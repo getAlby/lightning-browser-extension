@@ -15,17 +15,6 @@ The native application does all the user interaction and connections to the ligh
 | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
 | 49 & later ✔                                                                                  | 52 & later ✔                                                                                     | 36 & later ✔                                                                               | 79 & later ✔                                                                            | Latest ✔                                                                                      | Latest ✔                                                                                   | Latest ✔                                                                                         |
 
-## Demo
-
-- [abhijithvijayan/kutt-extension](https://github.com/abhijithvijayan/kutt-extension)
-
-## Use this template
-
-Create a new directory and run
-
-```
-curl -fsSL https://github.com/abhijithvijayan/web-extension-starter/archive/react-javascript.tar.gz | tar -xz --strip-components=1
-```
 
 ## 🚀 Quick Start
 
