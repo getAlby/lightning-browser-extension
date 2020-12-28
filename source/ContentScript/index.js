@@ -20,7 +20,7 @@ if (shouldInject()) {
         ...ev.data,
         origin: getOriginData(),
       };
-      browser.runtime.sendMessage(messageWithOrigin).then(response => {
+      const replyFunction = (response) => {
         window.postMessage(
           {
             application: 'Joule',
@@ -29,7 +29,8 @@ if (shouldInject()) {
           },
           '*',
         );
-      });
+      }
+      browser.runtime.sendMessage(messageWithOrigin).then(replyFunction).catch(replyFunction);
     }
   });
 }

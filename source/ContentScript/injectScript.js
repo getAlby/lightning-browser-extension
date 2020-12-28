@@ -12,7 +12,6 @@ export default function injectScript() {
     scriptEl.setAttribute('async', 'false');
     scriptEl.setAttribute('type', 'text/javascript');
     scriptEl.setAttribute('src', browser.extension.getURL('js/inpageScript.bundle.js'));
-    console.log(browser.extension.getURL('js/inpageScript.bundle.js'));
     container.appendChild(scriptEl);
   } catch (err) {
     console.error('WebLN injection failed', err);

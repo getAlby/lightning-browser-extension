@@ -5,7 +5,7 @@ export default class WebLNProvider {
     this.isExecuting = false;
   }
 
-  async enable() {
+  enable() {
     if (this.isEnabled) {
       return Promise.resolve({enabled: true});
     }
@@ -15,21 +15,21 @@ export default class WebLNProvider {
     });
   }
 
-  async getInfo() {
+  getInfo() {
     if (!this.isEnabled) {
       throw new Error('Provider must be enabled before calling getInfo');
     }
     return this.execute('getInfo');
   }
 
-  async sendPayment(paymentRequest) {
+  sendPayment(paymentRequest) {
     if (!this.isEnabled) {
       throw new Error('Provider must be enabled before calling sendPayment');
     }
     return this.execute('sendPayment', { paymentRequest });
   }
 
-  async makeInvoice(args) {
+  makeInvoice(args) {
     if (!this.isEnabled) {
       throw new Error('Provider must be enabled before calling makeInvoice');
     }
@@ -40,7 +40,7 @@ export default class WebLNProvider {
     return this.execute('makeInvoice', args);
   }
 
-  async signMessage(message) {
+  signMessage(message) {
     if (!this.isEnabled) {
       throw new Error('Provider must be enabled before calling signMessage');
     }
@@ -70,10 +70,12 @@ export default class WebLNProvider {
       function handleWindowMessage(messageEvent) {
         // check if it is a relevant message
         // there are some other events happening
+        window.webln.isExecuting = false;
         if (!messageEvent.data || !messageEvent.data.response || messageEvent.data.application !== 'Joule') {
           return;
         }
         if (messageEvent.data.data.error) {
+          window.webln.isExecuting = false;
           reject(messageEvent.data.data.error);
         } else {
           // 1. data: the message data
@@ -83,7 +85,6 @@ export default class WebLNProvider {
         }
         // For some reason must happen only at the end of this function
         window.removeEventListener('message', handleWindowMessage);
-        window.webln.isExecuting = false;
       }
 
       window.addEventListener('message', handleWindowMessage);

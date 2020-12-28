@@ -47,7 +47,7 @@ function getDocumentIcon() {
 
 // Makes absolute path given any path on the site, namely relative ones
 // e.g. ./favicon.ico becomes https://site.com/favicon.ico
-function makeAbsoluteUrl(string) {
+function makeAbsoluteUrl(path) {
   return new URL(path, window.location.origin).href;
 }
 
