@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import browser from 'webextension-polyfill';
 
 import './styles.scss';
@@ -7,49 +7,57 @@ function openWebPage(url) {
   return browser.tabs.create({url});
 }
 
-const Popup = () => {
-  return (
-    <section id="popup">
-      <h2>WEB-EXTENSION-STARTER</h2>
-      <button
-        id="options__button"
-        type="button"
-        onClick={() => {
-          return openWebPage('options.html');
-        }}
-      >
-        Options Page
-      </button>
-      <div className="links__holder">
-        <ul>
-          <li>
-            <button
-              type="button"
-              onClick={() => {
-                return openWebPage(
-                  'https://github.com/abhijithvijayan/web-extension-starter'
-                );
-              }}
-            >
-              GitHub
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              onClick={() => {
-                return openWebPage(
-                  'https://www.buymeacoffee.com/abhijithvijayan'
-                );
-              }}
-            >
-              Buy Me A Coffee
-            </button>
-          </li>
-        </ul>
-      </div>
-    </section>
-  );
-};
+function openApp() {
+  return browser.runtime.sendMessage({
+    application: 'Joule',
+    prompt: true,
+    type: 'open',
+    args: {},
+    origin: {internal: true}
+  });
+}
 
-export default Popup;
+function getInfo() {
+  return browser.runtime.sendMessage({
+    application: 'Joule',
+    prompt: true,
+    type: 'getInfo',
+    args: {},
+    origin: {internal: true}
+  });
+}
+
+export default class Popup extends React.Component {
+
+  constructor (props) {
+    super(props);
+    this.state = {
+      alias: ''
+    };
+  }
+  
+  componentDidMount () {
+    // TODO: cache? https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage/local
+    getInfo().then(info => {
+      this.setState({alias: info.data.alias});
+    });
+  }
+
+  render () {
+    return (
+      <section id="popup">
+        <h2>{this.state.alias}</h2>
+        <button
+          id="options__button"
+          type="button"
+          onClick={() => {
+            return openWebPage('options.html');
+          }}
+        >
+          Options Page
+        </button>
+        <button onClick={() => { return openApp() }}>Settings</button>
+      </section>
+    );
+  }
+};
