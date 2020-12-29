@@ -8,6 +8,8 @@ The goal is to write a minimal web extension supporting the developing [WebLN st
 The extension implements the WebLN standard. It passes each call to a native application (using [native messaging](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging)).
 The native application does all the user interaction and connections to the lightning wallet.
 
+Currently there is one prototype of a native companion app which can connect to LND: [lnd-native-companion](https://github.com/bumi/lnd-native-companion)
+
 
 ## Architecture idea
 
