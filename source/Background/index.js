@@ -8,6 +8,9 @@ const DEBUG = true;
 // listen to calls from the content script and pass it on to the native application
 // returns a promise to be handled in the content script
 browser.runtime.onMessage.addListener((message, sender) => {
+  if (DEBUG) {
+    console.log('Background onMessage: ', message, sender);
+  }
   // if the application does not match or if it is not a prompt we ignore the call
   if (message.application !== 'Joule' || !message.prompt) {
     return false;
