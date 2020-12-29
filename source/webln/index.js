@@ -49,11 +49,6 @@ export default class WebLNProvider {
   }
 
   execute(type, args) {
-    if (this.isExecuting) {
-      return Promise.reject(new Error('User is busy'));
-    }
-    window.webln.isExecuting = true;
-
     return new Promise((resolve, reject) => {
       // post the request to the content script. from there it gets passed to the background script and back
       // in page script can not directly connect to the background script
@@ -70,12 +65,10 @@ export default class WebLNProvider {
       function handleWindowMessage(messageEvent) {
         // check if it is a relevant message
         // there are some other events happening
-        window.webln.isExecuting = false;
         if (!messageEvent.data || !messageEvent.data.response || messageEvent.data.application !== 'Joule') {
           return;
         }
         if (messageEvent.data.data.error) {
-          window.webln.isExecuting = false;
           reject(messageEvent.data.data.error);
         } else {
           // 1. data: the message data
