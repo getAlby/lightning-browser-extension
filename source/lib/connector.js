@@ -32,7 +32,6 @@ export default class Connector {
   // non webln calls
 
   open(args) {
-    console.log('open');
     return this.call('home', args);
   }
 
