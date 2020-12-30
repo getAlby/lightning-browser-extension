@@ -36,6 +36,10 @@ export default class Connector {
     return this.call('home', args);
   }
 
+  setup(args) {
+    return this.call('setup', args);
+  }
+
   settings(args) {
     return this.call('settings', args);
   }
