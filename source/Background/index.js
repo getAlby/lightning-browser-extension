@@ -1,31 +1,64 @@
 import browser from 'webextension-polyfill';
 
-import Connector from '../lib/connector';
+import connectors from '../lib/connectors';
 
-const connector = new Connector();
+
 const DEBUG = true;
+let connector;
 
-// listen to calls from the content script and pass it on to the native application
-// returns a promise to be handled in the content script
-browser.runtime.onMessage.addListener((message, sender) => {
-  if (DEBUG) {
-    console.log('Background onMessage: ', message, sender);
-  }
-  // if the application does not match or if it is not a prompt we ignore the call
-  if (message.application !== 'Joule' || !message.prompt) {
-    return false;
+browser.storage.sync.get(['currentAccount', 'accounts']).then(result => {
+
+
+  browser.storage.sync.set({currentAccount: 'joule'});
+  /*
+  browser.storage.sync.set({
+    accounts: {
+      lndt: {
+        config: {
+          macaroon: '',
+          url: ''
+        },
+        connector: 'lnd'
+      },
+      joule: {
+        config: {},
+        connector: 'native'
+      }
+    },
+    currentAccount: 'lndt'
+  });
+  */
+
+  console.log(result);
+  const account = result.accounts[result.currentAccount];
+
+  if (account.connector) {
+    connector = new connectors[account.connector](account.config);
+  } else {
+    connector = new connectors.native(account.config);
   }
 
-  const call = connector[message.type]({args: message.args, origin: message.origin});
-  if (DEBUG) {
-    call.then(r => {
-      console.log('Connector response:', r);
-      return r
-    })
-  }
-  return call;
+  // listen to calls from the content script and pass it on to the native application
+  // returns a promise to be handled in the content script
+  browser.runtime.onMessage.addListener((message, sender) => {
+    if (DEBUG) {
+      console.log('Background onMessage: ', message, sender);
+    }
+    // if the application does not match or if it is not a prompt we ignore the call
+    if (message.application !== 'Joule' || !message.prompt) {
+      return false;
+    }
+
+    const call = connector[message.type]({args: message.args, origin: message.origin});
+    if (DEBUG) {
+      call.then(r => {
+        console.log('Connector response:', r);
+        return r
+      })
+    }
+    return call;
+  });
 });
-
 
 
 // provider.getInfo()

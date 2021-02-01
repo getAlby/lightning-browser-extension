@@ -1,21 +1,23 @@
+import memoizee from 'memoizee';
 import browser from 'webextension-polyfill';
 
 const nativeApplication = 'joule';
 
-export default class Connector {
+export default class Native {
 
-  constructor () {
+  constructor (config) {
     this.isExecuting = false;
+    this.getInfo = memoizee(
+      (args) => this.call('getInfo', args),
+      { promise: true, maxAge: 20000, preFetch: true, normalizer: () => 'getinfo' }
+    );
+    this.enable = memoizee(
+      (args) => this.call('enable', args),
+      { promise: true, maxAge: 20000, preFetch: true, normalizer: () => 'enable' }
+    );
   }
+
   // webln calls
-
-  enable(args) {
-    return this.call('enable', args);
-  }
-
-  getInfo(args) {
-    return this.call('getInfo', args);
-  }
 
   makeInvoice(args) {
     return this.call('makeInvoice', args);
