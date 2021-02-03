@@ -9,6 +9,10 @@ export default class Lnd {
     );
   }
 
+  async init() {
+    return Promise.resolve();
+  }
+
   sendPayment(args) {
     return this.request('POST', '/v2/router/send', args, {})
       .then(res => {

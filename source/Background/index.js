@@ -4,7 +4,7 @@ import connectors from '../lib/connectors';
 
 let connector;
 
-browser.storage.sync.get(['currentAccount', 'accounts', 'settings']).then(result => {
+browser.storage.sync.get(['currentAccount', 'accounts', 'settings']).then(async (result) => {
 
   /*
   browser.storage.sync.set({currentAccount: 'voltage'});
@@ -38,6 +38,8 @@ browser.storage.sync.get(['currentAccount', 'accounts', 'settings']).then(result
   } else {
     connector = new connectors.native(account.config);
   }
+
+  await connector.init();
 
   // listen to calls from the content script and pass it on to the native application
   // returns a promise to be handled in the content script

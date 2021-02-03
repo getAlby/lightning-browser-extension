@@ -17,6 +17,10 @@ export default class Native {
     );
   }
 
+  async init() {
+    return Promise.resolve();
+  }
+
   // webln calls
 
   makeInvoice(args) {

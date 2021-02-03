@@ -35,8 +35,11 @@ export default class Popup extends React.Component {
       alias: ''
     };
   }
-  
+
   componentDidMount () {
+    browser.storage.sync.get(['currentAccount']).then(result => {
+      this.setState({currentAccount: result.currentAccount});
+    })
     // TODO: cache? https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage/local
     getInfo().then(info => {
       this.setState({alias: info.data.alias});
@@ -46,6 +49,7 @@ export default class Popup extends React.Component {
   render () {
     return (
       <section id="popup">
+        {this.state.currentAccount}
         <h2>{this.state.alias}</h2>
         <button
           id="options__button"
