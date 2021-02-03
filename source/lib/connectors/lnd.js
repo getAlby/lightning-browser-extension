@@ -9,6 +9,22 @@ export default class Lnd {
     );
   }
 
+  sendPayment(args) {
+    return this.request('POST', '/v2/router/send', args, {})
+      .then(res => {
+        console.log(res);
+        return res.json();
+      })
+  }
+
+  getAddress() {
+    return this.request('POST', '/v2/wallet/address/next', undefined, {});
+  }
+
+  getBlockchainBalance() {
+    return this.request('GET', '/v1/balance/blockchain', undefined, {});
+  }
+
   async request(method, path, args, defaultValues) {
     let body = null;
     let query = '';
