@@ -2,12 +2,9 @@ import browser from 'webextension-polyfill';
 
 import connectors from '../lib/connectors';
 
-
-const DEBUG = true;
 let connector;
 
-browser.storage.sync.get(['currentAccount', 'accounts']).then(result => {
-
+browser.storage.sync.get(['currentAccount', 'accounts', 'settings']).then(result => {
 
   browser.storage.sync.set({currentAccount: 'joule'});
   /*
@@ -30,6 +27,8 @@ browser.storage.sync.get(['currentAccount', 'accounts']).then(result => {
   */
 
   console.log(result);
+
+  const settings = result.settings || {};
   const account = result.accounts[result.currentAccount];
 
   if (account.connector) {
@@ -41,7 +40,7 @@ browser.storage.sync.get(['currentAccount', 'accounts']).then(result => {
   // listen to calls from the content script and pass it on to the native application
   // returns a promise to be handled in the content script
   browser.runtime.onMessage.addListener((message, sender) => {
-    if (DEBUG) {
+    if (settings.debug) {
       console.log('Background onMessage: ', message, sender);
     }
     // if the application does not match or if it is not a prompt we ignore the call
@@ -50,7 +49,7 @@ browser.storage.sync.get(['currentAccount', 'accounts']).then(result => {
     }
 
     const call = connector[message.type]({args: message.args, origin: message.origin});
-    if (DEBUG) {
+    if (settings.debug) {
       call.then(r => {
         console.log('Connector response:', r);
         return r
