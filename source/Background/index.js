@@ -6,8 +6,8 @@ let connector;
 
 browser.storage.sync.get(['currentAccount', 'accounts', 'settings']).then(result => {
 
-  browser.storage.sync.set({currentAccount: 'joule'});
   /*
+  browser.storage.sync.set({currentAccount: 'voltage'});
   browser.storage.sync.set({
     accounts: {
       lndt: {
@@ -30,6 +30,8 @@ browser.storage.sync.get(['currentAccount', 'accounts', 'settings']).then(result
 
   const settings = result.settings || {};
   const account = result.accounts[result.currentAccount];
+
+  // TODO: check if an account is configured. Guess this also needs to be done on a different level to make sure we display a settings page if nothing is configured.
 
   if (account.connector) {
     connector = new connectors[account.connector](account.config);
