@@ -3,43 +3,34 @@ import browser from 'webextension-polyfill';
 import connectors from '../lib/connectors';
 
 let connector;
+let settings;
+
+const initConnector = async () => {
+  return browser.storage.sync.get(['currentAccount', 'accounts']).then((result) => {
+    const account = result.accounts[result.currentAccount];
+    // TODO: check if an account is configured. Guess this also needs to be done on a different level to make sure we display a settings page if nothing is configured.
+    if (account.connector) {
+      connector = new connectors[account.connector](account.config);
+    } else {
+      connector = new connectors.native(account.config);
+    }
+
+    return connector.init();
+  });
+}
+
+browser.storage.onChanged.addListener((changes) => {
+  if (changes.currentAccount) {
+    initConnector();
+  }
+  if (changes.settings) {
+    settings = changes.settings.newValue;
+  }
+});
 
 browser.storage.sync.get(['currentAccount', 'accounts', 'settings']).then(async (result) => {
-
-  /*
-  browser.storage.sync.set({currentAccount: 'voltage'});
-  browser.storage.sync.set({
-    accounts: {
-      lndt: {
-        config: {
-          macaroon: '',
-          url: ''
-        },
-        connector: 'lnd'
-      },
-      joule: {
-        config: {},
-        connector: 'native'
-      }
-    },
-    currentAccount: 'lndt'
-  });
-  */
-
-  console.log(result);
-
-  const settings = result.settings || {};
-  const account = result.accounts[result.currentAccount];
-
-  // TODO: check if an account is configured. Guess this also needs to be done on a different level to make sure we display a settings page if nothing is configured.
-
-  if (account.connector) {
-    connector = new connectors[account.connector](account.config);
-  } else {
-    connector = new connectors.native(account.config);
-  }
-
-  await connector.init();
+  settings = result.settings || {};
+  await initConnector();
 
   // listen to calls from the content script and pass it on to the native application
   // returns a promise to be handled in the content script
@@ -62,20 +53,3 @@ browser.storage.sync.get(['currentAccount', 'accounts', 'settings']).then(async 
     return call;
   });
 });
-
-
-// provider.getInfo()
-//   .then(info => console.log(info))
-//   .catch(e => console.log(e));
-
-//connector.signMessage({args: {message: 'hallo'}, origin: {}})
-// provider.makeInvoice()
-//  .then(invoice => console.log(invoice))
-//  .catch(e => console.log(e))
-
-// function send(data) {
-//   return new Promise((resolve, reject) => {
-//     let sending = browser.runtime.sendNativeMessage(hostName, data);
-//     sending.then(resolve, reject);
-//   });
-// }
