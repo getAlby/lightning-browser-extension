@@ -1,95 +1,102 @@
-import memoizee from 'memoizee';
-import utils from './../utils';
+import memoizee from "memoizee";
+import utils from "./../utils";
 
 export default class Lnd {
   constructor(config) {
     this.config = config;
     this.getInfo = memoizee(
-      (args) => this.request('GET', '/v1/getinfo', undefined, {}),
-      { promise: true, maxAge: 20000, preFetch: true, normalizer: () => 'getinfo' }
+      (args) => this.request("GET", "/v1/getinfo", undefined, {}),
+      {
+        promise: true,
+        maxAge: 20000,
+        preFetch: true,
+        normalizer: () => "getinfo",
+      }
     );
-    this.getBalance = memoizee(
-      () => this.getChannelsBalance(),
-      { promise: true, maxAge: 20000, preFetch: true, normalizer: () => 'getinfo' }
-    )
+    this.getBalance = memoizee(() => this.getChannelsBalance(), {
+      promise: true,
+      maxAge: 20000,
+      preFetch: true,
+      normalizer: () => "getinfo",
+    });
   }
 
   async init() {
     return Promise.resolve();
   }
 
-  enable() {
-    utils.openPrompt();
-    return Promise.resolve({data: {enabled: false}});
+  enable(args) {
+    return utils
+      .openPrompt(args)
+      .then((response) => {
+        return response;
+      })
+      .catch((e) => {
+        return { error: e.message };
+      });
   }
 
   sendPayment(message) {
     // TODO: should we use /v2/router/send ?
-    return this.request('POST', '/v1/channels/transactions', {
-      payment_request: message.args.paymentRequest,
-    }, {})
-      .then(json => {
+    return this.request(
+      "POST",
+      "/v1/channels/transactions",
+      {
+        payment_request: message.args.paymentRequest,
+      },
+      {}
+    )
+      .then((json) => {
         utils.notify({
           title: "Paid",
-          message: `pre image: ${json.data.payment_preimage}`
+          message: `pre image: ${json.data.payment_preimage}`,
         });
-        return {data: json};
+        return { data: json };
       })
-      .catch(e => {
-        return {error: e};
-      })
+      .catch((e) => {
+        return { error: e.message };
+      });
   }
 
   makeInvoice(message) {
-    return this.request('POST', '/v1/invoices', {
+    return this.request("POST", "/v1/invoices", {
       memo: message.args.memo,
-      value: message.args.amount
+      value: message.args.amount,
     });
   }
 
   getAddress() {
-    return this.request('POST', '/v2/wallet/address/next', undefined, {});
+    return this.request("POST", "/v2/wallet/address/next", undefined, {});
   }
 
   getBlockchainBalance = () => {
-    return this.request(
-      'GET',
-      '/v1/balance/blockchain',
-      undefined,
-      {
-        unconfirmed_balance: '0',
-        confirmed_balance: '0',
-        total_balance: '0',
-      },
-    );
+    return this.request("GET", "/v1/balance/blockchain", undefined, {
+      unconfirmed_balance: "0",
+      confirmed_balance: "0",
+      total_balance: "0",
+    });
   };
 
   getChannelsBalance = () => {
-    return this.request(
-      'GET',
-      '/v1/balance/channels',
-      undefined,
-      {
-        pending_open_balance: '0',
-        balance: '0',
-      },
-    );
+    return this.request("GET", "/v1/balance/channels", undefined, {
+      pending_open_balance: "0",
+      balance: "0",
+    });
   };
 
   async request(method, path, args, defaultValues) {
     let body = null;
-    let query = '';
+    let query = "";
     const headers = new Headers();
-    headers.append('Accept', 'application/json');
-    if (method === 'POST') {
+    headers.append("Accept", "application/json");
+    if (method === "POST") {
       body = JSON.stringify(args);
-      headers.append('Content-Type', 'application/json');
-    }
-    else if (args !== undefined) {
+      headers.append("Content-Type", "application/json");
+    } else if (args !== undefined) {
       query = `?`; //`?${stringify(args)}`;
     }
     if (this.config.macaroon) {
-      headers.append('Grpc-Metadata-macaroon', this.config.macaroon);
+      headers.append("Grpc-Metadata-macaroon", this.config.macaroon);
     }
     try {
       const res = await fetch(this.config.url + path + query, {
@@ -104,23 +111,21 @@ export default class Lnd {
           if (!errBody.error) {
             throw new Error();
           }
-        }
-        catch (err) {
+        } catch (err) {
           throw {
             statusText: res.statusText,
             status: res.status,
           };
         }
-        console.log('errBody', errBody);
+        console.log("errBody", errBody);
         throw errBody;
       }
       let data = await res.json();
       if (defaultValues) {
         data = Object.assign(Object.assign({}, defaultValues), data);
       }
-      return {data};
-    }
-    catch (err) {
+      return { data };
+    } catch (err) {
       console.error(`API error calling ${method} ${path}`, err);
       // Thrown errors must be JSON serializable, so include metadata if possible
       if (err.code || err.status || !err.message) {

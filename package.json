@@ -29,6 +29,7 @@
     "advanced-css-reset": "^1.2.2",
     "antd": "^4.12.2",
     "memoizee": "^0.4.15",
+    "query-string": "^6.13.8",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "webext-base-css": "^1.2.0",
