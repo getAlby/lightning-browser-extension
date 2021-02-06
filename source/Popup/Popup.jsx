@@ -27,6 +27,16 @@ function getInfo() {
   });
 }
 
+function getBalance() {
+  return browser.runtime.sendMessage({
+    application: 'Joule',
+    prompt: true,
+    type: 'getBalance',
+    args: {},
+    origin: {internal: true}
+  });
+}
+
 export default class Popup extends React.Component {
 
   constructor (props) {
@@ -44,6 +54,9 @@ export default class Popup extends React.Component {
     getInfo().then(info => {
       this.setState({alias: info.data.alias});
     });
+    getBalance().then(result => {
+      this.setState({balance: result.data.balance});
+    })
   }
 
   render () {
@@ -51,6 +64,7 @@ export default class Popup extends React.Component {
       <section id="popup">
         {this.state.currentAccount}
         <h2>{this.state.alias}</h2>
+        <p>{this.state.balance}</p>
         <button
           id="options__button"
           type="button"

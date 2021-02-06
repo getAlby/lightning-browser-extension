@@ -1,4 +1,5 @@
 import memoizee from 'memoizee';
+import utils from './../utils';
 
 export default class Lnd {
   constructor(config) {
@@ -7,27 +8,73 @@ export default class Lnd {
       (args) => this.request('GET', '/v1/getinfo', undefined, {}),
       { promise: true, maxAge: 20000, preFetch: true, normalizer: () => 'getinfo' }
     );
+    this.getBalance = memoizee(
+      () => this.getChannelsBalance(),
+      { promise: true, maxAge: 20000, preFetch: true, normalizer: () => 'getinfo' }
+    )
   }
 
   async init() {
     return Promise.resolve();
   }
 
-  sendPayment(args) {
-    return this.request('POST', '/v2/router/send', args, {})
-      .then(res => {
-        console.log(res);
-        return res.json();
+  enable() {
+    utils.openPrompt();
+    return Promise.resolve({data: {enabled: false}});
+  }
+
+  sendPayment(message) {
+    // TODO: should we use /v2/router/send ?
+    return this.request('POST', '/v1/channels/transactions', {
+      payment_request: message.args.paymentRequest,
+    }, {})
+      .then(json => {
+        utils.notify({
+          title: "Paid",
+          message: `pre image: ${json.data.payment_preimage}`
+        });
+        return {data: json};
       })
+      .catch(e => {
+        return {error: e};
+      })
+  }
+
+  makeInvoice(message) {
+    return this.request('POST', '/v1/invoices', {
+      memo: message.args.memo,
+      value: message.args.amount
+    });
   }
 
   getAddress() {
     return this.request('POST', '/v2/wallet/address/next', undefined, {});
   }
 
-  getBlockchainBalance() {
-    return this.request('GET', '/v1/balance/blockchain', undefined, {});
-  }
+  getBlockchainBalance = () => {
+    return this.request(
+      'GET',
+      '/v1/balance/blockchain',
+      undefined,
+      {
+        unconfirmed_balance: '0',
+        confirmed_balance: '0',
+        total_balance: '0',
+      },
+    );
+  };
+
+  getChannelsBalance = () => {
+    return this.request(
+      'GET',
+      '/v1/balance/channels',
+      undefined,
+      {
+        pending_open_balance: '0',
+        balance: '0',
+      },
+    );
+  };
 
   async request(method, path, args, defaultValues) {
     let body = null;

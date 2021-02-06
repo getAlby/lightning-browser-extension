@@ -63,6 +63,7 @@ module.exports = {
     contentScript: path.join(sourcePath, 'ContentScript', 'index.js'),
     inpageScript: path.join(sourcePath, 'InpageScript', 'index.js'),
     popup: path.join(sourcePath, 'Popup', 'index.jsx'),
+    prompt: path.join(sourcePath, 'Prompt', 'index.jsx'),
     options: path.join(sourcePath, 'Options', 'index.jsx'),
   },
 
@@ -164,6 +165,13 @@ module.exports = {
       chunks: ['options'],
       hash: true,
       filename: 'options.html',
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(viewsPath, 'prompt.html'),
+      inject: 'body',
+      chunks: ['prompt'],
+      hash: true,
+      filename: 'prompt.html',
     }),
     // write css file(s) to build folder
     new MiniCssExtractPlugin({filename: 'css/[name].css'}),

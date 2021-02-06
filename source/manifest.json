@@ -15,6 +15,7 @@
   "web_accessible_resources": ["js/inpageScript.bundle.js"],
   "permissions": [
     "nativeMessaging",
+    "notifications",
     "activeTab",
     "storage",
     "http://*/*",

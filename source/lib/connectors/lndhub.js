@@ -1,4 +1,5 @@
 import memoizee from 'memoizee';
+import utils from '../utils';
 
 export default class LndHub {
   constructor(config) {
@@ -15,6 +16,24 @@ export default class LndHub {
 
   async init() {
     return this.authorize();
+  }
+
+  sendPayment(args) {
+    return this.request('POST', '/payinvoice', {
+      invoice: args.paymentRequest
+    }).then(result => {
+      utils.notify({
+        title: "Paid",
+        message: `pre iamge:`
+      })
+    })
+  }
+
+  makeInvoice(args) {
+    return this.request('POST', '/addinvoice', {
+      amt: args.amount,
+      memo: args.defaultMemo
+    });
   }
 
   async authorize() {
