@@ -2,11 +2,12 @@
 @import "../styles/reset";
 @import "../styles/variables";
 
+@import "~antd/dist/antd";
+
 body {
   color: $black;
   background-color: $greyWhite;
 }
-
 
 #popup {
   min-width: 350px;
