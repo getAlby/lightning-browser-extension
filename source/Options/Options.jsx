@@ -21,12 +21,13 @@ export default class Options extends React.Component {
 
   componentDidMount() {
     browser.storage.sync
-      .get(["accounts", "currentAccount", "settings"])
+      .get(["accounts", "currentAccount", "settings", "hostSettings"])
       .then((result) => {
         this.setState({
           accounts: result.accounts || {},
           currentAccount: result.currentAccount,
           settings: result.settings || {},
+          hostSettings: result.hostSettings || {},
         });
       });
   }
@@ -179,6 +180,7 @@ export default class Options extends React.Component {
           </button>
         </section>
         <section>{JSON.stringify(this.state.settings)}</section>
+        <section>{JSON.stringify(this.state.hostSettings)}</section>
         {/* <section>
           <Formik
             initialValues={{ currentAccount: this.state.currentAccount }}

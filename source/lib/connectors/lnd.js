@@ -1,9 +1,10 @@
 import memoizee from "memoizee";
 import utils from "./../utils";
+import Base from "./base";
 
-export default class Lnd {
-  constructor(config) {
-    this.config = config;
+class Lnd extends Base {
+  constructor(connectorConfig, globalSettings) {
+    super(connectorConfig, globalSettings);
     this.getInfo = memoizee(
       (args) => this.request("GET", "/v1/getinfo", undefined, {}),
       {
@@ -25,37 +26,18 @@ export default class Lnd {
     return Promise.resolve();
   }
 
-  enable(args) {
-    return utils
-      .openPrompt(args)
-      .then((response) => {
-        return response;
-      })
-      .catch((e) => {
-        return { error: e.message };
-      });
-  }
-
   sendPayment(message) {
-    // TODO: should we use /v2/router/send ?
-    return this.request(
-      "POST",
-      "/v1/channels/transactions",
-      {
-        payment_request: message.args.paymentRequest,
-      },
-      {}
-    )
-      .then((json) => {
-        utils.notify({
-          title: "Paid",
-          message: `pre image: ${json.data.payment_preimage}`,
-        });
-        return { data: json };
-      })
-      .catch((e) => {
-        return { error: e.message };
-      });
+    return super.sendPayment(message, () => {
+      // TODO: should we use /v2/router/send ?
+      return this.request(
+        "POST",
+        "/v1/channels/transactions",
+        {
+          payment_request: message.args.paymentRequest,
+        },
+        {}
+      );
+    });
   }
 
   makeInvoice(message) {
@@ -135,3 +117,5 @@ export default class Lnd {
     }
   }
 }
+
+export default Lnd;

@@ -1,5 +1,6 @@
 import browser from "webextension-polyfill";
 
+import Settings from "../lib/settings";
 import connectors from "../lib/connectors";
 
 let connector;
@@ -7,14 +8,18 @@ let settings;
 
 const initConnector = async () => {
   return browser.storage.sync
-    .get(["currentAccount", "accounts"])
+    .get(["currentAccount", "accounts", "settings", "hostSettings"])
     .then((result) => {
+      let settings = new Settings({
+        settings: result.settings,
+        hostSettings: result.hostSettings,
+      });
       const account = result.accounts[result.currentAccount];
       // TODO: check if an account is configured. Guess this also needs to be done on a different level to make sure we display a settings page if nothing is configured.
       if (account.connector) {
-        connector = new connectors[account.connector](account.config);
+        connector = new connectors[account.connector](account.config, settings);
       } else {
-        connector = new connectors.native(account.config);
+        connector = new connectors.native(account.config, settings);
       }
 
       return connector.init();
@@ -33,7 +38,7 @@ browser.storage.onChanged.addListener((changes) => {
 browser.storage.sync
   .get(["currentAccount", "accounts", "settings"])
   .then(async (result) => {
-    settings = result.settings || {};
+    settings = result.settings;
     await initConnector();
 
     // listen to calls from the content script and pass it on to the native application

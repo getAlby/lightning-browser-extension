@@ -76,8 +76,6 @@ export default class WebLNProvider {
         if (messageEvent.data.data.error) {
           reject(messageEvent.data.data.error);
         } else {
-          console.log(messageEvent);
-          console.log(messageEvent.data);
           // 1. data: the message data
           // 2. data: the data passed as data to the message
           // 3. data: the actual response data

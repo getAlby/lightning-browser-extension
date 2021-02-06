@@ -1,17 +1,28 @@
-import memoizee from 'memoizee';
-import utils from '../utils';
+import memoizee from "memoizee";
+import utils from "../utils";
+import Base from "./base";
 
-export default class LndHub {
-  constructor(config) {
-    this.config = config;
+export default class LndHub extends Base {
+  constructor(connectorConfig, globalSettings) {
+    super(connectorConfig, globalSettings);
     this.getInfo = memoizee(
-      (args) => this.request('GET', '/getinfo', undefined, {}),
-      { promise: true, maxAge: 20000, preFetch: true, normalizer: () => 'getinfo' }
+      (args) => this.request("GET", "/getinfo", undefined, {}),
+      {
+        promise: true,
+        maxAge: 20000,
+        preFetch: true,
+        normalizer: () => "getinfo",
+      }
     );
     this.getBalance = memoizee(
-      (args) => this.request('GET', '/balance', undefined, {}),
-      { promise: true, maxAge: 20000, preFetch: true, normalizer: () => 'balance' }
-    )
+      (args) => this.request("GET", "/balance", undefined, {}),
+      {
+        promise: true,
+        maxAge: 20000,
+        preFetch: true,
+        normalizer: () => "balance",
+      }
+    );
   }
 
   async init() {
@@ -19,49 +30,56 @@ export default class LndHub {
   }
 
   sendPayment(args) {
-    return this.request('POST', '/payinvoice', {
-      invoice: args.paymentRequest
-    }).then(result => {
+    return this.request("POST", "/payinvoice", {
+      invoice: args.paymentRequest,
+    }).then((result) => {
       utils.notify({
         title: "Paid",
-        message: `pre iamge:`
-      })
-    })
+        message: `pre iamge:`,
+      });
+    });
   }
 
   makeInvoice(args) {
-    return this.request('POST', '/addinvoice', {
+    return this.request("POST", "/addinvoice", {
       amt: args.amount,
-      memo: args.defaultMemo
+      memo: args.defaultMemo,
     });
   }
 
   async authorize() {
     const headers = new Headers();
-    headers.append('Accept', 'application/json');
-    headers.append('Access-Control-Allow-Origin', '*');
-    headers.append('Content-Type', 'application/json');
-    return fetch(this.config.url + '/auth?type=auth', {
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify({login: this.config.login, password: this.config.password}),
-      })
-      .then(response => {
+    headers.append("Accept", "application/json");
+    headers.append("Access-Control-Allow-Origin", "*");
+    headers.append("Content-Type", "application/json");
+    return fetch(this.config.url + "/auth?type=auth", {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify({
+        login: this.config.login,
+        password: this.config.password,
+      }),
+    })
+      .then((response) => {
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error('API error: ' + response.status);
+          throw new Error("API error: " + response.status);
         }
       })
-      .then(json => {
-        if (typeof json === 'undefined') {
-          throw new Error('API failure: ' + response.err + ' ' + JSON.stringify(response.body));
+      .then((json) => {
+        if (typeof json === "undefined") {
+          throw new Error(
+            "API failure: " + response.err + " " + JSON.stringify(response.body)
+          );
         }
         if (json && json.error) {
-          throw new Error('API error: ' + json.message + ' (code ' + json.code + ')');
+          throw new Error(
+            "API error: " + json.message + " (code " + json.code + ")"
+          );
         }
         if (!json.access_token || !json.refresh_token) {
-          throw new Error('API unexpected response: ' + JSON.stringify(json));
+          throw new Error("API unexpected response: " + JSON.stringify(json));
         }
 
         this.refresh_token = json.refresh_token;
@@ -77,17 +95,16 @@ export default class LndHub {
       await this.authorize();
     }
     let body = null;
-    let query = '';
+    let query = "";
     const headers = new Headers();
-    headers.append('Accept', 'application/json');
-    headers.append('Access-Control-Allow-Origin', '*');
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Bearer' + ' ' + this.access_token);
+    headers.append("Accept", "application/json");
+    headers.append("Access-Control-Allow-Origin", "*");
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", "Bearer" + " " + this.access_token);
 
-    if (method === 'POST') {
+    if (method === "POST") {
       body = JSON.stringify(args);
-    }
-    else if (args !== undefined) {
+    } else if (args !== undefined) {
       query = `?`; //`?${stringify(args)}`;
     }
     const res = await fetch(this.config.url + path + query, {
@@ -97,7 +114,7 @@ export default class LndHub {
     });
     if (!res.ok) {
       errBody = await res.json();
-      console.log('errBody', errBody);
+      console.log("errBody", errBody);
       throw new Error(errBody);
     }
     let data = await res.json();
@@ -111,6 +128,6 @@ export default class LndHub {
     if (defaultValues) {
       data = Object.assign(Object.assign({}, defaultValues), data);
     }
-    return {data};
+    return { data };
   }
 }

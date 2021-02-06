@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import browser from "webextension-polyfill";
 import qs from "query-string";
 
+import Settings from "../lib/settings";
+
 import "./styles.scss";
+
+const settings = new Settings({});
 
 export default class Prompt extends React.Component {
   constructor(props) {
@@ -11,6 +15,9 @@ export default class Prompt extends React.Component {
   }
 
   enable() {
+    if (this.state.remember) {
+      settings.allowHost(this.state.origin.domain, { enabled: true });
+    }
     return browser.runtime.sendMessage({
       response: true,
       data: { enabled: true },
@@ -22,6 +29,10 @@ export default class Prompt extends React.Component {
       response: true,
       error: "User rejected",
     });
+  }
+
+  handleRememberChange(remember) {
+    return this.setState({ remember });
   }
 
   componentDidMount() {
@@ -42,6 +53,14 @@ export default class Prompt extends React.Component {
       <section id="prompt">
         <strong>{JSON.stringify(this.state.origin)}</strong>
         <h2>Allow access?</h2>
+        <input
+          name="remember"
+          type="checkbox"
+          onChange={(event) => {
+            this.handleRememberChange(event.target.checked);
+          }}
+        />
+
         <button onClick={() => this.enable()}>Enable</button>
         <br />
         <button onClick={() => this.reject()}>Reject</button>
