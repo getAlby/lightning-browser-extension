@@ -30,12 +30,9 @@ export default class LndHub extends Base {
   }
 
   sendPayment(args) {
-    return this.request("POST", "/payinvoice", {
-      invoice: args.paymentRequest,
-    }).then((result) => {
-      utils.notify({
-        title: "Paid",
-        message: `pre iamge:`,
+    return super.sendPayment(message, () => {
+      this.request("POST", "/payinvoice", {
+        invoice: args.paymentRequest,
       });
     });
   }
