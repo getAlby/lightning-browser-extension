@@ -2,6 +2,15 @@ import browser from "webextension-polyfill";
 import qs from "query-string";
 
 const utils = {
+  call: (type, args) => {
+    return browser.runtime.sendMessage({
+      application: "Joule",
+      prompt: true,
+      type: type,
+      args: args,
+      origin: { internal: true },
+    });
+  },
   notify: (details) => {
     const notification = Object.assign(
       {

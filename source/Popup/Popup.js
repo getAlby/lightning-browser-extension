@@ -1,5 +1,6 @@
 import React from "react";
 import browser from "webextension-polyfill";
+import utils from "../lib/utils";
 
 import "./styles.scss";
 
@@ -17,26 +18,6 @@ function openApp() {
   });
 }
 
-function getInfo() {
-  return browser.runtime.sendMessage({
-    application: "Joule",
-    prompt: true,
-    type: "getInfo",
-    args: {},
-    origin: { internal: true },
-  });
-}
-
-function getBalance() {
-  return browser.runtime.sendMessage({
-    application: "Joule",
-    prompt: true,
-    type: "getBalance",
-    args: {},
-    origin: { internal: true },
-  });
-}
-
 class Popup extends React.Component {
   constructor(props) {
     super(props);
@@ -46,14 +27,17 @@ class Popup extends React.Component {
   }
 
   componentDidMount() {
+    utils.call("isUnlocked").then((unlocked) => {
+      this.setState({ unlocked: unlocked ? "yes" : "no" });
+    });
     browser.storage.sync.get(["currentAccount"]).then((result) => {
       this.setState({ currentAccount: result.currentAccount });
     });
     // TODO: cache? https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage/local
-    getInfo().then((info) => {
+    utils.call("getInfo").then((info) => {
       this.setState({ alias: info.data.alias });
     });
-    getBalance().then((result) => {
+    utils.call("getBalance").then((result) => {
       this.setState({ balance: result.data.balance });
     });
   }
@@ -61,6 +45,7 @@ class Popup extends React.Component {
   render() {
     return (
       <section id="popup">
+        {this.state.unlocked}
         {this.state.currentAccount}
         <h2>{this.state.alias}</h2>
         <p>{this.state.balance}</p>
