@@ -9,7 +9,7 @@ export default function shouldInject() {
 function doctypeCheck() {
   const doctype = window.document.doctype;
   if (doctype) {
-    return doctype.name === 'html';
+    return doctype.name === "html";
   } else {
     return true;
   }
@@ -35,7 +35,7 @@ function documentElementCheck() {
   }
   const docNode = document.documentElement.nodeName;
   if (docNode) {
-    return docNode.toLowerCase() === 'html';
+    return docNode.toLowerCase() === "html";
   }
   return true;
 }

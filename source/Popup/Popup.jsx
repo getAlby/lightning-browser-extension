@@ -1,65 +1,64 @@
-import React, {useState} from 'react';
-import browser from 'webextension-polyfill';
+import React, { useState } from "react";
+import browser from "webextension-polyfill";
 
-import './styles.scss';
+import "./styles.scss";
 
 function openWebPage(url) {
-  return browser.tabs.create({url});
+  return browser.tabs.create({ url });
 }
 
 function openApp() {
   return browser.runtime.sendMessage({
-    application: 'Joule',
+    application: "Joule",
     prompt: true,
-    type: 'open',
+    type: "open",
     args: {},
-    origin: {internal: true}
+    origin: { internal: true },
   });
 }
 
 function getInfo() {
   return browser.runtime.sendMessage({
-    application: 'Joule',
+    application: "Joule",
     prompt: true,
-    type: 'getInfo',
+    type: "getInfo",
     args: {},
-    origin: {internal: true}
+    origin: { internal: true },
   });
 }
 
 function getBalance() {
   return browser.runtime.sendMessage({
-    application: 'Joule',
+    application: "Joule",
     prompt: true,
-    type: 'getBalance',
+    type: "getBalance",
     args: {},
-    origin: {internal: true}
+    origin: { internal: true },
   });
 }
 
 export default class Popup extends React.Component {
-
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
-      alias: ''
+      alias: "",
     };
   }
 
-  componentDidMount () {
-    browser.storage.sync.get(['currentAccount']).then(result => {
-      this.setState({currentAccount: result.currentAccount});
-    })
-    // TODO: cache? https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage/local
-    getInfo().then(info => {
-      this.setState({alias: info.data.alias});
+  componentDidMount() {
+    browser.storage.sync.get(["currentAccount"]).then((result) => {
+      this.setState({ currentAccount: result.currentAccount });
     });
-    getBalance().then(result => {
-      this.setState({balance: result.data.balance});
-    })
+    // TODO: cache? https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage/local
+    getInfo().then((info) => {
+      this.setState({ alias: info.data.alias });
+    });
+    getBalance().then((result) => {
+      this.setState({ balance: result.data.balance });
+    });
   }
 
-  render () {
+  render() {
     return (
       <section id="popup">
         {this.state.currentAccount}
@@ -69,13 +68,19 @@ export default class Popup extends React.Component {
           id="options__button"
           type="button"
           onClick={() => {
-            return openWebPage('options.html');
+            return openWebPage("options.html");
           }}
         >
           Options Page
         </button>
-        <button onClick={() => { return openApp() }}>Settings</button>
+        <button
+          onClick={() => {
+            return openApp();
+          }}
+        >
+          Settings
+        </button>
       </section>
     );
   }
-};
+}

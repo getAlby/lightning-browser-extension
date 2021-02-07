@@ -2,15 +2,13 @@
 
 function getDocumentName() {
   const nameMeta = document.querySelector(
-    'head > meta[property="og:site_name"]',
+    'head > meta[property="og:site_name"]'
   );
   if (nameMeta) {
     return nameMeta.content;
   }
 
-  const titleMeta = document.querySelector(
-    'head > meta[name="title"]',
-  );
+  const titleMeta = document.querySelector('head > meta[name="title"]');
   if (titleMeta) {
     return titleMeta.content;
   }
@@ -21,22 +19,20 @@ function getDocumentName() {
 function getDocumentIcon() {
   // Search for largest icon first
   const allIcons = Array.from(
-    document.querySelectorAll('head > link[rel="icon"]'),
-  ).filter(icon => !!icon.href);
+    document.querySelectorAll('head > link[rel="icon"]')
+  ).filter((icon) => !!icon.href);
 
   if (allIcons.length) {
     const href = allIcons.sort((a, b) => {
-      const aSize = parseInt(a.getAttribute('sizes') || '0', 10);
-      const bSize = parseInt(b.getAttribute('sizes') || '0', 10);
+      const aSize = parseInt(a.getAttribute("sizes") || "0", 10);
+      const bSize = parseInt(b.getAttribute("sizes") || "0", 10);
       return bSize - aSize;
     })[0].href;
     return makeAbsoluteUrl(href);
   }
 
   // Try for favicon
-  const favicon = document.querySelector(
-    'head > link[rel="shortcut icon"]',
-  );
+  const favicon = document.querySelector('head > link[rel="shortcut icon"]');
   if (favicon) {
     return makeAbsoluteUrl(favicon.href);
   }
@@ -53,7 +49,7 @@ function makeAbsoluteUrl(path) {
 
 export default function getOriginData() {
   if (!window || !document) {
-    throw new Error('Must be called in browser context');
+    throw new Error("Must be called in browser context");
   }
 
   return {

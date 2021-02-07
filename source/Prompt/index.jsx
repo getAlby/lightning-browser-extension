@@ -1,6 +1,6 @@
-import * as React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from "react";
+import ReactDOM from "react-dom";
 
-import Prompt from './Prompt';
+import Prompt from "./Prompt";
 
-ReactDOM.render(<Prompt />, document.getElementById('prompt-root'));
+ReactDOM.render(<Prompt />, document.getElementById("prompt-root"));
