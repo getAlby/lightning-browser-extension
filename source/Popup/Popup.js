@@ -4,92 +4,11 @@ import { HashRouter, Link, Route, Switch } from "react-router-dom";
 import { createHashHistory } from "history";
 import utils from "../lib/utils";
 
+import Unlock from "../components/unlock";
+import Home from "../components/home";
+import Loading from "../components/loading";
+
 import "./styles.scss";
-
-class Loading extends React.Component {
-  render() {
-    return <div>loading</div>;
-  }
-}
-class Unlock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.history = createHashHistory();
-    this.state = {
-      password: "",
-    };
-  }
-
-  handlePasswordChange(event) {
-    this.setState({ password: event.target.value });
-  }
-
-  unlock() {
-    utils.call("unlock", { password: this.state.password }).then(() => {
-      this.history.push("/home");
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <h2>Unlock:</h2>
-        <input
-          type="text"
-          value={this.state.password}
-          onChange={(event) => this.handlePasswordChange(event)}
-        />
-        <button
-          onClick={(e) => {
-            this.unlock();
-          }}
-        >
-          Unlock
-        </button>
-      </div>
-    );
-  }
-}
-
-class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      alias: "",
-    };
-  }
-
-  componentDidMount() {
-    browser.storage.sync.get(["currentAccount"]).then((result) => {
-      this.setState({ currentAccount: result.currentAccount });
-    });
-    utils.call("getInfo").then((info) => {
-      this.setState({ alias: info.data.alias });
-    });
-    utils.call("getBalance").then((result) => {
-      this.setState({ balance: result.data.balance });
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        {this.state.currentAccount}
-        <h2>{this.state.alias}</h2>
-        <p>{this.state.balance}</p>
-        <button
-          id="options__button"
-          type="button"
-          onClick={() => {
-            return utils.openPage("options.html");
-          }}
-        >
-          Options Page
-        </button>
-      </div>
-    );
-  }
-}
 
 class Popup extends React.Component {
   constructor(props) {

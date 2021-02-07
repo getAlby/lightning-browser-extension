@@ -3,13 +3,20 @@ import qs from "query-string";
 
 const utils = {
   call: (type, args) => {
-    return browser.runtime.sendMessage({
-      application: "Joule",
-      prompt: true,
-      type: type,
-      args: args,
-      origin: { internal: true },
-    });
+    return browser.runtime
+      .sendMessage({
+        application: "Joule",
+        prompt: true,
+        type: type,
+        args: args,
+        origin: { internal: true },
+      })
+      .then((response) => {
+        if (response.error) {
+          throw new Error(response.error);
+        }
+        return response.data;
+      });
   },
   notify: (details) => {
     const notification = Object.assign(

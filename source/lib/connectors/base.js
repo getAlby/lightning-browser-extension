@@ -8,6 +8,7 @@ class Base {
     this.connectorConfig = connectorConfig;
     // placeholder for the unlocked config
     this.config = {};
+    this.unlocked = false;
     this.settings = new Settings();
   }
 
@@ -16,13 +17,17 @@ class Base {
   }
 
   unlock(message) {
-    this.config = decryptData(
-      this.connectorConfig,
-      message.args.password,
-      this.settings.salt
-    );
-    this.unlocked = true;
-    return Promise.resolve(this.unlocked);
+    try {
+      this.config = decryptData(
+        this.connectorConfig,
+        message.args.password,
+        this.settings.salt
+      );
+      this.unlocked = true;
+      return Promise.resolve({ data: { unlocked: this.unlocked } });
+    } catch (e) {
+      return Promise.resolve({ error: "Failed to decrypt" });
+    }
   }
 
   lock() {
@@ -31,7 +36,7 @@ class Base {
   }
 
   isUnlocked(message) {
-    return Promise.resolve(this.unlocked);
+    return Promise.resolve({ data: this.unlocked });
   }
 
   enable(message) {
