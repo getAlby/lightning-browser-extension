@@ -1,9 +1,13 @@
 import memoizee from "memoizee";
 import utils from "./../utils";
+import { decryptData } from "./../crypto";
 
 class Base {
   constructor(connectorConfig, globalSettings) {
-    this.config = connectorConfig;
+    // encrypted config from browser storage
+    this.connectorConfig = connectorConfig;
+    // placeholder for the unlocked config
+    this.config = {};
     this.settings = globalSettings;
   }
 
@@ -11,8 +15,22 @@ class Base {
     return Promise.resolve();
   }
 
+  unlock(password) {
+    this.config = decryptData(
+      this.connectorConfig,
+      password,
+      this.settings.salt
+    );
+    this.unlocked = true;
+  }
+
+  lock() {
+    this.config = {};
+    this.unlocked = false;
+  }
+
   enable(message) {
-    if (this.settings.isEnabled(message.origin.domain)) {
+    if (this.unlocked && this.settings.isEnabled(message.origin.domain)) {
       return Promise.resolve({ data: { enabled: true } });
     }
     return utils

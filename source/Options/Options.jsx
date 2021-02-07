@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Typography } from "antd";
 import { Collapse, Form, Input, Button } from "antd";
+import { encryptData, decryptData } from "./../lib/crypto";
 
 import browser from "webextension-polyfill";
 
@@ -23,6 +24,10 @@ export default class Options extends React.Component {
     browser.storage.sync
       .get(["accounts", "currentAccount", "settings", "hostSettings"])
       .then((result) => {
+        if (result.accounts) {
+          console.log(result.accounts);
+          //result.accounts = decryptData(result.accounts, "btc", "salt");
+        }
         this.setState({
           accounts: result.accounts || {},
           currentAccount: result.currentAccount,
@@ -34,7 +39,6 @@ export default class Options extends React.Component {
 
   saveCurrentAccount(values) {
     const currentAccount = values.currentAccount;
-    console.log(currentAccount);
     if (currentAccount) {
       browser.storage.sync.set({ currentAccount }).then(() => {
         this.setState({ currentAccount });
@@ -44,7 +48,6 @@ export default class Options extends React.Component {
   }
 
   saveLndAccount(values) {
-    console.log(values);
     const accounts = this.state.accounts;
     accounts[values.name] = {
       config: {
@@ -85,12 +88,25 @@ export default class Options extends React.Component {
   }
 
   resetAccounts() {
-    this.saveAccounts({}).then(() => {
+    return this.saveAccounts({}).then(() => {
+      alert("Done");
+    });
+  }
+
+  resetHostSettings() {
+    return browser.storage.sync.set({ hostSettings: {} }).then(() => {
+      this.setState({ hostSettings: {} });
       alert("Done");
     });
   }
 
   saveAccounts(accounts) {
+    for (const [name, data] of Object.entries(accounts)) {
+      if (data.config) {
+        data.config = encryptData(data.config, "btc", "salt");
+      }
+      accounts[name] = data;
+    }
     return browser.storage.sync.set({ accounts }).then(() => {
       this.setState({ accounts });
     });
@@ -107,11 +123,15 @@ export default class Options extends React.Component {
         initialValues={{
           name: "",
         }}
-        onFinish={this.saveLndAccount}
-        onFinishFailed={this.onFinishFailedAddLndAccount}
+        onFinish={(values) => {
+          this.saveLndAccount(values);
+        }}
+        onFinishFailed={(errorInfo) => {
+          this.onFinishFailedAddLndAccount(errorInfo);
+        }}
       >
         <Form.Item
-          label="Username"
+          label="Name"
           name="name"
           rules={[
             {
@@ -180,7 +200,16 @@ export default class Options extends React.Component {
           </button>
         </section>
         <section>{JSON.stringify(this.state.settings)}</section>
-        <section>{JSON.stringify(this.state.hostSettings)}</section>
+        <section>
+          {JSON.stringify(this.state.hostSettings)}
+          <button
+            onClick={async (values) => {
+              this.resetHostSettings();
+            }}
+          >
+            Reset
+          </button>
+        </section>
         {/* <section>
           <Formik
             initialValues={{ currentAccount: this.state.currentAccount }}

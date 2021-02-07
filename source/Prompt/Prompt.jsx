@@ -46,6 +46,10 @@ export default class Prompt extends React.Component {
       args = JSON.parse(message.args);
     }
     this.setState({ origin, args });
+    return browser.runtime.sendMessage({
+      unlock: "btc",
+      application: "Joule",
+    });
   }
 
   render() {

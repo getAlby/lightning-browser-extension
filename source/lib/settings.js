@@ -10,6 +10,10 @@ class Settings {
     return this.settings.debug;
   }
 
+  get salt() {
+    return "salt";
+  }
+
   isEnabled(domain) {
     const url = new URL(domain);
     return url.host in this.hostSettings;

@@ -15,6 +15,9 @@ const initConnector = async () => {
         hostSettings: result.hostSettings,
       });
       const account = result.accounts[result.currentAccount];
+      if (!account) {
+        return Promise.reject("No account");
+      }
       // TODO: check if an account is configured. Guess this also needs to be done on a different level to make sure we display a settings page if nothing is configured.
       if (account.connector) {
         connector = new connectors[account.connector](account.config, settings);
@@ -27,7 +30,7 @@ const initConnector = async () => {
 };
 
 browser.storage.onChanged.addListener((changes) => {
-  if (changes.currentAccount) {
+  if (changes.accounts || changes.currentAccount) {
     initConnector();
   }
   if (changes.settings) {
@@ -47,9 +50,17 @@ browser.storage.sync
       if (settings.debug) {
         console.log("Background onMessage: ", message, sender);
       }
+      // If it is an unlock request we use it to decrypt the encrypted config in the connector
+      if (message.application === "Joule" && message.unlock) {
+        if (settings.debug) {
+          console.log("Unlocking connector");
+        }
+        connector.unlock(message.unlock);
+        return Promise.resolve();
+      }
       // if the application does not match or if it is not a prompt we ignore the call
       if (message.application !== "Joule" || !message.prompt) {
-        return false;
+        return Promise.resolve();
       }
 
       const call = connector[message.type]({
