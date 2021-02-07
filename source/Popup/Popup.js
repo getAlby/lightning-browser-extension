@@ -37,7 +37,7 @@ function getBalance() {
   });
 }
 
-export default class Popup extends React.Component {
+class Popup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -84,3 +84,5 @@ export default class Popup extends React.Component {
     );
   }
 }
+
+export default Popup;

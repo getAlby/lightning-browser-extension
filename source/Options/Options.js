@@ -10,7 +10,7 @@ import "./styles.scss";
 const { Title } = Typography;
 const { Panel } = Collapse;
 
-export default class Options extends React.Component {
+class Options extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -287,3 +287,5 @@ export default class Options extends React.Component {
     );
   }
 }
+
+export default Options;

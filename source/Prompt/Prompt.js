@@ -8,7 +8,7 @@ import "./styles.scss";
 
 const settings = new Settings({});
 
-export default class Prompt extends React.Component {
+class Prompt extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -72,3 +72,5 @@ export default class Prompt extends React.Component {
     );
   }
 }
+
+export default Prompt;
