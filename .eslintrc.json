@@ -4,6 +4,7 @@
 		"sourceType": "module"
 	},
 	"env": {
+		"browser": true,
 		"webextensions": true
 	}
 }

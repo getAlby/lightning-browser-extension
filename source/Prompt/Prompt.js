@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import browser from "webextension-polyfill";
 import qs from "query-string";
 
@@ -36,7 +36,7 @@ class Prompt extends React.Component {
   }
 
   componentDidMount() {
-    const message = qs.parse(location.search);
+    const message = qs.parse(window.location.search);
     let origin = {};
     let args = {};
     if (message.origin) {

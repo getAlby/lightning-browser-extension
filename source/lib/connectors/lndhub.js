@@ -97,7 +97,7 @@ export default class LndHub extends Base {
     headers.append("Accept", "application/json");
     headers.append("Access-Control-Allow-Origin", "*");
     headers.append("Content-Type", "application/json");
-    headers.append("Authorization", "Bearer" + " " + this.access_token);
+    headers.append("Authorization", `Bearer ${this.access_token}`);
 
     if (method === "POST") {
       body = JSON.stringify(args);
@@ -110,7 +110,7 @@ export default class LndHub extends Base {
       body,
     });
     if (!res.ok) {
-      errBody = await res.json();
+      const errBody = await res.json();
       console.log("errBody", errBody);
       throw new Error(errBody);
     }

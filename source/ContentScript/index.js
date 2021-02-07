@@ -2,7 +2,6 @@ import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
 import injectScript from "./injectScript";
 import browser from "webextension-polyfill";
-import WebLNProvider from "../webln";
 
 if (shouldInject()) {
   injectScript();

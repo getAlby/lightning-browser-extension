@@ -1,9 +1,8 @@
 import * as React from "react";
-import { Typography } from "antd";
-import { Collapse, Form, Input, Button } from "antd";
-import { encryptData, decryptData } from "./../lib/crypto";
-
 import browser from "webextension-polyfill";
+import { Collapse, Form, Input, Button, Typography } from "antd";
+
+import { encryptData } from "./../lib/crypto";
 
 import "./styles.scss";
 

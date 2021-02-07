@@ -20,7 +20,7 @@ if (document) {
       if (!response.enabled) {
         return;
       }
-      return webln
+      return window.webln
         .sendPayment(paymentRequest)
         .then((r) => {
           alert(JSON.stringify(r));

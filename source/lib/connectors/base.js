@@ -1,4 +1,3 @@
-import memoizee from "memoizee";
 import utils from "./../utils";
 import { decryptData } from "./../crypto";
 

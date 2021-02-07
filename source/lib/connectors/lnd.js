@@ -1,5 +1,4 @@
 import memoizee from "memoizee";
-import utils from "./../utils";
 import Base from "./base";
 
 class Lnd extends Base {
