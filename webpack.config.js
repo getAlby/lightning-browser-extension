@@ -62,9 +62,9 @@ module.exports = {
     background: path.join(sourcePath, "Background", "index.js"),
     contentScript: path.join(sourcePath, "ContentScript", "index.js"),
     inpageScript: path.join(sourcePath, "InpageScript", "index.js"),
-    popup: path.join(sourcePath, "Popup", "index.jsx"),
-    prompt: path.join(sourcePath, "Prompt", "index.jsx"),
-    options: path.join(sourcePath, "Options", "index.jsx"),
+    popup: path.join(sourcePath, "Popup", "index.js"),
+    prompt: path.join(sourcePath, "Prompt", "index.js"),
+    options: path.join(sourcePath, "Options", "index.js"),
   },
 
   output: {
