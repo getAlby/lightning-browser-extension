@@ -8,26 +8,23 @@ let settings;
 let currentUnlockPassword; // TODO: rethink this
 
 const initConnector = async () => {
-  return browser.storage.sync
-    .get(["currentAccount", "accounts"])
-    .then((result) => {
-      const account = result.accounts[result.currentAccount];
-      if (!account) {
-        return Promise.reject("No account");
-      }
-      // TODO: check if an account is configured. Guess this also needs to be done on a different level to make sure we display a settings page if nothing is configured.
-      if (account.connector) {
-        connector = new connectors[account.connector](account.config);
-      } else {
-        connector = new connectors.native(account.config);
-      }
+  const args = await browser.storage.sync.get(["currentAccount", "accounts"]);
+  const account = args.accounts[args.currentAccount];
+  if (!account) {
+    return Promise.reject("No account");
+  }
+  // TODO: check if an account is configured. Guess this also needs to be done on a different level to make sure we display a settings page if nothing is configured.
+  if (account.connector) {
+    connector = new connectors[account.connector](account.config);
+  } else {
+    connector = new connectors.native(account.config);
+  }
 
-      if (currentUnlockPassword) {
-        connector.unlock(currentUnlockPassword);
-      }
+  if (currentUnlockPassword) {
+    connector.unlock(currentUnlockPassword);
+  }
 
-      return connector.init();
-    });
+  return connector.init();
 };
 
 browser.storage.onChanged.addListener((changes) => {
@@ -66,30 +63,14 @@ const handleConnectorCalls = (message, sender) => {
   return call;
 };
 
-const handleUnlocks = (message, sender) => {
-  // If it is an unlock request we use it to decrypt the encrypted config in the connector
-  if (message.application !== "Joule" || !message.unlock) {
-    return;
-  }
-  if (settings && settings.debug) {
-    console.log("Unlocking");
-  }
-  currentUnlockPassword = message.unlock;
-  if (connector) {
-    connector.unlock(message.unlock);
-  }
-};
-
 async function init() {
-  // load the settings
-  settings = await new Settings();
+  settings = new Settings();
   await settings.load();
   // initialize a connector for the current account
   await initConnector();
   browser.runtime.onMessage.addListener(debugLogger);
   // this is the only handler that may and must return a Promise which resolve with the response to the content script
   browser.runtime.onMessage.addListener(handleConnectorCalls);
-  browser.runtime.onMessage.addListener(handleUnlocks);
 }
 
 init();

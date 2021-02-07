@@ -22,6 +22,7 @@ class Base {
       this.settings.salt
     );
     this.unlocked = true;
+    return Promise.resolve(this.unlocked);
   }
 
   lock() {

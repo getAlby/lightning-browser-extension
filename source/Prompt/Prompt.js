@@ -47,7 +47,6 @@ class Prompt extends React.Component {
       args = JSON.parse(message.args);
     }
     this.setState({ origin, args });
-    utils.call("unlock", { password: "btc" });
   }
 
   render() {

@@ -21,10 +21,6 @@ class Lnd extends Base {
     });
   }
 
-  async init() {
-    return Promise.resolve();
-  }
-
   sendPayment(message) {
     return super.sendPayment(message, () => {
       // TODO: should we use /v2/router/send ?
