@@ -1,17 +1,18 @@
 import utils from "./../utils";
 import { decryptData } from "./../crypto";
+import Settings from "../settings";
 
 class Base {
-  constructor(connectorConfig, globalSettings) {
+  constructor(connectorConfig) {
     // encrypted config from browser storage
     this.connectorConfig = connectorConfig;
     // placeholder for the unlocked config
     this.config = {};
-    this.settings = globalSettings;
+    this.settings = new Settings();
   }
 
   async init() {
-    return Promise.resolve();
+    return this.settings.load();
   }
 
   unlock(password) {
@@ -26,6 +27,10 @@ class Base {
   lock() {
     this.config = {};
     this.unlocked = false;
+  }
+
+  isUnlocked(message) {
+    return Promise.resolve(this.unlocked);
   }
 
   enable(message) {

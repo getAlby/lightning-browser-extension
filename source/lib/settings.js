@@ -1,9 +1,22 @@
 import browser from "webextension-polyfill";
 
 class Settings {
-  constructor(result) {
-    this.settings = result.settings || {};
-    this.hostSettings = result.hostSettings || {};
+  constructor(args) {
+    if (!args) {
+      args = {};
+    }
+    this.settings = args.settings || {};
+    this.hostSettings = args.hostSettings || {};
+  }
+
+  load() {
+    return browser.storage.sync
+      .get(["settings", "hostSettings"])
+      .then((result) => {
+        this.settings = result.settings;
+        this.hostSettings = result.hostSettings;
+        return this;
+      });
   }
 
   get debug() {
