@@ -3,6 +3,7 @@ import browser from "webextension-polyfill";
 import qs from "query-string";
 
 import Settings from "../lib/settings";
+import utils from "../lib/utils";
 
 import "./styles.scss";
 
@@ -46,10 +47,7 @@ class Prompt extends React.Component {
       args = JSON.parse(message.args);
     }
     this.setState({ origin, args });
-    return browser.runtime.sendMessage({
-      unlock: "btc",
-      application: "Joule",
-    });
+    utils.call("unlock", { password: "btc" });
   }
 
   render() {

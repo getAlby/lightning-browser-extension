@@ -15,10 +15,10 @@ class Base {
     return this.settings.load();
   }
 
-  unlock(password) {
+  unlock(message) {
     this.config = decryptData(
       this.connectorConfig,
-      password,
+      message.args.password,
       this.settings.salt
     );
     this.unlocked = true;
