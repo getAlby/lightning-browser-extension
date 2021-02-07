@@ -1,5 +1,3 @@
-import { message } from "antd";
-
 export default class WebLNProvider {
   constructor() {
     this.isEnabled = false;

@@ -1,5 +1,4 @@
 import memoizee from "memoizee";
-import utils from "../utils";
 import Base from "./base";
 
 export default class LndHub extends Base {
@@ -29,10 +28,10 @@ export default class LndHub extends Base {
     return this.authorize();
   }
 
-  sendPayment(args) {
+  sendPayment(message) {
     return super.sendPayment(message, () => {
       this.request("POST", "/payinvoice", {
-        invoice: args.paymentRequest,
+        invoice: message.args.paymentRequest,
       });
     });
   }
@@ -65,11 +64,6 @@ export default class LndHub extends Base {
         }
       })
       .then((json) => {
-        if (typeof json === "undefined") {
-          throw new Error(
-            "API failure: " + response.err + " " + JSON.stringify(response.body)
-          );
-        }
         if (json && json.error) {
           throw new Error(
             "API error: " + json.message + " (code " + json.code + ")"
