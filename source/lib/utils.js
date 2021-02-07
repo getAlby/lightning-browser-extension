@@ -21,6 +21,12 @@ const utils = {
     );
     browser.notifications.create(notification);
   },
+  openPage: (page) => {
+    browser.tabs.create({ url: browser.runtime.getURL(page) });
+  },
+  openUrl: (url) => {
+    browser.tabs.create({ url });
+  },
   openPrompt: (message) => {
     const urlParams = qs.stringify({
       args: JSON.stringify(message.args),

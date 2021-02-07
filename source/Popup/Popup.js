@@ -37,7 +37,7 @@ class Popup extends React.Component {
           id="options__button"
           type="button"
           onClick={() => {
-            return openWebPage("options.html");
+            return utils.openPage("options.html");
           }}
         >
           Options Page
