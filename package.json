@@ -22,7 +22,8 @@
     "build:opera": "cross-env NODE_ENV=production cross-env TARGET_BROWSER=opera webpack",
     "build": "yarn run build:chrome && yarn run build:firefox && yarn run build:opera",
     "lint": "eslint . --ext .js,.jsx",
-    "lint:fix": "eslint . --ext .js,.jsx --fix"
+    "lint:fix": "eslint . --ext .js,.jsx --fix",
+    "format": "prettier --loglevel silent --write \"**/*.(js|ts|jsx|tsx)\""
   },
   "husky": {
     "hooks": {
@@ -82,7 +83,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "postcss": "^8.1.7",
     "postcss-loader": "^4.0.4",
-    "prettier": "^2.1.2",
+    "prettier": "^2.2.1",
     "resolve-url-loader": "^3.1.2",
     "sass-loader": "^10.1.0",
     "terser-webpack-plugin": "^4.2.3",
