@@ -3,6 +3,7 @@ import { Typography, Layout, Tabs } from "antd";
 import React, { useState, useEffect } from "react";
 
 import LndForm from "../forms/lnd";
+import LndHubForm from "../forms/lndhub";
 import { encryptData } from "./../lib/crypto";
 import ListData from "../components/listData";
 import { normalizeAccountsData } from "../utils/helpers";
@@ -20,6 +21,10 @@ const Options = () => {
   const [currentAccount, setCurrentAccount] = useState("");
 
   useEffect(() => {
+    fetchOptionsFromStorage();
+  }, []);
+
+  const fetchOptionsFromStorage = () => {
     browser.storage.sync
       .get(["accounts", "currentAccount", "settings", "hostSettings"])
       .then((result) => {
@@ -29,7 +34,7 @@ const Options = () => {
         setHostSettings(result.hostSettings || {});
         setCurrentAccount(result.currentAccount || "");
       });
-  }, []);
+  };
 
   const saveCurrentAccount = (values) => {
     const currentAccount = values.currentAccount;
@@ -52,13 +57,7 @@ const Options = () => {
     };
 
     saveAccounts(accounts).then(() => {
-      setAccounts({
-        ...accounts,
-        [values.name]: {
-          connector: "lnd",
-          config: values.macaroon,
-        },
-      });
+      fetchOptionsFromStorage();
 
       if (formRef) {
         formRef.resetFields();
@@ -66,7 +65,7 @@ const Options = () => {
     });
   };
 
-  const saveLndHubAccount = (values) => {
+  const saveLndHubAccount = (values, formRef) => {
     accounts[values.name] = {
       config: {
         login: values.login,
@@ -77,7 +76,11 @@ const Options = () => {
     };
 
     saveAccounts(accounts).then(() => {
-      alert("Saved");
+      fetchOptionsFromStorage();
+
+      if (formRef) {
+        formRef.resetFields();
+      }
     });
   };
 
@@ -116,7 +119,7 @@ const Options = () => {
     });
   };
 
-  const addLndAccountFailure = (errorInfo) => {
+  const formSubmitFailure = (errorInfo) => {
     console.log(errorInfo);
   };
 
@@ -143,12 +146,15 @@ const Options = () => {
               <TabPane tab="LND Account" key="1">
                 <LndForm
                   saveLndAccount={saveLndAccount}
-                  addLndAccountFailure={addLndAccountFailure}
+                  addLndAccountFailure={formSubmitFailure}
                 />
               </TabPane>
 
               <TabPane tab="LND Hub Account" key="2">
-                LND hub account form comes here
+                <LndHubForm
+                  saveLndHubAccount={saveLndHubAccount}
+                  addLndHubAccountFailure={formSubmitFailure}
+                />
               </TabPane>
 
               <TabPane tab="Native Connection" key="3">
