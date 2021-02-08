@@ -1,53 +1,46 @@
-import * as React from "react";
 import browser from "webextension-polyfill";
-import { Collapse, Form, Input, Button, Typography } from "antd";
+import React, { useState, useEffect } from "react";
+import { Typography, Layout, Tabs, Row } from "antd";
 
+import LndForm from "../forms/lnd";
 import { encryptData } from "./../lib/crypto";
 
 import "./styles.scss";
 
-const { Title } = Typography;
-const { Panel } = Collapse;
+const { TabPane } = Tabs;
+const { Header, Content } = Layout;
+const { Title, Paragraph } = Typography;
 
-class Options extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      accounts: {},
-      currentAccount: "",
-      settings: {},
-    };
-  }
+const Options = () => {
+  const [accounts, setAccounts] = useState({});
+  const [settings, setSettings] = useState({});
+  const [hostSettings, setHostSettings] = useState({});
+  const [currentAccount, setCurrentAccount] = useState("");
 
-  componentDidMount() {
+  useEffect(() => {
     browser.storage.sync
       .get(["accounts", "currentAccount", "settings", "hostSettings"])
       .then((result) => {
-        if (result.accounts) {
-          console.log(result.accounts);
-          //result.accounts = decryptData(result.accounts, "btc", "salt");
-        }
-        this.setState({
-          accounts: result.accounts || {},
-          currentAccount: result.currentAccount,
-          settings: result.settings || {},
-          hostSettings: result.hostSettings || {},
-        });
+        console.log(result.accounts);
+        setAccounts(result.accounts || {});
+        setSettings(result.settings || {});
+        setHostSettings(result.hostSettings || {});
+        setCurrentAccount(result.currentAccount || "");
       });
-  }
+  }, []);
 
-  saveCurrentAccount(values) {
+  const saveCurrentAccount = (values) => {
     const currentAccount = values.currentAccount;
+
     if (currentAccount) {
       browser.storage.sync.set({ currentAccount }).then(() => {
-        this.setState({ currentAccount });
+        setCurrentAccount(currentAccount);
         alert("Saved");
       });
     }
-  }
+  };
 
-  saveLndAccount(values) {
-    const accounts = this.state.accounts;
+  const saveLndAccount = (values) => {
     accounts[values.name] = {
       config: {
         macaroon: values.macaroon,
@@ -55,13 +48,12 @@ class Options extends React.Component {
       },
       connector: "lnd",
     };
-    this.saveAccounts(accounts).then(() => {
+    saveAccounts(accounts).then(() => {
       alert("Saved");
     });
-  }
+  };
 
-  saveLndHubAccount(values) {
-    const accounts = this.state.accounts;
+  const saveLndHubAccount = (values) => {
     accounts[values.name] = {
       config: {
         login: values.login,
@@ -70,36 +62,36 @@ class Options extends React.Component {
       },
       connector: "lndhub",
     };
-    this.saveAccounts(accounts).then(() => {
+
+    saveAccounts(accounts).then(() => {
       alert("Saved");
     });
-  }
+  };
 
-  saveNativeAccount(values) {
-    const accounts = this.state.accounts;
+  const saveNativeAccount = (values) => {
     accounts[values.name] = {
       config: {},
       connector: "native",
     };
-    this.saveAccounts(accounts).then(() => {
+    saveAccounts(accounts).then(() => {
       alert("Saved");
     });
-  }
+  };
 
-  resetAccounts() {
-    return this.saveAccounts({}).then(() => {
+  const resetAccounts = () => {
+    return saveAccounts({}).then(() => {
       alert("Done");
     });
-  }
+  };
 
-  resetHostSettings() {
+  const resetHostSettings = () => {
     return browser.storage.sync.set({ hostSettings: {} }).then(() => {
-      this.setState({ hostSettings: {} });
+      setHostSettings({});
       alert("Done");
     });
-  }
+  };
 
-  saveAccounts(accounts) {
+  const saveAccounts = (accounts) => {
     for (const [name, data] of Object.entries(accounts)) {
       if (data.config) {
         data.config = encryptData(data.config, "btc", "salt");
@@ -107,184 +99,61 @@ class Options extends React.Component {
       accounts[name] = data;
     }
     return browser.storage.sync.set({ accounts }).then(() => {
-      this.setState({ accounts });
+      setAccounts(accounts);
     });
-  }
+  };
 
-  onFinishFailedAddLndAccount(errorInfo) {
+  const addLndAccountFailure = (errorInfo) => {
     console.log(errorInfo);
-  }
+  };
 
-  renderAddLndAccount() {
-    return (
-      <Form
-        name="basic"
-        initialValues={{
-          name: "",
-        }}
-        onFinish={(values) => {
-          this.saveLndAccount(values);
-        }}
-        onFinishFailed={(errorInfo) => {
-          this.onFinishFailedAddLndAccount(errorInfo);
-        }}
-      >
-        <Form.Item
-          label="Name"
-          name="name"
-          rules={[
-            {
-              required: true,
-              message: "Please input your username!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
+  return (
+    <Layout>
+      <Header>Lightning Extension Options</Header>
 
-        <Form.Item
-          label="Macaroon"
-          name="macaroon"
-          rules={[
-            {
-              required: true,
-              message: "Please input the macroon key!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
+      <Content>
+        <Tabs defaultActiveKey="2">
+          <TabPane tab="General" key="1">
+            Content of Tab Pane 1
+          </TabPane>
 
-        <Form.Item
-          label="URL"
-          name="url"
-          rules={[
-            {
-              type: "url",
-              required: true,
-              message: "Please enter the macroon url!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
-    );
-  }
+          <TabPane tab="Accounts" key="2">
+            {Object.keys(accounts).length > 0 && (
+              <>
+                <Row>
+                  <Title level={2}>Existing Accounts</Title>
+                </Row>
+                <Paragraph code>{JSON.stringify(accounts, null, 2)}</Paragraph>
+              </>
+            )}
 
-  renderAddLndHubAccount() {
-    return <div>renderAddLndHubAccount</div>;
-  }
+            <Title level={2}>Add Account</Title>
 
-  renderAddNativeAccount() {
-    return <div>renderAddNativeAccount</div>;
-  }
+            <Tabs defaultActiveKey="1">
+              <TabPane tab="LND Account" key="1">
+                <LndForm
+                  saveLndAccount={saveLndAccount}
+                  addLndAccountFailure={addLndAccountFailure}
+                />
+              </TabPane>
 
-  render() {
-    return (
-      <div>
-        <section>
-          {JSON.stringify(this.state.accounts)}
-          <button
-            onClick={async (values) => {
-              this.resetAccounts();
-            }}
-          >
-            Reset
-          </button>
-        </section>
-        <section>{JSON.stringify(this.state.settings)}</section>
-        <section>
-          {JSON.stringify(this.state.hostSettings)}
-          <button
-            onClick={async (values) => {
-              this.resetHostSettings();
-            }}
-          >
-            Reset
-          </button>
-        </section>
-        {/* <section>
-          <Formik
-            initialValues={{ currentAccount: this.state.currentAccount }}
-            onSubmit={async (values) => {
-              this.saveCurrentAccount(values);
-            }}
-          >
-            <Form>
-              Current account: <Field name="currentAccount" type="text" />
-              <button type="submit">Save</button>
-            </Form>
-          </Formik>
-        </section> */}
-        <Title level={2}>Add Account</Title>
-        <Collapse defaultActiveKey={["1"]}>
-          <Panel header="Add LND Account" key="1">
-            {this.renderAddLndAccount()}
-          </Panel>
-          <Panel header="Add LndHub Account" key="2">
-            {this.renderAddLndHubAccount()}
-          </Panel>
-          <Panel header="Add Native Connection" key="3">
-            {this.renderAddNativeAccount()}
-          </Panel>
-        </Collapse>
+              <TabPane tab="LND Hub Account" key="2">
+                LND hub account form comes here
+              </TabPane>
 
-        {/* <section>
-          <h2>Add LND Account</h2>
-          <Formik
-            initialValues={{ name: "", macaroon: "", url: "" }}
-            onSubmit={async (values) => {
-              this.saveLndAccount(values);
-            }}
-          >
-            <Form>
-              Name: <Field name="name" type="text" />
-              URL: <Field name="url" type="text" />
-              Macaroon Hex: <Field name="macaroon" type="text" />
-              <button type="submit">Save</button>
-            </Form>
-          </Formik>
-        </section>
-        <section>
-          <h2>Add LndHub Account</h2>
-          <Formik
-            initialValues={{ name: "", login: "", password: "", url: "" }}
-            onSubmit={async (values) => {
-              this.saveLndHubAccount(values);
-            }}
-          >
-            <Form>
-              Name: <Field name="name" type="text" />
-              URL: <Field name="url" type="text" />
-              Login: <Field name="login" type="text" />
-              Password: <Field name="password" type="text" />
-              <button type="submit">Save</button>
-            </Form>
-          </Formik>
-        </section>
-        <section>
-          <h2>Add Native Connection</h2>
-          <Formik
-            initialValues={{ name: "", login: "", password: "", url: "" }}
-            onSubmit={async (values) => {
-              this.saveNativeAccount(values);
-            }}
-          >
-            <Form>
-              Name: <Field name="name" type="text" />
-              <button type="submit">Save</button>
-            </Form>
-          </Formik>
-        </section> */}
-      </div>
-    );
-  }
-}
+              <TabPane tab="Native Connection" key="3">
+                Native accout form comes here
+              </TabPane>
+            </Tabs>
+          </TabPane>
+
+          <TabPane tab="Enabled Sites" key="3">
+            Content of Tab Pane 3
+          </TabPane>
+        </Tabs>
+      </Content>
+    </Layout>
+  );
+};
 
 export default Options;
