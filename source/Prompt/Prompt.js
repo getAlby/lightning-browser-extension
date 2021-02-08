@@ -1,20 +1,15 @@
 import React from "react";
-import { HashRouter, Link, Route, Switch } from "react-router-dom";
-import { createHashHistory } from "history";
-import browser from "webextension-polyfill";
 import qs from "query-string";
+import { createHashHistory } from "history";
+import { HashRouter, Route, Switch } from "react-router-dom";
 
-import Settings from "../lib/settings";
 import utils from "../lib/utils";
-
-import Loading from "../components/loading";
-import Unlock from "../components/unlock";
-import Enable from "../components/enable";
-import ConfirmPayment from "../components/confirmPayment";
+import Unlock from "../pages/unlock";
+import Enable from "../pages/enable";
+import Loading from "../pages/loading";
+import ConfirmPayment from "../pages/confirmPayment";
 
 import "./styles.scss";
-
-const settings = new Settings({});
 
 class Prompt extends React.Component {
   constructor(props) {
