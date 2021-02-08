@@ -13,8 +13,8 @@ class Settings {
     return browser.storage.sync
       .get(["settings", "hostSettings"])
       .then((result) => {
-        this.settings = result.settings;
-        this.hostSettings = result.hostSettings;
+        this.settings = result.settings || {};
+        this.hostSettings = result.hostSettings || {};
         return this;
       });
   }
