@@ -6,7 +6,7 @@ import LndForm from "../forms/lnd";
 import LndHubForm from "../forms/lndhub";
 import { encryptData } from "./../lib/crypto";
 import ListData from "../components/listData";
-import { normalizeAccountsData } from "../utils/helpers";
+import { normalizeAccountsData, normalizeSettingsData } from "../utils/helpers";
 
 import "./styles.scss";
 
@@ -138,6 +138,12 @@ const Options = () => {
               title="Existing Accounts"
               onResetCallback={resetAccounts}
               data={normalizeAccountsData(accounts)}
+            />
+
+            <ListData
+              title="Settings"
+              onResetCallback={resetHostSettings}
+              data={normalizeSettingsData(hostSettings)}
             />
 
             <Title level={2}>Add Account</Title>
