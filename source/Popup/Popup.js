@@ -1,11 +1,10 @@
 import React from "react";
-import browser from "webextension-polyfill";
-import { HashRouter, Link, Route, Switch } from "react-router-dom";
 import { createHashHistory } from "history";
-import utils from "../lib/utils";
+import { HashRouter, Switch, Route } from "react-router-dom";
 
-import Unlock from "../components/unlock";
+import utils from "../lib/utils";
 import Home from "../components/home";
+import Unlock from "../components/unlock";
 import Loading from "../components/loading";
 
 import "./styles.scss";
