@@ -28,7 +28,7 @@ const initConnector = async () => {
 };
 
 browser.storage.onChanged.addListener((changes) => {
-  if (changes.accounts || changes.currentAccount) {
+  if (changes.accounts || changes.currentAccount || changes.hostSettings) {
     initConnector();
   }
   if (changes.settings) {
@@ -53,6 +53,7 @@ const handleConnectorCalls = (message, sender) => {
   const call = connector[message.type]({
     args: message.args,
     origin: message.origin,
+    type: message.type,
   });
   if (settings.debug) {
     call.then((r) => {

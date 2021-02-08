@@ -36,7 +36,7 @@ class Base {
   }
 
   isUnlocked(message) {
-    return Promise.resolve({ data: this.unlocked });
+    return Promise.resolve({ data: { unlocked: this.unlocked } });
   }
 
   enable(message) {
@@ -46,6 +46,9 @@ class Base {
     return utils
       .openPrompt(message)
       .then((response) => {
+        if (response.data.enabled) {
+          this.settings.allowHost(message.origin.domain, response.data);
+        }
         return response;
       })
       .catch((e) => {
@@ -54,7 +57,21 @@ class Base {
   }
 
   sendPayment(message, executor) {
-    return executor()
+    if (!this.unlocked || !this.settings.isEnabled(message.origin.domain)) {
+      return Promise.resolve({ error: "Not enabled" });
+    }
+    let promise;
+    if (this.settings.hasAllowance(message.origin.domain)) {
+      promise = executor();
+    } else {
+      promise = utils.openPrompt(message).then((response) => {
+        if (response.data.confirmed) {
+          this.settings.allowHost(message.origin.domain, response);
+        }
+        return executor();
+      });
+    }
+    return promise
       .then((response) => {
         utils.notify({
           title: "Paid",

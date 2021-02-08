@@ -38,6 +38,7 @@ const utils = {
     const urlParams = qs.stringify({
       args: JSON.stringify(message.args),
       origin: JSON.stringify(message.origin),
+      type: message.type,
     });
 
     return new Promise((resolve, reject) => {

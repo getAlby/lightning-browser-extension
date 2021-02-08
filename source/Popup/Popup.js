@@ -16,8 +16,8 @@ class Popup extends React.Component {
   }
 
   componentDidMount() {
-    utils.call("isUnlocked").then((unlocked) => {
-      if (unlocked) {
+    utils.call("isUnlocked").then((response) => {
+      if (response.unlocked) {
         this.history.replace("/home");
       } else {
         this.history.replace("/unlock");
@@ -32,7 +32,11 @@ class Popup extends React.Component {
           <Switch>
             <Route exact path="/" render={(props) => <Loading />} />
             <Route exact path="/home" render={(props) => <Home />} />
-            <Route exact path="/unlock" render={(props) => <Unlock />} />
+            <Route
+              exact
+              path="/unlock"
+              render={(props) => <Unlock next="/home" />}
+            />
           </Switch>
         </section>
       </HashRouter>

@@ -1,9 +1,16 @@
 import React from "react";
+import { HashRouter, Link, Route, Switch } from "react-router-dom";
+import { createHashHistory } from "history";
 import browser from "webextension-polyfill";
 import qs from "query-string";
 
 import Settings from "../lib/settings";
 import utils from "../lib/utils";
+
+import Loading from "../components/loading";
+import Unlock from "../components/unlock";
+import Enable from "../components/enable";
+import ConfirmPayment from "../components/confirmPayment";
 
 import "./styles.scss";
 
@@ -12,31 +19,7 @@ const settings = new Settings({});
 class Prompt extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
-  }
-
-  enable() {
-    if (this.state.remember) {
-      settings.allowHost(this.state.origin.domain, { enabled: true });
-    }
-    return browser.runtime.sendMessage({
-      response: true,
-      data: { enabled: true },
-    });
-  }
-
-  reject() {
-    return browser.runtime.sendMessage({
-      response: true,
-      error: "User rejected",
-    });
-  }
-
-  handleRememberChange(remember) {
-    return this.setState({ remember });
-  }
-
-  componentDidMount() {
+    this.history = createHashHistory();
     const message = qs.parse(window.location.search);
     let origin = {};
     let args = {};
@@ -46,26 +29,44 @@ class Prompt extends React.Component {
     if (message.args) {
       args = JSON.parse(message.args);
     }
-    this.setState({ origin, args });
+    this.state = { origin, args, type: message.type };
+    console.log(this.state);
+  }
+
+  componentDidMount() {
+    utils.call("isUnlocked").then((response) => {
+      if (response.unlocked) {
+        this.history.replace(`${this.state.type}`);
+      } else {
+        this.history.replace("/unlock");
+      }
+    });
   }
 
   render() {
     return (
-      <section id="prompt">
-        <strong>{JSON.stringify(this.state.origin)}</strong>
-        <h2>Allow access?</h2>
-        <input
-          name="remember"
-          type="checkbox"
-          onChange={(event) => {
-            this.handleRememberChange(event.target.checked);
-          }}
-        />
-
-        <button onClick={() => this.enable()}>Enable</button>
-        <br />
-        <button onClick={() => this.reject()}>Reject</button>
-      </section>
+      <HashRouter>
+        <section id="prompt">
+          <Switch>
+            <Route exact path="/" render={(props) => <Loading />} />
+            <Route
+              exact
+              path="/unlock"
+              render={(props) => <Unlock next={`/${this.state.type}`} />}
+            />
+            <Route
+              exact
+              path="/enable"
+              render={(props) => <Enable origin={this.state.origin} />}
+            />
+            <Route
+              exact
+              path="/sendPayment"
+              render={(props) => <ConfirmPayment origin={this.state.origin} />}
+            />
+          </Switch>
+        </section>
+      </HashRouter>
     );
   }
 }

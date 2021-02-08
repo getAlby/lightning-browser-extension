@@ -24,7 +24,8 @@ class Unlock extends React.Component {
     utils
       .call("unlock", { password: this.state.password })
       .then(() => {
-        this.history.push("/home");
+        const next = this.props.next || "/home";
+        this.history.push(next);
       })
       .catch((e) => {
         this.setState({ error: e.message });
