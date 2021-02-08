@@ -50,6 +50,24 @@ body {
       }
     }
     /* Form custom styling end */
+
+    /* list custon styling start */
+    .ant-list {
+      .ant-list-items {
+        .ant-list-item {
+          border-bottom-color: #dcdcdc;
+
+          .ant-list-item-meta {
+            .ant-list-item-meta-content {
+              .ant-list-item-meta-description {
+                word-break: break-all;
+              }
+            }
+          }
+        }
+      }
+    }
+    /* list custon styling end */
   }
 }
 

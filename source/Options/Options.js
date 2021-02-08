@@ -1,15 +1,17 @@
 import browser from "webextension-polyfill";
+import { Typography, Layout, Tabs } from "antd";
 import React, { useState, useEffect } from "react";
-import { Typography, Layout, Button, Tabs, Row } from "antd";
 
 import LndForm from "../forms/lnd";
 import { encryptData } from "./../lib/crypto";
+import ListData from "../components/listData";
+import { normalizeAccountsData } from "../utils/helpers";
 
 import "./styles.scss";
 
 const { TabPane } = Tabs;
+const { Title } = Typography;
 const { Header, Content } = Layout;
-const { Title, Paragraph } = Typography;
 
 const Options = () => {
   const [accounts, setAccounts] = useState({});
@@ -129,26 +131,11 @@ const Options = () => {
           </TabPane>
 
           <TabPane tab="Accounts" key="2">
-            {Object.keys(accounts).length > 0 && (
-              <>
-                <Row align="middle" justify="space-between">
-                  <Title level={2}>Existing Accounts</Title>
-
-                  <div className="reset-button-wrapper">
-                    <Button
-                      shape="round"
-                      type="primary"
-                      onClick={resetAccounts}
-                      className="reset-button"
-                    >
-                      Reset
-                    </Button>
-                  </div>
-                </Row>
-
-                <Paragraph code>{JSON.stringify(accounts, null, 2)}</Paragraph>
-              </>
-            )}
+            <ListData
+              title="Existing Accounts"
+              onResetCallback={resetAccounts}
+              data={normalizeAccountsData(accounts)}
+            />
 
             <Title level={2}>Add Account</Title>
 
