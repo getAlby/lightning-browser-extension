@@ -19,16 +19,21 @@ const tailLayout = {
   },
 };
 
-const LndForm = ({ saveLndAccount, addLndAccountFailure }) => {
+const LndForm = ({ ref, saveLndAccount, addLndAccountFailure }) => {
+  const [form] = Form.useForm();
+
   return (
     <Form
       {...layout}
+      form={form}
       name="basic"
-      initialValues={{
-        name: "",
-      }}
-      onFinish={saveLndAccount}
       onFinishFailed={addLndAccountFailure}
+      onFinish={(values) => saveLndAccount(values, form)}
+      initialValues={{
+        url: "",
+        name: "",
+        macaroon: "",
+      }}
     >
       <FormItem
         label="Name"
