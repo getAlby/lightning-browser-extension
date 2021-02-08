@@ -58,6 +58,7 @@ const Options = () => {
 
     saveAccounts(accounts).then(() => {
       fetchOptionsFromStorage();
+      saveCurrentAccount({ currentAccount: values.name });
 
       if (formRef) {
         formRef.resetFields();
@@ -145,6 +146,8 @@ const Options = () => {
               onResetCallback={resetHostSettings}
               data={normalizeSettingsData(hostSettings)}
             />
+
+            <Title level={2}>Current Account: {currentAccount}</Title>
 
             <Title level={2}>Add Account</Title>
 
