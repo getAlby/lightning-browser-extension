@@ -1,5 +1,6 @@
 import browser from "webextension-polyfill";
 
+import utils from "../lib/utils";
 import Settings from "../lib/settings";
 import connectors from "../lib/connectors";
 
@@ -11,7 +12,7 @@ const initConnector = async () => {
   const args = await browser.storage.sync.get(["currentAccount", "accounts"]);
   const account = args.accounts[args.currentAccount];
   if (!account) {
-    return Promise.reject("No account");
+    return Promise.resolve("No account");
   }
   // TODO: check if an account is configured. Guess this also needs to be done on a different level to make sure we display a settings page if nothing is configured.
   if (account.connector) {
@@ -48,6 +49,13 @@ const handleConnectorCalls = (message, sender) => {
   // if the application does not match or if it is not a prompt we ignore the call
   if (message.application !== "Joule" || !message.prompt) {
     return Promise.resolve();
+  }
+
+  // if the connector is not available, probably because no account is configured we open the Options page.
+  // TODO: create an onboarding wizard
+  if (!connector) {
+    utils.openPage("Options.html");
+    return Promise.resolve({ error: "No account available" });
   }
 
   const call = connector[message.type]({
