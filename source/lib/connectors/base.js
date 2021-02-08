@@ -40,7 +40,7 @@ class Base {
   }
 
   enable(message) {
-    if (this.unlocked && this.settings.isEnabled(message.origin.domain)) {
+    if (this.settings.isEnabled(message.origin.domain)) {
       return Promise.resolve({ data: { enabled: true } });
     }
     return utils
