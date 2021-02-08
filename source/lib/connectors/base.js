@@ -57,11 +57,8 @@ class Base {
   }
 
   sendPayment(message, executor) {
-    if (!this.unlocked || !this.settings.isEnabled(message.origin.domain)) {
-      return Promise.resolve({ error: "Not enabled" });
-    }
     let promise;
-    if (this.settings.hasAllowance(message.origin.domain)) {
+    if (this.settings.hasAllowance(message)) {
       promise = executor();
     } else {
       promise = utils.openPrompt(message).then((response) => {

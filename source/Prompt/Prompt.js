@@ -30,7 +30,6 @@ class Prompt extends React.Component {
       args = JSON.parse(message.args);
     }
     this.state = { origin, args, type: message.type };
-    console.log(this.state);
   }
 
   componentDidMount() {

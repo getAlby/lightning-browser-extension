@@ -32,7 +32,8 @@ class Settings {
     return url.host in this.hostSettings;
   }
 
-  hasAllowance(domain) {
+  hasAllowance(message) {
+    const domain = message.origin && message.origin.domain;
     const url = new URL(domain);
     // TODO: check allowance
     const setting = this.hostSettings[url.host];
@@ -42,7 +43,6 @@ class Settings {
   allowHost(domain, allowance) {
     const url = new URL(domain);
     this.hostSettings[url.host] = allowance;
-    console.log(allowance);
     if (allowance.remember) {
       return browser.storage.sync.set({ hostSettings: this.hostSettings });
     } else {
