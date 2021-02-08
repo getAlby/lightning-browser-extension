@@ -1,6 +1,6 @@
 import browser from "webextension-polyfill";
 import React, { useState, useEffect } from "react";
-import { Typography, Layout, Tabs, Row } from "antd";
+import { Typography, Layout, Button, Tabs, Row } from "antd";
 
 import LndForm from "../forms/lnd";
 import { encryptData } from "./../lib/crypto";
@@ -21,7 +21,7 @@ const Options = () => {
     browser.storage.sync
       .get(["accounts", "currentAccount", "settings", "hostSettings"])
       .then((result) => {
-        console.log(result.accounts);
+        console.log(result);
         setAccounts(result.accounts || {});
         setSettings(result.settings || {});
         setHostSettings(result.hostSettings || {});
@@ -40,7 +40,7 @@ const Options = () => {
     }
   };
 
-  const saveLndAccount = (values) => {
+  const saveLndAccount = (values, formRef) => {
     accounts[values.name] = {
       config: {
         macaroon: values.macaroon,
@@ -48,8 +48,19 @@ const Options = () => {
       },
       connector: "lnd",
     };
+
     saveAccounts(accounts).then(() => {
-      alert("Saved");
+      setAccounts({
+        ...accounts,
+        [values.name]: {
+          connector: "lnd",
+          config: values.macaroon,
+        },
+      });
+
+      if (formRef) {
+        formRef.resetFields();
+      }
     });
   };
 
@@ -80,7 +91,7 @@ const Options = () => {
 
   const resetAccounts = () => {
     return saveAccounts({}).then(() => {
-      alert("Done");
+      setAccounts({});
     });
   };
 
@@ -120,9 +131,21 @@ const Options = () => {
           <TabPane tab="Accounts" key="2">
             {Object.keys(accounts).length > 0 && (
               <>
-                <Row>
+                <Row align="middle" justify="space-between">
                   <Title level={2}>Existing Accounts</Title>
+
+                  <div className="reset-button-wrapper">
+                    <Button
+                      shape="round"
+                      type="primary"
+                      onClick={resetAccounts}
+                      className="reset-button"
+                    >
+                      Reset
+                    </Button>
+                  </div>
                 </Row>
+
                 <Paragraph code>{JSON.stringify(accounts, null, 2)}</Paragraph>
               </>
             )}
