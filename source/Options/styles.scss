@@ -6,11 +6,12 @@
 @import "~webext-base-css/webext-base.css";
 
 body {
-  color: $black;
-  background-color: $greyWhite;
+  background-color: $white;
 }
 
 .ant-layout {
+  background: $white;
+
   .ant-layout-header {
     font-size: 22px;
     color: #ffffff;
