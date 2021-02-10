@@ -29,10 +29,18 @@ const initConnector = async () => {
 };
 
 browser.storage.onChanged.addListener((changes) => {
-  if (changes.accounts || changes.currentAccount || changes.hostSettings) {
+  // if the accounts change we initialize a new connector
+  // this also requires the user to unlock the account again
+  if (changes.accounts || changes.currentAccount) {
     initConnector();
   }
+  // Update the hostsettings in the current connector settings
+  if (changes.hostSettings) {
+    connector.settings.hostSettings = changes.hostSettings.newValue || {};
+  }
+  // Update the general settings in the current connector settings
   if (changes.settings) {
+    connector.settings.settings = changes.settings.newValue || {};
     settings = changes.settings.newValue;
   }
 });
