@@ -173,7 +173,8 @@ const Options = () => {
           </TabPane>
 
           <TabPane tab="Enabled Sites" key="3">
-            Content of Tab Pane 3
+            <p>{JSON.stringify(hostSettings)}</p>
+            <span onClick={resetHostSettings}>Reset</span>
           </TabPane>
         </Tabs>
       </Content>
