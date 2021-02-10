@@ -14,7 +14,11 @@ class Enable extends React.Component {
   enable() {
     return browser.runtime.sendMessage({
       response: true,
-      data: { enabled: true, remember: this.state.remember, allowance: false },
+      data: {
+        enabled: true,
+        remember: this.state.remember,
+        all: this.state.remember,
+      },
     });
   }
 

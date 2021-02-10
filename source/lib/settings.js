@@ -36,8 +36,8 @@ class Settings {
     const domain = message.origin && message.origin.domain;
     const url = new URL(domain);
     // TODO: check allowance
-    const setting = this.hostSettings[url.host];
-    return setting && setting.allowance;
+    const allowance = this.hostSettings[url.host];
+    return allowance && allowance.all;
   }
 
   allowHost(domain, allowance) {
