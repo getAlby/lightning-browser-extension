@@ -16,13 +16,18 @@ class Popup extends React.Component {
   }
 
   componentDidMount() {
-    utils.call("isUnlocked").then((response) => {
-      if (response.unlocked) {
-        this.history.replace("/home");
-      } else {
-        this.history.replace("/unlock");
-      }
-    });
+    utils
+      .call("isUnlocked")
+      .then((response) => {
+        if (response.unlocked) {
+          this.history.replace("/home");
+        } else {
+          this.history.replace("/unlock");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   render() {
