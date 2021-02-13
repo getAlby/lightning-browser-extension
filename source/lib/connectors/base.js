@@ -40,7 +40,7 @@ class Base {
   }
 
   enable(message) {
-    if (this.settings.isEnabled(message.origin.domain)) {
+    if (this.unlocked && this.settings.isEnabled(message.origin.domain)) {
       return Promise.resolve({ data: { enabled: true } });
     }
     return utils
@@ -56,29 +56,50 @@ class Base {
       });
   }
 
+  getAllowance(message) {
+    const allowance = this.settings.getAllowance(message.args.domain);
+    return Promise.resolve({ data: allowance });
+  }
+
   sendPayment(message, executor) {
     let promise;
-    if (this.settings.hasAllowance(message)) {
+    if (this.unlocked && this.settings.hasAllowance(message)) {
       promise = executor();
     } else {
       promise = utils.openPrompt(message).then((response) => {
         if (response.data.confirmed) {
-          this.settings.allowHost(message.origin.domain, response);
+          return executor();
+        } else {
+          return response;
         }
-        return executor();
       });
     }
     return promise
-      .then((response) => {
-        utils.notify({
-          title: "Paid",
-          message: `pre image: ${response.data.payment_preimage}`,
-        });
-        return response;
+      .then((paymentResponse) => {
+        // TODO: maybe use better check?
+        if (paymentResponse.data && paymentResponse.data.payment_error === "") {
+          this.processPayment(message, paymentResponse);
+          return paymentResponse;
+        } else {
+          return {
+            error: paymentResponse.data && paymentResponse.data.payment_error,
+          };
+        }
       })
       .catch((e) => {
         return { error: e.message };
       });
+  }
+
+  processPayment(message, paymentResponse) {
+    const route = paymentResponse.data.payment_route;
+    const { total_fees, total_amt } = route;
+    const recipient = message.origin.name || message.origin.domain;
+    this.settings.storePayment(message, paymentResponse);
+    utils.notify({
+      title: `Paid ${total_amt} Satoshi to ${recipient}`,
+      message: `pre image: ${paymentResponse.data.payment_preimage}`,
+    });
   }
 }
 

@@ -37,17 +37,40 @@ class Settings {
     const url = new URL(domain);
     // TODO: check allowance
     const allowance = this.hostSettings[url.host];
-    return allowance && allowance.all;
+    return allowance && allowance.budget;
+  }
+
+  getAllowance(domain) {
+    const url = new URL(domain);
+    return this.hostSettings[url.host];
   }
 
   allowHost(domain, allowance) {
     const url = new URL(domain);
     this.hostSettings[url.host] = allowance;
     if (allowance.remember) {
-      return browser.storage.sync.set({ hostSettings: this.hostSettings });
+      this.save();
     } else {
       return Promise.resolve();
     }
+  }
+
+  storePayment(message, paymentResponse) {
+    const url = new URL(message.origin.domain);
+    const allowance = this.hostSettings[url.host];
+    const { total_fees, total_amt } = paymentResponse.data.payment_route;
+    if (allowance && allowance.budget) {
+      allowance.budget = allowance.budget - total_amt - total_fees;
+      this.hostSettings[url.host] = allowance;
+      this.save();
+    }
+  }
+
+  save() {
+    return browser.storage.sync.set({
+      settings: this.settings,
+      hostSettings: this.hostSettings,
+    });
   }
 }
 

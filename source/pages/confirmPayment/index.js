@@ -2,6 +2,8 @@ import React from "react";
 import browser from "webextension-polyfill";
 import { createHashHistory } from "history";
 
+import msg from "../../lib/msg";
+
 // import "./styles.scss";
 
 class ConfirmPayment extends React.Component {
@@ -12,17 +14,13 @@ class ConfirmPayment extends React.Component {
   }
 
   enable() {
-    return browser.runtime.sendMessage({
-      response: true,
-      data: { confirm: true },
+    msg.reply({
+      confirmed: true,
     });
   }
 
   reject() {
-    return browser.runtime.sendMessage({
-      response: true,
-      error: "User rejected",
-    });
+    msg.error("User rejected");
   }
 
   render() {
