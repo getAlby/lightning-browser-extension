@@ -47,12 +47,9 @@ class Settings {
 
   allowHost(domain, allowance) {
     const url = new URL(domain);
-    this.hostSettings[url.host] = allowance;
-    if (allowance.remember) {
-      this.save();
-    } else {
-      return Promise.resolve();
-    }
+    const currentAllowance = this.hostSettings[url.host];
+    this.hostSettings[url.host] = { ...currentAllowance, ...allowance };
+    this.save();
   }
 
   storePayment(message, paymentResponse) {

@@ -1,14 +1,14 @@
 import browser from "webextension-polyfill";
 
 const msg = {
-  request: (type, args) => {
+  request: (type, args, origin) => {
     return browser.runtime
       .sendMessage({
         application: "Joule",
         prompt: true,
         type: type,
         args: args,
-        origin: { internal: true },
+        origin: origin || { internal: true },
       })
       .then((response) => {
         if (response.error) {

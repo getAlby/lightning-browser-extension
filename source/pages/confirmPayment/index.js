@@ -23,12 +23,35 @@ class ConfirmPayment extends React.Component {
     msg.error("User rejected");
   }
 
+  setBudget(satoshi) {
+    this.setState({ budget: parseInt(satoshi) });
+  }
+
+  saveBudget() {
+    console.log(this.state.budget);
+    msg
+      .request("setAllowance", { budget: this.state.budget }, this.props.origin)
+      .then(console.log);
+  }
+
   render() {
     return (
       <section id="confirm-payment">
         <button onClick={() => this.enable()}>Confirm</button>
         <br />
         <button onClick={() => this.reject()}>Reject</button>
+        <hr />
+        <p>
+          Budget:
+          <input
+            type="text"
+            name="budget"
+            onChange={(event) => {
+              this.setBudget(event.target.value);
+            }}
+          />
+          <button onClick={() => this.saveBudget()}>Save Budget</button>
+        </p>
       </section>
     );
   }

@@ -61,6 +61,11 @@ class Base {
     return Promise.resolve({ data: allowance });
   }
 
+  setAllowance(message) {
+    this.settings.allowHost(message.origin.domain, message.args);
+    return Promise.resolve();
+  }
+
   sendPayment(message, executor) {
     let promise;
     if (this.unlocked && this.settings.hasAllowance(message)) {

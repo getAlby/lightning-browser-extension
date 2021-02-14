@@ -2,6 +2,8 @@ import React from "react";
 import browser from "webextension-polyfill";
 import { createHashHistory } from "history";
 
+import { Button } from "antd";
+
 import msg from "../../lib/msg";
 
 // import "./styles.scss";
@@ -35,7 +37,7 @@ class Enable extends React.Component {
   }
 
   setBudget(satoshi) {
-    this.setState({ budget: satoshi });
+    this.setState({ budget: parseInt(satoshi) });
   }
 
   componentDidMount() {
@@ -75,9 +77,12 @@ class Enable extends React.Component {
           />
         </p>
 
-        <button onClick={() => this.enable()}>Enable</button>
-        <br />
-        <button onClick={() => this.reject()}>Reject</button>
+        <Button type="default" onClick={() => this.reject()}>
+          Reject
+        </Button>
+        <Button type="primary" onClick={() => this.enable()}>
+          Enable
+        </Button>
       </section>
     );
   }
