@@ -12,6 +12,8 @@ const initConnector = async () => {
   const args = await browser.storage.sync.get(["currentAccount", "accounts"]);
   const account = args.accounts[args.currentAccount];
   if (!account) {
+    // reset existing connector instance and return
+    connector = null;
     return Promise.resolve("No account");
   }
   // TODO: check if an account is configured. Guess this also needs to be done on a different level to make sure we display a settings page if nothing is configured.
