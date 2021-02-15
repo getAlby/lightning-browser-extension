@@ -122,6 +122,9 @@ const Options = () => {
   const resetAccounts = () => {
     return saveAccounts({}).then(() => {
       setAccounts({});
+      browser.storage.sync.set({ currentAccount: null }).then(() => {
+        setCurrentAccount(null);
+      });
     });
   };
 
