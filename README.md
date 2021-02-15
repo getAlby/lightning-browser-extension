@@ -1,19 +1,34 @@
 # Lightning Web Extension
 
-### A general Lightning Browser extension that uses native messaging to connect to wallet interfaces
+## STATUS: experimental
 
+### A general Lightning Browser extension that uses native messaging to connect to wallet interfaces
 
 The goal is to write a minimal web extension supporting the developing [WebLN standard](https://webln.dev) to allow browsers to interact with lightning.
 
-The extension implements the WebLN standard. It passes each call to a native application (using [native messaging](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging)).
-The native application does all the user interaction and connections to the lightning wallet.
+The extension implements the WebLN standard. The goal is to write a miminmal interface that allows websites to connect to Lightning nodes (to request payments, invoices, signatures, login, etc.)
 
-Currently there is one prototype of a native companion app which can connect to LND: [lnd-native-companion](https://github.com/bumi/lnd-native-companion)
+The extension can connect to different node implementation and supports custodial and non-custodial setups. 
+E.g.:
+
+* [remote LND](https://github.com/bumi/lightning-browser-extension/blob/master/source/lib/connectors/lnd.js)
+* [Local native companion apps](https://github.com/bumi/lightning-browser-extension/blob/master/source/lib/connectors/native.js) (e.g. zaphq or native wallet apps)
+* [LNBits](https://github.com/bumi/lightning-browser-extension/blob/master/source/lib/connectors/lnbits.js)
+* [LNDHub](https://github.com/bumi/lightning-browser-extension/blob/master/source/lib/connectors/lndhub.js) 
+* ...
 
 
 ## Architecture idea
 
 ![architecture](/ln-browser-architecture.png)
+
+
+## Native Companions
+The extension passes each call to a native application (using [native messaging](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging)).
+The native application does all the user interaction and connections to the lightning wallet.
+
+Currently there is one prototype of a native companion app which can connect to LND: [lnd-native-companion](https://github.com/bumi/lnd-native-companion)
+
 
 ## Browser Support
 
