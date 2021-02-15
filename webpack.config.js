@@ -26,7 +26,7 @@ const extensionReloaderPlugin =
           contentScript: "contentScript",
           background: "background",
           inpageScript: "inpageScript",
-          extensionPage: ["popup", "options"],
+          extensionPage: ["popup", "options", "welcome"],
         },
       })
     : () => {
@@ -65,6 +65,7 @@ module.exports = {
     popup: path.join(sourcePath, "Popup", "index.js"),
     prompt: path.join(sourcePath, "Prompt", "index.js"),
     options: path.join(sourcePath, "Options", "index.js"),
+    welcome: path.join(sourcePath, "Welcome", "index.js"),
   },
 
   output: {
@@ -172,6 +173,13 @@ module.exports = {
       chunks: ["prompt"],
       hash: true,
       filename: "prompt.html",
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(viewsPath, "welcome.html"),
+      inject: "body",
+      chunks: ["welcome"],
+      hash: true,
+      filename: "welcome.html",
     }),
     // write css file(s) to build folder
     new MiniCssExtractPlugin({ filename: "css/[name].css" }),

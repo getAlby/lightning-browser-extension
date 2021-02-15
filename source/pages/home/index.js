@@ -42,6 +42,14 @@ class Home extends React.Component {
         >
           Options Page
         </button>
+        <button
+          type="button"
+          onClick={() => {
+            return utils.openPage("welcome.html");
+          }}
+        >
+          Welcome
+        </button>
       </div>
     );
   }
