@@ -2,11 +2,14 @@ import browser from "webextension-polyfill";
 import { Typography, Layout, Tabs } from "antd";
 import React, { useState, useEffect } from "react";
 
+import msg from "../lib/msg";
+
 import LndForm from "../forms/lnd";
 import LndHubForm from "../forms/lndhub";
 import LnBitsForm from "../forms/lnbits";
 import { encryptData } from "./../lib/crypto";
 import ListData from "../components/listData";
+import SetPassword from "../components/setPassword";
 import { normalizeAccountsData, normalizeSettingsData } from "../utils/helpers";
 
 import "./styles.scss";
@@ -20,6 +23,8 @@ const Options = () => {
   const [settings, setSettings] = useState({});
   const [hostSettings, setHostSettings] = useState({});
   const [currentAccount, setCurrentAccount] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPasswordModal, setShowPasswordModal] = useState(true);
 
   useEffect(() => {
     fetchOptionsFromStorage();
@@ -128,13 +133,14 @@ const Options = () => {
   };
 
   const saveAccounts = (accounts) => {
+    settings.salt = window.crypto.getRandomValues(new Uint32Array(4)).join("");
     for (const [name, data] of Object.entries(accounts)) {
       if (data.config) {
-        data.config = encryptData(data.config, "btc", "salt");
+        data.config = encryptData(data.config, password, settings.salt);
       }
       accounts[name] = data;
     }
-    return browser.storage.sync.set({ accounts }).then(() => {
+    return browser.storage.sync.set({ accounts, settings }).then(() => {
       setAccounts(accounts);
     });
   };
@@ -143,8 +149,30 @@ const Options = () => {
     console.log(errorInfo);
   };
 
+  // TODO: refactor
+  const handlePasswordModalOk = (password) => {
+    setPassword(password);
+    if (Object.entries(accounts).length > 0) {
+      msg
+        .request("unlock", { password })
+        .then((response) => {
+          setShowPasswordModal(false);
+        })
+        .catch((e) => {
+          alert("Invalid password");
+        });
+    } else {
+      setShowPasswordModal(false);
+    }
+  };
+
   return (
     <Layout>
+      <SetPassword
+        visible={showPasswordModal}
+        onOk={handlePasswordModalOk}
+      ></SetPassword>
+
       <Header>Lightning Extension Options</Header>
 
       <Content>

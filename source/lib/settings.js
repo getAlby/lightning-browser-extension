@@ -24,7 +24,7 @@ class Settings {
   }
 
   get salt() {
-    return "salt";
+    return this.settings.salt;
   }
 
   isEnabled(domain) {
