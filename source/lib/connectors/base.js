@@ -26,6 +26,7 @@ class Base {
       this.unlocked = true;
       return Promise.resolve({ data: { unlocked: this.unlocked } });
     } catch (e) {
+      console.log({ action: "unlock", error: e });
       return Promise.resolve({ error: "Failed to decrypt" });
     }
   }

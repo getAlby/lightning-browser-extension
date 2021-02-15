@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 
 import LndForm from "../forms/lnd";
 import LndHubForm from "../forms/lndhub";
+import LnBitsForm from "../forms/lnbits";
 import { encryptData } from "./../lib/crypto";
 import ListData from "../components/listData";
 import { normalizeAccountsData, normalizeSettingsData } from "../utils/helpers";
@@ -28,7 +29,6 @@ const Options = () => {
     browser.storage.sync
       .get(["accounts", "currentAccount", "settings", "hostSettings"])
       .then((result) => {
-        console.log(result);
         setAccounts(result.accounts || {});
         setSettings(result.settings || {});
         setHostSettings(result.hostSettings || {});
@@ -78,7 +78,26 @@ const Options = () => {
 
     saveAccounts(accounts).then(() => {
       fetchOptionsFromStorage();
+      saveCurrentAccount({ currentAccount: values.name });
+      if (formRef) {
+        formRef.resetFields();
+      }
+    });
+  };
 
+  const saveLnBitsAccount = (values, formRef) => {
+    accounts[values.name] = {
+      config: {
+        adminkey: values.adminkey,
+        readkey: values.readkey,
+        url: "https://lnbits.com",
+      },
+      connector: "lnbits",
+    };
+
+    saveAccounts(accounts).then(() => {
+      fetchOptionsFromStorage();
+      saveCurrentAccount({ currentAccount: values.name });
       if (formRef) {
         formRef.resetFields();
       }
@@ -168,6 +187,13 @@ const Options = () => {
 
               <TabPane tab="Native Connection" key="3">
                 Native accout form comes here
+              </TabPane>
+
+              <TabPane tab="LNbits" key="4">
+                <LnBitsForm
+                  onFinish={saveLnBitsAccount}
+                  onFinishFailed={formSubmitFailure}
+                ></LnBitsForm>
               </TabPane>
             </Tabs>
           </TabPane>

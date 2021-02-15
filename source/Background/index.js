@@ -62,6 +62,7 @@ const handleConnectorCalls = (message, sender) => {
   // if the connector is not available, probably because no account is configured we open the Options page.
   // TODO: create an onboarding wizard
   if (!connector) {
+    console.log("No connector/account found");
     utils.openPage("Options.html");
     return Promise.resolve({ error: "No account available" });
   }
