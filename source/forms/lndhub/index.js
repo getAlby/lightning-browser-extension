@@ -30,8 +30,8 @@ const LndHubForm = ({ ref, saveLndHubAccount, addLndHubAccountFailure }) => {
       onFinishFailed={addLndHubAccountFailure}
       onFinish={(values) => saveLndHubAccount(values, form)}
       initialValues={{
+        name: "LndHub",
         url: "",
-        name: "",
         login: "",
         password: "",
       }}

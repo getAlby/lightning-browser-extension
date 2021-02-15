@@ -30,8 +30,8 @@ const LndForm = ({ ref, saveLndAccount, addLndAccountFailure }) => {
       onFinishFailed={addLndAccountFailure}
       onFinish={(values) => saveLndAccount(values, form)}
       initialValues={{
+        name: "LND",
         url: "",
-        name: "",
         macaroon: "",
       }}
     >
