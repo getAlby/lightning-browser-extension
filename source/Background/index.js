@@ -16,12 +16,7 @@ const initConnector = async () => {
     connector = null;
     return Promise.resolve("No account");
   }
-  // TODO: check if an account is configured. Guess this also needs to be done on a different level to make sure we display a settings page if nothing is configured.
-  if (account.connector) {
-    connector = new connectors[account.connector](account.config);
-  } else {
-    connector = new connectors.native(account.config);
-  }
+  connector = new connectors[account.connector](account.config);
 
   if (currentUnlockPassword) {
     connector.unlock(currentUnlockPassword);
