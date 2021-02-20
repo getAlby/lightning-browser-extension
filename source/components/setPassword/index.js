@@ -11,60 +11,58 @@ const SetPassword = ({ onOk, visible }) => {
   };
 
   return (
-    <>
-      <Modal
-        visible={visible}
-        title="Unlock your accounts"
-        onOk={onDone}
-        closeable={false}
-        footer={[
-          <Button key="submit" type="primary" onClick={form.submit}>
-            Save
-          </Button>,
-        ]}
-      >
-        <Form form={form} name="unlock" onFinish={onDone}>
-          <Form.Item
-            name="password"
-            label="Password"
-            rules={[
-              {
-                required: true,
-                message: "Please enter your password!",
-              },
-            ]}
-            hasFeedback
-          >
-            <Input.Password />
-          </Form.Item>
+    <Modal
+      visible={visible}
+      title="Unlock your accounts"
+      onOk={onDone}
+      closeable={false}
+      footer={[
+        <Button key="submit" type="primary" onClick={form.submit}>
+          Save
+        </Button>,
+      ]}
+    >
+      <Form form={form} name="unlock" onFinish={onDone}>
+        <Form.Item
+          name="password"
+          label="Password"
+          rules={[
+            {
+              required: true,
+              message: "Please enter your password!",
+            },
+          ]}
+          hasFeedback
+        >
+          <Input.Password />
+        </Form.Item>
 
-          <Form.Item
-            name="confirm"
-            label="Confirmation"
-            dependencies={["password"]}
-            hasFeedback
-            rules={[
-              {
-                required: true,
-                message: "Please confirm your password!",
+        <Form.Item
+          name="confirm"
+          label="Confirmation"
+          dependencies={["password"]}
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: "Please confirm your password!",
+            },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue("password") === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(
+                  "The two passwords that you entered do not match!"
+                );
               },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue("password") === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(
-                    "The two passwords that you entered do not match!"
-                  );
-                },
-              }),
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
-        </Form>
-      </Modal>
-    </>
+            }),
+          ]}
+        >
+          <Input.Password />
+        </Form.Item>
+      </Form>
+    </Modal>
   );
 };
 

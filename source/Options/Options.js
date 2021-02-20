@@ -3,6 +3,7 @@ import { Typography, Layout, Tabs } from "antd";
 import React, { useState, useEffect } from "react";
 
 import msg from "../lib/msg";
+import { encryptData } from "./../lib/crypto";
 
 import LndForm from "../forms/lnd";
 import LndHubForm from "../forms/lndhub";
@@ -10,8 +11,8 @@ import LnBitsForm from "../forms/lnbits";
 import NativeConnectionForm from "../forms/nativeConnection";
 
 import ListData from "../components/listData";
-import { encryptData } from "./../lib/crypto";
 import SetPassword from "../components/setPassword";
+
 import { normalizeAccountsData, normalizeSettingsData } from "../utils/helpers";
 
 import "./styles.scss";
