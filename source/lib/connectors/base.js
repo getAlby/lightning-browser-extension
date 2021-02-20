@@ -99,7 +99,7 @@ class Base {
 
   processPayment(message, paymentResponse) {
     const route = paymentResponse.data.payment_route;
-    const { total_fees, total_amt } = route;
+    const { total_amt } = route;
     const recipient = message.origin.name || message.origin.domain;
     this.settings.storePayment(message, paymentResponse);
     utils.notify({

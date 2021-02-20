@@ -1,10 +1,7 @@
 import React from "react";
 import browser from "webextension-polyfill";
-import { HashRouter, Link, Route, Switch } from "react-router-dom";
-import { createHashHistory } from "history";
-import utils from "../../lib/utils";
 
-//import "./styles.scss";
+import utils from "../../lib/utils";
 
 class Home extends React.Component {
   constructor(props) {

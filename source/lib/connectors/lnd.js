@@ -89,10 +89,10 @@ class Lnd extends Base {
             throw new Error();
           }
         } catch (err) {
-          throw {
+          throw new Error({
             statusText: res.statusText,
             status: res.status,
-          };
+          });
         }
         console.log("errBody", errBody);
         throw errBody;
