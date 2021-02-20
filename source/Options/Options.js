@@ -7,8 +7,10 @@ import msg from "../lib/msg";
 import LndForm from "../forms/lnd";
 import LndHubForm from "../forms/lndhub";
 import LnBitsForm from "../forms/lnbits";
-import { encryptData } from "./../lib/crypto";
+import NativeConnectionForm from "../forms/nativeConnection";
+
 import ListData from "../components/listData";
+import { encryptData } from "./../lib/crypto";
 import SetPassword from "../components/setPassword";
 import { normalizeAccountsData, normalizeSettingsData } from "../utils/helpers";
 
@@ -109,13 +111,15 @@ const Options = () => {
     });
   };
 
-  const saveNativeAccount = (values) => {
+  const saveNativeAccount = (values, formRef) => {
     accounts[values.name] = {
       config: {},
       connector: "native",
     };
     saveAccounts(accounts).then(() => {
-      alert("Saved");
+      if (formRef) {
+        formRef.resetFields();
+      }
     });
   };
 
@@ -217,7 +221,10 @@ const Options = () => {
               </TabPane>
 
               <TabPane tab="Native Connection" key="3">
-                Native accout form comes here
+                <NativeConnectionForm
+                  saveNativeAccount={saveNativeAccount}
+                  addNativeConnectionFailure={formSubmitFailure}
+                />
               </TabPane>
 
               <TabPane tab="LNbits" key="4">
