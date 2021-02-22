@@ -1,7 +1,11 @@
 import WebLNProvider from "../webln";
+import Donation from "./donation";
 
 if (document) {
   window.webln = new WebLNProvider();
+
+  const donation = new Donation(document.location.toString());
+  donation.execute();
 
   // Intercept any `lightning:{paymentReqest}` requests
   window.addEventListener("click", (ev) => {
