@@ -1,6 +1,8 @@
 import React from "react";
 import { Input, Button, Modal, Form } from "antd";
 
+import utils from "../../lib/utils";
+
 const SetPassword = ({ onOk, visible }) => {
   const [form] = Form.useForm();
 
@@ -13,10 +15,17 @@ const SetPassword = ({ onOk, visible }) => {
   return (
     <Modal
       visible={visible}
-      title="Unlock your accounts"
+      title="Your Password"
       onOk={onDone}
       closeable={false}
       footer={[
+        <span
+          onClick={() => {
+            utils.openPage("Welcome.html");
+          }}
+        >
+          Welcome
+        </span>,
         <Button key="submit" type="primary" onClick={form.submit}>
           Save
         </Button>,
