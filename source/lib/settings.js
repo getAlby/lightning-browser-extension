@@ -64,6 +64,7 @@ class Settings {
     const { total_fees, total_amt } = paymentResponse.data.payment_route;
     if (allowance && allowance.budget) {
       allowance.budget = allowance.budget - total_amt - total_fees;
+      allowance.lastPayment = Date.now();
       this.hostSettings[url.host] = allowance;
       this.save();
     }
