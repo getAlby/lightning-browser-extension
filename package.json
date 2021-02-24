@@ -40,13 +40,15 @@
     "advanced-css-reset": "^1.2.2",
     "antd": "^4.12.2",
     "crypto-js": "^4.0.0",
+    "lsat-js": "^1.0.7",
     "memoizee": "^0.4.15",
     "query-string": "^6.13.8",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
-    "simple-sha1": "^3.0.1",
+    "sha.js": "^2.4.11",
     "webext-base-css": "^1.2.0",
+    "webext-options-sync": "^2.0.1",
     "webextension-polyfill": "^0.7.0"
   },
   "devDependencies": {

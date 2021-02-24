@@ -1,25 +1,18 @@
-import sha1 from "simple-sha1";
+import utils from "../lib/utils";
 
 class Donation {
   constructor(location) {
     this.location = location;
   }
 
-  getHash() {
-    return new Promise((resolve, reject) => {
-      sha1(this.location, resolve);
-    });
-  }
-
   getRule() {
-    return this.getHash().then((hash) => {
-      console.log({ hash });
-      return fetch(`https://area402.herokuapp.com/domains/check?id=${hash}`)
-        .then((resp) => resp.json())
-        .catch((e) => {
-          return null;
-        });
-    });
+    const hash = utils.getHash(this.location);
+    console.log({ hash });
+    return fetch(`https://area402.herokuapp.com/domains/check?id=${hash}`)
+      .then((resp) => resp.json())
+      .catch((e) => {
+        return null;
+      });
   }
 
   getInvoice(rule) {

@@ -1,5 +1,6 @@
 import browser from "webextension-polyfill";
 import qs from "query-string";
+import shajs from "sha.js";
 
 const utils = {
   call: (type, args) => {
@@ -27,6 +28,9 @@ const utils = {
       details
     );
     browser.notifications.create(notification);
+  },
+  getHash: (str) => {
+    return shajs("sha256").update(str).digest("hex");
   },
   openPage: (page) => {
     browser.tabs.create({ url: browser.runtime.getURL(page) });
