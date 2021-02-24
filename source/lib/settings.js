@@ -33,14 +33,20 @@ class Settings {
   }
 
   hasAllowance(message) {
-    const domain = message.origin && message.origin.domain;
-    const url = new URL(domain);
     // TODO: check allowance
-    const allowance = this.hostSettings[url.host];
+    const allowance = this.getAllowance(message);
     return allowance && allowance.budget;
   }
 
-  getAllowance(domain) {
+  getAllowance(messageOrDomain) {
+    let domain;
+    if (typeof messageOrDomain === "string") {
+      domain = messageOrDomain;
+    } else if (messageOrDomain.origin) {
+      domain = messageOrDomain.origin.domain;
+    } else {
+      return {}; // no domain found - no allowance
+    }
     const url = new URL(domain);
     return this.hostSettings[url.host];
   }
