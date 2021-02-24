@@ -34,12 +34,14 @@ browser.storage.onChanged.addListener((changes) => {
     initConnector();
   }
   // Update the hostsettings in the current connector settings
-  if (changes.hostSettings) {
+  if (connector && changes.hostSettings) {
     connector.settings.hostSettings = changes.hostSettings.newValue || {};
   }
   // Update the general settings in the current connector settings
   if (changes.settings) {
-    connector.settings.settings = changes.settings.newValue || {};
+    if (connector) {
+      connector.settings.settings = changes.settings.newValue || {};
+    }
     settings = changes.settings.newValue;
   }
 });
