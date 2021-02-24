@@ -12,12 +12,14 @@
   "description": "Lightning up the browser",
   "homepage_url": "https://github.com/bumi",
   "short_name": "Lightning",
-  "web_accessible_resources": ["js/inpageScript.bundle.js"],
+  "web_accessible_resources": ["js/inpageScript.bundle.js", "lsat.html"],
   "permissions": [
     "nativeMessaging",
     "notifications",
     "activeTab",
     "storage",
+    "webRequest",
+    "webRequestBlocking",
     "http://*/*",
     "https://*/*"
   ],
@@ -62,7 +64,7 @@
     "scripts": [
       "js/background.bundle.js"
     ],
-    "__chrome|opera__persistent": false
+    "__chrome|opera__persistent": true
   },
 
   "content_scripts": [{

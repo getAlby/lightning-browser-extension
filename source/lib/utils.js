@@ -3,7 +3,7 @@ import qs from "query-string";
 import shajs from "sha.js";
 
 const utils = {
-  call: (type, args) => {
+  call: (type, args, overwrites) => {
     return browser.runtime
       .sendMessage({
         application: "Joule",
@@ -11,6 +11,7 @@ const utils = {
         type: type,
         args: args,
         origin: { internal: true },
+        ...overwrites,
       })
       .then((response) => {
         if (response.error) {
@@ -31,6 +32,18 @@ const utils = {
   },
   getHash: (str) => {
     return shajs("sha256").update(str).digest("hex");
+  },
+  base64ToHex: (str) => {
+    for (
+      var i = 0, bin = atob(str.replace(/[ \r\n]+$/, "")), hex = [];
+      i < bin.length;
+      ++i
+    ) {
+      let tmp = bin.charCodeAt(i).toString(16);
+      if (tmp.length === 1) tmp = "0" + tmp;
+      hex[hex.length] = tmp;
+    }
+    return hex.join("");
   },
   openPage: (page) => {
     browser.tabs.create({ url: browser.runtime.getURL(page) });

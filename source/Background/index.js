@@ -4,6 +4,8 @@ import utils from "../lib/utils";
 import Settings from "../lib/settings";
 import connectors from "../lib/connectors";
 
+import initLsatInterceptor from "./lsatInterceptor";
+
 let connector;
 let settings;
 let currentUnlockPassword; // TODO: rethink this
@@ -86,6 +88,9 @@ async function init() {
   browser.runtime.onMessage.addListener(debugLogger);
   // this is the only handler that may and must return a Promise which resolve with the response to the content script
   browser.runtime.onMessage.addListener(handleConnectorCalls);
+
+  const result = await browser.storage.sync.set({ lsats: {} });
+  initLsatInterceptor(connector);
 }
 
 init();
