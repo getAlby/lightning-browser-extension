@@ -22,12 +22,13 @@ E.g.:
 
 ![architecture](/ln-browser-architecture.png)
 
+## General Ideas
 
-## Native Companions
-The extension passes each call to a native application (using [native messaging](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging)).
-The native application does all the user interaction and connections to the lightning wallet.
-
-Currently there is one prototype of a native companion app which can connect to LND: [lnd-native-companion](https://github.com/bumi/lnd-native-companion)
+- Focus on the web-payment process, no channel-management or similar
+- Support to connect multiple wallets (LND, C-Lightning, local wallet UIs (e.g. Zap), custodial (e.g. lnbits), native embedded wallet)
+- [LNURL-pay](https://xn--57h.bigsun.xyz/lnurl-pay-flow.txt) support 
+- [LNURL-auth](https://xn--57h.bigsun.xyz/lnurl-auth.html) support 
+- [Lsat](https://lsat.tech/) support
 
 
 ## Browser Support
@@ -93,6 +94,16 @@ Then run the following:
 Note: By default the `manifest.json` is set with version `0.0.0`. The webpack loader will update the version in the build with that of the `package.json` version. In order to release a new version, update version in `package.json` and run script.
 
 If you don't want to use `package.json` version, you can disable the option [here](https://github.com/abhijithvijayan/web-extension-starter/blob/e10158c4a49948dea9fdca06592876d9ca04e028/webpack.config.js#L79).
+
+
+## Native Companions
+
+For native connections the extension passes each call to a native application (using [native messaging](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging)).
+The native application does all the user interaction and connections to the lightning wallet.
+
+Currently there is one prototype of a native companion app which can connect to LND: [lnd-native-companion](https://github.com/bumi/lnd-native-companion)
+
+
 
 ### Thanks
 
