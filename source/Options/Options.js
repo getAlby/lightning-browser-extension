@@ -134,10 +134,12 @@ const Options = () => {
   };
 
   const resetHostSettings = () => {
-    return browser.storage.sync.set({ hostSettings: {} }).then(() => {
-      setHostSettings({});
-      alert("Done");
-    });
+    return browser.storage.sync
+      .set({ hostSettings: {}, lsats: {} })
+      .then(() => {
+        setHostSettings({});
+        alert("Done");
+      });
   };
 
   const saveAccounts = (accounts) => {
