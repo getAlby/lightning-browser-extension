@@ -1,13 +1,16 @@
-import utils from "../lib/utils";
+import shajs from "sha.js";
 
 class Donation {
   constructor(location) {
     this.location = location;
   }
 
+  getHash() {
+    return shajs("sha256").update(this.location).digest("hex");
+  }
+
   getRule() {
-    const hash = utils.getHash(this.location);
-    console.log({ hash });
+    const hash = this.getHash();
     return fetch(`https://area402.herokuapp.com/domains/check?id=${hash}`)
       .then((resp) => resp.json())
       .catch((e) => {
@@ -29,7 +32,6 @@ class Donation {
   }
 
   execute() {
-    console.log(this.location);
     return this.getRule().then((rule) => {
       console.log({ rule });
       let isExecuting = false;
