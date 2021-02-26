@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Lightning",
-  "version": "0.0.0",
+  "version": "1.0.0",
 
   "icons": {
     "16": "assets/icons/favicon-16.png",
@@ -26,14 +26,14 @@
 
   "content_security_policy": "script-src 'self'; object-src 'self'",
 
-  "__chrome|firefox__author": "abhijithvijayan",
+  "__chrome|firefox__author": "bumi",
   "__opera__developer": {
-    "name": "abhijithvijayan"
+    "name": "bumi"
   },
 
   "__firefox__applications": {
     "gecko": {
-      "id": "{754FB1AD-CC3B-4856-B6A0-7786F8CA9D17}"
+      "id": "{424FB1AD-CC3B-4856-B6A0-7786F8CA9D17}"
     }
   },
 
@@ -48,7 +48,7 @@
       "48": "assets/icons/favicon-48.png",
       "128": "assets/icons/favicon-128.png"
     },
-    "default_title": "tiny title",
+    "default_title": "Lightning",
     "__chrome|opera__chrome_style": false,
     "__firefox__browser_style": false
   },
