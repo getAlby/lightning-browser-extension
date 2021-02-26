@@ -69,18 +69,18 @@ const utils = {
         .then((window) => {
           const tabId = window.tabs[0].id;
 
-          const onMessageListener = (message, sender) => {
+          const onMessageListener = (responseMessage, sender) => {
             if (
-              message &&
-              message.response &&
+              responseMessage &&
+              responseMessage.response &&
               sender.tab &&
               sender.tab.id === tabId
             ) {
               browser.tabs.onRemoved.removeListener(onRemovedListener);
-              if (message.error) {
-                reject(new Error(message.error));
+              if (responseMessage.error) {
+                reject(new Error(responseMessage.error));
               } else {
-                resolve(message);
+                resolve(responseMessage);
               }
               browser.windows.remove(sender.tab.windowId);
             }
