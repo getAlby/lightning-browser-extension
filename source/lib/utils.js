@@ -28,7 +28,7 @@ const utils = {
       },
       details
     );
-    browser.notifications.create(notification);
+    return browser.notifications.create(notification);
   },
   getHash: (str) => {
     return shajs("sha256").update(str).digest("hex");

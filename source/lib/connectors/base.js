@@ -1,6 +1,7 @@
 import utils from "./../utils";
 import { decryptData } from "./../crypto";
 import Settings from "../settings";
+import Allowances from "../allowances";
 
 class Base {
   constructor(connectorConfig) {
@@ -10,10 +11,11 @@ class Base {
     this.config = {};
     this.unlocked = false;
     this.settings = new Settings();
+    this.allowances = new Allowances();
   }
 
   async init() {
-    return this.settings.load();
+    return Promise.all([this.allowances.load(), this.settings.load()]);
   }
 
   unlock(message) {
@@ -41,14 +43,22 @@ class Base {
   }
 
   enable(message) {
-    if (this.unlocked && this.settings.isEnabled(message.origin.domain)) {
+    if (this.unlocked && this.allowances.isEnabled(message.origin.domain)) {
       return Promise.resolve({ data: { enabled: true } });
     }
     return utils
       .openPrompt(message)
       .then((response) => {
-        if (response.data.enabled) {
-          this.settings.allowHost(message.origin.domain, response.data);
+        // if the response should be saved/rememberd we update the allowance for the domain
+        // as this returns a promise we must wait until it resolves
+        if (response.data.enabled && response.data.remember) {
+          return this.allowances
+            .updateAllowance(message.origin.domain, {
+              isEnabled: true,
+            })
+            .then(() => {
+              return response;
+            });
         }
         return response;
       })
@@ -58,21 +68,24 @@ class Base {
   }
 
   getAllowance(message) {
-    const allowance = this.settings.getAllowance(message.args.domain);
+    const allowance = this.allowances.getAllowance(message.args.domain); // get the allowance of specific domain provided in the args
     return Promise.resolve({ data: allowance });
   }
 
   setAllowance(message) {
-    this.settings.allowHost(message.origin.domain, message.args);
-    return Promise.resolve();
+    return this.allowances
+      .updateAllowance(message.origin.domain, message.args)
+      .then(() => {
+        return true;
+      });
   }
 
   sendPayment(message, executor) {
     let promise;
-    if (this.unlocked && this.settings.hasAllowance(message)) {
+    if (this.unlocked && this.allowances.hasAllowance(message)) {
       promise = executor();
     } else {
-      promise = utils.openPrompt(message).then((response) => {
+      promise = utils.openPrompt({ ...message }).then((response) => {
         if (response.data.confirmed) {
           return executor();
         } else {
@@ -84,8 +97,9 @@ class Base {
       .then((paymentResponse) => {
         // TODO: maybe use better check?
         if (paymentResponse.data && paymentResponse.data.payment_error === "") {
-          this.processPayment(message, paymentResponse);
-          return paymentResponse;
+          return this.processPayment(message, paymentResponse).then(() => {
+            return paymentResponse;
+          });
         } else {
           return {
             error: paymentResponse.data && paymentResponse.data.payment_error,
@@ -101,10 +115,11 @@ class Base {
     const route = paymentResponse.data.payment_route;
     const { total_amt } = route;
     const recipient = message.origin.name || message.origin.domain;
-    this.settings.storePayment(message, paymentResponse);
-    utils.notify({
-      title: `Paid ${total_amt} Satoshi to ${recipient}`,
-      message: `pre image: ${paymentResponse.data.payment_preimage}`,
+    return this.allowances.storePayment(message, paymentResponse).then(() => {
+      return utils.notify({
+        title: `Paid ${total_amt} Satoshi to ${recipient}`,
+        message: `pre image: ${paymentResponse.data.payment_preimage}`,
+      });
     });
   }
 }
