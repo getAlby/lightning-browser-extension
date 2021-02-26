@@ -12,12 +12,16 @@ let currentUnlockPassword; // TODO: rethink this
 
 const initConnector = async () => {
   const args = await browser.storage.sync.get(["currentAccount", "accounts"]);
-  const account = args.accounts[args.currentAccount];
-  if (!account) {
+  if (
+    !args.accounts ||
+    !args.currentAccount ||
+    !args.accounts[args.currentAccount]
+  ) {
     // reset existing connector instance and return
     connector = null;
     return Promise.resolve("No account");
   }
+  const account = args.accounts[args.currentAccount];
   connector = new connectors[account.connector](account.config);
 
   if (currentUnlockPassword) {
