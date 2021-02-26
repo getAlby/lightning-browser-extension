@@ -27,10 +27,11 @@ class ConfirmPayment extends React.Component {
   }
 
   saveBudget() {
-    console.log(this.state.budget);
-    msg
-      .request("setAllowance", { budget: this.state.budget }, this.props.origin)
-      .then(console.log);
+    return msg.request(
+      "setAllowance",
+      { budget: this.state.budget, isEnabled: true },
+      { origin: this.props.origin }
+    );
   }
 
   render() {

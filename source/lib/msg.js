@@ -1,14 +1,15 @@
 import browser from "webextension-polyfill";
 
 const msg = {
-  request: (type, args, origin) => {
+  request: (type, args, overwrites) => {
     return browser.runtime
       .sendMessage({
         application: "Joule",
         prompt: true,
         type: type,
         args: args,
-        origin: origin || { internal: true },
+        origin: { internal: true },
+        ...overwrites,
       })
       .then((response) => {
         if (response.error) {
