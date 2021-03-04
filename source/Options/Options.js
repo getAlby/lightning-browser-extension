@@ -5,6 +5,10 @@ import React, { useState, useEffect } from "react";
 import msg from "../lib/msg";
 import { encryptData } from "./../lib/crypto";
 
+import Accounts from "../lib/accounts";
+import Settings from "../lib/settings";
+import Allowances from "../lib/allowances";
+
 import LndForm from "../forms/lnd";
 import LndHubForm from "../forms/lndhub";
 import LnBitsForm from "../forms/lnbits";
@@ -21,53 +25,54 @@ const { TabPane } = Tabs;
 const { Title } = Typography;
 const { Header, Content } = Layout;
 
+const accountsStore = new Accounts();
+const settingsStore = new Settings();
+const allowancesStore = new Allowances();
+
 const Options = () => {
   const [accounts, setAccounts] = useState({});
   const [settings, setSettings] = useState({});
-  const [hostSettings, setHostSettings] = useState({});
+  const [allowances, setAllowances] = useState({});
   const [currentAccount, setCurrentAccount] = useState("");
   const [password, setPassword] = useState("");
   const [showPasswordModal, setShowPasswordModal] = useState(true);
 
   useEffect(() => {
-    fetchOptionsFromStorage();
+    return load();
   }, []);
 
-  const fetchOptionsFromStorage = () => {
-    browser.storage.sync
-      .get(["accounts", "currentAccount", "settings", "hostSettings"])
-      .then((result) => {
-        setAccounts(result.accounts || {});
-        setSettings(result.settings || {});
-        setHostSettings(result.hostSettings || {});
-        setCurrentAccount(result.currentAccount || "");
-      });
+  const load = () => {
+    return Promise.all([
+      accountsStore.load(),
+      settingsStore.load(),
+      allowancesStore.load(),
+    ]).then(() => {
+      setAccounts(accountsStore.accounts);
+      setCurrentAccount(accountsStore.currentKey);
+      setSettings(settingsStore.settings);
+      setAllowances(allowancesStore.allowances);
+      console.log("load all", settingsStore.settings);
+    });
   };
 
   const saveCurrentAccount = (values) => {
-    const currentAccount = values.currentAccount;
-
-    if (currentAccount) {
-      browser.storage.sync.set({ currentAccount }).then(() => {
-        setCurrentAccount(currentAccount);
-        alert("Saved");
-      });
-    }
+    return accounts.setCurrentAccount(values.key).then(() => {
+      setCurrentAccount(values.key);
+      alert("saved");
+    });
   };
 
   const saveLndAccount = (values, formRef) => {
-    accounts[values.name] = {
+    const account = {
+      name: values.name,
       config: {
         macaroon: values.macaroon,
         url: values.url,
       },
       connector: "lnd",
     };
-
-    saveAccounts(accounts).then(() => {
-      fetchOptionsFromStorage();
-      saveCurrentAccount({ currentAccount: values.name });
-
+    return saveAccount(account).then(() => {
+      load();
       if (formRef) {
         formRef.resetFields();
       }
@@ -75,7 +80,8 @@ const Options = () => {
   };
 
   const saveLndHubAccount = (values, formRef) => {
-    accounts[values.name] = {
+    const account = {
+      name: values.name,
       config: {
         login: values.login,
         password: values.password,
@@ -84,9 +90,8 @@ const Options = () => {
       connector: "lndhub",
     };
 
-    saveAccounts(accounts).then(() => {
-      fetchOptionsFromStorage();
-      saveCurrentAccount({ currentAccount: values.name });
+    return saveAccount(account).then(() => {
+      load();
       if (formRef) {
         formRef.resetFields();
       }
@@ -94,7 +99,8 @@ const Options = () => {
   };
 
   const saveLnBitsAccount = (values, formRef) => {
-    accounts[values.name] = {
+    const account = {
+      name: values.name,
       config: {
         adminkey: values.adminkey,
         readkey: values.readkey,
@@ -103,9 +109,8 @@ const Options = () => {
       connector: "lnbits",
     };
 
-    saveAccounts(accounts).then(() => {
-      fetchOptionsFromStorage();
-      saveCurrentAccount({ currentAccount: values.name });
+    return saveAccount(account).then(() => {
+      load();
       if (formRef) {
         formRef.resetFields();
       }
@@ -113,11 +118,13 @@ const Options = () => {
   };
 
   const saveNativeAccount = (values, formRef) => {
-    accounts[values.name] = {
+    const account = {
+      name: values.name,
       config: {},
       connector: "native",
     };
-    saveAccounts(accounts).then(() => {
+    return saveAccount(account).then(() => {
+      load();
       if (formRef) {
         formRef.resetFields();
       }
@@ -125,33 +132,17 @@ const Options = () => {
   };
 
   const resetAccounts = () => {
-    return saveAccounts({}).then(() => {
-      setAccounts({});
-      browser.storage.sync.set({ currentAccount: null }).then(() => {
-        setCurrentAccount(null);
-      });
-    });
+    return accountsStore.reset();
   };
 
-  const resetHostSettings = () => {
-    return browser.storage.sync
-      .set({ hostSettings: {}, lsats: {} })
-      .then(() => {
-        setHostSettings({});
-        alert("Done");
-      });
+  const resetAllowances = () => {
+    return allowancesStore.reset();
   };
 
-  const saveAccounts = (accounts) => {
-    settings.salt = window.crypto.getRandomValues(new Uint32Array(4)).join("");
-    for (const [name, data] of Object.entries(accounts)) {
-      if (data.config) {
-        data.config = encryptData(data.config, password, settings.salt);
-      }
-      accounts[name] = data;
-    }
-    return browser.storage.sync.set({ accounts, settings }).then(() => {
-      setAccounts(accounts);
+  const saveAccount = (account) => {
+    account.config = encryptData(account.config, password, settingsStore.salt);
+    return accountsStore.setAccount(account, true).then(() => {
+      return load();
     });
   };
 
@@ -188,20 +179,17 @@ const Options = () => {
       <Content>
         <Tabs defaultActiveKey="2">
           <TabPane tab="General" key="1">
-            Content of Tab Pane 1
+            <p>{JSON.stringify(settings)}</p>
           </TabPane>
 
           <TabPane tab="Accounts" key="2">
+            {Object.entries(accounts).map((entry) => (
+              <div>{entry[1].name}</div>
+            ))}
             <ListData
               title="Existing Accounts"
               onResetCallback={resetAccounts}
               data={normalizeAccountsData(accounts)}
-            />
-
-            <ListData
-              title="Settings"
-              onResetCallback={resetHostSettings}
-              data={normalizeSettingsData(hostSettings)}
             />
 
             <Title level={2}>Current Account: {currentAccount}</Title>
@@ -239,9 +227,9 @@ const Options = () => {
             </Tabs>
           </TabPane>
 
-          <TabPane tab="Enabled Sites" key="3">
-            <p>{JSON.stringify(hostSettings)}</p>
-            <span onClick={resetHostSettings}>Reset</span>
+          <TabPane tab="Allowances" key="3">
+            <p>{JSON.stringify(allowances)}</p>
+            <span onClick={resetAllowances}>Reset</span>
           </TabPane>
         </Tabs>
       </Content>

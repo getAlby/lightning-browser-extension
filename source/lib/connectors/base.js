@@ -1,3 +1,4 @@
+import parsePaymentRequest from "invoices";
 import utils from "./../utils";
 import { decryptData } from "./../crypto";
 import Settings from "../settings";
@@ -54,7 +55,7 @@ class Base {
         if (response.data.enabled && response.data.remember) {
           return this.allowances
             .updateAllowance(message.origin.domain, {
-              isEnabled: true,
+              enabled: true,
             })
             .then(() => {
               return response;
@@ -85,7 +86,8 @@ class Base {
     if (this.unlocked && this.allowances.hasAllowance(message)) {
       promise = executor();
     } else {
-      promise = utils.openPrompt({ ...message }).then((response) => {
+      promise = utils.openPrompt(message).then((response) => {
+        console.log({ response });
         if (response.data.confirmed) {
           return executor();
         } else {
@@ -95,9 +97,15 @@ class Base {
     }
     return promise
       .then((paymentResponse) => {
+        console.log({ paymentResponse });
         // TODO: maybe use better check?
-        if (paymentResponse.data && paymentResponse.data.payment_error === "") {
+        if (
+          paymentResponse.data &&
+          (!paymentResponse.data.payment_error ||
+            paymentResponse.data.payment_error === "")
+        ) {
           return this.processPayment(message, paymentResponse).then(() => {
+            console.log("payment processed");
             return paymentResponse;
           });
         } else {
@@ -111,11 +119,23 @@ class Base {
       });
   }
 
+  parsePaymentRequest(message) {
+    const requestDetails = parsePaymentRequest({
+      request: message.args.paymentRequest,
+    });
+    return Promise.resolve({ data: requestDetails });
+  }
+
   processPayment(message, paymentResponse) {
     const route = paymentResponse.data.payment_route;
     const { total_amt } = route;
     const recipient = message.origin.name || message.origin.domain;
     return this.allowances.storePayment(message, paymentResponse).then(() => {
+      const allowance = this.allowances.getAllowance(message);
+      // check if notifications are disabled
+      if (allowance && !allowance.notifications) {
+        return Promise.resolve();
+      }
       return utils.notify({
         title: `Paid ${total_amt} Satoshi to ${recipient}`,
         message: `pre image: ${paymentResponse.data.payment_preimage}`,

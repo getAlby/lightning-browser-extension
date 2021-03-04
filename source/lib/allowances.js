@@ -1,40 +1,47 @@
 import OptionsSync from "webext-options-sync";
 import utils from "./utils";
 
-const INITIAL_ALLOWANCE = {
-  isEnabled: false,
+const ALLOWANCE_DEFAULTS = {
+  enabled: false,
   budget: 0,
+  spent: 0,
   lastPayment: 0,
   lastPaymentAttempt: 0,
+  notifications: true,
+  maxSatoshisPerPayment: 1000,
+  minSecondsIntervalPerPayment: 30,
 };
 
 class Allowances {
   constructor() {
-    this.allowanceStorage = new OptionsSync({
+    this.allowances = {}; // will be loaded async in `load()`
+    this.storage = new OptionsSync({
       storageName: "allowances",
     });
   }
 
   load() {
-    return this.allowanceStorage.getAll().then((allowances) => {
-      this.allowances = allowances;
+    return this.storage.getAll().then((allowances) => {
+      console.log(allowances);
+      this.allowances = allowances || {};
     });
   }
 
   isEnabled(domain) {
     const allowance = this.getAllowance(domain);
-    return allowance.isEnabled;
+    console.log({ allowance });
+    return allowance.enabled;
   }
 
   enable(messageOrDomain) {
     const allowance = this.getAllowance(messageOrDomain);
-    allowance.isEnabled = true;
+    allowance.enabled = true;
     this.updateAllowance(messageOrDomain, allowance);
   }
 
   getAllowance(messageOrDomain) {
     const hash = this.getAllowanceKey(messageOrDomain);
-    const allowance = this.allowances[hash] || INITIAL_ALLOWANCE;
+    const allowance = this.allowances[hash] || ALLOWANCE_DEFAULTS;
     return allowance;
   }
 
@@ -58,7 +65,7 @@ class Allowances {
 
   removeAllowance(messageOrDomain) {
     const hash = this.getAllowanceKey(messageOrDomain);
-    return this.allowanceStorage.set({ [hash]: null }).then(() => {
+    return this.storage.set({ [hash]: null }).then(() => {
       return this.load();
     });
   }
@@ -66,16 +73,22 @@ class Allowances {
   setAllowance(messageOrDomain, allowance) {
     const hash = this.getAllowanceKey(messageOrDomain);
     const domain = this.getDomain(messageOrDomain);
-    const update = { [hash]: { ...INITIAL_ALLOWANCE, domain, ...allowance } };
+    const update = { [hash]: { ...ALLOWANCE_DEFAULTS, domain, ...allowance } };
     // save new allowance and update allowances cache(this.allowances)
-    return this.allowanceStorage.set(update).then(() => {
+    return this.storage.set(update).then(() => {
       return this.load();
     });
   }
 
   hasAllowance(messageOrDomain) {
     const allowance = this.getAllowance(messageOrDomain);
-    return allowance.isEnabled && allowance.budget > 0; // TODO: check actual amount from the message
+    return (
+      allowance.enabled &&
+      Date.now() >
+        allowance.lastPaymentAttempt +
+          allowance.minSecondsIntervalPerPayment * 1000 &&
+      allowance.spent < allowance.budget
+    ); // (+ amount from message); // TODO: check actual amount from the message
   }
 
   updateAllowance(messageOrDomain, allowance) {
@@ -95,9 +108,15 @@ class Allowances {
   storePayment(message, paymentResponse) {
     const allowance = this.getAllowance(message);
     const { total_fees, total_amt } = paymentResponse.data.payment_route;
-    allowance.budget = Math.max(allowance.budget - total_amt - total_fees, 0); // do not save negative values
+    console.log({ allowance, total_fees, total_amt });
+    allowance.spent =
+      parseInt(allowance.spent) + parseInt(total_amt) + parseInt(total_fees); //TODO: review proper calculation
     allowance.lastPayment = Date.now();
     return this.setAllowance(message, allowance);
+  }
+
+  reset() {
+    this.storage.setAll({});
   }
 }
 

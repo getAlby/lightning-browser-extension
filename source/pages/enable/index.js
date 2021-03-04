@@ -24,6 +24,7 @@ class Enable extends React.Component {
       enabled: true,
       remember: this.state.remember,
       budget: this.state.budget,
+      spent: 0,
     });
   }
 

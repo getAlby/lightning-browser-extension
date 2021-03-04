@@ -77,12 +77,13 @@ const utils = {
               sender.tab.id === tabId
             ) {
               browser.tabs.onRemoved.removeListener(onRemovedListener);
-              if (responseMessage.error) {
-                reject(new Error(responseMessage.error));
-              } else {
-                resolve(responseMessage);
-              }
-              browser.windows.remove(sender.tab.windowId);
+              return browser.windows.remove(sender.tab.windowId).then(() => {
+                if (responseMessage.error) {
+                  return reject(new Error(responseMessage.error));
+                } else {
+                  return resolve(responseMessage);
+                }
+              });
             }
           };
 

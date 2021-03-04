@@ -56,5 +56,6 @@ export default function getOriginData() {
     domain: window.location.origin,
     name: getDocumentName(),
     icon: getDocumentIcon(),
+    external: true, // indicate that the call is coming from the website (and not made internally within the extension)
   };
 }

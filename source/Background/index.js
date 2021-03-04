@@ -2,26 +2,24 @@ import browser from "webextension-polyfill";
 
 import utils from "../lib/utils";
 import Settings from "../lib/settings";
+import Accounts from "../lib/accounts";
 import connectors from "../lib/connectors";
 
 import initLsatInterceptor from "./lsatInterceptor";
 
-let connector;
-let settings;
 let currentUnlockPassword; // TODO: rethink this
+let connector;
+let accounts = new Accounts();
+let settings = new Settings();
 
 const initConnector = async () => {
-  const args = await browser.storage.sync.get(["currentAccount", "accounts"]);
-  if (
-    !args.accounts ||
-    !args.currentAccount ||
-    !args.accounts[args.currentAccount]
-  ) {
-    // reset existing connector instance and return
-    connector = null;
-    return Promise.resolve("No account");
+  await accounts.load(); // load latest accounts from storage
+  const account = accounts.current;
+  console.log(account);
+  if (!account) {
+    console.log("Account not found");
+    return;
   }
-  const account = args.accounts[args.currentAccount];
   connector = new connectors[account.connector](account.config);
 
   if (currentUnlockPassword) {
@@ -34,20 +32,14 @@ const initConnector = async () => {
 browser.storage.onChanged.addListener((changes) => {
   // if the accounts change we initialize a new connector
   // this also requires the user to unlock the account again
-  if (changes.accounts || changes.currentAccount) {
+  if (changes.accounts) {
     initConnector();
   }
-  // Update the hostsettings in the current connector settings
-  if (connector && changes.hostSettings) {
-    connector.settings.hostSettings = changes.hostSettings.newValue || {};
-  }
   // Update the general settings in the current connector settings
-  if (changes.settings) {
-    if (connector) {
-      connector.settings.settings = changes.settings.newValue || {};
-    }
-    settings = changes.settings.newValue;
+  if (connector && changes.settings) {
+    connector.init();
   }
+  // TODO: what to do with allowances?
 });
 
 const debugLogger = (message, sender) => {
@@ -58,7 +50,7 @@ const debugLogger = (message, sender) => {
 
 // listen to calls from the content script and pass it on to the native application
 // returns a promise to be handled in the content script
-const handleConnectorCalls = (message, sender) => {
+const handleConnectorCalls = (message, sender, sendResponse) => {
   // if the application does not match or if it is not a prompt we ignore the call
   if (message.application !== "Joule" || !message.prompt) {
     return Promise.resolve();
@@ -72,6 +64,7 @@ const handleConnectorCalls = (message, sender) => {
     return Promise.resolve({ error: "No account available" });
   }
 
+  // check for internal vs. public calls
   const call = connector[message.type]({
     args: message.args,
     origin: message.origin,
@@ -87,16 +80,19 @@ const handleConnectorCalls = (message, sender) => {
 };
 
 async function init() {
-  settings = new Settings();
+  console.log("Loading background script");
   await settings.load();
+  await accounts.load();
   // initialize a connector for the current account
   await initConnector();
   browser.runtime.onMessage.addListener(debugLogger);
   // this is the only handler that may and must return a Promise which resolve with the response to the content script
   browser.runtime.onMessage.addListener(handleConnectorCalls);
 
-  const result = await browser.storage.sync.set({ lsats: {} });
-  initLsatInterceptor(connector);
+  if (settings.enableLsats) {
+    const result = await browser.storage.sync.set({ lsats: {} });
+    initLsatInterceptor(connector);
+  }
 }
 
 init();
