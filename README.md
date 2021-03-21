@@ -106,10 +106,11 @@ The native application does all the user interaction and connections to the ligh
 Currently there is one prototype of a native companion app which can connect to LND: [lnd-native-companion](https://github.com/bumi/lnd-native-companion)
 
 
-## FAQ
+## FAQs
 
-#### What's wrong with Joule
-Joule is a full interface to manage a LND node. It only supports one LND account. Our goal is not to write a full UI for a lightning node with all the channel management features but only focus on what is necessary for the web (for payment and authentication flows). We believe there are already way better management UIs.
+#### Why not use Joule?
+Joule is a full interface to manage a LND node. It only supports one LND account.  
+Our goal is NOT to write a full UI for a lightning node with all the channel management features but to only focus on what is necessary for the web (for payment and authentication flows). We believe there are already way better management UIs.
 Also we focus on supporting multipe different node backends (non-custodial and custodial).
 
 
