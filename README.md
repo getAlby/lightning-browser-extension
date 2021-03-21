@@ -2,7 +2,9 @@
 
 ## STATUS: experimental
 
-### A general Lightning Browser extension that uses native messaging to connect to wallet interfaces
+### A general browser extension to bring the Bitcoin Lightning network to the browser
+
+The extension provides deep lighting integration for websites (for payments and authentication flows).
 
 The goal is to write a minimal web extension supporting the developing [WebLN standard](https://webln.dev) to allow browsers to interact with lightning.
 
