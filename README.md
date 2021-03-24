@@ -81,7 +81,7 @@ Then run the following:
 
 - ### Firefox
 
-  - Load the Add-on via `about:debugging` as temporary Add-on.
+  - Load the Add-on via `about:debugging` => `This Firefox` as temporary Add-on.
   - Choose the `manifest.json` file in the extracted directory
 
 - ### Opera
