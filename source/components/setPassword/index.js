@@ -21,7 +21,7 @@ const SetPassword = ({ onOk, visible }) => {
       footer={[
         <span
           onClick={() => {
-            utils.openPage("Welcome.html");
+            utils.openPage("welcome.html");
           }}
         >
           Welcome
