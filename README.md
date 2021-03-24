@@ -83,11 +83,14 @@ Then run the following:
 
   - Load the Add-on via `about:debugging` => `This Firefox` as temporary Add-on.
   - Choose the `manifest.json` file in the extracted directory
+  - [debugging details](https://extensionworkshop.com/documentation/develop/debugging/#debugging_popups)
 
 - ### Opera
 
   - Load the extension via `opera:extensions`
   - Check the `Developer Mode` and load as unpacked from extension’s extracted directory.
+
+
 
 ### Production
 
