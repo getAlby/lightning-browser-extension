@@ -15,21 +15,22 @@ const ALLOWANCE_DEFAULTS = {
 class Allowances {
   constructor() {
     this.allowances = {}; // will be loaded async in `load()`
-    this.storage = new OptionsSync({
-      storageName: "allowances",
-    });
   }
 
   load() {
-    return this.storage.getAll().then((allowances) => {
-      console.log(allowances);
-      this.allowances = allowances || {};
+    return browser.storage.sync.get(["allowances"]).then((result) => {
+      this.allowances = result.allowances || {};
+    });
+  }
+
+  set(data) {
+    return browser.storage.sync.set(data).then(() => {
+      this.load();
     });
   }
 
   isEnabled(domain) {
     const allowance = this.getAllowance(domain);
-    console.log({ allowance });
     return allowance.enabled;
   }
 
@@ -65,19 +66,16 @@ class Allowances {
 
   removeAllowance(messageOrDomain) {
     const hash = this.getAllowanceKey(messageOrDomain);
-    return this.storage.set({ [hash]: null }).then(() => {
-      return this.load();
-    });
+    delete this.allowances[hash];
+    return this.set({ allowances: this.allowances });
   }
 
   setAllowance(messageOrDomain, allowance) {
     const hash = this.getAllowanceKey(messageOrDomain);
     const domain = this.getDomain(messageOrDomain);
-    const update = { [hash]: { ...ALLOWANCE_DEFAULTS, domain, ...allowance } };
+    this.allowances[hash] = { ...ALLOWANCE_DEFAULTS, domain, ...allowance };
     // save new allowance and update allowances cache(this.allowances)
-    return this.storage.set(update).then(() => {
-      return this.load();
-    });
+    return this.set({ allowances: this.allowances });
   }
 
   hasAllowance(messageOrDomain) {
@@ -108,7 +106,6 @@ class Allowances {
   storePayment(message, paymentResponse) {
     const allowance = this.getAllowance(message);
     const { total_fees, total_amt } = paymentResponse.data.payment_route;
-    console.log({ allowance, total_fees, total_amt });
     allowance.spent =
       parseInt(allowance.spent) + parseInt(total_amt) + parseInt(total_fees); //TODO: review proper calculation
     allowance.lastPayment = Date.now();
@@ -116,7 +113,7 @@ class Allowances {
   }
 
   reset() {
-    this.storage.setAll({});
+    this.set({ allowances: {} });
   }
 }
 
