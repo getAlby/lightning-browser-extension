@@ -1,23 +1,24 @@
-import OptionsSync from "webext-options-sync";
 import browser from "webextension-polyfill";
 import utils from "./utils";
 
 class Accounts {
   constructor(args) {
     this.accounts = {}; // will be loaded async in `load()`
-    this.storage = new OptionsSync({
-      storageName: "accounts",
-      defaults: {
-        currentKey: null,
-        accounts: {},
-      },
-    });
+    this.currentKey = null;
   }
 
   load() {
-    return this.storage.getAll().then((result) => {
-      this.accounts = result.accounts;
-      this.currentKey = result.currentKey;
+    return browser.storage.sync
+      .get(["accounts", "currentKey"])
+      .then((result) => {
+        this.accounts = result.accounts || {};
+        this.currentKey = result.currentKey;
+      });
+  }
+
+  set(data) {
+    return browser.storage.sync.set(data).then(() => {
+      this.load();
     });
   }
 
@@ -33,7 +34,7 @@ class Accounts {
   }
 
   setCurrent(accountKey) {
-    this.set({ currentKey: key }).then(() => {
+    this.set({ currentKey: accountKey }).then(() => {
       return this.load();
     });
   }
@@ -46,9 +47,7 @@ class Accounts {
     if (makeCurrent) {
       update.currentKey = key;
     }
-    return this.storage.set(update).then(() => {
-      return this.load();
-    });
+    return this.set(update);
   }
 
   removeAccount(accountKey) {
@@ -57,17 +56,11 @@ class Accounts {
     if (this.currentKey === accountKey) {
       this.currentKey = null;
     }
-    return this.storage
-      .set({ accounts: this.acounts, currentKey: this.currentKey })
-      .then(() => {
-        return this.load();
-      });
+    return this.set({ accounts: this.acounts, currentKey: this.currentKey });
   }
 
   reset() {
-    return this.storage.set({ accounts: {}, currentKey: null }).then(() => {
-      return this.load();
-    });
+    return this.set({ accounts: {}, currentKey: null });
   }
 }
 
