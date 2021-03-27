@@ -81,10 +81,10 @@ Then run the following:
 
 - ### Firefox
 
-  - [Load the Add-on](about:debugging#/runtime/this-firefox) via `about:debugging` => `This Firefox` as temporary Add-on.
+  - Load the Add-on via `about:debugging` => `This Firefox` as temporary Add-on. (about:debugging#/runtime/this-firefox)
   - Choose the `manifest.json` file in the extracted directory
   - [debugging details](https://extensionworkshop.com/documentation/develop/debugging/#debugging_popups)
-  - To see the debug console click "inspect" on the [list of temporary extensions](about:debugging#/runtime/this-firefox)
+  - To see the debug console click "inspect" on the list of temporary extensions (about:debugging#/runtime/this-firefox)
 
 - ### Opera
 
