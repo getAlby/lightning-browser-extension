@@ -48,6 +48,14 @@ const debugLogger = (message, sender) => {
   }
 };
 
+const handleInstalled = (details) => {
+  console.log("handle installed");
+  // TODO: maybe check if accounts are already configured?
+  if (details.reason === "install") {
+    utils.openUrl("welcome.html");
+  }
+};
+
 // listen to calls from the content script and pass it on to the native application
 // returns a promise to be handled in the content script
 const handleConnectorCalls = (message, sender, sendResponse) => {
@@ -88,6 +96,8 @@ async function init() {
   browser.runtime.onMessage.addListener(debugLogger);
   // this is the only handler that may and must return a Promise which resolve with the response to the content script
   browser.runtime.onMessage.addListener(handleConnectorCalls);
+
+  browser.runtime.onInstalled.addListener(handleInstalled);
 
   if (settings.enableLsats) {
     const result = await browser.storage.sync.set({ lsats: {} });
