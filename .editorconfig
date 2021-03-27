@@ -1,0 +1,4 @@
+[source/**.js]
+quote_type = double
+indent_style = space
+indent_size = 2
