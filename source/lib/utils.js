@@ -62,7 +62,7 @@ const utils = {
       browser.windows
         .create({
           url: `${browser.runtime.getURL("prompt.html")}?${urlParams}`,
-          type: "popup",
+          type: "detached_panel",
           width: 400,
           height: 580,
         })
