@@ -60,7 +60,7 @@ const handleConnectorCalls = (message, sender, sendResponse) => {
   // TODO: create an onboarding wizard
   if (!connector) {
     console.log("No connector/account found");
-    utils.openPage("Options.html");
+    utils.openPage("options.html");
     return Promise.resolve({ error: "No account available" });
   }
 
