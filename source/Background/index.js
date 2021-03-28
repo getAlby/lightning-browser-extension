@@ -23,7 +23,7 @@ const initConnector = async () => {
   connector = new connectors[account.connector](account.config);
 
   if (currentUnlockPassword) {
-    connector.unlock(currentUnlockPassword);
+    connector.unlock({ args: { password: currentUnlockPassword } });
   }
 
   return connector.init();
@@ -33,6 +33,7 @@ browser.storage.onChanged.addListener((changes) => {
   // if the accounts change we initialize a new connector
   // this also requires the user to unlock the account again
   if (changes.accounts) {
+    console.log("Accounts changed, refreshing connector");
     initConnector();
   }
   // Update the general settings in the current connector settings
@@ -56,6 +57,21 @@ const handleInstalled = (details) => {
   }
 };
 
+const handleAccountUpdates = (message, sender, sendResponse) => {
+  // if the application does not match or if it is not a setup call
+  if (message.application !== "Joule" || !message.setup) {
+    return Promise.resolve();
+  }
+
+  if (message.type === "setAccount") {
+    let newAccount = message.args.account;
+    currentUnlockPassword = message.args.password || currentUnlockPassword;
+    //newAccount.config = encryptData(newAccount.config, currentUnlockPassword, settings.salt);
+    return accounts.setAccount(newAccount).then(() => {
+      return initConnector();
+    });
+  }
+};
 // listen to calls from the content script and pass it on to the native application
 // returns a promise to be handled in the content script
 const handleConnectorCalls = (message, sender, sendResponse) => {
@@ -64,6 +80,12 @@ const handleConnectorCalls = (message, sender, sendResponse) => {
     return Promise.resolve();
   }
 
+  //if (message.setup) {
+  //  if (message.type === 'setPassword') {
+  //    currentUnlockPassword = message.args.password;
+  //    return Promise.resolve();
+  //  }
+  //}
   // if the connector is not available, probably because no account is configured we open the Options page.
   // TODO: create an onboarding wizard
   if (!connector) {
