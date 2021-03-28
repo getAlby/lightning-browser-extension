@@ -48,6 +48,14 @@ class Unlock extends React.Component {
           Unlock
         </button>
         <p>{this.state.error}</p>
+        <button
+          type="button"
+          onClick={() => {
+            return utils.openPage("welcome.html");
+          }}
+        >
+          Welcome
+        </button>
       </div>
     );
   }
