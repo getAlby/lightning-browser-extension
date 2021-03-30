@@ -35,7 +35,18 @@ class LndConfirm extends React.Component {
     return (
       <div>
         <h2>Review your details</h2>
-        <p></p>
+        <p>
+          <dl>
+            <dt>LND Name</dt>
+            <dd>{this.props.lndName}</dd>
+
+            <dt>LND Macaroon</dt>
+            <dd>{this.props.lndMacaroon}</dd>
+
+            <dt>LND URL</dt>
+            <dd>{this.props.lndUrl}</dd>
+          </dl>
+        </p>
         {JSON.stringify(this.state.info)}
         <hr />
         <HashRouter>

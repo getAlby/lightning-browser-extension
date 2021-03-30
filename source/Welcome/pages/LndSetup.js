@@ -37,12 +37,20 @@ class LndSetup extends React.Component {
       },
       connector: "lnd",
     };
+    // need to pass details to welcome.js state here since after setting the Account the config
+    // is not readable anymore as entered here
+    this.props.setLndConfig({
+      lndName: account.name ?? null,
+      lndMacaroon: account.config.macaroon ?? null,
+      lndUrl: account.config.url ?? null,
+    });
     account.config = encryptData(
       account.config,
       values.password,
       this.settingsStore.salt
     );
     return this.accountsStore.setAccount(account, true).then(() => {
+      // TODO: account config should be marked accepted in the welcome.js store
       this.history.push("/lnd/confirm");
     });
   }
