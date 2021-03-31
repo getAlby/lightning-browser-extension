@@ -1,4 +1,4 @@
-import OptionsSync from "webext-options-sync";
+import browser from "webextension-polyfill";
 import utils from "./utils";
 
 const ALLOWANCE_DEFAULTS = {

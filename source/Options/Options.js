@@ -1,4 +1,3 @@
-import browser from "webextension-polyfill";
 import { Typography, Layout, Tabs } from "antd";
 import React, { useState, useEffect } from "react";
 
