@@ -16,7 +16,7 @@ import NativeConnectionForm from "../forms/nativeConnection";
 import ListData from "../components/listData";
 import SetPassword from "../components/setPassword";
 
-import { normalizeAccountsData, normalizeSettingsData } from "../utils/helpers";
+import { normalizeAccountsData } from "../utils/helpers";
 
 import "./styles.scss";
 
@@ -51,13 +51,6 @@ const Options = () => {
       setSettings(settingsStore.settings);
       setAllowances(allowancesStore.allowances);
       console.log("load all", settingsStore.settings);
-    });
-  };
-
-  const saveCurrentAccount = (values) => {
-    return accounts.setCurrentAccount(values.key).then(() => {
-      setCurrentAccount(values.key);
-      alert("saved");
     });
   };
 

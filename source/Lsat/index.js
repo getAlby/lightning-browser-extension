@@ -1,6 +1,3 @@
-import * as React from "react";
-import ReactDOM from "react-dom";
-
 import browser from "webextension-polyfill";
 import qs from "query-string";
 import { Lsat } from "lsat-js";

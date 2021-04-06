@@ -100,7 +100,7 @@ async function init() {
   browser.runtime.onInstalled.addListener(handleInstalled);
 
   if (settings.enableLsats) {
-    const result = await browser.storage.sync.set({ lsats: {} });
+    await browser.storage.sync.set({ lsats: {} });
     initLsatInterceptor(connector);
   }
 }

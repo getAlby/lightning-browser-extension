@@ -1,6 +1,4 @@
 import OptionsSync from "webext-options-sync";
-import browser from "webextension-polyfill";
-
 class Settings {
   constructor(args) {
     this.settings = {}; // will be loaded async in `load()`

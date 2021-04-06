@@ -1,5 +1,4 @@
 import React from "react";
-import browser from "webextension-polyfill";
 
 import utils from "../lib/utils";
 import Accounts from "../lib/accounts";
