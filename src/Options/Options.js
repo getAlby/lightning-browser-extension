@@ -13,8 +13,8 @@ import LndHubForm from "../forms/lndhub";
 import LnBitsForm from "../forms/lnbits";
 import NativeConnectionForm from "../forms/nativeConnection";
 
-import ListData from "../components/listData";
-import SetPassword from "../components/setPassword";
+import ListData from "../app/components/listData";
+import SetPassword from "../app/components/setPassword";
 
 import { normalizeAccountsData } from "../utils/helpers";
 

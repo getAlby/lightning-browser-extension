@@ -14,7 +14,7 @@ const ListData = ({ data, title, onResetCallback }) => {
             onClick={onResetCallback}
             className="reset-button"
           >
-            Reset
+            Reset1
           </Button>
         </div>
       </Row>
