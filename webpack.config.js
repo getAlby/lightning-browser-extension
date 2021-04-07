@@ -65,7 +65,7 @@ module.exports = {
     inpageScript: path.join(sourcePath, "InpageScript", "index.js"),
     popup: path.join(sourcePath, "Popup", "index.js"),
     prompt: path.join(sourcePath, "Prompt", "index.js"),
-    options: path.join(sourcePath, "Options", "index.js"),
+    options: path.join(sourcePath, "app", "components", "Options", "index.js"),
     welcome: path.join(sourcePath, "Welcome", "index.js"),
     lsat: path.join(sourcePath, "Lsat", "index.js"),
   },
