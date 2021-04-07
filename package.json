@@ -1,9 +1,9 @@
 {
-  "name": "lightning-web-extension",
+  "name": "lightning-browser-extension",
   "version": "1.0.0",
-  "description": "Lightning web extension",
+  "description": "Lightning browser extension",
   "private": true,
-  "repository": "https://github.com/bumi/lightning-web-extension.git",
+  "repository": "https://github.com/bumi/lightning-browser-extension.git",
   "author": {
     "name": "Michael Bumann",
     "url": "https://michaelbumann.com"
