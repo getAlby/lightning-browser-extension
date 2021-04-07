@@ -82,7 +82,7 @@ module.exports = {
     prompt: path.join(sourcePath, "app", "components", "Prompt", "index.js"),
     options: path.join(sourcePath, "app", "components", "Options", "index.js"),
     welcome: path.join(sourcePath, "app", "components", "Welcome", "index.js"),
-    lsat: path.join(sourcePath, "Lsat", "index.js"),
+    lsat: path.join(sourcePath, "extension", "ln", "Lsat", "index.js"),
   },
 
   output: {

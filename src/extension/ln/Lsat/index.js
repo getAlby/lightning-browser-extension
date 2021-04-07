@@ -1,7 +1,7 @@
 import browser from "webextension-polyfill";
 import qs from "query-string";
 import { Lsat } from "lsat-js";
-import utils from "../lib/utils";
+import utils from "../../../lib/utils";
 
 (async function run() {
   const message = qs.parse(window.location.search);

@@ -1,4 +1,4 @@
-import WebLNProvider from "../../webln";
+import WebLNProvider from "../ln/webln";
 import Donation from "./donation";
 
 if (document) {
