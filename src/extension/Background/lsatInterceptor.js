@@ -1,7 +1,7 @@
 import browser from "webextension-polyfill";
 import { Lsat } from "lsat-js";
 import qs from "query-string";
-import utils from "../lib/utils";
+import utils from "../../lib/utils";
 
 let lsats = {};
 let connector;
