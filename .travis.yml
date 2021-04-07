@@ -5,4 +5,5 @@ cache: yarn
 before_script:
   - yarn install
 script:
+ - yarn lint
  - yarn build
