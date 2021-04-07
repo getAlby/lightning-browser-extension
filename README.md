@@ -23,6 +23,24 @@ E.g.:
 
 ![architecture](/doc/ln-browser-architecture.png)
 
+## Project Structure
+
+```
+./lightning-browser-extension
+├── src                     #1
+│   ├── app                 #1
+│   ├── common              #1
+│   ├── extension           #1
+├── static                  #1
+│   ├── assets              #1
+│   └── views               #1
+├── doc                     #1
+├── dist                    #1
+│   └── development         #1
+│   └── production          #1
+└
+```
+
 ## General Ideas
 
 - Focus on the web-payment process, no channel-management or similar
