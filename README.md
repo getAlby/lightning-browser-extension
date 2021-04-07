@@ -13,10 +13,10 @@ The extension implements the WebLN standard. The goal is to write a miminmal int
 The extension can connect to different node implementation and supports custodial and non-custodial setups.
 E.g.:
 
-- [remote LND](https://github.com/bumi/lightning-browser-extension/blob/master/source/lib/connectors/lnd.js)
-- [Local native companion apps](https://github.com/bumi/lightning-browser-extension/blob/master/source/lib/connectors/native.js) (e.g. zaphq or native wallet apps)
-- [LNBits](https://github.com/bumi/lightning-browser-extension/blob/master/source/lib/connectors/lnbits.js)
-- [LNDHub](https://github.com/bumi/lightning-browser-extension/blob/master/source/lib/connectors/lndhub.js)
+- [remote LND](https://github.com/bumi/lightning-browser-extension/blob/master/src/lib/connectors/lnd.js)
+- [Local native companion apps](https://github.com/bumi/lightning-browser-extension/blob/master/src/lib/connectors/native.js) (e.g. zaphq or native wallet apps)
+- [LNBits](https://github.com/bumi/lightning-browser-extension/blob/master/src/lib/connectors/lnbits.js)
+- [LNDHub](https://github.com/bumi/lightning-browser-extension/blob/master/src/lib/connectors/lndhub.js)
 - ...
 
 ## Architecture idea
