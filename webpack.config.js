@@ -10,7 +10,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
-const viewsPath = path.join(__dirname, "views");
+const viewsPath = path.join(__dirname, "static", "views");
 const sourcePath = path.join(__dirname, "src");
 const nodeEnv = process.env.NODE_ENV || "development";
 const destPath = path.join(__dirname, "dist", nodeEnv);
