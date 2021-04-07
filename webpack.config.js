@@ -12,8 +12,9 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const viewsPath = path.join(__dirname, "views");
 const sourcePath = path.join(__dirname, "src");
-const destPath = path.join(__dirname, "extension");
 const nodeEnv = process.env.NODE_ENV || "development";
+const destPath = path.join(__dirname, "dist", nodeEnv);
+
 const targetBrowser = process.env.TARGET_BROWSER;
 
 const extensionReloaderPlugin =
@@ -145,10 +146,12 @@ module.exports = {
     // delete previous build files
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: [
-        path.join(process.cwd(), `extension/${targetBrowser}`),
+        path.join(process.cwd(), "dist", nodeEnv, targetBrowser),
         path.join(
           process.cwd(),
-          `extension/${targetBrowser}.${getExtensionFileType(targetBrowser)}`
+          "dist",
+          nodeEnv,
+          `${targetBrowser}.${getExtensionFileType(targetBrowser)}`
         ),
       ],
       cleanStaleWebpackAssets: false,
