@@ -27,17 +27,17 @@ E.g.:
 
 ```
 ./lightning-browser-extension
-├── src                     #1
-│   ├── app                 #1
-│   ├── common              #1
-│   ├── extension           #1
-├── static                  #1
-│   ├── assets              #1
-│   └── views               #1
-├── doc                     #1
-├── dist                    #1
-│   └── development         #1
-│   └── production          #1
+├── src                     # Source Code
+│   ├── app                 # React UI App
+│   ├── extension           # Browser Extension
+│   ├── common              # Helpers and utilities used by both the React App and the Browser Extension
+├── static                  # Static Resources
+│   ├── assets              # Images, logos, etc
+│   └── views               # Static HTML files
+├── doc                     # Documentation (guidelines, architecture docs, etc)
+├── dist                    # Build
+│   └── development         # Developer Builds (not to be shared)
+│   └── production          # Production Builds
 └
 ```
 
