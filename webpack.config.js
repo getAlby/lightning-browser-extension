@@ -63,10 +63,10 @@ module.exports = {
     background: path.join(sourcePath, "Background", "index.js"),
     contentScript: path.join(sourcePath, "ContentScript", "index.js"),
     inpageScript: path.join(sourcePath, "InpageScript", "index.js"),
-    popup: path.join(sourcePath, "Popup", "index.js"),
-    prompt: path.join(sourcePath, "Prompt", "index.js"),
+    popup: path.join(sourcePath, "app", "components", "Popup", "index.js"),
+    prompt: path.join(sourcePath, "app", "components", "Prompt", "index.js"),
     options: path.join(sourcePath, "app", "components", "Options", "index.js"),
-    welcome: path.join(sourcePath, "Welcome", "index.js"),
+    welcome: path.join(sourcePath, "app", "components", "Welcome", "index.js"),
     lsat: path.join(sourcePath, "Lsat", "index.js"),
   },
 

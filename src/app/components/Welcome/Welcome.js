@@ -1,9 +1,9 @@
 import React from "react";
 
-import utils from "../lib/utils";
-import Accounts from "../lib/accounts";
-import Allowances from "../lib/allowances";
-import Settings from "../lib/settings";
+import utils from "../../../lib/utils";
+import Accounts from "../../../lib/accounts";
+import Allowances from "../../../lib/allowances";
+import Settings from "../../../lib/settings";
 
 class Welcome extends React.Component {
   constructor(props) {

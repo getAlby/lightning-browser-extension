@@ -1,13 +1,12 @@
-@import "../styles/fonts";
-@import "../styles/reset";
-@import "../styles/variables";
-
-@import "~antd/dist/antd";
+@import "../../styles/fonts";
+@import "../../styles/reset";
+@import "../../styles/variables";
 
 body {
   color: $black;
   background-color: $greyWhite;
 }
+
 
 #popup {
   min-width: 350px;
