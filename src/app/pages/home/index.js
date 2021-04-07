@@ -1,7 +1,7 @@
 import React from "react";
 import browser from "webextension-polyfill";
 
-import utils from "../../lib/utils";
+import utils from "../../../lib/utils";
 
 class Home extends React.Component {
   constructor(props) {

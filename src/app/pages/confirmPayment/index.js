@@ -1,7 +1,7 @@
 import React from "react";
 import { createHashHistory } from "history";
 
-import msg from "../../lib/msg";
+import msg from "../../../lib/msg";
 
 // import "./styles.scss";
 
