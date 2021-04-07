@@ -19,13 +19,6 @@ const SetPassword = ({ onOk, visible }) => {
       onOk={onDone}
       closeable={false}
       footer={[
-        <span
-          onClick={() => {
-            utils.openPage("welcome.html");
-          }}
-        >
-          Welcome
-        </span>,
         <Button key="submit" type="primary" onClick={form.submit}>
           Save
         </Button>,
