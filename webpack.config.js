@@ -60,17 +60,22 @@ module.exports = {
 
   entry: {
     manifest: path.join(sourcePath, "manifest.json"),
-    background: path.join(sourcePath, "extension", "Background", "index.js"),
+    background: path.join(
+      sourcePath,
+      "extension",
+      "background-script",
+      "index.js"
+    ),
     contentScript: path.join(
       sourcePath,
       "extension",
-      "ContentScript",
+      "content-script",
       "index.js"
     ),
     inpageScript: path.join(
       sourcePath,
       "extension",
-      "InpageScript",
+      "inpage-script",
       "index.js"
     ),
     popup: path.join(sourcePath, "app", "components", "Popup", "index.js"),
