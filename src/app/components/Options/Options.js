@@ -1,12 +1,12 @@
 import { Typography, Layout, Tabs } from "antd";
 import React, { useState, useEffect } from "react";
 
-import msg from "../../../lib/msg";
-import { encryptData } from "../../../lib/crypto";
+import msg from "../../../common/lib/msg";
+import { encryptData } from "../../../common/lib/crypto";
 
-import Accounts from "../../../lib/accounts";
-import Settings from "../../../lib/settings";
-import Allowances from "../../../lib/allowances";
+import Accounts from "../../../common/lib/accounts";
+import Settings from "../../../common/lib/settings";
+import Allowances from "../../../common/lib/allowances";
 
 import LndForm from "../../forms/lnd";
 import LndHubForm from "../../forms/lndhub";
@@ -16,7 +16,7 @@ import NativeConnectionForm from "../../forms/nativeConnection";
 import ListData from "../listData";
 import SetPassword from "../setPassword";
 
-import { normalizeAccountsData } from "../../../utils/helpers";
+import { normalizeAccountsData } from "../../../common/utils/helpers";
 
 import "./styles.scss";
 

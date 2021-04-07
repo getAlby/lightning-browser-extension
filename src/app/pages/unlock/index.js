@@ -1,7 +1,7 @@
 import React from "react";
 import { createHashHistory } from "history";
 
-import utils from "../../../lib/utils";
+import utils from "../../../common/lib/utils";
 
 import "./styles.scss";
 

@@ -3,7 +3,7 @@ import qs from "query-string";
 import { createHashHistory } from "history";
 import { HashRouter, Route, Switch } from "react-router-dom";
 
-import utils from "../../../lib/utils";
+import utils from "../../../common/lib/utils";
 import Unlock from "../../pages/unlock";
 import Enable from "../../pages/enable";
 import Loading from "../../pages/loading";

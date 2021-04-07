@@ -3,7 +3,7 @@ import { createHashHistory } from "history";
 
 import { Button } from "antd";
 
-import msg from "../../../lib/msg";
+import msg from "../../../common/lib/msg";
 
 // import "./styles.scss";
 
