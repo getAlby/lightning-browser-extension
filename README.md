@@ -28,16 +28,16 @@ E.g.:
 ```
 ./lightning-browser-extension
 ├── src                     # Source Code
-│   ├── app                 # React UI App
-│   ├── extension           # Browser Extension
-│   ├── common              # Helpers and utilities used by both the React App and the Browser Extension
+│   ├── app                     # React UI App
+│   ├── extension               # Browser Extension
+│   ├── common                  # Helpers and utilities used by both the React App and the Browser Extension
 ├── static                  # Static Resources
-│   ├── assets              # Images, logos, etc
-│   └── views               # Static HTML files
+│   ├── assets                  # Images, logos, etc
+│   └── views                   # Static HTML files
 ├── doc                     # Documentation (guidelines, architecture docs, etc)
 ├── dist                    # Build
-│   └── development         # Developer Builds (not to be shared)
-│   └── production          # Production Builds
+│   └── development             # Developer Builds (not to be shared)
+│   └── production              # Production Builds
 └
 ```
 
