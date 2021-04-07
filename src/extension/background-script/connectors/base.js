@@ -1,8 +1,8 @@
 import parsePaymentRequest from "invoices";
-import utils from "./../utils";
-import { decryptData } from "./../crypto";
-import Settings from "../settings";
-import Allowances from "../allowances";
+import utils from "../../../common/lib/utils";
+import { decryptData } from "../../../common/lib/crypto";
+import Settings from "../../../common/lib/settings";
+import Allowances from "../../../common/lib/allowances";
 
 class Base {
   constructor(connectorConfig) {
