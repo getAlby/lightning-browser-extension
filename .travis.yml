@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-  - 4.2
+ - "stable"
 before_script:
-  - npm install
+  - yarn install
 script:
- - npm install
+ - yarn build
