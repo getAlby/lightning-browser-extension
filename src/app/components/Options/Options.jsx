@@ -8,10 +8,10 @@ import Accounts from "../../../common/lib/accounts";
 import Settings from "../../../common/lib/settings";
 import Allowances from "../../../common/lib/allowances";
 
-import LndForm from "../../forms/Lnd";
-import LndHubForm from "../../forms/LndHub";
-import LnBitsForm from "../../forms/LnBits";
-import NativeConnectionForm from "../../forms/NativeConnection";
+import LndForm from "../Lnd";
+import LndHubForm from "../LndHub";
+import LnBitsForm from "../LnBits";
+import NativeConnectionForm from "../NativeConnection";
 
 import ListData from "../ListData";
 import SetPassword from "../SetPassword";

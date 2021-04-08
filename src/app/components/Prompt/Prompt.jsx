@@ -4,10 +4,10 @@ import { createHashHistory } from "history";
 import { HashRouter, Route, Switch } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";
-import Unlock from "../../pages/Unlock";
-import Enable from "../../pages/Enable";
-import Loading from "../../pages/Loading";
-import ConfirmPayment from "../../pages/ConfirmPayment";
+import Unlock from "../Unlock";
+import Enable from "../Enable";
+import Loading from "../Loading";
+import ConfirmPayment from "../ConfirmPayment";
 
 import "./styles.scss";
 
