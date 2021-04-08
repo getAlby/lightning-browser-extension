@@ -1,7 +1,4 @@
-# ignore haters
-haters/
-
-### Node ###
+# #### This all good standard ###
 # Logs
 logs
 *.log
@@ -45,8 +42,8 @@ build/Release
 node_modules/
 jspm_packages/
 
-# TypeScript v1 declaration files
-typings/
+# Snowpack dependency directory (https://snowpack.dev/)
+web_modules/
 
 # TypeScript cache
 *.tsbuildinfo
@@ -56,6 +53,12 @@ typings/
 
 # Optional eslint cache
 .eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
 
 # Optional REPL history
 .node_repl_history
@@ -72,15 +75,21 @@ typings/
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
+.parcel-cache
 
-# next.js build output
+# Next.js build output
 .next
+out
 
-# nuxt.js build output
+# Nuxt.js build / generate output
 .nuxt
+dist
 
-# react / gatsby 
-public/
+# Gatsby files
+.cache/
+# Comment in the public line in if your project uses Gatsby and not Next.js
+# https://nextjs.org/blog/next-9-1#public-directory-support
+# public
 
 # vuepress build output
 .vuepress/dist
@@ -94,19 +103,15 @@ public/
 # DynamoDB Local files
 .dynamodb/
 
-### Sass ###
-.sass-cache/
-*.css.map
-*.sass.map
-*.scss.map
+# TernJS port file
+.tern-port
 
-## Build directory
-dist/
-.awcache
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
 
-# yarn 2
-# https://github.com/yarnpkg/berry/issues/454#issuecomment-530312089
-.yarn/*
-!.yarn/releases
-!.yarn/plugins
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
 .pnp.*
