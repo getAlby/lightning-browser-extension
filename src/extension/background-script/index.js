@@ -1,4 +1,3 @@
-
 import utils from "../../common/lib/utils";
 import Settings from "../../common/lib/settings";
 import Accounts from "../../common/lib/accounts";
@@ -10,7 +9,6 @@ let currentUnlockPassword; // TODO: rethink this
 let connector;
 let accounts = new Accounts();
 let settings = new Settings();
-
 const initConnector = async () => {
   await accounts.load(); // load latest accounts from storage
   const account = accounts.current;

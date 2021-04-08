@@ -1,5 +1,5 @@
 const path = require("path");
-// const webpack = require("webpack");
+const webpack = require("webpack");
 const FilemanagerPlugin = require("filemanager-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
@@ -9,6 +9,7 @@ const ExtensionReloader = require("webpack-extension-reloader");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+
 
 const viewsPath = path.join(__dirname, "static", "views");
 // const sourcePath = path.join(__dirname, "source");
@@ -47,6 +48,8 @@ const getExtensionFileType = (browser) => {
 };
 
 module.exports = {
+  // TODO: check if this can be replaced /reenabled
+  // causes copiler error in webpack 5
   // devtool: "inline-source-map", // https://github.com/webpack/webpack/issues/1194#issuecomment-560382342
 
   stats: {
@@ -56,8 +59,7 @@ module.exports = {
     hash: true,
   },
 
-  // mode: nodeE#nv,
-  mode: 'development',
+  mode: nodeEnv,
 
   entry: {
     manifest: './src/manifest.json',
@@ -144,7 +146,7 @@ module.exports = {
     // TODO: reenable
     // new webpack.SourceMapDevToolPlugin({ filename: false }),
     // environmental variables
-    // new EnvironmentPlugin(["NODE_ENV", "TARGET_BROWSER"]),
+    new webpack.EnvironmentPlugin(["NODE_ENV", "TARGET_BROWSER"]),
     // delete previous build files
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: [
