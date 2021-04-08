@@ -3,9 +3,9 @@ import { createHashHistory } from "history";
 import { HashRouter, Switch, Route } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";
-import Home from "../../pages/home";
-import Unlock from "../../pages/unlock";
-import Loading from "../../pages/loading";
+import Home from "../../pages/Home";
+import Unlock from "../../pages/Unlock";
+import Loading from "../../pages/Loading";
 
 import "./styles.scss";
 
