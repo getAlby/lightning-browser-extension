@@ -1,8 +1,6 @@
 import React from "react";
 import { Input, Button, Modal, Form } from "antd";
 
-import utils from "../../../common/lib/utils";
-
 const SetPassword = ({ onOk, visible }) => {
   const [form] = Form.useForm();
 
