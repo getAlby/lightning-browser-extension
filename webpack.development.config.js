@@ -79,7 +79,7 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx", ".json"],
     alias: {
-      'webextension-polyfill': 'node_modules/webextension-polyfill',
+      'webextension-polyfill': 'webextension-polyfill',
       crypto: 'crypto-browserify',
       assert: 'assert'
     },
