@@ -9,12 +9,12 @@ import Settings from "../../../common/lib/settings";
 import Allowances from "../../../common/lib/allowances";
 
 import LndForm from "../../forms/lnd1";
-import LndHubForm from "../../forms/lnd-hub";
-import LnBitsForm from "../../forms/ln-bits";
-import NativeConnectionForm from "../../forms/native-Connection";
+import LndHubForm from "../../forms/LndHub";
+import LnBitsForm from "../../forms/LnBits";
+import NativeConnectionForm from "../../forms/NativeConnection";
 
-import ListData from "../list-Data";
-import SetPassword from "../set-Password";
+import ListData from "../ListData";
+import SetPassword from "../SetPassword";
 
 import { normalizeAccountsData } from "../../../common/utils/helpers";
 
