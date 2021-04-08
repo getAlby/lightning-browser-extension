@@ -61,8 +61,8 @@ module.exports = {
 
   entry: {
     manifest: './src/manifest.json',
-    background: './extension/background-script/index.js',
-    contentScript: './extension/content-script/index.js',
+    background: './src/extension/background-script/index.js',
+    contentScript: './src/extension/content-script/index.js',
     inpageScript:'./src/extension/inpage-script/index.js',
     popup: './src/app/components/Popup/index.jsx',
     prompt: './src/app/components/Prompt/index.jsx',
