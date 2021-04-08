@@ -7,3 +7,4 @@ before_script:
 script:
  - yarn lint
  - yarn build
+ - yarn run test
