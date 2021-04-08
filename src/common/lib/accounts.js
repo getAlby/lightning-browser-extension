@@ -1,4 +1,3 @@
-import browser from "webextension-polyfill";
 import utils from "./utils";
 
 class Accounts {

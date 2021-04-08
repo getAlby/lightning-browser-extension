@@ -1,4 +1,3 @@
-import browser from "webextension-polyfill";
 import qs from "query-string";
 import shajs from "sha.js";
 
