@@ -78,10 +78,10 @@ module.exports = {
       "inpage-script",
       "index.js"
     ),
-    popup: path.join(sourcePath, "app", "components", "Popup", "index.js"),
-    prompt: path.join(sourcePath, "app", "components", "Prompt", "index.js"),
-    options: path.join(sourcePath, "app", "components", "Options", "index.js"),
-    welcome: path.join(sourcePath, "app", "components", "Welcome", "index.js"),
+    popup: path.join(sourcePath, "app", "components", "Popup", "index.jsx"),
+    prompt: path.join(sourcePath, "app", "components", "Prompt", "index.jsx"),
+    options: path.join(sourcePath, "app", "components", "Options", "index.jsx"),
+    welcome: path.join(sourcePath, "app", "components", "Welcome", "index.jsx"),
     lsat: path.join(sourcePath, "extension", "ln", "lsat", "index.js"),
   },
 
