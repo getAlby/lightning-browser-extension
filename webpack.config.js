@@ -5,34 +5,17 @@ const TerserPlugin = require("terser-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const ExtensionReloader = require("webpack-extension-reloader");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
+
 const viewsPath = path.join(__dirname, "static", "views");
-const sourcePath = path.join(__dirname, "src");
+// const sourcePath = path.join(__dirname, "source");
 const nodeEnv = process.env.NODE_ENV || "development";
 const destPath = path.join(__dirname, "dist", nodeEnv);
 
 const targetBrowser = process.env.TARGET_BROWSER;
-
-const extensionReloaderPlugin =
-  nodeEnv === "development"
-    ? new ExtensionReloader({
-        port: 9090,
-        reloadPage: true,
-        entries: {
-          // TODO: reload manifest on update
-          contentScript: "contentScript",
-          background: "background",
-          inpageScript: "inpageScript",
-          extensionPage: ["popup", "options", "welcome", "lsat"],
-        },
-      })
-    : () => {
-        this.apply = () => {};
-      };
 
 const getExtensionFileType = (browser) => {
   if (browser === "opera") {
@@ -47,7 +30,7 @@ const getExtensionFileType = (browser) => {
 };
 
 module.exports = {
-  devtool: "inline-source-map", // https://github.com/webpack/webpack/issues/1194#issuecomment-560382342
+  devtool: 'inline-source-map',
 
   stats: {
     all: false,
@@ -59,30 +42,15 @@ module.exports = {
   mode: nodeEnv,
 
   entry: {
-    manifest: path.join(sourcePath, "manifest.json"),
-    background: path.join(
-      sourcePath,
-      "extension",
-      "background-script",
-      "index.js"
-    ),
-    contentScript: path.join(
-      sourcePath,
-      "extension",
-      "content-script",
-      "index.js"
-    ),
-    inpageScript: path.join(
-      sourcePath,
-      "extension",
-      "inpage-script",
-      "index.js"
-    ),
-    popup: path.join(sourcePath, "app", "components", "Popup", "index.jsx"),
-    prompt: path.join(sourcePath, "app", "components", "Prompt", "index.jsx"),
-    options: path.join(sourcePath, "app", "components", "Options", "index.jsx"),
-    welcome: path.join(sourcePath, "app", "components", "Welcome", "index.jsx"),
-    lsat: path.join(sourcePath, "extension", "ln", "lsat", "index.js"),
+    manifest: './src/manifest.json',
+    background: './src/extension/background-script/index.js',
+    contentScript: './src/extension/content-script/index.js',
+    inpageScript:'./src/extension/inpage-script/index.js',
+    popup: './src/app/components/Popup/index.jsx',
+    prompt: './src/app/components/Prompt/index.jsx',
+    options: './src/app/components/Options/index.jsx',
+    welcome: './src/app/components/Welcome/index.jsx',
+    lsat: './src/extension/ln/lsat/index.js',
   },
 
   output: {
@@ -93,9 +61,11 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx", ".json"],
     alias: {
-      "webextension-polyfill": path.resolve(
-        path.join(__dirname, "node_modules", "webextension-polyfill")
-      ),
+      'webextension-polyfill': 'webextension-polyfill',
+      Buffer: "buffer",
+      process: "process/browser",
+      crypto: 'crypto-browserify',
+      assert: 'assert',
     },
   },
 
@@ -152,10 +122,15 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.ProvidePlugin({
+      Buffer: ['buffer', 'Buffer'],
+      process: ['process']
+    }),
     // Plugin to not generate js bundle for manifest entry
     new WextManifestWebpackPlugin(),
     // Generate sourcemaps
-    new webpack.SourceMapDevToolPlugin({ filename: false }),
+    // TODO: reenable
+    // new webpack.SourceMapDevToolPlugin({ filename: false }),
     // environmental variables
     new webpack.EnvironmentPlugin(["NODE_ENV", "TARGET_BROWSER"]),
     // delete previous build files
@@ -212,23 +187,21 @@ module.exports = {
     // copy static assets
     new CopyWebpackPlugin({
       patterns: [{ from: "static/assets", to: "assets" }],
-    }),
-    // plugin to enable browser reloading in development mode
-    extensionReloaderPlugin,
+    })
   ],
 
   optimization: {
     minimize: true,
     minimizer: [
-      new TerserPlugin({
-        parallel: true,
-        terserOptions: {
-          format: {
-            comments: false,
-          },
-        },
-        extractComments: false,
-      }),
+      // new TerserPlugin({
+        // parallel: true,
+        // terserOptions: {
+          // format: {
+            // comments: false,
+          // },
+        // },
+        // extractComments: false,
+      // }),
       new OptimizeCSSAssetsPlugin({
         cssProcessorPluginOptions: {
           preset: ["default", { discardComments: { removeAll: true } }],
