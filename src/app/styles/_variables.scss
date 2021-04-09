@@ -18,7 +18,21 @@ $bold: 700;
 $exbold: 800;
 $exblack: 900;
 
+// colors
+$lightBlue: #1890ff;
+
 // other variables
 .d-none {
   display: none !important;
 }
+
+.d-flex {
+  display: flex !important;
+}
+
+// required for rem usage
+html {
+  font-size: 125%
+}
+
+

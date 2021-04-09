@@ -1,0 +1,43 @@
+.account--container {
+  max-width: 350px;
+
+  .account--container__upper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .account--container__name {
+      align-items: baseline;
+      width: 100%;
+      justify-content: center;
+
+      .ant-avatar {
+        margin-right: 0.5rem;
+      }
+    }
+    .account--container__edit {
+      position: relative;
+      bottom: -5px;
+    }
+  }
+
+  .transactions--container__item {
+    align-items: flex-start;
+  }
+
+
+  h1 {
+    font-size: 1.3rem;
+    margin-bottom: 0;
+  }
+  h2{
+    font-size: 1.0rem;
+    position: relative;
+    top: 2px;
+    padding-right: 0.25em;
+  }
+  h3 {
+    font-size: 0.9rem;
+    color: rbga(72, 72, 72, 0.8);
+  }
+}
