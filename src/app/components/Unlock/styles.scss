@@ -1,0 +1,25 @@
+.unlock--container {
+  min-height: 40ex;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+
+  .unlock--container__icon {
+    font-size: 86px;
+    padding-bottom: 1ex;
+  }
+
+  .ant-input-password {
+    margin-bottom: 2.25ex;
+
+    .ant-input {
+      line-height: 42px;
+    }
+  }
+
+  button {
+    margin-top: 0.5ex;
+  }
+}
+

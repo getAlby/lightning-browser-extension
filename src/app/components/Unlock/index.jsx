@@ -1,5 +1,7 @@
 import React from "react";
 import { createHashHistory } from "history";
+import { Button, Input } from "antd";
+import { UnlockTwoTone } from "@ant-design/icons";
 
 import utils from "../../../common/lib/utils";
 
@@ -33,20 +35,26 @@ class Unlock extends React.Component {
 
   render() {
     return (
-      <div>
+      <div class="unlock--container">
+        <UnlockTwoTone
+          className="unlock--container__icon"
+          twoToneColor="#1890ff"
+        />
         <h2>Unlock:</h2>
-        <input
+        <Input.Password
+          placeholder="Password"
+          size="small"
           type="text"
           value={this.state.password}
           onChange={(event) => this.handlePasswordChange(event)}
         />
-        <button
+        <Button
           onClick={(e) => {
             this.unlock();
           }}
         >
           Unlock
-        </button>
+        </Button>
         <p>{this.state.error}</p>
       </div>
     );
