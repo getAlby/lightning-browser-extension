@@ -5,7 +5,6 @@ const TerserPlugin = require("terser-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const ExtensionReloader = require("webpack-extension-reloader");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
@@ -17,23 +16,6 @@ const nodeEnv = process.env.NODE_ENV || "development";
 const destPath = path.join(__dirname, "dist", nodeEnv);
 
 const targetBrowser = process.env.TARGET_BROWSER;
-
-const extensionReloaderPlugin =
-  nodeEnv === "development"
-    ? new ExtensionReloader({
-        port: 9090,
-        reloadPage: true,
-        entries: {
-          // TODO: reload manifest on update
-          contentScript: "contentScript",
-          background: "background",
-          inpageScript: "inpageScript",
-          extensionPage: ["popup", "options", "welcome", "lsat"],
-        },
-      })
-    : () => {
-        this.apply = () => {};
-      };
 
 const getExtensionFileType = (browser) => {
   if (browser === "opera") {
@@ -48,9 +30,7 @@ const getExtensionFileType = (browser) => {
 };
 
 module.exports = {
-  // TODO: check if this can be replaced /reenabled
-  // causes copiler error in webpack 5
-  // devtool: "inline-source-map", // https://github.com/webpack/webpack/issues/1194#issuecomment-560382342
+  devtool: false,
 
   stats: {
     all: false,
@@ -82,8 +62,10 @@ module.exports = {
     extensions: [".js", ".jsx", ".json"],
     alias: {
       'webextension-polyfill': 'webextension-polyfill',
+      Buffer: "buffer",
+      process: "process/browser",
       crypto: 'crypto-browserify',
-      assert: 'assert'
+      assert: 'assert',
     },
   },
 
@@ -140,6 +122,10 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.ProvidePlugin({
+      Buffer: ['buffer', 'Buffer'],
+      process: ['process']
+    }),
     // Plugin to not generate js bundle for manifest entry
     new WextManifestWebpackPlugin(),
     // Generate sourcemaps
@@ -201,9 +187,7 @@ module.exports = {
     // copy static assets
     new CopyWebpackPlugin({
       patterns: [{ from: "static/assets", to: "assets" }],
-    }),
-    // plugin to enable browser reloading in development mode
-    extensionReloaderPlugin,
+    })
   ],
 
   optimization: {
