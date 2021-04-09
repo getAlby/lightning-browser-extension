@@ -1,3 +1,4 @@
+import browser from "webextension-polyfill";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
 import injectScript from "./injectScript";

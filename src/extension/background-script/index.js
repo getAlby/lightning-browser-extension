@@ -1,3 +1,4 @@
+import browser from "webextension-polyfill";
 import utils from "../../common/lib/utils";
 import Settings from "../../common/lib/settings";
 import Accounts from "../../common/lib/accounts";
