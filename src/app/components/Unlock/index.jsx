@@ -4,9 +4,8 @@ import { Button, Input } from "antd";
 import { UnlockTwoTone } from "@ant-design/icons";
 
 import utils from "../../../common/lib/utils";
-
+import variables from "./variables.module.scss";
 import "./styles.scss";
-
 class Unlock extends React.Component {
   constructor(props) {
     super(props);
@@ -38,7 +37,7 @@ class Unlock extends React.Component {
       <div class="unlock--container">
         <UnlockTwoTone
           className="unlock--container__icon"
-          twoToneColor="#1890ff"
+          twoToneColor={variables.lightBlue}
         />
         <h2>Unlock:</h2>
         <Input.Password
