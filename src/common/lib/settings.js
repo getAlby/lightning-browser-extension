@@ -6,7 +6,7 @@ class Settings {
       storageName: "settings",
       defaults: {
         debug: true,
-        enableLsats: true,
+        enableLsats: false,
         salt: "",
       },
     });
