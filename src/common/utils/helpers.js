@@ -27,3 +27,7 @@ export const getFiatFromSatoshi = async (currency, satoshi) => {
   const amount = Math.round((satoshi / 100000000) * exchangeRate);
   return amount;
 };
+
+export const calcFiatFromSatoshi = (exchangeRate, satoshi) => {
+  return Math.round((satoshi / 100000000) * exchangeRate);
+};

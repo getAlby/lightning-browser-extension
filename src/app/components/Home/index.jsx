@@ -3,8 +3,9 @@ import browser from "webextension-polyfill";
 
 import utils from "../../../common/lib/utils";
 import { getFiatFromSatoshi } from "../../../common/utils/helpers";
-import { Avatar, Empty, Divider, Tooltip } from "antd";
+import { Avatar, Divider, Tooltip } from "antd";
 import { PropertySafetyTwoTone, EditOutlined } from "@ant-design/icons";
+import Transactions from "./Transactions";
 import "./styles.scss";
 
 class Home extends React.Component {
@@ -13,9 +14,14 @@ class Home extends React.Component {
     this.state = {
       alias: "",
       currency: "USD",
+      balance: null,
       balanceFiat: null,
       transactions: {},
     };
+  }
+  get exchangeRate() {
+    if (!this.state.balance) return null;
+    return (this.state.balanceFiat / this.state.balance) * 100000000;
   }
 
   componentDidMount() {
@@ -31,7 +37,7 @@ class Home extends React.Component {
       this.setState({ transactions: result?.transactions });
     });
     utils.call("getBalance").then(async (result) => {
-      this.setState({ balance: result.balance });
+      this.setState({ balance: result?.balance });
       this.setState({
         balanceFiat: await getFiatFromSatoshi(
           this.state.currency,
@@ -64,7 +70,10 @@ class Home extends React.Component {
         </div>
         <Divider />
         <div>
-          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+          <Transactions
+            exchangeRate={this.exchangeRate}
+            transactions={this.state.transactions}
+          />
         </div>
       </div>
     );
