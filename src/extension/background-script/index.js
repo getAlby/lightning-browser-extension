@@ -33,6 +33,7 @@ browser.storage.onChanged.addListener((changes) => {
   // if the accounts change we initialize a new connector
   // this also requires the user to unlock the account again
   if (changes.accounts) {
+    console.log("Accounts changed, refreshing connector");
     initConnector();
   }
   // Update the general settings in the current connector settings

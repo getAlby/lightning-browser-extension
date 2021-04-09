@@ -1,44 +1,86 @@
 import React from "react";
 
-import utils from "../../../common/lib/utils";
+import { createHashHistory } from "history";
+import { HashRouter, Switch, Route } from "react-router-dom";
+
+import Home from "./Home";
+import LndSetup from "./LndSetup";
+import LndConfirm from "./LndConfirm";
+import Success from "./Success";
+
 import Accounts from "../../../common/lib/accounts";
-import Allowances from "../../../common/lib/allowances";
-import Settings from "../../../common/lib/settings";
 
 class Welcome extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
-    this.accounts = new Accounts();
-    this.settings = new Settings();
-    this.allowances = new Allowances();
+    // this.state = {
+    // password: null
+    // };
+    this.history = createHashHistory();
+    this.accountsStore = new Accounts();
   }
 
-  componentDidMount() {}
+  state = {
+    password: null,
+    lndName: null,
+    lndMacaroon: null,
+    lndUrl: null,
+  };
 
-  reset() {
-    //browser.storage.sync.set({ accounts: {} });
-    //browser.storage.sync.set({ settings: {} });
-    //browser.storage.sync.set({ allowances: {} });
-    this.accounts.reset();
-    this.allowances.reset();
-    this.settings.reset();
-    alert("Done, you can start over");
-    utils.openPage("Options.html");
+  setLndConfig(config) {
+    console.log("setting lnd config", config);
+    this.setState((state) => {
+      return {
+        lndName: config.lndName ?? null,
+        lndMacaroon: config.lndMacaroon ?? null,
+        lndUrl: config.lndUrl ?? null,
+      };
+    });
+  }
+  setPassword(pw) {
+    console.log("setting password", pw);
+    this.setState((state) => {
+      return {
+        password: pw,
+      };
+    });
+  }
+
+  componentDidMount() {
+    this.accountsStore.reset();
   }
 
   render() {
     return (
-      <div>
-        <p>Hallo</p>
-        <span
-          onClick={() => {
-            this.reset();
-          }}
-        >
-          Reset Everything
-        </span>
-      </div>
+      <HashRouter>
+        <Switch>
+          <Route exact path="/" render={(props) => <Home />} />
+          <Route exact path="/password" render={(props) => <Home />} />
+          <Route
+            exact
+            path="/lnd/setup"
+            render={(props) => (
+              <LndSetup
+                setLndConfig={(config) => this.setLndConfig(config)}
+                title={`Props through component`}
+                setPassword={(pw) => this.setPassword(pw)}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/lnd/confirm"
+            render={(props) => (
+              <LndConfirm
+                lndName={this.state.lndName}
+                lndMacaroon={this.state.lndMacaroon}
+                lndUrl={this.state.lndUrl}
+              />
+            )}
+          />
+          <Route exact path="/success" render={(props) => <Success />} />
+        </Switch>
+      </HashRouter>
     );
   }
 }
