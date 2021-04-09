@@ -1,16 +1,16 @@
 import React from "react";
 import { calcFiatFromSatoshi } from "../../../common/utils/helpers";
+import { formatRelative, subDays } from "date-fns";
+
 import "./styles.scss";
 
-import { Empty, List, Avatar, Icon } from "antd";
+import { Empty, List, Avatar, Icon, Tooltip } from "antd";
 import { StockOutlined } from "@ant-design/icons";
 
 class Transactions extends React.Component {
   constructor(props) {
     super(props);
   }
-
-  componentDidMount() {}
 
   render() {
     if (this.props.transactions?.length > 0) {
@@ -20,7 +20,7 @@ class Transactions extends React.Component {
             itemLayout="horizontal"
             dataSource={this.props.transactions}
             renderItem={(item) => (
-              <List.Item>
+              <List.Item className="transactions--container__item">
                 <List.Item.Meta
                   avatar={<Avatar icon={<StockOutlined />} />}
                   title={item.amount + " " + "Satoshi"}
@@ -33,6 +33,17 @@ class Transactions extends React.Component {
                     "USD"
                   }
                 />
+                {/* TODO: move to function*/}
+                <Tooltip
+                  placement="top"
+                  title={new Date(item.time_stamp * 1000).toString()}
+                >
+                  {/* setting 1.1.2000 as a fallback */}
+                  {formatRelative(
+                    new Date(parseInt(item.time_stamp) * 1000 ?? 946681200),
+                    new Date()
+                  )}
+                </Tooltip>
               </List.Item>
             )}
           />
