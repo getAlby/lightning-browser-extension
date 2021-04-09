@@ -34,7 +34,7 @@ const Options = () => {
   const [allowances, setAllowances] = useState({});
   const [currentAccount, setCurrentAccount] = useState("");
   const [password, setPassword] = useState("");
-  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [showPasswordModal, setShowPasswordModal] = useState(true);
 
   useEffect(() => {
     return load();
