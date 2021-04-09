@@ -43,6 +43,7 @@
     "@babel/runtime": "^7.12.5",
     "advanced-css-reset": "^1.2.2",
     "antd": "^4.12.2",
+    "axios": "^0.21.1",
     "crypto-js": "^4.0.0",
     "invoices": "^1.1.5",
     "lsat-js": "^1.0.7",

@@ -1,3 +1,5 @@
+const axios = require("axios");
+
 export const normalizeAccountsData = (data = {}) => {
   const accountDataKeys = Object.keys(data);
 
@@ -17,4 +19,11 @@ export const normalizeSettingsData = (data = {}) => {
     title: item,
     description: item.name,
   }));
+};
+
+export const getFiatFromSatoshi = async (currency, satoshi) => {
+  const res = await axios.get("https://blockchain.info/ticker");
+  let exchangeRate = res?.data[currency ?? "USD"]?.sell;
+  const amount = Math.round((satoshi / 100000000) * exchangeRate);
+  return amount;
 };
