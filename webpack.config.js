@@ -1,7 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
 const FilemanagerPlugin = require("filemanager-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
@@ -9,9 +8,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
-
 const viewsPath = path.join(__dirname, "static", "views");
-// const sourcePath = path.join(__dirname, "source");
 const nodeEnv = process.env.NODE_ENV || "development";
 const destPath = path.join(__dirname, "dist", nodeEnv);
 
@@ -30,7 +27,7 @@ const getExtensionFileType = (browser) => {
 };
 
 module.exports = {
-  devtool: 'inline-source-map',
+  devtool: "inline-source-map",
 
   stats: {
     all: false,
@@ -42,15 +39,15 @@ module.exports = {
   mode: nodeEnv,
 
   entry: {
-    manifest: './src/manifest.json',
-    background: './src/extension/background-script/index.js',
-    contentScript: './src/extension/content-script/index.js',
-    inpageScript:'./src/extension/inpage-script/index.js',
-    popup: './src/app/components/Popup/index.jsx',
-    prompt: './src/app/components/Prompt/index.jsx',
-    options: './src/app/components/Options/index.jsx',
-    welcome: './src/app/components/Welcome/index.jsx',
-    lsat: './src/extension/ln/lsat/index.js',
+    manifest: "./src/manifest.json",
+    background: "./src/extension/background-script/index.js",
+    contentScript: "./src/extension/content-script/index.js",
+    inpageScript: "./src/extension/inpage-script/index.js",
+    popup: "./src/app/components/Popup/index.jsx",
+    prompt: "./src/app/components/Prompt/index.jsx",
+    options: "./src/app/components/Options/index.jsx",
+    welcome: "./src/app/components/Welcome/index.jsx",
+    lsat: "./src/extension/ln/lsat/index.js",
   },
 
   output: {
@@ -61,11 +58,11 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx", ".json"],
     alias: {
-      'webextension-polyfill': 'webextension-polyfill',
+      "webextension-polyfill": "webextension-polyfill",
       Buffer: "buffer",
       process: "process/browser",
-      crypto: 'crypto-browserify',
-      assert: 'assert',
+      crypto: "crypto-browserify",
+      assert: "assert",
     },
   },
 
@@ -123,8 +120,8 @@ module.exports = {
 
   plugins: [
     new webpack.ProvidePlugin({
-      Buffer: ['buffer', 'Buffer'],
-      process: ['process']
+      Buffer: ["buffer", "Buffer"],
+      process: ["process"],
     }),
     // Plugin to not generate js bundle for manifest entry
     new WextManifestWebpackPlugin(),
@@ -187,20 +184,20 @@ module.exports = {
     // copy static assets
     new CopyWebpackPlugin({
       patterns: [{ from: "static/assets", to: "assets" }],
-    })
+    }),
   ],
 
   optimization: {
     minimize: true,
     minimizer: [
       // new TerserPlugin({
-        // parallel: true,
-        // terserOptions: {
-          // format: {
-            // comments: false,
-          // },
-        // },
-        // extractComments: false,
+      // parallel: true,
+      // terserOptions: {
+      // format: {
+      // comments: false,
+      // },
+      // },
+      // extractComments: false,
       // }),
       new OptimizeCSSAssetsPlugin({
         cssProcessorPluginOptions: {
