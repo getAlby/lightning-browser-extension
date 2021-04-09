@@ -3,8 +3,8 @@ import browser from "webextension-polyfill";
 
 import utils from "../../../common/lib/utils";
 import { getFiatFromSatoshi } from "../../../common/utils/helpers";
-import { Avatar } from "antd";
-import { PropertySafetyTwoTone } from "@ant-design/icons";
+import { Avatar, Empty, Divider, Tooltip } from "antd";
+import { PropertySafetyTwoTone, EditOutlined } from "@ant-design/icons";
 import "./styles.scss";
 
 class Home extends React.Component {
@@ -40,33 +40,26 @@ class Home extends React.Component {
     return (
       <div class="account--container">
         <div class="account--container__upper">
-          <Avatar
-            size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
-            icon={<PropertySafetyTwoTone />}
-          />
-          {this.state.currentAccount}
-          <h2>{this.state.alias}</h2>
+          <div class="account--container__name d-flex">
+            <Avatar size="45" icon={<PropertySafetyTwoTone />} />
+            <h2>{this.state.alias}</h2>
+            <Tooltip placement="topRight" title="Edit Account">
+              <EditOutlined
+                className="account--container__edit"
+                onClick={() => {
+                  return utils.openPage("options.html");
+                }}
+              />
+            </Tooltip>
+          </div>
           <h1>{this.state.balance} Satoshi</h1>
           <h3>
             {this.state.balanceFiat} {this.state.currency}
           </h3>
-          <button
-            id="options__button"
-            type="button"
-            onClick={() => {
-              return utils.openPage("options.html");
-            }}
-          >
-            Options Page
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              return utils.openPage("welcome.html");
-            }}
-          >
-            Welcome
-          </button>
+        </div>
+        <Divider />
+        <div>
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
         </div>
       </div>
     );

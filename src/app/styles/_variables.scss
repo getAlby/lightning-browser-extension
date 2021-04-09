@@ -22,3 +22,12 @@ $exblack: 900;
 .d-none {
   display: none !important;
 }
+
+.d-flex {
+  display: flex !important;
+}
+
+// required for rem usage
+html {
+  font-size: 125%
+}
