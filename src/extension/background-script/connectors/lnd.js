@@ -61,6 +61,12 @@ class Lnd extends Base {
     });
   };
 
+  getTransactions = () => {
+    return this.request("GET", "/v1/transactions", undefined, {
+      transactions: [],
+    });
+  };
+
   async request(method, path, args, defaultValues) {
     let body = null;
     let query = "";

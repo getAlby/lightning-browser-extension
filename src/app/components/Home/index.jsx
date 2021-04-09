@@ -14,6 +14,7 @@ class Home extends React.Component {
       alias: "",
       currency: "USD",
       balanceFiat: null,
+      transactions: {},
     };
   }
 
@@ -22,8 +23,12 @@ class Home extends React.Component {
       this.setState({ currentAccount: result.currentAccount });
     });
     utils.call("getInfo").then((info) => {
-      console.log(info);
-      this.setState({ alias: info.alias });
+      console.log("info", info);
+      this.setState({ alias: info?.alias });
+    });
+    utils.call("getTransactions").then((result) => {
+      console.log(result);
+      this.setState({ transactions: result?.transactions });
     });
     utils.call("getBalance").then(async (result) => {
       this.setState({ balance: result.balance });
@@ -43,7 +48,7 @@ class Home extends React.Component {
           <div class="account--container__name d-flex">
             <Avatar size="45" icon={<PropertySafetyTwoTone />} />
             <h2>{this.state.alias}</h2>
-            <Tooltip placement="topRight" title="Edit Account">
+            <Tooltip placement="top" title="Edit Account">
               <EditOutlined
                 className="account--container__edit"
                 onClick={() => {

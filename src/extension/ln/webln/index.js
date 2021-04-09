@@ -21,6 +21,13 @@ export default class WebLNProvider {
     return this.execute("getInfo");
   }
 
+  getTransactions() {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling getInfo");
+    }
+    return this.execute("getTransactions");
+  }
+
   sendPayment(paymentRequest) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling sendPayment");
