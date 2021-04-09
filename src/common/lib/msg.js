@@ -1,3 +1,4 @@
+import browser from "webextension-polyfill";
 
 const msg = {
   request: (type, args, overwrites) => {

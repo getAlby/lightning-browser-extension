@@ -1,3 +1,4 @@
+import browser from "webextension-polyfill";
 import qs from "query-string";
 import { Lsat } from "lsat-js";
 import utils from "../../../common/lib/utils";
