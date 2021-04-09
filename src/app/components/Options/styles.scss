@@ -1,0 +1,77 @@
+@import "../../styles/fonts";
+@import "../../styles/reset";
+@import "../../styles/variables";
+
+@import "~antd/dist/antd.css";
+@import "~webext-base-css/webext-base.css";
+
+body {
+  background-color: $white;
+}
+
+.ant-layout {
+  background: $white;
+
+  .ant-layout-header {
+    font-size: 22px;
+    color: #ffffff;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .ant-layout-content {
+    /* Tabs custom styling start */
+    .ant-tabs {
+      .ant-tabs-nav {
+        .ant-tabs-nav-wrap {
+          .ant-tabs-nav-list {
+            width: 100%;
+
+            .ant-tabs-tab {
+              align-items: center;
+              width: calc(100% / 3);
+              justify-content: center;
+            }
+          }
+        }
+      }
+
+      .ant-tabs-content-holder {
+        padding: 0 16px;
+      }
+    }
+    /* Tabs custom styling end */
+
+    /* Form custom styling start */
+    .ant-form {
+      .ant-form-item {
+        .ant-form-item-label {
+          text-align: left;
+        }
+      }
+    }
+    /* Form custom styling end */
+
+    /* list custon styling start */
+    .ant-list {
+      .ant-list-items {
+        .ant-list-item {
+          border-bottom-color: #dcdcdc;
+
+          .ant-list-item-meta {
+            .ant-list-item-meta-content {
+              .ant-list-item-meta-description {
+                word-break: break-all;
+              }
+            }
+          }
+        }
+      }
+    }
+    /* list custon styling end */
+  }
+}
+
+.reset-button-wrapper {
+  margin-bottom: 1em;
+}

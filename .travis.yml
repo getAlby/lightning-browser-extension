@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+ - "stable"
+cache: yarn
+before_script:
+  - yarn install
+script:
+ - yarn lint
+ - yarn build
+ - yarn run test

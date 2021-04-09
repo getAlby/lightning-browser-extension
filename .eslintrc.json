@@ -1,7 +1,8 @@
 {
-	"extends": [ "react-app" ],
+	"extends": [ "react-app", "plugin:prettier/recommended" ],
 	"parserOptions": {
-		"sourceType": "module"
+		"sourceType": "module",
+		"ecmaVersion": 2021
 	},
 	"env": {
 		"browser": true,

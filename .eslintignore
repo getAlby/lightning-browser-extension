@@ -1,4 +1,4 @@
 node_modules/
-extension/
+dist/
 .yarn/
 .pnp.js

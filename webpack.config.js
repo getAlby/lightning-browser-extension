@@ -10,10 +10,11 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
-const viewsPath = path.join(__dirname, "views");
-const sourcePath = path.join(__dirname, "source");
-const destPath = path.join(__dirname, "extension");
+const viewsPath = path.join(__dirname, "static", "views");
+const sourcePath = path.join(__dirname, "src");
 const nodeEnv = process.env.NODE_ENV || "development";
+const destPath = path.join(__dirname, "dist", nodeEnv);
+
 const targetBrowser = process.env.TARGET_BROWSER;
 
 const extensionReloaderPlugin =
@@ -59,14 +60,29 @@ module.exports = {
 
   entry: {
     manifest: path.join(sourcePath, "manifest.json"),
-    background: path.join(sourcePath, "Background", "index.js"),
-    contentScript: path.join(sourcePath, "ContentScript", "index.js"),
-    inpageScript: path.join(sourcePath, "InpageScript", "index.js"),
-    popup: path.join(sourcePath, "Popup", "index.js"),
-    prompt: path.join(sourcePath, "Prompt", "index.js"),
-    options: path.join(sourcePath, "Options", "index.js"),
-    welcome: path.join(sourcePath, "Welcome", "index.js"),
-    lsat: path.join(sourcePath, "Lsat", "index.js"),
+    background: path.join(
+      sourcePath,
+      "extension",
+      "background-script",
+      "index.js"
+    ),
+    contentScript: path.join(
+      sourcePath,
+      "extension",
+      "content-script",
+      "index.js"
+    ),
+    inpageScript: path.join(
+      sourcePath,
+      "extension",
+      "inpage-script",
+      "index.js"
+    ),
+    popup: path.join(sourcePath, "app", "components", "Popup", "index.jsx"),
+    prompt: path.join(sourcePath, "app", "components", "Prompt", "index.jsx"),
+    options: path.join(sourcePath, "app", "components", "Options", "index.jsx"),
+    welcome: path.join(sourcePath, "app", "components", "Welcome", "index.jsx"),
+    lsat: path.join(sourcePath, "extension", "ln", "lsat", "index.js"),
   },
 
   output: {
@@ -145,10 +161,12 @@ module.exports = {
     // delete previous build files
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: [
-        path.join(process.cwd(), `extension/${targetBrowser}`),
+        path.join(process.cwd(), "dist", nodeEnv, targetBrowser),
         path.join(
           process.cwd(),
-          `extension/${targetBrowser}.${getExtensionFileType(targetBrowser)}`
+          "dist",
+          nodeEnv,
+          `${targetBrowser}.${getExtensionFileType(targetBrowser)}`
         ),
       ],
       cleanStaleWebpackAssets: false,
@@ -193,7 +211,7 @@ module.exports = {
     new MiniCssExtractPlugin({ filename: "css/[name].css" }),
     // copy static assets
     new CopyWebpackPlugin({
-      patterns: [{ from: "source/assets", to: "assets" }],
+      patterns: [{ from: "static/assets", to: "assets" }],
     }),
     // plugin to enable browser reloading in development mode
     extensionReloaderPlugin,
