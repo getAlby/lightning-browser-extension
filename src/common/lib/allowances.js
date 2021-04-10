@@ -43,6 +43,7 @@ class Allowances {
   getAllowance(messageOrDomain) {
     const hash = this.getAllowanceKey(messageOrDomain);
     const allowance = this.allowances[hash] || ALLOWANCE_DEFAULTS;
+    allowance.budgetLeft = allowance.budget - allowance.spent;
     return allowance;
   }
 

@@ -2,6 +2,7 @@ import browser from "webextension-polyfill";
 import utils from "../../common/lib/utils";
 import Settings from "../../common/lib/settings";
 import Accounts from "../../common/lib/accounts";
+import Allowances from "../../common/lib/allowances";
 import connectors from "./connectors";
 
 import initLsatInterceptor from "./lsatInterceptor";
@@ -10,6 +11,8 @@ let currentUnlockPassword; // TODO: rethink this
 let connector;
 let accounts = new Accounts();
 let settings = new Settings();
+let allowances = new Allowances();
+
 const initConnector = async () => {
   await accounts.load(); // load latest accounts from storage
   const account = accounts.current;
@@ -37,7 +40,11 @@ browser.storage.onChanged.addListener((changes) => {
   if (connector && changes.settings) {
     connector.init();
   }
-  // TODO: what to do with allowances?
+  // refresh allowances
+  if (changes.allowances) {
+    // load the allowances and update the browser action icon with new details (e.g. updated amount)
+    allowances.load().then(updateIcon);
+  }
 });
 
 const debugLogger = (message, sender) => {
@@ -85,10 +92,38 @@ const handleConnectorCalls = (message, sender, sendResponse) => {
   return call;
 };
 
+const updateIcon = (_) => {
+  browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+    const currentTab = tabs[0];
+    // check if we have a tab and that we also can access the url (we get called for all tabs but we only get the URL for the current tab)
+    if (!currentTab || !currentTab.url) {
+      return;
+    }
+    // only check for pages that start with http/https
+    if (!currentTab.url.startsWith("http")) {
+      return;
+    }
+    const allowance = allowances.getAllowance(currentTab.url);
+    console.log(allowance);
+    if (allowance.budget > 0) {
+      browser.browserAction.setBadgeText({
+        text: `${allowance.budgetLeft}`,
+        tabId: currentTab.id,
+      });
+      browser.browserAction.setTitle({
+        title: `Allowance enabled: ${allowance.budgetLeft} Satoshis left`,
+        tabId: currentTab.id,
+      });
+    }
+  });
+};
+
 async function init() {
   console.log("Loading background script");
   await settings.load();
   await accounts.load();
+  await allowances.load();
+
   // initialize a connector for the current account
   await initConnector();
   browser.runtime.onMessage.addListener(debugLogger);
@@ -96,6 +131,14 @@ async function init() {
   browser.runtime.onMessage.addListener(handleConnectorCalls);
 
   browser.runtime.onInstalled.addListener(handleInstalled);
+
+  // Update extension icon depending on the allowance setting for the current tab
+  // listen to tab URL changes
+  browser.tabs.onUpdated.addListener(updateIcon);
+  // listen to tab switching
+  browser.tabs.onActivated.addListener(updateIcon);
+  // listen for window switching
+  browser.windows.onFocusChanged.addListener(updateIcon);
 
   if (settings.enableLsats) {
     await browser.storage.sync.set({ lsats: {} });
