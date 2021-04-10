@@ -62,7 +62,7 @@ class Lnd extends Base {
   };
 
   getTransactions = () => {
-    return this.request("GET", "/v1/transactions", undefined, {
+    return this.request("GET", "/v1/payments", undefined, {
       transactions: [],
     });
   };
