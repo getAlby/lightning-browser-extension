@@ -11,7 +11,10 @@ class ConfirmPayment extends React.Component {
     super(props);
     console.log('props', props)
     this.history = createHashHistory();
-    this.state = {};
+    this.state = {
+      budget: null,
+      budgetSet: false
+    };
   }
 
   enable() {
@@ -29,6 +32,7 @@ class ConfirmPayment extends React.Component {
   }
 
   saveBudget() {
+    this.setState({ budgetSaved: true })
     return msg.request(
       "setAllowance",
       { budget: this.state.budget, spent: 0, enabled: true },
@@ -59,15 +63,20 @@ class ConfirmPayment extends React.Component {
                             this.setBudget(event.target.value);
                           }}
                         />
-                          <Button 
-                            onClick={() =>
-                              this.saveBudget()
-                            }
-                            type="dashed" 
-                            danger
-                          >Save Budget</Button>
+                          {!this.state.budgetSaved &&
+                            <Button 
+                              onClick={() =>
+                                this.saveBudget()
+                              }
+                              type="dashed" 
+                              danger
+                            >Save Budget</Button>
+                          }
+                          {this.state.budgetSaved &&
+                            <Button ghost disabled>Budget saved</Button>
+                          }
                         </div>
-                        <div class="ant-result-subtitle">You may set a balance to not be asked for confirmation on payments until this budget is exhausted.</div>
+                        <div class="ant-result-subtitle">You may set a balance to not be asked for confirmation on payments until it is exhausted.</div>
 
                         <div className="confirm-payment--container__actions--budget  d-flex">
                         </div>
