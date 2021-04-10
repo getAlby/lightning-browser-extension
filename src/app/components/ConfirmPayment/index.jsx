@@ -49,7 +49,7 @@ class ConfirmPayment extends React.Component {
         >
             <Result
                 status="info"
-                title={`Please confirm your payment of ${this.props.invoice?.valueSat} Satoshi`}
+                title={`Confirm paying ${this.props.invoice?.valueSat} Satoshi`}
                 subTitle={`You are about to pay an invoice on ${this.props.origin?.domain} for ${this.props.invoice?.desc}`}
                 extra={[
                       <div className="confirm-payment--container__actions d-flex">
