@@ -4,7 +4,7 @@ import { Button, Input, Result } from 'antd';
 
 import msg from "../../../common/lib/msg";
 
-// import "./styles.scss";
+import "./styles.scss";
 
 class ConfirmPayment extends React.Component {
   constructor(props) {
@@ -41,33 +41,50 @@ class ConfirmPayment extends React.Component {
       <div className="d-flex">
         <section 
           id="confirm-payment"
-          className="confirm-payment--container"
+          className="confirm-payment--container d-flex"
         >
             <Result
                 status="info"
-                title="Please confirm your payment of 100 Satoshi"
-                subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
+                title={`Please confirm your payment of ${this.props.invoice?.valueSat} Satoshi`}
+                subTitle={`You are about to pay an invoice on ${this.props.origin?.domain} for ${this.props.invoice?.desc}`}
                 extra={[
-                      <Button type="primary" key="console">
-                                Go Console
-                              </Button>,
-                          <Button key="buy">Buy Again</Button>,
-                        ]}
+                      <div className="confirm-payment--container__actions d-flex">
+                        <div className="d-flex">
+                        <Input
+                          type="text"
+                          name="budget"
+                          placeholder="Budget"
+                          addonBefore="Satoshi"
+                          onChange={(event) => {
+                            this.setBudget(event.target.value);
+                          }}
+                        />
+                          <Button 
+                            onClick={() =>
+                              this.saveBudget()
+                            }
+                            type="dashed" 
+                            danger
+                          >Save Budget</Button>
+                        </div>
+                        <div class="ant-result-subtitle">You may set a balance to not be asked for confirmation on payments until this budget is exhausted.</div>
+
+                        <div className="confirm-payment--container__actions--budget  d-flex">
+                        </div>
+                        <div className="confirm-payment--container__actions--cta  d-flex">
+                          <Button 
+                            type="primary"
+                            onClick={() => this.enable()}
+                            key="console">
+                                    Confirm
+                          </Button>
+                          <Button 
+                            onClick={() => this.reject()}
+                            key="buy">Reject</Button>
+                        </div>
+                      </div>
+                ]}
               />
-            Budget:
-            <Input
-              type="text"
-              name="budget"
-              onChange={(event) => {
-                this.setBudget(event.target.value);
-              }}
-            />
-            <Button onClick={() => this.saveBudget()}>Save Budget</Button>
-          <div className="confirm-payment--container__actions d-flex">
-            <Button onClick={() => this.enable()}>Confirm</Button>
-            <br />
-            <Button onClick={() => this.reject()}>Reject</Button>
-          </div>
         </section>
       </div>
     );
