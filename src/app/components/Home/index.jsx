@@ -59,7 +59,7 @@ class Home extends React.Component {
         }
         const domain = tabs[0].url;
         const allowance = this.allowancesStore.getAllowance(domain);
-        this.setState({allowance});
+        this.setState({ allowance });
       });
     });
   }
