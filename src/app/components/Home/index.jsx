@@ -34,7 +34,7 @@ class Home extends React.Component {
     });
     utils.call("getTransactions").then((result) => {
       console.log(result);
-      this.setState({ transactions: result?.transactions });
+      this.setState({ transactions: result?.payments });
     });
     utils.call("getBalance").then(async (result) => {
       this.setState({ balance: result?.balance });
