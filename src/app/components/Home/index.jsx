@@ -1,6 +1,7 @@
 import React from "react";
 import browser from "webextension-polyfill";
 
+import Allowances from "../../../common/lib/allowances";
 import utils from "../../../common/lib/utils";
 import { getFiatFromSatoshi } from "../../../common/utils/helpers";
 import { Avatar, Divider, Tooltip } from "antd";
@@ -17,7 +18,9 @@ class Home extends React.Component {
       balance: null,
       balanceFiat: null,
       transactions: {},
+      allowance: {},
     };
+    this.allowancesStore = new Allowances();
   }
   get exchangeRate() {
     if (!this.state.balance) return null;
@@ -45,6 +48,20 @@ class Home extends React.Component {
         ),
       });
     });
+    this.loadCurrentAllowance();
+  }
+
+  loadCurrentAllowance() {
+    this.allowancesStore.load().then(() => {
+      browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+        if (!tabs || !tabs[0]) {
+          return;
+        }
+        const domain = tabs[0].url;
+        const allowance = this.allowancesStore.getAllowance(domain);
+        this.setState({allowance});
+      });
+    });
   }
 
   render() {
@@ -66,6 +83,10 @@ class Home extends React.Component {
           <h1>{this.state.balance} Satoshi</h1>
           <h3>
             {this.state.balanceFiat} {this.state.currency}
+          </h3>
+          <h3>
+            Budget: {this.state.allowance?.budget}
+            Spent: {this.state.allowance?.spent}
           </h3>
         </div>
         <Divider />
