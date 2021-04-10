@@ -85,11 +85,11 @@ class ConfirmPayment extends React.Component {
                             type="primary"
                             onClick={() => this.enable()}
                             key="console">
-                                    Confirm
+                                    Confirm Payment
                           </Button>
                           <Button 
                             onClick={() => this.reject()}
-                            key="buy">Reject</Button>
+                            key="buy">Reject Payment</Button>
                         </div>
                       </div>
                 ]}
