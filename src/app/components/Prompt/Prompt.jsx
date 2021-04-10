@@ -8,6 +8,8 @@ import Unlock from "../Unlock";
 import Enable from "../Enable";
 import Loading from "../Loading";
 import ConfirmPayment from "../ConfirmPayment";
+let invoice = require("@node-lightning/invoice");
+
 
 import "./styles.scss";
 
@@ -18,13 +20,18 @@ class Prompt extends React.Component {
     const message = qs.parse(window.location.search);
     let origin = {};
     let args = {};
+    console.log(message)
     if (message.origin) {
       origin = JSON.parse(message.origin);
     }
     if (message.args) {
       args = JSON.parse(message.args);
+      console.log('pro', args.paymentRequest, typeof(args.paymentRequest))
+      var decoded = invoice.decode(args.paymentRequest)
+      console.log(decoded)
     }
     this.state = { origin, args, type: message.type };
+    console.log(message)
   }
 
   componentDidMount() {

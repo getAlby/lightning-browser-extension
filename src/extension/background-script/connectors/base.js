@@ -1,4 +1,3 @@
-import parsePaymentRequest from "invoices";
 import utils from "../../../common/lib/utils";
 import { decryptData } from "../../../common/lib/crypto";
 import Settings from "../../../common/lib/settings";
