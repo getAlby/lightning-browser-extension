@@ -4,7 +4,9 @@ import { encryptData, decryptData } from "../../../common/lib/crypto";
  * Encripted storage module. A passord is required to initialize this module.
  * The storage is under the form of key-value pairs.
  */
-module.exports = function init(password) {
+let cachedStorage = null;
+
+function init(password) {
   if (!password) {
     throw new Error("A passord is required to initialize the storage module!");
   }
@@ -28,11 +30,26 @@ module.exports = function init(password) {
   function set(key, data) {
     // typeof key !== "string"
     const encryptedData = encryptData(data, pwd, salt);
-    return browser.storage.sync.set(key, { data: encryptedData });
+    return browser.storage.sync.set(key, {
+      data: encryptedData,
+    });
   }
 
   return {
     set,
     get,
   };
+}
+
+module.exports = function (password) {
+  if (password) {
+    cachedStorage = init(password);
+    return cachedStorage;
+  }
+  if (cachedStorage) {
+    return cachedStorage;
+  }
+  throw new Error(
+    "Storage module not initialized. A password must be provided!"
+  );
 };
