@@ -1,4 +1,6 @@
-import { encryptData, decryptData } from "../../../common/lib/crypto";
+import browser from "webextension-polyfill";
+
+import { encryptData, decryptData } from "../../common/lib/crypto";
 
 /**
  * Encripted storage module. A passord is required to initialize this module.
@@ -15,6 +17,9 @@ function init(password) {
   const salt = window.crypto.getRandomValues(new Uint32Array(4)).join("");
 
   function get(key) {
+    if (!key || typeof key !== "string") {
+      throw new Error("Invalid key: " + key);
+    }
     return browser.storage.sync.get(key).then((result) => {
       try {
         if (!result) return;
@@ -28,20 +33,34 @@ function init(password) {
   }
 
   function set(key, data) {
-    // typeof key !== "string"
+    if (!key || typeof key !== "string") {
+      throw new Error("Invalid key: " + key);
+    }
     const encryptedData = encryptData(data, pwd, salt);
-    return browser.storage.sync.set(key, {
-      data: encryptedData,
+    return browser.storage.sync.set({
+      [key]: {
+        data: encryptedData,
+      },
     });
   }
 
   return {
     set,
     get,
+    isInitialized: async function () {
+      const isPasswordSet = await browser.storage.sync.get("isPasswordSet");
+      return (
+        isPasswordSet !== undefined &&
+        JSON.stringify(isPasswordSet) !== JSON.stringify({})
+      );
+    },
+    isUnlocked: async function () {
+      return true;
+    },
   };
 }
 
-module.exports = function (password) {
+const dataStore = function (password) {
   if (password) {
     cachedStorage = init(password);
     return cachedStorage;
@@ -49,7 +68,18 @@ module.exports = function (password) {
   if (cachedStorage) {
     return cachedStorage;
   }
-  throw new Error(
-    "Storage module not initialized. A password must be provided!"
-  );
+  return {
+    isInitialized: async function () {
+      const isPasswordSet = await browser.storage.sync.get("isPasswordSet");
+      return (
+        isPasswordSet !== undefined &&
+        JSON.stringify(isPasswordSet) !== JSON.stringify({})
+      );
+    },
+    isUnlocked: async function () {
+      return false;
+    },
+  };
 };
+
+export default dataStore;
