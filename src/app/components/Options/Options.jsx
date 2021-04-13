@@ -1,10 +1,7 @@
 import React from "react";
-// import utils from "../../../common/lib/utils";
 import dataStore from "../../../extension/storage";
-import PasswordManager from "../../../common/lib/password-manager";
 import SetPassword from "../SetPassword";
 import Unlock from "../Unlock";
-// import Accounts from "../../../common/lib/accounts";
 
 // const accountsStore = new Accounts();
 class Options extends React.Component {
@@ -20,20 +17,27 @@ class Options extends React.Component {
     this.setState({ isUnlocked: await storage.isUnlocked() });
   }
 
-  render() {
-    const handlePasswordModalOk = (password) => {
-      console.log("#### handlePasswordModalOk", password);
-      const passwordManager = new PasswordManager();
-      passwordManager.init(password, password);
-      // move forward
-    };
-    console.log("######################### this.state:", this.state);
+  async handlePasswordConfigured() {
+    console.log("######################### handlePasswordConfigured");
+    await this.checkDataStoreState();
+    // move forward
+  }
 
+  async handleUnlock() {
+    console.log("######################### handleUnlock");
+    await this.checkDataStoreState();
+  }
+
+  render() {
     if (!this.state.isInitialized) {
-      return <SetPassword onOk={handlePasswordModalOk}></SetPassword>;
+      return (
+        <SetPassword
+          onOk={this.handlePasswordConfigured.bind(this)}
+        ></SetPassword>
+      );
     }
     if (!this.state.isUnlocked) {
-      return <Unlock next="/home" />;
+      return <Unlock onUnlock={this.handleUnlock.bind(this)} next="/home" />;
     }
     return (
       <div>

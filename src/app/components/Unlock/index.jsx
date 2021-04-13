@@ -3,7 +3,6 @@ import { createHashHistory } from "history";
 import { Button, Input } from "antd";
 import { UnlockTwoTone } from "@ant-design/icons";
 
-import utils from "../../../common/lib/utils";
 import PasswordManager from "../../../common/lib/password-manager";
 import variables from "./variables.module.scss";
 import "./styles.scss";
@@ -29,6 +28,7 @@ class Unlock extends React.Component {
     if (isValidPassword) {
       const next = this.props.next || "/home";
       this.history.push(next);
+      this.props.onUnlock && this.props.onUnlock();
     } else {
       this.setState({ error: "Incorrect Password!" });
     }

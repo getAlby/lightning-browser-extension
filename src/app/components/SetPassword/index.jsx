@@ -10,6 +10,7 @@ const SetPassword = ({ onOk }) => {
     if (values.password === values.confirm) {
       const passwordManager = new PasswordManager();
       await passwordManager.init(values.password, values.confirm);
+      onOk();
     }
   };
 

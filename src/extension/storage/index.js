@@ -1,9 +1,6 @@
 import browser from "webextension-polyfill";
 
-import {
-  encryptData,
-  decryptData
-} from "../../common/lib/crypto";
+import { encryptData, decryptData } from "../../common/lib/crypto";
 
 /**
  * Encripted storage module. A passord is required to initialize this module.
