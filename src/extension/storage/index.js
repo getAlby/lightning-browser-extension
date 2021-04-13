@@ -1,6 +1,9 @@
 import browser from "webextension-polyfill";
 
-import { encryptData, decryptData } from "../../common/lib/crypto";
+import {
+  encryptData,
+  decryptData
+} from "../../common/lib/crypto";
 
 /**
  * Encripted storage module. A passord is required to initialize this module.
@@ -14,7 +17,6 @@ function init(password) {
   }
 
   const pwd = `${password}`;
-  const salt = window.crypto.getRandomValues(new Uint32Array(4)).join("");
 
   function get(key) {
     if (!key || typeof key !== "string") {
@@ -22,9 +24,9 @@ function init(password) {
     }
     return browser.storage.sync.get(key).then((result) => {
       try {
-        if (!result) return;
-        const decriptedData = decryptData(result, pwd, salt);
-        return decriptedData.data;
+        if (!result || !result[key]) return;
+        const decriptedData = decryptData(result[key], pwd);
+        return decriptedData && decriptedData.data;
       } catch (err) {
         console.error(err);
         throw new Error("Cannot decode data from storage. Wrong password!");
@@ -36,18 +38,19 @@ function init(password) {
     if (!key || typeof key !== "string") {
       throw new Error("Invalid key: " + key);
     }
-    const encryptedData = encryptData(data, pwd, salt);
-    return browser.storage.sync.set({
-      [key]: {
-        data: encryptedData,
-      },
-    });
+
+    const encryptedData = encryptData({ data }, pwd);
+    const kV = {
+      [key]: encryptedData,
+    };
+    return browser.storage.sync.set(kV);
   }
 
   return {
     set,
     get,
     isInitialized: async function () {
+      // TODO: recheck
       const isPasswordSet = await browser.storage.sync.get("isPasswordSet");
       return (
         isPasswordSet !== undefined &&
@@ -60,15 +63,14 @@ function init(password) {
   };
 }
 
-const dataStore = function (password) {
-  if (password) {
-    cachedStorage = init(password);
-    return cachedStorage;
-  }
-  if (cachedStorage) {
-    return cachedStorage;
-  }
+function initNullDataStore() {
   return {
+    set: async function () {
+      throw new Error("Operation not permitted. Data Store is not unlocked!");
+    },
+    get: async function () {
+      throw new Error("Operation not permitted. Data Store is not unlocked!");
+    },
     isInitialized: async function () {
       const isPasswordSet = await browser.storage.sync.get("isPasswordSet");
       return (
@@ -80,6 +82,17 @@ const dataStore = function (password) {
       return false;
     },
   };
+}
+
+const dataStore = function (password) {
+  if (password) {
+    cachedStorage = init(password);
+    return cachedStorage;
+  }
+  if (cachedStorage) {
+    return cachedStorage;
+  }
+  return initNullDataStore();
 };
 
 export default dataStore;
