@@ -30,23 +30,24 @@ export const getFiatFromSatoshi = async (currency, satoshi) => {
 
 export const calcFiatFromSatoshi = (exchangeRate, satoshi) => {
   //making sure we have numbers not strings
-  satoshi = parseFloat(satoshi)
-  exchangeRate = parseFloat(exchangeRate)
+  satoshi = parseFloat(satoshi);
+  exchangeRate = parseFloat(exchangeRate);
   // making even more sure we are returning only numbers
-  return +(((satoshi / 100000000) * exchangeRate).toFixed(2));
+  return +((satoshi / 100000000) * exchangeRate).toFixed(2);
 };
 
-
 export const sortByFieldAscending = (data, field) => {
-  return data.sort((a,b) => {
-    let da = a[field], db = b[field];
+  return data.sort((a, b) => {
+    let da = a[field],
+      db = b[field];
     return db - da;
-  })
+  });
 };
 
 export const sortByFieldDescending = (data, field) => {
-  return data.sort((a,b) => {
-    let da = a[field], db = b[field];
+  return data.sort((a, b) => {
+    let da = a[field],
+      db = b[field];
     return da - db;
-  })
+  });
 };

@@ -70,7 +70,7 @@ const handleConnectorCalls = (message, sender, sendResponse) => {
     return Promise.resolve({ error: "No account available" });
   }
 
-  // check for internal vs. public calls
+  //  check for internal vs. public calls
   const call = connector[message.type]({
     args: message.args,
     origin: message.origin,

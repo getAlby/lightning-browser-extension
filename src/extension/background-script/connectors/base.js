@@ -39,7 +39,7 @@ class Base {
     this.unlocked = false;
   }
 
-  isUnlocked(message) {
+  isUnlocked() {
     return Promise.resolve({ data: { unlocked: this.unlocked } });
   }
 

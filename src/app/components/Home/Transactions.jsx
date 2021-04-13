@@ -6,7 +6,7 @@ import "./styles.scss";
 
 import { Empty, List, Avatar, Icon, Tooltip } from "antd";
 import { StockOutlined } from "@ant-design/icons";
-import { sortByFieldAscending } from  '../../../common/utils/helpers.js'
+import { sortByFieldAscending } from "../../../common/utils/helpers.js";
 
 class Transactions extends React.Component {
   constructor(props) {
@@ -19,7 +19,10 @@ class Transactions extends React.Component {
         <div class="transactions--container">
           <List
             itemLayout="horizontal"
-            dataSource={sortByFieldAscending(this.props.transactions, 'creation_date')}
+            dataSource={sortByFieldAscending(
+              this.props.transactions,
+              "creation_date"
+            )}
             renderItem={(item) => (
               <List.Item className="transactions--container__item">
                 <List.Item.Meta
