@@ -2,8 +2,8 @@ import React from "react";
 import passwordManager from "../../../common/lib/password-manager";
 import SetPassword from "../SetPassword";
 import Unlock from "../Unlock";
+import Configurations from "../Configurations";
 
-// const accountsStore = new Accounts();
 class Options extends React.Component {
   constructor(props) {
     super(props);
@@ -27,7 +27,6 @@ class Options extends React.Component {
   }
 
   render() {
-    console.log("this.state", this.state);
     if (this.state.isInitialized === false) {
       return (
         <SetPassword
@@ -39,11 +38,7 @@ class Options extends React.Component {
       return <Unlock onUnlock={this.handleUnlock.bind(this)} />;
     }
     if (this.state.isInitialized === true && this.state.isUnlocked === true) {
-      return (
-        <div>
-          <section id="options">Options</section>
-        </div>
-      );
+      return <Configurations />;
     }
     return <span>Loading...</span>;
   }

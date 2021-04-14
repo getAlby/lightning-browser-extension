@@ -14,8 +14,6 @@ import LnBitsForm from "../LnBits";
 import NativeConnectionForm from "../NativeConnection";
 
 import ListData from "../ListData";
-import SetPassword from "../SetPassword";
-
 import { normalizeAccountsData } from "../../../common/utils/helpers";
 
 import "./styles.scss";
@@ -28,13 +26,11 @@ const accountsStore = new Accounts();
 const settingsStore = new Settings();
 const allowancesStore = new Allowances();
 
-const Options = () => {
+const Configurations = () => {
   const [accounts, setAccounts] = useState({});
   const [settings, setSettings] = useState({});
   const [allowances, setAllowances] = useState({});
   const [currentAccount, setCurrentAccount] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPasswordModal, setShowPasswordModal] = useState(true);
 
   useEffect(() => {
     return load();
@@ -132,41 +128,16 @@ const Options = () => {
   };
 
   const saveAccount = (account) => {
-    account.config = encryptData(account.config, password, settingsStore.salt);
-    return accountsStore.setAccount(account, true).then(() => {
-      return load();
-    });
+    console.log("###### saveAccount", account);
   };
 
   const formSubmitFailure = (errorInfo) => {
     console.log(errorInfo);
   };
 
-  // TODO: refactor
-  const handlePasswordModalOk = (password) => {
-    setPassword(password);
-    if (Object.entries(accounts).length > 0) {
-      msg
-        .request("unlock", { password })
-        .then((response) => {
-          setShowPasswordModal(false);
-        })
-        .catch((e) => {
-          alert("Invalid password");
-        });
-    } else {
-      setShowPasswordModal(false);
-    }
-  };
-
   return (
     <Layout>
-      <SetPassword
-        visible={showPasswordModal}
-        onOk={handlePasswordModalOk}
-      ></SetPassword>
-
-      <Header>Lightning Extension Options</Header>
+      <Header>Lightning Extension Configurations</Header>
 
       <Content>
         <Tabs defaultActiveKey="2">
@@ -229,4 +200,4 @@ const Options = () => {
   );
 };
 
-export default Options;
+export default Configurations;
