@@ -1,50 +1,59 @@
 import React from "react";
 import { createHashHistory } from "history";
-import { HashRouter, Switch, Route } from "react-router-dom";
-
-import utils from "../../../common/lib/utils";
+import dataStore from "../../../extension/storage";
 import Home from "../Home";
 import Unlock from "../Unlock";
-import Loading from "../Loading";
+import SetPassword from "../SetPassword";
 
 import "./styles.scss";
 
 class Popup extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
     this.history = createHashHistory();
   }
 
-  componentDidMount() {
-    utils
-      .call("isUnlocked")
-      .then((response) => {
-        if (response.unlocked) {
-          this.history.replace("/home");
-        } else {
-          this.history.replace("/unlock");
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+  async componentDidMount() {
+    console.log("######################### Popup.componentDidMount");
+    await this.checkDataStoreState();
+  }
+
+  async checkDataStoreState() {
+    const storage = dataStore();
+    this.setState({ isInitialized: await storage.isInitialized() });
+    this.setState({ isUnlocked: await storage.isUnlocked() });
+  }
+
+  async handlePasswordConfigured() {
+    await this.checkDataStoreState();
+  }
+
+  async handleUnlock() {
+    await this.checkDataStoreState();
   }
 
   render() {
-    return (
-      <HashRouter>
+    if (!this.state.isInitialized) {
+      return (
         <section id="popup">
-          <Switch>
-            <Route exact path="/" render={(props) => <Loading />} />
-            <Route exact path="/home" render={(props) => <Home />} />
-            <Route
-              exact
-              path="/unlock"
-              render={(props) => <Unlock next="/home" />}
-            />
-          </Switch>
+          <SetPassword
+            onOk={this.handlePasswordConfigured.bind(this)}
+          ></SetPassword>
         </section>
-      </HashRouter>
+      );
+    }
+    if (!this.state.isUnlocked) {
+      return (
+        <section id="popup">
+          <Unlock onUnlock={this.handleUnlock.bind(this)} />
+        </section>
+      );
+    }
+    return (
+      <section id="popup">
+        <Home />
+      </section>
     );
   }
 }
