@@ -1,9 +1,6 @@
 import { Typography, Layout, Tabs } from "antd";
 import React, { useState, useEffect } from "react";
 
-import msg from "../../../common/lib/msg";
-import { encryptData } from "../../../common/lib/crypto";
-
 import Accounts from "../../../common/lib/accounts";
 import Settings from "../../../common/lib/settings";
 import Allowances from "../../../common/lib/allowances";
