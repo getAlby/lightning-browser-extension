@@ -1,8 +1,10 @@
 import React from "react";
 import Home from "../Home";
 import passwordManager from "../../../common/lib/password-manager";
+
 import Unlock from "../Unlock";
 import SetPassword from "../SetPassword";
+import Loading from "../Loading";
 
 import "./styles.scss";
 
@@ -54,7 +56,7 @@ class Popup extends React.Component {
         </section>
       );
     }
-    return <span>Loading...</span>;
+    return <Loading />;
   }
 }
 

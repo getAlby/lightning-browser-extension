@@ -1,8 +1,10 @@
 import React from "react";
 import passwordManager from "../../../common/lib/password-manager";
+
 import SetPassword from "../SetPassword";
 import Unlock from "../Unlock";
 import Configurations from "../Configurations";
+import Loading from "../Loading";
 
 class Options extends React.Component {
   constructor(props) {
@@ -40,7 +42,7 @@ class Options extends React.Component {
     if (this.state.isInitialized === true && this.state.isUnlocked === true) {
       return <Configurations />;
     }
-    return <span>Loading...</span>;
+    return <Loading />;
   }
 }
 
