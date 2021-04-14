@@ -28,11 +28,7 @@
     "test-app": "jest ./src/app",
     "test": "jest"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged --allow-empty"
-    }
-  },
+
   "lint-staged": {
     "*.{js,jsx,ts,tsx,md}": [
       "prettier --write"
