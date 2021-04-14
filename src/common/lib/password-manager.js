@@ -1,4 +1,4 @@
-import dataStore from "../../extension/data-store";
+import dataStore from "../data-store";
 import messaging from "../../common/lib/messaging";
 
 async function init(password, confirmedPassword) {
