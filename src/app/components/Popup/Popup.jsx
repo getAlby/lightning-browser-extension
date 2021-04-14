@@ -1,7 +1,8 @@
 import React from "react";
-import Home from "../Home";
+
 import passwordManager from "../../../common/lib/password-manager";
 
+import Home from "../Home";
 import Unlock from "../Unlock";
 import SetPassword from "../SetPassword";
 import Loading from "../Loading";
