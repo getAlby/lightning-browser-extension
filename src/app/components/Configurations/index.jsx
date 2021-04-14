@@ -1,7 +1,8 @@
 import { Typography, Layout, Tabs } from "antd";
 import React, { useState, useEffect } from "react";
 
-import Accounts from "../../../common/lib/accounts";
+import accountManager from "../../../common/lib/account-manager";
+
 import Settings from "../../../common/lib/settings";
 import Allowances from "../../../common/lib/allowances";
 
@@ -11,7 +12,6 @@ import LnBitsForm from "../LnBits";
 import NativeConnectionForm from "../NativeConnection";
 
 import ListData from "../ListData";
-import { normalizeAccountsData } from "../../../common/utils/helpers";
 
 import "./styles.scss";
 
@@ -19,15 +19,14 @@ const { TabPane } = Tabs;
 const { Title } = Typography;
 const { Header, Content } = Layout;
 
-const accountsStore = new Accounts();
 const settingsStore = new Settings();
 const allowancesStore = new Allowances();
 
 const Configurations = () => {
-  const [accounts, setAccounts] = useState({});
+  const [accounts, setAccounts] = useState([]);
   const [settings, setSettings] = useState({});
   const [allowances, setAllowances] = useState({});
-  const [currentAccount, setCurrentAccount] = useState("");
+  const [currentAccount, setCurrentAccount] = useState({});
 
   useEffect(() => {
     return load();
@@ -35,12 +34,13 @@ const Configurations = () => {
 
   const load = () => {
     return Promise.all([
-      accountsStore.load(),
+      accountManager.getAll(),
+      accountManager.getCurrentAccount(),
       settingsStore.load(),
       allowancesStore.load(),
-    ]).then(() => {
-      setAccounts(accountsStore.accounts);
-      setCurrentAccount(accountsStore.currentKey);
+    ]).then((responses) => {
+      setAccounts(responses[0]);
+      setCurrentAccount(responses[1]);
       setSettings(settingsStore.settings);
       setAllowances(allowancesStore.allowances);
       console.log("load all", settingsStore.settings);
@@ -116,16 +116,17 @@ const Configurations = () => {
     });
   };
 
-  const resetAccounts = () => {
-    return accountsStore.reset();
+  const resetAccounts = async () => {
+    await accountManager.removeAll();
+    await load();
   };
 
   const resetAllowances = () => {
     return allowancesStore.reset();
   };
 
-  const saveAccount = (account) => {
-    console.log("###### saveAccount", account);
+  const saveAccount = async (account) => {
+    return accountManager.add(account);
   };
 
   const formSubmitFailure = (errorInfo) => {
@@ -143,16 +144,13 @@ const Configurations = () => {
           </TabPane>
 
           <TabPane tab="Accounts" key="2">
-            {Object.entries(accounts).map((entry) => (
-              <div>{entry[1].name}</div>
-            ))}
             <ListData
               title="Existing Accounts"
               onResetCallback={resetAccounts}
-              data={normalizeAccountsData(accounts)}
+              data={accounts}
             />
 
-            <Title level={2}>Current Account: {currentAccount}</Title>
+            <Title level={2}>Current Account: {currentAccount?.name}</Title>
 
             <Title level={2}>Add Account</Title>
 

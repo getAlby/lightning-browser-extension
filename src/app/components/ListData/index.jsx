@@ -14,7 +14,7 @@ const ListData = ({ data, title, onResetCallback }) => {
             onClick={onResetCallback}
             className="reset-button"
           >
-            Reset1
+            Reset
           </Button>
         </div>
       </Row>
@@ -24,8 +24,8 @@ const ListData = ({ data, title, onResetCallback }) => {
         dataSource={data}
         itemLayout="vertical"
         renderItem={(item) => (
-          <List.Item key={item.title}>
-            <List.Item.Meta title={item.title} description={item.description} />
+          <List.Item key={item.id}>
+            <List.Item.Meta title={item.name} />
           </List.Item>
         )}
       />

@@ -1,18 +1,16 @@
 import browser from "webextension-polyfill";
 import utils from "../../../common/lib/utils";
 import Settings from "../../../common/lib/settings";
-import Accounts from "../../../common/lib/accounts";
+import accountManager from "../../../common/lib/account-manager";
 import connectors from "../connectors";
 
 import initLsatInterceptor from "./lsatInterceptor";
 
 let currentUnlockPassword; // TODO: rethink this
 let connector;
-let accounts = new Accounts();
 let settings = new Settings();
 const initConnector = async () => {
-  await accounts.load(); // load latest accounts from storage
-  const account = accounts.current;
+  const account = accountManager.getCurrentAccount();
   console.log(account);
   if (!account) {
     console.log("Account not found");
@@ -88,7 +86,7 @@ const handleConnectorCalls = (message, sender, sendResponse) => {
 async function init() {
   console.log("Loading background script");
   await settings.load();
-  await accounts.load();
+  // await accounts.load();
   // initialize a connector for the current account
   await initConnector();
   browser.runtime.onMessage.addListener(debugLogger);
