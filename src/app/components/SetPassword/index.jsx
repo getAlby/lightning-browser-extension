@@ -1,15 +1,18 @@
 import React from "react";
 import { Input, Button, Form } from "antd";
 
-import PasswordManager from "../../../common/lib/password-manager";
+import passwordManager from "../../../common/lib/password-manager";
+import messaging from "../../../common/lib/messaging";
 
 const SetPassword = ({ onOk }) => {
   const [form] = Form.useForm();
 
   const onDone = async (values) => {
     if (values.password === values.confirm) {
-      const passwordManager = new PasswordManager();
       await passwordManager.init(values.password, values.confirm);
+      messaging.sendMessage("set-password-to-cache", {
+        password: values.password,
+      });
       onOk();
     }
   };

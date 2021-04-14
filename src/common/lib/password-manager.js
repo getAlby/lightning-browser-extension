@@ -1,24 +1,57 @@
 import dataStore from "../../extension/storage";
+import messaging from "../../common/lib/messaging";
 
-class PasswordManager {
-  async init(password, confirmedPassword) {
-    if (password !== confirmedPassword) {
-      throw new Error("Cannot initialzie. Passwords do not match!");
-    }
-    const storage = dataStore(password);
-    await storage.set("isPasswordSet", true);
+async function init(password, confirmedPassword) {
+  if (password !== confirmedPassword) {
+    throw new Error("Cannot initialzie. Passwords do not match!");
   }
+  const storage = dataStore(password);
+  await storage.set("isPasswordSet", true);
+}
 
-  async checkPassword(password) {
-    try {
-      const storage = dataStore(password);
-      const isPasswordSet = await storage.get("isPasswordSet");
-      return isPasswordSet === true;
-    } catch (err) {
-      console.log(err);
-      return false;
-    }
+async function checkPassword(password) {
+  if (password && password.length) {
+    return _checkUserPassword(password);
+  }
+  return _checkCachedPassword();
+}
+
+async function isInitialized() {
+  const storage = dataStore();
+  return storage.isInitialized();
+}
+
+async function isUnlocked() {
+  const storage = dataStore();
+  return storage.isUnlocked();
+}
+
+async function _checkUserPassword(password) {
+  try {
+    const storage = dataStore(password);
+    const isPasswordSet = await storage.get("isPasswordSet");
+    return isPasswordSet === true;
+  } catch (err) {
+    console.log(err);
+    return false;
   }
 }
 
-export default PasswordManager;
+async function _checkCachedPassword() {
+  return new Promise(async (resolve) => {
+    await messaging.onMessage("cached-password", async (msg) => {
+      const isPasswordSet = await _checkUserPassword(msg.password);
+      resolve(isPasswordSet);
+    });
+    await messaging.sendMessage("get-password-from-cache");
+  });
+}
+
+const passwordManager = {
+  init,
+  checkPassword,
+  isInitialized,
+  isUnlocked,
+};
+
+export default passwordManager;

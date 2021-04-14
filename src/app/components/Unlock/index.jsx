@@ -3,7 +3,8 @@ import { createHashHistory } from "history";
 import { Button, Input } from "antd";
 import { UnlockTwoTone } from "@ant-design/icons";
 
-import PasswordManager from "../../../common/lib/password-manager";
+import messaging from "../../../common/lib/messaging";
+import passwordManager from "../../../common/lib/password-manager";
 import variables from "./variables.module.scss";
 import "./styles.scss";
 class Unlock extends React.Component {
@@ -21,13 +22,13 @@ class Unlock extends React.Component {
   }
 
   async unlock() {
-    const passwordManager = new PasswordManager();
     const isValidPassword = await passwordManager.checkPassword(
       this.state.password
     );
     if (isValidPassword) {
-      const next = this.props.next || "/home";
-      this.history.push(next);
+      messaging.sendMessage("set-password-to-cache", {
+        password: this.state.password,
+      });
       this.props.onUnlock && this.props.onUnlock();
     } else {
       this.setState({ error: "Incorrect Password!" });

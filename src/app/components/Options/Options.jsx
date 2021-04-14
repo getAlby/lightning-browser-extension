@@ -1,5 +1,5 @@
 import React from "react";
-import dataStore from "../../../extension/storage";
+import passwordManager from "../../../common/lib/password-manager";
 import SetPassword from "../SetPassword";
 import Unlock from "../Unlock";
 
@@ -12,38 +12,40 @@ class Options extends React.Component {
   }
 
   async checkDataStoreState() {
-    const storage = dataStore();
-    this.setState({ isInitialized: await storage.isInitialized() });
-    this.setState({ isUnlocked: await storage.isUnlocked() });
+    await passwordManager.checkPassword();
+    this.setState({ isInitialized: await passwordManager.isInitialized() });
+    this.setState({ isUnlocked: await passwordManager.isUnlocked() });
   }
 
   async handlePasswordConfigured() {
-    console.log("######################### handlePasswordConfigured");
     await this.checkDataStoreState();
     // move forward
   }
 
   async handleUnlock() {
-    console.log("######################### handleUnlock");
     await this.checkDataStoreState();
   }
 
   render() {
-    if (!this.state.isInitialized) {
+    console.log("this.state", this.state);
+    if (this.state.isInitialized === false) {
       return (
         <SetPassword
           onOk={this.handlePasswordConfigured.bind(this)}
         ></SetPassword>
       );
     }
-    if (!this.state.isUnlocked) {
-      return <Unlock onUnlock={this.handleUnlock.bind(this)} next="/home" />;
+    if (this.state.isUnlocked === false) {
+      return <Unlock onUnlock={this.handleUnlock.bind(this)} />;
     }
-    return (
-      <div>
-        <section id="options">Options</section>
-      </div>
-    );
+    if (this.state.isInitialized === true && this.state.isUnlocked === true) {
+      return (
+        <div>
+          <section id="options">Options</section>
+        </div>
+      );
+    }
+    return <span>Loading...</span>;
   }
 }
 

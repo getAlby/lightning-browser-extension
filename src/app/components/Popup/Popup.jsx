@@ -1,7 +1,6 @@
 import React from "react";
-import { createHashHistory } from "history";
-import dataStore from "../../../extension/storage";
 import Home from "../Home";
+import passwordManager from "../../../common/lib/password-manager";
 import Unlock from "../Unlock";
 import SetPassword from "../SetPassword";
 
@@ -11,18 +10,16 @@ class Popup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.history = createHashHistory();
   }
 
   async componentDidMount() {
-    console.log("######################### Popup.componentDidMount");
     await this.checkDataStoreState();
   }
 
   async checkDataStoreState() {
-    const storage = dataStore();
-    this.setState({ isInitialized: await storage.isInitialized() });
-    this.setState({ isUnlocked: await storage.isUnlocked() });
+    await passwordManager.checkPassword();
+    this.setState({ isInitialized: await passwordManager.isInitialized() });
+    this.setState({ isUnlocked: await passwordManager.isUnlocked() });
   }
 
   async handlePasswordConfigured() {
@@ -34,7 +31,7 @@ class Popup extends React.Component {
   }
 
   render() {
-    if (!this.state.isInitialized) {
+    if (this.state.isInitialized === false) {
       return (
         <section id="popup">
           <SetPassword
@@ -43,18 +40,21 @@ class Popup extends React.Component {
         </section>
       );
     }
-    if (!this.state.isUnlocked) {
+    if (this.state.isUnlocked === false) {
       return (
         <section id="popup">
           <Unlock onUnlock={this.handleUnlock.bind(this)} />
         </section>
       );
     }
-    return (
-      <section id="popup">
-        <Home />
-      </section>
-    );
+    if (this.state.isInitialized === true && this.state.isUnlocked === true) {
+      return (
+        <section id="popup">
+          <Home />
+        </section>
+      );
+    }
+    return <span>Loading...</span>;
   }
 }
 
