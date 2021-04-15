@@ -1,6 +1,8 @@
 import React from "react";
-import passwordManager from "../../../common/lib/password-manager";
+import { createHashHistory } from "history";
+import { HashRouter, Route, Switch } from "react-router-dom";
 
+import passwordManager from "../../../common/lib/password-manager";
 import SetPassword from "../SetPassword";
 import Unlock from "../Unlock";
 import Configurations from "../Configurations";
@@ -10,7 +12,8 @@ class Options extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.checkDataStoreState();
+    this.history = createHashHistory();
+
   }
 
   async checkDataStoreState() {
@@ -28,21 +31,45 @@ class Options extends React.Component {
     await this.checkDataStoreState();
   }
 
-  render() {
+  async componentDidMount() {
+    await this.checkDataStoreState();
     if (this.state.isInitialized === false) {
-      return (
-        <SetPassword
-          onOk={this.handlePasswordConfigured.bind(this)}
-        ></SetPassword>
-      );
+      return this.history.replace("/init");
     }
     if (this.state.isUnlocked === false) {
-      return <Unlock onUnlock={this.handleUnlock.bind(this)} />;
+      return this.history.replace("/unlock");
     }
     if (this.state.isInitialized === true && this.state.isUnlocked === true) {
-      return <Configurations />;
+      return this.history.replace("/config");
     }
-    return <Loading />;
+    return this.history.replace("/");
+  }
+
+  render() {
+    return (
+      <HashRouter>
+        <section id="prompt">
+          <Switch>
+            <Route
+              exact
+              path="/unlock"
+              render={() => <Unlock onUnlock={this.handleUnlock.bind(this)} />}
+            />
+            <Route
+              exact
+              path="/init"
+              render={() => (
+                <SetPassword
+                  onOk={this.handlePasswordConfigured.bind(this)}
+                ></SetPassword>
+              )}
+            />
+            <Route exact path="/config" render={() => <Configurations />} />
+            <Route exact path="/" render={() => <Loading />} />
+          </Switch>
+        </section>
+      </HashRouter>
+    );
   }
 }
 
