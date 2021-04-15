@@ -7,6 +7,14 @@ async function getAll() {
   return (await dataStore().get(ACCOUNTS_DATA_STORE_KEY)) || [];
 }
 
+async function getById(accountId) {
+  if (!accountId) {
+    return;
+  }
+  const accounts = (await dataStore().get(ACCOUNTS_DATA_STORE_KEY)) || [];
+  return accounts.find((acc) => acc.id === accountId);
+}
+
 async function add(account = {}) {
   const accounts = (await getAll()) || [];
   account.isCurrent = accounts.length === 0;
@@ -22,6 +30,7 @@ async function remove(accountID = "") {
   await _setAccounts(updatedAccounts);
   return updatedAccounts;
 }
+
 async function removeAll() {
   await _setAccounts([]);
 }
@@ -44,6 +53,7 @@ async function _setAccounts(accounts) {
 
 const accountManager = {
   getAll,
+  getById,
   add,
   remove,
   removeAll,

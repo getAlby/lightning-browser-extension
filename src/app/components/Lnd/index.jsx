@@ -13,9 +13,8 @@ const layout = {
 };
 
 const LndForm = ({
-  ref,
+  initialValues = {},
   saveLndAccount,
-  addLndAccountFailure,
   submitHook = () => {},
 }) => {
   const [form] = Form.useForm();
@@ -26,13 +25,8 @@ const LndForm = ({
       form={form}
       name="basic"
       layout="vertical"
-      onFinishFailed={addLndAccountFailure}
       onFinish={(values) => saveLndAccount(values, form)}
-      initialValues={{
-        name: "LND",
-        url: "",
-        macaroon: "",
-      }}
+      initialValues={initialValues}
     >
       <FormItem
         label="Name"

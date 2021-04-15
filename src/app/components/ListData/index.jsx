@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { List, Button } from "antd";
 
 const ListData = ({
@@ -6,6 +7,15 @@ const ListData = ({
   setCurrentAccount = () => {},
   deleteAccount = () => {},
 }) => {
+  const history = useHistory();
+
+  const goToEditAccount = (accountId) => {
+    return history.push({
+      pathname: "/account",
+      state: { accountId },
+    });
+  };
+
   function getActions(account = {}) {
     const actions = [];
     if (account.isCurrent === false) {
@@ -25,7 +35,11 @@ const ListData = ({
       );
     }
 
-    actions.push(<Button type="link">More</Button>);
+    actions.push(
+      <Button type="link" onClick={() => goToEditAccount(account.id)}>
+        More
+      </Button>
+    );
     return actions;
   }
 

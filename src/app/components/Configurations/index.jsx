@@ -1,6 +1,6 @@
-import { Layout, Tabs, Divider, Button } from "antd";
+import { Tabs, Divider, Button } from "antd";
 import React, { useState, useEffect } from "react";
-import { createHashHistory } from "history";
+import { useHistory } from "react-router-dom";
 
 import accountManager from "../../../common/lib/account-manager";
 
@@ -22,7 +22,7 @@ const Configurations = () => {
   const [allowances, setAllowances] = useState({});
   const [currentAccount, setCurrentAccount] = useState(null);
 
-  const history = createHashHistory();
+  const history = useHistory();
 
   useEffect(() => {
     return load();
@@ -141,7 +141,10 @@ const Configurations = () => {
   };
 
   const goToAddAccount = () => {
-    return history.replace("/account");
+    return history.push({
+      pathname: "/account",
+      state: { acountId: null },
+    });
   };
 
   return (
