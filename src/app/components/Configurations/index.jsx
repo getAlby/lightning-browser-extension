@@ -1,4 +1,4 @@
-import { Typography, Layout, Tabs, Divider } from "antd";
+import { Layout, Tabs, Divider } from "antd";
 import React, { useState, useEffect } from "react";
 
 import accountManager from "../../../common/lib/account-manager";
@@ -16,7 +16,6 @@ import ListData from "../ListData";
 import "./styles.scss";
 
 const { TabPane } = Tabs;
-const { Title } = Typography;
 const { Header, Content } = Layout;
 
 const settingsStore = new Settings();
@@ -50,6 +49,7 @@ const Configurations = () => {
   const saveLndAccount = (values, formRef) => {
     const account = {
       name: values.name,
+      description: values.description,
       config: {
         macaroon: values.macaroon,
         url: values.url,
@@ -145,10 +145,10 @@ const Configurations = () => {
 
           <TabPane tab="Accounts" key="2">
             <Divider plain>Current Account</Divider>
-            <ListData data={[currentAccount]} />
+            <ListData data={currentAccount ? [currentAccount] : []} />
 
             <Divider plain>Accounts</Divider>
-            <ListData data={accounts} />
+            <ListData data={accounts || []} />
 
             <Divider plain>Add Account</Divider>
 

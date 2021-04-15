@@ -27,6 +27,7 @@ const LndForm = ({ ref, saveLndAccount, addLndAccountFailure }) => {
       {...layout}
       form={form}
       name="basic"
+      layout="vertical"
       onFinishFailed={addLndAccountFailure}
       onFinish={(values) => saveLndAccount(values, form)}
       initialValues={{
@@ -41,10 +42,14 @@ const LndForm = ({ ref, saveLndAccount, addLndAccountFailure }) => {
         rules={[
           {
             required: true,
-            message: "Please input your username!",
+            message: "Please set a name for the account!",
           },
         ]}
       >
+        <Input />
+      </FormItem>
+
+      <FormItem label="Description" name="description">
         <Input />
       </FormItem>
 

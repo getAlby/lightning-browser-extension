@@ -1,7 +1,7 @@
 import React from "react";
 import { List, Button } from "antd";
 
-const ListData = ({ data, title, onResetCallback }) => {
+const ListData = ({ data }) => {
   return data.length > 0 ? (
     <>
       <List
