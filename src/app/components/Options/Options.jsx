@@ -12,8 +12,8 @@ class Options extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.checkDataStoreState();
     this.history = createHashHistory();
-
   }
 
   async checkDataStoreState() {
@@ -53,18 +53,39 @@ class Options extends React.Component {
             <Route
               exact
               path="/unlock"
-              render={() => <Unlock onUnlock={this.handleUnlock.bind(this)} />}
+              render={() =>
+                this.state.isUnlocked === true ? (
+                  <Unlock onUnlock={this.handleUnlock.bind(this)} />
+                ) : (
+                  <Loading />
+                )
+              }
             />
             <Route
               exact
               path="/init"
-              render={() => (
-                <SetPassword
-                  onOk={this.handlePasswordConfigured.bind(this)}
-                ></SetPassword>
-              )}
+              render={() =>
+                this.state.isInitialized === true ? (
+                  <SetPassword
+                    onOk={this.handlePasswordConfigured.bind(this)}
+                  ></SetPassword>
+                ) : (
+                  <Loading />
+                )
+              }
             />
-            <Route exact path="/config" render={() => <Configurations />} />
+            <Route
+              exact
+              path="/config"
+              render={() =>
+                this.state.isInitialized === true &&
+                this.state.isUnlocked === true ? (
+                  <Configurations />
+                ) : (
+                  <Loading />
+                )
+              }
+            />
             <Route exact path="/" render={() => <Loading />} />
           </Switch>
         </section>

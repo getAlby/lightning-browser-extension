@@ -1,4 +1,4 @@
-import { Layout, Tabs, Divider, Button, DownloadOutlined } from "antd";
+import { Layout, Tabs, Divider, Button } from "antd";
 import React, { useState, useEffect } from "react";
 
 import accountManager from "../../../common/lib/account-manager";
@@ -25,7 +25,7 @@ const Configurations = () => {
   const [accounts, setAccounts] = useState([]);
   const [settings, setSettings] = useState({});
   const [allowances, setAllowances] = useState({});
-  const [currentAccount, setCurrentAccount] = useState({});
+  const [currentAccount, setCurrentAccount] = useState(null);
 
   useEffect(() => {
     return load();
