@@ -1,6 +1,7 @@
 import React from "react";
 import { createHashHistory } from "history";
 import { HashRouter, Route, Switch } from "react-router-dom";
+import { Layout } from "antd";
 
 import passwordManager from "../../../common/lib/password-manager";
 import Account from "../Account";
@@ -9,6 +10,7 @@ import Unlock from "../Unlock";
 import Configurations from "../Configurations";
 import Loading from "../Loading";
 
+const { Header, Content } = Layout;
 class Options extends React.Component {
   constructor(props) {
     super(props);
@@ -48,50 +50,56 @@ class Options extends React.Component {
 
   render() {
     return (
-      <HashRouter>
-        <section id="prompt">
-          <Switch>
-            <Route
-              exact
-              path="/unlock"
-              render={() =>
-                this.state.isUnlocked === true ? (
-                  <Unlock onUnlock={this.handleUnlock.bind(this)} />
-                ) : (
-                  <Loading />
-                )
-              }
-            />
-            <Route
-              exact
-              path="/init"
-              render={() =>
-                this.state.isInitialized === true ? (
-                  <SetPassword
-                    onOk={this.handlePasswordConfigured.bind(this)}
-                  ></SetPassword>
-                ) : (
-                  <Loading />
-                )
-              }
-            />
-            <Route
-              exact
-              path="/config"
-              render={() =>
-                this.state.isInitialized === true &&
-                this.state.isUnlocked === true ? (
-                  <Configurations />
-                ) : (
-                  <Loading />
-                )
-              }
-            />
-            <Route exact path="/account" render={() => <Account />} />
-            <Route exact path="/" render={() => <Loading />} />
-          </Switch>
-        </section>
-      </HashRouter>
+      <Layout>
+        <Header>Lightning Extension Configuration</Header>
+
+        <Content>
+          <HashRouter>
+            <section id="prompt">
+              <Switch>
+                <Route
+                  exact
+                  path="/unlock"
+                  render={() =>
+                    this.state.isUnlocked === true ? (
+                      <Unlock onUnlock={this.handleUnlock.bind(this)} />
+                    ) : (
+                      <Loading />
+                    )
+                  }
+                />
+                <Route
+                  exact
+                  path="/init"
+                  render={() =>
+                    this.state.isInitialized === true ? (
+                      <SetPassword
+                        onOk={this.handlePasswordConfigured.bind(this)}
+                      ></SetPassword>
+                    ) : (
+                      <Loading />
+                    )
+                  }
+                />
+                <Route
+                  exact
+                  path="/config"
+                  render={() =>
+                    this.state.isInitialized === true &&
+                    this.state.isUnlocked === true ? (
+                      <Configurations />
+                    ) : (
+                      <Loading />
+                    )
+                  }
+                />
+                <Route exact path="/account" render={() => <Account />} />
+                <Route exact path="/" render={() => <Loading />} />
+              </Switch>
+            </section>
+          </HashRouter>
+        </Content>
+      </Layout>
     );
   }
 }

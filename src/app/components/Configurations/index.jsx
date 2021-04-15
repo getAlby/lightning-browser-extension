@@ -17,7 +17,6 @@ import ListData from "../ListData";
 import "./styles.scss";
 
 const { TabPane } = Tabs;
-const { Header, Content } = Layout;
 
 const settingsStore = new Settings();
 const allowancesStore = new Allowances();
@@ -151,31 +150,27 @@ const Configurations = () => {
   };
 
   return (
-    <Layout>
-      <Header>Lightning Extension Configuration</Header>
+    <Tabs defaultActiveKey="2">
+      <TabPane tab="General" key="1">
+        <p>{JSON.stringify(settings)}</p>
+      </TabPane>
 
-      <Content>
-        <Tabs defaultActiveKey="2">
-          <TabPane tab="General" key="1">
-            <p>{JSON.stringify(settings)}</p>
-          </TabPane>
+      <TabPane tab="Accounts" key="2">
+        <Divider plain>Current Account</Divider>
+        <ListData data={currentAccount ? [currentAccount] : []} />
 
-          <TabPane tab="Accounts" key="2">
-            <Divider plain>Current Account</Divider>
-            <ListData data={currentAccount ? [currentAccount] : []} />
+        <Divider plain>Accounts</Divider>
+        <ListData
+          data={accounts || []}
+          setCurrentAccount={updateCurrentAccount}
+          deleteAccount={removeAccount}
+        />
 
-            <Divider plain>Accounts</Divider>
-            <ListData
-              data={accounts || []}
-              setCurrentAccount={updateCurrentAccount}
-              deleteAccount={removeAccount}
-            />
-
-            <Divider plain></Divider>
-            <Button type="primary" shape="round" onClick={goToAddAccount}>
-              Add Account
-            </Button>
-            {/* <Tabs defaultActiveKey="1">
+        <Divider plain></Divider>
+        <Button type="primary" shape="round" onClick={goToAddAccount}>
+          Add Account
+        </Button>
+        {/* <Tabs defaultActiveKey="1">
               <TabPane tab="LND Account" key="1">
                 <LndForm
                   saveLndAccount={saveLndAccount}
@@ -204,15 +199,13 @@ const Configurations = () => {
                 ></LnBitsForm>
               </TabPane>
             </Tabs> */}
-          </TabPane>
+      </TabPane>
 
-          <TabPane tab="Allowances" key="3">
-            <p>{JSON.stringify(allowances)}</p>
-            <span onClick={resetAllowances}>Reset</span>
-          </TabPane>
-        </Tabs>
-      </Content>
-    </Layout>
+      <TabPane tab="Allowances" key="3">
+        <p>{JSON.stringify(allowances)}</p>
+        <span onClick={resetAllowances}>Reset</span>
+      </TabPane>
+    </Tabs>
   );
 };
 
