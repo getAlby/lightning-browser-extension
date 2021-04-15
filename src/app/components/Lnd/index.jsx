@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input } from "antd";
 
 const FormItem = Form.Item;
 
@@ -9,13 +9,6 @@ const layout = {
   },
   wrapperCol: {
     span: 20,
-  },
-};
-
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
   },
 };
 
@@ -78,12 +71,6 @@ const LndForm = ({ ref, saveLndAccount, addLndAccountFailure }) => {
         ]}
       >
         <Input />
-      </FormItem>
-
-      <FormItem {...tailLayout}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
       </FormItem>
     </Form>
   );

@@ -3,6 +3,7 @@ import { createHashHistory } from "history";
 import { HashRouter, Route, Switch } from "react-router-dom";
 
 import passwordManager from "../../../common/lib/password-manager";
+import Account from "../Account";
 import SetPassword from "../SetPassword";
 import Unlock from "../Unlock";
 import Configurations from "../Configurations";
@@ -86,6 +87,7 @@ class Options extends React.Component {
                 )
               }
             />
+            <Route exact path="/account" render={() => <Account />} />
             <Route exact path="/" render={() => <Loading />} />
           </Switch>
         </section>

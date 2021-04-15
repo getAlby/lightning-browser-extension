@@ -1,5 +1,6 @@
 import { Layout, Tabs, Divider, Button } from "antd";
 import React, { useState, useEffect } from "react";
+import { createHashHistory } from "history";
 
 import accountManager from "../../../common/lib/account-manager";
 
@@ -26,6 +27,8 @@ const Configurations = () => {
   const [settings, setSettings] = useState({});
   const [allowances, setAllowances] = useState({});
   const [currentAccount, setCurrentAccount] = useState(null);
+
+  const history = createHashHistory();
 
   useEffect(() => {
     return load();
@@ -143,6 +146,10 @@ const Configurations = () => {
     await load();
   };
 
+  const goToAddAccount = () => {
+    return history.replace("/account");
+  };
+
   return (
     <Layout>
       <Header>Lightning Extension Configuration</Header>
@@ -165,10 +172,10 @@ const Configurations = () => {
             />
 
             <Divider plain></Divider>
-            <Button type="primary" shape="round">
+            <Button type="primary" shape="round" onClick={goToAddAccount}>
               Add Account
             </Button>
-            <Tabs defaultActiveKey="1">
+            {/* <Tabs defaultActiveKey="1">
               <TabPane tab="LND Account" key="1">
                 <LndForm
                   saveLndAccount={saveLndAccount}
@@ -196,7 +203,7 @@ const Configurations = () => {
                   onFinishFailed={formSubmitFailure}
                 ></LnBitsForm>
               </TabPane>
-            </Tabs>
+            </Tabs> */}
           </TabPane>
 
           <TabPane tab="Allowances" key="3">
