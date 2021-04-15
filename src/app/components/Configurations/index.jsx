@@ -145,10 +145,10 @@ const Configurations = () => {
 
           <TabPane tab="Accounts" key="2">
             <Divider plain>Current Account</Divider>
-            <div>{currentAccount?.name}</div>
+            <ListData data={[currentAccount]} />
 
             <Divider plain>Accounts</Divider>
-            <ListData onResetCallback={resetAccounts} data={accounts} />
+            <ListData data={accounts} />
 
             <Divider plain>Add Account</Divider>
 
