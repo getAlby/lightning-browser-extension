@@ -15,7 +15,11 @@ const ListData = ({
         </Button>
       );
       actions.push(
-        <Button type="primary" onClick={() => setCurrentAccount(account.id)}>
+        <Button
+          type="primary"
+          shape="round"
+          onClick={() => setCurrentAccount(account.id)}
+        >
           Set Current
         </Button>
       );

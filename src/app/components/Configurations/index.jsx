@@ -1,4 +1,4 @@
-import { Layout, Tabs, Divider } from "antd";
+import { Layout, Tabs, Divider, Button, DownloadOutlined } from "antd";
 import React, { useState, useEffect } from "react";
 
 import accountManager from "../../../common/lib/account-manager";
@@ -164,8 +164,10 @@ const Configurations = () => {
               deleteAccount={removeAccount}
             />
 
-            <Divider plain>Add Account</Divider>
-
+            <Divider plain></Divider>
+            <Button type="primary" shape="round">
+              Add Account
+            </Button>
             <Tabs defaultActiveKey="1">
               <TabPane tab="LND Account" key="1">
                 <LndForm
