@@ -1,4 +1,4 @@
-import { Typography, Layout, Tabs } from "antd";
+import { Typography, Layout, Tabs, Divider } from "antd";
 import React, { useState, useEffect } from "react";
 
 import accountManager from "../../../common/lib/account-manager";
@@ -135,7 +135,7 @@ const Configurations = () => {
 
   return (
     <Layout>
-      <Header>Lightning Extension Configurations</Header>
+      <Header>Lightning Extension Configuration</Header>
 
       <Content>
         <Tabs defaultActiveKey="2">
@@ -144,15 +144,13 @@ const Configurations = () => {
           </TabPane>
 
           <TabPane tab="Accounts" key="2">
-            <ListData
-              title="Existing Accounts"
-              onResetCallback={resetAccounts}
-              data={accounts}
-            />
+            <Divider plain>Current Account</Divider>
+            <div>{currentAccount?.name}</div>
 
-            <Title level={2}>Current Account: {currentAccount?.name}</Title>
+            <Divider plain>Accounts</Divider>
+            <ListData onResetCallback={resetAccounts} data={accounts} />
 
-            <Title level={2}>Add Account</Title>
+            <Divider plain>Add Account</Divider>
 
             <Tabs defaultActiveKey="1">
               <TabPane tab="LND Account" key="1">

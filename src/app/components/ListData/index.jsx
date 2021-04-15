@@ -1,36 +1,24 @@
 import React from "react";
-import { Typography, Button, List, Row } from "antd";
+import { List } from "antd";
 
 const ListData = ({ data, title, onResetCallback }) => {
   return data.length > 0 ? (
     <>
-      <Row align="middle" justify="space-between">
-        <Typography.Title level={2}>{title}</Typography.Title>
-
-        <div className="reset-button-wrapper">
-          <Button
-            shape="round"
-            type="primary"
-            onClick={onResetCallback}
-            className="reset-button"
-          >
-            Reset
-          </Button>
-        </div>
-      </Row>
-
       <List
-        size="default"
+        size="small"
         dataSource={data}
-        itemLayout="vertical"
+        itemLayout="horizontal"
+        bordered
         renderItem={(item) => (
-          <List.Item key={item.id}>
-            <List.Item.Meta title={item.name} />
+          <List.Item key={item.id} actions={[<a key="123">more</a>]}>
+            <List.Item.Meta title={item.name} description={item.description} />
           </List.Item>
         )}
       />
     </>
-  ) : null;
+  ) : (
+    <span>No account configured yet</span>
+  );
 };
 
 export default ListData;
