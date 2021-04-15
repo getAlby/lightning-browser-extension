@@ -1,21 +1,30 @@
 import React from "react";
 import { List, Button } from "antd";
 
-const ListData = ({ data }) => {
-  function getActions(item = {}) {
+const ListData = ({
+  data,
+  setCurrentAccount = () => {},
+  deleteAccount = () => {},
+}) => {
+  function getActions(account = {}) {
     const actions = [];
-    if (!item.isCurrent) {
+    if (account.isCurrent === false) {
       actions.push(
-        <Button type="text" danger>
+        <Button type="text" danger onClick={() => deleteAccount(account.id)}>
           Delete
         </Button>
       );
-      actions.push(<Button type="primary">Set Current</Button>);
+      actions.push(
+        <Button type="primary" onClick={() => setCurrentAccount(account.id)}>
+          Set Current
+        </Button>
+      );
     }
 
     actions.push(<Button type="link">More</Button>);
     return actions;
   }
+
   return data.length > 0 ? (
     <>
       <List
@@ -31,7 +40,7 @@ const ListData = ({ data }) => {
       />
     </>
   ) : (
-    <span>No account configured yet</span>
+    <span>No account</span>
   );
 };
 

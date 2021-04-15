@@ -133,6 +133,16 @@ const Configurations = () => {
     console.log(errorInfo);
   };
 
+  const updateCurrentAccount = async (accountId) => {
+    await accountManager.setCurrentAccount(accountId);
+    await load();
+  };
+
+  const removeAccount = async (accountId) => {
+    await accountManager.remove(accountId);
+    await load();
+  };
+
   return (
     <Layout>
       <Header>Lightning Extension Configuration</Header>
@@ -148,7 +158,11 @@ const Configurations = () => {
             <ListData data={currentAccount ? [currentAccount] : []} />
 
             <Divider plain>Accounts</Divider>
-            <ListData data={accounts || []} />
+            <ListData
+              data={accounts || []}
+              setCurrentAccount={updateCurrentAccount}
+              deleteAccount={removeAccount}
+            />
 
             <Divider plain>Add Account</Divider>
 
