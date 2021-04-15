@@ -12,9 +12,14 @@ const layout = {
   },
 };
 
-const LndForm = ({ ref, saveLndAccount, addLndAccountFailure }) => {
+const LndForm = ({
+  ref,
+  saveLndAccount,
+  addLndAccountFailure,
+  submitHook = () => {},
+}) => {
   const [form] = Form.useForm();
-
+  submitHook(form);
   return (
     <Form
       {...layout}
