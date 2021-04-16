@@ -30,11 +30,9 @@ const Account = () => {
       if (acc.type) {
         setAccountType(acc.type);
       }
-      console.log("########################2 acc ", acc);
-      console.log("########################2 accountType: ", accountType);
     }
     fetchAccount();
-  }, [accountId, accountType]);
+  }, [accountId]);
 
   let connectorForm = null;
   const submitHook = (innerForm) => {
@@ -61,7 +59,6 @@ const Account = () => {
   };
 
   const handleConnectorTypeChange = (type) => {
-    console.log("############## type", type);
     setAccountType(type);
   };
 
@@ -74,6 +71,25 @@ const Account = () => {
       ))}
     </Menu>
   );
+
+  const accountConfig = () => {
+    if (accountType === "lnd") {
+      return <LndForm initialValues={account} submitHook={submitHook} />;
+    }
+    if (accountType === "lndHub") {
+      return <LndHubForm initialValues={account} submitHook={submitHook} />;
+    }
+    if (accountType === "lnBits") {
+      return <LnBitsForm initialValues={account} submitHook={submitHook} />;
+    }
+    if (accountType === "native") {
+      return (
+        <NativeConnectionForm initialValues={account} submitHook={submitHook} />
+      );
+    }
+    return <div>Unknown Account Type</div>;
+  };
+
   return (
     <>
       <Row>
@@ -81,7 +97,7 @@ const Account = () => {
         <Col span={20}>
           <Form name="basic" layout="vertical">
             <Form.Item label="Type" name="type">
-              <Dropdown.Button overlay={menu}>
+              <Dropdown.Button overlay={menu} disabled={account && account.id}>
                 {CONNECTORS[accountType]}
               </Dropdown.Button>
             </Form.Item>
@@ -90,9 +106,7 @@ const Account = () => {
       </Row>
       <Row>
         <Col span={1}></Col>
-        <Col span={20}>
-          <LndForm initialValues={account} submitHook={submitHook} />
-        </Col>
+        <Col span={20}> {accountConfig()} </Col>
       </Row>
       <Row>
         <Col span={1}></Col>

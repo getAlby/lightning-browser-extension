@@ -42,91 +42,8 @@ const Configurations = () => {
     });
   };
 
-  const saveLndAccount = (values, formRef) => {
-    const account = {
-      name: values.name,
-      description: values.description,
-      config: {
-        macaroon: values.macaroon,
-        url: values.url,
-      },
-      connector: "lnd",
-    };
-    return saveAccount(account).then(() => {
-      load();
-      if (formRef) {
-        formRef.resetFields();
-      }
-    });
-  };
-
-  const saveLndHubAccount = (values, formRef) => {
-    const account = {
-      name: values.name,
-      config: {
-        login: values.login,
-        password: values.password,
-        url: values.url,
-      },
-      connector: "lndhub",
-    };
-
-    return saveAccount(account).then(() => {
-      load();
-      if (formRef) {
-        formRef.resetFields();
-      }
-    });
-  };
-
-  const saveLnBitsAccount = (values, formRef) => {
-    const account = {
-      name: values.name,
-      config: {
-        adminkey: values.adminkey,
-        readkey: values.readkey,
-        url: "https://lnbits.com",
-      },
-      connector: "lnbits",
-    };
-
-    return saveAccount(account).then(() => {
-      load();
-      if (formRef) {
-        formRef.resetFields();
-      }
-    });
-  };
-
-  const saveNativeAccount = (values, formRef) => {
-    const account = {
-      name: values.name,
-      config: {},
-      connector: "native",
-    };
-    return saveAccount(account).then(() => {
-      load();
-      if (formRef) {
-        formRef.resetFields();
-      }
-    });
-  };
-
-  const resetAccounts = async () => {
-    await accountManager.removeAll();
-    await load();
-  };
-
   const resetAllowances = () => {
     return allowancesStore.reset();
-  };
-
-  const saveAccount = async (account) => {
-    return accountManager.add(account);
-  };
-
-  const formSubmitFailure = (errorInfo) => {
-    console.log(errorInfo);
   };
 
   const updateCurrentAccount = async (accountId) => {
@@ -156,7 +73,7 @@ const Configurations = () => {
         <Divider plain>Current Account</Divider>
         <ListData data={currentAccount ? [currentAccount] : []} />
 
-        <Divider plain>Accounts</Divider>
+        <Divider plain>All Accounts</Divider>
         <ListData
           data={accounts || []}
           setCurrentAccount={updateCurrentAccount}

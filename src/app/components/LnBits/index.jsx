@@ -1,5 +1,5 @@
-import React from "react";
-import { Form, Input, Button } from "antd";
+import React, { useEffect } from "react";
+import { Form, Input } from "antd";
 
 const FormItem = Form.Item;
 
@@ -12,29 +12,22 @@ const layout = {
   },
 };
 
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
-
-const LnBitsForm = ({ ref, onFinish, onFinishFailed }) => {
+const LnBitsForm = ({ initialValues = {}, submitHook = () => {} }) => {
   const [form] = Form.useForm();
+  submitHook(form);
 
+  useEffect(() => {
+    if (initialValues) {
+      form.setFieldsValue({
+        name: initialValues.name,
+        description: initialValues.description,
+        adminkey: initialValues.adminkey,
+        readkey: initialValues.readkey,
+      });
+    }
+  }, [form, initialValues]);
   return (
-    <Form
-      {...layout}
-      form={form}
-      name="basic"
-      onFinishFailed={onFinishFailed}
-      onFinish={(values) => onFinish(values, form)}
-      initialValues={{
-        name: "LNBits",
-        adminkey: "",
-        readkey: "",
-      }}
-    >
+    <Form {...layout} form={form} name="basic" layout="vertical">
       <FormItem
         label="Name"
         name="name"
@@ -45,6 +38,10 @@ const LnBitsForm = ({ ref, onFinish, onFinishFailed }) => {
           },
         ]}
       >
+        <Input />
+      </FormItem>
+
+      <FormItem label="Description" name="description">
         <Input />
       </FormItem>
 
@@ -62,7 +59,7 @@ const LnBitsForm = ({ ref, onFinish, onFinishFailed }) => {
       </FormItem>
 
       <FormItem
-        label="Invoice/read key"
+        label="Invoice / read key"
         name="readkey"
         rules={[
           {
@@ -72,12 +69,6 @@ const LnBitsForm = ({ ref, onFinish, onFinishFailed }) => {
         ]}
       >
         <Input />
-      </FormItem>
-
-      <FormItem {...tailLayout}>
-        <Button type="primary" htmlType="submit">
-          Save
-        </Button>
       </FormItem>
     </Form>
   );

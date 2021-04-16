@@ -1,5 +1,5 @@
-import React from "react";
-import { Form, Input, Button } from "antd";
+import React, { useEffect } from "react";
+import { Form, Input } from "antd";
 
 const FormItem = Form.Item;
 
@@ -12,30 +12,24 @@ const layout = {
   },
 };
 
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
-
 const NativeConnectionForm = ({
-  saveNativeAccount,
-  addNativeConnectionFailure,
+  initialValues = {},
+  submitHook = () => {},
 }) => {
   const [form] = Form.useForm();
+  submitHook(form);
+
+  useEffect(() => {
+    if (initialValues) {
+      form.setFieldsValue({
+        name: initialValues.name,
+        description: initialValues.description,
+      });
+    }
+  }, [form, initialValues]);
 
   return (
-    <Form
-      {...layout}
-      form={form}
-      name="basic"
-      onFinishFailed={addNativeConnectionFailure}
-      onFinish={(values) => saveNativeAccount(values, form)}
-      initialValues={{
-        name: "",
-      }}
-    >
+    <Form {...layout} form={form} name="basic" layout="vertical">
       <FormItem
         label="Name"
         name="name"
@@ -48,11 +42,8 @@ const NativeConnectionForm = ({
       >
         <Input />
       </FormItem>
-
-      <FormItem {...tailLayout}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
+      <FormItem label="Description" name="description">
+        <Input />
       </FormItem>
     </Form>
   );

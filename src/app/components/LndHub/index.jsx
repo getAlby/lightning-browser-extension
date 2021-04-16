@@ -1,5 +1,5 @@
-import React from "react";
-import { Form, Input, Button } from "antd";
+import React, { useEffect } from "react";
+import { Form, Input } from "antd";
 
 const FormItem = Form.Item;
 
@@ -12,30 +12,24 @@ const layout = {
   },
 };
 
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
-
-const LndHubForm = ({ ref, saveLndHubAccount, addLndHubAccountFailure }) => {
+const LndHubForm = ({ initialValues = {}, submitHook = () => {} }) => {
   const [form] = Form.useForm();
+  submitHook(form);
+
+  useEffect(() => {
+    if (initialValues) {
+      form.setFieldsValue({
+        name: initialValues.name,
+        description: initialValues.description,
+        url: initialValues.url,
+        login: initialValues.login,
+        password: initialValues.password,
+      });
+    }
+  }, [form, initialValues]);
 
   return (
-    <Form
-      {...layout}
-      form={form}
-      name="basic"
-      onFinishFailed={addLndHubAccountFailure}
-      onFinish={(values) => saveLndHubAccount(values, form)}
-      initialValues={{
-        name: "LndHub",
-        url: "",
-        login: "",
-        password: "",
-      }}
-    >
+    <Form {...layout} form={form} name="basic" layout="vertical">
       <FormItem
         label="Name"
         name="name"
@@ -46,6 +40,9 @@ const LndHubForm = ({ ref, saveLndHubAccount, addLndHubAccountFailure }) => {
           },
         ]}
       >
+        <Input />
+      </FormItem>
+      <FormItem label="Description" name="description">
         <Input />
       </FormItem>
 
@@ -87,12 +84,6 @@ const LndHubForm = ({ ref, saveLndHubAccount, addLndHubAccountFailure }) => {
         ]}
       >
         <Input.Password />
-      </FormItem>
-
-      <FormItem {...tailLayout}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
       </FormItem>
     </Form>
   );
