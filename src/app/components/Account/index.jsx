@@ -4,6 +4,8 @@ import { useLocation, useHistory } from "react-router-dom";
 import { Form, Row, Col, Menu, Dropdown, Button, message } from "antd";
 
 import accountManager from "../../../common/lib/account-manager";
+import connectors from "../../../extension/background-script/connectors";
+// src/extension/background-script/connectors/lnd.js
 import LndForm from "../Lnd";
 import LndHubForm from "../LndHub";
 import LnBitsForm from "../LnBits";
@@ -62,6 +64,23 @@ const Account = () => {
     setAccountType(type);
   };
 
+  const handleTestAccount = async () => {
+    console.log("############################## handleTestAccount");
+    try {
+      const values = connectorForm && (await connectorForm.validateFields());
+      console.log("###################### connectors", connectors);
+      const lndConnector = new connectors.lnd({
+          macaroon: values.macaroon,
+          url: values.url,
+      });
+      const address = await lndConnector.getAddress();
+      console.log("####################### address", address);
+    } catch (err) {
+      console.log("### err", err);
+      message.error(`Cannot connect ${err.message || ""}`);
+    }
+  };
+
   const menu = (
     <Menu>
       {Object.keys(CONNECTORS).map((key) => (
@@ -110,7 +129,7 @@ const Account = () => {
       </Row>
       <Row>
         <Col span={1}></Col>
-        <Col span={8}>
+        <Col span={5}>
           {account && account.id ? (
             <Button type="primary" onClick={handleSubmit}>
               Update
@@ -121,7 +140,12 @@ const Account = () => {
             </Button>
           )}
         </Col>
-        <Col span={8}>
+        <Col span={5}>
+          <Button type="danger" onClick={handleTestAccount}>
+            Test
+          </Button>
+        </Col>
+        <Col span={5}>
           <Button type="text" onClick={history.goBack}>
             Cancel
           </Button>
