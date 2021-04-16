@@ -15,27 +15,26 @@ class Options extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.checkDataStoreState();
     this.history = createHashHistory();
+    this.checkDataStoreState();
   }
 
   async checkDataStoreState() {
     await passwordManager.checkPassword();
     this.setState({ isInitialized: await passwordManager.isInitialized() });
     this.setState({ isUnlocked: await passwordManager.isUnlocked() });
+    this.updateRoute();
   }
 
   async handlePasswordConfigured() {
     await this.checkDataStoreState();
-    // move forward
   }
 
   async handleUnlock() {
     await this.checkDataStoreState();
   }
 
-  async componentDidMount() {
-    await this.checkDataStoreState();
+  async updateRoute() {
     if (this.state.isInitialized === false) {
       return this.history.replace("/init");
     }
@@ -61,7 +60,7 @@ class Options extends React.Component {
                   exact
                   path="/unlock"
                   render={() =>
-                    this.state.isUnlocked === true ? (
+                    this.state.isUnlocked === false ? (
                       <Unlock onUnlock={this.handleUnlock.bind(this)} />
                     ) : (
                       <Loading />
@@ -72,7 +71,7 @@ class Options extends React.Component {
                   exact
                   path="/init"
                   render={() =>
-                    this.state.isInitialized === true ? (
+                    this.state.isInitialized === false ? (
                       <SetPassword
                         onOk={this.handlePasswordConfigured.bind(this)}
                       ></SetPassword>

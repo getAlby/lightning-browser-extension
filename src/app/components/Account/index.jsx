@@ -32,11 +32,11 @@ const Account = () => {
     try {
       const values = connectorForm && (await connectorForm.validateFields());
       if (account && account.id) {
-        accountManager.update(Object.assign(account, values));
+        await accountManager.update(Object.assign(account, values));
         message.success(`Account ${account.name} updated!`);
       } else {
-        accountManager.add(values);
-        message.success(`Account ${account.name} created!`);
+        const newAccount = await accountManager.add(values);
+        message.success(`Account ${newAccount.name} created!`);
       }
       history.goBack();
     } catch (err) {
