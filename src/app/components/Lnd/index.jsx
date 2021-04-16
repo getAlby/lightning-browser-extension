@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Input } from "antd";
 
 const FormItem = Form.Item;
@@ -19,6 +19,18 @@ const LndForm = ({
 }) => {
   const [form] = Form.useForm();
   submitHook(form);
+
+  useEffect(() => {
+    if (initialValues) {
+      form.setFieldsValue({
+        name: initialValues.name,
+        description: initialValues.description,
+        macaroon: initialValues.macaroon,
+        url: initialValues.url,
+      });
+    }
+  }, [form, initialValues]);
+
   return (
     <Form
       {...layout}
@@ -26,7 +38,6 @@ const LndForm = ({
       name="basic"
       layout="vertical"
       onFinish={(values) => saveLndAccount(values, form)}
-      initialValues={initialValues}
     >
       <FormItem
         label="Name"

@@ -39,7 +39,6 @@ const Configurations = () => {
       setCurrentAccount(responses[1]);
       setSettings(settingsStore.settings);
       setAllowances(allowancesStore.allowances);
-      console.log("load all", settingsStore.settings);
     });
   };
 

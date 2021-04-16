@@ -15,11 +15,27 @@ async function getById(accountId) {
   return accounts.find((acc) => acc.id === accountId);
 }
 
-async function add(account = {}) {
+async function add(account) {
+  if (!account) {
+    return;
+  }
   const accounts = (await getAll()) || [];
   account.isCurrent = accounts.length === 0;
   account.id = uuidv4();
   accounts.push(account);
+  await _setAccounts(accounts);
+  return account;
+}
+
+async function update(account) {
+  if (!account) {
+    return;
+  }
+  const accounts = (await getAll()) || [];
+  const accountIndex = accounts.findIndex((acc) => acc.id === account.id);
+  if (accountIndex !== -1) {
+    accounts[accountIndex] = account;
+  }
   await _setAccounts(accounts);
   return account;
 }
@@ -55,6 +71,7 @@ const accountManager = {
   getAll,
   getById,
   add,
+  update,
   remove,
   removeAll,
   setCurrentAccount,

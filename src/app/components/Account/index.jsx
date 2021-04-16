@@ -13,17 +13,15 @@ const Account = () => {
   const history = useHistory();
   const location = useLocation();
   const accountId = location.state && location.state.accountId;
-  console.log("######################## location", location);
-
   const [account, setAccount] = useState(null);
+
   useEffect(() => {
     async function fetchAccount() {
       const acc = await accountManager.getById(accountId);
       setAccount(acc);
-      console.log("########################### account:", acc);
     }
     fetchAccount();
-  }, []);
+  }, [accountId]);
 
   let connectorForm = null;
   const submitHook = (innerForm) => {
@@ -33,7 +31,11 @@ const Account = () => {
   const handleSubmit = async () => {
     try {
       const values = connectorForm && (await connectorForm.validateFields());
-      console.log("########## 5:", values);
+      if (account && account.id) {
+        accountManager.update(Object.assign(account, values));
+      } else {
+        accountManager.add(values);
+      }
     } catch (err) {}
   };
 
@@ -68,9 +70,15 @@ const Account = () => {
       <Row>
         <Col span={1}></Col>
         <Col span={8}>
-          <Button type="primary" onClick={handleSubmit}>
-            Submit
-          </Button>
+          {account && account.id ? (
+            <Button type="primary" onClick={handleSubmit}>
+              Update
+            </Button>
+          ) : (
+            <Button type="primary" onClick={handleSubmit}>
+              Add
+            </Button>
+          )}
         </Col>
         <Col span={8}>
           <Button type="text" onClick={history.goBack}>
