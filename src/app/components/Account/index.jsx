@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 
-import { Form, Row, Col, Menu, Dropdown, Button } from "antd";
+import { Form, Row, Col, Menu, Dropdown, Button, message } from "antd";
 
 import accountManager from "../../../common/lib/account-manager";
 import LndForm from "../Lnd";
@@ -33,10 +33,15 @@ const Account = () => {
       const values = connectorForm && (await connectorForm.validateFields());
       if (account && account.id) {
         accountManager.update(Object.assign(account, values));
+        message.success(`Account ${account.name} updated!`);
       } else {
         accountManager.add(values);
+        message.success(`Account ${account.name} created!`);
       }
-    } catch (err) {}
+      history.goBack();
+    } catch (err) {
+      message.error("Please check field values!");
+    }
   };
 
   const menu = (
