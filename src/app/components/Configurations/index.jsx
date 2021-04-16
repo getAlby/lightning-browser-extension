@@ -167,35 +167,6 @@ const Configurations = () => {
         <Button type="primary" shape="round" onClick={goToAddAccount}>
           Add Account
         </Button>
-        {/* <Tabs defaultActiveKey="1">
-              <TabPane tab="LND Account" key="1">
-                <LndForm
-                  saveLndAccount={saveLndAccount}
-                  addLndAccountFailure={formSubmitFailure}
-                />
-              </TabPane>
-
-              <TabPane tab="LND Hub Account" key="2">
-                <LndHubForm
-                  saveLndHubAccount={saveLndHubAccount}
-                  addLndHubAccountFailure={formSubmitFailure}
-                />
-              </TabPane>
-
-              <TabPane tab="Native Connection" key="3">
-                <NativeConnectionForm
-                  saveNativeAccount={saveNativeAccount}
-                  addNativeConnectionFailure={formSubmitFailure}
-                />
-              </TabPane>
-
-              <TabPane tab="LNbits" key="4">
-                <LnBitsForm
-                  onFinish={saveLnBitsAccount}
-                  onFinishFailed={formSubmitFailure}
-                ></LnBitsForm>
-              </TabPane>
-            </Tabs> */}
       </TabPane>
 
       <TabPane tab="Allowances" key="3">

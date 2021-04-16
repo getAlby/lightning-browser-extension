@@ -9,19 +9,32 @@ import LndHubForm from "../LndHub";
 import LnBitsForm from "../LnBits";
 import NativeConnectionForm from "../NativeConnection";
 
+const CONNECTORS = {
+  lnd: "LND",
+  lndHub: "LndHub",
+  lnBits: "LnBits",
+  native: "Native",
+};
+
 const Account = () => {
   const history = useHistory();
   const location = useLocation();
   const accountId = location.state && location.state.accountId;
-  const [account, setAccount] = useState(null);
+  const [account, setAccount] = useState({});
+  const [accountType, setAccountType] = useState("lnd");
 
   useEffect(() => {
     async function fetchAccount() {
-      const acc = await accountManager.getById(accountId);
+      const acc = (await accountManager.getById(accountId)) || {};
       setAccount(acc);
+      if (acc.type) {
+        setAccountType(acc.type);
+      }
+      console.log("########################2 acc ", acc);
+      console.log("########################2 accountType: ", accountType);
     }
     fetchAccount();
-  }, [accountId]);
+  }, [accountId, accountType]);
 
   let connectorForm = null;
   const submitHook = (innerForm) => {
@@ -31,11 +44,14 @@ const Account = () => {
   const handleSubmit = async () => {
     try {
       const values = connectorForm && (await connectorForm.validateFields());
-      if (account && account.id) {
-        await accountManager.update(Object.assign(account, values));
-        message.success(`Account ${account.name} updated!`);
+      const newAccount = Object.assign({}, account || {}, values || {});
+      newAccount.type = accountType;
+      setAccount(newAccount);
+      if (newAccount.id) {
+        await accountManager.update(newAccount);
+        message.success(`Account ${newAccount.name} updated!`);
       } else {
-        const newAccount = await accountManager.add(values);
+        await accountManager.add(newAccount);
         message.success(`Account ${newAccount.name} created!`);
       }
       history.goBack();
@@ -44,12 +60,18 @@ const Account = () => {
     }
   };
 
+  const handleConnectorTypeChange = (type) => {
+    console.log("############## type", type);
+    setAccountType(type);
+  };
+
   const menu = (
     <Menu>
-      <Menu.Item key="lnd">LND</Menu.Item>
-      <Menu.Item key="lndHub">LndHub</Menu.Item>
-      <Menu.Item key="lnBits">LnBits</Menu.Item>
-      <Menu.Item key="native">Native</Menu.Item>
+      {Object.keys(CONNECTORS).map((key) => (
+        <Menu.Item key={key} onClick={() => handleConnectorTypeChange(key)}>
+          {CONNECTORS[key]}
+        </Menu.Item>
+      ))}
     </Menu>
   );
   return (
@@ -60,7 +82,7 @@ const Account = () => {
           <Form name="basic" layout="vertical">
             <Form.Item label="Type" name="type">
               <Dropdown.Button overlay={menu}>
-                Dropdown sasasasasasasassas
+                {CONNECTORS[accountType]}
               </Dropdown.Button>
             </Form.Item>
           </Form>

@@ -12,11 +12,7 @@ const layout = {
   },
 };
 
-const LndForm = ({
-  initialValues = {},
-  saveLndAccount,
-  submitHook = () => {},
-}) => {
+const LndForm = ({ initialValues = {}, submitHook = () => {} }) => {
   const [form] = Form.useForm();
   submitHook(form);
 
@@ -32,13 +28,7 @@ const LndForm = ({
   }, [form, initialValues]);
 
   return (
-    <Form
-      {...layout}
-      form={form}
-      name="basic"
-      layout="vertical"
-      onFinish={(values) => saveLndAccount(values, form)}
-    >
+    <Form {...layout} form={form} name="basic" layout="vertical">
       <FormItem
         label="Name"
         name="name"
