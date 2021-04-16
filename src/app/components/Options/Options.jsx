@@ -1,7 +1,7 @@
 import React from "react";
 import { createHashHistory } from "history";
 import { HashRouter, Route, Switch } from "react-router-dom";
-import { Layout } from "antd";
+import { Layout, Modal } from "antd";
 
 import passwordManager from "../../../common/lib/password-manager";
 import Account from "../Account";
@@ -61,7 +61,9 @@ class Options extends React.Component {
                   path="/unlock"
                   render={() =>
                     this.state.isUnlocked === false ? (
-                      <Unlock onUnlock={this.handleUnlock.bind(this)} />
+                      <Modal closeable={false} visible={true} footer={null}>
+                        <Unlock onUnlock={this.handleUnlock.bind(this)} />
+                      </Modal>
                     ) : (
                       <Loading />
                     )
@@ -72,9 +74,11 @@ class Options extends React.Component {
                   path="/init"
                   render={() =>
                     this.state.isInitialized === false ? (
-                      <SetPassword
-                        onOk={this.handlePasswordConfigured.bind(this)}
-                      ></SetPassword>
+                      <Modal closeable={false} visible={true} footer={null}>
+                        <SetPassword
+                          onOk={this.handlePasswordConfigured.bind(this)}
+                        ></SetPassword>
+                      </Modal>
                     ) : (
                       <Loading />
                     )
