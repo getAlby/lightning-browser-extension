@@ -26,7 +26,7 @@ class Prompt extends React.Component {
     }
     if (message.args) {
       args = JSON.parse(message.args);
-      var decoded = invoice.decode(args.paymentRequest)
+      const decodedPaymentRequest = invoice.decode(args.paymentRequest)
     }
     this.state = { origin, args, type: message.type, invoice: decoded ?? {}  };
   }
