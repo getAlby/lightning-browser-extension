@@ -70,11 +70,12 @@ const Account = () => {
       const values = connectorForm && (await connectorForm.validateFields());
       console.log("###################### connectors", connectors);
       const lndConnector = new connectors.lnd({
-          macaroon: values.macaroon,
-          url: values.url,
+        macaroon: values.macaroon,
+        url: values.url,
       });
-      const address = await lndConnector.getAddress();
-      console.log("####################### address", address);
+      const info = await lndConnector.getInfo();
+      console.log("####################### info", info);
+      message.success(`Alias: ${info.data.alias || ""}`);
     } catch (err) {
       console.log("### err", err);
       message.error(`Cannot connect ${err.message || ""}`);

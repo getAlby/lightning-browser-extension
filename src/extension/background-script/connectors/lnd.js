@@ -4,6 +4,7 @@ import Base from "./base";
 class Lnd extends Base {
   constructor(connectorConfig, globalSettings) {
     super(connectorConfig, globalSettings);
+    this.config = connectorConfig;
     this.getInfo = memoizee(
       (args) => this.request("GET", "/v1/getinfo", undefined, {}),
       {
