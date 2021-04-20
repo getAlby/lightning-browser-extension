@@ -5,7 +5,6 @@ import { Form, Row, Col, Menu, Dropdown, Button, message } from "antd";
 
 import accountManager from "../../../common/lib/account-manager";
 import connectors from "../../../extension/background-script/connectors";
-// src/extension/background-script/connectors/lnd.js
 import LndForm from "../Lnd";
 import LndHubForm from "../LndHub";
 import LnBitsForm from "../LnBits";
@@ -65,16 +64,13 @@ const Account = () => {
   };
 
   const handleTestAccount = async () => {
-    console.log("############################## handleTestAccount");
     try {
       const values = connectorForm && (await connectorForm.validateFields());
-      console.log("###################### connectors", connectors);
       const lndConnector = new connectors.lnd({
         macaroon: values.macaroon,
         url: values.url,
       });
       const info = await lndConnector.getInfo();
-      console.log("####################### info", info);
       message.success(`Alias: ${info.data.alias || ""}`);
     } catch (err) {
       console.log("### err", err);
