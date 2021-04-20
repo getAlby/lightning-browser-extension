@@ -1,5 +1,5 @@
 import dataStore from "../data-store";
-import messaging from "./messaging";
+import messagingSvc from "./messaging.svc";
 
 async function init(password, confirmedPassword) {
   if (password !== confirmedPassword) {
@@ -39,11 +39,11 @@ async function _checkUserPassword(password) {
 
 async function _checkCachedPassword() {
   return new Promise(async (resolve) => {
-    await messaging.onMessage("cached-password", async (msg) => {
+    await messagingSvc.onMessage("cached-password", async (msg) => {
       const isPasswordSet = await _checkUserPassword(msg.password);
       resolve(isPasswordSet);
     });
-    await messaging.sendMessage("get-password-from-cache");
+    await messagingSvc.sendMessage("get-password-from-cache");
   });
 }
 

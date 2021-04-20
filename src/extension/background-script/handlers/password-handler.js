@@ -1,14 +1,14 @@
-import messaging from "../../../common/services/messaging";
+import messagingSvc from "../../../common/services/messaging.svc";
 
 let chachedPassword = "";
 
 function handlePassword() {
-  messaging.onMessage("set-password-to-cache", (msg) => {
+  messagingSvc.onMessage("set-password-to-cache", (msg) => {
     chachedPassword = msg.password;
   });
 
-  messaging.onMessage("get-password-from-cache", () => {
-    messaging.sendMessage("cached-password", {
+  messagingSvc.onMessage("get-password-from-cache", () => {
+    messagingSvc.sendMessage("cached-password", {
       password: chachedPassword,
     });
   });

@@ -3,7 +3,7 @@ import { createHashHistory } from "history";
 import { Button, Input } from "antd";
 import { UnlockTwoTone } from "@ant-design/icons";
 
-import messaging from "../../../common/services/messaging";
+import messagingSvc from "../../../common/services/messaging.svc";
 import passwordSvc from "../../../common/services/password.svc";
 import variables from "./variables.module.scss";
 import "./styles.scss";
@@ -26,7 +26,7 @@ class Unlock extends React.Component {
       this.state.password
     );
     if (isValidPassword) {
-      messaging.sendMessage("set-password-to-cache", {
+      messagingSvc.sendMessage("set-password-to-cache", {
         password: this.state.password,
       });
       this.props.onUnlock && this.props.onUnlock();
