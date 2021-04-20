@@ -73,7 +73,6 @@ const Account = () => {
       const info = await lndConnector.getInfo();
       message.success(`Alias: ${info.data.alias || ""}`);
     } catch (err) {
-      console.log("### err", err);
       message.error(`Cannot connect ${err.message || ""}`);
     }
   };
