@@ -47,11 +47,11 @@ async function _checkCachedPassword() {
   });
 }
 
-const passwordManager = {
+const passwordSvc = {
   init,
   checkPassword,
   isInitialized,
   isUnlocked,
 };
 
-export default passwordManager;
+export default passwordSvc;

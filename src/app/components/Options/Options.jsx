@@ -3,7 +3,7 @@ import { createHashHistory } from "history";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import { Layout, Modal } from "antd";
 
-import passwordManager from "../../../common/services/password-manager";
+import passwordSvc from "../../../common/services/password.svc";
 import Account from "../Account";
 import SetPassword from "../SetPassword";
 import Unlock from "../Unlock";
@@ -20,9 +20,9 @@ class Options extends React.Component {
   }
 
   async checkDataStoreState() {
-    await passwordManager.checkPassword();
-    this.setState({ isInitialized: await passwordManager.isInitialized() });
-    this.setState({ isUnlocked: await passwordManager.isUnlocked() });
+    await passwordSvc.checkPassword();
+    this.setState({ isInitialized: await passwordSvc.isInitialized() });
+    this.setState({ isUnlocked: await passwordSvc.isUnlocked() });
     this.updateRoute();
   }
 

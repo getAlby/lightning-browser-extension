@@ -1,7 +1,7 @@
 import React from "react";
 import { Input, Button, Form } from "antd";
 
-import passwordManager from "../../../common/services/password-manager";
+import passwordSvc from "../../../common/services/password.svc";
 import messaging from "../../../common/services/messaging";
 
 const SetPassword = ({ onOk }) => {
@@ -9,7 +9,7 @@ const SetPassword = ({ onOk }) => {
 
   const onDone = async (values) => {
     if (values.password === values.confirm) {
-      await passwordManager.init(values.password, values.confirm);
+      await passwordSvc.init(values.password, values.confirm);
       messaging.sendMessage("set-password-to-cache", {
         password: values.password,
       });

@@ -2,7 +2,7 @@ import React from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import { createHashHistory } from "history";
 
-import passwordManager from "../../../common/services/password-manager";
+import passwordSvc from "../../../common/services/password.svc";
 
 import Home from "../Home";
 import Unlock from "../Unlock";
@@ -24,9 +24,9 @@ class Popup extends React.Component {
   }
 
   async checkDataStoreState() {
-    await passwordManager.checkPassword();
-    this.setState({ isInitialized: await passwordManager.isInitialized() });
-    this.setState({ isUnlocked: await passwordManager.isUnlocked() });
+    await passwordSvc.checkPassword();
+    this.setState({ isInitialized: await passwordSvc.isInitialized() });
+    this.setState({ isUnlocked: await passwordSvc.isUnlocked() });
     this.updateRoute();
   }
 

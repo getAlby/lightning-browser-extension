@@ -4,7 +4,7 @@ import { Button, Input } from "antd";
 import { UnlockTwoTone } from "@ant-design/icons";
 
 import messaging from "../../../common/services/messaging";
-import passwordManager from "../../../common/services/password-manager";
+import passwordSvc from "../../../common/services/password.svc";
 import variables from "./variables.module.scss";
 import "./styles.scss";
 class Unlock extends React.Component {
@@ -22,7 +22,7 @@ class Unlock extends React.Component {
   }
 
   async unlock() {
-    const isValidPassword = await passwordManager.checkPassword(
+    const isValidPassword = await passwordSvc.checkPassword(
       this.state.password
     );
     if (isValidPassword) {
