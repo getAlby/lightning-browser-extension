@@ -2,7 +2,7 @@ import { Tabs, Divider, Button } from "antd";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-import accountManager from "../../../common/services/account-manager";
+import accountSvc from "../../../common/services/account.svc";
 
 import Settings from "../../../common/lib/settings";
 import Allowances from "../../../common/lib/allowances";
@@ -30,8 +30,8 @@ const Configurations = () => {
 
   const load = () => {
     return Promise.all([
-      accountManager.getAll(),
-      accountManager.getCurrentAccount(),
+      accountSvc.getAll(),
+      accountSvc.getCurrentAccount(),
       settingsStore.load(),
       allowancesStore.load(),
     ]).then((responses) => {
@@ -47,12 +47,12 @@ const Configurations = () => {
   };
 
   const updateCurrentAccount = async (accountId) => {
-    await accountManager.setCurrentAccount(accountId);
+    await accountSvc.setCurrentAccount(accountId);
     await load();
   };
 
   const removeAccount = async (accountId) => {
-    await accountManager.remove(accountId);
+    await accountSvc.remove(accountId);
     await load();
   };
 

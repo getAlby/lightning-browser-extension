@@ -1,7 +1,7 @@
 import browser from "webextension-polyfill";
 import utils from "../../../common/lib/utils";
 import Settings from "../../../common/lib/settings";
-import accountManager from "../../../common/services/account-manager";
+import accountSvc from "../../../common/services/account.svc";
 import connectors from "../connectors";
 
 import initLsatInterceptor from "./lsatInterceptor";
@@ -10,7 +10,7 @@ let currentUnlockPassword; // TODO: rethink this
 let connector;
 let settings = new Settings();
 const initConnector = async () => {
-  const account = await accountManager.getCurrentAccount();
+  const account = await accountSvc.getCurrentAccount();
   console.log(account);
   if (!account) {
     console.log("Account not found");

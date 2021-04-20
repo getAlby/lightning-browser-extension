@@ -3,7 +3,7 @@ import { useLocation, useHistory } from "react-router-dom";
 
 import { Form, Row, Col, Menu, Dropdown, Button, message } from "antd";
 
-import accountManager from "../../../common/services/account-manager";
+import accountSvc from "../../../common/services/account.svc";
 import connectors from "../../../extension/background-script/connectors";
 import LndForm from "../Lnd";
 import LndHubForm from "../LndHub";
@@ -26,7 +26,7 @@ const Account = () => {
 
   useEffect(() => {
     async function fetchAccount() {
-      const acc = (await accountManager.getById(accountId)) || {};
+      const acc = (await accountSvc.getById(accountId)) || {};
       setAccount(acc);
       if (acc.type) {
         setAccountType(acc.type);
@@ -47,10 +47,10 @@ const Account = () => {
       newAccount.type = accountType;
       setAccount(newAccount);
       if (newAccount.id) {
-        await accountManager.update(newAccount);
+        await accountSvc.update(newAccount);
         message.success(`Account ${newAccount.name} updated!`);
       } else {
-        await accountManager.add(newAccount);
+        await accountSvc.add(newAccount);
         message.success(`Account ${newAccount.name} created!`);
       }
       history.goBack();

@@ -67,7 +67,7 @@ async function _setAccounts(accounts) {
   return dataStore().set(ACCOUNTS_DATA_STORE_KEY, accounts);
 }
 
-const accountManager = {
+const accountSvc = {
   getAll,
   getById,
   add,
@@ -78,4 +78,4 @@ const accountManager = {
   getCurrentAccount,
 };
 
-export default accountManager;
+export default accountSvc;
