@@ -1,7 +1,7 @@
 import browser from "webextension-polyfill";
 import utils from "../../../common/lib/utils";
 import Settings from "../../../common/lib/settings";
-import accountManager from "../../../common/lib/account-manager";
+import accountManager from "../../../common/services/account-manager";
 import connectors from "../connectors";
 
 import initLsatInterceptor from "./lsatInterceptor";

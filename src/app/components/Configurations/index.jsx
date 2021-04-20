@@ -2,7 +2,7 @@ import { Tabs, Divider, Button } from "antd";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-import accountManager from "../../../common/lib/account-manager";
+import accountManager from "../../../common/services/account-manager";
 
 import Settings from "../../../common/lib/settings";
 import Allowances from "../../../common/lib/allowances";

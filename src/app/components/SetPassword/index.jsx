@@ -1,8 +1,8 @@
 import React from "react";
 import { Input, Button, Form } from "antd";
 
-import passwordManager from "../../../common/lib/password-manager";
-import messaging from "../../../common/lib/messaging";
+import passwordManager from "../../../common/services/password-manager";
+import messaging from "../../../common/services/messaging";
 
 const SetPassword = ({ onOk }) => {
   const [form] = Form.useForm();

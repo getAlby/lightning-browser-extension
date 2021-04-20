@@ -3,8 +3,8 @@ import { createHashHistory } from "history";
 import { Button, Input } from "antd";
 import { UnlockTwoTone } from "@ant-design/icons";
 
-import messaging from "../../../common/lib/messaging";
-import passwordManager from "../../../common/lib/password-manager";
+import messaging from "../../../common/services/messaging";
+import passwordManager from "../../../common/services/password-manager";
 import variables from "./variables.module.scss";
 import "./styles.scss";
 class Unlock extends React.Component {

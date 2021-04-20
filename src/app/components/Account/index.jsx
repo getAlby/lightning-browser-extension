@@ -3,7 +3,7 @@ import { useLocation, useHistory } from "react-router-dom";
 
 import { Form, Row, Col, Menu, Dropdown, Button, message } from "antd";
 
-import accountManager from "../../../common/lib/account-manager";
+import accountManager from "../../../common/services/account-manager";
 import connectors from "../../../extension/background-script/connectors";
 import LndForm from "../Lnd";
 import LndHubForm from "../LndHub";

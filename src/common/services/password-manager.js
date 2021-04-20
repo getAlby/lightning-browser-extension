@@ -1,5 +1,5 @@
 import dataStore from "../data-store";
-import messaging from "../../common/lib/messaging";
+import messaging from "./messaging";
 
 async function init(password, confirmedPassword) {
   if (password !== confirmedPassword) {

@@ -1,4 +1,4 @@
-import messaging from "../../../common/lib/messaging";
+import messaging from "../../../common/services/messaging";
 
 let chachedPassword = "";
 

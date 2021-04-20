@@ -2,7 +2,7 @@ import React from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import { createHashHistory } from "history";
 
-import passwordManager from "../../../common/lib/password-manager";
+import passwordManager from "../../../common/services/password-manager";
 
 import Home from "../Home";
 import Unlock from "../Unlock";
