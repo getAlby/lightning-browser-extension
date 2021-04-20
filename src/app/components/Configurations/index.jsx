@@ -6,7 +6,6 @@ import accountSvc from "../../../common/services/account.svc";
 
 import Settings from "../../../common/lib/settings";
 import Allowances from "../../../common/lib/allowances";
-
 import ListData from "../ListData";
 
 import "./styles.scss";
