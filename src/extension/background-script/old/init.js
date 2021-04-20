@@ -10,7 +10,7 @@ let currentUnlockPassword; // TODO: rethink this
 let connector;
 let settings = new Settings();
 const initConnector = async () => {
-  const account = accountManager.getCurrentAccount();
+  const account = await accountManager.getCurrentAccount();
   console.log(account);
   if (!account) {
     console.log("Account not found");
