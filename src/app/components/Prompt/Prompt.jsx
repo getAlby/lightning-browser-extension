@@ -8,6 +8,8 @@ import Unlock from "../Unlock";
 import Enable from "../Enable";
 import Loading from "../Loading";
 import ConfirmPayment from "../ConfirmPayment";
+let invoice = require("@node-lightning/invoice");
+
 
 import "./styles.scss";
 
@@ -18,13 +20,15 @@ class Prompt extends React.Component {
     const message = qs.parse(window.location.search);
     let origin = {};
     let args = {};
+    console.log(message)
     if (message.origin) {
       origin = JSON.parse(message.origin);
     }
     if (message.args) {
       args = JSON.parse(message.args);
+      const decodedPaymentRequest = invoice.decode(args.paymentRequest)
     }
-    this.state = { origin, args, type: message.type };
+    this.state = { origin, args, type: message.type, invoice: decodedPaymentRequest ?? {}  };
   }
 
   componentDidMount() {
@@ -56,7 +60,11 @@ class Prompt extends React.Component {
             <Route
               exact
               path="/sendPayment"
-              render={(props) => <ConfirmPayment origin={this.state.origin} />}
+              render={
+                (props) => <ConfirmPayment 
+                              invoice={this.state.invoice}
+                              origin={this.state.origin}
+              />}
             />
           </Switch>
         </section>

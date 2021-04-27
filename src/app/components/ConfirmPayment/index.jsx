@@ -1,15 +1,20 @@
 import React from "react";
 import { createHashHistory } from "history";
+import { Button, Input, Result } from 'antd';
 
 import msg from "../../../common/lib/msg";
 
-// import "./styles.scss";
+import "./styles.scss";
 
 class ConfirmPayment extends React.Component {
   constructor(props) {
     super(props);
+    console.log('props', props)
     this.history = createHashHistory();
-    this.state = {};
+    this.state = {
+      budget: null,
+      budgetSet: false
+    };
   }
 
   enable() {
@@ -27,6 +32,7 @@ class ConfirmPayment extends React.Component {
   }
 
   saveBudget() {
+    this.setState({ budgetSaved: true })
     return msg.request(
       "setAllowance",
       { budget: this.state.budget, spent: 0, enabled: true },
@@ -36,23 +42,60 @@ class ConfirmPayment extends React.Component {
 
   render() {
     return (
-      <section id="confirm-payment">
-        <button onClick={() => this.enable()}>Confirm</button>
-        <br />
-        <button onClick={() => this.reject()}>Reject</button>
-        <hr />
-        <p>
-          Budget:
-          <input
-            type="text"
-            name="budget"
-            onChange={(event) => {
-              this.setBudget(event.target.value);
-            }}
-          />
-          <button onClick={() => this.saveBudget()}>Save Budget</button>
-        </p>
-      </section>
+      <div className="d-flex">
+        <section 
+          id="confirm-payment"
+          className="confirm-payment--container d-flex"
+        >
+            <Result
+                status="info"
+                title={`Confirm paying ${this.props.invoice?.valueSat} Satoshi`}
+                subTitle={`You are about to pay an invoice on ${this.props.origin?.domain} for ${this.props.invoice?.desc}`}
+                extra={[
+                      <div className="confirm-payment--container__actions d-flex">
+                        <div className="d-flex">
+                        <Input
+                          type="text"
+                          name="budget"
+                          placeholder="Budget"
+                          addonBefore="Satoshi"
+                          onChange={(event) => {
+                            this.setBudget(event.target.value);
+                          }}
+                        />
+                          {!this.state.budgetSaved &&
+                            <Button 
+                              onClick={() =>
+                                this.saveBudget()
+                              }
+                              type="dashed" 
+                              danger
+                            >Save Budget</Button>
+                          }
+                          {this.state.budgetSaved &&
+                            <Button ghost disabled>Budget saved</Button>
+                          }
+                        </div>
+                        <div class="ant-result-subtitle">You may set a balance to not be asked for confirmation on payments until it is exhausted.</div>
+
+                        <div className="confirm-payment--container__actions--budget  d-flex">
+                        </div>
+                        <div className="confirm-payment--container__actions--cta  d-flex">
+                          <Button 
+                            type="primary"
+                            onClick={() => this.enable()}
+                            key="console">
+                                    Confirm Payment
+                          </Button>
+                          <Button 
+                            onClick={() => this.reject()}
+                            key="buy">Reject Payment</Button>
+                        </div>
+                      </div>
+                ]}
+              />
+        </section>
+      </div>
     );
   }
 }

@@ -41,6 +41,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "@babel/runtime": "^7.13.10",
+    "@node-lightning/invoice": "^0.22.0",
     "advanced-css-reset": "^1.2.2",
     "antd": "^4.15.0",
     "assert": "^2.0.0",
@@ -109,6 +110,7 @@
     "react-test-renderer": "^17.0.2",
     "resolve-url-loader": "^3.1.2",
     "sass-loader": "^11.0.1",
+    "stream-browserify": "^3.0.0",
     "terser-webpack-plugin": "5",
     "webpack": "^5.31.0",
     "webpack-cli": "^4.6.0",

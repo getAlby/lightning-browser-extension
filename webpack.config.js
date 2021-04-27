@@ -63,6 +63,7 @@ module.exports = {
       process: "process/browser",
       crypto: "crypto-browserify",
       assert: "assert",
+      stream: "stream-browserify"
     },
   },
 
