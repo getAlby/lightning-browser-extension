@@ -24,7 +24,7 @@
     "https://*/*"
   ],
 
- "content_security_policy": "script-src 'self' http://localhost:8097; object-src 'self'; connect-src wss://remotedev.io/socketcluster/ ws://localhost:8000 ws://localhost:8097 ws://localhost:9090 https://alice-wallet.webln.external.myzel.io:443 https://blockchain.info/ticker",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
 
   "__chrome|firefox__author": "bumi",
   "__opera__developer": {

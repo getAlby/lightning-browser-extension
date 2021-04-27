@@ -2,6 +2,8 @@ import { Typography, Layout, Tabs } from "antd";
 import React, { useState, useEffect } from "react";
 
 import msg from "../../../common/lib/msg";
+import store from "../../../app/store/index.js";
+import addTodo from "../../store/features/todos/todosSlice.js"
 import { encryptData } from "../../../common/lib/crypto";
 
 import Accounts from "../../../common/lib/accounts";
@@ -41,6 +43,12 @@ const Options = () => {
   }, []);
 
   const load = () => {
+    console.log('initial state', store.getState())
+    store.dispatch({
+      type: 'todos/addTodo', 
+      payload: "this needs to be done"
+    })
+    console.log('next state', store.getState())
     return Promise.all([
       accountsStore.load(),
       settingsStore.load(),

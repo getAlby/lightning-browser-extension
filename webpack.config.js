@@ -186,6 +186,10 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [{ from: "static/assets", to: "assets" }],
     }),
+    // required for remote-redux-devtools
+    new webpack.DefinePlugin({
+     'process.env.node_env': JSON.stringify('development')
+    })
   ],
 
   optimization: {
