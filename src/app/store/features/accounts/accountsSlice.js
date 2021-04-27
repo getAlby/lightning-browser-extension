@@ -5,7 +5,7 @@ const initialState = [
 ]
 
 function nextAccountId(accounts) {
-  const maxId = accounts.reduce((maxId, todo) => Math.max(todo.id, maxId), -1)
+  const maxId = accounts.reduce((maxId, account) => Math.max(account.id, maxId), -1)
   return maxId + 1
 }
 
