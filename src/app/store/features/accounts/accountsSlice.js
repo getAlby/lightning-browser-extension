@@ -4,20 +4,20 @@ const initialState = [
   { id: 2, text: 'Build something fun!', completed: false, color: 'blue' }
 ]
 
-function nextTodoId(todos) {
-  const maxId = todos.reduce((maxId, todo) => Math.max(todo.id, maxId), -1)
+function nextAccountId(accounts) {
+  const maxId = accounts.reduce((maxId, todo) => Math.max(todo.id, maxId), -1)
   return maxId + 1
 }
 
 
-export default function todosReducer(state = initialState, action) {
+export default function accountsReducer(state = initialState, action) {
   switch (action.type) {
-    case 'todos/addTodo': {
-      // Can return just the new todos array - no extra object around it
+    case 'accounts/addAccount': {
+      // Can return just the new accounts array - no extra object around it
       return [
         ...state,
         {
-          id: nextTodoId(state),
+          id: nextAccountId(state),
           text: action.payload,
           completed: false
         }
