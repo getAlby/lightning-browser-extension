@@ -6,9 +6,9 @@
 
 The extension provides deep Lighting Network integration for websites (for payments and authentication flows).
 
-The goal is to write a minimal web extension supporting the developing [WebLN standard](https://webln.dev) to allow browsers to interact with the Lightning Network.
+The goal is to write a minimal web extension to allow browsers to interact with the Lightning Network.
 
-The extension implements the WebLN standard. The goal is to write a miminmal interface that allows websites to connect to Lightning Network nodes (to request payments, invoices, signatures, login, etc.)
+The extension implements the WebLN standard as the interface that allows websites to connect to Lightning Network nodes (to request payments, invoices, signatures, login, etc.)
 
 The extension can connect to different node implementation and supports custodial and non-custodial setups.
 E.g.:
