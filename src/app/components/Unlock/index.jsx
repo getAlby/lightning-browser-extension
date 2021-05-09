@@ -20,6 +20,10 @@ class Unlock extends React.Component {
     this.setState({ error: null, password: event.target.value });
   }
 
+  reset() {
+    utils.openPage('welcome.html');
+  }
+
   unlock() {
     utils
       .call("unlock", { password: this.state.password })
@@ -54,7 +58,19 @@ class Unlock extends React.Component {
         >
           Unlock
         </Button>
-        <p>{this.state.error}</p>
+        {this.state.error && (
+          <p>
+            {this.state.error} (
+            <span
+              onClick={(event) => {
+                this.reset();
+              }}
+            >
+              config
+            </span>
+            )
+          </p>
+        )}
       </div>
     );
   }

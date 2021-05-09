@@ -6,7 +6,7 @@ class Settings {
       storageName: "settings",
       defaults: {
         debug: true,
-        enableLsats: true,
+        enableLsats: false,
         salt: "",
       },
     });
@@ -49,7 +49,7 @@ class Settings {
   }
 
   reset() {
-    this.storage.set(this.storage.defaults);
+    return this.set(this.storage.defaults);
   }
 }
 

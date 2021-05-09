@@ -106,6 +106,12 @@ Then run the following:
   - Load the extension via `opera:extensions`
   - Check the `Developer Mode` and load as unpacked from extension’s extracted directory.
 
+** Use the development LND account**
+
+To connect to a remote development LND node you can use a [test account](https://github.com/bumi/lightning-browser-extension/wiki/Test-setup)
+Configure BOB in the extension and pay ALICE on [https://regtest-alice.herokuapp.com/](https://regtest-alice.herokuapp.com/)
+  
+
 ### Production
 
 - `yarn run build` builds the extension for all the browsers to `extension/BROWSER` directory respectively.
