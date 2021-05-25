@@ -14,7 +14,6 @@ import LnBitsForm from "../LnBits";
 import NativeConnectionForm from "../NativeConnection";
 
 import ListData from "../ListData";
-import SetPassword from "../SetPassword";
 
 import { normalizeAccountsData } from "../../../common/utils/helpers";
 
@@ -50,7 +49,6 @@ const Options = () => {
       setCurrentAccount(accountsStore.currentKey);
       setSettings(settingsStore.settings);
       setAllowances(allowancesStore.allowances);
-      console.log("load all", settingsStore.settings);
     });
   };
 
@@ -124,7 +122,9 @@ const Options = () => {
   };
 
   const resetAccounts = () => {
-    return accountsStore.reset();
+    return accountsStore.reset().then(() => {
+      document.location.reload();
+    });
   };
 
   const resetAllowances = () => {
@@ -161,11 +161,6 @@ const Options = () => {
 
   return (
     <Layout>
-      <SetPassword
-        visible={showPasswordModal}
-        onOk={handlePasswordModalOk}
-      ></SetPassword>
-
       <Header>Lightning Extension Options</Header>
 
       <Content>
@@ -188,6 +183,16 @@ const Options = () => {
 
             <Title level={2}>Add Account</Title>
 
+            <p>
+              Choose a password:
+              <input
+                type="text"
+                value={password}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+              />
+            </p>
             <Tabs defaultActiveKey="1">
               <TabPane tab="LND Account" key="1">
                 <LndForm

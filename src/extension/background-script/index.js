@@ -15,6 +15,7 @@ const initConnector = async () => {
   const account = accounts.current;
   console.log(account);
   if (!account) {
+    connector = null;
     console.log("Account not found");
     return;
   }
@@ -66,7 +67,7 @@ const handleConnectorCalls = (message, sender, sendResponse) => {
   // TODO: create an onboarding wizard
   if (!connector) {
     console.log("No connector/account found");
-    utils.openPage("options.html");
+    utils.openPage("welcome.html");
     return Promise.resolve({ error: "No account available" });
   }
 
