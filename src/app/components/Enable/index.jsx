@@ -9,7 +9,7 @@ import msg from "../../../common/lib/msg";
 
 class Enable extends React.Component {
   constructor(props) {
-    super(props);
+    super(props); 
     this.history = createHashHistory();
     this.state = {
       loading: true,
