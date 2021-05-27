@@ -1,11 +1,18 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
-  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./static/views/welcome.html"],
-  darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+      },
+      colors: {
+        "orange-bitcoin": "#f7931a",
+        "red-bitcoin": "#eb5757",
+        "green-bitcoin": "#27ae60",
+        "blue-bitcoin": "#2d9cdb",
+        "purple-bitcoin": "#bb6bd9"
+      },
+    },
   },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
 };
