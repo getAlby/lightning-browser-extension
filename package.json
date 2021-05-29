@@ -21,7 +21,7 @@
     "build:chrome": "cross-env NODE_ENV=production cross-env TARGET_BROWSER=chrome webpack",
     "build:firefox": "cross-env NODE_ENV=production cross-env TARGET_BROWSER=firefox webpack",
     "build:opera": "cross-env NODE_ENV=production cross-env TARGET_BROWSER=opera webpack",
-    "build": "craco build && npm run build:style && yarn run build:chrome && yarn run build:firefox && yarn run build:opera",
+    "build": "yarn run build:style && yarn run build:chrome && yarn run build:firefox && yarn run build:opera",
     "lint": "eslint . --ext .js,.jsx --max-warnings 0",
     "lint:fix": "eslint . --ext .js,.jsx --fix",
     "format": "prettier --loglevel silent --write \"**/*.(js|ts|jsx|tsx)\"",
