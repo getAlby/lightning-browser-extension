@@ -44,7 +44,6 @@
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "@babel/runtime": "^7.13.10",
-    "@craco/craco": "^6.1.2",
     "@headlessui/react": "^1.2.0",
     "@heroicons/react": "^1.0.1",
     "@node-lightning/invoice": "^0.22.0",
