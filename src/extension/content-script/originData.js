@@ -1,15 +1,19 @@
 // https://github.com/joule-labs/joule-extension/blob/1ba2050ef0dcfacdd6bfedf291acaff39d1baa8a/src/app/utils/prompt.ts
 
 function getDocumentName() {
-  const nameMeta = document.querySelector(
+  const ogSiteName = document.querySelector(
     'head > meta[property="og:site_name"]'
   );
-  if (nameMeta) {
-    return nameMeta.content;
+  if (ogSiteName && ogSiteName.content && ogSiteName.content !== "") {
+    return ogSiteName.content;
+  }
+  const ogTitle = document.querySelector('head > meta[property="og:title"]');
+  if (ogTitle && ogTitle.content && ogTitle.content !== "") {
+    return ogTitle.content;
   }
 
   const titleMeta = document.querySelector('head > meta[name="title"]');
-  if (titleMeta) {
+  if (titleMeta && titleMeta.content && titleMeta.content !== "") {
     return titleMeta.content;
   }
 
@@ -31,6 +35,16 @@ function getDocumentIcon() {
     return makeAbsoluteUrl(href);
   }
 
+  const ogImageSecure = document.querySelector(
+    'head > meta[property="og:image:secure"]'
+  );
+  if (ogImageSecure) {
+    return makeAbsoluteUrl(ogImageSecure.content);
+  }
+  const ogImage = document.querySelector('head > meta[property="og:image"]');
+  if (ogImage) {
+    return makeAbsoluteUrl(ogImage.content);
+  }
   // Try for favicon
   const favicon = document.querySelector('head > link[rel="shortcut icon"]');
   if (favicon) {
@@ -39,6 +53,28 @@ function getDocumentIcon() {
 
   // Fallback to default favicon path, let it be replaced in view if it fails
   return `${window.location.origin}/favicon.ico`;
+}
+
+function getDocumentDescription() {
+  const ogDescription = document.querySelector(
+    'head > meta[property="og:description"]'
+  );
+  if (ogDescription && ogDescription.content && ogDescription.content !== "") {
+    return ogDescription.content;
+  }
+
+  const descriptionMeta = document.querySelector(
+    'head > meta[name="description"]'
+  );
+  if (
+    descriptionMeta &&
+    descriptionMeta.content &&
+    descriptionMeta.content !== ""
+  ) {
+    return descriptionMeta.content;
+  }
+
+  return "";
 }
 
 // Makes absolute path given any path on the site, namely relative ones
@@ -54,7 +90,10 @@ export default function getOriginData() {
 
   return {
     domain: window.location.origin,
+    host: window.location.host,
+    pathname: window.location.pathname,
     name: getDocumentName(),
+    description: getDocumentDescription(),
     icon: getDocumentIcon(),
     external: true, // indicate that the call is coming from the website (and not made internally within the extension)
   };
