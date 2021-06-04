@@ -20,15 +20,16 @@ class Prompt extends React.Component {
     const message = qs.parse(window.location.search);
     let origin = {};
     let args = {};
+    let invoice = {};
     console.log(message)
     if (message.origin) {
       origin = JSON.parse(message.origin);
     }
     if (message.args) {
       args = JSON.parse(message.args);
-      const decodedPaymentRequest = invoice.decode(args.paymentRequest)
+      invoice = invoice.decode(args.paymentRequest);
     }
-    this.state = { origin, args, type: message.type, invoice: decodedPaymentRequest ?? {}  };
+    this.state = { origin, args, invoice, type: message.type };
   }
 
   componentDidMount() {
@@ -61,7 +62,7 @@ class Prompt extends React.Component {
               exact
               path="/sendPayment"
               render={
-                (props) => <ConfirmPayment 
+                (props) => <ConfirmPayment
                               invoice={this.state.invoice}
                               origin={this.state.origin}
               />}
