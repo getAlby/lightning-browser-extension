@@ -13,7 +13,6 @@ const Template = (args) => (
   <ListData {...args} onResetCallback={() => alert("Reset callback fn")} />
 );
 
-//👇 Each story then reuses that template
 export const Default = Template.bind({});
 
 Default.args = {
