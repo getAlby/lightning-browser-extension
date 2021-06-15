@@ -6,6 +6,7 @@ import { getFiatFromSatoshi } from "../../../common/utils/helpers";
 import { Avatar, Divider, Tooltip } from "antd";
 import { PropertySafetyTwoTone, EditOutlined } from "@ant-design/icons";
 import Transactions from "./Transactions";
+import Loading from "../Loading";
 import "./styles.scss";
 
 class Home extends React.Component {
@@ -17,6 +18,7 @@ class Home extends React.Component {
       balance: null,
       balanceFiat: null,
       transactions: {},
+      loadingTransactions: true,
     };
   }
   get exchangeRate() {
@@ -34,7 +36,10 @@ class Home extends React.Component {
     });
     utils.call("getTransactions").then((result) => {
       console.log(result);
-      this.setState({ transactions: result?.payments });
+      this.setState({
+        transactions: result?.payments,
+        loadingTransactions: false,
+      });
     });
     utils.call("getBalance").then(async (result) => {
       this.setState({ balance: result?.balance });
@@ -49,9 +54,9 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div class="account--container">
-        <div class="account--container__upper">
-          <div class="account--container__name d-flex">
+      <div className="account--container">
+        <div className="account--container__upper">
+          <div className="account--container__name d-flex">
             <Avatar size="45" icon={<PropertySafetyTwoTone />} />
             <h2>{this.state.alias}</h2>
             <Tooltip placement="top" title="Edit Account">
@@ -70,10 +75,16 @@ class Home extends React.Component {
         </div>
         <Divider />
         <div>
-          <Transactions
-            exchangeRate={this.exchangeRate}
-            transactions={this.state.transactions}
-          />
+          {this.state.loadingTransactions ? (
+            <div className="flex justify-center">
+              <Loading />
+            </div>
+          ) : (
+            <Transactions
+              exchangeRate={this.exchangeRate}
+              transactions={this.state.transactions}
+            />
+          )}
         </div>
       </div>
     );
