@@ -3,8 +3,6 @@ import { calcFiatFromSatoshi } from "../../../common/utils/helpers";
 import { formatRelative, subDays } from "date-fns";
 import { PlusIcon } from "@heroicons/react/outline";
 
-import "./styles.scss";
-
 import { Empty } from "antd";
 import { sortByFieldAscending } from "../../../common/utils/helpers.js";
 
@@ -15,13 +13,13 @@ function Transactions({ exchangeRate, transactions }) {
     return (
       <div className="divide-y divide-gray-200">
         {sortByFieldAscending(transactions, "creation_date").map((item) => (
-          <div key={item.payment_index} className="flex py-4">
-            <div className="flex justify-center items-center w-6 h-6 border-2 border-grey-600 rounded-full">
-              <PlusIcon className="h-4 w-4" aria-hidden="true" />
+          <div key={item.payment_index} className="flex py-4 items-center">
+            <div className="flex justify-center items-center w-8 h-8 border-2 border-gray-200 rounded-full">
+              <PlusIcon className="h-6 w-6" aria-hidden="true" />
             </div>
             <div className="ml-4">
-              <div className="text-base">John Doe</div>
-              <div className="text-gray-500">
+              <div className="text-lg">John Doe</div>
+              <div className="text-sm text-gray-500">
                 {/* setting 1.1.2000 as a fallback */}
                 {formatRelative(
                   new Date(parseInt(item.creation_date) * 1000 ?? 946681200),
@@ -30,8 +28,8 @@ function Transactions({ exchangeRate, transactions }) {
               </div>
             </div>
             <div className="text-right ml-auto">
-              <div>{`${item.value} Satoshi`}</div>
-              <div className="text-gray-500">{`$${calcFiatFromSatoshi(
+              <div className="text-lg">{`₿${item.value}`}</div>
+              <div className="text-sm text-gray-500">{`$${calcFiatFromSatoshi(
                 exchangeRate ?? null,
                 item.value
               )}`}</div>

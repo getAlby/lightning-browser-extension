@@ -3,11 +3,11 @@ import browser from "webextension-polyfill";
 
 import utils from "../../../common/lib/utils";
 import { getFiatFromSatoshi } from "../../../common/utils/helpers";
-import { Avatar, Divider, Tooltip } from "antd";
+import { Avatar, Tooltip } from "antd";
 import { PropertySafetyTwoTone, EditOutlined } from "@ant-design/icons";
-import Transactions from "./Transactions";
-import Loading from "../Loading";
-import "./styles.scss";
+import Transactions from "../../components/Transactions";
+import Loading from "../../components/Loading";
+import BalanceCard from "../../components/BalanceCard";
 
 class Home extends React.Component {
   constructor(props) {
@@ -54,11 +54,11 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="account--container">
-        <div className="account--container__upper">
-          <div className="account--container__name d-flex">
-            <Avatar size="45" icon={<PropertySafetyTwoTone />} />
-            <h2>{this.state.alias}</h2>
+      <div>
+        <div className="px-5 py-2 flex border-b border-gray-100">
+          <Avatar size="45" icon={<PropertySafetyTwoTone />} />
+          <h2>{this.state.alias}</h2>
+          <div className="ml-auto">
             <Tooltip placement="top" title="Edit Account">
               <EditOutlined
                 className="account--container__edit"
@@ -68,16 +68,18 @@ class Home extends React.Component {
               />
             </Tooltip>
           </div>
-          <h1>{this.state.balance} Satoshi</h1>
-          <h3>
-            {this.state.balanceFiat} {this.state.currency}
-          </h3>
         </div>
-        <Divider />
-        <div className="p-4">
-          <h2>Transactions</h2>
+        <div className="p-5 border-b-4 border-gray-200">
+          <BalanceCard
+            alias="Wallet name"
+            crypto={`₿${this.state.balance || ""}`}
+            fiat={`$${this.state.balanceFiat || ""}`}
+          />
+        </div>
+        <div className="p-5">
+          <h2 className="text-xl">Transactions</h2>
           {this.state.loadingTransactions ? (
-            <div className="flex justify-center">
+            <div className="pt-4 flex justify-center">
               <Loading />
             </div>
           ) : (
