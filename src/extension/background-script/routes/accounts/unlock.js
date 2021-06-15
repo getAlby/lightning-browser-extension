@@ -1,7 +1,8 @@
 import { decryptData } from "../../../../common/lib/crypto";
+import state from "../../state";
 const connectors = require("../../connectors");
 
-const unlock = (state, message, sender) => {
+const unlock = (message, sender) => {
   const currentState = state.getState();
   const password = message.args.password;
   state.setState({ password });

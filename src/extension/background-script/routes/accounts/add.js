@@ -1,7 +1,8 @@
 import { encryptData } from "../../../../common/lib/crypto";
 import utils from "../../../../common/lib/utils";
+import state from "../../state";
 
-const add = (state, message, sender) => {
+const add = (message, sender) => {
   console.log("Adding new account");
   const newAccount = message.args;
   const accounts = state.getState().accounts;
