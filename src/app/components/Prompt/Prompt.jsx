@@ -4,8 +4,8 @@ import { createHashHistory } from "history";
 import { HashRouter, Route, Switch } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";
-import Unlock from "../Unlock";
-import Enable from "../Enable";
+import Unlock from "../../screens/Unlock";
+import Enable from "../../screens/Enable";
 import Loading from "../Loading";
 import ConfirmPayment from "../ConfirmPayment";
 let invoiceParser = require("@node-lightning/invoice");
