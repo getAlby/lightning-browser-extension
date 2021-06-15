@@ -13,10 +13,10 @@ export default function TestConnection() {
               Awesome we were able to connect to your lightning node. Are these
               these correct details?
             </p>
-            <Card topLabel="HeroNode" heading="12,350,283 SATS" lastLabel="€ 32,480.56" />
+            <Card Card color="red-bitcoin" alias="HeroNode" satoshis="12350283" fiat="32480.56" currency="EUR" />
 
             <div className="px-4 py-5 sm:p-0 ">
-              <dl className="sm:divide-y sm:divide-gray-200">
+              <div className="sm:divide-y sm:divide-gray-200">
                 <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-lg font-semibold text-black">Channels</dt>
                   <dd className="mt-1 text-base font-medium text-gray-900 sm:mt-0 sm:col-span-2">
@@ -29,7 +29,7 @@ export default function TestConnection() {
                     regtest-bob.nomadiclabs.net
                   </dd>
                 </div>
-              </dl>
+              </div>
               <div className="float-right">
                 <Button label="Yes looks good" />
               </div>
