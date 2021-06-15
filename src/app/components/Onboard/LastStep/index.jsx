@@ -2,7 +2,7 @@ import React from "react";
 import Template from "../Shared/template";
 import Button from "../../Shared/button";
 
-export default function lastStep() {
+export default function LastStep() {
   return (
     <Template>
       <div className="grid justify-items-center">
