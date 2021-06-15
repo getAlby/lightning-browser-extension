@@ -10,7 +10,6 @@ import Loading from "../Loading";
 import ConfirmPayment from "../ConfirmPayment";
 let invoiceParser = require("@node-lightning/invoice");
 
-
 import "./styles.scss";
 
 class Prompt extends React.Component {
@@ -21,7 +20,7 @@ class Prompt extends React.Component {
     let origin = {};
     let args = {};
     let invoice = {};
-    console.log(message)
+    console.log(message);
     if (message.origin) {
       origin = JSON.parse(message.origin);
     }
@@ -61,11 +60,12 @@ class Prompt extends React.Component {
             <Route
               exact
               path="/sendPayment"
-              render={
-                (props) => <ConfirmPayment
-                              invoice={this.state.invoice}
-                              origin={this.state.origin}
-              />}
+              render={(props) => (
+                <ConfirmPayment
+                  invoice={this.state.invoice}
+                  origin={this.state.origin}
+                />
+              )}
             />
           </Switch>
         </section>

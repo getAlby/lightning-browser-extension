@@ -74,7 +74,8 @@ class Home extends React.Component {
           </h3>
         </div>
         <Divider />
-        <div>
+        <div className="p-4">
+          <h2>Transactions</h2>
           {this.state.loadingTransactions ? (
             <div className="flex justify-center">
               <Loading />

@@ -7,8 +7,6 @@ import Home from "../Home";
 import Unlock from "../Unlock";
 import Loading from "../Loading";
 
-import "./styles.scss";
-
 class Popup extends React.Component {
   constructor(props) {
     super(props);

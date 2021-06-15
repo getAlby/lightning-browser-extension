@@ -63,7 +63,7 @@ module.exports = {
       process: "process/browser",
       crypto: "crypto-browserify",
       assert: "assert",
-      stream: "stream-browserify"
+      stream: "stream-browserify",
     },
   },
 
@@ -97,21 +97,7 @@ module.exports = {
               sourceMap: true,
             },
           },
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                plugins: [
-                  [
-                    "autoprefixer",
-                    {
-                      // Options
-                    },
-                  ],
-                ],
-              },
-            },
-          },
+          "postcss-loader",
           "resolve-url-loader", // Rewrites relative paths in url() statements
           "sass-loader", // Takes the Sass/SCSS file and compiles to the CSS
         ],

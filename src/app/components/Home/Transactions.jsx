@@ -10,8 +10,24 @@ import { sortByFieldAscending } from "../../../common/utils/helpers.js";
 
 function Transactions({ exchangeRate, transactions }) {
   if (transactions?.length > 0) {
+    console.log(sortByFieldAscending(transactions, "creation_date"));
+
     return (
-      <div class="transactions--container">
+      <div className="divide-y divide-gray-200">
+        {sortByFieldAscending(transactions, "creation_date").map((item) => (
+          <div key={item.payment_index} className="flex py-4">
+            <div className="flex justify-center items-center w-6 h-6 border-2 border-grey-600 rounded-full">
+              +
+            </div>
+            <div className="ml-4">John Doe</div>
+            {`${item.value} Satoshi`}
+          </div>
+        ))}
+      </div>
+    );
+
+    return (
+      <div>
         <List
           itemLayout="horizontal"
           dataSource={sortByFieldAscending(transactions, "creation_date")}
@@ -45,7 +61,7 @@ function Transactions({ exchangeRate, transactions }) {
   }
 
   return (
-    <div class="transactions--container">
+    <div className="transactions--container">
       <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
     </div>
   );
