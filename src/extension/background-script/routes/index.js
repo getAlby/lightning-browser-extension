@@ -14,10 +14,10 @@ const connectorCall = (state, message, sender) => {
 const routes = {
   ln: {
     getInfo: connectorCall,
-    isUnlocked: connectorCall,
   },
   accounts: accounts,
   isUnlocked: accounts.isUnlocked,
+  unlock: accounts.unlock,
 };
 
 const router = (path) => {
