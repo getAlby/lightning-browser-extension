@@ -65,7 +65,7 @@ const handleConnectorCalls = (message, sender, sendResponse) => {
 
   console.log("hallo");
   console.log(message.type);
-  return router(message.type)(state, message, sender);
+  return router(message.type)(message, sender);
 
   // if the connector is not available, probably because no account is configured we open the Options page.
   // TODO: create an onboarding wizard
