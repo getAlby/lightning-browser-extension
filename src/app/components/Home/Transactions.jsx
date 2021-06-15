@@ -1,11 +1,11 @@
 import React from "react";
 import { calcFiatFromSatoshi } from "../../../common/utils/helpers";
 import { formatRelative, subDays } from "date-fns";
+import { PlusIcon } from "@heroicons/react/outline";
 
 import "./styles.scss";
 
-import { Empty, List, Avatar, Icon, Tooltip } from "antd";
-import { StockOutlined } from "@ant-design/icons";
+import { Empty } from "antd";
 import { sortByFieldAscending } from "../../../common/utils/helpers.js";
 
 function Transactions({ exchangeRate, transactions }) {
@@ -17,45 +17,27 @@ function Transactions({ exchangeRate, transactions }) {
         {sortByFieldAscending(transactions, "creation_date").map((item) => (
           <div key={item.payment_index} className="flex py-4">
             <div className="flex justify-center items-center w-6 h-6 border-2 border-grey-600 rounded-full">
-              +
+              <PlusIcon className="h-4 w-4" aria-hidden="true" />
             </div>
-            <div className="ml-4">John Doe</div>
-            {`${item.value} Satoshi`}
-          </div>
-        ))}
-      </div>
-    );
-
-    return (
-      <div>
-        <List
-          itemLayout="horizontal"
-          dataSource={sortByFieldAscending(transactions, "creation_date")}
-          renderItem={(item) => (
-            <List.Item className="transactions--container__item">
-              <List.Item.Meta
-                avatar={<Avatar icon={<StockOutlined />} />}
-                title={item.value + " " + "Satoshi"}
-                description={
-                  calcFiatFromSatoshi(exchangeRate ?? null, item.value) +
-                  " " +
-                  "USD"
-                }
-              />
-              {/* TODO: move to function*/}
-              <Tooltip
-                placement="top"
-                title={new Date(item.creation_date * 1000).toString()}
-              >
+            <div className="ml-4">
+              <div className="text-base">John Doe</div>
+              <div className="text-gray-500">
                 {/* setting 1.1.2000 as a fallback */}
                 {formatRelative(
                   new Date(parseInt(item.creation_date) * 1000 ?? 946681200),
                   new Date()
                 )}
-              </Tooltip>
-            </List.Item>
-          )}
-        />
+              </div>
+            </div>
+            <div className="text-right ml-auto">
+              <div>{`${item.value} Satoshi`}</div>
+              <div className="text-gray-500">{`$${calcFiatFromSatoshi(
+                exchangeRate ?? null,
+                item.value
+              )}`}</div>
+            </div>
+          </div>
+        ))}
       </div>
     );
   }

@@ -46,7 +46,7 @@ class Unlock extends React.Component {
 
   render() {
     return (
-      <div className="unlock--container">
+      <div className="unlock--container p-8">
         <UnlockTwoTone
           className="unlock--container__icon"
           twoToneColor={variables.lightBlue}
