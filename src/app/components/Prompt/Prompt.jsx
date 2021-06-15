@@ -8,7 +8,7 @@ import Unlock from "../Unlock";
 import Enable from "../Enable";
 import Loading from "../Loading";
 import ConfirmPayment from "../ConfirmPayment";
-let invoice = require("@node-lightning/invoice");
+let invoiceParser = require("@node-lightning/invoice");
 
 
 import "./styles.scss";
@@ -27,7 +27,7 @@ class Prompt extends React.Component {
     }
     if (message.args) {
       args = JSON.parse(message.args);
-      invoice = invoice.decode(args.paymentRequest);
+      invoice = invoiceParser.decode(args.paymentRequest);
     }
     this.state = { origin, args, invoice, type: message.type };
   }
