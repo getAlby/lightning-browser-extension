@@ -6,6 +6,7 @@ import { UnlockTwoTone } from "@ant-design/icons";
 import utils from "../../../common/lib/utils";
 import variables from "./variables.module.scss";
 import "./styles.scss";
+
 class Unlock extends React.Component {
   constructor(props) {
     super(props);
@@ -14,14 +15,21 @@ class Unlock extends React.Component {
       password: "",
       error: "",
     };
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handlePasswordChange(event) {
     this.setState({ error: null, password: event.target.value });
   }
 
+  handleSubmit(event) {
+    this.unlock();
+    event.preventDefault();
+  }
+
   reset() {
-    utils.openPage('welcome.html');
+    utils.openPage("welcome.html");
   }
 
   unlock() {
@@ -38,26 +46,22 @@ class Unlock extends React.Component {
 
   render() {
     return (
-      <div class="unlock--container">
+      <div className="unlock--container">
         <UnlockTwoTone
           className="unlock--container__icon"
           twoToneColor={variables.lightBlue}
         />
         <h2>Unlock:</h2>
-        <Input.Password
-          placeholder="Password"
-          size="small"
-          type="text"
-          value={this.state.password}
-          onChange={(event) => this.handlePasswordChange(event)}
-        />
-        <Button
-          onClick={(e) => {
-            this.unlock();
-          }}
-        >
-          Unlock
-        </Button>
+        <form onSubmit={this.handleSubmit}>
+          <Input.Password
+            placeholder="Password"
+            size="small"
+            type="text"
+            value={this.state.password}
+            onChange={this.handlePasswordChange}
+          />
+          <Button htmlType="submit">Unlock</Button>
+        </form>
         {this.state.error && (
           <p>
             {this.state.error} (
