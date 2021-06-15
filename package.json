@@ -47,6 +47,7 @@
     "@headlessui/react": "^1.2.0",
     "@heroicons/react": "^1.0.1",
     "@node-lightning/invoice": "^0.22.0",
+    "@tailwindcss/forms": "^0.3.2",
     "advanced-css-reset": "^1.2.2",
     "antd": "^4.15.0",
     "assert": "^2.0.0",
