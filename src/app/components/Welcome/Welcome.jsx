@@ -33,7 +33,7 @@ class Welcome extends React.Component {
     return Promise.all([
       this.accounts.reset(),
       this.allowances.reset(),
-      this.settings.reset()
+      this.settings.reset(),
     ]).then(() => {
       const account = {
         name: "LND-DEV",
@@ -44,10 +44,9 @@ class Welcome extends React.Component {
         },
         connector: "lnd",
       };
-      console.log(this.settings.salt);
-      account.config = encryptData(account.config, "btc", this.settings.salt);
-      return this.accounts.setAccount(account, true).then(() => {
-        alert('Test account is saved. Your password is: btc');
+      return utils.call("accounts.add", account).then((response) => {
+        console.log(response);
+        alert("Test account is saved. Your password is: btc");
       });
     });
   }

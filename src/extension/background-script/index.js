@@ -1,15 +1,19 @@
 import browser from "webextension-polyfill";
+
 import utils from "../../common/lib/utils";
 import Settings from "../../common/lib/settings";
 import Accounts from "../../common/lib/accounts";
 import connectors from "./connectors";
 
-import initLsatInterceptor from "./lsatInterceptor";
+import { router } from "./routes";
+import state from "./state";
 
-let currentUnlockPassword; // TODO: rethink this
+//import initLsatInterceptor from "./lsatInterceptor";
+
 let connector;
 let accounts = new Accounts();
 let settings = new Settings();
+
 const initConnector = async () => {
   await accounts.load(); // load latest accounts from storage
   const account = accounts.current;
@@ -20,10 +24,6 @@ const initConnector = async () => {
     return;
   }
   connector = new connectors[account.connector](account.config);
-
-  if (currentUnlockPassword) {
-    connector.unlock(currentUnlockPassword);
-  }
 
   return connector.init();
 };
@@ -63,6 +63,10 @@ const handleConnectorCalls = (message, sender, sendResponse) => {
     return Promise.resolve();
   }
 
+  console.log("hallo");
+  console.log(message.type);
+  return router(message.type)(state, message, sender);
+
   // if the connector is not available, probably because no account is configured we open the Options page.
   // TODO: create an onboarding wizard
   if (!connector) {
@@ -88,6 +92,8 @@ const handleConnectorCalls = (message, sender, sendResponse) => {
 
 async function init() {
   console.log("Loading background script");
+  await state.getState().init();
+
   await settings.load();
   await accounts.load();
   // initialize a connector for the current account

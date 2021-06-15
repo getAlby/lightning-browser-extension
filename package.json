@@ -71,7 +71,8 @@
     "webext-options-sync": "^2.0.1",
     "webextension-polyfill": "^0.7.0",
     "webpack-dev-server": "^3.11.2",
-    "webpack-sources": "^2.2.0"
+    "webpack-sources": "^2.2.0",
+    "zustand": "^3.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.13.15",
