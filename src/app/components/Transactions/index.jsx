@@ -8,8 +8,6 @@ import { sortByFieldAscending } from "../../../common/utils/helpers.js";
 
 function Transactions({ exchangeRate, transactions }) {
   if (transactions?.length > 0) {
-    console.log(sortByFieldAscending(transactions, "creation_date"));
-
     return (
       <div className="divide-y divide-gray-200">
         {sortByFieldAscending(transactions, "creation_date").map((item) => (
