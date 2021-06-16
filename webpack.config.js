@@ -171,7 +171,7 @@ module.exports = {
       filename: "lsat.html",
     }),
     // write css file(s) to build folder
-    new MiniCssExtractPlugin({ filename: "[name].css" }),
+    new MiniCssExtractPlugin({ filename: "[name].css" }), // No css subfolder has been used as this breaks path's to url's such as fonts.
     // copy static assets
     new CopyWebpackPlugin({
       patterns: [{ from: "static/assets", to: "assets" }],
