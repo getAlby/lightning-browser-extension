@@ -67,8 +67,8 @@ class Home extends React.Component {
         <div className="p-5 border-b-4 border-gray-200">
           <BalanceCard
             alias="Wallet name"
-            crypto={`₿${balance || ""}`}
-            fiat={`$${balanceFiat || ""}`}
+            crypto={balance && `₿${balance}`}
+            fiat={balanceFiat && `$${balanceFiat}`}
           />
         </div>
         <div className="p-5">
