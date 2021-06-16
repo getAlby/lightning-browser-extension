@@ -33,9 +33,9 @@ export default function Radio({ options }) {
                   <span
                     className={classNames(
                       checked
-                        ? "bg-orange-bitcoin border-transparent"
+                        ? "bg-black border-transparent"
                         : "bg-white border-gray-300",
-                      active ? "ring-2 ring-offset-2 ring-orange-bitcoin" : "",
+                      active ? "ring-2 ring-offset-2 ring-black" : "",
                       "h-4 w-4 rounded-full border flex items-center justify-center"
                     )}
                     aria-hidden="true"
@@ -52,7 +52,7 @@ export default function Radio({ options }) {
                 <RadioGroup.Description className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center">
                   <span
                     className={classNames(
-                      checked ? "text-orange-bitcoin" : "text-gray-900",
+                      checked ? "text-black" : "text-gray-900",
                       "font-medium"
                     )}
                   >
@@ -61,8 +61,8 @@ export default function Radio({ options }) {
                 </RadioGroup.Description>
                 <RadioGroup.Description
                   className={classNames(
-                    checked ? "text-orange-bitcoin" : "text-gray-500",
-                    "ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right"
+                    checked ? "text-black" : "text-gray-500",
+                    "ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right font-semibold"
                   )}
                 >
                   {option.value}
