@@ -102,6 +102,10 @@ module.exports = {
           "sass-loader", // Takes the Sass/SCSS file and compiles to the CSS
         ],
       },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: "asset/resource",
+      },
     ],
   },
 
@@ -167,7 +171,7 @@ module.exports = {
       filename: "lsat.html",
     }),
     // write css file(s) to build folder
-    new MiniCssExtractPlugin({ filename: "css/[name].css" }),
+    new MiniCssExtractPlugin({ filename: "[name].css" }),
     // copy static assets
     new CopyWebpackPlugin({
       patterns: [{ from: "static/assets", to: "assets" }],
