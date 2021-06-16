@@ -50,6 +50,7 @@ Object.keys(browserStorage).forEach((key) => {
     },
     (state) => state[key],
     (newValue, previousValue) => {
+      // NOTE: using JSON.stringify to compare objects
       return JSON.stringify(newValue) === JSON.stringify(previousValue);
     }
   );
