@@ -6,9 +6,16 @@ const add = (message, sender) => {
   console.log("Adding new account");
   const newAccount = message.args;
   const accounts = state.getState().accounts;
-  const accountId = utils.getHash(newAccount.name);
 
-  newAccount.config = encryptData(newAccount.config, "btc", "");
+  // TODO: add validations
+
+  // TODO: make sure a password is set
+  const password = state.getState().password;
+
+  const accountId = utils.getHash(newAccount.name);
+  console.log(`Created account ${accountId}`);
+
+  newAccount.config = encryptData(newAccount.config, password);
   accounts[accountId] = newAccount;
 
   state.setState({ accounts });

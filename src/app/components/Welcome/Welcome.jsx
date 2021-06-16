@@ -44,10 +44,20 @@ class Welcome extends React.Component {
         },
         connector: "lnd",
       };
-      return utils.call("accounts.add", account).then((response) => {
-        console.log(response);
-        alert("Test account is saved. Your password is: btc");
-      });
+      return utils
+        .call("accounts.unlock", { password: "btc" })
+        .then((unlocked) => {
+          console.log(unlocked);
+          return utils.call("accounts.add", account).then((added) => {
+            console.log(added);
+            return utils
+              .call("accounts.select", { accountId: added.accountId })
+              .then((selected) => {
+                console.log(selected);
+                alert("Test account is saved. Your password is: btc");
+              });
+          });
+        });
     });
   }
 

@@ -2,8 +2,8 @@ import memoizee from "memoizee";
 import Base from "./base";
 
 class Lnd extends Base {
-  constructor(connectorConfig, globalSettings) {
-    super(connectorConfig, globalSettings);
+  constructor(config) {
+    super(config);
     this.getInfo = memoizee(
       (args) => this.request("GET", "/v1/getinfo", undefined, {}),
       {

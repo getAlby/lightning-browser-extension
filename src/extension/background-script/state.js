@@ -16,7 +16,6 @@ const state = createState((set, get) => ({
   accounts: {},
   currentAccountId: null,
   password: null,
-  counter: 1,
   lock: () => set({ password: null, connector: null, account: null }),
   init: () => {
     return browser.storage.sync

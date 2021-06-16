@@ -4,12 +4,8 @@ import Settings from "../../../common/lib/settings";
 import Allowances from "../../../common/lib/allowances";
 
 class Base {
-  constructor(connectorConfig) {
-    // encrypted config from browser storage
-    this.connectorConfig = connectorConfig;
-    // placeholder for the unlocked config
-    this.config = {};
-    this.unlocked = false;
+  constructor(config) {
+    this.config = config;
     this.settings = new Settings();
     this.allowances = new Allowances();
   }
@@ -18,32 +14,8 @@ class Base {
     return Promise.all([this.allowances.load(), this.settings.load()]);
   }
 
-  unlock(message) {
-    try {
-      this.config = decryptData(
-        this.connectorConfig,
-        message.args.password,
-        this.settings.salt
-      );
-      this.unlocked = true;
-      return Promise.resolve({ data: { unlocked: this.unlocked } });
-    } catch (e) {
-      console.log({ action: "unlock", error: e });
-      return Promise.resolve({ error: "Failed to decrypt" });
-    }
-  }
-
-  lock() {
-    this.config = {};
-    this.unlocked = false;
-  }
-
-  isUnlocked(message) {
-    return Promise.resolve({ data: { unlocked: this.unlocked } });
-  }
-
   enable(message) {
-    if (this.unlocked && this.allowances.isEnabled(message.origin.domain)) {
+    if (this.allowances.isEnabled(message.origin.domain)) {
       return Promise.resolve({ data: { enabled: true } });
     }
     return utils
@@ -118,12 +90,15 @@ class Base {
       });
   }
 
+  /*
+  // ERROR!
   parsePaymentRequest(message) {
     const requestDetails = parsePaymentRequest({
       request: message.args.paymentRequest,
     });
     return Promise.resolve({ data: requestDetails });
   }
+  */
 
   processPayment(message, paymentResponse) {
     const route = paymentResponse.data.payment_route;
