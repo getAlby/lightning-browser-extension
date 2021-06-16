@@ -1,9 +1,10 @@
 import React from "react";
 import browser from "webextension-polyfill";
-import { CashIcon, CogIcon } from "@heroicons/react/outline";
 
 import utils from "../../../common/lib/utils";
 import { getFiatFromSatoshi } from "../../../common/utils/helpers";
+
+import Appbar from "../../components/Appbar";
 import Transactions from "../../components/Transactions";
 import Loading from "../../components/Loading";
 import BalanceCard from "../../components/BalanceCard";
@@ -56,21 +57,7 @@ class Home extends React.Component {
 
     return (
       <div>
-        <div className="px-5 space-x-4 py-2 flex items-center border-b border-gray-100">
-          <CashIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
-          <div className="flex-auto">
-            <div className="text-xs text-gray-500">{alias || "\u00A0"}</div>
-            <div className="text-xs">₿0.0016 7930 €33.57</div>
-          </div>
-          <button
-            className="ml-auto"
-            onClick={() => {
-              return utils.openPage("options.html");
-            }}
-          >
-            <CogIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
-          </button>
-        </div>
+        <Appbar title={alias || "\u00A0"} subtitle="₿0.0016 7930 €33.57" />
         <div className="p-5 border-b-4 border-gray-200">
           <BalanceCard
             alias="Wallet name"
