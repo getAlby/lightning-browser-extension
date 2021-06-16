@@ -5,7 +5,6 @@ import msg from "../../../common/lib/msg";
 import { encryptData } from "../../../common/lib/crypto";
 
 import Accounts from "../../../common/lib/accounts";
-import Settings from "../../../common/lib/settings";
 import Allowances from "../../../common/lib/allowances";
 
 import LndForm from "../Lnd";
@@ -24,12 +23,10 @@ const { Title } = Typography;
 const { Header, Content } = Layout;
 
 const accountsStore = new Accounts();
-const settingsStore = new Settings();
 const allowancesStore = new Allowances();
 
 const Options = () => {
   const [accounts, setAccounts] = useState({});
-  const [settings, setSettings] = useState({});
   const [allowances, setAllowances] = useState({});
   const [currentAccount, setCurrentAccount] = useState("");
   const [password, setPassword] = useState("");
@@ -42,12 +39,10 @@ const Options = () => {
   const load = () => {
     return Promise.all([
       accountsStore.load(),
-      settingsStore.load(),
       allowancesStore.load(),
     ]).then(() => {
       setAccounts(accountsStore.accounts);
       setCurrentAccount(accountsStore.currentKey);
-      setSettings(settingsStore.settings);
       setAllowances(allowancesStore.allowances);
     });
   };
@@ -132,7 +127,7 @@ const Options = () => {
   };
 
   const saveAccount = (account) => {
-    account.config = encryptData(account.config, password, settingsStore.salt);
+    account.config = encryptData(account.config, password);
     return accountsStore.setAccount(account, true).then(() => {
       return load();
     });
@@ -166,7 +161,6 @@ const Options = () => {
       <Content>
         <Tabs defaultActiveKey="2">
           <TabPane tab="General" key="1">
-            <p>{JSON.stringify(settings)}</p>
           </TabPane>
 
           <TabPane tab="Accounts" key="2">

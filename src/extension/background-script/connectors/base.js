@@ -1,17 +1,15 @@
 import utils from "../../../common/lib/utils";
 import { decryptData } from "../../../common/lib/crypto";
-import Settings from "../../../common/lib/settings";
 import Allowances from "../../../common/lib/allowances";
 
 class Base {
   constructor(config) {
     this.config = config;
-    this.settings = new Settings();
     this.allowances = new Allowances();
   }
 
   async init() {
-    return Promise.all([this.allowances.load(), this.settings.load()]);
+    return Promise.all([this.allowances.load()]);
   }
 
   enable(message) {
