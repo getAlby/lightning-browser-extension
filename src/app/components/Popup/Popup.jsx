@@ -3,8 +3,8 @@ import { createHashHistory } from "history";
 import { HashRouter, Switch, Route } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";
-import Home from "../Home";
-import Unlock from "../Unlock";
+import Home from "../../screens/Home";
+import Unlock from "../../screens/Unlock";
 import Loading from "../Loading";
 
 import "./styles.scss";

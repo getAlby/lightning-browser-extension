@@ -1,11 +1,8 @@
 import React from "react";
+import { Spin } from "antd";
 
-//import "./styles.scss";
-
-class Loading extends React.Component {
-  render() {
-    return <div>loading</div>;
-  }
+function Loading() {
+  return <Spin />;
 }
 
 export default Loading;

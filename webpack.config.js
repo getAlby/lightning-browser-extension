@@ -63,7 +63,7 @@ module.exports = {
       process: "process/browser",
       crypto: "crypto-browserify",
       assert: "assert",
-      stream: "stream-browserify"
+      stream: "stream-browserify",
     },
   },
 
@@ -97,24 +97,18 @@ module.exports = {
               sourceMap: true,
             },
           },
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                plugins: [
-                  [
-                    "autoprefixer",
-                    {
-                      // Options
-                    },
-                  ],
-                ],
-              },
-            },
-          },
+          "postcss-loader",
           "resolve-url-loader", // Rewrites relative paths in url() statements
           "sass-loader", // Takes the Sass/SCSS file and compiles to the CSS
         ],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: "asset/resource",
       },
     ],
   },
@@ -181,7 +175,7 @@ module.exports = {
       filename: "lsat.html",
     }),
     // write css file(s) to build folder
-    new MiniCssExtractPlugin({ filename: "css/[name].css" }),
+    new MiniCssExtractPlugin({ filename: "[name].css" }), // No css subfolder has been used as this breaks path's to url's such as fonts.
     // copy static assets
     new CopyWebpackPlugin({
       patterns: [{ from: "static/assets", to: "assets" }],

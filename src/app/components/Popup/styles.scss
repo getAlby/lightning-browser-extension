@@ -1,22 +1,20 @@
-@import "../../styles/fonts";
-@import "../../styles/reset";
-@import "../../styles/variables";
+// @import "../../styles/fonts";
+// @import "../../styles/variables";
 
-@import "~antd/dist/antd";
+// @import "~antd/dist/antd";
 
-body {
-  color: $black;
-  background-color: $greyWhite;
-}
+// body {
+//   color: $black;
+// }
 
 #popup {
   min-width: 350px;
-  padding: 30px 20px;
+  // padding: 30px 20px;
 
-  h2 {
-    font-size: 25px;
-    text-align: center;
-  }
+  // h2 {
+  //   font-size: 25px;
+  //   text-align: center;
+  // }
 
   #options__button {
     width: 50%;

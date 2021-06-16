@@ -3,10 +3,11 @@ import browser from "webextension-polyfill";
 
 import utils from "../../../common/lib/utils";
 import { getFiatFromSatoshi } from "../../../common/utils/helpers";
-import { Avatar, Divider, Tooltip } from "antd";
-import { PropertySafetyTwoTone, EditOutlined } from "@ant-design/icons";
-import Transactions from "./Transactions";
-import "./styles.scss";
+
+import Appbar from "../../components/Appbar";
+import Transactions from "../../components/Transactions";
+import Loading from "../../components/Loading";
+import BalanceCard from "../../components/BalanceCard";
 
 class Home extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class Home extends React.Component {
       balance: null,
       balanceFiat: null,
       transactions: {},
+      loadingTransactions: true,
     };
   }
   get exchangeRate() {
@@ -34,7 +36,10 @@ class Home extends React.Component {
     });
     utils.call("getTransactions").then((result) => {
       console.log(result);
-      this.setState({ transactions: result?.payments });
+      this.setState({
+        transactions: result?.payments,
+        loadingTransactions: false,
+      });
     });
     utils.call("getBalance").then(async (result) => {
       this.setState({ balance: result?.balance });
@@ -48,32 +53,36 @@ class Home extends React.Component {
   }
 
   render() {
+    const { alias, balance, balanceFiat, transactions } = this.state;
+
     return (
-      <div class="account--container">
-        <div class="account--container__upper">
-          <div class="account--container__name d-flex">
-            <Avatar size="45" icon={<PropertySafetyTwoTone />} />
-            <h2>{this.state.alias}</h2>
-            <Tooltip placement="top" title="Edit Account">
-              <EditOutlined
-                className="account--container__edit"
-                onClick={() => {
-                  return utils.openPage("options.html");
-                }}
-              />
-            </Tooltip>
-          </div>
-          <h1>{this.state.balance} Satoshi</h1>
-          <h3>
-            {this.state.balanceFiat} {this.state.currency}
-          </h3>
-        </div>
-        <Divider />
-        <div>
-          <Transactions
-            exchangeRate={this.exchangeRate}
-            transactions={this.state.transactions}
+      <div>
+        <Appbar
+          title={alias}
+          subtitle="₿0.0016 7930 €33.57"
+          onOptionsClick={() => {
+            return utils.openPage("options.html");
+          }}
+        />
+        <div className="p-5 border-b-4 border-gray-200">
+          <BalanceCard
+            alias="Wallet name"
+            crypto={balance && `₿${balance}`}
+            fiat={balanceFiat && `$${balanceFiat}`}
           />
+        </div>
+        <div className="p-5">
+          <h2 className="text-xl">Transactions</h2>
+          {this.state.loadingTransactions ? (
+            <div className="pt-4 flex justify-center">
+              <Loading />
+            </div>
+          ) : (
+            <Transactions
+              exchangeRate={this.exchangeRate}
+              transactions={transactions}
+            />
+          )}
         </div>
       </div>
     );

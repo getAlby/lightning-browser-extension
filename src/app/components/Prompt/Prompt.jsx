@@ -4,12 +4,11 @@ import { createHashHistory } from "history";
 import { HashRouter, Route, Switch } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";
-import Unlock from "../Unlock";
-import Enable from "../Enable";
+import Unlock from "../../screens/Unlock";
+import Enable from "../../screens/Enable";
 import Loading from "../Loading";
 import ConfirmPayment from "../ConfirmPayment";
-let invoice = require("@node-lightning/invoice");
-
+let invoiceParser = require("@node-lightning/invoice");
 
 import "./styles.scss";
 
@@ -21,13 +20,13 @@ class Prompt extends React.Component {
     let origin = {};
     let args = {};
     let invoice = {};
-    console.log(message)
+    console.log(message);
     if (message.origin) {
       origin = JSON.parse(message.origin);
     }
     if (message.args) {
       args = JSON.parse(message.args);
-      invoice = invoice.decode(args.paymentRequest);
+      invoice = invoiceParser.decode(args.paymentRequest);
     }
     this.state = { origin, args, invoice, type: message.type };
   }
@@ -61,11 +60,12 @@ class Prompt extends React.Component {
             <Route
               exact
               path="/sendPayment"
-              render={
-                (props) => <ConfirmPayment
-                              invoice={this.state.invoice}
-                              origin={this.state.origin}
-              />}
+              render={(props) => (
+                <ConfirmPayment
+                  invoice={this.state.invoice}
+                  origin={this.state.origin}
+                />
+              )}
             />
           </Switch>
         </section>
