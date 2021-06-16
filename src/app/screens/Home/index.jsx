@@ -57,7 +57,13 @@ class Home extends React.Component {
 
     return (
       <div>
-        <Appbar title={alias || "\u00A0"} subtitle="₿0.0016 7930 €33.57" />
+        <Appbar
+          title={alias}
+          subtitle="₿0.0016 7930 €33.57"
+          onOptionsClick={() => {
+            return utils.openPage("options.html");
+          }}
+        />
         <div className="p-5 border-b-4 border-gray-200">
           <BalanceCard
             alias="Wallet name"
