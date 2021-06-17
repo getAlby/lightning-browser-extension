@@ -28,10 +28,7 @@ class DevMenu extends React.Component {
     return Promise.all([
       this.accounts.reset(),
       this.allowances.reset(),
-<<<<<<< HEAD:src/app/components/Welcome/Welcome.jsx
-=======
       this.settings.reset(),
->>>>>>> master:src/app/components/DevMenu/index.jsx
     ]).then(() => {
       const account = {
         name: "LND-DEV",
@@ -42,7 +39,6 @@ class DevMenu extends React.Component {
         },
         connector: "lnd",
       };
-<<<<<<< HEAD:src/app/components/Welcome/Welcome.jsx
       return utils
         .call("accounts.unlock", { password: "btc" })
         .then((unlocked) => {
@@ -57,13 +53,6 @@ class DevMenu extends React.Component {
               });
           });
         });
-=======
-      console.log(this.settings.salt);
-      account.config = encryptData(account.config, "btc", this.settings.salt);
-      return this.accounts.setAccount(account, true).then(() => {
-        alert("Test account is saved. Your password is: btc");
-      });
->>>>>>> master:src/app/components/DevMenu/index.jsx
     });
   }
 
