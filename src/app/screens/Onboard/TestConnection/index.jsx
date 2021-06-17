@@ -8,7 +8,7 @@ export default function TestConnection() {
 
   return (
     <div>
-      <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+      <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
         <div className="relative">
           <div className="mt-12">
             <h1 className="text-3xl font-bold mt-4">Connection success!</h1>
@@ -50,7 +50,10 @@ export default function TestConnection() {
           </div>
         </div>
 
-        <div className="mt-10 -mx-4 relative lg:mt-0" aria-hidden="true">
+        <div
+          className="mt-10 -mx-4 relative lg:mt-0 lg:flex lg:items-center"
+          aria-hidden="true"
+        >
           <img src="https://i.ibb.co/rcLR6MK/Frame-19.png" />
         </div>
       </div>

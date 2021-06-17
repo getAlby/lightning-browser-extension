@@ -65,7 +65,9 @@ export default function Intro() {
     <div>
       <div className="relative lg:grid lg:grid-cols-3 lg:gap-x-8 mt-20">
         <div className="lg:col-span-1 ml-12 mt-8">
-          <img src="https://i.ibb.co/3F3mCkR/logox.png" />
+          <div className="h-32">
+            <img src="https://i.ibb.co/3F3mCkR/logox.png" />
+          </div>
           <h2 className="mt-10 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
             A better way to send money.
           </h2>

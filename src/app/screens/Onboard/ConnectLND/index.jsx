@@ -7,9 +7,11 @@ export default function ConnectLnd() {
   const history = useHistory();
 
   return (
-    <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+    <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
       <div className="relative">
-        <img className="mb-12" src="https://i.ibb.co/3F3mCkR/logox.png" />
+        <div className="h-32">
+          <img className="mb-12" src="https://i.ibb.co/3F3mCkR/logox.png" />
+        </div>
         <h1 className="text-3xl font-bold mt-4">Connect to your remote node</h1>
         <p className="text-base text-gray-500 mt-6">
           You will need to retreive the node url and an admin macaroon. Not sure
@@ -50,7 +52,10 @@ export default function ConnectLnd() {
         </div>
       </div>
 
-      <div className="mt-10 -mx-4 relative lg:mt-0" aria-hidden="true">
+      <div
+        className="mt-10 -mx-4 relative lg:mt-0 lg:flex lg:items-center"
+        aria-hidden="true"
+      >
         <img src="https://i.ibb.co/QfF1PP6/Frame-20.png" />
       </div>
     </div>
