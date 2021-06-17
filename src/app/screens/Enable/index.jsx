@@ -9,7 +9,7 @@ import msg from "../../../common/lib/msg";
 
 class Enable extends React.Component {
   constructor(props) {
-    super(props); 
+    super(props);
     this.history = createHashHistory();
     this.state = {
       loading: true,
@@ -54,7 +54,7 @@ class Enable extends React.Component {
 
   render() {
     return (
-      <section id="prompt">
+      <div className="p-5">
         <strong>{JSON.stringify(this.props.origin)}</strong>
         <strong>{JSON.stringify(this.state)}</strong>
         <h2>Allow access?</h2>
@@ -83,7 +83,7 @@ class Enable extends React.Component {
         <Button type="primary" onClick={() => this.enable()}>
           Enable
         </Button>
-      </section>
+      </div>
     );
   }
 }
