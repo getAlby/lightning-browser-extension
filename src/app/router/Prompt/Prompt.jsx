@@ -6,8 +6,8 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 import utils from "../../../common/lib/utils";
 import Unlock from "../../screens/Unlock";
 import Enable from "../../screens/Enable";
-import Loading from "../Loading";
-import ConfirmPayment from "../ConfirmPayment";
+import Loading from "../../components/Loading";
+import ConfirmPayment from "../../components/ConfirmPayment";
 let invoiceParser = require("@node-lightning/invoice");
 
 import "./styles.scss";

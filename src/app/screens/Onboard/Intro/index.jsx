@@ -1,5 +1,4 @@
 import React from "react";
-import Template from "../Shared/template";
 import FAQs from "./faqs";
 import Features from "./features";
 import {
@@ -9,6 +8,7 @@ import {
   ArrowRightIcon,
   ScaleIcon,
 } from "@heroicons/react/outline";
+import { useHistory } from "react-router-dom";
 
 const features = [
   {
@@ -58,12 +58,16 @@ const faqs = [
   },
 ];
 
-export default function WelcomePage() {
+export default function Intro() {
+  const history = useHistory();
+
   return (
-    <Template>
+    <div>
       <div className="relative lg:grid lg:grid-cols-3 lg:gap-x-8 mt-20">
         <div className="lg:col-span-1 ml-12 mt-8">
-          <img src="https://i.ibb.co/3F3mCkR/logox.png" />
+          <div className="h-32">
+            <img src="https://i.ibb.co/3F3mCkR/logox.png" />
+          </div>
           <h2 className="mt-10 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
             A better way to send money.
           </h2>
@@ -76,11 +80,12 @@ export default function WelcomePage() {
         </div>
       </div>
       <button
+        onClick={() => history.push("/set-password")}
         type="button"
         className="mr-5 float-right inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-orange-bitcoin hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       >
         <ArrowRightIcon className="h-6 w-6" aria-hidden="true" />
       </button>
-    </Template>
+    </div>
   );
 }

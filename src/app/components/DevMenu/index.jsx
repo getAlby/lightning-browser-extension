@@ -5,8 +5,7 @@ import utils from "../../../common/lib/utils";
 import Accounts from "../../../common/lib/accounts";
 import Allowances from "../../../common/lib/allowances";
 
-
-class Welcome extends React.Component {
+class DevMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -29,6 +28,10 @@ class Welcome extends React.Component {
     return Promise.all([
       this.accounts.reset(),
       this.allowances.reset(),
+<<<<<<< HEAD:src/app/components/Welcome/Welcome.jsx
+=======
+      this.settings.reset(),
+>>>>>>> master:src/app/components/DevMenu/index.jsx
     ]).then(() => {
       const account = {
         name: "LND-DEV",
@@ -39,6 +42,7 @@ class Welcome extends React.Component {
         },
         connector: "lnd",
       };
+<<<<<<< HEAD:src/app/components/Welcome/Welcome.jsx
       return utils
         .call("accounts.unlock", { password: "btc" })
         .then((unlocked) => {
@@ -53,28 +57,39 @@ class Welcome extends React.Component {
               });
           });
         });
+=======
+      console.log(this.settings.salt);
+      account.config = encryptData(account.config, "btc", this.settings.salt);
+      return this.accounts.setAccount(account, true).then(() => {
+        alert("Test account is saved. Your password is: btc");
+      });
+>>>>>>> master:src/app/components/DevMenu/index.jsx
     });
   }
 
   render() {
     return (
-      <div>
-        <h1>Hello</h1>
-        <p>
-          <span onClick={() => { this.initDevelopmentAccount() }}>
-            Reset and add development account
-          </span>
-        </p>
-        <span
+      <div className="flex items-center px-3 py-2 space-x-3 bg-gray-800 text-white">
+        <span>Dev Menu</span>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+          onClick={() => {
+            this.initDevelopmentAccount();
+          }}
+        >
+          Reset and add development account
+        </button>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
           onClick={() => {
             this.reset();
           }}
         >
           Reset Everything
-        </span>
+        </button>
       </div>
     );
   }
 }
 
-export default Welcome;
+export default DevMenu;
