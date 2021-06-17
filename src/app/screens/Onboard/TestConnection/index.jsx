@@ -1,7 +1,11 @@
 import React from "react";
 import Button from "../../../components/Shared/button";
 import Card from "../../../components/card";
+import { useHistory } from "react-router-dom";
+
 export default function TestConnection() {
+  const history = useHistory();
+
   return (
     <div>
       <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
@@ -37,7 +41,10 @@ export default function TestConnection() {
                 </div>
               </div>
               <div className="float-right">
-                <Button label="Yes looks good" />
+                <Button
+                  onClick={() => history.push("/last-step")}
+                  label="Yes looks good"
+                />
               </div>
             </div>
           </div>

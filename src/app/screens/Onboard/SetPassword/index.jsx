@@ -1,8 +1,11 @@
 import React from "react";
 import Input from "../../../components/Shared/input";
 import Button from "../../../components/Shared/button";
+import { useHistory } from "react-router-dom";
 
 export default function SetPassword() {
+  const history = useHistory();
+
   return (
     <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
       <div className="relative">
@@ -41,7 +44,10 @@ export default function SetPassword() {
           </div>
         </div>
         <div className="mt-8 w-2/5">
-          <Button label="Let's GOO!" />
+          <Button
+            onClick={() => history.push("/connect-lnd")}
+            label="Let's GOO!"
+          />
         </div>
       </div>
 
