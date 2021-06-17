@@ -79,7 +79,18 @@ class Enable extends React.Component {
         <div className="p-5">
           {/* <strong>{JSON.stringify(this.props.origin)}</strong> */}
           {/* <strong>{JSON.stringify(this.state)}</strong> */}
-          <h2>Allow access?</h2>
+          <h3 className="text-2xl">
+            Connect with <i>host.com</i>
+          </h3>
+
+          <p className="text-xl text-gray-500">
+            <strong>The Hype Machine (hypem.com)</strong> does not have access
+            to your account.
+          </p>
+          <p className="text-xl text-gray-500">
+            Do you want to grant them access?
+          </p>
+
           <input
             name="remember"
             type="checkbox"
@@ -99,7 +110,7 @@ class Enable extends React.Component {
             />
           </p>
 
-          <div>
+          <div className="mb-4">
             <Button
               type="primary"
               label="Enable"
@@ -107,18 +118,18 @@ class Enable extends React.Component {
               onClick={this.enable}
             />
           </div>
+
           <p className="underline text-base text-gray-300">
             Only connect with sites you trust.
           </p>
-          <div>
-            <a
-              className="underline text-base text-gray-500"
-              href="#"
-              onClick={this.reject}
-            >
-              Cancel
-            </a>
-          </div>
+
+          <a
+            className="underline text-base text-gray-500"
+            href="#"
+            onClick={this.reject}
+          >
+            Cancel
+          </a>
         </div>
       </div>
     );
