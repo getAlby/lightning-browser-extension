@@ -1,6 +1,6 @@
 import React from "react";
-import Input from "../../../components/Shared/input";
-import Button from "../../../components/Shared/button";
+import Input from "../../../components/Form/input";
+import Button from "../../../components/button";
 import { useHistory } from "react-router-dom";
 
 export default function ConnectLnd() {

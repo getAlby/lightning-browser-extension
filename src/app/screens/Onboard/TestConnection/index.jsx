@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../../../components/Shared/button";
+import Button from "../../../components/button";
 import Card from "../../../components/card";
 import { useHistory } from "react-router-dom";
 

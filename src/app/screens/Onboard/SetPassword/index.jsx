@@ -1,10 +1,35 @@
-import React from "react";
-import Input from "../../../components/Shared/input";
-import Button from "../../../components/Shared/button";
+import React, { useState } from "react";
+import Input from "../../../components/Form/input";
+import Button from "../../../components/button";
 import { useHistory } from "react-router-dom";
+
+const initialFormData = Object.freeze({
+  password: "",
+  passwordConfirmation: "",
+});
 
 export default function SetPassword() {
   const history = useHistory();
+  const [formData, setFormData] = useState(initialFormData);
+
+  function handleChange(event) {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value.trim(),
+    });
+  }
+
+  function handleSubmit(event) {
+    const { password, passwordConfirmation } = formData;
+    if (password !== passwordConfirmation) {
+      alert("Passwords don't match.");
+    } else {
+      // Save user to the api.
+      // for e.g.: users.add({ username: 'John Doe', password })
+      history.push("/connect-lnd");
+    }
+    event.preventDefault();
+  }
 
   return (
     <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
@@ -19,36 +44,45 @@ export default function SetPassword() {
         <p className="text-base text-orange-bitcoin mt-2">
           Check out this guides.
         </p>
-        <div className="w-4/5">
-          <div className="mt-6">
-            <label
-              htmlFor="email"
-              className="block text-base font-medium text-gray-700"
-            >
-              Set a password
-            </label>
-            <div>
-              <Input />
+        <form onSubmit={handleSubmit}>
+          <div className="w-4/5">
+            <div className="mt-6">
+              <label
+                htmlFor="email"
+                className="block text-base font-medium text-gray-700"
+              >
+                Set a password
+              </label>
+              <div>
+                <Input
+                  name="password"
+                  type="password"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="mt-6">
+              <label
+                htmlFor="email"
+                className="block text-base font-medium text-gray-700"
+              >
+                Lets confirm you typed it correct.
+              </label>
+              <div className="mt-1">
+                <Input
+                  name="passwordConfirmation"
+                  type="password"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
             </div>
           </div>
-          <div className="mt-6">
-            <label
-              htmlFor="email"
-              className="block text-base font-medium text-gray-700"
-            >
-              Lets confirm you typed it correct.
-            </label>
-            <div className="mt-1">
-              <Input />
-            </div>
+          <div className="mt-8 w-2/5">
+            <Button label="Let's GOO!" type="submit" />
           </div>
-        </div>
-        <div className="mt-8 w-2/5">
-          <Button
-            onClick={() => history.push("/connect-lnd")}
-            label="Let's GOO!"
-          />
-        </div>
+        </form>
       </div>
 
       <div className="mt-10 -mx-4 relative lg:mt-0" aria-hidden="true">
