@@ -1,11 +1,14 @@
 import React from "react";
-import Template from "../Shared/template";
-import Button from '../../Shared/button'
-import Card from '../Shared/card'
+import Button from "../../../components/button";
+import Card from "../../../components/card";
+import { useHistory } from "react-router-dom";
+
 export default function TestConnection() {
+  const history = useHistory();
+
   return (
-    <Template>
-      <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+    <div>
+      <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
         <div className="relative">
           <div className="mt-12">
             <h1 className="text-3xl font-bold mt-4">Connection success!</h1>
@@ -13,7 +16,14 @@ export default function TestConnection() {
               Awesome we were able to connect to your lightning node. Are these
               these correct details?
             </p>
-            <Card Card color="red-bitcoin" alias="HeroNode" satoshis="12350283" fiat="32480.56" currency="EUR" />
+            <Card
+              Card
+              color="red-bitcoin"
+              alias="HeroNode"
+              satoshis="12350283"
+              fiat="32480.56"
+              currency="EUR"
+            />
 
             <div className="px-4 py-5 sm:p-0 ">
               <div className="sm:divide-y sm:divide-gray-200">
@@ -31,16 +41,22 @@ export default function TestConnection() {
                 </div>
               </div>
               <div className="float-right">
-                <Button label="Yes looks good" />
+                <Button
+                  onClick={() => history.push("/last-step")}
+                  label="Yes looks good"
+                />
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-10 -mx-4 relative lg:mt-0" aria-hidden="true">
+        <div
+          className="mt-10 -mx-4 relative lg:mt-0 lg:flex lg:items-center"
+          aria-hidden="true"
+        >
           <img src="https://i.ibb.co/rcLR6MK/Frame-19.png" />
         </div>
       </div>
-    </Template>
+    </div>
   );
 }

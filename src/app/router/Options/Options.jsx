@@ -8,12 +8,12 @@ import Accounts from "../../../common/lib/accounts";
 import Settings from "../../../common/lib/settings";
 import Allowances from "../../../common/lib/allowances";
 
-import LndForm from "../Lnd";
-import LndHubForm from "../LndHub";
-import LnBitsForm from "../LnBits";
-import NativeConnectionForm from "../NativeConnection";
+import LndForm from "../../components/Lnd";
+import LndHubForm from "../../components/LndHub";
+import LnBitsForm from "../../components/LnBits";
+import NativeConnectionForm from "../../components/NativeConnection";
 
-import ListData from "../ListData";
+import ListData from "../../components/ListData";
 
 import { normalizeAccountsData } from "../../../common/utils/helpers";
 
