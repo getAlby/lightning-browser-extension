@@ -1,7 +1,13 @@
 import * as accounts from "./actions/accounts";
 import * as ln from "./actions/ln";
+import * as allowances from "./actions/allowances";
 
 const routes = {
+  webln: {
+    enable: allowances.enable,
+    getInfo: ln.getInfo,
+    sendPayment: ln.sendPayment,
+  },
   ln: ln,
   accounts: accounts,
   // legacy routes

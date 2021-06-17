@@ -6,6 +6,7 @@ import createState from "zustand";
 const browserStorage = {
   settings: {},
   accounts: {},
+  allowances: [],
   currentAccountId: null,
 };
 
@@ -14,6 +15,7 @@ const state = createState((set, get) => ({
   account: null,
   settings: {},
   accounts: {},
+  allowances: [],
   currentAccountId: null,
   password: null,
   lock: () => set({ password: null, connector: null, account: null }),

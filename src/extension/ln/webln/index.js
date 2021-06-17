@@ -62,7 +62,7 @@ export default class WebLNProvider {
         {
           application: "Joule",
           prompt: true,
-          type,
+          type: `webln.${type}`,
           args,
         },
         "*" // TODO use origin
