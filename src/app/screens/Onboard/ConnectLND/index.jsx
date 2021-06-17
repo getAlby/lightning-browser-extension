@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../../../components/Form/input";
 import Button from "../../../components/button";
 import { useHistory } from "react-router-dom";
 
+const initialFormData = Object.freeze({
+  routeUrl: "",
+  macaroon: "",
+});
+
 export default function ConnectLnd() {
   const history = useHistory();
+  const [formData, setFormData] = useState(initialFormData);
+
+  function handleChange(event) {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value.trim(),
+    });
+  }
+
+  function handleSubmit(event) {
+    console.log(formData);
+    const { routeUrl, macaroon } = formData;
+    // Do something with the formData...
+
+    history.push("/test-connection");
+    event.preventDefault();
+  }
 
   return (
     <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
@@ -20,36 +42,35 @@ export default function ConnectLnd() {
         <p className="text-base text-orange-bitcoin mt-2">
           Check out this guides.
         </p>
-        <div className="w-4/5">
-          <div className="mt-6">
-            <label
-              htmlFor="email"
-              className="block text-base font-medium text-gray-700"
-            >
-              Route URL
-            </label>
-            <div>
-              <Input />
+        <form onSubmit={handleSubmit}>
+          <div className="w-4/5">
+            <div className="mt-6">
+              <label
+                htmlFor="email"
+                className="block text-base font-medium text-gray-700"
+              >
+                Route URL
+              </label>
+              <div>
+                <Input name="routeUrl" onChange={handleChange} required />
+              </div>
+            </div>
+            <div className="mt-6">
+              <label
+                htmlFor="email"
+                className="block text-base font-medium text-gray-700"
+              >
+                Macaroon
+              </label>
+              <div className="mt-1">
+                <Input name="macaroon" onChange={handleChange} required />
+              </div>
             </div>
           </div>
-          <div className="mt-6">
-            <label
-              htmlFor="email"
-              className="block text-base font-medium text-gray-700"
-            >
-              Macaroon
-            </label>
-            <div className="mt-1">
-              <Input />
-            </div>
+          <div className="mt-8 w-2/5">
+            <Button type="submit" label="Continue" />
           </div>
-        </div>
-        <div className="mt-8 w-2/5">
-          <Button
-            onClick={() => history.push("/test-connection")}
-            label="Continue"
-          />
-        </div>
+        </form>
       </div>
 
       <div
