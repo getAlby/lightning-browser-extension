@@ -1,11 +1,9 @@
 import React from "react";
 import { createHashHistory } from "history";
+import Blur from "react-blur";
 
-import { Button } from "antd";
-
+import Button from "../../components/button";
 import msg from "../../../common/lib/msg";
-
-// import "./styles.scss";
 
 class Enable extends React.Component {
   constructor(props) {
@@ -17,6 +15,8 @@ class Enable extends React.Component {
       enabled: false,
       budget: null,
     };
+    this.enable = this.enable.bind(this);
+    this.reject = this.reject.bind(this);
   }
 
   enable() {
@@ -28,8 +28,9 @@ class Enable extends React.Component {
     });
   }
 
-  reject() {
+  reject(event) {
     msg.error("User rejected");
+    event.preventDefault();
   }
 
   setRemember(remember) {
@@ -54,35 +55,71 @@ class Enable extends React.Component {
 
   render() {
     return (
-      <div className="p-5">
-        <strong>{JSON.stringify(this.props.origin)}</strong>
-        <strong>{JSON.stringify(this.state)}</strong>
-        <h2>Allow access?</h2>
-        <input
-          name="remember"
-          type="checkbox"
-          onChange={(event) => {
-            this.setRemember(event.target.checked);
-          }}
-        />
+      <div className="text-center">
+        <header>
+          <Blur
+            className="bg-black"
+            img="https://img.podplay.com/922c5e7d-0230-51d4-a81c-578eb3d7c616/575/575"
+            blurRadius={100}
+            enableStyles
+          >
+            <div className="relative p-6">
+              <img
+                class="w-32 h-32 rounded-2xl shadow-md mx-auto mb-4"
+                src="https://img.podplay.com/922c5e7d-0230-51d4-a81c-578eb3d7c616/575/575"
+                alt=""
+              />
+              <h2 className="mb-0 text-3xl text-white">
+                The Biz with John Carvalho
+              </h2>
+            </div>
+          </Blur>
+        </header>
 
-        <p>
-          Budget:
+        <div className="p-5">
+          {/* <strong>{JSON.stringify(this.props.origin)}</strong> */}
+          {/* <strong>{JSON.stringify(this.state)}</strong> */}
+          <h2>Allow access?</h2>
           <input
-            type="text"
-            name="budget"
+            name="remember"
+            type="checkbox"
             onChange={(event) => {
-              this.setBudget(event.target.value);
+              this.setRemember(event.target.checked);
             }}
           />
-        </p>
 
-        <Button type="default" onClick={() => this.reject()}>
-          Reject
-        </Button>
-        <Button type="primary" onClick={() => this.enable()}>
-          Enable
-        </Button>
+          <p>
+            Budget:
+            <input
+              type="text"
+              name="budget"
+              onChange={(event) => {
+                this.setBudget(event.target.value);
+              }}
+            />
+          </p>
+
+          <div>
+            <Button
+              type="primary"
+              label="Enable"
+              fullWidth
+              onClick={this.enable}
+            />
+          </div>
+          <p className="underline text-base text-gray-300">
+            Only connect with sites you trust.
+          </p>
+          <div>
+            <a
+              className="underline text-base text-gray-500"
+              href="#"
+              onClick={this.reject}
+            >
+              Cancel
+            </a>
+          </div>
+        </div>
       </div>
     );
   }

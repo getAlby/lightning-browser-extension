@@ -3,14 +3,14 @@ import qs from "query-string";
 import { createHashHistory } from "history";
 import { HashRouter, Route, Switch } from "react-router-dom";
 
+import "./styles.scss";
+
 import utils from "../../../common/lib/utils";
 import Unlock from "../../screens/Unlock";
 import Enable from "../../screens/Enable";
 import Loading from "../../components/Loading";
 import ConfirmPayment from "../../components/ConfirmPayment";
 let invoiceParser = require("@node-lightning/invoice");
-
-import "./styles.scss";
 
 class Prompt extends React.Component {
   constructor(props) {
@@ -31,15 +31,15 @@ class Prompt extends React.Component {
     this.state = { origin, args, invoice, type: message.type };
   }
 
-  componentDidMount() {
-    utils.call("isUnlocked").then((response) => {
-      if (response.unlocked) {
-        this.history.replace(`${this.state.type}`);
-      } else {
-        this.history.replace("/unlock");
-      }
-    });
-  }
+  // componentDidMount() {
+  //   utils.call("isUnlocked").then((response) => {
+  //     if (response.unlocked) {
+  //       this.history.replace(`${this.state.type}`);
+  //     } else {
+  //       this.history.replace("/unlock");
+  //     }
+  //   });
+  // }
 
   render() {
     return (
