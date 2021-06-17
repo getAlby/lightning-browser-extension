@@ -5,7 +5,7 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 import utils from "../../../common/lib/utils";
 import Home from "../../screens/Home";
 import Unlock from "../../screens/Unlock";
-import Loading from "../Loading";
+import Loading from "../../components/Loading";
 
 import "./styles.scss";
 

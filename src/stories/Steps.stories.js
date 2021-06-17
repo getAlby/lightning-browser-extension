@@ -1,5 +1,5 @@
 import React from "react";
-import Steps from "../app/components/Onboard/Shared/steps";
+import Steps from "../app/components/steps";
 import "../app/styles/index.css";
 
 const steps = [

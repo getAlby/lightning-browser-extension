@@ -1,10 +1,9 @@
 import React from "react";
-import Template from "../Shared/template";
-import Button from '../../Shared/button'
-import Card from '../Shared/card'
+import Button from "../../../components/Shared/button";
+import Card from "../../../components/card";
 export default function TestConnection() {
   return (
-    <Template>
+    <div>
       <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
         <div className="relative">
           <div className="mt-12">
@@ -13,7 +12,14 @@ export default function TestConnection() {
               Awesome we were able to connect to your lightning node. Are these
               these correct details?
             </p>
-            <Card Card color="red-bitcoin" alias="HeroNode" satoshis="12350283" fiat="32480.56" currency="EUR" />
+            <Card
+              Card
+              color="red-bitcoin"
+              alias="HeroNode"
+              satoshis="12350283"
+              fiat="32480.56"
+              currency="EUR"
+            />
 
             <div className="px-4 py-5 sm:p-0 ">
               <div className="sm:divide-y sm:divide-gray-200">
@@ -41,6 +47,6 @@ export default function TestConnection() {
           <img src="https://i.ibb.co/rcLR6MK/Frame-19.png" />
         </div>
       </div>
-    </Template>
+    </div>
   );
 }
