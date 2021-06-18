@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import Input from "../../../components/Form/input";
 import Button from "../../../components/button";
 import { useHistory } from "react-router-dom";
-import { encryptData } from "../../../../common/lib/crypto";
+import utils from "../../../../common/lib/utils";
 import Accounts from "../../../../common/lib/accounts";
 import Allowances from "../../../../common/lib/allowances";
-import Settings from "../../../../common/lib/settings";
 
 const initialFormData = Object.freeze({
   password: "",
@@ -13,7 +12,6 @@ const initialFormData = Object.freeze({
 });
 
 const accounts = new Accounts();
-const settings = new Settings();
 const allowances = new Allowances();
 
 export default function SetPassword() {
@@ -21,11 +19,7 @@ export default function SetPassword() {
   const [formData, setFormData] = useState(initialFormData);
 
   function createAccount(password) {
-    return Promise.all([
-      accounts.reset(),
-      allowances.reset(),
-      settings.reset(),
-    ]).then(() => {
+    return Promise.all([accounts.reset(), allowances.reset()]).then(() => {
       const account = {
         name: "LND-DEV",
         config: {
@@ -35,10 +29,20 @@ export default function SetPassword() {
         },
         connector: "lnd",
       };
-      account.config = encryptData(account.config, password, settings.salt);
-      return accounts.setAccount(account, true).then(() => {
-        alert(`Test account is saved. Your password is: ${password}`);
-      });
+      return utils
+        .call("accounts.unlock", { password: "btc" })
+        .then((unlocked) => {
+          console.log(unlocked);
+          return utils.call("accounts.add", account).then((added) => {
+            console.log(added);
+            return utils
+              .call("accounts.select", { accountId: added.accountId })
+              .then((selected) => {
+                console.log(selected);
+                alert("Test account is saved. Your password is: btc");
+              });
+          });
+        });
     });
   }
 

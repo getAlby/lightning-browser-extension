@@ -41,6 +41,7 @@ const state = createState((set, get) => ({
 }));
 
 Object.keys(browserStorage).forEach((key) => {
+  console.log(`Adding state subscription for ${key}`);
   state.subscribe(
     (newValue, previousValue) => {
       //if (previous && Object.keys(previous) > 0) {

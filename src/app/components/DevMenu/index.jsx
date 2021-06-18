@@ -18,18 +18,12 @@ class DevMenu extends React.Component {
   reset() {
     //browser.storage.sync.set({ accounts: {} });
     //browser.storage.sync.set({ allowances: {} });
-    this.accounts.reset();
-    this.allowances.reset();
     alert("Done, you can start over");
     utils.openPage("Options.html");
   }
 
   initDevelopmentAccount() {
-    return Promise.all([
-      this.accounts.reset(),
-      this.allowances.reset(),
-      this.settings.reset(),
-    ]).then(() => {
+    return Promise.all([this.accounts.reset(), this.allowances.reset()]).then(() => {
       const account = {
         name: "LND-DEV",
         config: {
