@@ -42,14 +42,20 @@ export default function CategoriesTable({ categories }) {
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right">
-                      <p className="text-sm font-semibold fixed">
-                        - {category.sumvalue}
-                      </p>
-                      <ChevronRightIcon
-                        className="h-5 w-5 text-black text-sm font-light inline relative"
-                        aria-hidden="true"
-                      />
+                    <td className="px-6 py-4 whitespace-nowrap text-left">
+                      <div className="text-xs text-gray-500">
+                        <span
+                          className={`text-sm font-semibold inline-block text-${category.color} relative top-6`}
+                        >
+                          {category.sumvalue}
+                        </span>
+                        <div className="relative left-10 mt-1">
+                          <ChevronRightIcon
+                            className="h-5 w-5 text-black text-sm font-light"
+                            aria-hidden="true"
+                          />
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 ))}
