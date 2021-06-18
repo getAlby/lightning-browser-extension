@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+import { classNames } from "../../utils/index";
 
 export default function Radio({ options }) {
   const [selected, setSelected] = useState(options[0]);

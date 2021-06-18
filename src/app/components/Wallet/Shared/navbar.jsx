@@ -1,7 +1,7 @@
 import { Popover } from "@headlessui/react";
+import { classNames } from "../../../utils/index";
 import { CogIcon, LightningBoltIcon } from "@heroicons/react/outline";
 import {
-  CreditCardIcon,
   OfficeBuildingIcon,
   UserIcon,
   UsersIcon,
@@ -13,9 +13,6 @@ const tabs = [
   { name: "Recieve", href: "#", icon: UsersIcon, current: false },
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function Navbar() {
   return (

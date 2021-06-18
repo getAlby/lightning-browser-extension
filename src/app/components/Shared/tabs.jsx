@@ -1,6 +1,4 @@
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+import { classNames } from "../../utils/index";
 
 export default function Tabs({ tabs }) {
   return (
