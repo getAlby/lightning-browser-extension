@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../app/components/Shared/button";
+import Button from "../app/components/button";
 
 export const Primary = () => <Button label="Button" />;
 
