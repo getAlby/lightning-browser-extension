@@ -62,7 +62,8 @@ export default class WebLNProvider {
         {
           application: "Joule",
           prompt: true,
-          type: `webln.${type}`,
+          //action: `webln/${type}`, // TODO: think about a convention to cal the actions
+          type: `${type}`,
           args,
         },
         "*" // TODO use origin

@@ -6,7 +6,8 @@ const connectorCall = (method) => {
     const connector = state.getState().connector;
 
     if (!connector) {
-      return Promise.reject({
+      // TODO: add unlock prompt
+      return Promise.resolve({
         error: "Connector not available. Is the account unlocked?",
       });
     }

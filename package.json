@@ -56,6 +56,7 @@
     "browser-polyfill": "^3.20.2",
     "crypto-browserify": "^3.12.0",
     "crypto-js": "^4.0.0",
+    "dexie": "^3.0.3",
     "invoices": "^1.1.7",
     "lsat-js": "^1.0.7",
     "memoizee": "^0.4.15",

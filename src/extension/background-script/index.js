@@ -4,6 +4,7 @@ import utils from "../../common/lib/utils";
 
 import { router } from "./router";
 import state from "./state";
+import db from "./db";
 
 const debugLogger = (message, sender) => {
   if (state.getState().settings.debug) {
@@ -26,13 +27,15 @@ const routeCalls = (message, sender, sendResponse) => {
   if (message.application !== "Joule" || !message.prompt) {
     return Promise.resolve();
   }
+  const debug = state.getState().settings.debug;
 
-  console.log(`Routing call: ${message.type}`);
+  const action = message.action || message.type; // TODO: what is a good message format to route to an action?
+  console.log(`Routing call: ${action}`);
   // Potentially check for internal vs. public calls
-  const call = router(message.type)(message, sender);
+  const call = router(action)(message, sender);
 
   // Log the action response if we are in debug mode
-  if (state.getState().settings.debug) {
+  if (debug) {
     call.then((r) => {
       console.log("Action response:", r);
       return r;
@@ -44,8 +47,10 @@ const routeCalls = (message, sender, sendResponse) => {
 async function init() {
   console.log("Loading background script");
 
+  //await browser.storage.sync.set({ settings: { debug: true }, allowances: [] });
   await state.getState().init();
   console.log("State loaded");
+  await db.open();
 
   // initialize a connector for the current account
   browser.runtime.onMessage.addListener(debugLogger);
