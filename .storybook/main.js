@@ -19,4 +19,10 @@ module.exports = {
     });
     return config;
   },
+
+  // Temp fix for: TypeError: (tag.text || "").trim is not a function #356
+  // https://github.com/styleguidist/react-docgen-typescript/issues/356
+  typescript: {
+    reactDocgen: "react-docgen",
+  },
 };

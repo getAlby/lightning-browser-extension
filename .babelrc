@@ -15,7 +15,8 @@
         }
       }
     ],
-    "@babel/react"
+    "@babel/react",
+    "@babel/preset-typescript"
   ],
   "plugins": [
     ["import", {

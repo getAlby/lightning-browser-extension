@@ -1,6 +1,10 @@
 import React from "react";
 
-export default function Button({ type = "button", label, onClick }) {
+type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  label: string;
+};
+
+export default function Button({ type = "button", label, onClick }: Props) {
   return (
     <button
       type={type}
