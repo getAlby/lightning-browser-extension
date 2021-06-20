@@ -22,7 +22,7 @@ const handleInstalled = (details) => {
 
 // listen to calls from the content script and calls the actions through the router
 // returns a promise to be handled in the content script
-const routeCalls = (message, sender, sendResponse) => {
+const routeCalls = (message, sender) => {
   // if the application does not match or if it is not a prompt we ignore the call
   if (message.application !== "Joule" || !message.prompt) {
     return Promise.resolve();
