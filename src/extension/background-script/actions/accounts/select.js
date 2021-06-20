@@ -5,7 +5,7 @@ import connectors from "../../connectors";
 const select = (message, sender) => {
   const currentState = state.getState();
 
-  const accountId = message.args.accountId;
+  const accountId = message.args.id;
   const account = currentState.accounts[accountId];
 
   if (account) {

@@ -3,7 +3,6 @@ import utils from "../../../../common/lib/utils";
 import state from "../../state";
 
 const add = (message, sender) => {
-  console.log("Adding new account");
   const newAccount = message.args;
   const accounts = state.getState().accounts;
 
@@ -11,6 +10,7 @@ const add = (message, sender) => {
 
   // TODO: make sure a password is set
   const password = state.getState().password;
+  const currentAccountId = state.getState().currentAccountId;
 
   const accountId = utils.getHash(newAccount.name);
   console.log(`Created account ${accountId}`);
@@ -19,6 +19,10 @@ const add = (message, sender) => {
   accounts[accountId] = newAccount;
 
   state.setState({ accounts });
+
+  if (!currentAccountId) {
+    state.setState({ currentAccountId: accountId });
+  }
   return Promise.resolve({ data: { accountId: accountId } });
 };
 

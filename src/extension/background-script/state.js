@@ -1,12 +1,14 @@
 import browser from "webextension-polyfill";
 import createState from "zustand";
 
+import { decryptData } from "../../common/lib/crypto";
+import connectors from "./connectors";
+
 // these keys get synced from the state to the browser storage
 // the values are the default values
 const browserStorage = {
   settings: {},
   accounts: {},
-  allowances: [],
   currentAccountId: null,
 };
 
@@ -15,9 +17,24 @@ const state = createState((set, get) => ({
   account: null,
   settings: {},
   accounts: {},
-  allowances: [],
   currentAccountId: null,
   password: null,
+  getAccount: () => {
+    const currentAccountId = get().currentAccountId;
+    const account = get().accounts[currentAccountId];
+    return account;
+  },
+  getConnector: () => {
+    const currentAccountId = get().currentAccountId;
+    const account = get().accounts[currentAccountId];
+
+    const config = decryptData(account.config, get().password);
+    const connector = new connectors[account.connector](config);
+    // TODO memoize connector?
+    set({ connector: connector });
+
+    return connector;
+  },
   lock: () => set({ password: null, connector: null, account: null }),
   init: () => {
     return browser.storage.sync

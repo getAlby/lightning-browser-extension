@@ -3,7 +3,7 @@ import state from "../../state";
 const connectorCall = (method) => {
   return (message, sender) => {
     console.log(`Lightning call: ${message.type}`);
-    const connector = state.getState().connector;
+    const connector = state.getState().getConnector();
 
     if (!connector) {
       // TODO: add unlock prompt
