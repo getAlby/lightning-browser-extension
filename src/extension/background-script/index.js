@@ -25,7 +25,7 @@ const handleInstalled = (details) => {
 const routeCalls = (message, sender) => {
   // if the application does not match or if it is not a prompt we ignore the call
   if (message.application !== "Joule" || !message.prompt) {
-    return Promise.resolve();
+    return;
   }
   const debug = state.getState().settings.debug;
 
