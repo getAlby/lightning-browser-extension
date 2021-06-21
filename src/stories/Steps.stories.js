@@ -1,5 +1,6 @@
 import React from "react";
 import Steps from "../app/components/steps";
+import { MemoryRouter } from "react-router-dom";
 import "../app/styles/index.css";
 
 const steps = [
@@ -13,4 +14,11 @@ export const Primary = () => <Steps steps={steps} />;
 export default {
   title: "Components/Steps",
   component: Steps,
+  decorators: [
+    (Story) => (
+      <MemoryRouter>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
 };
