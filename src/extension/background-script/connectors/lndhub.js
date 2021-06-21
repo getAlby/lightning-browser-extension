@@ -2,8 +2,8 @@ import memoizee from "memoizee";
 import Base from "./base";
 
 export default class LndHub extends Base {
-  constructor(connectorConfig, globalSettings) {
-    super(connectorConfig, globalSettings);
+  constructor(config) {
+    super(config);
     this.getInfo = memoizee(
       (args) => this.request("GET", "/getinfo", undefined, {}),
       {

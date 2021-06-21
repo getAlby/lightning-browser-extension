@@ -9,18 +9,6 @@ export const normalizeAccountsData = (data = {}) => {
   }));
 };
 
-/**
- * This is still yet to be finalised, for now just going to return an empty array.
- */
-export const normalizeSettingsData = (data = {}) => {
-  const settingsKeys = Object.keys({});
-
-  return settingsKeys.map((item) => ({
-    title: item,
-    description: item.name,
-  }));
-};
-
 export const getFiatFromSatoshi = async (currency, satoshi) => {
   const res = await axios.get("https://blockchain.info/ticker");
   let exchangeRate = res?.data[currency ?? "USD"]?.sell;
