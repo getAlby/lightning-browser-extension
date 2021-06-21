@@ -56,7 +56,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: [".js", ".jsx", ".json"],
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
     alias: {
       "webextension-polyfill": "webextension-polyfill",
       Buffer: "buffer",
