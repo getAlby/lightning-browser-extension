@@ -1,85 +1,43 @@
 import browser from "webextension-polyfill";
+
 import utils from "../../common/lib/utils";
-import Settings from "../../common/lib/settings";
-import Accounts from "../../common/lib/accounts";
-import connectors from "./connectors";
 
-import initLsatInterceptor from "./lsatInterceptor";
-
-let currentUnlockPassword; // TODO: rethink this
-let connector;
-let accounts = new Accounts();
-let settings = new Settings();
-const initConnector = async () => {
-  await accounts.load(); // load latest accounts from storage
-  const account = accounts.current;
-  console.log(account);
-  if (!account) {
-    connector = null;
-    console.log("Account not found");
-    return;
-  }
-  connector = new connectors[account.connector](account.config);
-
-  if (currentUnlockPassword) {
-    connector.unlock(currentUnlockPassword);
-  }
-
-  return connector.init();
-};
-
-browser.storage.onChanged.addListener((changes) => {
-  // if the accounts change we initialize a new connector
-  // this also requires the user to unlock the account again
-  if (changes.accounts) {
-    initConnector();
-  }
-  // Update the general settings in the current connector settings
-  if (connector && changes.settings) {
-    connector.init();
-  }
-  // TODO: what to do with allowances?
-});
+import { router } from "./router";
+import state from "./state";
+import db from "./db";
 
 const debugLogger = (message, sender) => {
-  if (settings && settings.debug) {
+  if (state.getState().settings.debug) {
     console.log("Background onMessage: ", message, sender);
   }
 };
 
 const handleInstalled = (details) => {
-  console.log("handle installed");
+  console.log(`Handle installed: ${details.reason}`);
   // TODO: maybe check if accounts are already configured?
   if (details.reason === "install") {
     utils.openUrl("welcome.html");
   }
 };
 
-// listen to calls from the content script and pass it on to the native application
+// listen to calls from the content script and calls the actions through the router
 // returns a promise to be handled in the content script
-const handleConnectorCalls = (message, sender, sendResponse) => {
+const routeCalls = (message, sender) => {
   // if the application does not match or if it is not a prompt we ignore the call
   if (message.application !== "Joule" || !message.prompt) {
-    return Promise.resolve();
+    return;
   }
+  const debug = state.getState().settings.debug;
 
-  // if the connector is not available, probably because no account is configured we open the Options page.
-  // TODO: create an onboarding wizard
-  if (!connector) {
-    console.log("No connector/account found");
-    utils.openPage("welcome.html");
-    return Promise.resolve({ error: "No account available" });
-  }
+  const action = message.action || message.type; // TODO: what is a good message format to route to an action?
+  console.log(`Routing call: ${action}`);
+  // Potentially check for internal vs. public calls
+  const call = router(action)(message, sender);
 
-  // check for internal vs. public calls
-  const call = connector[message.type]({
-    args: message.args,
-    origin: message.origin,
-    type: message.type,
-  });
-  if (settings.debug) {
+  // Log the action response if we are in debug mode
+  if (debug) {
     call.then((r) => {
-      console.log("Connector response:", r);
+      console.log("Action response:", r);
       return r;
     });
   }
@@ -88,20 +46,25 @@ const handleConnectorCalls = (message, sender, sendResponse) => {
 
 async function init() {
   console.log("Loading background script");
-  await settings.load();
-  await accounts.load();
+
+  //await browser.storage.sync.set({ settings: { debug: true }, allowances: [] });
+  await state.getState().init();
+  console.log("State loaded");
+  await db.open();
+
   // initialize a connector for the current account
-  await initConnector();
   browser.runtime.onMessage.addListener(debugLogger);
   // this is the only handler that may and must return a Promise which resolve with the response to the content script
-  browser.runtime.onMessage.addListener(handleConnectorCalls);
+  browser.runtime.onMessage.addListener(routeCalls);
 
   browser.runtime.onInstalled.addListener(handleInstalled);
 
+  /*
   if (settings.enableLsats) {
     await browser.storage.sync.set({ lsats: {} });
     initLsatInterceptor(connector);
   }
+  */
 }
 
 init();

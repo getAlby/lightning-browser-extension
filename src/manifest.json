@@ -10,8 +10,7 @@
     "128": "assets/icons/favicon-128.png"
   },
   "description": "Lightning up the browser",
-  "homepage_url": "https://github.com/bumi",
-  "short_name": "Lightning",
+  "homepage_url": "https://github.com/bumi/lightning-browser-extension",
   "web_accessible_resources": ["js/inpageScript.bundle.js", "lsat.html"],
   "permissions": [
     "nativeMessaging",
@@ -20,8 +19,7 @@
     "storage",
     "webRequest",
     "webRequestBlocking",
-    "http://*/*",
-    "https://*/*"
+    "*://*/*"
   ],
 
   "content_security_policy": "script-src 'self'; object-src 'self'",
@@ -31,7 +29,7 @@
     "name": "bumi"
   },
 
-  "__firefox__applications": {
+  "__firefox__browser_specific_settings": {
     "gecko": {
       "id": "{424FB1AD-CC3B-4856-B6A0-7786F8CA9D17}"
     }
@@ -53,11 +51,11 @@
     "__firefox__browser_style": false
   },
 
-  "__chrome|opera__options_page": "options.html",
   "options_ui": {
     "page": "options.html",
     "open_in_tab": true,
-    "__chrome__chrome_style": false
+    "__chrome|opera__chrome_style": false,
+    "__firefox__browser_style": false
   },
 
   "background": {
@@ -69,8 +67,7 @@
 
   "content_scripts": [{
     "matches": [
-      "http://*/*",
-      "https://*/*"
+      "*://*/*"
     ],
     "js": [
       "js/contentScript.bundle.js"
