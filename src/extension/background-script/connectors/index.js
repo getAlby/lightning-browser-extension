@@ -4,6 +4,14 @@ import LndHub from "./lndhub";
 import LnBits from "./lnbits";
 import Base from "./base";
 
+/*
+const initialize = (account, password) => {
+  const config = decryptData(account.config, password);
+  const connector = new connectors[account.connector](config);
+  return connector;
+};
+*/
+
 const connectors = {
   base: Base,
   native: Native,

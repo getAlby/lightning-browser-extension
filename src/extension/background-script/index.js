@@ -6,6 +6,10 @@ import { router } from "./router";
 import state from "./state";
 import db from "./db";
 
+setInterval(() => {
+  console.log(state.getState());
+}, 5000);
+
 const debugLogger = (message, sender) => {
   if (state.getState().settings.debug) {
     console.log("Background onMessage: ", message, sender);

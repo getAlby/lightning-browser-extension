@@ -1,4 +1,5 @@
 import state from "../../state";
+import sendPayment from "./sendPayment";
 
 const connectorCall = (method) => {
   return (message, sender) => {
@@ -24,4 +25,4 @@ const getInfo = connectorCall("getInfo");
 const getBalance = connectorCall("getBalance");
 const getTransactions = connectorCall("getTransactions");
 
-export { getInfo, getBalance, getTransactions };
+export { getInfo, getBalance, getTransactions, sendPayment };

@@ -21,18 +21,15 @@ class Lnd extends Base {
     });
   }
 
-  sendPayment(message) {
-    return super.sendPayment(message, () => {
-      // TODO: should we use /v2/router/send ?
-      return this.request(
-        "POST",
-        "/v1/channels/transactions",
-        {
-          payment_request: message.args.paymentRequest,
-        },
-        {}
-      );
-    });
+  sendPayment(args) {
+    return this.request(
+      "POST",
+      "/v1/channels/transactions",
+      {
+        payment_request: args.paymentRequest,
+      },
+      {}
+    );
   }
 
   makeInvoice(message) {
