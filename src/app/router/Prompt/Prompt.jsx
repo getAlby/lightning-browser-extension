@@ -31,15 +31,15 @@ class Prompt extends React.Component {
     this.state = { origin, args, invoice, type: message.type };
   }
 
-  // componentDidMount() {
-  //   utils.call("isUnlocked").then((response) => {
-  //     if (response.unlocked) {
-  //       this.history.replace(`${this.state.type}`);
-  //     } else {
-  //       this.history.replace("/unlock");
-  //     }
-  //   });
-  // }
+  componentDidMount() {
+    utils.call("isUnlocked").then((response) => {
+      if (response.unlocked) {
+        this.history.replace(`${this.state.type}`);
+      } else {
+        this.history.replace("/unlock");
+      }
+    });
+  }
 
   render() {
     return (
