@@ -21,6 +21,7 @@ export default function SetPassword() {
   }
 
   async function handleSubmit(event) {
+    event.preventDefault();
     const { password, passwordConfirmation } = formData;
     if (password !== passwordConfirmation) {
       alert("Passwords don't match.");
@@ -32,7 +33,6 @@ export default function SetPassword() {
         console.log(e.message);
       }
     }
-    event.preventDefault();
   }
 
   return (
