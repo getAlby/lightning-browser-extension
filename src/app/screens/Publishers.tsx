@@ -6,11 +6,12 @@ import Searchbar from "../components/Searchbar";
 const publishers = [
   {
     id: "pub_id1",
+    date: "20-06-2021",
     name: "Imagine Bitcoin 2140",
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
     sats: "186,000 / 310,000",
-    percentage: "60%",
+    percentage: "20",
     image: "https://picsum.photos/id/10/200",
   },
   {
@@ -19,7 +20,7 @@ const publishers = [
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
     sats: "186,000 / 310,000",
-    percentage: "60%",
+    percentage: "60",
     image: "https://picsum.photos/id/11/200",
   },
   {
@@ -28,7 +29,7 @@ const publishers = [
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
     sats: "186,000 / 310,000",
-    percentage: "60%",
+    percentage: "30",
     image: "https://picsum.photos/id/12/200",
   },
   {
@@ -37,7 +38,7 @@ const publishers = [
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
     sats: "186,000 / 310,000",
-    percentage: "60%",
+    percentage: "10",
     image: "https://picsum.photos/id/13/200",
   },
   {
@@ -46,7 +47,7 @@ const publishers = [
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
     sats: "186,000 / 310,000",
-    percentage: "60%",
+    percentage: "100",
     image: "https://picsum.photos/id/14/200",
   },
   {
@@ -55,7 +56,7 @@ const publishers = [
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
     sats: "186,000 / 310,000",
-    percentage: "60%",
+    percentage: "90",
     image: "https://picsum.photos/id/15/200",
   },
   {
@@ -64,7 +65,7 @@ const publishers = [
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
     sats: "186,000 / 310,000",
-    percentage: "60%",
+    percentage: "80",
     image: "https://picsum.photos/id/16/200",
   },
   {
@@ -73,7 +74,7 @@ const publishers = [
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
     sats: "186,000 / 310,000",
-    percentage: "60%",
+    percentage: "66",
     image: "https://picsum.photos/id/17/200",
   },
 ];

@@ -1,7 +1,6 @@
 import React from "react";
 
 import Badge from "./Shared/badge";
-import Progressbar from "./Shared/progressbar";
 
 export default function PublishersTable({ publishers }) {
   return (
@@ -18,9 +17,9 @@ export default function PublishersTable({ publishers }) {
                     alt=""
                   />
                 </div>
-                <div className="ml-4 ">
+                <div className="ml-4">
                   <div className="text-sm font-medium text-gray-900">
-                    <p className="inline mr-2"> {publisher.name}</p>
+                    <p className="inline mr-2">{publisher.name}</p>
                     {publisher.badge && (
                       <Badge
                         label={publisher.badge.label}
@@ -38,16 +37,16 @@ export default function PublishersTable({ publishers }) {
                 <p className="text-sm font-semibold mb-0">
                   {publisher.sats} sats
                 </p>
-                <span
-                  className={`text-xs font-semibold inline-block text-blue-bitcoin relative top-5`}
-                >
-                  {publisher.percentage}
-                </span>
-                <div className="relative mt-2 w-6/12 ml-24">
-                  <Progressbar
-                    filledColor="blue-bitcoin"
-                    notFilledColor="blue-200"
-                  />
+                <div className="relative mt-2 w-6/12 ml-auto">
+                  <div className="flex items-center">
+                    <div
+                      style={{ width: `${publisher.percentage}%` }}
+                      className="ml-auto h-2 shadow-none rounded flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"
+                    />
+                    <span className={`text-xs font-semibold text-blue-500`}>
+                      {publisher.percentage}%
+                    </span>
+                  </div>
                 </div>
               </div>
             </td>
