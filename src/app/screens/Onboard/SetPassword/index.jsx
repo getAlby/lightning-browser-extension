@@ -3,24 +3,15 @@ import Input from "../../../components/Form/input";
 import Button from "../../../components/button";
 import { useHistory } from "react-router-dom";
 import utils from "../../../../common/lib/utils";
-import Accounts from "../../../../common/lib/accounts";
-import Allowances from "../../../../common/lib/allowances";
 
 const initialFormData = Object.freeze({
   password: "",
   passwordConfirmation: "",
 });
 
-const accounts = new Accounts();
-const allowances = new Allowances();
-
 export default function SetPassword() {
   const history = useHistory();
   const [formData, setFormData] = useState(initialFormData);
-
-  function setPassword(password) {
-    return utils.call("setPassword", { password });
-  }
 
   function handleChange(event) {
     setFormData({
@@ -29,14 +20,17 @@ export default function SetPassword() {
     });
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     const { password, passwordConfirmation } = formData;
     if (password !== passwordConfirmation) {
       alert("Passwords don't match.");
     } else {
-      setPassword(password).then(() => {
+      try {
+        await utils.call("setPassword", { password });
         history.push("/connect-lnd");
-      });
+      } catch (e) {
+        console.log(e.message);
+      }
     }
     event.preventDefault();
   }
