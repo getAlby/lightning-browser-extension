@@ -1,13 +1,15 @@
-import Badge from "../../Shared/badge";
-import Progressbar from "../../Shared/progressbar";
+import React from "react";
+
+import Badge from "./Shared/badge";
+import Progressbar from "./Shared/progressbar";
 
 export default function PublishersTable({ publishers }) {
   return (
     <table className="min-w-full divide-y divide-gray-200">
       <tbody className="bg-white divide-y divide-gray-200">
         {publishers.map((publisher) => (
-          <tr key={publisher.email}>
-            <td className="px-6 py-4 whitespace-nowrap">
+          <tr key={publisher.id}>
+            <td className="pr-6 py-4 whitespace-nowrap">
               <div className="flex items-center">
                 <div className="flex-shrink-0 h-10 w-10">
                   <img
