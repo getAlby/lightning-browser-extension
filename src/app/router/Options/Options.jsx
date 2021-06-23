@@ -39,11 +39,11 @@ class Options extends React.Component {
               <Publishers />
             </Route>
             <Route path="/screen-2">
-              <div>Screen 2</div>
+              <h2 className="mt-12 mb-6 text-2xl font-bold">Screen 2</h2>
               <p>Test content</p>
             </Route>
             <Route path="/screen-3">
-              <div>Screen 3</div>
+              <h2 className="mt-12 mb-6 text-2xl font-bold">Screen 3</h2>
               <p>Lorem ipsum</p>
             </Route>
           </Switch>

@@ -21,7 +21,7 @@ export default function Appbar({ title, subtitle, onOptionsClick, children }) {
       <div>{children}</div>
       <div className="w-4/12 lg:w-3/12 flex justify-end items-center">
         <button
-          className="focus:outline-none transition duration-200 opacity-50 hover:opacity-100"
+          className="opacity-50 focus:outline-none transition-opacity duration-200 hover:opacity-100"
           onClick={onOptionsClick}
         >
           <img

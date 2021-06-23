@@ -6,7 +6,7 @@ import Searchbar from "../components/Searchbar";
 const publishers = [
   {
     id: "pub_id1",
-    date: "20-06-2021",
+    description: "Art · 12 payments",
     name: "Imagine Bitcoin 2140",
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
@@ -16,6 +16,7 @@ const publishers = [
   },
   {
     id: "pub_id2",
+    description: "Art · 12 payments",
     name: "Imagine Bitcoin 2140",
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
@@ -25,6 +26,7 @@ const publishers = [
   },
   {
     id: "pub_id3",
+    description: "Art · 12 payments",
     name: "Imagine Bitcoin 2140",
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
@@ -34,6 +36,7 @@ const publishers = [
   },
   {
     id: "pub_id4",
+    description: "Art · 12 payments",
     name: "Imagine Bitcoin 2140",
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
@@ -43,6 +46,7 @@ const publishers = [
   },
   {
     id: "pub_id5",
+    description: "Art · 12 payments",
     name: "Imagine Bitcoin 2140",
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
@@ -52,30 +56,13 @@ const publishers = [
   },
   {
     id: "pub_id6",
+    description: "Art · 12 payments",
     name: "Imagine Bitcoin 2140",
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
     sats: "186,000 / 310,000",
-    percentage: "90",
+    percentage: "40",
     image: "https://picsum.photos/id/15/200",
-  },
-  {
-    id: "pub_id7",
-    name: "Imagine Bitcoin 2140",
-    title: "Regional Paradigm Technician",
-    badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
-    sats: "186,000 / 310,000",
-    percentage: "80",
-    image: "https://picsum.photos/id/16/200",
-  },
-  {
-    id: "pub_id8",
-    name: "Imagine Bitcoin 2140",
-    title: "Regional Paradigm Technician",
-    badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
-    sats: "186,000 / 310,000",
-    percentage: "66",
-    image: "https://picsum.photos/id/17/200",
   },
 ];
 
