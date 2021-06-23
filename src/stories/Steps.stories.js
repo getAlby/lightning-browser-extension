@@ -1,7 +1,6 @@
 import React from "react";
 import Steps from "../app/components/steps";
 import { MemoryRouter } from "react-router-dom";
-import "../app/styles/index.css";
 
 const steps = [
   { id: "Step 1", name: "Job details", href: "#", status: "complete" },

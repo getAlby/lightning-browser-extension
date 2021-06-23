@@ -1,91 +1,110 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { createHashHistory } from "history";
 
-import { Button } from "antd";
-
+import Button from "../../components/button";
+import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
 
-// import "./styles.scss";
+function Enable(props) {
+  const [loading, setLoading] = useState(true);
+  const [remember, setRemember] = useState(false);
+  const [enabled, setEnabled] = useState(false);
+  const [budget, setBudget] = useState(null);
+  const history = useRef(createHashHistory());
 
-class Enable extends React.Component {
-  constructor(props) {
-    super(props); 
-    this.history = createHashHistory();
-    this.state = {
-      loading: true,
-      remember: false,
-      enabled: false,
-      budget: null,
-    };
-  }
-
-  enable() {
+  function enable() {
+    setEnabled(true);
     msg.reply({
       enabled: true,
-      remember: this.state.remember,
-      budget: this.state.budget,
+      remember,
+      budget,
       spent: 0,
     });
   }
 
-  reject() {
+  function reject(event) {
     msg.error("User rejected");
+    event.preventDefault();
   }
 
-  setRemember(remember) {
-    return this.setState({ remember });
-  }
-
-  setBudget(satoshi) {
-    this.setState({ budget: parseInt(satoshi) });
-  }
-
-  componentDidMount() {
-    msg
-      .request("getAllowance", { domain: this.props.origin.domain })
-      .then((allowance) => {
-        this.setState({ ...allowance });
+  useEffect(() => {
+    async function getAllowance() {
+      try {
+        const allowance = await msg.request("getAllowance", {
+          domain: props.origin.domain,
+        });
         if (allowance && allowance.enabled) {
-          this.enable();
+          enable();
         }
-        this.setState({ loading: false });
-      });
-  }
+        setLoading(false);
+      } catch (e) {
+        console.log(e.message);
+      }
+    }
+    getAllowance();
+  }, []);
 
-  render() {
-    return (
-      <section id="prompt">
-        <strong>{JSON.stringify(this.props.origin)}</strong>
-        <strong>{JSON.stringify(this.state)}</strong>
-        <h2>Allow access?</h2>
-        <input
-          name="remember"
-          type="checkbox"
-          onChange={(event) => {
-            this.setRemember(event.target.checked);
-          }}
-        />
+  return (
+    <div>
+      <PublisherCard
+        title="The Biz with John Carvalho"
+        image="https://img.podplay.com/922c5e7d-0230-51d4-a81c-578eb3d7c616/575/575"
+      />
 
-        <p>
-          Budget:
-          <input
-            type="text"
-            name="budget"
-            onChange={(event) => {
-              this.setBudget(event.target.value);
-            }}
-          />
+      <div className="text-center px-8 py-16">
+        {/* <strong>{JSON.stringify(props.origin)}</strong> */}
+        <h3 className="text-2xl mb-6">
+          Connect with <i>host.com</i>
+        </h3>
+
+        <p className="text-xl text-gray-500 mb-6">
+          <strong>The Hype Machine (hypem.com)</strong> does not have access to
+          your account.
+        </p>
+        <p className="text-xl text-gray-500 mb-6">
+          Do you want to grant them access?
         </p>
 
-        <Button type="default" onClick={() => this.reject()}>
-          Reject
-        </Button>
-        <Button type="primary" onClick={() => this.enable()}>
-          Enable
-        </Button>
-      </section>
-    );
-  }
+        <div className="mb-6">
+          <p className="mb-6">
+            Remember:{" "}
+            <input
+              name="remember"
+              type="checkbox"
+              onChange={(event) => {
+                setRemember(event.target.checked);
+              }}
+            />
+          </p>
+
+          <p>
+            Budget:{" "}
+            <input
+              type="text"
+              name="budget"
+              onChange={(event) => {
+                setBudget(event.target.value);
+              }}
+            />
+          </p>
+        </div>
+
+        <Button type="primary" label="Enable" fullWidth onClick={enable} />
+
+        <p className="mt-6 underline text-base text-gray-300">
+          Only connect with sites you trust.
+        </p>
+
+        <a
+          className="mt-6 underline text-base text-gray-500"
+          href="#"
+          onClick={reject}
+        >
+          Cancel
+        </a>
+      </div>
+    </div>
+  );
 }
 
 export default Enable;
