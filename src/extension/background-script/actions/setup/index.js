@@ -1,3 +1,5 @@
 import setPassword from "./setPassword";
+import status from "./status";
+import reset from "./reset";
 
-export { setPassword };
+export { setPassword, status, reset };

@@ -17,9 +17,12 @@ class Popup extends React.Component {
 
   componentDidMount() {
     utils
-      .call("isUnlocked")
+      .call("status")
       .then((response) => {
-        if (response.unlocked) {
+        if (!response.configured) {
+          utils.openPage("welcome.html");
+          window.close();
+        } else if (response.unlocked) {
           this.history.replace("/home");
         } else {
           this.history.replace("/unlock");

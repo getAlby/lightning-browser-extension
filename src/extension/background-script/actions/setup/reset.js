@@ -1,4 +1,4 @@
-import state from "../state";
+import state from "../../state";
 
 const reset = async (message, sender) => {
   state.setState({
