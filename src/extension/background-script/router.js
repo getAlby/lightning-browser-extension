@@ -2,7 +2,6 @@ import * as accounts from "./actions/accounts";
 import * as ln from "./actions/ln";
 import * as allowances from "./actions/allowances";
 import * as setup from "./actions/setup";
-import reset from "./actions/reset";
 
 // TODO: potential nesting/grouping of actions for better organization
 const routes = {
@@ -25,7 +24,8 @@ const routes = {
   setPassword: setup.setPassword,
   addAccount: accounts.add,
   selectAccount: accounts.select,
-  reset: reset,
+  reset: setup.reset,
+  status: setup.status,
 };
 
 const router = (path) => {
