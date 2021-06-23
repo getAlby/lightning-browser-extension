@@ -14,12 +14,30 @@ if (document) {
       return;
     }
     const lightningLink = target.closest('[href^="lightning:"]');
-    if (!lightningLink) {
+    const bitcoinLinkWithLighting = target.closest('[href*="lightning=lnbc"]');
+    let href;
+    let paymentRequest;
+
+    if (!lightningLink && !bitcoinLinkWithLighting) {
       return;
     }
     ev.preventDefault();
-    const href = lightningLink.getAttribute("href");
-    const paymentRequest = href.replace("lightning:", "");
+
+    if (lightningLink) {
+      href = lightningLink.getAttribute("href");
+      paymentRequest = href.replace("lightning:", "");
+    } else if (bitcoinLinkWithLighting) {
+      href = bitcoinLinkWithLighting.getAttribute("href");
+      const matches = href.match(/lightning=(\w+)/);
+      if (!matches) {
+        return;
+      }
+      paymentRequest = matches[0];
+    }
+    if (!paymentRequest) {
+      return;
+    }
+
     window.webln.enable().then((response) => {
       if (!response.enabled) {
         return;
