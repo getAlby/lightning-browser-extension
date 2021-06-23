@@ -1,14 +1,15 @@
 import state from "../state";
 
-const reset = (message, sender) => {
+const reset = async (message, sender) => {
   state.setState({
     settings: { debug: true },
     accounts: {},
     password: null,
     currentAccountId: null,
   });
+  await browser.storage.sync.set({ allowances: [] });
 
-  return Promise.resolve({ data: { reset: true } });
+  return { data: { reset: true } };
 };
 
 export default reset;
