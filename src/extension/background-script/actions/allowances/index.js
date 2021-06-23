@@ -1,3 +1,4 @@
 import enable from "./enable";
+import get from "./get";
 
-export { enable };
+export { enable, get };

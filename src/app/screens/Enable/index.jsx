@@ -18,7 +18,6 @@ function Enable(props) {
       enabled: true,
       remember,
       budget,
-      spent: 0,
     });
   }
 
@@ -32,6 +31,7 @@ function Enable(props) {
       try {
         const allowance = await msg.request("getAllowance", {
           domain: props.origin.domain,
+          host: props.origin.host,
         });
         if (allowance && allowance.enabled) {
           enable();
