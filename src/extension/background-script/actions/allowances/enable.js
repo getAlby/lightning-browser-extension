@@ -3,7 +3,7 @@ import db from "../../db";
 import utils from "../../../../common/lib/utils";
 
 const enable = async (message, sender) => {
-  const host = message.origin.host;
+  const host = message.origin.host || message.args.host;
   const allowance = await db.allowances
     .where("host")
     .equalsIgnoreCase(host)
@@ -15,9 +15,11 @@ const enable = async (message, sender) => {
     };
   } else {
     try {
-      const response = utils.openPrompt(message);
+      const response = await utils.openPrompt(message);
       // if the response should be saved/rememberd we update the allowance for the domain
       // as this returns a promise we must wait until it resolves
+      console.log('prompt open?');
+      console.log(response);
       if (response.data.enabled && response.data.remember) {
         if (allowance) {
           await db.allowances.update(allowance.id, { enabled: true });
@@ -31,7 +33,10 @@ const enable = async (message, sender) => {
         await db.saveToStorage();
       }
       return {
-        data: { enabled: response.enabled, remember: response.remember },
+        data: {
+          enabled: response.data.enabled,
+          remember: response.data.remember,
+        },
       };
     } catch (e) {
       console.log(e);

@@ -5,8 +5,8 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const viewsPath = path.join(__dirname, "static", "views");
 const nodeEnv = process.env.NODE_ENV || "development";
@@ -194,11 +194,7 @@ module.exports = {
       // },
       // extractComments: false,
       // }),
-      new OptimizeCSSAssetsPlugin({
-        cssProcessorPluginOptions: {
-          preset: ["default", { discardComments: { removeAll: true } }],
-        },
-      }),
+      new CssMinimizerPlugin(),
       new FilemanagerPlugin({
         events: {
           onEnd: {

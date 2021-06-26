@@ -13,6 +13,7 @@ const browserStorage = {
 };
 
 const state = createState((set, get) => ({
+  configured: false,
   connector: null,
   account: null,
   settings: {},
@@ -44,6 +45,7 @@ const state = createState((set, get) => ({
         Object.keys(browserStorage).forEach((key) => {
           data[key] = result[key] || browserStorage[key];
         });
+        data.configured = Object.keys(data.accounts) > 0 // configured if an account is present
         set(data);
       });
   },

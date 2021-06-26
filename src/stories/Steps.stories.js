@@ -1,6 +1,6 @@
 import React from "react";
 import Steps from "../app/components/steps";
-import "../app/styles/index.css";
+import { MemoryRouter } from "react-router-dom";
 
 const steps = [
   { id: "Step 1", name: "Job details", href: "#", status: "complete" },
@@ -13,4 +13,11 @@ export const Primary = () => <Steps steps={steps} />;
 export default {
   title: "Components/Steps",
   component: Steps,
+  decorators: [
+    (Story) => (
+      <MemoryRouter>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
 };
