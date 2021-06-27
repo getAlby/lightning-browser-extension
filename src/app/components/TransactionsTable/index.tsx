@@ -1,15 +1,27 @@
+import React from "react";
 import {
   PlusCircleIcon,
   MinusCircleIcon,
   ExclamationCircleIcon,
 } from "@heroicons/react/outline";
-import Badge from "../../Shared/badge";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+import Badge from "../Shared/badge";
 
-export default function TransactionsTable({ transactions }) {
+type Props = {
+  transactions: Transaction[];
+};
+
+type Transaction = {
+  type: string;
+  email: string;
+  title: string;
+  date: string;
+  amount: string;
+  currency: string;
+  value: string;
+};
+
+export default function TransactionsTable({ transactions }: Props) {
   return (
     <table className="min-w-full divide-y divide-gray-200">
       <tbody className="bg-white divide-y divide-gray-200">

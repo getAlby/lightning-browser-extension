@@ -1,231 +1,56 @@
-import { Typography, Layout, Tabs } from "antd";
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { HashRouter, Switch, Route, Link } from "react-router-dom";
 
-import msg from "../../../common/lib/msg";
-import { encryptData } from "../../../common/lib/crypto";
+import AppBar from "../../components/Appbar";
 
-import Accounts from "../../../common/lib/accounts";
-import Allowances from "../../../common/lib/allowances";
+import Publishers from "../../screens/Publishers";
 
-import LndForm from "../../components/Lnd";
-import LndHubForm from "../../components/LndHub";
-import LnBitsForm from "../../components/LnBits";
-import NativeConnectionForm from "../../components/NativeConnection";
+class Options extends React.Component {
+  render() {
+    return (
+      <HashRouter>
+        <AppBar
+          title="myNode"
+          subtitle="₿ 0.0016 7930   €33.57"
+          onOptionsClick={() => alert("options clicked")}
+        >
+          <ul className="flex space-x-8">
+            <li>
+              <Link className="underline" to="/">
+                Publishers
+              </Link>
+            </li>
+            <li>
+              <Link className="underline" to="/screen-2">
+                Screen 2
+              </Link>
+            </li>
+            <li>
+              <Link className="underline" to="/screen-3">
+                Screen 3
+              </Link>
+            </li>
+          </ul>
+        </AppBar>
 
-import ListData from "../../components/ListData";
-
-import { normalizeAccountsData } from "../../../common/utils/helpers";
-
-import "./styles.scss";
-
-const { TabPane } = Tabs;
-const { Title } = Typography;
-const { Header, Content } = Layout;
-
-const accountsStore = new Accounts();
-const allowancesStore = new Allowances();
-
-const Options = () => {
-  const [accounts, setAccounts] = useState({});
-  const [allowances, setAllowances] = useState({});
-  const [currentAccount, setCurrentAccount] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPasswordModal, setShowPasswordModal] = useState(true);
-
-  useEffect(() => {
-    return load();
-  }, []);
-
-  const load = () => {
-    return Promise.all([
-      accountsStore.load(),
-      allowancesStore.load(),
-    ]).then(() => {
-      setAccounts(accountsStore.accounts);
-      setCurrentAccount(accountsStore.currentKey);
-      setAllowances(allowancesStore.allowances);
-    });
-  };
-
-  const saveLndAccount = (values, formRef) => {
-    const account = {
-      name: values.name,
-      config: {
-        macaroon: values.macaroon,
-        url: values.url,
-      },
-      connector: "lnd",
-    };
-    return saveAccount(account).then(() => {
-      load();
-      if (formRef) {
-        formRef.resetFields();
-      }
-    });
-  };
-
-  const saveLndHubAccount = (values, formRef) => {
-    const account = {
-      name: values.name,
-      config: {
-        login: values.login,
-        password: values.password,
-        url: values.url,
-      },
-      connector: "lndhub",
-    };
-
-    return saveAccount(account).then(() => {
-      load();
-      if (formRef) {
-        formRef.resetFields();
-      }
-    });
-  };
-
-  const saveLnBitsAccount = (values, formRef) => {
-    const account = {
-      name: values.name,
-      config: {
-        adminkey: values.adminkey,
-        readkey: values.readkey,
-        url: "https://lnbits.com",
-      },
-      connector: "lnbits",
-    };
-
-    return saveAccount(account).then(() => {
-      load();
-      if (formRef) {
-        formRef.resetFields();
-      }
-    });
-  };
-
-  const saveNativeAccount = (values, formRef) => {
-    const account = {
-      name: values.name,
-      config: {},
-      connector: "native",
-    };
-    return saveAccount(account).then(() => {
-      load();
-      if (formRef) {
-        formRef.resetFields();
-      }
-    });
-  };
-
-  const resetAccounts = () => {
-    return accountsStore.reset().then(() => {
-      document.location.reload();
-    });
-  };
-
-  const resetAllowances = () => {
-    return allowancesStore.reset();
-  };
-
-  const saveAccount = (account) => {
-    account.config = encryptData(account.config, password);
-    return accountsStore.setAccount(account, true).then(() => {
-      return load();
-    });
-  };
-
-  const formSubmitFailure = (errorInfo) => {
-    console.log(errorInfo);
-  };
-
-  // TODO: refactor
-  const handlePasswordModalOk = (password) => {
-    setPassword(password);
-    if (Object.entries(accounts).length > 0) {
-      msg
-        .request("unlock", { password })
-        .then((response) => {
-          setShowPasswordModal(false);
-        })
-        .catch((e) => {
-          alert("Invalid password");
-        });
-    } else {
-      setShowPasswordModal(false);
-    }
-  };
-
-  return (
-    <Layout>
-      <Header>Lightning Extension Options</Header>
-
-      <Content>
-        <Tabs defaultActiveKey="2">
-          <TabPane tab="General" key="1">
-          </TabPane>
-
-          <TabPane tab="Accounts" key="2">
-            {Object.entries(accounts).map((entry) => (
-              <div>{entry[1].name}</div>
-            ))}
-            <ListData
-              title="Existing Accounts"
-              onResetCallback={resetAccounts}
-              data={normalizeAccountsData(accounts)}
-            />
-
-            <Title level={2}>Current Account: {currentAccount}</Title>
-
-            <Title level={2}>Add Account</Title>
-
-            <p>
-              Choose a password:
-              <input
-                type="text"
-                value={password}
-                onChange={(event) => {
-                  setPassword(event.target.value);
-                }}
-              />
-            </p>
-            <Tabs defaultActiveKey="1">
-              <TabPane tab="LND Account" key="1">
-                <LndForm
-                  saveLndAccount={saveLndAccount}
-                  addLndAccountFailure={formSubmitFailure}
-                />
-              </TabPane>
-
-              <TabPane tab="LND Hub Account" key="2">
-                <LndHubForm
-                  saveLndHubAccount={saveLndHubAccount}
-                  addLndHubAccountFailure={formSubmitFailure}
-                />
-              </TabPane>
-
-              <TabPane tab="Native Connection" key="3">
-                <NativeConnectionForm
-                  saveNativeAccount={saveNativeAccount}
-                  addNativeConnectionFailure={formSubmitFailure}
-                />
-              </TabPane>
-
-              <TabPane tab="LNbits" key="4">
-                <LnBitsForm
-                  onFinish={saveLnBitsAccount}
-                  onFinishFailed={formSubmitFailure}
-                ></LnBitsForm>
-              </TabPane>
-            </Tabs>
-          </TabPane>
-
-          <TabPane tab="Allowances" key="3">
-            <p>{JSON.stringify(allowances)}</p>
-            <span onClick={resetAllowances}>Reset</span>
-          </TabPane>
-        </Tabs>
-      </Content>
-    </Layout>
-  );
-};
+        <div className="container mx-auto px-4">
+          <Switch>
+            <Route exact path="/">
+              <Publishers />
+            </Route>
+            <Route path="/screen-2">
+              <h2 className="mt-12 mb-6 text-2xl font-bold">Screen 2</h2>
+              <p>Test content</p>
+            </Route>
+            <Route path="/screen-3">
+              <h2 className="mt-12 mb-6 text-2xl font-bold">Screen 3</h2>
+              <p>Lorem ipsum</p>
+            </Route>
+          </Switch>
+        </div>
+      </HashRouter>
+    );
+  }
+}
 
 export default Options;
