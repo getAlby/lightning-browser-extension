@@ -18,7 +18,7 @@ const success = (message, data) => {
 const failed = (message, data) => {
   return utils.notify({
     title: `Payment failed`,
-    message: data.response.payment_error,
+    message: `Error: ${data.response.data.payment_error}`,
   });
 };
 

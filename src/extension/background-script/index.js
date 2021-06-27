@@ -6,7 +6,7 @@ import { router } from "./router";
 import state from "./state";
 import db from "./db";
 
-require('./events/notify');
+import "./events"; // just load all files and register PubSub subscriptions
 
 setInterval(() => {
   console.log(state.getState());

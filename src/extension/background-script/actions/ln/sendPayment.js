@@ -1,10 +1,18 @@
 import PubSub from "pubsub-js";
+import parsePaymentRequest from "invoices";
 import utils from "../../../../common/lib/utils";
 import state from "../../state";
 import db from "../../db";
 
+const LNInvoices = require('invoices');
+
 const sendPayment = async (message, sender) => {
   PubSub.publish(`ln.sendPayment.start`, message);
+
+  const paymentRequest = message.args.paymentRequest;
+  const paymentRequestDetails = LNInvoices.parsePaymentRequest({
+    request: paymentRequest,
+  });
 
   const host = message.origin.host;
   const allowance = await db.allowances
@@ -13,23 +21,23 @@ const sendPayment = async (message, sender) => {
     .first();
 
   if (allowance) {
-    return sendPaymentWithAllowance(message, allowance);
+    return sendPaymentWithAllowance(message, paymentRequestDetails, allowance);
   } else {
-    return sendPaymentWithPrompt(message);
+    return sendPaymentWithPrompt(message, paymentRequestDetails);
   }
 };
 
-async function sendPaymentWithAllowance(message, allowance) {
+async function sendPaymentWithAllowance(message, paymentRequestDetails, allowance) {
   const connector = state.getState().getConnector();
   const response = await connector.sendPayment({
     paymentRequest: message.args.paymentRequest,
   });
-  publishPaymentNotification(message, response);
+  publishPaymentNotification(message, paymentRequestDetails, response);
 
   return response;
 }
 
-async function sendPaymentWithPrompt(message) {
+async function sendPaymentWithPrompt(message, paymentRequestDetails) {
   const connector = state.getState().getConnector();
 
   const response = await utils.openPrompt(message);
@@ -38,21 +46,22 @@ async function sendPaymentWithPrompt(message) {
       paymentRequest: message.args.paymentRequest,
     });
 
-    publishPaymentNotification(message, response);
+    publishPaymentNotification(message, paymentRequestDetails, response);
     return response;
   } else {
     return response;
   }
 }
 
-function publishPaymentNotification(message, response) {
+function publishPaymentNotification(message, paymentRequestDetails, response) {
   let status = "success"; // default. let's hope for success
   if (response.data.payment_error) {
     status = "failed";
   }
   PubSub.publish(`ln.sendPayment.${status}`, {
     response,
-    origin: message.orgin,
+    paymentRequestDetails,
+    origin: message.origin,
   });
 }
 
