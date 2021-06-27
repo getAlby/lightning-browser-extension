@@ -1,5 +1,6 @@
 import state from "../../state";
 import sendPayment from "./sendPayment";
+import PubSub from 'pubsub-js';
 
 const connectorCall = (method) => {
   return (message, sender) => {
@@ -12,6 +13,8 @@ const connectorCall = (method) => {
         error: "Connector not available. Is the account unlocked?",
       });
     }
+
+    PubSub.publish(`ln.${method}.start`, message);
 
     return connector[method]({
       args: message.args,

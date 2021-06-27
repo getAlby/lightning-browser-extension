@@ -1,8 +1,11 @@
+import PubSub from "pubsub-js";
 import utils from "../../../../common/lib/utils";
 import state from "../../state";
 import db from "../../db";
 
 const sendPayment = async (message, sender) => {
+  PubSub.publish(`ln.sendPayment.start`, message);
+
   const host = message.origin.host;
   const allowance = await db.allowances
     .where("host")
@@ -21,6 +24,8 @@ async function sendPaymentWithAllowance(message, allowance) {
   const response = await connector.sendPayment({
     paymentRequest: message.args.paymentRequest,
   });
+  publishPaymentNotification(message, response);
+
   return response;
 }
 
@@ -32,10 +37,23 @@ async function sendPaymentWithPrompt(message) {
     const response = await connector.sendPayment({
       paymentRequest: message.args.paymentRequest,
     });
+
+    publishPaymentNotification(message, response);
     return response;
   } else {
     return response;
   }
+}
+
+function publishPaymentNotification(message, response) {
+  let status = "success"; // default. let's hope for success
+  if (response.data.payment_error) {
+    status = "failed";
+  }
+  PubSub.publish(`ln.sendPayment.${status}`, {
+    response,
+    origin: message.orgin,
+  });
 }
 
 export default sendPayment;

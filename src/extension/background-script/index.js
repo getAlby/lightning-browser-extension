@@ -6,6 +6,8 @@ import { router } from "./router";
 import state from "./state";
 import db from "./db";
 
+require('./events/notify');
+
 setInterval(() => {
   console.log(state.getState());
 }, 5000);
