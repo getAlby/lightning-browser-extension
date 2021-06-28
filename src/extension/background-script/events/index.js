@@ -1,6 +1,6 @@
 import PubSub from "pubsub-js";
-import persistSuccessfullPayment from "./persistPayments";
-import updateAllowance from "./allowances";
+import { persistSuccessfullPayment } from "./persistPayments";
+import { updateAllowance } from "./allowances";
 import {
   paymentSuccessNotification,
   paymentFailedNotification,
