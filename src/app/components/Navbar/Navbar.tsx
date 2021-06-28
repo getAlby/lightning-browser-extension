@@ -18,7 +18,7 @@ export default function Navbar({
 }: Props) {
   return (
     <div className="px-5 py-2 flex justify-between items-center border-b border-gray-200">
-      <div className="w-4/12 lg:w-3/12 flex items-center">
+      <div className="md:w-4/12 lg:w-3/12 flex items-center">
         <img
           className="-ml-1 mr-4 w-8 h-8 opacity-50"
           src={WalletIcon}
@@ -35,7 +35,7 @@ export default function Navbar({
           <nav className="flex space-x-8">{children}</nav>
         </div>
       )}
-      <div className="w-4/12 lg:w-3/12 flex justify-end items-center">
+      <div className="md:w-4/12 lg:w-3/12 flex justify-end items-center">
         <button
           className="opacity-50 focus:outline-none transition-opacity duration-200 hover:opacity-100"
           onClick={onOptionsClick}
