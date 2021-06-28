@@ -5,7 +5,7 @@ class DB extends Dexie {
   constructor() {
     super("LBE");
     this.version(1).stores({
-      allowances: "++id,&host,name,enabled,totalBudget,remainingBudget,lastPaymentAt,createdAt",
+      allowances: "++id,&host,name,imageURL,tag,enabled,totalBudget,remainingBudget,lastPaymentAt,createdAt",
       payments: "++id,allowanceId,host,name,description,totalAmount,preimage,destination,createdAt",
     });
     this.on("ready", this.loadFromStorage.bind(this));
