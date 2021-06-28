@@ -27,7 +27,7 @@ const getExtensionFileType = (browser) => {
 };
 
 module.exports = {
-  devtool: "inline-source-map",
+  devtool: nodeEnv === "development" ? "inline-source-map" : false,
 
   stats: {
     all: false,
