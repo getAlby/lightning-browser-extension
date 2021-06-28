@@ -11,7 +11,8 @@ const dummyData = [
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
     sats: "186,000 / 310,000",
-    percentage: "20",
+    spent: 186000,
+    total: 310000,
     image: "https://picsum.photos/id/10/200",
   },
   {
@@ -21,7 +22,8 @@ const dummyData = [
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
     sats: "186,000 / 310,000",
-    percentage: "60",
+    spent: 16000,
+    total: 310000,
     image: "https://picsum.photos/id/11/200",
   },
   {
@@ -31,7 +33,8 @@ const dummyData = [
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
     sats: "186,000 / 310,000",
-    percentage: "30",
+    spent: 140000,
+    total: 310000,
     image: "https://picsum.photos/id/12/200",
   },
   {
@@ -41,7 +44,8 @@ const dummyData = [
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
     sats: "186,000 / 310,000",
-    percentage: "10",
+    spent: 90000,
+    total: 310000,
     image: "https://picsum.photos/id/13/200",
   },
   {
@@ -51,7 +55,8 @@ const dummyData = [
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
     sats: "186,000 / 310,000",
-    percentage: "100",
+    spent: 120000,
+    total: 310000,
     image: "https://picsum.photos/id/14/200",
   },
   {
@@ -61,7 +66,8 @@ const dummyData = [
     title: "Regional Paradigm Technician",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
     sats: "186,000 / 310,000",
-    percentage: "40",
+    spent: 40000,
+    total: 310000,
     image: "https://picsum.photos/id/15/200",
   },
 ];
@@ -74,7 +80,11 @@ function Publishers() {
       try {
         // const result = await getPublishersAsyncFunc();
         const result = dummyData;
-        setData(result);
+        const resultWithPercentages = result.map((publisher) => ({
+          ...publisher,
+          percentage: ((publisher.spent / publisher.total) * 100).toFixed(0),
+        }));
+        setData(resultWithPercentages);
       } catch (e) {
         console.log(e.message);
       }
