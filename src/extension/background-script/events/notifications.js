@@ -1,9 +1,8 @@
-import PubSub from "pubsub-js";
 import utils from "../../../common/lib/utils";
 
 // TODO: add settings check if a notification should be sent
 
-const success = (message, data) => {
+const paymentSuccessNotification = (message, data) => {
   const recipient = data.origin.name;
   const paymentResponse = data.response;
   const route = paymentResponse.data.payment_route;
@@ -15,12 +14,11 @@ const success = (message, data) => {
   });
 };
 
-const failed = (message, data) => {
+const paymentFailedNotification = (message, data) => {
   return utils.notify({
     title: `Payment failed`,
     message: `Error: ${data.response.data.payment_error}`,
   });
 };
 
-PubSub.subscribe("ln.sendPayment.success", success);
-PubSub.subscribe("ln.sendPayment.failed", failed);
+export { paymentSuccessNotification, paymentFailedNotification };

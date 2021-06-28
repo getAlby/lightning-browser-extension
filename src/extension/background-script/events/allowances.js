@@ -1,7 +1,7 @@
 import PubSub from "pubsub-js";
 import db from "../db";
 
-const success = async (message, data) => {
+const updateAllowance = async (message, data) => {
   const host = data.origin.host;
   const paymentResponse = data.response;
   const route = paymentResponse.data.payment_route;
@@ -26,4 +26,4 @@ const success = async (message, data) => {
   return true;
 };
 
-PubSub.subscribe("ln.sendPayment.success", success);
+export { updateAllowance };

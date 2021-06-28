@@ -1,7 +1,6 @@
-import PubSub from "pubsub-js";
 import db from "../db";
 
-const success = async (message, data) => {
+const persistSuccessfullPayment = async (message, data) => {
   const recipientName = data.origin.name;
   const host = data.origin.host;
   const paymentResponse = data.response;
@@ -22,4 +21,4 @@ const success = async (message, data) => {
   return true;
 };
 
-PubSub.subscribe("ln.sendPayment.success", success);
+export { persistSuccessfullPayment };

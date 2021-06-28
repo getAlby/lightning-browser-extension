@@ -6,7 +6,7 @@ import { router } from "./router";
 import state from "./state";
 import db from "./db";
 
-import "./events"; // just load all files and register PubSub subscriptions
+import * as events from "./events";
 
 setInterval(() => {
   console.log(state.getState());
@@ -57,6 +57,8 @@ async function init() {
   await state.getState().init();
   console.log("State loaded");
   await db.open();
+
+  events.subscribe();
 
   // initialize a connector for the current account
   browser.runtime.onMessage.addListener(debugLogger);
