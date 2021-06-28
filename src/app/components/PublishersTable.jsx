@@ -30,8 +30,7 @@ export default function PublishersTable({ publishers }) {
                     )}
                   </div>
                   <div className="text-base text-gray-500">
-                    {publisher.host} - {publisher.paymentsCount} payments
-                    {publisher.description}
+                    {publisher.host} · {publisher.paymentsCount} payments
                   </div>
                 </div>
               </div>
