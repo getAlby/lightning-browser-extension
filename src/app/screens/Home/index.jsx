@@ -4,7 +4,7 @@ import browser from "webextension-polyfill";
 import utils from "../../../common/lib/utils";
 import { getFiatFromSatoshi } from "../../../common/utils/helpers";
 
-import Appbar from "../../components/Appbar";
+import Navbar from "../../components/Navbar";
 import Transactions from "../../components/Transactions";
 import Loading from "../../components/Loading";
 import BalanceCard from "../../components/BalanceCard";
@@ -54,7 +54,7 @@ class Home extends React.Component {
 
     return (
       <div>
-        <Appbar
+        <Navbar
           title={alias}
           subtitle="₿0.0016 7930 €33.57"
           onOptionsClick={() => {

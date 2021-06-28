@@ -93,6 +93,7 @@
     "@storybook/builder-webpack5": "^6.3.0-beta.0",
     "@storybook/cli": "^6.2.9",
     "@storybook/react": "^6.2.9",
+    "@types/react-router-dom": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
     "autoprefixer": "^9.8.6",
