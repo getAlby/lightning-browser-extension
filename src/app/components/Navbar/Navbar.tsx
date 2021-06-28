@@ -3,7 +3,19 @@ import Skeleton from "react-loading-skeleton";
 import WalletIcon from "@bitcoin-design/bitcoin-icons/svg/outline/wallet.svg";
 import GearIcon from "@bitcoin-design/bitcoin-icons/svg/outline/gear.svg";
 
-export default function Appbar({ title, subtitle, onOptionsClick, children }) {
+type Props = {
+  title: string;
+  subtitle: string;
+  onOptionsClick: () => void;
+  children?: React.ReactNode;
+};
+
+export default function Navbar({
+  title,
+  subtitle,
+  onOptionsClick,
+  children,
+}: Props) {
   return (
     <div className="px-5 py-2 flex justify-between items-center border-b border-gray-200">
       <div className="w-4/12 lg:w-3/12 flex items-center">
@@ -18,7 +30,11 @@ export default function Appbar({ title, subtitle, onOptionsClick, children }) {
           <div className="text-sm">{subtitle || <Skeleton />}</div>
         </div>
       </div>
-      <div>{children}</div>
+      {children && (
+        <div>
+          <nav className="flex space-x-8">{children}</nav>
+        </div>
+      )}
       <div className="w-4/12 lg:w-3/12 flex justify-end items-center">
         <button
           className="opacity-50 focus:outline-none transition-opacity duration-200 hover:opacity-100"
