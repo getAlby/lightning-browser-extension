@@ -67,19 +67,19 @@ const dummyData = [
 ];
 
 function Publishers() {
-  const [publishers, setPublishers] = useState([]);
-
-  async function fetchData() {
-    try {
-      // const data = await getPublishersAsyncFn();
-      const data = dummyData;
-      setPublishers(data);
-    } catch (e) {
-      console.log(e.message);
-    }
-  }
+  const [data, setData] = useState([]);
 
   useEffect(() => {
+    async function fetchData() {
+      try {
+        // const result = await getPublishersAsyncFunc();
+        const result = dummyData;
+        setData(result);
+      } catch (e) {
+        console.log(e.message);
+      }
+    }
+
     fetchData();
   }, []);
 
@@ -93,7 +93,7 @@ function Publishers() {
         <Searchbar />
       </div>
 
-      <PublishersTable publishers={publishers} />
+      <PublishersTable publishers={data} />
     </>
   );
 }
