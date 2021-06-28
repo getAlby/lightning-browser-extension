@@ -16,6 +16,7 @@ const routes = {
   */
   enable: allowances.enable,
   getAllowance: allowances.get,
+  listAllowances: allowances.list,
   isUnlocked: accounts.isUnlocked,
   unlock: accounts.unlock,
   getInfo: ln.getInfo,

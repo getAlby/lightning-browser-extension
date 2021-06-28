@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import PublishersTable from "../components/PublishersTable";
 import Searchbar from "../components/Searchbar";
 
+import utils from "../../common/lib/utils";
+
 const dummyData = [
   {
     id: "pub_id1",
@@ -78,13 +80,15 @@ function Publishers() {
   useEffect(() => {
     async function fetchData() {
       try {
-        // const result = await getPublishersAsyncFunc();
-        const result = dummyData;
-        const resultWithPercentages = result.map((publisher) => ({
-          ...publisher,
-          percentage: ((publisher.spent / publisher.total) * 100).toFixed(0),
-        }));
-        setData(resultWithPercentages);
+        const response = await utils.call("listAllowances");
+        console.log(response);
+        const allowances = response.allowances.map((allowance) => {
+          if (allowance.enabled && allowance.remainingBudget > 0) {
+            allowance.badge = { label: "ACTIVE", color: "green-bitcoin", textColor: "white" };
+          }
+          return allowance;
+        });
+        setData(allowances);
       } catch (e) {
         console.log(e.message);
       }
