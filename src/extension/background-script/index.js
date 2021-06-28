@@ -6,6 +6,14 @@ import { router } from "./router";
 import state from "./state";
 import db from "./db";
 
+import * as events from "./events";
+
+/* debug help to check the current state
+setInterval(() => {
+  console.log(state.getState());
+}, 5000);
+*/
+
 const debugLogger = (message, sender) => {
   if (state.getState().settings.debug) {
     console.log("Background onMessage: ", message, sender);
@@ -51,6 +59,8 @@ async function init() {
   await state.getState().init();
   console.log("State loaded");
   await db.open();
+
+  events.subscribe();
 
   // initialize a connector for the current account
   browser.runtime.onMessage.addListener(debugLogger);

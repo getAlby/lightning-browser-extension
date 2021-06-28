@@ -5,27 +5,35 @@ class DB extends Dexie {
   constructor() {
     super("LBE");
     this.version(1).stores({
-      allowances: "++id,&host,name,enabled,totalBudget,remainingBudget,createdAt",
+      allowances: "++id,&host,name,imageURL,tag,enabled,totalBudget,remainingBudget,lastPaymentAt,createdAt",
+      payments: "++id,allowanceId,host,name,description,totalAmount,totalFees,preimage,paymentRequest,paymentHash,destination,createdAt",
     });
     this.on("ready", this.loadFromStorage.bind(this));
   }
 
   async saveToStorage() {
     const allowanceArray = await this.allowances.toArray();
-    await browser.storage.sync.set({ allowances: allowanceArray });
+    const paymentsArray = await this.payments.toArray();
+    await browser.storage.sync.set({
+      allowances: allowanceArray,
+      payments: paymentsArray,
+    });
     return true;
   }
 
   async loadFromStorage() {
     try {
-      const result = await browser.storage.sync.get(["allowances"]);
+      const result = await browser.storage.sync.get(["allowances", "payments"]);
       console.log("Loading DB data from storage");
-      console.log(result);
-      await this.allowances.bulkAdd(result.allowances);
-      console.log("Loaded allowances");
+      if (result.allowances) {
+        await this.allowances.bulkAdd(result.allowances);
+      }
+      if (result.payments) {
+        await this.payments.bulkAdd(result.payments);
+      }
       return true;
     } catch (e) {
-      console.log("Failed to load allowances");
+      console.log("Failed to load DB data from storage");
       console.log(e);
     }
   }

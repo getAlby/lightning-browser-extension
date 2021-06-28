@@ -27,9 +27,6 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    browser.storage.sync.get(["currentAccount"]).then((result) => {
-      this.setState({ currentAccount: result.currentAccount });
-    });
     utils.call("getInfo").then((info) => {
       console.log("info", info);
       this.setState({ alias: info?.alias });
