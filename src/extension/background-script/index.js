@@ -8,9 +8,11 @@ import db from "./db";
 
 import * as events from "./events";
 
+/* debug help to check the current state
 setInterval(() => {
   console.log(state.getState());
 }, 5000);
+*/
 
 const debugLogger = (message, sender) => {
   if (state.getState().settings.debug) {
