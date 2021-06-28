@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import PublishersTable from "../components/PublishersTable";
 import Searchbar from "../components/Searchbar";
 
-const publishers = [
+const dummyData = [
   {
     id: "pub_id1",
     description: "Art · 12 payments",
@@ -67,6 +67,22 @@ const publishers = [
 ];
 
 function Publishers() {
+  const [publishers, setPublishers] = useState([]);
+
+  async function fetchData() {
+    try {
+      // const data = await getPublishersAsyncFn();
+      const data = dummyData;
+      setPublishers(data);
+    } catch (e) {
+      console.log(e.message);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <>
       <h2 className="mt-12 mb-6 text-2xl font-bold">
