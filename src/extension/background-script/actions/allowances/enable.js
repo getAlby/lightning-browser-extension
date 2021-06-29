@@ -18,8 +18,6 @@ const enable = async (message, sender) => {
       const response = await utils.openPrompt(message);
       // if the response should be saved/rememberd we update the allowance for the domain
       // as this returns a promise we must wait until it resolves
-      console.log('prompt open?');
-      console.log(response);
       if (response.data.enabled && response.data.remember) {
         if (allowance) {
           await db.allowances.update(allowance.id, { enabled: true });
