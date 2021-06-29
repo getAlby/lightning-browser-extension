@@ -45,7 +45,7 @@ const routeCalls = (message, sender) => {
   // Log the action response if we are in debug mode
   if (debug) {
     call.then((r) => {
-      console.log("Action response:", r);
+      console.log(`${action} response:`, r);
       return r;
     });
   }
