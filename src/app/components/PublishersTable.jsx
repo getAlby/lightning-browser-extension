@@ -1,4 +1,5 @@
 import React from "react";
+import { ChevronRightIcon } from "@heroicons/react/outline";
 
 import Badge from "./Shared/badge";
 
@@ -56,6 +57,9 @@ export default function PublishersTable({ publishers }) {
                   </div>
                 </div>
               </div>
+            </td>
+            <td className="w-8">
+              <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
             </td>
           </tr>
         ))}
