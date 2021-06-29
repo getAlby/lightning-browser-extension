@@ -18,11 +18,11 @@ export default function PublisherCard({ title, image }: Props) {
       }}
     >
       <img
-        className="w-32 h-32 rounded-2xl shadow-xl mx-auto mb-4"
+        className="w-24 h-24 rounded-xl shadow-xl mx-auto mb-4"
         src={image}
         alt=""
       />
-      <h2 className="text-center mb-0 text-3xl text-white">{title}</h2>
+      <h2 className="text-center mb-0 text-xl text-white">{title}</h2>
     </div>
   );
 }

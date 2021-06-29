@@ -9,7 +9,7 @@ import utils from "../../../common/lib/utils";
 import Unlock from "../../screens/Unlock";
 import Enable from "../../screens/Enable";
 import Loading from "../../components/Loading";
-import ConfirmPayment from "../../components/ConfirmPayment";
+import ConfirmPayment from "../../screens/ConfirmPayment";
 let invoiceParser = require("@node-lightning/invoice");
 
 class Prompt extends React.Component {

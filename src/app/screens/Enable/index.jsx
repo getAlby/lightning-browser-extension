@@ -51,52 +51,29 @@ function Enable(props) {
         image="https://img.podplay.com/922c5e7d-0230-51d4-a81c-578eb3d7c616/575/575"
       />
 
-      <div className="text-center px-8 py-16">
-        {/* <strong>{JSON.stringify(props.origin)}</strong> */}
-        <h3 className="text-2xl mb-6">
+      <div className="text-center p-6">
+        <h3 className="text-xl mb-4">
           Connect with <i>host.com</i>
         </h3>
 
-        <p className="text-xl text-gray-500 mb-6">
+        <p className="text-base text-gray-500 mb-4">
           <strong>The Hype Machine (hypem.com)</strong> does not have access to
           your account.
         </p>
-        <p className="text-xl text-gray-500 mb-6">
+        <p className="text-base text-gray-500 mb-4">
           Do you want to grant them access?
         </p>
 
-        <div className="mb-6">
-          <p className="mb-6">
-            Remember:{" "}
-            <input
-              name="remember"
-              type="checkbox"
-              onChange={(event) => {
-                setRemember(event.target.checked);
-              }}
-            />
-          </p>
-
-          <p>
-            Budget:{" "}
-            <input
-              type="text"
-              name="budget"
-              onChange={(event) => {
-                setBudget(event.target.value);
-              }}
-            />
-          </p>
+        <div className="mt-8 mb-5">
+          <Button type="primary" label="Enable" fullWidth onClick={enable} />
         </div>
 
-        <Button type="primary" label="Enable" fullWidth onClick={enable} />
-
-        <p className="mt-6 underline text-base text-gray-300">
+        <p className="mb-3 underline text-sm text-gray-300">
           Only connect with sites you trust.
         </p>
 
         <a
-          className="mt-6 underline text-base text-gray-500"
+          className="underline text-sm text-gray-500"
           href="#"
           onClick={reject}
         >
