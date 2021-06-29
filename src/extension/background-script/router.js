@@ -14,6 +14,7 @@ const routes = {
   ln: ln,
   accounts: accounts,
   */
+  addAllowance: allowances.add,
   enable: allowances.enable,
   getAllowance: allowances.get,
   listAllowances: allowances.list,

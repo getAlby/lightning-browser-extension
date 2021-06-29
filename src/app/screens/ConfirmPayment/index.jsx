@@ -20,12 +20,12 @@ class ConfirmPayment extends React.Component {
     };
   }
 
-  enable() {
+  async confirm() {
     if (this.state.rememberMe && this.state.budget) {
-      this.saveBudget();
+      await this.saveBudget();
     }
 
-    msg.reply({
+    return await msg.reply({
       confirmed: true,
     });
   }
@@ -40,11 +40,12 @@ class ConfirmPayment extends React.Component {
   }
 
   saveBudget() {
-    return msg.request(
-      "setAllowance",
-      { budget: this.state.budget, spent: 0, enabled: true },
-      { origin: this.props.origin }
-    );
+    return msg.request("addAllowance", {
+      totalBudget: this.state.budget,
+      host: this.props.origin.host,
+      name: this.props.origin.name,
+      imageURL: this.props.origin.icon,
+    });
   }
 
   render() {
@@ -107,7 +108,11 @@ class ConfirmPayment extends React.Component {
 
           <div className="text-center">
             <div className="mb-5">
-              <Button onClick={() => this.enable()} label="Confirm" fullWidth />
+              <Button
+                onClick={() => this.confirm()}
+                label="Confirm"
+                fullWidth
+              />
             </div>
 
             <p className="mb-3 underline text-sm text-gray-300">

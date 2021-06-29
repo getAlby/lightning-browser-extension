@@ -20,7 +20,10 @@ const sendPayment = async (message, sender) => {
     .equalsIgnoreCase(host)
     .first();
 
-  if (allowance) {
+  if (
+    allowance &&
+    allowance.remainingBudget >= parseInt(paymentRequestDetails.tokens)
+  ) {
     return sendPaymentWithAllowance(message, paymentRequestDetails, allowance);
   } else {
     return sendPaymentWithPrompt(message, paymentRequestDetails);

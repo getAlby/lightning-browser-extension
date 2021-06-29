@@ -23,6 +23,7 @@ const updateAllowance = async (message, data) => {
     remainingBudget: newRemaining,
     lastPaymentAt: Date.now(),
   });
+  await db.saveToStorage();
   return true;
 };
 
