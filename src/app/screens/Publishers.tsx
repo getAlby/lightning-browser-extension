@@ -8,23 +8,25 @@ import utils from "../../common/lib/utils";
 function Publishers() {
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await utils.call("listAllowances");
-        console.log(response);
-        const allowances = response.allowances.map((allowance) => {
-          if (allowance.enabled && allowance.remainingBudget > 0) {
-            allowance.badge = { label: "ACTIVE", color: "green-bitcoin", textColor: "white" };
-          }
-          return allowance;
-        });
-        setData(allowances);
-      } catch (e) {
-        console.log(e.message);
-      }
+  const deletePublisher = async (id) => {
+    await utils.call("deleteAllowance", { id });
+    fetchData();
+  };
+  async function fetchData() {
+    try {
+      const response = await utils.call("listAllowances");
+      const allowances = response.allowances.map((allowance) => {
+        if (allowance.enabled && allowance.remainingBudget > 0) {
+          allowance.badge = { label: "ACTIVE", color: "green-bitcoin", textColor: "white" };
+        }
+        return allowance;
+      });
+      setData(allowances);
+    } catch (e) {
+      console.log(e.message);
     }
-
+  }
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -38,7 +40,7 @@ function Publishers() {
         <Searchbar />
       </div>
 
-      <PublishersTable publishers={data} />
+      <PublishersTable publishers={data} deletePublisher={deletePublisher} />
     </>
   );
 }
