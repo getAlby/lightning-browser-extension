@@ -13,4 +13,11 @@ export const TestConnection = () => <TestConnectionScreen />;
 
 export default {
   title: "Screens/Onboard",
+  decorators: [
+    (Story) => (
+      <div className="container mx-auto">
+        <Story />
+      </div>
+    ),
+  ],
 };
