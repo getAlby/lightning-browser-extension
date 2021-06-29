@@ -10,7 +10,7 @@ function Publishers() {
 
   const deletePublisher = async (id) => {
     await utils.call("deleteAllowance", { id });
-    fetchData();
+    setData(data.filter(publisher => publisher.id !== id))
   };
   async function fetchData() {
     try {
