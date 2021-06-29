@@ -57,6 +57,7 @@ class Unlock extends React.Component {
             placeholder="Password"
             size="small"
             type="text"
+            autoFocus
             value={this.state.password}
             onChange={this.handlePasswordChange}
           />

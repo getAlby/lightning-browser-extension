@@ -4,6 +4,6 @@ import Transactions from "../app/components/Wallet/Transactions/index";
 export const Primary = () => <Transactions />;
 
 export default {
-  title: "Pages/Wallet/Transactions",
+  title: "Screens/Wallet/Transactions",
   component: Transactions,
 };
