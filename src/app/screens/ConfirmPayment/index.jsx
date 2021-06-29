@@ -3,6 +3,7 @@ import { createHashHistory } from "history";
 
 import Button from "../../components/button";
 import Checkbox from "../../components/Form/Checkbox";
+import CurrencyInput from "../../components/Form/CurrencyInput";
 import Collapse from "../../components/Collapse";
 import PaymentSummary from "../../components/PaymentSummary";
 import PublisherCard from "../../components/PublisherCard";
@@ -90,39 +91,15 @@ class ConfirmPayment extends React.Component {
                 <div>
                   <label
                     htmlFor="price"
-                    className="block text-sm font-medium text-gray-700"
+                    className="mb-1 block text-sm font-medium text-gray-700"
                   >
                     Budget
                   </label>
-                  <div className="mt-1 relative rounded-md shadow-sm">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <span className="text-gray-500 sm:text-sm">$</span>
-                    </div>
-                    <input
-                      type="text"
-                      name="price"
-                      id="price"
-                      className="focus:ring-orange-bitcoin focus:border-orange-bitcoin block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
-                      placeholder="0.00"
-                      onChange={(event) => {
-                        this.setBudget(event.target.value);
-                      }}
-                    />
-                    <div className="absolute inset-y-0 right-0 flex items-center">
-                      <label htmlFor="currency" className="sr-only">
-                        Currency
-                      </label>
-                      <select
-                        id="currency"
-                        name="currency"
-                        className="focus:ring-orange-bitcoin focus:border-orange-bitcoin h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md"
-                      >
-                        <option>USD</option>
-                        <option>EUR</option>
-                        <option>BTC</option>
-                      </select>
-                    </div>
-                  </div>
+                  <CurrencyInput
+                    onChange={(event) => {
+                      this.setBudget(event.target.value);
+                    }}
+                  />
                 </div>
               </div>
             </Collapse>
