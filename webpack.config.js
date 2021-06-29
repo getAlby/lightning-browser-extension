@@ -7,6 +7,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 const viewsPath = path.join(__dirname, "static", "views");
 const nodeEnv = process.env.NODE_ENV || "development";
@@ -27,7 +28,7 @@ const getExtensionFileType = (browser) => {
 };
 
 module.exports = {
-  devtool: "inline-source-map",
+  devtool: nodeEnv === "development" ? "inline-source-map" : false,
 
   stats: {
     all: false,
@@ -185,15 +186,7 @@ module.exports = {
   optimization: {
     minimize: true,
     minimizer: [
-      // new TerserPlugin({
-      // parallel: true,
-      // terserOptions: {
-      // format: {
-      // comments: false,
-      // },
-      // },
-      // extractComments: false,
-      // }),
+      new TerserPlugin(),
       new CssMinimizerPlugin(),
       new FilemanagerPlugin({
         events: {

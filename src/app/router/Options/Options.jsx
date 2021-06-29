@@ -17,8 +17,8 @@ class Options extends React.Component {
           <Navbar.Link exact href="/">
             Publishers
           </Navbar.Link>
-          <Navbar.Link href="/screen-2">Screen 2</Navbar.Link>
-          <Navbar.Link href="/screen-3">Screen 3</Navbar.Link>
+          <Navbar.Link href="/send">Send</Navbar.Link>
+          <Navbar.Link href="/receive">Receive</Navbar.Link>
         </Navbar>
 
         <div className="container mx-auto px-4">
@@ -26,12 +26,12 @@ class Options extends React.Component {
             <Route exact path="/">
               <Publishers />
             </Route>
-            <Route path="/screen-2">
-              <h2 className="mt-12 mb-6 text-2xl font-bold">Screen 2</h2>
+            <Route path="/send">
+              <h2 className="mt-12 mb-6 text-2xl font-bold">Send</h2>
               <p>Test content</p>
             </Route>
-            <Route path="/screen-3">
-              <h2 className="mt-12 mb-6 text-2xl font-bold">Screen 3</h2>
+            <Route path="/receive">
+              <h2 className="mt-12 mb-6 text-2xl font-bold">Receive</h2>
               <p>Lorem ipsum</p>
             </Route>
           </Switch>

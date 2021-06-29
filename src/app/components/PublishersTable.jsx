@@ -1,4 +1,5 @@
 import React from "react";
+import { ChevronRightIcon } from "@heroicons/react/outline";
 
 import Badge from "./Shared/badge";
 
@@ -9,7 +10,10 @@ export default function PublishersTable({ publishers, deletePublisher }) {
     <table className="min-w-full">
       <tbody className="divide-y divide-gray-200">
         {publishers.map((publisher) => (
-          <tr key={publisher.id}>
+          <tr
+            key={publisher.id}
+            className="hover:bg-gray-50 transition duration-200"
+          >
             <td className="pr-6 py-6 whitespace-nowrap">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -64,6 +68,9 @@ export default function PublishersTable({ publishers, deletePublisher }) {
                   </div>
                 </div>
               )}
+            </td>
+            <td className="w-8">
+              <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
             </td>
           </tr>
         ))}
