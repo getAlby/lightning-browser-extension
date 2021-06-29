@@ -1,9 +1,15 @@
 import React from "react";
 
 import Badge from "./Shared/badge";
+import utils from "../../common/lib/utils";
 
 const DEFAULT_IMAGE = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPjxyZWN0IHg9IjAiIHk9IjIiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHN0eWxlPSJmaWxsOiNhNGZhYWM7c3Ryb2tlOiNhNGZhYWM7c3Ryb2tlLXdpZHRoOjAuMDUiLz48cmVjdCB4PSI0IiB5PSIyIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBzdHlsZT0iZmlsbDojYTRmYWFjO3N0cm9rZTojYTRmYWFjO3N0cm9rZS13aWR0aDowLjA1Ii8+PHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9IjEiIGhlaWdodD0iMSIgc3R5bGU9ImZpbGw6I2E0ZmFhYztzdHJva2U6I2E0ZmFhYztzdHJva2Utd2lkdGg6MC4wNSIvPjxyZWN0IHg9IjMiIHk9IjEiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHN0eWxlPSJmaWxsOiNhNGZhYWM7c3Ryb2tlOiNhNGZhYWM7c3Ryb2tlLXdpZHRoOjAuMDUiLz48cmVjdCB4PSIxIiB5PSIzIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBzdHlsZT0iZmlsbDojYTRmYWFjO3N0cm9rZTojYTRmYWFjO3N0cm9rZS13aWR0aDowLjA1Ii8+PHJlY3QgeD0iMyIgeT0iMyIgd2lkdGg9IjEiIGhlaWdodD0iMSIgc3R5bGU9ImZpbGw6I2E0ZmFhYztzdHJva2U6I2E0ZmFhYztzdHJva2Utd2lkdGg6MC4wNSIvPjxyZWN0IHg9IjEiIHk9IjQiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHN0eWxlPSJmaWxsOiNhNGZhYWM7c3Ryb2tlOiNhNGZhYWM7c3Ryb2tlLXdpZHRoOjAuMDUiLz48cmVjdCB4PSIzIiB5PSI0IiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBzdHlsZT0iZmlsbDojYTRmYWFjO3N0cm9rZTojYTRmYWFjO3N0cm9rZS13aWR0aDowLjA1Ii8+PHJlY3QgeD0iMiIgeT0iMiIgd2lkdGg9IjEiIGhlaWdodD0iMSIgc3R5bGU9ImZpbGw6I2E0ZmFhYztzdHJva2U6I2E0ZmFhYztzdHJva2Utd2lkdGg6MC4wNSIvPjxyZWN0IHg9IjIiIHk9IjMiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHN0eWxlPSJmaWxsOiNhNGZhYWM7c3Ryb2tlOiNhNGZhYWM7c3Ryb2tlLXdpZHRoOjAuMDUiLz48L3N2Zz4=";
 export default function PublishersTable({ publishers }) {
+  const deletePublisher = (id) => {
+    utils.call("deleteAllowance", { id });
+    // TODO: reload
+  };
+
   return (
     <table className="min-w-full">
       <tbody className="divide-y divide-gray-200">
@@ -36,6 +42,7 @@ export default function PublishersTable({ publishers }) {
               </div>
             </td>
             <td className="px-6 py-6 whitespace-nowrap text-right">
+              <span onClick={deletePublisher(publisher.id)}>delete</span>
               {publisher.usedBudget && publisher.totalBudget && (
                 <div className="ml-40">
                   <p className="text-lg text-gray-700 mb-0">
