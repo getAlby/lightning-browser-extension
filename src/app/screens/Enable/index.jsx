@@ -46,19 +46,16 @@ function Enable(props) {
 
   return (
     <div>
-      <PublisherCard
-        title="The Biz with John Carvalho"
-        image="https://img.podplay.com/922c5e7d-0230-51d4-a81c-578eb3d7c616/575/575"
-      />
+      <PublisherCard title={props.origin.name} image={props.origin.icon} />
 
       <div className="text-center p-6">
         <h3 className="text-xl mb-4">
-          Connect with <i>host.com</i>
+          Connect with <i>{props.origin.host}</i>
         </h3>
 
         <p className="text-base text-gray-500 mb-4">
-          <strong>The Hype Machine (hypem.com)</strong> does not have access to
-          your account.
+          <strong>{props.origin.name}</strong> does not have access to your
+          account.
         </p>
         <p className="text-base text-gray-500 mb-4">
           Do you want to grant them access?
