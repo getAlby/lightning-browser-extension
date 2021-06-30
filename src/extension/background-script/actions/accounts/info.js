@@ -1,6 +1,6 @@
 import state from "../../state";
 
-const info = (message, sender) => {
+const info = async (message, sender) => {
   let connector;
   // TODO!
   //if (message.args.id) {
@@ -10,9 +10,15 @@ const info = (message, sender) => {
   //}
   connector = state.getState().getConnector();
 
-  const info = connector.getInfo();
+  const [info, balance] = await Promise.all([
+    connector.getInfo(),
+    connector.getBalance(),
+  ]);
 
-  return Promise.resolve({ data: info });
+  // TODO error handling
+  return {
+    data: { info: info.data, balance: balance.data },
+  };
 };
 
 export default info;

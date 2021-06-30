@@ -27,24 +27,22 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    utils.call("getInfo").then((info) => {
-      console.log("info", info);
-      this.setState({ alias: info?.alias });
+    utils.call("accountInfo").then((response) => {
+      this.setState({
+        alias: response.info?.alias,
+        balance: response.balance?.balance,
+      });
+      getFiatFromSatoshi(this.state.currency, this.state.balance).then(
+        (fiat) => {
+          this.setState({ balanceFiat: fiat });
+        }
+      );
     });
     utils.call("getTransactions").then((result) => {
       console.log(result);
       this.setState({
         transactions: result?.payments,
         loadingTransactions: false,
-      });
-    });
-    utils.call("getBalance").then(async (result) => {
-      this.setState({ balance: result?.balance });
-      this.setState({
-        balanceFiat: await getFiatFromSatoshi(
-          this.state.currency,
-          result.balance
-        ),
       });
     });
   }
@@ -56,7 +54,7 @@ class Home extends React.Component {
       <div>
         <Navbar
           title={alias}
-          subtitle="₿0.0016 7930 €33.57"
+          subtitle={`${balance} (${balanceFiat})`}
           onOptionsClick={() => {
             return utils.openPage("options.html");
           }}
