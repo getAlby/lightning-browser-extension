@@ -16,7 +16,7 @@ function Enable(props) {
     setEnabled(true);
     msg.reply({
       enabled: true,
-      remember,
+      remember: true, // remember by defaul
       budget,
     });
   }
