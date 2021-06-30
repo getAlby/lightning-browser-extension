@@ -52,16 +52,16 @@ class ConfirmPayment extends React.Component {
     return (
       <div>
         <PublisherCard
-          title="The Biz with John Carvalho"
-          image="https://img.podplay.com/922c5e7d-0230-51d4-a81c-578eb3d7c616/575/575"
+          title={this.props.origin.name}
+          image={this.props.origin.icon}
         />
 
         <div className="p-6">
           <div className="mb-8">
             <PaymentSummary
-              amount={`${this.props.invoice?.valueSat}`}
+              amount={this.props.invoice?.valueSat}
               amountAlt="$28.55"
-              description={`${this.props.invoice?.desc}`}
+              description={this.props.invoice?.desc}
             />
           </div>
 

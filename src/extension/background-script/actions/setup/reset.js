@@ -1,3 +1,4 @@
+import browser from "webextension-polyfill";
 import state from "../../state";
 
 const reset = async (message, sender) => {

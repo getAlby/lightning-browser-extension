@@ -8,7 +8,7 @@ type Props = {
 
 function PaymentSummary({ amount, amountAlt, description }: Props) {
   return (
-    <div className="p-4 bg-gray-50 border-t border-b border-gray-100">
+    <div className="p-4 bg-gray-50 border-t border-b border-gray-200">
       <dl className="mb-0">
         <dt className="uppercase font-semibold text-gray-500 text-xs">
           Amount
