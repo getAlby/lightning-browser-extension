@@ -2,6 +2,9 @@ import React from "react";
 import { createHashHistory } from "history";
 
 import Button from "../../components/button";
+import Checkbox from "../../components/Form/Checkbox";
+import CurrencyInput from "../../components/Form/CurrencyInput";
+import Collapse from "../../components/Collapse";
 import PaymentSummary from "../../components/PaymentSummary";
 import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
@@ -13,12 +16,16 @@ class ConfirmPayment extends React.Component {
     this.history = createHashHistory();
     this.state = {
       budget: null,
-      budgetSet: false,
+      rememberMe: false,
     };
   }
 
-  enable() {
-    msg.reply({
+  async confirm() {
+    if (this.state.rememberMe && this.state.budget) {
+      await this.saveBudget();
+    }
+
+    return await msg.reply({
       confirmed: true,
     });
   }
@@ -33,12 +40,12 @@ class ConfirmPayment extends React.Component {
   }
 
   saveBudget() {
-    this.setState({ budgetSaved: true });
-    return msg.request(
-      "setAllowance",
-      { budget: this.state.budget, spent: 0, enabled: true },
-      { origin: this.props.origin }
-    );
+    return msg.request("addAllowance", {
+      totalBudget: this.state.budget,
+      host: this.props.origin.host,
+      name: this.props.origin.name,
+      imageURL: this.props.origin.icon,
+    });
   }
 
   render() {
@@ -50,33 +57,6 @@ class ConfirmPayment extends React.Component {
         />
 
         <div className="p-6">
-          <div className="text-center mb-6">
-            <div className="d-flex">
-              <p className="mb-4">
-                Satoshi:
-                <input
-                  type="text"
-                  name="budget"
-                  placeholder="Budget"
-                  addonBefore="Satoshi"
-                  onChange={(event) => {
-                    this.setBudget(event.target.value);
-                  }}
-                />
-              </p>
-              {!this.state.budgetSaved && (
-                <Button onClick={() => this.saveBudget()} label="Save Budget" />
-              )}
-              {this.state.budgetSaved && (
-                <Button label="Budget saved">Budget saved</Button>
-              )}
-            </div>
-            <div className="mt-4">
-              You may set a balance to not be asked for confirmation on payments
-              until it is exhausted.
-            </div>
-          </div>
-
           <div className="mb-8">
             <PaymentSummary
               amount={`${this.props.invoice?.valueSat}`}
@@ -85,9 +65,54 @@ class ConfirmPayment extends React.Component {
             />
           </div>
 
+          <div className="mb-8">
+            <div className="flex items-center">
+              <Checkbox
+                id="remember_me"
+                name="remember_me"
+                checked={this.state.rememberMe}
+                onChange={(event) => {
+                  this.setState({ rememberMe: event.target.checked });
+                }}
+              />
+              <label
+                htmlFor="remember_me"
+                className="ml-2 block text-sm text-gray-900 font-medium"
+              >
+                Remember and set a budget
+              </label>
+            </div>
+
+            <Collapse isOpen={this.state.rememberMe}>
+              <div>
+                <p className="pt-4 text-gray-500 text-sm">
+                  You may set a balance to not be asked for confirmation on
+                  payments until it is exhausted.
+                </p>
+                <div>
+                  <label
+                    htmlFor="price"
+                    className="mb-1 block text-sm font-medium text-gray-700"
+                  >
+                    Budget
+                  </label>
+                  <CurrencyInput
+                    onChange={(event) => {
+                      this.setBudget(event.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+            </Collapse>
+          </div>
+
           <div className="text-center">
             <div className="mb-5">
-              <Button onClick={() => this.enable()} label="Confirm" fullWidth />
+              <Button
+                onClick={() => this.confirm()}
+                label="Confirm"
+                fullWidth
+              />
             </div>
 
             <p className="mb-3 underline text-sm text-gray-300">

@@ -9,12 +9,11 @@ const list = async (message, sender) => {
     const remainingBudget = allowance.remainingBudget || 0;
 
     if (remainingBudget > 0) {
+      allowance.usedBudget = allowance.totalBudget - allowance.remainingBudget;
       allowance.percentage = (
-        (allowance.remainingBudget / allowance.totalBudget) *
+        (allowance.usedBudget / allowance.totalBudget) *
         100
       ).toFixed(0);
-
-      allowance.usedBudget = allowance.totalBudget - allowance.remainingBudget;
     }
     allowance.paymentsCount = await db.payments
       .where("host")

@@ -14,7 +14,7 @@ class DB extends Dexie {
   async saveToStorage() {
     const allowanceArray = await this.allowances.toArray();
     const paymentsArray = await this.payments.toArray();
-    await browser.storage.sync.set({
+    await browser.storage.local.set({
       allowances: allowanceArray,
       payments: paymentsArray,
     });
@@ -23,7 +23,7 @@ class DB extends Dexie {
 
   async loadFromStorage() {
     try {
-      const result = await browser.storage.sync.get(["allowances", "payments"]);
+      const result = await browser.storage.local.get(["allowances", "payments"]);
       console.log("Loading DB data from storage");
       if (result.allowances) {
         await this.allowances.bulkAdd(result.allowances);

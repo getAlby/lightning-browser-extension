@@ -16,13 +16,14 @@ const updateAllowance = async (message, data) => {
     return;
   }
 
-  const remainingBudget = allowance.remainingBudget || allowance.totalBudget || 0; // remainingBudget might be blank
+  const remainingBudget = allowance.remainingBudget || 0; // remainingBudget might be blank
   const newRemaining = remainingBudget - total_amt;
 
   await db.allowances.update(allowance.id, {
     remainingBudget: newRemaining,
     lastPaymentAt: Date.now(),
   });
+  await db.saveToStorage();
   return true;
 };
 
