@@ -60,7 +60,6 @@ class ConfirmPayment extends React.Component {
           <div className="mb-8">
             <PaymentSummary
               amount={this.props.invoice?.valueSat}
-              amountAlt="$28.55"
               description={this.props.invoice?.desc}
             />
           </div>
