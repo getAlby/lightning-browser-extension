@@ -22,24 +22,28 @@ class Options extends React.Component {
           <Navbar.Link href="/receive">Receive</Navbar.Link>
         </Navbar>
 
-        <div className="container mx-auto px-4">
-          <Switch>
-            <Route exact path="/">
+        <Switch>
+          <Route exact path="/">
+            <div className="container mx-auto px-4">
               <Publishers />
-            </Route>
-            <Route exact path="/publisher/:id">
-              <Publisher />
-            </Route>
-            <Route path="/send">
+            </div>
+          </Route>
+          <Route exact path="/publisher/:id">
+            <Publisher />
+          </Route>
+          <Route path="/send">
+            <div className="container mx-auto px-4">
               <h2 className="mt-12 mb-6 text-2xl font-bold">Send</h2>
               <p>Test content</p>
-            </Route>
-            <Route path="/receive">
+            </div>
+          </Route>
+          <Route path="/receive">
+            <div className="container mx-auto px-4">
               <h2 className="mt-12 mb-6 text-2xl font-bold">Receive</h2>
               <p>Lorem ipsum</p>
-            </Route>
-          </Switch>
-        </div>
+            </div>
+          </Route>
+        </Switch>
       </HashRouter>
     );
   }

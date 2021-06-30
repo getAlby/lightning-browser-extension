@@ -17,7 +17,7 @@ export default function PublishersTable({
         {publishers.map((publisher) => (
           <tr
             key={publisher.id}
-            className="hover:bg-gray-50 transition duration-200"
+            className="cursor-pointer hover:bg-gray-50 transition duration-200"
             onClick={() => navigateToPublisher(publisher.id)}
           >
             <td className="pr-6 py-6 whitespace-nowrap">

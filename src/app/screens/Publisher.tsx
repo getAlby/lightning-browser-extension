@@ -1,25 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import utils from "../../common/lib/utils";
+import PublisherCard from "../components/PublisherCard";
+import Progressbar from "../components/Shared/progressbar";
 
 function Publisher() {
+  const [allowance, setAllowance] = useState({
+    host: "",
+    imageURL: "",
+    remainingBudget: 0,
+    totalBudget: 0,
+    payments: [],
+  });
   const { id } = useParams();
 
   async function fetchData() {
     try {
-      const response = await utils.call("listAllowances");
-      const allowances = response.allowances.map((allowance) => {
-        if (allowance.enabled && allowance.remainingBudget > 0) {
-          allowance.badge = {
-            label: "ACTIVE",
-            color: "green-bitcoin",
-            textColor: "white",
-          };
-        }
-        return allowance;
+      const response = await utils.call("getAllowanceById", {
+        id: parseInt(id),
       });
-      setData(allowances);
+      console.log(response);
+      setAllowance(response);
     } catch (e) {
       console.log(e.message);
     }
@@ -31,8 +33,33 @@ function Publisher() {
 
   return (
     <div>
-      <h2 className="mt-12 mb-6 text-2xl font-bold">Publisher {id}</h2>
-      <p>Show details from publisher {id}</p>
+      <PublisherCard title={allowance.host} image={allowance.imageURL} />
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center py-3 border-b border-grey-200">
+          <dl>
+            <dt className="text-sm">Allowance</dt>
+            <dd className="text-sm text-gray-500">
+              {allowance.remainingBudget} / {allowance.totalBudget} sats
+            </dd>
+          </dl>
+          <div className="w-24">
+            <Progressbar
+              filledColor="blue-bitcoin"
+              notFilledColor="blue-200"
+              textColor="white"
+            />
+          </div>
+        </div>
+
+        <div>
+          <p className="mt-8 text-xl font-bold">Temporary list of payments:</p>
+          {allowance.payments.map((payment) => (
+            <div key={payment.id} className="py-6 border-b border-gray-200">
+              {payment.createdAt}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
