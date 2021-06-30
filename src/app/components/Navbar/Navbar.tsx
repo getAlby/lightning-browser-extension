@@ -36,17 +36,19 @@ export default function Navbar({
         </div>
       )}
       <div className="md:w-4/12 lg:w-3/12 flex justify-end items-center">
-        <button
-          className="opacity-50 focus:outline-none transition-opacity duration-200 hover:opacity-100"
-          onClick={onOptionsClick}
-        >
-          <img
-            className="-mr-1 w-8 h-8"
-            src={GearIcon}
-            alt=""
-            aria-hidden="true"
-          />
-        </button>
+        {onOptionsClick && (
+          <button
+            className="opacity-50 focus:outline-none transition-opacity duration-200 hover:opacity-100"
+            onClick={onOptionsClick}
+            >
+            <img
+              className="-mr-1 w-8 h-8"
+              src={GearIcon}
+              alt=""
+              aria-hidden="true"
+            />
+          </button>
+        )}
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import msg from "../../../common/lib/msg";
 
 function Enable(props) {
   const [loading, setLoading] = useState(true);
-  const [remember, setRemember] = useState(false);
+  const [remember, setRemember] = useState(true);
   const [enabled, setEnabled] = useState(false);
   const [budget, setBudget] = useState(null);
   const history = useRef(createHashHistory());
