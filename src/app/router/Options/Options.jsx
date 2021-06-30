@@ -4,6 +4,7 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 
 import Publishers from "../../screens/Publishers";
+import Publisher from "../../screens/Publisher";
 
 class Options extends React.Component {
   render() {
@@ -25,6 +26,9 @@ class Options extends React.Component {
           <Switch>
             <Route exact path="/">
               <Publishers />
+            </Route>
+            <Route exact path="/publisher/:id">
+              <Publisher />
             </Route>
             <Route path="/send">
               <h2 className="mt-12 mb-6 text-2xl font-bold">Send</h2>

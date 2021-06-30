@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import PublishersTable from "../components/PublishersTable";
 import Searchbar from "../components/Searchbar";
@@ -7,17 +8,27 @@ import utils from "../../common/lib/utils";
 
 function Publishers() {
   const [data, setData] = useState([]);
+  const history = useHistory();
 
   const deletePublisher = async (id) => {
     await utils.call("deleteAllowance", { id });
-    setData(data.filter(publisher => publisher.id !== id))
+    setData(data.filter((publisher) => publisher.id !== id));
   };
+
+  function navigateToPublisher(id) {
+    history.push(`/publisher/${id}`);
+  }
+
   async function fetchData() {
     try {
       const response = await utils.call("listAllowances");
       const allowances = response.allowances.map((allowance) => {
         if (allowance.enabled && allowance.remainingBudget > 0) {
-          allowance.badge = { label: "ACTIVE", color: "green-bitcoin", textColor: "white" };
+          allowance.badge = {
+            label: "ACTIVE",
+            color: "green-bitcoin",
+            textColor: "white",
+          };
         }
         return allowance;
       });
@@ -26,6 +37,7 @@ function Publishers() {
       console.log(e.message);
     }
   }
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -36,11 +48,15 @@ function Publishers() {
         Manage Publishers & Allowances
       </h2>
 
-      <div className="pb-1 border-b border-grey-200">
+      {/* <div className="pb-1 border-b border-grey-200">
         <Searchbar />
-      </div>
+      </div> */}
 
-      <PublishersTable publishers={data} deletePublisher={deletePublisher} />
+      <PublishersTable
+        publishers={data}
+        navigateToPublisher={navigateToPublisher}
+        deletePublisher={deletePublisher}
+      />
     </>
   );
 }
