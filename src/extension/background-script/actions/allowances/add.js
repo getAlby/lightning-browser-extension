@@ -29,6 +29,7 @@ const add = async (message, sender) => {
       enabled: true,
       totalBudget: totalBudget,
       remainingBudget: totalBudget,
+      lastPaymentAt: 0,
     });
   }
   await db.saveToStorage();
