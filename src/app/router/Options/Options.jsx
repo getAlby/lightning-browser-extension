@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { HashRouter, Switch, Route } from "react-router-dom";
+
 import utils from "../../../common/lib/utils";
-
 import Navbar from "../../components/Navbar";
-
 import Publishers from "../../screens/Publishers";
 import Publisher from "../../screens/Publisher";
 

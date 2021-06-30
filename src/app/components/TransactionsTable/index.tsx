@@ -13,7 +13,7 @@ type Props = {
 
 type Transaction = {
   type: string;
-  email: string;
+  id: string;
   title: string;
   date: string;
   amount: string;
@@ -26,7 +26,7 @@ export default function TransactionsTable({ transactions }: Props) {
     <table className="min-w-full divide-y divide-gray-200">
       <tbody className="bg-white divide-y divide-gray-200">
         {transactions.map((tx) => (
-          <tr key={tx.email}>
+          <tr key={tx.id}>
             <td className="px-6 py-4 whitespace-nowrap">
               <div className="flex items-center">
                 <div className="flex-shrink-0 h-8 w-8">
@@ -69,7 +69,7 @@ export default function TransactionsTable({ transactions }: Props) {
                 </div>
                 <div className="mb-3">
                   <div className="text-sm font-medium text-gray-900">
-                    <p className="inline mr-10"> {tx.title}</p>
+                    <p className="inline mr-10">{tx.title}</p>
                   </div>
                   <div className="text-sm text-gray-500">{tx.date}</div>
                   <div className="text-sm text-red-600 font-semibold">
@@ -92,7 +92,7 @@ export default function TransactionsTable({ transactions }: Props) {
               )}
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-              <p className="text-sm font-semibold mb-2">{tx.amount}</p>
+              <p className="text-sm font-semibold mb-2">{tx.totalAmount}</p>
               <p className="text-gray-500">
                 {tx.currency} {tx.value}
               </p>

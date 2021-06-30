@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import utils from "../../common/lib/utils";
 import PublisherCard from "../components/PublisherCard";
 import Progressbar from "../components/Shared/progressbar";
+import TransactionsTable from "../components/TransactionsTable";
 
 function Publisher() {
   const [allowance, setAllowance] = useState({
@@ -52,12 +53,14 @@ function Publisher() {
         </div>
 
         <div>
-          <p className="mt-8 text-xl font-bold">Temporary list of payments:</p>
-          {allowance.payments.map((payment) => (
-            <div key={payment.id} className="py-6 border-b border-gray-200">
-              {payment.createdAt}
-            </div>
-          ))}
+          <TransactionsTable
+            transactions={allowance.payments.map((payment) => ({
+              ...payment,
+              type: "sent",
+              date: new Date(payment.createdAt).toString(),
+              title: payment.name,
+            }))}
+          />
         </div>
       </div>
     </div>
