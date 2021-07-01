@@ -90,12 +90,15 @@ class ConfirmPayment extends React.Component {
                 </p>
                 <div>
                   <label
-                    htmlFor="price"
+                    htmlFor="budget"
                     className="mb-1 block text-sm font-medium text-gray-700"
                   >
                     Budget
                   </label>
                   <CurrencyInput
+                    id="budget"
+                    name="budget"
+                    placeholder="sats"
                     onChange={(event) => {
                       this.setBudget(event.target.value);
                     }}
