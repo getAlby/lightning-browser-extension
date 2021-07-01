@@ -10,11 +10,18 @@ const get = async (message, sender) => {
 
   console.log(allowance);
   if (allowance) {
+    const payments = await db.payments
+      .where("host")
+      .equalsIgnoreCase(allowance.host)
+      .toArray();
+
     return {
       data: {
         name: allowance.name,
         host: allowance.host,
+        imageURL: allowance.imageURL,
         enabled: allowance.enabled,
+        payments,
         totalBudget: allowance.totalBudget,
         remainingBudget: allowance.remainingBudget,
         createdAt: allowance.createdAt,

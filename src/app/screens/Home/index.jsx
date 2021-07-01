@@ -8,12 +8,15 @@ import Navbar from "../../components/Navbar";
 import Transactions from "../../components/Transactions";
 import Loading from "../../components/Loading";
 import BalanceCard from "../../components/BalanceCard";
+import PublisherCard from "../../components/PublisherCard";
+import Progressbar from "../../components/Shared/progressbar";
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       alias: "",
+      allowance: null,
       currency: "USD",
       balance: null,
       balanceFiat: null,
@@ -27,6 +30,18 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
+    browser.tabs
+      .query({ active: true, lastFocusedWindow: true })
+      .then((tabs) => {
+        const url = new URL(tabs[0].url);
+        utils.call("getAllowance", { host: url.host }).then((result) => {
+          console.log(result);
+          if (result.enabled) {
+            this.setState({ allowance: result });
+          }
+        });
+      });
+
     utils.call("accountInfo").then((response) => {
       this.setState({
         alias: response.info?.alias,
@@ -47,18 +62,45 @@ class Home extends React.Component {
     });
   }
 
-  render() {
-    const { alias, balance, balanceFiat, transactions } = this.state;
-
+  renderAllowanceView() {
+    const { allowance } = this.state;
     return (
-      <div>
-        <Navbar
-          title={alias}
-          subtitle={`${balance} (${balanceFiat})`}
-          onOptionsClick={() => {
-            return utils.openPage("options.html");
-          }}
-        />
+      <>
+        <PublisherCard title={allowance.name} image={allowance.imageURL} />
+        <div className="px-5">
+          <div className="flex justify-between items-center py-3 border-b border-grey-200">
+            <dl className="mb-0">
+              <dt className="text-sm">Allowance</dt>
+              <dd className="mb-0 text-sm text-gray-500">
+                {allowance.remainingBudget} / {allowance.totalBudget} sats
+              </dd>
+            </dl>
+            <div className="w-24">
+              <Progressbar
+                filledColor="blue-bitcoin"
+                notFilledColor="blue-200"
+                textColor="white"
+              />
+            </div>
+          </div>
+
+          <Transactions
+            exchangeRate={this.exchangeRate}
+            transactions={allowance.payments.map((payment) => ({
+              ...payment,
+              creation_date: payment.createdAt,
+              value: payment.totalAmount,
+            }))}
+          />
+        </div>
+      </>
+    );
+  }
+
+  renderDefaultView() {
+    const { balance, balanceFiat, transactions } = this.state;
+    return (
+      <>
         <div className="p-5 border-b-4 border-gray-200">
           <BalanceCard
             alias="Wallet name"
@@ -66,6 +108,7 @@ class Home extends React.Component {
             fiat={balanceFiat && `$${balanceFiat}`}
           />
         </div>
+
         <div className="p-5">
           <h2 className="text-xl">Transactions</h2>
           {this.state.loadingTransactions ? (
@@ -79,6 +122,23 @@ class Home extends React.Component {
             />
           )}
         </div>
+      </>
+    );
+  }
+
+  render() {
+    const { alias, allowance, balance, balanceFiat } = this.state;
+
+    return (
+      <div>
+        <Navbar
+          title={alias}
+          subtitle={`${balance} (${balanceFiat})`}
+          onOptionsClick={() => {
+            return utils.openPage("options.html");
+          }}
+        />
+        {allowance ? this.renderAllowanceView() : this.renderDefaultView()}
       </div>
     );
   }
