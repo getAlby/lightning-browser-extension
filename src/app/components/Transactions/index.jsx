@@ -2,8 +2,6 @@ import React from "react";
 import { calcFiatFromSatoshi } from "../../../common/utils/helpers";
 import { formatRelative, subDays } from "date-fns";
 import { PlusIcon } from "@heroicons/react/outline";
-
-import { Empty } from "antd";
 import { sortByFieldAscending } from "../../../common/utils/helpers.js";
 
 function Transactions({ exchangeRate, transactions }) {
@@ -40,7 +38,7 @@ function Transactions({ exchangeRate, transactions }) {
 
   return (
     <div className="transactions--container">
-      <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+      <p>No transactions.</p>
     </div>
   );
 }
