@@ -35,7 +35,6 @@ class Home extends React.Component {
       .then((tabs) => {
         const url = new URL(tabs[0].url);
         utils.call("getAllowance", { host: url.host }).then((result) => {
-          console.log(result);
           if (result.enabled) {
             this.setState({ allowance: result });
           }
