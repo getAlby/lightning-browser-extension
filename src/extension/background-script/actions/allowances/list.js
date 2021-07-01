@@ -2,10 +2,9 @@ import db from "../../db";
 
 const list = async (message, sender) => {
   // TODO add filter and ordering?
-  let allowances = await db.allowances.toArray();
+  let allowances = await db.allowances.toCollection().reverse().sortBy("lastPaymentAt");
 
   const allowancePromises = allowances.map(async (allowance) => {
-    const totalBudget = allowance.totalBudget || 0;
     const remainingBudget = allowance.remainingBudget || 0;
 
     if (remainingBudget > 0) {
@@ -24,7 +23,6 @@ const list = async (message, sender) => {
   });
 
   allowances = await Promise.all(allowancePromises);
-  console.log(allowances);
   return {
     data: {
       allowances,
