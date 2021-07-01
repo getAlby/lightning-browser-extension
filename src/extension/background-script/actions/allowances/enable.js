@@ -25,7 +25,7 @@ const enable = async (message, sender) => {
           await db.allowances.add({
             host: host,
             name: message.origin.name,
-            imageURL: message.origin.imageURL,
+            imageURL: message.origin.icon,
             enabled: true,
             lastPaymentAt: 0,
             totalBudget: 0,
