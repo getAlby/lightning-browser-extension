@@ -1,11 +1,10 @@
 import React from "react";
 import { createHashHistory } from "history";
-import { Button, Input } from "antd";
 import { UnlockTwoTone } from "@ant-design/icons";
 
 import utils from "../../../common/lib/utils";
-import variables from "./variables.module.scss";
-import "./styles.scss";
+import Button from "../../components/button";
+import Input from "../../components/Form/input";
 
 class Unlock extends React.Component {
   constructor(props) {
@@ -46,22 +45,21 @@ class Unlock extends React.Component {
 
   render() {
     return (
-      <div className="unlock--container p-8">
-        <UnlockTwoTone
-          className="unlock--container__icon"
-          twoToneColor={variables.lightBlue}
-        />
-        <h2>Unlock:</h2>
+      <div className="p-8 text-center">
+        <UnlockTwoTone className="text-6xl mb-4" />
+        <h2 className="text-2xl font-bold mb-4">Unlock:</h2>
         <form onSubmit={this.handleSubmit}>
-          <Input.Password
-            placeholder="Password"
-            size="small"
-            type="text"
-            autoFocus
-            value={this.state.password}
-            onChange={this.handlePasswordChange}
-          />
-          <Button htmlType="submit">Unlock</Button>
+          <div className="mb-4">
+            <Input
+              placeholder="Password"
+              size="small"
+              type="password"
+              autoFocus
+              value={this.state.password}
+              onChange={this.handlePasswordChange}
+            />
+          </div>
+          <Button type="submit" label="unlock" fullWidth />
         </form>
         {this.state.error && (
           <p>
