@@ -30,16 +30,15 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    browser.tabs
-      .query({ active: true, lastFocusedWindow: true })
-      .then((tabs) => {
-        const url = new URL(tabs[0].url);
-        utils.call("getAllowance", { host: url.host }).then((result) => {
-          if (result.enabled) {
-            this.setState({ allowance: result });
-          }
-        });
+    browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+      const [currentTab] = tabs;
+      const url = new URL(currentTab.url);
+      utils.call("getAllowance", { host: url.host }).then((result) => {
+        if (result.enabled) {
+          this.setState({ allowance: result });
+        }
       });
+    });
 
     utils.call("accountInfo").then((response) => {
       this.setState({
@@ -83,14 +82,16 @@ class Home extends React.Component {
             </div>
           </div>
 
-          <Transactions
-            exchangeRate={this.exchangeRate}
-            transactions={allowance.payments.map((payment) => ({
-              ...payment,
-              creation_date: payment.createdAt,
-              value: payment.totalAmount,
-            }))}
-          />
+          {allowance.payments && (
+            <Transactions
+              exchangeRate={this.exchangeRate}
+              transactions={allowance.payments.map((payment) => ({
+                ...payment,
+                creation_date: payment.createdAt,
+                value: payment.totalAmount,
+              }))}
+            />
+          )}
         </div>
       </>
     );
