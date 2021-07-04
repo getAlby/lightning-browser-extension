@@ -6,8 +6,10 @@ type Props = {
 };
 
 function Collapse({ isOpen = false, children }: Props) {
+  const collapseEl = useRef<HTMLDivElement>(null);
   const contentEl = useRef<HTMLDivElement>(null);
   const [childHeight, setChildHeight] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     if (contentEl.current && contentEl.current.clientHeight !== childHeight) {
@@ -15,16 +17,35 @@ function Collapse({ isOpen = false, children }: Props) {
     }
   }, [isOpen, childHeight]);
 
+  useEffect(() => {
+    setIsAnimating(true);
+  }, [isOpen]);
+
+  function transitionComplete() {
+    setIsAnimating(false);
+  }
+
+  useEffect(() => {
+    if (collapseEl.current) {
+      const el = collapseEl.current;
+      el.addEventListener("transitionend", transitionComplete);
+
+      return () => {
+        el.removeEventListener("transitionend", transitionComplete);
+      };
+    }
+  }, []);
+
   return (
     <div
-      className="collapse transition-all duration-300 overflow-hidden"
+      ref={collapseEl}
+      className="collapse transition-all duration-300"
       style={{
-        maxHeight: isOpen ? `${childHeight}px` : 0,
+        height: isOpen ? `${childHeight}px` : 0,
+        overflow: isAnimating || !isOpen ? "hidden" : "visible",
       }}
     >
-      <div className="overflow-auto" ref={contentEl}>
-        {children}
-      </div>
+      <div ref={contentEl}>{children}</div>
     </div>
   );
 }

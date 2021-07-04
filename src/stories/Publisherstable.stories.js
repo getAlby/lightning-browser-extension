@@ -1,6 +1,5 @@
 import React from "react";
 import PublishersTable from "../app/components/PublishersTable";
-import "../app/styles/index.css";
 
 const publishers = [
   {
