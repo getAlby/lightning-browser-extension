@@ -1,7 +1,7 @@
 import React from "react";
 import {
-  PlusCircleIcon,
-  MinusCircleIcon,
+  PlusIcon,
+  MinusIcon,
   ExclamationCircleIcon,
 } from "@heroicons/react/outline";
 
@@ -27,33 +27,27 @@ export default function TransactionsTable({ transactions }: Props) {
       <tbody className="bg-white divide-y divide-gray-200">
         {transactions.map((tx) => (
           <tr key={tx.id}>
-            <td className="px-6 py-4 whitespace-nowrap">
+            <td className="pr-6 py-4 whitespace-nowrap">
               <div className="flex items-center">
-                <div className="flex-shrink-0 h-8 w-8">
+                <div className="flex-shrink-0 mr-4">
                   {tx.type == "received" ? (
-                    <PlusCircleIcon
-                      className="h-5 w-5 border-gray-200 text-black"
-                      text-black
-                      aria-hidden="true"
-                    />
+                    <div className="flex justify-center items-center w-9 h-9 border-2 border-gray-200 rounded-full">
+                      <PlusIcon className="h-6 w-6" aria-hidden="true" />
+                    </div>
                   ) : (
                     ""
                   )}
                   {tx.type == "sent" ? (
-                    <MinusCircleIcon
-                      className="h-5 w-5 border-gray-200 text-black"
-                      text-black
-                      aria-hidden="true"
-                    />
+                    <div className="flex justify-center items-center w-9 h-9 border-2 border-gray-200 rounded-full">
+                      <MinusIcon className="h-6 w-6" aria-hidden="true" />
+                    </div>
                   ) : (
                     ""
                   )}
                   {tx.type == "sending" ? (
-                    <MinusCircleIcon
-                      className="h-5 w-5 border-gray-200 text-black"
-                      text-black
-                      aria-hidden="true"
-                    />
+                    <div className="flex justify-center items-center w-9 h-9 border-2 border-gray-200 rounded-full">
+                      <MinusIcon className="h-6 w-6" aria-hidden="true" />
+                    </div>
                   ) : (
                     ""
                   )}
@@ -67,14 +61,12 @@ export default function TransactionsTable({ transactions }: Props) {
                     ""
                   )}
                 </div>
-                <div className="mb-3">
-                  <div className="text-sm font-medium text-gray-900">
+                <div>
+                  <div className="text-xl text-gray-900">
                     <p className="inline mr-10">{tx.title}</p>
                   </div>
-                  <div className="text-sm text-gray-500">{tx.date}</div>
-                  <div className="text-sm text-red-600 font-semibold">
-                    {tx.error}
-                  </div>
+                  <div className="text-base text-gray-500">{tx.date}</div>
+                  <div className="text-base text-red-600">{tx.error}</div>
                 </div>
               </div>
               {tx.badges ? (
@@ -91,9 +83,9 @@ export default function TransactionsTable({ transactions }: Props) {
                 ""
               )}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-              <p className="text-sm font-semibold mb-2">{tx.totalAmount}</p>
-              <p className="text-gray-500">
+            <td className="px-6 py-4 whitespace-nowrap text-right">
+              <p className="text-xl">{tx.totalAmount}</p>
+              <p className="text-base text-gray-500">
                 {tx.currency} {tx.value}
               </p>
             </td>

@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import * as dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 import utils from "../../common/lib/utils";
 import PublisherCard from "../components/PublisherCard";
 import Progressbar from "../components/Shared/progressbar";
 import TransactionsTable from "../components/TransactionsTable";
+
+dayjs.extend(relativeTime);
 
 function Publisher() {
   const [allowance, setAllowance] = useState({
@@ -57,8 +61,11 @@ function Publisher() {
             transactions={allowance.payments.map((payment) => ({
               ...payment,
               type: "sent",
-              date: new Date(payment.createdAt).toString(),
+              date: dayjs(payment.createdAt).fromNow(),
+              // date: dayjs.unix(payment.createdAt),
               title: payment.name,
+              currency: "€",
+              value: 9.99,
             }))}
           />
         </div>
