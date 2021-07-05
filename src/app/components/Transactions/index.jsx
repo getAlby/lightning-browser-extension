@@ -1,8 +1,11 @@
 import React from "react";
 import { calcFiatFromSatoshi } from "../../../common/utils/helpers";
-import { formatRelative, subDays } from "date-fns";
+import * as dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import { PlusIcon } from "@heroicons/react/outline";
 import { sortByFieldAscending } from "../../../common/utils/helpers.js";
+
+dayjs.extend(relativeTime);
 
 function Transactions({ exchangeRate, transactions }) {
   if (transactions?.length > 0) {
@@ -16,11 +19,7 @@ function Transactions({ exchangeRate, transactions }) {
             <div className="ml-4">
               <div className="text-lg">John Doe</div>
               <div className="text-sm text-gray-500">
-                {/* setting 1.1.2000 as a fallback */}
-                {formatRelative(
-                  new Date(parseInt(item.creation_date) * 1000 ?? 946681200),
-                  new Date()
-                )}
+                {dayjs(item.creation_date).fromNow()}
               </div>
             </div>
             <div className="text-right ml-auto">
