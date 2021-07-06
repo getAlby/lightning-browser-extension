@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { HashRouter, Switch, Route } from "react-router-dom";
 
-import Navbar from "../../components/Navbar";
-
-import Publishers from "../../screens/Publishers";
 import utils from "../../../common/lib/utils";
+import Navbar from "../../components/Navbar";
+import Publishers from "../../screens/Publishers";
+import Publisher from "../../screens/Publisher";
 
 function Options() {
   const [accountInfo, setAccountInfo] = useState({});
@@ -28,21 +28,28 @@ function Options() {
         <Navbar.Link href="/receive">Receive</Navbar.Link>
       </Navbar>
 
-      <div className="container mx-auto px-4">
-        <Switch>
-          <Route exact path="/">
+      <Switch>
+        <Route exact path="/">
+          <div className="container mx-auto px-4">
             <Publishers />
-          </Route>
-          <Route path="/send">
+          </div>
+        </Route>
+        <Route exact path="/publisher/:id">
+          <Publisher />
+        </Route>
+        <Route path="/send">
+          <div className="container mx-auto px-4">
             <h2 className="mt-12 mb-6 text-2xl font-bold">Send</h2>
             <p>Test content</p>
-          </Route>
-          <Route path="/receive">
+          </div>
+        </Route>
+        <Route path="/receive">
+          <div className="container mx-auto px-4">
             <h2 className="mt-12 mb-6 text-2xl font-bold">Receive</h2>
             <p>Lorem ipsum</p>
-          </Route>
-        </Switch>
-      </div>
+          </div>
+        </Route>
+      </Switch>
     </HashRouter>
   );
 }

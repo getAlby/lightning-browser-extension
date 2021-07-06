@@ -89,6 +89,7 @@ export default function getOriginData() {
   }
 
   return {
+    location: window.location.toString(),
     domain: window.location.origin,
     host: window.location.host,
     pathname: window.location.pathname,

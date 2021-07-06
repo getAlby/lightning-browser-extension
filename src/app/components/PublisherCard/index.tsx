@@ -11,7 +11,7 @@ export default function PublisherCard({ title, image }: Props) {
 
   return (
     <div
-      className="p-6"
+      className="p-6 bg-gray-300"
       style={{
         backgroundColor: data.vibrant,
         backgroundImage: `linear-gradient(${data.vibrant}, rgba(0, 0, 0, 0.3) 85%)`,
