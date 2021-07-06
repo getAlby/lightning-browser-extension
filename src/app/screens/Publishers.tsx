@@ -55,7 +55,6 @@ function Publishers() {
       <PublishersTable
         publishers={data}
         navigateToPublisher={navigateToPublisher}
-        deletePublisher={deletePublisher}
       />
     </>
   );
