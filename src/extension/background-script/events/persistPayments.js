@@ -10,6 +10,7 @@ const persistSuccessfullPayment = async (message, data) => {
 
   await db.payments.add({
     host: host,
+    location: data.origin.location,
     name: recipientName,
     description: paymentRequestDetails.description,
     preimage: paymentResponse.data.payment_preimage,

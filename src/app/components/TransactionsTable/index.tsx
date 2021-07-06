@@ -15,6 +15,7 @@ type Transaction = {
   type: string;
   id: string;
   title: string;
+  subTitle: string;
   date: string;
   amount: string;
   currency: string;
@@ -65,7 +66,7 @@ export default function TransactionsTable({ transactions }: Props) {
                   <div className="text-xl text-gray-900">
                     <p className="inline mr-10">{tx.title}</p>
                   </div>
-                  <div className="text-base text-gray-500">{tx.date}</div>
+                  <div className="text-base text-gray-500">{tx.subTitle}</div>
                   <div className="text-base text-red-600">{tx.error}</div>
                 </div>
               </div>
@@ -84,9 +85,9 @@ export default function TransactionsTable({ transactions }: Props) {
               )}
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-right">
-              <p className="text-xl">{tx.totalAmount}</p>
+              <p className="text-xl">{tx.totalAmount} sats</p>
               <p className="text-base text-gray-500">
-                {tx.currency} {tx.value}
+                {tx.date}
               </p>
             </td>
           </tr>

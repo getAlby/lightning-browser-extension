@@ -15,6 +15,7 @@ function Publisher() {
     host: "",
     imageURL: "",
     remainingBudget: 0,
+    usedBudget: 0,
     totalBudget: 0,
     payments: [],
   });
@@ -44,7 +45,7 @@ function Publisher() {
           <dl>
             <dt className="text-sm">Allowance</dt>
             <dd className="text-sm text-gray-500">
-              {allowance.remainingBudget} / {allowance.totalBudget} sats
+              {allowance.usedBudget} / {allowance.totalBudget} sats
             </dd>
           </dl>
           <div className="w-24">
@@ -52,6 +53,7 @@ function Publisher() {
               filledColor="blue-bitcoin"
               notFilledColor="blue-200"
               textColor="white"
+              percentage={allowance.percentage}
             />
           </div>
         </div>
@@ -63,7 +65,8 @@ function Publisher() {
               type: "sent",
               date: dayjs(payment.createdAt).fromNow(),
               // date: dayjs.unix(payment.createdAt),
-              title: payment.name,
+              title: payment.description,
+              subTitle: `${payment.name} @ ${payment.location}`,
               currency: "€",
               value: 9.99,
             }))}
