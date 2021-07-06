@@ -1,14 +1,15 @@
 import React from "react";
 import { usePalette } from "react-palette";
+import { ExternalLinkIcon } from "@heroicons/react/solid";
 
 type Props = {
   title: string;
   image: string;
+  url?: string;
 };
 
-export default function PublisherCard({ title, image }: Props) {
+export default function PublisherCard({ title, image, url }: Props) {
   const { data } = usePalette(image);
-
   return (
     <div
       className="p-6 bg-gray-300"
@@ -22,7 +23,15 @@ export default function PublisherCard({ title, image }: Props) {
         src={image}
         alt=""
       />
-      <h2 className="text-center mb-0 text-xl text-white">{title}</h2>
+      <h2 className="text-center mb-0 text-xl text-white">
+        {title}
+
+        {url && (
+          <a href={url} target="_blank">
+            <ExternalLinkIcon className="inline h-5 w-5" aria-hidden="true" />
+          </a>
+        )}
+      </h2>
     </div>
   );
 }
