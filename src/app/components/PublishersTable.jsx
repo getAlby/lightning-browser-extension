@@ -8,69 +8,71 @@ const DEFAULT_IMAGE =
 
 export default function PublishersTable({ publishers, navigateToPublisher }) {
   return (
-    <table className="min-w-full">
-      <tbody className="divide-y divide-gray-200">
-        {publishers.map((publisher) => (
-          <tr
-            key={publisher.id}
-            className="cursor-pointer hover:bg-gray-50 transition duration-200"
-            onClick={() => navigateToPublisher(publisher.id)}
-          >
-            <td className="pr-6 py-6 whitespace-nowrap">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <img
-                    className="h-12 w-12 object-cover rounded-full shadow-lg"
-                    src={publisher.imageURL || DEFAULT_IMAGE}
-                    alt={publisher.host}
-                  />
-                </div>
-                <div className="ml-4">
-                  <div className="flex items-center">
-                    <p className="text-xl inline mr-2">{publisher.name}</p>
-                    {publisher.badge && (
-                      <Badge
-                        label={publisher.badge.label}
-                        color={publisher.badge.color}
-                        textColor={publisher.badge.textColor}
-                        textColor={publisher.badge.textColor}
-                      />
-                    )}
+    <div className="shadow overflow-hidden border-b border-gray-200 rounded-lg">
+      <table className="min-w-full">
+        <tbody className="divide-y divide-gray-200">
+          {publishers.map((publisher) => (
+            <tr
+              key={publisher.id}
+              className="cursor-pointer hover:bg-gray-50 transition duration-200"
+              onClick={() => navigateToPublisher(publisher.id)}
+            >
+              <td className="px-4 py-6 whitespace-nowrap">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <img
+                      className="h-12 w-12 object-cover rounded-full shadow-lg"
+                      src={publisher.imageURL || DEFAULT_IMAGE}
+                      alt={publisher.host}
+                    />
                   </div>
-                  <div className="text-base text-gray-500">
-                    {publisher.host} · {publisher.paymentsCount} payments
-                  </div>
-                </div>
-              </div>
-            </td>
-            <td className="px-6 py-6 whitespace-nowrap text-right">
-              {publisher.totalBudget && (
-                <div className="ml-40">
-                  <p className="text-lg text-gray-700 mb-0">
-                    {publisher.usedBudget} / {publisher.totalBudget} sats
-                  </p>
-                  <div className="relative mt-2 w-44 ml-auto">
+                  <div className="ml-4">
                     <div className="flex items-center">
-                      <div
-                        style={{ width: `${publisher.percentage}%` }}
-                        className="ml-auto h-2 shadow-none rounded flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"
-                      />
-                      <span
-                        className={`ml-2 text-sm font-semibold text-blue-500`}
-                      >
-                        {publisher.percentage}%
-                      </span>
+                      <p className="text-lg inline mr-2">{publisher.name}</p>
+                      {publisher.badge && (
+                        <Badge
+                          label={publisher.badge.label}
+                          color={publisher.badge.color}
+                          textColor={publisher.badge.textColor}
+                          textColor={publisher.badge.textColor}
+                        />
+                      )}
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      {publisher.host} · {publisher.paymentsCount} payments
                     </div>
                   </div>
                 </div>
-              )}
-            </td>
-            <td className="w-8">
-              <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+              </td>
+              <td className="px-4 py-6 whitespace-nowrap text-right">
+                {publisher.totalBudget && (
+                  <div className="ml-40">
+                    <p className="text-lg text-gray-700 mb-0">
+                      {publisher.usedBudget} / {publisher.totalBudget} sats
+                    </p>
+                    <div className="relative mt-2 w-44 ml-auto">
+                      <div className="flex items-center">
+                        <div
+                          style={{ width: `${publisher.percentage}%` }}
+                          className="ml-auto h-2 shadow-none rounded flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"
+                        />
+                        <span
+                          className={`ml-2 text-sm font-semibold text-blue-500`}
+                        >
+                          {publisher.percentage}%
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </td>
+              <td className="w-10">
+                <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }

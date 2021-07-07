@@ -41,7 +41,7 @@ function Publisher() {
     <div>
       <PublisherCard title={allowance.host} image={allowance.imageURL} />
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center py-3 border-b border-grey-200">
+        <div className="flex justify-between items-center py-3">
           <dl>
             <dt className="text-sm">Allowance</dt>
             <dd className="text-sm text-gray-500">

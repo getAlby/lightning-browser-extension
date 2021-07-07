@@ -1,15 +1,19 @@
 import React from "react";
 import browser from "webextension-polyfill";
+import * as dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 import utils from "../../../common/lib/utils";
 import { getFiatFromSatoshi } from "../../../common/utils/helpers";
 
 import Navbar from "../../components/Navbar";
-import Transactions from "../../components/Transactions";
+import TransactionsTable from "../../components/TransactionsTable";
+
 import Loading from "../../components/Loading";
-import BalanceCard from "../../components/BalanceCard";
 import PublisherCard from "../../components/PublisherCard";
 import Progressbar from "../../components/Shared/progressbar";
+
+dayjs.extend(relativeTime);
 
 class Home extends React.Component {
   constructor(props) {
@@ -66,7 +70,7 @@ class Home extends React.Component {
       <>
         <PublisherCard title={allowance.name} image={allowance.imageURL} />
         <div className="px-5">
-          <div className="flex justify-between items-center py-3 border-b border-grey-200">
+          <div className="flex justify-between items-center py-3">
             <dl className="mb-0">
               <dt className="text-sm">Allowance</dt>
               <dd className="mb-0 text-sm text-gray-500">
@@ -83,12 +87,13 @@ class Home extends React.Component {
           </div>
 
           {allowance.payments && (
-            <Transactions
-              exchangeRate={this.exchangeRate}
+            <TransactionsTable
               transactions={allowance.payments.map((payment) => ({
-                ...payment,
-                creation_date: payment.createdAt,
-                value: payment.totalAmount,
+                type: "sent",
+                date: dayjs(payment.createdAt).fromNow(),
+                title: "John Doe",
+                subTitle: "Lorem ipsum",
+                totalAmount: payment.totalAmount,
               }))}
             />
           )}
@@ -98,31 +103,26 @@ class Home extends React.Component {
   }
 
   renderDefaultView() {
-    const { balance, balanceFiat, transactions } = this.state;
+    const { transactions } = this.state;
     return (
-      <>
-        <div className="p-5 border-b-4 border-gray-200">
-          <BalanceCard
-            alias="Wallet name"
-            crypto={balance && `₿${balance}`}
-            fiat={balanceFiat && `$${balanceFiat}`}
+      <div className="p-5">
+        <h2 className="text-xl font-semibold mb-3">Transactions</h2>
+        {this.state.loadingTransactions ? (
+          <div className="pt-4 flex justify-center">
+            <Loading />
+          </div>
+        ) : (
+          <TransactionsTable
+            transactions={transactions.map((transaction) => ({
+              type: "sent",
+              date: dayjs(transaction.createdAt).fromNow(),
+              title: "John Doe",
+              subTitle: "Lorem ipsum",
+              totalAmount: transaction.value,
+            }))}
           />
-        </div>
-
-        <div className="p-5">
-          <h2 className="text-xl">Transactions</h2>
-          {this.state.loadingTransactions ? (
-            <div className="pt-4 flex justify-center">
-              <Loading />
-            </div>
-          ) : (
-            <Transactions
-              exchangeRate={this.exchangeRate}
-              transactions={transactions}
-            />
-          )}
-        </div>
-      </>
+        )}
+      </div>
     );
   }
 
@@ -133,7 +133,7 @@ class Home extends React.Component {
       <div>
         <Navbar
           title={alias}
-          subtitle={`${balance} (${balanceFiat})`}
+          subtitle={balance && balanceFiat ? `${balance} (${balanceFiat})` : ""}
           onOptionsClick={() => {
             return utils.openPage("options.html");
           }}
