@@ -23,12 +23,12 @@ export default function PublisherCard({ title, image, url }: Props) {
         src={image}
         alt=""
       />
-      <h2 className="text-center mb-0 text-xl text-white">
+      <h2 className="flex justify-center items-center text-center mb-0 text-xl text-white">
         {title}
 
         {url && (
-          <a href={url} target="_blank">
-            <ExternalLinkIcon className="inline h-5 w-5" aria-hidden="true" />
+          <a href={url} target="_blank" className="inline-flex">
+            <ExternalLinkIcon className="inline-flex h-5 w-5" aria-hidden="true" />
           </a>
         )}
       </h2>
