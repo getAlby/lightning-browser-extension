@@ -2,11 +2,13 @@ import React from "react";
 import Progressbar from "../app/components/Shared/progressbar";
 
 export const Primary = () => (
-  <Progressbar
-    filledColor="blue-bitcoin"
-    notFilledColor="blue-200"
-    textColor="white"
-  />
+  <div className="space-y-6">
+    <Progressbar percentage="0" />
+    <Progressbar percentage="25" />
+    <Progressbar percentage="50" />
+    <Progressbar percentage="75" />
+    <Progressbar percentage="100" />
+  </div>
 );
 
 export default {

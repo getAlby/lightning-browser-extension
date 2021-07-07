@@ -29,7 +29,7 @@ export default function TransactionsTable({ transactions }: Props) {
         <tbody className="bg-white divide-y divide-gray-200">
           {transactions.map((tx) => (
             <tr key={tx.id}>
-              <td className="px-4 py-4 whitespace-nowrap">
+              <td className="px-3 py-3 whitespace-nowrap">
                 <div className="flex items-center">
                   <div className="flex-shrink-0 mr-4">
                     {tx.type == "received" ? (
@@ -85,7 +85,7 @@ export default function TransactionsTable({ transactions }: Props) {
                   ""
                 )}
               </td>
-              <td className="px-4 py-4 whitespace-nowrap text-right">
+              <td className="px-3 py-3 whitespace-nowrap text-right">
                 <p className="text-lg">{tx.totalAmount} sats</p>
                 <p className="text-sm text-gray-500">{tx.date}</p>
               </td>

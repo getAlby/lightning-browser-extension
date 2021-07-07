@@ -33,10 +33,7 @@ export default function CategoriesTable({ categories }) {
                               {category.percentage}%
                             </span>
                             <div className="relative right-3.5 ml-3 mt-2 w-9/12">
-                              <Progressbar
-                                filledColor={`${category.color}`}
-                                notFilledColor="green-200"
-                              />
+                              <Progressbar percentage={category.percentage} />
                             </div>
                           </div>
                         </div>

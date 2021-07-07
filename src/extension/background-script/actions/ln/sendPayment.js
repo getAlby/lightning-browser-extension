@@ -4,7 +4,7 @@ import utils from "../../../../common/lib/utils";
 import state from "../../state";
 import db from "../../db";
 
-const LNInvoices = require('invoices');
+const LNInvoices = require("invoices");
 
 const sendPayment = async (message, sender) => {
   PubSub.publish(`ln.sendPayment.start`, message);
@@ -30,7 +30,11 @@ const sendPayment = async (message, sender) => {
   }
 };
 
-async function sendPaymentWithAllowance(message, paymentRequestDetails, allowance) {
+async function sendPaymentWithAllowance(
+  message,
+  paymentRequestDetails,
+  allowance
+) {
   const connector = state.getState().getConnector();
   const response = await connector.sendPayment({
     paymentRequest: message.args.paymentRequest,
