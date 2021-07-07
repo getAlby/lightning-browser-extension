@@ -75,9 +75,9 @@ class Home extends React.Component {
             </dl>
             <div className="w-24">
               <Progressbar
-                filledColor="blue-bitcoin"
-                notFilledColor="blue-200"
-                textColor="white"
+                percentage={
+                  (allowance.remainingBudget / allowance.totalBudget) * 100
+                }
               />
             </div>
           </div>
