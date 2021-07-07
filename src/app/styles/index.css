@@ -19,3 +19,16 @@
   font-named-instance: 'Italic';
   src: url("./fonts/Inter-italic.var.woff2?v=3.18") format("woff2");
 }
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}

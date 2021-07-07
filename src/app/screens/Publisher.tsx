@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Modal from "react-modal";
+import EditIcon from "@bitcoin-design/bitcoin-icons/svg/filled/edit.svg";
 
 import utils from "../../common/lib/utils";
 import PublisherCard from "../components/PublisherCard";
@@ -73,17 +74,28 @@ function Publisher() {
                 {allowance.usedBudget} / {allowance.totalBudget} sats
               </dd>
             </dl>
-            <button onClick={openModal}>Edit</button>
+            <button
+              className="opacity-50 focus:outline-none transition-opacity duration-200 hover:opacity-100"
+              onClick={openModal}
+            >
+              <img
+                className="ml-3 w-6 h-6"
+                src={EditIcon}
+                alt=""
+                aria-hidden="true"
+              />
+            </button>
             <Modal
+              closeTimeoutMS={200}
               isOpen={modalIsOpen}
-              // onAfterOpen={afterOpenModal}
               onRequestClose={closeModal}
               style={customStyles}
               contentLabel="Example Modal"
               overlayClassName="bg-black bg-opacity-25 fixed inset-0"
+              className="absolute rounded-lg bg-white p-5"
             >
-              <h2>Hello</h2>
               <button onClick={closeModal}>close</button>
+              <h2>Hello</h2>
               <div>I am a modal</div>
             </Modal>
           </div>
