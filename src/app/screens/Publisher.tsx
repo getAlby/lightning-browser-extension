@@ -39,7 +39,7 @@ function Publisher() {
 
   return (
     <div>
-      <PublisherCard title={allowance.host} image={allowance.imageURL} />
+      <PublisherCard title={allowance.host} image={allowance.imageURL} url={`https://${allowance.host}`} />
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-3 border-b border-grey-200">
           <dl>
@@ -61,7 +61,7 @@ function Publisher() {
               date: dayjs(payment.createdAt).fromNow(),
               // date: dayjs.unix(payment.createdAt),
               title: payment.description,
-              subTitle: `${payment.name} @ ${payment.location}`,
+              subTitle: <p>{payment.name} @ <a target="_blank" href={payment.location}>{payment.location}</a></p>,
               currency: "€",
               value: 9.99,
             }))}
