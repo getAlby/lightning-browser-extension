@@ -46,7 +46,7 @@ export default function PublishersTable({ publishers, navigateToPublisher }) {
                 </div>
               </td>
               <td className="px-6 py-6 whitespace-nowrap text-right">
-                {publisher.totalBudget && (
+                {parseInt(publisher.totalBudget) > 0 && (
                   <div className="ml-40">
                     <p className="text-lg text-gray-700 mb-0">
                       {publisher.usedBudget} / {publisher.totalBudget} sats
