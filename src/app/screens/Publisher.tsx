@@ -89,12 +89,7 @@ function Publisher() {
           </div>
 
           <div className="w-24">
-            <Progressbar
-              filledColor="blue-bitcoin"
-              notFilledColor="blue-200"
-              textColor="white"
-              percentage={allowance.percentage}
-            />
+            <Progressbar percentage={allowance.percentage} />
           </div>
         </div>
 
