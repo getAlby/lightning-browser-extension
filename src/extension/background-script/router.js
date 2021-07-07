@@ -2,6 +2,7 @@ import * as accounts from "./actions/accounts";
 import * as ln from "./actions/ln";
 import * as allowances from "./actions/allowances";
 import * as setup from "./actions/setup";
+import * as transactions from "./actions/transactions";
 
 // TODO: potential nesting/grouping of actions for better organization
 const routes = {
@@ -25,7 +26,7 @@ const routes = {
   getInfo: ln.getInfo,
   sendPayment: ln.sendPayment,
   getBalance: ln.getBalance,
-  getTransactions: ln.getTransactions,
+  getTransactions: transactions.all,
   setPassword: setup.setPassword,
   accountInfo: accounts.info,
   addAccount: accounts.add,
