@@ -17,7 +17,7 @@ const updateAllowance = async (message, data) => {
   }
 
   const remainingBudget = allowance.remainingBudget || 0; // remainingBudget might be blank
-  const newRemaining = remainingBudget - total_amt;
+  const newRemaining = Math.max(remainingBudget - total_amt, 0); // no negative values
 
   await db.allowances.update(allowance.id, {
     remainingBudget: newRemaining,
