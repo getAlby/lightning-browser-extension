@@ -56,25 +56,21 @@ export default function ConnectLnd() {
           <img className="mb-12" src="https://i.ibb.co/3F3mCkR/logox.png" />
         </div>
         <h1 className="text-3xl font-bold mt-4">Connect to your remote node</h1>
-        <p className="text-base text-gray-500 mt-6">
+        <p className="text-gray-500 mt-6">
           You will need to retreive the node url and an admin macaroon. Not sure
           where to find these details?
         </p>
-        <p className="text-base text-orange-bitcoin mt-2">
-          Check out this guides.
-        </p>
+        <p className="text-orange-bitcoin mt-2">Check out this guides.</p>
         <form onSubmit={handleSubmit}>
           <div className="w-4/5">
             <div className="mt-6">
-              <label className="block text-base font-medium text-gray-700">
-                Address
-              </label>
+              <label className="block font-medium text-gray-700">Address</label>
               <div>
                 <Input name="url" onChange={handleChange} required />
               </div>
             </div>
             <div className="mt-6">
-              <label className="block text-base font-medium text-gray-700">
+              <label className="block font-medium text-gray-700">
                 Macaroon
               </label>
               <div className="mt-1">
