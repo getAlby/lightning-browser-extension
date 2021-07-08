@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { HashRouter, Switch, Route } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";
+import Container from "../../components/Container";
 import Navbar from "../../components/Navbar";
 import Publishers from "../../screens/Publishers";
 import Publisher from "../../screens/Publisher";
@@ -30,24 +31,24 @@ function Options() {
 
       <Switch>
         <Route exact path="/">
-          <div className="container mx-auto px-4">
+          <Container>
             <Publishers />
-          </div>
+          </Container>
         </Route>
         <Route exact path="/publisher/:id">
           <Publisher />
         </Route>
         <Route path="/send">
-          <div className="container mx-auto px-4">
+          <Container>
             <h2 className="mt-12 mb-6 text-2xl font-bold">Send</h2>
             <p>Test content</p>
-          </div>
+          </Container>
         </Route>
         <Route path="/receive">
-          <div className="container mx-auto px-4">
+          <Container>
             <h2 className="mt-12 mb-6 text-2xl font-bold">Receive</h2>
             <p>Lorem ipsum</p>
-          </div>
+          </Container>
         </Route>
       </Switch>
     </HashRouter>
