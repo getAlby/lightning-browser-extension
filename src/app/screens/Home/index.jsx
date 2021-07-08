@@ -95,11 +95,10 @@ class Home extends React.Component {
                 // date: dayjs.unix(payment.createdAt),
                 title: payment.description,
                 subTitle: (
-                  <p>
+                  <p className="truncate">
                     {payment.name} @{" "}
                     <a
                       target="_blank"
-                      className="truncate"
                       title={payment.location}
                       href={payment.location}
                       rel="noreferrer"
@@ -135,11 +134,10 @@ class Home extends React.Component {
               date: dayjs(transaction.createdAt).fromNow(),
               title: transaction.description,
               subTitle: (
-                <p>
+                <p className="truncate">
                   {transaction.name} @{" "}
                   <a
                     target="_blank"
-                    className="truncate"
                     title={transaction.location}
                     href={transaction.location}
                     rel="noreferrer"
