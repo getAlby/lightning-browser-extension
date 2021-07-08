@@ -4,12 +4,15 @@ import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Modal from "react-modal";
 import { DotsVerticalIcon } from "@heroicons/react/solid";
+import CrossIcon from "@bitcoin-design/bitcoin-icons/svg/outline/cross.svg";
 
 import utils from "../../common/lib/utils";
+import Button from "../components/button";
 import Container from "../components/Container";
 import PublisherCard from "../components/PublisherCard";
 import Progressbar from "../components/Shared/progressbar";
 import TransactionsTable from "../components/TransactionsTable";
+import CurrencyInput from "../components/Form/CurrencyInput";
 
 dayjs.extend(relativeTime);
 
@@ -38,6 +41,7 @@ function Publisher() {
   });
   const [modalIsOpen, setIsOpen] = useState(false);
   const { id } = useParams();
+  const [budget, setBudget] = useState(0);
 
   async function fetchData() {
     try {
@@ -56,11 +60,18 @@ function Publisher() {
   }, []);
 
   function openModal() {
+    setBudget(allowance.totalBudget);
     setIsOpen(true);
   }
 
   function closeModal() {
     setIsOpen(false);
+  }
+
+  function save() {
+    // TODO: do something with budget...
+    // API.setTotalBudget(budget)
+    closeModal();
   }
 
   return (
@@ -83,7 +94,7 @@ function Publisher() {
           </dl>
 
           <button
-            className="ml-1 inline-flex items-center focus:outline-none text-blue-500"
+            className="ml-1 mt-2 inline-flex items-center focus:outline-none text-blue-500"
             onClick={openModal}
           >
             <DotsVerticalIcon className="h-5 w-5" aria-hidden="true" />
@@ -96,11 +107,41 @@ function Publisher() {
             style={customStyles}
             contentLabel="Allowance Options"
             overlayClassName="bg-black bg-opacity-25 fixed inset-0"
-            className="absolute rounded-lg bg-white p-5"
+            className="absolute rounded-lg bg-white w-full max-w-lg"
           >
-            <button onClick={closeModal}>close</button>
-            <h2>Allowance Settings</h2>
-            <div>Settings</div>
+            <div className="p-5 flex justify-between">
+              <h2 className="text-2xl font-bold">Allowance Settings</h2>
+              <button onClick={closeModal}>
+                <img
+                  className="w-6 h-6"
+                  src={CrossIcon}
+                  alt=""
+                  aria-hidden="true"
+                />
+              </button>
+            </div>
+            <div className="p-5 border-t border-b border-gray-200">
+              <label
+                htmlFor="budget"
+                className="mb-1 block text-sm font-medium text-gray-700"
+              >
+                Budget
+              </label>
+              <div className="w-60">
+                <CurrencyInput
+                  id="budget"
+                  name="budget"
+                  placeholder="sats"
+                  value={budget}
+                  onChange={(event) => {
+                    setBudget(event.target.value);
+                  }}
+                />
+              </div>
+            </div>
+            <div className="flex justify-end p-5">
+              <Button onClick={save} label="Save" />
+            </div>
           </Modal>
         </div>
 
