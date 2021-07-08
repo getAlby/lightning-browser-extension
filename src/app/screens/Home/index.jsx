@@ -69,7 +69,7 @@ class Home extends React.Component {
     return (
       <>
         <PublisherCard title={allowance.name} image={allowance.imageURL} />
-        <div className="px-5">
+        <div className="px-5 pb-5">
           <div className="flex justify-between items-center py-3">
             <dl className="mb-0">
               <dt className="text-sm">Allowance</dt>
