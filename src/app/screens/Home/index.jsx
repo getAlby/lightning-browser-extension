@@ -70,21 +70,21 @@ class Home extends React.Component {
       <>
         <PublisherCard title={allowance.name} image={allowance.imageURL} />
         <div className="px-5 pb-5">
-          <div className="flex justify-between items-center py-3">
-            <dl className="mb-0">
-              <dt className="text-sm">Allowance</dt>
-              <dd className="mb-0 text-sm text-gray-500">
-                {allowance.remainingBudget} / {allowance.totalBudget} sats
-              </dd>
-            </dl>
-            <div className="w-24">
-              <Progressbar
-                percentage={
-                  (allowance.remainingBudget / allowance.totalBudget) * 100
-                }
-              />
+          {parseInt(allowance.totalBudget) > 0 ? (
+            <div className="flex justify-between items-center py-3">
+              <dl className="mb-0">
+                <dt className="text-sm">Allowance</dt>
+                <dd className="mb-0 text-sm text-gray-500">
+                  {allowance.usedBudget} / {allowance.totalBudget} sats
+                </dd>
+              </dl>
+              <div className="w-24">
+                <Progressbar percentage={allowance.precentag} />
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="flex justify-between items-center py-3"></div>
+          )}
 
           {allowance.payments && (
             <TransactionsTable
