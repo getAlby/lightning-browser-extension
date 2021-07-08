@@ -91,7 +91,7 @@
     "@storybook/addon-essentials": "^6.2.9",
     "@storybook/addon-links": "^6.2.9",
     "@storybook/builder-webpack5": "^6.3.0-beta.0",
-    "@storybook/cli": "^6.2.9",
+    "@storybook/cli": "^6.3.2",
     "@storybook/react": "^6.2.9",
     "@types/react-router-dom": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
