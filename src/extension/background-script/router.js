@@ -21,6 +21,7 @@ const routes = {
   getAllowanceById: allowances.getById,
   listAllowances: allowances.list,
   deleteAllowance: allowances.deleteAllowance,
+  updateAllowance: allowances.updateAllowance,
   isUnlocked: accounts.isUnlocked,
   unlock: accounts.unlock,
   getInfo: ln.getInfo,

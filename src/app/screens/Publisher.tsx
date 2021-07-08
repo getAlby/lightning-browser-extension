@@ -68,9 +68,10 @@ function Publisher() {
     setIsOpen(false);
   }
 
-  function save() {
-    // TODO: do something with budget...
-    // API.setTotalBudget(budget)
+  async function save() {
+    console.log(budget);
+    const result = await utils.call("updateAllowance", {id: id, totalBudget: budget});
+    await fetchData();
     closeModal();
   }
 
