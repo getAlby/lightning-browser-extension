@@ -35,7 +35,6 @@ export default function PublishersTable({ publishers, navigateToPublisher }) {
                           label={publisher.badge.label}
                           color={publisher.badge.color}
                           textColor={publisher.badge.textColor}
-                          textColor={publisher.badge.textColor}
                         />
                       )}
                     </div>

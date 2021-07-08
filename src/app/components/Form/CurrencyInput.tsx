@@ -4,6 +4,7 @@ function CurrencyInput({
   id,
   name,
   placeholder,
+  value,
   onChange,
 }: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
@@ -17,6 +18,7 @@ function CurrencyInput({
         id={id}
         className="focus:ring-orange-bitcoin focus:border-orange-bitcoin block w-full px-3 sm:text-sm border-gray-300 rounded-md"
         placeholder={placeholder}
+        value={value}
         onChange={onChange}
       />
       {/* <div className="absolute inset-y-0 right-0 flex items-center">

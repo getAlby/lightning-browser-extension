@@ -1,7 +1,7 @@
 import React from "react";
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  fullWidth: boolean;
+  fullWidth?: boolean;
   label: string;
 };
 
