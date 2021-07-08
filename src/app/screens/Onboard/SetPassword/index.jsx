@@ -42,20 +42,18 @@ export default function SetPassword() {
           <img className="mb-12" src="https://i.ibb.co/3F3mCkR/logox.png" />
         </div>
         <h1 className="text-3xl font-bold mt-4">Secure the bag!</h1>
-        <p className="text-base text-gray-500 mt-6">
+        <p className="text-gray-500 mt-6">
           You need to set a password so we can lock the wallet when it’s not
           being used. The browser is not the most secure environment and access
           to your node needs to be kept private when not in use.
         </p>
-        <p className="text-base text-orange-bitcoin mt-2">
-          Check out this guides.
-        </p>
+        <p className="text-orange-bitcoin mt-2">Check out this guides.</p>
         <form onSubmit={handleSubmit}>
           <div className="w-4/5">
             <div className="mt-6">
               <label
                 htmlFor="email"
-                className="block text-base font-medium text-gray-700"
+                className="block font-medium text-gray-700"
               >
                 Set a password
               </label>
@@ -71,7 +69,7 @@ export default function SetPassword() {
             <div className="mt-6">
               <label
                 htmlFor="email"
-                className="block text-base font-medium text-gray-700"
+                className="block font-medium text-gray-700"
               >
                 Lets confirm you typed it correct.
               </label>

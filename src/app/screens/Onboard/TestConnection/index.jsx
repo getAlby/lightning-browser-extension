@@ -12,7 +12,7 @@ export default function TestConnection() {
         <div className="relative">
           <div className="mt-12">
             <h1 className="text-3xl font-bold mt-4">Connection success!</h1>
-            <p className="text-base text-gray-500 mt-6">
+            <p className="text-gray-500 mt-6">
               Awesome we were able to connect to your lightning node. Are these
               these correct details?
             </p>
@@ -29,13 +29,13 @@ export default function TestConnection() {
               <div className="sm:divide-y sm:divide-gray-200">
                 <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-lg font-semibold text-black">Channels</dt>
-                  <dd className="mt-1 text-base font-medium text-gray-900 sm:mt-0 sm:col-span-2">
+                  <dd className="mt-1 font-medium text-gray-900 sm:mt-0 sm:col-span-2">
                     3
                   </dd>
                 </div>
                 <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-lg font-semibold text-black">Node URL</dt>
-                  <dd className="mt-1 text-base font-medium text-gray-900 sm:mt-0 sm:col-span-2">
+                  <dd className="mt-1 font-medium text-gray-900 sm:mt-0 sm:col-span-2">
                     regtest-bob.nomadiclabs.net
                   </dd>
                 </div>
