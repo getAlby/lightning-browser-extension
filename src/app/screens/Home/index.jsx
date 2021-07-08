@@ -58,7 +58,7 @@ class Home extends React.Component {
     utils.call("getTransactions").then((result) => {
       console.log(result);
       this.setState({
-        transactions: result?.payments,
+        transactions: result?.transactions,
         loadingTransactions: false,
       });
     });
@@ -89,11 +89,27 @@ class Home extends React.Component {
           {allowance.payments && (
             <TransactionsTable
               transactions={allowance.payments.map((payment) => ({
+                ...payment,
                 type: "sent",
                 date: dayjs(payment.createdAt).fromNow(),
-                title: "John Doe",
-                subTitle: "Lorem ipsum",
-                totalAmount: payment.totalAmount,
+                // date: dayjs.unix(payment.createdAt),
+                title: payment.description,
+                subTitle: (
+                  <p>
+                    {payment.name} @{" "}
+                    <a
+                      target="_blank"
+                      className="truncate"
+                      title={payment.location}
+                      href={payment.location}
+                      rel="noreferrer"
+                    >
+                      {payment.location}
+                    </a>
+                  </p>
+                ),
+                currency: "€",
+                value: 9.99,
               }))}
             />
           )}
@@ -114,11 +130,24 @@ class Home extends React.Component {
         ) : (
           <TransactionsTable
             transactions={transactions.map((transaction) => ({
+              ...transaction,
               type: "sent",
               date: dayjs(transaction.createdAt).fromNow(),
-              title: "John Doe",
-              subTitle: "Lorem ipsum",
-              totalAmount: transaction.value,
+              title: transaction.description,
+              subTitle: (
+                <p>
+                  {transaction.name} @{" "}
+                  <a
+                    target="_blank"
+                    className="truncate"
+                    title={transaction.location}
+                    href={transaction.location}
+                    rel="noreferrer"
+                  >
+                    {transaction.location}
+                  </a>
+                </p>
+              ),
             }))}
           />
         )}
