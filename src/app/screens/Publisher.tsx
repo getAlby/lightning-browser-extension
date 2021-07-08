@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Modal from "react-modal";
@@ -41,6 +41,7 @@ function Publisher() {
   });
   const [modalIsOpen, setIsOpen] = useState(false);
   const { id } = useParams();
+  const history = useHistory();
   const [budget, setBudget] = useState(0);
 
   async function fetchData() {
@@ -68,11 +69,15 @@ function Publisher() {
     setIsOpen(false);
   }
 
-  async function save() {
-    console.log(budget);
-    const result = await utils.call("updateAllowance", {id: id, totalBudget: budget});
+  async function updateAllowance() {
+    const result = await utils.call("updateAllowance", {id: parseInt(id), totalBudget: budget});
     await fetchData();
     closeModal();
+  }
+
+  async function deleteAllowance() {
+    const result = await utils.call("deleteAllowance", {id: parseInt(id) });
+    history.push("/");
   }
 
   return (
@@ -141,7 +146,10 @@ function Publisher() {
               </div>
             </div>
             <div className="flex justify-end p-5">
-              <Button onClick={save} label="Save" />
+              <span onClick={deleteAllowance} className="cursor-pointer inline-flex justify-center items-center px-7 py-2 font-medium">
+                delete
+              </span>
+              <Button onClick={updateAllowance} label="Save" />
             </div>
           </Modal>
         </div>
