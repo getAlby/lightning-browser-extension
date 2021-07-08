@@ -12,10 +12,9 @@ import msg from "../../../common/lib/msg";
 class ConfirmPayment extends React.Component {
   constructor(props) {
     super(props);
-    console.log("props", props);
     this.history = createHashHistory();
     this.state = {
-      budget: null,
+      budget: (this.props.invoice?.valueSat || 0) * 10,
       rememberMe: false,
     };
   }
@@ -99,6 +98,7 @@ class ConfirmPayment extends React.Component {
                     id="budget"
                     name="budget"
                     placeholder="sats"
+                    value={this.state.budget}
                     onChange={(event) => {
                       this.setBudget(event.target.value);
                     }}
