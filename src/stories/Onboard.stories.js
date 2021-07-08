@@ -1,6 +1,6 @@
 import React from "react";
 import IntroScreen from "../app/screens/Onboard/Intro";
-import ConnectLndScreen from "../app/screens/Onboard/ConnectLND";
+import ConnectLndScreen from "../app/screens/Onboard/ConnectLnd";
 import LastStepScreen from "../app/screens/Onboard/LastStep";
 import TestConnectionScreen from "../app/screens/Onboard/TestConnection";
 import SetPasswordScreen from "../app/screens/Onboard/SetPassword";

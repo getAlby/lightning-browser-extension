@@ -1,7 +1,6 @@
 name: Build Production
 
 on:
-  pull_request:
   push:
     branches:
       - master
@@ -51,4 +50,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: opera.crx
-          path: dist/production/opera.crz
+          path: dist/production/opera.crx
