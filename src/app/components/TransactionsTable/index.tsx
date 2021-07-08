@@ -41,40 +41,40 @@ export default function TransactionsTable({ transactions }: Props) {
 
   return (
     <div className="shadow overflow-hidden border-b border-gray-200 rounded-lg">
-      <table className="min-w-full divide-y divide-gray-200">
-        <tbody className="bg-white divide-y divide-gray-200">
-          {transactions.map((tx) => (
-            <tr key={tx.id}>
-              <td className="px-3 py-2 whitespace-nowrap">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0 mr-3">
-                    {tx.type && renderIcon(tx.type)}
-                  </div>
-                  <div>
-                    <div className="text-gray-900">{tx.title}</div>
-                    <div className="text-sm text-gray-500">{tx.subTitle}</div>
+      <div className="bg-white divide-y divide-gray-200">
+        {transactions.map((tx) => (
+          <div key={tx.id} className="flex justify-between space-x-4 px-3 py-2">
+            <div className="overflow-hidden">
+              <div className="flex items-center">
+                <div className="flex-shrink-0 mr-3">
+                  {tx.type && renderIcon(tx.type)}
+                </div>
+                <div className="overflow-hidden">
+                  <div className="text-gray-900 truncate">{tx.title}</div>
+                  <div className="text-sm text-gray-500 truncate">
+                    {tx.subTitle}
                   </div>
                 </div>
-                {tx.badges && (
-                  <div className="ml-6 space-x-3">
-                    {tx.badges.map((badge) => (
-                      <Badge
-                        label={badge.label}
-                        color={badge.color}
-                        textColor={badge.textColor}
-                      />
-                    ))}
-                  </div>
-                )}
-              </td>
-              <td className="px-3 py-2 whitespace-nowrap text-right">
-                <p>{tx.totalAmount} sats</p>
-                <p className="text-sm text-gray-500">{tx.date}</p>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+              </div>
+              {tx.badges && (
+                <div className="ml-6 space-x-3">
+                  {tx.badges.map((badge) => (
+                    <Badge
+                      label={badge.label}
+                      color={badge.color}
+                      textColor={badge.textColor}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+            <div className="text-right flex-shrink-0">
+              <p>{tx.totalAmount} sats</p>
+              <p className="text-sm text-gray-500">{tx.date}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

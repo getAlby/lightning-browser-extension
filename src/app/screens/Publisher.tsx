@@ -67,7 +67,7 @@ function Publisher() {
               // date: dayjs.unix(payment.createdAt),
               title: payment.description,
               subTitle: (
-                <p>
+                <p className="truncate">
                   {payment.name} @{" "}
                   <a target="_blank" href={payment.location}>
                     {payment.location}
