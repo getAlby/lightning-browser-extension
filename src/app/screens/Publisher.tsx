@@ -71,7 +71,7 @@ function Publisher() {
         url={`https://${allowance.host}`}
       />
       <Container>
-        <div className="flex justify-between items-center py-3">
+        <div className="flex justify-between items-center pt-8 pb-4">
           <dl>
             <dt className="text-sm font-medium text-gray-500">Allowance</dt>
             <dd className="flex items-center font-bold text-xl">
