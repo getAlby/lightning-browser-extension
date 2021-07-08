@@ -4,6 +4,7 @@ import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 import utils from "../../common/lib/utils";
+import Container from "../components/Container";
 import PublisherCard from "../components/PublisherCard";
 import Progressbar from "../components/Shared/progressbar";
 import TransactionsTable from "../components/TransactionsTable";
@@ -39,8 +40,12 @@ function Publisher() {
 
   return (
     <div>
-      <PublisherCard title={allowance.host} image={allowance.imageURL} url={`https://${allowance.host}`} />
-      <div className="container mx-auto px-4">
+      <PublisherCard
+        title={allowance.host}
+        image={allowance.imageURL}
+        url={`https://${allowance.host}`}
+      />
+      <Container>
         <div className="flex justify-between items-center py-3">
           <dl>
             <dt className="text-sm">Allowance</dt>
@@ -61,13 +66,20 @@ function Publisher() {
               date: dayjs(payment.createdAt).fromNow(),
               // date: dayjs.unix(payment.createdAt),
               title: payment.description,
-              subTitle: <p>{payment.name} @ <a target="_blank" href={payment.location}>{payment.location}</a></p>,
+              subTitle: (
+                <p className="truncate">
+                  {payment.name} @{" "}
+                  <a target="_blank" href={payment.location}>
+                    {payment.location}
+                  </a>
+                </p>
+              ),
               currency: "€",
               value: 9.99,
             }))}
           />
         </div>
-      </div>
+      </Container>
     </div>
   );
 }
