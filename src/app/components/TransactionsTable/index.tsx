@@ -43,7 +43,7 @@ export default function TransactionsTable({ transactions }: Props) {
     <div className="shadow overflow-hidden border-b border-gray-200 rounded-lg">
       <div className="bg-white divide-y divide-gray-200">
         {transactions.map((tx) => (
-          <div key={tx.id} className="flex justify-between space-x-4 px-3 py-2">
+          <div key={tx.id} className="flex justify-between space-x-5 px-3 py-2">
             <div className="overflow-hidden">
               <div className="flex items-center">
                 <div className="flex-shrink-0 mr-3">
