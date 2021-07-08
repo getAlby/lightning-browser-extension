@@ -162,7 +162,9 @@ class Home extends React.Component {
           title={alias}
           subtitle={balance && balanceFiat ? `${balance} (${balanceFiat})` : ""}
           onOptionsClick={() => {
-            return utils.openPage("options.html");
+            utils.openPage("options.html");
+            window.close();
+            return;
           }}
         />
         {allowance ? this.renderAllowanceView() : this.renderDefaultView()}
