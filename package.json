@@ -87,7 +87,7 @@
     "@babel/preset-env": "^7.13.15",
     "@babel/preset-react": "^7.13.13",
     "@babel/preset-typescript": "^7.14.5",
-    "@storybook/addon-actions": "^6.2.9",
+    "@storybook/addon-actions": "^6.3.2",
     "@storybook/addon-essentials": "^6.2.9",
     "@storybook/addon-links": "^6.2.9",
     "@storybook/builder-webpack5": "^6.3.0-beta.0",
