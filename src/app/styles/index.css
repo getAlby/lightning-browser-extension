@@ -20,6 +20,10 @@
   src: url("./fonts/Inter-italic.var.woff2?v=3.18") format("woff2");
 }
 
+body {
+  font-size: 100%;
+}
+
 .ReactModal__Overlay {
   opacity: 0;
   transition: opacity 200ms ease;

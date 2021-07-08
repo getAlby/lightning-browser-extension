@@ -3,9 +3,10 @@ import { useParams } from "react-router-dom";
 import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Modal from "react-modal";
-import EditIcon from "@bitcoin-design/bitcoin-icons/svg/filled/edit.svg";
+import { DotsVerticalIcon } from "@heroicons/react/solid";
 
 import utils from "../../common/lib/utils";
+import Container from "../components/Container";
 import PublisherCard from "../components/PublisherCard";
 import Progressbar from "../components/Shared/progressbar";
 import TransactionsTable from "../components/TransactionsTable";
@@ -64,45 +65,43 @@ function Publisher() {
 
   return (
     <div>
-      <PublisherCard title={allowance.host} image={allowance.imageURL} />
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center py-3 border-b border-grey-200">
-          <div className="flex">
-            <dl>
-              <dt className="text-sm">Allowance</dt>
-              <dd className="text-sm text-gray-500">
-                {allowance.usedBudget} / {allowance.totalBudget} sats
-              </dd>
-            </dl>
-            <button
-              className="opacity-50 focus:outline-none transition-opacity duration-200 hover:opacity-100"
-              onClick={openModal}
-            >
-              <img
-                className="ml-3 w-6 h-6"
-                src={EditIcon}
-                alt=""
-                aria-hidden="true"
-              />
-            </button>
-            <Modal
-              closeTimeoutMS={200}
-              isOpen={modalIsOpen}
-              onRequestClose={closeModal}
-              style={customStyles}
-              contentLabel="Example Modal"
-              overlayClassName="bg-black bg-opacity-25 fixed inset-0"
-              className="absolute rounded-lg bg-white p-5"
-            >
-              <button onClick={closeModal}>close</button>
-              <h2>Hello</h2>
-              <div>I am a modal</div>
-            </Modal>
-          </div>
+      <PublisherCard
+        title={allowance.host}
+        image={allowance.imageURL}
+        url={`https://${allowance.host}`}
+      />
+      <Container>
+        <div className="flex justify-between items-center py-3">
+          <dl>
+            <dt className="text-sm">Allowance</dt>
+            <dd className="flex items-center text-sm text-gray-500">
+              {allowance.usedBudget} / {allowance.totalBudget} sats
+              <div className="ml-3 w-24">
+                <Progressbar percentage={allowance.percentage} />
+              </div>
+            </dd>
+          </dl>
 
-          <div className="w-24">
-            <Progressbar percentage={allowance.percentage} />
-          </div>
+          <button
+            className="ml-1 inline-flex items-center focus:outline-none text-blue-500"
+            onClick={openModal}
+          >
+            <DotsVerticalIcon className="h-5 w-5" aria-hidden="true" />
+            <span className="text-sm font-semibold">Settings</span>
+          </button>
+          <Modal
+            closeTimeoutMS={200}
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            style={customStyles}
+            contentLabel="Allowance Options"
+            overlayClassName="bg-black bg-opacity-25 fixed inset-0"
+            className="absolute rounded-lg bg-white p-5"
+          >
+            <button onClick={closeModal}>close</button>
+            <h2>Allowance Settings</h2>
+            <div>Settings</div>
+          </Modal>
         </div>
 
         <div>
@@ -113,13 +112,20 @@ function Publisher() {
               date: dayjs(payment.createdAt).fromNow(),
               // date: dayjs.unix(payment.createdAt),
               title: payment.description,
-              subTitle: `${payment.name} @ ${payment.location}`,
+              subTitle: (
+                <p className="truncate">
+                  {payment.name} @{" "}
+                  <a target="_blank" href={payment.location}>
+                    {payment.location}
+                  </a>
+                </p>
+              ),
               currency: "€",
               value: 9.99,
             }))}
           />
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

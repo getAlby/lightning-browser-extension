@@ -10,7 +10,7 @@ export default function Tabs({ tabs }) {
         <select
           id="tabs"
           name="tabs"
-          className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-orange-bitcoin focus:border-orange-bitcoin sm:text-sm rounded-md"
+          className="block w-full pl-3 pr-10 py-2 border-gray-300 focus:outline-none focus:ring-orange-bitcoin focus:border-orange-bitcoin sm:text-sm rounded-md"
           defaultValue={tabs.find((tab) => tab.current).name}
         >
           {tabs.map((tab) => (

@@ -53,13 +53,11 @@ function Enable(props) {
           Connect with <i>{props.origin.host}</i>
         </h3>
 
-        <p className="text-base text-gray-500 mb-4">
+        <p className="text-gray-500 mb-4">
           <strong>{props.origin.name}</strong> does not have access to your
           account.
         </p>
-        <p className="text-base text-gray-500 mb-4">
-          Do you want to grant them access?
-        </p>
+        <p className="text-gray-500 mb-4">Do you want to grant them access?</p>
 
         <div className="mt-8 mb-5">
           <Button type="primary" label="Enable" fullWidth onClick={enable} />

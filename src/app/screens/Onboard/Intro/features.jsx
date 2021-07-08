@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Features({features}) {
+export default function Features({ features }) {
   return (
     <div className="mt-10 space-y-10 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10 lg:mt-0 lg:col-span-2">
       {features.map((feature) => (
@@ -13,9 +13,7 @@ export default function Features({features}) {
               {feature.name}
             </p>
           </dt>
-          <dd className="mt-2 text-base text-gray-500">
-            {feature.description}
-          </dd>
+          <dd className="mt-2 text-gray-500">{feature.description}</dd>
         </div>
       ))}
     </div>

@@ -5,15 +5,12 @@ const list = async (message, sender) => {
   let allowances = await db.allowances.toCollection().reverse().sortBy("lastPaymentAt");
 
   const allowancePromises = allowances.map(async (allowance) => {
-    const remainingBudget = allowance.remainingBudget || 0;
+    allowance.usedBudget = parseInt(allowance.totalBudget) - parseInt(allowance.remainingBudget);
+    allowance.percentage = (
+      (allowance.usedBudget / allowance.totalBudget) *
+      100
+    ).toFixed(0);
 
-    if (remainingBudget > 0) {
-      allowance.usedBudget = allowance.totalBudget - allowance.remainingBudget;
-      allowance.percentage = (
-        (allowance.usedBudget / allowance.totalBudget) *
-        100
-      ).toFixed(0);
-    }
     allowance.paymentsCount = await db.payments
       .where("host")
       .equalsIgnoreCase(allowance.host)

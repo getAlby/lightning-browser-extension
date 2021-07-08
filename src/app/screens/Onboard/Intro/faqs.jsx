@@ -26,7 +26,7 @@ export default function FAQs(props) {
                 </Disclosure.Button>
               </dt>
               <Disclosure.Panel as="dd" className="mt-2 pr-12">
-                <p className="text-base text-gray-500">{faq.answer}</p>
+                <p className="text-gray-500">{faq.answer}</p>
               </Disclosure.Panel>
             </>
           )}

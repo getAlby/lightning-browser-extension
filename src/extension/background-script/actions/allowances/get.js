@@ -10,6 +10,12 @@ const get = async (message, sender) => {
 
   console.log(allowance);
   if (allowance) {
+    allowance.usedBudget = parseInt(allowance.totalBudget) - parseInt(allowance.remainingBudget);
+    allowance.percentage = (
+      (allowance.usedBudget / allowance.totalBudget) *
+      100
+    ).toFixed(0);
+
     const payments = await db.payments
       .where("host")
       .equalsIgnoreCase(allowance.host)
