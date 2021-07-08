@@ -1,7 +1,6 @@
 name: Build Production
 
 on:
-  pull_request:
   push:
     branches:
       - master
