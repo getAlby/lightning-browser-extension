@@ -69,7 +69,7 @@ class Home extends React.Component {
     return (
       <>
         <PublisherCard title={allowance.name} image={allowance.imageURL} />
-        <div className="px-5">
+        <div className="px-5 pb-5">
           <div className="flex justify-between items-center py-3">
             <dl className="mb-0">
               <dt className="text-sm">Allowance</dt>
@@ -95,11 +95,10 @@ class Home extends React.Component {
                 // date: dayjs.unix(payment.createdAt),
                 title: payment.description,
                 subTitle: (
-                  <p>
+                  <p className="truncate">
                     {payment.name} @{" "}
                     <a
                       target="_blank"
-                      className="truncate"
                       title={payment.location}
                       href={payment.location}
                       rel="noreferrer"
@@ -135,11 +134,10 @@ class Home extends React.Component {
               date: dayjs(transaction.createdAt).fromNow(),
               title: transaction.description,
               subTitle: (
-                <p>
+                <p className="truncate">
                   {transaction.name} @{" "}
                   <a
                     target="_blank"
-                    className="truncate"
                     title={transaction.location}
                     href={transaction.location}
                     rel="noreferrer"

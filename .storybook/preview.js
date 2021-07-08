@@ -1,6 +1,7 @@
 import "../src/app/styles/index.css";
 
 // Needed to make Storybook work with webextension-polyfill.
+if (!window.chrome) window.chrome = {};
 if (!chrome.runtime) chrome.runtime = {};
 if (!chrome.runtime.id) chrome.runtime.id = "history-delete";
 
