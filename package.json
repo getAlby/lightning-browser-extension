@@ -57,7 +57,7 @@
     "crypto-js": "^4.0.0",
     "dayjs": "^1.10.5",
     "dexie": "^3.0.3",
-    "invoices": "^1.1.7",
+    "invoices": "^2.0.0",
     "lsat-js": "^1.0.7",
     "memoizee": "^0.4.15",
     "postcss-cli": "^8.3.1",

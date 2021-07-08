@@ -8800,10 +8800,10 @@ invariant@^2.2.3, invariant@^2.2.4:
   dependencies:
     loose-envify "^1.0.0"
 
-invoices@^1.1.7:
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/invoices/-/invoices-1.2.1.tgz"
-  integrity sha512-b1yeWevW04/jMmkzJ3Fk91d8cAd+pYYg/w0S7XCGAI4yo8jSnAD+S4oAWjfFkwNa+GV8WwCOTDuotWcI5md87A==
+invoices@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/invoices/-/invoices-2.0.0.tgz#f84185150720b7d7799bbe10dbb772c7fabf93d4"
+  integrity sha512-UnU0bS3+cMA2UvYrF5RXp/Hm7v/nYiA3F0GVCOeRmDiZmXAt/eO7KdqyRzewopvhBlev7F7t7GZzRRYY1XE3xg==
   dependencies:
     bech32 "2.0.0"
     bitcoinjs-lib "5.2.0"
