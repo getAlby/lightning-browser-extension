@@ -92,15 +92,14 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader, // It creates a CSS file per JS file which contains CSS
           },
+          "css-loader", // Takes the CSS files and returns the CSS with imports and url(...) for Webpack
+          "postcss-loader",
           {
-            loader: "css-loader", // Takes the CSS files and returns the CSS with imports and url(...) for Webpack
+            loader: "sass-loader", // Takes the Sass/SCSS file and compiles to the CSS
             options: {
-              sourceMap: nodeEnv === "development",
+              sourceMap: true,
             },
           },
-          "postcss-loader",
-          "resolve-url-loader", // Rewrites relative paths in url() statements
-          "sass-loader", // Takes the Sass/SCSS file and compiles to the CSS
         ],
       },
       {
