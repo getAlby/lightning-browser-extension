@@ -124,7 +124,7 @@
     "jest": "^27.0.6",
     "jest-transform-stub": "^2.0.0",
     "lint-staged": "^11.0.0",
-    "mini-css-extract-plugin": "^2.0.0",
+    "mini-css-extract-plugin": "^2.1.0",
     "node-sass": "^6.0.1",
     "postcss": "^8.3.5",
     "postcss-loader": "^6.1.1",
