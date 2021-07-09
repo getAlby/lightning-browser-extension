@@ -95,7 +95,7 @@ module.exports = {
           {
             loader: "css-loader", // Takes the CSS files and returns the CSS with imports and url(...) for Webpack
             options: {
-              sourceMap: true,
+              sourceMap: nodeEnv === "development",
             },
           },
           "postcss-loader",
