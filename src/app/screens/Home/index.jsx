@@ -79,7 +79,7 @@ class Home extends React.Component {
                 </dd>
               </dl>
               <div className="w-24">
-                <Progressbar percentage={allowance.precentag} />
+                <Progressbar percentage={allowance.percentage} />
               </div>
             </div>
           ) : (
