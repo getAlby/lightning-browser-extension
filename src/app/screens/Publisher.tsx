@@ -3,12 +3,13 @@ import { useHistory, useParams } from "react-router-dom";
 import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Modal from "react-modal";
-import { DotsVerticalIcon } from "@heroicons/react/solid";
 import CrossIcon from "@bitcoin-design/bitcoin-icons/svg/outline/cross.svg";
+import { DotsHorizontalIcon } from "@heroicons/react/solid";
 
 import utils from "../../common/lib/utils";
 import Button from "../components/button";
 import Container from "../components/Container";
+import Menu from "../components/Menu";
 import PublisherCard from "../components/PublisherCard";
 import Progressbar from "../components/Shared/progressbar";
 import TransactionsTable from "../components/TransactionsTable";
@@ -70,13 +71,16 @@ function Publisher() {
   }
 
   async function updateAllowance() {
-    const result = await utils.call("updateAllowance", {id: parseInt(id), totalBudget: budget});
+    const result = await utils.call("updateAllowance", {
+      id: parseInt(id),
+      totalBudget: budget,
+    });
     await fetchData();
     closeModal();
   }
 
   async function deleteAllowance() {
-    const result = await utils.call("deleteAllowance", {id: parseInt(id) });
+    const result = await utils.call("deleteAllowance", { id: parseInt(id) });
     history.push("/");
   }
 
@@ -99,13 +103,27 @@ function Publisher() {
             </dd>
           </dl>
 
-          <button
-            className="ml-1 mt-2 inline-flex items-center focus:outline-none text-blue-500"
-            onClick={openModal}
-          >
-            <DotsVerticalIcon className="h-5 w-5" aria-hidden="true" />
-            <span className="text-sm font-semibold">Settings</span>
-          </button>
+          <Menu>
+            <Menu.Button>
+              <DotsHorizontalIcon className="h-5 w-5" aria-hidden="true" />
+            </Menu.Button>
+            <Menu.List>
+              <Menu.Item onClick={openModal}>Edit</Menu.Item>
+              <Menu.Item
+                onClick={() => {
+                  if (
+                    window.confirm(
+                      "Are you sure you want to delete this publisher?"
+                    )
+                  ) {
+                    deleteAllowance();
+                  }
+                }}
+              >
+                Delete
+              </Menu.Item>
+            </Menu.List>
+          </Menu>
           <Modal
             closeTimeoutMS={200}
             isOpen={modalIsOpen}
@@ -116,7 +134,7 @@ function Publisher() {
             className="absolute rounded-lg bg-white w-full max-w-lg"
           >
             <div className="p-5 flex justify-between">
-              <h2 className="text-2xl font-bold">Allowance Settings</h2>
+              <h2 className="text-2xl font-bold">Edit Allowance</h2>
               <button onClick={closeModal}>
                 <img
                   className="w-6 h-6"
@@ -146,9 +164,6 @@ function Publisher() {
               </div>
             </div>
             <div className="flex justify-end p-5">
-              <span onClick={deleteAllowance} className="cursor-pointer inline-flex justify-center items-center px-7 py-2 font-medium">
-                delete
-              </span>
               <Button onClick={updateAllowance} label="Save" />
             </div>
           </Modal>

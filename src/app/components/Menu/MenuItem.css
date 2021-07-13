@@ -1,0 +1,3 @@
+[data-reach-menu-item][data-selected] {
+  @apply bg-gray-100;
+}
