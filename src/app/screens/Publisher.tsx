@@ -70,14 +70,17 @@ function Publisher() {
   }
 
   async function updateAllowance() {
-    const result = await utils.call("updateAllowance", {id: parseInt(id), totalBudget: budget});
+    const result = await utils.call("updateAllowance", {
+      id: parseInt(id),
+      totalBudget: budget,
+    });
     await fetchData();
     closeModal();
   }
 
   async function deleteAllowance() {
-    const result = await utils.call("deleteAllowance", {id: parseInt(id) });
-    history.push("/");
+    const result = await utils.call("deleteAllowance", { id: parseInt(id) });
+    history.replace("/publishers");
   }
 
   return (
@@ -146,7 +149,10 @@ function Publisher() {
               </div>
             </div>
             <div className="flex justify-end p-5">
-              <span onClick={deleteAllowance} className="cursor-pointer inline-flex justify-center items-center px-7 py-2 font-medium">
+              <span
+                onClick={deleteAllowance}
+                className="cursor-pointer inline-flex justify-center items-center px-7 py-2 font-medium"
+              >
                 delete
               </span>
               <Button onClick={updateAllowance} label="Save" />
