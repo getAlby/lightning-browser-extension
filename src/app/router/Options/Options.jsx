@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { HashRouter, Switch, Redirect, Route } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";
 import Container from "../../components/Container";
@@ -22,20 +22,19 @@ function Options() {
   return (
     <HashRouter>
       <Navbar title={accountInfo.alias} subtitle={accountInfo.balance}>
-        <Navbar.Link exact href="/">
-          Publishers
-        </Navbar.Link>
+        <Navbar.Link href="/publishers">Publishers</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>
         <Navbar.Link href="/receive">Receive</Navbar.Link>
       </Navbar>
 
       <Switch>
         <Route exact path="/">
-          <Container>
-            <Publishers />
-          </Container>
+          <Redirect to="/publishers" />
         </Route>
-        <Route exact path="/publisher/:id">
+        <Route exact path="/publishers">
+          <Publishers />
+        </Route>
+        <Route path="/publishers/:id">
           <Publisher />
         </Route>
         <Route path="/send">

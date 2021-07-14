@@ -81,7 +81,7 @@ function Publisher() {
 
   async function deleteAllowance() {
     const result = await utils.call("deleteAllowance", { id: parseInt(id) });
-    history.push("/");
+    history.replace("/publishers");
   }
 
   return (
