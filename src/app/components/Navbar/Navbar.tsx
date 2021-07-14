@@ -8,6 +8,7 @@ type Props = {
   subtitle: string;
   onOptionsClick: () => void;
   children?: React.ReactNode;
+  right?: React.ReactNode;
 };
 
 export default function Navbar({
@@ -15,6 +16,7 @@ export default function Navbar({
   subtitle,
   onOptionsClick,
   children,
+  right,
 }: Props) {
   return (
     <div className="px-5 py-2 flex justify-between items-center border-b border-gray-200">
@@ -49,6 +51,7 @@ export default function Navbar({
             />
           </button>
         )}
+        {right}
       </div>
     </div>
   );

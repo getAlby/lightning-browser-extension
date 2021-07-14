@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { HashRouter, Switch, Route } from "react-router-dom";
+import { LogoutIcon } from "@heroicons/react/outline";
 
 import utils from "../../../common/lib/utils";
 import Container from "../../components/Container";
@@ -19,9 +20,30 @@ function Options() {
     });
   }, []);
 
+  async function lock() {
+    try {
+      await utils.call("lock");
+      window.close();
+    } catch (e) {
+      console.log(e.message);
+    }
+  }
+
   return (
     <HashRouter>
-      <Navbar title={accountInfo.alias} subtitle={accountInfo.balance}>
+      <Navbar
+        title={accountInfo.alias}
+        subtitle={accountInfo.balance}
+        right={
+          <button
+            className="inline-flex items-center focus:outline-none text-gray-500 hover:text-black transition-color duration-200"
+            onClick={lock}
+          >
+            <LogoutIcon className="h-5 w-5 mr-1" aria-hidden="true" />
+            <span className="text-sm font-semibold">Log out</span>
+          </button>
+        }
+      >
         <Navbar.Link exact href="/">
           Publishers
         </Navbar.Link>
