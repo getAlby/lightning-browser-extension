@@ -1,6 +1,6 @@
 import React from "react";
 import { createHashHistory } from "history";
-import { UnlockTwoTone } from "@ant-design/icons";
+import { LockOpenIcon } from "@heroicons/react/solid";
 
 import utils from "../../../common/lib/utils";
 import Button from "../../components/button";
@@ -46,7 +46,10 @@ class Unlock extends React.Component {
   render() {
     return (
       <div className="p-8 text-center">
-        <UnlockTwoTone className="text-6xl mb-4" />
+        <LockOpenIcon
+          className="inline mb-4 h-16 w-16 text-blue-500"
+          aria-hidden="true"
+        />
         <h2 className="text-2xl font-bold mb-4">Unlock:</h2>
         <form onSubmit={this.handleSubmit}>
           <div className="mb-4">

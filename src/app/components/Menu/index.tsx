@@ -1,6 +1,5 @@
-import { Menu as MenuComponent } from "@reach/menu-button";
+import { Menu as MenuComponent, MenuButton } from "@reach/menu-button";
 
-import MenuButton from "./MenuButton";
 import MenuList from "./MenuList";
 import MenuItem from "./MenuItem";
 

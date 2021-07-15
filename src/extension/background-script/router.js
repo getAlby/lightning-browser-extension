@@ -22,6 +22,7 @@ const routes = {
   listAllowances: allowances.list,
   deleteAllowance: allowances.deleteAllowance,
   updateAllowance: allowances.updateAllowance,
+  lock: accounts.lock,
   isUnlocked: accounts.isUnlocked,
   unlock: accounts.unlock,
   getInfo: ln.getInfo,

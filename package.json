@@ -42,7 +42,6 @@
     ]
   },
   "dependencies": {
-    "@ant-design/icons": "^4.6.2",
     "@babel/runtime": "^7.13.10",
     "@bitcoin-design/bitcoin-icons": "^0.1.0",
     "@headlessui/react": "^1.2.0",

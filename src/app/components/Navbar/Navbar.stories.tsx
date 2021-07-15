@@ -2,6 +2,7 @@ import React from "react";
 import { MemoryRouter } from "react-router-dom";
 
 import Navbar from ".";
+import UserMenu from "../UserMenu";
 
 const metadata = {
   title: "Components/Navbar",
@@ -21,16 +22,12 @@ export const Default = () => (
   <Navbar
     title="John Doe"
     subtitle="₿0.0016 7930 €33.57"
-    onOptionsClick={() => alert("Options clicked!")}
+    right={<UserMenu />}
   />
 );
 
 export const WithLinks = () => (
-  <Navbar
-    title="John Doe"
-    subtitle="₿0.0016 7930 €33.57"
-    onOptionsClick={() => alert("Options clicked!")}
-  >
+  <Navbar title="John Doe" subtitle="₿0.0016 7930 €33.57" right={<UserMenu />}>
     <Navbar.Link href="/">Screen 1</Navbar.Link>
     <Navbar.Link href="/screen-2">Screen 2</Navbar.Link>
     <Navbar.Link href="/screen-3">Screen 3</Navbar.Link>
@@ -38,9 +35,5 @@ export const WithLinks = () => (
 );
 
 export const Loading = () => (
-  <Navbar
-    title=""
-    subtitle=""
-    onOptionsClick={() => alert("Options clicked!")}
-  />
+  <Navbar title="" subtitle="" right={<UserMenu />} />
 );

@@ -8,6 +8,7 @@ import { getFiatFromSatoshi } from "../../../common/utils/helpers";
 
 import Navbar from "../../components/Navbar";
 import TransactionsTable from "../../components/TransactionsTable";
+import UserMenu from "../../components/UserMenu";
 
 import Loading from "../../components/Loading";
 import PublisherCard from "../../components/PublisherCard";
@@ -161,11 +162,7 @@ class Home extends React.Component {
         <Navbar
           title={alias}
           subtitle={balance && balanceFiat ? `${balance} (${balanceFiat})` : ""}
-          onOptionsClick={() => {
-            utils.openPage("options.html");
-            window.close();
-            return;
-          }}
+          right={<UserMenu />}
         />
         {allowance ? this.renderAllowanceView() : this.renderDefaultView()}
       </div>
