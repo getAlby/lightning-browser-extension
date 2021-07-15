@@ -161,11 +161,6 @@ class Home extends React.Component {
         <Navbar
           title={alias}
           subtitle={balance && balanceFiat ? `${balance} (${balanceFiat})` : ""}
-          onOptionsClick={() => {
-            utils.openPage("options.html");
-            window.close();
-            return;
-          }}
         />
         {allowance ? this.renderAllowanceView() : this.renderDefaultView()}
       </div>

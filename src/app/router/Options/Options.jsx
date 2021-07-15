@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { HashRouter, Switch, Redirect, Route } from "react-router-dom";
-import { LockClosedIcon } from "@heroicons/react/solid";
 
 import utils from "../../../common/lib/utils";
 import Container from "../../components/Container";
@@ -20,30 +19,9 @@ function Options() {
     });
   }, []);
 
-  async function lock() {
-    try {
-      await utils.call("lock");
-      window.close();
-    } catch (e) {
-      console.log(e.message);
-    }
-  }
-
   return (
     <HashRouter>
-      <Navbar
-        title={accountInfo.alias}
-        subtitle={accountInfo.balance}
-        right={
-          <button
-            className="inline-flex items-center focus:outline-none text-gray-500 hover:text-black transition-color duration-200"
-            onClick={lock}
-          >
-            <LockClosedIcon className="h-5 w-5 mr-1" aria-hidden="true" />
-            <span className="text-sm font-semibold">Lock</span>
-          </button>
-        }
-      >
+      <Navbar title={accountInfo.alias} subtitle={accountInfo.balance}>
         <Navbar.Link href="/publishers">Publishers</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>
         <Navbar.Link href="/receive">Receive</Navbar.Link>
