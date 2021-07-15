@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
+import Container from "../components/Container";
 import PublishersTable from "../components/PublishersTable";
 import Searchbar from "../components/Searchbar";
 
@@ -16,7 +17,7 @@ function Publishers() {
   };
 
   function navigateToPublisher(id) {
-    history.push(`/publisher/${id}`);
+    history.push(`/publishers/${id}`);
   }
 
   async function fetchData() {
@@ -43,7 +44,7 @@ function Publishers() {
   }, []);
 
   return (
-    <>
+    <Container>
       <h2 className="mt-12 mb-6 text-2xl font-bold">
         Manage Publishers & Allowances
       </h2>
@@ -56,7 +57,7 @@ function Publishers() {
         publishers={data}
         navigateToPublisher={navigateToPublisher}
       />
-    </>
+    </Container>
   );
 }
 

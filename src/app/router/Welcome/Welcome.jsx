@@ -12,14 +12,12 @@ import Intro from "../../screens/Onboard/Intro";
 import SetPassword from "../../screens/Onboard/SetPassword";
 import ConnectLnd from "../../screens/Onboard/ConnectLnd";
 import TestConnection from "../../screens/Onboard/TestConnection";
-import LastStep from "../../screens/Onboard/LastStep";
 
 const routes = [
   { path: "/", component: Intro, exact: true },
   { path: "/set-password", component: SetPassword },
   { path: "/connect-lnd", component: ConnectLnd },
   { path: "/test-connection", component: TestConnection },
-  { path: "/last-step", component: LastStep },
 ];
 
 const initialSteps = routes.map((route, index) => ({
