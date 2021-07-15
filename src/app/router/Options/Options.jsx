@@ -4,6 +4,7 @@ import { HashRouter, Switch, Redirect, Route } from "react-router-dom";
 import utils from "../../../common/lib/utils";
 import Container from "../../components/Container";
 import Navbar from "../../components/Navbar";
+import UserMenu from "../../components/UserMenu";
 import Publishers from "../../screens/Publishers";
 import Publisher from "../../screens/Publisher";
 
@@ -21,7 +22,11 @@ function Options() {
 
   return (
     <HashRouter>
-      <Navbar title={accountInfo.alias} subtitle={accountInfo.balance}>
+      <Navbar
+        title={accountInfo.alias}
+        subtitle={accountInfo.balance}
+        right={<UserMenu />}
+      >
         <Navbar.Link href="/publishers">Publishers</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>
         <Navbar.Link href="/receive">Receive</Navbar.Link>
