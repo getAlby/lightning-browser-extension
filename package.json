@@ -52,6 +52,7 @@
     "advanced-css-reset": "^1.2.2",
     "assert": "^2.0.0",
     "axios": "^0.21.1",
+    "bech32": "^2.0.0",
     "browser-polyfill": "^3.20.2",
     "crypto-browserify": "^3.12.0",
     "crypto-js": "^4.0.0",

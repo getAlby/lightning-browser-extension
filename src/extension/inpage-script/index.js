@@ -42,6 +42,17 @@ if (document) {
       if (!response.enabled) {
         return;
       }
+      if (paymentRequest.startsWith("LNURL")) {
+        return window.webln
+          .getInvoice(paymentRequest)
+          .then((r) => {
+            // alert(JSON.stringify(r));
+          })
+          .catch((e) => {
+            console.log(e);
+            alert(`Error: ${e.message}`);
+          });
+      }
       return window.webln
         .sendPayment(paymentRequest)
         .then((r) => {

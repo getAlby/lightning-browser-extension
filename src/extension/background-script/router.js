@@ -26,6 +26,7 @@ const routes = {
   isUnlocked: accounts.isUnlocked,
   unlock: accounts.unlock,
   getInfo: ln.getInfo,
+  getInvoice: ln.getInvoice,
   sendPayment: ln.sendPayment,
   getBalance: ln.getBalance,
   getTransactions: transactions.all,

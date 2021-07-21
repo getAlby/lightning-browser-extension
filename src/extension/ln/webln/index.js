@@ -35,6 +35,13 @@ export default class WebLNProvider {
     return this.execute("sendPayment", { paymentRequest });
   }
 
+  getInvoice(lnurlEncoded) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling getInvoice");
+    }
+    return this.execute("getInvoice", { lnurlEncoded });
+  }
+
   makeInvoice(args) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling makeInvoice");

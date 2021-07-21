@@ -1,6 +1,7 @@
 import state from "../../state";
+import getInvoice from "./getInvoice";
 import sendPayment from "./sendPayment";
-import PubSub from 'pubsub-js';
+import PubSub from "pubsub-js";
 
 const connectorCall = (method) => {
   return (message, sender) => {
@@ -28,4 +29,4 @@ const getInfo = connectorCall("getInfo");
 const getBalance = connectorCall("getBalance");
 const getTransactions = connectorCall("getTransactions");
 
-export { getInfo, getBalance, getTransactions, sendPayment };
+export { getInfo, getBalance, getTransactions, getInvoice, sendPayment };
