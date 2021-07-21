@@ -56,10 +56,10 @@ function GetInvoice({ lnurlEncoded, origin }: Props) {
 
   function renderAmount() {
     if (metadata.minSendable === metadata.maxSendable) {
-      return <p>Pay {metadata.minSendable} satoshi</p>;
+      return <p>{metadata.minSendable} satoshi</p>;
     } else {
       return (
-        <div>
+        <div className="flex flex-col">
           <input
             type="range"
             min={metadata.minSendable}
@@ -79,6 +79,9 @@ function GetInvoice({ lnurlEncoded, origin }: Props) {
       <div className="p-6 text-center">
         {metadata && (
           <>
+            <p className="font-semibold text-gray-500">Send payment to</p>
+            <p className="mb-6">{origin.name}</p>
+            <p className="font-semibold text-gray-500">Amount</p>
             <div className="mb-6">{renderAmount()}</div>
             <div>
               <div className="mb-5">
