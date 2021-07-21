@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, MouseEvent } from "react";
 import axios from "axios";
 import { bech32 } from "bech32";
 
@@ -16,8 +16,12 @@ type Props = {
 };
 
 function GetInvoice({ lnurlEncoded, origin }: Props) {
-  const [metadata, setMetadata] = useState(null);
-  const [value, setValue] = useState(0);
+  const [metadata, setMetadata] = useState({
+    minSendable: 0,
+    maxSendable: 0,
+    callback: "",
+  });
+  const [value, setValue] = useState<string | number>(0);
 
   useEffect(() => {
     async function fetchMetadata() {
@@ -49,7 +53,7 @@ function GetInvoice({ lnurlEncoded, origin }: Props) {
     }
   }
 
-  function reject(e) {
+  function reject(e: MouseEvent) {
     e.preventDefault();
     msg.error("User rejected");
   }
