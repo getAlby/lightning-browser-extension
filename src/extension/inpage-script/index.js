@@ -1,8 +1,10 @@
 import WebLNProvider from "../ln/webln";
+import LNURLProvider from "../ln/lnurl";
 import Donation from "./donation";
 
 if (document) {
   window.webln = new WebLNProvider();
+  window.lnurl = new LNURLProvider();
 
   const donation = new Donation(document.location.toString());
   donation.execute();
@@ -43,8 +45,8 @@ if (document) {
         return;
       }
       if (paymentRequest.toLowerCase().startsWith("lnurl")) {
-        return window.webln
-          .getInvoice(paymentRequest)
+        return window.lnurl
+          .pay(paymentRequest)
           .then((r) => {
             alert(JSON.stringify(r));
           })

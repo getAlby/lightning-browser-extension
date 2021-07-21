@@ -15,7 +15,7 @@ type Props = {
   };
 };
 
-function GetInvoice({ lnurlEncoded, origin }: Props) {
+function LNURLPay({ lnurlEncoded, origin }: Props) {
   const [metadata, setMetadata] = useState({
     minSendable: 0,
     maxSendable: 0,
@@ -113,4 +113,4 @@ function GetInvoice({ lnurlEncoded, origin }: Props) {
   );
 }
 
-export default GetInvoice;
+export default LNURLPay;

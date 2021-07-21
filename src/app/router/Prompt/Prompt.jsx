@@ -10,7 +10,7 @@ import Unlock from "../../screens/Unlock";
 import Enable from "../../screens/Enable";
 import Loading from "../../components/Loading";
 import ConfirmPayment from "../../screens/ConfirmPayment";
-import GetInvoice from "../../screens/GetInvoice";
+import LNURLPay from "../../screens/LNURLPay";
 let invoiceParser = require("@node-lightning/invoice");
 
 class Prompt extends React.Component {
@@ -60,8 +60,8 @@ class Prompt extends React.Component {
               path="/enable"
               render={(props) => <Enable origin={this.state.origin} />}
             />
-            <Route exact path="/getInvoice">
-              <GetInvoice
+            <Route exact path="/lnurlPay">
+              <LNURLPay
                 lnurlEncoded={this.state.args?.lnurlEncoded}
                 origin={this.state.origin}
               />

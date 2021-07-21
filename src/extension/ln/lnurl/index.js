@@ -1,57 +1,6 @@
-export default class WebLNProvider {
-  constructor() {
-    this.enabled = false;
-    this.executing = false;
-  }
-
-  enable() {
-    if (this.enabled) {
-      return Promise.resolve({ enabled: true });
-    }
-    return this.execute("enable").then((result) => {
-      this.enabled = result.enabled;
-      return result;
-    });
-  }
-
-  getInfo() {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling getInfo");
-    }
-    return this.execute("getInfo");
-  }
-
-  getTransactions() {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling getInfo");
-    }
-    return this.execute("getTransactions");
-  }
-
-  sendPayment(paymentRequest) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling sendPayment");
-    }
-    return this.execute("sendPayment", { paymentRequest });
-  }
-
-  makeInvoice(args) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling makeInvoice");
-    }
-    if (typeof args !== "object") {
-      args = { amount: args };
-    }
-
-    return this.execute("makeInvoice", args);
-  }
-
-  signMessage(message) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling signMessage");
-    }
-
-    return this.execute("signMessage", { message });
+export default class LNURLProvider {
+  pay(lnurlEncoded) {
+    return this.execute("lnurlPay", { lnurlEncoded });
   }
 
   execute(type, args) {
