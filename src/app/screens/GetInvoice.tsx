@@ -67,7 +67,7 @@ function GetInvoice({ lnurlEncoded, origin }: Props) {
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />
-          <output>{value} satoshi</output>
+          <output className="mt-1 text-sm">{value} satoshi</output>
         </div>
       );
     }
@@ -76,14 +76,16 @@ function GetInvoice({ lnurlEncoded, origin }: Props) {
   return (
     <div>
       <PublisherCard title={origin.name} image={origin.icon} />
-      <div className="p-6 text-center">
+      <div className="p-6">
         {metadata && (
           <>
-            <p className="font-semibold text-gray-500">Send payment to</p>
-            <p className="mb-6">{origin.name}</p>
-            <p className="font-semibold text-gray-500">Amount</p>
-            <div className="mb-6">{renderAmount()}</div>
-            <div>
+            <dl className="shadow p-4 rounded-lg mb-8">
+              <dt className="font-semibold text-gray-500">Send payment to</dt>
+              <dd className="mb-6">{origin.name}</dd>
+              <dt className="font-semibold text-gray-500">Amount</dt>
+              <dd>{renderAmount()}</dd>
+            </dl>
+            <div className="text-center">
               <div className="mb-5">
                 <Button onClick={confirm} label="Confirm" fullWidth />
               </div>
