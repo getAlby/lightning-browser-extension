@@ -46,7 +46,7 @@ if (document) {
         return window.webln
           .getInvoice(paymentRequest)
           .then((r) => {
-            // alert(JSON.stringify(r));
+            alert(JSON.stringify(r));
           })
           .catch((e) => {
             console.log(e);
