@@ -42,7 +42,7 @@ if (document) {
       if (!response.enabled) {
         return;
       }
-      if (paymentRequest.startsWith("LNURL")) {
+      if (paymentRequest.toLowerCase().startsWith("lnurl")) {
         return window.webln
           .getInvoice(paymentRequest)
           .then((r) => {
