@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
+import PublisherCard from "../components/PublisherCard";
 const { bech32 } = require("bech32");
 
 type Props = {
   lnurlEncoded: string;
+  origin: {
+    name: string;
+    icon: string;
+  };
 };
 
-function GetInvoice({ lnurlEncoded }: Props) {
+function GetInvoice({ lnurlEncoded, origin }: Props) {
   const [lnurl, setLnurl] = useState("");
 
   useEffect(() => {
@@ -18,7 +23,12 @@ function GetInvoice({ lnurlEncoded }: Props) {
     }
   }, [lnurlEncoded]);
 
-  return <div>lnurl: {lnurl}</div>;
+  return (
+    <div>
+      <PublisherCard title={origin.name} image={origin.icon} />
+      lnurl: {lnurl}
+    </div>
+  );
 }
 
 export default GetInvoice;

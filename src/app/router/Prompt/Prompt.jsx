@@ -61,7 +61,10 @@ class Prompt extends React.Component {
               render={(props) => <Enable origin={this.state.origin} />}
             />
             <Route exact path="/getInvoice">
-              <GetInvoice lnurlEncoded={this.state.args?.lnurlEncoded} />
+              <GetInvoice
+                lnurlEncoded={this.state.args?.lnurlEncoded}
+                origin={this.state.origin}
+              />
             </Route>
             <Route
               exact
