@@ -12,18 +12,17 @@ async function lnurl(message, sender) {
     switch (lnurlType) {
       case "channelRequest":
         // lnurl-channel
-        break;
+        return;
       case "login":
         // lnurl-auth
-        break;
+        return;
       case "payRequest":
-        payWithPrompt(message, lnurlMetadata);
-        break;
+        return payWithPrompt(message, lnurlMetadata);
       case "withdrawRequest":
         // lnurl-withdraw
-        break;
+        return;
       default:
-        break;
+        return;
     }
   } catch (e) {
     console.log(e.message);
