@@ -7,7 +7,7 @@ import Button from "../components/button";
 import PublisherCard from "../components/PublisherCard";
 
 type Props = {
-  metadata: {
+  details: {
     minSendable: number;
     maxSendable: number;
     callback: string;
@@ -18,12 +18,12 @@ type Props = {
   };
 };
 
-function LNURLPay({ metadata, origin }: Props) {
-  const [value, setValue] = useState<string | number>(metadata.minSendable);
+function LNURLPay({ details, origin }: Props) {
+  const [value, setValue] = useState<string | number>(details.minSendable);
 
   async function confirm() {
     try {
-      const res = await axios.get(metadata.callback, {
+      const res = await axios.get(details.callback, {
         params: { amount: value },
       });
       return await msg.reply({
@@ -40,15 +40,15 @@ function LNURLPay({ metadata, origin }: Props) {
   }
 
   function renderAmount() {
-    if (metadata.minSendable === metadata.maxSendable) {
-      return <p>{metadata.minSendable} satoshi</p>;
+    if (details.minSendable === details.maxSendable) {
+      return <p>{details.minSendable} satoshi</p>;
     } else {
       return (
         <div className="flex flex-col">
           <input
             type="range"
-            min={metadata.minSendable}
-            max={metadata.maxSendable}
+            min={details.minSendable}
+            max={details.maxSendable}
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />
