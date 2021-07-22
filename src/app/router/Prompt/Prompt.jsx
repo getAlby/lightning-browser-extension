@@ -62,7 +62,7 @@ class Prompt extends React.Component {
             />
             <Route exact path="/lnurlPay">
               <LNURLPay
-                lnurlEncoded={this.state.args?.lnurlEncoded}
+                metadata={this.state.args?.lnurlMetadata}
                 origin={this.state.origin}
               />
             </Route>

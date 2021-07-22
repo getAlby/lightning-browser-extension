@@ -1,6 +1,6 @@
 import * as accounts from "./actions/accounts";
 import * as ln from "./actions/ln";
-import * as lnurl from "./actions/lnurl";
+import lnurl from "./actions/lnurl";
 import * as allowances from "./actions/allowances";
 import * as setup from "./actions/setup";
 import * as transactions from "./actions/transactions";
@@ -27,7 +27,7 @@ const routes = {
   isUnlocked: accounts.isUnlocked,
   unlock: accounts.unlock,
   getInfo: ln.getInfo,
-  lnurlPay: lnurl.pay,
+  lnurl,
   sendPayment: ln.sendPayment,
   getBalance: ln.getBalance,
   getTransactions: transactions.all,

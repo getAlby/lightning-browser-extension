@@ -1,6 +1,5 @@
-import React, { useState, useEffect, MouseEvent } from "react";
+import React, { useState, MouseEvent } from "react";
 import axios from "axios";
-import { bech32 } from "bech32";
 
 import msg from "../../common/lib/msg";
 
@@ -8,37 +7,19 @@ import Button from "../components/button";
 import PublisherCard from "../components/PublisherCard";
 
 type Props = {
-  lnurlEncoded: string;
+  metadata: {
+    minSendable: number;
+    maxSendable: number;
+    callback: string;
+  };
   origin: {
     name: string;
     icon: string;
   };
 };
 
-function LNURLPay({ lnurlEncoded, origin }: Props) {
-  const [metadata, setMetadata] = useState({
-    minSendable: 0,
-    maxSendable: 0,
-    callback: "",
-  });
-  const [value, setValue] = useState<string | number>(0);
-
-  useEffect(() => {
-    async function fetchMetadata() {
-      try {
-        const { words: dataPart } = bech32.decode(lnurlEncoded, 2000);
-        const requestByteArray = bech32.fromWords(dataPart);
-        const lnurl = Buffer.from(requestByteArray).toString();
-        const { data } = await axios.get(lnurl);
-        setMetadata(data);
-        setValue(data.minSendable);
-      } catch (e) {
-        console.log(e.message);
-      }
-    }
-
-    fetchMetadata();
-  }, [lnurlEncoded]);
+function LNURLPay({ metadata, origin }: Props) {
+  const [value, setValue] = useState<string | number>(metadata.minSendable);
 
   async function confirm() {
     try {
@@ -81,33 +62,29 @@ function LNURLPay({ lnurlEncoded, origin }: Props) {
     <div>
       <PublisherCard title={origin.name} image={origin.icon} />
       <div className="p-6">
-        {metadata && (
-          <>
-            <dl className="shadow p-4 rounded-lg mb-8">
-              <dt className="font-semibold text-gray-500">Send payment to</dt>
-              <dd className="mb-6">{origin.name}</dd>
-              <dt className="font-semibold text-gray-500">Amount</dt>
-              <dd>{renderAmount()}</dd>
-            </dl>
-            <div className="text-center">
-              <div className="mb-5">
-                <Button onClick={confirm} label="Confirm" fullWidth />
-              </div>
+        <dl className="shadow p-4 rounded-lg mb-8">
+          <dt className="font-semibold text-gray-500">Send payment to</dt>
+          <dd className="mb-6">{origin.name}</dd>
+          <dt className="font-semibold text-gray-500">Amount</dt>
+          <dd>{renderAmount()}</dd>
+        </dl>
+        <div className="text-center">
+          <div className="mb-5">
+            <Button onClick={confirm} label="Confirm" fullWidth />
+          </div>
 
-              <p className="mb-3 underline text-sm text-gray-300">
-                Only connect with sites you trust.
-              </p>
+          <p className="mb-3 underline text-sm text-gray-300">
+            Only connect with sites you trust.
+          </p>
 
-              <a
-                className="underline text-sm text-gray-500"
-                href="#"
-                onClick={reject}
-              >
-                Cancel
-              </a>
-            </div>
-          </>
-        )}
+          <a
+            className="underline text-sm text-gray-500"
+            href="#"
+            onClick={reject}
+          >
+            Cancel
+          </a>
+        </div>
       </div>
     </div>
   );

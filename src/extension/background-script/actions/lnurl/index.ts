@@ -1,10 +1,44 @@
+import axios from "axios";
+
 import utils from "../../../../common/lib/utils";
+import { decodeBech32 } from "../../../../common/utils/helpers";
 
-const pay = async (message, sender) => {
-  const response = await utils.openPrompt(message);
-  if (response.data.confirmed) {
-    return "You've paid!";
+async function lnurl(message, sender) {
+  try {
+    const lnurlDecoded = decodeBech32(message.args.lnurlEncoded);
+    const { data: lnurlMetadata } = await axios.get(lnurlDecoded);
+    const { tag: lnurlType } = lnurlMetadata;
+
+    switch (lnurlType) {
+      case "channelRequest":
+        // lnurl-channel
+        break;
+      case "login":
+        // lnurl-auth
+        break;
+      case "payRequest":
+        payWithPrompt(message, lnurlMetadata);
+        break;
+      case "withdrawRequest":
+        // lnurl-withdraw
+        break;
+      default:
+        break;
+    }
+  } catch (e) {
+    console.log(e.message);
   }
-};
+}
 
-export { pay };
+async function payWithPrompt(message, lnurlMetadata) {
+  const response = await utils.openPrompt({
+    ...message,
+    type: "lnurlPay",
+    args: { ...message.args, lnurlMetadata },
+  });
+  if (response.data.confirmed) {
+    // payment confirmed.
+  }
+}
+
+export default lnurl;
