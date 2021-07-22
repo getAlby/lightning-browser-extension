@@ -10,7 +10,12 @@ async function lnurl(message) {
     let lnurlType = url.searchParams.get("tag");
     let lnurlDetails;
 
-    if (lnurlType !== "login") {
+    if (lnurlType === "login") {
+      lnurlDetails = {
+        k1: url.searchParams.get("k1"),
+        action: url.searchParams.get("action"),
+      };
+    } else {
       const res = await axios.get(lnurlDecoded);
       lnurlDetails = res.data;
       lnurlType = res.data.tag;
@@ -21,9 +26,8 @@ async function lnurl(message) {
         console.log("lnurl-channel");
         return;
       case "login":
-        const k1 = url.searchParams.get("k1");
-        const action = url.searchParams.get("action");
         console.log("lnurl-auth");
+        console.log(lnurlDetails);
         return;
       case "payRequest":
         return payWithPrompt(message, lnurlDetails);
