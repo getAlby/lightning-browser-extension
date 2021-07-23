@@ -1,5 +1,4 @@
 import PubSub from "pubsub-js";
-import parsePaymentRequest from "invoices";
 import utils from "../../../../common/lib/utils";
 import state from "../../state";
 import db from "../../db";

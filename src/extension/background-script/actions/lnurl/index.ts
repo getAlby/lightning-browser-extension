@@ -1,6 +1,9 @@
 import axios from "axios";
+import PubSub from "pubsub-js";
+import { parsePaymentRequest } from "invoices";
 
 import utils from "../../../../common/lib/utils";
+import state from "../../state";
 import { decodeBech32 } from "../../../../common/utils/helpers";
 
 async function lnurl(message) {
@@ -43,14 +46,40 @@ async function lnurl(message) {
 }
 
 async function payWithPrompt(message, lnurlDetails) {
-  const response = await utils.openPrompt({
+  const connector = state.getState().getConnector();
+  const { data } = await utils.openPrompt({
     ...message,
     type: "lnurlPay",
     args: { ...message.args, lnurlDetails },
   });
-  if (response.data.confirmed) {
-    // payment confirmed.
+  const { confirmed, paymentRequest } = data;
+  if (confirmed && paymentRequest) {
+    const paymentRequestDetails = parsePaymentRequest({
+      request: paymentRequest,
+    });
+
+    try {
+      const response = await connector.sendPayment({
+        paymentRequest,
+      });
+      publishPaymentNotification(message, paymentRequestDetails, response);
+      return response;
+    } catch (e) {
+      console.log(e.message);
+    }
   }
+}
+
+function publishPaymentNotification(message, paymentRequestDetails, response) {
+  let status = "success"; // default. let's hope for success
+  if (response.data.payment_error) {
+    status = "failed";
+  }
+  PubSub.publish(`ln.sendPayment.${status}`, {
+    response,
+    paymentRequestDetails,
+    origin: message.origin,
+  });
 }
 
 export default lnurl;
