@@ -41,7 +41,7 @@ export const sortByFieldDescending = (data, field) => {
   });
 };
 
-export function decodeBech32(str) {
+export function bech32Decode(str) {
   const { words: dataPart } = bech32.decode(str, 2000);
   const requestByteArray = bech32.fromWords(dataPart);
   return Buffer.from(requestByteArray).toString();

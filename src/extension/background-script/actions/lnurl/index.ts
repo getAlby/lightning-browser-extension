@@ -4,11 +4,11 @@ import { parsePaymentRequest } from "invoices";
 
 import utils from "../../../../common/lib/utils";
 import state from "../../state";
-import { decodeBech32 } from "../../../../common/utils/helpers";
+import { bech32Decode } from "../../../../common/utils/helpers";
 
 async function lnurl(message) {
   try {
-    const lnurlDecoded = decodeBech32(message.args.lnurlEncoded);
+    const lnurlDecoded = bech32Decode(message.args.lnurlEncoded);
     const url = new URL(lnurlDecoded);
     let lnurlType = url.searchParams.get("tag");
     let lnurlDetails;

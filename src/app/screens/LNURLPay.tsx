@@ -53,8 +53,10 @@ function LNURLPay({ details, origin }: Props) {
         return;
       }
 
+      // TODO:
       // If routes array is not empty: verifies signature for every provided ChannelUpdate, may use these routes if fee levels are acceptable
 
+      // TODO:
       // If successAction is not null: LN WALLET makes sure that tag value of is of supported type, aborts a payment otherwise
 
       // LN WALLET pays the invoice, no additional user confirmation is required at this point
@@ -63,6 +65,7 @@ function LNURLPay({ details, origin }: Props) {
         paymentRequest,
       });
 
+      // TODO:
       // Once payment is fulfilled LN WALLET executes a non-null successAction
       // For message, a toaster or popup is sufficient
       // For url, the wallet should give the user a popup which displays description, url, and a 'open' button to open the url in a new browser tab
