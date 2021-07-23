@@ -65,6 +65,7 @@ async function payWithPrompt(message, lnurlDetails) {
       publishPaymentNotification(message, paymentRequestDetails, response);
 
       // Once payment is fulfilled LN WALLET executes a non-null successAction
+      // LN WALLET should also store successAction data on the transaction record
       if (successAction) {
         switch (successAction.tag) {
           // TODO:
@@ -79,7 +80,7 @@ async function payWithPrompt(message, lnurlDetails) {
             break;
           case "aes":
             // TODO:
-            // For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage. LN WALLET should also store successAction data on the transaction record
+            // For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage
             break;
           default:
             break;
