@@ -1,5 +1,8 @@
 import React, { useState, MouseEvent } from "react";
 import axios from "axios";
+import sha256 from "crypto-js/sha256";
+import Hex from "crypto-js/enc-hex";
+import * as invoiceParser from "@node-lightning/invoice";
 
 import msg from "../../common/lib/msg";
 
@@ -23,15 +26,47 @@ function LNURLPay({ details, origin }: Props) {
 
   async function confirm() {
     try {
+      // Request the invoice
       const res = await axios.get(details.callback, {
         params: { amount: value },
       });
-      return await msg.reply({
-        confirmed: true,
-      });
+      const invoice = invoiceParser.decode(res.data.pr);
+
+      // LN WALLET Verifies that h tag (description_hash) in provided invoice is a hash of metadata string converted to byte array in UTF-8 encoding
+      const metadataHex = await sha256(details.metadata).toString(Hex);
+      const hTagHex = Array.from(invoice.hashDesc)
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join(""); // convert bytes to hex string
+      if (hTagHex !== metadataHex) {
+        alert("Invoice invalid.");
+        return;
+      }
+
+      // LN WALLET Verifies that amount in provided invoice equals an amount previously specified by user
+      if (invoice.valueMsat !== String(value)) {
+        alert("Invoice invalid.");
+        return;
+      }
+
+      // If routes array is not empty: verifies signature for every provided ChannelUpdate, may use these routes if fee levels are acceptable
+
+      // If successAction is not null: LN WALLET makes sure that tag value of is of supported type, aborts a payment otherwise
+
+      // LN WALLET pays the invoice, no additional user confirmation is required at this point
+
+      // Once payment is fulfilled LN WALLET executes a non-null successAction
+      // For message, a toaster or popup is sufficient
+      // For url, the wallet should give the user a popup which displays description, url, and a 'open' button to open the url in a new browser tab
+      // For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage. LN WALLET should also store successAction data on the transaction record
     } catch (e) {
       console.log(e.message);
     }
+
+    // Check if all is ok and pay the invoice
+
+    // return await msg.reply({
+    //   confirmed: true,
+    // });
   }
 
   function reject(e: MouseEvent) {
