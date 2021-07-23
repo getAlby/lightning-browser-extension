@@ -70,13 +70,8 @@ function LNURLPay({ details, origin }: Props) {
       return await msg.reply({
         confirmed: true,
         paymentRequest,
+        successAction,
       });
-
-      // TODO:
-      // Once payment is fulfilled LN WALLET executes a non-null successAction
-      // For message, a toaster or popup is sufficient
-      // For url, the wallet should give the user a popup which displays description, url, and a 'open' button to open the url in a new browser tab
-      // For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage. LN WALLET should also store successAction data on the transaction record
     } catch (e) {
       console.log(e.message);
     }
