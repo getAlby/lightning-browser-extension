@@ -41,29 +41,15 @@ function LNURLPay({ details, origin }: Props) {
         request: paymentRequest,
       });
 
-      // LN WALLET Verifies that h tag (description_hash) in provided invoice is a hash of metadata string converted to byte array in UTF-8 encoding
+      // Verify invoice
       const metadataHash = await sha256(details.metadata).toString(Hex);
-      if (paymentRequestDetails.description_hash !== metadataHash) {
-        alert("Payment aborted.");
-        return;
-      }
-
-      // LN WALLET Verifies that amount in provided invoice equals an amount previously specified by user
-      if (paymentRequestDetails.mtokens !== String(value)) {
-        alert("Payment aborted.");
-        return;
-      }
-
-      // TODO:
-      // If routes array is not empty: verifies signature for every provided ChannelUpdate, may use these routes if fee levels are acceptable
-
-      // If successAction is not null: LN WALLET makes sure that tag value of is of supported type, aborts a payment otherwise
-      if (
-        successAction &&
-        !["url", "message", "aes"].includes(successAction.tag)
-      ) {
-        alert("Payment aborted.");
-        return;
+      switch (true) {
+        case paymentRequestDetails.description_hash !== metadataHash: // LN WALLET Verifies that h tag (description_hash) in provided invoice is a hash of metadata string converted to byte array in UTF-8 encoding
+        case paymentRequestDetails.mtokens !== String(value): // LN WALLET Verifies that amount in provided invoice equals an amount previously specified by user
+        case successAction &&
+          !["url", "message", "aes"].includes(successAction.tag): // If successAction is not null: LN WALLET makes sure that tag value of is of supported type, aborts a payment otherwise
+          alert("Payment aborted.");
+          return;
       }
 
       // LN WALLET pays the invoice, no additional user confirmation is required at this point
