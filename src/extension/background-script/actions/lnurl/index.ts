@@ -52,7 +52,7 @@ async function payWithPrompt(message, lnurlDetails) {
     type: "lnurlPay",
     args: { ...message.args, lnurlDetails },
   });
-  const { confirmed, paymentRequest, successAction } = data;
+  const { confirmed, paymentRequest, successCallback } = data;
   if (confirmed && paymentRequest) {
     const paymentRequestDetails = parsePaymentRequest({
       request: paymentRequest,
@@ -64,28 +64,7 @@ async function payWithPrompt(message, lnurlDetails) {
       });
       publishPaymentNotification(message, paymentRequestDetails, response);
 
-      // Once payment is fulfilled LN WALLET executes a non-null successAction
-      // LN WALLET should also store successAction data on the transaction record
-      if (successAction) {
-        switch (successAction.tag) {
-          // TODO:
-          // For url, the wallet should give the user a popup which displays description, url, and a 'open' button to open the url in a new browser tab
-          case "url":
-            break;
-          // For message, a toaster or popup is sufficient
-          case "message":
-            utils.notify({
-              message: successAction.message,
-            });
-            break;
-          case "aes":
-            // TODO:
-            // For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage
-            break;
-          default:
-            break;
-        }
-      }
+      if (successCallback) successCallback();
 
       return response;
     } catch (e) {

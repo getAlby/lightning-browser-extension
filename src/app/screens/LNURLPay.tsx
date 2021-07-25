@@ -5,6 +5,7 @@ import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
 
 import msg from "../../common/lib/msg";
+import utils from "../../common/lib/utils";
 
 import Button from "../components/button";
 import PublisherCard from "../components/PublisherCard";
@@ -22,13 +23,15 @@ type Props = {
 };
 
 function LNURLPay({ details, origin }: Props) {
-  const [value, setValue] = useState<string | number>(details.minSendable);
+  const [valueMSat, setValueMSat] = useState<string | number>(
+    details.minSendable
+  );
 
   async function confirm() {
     try {
       // Get the invoice
       const params = {
-        amount: value, // user specified sum in MilliSatoshi
+        amount: valueMSat, // user specified sum in MilliSatoshi
         // nonce: "", // an optional parameter used to prevent server response caching
         // fromnodes: "", // an optional parameter with value set to comma separated nodeIds if payer wishes a service to provide payment routes starting from specified LN nodeIds
         // comment: "", // an optional parameter to pass the LN WALLET user's comment to LN SERVICE. Note on comment length: GET URL's accept around ~2000 characters for the entire request string. Therefore comment can only be as large as to fit in the URL alongisde any/all of the properties outlined above.*
@@ -45,18 +48,39 @@ function LNURLPay({ details, origin }: Props) {
       const metadataHash = await sha256(details.metadata).toString(Hex);
       switch (true) {
         case paymentRequestDetails.description_hash !== metadataHash: // LN WALLET Verifies that h tag (description_hash) in provided invoice is a hash of metadata string converted to byte array in UTF-8 encoding
-        case paymentRequestDetails.mtokens !== String(value): // LN WALLET Verifies that amount in provided invoice equals an amount previously specified by user
+        case paymentRequestDetails.mtokens !== String(valueMSat): // LN WALLET Verifies that amount in provided invoice equals an amount previously specified by user
         case successAction &&
           !["url", "message", "aes"].includes(successAction.tag): // If successAction is not null: LN WALLET makes sure that tag value of is of supported type, aborts a payment otherwise
           alert("Payment aborted.");
           return;
       }
 
+      // Once payment is fulfilled LN WALLET executes a non-null successAction
+      // LN WALLET should also store successAction data on the transaction record
+      let successCallback;
+      if (successAction) {
+        successCallback = () => {
+          switch (successAction.tag) {
+            case "url": // TODO: For url, the wallet should give the user a popup which displays description, url, and a 'open' button to open the url in a new browser tab
+              break;
+            case "message": // For message, a toaster or popup is sufficient
+              utils.notify({
+                message: successAction.message,
+              });
+              break;
+            case "aes": // TOOD: For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage
+              break;
+            default:
+              break;
+          }
+        };
+      }
+
       // LN WALLET pays the invoice, no additional user confirmation is required at this point
       return await msg.reply({
         confirmed: true,
         paymentRequest,
-        successAction,
+        successCallback,
       });
     } catch (e) {
       console.log(e.message);
@@ -70,7 +94,7 @@ function LNURLPay({ details, origin }: Props) {
 
   function renderAmount() {
     if (details.minSendable === details.maxSendable) {
-      return <p>{details.minSendable} satoshi</p>;
+      return <p>{`${details.minSendable / 1000} satoshi`}</p>;
     } else {
       return (
         <div className="flex flex-col">
@@ -78,10 +102,13 @@ function LNURLPay({ details, origin }: Props) {
             type="range"
             min={details.minSendable}
             max={details.maxSendable}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
+            step="1000"
+            value={valueMSat}
+            onChange={(e) => setValueMSat(e.target.value)}
           />
-          <output className="mt-1 text-sm">{value} satoshi</output>
+          <output className="mt-1 text-sm">{`${
+            valueMSat / 1000
+          } satoshi`}</output>
         </div>
       );
     }
