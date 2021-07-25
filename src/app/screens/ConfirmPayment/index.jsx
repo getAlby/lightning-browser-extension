@@ -58,7 +58,7 @@ class ConfirmPayment extends React.Component {
         <div className="p-6">
           <div className="mb-8">
             <PaymentSummary
-              amount={this.props.invoice?.mtokens}
+              amount={this.props.invoice?.tokens}
               description={this.props.invoice?.description}
             />
           </div>
