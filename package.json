@@ -46,7 +46,6 @@
     "@bitcoin-design/bitcoin-icons": "^0.1.0",
     "@headlessui/react": "^1.2.0",
     "@heroicons/react": "^1.0.2",
-    "@node-lightning/invoice": "^0.22.0",
     "@reach/menu-button": "^0.15.3",
     "@tailwindcss/forms": "^0.3.2",
     "advanced-css-reset": "^1.2.2",

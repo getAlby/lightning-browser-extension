@@ -1660,28 +1660,6 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@node-lightning/bufio@^0.22.1":
-  version "0.22.1"
-  resolved "https://registry.npmjs.org/@node-lightning/bufio/-/bufio-0.22.1.tgz"
-  integrity sha512-RsVS8J20qGva2QFZTnFFH93g/fOQ+qBm9APtRQI2VP+oWSICIarWrery83m1GKTzZ1IjpWbiiC9PHwdk6DkSsg==
-
-"@node-lightning/crypto@^0.22.1":
-  version "0.22.1"
-  resolved "https://registry.npmjs.org/@node-lightning/crypto/-/crypto-0.22.1.tgz"
-  integrity sha512-uNnhc2/6auOvzTdZ68OrhEMzq/ePc+nNe6f+F2TU4gTFLZYlYvsdKl7UBcmzhxMnWdHxVupVmIHuvgi29r6xGA==
-  dependencies:
-    secp256k1 "^4.0.2"
-
-"@node-lightning/invoice@^0.22.0":
-  version "0.22.1"
-  resolved "https://registry.npmjs.org/@node-lightning/invoice/-/invoice-0.22.1.tgz"
-  integrity sha512-bXwZhMhAvuqHqW5ptNEThfnmmcmYuRB6r2wKrtK1FgMafzNN6RwLHHCZuYP+V3cudoJ4Ythsl1c84wq+XRAD0A==
-  dependencies:
-    "@node-lightning/bufio" "^0.22.1"
-    "@node-lightning/crypto" "^0.22.1"
-    bech32 "^1.1.3"
-    bs58check "^2.1.2"
-
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz"
@@ -4727,7 +4705,7 @@ bech32@2.0.0:
   resolved "https://registry.npmjs.org/bech32/-/bech32-2.0.0.tgz"
   integrity sha512-LcknSilhIGatDAsY1ak2I8VtGaHNhgMSYVxFrGLXv+xLHytaKZKcaUJJUE7qmBr7h33o5YQwP55pMI0xmkpJwg==
 
-bech32@^1.1.2, bech32@^1.1.3:
+bech32@^1.1.2:
   version "1.1.4"
   resolved "https://registry.npmjs.org/bech32/-/bech32-1.1.4.tgz"
   integrity sha512-s0IrSOzLlbvX7yp4WBfPITzpAU8sqQcpsmwXDiKwrG4r491vwCO/XpejasRNl0piBMe/DvP4Tz0mIS/X1DPJBQ==
@@ -5089,7 +5067,7 @@ bs58@^4.0.0:
   dependencies:
     base-x "^3.0.2"
 
-bs58check@<3.0.0, bs58check@^2.0.0, bs58check@^2.1.1, bs58check@^2.1.2:
+bs58check@<3.0.0, bs58check@^2.0.0, bs58check@^2.1.1:
   version "2.1.2"
   resolved "https://registry.npmjs.org/bs58check/-/bs58check-2.1.2.tgz"
   integrity sha512-0TS1jicxdU09dwJMNZtVAfzPi6Q6QeN0pM1Fkzrjn+XYHvzMKPU3pHVpva+769iNVSfIYWf7LJ6WR+BuuMf8cA==
@@ -13957,7 +13935,7 @@ scss-tokenizer@^0.2.3:
     js-base64 "^2.1.8"
     source-map "^0.4.2"
 
-secp256k1@4.0.2, secp256k1@^4.0.2:
+secp256k1@4.0.2:
   version "4.0.2"
   resolved "https://registry.npmjs.org/secp256k1/-/secp256k1-4.0.2.tgz"
   integrity sha512-UDar4sKvWAksIlfX3xIaQReADn+WFnHvbVujpcbr+9Sf/69odMwy2MUsz5CKLQgX9nsIyrjuxL2imVyoNHa3fg==
