@@ -14,7 +14,7 @@ class ConfirmPayment extends React.Component {
     super(props);
     this.history = createHashHistory();
     this.state = {
-      budget: this.props.invoice?.mtokens || 0,
+      budget: (this.props.invoice?.tokens || 0) * 10,
       rememberMe: false,
     };
   }
