@@ -46,7 +46,6 @@ async function lnurl(message) {
 }
 
 async function payWithPrompt(message, lnurlDetails) {
-  const connector = state.getState().getConnector();
   const { data } = await utils.openPrompt({
     ...message,
     type: "lnurlPay",
@@ -54,6 +53,8 @@ async function payWithPrompt(message, lnurlDetails) {
   });
   const { confirmed, paymentRequest, successCallback } = data;
   if (confirmed && paymentRequest) {
+    // to get the connector the account must be unlocked. The opened prompt also takes care of that
+    const connector = state.getState().getConnector();
     const paymentRequestDetails = parsePaymentRequest({
       request: paymentRequest,
     });
