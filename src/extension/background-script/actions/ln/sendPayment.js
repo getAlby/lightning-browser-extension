@@ -1,16 +1,14 @@
 import PubSub from "pubsub-js";
-import parsePaymentRequest from "invoices";
+import { parsePaymentRequest } from "invoices";
 import utils from "../../../../common/lib/utils";
 import state from "../../state";
 import db from "../../db";
-
-const LNInvoices = require("invoices");
 
 const sendPayment = async (message, sender) => {
   PubSub.publish(`ln.sendPayment.start`, message);
 
   const paymentRequest = message.args.paymentRequest;
-  const paymentRequestDetails = LNInvoices.parsePaymentRequest({
+  const paymentRequestDetails = parsePaymentRequest({
     request: paymentRequest,
   });
 
