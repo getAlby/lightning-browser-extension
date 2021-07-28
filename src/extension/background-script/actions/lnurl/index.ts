@@ -127,7 +127,7 @@ async function authWithPrompt(message, lnurlDetails) {
       });
 
       const reason = e.response?.data?.reason || e.message;
-      return { error: reaseon }
+      return { error: reason }
     }
 
     // if the service returned with a HTTP 200 we still check if the response data is OK
