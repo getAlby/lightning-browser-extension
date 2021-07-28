@@ -108,7 +108,7 @@ async function authWithPrompt(message, lnurlDetails) {
 
   let loginStatus = { confirmed: true, remember: true };
   // if there is no publisher or lnurlAuth is not enabled we prompt the user
-  if (!isUnlocked || !allowance || !allowance.lnurlAuth) {
+  if (!isUnlocked || !allowance || !allowance.enabled || !allowance.lnurlAuth) {
     const { data } = await utils.openPrompt({
       ...message,
       type: "lnurlAuth",
