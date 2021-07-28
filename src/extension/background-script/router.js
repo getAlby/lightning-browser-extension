@@ -29,6 +29,7 @@ const routes = {
   getInfo: ln.getInfo,
   lnurl,
   sendPayment: ln.sendPayment,
+  signMessage: ln.signMessage,
   getBalance: ln.getBalance,
   getTransactions: transactions.all,
   setPassword: setup.setPassword,
