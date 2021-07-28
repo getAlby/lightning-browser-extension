@@ -10,6 +10,7 @@ import Hex from "crypto-js/enc-hex";
 
 import utils from "../../../../common/lib/utils";
 import state from "../../state";
+import db from "../../db";
 import { bech32Decode } from "../../../../common/utils/helpers";
 
 const EC = require('elliptic').ec;
@@ -58,7 +59,7 @@ async function lnurl(message) {
   }
 }
 
-async function authWithPrompt(message, lnurlDetails) {
+async function auth(message, lnurlDetails) {
   const connector = state.getState().getConnector();
   const signResponse = await connector.signMessage({
     msg: Base64.stringify(UTF8.parse(LNURLAUTH_CANONICAL_PHRASE)),
@@ -67,7 +68,6 @@ async function authWithPrompt(message, lnurlDetails) {
       key_index: 0,
     },
   });
-
   const lnSignature = signResponse.signature;
 
   // TODO: add assertions we got a valid signature, k1 and host
@@ -88,9 +88,77 @@ async function authWithPrompt(message, lnurlDetails) {
   loginURL.searchParams.set('sig', signedMessageDERHex);
   loginURL.searchParams.set('key', pkHex);
   loginURL.searchParams.set('t', Date.now())
-  const loginResponse = await axios.get(loginURL);
+  const authResponse = await axios.get(loginURL);
 
-  return loginResponse.data;
+  return authResponse;
+}
+
+async function authWithPrompt(message, lnurlDetails) {
+  PubSub.publish(`lnurl.auth.start`, {message, lnurlDetails});
+
+  // get the publisher to check if lnurlAuth for auto-login is enabled
+  let allowance = await db.allowances
+    .where("host")
+    .equalsIgnoreCase(message.origin.host)
+    .first();
+
+  let loginStatus = { confirmed: true, remember: true };
+  // if there is no publisher or lnurlAuth is not enabled we prompt the user
+  if (!allowance || !allowance.lnurlAuth) {
+    const { data } = await utils.openPrompt({
+      ...message,
+      type: "lnurlAuth",
+      args: { ...message.args, host: lnurlDetails.url.host, pathname: lnurlDetails.url.pathname },
+    });
+    loginStatus = data;
+  }
+
+  // if the user confirmed (or if we already had a publisher with lnurl auth enabled) we perform the authentication
+  if (loginStatus.confirmed) {
+    let authResponse;
+    try {
+      // Sign the message and do the authentication request to the service
+      authResponse = await auth(message, lnurlDetails);
+    } catch (e) {
+      PubSub.publish(`lnurl.auth.failed`, {
+        authResponse: e.response,
+        lnurlDetails,
+        origin: message.origin,
+      });
+
+      const reason = e.response?.data?.reason || e.message;
+      return { error: reaseon }
+    }
+
+    // if the service returned with a HTTP 200 we still check if the response data is OK
+    if (!authResponse.data.status.toUpperCase() === 'OK') {
+      PubSub.publish(`lnurl.auth.failed`, {
+        authResponse: authResponse,
+        lnurlDetails,
+        origin: message.origin,
+      });
+      return { error: e.response?.data?.reason}
+    }
+
+    PubSub.publish(`lnurl.auth.success`, {
+      authResponse,
+      lnurlDetails,
+      origin: message.origin,
+    });
+
+    // if auto login should be enabled get the publisher and update the publisher entry
+    if (loginStatus.remember) {
+      allowance = await db.allowances
+        .where("host")
+        .equalsIgnoreCase(message.origin.host)
+        .first();
+      await db.allowances.update(allowance.id, {
+        lnurlAuth: true,
+      });
+      await db.saveToStorage();
+    }
+    return { data: authResponse.data };
+  }
 }
 
 async function payWithPrompt(message, lnurlDetails) {

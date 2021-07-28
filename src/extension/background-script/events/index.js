@@ -4,6 +4,8 @@ import { updateAllowance } from "./allowances";
 import {
   paymentSuccessNotification,
   paymentFailedNotification,
+  lnurlAuthSuccessNotification,
+  lnurlAuthFailedNotification,
 } from "./notifications";
 
 const subscribe = () => {
@@ -12,6 +14,10 @@ const subscribe = () => {
 
   PubSub.subscribe("ln.sendPayment.success", persistSuccessfullPayment);
   PubSub.subscribe("ln.sendPayment.success", updateAllowance);
+
+  PubSub.subscribe("lnurl.auth.success", lnurlAuthSuccessNotification);
+  PubSub.subscribe("lnurl.auth.failed", lnurlAuthFailedNotification);
+
   console.log(`Event subscriptions registered`);
 };
 
