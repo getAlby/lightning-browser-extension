@@ -48,7 +48,7 @@ if (document) {
         return window.webln
           .lnurl(paymentRequest)
           .then((r) => {
-            alert(JSON.stringify(r));
+            console.log(r);
           })
           .catch((e) => {
             console.log(e);
