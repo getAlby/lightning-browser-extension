@@ -102,9 +102,13 @@ async function authWithPrompt(message, lnurlDetails) {
     .equalsIgnoreCase(message.origin.host)
     .first();
 
+  // we have the check the unlock status manually. The account can still be locked
+  // If it is locked we must show a prompt to unlock
+  const isUnlocked = state.getState().password !== null;
+
   let loginStatus = { confirmed: true, remember: true };
   // if there is no publisher or lnurlAuth is not enabled we prompt the user
-  if (!allowance || !allowance.lnurlAuth) {
+  if (!isUnlocked || !allowance || !allowance.lnurlAuth) {
     const { data } = await utils.openPrompt({
       ...message,
       type: "lnurlAuth",
