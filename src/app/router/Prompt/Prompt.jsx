@@ -2,6 +2,7 @@ import React from "react";
 import qs from "query-string";
 import { createHashHistory } from "history";
 import { HashRouter, Route, Switch } from "react-router-dom";
+import { parsePaymentRequest } from "invoices";
 
 import "./styles.scss";
 
@@ -11,7 +12,6 @@ import Enable from "../../screens/Enable";
 import Loading from "../../components/Loading";
 import ConfirmPayment from "../../screens/ConfirmPayment";
 import LNURLPay from "../../screens/LNURLPay";
-let invoiceParser = require("@node-lightning/invoice");
 
 class Prompt extends React.Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class Prompt extends React.Component {
     if (message.args) {
       args = JSON.parse(message.args);
       if (args.paymentRequest) {
-        invoice = invoiceParser.decode(args.paymentRequest);
+        invoice = parsePaymentRequest({ request: args.paymentRequest });
       }
     }
     this.state = { origin, args, invoice, type: message.type };
