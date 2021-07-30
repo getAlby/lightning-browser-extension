@@ -50,32 +50,29 @@ function LNURLPay({ details, origin }: Props) {
         return;
       }
 
-      // Once payment is fulfilled LN WALLET executes a non-null successAction
-      // LN WALLET should also store successAction data on the transaction record
-      let successCallback;
-      if (successAction) {
-        successCallback = () => {
-          switch (successAction.tag) {
-            case "url": // TODO: For url, the wallet should give the user a popup which displays description, url, and a 'open' button to open the url in a new browser tab
-              break;
-            case "message": // For message, a toaster or popup is sufficient
-              utils.notify({
-                message: successAction.message,
-              });
-              break;
-            case "aes": // TOOD: For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage
-              break;
-            default:
-              break;
-          }
-        };
-      }
-
       // LN WALLET pays the invoice, no additional user confirmation is required at this point
-      return await msg.reply({
-        confirmed: true,
+      return await utils.call("lnurlPay", {
+        message: { origin },
         paymentRequest,
-        successCallback,
+        // Once payment is fulfilled LN WALLET executes a non-null successAction
+        // LN WALLET should also store successAction data on the transaction record
+        successCallback: successAction
+          ? () => {
+              switch (successAction.tag) {
+                case "url": // TODO: For url, the wallet should give the user a popup which displays description, url, and a 'open' button to open the url in a new browser tab
+                  break;
+                case "message": // For message, a toaster or popup is sufficient
+                  utils.notify({
+                    message: successAction.message,
+                  });
+                  break;
+                case "aes": // TOOD: For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage
+                  break;
+                default:
+                  break;
+              }
+            }
+          : null,
       });
     } catch (e) {
       console.log(e.message);

@@ -58,7 +58,11 @@ async function sendPaymentWithPrompt(message, paymentRequestDetails) {
   }
 }
 
-function publishPaymentNotification(message, paymentRequestDetails, response) {
+export function publishPaymentNotification(
+  message,
+  paymentRequestDetails,
+  response
+) {
   let status = "success"; // default. let's hope for success
   if (response.data.payment_error) {
     status = "failed";
