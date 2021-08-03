@@ -21,4 +21,27 @@ const paymentFailedNotification = (message, data) => {
   });
 };
 
-export { paymentSuccessNotification, paymentFailedNotification };
+const lnurlAuthSuccessNotification = (message, data) => {
+  return utils.notify({
+    title: `Login to ${data.origin.name}`,
+    message: `Successfully logged into ${data.lnurlDetails.url.host}`,
+  });
+};
+
+const lnurlAuthFailedNotification = (message, data) => {
+  const reason =
+    data.authResponse &&
+    data.authResponse.data &&
+    data.authResponse.data.reason;
+  return utils.notify({
+    title: `Login failed`,
+    message: `${reason}`,
+  });
+};
+
+export {
+  paymentSuccessNotification,
+  paymentFailedNotification,
+  lnurlAuthSuccessNotification,
+  lnurlAuthFailedNotification
+};

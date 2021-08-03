@@ -57,6 +57,7 @@
     "crypto-js": "^4.0.0",
     "dayjs": "^1.10.6",
     "dexie": "^3.0.3",
+    "elliptic": "^6.5.4",
     "invoices": "^2.0.0",
     "lsat-js": "^2.0.0",
     "memoizee": "^0.4.15",
