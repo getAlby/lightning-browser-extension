@@ -1,15 +1,14 @@
 import PubSub from "pubsub-js";
+import { parsePaymentRequest } from "invoices";
 import utils from "../../../../common/lib/utils";
 import state from "../../state";
 import db from "../../db";
-
-const LNInvoices = require("invoices");
 
 const sendPayment = async (message, sender) => {
   PubSub.publish(`ln.sendPayment.start`, message);
 
   const paymentRequest = message.args.paymentRequest;
-  const paymentRequestDetails = LNInvoices.parsePaymentRequest({
+  const paymentRequestDetails = parsePaymentRequest({
     request: paymentRequest,
   });
 
@@ -59,7 +58,11 @@ async function sendPaymentWithPrompt(message, paymentRequestDetails) {
   }
 }
 
-function publishPaymentNotification(message, paymentRequestDetails, response) {
+export function publishPaymentNotification(
+  message,
+  paymentRequestDetails,
+  response
+) {
   let status = "success"; // default. let's hope for success
   if (response.data.payment_error) {
     status = "failed";

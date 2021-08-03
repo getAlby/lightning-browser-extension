@@ -1,5 +1,4 @@
 import axios from "axios";
-import PubSub from "pubsub-js";
 import { parsePaymentRequest } from "invoices";
 
 import sha256 from "crypto-js/sha256";
@@ -12,6 +11,7 @@ import utils from "../../../../common/lib/utils";
 import state from "../../state";
 import db from "../../db";
 import { bech32Decode } from "../../../../common/utils/helpers";
+import { publishPaymentNotification } from "../ln/sendpayment";
 
 const EC = require('elliptic').ec;
 const ec = new EC('secp256k1');
@@ -166,44 +166,36 @@ async function authWithPrompt(message, lnurlDetails) {
 }
 
 async function payWithPrompt(message, lnurlDetails) {
-  const { data } = await utils.openPrompt({
+  await utils.openPrompt({
     ...message,
     type: "lnurlPay",
     args: { ...message.args, lnurlDetails },
   });
-  const { confirmed, paymentRequest, successCallback } = data;
-  if (confirmed && paymentRequest) {
-    // to get the connector the account must be unlocked. The opened prompt also takes care of that
-    const connector = state.getState().getConnector();
-    const paymentRequestDetails = parsePaymentRequest({
-      request: paymentRequest,
-    });
-
-    try {
-      const response = await connector.sendPayment({
-        paymentRequest,
-      });
-      publishPaymentNotification(message, paymentRequestDetails, response);
-
-      if (successCallback) successCallback();
-
-      return response;
-    } catch (e) {
-      console.log(e.message);
-    }
-  }
 }
 
-function publishPaymentNotification(message, paymentRequestDetails, response) {
-  let status = "success"; // default. let's hope for success
-  if (response.data.payment_error) {
-    status = "failed";
-  }
-  PubSub.publish(`ln.sendPayment.${status}`, {
-    response,
-    paymentRequestDetails,
-    origin: message.origin,
+export async function lnurlPay(message, sender) {
+  const { paymentRequest, successCallback } = message.args;
+  const connector = state.getState().getConnector();
+  const paymentRequestDetails = parsePaymentRequest({
+    request: paymentRequest,
   });
+
+  try {
+    const response = await connector.sendPayment({
+      paymentRequest,
+    });
+    publishPaymentNotification(
+      message.args.message,
+      paymentRequestDetails,
+      response
+    );
+
+    if (successCallback) successCallback();
+
+    return response;
+  } catch (e) {
+    console.log(e.message);
+  }
 }
 
 export default lnurl;
