@@ -4,7 +4,7 @@
 
 ### A general browser extension to bring the Bitcoin Lightning network to the browser
 
-The extension provides deep Lighting Network integration for websites (for payments and authentication flows).
+The extension provides deep Lightning Network integration for websites (for payments and authentication flows).
 
 The goal is to write a minimal web extension to allow browsers to interact with the Lightning Network. It focusses on the web-payments process and does not try to be a full node UI with advanced channel-management or similar features. 
 
@@ -19,6 +19,7 @@ The extension can connect to different node implementations and supports custodi
 - [x] WebLN getInfo, sendPayment, makeInvoice support
 - [x] [LNURL-pay](https://xn--57h.bigsun.xyz/lnurl-pay-flow.txt) support
 - [x] [LNURL-auth](https://xn--57h.bigsun.xyz/lnurl-auth.html) support
+- [x] Payment history with additional website metadata
 - [ ] WebLN signMessage, verifyMessage support
 - [ ] [Lsat](https://lsat.tech/) support
 
