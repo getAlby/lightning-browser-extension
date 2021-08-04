@@ -24,6 +24,11 @@ The extension can connect to different node implementations and supports custodi
 - [ ] [Lsat](https://lsat.tech/) support
 
 
+## Join the conversation
+
+We have a channel on the [bitcoin.design](https://bitcoin.design/) Slack community. Come and join us! [#lightning-browser-extension](https://bitcoindesign.slack.com/archives/C02591ADXM2)
+
+
 ## Browser Support
 
 | [![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png)](/) | [![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png)](/) | [![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png)](/) | [![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png)](/) | [![Yandex](https://raw.github.com/alrra/browser-logos/master/src/yandex/yandex_48x48.png)](/) | [![Brave](https://raw.github.com/alrra/browser-logos/master/src/brave/brave_48x48.png)](/) | [![vivaldi](https://raw.github.com/alrra/browser-logos/master/src/vivaldi/vivaldi_48x48.png)](/) |
