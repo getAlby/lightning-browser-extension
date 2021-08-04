@@ -24,7 +24,7 @@ const paymentFailedNotification = (message, data) => {
 const lnurlAuthSuccessNotification = (message, data) => {
   return utils.notify({
     title: `Login to ${data.origin.name}`,
-    message: `Successfully logged into ${data.lnurlDetails.url.host}`,
+    message: `Successfully logged into ${data.lnurlDetails.domain}`,
   });
 };
 
@@ -43,5 +43,5 @@ export {
   paymentSuccessNotification,
   paymentFailedNotification,
   lnurlAuthSuccessNotification,
-  lnurlAuthFailedNotification
+  lnurlAuthFailedNotification,
 };

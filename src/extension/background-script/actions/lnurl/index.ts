@@ -34,6 +34,7 @@ async function lnurl(message) {
       lnurlType = res.data.tag;
     }
     lnurlDetails.domain = url.hostname;
+    lnurlDetails.url = url;
 
     switch (lnurlType) {
       case "channelRequest":
@@ -52,7 +53,7 @@ async function lnurl(message) {
         return;
     }
   } catch (e) {
-    console.log(e.message);
+    console.log(e);
   }
 }
 
