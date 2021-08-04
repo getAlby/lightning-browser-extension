@@ -3,8 +3,8 @@ import { parsePaymentRequest } from "invoices";
 
 import sha256 from "crypto-js/sha256";
 import hmacSHA256 from "crypto-js/hmac-sha256";
-import Base64 from 'crypto-js/enc-base64';
-import UTF8 from 'crypto-js/enc-utf8';
+import Base64 from "crypto-js/enc-base64";
+import UTF8 from "crypto-js/enc-utf8";
 import Hex from "crypto-js/enc-hex";
 
 import utils from "../../../../common/lib/utils";
@@ -13,11 +13,11 @@ import db from "../../db";
 import { bech32Decode } from "../../../../common/utils/helpers";
 import { publishPaymentNotification } from "../ln/sendpayment";
 
-const EC = require('elliptic').ec;
-const ec = new EC('secp256k1');
+const EC = require("elliptic").ec;
+const ec = new EC("secp256k1");
 
 const LNURLAUTH_CANONICAL_PHRASE =
-    'DO NOT EVER SIGN THIS TEXT WITH YOUR PRIVATE KEYS! IT IS ONLY USED FOR DERIVATION OF LNURL-AUTH HASHING-KEY, DISCLOSING ITS SIGNATURE WILL COMPROMISE YOUR LNURL-AUTH IDENTITY AND MAY LEAD TO LOSS OF FUNDS!';
+  "DO NOT EVER SIGN THIS TEXT WITH YOUR PRIVATE KEYS! IT IS ONLY USED FOR DERIVATION OF LNURL-AUTH HASHING-KEY, DISCLOSING ITS SIGNATURE WILL COMPROMISE YOUR LNURL-AUTH IDENTITY AND MAY LEAD TO LOSS OF FUNDS!";
 
 async function lnurl(message) {
   try {
@@ -73,28 +73,30 @@ async function auth(message, lnurlDetails) {
   // TODO: add assertions we got a valid signature, k1 and host
 
   const hashingKey = sha256(lnSignature).toString(Hex);
-  const linkingKeyPriv = hmacSHA256(lnurlDetails.url.host, hashingKey).toString(Hex);
+  const linkingKeyPriv = hmacSHA256(lnurlDetails.url.host, hashingKey).toString(
+    Hex
+  );
 
   const sk = ec.keyFromPrivate(linkingKeyPriv);
   const pk = sk.getPublic();
-  const pkHex = pk.encodeCompressed('hex');//pk.encode('hex')
+  const pkHex = pk.encodeCompressed("hex"); //pk.encode('hex')
 
   const k1Hex = utils.hexToUint8Array(lnurlDetails.k1);
   const signedMessage = sk.sign(k1Hex);
 
-  const signedMessageDERHex = signedMessage.toDER('hex');
+  const signedMessageDERHex = signedMessage.toDER("hex");
 
   const loginURL = lnurlDetails.url;
-  loginURL.searchParams.set('sig', signedMessageDERHex);
-  loginURL.searchParams.set('key', pkHex);
-  loginURL.searchParams.set('t', Date.now())
+  loginURL.searchParams.set("sig", signedMessageDERHex);
+  loginURL.searchParams.set("key", pkHex);
+  loginURL.searchParams.set("t", Date.now());
   const authResponse = await axios.get(loginURL);
 
   return authResponse;
 }
 
 async function authWithPrompt(message, lnurlDetails) {
-  PubSub.publish(`lnurl.auth.start`, {message, lnurlDetails});
+  PubSub.publish(`lnurl.auth.start`, { message, lnurlDetails });
 
   // get the publisher to check if lnurlAuth for auto-login is enabled
   let allowance = await db.allowances
@@ -112,7 +114,11 @@ async function authWithPrompt(message, lnurlDetails) {
     const { data } = await utils.openPrompt({
       ...message,
       type: "lnurlAuth",
-      args: { ...message.args, host: lnurlDetails.url.host, pathname: lnurlDetails.url.pathname },
+      args: {
+        ...message.args,
+        host: lnurlDetails.url.host,
+        pathname: lnurlDetails.url.pathname,
+      },
     });
     loginStatus = data;
   }
@@ -131,17 +137,17 @@ async function authWithPrompt(message, lnurlDetails) {
       });
 
       const reason = e.response?.data?.reason || e.message;
-      return { error: reason }
+      return { error: reason };
     }
 
     // if the service returned with a HTTP 200 we still check if the response data is OK
-    if (!authResponse.data.status.toUpperCase() === 'OK') {
+    if (!authResponse.data.status.toUpperCase() === "OK") {
       PubSub.publish(`lnurl.auth.failed`, {
         authResponse: authResponse,
         lnurlDetails,
         origin: message.origin,
       });
-      return { error: e.response?.data?.reason}
+      return { error: e.response?.data?.reason };
     }
 
     PubSub.publish(`lnurl.auth.success`, {
@@ -174,7 +180,7 @@ async function payWithPrompt(message, lnurlDetails) {
 }
 
 export async function lnurlPay(message, sender) {
-  const { paymentRequest, successCallback } = message.args;
+  const { paymentRequest } = message.args;
   const connector = state.getState().getConnector();
   const paymentRequestDetails = parsePaymentRequest({
     request: paymentRequest,
@@ -189,8 +195,6 @@ export async function lnurlPay(message, sender) {
       paymentRequestDetails,
       response
     );
-
-    if (successCallback) successCallback();
 
     return response;
   } catch (e) {

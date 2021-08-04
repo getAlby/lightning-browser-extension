@@ -51,29 +51,40 @@ function LNURLPay({ details, origin }: Props) {
       }
 
       // LN WALLET pays the invoice, no additional user confirmation is required at this point
-      return await utils.call("lnurlPay", {
+      const payment = await utils.call("lnurlPay", {
         message: { origin },
         paymentRequest,
-        // Once payment is fulfilled LN WALLET executes a non-null successAction
-        // LN WALLET should also store successAction data on the transaction record
-        successCallback: successAction
-          ? () => {
-              switch (successAction.tag) {
-                case "url": // TODO: For url, the wallet should give the user a popup which displays description, url, and a 'open' button to open the url in a new browser tab
-                  break;
-                case "message": // For message, a toaster or popup is sufficient
-                  utils.notify({
-                    message: successAction.message,
-                  });
-                  break;
-                case "aes": // TOOD: For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage
-                  break;
-                default:
-                  break;
-              }
-            }
-          : null,
       });
+
+      // Once payment is fulfilled LN WALLET executes a non-null successAction
+      // LN WALLET should also store successAction data on the transaction record
+      if (successAction && !payment.payment_error) {
+        switch (successAction.tag) {
+          case "url": // TODO: For url, the wallet should give the user a popup which displays description, url, and a 'open' button to open the url in a new browser tab
+            alert(successAction.description);
+            if (
+              window.confirm(
+                `${successAction.description} Do you want to open: ${successAction.url}?`
+              )
+            ) {
+              window.open(successAction.url);
+            }
+            break;
+          case "message":
+            utils.notify({
+              message: successAction.message,
+            });
+            break;
+          case "aes": // TODO: For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage
+          default:
+            alert(
+              `Not implemented yet. Please submit an issue to support success action: ${successAction.tag}`
+            );
+            break;
+        }
+      }
+
+      window.close();
     } catch (e) {
       console.log(e.message);
     }
