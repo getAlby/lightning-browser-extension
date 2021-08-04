@@ -1,41 +1,37 @@
 # Lightning Web Extension
 
-## STATUS: experimental
+## STATUS: alpha
 
 ### A general browser extension to bring the Bitcoin Lightning network to the browser
 
 The extension provides deep Lighting Network integration for websites (for payments and authentication flows).
 
-The goal is to write a minimal web extension to allow browsers to interact with the Lightning Network.
+The goal is to write a minimal web extension to allow browsers to interact with the Lightning Network. It focusses on the web-payments process and does not try to be a full node UI with advanced channel-management or similar features. 
 
 The extension implements the WebLN standard as the interface that allows websites to connect to Lightning Network nodes (to request payments, invoices, signatures, login, etc.)
 
-The extension can connect to different node implementation and supports custodial and non-custodial setups.
-E.g.:
+The extension can connect to different node implementations and supports custodial and non-custodial setups.
 
-- [Remote LND](https://github.com/bumi/lightning-browser-extension/blob/master/src/lib/connectors/lnd.js)
-- [Local native companion apps](https://github.com/bumi/lightning-browser-extension/blob/master/src/lib/connectors/native.js) (e.g. zaphq or native wallet apps)
-- [LNBits](https://github.com/bumi/lightning-browser-extension/blob/master/src/lib/connectors/lnbits.js)
-- [LNDHub](https://github.com/bumi/lightning-browser-extension/blob/master/src/lib/connectors/lndhub.js)
-- ...
+## Some Features
 
-## Architecture idea
+- [x] Custom budgets/allowances for websites to allow payment streams/auto-payments 
+- [x] Multiple accounts and support for different node backends (lnd, etc.)
+- [x] WebLN getInfo, sendPayment, makeInvoice support
+- [x] [LNURL-pay](https://xn--57h.bigsun.xyz/lnurl-pay-flow.txt) support
+- [x] [LNURL-auth](https://xn--57h.bigsun.xyz/lnurl-auth.html) support
+- [ ] WebLN signMessage, verifyMessage support
+- [ ] [Lsat](https://lsat.tech/) support
 
-![architecture](/doc/ln-browser-architecture.png)
-
-## General Ideas
-
-- Focus on the web-payment process, no channel-management or similar
-- Support to connect multiple wallets (LND, C-Lightning, local wallet UIs (e.g. Zap), custodial (e.g. lnbits), native embedded wallet)
-- [LNURL-pay](https://xn--57h.bigsun.xyz/lnurl-pay-flow.txt) support
-- [LNURL-auth](https://xn--57h.bigsun.xyz/lnurl-auth.html) support
-- [Lsat](https://lsat.tech/) support
 
 ## Browser Support
 
 | [![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png)](/) | [![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png)](/) | [![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png)](/) | [![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png)](/) | [![Yandex](https://raw.github.com/alrra/browser-logos/master/src/yandex/yandex_48x48.png)](/) | [![Brave](https://raw.github.com/alrra/browser-logos/master/src/brave/brave_48x48.png)](/) | [![vivaldi](https://raw.github.com/alrra/browser-logos/master/src/vivaldi/vivaldi_48x48.png)](/) |
 | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
 | 49 & later ✔                                                                                  | 52 & later ✔                                                                                     | 36 & later ✔                                                                               | 79 & later ✔                                                                            | Latest ✔                                                                                      | Latest ✔                                                                                   | Latest ✔                                                                                         |
+
+## Architecture idea
+
+![architecture](/doc/ln-browser-architecture.png)
 
 ## Project Structure
 
