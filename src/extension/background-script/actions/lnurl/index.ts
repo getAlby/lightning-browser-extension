@@ -24,19 +24,16 @@ async function lnurl(message) {
     const lnurlDecoded = bech32Decode(message.args.lnurlEncoded);
     const url = new URL(lnurlDecoded);
     let lnurlType = url.searchParams.get("tag");
-    let lnurlDetails;
-
+    let lnurlDetails = {};
     if (lnurlType === "login") {
-      lnurlDetails = {
-        k1: url.searchParams.get("k1"),
-        action: url.searchParams.get("action"),
-        url,
-      };
+      lnurlDetails.k1 = url.searchParams.get("k1");
+      lnurlDetails.action = url.searchParams.get("action");
     } else {
       const res = await axios.get(lnurlDecoded);
       lnurlDetails = res.data;
       lnurlType = res.data.tag;
     }
+    lnurlDetails.domain = url.hostname;
 
     switch (lnurlType) {
       case "channelRequest":
@@ -116,8 +113,7 @@ async function authWithPrompt(message, lnurlDetails) {
       type: "lnurlAuth",
       args: {
         ...message.args,
-        host: lnurlDetails.url.host,
-        pathname: lnurlDetails.url.pathname,
+        lnurlDetails,
       },
     });
     loginStatus = data;

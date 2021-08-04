@@ -7,11 +7,9 @@ import utils from "../../common/lib/utils";
 import Button from "../components/button";
 import PublisherCard from "../components/PublisherCard";
 
-
 type Props = {
   details: {
-    host: string;
-    pathname: string;
+    domain: string;
     k1: string;
   };
   origin: {
@@ -21,7 +19,6 @@ type Props = {
 };
 
 function LNURLAuth({ details, origin }: Props) {
-
   async function confirm() {
     return await msg.reply({
       confirmed: true,
@@ -39,8 +36,10 @@ function LNURLAuth({ details, origin }: Props) {
       <PublisherCard title={origin.name} image={origin.icon} />
       <div className="p-6">
         <dl className="shadow p-4 rounded-lg mb-8">
-          <dt className="font-semibold text-gray-500">{origin.name} asks you to login to</dt>
-          <dd className="mb-6">{details.host}</dd>
+          <dt className="font-semibold text-gray-500">
+            {origin.name} asks you to login to
+          </dt>
+          <dd className="mb-6">{details.domain}</dd>
         </dl>
         <div className="text-center">
           <div className="mb-5">

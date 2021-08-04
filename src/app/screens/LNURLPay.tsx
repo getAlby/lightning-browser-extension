@@ -13,6 +13,7 @@ type Props = {
     minSendable: number;
     maxSendable: number;
     callback: string;
+    domain: string;
   };
   origin: {
     name: string;
@@ -123,7 +124,7 @@ function LNURLPay({ details, origin }: Props) {
       <div className="p-6">
         <dl className="shadow p-4 rounded-lg mb-8">
           <dt className="font-semibold text-gray-500">Send payment to</dt>
-          <dd className="mb-6">{origin.name}</dd>
+          <dd className="mb-6">{details.domain}</dd>
           <dt className="font-semibold text-gray-500">Amount</dt>
           <dd>{renderAmount()}</dd>
         </dl>

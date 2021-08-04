@@ -69,10 +69,7 @@ class Prompt extends React.Component {
             </Route>
             <Route exact path="/lnurlAuth">
               <LNURLAuth
-                details={{
-                  host: this.state.args?.host,
-                  pathname: this.state.args?.pathname,
-                }}
+                details={this.state.args?.lnurlDetails}
                 origin={this.state.origin}
               />
             </Route>
