@@ -7,14 +7,16 @@ if (document) {
   const donation = new Donation(document.location.toString());
   donation.execute();
 
-  // Intercept any `lightning:{paymentReqest}` requests
+  // Intercept any `lightning:` requests
   window.addEventListener("click", (ev) => {
     const target = ev.target;
     if (!target || !target.closest) {
       return;
     }
-    const lightningLink = target.closest('[href^="lightning:"]');
-    const bitcoinLinkWithLighting = target.closest('[href*="lightning=lnbc"]');
+    const lightningLink = target.closest('[href^="lightning:" i]');
+    const bitcoinLinkWithLighting = target.closest(
+      '[href*="lightning=lnbc" i]'
+    );
     let href;
     let paymentRequest;
 
@@ -24,7 +26,7 @@ if (document) {
     ev.preventDefault();
 
     if (lightningLink) {
-      href = lightningLink.getAttribute("href");
+      href = lightningLink.getAttribute("href").toLowerCase();
       paymentRequest = href.replace("lightning:", "");
     } else if (bitcoinLinkWithLighting) {
       href = bitcoinLinkWithLighting.getAttribute("href");
@@ -41,6 +43,17 @@ if (document) {
     window.webln.enable().then((response) => {
       if (!response.enabled) {
         return;
+      }
+      if (paymentRequest.toLowerCase().startsWith("lnurl")) {
+        return window.webln
+          .lnurl(paymentRequest)
+          .then((r) => {
+            console.log(r);
+          })
+          .catch((e) => {
+            console.log(e);
+            alert(`Error: ${e.message}`);
+          });
       }
       return window.webln
         .sendPayment(paymentRequest)

@@ -11,6 +11,8 @@ import Unlock from "../../screens/Unlock";
 import Enable from "../../screens/Enable";
 import Loading from "../../components/Loading";
 import ConfirmPayment from "../../screens/ConfirmPayment";
+import LNURLPay from "../../screens/LNURLPay";
+import LNURLAuth from "../../screens/LNURLAuth";
 
 class Prompt extends React.Component {
   constructor(props) {
@@ -26,7 +28,9 @@ class Prompt extends React.Component {
     }
     if (message.args) {
       args = JSON.parse(message.args);
-      invoice = parsePaymentRequest({ request: args.paymentRequest });
+      if (args.paymentRequest) {
+        invoice = parsePaymentRequest({ request: args.paymentRequest });
+      }
     }
     this.state = { origin, args, invoice, type: message.type };
   }
@@ -57,6 +61,18 @@ class Prompt extends React.Component {
               path="/enable"
               render={(props) => <Enable origin={this.state.origin} />}
             />
+            <Route exact path="/lnurlPay">
+              <LNURLPay
+                details={this.state.args?.lnurlDetails}
+                origin={this.state.origin}
+              />
+            </Route>
+            <Route exact path="/lnurlAuth">
+              <LNURLAuth
+                details={this.state.args?.lnurlDetails}
+                origin={this.state.origin}
+              />
+            </Route>
             <Route
               exact
               path="/sendPayment"
