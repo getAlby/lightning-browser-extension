@@ -14,6 +14,28 @@ setInterval(() => {
 }, 5000);
 */
 
+const updateIcon = async (tabId, changeInfo, tabInfo) => {
+  if (!changeInfo.url) {
+    return;
+  }
+  if (!changeInfo.url.startsWith("http")) {
+    return;
+  }
+  const url = new URL(changeInfo.url);
+
+  const allowance = await db.allowances
+    .where("host")
+    .equalsIgnoreCase(url.host)
+    .first();
+
+  if (allowance) {
+    return browser.browserAction.setIcon({
+      path: "assets/icons/satsymbol.svg",
+      tabId: tabId,
+    });
+  }
+};
+
 const debugLogger = (message, sender) => {
   if (state.getState().settings.debug) {
     console.log("Background onMessage: ", message, sender);
@@ -69,6 +91,7 @@ async function init() {
 
   browser.runtime.onInstalled.addListener(handleInstalled);
 
+  browser.tabs.onUpdated.addListener(updateIcon);
   /*
   if (settings.enableLsats) {
     await browser.storage.sync.set({ lsats: {} });
