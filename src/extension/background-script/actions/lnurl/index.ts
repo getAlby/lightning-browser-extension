@@ -11,7 +11,7 @@ import utils from "../../../../common/lib/utils";
 import state from "../../state";
 import db from "../../db";
 import { bech32Decode } from "../../../../common/utils/helpers";
-import { publishPaymentNotification } from "../ln/sendpayment";
+import { publishPaymentNotification } from "../ln/sendPayment";
 
 const EC = require("elliptic").ec;
 const ec = new EC("secp256k1");
