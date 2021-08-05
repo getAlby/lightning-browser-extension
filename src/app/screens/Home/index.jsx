@@ -57,7 +57,6 @@ class Home extends React.Component {
       );
     });
     utils.call("getTransactions").then((result) => {
-      console.log(result);
       this.setState({
         transactions: result?.transactions,
         loadingTransactions: false,
@@ -161,7 +160,7 @@ class Home extends React.Component {
       <div>
         <Navbar
           title={alias}
-          subtitle={balance && balanceFiat ? `${balance} (${balanceFiat})` : ""}
+          subtitle={typeof balance === "number" ? `${balance} Sats` : ""}
           right={<UserMenu />}
         />
         {allowance ? this.renderAllowanceView() : this.renderDefaultView()}

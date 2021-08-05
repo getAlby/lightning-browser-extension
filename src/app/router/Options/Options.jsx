@@ -24,7 +24,11 @@ function Options() {
     <HashRouter>
       <Navbar
         title={accountInfo.alias}
-        subtitle={accountInfo.balance}
+        subtitle={
+          typeof accountInfo.balance === "number"
+            ? `${accountInfo.balance} Sats`
+            : ""
+        }
         right={<UserMenu />}
       >
         <Navbar.Link href="/publishers">Publishers</Navbar.Link>
