@@ -37,15 +37,27 @@ export default function SetPassword() {
   }
 
   return (
-    <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
-      <div className="relative">
-        <h1 className="text-3xl font-bold mt-4">Create your password</h1>
-        <p className="text-gray-500 mt-6">
-          You need to set a password so we can lock the wallet when it’s not
-          being used. Payments are never made without decrypting your secure
-          credentials.
-        </p>
-        <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
+      <div className="relative lg:grid lg:grid-cols-3 lg:gap-x-8 mt-20">
+        <div className="lg:col-span-1 ml-12 mt-8">
+          <div className="h-32 max-w-xs">
+            <img
+              src="assets/icons/satsymbol.svg"
+              alt="Sats"
+              className="max-w-xs"
+            />
+          </div>
+          <h2 className="mt-10 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+            The power of lightning in your browser
+          </h2>
+        </div>
+        <div className="lg:col-span-2">
+          <h1 className="text-3xl font-bold mt-4">Create your password</h1>
+          <p className="text-gray-500 mt-6">
+            You need to set a password so we can lock the wallet when it’s not
+            being used. Payments are never made without decrypting your secure
+            credentials.
+          </p>
           <div className="w-4/5">
             <div className="mt-6">
               <label
@@ -80,16 +92,11 @@ export default function SetPassword() {
               </div>
             </div>
           </div>
-          <div className="mt-8 w-2/5">
-            <Button label="Next" type="submit" />
-          </div>
-        </form>
+        </div>
       </div>
-
-      <div
-        className="mt-10 -mx-4 relative lg:mt-0 lg:flex lg:items-center"
-        aria-hidden="true"
-      ></div>
-    </div>
+      <div className="sm:py-16 sm:px-6 lg:px-8 float-right">
+        <Button label="Next" type="submit" />
+      </div>
+    </form>
   );
 }
