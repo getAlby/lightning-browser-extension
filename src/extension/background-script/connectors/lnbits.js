@@ -1,41 +1,36 @@
-import memoizee from "memoizee";
 import Base from "./base";
 
 class LnBits extends Base {
-  constructor(config) {
-    super(config);
-    this.getInfo = memoizee(
-      (args) =>
-        this.request(
-          "GET",
-          "/api/v1/wallet",
-          this.config.readkey,
-          undefined,
-          {}
-        ),
-      {
-        promise: true,
-        maxAge: 20000,
-        preFetch: true,
-        normalizer: () => "getinfo",
-      }
-    );
-    this.getBalance = memoizee(
-      (args) =>
-        this.request(
-          "GET",
-          "/api/v1/wallet",
-          this.config.readkey,
-          undefined,
-          {}
-        ),
-      {
-        promise: true,
-        maxAge: 20000,
-        preFetch: true,
-        normalizer: () => "balance",
-      }
-    );
+  getInfo() {
+    return this.request(
+      "GET",
+      "/api/v1/wallet",
+      this.config.readkey,
+      undefined,
+      {}
+    ).then((data) => {
+      return {
+        data: {
+          alias: data.name,
+        },
+      };
+    });
+  }
+
+  getBalance() {
+    return this.request(
+      "GET",
+      "/api/v1/wallet",
+      this.config.readkey,
+      undefined,
+      {}
+    ).then((data) => {
+      return {
+        data: {
+          balance: data.balance,
+        },
+      };
+    });
   }
 
   sendPayment(message) {
@@ -74,9 +69,7 @@ class LnBits extends Base {
     if (defaultValues) {
       data = Object.assign(Object.assign({}, defaultValues), data);
     }
-    // TODO: specify and follow API
-    data.alias = data.name;
-    return { data };
+    return data;
   }
 }
 

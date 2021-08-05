@@ -2,30 +2,28 @@ import memoizee from "memoizee";
 import Base from "./base";
 
 export default class LndHub extends Base {
-  constructor(config) {
-    super(config);
-    this.getInfo = memoizee(
-      (args) => this.request("GET", "/getinfo", undefined, {}),
-      {
-        promise: true,
-        maxAge: 20000,
-        preFetch: true,
-        normalizer: () => "getinfo",
-      }
-    );
-    this.getBalance = memoizee(
-      (args) => this.request("GET", "/balance", undefined, {}),
-      {
-        promise: true,
-        maxAge: 20000,
-        preFetch: true,
-        normalizer: () => "balance",
-      }
-    );
-  }
-
   async init() {
     return this.authorize();
+  }
+
+  getInfo() {
+    return this.request("GET", "/getinfo", undefined, {}).then((data) => {
+      return {
+        data: {
+          alias: data.alias,
+        },
+      };
+    });
+  }
+
+  getBalance() {
+    return this.request("GET", "/balance", undefined, {}).then((data) => {
+      return {
+        data: {
+          balance: data.BTC.AvailableBalance,
+        },
+      };
+    });
   }
 
   sendPayment(message) {
@@ -119,6 +117,6 @@ export default class LndHub extends Base {
     if (defaultValues) {
       data = Object.assign(Object.assign({}, defaultValues), data);
     }
-    return { data };
+    return data;
   }
 }
