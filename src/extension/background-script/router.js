@@ -40,6 +40,7 @@ const routes = {
   selectAccount: accounts.select,
   reset: setup.reset,
   status: setup.status,
+  validateAccount: setup.validateAccount,
 };
 
 const router = (path) => {
