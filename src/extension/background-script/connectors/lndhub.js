@@ -1,4 +1,5 @@
 import memoizee from "memoizee";
+import axios from "axios";
 import Base from "./base";
 
 export default class LndHub extends Base {
@@ -26,11 +27,25 @@ export default class LndHub extends Base {
     });
   }
 
-  sendPayment(message) {
-    return super.sendPayment(message, () => {
-      this.request("POST", "/payinvoice", {
-        invoice: message.args.paymentRequest,
-      });
+  sendPayment(args) {
+    return this.request("POST", "/payinvoice", {
+      invoice: args.paymentRequest,
+    }).then((data) => {
+      if (
+        typeof data.payment_hash === "object" &&
+        data.payment_hash.type === "Buffer"
+      ) {
+        data.payment_hash = Buffer.from(data.payment_hash.data).toString("hex");
+      }
+      if (
+        typeof data.payment_preimage === "object" &&
+        data.payment_preimage.type === "Buffer"
+      ) {
+        data.payment_preimage = Buffer.from(
+          data.payment_preimage.data
+        ).toString("hex");
+      }
+      return { data };
     });
   }
 
@@ -38,6 +53,8 @@ export default class LndHub extends Base {
     return this.request("POST", "/addinvoice", {
       amt: args.amount,
       memo: args.defaultMemo,
+    }).then((data) => {
+      return { data };
     });
   }
 
@@ -83,40 +100,40 @@ export default class LndHub extends Base {
     if (!this.access_token) {
       await this.authorize();
     }
-    let body = null;
-    let query = "";
-    const headers = new Headers();
-    headers.append("Accept", "application/json");
-    headers.append("Access-Control-Allow-Origin", "*");
-    headers.append("Content-Type", "application/json");
-    headers.append("Authorization", `Bearer ${this.access_token}`);
 
+    const reqConfig = {
+      method: method,
+      url: this.config.url + path,
+      responseType: "json",
+      headers: {
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.access_token}`,
+      },
+    };
     if (method === "POST") {
-      body = JSON.stringify(args);
+      reqConfig.data = args;
     } else if (args !== undefined) {
-      query = `?`; //`?${stringify(args)}`;
+      reqConfig.params = args;
     }
-    const res = await fetch(this.config.url + path + query, {
-      method,
-      headers,
-      body,
-    });
-    if (!res.ok) {
-      const errBody = await res.json();
-      console.log("errBody", errBody);
-      throw new Error(errBody);
-    }
-    let data = await res.json();
-    if (data && data.error) {
-      if (data.code * 1 === 1 && !this.noRetry) {
-        await this.authorize();
-        this.noRetry = true;
-        return this.request(method, path, args, defaultValues);
+    try {
+      const res = await axios(reqConfig);
+      let data = res.data;
+      if (data && data.error) {
+        if (data.code * 1 === 1 && !this.noRetry) {
+          await this.authorize();
+          this.noRetry = true;
+          return this.request(method, path, args, defaultValues);
+        }
       }
+      if (defaultValues) {
+        data = Object.assign(Object.assign({}, defaultValues), data);
+      }
+      return data;
+    } catch (e) {
+      console.log(e);
+      throw new Error(error.response.data);
     }
-    if (defaultValues) {
-      data = Object.assign(Object.assign({}, defaultValues), data);
-    }
-    return data;
   }
 }
