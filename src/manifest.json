@@ -11,7 +11,7 @@
   },
   "description": "Lightning up the browser",
   "homepage_url": "https://github.com/bumi/lightning-browser-extension",
-  "web_accessible_resources": ["js/inpageScript.bundle.js", "lsat.html"],
+  "web_accessible_resources": ["js/inpageScript.bundle.js"],
   "permissions": [
     "nativeMessaging",
     "notifications",
@@ -31,7 +31,7 @@
 
   "__firefox__browser_specific_settings": {
     "gecko": {
-      "id": "{424FB1AD-CC3B-4856-B6A0-7786F8CA9D17}"
+      "id": "{9d83fc85-eb3a-4877-88e3-94b3c558383c}"
     }
   },
 
