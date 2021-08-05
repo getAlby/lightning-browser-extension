@@ -84,6 +84,7 @@ export default function ConnectLnbits() {
                   name="readkey"
                   type="text"
                   required
+                  autoFocus
                   onChange={handleChange}
                 />
               </div>
@@ -112,6 +113,7 @@ export default function ConnectLnbits() {
                 <Input
                   name="url"
                   type="text"
+                  value={formData.url}
                   required
                   onChange={handleChange}
                 />

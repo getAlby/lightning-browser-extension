@@ -70,6 +70,7 @@ export default function SetPassword() {
                 <Input
                   name="password"
                   type="password"
+                  autoFocus
                   required
                   onChange={handleChange}
                 />

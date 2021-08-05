@@ -7,6 +7,8 @@ export default function Input({
   type = "text",
   required = false,
   onChange,
+  value,
+  autoFocus = false,
 }) {
   return (
     <input
@@ -17,6 +19,8 @@ export default function Input({
       placeholder={placeholder}
       required={required}
       onChange={onChange}
+      value={value}
+      autoFocus={autoFocus}
     />
   );
 }

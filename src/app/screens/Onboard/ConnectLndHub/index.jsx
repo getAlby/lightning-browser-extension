@@ -113,6 +113,7 @@ export default function ConnectLndHub() {
                   name="url"
                   type="text"
                   required
+                  value={formData.url}
                   onChange={handleChange}
                 />
               </div>
