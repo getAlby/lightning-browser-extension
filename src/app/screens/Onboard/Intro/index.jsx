@@ -18,7 +18,7 @@ const features = [
     icon: LightningBoltIcon,
   },
   {
-    name: "No annoying paywalls",
+    name: "No more annoying paywalls",
     description:
       "Define individual budgets for websites to enable seamless payment streams. No more annoying paywalls.",
     icon: KeyIcon,
