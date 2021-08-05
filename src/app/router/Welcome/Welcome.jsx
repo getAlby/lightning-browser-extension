@@ -14,14 +14,14 @@ import ConnectLnd from "../../screens/Onboard/ConnectLnd";
 import TestConnection from "../../screens/Onboard/TestConnection";
 
 const routes = [
-  { path: "/", component: Intro, exact: true },
-  { path: "/set-password", component: SetPassword },
-  { path: "/connect-lnd", component: ConnectLnd },
-  { path: "/test-connection", component: TestConnection },
+  { path: "/", component: Intro, exact: true, name: "Welcome" },
+  { path: "/set-password", component: SetPassword, name: "Your Password" },
+  { path: "/connect-lnd", component: ConnectLnd, name: "Connect to Lightning" },
+  { path: "/test-connection", component: TestConnection, name: "Done" },
 ];
 
 const initialSteps = routes.map((route, index) => ({
-  id: `Step ${index + 1}`,
+  id: route.name,
   href: route.path,
   status: "upcoming",
 }));
