@@ -9,6 +9,9 @@ const steps = [
 ];
 
 export const Primary = () => <Steps steps={steps} />;
+export const WithoutLinks = () => (
+  <Steps steps={steps.map((s) => ({ ...s, href: null }))} />
+);
 
 export default {
   title: "Components/Steps",
