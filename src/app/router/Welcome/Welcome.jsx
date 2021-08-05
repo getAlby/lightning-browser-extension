@@ -22,7 +22,6 @@ const routes = [
 
 const initialSteps = routes.map((route, index) => ({
   id: route.name,
-  href: route.path,
   status: "upcoming",
 }));
 
