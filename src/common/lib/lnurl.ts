@@ -1,8 +1,27 @@
+import axios from "axios";
 import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
 
+import { bech32Decode } from "../utils/helpers";
+
 const lnurl = {
+  async getDetails(lnurlEncoded) {
+    const lnurlDecoded = bech32Decode(lnurlEncoded);
+    const url = new URL(lnurlDecoded);
+    let lnurlDetails = {};
+    lnurlDetails.tag = url.searchParams.get("tag");
+    if (lnurlDetails.tag === "login") {
+      lnurlDetails.k1 = url.searchParams.get("k1");
+      lnurlDetails.action = url.searchParams.get("action");
+    } else {
+      const res = await axios.get(lnurlDecoded);
+      lnurlDetails = res.data;
+    }
+    lnurlDetails.domain = url.hostname;
+    lnurlDetails.url = url;
+    return lnurlDetails;
+  },
   async verifyInvoice({ paymentInfo, metadata, amount }) {
     const paymentRequestDetails = parsePaymentRequest({
       request: paymentInfo.pr,

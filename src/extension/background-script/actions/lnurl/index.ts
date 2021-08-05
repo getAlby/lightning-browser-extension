@@ -8,9 +8,9 @@ import UTF8 from "crypto-js/enc-utf8";
 import Hex from "crypto-js/enc-hex";
 
 import utils from "../../../../common/lib/utils";
+import lnurlLib from "../../../../common/lib/lnurl";
 import state from "../../state";
 import db from "../../db";
-import { bech32Decode } from "../../../../common/utils/helpers";
 import { publishPaymentNotification } from "../ln/sendPayment";
 
 const EC = require("elliptic").ec;
@@ -21,22 +21,9 @@ const LNURLAUTH_CANONICAL_PHRASE =
 
 async function lnurl(message) {
   try {
-    const lnurlDecoded = bech32Decode(message.args.lnurlEncoded);
-    const url = new URL(lnurlDecoded);
-    let lnurlType = url.searchParams.get("tag");
-    let lnurlDetails = {};
-    if (lnurlType === "login") {
-      lnurlDetails.k1 = url.searchParams.get("k1");
-      lnurlDetails.action = url.searchParams.get("action");
-    } else {
-      const res = await axios.get(lnurlDecoded);
-      lnurlDetails = res.data;
-      lnurlType = res.data.tag;
-    }
-    lnurlDetails.domain = url.hostname;
-    lnurlDetails.url = url;
+    const lnurlDetails = await lnurlLib.getDetails(message.args.lnurlEncoded);
 
-    switch (lnurlType) {
+    switch (lnurlDetails.tag) {
       case "channelRequest":
         console.log("lnurl-channel");
         return;
