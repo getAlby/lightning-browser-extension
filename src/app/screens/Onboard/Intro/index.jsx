@@ -1,60 +1,38 @@
 import React from "react";
-import FAQs from "./faqs";
 import Features from "./features";
+import Button from "../../../components/button";
 import {
-  GlobeAltIcon,
   LightningBoltIcon,
-  MailIcon,
   ArrowRightIcon,
-  ScaleIcon,
+  EyeOffIcon,
+  CodeIcon,
+  KeyIcon,
 } from "@heroicons/react/outline";
 import { useHistory } from "react-router-dom";
 
 const features = [
   {
-    name: "Competitive rates",
+    name: "Send in One Click",
     description:
-      "Consequuntur omnis dicta cumque, inventore atque ab dolores aspernatur tempora ab doloremque.",
-    icon: GlobeAltIcon,
-  },
-  {
-    name: "No hidden fees",
-    description:
-      "Corporis quisquam nostrum nulla veniam recusandae temporibus aperiam officia incidunt at distinctio ratione.",
-    icon: ScaleIcon,
-  },
-  {
-    name: "Instant transfers",
-    description:
-      "Omnis, illo delectus? Libero, possimus nulla nemo tenetur adipisci repellat dolore eligendi velit doloribus mollitia.",
+      "Lightning transactions happen all in your browser. No alt+tab or QR-code scanning needed.",
     icon: LightningBoltIcon,
   },
   {
-    name: "Reminder emails",
+    name: "No annoying paywalls",
     description:
-      "Veniam necessitatibus reiciendis fugit explicabo dolorem nihil et omnis assumenda odit? Quisquam unde accusantium.",
-    icon: MailIcon,
-  },
-];
-
-const faqs = [
-  {
-    id: 1,
-    question: "What's the lightning network?",
-    answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "Define individual budgets for websites to enable seamless payment streams. No more annoying paywalls.",
+    icon: KeyIcon,
   },
   {
-    id: 2,
-    question: "What a lightning network transaction cost?",
-    answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+    name: "Privacy first",
+    description: "Use lightning to authenticate and control your privacy.",
+    icon: EyeOffIcon,
   },
   {
-    id: 3,
-    question: "What are other applications of the ln?",
-    answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+    name: "Free and Open Source",
+    description:
+      "Completely open code that can be audited by anyone. No stats or trackers. You are in control.",
+    icon: CodeIcon,
   },
 ];
 
@@ -65,27 +43,26 @@ export default function Intro() {
     <div>
       <div className="relative lg:grid lg:grid-cols-3 lg:gap-x-8 mt-20">
         <div className="lg:col-span-1 ml-12 mt-8">
-          <div className="h-32">
-            <img src="https://i.ibb.co/3F3mCkR/logox.png" />
+          <div className="h-32 max-w-xs">
+            <img
+              src="assets/icons/satsymbol.svg"
+              alt="Sats"
+              className="max-w-xs"
+            />
           </div>
           <h2 className="mt-10 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-            A better way to send money.
+            The power of lightning in your browser
           </h2>
         </div>
         <Features features={features} />
       </div>
-      <div className="sm:py-16 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto divide-y-2 divide-gray-200 mr-0">
-          <FAQs faqs={faqs} />
-        </div>
+      <div className="sm:py-16 sm:px-6 lg:px-8 float-right">
+        <Button
+          onClick={() => history.push("/set-password")}
+          type="button"
+          label="Get Started"
+        ></Button>
       </div>
-      <button
-        onClick={() => history.push("/set-password")}
-        type="button"
-        className="mr-5 float-right inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-orange-bitcoin hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-      >
-        <ArrowRightIcon className="h-6 w-6" aria-hidden="true" />
-      </button>
     </div>
   );
 }

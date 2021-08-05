@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ArrowRightIcon } from "@heroicons/react/outline";
 import Input from "../../../components/Form/input";
 import Button from "../../../components/button";
 import { useHistory } from "react-router-dom";
@@ -38,16 +39,12 @@ export default function SetPassword() {
   return (
     <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
       <div className="relative">
-        <div className="h-32">
-          <img className="mb-12" src="https://i.ibb.co/3F3mCkR/logox.png" />
-        </div>
-        <h1 className="text-3xl font-bold mt-4">Secure the bag!</h1>
+        <h1 className="text-3xl font-bold mt-4">Create your password</h1>
         <p className="text-gray-500 mt-6">
           You need to set a password so we can lock the wallet when it’s not
-          being used. The browser is not the most secure environment and access
-          to your node needs to be kept private when not in use.
+          being used. Payments are never made without decrypting your secure
+          credentials.
         </p>
-        <p className="text-orange-bitcoin mt-2">Check out this guides.</p>
         <form onSubmit={handleSubmit}>
           <div className="w-4/5">
             <div className="mt-6">
@@ -84,7 +81,7 @@ export default function SetPassword() {
             </div>
           </div>
           <div className="mt-8 w-2/5">
-            <Button label="Let's GOO!" type="submit" />
+            <Button label="Next" type="submit" />
           </div>
         </form>
       </div>
@@ -92,9 +89,7 @@ export default function SetPassword() {
       <div
         className="mt-10 -mx-4 relative lg:mt-0 lg:flex lg:items-center"
         aria-hidden="true"
-      >
-        <img src="https://i.ibb.co/QfF1PP6/Frame-20.png" />
-      </div>
+      ></div>
     </div>
   );
 }
