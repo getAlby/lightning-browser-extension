@@ -20,9 +20,8 @@ const routes = [
   { path: "/test-connection", component: TestConnection, name: "Done" },
 ];
 
-const initialSteps = routes.map((route, index) => ({
+const initialSteps = routes.map((route) => ({
   id: route.name,
-  href: route.path,
   status: "upcoming",
 }));
 
