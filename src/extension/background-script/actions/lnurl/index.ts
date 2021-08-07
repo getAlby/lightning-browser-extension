@@ -1,4 +1,5 @@
 import axios from "axios";
+import PubSub from "pubsub-js";
 import { parsePaymentRequest } from "invoices";
 
 import sha256 from "crypto-js/sha256";
@@ -75,7 +76,13 @@ async function auth(message, lnurlDetails) {
   loginURL.searchParams.set("sig", signedMessageDERHex);
   loginURL.searchParams.set("key", pkHex);
   loginURL.searchParams.set("t", Date.now());
-  const authResponse = await axios.get(loginURL);
+  let authResponse;
+  try {
+    authResponse = await axios.get(loginURL);
+  } catch (e) {
+    const error = authResponse?.data?.reason || e.message; // lnurl error or exception message
+    throw new Error(error);
+  }
 
   return authResponse;
 }
@@ -114,14 +121,15 @@ async function authWithPrompt(message, lnurlDetails) {
       // Sign the message and do the authentication request to the service
       authResponse = await auth(message, lnurlDetails);
     } catch (e) {
+      console.log("LNURL-auth failed");
+      console.log(e);
       PubSub.publish(`lnurl.auth.failed`, {
-        authResponse: e.response,
+        error: e.message,
         lnurlDetails,
         origin: message.origin,
       });
 
-      const reason = e.response?.data?.reason || e.message;
-      return { error: reason };
+      return { error: e.message };
     }
 
     // if the service returned with a HTTP 200 we still check if the response data is OK
