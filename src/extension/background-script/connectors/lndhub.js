@@ -36,6 +36,10 @@ export default class LndHub extends Base {
     });
   }
 
+  signMessage(args) {
+    return Promise.reject(new Error("Not supported with Lndhub"));
+  }
+
   makeInvoice(args) {
     return this.request("POST", "/addinvoice", {
       amt: args.amount,

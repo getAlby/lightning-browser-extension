@@ -29,13 +29,9 @@ const lnurlAuthSuccessNotification = (message, data) => {
 };
 
 const lnurlAuthFailedNotification = (message, data) => {
-  const reason =
-    data.authResponse &&
-    data.authResponse.data &&
-    data.authResponse.data.reason;
   return utils.notify({
     title: `Login failed`,
-    message: `${reason}`,
+    message: `${data.error}`,
   });
 };
 
