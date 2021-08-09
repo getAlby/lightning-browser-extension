@@ -93,22 +93,30 @@ class Home extends React.Component {
                 type: "sent",
                 date: dayjs(payment.createdAt).fromNow(),
                 // date: dayjs.unix(payment.createdAt),
-                title: payment.description,
-                subTitle: (
-                  <p className="truncate">
-                    {payment.name} @{" "}
+                title: (
+                  <p>
                     <a
                       target="_blank"
-                      title={payment.location}
-                      href={payment.location}
+                      title={payment.name}
+                      href={`options.html#/publishers`}
                       rel="noreferrer"
                     >
-                      {payment.location}
+                      {payment.description}
                     </a>
                   </p>
                 ),
-                currency: "€",
-                value: 9.99,
+                subTitle: (
+                  <p className="truncate">
+                    <a
+                      target="_blank"
+                      title={payment.name}
+                      href={`options.html#/publishers`}
+                      rel="noreferrer"
+                    >
+                      {payment.host}
+                    </a>
+                  </p>
+                ),
               }))}
             />
           )}

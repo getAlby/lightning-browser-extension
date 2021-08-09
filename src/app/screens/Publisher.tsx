@@ -185,8 +185,6 @@ function Publisher() {
                   </a>
                 </p>
               ),
-              currency: "€",
-              value: 9.99,
             }))}
           />
         </div>
