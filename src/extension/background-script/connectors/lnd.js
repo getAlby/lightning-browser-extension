@@ -59,6 +59,13 @@ class Lnd extends Base {
     return this.request("GET", "/v1/balance/channels", undefined, {
       pending_open_balance: "0",
       balance: "0",
+    }).then((res) => {
+      return {
+        data: {
+          balance: res.data.balance,
+          pending_open_balance: res.data.pending_open_balance,
+        },
+      };
     });
   };
 
