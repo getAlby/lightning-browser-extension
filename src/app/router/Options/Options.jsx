@@ -14,8 +14,7 @@ function Options() {
   useEffect(() => {
     utils.call("accountInfo").then((response) => {
       const { alias } = response.info;
-      const { balance } = response.balance;
-
+      const balance = parseInt(response.balance.balance); // TODO: handle amounts
       setAccountInfo({ alias, balance });
     });
   }, []);

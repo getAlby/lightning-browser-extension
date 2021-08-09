@@ -48,7 +48,7 @@ class Home extends React.Component {
     utils.call("accountInfo").then((response) => {
       this.setState({
         alias: response.info?.alias,
-        balance: response.balance?.balance,
+        balance: parseInt(response.balance?.balance),
       });
       getFiatFromSatoshi(this.state.currency, this.state.balance).then(
         (fiat) => {
