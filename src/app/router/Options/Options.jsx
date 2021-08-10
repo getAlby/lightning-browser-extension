@@ -48,13 +48,27 @@ function Options() {
         <Route path="/send">
           <Container>
             <h2 className="mt-12 mb-6 text-2xl font-bold">Send</h2>
-            <p>Test content</p>
+            <p>
+              We are still working on this feature.
+              <br />
+              You can{" "}
+              <a href="https://github.com/bumi/lightning-browser-extension/">
+                join the development on GitHub
+              </a>
+            </p>
           </Container>
         </Route>
         <Route path="/receive">
           <Container>
             <h2 className="mt-12 mb-6 text-2xl font-bold">Receive</h2>
-            <p>Lorem ipsum</p>
+            <p>
+              We are still working on this feature.
+              <br />
+              You can{" "}
+              <a href="https://github.com/bumi/lightning-browser-extension/">
+                join the development on GitHub
+              </a>
+            </p>
           </Container>
         </Route>
       </Switch>

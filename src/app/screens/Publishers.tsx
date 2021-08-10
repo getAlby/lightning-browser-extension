@@ -45,9 +45,7 @@ function Publishers() {
 
   return (
     <Container>
-      <h2 className="mt-12 mb-6 text-2xl font-bold">
-        Manage Publishers & Allowances
-      </h2>
+      <h2 className="mt-12 mb-6 text-2xl font-bold">Allowances</h2>
 
       {/* <div className="pb-1 border-b border-grey-200">
         <Searchbar />
