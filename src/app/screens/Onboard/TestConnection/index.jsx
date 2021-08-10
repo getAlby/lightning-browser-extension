@@ -20,7 +20,7 @@ export default function TestConnection() {
       .call("accountInfo")
       .then((response) => {
         const { alias } = response.info;
-        const { balance } = response.balance;
+        const balance = parseInt(response.balance.balance);
 
         setAccountInfo({ alias, balance });
       })
