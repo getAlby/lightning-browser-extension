@@ -3,7 +3,7 @@ import * as ln from "./actions/ln";
 import lnurl, { lnurlPay } from "./actions/lnurl";
 import * as allowances from "./actions/allowances";
 import * as setup from "./actions/setup";
-import * as transactions from "./actions/transactions";
+import * as payments from "./actions/payments";
 
 // TODO: potential nesting/grouping of actions for better organization
 const routes = {
@@ -32,7 +32,7 @@ const routes = {
   sendPayment: ln.sendPayment,
   signMessage: ln.signMessage,
   getBalance: ln.getBalance,
-  getTransactions: transactions.all,
+  getPayments: payments.all,
   setPassword: setup.setPassword,
   accountInfo: accounts.info,
   addAccount: accounts.add,

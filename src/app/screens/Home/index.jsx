@@ -25,8 +25,8 @@ class Home extends React.Component {
       currency: "USD",
       balance: null,
       balanceFiat: null,
-      transactions: {},
-      loadingTransactions: true,
+      payments: {},
+      loadingPayments: true,
     };
   }
   get exchangeRate() {
@@ -56,10 +56,10 @@ class Home extends React.Component {
         }
       );
     });
-    utils.call("getTransactions").then((result) => {
+    utils.call("getPayments").then((result) => {
       this.setState({
-        transactions: result?.transactions,
-        loadingTransactions: false,
+        payments: result?.payments,
+        loadingPayments: false,
       });
     });
   }
@@ -75,7 +75,7 @@ class Home extends React.Component {
               <dl className="mb-0">
                 <dt className="text-sm">Allowance</dt>
                 <dd className="mb-0 text-sm text-gray-500">
-                  {allowance.usedBudget} / {allowance.totalBudget} sats
+                  {allowance.usedBudget} / {allowance.totalBudget} Sats
                 </dd>
               </dl>
               <div className="w-24">
@@ -126,31 +126,41 @@ class Home extends React.Component {
   }
 
   renderDefaultView() {
-    const { transactions } = this.state;
+    const { payments } = this.state;
     return (
       <div className="p-5">
-        <h2 className="text-xl font-semibold mb-3">Transactions</h2>
-        {this.state.loadingTransactions ? (
+        <hr></hr>
+        {this.state.loadingPayments ? (
           <div className="pt-4 flex justify-center">
             <Loading />
           </div>
         ) : (
           <TransactionsTable
-            transactions={transactions.map((transaction) => ({
-              ...transaction,
+            transactions={payments.map((payment) => ({
+              ...payment,
               type: "sent",
-              date: dayjs(transaction.createdAt).fromNow(),
-              title: transaction.description,
-              subTitle: (
-                <p className="truncate">
-                  {transaction.name} @{" "}
+              date: dayjs(payment.createdAt).fromNow(),
+              title: (
+                <p>
                   <a
                     target="_blank"
-                    title={transaction.location}
-                    href={transaction.location}
+                    title={payment.name}
+                    href={`options.html#/publishers`}
                     rel="noreferrer"
                   >
-                    {transaction.location}
+                    {payment.description}
+                  </a>
+                </p>
+              ),
+              subTitle: (
+                <p className="truncate">
+                  <a
+                    target="_blank"
+                    title={payment.name}
+                    href={`options.html#/publishers`}
+                    rel="noreferrer"
+                  >
+                    {payment.host}
                   </a>
                 </p>
               ),
