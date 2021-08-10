@@ -9,6 +9,7 @@ export default function Input({
   onChange,
   value,
   autoFocus = false,
+  autoComplete = "off",
 }) {
   return (
     <input
@@ -21,6 +22,7 @@ export default function Input({
       onChange={onChange}
       value={value}
       autoFocus={autoFocus}
+      autoComplete={autoComplete}
     />
   );
 }
