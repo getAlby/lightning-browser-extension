@@ -57,7 +57,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".json", ".go"],
     alias: {
       "webextension-polyfill": "webextension-polyfill",
       Buffer: "buffer",
@@ -73,7 +73,35 @@ module.exports = {
   },
 
   module: {
+    noParse: /wasm_exec\.js$/,
     rules: [
+      {
+        test: /\.go$/,
+        use: [
+          {
+            //loader: "golang-wasm",
+            loader: "@hanxx/go-wasm-loader",
+            options: {
+              goCompiler: {
+                bin: (root) => {
+                  return path.join(root, "bin/go");
+                },
+                args: (resourcePath) => {
+                  return [
+                    "build",
+                    "-trimpath",
+                    "-tags=appengine",
+                    "-v",
+                    "-o",
+                    `${resourcePath}.wasm`,
+                    path.dirname(resourcePath),
+                  ];
+                },
+              },
+            },
+          },
+        ],
+      },
       {
         type: "javascript/auto", // prevent webpack handling json with its own loaders,
         test: /manifest\.json$/,
@@ -116,6 +144,12 @@ module.exports = {
       },
     ],
   },
+
+  ignoreWarnings: [
+    {
+      module: /wasm_exec.js$/,
+    },
+  ],
 
   plugins: [
     new webpack.ProvidePlugin({

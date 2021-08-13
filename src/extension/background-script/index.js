@@ -8,36 +8,16 @@ import db from "./db";
 
 import * as events from "./events";
 
-import "./wasm_exec.js";
-
-const wasmURL = browser.extension.getURL("assets/wasm-demo.wasm");
-
-const go = new Go();
-let mod, inst;
-WebAssembly.instantiateStreaming(fetch(wasmURL), go.importObject)
-  .then((result) => {
-    mod = result.module;
-    inst = result.instance;
-    run();
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-
-async function run() {
-  console.log("RUN");
-  go.argv = ["wasm-demo", "--debuglevel=trace"];
-  await go.run(inst); // this resolves once the program exits?!
-  inst = await WebAssembly.instantiate(mod, go.importObject); // reset instance
-}
+import wasm from "./main.go";
 
 setTimeout(() => {
-  console.log(
-    demoDecodeInvoice(
+  wasm
+    .ddemoDecodeInvoice(
       "lnbc1500n1pssc9wkpp5x3p7cys9vk6pfvsrl9flraasny304uqfjhut00hqgvp9v42u42eqdpa2fjkzep6ypyx7aeqw3hjqsmfwf3h2mrpwgs9yetzv9kxzmnrv5s8wteqgfskccqzpgxqr23ssp5vw3llna7c9xngl5wwfflr6czn39t39ks8czkv7hfju2vs2u2ce8s9qyyssq5zgr9khymuqgkxuwz0ulreth0kxdreewmmuvvw2kn74a8xdfelsk9q5z5fnxy2rkdpwyldxnkse5pmfpxsdvfw6m7ffstzhf4ahzhjgqm6avmd"
     )
-  );
-  console.log(demoGenerateAezeed());
+    .then((r) => {
+      console.log({ r });
+    });
 }, 2000);
 
 /* debug help to check the current state
