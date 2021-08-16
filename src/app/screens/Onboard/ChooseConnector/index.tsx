@@ -1,23 +1,10 @@
 import React from "react";
-import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
-import { ChevronRightIcon } from "@heroicons/react/outline";
+import { Switch, Route, useRouteMatch } from "react-router-dom";
+
+import LinkButton from "../../../components/LinkButton";
 
 import ConnectLnd from "../ConnectLnd";
 import ConnectLndHub from "../ConnectLndHub";
-
-function LinkButton({ to, title, description }) {
-  return (
-    <Link to={to} className="block">
-      <div className="p-4 flex justify-between items-center shadow overflow-hidden border-b border-gray-200 rounded-lg hover:bg-gray-50 transition duration-200">
-        <div>
-          <span className="block">{title}</span>
-          <span className="text-sm text-gray-500">{description}</span>
-        </div>
-        <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-      </div>
-    </Link>
-  );
-}
 
 export default function ChooseConnector() {
   let { path, url } = useRouteMatch();
@@ -38,18 +25,17 @@ export default function ChooseConnector() {
             <div className="space-y-4">
               <LinkButton
                 to={`${url}/lnd`}
-                title="LND"
-                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                title="Connect to your remote node"
+                description="Currently we only support LND."
               />
               <LinkButton
                 to={`${url}/lnd-hub`}
-                title="LndHub"
-                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                title="Connect to your mobile wallet"
+                description="Currently we only support BlueWallet."
               />
               <LinkButton
-                to={`${url}/get-a-new-wallet`}
-                title="Get a new wallet"
-                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                to={`${url}/create-wallet`}
+                title="I don’t have a lightning node"
               />
             </div>
           </div>
@@ -61,7 +47,9 @@ export default function ChooseConnector() {
       <Route path={`${path}/lnd-hub`}>
         <ConnectLndHub />
       </Route>
-      <Route path={`${path}/get-a-new-wallet`}>Get a new wallet...</Route>
+      <Route path={`${path}/create-wallet`}>
+        Create a new BlueWallet account...
+      </Route>
     </Switch>
   );
 }
