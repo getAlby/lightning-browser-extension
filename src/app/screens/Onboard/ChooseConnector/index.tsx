@@ -3,6 +3,7 @@ import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 import { ChevronRightIcon } from "@heroicons/react/outline";
 
 import ConnectLnd from "../ConnectLnd";
+import ConnectLndHub from "../ConnectLndHub";
 
 function LinkButton({ to, title, description }) {
   return (
@@ -57,8 +58,10 @@ export default function ChooseConnector() {
       <Route path={`${path}/lnd`}>
         <ConnectLnd />
       </Route>
-      <Route path={`${path}/lnd-hub`}>Lnd Hub</Route>
-      <Route path={`${path}/get-a-new-wallet`}>Get a new wallet</Route>
+      <Route path={`${path}/lnd-hub`}>
+        <ConnectLndHub />
+      </Route>
+      <Route path={`${path}/get-a-new-wallet`}>Get a new wallet...</Route>
     </Switch>
   );
 }
