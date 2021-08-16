@@ -7,7 +7,7 @@ import ConnectLnd from "../ConnectLnd";
 function LinkButton({ to, title, description }) {
   return (
     <Link to={to} className="block">
-      <div className="p-4 flex justify-between items-center shadow overflow-hidden border-b border-gray-200 rounded-lg">
+      <div className="p-4 flex justify-between items-center shadow overflow-hidden border-b border-gray-200 rounded-lg hover:bg-gray-50 transition duration-200">
         <div>
           <span className="block">{title}</span>
           <span className="text-sm text-gray-500">{description}</span>
