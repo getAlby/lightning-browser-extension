@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { ArrowRightIcon } from "@heroicons/react/outline";
 import Input from "../../../components/Form/input";
 import Button from "../../../components/button";
 import { useHistory } from "react-router-dom";
@@ -29,7 +28,7 @@ export default function SetPassword() {
     } else {
       try {
         await utils.call("setPassword", { password });
-        history.push("/connect-lnd");
+        history.push("/choose-connector");
       } catch (e) {
         console.log(e.message);
       }

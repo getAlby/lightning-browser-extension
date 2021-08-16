@@ -10,13 +10,17 @@ import DevMenu from "../../components/DevMenu";
 import Steps from "../../components/steps";
 import Intro from "../../screens/Onboard/Intro";
 import SetPassword from "../../screens/Onboard/SetPassword";
-import ConnectLnd from "../../screens/Onboard/ConnectLnd";
+import ChooseConnector from "../../screens/Onboard/ChooseConnector";
 import TestConnection from "../../screens/Onboard/TestConnection";
 
 const routes = [
   { path: "/", component: Intro, exact: true, name: "Welcome" },
   { path: "/set-password", component: SetPassword, name: "Your Password" },
-  { path: "/connect-lnd", component: ConnectLnd, name: "Connect to Lightning" },
+  {
+    path: "/choose-connector",
+    component: ChooseConnector,
+    name: "Connect to Lightning",
+  },
   { path: "/test-connection", component: TestConnection, name: "Done" },
 ];
 
@@ -52,9 +56,10 @@ function App() {
   // Update step progress based on active location.
   useEffect(() => {
     const { pathname } = location;
-    const activeStepIndex = routes.findIndex(
-      (route) => route.path === pathname
-    );
+    let activeStepIndex = 0;
+    routes.forEach((route, index) => {
+      if (pathname.includes(route.path)) activeStepIndex = index;
+    });
     const updatedSteps = initialSteps.map((step, index) => {
       let status = "upcoming";
       if (index < activeStepIndex) {
