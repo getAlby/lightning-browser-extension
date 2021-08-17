@@ -5,6 +5,7 @@ import LinkButton from "../../../components/LinkButton";
 
 import ConnectLnd from "../ConnectLnd";
 import ConnectLndHub from "../ConnectLndHub";
+import NewWallet from "../NewWallet";
 
 export default function ChooseConnector() {
   let { path, url } = useRouteMatch();
@@ -54,7 +55,7 @@ export default function ChooseConnector() {
         <ConnectLndHub />
       </Route>
       <Route path={`${path}/create-wallet`}>
-        <div className="mt-20">Create a new BlueWallet account...</div>
+        <NewWallet />
       </Route>
     </Switch>
   );
