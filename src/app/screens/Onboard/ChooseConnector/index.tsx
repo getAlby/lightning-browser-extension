@@ -11,15 +11,19 @@ export default function ChooseConnector() {
   const connectors = [
     {
       to: `${url}/lnd`,
-      title: "Connect to your remote node",
-      description: "Currently we only support LND.",
+      title: "LND",
+      description: "Connect to your LND node",
     },
     {
       to: `${url}/lnd-hub`,
-      title: "Connect to your mobile wallet",
-      description: "Currently we only support BlueWallet.",
+      title: "LNDHub (Bluewallet)",
+      description: "Connect to your Bluewallet mobile wallet",
     },
-    { to: `${url}/create-wallet`, title: "I don’t have a lightning node" },
+    {
+      to: `${url}/create-wallet`,
+      title: "Create a new wallet",
+      description: "We create and manage a lightning wallet for you"
+    },
   ];
 
   return (
@@ -28,11 +32,11 @@ export default function ChooseConnector() {
         <div className="relative mt-20 lg:grid lg:grid-cols-2 lg:gap-8">
           <div className="relative">
             <h1 className="text-3xl font-bold">
-              Do you have a lightning node?
+              Do you have a lightning wallet?
             </h1>
             <p className="text-gray-500 my-6">
-              You need to first connect to a funded lightning node so that you
-              can interact with your favorite publishers that accept bitcoin
+              You need to first connect to a lightning wallet so that you
+              can interact with your favorite websites that accept bitcoin
               lightning payments!
             </p>
             <div className="space-y-4">

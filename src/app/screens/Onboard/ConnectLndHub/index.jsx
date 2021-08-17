@@ -24,7 +24,7 @@ export default function ConnectLndHub() {
     event.preventDefault();
     const { login, password, url } = formData;
     const account = {
-      name: "LNBits",
+      name: "LNDHub",
       config: {
         login,
         password,
