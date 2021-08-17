@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Features({ features }) {
   return (
-    <div className="mt-10 space-y-10 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10 lg:mt-0 lg:col-span-2">
+    <div className="space-y-10 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10">
       {features.map((feature) => (
         <div key={feature.name}>
           <dt>

@@ -27,7 +27,7 @@ export default function ChooseConnector() {
       <Route exact path={path}>
         <div className="relative mt-20 lg:grid lg:grid-cols-2 lg:gap-8">
           <div className="relative">
-            <h1 className="text-3xl font-bold mt-4">
+            <h1 className="text-3xl font-bold">
               Do you have a lightning node?
             </h1>
             <p className="text-gray-500 my-6">

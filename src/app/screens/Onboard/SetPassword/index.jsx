@@ -38,8 +38,8 @@ export default function SetPassword() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="relative lg:grid lg:grid-cols-3 lg:gap-x-8 mt-20">
-        <div className="lg:col-span-1 ml-12 mt-8">
-          <div className="h-32 max-w-xs">
+        <div className="lg:col-span-1">
+          <div className="max-w-xs">
             <img
               src="assets/icons/satsymbol.svg"
               alt="Sats"
@@ -51,7 +51,7 @@ export default function SetPassword() {
           </h2>
         </div>
         <div className="lg:col-span-2">
-          <h1 className="text-3xl font-bold mt-4">Create your password</h1>
+          <h1 className="text-3xl font-bold">Create your password</h1>
           <p className="text-gray-500 mt-6">
             You need to set a password so we can lock the wallet when it’s not
             being used. Payments are never made without decrypting your secure

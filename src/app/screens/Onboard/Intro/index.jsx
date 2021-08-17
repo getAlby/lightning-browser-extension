@@ -42,8 +42,8 @@ export default function Intro() {
   return (
     <div>
       <div className="relative lg:grid lg:grid-cols-3 lg:gap-x-8 mt-20">
-        <div className="lg:col-span-1 ml-12 mt-8">
-          <div className="h-32 max-w-xs">
+        <div className="lg:col-span-1">
+          <div className="max-w-xs">
             <img
               src="assets/icons/satsymbol.svg"
               alt="Sats"
@@ -54,7 +54,9 @@ export default function Intro() {
             The power of lightning in your browser
           </h2>
         </div>
-        <Features features={features} />
+        <div className="mt-10 lg:mt-0 lg:col-span-2">
+          <Features features={features} />
+        </div>
       </div>
       <div className="sm:py-16 sm:px-6 lg:px-8 float-right">
         <Button
