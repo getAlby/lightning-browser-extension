@@ -25,6 +25,10 @@ export default function PublishersTable({ publishers, navigateToPublisher }) {
                       className="h-12 w-12 object-cover rounded-full shadow-lg"
                       src={publisher.imageURL || DEFAULT_IMAGE}
                       alt={publisher.host}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = DEFAULT_IMAGE;
+                      }}
                     />
                   </div>
                   <div className="ml-4">
