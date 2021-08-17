@@ -8,11 +8,24 @@ import ConnectLndHub from "../ConnectLndHub";
 
 export default function ChooseConnector() {
   let { path, url } = useRouteMatch();
+  const connectors = [
+    {
+      to: `${url}/lnd`,
+      title: "Connect to your remote node",
+      description: "Currently we only support LND.",
+    },
+    {
+      to: `${url}/lnd-hub`,
+      title: "Connect to your mobile wallet",
+      description: "Currently we only support BlueWallet.",
+    },
+    { to: `${url}/create-wallet`, title: "I don’t have a lightning node" },
+  ];
 
   return (
     <Switch>
       <Route exact path={path}>
-        <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
+        <div className="relative mt-20 lg:grid lg:grid-cols-2 lg:gap-8">
           <div className="relative">
             <h1 className="text-3xl font-bold mt-4">
               Do you have a lightning node?
@@ -23,20 +36,9 @@ export default function ChooseConnector() {
               lightning payments!
             </p>
             <div className="space-y-4">
-              <LinkButton
-                to={`${url}/lnd`}
-                title="Connect to your remote node"
-                description="Currently we only support LND."
-              />
-              <LinkButton
-                to={`${url}/lnd-hub`}
-                title="Connect to your mobile wallet"
-                description="Currently we only support BlueWallet."
-              />
-              <LinkButton
-                to={`${url}/create-wallet`}
-                title="I don’t have a lightning node"
-              />
+              {connectors.map(({ to, title, description }) => (
+                <LinkButton to={to} title={title} description={description} />
+              ))}
             </div>
           </div>
         </div>
@@ -48,7 +50,7 @@ export default function ChooseConnector() {
         <ConnectLndHub />
       </Route>
       <Route path={`${path}/create-wallet`}>
-        Create a new BlueWallet account...
+        <div className="mt-20">Create a new BlueWallet account...</div>
       </Route>
     </Switch>
   );
