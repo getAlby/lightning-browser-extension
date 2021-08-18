@@ -15,9 +15,17 @@ const paymentSuccessNotification = (message, data) => {
 };
 
 const paymentFailedNotification = (message, data) => {
+  let error;
+  // general error
+  if (data.response.error) {
+    error = data.response.error;
+    // lnd payment error. TODO: improve and unify error handling
+  } else if (data.response.data && data.response.data.payment_error) {
+    error = data.response.data.payment_error;
+  }
   return utils.notify({
     title: `Payment failed`,
-    message: `Error: ${data.response.data.payment_error}`,
+    message: `Error: ${error}`,
   });
 };
 

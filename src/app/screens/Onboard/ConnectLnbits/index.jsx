@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import Input from "../../../components/Form/input";
 import Button from "../../../components/button";
 import { useHistory } from "react-router-dom";
+
 import utils from "../../../../common/lib/utils";
 
-const initialFormData = Object.freeze({
-  password: "",
-  passwordConfirmation: "",
-});
-
-export default function SetPassword() {
+export default function ConnectLnbits() {
   const history = useHistory();
-  const [formData, setFormData] = useState(initialFormData);
+  const [formData, setFormData] = useState({
+    readkey: "",
+    adminkey: "",
+    url: "https://lnbits.com",
+  });
 
   function handleChange(event) {
     setFormData({
@@ -22,16 +22,34 @@ export default function SetPassword() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const { password, passwordConfirmation } = formData;
-    if (password !== passwordConfirmation) {
-      alert("Passwords don't match.");
-    } else {
-      try {
-        await utils.call("setPassword", { password });
-        history.push("/choose-connector");
-      } catch (e) {
-        console.log(e.message);
+    const { readkey, adminkey, url } = formData;
+    const account = {
+      name: "LNBits",
+      config: {
+        readkey,
+        adminkey,
+        url,
+      },
+      connector: "lnbits",
+    };
+
+    try {
+      const validation = await utils.call("validateAccount", account);
+      if (validation.valid) {
+        const addResult = await utils.call("addAccount", account);
+        if (addResult.accountId) {
+          const selectResult = await utils.call("selectAccount", {
+            id: addResult.accountId,
+          });
+          history.push("/test-connection");
+        }
+      } else {
+        console.log(validation);
+        alert(`Connection failed (${validation.error})`);
       }
+    } catch (e) {
+      console.log(e.message);
+      alert(`Connection failed (${e.message})`);
     }
   }
 
@@ -51,41 +69,51 @@ export default function SetPassword() {
           </h2>
         </div>
         <div className="lg:col-span-2">
-          <h1 className="text-3xl font-bold">Create your password</h1>
-          <p className="text-gray-500 mt-6">
-            You need to set a password so we can lock the wallet when it’s not
-            being used. Payments are never made without decrypting your secure
-            credentials.
-          </p>
+          <h1 className="text-3xl font-bold">Connect to LNbits</h1>
+          <p className="text-gray-500 mt-6"></p>
           <div className="w-4/5">
             <div className="mt-6">
               <label
-                htmlFor="email"
+                htmlFor="readkey"
                 className="block font-medium text-gray-700"
               >
-                Set a password
+                LNbits Read Key
               </label>
               <div>
                 <Input
-                  name="password"
-                  type="password"
-                  autoFocus
+                  name="readkey"
+                  type="text"
                   required
+                  autoFocus
                   onChange={handleChange}
                 />
               </div>
             </div>
             <div className="mt-6">
               <label
-                htmlFor="email"
+                htmlFor="adminkey"
                 className="block font-medium text-gray-700"
               >
-                Lets confirm you typed it correct.
+                LNbits Admin Key
               </label>
               <div className="mt-1">
                 <Input
-                  name="passwordConfirmation"
-                  type="password"
+                  name="adminkey"
+                  type="text"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="mt-6">
+              <label htmlFor="url" className="block font-medium text-gray-700">
+                LNbits URL
+              </label>
+              <div className="mt-1">
+                <Input
+                  name="url"
+                  type="text"
+                  value={formData.url}
                   required
                   onChange={handleChange}
                 />

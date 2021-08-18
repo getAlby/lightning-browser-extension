@@ -64,7 +64,7 @@ export function publishPaymentNotification(
   response
 ) {
   let status = "success"; // default. let's hope for success
-  if (response.data.payment_error) {
+  if (response.error || (response.data && response.data.payment_error)) {
     status = "failed";
   }
   PubSub.publish(`ln.sendPayment.${status}`, {

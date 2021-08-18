@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import Input from "../../../components/Form/input";
 import Button from "../../../components/button";
 import { useHistory } from "react-router-dom";
+
 import utils from "../../../../common/lib/utils";
 
-const initialFormData = Object.freeze({
-  password: "",
-  passwordConfirmation: "",
-});
-
-export default function SetPassword() {
+export default function ConnectLndHub() {
   const history = useHistory();
-  const [formData, setFormData] = useState(initialFormData);
+  const [formData, setFormData] = useState({
+    login: "",
+    password: "",
+    url: "https://lndhub.herokuapp.com",
+  });
 
   function handleChange(event) {
     setFormData({
@@ -22,16 +22,34 @@ export default function SetPassword() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const { password, passwordConfirmation } = formData;
-    if (password !== passwordConfirmation) {
-      alert("Passwords don't match.");
-    } else {
-      try {
-        await utils.call("setPassword", { password });
-        history.push("/choose-connector");
-      } catch (e) {
-        console.log(e.message);
+    const { login, password, url } = formData;
+    const account = {
+      name: "LNDHub",
+      config: {
+        login,
+        password,
+        url,
+      },
+      connector: "lndhub",
+    };
+
+    try {
+      const validation = await utils.call("validateAccount", account);
+      if (validation.valid) {
+        const addResult = await utils.call("addAccount", account);
+        if (addResult.accountId) {
+          const selectResult = await utils.call("selectAccount", {
+            id: addResult.accountId,
+          });
+          history.push("/test-connection");
+        }
+      } else {
+        console.log(validation);
+        alert(`Connection failed (${validation.error})`);
       }
+    } catch (e) {
+      console.log(e.message);
+      alert(`Connection failed (${e.message})`);
     }
   }
 
@@ -51,25 +69,20 @@ export default function SetPassword() {
           </h2>
         </div>
         <div className="lg:col-span-2">
-          <h1 className="text-3xl font-bold">Create your password</h1>
-          <p className="text-gray-500 mt-6">
-            You need to set a password so we can lock the wallet when it’s not
-            being used. Payments are never made without decrypting your secure
-            credentials.
-          </p>
+          <h1 className="text-3xl font-bold">Connect to LndHub</h1>
+          <p className="text-gray-500 mt-6"></p>
           <div className="w-4/5">
             <div className="mt-6">
               <label
-                htmlFor="email"
+                htmlFor="login"
                 className="block font-medium text-gray-700"
               >
-                Set a password
+                Login
               </label>
               <div>
                 <Input
-                  name="password"
-                  type="password"
-                  autoFocus
+                  name="login"
+                  type="text"
                   required
                   onChange={handleChange}
                 />
@@ -77,16 +90,30 @@ export default function SetPassword() {
             </div>
             <div className="mt-6">
               <label
-                htmlFor="email"
+                htmlFor="password"
                 className="block font-medium text-gray-700"
               >
-                Lets confirm you typed it correct.
+                Password
               </label>
               <div className="mt-1">
                 <Input
-                  name="passwordConfirmation"
-                  type="password"
+                  name="password"
+                  type="text"
                   required
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="mt-6">
+              <label htmlFor="url" className="block font-medium text-gray-700">
+                URL
+              </label>
+              <div className="mt-1">
+                <Input
+                  name="url"
+                  type="text"
+                  required
+                  value={formData.url}
                   onChange={handleChange}
                 />
               </div>

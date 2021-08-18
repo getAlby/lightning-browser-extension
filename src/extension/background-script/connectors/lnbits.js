@@ -1,52 +1,73 @@
-import memoizee from "memoizee";
 import Base from "./base";
+import { parsePaymentRequest } from "invoices";
 
 class LnBits extends Base {
-  constructor(config) {
-    super(config);
-    this.getInfo = memoizee(
-      (args) =>
-        this.request(
-          "GET",
-          "/api/v1/wallet",
-          this.config.readkey,
-          undefined,
-          {}
-        ),
-      {
-        promise: true,
-        maxAge: 20000,
-        preFetch: true,
-        normalizer: () => "getinfo",
-      }
-    );
-    this.getBalance = memoizee(
-      (args) =>
-        this.request(
-          "GET",
-          "/api/v1/wallet",
-          this.config.readkey,
-          undefined,
-          {}
-        ),
-      {
-        promise: true,
-        maxAge: 20000,
-        preFetch: true,
-        normalizer: () => "balance",
-      }
-    );
-  }
-
-  sendPayment(message) {
-    return super.sendPayment(message, () => {
-      this.request("POST", "/api/v1/payments", {
-        bolt11: message.args.paymentRequest,
-        out: true,
-      });
+  getInfo() {
+    return this.request(
+      "GET",
+      "/api/v1/wallet",
+      this.config.readkey,
+      undefined,
+      {}
+    ).then((data) => {
+      return {
+        data: {
+          alias: data.name,
+        },
+      };
     });
   }
 
+  getBalance() {
+    return this.request(
+      "GET",
+      "/api/v1/wallet",
+      this.config.readkey,
+      undefined,
+      {}
+    ).then((data) => {
+      return {
+        data: {
+          balance: data.balance,
+        },
+      };
+    });
+  }
+
+  sendPayment(args) {
+    const paymentRequestDetails = parsePaymentRequest({
+      request: args.paymentRequest,
+    });
+    const amountInSats = parseInt(paymentRequestDetails.tokens);
+    return this.request("POST", "/api/v1/payments", this.config.adminkey, {
+      bolt11: args.paymentRequest,
+      out: true,
+    })
+      .then((data) => {
+        // TODO: how do we get the total amount here??
+        return this.checkPayment(data.checking_id).then((checkData) => {
+          return {
+            data: {
+              payment_preimage: checkData.preimage,
+              payment_hash: data.payment_hash,
+              payment_route: { total_amt: amountInSats, total_fees: 0 },
+            },
+          };
+        });
+      })
+      .catch((e) => {
+        return { error: e.message };
+      });
+  }
+
+  checkPayment(checkingId) {
+    return this.request(
+      "GET",
+      `/api/v1/payments/${checkingId}`,
+      this.config.readkey
+    );
+  }
+    
   signMessage(args) {
     return Promise.reject(new Error("Not supported with Lnbits"));
   }
@@ -72,15 +93,13 @@ class LnBits extends Base {
     if (!res.ok) {
       const errBody = await res.json();
       console.log("errBody", errBody);
-      throw new Error(errBody);
+      throw new Error(errBody.message);
     }
     let data = await res.json();
     if (defaultValues) {
       data = Object.assign(Object.assign({}, defaultValues), data);
     }
-    // TODO: specify and follow API
-    data.alias = data.name;
-    return { data };
+    return data;
   }
 }
 
