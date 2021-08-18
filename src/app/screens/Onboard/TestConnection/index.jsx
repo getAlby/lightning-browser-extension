@@ -36,12 +36,12 @@ export default function TestConnection() {
 
   return (
     <div>
-      <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
+      <div className="relative lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
         <div className="relative">
-          <div className="mt-12">
+          <div>
             {errorMessage && (
               <div>
-                <h1 className="text-3xl font-bold mt-4">Connection Error</h1>
+                <h1 className="text-3xl font-bold">Connection Error</h1>
                 <p>{errorMessage}</p>
                 <Button label="Edit" onClick={handleEdit} />
               </div>
@@ -49,9 +49,7 @@ export default function TestConnection() {
 
             {accountInfo && accountInfo.alias && (
               <div>
-                <h1 className="text-3xl font-bold mt-4">
-                  Connection success! 🎉
-                </h1>
+                <h1 className="text-3xl font-bold">Connection success! 🎉</h1>
                 <p className="text-gray-500 mt-6">
                   Awesome, you're ready to go!
                   {faucetEnabled && accountInfo.balance === 0 && (

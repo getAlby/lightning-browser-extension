@@ -55,20 +55,8 @@ export default function ConnectLnbits() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="relative lg:grid lg:grid-cols-3 lg:gap-x-8 mt-20">
-        <div className="lg:col-span-1">
-          <div className="max-w-xs">
-            <img
-              src="assets/icons/satsymbol.svg"
-              alt="Sats"
-              className="max-w-xs"
-            />
-          </div>
-          <h2 className="mt-10 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-            The power of lightning in your browser
-          </h2>
-        </div>
-        <div className="lg:col-span-2">
+      <div className="relative lg:flex mt-24">
+        <div className="lg:w-1/2">
           <h1 className="text-3xl font-bold">Connect to LNbits</h1>
           <p className="text-gray-500 mt-6"></p>
           <div className="w-4/5">
@@ -79,7 +67,7 @@ export default function ConnectLnbits() {
               >
                 LNbits Read Key
               </label>
-              <div>
+              <div className="mt-1">
                 <Input
                   name="readkey"
                   type="text"
@@ -120,10 +108,19 @@ export default function ConnectLnbits() {
               </div>
             </div>
           </div>
+          <div className="mt-8">
+            <Button label="Next" type="submit" />
+          </div>
         </div>
-      </div>
-      <div className="sm:py-16 sm:px-6 lg:px-8 float-right">
-        <Button label="Next" type="submit" />
+        <div className="mt-16 lg:mt-0 lg:w-1/2">
+          <div className="lg:flex h-full justify-center items-center">
+            <img
+              src="assets/icons/satsymbol.svg"
+              alt="Sats"
+              className="max-w-xs"
+            />
+          </div>
+        </div>
       </div>
     </form>
   );
