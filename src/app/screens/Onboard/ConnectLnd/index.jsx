@@ -12,13 +12,6 @@ const initialFormData = Object.freeze({
   macaroon: "",
 });
 
-function buf2hex(buffer) {
-  // buffer is an ArrayBuffer
-  return [...new Uint8Array(buffer)]
-    .map((x) => x.toString(16).padStart(2, "0"))
-    .join("");
-}
-
 export default function ConnectLnd() {
   const history = useHistory();
   const [formData, setFormData] = useState(initialFormData);
@@ -81,9 +74,8 @@ export default function ConnectLnd() {
   function readFile(file) {
     const reader = new FileReader();
     reader.onload = function (evt) {
-      let macaroon;
-      if ((macaroon = buf2hex(evt.target.result))) {
-        console.log(macaroon);
+      const macaroon = utils.buf2hex(evt.target.result);
+      if (macaroon) {
         setFormData({
           ...formData,
           macaroon,
