@@ -45,11 +45,6 @@ const utils = {
     }
     return hex.join("");
   },
-  buf2hex: (buffer) => {
-    return [...new Uint8Array(buffer)]
-      .map((x) => x.toString(16).padStart(2, "0"))
-      .join("");
-  },
   bytesToHexString: (bytes) => {
     return Array.from(bytes, (byte) => {
       return ("0" + (byte & 0xff).toString(16)).slice(-2);

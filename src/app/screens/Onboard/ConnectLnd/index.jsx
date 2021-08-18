@@ -74,7 +74,9 @@ export default function ConnectLnd() {
   function readFile(file) {
     const reader = new FileReader();
     reader.onload = function (evt) {
-      const macaroon = utils.buf2hex(evt.target.result);
+      const macaroon = utils.bytesToHexString(
+        new Uint8Array(evt.target.result)
+      );
       if (macaroon) {
         setFormData({
           ...formData,
