@@ -41,7 +41,7 @@ export default function Intro() {
 
   return (
     <div>
-      <div className="relative lg:grid lg:grid-cols-3 lg:gap-x-8 mt-20">
+      <div className="relative lg:grid lg:grid-cols-3 lg:gap-x-8 mt-24">
         <div className="lg:col-span-1">
           <div className="max-w-xs">
             <img
@@ -50,7 +50,7 @@ export default function Intro() {
               className="max-w-xs"
             />
           </div>
-          <h2 className="mt-10 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="mt-10 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl lg:max-w-xs">
             The power of lightning in your browser
           </h2>
         </div>
@@ -58,7 +58,7 @@ export default function Intro() {
           <Features features={features} />
         </div>
       </div>
-      <div className="sm:py-16 sm:px-6 lg:px-8 float-right">
+      <div className="mt-8 float-right">
         <Button
           onClick={() => history.push("/set-password")}
           type="button"

@@ -93,10 +93,7 @@ export default function ConnectLnd() {
   return (
     <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
       <div className="relative">
-        <div className="h-32">
-          <img className="mb-12" src="https://i.ibb.co/3F3mCkR/logox.png" />
-        </div>
-        <h1 className="text-3xl font-bold mt-4">Connect to your remote node</h1>
+        <h1 className="text-3xl font-bold">Connect to your remote node</h1>
         <p className="text-gray-500 mt-6">
           You will need to retreive the node url and an admin macaroon. Not sure
           where to find these details?
@@ -106,7 +103,7 @@ export default function ConnectLnd() {
           <div className="w-4/5">
             <div className="mt-6">
               <label className="block font-medium text-gray-700">Address</label>
-              <div>
+              <div className="mt-1">
                 <Input
                   name="url"
                   placeholder="https://"
