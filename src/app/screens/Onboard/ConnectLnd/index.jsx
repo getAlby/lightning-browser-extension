@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { UploadIcon } from "@heroicons/react/outline";
 
 import Input from "../../../components/Form/input";
@@ -16,6 +16,7 @@ export default function ConnectLnd() {
   const history = useHistory();
   const [formData, setFormData] = useState(initialFormData);
   const [isDragging, setDragging] = useState(false);
+  const hiddenFileInput = useRef(null);
 
   function handleChange(event) {
     setFormData({
@@ -53,21 +54,14 @@ export default function ConnectLnd() {
 
   function dropHandler(event) {
     event.preventDefault();
-
-    if (event.dataTransfer.items) {
-      for (let i = 0; i < event.dataTransfer.items.length; i++) {
-        if (event.dataTransfer.items[i].kind === "file") {
-          const file = event.dataTransfer.items[i].getAsFile();
-          readFile(file);
-        }
-      }
-    } else {
-      for (let i = 0; i < event.dataTransfer.files.length; i++) {
-        const file = event.dataTransfer.files[i];
-        readFile(file);
-      }
+    if (
+      event.dataTransfer.items &&
+      event.dataTransfer.items[0].kind === "file"
+    ) {
+      const file = event.dataTransfer.items[0].getAsFile();
+      const extension = file.name.split(".").pop();
+      if (extension === "macaroon") readFile(file);
     }
-
     if (isDragging) setDragging(false);
   }
 
@@ -137,18 +131,32 @@ export default function ConnectLnd() {
               </div>
               <p className="text-center my-4">OR</p>
               <div
-                className={`flex flex-col items-center p-4 py-10 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
+                className={`cursor-pointer flex flex-col items-center p-4 py-10 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
                   isDragging ? "border-blue-500 bg-blue-50" : ""
                 }`}
                 onDrop={dropHandler}
                 onDragOver={dragOverHandler}
                 onDragLeave={dragLeaveHandler}
+                onClick={() => hiddenFileInput.current.click()}
               >
                 <UploadIcon
-                  className="mb-2 h-10 w-10 text-blue-500"
+                  className="mb-3 h-9 w-9 text-blue-500"
                   aria-hidden="true"
                 />
-                <p>Drag and drop your macaroon here</p>
+                <p>
+                  Drag and drop your macaroon here or{" "}
+                  <span className="underline">browse</span>
+                </p>
+                <input
+                  ref={hiddenFileInput}
+                  onChange={(event) => {
+                    const file = event.target.files[0];
+                    readFile(file);
+                  }}
+                  type="file"
+                  accept=".macaroon"
+                  hidden
+                />
               </div>
             </div>
           </div>
