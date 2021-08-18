@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { UploadIcon } from "@heroicons/react/outline";
+
 import Input from "../../../components/Form/input";
 import Button from "../../../components/button";
 import { useHistory } from "react-router-dom";
@@ -13,6 +15,8 @@ const initialFormData = Object.freeze({
 export default function ConnectLnd() {
   const history = useHistory();
   const [formData, setFormData] = useState(initialFormData);
+  const [isDragging, setDragging] = useState(false);
+  const hiddenFileInput = useRef(null);
 
   function handleChange(event) {
     setFormData({
@@ -48,6 +52,44 @@ export default function ConnectLnd() {
     }
   }
 
+  function dropHandler(event) {
+    event.preventDefault();
+    if (
+      event.dataTransfer.items &&
+      event.dataTransfer.items[0].kind === "file"
+    ) {
+      const file = event.dataTransfer.items[0].getAsFile();
+      const extension = file.name.split(".").pop();
+      if (extension === "macaroon") readFile(file);
+    }
+    if (isDragging) setDragging(false);
+  }
+
+  function readFile(file) {
+    const reader = new FileReader();
+    reader.onload = function (evt) {
+      const macaroon = utils.bytesToHexString(
+        new Uint8Array(evt.target.result)
+      );
+      if (macaroon) {
+        setFormData({
+          ...formData,
+          macaroon,
+        });
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  }
+
+  function dragOverHandler(event) {
+    event.preventDefault();
+    if (!isDragging) setDragging(true);
+  }
+
+  function dragLeaveHandler(event) {
+    if (isDragging) setDragging(false);
+  }
+
   return (
     <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
       <div className="relative">
@@ -74,11 +116,47 @@ export default function ConnectLnd() {
               </div>
             </div>
             <div className="mt-6">
-              <label className="block font-medium text-gray-700">
-                Macaroon
-              </label>
-              <div className="mt-1">
-                <Input name="macaroon" onChange={handleChange} required />
+              <div>
+                <label className="block font-medium text-gray-700">
+                  Macaroon
+                </label>
+                <div className="mt-1">
+                  <Input
+                    name="macaroon"
+                    value={formData.macaroon}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+              <p className="text-center my-4">OR</p>
+              <div
+                className={`cursor-pointer flex flex-col items-center p-4 py-10 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
+                  isDragging ? "border-blue-500 bg-blue-50" : ""
+                }`}
+                onDrop={dropHandler}
+                onDragOver={dragOverHandler}
+                onDragLeave={dragLeaveHandler}
+                onClick={() => hiddenFileInput.current.click()}
+              >
+                <UploadIcon
+                  className="mb-3 h-9 w-9 text-blue-500"
+                  aria-hidden="true"
+                />
+                <p>
+                  Drag and drop your macaroon here or{" "}
+                  <span className="underline">browse</span>
+                </p>
+                <input
+                  ref={hiddenFileInput}
+                  onChange={(event) => {
+                    const file = event.target.files[0];
+                    readFile(file);
+                  }}
+                  type="file"
+                  accept=".macaroon"
+                  hidden
+                />
               </div>
             </div>
           </div>
