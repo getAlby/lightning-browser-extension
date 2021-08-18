@@ -158,6 +158,17 @@ export default function ConnectLnd() {
             </div>
           </div>
           <div className="mt-8 w-2/5">
+            <span
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                history.goBack();
+                return false;
+              }}
+              className="cursor-pointer inline-flex justify-center items-center px-7 py-2 font-small"
+            >
+              Back
+            </span>
             <Button type="submit" label="Continue" />
           </div>
         </form>

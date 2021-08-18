@@ -8,9 +8,7 @@ import utils from "../../../../common/lib/utils";
 export default function ConnectLndHub() {
   const history = useHistory();
   const [formData, setFormData] = useState({
-    login: "",
-    password: "",
-    url: "https://lndhub.herokuapp.com",
+    uri: "",
   });
 
   function handleChange(event) {
@@ -22,7 +20,14 @@ export default function ConnectLndHub() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const { login, password, url } = formData;
+    const match = formData.uri.match(/lndhub:\/\/(\S+):(\S+)@(\S+)/i);
+    if (!match) {
+      alert("Invalid LNDHub URI");
+      return;
+    }
+    const login = match[1];
+    const password = match[2];
+    const url = match[3];
     const account = {
       name: "LNDHub",
       config: {
@@ -57,7 +62,7 @@ export default function ConnectLndHub() {
     <form onSubmit={handleSubmit}>
       <div className="relative mt-24 lg:flex space-x-8">
         <div className="lg:w-1/2">
-          <h1 className="text-3xl font-bold">Connect to LndHub</h1>
+          <h1 className="text-3xl font-bold">Connect to LNDHub (BlueWallet)</h1>
           <p className="text-gray-500 mt-6"></p>
           <div className="w-4/5">
             <div className="mt-6">
@@ -65,50 +70,36 @@ export default function ConnectLndHub() {
                 htmlFor="login"
                 className="block font-medium text-gray-700"
               >
-                Login
+                LNDHub Export URI
               </label>
               <div className="mt-1">
                 <Input
-                  name="login"
+                  name="uri"
                   type="text"
                   required
+                  placeholder="lndhub://..."
                   onChange={handleChange}
                 />
-              </div>
-            </div>
-            <div className="mt-6">
-              <label
-                htmlFor="password"
-                className="block font-medium text-gray-700"
-              >
-                Password
-              </label>
-              <div className="mt-1">
-                <Input
-                  name="password"
-                  type="text"
-                  required
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div className="mt-6">
-              <label htmlFor="url" className="block font-medium text-gray-700">
-                URL
-              </label>
-              <div className="mt-1">
-                <Input
-                  name="url"
-                  type="text"
-                  required
-                  value={formData.url}
-                  onChange={handleChange}
-                />
+                <small>
+                  BlueWallet users find the Backup/Export URI in the lightning
+                  wallet settings.
+                </small>
               </div>
             </div>
           </div>
           <div className="mt-8">
-            <Button label="Next" type="submit" />
+            <span
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                history.goBack();
+                return false;
+              }}
+              className="cursor-pointer inline-flex justify-center items-center px-7 py-2 font-small"
+            >
+              Back
+            </span>
+            <Button label="Continue" type="submit" />
           </div>
         </div>
         <div className="mt-16 lg:mt-0 lg:w-1/2">

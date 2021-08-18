@@ -72,7 +72,18 @@ export default function ConnectLndHub() {
             </div>
           </div>
           <div className="mt-8">
-            <Button label="Next" onClick={handleNext} />
+            <span
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                history.goBack();
+                return false;
+              }}
+              className="cursor-pointer inline-flex justify-center items-center px-7 py-2 font-small"
+            >
+              Back
+            </span>
+            <Button label="Continue" onClick={handleNext} />
           </div>
         </div>
         <div className="mt-16 lg:mt-0 lg:w-1/2">
