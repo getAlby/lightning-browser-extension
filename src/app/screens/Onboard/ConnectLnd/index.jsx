@@ -93,12 +93,10 @@ export default function ConnectLnd() {
   return (
     <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
       <div className="relative">
-        <h1 className="text-3xl font-bold">Connect to your remote node</h1>
+        <h1 className="text-3xl font-bold">Connect to your LND node</h1>
         <p className="text-gray-500 mt-6">
-          You will need to retreive the node url and an admin macaroon. Not sure
-          where to find these details?
+          You will need to retrieve the node url and an admin macaroon.
         </p>
-        <p className="text-orange-bitcoin mt-2">Check out this guides.</p>
         <form onSubmit={handleSubmit}>
           <div className="w-4/5">
             <div className="mt-6">
@@ -178,7 +176,7 @@ export default function ConnectLnd() {
         className="mt-10 -mx-4 relative lg:mt-0 lg:flex lg:items-center"
         aria-hidden="true"
       >
-        <img src="https://i.ibb.co/QfF1PP6/Frame-20.png" />
+        <img src="assets/icons/satsymbol.svg" alt="Sats" className="max-w-xs" />
       </div>
     </div>
   );
