@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { UploadIcon } from "@heroicons/react/outline";
+
 import Input from "../../../components/Form/input";
 import Button from "../../../components/button";
 import { useHistory } from "react-router-dom";
@@ -10,9 +12,17 @@ const initialFormData = Object.freeze({
   macaroon: "",
 });
 
+function buf2hex(buffer) {
+  // buffer is an ArrayBuffer
+  return [...new Uint8Array(buffer)]
+    .map((x) => x.toString(16).padStart(2, "0"))
+    .join("");
+}
+
 export default function ConnectLnd() {
   const history = useHistory();
   const [formData, setFormData] = useState(initialFormData);
+  const [isDragging, setDragging] = useState(false);
 
   function handleChange(event) {
     setFormData({
@@ -48,6 +58,50 @@ export default function ConnectLnd() {
     }
   }
 
+  function dropHandler(event) {
+    event.preventDefault();
+
+    if (event.dataTransfer.items) {
+      for (let i = 0; i < event.dataTransfer.items.length; i++) {
+        if (event.dataTransfer.items[i].kind === "file") {
+          const file = event.dataTransfer.items[i].getAsFile();
+          readFile(file);
+        }
+      }
+    } else {
+      for (let i = 0; i < event.dataTransfer.files.length; i++) {
+        const file = event.dataTransfer.files[i];
+        readFile(file);
+      }
+    }
+
+    if (isDragging) setDragging(false);
+  }
+
+  function readFile(file) {
+    const reader = new FileReader();
+    reader.onload = function (evt) {
+      let macaroon;
+      if ((macaroon = buf2hex(evt.target.result))) {
+        console.log(macaroon);
+        setFormData({
+          ...formData,
+          macaroon,
+        });
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  }
+
+  function dragOverHandler(event) {
+    event.preventDefault();
+    if (!isDragging) setDragging(true);
+  }
+
+  function dragLeaveHandler(event) {
+    if (isDragging) setDragging(false);
+  }
+
   return (
     <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
       <div className="relative">
@@ -74,11 +128,33 @@ export default function ConnectLnd() {
               </div>
             </div>
             <div className="mt-6">
-              <label className="block font-medium text-gray-700">
-                Macaroon
-              </label>
-              <div className="mt-1">
-                <Input name="macaroon" onChange={handleChange} required />
+              <div>
+                <label className="block font-medium text-gray-700">
+                  Macaroon
+                </label>
+                <div className="mt-1">
+                  <Input
+                    name="macaroon"
+                    value={formData.macaroon}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+              <p className="text-center my-4">OR</p>
+              <div
+                className={`flex flex-col items-center p-4 py-10 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
+                  isDragging ? "border-blue-500 bg-blue-50" : ""
+                }`}
+                onDrop={dropHandler}
+                onDragOver={dragOverHandler}
+                onDragLeave={dragLeaveHandler}
+              >
+                <UploadIcon
+                  className="mb-2 h-10 w-10 text-blue-500"
+                  aria-hidden="true"
+                />
+                <p>Drag and drop your macaroon here</p>
               </div>
             </div>
           </div>
