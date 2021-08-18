@@ -4,6 +4,8 @@ import Button from "../../../components/button";
 import Card from "../../../components/card";
 import utils from "../../../../common/lib/utils";
 
+const faucetEnabled = false;
+
 export default function TestConnection() {
   const [accountInfo, setAccountInfo] = useState({});
   const [errorMessage, setErrorMessage] = useState();
@@ -14,6 +16,8 @@ export default function TestConnection() {
       history.goBack();
     });
   }
+
+  function claimSats(event) {}
 
   useEffect(() => {
     utils
@@ -49,8 +53,18 @@ export default function TestConnection() {
                   Connection success! 🎉
                 </h1>
                 <p className="text-gray-500 mt-6">
-                  Awesome, we were able to connect to your lightning node.
+                  Awesome, you're ready to go!
+                  {faucetEnabled && accountInfo.balance === 0 && (
+                    <p>
+                      But it seems you're wallet has 0 Sats. To get started we
+                      can send you some Sats...
+                      <a href="#" onClick={claimSats}>
+                        click here.
+                      </a>
+                    </p>
+                  )}
                 </p>
+
                 <div className="mt-6 shadow p-4 rounded-lg">
                   <Card
                     Card
