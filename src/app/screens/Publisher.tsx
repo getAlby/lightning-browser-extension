@@ -164,7 +164,7 @@ function Publisher() {
               </div>
             </div>
             <div className="flex justify-end p-5">
-              <Button onClick={updateAllowance} label="Save" />
+              <Button onClick={updateAllowance} label="Save" primary />
             </div>
           </Modal>
         </div>

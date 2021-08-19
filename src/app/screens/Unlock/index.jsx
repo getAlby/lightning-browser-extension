@@ -62,7 +62,7 @@ class Unlock extends React.Component {
               onChange={this.handlePasswordChange}
             />
           </div>
-          <Button type="submit" label="unlock" fullWidth />
+          <Button type="submit" label="unlock" fullWidth primary />
         </form>
         {this.state.error && (
           <p>

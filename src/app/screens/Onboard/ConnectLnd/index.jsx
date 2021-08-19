@@ -91,8 +91,8 @@ export default function ConnectLnd() {
   }
 
   return (
-    <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
-      <div className="relative">
+    <div className="relative mt-24 lg:flex space-x-8">
+      <div className="lg:w-1/2">
         <h1 className="text-3xl font-bold">Connect to your LND node</h1>
         <p className="text-gray-500 mt-6">
           You will need to retrieve the node url and an admin macaroon.
@@ -155,28 +155,27 @@ export default function ConnectLnd() {
               </div>
             </div>
           </div>
-          <div className="mt-8 w-2/5">
-            <span
-              href="#"
+          <div className="mt-8 flex space-x-4">
+            <Button
+              label="Back"
               onClick={(e) => {
                 e.preventDefault();
                 history.goBack();
                 return false;
               }}
-              className="cursor-pointer inline-flex justify-center items-center px-7 py-2 font-small"
-            >
-              Back
-            </span>
-            <Button type="submit" label="Continue" />
+            />
+            <Button type="submit" label="Continue" primary />
           </div>
         </form>
       </div>
-
-      <div
-        className="mt-10 -mx-4 relative lg:mt-0 lg:flex lg:items-center"
-        aria-hidden="true"
-      >
-        <img src="assets/icons/satsymbol.svg" alt="Sats" className="max-w-xs" />
+      <div className="mt-16 lg:mt-0 lg:w-1/2">
+        <div className="lg:flex h-full justify-center items-center">
+          <img
+            src="assets/icons/satsymbol.svg"
+            alt="Sats"
+            className="max-w-xs"
+          />
+        </div>
       </div>
     </div>
   );

@@ -109,7 +109,7 @@ export default function ConnectLnbits() {
             </div>
           </div>
           <div className="mt-8">
-            <Button label="Next" type="submit" />
+            <Button label="Next" type="submit" primary />
           </div>
         </div>
         <div className="mt-16 lg:mt-0 lg:w-1/2">
