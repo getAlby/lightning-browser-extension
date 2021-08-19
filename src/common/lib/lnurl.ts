@@ -6,7 +6,20 @@ import { parsePaymentRequest } from "invoices";
 import { bech32Decode } from "../utils/helpers";
 
 const lnurl = {
-  async getDetails(lnurlEncoded) {
+  findLnurl(bodyOfText: string) {
+    const res =
+      /^(?:http.*[&?]lightning=|lightning:)?(lnurl1[02-9ac-hj-np-z]+)/.exec(
+        bodyOfText.toLowerCase()
+      );
+    if (res) {
+      return res[1];
+    }
+    return null;
+  },
+  isLnurl(url: string) {
+    return this.findLnurl(url) !== null;
+  },
+  async getDetails(lnurlEncoded: string) {
     const lnurlDecoded = bech32Decode(lnurlEncoded);
     const url = new URL(lnurlDecoded);
     let lnurlDetails = {};

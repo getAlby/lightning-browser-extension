@@ -1,5 +1,6 @@
 import WebLNProvider from "../ln/webln";
 import Donation from "./donation";
+import lnurlLib from "../../common/lib/lnurl";
 
 if (document) {
   window.webln = new WebLNProvider();
@@ -44,7 +45,7 @@ if (document) {
       if (!response.enabled) {
         return;
       }
-      if (paymentRequest.toLowerCase().startsWith("lnurl")) {
+      if (lnurlLib.isLnurl(paymentRequest)) {
         return window.webln
           .lnurl(paymentRequest)
           .then((r) => {
