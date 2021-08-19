@@ -43,7 +43,7 @@ export default function TestConnection() {
               <div>
                 <h1 className="text-3xl font-bold">Connection Error</h1>
                 <p>{errorMessage}</p>
-                <Button label="Edit" onClick={handleEdit} />
+                <Button label="Edit" onClick={handleEdit} primary />
               </div>
             )}
 
@@ -82,7 +82,7 @@ export default function TestConnection() {
                   </p>
 
                   <div className="mt-8">
-                    <Button label="Give it a try now" />
+                    <Button label="Give it a try now" primary />
                   </div>
                 </div>
               </div>

@@ -114,6 +114,7 @@ class ConfirmPayment extends React.Component {
                 onClick={() => this.confirm()}
                 label="Confirm"
                 fullWidth
+                primary
               />
             </div>
 

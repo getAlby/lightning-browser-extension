@@ -43,7 +43,7 @@ function LNURLAuth({ details, origin }: Props) {
         </dl>
         <div className="text-center">
           <div className="mb-5">
-            <Button onClick={confirm} label="Login" fullWidth />
+            <Button onClick={confirm} label="Login" fullWidth primary />
           </div>
 
           <p className="mb-3 underline text-sm text-gray-300">

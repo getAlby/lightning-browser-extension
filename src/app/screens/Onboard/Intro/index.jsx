@@ -63,6 +63,7 @@ export default function Intro() {
           onClick={() => history.push("/set-password")}
           type="button"
           label="Get Started"
+          primary
         ></Button>
       </div>
     </div>
