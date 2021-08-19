@@ -173,7 +173,7 @@ export default function ConnectLnd() {
       </div>
 
       <div
-        className="mt-10 -mx-4 relative lg:mt-0 lg:flex lg:items-center"
+        className="lg:flex h-full justify-center items-center"
         aria-hidden="true"
       >
         <img src="assets/icons/satsymbol.svg" alt="Sats" className="max-w-xs" />
