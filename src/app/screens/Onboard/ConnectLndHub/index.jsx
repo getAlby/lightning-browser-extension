@@ -29,7 +29,7 @@ export default function ConnectLndHub() {
     }
     const login = match[1];
     const password = match[2];
-    const url = match[3];
+    const url = match[3].replace(/\/$/, "");
     const account = {
       name: "LNDHub",
       config: {
