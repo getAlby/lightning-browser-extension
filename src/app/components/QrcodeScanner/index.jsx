@@ -64,7 +64,7 @@ function QrcodeScanner({
 
   return (
     <div className="p-6 shadow-sm rounded-md border border-gray-300 flex flex-col items-center">
-      <h4 className="text-xl font-bold mb-6">Scan QR Code</h4>
+      <h4 className="text-xl font-bold mb-4">Scan QR Code</h4>
 
       {!isScanning && (
         <>
