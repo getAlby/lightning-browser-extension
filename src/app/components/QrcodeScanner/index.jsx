@@ -73,7 +73,7 @@ function QrcodeScanner({
             aria-hidden="true"
           />
           <Button
-            label="Request Camera Permissions"
+            label="Start scanning"
             onClick={handleRequestCameraPermissions}
           />
         </>
