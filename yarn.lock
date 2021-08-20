@@ -8906,6 +8906,11 @@ html-webpack-plugin@^5.0.0, html-webpack-plugin@^5.3.1:
     pretty-error "^3.0.4"
     tapable "^2.0.0"
 
+html5-qrcode@^2.0.11:
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/html5-qrcode/-/html5-qrcode-2.0.11.tgz#2cc5f63e767be53dd6c6d56b6c4f180a12aa8075"
+  integrity sha512-cCrVOK2yJGPGSTjchqRhkBJIrxvojEwF/pDKLNxmTH1wiAsVc61ZnIqyApIVyNfn5dKRFax70Qpr7pZwbUNiUw==
+
 htmlparser2@^6.1.0:
   version "6.1.0"
   resolved "https://registry.npmjs.org/htmlparser2/-/htmlparser2-6.1.0.tgz"
