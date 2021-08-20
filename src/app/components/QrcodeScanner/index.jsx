@@ -30,6 +30,7 @@ function QrcodeScanner({
               qrbox,
             },
             (decodedText, decodedResult) => {
+              handleStopScanning();
               qrCodeSuccessCallback(decodedText);
             },
             (errorMessage) => {
