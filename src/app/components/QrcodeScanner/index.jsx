@@ -13,11 +13,7 @@ function QrcodeScanner({
   const html5QrCodeRef = useRef(null);
 
   useEffect(() => {
-    return () => {
-      html5QrCodeRef.current.stop().catch((e) => {
-        // Stop failed.
-      });
-    };
+    return handleStopScanning;
   }, []);
 
   async function handleRequestCameraPermissions() {
@@ -55,6 +51,7 @@ function QrcodeScanner({
         .stop()
         .then((ignore) => {
           setScanning(false);
+          html5QrCodeRef.current.clear();
         })
         .catch((e) => {
           // Stop failed.
@@ -63,26 +60,25 @@ function QrcodeScanner({
   }
 
   return (
-    <div className="p-6 shadow-sm rounded-md border border-gray-300 flex flex-col items-center">
-      <h4 className="text-xl font-bold mb-4">Scan QR Code</h4>
+    <div className="shadow-sm rounded-md border border-gray-300 flex flex-col items-center">
+      <h4 className="text-xl font-bold my-4">Scan QR Code</h4>
 
       {!isScanning && (
         <>
-          <QrcodeIcon
-            className="mb-6 h-24 w-24 text-blue-500"
-            aria-hidden="true"
-          />
-          <Button
-            label="Start scanning"
-            onClick={handleRequestCameraPermissions}
-          />
+          <QrcodeIcon className="h-24 w-24 text-blue-500" aria-hidden="true" />
+          <div className="my-6">
+            <Button
+              label="Start scanning"
+              onClick={handleRequestCameraPermissions}
+            />
+          </div>
         </>
       )}
 
-      <div className="bg-black" id="reader" />
+      <div className="bg-black w-full" id="reader" />
 
       {isScanning && (
-        <div className="mt-6">
+        <div className="my-6">
           <Button label="Stop scanning" onClick={handleStopScanning} />
         </div>
       )}
