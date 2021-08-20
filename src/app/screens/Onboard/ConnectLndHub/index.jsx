@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import Input from "../../../components/Form/input";
-import Button from "../../../components/button";
 import { useHistory } from "react-router-dom";
 
 import utils from "../../../../common/lib/utils";
+
+import Input from "../../../components/Form/input";
+import Button from "../../../components/button";
+import QrcodeScanner from "../../../components/QrcodeScanner";
 
 export default function ConnectLndHub() {
   const history = useHistory();
@@ -27,7 +29,7 @@ export default function ConnectLndHub() {
     }
     const login = match[1];
     const password = match[2];
-    const url = match[3];
+    const url = match[3].replace(/\/$/, "");
     const account = {
       name: "LNDHub",
       config: {
@@ -78,6 +80,7 @@ export default function ConnectLndHub() {
                   type="text"
                   required
                   placeholder="lndhub://..."
+                  value={formData.uri}
                   onChange={handleChange}
                 />
                 <small>
@@ -85,6 +88,20 @@ export default function ConnectLndHub() {
                   wallet settings.
                 </small>
               </div>
+              <p className="text-center my-4">OR</p>
+              <QrcodeScanner
+                fps={10}
+                qrbox={250}
+                qrCodeSuccessCallback={(decodedText) => {
+                  if (formData.uri !== decodedText) {
+                    setFormData({
+                      ...formData,
+                      uri: decodedText,
+                    });
+                  }
+                }}
+                qrCodeErrorCallback={console.error}
+              />
             </div>
           </div>
           <div className="mt-8 flex space-x-4">
