@@ -10,7 +10,6 @@ const makeInvoice = async (message, sender) => {
     memo: message.args.memo,
   });
 
-  console.log(response);
   return response;
 };
 
