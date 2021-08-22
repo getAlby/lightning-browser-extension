@@ -10,6 +10,7 @@ export default function Input({
   value,
   autoFocus = false,
   autoComplete = "off",
+  disabled,
 }) {
   return (
     <input
@@ -23,6 +24,7 @@ export default function Input({
       value={value}
       autoFocus={autoFocus}
       autoComplete={autoComplete}
+      disabled={disabled}
     />
   );
 }
