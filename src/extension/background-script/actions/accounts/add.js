@@ -23,6 +23,9 @@ const add = (message, sender) => {
   if (!currentAccountId) {
     state.setState({ currentAccountId: accountId });
   }
+
+  // make sure we immediately persist the new account
+  state.getState().saveToStorage();
   return Promise.resolve({ data: { accountId: accountId } });
 };
 

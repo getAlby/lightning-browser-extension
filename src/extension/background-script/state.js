@@ -47,7 +47,7 @@ const state = createState((set, get) => ({
         set(data);
       });
   },
-  flush: () => {
+  saveToStorage: () => {
     const current = get();
     const data = {};
     Object.keys(browserStorage).forEach((key) => {
