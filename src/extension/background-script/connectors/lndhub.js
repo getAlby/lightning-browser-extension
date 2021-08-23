@@ -31,6 +31,9 @@ export default class LndHub extends Base {
     return this.request("POST", "/payinvoice", {
       invoice: args.paymentRequest,
     }).then((data) => {
+      if (data.error) {
+        return { error: data.message };
+      }
       if (
         typeof data.payment_hash === "object" &&
         data.payment_hash.type === "Buffer"
@@ -137,7 +140,7 @@ export default class LndHub extends Base {
       return data;
     } catch (e) {
       console.log(e);
-      throw new Error(error.response.data);
+      throw new Error(e.response.data);
     }
   }
 }
