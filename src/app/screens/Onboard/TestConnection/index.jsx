@@ -72,7 +72,11 @@ export default function TestConnection() {
           })
           .catch((r) => {
             console.log(r.response);
-            alert(r.response.data.error);
+            if (r.response && r.response.data) {
+              alert(r.response.data.error);
+            } else {
+              alert("An error ocurred. Did you already use the faucet?");
+            }
           });
       });
   }
