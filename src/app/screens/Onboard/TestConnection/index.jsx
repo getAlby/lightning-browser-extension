@@ -140,8 +140,9 @@ export default function TestConnection() {
           </div>
         </div>
         <div className="flex justify-end p-5">
-          {faucetLoading && <Loading />}
-          {!faucetLoading && (
+          {faucetLoading ? (
+            <Loading />
+          ) : (
             <Button onClick={claimSats} label="Get Sats" primary />
           )}
         </div>
@@ -182,7 +183,7 @@ export default function TestConnection() {
                       >
                         To get started we can send you some Sats...
                       </a>
-                      {faucetURL && renderFaucet()}
+                      {renderFaucet()}
                     </div>
                   )}
                 </div>
