@@ -36,10 +36,18 @@ class Lnd extends Base {
     return this.request("POST", "/v2/signer/signmessage", args);
   }
 
-  makeInvoice(message) {
+  makeInvoice(args) {
     return this.request("POST", "/v1/invoices", {
-      memo: message.args.memo,
-      value: message.args.amount,
+      memo: args.memo,
+      value: args.amount,
+    }).then((res) => {
+      return {
+        data: {
+          paymentRequest: res.data.payment_request,
+          addIndex: res.data.add_index,
+          rHash: res.data.r_hash,
+        },
+      };
     });
   }
 

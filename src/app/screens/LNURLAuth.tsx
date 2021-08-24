@@ -1,5 +1,4 @@
 import React, { useState, MouseEvent } from "react";
-import axios from "axios";
 
 import msg from "../../common/lib/msg";
 import utils from "../../common/lib/utils";

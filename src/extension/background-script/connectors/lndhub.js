@@ -59,9 +59,15 @@ export default class LndHub extends Base {
   makeInvoice(args) {
     return this.request("POST", "/addinvoice", {
       amt: args.amount,
-      memo: args.defaultMemo,
+      memo: args.memo,
     }).then((data) => {
-      return { data };
+      return {
+        data: {
+          paymentRequest: data.payment_request,
+          rHash: data.r_hash,
+          addIndes: data.add_index,
+        },
+      };
     });
   }
 
