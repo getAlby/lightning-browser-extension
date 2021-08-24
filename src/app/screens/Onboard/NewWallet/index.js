@@ -15,16 +15,9 @@ export default function NewWallet() {
   });
   const history = useHistory();
 
-  function handleNext(event) {
+  function signup(event) {
     event.preventDefault();
-    if (lndHubData.login && lndHubData.password) {
-      return next();
-    } else {
-      return signup();
-    }
-  }
 
-  function signup() {
     const headers = new Headers();
     headers.append("Accept", "application/json");
     headers.append("Access-Control-Allow-Origin", "*");
@@ -41,7 +34,9 @@ export default function NewWallet() {
     });
   }
 
-  async function next() {
+  async function next(event) {
+    event.preventDefault();
+
     const { login, password } = lndHubData;
     const account = {
       name: "LNDHub",
@@ -128,7 +123,7 @@ export default function NewWallet() {
             />
             <Button
               label={lndHubData.login ? "Next" : "Create a wallet"}
-              onClick={handleNext}
+              onClick={lndHubData.login ? next : signup}
               primary
             />
           </div>
