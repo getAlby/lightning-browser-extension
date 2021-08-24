@@ -2,7 +2,6 @@ import connectors from "../../connectors";
 
 const validateAccount = async (message, sender) => {
   const account = message.args;
-  console.log(account);
   const connector = new connectors[account.connector](account.config);
 
   try {

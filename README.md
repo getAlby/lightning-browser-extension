@@ -141,7 +141,7 @@ Also we focus on supporting multipe different node backends (non-custodial and c
 ### Thanks
 
 Based on the web extension starter kit: [/abhijithvijayan/web-extension-starter](https://github.com/abhijithvijayan/web-extension-starter")  
-heaviy inspired by the amazon work of the [Joule extension](https://lightningjoule.com/)
+heavily inspired by the super amazing work of the [Joule extension](https://lightningjoule.com/)
 
 ## License
 

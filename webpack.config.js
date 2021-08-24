@@ -124,7 +124,12 @@ module.exports = {
     // TODO: reenable
     // new webpack.SourceMapDevToolPlugin({ filename: false }),
     // environmental variables
-    new webpack.EnvironmentPlugin(["NODE_ENV", "TARGET_BROWSER"]),
+    new webpack.EnvironmentPlugin([
+      "NODE_ENV",
+      "TARGET_BROWSER",
+      "FAUCET_URL",
+      "FAUCET_K",
+    ]),
     // delete previous build files
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: [

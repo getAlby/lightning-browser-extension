@@ -1,6 +1,7 @@
 export default class WebLNProvider {
   constructor() {
     this.enabled = false;
+    this.isEnabled = false; // seems some webln implementations use webln.isEnabled and some use webln.enabled
     this.executing = false;
   }
 
@@ -10,6 +11,7 @@ export default class WebLNProvider {
     }
     return this.execute("enable").then((result) => {
       this.enabled = result.enabled;
+      this.isEnabled = result.enabled;
       return result;
     });
   }

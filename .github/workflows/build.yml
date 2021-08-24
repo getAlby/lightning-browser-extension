@@ -10,8 +10,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      FAUCET_URL: ${{ secrets.FAUCET_URL }}
+      FAUCET_K: ${{ secrets.FAUCET_K }}
 
     name: build-prod
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
