@@ -22,9 +22,6 @@ class DevMenu extends React.Component {
   }
 
   render() {
-    if (process.env.NODE_ENV !== "development") {
-      return null;
-    }
     return (
       <div className="flex items-center px-3 py-2 space-x-3 bg-gray-800 text-white">
         <span>Dev Menu</span>
