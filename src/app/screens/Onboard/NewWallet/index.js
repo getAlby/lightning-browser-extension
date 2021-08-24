@@ -74,15 +74,7 @@ export default function NewWallet() {
         <div className="lg:w-1/2">
           <h1 className="text-3xl font-bold">Get a new lightning wallet</h1>
           <p className="text-gray-500 mt-6"></p>
-          {!lndHubData.login && (
-            <div className="w-4/5">
-              <div className="mt-6">
-                <strong>Remember, not your keys, not your coins.</strong>
-                This quick setup uses a custodial service to manage your wallet.
-              </div>
-            </div>
-          )}
-          {lndHubData.login && (
+          {lndHubData.login ? (
             <div className="w-4/5">
               <div className="mt-6">
                 <Input
@@ -109,6 +101,13 @@ export default function NewWallet() {
                 If you loose access you will need this backup to recover your
                 wallet. You can also import the wallet into your BlueWallet
                 mobile app using the QR Code.
+              </div>
+            </div>
+          ) : (
+            <div className="w-4/5">
+              <div className="mt-6">
+                <strong>Remember, not your keys, not your coins.</strong>
+                This quick setup uses a custodial service to manage your wallet.
               </div>
             </div>
           )}
