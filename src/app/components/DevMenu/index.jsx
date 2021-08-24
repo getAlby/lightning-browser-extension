@@ -18,7 +18,7 @@ class DevMenu extends React.Component {
   }
 
   initDevelopmentAccount() {
-    alert('not implemented');
+    alert("not implemented");
   }
 
   render() {

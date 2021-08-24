@@ -74,7 +74,7 @@ function App() {
 
   return (
     <div>
-      <DevMenu />
+      {process.env.NODE_ENV === "development" && <DevMenu />}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Steps steps={steps} />
       </div>
