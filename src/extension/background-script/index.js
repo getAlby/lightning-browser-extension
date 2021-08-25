@@ -30,7 +30,12 @@ const updateIcon = async (tabId, changeInfo, tabInfo) => {
 
   if (allowance) {
     return browser.browserAction.setIcon({
-      path: "assets/icons/satsymbol.svg",
+      path: {
+        16: "assets/icons/satsymbol-16.png",
+        32: "assets/icons/satsymbol-32.png",
+        48: "assets/icons/satsymbol-48.png",
+        128: "assets/icons/satsymbol-128.png",
+      },
       tabId: tabId,
     });
   }

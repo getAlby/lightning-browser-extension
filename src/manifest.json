@@ -4,10 +4,10 @@
   "version": "1.0.0",
 
   "icons": {
-    "16": "assets/icons/satsymbol-black.svg",
-    "32": "assets/icons/satsymbol-black.svg",
-    "48": "assets/icons/satsymbol-black.svg",
-    "128": "assets/icons/satsymbol-black.svg"
+    "16": "assets/icons/satsymbol-black-16.png",
+    "32": "assets/icons/satsymbol-black-32.png",
+    "48": "assets/icons/satsymbol-black-48.png",
+    "128": "assets/icons/satsymbol-black-128.png"
   },
   "description": "Lightning up the browser",
   "homepage_url": "https://github.com/bumi/lightning-browser-extension",
@@ -41,10 +41,10 @@
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "assets/icons/satsymbol-black.svg",
-      "32": "assets/icons/satsymbol-black.svg",
-      "48": "assets/icons/satsymbol-black.svg",
-      "128": "assets/icons/satsymbol-black.svg"
+      "16": "assets/icons/satsymbol-black-16.png",
+      "32": "assets/icons/satsymbol-black-32.png",
+      "48": "assets/icons/satsymbol-black-48.png",
+      "128": "assets/icons/satsymbol-black-128.png"
     },
     "default_title": "Lightning",
     "__chrome|opera__chrome_style": false,
