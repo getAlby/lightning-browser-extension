@@ -9,6 +9,14 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
+// init env variables otherwise the EnvironmentPlugin complains if those are not set.
+if (!process.env.FAUCET_URL) {
+  process.env.FAUCET_URL = null;
+}
+if (!process.env.FAUCET_K) {
+  process.env.FAUCET_K = null;
+}
+
 const viewsPath = path.join(__dirname, "static", "views");
 const nodeEnv = process.env.NODE_ENV || "development";
 const destPath = path.join(__dirname, "dist", nodeEnv);
