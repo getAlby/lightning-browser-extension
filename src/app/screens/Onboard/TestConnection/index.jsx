@@ -190,8 +190,7 @@ export default function TestConnection() {
 
                 <div className="mt-6 shadow p-4 rounded-lg">
                   <Card
-                    Card
-                    color="green-bitcoin"
+                    color="bg-green-bitcoin"
                     alias={accountInfo.alias}
                     satoshis={
                       typeof accountInfo.balance === "number"
