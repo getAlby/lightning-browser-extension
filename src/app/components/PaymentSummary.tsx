@@ -14,7 +14,7 @@ function PaymentSummary({ amount, amountAlt, description }: Props) {
           Amount
         </dt>
         <dd className="mb-0 text-lg">{amount}</dd>
-        {amountAlt && <dd className="text-gray-500">{amountAlt}</dd>}
+        {amountAlt && <dd className="text-gray-500">{amountAlt} Sats</dd>}
         <dt className="mt-4 uppercase font-semibold text-gray-500 text-xs">
           Description
         </dt>
