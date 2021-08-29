@@ -6,7 +6,7 @@ const utils = {
   call: (type, args, overwrites) => {
     return browser.runtime
       .sendMessage({
-        application: "Joule",
+        application: "LBE",
         prompt: true,
         type: type,
         args: args,

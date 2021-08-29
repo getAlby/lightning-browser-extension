@@ -58,7 +58,8 @@ if (document) {
       return window.webln
         .sendPayment(paymentRequest)
         .then((r) => {
-          alert(JSON.stringify(r));
+          console.log(r);
+          //alert(JSON.stringify(r));
         })
         .catch((e) => {
           console.log(e);

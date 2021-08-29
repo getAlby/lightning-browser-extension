@@ -71,7 +71,7 @@ export default class WebLNProvider {
       // in page script can not directly connect to the background script
       window.postMessage(
         {
-          application: "Joule",
+          application: "LBE",
           prompt: true,
           //action: `webln/${type}`, // TODO: think about a convention to cal the actions
           type: `${type}`,
@@ -81,15 +81,13 @@ export default class WebLNProvider {
       );
 
       function handleWindowMessage(messageEvent) {
-        console.log({ messageEvent });
         // check if it is a relevant message
         // there are some other events happening
         if (
           !messageEvent.data ||
           !messageEvent.data.response ||
-          messageEvent.data.application !== "Joule"
+          messageEvent.data.application !== "LBE"
         ) {
-          console.log("No response, ignoring");
           return;
         }
         if (messageEvent.data.data.error) {
@@ -106,7 +104,6 @@ export default class WebLNProvider {
 
       window.addEventListener("message", handleWindowMessage);
     });
-    console.log(p);
     return p;
   }
 }
