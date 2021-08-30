@@ -27,6 +27,7 @@ class Home extends React.Component {
       balanceFiat: null,
       payments: {},
       loadingPayments: true,
+      lnData: {},
     };
   }
   get exchangeRate() {
@@ -34,7 +35,24 @@ class Home extends React.Component {
     return (this.state.balanceFiat / this.state.balance) * 100000000;
   }
 
-  componentDidMount() {
+  loadLightningDataFromCurrentWebsite() {
+    // Enhancement data is loaded asynchronously (for example because we need to fetch additional data).
+    // Sadly we can not get return values from async code through executeScript()
+    // To work around this we write the enhancement data into a variable in the content script and access that variable here.
+    // Due to the async execution the variable could potentially not yet be loaded
+    browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+      const [currentTab] = tabs;
+      browser.tabs
+        .executeScript(currentTab.id, {
+          code: "window.LBE_LIGHTNING_DATA;",
+        })
+        .then((data) => {
+          this.setState({ lnData: data });
+        });
+    });
+  }
+
+  loadAllowance() {
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
       const [currentTab] = tabs;
       const url = new URL(currentTab.url);
@@ -44,7 +62,9 @@ class Home extends React.Component {
         }
       });
     });
+  }
 
+  loadAccountInfo() {
     utils.call("accountInfo").then((response) => {
       this.setState({
         alias: response.info?.alias,
@@ -56,12 +76,22 @@ class Home extends React.Component {
         }
       );
     });
+  }
+
+  loadPayments() {
     utils.call("getPayments").then((result) => {
       this.setState({
         payments: result?.payments,
         loadingPayments: false,
       });
     });
+  }
+
+  componentDidMount() {
+    this.loadAccountInfo();
+    this.loadPayments();
+    this.loadAllowance();
+    this.loadLightningDataFromCurrentWebsite();
   }
 
   renderAllowanceView() {
@@ -181,6 +211,7 @@ class Home extends React.Component {
           subtitle={typeof balance === "number" ? `${balance} Sats` : ""}
           right={<UserMenu />}
         />
+        <div>Data: {JSON.stringify(this.state.lnData)}</div>
         {allowance ? this.renderAllowanceView() : this.renderDefaultView()}
       </div>
     );

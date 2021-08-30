@@ -3,8 +3,11 @@ import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
 import injectScript from "./injectScript";
 
+import { enhancements, loadEnhancements } from "../inpage-script/enhancements";
+
 if (shouldInject()) {
   injectScript();
+  loadEnhancements(); // TODO: make optional
 
   // message listener to listen to inpage webln calls
   // those calls get passed on to the background script
