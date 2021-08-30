@@ -206,7 +206,9 @@ export default function TestConnection() {
                   </p>
 
                   <div className="mt-8">
-                    <Button label="Give it a try now" primary />
+                    <a href="https://area402.herokuapp.com/demo">
+                      <Button label="Give it a try now" primary />
+                    </a>
                   </div>
                 </div>
               </div>
