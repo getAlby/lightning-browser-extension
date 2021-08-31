@@ -49,10 +49,10 @@ jobs:
         uses: zdurham/s3-upload-github-action@master
         with:
           args: --acl public-read
-          env:
-            FILE: dist/production/opera.crx
-            AWS_REGION: 'eu-central-1'
-            S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-            S3_KEY: 'opera-nightly.crx'
-            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        env:
+          FILE: 'dist/production/opera.crx'
+          AWS_REGION: 'eu-central-1'
+          S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          S3_KEY: 'opera-nightly.crx'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
