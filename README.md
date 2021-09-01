@@ -34,6 +34,7 @@ We have a channel on the [bitcoin.design](https://bitcoin.design/) Slack communi
 * [Firefox Nightly](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/elbee-firefox.xpi)
 * [Chrome Nightly](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/elbee-chrome.zip)
 
+(Note: You might need to reconfigure your wallet after installing new versions)
 
 ## Browser Support
 
