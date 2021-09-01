@@ -29,17 +29,11 @@
     "test-app": "jest ./src/app",
     "test": "jest",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged --allow-empty"
-    }
+    "build-storybook": "build-storybook",
+    "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,md}": [
-      "prettier --write"
-    ]
+    "*.{js,jsx,ts,tsx}": ["eslint --cache --fix", "npm run format"]
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
@@ -123,7 +117,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "filemanager-webpack-plugin": "^6.1.5",
     "html-webpack-plugin": "^5.3.1",
-    "husky": "^7.0.1",
+    "husky": "^7.0.0",
     "jest": "^27.0.6",
     "jest-transform-stub": "^2.0.0",
     "lint-staged": "^11.1.2",
