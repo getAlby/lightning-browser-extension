@@ -48,6 +48,7 @@ jobs:
           
   release-firefox-nightly:
     runs-on: ubuntu-latest
+    needs: build-prod
     env:
       FILE: 'firefox.xpi'
       AWS_REGION: 'eu-central-1'
