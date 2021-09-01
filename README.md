@@ -32,7 +32,7 @@ We have a channel on the [bitcoin.design](https://bitcoin.design/) Slack communi
 ## Download Nightly releases
 
 * [Firefox Nightly](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/elbee-firefox.xpi)
-* [Chrome Nightly](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/elbee-chrome.zip)
+* [Chrome Nightly](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/elbee-chrome.zip) - Go to [chrome://extensions/](chrome://extensions/), enable "Developer mode" (top right) and drag& drop the file 
 
 (Note: You might need to reconfigure your wallet after installing new versions)
 
