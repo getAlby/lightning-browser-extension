@@ -9,7 +9,8 @@ module.exports = {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
       },
       fontSize: {
-        xxs: ".5rem",
+        xxxs: ".5rem",
+        xxs: ".625rem",
       },
       colors: {
         "orange-bitcoin": "#f7931a",
