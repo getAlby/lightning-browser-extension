@@ -13,7 +13,6 @@ const tabs = [
   { name: "Recieve", href: "#", icon: UsersIcon, current: false },
 ];
 
-
 export default function Navbar() {
   return (
     <div className="border-b-2 border-gray-100 h-16">

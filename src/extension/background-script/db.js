@@ -5,8 +5,10 @@ class DB extends Dexie {
   constructor() {
     super("LBE");
     this.version(1).stores({
-      allowances: "++id,&host,name,imageURL,tag,enabled,totalBudget,remainingBudget,lastPaymentAt,lnurlAuth,createdAt",
-      payments: "++id,allowanceId,host,location,name,description,totalAmount,totalFees,preimage,paymentRequest,paymentHash,destination,createdAt",
+      allowances:
+        "++id,&host,name,imageURL,tag,enabled,totalBudget,remainingBudget,lastPaymentAt,lnurlAuth,createdAt",
+      payments:
+        "++id,allowanceId,host,location,name,description,totalAmount,totalFees,preimage,paymentRequest,paymentHash,destination,createdAt",
     });
     this.on("ready", this.loadFromStorage.bind(this));
   }
@@ -23,7 +25,10 @@ class DB extends Dexie {
 
   async loadFromStorage() {
     try {
-      const result = await browser.storage.local.get(["allowances", "payments"]);
+      const result = await browser.storage.local.get([
+        "allowances",
+        "payments",
+      ]);
       console.log("Loading DB data from storage");
       if (result.allowances) {
         await this.allowances.bulkAdd(result.allowances);
