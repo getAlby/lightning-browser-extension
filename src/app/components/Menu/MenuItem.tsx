@@ -10,7 +10,7 @@ type Props = {
 function MenuItemComponent({ children, onClick }: Props) {
   return (
     <MenuItem
-      className="cursor-pointer text-gray-700 block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+      className="flex items-center cursor-pointer text-gray-700 block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
       onSelect={onClick}
     >
       {children}

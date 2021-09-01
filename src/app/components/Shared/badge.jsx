@@ -1,9 +1,11 @@
 import React from "react";
 
-export default function Badge({ label, color, textColor }) {
+export default function Badge({ label, color, textColor, small }) {
   return (
     <span
-      className={`px-1.5 py-1 rounded text-xs font-medium bg-${color} text-${textColor}`}
+      className={`inline-block leading-none rounded font-medium bg-${color} text-${textColor} ${
+        !small ? "p-1.5 text-xs" : "p-1 text-xxs"
+      }`}
     >
       {label}
     </span>
