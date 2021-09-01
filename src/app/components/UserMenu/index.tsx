@@ -123,7 +123,11 @@ export default function UserMenu() {
             </Menu.Item>
           );
         })}
-        <Menu.Item onClick={() => {}}>
+        <Menu.Item
+          onClick={() => {
+            openOptions("accounts/new");
+          }}
+        >
           <PlusIcon className="h-5 w-5 mr-2 text-gray-500" aria-hidden="true" />
           Add a new account
         </Menu.Item>
