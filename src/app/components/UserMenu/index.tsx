@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import {
   ChevronDownIcon,
   CogIcon,
@@ -16,6 +17,7 @@ import Menu from "../Menu";
 import Badge from "../Shared/badge";
 
 export default function UserMenu() {
+  const history = useHistory();
   const [accounts, setAccounts] = useState({});
 
   useEffect(() => {
@@ -32,10 +34,13 @@ export default function UserMenu() {
   }
 
   function openOptions(path: string) {
-    utils.openPage(`options.html#/${path}`);
-    // close the popup
+    // if we are in the popup
     if (window.location.pathname !== "/options.html") {
+      utils.openPage(`options.html#/${path}`);
+      // close the popup
       window.close();
+    } else {
+      history.push(`/${path}`);
     }
   }
 
