@@ -33,7 +33,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": ["eslint --cache --fix", "npm run format"]
+    "*.{js,jsx,ts,tsx}": ["eslint --cache --fix", "prettier --write"]
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
