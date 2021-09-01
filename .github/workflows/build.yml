@@ -15,7 +15,8 @@ jobs:
       FAUCET_K: ${{ secrets.FAUCET_K }}
 
     name: build-prod
-
+    environment: faucet
+    
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -49,6 +50,7 @@ jobs:
   release-firefox-nightly:
     runs-on: ubuntu-latest
     needs: build
+    environment: release
     env:
       FILE: 'firefox.xpi'
       AWS_REGION: 'eu-central-1'
@@ -63,6 +65,52 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: firefox.xpi
+      - name: Upload releases to S3
+        uses: zdurham/s3-upload-github-action@master
+        with:
+          args: --acl public-read
+          
+  release-chrome-nightly:
+    runs-on: ubuntu-latest
+    needs: build
+    environment: release
+    env:
+      FILE: 'chrome.zip'
+      AWS_REGION: 'eu-central-1'
+      S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+      S3_KEY: 'elbee-chrome.zip'
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    name: release-chrome-nightly
+    steps:
+      - name: Download chrome.zip
+        uses: actions/download-artifact@v2
+        with:
+          name: chrome.zip
+      - name: Upload releases to S3
+        uses: zdurham/s3-upload-github-action@master
+        with:
+          args: --acl public-read
+  
+  release-opera-nightly:
+    runs-on: ubuntu-latest
+    needs: build
+    environment: release
+    env:
+      FILE: 'opera.crx'
+      AWS_REGION: 'eu-central-1'
+      S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+      S3_KEY: 'elbee-opera.crx'
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    name: release-opera-nightly
+    steps:
+      - name: Download opera.crz
+        uses: actions/download-artifact@v2
+        with:
+          name: opera.crx
       - name: Upload releases to S3
         uses: zdurham/s3-upload-github-action@master
         with:
