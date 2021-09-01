@@ -34,8 +34,16 @@ export default function PublisherCard({ title, image, url }: Props) {
         {title}
 
         {url && (
-          <a href={url} target="_blank" className="inline-flex">
-            <ExternalLinkIcon className="inline-flex h-5 w-5" aria-hidden="true" />
+          <a
+            href={url}
+            target="_blank"
+            className="inline-flex"
+            rel="noreferrer"
+          >
+            <ExternalLinkIcon
+              className="inline-flex h-5 w-5"
+              aria-hidden="true"
+            />
           </a>
         )}
       </h2>

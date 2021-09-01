@@ -2,10 +2,14 @@ import db from "../../db";
 
 const list = async (message, sender) => {
   // TODO add filter and ordering?
-  let allowances = await db.allowances.toCollection().reverse().sortBy("lastPaymentAt");
+  let allowances = await db.allowances
+    .toCollection()
+    .reverse()
+    .sortBy("lastPaymentAt");
 
   const allowancePromises = allowances.map(async (allowance) => {
-    allowance.usedBudget = parseInt(allowance.totalBudget) - parseInt(allowance.remainingBudget);
+    allowance.usedBudget =
+      parseInt(allowance.totalBudget) - parseInt(allowance.remainingBudget);
     allowance.percentage = (
       (allowance.usedBudget / allowance.totalBudget) *
       100
