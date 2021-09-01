@@ -45,14 +45,24 @@ jobs:
         with:
           name: opera.crx
           path: dist/production/opera.crx
+          
+  release-firefox-nightly:
+    runs-on: ubuntu-latest
+    env:
+      FILE: 'firefox.xpi'
+      AWS_REGION: 'eu-central-1'
+      S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+      S3_KEY: 'elbee-firefox.xpi'
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    name: release-firefox-nightly
+    steps:
+      - name: Download firefox.xpi
+        uses: actions/download-artifact@v2
+        with:
+          name: firefox.xpi
       - name: Upload releases to S3
         uses: zdurham/s3-upload-github-action@master
         with:
           args: --acl public-read
-        env:
-          FILE: 'dist/production/opera.crx'
-          AWS_REGION: 'eu-central-1'
-          S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-          S3_KEY: 'opera-nightly.crx'
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
