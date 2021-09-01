@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   ChevronDownIcon,
   CogIcon,
@@ -16,9 +16,25 @@ import Menu from "../Menu";
 import Badge from "../Shared/badge";
 
 export default function UserMenu() {
-  function openOptions() {
+  const [accounts, setAccounts] = useState({});
+
+  useEffect(() => {
+    utils.call("getAccounts").then((response) => {
+      setAccounts(response);
+    });
+  }, []);
+
+  async function selectAccount(accountId: string) {
+    await utils.call("selectAccount", {
+      id: accountId,
+    });
+    document.location.reload();
+  }
+
+  function openOptions(path: string) {
+    utils.openPage(`options.html#/${path}`);
+    // close the popup
     if (window.location.pathname !== "/options.html") {
-      utils.openPage("options.html");
       window.close();
     }
   }
@@ -39,14 +55,22 @@ export default function UserMenu() {
         <ChevronDownIcon className="h-4 w-4" aria-hidden="true" />
       </Menu.Button>
       <Menu.List>
-        <Menu.Item onClick={() => {}}>
+        <Menu.Item
+          onClick={() => {
+            openOptions("publishers");
+          }}
+        >
           <TableIcon
             className="h-5 w-5 mr-2 text-gray-500"
             aria-hidden="true"
           />
-          Publishers & Allowances
+          Allowances
         </Menu.Item>
-        <Menu.Item onClick={() => {}}>
+        <Menu.Item
+          onClick={() => {
+            openOptions("send");
+          }}
+        >
           <img
             className="w-6 h-6 -ml-0.5 mr-2 opacity-75"
             src={SendIcon}
@@ -55,7 +79,11 @@ export default function UserMenu() {
           />
           Send
         </Menu.Item>
-        <Menu.Item onClick={() => {}}>
+        <Menu.Item
+          onClick={() => {
+            openOptions("receive");
+          }}
+        >
           <img
             className="w-6 h-6 -ml-0.5 mr-2 opacity-75"
             src={ReceiveIcon}
@@ -66,36 +94,35 @@ export default function UserMenu() {
         </Menu.Item>
         <Menu.Divider />
         <Menu.Subheader>Switch account</Menu.Subheader>
-        <Menu.Item onClick={() => {}}>
-          <img
-            className="w-6 h-6 -ml-0.5 mr-2 opacity-75"
-            src={WalletIcon}
-            alt=""
-            aria-hidden="true"
-          />
-          LNDHub&nbsp;
-          <Badge label="LNDHub" color="blue-500" textColor="white" small />
-        </Menu.Item>
-        <Menu.Item onClick={() => {}}>
-          <img
-            className="w-6 h-6 -ml-0.5 mr-2 opacity-75"
-            src={WalletIcon}
-            alt=""
-            aria-hidden="true"
-          />
-          <span className="truncate">LNDHub #2 with overflowing text</span>
-          &nbsp;
-          <Badge label="LND" color="blue-500" textColor="white" small />
-        </Menu.Item>
+        {Object.keys(accounts).map(accountId => {
+          const account = accounts[accountId];
+          return (
+            <Menu.Item
+              onClick={() => {
+                selectAccount(accountId);
+              }}
+            >
+              <img
+                className="w-6 h-6 -ml-0.5 mr-2 opacity-75"
+                src={WalletIcon}
+                alt=""
+                aria-hidden="true"
+              />
+              {account.name}&nbsp;
+              <Badge
+                label={account.connector}
+                color="blue-500"
+                textColor="white"
+                small
+              />
+            </Menu.Item>
+          );
+        })}
         <Menu.Item onClick={() => {}}>
           <PlusIcon className="h-5 w-5 mr-2 text-gray-500" aria-hidden="true" />
           Add a new account
         </Menu.Item>
         <Menu.Divider />
-        <Menu.Item onClick={openOptions}>
-          <CogIcon className="h-5 w-5 mr-2 text-gray-500" aria-hidden="true" />
-          Options
-        </Menu.Item>
         <Menu.Item onClick={lock}>
           <LockClosedIcon
             className="h-5 w-5 mr-2 text-gray-500"
