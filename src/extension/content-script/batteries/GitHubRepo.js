@@ -10,16 +10,10 @@ const battery = () => {
   return axios
     .get(lndonateUrl, { responseType: "text" })
     .then((response) => {
-      const data = response.data.split("=");
-      const method = data[0];
-      if (method !== "lnurlp") {
-        return;
-      }
-      const recipient = data[1];
       return [
         {
-          method,
-          recipient,
+          method: "lnurl",
+          recipient: response.data,
           name: `${username}/${repo}`,
         },
       ];
