@@ -4,6 +4,7 @@ import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 import utils from "../../../common/lib/utils";
+import lnurlLib from "../../../common/lib/lnurl";
 import { getFiatFromSatoshi } from "../../../common/utils/helpers";
 
 import Button from "../../components/button";
@@ -218,7 +219,17 @@ class Home extends React.Component {
         />
         {lnData.length > 0 && (
           <PublisherCard title={lnData[0].name} image={""}>
-            <Button href={lnData[0].recipient} label="Donate" primary />
+            <Button
+              onPress={async () => {
+                await utils.call("lnurl", {
+                  message: {
+                    lnurlEncoded: lnData[0].recipient,
+                  },
+                });
+              }}
+              label="Donate"
+              primary
+            />
           </PublisherCard>
         )}
         <div>Data: {JSON.stringify(this.state.lnData)}</div>
