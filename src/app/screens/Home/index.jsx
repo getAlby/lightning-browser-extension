@@ -6,6 +6,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import utils from "../../../common/lib/utils";
 import { getFiatFromSatoshi } from "../../../common/utils/helpers";
 
+import Button from "../../components/button";
 import Navbar from "../../components/Navbar";
 import TransactionsTable from "../../components/TransactionsTable";
 import UserMenu from "../../components/UserMenu";
@@ -217,12 +218,7 @@ class Home extends React.Component {
         />
         {lnData.length > 0 && (
           <PublisherCard title={lnData[0].name} image={""}>
-            <a
-              className="bg-orange-bitcoin inline-flex justify-center items-center px-7 py-2 border border-transparent font-medium rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2"
-              href={lnData[0].recipient}
-            >
-              Donate
-            </a>
+            <Button href={lnData[0].recipient} label="Donate" primary />
           </PublisherCard>
         )}
         <div>Data: {JSON.stringify(this.state.lnData)}</div>
