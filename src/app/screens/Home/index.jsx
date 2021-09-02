@@ -220,7 +220,7 @@ class Home extends React.Component {
         {lnData.length > 0 && (
           <PublisherCard title={lnData[0].name} image={""}>
             <Button
-              onPress={async () => {
+              onClick={async () => {
                 await utils.call("lnurl", {
                   message: {
                     lnurlEncoded: lnData[0].recipient,
