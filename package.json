@@ -28,7 +28,7 @@
     "test-ext": "jest ./src/extension",
     "test-app": "jest ./src/app",
     "test": "jest",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 -s ./static",
     "build-storybook": "build-storybook",
     "prepare": "husky install"
   },
