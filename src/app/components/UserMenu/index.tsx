@@ -16,7 +16,7 @@ import Menu from "../Menu";
 import Badge from "../Shared/badge";
 
 type UserMenuProps = {
-  onAccountSwitch: () => void;
+  onAccountSwitch?: () => void;
 };
 
 export default function UserMenu({ onAccountSwitch }: UserMenuProps) {
