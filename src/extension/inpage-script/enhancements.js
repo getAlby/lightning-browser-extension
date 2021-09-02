@@ -1,4 +1,5 @@
 import axios from "axios";
+import getOriginData from "../content-script/originData";
 
 function findLNURL(text) {
   return text.match(/lnurlp:(\S+)/i);
@@ -15,16 +16,19 @@ const enhancements = [
         return;
       }
       const recipient = monetizationTag.content;
+      const metaData = getOriginData();
       window.LBE_LIGHTNING_DATA = [
         {
           method: "lnurlp",
           recipient: recipient,
+          name: metaData.name,
+          icon: metaData.icon,
         },
       ];
     },
   },
   {
-    url: /^https:\/\/github.com\/([^\/]+)\/([^\/]+)\/>*/,
+    url: /^https:\/\/github.com\/([^/]+)\/([^/]+)\/>*/,
     collector: async (matchData) => {
       const username = matchData[1];
       const repo = matchData[2];
@@ -143,7 +147,7 @@ const enhancements = [
             `[data-testid="sidebarColumn"] [data-testid="UserCell"] a[href="/${username}"]`
           );
           name = `${profileLinks[1].textContent} (@${username}) / Twitter`;
-          imageUrl = prodileLinks[0].querySelector("img").src;
+          imageUrl = profileLinks[0].querySelector("img").src;
           userDescriptionElement = profileLinks[1].closest(
             '[data-testid="UserCell"]'
           );
@@ -185,7 +189,7 @@ const enhancements = [
 
 const loadEnhancements = () => {
   // find enhancement
-  const collectors = enhancements.map((enhancement) => {
+  enhancements.map((enhancement) => {
     const matchData = document.location.toString().match(enhancement.url);
     if (matchData) {
       return enhancement.collector(matchData);
