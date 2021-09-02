@@ -27,7 +27,7 @@ class Home extends React.Component {
       balanceFiat: null,
       payments: {},
       loadingPayments: true,
-      lnData: {},
+      lnData: [],
     };
   }
   get exchangeRate() {
@@ -49,7 +49,10 @@ class Home extends React.Component {
         .then((data) => {
           // data is an array, see: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/executeScript#return_value
           // we execute it only in the current Tab. Thus the array has only one entry
-          this.setState({ lnData: data[0] });
+          if (data[0]) {
+            console.log(data[0]);
+            this.setState({ lnData: data[0] });
+          }
         });
     });
   }
@@ -204,8 +207,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { alias, allowance, balance, balanceFiat } = this.state;
-
+    const { alias, allowance, balance, balanceFiat, lnData } = this.state;
     return (
       <div>
         <Navbar
@@ -213,6 +215,16 @@ class Home extends React.Component {
           subtitle={typeof balance === "number" ? `${balance} Sats` : ""}
           right={<UserMenu />}
         />
+        {lnData.length > 0 && (
+          <PublisherCard title={lnData[0].name} image={""}>
+            <a
+              className="bg-orange-bitcoin inline-flex justify-center items-center px-7 py-2 border border-transparent font-medium rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2"
+              href={lnData[0].recipient}
+            >
+              Donate
+            </a>
+          </PublisherCard>
+        )}
         <div>Data: {JSON.stringify(this.state.lnData)}</div>
         {allowance ? this.renderAllowanceView() : this.renderDefaultView()}
       </div>
