@@ -217,7 +217,7 @@ class Home extends React.Component {
           subtitle={typeof balance === "number" ? `${balance} Sats` : ""}
           right={<UserMenu />}
         />
-        {lnData.length > 0 && (
+        {!allowance && lnData.length > 0 && (
           <PublisherCard title={lnData[0].name} image={lnData[0].icon}>
             <Button
               onClick={async () => {
