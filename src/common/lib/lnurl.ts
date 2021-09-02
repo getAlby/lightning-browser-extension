@@ -52,7 +52,7 @@ const normalizeLnurl = (lnurlString: string) => {
   }
 
   //maybe it's already a URL?
-  return new URL(lnurlString);
+  return new URL(lnurlString.replace(/^lnurl[pwc]/i, "https"));
 };
 
 const lnurl = {
