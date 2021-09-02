@@ -1,3 +1,9 @@
+import axios from "axios";
+
+function findLNURL(text) {
+  return text.match(/lnurlp:(\S+)/i);
+}
+
 const enhancements = [
   {
     url: /^https:\/\/.*/,
@@ -38,6 +44,7 @@ const enhancements = [
             {
               method,
               recipient,
+              name: `${username}/${repo}`,
             },
           ];
         })
@@ -71,6 +78,107 @@ const enhancements = [
             }
           ));
         });
+    },
+  },
+  {
+    url: /^https:\/\/www\.youtube.com\/watch.*/,
+    collector: async () => {
+      const channelLink = document.querySelector(".ytd-channel-name a");
+      if (!channelLink) {
+        return;
+      }
+      const name = channelLink.textContent;
+      const imageUrl = document.querySelector("#meta-contents img").src;
+      axios
+        .get(`${channelLink.href}/about`, { responseType: "document" })
+        .then((response) => {
+          const descriptionElement = response.data.querySelector(
+            'meta[name="description"]'
+          );
+          if (!descriptionElement) {
+            return;
+          }
+          const lnurl = findLNURL(descriptionElement.content);
+          if (lnurl) {
+            window.LBE_LIGHTNING_DATA = [
+              {
+                method: "lnurl",
+                recipient: lnurl[1],
+                name: name,
+                iconUrl: imageUrl,
+              },
+            ];
+          }
+        });
+    },
+  },
+  {
+    url: /^https:\/\/twitter\.com\/(\w+).*/,
+    collector: async (matchData) => {
+      const username = matchData[1];
+      // Twitter loads everything async...so we need to wait a bit
+      setTimeout(() => {
+        let userDescriptionElement;
+        let imageUrl;
+        let name;
+        // if we are on a user profile
+        if (
+          document.querySelector(
+            `[data-testid="primaryColumn"] a[href="/${username}/header_photo"]`
+          )
+        ) {
+          userDescriptionElement = document.querySelector(
+            '[data-testid="primaryColumn"] [data-testid="UserDescription"]'
+          );
+          imageUrl = document.querySelector(
+            `[data-testid="primaryColumn"] a[href="/Stadicus3000/photo"] img`
+          ).src;
+          name = document.title; // something like "name (@handle) / Twitter"
+        } else if (
+          document.querySelector(
+            `[data-testid="sidebarColumn"] [data-testid="UserCell"] a[href="/${username}"]`
+          )
+        ) {
+          const profileLinks = document.querySelectorAll(
+            `[data-testid="sidebarColumn"] [data-testid="UserCell"] a[href="/${username}"]`
+          );
+          name = `${profileLinks[1].textContent} (@${username}) / Twitter`;
+          imageUrl = prodileLinks[0].querySelector("img").src;
+          userDescriptionElement = profileLinks[1].closest(
+            '[data-testid="UserCell"]'
+          );
+        }
+        let lnurl;
+        // extract lnurlp: from the description text
+        lnurl = findLNURL(userDescriptionElement.textContent);
+
+        // if we did not find anything let's look for an ⚡ emoji
+        if (!lnurl) {
+          const zapElement =
+            userDescriptionElement.querySelector('img[alt="⚡"]');
+          // if we find a ⚡ emoji we user the text of the next sibling and try to extract a lnurl
+          if (zapElement) {
+            const match = zapElement.nextSibling.textContent.match(/(\S+@\S+)/);
+            if (match) {
+              lnurl = match[1];
+            }
+          }
+        }
+
+        // if we still did not find anything ignore it.
+        if (!lnurl) {
+          return;
+        }
+
+        window.LBE_LIGHTNING_DATA = [
+          {
+            method: "lnurl",
+            recipient: lnurl,
+            icon: imageUrl,
+            name: name,
+          },
+        ];
+      }, 1500);
     },
   },
 ];
