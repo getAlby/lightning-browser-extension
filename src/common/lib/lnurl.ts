@@ -36,13 +36,12 @@ const findLnurl = (text: string) => {
 };
 
 const normalizeLnurl = (lnurlString: string) => {
-  console.log(lnurlString);
   // maybe it's bech32 encoded?
   try {
     const url = bech32Decode(lnurlString);
     return new URL(url);
   } catch (e) {
-    console.log(e);
+    console.log("ignoring bech32 parsing error", e);
   }
 
   // maybe it's a lightning address?
@@ -82,7 +81,7 @@ const lnurl = {
       console.log(e.message);
     }
     switch (true) {
-      case paymentRequestDetails.description_hash !== metadataHash: // LN WALLET Verifies that h tag (description_hash) in provided invoice is a hash of metadata string converted to byte array in UTF-8 encoding
+      case paymentRequestDetails.description !== metadataHash: // LN WALLET Verifies that h tag (description_hash) in provided invoice is a hash of metadata string converted to byte array in UTF-8 encoding
       case paymentRequestDetails.mtokens !== String(amount): // LN WALLET Verifies that amount in provided invoice equals an amount previously specified by user
       case paymentInfo.successAction &&
         !["url", "message", "aes"].includes(paymentInfo.successAction.tag): // If successAction is not null: LN WALLET makes sure that tag value of is of supported type, aborts a payment otherwise

@@ -73,6 +73,7 @@ function LNURLPay({ details, origin }: Props) {
             break;
           case "message":
             utils.notify({
+              title: `LNURL response:`,
               message: successAction.message,
             });
             break;
@@ -87,7 +88,8 @@ function LNURLPay({ details, origin }: Props) {
 
       window.close();
     } catch (e) {
-      console.log(e.message);
+      console.log(e);
+      alert(`Error: ${e.message}`);
     }
   }
 
