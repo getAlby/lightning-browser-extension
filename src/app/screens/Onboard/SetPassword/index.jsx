@@ -39,11 +39,10 @@ export default function SetPassword() {
     <form onSubmit={handleSubmit}>
       <div className="relative mt-24 lg:flex space-x-8">
         <div className="lg:w-1/2">
-          <h1 className="text-3xl font-bold">Create your password</h1>
+          <h1 className="text-3xl font-bold">Protect your wallet</h1>
           <p className="text-gray-500 mt-6">
-            You need to set a password so we can lock the wallet when it’s not
-            being used. Payments are never made without decrypting your secure
-            credentials.
+            Your wallet is securely encrypted with a password and needs to be
+            unlocked before usage.
           </p>
           <div className="w-4/5">
             <div className="mt-6">
@@ -51,7 +50,7 @@ export default function SetPassword() {
                 htmlFor="email"
                 className="block font-medium text-gray-700"
               >
-                Set a password
+                Choose a password:
               </label>
               <div className="mt-1">
                 <Input
@@ -68,7 +67,7 @@ export default function SetPassword() {
                 htmlFor="email"
                 className="block font-medium text-gray-700"
               >
-                Lets confirm you typed it correct.
+                Lets confirm you typed it correct:
               </label>
               <div className="mt-1">
                 <Input

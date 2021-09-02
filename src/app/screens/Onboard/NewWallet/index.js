@@ -95,7 +95,7 @@ export default function NewWallet() {
                   <QRCode
                     value={`lndhub://${lndHubData.login}:${lndHubData.password}@${url}/`}
                     level="M"
-                    size="72"
+                    size="96"
                   />
                 </div>
                 If you loose access you will need this backup to recover your

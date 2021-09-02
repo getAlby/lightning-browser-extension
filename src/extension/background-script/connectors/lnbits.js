@@ -67,7 +67,7 @@ class LnBits extends Base {
       this.config.readkey
     );
   }
-    
+
   signMessage(args) {
     return Promise.reject(new Error("Not supported with Lnbits"));
   }

@@ -65,7 +65,11 @@ export default function ConnectLndHub() {
       <div className="relative mt-24 lg:flex space-x-8">
         <div className="lg:w-1/2">
           <h1 className="text-3xl font-bold">Connect to LNDHub (BlueWallet)</h1>
-          <p className="text-gray-500 mt-6"></p>
+          <p className="text-gray-500 text-sm">
+            in BlueWallet, choose the wallet you want to connect, open it, click
+            on "...", click on Export/Backup to display the QR code and scan it
+            with your webcam
+          </p>
           <div className="w-4/5">
             <div className="mt-6">
               <label
@@ -83,10 +87,6 @@ export default function ConnectLndHub() {
                   value={formData.uri}
                   onChange={handleChange}
                 />
-                <small>
-                  BlueWallet users find the Backup/Export URI in the lightning
-                  wallet settings.
-                </small>
               </div>
               <p className="text-center my-4">OR</p>
               <QrcodeScanner
