@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import {
   ChevronDownIcon,
-  CogIcon,
   LockClosedIcon,
   PlusIcon,
   TableIcon,
@@ -16,7 +15,11 @@ import utils from "../../../common/lib/utils";
 import Menu from "../Menu";
 import Badge from "../Shared/badge";
 
-export default function UserMenu() {
+type UserMenuProps = {
+  onAccountSwitch: () => void;
+};
+
+export default function UserMenu({ onAccountSwitch }: UserMenuProps) {
   const history = useHistory();
   const [accounts, setAccounts] = useState({});
 
@@ -30,7 +33,7 @@ export default function UserMenu() {
     await utils.call("selectAccount", {
       id: accountId,
     });
-    document.location.reload();
+    onAccountSwitch && onAccountSwitch();
   }
 
   function openOptions(path: string) {
@@ -99,7 +102,7 @@ export default function UserMenu() {
         </Menu.Item>
         <Menu.Divider />
         <Menu.Subheader>Switch account</Menu.Subheader>
-        {Object.keys(accounts).map(accountId => {
+        {Object.keys(accounts).map((accountId) => {
           const account = accounts[accountId];
           return (
             <Menu.Item

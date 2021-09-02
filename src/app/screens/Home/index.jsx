@@ -35,6 +35,10 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
+    this.initialize();
+  }
+
+  initialize = () => {
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
       const [currentTab] = tabs;
       const url = new URL(currentTab.url);
@@ -62,7 +66,7 @@ class Home extends React.Component {
         loadingPayments: false,
       });
     });
-  }
+  };
 
   renderAllowanceView() {
     const { allowance } = this.state;
@@ -179,7 +183,7 @@ class Home extends React.Component {
         <Navbar
           title={alias}
           subtitle={typeof balance === "number" ? `${balance} Sats` : ""}
-          right={<UserMenu />}
+          right={<UserMenu onAccountSwitch={this.initialize} />}
         />
         {allowance ? this.renderAllowanceView() : this.renderDefaultView()}
       </div>
