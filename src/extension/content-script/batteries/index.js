@@ -13,7 +13,7 @@ function lightningUp() {
   if (enhancement) {
     enhancement.battery().then((data) => {
       if (data) {
-        window.LBE_LIGHTNING_DATA = [data];
+        window.LBE_LIGHTNING_DATA = data;
         utils.call("highlightIcon");
       }
     });

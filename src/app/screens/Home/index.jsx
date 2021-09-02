@@ -47,7 +47,9 @@ class Home extends React.Component {
           code: "window.LBE_LIGHTNING_DATA;",
         })
         .then((data) => {
-          this.setState({ lnData: data });
+          // data is an array, see: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/executeScript#return_value
+          // we execute it only in the current Tab. Thus the array has only one entry
+          this.setState({ lnData: data[0] });
         });
     });
   }
