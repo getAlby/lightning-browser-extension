@@ -217,14 +217,12 @@ class Home extends React.Component {
           subtitle={typeof balance === "number" ? `${balance} Sats` : ""}
           right={<UserMenu />}
         />
-        {lnData.length > 0 && (
+        {!allowance && lnData.length > 0 && (
           <PublisherCard title={lnData[0].name} image={""}>
             <Button
               onClick={async () => {
                 await utils.call("lnurl", {
-                  message: {
-                    lnurlEncoded: lnData[0].recipient,
-                  },
+                  lnurlEncoded: lnData[0].recipient,
                 });
               }}
               label="Donate"
@@ -232,7 +230,6 @@ class Home extends React.Component {
             />
           </PublisherCard>
         )}
-        <div>Data: {JSON.stringify(this.state.lnData)}</div>
         {allowance ? this.renderAllowanceView() : this.renderDefaultView()}
       </div>
     );
