@@ -221,9 +221,20 @@ class Home extends React.Component {
           <PublisherCard title={lnData[0].name} image={lnData[0].icon}>
             <Button
               onClick={async () => {
-                await utils.call("lnurl", {
-                  lnurlEncoded: lnData[0].recipient,
-                });
+                await utils.call(
+                  "lnurl",
+                  {
+                    lnurlEncoded: lnData[0].recipient,
+                  },
+                  {
+                    origin: {
+                      external: true,
+                      name: lnData[0].name,
+                      description: lnData[0].description,
+                      icon: lnData[0].icon,
+                    },
+                  }
+                );
               }}
               label="Donate"
               primary
