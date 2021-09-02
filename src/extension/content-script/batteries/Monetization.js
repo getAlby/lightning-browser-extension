@@ -15,8 +15,7 @@ const battery = async () => {
     {
       method: "lnurlp",
       recipient: recipient,
-      name: metaData.name,
-      icon: metaData.icon,
+      ...metaData,
     },
   ];
 };

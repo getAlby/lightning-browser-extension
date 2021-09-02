@@ -15,7 +15,6 @@ const battery = () => {
       const descriptionElement = response.data.querySelector(
         'meta[name="description"]'
       );
-      console.log(descriptionElement);
       if (!descriptionElement) {
         return;
       }
@@ -26,7 +25,7 @@ const battery = () => {
             method: "lnurl",
             recipient: lnurl[1],
             name: name,
-            iconUrl: imageUrl,
+            icon: imageUrl,
           },
         ];
       }
