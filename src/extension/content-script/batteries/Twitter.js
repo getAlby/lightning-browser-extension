@@ -52,6 +52,7 @@ function battery() {
       const userData = getUserData(username);
 
       if (!userData) {
+        resolve();
         return;
       }
 
@@ -61,19 +62,22 @@ function battery() {
 
       // if we did not find anything let's look for an ⚡ emoji
       if (!lnurl) {
+        const zapElement = userData.element.querySelector(
+          'img[src*="26a1.svg"]'
+        );
         // it is hard to find the :zap: emoij. Twitter uses images for that but has an alt text with the emoij
         // but there could be some control characters somewhere...somehow...no idea...
         // for that reason we check if there is any character with the zap char code in the alt string.
-        const emojis = userData.element.querySelectorAll("img");
-        const zapElement = Array.from(emojis).find((img) => {
-          return Array.from(img.alt.trim()).some(
-            (c) => c.charCodeAt(0) === 9889
-          );
-        });
+
+        //const emojis = userData.element.querySelectorAll("img");
+        //const zapElement = Array.from(emojis).find((img) => {
+        //  return Array.from(img.alt.trim()).some(
+        //    (c) => c.charCodeAt(0) === 9889
+        //  );
+        //});
         // if we find a ⚡ emoji we use the text of the next sibling and try to extract a lnurl
         if (zapElement) {
           const match = zapElement.nextSibling.textContent.match(/(\S+@\S+)/);
-          console.log(match);
           if (match) {
             lnurl = match[1];
           }
@@ -82,6 +86,7 @@ function battery() {
 
       // if we still did not find anything ignore it.
       if (!lnurl) {
+        resolve();
         return;
       }
 
@@ -93,7 +98,7 @@ function battery() {
           name: userData.name,
         },
       ]);
-    }, 1500);
+    }, 1000);
   });
 }
 
