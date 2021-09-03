@@ -1,16 +1,20 @@
 import axios from "axios";
 
-const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
+const urlMatcher = /^https:\/\/www\.youtube.com\/(channel|c)\/([^/]+).*/;
 
 const battery = () => {
-  const channelLink = document.querySelector(".ytd-channel-name a");
-  if (!channelLink) {
-    return Promise.resolve();
-  }
-  const name = channelLink.textContent;
-  const imageUrl = document.querySelector("#meta-contents img").src;
+  const matchData = document.location.toString().match(urlMatcher);
+  const name = document.querySelector(
+    "#inner-header-container yt-formatted-string.ytd-channel-name"
+  ).textContent;
+  const imageUrl = document.querySelector(
+    "#channel-header-container yt-img-shadow img"
+  ).src;
+
   return axios
-    .get(`${channelLink.href}/about`, { responseType: "document" })
+    .get(`https://www.youtube.com/${matchData[1]}/${matchData[2]}/about`, {
+      responseType: "document",
+    })
     .then((response) => {
       // TODO extract from links?
       const descriptionElement = response.data.querySelector(
@@ -35,9 +39,9 @@ const battery = () => {
     });
 };
 
-const YouTubeVideo = {
+const YouTubeChannel = {
   urlMatcher,
   battery,
 };
 
-export default YouTubeVideo;
+export default YouTubeChannel;
