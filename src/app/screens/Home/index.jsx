@@ -59,7 +59,7 @@ class Home extends React.Component {
     });
   }
 
-  loadAllowance() {
+  loadAllowance = () => {
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
       const [currentTab] = tabs;
       const url = new URL(currentTab.url);
@@ -69,7 +69,7 @@ class Home extends React.Component {
         }
       });
     });
-  }
+  };
 
   loadAccountInfo() {
     utils.call("accountInfo").then((response) => {
@@ -94,10 +94,14 @@ class Home extends React.Component {
     });
   }
 
-  componentDidMount() {
+  initialize() {
     this.loadAccountInfo();
     this.loadPayments();
     this.loadAllowance();
+  }
+
+  componentDidMount() {
+    this.initialize();
     this.loadLightningDataFromCurrentWebsite();
   }
 
@@ -215,7 +219,7 @@ class Home extends React.Component {
         <Navbar
           title={alias}
           subtitle={typeof balance === "number" ? `${balance} Sats` : ""}
-          right={<UserMenu />}
+          right={<UserMenu onAccountSwitch={this.initialize} />}
         />
         {!allowance && lnData.length > 0 && (
           <PublisherCard title={lnData[0].name} image={lnData[0].icon}>
