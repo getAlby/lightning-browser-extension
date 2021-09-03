@@ -1,19 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import {
   ChevronDownIcon,
-  CogIcon,
   LockClosedIcon,
+  PlusIcon,
+  TableIcon,
   UserIcon,
 } from "@heroicons/react/solid";
+import SendIcon from "@bitcoin-design/bitcoin-icons/svg/filled/send.svg";
+import ReceiveIcon from "@bitcoin-design/bitcoin-icons/svg/filled/receive.svg";
+import WalletIcon from "@bitcoin-design/bitcoin-icons/svg/outline/wallet.svg";
 
 import utils from "../../../common/lib/utils";
 import Menu from "../Menu";
+import Badge from "../Shared/badge";
 
-export default function UserMenu() {
-  function openOptions() {
+type UserMenuProps = {
+  onAccountSwitch?: () => void;
+};
+
+export default function UserMenu({ onAccountSwitch }: UserMenuProps) {
+  const history = useHistory();
+  const [accounts, setAccounts] = useState({});
+
+  useEffect(() => {
+    utils.call("getAccounts").then((response) => {
+      setAccounts(response);
+    });
+  }, []);
+
+  async function selectAccount(accountId: string) {
+    await utils.call("selectAccount", {
+      id: accountId,
+    });
+    onAccountSwitch && onAccountSwitch();
+  }
+
+  function openOptions(path: string) {
+    // if we are in the popup
     if (window.location.pathname !== "/options.html") {
-      utils.openPage("options.html");
+      utils.openPage(`options.html#/${path}`);
+      // close the popup
       window.close();
+    } else {
+      history.push(`/${path}`);
     }
   }
 
@@ -33,23 +63,84 @@ export default function UserMenu() {
         <ChevronDownIcon className="h-4 w-4" aria-hidden="true" />
       </Menu.Button>
       <Menu.List>
-        <Menu.Item onClick={openOptions}>
-          <div className="flex">
-            <CogIcon
-              className="h-5 w-5 mr-2 text-gray-500"
-              aria-hidden="true"
-            />
-            Options
-          </div>
+        <Menu.Item
+          onClick={() => {
+            openOptions("publishers");
+          }}
+        >
+          <TableIcon
+            className="h-5 w-5 mr-2 text-gray-500"
+            aria-hidden="true"
+          />
+          Allowances
         </Menu.Item>
+        <Menu.Item
+          onClick={() => {
+            openOptions("send");
+          }}
+        >
+          <img
+            className="w-6 h-6 -ml-0.5 mr-2 opacity-75"
+            src={SendIcon}
+            alt=""
+            aria-hidden="true"
+          />
+          Send
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => {
+            openOptions("receive");
+          }}
+        >
+          <img
+            className="w-6 h-6 -ml-0.5 mr-2 opacity-75"
+            src={ReceiveIcon}
+            alt=""
+            aria-hidden="true"
+          />
+          Receive
+        </Menu.Item>
+        <Menu.Divider />
+        <Menu.Subheader>Switch account</Menu.Subheader>
+        {Object.keys(accounts).map((accountId) => {
+          const account = accounts[accountId];
+          return (
+            <Menu.Item
+              onClick={() => {
+                selectAccount(accountId);
+              }}
+            >
+              <img
+                className="w-6 h-6 -ml-0.5 mr-2 opacity-75"
+                src={WalletIcon}
+                alt=""
+                aria-hidden="true"
+              />
+              {account.name}&nbsp;
+              <Badge
+                label={account.connector}
+                color="blue-500"
+                textColor="white"
+                small
+              />
+            </Menu.Item>
+          );
+        })}
+        <Menu.Item
+          onClick={() => {
+            openOptions("accounts/new");
+          }}
+        >
+          <PlusIcon className="h-5 w-5 mr-2 text-gray-500" aria-hidden="true" />
+          Add a new account
+        </Menu.Item>
+        <Menu.Divider />
         <Menu.Item onClick={lock}>
-          <div className="flex">
-            <LockClosedIcon
-              className="h-5 w-5 mr-2 text-gray-500"
-              aria-hidden="true"
-            />
-            Lock
-          </div>
+          <LockClosedIcon
+            className="h-5 w-5 mr-2 text-gray-500"
+            aria-hidden="true"
+          />
+          Lock
         </Menu.Item>
       </Menu.List>
     </Menu>

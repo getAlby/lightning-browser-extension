@@ -39,7 +39,6 @@ export default function ConnectLnd() {
 
     try {
       const addResult = await utils.call("addAccount", account);
-      console.log(addResult);
       if (addResult.accountId) {
         const selectResult = await utils.call("selectAccount", {
           id: addResult.accountId,
