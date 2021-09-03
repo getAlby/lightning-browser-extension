@@ -219,7 +219,13 @@ class Home extends React.Component {
         <Navbar
           title={alias}
           subtitle={typeof balance === "number" ? `${balance} Sats` : ""}
-          right={<UserMenu onAccountSwitch={this.initialize} />}
+          right={
+            <UserMenu
+              onAccountSwitch={() => {
+                this.initialize();
+              }}
+            />
+          }
         />
         {!allowance && lnData.length > 0 && (
           <PublisherCard title={lnData[0].name} image={lnData[0].icon}>
