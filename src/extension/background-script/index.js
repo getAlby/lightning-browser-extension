@@ -14,11 +14,20 @@ setInterval(() => {
 }, 5000);
 */
 
-const updateIcon = async (tabId, changeInfo, tabInfo) => {
-  if (!changeInfo.url) {
+const extractLightningDataFromPage = async (tabId, changeInfo, tabInfo) => {
+  if (
+    !changeInfo.url ||
+    !changeInfo.url.startsWith("http" || changeInfo.status !== "complete")
+  ) {
     return;
   }
-  if (!changeInfo.url.startsWith("http")) {
+  return browser.tabs.executeScript(tabId, {
+    code: "if (window.LBE_EXTRACT_LIGHTNING_DATA) { LBE_EXTRACT_LIGHTNING_DATA(); };",
+  });
+};
+
+const updateIcon = async (tabId, changeInfo, tabInfo) => {
+  if (!changeInfo.url || !changeInfo.url.startsWith("http")) {
     return;
   }
   const url = new URL(changeInfo.url);
@@ -96,13 +105,8 @@ async function init() {
 
   browser.runtime.onInstalled.addListener(handleInstalled);
 
-  browser.tabs.onUpdated.addListener(updateIcon);
-  /*
-  if (settings.enableLsats) {
-    await browser.storage.sync.set({ lsats: {} });
-    initLsatInterceptor(connector);
-  }
-  */
+  browser.tabs.onUpdated.addListener(updateIcon); // update Icon when there is an allowance
+  browser.tabs.onUpdated.addListener(extractLightningDataFromPage); // extract LN data from websites
 }
 
 init();

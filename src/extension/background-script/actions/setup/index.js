@@ -2,6 +2,6 @@ import setPassword from "./setPassword";
 import status from "./status";
 import reset from "./reset";
 import validateAccount from "./validateAccount";
-import highlightIcon from "./highlightIcon";
+import setIcon from "./setIcon";
 
-export { setPassword, status, reset, validateAccount, highlightIcon };
+export { setPassword, status, reset, validateAccount, setIcon };
