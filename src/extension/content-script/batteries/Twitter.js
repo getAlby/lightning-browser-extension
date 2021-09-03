@@ -37,7 +37,9 @@ function getUserData(username) {
     const element = profileLinks[1].closest('[data-testid="UserCell"]');
     return {
       element,
-      name: `${profileLinks[1].textContent} (@${username}) / Twitter`,
+      name: `${
+        profileLinks[1].querySelector("span").textContent
+      } (@${username}) / Twitter`,
       imageUrl: profileLinks[0].querySelector("img").src,
     };
   }
