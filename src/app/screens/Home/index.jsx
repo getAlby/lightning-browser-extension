@@ -246,7 +246,7 @@ class Home extends React.Component {
                   }
                 );
               }}
-              label="⚡️ Send Sats"
+              label="⚡️ Send Sats ⚡️"
               primary
             />
           </PublisherCard>
