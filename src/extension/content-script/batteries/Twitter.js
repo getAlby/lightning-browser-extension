@@ -4,7 +4,7 @@ const urlMatcher = /^https:\/\/twitter\.com\/(\w+).*/;
 function isOnProfilePage(username) {
   return (
     document.querySelector(
-      `[data-testid="primaryColumn"] a[href="/${username}/header_photo"]`
+      '[data-testid="primaryColumn"] [data-testid="UserDescription"]'
     ) != null
   );
 }
@@ -53,6 +53,7 @@ function battery() {
     setTimeout(() => {
       const userData = getUserData(username);
 
+      console.log({ userData });
       if (!userData) {
         resolve();
         return;
