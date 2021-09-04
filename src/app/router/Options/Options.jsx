@@ -7,6 +7,8 @@ import Navbar from "../../components/Navbar";
 import UserMenu from "../../components/UserMenu";
 import Publishers from "../../screens/Publishers";
 import Publisher from "../../screens/Publisher";
+import ChooseConnector from "../../screens/Options/ChooseConnector";
+import TestConnection from "../../screens/Options/TestConnection";
 
 function Options() {
   const [accountInfo, setAccountInfo] = useState({});
@@ -69,6 +71,16 @@ function Options() {
                 join the development on GitHub
               </a>
             </p>
+          </Container>
+        </Route>
+        <Route path="/accounts/new">
+          <Container>
+            <ChooseConnector />
+          </Container>
+        </Route>
+        <Route path="/test-connection">
+          <Container>
+            <TestConnection />
           </Container>
         </Route>
       </Switch>

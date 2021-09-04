@@ -1,6 +1,8 @@
 import React from "react";
+import { PencilIcon } from "@heroicons/react/solid";
 
 import Menu from ".";
+import Badge from "../Shared/badge";
 
 export const Default = () => (
   <Menu>
@@ -8,8 +10,16 @@ export const Default = () => (
       Menu
     </Menu.Button>
     <Menu.List>
-      <Menu.Item onClick={() => alert("Edit")}>Edit</Menu.Item>
-      <Menu.Item onClick={() => alert("Copy")}>Copy</Menu.Item>
+      <Menu.Subheader>Actions</Menu.Subheader>
+      <Menu.Item onClick={() => alert("Edit")}>
+        <PencilIcon className="h-5 w-5 mr-2 text-gray-500" aria-hidden="true" />
+        Edit
+      </Menu.Item>
+      <Menu.Item onClick={() => alert("Copy")}>
+        Copy&nbsp;
+        <Badge label="Badge" color="blue-500" textColor="white" small />
+      </Menu.Item>
+      <Menu.Divider />
       <Menu.Item onClick={() => alert("Delete")}>Delete</Menu.Item>
     </Menu.List>
   </Menu>
