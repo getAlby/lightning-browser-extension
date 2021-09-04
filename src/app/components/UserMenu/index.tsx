@@ -24,9 +24,9 @@ export default function UserMenu({ onAccountSwitch }: UserMenuProps) {
   const [accounts, setAccounts] = useState({});
 
   useEffect(() => {
-    utils.call("getAccounts").then((response) => {
-      setAccounts(response);
-    });
+    // utils.call("getAccounts").then((response) => {
+    //   setAccounts(response);
+    // });
   }, []);
 
   async function selectAccount(accountId: string) {
@@ -57,13 +57,13 @@ export default function UserMenu({ onAccountSwitch }: UserMenuProps) {
   }
 
   return (
-    <Menu>
-      <Menu.Button className="inline-flex items-center text-gray-500 hover:text-black transition-color duration-200">
+    <Menu as="div" className="relative">
+      <Menu.Button className="flex items-center text-gray-500 hover:text-black transition-color duration-200">
         <UserIcon className="h-6 w-6" aria-hidden="true" />
         <ChevronDownIcon className="h-4 w-4" aria-hidden="true" />
       </Menu.Button>
-      <Menu.List>
-        <Menu.Item
+      <Menu.List position="right">
+        <Menu.ItemButton
           onClick={() => {
             openOptions("publishers");
           }}
@@ -73,8 +73,8 @@ export default function UserMenu({ onAccountSwitch }: UserMenuProps) {
             aria-hidden="true"
           />
           Allowances
-        </Menu.Item>
-        <Menu.Item
+        </Menu.ItemButton>
+        <Menu.ItemButton
           onClick={() => {
             openOptions("send");
           }}
@@ -86,8 +86,8 @@ export default function UserMenu({ onAccountSwitch }: UserMenuProps) {
             aria-hidden="true"
           />
           Send
-        </Menu.Item>
-        <Menu.Item
+        </Menu.ItemButton>
+        <Menu.ItemButton
           onClick={() => {
             openOptions("receive");
           }}
@@ -99,13 +99,13 @@ export default function UserMenu({ onAccountSwitch }: UserMenuProps) {
             aria-hidden="true"
           />
           Receive
-        </Menu.Item>
+        </Menu.ItemButton>
         <Menu.Divider />
         <Menu.Subheader>Switch account</Menu.Subheader>
         {Object.keys(accounts).map((accountId) => {
           const account = accounts[accountId];
           return (
-            <Menu.Item
+            <Menu.ItemButton
               onClick={() => {
                 selectAccount(accountId);
               }}
@@ -123,25 +123,25 @@ export default function UserMenu({ onAccountSwitch }: UserMenuProps) {
                 textColor="white"
                 small
               />
-            </Menu.Item>
+            </Menu.ItemButton>
           );
         })}
-        <Menu.Item
+        <Menu.ItemButton
           onClick={() => {
             openOptions("accounts/new");
           }}
         >
           <PlusIcon className="h-5 w-5 mr-2 text-gray-500" aria-hidden="true" />
           Add a new account
-        </Menu.Item>
+        </Menu.ItemButton>
         <Menu.Divider />
-        <Menu.Item onClick={lock}>
+        <Menu.ItemButton onClick={lock}>
           <LockClosedIcon
             className="h-5 w-5 mr-2 text-gray-500"
             aria-hidden="true"
           />
           Lock
-        </Menu.Item>
+        </Menu.ItemButton>
       </Menu.List>
     </Menu>
   );
