@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Input from "../../../components/Form/input";
+import Input from "../../../components/Form/Input";
 import Button from "../../../components/Button";
 import { useHistory } from "react-router-dom";
 import utils from "../../../../common/lib/utils";

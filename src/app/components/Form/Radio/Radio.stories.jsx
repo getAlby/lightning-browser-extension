@@ -1,5 +1,6 @@
 import React from "react";
-import Radio from "../app/components/Radio";
+
+import Radio from ".";
 
 export const Primary = () => (
   <Radio

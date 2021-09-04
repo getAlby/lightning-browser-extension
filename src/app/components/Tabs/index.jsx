@@ -1,5 +1,6 @@
 import React from "react";
-import { classNames } from "../utils/index";
+
+import { classNames } from "../../utils/index";
 
 export default function Tabs({ tabs }) {
   return (

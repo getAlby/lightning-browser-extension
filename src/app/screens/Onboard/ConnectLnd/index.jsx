@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { UploadIcon } from "@heroicons/react/outline";
 
-import Input from "../../../components/Form/input";
+import Input from "../../../components/Form/Input";
 import Button from "../../../components/Button";
 import { useHistory } from "react-router-dom";
 
