@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Input from "../../../components/Form/input";
-import Button from "../../../components/button";
+import Input from "../../../components/Form/Input";
+import Button from "../../../components/Button";
 import { useHistory } from "react-router-dom";
 import QRCode from "react-qr-code";
 

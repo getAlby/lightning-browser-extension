@@ -42,7 +42,6 @@
     "@heroicons/react": "^1.0.4",
     "@reach/menu-button": "^0.15.3",
     "@tailwindcss/forms": "^0.3.2",
-    "advanced-css-reset": "^1.2.2",
     "assert": "^2.0.0",
     "axios": "^0.21.1",
     "bech32": "^2.0.0",

@@ -1,7 +1,7 @@
 import React from "react";
 import { createHashHistory } from "history";
 
-import Button from "../../components/button";
+import Button from "../../components/Button";
 import Checkbox from "../../components/Form/Checkbox";
 import CurrencyInput from "../../components/Form/CurrencyInput";
 import Collapse from "../../components/Collapse";

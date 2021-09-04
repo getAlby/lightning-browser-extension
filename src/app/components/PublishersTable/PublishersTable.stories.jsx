@@ -1,5 +1,6 @@
 import React from "react";
-import PublishersTable from "../app/components/PublishersTable";
+
+import PublishersTable from ".";
 
 const publishers = [
   {

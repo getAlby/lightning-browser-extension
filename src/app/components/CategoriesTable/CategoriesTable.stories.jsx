@@ -1,6 +1,7 @@
-import { BellIcon, RssIcon } from "@heroicons/react/solid";
 import React from "react";
-import CategoriesTable from "../app/components/Wallet/Shared/categoriesTable";
+import { BellIcon, RssIcon } from "@heroicons/react/solid";
+
+import CategoriesTable from ".";
 
 let categories = [
   {

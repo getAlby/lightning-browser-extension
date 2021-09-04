@@ -1,11 +1,11 @@
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
 
-import IntroScreen from "../app/screens/Onboard/Intro";
-import ChooseConnectorScreen from "../app/screens/Onboard/ChooseConnector";
-import ConnectLndScreen from "../app/screens/Onboard/ConnectLnd";
-import TestConnectionScreen from "../app/screens/Onboard/TestConnection";
-import SetPasswordScreen from "../app/screens/Onboard/SetPassword";
+import IntroScreen from "./Intro";
+import ChooseConnectorScreen from "./ChooseConnector";
+import ConnectLndScreen from "./ConnectLnd";
+import TestConnectionScreen from "./TestConnection";
+import SetPasswordScreen from "./SetPassword";
 
 export const Intro = () => <IntroScreen />;
 export const SetPassword = () => <SetPasswordScreen />;
