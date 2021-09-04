@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import utils from "../../../../common/lib/utils";
 
 import Input from "../../../components/Form/input";
-import Button from "../../../components/button";
+import Button from "../../../components/Button";
 import QrcodeScanner from "../../../components/QrcodeScanner";
 
 export default function ConnectLndHub() {

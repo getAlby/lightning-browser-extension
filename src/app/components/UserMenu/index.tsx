@@ -13,7 +13,7 @@ import WalletIcon from "@bitcoin-design/bitcoin-icons/svg/outline/wallet.svg";
 
 import utils from "../../../common/lib/utils";
 import Menu from "../Menu";
-import Badge from "../Shared/badge";
+import Badge from "../Badge";
 
 type UserMenuProps = {
   onAccountSwitch?: () => void;

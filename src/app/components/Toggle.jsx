@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Switch } from "@headlessui/react";
-import { classNames } from "../../utils/index";
+
+import { classNames } from "../utils/index";
 
 export default function Toggle({ color }) {
   const [enabled, setEnabled] = useState(false);

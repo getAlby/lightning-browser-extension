@@ -3,7 +3,7 @@ import { createHashHistory } from "history";
 import { LockOpenIcon } from "@heroicons/react/solid";
 
 import utils from "../../../common/lib/utils";
-import Button from "../../components/button";
+import Button from "../../components/Button";
 import Input from "../../components/Form/input";
 
 class Unlock extends React.Component {

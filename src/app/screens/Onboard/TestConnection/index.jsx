@@ -4,8 +4,8 @@ import { useHistory } from "react-router-dom";
 import Modal from "react-modal";
 import CrossIcon from "@bitcoin-design/bitcoin-icons/svg/outline/cross.svg";
 import Input from "../../../components/Form/input";
-import Button from "../../../components/button";
-import Card from "../../../components/card";
+import Button from "../../../components/Button";
+import Card from "../../../components/Card";
 import utils from "../../../../common/lib/utils";
 import Loading from "../../../components/Loading";
 
