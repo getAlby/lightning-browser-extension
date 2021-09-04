@@ -1,6 +1,6 @@
 import { ChevronRightIcon } from "@heroicons/react/solid";
 
-import Progressbar from "../../Progressbar";
+import Progressbar from "./Progressbar";
 
 export default function CategoriesTable({ categories }) {
   return (
