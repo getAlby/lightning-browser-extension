@@ -6,7 +6,7 @@ type Props = {
   onClick: () => void;
 };
 
-function MenuItemComponent({ children, onClick }: Props) {
+function MenuItemButton({ children, onClick }: Props) {
   return (
     <Menu.Item>
       {({ active }) => (
@@ -23,4 +23,4 @@ function MenuItemComponent({ children, onClick }: Props) {
   );
 }
 
-export default MenuItemComponent;
+export default MenuItemButton;
