@@ -4195,11 +4195,6 @@ adjust-sourcemap-loader@^4.0.0:
     loader-utils "^2.0.0"
     regex-parser "^2.2.11"
 
-advanced-css-reset@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.npmjs.org/advanced-css-reset/-/advanced-css-reset-1.2.2.tgz"
-  integrity sha512-q02okAI2K01GJj+FMko0ApeBkbNTWWmtlBd5A6tLZnLNl868qMaG7RHfzmpDJT8SRp0xvKro+IEH6q1J3cmwKA==
-
 agent-base@5:
   version "5.1.1"
   resolved "https://registry.npmjs.org/agent-base/-/agent-base-5.1.1.tgz"
