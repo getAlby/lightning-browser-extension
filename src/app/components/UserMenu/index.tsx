@@ -24,9 +24,9 @@ export default function UserMenu({ onAccountSwitch }: UserMenuProps) {
   const [accounts, setAccounts] = useState({});
 
   useEffect(() => {
-    // utils.call("getAccounts").then((response) => {
-    //   setAccounts(response);
-    // });
+    utils.call("getAccounts").then((response) => {
+      setAccounts(response);
+    });
   }, []);
 
   async function selectAccount(accountId: string) {
