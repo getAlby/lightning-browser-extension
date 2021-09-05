@@ -16,7 +16,7 @@ The extension can connect to different node implementations and supports custodi
 
 - [x] Custom budgets/allowances for websites to allow payment streams/auto-payments
 - [x] Multiple accounts and support for different node backends (lnd, etc.)
-- [x] WebLN getInfo, sendPayment, makeInvoice support
+- [x] Full WebLN send and receive payment flows (getInfo, sendPayment, makeInvoice support) 
 - [x] [LNURL-pay](https://xn--57h.bigsun.xyz/lnurl-pay-flow.txt) support
 - [x] [LNURL-auth](https://xn--57h.bigsun.xyz/lnurl-auth.html) support
 - [x] Payment history with additional website metadata
