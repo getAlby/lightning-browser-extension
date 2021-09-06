@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { QrcodeIcon } from "@heroicons/react/outline";
 
-import Button from "../button";
+import Button from "../Button";
 
 function QrcodeScanner({
   fps = 10,

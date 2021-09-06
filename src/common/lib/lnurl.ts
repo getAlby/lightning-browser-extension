@@ -5,17 +5,66 @@ import { parsePaymentRequest } from "invoices";
 
 import { bech32Decode } from "../utils/helpers";
 
+const fromInternetIdentifier = (address: string) => {
+  // email regex: https://emailregex.com/
+  if (
+    address.match(
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    )
+  ) {
+    const [name, host] = address.split("@");
+    return `https://${host}/.well-known/lnurlp/${name}`;
+  }
+  return null;
+};
+
+const findLnurl = (text: string) => {
+  let stringToText = text.trim();
+  let match;
+  // look for LNURL bech32 in the string
+  match = stringToText.match(/(lnurl[a-zA-HJ-NP-Z0-9]+)/i);
+  if (match) {
+    return match[1];
+  }
+
+  // look for a LNURL with protocol scheme
+  match = stringToText.match(/(lnurl([pwc])?:\/\/(\S+))/i);
+  if (match) {
+    return match[2];
+  }
+  return null;
+};
+
+const normalizeLnurl = (lnurlString: string) => {
+  console.log(lnurlString);
+  // maybe it's bech32 encoded?
+  try {
+    const url = bech32Decode(lnurlString);
+    return new URL(url);
+  } catch (e) {
+    console.log(e);
+  }
+
+  // maybe it's a lightning address?
+  const urlFromAddress = fromInternetIdentifier(lnurlString);
+  if (urlFromAddress) {
+    return new URL(urlFromAddress);
+  }
+
+  //maybe it's already a URL?
+  return new URL(lnurlString);
+};
+
 const lnurl = {
-  async getDetails(lnurlEncoded) {
-    const lnurlDecoded = bech32Decode(lnurlEncoded);
-    const url = new URL(lnurlDecoded);
+  async getDetails(lnurlString) {
+    const url = normalizeLnurl(lnurlString);
     let lnurlDetails = {};
     lnurlDetails.tag = url.searchParams.get("tag");
     if (lnurlDetails.tag === "login") {
       lnurlDetails.k1 = url.searchParams.get("k1");
       lnurlDetails.action = url.searchParams.get("action");
     } else {
-      const res = await axios.get(lnurlDecoded);
+      const res = await axios.get(url.toString());
       lnurlDetails = res.data;
     }
     lnurlDetails.domain = url.hostname;

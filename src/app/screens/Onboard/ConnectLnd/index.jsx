@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import { UploadIcon } from "@heroicons/react/outline";
 
-import Input from "../../../components/Form/input";
-import Button from "../../../components/button";
+import Input from "../../../components/Form/Input";
+import Button from "../../../components/Button";
 import { useHistory } from "react-router-dom";
 
 import utils from "../../../../common/lib/utils";
@@ -39,7 +39,6 @@ export default function ConnectLnd() {
 
     try {
       const addResult = await utils.call("addAccount", account);
-      console.log(addResult);
       if (addResult.accountId) {
         const selectResult = await utils.call("selectAccount", {
           id: addResult.accountId,

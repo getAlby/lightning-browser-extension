@@ -1,12 +1,17 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
+  mode: "jit",
   purge: ["./src/app/**/*.{js,ts,jsx,tsx}"],
   plugins: [require("@tailwindcss/forms")],
   theme: {
     extend: {
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+      },
+      fontSize: {
+        xxxs: ".5rem",
+        xxs: ".625rem",
       },
       colors: {
         "orange-bitcoin": "#f7931a",

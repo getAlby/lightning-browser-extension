@@ -3,14 +3,12 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import Modal from "react-modal";
 import CrossIcon from "@bitcoin-design/bitcoin-icons/svg/outline/cross.svg";
-import Input from "../../../components/Form/input";
-import Button from "../../../components/button";
-import Card from "../../../components/card";
+import Input from "../../../components/Form/Input";
+import Button from "../../../components/Button";
+import Card from "../../../components/Card";
 import utils from "../../../../common/lib/utils";
 import Loading from "../../../components/Loading";
 
-// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-Modal.setAppElement("#welcome-root");
 const customStyles = {
   content: {
     top: "50%",
