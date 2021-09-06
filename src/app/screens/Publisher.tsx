@@ -17,9 +17,6 @@ import CurrencyInput from "../components/Form/CurrencyInput";
 
 dayjs.extend(relativeTime);
 
-// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-Modal.setAppElement("#options-root");
-
 const customStyles = {
   content: {
     top: "50%",
