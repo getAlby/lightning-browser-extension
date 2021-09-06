@@ -9,4 +9,8 @@ const metadata = {
 
 export default metadata;
 
-export const Default = () => <UserMenu />;
+export const Default = () => (
+  <div className="max-w-xs flex justify-end">
+    <UserMenu />
+  </div>
+);
