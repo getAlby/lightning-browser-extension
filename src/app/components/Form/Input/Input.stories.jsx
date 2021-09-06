@@ -1,5 +1,6 @@
 import React from "react";
-import Input from "../app/components/Form/input";
+
+import Input from ".";
 
 export const Primary = () => (
   <Input name="username" id="u-1" placeholder="@Shawki" />

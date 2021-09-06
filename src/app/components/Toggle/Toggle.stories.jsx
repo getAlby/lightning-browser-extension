@@ -1,5 +1,6 @@
 import React from "react";
-import Toggle from "../app/components/Shared/toggle";
+
+import Toggle from ".";
 
 export const Primary = () => <Toggle color="orange-bitcoin" />;
 

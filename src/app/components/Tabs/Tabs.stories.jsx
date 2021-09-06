@@ -1,5 +1,6 @@
 import React from "react";
-import Tabs from "../app/components/Shared/tabs";
+
+import Tabs from ".";
 
 const tabs = [
   { name: "Basics", href: "#", current: true },

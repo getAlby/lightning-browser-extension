@@ -1,5 +1,6 @@
 import React from "react";
-import Button from "../app/components/button";
+
+import Button from ".";
 
 export const Default = () => <Button label="Button" />;
 export const Primary = () => <Button label="Button" primary />;

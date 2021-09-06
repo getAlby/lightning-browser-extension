@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { createHashHistory } from "history";
 
-import Button from "../../components/button";
+import Button from "../../components/Button";
 import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
 

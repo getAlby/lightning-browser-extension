@@ -12,7 +12,7 @@ import UserMenu from "../../components/UserMenu";
 
 import Loading from "../../components/Loading";
 import PublisherCard from "../../components/PublisherCard";
-import Progressbar from "../../components/Shared/progressbar";
+import Progressbar from "../../components/Progressbar";
 
 dayjs.extend(relativeTime);
 

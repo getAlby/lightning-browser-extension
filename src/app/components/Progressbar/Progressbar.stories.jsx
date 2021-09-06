@@ -1,5 +1,6 @@
 import React from "react";
-import Progressbar from "../app/components/Shared/progressbar";
+
+import Progressbar from ".";
 
 export const Primary = () => (
   <div className="space-y-6">

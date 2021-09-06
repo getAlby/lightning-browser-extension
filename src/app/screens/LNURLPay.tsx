@@ -5,7 +5,7 @@ import msg from "../../common/lib/msg";
 import utils from "../../common/lib/utils";
 import lnurl from "../../common/lib/lnurl";
 
-import Button from "../components/button";
+import Button from "../components/Button";
 import PublisherCard from "../components/PublisherCard";
 
 type Props = {

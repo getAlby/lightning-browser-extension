@@ -1,7 +1,7 @@
 import React from "react";
 import { PlusIcon, MinusIcon } from "@heroicons/react/outline";
 
-import Badge from "../Shared/badge";
+import Badge from "../Badge";
 
 type Props = {
   transactions: Transaction[];

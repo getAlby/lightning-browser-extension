@@ -2,7 +2,7 @@ import React from "react";
 import { PencilIcon } from "@heroicons/react/solid";
 
 import Menu from ".";
-import Badge from "../Shared/badge";
+import Badge from "../Badge";
 
 export const Default = () => (
   <Menu as="div" className="relative">

@@ -1,5 +1,6 @@
 import React from "react";
-import Card from "../app/components/card";
+
+import Card from ".";
 
 export const Primary = () => (
   <Card

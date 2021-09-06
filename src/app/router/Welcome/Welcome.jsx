@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 import DevMenu from "../../components/DevMenu";
-import Steps from "../../components/steps";
+import Steps from "../../components/Steps";
 import Intro from "../../screens/Onboard/Intro";
 import SetPassword from "../../screens/Onboard/SetPassword";
 import ChooseConnector from "../../screens/Onboard/ChooseConnector";
