@@ -9,8 +9,6 @@ import Card from "../../../components/Card";
 import utils from "../../../../common/lib/utils";
 import Loading from "../../../components/Loading";
 
-// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-Modal.setAppElement("#welcome-root");
 const customStyles = {
   content: {
     top: "50%",
