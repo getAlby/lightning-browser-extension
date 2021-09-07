@@ -58,7 +58,7 @@ export default function UserMenu({ onAccountSwitch }: UserMenuProps) {
 
   return (
     <Menu as="div" className="relative">
-      <Menu.Button className="flex items-center text-gray-500 hover:text-black transition-color duration-200">
+      <Menu.Button className="flex items-center text-gray-500 hover:text-black transition-colors duration-200">
         <UserIcon className="h-6 w-6" aria-hidden="true" />
         <ChevronDownIcon className="h-4 w-4" aria-hidden="true" />
       </Menu.Button>

@@ -3,8 +3,11 @@ import { createHashHistory } from "history";
 import { HashRouter, Switch, Route } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";
+
 import Home from "../../screens/Home";
 import Unlock from "../../screens/Unlock";
+import Send from "../../screens/Send";
+
 import Loading from "../../components/Loading";
 import Navbar from "../../components/Navbar";
 import UserMenu from "../../components/UserMenu";
@@ -40,15 +43,17 @@ class Popup extends React.Component {
       <HashRouter>
         <section id="popup">
           <Switch>
-            <Route exact path="/" render={(props) => <Loading />} />
-            <Route
-              exact
-              path="/unlock"
-              render={(props) => <Unlock next="/home" />}
-            />
+            <Route exact path="/">
+              <Loading />
+            </Route>
+            <Route exact path="/unlock">
+              <Unlock next="/home" />
+            </Route>
 
-            {/* TODO: these routes should not be accessible when not unlocked. See: https://reactrouter.com/web/example/auth-workflow */}
-            <Route component={Default} />
+            {/* TODO: these routes should not be accessible when locked. See: https://reactrouter.com/web/example/auth-workflow */}
+            <Route>
+              <Default />
+            </Route>
           </Switch>
         </section>
       </HashRouter>
@@ -94,7 +99,7 @@ const Default = () => {
         <Home key={key} />
       </Route>
       <Route path="/send">
-        <p>Send screen...</p>
+        <Send />
       </Route>
     </div>
   );

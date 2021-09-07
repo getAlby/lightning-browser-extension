@@ -47,7 +47,7 @@ export default function SetPassword() {
           <div className="w-4/5">
             <div className="mt-6">
               <label
-                htmlFor="email"
+                htmlFor="password"
                 className="block font-medium text-gray-700"
               >
                 Choose a password:
@@ -64,7 +64,7 @@ export default function SetPassword() {
             </div>
             <div className="mt-6">
               <label
-                htmlFor="email"
+                htmlFor="passwordConfirmation"
                 className="block font-medium text-gray-700"
               >
                 Lets confirm you typed it correct:
