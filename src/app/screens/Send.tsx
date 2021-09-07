@@ -15,14 +15,18 @@ function Send() {
   const [invoice, setInvoice] = useState("");
   const history = useHistory();
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (invoice) {
-      utils.call(
-        "sendPayment",
-        { paymentRequest: invoice },
-        { origin: getOriginData() }
-      );
+      try {
+        await utils.call(
+          "sendPayment",
+          { paymentRequest: invoice },
+          { origin: getOriginData() }
+        );
+      } catch (e) {
+        alert(e.message);
+      }
     }
   }
 
