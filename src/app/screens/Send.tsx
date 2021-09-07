@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import CaretLeftIcon from "@bitcoin-design/bitcoin-icons/svg/filled/caret-left.svg";
+import { QrcodeIcon } from "@heroicons/react/outline";
 
 import utils from "../../common/lib/utils";
 import getOriginData from "../../extension/content-script/originData";
@@ -37,6 +38,17 @@ function Send() {
                 className="w-4 h-4"
                 src={CaretLeftIcon}
                 alt=""
+                aria-hidden="true"
+              />
+            }
+          />
+        }
+        headerRight={
+          <IconButton
+            onClick={() => alert("Should open QR code scanning")}
+            icon={
+              <QrcodeIcon
+                className="h-6 w-6 text-blue-500"
                 aria-hidden="true"
               />
             }
