@@ -44,8 +44,10 @@ class Popup extends React.Component {
             <Route
               exact
               path="/unlock"
-              render={(props) => <Unlock next="/" />}
+              render={(props) => <Unlock next="/home" />}
             />
+
+            {/* TODO: these routes should not be accessible when not unlocked. See: https://reactrouter.com/web/example/auth-workflow */}
             <Route component={Default} />
           </Switch>
         </section>
@@ -88,7 +90,12 @@ const Default = () => {
           />
         }
       />
-      <Route path="/home" render={(props) => <Home key={key} />} />
+      <Route path="/home">
+        <Home key={key} />
+      </Route>
+      <Route path="/send">
+        <p>Send screen...</p>
+      </Route>
     </div>
   );
 };

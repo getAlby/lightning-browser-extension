@@ -76,7 +76,7 @@ export default function UserMenu({ onAccountSwitch }: UserMenuProps) {
         </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
-            openOptions("send");
+            history.push("/send");
           }}
         >
           <img
