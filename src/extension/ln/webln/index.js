@@ -91,7 +91,7 @@ export default class WebLNProvider {
           return;
         }
         if (messageEvent.data.data.error) {
-          reject(messageEvent.data.data.error);
+          reject(new Error(messageEvent.data.data.error));
         } else {
           // 1. data: the message data
           // 2. data: the data passed as data to the message
