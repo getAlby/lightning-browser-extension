@@ -21,7 +21,7 @@ The extension can connect to different node implementations and supports custodi
 - [x] [LNURL-auth](https://xn--57h.bigsun.xyz/lnurl-auth.html) support
 - [x] Payment history with additional website metadata
 - [ ] [LNURL-withdraw](https://xn--57h.bigsun.xyz/lnurl-withdraw-flow.txt) support
-- [ ] WebLN signMessage, verifyMessage support
+- [x] WebLN signMessage, verifyMessage support
 - [ ] WebLN dynamic makeInvoice support
 - [ ] [Lsat](https://lsat.tech/) support
 
