@@ -3,7 +3,7 @@ import React, { useState, MouseEvent } from "react";
 import msg from "../../common/lib/msg";
 import utils from "../../common/lib/utils";
 
-import Button from "../components/button";
+import Button from "../components/Button";
 import PublisherCard from "../components/PublisherCard";
 
 type Props = {

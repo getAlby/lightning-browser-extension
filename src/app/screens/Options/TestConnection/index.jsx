@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import Button from "../../../components/button";
-import Card from "../../../components/card";
+import Button from "../../../components/Button";
+import Card from "../../../components/Card";
 import utils from "../../../../common/lib/utils";
 
 export default function TestConnection() {

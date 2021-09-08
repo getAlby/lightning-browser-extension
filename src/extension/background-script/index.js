@@ -57,6 +57,7 @@ const debugLogger = (message, sender) => {
 };
 
 const handleInstalled = (details) => {
+  console.log(details);
   console.log(`Handle installed: ${details.reason}`);
   // TODO: maybe check if accounts are already configured?
   if (details.reason === "install") {
@@ -103,10 +104,18 @@ async function init() {
   // this is the only handler that may and must return a Promise which resolve with the response to the content script
   browser.runtime.onMessage.addListener(routeCalls);
 
-  browser.runtime.onInstalled.addListener(handleInstalled);
-
   browser.tabs.onUpdated.addListener(updateIcon); // update Icon when there is an allowance
   browser.tabs.onUpdated.addListener(extractLightningDataFromPage); // extract LN data from websites
+  /*
+  if (settings.enableLsats) {
+    await browser.storage.sync.set({ lsats: {} });
+    initLsatInterceptor(connector);
+  }
+  */
 }
+
+// The onInstalled event is fired directly after the code is loaded.
+// When we subscribe to that event asynchronously in the init() function it is too late and we miss the event.
+browser.runtime.onInstalled.addListener(handleInstalled);
 
 init();

@@ -5,12 +5,12 @@ import utils from "../../../common/lib/utils";
 const paymentSuccessNotification = (message, data) => {
   const recipient = data.origin.name;
   const paymentResponse = data.response;
-  const route = paymentResponse.data.payment_route;
+  const route = paymentResponse.data.route;
   const { total_amt } = route;
 
   return utils.notify({
     title: `Paid ${total_amt} Satoshi to ${recipient}`,
-    message: `pre image: ${paymentResponse.data.payment_preimage}`,
+    message: `pre image: ${paymentResponse.data.preimage}`,
   });
 };
 

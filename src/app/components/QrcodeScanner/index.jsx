@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { QrcodeIcon } from "@heroicons/react/outline";
 
-import Button from "../button";
+import Button from "../Button";
 
 function QrcodeScanner({
   fps = 10,
@@ -18,10 +18,10 @@ function QrcodeScanner({
 
   async function handleRequestCameraPermissions() {
     try {
-      const devices = await Html5Qrcode.getCameras();
+      const devices = await window.Html5Qrcode.getCameras();
       if (devices && devices.length) {
         setScanning(true);
-        html5QrCodeRef.current = new Html5Qrcode("reader");
+        html5QrCodeRef.current = new window.Html5Qrcode("reader");
         html5QrCodeRef.current
           .start(
             devices[0].id,

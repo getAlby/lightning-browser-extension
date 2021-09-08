@@ -31,6 +31,7 @@ const routes = {
   lnurlPay,
   sendPayment: ln.sendPayment,
   signMessage: ln.signMessage,
+  verifyMessage: ln.verifyMessage,
   makeInvoice: ln.makeInvoice,
   getBalance: ln.getBalance,
   getPayments: payments.all,

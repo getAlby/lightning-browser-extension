@@ -24,7 +24,7 @@ const utils = {
     const notification = Object.assign(
       {
         type: "basic",
-        iconUrl: browser.extension.getURL("assets/icons/favicon-48.png"),
+        iconUrl: "assets/icons/satsymbol-48.png",
       },
       details
     );
