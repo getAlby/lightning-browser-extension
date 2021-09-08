@@ -74,7 +74,7 @@ function Send() {
         title="Send a payment"
         headerLeft={
           <IconButton
-            onClick={() => history.goBack()}
+            onClick={() => history.push("/home")}
             icon={
               <img
                 className="w-4 h-4"
@@ -98,13 +98,10 @@ function Send() {
         }
       />
       <form className="px-4" onSubmit={handleSubmit}>
-        <label
-          htmlFor="invoice"
-          className="mt-6 block font-medium text-gray-700"
-        >
+        <label htmlFor="invoice" className="mt-6 block text-gray-700">
           Lightning Invoice
         </label>
-        <div className="mt-1 mb-4">
+        <div className="mt-1 mb-5">
           <Input
             name="invoice"
             placeholder="Paste invoice"
