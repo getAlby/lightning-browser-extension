@@ -1,3 +1,5 @@
+import Base64 from "crypto-js/enc-base64";
+import UTF8 from "crypto-js/enc-utf8";
 import Base from "./base";
 
 class Lnd extends Base {
@@ -40,7 +42,18 @@ class Lnd extends Base {
   }
 
   signMessage(args) {
-    return this.request("POST", "/v2/signer/signmessage", args);
+    // use v2 to use the key locator (key_loc)
+    // return this.request("POST", "/v2/signer/signmessage", {
+    return this.request("POST", "/v1/signmessage", {
+      msg: Base64.stringify(UTF8.parse(args.message)),
+    }).then((res) => {
+      return {
+        data: {
+          message: args.message,
+          signature: res.data.signature,
+        },
+      };
+    });
   }
 
   makeInvoice(args) {
