@@ -76,6 +76,10 @@ class LnBits extends Base {
     return Promise.reject(new Error("Not supported with Lnbits"));
   }
 
+  verifyMessage(args) {
+    return Promise.reject(new Error("Not supported with Lnbits"));
+  }
+
   async request(method, path, apiKey, args, defaultValues) {
     let body = null;
     let query = "";

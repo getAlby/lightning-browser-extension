@@ -56,6 +56,19 @@ class Lnd extends Base {
     });
   }
 
+  verifyMessage(args) {
+    return this.request("POST", "/v1/verifymessage", {
+      msg: Base64.stringify(UTF8.parse(args.message)),
+      signature: args.signature,
+    }).then((res) => {
+      return {
+        data: {
+          valid: res.data.valid,
+        },
+      };
+    });
+  }
+
   makeInvoice(args) {
     return this.request("POST", "/v1/invoices", {
       memo: args.memo,
