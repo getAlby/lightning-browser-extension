@@ -1,6 +1,10 @@
 import Base from "./base";
 import { parsePaymentRequest } from "invoices";
 
+// !!!!!
+// TODO: needs updating. not used currently
+// !!!!
+
 class LnBits extends Base {
   getInfo() {
     return this.request(
@@ -48,9 +52,9 @@ class LnBits extends Base {
         return this.checkPayment(data.checking_id).then((checkData) => {
           return {
             data: {
-              payment_preimage: checkData.preimage,
-              payment_hash: data.payment_hash,
-              payment_route: { total_amt: amountInSats, total_fees: 0 },
+              preimage: checkData.preimage,
+              paymentHash: data.payment_hash,
+              route: { total_amt: amountInSats, total_fees: 0 },
             },
           };
         });
