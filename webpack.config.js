@@ -153,10 +153,11 @@ module.exports = {
       verbose: true,
     }),
     new HtmlWebpackPlugin({
-      template: path.join(viewsPath, "popup.html"),
+      template: path.join(viewsPath, "popup.ejs"),
       inject: "body",
       chunks: ["popup"],
       hash: true,
+      environment: process.env.NODE_ENV,
       filename: "popup.html",
     }),
     new HtmlWebpackPlugin({
