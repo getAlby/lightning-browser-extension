@@ -102,12 +102,12 @@ Then run the following:
   - Go to the browser address bar and type `chrome://extensions`
   - Check the `Developer Mode` button to enable it.
   - Click on the `Load Unpacked Extension…` button.
-  - Select your extension’s extracted directory.
+  - Select the extension’s dist directory: `dist/development/chrome`
 
 - **Firefox**
 
   - Load the Add-on via `about:debugging` => `This Firefox` as temporary Add-on. (`about:debugging#/runtime/this-firfox`)
-  - Choose the `manifest.json` file in the extracted directory
+  - Choose the `manifest.json` file in the extension's dist directory: `dist/development/firefox`
   - [debugging details](https://extensionworkshop.com/documentation/develop/debugging/#debugging_popups)
   - To see the debug console click "inspect" on the list of temporary extensions (`about:debugging#/runtime/this-firefox`)
 
