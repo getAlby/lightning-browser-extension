@@ -42,7 +42,7 @@ function QrcodeScanner({
           });
       }
     } catch (error) {
-      // handle error
+      alert("Please allow camera access in the settings screen.");
     }
   }
 

@@ -9,6 +9,7 @@ import Publishers from "../../screens/Publishers";
 import Publisher from "../../screens/Publisher";
 import ChooseConnector from "../../screens/Options/ChooseConnector";
 import TestConnection from "../../screens/Options/TestConnection";
+import Settings from "../../screens/Settings";
 
 function Options() {
   const [accountInfo, setAccountInfo] = useState({});
@@ -35,6 +36,7 @@ function Options() {
         <Navbar.Link href="/publishers">Publishers</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>
         <Navbar.Link href="/receive">Receive</Navbar.Link>
+        <Navbar.Link href="/settings">Settings</Navbar.Link>
       </Navbar>
 
       <Switch>
@@ -72,6 +74,9 @@ function Options() {
               </a>
             </p>
           </Container>
+        </Route>
+        <Route path="/settings">
+          <Settings />
         </Route>
         <Route path="/accounts/new">
           <Container>
