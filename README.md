@@ -30,6 +30,8 @@ The extension can connect to different node implementations and supports custodi
 
 We have a channel on the [bitcoin.design](https://bitcoin.design/) Slack community. Come and join us! [#lightning-browser-extension](https://bitcoindesign.slack.com/archives/C02591ADXM2)
 
+We also do a weekly call at 13:00 UTC - (15:00 CEST/CAT - 09:00 EDT) on [https://meet.jit.si/bitcoindesign](https://meet.jit.si/bitcoindesign)
+
 ## Try out the most recent version
 Download Nightly releases 
 * [Firefox Nightly](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/elbee-firefox.xpi) - best install it as temporary add-on as discussed in the "Load extension into browser" section
