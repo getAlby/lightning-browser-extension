@@ -16,6 +16,7 @@ type Transaction = {
   amount: string;
   currency: string;
   value: string;
+  preimage: string;
 };
 
 export default function TransactionsTable({ transactions }: Props) {
@@ -53,6 +54,7 @@ export default function TransactionsTable({ transactions }: Props) {
                   <div className="text-gray-900 truncate">{tx.title}</div>
                   <div className="text-sm text-gray-500 truncate">
                     {tx.subTitle}
+                    <p className="truncate">{tx.preimage}</p>
                   </div>
                 </div>
               </div>
