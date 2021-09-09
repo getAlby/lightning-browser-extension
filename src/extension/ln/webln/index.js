@@ -65,6 +65,14 @@ export default class WebLNProvider {
     return this.execute("signMessage", { message });
   }
 
+  verifyMessage(signature, message) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling verifyMessage");
+    }
+
+    return this.execute("verifyMessage", { signature, message });
+  }
+
   execute(type, args) {
     const p = new Promise((resolve, reject) => {
       // post the request to the content script. from there it gets passed to the background script and back
@@ -91,7 +99,7 @@ export default class WebLNProvider {
           return;
         }
         if (messageEvent.data.data.error) {
-          reject(messageEvent.data.data.error);
+          reject(new Error(messageEvent.data.data.error));
         } else {
           // 1. data: the message data
           // 2. data: the data passed as data to the message

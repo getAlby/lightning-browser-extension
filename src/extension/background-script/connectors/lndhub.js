@@ -1,4 +1,3 @@
-import memoizee from "memoizee";
 import axios from "axios";
 import Base from "./base";
 
@@ -34,6 +33,9 @@ export default class LndHub extends Base {
       if (data.error) {
         return { error: data.message };
       }
+      if (data.payment_error) {
+        return { error: data.payment_error };
+      }
       if (
         typeof data.payment_hash === "object" &&
         data.payment_hash.type === "Buffer"
@@ -48,11 +50,21 @@ export default class LndHub extends Base {
           data.payment_preimage.data
         ).toString("hex");
       }
-      return { data };
+      return {
+        data: {
+          preimage: data.payment_preimage,
+          paymentHash: data.payment_hash,
+          route: data.payment_route,
+        },
+      };
     });
   }
 
   signMessage(args) {
+    return Promise.reject(new Error("Not supported with Lndhub"));
+  }
+
+  verifyMessage(args) {
     return Promise.reject(new Error("Not supported with Lndhub"));
   }
 
@@ -61,11 +73,13 @@ export default class LndHub extends Base {
       amt: args.amount,
       memo: args.memo,
     }).then((data) => {
+      if (typeof data.r_hash === "object" && data.r_hash.type === "Buffer") {
+        data.r_hash = Buffer.from(data.r_hash.data).toString("hex");
+      }
       return {
         data: {
           paymentRequest: data.payment_request,
           rHash: data.r_hash,
-          addIndes: data.add_index,
         },
       };
     });
