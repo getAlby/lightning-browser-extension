@@ -6,6 +6,7 @@ import utils from "../../common/lib/utils";
 import lnurl from "../../common/lib/lnurl";
 
 import Button from "../components/Button";
+import Input from "../components/Form/Input";
 import PublisherCard from "../components/PublisherCard";
 
 type Props = {
@@ -101,8 +102,16 @@ function LNURLPay({ details, origin }: Props) {
       return <p>{`${details.minSendable / 1000} satoshi`}</p>;
     } else {
       return (
-        <div className="flex flex-col">
+        <div className="mt-1 flex flex-col">
+          <Input
+            type="number"
+            min={details.minSendable / 1000}
+            max={details.maxSendable / 1000}
+            value={valueMSat / 1000}
+            onChange={(e) => setValueMSat(e.target.value * 1000)}
+          />
           <input
+            className="mt-2"
             type="range"
             min={details.minSendable}
             max={details.maxSendable}
@@ -110,9 +119,6 @@ function LNURLPay({ details, origin }: Props) {
             value={valueMSat}
             onChange={(e) => setValueMSat(e.target.value)}
           />
-          <output className="mt-1 text-sm">{`${
-            valueMSat / 1000
-          } satoshi`}</output>
         </div>
       );
     }
