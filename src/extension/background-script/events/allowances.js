@@ -4,7 +4,7 @@ import db from "../db";
 const updateAllowance = async (message, data) => {
   const host = data.origin.host;
   const paymentResponse = data.response;
-  const route = paymentResponse.data.payment_route;
+  const route = paymentResponse.data.route;
   const { total_amt } = route;
 
   const allowance = await db.allowances

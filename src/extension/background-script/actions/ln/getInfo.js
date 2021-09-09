@@ -8,7 +8,7 @@ const getInfo = async (message, sender) => {
     data: {
       node: {
         alias: info.data.alias,
-        pubkey: info.data.identity_pubkey,
+        pubkey: info.data.pubkey,
         color: info.data.color,
       },
     },

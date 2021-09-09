@@ -1,24 +1,22 @@
-import memoizee from "memoizee";
+import Base64 from "crypto-js/enc-base64";
+import UTF8 from "crypto-js/enc-utf8";
 import Base from "./base";
 
 class Lnd extends Base {
-  constructor(config) {
-    super(config);
-    this.getInfo = memoizee(
-      (args) => this.request("GET", "/v1/getinfo", undefined, {}),
-      {
-        promise: true,
-        maxAge: 20000,
-        preFetch: true,
-        normalizer: () => "getinfo",
-      }
-    );
-    this.getBalance = memoizee(() => this.getChannelsBalance(), {
-      promise: true,
-      maxAge: 20000,
-      preFetch: true,
-      normalizer: () => "getinfo",
+  getInfo() {
+    return this.request("GET", "/v1/getinfo", undefined, {}).then((res) => {
+      return {
+        data: {
+          alias: res.data.alias,
+          pubkey: res.data.identity_pubkey,
+          color: res.data.color,
+        },
+      };
     });
+  }
+
+  getBalance() {
+    return this.getChannelsBalance();
   }
 
   sendPayment(args) {
@@ -29,11 +27,46 @@ class Lnd extends Base {
         payment_request: args.paymentRequest,
       },
       {}
-    );
+    ).then((res) => {
+      if (res.data.payment_error) {
+        return { error: res.data.payment_error };
+      }
+      return {
+        data: {
+          preimage: res.data.payment_preimage,
+          paymentHash: res.data.payment_hash,
+          route: res.data.payment_route,
+        },
+      };
+    });
   }
 
   signMessage(args) {
-    return this.request("POST", "/v2/signer/signmessage", args);
+    // use v2 to use the key locator (key_loc)
+    // return this.request("POST", "/v2/signer/signmessage", {
+    return this.request("POST", "/v1/signmessage", {
+      msg: Base64.stringify(UTF8.parse(args.message)),
+    }).then((res) => {
+      return {
+        data: {
+          message: args.message,
+          signature: res.data.signature,
+        },
+      };
+    });
+  }
+
+  verifyMessage(args) {
+    return this.request("POST", "/v1/verifymessage", {
+      msg: Base64.stringify(UTF8.parse(args.message)),
+      signature: args.signature,
+    }).then((res) => {
+      return {
+        data: {
+          valid: res.data.valid,
+        },
+      };
+    });
   }
 
   makeInvoice(args) {
@@ -44,7 +77,6 @@ class Lnd extends Base {
       return {
         data: {
           paymentRequest: res.data.payment_request,
-          addIndex: res.data.add_index,
           rHash: res.data.r_hash,
         },
       };
