@@ -5,6 +5,7 @@ import CaretLeftIcon from "@bitcoin-design/bitcoin-icons/svg/filled/caret-left.s
 import Button from "../components/Button";
 import IconButton from "../components/IconButton";
 import Input from "../components/Form/Input";
+import Select from "../components/Form/Select";
 import Header from "../components/Header";
 
 function Receive() {
@@ -76,8 +77,7 @@ function Receive() {
             Expiration
           </label>
           <div className="mt-1">
-            <select
-              className="w-full py-3 border-gray-300 rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50"
+            <Select
               name="expiration"
               value={formData.expiration}
               onChange={handleChange}
@@ -91,7 +91,7 @@ function Receive() {
               <option key="180" value="180">
                 3 hours
               </option>
-            </select>
+            </Select>
           </div>
         </div>
 
