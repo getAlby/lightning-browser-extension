@@ -144,23 +144,31 @@ export default class LndHub extends Base {
     } else if (args !== undefined) {
       reqConfig.params = args;
     }
+    let data;
     try {
       const res = await axios(reqConfig);
-      let data = res.data;
-      if (data && data.error) {
-        if (data.code * 1 === 1 && !this.noRetry) {
-          await this.authorize();
-          this.noRetry = true;
-          return this.request(method, path, args, defaultValues);
-        }
-      }
-      if (defaultValues) {
-        data = Object.assign(Object.assign({}, defaultValues), data);
-      }
-      return data;
+      data = res.data;
     } catch (e) {
       console.log(e);
-      throw new Error(e.response.data);
+      throw new Error(e.message);
     }
+    if (data && data.error) {
+      if (data.code * 1 === 1 && !this.noRetry) {
+        try {
+          await this.authorize();
+        } catch (e) {
+          console.log(e);
+          throw new Error(e.message);
+        }
+        this.noRetry = true;
+        return this.request(method, path, args, defaultValues);
+      } else {
+        throw new Error(data.message);
+      }
+    }
+    if (defaultValues) {
+      data = Object.assign(Object.assign({}, defaultValues), data);
+    }
+    return data;
   }
 }
