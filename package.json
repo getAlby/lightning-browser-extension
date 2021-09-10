@@ -77,10 +77,11 @@
     "zustand": "^3.5.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.0",
+    "@babel/core": "^7.15.5",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.13.8",
     "@babel/plugin-transform-destructuring": "^7.13.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.15.4",
     "@babel/plugin-transform-runtime": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.13.13",
@@ -97,7 +98,7 @@
     "@typescript-eslint/parser": "^4.30.0",
     "autoprefixer": "^10.3.3",
     "babel-eslint": "^10.0.0",
-    "babel-jest": "^27.1.0",
+    "babel-jest": "^27.1.1",
     "babel-loader": "^8.2.2",
     "babel-plugin-import": "^1.13.3",
     "buffer": "^6.0.3",
