@@ -8,7 +8,6 @@ import utils from "../../../../common/lib/utils";
 export default function ConnectLnbits() {
   const history = useHistory();
   const [formData, setFormData] = useState({
-    readkey: "",
     adminkey: "",
     url: "https://lnbits.com",
   });
@@ -22,11 +21,10 @@ export default function ConnectLnbits() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const { readkey, adminkey, url } = formData;
+    const { adminkey, url } = formData;
     const account = {
       name: "LNBits",
       config: {
-        readkey,
         adminkey,
         url,
       },
@@ -60,23 +58,6 @@ export default function ConnectLnbits() {
           <h1 className="text-3xl font-bold">Connect to LNbits</h1>
           <p className="text-gray-500 mt-6"></p>
           <div className="w-4/5">
-            <div className="mt-6">
-              <label
-                htmlFor="readkey"
-                className="block font-medium text-gray-700"
-              >
-                LNbits Read Key
-              </label>
-              <div className="mt-1">
-                <Input
-                  name="readkey"
-                  type="text"
-                  required
-                  autoFocus
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
             <div className="mt-6">
               <label
                 htmlFor="adminkey"
