@@ -23,8 +23,8 @@ export default function ChooseConnector() {
     },
     {
       to: `${url}/lnbits`,
-      title: "LNBits",
-      description: "Connect to your LNBits account",
+      title: "LNbits",
+      description: "Connect to your LNbits account",
     },
     {
       to: `${url}/create-wallet`,
