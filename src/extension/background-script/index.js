@@ -105,6 +105,7 @@ async function init() {
   browser.runtime.onMessage.addListener(routeCalls);
 
   browser.tabs.onUpdated.addListener(updateIcon); // update Icon when there is an allowance
+  // TODO: make optional
   browser.tabs.onUpdated.addListener(extractLightningDataFromPage); // extract LN data from websites
   /*
   if (settings.enableLsats) {

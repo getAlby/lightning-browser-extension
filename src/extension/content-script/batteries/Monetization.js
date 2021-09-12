@@ -4,17 +4,17 @@ const urlMatcher = /^https?:\/\/.*/i;
 
 const battery = () => {
   const monetizationTag = document.querySelector(
-    'head > meta[name="monetization"][content^="lightning:" i]'
+    'head > meta[name="lightning"][content^="lnurlp:" i]'
   );
   if (!monetizationTag) {
     return Promise.resolve();
   }
-  const recipient = monetizationTag.content.replace(/lightning:/i, "");
+  const recipient = monetizationTag.content.replace(/lnurlp:/i, "");
   const metaData = getOriginData();
 
   return Promise.resolve([
     {
-      method: "lnurl",
+      method: "lnurlp",
       recipient: recipient,
       ...metaData,
     },
