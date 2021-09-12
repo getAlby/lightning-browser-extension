@@ -109,7 +109,7 @@ Then run the following:
 - **Firefox**
 
   - Load the Add-on via `about:debugging` => `This Firefox` as temporary Add-on. (`about:debugging#/runtime/this-firfox`)
-  - Choose the `manifest.json` file in the extension's dist directory: `dist/development/firefox`
+  - Choose a .xpi file or the `manifest.json` file in the extension's dist directory: `dist/development/firefox`
   - [debugging details](https://extensionworkshop.com/documentation/develop/debugging/#debugging_popups)
   - To see the debug console click "inspect" on the list of temporary extensions (`about:debugging#/runtime/this-firefox`)
 
