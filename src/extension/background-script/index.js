@@ -15,15 +15,16 @@ setInterval(() => {
 */
 
 const extractLightningDataFromPage = async (tabId, changeInfo, tabInfo) => {
-  if (
-    !changeInfo.url ||
-    !changeInfo.url.startsWith("http" || changeInfo.status !== "complete")
-  ) {
+  if (changeInfo.status !== "complete") {
     return;
   }
-  return browser.tabs.executeScript(tabId, {
-    code: "if (window.LBE_EXTRACT_LIGHTNING_DATA) { LBE_EXTRACT_LIGHTNING_DATA(); };",
-  });
+
+  // delay execution a bit to give the website chance to potentially load async data (e.g. most data from twitter is loaded async)
+  setTimeout(() => {
+    browser.tabs.executeScript(tabId, {
+      code: "if ((document.location.protocol === 'https:' || document.location.protocol === 'http:') && window.LBE_EXTRACT_LIGHTNING_DATA) { LBE_EXTRACT_LIGHTNING_DATA(); };",
+    });
+  }, 500);
 };
 
 const updateIcon = async (tabId, changeInfo, tabInfo) => {
@@ -57,7 +58,6 @@ const debugLogger = (message, sender) => {
 };
 
 const handleInstalled = (details) => {
-  console.log(details);
   console.log(`Handle installed: ${details.reason}`);
   // TODO: maybe check if accounts are already configured?
   if (details.reason === "install") {
