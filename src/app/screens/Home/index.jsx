@@ -52,7 +52,6 @@ class Home extends React.Component {
           // data is an array, see: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/executeScript#return_value
           // we execute it only in the current Tab. Thus the array has only one entry
           if (data[0]) {
-            console.log(data[0]);
             this.setState({ lnData: data[0] });
           }
         });
