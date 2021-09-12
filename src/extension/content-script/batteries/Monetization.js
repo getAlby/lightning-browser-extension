@@ -4,7 +4,7 @@ const urlMatcher = /^https?:\/\/.*/i;
 
 const battery = () => {
   const monetizationTag = document.querySelector(
-    'head > meta[name="lightning"]'
+    'head > meta[name="lightning"][content^="lnurlp:" i]'
   );
   if (!monetizationTag) {
     return Promise.resolve();
