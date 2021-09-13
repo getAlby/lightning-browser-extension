@@ -1,5 +1,10 @@
 const urlMatcher = /^https:\/\/twitter\.com\/(\w+).*/;
 
+function getUsername() {
+  const matchData = document.location.toString().match(urlMatcher);
+  return matchData[1];
+}
+
 // can we get the user description from the primary column that looks like a profile?
 function isOnProfilePage(username) {
   return (
@@ -53,17 +58,22 @@ function getUserData(username) {
 }
 
 function battery() {
-  // Twitter loads everything async...so we need to wait a bit
+  // Twitter loads everything async...so we use an interval to check if data finished loading.
   return new Promise((resolve, reject) => {
+    const username = getUsername();
+    if (!isOnProfilePage(username) && !isOnTweet(username)) {
+      resolve();
+      return;
+    }
+
     let counter = 0;
     const maxRetries = 3;
     const delayBetweenRetries = 250;
     const intervalId = setInterval(() => {
       counter++;
       let userData;
-      const matchData = document.location.toString().match(urlMatcher);
-      const username = matchData[1];
-      if ((userData = getUserData(username))) {
+      const uptodateUsername = getUsername(); // Need to grab username again for when users switch pages between interval.
+      if ((userData = getUserData(uptodateUsername))) {
         clearInterval(intervalId);
         console.log({ userData });
 
