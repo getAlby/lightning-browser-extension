@@ -30,7 +30,7 @@ if (document) {
       if (!matches) {
         return;
       }
-      paymentRequest = matches[0];
+      paymentRequest = matches[1];
     }
     if (!paymentRequest) {
       return;
