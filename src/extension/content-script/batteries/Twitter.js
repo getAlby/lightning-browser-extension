@@ -23,39 +23,46 @@ function getUserData(username) {
     const element = document.querySelector(
       '[data-testid="primaryColumn"] [data-testid="UserDescription"]'
     );
-    return {
-      element,
-      imageUrl: document.querySelector(
-        `[data-testid="primaryColumn"] a[href="/${username}/photo"] img`
-      ).src,
-      name: document.title,
-    };
+    const imageUrl = document.querySelector(
+      `[data-testid="primaryColumn"] a[href="/${username}/photo"] img`
+    )?.src;
+    if (element && imageUrl) {
+      return {
+        element,
+        imageUrl,
+        name: document.title,
+      };
+    }
   } else if (isOnTweet(username)) {
     const profileLinks = document.querySelectorAll(
       `[data-testid="sidebarColumn"] [data-testid="UserCell"] a[href="/${username}"]`
     );
     const element = profileLinks[1].closest('[data-testid="UserCell"]');
-    return {
-      element,
-      name: `${
-        profileLinks[1].querySelector("span").textContent
-      } (@${username}) / Twitter`,
-      imageUrl: profileLinks[0].querySelector("img").src,
-    };
+    const imageUrl = profileLinks[0].querySelector("img")?.src;
+    if (element && imageUrl) {
+      return {
+        element,
+        name: `${
+          profileLinks[1].querySelector("span").textContent
+        } (@${username}) / Twitter`,
+        imageUrl,
+      };
+    }
   }
+  return null;
 }
 
 function battery() {
-  const matchData = document.location.toString().match(urlMatcher);
-  const username = matchData[1];
   // Twitter loads everything async...so we need to wait a bit
   return new Promise((resolve, reject) => {
     let counter = 0;
-    const maxRetries = 20;
-    const delayBetweenRetries = 100;
+    const maxRetries = 3;
+    const delayBetweenRetries = 250;
     const intervalId = setInterval(() => {
       counter++;
       let userData;
+      const matchData = document.location.toString().match(urlMatcher);
+      const username = matchData[1];
       if ((userData = getUserData(username))) {
         clearInterval(intervalId);
         console.log({ userData });
