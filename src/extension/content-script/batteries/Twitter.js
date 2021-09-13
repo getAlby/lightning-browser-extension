@@ -50,58 +50,64 @@ function battery() {
   const username = matchData[1];
   // Twitter loads everything async...so we need to wait a bit
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const userData = getUserData(username);
+    let counter = 0;
+    const maxRetries = 20;
+    const delayBetweenRetries = 100;
+    const intervalId = setInterval(() => {
+      counter++;
+      let userData;
+      if ((userData = getUserData(username))) {
+        clearInterval(intervalId);
+        console.log({ userData });
 
-      console.log({ userData });
-      if (!userData) {
-        resolve();
-        return;
-      }
+        let lnurl;
+        // extract lnurlp: from the description text
+        lnurl = userData.element.textContent.match(/lnurlp:(\S+)/i);
 
-      let lnurl;
-      // extract lnurlp: from the description text
-      lnurl = userData.element.textContent.match(/lnurlp:(\S+)/i);
+        // if we did not find anything let's look for an ⚡ emoji
+        if (!lnurl) {
+          const zapElement = userData.element.querySelector(
+            'img[src*="26a1.svg"]'
+          );
+          // it is hard to find the :zap: emoij. Twitter uses images for that but has an alt text with the emoij
+          // but there could be some control characters somewhere...somehow...no idea...
+          // for that reason we check if there is any character with the zap char code in the alt string.
 
-      // if we did not find anything let's look for an ⚡ emoji
-      if (!lnurl) {
-        const zapElement = userData.element.querySelector(
-          'img[src*="26a1.svg"]'
-        );
-        // it is hard to find the :zap: emoij. Twitter uses images for that but has an alt text with the emoij
-        // but there could be some control characters somewhere...somehow...no idea...
-        // for that reason we check if there is any character with the zap char code in the alt string.
-
-        //const emojis = userData.element.querySelectorAll("img");
-        //const zapElement = Array.from(emojis).find((img) => {
-        //  return Array.from(img.alt.trim()).some(
-        //    (c) => c.charCodeAt(0) === 9889
-        //  );
-        //});
-        // if we find a ⚡ emoji we use the text of the next sibling and try to extract a lnurl
-        if (zapElement) {
-          const match = zapElement.nextSibling.textContent.match(/(\S+@\S+)/);
-          if (match) {
-            lnurl = match[1];
+          //const emojis = userData.element.querySelectorAll("img");
+          //const zapElement = Array.from(emojis).find((img) => {
+          //  return Array.from(img.alt.trim()).some(
+          //    (c) => c.charCodeAt(0) === 9889
+          //  );
+          //});
+          // if we find a ⚡ emoji we use the text of the next sibling and try to extract a lnurl
+          if (zapElement) {
+            const match = zapElement.nextSibling.textContent.match(/(\S+@\S+)/);
+            if (match) {
+              lnurl = match[1];
+            }
           }
         }
-      }
 
-      // if we still did not find anything ignore it.
-      if (!lnurl) {
+        // if we still did not find anything ignore it.
+        if (!lnurl) {
+          resolve();
+          return;
+        }
+
+        resolve([
+          {
+            method: "lnurl",
+            recipient: lnurl,
+            icon: userData.imageUrl,
+            name: userData.name,
+          },
+        ]);
+      } else if (counter === maxRetries) {
+        clearInterval(intervalId);
         resolve();
         return;
       }
-
-      resolve([
-        {
-          method: "lnurl",
-          recipient: lnurl,
-          icon: userData.imageUrl,
-          name: userData.name,
-        },
-      ]);
-    }, 1000);
+    }, delayBetweenRetries);
   });
 }
 

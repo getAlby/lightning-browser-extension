@@ -19,12 +19,9 @@ const extractLightningDataFromPage = async (tabId, changeInfo, tabInfo) => {
     return;
   }
 
-  // delay execution a bit to give the website chance to potentially load async data (e.g. most data from twitter is loaded async)
-  setTimeout(() => {
-    browser.tabs.executeScript(tabId, {
-      code: "if ((document.location.protocol === 'https:' || document.location.protocol === 'http:') && window.LBE_EXTRACT_LIGHTNING_DATA) { LBE_EXTRACT_LIGHTNING_DATA(); };",
-    });
-  }, 500);
+  browser.tabs.executeScript(tabId, {
+    code: "if ((document.location.protocol === 'https:' || document.location.protocol === 'http:') && window.LBE_EXTRACT_LIGHTNING_DATA) { LBE_EXTRACT_LIGHTNING_DATA(); };",
+  });
 };
 
 const updateIcon = async (tabId, changeInfo, tabInfo) => {
