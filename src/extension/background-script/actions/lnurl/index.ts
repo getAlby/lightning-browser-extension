@@ -4,8 +4,6 @@ import { parsePaymentRequest } from "invoices";
 
 import sha256 from "crypto-js/sha256";
 import hmacSHA256 from "crypto-js/hmac-sha256";
-import Base64 from "crypto-js/enc-base64";
-import UTF8 from "crypto-js/enc-utf8";
 import Hex from "crypto-js/enc-hex";
 
 import utils from "../../../../common/lib/utils";
@@ -48,7 +46,7 @@ async function lnurl(message) {
 async function auth(message, lnurlDetails) {
   const connector = state.getState().getConnector();
   const signResponse = await connector.signMessage({
-    msg: Base64.stringify(UTF8.parse(LNURLAUTH_CANONICAL_PHRASE)),
+    message: LNURLAUTH_CANONICAL_PHRASE,
     key_loc: {
       key_family: 0,
       key_index: 0,
