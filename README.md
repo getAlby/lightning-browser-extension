@@ -30,10 +30,12 @@ The extension can connect to different node implementations and supports custodi
 
 We have a channel on the [bitcoin.design](https://bitcoin.design/) Slack community. Come and join us! [#lightning-browser-extension](https://bitcoindesign.slack.com/archives/C02591ADXM2)
 
+We also do a weekly call at 13:00 UTC - (15:00 CEST/CAT - 09:00 EDT) on [https://meet.jit.si/bitcoindesign](https://meet.jit.si/bitcoindesign)
+
 ## Try out the most recent version
 Download Nightly releases 
-* [Firefox Nightly](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/elbee-firefox.xpi)
-* [Chrome Nightly](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/elbee-chrome.zip) - Go to `chrome://extensions/`, enable "Developer mode" (top right) and drag& drop the file 
+* [Firefox Nightly](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/elbee-firefox.xpi) - best install it as temporary add-on as discussed in the "Load extension into browser" section
+* [Chrome Nightly](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/elbee-chrome.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right) and drag& drop the file 
 
 (Note: You might need to reconfigure your wallet after installing new versions)
 
@@ -102,12 +104,12 @@ Then run the following:
   - Go to the browser address bar and type `chrome://extensions`
   - Check the `Developer Mode` button to enable it.
   - Click on the `Load Unpacked Extension…` button.
-  - Select your extension’s extracted directory.
+  - Select the extension’s dist directory: `dist/development/chrome`
 
 - **Firefox**
 
   - Load the Add-on via `about:debugging` => `This Firefox` as temporary Add-on. (`about:debugging#/runtime/this-firfox`)
-  - Choose the `manifest.json` file in the extracted directory
+  - Choose a .xpi file or the `manifest.json` file in the extension's dist directory: `dist/development/firefox`
   - [debugging details](https://extensionworkshop.com/documentation/develop/debugging/#debugging_popups)
   - To see the debug console click "inspect" on the list of temporary extensions (`about:debugging#/runtime/this-firefox`)
 

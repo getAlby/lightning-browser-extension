@@ -11,6 +11,8 @@ export default function Input({
   autoFocus = false,
   autoComplete = "off",
   disabled,
+  min,
+  max,
 }) {
   return (
     <input
@@ -25,6 +27,8 @@ export default function Input({
       autoFocus={autoFocus}
       autoComplete={autoComplete}
       disabled={disabled}
+      min={min}
+      max={max}
     />
   );
 }
