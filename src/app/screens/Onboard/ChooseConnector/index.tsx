@@ -5,6 +5,7 @@ import LinkButton from "../../../components/LinkButton";
 
 import ConnectLnd from "../ConnectLnd";
 import ConnectLndHub from "../ConnectLndHub";
+import ConnectLnbits from "../ConnectLnbits";
 import NewWallet from "../NewWallet";
 
 export default function ChooseConnector() {
@@ -19,6 +20,11 @@ export default function ChooseConnector() {
       to: `${url}/lnd-hub`,
       title: "LNDHub (Bluewallet)",
       description: "Connect to your Bluewallet mobile wallet",
+    },
+    {
+      to: `${url}/lnbits`,
+      title: "LNbits",
+      description: "Connect to your LNbits account",
     },
     {
       to: `${url}/create-wallet`,
@@ -53,6 +59,9 @@ export default function ChooseConnector() {
       </Route>
       <Route path={`${path}/lnd-hub`}>
         <ConnectLndHub />
+      </Route>
+      <Route path={`${path}/lnbits`}>
+        <ConnectLnbits />
       </Route>
       <Route path={`${path}/create-wallet`}>
         <NewWallet />

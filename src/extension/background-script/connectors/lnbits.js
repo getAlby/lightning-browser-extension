@@ -1,16 +1,13 @@
 import Base from "./base";
 import { parsePaymentRequest } from "invoices";
 
-// !!!!!
-// TODO: needs updating. not used currently
-// !!!!
-
 class LnBits extends Base {
   getInfo() {
+    console.log(this.config);
     return this.request(
       "GET",
       "/api/v1/wallet",
-      this.config.readkey,
+      this.config.adminkey,
       undefined,
       {}
     ).then((data) => {
@@ -26,13 +23,15 @@ class LnBits extends Base {
     return this.request(
       "GET",
       "/api/v1/wallet",
-      this.config.readkey,
+      this.config.adminkey,
       undefined,
       {}
     ).then((data) => {
+      // TODO better amount handling
+      const balanceInSats = data.balance / 1000;
       return {
         data: {
-          balance: data.balance,
+          balance: balanceInSats,
         },
       };
     });
@@ -49,7 +48,7 @@ class LnBits extends Base {
     })
       .then((data) => {
         // TODO: how do we get the total amount here??
-        return this.checkPayment(data.checking_id).then((checkData) => {
+        return this.checkPayment(data.payment_hash).then((checkData) => {
           return {
             data: {
               preimage: checkData.preimage,
@@ -64,11 +63,11 @@ class LnBits extends Base {
       });
   }
 
-  checkPayment(checkingId) {
+  checkPayment(paymentHash) {
     return this.request(
       "GET",
-      `/api/v1/payments/${checkingId}`,
-      this.config.readkey
+      `/api/v1/payments/${paymentHash}`,
+      this.config.adminkey
     );
   }
 
@@ -78,6 +77,21 @@ class LnBits extends Base {
 
   verifyMessage(args) {
     return Promise.reject(new Error("Not supported with Lnbits"));
+  }
+
+  makeInvoice(args) {
+    return this.request("POST", "/api/v1/payments", this.config.adminkey, {
+      amount: args.amount,
+      memo: args.memo,
+      out: false,
+    }).then((data) => {
+      return {
+        data: {
+          paymentRequest: data.payment_request,
+          rHash: data.payment_hash,
+        },
+      };
+    });
   }
 
   async request(method, path, apiKey, args, defaultValues) {
