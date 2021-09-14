@@ -36,7 +36,6 @@ const findLnurl = (text: string) => {
 };
 
 const normalizeLnurl = (lnurlString: string) => {
-  console.log(lnurlString);
   // maybe it's bech32 encoded?
   try {
     const url = bech32Decode(lnurlString);

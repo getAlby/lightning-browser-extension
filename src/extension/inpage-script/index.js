@@ -10,13 +10,15 @@ if (document) {
       return;
     }
     const lightningLink = target.closest('[href^="lightning:" i]');
+    const lnurlLink = target.closest('[href^="lnurl" i]');
     const bitcoinLinkWithLighting = target.closest(
       '[href*="lightning=lnbc" i]'
     );
     let href;
     let paymentRequest;
+    let lnurl;
 
-    if (!lightningLink && !bitcoinLinkWithLighting) {
+    if (!lightningLink && !bitcoinLinkWithLighting && !lnurlLink) {
       return;
     }
     ev.preventDefault();
@@ -31,18 +33,28 @@ if (document) {
         return;
       }
       paymentRequest = matches[1];
+    } else if (lnurlLink) {
+      href = lnurlLink.getAttribute("href").toLowerCase();
+      lnurl = href.replace(/^lnurl[pwc]:/i, "");
     }
-    if (!paymentRequest) {
+
+    // if we did not find any paymentRequest and no LNURL we give up and return
+    if (!paymentRequest && !lnurl) {
       return;
+    }
+
+    // it could be it is a LNURL behind a lightning: link
+    if (paymentRequest && paymentRequest.startsWith("lnurl")) {
+      lnurl = paymentRequest;
     }
 
     window.webln.enable().then((response) => {
       if (!response.enabled) {
         return;
       }
-      if (paymentRequest.toLowerCase().startsWith("lnurl")) {
+      if (lnurl) {
         return window.webln
-          .lnurl(paymentRequest)
+          .lnurl(lnurl)
           .then((r) => {
             console.log(r);
           })
