@@ -49,55 +49,48 @@ export default function TransactionsTable({ transactions }: Props) {
           <div className="px-3 py-2">
             <Disclosure>
               {({ open }) => (
-                <>
-                  <div key={tx.id} className="flex justify-between space-x-5">
-                    <div className="overflow-hidden">
-                      <div className="flex mt-3">
-                        <div className="flex-shrink-0 mr-3">
-                          {tx.type && renderIcon(tx.type)}
-                        </div>
-                        <div className="overflow-hidden">
-                          <div className="text-gray-900 truncate">
-                            {tx.title}
+                <div key={tx.id} className="flex justify-between space-x-5">
+                  <div className="overflow-hidden">
+                    <div className="flex mt-3">
+                      <div className="flex-shrink-0 mr-3">
+                        {tx.type && renderIcon(tx.type)}
+                      </div>
+                      <div className="overflow-hidden">
+                        <div className="text-gray-900 truncate">{tx.title}</div>
+                        <Disclosure.Panel>
+                          <div className="text-sm text-gray-500 truncate">
+                            {tx.subTitle}
+                            <p className="truncate">Preimage: {tx.preimage}</p>
                           </div>
-                          <Disclosure.Panel>
-                            <div className="text-sm text-gray-500 truncate">
-                              {tx.subTitle}
-                              <p className="truncate">
-                                Preimage: {tx.preimage}
-                              </p>
-                            </div>
-                          </Disclosure.Panel>
-                        </div>
+                        </Disclosure.Panel>
                       </div>
-                      {tx.badges && (
-                        <div className="ml-6 space-x-3">
-                          {tx.badges.map((badge) => (
-                            <Badge
-                              label={badge.label}
-                              color={badge.color}
-                              textColor={badge.textColor}
-                            />
-                          ))}
-                        </div>
-                      )}
                     </div>
-                    <div className="flex text-right space-x-4  flex-shrink-0">
-                      <div>
-                        <p>{tx.totalAmount} sats</p>
-                        <p className="text-sm text-gray-500">{tx.date}</p>
+                    {tx.badges && (
+                      <div className="ml-6 space-x-3">
+                        {tx.badges.map((badge) => (
+                          <Badge
+                            label={badge.label}
+                            color={badge.color}
+                            textColor={badge.textColor}
+                          />
+                        ))}
                       </div>
-
-                      <Disclosure.Button className="block h-0 mt-2">
-                        <ChevronDownIcon
-                          className={`${
-                            open ? "transform rotate-180" : ""
-                          } w-4 h-4 `}
-                        />
-                      </Disclosure.Button>
-                    </div>
+                    )}
                   </div>
-                </>
+                  <div className="flex text-right space-x-4  flex-shrink-0">
+                    <div>
+                      <p>{tx.totalAmount} sats</p>
+                      <p className="text-sm text-gray-500">{tx.date}</p>
+                    </div>
+                    <Disclosure.Button className="block h-0 mt-2">
+                      <ChevronDownIcon
+                        className={`${
+                          open ? "transform rotate-180" : ""
+                        } w-4 h-4 `}
+                      />
+                    </Disclosure.Button>
+                  </div>
+                </div>
               )}
             </Disclosure>
           </div>
