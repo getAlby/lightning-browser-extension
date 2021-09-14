@@ -44,18 +44,26 @@ async function sendPaymentWithAllowance(
 
 async function sendPaymentWithPrompt(message, paymentRequestDetails) {
   const connector = state.getState().getConnector();
-
-  const response = await utils.openPrompt(message);
-  if (response.data.confirmed) {
-    const response = await connector.sendPayment({
-      paymentRequest: message.args.paymentRequest,
-    });
-
-    publishPaymentNotification(message, paymentRequestDetails, response);
-    return response;
-  } else {
-    return response;
+  let promptResponse;
+  let paymentResponse;
+  try {
+    promptResponse = await utils.openPrompt(message);
+    if (promptResponse && promptResponse.data.confirmed) {
+      paymentResponse = await connector.sendPayment({
+        paymentRequest: message.args.paymentRequest,
+      });
+      publishPaymentNotification(
+        message,
+        paymentRequestDetails,
+        paymentResponse
+      );
+      return paymentResponse;
+    }
+  } catch (e) {
+    console.log("Payment cancelled", e);
+    return { error: e.message };
   }
+  return { error: "Failed" };
 }
 
 export function publishPaymentNotification(

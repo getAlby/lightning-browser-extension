@@ -3,10 +3,11 @@ import { parsePaymentRequest } from "invoices";
 
 class LnBits extends Base {
   getInfo() {
+    console.log(this.config);
     return this.request(
       "GET",
       "/api/v1/wallet",
-      this.config.readkey,
+      this.config.adminkey,
       undefined,
       {}
     ).then((data) => {
@@ -22,13 +23,15 @@ class LnBits extends Base {
     return this.request(
       "GET",
       "/api/v1/wallet",
-      this.config.readkey,
+      this.config.adminkey,
       undefined,
       {}
     ).then((data) => {
+      // TODO better amount handling
+      const balanceInSats = data.balance / 1000;
       return {
         data: {
-          balance: data.balance,
+          balance: balanceInSats,
         },
       };
     });
@@ -45,12 +48,12 @@ class LnBits extends Base {
     })
       .then((data) => {
         // TODO: how do we get the total amount here??
-        return this.checkPayment(data.checking_id).then((checkData) => {
+        return this.checkPayment(data.payment_hash).then((checkData) => {
           return {
             data: {
-              payment_preimage: checkData.preimage,
-              payment_hash: data.payment_hash,
-              payment_route: { total_amt: amountInSats, total_fees: 0 },
+              preimage: checkData.preimage,
+              paymentHash: data.payment_hash,
+              route: { total_amt: amountInSats, total_fees: 0 },
             },
           };
         });
@@ -60,16 +63,35 @@ class LnBits extends Base {
       });
   }
 
-  checkPayment(checkingId) {
+  checkPayment(paymentHash) {
     return this.request(
       "GET",
-      `/api/v1/payments/${checkingId}`,
-      this.config.readkey
+      `/api/v1/payments/${paymentHash}`,
+      this.config.adminkey
     );
   }
 
   signMessage(args) {
     return Promise.reject(new Error("Not supported with Lnbits"));
+  }
+
+  verifyMessage(args) {
+    return Promise.reject(new Error("Not supported with Lnbits"));
+  }
+
+  makeInvoice(args) {
+    return this.request("POST", "/api/v1/payments", this.config.adminkey, {
+      amount: args.amount,
+      memo: args.memo,
+      out: false,
+    }).then((data) => {
+      return {
+        data: {
+          paymentRequest: data.payment_request,
+          rHash: data.payment_hash,
+        },
+      };
+    });
   }
 
   async request(method, path, apiKey, args, defaultValues) {
