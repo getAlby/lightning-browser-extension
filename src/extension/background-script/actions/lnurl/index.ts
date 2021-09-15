@@ -6,14 +6,12 @@ import sha256 from "crypto-js/sha256";
 import hmacSHA256 from "crypto-js/hmac-sha256";
 import Hex from "crypto-js/enc-hex";
 
+import HashKeySigner from "../../../../common/utils/signer";
 import utils from "../../../../common/lib/utils";
 import lnurlLib from "../../../../common/lib/lnurl";
 import state from "../../state";
 import db from "../../db";
 import { publishPaymentNotification } from "../ln/sendPayment";
-
-const EC = require("elliptic").ec;
-const ec = new EC("secp256k1");
 
 const LNURLAUTH_CANONICAL_PHRASE =
   "DO NOT EVER SIGN THIS TEXT WITH YOUR PRIVATE KEYS! IT IS ONLY USED FOR DERIVATION OF LNURL-AUTH HASHING-KEY, DISCLOSING ITS SIGNATURE WILL COMPROMISE YOUR LNURL-AUTH IDENTITY AND MAY LEAD TO LOSS OF FUNDS!";
@@ -71,27 +69,26 @@ async function auth(message, lnurlDetails) {
     throw new Error("Invalid hashingKey/linkingKey");
   }
 
-  const sk = ec.keyFromPrivate(linkingKeyPriv);
-  const pk = sk.getPublic();
-  const pkHex = pk.encodeCompressed("hex"); //pk.encode('hex')
+  const signer = new HashKeySigner(linkingKeyPriv);
 
-  const k1Hex = utils.hexToUint8Array(lnurlDetails.k1);
+  const k1Hex = Buffer.from(lnurlDetails.k1, "hex");
   if (!lnurlDetails.k1 || !k1Hex) {
     throw new Error("Invalid K1");
   }
-  const signedMessage = sk.sign(k1Hex);
-
+  const signedMessage = signer.sign(k1Hex);
   const signedMessageDERHex = signedMessage.toDER("hex");
 
   const loginURL = lnurlDetails.url;
   loginURL.searchParams.set("sig", signedMessageDERHex);
-  loginURL.searchParams.set("key", pkHex);
+  loginURL.searchParams.set("key", signer.pkHex);
   loginURL.searchParams.set("t", Date.now());
   let authResponse;
   try {
     authResponse = await axios.get(loginURL);
   } catch (e) {
-    const error = authResponse?.data?.reason || e.message; // lnurl error or exception message
+    console.log("LNURL-AUTH FAIL:", e);
+    console.log(e.response?.data);
+    const error = e.response?.data?.reason || e.message; // lnurl error or exception message
     throw new Error(error);
   }
 

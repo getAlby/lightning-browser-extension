@@ -2,10 +2,7 @@ import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
 import Base from "./base";
-import utils from "../../../common/lib/utils";
-
-const EC = require("elliptic").ec;
-const ec = new EC("secp256k1");
+import HashKeySigner from "../../../common/utils/signer";
 
 class LnBits extends Base {
   getInfo() {
@@ -82,22 +79,19 @@ class LnBits extends Base {
     if (!this.config.url || !this.config.adminkey) {
       return Promise.reject(new Error("Missing config"));
     }
+    if (!args.message) {
+      return Promise.reject(new Error("Invalid message"));
+    }
     // create a signing key from the lnbits URL and the adminkey
-    const key = sha256(
+    const keyHex = sha256(
       `LBE-LNBITS-${this.config.url}-${this.config.adminkey}`
     ).toString(Hex);
-    if (!key) {
+
+    if (!keyHex) {
       return Promise.reject(new Error("Could not create key"));
     }
-    const sk = ec.keyFromPrivate(key);
-    // const pk = sk.getPublic();
-    // const pkHex = pk.encodeCompressed("hex"); //pk.encode('hex')
-
-    const messageHex = utils.hexToUint8Array(args.message);
-
-    const signedMessage = sk.sign(messageHex);
-    const signedMessageDERHex = signedMessage.toDER("hex");
-
+    const signer = new HashKeySigner(keyHex);
+    const signedMessageDERHex = signer.sign(args.message).toDER("hex");
     // make sure we got some signed message
     if (!signedMessageDERHex) {
       return Promise.reject(new Error("Signing failed"));
@@ -110,7 +104,20 @@ class LnBits extends Base {
   }
 
   verifyMessage(args) {
-    return Promise.reject(new Error("Not supported with Lnbits"));
+    // create a signing key from the lnbits URL and the adminkey
+    const keyHex = sha256(
+      `LBE-LNBITS-${this.config.url}-${this.config.adminkey}`
+    ).toString(Hex);
+
+    if (!keyHex) {
+      return Promise.reject(new Error("Could not create key"));
+    }
+    const signer = new HashKeySigner(keyHex);
+    return Promise.resolve({
+      data: {
+        valid: signer.verify(args.message, args.signature),
+      },
+    });
   }
 
   makeInvoice(args) {

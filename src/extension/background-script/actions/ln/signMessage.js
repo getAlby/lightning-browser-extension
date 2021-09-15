@@ -7,7 +7,7 @@ const signMessage = async (message, sender) => {
   const connector = state.getState().getConnector();
   try {
     const response = await connector.signMessage({
-      message: message.args.message,
+      message: Buffer.from(message.args.message).toString("hex"),
       key_loc: {
         key_family: message.args.key_family || 0,
         key_index: message.args.key_index || 0,
