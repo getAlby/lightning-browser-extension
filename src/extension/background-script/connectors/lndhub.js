@@ -1,5 +1,11 @@
 import axios from "axios";
+import sha256 from "crypto-js/sha256";
+import Hex from "crypto-js/enc-hex";
 import Base from "./base";
+import utils from "../../../common/lib/utils";
+
+const EC = require("elliptic").ec;
+const ec = new EC("secp256k1");
 
 export default class LndHub extends Base {
   async init() {
@@ -61,7 +67,35 @@ export default class LndHub extends Base {
   }
 
   signMessage(args) {
-    return Promise.reject(new Error("Not supported with Lndhub"));
+    // make sure we got the config to create a new key
+    if (!this.config.url || !this.config.login || !this.config.password) {
+      return Promise.reject(new Error("Missing config"));
+    }
+    // create a signing key from the lndhub URL and the login/password combination
+    const key = sha256(
+      `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
+    ).toString(Hex);
+    if (!key) {
+      return Promise.reject(new Error("Could not create key"));
+    }
+    const sk = ec.keyFromPrivate(key);
+    // const pk = sk.getPublic();
+    // const pkHex = pk.encodeCompressed("hex"); //pk.encode('hex')
+
+    const messageHex = utils.hexToUint8Array(args.message);
+
+    const signedMessage = sk.sign(messageHex);
+    const signedMessageDERHex = signedMessage.toDER("hex");
+
+    // make sure we got some signed message
+    if (!signedMessageDERHex) {
+      return Promise.reject(new Error("Signing failed"));
+    }
+    return Promise.resolve({
+      data: {
+        signature: signedMessageDERHex,
+      },
+    });
   }
 
   verifyMessage(args) {
