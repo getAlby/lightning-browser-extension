@@ -26,11 +26,9 @@ if (document) {
       paymentRequest = href.replace("lightning:", "");
     } else if (bitcoinLinkWithLighting) {
       href = bitcoinLinkWithLighting.getAttribute("href");
-      const matches = href.match(/lightning=(\w+)/);
-      if (!matches) {
-        return;
-      }
-      paymentRequest = matches[1];
+      const url = new URL(href);
+      const query = new URLSearchParams(url.search);
+      paymentRequest = query.get("lightning");
     } else if (lnurlLink) {
       href = lnurlLink.getAttribute("href").toLowerCase();
       lnurl = href.replace(/^lnurl[pwc]:/i, "");
