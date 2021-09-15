@@ -1,5 +1,9 @@
 import axios from "axios";
+import sha256 from "crypto-js/sha256";
+import Hex from "crypto-js/enc-hex";
 import Base from "./base";
+import utils from "../../../common/lib/utils";
+import HashKeySigner from "../../../common/utils/signer";
 
 export default class LndHub extends Base {
   async init() {
@@ -61,11 +65,48 @@ export default class LndHub extends Base {
   }
 
   signMessage(args) {
-    return Promise.reject(new Error("Not supported with Lndhub"));
+    // make sure we got the config to create a new key
+    if (!this.config.url || !this.config.login || !this.config.password) {
+      return Promise.reject(new Error("Missing config"));
+    }
+    if (!args.message) {
+      return Promise.reject(new Error("Invalid message"));
+    }
+    const message = utils.stringToUint8Array(args.message);
+    // create a signing key from the lndhub URL and the login/password combination
+    const keyHex = sha256(
+      `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
+    ).toString(Hex);
+    if (!keyHex) {
+      return Promise.reject(new Error("Could not create key"));
+    }
+    const signer = new HashKeySigner(keyHex);
+    const signedMessageDERHex = signer.sign(message).toDER("hex");
+    // make sure we got some signed message
+    if (!signedMessageDERHex) {
+      return Promise.reject(new Error("Signing failed"));
+    }
+    return Promise.resolve({
+      data: {
+        signature: signedMessageDERHex,
+      },
+    });
   }
 
   verifyMessage(args) {
-    return Promise.reject(new Error("Not supported with Lndhub"));
+    // create a signing key from the lndhub URL and the login/password combination
+    const keyHex = sha256(
+      `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
+    ).toString(Hex);
+    if (!keyHex) {
+      return Promise.reject(new Error("Could not create key"));
+    }
+    const signer = new HashKeySigner(keyHex);
+    return Promise.resolve({
+      data: {
+        valid: signer.verify(args.message, args.signature),
+      },
+    });
   }
 
   makeInvoice(args) {

@@ -1,4 +1,5 @@
 import PubSub from "pubsub-js";
+import utils from "../../../../common/lib/utils";
 import state from "../../state";
 
 const signMessage = async (message, sender) => {
@@ -15,6 +16,7 @@ const signMessage = async (message, sender) => {
     });
     return response;
   } catch (e) {
+    console.log(e);
     PubSub.publish(`ln.signMessage.failed`, {
       error: e.message,
       message,
