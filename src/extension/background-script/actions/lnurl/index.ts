@@ -52,20 +52,33 @@ async function auth(message, lnurlDetails) {
       key_index: 0,
     },
   });
-  const lnSignature = signResponse.signature;
+  const lnSignature = signResponse.data.signature;
 
-  // TODO: add assertions we got a valid signature, k1 and host
+  // make sure we got a signature
+  if (!lnSignature) {
+    throw new Error("Invalid Signature");
+  }
 
   const hashingKey = sha256(lnSignature).toString(Hex);
+  if (!lnurlDetails.url.host || !hashingKey) {
+    throw new Error("Invalid input");
+  }
   const linkingKeyPriv = hmacSHA256(lnurlDetails.url.host, hashingKey).toString(
     Hex
   );
+  // make sure we got a hashingKey and a linkingkey (just to be sure for whatever reason)
+  if (!hashingKey || !linkingKeyPriv) {
+    throw new Error("Invalid hashingKey/linkingKey");
+  }
 
   const sk = ec.keyFromPrivate(linkingKeyPriv);
   const pk = sk.getPublic();
   const pkHex = pk.encodeCompressed("hex"); //pk.encode('hex')
 
   const k1Hex = utils.hexToUint8Array(lnurlDetails.k1);
+  if (!lnurlDetails.k1 || !k1Hex) {
+    throw new Error("Invalid K1");
+  }
   const signedMessage = sk.sign(k1Hex);
 
   const signedMessageDERHex = signedMessage.toDER("hex");
