@@ -58,23 +58,17 @@ function getUserData(username) {
 }
 
 function battery() {
-  // Twitter loads everything async...so we use an interval to check if data finished loading.
-  return new Promise((resolve, reject) => {
-    const username = getUsername();
-    if (!isOnProfilePage(username) && !isOnTweet(username)) {
-      resolve();
-      return;
-    }
+  // Twitter loads everything async...so we observe DOM changes to check if data finished loading.
+  let timer;
+  const timeout = 1500; // Observing should auto-stop after timeout (when nothing found).
 
-    let counter = 0;
-    const maxRetries = 3;
-    const delayBetweenRetries = 250;
-    const intervalId = setInterval(() => {
-      counter++;
+  return new Promise((resolve, reject) => {
+    function twitterDOMChanged(_, observer) {
+      const username = getUsername();
       let userData;
-      const uptodateUsername = getUsername(); // Need to grab username again for when users switch pages between interval.
-      if ((userData = getUserData(uptodateUsername))) {
-        clearInterval(intervalId);
+      if ((userData = getUserData(username))) {
+        observer.disconnect();
+        clearTimeout(timer);
         console.log({ userData });
 
         let lnurl;
@@ -119,12 +113,16 @@ function battery() {
             name: userData.name,
           },
         ]);
-      } else if (counter === maxRetries) {
-        clearInterval(intervalId);
-        resolve();
-        return;
       }
-    }, delayBetweenRetries);
+    }
+
+    const observer = new MutationObserver(twitterDOMChanged);
+    observer.observe(document, { childList: true, subtree: true });
+
+    timer = setTimeout(() => {
+      observer.disconnect();
+      resolve();
+    }, timeout);
   });
 }
 
