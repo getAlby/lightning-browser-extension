@@ -71,11 +71,11 @@ async function auth(message, lnurlDetails) {
 
   const signer = new HashKeySigner(linkingKeyPriv);
 
-  const k1Hex = Buffer.from(lnurlDetails.k1, "hex");
-  if (!lnurlDetails.k1 || !k1Hex) {
+  const k1 = utils.hexToUint8Array(lnurlDetails.k1);
+  if (!lnurlDetails.k1 || !k1) {
     throw new Error("Invalid K1");
   }
-  const signedMessage = signer.sign(k1Hex);
+  const signedMessage = signer.sign(k1);
   const signedMessageDERHex = signedMessage.toDER("hex");
 
   const loginURL = lnurlDetails.url;

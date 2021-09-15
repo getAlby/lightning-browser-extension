@@ -1,4 +1,5 @@
 import PubSub from "pubsub-js";
+import utils from "../../../../common/lib/utils";
 import state from "../../state";
 
 const signMessage = async (message, sender) => {
@@ -7,7 +8,7 @@ const signMessage = async (message, sender) => {
   const connector = state.getState().getConnector();
   try {
     const response = await connector.signMessage({
-      message: Buffer.from(message.args.message).toString("hex"),
+      message: message.args.message,
       key_loc: {
         key_family: message.args.key_family || 0,
         key_index: message.args.key_index || 0,
@@ -15,6 +16,7 @@ const signMessage = async (message, sender) => {
     });
     return response;
   } catch (e) {
+    console.log(e);
     PubSub.publish(`ln.signMessage.failed`, {
       error: e.message,
       message,

@@ -2,6 +2,7 @@ import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
 import Base from "./base";
+import utils from "../../../common/lib/utils";
 import HashKeySigner from "../../../common/utils/signer";
 
 class LnBits extends Base {
@@ -82,6 +83,7 @@ class LnBits extends Base {
     if (!args.message) {
       return Promise.reject(new Error("Invalid message"));
     }
+    const message = utils.stringToUint8Array(args.message);
     // create a signing key from the lnbits URL and the adminkey
     const keyHex = sha256(
       `LBE-LNBITS-${this.config.url}-${this.config.adminkey}`
@@ -91,7 +93,7 @@ class LnBits extends Base {
       return Promise.reject(new Error("Could not create key"));
     }
     const signer = new HashKeySigner(keyHex);
-    const signedMessageDERHex = signer.sign(args.message).toDER("hex");
+    const signedMessageDERHex = signer.sign(message).toDER("hex");
     // make sure we got some signed message
     if (!signedMessageDERHex) {
       return Promise.reject(new Error("Signing failed"));

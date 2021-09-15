@@ -2,6 +2,7 @@ import axios from "axios";
 import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import Base from "./base";
+import utils from "../../../common/lib/utils";
 import HashKeySigner from "../../../common/utils/signer";
 
 export default class LndHub extends Base {
@@ -71,6 +72,7 @@ export default class LndHub extends Base {
     if (!args.message) {
       return Promise.reject(new Error("Invalid message"));
     }
+    const message = utils.stringToUint8Array(args.message);
     // create a signing key from the lndhub URL and the login/password combination
     const keyHex = sha256(
       `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
@@ -79,7 +81,7 @@ export default class LndHub extends Base {
       return Promise.reject(new Error("Could not create key"));
     }
     const signer = new HashKeySigner(keyHex);
-    const signedMessageDERHex = signer.sign(args.message).toDER("hex");
+    const signedMessageDERHex = signer.sign(message).toDER("hex");
     // make sure we got some signed message
     if (!signedMessageDERHex) {
       return Promise.reject(new Error("Signing failed"));
