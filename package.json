@@ -29,7 +29,7 @@
     "test-app": "jest ./src/app",
     "test": "jest",
     "test:coverage": "jest --coverage --collectCoverageFrom='src/**/*.(js|ts|jsx|tsx)'",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 -s ./static",
     "build-storybook": "build-storybook",
     "prepare": "husky install"
   },
