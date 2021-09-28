@@ -1,10 +1,10 @@
 import React from "react";
 import { createHashHistory } from "history";
+import { Transition } from "@headlessui/react";
 
 import Button from "../../components/Button";
 import Checkbox from "../../components/Form/Checkbox";
 import CurrencyInput from "../../components/Form/CurrencyInput";
-import Collapse from "../../components/Collapse";
 import PaymentSummary from "../../components/PaymentSummary";
 import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
@@ -81,31 +81,37 @@ class ConfirmPayment extends React.Component {
               </label>
             </div>
 
-            <Collapse isOpen={this.state.rememberMe}>
+            <Transition
+              show={this.state.rememberMe}
+              enter="transition duration-100 ease-out"
+              enterFrom="transform scale-95 opacity-0"
+              enterTo="transform scale-100 opacity-100"
+              leave="transition duration-75 ease-out"
+              leaveFrom="transform scale-100 opacity-100"
+              leaveTo="transform scale-95 opacity-0"
+            >
+              <p className="mt-4 mb-3 text-gray-500 text-sm">
+                You may set a balance to not be asked for confirmation on
+                payments until it is exhausted.
+              </p>
               <div>
-                <p className="pt-4 text-gray-500 text-sm">
-                  You may set a balance to not be asked for confirmation on
-                  payments until it is exhausted.
-                </p>
-                <div>
-                  <label
-                    htmlFor="budget"
-                    className="mb-1 block text-sm font-medium text-gray-700"
-                  >
-                    Budget
-                  </label>
-                  <CurrencyInput
-                    id="budget"
-                    name="budget"
-                    placeholder="sats"
-                    value={this.state.budget}
-                    onChange={(event) => {
-                      this.setBudget(event.target.value);
-                    }}
-                  />
-                </div>
+                <label
+                  htmlFor="budget"
+                  className="mb-1 block text-sm font-medium text-gray-700"
+                >
+                  Budget
+                </label>
+                <CurrencyInput
+                  id="budget"
+                  name="budget"
+                  placeholder="sats"
+                  value={this.state.budget}
+                  onChange={(event) => {
+                    this.setBudget(event.target.value);
+                  }}
+                />
               </div>
-            </Collapse>
+            </Transition>
           </div>
 
           <div className="text-center">
