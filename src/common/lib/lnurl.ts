@@ -41,7 +41,7 @@ const normalizeLnurl = (lnurlString: string) => {
     const url = bech32Decode(lnurlString);
     return new URL(url);
   } catch (e) {
-    console.log(e);
+    console.log("ignoring bech32 parsing error", e);
   }
 
   // maybe it's a lightning address?
@@ -51,7 +51,7 @@ const normalizeLnurl = (lnurlString: string) => {
   }
 
   //maybe it's already a URL?
-  return new URL(lnurlString);
+  return new URL(`https://${lnurlString.replace(/^lnurl[pwc]/i, "")}`);
 };
 
 const lnurl = {
@@ -70,13 +70,13 @@ const lnurl = {
     lnurlDetails.url = url;
     return lnurlDetails;
   },
-  async verifyInvoice({ paymentInfo, metadata, amount }) {
+  verifyInvoice({ paymentInfo, metadata, amount }) {
     const paymentRequestDetails = parsePaymentRequest({
       request: paymentInfo.pr,
     });
     let metadataHash = "";
     try {
-      metadataHash = await sha256(metadata).toString(Hex);
+      metadataHash = sha256(metadata).toString(Hex);
     } catch (e) {
       console.log(e.message);
     }

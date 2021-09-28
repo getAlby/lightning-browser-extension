@@ -26,11 +26,9 @@ if (document) {
       paymentRequest = href.replace("lightning:", "");
     } else if (bitcoinLinkWithLighting) {
       href = bitcoinLinkWithLighting.getAttribute("href");
-      const matches = href.match(/lightning=(\w+)/);
-      if (!matches) {
-        return;
-      }
-      paymentRequest = matches[1];
+      const url = new URL(href);
+      const query = new URLSearchParams(url.search);
+      paymentRequest = query.get("lightning");
     } else if (lnurlLink) {
       href = lnurlLink.getAttribute("href").toLowerCase();
       lnurl = href.replace(/^lnurl[pwc]:/i, "");
@@ -46,6 +44,8 @@ if (document) {
       lnurl = paymentRequest.replace(/^lnurl[pwc]:/i, ""); // replace potential scheme. the different lnurl types are handled in the lnurl action (by checking the type in the LNURL response)
     }
 
+    console.log(lnurl);
+    console.log(paymentRequest);
     window.webln.enable().then((response) => {
       if (!response.enabled) {
         return;

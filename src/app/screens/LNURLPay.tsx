@@ -26,9 +26,11 @@ function LNURLPay({ details, origin }: Props) {
   const [valueMSat, setValueMSat] = useState<string | number>(
     details.minSendable
   );
+  const [loading, setLoading] = useState(false);
 
   async function confirm() {
     try {
+      setLoading(true);
       // Get the invoice
       const params = {
         amount: valueMSat, // user specified sum in MilliSatoshi
@@ -42,13 +44,13 @@ function LNURLPay({ details, origin }: Props) {
       });
       const { pr: paymentRequest, successAction } = paymentInfo;
 
-      const isValidInvoice = await lnurl.verifyInvoice({
+      const isValidInvoice = lnurl.verifyInvoice({
         paymentInfo,
         metadata: details.metadata,
         amount: valueMSat,
       });
       if (!isValidInvoice) {
-        alert("Payment aborted.");
+        alert("Payment aborted. Invalid invoice");
         return;
       }
 
@@ -74,6 +76,7 @@ function LNURLPay({ details, origin }: Props) {
             break;
           case "message":
             utils.notify({
+              title: `LNURL response:`,
               message: successAction.message,
             });
             break;
@@ -88,7 +91,10 @@ function LNURLPay({ details, origin }: Props) {
 
       window.close();
     } catch (e) {
-      console.log(e.message);
+      console.log(e);
+      alert(`Error: ${e.message}`);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -136,7 +142,13 @@ function LNURLPay({ details, origin }: Props) {
         </dl>
         <div className="text-center">
           <div className="mb-5">
-            <Button onClick={confirm} label="Confirm" fullWidth primary />
+            <Button
+              onClick={confirm}
+              label="Confirm"
+              fullWidth
+              primary
+              loading={loading}
+            />
           </div>
 
           <p className="mb-3 underline text-sm text-gray-300">

@@ -44,6 +44,7 @@ const routes = {
   reset: setup.reset,
   status: setup.status,
   validateAccount: setup.validateAccount,
+  setIcon: setup.setIcon,
 };
 
 const router = (path) => {

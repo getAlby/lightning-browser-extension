@@ -4,8 +4,10 @@ import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 import utils from "../../../common/lib/utils";
+import lnurlLib from "../../../common/lib/lnurl";
 import { getFiatFromSatoshi } from "../../../common/utils/helpers";
 
+import Button from "../../components/button";
 import Navbar from "../../components/Navbar";
 import TransactionsTable from "../../components/TransactionsTable";
 import UserMenu from "../../components/UserMenu";
@@ -27,6 +29,7 @@ class Home extends React.Component {
       balanceFiat: null,
       payments: {},
       loadingPayments: true,
+      lnData: [],
     };
   }
   get exchangeRate() {
@@ -34,11 +37,28 @@ class Home extends React.Component {
     return (this.state.balanceFiat / this.state.balance) * 100000000;
   }
 
-  componentDidMount() {
-    this.initialize();
+  loadLightningDataFromCurrentWebsite() {
+    // Enhancement data is loaded asynchronously (for example because we need to fetch additional data).
+    // Sadly we can not get return values from async code through executeScript()
+    // To work around this we write the enhancement data into a variable in the content script and access that variable here.
+    // Due to the async execution the variable could potentially not yet be loaded
+    browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+      const [currentTab] = tabs;
+      browser.tabs
+        .executeScript(currentTab.id, {
+          code: "window.LBE_LIGHTNING_DATA;",
+        })
+        .then((data) => {
+          // data is an array, see: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/executeScript#return_value
+          // we execute it only in the current Tab. Thus the array has only one entry
+          if (data[0]) {
+            this.setState({ lnData: data[0] });
+          }
+        });
+    });
   }
 
-  initialize = () => {
+  loadAllowance = () => {
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
       const [currentTab] = tabs;
       const url = new URL(currentTab.url);
@@ -48,7 +68,9 @@ class Home extends React.Component {
         }
       });
     });
+  };
 
+  loadAccountInfo() {
     utils.call("accountInfo").then((response) => {
       this.setState({
         alias: response.info?.alias,
@@ -60,13 +82,27 @@ class Home extends React.Component {
         }
       );
     });
+  }
+
+  loadPayments() {
     utils.call("getPayments").then((result) => {
       this.setState({
         payments: result?.payments,
         loadingPayments: false,
       });
     });
-  };
+  }
+
+  initialize() {
+    this.loadAccountInfo();
+    this.loadPayments();
+    this.loadAllowance();
+  }
+
+  componentDidMount() {
+    this.initialize();
+    this.loadLightningDataFromCurrentWebsite();
+  }
 
   renderAllowanceView() {
     const { allowance } = this.state;
@@ -176,15 +212,44 @@ class Home extends React.Component {
   }
 
   render() {
-    const { alias, allowance, balance, balanceFiat } = this.state;
-
+    const { alias, allowance, balance, balanceFiat, lnData } = this.state;
     return (
       <div>
         <Navbar
           title={alias}
           subtitle={typeof balance === "number" ? `${balance} Sats` : ""}
-          right={<UserMenu onAccountSwitch={this.initialize} />}
+          right={
+            <UserMenu
+              onAccountSwitch={() => {
+                this.initialize();
+              }}
+            />
+          }
         />
+        {!allowance && lnData.length > 0 && (
+          <PublisherCard title={lnData[0].name} image={lnData[0].icon}>
+            <Button
+              onClick={async () => {
+                await utils.call(
+                  "lnurl",
+                  {
+                    lnurlEncoded: lnData[0].recipient,
+                  },
+                  {
+                    origin: {
+                      external: true,
+                      name: lnData[0].name,
+                      description: lnData[0].description,
+                      icon: lnData[0].icon,
+                    },
+                  }
+                );
+              }}
+              label="⚡️ Send Sats ⚡️"
+              primary
+            />
+          </PublisherCard>
+        )}
         {allowance ? this.renderAllowanceView() : this.renderDefaultView()}
       </div>
     );

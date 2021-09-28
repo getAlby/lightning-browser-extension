@@ -521,10 +521,7 @@ const metaDataRules = {
   },
   monetization: {
     rules: [
-      [
-        'meta[name="monetization"][content^="lightning:" i]',
-        (element) => element.getAttribute("content"),
-      ],
+      ['meta[name="lightning"]', (element) => element.getAttribute("content")],
     ],
     processor: (text) => text.toLowerCase(),
   },

@@ -14,11 +14,18 @@ setInterval(() => {
 }, 5000);
 */
 
-const updateIcon = async (tabId, changeInfo, tabInfo) => {
-  if (!changeInfo.url) {
+const extractLightningDataFromPage = async (tabId, changeInfo, tabInfo) => {
+  if (changeInfo.status !== "complete") {
     return;
   }
-  if (!changeInfo.url.startsWith("http")) {
+
+  browser.tabs.executeScript(tabId, {
+    code: "if ((document.location.protocol === 'https:' || document.location.protocol === 'http:') && window.LBE_EXTRACT_LIGHTNING_DATA) { LBE_EXTRACT_LIGHTNING_DATA(); };",
+  });
+};
+
+const updateIcon = async (tabId, changeInfo, tabInfo) => {
+  if (!changeInfo.url || !changeInfo.url.startsWith("http")) {
     return;
   }
   const url = new URL(changeInfo.url);
@@ -48,7 +55,6 @@ const debugLogger = (message, sender) => {
 };
 
 const handleInstalled = (details) => {
-  console.log(details);
   console.log(`Handle installed: ${details.reason}`);
   // TODO: maybe check if accounts are already configured?
   if (details.reason === "install") {
@@ -95,7 +101,9 @@ async function init() {
   // this is the only handler that may and must return a Promise which resolve with the response to the content script
   browser.runtime.onMessage.addListener(routeCalls);
 
-  browser.tabs.onUpdated.addListener(updateIcon);
+  browser.tabs.onUpdated.addListener(updateIcon); // update Icon when there is an allowance
+  // TODO: make optional
+  browser.tabs.onUpdated.addListener(extractLightningDataFromPage); // extract LN data from websites
   /*
   if (settings.enableLsats) {
     await browser.storage.sync.set({ lsats: {} });
