@@ -70,13 +70,13 @@ const lnurl = {
     lnurlDetails.url = url;
     return lnurlDetails;
   },
-  async verifyInvoice({ paymentInfo, metadata, amount }) {
+  verifyInvoice({ paymentInfo, metadata, amount }) {
     const paymentRequestDetails = parsePaymentRequest({
       request: paymentInfo.pr,
     });
     let metadataHash = "";
     try {
-      metadataHash = await sha256(metadata).toString(Hex);
+      metadataHash = sha256(metadata).toString(Hex);
     } catch (e) {
       console.log(e.message);
     }

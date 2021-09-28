@@ -44,13 +44,13 @@ function LNURLPay({ details, origin }: Props) {
       });
       const { pr: paymentRequest, successAction } = paymentInfo;
 
-      const isValidInvoice = await lnurl.verifyInvoice({
+      const isValidInvoice = lnurl.verifyInvoice({
         paymentInfo,
         metadata: details.metadata,
         amount: valueMSat,
       });
       if (!isValidInvoice) {
-        alert("Payment aborted.");
+        alert("Payment aborted. Invalid invoice");
         return;
       }
 
