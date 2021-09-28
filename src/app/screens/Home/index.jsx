@@ -7,7 +7,7 @@ import utils from "../../../common/lib/utils";
 import lnurlLib from "../../../common/lib/lnurl";
 import { getFiatFromSatoshi } from "../../../common/utils/helpers";
 
-import Button from "../../components/button";
+import Button from "../../components/Button";
 import Navbar from "../../components/Navbar";
 import TransactionsTable from "../../components/TransactionsTable";
 import UserMenu from "../../components/UserMenu";
