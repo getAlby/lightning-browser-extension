@@ -1,20 +1,13 @@
 import utils from "../../../common/lib/utils";
-import GitHubRepo from "./GitHubRepo";
+// import GitHubRepo from "./GitHubRepo";
 import Monetization from "./Monetization";
 import Twitter from "./Twitter";
-import YouTubeVideo from "./YouTubeVideo";
-import YouTubeChannel from "./YouTubeChannel";
+// import YouTubeVideo from "./YouTubeVideo";
+// import YouTubeChannel from "./YouTubeChannel";
 
-const enhancements = [
-  Monetization,
-  Twitter,
-  YouTubeVideo,
-  YouTubeChannel,
-  GitHubRepo,
-];
+const enhancements = [Monetization, Twitter];
 
 function LBE_EXTRACT_LIGHTNING_DATA() {
-  console.log("Lightning charging your web");
   // prevent the function from being called multiple times
   // this could happen because the browser.tabs.onUpdated event is fired multiple times
   if (window.LBE_EXTRACT_LIGHTNING_DATA_RUNNING) {
