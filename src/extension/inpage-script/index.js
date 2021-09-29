@@ -44,8 +44,6 @@ if (document) {
       lnurl = paymentRequest.replace(/^lnurl[pwc]:/i, ""); // replace potential scheme. the different lnurl types are handled in the lnurl action (by checking the type in the LNURL response)
     }
 
-    console.log(lnurl);
-    console.log(paymentRequest);
     window.webln.enable().then((response) => {
       if (!response.enabled) {
         return;

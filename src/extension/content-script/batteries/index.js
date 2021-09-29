@@ -2,10 +2,10 @@ import utils from "../../../common/lib/utils";
 // import GitHubRepo from "./GitHubRepo";
 import Monetization from "./Monetization";
 import Twitter from "./Twitter";
-// import YouTubeVideo from "./YouTubeVideo";
+import YouTubeVideo from "./YouTubeVideo";
 // import YouTubeChannel from "./YouTubeChannel";
 
-const enhancements = [Monetization, Twitter];
+const enhancements = [Monetization, Twitter, YouTubeVideo];
 
 function LBE_EXTRACT_LIGHTNING_DATA() {
   // prevent the function from being called multiple times
