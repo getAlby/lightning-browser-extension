@@ -59,6 +59,7 @@ jobs:
       S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      S3_FILE: "alby-firefox-nightly-${{ github.event.pull_request.number || 'master' }}"
 
     name: release-firefox-nightly
     steps:
@@ -66,8 +67,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: firefox.xpi
-      - name: Set S3 filename
-        run: if [[ "$GITHUB_REF" == "refs/heads/master" ]]; then echo "alby-firefox-nightly-master" >> $S3_KEY; else echo "alby-firefox-nightly-${{ github.event.pull_request.number }}" >> $S3_KEY; fi
       - name: Upload releases to S3
         uses: zdurham/s3-upload-github-action@master
         with:
@@ -83,6 +82,7 @@ jobs:
       S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      S3_FILE: "alby-chrome-nightly-${{ github.event.pull_request.number || 'master' }}"
 
     name: release-chrome-nightly
     steps:
@@ -90,8 +90,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: chrome.zip
-      - name: Set S3 filename
-        run: if [[ "$GITHUB_REF" == "refs/heads/master" ]]; then echo "alby-chrome-nightly-master" >> $S3_KEY; else echo  "alby-chrome-nightly-${{ github.event.pull_request.number }}" >> $S3_KEY; fi
       - name: Upload releases to S3
         uses: zdurham/s3-upload-github-action@master
         with:
@@ -107,6 +105,7 @@ jobs:
       S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      S3_FILE: "alby-opera-nightly-${{ github.event.pull_request.number || 'master' }}"
 
     name: release-opera-nightly
     steps:
@@ -114,8 +113,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: opera.crx
-      - name: Set S3 filename
-        run: if [[ "$GITHUB_REF" == "refs/heads/master" ]]; then echo "alby-opera-nightly-master" >> $S3_KEY; else echo "alby-opera-nightly-${{ github.event.pull_request.number }}" >> $S3_KEY; fi
       - name: Upload releases to S3
         uses: zdurham/s3-upload-github-action@master
         with:
