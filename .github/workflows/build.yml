@@ -143,6 +143,6 @@ jobs:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             Build files:
-            * [Firefox](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/alby-firefox-${{ github.event.pull_request.number }}.xpi)
-            * [Chrome](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/alby-chrome-${{ github.event.pull_request.number }}.zip)
+            * [Firefox](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/alby-firefox-nightly-${{ github.event.pull_request.number }}.xpi)
+            * [Chrome](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/alby-chrome-nightly-${{ github.event.pull_request.number }}.zip)
           edit-mode: replace
