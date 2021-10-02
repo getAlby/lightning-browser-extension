@@ -1,6 +1,13 @@
 name: Build Production
 
-on: push
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - v*
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
   build:
@@ -50,7 +57,6 @@ jobs:
       FILE: 'firefox.xpi'
       AWS_REGION: 'eu-central-1'
       S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      S3_KEY: "alby-firefox-${{ github.ref == 'refs/heads/master' ? 'master' : github.event.pull_request.number }}.xpi"
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
@@ -60,6 +66,8 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: firefox.xpi
+      - name: Set S3 filename
+        run: if [[ "$GITHUB_REF" == "refs/heads/master" ]] then $S3_KEY = "master"; else $S3_KEY = "${{ github.event.pull_request.number }}"; fi
       - name: Upload releases to S3
         uses: zdurham/s3-upload-github-action@master
         with:
@@ -73,7 +81,6 @@ jobs:
       FILE: 'chrome.zip'
       AWS_REGION: 'eu-central-1'
       S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      S3_KEY: "alby-chrome-${{ github.ref == 'refs/heads/master' ? 'master' : github.event.pull_request.number }}.zip"
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
@@ -83,6 +90,8 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: chrome.zip
+      - name: Set S3 filename
+        run: if [[ "$GITHUB_REF" == "refs/heads/master" ]] then $S3_KEY = "master"; else $S3_KEY = "${{ github.event.pull_request.number }}"; fi
       - name: Upload releases to S3
         uses: zdurham/s3-upload-github-action@master
         with:
@@ -96,7 +105,6 @@ jobs:
       FILE: 'opera.crx'
       AWS_REGION: 'eu-central-1'
       S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      S3_KEY: "alby-opera-${{ github.ref == 'refs/heads/master' ? 'master' : github.event.pull_request.number }}.crx"
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
@@ -106,6 +114,8 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: opera.crx
+      - name: Set S3 filename
+        run: if [[ "$GITHUB_REF" == "refs/heads/master" ]] then $S3_KEY = "master"; else $S3_KEY = "${{ github.event.pull_request.number }}"; fi
       - name: Upload releases to S3
         uses: zdurham/s3-upload-github-action@master
         with:
