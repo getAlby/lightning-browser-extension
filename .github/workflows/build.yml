@@ -50,7 +50,7 @@ jobs:
       FILE: 'firefox.xpi'
       AWS_REGION: 'eu-central-1'
       S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      S3_KEY: 'alby-firefox-${{github.event.pull_request.number || "master"}}.xpi'
+      S3_KEY: "alby-firefox-${{github.event.pull_request.number || 'master' }}.xpi"
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
@@ -73,7 +73,7 @@ jobs:
       FILE: 'chrome.zip'
       AWS_REGION: 'eu-central-1'
       S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      S3_KEY: 'alby-chrome-${{github.event.pull_request.number || "master"}}.zip'
+      S3_KEY: "alby-chrome-${{github.event.pull_request.number || 'master' }}.zip"
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
@@ -96,7 +96,7 @@ jobs:
       FILE: 'opera.crx'
       AWS_REGION: 'eu-central-1'
       S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      S3_KEY: 'alby-opera-${{github.event.pull_request.number || "master"}}.crx'
+      S3_KEY: "alby-opera-${{github.event.pull_request.number || 'master' }}.crx"
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
