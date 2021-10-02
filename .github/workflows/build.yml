@@ -67,7 +67,7 @@ jobs:
         with:
           name: firefox.xpi
       - name: Set S3 filename
-        run: if [[ "$GITHUB_REF" == "refs/heads/master" ]] then S3_KEY = "master"; else S3_KEY = "${{ github.event.pull_request.number }}"; fi
+        run: if [[ "$GITHUB_REF" == "refs/heads/master" ]] then S3_KEY="master"; else S3_KEY="${{ github.event.pull_request.number }}"; fi
       - name: Upload releases to S3
         uses: zdurham/s3-upload-github-action@master
         with:
@@ -91,7 +91,7 @@ jobs:
         with:
           name: chrome.zip
       - name: Set S3 filename
-        run: if [[ "$GITHUB_REF" == "refs/heads/master" ]]; then S3_KEY = "master"; else S3_KEY = "${{ github.event.pull_request.number }}"; fi
+        run: if [[ "$GITHUB_REF" == "refs/heads/master" ]]; then S3_KEY="master"; else S3_KEY="${{ github.event.pull_request.number }}"; fi
       - name: Upload releases to S3
         uses: zdurham/s3-upload-github-action@master
         with:
@@ -115,7 +115,7 @@ jobs:
         with:
           name: opera.crx
       - name: Set S3 filename
-        run: if [[ "$GITHUB_REF" == "refs/heads/master" ]] then S3_KEY = "master"; else S3_KEY = "${{ github.event.pull_request.number }}"; fi
+        run: if [[ "$GITHUB_REF" == "refs/heads/master" ]] then S3_KEY="master"; else S3_KEY="${{ github.event.pull_request.number }}"; fi
       - name: Upload releases to S3
         uses: zdurham/s3-upload-github-action@master
         with:
