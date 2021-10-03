@@ -131,7 +131,7 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           comment-author: 'github-actions[bot]'
-          body-includes: Build output
+          body-includes: Build files
 
       - name: Create or update comment
         uses: peter-evans/create-or-update-comment@v1
