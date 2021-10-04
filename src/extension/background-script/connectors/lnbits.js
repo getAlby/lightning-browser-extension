@@ -1,16 +1,17 @@
-import Base from "./base";
+import sha256 from "crypto-js/sha256";
+import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
-
-// !!!!!
-// TODO: needs updating. not used currently
-// !!!!
+import Base from "./base";
+import utils from "../../../common/lib/utils";
+import HashKeySigner from "../../../common/utils/signer";
 
 class LnBits extends Base {
   getInfo() {
+    console.log(this.config);
     return this.request(
       "GET",
       "/api/v1/wallet",
-      this.config.readkey,
+      this.config.adminkey,
       undefined,
       {}
     ).then((data) => {
@@ -26,13 +27,15 @@ class LnBits extends Base {
     return this.request(
       "GET",
       "/api/v1/wallet",
-      this.config.readkey,
+      this.config.adminkey,
       undefined,
       {}
     ).then((data) => {
+      // TODO better amount handling
+      const balanceInSats = data.balance / 1000;
       return {
         data: {
-          balance: data.balance,
+          balance: balanceInSats,
         },
       };
     });
@@ -49,7 +52,7 @@ class LnBits extends Base {
     })
       .then((data) => {
         // TODO: how do we get the total amount here??
-        return this.checkPayment(data.checking_id).then((checkData) => {
+        return this.checkPayment(data.payment_hash).then((checkData) => {
           return {
             data: {
               preimage: checkData.preimage,
@@ -64,20 +67,74 @@ class LnBits extends Base {
       });
   }
 
-  checkPayment(checkingId) {
+  checkPayment(paymentHash) {
     return this.request(
       "GET",
-      `/api/v1/payments/${checkingId}`,
-      this.config.readkey
+      `/api/v1/payments/${paymentHash}`,
+      this.config.adminkey
     );
   }
 
   signMessage(args) {
-    return Promise.reject(new Error("Not supported with Lnbits"));
+    // make sure we got the config to create a new key
+    if (!this.config.url || !this.config.adminkey) {
+      return Promise.reject(new Error("Missing config"));
+    }
+    if (!args.message) {
+      return Promise.reject(new Error("Invalid message"));
+    }
+    const message = utils.stringToUint8Array(args.message);
+    // create a signing key from the lnbits URL and the adminkey
+    const keyHex = sha256(
+      `LBE-LNBITS-${this.config.url}-${this.config.adminkey}`
+    ).toString(Hex);
+
+    if (!keyHex) {
+      return Promise.reject(new Error("Could not create key"));
+    }
+    const signer = new HashKeySigner(keyHex);
+    const signedMessageDERHex = signer.sign(message).toDER("hex");
+    // make sure we got some signed message
+    if (!signedMessageDERHex) {
+      return Promise.reject(new Error("Signing failed"));
+    }
+    return Promise.resolve({
+      data: {
+        signature: signedMessageDERHex,
+      },
+    });
   }
 
   verifyMessage(args) {
-    return Promise.reject(new Error("Not supported with Lnbits"));
+    // create a signing key from the lnbits URL and the adminkey
+    const keyHex = sha256(
+      `LBE-LNBITS-${this.config.url}-${this.config.adminkey}`
+    ).toString(Hex);
+
+    if (!keyHex) {
+      return Promise.reject(new Error("Could not create key"));
+    }
+    const signer = new HashKeySigner(keyHex);
+    return Promise.resolve({
+      data: {
+        valid: signer.verify(args.message, args.signature),
+      },
+    });
+  }
+
+  makeInvoice(args) {
+    return this.request("POST", "/api/v1/payments", this.config.adminkey, {
+      amount: args.amount,
+      memo: args.memo,
+      out: false,
+    }).then((data) => {
+      return {
+        data: {
+          paymentRequest: data.payment_request,
+          rHash: data.payment_hash,
+        },
+      };
+    });
   }
 
   async request(method, path, apiKey, args, defaultValues) {
