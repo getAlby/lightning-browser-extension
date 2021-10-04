@@ -51,7 +51,7 @@ export default function TransactionsTable({ transactions }: Props) {
               {({ open }) => (
                 <div key={tx.id} className="flex justify-between space-x-5">
                   <div className="overflow-hidden">
-                    <div className="flex mt-3">
+                    <div className="flex mt-2">
                       <div className="flex-shrink-0 mr-3">
                         {tx.type && renderIcon(tx.type)}
                       </div>
