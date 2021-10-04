@@ -58,7 +58,7 @@
     "invoices": "^2.0.0",
     "lsat-js": "^2.0.3",
     "memoizee": "^0.4.15",
-    "postcss-cli": "^8.3.1",
+    "postcss-cli": "^9.0.1",
     "pubsub-js": "^1.9.3",
     "query-string": "^7.0.0",
     "react": "^17.0.2",
