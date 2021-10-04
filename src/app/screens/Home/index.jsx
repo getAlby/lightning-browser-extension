@@ -134,7 +134,7 @@ class Home extends React.Component {
                 date: dayjs(payment.createdAt).fromNow(),
                 // date: dayjs.unix(payment.createdAt),
                 title: (
-                  <p>
+                  <p className="truncate">
                     <a
                       target="_blank"
                       title={payment.name}
@@ -181,7 +181,7 @@ class Home extends React.Component {
               type: "sent",
               date: dayjs(payment.createdAt).fromNow(),
               title: (
-                <p>
+                <p className="truncate">
                   <a
                     target="_blank"
                     title={payment.name}
