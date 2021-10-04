@@ -59,6 +59,7 @@ jobs:
       S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      S3_KEY: "alby-firefox-nightly-${{ github.event.pull_request.number || 'master' }}.xpi"
 
     name: release-firefox-nightly
     steps:
@@ -66,8 +67,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: firefox.xpi
-      - name: Set S3 filename
-        run: if [[ "$GITHUB_REF" == "refs/heads/master" ]]; then S3_KEY="alby-nightly-master"; else S3_KEY="alby-nightly-${{ github.event.pull_request.number }}"; fi
       - name: Upload releases to S3
         uses: zdurham/s3-upload-github-action@master
         with:
@@ -83,6 +82,7 @@ jobs:
       S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      S3_KEY: "alby-chrome-nightly-${{ github.event.pull_request.number || 'master' }}.zip"
 
     name: release-chrome-nightly
     steps:
@@ -90,8 +90,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: chrome.zip
-      - name: Set S3 filename
-        run: if [[ "$GITHUB_REF" == "refs/heads/master" ]]; then S3_KEY="alby-nightly-master"; else S3_KEY="alby-nightly-${{ github.event.pull_request.number }}"; fi
       - name: Upload releases to S3
         uses: zdurham/s3-upload-github-action@master
         with:
@@ -107,6 +105,7 @@ jobs:
       S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      S3_KEY: "alby-opera-nightly-${{ github.event.pull_request.number || 'master' }}.crx"
 
     name: release-opera-nightly
     steps:
@@ -114,8 +113,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: opera.crx
-      - name: Set S3 filename
-        run: if [[ "$GITHUB_REF" == "refs/heads/master" ]]; then S3_KEY="alby-nightly-master"; else S3_KEY="alby-nightly-${{ github.event.pull_request.number }}"; fi
       - name: Upload releases to S3
         uses: zdurham/s3-upload-github-action@master
         with:
@@ -134,7 +131,7 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           comment-author: 'github-actions[bot]'
-          body-includes: Build output
+          body-includes: Build files
 
       - name: Create or update comment
         uses: peter-evans/create-or-update-comment@v1
@@ -143,6 +140,6 @@ jobs:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             Build files:
-            * [Firefox](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/alby-firefox-${{ github.event.pull_request.number }}.xpi)
-            * [Chrome](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/alby-chrome-${{ github.event.pull_request.number }}.zip)
+            * [Firefox](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/alby-firefox-nightly-${{ github.event.pull_request.number }}.xpi)
+            * [Chrome](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/alby-chrome-nightly-${{ github.event.pull_request.number }}.zip)
           edit-mode: replace

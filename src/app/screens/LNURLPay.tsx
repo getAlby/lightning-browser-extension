@@ -105,7 +105,7 @@ function LNURLPay({ details, origin }: Props) {
 
   function renderAmount() {
     if (details.minSendable === details.maxSendable) {
-      return <p>{`${details.minSendable / 1000} satoshi`}</p>;
+      return <p>{`${details.minSendable / 1000} Satoshi`}</p>;
     } else {
       return (
         <div className="mt-1 flex flex-col">
@@ -137,7 +137,7 @@ function LNURLPay({ details, origin }: Props) {
         <dl className="shadow p-4 rounded-lg mb-8">
           <dt className="font-semibold text-gray-500">Send payment to</dt>
           <dd className="mb-6">{details.domain}</dd>
-          <dt className="font-semibold text-gray-500">Amount (satoshi)</dt>
+          <dt className="font-semibold text-gray-500">Amount (Satoshi)</dt>
           <dd>{renderAmount()}</dd>
         </dl>
         <div className="text-center">

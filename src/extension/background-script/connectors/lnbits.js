@@ -7,7 +7,6 @@ import HashKeySigner from "../../../common/utils/signer";
 
 class LnBits extends Base {
   getInfo() {
-    console.log(this.config);
     return this.request(
       "GET",
       "/api/v1/wallet",
