@@ -4,18 +4,14 @@ import { parsePaymentRequest } from "invoices";
 
 import sha256 from "crypto-js/sha256";
 import hmacSHA256 from "crypto-js/hmac-sha256";
-import Base64 from "crypto-js/enc-base64";
-import UTF8 from "crypto-js/enc-utf8";
 import Hex from "crypto-js/enc-hex";
 
+import HashKeySigner from "../../../../common/utils/signer";
 import utils from "../../../../common/lib/utils";
 import lnurlLib from "../../../../common/lib/lnurl";
 import state from "../../state";
 import db from "../../db";
 import { publishPaymentNotification } from "../ln/sendPayment";
-
-const EC = require("elliptic").ec;
-const ec = new EC("secp256k1");
 
 const LNURLAUTH_CANONICAL_PHRASE =
   "DO NOT EVER SIGN THIS TEXT WITH YOUR PRIVATE KEYS! IT IS ONLY USED FOR DERIVATION OF LNURL-AUTH HASHING-KEY, DISCLOSING ITS SIGNATURE WILL COMPROMISE YOUR LNURL-AUTH IDENTITY AND MAY LEAD TO LOSS OF FUNDS!";
@@ -48,39 +44,51 @@ async function lnurl(message) {
 async function auth(message, lnurlDetails) {
   const connector = state.getState().getConnector();
   const signResponse = await connector.signMessage({
-    msg: Base64.stringify(UTF8.parse(LNURLAUTH_CANONICAL_PHRASE)),
+    message: LNURLAUTH_CANONICAL_PHRASE,
     key_loc: {
       key_family: 0,
       key_index: 0,
     },
   });
-  const lnSignature = signResponse.signature;
+  const lnSignature = signResponse.data.signature;
 
-  // TODO: add assertions we got a valid signature, k1 and host
+  // make sure we got a signature
+  if (!lnSignature) {
+    throw new Error("Invalid Signature");
+  }
 
   const hashingKey = sha256(lnSignature).toString(Hex);
+  if (!lnurlDetails.url.host || !hashingKey) {
+    throw new Error("Invalid input");
+  }
   const linkingKeyPriv = hmacSHA256(lnurlDetails.url.host, hashingKey).toString(
     Hex
   );
+  // make sure we got a hashingKey and a linkingkey (just to be sure for whatever reason)
+  if (!hashingKey || !linkingKeyPriv) {
+    throw new Error("Invalid hashingKey/linkingKey");
+  }
 
-  const sk = ec.keyFromPrivate(linkingKeyPriv);
-  const pk = sk.getPublic();
-  const pkHex = pk.encodeCompressed("hex"); //pk.encode('hex')
+  const signer = new HashKeySigner(linkingKeyPriv);
 
-  const k1Hex = utils.hexToUint8Array(lnurlDetails.k1);
-  const signedMessage = sk.sign(k1Hex);
-
+  const k1 = utils.hexToUint8Array(lnurlDetails.k1);
+  if (!lnurlDetails.k1 || !k1) {
+    throw new Error("Invalid K1");
+  }
+  const signedMessage = signer.sign(k1);
   const signedMessageDERHex = signedMessage.toDER("hex");
 
   const loginURL = lnurlDetails.url;
   loginURL.searchParams.set("sig", signedMessageDERHex);
-  loginURL.searchParams.set("key", pkHex);
+  loginURL.searchParams.set("key", signer.pkHex);
   loginURL.searchParams.set("t", Date.now());
   let authResponse;
   try {
     authResponse = await axios.get(loginURL);
   } catch (e) {
-    const error = authResponse?.data?.reason || e.message; // lnurl error or exception message
+    console.log("LNURL-AUTH FAIL:", e);
+    console.log(e.response?.data);
+    const error = e.response?.data?.reason || e.message; // lnurl error or exception message
     throw new Error(error);
   }
 

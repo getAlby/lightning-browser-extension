@@ -5,7 +5,7 @@ const persistSuccessfullPayment = async (message, data) => {
   const host = data.origin.host;
   const paymentResponse = data.response;
   const paymentRequestDetails = data.paymentRequestDetails;
-  const route = paymentResponse.data.payment_route;
+  const route = paymentResponse.data.route;
   const { total_amt, total_fees } = route;
 
   await db.payments.add({
@@ -13,15 +13,15 @@ const persistSuccessfullPayment = async (message, data) => {
     location: data.origin.location,
     name: recipientName,
     description: paymentRequestDetails.description,
-    preimage: paymentResponse.data.payment_preimage,
-    paymentHash: paymentResponse.data.payment_hash,
+    preimage: paymentResponse.data.preimage,
+    paymentHash: paymentResponse.data.paymentHash,
     destination: paymentRequestDetails.destination,
     totalAmount: total_amt,
     totalFees: total_fees,
     createdAt: Date.now(),
   });
   await db.saveToStorage();
-  console.log(`Presisted payment ${paymentResponse.data.payment_hash}`);
+  console.log(`Presisted payment ${paymentResponse.data.paymentHash}`);
   return true;
 };
 

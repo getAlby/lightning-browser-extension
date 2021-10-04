@@ -31,6 +31,7 @@ const routes = {
   lnurlPay,
   sendPayment: ln.sendPayment,
   signMessage: ln.signMessage,
+  verifyMessage: ln.verifyMessage,
   makeInvoice: ln.makeInvoice,
   getBalance: ln.getBalance,
   getPayments: payments.all,
@@ -43,6 +44,7 @@ const routes = {
   reset: setup.reset,
   status: setup.status,
   validateAccount: setup.validateAccount,
+  setIcon: setup.setIcon,
 };
 
 const router = (path) => {

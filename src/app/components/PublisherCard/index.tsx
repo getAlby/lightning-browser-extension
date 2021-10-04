@@ -9,13 +9,14 @@ type Props = {
   title: string;
   image: string;
   url?: string;
+  children?: React.ReactNode;
 };
 
-export default function PublisherCard({ title, image, url }: Props) {
+export default function PublisherCard({ title, image, url, children }: Props) {
   const { data } = usePalette(image);
   return (
     <div
-      className="p-6 bg-gray-300"
+      className="p-6 bg-gray-300 text-center"
       style={{
         backgroundColor: data.vibrant,
         backgroundImage: `linear-gradient(${data.vibrant}, rgba(0, 0, 0, 0.3) 85%)`,
@@ -30,7 +31,7 @@ export default function PublisherCard({ title, image, url }: Props) {
           e.target.src = DEFAULT_IMAGE;
         }}
       />
-      <h2 className="flex justify-center items-center text-center mb-0 text-xl text-white">
+      <h2 className="text-center mb-0 text-xl text-white">
         {title}
 
         {url && (
@@ -47,6 +48,7 @@ export default function PublisherCard({ title, image, url }: Props) {
           </a>
         )}
       </h2>
+      {children && <div className="mt-2">{children}</div>}
     </div>
   );
 }

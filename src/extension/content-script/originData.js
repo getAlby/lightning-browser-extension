@@ -521,10 +521,7 @@ const metaDataRules = {
   },
   monetization: {
     rules: [
-      [
-        'meta[name="monetization"][content^="lightning:" i]',
-        (element) => element.getAttribute("content"),
-      ],
+      ['meta[name="lightning"]', (element) => element.getAttribute("content")],
     ],
     processor: (text) => text.toLowerCase(),
   },
@@ -618,7 +615,7 @@ export default function getOriginData() {
     pathname: window.location.pathname,
     name: metaData.provider || metaData.title,
     description: metaData.description,
-    icon: metaData.icon,
+    icon: metaData.image || metaData.icon,
     metaData: metaData,
     external: true, // indicate that the call is coming from the website (and not made internally within the extension)
   };

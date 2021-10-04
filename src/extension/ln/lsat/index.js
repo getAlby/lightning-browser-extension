@@ -19,8 +19,8 @@ import utils from "../../../common/lib/utils";
     .call("sendPayment", { paymentRequest: lsat.invoice }, { origin })
     .then((response) => {
       console.log(response);
-      if (response && response.payment_hash) {
-        let preimage = utils.base64ToHex(response.payment_preimage);
+      if (response && response.paymentHash) {
+        let preimage = utils.base64ToHex(response.preimage);
         lsat.paymentPreimage = preimage;
         console.log(lsat.toToken());
         lsats[urlHash] = { token: lsat.toToken() };

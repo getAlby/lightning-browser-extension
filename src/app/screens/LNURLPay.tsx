@@ -6,6 +6,7 @@ import utils from "../../common/lib/utils";
 import lnurl from "../../common/lib/lnurl";
 
 import Button from "../components/Button";
+import Input from "../components/Form/Input";
 import PublisherCard from "../components/PublisherCard";
 
 type Props = {
@@ -25,9 +26,11 @@ function LNURLPay({ details, origin }: Props) {
   const [valueMSat, setValueMSat] = useState<string | number>(
     details.minSendable
   );
+  const [loading, setLoading] = useState(false);
 
   async function confirm() {
     try {
+      setLoading(true);
       // Get the invoice
       const params = {
         amount: valueMSat, // user specified sum in MilliSatoshi
@@ -41,13 +44,13 @@ function LNURLPay({ details, origin }: Props) {
       });
       const { pr: paymentRequest, successAction } = paymentInfo;
 
-      const isValidInvoice = await lnurl.verifyInvoice({
+      const isValidInvoice = lnurl.verifyInvoice({
         paymentInfo,
         metadata: details.metadata,
         amount: valueMSat,
       });
       if (!isValidInvoice) {
-        alert("Payment aborted.");
+        alert("Payment aborted. Invalid invoice");
         return;
       }
 
@@ -73,6 +76,7 @@ function LNURLPay({ details, origin }: Props) {
             break;
           case "message":
             utils.notify({
+              title: `LNURL response:`,
               message: successAction.message,
             });
             break;
@@ -87,7 +91,10 @@ function LNURLPay({ details, origin }: Props) {
 
       window.close();
     } catch (e) {
-      console.log(e.message);
+      console.log(e);
+      alert(`Error: ${e.message}`);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -101,8 +108,16 @@ function LNURLPay({ details, origin }: Props) {
       return <p>{`${details.minSendable / 1000} satoshi`}</p>;
     } else {
       return (
-        <div className="flex flex-col">
+        <div className="mt-1 flex flex-col">
+          <Input
+            type="number"
+            min={details.minSendable / 1000}
+            max={details.maxSendable / 1000}
+            value={valueMSat / 1000}
+            onChange={(e) => setValueMSat(e.target.value * 1000)}
+          />
           <input
+            className="mt-2"
             type="range"
             min={details.minSendable}
             max={details.maxSendable}
@@ -110,9 +125,6 @@ function LNURLPay({ details, origin }: Props) {
             value={valueMSat}
             onChange={(e) => setValueMSat(e.target.value)}
           />
-          <output className="mt-1 text-sm">{`${
-            valueMSat / 1000
-          } satoshi`}</output>
         </div>
       );
     }
@@ -125,12 +137,18 @@ function LNURLPay({ details, origin }: Props) {
         <dl className="shadow p-4 rounded-lg mb-8">
           <dt className="font-semibold text-gray-500">Send payment to</dt>
           <dd className="mb-6">{details.domain}</dd>
-          <dt className="font-semibold text-gray-500">Amount</dt>
+          <dt className="font-semibold text-gray-500">Amount (satoshi)</dt>
           <dd>{renderAmount()}</dd>
         </dl>
         <div className="text-center">
           <div className="mb-5">
-            <Button onClick={confirm} label="Confirm" fullWidth primary />
+            <Button
+              onClick={confirm}
+              label="Confirm"
+              fullWidth
+              primary
+              loading={loading}
+            />
           </div>
 
           <p className="mb-3 underline text-sm text-gray-300">

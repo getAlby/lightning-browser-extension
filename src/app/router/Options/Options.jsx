@@ -13,12 +13,15 @@ import TestConnection from "../../screens/Options/TestConnection";
 function Options() {
   const [accountInfo, setAccountInfo] = useState({});
 
-  useEffect(() => {
-    utils.call("accountInfo").then((response) => {
+  function loadAccountInfo() {
+    return utils.call("accountInfo").then((response) => {
       const { alias } = response.info;
       const balance = parseInt(response.balance.balance); // TODO: handle amounts
       setAccountInfo({ alias, balance });
     });
+  }
+  useEffect(() => {
+    loadAccountInfo();
   }, []);
 
   return (
@@ -30,7 +33,7 @@ function Options() {
             ? `${accountInfo.balance} Sats`
             : ""
         }
-        right={<UserMenu />}
+        right={<UserMenu onAccountSwitch={loadAccountInfo} />}
       >
         <Navbar.Link href="/publishers">Publishers</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>

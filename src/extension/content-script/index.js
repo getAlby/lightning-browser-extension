@@ -3,8 +3,13 @@ import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
 import injectScript from "./injectScript";
 
+//import { enhancements, loadEnhancements } from "../inpage-script/enhancements";
+import LBE_EXTRACT_LIGHTNING_DATA from "./batteries";
+
 if (shouldInject()) {
   injectScript();
+  // TODO: make optional
+  window.LBE_EXTRACT_LIGHTNING_DATA = LBE_EXTRACT_LIGHTNING_DATA;
 
   // message listener to listen to inpage webln calls
   // those calls get passed on to the background script

@@ -6,6 +6,9 @@ module.exports = {
   plugins: [require("@tailwindcss/forms")],
   theme: {
     extend: {
+      animation: {
+        "spin-fast": "spin 0.7s linear infinite",
+      },
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
       },

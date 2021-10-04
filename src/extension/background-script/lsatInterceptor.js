@@ -59,8 +59,8 @@ const processLsatAuthentication = (responseDetails) => {
         origin: { domain: responseDetails.url, name: "", icon: "" },
       })
       .then((response) => {
-        if (response.data && response.data.payment_hash) {
-          let preimage = utils.base64ToHex(response.data.payment_preimage);
+        if (response.data && response.data.paymentHash) {
+          let preimage = utils.base64ToHex(response.data.preimage);
           //lsat.setPreimage(preimage);
           lsat.paymentPreimage = preimage;
           lsats[urlHash] = { token: lsat.toToken() };

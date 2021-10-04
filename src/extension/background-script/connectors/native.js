@@ -3,6 +3,10 @@ import browser from "webextension-polyfill";
 
 const nativeApplication = "LBE";
 
+// !!!!!
+// TODO: needs updating. not used currently
+// !!!!!
+
 export default class Native {
   constructor(config) {
     this.isExecuting = false;

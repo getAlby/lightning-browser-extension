@@ -70,6 +70,7 @@
     "matches": [
       "*://*/*"
     ],
+    "run_at": "document_end",
     "js": [
       "js/contentScript.bundle.js"
     ]

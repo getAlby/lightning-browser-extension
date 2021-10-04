@@ -6,6 +6,8 @@ on:
       - master
     tags:
       - v*
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
   build:
@@ -16,7 +18,7 @@ jobs:
 
     name: build-prod
     environment: faucet
-    
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -25,7 +27,7 @@ jobs:
           cache: 'yarn'
 
       - run: yarn install
-      
+
       - name: Build production
         run: yarn build
 
@@ -46,7 +48,7 @@ jobs:
         with:
           name: opera.crx
           path: dist/production/opera.crx
-          
+
   release-firefox-nightly:
     runs-on: ubuntu-latest
     needs: build
@@ -55,7 +57,6 @@ jobs:
       FILE: 'firefox.xpi'
       AWS_REGION: 'eu-central-1'
       S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      S3_KEY: 'elbee-firefox.xpi'
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
@@ -65,11 +66,13 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: firefox.xpi
+      - name: Set S3 filename
+        run: if [[ "$GITHUB_REF" == "refs/heads/master" ]]; then S3_KEY="alby-nightly-master"; else S3_KEY="alby-nightly-${{ github.event.pull_request.number }}"; fi
       - name: Upload releases to S3
         uses: zdurham/s3-upload-github-action@master
         with:
           args: --acl public-read
-          
+
   release-chrome-nightly:
     runs-on: ubuntu-latest
     needs: build
@@ -78,7 +81,6 @@ jobs:
       FILE: 'chrome.zip'
       AWS_REGION: 'eu-central-1'
       S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      S3_KEY: 'elbee-chrome.zip'
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
@@ -88,11 +90,13 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: chrome.zip
+      - name: Set S3 filename
+        run: if [[ "$GITHUB_REF" == "refs/heads/master" ]]; then S3_KEY="alby-nightly-master"; else S3_KEY="alby-nightly-${{ github.event.pull_request.number }}"; fi
       - name: Upload releases to S3
         uses: zdurham/s3-upload-github-action@master
         with:
           args: --acl public-read
-  
+
   release-opera-nightly:
     runs-on: ubuntu-latest
     needs: build
@@ -101,7 +105,6 @@ jobs:
       FILE: 'opera.crx'
       AWS_REGION: 'eu-central-1'
       S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      S3_KEY: 'elbee-opera.crx'
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
@@ -111,7 +114,35 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: opera.crx
+      - name: Set S3 filename
+        run: if [[ "$GITHUB_REF" == "refs/heads/master" ]]; then S3_KEY="alby-nightly-master"; else S3_KEY="alby-nightly-${{ github.event.pull_request.number }}"; fi
       - name: Upload releases to S3
         uses: zdurham/s3-upload-github-action@master
         with:
           args: --acl public-read
+
+  comment-build-links:
+    runs-on: ubuntu-latest
+    needs: [build, release-firefox-nightly, release-chrome-nightly, release-opera-nightly]
+    name: comment-release-links
+    if: ${{ github.event_name == 'pull_request' }}
+
+    steps:
+      - name: Find Comment
+        uses: peter-evans/find-comment@v1
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: Build output
+
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            Build files:
+            * [Firefox](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/alby-firefox-${{ github.event.pull_request.number }}.xpi)
+            * [Chrome](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/alby-chrome-${{ github.event.pull_request.number }}.zip)
+          edit-mode: replace
