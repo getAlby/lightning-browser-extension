@@ -30,7 +30,7 @@ The extension can connect to different node implementations and supports custodi
 
 We have a channel on the [bitcoin.design](https://bitcoin.design/) Slack community [#lightning-browser-extension](https://bitcoindesign.slack.com/archives/C02591ADXM2) and a [Telegram group](https://t.me/getAlby) Come and join us! 
 
-We also do a weekly call at 13:00 UTC - (15:00 CEST/CAT - 09:00 EDT) on [https://meet.jit.si/bitcoindesign](https://meet.jit.si/bitcoindesign)
+We also do a weekly call at 13:00 UTC - (15:00 CEST/CAT - 09:00 EDT) on [Google Meet](https://meet.google.com/aea-xvbm-fhy)
 
 ## Try out the most recent version
 Download Nightly releases 
