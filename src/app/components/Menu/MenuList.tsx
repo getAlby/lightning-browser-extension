@@ -22,7 +22,7 @@ function List({ position = "left", children }: Props) {
           position === "left"
             ? "left-0 origin-top-left"
             : "right-0 origin-top-right"
-        } absolute mt-2 py-1 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none`}
+        } absolute z-50 mt-2 py-1 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none`}
       >
         {children}
       </Menu.Items>
