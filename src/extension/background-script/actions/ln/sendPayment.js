@@ -24,7 +24,7 @@ const sendPayment = async (message, sender) => {
   ) {
     return sendPaymentWithAllowance(message, paymentRequestDetails, allowance);
   } else {
-    return sendPaymentWithPrompt(message, paymentRequestDetails);
+    return payWithPrompt(message);
   }
 };
 
@@ -42,28 +42,31 @@ async function sendPaymentWithAllowance(
   return response;
 }
 
-async function sendPaymentWithPrompt(message, paymentRequestDetails) {
+async function payWithPrompt(message) {
+  await utils.openPrompt(message);
+}
+
+export async function weblnPay(message) {
+  const { paymentRequest } = message.args;
   const connector = state.getState().getConnector();
-  let promptResponse;
-  let paymentResponse;
+  const paymentRequestDetails = parsePaymentRequest({
+    request: paymentRequest,
+  });
+
   try {
-    promptResponse = await utils.openPrompt(message);
-    if (promptResponse && promptResponse.data.confirmed) {
-      paymentResponse = await connector.sendPayment({
-        paymentRequest: message.args.paymentRequest,
-      });
-      publishPaymentNotification(
-        message,
-        paymentRequestDetails,
-        paymentResponse
-      );
-      return paymentResponse;
-    }
+    const response = await connector.sendPayment({
+      paymentRequest,
+    });
+    publishPaymentNotification(
+      message.args.message,
+      paymentRequestDetails,
+      response
+    );
+
+    return response;
   } catch (e) {
-    console.log("Payment cancelled", e);
-    return { error: e.message };
+    console.log(e.message);
   }
-  return { error: "Failed" };
 }
 
 export function publishPaymentNotification(

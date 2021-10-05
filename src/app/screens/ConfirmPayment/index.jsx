@@ -8,6 +8,7 @@ import CurrencyInput from "../../components/Form/CurrencyInput";
 import PaymentSummary from "../../components/PaymentSummary";
 import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
+import utils from "../../../common/lib/utils";
 
 class ConfirmPayment extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class ConfirmPayment extends React.Component {
     this.state = {
       budget: (this.props.invoice?.tokens || 0) * 10,
       rememberMe: false,
+      loading: false,
     };
   }
 
@@ -24,9 +26,18 @@ class ConfirmPayment extends React.Component {
       await this.saveBudget();
     }
 
-    return await msg.reply({
-      confirmed: true,
-    });
+    try {
+      this.setState({ loading: true });
+      await utils.call("weblnPay", {
+        message: { origin: this.props.origin },
+        paymentRequest: this.props.paymentRequest,
+      });
+      window.close();
+    } catch (e) {
+      alert(`Error: ${e.message}`);
+    } finally {
+      this.setState({ loading: false });
+    }
   }
 
   reject(e) {
@@ -121,6 +132,7 @@ class ConfirmPayment extends React.Component {
                 label="Confirm"
                 fullWidth
                 primary
+                loading={this.state.loading}
               />
             </div>
 

@@ -30,6 +30,7 @@ const routes = {
   lnurl,
   lnurlPay,
   sendPayment: ln.sendPayment,
+  weblnPay: ln.weblnPay,
   signMessage: ln.signMessage,
   verifyMessage: ln.verifyMessage,
   makeInvoice: ln.makeInvoice,

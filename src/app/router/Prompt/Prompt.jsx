@@ -79,6 +79,7 @@ class Prompt extends React.Component {
               render={(props) => (
                 <ConfirmPayment
                   invoice={this.state.invoice}
+                  paymentRequest={this.state.args?.paymentRequest}
                   origin={this.state.origin}
                 />
               )}
