@@ -1,7 +1,7 @@
 module.exports = {
   verbose: true,
   transform: {
-    "^.+\\.(js|jsx)$": "babel-jest",
+    "^.+\\.[t|j]sx?$": "babel-jest",
   },
   moduleNameMapper: {
     "^.+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$":

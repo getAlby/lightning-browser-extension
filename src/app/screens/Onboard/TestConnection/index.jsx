@@ -1,14 +1,37 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useHistory } from "react-router-dom";
-import Button from "../../../components/button";
-import Card from "../../../components/card";
+import Modal from "react-modal";
+import CrossIcon from "@bitcoin-design/bitcoin-icons/svg/outline/cross.svg";
+import Input from "../../../components/Form/Input";
+import Button from "../../../components/Button";
+import Card from "../../../components/Card";
 import utils from "../../../../common/lib/utils";
+import Loading from "../../../components/Loading";
 
-const faucetEnabled = false;
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
+
+const faucetURL = process.env.FAUCET_URL;
+const faucetK = process.env.FAUCET_K;
+const faucetAmount = 210;
+const faucetMemo = "LN Faucet";
 
 export default function TestConnection() {
   const [accountInfo, setAccountInfo] = useState({});
   const [errorMessage, setErrorMessage] = useState();
+  const [faucetEmail, setFaucetEmail] = useState();
+  const [showFaucet, setShowFaucet] = useState(false);
+  const [faucetLoading, setFaucetLoading] = useState(false);
+
   const history = useHistory();
 
   function handleEdit(event) {
@@ -17,9 +40,46 @@ export default function TestConnection() {
     });
   }
 
-  function claimSats(event) {}
+  function handleEmailChange(event) {
+    setFaucetEmail(event.target.value.trim());
+  }
 
-  useEffect(() => {
+  function closeFaucet() {
+    setShowFaucet(false);
+  }
+
+  function claimSats(event) {
+    event.preventDefault();
+    setFaucetLoading(true);
+    utils
+      .call("makeInvoice", { amount: faucetAmount, memo: faucetMemo })
+      .then((invoice) => {
+        axios
+          .post(faucetURL, {
+            k: faucetK,
+            payment_request: invoice.paymentRequest,
+            email: faucetEmail,
+          })
+          .then((response) => {
+            if (response.data.ok) {
+              loadAccountInfo();
+              alert(`We've sent you ${faucetAmount} Satoshi`);
+              setFaucetLoading(false);
+              setShowFaucet(false);
+            }
+          })
+          .catch((r) => {
+            console.log(r.response);
+            if (r.response && r.response.data) {
+              alert(r.response.data.error);
+            } else {
+              alert("An error ocurred. Did you already use the faucet?");
+            }
+          });
+      });
+  }
+
+  function loadAccountInfo() {
     utils
       .call("accountInfo")
       .then((response) => {
@@ -32,43 +92,103 @@ export default function TestConnection() {
         console.log(e);
         setErrorMessage(e.message);
       });
+  }
+
+  useEffect(() => {
+    loadAccountInfo();
   }, []);
+
+  function renderFaucet() {
+    return (
+      <Modal
+        closeTimeoutMS={200}
+        isOpen={showFaucet}
+        onRequestClose={closeFaucet}
+        contentLabel="Allowance Options"
+        style={customStyles}
+        overlayClassName="bg-black bg-opacity-25 fixed inset-0"
+        className="absolute rounded-lg bg-white w-full max-w-lg"
+      >
+        <div className="p-5 flex justify-between">
+          <h2 className="text-2xl font-bold">Get some Satoshi</h2>
+          <button onClick={closeFaucet}>
+            <img
+              className="w-6 h-6"
+              src={CrossIcon}
+              alt=""
+              aria-hidden="true"
+            />
+          </button>
+        </div>
+        <div className="p-5 border-t border-b border-gray-200">
+          <p className="mb-2">
+            To get started we send {faucetAmount} Satoshi to your wallet.
+            <br />
+            Please provide your email. We will notify you of updates (don't
+            worry, we also hate spam)
+          </p>
+          <div className="w-60">
+            <Input
+              name="uri"
+              type="text"
+              onChange={handleEmailChange}
+              required
+              placeholder="you@email.com"
+            />
+          </div>
+        </div>
+        <div className="flex justify-end p-5">
+          {faucetLoading ? (
+            <Loading />
+          ) : (
+            <Button onClick={claimSats} label="Get Sats" primary />
+          )}
+        </div>
+      </Modal>
+    );
+  }
 
   return (
     <div>
-      <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
+      <div className="relative lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
         <div className="relative">
-          <div className="mt-12">
+          <div>
             {errorMessage && (
               <div>
-                <h1 className="text-3xl font-bold mt-4">Connection Error</h1>
+                <h1 className="text-3xl font-bold">Connection Error</h1>
                 <p>{errorMessage}</p>
-                <Button label="Edit" onClick={handleEdit} />
+                <Button label="Edit" onClick={handleEdit} primary />
               </div>
             )}
 
             {accountInfo && accountInfo.alias && (
               <div>
-                <h1 className="text-3xl font-bold mt-4">
-                  Connection success! 🎉
-                </h1>
+                <h1 className="text-3xl font-bold">Success! 🎉</h1>
                 <p className="text-gray-500 mt-6">
                   Awesome, you're ready to go!
-                  {faucetEnabled && accountInfo.balance === 0 && (
-                    <p>
-                      But it seems you're wallet has 0 Sats. To get started we
-                      can send you some Sats...
-                      <a href="#" onClick={claimSats}>
-                        click here.
-                      </a>
-                    </p>
-                  )}
                 </p>
+                <div>
+                  {faucetURL && accountInfo.balance === 0 && (
+                    <div className="text-gray-500">
+                      You're wallet is currently empty. &nbsp;
+                      <a
+                        href="#"
+                        className="underline"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setShowFaucet(true);
+                        }}
+                      >
+                        To get started we can send you some Sats...
+                      </a>
+                      {renderFaucet()}
+                    </div>
+                  )}
+                </div>
 
                 <div className="mt-6 shadow p-4 rounded-lg">
                   <Card
-                    Card
-                    color="green-bitcoin"
+                    color="bg-green-bitcoin"
                     alias={accountInfo.alias}
                     satoshis={
                       typeof accountInfo.balance === "number"
@@ -84,7 +204,9 @@ export default function TestConnection() {
                   </p>
 
                   <div className="mt-8">
-                    <Button label="Give it a try now" />
+                    <a href="https://area402.herokuapp.com/demo">
+                      <Button label="Give it a try now" primary />
+                    </a>
                   </div>
                 </div>
               </div>

@@ -1,12 +1,15 @@
-import { Menu as MenuComponent, MenuButton } from "@reach/menu-button";
+import { Menu as MenuComponent } from "@headlessui/react";
 
 import MenuList from "./MenuList";
-import MenuItem from "./MenuItem";
+import MenuSubheader from "./MenuSubheader";
+import MenuItemButton from "./MenuItemButton";
+import MenuDivider from "./MenuDivider";
 
 const Menu = Object.assign(MenuComponent, {
-  Button: MenuButton,
   List: MenuList,
-  Item: MenuItem,
+  Subheader: MenuSubheader,
+  ItemButton: MenuItemButton,
+  Divider: MenuDivider,
 });
 
 export default Menu;

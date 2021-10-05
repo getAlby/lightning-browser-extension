@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 import DevMenu from "../../components/DevMenu";
-import Steps from "../../components/steps";
+import Steps from "../../components/Steps";
 import Intro from "../../screens/Onboard/Intro";
 import SetPassword from "../../screens/Onboard/SetPassword";
 import ChooseConnector from "../../screens/Onboard/ChooseConnector";
@@ -74,7 +74,7 @@ function App() {
 
   return (
     <div>
-      <DevMenu />
+      {process.env.NODE_ENV === "development" && <DevMenu />}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Steps steps={steps} />
       </div>

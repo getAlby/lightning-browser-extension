@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Input from "../../../components/Form/input";
-import Button from "../../../components/button";
+import Input from "../../../components/Form/Input";
+import Button from "../../../components/Button";
 import { useHistory } from "react-router-dom";
 import utils from "../../../../common/lib/utils";
 
@@ -37,25 +37,12 @@ export default function SetPassword() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="relative lg:grid lg:grid-cols-3 lg:gap-x-8 mt-20">
-        <div className="lg:col-span-1">
-          <div className="max-w-xs">
-            <img
-              src="assets/icons/satsymbol.svg"
-              alt="Sats"
-              className="max-w-xs"
-            />
-          </div>
-          <h2 className="mt-10 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-            The power of lightning in your browser
-          </h2>
-        </div>
-        <div className="lg:col-span-2">
-          <h1 className="text-3xl font-bold">Create your password</h1>
+      <div className="relative mt-24 lg:flex space-x-8">
+        <div className="lg:w-1/2">
+          <h1 className="text-3xl font-bold">Protect your wallet</h1>
           <p className="text-gray-500 mt-6">
-            You need to set a password so we can lock the wallet when it’s not
-            being used. Payments are never made without decrypting your secure
-            credentials.
+            Your wallet is securely encrypted with a password and needs to be
+            unlocked before usage.
           </p>
           <div className="w-4/5">
             <div className="mt-6">
@@ -63,9 +50,9 @@ export default function SetPassword() {
                 htmlFor="email"
                 className="block font-medium text-gray-700"
               >
-                Set a password
+                Choose a password:
               </label>
-              <div>
+              <div className="mt-1">
                 <Input
                   name="password"
                   type="password"
@@ -80,7 +67,7 @@ export default function SetPassword() {
                 htmlFor="email"
                 className="block font-medium text-gray-700"
               >
-                Lets confirm you typed it correct.
+                Lets confirm you typed it correct:
               </label>
               <div className="mt-1">
                 <Input
@@ -92,10 +79,19 @@ export default function SetPassword() {
               </div>
             </div>
           </div>
+          <div className="mt-8">
+            <Button label="Next" type="submit" primary />
+          </div>
         </div>
-      </div>
-      <div className="sm:py-16 sm:px-6 lg:px-8 float-right">
-        <Button label="Next" type="submit" />
+        <div className="mt-16 lg:mt-0 lg:w-1/2">
+          <div className="lg:flex h-full justify-center items-center">
+            <img
+              src="assets/icons/satsymbol.svg"
+              alt="Sats"
+              className="max-w-xs"
+            />
+          </div>
+        </div>
       </div>
     </form>
   );

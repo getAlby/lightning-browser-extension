@@ -1,10 +1,9 @@
 import React, { useState, MouseEvent } from "react";
-import axios from "axios";
 
 import msg from "../../common/lib/msg";
 import utils from "../../common/lib/utils";
 
-import Button from "../components/button";
+import Button from "../components/Button";
 import PublisherCard from "../components/PublisherCard";
 
 type Props = {
@@ -43,7 +42,7 @@ function LNURLAuth({ details, origin }: Props) {
         </dl>
         <div className="text-center">
           <div className="mb-5">
-            <Button onClick={confirm} label="Login" fullWidth />
+            <Button onClick={confirm} label="Login" fullWidth primary />
           </div>
 
           <p className="mb-3 underline text-sm text-gray-300">

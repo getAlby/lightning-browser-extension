@@ -1,6 +1,7 @@
 export default class WebLNProvider {
   constructor() {
     this.enabled = false;
+    this.isEnabled = false; // seems some webln implementations use webln.isEnabled and some use webln.enabled
     this.executing = false;
   }
 
@@ -10,6 +11,7 @@ export default class WebLNProvider {
     }
     return this.execute("enable").then((result) => {
       this.enabled = result.enabled;
+      this.isEnabled = result.enabled;
       return result;
     });
   }
@@ -63,13 +65,21 @@ export default class WebLNProvider {
     return this.execute("signMessage", { message });
   }
 
+  verifyMessage(signature, message) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling verifyMessage");
+    }
+
+    return this.execute("verifyMessage", { signature, message });
+  }
+
   execute(type, args) {
     const p = new Promise((resolve, reject) => {
       // post the request to the content script. from there it gets passed to the background script and back
       // in page script can not directly connect to the background script
       window.postMessage(
         {
-          application: "Joule",
+          application: "LBE",
           prompt: true,
           //action: `webln/${type}`, // TODO: think about a convention to cal the actions
           type: `${type}`,
@@ -79,19 +89,17 @@ export default class WebLNProvider {
       );
 
       function handleWindowMessage(messageEvent) {
-        console.log({ messageEvent });
         // check if it is a relevant message
         // there are some other events happening
         if (
           !messageEvent.data ||
           !messageEvent.data.response ||
-          messageEvent.data.application !== "Joule"
+          messageEvent.data.application !== "LBE"
         ) {
-          console.log("No response, ignoring");
           return;
         }
         if (messageEvent.data.data.error) {
-          reject(messageEvent.data.data.error);
+          reject(new Error(messageEvent.data.data.error));
         } else {
           // 1. data: the message data
           // 2. data: the data passed as data to the message
@@ -104,7 +112,6 @@ export default class WebLNProvider {
 
       window.addEventListener("message", handleWindowMessage);
     });
-    console.log(p);
     return p;
   }
 }

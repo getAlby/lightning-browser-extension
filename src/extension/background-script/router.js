@@ -31,16 +31,20 @@ const routes = {
   lnurlPay,
   sendPayment: ln.sendPayment,
   signMessage: ln.signMessage,
+  verifyMessage: ln.verifyMessage,
+  makeInvoice: ln.makeInvoice,
   getBalance: ln.getBalance,
   getPayments: payments.all,
   setPassword: setup.setPassword,
   accountInfo: accounts.info,
   addAccount: accounts.add,
+  getAccounts: accounts.all,
   removeAccount: accounts.remove,
   selectAccount: accounts.select,
   reset: setup.reset,
   status: setup.status,
   validateAccount: setup.validateAccount,
+  setIcon: setup.setIcon,
 };
 
 const router = (path) => {

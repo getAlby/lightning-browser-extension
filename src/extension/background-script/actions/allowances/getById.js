@@ -6,7 +6,8 @@ const getById = async (message, sender) => {
 
   console.log(allowance);
   if (allowance) {
-    allowance.usedBudget = parseInt(allowance.totalBudget) - parseInt(allowance.remainingBudget);
+    allowance.usedBudget =
+      parseInt(allowance.totalBudget) - parseInt(allowance.remainingBudget);
     allowance.percentage = (
       (allowance.usedBudget / allowance.totalBudget) *
       100

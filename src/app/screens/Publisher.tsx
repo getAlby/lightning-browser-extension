@@ -7,18 +7,15 @@ import CrossIcon from "@bitcoin-design/bitcoin-icons/svg/outline/cross.svg";
 import { DotsHorizontalIcon } from "@heroicons/react/solid";
 
 import utils from "../../common/lib/utils";
-import Button from "../components/button";
+import Button from "../components/Button";
 import Container from "../components/Container";
 import Menu from "../components/Menu";
 import PublisherCard from "../components/PublisherCard";
-import Progressbar from "../components/Shared/progressbar";
+import Progressbar from "../components/Progressbar";
 import TransactionsTable from "../components/TransactionsTable";
 import CurrencyInput from "../components/Form/CurrencyInput";
 
 dayjs.extend(relativeTime);
-
-// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-Modal.setAppElement("#options-root");
 
 const customStyles = {
   content: {
@@ -164,7 +161,7 @@ function Publisher() {
               </div>
             </div>
             <div className="flex justify-end p-5">
-              <Button onClick={updateAllowance} label="Save" />
+              <Button onClick={updateAllowance} label="Save" primary />
             </div>
           </Modal>
         </div>
@@ -180,7 +177,7 @@ function Publisher() {
               subTitle: (
                 <p className="truncate">
                   {payment.name} @{" "}
-                  <a target="_blank" href={payment.location}>
+                  <a target="_blank" href={payment.location} rel="noreferrer">
                     {payment.location}
                   </a>
                 </p>

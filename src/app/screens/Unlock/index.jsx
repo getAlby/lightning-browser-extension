@@ -3,8 +3,8 @@ import { createHashHistory } from "history";
 import { LockOpenIcon } from "@heroicons/react/solid";
 
 import utils from "../../../common/lib/utils";
-import Button from "../../components/button";
-import Input from "../../components/Form/input";
+import Button from "../../components/Button";
+import Input from "../../components/Form/Input";
 
 class Unlock extends React.Component {
   constructor(props) {
@@ -62,7 +62,7 @@ class Unlock extends React.Component {
               onChange={this.handlePasswordChange}
             />
           </div>
-          <Button type="submit" label="unlock" fullWidth />
+          <Button type="submit" label="unlock" fullWidth primary />
         </form>
         {this.state.error && (
           <p>

@@ -7,16 +7,21 @@ import Navbar from "../../components/Navbar";
 import UserMenu from "../../components/UserMenu";
 import Publishers from "../../screens/Publishers";
 import Publisher from "../../screens/Publisher";
+import ChooseConnector from "../../screens/Options/ChooseConnector";
+import TestConnection from "../../screens/Options/TestConnection";
 
 function Options() {
   const [accountInfo, setAccountInfo] = useState({});
 
-  useEffect(() => {
-    utils.call("accountInfo").then((response) => {
+  function loadAccountInfo() {
+    return utils.call("accountInfo").then((response) => {
       const { alias } = response.info;
       const balance = parseInt(response.balance.balance); // TODO: handle amounts
       setAccountInfo({ alias, balance });
     });
+  }
+  useEffect(() => {
+    loadAccountInfo();
   }, []);
 
   return (
@@ -28,7 +33,7 @@ function Options() {
             ? `${accountInfo.balance} Sats`
             : ""
         }
-        right={<UserMenu />}
+        right={<UserMenu onAccountSwitch={loadAccountInfo} />}
       >
         <Navbar.Link href="/publishers">Publishers</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>
@@ -69,6 +74,16 @@ function Options() {
                 join the development on GitHub
               </a>
             </p>
+          </Container>
+        </Route>
+        <Route path="/accounts/new">
+          <Container>
+            <ChooseConnector />
+          </Container>
+        </Route>
+        <Route path="/test-connection">
+          <Container>
+            <TestConnection />
           </Container>
         </Route>
       </Switch>

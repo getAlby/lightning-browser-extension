@@ -1,6 +1,9 @@
-import memoizee from "memoizee";
 import axios from "axios";
+import sha256 from "crypto-js/sha256";
+import Hex from "crypto-js/enc-hex";
 import Base from "./base";
+import utils from "../../../common/lib/utils";
+import HashKeySigner from "../../../common/utils/signer";
 
 export default class LndHub extends Base {
   async init() {
@@ -31,6 +34,12 @@ export default class LndHub extends Base {
     return this.request("POST", "/payinvoice", {
       invoice: args.paymentRequest,
     }).then((data) => {
+      if (data.error) {
+        return { error: data.message };
+      }
+      if (data.payment_error) {
+        return { error: data.payment_error };
+      }
       if (
         typeof data.payment_hash === "object" &&
         data.payment_hash.type === "Buffer"
@@ -45,20 +54,75 @@ export default class LndHub extends Base {
           data.payment_preimage.data
         ).toString("hex");
       }
-      return { data };
+      return {
+        data: {
+          preimage: data.payment_preimage,
+          paymentHash: data.payment_hash,
+          route: data.payment_route,
+        },
+      };
     });
   }
 
   signMessage(args) {
-    return Promise.reject(new Error("Not supported with Lndhub"));
+    // make sure we got the config to create a new key
+    if (!this.config.url || !this.config.login || !this.config.password) {
+      return Promise.reject(new Error("Missing config"));
+    }
+    if (!args.message) {
+      return Promise.reject(new Error("Invalid message"));
+    }
+    const message = utils.stringToUint8Array(args.message);
+    // create a signing key from the lndhub URL and the login/password combination
+    const keyHex = sha256(
+      `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
+    ).toString(Hex);
+    if (!keyHex) {
+      return Promise.reject(new Error("Could not create key"));
+    }
+    const signer = new HashKeySigner(keyHex);
+    const signedMessageDERHex = signer.sign(message).toDER("hex");
+    // make sure we got some signed message
+    if (!signedMessageDERHex) {
+      return Promise.reject(new Error("Signing failed"));
+    }
+    return Promise.resolve({
+      data: {
+        signature: signedMessageDERHex,
+      },
+    });
+  }
+
+  verifyMessage(args) {
+    // create a signing key from the lndhub URL and the login/password combination
+    const keyHex = sha256(
+      `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
+    ).toString(Hex);
+    if (!keyHex) {
+      return Promise.reject(new Error("Could not create key"));
+    }
+    const signer = new HashKeySigner(keyHex);
+    return Promise.resolve({
+      data: {
+        valid: signer.verify(args.message, args.signature),
+      },
+    });
   }
 
   makeInvoice(args) {
     return this.request("POST", "/addinvoice", {
       amt: args.amount,
-      memo: args.defaultMemo,
+      memo: args.memo,
     }).then((data) => {
-      return { data };
+      if (typeof data.r_hash === "object" && data.r_hash.type === "Buffer") {
+        data.r_hash = Buffer.from(data.r_hash.data).toString("hex");
+      }
+      return {
+        data: {
+          paymentRequest: data.payment_request,
+          rHash: data.r_hash,
+        },
+      };
     });
   }
 
@@ -121,23 +185,31 @@ export default class LndHub extends Base {
     } else if (args !== undefined) {
       reqConfig.params = args;
     }
+    let data;
     try {
       const res = await axios(reqConfig);
-      let data = res.data;
-      if (data && data.error) {
-        if (data.code * 1 === 1 && !this.noRetry) {
-          await this.authorize();
-          this.noRetry = true;
-          return this.request(method, path, args, defaultValues);
-        }
-      }
-      if (defaultValues) {
-        data = Object.assign(Object.assign({}, defaultValues), data);
-      }
-      return data;
+      data = res.data;
     } catch (e) {
       console.log(e);
-      throw new Error(error.response.data);
+      throw new Error(e.message);
     }
+    if (data && data.error) {
+      if (data.code * 1 === 1 && !this.noRetry) {
+        try {
+          await this.authorize();
+        } catch (e) {
+          console.log(e);
+          throw new Error(e.message);
+        }
+        this.noRetry = true;
+        return this.request(method, path, args, defaultValues);
+      } else {
+        throw new Error(data.message);
+      }
+    }
+    if (defaultValues) {
+      data = Object.assign(Object.assign({}, defaultValues), data);
+    }
+    return data;
   }
 }

@@ -9,6 +9,14 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
+// init env variables otherwise the EnvironmentPlugin complains if those are not set.
+if (!process.env.FAUCET_URL) {
+  process.env.FAUCET_URL = null;
+}
+if (!process.env.FAUCET_K) {
+  process.env.FAUCET_K = null;
+}
+
 const viewsPath = path.join(__dirname, "static", "views");
 const nodeEnv = process.env.NODE_ENV || "development";
 const destPath = path.join(__dirname, "dist", nodeEnv);
@@ -124,7 +132,12 @@ module.exports = {
     // TODO: reenable
     // new webpack.SourceMapDevToolPlugin({ filename: false }),
     // environmental variables
-    new webpack.EnvironmentPlugin(["NODE_ENV", "TARGET_BROWSER"]),
+    new webpack.EnvironmentPlugin([
+      "NODE_ENV",
+      "TARGET_BROWSER",
+      "FAUCET_URL",
+      "FAUCET_K",
+    ]),
     // delete previous build files
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: [

@@ -12,7 +12,7 @@ const add = (message, sender) => {
   const password = state.getState().password;
   const currentAccountId = state.getState().currentAccountId;
 
-  const accountId = utils.getHash(newAccount.name);
+  const accountId = Object.keys(accounts).length + 1;
   console.log(`Created account ${accountId}`);
 
   newAccount.config = encryptData(newAccount.config, password);
@@ -23,6 +23,9 @@ const add = (message, sender) => {
   if (!currentAccountId) {
     state.setState({ currentAccountId: accountId });
   }
+
+  // make sure we immediately persist the new account
+  state.getState().saveToStorage();
   return Promise.resolve({ data: { accountId: accountId } });
 };
 

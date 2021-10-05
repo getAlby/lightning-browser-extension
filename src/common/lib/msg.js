@@ -4,7 +4,7 @@ const msg = {
   request: (type, args, overwrites) => {
     return browser.runtime
       .sendMessage({
-        application: "Joule",
+        application: "LBE",
         prompt: true,
         type: type,
         args: args,
@@ -20,7 +20,7 @@ const msg = {
   },
   reply: (data) => {
     return browser.runtime.sendMessage({
-      application: "Joule",
+      application: "LBE",
       response: true,
       data: data,
       origin: { internal: true },
@@ -28,7 +28,7 @@ const msg = {
   },
   error: (error) => {
     return browser.runtime.sendMessage({
-      application: "Joule",
+      application: "LBE",
       response: true,
       error: error,
       origin: { internal: true },

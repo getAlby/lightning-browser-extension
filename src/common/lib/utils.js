@@ -6,7 +6,7 @@ const utils = {
   call: (type, args, overwrites) => {
     return browser.runtime
       .sendMessage({
-        application: "Joule",
+        application: "LBE",
         prompt: true,
         type: type,
         args: args,
@@ -24,7 +24,7 @@ const utils = {
     const notification = Object.assign(
       {
         type: "basic",
-        iconUrl: browser.extension.getURL("assets/icons/favicon-48.png"),
+        iconUrl: "assets/icons/satsymbol-48.png",
       },
       details
     );
@@ -50,10 +50,16 @@ const utils = {
       return ("0" + (byte & 0xff).toString(16)).slice(-2);
     }).join("");
   },
+  bytesToString: (bytes) => {
+    return String.fromCharCode.apply(null, bytes);
+  },
   hexToUint8Array: (hexString) => {
     return new Uint8Array(
       hexString.match(/.{1,2}/g).map((byte) => parseInt(byte, 16))
     );
+  },
+  stringToUint8Array: (str) => {
+    return Uint8Array.from(str, (x) => x.charCodeAt(0));
   },
   openPage: (page) => {
     browser.tabs.create({ url: browser.runtime.getURL(page) });

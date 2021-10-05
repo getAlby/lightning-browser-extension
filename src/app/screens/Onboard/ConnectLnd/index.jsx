@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import { UploadIcon } from "@heroicons/react/outline";
 
-import Input from "../../../components/Form/input";
-import Button from "../../../components/button";
+import Input from "../../../components/Form/Input";
+import Button from "../../../components/Button";
 import { useHistory } from "react-router-dom";
 
 import utils from "../../../../common/lib/utils";
@@ -39,7 +39,6 @@ export default function ConnectLnd() {
 
     try {
       const addResult = await utils.call("addAccount", account);
-      console.log(addResult);
       if (addResult.accountId) {
         const selectResult = await utils.call("selectAccount", {
           id: addResult.accountId,
@@ -91,22 +90,17 @@ export default function ConnectLnd() {
   }
 
   return (
-    <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
-      <div className="relative">
-        <div className="h-32">
-          <img className="mb-12" src="https://i.ibb.co/3F3mCkR/logox.png" />
-        </div>
-        <h1 className="text-3xl font-bold mt-4">Connect to your remote node</h1>
+    <div className="relative mt-24 lg:flex space-x-8">
+      <div className="lg:w-1/2">
+        <h1 className="text-3xl font-bold">Connect to your LND node</h1>
         <p className="text-gray-500 mt-6">
-          You will need to retreive the node url and an admin macaroon. Not sure
-          where to find these details?
+          You will need to retrieve the node url and an admin macaroon.
         </p>
-        <p className="text-orange-bitcoin mt-2">Check out this guides.</p>
         <form onSubmit={handleSubmit}>
           <div className="w-4/5">
             <div className="mt-6">
               <label className="block font-medium text-gray-700">Address</label>
-              <div>
+              <div className="mt-1">
                 <Input
                   name="url"
                   placeholder="https://"
@@ -160,17 +154,27 @@ export default function ConnectLnd() {
               </div>
             </div>
           </div>
-          <div className="mt-8 w-2/5">
-            <Button type="submit" label="Continue" />
+          <div className="mt-8 flex space-x-4">
+            <Button
+              label="Back"
+              onClick={(e) => {
+                e.preventDefault();
+                history.goBack();
+                return false;
+              }}
+            />
+            <Button type="submit" label="Continue" primary />
           </div>
         </form>
       </div>
-
-      <div
-        className="mt-10 -mx-4 relative lg:mt-0 lg:flex lg:items-center"
-        aria-hidden="true"
-      >
-        <img src="https://i.ibb.co/QfF1PP6/Frame-20.png" />
+      <div className="mt-16 lg:mt-0 lg:w-1/2">
+        <div className="lg:flex h-full justify-center items-center">
+          <img
+            src="assets/icons/satsymbol.svg"
+            alt="Sats"
+            className="max-w-xs"
+          />
+        </div>
       </div>
     </div>
   );

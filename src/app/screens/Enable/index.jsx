@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { createHashHistory } from "history";
 
-import Button from "../../components/button";
+import Button from "../../components/Button";
 import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
 
@@ -60,7 +60,13 @@ function Enable(props) {
         <p className="text-gray-500 mb-4">Do you want to grant them access?</p>
 
         <div className="mt-8 mb-5">
-          <Button type="primary" label="Enable" fullWidth onClick={enable} />
+          <Button
+            type="primary"
+            label="Enable"
+            fullWidth
+            onClick={enable}
+            primary
+          />
         </div>
 
         <p className="mb-3 underline text-sm text-gray-300">
