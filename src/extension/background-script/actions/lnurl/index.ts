@@ -11,7 +11,6 @@ import utils from "../../../../common/lib/utils";
 import lnurlLib from "../../../../common/lib/lnurl";
 import state from "../../state";
 import db from "../../db";
-import { publishPaymentNotification } from "../ln/sendPayment";
 
 const LNURLAUTH_CANONICAL_PHRASE =
   "DO NOT EVER SIGN THIS TEXT WITH YOUR PRIVATE KEYS! IT IS ONLY USED FOR DERIVATION OF LNURL-AUTH HASHING-KEY, DISCLOSING ITS SIGNATURE WILL COMPROMISE YOUR LNURL-AUTH IDENTITY AND MAY LEAD TO LOSS OF FUNDS!";
@@ -190,7 +189,7 @@ export async function lnurlPay(message, sender) {
     const response = await connector.sendPayment({
       paymentRequest,
     });
-    publishPaymentNotification(
+    utils.publishPaymentNotification(
       message.args.message,
       paymentRequestDetails,
       response

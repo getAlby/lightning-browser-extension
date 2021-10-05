@@ -37,7 +37,7 @@ async function sendPaymentWithAllowance(
   const response = await connector.sendPayment({
     paymentRequest: message.args.paymentRequest,
   });
-  publishPaymentNotification(message, paymentRequestDetails, response);
+  utils.publishPaymentNotification(message, paymentRequestDetails, response);
 
   return response;
 }
@@ -57,7 +57,7 @@ export async function weblnPay(message) {
     const response = await connector.sendPayment({
       paymentRequest,
     });
-    publishPaymentNotification(
+    utils.publishPaymentNotification(
       message.args.message,
       paymentRequestDetails,
       response
@@ -67,22 +67,6 @@ export async function weblnPay(message) {
   } catch (e) {
     console.log(e.message);
   }
-}
-
-export function publishPaymentNotification(
-  message,
-  paymentRequestDetails,
-  response
-) {
-  let status = "success"; // default. let's hope for success
-  if (response.error || (response.data && response.data.payment_error)) {
-    status = "failed";
-  }
-  PubSub.publish(`ln.sendPayment.${status}`, {
-    response,
-    paymentRequestDetails,
-    origin: message.origin,
-  });
 }
 
 export default sendPayment;

@@ -1,6 +1,7 @@
 import PubSub from "pubsub-js";
 import state from "../../state";
-import sendPayment, { weblnPay } from "./sendPayment";
+import sendPayment from "./sendPayment";
+import weblnPay from "./weblnPay";
 import signMessage from "./signMessage";
 import getInfo from "./getInfo";
 import makeInvoice from "./makeInvoice";
