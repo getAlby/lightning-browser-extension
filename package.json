@@ -75,7 +75,7 @@
     "webextension-polyfill": "^0.8.0",
     "webpack-dev-server": "^4.2.1",
     "webpack-sources": "^3.2.1",
-    "zustand": "^3.5.10"
+    "zustand": "^3.5.12"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
