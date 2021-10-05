@@ -68,7 +68,7 @@ jobs:
       - name: Upload releases to S3
         uses: zdurham/s3-upload-github-action@master
         with:
-          args: --acl public-read
+          args: --acl public-read --content-type application/x-xpinstall
 
   release-chrome-nightly:
     runs-on: ubuntu-latest
