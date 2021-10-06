@@ -128,7 +128,7 @@ jobs:
 
     steps:
       - name: Find Comment
-        if: ${{ env.AWS_S3_BUCKET }}
+        if: ${{ env.S3_BUCKET }}
         uses: peter-evans/find-comment@v1
         id: fc
         with:
@@ -137,7 +137,7 @@ jobs:
           body-includes: Build files
 
       - name: Create or update comment
-        if: ${{ env.AWS_S3_BUCKET }}
+        if: ${{ env.S3_BUCKET }}
         uses: peter-evans/create-or-update-comment@v1
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
