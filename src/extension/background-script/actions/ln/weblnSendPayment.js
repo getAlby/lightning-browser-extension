@@ -43,7 +43,7 @@ async function sendPaymentWithAllowance(
 }
 
 async function payWithPrompt(message) {
-  await utils.openPrompt(message);
+  await utils.openPrompt({ ...message, type: "sendPayment" });
 }
 
 export default weblnSendPayment;

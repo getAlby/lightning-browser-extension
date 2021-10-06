@@ -75,7 +75,7 @@ class Prompt extends React.Component {
             </Route>
             <Route
               exact
-              path="/weblnSendPayment"
+              path="/sendPayment"
               render={(props) => (
                 <ConfirmPayment
                   invoice={this.state.invoice}
