@@ -28,7 +28,7 @@ class ConfirmPayment extends React.Component {
 
     try {
       this.setState({ loading: true });
-      await utils.call("weblnPay", {
+      await utils.call("sendPayment", {
         message: { origin: this.props.origin },
         paymentRequest: this.props.paymentRequest,
       });

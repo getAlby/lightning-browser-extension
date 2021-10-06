@@ -3,7 +3,7 @@ import { parsePaymentRequest } from "invoices";
 import state from "../../state";
 import utils from "../../../../common/lib/utils";
 
-export default async function weblnPay(message) {
+export default async function sendPayment(message) {
   const { paymentRequest } = message.args;
   const connector = state.getState().getConnector();
   const paymentRequestDetails = parsePaymentRequest({

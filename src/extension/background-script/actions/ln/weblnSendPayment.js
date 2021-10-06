@@ -4,7 +4,7 @@ import utils from "../../../../common/lib/utils";
 import state from "../../state";
 import db from "../../db";
 
-const sendPayment = async (message, sender) => {
+const weblnSendPayment = async (message, sender) => {
   PubSub.publish(`ln.sendPayment.start`, message);
 
   const paymentRequest = message.args.paymentRequest;
@@ -69,4 +69,4 @@ export async function weblnPay(message) {
   }
 }
 
-export default sendPayment;
+export default weblnSendPayment;
