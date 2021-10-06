@@ -1,11 +1,9 @@
-name: Build Production
+name: Build and upload nightly release
 
 on:
   push:
     branches:
       - master
-    tags:
-      - v*
   pull_request:
     types: [opened, synchronize]
 
@@ -62,10 +60,12 @@ jobs:
     name: release-firefox-nightly
     steps:
       - name: Download firefox.xpi
+        if: ${{ env.S3_BUCKET }}
         uses: actions/download-artifact@v2
         with:
           name: firefox.xpi
       - name: Upload releases to S3
+        if: ${{ env.S3_BUCKET }}
         uses: zdurham/s3-upload-github-action@master
         with:
           args: --acl public-read --content-type application/x-xpinstall
@@ -84,10 +84,12 @@ jobs:
     name: release-chrome-nightly
     steps:
       - name: Download chrome.zip
+        if: ${{ env.S3_BUCKET }}
         uses: actions/download-artifact@v2
         with:
           name: chrome.zip
       - name: Upload releases to S3
+        if: ${{ env.S3_BUCKET }}
         uses: zdurham/s3-upload-github-action@master
         with:
           args: --acl public-read
@@ -106,22 +108,27 @@ jobs:
     name: release-opera-nightly
     steps:
       - name: Download opera.crz
+        if: ${{ env.S3_BUCKET }}
         uses: actions/download-artifact@v2
         with:
           name: opera.crx
       - name: Upload releases to S3
+        if: ${{ env.S3_BUCKET }}
         uses: zdurham/s3-upload-github-action@master
         with:
           args: --acl public-read
 
   comment-build-links:
+    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     needs: [build, release-firefox-nightly, release-chrome-nightly, release-opera-nightly]
     name: comment-release-links
-    if: ${{ github.event_name == 'pull_request' }}
+    env: 
+      S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
 
     steps:
       - name: Find Comment
+        if: ${{ env.S3_BUCKET }}
         uses: peter-evans/find-comment@v1
         id: fc
         with:
@@ -130,12 +137,13 @@ jobs:
           body-includes: Build files
 
       - name: Create or update comment
+        if: ${{ env.S3_BUCKET }}
         uses: peter-evans/create-or-update-comment@v1
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             Build files:
-            * [Firefox](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/alby-firefox-nightly-${{ github.event.pull_request.number }}.xpi)
-            * [Chrome](https://elbee-releases-public.s3.eu-central-1.amazonaws.com/alby-chrome-nightly-${{ github.event.pull_request.number }}.zip)
+            * [Firefox](https://${{ env.S3_BUCKET }}.s3.eu-central-1.amazonaws.com/alby-firefox-nightly-${{ github.event.pull_request.number }}.xpi)
+            * [Chrome](https://${{ env.S3_BUCKET }}.s3.eu-central-1.amazonaws.com/alby-chrome-nightly-${{ github.event.pull_request.number }}.zip)
           edit-mode: replace
