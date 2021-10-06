@@ -1,4 +1,4 @@
-name: Build Production
+name: Build and upload nightly release
 
 on:
   push:
@@ -49,6 +49,7 @@ jobs:
           path: dist/production/opera.crx
 
   release-firefox-nightly:
+    if: ${{ secrets.AWS_S3_BUCKET }}
     runs-on: ubuntu-latest
     needs: build
     env:
@@ -71,6 +72,7 @@ jobs:
           args: --acl public-read --content-type application/x-xpinstall
 
   release-chrome-nightly:
+    if: ${{ secrets.AWS_S3_BUCKET }}
     runs-on: ubuntu-latest
     needs: build
     env:
@@ -93,6 +95,7 @@ jobs:
           args: --acl public-read
 
   release-opera-nightly:
+    if: ${{ secrets.AWS_S3_BUCKET }}
     runs-on: ubuntu-latest
     needs: build
     env:
@@ -115,10 +118,10 @@ jobs:
           args: --acl public-read
 
   comment-build-links:
+    if: ${{ secrets.AWS_S3_BUCKET && github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     needs: [build, release-firefox-nightly, release-chrome-nightly, release-opera-nightly]
     name: comment-release-links
-    if: ${{ github.event_name == 'pull_request' }}
 
     steps:
       - name: Find Comment
