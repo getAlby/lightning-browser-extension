@@ -1,7 +1,6 @@
 name: Build PR previews
 
-on:
-  on: issue_comment
+on: issue_comment
 
 jobs:
   build:
