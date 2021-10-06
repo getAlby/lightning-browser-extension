@@ -4,10 +4,8 @@ on:
   push:
     branches:
       - master
-    tags:
-      - v*
   pull_request_target:
-    types: [opened, synchronize]
+    types: [opened, synchronize, labeled]
 
 jobs:
   build:
