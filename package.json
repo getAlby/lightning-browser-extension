@@ -46,7 +46,7 @@
     "@heroicons/react": "^1.0.4",
     "@tailwindcss/forms": "^0.3.4",
     "assert": "^2.0.0",
-    "axios": "^0.21.4",
+    "axios": "^0.22.0",
     "bech32": "^2.0.0",
     "browser-polyfill": "^3.20.2",
     "crypto-browserify": "^3.12.0",
