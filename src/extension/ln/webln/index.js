@@ -43,7 +43,7 @@ export default class WebLNProvider {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling sendPayment");
     }
-    return this.execute("weblnSendPayment", { paymentRequest });
+    return this.execute("sendPaymentOrPrompt", { paymentRequest });
   }
 
   makeInvoice(args) {

@@ -4,7 +4,7 @@ import utils from "../../../../common/lib/utils";
 import state from "../../state";
 import db from "../../db";
 
-const weblnSendPayment = async (message, sender) => {
+const sendPaymentOrPrompt = async (message, sender) => {
   PubSub.publish(`ln.sendPayment.start`, message);
 
   const paymentRequest = message.args.paymentRequest;
@@ -46,4 +46,4 @@ async function payWithPrompt(message) {
   await utils.openPrompt({ ...message, type: "sendPayment" });
 }
 
-export default weblnSendPayment;
+export default sendPaymentOrPrompt;
