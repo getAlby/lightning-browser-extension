@@ -49,7 +49,6 @@ jobs:
           path: dist/production/opera.crx
 
   release-firefox-nightly:
-    if: ${{ secrets.AWS_S3_BUCKET }}
     runs-on: ubuntu-latest
     needs: build
     env:
@@ -63,16 +62,17 @@ jobs:
     name: release-firefox-nightly
     steps:
       - name: Download firefox.xpi
+        if: ${{ secrets.AWS_S3_BUCKET }}
         uses: actions/download-artifact@v2
         with:
           name: firefox.xpi
       - name: Upload releases to S3
+        if: ${{ secrets.AWS_S3_BUCKET }}
         uses: zdurham/s3-upload-github-action@master
         with:
           args: --acl public-read --content-type application/x-xpinstall
 
   release-chrome-nightly:
-    if: ${{ secrets.AWS_S3_BUCKET }}
     runs-on: ubuntu-latest
     needs: build
     env:
@@ -86,16 +86,17 @@ jobs:
     name: release-chrome-nightly
     steps:
       - name: Download chrome.zip
+        if: ${{ secrets.AWS_S3_BUCKET }}
         uses: actions/download-artifact@v2
         with:
           name: chrome.zip
       - name: Upload releases to S3
+        if: ${{ secrets.AWS_S3_BUCKET }}
         uses: zdurham/s3-upload-github-action@master
         with:
           args: --acl public-read
 
   release-opera-nightly:
-    if: ${{ secrets.AWS_S3_BUCKET }}
     runs-on: ubuntu-latest
     needs: build
     env:
@@ -109,22 +110,25 @@ jobs:
     name: release-opera-nightly
     steps:
       - name: Download opera.crz
+        if: ${{ secrets.AWS_S3_BUCKET }}
         uses: actions/download-artifact@v2
         with:
           name: opera.crx
       - name: Upload releases to S3
+        if: ${{ secrets.AWS_S3_BUCKET }}
         uses: zdurham/s3-upload-github-action@master
         with:
           args: --acl public-read
 
   comment-build-links:
-    if: ${{ secrets.AWS_S3_BUCKET && github.event_name == 'pull_request' }}
+    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     needs: [build, release-firefox-nightly, release-chrome-nightly, release-opera-nightly]
     name: comment-release-links
 
     steps:
       - name: Find Comment
+        if: ${{ secrets.AWS_S3_BUCKET }}
         uses: peter-evans/find-comment@v1
         id: fc
         with:
@@ -133,6 +137,7 @@ jobs:
           body-includes: Build files
 
       - name: Create or update comment
+        if: ${{ secrets.AWS_S3_BUCKET }}
         uses: peter-evans/create-or-update-comment@v1
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
