@@ -46,27 +46,4 @@ async function payWithPrompt(message) {
   await utils.openPrompt(message);
 }
 
-export async function weblnPay(message) {
-  const { paymentRequest } = message.args;
-  const connector = state.getState().getConnector();
-  const paymentRequestDetails = parsePaymentRequest({
-    request: paymentRequest,
-  });
-
-  try {
-    const response = await connector.sendPayment({
-      paymentRequest,
-    });
-    utils.publishPaymentNotification(
-      message.args.message,
-      paymentRequestDetails,
-      response
-    );
-
-    return response;
-  } catch (e) {
-    console.log(e.message);
-  }
-}
-
 export default weblnSendPayment;
