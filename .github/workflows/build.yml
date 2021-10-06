@@ -15,7 +15,7 @@ jobs:
       FAUCET_K: ${{ secrets.FAUCET_K }}
 
     name: build-prod
-    if: ${{ github.ref == 'refs/heads/master' || contains( github.event.pull_request.labels.*.name, 'ready-to-test') }}
+    if: ${{ github.ref == 'refs/heads/master' || contains( github.event.pull_request_target.labels.*.name, 'ready-to-test') }}
     
     steps:
       - uses: actions/checkout@v2
