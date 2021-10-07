@@ -11,7 +11,7 @@ type Props = {
 
 export default function Navbar({ title, subtitle, children, right }: Props) {
   return (
-    <div className="px-4 py-2 flex justify-between items-center border-b border-gray-200">
+    <div className="px-4 py-2 bg-white flex justify-between items-center border-b border-gray-200">
       <div className="flex w-8/12 md:w-4/12 lg:w-3/12">
         <div className="px-2 py-1 flex items-center bg-gray-100 rounded-md">
           <img
