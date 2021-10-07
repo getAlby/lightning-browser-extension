@@ -77,7 +77,7 @@ function Publisher() {
               type: "sent",
               date: dayjs(payment.createdAt).fromNow(),
               // date: dayjs.unix(payment.createdAt),
-              title: payment.description,
+              title: payment.name,
               subTitle: (
                 <p className="truncate">
                   {payment.name} @{" "}

@@ -1,5 +1,5 @@
 import React from "react";
-import { ChevronRightIcon } from "@heroicons/react/outline";
+import { ChevronRightIcon } from "@heroicons/react/solid";
 
 import Badge from "../Badge";
 import Progressbar from "../Progressbar";
@@ -70,7 +70,10 @@ export default function PublishersTable({ publishers, navigateToPublisher }) {
                 )}
               </td>
               <td className="w-10">
-                <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+                <ChevronRightIcon
+                  className="h-6 w-6 text-gray-500"
+                  aria-hidden="true"
+                />
               </td>
             </tr>
           ))}
