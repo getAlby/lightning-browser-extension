@@ -80,11 +80,11 @@ export default function TransactionsTable({ transactions }: Props) {
                         </p>
                         <p className="text-xs text-gray-400">{tx.date}</p>
                       </div>
-                      <Disclosure.Button className="block h-0 mt-2">
+                      <Disclosure.Button className="block h-0 mt-2 text-gray-500 hover:text-black transition-color duration-200">
                         <ChevronDownIcon
                           className={`${
                             open ? "transform rotate-180" : ""
-                          } w-5 h-5 text-gray-500`}
+                          } w-5 h-5`}
                         />
                       </Disclosure.Button>
                     </div>
