@@ -14,7 +14,7 @@ export default function Navbar({ title, subtitle, children, right }: Props) {
     <div className="px-4 py-2 flex justify-between items-center border-b border-gray-200">
       <div className="w-8/12 md:w-4/12 lg:w-3/12 flex items-center">
         <img
-          className="-ml-1 mr-4 w-8 h-8 opacity-50"
+          className="-ml-1 mr-2 w-8 h-8 opacity-50"
           src={WalletIcon}
           alt=""
           aria-hidden="true"
