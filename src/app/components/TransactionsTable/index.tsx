@@ -42,7 +42,7 @@ export default function TransactionsTable({ transactions }: Props) {
   }
 
   return (
-    <div className="shadow overflow-hidden border-b border-gray-200 rounded-lg">
+    <div className="shadow overflow-hidden rounded-lg">
       <div className="bg-white divide-y divide-gray-200">
         {transactions.map((tx) => (
           <div className="px-3 py-2">
