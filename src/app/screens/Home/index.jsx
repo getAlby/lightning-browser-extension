@@ -151,7 +151,7 @@ class Home extends React.Component {
                     <a
                       target="_blank"
                       title={payment.name}
-                      href={`options.html#/publishers`}
+                      href={`options.html#/publishers/${allowance.id}`}
                       rel="noreferrer"
                     >
                       {payment.name}
@@ -163,7 +163,7 @@ class Home extends React.Component {
                     <a
                       target="_blank"
                       title={payment.name}
-                      href={`options.html#/publishers`}
+                      href={`options.html#/publishers/${allowance.id}`}
                       rel="noreferrer"
                     >
                       {payment.host}
