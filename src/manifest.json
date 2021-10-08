@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Lightning",
+  "name": "Alby",
   "version": "1.0.0",
 
   "icons": {
@@ -9,8 +9,8 @@
     "48": "assets/icons/satsymbol-black-48.png",
     "128": "assets/icons/satsymbol-black-128.png"
   },
-  "description": "Lightning up the browser",
-  "homepage_url": "https://github.com/bumi/lightning-browser-extension",
+  "description": "Lightning buzz for your Browser. The extension for the Bitcoin Lightning Network.",
+  "homepage_url": "https://getAlby.com/",
   "web_accessible_resources": ["js/inpageScript.bundle.js"],
   "permissions": [
     "nativeMessaging",
@@ -24,14 +24,14 @@
 
   "content_security_policy": "script-src 'self'; object-src 'self'",
 
-  "__chrome|firefox__author": "bumi",
+  "__chrome|firefox__author": "Alby",
   "__opera__developer": {
-    "name": "bumi"
+    "name": "Alby"
   },
 
   "__firefox__browser_specific_settings": {
     "gecko": {
-      "id": "{9d83fc85-eb3a-4877-88e3-94b3c558383c}"
+      "id": "extension@getalby.com"
     }
   },
 
@@ -46,7 +46,7 @@
       "48": "assets/icons/satsymbol-black-48.png",
       "128": "assets/icons/satsymbol-black-128.png"
     },
-    "default_title": "Lightning",
+    "default_title": "Alby",
     "__chrome|opera__chrome_style": false,
     "__firefox__browser_style": false
   },
