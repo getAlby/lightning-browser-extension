@@ -24,7 +24,7 @@ const sendPaymentOrPrompt = async (message, sender) => {
   ) {
     return sendPaymentWithAllowance(message, paymentRequestDetails, allowance);
   } else {
-    return payWithPrompt(message);
+    return payWithPrompt(message, paymentRequestDetails);
   }
 };
 
@@ -42,8 +42,18 @@ async function sendPaymentWithAllowance(
   return response;
 }
 
-async function payWithPrompt(message) {
-  await utils.openPrompt({ ...message, type: "sendPayment" });
+async function payWithPrompt(message, paymentRequestDetails) {
+  try {
+    const response = await utils.openPrompt({
+      ...message,
+      type: "sendPayment",
+    });
+    utils.publishPaymentNotification(message, paymentRequestDetails, response);
+    return response;
+  } catch (e) {
+    console.log("Payment cancelled", e);
+    return { error: e.message };
+  }
 }
 
 export default sendPaymentOrPrompt;

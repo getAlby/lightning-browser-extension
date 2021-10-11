@@ -28,10 +28,11 @@ class ConfirmPayment extends React.Component {
 
     try {
       this.setState({ loading: true });
-      await utils.call("sendPayment", {
+      const response = await utils.call("sendPayment", {
         message: { origin: this.props.origin },
         paymentRequest: this.props.paymentRequest,
       });
+      msg.reply(response);
       window.close();
     } catch (e) {
       alert(`Error: ${e.message}`);
