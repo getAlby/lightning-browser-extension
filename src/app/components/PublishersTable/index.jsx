@@ -1,5 +1,5 @@
 import React from "react";
-import { ChevronRightIcon } from "@heroicons/react/outline";
+import { ChevronRightIcon } from "@heroicons/react/solid";
 
 import Badge from "../Badge";
 import Progressbar from "../Progressbar";
@@ -9,9 +9,9 @@ const DEFAULT_IMAGE =
 
 export default function PublishersTable({ publishers, navigateToPublisher }) {
   return (
-    <div className="shadow overflow-hidden border-b border-gray-200 rounded-lg">
+    <div className="shadow overflow-hidden rounded-lg">
       <table className="min-w-full">
-        <tbody className="divide-y divide-gray-200">
+        <tbody className="bg-white divide-y divide-gray-200">
           {publishers.map((publisher) => (
             <tr
               key={publisher.id}
@@ -70,7 +70,10 @@ export default function PublishersTable({ publishers, navigateToPublisher }) {
                 )}
               </td>
               <td className="w-10">
-                <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+                <ChevronRightIcon
+                  className="h-6 w-6 text-gray-500"
+                  aria-hidden="true"
+                />
               </td>
             </tr>
           ))}

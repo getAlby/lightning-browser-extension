@@ -1,7 +1,7 @@
 import React from "react";
-import { PlusIcon, MinusIcon } from "@heroicons/react/outline";
+import { PlusIcon, MinusIcon } from "@heroicons/react/solid";
 import { Disclosure } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/outline";
+import { ChevronDownIcon } from "@heroicons/react/solid";
 
 import Badge from "../Badge";
 
@@ -24,46 +24,42 @@ type Transaction = {
 export default function TransactionsTable({ transactions }: Props) {
   function renderIcon(type: string) {
     function getIcon() {
-      const iconClasses = "h-4 w-4";
+      const iconClasses = "h-3 w-3";
       switch (type) {
         case "received":
           return <PlusIcon className={iconClasses} aria-hidden="true" />;
         case "sent":
-          return <MinusIcon className={iconClasses} aria-hidden="true" />;
         case "sending":
           return <MinusIcon className={iconClasses} aria-hidden="true" />;
       }
     }
 
     return (
-      <div className="flex justify-center items-center w-7 h-7 border-2 border-gray-200 rounded-full">
+      <div className="flex justify-center items-center w-6 h-6 border-2 border-gray-200 rounded-full">
         {getIcon()}
       </div>
     );
   }
 
   return (
-    <div className="shadow overflow-hidden border-b border-gray-200 rounded-lg">
+    <div className="shadow overflow-hidden rounded-lg">
       <div className="bg-white divide-y divide-gray-200">
         {transactions.map((tx) => (
           <div className="px-3 py-2">
             <Disclosure>
               {({ open }) => (
-                <div key={tx.id} className="flex justify-between space-x-5">
-                  <div className="overflow-hidden">
-                    <div className="flex mt-2">
-                      <div className="flex-shrink-0 mr-3">
-                        {tx.type && renderIcon(tx.type)}
+                <>
+                  <div key={tx.id} className="flex">
+                    <div className="flex items-center flex-shrink-0 mr-3">
+                      {tx.type && renderIcon(tx.type)}
+                    </div>
+                    <div className="overflow-hidden mr-3">
+                      <div className="text-sm font-medium text-gray-900 truncate">
+                        {tx.title}
                       </div>
-                      <div className="overflow-hidden">
-                        <div className="text-gray-900 truncate">{tx.title}</div>
-                        <Disclosure.Panel>
-                          <div className="text-sm text-gray-500 truncate">
-                            {tx.subTitle}
-                            <p className="truncate">Preimage: {tx.preimage}</p>
-                          </div>
-                        </Disclosure.Panel>
-                      </div>
+                      <p className="text-xs text-gray-500 capitalize">
+                        {tx.type}
+                      </p>
                     </div>
                     {tx.badges && (
                       <div className="ml-6 space-x-3">
@@ -76,21 +72,30 @@ export default function TransactionsTable({ transactions }: Props) {
                         ))}
                       </div>
                     )}
-                  </div>
-                  <div className="flex text-right space-x-4  flex-shrink-0">
-                    <div>
-                      <p>{tx.totalAmount} sats</p>
-                      <p className="text-sm text-gray-500">{tx.date}</p>
+                    <div className="flex ml-auto text-right space-x-3 flex-shrink-0">
+                      <div>
+                        <p className="text-sm font-medium">
+                          {tx.type === "sent" || "sending" ? "-" : "+"}
+                          {tx.totalAmount} sats
+                        </p>
+                        <p className="text-xs text-gray-400">{tx.date}</p>
+                      </div>
+                      <Disclosure.Button className="block h-0 mt-2 text-gray-500 hover:text-black transition-color duration-200">
+                        <ChevronDownIcon
+                          className={`${
+                            open ? "transform rotate-180" : ""
+                          } w-5 h-5`}
+                        />
+                      </Disclosure.Button>
                     </div>
-                    <Disclosure.Button className="block h-0 mt-2">
-                      <ChevronDownIcon
-                        className={`${
-                          open ? "transform rotate-180" : ""
-                        } w-4 h-4 `}
-                      />
-                    </Disclosure.Button>
                   </div>
-                </div>
+                  <Disclosure.Panel>
+                    <div className="mt-1 ml-9 text-xs text-gray-500">
+                      {tx.description}
+                      <p className="truncate">Preimage: {tx.preimage}</p>
+                    </div>
+                  </Disclosure.Panel>
+                </>
               )}
             </Disclosure>
           </div>

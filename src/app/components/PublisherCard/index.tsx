@@ -31,7 +31,7 @@ export default function PublisherCard({ title, image, url, children }: Props) {
           e.target.src = DEFAULT_IMAGE;
         }}
       />
-      <h2 className="text-center mb-0 text-xl text-white">
+      <h2 className="text-center mb-0 text-xl font-medium text-white">
         {title}
 
         {url && (
