@@ -139,7 +139,7 @@ function LNURLPay({ details, origin }: Props) {
         } else if (type === "text/long-desc") {
           return ["Full Description", <p>{content}</p>];
         } else if (["image/png;base64", "image/jpeg;base64"].includes(type)) {
-          return ["lnurl", <img src={content} alt="lnurl" />];
+          return ["lnurl", <img src={`data:${type},${content}`} alt="lnurl" />];
         }
         return undefined;
       })
