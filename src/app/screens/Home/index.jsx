@@ -4,13 +4,10 @@ import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 import utils from "../../../common/lib/utils";
-import { getFiatFromSatoshi } from "../../../common/utils/helpers";
 
 import Button from "../../components/Button";
-import Navbar from "../../components/Navbar";
 import TransactionsTable from "../../components/TransactionsTable";
 import AllowanceMenu from "../../components/AllowanceMenu";
-import UserMenu from "../../components/UserMenu";
 
 import Loading from "../../components/Loading";
 import PublisherCard from "../../components/PublisherCard";
@@ -63,20 +60,6 @@ class Home extends React.Component {
     });
   };
 
-  loadAccountInfo() {
-    utils.call("accountInfo").then((response) => {
-      this.setState({
-        alias: response.info?.alias,
-        balance: parseInt(response.balance?.balance),
-      });
-      getFiatFromSatoshi(this.state.currency, this.state.balance).then(
-        (fiat) => {
-          this.setState({ balanceFiat: fiat });
-        }
-      );
-    });
-  }
-
   loadPayments() {
     utils.call("getPayments").then((result) => {
       this.setState({
@@ -87,7 +70,6 @@ class Home extends React.Component {
   }
 
   initialize() {
-    this.loadAccountInfo();
     this.loadPayments();
     this.loadAllowance();
   }
@@ -217,21 +199,10 @@ class Home extends React.Component {
   }
 
   render() {
-    const { alias, allowance, balance, lnData } = this.state;
+    const { allowance, lnData } = this.state;
 
     return (
       <div>
-        <Navbar
-          title={alias}
-          subtitle={typeof balance === "number" ? `${balance} Sats` : ""}
-          right={
-            <UserMenu
-              onAccountSwitch={() => {
-                this.initialize();
-              }}
-            />
-          }
-        />
         {!allowance && lnData.length > 0 && (
           <PublisherCard title={lnData[0].name} image={lnData[0].icon}>
             <Button
