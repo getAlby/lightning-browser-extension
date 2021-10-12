@@ -1,12 +1,9 @@
-import PubSub from "pubsub-js";
 import { parsePaymentRequest } from "invoices";
 import utils from "../../../../common/lib/utils";
-import state from "../../state";
 import db from "../../db";
+import sendPayment from "../ln/sendPayment";
 
 const sendPaymentOrPrompt = async (message, sender) => {
-  PubSub.publish(`ln.sendPayment.start`, message);
-
   const paymentRequest = message.args.paymentRequest;
   const paymentRequestDetails = parsePaymentRequest({
     request: paymentRequest,
@@ -28,17 +25,9 @@ const sendPaymentOrPrompt = async (message, sender) => {
   }
 };
 
-async function sendPaymentWithAllowance(
-  message,
-  paymentRequestDetails,
-  allowance
-) {
-  const connector = state.getState().getConnector();
-  const response = await connector.sendPayment({
-    paymentRequest: message.args.paymentRequest,
-  });
+async function sendPaymentWithAllowance(message, paymentRequestDetails) {
+  const response = sendPayment(message);
   utils.publishPaymentNotification(message, paymentRequestDetails, response);
-
   return response;
 }
 
@@ -46,7 +35,7 @@ async function payWithPrompt(message, paymentRequestDetails) {
   try {
     const response = await utils.openPrompt({
       ...message,
-      type: "sendPayment",
+      type: "confirmPayment",
     });
     utils.publishPaymentNotification(message, paymentRequestDetails, response);
     return response;

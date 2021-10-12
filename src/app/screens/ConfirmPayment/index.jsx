@@ -33,7 +33,6 @@ class ConfirmPayment extends React.Component {
         paymentRequest: this.props.paymentRequest,
       });
       msg.reply(response);
-      window.close();
     } catch (e) {
       alert(`Error: ${e.message}`);
     } finally {

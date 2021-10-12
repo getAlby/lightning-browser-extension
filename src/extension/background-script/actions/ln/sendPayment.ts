@@ -1,6 +1,9 @@
+import PubSub from "pubsub-js";
+
 import state from "../../state";
 
 export default async function sendPayment(message) {
+  PubSub.publish(`ln.sendPayment.start`, message);
   const { paymentRequest } = message.args;
   const connector = state.getState().getConnector();
 

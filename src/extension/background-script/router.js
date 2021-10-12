@@ -1,6 +1,7 @@
 import * as accounts from "./actions/accounts";
 import * as ln from "./actions/ln";
 import lnurl, { lnurlPay } from "./actions/lnurl";
+import * as webln from "./actions/webln";
 import * as allowances from "./actions/allowances";
 import * as setup from "./actions/setup";
 import * as payments from "./actions/payments";
@@ -29,8 +30,8 @@ const routes = {
   getInfo: ln.getInfo,
   lnurl,
   lnurlPay,
+  sendPaymentOrPrompt: webln.sendPaymentOrPrompt,
   sendPayment: ln.sendPayment,
-  sendPaymentOrPrompt: ln.sendPaymentOrPrompt,
   signMessage: ln.signMessage,
   verifyMessage: ln.verifyMessage,
   makeInvoice: ln.makeInvoice,
