@@ -132,18 +132,27 @@ function LNURLPay({ details, origin }: Props) {
   }
 
   function formattedMetadata() {
-    return JSON.parse(details.metadata)
-      .map(([type, content]: [string, string]) => {
-        if (type === "text/plain") {
-          return ["Description", content];
-        } else if (type === "text/long-desc") {
-          return ["Full Description", <p>{content}</p>];
-        } else if (["image/png;base64", "image/jpeg;base64"].includes(type)) {
-          return ["lnurl", <img src={`data:${type},${content}`} alt="lnurl" />];
-        }
-        return undefined;
-      })
-      .filter(Boolean);
+    try {
+      const metadata = JSON.parse(details.metadata);
+      return metadata
+        .map(([type, content]: [string, string]) => {
+          if (type === "text/plain") {
+            return ["Description", content];
+          } else if (type === "text/long-desc") {
+            return ["Full Description", <p>{content}</p>];
+          } else if (["image/png;base64", "image/jpeg;base64"].includes(type)) {
+            return [
+              "lnurl",
+              <img src={`data:${type},${content}`} alt="lnurl" />,
+            ];
+          }
+          return undefined;
+        })
+        .filter(Boolean);
+    } catch (e) {
+      console.log(e.message);
+    }
+    return [];
   }
 
   return (
