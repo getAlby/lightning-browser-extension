@@ -151,20 +151,16 @@ function LNURLPay({ details, origin }: Props) {
       <PublisherCard title={origin.name} image={origin.icon} />
       <div className="p-6">
         <dl className="shadow p-4 rounded-lg mb-8">
-          <dt className="text-sm font-semibold text-gray-500">
-            Send payment to
-          </dt>
-          <dd className="text-sm mb-4">{details.domain}</dd>
-          {formattedMetadata().map(([t, d]) => (
+          {[
+            ["Send payment to", details.domain],
+            ...formattedMetadata(),
+            ["Amount (Satoshi)", renderAmount()],
+          ].map(([t, d]) => (
             <>
               <dt className="text-sm font-semibold text-gray-500">{t}</dt>
               <dd className="text-sm mb-4">{d}</dd>
             </>
           ))}
-          <dt className="text-sm font-semibold text-gray-500">
-            Amount (Satoshi)
-          </dt>
-          <dd>{renderAmount()}</dd>
         </dl>
         <div className="text-center">
           <div className="mb-5">
