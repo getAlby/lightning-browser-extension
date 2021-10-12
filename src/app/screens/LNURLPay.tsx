@@ -15,6 +15,7 @@ type Props = {
     maxSendable: number;
     callback: string;
     domain: string;
+    metadata: string;
   };
   origin: {
     name: string;
@@ -130,14 +131,39 @@ function LNURLPay({ details, origin }: Props) {
     }
   }
 
+  function formattedMetadata() {
+    return JSON.parse(details.metadata)
+      .map(([type, content]: [string, string]) => {
+        if (type === "text/plain") {
+          return ["Description", content];
+        } else if (type === "text/long-desc") {
+          return ["Full Description", <p>{content}</p>];
+        } else if (["image/png;base64", "image/jpeg;base64"].includes(type)) {
+          return ["lnurl", <img src={content} alt="lnurl" />];
+        }
+        return undefined;
+      })
+      .filter(Boolean);
+  }
+
   return (
     <div>
       <PublisherCard title={origin.name} image={origin.icon} />
       <div className="p-6">
         <dl className="shadow p-4 rounded-lg mb-8">
-          <dt className="font-semibold text-gray-500">Send payment to</dt>
-          <dd className="mb-6">{details.domain}</dd>
-          <dt className="font-semibold text-gray-500">Amount (Satoshi)</dt>
+          <dt className="text-sm font-semibold text-gray-500">
+            Send payment to
+          </dt>
+          <dd className="text-sm mb-4">{details.domain}</dd>
+          {formattedMetadata().map(([t, d]) => (
+            <>
+              <dt className="text-sm font-semibold text-gray-500">{t}</dt>
+              <dd className="text-sm mb-4">{d}</dd>
+            </>
+          ))}
+          <dt className="text-sm font-semibold text-gray-500">
+            Amount (Satoshi)
+          </dt>
           <dd>{renderAmount()}</dd>
         </dl>
         <div className="text-center">
