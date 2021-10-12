@@ -84,13 +84,13 @@ class Home extends React.Component {
     return (
       <>
         <PublisherCard title={allowance.name} image={allowance.imageURL} />
-        <div className="px-5 pb-5">
+        <div className="px-4 pb-5">
           <div className="flex justify-between items-center py-3">
             {parseInt(allowance.totalBudget) > 0 ? (
               <>
                 <dl className="mb-0">
-                  <dt className="text-sm">Allowance</dt>
-                  <dd className="mb-0 text-sm text-gray-500">
+                  <dt className="text-xs text-gray-500">Allowance</dt>
+                  <dd className="mb-0 text-sm font-medium">
                     {allowance.usedBudget} / {allowance.totalBudget} Sats
                   </dd>
                 </dl>
@@ -126,10 +126,10 @@ class Home extends React.Component {
                     <a
                       target="_blank"
                       title={payment.name}
-                      href={`options.html#/publishers`}
+                      href={`options.html#/publishers/${allowance.id}`}
                       rel="noreferrer"
                     >
-                      {payment.description}
+                      {payment.name}
                     </a>
                   </p>
                 ),
@@ -138,7 +138,7 @@ class Home extends React.Component {
                     <a
                       target="_blank"
                       title={payment.name}
-                      href={`options.html#/publishers`}
+                      href={`options.html#/publishers/${allowance.id}`}
                       rel="noreferrer"
                     >
                       {payment.host}
@@ -156,7 +156,7 @@ class Home extends React.Component {
   renderDefaultView() {
     const { payments } = this.state;
     return (
-      <div className="p-5">
+      <div className="p-4">
         {this.state.loadingPayments ? (
           <div className="pt-4 flex justify-center">
             <Loading />
@@ -175,7 +175,7 @@ class Home extends React.Component {
                     href={`options.html#/publishers`}
                     rel="noreferrer"
                   >
-                    {payment.description}
+                    {payment.name}
                   </a>
                 </p>
               ),

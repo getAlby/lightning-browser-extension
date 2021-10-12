@@ -89,8 +89,16 @@ export default function ConnectLnbits() {
               </div>
             </div>
           </div>
-          <div className="mt-8">
-            <Button label="Next" type="submit" primary />
+          <div className="mt-8 flex space-x-4">
+            <Button
+              label="Back"
+              onClick={(e) => {
+                e.preventDefault();
+                history.goBack();
+                return false;
+              }}
+            />
+            <Button type="submit" label="Continue" primary />
           </div>
         </div>
         <div className="mt-16 lg:mt-0 lg:w-1/2">

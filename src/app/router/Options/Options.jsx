@@ -23,6 +23,17 @@ function Options() {
     });
   }
   useEffect(() => {
+    utils
+      .call("status")
+      .then((response) => {
+        if (!response.configured) {
+          utils.openPage("welcome.html");
+          window.close();
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
     loadAccountInfo();
   }, []);
 
