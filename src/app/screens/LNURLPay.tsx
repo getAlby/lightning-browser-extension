@@ -150,7 +150,7 @@ function LNURLPay({ details, origin }: Props) {
     <div>
       <PublisherCard title={origin.name} image={origin.icon} />
       <div className="p-6">
-        <dl className="shadow p-4 rounded-lg mb-8">
+        <dl className="shadow pt-4 px-4 rounded-lg mb-8 overflow-hidden">
           {[
             ["Send payment to", details.domain],
             ...formattedMetadata(),
