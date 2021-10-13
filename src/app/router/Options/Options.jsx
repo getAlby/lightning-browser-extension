@@ -10,6 +10,7 @@ import Publisher from "../../screens/Publisher";
 import ChooseConnector from "../../screens/Options/ChooseConnector";
 import TestConnection from "../../screens/Options/TestConnection";
 import Send from "../../screens/Send";
+import Receive from "../../screens/Receive";
 import Settings from "../../screens/Settings";
 
 function Options() {
@@ -68,17 +69,7 @@ function Options() {
           <Send />
         </Route>
         <Route path="/receive">
-          <Container>
-            <h2 className="mt-12 mb-6 text-2xl font-bold">Receive</h2>
-            <p>
-              We are still working on this feature.
-              <br />
-              You can{" "}
-              <a href="https://github.com/bumi/lightning-browser-extension/">
-                join the development on GitHub
-              </a>
-            </p>
-          </Container>
+          <Receive />
         </Route>
         <Route path="/settings">
           <Settings />
