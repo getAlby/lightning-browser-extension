@@ -1,7 +1,6 @@
 import React, { useState, useEffect, MouseEvent } from "react";
 import axios from "axios";
-import browser from "webextension-polyfill";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 import msg from "../../common/lib/msg";
 import utils from "../../common/lib/utils";
@@ -27,6 +26,7 @@ type Props = {
 
 function LNURLPay(props: Props) {
   const history = useHistory();
+  const location = useLocation();
   const [details, setDetails] = useState(props.details);
   const [origin, setOrigin] = useState(props.origin);
   const [valueMSat, setValueMSat] = useState<string | number>(
@@ -35,36 +35,22 @@ function LNURLPay(props: Props) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    function getLightningData() {
-      browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
-        const [currentTab] = tabs;
-        browser.tabs
-          .executeScript(currentTab.id, {
-            code: "window.LBE_LIGHTNING_DATA;",
-          })
-          .then(async (data) => {
-            // data is an array, see: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/executeScript#return_value
-            // we execute it only in the current Tab. Thus the array has only one entry
-            if (data[0]) {
-              const lnData = data[0];
-              const lnurlDetails = await lnurl.getDetails(lnData[0].recipient);
-              setDetails(lnurlDetails);
-              const origin = {
-                external: true,
-                name: lnData[0].name,
-                description: lnData[0].description,
-                icon: lnData[0].icon,
-              };
-              setOrigin(origin);
-            }
-          });
-      });
+    async function getLightningData() {
+      try {
+        const params = new URLSearchParams(location.search);
+        let pDetails = JSON.parse(params.get("details"));
+        let pOrigin = JSON.parse(params.get("origin"));
+        setDetails(pDetails);
+        setOrigin(pOrigin);
+      } catch (e) {
+        console.log(e.message);
+      }
     }
 
-    if (!props.details && !props.origin) {
+    if (location.search) {
       getLightningData();
     }
-  }, [props]);
+  }, [location]);
 
   async function confirm() {
     try {

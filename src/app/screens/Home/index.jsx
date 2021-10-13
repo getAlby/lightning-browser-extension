@@ -5,7 +5,7 @@ import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 import utils from "../../../common/lib/utils";
-import lnurlLib from "../../../common/lib/lnurl";
+import lnurl from "../../../common/lib/lnurl";
 
 import Button from "../../components/Button";
 import TransactionsTable from "../../components/TransactionsTable";
@@ -209,7 +209,21 @@ class Home extends React.Component {
         {!allowance && lnData.length > 0 && (
           <PublisherCard title={lnData[0].name} image={lnData[0].icon}>
             <Button
-              onClick={() => this.history.push("lnurlPay")}
+              onClick={async () => {
+                const details = await lnurl.getDetails(lnData[0].recipient);
+                const origin = {
+                  external: true,
+                  name: lnData[0].name,
+                  description: lnData[0].description,
+                  icon: lnData[0].icon,
+                };
+                this.history.push({
+                  pathname: "/lnurlPay",
+                  search: `?details=${JSON.stringify(
+                    details
+                  )}&origin=${JSON.stringify(origin)}`,
+                });
+              }}
               label="⚡️ Send Sats ⚡️"
               primary
             />
