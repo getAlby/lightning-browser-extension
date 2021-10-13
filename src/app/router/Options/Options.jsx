@@ -9,6 +9,8 @@ import Publishers from "../../screens/Publishers";
 import Publisher from "../../screens/Publisher";
 import ChooseConnector from "../../screens/Options/ChooseConnector";
 import TestConnection from "../../screens/Options/TestConnection";
+import Send from "../../screens/Send";
+import Settings from "../../screens/Settings";
 
 function Options() {
   const [accountInfo, setAccountInfo] = useState({});
@@ -49,6 +51,7 @@ function Options() {
         <Navbar.Link href="/publishers">Publishers</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>
         <Navbar.Link href="/receive">Receive</Navbar.Link>
+        <Navbar.Link href="/settings">Settings</Navbar.Link>
       </Navbar>
 
       <Switch>
@@ -62,17 +65,7 @@ function Options() {
           <Publisher />
         </Route>
         <Route path="/send">
-          <Container>
-            <h2 className="mt-12 mb-6 text-2xl font-bold">Send</h2>
-            <p>
-              We are still working on this feature.
-              <br />
-              You can{" "}
-              <a href="https://github.com/bumi/lightning-browser-extension/">
-                join the development on GitHub
-              </a>
-            </p>
-          </Container>
+          <Send />
         </Route>
         <Route path="/receive">
           <Container>
@@ -86,6 +79,9 @@ function Options() {
               </a>
             </p>
           </Container>
+        </Route>
+        <Route path="/settings">
+          <Settings />
         </Route>
         <Route path="/accounts/new">
           <Container>
