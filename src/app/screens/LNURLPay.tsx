@@ -1,6 +1,7 @@
 import React, { useState, useEffect, MouseEvent } from "react";
 import axios from "axios";
 import browser from "webextension-polyfill";
+import { useHistory } from "react-router-dom";
 
 import msg from "../../common/lib/msg";
 import utils from "../../common/lib/utils";
@@ -25,6 +26,7 @@ type Props = {
 };
 
 function LNURLPay(props: Props) {
+  const history = useHistory();
   const [details, setDetails] = useState(props.details);
   const [origin, setOrigin] = useState(props.origin);
   const [valueMSat, setValueMSat] = useState<string | number>(
@@ -136,7 +138,11 @@ function LNURLPay(props: Props) {
 
   function reject(e: MouseEvent) {
     e.preventDefault();
-    msg.error("User rejected");
+    if (props.details && props.origin) {
+      msg.error("User rejected");
+    } else {
+      history.goBack();
+    }
   }
 
   function renderAmount() {
