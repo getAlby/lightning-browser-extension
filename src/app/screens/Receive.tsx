@@ -37,7 +37,6 @@ function Receive() {
         memo: formData.description,
       });
       setInvoice(response);
-      console.log(response);
     } catch (e) {
       alert(e.message);
     }
@@ -49,7 +48,7 @@ function Receive() {
         <div className="mb-8 p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center">
           <QRCode value={invoice.paymentRequest} level="M" />
         </div>
-        <div className="flex justify-center">
+        <div className="mb-4 flex justify-center">
           <Button
             onClick={async () => {
               try {
