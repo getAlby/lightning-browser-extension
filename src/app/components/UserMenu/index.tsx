@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import {
+  CogIcon,
   ChevronDownIcon,
   LockClosedIcon,
   PlusIcon,
@@ -99,6 +100,14 @@ export default function UserMenu({ onAccountSwitch }: UserMenuProps) {
             aria-hidden="true"
           />
           Receive
+        </Menu.ItemButton>
+        <Menu.ItemButton
+          onClick={() => {
+            openOptions("settings");
+          }}
+        >
+          <CogIcon className="h-5 w-5 mr-2 text-gray-500" aria-hidden="true" />
+          Settings
         </Menu.ItemButton>
         <Menu.Divider />
         <Menu.Subheader>Switch account</Menu.Subheader>

@@ -52,7 +52,7 @@ function Send() {
             />
           }
         />
-        <div className="p-4">
+        <div className="p-4 max-w-screen-sm mx-auto">
           <QrcodeScanner
             qrbox={200}
             qrCodeSuccessCallback={(decodedText) => {
@@ -97,11 +97,14 @@ function Send() {
           />
         }
       />
-      <form className="px-4" onSubmit={handleSubmit}>
-        <label htmlFor="invoice" className="mt-6 block text-gray-700">
+      <form className="px-4 max-w-screen-sm mx-auto" onSubmit={handleSubmit}>
+        <label
+          htmlFor="invoice"
+          className="mt-6 block font-medium text-gray-700"
+        >
           Lightning Invoice
         </label>
-        <div className="mt-1 mb-5">
+        <div className="mt-1 mb-4">
           <Input
             name="invoice"
             placeholder="Paste invoice"
