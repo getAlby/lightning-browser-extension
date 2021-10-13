@@ -61,10 +61,10 @@ function LNURLPay(props: Props) {
       });
     }
 
-    if (!details && !origin) {
+    if (!props.details && !props.origin) {
       getLightningData();
     }
-  }, []);
+  }, [props]);
 
   async function confirm() {
     try {
