@@ -7,6 +7,7 @@ import utils from "../../../common/lib/utils";
 import Home from "../../screens/Home";
 import Unlock from "../../screens/Unlock";
 import Send from "../../screens/Send";
+import LNURLPay from "../../screens/LNURLPay";
 
 import Loading from "../../components/Loading";
 import Navbar from "../../components/Navbar";
@@ -100,6 +101,9 @@ const Default = () => {
       </Route>
       <Route path="/send">
         <Send />
+      </Route>
+      <Route exact path="/lnurlPay">
+        <LNURLPay />
       </Route>
     </div>
   );

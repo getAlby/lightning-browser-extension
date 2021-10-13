@@ -1,5 +1,6 @@
-import React, { useState, MouseEvent } from "react";
+import React, { useState, useEffect, MouseEvent } from "react";
 import axios from "axios";
+import browser from "webextension-polyfill";
 
 import msg from "../../common/lib/msg";
 import utils from "../../common/lib/utils";
@@ -7,6 +8,7 @@ import lnurl from "../../common/lib/lnurl";
 
 import Button from "../components/Button";
 import Input from "../components/Form/Input";
+import Loading from "../components/Loading";
 import PublisherCard from "../components/PublisherCard";
 
 type Props = {
@@ -22,11 +24,45 @@ type Props = {
   };
 };
 
-function LNURLPay({ details, origin }: Props) {
+function LNURLPay(props: Props) {
+  const [details, setDetails] = useState(props.details);
+  const [origin, setOrigin] = useState(props.origin);
   const [valueMSat, setValueMSat] = useState<string | number>(
-    details.minSendable
+    details?.minSendable || 0
   );
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    function getLightningData() {
+      browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+        const [currentTab] = tabs;
+        browser.tabs
+          .executeScript(currentTab.id, {
+            code: "window.LBE_LIGHTNING_DATA;",
+          })
+          .then(async (data) => {
+            // data is an array, see: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/executeScript#return_value
+            // we execute it only in the current Tab. Thus the array has only one entry
+            if (data[0]) {
+              const lnData = data[0];
+              const lnurlDetails = await lnurl.getDetails(lnData[0].recipient);
+              setDetails(lnurlDetails);
+              const origin = {
+                external: true,
+                name: lnData[0].name,
+                description: lnData[0].description,
+                icon: lnData[0].icon,
+              };
+              setOrigin(origin);
+            }
+          });
+      });
+    }
+
+    if (!details && !origin) {
+      getLightningData();
+    }
+  }, []);
 
   async function confirm() {
     try {
@@ -130,11 +166,19 @@ function LNURLPay({ details, origin }: Props) {
     }
   }
 
+  if (!details || !origin) {
+    return (
+      <div className="flex justify-center items-center">
+        <Loading />
+      </div>
+    );
+  }
+
   return (
     <div>
       <PublisherCard title={origin.name} image={origin.icon} />
       <div className="p-6">
-        <dl className="shadow p-4 rounded-lg mb-8">
+        <dl className="shadow bg-white p-4 rounded-lg mb-8">
           <dt className="font-semibold text-gray-500">Send payment to</dt>
           <dd className="mb-6">{details.domain}</dd>
           <dt className="font-semibold text-gray-500">Amount (Satoshi)</dt>

@@ -1,9 +1,11 @@
 import React from "react";
+import { createHashHistory } from "history";
 import browser from "webextension-polyfill";
 import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 import utils from "../../../common/lib/utils";
+import lnurlLib from "../../../common/lib/lnurl";
 
 import Button from "../../components/Button";
 import TransactionsTable from "../../components/TransactionsTable";
@@ -18,6 +20,7 @@ dayjs.extend(relativeTime);
 class Home extends React.Component {
   constructor(props) {
     super(props);
+    this.history = createHashHistory();
     this.state = {
       allowance: null,
       currency: "USD",
@@ -206,22 +209,7 @@ class Home extends React.Component {
         {!allowance && lnData.length > 0 && (
           <PublisherCard title={lnData[0].name} image={lnData[0].icon}>
             <Button
-              onClick={async () => {
-                await utils.call(
-                  "lnurl",
-                  {
-                    lnurlEncoded: lnData[0].recipient,
-                  },
-                  {
-                    origin: {
-                      external: true,
-                      name: lnData[0].name,
-                      description: lnData[0].description,
-                      icon: lnData[0].icon,
-                    },
-                  }
-                );
-              }}
+              onClick={() => this.history.push("lnurlPay")}
               label="⚡️ Send Sats ⚡️"
               primary
             />
