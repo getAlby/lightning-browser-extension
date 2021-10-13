@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import CaretLeftIcon from "@bitcoin-design/bitcoin-icons/svg/filled/caret-left.svg";
+import QRCode from "react-qr-code";
 
 import utils from "../../common/lib/utils";
 
@@ -43,14 +44,9 @@ function Receive() {
 
   function renderInvoice() {
     return (
-      <>
-        <p className="break-words mb-4">
-          <strong>paymentRequest</strong> {invoice.paymentRequest}
-        </p>
-        <p className="break-words">
-          <strong>rHash</strong> {invoice.rHash}
-        </p>
-      </>
+      <div className="p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center">
+        <QRCode value={invoice.paymentRequest} level="M" />
+      </div>
     );
   }
 
