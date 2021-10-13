@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import CaretLeftIcon from "@bitcoin-design/bitcoin-icons/svg/filled/caret-left.svg";
+import CopyIcon from "@bitcoin-design/bitcoin-icons/svg/outline/copy.svg";
 import QRCode from "react-qr-code";
 
 import utils from "../../common/lib/utils";
@@ -57,6 +58,14 @@ function Receive() {
                 alert(e.message);
               }
             }}
+            icon={
+              <img
+                className="w-6 h-6"
+                src={CopyIcon}
+                alt=""
+                aria-hidden="true"
+              />
+            }
             label="Copy"
           />
         </div>
@@ -88,7 +97,10 @@ function Receive() {
         ) : (
           <>
             <div className="mt-2 mb-4">
-              <label htmlFor="amount" className="block text-gray-700">
+              <label
+                htmlFor="amount"
+                className="block font-medium text-gray-700"
+              >
                 Amount
               </label>
               <div className="mt-1">
@@ -102,7 +114,10 @@ function Receive() {
             </div>
 
             <div className="mb-4">
-              <label htmlFor="description" className="block text-gray-700">
+              <label
+                htmlFor="description"
+                className="block font-medium text-gray-700"
+              >
                 Description
               </label>
               <div className="mt-1">
@@ -116,7 +131,7 @@ function Receive() {
             </div>
 
             {/* <div className="mb-5">
-          <label htmlFor="expiration" className="block text-gray-700">
+          <label htmlFor="expiration" className="block font-medium text-gray-700">
             Expiration
           </label>
           <div className="mt-1">

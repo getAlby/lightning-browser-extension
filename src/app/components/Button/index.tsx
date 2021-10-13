@@ -7,6 +7,7 @@ import Loading from "../Loading";
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   fullWidth?: boolean;
   label: string;
+  icon?: React.ReactNode;
   primary?: boolean;
   loading?: boolean;
 };
@@ -15,6 +16,7 @@ export default function Button({
   type = "button",
   label,
   onClick,
+  icon,
   fullWidth = false,
   primary = false,
   loading = false,
@@ -36,6 +38,7 @@ export default function Button({
           <Loading color="white" />
         </div>
       )}
+      {icon && <div className="mr-2">{icon}</div>}
       {label}
     </button>
   );
