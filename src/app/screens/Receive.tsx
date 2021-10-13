@@ -44,8 +44,22 @@ function Receive() {
 
   function renderInvoice() {
     return (
-      <div className="p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center">
-        <QRCode value={invoice.paymentRequest} level="M" />
+      <div>
+        <div className="mb-8 p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center">
+          <QRCode value={invoice.paymentRequest} level="M" />
+        </div>
+        <div className="flex justify-center">
+          <Button
+            onClick={async () => {
+              try {
+                navigator.clipboard.writeText(invoice.paymentRequest);
+              } catch (e) {
+                alert(e.message);
+              }
+            }}
+            label="Copy"
+          />
+        </div>
       </div>
     );
   }
