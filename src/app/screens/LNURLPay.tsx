@@ -1,4 +1,4 @@
-import React, { useState, useEffect, MouseEvent } from "react";
+import React, { useState, MouseEvent } from "react";
 import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
 
@@ -8,7 +8,6 @@ import lnurl from "../../common/lib/lnurl";
 
 import Button from "../components/Button";
 import Input from "../components/Form/Input";
-import Loading from "../components/Loading";
 import PublisherCard from "../components/PublisherCard";
 
 type Props = {
@@ -27,30 +26,12 @@ type Props = {
 function LNURLPay(props: Props) {
   const history = useHistory();
   const location = useLocation();
-  const [details, setDetails] = useState(props.details);
-  const [origin, setOrigin] = useState(props.origin);
+  const details = props.details || location.state?.details;
+  const origin = props.origin || location.state?.origin;
   const [valueMSat, setValueMSat] = useState<string | number>(
     details?.minSendable || 0
   );
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    async function getLightningData() {
-      try {
-        const params = new URLSearchParams(location.search);
-        let pDetails = JSON.parse(params.get("details"));
-        let pOrigin = JSON.parse(params.get("origin"));
-        setDetails(pDetails);
-        setOrigin(pOrigin);
-      } catch (e) {
-        console.log(e.message);
-      }
-    }
-
-    if (location.search) {
-      getLightningData();
-    }
-  }, [location]);
 
   async function confirm() {
     try {
@@ -156,14 +137,6 @@ function LNURLPay(props: Props) {
         </div>
       );
     }
-  }
-
-  if (!details || !origin) {
-    return (
-      <div className="flex justify-center items-center">
-        <Loading />
-      </div>
-    );
   }
 
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import { createHashHistory } from "history";
+import { withRouter } from "react-router-dom";
 import browser from "webextension-polyfill";
 import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -20,7 +20,6 @@ dayjs.extend(relativeTime);
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.history = createHashHistory();
     this.state = {
       allowance: null,
       currency: "USD",
@@ -203,6 +202,7 @@ class Home extends React.Component {
 
   render() {
     const { allowance, lnData } = this.state;
+    const { history } = this.props;
 
     return (
       <div>
@@ -217,11 +217,9 @@ class Home extends React.Component {
                   description: lnData[0].description,
                   icon: lnData[0].icon,
                 };
-                this.history.push({
-                  pathname: "/lnurlPay",
-                  search: `?details=${JSON.stringify(
-                    details
-                  )}&origin=${JSON.stringify(origin)}`,
+                history.push("/lnurlPay", {
+                  details,
+                  origin,
                 });
               }}
               label="⚡️ Send Sats ⚡️"
@@ -235,4 +233,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default withRouter(Home);

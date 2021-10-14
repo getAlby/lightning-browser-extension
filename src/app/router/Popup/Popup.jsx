@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { createHashHistory } from "history";
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { createMemoryHistory } from "history";
+import { Switch, Route, Router } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";
 
@@ -18,19 +18,22 @@ import "./styles.scss";
 class Popup extends React.Component {
   constructor(props) {
     super(props);
-    this.history = createHashHistory();
+    this.history = createMemoryHistory();
   }
 
   componentDidMount() {
     utils
       .call("status")
       .then((response) => {
+        console.log(response);
         if (!response.configured) {
           utils.openPage("welcome.html");
           window.close();
         } else if (response.unlocked) {
+          console.log("i should redirect to /home");
           this.history.replace("/home");
         } else {
+          console.log("i should replace with /unlock");
           this.history.replace("/unlock");
         }
       })
@@ -41,7 +44,7 @@ class Popup extends React.Component {
 
   render() {
     return (
-      <HashRouter>
+      <Router history={this.history}>
         <section id="popup">
           <Switch>
             <Route exact path="/">
@@ -57,7 +60,7 @@ class Popup extends React.Component {
             </Route>
           </Switch>
         </section>
-      </HashRouter>
+      </Router>
     );
   }
 }
