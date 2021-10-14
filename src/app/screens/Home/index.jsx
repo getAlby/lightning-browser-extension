@@ -210,17 +210,21 @@ class Home extends React.Component {
           <PublisherCard title={lnData[0].name} image={lnData[0].icon}>
             <Button
               onClick={async () => {
-                const details = await lnurl.getDetails(lnData[0].recipient);
-                const origin = {
-                  external: true,
-                  name: lnData[0].name,
-                  description: lnData[0].description,
-                  icon: lnData[0].icon,
-                };
-                history.push("/lnurlPay", {
-                  details,
-                  origin,
-                });
+                try {
+                  const details = await lnurl.getDetails(lnData[0].recipient);
+                  const origin = {
+                    external: true,
+                    name: lnData[0].name,
+                    description: lnData[0].description,
+                    icon: lnData[0].icon,
+                  };
+                  history.push("/lnurlPay", {
+                    details,
+                    origin,
+                  });
+                } catch (e) {
+                  alert(e.message);
+                }
               }}
               label="⚡️ Send Sats ⚡️"
               primary
