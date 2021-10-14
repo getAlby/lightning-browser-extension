@@ -1,12 +1,15 @@
 import React, { useState, MouseEvent } from "react";
 import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
+import CaretLeftIcon from "@bitcoin-design/bitcoin-icons/svg/filled/caret-left.svg";
 
 import msg from "../../common/lib/msg";
 import utils from "../../common/lib/utils";
 import lnurl from "../../common/lib/lnurl";
 
 import Button from "../components/Button";
+import Header from "../components/Header";
+import IconButton from "../components/IconButton";
 import Input from "../components/Form/Input";
 import PublisherCard from "../components/PublisherCard";
 
@@ -141,6 +144,24 @@ function LNURLPay(props: Props) {
 
   return (
     <div>
+      {location.state && (
+        <Header
+          title="Send a payment"
+          headerLeft={
+            <IconButton
+              onClick={() => history.goBack()}
+              icon={
+                <img
+                  className="w-4 h-4"
+                  src={CaretLeftIcon}
+                  alt=""
+                  aria-hidden="true"
+                />
+              }
+            />
+          }
+        />
+      )}
       <PublisherCard title={origin.name} image={origin.icon} />
       <div className="p-6">
         <dl className="shadow bg-white p-4 rounded-lg mb-8">
