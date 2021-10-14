@@ -102,7 +102,7 @@ const Default = () => {
       <Route path="/send">
         <Send />
       </Route>
-      <Route exact path="/lnurlPay">
+      <Route path="/lnurlPay">
         <LNURLPay />
       </Route>
     </div>
