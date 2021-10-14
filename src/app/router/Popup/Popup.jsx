@@ -25,15 +25,12 @@ class Popup extends React.Component {
     utils
       .call("status")
       .then((response) => {
-        console.log(response);
         if (!response.configured) {
           utils.openPage("welcome.html");
           window.close();
         } else if (response.unlocked) {
-          console.log("i should redirect to /home");
           this.history.replace("/home");
         } else {
-          console.log("i should replace with /unlock");
           this.history.replace("/unlock");
         }
       })

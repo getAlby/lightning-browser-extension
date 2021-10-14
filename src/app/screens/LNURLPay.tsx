@@ -29,7 +29,7 @@ function LNURLPay(props: Props) {
   const details = props.details || location.state?.details;
   const origin = props.origin || location.state?.origin;
   const [valueMSat, setValueMSat] = useState<string | number>(
-    details?.minSendable || 0
+    details.minSendable
   );
   const [loading, setLoading] = useState(false);
 
