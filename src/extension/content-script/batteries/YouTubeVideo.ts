@@ -14,17 +14,18 @@ const battery = (): Promise<[Battery] | void> => {
   // check for an lnurl
   if ((match = text.match(/(lnurlp:)(\S+)/i))) {
     recipient = match[2];
-
-    // if there is no lnurl we check for a zap emoji with a lightning address
-    // we check for the @-sign to try to limit the possibility to match some invalid text (e.g. random emoji usage)
-  } else if ((match = text.match(/(⚡️:)(\S+@\S+)/i))) {
+  }
+  // if there is no lnurl we check for a zap emoji with a lightning address
+  // we check for the @-sign to try to limit the possibility to match some invalid text (e.g. random emoji usage)
+  else if ((match = text.match(/(⚡️:)(\S+@\S+)/i))) {
     recipient = match[2];
   } else {
     return Promise.resolve();
   }
 
   const name = channelLink.textContent || "";
-  const imageUrl = document.querySelector("#meta-contents img").src || "";
+  const imageUrl =
+    document.querySelector<HTMLImageElement>("#meta-contents img")?.src || "";
   return Promise.resolve([
     {
       method: "lnurl",

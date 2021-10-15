@@ -1,28 +1,31 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 import { Battery } from "../../../types";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/(channel|c)\/([^/]+).*/;
 
 const battery = (): Promise<[Battery] | void> => {
-  const matchData = document.location.toString().match(urlMatcher);
+  let match = document.location.toString().match(urlMatcher);
+  if (!match) {
+    return Promise.resolve();
+  }
   const name =
     document.querySelector(
       "#inner-header-container yt-formatted-string.ytd-channel-name"
-    ).textContent || "";
+    )?.textContent || "";
   const imageUrl =
-    document.querySelector("#channel-header-container yt-img-shadow img").src ||
-    "";
+    document.querySelector<HTMLImageElement>(
+      "#channel-header-container yt-img-shadow img"
+    )?.src || "";
 
   return axios
-    .get(`https://www.youtube.com/${matchData[1]}/${matchData[2]}/about`, {
+    .get(`https://www.youtube.com/${match[1]}/${match[2]}/about`, {
       responseType: "document",
     })
-    .then((response) => {
+    .then((response: AxiosResponse<Document>) => {
       // TODO extract from links?
-      const descriptionElement = response.data.querySelector(
-        'meta[name="description"]'
-      );
+      const descriptionElement: HTMLMetaElement | null =
+        response.data.querySelector('meta[name="description"]');
       if (!descriptionElement) {
         return;
       }
