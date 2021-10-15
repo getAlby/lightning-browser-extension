@@ -11,7 +11,7 @@ type Props = {
 export default function LinkButton({ to, title, description }: Props) {
   return (
     <Link to={to} className="block">
-      <div className="p-4 flex justify-between items-center shadow overflow-hidden border-b border-gray-200 rounded-lg hover:bg-gray-50 transition duration-200">
+      <div className="p-4 bg-white flex justify-between items-center shadow overflow-hidden border-b border-gray-200 rounded-lg hover:bg-gray-50 transition duration-200">
         <div>
           <span className="block text-lg">{title}</span>
           {description && (

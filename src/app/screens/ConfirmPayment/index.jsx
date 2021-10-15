@@ -1,5 +1,4 @@
 import React from "react";
-import { createHashHistory } from "history";
 import { Transition } from "@headlessui/react";
 
 import Button from "../../components/Button";
@@ -12,7 +11,6 @@ import msg from "../../../common/lib/msg";
 class ConfirmPayment extends React.Component {
   constructor(props) {
     super(props);
-    this.history = createHashHistory();
     this.state = {
       budget: (this.props.invoice?.tokens || 0) * 10,
       rememberMe: false,
