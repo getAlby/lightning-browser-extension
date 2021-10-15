@@ -15,6 +15,7 @@ export default function Button({
   type = "button",
   label,
   onClick,
+  disabled,
   fullWidth = false,
   primary = false,
   loading = false,
@@ -27,9 +28,11 @@ export default function Button({
         primary
           ? "bg-orange-bitcoin text-white border border-transparent hover:opacity-90"
           : "bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100",
+        disabled ? "cursor-default" : "cursor-pointer",
         "inline-flex justify-center items-center px-7 py-2 font-medium rounded-md shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-bitcoin transition-colors duration-200"
       )}
       onClick={onClick}
+      disabled={disabled}
     >
       {loading && (
         <div className="mr-2">

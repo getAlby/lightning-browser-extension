@@ -132,6 +132,7 @@ class ConfirmPayment extends React.Component {
                 label="Confirm"
                 fullWidth
                 primary
+                disabled={this.state.loading}
                 loading={this.state.loading}
               />
             </div>
