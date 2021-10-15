@@ -150,7 +150,7 @@ function LNURLPay({ details, origin }: Props) {
         })
         .filter(Boolean);
     } catch (e) {
-      console.log(e.message);
+      console.error(e);
     }
     return [];
   }
