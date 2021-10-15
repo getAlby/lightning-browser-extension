@@ -12,13 +12,9 @@ export default async function sendPayment(message) {
   });
   const connector = state.getState().getConnector();
 
-  try {
-    const response = await connector.sendPayment({
-      paymentRequest,
-    });
-    utils.publishPaymentNotification(message, paymentRequestDetails, response);
-    return response;
-  } catch (e) {
-    console.log(e.message);
-  }
+  const response = await connector.sendPayment({
+    paymentRequest,
+  });
+  utils.publishPaymentNotification(message, paymentRequestDetails, response);
+  return response;
 }

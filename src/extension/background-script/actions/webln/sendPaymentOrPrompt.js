@@ -26,8 +26,12 @@ const sendPaymentOrPrompt = async (message, sender) => {
 };
 
 async function sendPaymentWithAllowance(message) {
-  const response = await sendPayment(message);
-  return response;
+  try {
+    const response = await sendPayment(message);
+    return response;
+  } catch (e) {
+    return { error: e.message };
+  }
 }
 
 async function payWithPrompt(message) {
