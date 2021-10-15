@@ -1,8 +1,7 @@
-import PubSub from "pubsub-js";
 import db from "../db";
 
 const updateAllowance = async (message, data) => {
-  const host = data.origin.host;
+  const host = data.origin.host || "";
   const paymentResponse = data.response;
   const route = paymentResponse.data.route;
   const { total_amt } = route;
