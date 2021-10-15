@@ -1,15 +1,18 @@
 import axios from "axios";
 
+import { Battery } from "../../../types";
+
 const urlMatcher = /^https:\/\/www\.youtube.com\/(channel|c)\/([^/]+).*/;
 
-const battery = () => {
+const battery = (): Promise<[Battery] | void> => {
   const matchData = document.location.toString().match(urlMatcher);
-  const name = document.querySelector(
-    "#inner-header-container yt-formatted-string.ytd-channel-name"
-  ).textContent;
-  const imageUrl = document.querySelector(
-    "#channel-header-container yt-img-shadow img"
-  ).src;
+  const name =
+    document.querySelector(
+      "#inner-header-container yt-formatted-string.ytd-channel-name"
+    ).textContent || "";
+  const imageUrl =
+    document.querySelector("#channel-header-container yt-img-shadow img").src ||
+    "";
 
   return axios
     .get(`https://www.youtube.com/${matchData[1]}/${matchData[2]}/about`, {
