@@ -30,6 +30,7 @@ async function sendPaymentWithAllowance(message) {
     const response = await sendPayment(message);
     return response;
   } catch (e) {
+    console.error(e);
     return { error: e.message };
   }
 }
