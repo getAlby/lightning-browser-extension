@@ -9207,10 +9207,10 @@ html-webpack-plugin@^5.0.0, html-webpack-plugin@^5.3.1:
     pretty-error "^3.0.4"
     tapable "^2.0.0"
 
-html5-qrcode@^2.0.12:
-  version "2.0.12"
-  resolved "https://registry.yarnpkg.com/html5-qrcode/-/html5-qrcode-2.0.12.tgz#8c93e530000625b0866e585e86e96fafe259a9ce"
-  integrity sha512-9pfGODZRZ2uhNiZJHGxKp7G31ORJ/N8kQmnib93/HucetbShBimARYjE3Mvgh+rDs2nTetUC5twUYuZ8kvZOvQ==
+html5-qrcode@^2.0.13:
+  version "2.0.13"
+  resolved "https://registry.yarnpkg.com/html5-qrcode/-/html5-qrcode-2.0.13.tgz#b0b11e50054f0641a35888d9a38f17de0073d145"
+  integrity sha512-nB7jN8p/GJ7GSCqNvpXef4tkl55/WWh3d6Ob7fxIpf6AvbnbE/jWXWUhlQrZnnFirHgmsEqHhSVv6RjPk8/iKQ==
 
 htmlparser2@^6.1.0:
   version "6.1.0"
