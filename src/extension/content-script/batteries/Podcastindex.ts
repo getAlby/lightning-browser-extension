@@ -41,6 +41,7 @@ const battery = (): Promise<Battery[] | void> => {
         return {
           method,
           recipient: destination.address,
+          host: window.location.host,
           name: destination.name,
           icon: feed.image,
         };

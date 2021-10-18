@@ -1,6 +1,7 @@
 export interface Battery {
   method: string;
   recipient: string;
-  icon: string;
+  host: string;
   name: string;
+  icon: string;
 }

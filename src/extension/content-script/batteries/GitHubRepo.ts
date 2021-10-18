@@ -16,6 +16,7 @@ const battery = (): Promise<[Battery] | void> => {
         {
           method: "lnurl",
           recipient: response.data,
+          host: window.location.host,
           name: `${username}/${repo}`,
           icon: "",
         },

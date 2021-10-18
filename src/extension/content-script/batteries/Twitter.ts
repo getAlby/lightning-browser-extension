@@ -121,6 +121,7 @@ function battery(): Promise<[Battery] | void> {
           {
             method: "lnurl",
             recipient,
+            host: window.location.host,
             icon: userData.imageUrl,
             name: userData.name,
           },

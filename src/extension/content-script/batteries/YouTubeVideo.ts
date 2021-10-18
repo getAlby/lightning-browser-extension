@@ -30,6 +30,7 @@ const battery = (): Promise<[Battery] | void> => {
     {
       method: "lnurl",
       recipient,
+      host: window.location.host,
       name,
       icon: imageUrl,
     },
