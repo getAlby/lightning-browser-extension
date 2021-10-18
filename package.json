@@ -40,7 +40,7 @@
     ]
   },
   "dependencies": {
-    "@babel/runtime": "^7.13.10",
+    "@babel/runtime": "^7.15.4",
     "@bitcoin-design/bitcoin-icons": "^0.1.1",
     "@headlessui/react": "^1.4.1",
     "@heroicons/react": "^1.0.4",
@@ -78,13 +78,13 @@
     "zustand": "^3.5.12"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.8",
+    "@babel/core": "^7.15.4",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.15.6",
     "@babel/plugin-transform-destructuring": "^7.13.0",
     "@babel/plugin-transform-modules-commonjs": "^7.15.4",
     "@babel/plugin-transform-runtime": "^7.15.8",
-    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-env": "^7.15.4",
     "@babel/preset-react": "^7.13.13",
     "@babel/preset-typescript": "^7.15.0",
     "@storybook/addon-actions": "^6.4.0-beta.4",
