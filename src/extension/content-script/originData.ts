@@ -1,5 +1,32 @@
 // https://github.com/BetaHuhn/metadata-scraper <3
-const metaDataRules = {
+import { MetaData, OriginData } from "../../types";
+
+type MetadataRule = [string, (el: Element) => string | null];
+
+interface Context {
+  url: string;
+  options: Options;
+}
+
+interface RuleSet {
+  rules: MetadataRule[];
+  defaultValue?: (context: Context) => string | string[];
+  scorer?: (el: Element, score: any) => any;
+  processor?: (input: any, context: Context) => any;
+}
+
+interface Options {
+  maxRedirects?: number;
+  ua?: string;
+  lang?: string;
+  timeout?: number;
+  forceImageHttps?: boolean;
+  html?: string;
+  url?: string;
+  customRules?: Record<string, RuleSet>;
+}
+
+const metaDataRules: Record<string, RuleSet> = {
   title: {
     rules: [
       [
@@ -34,7 +61,7 @@ const metaDataRules = {
         'meta[name="sailthru.title"][content]',
         (element) => element.getAttribute("content"),
       ],
-      ["title", (element) => element.text],
+      ["title", (element: any) => element.text],
     ],
   },
   description: {
@@ -281,7 +308,7 @@ const metaDataRules = {
       ],
     ],
     processor: (keywords) =>
-      keywords.split(",").map((keyword) => keyword.trim()),
+      keywords.split(",").map((keyword: string) => keyword.trim()),
   },
   author: {
     rules: [
@@ -325,8 +352,8 @@ const metaDataRules = {
         'meta[name="sailthru.author"][content]',
         (element) => element.getAttribute("content"),
       ],
-      ['a[class*="author" i]', (element) => element.text],
-      ['[rel="author"]', (element) => element.text],
+      ['a[class*="author" i]', (element: any) => element.text],
+      ['[rel="author"]', (element: any) => element.text],
       [
         'meta[property="twitter:creator"][content]',
         (element) => element.getAttribute("content"),
@@ -527,15 +554,15 @@ const metaDataRules = {
   },
 };
 
-function makeUrlAbsolute(base, path) {
+function makeUrlAbsolute(base: string, path: string) {
   return new URL(path, base).href;
 }
 
-function makeUrlSecure(url) {
+function makeUrlSecure(url: string) {
   return url.replace(/^http:/, "https:");
 }
 
-function getProvider(host) {
+function getProvider(host: string) {
   return host
     .replace(/www[a-zA-Z0-9]*\./, "")
     .replace(".co.", ".")
@@ -544,7 +571,7 @@ function getProvider(host) {
     .join(" ");
 }
 
-const runRule = function (ruleSet, doc, context) {
+const runRule = function (ruleSet: RuleSet, doc: Document, context: Context) {
   let maxScore = 0;
   let value;
 
@@ -588,8 +615,8 @@ const runRule = function (ruleSet, doc, context) {
 };
 
 const getMetaData = function () {
-  const metadata = {};
-  Object.keys(metaDataRules).map((key) => {
+  const metadata: MetaData = {};
+  Object.keys(metaDataRules).forEach((key) => {
     const ruleSet = metaDataRules[key];
     metadata[key] =
       runRule(ruleSet, document, {
@@ -601,7 +628,7 @@ const getMetaData = function () {
   return metadata;
 };
 
-export default function getOriginData() {
+export default function getOriginData(): OriginData {
   if (!window || !document) {
     throw new Error("Must be called in browser context");
   }
@@ -613,9 +640,9 @@ export default function getOriginData() {
     domain: window.location.origin,
     host: window.location.host,
     pathname: window.location.pathname,
-    name: metaData.provider || metaData.title,
-    description: metaData.description,
-    icon: metaData.image || metaData.icon,
+    name: metaData.provider || metaData.title || "",
+    description: metaData.description || "",
+    icon: metaData.image || metaData.icon || "",
     metaData: metaData,
     external: true, // indicate that the call is coming from the website (and not made internally within the extension)
   };

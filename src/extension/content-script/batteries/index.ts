@@ -1,16 +1,24 @@
 import utils from "../../../common/lib/utils";
+import { Battery } from "../../../types";
 // import GitHubRepo from "./GitHubRepo";
 import Monetization from "./Monetization";
 import Twitter from "./Twitter";
 import YouTubeVideo from "./YouTubeVideo";
 // import YouTubeChannel from "./YouTubeChannel";
 
+declare global {
+  interface Window {
+    LBE_LIGHTNING_DATA: [Battery] | null;
+    LBE_EXTRACT_LIGHTNING_DATA_RUNNING: boolean;
+  }
+}
+
 const enhancements = [Monetization, Twitter, YouTubeVideo];
 
 function LBE_EXTRACT_LIGHTNING_DATA() {
   // prevent the function from being called multiple times
   // this could happen because the browser.tabs.onUpdated event is fired multiple times
-  if (window.LBE_EXTRACT_LIGHTNING_DATA_RUNNING) {
+  if (window["LBE_EXTRACT_LIGHTNING_DATA_RUNNING"]) {
     return;
   }
   // reset potential previous data (e.g. if navigation happens through JS and not a full page load)
