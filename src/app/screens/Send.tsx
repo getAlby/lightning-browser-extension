@@ -74,7 +74,7 @@ function Send() {
         title="Send a payment"
         headerLeft={
           <IconButton
-            onClick={() => history.goBack()}
+            onClick={() => history.push("/home")}
             icon={
               <img
                 className="w-4 h-4"
