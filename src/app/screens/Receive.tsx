@@ -20,6 +20,7 @@ function Receive() {
     expiration: "",
   });
   const [invoice, setInvoice] = useState();
+  const [copyLabel, setCopyLabel] = useState("Copy");
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -53,6 +54,10 @@ function Receive() {
             onClick={async () => {
               try {
                 navigator.clipboard.writeText(invoice.paymentRequest);
+                setCopyLabel("Copied!");
+                setTimeout(() => {
+                  setCopyLabel("Copy");
+                }, 1000);
               } catch (e) {
                 alert(e.message);
               }
@@ -65,7 +70,7 @@ function Receive() {
                 aria-hidden="true"
               />
             }
-            label="Copy"
+            label={copyLabel}
           />
         </div>
       </div>
