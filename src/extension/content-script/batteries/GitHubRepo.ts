@@ -1,4 +1,6 @@
 import axios, { AxiosResponse } from "axios";
+
+import getOriginData from "../originData";
 import { Battery } from "../../../types";
 
 const urlMatcher = /^https:\/\/github.com\/([^/]+)\/([^/]+)\/*/;
@@ -16,7 +18,7 @@ const battery = (): Promise<[Battery] | void> => {
         {
           method: "lnurl",
           recipient: response.data,
-          host: window.location.host,
+          ...getOriginData(),
           name: `${username}/${repo}`,
           icon: "",
         },

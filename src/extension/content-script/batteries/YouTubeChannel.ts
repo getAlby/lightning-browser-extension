@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
+import getOriginData from "../originData";
 import { Battery } from "../../../types";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/(channel|c)\/([^/]+).*/;
@@ -37,7 +38,7 @@ const battery = (): Promise<[Battery] | void> => {
           {
             method: "lnurl",
             recipient: lnurl[2],
-            host: window.location.host,
+            ...getOriginData(),
             name: name,
             icon: imageUrl,
           },

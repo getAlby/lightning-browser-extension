@@ -1,3 +1,4 @@
+import getOriginData from "../originData";
 import { Battery } from "../../../types";
 
 const urlMatcher = /^https:\/\/twitter\.com\/(\w+).*/;
@@ -121,7 +122,7 @@ function battery(): Promise<[Battery] | void> {
           {
             method: "lnurl",
             recipient,
-            host: window.location.host,
+            ...getOriginData(),
             icon: userData.imageUrl,
             name: userData.name,
           },

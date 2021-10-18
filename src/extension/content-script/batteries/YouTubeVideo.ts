@@ -1,3 +1,4 @@
+import getOriginData from "../originData";
 import { Battery } from "../../../types";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
@@ -30,7 +31,7 @@ const battery = (): Promise<[Battery] | void> => {
     {
       method: "lnurl",
       recipient,
-      host: window.location.host,
+      ...getOriginData(),
       name,
       icon: imageUrl,
     },

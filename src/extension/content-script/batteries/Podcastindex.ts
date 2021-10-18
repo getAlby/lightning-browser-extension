@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
+import getOriginData from "../originData";
 import { Battery } from "../../../types";
 
 interface Podcast {
@@ -41,7 +42,7 @@ const battery = (): Promise<Battery[] | void> => {
         return {
           method,
           recipient: destination.address,
-          host: window.location.host,
+          ...getOriginData(),
           name: destination.name,
           icon: feed.image,
         };
