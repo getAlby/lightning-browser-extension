@@ -7,6 +7,7 @@ import utils from "../../../common/lib/utils";
 import Home from "../../screens/Home";
 import Unlock from "../../screens/Unlock";
 import Send from "../../screens/Send";
+import Receive from "../../screens/Receive";
 import LNURLPay from "../../screens/LNURLPay";
 
 import Loading from "../../components/Loading";
@@ -101,6 +102,9 @@ const Default = () => {
       </Route>
       <Route path="/send">
         <Send />
+      </Route>
+      <Route path="/receive">
+        <Receive />
       </Route>
       <Route path="/lnurlPay">
         <LNURLPay />

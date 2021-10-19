@@ -1,12 +1,16 @@
+import getOriginData from "../originData";
+import { Battery } from "../../../types";
+
 const urlMatcher = /^https:\/\/twitter\.com\/(\w+).*/;
 
 function getUsername() {
   const matchData = document.location.toString().match(urlMatcher);
-  return matchData[1];
+  if (matchData) return matchData[1];
+  return "";
 }
 
 // can we get the user description from the primary column that looks like a profile?
-function isOnProfilePage(username) {
+function isOnProfilePage(username: string) {
   return (
     document.querySelector(
       '[data-testid="primaryColumn"] [data-testid="UserDescription"]'
@@ -15,7 +19,7 @@ function isOnProfilePage(username) {
 }
 
 // can we get the user description from the sidebar?
-function isOnTweet(username) {
+function isOnTweet(username: string) {
   return (
     document.querySelector(
       `[data-testid="sidebarColumn"] [data-testid="UserCell"] a[href="/${username}"]`
@@ -23,12 +27,12 @@ function isOnTweet(username) {
   );
 }
 
-function getUserData(username) {
+function getUserData(username: string) {
   if (isOnProfilePage(username)) {
     const element = document.querySelector(
       '[data-testid="primaryColumn"] [data-testid="UserDescription"]'
     );
-    const imageUrl = document.querySelector(
+    const imageUrl = document.querySelector<HTMLImageElement>(
       `[data-testid="primaryColumn"] a[href="/${username}/photo"] img`
     )?.src;
     if (element && imageUrl) {
@@ -48,7 +52,7 @@ function getUserData(username) {
       return {
         element,
         name: `${
-          profileLinks[1].querySelector("span").textContent
+          profileLinks[1].querySelector("span")?.textContent
         } (@${username}) / Twitter`,
         imageUrl,
       };
@@ -57,13 +61,16 @@ function getUserData(username) {
   return null;
 }
 
-function battery() {
+function battery(): Promise<[Battery] | void> {
   // Twitter loads everything async...so we observe DOM changes to check if data finished loading.
-  let timer;
+  let timer: NodeJS.Timeout;
   const timeout = 1500; // Observing should auto-stop after timeout (when nothing found).
 
   return new Promise((resolve, reject) => {
-    function twitterDOMChanged(_, observer) {
+    function twitterDOMChanged(
+      _: MutationRecord[],
+      observer: MutationObserver
+    ) {
       const username = getUsername();
       let userData;
       if ((userData = getUserData(username))) {
@@ -71,12 +78,15 @@ function battery() {
         clearTimeout(timer);
         console.log({ userData });
 
-        let lnurl;
+        let match;
+        let recipient;
         // extract lnurlp: from the description text
-        lnurl = userData.element.textContent.match(/lnurlp:(\S+)/i);
-
-        // if we did not find anything let's look for an ⚡ emoji
-        if (!lnurl) {
+        if (
+          (match = (userData.element.textContent || "").match(/lnurlp:(\S+)/i))
+        ) {
+          recipient = match[1];
+        } else {
+          // if we did not find anything let's look for an ⚡ emoji
           const zapElement = userData.element.querySelector(
             'img[src*="26a1.svg"]'
           );
@@ -92,15 +102,18 @@ function battery() {
           //});
           // if we find a ⚡ emoji we use the text of the next sibling and try to extract a lnurl
           if (zapElement) {
-            const match = zapElement.nextSibling.textContent.match(/(\S+@\S+)/);
-            if (match) {
-              lnurl = match[1];
+            if (
+              (match = (zapElement.nextSibling?.textContent || "").match(
+                /(\S+@\S+)/
+              ))
+            ) {
+              recipient = match[1];
             }
           }
         }
 
         // if we still did not find anything ignore it.
-        if (!lnurl) {
+        if (!recipient) {
           resolve();
           return;
         }
@@ -108,7 +121,8 @@ function battery() {
         resolve([
           {
             method: "lnurl",
-            recipient: lnurl,
+            recipient,
+            ...getOriginData(),
             icon: userData.imageUrl,
             name: userData.name,
           },

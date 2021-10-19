@@ -90,7 +90,7 @@ export default function UserMenu({ onAccountSwitch }: UserMenuProps) {
         </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
-            openOptions("receive");
+            history.push("/receive");
           }}
         >
           <img

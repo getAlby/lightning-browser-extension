@@ -215,6 +215,7 @@ class Home extends React.Component {
                   const origin = {
                     external: true,
                     name: lnData[0].name,
+                    host: lnData[0].host,
                     description: lnData[0].description,
                     icon: lnData[0].icon,
                   };

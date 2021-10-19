@@ -1,9 +1,10 @@
-import getOriginData from "../../content-script/originData";
+import getOriginData from "../originData";
+import { Battery } from "../../../types";
 
 const urlMatcher = /^https?:\/\/.*/i;
 
-const battery = () => {
-  const monetizationTag = document.querySelector(
+const battery = (): Promise<[Battery] | void> => {
+  const monetizationTag = document.querySelector<HTMLMetaElement>(
     'head > meta[name="lightning"][content^="lnurlp:" i]'
   );
   if (!monetizationTag) {
