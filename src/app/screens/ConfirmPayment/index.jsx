@@ -16,6 +16,7 @@ class ConfirmPayment extends React.Component {
     this.state = {
       budget: (this.props.invoice?.tokens || 0) * 10,
       rememberMe: false,
+      loading: false,
     };
   }
 
@@ -24,9 +25,16 @@ class ConfirmPayment extends React.Component {
       await this.saveBudget();
     }
 
-    return await msg.reply({
-      confirmed: true,
-    });
+    try {
+      this.setState({ loading: true });
+      return await msg.reply({
+        confirmed: true,
+      });
+    } catch (e) {
+      console.error(e);
+    } finally {
+      this.setState({ loading: false });
+    }
   }
 
   reject(e) {
@@ -121,6 +129,8 @@ class ConfirmPayment extends React.Component {
                 label="Confirm"
                 fullWidth
                 primary
+                disabled={this.state.loading}
+                loading={this.state.loading}
               />
             </div>
 

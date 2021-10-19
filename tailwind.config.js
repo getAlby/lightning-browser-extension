@@ -18,7 +18,7 @@ module.exports = {
       },
       colors: {
         "orange-bitcoin": "#f7931a",
-        "orange-bitcoin-h": "#f68b0a",
+        "orange-bitcoin-700": "#e78308",
         "red-bitcoin": "#eb5757",
         "green-bitcoin": "#27ae60",
         "blue-bitcoin": "#2d9cdb",

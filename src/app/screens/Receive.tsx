@@ -19,6 +19,7 @@ function Receive() {
     description: "",
     expiration: "",
   });
+  const [loading, setLoading] = useState(false);
   const [invoice, setInvoice] = useState();
   const [copyLabel, setCopyLabel] = useState("Copy");
 
@@ -33,6 +34,7 @@ function Receive() {
 
   async function createInvoice() {
     try {
+      setLoading(true);
       const response = await utils.call("makeInvoice", {
         amount: formData.amount,
         memo: formData.description,
@@ -40,6 +42,8 @@ function Receive() {
       setInvoice(response);
     } catch (e) {
       alert(e.message);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -164,6 +168,8 @@ function Receive() {
                   label="Create Invoice"
                   fullWidth
                   primary
+                  loading={loading}
+                  disabled={loading}
                 />
               </div>
               <a

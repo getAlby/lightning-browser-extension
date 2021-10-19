@@ -7,6 +7,8 @@ export default function Input({
   type = "text",
   required = false,
   onChange,
+  onFocus,
+  onBlur,
   value,
   autoFocus = false,
   autoComplete = "off",
@@ -23,6 +25,8 @@ export default function Input({
       placeholder={placeholder}
       required={required}
       onChange={onChange}
+      onFocus={onFocus}
+      onBlur={onBlur}
       value={value}
       autoFocus={autoFocus}
       autoComplete={autoComplete}

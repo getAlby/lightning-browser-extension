@@ -179,6 +179,7 @@ function LNURLPay({ details, origin }: Props) {
               fullWidth
               primary
               loading={loading}
+              disabled={loading}
             />
           </div>
 
