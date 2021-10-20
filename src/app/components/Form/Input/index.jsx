@@ -7,6 +7,8 @@ export default function Input({
   type = "text",
   required = false,
   onChange,
+  onFocus,
+  onBlur,
   value,
   autoFocus = false,
   autoComplete = "off",
@@ -19,10 +21,12 @@ export default function Input({
       type={type}
       name={name}
       id={id}
-      className="shadow-sm focus:ring-orange-bitcoin h-14 focus:border-orange-bitcoin block w-full sm:text-sm border-gray-300 rounded-md"
+      className="shadow-sm focus:ring-orange-bitcoin focus:border-orange-bitcoin block w-full sm:text-sm border-gray-300 rounded-md"
       placeholder={placeholder}
       required={required}
       onChange={onChange}
+      onFocus={onFocus}
+      onBlur={onBlur}
       value={value}
       autoFocus={autoFocus}
       autoComplete={autoComplete}

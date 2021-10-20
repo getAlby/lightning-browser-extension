@@ -10,7 +10,7 @@ function Settings() {
   return (
     <Container>
       <h2 className="mt-12 mb-6 text-2xl font-bold">Settings</h2>
-      <div className="shadow sm:rounded-md sm:overflow-hidden p-6">
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden p-6">
         <h3 className="text-gray-700 font-medium">Camera access</h3>
         <p className="text-gray-400 text-sm">For scanning QR codes</p>
         <div className="mt-2">

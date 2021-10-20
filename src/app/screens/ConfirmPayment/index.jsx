@@ -34,6 +34,7 @@ class ConfirmPayment extends React.Component {
       });
       msg.reply(response);
     } catch (e) {
+      console.error(e);
       alert(`Error: ${e.message}`);
     } finally {
       this.setState({ loading: false });

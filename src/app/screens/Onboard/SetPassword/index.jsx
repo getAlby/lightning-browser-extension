@@ -9,30 +9,57 @@ const initialFormData = Object.freeze({
   passwordConfirmation: "",
 });
 
+const initialErrors = Object.freeze({
+  password: "",
+  passwordConfirmation: "",
+});
+
 export default function SetPassword() {
   const history = useHistory();
   const [formData, setFormData] = useState(initialFormData);
+  const [errors, setErrors] = useState(initialErrors);
 
   function handleChange(event) {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value.trim(),
     });
+
+    if (event.target.name === "password" && errors.password) {
+      setErrors({ ...errors, password: "" });
+    } else if (
+      event.target.name === "passwordConfirmation" &&
+      errors.passwordConfirmation &&
+      formData.password === event.target.value.trim()
+    ) {
+      setErrors({ ...errors, passwordConfirmation: "" });
+    }
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const { password, passwordConfirmation } = formData;
-    if (password !== passwordConfirmation) {
-      alert("Passwords don't match.");
-    } else {
-      try {
-        await utils.call("setPassword", { password });
-        history.push("/choose-connector");
-      } catch (e) {
-        console.log(e.message);
-      }
+    try {
+      await utils.call("setPassword", { password: formData.password });
+      history.push("/choose-connector");
+    } catch (e) {
+      console.log(e.message);
     }
+  }
+
+  function validate() {
+    let password = "";
+    let passwordConfirmation = "";
+
+    if (!formData.password) password = "Please enter a password.";
+    if (!formData.passwordConfirmation) {
+      passwordConfirmation = "Please confirm your password.";
+    } else if (formData.password !== formData.passwordConfirmation) {
+      passwordConfirmation = "Passwords don't match.";
+    }
+    setErrors({
+      password,
+      passwordConfirmation,
+    });
   }
 
   return (
@@ -60,6 +87,9 @@ export default function SetPassword() {
                   required
                   onChange={handleChange}
                 />
+                {errors.password && (
+                  <div className="mt-1 text-red-500">{errors.password}</div>
+                )}
               </div>
             </div>
             <div className="mt-6">
@@ -75,12 +105,29 @@ export default function SetPassword() {
                   type="password"
                   required
                   onChange={handleChange}
+                  onBlur={validate}
                 />
+                {errors.passwordConfirmation && (
+                  <div className="mt-1 text-red-500">
+                    {errors.passwordConfirmation}
+                  </div>
+                )}
               </div>
             </div>
           </div>
           <div className="mt-8">
-            <Button label="Next" type="submit" primary />
+            <Button
+              label="Next"
+              type="submit"
+              primary={
+                formData.password &&
+                formData.password === formData.passwordConfirmation
+              }
+              disabled={
+                !formData.password ||
+                formData.password !== formData.passwordConfirmation
+              }
+            />
           </div>
         </div>
         <div className="mt-16 lg:mt-0 lg:w-1/2">
