@@ -11,6 +11,7 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   primary?: boolean;
   loading?: boolean;
   disabled?: boolean;
+  direction?: "row" | "column";
 };
 
 export default function Button({
@@ -18,6 +19,7 @@ export default function Button({
   label,
   onClick,
   disabled,
+  direction = "row",
   icon,
   fullWidth = false,
   primary = false,
@@ -27,6 +29,7 @@ export default function Button({
     <button
       type={type}
       className={classNames(
+        direction === "row" ? "flex-row" : "flex-col",
         fullWidth && "w-full",
         primary
           ? "bg-orange-bitcoin text-white border border-transparent"
@@ -40,11 +43,11 @@ export default function Button({
       disabled={disabled}
     >
       {loading && (
-        <div className="mr-2">
+        <div className={direction === "row" ? "mr-2" : ""}>
           <Loading color={primary ? "white" : "black"} />
         </div>
       )}
-      {icon && <div className="mr-2">{icon}</div>}
+      {icon && <div className={direction === "row" ? "mr-2" : ""}>{icon}</div>}
       {label}
     </button>
   );

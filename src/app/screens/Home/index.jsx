@@ -2,13 +2,15 @@ import React from "react";
 import browser from "webextension-polyfill";
 import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { withRouter } from "react-router";
+import SendIcon from "@bitcoin-design/bitcoin-icons/svg/filled/send.svg";
+import ReceiveIcon from "@bitcoin-design/bitcoin-icons/svg/filled/receive.svg";
 
 import utils from "../../../common/lib/utils";
 
 import Button from "../../components/Button";
 import TransactionsTable from "../../components/TransactionsTable";
 import AllowanceMenu from "../../components/AllowanceMenu";
-
 import Loading from "../../components/Loading";
 import PublisherCard from "../../components/PublisherCard";
 import Progressbar from "../../components/Progressbar";
@@ -155,44 +157,89 @@ class Home extends React.Component {
 
   renderDefaultView() {
     const { payments } = this.state;
+    const { history } = this.props;
     return (
       <div className="p-4">
+        <div className="flex mb-6 space-x-4">
+          <Button
+            fullWidth
+            icon={
+              <img
+                className="w-6 h-6"
+                src={SendIcon}
+                alt=""
+                aria-hidden="true"
+              />
+            }
+            label="Send"
+            direction="column"
+            onClick={() => {
+              history.push("/send");
+            }}
+          />
+          <Button
+            fullWidth
+            icon={
+              <img
+                className="w-6 h-6"
+                src={ReceiveIcon}
+                alt=""
+                aria-hidden="true"
+              />
+            }
+            label="Receive"
+            direction="column"
+            onClick={() => {
+              history.push("/receive");
+            }}
+          />
+        </div>
+
         {this.state.loadingPayments ? (
-          <div className="pt-4 flex justify-center">
+          <div className="flex justify-center">
             <Loading />
           </div>
         ) : (
-          <TransactionsTable
-            transactions={payments.map((payment) => ({
-              ...payment,
-              type: "sent",
-              date: dayjs(payment.createdAt).fromNow(),
-              title: (
-                <p className="truncate">
-                  <a
-                    target="_blank"
-                    title={payment.name}
-                    href={`options.html#/publishers`}
-                    rel="noreferrer"
-                  >
-                    {payment.name}
-                  </a>
-                </p>
-              ),
-              subTitle: (
-                <p className="truncate">
-                  <a
-                    target="_blank"
-                    title={payment.name}
-                    href={`options.html#/publishers`}
-                    rel="noreferrer"
-                  >
-                    {payment.host}
-                  </a>
-                </p>
-              ),
-            }))}
-          />
+          <div>
+            <h2 className="mb-2 text-lg text-gray-900 font-semibold">
+              Transactions
+            </h2>
+            {payments.length > 0 ? (
+              <TransactionsTable
+                transactions={payments.map((payment) => ({
+                  ...payment,
+                  type: "sent",
+                  date: dayjs(payment.createdAt).fromNow(),
+                  title: (
+                    <p className="truncate">
+                      <a
+                        target="_blank"
+                        title={payment.name}
+                        href={`options.html#/publishers`}
+                        rel="noreferrer"
+                      >
+                        {payment.name}
+                      </a>
+                    </p>
+                  ),
+                  subTitle: (
+                    <p className="truncate">
+                      <a
+                        target="_blank"
+                        title={payment.name}
+                        href={`options.html#/publishers`}
+                        rel="noreferrer"
+                      >
+                        {payment.host}
+                      </a>
+                    </p>
+                  ),
+                }))}
+              />
+            ) : (
+              <p className="text-gray-500">No transactions yet.</p>
+            )}
+          </div>
         )}
       </div>
     );
@@ -234,4 +281,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default withRouter(Home);
