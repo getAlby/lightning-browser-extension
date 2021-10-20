@@ -1,6 +1,7 @@
 import browser from "webextension-polyfill";
 import qs from "query-string";
 import shajs from "sha.js";
+import PubSub from "pubsub-js";
 
 const utils = {
   call: (type, args, overwrites) => {
@@ -60,6 +61,17 @@ const utils = {
   },
   stringToUint8Array: (str) => {
     return Uint8Array.from(str, (x) => x.charCodeAt(0));
+  },
+  publishPaymentNotification: (message, paymentRequestDetails, response) => {
+    let status = "success"; // default. let's hope for success
+    if (response.error || (response.data && response.data.payment_error)) {
+      status = "failed";
+    }
+    PubSub.publish(`ln.sendPayment.${status}`, {
+      response,
+      paymentRequestDetails,
+      origin: message.origin,
+    });
   },
   openPage: (page) => {
     browser.tabs.create({ url: browser.runtime.getURL(page) });

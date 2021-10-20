@@ -23,7 +23,7 @@ function Send() {
     if (invoice) {
       try {
         await utils.call(
-          "sendPayment",
+          "sendPaymentOrPrompt",
           { paymentRequest: invoice },
           { origin: getOriginData() }
         );

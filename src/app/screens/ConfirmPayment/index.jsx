@@ -8,6 +8,7 @@ import CurrencyInput from "../../components/Form/CurrencyInput";
 import PaymentSummary from "../../components/PaymentSummary";
 import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
+import utils from "../../../common/lib/utils";
 
 class ConfirmPayment extends React.Component {
   constructor(props) {
@@ -27,11 +28,14 @@ class ConfirmPayment extends React.Component {
 
     try {
       this.setState({ loading: true });
-      return await msg.reply({
-        confirmed: true,
+      const response = await utils.call("sendPayment", {
+        message: { origin: this.props.origin },
+        paymentRequest: this.props.paymentRequest,
       });
+      msg.reply(response);
     } catch (e) {
       console.error(e);
+      alert(`Error: ${e.message}`);
     } finally {
       this.setState({ loading: false });
     }
