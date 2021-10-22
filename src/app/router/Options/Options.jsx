@@ -47,7 +47,6 @@ function Options() {
             ? `${accountInfo.balance} Sats`
             : ""
         }
-        right={<UserMenu onAccountSwitch={loadAccountInfo} />}
       >
         <Navbar.Link href="/publishers">Publishers</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>
