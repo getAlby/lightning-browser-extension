@@ -1,11 +1,15 @@
 import React, { useState, MouseEvent } from "react";
 import axios from "axios";
+import { useHistory, useLocation } from "react-router-dom";
+import CaretLeftIcon from "@bitcoin-design/bitcoin-icons/svg/filled/caret-left.svg";
 
 import msg from "../../common/lib/msg";
 import utils from "../../common/lib/utils";
 import lnurl from "../../common/lib/lnurl";
 
 import Button from "../components/Button";
+import Header from "../components/Header";
+import IconButton from "../components/IconButton";
 import Input from "../components/Form/Input";
 import PublisherCard from "../components/PublisherCard";
 
@@ -23,7 +27,11 @@ type Props = {
   };
 };
 
-function LNURLPay({ details, origin }: Props) {
+function LNURLPay(props: Props) {
+  const history = useHistory();
+  const location = useLocation();
+  const details = props.details || location.state?.details;
+  const origin = props.origin || location.state?.origin;
   const [valueMSat, setValueMSat] = useState<string | number>(
     details.minSendable
   );
@@ -101,7 +109,11 @@ function LNURLPay({ details, origin }: Props) {
 
   function reject(e: MouseEvent) {
     e.preventDefault();
-    msg.error("User rejected");
+    if (props.details && props.origin) {
+      msg.error("User rejected");
+    } else {
+      history.goBack();
+    }
   }
 
   function renderAmount() {
@@ -157,9 +169,27 @@ function LNURLPay({ details, origin }: Props) {
 
   return (
     <div>
+      {location.state && (
+        <Header
+          title="Send a payment"
+          headerLeft={
+            <IconButton
+              onClick={() => history.goBack()}
+              icon={
+                <img
+                  className="w-4 h-4"
+                  src={CaretLeftIcon}
+                  alt=""
+                  aria-hidden="true"
+                />
+              }
+            />
+          }
+        />
+      )}
       <PublisherCard title={origin.name} image={origin.icon} />
       <div className="p-6">
-        <dl className="shadow pt-4 px-4 rounded-lg mb-8 overflow-hidden">
+        <dl className="shadow bg-white pt-4 px-4 rounded-lg mb-6 overflow-hidden">
           {[
             ["Send payment to", details.domain],
             ...formattedMetadata(),
