@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import browser from "webextension-polyfill";
 import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { withRouter } from "react-router";
+
 import SendIcon from "@bitcoin-design/bitcoin-icons/svg/filled/send.svg";
 import ReceiveIcon from "@bitcoin-design/bitcoin-icons/svg/filled/receive.svg";
 
