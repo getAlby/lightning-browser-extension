@@ -21,13 +21,15 @@ export default function Navbar({
   return (
     <div className="px-4 py-2 bg-white flex justify-between items-center border-b border-gray-200">
       <div className="flex w-8/12 md:w-4/12 lg:w-3/12">
-        <div className="relative pl-2 flex items-center bg-gray-100 rounded-md">
-          <img
-            className="-ml-1 w-8 h-8 opacity-50"
-            src={WalletIcon}
-            alt=""
-            aria-hidden="true"
-          />
+        <div className="relative pl-2 flex bg-gray-100 rounded-md">
+          <div className="flex items-center">
+            <img
+              className="-ml-1 w-8 h-8 opacity-50"
+              src={WalletIcon}
+              alt=""
+              aria-hidden="true"
+            />
+          </div>
           <div
             className={`flex-auto mx-2 py-1 ${
               !title && !subtitle ? "w-28" : ""
