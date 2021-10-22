@@ -23,6 +23,7 @@ function Options() {
       setAccountInfo({ alias, balance });
     });
   }
+
   useEffect(() => {
     utils
       .call("status")
@@ -47,7 +48,7 @@ function Options() {
             ? `${accountInfo.balance} Sats`
             : ""
         }
-        right={<UserMenu onAccountSwitch={loadAccountInfo} />}
+        onAccountSwitch={loadAccountInfo}
       >
         <Navbar.Link href="/publishers">Publishers</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>
