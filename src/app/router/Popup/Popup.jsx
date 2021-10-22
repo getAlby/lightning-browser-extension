@@ -87,6 +87,10 @@ const Default = () => {
             ? `${accountInfo.balance} Sats`
             : ""
         }
+        onAccountSwitch={() => {
+          getAccountInfo();
+          setKey(Date.now()); // Refresh Home.
+        }}
       />
       <Route path="/home">
         <Home key={key} />

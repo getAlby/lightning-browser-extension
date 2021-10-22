@@ -12,7 +12,7 @@ type Props = {
   onAccountSwitch?: () => void;
 };
 
-function AccountMenu(onAccountSwitch: Props) {
+function AccountMenu({ onAccountSwitch }: Props) {
   const history = useHistory();
   const [accounts, setAccounts] = useState({});
 
