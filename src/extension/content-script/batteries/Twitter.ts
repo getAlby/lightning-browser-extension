@@ -22,7 +22,7 @@ function isOnProfilePage(username: string) {
 function isOnTweet(username: string) {
   return (
     document.querySelector(
-      `[data-testid="sidebarColumn"] [data-testid="UserCell"] a[href="/${username}"]`
+      `[data-testid="sidebarColumn"] [data-testid="UserCell"] a[href="/${username}" i]`
     ) != null
   );
 }
@@ -33,7 +33,7 @@ function getUserData(username: string) {
       '[data-testid="primaryColumn"] [data-testid="UserDescription"]'
     );
     const imageUrl = document.querySelector<HTMLImageElement>(
-      `[data-testid="primaryColumn"] a[href="/${username}/photo"] img`
+      `[data-testid="primaryColumn"] a[href="/${username}/photo" i] img`
     )?.src;
     if (element && imageUrl) {
       return {
@@ -44,7 +44,7 @@ function getUserData(username: string) {
     }
   } else if (isOnTweet(username)) {
     const profileLinks = document.querySelectorAll(
-      `[data-testid="sidebarColumn"] [data-testid="UserCell"] a[href="/${username}"]`
+      `[data-testid="sidebarColumn"] [data-testid="UserCell"] a[href="/${username}" i]`
     );
     const element = profileLinks[1].closest('[data-testid="UserCell"]');
     const imageUrl = profileLinks[0].querySelector("img")?.src;
