@@ -23,7 +23,6 @@ function LBE_EXTRACT_LIGHTNING_DATA() {
   }
   // reset potential previous data (e.g. if navigation happens through JS and not a full page load)
   window.LBE_LIGHTNING_DATA = null;
-  utils.call("setIcon", { icon: "off" });
   // get maching extractors/enhancements for the current URL
   // NOTE: this does not mean that data can be found. Because of that we run all possible ones
   const matching = enhancements.filter((e) => {

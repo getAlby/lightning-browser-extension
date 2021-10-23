@@ -35,17 +35,26 @@ const updateIcon = async (tabId, changeInfo, tabInfo) => {
     .equalsIgnoreCase(url.host)
     .first();
 
+  // TODO: move to some config file
+  const names = {
+    active: "satsymbol",
+    off: "satsymbol-black",
+  };
+  let name;
   if (allowance) {
-    return browser.browserAction.setIcon({
-      path: {
-        16: "assets/icons/satsymbol-16.png",
-        32: "assets/icons/satsymbol-32.png",
-        48: "assets/icons/satsymbol-48.png",
-        128: "assets/icons/satsymbol-128.png",
-      },
-      tabId: tabId,
-    });
+    name = names.active;
+  } else {
+    name = names.off;
   }
+  return browser.browserAction.setIcon({
+    path: {
+      16: `assets/icons/${name}-16.png`,
+      32: `assets/icons/${name}-32.png`,
+      48: `assets/icons/${name}-48.png`,
+      128: `assets/icons/${name}-128.png`,
+    },
+    tabId: tabId,
+  });
 };
 
 const debugLogger = (message, sender) => {
@@ -101,9 +110,10 @@ async function init() {
   // this is the only handler that may and must return a Promise which resolve with the response to the content script
   browser.runtime.onMessage.addListener(routeCalls);
 
-  browser.tabs.onUpdated.addListener(updateIcon); // update Icon when there is an allowance
   // TODO: make optional
   browser.tabs.onUpdated.addListener(extractLightningDataFromPage); // extract LN data from websites
+
+  browser.tabs.onUpdated.addListener(updateIcon); // update Icon when there is an allowance
   /*
   if (settings.enableLsats) {
     await browser.storage.sync.set({ lsats: {} });
