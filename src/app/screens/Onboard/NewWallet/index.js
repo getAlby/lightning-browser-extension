@@ -39,7 +39,7 @@ export default function NewWallet() {
 
     const { login, password } = lndHubData;
     const account = {
-      name: "LNDHub",
+      name: "Alby",
       config: {
         login,
         password,
