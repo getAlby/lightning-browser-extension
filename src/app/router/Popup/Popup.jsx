@@ -12,7 +12,6 @@ import LNURLPay from "../../screens/LNURLPay";
 
 import Loading from "../../components/Loading";
 import Navbar from "../../components/Navbar";
-import UserMenu from "../../components/UserMenu";
 
 class Popup extends React.Component {
   constructor(props) {

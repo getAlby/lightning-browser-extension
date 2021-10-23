@@ -9,7 +9,7 @@ import utils from "../../common/lib/utils";
 import Button from "../components/Button";
 import IconButton from "../components/IconButton";
 import Input from "../components/Form/Input";
-import Select from "../components/Form/Select";
+// import Select from "../components/Form/Select";
 import Header from "../components/Header";
 
 function Receive() {
@@ -131,7 +131,7 @@ function Receive() {
               <div className="mt-1">
                 <Input
                   name="description"
-                  placeholder="Who is sending this payment?"
+                  placeholder="For e.g. who is sending this payment?"
                   type="text"
                   onChange={handleChange}
                 />
@@ -167,9 +167,15 @@ function Receive() {
                   onClick={createInvoice}
                   label="Create Invoice"
                   fullWidth
-                  primary
+                  primary={
+                    formData.amount !== "" && formData.description !== ""
+                  }
                   loading={loading}
-                  disabled={loading}
+                  disabled={
+                    loading ||
+                    formData.amount === "" ||
+                    formData.description === ""
+                  }
                 />
               </div>
               <a
