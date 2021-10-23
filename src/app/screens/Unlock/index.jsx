@@ -55,7 +55,13 @@ function Unlock(props) {
             onChange={handlePasswordChange}
           />
         </div>
-        <Button type="submit" label="unlock" fullWidth primary />
+        <Button
+          type="submit"
+          label="unlock"
+          fullWidth
+          primary
+          disabled={password === ""}
+        />
       </form>
       {error && (
         <p>

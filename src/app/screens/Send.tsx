@@ -20,16 +20,14 @@ function Send() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (invoice) {
-      try {
-        await utils.call(
-          "sendPaymentOrPrompt",
-          { paymentRequest: invoice },
-          { origin: getOriginData() }
-        );
-      } catch (e) {
-        alert(e.message);
-      }
+    try {
+      await utils.call(
+        "sendPaymentOrPrompt",
+        { paymentRequest: invoice },
+        { origin: getOriginData() }
+      );
+    } catch (e) {
+      alert(e.message);
     }
   }
 
@@ -97,10 +95,10 @@ function Send() {
           />
         }
       />
-      <form className="px-4 max-w-screen-sm mx-auto" onSubmit={handleSubmit}>
+      <form className="p-4 max-w-screen-sm mx-auto" onSubmit={handleSubmit}>
         <label
           htmlFor="invoice"
-          className="mt-6 block font-medium text-gray-700"
+          className="mt-2 block font-medium text-gray-700"
         >
           Lightning Invoice
         </label>
@@ -114,7 +112,13 @@ function Send() {
             }
           />
         </div>
-        <Button type="submit" label="View invoice" primary fullWidth />
+        <Button
+          type="submit"
+          label="View invoice"
+          primary
+          disabled={invoice === ""}
+          fullWidth
+        />
       </form>
     </div>
   );

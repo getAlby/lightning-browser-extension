@@ -15,6 +15,6 @@ export const Primary = () => (
 );
 
 export default {
-  title: "Components/Radio",
+  title: "Components/Form/Radio",
   component: Radio,
 };

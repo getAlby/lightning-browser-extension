@@ -57,6 +57,7 @@ function Options() {
       </Navbar>
 
       <Switch>
+        <Redirect from="/home" to="/publishers" />
         <Route exact path="/">
           <Redirect to="/publishers" />
         </Route>

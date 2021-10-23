@@ -27,6 +27,7 @@ class Home extends React.Component {
       currency: "USD",
       payments: {},
       loadingPayments: true,
+      loadingSendSats: false,
       lnData: [],
     };
   }
@@ -248,7 +249,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { allowance, lnData } = this.state;
+    const { allowance, lnData, loadingSendSats } = this.state;
     const { history } = this.props;
 
     return (
@@ -258,6 +259,7 @@ class Home extends React.Component {
             <Button
               onClick={async () => {
                 try {
+                  this.setState({ loadingSendSats: true });
                   const details = await lnurl.getDetails(lnData[0].recipient);
                   const origin = {
                     external: true,
@@ -272,10 +274,13 @@ class Home extends React.Component {
                   });
                 } catch (e) {
                   alert(e.message);
+                } finally {
+                  this.setState({ loadingSendSats: false });
                 }
               }}
               label="⚡️ Send Sats ⚡️"
               primary
+              loading={loadingSendSats}
             />
           </PublisherCard>
         )}

@@ -7,6 +7,6 @@ export const Primary = () => (
 );
 
 export default {
-  title: "Components/Input",
+  title: "Components/Form/Input",
   component: Input,
 };

@@ -98,7 +98,12 @@ export default function ConnectLnbits() {
                 return false;
               }}
             />
-            <Button type="submit" label="Continue" primary />
+            <Button
+              type="submit"
+              label="Continue"
+              primary
+              disabled={formData.adminkey === "" || formData.url === ""}
+            />
           </div>
         </div>
         <div className="mt-16 lg:mt-0 lg:w-1/2">
