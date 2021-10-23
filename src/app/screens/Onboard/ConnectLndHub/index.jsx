@@ -113,7 +113,12 @@ export default function ConnectLndHub() {
                 return false;
               }}
             />
-            <Button type="submit" label="Continue" primary />
+            <Button
+              type="submit"
+              label="Continue"
+              primary={formData.uri !== ""}
+              disabled={formData.uri === ""}
+            />
           </div>
         </div>
         <div className="mt-16 lg:mt-0 lg:w-1/2">
