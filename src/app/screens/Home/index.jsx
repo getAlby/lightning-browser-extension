@@ -1,12 +1,14 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import browser from "webextension-polyfill";
 import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { withRouter } from "react-router";
+
 import SendIcon from "@bitcoin-design/bitcoin-icons/svg/filled/send.svg";
 import ReceiveIcon from "@bitcoin-design/bitcoin-icons/svg/filled/receive.svg";
 
 import utils from "../../../common/lib/utils";
+import lnurl from "../../../common/lib/lnurl";
 
 import Button from "../../components/Button";
 import TransactionsTable from "../../components/TransactionsTable";
@@ -247,6 +249,7 @@ class Home extends React.Component {
 
   render() {
     const { allowance, lnData } = this.state;
+    const { history } = this.props;
 
     return (
       <div>
@@ -254,21 +257,22 @@ class Home extends React.Component {
           <PublisherCard title={lnData[0].name} image={lnData[0].icon}>
             <Button
               onClick={async () => {
-                await utils.call(
-                  "lnurl",
-                  {
-                    lnurlEncoded: lnData[0].recipient,
-                  },
-                  {
-                    origin: {
-                      external: true,
-                      name: lnData[0].name,
-                      host: lnData[0].host,
-                      description: lnData[0].description,
-                      icon: lnData[0].icon,
-                    },
-                  }
-                );
+                try {
+                  const details = await lnurl.getDetails(lnData[0].recipient);
+                  const origin = {
+                    external: true,
+                    name: lnData[0].name,
+                    host: lnData[0].host,
+                    description: lnData[0].description,
+                    icon: lnData[0].icon,
+                  };
+                  history.push("/lnurlPay", {
+                    details,
+                    origin,
+                  });
+                } catch (e) {
+                  alert(e.message);
+                }
               }}
               label="⚡️ Send Sats ⚡️"
               primary

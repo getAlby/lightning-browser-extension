@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { createHashHistory } from "history";
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { createMemoryHistory } from "history";
+import { Switch, Route, Router } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";
 
@@ -8,6 +8,7 @@ import Home from "../../screens/Home";
 import Unlock from "../../screens/Unlock";
 import Send from "../../screens/Send";
 import Receive from "../../screens/Receive";
+import LNURLPay from "../../screens/LNURLPay";
 
 import Loading from "../../components/Loading";
 import Navbar from "../../components/Navbar";
@@ -16,7 +17,7 @@ import UserMenu from "../../components/UserMenu";
 class Popup extends React.Component {
   constructor(props) {
     super(props);
-    this.history = createHashHistory();
+    this.history = createMemoryHistory();
   }
 
   componentDidMount() {
@@ -39,7 +40,7 @@ class Popup extends React.Component {
 
   render() {
     return (
-      <HashRouter>
+      <Router history={this.history}>
         <section id="popup">
           <Switch>
             <Route exact path="/">
@@ -55,7 +56,7 @@ class Popup extends React.Component {
             </Route>
           </Switch>
         </section>
-      </HashRouter>
+      </Router>
     );
   }
 }
@@ -85,14 +86,10 @@ const Default = () => {
             ? `${accountInfo.balance} Sats`
             : ""
         }
-        right={
-          <UserMenu
-            onAccountSwitch={() => {
-              getAccountInfo();
-              setKey(Date.now()); // Refresh Home.
-            }}
-          />
-        }
+        onAccountSwitch={() => {
+          getAccountInfo();
+          setKey(Date.now()); // Refresh Home.
+        }}
       />
       <Route path="/home">
         <Home key={key} />
@@ -102,6 +99,9 @@ const Default = () => {
       </Route>
       <Route path="/receive">
         <Receive />
+      </Route>
+      <Route path="/lnurlPay">
+        <LNURLPay />
       </Route>
     </div>
   );
