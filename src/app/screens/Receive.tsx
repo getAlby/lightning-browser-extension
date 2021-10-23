@@ -114,7 +114,7 @@ function Receive() {
               <div className="mt-1">
                 <Input
                   name="amount"
-                  placeholder="Enter amount..."
+                  placeholder="Amount in Satoshi..."
                   type="text"
                   onChange={handleChange}
                 />

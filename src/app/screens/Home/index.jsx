@@ -95,7 +95,7 @@ class Home extends React.Component {
                 <dl className="mb-0">
                   <dt className="text-xs text-gray-500">Allowance</dt>
                   <dd className="mb-0 text-sm font-medium">
-                    {allowance.usedBudget} / {allowance.totalBudget} Sats
+                    {allowance.usedBudget} / {allowance.totalBudget} sat used
                   </dd>
                 </dl>
               </>
