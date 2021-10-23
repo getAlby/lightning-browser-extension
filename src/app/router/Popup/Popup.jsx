@@ -14,8 +14,6 @@ import Loading from "../../components/Loading";
 import Navbar from "../../components/Navbar";
 import UserMenu from "../../components/UserMenu";
 
-import "./styles.scss";
-
 class Popup extends React.Component {
   constructor(props) {
     super(props);
