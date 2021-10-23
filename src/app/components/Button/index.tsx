@@ -36,8 +36,7 @@ export default function Button({
           : `bg-white text-gray-700 border border-gray-200`,
         primary && !disabled && "hover:bg-orange-bitcoin-700",
         !primary && !disabled && "hover:bg-gray-100",
-        disabled ? "cursor-default" : "cursor-pointer",
-        primary && disabled && "opacity-60",
+        disabled ? "cursor-default opacity-60" : "cursor-pointer",
         "inline-flex justify-center items-center px-7 py-2 font-medium rounded-md shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-bitcoin transition duration-150"
       )}
       onClick={onClick}
