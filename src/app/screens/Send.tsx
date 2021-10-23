@@ -115,7 +115,7 @@ function Send() {
         <Button
           type="submit"
           label="View invoice"
-          primary={invoice !== ""}
+          primary
           disabled={invoice === ""}
           fullWidth
         />

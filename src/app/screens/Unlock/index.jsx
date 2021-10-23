@@ -59,7 +59,7 @@ function Unlock(props) {
           type="submit"
           label="unlock"
           fullWidth
-          primary={password !== ""}
+          primary
           disabled={password === ""}
         />
       </form>

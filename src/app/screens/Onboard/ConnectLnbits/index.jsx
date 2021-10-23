@@ -101,7 +101,7 @@ export default function ConnectLnbits() {
             <Button
               type="submit"
               label="Continue"
-              primary={formData.adminkey !== "" && formData.url !== ""}
+              primary
               disabled={formData.adminkey === "" || formData.url === ""}
             />
           </div>

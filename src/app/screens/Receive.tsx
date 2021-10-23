@@ -167,9 +167,7 @@ function Receive() {
                   onClick={createInvoice}
                   label="Create Invoice"
                   fullWidth
-                  primary={
-                    formData.amount !== "" && formData.description !== ""
-                  }
+                  primary
                   loading={loading}
                   disabled={
                     loading ||

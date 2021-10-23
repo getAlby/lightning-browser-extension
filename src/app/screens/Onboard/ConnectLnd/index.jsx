@@ -166,7 +166,7 @@ export default function ConnectLnd() {
             <Button
               type="submit"
               label="Continue"
-              primary={formData.address !== "" && formData.macaroon !== ""}
+              primary
               disabled={formData.address === "" || formData.macaroon === ""}
             />
           </div>

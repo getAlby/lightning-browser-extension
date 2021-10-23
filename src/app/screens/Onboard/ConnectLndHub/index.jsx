@@ -116,7 +116,7 @@ export default function ConnectLndHub() {
             <Button
               type="submit"
               label="Continue"
-              primary={formData.uri !== ""}
+              primary
               disabled={formData.uri === ""}
             />
           </div>
