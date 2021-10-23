@@ -22,7 +22,6 @@ class Prompt extends React.Component {
     let origin = {};
     let args = {};
     let invoice = {};
-    console.log(message);
     if (message.origin) {
       origin = JSON.parse(message.origin);
     }
