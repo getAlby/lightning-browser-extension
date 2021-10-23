@@ -168,24 +168,6 @@ function LNURLPay(props: Props) {
 
   return (
     <div>
-      {location.state && (
-        <Header
-          title="Send a payment"
-          headerLeft={
-            <IconButton
-              onClick={() => history.goBack()}
-              icon={
-                <img
-                  className="w-4 h-4"
-                  src={CaretLeftIcon}
-                  alt=""
-                  aria-hidden="true"
-                />
-              }
-            />
-          }
-        />
-      )}
       <PublisherCard title={origin.name} image={origin.icon} />
       <div className="p-6">
         <dl className="shadow bg-white pt-4 px-4 rounded-lg mb-6 overflow-hidden">
