@@ -76,7 +76,7 @@ function LNURLPay(props: Props) {
           case "url": // TODO: For url, the wallet should give the user a popup which displays description, url, and a 'open' button to open the url in a new browser tab
             if (
               window.confirm(
-                `${successAction.description} \nDo you want to open? ${successAction.url}?`
+                `${successAction.description} \n\nDo you want to visit the following page?\n\n${successAction.url}`
               )
             ) {
               utils.openUrl(successAction.url);
