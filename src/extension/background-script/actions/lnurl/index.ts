@@ -185,20 +185,15 @@ export async function lnurlPay(message, sender) {
     request: paymentRequest,
   });
 
-  try {
-    const response = await connector.sendPayment({
-      paymentRequest,
-    });
-    utils.publishPaymentNotification(
-      message.args.message,
-      paymentRequestDetails,
-      response
-    );
-
-    return response;
-  } catch (e) {
-    console.log(e.message);
-  }
+  const response = await connector.sendPayment({
+    paymentRequest,
+  });
+  utils.publishPaymentNotification(
+    message.args.message,
+    paymentRequestDetails,
+    response
+  );
+  return response;
 }
 
 export default lnurl;
