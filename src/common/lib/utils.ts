@@ -4,7 +4,11 @@ import shajs from "sha.js";
 import PubSub from "pubsub-js";
 
 const utils = {
-  call: (type, args, overwrites) => {
+  call: (
+    type: string,
+    args?: { [key: string]: any },
+    overwrites?: { [key: string]: any }
+  ) => {
     return browser.runtime
       .sendMessage({
         application: "LBE",
@@ -14,27 +18,26 @@ const utils = {
         origin: { internal: true },
         ...overwrites,
       })
-      .then((response) => {
+      .then((response: { data: any; error?: string }) => {
         if (response.error) {
           throw new Error(response.error);
         }
         return response.data;
       });
   },
-  notify: (details) => {
-    const notification = Object.assign(
-      {
-        type: "basic",
-        iconUrl: "assets/icons/satsymbol-48.png",
-      },
-      details
-    );
+  notify: (options: { title: string; message: string }) => {
+    const notification: browser.Notifications.CreateNotificationOptions = {
+      type: "basic",
+      iconUrl: "assets/icons/satsymbol-48.png",
+      ...options,
+    };
+
     return browser.notifications.create(notification);
   },
-  getHash: (str) => {
+  getHash: (str: string) => {
     return shajs("sha256").update(str).digest("hex");
   },
-  base64ToHex: (str) => {
+  base64ToHex: (str: string) => {
     for (
       var i = 0, bin = atob(str.replace(/[ \r\n]+$/, "")), hex = [];
       i < bin.length;
@@ -46,20 +49,21 @@ const utils = {
     }
     return hex.join("");
   },
-  bytesToHexString: (bytes) => {
+  bytesToHexString: (bytes: number[]) => {
     return Array.from(bytes, (byte) => {
       return ("0" + (byte & 0xff).toString(16)).slice(-2);
     }).join("");
   },
-  bytesToString: (bytes) => {
+  bytesToString: (bytes: number[]) => {
     return String.fromCharCode.apply(null, bytes);
   },
-  hexToUint8Array: (hexString) => {
-    return new Uint8Array(
-      hexString.match(/.{1,2}/g).map((byte) => parseInt(byte, 16))
-    );
+  hexToUint8Array: (hexString: string) => {
+    const match = hexString.match(/.{1,2}/g);
+    if (match) {
+      return new Uint8Array(match.map((byte) => parseInt(byte, 16)));
+    }
   },
-  stringToUint8Array: (str) => {
+  stringToUint8Array: (str: string) => {
     return Uint8Array.from(str, (x) => x.charCodeAt(0));
   },
   publishPaymentNotification: (message, paymentRequestDetails, response) => {
@@ -73,10 +77,10 @@ const utils = {
       origin: message.origin,
     });
   },
-  openPage: (page) => {
+  openPage: (page: string) => {
     browser.tabs.create({ url: browser.runtime.getURL(page) });
   },
-  openUrl: (url) => {
+  openUrl: (url: string) => {
     browser.tabs.create({ url });
   },
   openPrompt: (message) => {

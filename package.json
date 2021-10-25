@@ -36,8 +36,7 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix",
-      "prettier --write",
-      "tsc --noEmit"
+      "prettier --write"
     ]
   },
   "dependencies": {
@@ -96,7 +95,10 @@
     "@storybook/cli": "^6.4.0-beta.4",
     "@storybook/manager-webpack5": "^6.4.0-beta.4",
     "@storybook/react": "^6.4.0-beta.4",
+    "@types/pubsub-js": "^1.8.3",
     "@types/react-router-dom": "^5.3.1",
+    "@types/sha.js": "^2.4.0",
+    "@types/webextension-polyfill": "^0.8.1",
     "@typescript-eslint/eslint-plugin": "^4.32.0",
     "@typescript-eslint/parser": "^4.33.0",
     "autoprefixer": "^10.3.6",
