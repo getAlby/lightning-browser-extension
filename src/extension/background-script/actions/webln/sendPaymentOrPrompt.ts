@@ -31,7 +31,9 @@ async function sendPaymentWithAllowance(message) {
     return response;
   } catch (e) {
     console.error(e);
-    return { error: e.message };
+    if (e instanceof Error) {
+      return { error: e.message };
+    }
   }
 }
 
@@ -44,7 +46,9 @@ async function payWithPrompt(message) {
     return response;
   } catch (e) {
     console.log("Payment cancelled", e);
-    return { error: e.message };
+    if (e instanceof Error) {
+      return { error: e.message };
+    }
   }
 }
 
