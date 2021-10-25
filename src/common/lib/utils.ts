@@ -66,7 +66,11 @@ const utils = {
   stringToUint8Array: (str: string) => {
     return Uint8Array.from(str, (x) => x.charCodeAt(0));
   },
-  publishPaymentNotification: (message, paymentRequestDetails, response) => {
+  publishPaymentNotification: (
+    message,
+    paymentRequestDetails: PaymentRequestDetails,
+    response
+  ) => {
     let status = "success"; // default. let's hope for success
     if (response.error || (response.data && response.data.payment_error)) {
       status = "failed";
@@ -119,7 +123,7 @@ const utils = {
             }
           };
 
-          const onRemovedListener = (tid) => {
+          const onRemovedListener = (tid: number) => {
             if (tabId === tid) {
               browser.runtime.onMessage.removeListener(onMessageListener);
               reject(new Error("Prompt was closed"));
