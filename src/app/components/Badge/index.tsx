@@ -4,7 +4,7 @@ type Props = {
   label: string;
   color: string;
   textColor: string;
-  small: boolean;
+  small?: boolean;
 };
 
 export default function Badge({ label, color, textColor, small }: Props) {

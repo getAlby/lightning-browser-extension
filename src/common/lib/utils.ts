@@ -8,7 +8,7 @@ import { OriginData } from "../../types";
 const utils = {
   call: (
     type: string,
-    args?: { [key: string]: string | number },
+    args?: { [key: string]: any },
     overwrites?: { [key: string]: string }
   ) => {
     return browser.runtime

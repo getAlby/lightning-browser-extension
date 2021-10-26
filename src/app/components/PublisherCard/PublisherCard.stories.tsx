@@ -1,7 +1,9 @@
 import React from "react";
-import PublisherCard from "./";
+import { Story } from "@storybook/react/types-6-0";
 
-const Template = (args) => <PublisherCard {...args} />;
+import PublisherCard, { Props } from "./";
+
+const Template: Story<Props> = (args) => <PublisherCard {...args} />;
 
 export const Default = Template.bind({});
 
@@ -11,7 +13,9 @@ Default.args = {
   url: "https://bitcoin.org",
 };
 
-export default {
+const metadata = {
   title: "Components/PublisherCard",
   component: PublisherCard,
 };
+
+export default metadata;

@@ -9,6 +9,12 @@ type Props = {
   transactions: Transaction[];
 };
 
+type TBadge = {
+  label: string;
+  color: string;
+  textColor: string;
+};
+
 type Transaction = {
   type: string;
   id: string;
@@ -19,6 +25,9 @@ type Transaction = {
   currency: string;
   value: string;
   preimage: string;
+  badges: TBadge[];
+  totalAmount: string;
+  description: string;
 };
 
 export default function TransactionsTable({ transactions }: Props) {

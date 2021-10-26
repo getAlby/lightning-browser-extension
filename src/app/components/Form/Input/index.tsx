@@ -15,7 +15,7 @@ export default function Input({
   disabled,
   min,
   max,
-}) {
+}: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
       type={type}

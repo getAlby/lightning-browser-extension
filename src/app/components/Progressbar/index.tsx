@@ -1,6 +1,10 @@
 import React from "react";
 
-export default function Progressbar({ percentage }) {
+type Props = {
+  percentage: string;
+};
+
+export default function Progressbar({ percentage }: Props) {
   return (
     <div className="relative">
       <div className="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
