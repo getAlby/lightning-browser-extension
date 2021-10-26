@@ -12,7 +12,16 @@ const browserStorage = {
   currentAccountId: null,
 };
 
-const state = createState((set, get) => ({
+interface State {
+  connector: any;
+  account: any;
+  settings: any;
+  accounts: any;
+  currentAccountId: string | null;
+  password: string | null;
+}
+
+const state = createState<State>((set, get) => ({
   connector: null,
   account: null,
   settings: {},
@@ -21,19 +30,30 @@ const state = createState((set, get) => ({
   password: null,
   getAccount: () => {
     const currentAccountId = get().currentAccountId;
-    const account = get().accounts[currentAccountId];
+    let account = null;
+    if (currentAccountId) {
+      account = get().accounts[currentAccountId];
+    }
     return account;
   },
   getConnector: () => {
     const currentAccountId = get().currentAccountId;
-    const account = get().accounts[currentAccountId];
+    let account = null;
+    if (currentAccountId) {
+      account = get().accounts[currentAccountId];
+    }
 
-    const config = decryptData(account.config, get().password);
-    const connector = new connectors[account.connector](config);
-    // TODO memoize connector?
-    set({ connector: connector });
+    let password = null;
+    if ((password = get().password)) {
+      const config = decryptData(account.config, password);
 
-    return connector;
+      const connector = new connectors[account.connector](config);
+      // TODO memoize connector?
+      set({ connector: connector });
+
+      return connector;
+    }
+    return null;
   },
   lock: () => set({ password: null, connector: null, account: null }),
   init: () => {

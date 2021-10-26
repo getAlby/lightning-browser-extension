@@ -82,11 +82,11 @@ async function auth(message: Message, lnurlDetails: LNURLDetails) {
   const loginURL = lnurlDetails.url;
   loginURL.searchParams.set("sig", signedMessageDERHex);
   loginURL.searchParams.set("key", signer.pkHex);
-  loginURL.searchParams.set("t", Date.now());
+  loginURL.searchParams.set("t", Date.now().toString());
   let authResponse;
   try {
-    authResponse = await axios.get(loginURL);
-  } catch (e) {
+    authResponse = await axios.get(loginURL.toString());
+  } catch (e: any) {
     console.log("LNURL-AUTH FAIL:", e);
     console.log(e.response?.data);
     const error = e.response?.data?.reason || e.message; // lnurl error or exception message
