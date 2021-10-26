@@ -31,6 +31,7 @@ export default function TestConnection() {
   const [faucetEmail, setFaucetEmail] = useState();
   const [showFaucet, setShowFaucet] = useState(false);
   const [faucetLoading, setFaucetLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const history = useHistory();
 
@@ -87,6 +88,7 @@ export default function TestConnection() {
         const balance = parseInt(response.balance.balance);
 
         setAccountInfo({ alias, balance });
+        setLoading(true);
       })
       .catch((e) => {
         console.log(e);
@@ -153,15 +155,15 @@ export default function TestConnection() {
       <div className="relative lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
         <div className="relative">
           <div>
-            {errorMessage && (
+            {/* {errorMessage && (
               <div>
                 <h1 className="text-3xl font-bold">Connection Error</h1>
                 <p>{errorMessage}</p>
                 <Button label="Edit" onClick={handleEdit} primary />
               </div>
-            )}
+            )} */}
 
-            {accountInfo && accountInfo.alias && (
+            {accountInfo && accountInfo.alias && loading ? (
               <div>
                 <h1 className="text-3xl font-bold">Success! 🎉</h1>
                 <p className="text-gray-500 mt-6">
@@ -210,6 +212,14 @@ export default function TestConnection() {
                   </div>
                 </div>
               </div>
+            ) : errorMessage ? (
+              <div>
+                <h1 className="text-3xl font-bold">Connection Error</h1>
+                <p>{errorMessage}</p>
+                <Button label="Edit" onClick={handleEdit} primary />
+              </div>
+            ) : (
+              <Loading />
             )}
           </div>
         </div>

@@ -3,10 +3,12 @@ import { useHistory } from "react-router-dom";
 import Button from "../../../components/Button";
 import Card from "../../../components/Card";
 import utils from "../../../../common/lib/utils";
+import Loading from "../../../components/Loading";
 
 export default function TestConnection() {
   const [accountInfo, setAccountInfo] = useState({});
   const [errorMessage, setErrorMessage] = useState();
+  const [loading, setLoading] = useState(false);
 
   const history = useHistory();
 
@@ -25,6 +27,7 @@ export default function TestConnection() {
         const balance = parseInt(response.balance.balance);
 
         setAccountInfo({ alias, balance });
+        setLoading(true);
       })
       .catch((e) => {
         console.log(e);
@@ -41,15 +44,7 @@ export default function TestConnection() {
       <div className="relative lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
         <div className="relative">
           <div>
-            {errorMessage && (
-              <div>
-                <h1 className="text-3xl font-bold">Connection Error</h1>
-                <p>{errorMessage}</p>
-                <Button label="Edit" onClick={handleEdit} primary />
-              </div>
-            )}
-
-            {accountInfo && accountInfo.alias && (
+            {accountInfo && accountInfo.alias && loading ? (
               <div>
                 <h1 className="text-3xl font-bold">Success! 🎉</h1>
                 <p className="text-gray-500 mt-6">
@@ -68,6 +63,14 @@ export default function TestConnection() {
                   />
                 </div>
               </div>
+            ) : errorMessage ? (
+              <div>
+                <h1 className="text-3xl font-bold">Connection Error</h1>
+                <p>{errorMessage}</p>
+                <Button label="Edit" onClick={handleEdit} primary />
+              </div>
+            ) : (
+              <Loading />
             )}
           </div>
         </div>
