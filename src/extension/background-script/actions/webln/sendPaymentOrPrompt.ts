@@ -1,10 +1,19 @@
 import { parsePaymentRequest } from "invoices";
+
 import utils from "../../../../common/lib/utils";
+import { Message } from "../../../../types";
+
 import db from "../../db";
 import sendPayment from "../ln/sendPayment";
 
-const sendPaymentOrPrompt = async (message, sender) => {
+const sendPaymentOrPrompt = async (message: Message) => {
   const paymentRequest = message.args.paymentRequest;
+  if (!paymentRequest) {
+    return {
+      error: "Payment request missing.",
+    };
+  }
+
   const paymentRequestDetails = parsePaymentRequest({
     request: paymentRequest,
   });
@@ -15,17 +24,14 @@ const sendPaymentOrPrompt = async (message, sender) => {
     .equalsIgnoreCase(host)
     .first();
 
-  if (
-    allowance &&
-    allowance.remainingBudget >= parseInt(paymentRequestDetails.tokens)
-  ) {
+  if (allowance && allowance.remainingBudget >= paymentRequestDetails.tokens) {
     return sendPaymentWithAllowance(message);
   } else {
     return payWithPrompt(message);
   }
 };
 
-async function sendPaymentWithAllowance(message) {
+async function sendPaymentWithAllowance(message: Message) {
   try {
     const response = await sendPayment(message);
     return response;
@@ -37,7 +43,7 @@ async function sendPaymentWithAllowance(message) {
   }
 }
 
-async function payWithPrompt(message) {
+async function payWithPrompt(message: Message) {
   try {
     const response = await utils.openPrompt({
       ...message,

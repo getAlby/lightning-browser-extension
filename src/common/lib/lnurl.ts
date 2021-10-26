@@ -54,14 +54,22 @@ const normalizeLnurl = (lnurlString: string) => {
   return new URL(`https://${lnurlString.replace(/^lnurl[pwc]/i, "")}`);
 };
 
+type LnurlDetails = {
+  tag: string;
+  k1: string;
+  action: string;
+  domain: string;
+  url: URL;
+};
+
 const lnurl = {
-  async getDetails(lnurlString) {
+  async getDetails(lnurlString: string) {
     const url = normalizeLnurl(lnurlString);
-    let lnurlDetails = {};
-    lnurlDetails.tag = url.searchParams.get("tag");
+    let lnurlDetails = {} as LnurlDetails;
+    lnurlDetails.tag = url.searchParams.get("tag") || "";
     if (lnurlDetails.tag === "login") {
-      lnurlDetails.k1 = url.searchParams.get("k1");
-      lnurlDetails.action = url.searchParams.get("action");
+      lnurlDetails.k1 = url.searchParams.get("k1") || "";
+      lnurlDetails.action = url.searchParams.get("action") || "";
     } else {
       const res = await axios.get(url.toString());
       lnurlDetails = res.data;

@@ -1,13 +1,15 @@
-import browser from "webextension-polyfill";
+import browser, { Runtime } from "webextension-polyfill";
 import qs from "query-string";
 import shajs from "sha.js";
 import PubSub from "pubsub-js";
 
+import { OriginData } from "../../types";
+
 const utils = {
   call: (
     type: string,
-    args?: { [key: string]: any },
-    overwrites?: { [key: string]: any }
+    args?: { [key: string]: string | number },
+    overwrites?: { [key: string]: string }
   ) => {
     return browser.runtime
       .sendMessage({
@@ -67,9 +69,9 @@ const utils = {
     return Uint8Array.from(str, (x) => x.charCodeAt(0));
   },
   publishPaymentNotification: (
-    message,
+    message: { [key: string]: string },
     paymentRequestDetails: PaymentRequestDetails,
-    response
+    response: any
   ) => {
     let status = "success"; // default. let's hope for success
     if (response.error || (response.data && response.data.payment_error)) {
@@ -87,7 +89,11 @@ const utils = {
   openUrl: (url: string) => {
     browser.tabs.create({ url });
   },
-  openPrompt: (message) => {
+  openPrompt: (message: {
+    args: { [key: string]: string | number };
+    origin: OriginData;
+    type: string;
+  }) => {
     const urlParams = qs.stringify({
       args: JSON.stringify(message.args),
       origin: JSON.stringify(message.origin),
@@ -103,9 +109,15 @@ const utils = {
           height: 580,
         })
         .then((window) => {
-          const tabId = window.tabs[0].id;
+          let tabId: number | undefined;
+          if (window.tabs) {
+            tabId = window.tabs[0].id;
+          }
 
-          const onMessageListener = (responseMessage, sender) => {
+          const onMessageListener = (
+            responseMessage: any,
+            sender: Runtime.MessageSender
+          ) => {
             if (
               responseMessage &&
               responseMessage.response &&
@@ -113,7 +125,7 @@ const utils = {
               sender.tab.id === tabId
             ) {
               browser.tabs.onRemoved.removeListener(onRemovedListener);
-              return browser.windows.remove(sender.tab.windowId).then(() => {
+              return browser.windows.remove(sender.tab.windowId!).then(() => {
                 if (responseMessage.error) {
                   return reject(new Error(responseMessage.error));
                 } else {

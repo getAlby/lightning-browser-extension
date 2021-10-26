@@ -6,6 +6,7 @@ import sha256 from "crypto-js/sha256";
 import hmacSHA256 from "crypto-js/hmac-sha256";
 import Hex from "crypto-js/enc-hex";
 
+import { Message } from "../../../../types";
 import HashKeySigner from "../../../../common/utils/signer";
 import utils from "../../../../common/lib/utils";
 import lnurlLib from "../../../../common/lib/lnurl";
@@ -15,8 +16,9 @@ import db from "../../db";
 const LNURLAUTH_CANONICAL_PHRASE =
   "DO NOT EVER SIGN THIS TEXT WITH YOUR PRIVATE KEYS! IT IS ONLY USED FOR DERIVATION OF LNURL-AUTH HASHING-KEY, DISCLOSING ITS SIGNATURE WILL COMPROMISE YOUR LNURL-AUTH IDENTITY AND MAY LEAD TO LOSS OF FUNDS!";
 
-async function lnurl(message) {
+async function lnurl(message: Message) {
   try {
+    if (!message.args.lnurlEncoded) return;
     const lnurlDetails = await lnurlLib.getDetails(message.args.lnurlEncoded);
 
     switch (lnurlDetails.tag) {
@@ -40,7 +42,7 @@ async function lnurl(message) {
   }
 }
 
-async function auth(message, lnurlDetails) {
+async function auth(message: Message, lnurlDetails) {
   const connector = state.getState().getConnector();
   const signResponse = await connector.signMessage({
     message: LNURLAUTH_CANONICAL_PHRASE,
@@ -94,7 +96,7 @@ async function auth(message, lnurlDetails) {
   return authResponse;
 }
 
-async function authWithPrompt(message, lnurlDetails) {
+async function authWithPrompt(message: Message, lnurlDetails) {
   PubSub.publish(`lnurl.auth.start`, { message, lnurlDetails });
 
   // get the publisher to check if lnurlAuth for auto-login is enabled
@@ -170,7 +172,7 @@ async function authWithPrompt(message, lnurlDetails) {
   }
 }
 
-async function payWithPrompt(message, lnurlDetails) {
+async function payWithPrompt(message: Message, lnurlDetails) {
   await utils.openPrompt({
     ...message,
     type: "lnurlPay",
@@ -178,7 +180,7 @@ async function payWithPrompt(message, lnurlDetails) {
   });
 }
 
-export async function lnurlPay(message, sender) {
+export async function lnurlPay(message: Message, sender) {
   const { paymentRequest } = message.args;
   const connector = state.getState().getConnector();
   const paymentRequestDetails = parsePaymentRequest({
@@ -197,7 +199,7 @@ export async function lnurlPay(message, sender) {
 
     return response;
   } catch (e) {
-    console.log(e.message);
+    console.error(e);
   }
 }
 
