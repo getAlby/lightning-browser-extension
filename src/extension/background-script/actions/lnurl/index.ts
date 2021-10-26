@@ -6,7 +6,7 @@ import sha256 from "crypto-js/sha256";
 import hmacSHA256 from "crypto-js/hmac-sha256";
 import Hex from "crypto-js/enc-hex";
 
-import { Message } from "../../../../types";
+import { Message, LNURLDetails } from "../../../../types";
 import HashKeySigner from "../../../../common/utils/signer";
 import utils from "../../../../common/lib/utils";
 import lnurlLib from "../../../../common/lib/lnurl";
@@ -42,7 +42,7 @@ async function lnurl(message: Message) {
   }
 }
 
-async function auth(message: Message, lnurlDetails) {
+async function auth(message: Message, lnurlDetails: LNURLDetails) {
   const connector = state.getState().getConnector();
   const signResponse = await connector.signMessage({
     message: LNURLAUTH_CANONICAL_PHRASE,
@@ -96,7 +96,7 @@ async function auth(message: Message, lnurlDetails) {
   return authResponse;
 }
 
-async function authWithPrompt(message: Message, lnurlDetails) {
+async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
   PubSub.publish(`lnurl.auth.start`, { message, lnurlDetails });
 
   // get the publisher to check if lnurlAuth for auto-login is enabled
@@ -172,7 +172,7 @@ async function authWithPrompt(message: Message, lnurlDetails) {
   }
 }
 
-async function payWithPrompt(message: Message, lnurlDetails) {
+async function payWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
   await utils.openPrompt({
     ...message,
     type: "lnurlPay",

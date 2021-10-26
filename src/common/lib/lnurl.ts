@@ -3,6 +3,7 @@ import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
 
+import { LNURLDetails } from "../../types";
 import { bech32Decode } from "../utils/helpers";
 
 const fromInternetIdentifier = (address: string) => {
@@ -54,18 +55,10 @@ const normalizeLnurl = (lnurlString: string) => {
   return new URL(`https://${lnurlString.replace(/^lnurl[pwc]/i, "")}`);
 };
 
-type LnurlDetails = {
-  tag: string;
-  k1: string;
-  action: string;
-  domain: string;
-  url: URL;
-};
-
 const lnurl = {
   async getDetails(lnurlString: string) {
     const url = normalizeLnurl(lnurlString);
-    let lnurlDetails = {} as LnurlDetails;
+    let lnurlDetails = {} as LNURLDetails;
     lnurlDetails.tag = url.searchParams.get("tag") || "";
     if (lnurlDetails.tag === "login") {
       lnurlDetails.k1 = url.searchParams.get("k1") || "";

@@ -34,3 +34,11 @@ export interface Message {
   args: { lnurlEncoded?: string; paymentRequest?: string };
   origin: OriginData;
 }
+
+export interface LNURLDetails {
+  tag: "channelRequest" | "login" | "payRequest" | "withdrawRequest";
+  k1: string;
+  action: string;
+  domain: string;
+  url: URL;
+}
