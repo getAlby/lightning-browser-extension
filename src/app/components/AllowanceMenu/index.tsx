@@ -61,7 +61,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                   });
                   onDelete && onDelete();
                 } catch (e) {
-                  console.log(e.message);
+                  console.error(e);
                 }
               }
             }}
@@ -103,7 +103,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               placeholder="sats"
               value={budget}
               onChange={(event) => {
-                setBudget(event.target.value);
+                setBudget(parseInt(event.target.value));
               }}
             />
           </div>
