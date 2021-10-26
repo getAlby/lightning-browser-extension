@@ -1,6 +1,7 @@
 import axios from "axios";
 import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
+import { parsePaymentRequest } from "invoices";
 import Base from "./base";
 import utils from "../../../common/lib/utils";
 import HashKeySigner from "../../../common/utils/signer";
@@ -53,6 +54,18 @@ export default class LndHub extends Base {
         data.payment_preimage = Buffer.from(
           data.payment_preimage.data
         ).toString("hex");
+      }
+
+      // HACK!
+      // some Lnbits extension that implement the LNDHub API do not return the route information.
+      // to somewhat work around this we set a payment route and use the amount from the payment request.
+      // lnbits needs to fix this and return proper route information with a total amount and fees
+      if (!data.payment_route) {
+        const paymentRequestDetails = parsePaymentRequest({
+          request: args.paymentRequest,
+        });
+        const amountInSats = parseInt(paymentRequestDetails.tokens);
+        data.payment_route = { total_amt: amountInSats, total_fees: 0 };
       }
       return {
         data: {
