@@ -195,16 +195,11 @@ export async function lnurlPay(message: Message) {
     request: paymentRequest,
   });
 
-  try {
-    const response = await connector.sendPayment({
-      paymentRequest,
-    });
-    utils.publishPaymentNotification(message, paymentRequestDetails, response);
-
-    return response;
-  } catch (e) {
-    console.error(e);
-  }
+  const response = await connector.sendPayment({
+    paymentRequest,
+  });
+  utils.publishPaymentNotification(message, paymentRequestDetails, response);
+  return response;
 }
 
 export default lnurl;
