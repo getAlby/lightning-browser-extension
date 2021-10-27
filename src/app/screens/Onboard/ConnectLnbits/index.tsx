@@ -12,14 +12,14 @@ export default function ConnectLnbits() {
     url: "https://lnbits.com",
   });
 
-  function handleChange(event) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value.trim(),
     });
   }
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const { adminkey, url } = formData;
     const account = {
@@ -36,7 +36,7 @@ export default function ConnectLnbits() {
       if (validation.valid) {
         const addResult = await utils.call("addAccount", account);
         if (addResult.accountId) {
-          const selectResult = await utils.call("selectAccount", {
+          await utils.call("selectAccount", {
             id: addResult.accountId,
           });
           history.push("/test-connection");
@@ -46,8 +46,10 @@ export default function ConnectLnbits() {
         alert(`Connection failed (${validation.error})`);
       }
     } catch (e) {
-      console.log(e.message);
-      alert(`Connection failed (${e.message})`);
+      console.error(e);
+      if (e instanceof Error) {
+        alert(`Connection failed (${e.message})`);
+      }
     }
   }
 

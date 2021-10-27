@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
+import { Transaction } from "../../types";
 import utils from "../../common/lib/utils";
 import Container from "../components/Container";
 import AllowanceMenu from "../components/AllowanceMenu";
@@ -20,8 +21,10 @@ function Publisher() {
     usedBudget: 0,
     totalBudget: 0,
     payments: [],
+    percentage: "",
+    id: "",
   });
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const history = useHistory();
 
   async function fetchData() {
@@ -32,7 +35,7 @@ function Publisher() {
       console.log(response);
       setAllowance(response);
     } catch (e) {
-      console.log(e.message);
+      console.error(e);
     }
   }
 
@@ -72,21 +75,20 @@ function Publisher() {
 
         <div>
           <TransactionsTable
-            transactions={allowance.payments.map((payment) => ({
-              ...payment,
-              type: "sent",
-              date: dayjs(payment.createdAt).fromNow(),
-              // date: dayjs.unix(payment.createdAt),
-              title: payment.name,
-              subTitle: (
-                <p className="truncate">
-                  {payment.name} @{" "}
-                  <a target="_blank" href={payment.location} rel="noreferrer">
-                    {payment.location}
-                  </a>
-                </p>
-              ),
-            }))}
+            transactions={allowance.payments.map(
+              (
+                payment: {
+                  createdAt: string;
+                  name: string;
+                  location: string;
+                } & Transaction
+              ) => ({
+                ...payment,
+                type: "sent",
+                date: dayjs(payment.createdAt).fromNow(),
+                title: payment.name,
+              })
+            )}
           />
         </div>
       </Container>

@@ -1,5 +1,4 @@
 import PubSub from "pubsub-js";
-import utils from "../../../../common/lib/utils";
 import state from "../../state";
 
 const signMessage = async (message, sender) => {

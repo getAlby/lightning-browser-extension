@@ -16,16 +16,16 @@ export default function ConnectLnd() {
   const history = useHistory();
   const [formData, setFormData] = useState(initialFormData);
   const [isDragging, setDragging] = useState(false);
-  const hiddenFileInput = useRef(null);
+  const hiddenFileInput = useRef<HTMLInputElement>(null);
 
-  function handleChange(event) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value.trim(),
     });
   }
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const { url, macaroon } = formData;
     const account = {
@@ -40,52 +40,56 @@ export default function ConnectLnd() {
     try {
       const addResult = await utils.call("addAccount", account);
       if (addResult.accountId) {
-        const selectResult = await utils.call("selectAccount", {
+        await utils.call("selectAccount", {
           id: addResult.accountId,
         });
         history.push("/test-connection");
       }
     } catch (e) {
       // TODO: do something with the error, for e.g. display the message to the user.
-      console.log(e.message);
+      console.error(e);
     }
   }
 
-  function dropHandler(event) {
+  function dropHandler(event: React.DragEvent<HTMLDivElement>) {
     event.preventDefault();
     if (
       event.dataTransfer.items &&
       event.dataTransfer.items[0].kind === "file"
     ) {
       const file = event.dataTransfer.items[0].getAsFile();
-      const extension = file.name.split(".").pop();
-      if (extension === "macaroon") readFile(file);
+      if (file) {
+        const extension = file.name.split(".").pop();
+        if (extension === "macaroon") readFile(file);
+      }
     }
     if (isDragging) setDragging(false);
   }
 
-  function readFile(file) {
+  function readFile(file: File) {
     const reader = new FileReader();
     reader.onload = function (evt) {
-      const macaroon = utils.bytesToHexString(
-        new Uint8Array(evt.target.result)
-      );
-      if (macaroon) {
-        setFormData({
-          ...formData,
-          macaroon,
-        });
+      if (evt.target?.result) {
+        const macaroon = utils.bytesToHexString(
+          new Uint8Array(evt.target.result as ArrayBuffer)
+        );
+        if (macaroon) {
+          setFormData({
+            ...formData,
+            macaroon,
+          });
+        }
       }
     };
     reader.readAsArrayBuffer(file);
   }
 
-  function dragOverHandler(event) {
+  function dragOverHandler(event: React.DragEvent<HTMLDivElement>) {
     event.preventDefault();
     if (!isDragging) setDragging(true);
   }
 
-  function dragLeaveHandler(event) {
+  function dragLeaveHandler(event: React.DragEvent<HTMLDivElement>) {
     if (isDragging) setDragging(false);
   }
 
@@ -131,7 +135,9 @@ export default function ConnectLnd() {
                 onDrop={dropHandler}
                 onDragOver={dragOverHandler}
                 onDragLeave={dragLeaveHandler}
-                onClick={() => hiddenFileInput.current.click()}
+                onClick={() => {
+                  if (hiddenFileInput?.current) hiddenFileInput.current.click();
+                }}
               >
                 <UploadIcon
                   className="mb-3 h-9 w-9 text-blue-500"
@@ -144,8 +150,10 @@ export default function ConnectLnd() {
                 <input
                   ref={hiddenFileInput}
                   onChange={(event) => {
-                    const file = event.target.files[0];
-                    readFile(file);
+                    if (event.target.files) {
+                      const file = event.target.files[0];
+                      readFile(file);
+                    }
                   }}
                   type="file"
                   accept=".macaroon"
@@ -167,7 +175,7 @@ export default function ConnectLnd() {
               type="submit"
               label="Continue"
               primary
-              disabled={formData.address === "" || formData.macaroon === ""}
+              disabled={formData.url === "" || formData.macaroon === ""}
             />
           </div>
         </form>

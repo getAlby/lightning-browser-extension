@@ -12,7 +12,9 @@ export const Default = () => (
   />
 );
 
-export default {
+const metadata = {
   title: "Components/Buttons/IconButton",
   component: IconButton,
 };
+
+export default metadata;
