@@ -48,7 +48,7 @@ export default function ConnectLndHub() {
           await utils.call("selectAccount", {
             id: addResult.accountId,
           });
-          history.push("/test-connection");
+          history.push("/set-password");
         }
       } else {
         console.log(validation);

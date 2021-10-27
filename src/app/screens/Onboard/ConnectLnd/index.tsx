@@ -43,7 +43,7 @@ export default function ConnectLnd() {
         await utils.call("selectAccount", {
           id: addResult.accountId,
         });
-        history.push("/test-connection");
+        history.push("/set-password");
       }
     } catch (e) {
       // TODO: do something with the error, for e.g. display the message to the user.

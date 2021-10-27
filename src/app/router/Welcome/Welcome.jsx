@@ -10,17 +10,17 @@ import DevMenu from "../../components/DevMenu";
 import Steps from "../../components/Steps";
 import Intro from "../../screens/Onboard/Intro";
 import SetPassword from "../../screens/Onboard/SetPassword";
-import ChooseConnector from "../../screens/Onboard/ChooseConnector";
+import Connect from "../../screens/Onboard/Connect";
 import TestConnection from "../../screens/Onboard/TestConnection";
 
 const routes = [
   { path: "/", component: Intro, exact: true, name: "Welcome" },
-  { path: "/set-password", component: SetPassword, name: "Your Password" },
   {
-    path: "/choose-connector",
-    component: ChooseConnector,
+    path: "/connect",
+    component: Connect,
     name: "Connect to Lightning",
   },
+  { path: "/set-password", component: SetPassword, name: "Your Password" },
   { path: "/test-connection", component: TestConnection, name: "Done" },
 ];
 

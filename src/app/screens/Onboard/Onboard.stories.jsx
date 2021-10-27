@@ -2,14 +2,14 @@ import React from "react";
 import { MemoryRouter } from "react-router-dom";
 
 import IntroScreen from "./Intro";
-import ChooseConnectorScreen from "./ChooseConnector";
+import ConnectScreen from "./Connect";
 import ConnectLndScreen from "./ConnectLnd";
 import TestConnectionScreen from "./TestConnection";
 import SetPasswordScreen from "./SetPassword";
 
 export const Intro = () => <IntroScreen />;
 export const SetPassword = () => <SetPasswordScreen />;
-export const ChooseConnector = () => <ChooseConnectorScreen />;
+export const Connect = () => <ConnectScreen />;
 export const ConnectLnd = () => <ConnectLndScreen />;
 export const TestConnection = () => <TestConnectionScreen />;
 

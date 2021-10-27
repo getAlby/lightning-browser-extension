@@ -40,7 +40,7 @@ export default function SetPassword() {
     event.preventDefault();
     try {
       await utils.call("setPassword", { password: formData.password });
-      history.push("/choose-connector");
+      history.push("/test-connection");
     } catch (e) {
       console.log(e.message);
     }
