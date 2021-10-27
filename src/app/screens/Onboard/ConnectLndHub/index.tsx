@@ -13,14 +13,14 @@ export default function ConnectLndHub() {
     uri: "",
   });
 
-  function handleChange(event) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value.trim(),
     });
   }
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const match = formData.uri.match(/lndhub:\/\/(\S+):(\S+)@(\S+)/i);
     if (!match) {
@@ -45,7 +45,7 @@ export default function ConnectLndHub() {
       if (validation.valid) {
         const addResult = await utils.call("addAccount", account);
         if (addResult.accountId) {
-          const selectResult = await utils.call("selectAccount", {
+          await utils.call("selectAccount", {
             id: addResult.accountId,
           });
           history.push("/test-connection");
@@ -55,8 +55,10 @@ export default function ConnectLndHub() {
         alert(`Connection failed (${validation.error})`);
       }
     } catch (e) {
-      console.log(e.message);
-      alert(`Connection failed (${e.message})`);
+      console.error(e);
+      if (e instanceof Error) {
+        alert(`Connection failed (${e.message})`);
+      }
     }
   }
 
@@ -92,7 +94,7 @@ export default function ConnectLndHub() {
               <QrcodeScanner
                 fps={10}
                 qrbox={250}
-                qrCodeSuccessCallback={(decodedText) => {
+                qrCodeSuccessCallback={(decodedText: string) => {
                   if (formData.uri !== decodedText) {
                     setFormData({
                       ...formData,

@@ -1,7 +1,40 @@
 import browser from "webextension-polyfill";
 import Dexie from "dexie";
 
+interface IAllowance {
+  id?: number;
+  host: string;
+  name: string;
+  imageURL: string;
+  tag: string;
+  enabled: boolean;
+  totalBudget: number;
+  remainingBudget: number;
+  lastPaymentAt: string;
+  lnurlAuth: string;
+  createdAt: string;
+}
+
+interface IPayment {
+  id?: number;
+  allowanceId: string;
+  host: string;
+  location: string;
+  name: string;
+  description: string;
+  totalAmount: number;
+  totalFees: number;
+  preimage: string;
+  paymentRequest: string;
+  paymentHash: string;
+  destination: string;
+  createdAt: string;
+}
+
 class DB extends Dexie {
+  allowances: Dexie.Table<IAllowance, number>;
+  payments: Dexie.Table<IPayment, number>;
+
   constructor() {
     super("LBE");
     this.version(1).stores({
@@ -11,6 +44,8 @@ class DB extends Dexie {
         "++id,allowanceId,host,location,name,description,totalAmount,totalFees,preimage,paymentRequest,paymentHash,destination,createdAt",
     });
     this.on("ready", this.loadFromStorage.bind(this));
+    this.allowances = this.table("allowances");
+    this.payments = this.table("payments");
   }
 
   async saveToStorage() {

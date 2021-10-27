@@ -27,7 +27,7 @@ export default function UserMenu() {
       await utils.call("lock");
       window.close();
     } catch (e) {
-      console.log(e.message);
+      console.error(e);
     }
   }
 

@@ -14,7 +14,9 @@ type Props = {
 
 function AccountMenu({ onAccountSwitch }: Props) {
   const history = useHistory();
-  const [accounts, setAccounts] = useState({});
+  const [accounts, setAccounts] = useState<{
+    [key: string]: { name: "string"; connector: "string" };
+  }>({});
 
   useEffect(() => {
     utils.call("getAccounts").then((response) => {

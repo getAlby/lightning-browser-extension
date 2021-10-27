@@ -1,8 +1,8 @@
-import Native from "./native";
-import Lnd from "./lnd";
-import LndHub from "./lndhub";
-import LnBits from "./lnbits";
-import Base from "./base";
+const Native: any = require("./native");
+const Lnd: any = require("./lnd");
+const LndHub: any = require("./lndhub");
+const LnBits: any = require("./lnbits");
+const Base: any = require("./base");
 
 /*
 const initialize = (account, password) => {

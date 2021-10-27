@@ -3,16 +3,29 @@ import { QrcodeIcon } from "@heroicons/react/outline";
 
 import Button from "../Button";
 
+declare global {
+  interface Window {
+    Html5Qrcode: any;
+  }
+}
+
+type Props = {
+  fps?: number;
+  qrbox: number;
+  qrCodeSuccessCallback: (decodedText: string) => void;
+  qrCodeErrorCallback?: () => void;
+};
+
 function QrcodeScanner({
   fps = 10,
   qrbox = 250,
   qrCodeSuccessCallback,
   qrCodeErrorCallback,
-}) {
+}: Props) {
   const [isScanning, setScanning] = useState(false);
-  const [cameras, setCameras] = useState([]);
+  const [cameras, setCameras] = useState<{ id: string; label: string }[]>([]);
   const [selectedCamera, setSelectedCamera] = useState("");
-  const html5QrCodeRef = useRef(null);
+  const html5QrCodeRef = useRef<any>(null);
 
   useEffect(() => {
     return () => {
@@ -33,31 +46,33 @@ function QrcodeScanner({
     }
   }
 
-  async function handleStartScanning(id) {
+  async function handleStartScanning(id: string) {
     setScanning(true);
     setSelectedCamera(id);
     try {
-      await html5QrCodeRef.current.stop();
-      html5QrCodeRef.current
-        .start(
-          id,
-          {
-            fps,
-            qrbox,
-          },
-          (decodedText, decodedResult) => {
-            handleStopScanning();
-            qrCodeSuccessCallback(decodedText);
-          },
-          (errorMessage) => {
-            // qrCodeErrorCallback(errorMessage);
-          }
-        )
-        .catch((e) => {
-          // Start failed.
-        });
+      if (html5QrCodeRef?.current) {
+        await html5QrCodeRef.current.stop();
+        html5QrCodeRef.current
+          .start(
+            id,
+            {
+              fps,
+              qrbox,
+            },
+            (decodedText: string) => {
+              handleStopScanning();
+              qrCodeSuccessCallback(decodedText);
+            },
+            (errorMessage: string) => {
+              // qrCodeErrorCallback(errorMessage);
+            }
+          )
+          .catch(() => {
+            // Start failed.
+          });
+      }
     } catch (e) {
-      console.log(e.message);
+      console.error(e);
     }
   }
 
@@ -65,11 +80,11 @@ function QrcodeScanner({
     if (html5QrCodeRef.current) {
       html5QrCodeRef.current
         .stop()
-        .then((ignore) => {
+        .then(() => {
           html5QrCodeRef.current.clear();
           if (isMounted) setScanning(false);
         })
-        .catch((e) => {
+        .catch(() => {
           // Stop failed.
         });
     }
@@ -110,7 +125,7 @@ function QrcodeScanner({
               ))}
             </select>
           </div>
-          <Button label="Stop scanning" onClick={handleStopScanning} />
+          <Button label="Stop scanning" onClick={() => handleStopScanning()} />
         </div>
       )}
     </div>

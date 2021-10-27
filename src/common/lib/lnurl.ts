@@ -3,6 +3,7 @@ import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
 
+import { LNURLDetails, LNURLPaymentInfo } from "../../types";
 import { bech32Decode } from "../utils/helpers";
 
 const fromInternetIdentifier = (address: string) => {
@@ -55,13 +56,13 @@ const normalizeLnurl = (lnurlString: string) => {
 };
 
 const lnurl = {
-  async getDetails(lnurlString) {
+  async getDetails(lnurlString: string) {
     const url = normalizeLnurl(lnurlString);
-    let lnurlDetails = {};
-    lnurlDetails.tag = url.searchParams.get("tag");
+    let lnurlDetails = {} as LNURLDetails;
+    lnurlDetails.tag = url.searchParams.get("tag") as LNURLDetails["tag"];
     if (lnurlDetails.tag === "login") {
-      lnurlDetails.k1 = url.searchParams.get("k1");
-      lnurlDetails.action = url.searchParams.get("action");
+      lnurlDetails.k1 = url.searchParams.get("k1") || "";
+      lnurlDetails.action = url.searchParams.get("action") || "";
     } else {
       const res = await axios.get(url.toString());
       lnurlDetails = res.data;
@@ -70,7 +71,15 @@ const lnurl = {
     lnurlDetails.url = url;
     return lnurlDetails;
   },
-  verifyInvoice({ paymentInfo, metadata, amount }) {
+  verifyInvoice({
+    paymentInfo,
+    metadata,
+    amount,
+  }: {
+    paymentInfo: LNURLPaymentInfo;
+    metadata: string;
+    amount: number;
+  }) {
     const paymentRequestDetails = parsePaymentRequest({
       request: paymentInfo.pr,
     });
@@ -78,7 +87,7 @@ const lnurl = {
     try {
       metadataHash = sha256(metadata).toString(Hex);
     } catch (e) {
-      console.log(e.message);
+      console.error();
     }
     switch (true) {
       case paymentRequestDetails.description_hash !== metadataHash: // LN WALLET Verifies that h tag (description_hash) in provided invoice is a hash of metadata string converted to byte array in UTF-8 encoding

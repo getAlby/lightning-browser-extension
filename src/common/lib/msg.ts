@@ -1,7 +1,11 @@
 import browser from "webextension-polyfill";
 
 const msg = {
-  request: (type, args, overwrites) => {
+  request: (
+    type: string,
+    args?: { [key: string]: string | number },
+    overwrites?: { [key: string]: string }
+  ) => {
     return browser.runtime
       .sendMessage({
         application: "LBE",
@@ -18,7 +22,7 @@ const msg = {
         return response.data;
       });
   },
-  reply: (data) => {
+  reply: (data: any) => {
     return browser.runtime.sendMessage({
       application: "LBE",
       response: true,
@@ -26,7 +30,7 @@ const msg = {
       origin: { internal: true },
     });
   },
-  error: (error) => {
+  error: (error: string) => {
     return browser.runtime.sendMessage({
       application: "LBE",
       response: true,

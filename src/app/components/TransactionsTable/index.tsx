@@ -3,22 +3,12 @@ import { PlusIcon, MinusIcon } from "@heroicons/react/solid";
 import { Disclosure } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 
+import { Transaction } from "../../../types";
+
 import Badge from "../Badge";
 
 type Props = {
   transactions: Transaction[];
-};
-
-type Transaction = {
-  type: string;
-  id: string;
-  title: string;
-  subTitle: string;
-  date: string;
-  amount: string;
-  currency: string;
-  value: string;
-  preimage: string;
 };
 
 export default function TransactionsTable({ transactions }: Props) {

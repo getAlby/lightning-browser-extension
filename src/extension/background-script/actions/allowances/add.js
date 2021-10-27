@@ -1,6 +1,4 @@
-import state from "../../state";
 import db from "../../db";
-import utils from "../../../../common/lib/utils";
 
 const add = async (message, sender) => {
   const host = message.args.host;
