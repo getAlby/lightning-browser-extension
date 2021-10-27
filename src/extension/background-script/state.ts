@@ -2,6 +2,8 @@ import browser from "webextension-polyfill";
 import createState from "zustand";
 
 import { decryptData } from "../../common/lib/crypto";
+// TODO: Add type checking to connectors and remove this ts-ignore line.
+// @ts-ignore: Unreachable code error
 import connectors from "./connectors";
 
 type Connector = any;
