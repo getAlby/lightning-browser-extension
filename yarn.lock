@@ -3515,6 +3515,11 @@
   dependencies:
     "@types/unist" "*"
 
+"@types/memoizee@^0.4.6":
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/@types/memoizee/-/memoizee-0.4.6.tgz#a4ba7a3ea61fa45be916f148763bec2ca38c34cf"
+  integrity sha512-qJezGqoi3pW9Pset2w1Gfv8jATvmHHHnpO9Dq8x8pJGyYIpiUZJqRU0NM7xenmN0AcXEe7vqshI8H98KeFLYcg==
+
 "@types/micromatch@^4.0.1":
   version "4.0.1"
   resolved "https://registry.npmjs.org/@types/micromatch/-/micromatch-4.0.1.tgz"
