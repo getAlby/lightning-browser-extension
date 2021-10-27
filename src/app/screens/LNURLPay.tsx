@@ -39,7 +39,9 @@ function LNURLPay(props: Props) {
   } = useLocation();
   const details = props.details || location.state?.details;
   const origin = props.origin || location.state?.origin;
-  const [valueMSat, setValueMSat] = useState<number>(details.minSendable);
+  const [valueMSat, setValueMSat] = useState<number | undefined>(
+    details.minSendable
+  );
   const [loading, setLoading] = useState(false);
 
   async function confirm() {
@@ -62,7 +64,7 @@ function LNURLPay(props: Props) {
       const isValidInvoice = lnurl.verifyInvoice({
         paymentInfo,
         metadata: details.metadata,
-        amount: valueMSat,
+        amount: valueMSat!,
       });
       if (!isValidInvoice) {
         alert("Payment aborted. Invalid invoice");
@@ -133,8 +135,14 @@ function LNURLPay(props: Props) {
             type="number"
             min={details.minSendable / 1000}
             max={details.maxSendable / 1000}
-            value={valueMSat / 1000}
-            onChange={(e) => setValueMSat(parseInt(e.target.value) * 1000)}
+            value={valueMSat ? valueMSat / 1000 : undefined}
+            onChange={(e) => {
+              let newValue;
+              if (e.target.value) {
+                newValue = parseInt(e.target.value) * 1000;
+              }
+              setValueMSat(newValue);
+            }}
           />
           <input
             className="mt-2"
@@ -142,7 +150,7 @@ function LNURLPay(props: Props) {
             min={details.minSendable}
             max={details.maxSendable}
             step="1000"
-            value={valueMSat}
+            value={valueMSat || 0}
             onChange={(e) => setValueMSat(parseInt(e.target.value))}
           />
         </div>
@@ -198,7 +206,7 @@ function LNURLPay(props: Props) {
               fullWidth
               primary
               loading={loading}
-              disabled={loading}
+              disabled={loading || !valueMSat}
             />
           </div>
 
