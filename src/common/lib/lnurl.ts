@@ -59,7 +59,7 @@ const lnurl = {
   async getDetails(lnurlString: string) {
     const url = normalizeLnurl(lnurlString);
     let lnurlDetails = {} as LNURLDetails;
-    lnurlDetails.tag = url.searchParams.get("tag") || "";
+    lnurlDetails.tag = url.searchParams.get("tag") as LNURLDetails["tag"];
     if (lnurlDetails.tag === "login") {
       lnurlDetails.k1 = url.searchParams.get("k1") || "";
       lnurlDetails.action = url.searchParams.get("action") || "";
@@ -71,7 +71,23 @@ const lnurl = {
     lnurlDetails.url = url;
     return lnurlDetails;
   },
-  verifyInvoice({ paymentInfo, metadata, amount }) {
+  verifyInvoice({
+    paymentInfo,
+    metadata,
+    amount,
+  }: {
+    paymentInfo: {
+      pr: string;
+      successAction: {
+        tag: string;
+        description?: string;
+        message?: string;
+        url?: string;
+      };
+    };
+    metadata: string;
+    amount: number;
+  }) {
     const paymentRequestDetails = parsePaymentRequest({
       request: paymentInfo.pr,
     });
@@ -79,7 +95,7 @@ const lnurl = {
     try {
       metadataHash = sha256(metadata).toString(Hex);
     } catch (e) {
-      console.log(e.message);
+      console.error();
     }
     switch (true) {
       case paymentRequestDetails.description_hash !== metadataHash: // LN WALLET Verifies that h tag (description_hash) in provided invoice is a hash of metadata string converted to byte array in UTF-8 encoding

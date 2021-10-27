@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import PubSub from "pubsub-js";
 import { parsePaymentRequest } from "invoices";
 
@@ -83,17 +83,16 @@ async function auth(message: Message, lnurlDetails: LNURLDetails) {
   loginURL.searchParams.set("sig", signedMessageDERHex);
   loginURL.searchParams.set("key", signer.pkHex);
   loginURL.searchParams.set("t", Date.now().toString());
-  let authResponse;
   try {
-    authResponse = await axios.get(loginURL.toString());
+    let authResponse: AxiosResponse<{ status: string; reason?: string }> =
+      await axios.get(loginURL.toString());
+    return authResponse;
   } catch (e: any) {
     console.log("LNURL-AUTH FAIL:", e);
     console.log(e.response?.data);
     const error = e.response?.data?.reason || e.message; // lnurl error or exception message
     throw new Error(error);
   }
-
-  return authResponse;
 }
 
 async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
@@ -131,24 +130,26 @@ async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
       authResponse = await auth(message, lnurlDetails);
     } catch (e) {
       console.log("LNURL-auth failed");
-      console.log(e);
-      PubSub.publish(`lnurl.auth.failed`, {
-        error: e.message,
-        lnurlDetails,
-        origin: message.origin,
-      });
+      console.error(e);
+      if (e instanceof Error) {
+        PubSub.publish(`lnurl.auth.failed`, {
+          error: e.message,
+          lnurlDetails,
+          origin: message.origin,
+        });
 
-      return { error: e.message };
+        return { error: e.message };
+      }
     }
 
     // if the service returned with a HTTP 200 we still check if the response data is OK
-    if (!authResponse.data.status.toUpperCase() === "OK") {
+    if (authResponse?.data.status.toUpperCase() !== "OK") {
       PubSub.publish(`lnurl.auth.failed`, {
         authResponse: authResponse,
         lnurlDetails,
         origin: message.origin,
       });
-      return { error: e.response?.data?.reason };
+      return { error: authResponse?.data?.reason };
     }
 
     PubSub.publish(`lnurl.auth.success`, {
@@ -163,9 +164,11 @@ async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
         .where("host")
         .equalsIgnoreCase(message.origin.host)
         .first();
-      await db.allowances.update(allowance.id, {
-        lnurlAuth: true,
-      });
+      if (allowance?.id) {
+        await db.allowances.update(allowance.id, {
+          lnurlAuth: true,
+        });
+      }
       await db.saveToStorage();
     }
     return { data: authResponse.data };
@@ -180,8 +183,13 @@ async function payWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
   });
 }
 
-export async function lnurlPay(message: Message, sender) {
+export async function lnurlPay(message: Message) {
   const { paymentRequest } = message.args;
+  if (!paymentRequest) {
+    return {
+      error: "Payment request missing.",
+    };
+  }
   const connector = state.getState().getConnector();
   const paymentRequestDetails = parsePaymentRequest({
     request: paymentRequest,
@@ -191,11 +199,7 @@ export async function lnurlPay(message: Message, sender) {
     const response = await connector.sendPayment({
       paymentRequest,
     });
-    utils.publishPaymentNotification(
-      message.args.message,
-      paymentRequestDetails,
-      response
-    );
+    utils.publishPaymentNotification(message, paymentRequestDetails, response);
 
     return response;
   } catch (e) {

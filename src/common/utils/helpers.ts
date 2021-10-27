@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { bech32 } from "bech32";
 
-export const normalizeAccountsData = (data = {}) => {
+export const normalizeAccountsData = (data: { [key: string]: any } = {}) => {
   const accountDataKeys = Object.keys(data);
 
   return accountDataKeys.map((item) => ({
@@ -10,22 +10,26 @@ export const normalizeAccountsData = (data = {}) => {
   }));
 };
 
-export const getFiatFromSatoshi = async (currency, satoshi) => {
-  const res = await axios.get("https://blockchain.info/ticker");
-  let exchangeRate = res?.data[currency ?? "USD"]?.sell;
+export const getFiatFromSatoshi = async (currency: string, satoshi: number) => {
+  const res: AxiosResponse<{
+    [key: string]: {
+      sell: number;
+    };
+  }> = await axios.get("https://blockchain.info/ticker");
+  let exchangeRate: number = res?.data[currency ?? "USD"]?.sell;
   const amount = Math.round((satoshi / 100000000) * exchangeRate);
   return amount;
 };
 
-export const calcFiatFromSatoshi = (exchangeRate, satoshi) => {
+export const calcFiatFromSatoshi = (rate: string, s: string) => {
   //making sure we have numbers not strings
-  satoshi = parseFloat(satoshi);
-  exchangeRate = parseFloat(exchangeRate);
+  const satoshi = parseFloat(s);
+  const exchangeRate = parseFloat(rate);
   // making even more sure we are returning only numbers
   return +((satoshi / 100000000) * exchangeRate).toFixed(2);
 };
 
-export const sortByFieldAscending = (data, field) => {
+export const sortByFieldAscending = (data: [], field: string) => {
   return data.sort((a, b) => {
     let da = a[field],
       db = b[field];
@@ -33,7 +37,7 @@ export const sortByFieldAscending = (data, field) => {
   });
 };
 
-export const sortByFieldDescending = (data, field) => {
+export const sortByFieldDescending = (data: [], field: string) => {
   return data.sort((a, b) => {
     let da = a[field],
       db = b[field];
@@ -41,7 +45,7 @@ export const sortByFieldDescending = (data, field) => {
   });
 };
 
-export function bech32Decode(str) {
+export function bech32Decode(str: string) {
   const { words: dataPart } = bech32.decode(str, 2000);
   const requestByteArray = bech32.fromWords(dataPart);
   return Buffer.from(requestByteArray).toString();

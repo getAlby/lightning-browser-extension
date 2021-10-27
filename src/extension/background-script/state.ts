@@ -12,6 +12,8 @@ const browserStorage = {
   currentAccountId: null,
 };
 
+type Connector = any;
+
 interface State {
   connector: any;
   account: any;
@@ -19,6 +21,7 @@ interface State {
   accounts: any;
   currentAccountId: string | null;
   password: string | null;
+  getConnector: () => Connector | null;
 }
 
 const state = createState<State>((set, get) => ({

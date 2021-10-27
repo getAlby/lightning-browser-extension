@@ -3,7 +3,7 @@ import qs from "query-string";
 import shajs from "sha.js";
 import PubSub from "pubsub-js";
 
-import { OriginData } from "../../types";
+import { Message, OriginData } from "../../types";
 
 const utils = {
   call: (
@@ -69,7 +69,7 @@ const utils = {
     return Uint8Array.from(str, (x) => x.charCodeAt(0));
   },
   publishPaymentNotification: (
-    message: { [key: string]: string },
+    message: Message,
     paymentRequestDetails: PaymentRequestDetails,
     response: any
   ) => {
@@ -90,10 +90,10 @@ const utils = {
     browser.tabs.create({ url });
   },
   openPrompt: (message: {
-    args: { [key: string]: string | number };
+    args: { [key: string]: any };
     origin: OriginData;
     type: string;
-  }) => {
+  }): any => {
     const urlParams = qs.stringify({
       args: JSON.stringify(message.args),
       origin: JSON.stringify(message.origin),

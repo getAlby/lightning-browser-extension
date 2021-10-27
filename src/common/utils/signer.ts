@@ -2,7 +2,10 @@ import elliptic from "elliptic";
 const ec = new elliptic.ec("secp256k1");
 
 class HashKeySigner {
-  constructor(keyHex) {
+  sk: elliptic.ec.KeyPair;
+  keyHex: string;
+
+  constructor(keyHex: string) {
     this.keyHex = keyHex;
     if (!keyHex) {
       throw new Error("Invalid key");
@@ -18,14 +21,14 @@ class HashKeySigner {
     return this.pk.encodeCompressed("hex");
   }
 
-  sign(message) {
+  sign(message: string | Uint8Array) {
     if (!message) {
       throw new Error("Invalid message");
     }
     return this.sk.sign(message, { canonical: true });
   }
 
-  verify(message, signature) {
+  verify(message: string, signature: string) {
     return this.sk.verify(message, signature);
   }
 }
