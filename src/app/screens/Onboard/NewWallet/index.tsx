@@ -15,7 +15,7 @@ export default function NewWallet() {
   });
   const history = useHistory();
 
-  function signup(event) {
+  function signup(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
 
     const headers = new Headers();
@@ -34,7 +34,7 @@ export default function NewWallet() {
     });
   }
 
-  async function next(event) {
+  async function next(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
 
     const { login, password } = lndHubData;
@@ -53,7 +53,7 @@ export default function NewWallet() {
       if (validation.valid) {
         const addResult = await utils.call("addAccount", account);
         if (addResult.accountId) {
-          const selectResult = await utils.call("selectAccount", {
+          await utils.call("selectAccount", {
             id: addResult.accountId,
           });
           history.push("/test-connection");
@@ -63,8 +63,10 @@ export default function NewWallet() {
         alert(`Connection failed (${validation.error})`);
       }
     } catch (e) {
-      console.log(e);
-      alert(`Connection failed (${e.message})`);
+      console.error(e);
+      if (e instanceof Error) {
+        alert(`Connection failed (${e.message})`);
+      }
     }
   }
 
@@ -95,7 +97,7 @@ export default function NewWallet() {
                   <QRCode
                     value={`lndhub://${lndHubData.login}:${lndHubData.password}@${url}/`}
                     level="M"
-                    size="96"
+                    size={96}
                   />
                 </div>
                 If you loose access you will need this backup to recover your

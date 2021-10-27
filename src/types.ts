@@ -42,3 +42,30 @@ export interface LNURLDetails {
   domain: string;
   url: URL;
 }
+
+export interface IBadge {
+  label: string;
+  color: string;
+  textColor: string;
+}
+
+export type Transaction = {
+  type: string;
+  id: string;
+  title: string;
+  subTitle: string;
+  date: string;
+  amount: string;
+  currency: string;
+  value: string;
+  preimage: string;
+  badges: IBadge[];
+  totalAmount: string;
+  description: string;
+};
+
+export interface Allowance {
+  badge: IBadge;
+  enabled: boolean;
+  remainingBudget: number;
+}

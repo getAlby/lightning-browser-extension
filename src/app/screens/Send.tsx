@@ -27,7 +27,9 @@ function Send() {
         { origin: getOriginData() }
       );
     } catch (e) {
-      alert(e.message);
+      if (e instanceof Error) {
+        alert(e.message);
+      }
     }
   }
 

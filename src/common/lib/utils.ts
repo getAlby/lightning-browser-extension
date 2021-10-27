@@ -9,7 +9,7 @@ const utils = {
   call: (
     type: string,
     args?: { [key: string]: any },
-    overwrites?: { [key: string]: string }
+    overwrites?: { [key: string]: any }
   ) => {
     return browser.runtime
       .sendMessage({
@@ -51,7 +51,7 @@ const utils = {
     }
     return hex.join("");
   },
-  bytesToHexString: (bytes: number[]) => {
+  bytesToHexString: (bytes: Uint8Array) => {
     return Array.from(bytes, (byte) => {
       return ("0" + (byte & 0xff).toString(16)).slice(-2);
     }).join("");

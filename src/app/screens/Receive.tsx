@@ -20,7 +20,7 @@ function Receive() {
     expiration: "",
   });
   const [loading, setLoading] = useState(false);
-  const [invoice, setInvoice] = useState();
+  const [invoice, setInvoice] = useState<{ paymentRequest: string }>();
   const [copyLabel, setCopyLabel] = useState("Copy");
 
   function handleChange(
@@ -41,13 +41,16 @@ function Receive() {
       });
       setInvoice(response);
     } catch (e) {
-      alert(e.message);
+      if (e instanceof Error) {
+        alert(e.message);
+      }
     } finally {
       setLoading(false);
     }
   }
 
   function renderInvoice() {
+    if (!invoice) return null;
     return (
       <div>
         <div className="mb-8 p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center">
@@ -63,7 +66,9 @@ function Receive() {
                   setCopyLabel("Copy");
                 }, 1000);
               } catch (e) {
-                alert(e.message);
+                if (e instanceof Error) {
+                  alert(e.message);
+                }
               }
             }}
             icon={
