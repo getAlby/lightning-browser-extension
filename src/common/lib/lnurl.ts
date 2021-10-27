@@ -3,7 +3,7 @@ import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
 
-import { LNURLDetails } from "../../types";
+import { LNURLDetails, LNURLPaymentInfo } from "../../types";
 import { bech32Decode } from "../utils/helpers";
 
 const fromInternetIdentifier = (address: string) => {
@@ -76,15 +76,7 @@ const lnurl = {
     metadata,
     amount,
   }: {
-    paymentInfo: {
-      pr: string;
-      successAction: {
-        tag: string;
-        description?: string;
-        message?: string;
-        url?: string;
-      };
-    };
+    paymentInfo: LNURLPaymentInfo;
     metadata: string;
     amount: number;
   }) {

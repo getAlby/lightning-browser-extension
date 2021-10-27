@@ -43,6 +43,16 @@ export interface LNURLDetails {
   url: URL;
 }
 
+export interface LNURLPaymentInfo {
+  pr: string;
+  successAction: {
+    tag: string;
+    description?: string;
+    message?: string;
+    url?: string;
+  };
+}
+
 export interface IBadge {
   label: string;
   color: string;
