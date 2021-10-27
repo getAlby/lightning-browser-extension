@@ -122,8 +122,12 @@ function LNURLPay(props: Props) {
             type="number"
             min={details.minSendable / 1000}
             max={details.maxSendable / 1000}
-            value={valueMSat / 1000}
-            onChange={(e) => setValueMSat(e.target.value * 1000)}
+            value={valueMSat ? valueMSat / 1000 : valueMSat}
+            onChange={(e) => {
+              setValueMSat(
+                e.target.value ? e.target.value * 1000 : e.target.value
+              );
+            }}
           />
           <input
             className="mt-2"
@@ -131,7 +135,7 @@ function LNURLPay(props: Props) {
             min={details.minSendable}
             max={details.maxSendable}
             step="1000"
-            value={valueMSat}
+            value={valueMSat || 0}
             onChange={(e) => setValueMSat(e.target.value)}
           />
         </div>
@@ -187,7 +191,7 @@ function LNURLPay(props: Props) {
               fullWidth
               primary
               loading={loading}
-              disabled={loading}
+              disabled={loading || !valueMSat}
             />
           </div>
 
