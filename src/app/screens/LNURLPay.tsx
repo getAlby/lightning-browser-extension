@@ -72,10 +72,11 @@ function LNURLPay(props: Props) {
       }
 
       // LN WALLET pays the invoice, no additional user confirmation is required at this point
-      const payment = await utils.call("lnurlPay", {
-        message: { origin },
-        paymentRequest,
-      });
+      const payment = await utils.call(
+        "lnurlPay",
+        { paymentRequest },
+        { origin }
+      );
 
       // Once payment is fulfilled LN WALLET executes a non-null successAction
       // LN WALLET should also store successAction data on the transaction record
