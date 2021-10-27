@@ -1,8 +1,13 @@
-const Native: any = require("./native");
-const Lnd: any = require("./lnd");
-const LndHub: any = require("./lndhub");
-const LnBits: any = require("./lnbits");
-const Base: any = require("./base");
+// @ts-ignore: implicitly has 'any' type error
+import Native from "./native";
+// @ts-ignore: implicitly has 'any' type error
+import Lnd from "./lnd";
+// @ts-ignore: implicitly has 'any' type error
+import LndHub from "./lndhub";
+// @ts-ignore: implicitly has 'any' type error
+import LnBits from "./lnbits";
+// @ts-ignore: implicitly has 'any' type error
+import Base from "./base";
 
 /*
 const initialize = (account, password) => {
