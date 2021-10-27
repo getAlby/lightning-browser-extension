@@ -41,7 +41,7 @@ export default function Intro() {
         </h2>
       </div>
       <div className="lg:pl-20">
-        <h1 className="text-3xl font-bold">Do you have a lightning wallet?</h1>
+        <h1 className="text-3xl font-bold">Let's get started</h1>
         <p className="text-gray-500 my-6">
           You need to first connect to a lightning wallet so that you can
           interact with your favorite websites that accept bitcoin lightning
