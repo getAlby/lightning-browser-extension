@@ -32,13 +32,13 @@ const battery = (): Promise<Battery[] | void> => {
   if (!feedId) return Promise.resolve();
   return axios
     .get(`https://podcastindex.org/api/podcasts/byfeedid?id=${feedId}`)
-    .then((response: AxiosResponse<Podcast>) => {
+    .then((response: AxiosResponse<any>) => {
       const feed = response.data.feed;
       if (!feed.value || feed.value.model.type !== "lightning") {
         return;
       }
       const method = feed.value.model.method;
-      return feed.value.destinations.map((destination) => {
+      return feed.value.destinations.map((destination: Destination) => {
         return {
           method,
           recipient: destination.address,

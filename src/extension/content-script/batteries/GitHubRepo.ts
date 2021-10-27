@@ -13,7 +13,7 @@ const battery = (): Promise<[Battery] | void> => {
   const lndonateUrl = `https://raw.githubusercontent.com/${username}/${repo}/master/.lndonate`;
   return axios
     .get(lndonateUrl, { responseType: "text" })
-    .then((response: AxiosResponse<string>) => {
+    .then((response: AxiosResponse<any>) => {
       return [
         {
           method: "lnurl",

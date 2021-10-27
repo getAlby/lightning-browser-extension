@@ -65,7 +65,7 @@ const lnurl = {
       lnurlDetails.action = url.searchParams.get("action") || "";
     } else {
       const res = await axios.get(url.toString());
-      lnurlDetails = res.data;
+      lnurlDetails = res.data as LNURLDetails;
     }
     lnurlDetails.domain = url.hostname;
     lnurlDetails.url = url;

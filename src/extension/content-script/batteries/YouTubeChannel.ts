@@ -23,7 +23,7 @@ const battery = (): Promise<[Battery] | void> => {
     .get(`https://www.youtube.com/${match[1]}/${match[2]}/about`, {
       responseType: "document",
     })
-    .then((response: AxiosResponse<Document>) => {
+    .then((response: AxiosResponse<any>) => {
       // TODO extract from links?
       const descriptionElement: HTMLMetaElement | null =
         response.data.querySelector('meta[name="description"]');
