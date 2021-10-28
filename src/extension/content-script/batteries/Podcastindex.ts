@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
 import getOriginData from "../originData";
 import { Battery } from "../../../types";
@@ -31,8 +31,8 @@ const battery = (): Promise<Battery[] | void> => {
   }
   if (!feedId) return Promise.resolve();
   return axios
-    .get(`https://podcastindex.org/api/podcasts/byfeedid?id=${feedId}`)
-    .then((response: AxiosResponse<Podcast>) => {
+    .get<Podcast>(`https://podcastindex.org/api/podcasts/byfeedid?id=${feedId}`)
+    .then((response) => {
       const feed = response.data.feed;
       if (!feed.value || feed.value.model.type !== "lightning") {
         return;

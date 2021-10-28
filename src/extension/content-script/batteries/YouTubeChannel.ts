@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
 import getOriginData from "../originData";
 import { Battery } from "../../../types";
@@ -20,10 +20,10 @@ const battery = (): Promise<[Battery] | void> => {
     )?.src || "";
 
   return axios
-    .get(`https://www.youtube.com/${match[1]}/${match[2]}/about`, {
+    .get<Document>(`https://www.youtube.com/${match[1]}/${match[2]}/about`, {
       responseType: "document",
     })
-    .then((response: AxiosResponse<Document>) => {
+    .then((response) => {
       // TODO extract from links?
       const descriptionElement: HTMLMetaElement | null =
         response.data.querySelector('meta[name="description"]');
