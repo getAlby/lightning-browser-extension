@@ -125,7 +125,7 @@ function Send() {
         <div className="mt-1 mb-4">
           <Input
             name="invoice"
-            placeholder="Paste invoicem, lnurl or lightning address"
+            placeholder="Paste invoice, lnurl or lightning address"
             value={invoice}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               setInvoice(event.target.value)
