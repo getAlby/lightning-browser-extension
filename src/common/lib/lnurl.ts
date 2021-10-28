@@ -45,17 +45,23 @@ const lnurl = {
   findLnurl(text: string) {
     let stringToText = text.trim();
     let match;
+
+    // look for a LNURL with lnurlp: prefix
+    if ((match = stringToText.match(/lnurlp:(\S+)/i))) {
+      return match[1];
+      // return `http://${match[1]}`;
+    }
+
     // look for LNURL bech32 in the string
-    match = stringToText.match(/(lnurl[a-zA-HJ-NP-Z0-9]+)/i);
-    if (match) {
+    if ((match = stringToText.match(/(lnurl[a-zA-HJ-NP-Z0-9]+)/i))) {
       return match[1];
     }
 
     // look for a LNURL with protocol scheme
-    match = stringToText.match(/(lnurl([pwc])?:\/\/(\S+))/i);
-    if (match) {
+    if ((match = stringToText.match(/(lnurl([pwc])?:\/\/(\S+))/i))) {
       return match[2];
     }
+
     return null;
   },
   async getDetails(lnurlString: string) {
