@@ -134,7 +134,7 @@ function Send() {
         </div>
         <Button
           type="submit"
-          label="View invoice"
+          label="Continue"
           primary
           fullWidth
           loading={loading}
