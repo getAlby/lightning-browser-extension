@@ -6,6 +6,7 @@ import CrossIcon from "@bitcoin-design/bitcoin-icons/svg/filled/cross.svg";
 
 import utils from "../../common/lib/utils";
 import getOriginData from "../../extension/content-script/originData";
+import lnurlLib from "../../common/lib/lnurl";
 
 import Button from "../components/Button";
 import IconButton from "../components/IconButton";
@@ -17,19 +18,32 @@ function Send() {
   const [invoice, setInvoice] = useState("");
   const history = useHistory();
   const [qrIsOpen, setQrIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
-      await utils.call(
-        "sendPaymentOrPrompt",
-        { paymentRequest: invoice },
-        { origin: getOriginData() }
-      );
+      const lnurl = lnurlLib.findLnurl(invoice);
+      if (lnurl) {
+        setLoading(true);
+        const details = await lnurlLib.getDetails(lnurl);
+        history.push("/lnurlPay", {
+          details,
+          origin: getOriginData(),
+        });
+      } else {
+        await utils.call(
+          "sendPaymentOrPrompt",
+          { paymentRequest: invoice },
+          { origin: getOriginData() }
+        );
+      }
     } catch (e) {
       if (e instanceof Error) {
         alert(e.message);
       }
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -107,7 +121,7 @@ function Send() {
         <div className="mt-1 mb-4">
           <Input
             name="invoice"
-            placeholder="Paste invoice"
+            placeholder="Paste invoice or lnurl"
             value={invoice}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               setInvoice(event.target.value)
@@ -118,8 +132,9 @@ function Send() {
           type="submit"
           label="View invoice"
           primary
-          disabled={invoice === ""}
           fullWidth
+          loading={loading}
+          disabled={invoice === ""}
         />
       </form>
     </div>
