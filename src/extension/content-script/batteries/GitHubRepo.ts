@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
 import getOriginData from "../originData";
 import { Battery } from "../../../types";
@@ -12,8 +12,8 @@ const battery = (): Promise<[Battery] | void> => {
   const repo = matchData[2];
   const lndonateUrl = `https://raw.githubusercontent.com/${username}/${repo}/master/.lndonate`;
   return axios
-    .get(lndonateUrl, { responseType: "text" })
-    .then((response: AxiosResponse<any>) => {
+    .get<string>(lndonateUrl, { responseType: "text" })
+    .then((response) => {
       return [
         {
           method: "lnurl",

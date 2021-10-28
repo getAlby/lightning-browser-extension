@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import PubSub from "pubsub-js";
 import { parsePaymentRequest } from "invoices";
 
@@ -84,8 +84,9 @@ async function auth(message: Message, lnurlDetails: LNURLDetails) {
   loginURL.searchParams.set("key", signer.pkHex);
   loginURL.searchParams.set("t", Date.now().toString());
   try {
-    let authResponse: AxiosResponse<{ status: string; reason?: string }> =
-      await axios.get(loginURL.toString());
+    let authResponse = await axios.get<{ status: string; reason?: string }>(
+      loginURL.toString()
+    );
     return authResponse;
   } catch (e: any) {
     console.log("LNURL-AUTH FAIL:", e);

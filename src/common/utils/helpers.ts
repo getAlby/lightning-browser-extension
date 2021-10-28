@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { bech32 } from "bech32";
 
 export const normalizeAccountsData = (data: { [key: string]: any } = {}) => {
@@ -11,11 +11,11 @@ export const normalizeAccountsData = (data: { [key: string]: any } = {}) => {
 };
 
 export const getFiatFromSatoshi = async (currency: string, satoshi: number) => {
-  const res: AxiosResponse<{
+  const res = await axios.get<{
     [key: string]: {
       sell: number;
     };
-  }> = await axios.get("https://blockchain.info/ticker");
+  }>("https://blockchain.info/ticker");
   let exchangeRate: number = res?.data[currency ?? "USD"]?.sell;
   const amount = Math.round((satoshi / 100000000) * exchangeRate);
   return amount;
