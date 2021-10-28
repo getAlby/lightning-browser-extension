@@ -133,10 +133,11 @@ module.exports = {
     // new webpack.SourceMapDevToolPlugin({ filename: false }),
     // environmental variables
     new webpack.EnvironmentPlugin([
-      "NODE_ENV",
-      "TARGET_BROWSER",
+      "ALBY_LNDHUB_URL",
       "FAUCET_URL",
       "FAUCET_K",
+      "NODE_ENV",
+      "TARGET_BROWSER",
     ]),
     // delete previous build files
     new CleanWebpackPlugin({
