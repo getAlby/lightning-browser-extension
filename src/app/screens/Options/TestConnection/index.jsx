@@ -19,20 +19,20 @@ export default function TestConnection() {
   }
 
   function loadAccountInfo() {
+    setLoading(true);
     utils
       .call("accountInfo")
       .then((response) => {
         console.log(response);
         const { alias } = response.info;
         const balance = parseInt(response.balance.balance);
-
         setAccountInfo({ alias, balance });
-        setLoading(true);
       })
       .catch((e) => {
         console.log(e);
         setErrorMessage(e.message);
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   useEffect(() => {
@@ -44,7 +44,15 @@ export default function TestConnection() {
       <div className="relative lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
         <div className="relative">
           <div>
-            {accountInfo && accountInfo.alias && loading ? (
+            {errorMessage && (
+              <div>
+                <h1 className="text-3xl font-bold">Connection Error</h1>
+                <p>{errorMessage}</p>
+                <Button label="Edit" onClick={handleEdit} primary />
+              </div>
+            )}
+
+            {accountInfo && accountInfo.alias && (
               <div>
                 <h1 className="text-3xl font-bold">Success! 🎉</h1>
                 <p className="text-gray-500 mt-6">
@@ -63,15 +71,8 @@ export default function TestConnection() {
                   />
                 </div>
               </div>
-            ) : errorMessage ? (
-              <div>
-                <h1 className="text-3xl font-bold">Connection Error</h1>
-                <p>{errorMessage}</p>
-                <Button label="Edit" onClick={handleEdit} primary />
-              </div>
-            ) : (
-              <Loading />
             )}
+            {loading && <Loading />}
           </div>
         </div>
 
