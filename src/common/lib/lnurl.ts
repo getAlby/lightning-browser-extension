@@ -6,13 +6,12 @@ import { parsePaymentRequest } from "invoices";
 import { LNURLDetails, LNURLPaymentInfo } from "../../types";
 import { bech32Decode } from "../utils/helpers";
 
+// email regex: https://emailregex.com/
+const emailRegex =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 const fromInternetIdentifier = (address: string) => {
-  // email regex: https://emailregex.com/
-  if (
-    address.match(
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    )
-  ) {
+  if (address.match(emailRegex)) {
     const [name, host] = address.split("@");
     return `https://${host}/.well-known/lnurlp/${name}`;
   }
@@ -39,6 +38,9 @@ const normalizeLnurl = (lnurlString: string) => {
 };
 
 const lnurl = {
+  isLightningAddress(address: string) {
+    return emailRegex.test(address);
+  },
   findLnurl(text: string) {
     let stringToText = text.trim();
     let match;

@@ -23,7 +23,11 @@ function Send() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
-      const lnurl = lnurlLib.findLnurl(invoice);
+      let lnurl = lnurlLib.findLnurl(invoice);
+      if (!lnurl && lnurlLib.isLightningAddress(invoice)) {
+        lnurl = invoice;
+      }
+
       if (lnurl) {
         setLoading(true);
         const details = await lnurlLib.getDetails(lnurl);
@@ -121,7 +125,7 @@ function Send() {
         <div className="mt-1 mb-4">
           <Input
             name="invoice"
-            placeholder="Paste invoice or lnurl"
+            placeholder="Paste invoicem, lnurl or lightning address"
             value={invoice}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               setInvoice(event.target.value)
