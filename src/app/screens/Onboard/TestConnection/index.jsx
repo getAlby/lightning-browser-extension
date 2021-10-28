@@ -89,7 +89,6 @@ export default function TestConnection() {
         const balance = parseInt(response.balance.balance);
 
         setAccountInfo({ alias, balance });
-        setLoading(true);
       })
       .catch((e) => {
         console.log(e);
