@@ -6,16 +6,18 @@ import QRCode from "react-qr-code";
 
 import utils from "../../../../common/lib/utils";
 
-const url = "https://lndhub.herokuapp.com";
+const url = process.env.ALBY_LNDHUB_URL || "https://lndhub.herokuapp.com";
 
 export default function NewWallet() {
   const [lndHubData, setLndHubData] = useState({
     login: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   function signup(event: React.MouseEvent<HTMLButtonElement>) {
+    setLoading(true);
     event.preventDefault();
 
     const headers = new Headers();
@@ -27,14 +29,28 @@ export default function NewWallet() {
       method: "POST",
       headers,
       body: JSON.stringify({ partnerid: "bluewallet", accounttype: "common" }),
-    }).then((res) => {
-      res.json().then((data) => {
-        setLndHubData(data);
+    })
+      .then((res) => {
+        res.json().then((data) => {
+          if (data.login && data.password) {
+            setLndHubData(data);
+          } else {
+            console.error(data);
+            alert("Failed to create a new wallet. Please contact support.");
+          }
+        });
+      })
+      .catch((e) => {
+        console.error(e);
+        alert(`Failed to create a new wallet: ${e.message}`);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-    });
   }
 
   async function next(event: React.MouseEvent<HTMLButtonElement>) {
+    setLoading(true);
     event.preventDefault();
 
     const { login, password } = lndHubData;
@@ -67,6 +83,8 @@ export default function NewWallet() {
       if (e instanceof Error) {
         alert(`Connection failed (${e.message})`);
       }
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -124,6 +142,7 @@ export default function NewWallet() {
             />
             <Button
               label={lndHubData.login ? "Next" : "Create a wallet"}
+              loading={loading}
               onClick={lndHubData.login ? next : signup}
               primary
             />
