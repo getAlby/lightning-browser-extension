@@ -16,6 +16,10 @@ if (!process.env.FAUCET_URL) {
 if (!process.env.FAUCET_K) {
   process.env.FAUCET_K = null;
 }
+// default value is set in the code where it is used
+if (!process.env.ALBY_LNDHUB_URL) {
+  process.env.ALBY_LNDHUB_URL = null;
+}
 
 const viewsPath = path.join(__dirname, "static", "views");
 const nodeEnv = process.env.NODE_ENV || "development";
@@ -133,10 +137,11 @@ module.exports = {
     // new webpack.SourceMapDevToolPlugin({ filename: false }),
     // environmental variables
     new webpack.EnvironmentPlugin([
-      "NODE_ENV",
-      "TARGET_BROWSER",
+      "ALBY_LNDHUB_URL",
       "FAUCET_URL",
       "FAUCET_K",
+      "NODE_ENV",
+      "TARGET_BROWSER",
     ]),
     // delete previous build files
     new CleanWebpackPlugin({
