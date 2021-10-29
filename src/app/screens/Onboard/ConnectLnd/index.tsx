@@ -17,6 +17,7 @@ export default function ConnectLnd() {
   const [formData, setFormData] = useState(initialFormData);
   const [isDragging, setDragging] = useState(false);
   const hiddenFileInput = useRef<HTMLInputElement>(null);
+  const [loading, setLoading] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -27,6 +28,7 @@ export default function ConnectLnd() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setLoading(true);
     const { url, macaroon } = formData;
     const account = {
       name: "LND",
@@ -38,17 +40,29 @@ export default function ConnectLnd() {
     };
 
     try {
-      const addResult = await utils.call("addAccount", account);
-      if (addResult.accountId) {
-        await utils.call("selectAccount", {
-          id: addResult.accountId,
-        });
-        history.push("/test-connection");
+      const validation = await utils.call("validateAccount", account);
+      if (validation.valid) {
+        const addResult = await utils.call("addAccount", account);
+        if (addResult.accountId) {
+          await utils.call("selectAccount", {
+            id: addResult.accountId,
+          });
+          history.push("/test-connection");
+        }
+      } else {
+        console.log(validation);
+        alert(`
+          Connection failed. Are your LND credentials correct? \n\n(${validation.error})`);
       }
     } catch (e) {
-      // TODO: do something with the error, for e.g. display the message to the user.
-      console.error(e);
+      let message = "Connection failed. Are your LND credentials correct?";
+      if (e instanceof Error) {
+        message += `\n\n${e.message}`;
+      }
+      console.log(e);
+      alert(message);
     }
+    setLoading(false);
   }
 
   function dropHandler(event: React.DragEvent<HTMLDivElement>) {
@@ -175,6 +189,7 @@ export default function ConnectLnd() {
               type="submit"
               label="Continue"
               primary
+              loading={loading}
               disabled={formData.url === "" || formData.macaroon === ""}
             />
           </div>
