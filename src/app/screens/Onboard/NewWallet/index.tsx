@@ -42,7 +42,6 @@ export default function NewWallet() {
       })
       .catch((e) => {
         console.error(e);
-        setLoading(false);
         alert(`Failed to create a new wallet: ${e.message}`);
       })
       .finally(() => {
@@ -79,13 +78,13 @@ export default function NewWallet() {
         console.log(validation);
         alert(`Connection failed (${validation.error})`);
       }
-      setLoading(false);
     } catch (e) {
       console.error(e);
-      setLoading(false);
       if (e instanceof Error) {
         alert(`Connection failed (${e.message})`);
       }
+    } finally {
+      setLoading(false);
     }
   }
 
