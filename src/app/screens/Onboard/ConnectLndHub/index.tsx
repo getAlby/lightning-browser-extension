@@ -12,6 +12,7 @@ export default function ConnectLndHub() {
   const [formData, setFormData] = useState({
     uri: "",
   });
+  const [loading, setLoading] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -22,9 +23,11 @@ export default function ConnectLndHub() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setLoading(true);
     const match = formData.uri.match(/lndhub:\/\/(\S+):(\S+)@(\S+)/i);
     if (!match) {
       alert("Invalid LNDHub URI");
+      setLoading(false);
       return;
     }
     const login = match[1];
@@ -52,14 +55,19 @@ export default function ConnectLndHub() {
         }
       } else {
         console.log(validation);
-        alert(`Connection failed (${validation.error})`);
+        alert(
+          `Connection failed. Is your LNDHub URI correct? \n\n(${validation.error})`
+        );
       }
     } catch (e) {
       console.error(e);
+      let message = "Connection failed. Is your LNDHub URI correct?";
       if (e instanceof Error) {
-        alert(`Connection failed (${e.message})`);
+        message += `\n\n${e.message}`;
       }
+      alert(message);
     }
+    setLoading(false);
   }
 
   return (
@@ -119,6 +127,7 @@ export default function ConnectLndHub() {
               type="submit"
               label="Continue"
               primary
+              loading={loading}
               disabled={formData.uri === ""}
             />
           </div>
