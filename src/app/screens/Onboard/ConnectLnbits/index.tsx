@@ -9,8 +9,9 @@ export default function ConnectLnbits() {
   const history = useHistory();
   const [formData, setFormData] = useState({
     adminkey: "",
-    url: "https://lnbits.com",
+    url: "https://demo.lnbits.com",
   });
+  const [loading, setLoading] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -21,6 +22,7 @@ export default function ConnectLnbits() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setLoading(true);
     const { adminkey, url } = formData;
     const account = {
       name: "LNBits",
@@ -43,14 +45,20 @@ export default function ConnectLnbits() {
         }
       } else {
         console.log(validation);
-        alert(`Connection failed (${validation.error})`);
+        alert(
+          `Connection failed. Do you have the correct URL and Admin Key? \n\n(${validation.error})`
+        );
       }
     } catch (e) {
       console.error(e);
+      let message =
+        "Connection failed. Do you have the correct URL and Admin Key?";
       if (e instanceof Error) {
-        alert(`Connection failed (${e.message})`);
+        message += `\n\n${e.message}`;
       }
+      alert(message);
     }
+    setLoading(false);
   }
 
   return (
@@ -104,6 +112,7 @@ export default function ConnectLnbits() {
               type="submit"
               label="Continue"
               primary
+              loading={loading}
               disabled={formData.adminkey === "" || formData.url === ""}
             />
           </div>
