@@ -13,12 +13,10 @@
   "homepage_url": "https://getAlby.com/",
   "web_accessible_resources": ["js/inpageScript.bundle.js"],
   "permissions": [
-    "nativeMessaging",
     "notifications",
     "activeTab",
     "storage",
-    "webRequest",
-    "webRequestBlocking",
+    "unlimitedStorage",
     "*://*/*"
   ],
 
