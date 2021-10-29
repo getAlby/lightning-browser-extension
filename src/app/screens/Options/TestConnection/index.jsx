@@ -3,10 +3,12 @@ import { useHistory } from "react-router-dom";
 import Button from "../../../components/Button";
 import Card from "../../../components/Card";
 import utils from "../../../../common/lib/utils";
+import Loading from "../../../components/Loading";
 
 export default function TestConnection() {
   const [accountInfo, setAccountInfo] = useState({});
   const [errorMessage, setErrorMessage] = useState();
+  const [loading, setLoading] = useState(false);
 
   const history = useHistory();
 
@@ -17,19 +19,20 @@ export default function TestConnection() {
   }
 
   function loadAccountInfo() {
+    setLoading(true);
     utils
       .call("accountInfo")
       .then((response) => {
         console.log(response);
         const { alias } = response.info;
         const balance = parseInt(response.balance.balance);
-
         setAccountInfo({ alias, balance });
       })
       .catch((e) => {
         console.log(e);
         setErrorMessage(e.message);
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   useEffect(() => {
@@ -69,6 +72,7 @@ export default function TestConnection() {
                 </div>
               </div>
             )}
+            {loading && <Loading />}
           </div>
         </div>
 

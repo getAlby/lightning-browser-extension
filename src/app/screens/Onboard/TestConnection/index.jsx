@@ -31,6 +31,7 @@ export default function TestConnection() {
   const [faucetEmail, setFaucetEmail] = useState();
   const [showFaucet, setShowFaucet] = useState(false);
   const [faucetLoading, setFaucetLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const history = useHistory();
 
@@ -80,6 +81,7 @@ export default function TestConnection() {
   }
 
   function loadAccountInfo() {
+    setLoading(true);
     utils
       .call("accountInfo")
       .then((response) => {
@@ -91,7 +93,8 @@ export default function TestConnection() {
       .catch((e) => {
         console.log(e);
         setErrorMessage(e.message);
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   useEffect(() => {
@@ -211,6 +214,8 @@ export default function TestConnection() {
                 </div>
               </div>
             )}
+
+            {loading && <Loading />}
           </div>
         </div>
 
