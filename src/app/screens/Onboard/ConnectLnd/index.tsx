@@ -50,16 +50,15 @@ export default function ConnectLnd() {
           history.push("/test-connection");
         }
       } else {
-        console.log(validation);
         alert(`
           Connection failed. Are your LND credentials correct? \n\n(${validation.error})`);
       }
     } catch (e) {
+      console.error(e);
       let message = "Connection failed. Are your LND credentials correct?";
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
-      console.log(e);
       alert(message);
     }
     setLoading(false);
