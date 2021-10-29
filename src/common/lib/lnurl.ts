@@ -19,23 +19,6 @@ const fromInternetIdentifier = (address: string) => {
   return null;
 };
 
-const findLnurl = (text: string) => {
-  let stringToText = text.trim();
-  let match;
-  // look for LNURL bech32 in the string
-  match = stringToText.match(/(lnurl[a-zA-HJ-NP-Z0-9]+)/i);
-  if (match) {
-    return match[1];
-  }
-
-  // look for a LNURL with protocol scheme
-  match = stringToText.match(/(lnurl([pwc])?:\/\/(\S+))/i);
-  if (match) {
-    return match[2];
-  }
-  return null;
-};
-
 const normalizeLnurl = (lnurlString: string) => {
   // maybe it's bech32 encoded?
   try {
@@ -56,6 +39,25 @@ const normalizeLnurl = (lnurlString: string) => {
 };
 
 const lnurl = {
+  isLightningAddress(address: string) {
+    return Boolean(fromInternetIdentifier(address));
+  },
+  findLnurl(text: string) {
+    let stringToText = text.trim();
+    let match;
+
+    // look for a LNURL with protocol scheme
+    if ((match = stringToText.match(/lnurl[pwc]:(\S+)/i))) {
+      return match[1];
+    }
+
+    // look for LNURL bech32 in the string
+    if ((match = stringToText.match(/(lnurl[a-zA-HJ-NP-Z0-9]+)/i))) {
+      return match[1];
+    }
+
+    return null;
+  },
   async getDetails(lnurlString: string) {
     const url = normalizeLnurl(lnurlString);
     let lnurlDetails = {} as LNURLDetails;
