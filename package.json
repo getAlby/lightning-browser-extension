@@ -54,7 +54,7 @@
     "dayjs": "^1.10.7",
     "dexie": "^3.0.3",
     "elliptic": "^6.5.4",
-    "html5-qrcode": "^2.0.13",
+    "html5-qrcode": "^2.1.1",
     "invoices": "^2.0.0",
     "lsat-js": "^2.0.3",
     "memoizee": "^0.4.15",

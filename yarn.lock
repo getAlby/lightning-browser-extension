@@ -9350,10 +9350,10 @@ html-webpack-plugin@^5.0.0, html-webpack-plugin@^5.3.1:
     pretty-error "^3.0.4"
     tapable "^2.0.0"
 
-html5-qrcode@^2.0.13:
-  version "2.0.13"
-  resolved "https://registry.yarnpkg.com/html5-qrcode/-/html5-qrcode-2.0.13.tgz#b0b11e50054f0641a35888d9a38f17de0073d145"
-  integrity sha512-nB7jN8p/GJ7GSCqNvpXef4tkl55/WWh3d6Ob7fxIpf6AvbnbE/jWXWUhlQrZnnFirHgmsEqHhSVv6RjPk8/iKQ==
+html5-qrcode@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/html5-qrcode/-/html5-qrcode-2.1.1.tgz#fc1cc8a020a5846230aa5be71ac6118c8f2b0c6d"
+  integrity sha512-F+oqQ8vyOE2RbuTbtEGBiD4HYQqI3x69bF60jJHCHW/H0qgS7cdPoA0ySTZaF3S/+7WbSZkEHEqqVzRXLvehSQ==
 
 htmlparser2@^6.1.0:
   version "6.1.0"
