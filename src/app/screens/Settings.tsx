@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Html5Qrcode } from "html5-qrcode";
 
 import Container from "../components/Container";
 import Button from "../components/Button";
@@ -19,7 +20,7 @@ function Settings() {
               label="Allow camera access"
               onClick={async () => {
                 try {
-                  const devices = await window.Html5Qrcode.getCameras();
+                  await Html5Qrcode.getCameras();
                   setCameraPermissionsGranted(true);
                 } catch (e) {
                   alert(e);

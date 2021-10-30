@@ -1,5 +1,4 @@
 const path = require("path");
-const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   core: {
@@ -19,18 +18,6 @@ module.exports = {
     },
   ],
   webpackFinal: async (config) => {
-    // TODO: load from package once the lib supports it
-    config.plugins.push(
-      new CopyPlugin({
-        patterns: [
-          {
-            from: "./node_modules/html5-qrcode/dist",
-            to: "./html5-qrcode-dist/",
-          },
-        ],
-      })
-    );
-
     config.module.rules.push({
       test: /\,css&/,
       use: [
