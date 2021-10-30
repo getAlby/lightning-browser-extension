@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { QrcodeIcon } from "@heroicons/react/outline";
+import { Html5Qrcode, Html5QrcodeScannerState } from "html5-qrcode";
 
 import Button from "../Button";
 
-declare global {
-  interface Window {
-    Html5Qrcode: any;
-  }
+interface CameraDevice {
+  id: string;
+  label: string;
 }
 
 type Props = {
@@ -23,9 +23,9 @@ function QrcodeScanner({
   qrCodeErrorCallback,
 }: Props) {
   const [isScanning, setScanning] = useState(false);
-  const [cameras, setCameras] = useState<{ id: string; label: string }[]>([]);
+  const [cameras, setCameras] = useState<CameraDevice[]>([]);
   const [selectedCamera, setSelectedCamera] = useState("");
-  const html5QrCodeRef = useRef<any>(null);
+  const html5QrCodeRef = useRef<Html5Qrcode>();
 
   useEffect(() => {
     return () => {
@@ -35,10 +35,10 @@ function QrcodeScanner({
 
   async function handleRequestCameraPermissions() {
     try {
-      const devices = await window.Html5Qrcode.getCameras(); // Request camera permissions.
+      const devices = await Html5Qrcode.getCameras(); // Request camera permissions.
       if (devices && devices.length) {
         setCameras(devices);
-        html5QrCodeRef.current = new window.Html5Qrcode("reader");
+        html5QrCodeRef.current = new Html5Qrcode("reader", false);
         handleStartScanning(devices[0].id);
       }
     } catch (error) {
@@ -50,8 +50,22 @@ function QrcodeScanner({
     setScanning(true);
     setSelectedCamera(id);
     try {
-      if (html5QrCodeRef?.current) {
-        await html5QrCodeRef.current.stop();
+      if (html5QrCodeRef.current) {
+        // Stop if there's already a scanner active.
+        try {
+          const scannerState = html5QrCodeRef.current.getState();
+          if (
+            [
+              Html5QrcodeScannerState.PAUSED,
+              Html5QrcodeScannerState.SCANNING,
+            ].includes(scannerState)
+          ) {
+            await html5QrCodeRef.current.stop();
+          }
+        } catch (e) {
+          console.error(e);
+        }
+
         html5QrCodeRef.current
           .start(
             id,
@@ -76,17 +90,15 @@ function QrcodeScanner({
     }
   }
 
-  function handleStopScanning(isMounted = true) {
-    if (html5QrCodeRef.current) {
-      html5QrCodeRef.current
-        .stop()
-        .then(() => {
-          html5QrCodeRef.current.clear();
-          if (isMounted) setScanning(false);
-        })
-        .catch(() => {
-          // Stop failed.
-        });
+  async function handleStopScanning(isMounted = true) {
+    try {
+      if (html5QrCodeRef.current) {
+        await html5QrCodeRef.current.stop();
+        html5QrCodeRef.current.clear();
+        if (isMounted) setScanning(false);
+      }
+    } catch (e) {
+      console.error(e);
     }
   }
 
