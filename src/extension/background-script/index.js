@@ -15,20 +15,19 @@ setInterval(() => {
 */
 
 const extractLightningDataFromPage = async (tabId, changeInfo, tabInfo) => {
-  if (changeInfo.status !== "complete") {
+  if (changeInfo.status !== "complete" || !tabInfo.url?.startsWith("http")) {
     return;
   }
-
   browser.tabs.executeScript(tabId, {
     code: "if ((document.location.protocol === 'https:' || document.location.protocol === 'http:') && window.LBE_EXTRACT_LIGHTNING_DATA) { LBE_EXTRACT_LIGHTNING_DATA(); };",
   });
 };
 
 const updateIcon = async (tabId, changeInfo, tabInfo) => {
-  if (!changeInfo.url || !changeInfo.url.startsWith("http")) {
+  if (changeInfo.status !== "complete" || !tabInfo.url?.startsWith("http")) {
     return;
   }
-  const url = new URL(changeInfo.url);
+  const url = new URL(tabInfo.url);
 
   const allowance = await db.allowances
     .where("host")
