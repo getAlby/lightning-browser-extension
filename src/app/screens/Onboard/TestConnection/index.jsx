@@ -91,7 +91,7 @@ export default function TestConnection() {
         setAccountInfo({ alias, balance });
       })
       .catch((e) => {
-        console.log(e);
+        console.error(e);
         setErrorMessage(e.message);
       })
       .finally(() => setLoading(false));
