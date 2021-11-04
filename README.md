@@ -150,7 +150,9 @@ Currently there is one prototype of a native companion app which can connect to 
 ## ⭐ Contributing
 We welcome and appreciate new contributions.
 
-If you're a developer looking to help but not sure where to begin, check out the issues that have specifically been marked as being friendly to new contributors [here](https://github.com/bumi/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22).
+We use the [Development Project Board](https://github.com/getAlby/lightning-browser-extension/projects/2) to plan the next ToDos. Best choose something from the ToDo Column. (If there is nothing for you, feel free to pick something from the backlog)
+
+If you're a developer looking to help but not sure where to begin, check out the issues that have specifically been marked as being friendly to new contributors [here](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22+project%3AgetAlby%2Flightning-browser-extension%2F2).
 
 If you're looking for a bigger challenge, before opening a pull request please [create an issue](https://github.com/bumi/lightning-browser-extension/issues/new) or [join our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2) to get feedback, discuss the best way to tackle the challenge, and to ensure that there's no duplication of work.
 
