@@ -11,14 +11,14 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 // init env variables otherwise the EnvironmentPlugin complains if those are not set.
 if (!process.env.FAUCET_URL) {
-  process.env.FAUCET_URL = null;
+  process.env.FAUCET_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
 if (!process.env.FAUCET_K) {
-  process.env.FAUCET_K = null;
+  process.env.FAUCET_K = ""; // env variables are passed as string. empty strings are still falsy
 }
 // default value is set in the code where it is used
 if (!process.env.ALBY_LNDHUB_URL) {
-  process.env.ALBY_LNDHUB_URL = null;
+  process.env.ALBY_LNDHUB_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
 
 const viewsPath = path.join(__dirname, "static", "views");

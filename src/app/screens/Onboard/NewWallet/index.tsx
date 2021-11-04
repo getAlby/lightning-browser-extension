@@ -75,7 +75,7 @@ export default function NewWallet() {
           history.push("/test-connection");
         }
       } else {
-        console.log(validation);
+        console.log({ validation });
         alert(`Connection failed (${validation.error})`);
       }
     } catch (e) {
