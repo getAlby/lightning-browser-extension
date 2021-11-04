@@ -9,7 +9,7 @@
     "48": "assets/icons/satsymbol-black-48.png",
     "128": "assets/icons/satsymbol-black-128.png"
   },
-  "description": "Lightning buzz for your Browser. The extension for the Bitcoin Lightning Network.",
+  "description": "Bitcoin buzz for your browser. The extension for the Bitcoin Lightning Network.",
   "homepage_url": "https://getAlby.com/",
   "web_accessible_resources": ["js/inpageScript.bundle.js"],
   "permissions": [
