@@ -113,12 +113,6 @@ async function init() {
   browser.tabs.onUpdated.addListener(extractLightningDataFromPage); // extract LN data from websites
 
   browser.tabs.onUpdated.addListener(updateIcon); // update Icon when there is an allowance
-  /*
-  if (settings.enableLsats) {
-    await browser.storage.sync.set({ lsats: {} });
-    initLsatInterceptor(connector);
-  }
-  */
 }
 
 // The onInstalled event is fired directly after the code is loaded.
