@@ -57,7 +57,6 @@
     "elliptic": "^6.5.4",
     "html5-qrcode": "^2.1.1",
     "invoices": "^2.0.0",
-    "lsat-js": "^2.0.3",
     "memoizee": "^0.4.15",
     "postcss-cli": "^9.0.1",
     "pubsub-js": "^1.9.3",

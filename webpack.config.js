@@ -60,7 +60,6 @@ module.exports = {
     prompt: "./src/app/router/Prompt/index.jsx",
     options: "./src/app/router/Options/index.jsx",
     welcome: "./src/app/router/Welcome/index.jsx",
-    lsat: "./src/extension/ln/lsat/index.js",
   },
 
   output: {
@@ -184,13 +183,6 @@ module.exports = {
       chunks: ["welcome"],
       hash: true,
       filename: "welcome.html",
-    }),
-    new HtmlWebpackPlugin({
-      template: path.join(viewsPath, "lsat.html"),
-      inject: "body",
-      chunks: ["lsat"],
-      hash: true,
-      filename: "lsat.html",
     }),
     // write css file(s) to build folder
     new MiniCssExtractPlugin({ filename: "[name].css" }), // No css subfolder has been used as this breaks path's to url's such as fonts.
