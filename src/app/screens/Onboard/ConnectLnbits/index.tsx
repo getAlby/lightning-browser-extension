@@ -65,13 +65,15 @@ export default function ConnectLnbits() {
     <form onSubmit={handleSubmit}>
       <div className="relative lg:flex mt-24">
         <div className="lg:w-1/2">
-          <h1 className="text-3xl font-bold">Connect to LNbits</h1>
+          <h1 className="text-3xl font-bold dark:text-white">
+            Connect to LNbits
+          </h1>
           <p className="text-gray-500 mt-6"></p>
           <div className="w-4/5">
             <div className="mt-6">
               <label
                 htmlFor="adminkey"
-                className="block font-medium text-gray-700"
+                className="block font-medium text-gray-700 dark:text-gray-500"
               >
                 LNbits Admin Key
               </label>
@@ -85,7 +87,10 @@ export default function ConnectLnbits() {
               </div>
             </div>
             <div className="mt-6">
-              <label htmlFor="url" className="block font-medium text-gray-700">
+              <label
+                htmlFor="url"
+                className="block font-medium text-gray-700 dark:text-gray-500"
+              >
                 LNbits URL
               </label>
               <div className="mt-1">

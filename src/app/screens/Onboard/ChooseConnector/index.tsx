@@ -38,7 +38,7 @@ export default function ChooseConnector() {
       <Route exact path={path}>
         <div className="relative mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
           <div className="relative">
-            <h1 className="text-3xl font-bold">
+            <h1 className="text-3xl font-bold dark:text-white">
               Do you have a lightning wallet?
             </h1>
             <p className="text-gray-500 my-6">

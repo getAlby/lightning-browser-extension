@@ -158,16 +158,20 @@ export default function TestConnection() {
           <div>
             {errorMessage && (
               <div>
-                <h1 className="text-3xl font-bold">Connection Error</h1>
-                <p>{errorMessage}</p>
+                <h1 className="text-3xl font-bold dark:text-white">
+                  Connection Error
+                </h1>
+                <p className="dark:text-white">{errorMessage}</p>
                 <Button label="Edit" onClick={handleEdit} primary />
               </div>
             )}
 
             {accountInfo && accountInfo.alias && (
               <div>
-                <h1 className="text-3xl font-bold">Success! 🎉</h1>
-                <p className="text-gray-500 mt-6">
+                <h1 className="text-3xl font-bold dark:text-white">
+                  Success! 🎉
+                </h1>
+                <p className="text-gray-500 dark:text-white mt-6">
                   Awesome, you're ready to go!
                 </p>
                 <div>
@@ -189,7 +193,7 @@ export default function TestConnection() {
                   )}
                 </div>
 
-                <div className="mt-6 shadow p-4 rounded-lg">
+                <div className="mt-6 shadow dark:bg-gray-800 p-4 rounded-lg">
                   <Card
                     color="bg-green-bitcoin"
                     alias={accountInfo.alias}
@@ -201,7 +205,7 @@ export default function TestConnection() {
                   />
                 </div>
                 <div>
-                  <p className="text-gray-500 mt-8">
+                  <p className="text-gray-500 dark:text-white mt-8">
                     Now you’ve connected your node would you like to go through
                     a tutorial?
                   </p>

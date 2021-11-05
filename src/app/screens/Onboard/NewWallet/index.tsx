@@ -92,7 +92,9 @@ export default function NewWallet() {
     <div>
       <div className="relative lg:flex mt-24">
         <div className="lg:w-1/2">
-          <h1 className="text-3xl font-bold">Get a new lightning wallet</h1>
+          <h1 className="text-3xl font-bold dark:text-white">
+            Get a new lightning wallet
+          </h1>
           <p className="text-gray-500 mt-6"></p>
           {lndHubData.login ? (
             <div className="w-4/5">
@@ -104,7 +106,7 @@ export default function NewWallet() {
                   disabled
                 />
               </div>
-              <div className="mt-6">
+              <div className="mt-6 dark:text-white">
                 <p>
                   <strong>
                     We have created a new wallet for you. <br />
@@ -125,8 +127,8 @@ export default function NewWallet() {
             </div>
           ) : (
             <div className="w-4/5">
-              <div className="mt-6">
-                <strong>Remember, not your keys, not your coins.</strong>
+              <div className="mt-6 dark:text-white">
+                <strong>Remember, not your keys, not your coins. </strong>
                 This quick setup uses a custodial service to manage your wallet.
               </div>
             </div>

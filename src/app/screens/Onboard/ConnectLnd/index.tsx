@@ -109,14 +109,18 @@ export default function ConnectLnd() {
   return (
     <div className="relative mt-24 lg:flex space-x-8">
       <div className="lg:w-1/2">
-        <h1 className="text-3xl font-bold">Connect to your LND node</h1>
+        <h1 className="text-3xl font-bold dark:text-white">
+          Connect to your LND node
+        </h1>
         <p className="text-gray-500 mt-6">
           You will need to retrieve the node url and an admin macaroon.
         </p>
         <form onSubmit={handleSubmit}>
           <div className="w-4/5">
             <div className="mt-6">
-              <label className="block font-medium text-gray-700">Address</label>
+              <label className="block font-medium text-gray-700 dark:text-white">
+                Address
+              </label>
               <div className="mt-1">
                 <Input
                   name="url"
@@ -128,7 +132,7 @@ export default function ConnectLnd() {
             </div>
             <div className="mt-6">
               <div>
-                <label className="block font-medium text-gray-700">
+                <label className="block font-medium text-gray-700 dark:text-white">
                   Macaroon
                 </label>
                 <div className="mt-1">
@@ -140,7 +144,7 @@ export default function ConnectLnd() {
                   />
                 </div>
               </div>
-              <p className="text-center my-4">OR</p>
+              <p className="text-center my-4 dark:text-white">OR</p>
               <div
                 className={`cursor-pointer bg-white flex flex-col items-center p-4 py-10 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
                   isDragging ? "border-blue-500 bg-blue-50" : ""

@@ -50,7 +50,7 @@ export default function Intro() {
               className="max-w-xs"
             />
           </div>
-          <h2 className="mt-10 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl lg:max-w-xs">
+          <h2 className="mt-10 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl lg:max-w-xs">
             The power of lightning in your browser
           </h2>
         </div>

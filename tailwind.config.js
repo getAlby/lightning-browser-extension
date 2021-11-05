@@ -26,4 +26,5 @@ module.exports = {
       },
     },
   },
+  darkMode: "media",
 };
