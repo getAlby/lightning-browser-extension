@@ -5297,17 +5297,17 @@ body-parser@1.19.0:
     raw-body "2.4.0"
     type-is "~1.6.17"
 
-bolt07@1.7.3:
-  version "1.7.3"
-  resolved "https://registry.npmjs.org/bolt07/-/bolt07-1.7.3.tgz"
-  integrity sha512-zXhf60qEpFXwRTeoaJ+0SyPw/jzBtIHZLCJBvaa0rFGiiQKdWXdaiIWeyIkxl74p/UGUv4BQsbkAgB0Em/1QOQ==
+bolt07@1.7.4:
+  version "1.7.4"
+  resolved "https://registry.yarnpkg.com/bolt07/-/bolt07-1.7.4.tgz#40787ed2c8e744224ffc2d828d5737907289ae56"
+  integrity sha512-y82Na9vEBY+rqjJhjYMFAch70nWvbL5OiEPFqNf7cGTtQfG7g/Vui2KnemrX1mxEw2SgccF+Rn1NSRm9HFtu3w==
   dependencies:
     bn.js "5.2.0"
 
-bolt09@0.1.5:
-  version "0.1.5"
-  resolved "https://registry.npmjs.org/bolt09/-/bolt09-0.1.5.tgz"
-  integrity sha512-oT1+erg21vat55oXNd7nNEkCO0FQnmaraFZuyXFyeVk7dZCm/3vgic0qK1VuUSV+ksYXJfRKYC4AqfYrtHNPZg==
+bolt09@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/bolt09/-/bolt09-0.2.0.tgz#dd34a527359a834d90ae3ad3895d4dca775706ab"
+  integrity sha512-s6QWo7qqu6fKGLISGMSG+vFxIRzeUT3KQHDiHpvhflyI3TQD6zdaMu4fEpP7PoyMFJt2Ve26SBvvRP3MM7V0bw==
 
 bonjour@^3.5.0:
   version "3.5.0"
@@ -9565,16 +9565,16 @@ invariant@^2.2.3, invariant@^2.2.4:
   dependencies:
     loose-envify "^1.0.0"
 
-invoices@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/invoices/-/invoices-2.0.0.tgz#f84185150720b7d7799bbe10dbb772c7fabf93d4"
-  integrity sha512-UnU0bS3+cMA2UvYrF5RXp/Hm7v/nYiA3F0GVCOeRmDiZmXAt/eO7KdqyRzewopvhBlev7F7t7GZzRRYY1XE3xg==
+invoices@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/invoices/-/invoices-2.0.1.tgz#f8c9d72a88fd5f4675d52a3f6979ca9f9e16aab5"
+  integrity sha512-qd6Os70iotC/P09ArTWsXB3/G8MJRYMkrJQ1k2983kzdKVlROgWobKmdvrA/IFmjg0Ztg/wDkhx49dIQqT8PzQ==
   dependencies:
     bech32 "2.0.0"
     bitcoinjs-lib "5.2.0"
     bn.js "5.2.0"
-    bolt07 "1.7.3"
-    bolt09 "0.1.5"
+    bolt07 "1.7.4"
+    bolt09 "0.2.0"
     secp256k1 "4.0.2"
 
 ip-regex@^4.0.0:
