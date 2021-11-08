@@ -3,10 +3,10 @@ import setLightningData from "../setLightningData";
 
 const urlMatcher = /^https:\/\/twitter\.com\/(\w+).*/;
 
-function getUsername() {
+function getUsername(): string | null {
   const matchData = document.location.toString().match(urlMatcher);
   if (matchData) return matchData[1];
-  return "";
+  return null;
 }
 
 // can we get the user description from the primary column that looks like a profile?
@@ -64,10 +64,12 @@ function getUserData(username: string) {
 function twitterDOMChanged(_: MutationRecord[], observer: MutationObserver) {
   const username = getUsername();
   if (
+    !username ||
     ["home", "explore", "notifications", "messages"].includes(
       username.toLocaleLowerCase()
     )
   ) {
+    setLightningData(null);
     return;
   }
 
@@ -108,6 +110,7 @@ function twitterDOMChanged(_: MutationRecord[], observer: MutationObserver) {
 
     // if we still did not find anything ignore it.
     if (!recipient) {
+      setLightningData(null);
       return;
     }
 
@@ -125,7 +128,7 @@ function twitterDOMChanged(_: MutationRecord[], observer: MutationObserver) {
 
 function battery(): void {
   const observer = new MutationObserver(twitterDOMChanged);
-  observer.observe(document.head, { childList: true, subtree: true });
+  observer.observe(document, { childList: true, subtree: true });
 }
 
 const twitter = {
