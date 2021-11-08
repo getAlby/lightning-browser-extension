@@ -15,6 +15,7 @@ setInterval(() => {
 */
 
 const extractLightningDataFromPage = async (tabId, changeInfo, tabInfo) => {
+  console.log({ changeInfo, tabInfo });
   if (changeInfo.status !== "complete" || !tabInfo.url?.startsWith("http")) {
     return;
   }
@@ -110,7 +111,7 @@ async function init() {
   browser.runtime.onMessage.addListener(routeCalls);
 
   // TODO: make optional
-  browser.tabs.onUpdated.addListener(extractLightningDataFromPage); // extract LN data from websites
+  //browser.tabs.onUpdated.addListener(extractLightningDataFromPage); // extract LN data from websites
 
   browser.tabs.onUpdated.addListener(updateIcon); // update Icon when there is an allowance
 }

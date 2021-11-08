@@ -7,9 +7,11 @@ import injectScript from "./injectScript";
 import LBE_EXTRACT_LIGHTNING_DATA from "./batteries";
 
 if (shouldInject()) {
+  console.log("inject");
   injectScript();
   // TODO: make optional
   window.LBE_EXTRACT_LIGHTNING_DATA = LBE_EXTRACT_LIGHTNING_DATA;
+  window.LBE_EXTRACT_LIGHTNING_DATA();
 
   // message listener to listen to inpage webln calls
   // those calls get passed on to the background script

@@ -1,5 +1,5 @@
 import getOriginData from "../originData";
-import { Battery } from "../../../types";
+import setLightningData from "../setLightningData";
 
 const urlMatcher = /^https:\/\/twitter\.com\/(\w+).*/;
 
@@ -61,83 +61,71 @@ function getUserData(username: string) {
   return null;
 }
 
-function battery(): Promise<[Battery] | void> {
-  // Twitter loads everything async...so we observe DOM changes to check if data finished loading.
-  let timer: NodeJS.Timeout;
-  const timeout = 1500; // Observing should auto-stop after timeout (when nothing found).
+function twitterDOMChanged(_: MutationRecord[], observer: MutationObserver) {
+  const username = getUsername();
+  if (
+    ["home", "explore", "notifications", "messages"].includes(
+      username.toLocaleLowerCase()
+    )
+  ) {
+    return;
+  }
 
-  return new Promise((resolve, reject) => {
-    function twitterDOMChanged(
-      _: MutationRecord[],
-      observer: MutationObserver
-    ) {
-      const username = getUsername();
-      let userData;
-      if ((userData = getUserData(username))) {
-        observer.disconnect();
-        clearTimeout(timer);
-        console.log({ userData });
+  console.log(`checking ${username}`);
+  let userData;
+  if ((userData = getUserData(username))) {
+    //observer.disconnect();
 
-        let match;
-        let recipient;
-        // extract lnurlp: from the description text
+    let match;
+    let recipient;
+    // extract lnurlp: from the description text
+    if ((match = (userData.element.textContent || "").match(/lnurlp:(\S+)/i))) {
+      recipient = match[1];
+    } else {
+      // if we did not find anything let's look for an ⚡ emoji
+      const zapElement = userData.element.querySelector('img[src*="26a1.svg"]');
+      // it is hard to find the :zap: emoji. Twitter uses images for that but has an alt text with the emoij
+      // but there could be some control characters somewhere...somehow...no idea...
+      // for that reason we check if there is any character with the zap char code in the alt string.
+
+      //const emojis = userData.element.querySelectorAll("img");
+      //const zapElement = Array.from(emojis).find((img) => {
+      //  return Array.from(img.alt.trim()).some(
+      //    (c) => c.charCodeAt(0) === 9889
+      //  );
+      //});
+      // if we find a ⚡ emoji we use the text of the next sibling and try to extract a lnurl
+      if (zapElement) {
         if (
-          (match = (userData.element.textContent || "").match(/lnurlp:(\S+)/i))
+          (match = (zapElement.nextSibling?.textContent || "").match(
+            /(\S+@\S+)/
+          ))
         ) {
           recipient = match[1];
-        } else {
-          // if we did not find anything let's look for an ⚡ emoji
-          const zapElement = userData.element.querySelector(
-            'img[src*="26a1.svg"]'
-          );
-          // it is hard to find the :zap: emoij. Twitter uses images for that but has an alt text with the emoij
-          // but there could be some control characters somewhere...somehow...no idea...
-          // for that reason we check if there is any character with the zap char code in the alt string.
-
-          //const emojis = userData.element.querySelectorAll("img");
-          //const zapElement = Array.from(emojis).find((img) => {
-          //  return Array.from(img.alt.trim()).some(
-          //    (c) => c.charCodeAt(0) === 9889
-          //  );
-          //});
-          // if we find a ⚡ emoji we use the text of the next sibling and try to extract a lnurl
-          if (zapElement) {
-            if (
-              (match = (zapElement.nextSibling?.textContent || "").match(
-                /(\S+@\S+)/
-              ))
-            ) {
-              recipient = match[1];
-            }
-          }
         }
-
-        // if we still did not find anything ignore it.
-        if (!recipient) {
-          resolve();
-          return;
-        }
-
-        resolve([
-          {
-            method: "lnurl",
-            recipient,
-            ...getOriginData(),
-            icon: userData.imageUrl,
-            name: userData.name,
-          },
-        ]);
       }
     }
 
-    const observer = new MutationObserver(twitterDOMChanged);
-    observer.observe(document, { childList: true, subtree: true });
+    // if we still did not find anything ignore it.
+    if (!recipient) {
+      return;
+    }
 
-    timer = setTimeout(() => {
-      observer.disconnect();
-      resolve();
-    }, timeout);
-  });
+    setLightningData([
+      {
+        method: "lnurl",
+        recipient,
+        ...getOriginData(),
+        icon: userData.imageUrl,
+        name: userData.name,
+      },
+    ]);
+  }
+}
+
+function battery(): void {
+  const observer = new MutationObserver(twitterDOMChanged);
+  observer.observe(document.head, { childList: true, subtree: true });
 }
 
 const twitter = {

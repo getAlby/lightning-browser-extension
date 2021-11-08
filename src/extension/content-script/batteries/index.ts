@@ -16,11 +16,17 @@ declare global {
 const enhancements = [Monetization, Twitter, YouTubeVideo];
 
 function LBE_EXTRACT_LIGHTNING_DATA() {
-  // prevent the function from being called multiple times
-  // this could happen because the browser.tabs.onUpdated event is fired multiple times
-  if (window["LBE_EXTRACT_LIGHTNING_DATA_RUNNING"]) {
+  console.log("extracting");
+  if (window.LBE_LIGHTNING_DATA) {
+    console.log("LBE_LIGHTNING_DATA set");
+    console.log({ lightningData: window.LBE_LIGHTNING_DATA });
     return;
   }
+  // prevent the function from being called multiple times
+  // this could happen because the browser.tabs.onUpdated event is fired multiple times
+  //if (window["LBE_EXTRACT_LIGHTNING_DATA_RUNNING"]) {
+  //  return;
+  //}
   // reset potential previous data (e.g. if navigation happens through JS and not a full page load)
   window.LBE_LIGHTNING_DATA = null;
   // get maching extractors/enhancements for the current URL
@@ -34,17 +40,16 @@ function LBE_EXTRACT_LIGHTNING_DATA() {
   // there is no clear event to identify that a user has navigated on the website. we rely on the `browser.tabs.onUpdated` event.
   window.LBE_EXTRACT_LIGHTNING_DATA_RUNNING = true;
 
-  const batteriesRunning = matching.map((enhancement) => {
-    return enhancement.battery().then((data) => {
-      if (data) {
-        window.LBE_LIGHTNING_DATA = data;
-        utils.call("setIcon", { icon: "active" });
-      }
-    });
+  matching.forEach((enhancement) => {
+    enhancement.battery();
+    //if (data) {
+    //  window.LBE_LIGHTNING_DATA = data;
+    //  utils.call("setIcon", { icon: "active" });
+    //}
   });
   // reset lock
-  Promise.all(batteriesRunning).then(() => {
-    window.LBE_EXTRACT_LIGHTNING_DATA_RUNNING = false;
-  });
+  //Promise.all(batteriesRunning).then(() => {
+  //  window.LBE_EXTRACT_LIGHTNING_DATA_RUNNING = false;
+  //});
 }
 export default LBE_EXTRACT_LIGHTNING_DATA;
