@@ -132,6 +132,7 @@ function battery(): Promise<[Battery] | void> {
 
     const observer = new MutationObserver(twitterDOMChanged);
     observer.observe(document, { childList: true, subtree: true });
+    twitterDOMChanged([], observer);
 
     timer = setTimeout(() => {
       observer.disconnect();
