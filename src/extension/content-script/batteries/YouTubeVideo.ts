@@ -8,6 +8,7 @@ const battery = (): void => {
   const videoDescription = document.querySelector("#description .content");
   const channelLink = document.querySelector(".ytd-channel-name a");
   if (!videoDescription || !channelLink) {
+    setLightningData(null);
     return;
   }
   const text = videoDescription.textContent || "";
@@ -22,6 +23,7 @@ const battery = (): void => {
   else if ((match = text.match(/(⚡️:?|lightning:|lnurl:)(\S+@\S+)/i))) {
     recipient = match[2];
   } else {
+    setLightningData(null);
     return;
   }
 

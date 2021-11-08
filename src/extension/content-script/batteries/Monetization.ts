@@ -9,6 +9,7 @@ const battery = (): void => {
     'head > meta[name="lightning"][content^="lnurlp:" i]'
   );
   if (!monetizationTag) {
+    setLightningData(null);
     return;
   }
   const recipient = monetizationTag.content.replace(/lnurlp:/i, "");
