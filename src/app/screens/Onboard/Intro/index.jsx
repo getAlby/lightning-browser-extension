@@ -46,7 +46,7 @@ export default function Intro() {
           <div className="max-w-xs">
             <img
               src="assets/icons/satsymbol.svg"
-              alt="Sats"
+              alt="sat"
               className="max-w-xs"
             />
           </div>

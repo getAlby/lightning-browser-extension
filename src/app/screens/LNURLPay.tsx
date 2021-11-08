@@ -130,7 +130,7 @@ function LNURLPay(props: Props) {
 
   function renderAmount() {
     if (details.minSendable === details.maxSendable) {
-      return <p>{`${details.minSendable / 1000} Satoshi`}</p>;
+      return <p>{`${details.minSendable / 1000} sat`}</p>;
     } else {
       return (
         <div className="mt-1 flex flex-col">
@@ -193,7 +193,7 @@ function LNURLPay(props: Props) {
           {[
             ["Send payment to", details.domain],
             ...formattedMetadata(),
-            ["Amount (Satoshi)", renderAmount()],
+            ["Amount (sat)", renderAmount()],
           ].map(([t, d]) => (
             <>
               <dt className="text-sm font-semibold text-gray-500">{t}</dt>
