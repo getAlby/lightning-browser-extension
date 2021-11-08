@@ -1,3 +1,5 @@
+import browser from "webextension-polyfill";
+
 const setIcon = async (message, sender) => {
   // TODO: refactor names / rename files?
   const names = {
