@@ -8,10 +8,10 @@ import ConnectLndHub from "../ConnectLndHub";
 import ConnectLnbits from "../ConnectLnbits";
 import NewWallet from "../NewWallet";
 
-import lnbits from "/static/assets/icons/lnbits.svg";
-import lndhub from "/static/assets/icons/lndhub.svg";
-import lnd from "/static/assets/icons/lnd.svg";
-import alby from "/static/assets/icons/alby.svg";
+import lnbits from "/static/assets/icons/lnbits.png";
+import lndhub from "/static/assets/icons/lndhub.png";
+import lnd from "/static/assets/icons/lnd.png";
+import alby from "/static/assets/icons/alby.png";
 
 export default function ChooseConnector() {
   let { path, url } = useRouteMatch();
