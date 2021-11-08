@@ -132,6 +132,9 @@ function battery(): Promise<[Battery] | void> {
 
     const observer = new MutationObserver(twitterDOMChanged);
     observer.observe(document, { childList: true, subtree: true });
+    // On slow connections the observer is added after the DOM is fully loaded.
+    // Therefore the callback twitterDOMChanged needs to also be called manually.
+    twitterDOMChanged([], observer);
 
     timer = setTimeout(() => {
       observer.disconnect();
