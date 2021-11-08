@@ -14,15 +14,6 @@ setInterval(() => {
 }, 5000);
 */
 
-const extractLightningDataFromPage = async (tabId, changeInfo, tabInfo) => {
-  if (changeInfo.status !== "complete" || !tabInfo.url?.startsWith("http")) {
-    return;
-  }
-  browser.tabs.executeScript(tabId, {
-    code: "if ((document.location.protocol === 'https:' || document.location.protocol === 'http:') && window.LBE_EXTRACT_LIGHTNING_DATA) { LBE_EXTRACT_LIGHTNING_DATA(); };",
-  });
-};
-
 const updateIcon = async (tabId, changeInfo, tabInfo) => {
   if (changeInfo.status !== "complete" || !tabInfo.url?.startsWith("http")) {
     return;
@@ -110,8 +101,6 @@ async function init() {
   browser.runtime.onMessage.addListener(routeCalls);
 
   // TODO: make optional
-  browser.tabs.onUpdated.addListener(extractLightningDataFromPage); // extract LN data from websites
-
   browser.tabs.onUpdated.addListener(updateIcon); // update Icon when there is an allowance
 }
 

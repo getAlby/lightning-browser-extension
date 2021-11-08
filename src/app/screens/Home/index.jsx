@@ -34,21 +34,11 @@ class Home extends React.Component {
 
   loadLightningDataFromCurrentWebsite() {
     // Enhancement data is loaded asynchronously (for example because we need to fetch additional data).
-    // Sadly we can not get return values from async code through executeScript()
-    // To work around this we write the enhancement data into a variable in the content script and access that variable here.
-    // Due to the async execution the variable could potentially not yet be loaded
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
-      const [currentTab] = tabs;
       browser.tabs
-        .executeScript(currentTab.id, {
-          code: "window.LBE_LIGHTNING_DATA;",
-        })
+        .sendMessage(tabs[0].id, { type: "lightningData" })
         .then((data) => {
-          // data is an array, see: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/executeScript#return_value
-          // we execute it only in the current Tab. Thus the array has only one entry
-          if (data[0]) {
-            this.setState({ lnData: data[0] });
-          }
+          this.setState({ lnData: data });
         });
     });
   }
