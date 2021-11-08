@@ -129,6 +129,9 @@ function twitterDOMChanged(_: MutationRecord[], observer: MutationObserver) {
 function battery(): void {
   const observer = new MutationObserver(twitterDOMChanged);
   observer.observe(document, { childList: true, subtree: true });
+  // On slow connections the observer is added after the DOM is fully loaded.
+  // Therefore the callback twitterDOMChanged needs to also be called manually.
+  twitterDOMChanged([], observer);
 }
 
 const twitter = {
