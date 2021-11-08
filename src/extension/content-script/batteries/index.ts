@@ -15,7 +15,7 @@ declare global {
 
 const enhancements = [Monetization, Twitter, YouTubeVideo];
 
-function LBE_EXTRACT_LIGHTNING_DATA() {
+async function LBE_EXTRACT_LIGHTNING_DATA() {
   // prevent the function from being called multiple times
   // this could happen because the browser.tabs.onUpdated event is fired multiple times
   if (window["LBE_EXTRACT_LIGHTNING_DATA_RUNNING"]) {
@@ -43,8 +43,8 @@ function LBE_EXTRACT_LIGHTNING_DATA() {
     });
   });
   // reset lock
-  Promise.all(batteriesRunning).then(() => {
-    window.LBE_EXTRACT_LIGHTNING_DATA_RUNNING = false;
-  });
+  await Promise.all(batteriesRunning);
+  window.LBE_EXTRACT_LIGHTNING_DATA_RUNNING = false;
+  return window.LBE_LIGHTNING_DATA;
 }
 export default LBE_EXTRACT_LIGHTNING_DATA;
