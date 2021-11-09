@@ -144,7 +144,7 @@ export default function TestConnection() {
           {faucetLoading ? (
             <Loading />
           ) : (
-            <Button onClick={claimSats} label="Get Satoshi" primary />
+            <Button onClick={claimSats} label="Get Satoshis" primary />
           )}
         </div>
       </Modal>
