@@ -8,8 +8,6 @@ import LBE_EXTRACT_LIGHTNING_DATA from "./batteries";
 
 if (shouldInject()) {
   injectScript();
-  // TODO: make optional
-  window.LBE_EXTRACT_LIGHTNING_DATA = LBE_EXTRACT_LIGHTNING_DATA;
 
   // extract LN data from websites
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {

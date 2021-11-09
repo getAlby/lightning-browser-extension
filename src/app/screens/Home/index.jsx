@@ -38,7 +38,9 @@ class Home extends React.Component {
       browser.tabs
         .sendMessage(tabs[0].id, { type: "lightningData" })
         .then((data) => {
-          this.setState({ lnData: data });
+          if (data) {
+            this.setState({ lnData: data });
+          }
         });
     });
   }
