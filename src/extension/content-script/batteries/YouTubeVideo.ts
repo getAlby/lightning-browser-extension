@@ -1,13 +1,17 @@
 import getOriginData from "../originData";
-import { Battery } from "../../../types";
+import setLightningData from "../setLightningData";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
 
-const battery = (): Promise<[Battery] | void> => {
-  const videoDescription = document.querySelector("#description .content");
-  const channelLink = document.querySelector(".ytd-channel-name a");
+const battery = (): void => {
+  const videoDescription = document.querySelector(
+    "#columns #primary #primary-inner #meta-contents #description .content"
+  );
+  const channelLink = document.querySelector(
+    "#columns #primary #primary-inner #meta-contents .ytd-channel-name a"
+  );
   if (!videoDescription || !channelLink) {
-    return Promise.resolve();
+    return;
   }
   const text = videoDescription.textContent || "";
   let match;
@@ -21,13 +25,15 @@ const battery = (): Promise<[Battery] | void> => {
   else if ((match = text.match(/(⚡️:?|lightning:|lnurl:)(\S+@\S+)/i))) {
     recipient = match[2];
   } else {
-    return Promise.resolve();
+    return;
   }
 
   const name = channelLink.textContent || "";
   const imageUrl =
-    document.querySelector<HTMLImageElement>("#meta-contents img")?.src || "";
-  return Promise.resolve([
+    document.querySelector<HTMLImageElement>(
+      "#columns #primary #primary-inner #meta-contents img"
+    )?.src || "";
+  setLightningData([
     {
       method: "lnurl",
       recipient,

@@ -32,19 +32,6 @@ class Home extends React.Component {
     };
   }
 
-  loadLightningDataFromCurrentWebsite() {
-    // Enhancement data is loaded asynchronously (for example because we need to fetch additional data).
-    browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
-      browser.tabs
-        .sendMessage(tabs[0].id, { type: "lightningData" })
-        .then((data) => {
-          if (data) {
-            this.setState({ lnData: data });
-          }
-        });
-    });
-  }
-
   loadAllowance = () => {
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
       const [currentTab] = tabs;
@@ -66,14 +53,25 @@ class Home extends React.Component {
     });
   }
 
-  initialize() {
-    this.loadPayments();
-    this.loadAllowance();
-  }
+  handleLightningDataMessage = (response) => {
+    if (response.type === "lightningData") {
+      this.setState({ lnData: response.args });
+    }
+  };
 
   componentDidMount() {
-    this.initialize();
-    this.loadLightningDataFromCurrentWebsite();
+    this.loadPayments();
+    this.loadAllowance();
+
+    // Enhancement data is loaded asynchronously (for example because we need to fetch additional data).
+    browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+      browser.tabs.sendMessage(tabs[0].id, { type: "extractLightningData" });
+    });
+    browser.runtime.onMessage.addListener(this.handleLightningDataMessage);
+  }
+
+  componentWillUnmount() {
+    browser.runtime.onMessage.removeListener(this.handleLightningDataMessage);
   }
 
   renderAllowanceView() {

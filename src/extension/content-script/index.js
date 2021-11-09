@@ -4,19 +4,15 @@ import shouldInject from "./shouldInject";
 import injectScript from "./injectScript";
 
 //import { enhancements, loadEnhancements } from "../inpage-script/enhancements";
-import LBE_EXTRACT_LIGHTNING_DATA from "./batteries";
+import extractLightningData from "./batteries";
 
 if (shouldInject()) {
   injectScript();
 
   // extract LN data from websites
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.type === "lightningData") {
-      // Lightning data was requested from the popup.
-      LBE_EXTRACT_LIGHTNING_DATA().then(sendResponse);
-      return true;
-    } else if (request.type === "tabUpdated") {
-      LBE_EXTRACT_LIGHTNING_DATA();
+    if (request.type === "extractLightningData") {
+      extractLightningData();
     }
   });
 

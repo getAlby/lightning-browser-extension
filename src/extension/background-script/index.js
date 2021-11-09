@@ -14,10 +14,10 @@ setInterval(() => {
 }, 5000);
 */
 
-const notifyContentScript = (tabId, changeInfo, tab) => {
+const extractLightningData = (tabId, changeInfo, tab) => {
   if (changeInfo.status === "complete" && tab.url?.startsWith("http")) {
     browser.tabs.sendMessage(tabId, {
-      type: "tabUpdated",
+      type: "extractLightningData",
     });
   }
 };
@@ -112,7 +112,7 @@ async function init() {
   browser.tabs.onUpdated.addListener(updateIcon); // update Icon when there is an allowance
 
   // Notify the content script that the tab has been updated.
-  browser.tabs.onUpdated.addListener(notifyContentScript);
+  browser.tabs.onUpdated.addListener(extractLightningData);
 }
 
 // The onInstalled event is fired directly after the code is loaded.
