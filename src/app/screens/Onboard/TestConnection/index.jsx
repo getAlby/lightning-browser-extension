@@ -113,7 +113,7 @@ export default function TestConnection() {
         className="absolute rounded-lg bg-white w-full max-w-lg"
       >
         <div className="p-5 flex justify-between">
-          <h2 className="text-2xl font-bold">Get some sat</h2>
+          <h2 className="text-2xl font-bold">Get some Satoshi</h2>
           <button onClick={closeFaucet}>
             <img
               className="w-6 h-6"
