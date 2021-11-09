@@ -14,6 +14,14 @@ setInterval(() => {
 }, 5000);
 */
 
+const notifyContentScript = (tabId, changeInfo, tab) => {
+  if (changeInfo.status === "complete" && tab.url?.startsWith("http")) {
+    browser.tabs.sendMessage(tabId, {
+      type: "tabUpdated",
+    });
+  }
+};
+
 const updateIcon = async (tabId, changeInfo, tabInfo) => {
   if (changeInfo.status !== "complete" || !tabInfo.url?.startsWith("http")) {
     return;
@@ -104,13 +112,7 @@ async function init() {
   browser.tabs.onUpdated.addListener(updateIcon); // update Icon when there is an allowance
 
   // Notify the content script that the tab has been updated.
-  browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-    if (changeInfo.status === "complete") {
-      browser.tabs.sendMessage(tabId, {
-        type: "tabUpdated",
-      });
-    }
-  });
+  browser.tabs.onUpdated.addListener(notifyContentScript);
 }
 
 // The onInstalled event is fired directly after the code is loaded.
