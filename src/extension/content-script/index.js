@@ -12,11 +12,13 @@ if (shouldInject()) {
   // extract LN data from websites
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.type === "lightningData") {
+      // Lightning data was requested from the popup.
       LBE_EXTRACT_LIGHTNING_DATA().then(sendResponse);
       return true;
+    } else if (request.type === "tabUpdated") {
+      LBE_EXTRACT_LIGHTNING_DATA();
     }
   });
-  LBE_EXTRACT_LIGHTNING_DATA();
 
   // message listener to listen to inpage webln calls
   // those calls get passed on to the background script

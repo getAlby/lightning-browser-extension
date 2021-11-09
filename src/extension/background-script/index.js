@@ -102,6 +102,15 @@ async function init() {
 
   // TODO: make optional
   browser.tabs.onUpdated.addListener(updateIcon); // update Icon when there is an allowance
+
+  // Notify the content script that the tab has been updated.
+  browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+    if (changeInfo.status === "complete") {
+      browser.tabs.sendMessage(tabId, {
+        type: "tabUpdated",
+      });
+    }
+  });
 }
 
 // The onInstalled event is fired directly after the code is loaded.
