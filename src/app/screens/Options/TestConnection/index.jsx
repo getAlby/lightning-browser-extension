@@ -65,7 +65,7 @@ export default function TestConnection() {
                     alias={accountInfo.alias}
                     satoshis={
                       typeof accountInfo.balance === "number"
-                        ? `${accountInfo.balance} Sats`
+                        ? `${accountInfo.balance} sat`
                         : ""
                     }
                   />

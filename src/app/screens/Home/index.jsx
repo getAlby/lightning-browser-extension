@@ -278,7 +278,7 @@ class Home extends React.Component {
                   this.setState({ loadingSendSats: false });
                 }
               }}
-              label="⚡️ Send Sats ⚡️"
+              label="⚡️ Send Satoshis ⚡️"
               primary
               loading={loadingSendSats}
             />
