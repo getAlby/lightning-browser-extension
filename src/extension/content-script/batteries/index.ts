@@ -12,9 +12,9 @@ async function LBE_EXTRACT_LIGHTNING_DATA() {
 
   // get maching extractors/enhancements for the current URL
   // NOTE: this does not mean that data can be found. Because of that we run all possible ones
-  const matching = enhancements.filter((e) => {
-    return document.location.toString().match(e.urlMatcher);
-  });
+  const matching = enhancements.filter((e) =>
+    document.location.toString().match(e.urlMatcher)
+  );
 
   const batteriesRunning = matching.map((enhancement) => {
     return enhancement.battery().then((data) => {
