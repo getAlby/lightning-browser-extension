@@ -17141,10 +17141,10 @@ zip-stream@^4.1.0:
     compress-commons "^4.1.0"
     readable-stream "^3.6.0"
 
-zustand@^3.5.12:
-  version "3.5.12"
-  resolved "https://registry.yarnpkg.com/zustand/-/zustand-3.5.12.tgz#407a8685eb286a32d7f560e74966993bbff1dae8"
-  integrity sha512-Cv9fX/yM5HXYODkn3Q/HMmMofnmZw3yqM73VT/3rQEvI/04Yl0OFNO24qMofhN82xTPWcCffkGPFCMq8r67Whg==
+zustand@^3.6.4:
+  version "3.6.4"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-3.6.4.tgz#2aed404072e3d4538fbc380bcf4eee88b174051d"
+  integrity sha512-liH2ZaEOSiEaVEl7N0CVzoKYZCQPpibfsIgB2ksrjvfu17WME8Eh7XV/MCi5OQM5AnbuYbLowplR03UP5yrNYw==
 
 zwitch@^1.0.0:
   version "1.0.5"
