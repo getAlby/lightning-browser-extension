@@ -1,17 +1,9 @@
 import utils from "../../../common/lib/utils";
-import { Battery } from "../../../types";
 // import GitHubRepo from "./GitHubRepo";
 import Monetization from "./Monetization";
 import Twitter from "./Twitter";
 import YouTubeVideo from "./YouTubeVideo";
 // import YouTubeChannel from "./YouTubeChannel";
-
-declare global {
-  interface Window {
-    LBE_LIGHTNING_DATA: [Battery] | null;
-    LBE_EXTRACT_LIGHTNING_DATA_RUNNING: boolean;
-  }
-}
 
 const enhancements = [Monetization, Twitter, YouTubeVideo];
 
