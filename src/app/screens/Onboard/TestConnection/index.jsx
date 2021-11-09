@@ -182,7 +182,7 @@ export default function TestConnection() {
                           setShowFaucet(true);
                         }}
                       >
-                        To get started we can send you some sat...
+                        To get started we can send you some Satoshi...
                       </a>
                       {renderFaucet()}
                     </div>
