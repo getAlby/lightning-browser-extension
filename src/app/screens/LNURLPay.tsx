@@ -193,7 +193,7 @@ function LNURLPay(props: Props) {
           {[
             ["Send payment to", details.domain],
             ...formattedMetadata(),
-            ["Amount (sat)", renderAmount()],
+            ["Amount (Satoshi)", renderAmount()],
           ].map(([t, d]) => (
             <>
               <dt className="text-sm font-semibold text-gray-500">{t}</dt>
