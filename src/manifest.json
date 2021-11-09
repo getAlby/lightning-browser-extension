@@ -15,6 +15,7 @@
   "permissions": [
     "notifications",
     "activeTab",
+    "tabs",
     "storage",
     "unlimitedStorage",
     "*://*/*"
