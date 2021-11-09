@@ -4,6 +4,7 @@ import Twitter from "./Twitter";
 import YouTubeVideo from "./YouTubeVideo";
 // import YouTubeChannel from "./YouTubeChannel";
 
+// Order is important as the first one for which the URL matches will be used
 const enhancements = [Twitter, YouTubeVideo, Monetization];
 
 async function extractLightningData() {
