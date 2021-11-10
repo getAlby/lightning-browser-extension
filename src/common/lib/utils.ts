@@ -106,7 +106,7 @@ const utils = {
           url: `${browser.runtime.getURL("prompt.html")}?${urlParams}`,
           type: "popup",
           width: 400,
-          height: 580,
+          height: 600,
         })
         .then((window) => {
           let tabId: number | undefined;
