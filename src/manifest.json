@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Alby",
-  "version": "1.0.0",
+  "version": "1.0.1",
 
   "icons": {
     "16": "assets/icons/satsymbol-black-16.png",
