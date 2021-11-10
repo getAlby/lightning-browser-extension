@@ -4,10 +4,10 @@
   "version": "1.0.0",
 
   "icons": {
-    "16": "assets/icons/satsymbol-black-16.png",
-    "32": "assets/icons/satsymbol-black-32.png",
-    "48": "assets/icons/satsymbol-black-48.png",
-    "128": "assets/icons/satsymbol-black-128.png"
+    "16": "assets/icons/alby_icon_yellow_16x16.png",
+    "32": "assets/icons/alby_icon_yellow_32x32.png",
+    "48": "assets/icons/alby_icon_yellow_48x48.png",
+    "128": "assets/icons/alby_icon_yellow_128x128.png"
   },
   "description": "Bitcoin buzz for your browser. The extension for the Bitcoin Lightning Network.",
   "homepage_url": "https://getAlby.com/",
@@ -39,10 +39,10 @@
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "assets/icons/satsymbol-black-16.png",
-      "32": "assets/icons/satsymbol-black-32.png",
-      "48": "assets/icons/satsymbol-black-48.png",
-      "128": "assets/icons/satsymbol-black-128.png"
+      "16": "assets/icons/alby_icon_yellow_16x16.png",
+      "32": "assets/icons/alby_icon_yellow_32x32.png",
+      "48": "assets/icons/alby_icon_yellow_48x48.png",
+      "128": "assets/icons/alby_icon_yellow_128x128.png"
     },
     "default_title": "Alby",
     "__chrome|opera__chrome_style": false,
