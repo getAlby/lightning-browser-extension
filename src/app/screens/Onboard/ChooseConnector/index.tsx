@@ -6,6 +6,7 @@ import LinkButton from "../../../components/LinkButton";
 import ConnectLnd from "../ConnectLnd";
 import ConnectLndHub from "../ConnectLndHub";
 import ConnectLnbits from "../ConnectLnbits";
+import ConnectGaloy from "../ConnectGaloy";
 import NewWallet from "../NewWallet";
 
 export default function ChooseConnector() {
@@ -27,6 +28,11 @@ export default function ChooseConnector() {
       description: "Connect to your LNbits account",
     },
     {
+      to: `${url}/galoy`,
+      title: "Connect to Galoy",
+      description: "Create or connect to a Galoy account",
+    },
+    {
       to: `${url}/create-wallet`,
       title: "Create a new wallet",
       description: "We create and manage a lightning wallet for you",
@@ -46,12 +52,12 @@ export default function ChooseConnector() {
               interact with your favorite websites that accept bitcoin lightning
               payments!
             </p>
-            <div className="space-y-4">
-              {connectors.map(({ to, title, description }) => (
-                <LinkButton to={to} title={title} description={description} />
-              ))}
-            </div>
           </div>
+        </div>
+        <div className="lg:grid lg:grid-cols-3 mg:grid-col-2 lg:gap-4 md:gap:4 lg:place-content-stretch">
+          {connectors.map(({ to, title, description }) => (
+            <LinkButton to={to} title={title} description={description} />
+          ))}
         </div>
       </Route>
       <Route path={`${path}/lnd`}>
@@ -62,6 +68,9 @@ export default function ChooseConnector() {
       </Route>
       <Route path={`${path}/lnbits`}>
         <ConnectLnbits />
+      </Route>
+      <Route path={`${path}/galoy`}>
+        <ConnectGaloy />
       </Route>
       <Route path={`${path}/create-wallet`}>
         <NewWallet />
