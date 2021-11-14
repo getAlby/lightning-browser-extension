@@ -45,12 +45,12 @@ function Options() {
         title={accountInfo.alias}
         subtitle={
           typeof accountInfo.balance === "number"
-            ? `${accountInfo.balance} Sats`
+            ? `${accountInfo.balance} sat`
             : ""
         }
         onAccountSwitch={loadAccountInfo}
       >
-        <Navbar.Link href="/publishers">Publishers</Navbar.Link>
+        <Navbar.Link href="/publishers">Websites</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>
         <Navbar.Link href="/receive">Receive</Navbar.Link>
         <Navbar.Link href="/settings">Settings</Navbar.Link>

@@ -12,7 +12,7 @@
   "description": "Lightning up the browser",
   "homepage_url": "https://github.com/bumi",
   "short_name": "Lightning",
-  "web_accessible_resources": ["js/inpageScript.bundle.js", "lsat.html"],
+  "web_accessible_resources": ["js/inpageScript.bundle.js"],
   "permissions": [
     "nativeMessaging",
     "notifications",

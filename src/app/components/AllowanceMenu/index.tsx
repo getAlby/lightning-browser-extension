@@ -100,7 +100,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             <CurrencyInput
               id="budget"
               name="budget"
-              placeholder="sats"
+              placeholder="sat"
               value={budget}
               onChange={(event) => {
                 setBudget(parseInt(event.target.value));

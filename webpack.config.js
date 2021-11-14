@@ -11,14 +11,14 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 // init env variables otherwise the EnvironmentPlugin complains if those are not set.
 if (!process.env.FAUCET_URL) {
-  process.env.FAUCET_URL = null;
+  process.env.FAUCET_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
 if (!process.env.FAUCET_K) {
-  process.env.FAUCET_K = null;
+  process.env.FAUCET_K = ""; // env variables are passed as string. empty strings are still falsy
 }
 // default value is set in the code where it is used
 if (!process.env.ALBY_LNDHUB_URL) {
-  process.env.ALBY_LNDHUB_URL = null;
+  process.env.ALBY_LNDHUB_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
 
 const viewsPath = path.join(__dirname, "static", "views");
@@ -60,7 +60,6 @@ module.exports = {
     prompt: "./src/app/router/Prompt/index.jsx",
     options: "./src/app/router/Options/index.jsx",
     welcome: "./src/app/router/Welcome/index.jsx",
-    lsat: "./src/extension/ln/lsat/index.js",
   },
 
   output: {
@@ -184,13 +183,6 @@ module.exports = {
       chunks: ["welcome"],
       hash: true,
       filename: "welcome.html",
-    }),
-    new HtmlWebpackPlugin({
-      template: path.join(viewsPath, "lsat.html"),
-      inject: "body",
-      chunks: ["lsat"],
-      hash: true,
-      filename: "lsat.html",
     }),
     // write css file(s) to build folder
     new MiniCssExtractPlugin({ filename: "[name].css" }), // No css subfolder has been used as this breaks path's to url's such as fonts.

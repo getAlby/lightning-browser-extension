@@ -82,7 +82,7 @@ const Default = () => {
         title={accountInfo.alias}
         subtitle={
           typeof accountInfo.balance === "number"
-            ? `${accountInfo.balance} Sats`
+            ? `${accountInfo.balance} sat`
             : ""
         }
         onAccountSwitch={() => {

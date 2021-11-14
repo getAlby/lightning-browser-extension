@@ -14,21 +14,19 @@ setInterval(() => {
 }, 5000);
 */
 
-const extractLightningDataFromPage = async (tabId, changeInfo, tabInfo) => {
-  if (changeInfo.status !== "complete") {
-    return;
+const extractLightningData = (tabId, changeInfo, tab) => {
+  if (changeInfo.status === "complete" && tab.url?.startsWith("http")) {
+    browser.tabs.sendMessage(tabId, {
+      type: "extractLightningData",
+    });
   }
-
-  browser.tabs.executeScript(tabId, {
-    code: "if ((document.location.protocol === 'https:' || document.location.protocol === 'http:') && window.LBE_EXTRACT_LIGHTNING_DATA) { LBE_EXTRACT_LIGHTNING_DATA(); };",
-  });
 };
 
 const updateIcon = async (tabId, changeInfo, tabInfo) => {
-  if (!changeInfo.url || !changeInfo.url.startsWith("http")) {
+  if (changeInfo.status !== "complete" || !tabInfo.url?.startsWith("http")) {
     return;
   }
-  const url = new URL(changeInfo.url);
+  const url = new URL(tabInfo.url);
 
   const allowance = await db.allowances
     .where("host")
@@ -111,15 +109,10 @@ async function init() {
   browser.runtime.onMessage.addListener(routeCalls);
 
   // TODO: make optional
-  browser.tabs.onUpdated.addListener(extractLightningDataFromPage); // extract LN data from websites
-
   browser.tabs.onUpdated.addListener(updateIcon); // update Icon when there is an allowance
-  /*
-  if (settings.enableLsats) {
-    await browser.storage.sync.set({ lsats: {} });
-    initLsatInterceptor(connector);
-  }
-  */
+
+  // Notify the content script that the tab has been updated.
+  browser.tabs.onUpdated.addListener(extractLightningData);
 }
 
 // The onInstalled event is fired directly after the code is loaded.

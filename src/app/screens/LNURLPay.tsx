@@ -130,7 +130,7 @@ function LNURLPay(props: Props) {
 
   function renderAmount() {
     if (details.minSendable === details.maxSendable) {
-      return <p>{`${details.minSendable / 1000} Satoshi`}</p>;
+      return <p>{`${details.minSendable / 1000} sat`}</p>;
     } else {
       return (
         <div className="mt-1 flex flex-col">
