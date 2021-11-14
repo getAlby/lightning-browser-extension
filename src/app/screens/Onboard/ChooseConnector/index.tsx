@@ -41,7 +41,7 @@ export default function ChooseConnector() {
             <h1 className="text-3xl font-bold dark:text-white">
               Do you have a lightning wallet?
             </h1>
-            <p className="text-gray-500 my-6">
+            <p className="text-gray-500 my-6 dark:text-gray-400">
               You need to first connect to a lightning wallet so that you can
               interact with your favorite websites that accept bitcoin lightning
               payments!

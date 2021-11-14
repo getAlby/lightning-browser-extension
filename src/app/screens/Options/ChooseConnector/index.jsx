@@ -38,7 +38,9 @@ export default function ChooseConnector() {
       <Route exact path={path}>
         <div className="relative mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
           <div className="relative">
-            <h1 className="text-3xl font-bold">Add a new lightning account</h1>
+            <h1 className="text-3xl font-bold dark:text-white">
+              Add a new lightning account
+            </h1>
             <p className="text-gray-500 my-6"></p>
             <div className="space-y-4">
               {connectors.map(({ to, title, description }) => (

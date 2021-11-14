@@ -69,7 +69,7 @@ export default function SetPassword() {
           <h1 className="text-3xl font-bold dark:text-white">
             Protect your wallet
           </h1>
-          <p className="text-gray-500 mt-6">
+          <p className="text-gray-500 mt-6 dark:text-gray-400">
             Your wallet is securely encrypted with a password and needs to be
             unlocked before usage.
           </p>
@@ -99,7 +99,7 @@ export default function SetPassword() {
                 htmlFor="passwordConfirmation"
                 className="block font-medium text-gray-700 dark:text-white"
               >
-                Lets confirm you typed it correct:
+                Let's confirm you typed it correct:
               </label>
               <div className="mt-1">
                 <Input

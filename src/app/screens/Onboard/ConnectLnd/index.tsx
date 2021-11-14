@@ -112,7 +112,7 @@ export default function ConnectLnd() {
         <h1 className="text-3xl font-bold dark:text-white">
           Connect to your LND node
         </h1>
-        <p className="text-gray-500 mt-6">
+        <p className="text-gray-500 mt-6 dark:text-gray-400">
           You will need to retrieve the node url and an admin macaroon.
         </p>
         <form onSubmit={handleSubmit}>

@@ -118,7 +118,7 @@ function Send() {
       <form className="p-4 max-w-screen-sm mx-auto" onSubmit={handleSubmit}>
         <label
           htmlFor="invoice"
-          className="mt-2 block font-medium text-gray-700"
+          className="mt-2 block font-medium text-gray-700 dark:text-white"
         >
           Lightning Invoice
         </label>

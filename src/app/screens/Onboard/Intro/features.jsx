@@ -13,7 +13,9 @@ export default function Features({ features }) {
               {feature.name}
             </p>
           </dt>
-          <dd className="mt-2 text-gray-500">{feature.description}</dd>
+          <dd className="mt-2 text-gray-500 dark:text-gray-400">
+            {feature.description}
+          </dd>
         </div>
       ))}
     </div>

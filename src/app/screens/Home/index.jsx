@@ -204,7 +204,7 @@ class Home extends React.Component {
           </div>
         ) : (
           <div>
-            <h2 className="mb-2 text-lg text-gray-900 font-semibold">
+            <h2 className="mb-2 text-lg text-gray-900 font-semibold dark:text-white">
               Transactions
             </h2>
             {payments.length > 0 ? (
@@ -240,7 +240,9 @@ class Home extends React.Component {
                 }))}
               />
             ) : (
-              <p className="text-gray-500">No transactions yet.</p>
+              <p className="text-gray-500 dark:text-gray-400">
+                No transactions yet.
+              </p>
             )}
           </div>
         )}

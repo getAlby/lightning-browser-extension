@@ -43,7 +43,7 @@ function Unlock(props) {
         className="inline mb-4 h-16 w-16 text-blue-500"
         aria-hidden="true"
       />
-      <h2 className="text-2xl font-bold mb-4">Unlock:</h2>
+      <h2 className="text-2xl font-bold mb-4 dark:text-white">Unlock:</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <Input

@@ -19,9 +19,9 @@ export default function Navbar({
   children,
 }: Props) {
   return (
-    <div className="px-4 py-2 bg-white flex justify-between items-center border-b border-gray-200">
+    <div className="px-4 py-2 bg-white flex justify-between items-center border-b border-gray-200 dark:bg-gray-800">
       <div className="flex w-8/12 md:w-4/12 lg:w-3/12">
-        <div className="relative pl-2 flex bg-gray-100 rounded-md">
+        <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-gray-600">
           <div className="flex items-center">
             <img
               className="-ml-1 w-8 h-8 opacity-50"
@@ -35,8 +35,12 @@ export default function Navbar({
               !title && !subtitle ? "w-28" : ""
             }`}
           >
-            <div className="text-xs text-gray-500">{title || <Skeleton />}</div>
-            <div className="text-xs">{subtitle || <Skeleton />}</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400">
+              {title || <Skeleton />}
+            </div>
+            <div className="text-xs dark:text-white">
+              {subtitle || <Skeleton />}
+            </div>
           </div>
           <AccountMenu onAccountSwitch={onAccountSwitch} />
         </div>

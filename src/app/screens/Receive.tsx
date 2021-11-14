@@ -112,7 +112,7 @@ function Receive() {
             <div className="mt-2 mb-4">
               <label
                 htmlFor="amount"
-                className="block font-medium text-gray-700"
+                className="block font-medium text-gray-700 dark:text-white"
               >
                 Amount
               </label>
@@ -129,7 +129,7 @@ function Receive() {
             <div className="mb-4">
               <label
                 htmlFor="description"
-                className="block font-medium text-gray-700"
+                className="block font-medium text-gray-700 dark:text-white"
               >
                 Description
               </label>
@@ -182,7 +182,7 @@ function Receive() {
                 />
               </div>
               <a
-                className="underline text-sm text-gray-500"
+                className="underline text-sm text-gray-500 dark:text-gray-400"
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();

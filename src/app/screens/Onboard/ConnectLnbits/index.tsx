@@ -73,7 +73,7 @@ export default function ConnectLnbits() {
             <div className="mt-6">
               <label
                 htmlFor="adminkey"
-                className="block font-medium text-gray-700 dark:text-gray-500"
+                className="block font-medium text-gray-700 dark:text-gray-400"
               >
                 LNbits Admin Key
               </label>
@@ -89,7 +89,7 @@ export default function ConnectLnbits() {
             <div className="mt-6">
               <label
                 htmlFor="url"
-                className="block font-medium text-gray-700 dark:text-gray-500"
+                className="block font-medium text-gray-700 dark:text-gray-400"
               >
                 LNbits URL
               </label>
