@@ -147,6 +147,10 @@ The native application does all the user interaction and connections to the ligh
 
 Currently there is one prototype of a native companion app which can connect to LND: [lnd-native-companion](https://github.com/bumi/lnd-native-companion)
 
+## Lightning Network Test Environment
+
+While developing you will want to have a Lightning Network test environment so that you can send/receive sats. The easiest and quickest way to do this is to use the application [Polar](https://lightningpolar.com/), which was created for this purpose. You can easily setup a network of lightning nodes to use as a testing environment while working on Alby or any other lightning project.
+
 ## ⭐ Contributing
 We welcome and appreciate new contributions.
 
