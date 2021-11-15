@@ -21,6 +21,7 @@ const routes = [
     path: "/choose-connector/*",
     component: ChooseConnector,
     name: "Connect to Lightning",
+    routes: [{ path: "/lnd", component: ConnectLnd, name: "blabla" }],
   },
   { path: "/test-connection", component: TestConnection, name: "Done" },
 ];
