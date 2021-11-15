@@ -7,6 +7,8 @@ import LndHub from "./lndhub";
 // @ts-ignore: implicitly has 'any' type error
 import LnBits from "./lnbits";
 // @ts-ignore: implicitly has 'any' type error
+import Galoy from "./galoy";
+// @ts-ignore: implicitly has 'any' type error
 import Base from "./base";
 
 /*
@@ -23,6 +25,7 @@ const connectors = {
   lnd: Lnd,
   lndhub: LndHub,
   lnbits: LnBits,
+  galoy: Galoy,
 };
 
 export default connectors;

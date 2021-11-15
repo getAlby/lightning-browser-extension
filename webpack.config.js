@@ -21,6 +21,11 @@ if (!process.env.ALBY_LNDHUB_URL) {
   process.env.ALBY_LNDHUB_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
 
+// default value is set in the code where it is used
+if (!process.env.GALOY_URL) {
+  process.env.GALOY_URL = ""; // env variables are passed as string. empty strings are still falsy
+}
+
 const viewsPath = path.join(__dirname, "static", "views");
 const nodeEnv = process.env.NODE_ENV || "development";
 const destPath = path.join(__dirname, "dist", nodeEnv);
@@ -137,6 +142,7 @@ module.exports = {
     // environmental variables
     new webpack.EnvironmentPlugin([
       "ALBY_LNDHUB_URL",
+      "GALOY_URL",
       "FAUCET_URL",
       "FAUCET_K",
       "NODE_ENV",
