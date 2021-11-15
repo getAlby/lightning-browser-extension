@@ -57,7 +57,7 @@ function Unlock(props) {
         </div>
         <Button
           type="submit"
-          label="unlock"
+          label="Unlock"
           fullWidth
           primary
           disabled={password === ""}

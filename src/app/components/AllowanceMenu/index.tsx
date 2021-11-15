@@ -43,7 +43,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   return (
     <>
       <Menu as="div" className="relative">
-        <Menu.Button className="flex items-center text-gray-500 hover:text-black transition-color duration-200">
+        <Menu.Button className="flex items-center text-gray-500 hover:text-black transition-color duration-200 dark:hover:text-white">
           <CogIcon className="h-6 w-6" aria-hidden="true" />
         </Menu.Button>
         <Menu.List position="right">
