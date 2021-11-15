@@ -5,6 +5,7 @@ import utils from "../../common/lib/utils";
 import { router } from "./router";
 import state from "./state";
 import db from "./db";
+import connectors from "./connectors";
 
 import * as events from "./events";
 
@@ -113,6 +114,16 @@ async function init() {
 
   // Notify the content script that the tab has been updated.
   browser.tabs.onUpdated.addListener(extractLightningData);
+
+  if (state.getState().settings.debug) {
+    console.log("Debug mode enabled, use window.debugAlby");
+    window.debugAlby = {
+      state,
+      db,
+      connectors,
+      router,
+    };
+  }
 }
 
 // The onInstalled event is fired directly after the code is loaded.
