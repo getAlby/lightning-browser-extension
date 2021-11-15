@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { LockOpenIcon } from "@heroicons/react/solid";
 
 import utils from "../../../common/lib/utils";
 import Button from "../../components/Button";
 import Input from "../../components/Form/Input";
 
-function Unlock(props) {
+function Unlock({ next = "/home" }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function handlePasswordChange(event) {
     setError(null);
@@ -29,8 +29,7 @@ function Unlock(props) {
     utils
       .call("unlock", { password })
       .then(() => {
-        const next = props.next || "/home";
-        history.push(next);
+        navigate(next);
       })
       .catch((e) => {
         setError(e.message);

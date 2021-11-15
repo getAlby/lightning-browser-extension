@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   HashRouter as Router,
-  Switch,
+  Routes,
   Route,
   useLocation,
 } from "react-router-dom";
@@ -11,15 +11,17 @@ import Steps from "../../components/Steps";
 import Intro from "../../screens/Onboard/Intro";
 import SetPassword from "../../screens/Onboard/SetPassword";
 import ChooseConnector from "../../screens/Onboard/ChooseConnector";
+import ConnectLnd from "../../screens/Onboard/ConnectLnd";
 import TestConnection from "../../screens/Onboard/TestConnection";
 
 const routes = [
-  { path: "/", component: Intro, exact: true, name: "Welcome" },
+  { path: "/", component: Intro, name: "Welcome" },
   { path: "/set-password", component: SetPassword, name: "Your Password" },
   {
-    path: "/choose-connector",
+    path: "/choose-connector/*",
     component: ChooseConnector,
     name: "Connect to Lightning",
+    routes: [{ path: "/lnd", component: ConnectLnd, name: "blabla" }],
   },
   { path: "/test-connection", component: TestConnection, name: "Done" },
 ];
@@ -28,18 +30,6 @@ const initialSteps = routes.map((route, index) => ({
   id: route.name,
   status: "upcoming",
 }));
-
-function RouteWithSubRoutes(route) {
-  return (
-    <Route
-      path={route.path}
-      render={(props) => (
-        // pass the sub-routes down to keep nesting
-        <route.component {...props} routes={route.routes} />
-      )}
-    />
-  );
-}
 
 function WelcomeRouter() {
   return (
@@ -79,11 +69,15 @@ function App() {
         <Steps steps={steps} />
       </div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Switch>
+        <Routes>
           {routes.map((route, i) => (
-            <RouteWithSubRoutes key={i} {...route} />
+            <Route
+              key={i}
+              path={route.path}
+              element={<route.component routes={route.routes} />}
+            />
           ))}
-        </Switch>
+        </Routes>
       </div>
     </div>
   );

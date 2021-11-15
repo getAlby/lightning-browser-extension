@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { HashRouter, Switch, Redirect, Route } from "react-router-dom";
+import { HashRouter, Navigate, Routes, Route } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";
 import Container from "../../components/Container";
 import Navbar from "../../components/Navbar";
-import UserMenu from "../../components/UserMenu";
 import Publishers from "../../screens/Publishers";
 import Publisher from "../../screens/Publisher";
 import ChooseConnector from "../../screens/Options/ChooseConnector";
@@ -57,37 +56,33 @@ function Options() {
         <Navbar.Link href="/settings">Settings</Navbar.Link>
       </Navbar>
 
-      <Switch>
-        <Redirect from="/home" to="/publishers" />
-        <Route exact path="/">
-          <Redirect to="/publishers" />
+      <Routes>
+        <Route path="/" element={<Navigate to="/publishers" replace />} />
+        <Route path="home" element={<Navigate to="/publishers" replace />} />
+        <Route path="publishers">
+          <Route path=":id" element={<Publisher />} />
+          <Route index element={<Publishers />} />
         </Route>
-        <Route exact path="/publishers">
-          <Publishers />
-        </Route>
-        <Route path="/publishers/:id">
-          <Publisher />
-        </Route>
-        <Route path="/send">
-          <Send />
-        </Route>
-        <Route path="/receive">
-          <Receive />
-        </Route>
-        <Route path="/settings">
-          <Settings />
-        </Route>
-        <Route path="/accounts/new">
-          <Container>
-            <ChooseConnector />
-          </Container>
-        </Route>
-        <Route path="/test-connection">
-          <Container>
-            <TestConnection />
-          </Container>
-        </Route>
-      </Switch>
+        <Route path="send" element={<Send />} />
+        <Route path="receive" element={<Receive />} />
+        <Route path="settings" element={<Settings />} />
+        <Route
+          path="accounts/new"
+          element={
+            <Container>
+              <ChooseConnector />
+            </Container>
+          }
+        />
+        <Route
+          path="test-connection"
+          element={
+            <Container>
+              <TestConnection />
+            </Container>
+          }
+        />
+      </Routes>
     </HashRouter>
   );
 }
