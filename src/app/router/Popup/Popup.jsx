@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { createMemoryHistory } from "history";
-import { Switch, Route, Router } from "react-router-dom";
+import { MemoryRouter, Route, Routes, useNavigate } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";
 
@@ -13,13 +12,10 @@ import LNURLPay from "../../screens/LNURLPay";
 import Loading from "../../components/Loading";
 import Navbar from "../../components/Navbar";
 
-class Popup extends React.Component {
-  constructor(props) {
-    super(props);
-    this.history = createMemoryHistory();
-  }
+function GateKeeping() {
+  const navigate = useNavigate();
 
-  componentDidMount() {
+  useEffect(() => {
     utils
       .call("status")
       .then((response) => {
@@ -27,37 +23,33 @@ class Popup extends React.Component {
           utils.openPage("welcome.html");
           window.close();
         } else if (response.unlocked) {
-          this.history.replace("/home");
+          navigate("/home", { replace: true });
         } else {
-          this.history.replace("/unlock");
+          navigate("/unlock", { replace: true });
         }
       })
       .catch((e) => {
         console.log(e);
       });
-  }
+  }, []);
 
-  render() {
-    return (
-      <Router history={this.history}>
-        <section id="popup">
-          <Switch>
-            <Route exact path="/">
-              <Loading />
-            </Route>
-            <Route exact path="/unlock">
-              <Unlock next="/home" />
-            </Route>
+  return <Loading />;
+}
 
-            {/* TODO: these routes should not be accessible when locked. See: https://reactrouter.com/web/example/auth-workflow */}
-            <Route>
-              <Default />
-            </Route>
-          </Switch>
-        </section>
-      </Router>
-    );
-  }
+function Popup() {
+  return (
+    <MemoryRouter>
+      <section id="popup">
+        <Routes>
+          <Route path="/" element={<GateKeeping />} />
+          <Route path="unlock" element={<Unlock next="/home" />} />
+
+          {/* TODO: these routes should not be accessible when locked. See: https://reactrouter.com/docs/en/v6/examples/auth */}
+          <Route path="*" element={<Default />} />
+        </Routes>
+      </section>
+    </MemoryRouter>
+  );
 }
 
 const Default = () => {
@@ -90,18 +82,12 @@ const Default = () => {
           setKey(Date.now()); // Refresh Home.
         }}
       />
-      <Route path="/home">
-        <Home key={key} />
-      </Route>
-      <Route path="/send">
-        <Send />
-      </Route>
-      <Route path="/receive">
-        <Receive />
-      </Route>
-      <Route path="/lnurlPay">
-        <LNURLPay />
-      </Route>
+      <Routes>
+        <Route path="home" element={<Home key={key} />} />
+        <Route path="send" element={<Send />} />
+        <Route path="receive" element={<Receive />} />
+        <Route path="lnurlPay" element={<LNURLPay />} />
+      </Routes>
     </div>
   );
 };

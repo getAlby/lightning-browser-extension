@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CaretLeftIcon from "@bitcoin-design/bitcoin-icons/svg/filled/caret-left.svg";
 import { QrcodeIcon } from "@heroicons/react/outline";
 import CrossIcon from "@bitcoin-design/bitcoin-icons/svg/filled/cross.svg";
@@ -16,7 +16,7 @@ import QrcodeScanner from "../components/QrcodeScanner";
 
 function Send() {
   const [invoice, setInvoice] = useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
   const [qrIsOpen, setQrIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -31,9 +31,11 @@ function Send() {
       if (lnurl) {
         setLoading(true);
         const details = await lnurlLib.getDetails(lnurl);
-        history.push("/lnurlPay", {
-          details,
-          origin: getOriginData(),
+        navigate("/lnurlPay", {
+          state: {
+            details,
+            origin: getOriginData(),
+          },
         });
       } else {
         await utils.call(
@@ -92,7 +94,7 @@ function Send() {
         title="Send a payment"
         headerLeft={
           <IconButton
-            onClick={() => history.push("/home")}
+            onClick={() => navigate("/home")}
             icon={
               <img
                 className="w-4 h-4"

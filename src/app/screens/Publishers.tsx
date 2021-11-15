@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Container from "../components/Container";
 import PublishersTable from "../components/PublishersTable";
@@ -9,10 +9,10 @@ import utils from "../../common/lib/utils";
 
 function Publishers() {
   const [data, setData] = useState([]);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function navigateToPublisher(id: string) {
-    history.push(`/publishers/${id}`);
+    navigate(`/publishers/${id}`);
   }
 
   async function fetchData() {

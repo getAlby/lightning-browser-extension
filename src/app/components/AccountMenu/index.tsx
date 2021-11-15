@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import WalletIcon from "@bitcoin-design/bitcoin-icons/svg/outline/wallet.svg";
 import { ChevronDownIcon, PlusIcon } from "@heroicons/react/solid";
 
@@ -13,7 +13,7 @@ type Props = {
 };
 
 function AccountMenu({ onAccountSwitch }: Props) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [accounts, setAccounts] = useState<{
     [key: string]: { name: "string"; connector: "string" };
   }>({});
@@ -38,7 +38,7 @@ function AccountMenu({ onAccountSwitch }: Props) {
       // close the popup
       window.close();
     } else {
-      history.push(`/${path}`);
+      navigate(`/${path}`);
     }
   }
 

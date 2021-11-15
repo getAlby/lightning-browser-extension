@@ -1,6 +1,6 @@
 import React, { useState, MouseEvent } from "react";
 import axios from "axios";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { LNURLPaymentInfo } from "../../types";
 import msg from "../../common/lib/msg";
@@ -30,7 +30,7 @@ type Props = {
 };
 
 function LNURLPay(props: Props) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const location: {
     state: {
       details: Details;
@@ -124,7 +124,7 @@ function LNURLPay(props: Props) {
     if (props.details && props.origin) {
       msg.error("User rejected");
     } else {
-      history.goBack();
+      navigate(-1);
     }
   }
 

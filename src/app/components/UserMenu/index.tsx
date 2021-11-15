@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CogIcon, LockClosedIcon, TableIcon } from "@heroicons/react/solid";
 import { MenuIcon } from "@heroicons/react/outline";
 import SendIcon from "@bitcoin-design/bitcoin-icons/svg/filled/send.svg";
@@ -9,7 +9,7 @@ import utils from "../../../common/lib/utils";
 import Menu from "../Menu";
 
 export default function UserMenu() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function openOptions(path: string) {
     // if we are in the popup
@@ -18,7 +18,7 @@ export default function UserMenu() {
       // close the popup
       window.close();
     } else {
-      history.push(`/${path}`);
+      navigate(`/${path}`);
     }
   }
 
@@ -50,7 +50,7 @@ export default function UserMenu() {
         </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
-            history.push("/send");
+            navigate("/send");
           }}
         >
           <img
@@ -63,7 +63,7 @@ export default function UserMenu() {
         </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
-            history.push("/receive");
+            navigate("/receive");
           }}
         >
           <img

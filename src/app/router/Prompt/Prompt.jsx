@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import qs from "query-string";
-import { createHashHistory } from "history";
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { parsePaymentRequest } from "invoices";
 
 import "./styles.scss";
@@ -14,10 +13,25 @@ import ConfirmPayment from "../../screens/ConfirmPayment";
 import LNURLPay from "../../screens/LNURLPay";
 import LNURLAuth from "../../screens/LNURLAuth";
 
+function GateKeeping({ next }) {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    utils.call("isUnlocked").then((response) => {
+      if (response.unlocked) {
+        navigate(next, { replace: true });
+      } else {
+        navigate("/unlock", { replace: true });
+      }
+    });
+  }, []);
+
+  return <Loading />;
+}
+
 class Prompt extends React.Component {
   constructor(props) {
     super(props);
-    this.history = createHashHistory();
     const message = qs.parse(window.location.search);
     let origin = {};
     let args = {};
@@ -34,56 +48,52 @@ class Prompt extends React.Component {
     this.state = { origin, args, invoice, type: message.type };
   }
 
-  componentDidMount() {
-    utils.call("isUnlocked").then((response) => {
-      if (response.unlocked) {
-        this.history.replace(`${this.state.type}`);
-      } else {
-        this.history.replace("/unlock");
-      }
-    });
-  }
-
   render() {
     return (
       <HashRouter>
         <section id="prompt">
-          <Switch>
-            <Route exact path="/" render={(props) => <Loading />} />
+          <Routes>
             <Route
-              exact
-              path="/unlock"
-              render={(props) => <Unlock next={`/${this.state.type}`} />}
+              path="/"
+              element={<GateKeeping next={`/${this.state.type}`} />}
             />
             <Route
-              exact
-              path="/enable"
-              render={(props) => <Enable origin={this.state.origin} />}
+              path="unlock"
+              element={<Unlock next={`/${this.state.type}`} />}
             />
-            <Route exact path="/lnurlPay">
-              <LNURLPay
-                details={this.state.args?.lnurlDetails}
-                origin={this.state.origin}
-              />
-            </Route>
-            <Route exact path="/lnurlAuth">
-              <LNURLAuth
-                details={this.state.args?.lnurlDetails}
-                origin={this.state.origin}
-              />
-            </Route>
             <Route
-              exact
-              path="/confirmPayment"
-              render={(props) => (
+              path="enable"
+              element={<Enable origin={this.state.origin} />}
+            />
+            <Route
+              path="lnurlPay"
+              element={
+                <LNURLPay
+                  details={this.state.args?.lnurlDetails}
+                  origin={this.state.origin}
+                />
+              }
+            />
+            <Route
+              path="lnurlAuth"
+              element={
+                <LNURLAuth
+                  details={this.state.args?.lnurlDetails}
+                  origin={this.state.origin}
+                />
+              }
+            />
+            <Route
+              path="confirmPayment"
+              element={
                 <ConfirmPayment
                   invoice={this.state.invoice}
                   paymentRequest={this.state.args?.paymentRequest}
                   origin={this.state.origin}
                 />
-              )}
+              }
             />
-          </Switch>
+          </Routes>
         </section>
       </HashRouter>
     );

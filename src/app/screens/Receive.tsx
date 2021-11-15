@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CaretLeftIcon from "@bitcoin-design/bitcoin-icons/svg/filled/caret-left.svg";
 import CopyIcon from "@bitcoin-design/bitcoin-icons/svg/outline/copy.svg";
 import QRCode from "react-qr-code";
@@ -13,7 +13,7 @@ import Input from "../components/Form/Input";
 import Header from "../components/Header";
 
 function Receive() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     amount: "",
     description: "",
@@ -92,7 +92,7 @@ function Receive() {
         title="Receive"
         headerLeft={
           <IconButton
-            onClick={() => history.push("/home")}
+            onClick={() => navigate("/home")}
             icon={
               <img
                 className="w-4 h-4"
@@ -186,7 +186,7 @@ function Receive() {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  history.push("/home");
+                  navigate("/home");
                 }}
               >
                 Cancel
