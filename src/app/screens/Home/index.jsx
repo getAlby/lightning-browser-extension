@@ -94,8 +94,10 @@ class Home extends React.Component {
             {parseInt(allowance.totalBudget) > 0 ? (
               <>
                 <dl className="mb-0">
-                  <dt className="text-xs text-gray-500">Allowance</dt>
-                  <dd className="mb-0 text-sm font-medium">
+                  <dt className="text-xs text-gray-500 dark:tex-gray-400">
+                    Allowance
+                  </dt>
+                  <dd className="mb-0 text-sm font-medium dark:text-gray-400">
                     {allowance.usedBudget} / {allowance.totalBudget} sat used
                   </dd>
                 </dl>

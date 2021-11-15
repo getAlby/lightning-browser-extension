@@ -47,15 +47,17 @@ function Enable(props) {
       <PublisherCard title={props.origin.name} image={props.origin.icon} />
 
       <div className="text-center p-6">
-        <h3 className="text-xl mb-4">
+        <h3 className="text-xl mb-4 dark:text-white">
           Connect with <i>{props.origin.host}</i>
         </h3>
 
-        <p className="text-gray-500 mb-4">
+        <p className="text-gray-500 mb-4 dark:text-gray-400">
           <strong>{props.origin.name}</strong> does not have access to your
           account.
         </p>
-        <p className="text-gray-500 mb-4">Do you want to grant them access?</p>
+        <p className="text-gray-500 mb-4 dark:text-gray-400">
+          Do you want to grant them access?
+        </p>
 
         <div className="mt-8 mb-5">
           <Button
@@ -72,7 +74,7 @@ function Enable(props) {
         </p>
 
         <a
-          className="underline text-sm text-gray-500"
+          className="underline text-sm text-gray-500 dark:text-gray-400"
           href="#"
           onClick={reject}
         >

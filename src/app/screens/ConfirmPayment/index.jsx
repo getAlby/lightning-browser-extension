@@ -86,7 +86,7 @@ class ConfirmPayment extends React.Component {
               />
               <label
                 htmlFor="remember_me"
-                className="ml-2 block text-sm text-gray-900 font-medium"
+                className="ml-2 block text-sm text-gray-900 font-medium dark:text-gray-400"
               >
                 Remember and set a budget
               </label>
@@ -101,14 +101,14 @@ class ConfirmPayment extends React.Component {
               leaveFrom="transform scale-100 opacity-100"
               leaveTo="transform scale-95 opacity-0"
             >
-              <p className="mt-4 mb-3 text-gray-500 text-sm">
+              <p className="mt-4 mb-3 text-gray-500 text-sm dark:text-gray-400">
                 You may set a balance to not be asked for confirmation on
                 payments until it is exhausted.
               </p>
               <div>
                 <label
                   htmlFor="budget"
-                  className="mb-1 block text-sm font-medium text-gray-700"
+                  className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
                 >
                   Budget
                 </label>
@@ -142,7 +142,7 @@ class ConfirmPayment extends React.Component {
             </p>
 
             <a
-              className="underline text-sm text-gray-500"
+              className="underline text-sm text-gray-500 dark:text-gray-400"
               href="#"
               onClick={this.reject}
             >

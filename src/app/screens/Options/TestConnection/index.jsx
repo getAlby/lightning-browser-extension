@@ -54,8 +54,10 @@ export default function TestConnection() {
 
             {accountInfo && accountInfo.alias && (
               <div>
-                <h1 className="text-3xl font-bold">Success! 🎉</h1>
-                <p className="text-gray-500 mt-6">
+                <h1 className="text-3xl font-bold dark:text-white">
+                  Success! 🎉
+                </h1>
+                <p className="text-gray-500 mt-6 dark:text-gray-400">
                   Awesome, you're ready to go!
                 </p>
 
