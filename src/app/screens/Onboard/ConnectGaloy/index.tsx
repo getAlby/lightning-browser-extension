@@ -8,7 +8,7 @@ import utils from "../../../../common/lib/utils";
 
 const url = process.env.GALOY_URL || "http://localhost:4002/graphql/";
 
-export default function ConnectLnbits() {
+export default function ConnectGaloy() {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState<string>("");

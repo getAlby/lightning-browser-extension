@@ -58,6 +58,21 @@ export default class Galoy extends Base {
   }
 
   sendPayment(args) {
+    const query = {
+      query: `
+        query getinfo {
+          me {
+              id
+              username
+              defaultAccount {
+                wallets {
+                  balance
+              }
+            }
+          }
+        }
+      `,
+    };
     return this.request("POST", "/payinvoice", {
       invoice: args.paymentRequest,
     }).then((data) => {
@@ -149,17 +164,34 @@ export default class Galoy extends Base {
   }
 
   makeInvoice(args) {
-    return this.request("POST", "/addinvoice", {
-      amt: args.amount,
-      memo: args.memo,
-    }).then((data) => {
-      if (typeof data.r_hash === "object" && data.r_hash.type === "Buffer") {
-        data.r_hash = Buffer.from(data.r_hash.data).toString("hex");
-      }
+    const query = {
+      query: `
+        mutation lnInvoiceCreate($input: LnInvoiceCreateInput!) {
+          lnInvoiceCreate(input: $input) {
+            invoice {
+              paymentRequest
+              paymentHash
+              paymentSecret
+              satoshis
+            }
+            errors {
+              message
+            }
+          }
+        }
+            `,
+      variables: {
+        input: {
+          amount: args.amount,
+          memo: args.memo,
+        },
+      },
+    };
+    return this.request("POST", "", query, {}).then((data) => {
       return {
         data: {
-          paymentRequest: data.payment_request,
-          rHash: data.r_hash,
+          paymentRequest: data.data.lnInvoiceCreate.invoice.paymentRequest,
+          rHash: data.data.lnInvoiceCreate.invoice.paymentHash,
         },
       };
     });
