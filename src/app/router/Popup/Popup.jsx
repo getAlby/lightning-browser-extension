@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MemoryRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { MemoryRouter, Outlet, Route, Routes } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";
 
@@ -9,50 +9,38 @@ import Send from "../../screens/Send";
 import Receive from "../../screens/Receive";
 import LNURLPay from "../../screens/LNURLPay";
 
-import Loading from "../../components/Loading";
+import { AuthProvider } from "../../context/AuthContext";
+import RequireAuth from "../RequireAuth";
 import Navbar from "../../components/Navbar";
-
-function GateKeeping() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    utils
-      .call("status")
-      .then((response) => {
-        if (!response.configured) {
-          utils.openPage("welcome.html");
-          window.close();
-        } else if (response.unlocked) {
-          navigate("/home", { replace: true });
-        } else {
-          navigate("/unlock", { replace: true });
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
-
-  return <Loading />;
-}
 
 function Popup() {
   return (
-    <MemoryRouter>
-      <section id="popup">
-        <Routes>
-          <Route path="/" element={<GateKeeping />} />
-          <Route path="unlock" element={<Unlock next="/home" />} />
-
-          {/* TODO: these routes should not be accessible when locked. See: https://reactrouter.com/docs/en/v6/examples/auth */}
-          <Route path="*" element={<Default />} />
-        </Routes>
-      </section>
-    </MemoryRouter>
+    <AuthProvider>
+      <MemoryRouter>
+        <section id="popup">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <RequireAuth>
+                  <App />
+                </RequireAuth>
+              }
+            >
+              <Route index element={<Home />} />
+              <Route path="send" element={<Send />} />
+              <Route path="receive" element={<Receive />} />
+              <Route path="lnurlPay" element={<LNURLPay />} />
+            </Route>
+            <Route path="unlock" element={<Unlock />} />
+          </Routes>
+        </section>
+      </MemoryRouter>
+    </AuthProvider>
   );
 }
 
-const Default = () => {
+const App = () => {
   const [accountInfo, setAccountInfo] = useState({});
   const [key, setKey] = useState(Date.now());
 
@@ -79,15 +67,15 @@ const Default = () => {
         }
         onAccountSwitch={() => {
           getAccountInfo();
+
+          // TODO: this should be done in an eloquent way. Maybe use context?
           setKey(Date.now()); // Refresh Home.
         }}
       />
-      <Routes>
-        <Route path="home" element={<Home key={key} />} />
-        <Route path="send" element={<Send />} />
-        <Route path="receive" element={<Receive />} />
-        <Route path="lnurlPay" element={<LNURLPay />} />
-      </Routes>
+
+      <React.Fragment key={key}>
+        <Outlet />
+      </React.Fragment>
     </div>
   );
 };

@@ -1,33 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import qs from "query-string";
-import { HashRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { parsePaymentRequest } from "invoices";
 
 import "./styles.scss";
 
-import utils from "../../../common/lib/utils";
+import { AuthProvider } from "../../context/AuthContext";
+import RequireAuth from "../RequireAuth";
 import Unlock from "../../screens/Unlock";
 import Enable from "../../screens/Enable";
-import Loading from "../../components/Loading";
 import ConfirmPayment from "../../screens/ConfirmPayment";
 import LNURLPay from "../../screens/LNURLPay";
 import LNURLAuth from "../../screens/LNURLAuth";
-
-function GateKeeping({ next }) {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    utils.call("isUnlocked").then((response) => {
-      if (response.unlocked) {
-        navigate(next, { replace: true });
-      } else {
-        navigate("/unlock", { replace: true });
-      }
-    });
-  }, []);
-
-  return <Loading />;
-}
 
 class Prompt extends React.Component {
   constructor(props) {
@@ -50,52 +34,58 @@ class Prompt extends React.Component {
 
   render() {
     return (
-      <HashRouter>
-        <section id="prompt">
+      <AuthProvider>
+        <HashRouter>
           <Routes>
             <Route
               path="/"
-              element={<GateKeeping next={`/${this.state.type}`} />}
-            />
-            <Route
-              path="unlock"
-              element={<Unlock next={`/${this.state.type}`} />}
-            />
-            <Route
-              path="enable"
-              element={<Enable origin={this.state.origin} />}
-            />
-            <Route
-              path="lnurlPay"
               element={
-                <LNURLPay
-                  details={this.state.args?.lnurlDetails}
-                  origin={this.state.origin}
-                />
+                <RequireAuth>
+                  <Outlet />
+                </RequireAuth>
               }
-            />
-            <Route
-              path="lnurlAuth"
-              element={
-                <LNURLAuth
-                  details={this.state.args?.lnurlDetails}
-                  origin={this.state.origin}
-                />
-              }
-            />
-            <Route
-              path="confirmPayment"
-              element={
-                <ConfirmPayment
-                  invoice={this.state.invoice}
-                  paymentRequest={this.state.args?.paymentRequest}
-                  origin={this.state.origin}
-                />
-              }
-            />
+            >
+              <Route
+                index
+                element={<Navigate to={`/${this.state.type}`} replace />}
+              />
+              <Route
+                path="enable"
+                element={<Enable origin={this.state.origin} />}
+              />
+              <Route
+                path="lnurlPay"
+                element={
+                  <LNURLPay
+                    details={this.state.args?.lnurlDetails}
+                    origin={this.state.origin}
+                  />
+                }
+              />
+              <Route
+                path="lnurlAuth"
+                element={
+                  <LNURLAuth
+                    details={this.state.args?.lnurlDetails}
+                    origin={this.state.origin}
+                  />
+                }
+              />
+              <Route
+                path="confirmPayment"
+                element={
+                  <ConfirmPayment
+                    invoice={this.state.invoice}
+                    paymentRequest={this.state.args?.paymentRequest}
+                    origin={this.state.origin}
+                  />
+                }
+              />
+            </Route>
+            <Route path="unlock" element={<Unlock />} />
           </Routes>
-        </section>
-      </HashRouter>
+        </HashRouter>
+      </AuthProvider>
     );
   }
 }

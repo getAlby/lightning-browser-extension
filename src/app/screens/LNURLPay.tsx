@@ -25,8 +25,8 @@ type Origin = {
 };
 
 type Props = {
-  details: Details;
-  origin: Origin;
+  details?: Details;
+  origin?: Origin;
 };
 
 function LNURLPay(props: Props) {
