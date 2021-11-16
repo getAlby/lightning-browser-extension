@@ -1,8 +1,8 @@
 const setIcon = async (message, sender) => {
   // TODO: refactor names / rename files?
   const names = {
-    active: "alby_icon_blue",
-    off: "alby_icon_yellow",
+    active: "alby_icon_yellow",
+    off: "alby_icon_sleeping",
   };
   const name = names[message.args.icon];
   return browser.browserAction

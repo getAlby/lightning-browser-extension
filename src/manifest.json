@@ -39,10 +39,10 @@
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "assets/icons/alby_icon_yellow_16x16.png",
-      "32": "assets/icons/alby_icon_yellow_32x32.png",
-      "48": "assets/icons/alby_icon_yellow_48x48.png",
-      "128": "assets/icons/alby_icon_yellow_128x128.png"
+      "16": "assets/icons/alby_icon_sleeping_16x16.png",
+      "32": "assets/icons/alby_icon_sleeping_32x32.png",
+      "48": "assets/icons/alby_icon_sleeping_48x48.png",
+      "128": "assets/icons/alby_icon_sleeping_128x128.png"
     },
     "default_title": "Alby",
     "__chrome|opera__chrome_style": false,

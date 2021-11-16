@@ -36,8 +36,8 @@ const updateIcon = async (tabId, changeInfo, tabInfo) => {
 
   // TODO: move to some config file
   const names = {
-    active: "alby_icon_blue",
-    off: "alby_icon_yellow",
+    active: "alby_icon_yellow",
+    off: "alby_icon_sleeping",
   };
   let name;
   if (allowance) {
