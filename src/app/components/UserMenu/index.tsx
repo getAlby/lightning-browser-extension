@@ -6,10 +6,12 @@ import SendIcon from "@bitcoin-design/bitcoin-icons/svg/filled/send.svg";
 import ReceiveIcon from "@bitcoin-design/bitcoin-icons/svg/filled/receive.svg";
 
 import utils from "../../../common/lib/utils";
+import { useAuth } from "../../context/AuthContext";
 import Menu from "../Menu";
 
 export default function UserMenu() {
   const navigate = useNavigate();
+  const auth = useAuth();
 
   function openOptions(path: string) {
     // if we are in the popup
@@ -24,8 +26,9 @@ export default function UserMenu() {
 
   async function lock() {
     try {
-      await utils.call("lock");
-      window.close();
+      auth.lock(() => {
+        window.close();
+      });
     } catch (e) {
       console.error(e);
     }

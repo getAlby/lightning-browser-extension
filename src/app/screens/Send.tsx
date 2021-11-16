@@ -94,7 +94,7 @@ function Send() {
         title="Send a payment"
         headerLeft={
           <IconButton
-            onClick={() => navigate("/home")}
+            onClick={() => navigate("/")}
             icon={
               <img
                 className="w-4 h-4"

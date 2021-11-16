@@ -92,7 +92,7 @@ function Receive() {
         title="Receive"
         headerLeft={
           <IconButton
-            onClick={() => navigate("/home")}
+            onClick={() => navigate("/")}
             icon={
               <img
                 className="w-4 h-4"
@@ -186,7 +186,7 @@ function Receive() {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  navigate("/home");
+                  navigate("/");
                 }}
               >
                 Cancel
