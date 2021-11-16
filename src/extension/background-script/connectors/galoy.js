@@ -60,59 +60,33 @@ export default class Galoy extends Base {
   sendPayment(args) {
     const query = {
       query: `
-        query getinfo {
-          me {
-              id
-              username
-              defaultAccount {
-                wallets {
-                  balance
-              }
-            }
+        mutation lnInvoicePaymentSend($input: LnInvoicePaymentInput!) {
+          lnInvoicePaymentSend(input:$input) {
+            status
           }
         }
       `,
+      variables: {
+        input: {
+          paymentRequest: args.paymentRequest,
+          memo: "Sent via Alby",
+        },
+      },
     };
-    return this.request("POST", "/payinvoice", {
-      invoice: args.paymentRequest,
-    }).then((data) => {
-      if (data.error) {
-        return { error: data.message };
-      }
-      if (data.payment_error) {
-        return { error: data.payment_error };
-      }
-      if (
-        typeof data.payment_hash === "object" &&
-        data.payment_hash.type === "Buffer"
-      ) {
-        data.payment_hash = Buffer.from(data.payment_hash.data).toString("hex");
-      }
-      if (
-        typeof data.payment_preimage === "object" &&
-        data.payment_preimage.type === "Buffer"
-      ) {
-        data.payment_preimage = Buffer.from(
-          data.payment_preimage.data
-        ).toString("hex");
-      }
 
-      // HACK!
-      // some Lnbits extension that implement the LNDHub API do not return the route information.
-      // to somewhat work around this we set a payment route and use the amount from the payment request.
-      // lnbits needs to fix this and return proper route information with a total amount and fees
-      if (!data.payment_route) {
-        const paymentRequestDetails = parsePaymentRequest({
-          request: args.paymentRequest,
-        });
-        const amountInSats = parseInt(paymentRequestDetails.tokens);
-        data.payment_route = { total_amt: amountInSats, total_fees: 0 };
+    const { tokens: amountInSats, payment: paymentHash } = parsePaymentRequest({
+      request: args.paymentRequest,
+    });
+
+    return this.request("POST", "", query, {}).then((data) => {
+      if (data.data.lnInvoicePaymentSend.errors?.message) {
+        return { error: data.data.lnInvoicePaymentSend.errors?.message };
       }
       return {
         data: {
-          preimage: data.payment_preimage,
-          paymentHash: data.payment_hash,
-          route: data.payment_route,
+          preimage: "No preimage received",
+          paymentHash,
+          route: { total_amt: amountInSats, total_fees: 0 },
         },
       };
     });
