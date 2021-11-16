@@ -24,7 +24,7 @@ function Options() {
             path="/"
             element={
               <RequireAuth>
-                <App />
+                <Layout />
               </RequireAuth>
             }
           >
@@ -60,7 +60,7 @@ function Options() {
   );
 }
 
-const App = () => {
+const Layout = () => {
   const [accountInfo, setAccountInfo] = useState({});
 
   useEffect(() => {

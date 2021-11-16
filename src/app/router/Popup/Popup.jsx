@@ -23,7 +23,7 @@ function Popup() {
               path="/"
               element={
                 <RequireAuth>
-                  <App />
+                  <Layout />
                 </RequireAuth>
               }
             >
@@ -40,7 +40,7 @@ function Popup() {
   );
 }
 
-const App = () => {
+const Layout = () => {
   const [accountInfo, setAccountInfo] = useState({});
   const [key, setKey] = useState(Date.now());
 
