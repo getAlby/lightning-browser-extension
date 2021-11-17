@@ -39,9 +39,7 @@ const getExtensionFileType = (browser) => {
   return "zip";
 };
 
-module.exports = {
-  devtool: nodeEnv === "development" ? "inline-source-map" : false,
-
+var options = {
   stats: {
     all: false,
     builtAt: true,
@@ -191,9 +189,13 @@ module.exports = {
       patterns: [{ from: "static/assets", to: "assets" }],
     }),
   ],
+};
 
-  optimization: {
-    minimize: nodeEnv !== "development",
+if (nodeEnv === "development") {
+  options.devtool = "inline-source-map";
+} else {
+  options.optimization = {
+    minimize: true,
     minimizer: [
       new TerserPlugin(),
       new CssMinimizerPlugin(),
@@ -215,5 +217,7 @@ module.exports = {
         },
       }),
     ],
-  },
-};
+  };
+}
+
+module.exports = options;
