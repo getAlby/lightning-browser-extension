@@ -9,7 +9,7 @@ export default function ConnectLnbits() {
   const history = useHistory();
   const [formData, setFormData] = useState({
     adminkey: "",
-    url: "https://demo.lnbits.com",
+    url: "https://legend.lnbits.com",
   });
   const [loading, setLoading] = useState(false);
 
