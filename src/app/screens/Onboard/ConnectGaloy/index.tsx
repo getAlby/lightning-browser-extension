@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 
 import utils from "../../../../common/lib/utils";
 
-const url = process.env.GALOY_URL || "http://localhost:4002/graphql/";
+const url = process.env.GALOY_URL || "https://api.staging.galoy.io/graphql/";
 
 export default function ConnectGaloy() {
   const history = useHistory();
@@ -27,7 +27,7 @@ export default function ConnectGaloy() {
 
   async function requestSmsCode(event: React.MouseEvent<HTMLButtonElement>) {
     setLoading(true);
-    const url = "http://localhost:4002/graphql/";
+    const url = "https://api.staging.galoy.io/graphql/";
     const query = {
       query: `
         mutation userRequestAuthCode($input: UserRequestAuthCodeInput!) {
@@ -60,7 +60,7 @@ export default function ConnectGaloy() {
 
   async function requestAuthToken(event: React.MouseEvent<HTMLButtonElement>) {
     setLoading(true);
-    const url = "http://localhost:4002/graphql/";
+    const url = "https://api.staging.galoy.io/graphql/";
     const query = {
       query: `
         mutation userLogin($input: UserLoginInput!) {
