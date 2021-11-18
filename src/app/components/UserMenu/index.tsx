@@ -46,7 +46,7 @@ export default function UserMenu() {
             className="h-5 w-5 mr-2 text-gray-500"
             aria-hidden="true"
           />
-          Allowances
+          Websites
         </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
