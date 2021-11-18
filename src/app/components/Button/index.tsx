@@ -33,7 +33,7 @@ export default function Button({
         fullWidth && "w-full",
         primary
           ? "bg-orange-bitcoin text-white border border-transparent"
-          : `bg-white text-gray-700 border border-gray-200 dark:bg-gray-700 dark:text-gray-200`,
+          : `bg-white text-gray-700 border border-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-500`,
         primary && !disabled && "hover:bg-orange-bitcoin-700",
         !primary && !disabled && "hover:bg-gray-100 dark:hover:bg-gray-600",
         disabled ? "cursor-default opacity-60" : "cursor-pointer",

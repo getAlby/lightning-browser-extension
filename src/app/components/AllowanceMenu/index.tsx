@@ -89,7 +89,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             />
           </button>
         </div>
-        <div className="p-5 border-t border-b border-gray-200 dark:bg-gray-800">
+        <div className="p-5 border-t border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">
           <label
             htmlFor="budget"
             className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"

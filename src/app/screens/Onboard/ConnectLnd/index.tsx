@@ -146,7 +146,7 @@ export default function ConnectLnd() {
               </div>
               <p className="text-center my-4 dark:text-white">OR</p>
               <div
-                className={`cursor-pointer bg-white flex flex-col items-center p-4 py-10 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
+                className={`cursor-pointer bg-white dark:bg-gray-800 flex flex-col items-center p-4 py-10 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
                   isDragging ? "border-blue-500 bg-blue-50" : ""
                 }`}
                 onDrop={dropHandler}
@@ -160,7 +160,7 @@ export default function ConnectLnd() {
                   className="mb-3 h-9 w-9 text-blue-500"
                   aria-hidden="true"
                 />
-                <p>
+                <p className="dark:text-white">
                   Drag and drop your macaroon here or{" "}
                   <span className="underline">browse</span>
                 </p>

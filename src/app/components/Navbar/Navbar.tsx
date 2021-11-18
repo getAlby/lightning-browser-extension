@@ -19,7 +19,7 @@ export default function Navbar({
   children,
 }: Props) {
   return (
-    <div className="px-4 py-2 bg-white flex justify-between items-center border-b border-gray-200 dark:bg-gray-800">
+    <div className="px-4 py-2 bg-white flex justify-between items-center border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">
       <div className="flex w-8/12 md:w-4/12 lg:w-3/12">
         <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-gray-600">
           <div className="flex items-center">
