@@ -103,7 +103,11 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               placeholder="sat"
               value={budget}
               onChange={(event) => {
-                setBudget(parseInt(event.target.value));
+                if (event.target.value.length >= 1) {
+                  setBudget(parseInt(event.target.value));
+                } else {
+                  setBudget(0);
+                }
               }}
             />
           </div>
