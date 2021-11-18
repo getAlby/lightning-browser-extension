@@ -20,7 +20,7 @@ type Props = {
 
 function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [budget, setBudget] = useState(0);
+  const [budget, setBudget] = useState<number | undefined>(0);
 
   function openModal() {
     setBudget(allowance.totalBudget);
@@ -113,7 +113,12 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
           </div>
         </div>
         <div className="flex justify-end p-5">
-          <Button onClick={updateAllowance} label="Save" primary disabled={budget === undefined}/>
+          <Button
+            onClick={updateAllowance}
+            label="Save"
+            primary
+            disabled={budget === undefined}
+          />
         </div>
       </Modal>
     </>
