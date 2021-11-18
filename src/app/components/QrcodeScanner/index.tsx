@@ -93,7 +93,15 @@ function QrcodeScanner({
   async function handleStopScanning(isMounted = true) {
     try {
       if (html5QrCodeRef.current) {
-        await html5QrCodeRef.current.stop();
+        const scannerState = html5QrCodeRef.current.getState();
+        if (
+          [
+            Html5QrcodeScannerState.PAUSED,
+            Html5QrcodeScannerState.SCANNING,
+          ].includes(scannerState)
+        ) {
+          await html5QrCodeRef.current.stop();
+        }
         html5QrCodeRef.current.clear();
         if (isMounted) setScanning(false);
       }
