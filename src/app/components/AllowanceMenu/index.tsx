@@ -103,17 +103,17 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               placeholder="sat"
               value={budget}
               onChange={(event) => {
-                if (event.target.value.length >= 1) {
-                  setBudget(parseInt(event.target.value));
-                } else {
-                  setBudget(0);
-                }
+                setBudget(
+                  !isNaN(event.target.valueAsNumber)
+                    ? event.target.valueAsNumber
+                    : undefined
+                );
               }}
             />
           </div>
         </div>
         <div className="flex justify-end p-5">
-          <Button onClick={updateAllowance} label="Save" primary />
+          <Button onClick={updateAllowance} label="Save" primary disabled={budget === undefined}/>
         </div>
       </Modal>
     </>
