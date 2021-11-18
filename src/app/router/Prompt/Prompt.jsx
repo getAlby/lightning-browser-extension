@@ -4,8 +4,6 @@ import { createHashHistory } from "history";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import { parsePaymentRequest } from "invoices";
 
-import "./styles.scss";
-
 import utils from "../../../common/lib/utils";
 import Unlock from "../../screens/Unlock";
 import Enable from "../../screens/Enable";
