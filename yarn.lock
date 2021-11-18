@@ -13041,10 +13041,10 @@ public-encrypt@^4.0.0:
     randombytes "^2.0.1"
     safe-buffer "^5.1.2"
 
-pubsub-js@^1.9.3:
-  version "1.9.3"
-  resolved "https://registry.npmjs.org/pubsub-js/-/pubsub-js-1.9.3.tgz"
-  integrity sha512-FhYYlPNOywTh7zN38u5AlG67emA47w6JZd7YgdQU1w8gQbZhhIGxVM0AQosdaINHb2ALb+fhfnVyBJAt4D4IzA==
+pubsub-js@^1.9.4:
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/pubsub-js/-/pubsub-js-1.9.4.tgz#5c8678600e34e95b1269e96c17e1b51dab3ecb5a"
+  integrity sha512-hJYpaDvPH4w8ZX/0Fdf9ma1AwRgU353GfbaVfPjfJQf1KxZ2iHaHl3fAUw1qlJIR5dr4F3RzjGaWohYUEyoh7A==
 
 pump@^2.0.0:
   version "2.0.1"
