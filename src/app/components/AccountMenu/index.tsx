@@ -44,7 +44,7 @@ function AccountMenu({ onAccountSwitch }: Props) {
 
   return (
     <Menu as="div">
-      <Menu.Button className="h-full px-2 rounded-r-md hover:bg-gray-200 transition-colors duration-200">
+      <Menu.Button className="h-full px-2 rounded-r-md hover:bg-gray-200 dark:hover:bg-gray-500 transition-colors duration-200">
         <ChevronDownIcon className="h-4 w-4" aria-hidden="true" />
       </Menu.Button>
       <Menu.List position="left">
