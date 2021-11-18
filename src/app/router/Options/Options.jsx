@@ -4,7 +4,6 @@ import { HashRouter, Switch, Redirect, Route } from "react-router-dom";
 import utils from "../../../common/lib/utils";
 import Container from "../../components/Container";
 import Navbar from "../../components/Navbar";
-import UserMenu from "../../components/UserMenu";
 import Publishers from "../../screens/Publishers";
 import Publisher from "../../screens/Publisher";
 import ChooseConnector from "../../screens/Options/ChooseConnector";
