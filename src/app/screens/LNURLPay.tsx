@@ -45,6 +45,7 @@ function LNURLPay(props: Props) {
   );
   const [comment, setComment] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   async function confirm() {
     try {
@@ -84,6 +85,7 @@ function LNURLPay(props: Props) {
 
       // Once payment is fulfilled LN WALLET executes a non-null successAction
       // LN WALLET should also store successAction data on the transaction record
+      let shouldCloseWindow = true;
       if (successAction && !payment.payment_error) {
         switch (successAction.tag) {
           case "url": // TODO: For url, the wallet should give the user a popup which displays description, url, and a 'open' button to open the url in a new browser tab
@@ -96,10 +98,8 @@ function LNURLPay(props: Props) {
             }
             break;
           case "message":
-            utils.notify({
-              title: `LNURL response:`,
-              message: successAction.message!,
-            });
+            shouldCloseWindow = false;
+            setSuccessMessage(successAction.message!);
             break;
           case "aes": // TODO: For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage
           default:
@@ -110,7 +110,9 @@ function LNURLPay(props: Props) {
         }
       }
 
-      window.close();
+      if (shouldCloseWindow) {
+        window.close();
+      }
     } catch (e) {
       console.log(e);
       if (e instanceof Error) {
@@ -216,38 +218,49 @@ function LNURLPay(props: Props) {
     <div>
       <PublisherCard title={origin.name} image={origin.icon} />
       <div className="p-6">
-        <dl className="shadow bg-white pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-          {elements().map(([t, d]) => (
-            <>
-              <dt className="text-sm font-semibold text-gray-500">{t}</dt>
-              <dd className="text-sm mb-4">{d}</dd>
-            </>
-          ))}
-        </dl>
-        <div className="text-center">
-          <div className="mb-5">
-            <Button
-              onClick={confirm}
-              label="Confirm"
-              fullWidth
-              primary
-              loading={loading}
-              disabled={loading || !valueMSat}
-            />
-          </div>
+        {!successMessage ? (
+          <>
+            <dl className="shadow bg-white pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+              {elements().map(([t, d]) => (
+                <>
+                  <dt className="text-sm font-semibold text-gray-500">{t}</dt>
+                  <dd className="text-sm mb-4">{d}</dd>
+                </>
+              ))}
+            </dl>
+            <div className="text-center">
+              <div className="mb-5">
+                <Button
+                  onClick={confirm}
+                  label="Confirm"
+                  fullWidth
+                  primary
+                  loading={loading}
+                  disabled={loading || !valueMSat}
+                />
+              </div>
 
-          <p className="mb-3 underline text-sm text-gray-300">
-            Only connect with sites you trust.
-          </p>
+              <p className="mb-3 underline text-sm text-gray-300">
+                Only connect with sites you trust.
+              </p>
 
-          <a
-            className="underline text-sm text-gray-500"
-            href="#"
-            onClick={reject}
-          >
-            Cancel
-          </a>
-        </div>
+              <a
+                className="underline text-sm text-gray-500"
+                href="#"
+                onClick={reject}
+              >
+                Cancel
+              </a>
+            </div>
+          </>
+        ) : (
+          <dl className="shadow bg-white pt-4 px-4 rounded-lg overflow-hidden">
+            <dt className="text-sm font-semibold text-gray-500">
+              LNURL response:
+            </dt>
+            <dd className="text-sm mb-4">{successMessage}</dd>
+          </dl>
+        )}
       </div>
     </div>
   );
