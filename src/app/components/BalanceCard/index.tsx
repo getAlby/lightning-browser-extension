@@ -1,11 +1,17 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
 
+type Props = {
+  alias: string;
+  crypto: string;
+  fiat: string;
+};
+
 const skeletonStyle = {
   opacity: 0.5,
 };
 
-export default function Card({ alias, crypto, fiat }) {
+function BalanceCard({ alias, crypto, fiat }: Props) {
   return (
     <div className={`bg-blue-bitcoin p-6 pb-2 rounded-2xl shadow-lg`}>
       <p className="text-sm	font-normal text-white">
@@ -20,3 +26,5 @@ export default function Card({ alias, crypto, fiat }) {
     </div>
   );
 }
+
+export default BalanceCard;
