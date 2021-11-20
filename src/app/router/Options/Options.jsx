@@ -37,7 +37,7 @@ function Options() {
             <Route path="receive" element={<Receive />} />
             <Route path="settings" element={<Settings />} />
             <Route
-              path="accounts/new"
+              path="accounts/new/*"
               element={
                 <Container>
                   <ChooseConnector />
