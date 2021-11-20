@@ -3,8 +3,6 @@ import qs from "query-string";
 import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { parsePaymentRequest } from "invoices";
 
-import "./styles.scss";
-
 import { AuthProvider } from "../../context/AuthContext";
 import RequireAuth from "../RequireAuth";
 import Unlock from "../../screens/Unlock";

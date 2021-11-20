@@ -49,6 +49,7 @@ const Layout = () => {
   }, []);
 
   function getAccountInfo() {
+    setAccountInfo({});
     utils.call("accountInfo").then((response) => {
       const { alias } = response.info;
       const balance = parseInt(response.balance.balance); // TODO: handle amounts
