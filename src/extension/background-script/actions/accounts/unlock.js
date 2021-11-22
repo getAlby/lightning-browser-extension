@@ -5,6 +5,7 @@ const unlock = (message, sender) => {
   const password = message.args.password;
 
   const account = state.getState().getAccount();
+  const currentAccountId = state.getState().currentAccountId;
   if (!account) {
     console.log("No account configured");
     return Promise.resolve({ error: "No account configured" });
@@ -18,7 +19,10 @@ const unlock = (message, sender) => {
 
   // if everything is fine we keep the password in memory
   state.setState({ password });
-  return Promise.resolve({ data: { unlocked: true } });
+
+  console.log("account", account);
+
+  return Promise.resolve({ data: { unlocked: true, currentAccountId } });
 };
 
 export default unlock;

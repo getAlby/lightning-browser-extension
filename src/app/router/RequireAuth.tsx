@@ -5,14 +5,14 @@ import { useAuth } from "../context/AuthContext";
 import Loading from "../components/Loading";
 
 function RequireAuth({ children }: { children: JSX.Element }) {
-  let auth = useAuth();
-  let location = useLocation();
+  const auth = useAuth();
+  const location = useLocation();
 
   if (auth.loading) {
     return <Loading />;
   }
 
-  if (!auth.user) {
+  if (!auth.account) {
     return <Navigate to="/unlock" state={{ from: location }} />;
   }
 
