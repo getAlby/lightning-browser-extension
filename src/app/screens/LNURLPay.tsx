@@ -254,12 +254,22 @@ function LNURLPay(props: Props) {
             </div>
           </>
         ) : (
-          <dl className="shadow bg-white pt-4 px-4 rounded-lg overflow-hidden">
-            <dt className="text-sm font-semibold text-gray-500">
-              LNURL response:
-            </dt>
-            <dd className="text-sm mb-4">{successMessage}</dd>
-          </dl>
+          <>
+            <dl className="shadow bg-white pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+              <dt className="text-sm font-semibold text-gray-500">
+                LNURL response:
+              </dt>
+              <dd className="text-sm mb-4">{successMessage}</dd>
+            </dl>
+            <div className="text-center">
+              <button
+                className="underline text-sm text-gray-500"
+                onClick={() => history.push("/home")}
+              >
+                Close
+              </button>
+            </div>
+          </>
         )}
       </div>
     </div>
