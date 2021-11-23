@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import CrossIcon from "@bitcoin-design/bitcoin-icons/svg/outline/cross.svg";
 import Input from "../../../components/Form/Input";
@@ -33,11 +33,11 @@ export default function TestConnection() {
   const [faucetLoading, setFaucetLoading] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function handleEdit(event) {
     utils.call("removeAccount").then(() => {
-      history.goBack();
+      navigate(-1);
     });
   }
 
