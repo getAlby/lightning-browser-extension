@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { CogIcon } from "@heroicons/react/solid";
-import CrossIcon from "@bitcoin-design/bitcoin-icons/svg/outline/cross.svg";
+import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 
 import utils from "../../../common/lib/utils";
 
@@ -81,12 +81,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         <div className="p-5 flex justify-between">
           <h2 className="text-2xl font-bold">Edit Allowance</h2>
           <button onClick={closeModal}>
-            <img
-              className="w-6 h-6"
-              src={CrossIcon}
-              alt=""
-              aria-hidden="true"
-            />
+            <CrossIcon className="w-6 h-6" />
           </button>
         </div>
         <div className="p-5 border-t border-b border-gray-200">
