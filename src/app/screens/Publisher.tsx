@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
@@ -24,16 +24,17 @@ function Publisher() {
     percentage: "",
     id: "",
   });
-  const { id } = useParams<{ id: string }>();
-  const history = useHistory();
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   async function fetchData() {
     try {
-      const response = await utils.call("getAllowanceById", {
-        id: parseInt(id),
-      });
-      console.log(response);
-      setAllowance(response);
+      if (id) {
+        const response = await utils.call("getAllowanceById", {
+          id: parseInt(id),
+        });
+        setAllowance(response);
+      }
     } catch (e) {
       console.error(e);
     }
@@ -68,7 +69,7 @@ function Publisher() {
               fetchData();
             }}
             onDelete={() => {
-              history.replace("/publishers");
+              navigate("/publishers", { replace: true });
             }}
           />
         </div>

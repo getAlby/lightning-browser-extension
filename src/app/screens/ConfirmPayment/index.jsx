@@ -46,7 +46,7 @@ class ConfirmPayment extends React.Component {
   }
 
   setBudget(satoshi) {
-    this.setState({ budget: parseInt(satoshi) });
+    this.setState({ budget: parseInt(satoshi) || undefined });
   }
 
   saveBudget() {

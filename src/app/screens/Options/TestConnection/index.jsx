@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "../../../components/Button";
 import Card from "../../../components/Card";
 import utils from "../../../../common/lib/utils";
@@ -10,11 +10,11 @@ export default function TestConnection() {
   const [errorMessage, setErrorMessage] = useState();
   const [loading, setLoading] = useState(false);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function handleEdit(event) {
     utils.call("removeAccount").then(() => {
-      history.goBack();
+      navigate(-1);
     });
   }
 
