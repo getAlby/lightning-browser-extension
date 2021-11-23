@@ -1,4 +1,5 @@
 import "../src/app/styles/index.css";
+import "react-loading-skeleton/dist/skeleton.css";
 
 // Needed to make Storybook work with webextension-polyfill.
 if (!window.chrome) window.chrome = {};
