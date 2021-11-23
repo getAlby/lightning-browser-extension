@@ -44,7 +44,6 @@
     "@babel/runtime": "^7.15.4",
     "@bitcoin-design/bitcoin-icons-react": "^0.1.8",
     "@headlessui/react": "^1.4.2",
-    "@heroicons/react": "^1.0.5",
     "@tailwindcss/forms": "^0.3.4",
     "assert": "^2.0.0",
     "axios": "^0.24.0",

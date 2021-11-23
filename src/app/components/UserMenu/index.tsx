@@ -1,9 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { CogIcon, LockClosedIcon, TableIcon } from "@heroicons/react/solid";
-import { MenuIcon } from "@heroicons/react/outline";
 import {
+  GearIcon,
+  LockIcon,
+  MenuIcon,
   SendIcon,
+  TransactionsIcon,
   ReceiveIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 
@@ -39,7 +41,7 @@ export default function UserMenu() {
   return (
     <Menu as="div" className="relative">
       <Menu.Button className="flex items-center text-gray-500 hover:text-black transition-colors duration-200">
-        <MenuIcon className="h-6 w-6" aria-hidden="true" />
+        <MenuIcon className="h-6 w-6" />
       </Menu.Button>
       <Menu.List position="right">
         <Menu.ItemButton
@@ -47,10 +49,7 @@ export default function UserMenu() {
             openOptions("publishers");
           }}
         >
-          <TableIcon
-            className="h-5 w-5 mr-2 text-gray-500"
-            aria-hidden="true"
-          />
+          <TransactionsIcon className="h-5 w-5 mr-2 text-gray-500" />
           Allowances
         </Menu.ItemButton>
         <Menu.ItemButton
@@ -74,15 +73,12 @@ export default function UserMenu() {
             openOptions("settings");
           }}
         >
-          <CogIcon className="h-5 w-5 mr-2 text-gray-500" aria-hidden="true" />
+          <GearIcon className="h-5 w-5 mr-2 text-gray-500" />
           Settings
         </Menu.ItemButton>
         <Menu.Divider />
         <Menu.ItemButton onClick={lock}>
-          <LockClosedIcon
-            className="h-5 w-5 mr-2 text-gray-500"
-            aria-hidden="true"
-          />
+          <LockIcon className="h-5 w-5 mr-2 text-gray-500" />
           Lock
         </Menu.ItemButton>
       </Menu.List>

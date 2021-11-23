@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { QrcodeIcon } from "@heroicons/react/outline";
 import {
   CaretLeftIcon,
   CrossIcon,
+  QrCodeIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import utils from "../../common/lib/utils";
@@ -96,12 +96,7 @@ function Send() {
         headerRight={
           <IconButton
             onClick={() => setQrIsOpen(true)}
-            icon={
-              <QrcodeIcon
-                className="h-6 w-6 text-blue-500"
-                aria-hidden="true"
-              />
-            }
+            icon={<QrCodeIcon className="h-6 w-6 text-blue-500" />}
           />
         }
       />
