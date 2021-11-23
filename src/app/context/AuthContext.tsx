@@ -42,7 +42,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
       })
       .catch((e) => {
-        console.log(e);
         alert(`An unexpected error occurred (${e.message})`);
       })
       .finally(() => {
