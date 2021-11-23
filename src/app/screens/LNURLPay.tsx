@@ -45,7 +45,9 @@ function LNURLPay(props: Props) {
   );
   const [comment, setComment] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
+  const [successAction, setSuccessAction] = useState<
+    LNURLPaymentInfo["successAction"] | undefined
+  >();
 
   async function confirm() {
     try {
@@ -85,32 +87,21 @@ function LNURLPay(props: Props) {
 
       // Once payment is fulfilled LN WALLET executes a non-null successAction
       // LN WALLET should also store successAction data on the transaction record
-      let shouldCloseWindow = true;
       if (successAction && !payment.payment_error) {
         switch (successAction.tag) {
-          case "url": // TODO: For url, the wallet should give the user a popup which displays description, url, and a 'open' button to open the url in a new browser tab
-            if (
-              window.confirm(
-                `${successAction.description} \n\nDo you want to visit the following page?\n\n${successAction.url}`
-              )
-            ) {
-              utils.openUrl(successAction.url!);
-            }
-            break;
+          case "url":
           case "message":
-            shouldCloseWindow = false;
-            setSuccessMessage(successAction.message!);
+            setSuccessAction(successAction);
             break;
           case "aes": // TODO: For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage
           default:
             alert(
               `Not implemented yet. Please submit an issue to support success action: ${successAction.tag}`
             );
+            window.close();
             break;
         }
-      }
-
-      if (shouldCloseWindow) {
+      } else {
         window.close();
       }
     } catch (e) {
@@ -214,11 +205,59 @@ function LNURLPay(props: Props) {
     return elements;
   }
 
+  function renderSuccessAction() {
+    if (successAction) {
+      let descriptionList;
+      if (successAction.tag === "url") {
+        descriptionList = [
+          ["Description", successAction.description],
+          [
+            "Url",
+            <>
+              {successAction.url}
+              <div className="mt-4">
+                <Button
+                  onClick={() => utils.openUrl(successAction.url!)}
+                  label="Open"
+                  primary
+                />
+              </div>
+            </>,
+          ],
+        ];
+      } else if (successAction.tag === "message") {
+        descriptionList = [["Message", successAction.message]];
+      }
+
+      return (
+        <>
+          <dl className="shadow bg-white pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+            {descriptionList &&
+              descriptionList.map(([dt, dd]) => (
+                <>
+                  <dt className="text-sm font-semibold text-gray-500">{dt}</dt>
+                  <dd className="text-sm mb-4">{dd}</dd>
+                </>
+              ))}
+          </dl>
+          <div className="text-center">
+            <button
+              className="underline text-sm text-gray-500"
+              onClick={() => window.close()}
+            >
+              Close
+            </button>
+          </div>
+        </>
+      );
+    }
+  }
+
   return (
     <div>
       <PublisherCard title={origin.name} image={origin.icon} />
       <div className="p-6">
-        {!successMessage ? (
+        {!successAction ? (
           <>
             <dl className="shadow bg-white pt-4 px-4 rounded-lg mb-6 overflow-hidden">
               {elements().map(([t, d]) => (
@@ -254,22 +293,7 @@ function LNURLPay(props: Props) {
             </div>
           </>
         ) : (
-          <>
-            <dl className="shadow bg-white pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-              <dt className="text-sm font-semibold text-gray-500">
-                LNURL response:
-              </dt>
-              <dd className="text-sm mb-4">{successMessage}</dd>
-            </dl>
-            <div className="text-center">
-              <button
-                className="underline text-sm text-gray-500"
-                onClick={() => history.push("/home")}
-              >
-                Close
-              </button>
-            </div>
-          </>
+          renderSuccessAction()
         )}
       </div>
     </div>
