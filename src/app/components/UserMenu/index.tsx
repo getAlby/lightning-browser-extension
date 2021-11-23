@@ -2,8 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { CogIcon, LockClosedIcon, TableIcon } from "@heroicons/react/solid";
 import { MenuIcon } from "@heroicons/react/outline";
-import SendIcon from "@bitcoin-design/bitcoin-icons/svg/filled/send.svg";
-import ReceiveIcon from "@bitcoin-design/bitcoin-icons/svg/filled/receive.svg";
+import {
+  SendIcon,
+  ReceiveIcon,
+} from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import utils from "../../../common/lib/utils";
 import { useAuth } from "../../context/AuthContext";
@@ -56,12 +58,7 @@ export default function UserMenu() {
             navigate("/send");
           }}
         >
-          <img
-            className="w-6 h-6 -ml-0.5 mr-2 opacity-75"
-            src={SendIcon}
-            alt=""
-            aria-hidden="true"
-          />
+          <SendIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75" />
           Send
         </Menu.ItemButton>
         <Menu.ItemButton
@@ -69,12 +66,7 @@ export default function UserMenu() {
             navigate("/receive");
           }}
         >
-          <img
-            className="w-6 h-6 -ml-0.5 mr-2 opacity-75"
-            src={ReceiveIcon}
-            alt=""
-            aria-hidden="true"
-          />
+          <ReceiveIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75" />
           Receive
         </Menu.ItemButton>
         <Menu.ItemButton

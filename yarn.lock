@@ -1677,10 +1677,10 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bitcoin-design/bitcoin-icons@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@bitcoin-design/bitcoin-icons/-/bitcoin-icons-0.1.1.tgz#e3f87d91e5c1bf837ca00381466f2025988beb0b"
-  integrity sha512-uYECF3H7nchey3/Qg7cmPyRi4O6O5jZ7ZH9hBU3Q85iRd+XaBs4PzO4vSmHIya/+TIWYLhq6u5kKlKuiCYmtmQ==
+"@bitcoin-design/bitcoin-icons-react@^0.1.8":
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/@bitcoin-design/bitcoin-icons-react/-/bitcoin-icons-react-0.1.8.tgz#012d86668c75576e0cd48e11aebb6861697734fe"
+  integrity sha512-8fy+hIolvH0iOeO5E+K/hPJTEdY5r93y6jVpQ1pnUOI70AhVkLitZZ0lpmAW0Qqr9wmw3HMNb3To+un8LRGNTA==
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"

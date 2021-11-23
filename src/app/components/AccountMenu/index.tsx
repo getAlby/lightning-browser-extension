@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import WalletIcon from "@bitcoin-design/bitcoin-icons/svg/outline/wallet.svg";
+import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { ChevronDownIcon, PlusIcon } from "@heroicons/react/solid";
 
 import utils from "../../../common/lib/utils";
@@ -57,12 +57,7 @@ function AccountMenu({ onAccountSwitch }: Props) {
                 selectAccount(accountId);
               }}
             >
-              <img
-                className="w-6 h-6 -ml-0.5 mr-2 opacity-75"
-                src={WalletIcon}
-                alt=""
-                aria-hidden="true"
-              />
+              <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75" />
               {account.name}&nbsp;
               <Badge
                 label={account.connector}
