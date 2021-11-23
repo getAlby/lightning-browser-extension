@@ -147,7 +147,7 @@ function Home() {
         <div className="flex mb-6 space-x-4">
           <Button
             fullWidth
-            icon={<SendIcon />}
+            icon={<SendIcon className="w-6 h-6" />}
             label="Send"
             direction="column"
             onClick={() => {
