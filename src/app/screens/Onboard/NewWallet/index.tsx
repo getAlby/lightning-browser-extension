@@ -126,7 +126,7 @@ export default function NewWallet() {
           ) : (
             <div className="w-4/5">
               <div className="mt-6">
-                <strong>Remember, not your keys, not your coins.</strong>
+                <strong>Remember, not your keys, not your coins. </strong>
                 This quick setup uses a custodial service to manage your wallet.
               </div>
             </div>

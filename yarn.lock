@@ -1812,10 +1812,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@headlessui/react@^1.4.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.4.1.tgz#0a8dbb20e1d63dcea55bfc3ab1b87637aaac7777"
-  integrity sha512-gL6Ns5xQM57cZBzX6IVv6L7nsam8rDEpRhs5fg28SN64ikfmuuMgunc+Rw5C1cMScnvFM+cz32ueVrlSFEVlSg==
+"@headlessui/react@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.4.2.tgz#87e264f190dbebbf8dfdd900530da973dad24576"
+  integrity sha512-N8tv7kLhg9qGKBkVdtg572BvKvWhmiudmeEpOCyNwzOsZHCXBtl8AazGikIfUS+vBoub20Fse3BjawXDVPPdug==
 
 "@heroicons/react@^1.0.5":
   version "1.0.5"
@@ -13339,10 +13339,10 @@ react-loading-skeleton@^2.2.0:
   dependencies:
     "@emotion/core" "^10.0.22"
 
-react-modal@^3.14.3:
-  version "3.14.3"
-  resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-3.14.3.tgz#7eb7c5ec85523e5843e2d4737cc17fc3f6aeb1c0"
-  integrity sha512-+C2KODVKyu20zHXPJxfOOcf571L1u/EpFlH+oS/3YDn8rgVE51QZuxuuIwabJ8ZFnOEHaD+r6XNjqwtxZnXO0g==
+react-modal@^3.14.4:
+  version "3.14.4"
+  resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-3.14.4.tgz#2ca7e8e9a180955e5c9508c228b73167c1e6f6a3"
+  integrity sha512-8surmulejafYCH9wfUmFyj4UfbSJwjcgbS9gf3oOItu4Hwd6ivJyVBETI0yHRhpJKCLZMUtnhzk76wXTsNL6Qg==
   dependencies:
     exenv "^1.2.0"
     prop-types "^15.7.2"
@@ -16111,10 +16111,10 @@ webpack-sources@^3.2.0:
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-3.2.0.tgz#b16973bcf844ebcdb3afde32eda1c04d0b90f89d"
   integrity sha512-fahN08Et7P9trej8xz/Z7eRu8ltyiygEo/hnRi9KqBUs80KeDcnf96ZJo++ewWd84fEf3xSX9bp4ZS9hbw0OBw==
 
-webpack-sources@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-3.2.1.tgz#251a7d9720d75ada1469ca07dbb62f3641a05b6d"
-  integrity sha512-t6BMVLQ0AkjBOoRTZgqrWm7xbXMBzD+XDq2EZ96+vMfn3qKgsvdXZhbPZ4ElUOpdv4u+iiGe+w3+J75iy/bYGA==
+webpack-sources@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-3.2.2.tgz#d88e3741833efec57c4c789b6010db9977545260"
+  integrity sha512-cp5qdmHnu5T8wRg2G3vZZHoJPN14aqQ89SyQ11NpGH5zEMDCclt49rzo+MaRazk7/UeILhAI+/sEtcM+7Fr0nw==
 
 webpack-virtual-modules@^0.2.2:
   version "0.2.2"
