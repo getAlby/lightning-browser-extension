@@ -20,7 +20,6 @@ const unlock = (message, sender) => {
   // if everything is fine we keep the password in memory
   state.setState({ password });
 
-  console.log("account", account);
 
   return Promise.resolve({ data: { unlocked: true, currentAccountId } });
 };
