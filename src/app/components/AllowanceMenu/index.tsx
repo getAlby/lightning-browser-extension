@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-import { CogIcon } from "@heroicons/react/solid";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import utils from "../../../common/lib/utils";
 
@@ -44,7 +44,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
     <>
       <Menu as="div" className="relative">
         <Menu.Button className="flex items-center text-gray-500 hover:text-black transition-color duration-200">
-          <CogIcon className="h-6 w-6" aria-hidden="true" />
+          <GearIcon className="h-6 w-6" />
         </Menu.Button>
         <Menu.List position="right">
           <Menu.ItemButton onClick={openModal}>Edit</Menu.ItemButton>
