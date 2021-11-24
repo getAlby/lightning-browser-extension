@@ -5,6 +5,7 @@ import utils from "../../common/lib/utils";
 import { router } from "./router";
 import state from "./state";
 import db from "./db";
+import connectors from "./connectors";
 
 import * as events from "./events";
 
@@ -35,8 +36,8 @@ const updateIcon = async (tabId, changeInfo, tabInfo) => {
 
   // TODO: move to some config file
   const names = {
-    active: "satsymbol",
-    off: "satsymbol-black",
+    active: "alby_icon_yellow",
+    off: "alby_icon_sleeping",
   };
   let name;
   if (allowance) {
@@ -46,10 +47,10 @@ const updateIcon = async (tabId, changeInfo, tabInfo) => {
   }
   return browser.browserAction.setIcon({
     path: {
-      16: `assets/icons/${name}-16.png`,
-      32: `assets/icons/${name}-32.png`,
-      48: `assets/icons/${name}-48.png`,
-      128: `assets/icons/${name}-128.png`,
+      16: `assets/icons/${name}_16x16.png`,
+      32: `assets/icons/${name}_32x32.png`,
+      48: `assets/icons/${name}_48x48.png`,
+      128: `assets/icons/${name}_128x128.png`,
     },
     tabId: tabId,
   });
@@ -113,6 +114,16 @@ async function init() {
 
   // Notify the content script that the tab has been updated.
   browser.tabs.onUpdated.addListener(extractLightningData);
+
+  if (state.getState().settings.debug) {
+    console.log("Debug mode enabled, use window.debugAlby");
+    window.debugAlby = {
+      state,
+      db,
+      connectors,
+      router,
+    };
+  }
 }
 
 // The onInstalled event is fired directly after the code is loaded.

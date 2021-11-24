@@ -157,7 +157,7 @@ class LnBits extends Base {
     if (!res.ok) {
       const errBody = await res.json();
       console.log("errBody", errBody);
-      throw new Error(errBody.message);
+      throw new Error(errBody.detail);
     }
     let data = await res.json();
     if (defaultValues) {

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import Input from "../../../components/Form/Input";
 import Button from "../../../components/Button";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import utils from "../../../../common/lib/utils";
 
 export default function ConnectLnbits() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     adminkey: "",
-    url: "https://demo.lnbits.com",
+    url: "https://legend.lnbits.com",
   });
   const [loading, setLoading] = useState(false);
 
@@ -41,7 +41,7 @@ export default function ConnectLnbits() {
           await utils.call("selectAccount", {
             id: addResult.accountId,
           });
-          history.push("/test-connection");
+          navigate("/test-connection");
         }
       } else {
         console.log(validation);
@@ -104,7 +104,7 @@ export default function ConnectLnbits() {
               label="Back"
               onClick={(e) => {
                 e.preventDefault();
-                history.goBack();
+                navigate(-1);
                 return false;
               }}
             />

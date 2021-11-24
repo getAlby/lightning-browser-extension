@@ -1,15 +1,17 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CogIcon, LockClosedIcon, TableIcon } from "@heroicons/react/solid";
 import { MenuIcon } from "@heroicons/react/outline";
 import SendIcon from "@bitcoin-design/bitcoin-icons/svg/filled/send.svg";
 import ReceiveIcon from "@bitcoin-design/bitcoin-icons/svg/filled/receive.svg";
 
 import utils from "../../../common/lib/utils";
+import { useAuth } from "../../context/AuthContext";
 import Menu from "../Menu";
 
 export default function UserMenu() {
-  const history = useHistory();
+  const navigate = useNavigate();
+  const auth = useAuth();
 
   function openOptions(path: string) {
     // if we are in the popup
@@ -18,14 +20,15 @@ export default function UserMenu() {
       // close the popup
       window.close();
     } else {
-      history.push(`/${path}`);
+      navigate(`/${path}`);
     }
   }
 
   async function lock() {
     try {
-      await utils.call("lock");
-      window.close();
+      auth.lock(() => {
+        window.close();
+      });
     } catch (e) {
       console.error(e);
     }
@@ -50,7 +53,7 @@ export default function UserMenu() {
         </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
-            history.push("/send");
+            navigate("/send");
           }}
         >
           <img
@@ -63,7 +66,7 @@ export default function UserMenu() {
         </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
-            history.push("/receive");
+            navigate("/receive");
           }}
         >
           <img
