@@ -3,7 +3,7 @@ import { UploadIcon } from "@heroicons/react/outline";
 
 import Input from "../../../components/Form/Input";
 import Button from "../../../components/Button";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import utils from "../../../../common/lib/utils";
 
@@ -13,7 +13,7 @@ const initialFormData = Object.freeze({
 });
 
 export default function ConnectLnd() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
   const [isDragging, setDragging] = useState(false);
   const hiddenFileInput = useRef<HTMLInputElement>(null);
@@ -47,7 +47,7 @@ export default function ConnectLnd() {
           await utils.call("selectAccount", {
             id: addResult.accountId,
           });
-          history.push("/test-connection");
+          navigate("/test-connection");
         }
       } else {
         alert(`
@@ -184,7 +184,7 @@ export default function ConnectLnd() {
               label="Back"
               onClick={(e) => {
                 e.preventDefault();
-                history.goBack();
+                navigate(-1);
                 return false;
               }}
             />
@@ -202,7 +202,7 @@ export default function ConnectLnd() {
         <div className="lg:flex h-full justify-center items-center">
           <img
             src="assets/icons/satsymbol.svg"
-            alt="Sats"
+            alt="sat"
             className="max-w-xs"
           />
         </div>

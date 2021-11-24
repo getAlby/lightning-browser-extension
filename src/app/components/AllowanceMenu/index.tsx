@@ -20,7 +20,7 @@ type Props = {
 
 function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [budget, setBudget] = useState(0);
+  const [budget, setBudget] = useState<number | undefined>(0);
 
   function openModal() {
     setBudget(allowance.totalBudget);
@@ -100,16 +100,25 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             <CurrencyInput
               id="budget"
               name="budget"
-              placeholder="sats"
+              placeholder="sat"
               value={budget}
               onChange={(event) => {
-                setBudget(parseInt(event.target.value));
+                setBudget(
+                  !isNaN(event.target.valueAsNumber)
+                    ? event.target.valueAsNumber
+                    : undefined
+                );
               }}
             />
           </div>
         </div>
         <div className="flex justify-end p-5 dark:bg-gray-800">
-          <Button onClick={updateAllowance} label="Save" primary />
+          <Button
+            onClick={updateAllowance}
+            label="Save"
+            primary
+            disabled={budget === undefined}
+          />
         </div>
       </Modal>
     </>

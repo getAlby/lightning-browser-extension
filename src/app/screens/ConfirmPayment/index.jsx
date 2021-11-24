@@ -46,7 +46,7 @@ class ConfirmPayment extends React.Component {
   }
 
   setBudget(satoshi) {
-    this.setState({ budget: parseInt(satoshi) });
+    this.setState({ budget: parseInt(satoshi) || undefined });
   }
 
   saveBudget() {
@@ -115,7 +115,7 @@ class ConfirmPayment extends React.Component {
                 <CurrencyInput
                   id="budget"
                   name="budget"
-                  placeholder="sats"
+                  placeholder="sat"
                   value={this.state.budget}
                   onChange={(event) => {
                     this.setBudget(event.target.value);

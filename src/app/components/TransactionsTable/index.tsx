@@ -66,7 +66,7 @@ export default function TransactionsTable({ transactions }: Props) {
                       <div>
                         <p className="text-sm font-medium dark:text-white">
                           {tx.type === "sent" || "sending" ? "-" : "+"}
-                          {tx.totalAmount} sats
+                          {tx.totalAmount} sat
                         </p>
                         <p className="text-xs text-gray-400">{tx.date}</p>
                       </div>

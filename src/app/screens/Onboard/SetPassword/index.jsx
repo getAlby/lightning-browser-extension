@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "../../../components/Form/Input";
 import Button from "../../../components/Button";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import utils from "../../../../common/lib/utils";
 
 const initialFormData = Object.freeze({
@@ -15,7 +15,7 @@ const initialErrors = Object.freeze({
 });
 
 export default function SetPassword() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState(initialErrors);
 
@@ -40,7 +40,7 @@ export default function SetPassword() {
     event.preventDefault();
     try {
       await utils.call("setPassword", { password: formData.password });
-      history.push("/choose-connector");
+      navigate("/choose-connector");
     } catch (e) {
       console.log(e.message);
     }
@@ -133,7 +133,7 @@ export default function SetPassword() {
           <div className="lg:flex h-full justify-center items-center">
             <img
               src="assets/icons/satsymbol.svg"
-              alt="Sats"
+              alt="sat"
               className="max-w-xs"
             />
           </div>

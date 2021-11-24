@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "../../../components/Form/Input";
 import Button from "../../../components/Button";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";
 
 import utils from "../../../../common/lib/utils";
@@ -14,7 +14,7 @@ export default function NewWallet() {
     password: "",
   });
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function signup(event: React.MouseEvent<HTMLButtonElement>) {
     setLoading(true);
@@ -72,7 +72,7 @@ export default function NewWallet() {
           await utils.call("selectAccount", {
             id: addResult.accountId,
           });
-          history.push("/test-connection");
+          navigate("/test-connection");
         }
       } else {
         console.log({ validation });
@@ -138,7 +138,7 @@ export default function NewWallet() {
               label="Back"
               onClick={(e) => {
                 e.preventDefault();
-                history.goBack();
+                navigate(-1);
                 return false;
               }}
             />
@@ -154,7 +154,7 @@ export default function NewWallet() {
           <div className="lg:flex h-full justify-center items-center">
             <img
               src="assets/icons/satsymbol.svg"
-              alt="Sats"
+              alt="sat"
               className="max-w-xs"
             />
           </div>

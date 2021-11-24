@@ -5,6 +5,7 @@ import utils from "../../common/lib/utils";
 import { router } from "./router";
 import state from "./state";
 import db from "./db";
+import connectors from "./connectors";
 
 import * as events from "./events";
 
@@ -14,13 +15,12 @@ setInterval(() => {
 }, 5000);
 */
 
-const extractLightningDataFromPage = async (tabId, changeInfo, tabInfo) => {
-  if (changeInfo.status !== "complete" || !tabInfo.url?.startsWith("http")) {
-    return;
+const extractLightningData = (tabId, changeInfo, tab) => {
+  if (changeInfo.status === "complete" && tab.url?.startsWith("http")) {
+    browser.tabs.sendMessage(tabId, {
+      type: "extractLightningData",
+    });
   }
-  browser.tabs.executeScript(tabId, {
-    code: "if ((document.location.protocol === 'https:' || document.location.protocol === 'http:') && window.LBE_EXTRACT_LIGHTNING_DATA) { LBE_EXTRACT_LIGHTNING_DATA(); };",
-  });
 };
 
 const updateIcon = async (tabId, changeInfo, tabInfo) => {
@@ -36,8 +36,8 @@ const updateIcon = async (tabId, changeInfo, tabInfo) => {
 
   // TODO: move to some config file
   const names = {
-    active: "satsymbol",
-    off: "satsymbol-black",
+    active: "alby_icon_yellow",
+    off: "alby_icon_sleeping",
   };
   let name;
   if (allowance) {
@@ -47,10 +47,10 @@ const updateIcon = async (tabId, changeInfo, tabInfo) => {
   }
   return browser.browserAction.setIcon({
     path: {
-      16: `assets/icons/${name}-16.png`,
-      32: `assets/icons/${name}-32.png`,
-      48: `assets/icons/${name}-48.png`,
-      128: `assets/icons/${name}-128.png`,
+      16: `assets/icons/${name}_16x16.png`,
+      32: `assets/icons/${name}_32x32.png`,
+      48: `assets/icons/${name}_48x48.png`,
+      128: `assets/icons/${name}_128x128.png`,
     },
     tabId: tabId,
   });
@@ -110,9 +110,20 @@ async function init() {
   browser.runtime.onMessage.addListener(routeCalls);
 
   // TODO: make optional
-  browser.tabs.onUpdated.addListener(extractLightningDataFromPage); // extract LN data from websites
-
   browser.tabs.onUpdated.addListener(updateIcon); // update Icon when there is an allowance
+
+  // Notify the content script that the tab has been updated.
+  browser.tabs.onUpdated.addListener(extractLightningData);
+
+  if (state.getState().settings.debug) {
+    console.log("Debug mode enabled, use window.debugAlby");
+    window.debugAlby = {
+      state,
+      db,
+      connectors,
+      router,
+    };
+  }
 }
 
 // The onInstalled event is fired directly after the code is loaded.

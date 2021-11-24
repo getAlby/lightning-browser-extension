@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { createMemoryHistory } from "history";
-import { Switch, Route, Router } from "react-router-dom";
+import { MemoryRouter, Outlet, Route, Routes } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";
 
@@ -10,57 +9,38 @@ import Send from "../../screens/Send";
 import Receive from "../../screens/Receive";
 import LNURLPay from "../../screens/LNURLPay";
 
-import Loading from "../../components/Loading";
+import { AuthProvider } from "../../context/AuthContext";
+import RequireAuth from "../RequireAuth";
 import Navbar from "../../components/Navbar";
 
-class Popup extends React.Component {
-  constructor(props) {
-    super(props);
-    this.history = createMemoryHistory();
-  }
-
-  componentDidMount() {
-    utils
-      .call("status")
-      .then((response) => {
-        if (!response.configured) {
-          utils.openPage("welcome.html");
-          window.close();
-        } else if (response.unlocked) {
-          this.history.replace("/home");
-        } else {
-          this.history.replace("/unlock");
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
-
-  render() {
-    return (
-      <Router history={this.history}>
+function Popup() {
+  return (
+    <AuthProvider>
+      <MemoryRouter>
         <section id="popup">
-          <Switch>
-            <Route exact path="/">
-              <Loading />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <RequireAuth>
+                  <Layout />
+                </RequireAuth>
+              }
+            >
+              <Route index element={<Home />} />
+              <Route path="send" element={<Send />} />
+              <Route path="receive" element={<Receive />} />
+              <Route path="lnurlPay" element={<LNURLPay />} />
             </Route>
-            <Route exact path="/unlock">
-              <Unlock next="/home" />
-            </Route>
-
-            {/* TODO: these routes should not be accessible when locked. See: https://reactrouter.com/web/example/auth-workflow */}
-            <Route>
-              <Default />
-            </Route>
-          </Switch>
+            <Route path="unlock" element={<Unlock />} />
+          </Routes>
         </section>
-      </Router>
-    );
-  }
+      </MemoryRouter>
+    </AuthProvider>
+  );
 }
 
-const Default = () => {
+const Layout = () => {
   const [accountInfo, setAccountInfo] = useState({});
   const [key, setKey] = useState(Date.now());
 
@@ -69,6 +49,7 @@ const Default = () => {
   }, []);
 
   function getAccountInfo() {
+    setAccountInfo({});
     utils.call("accountInfo").then((response) => {
       const { alias } = response.info;
       const balance = parseInt(response.balance.balance); // TODO: handle amounts
@@ -82,26 +63,20 @@ const Default = () => {
         title={accountInfo.alias}
         subtitle={
           typeof accountInfo.balance === "number"
-            ? `${accountInfo.balance} Sats`
+            ? `${accountInfo.balance} sat`
             : ""
         }
         onAccountSwitch={() => {
           getAccountInfo();
+
+          // TODO: this should be done in an eloquent way. Maybe use context?
           setKey(Date.now()); // Refresh Home.
         }}
       />
-      <Route path="/home">
-        <Home key={key} />
-      </Route>
-      <Route path="/send">
-        <Send />
-      </Route>
-      <Route path="/receive">
-        <Receive />
-      </Route>
-      <Route path="/lnurlPay">
-        <LNURLPay />
-      </Route>
+
+      <React.Fragment key={key}>
+        <Outlet />
+      </React.Fragment>
     </div>
   );
 };

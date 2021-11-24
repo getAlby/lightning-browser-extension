@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import utils from "../../../../common/lib/utils";
 
@@ -8,7 +8,7 @@ import Button from "../../../components/Button";
 import QrcodeScanner from "../../../components/QrcodeScanner";
 
 export default function ConnectLndHub() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     uri: "",
   });
@@ -51,7 +51,7 @@ export default function ConnectLndHub() {
           await utils.call("selectAccount", {
             id: addResult.accountId,
           });
-          history.push("/test-connection");
+          navigate("/test-connection");
         }
       } else {
         console.log(validation);
@@ -74,9 +74,7 @@ export default function ConnectLndHub() {
     <form onSubmit={handleSubmit}>
       <div className="relative mt-24 lg:flex space-x-8">
         <div className="lg:w-1/2">
-          <h1 className="text-3xl font-bold dark:text-white">
-            Connect to LNDHub (BlueWallet)
-          </h1>
+          <h1 className="text-3xl font-bold dark:text-white">Connect to LNDHub (BlueWallet)</h1>
           <p className="text-gray-500 mt-6 dark:text-gray-400">
             In BlueWallet, choose the wallet you want to connect, open it, click
             on "...", click on Export/Backup to display the QR code and scan it
@@ -121,7 +119,7 @@ export default function ConnectLndHub() {
               label="Back"
               onClick={(e) => {
                 e.preventDefault();
-                history.goBack();
+                navigate(-1);
                 return false;
               }}
             />
@@ -138,7 +136,7 @@ export default function ConnectLndHub() {
           <div className="lg:flex h-full justify-center items-center">
             <img
               src="assets/icons/satsymbol.svg"
-              alt="Sats"
+              alt="sat"
               className="max-w-xs"
             />
           </div>

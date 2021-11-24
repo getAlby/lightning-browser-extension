@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import CrossIcon from "@bitcoin-design/bitcoin-icons/svg/outline/cross.svg";
 import Input from "../../../components/Form/Input";
@@ -33,11 +33,11 @@ export default function TestConnection() {
   const [faucetLoading, setFaucetLoading] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function handleEdit(event) {
     utils.call("removeAccount").then(() => {
-      history.goBack();
+      navigate(-1);
     });
   }
 
@@ -64,7 +64,7 @@ export default function TestConnection() {
           .then((response) => {
             if (response.data.ok) {
               loadAccountInfo();
-              alert(`We've sent you ${faucetAmount} Satoshi`);
+              alert(`We've sent you ${faucetAmount} sat`);
               setFaucetLoading(false);
               setShowFaucet(false);
             }
@@ -125,7 +125,7 @@ export default function TestConnection() {
         </div>
         <div className="p-5 border-t border-b border-gray-200">
           <p className="mb-2">
-            To get started we send {faucetAmount} Satoshi to your wallet.
+            To get started we send {faucetAmount} sat to your wallet.
             <br />
             Please provide your email. We will notify you of updates (don't
             worry, we also hate spam)
@@ -144,7 +144,7 @@ export default function TestConnection() {
           {faucetLoading ? (
             <Loading />
           ) : (
-            <Button onClick={claimSats} label="Get Sats" primary />
+            <Button onClick={claimSats} label="Get Satoshis" primary />
           )}
         </div>
       </Modal>
@@ -186,7 +186,7 @@ export default function TestConnection() {
                           setShowFaucet(true);
                         }}
                       >
-                        To get started we can send you some Sats...
+                        To get started we can send you some Satoshis...
                       </a>
                       {renderFaucet()}
                     </div>
@@ -199,7 +199,7 @@ export default function TestConnection() {
                     alias={accountInfo.alias}
                     satoshis={
                       typeof accountInfo.balance === "number"
-                        ? `${accountInfo.balance} Sats`
+                        ? `${accountInfo.balance} sat`
                         : ""
                     }
                   />

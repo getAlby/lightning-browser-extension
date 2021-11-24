@@ -1,5 +1,5 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import browser from "webextension-polyfill";
 import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -19,73 +19,55 @@ import Progressbar from "../../components/Progressbar";
 
 dayjs.extend(relativeTime);
 
-class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      allowance: null,
-      currency: "USD",
-      payments: {},
-      loadingPayments: true,
-      loadingSendSats: false,
-      lnData: [],
-    };
-  }
+function Home() {
+  const [allowance, setAllowance] = useState(null);
+  const [payments, setPayments] = useState({});
+  const [loadingPayments, setLoadingPayments] = useState(true);
+  const [loadingSendSats, setLoadingSendSats] = useState(false);
+  const [lnData, setLnData] = useState([]);
+  const navigate = useNavigate();
 
-  loadLightningDataFromCurrentWebsite() {
-    // Enhancement data is loaded asynchronously (for example because we need to fetch additional data).
-    // Sadly we can not get return values from async code through executeScript()
-    // To work around this we write the enhancement data into a variable in the content script and access that variable here.
-    // Due to the async execution the variable could potentially not yet be loaded
-    browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
-      const [currentTab] = tabs;
-      browser.tabs
-        .executeScript(currentTab.id, {
-          code: "window.LBE_LIGHTNING_DATA;",
-        })
-        .then((data) => {
-          // data is an array, see: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/executeScript#return_value
-          // we execute it only in the current Tab. Thus the array has only one entry
-          if (data[0]) {
-            this.setState({ lnData: data[0] });
-          }
-        });
-    });
-  }
-
-  loadAllowance = () => {
+  function loadAllowance() {
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
       const [currentTab] = tabs;
       const url = new URL(currentTab.url);
       utils.call("getAllowance", { host: url.host }).then((result) => {
         if (result.enabled) {
-          this.setState({ allowance: result });
+          setAllowance(result);
         }
       });
     });
-  };
+  }
 
-  loadPayments() {
+  function loadPayments() {
     utils.call("getPayments").then((result) => {
-      this.setState({
-        payments: result?.payments,
-        loadingPayments: false,
-      });
+      setPayments(result?.payments);
+      setLoadingPayments(false);
     });
   }
 
-  initialize() {
-    this.loadPayments();
-    this.loadAllowance();
+  function handleLightningDataMessage(response) {
+    if (response.type === "lightningData") {
+      setLnData(response.args);
+    }
   }
 
-  componentDidMount() {
-    this.initialize();
-    this.loadLightningDataFromCurrentWebsite();
-  }
+  useEffect(() => {
+    loadPayments();
+    loadAllowance();
 
-  renderAllowanceView() {
-    const { allowance } = this.state;
+    // Enhancement data is loaded asynchronously (for example because we need to fetch additional data).
+    browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+      browser.tabs.sendMessage(tabs[0].id, { type: "extractLightningData" });
+    });
+    browser.runtime.onMessage.addListener(handleLightningDataMessage);
+
+    return () => {
+      browser.runtime.onMessage.removeListener(handleLightningDataMessage);
+    };
+  }, []);
+
+  function renderAllowanceView() {
     return (
       <>
         <PublisherCard title={allowance.name} image={allowance.imageURL} />
@@ -113,9 +95,9 @@ class Home extends React.Component {
               )}
               <AllowanceMenu
                 allowance={allowance}
-                onEdit={this.loadAllowance}
+                onEdit={loadAllowance}
                 onDelete={() => {
-                  this.setState({ allowance: null });
+                  setAllowance(null);
                 }}
               />
             </div>
@@ -160,9 +142,7 @@ class Home extends React.Component {
     );
   }
 
-  renderDefaultView() {
-    const { payments } = this.state;
-    const { history } = this.props;
+  function renderDefaultView() {
     return (
       <div className="p-4">
         <div className="flex mb-6 space-x-4">
@@ -179,7 +159,7 @@ class Home extends React.Component {
             label="Send"
             direction="column"
             onClick={() => {
-              history.push("/send");
+              navigate("/send");
             }}
           />
           <Button
@@ -195,12 +175,12 @@ class Home extends React.Component {
             label="Receive"
             direction="column"
             onClick={() => {
-              history.push("/receive");
+              navigate("/receive");
             }}
           />
         </div>
 
-        {this.state.loadingPayments ? (
+        {loadingPayments ? (
           <div className="flex justify-center">
             <Loading />
           </div>
@@ -252,46 +232,43 @@ class Home extends React.Component {
     );
   }
 
-  render() {
-    const { allowance, lnData, loadingSendSats } = this.state;
-    const { history } = this.props;
-
-    return (
-      <div>
-        {!allowance && lnData.length > 0 && (
-          <PublisherCard title={lnData[0].name} image={lnData[0].icon}>
-            <Button
-              onClick={async () => {
-                try {
-                  this.setState({ loadingSendSats: true });
-                  const details = await lnurl.getDetails(lnData[0].recipient);
-                  const origin = {
-                    external: true,
-                    name: lnData[0].name,
-                    host: lnData[0].host,
-                    description: lnData[0].description,
-                    icon: lnData[0].icon,
-                  };
-                  history.push("/lnurlPay", {
+  return (
+    <div>
+      {!allowance && lnData.length > 0 && (
+        <PublisherCard title={lnData[0].name} image={lnData[0].icon}>
+          <Button
+            onClick={async () => {
+              try {
+                setLoadingSendSats(true);
+                const details = await lnurl.getDetails(lnData[0].recipient);
+                const origin = {
+                  external: true,
+                  name: lnData[0].name,
+                  host: lnData[0].host,
+                  description: lnData[0].description,
+                  icon: lnData[0].icon,
+                };
+                navigate("/lnurlPay", {
+                  state: {
                     details,
                     origin,
-                  });
-                } catch (e) {
-                  alert(e.message);
-                } finally {
-                  this.setState({ loadingSendSats: false });
-                }
-              }}
-              label="⚡️ Send Sats ⚡️"
-              primary
-              loading={loadingSendSats}
-            />
-          </PublisherCard>
-        )}
-        {allowance ? this.renderAllowanceView() : this.renderDefaultView()}
-      </div>
-    );
-  }
+                  },
+                });
+              } catch (e) {
+                alert(e.message);
+              } finally {
+                setLoadingSendSats(false);
+              }
+            }}
+            label="⚡️ Send Satoshis ⚡️"
+            primary
+            loading={loadingSendSats}
+          />
+        </PublisherCard>
+      )}
+      {allowance ? renderAllowanceView() : renderDefaultView()}
+    </div>
+  );
 }
 
-export default withRouter(Home);
+export default Home;

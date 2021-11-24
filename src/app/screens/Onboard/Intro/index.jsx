@@ -8,7 +8,7 @@ import {
   CodeIcon,
   KeyIcon,
 } from "@heroicons/react/outline";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const features = [
   {
@@ -37,7 +37,7 @@ const features = [
 ];
 
 export default function Intro() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -46,7 +46,7 @@ export default function Intro() {
           <div className="max-w-xs">
             <img
               src="assets/icons/satsymbol.svg"
-              alt="Sats"
+              alt="sat"
               className="max-w-xs"
             />
           </div>
@@ -60,7 +60,7 @@ export default function Intro() {
       </div>
       <div className="mt-8 float-right">
         <Button
-          onClick={() => history.push("/set-password")}
+          onClick={() => navigate("/set-password")}
           type="button"
           label="Get Started"
           primary

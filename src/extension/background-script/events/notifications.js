@@ -9,7 +9,7 @@ const paymentSuccessNotification = (message, data) => {
   const { total_amt } = route;
 
   return utils.notify({
-    title: `Paid ${total_amt} Satoshi to ${recipient}`,
+    title: `Paid ${total_amt} sat to ${recipient}`,
     message: `pre image: ${paymentResponse.data.preimage}`,
   });
 };
