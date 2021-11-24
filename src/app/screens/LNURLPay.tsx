@@ -206,51 +206,51 @@ function LNURLPay(props: Props) {
   }
 
   function renderSuccessAction() {
-    if (successAction) {
-      let descriptionList;
-      if (successAction.tag === "url") {
-        descriptionList = [
-          ["Description", successAction.description],
-          [
-            "Url",
-            <>
-              {successAction.url}
-              <div className="mt-4">
-                <Button
-                  onClick={() => utils.openUrl(successAction.url!)}
-                  label="Open"
-                  primary
-                />
-              </div>
-            </>,
-          ],
-        ];
-      } else if (successAction.tag === "message") {
-        descriptionList = [["Message", successAction.message]];
-      }
+    if (!successAction) return;
 
-      return (
-        <>
-          <dl className="shadow bg-white pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-            {descriptionList &&
-              descriptionList.map(([dt, dd]) => (
-                <>
-                  <dt className="text-sm font-semibold text-gray-500">{dt}</dt>
-                  <dd className="text-sm mb-4">{dd}</dd>
-                </>
-              ))}
-          </dl>
-          <div className="text-center">
-            <button
-              className="underline text-sm text-gray-500"
-              onClick={() => window.close()}
-            >
-              Close
-            </button>
-          </div>
-        </>
-      );
+    let descriptionList;
+    if (successAction.tag === "url") {
+      descriptionList = [
+        ["Description", successAction.description],
+        [
+          "Url",
+          <>
+            {successAction.url}
+            <div className="mt-4">
+              <Button
+                onClick={() => utils.openUrl(successAction.url!)}
+                label="Open"
+                primary
+              />
+            </div>
+          </>,
+        ],
+      ];
+    } else if (successAction.tag === "message") {
+      descriptionList = [["Message", successAction.message]];
     }
+
+    return (
+      <>
+        <dl className="shadow bg-white pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+          {descriptionList &&
+            descriptionList.map(([dt, dd]) => (
+              <>
+                <dt className="text-sm font-semibold text-gray-500">{dt}</dt>
+                <dd className="text-sm mb-4">{dd}</dd>
+              </>
+            ))}
+        </dl>
+        <div className="text-center">
+          <button
+            className="underline text-sm text-gray-500"
+            onClick={() => window.close()}
+          >
+            Close
+          </button>
+        </div>
+      </>
+    );
   }
 
   return (
