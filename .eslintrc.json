@@ -1,5 +1,12 @@
 {
-	"extends": ["plugin:@typescript-eslint/recommended", "plugin:react/recommended", "plugin:react-hooks/recommended", "plugin:react/jsx-runtime", "plugin:prettier/recommended"],
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:react/recommended",
+		"plugin:react-hooks/recommended",
+		"plugin:react/jsx-runtime",
+		"plugin:prettier/recommended"
+	],
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
 		"sourceType": "module",
@@ -17,5 +24,11 @@
     "react": {
       "version": "detect"
     }
-  }
+  },
+	"globals": {
+		"Buffer": true,
+		"expect": true,
+		"process": true,
+		"test": true
+	}
 }
