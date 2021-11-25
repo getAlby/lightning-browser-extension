@@ -1,5 +1,3 @@
-import * as React from "react";
-
 type Props = {
   title: string;
   headerLeft?: React.ReactNode;

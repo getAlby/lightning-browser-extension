@@ -1,5 +1,3 @@
-import * as React from "react";
-
 type Props = React.SelectHTMLAttributes<HTMLSelectElement> & {
   children: React.ReactNode;
 };

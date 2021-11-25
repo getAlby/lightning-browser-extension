@@ -1,5 +1,3 @@
-import * as React from "react";
-
 type Props = {
   icon: React.ReactNode;
   onClick: () => void;

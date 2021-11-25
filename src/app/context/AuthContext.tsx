@@ -1,5 +1,4 @@
-import { useState, useEffect, createContext } from "react";
-import * as React from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 import utils from "../../common/lib/utils";
 
 interface AuthContextType {
@@ -56,5 +55,5 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 }
 
 export function useAuth() {
-  return React.useContext(AuthContext);
+  return useContext(AuthContext);
 }
