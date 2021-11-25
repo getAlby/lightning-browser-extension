@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import WalletIcon from "@bitcoin-design/bitcoin-icons/svg/outline/wallet.svg";
 import { ChevronDownIcon, PlusIcon } from "@heroicons/react/solid";

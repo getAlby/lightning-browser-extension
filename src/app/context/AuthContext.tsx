@@ -1,4 +1,5 @@
-import React, { useState, useEffect, createContext } from "react";
+import { useState, useEffect, createContext } from "react";
+import * as React from "react";
 import utils from "../../common/lib/utils";
 
 interface AuthContextType {

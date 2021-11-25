@@ -1,4 +1,3 @@
-import React from "react";
 import { BellIcon, RssIcon } from "@heroicons/react/solid";
 
 import CategoriesTable from ".";

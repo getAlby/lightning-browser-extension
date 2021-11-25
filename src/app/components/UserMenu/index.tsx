@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { CogIcon, LockClosedIcon, TableIcon } from "@heroicons/react/solid";
 import { MenuIcon } from "@heroicons/react/outline";

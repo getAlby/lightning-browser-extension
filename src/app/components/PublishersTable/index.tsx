@@ -1,4 +1,3 @@
-import React from "react";
 import { ChevronRightIcon } from "@heroicons/react/solid";
 
 import Badge from "../Badge";

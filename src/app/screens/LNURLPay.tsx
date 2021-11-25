@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from "react";
+import { useState, MouseEvent } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -178,11 +178,11 @@ function LNURLPay(props: Props) {
           if (type === "text/plain") {
             return ["Description", content];
           } else if (type === "text/long-desc") {
-            return ["Full Description", <p>{content}</p>];
+            return ["Full Description", <p key={type}>{content}</p>];
           } else if (["image/png;base64", "image/jpeg;base64"].includes(type)) {
             return [
               "lnurl",
-              <img src={`data:${type},${content}`} alt="lnurl" />,
+              <img key={type} src={`data:${type},${content}`} alt="lnurl" />,
             ];
           }
           return undefined;
@@ -195,7 +195,7 @@ function LNURLPay(props: Props) {
   }
 
   function elements() {
-    let elements = [];
+    const elements = [];
     elements.push(["Send payment to", details.domain]);
     elements.push(...formattedMetadata());
     elements.push(["Amount (Satoshi)", renderAmount()]);

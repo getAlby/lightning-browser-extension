@@ -43,7 +43,7 @@ const lnurl = {
     return Boolean(fromInternetIdentifier(address));
   },
   findLnurl(text: string) {
-    let stringToText = text.trim();
+    const stringToText = text.trim();
     let match;
 
     // look for a LNURL with protocol scheme

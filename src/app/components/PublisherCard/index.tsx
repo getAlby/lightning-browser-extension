@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { usePalette } from "react-palette";
 import { ExternalLinkIcon } from "@heroicons/react/solid";
 

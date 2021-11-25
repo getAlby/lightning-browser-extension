@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import CaretLeftIcon from "@bitcoin-design/bitcoin-icons/svg/filled/caret-left.svg";
 import { QrcodeIcon } from "@heroicons/react/outline";

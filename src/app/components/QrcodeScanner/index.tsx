@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { QrcodeIcon } from "@heroicons/react/outline";
 import { Html5Qrcode, Html5QrcodeScannerState } from "html5-qrcode";
 

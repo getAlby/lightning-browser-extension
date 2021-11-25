@@ -1,4 +1,5 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
+import * as React from "react";
 import { Menu, Transition } from "@headlessui/react";
 
 type Props = {

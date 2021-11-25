@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
+import * as React from "react";
 import { UploadIcon } from "@heroicons/react/outline";
 
 import Input from "../../../components/Form/Input";

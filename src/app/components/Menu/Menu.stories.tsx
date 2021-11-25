@@ -1,4 +1,3 @@
-import React from "react";
 import { PencilIcon } from "@heroicons/react/solid";
 
 import Menu from ".";

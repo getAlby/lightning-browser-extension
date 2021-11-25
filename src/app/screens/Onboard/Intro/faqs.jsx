@@ -1,4 +1,3 @@
-import React from "react";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import { Disclosure } from "@headlessui/react";
 import { classNames } from "../../../utils/index";

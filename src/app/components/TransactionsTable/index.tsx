@@ -1,4 +1,3 @@
-import React from "react";
 import { PlusIcon, MinusIcon } from "@heroicons/react/solid";
 import { Disclosure } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";

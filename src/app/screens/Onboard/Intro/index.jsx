@@ -1,4 +1,3 @@
-import React from "react";
 import Features from "./features";
 import Button from "../../../components/Button";
 import {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { MemoryRouter, Outlet, Route, Routes } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";
@@ -74,9 +74,9 @@ const Layout = () => {
         }}
       />
 
-      <React.Fragment key={key}>
+      <Fragment key={key}>
         <Outlet />
-      </React.Fragment>
+      </Fragment>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Modal from "react-modal";
 import { CogIcon } from "@heroicons/react/solid";
 import CrossIcon from "@bitcoin-design/bitcoin-icons/svg/outline/cross.svg";

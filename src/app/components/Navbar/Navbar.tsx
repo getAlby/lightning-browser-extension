@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import Skeleton from "react-loading-skeleton";
 import WalletIcon from "@bitcoin-design/bitcoin-icons/svg/outline/wallet.svg";
 

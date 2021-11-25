@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import * as React from "react";
 import Input from "../../../components/Form/Input";
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
