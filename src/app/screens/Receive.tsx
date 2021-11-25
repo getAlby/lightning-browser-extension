@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import CaretLeftIcon from "@bitcoin-design/bitcoin-icons/svg/filled/caret-left.svg";
-import CopyIcon from "@bitcoin-design/bitcoin-icons/svg/outline/copy.svg";
+import { useNavigate } from "react-router-dom";
+import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import QRCode from "react-qr-code";
 
 import utils from "../../common/lib/utils";
@@ -13,7 +13,7 @@ import Input from "../components/Form/Input";
 import Header from "../components/Header";
 
 function Receive() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     amount: "",
     description: "",
@@ -71,14 +71,7 @@ function Receive() {
                 }
               }
             }}
-            icon={
-              <img
-                className="w-6 h-6"
-                src={CopyIcon}
-                alt=""
-                aria-hidden="true"
-              />
-            }
+            icon={<CopyIcon className="w-6 h-6" />}
             label={copyLabel}
           />
         </div>
@@ -92,15 +85,8 @@ function Receive() {
         title="Receive"
         headerLeft={
           <IconButton
-            onClick={() => history.push("/home")}
-            icon={
-              <img
-                className="w-4 h-4"
-                src={CaretLeftIcon}
-                alt=""
-                aria-hidden="true"
-              />
-            }
+            onClick={() => navigate("/")}
+            icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
       />
@@ -186,7 +172,7 @@ function Receive() {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  history.push("/home");
+                  navigate("/");
                 }}
               >
                 Cancel

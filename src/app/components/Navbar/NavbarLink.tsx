@@ -3,17 +3,19 @@ import { NavLink } from "react-router-dom";
 
 type Props = {
   children: React.ReactNode;
-  exact?: boolean;
+  end?: boolean;
   href: string;
 };
 
-function NavbarLink({ children, exact = false, href }: Props) {
+function NavbarLink({ children, end = false, href }: Props) {
   return (
     <NavLink
-      exact={exact}
+      end={end}
       to={href}
-      className="block text-gray-500 hover:text-gray-700 px-1 font-semibold transition-colors duration-200"
-      activeClassName="text-orange-bitcoin hover:text-orange-bitcoin"
+      className={({ isActive }) =>
+        "block text-gray-500 hover:text-gray-700 px-1 font-semibold transition-colors duration-200" +
+        (isActive ? " text-orange-bitcoin hover:text-orange-bitcoin" : "")
+      }
     >
       {children}
     </NavLink>

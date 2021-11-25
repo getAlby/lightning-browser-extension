@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import WalletIcon from "@bitcoin-design/bitcoin-icons/svg/outline/wallet.svg";
-import { ChevronDownIcon, PlusIcon } from "@heroicons/react/solid";
+import { useNavigate } from "react-router-dom";
+import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import {
+  CaretDownIcon,
+  PlusIcon,
+} from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import utils from "../../../common/lib/utils";
 
@@ -13,7 +16,7 @@ type Props = {
 };
 
 function AccountMenu({ onAccountSwitch }: Props) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [accounts, setAccounts] = useState<{
     [key: string]: { name: "string"; connector: "string" };
   }>({});
@@ -38,14 +41,14 @@ function AccountMenu({ onAccountSwitch }: Props) {
       // close the popup
       window.close();
     } else {
-      history.push(`/${path}`);
+      navigate(`/${path}`);
     }
   }
 
   return (
     <Menu as="div">
       <Menu.Button className="h-full px-2 rounded-r-md hover:bg-gray-200 transition-colors duration-200">
-        <ChevronDownIcon className="h-4 w-4" aria-hidden="true" />
+        <CaretDownIcon className="h-4 w-4" />
       </Menu.Button>
       <Menu.List position="left">
         <Menu.Subheader>Switch account</Menu.Subheader>
@@ -57,12 +60,7 @@ function AccountMenu({ onAccountSwitch }: Props) {
                 selectAccount(accountId);
               }}
             >
-              <img
-                className="w-6 h-6 -ml-0.5 mr-2 opacity-75"
-                src={WalletIcon}
-                alt=""
-                aria-hidden="true"
-              />
+              <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75" />
               {account.name}&nbsp;
               <Badge
                 label={account.connector}
@@ -78,7 +76,7 @@ function AccountMenu({ onAccountSwitch }: Props) {
             openOptions("accounts/new");
           }}
         >
-          <PlusIcon className="h-5 w-5 mr-2 text-gray-500" aria-hidden="true" />
+          <PlusIcon className="h-5 w-5 mr-2 text-gray-500" />
           Add a new account
         </Menu.ItemButton>
       </Menu.List>

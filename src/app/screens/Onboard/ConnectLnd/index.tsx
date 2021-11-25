@@ -1,9 +1,9 @@
 import React, { useState, useRef } from "react";
-import { UploadIcon } from "@heroicons/react/outline";
+import { SendIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import Input from "../../../components/Form/Input";
 import Button from "../../../components/Button";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import utils from "../../../../common/lib/utils";
 
@@ -13,7 +13,7 @@ const initialFormData = Object.freeze({
 });
 
 export default function ConnectLnd() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
   const [isDragging, setDragging] = useState(false);
   const hiddenFileInput = useRef<HTMLInputElement>(null);
@@ -47,7 +47,7 @@ export default function ConnectLnd() {
           await utils.call("selectAccount", {
             id: addResult.accountId,
           });
-          history.push("/test-connection");
+          navigate("/test-connection");
         }
       } else {
         alert(`
@@ -152,10 +152,7 @@ export default function ConnectLnd() {
                   if (hiddenFileInput?.current) hiddenFileInput.current.click();
                 }}
               >
-                <UploadIcon
-                  className="mb-3 h-9 w-9 text-blue-500"
-                  aria-hidden="true"
-                />
+                <SendIcon className="mb-3 h-9 w-9 text-blue-500" />
                 <p>
                   Drag and drop your macaroon here or{" "}
                   <span className="underline">browse</span>
@@ -180,7 +177,7 @@ export default function ConnectLnd() {
               label="Back"
               onClick={(e) => {
                 e.preventDefault();
-                history.goBack();
+                navigate(-1);
                 return false;
               }}
             />

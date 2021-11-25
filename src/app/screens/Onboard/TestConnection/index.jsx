@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
-import CrossIcon from "@bitcoin-design/bitcoin-icons/svg/outline/cross.svg";
+import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Input from "../../../components/Form/Input";
 import Button from "../../../components/Button";
 import Card from "../../../components/Card";
@@ -33,11 +33,11 @@ export default function TestConnection() {
   const [faucetLoading, setFaucetLoading] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function handleEdit(event) {
     utils.call("removeAccount").then(() => {
-      history.goBack();
+      navigate(-1);
     });
   }
 
@@ -115,12 +115,7 @@ export default function TestConnection() {
         <div className="p-5 flex justify-between">
           <h2 className="text-2xl font-bold">Get some Satoshi</h2>
           <button onClick={closeFaucet}>
-            <img
-              className="w-6 h-6"
-              src={CrossIcon}
-              alt=""
-              aria-hidden="true"
-            />
+            <CrossIcon className="w-6 h-6" />
           </button>
         </div>
         <div className="p-5 border-t border-b border-gray-200">

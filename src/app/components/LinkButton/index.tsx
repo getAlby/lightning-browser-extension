@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ChevronRightIcon } from "@heroicons/react/outline";
+import { CaretRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 type Props = {
   to: string;
@@ -18,7 +18,7 @@ export default function LinkButton({ to, title, description }: Props) {
             <span className="text-sm text-gray-500">{description}</span>
           )}
         </div>
-        <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+        <CaretRightIcon className="h-5 w-5" />
       </div>
     </Link>
   );

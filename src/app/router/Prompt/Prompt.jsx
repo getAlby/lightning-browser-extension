@@ -1,13 +1,12 @@
 import React from "react";
 import qs from "query-string";
-import { createHashHistory } from "history";
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { parsePaymentRequest } from "invoices";
 
-import utils from "../../../common/lib/utils";
+import { AuthProvider } from "../../context/AuthContext";
+import RequireAuth from "../RequireAuth";
 import Unlock from "../../screens/Unlock";
 import Enable from "../../screens/Enable";
-import Loading from "../../components/Loading";
 import ConfirmPayment from "../../screens/ConfirmPayment";
 import LNURLPay from "../../screens/LNURLPay";
 import LNURLAuth from "../../screens/LNURLAuth";
@@ -15,7 +14,6 @@ import LNURLAuth from "../../screens/LNURLAuth";
 class Prompt extends React.Component {
   constructor(props) {
     super(props);
-    this.history = createHashHistory();
     const message = qs.parse(window.location.search);
     let origin = {};
     let args = {};
@@ -32,58 +30,60 @@ class Prompt extends React.Component {
     this.state = { origin, args, invoice, type: message.type };
   }
 
-  componentDidMount() {
-    utils.call("isUnlocked").then((response) => {
-      if (response.unlocked) {
-        this.history.replace(`${this.state.type}`);
-      } else {
-        this.history.replace("/unlock");
-      }
-    });
-  }
-
   render() {
     return (
-      <HashRouter>
-        <section id="prompt">
-          <Switch>
-            <Route exact path="/" render={(props) => <Loading />} />
+      <AuthProvider>
+        <HashRouter>
+          <Routes>
             <Route
-              exact
-              path="/unlock"
-              render={(props) => <Unlock next={`/${this.state.type}`} />}
-            />
-            <Route
-              exact
-              path="/enable"
-              render={(props) => <Enable origin={this.state.origin} />}
-            />
-            <Route exact path="/lnurlPay">
-              <LNURLPay
-                details={this.state.args?.lnurlDetails}
-                origin={this.state.origin}
+              path="/"
+              element={
+                <RequireAuth>
+                  <Outlet />
+                </RequireAuth>
+              }
+            >
+              <Route
+                index
+                element={<Navigate to={`/${this.state.type}`} replace />}
+              />
+              <Route
+                path="enable"
+                element={<Enable origin={this.state.origin} />}
+              />
+              <Route
+                path="lnurlPay"
+                element={
+                  <LNURLPay
+                    details={this.state.args?.lnurlDetails}
+                    origin={this.state.origin}
+                  />
+                }
+              />
+              <Route
+                path="lnurlAuth"
+                element={
+                  <LNURLAuth
+                    details={this.state.args?.lnurlDetails}
+                    origin={this.state.origin}
+                  />
+                }
+              />
+              <Route
+                path="confirmPayment"
+                element={
+                  <ConfirmPayment
+                    invoice={this.state.invoice}
+                    paymentRequest={this.state.args?.paymentRequest}
+                    origin={this.state.origin}
+                  />
+                }
               />
             </Route>
-            <Route exact path="/lnurlAuth">
-              <LNURLAuth
-                details={this.state.args?.lnurlDetails}
-                origin={this.state.origin}
-              />
-            </Route>
-            <Route
-              exact
-              path="/confirmPayment"
-              render={(props) => (
-                <ConfirmPayment
-                  invoice={this.state.invoice}
-                  paymentRequest={this.state.args?.paymentRequest}
-                  origin={this.state.origin}
-                />
-              )}
-            />
-          </Switch>
-        </section>
-      </HashRouter>
+            <Route path="unlock" element={<Unlock />} />
+          </Routes>
+        </HashRouter>
+      </AuthProvider>
     );
   }
 }
