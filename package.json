@@ -103,7 +103,7 @@
     "@types/sha.js": "^2.4.0",
     "@types/webextension-polyfill": "^0.8.1",
     "@typescript-eslint/eslint-plugin": "^4.32.0",
-    "@typescript-eslint/parser": "^4.33.0",
+    "@typescript-eslint/parser": "^5.4.0",
     "autoprefixer": "^10.3.6",
     "babel-eslint": "^10.0.0",
     "babel-jest": "^27.2.4",
