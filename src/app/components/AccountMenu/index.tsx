@@ -53,6 +53,7 @@ function AccountMenu({ onAccountSwitch }: Props) {
           const account = accounts[accountId];
           return (
             <Menu.ItemButton
+              key={accountId}
               onClick={() => {
                 selectAccount(accountId);
               }}
