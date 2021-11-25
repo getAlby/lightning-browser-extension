@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";

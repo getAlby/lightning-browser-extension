@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Modal from "react-modal";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";

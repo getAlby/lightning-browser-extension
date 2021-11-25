@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { UnlockIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 

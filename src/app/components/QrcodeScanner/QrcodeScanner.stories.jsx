@@ -1,5 +1,3 @@
-import React from "react";
-
 import QrcodeScanner from ".";
 
 export const Default = () => (

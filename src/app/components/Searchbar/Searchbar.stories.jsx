@@ -1,5 +1,3 @@
-import React from "react";
-
 import Searchbar from ".";
 
 export const Primary = () => <Searchbar />;

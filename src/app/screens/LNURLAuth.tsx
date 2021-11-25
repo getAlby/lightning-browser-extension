@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from "react";
+import { useState, MouseEvent } from "react";
 
 import msg from "../../common/lib/msg";
 import utils from "../../common/lib/utils";

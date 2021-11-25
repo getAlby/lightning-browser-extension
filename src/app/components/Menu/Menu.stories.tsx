@@ -1,4 +1,3 @@
-import React from "react";
 import { EditIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import Menu from ".";

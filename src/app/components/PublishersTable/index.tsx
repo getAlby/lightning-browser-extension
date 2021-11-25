@@ -1,4 +1,3 @@
-import React from "react";
 import { CaretRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import Badge from "../Badge";

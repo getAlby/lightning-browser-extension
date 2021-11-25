@@ -1,5 +1,3 @@
-import React from "react";
-
 import AllowanceMenu from ".";
 
 export const Default = () => (

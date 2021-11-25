@@ -1,4 +1,3 @@
-import React from "react";
 import { BellIcon, SofaIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import CategoriesTable from ".";

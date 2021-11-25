@@ -1,4 +1,4 @@
-import React from "react";
+import { Component } from "react";
 import qs from "query-string";
 import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { parsePaymentRequest } from "invoices";
@@ -11,7 +11,7 @@ import ConfirmPayment from "../../screens/ConfirmPayment";
 import LNURLPay from "../../screens/LNURLPay";
 import LNURLAuth from "../../screens/LNURLAuth";
 
-class Prompt extends React.Component {
+class Prompt extends Component {
   constructor(props) {
     super(props);
     const message = qs.parse(window.location.search);

@@ -1,5 +1,3 @@
-import React from "react";
-
 import Radio from ".";
 
 export const Primary = () => (

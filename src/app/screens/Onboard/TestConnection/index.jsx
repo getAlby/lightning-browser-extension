@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
@@ -122,7 +122,7 @@ export default function TestConnection() {
           <p className="mb-2">
             To get started we send {faucetAmount} sat to your wallet.
             <br />
-            Please provide your email. We will notify you of updates (don't
+            Please provide your email. We will notify you of updates (don&apos;t
             worry, we also hate spam)
           </p>
           <div className="w-60">
@@ -163,12 +163,12 @@ export default function TestConnection() {
               <div>
                 <h1 className="text-3xl font-bold">Success! 🎉</h1>
                 <p className="text-gray-500 mt-6">
-                  Awesome, you're ready to go!
+                  Awesome, you&apos;re ready to go!
                 </p>
                 <div>
                   {faucetURL && accountInfo.balance === 0 && (
                     <div className="text-gray-500">
-                      You're wallet is currently empty. &nbsp;
+                      You&apos;re wallet is currently empty. &nbsp;
                       <a
                         href="#"
                         className="underline"

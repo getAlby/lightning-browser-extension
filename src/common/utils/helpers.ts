@@ -16,7 +16,7 @@ export const getFiatFromSatoshi = async (currency: string, satoshi: number) => {
       sell: number;
     };
   }>("https://blockchain.info/ticker");
-  let exchangeRate: number = res?.data[currency ?? "USD"]?.sell;
+  const exchangeRate: number = res?.data[currency ?? "USD"]?.sell;
   const amount = Math.round((satoshi / 100000000) * exchangeRate);
   return amount;
 };
@@ -31,7 +31,7 @@ export const calcFiatFromSatoshi = (rate: string, s: string) => {
 
 export const sortByFieldAscending = (data: [], field: string) => {
   return data.sort((a, b) => {
-    let da = a[field],
+    const da = a[field],
       db = b[field];
     return db - da;
   });
@@ -39,7 +39,7 @@ export const sortByFieldAscending = (data: [], field: string) => {
 
 export const sortByFieldDescending = (data: [], field: string) => {
   return data.sort((a, b) => {
-    let da = a[field],
+    const da = a[field],
       db = b[field];
     return da - db;
   });

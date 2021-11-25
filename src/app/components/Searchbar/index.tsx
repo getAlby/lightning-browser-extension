@@ -1,4 +1,3 @@
-import React from "react";
 import { SearchIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 export default function Searchbar() {

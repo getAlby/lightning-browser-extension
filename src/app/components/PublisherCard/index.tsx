@@ -1,4 +1,3 @@
-import React from "react";
 import { usePalette } from "react-palette";
 import { LinkIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 

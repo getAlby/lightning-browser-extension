@@ -1,4 +1,3 @@
-import React from "react";
 import {
   PlusIcon,
   MinusIcon,
@@ -38,11 +37,11 @@ export default function TransactionsTable({ transactions }: Props) {
     <div className="shadow overflow-hidden rounded-lg">
       <div className="bg-white divide-y divide-gray-200">
         {transactions.map((tx) => (
-          <div className="px-3 py-2">
+          <div key={tx.id} className="px-3 py-2">
             <Disclosure>
               {({ open }) => (
                 <>
-                  <div key={tx.id} className="flex">
+                  <div className="flex">
                     <div className="flex items-center flex-shrink-0 mr-3">
                       {tx.type && renderIcon(tx.type)}
                     </div>
@@ -56,8 +55,9 @@ export default function TransactionsTable({ transactions }: Props) {
                     </div>
                     {tx.badges && (
                       <div className="ml-6 space-x-3">
-                        {tx.badges.map((badge) => (
+                        {tx.badges.map((badge, i) => (
                           <Badge
+                            key={badge.label}
                             label={badge.label}
                             color={badge.color}
                             textColor={badge.textColor}
@@ -68,7 +68,7 @@ export default function TransactionsTable({ transactions }: Props) {
                     <div className="flex ml-auto text-right space-x-3 flex-shrink-0">
                       <div>
                         <p className="text-sm font-medium">
-                          {tx.type === "sent" || "sending" ? "-" : "+"}
+                          {["sent", "sending"].includes(tx.type) ? "-" : "+"}
                           {tx.totalAmount} sat
                         </p>
                         <p className="text-xs text-gray-400">{tx.date}</p>

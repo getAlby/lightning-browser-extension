@@ -1,4 +1,3 @@
-import React from "react";
 import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import Header from ".";

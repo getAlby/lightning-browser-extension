@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import {
@@ -56,6 +56,7 @@ function AccountMenu({ onAccountSwitch }: Props) {
           const account = accounts[accountId];
           return (
             <Menu.ItemButton
+              key={accountId}
               onClick={() => {
                 selectAccount(accountId);
               }}

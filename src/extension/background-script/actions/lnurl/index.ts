@@ -84,7 +84,7 @@ async function auth(message: Message, lnurlDetails: LNURLDetails) {
   loginURL.searchParams.set("key", signer.pkHex);
   loginURL.searchParams.set("t", Date.now().toString());
   try {
-    let authResponse = await axios.get<{ status: string; reason?: string }>(
+    const authResponse = await axios.get<{ status: string; reason?: string }>(
       loginURL.toString()
     );
     return authResponse;

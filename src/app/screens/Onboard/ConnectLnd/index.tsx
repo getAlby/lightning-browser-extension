@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { SendIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import Input from "../../../components/Form/Input";
