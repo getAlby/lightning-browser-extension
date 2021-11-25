@@ -1913,10 +1913,10 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bitcoin-design/bitcoin-icons@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@bitcoin-design/bitcoin-icons/-/bitcoin-icons-0.1.1.tgz#e3f87d91e5c1bf837ca00381466f2025988beb0b"
-  integrity sha512-uYECF3H7nchey3/Qg7cmPyRi4O6O5jZ7ZH9hBU3Q85iRd+XaBs4PzO4vSmHIya/+TIWYLhq6u5kKlKuiCYmtmQ==
+"@bitcoin-design/bitcoin-icons-react@^0.1.8":
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/@bitcoin-design/bitcoin-icons-react/-/bitcoin-icons-react-0.1.8.tgz#012d86668c75576e0cd48e11aebb6861697734fe"
+  integrity sha512-8fy+hIolvH0iOeO5E+K/hPJTEdY5r93y6jVpQ1pnUOI70AhVkLitZZ0lpmAW0Qqr9wmw3HMNb3To+un8LRGNTA==
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
@@ -2052,11 +2052,6 @@
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.4.2.tgz#87e264f190dbebbf8dfdd900530da973dad24576"
   integrity sha512-N8tv7kLhg9qGKBkVdtg572BvKvWhmiudmeEpOCyNwzOsZHCXBtl8AazGikIfUS+vBoub20Fse3BjawXDVPPdug==
-
-"@heroicons/react@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-1.0.5.tgz#2fe4df9d33eb6ce6d5178a0f862e97b61c01e27d"
-  integrity sha512-UDMyLM2KavIu2vlWfMspapw9yii7aoLwzI2Hudx4fyoPwfKfxU8r3cL8dEBXOjcLG0/oOONZzbT14M1HoNtEcg==
 
 "@humanwhocodes/config-array@^0.6.0":
   version "0.6.0"
@@ -13567,10 +13562,10 @@ react-popper@^2.2.4:
     react-fast-compare "^3.0.1"
     warning "^4.0.2"
 
-react-qr-code@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/react-qr-code/-/react-qr-code-2.0.2.tgz#64107c869079aceb897c97496d163720ab2820e8"
-  integrity sha512-73VGe81MgeE5FJNFgdY42ez/wPPJTHuooU3iE4CX+6F8M88O1Gg4zNA0L4bKEpoySQ0QjqreJgyXjFrG/QfsdA==
+react-qr-code@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-qr-code/-/react-qr-code-2.0.3.tgz#cc80785e08f817d1ab066ca4035262f77d049648"
+  integrity sha512-6GDH0l53lksf2JgZwwcoS0D60a1OAal/GQRyNFkMBW19HjSqvtD5S20scmSQsKl+BgWM85Wd5DCcUYoHd+PZnQ==
   dependencies:
     prop-types "^15.7.2"
     qr.js "0.0.0"

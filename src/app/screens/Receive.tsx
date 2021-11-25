@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CaretLeftIcon from "@bitcoin-design/bitcoin-icons/svg/filled/caret-left.svg";
-import CopyIcon from "@bitcoin-design/bitcoin-icons/svg/outline/copy.svg";
+import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import QRCode from "react-qr-code";
 
 import utils from "../../common/lib/utils";
@@ -71,14 +71,7 @@ function Receive() {
                 }
               }
             }}
-            icon={
-              <img
-                className="w-6 h-6"
-                src={CopyIcon}
-                alt=""
-                aria-hidden="true"
-              />
-            }
+            icon={<CopyIcon className="w-6 h-6" />}
             label={copyLabel}
           />
         </div>
@@ -93,14 +86,7 @@ function Receive() {
         headerLeft={
           <IconButton
             onClick={() => navigate("/")}
-            icon={
-              <img
-                className="w-4 h-4"
-                src={CaretLeftIcon}
-                alt=""
-                aria-hidden="true"
-              />
-            }
+            icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
       />

@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import browser from "webextension-polyfill";
 import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-
-import SendIcon from "@bitcoin-design/bitcoin-icons/svg/filled/send.svg";
-import ReceiveIcon from "@bitcoin-design/bitcoin-icons/svg/filled/receive.svg";
+import {
+  SendIcon,
+  ReceiveIcon,
+} from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import utils from "../../../common/lib/utils";
 import lnurl from "../../../common/lib/lnurl";
@@ -146,14 +147,7 @@ function Home() {
         <div className="flex mb-6 space-x-4">
           <Button
             fullWidth
-            icon={
-              <img
-                className="w-6 h-6"
-                src={SendIcon}
-                alt=""
-                aria-hidden="true"
-              />
-            }
+            icon={<SendIcon className="w-6 h-6" />}
             label="Send"
             direction="column"
             onClick={() => {
@@ -162,14 +156,7 @@ function Home() {
           />
           <Button
             fullWidth
-            icon={
-              <img
-                className="w-6 h-6"
-                src={ReceiveIcon}
-                alt=""
-                aria-hidden="true"
-              />
-            }
+            icon={<ReceiveIcon className="w-6 h-6" />}
             label="Receive"
             direction="column"
             onClick={() => {

@@ -1,4 +1,4 @@
-import { PencilIcon } from "@heroicons/react/solid";
+import { EditIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import Menu from ".";
 import Badge from "../Badge";
@@ -11,7 +11,7 @@ export const Default = () => (
     <Menu.List>
       <Menu.Subheader>Actions</Menu.Subheader>
       <Menu.ItemButton onClick={() => alert("Edit")}>
-        <PencilIcon className="h-5 w-5 mr-2 text-gray-500" aria-hidden="true" />
+        <EditIcon className="h-5 w-5 mr-2 text-gray-500" />
         Edit
       </Menu.ItemButton>
       <Menu.ItemButton onClick={() => alert("Copy")}>

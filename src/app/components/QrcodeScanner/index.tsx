@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { QrcodeIcon } from "@heroicons/react/outline";
+import { QrCodeIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Html5Qrcode, Html5QrcodeScannerState } from "html5-qrcode";
 
 import Button from "../Button";
@@ -116,7 +116,7 @@ function QrcodeScanner({
 
       {!isScanning && (
         <>
-          <QrcodeIcon className="h-24 w-24 text-blue-500" aria-hidden="true" />
+          <QrCodeIcon className="h-24 w-24 text-blue-500" />
           <div className="my-6">
             <Button
               label="Start scanning"

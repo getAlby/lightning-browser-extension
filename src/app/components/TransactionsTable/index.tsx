@@ -1,6 +1,9 @@
-import { PlusIcon, MinusIcon } from "@heroicons/react/solid";
+import {
+  PlusIcon,
+  MinusIcon,
+  CaretDownIcon,
+} from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Disclosure } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/solid";
 
 import { Transaction } from "../../../types";
 
@@ -16,10 +19,10 @@ export default function TransactionsTable({ transactions }: Props) {
       const iconClasses = "h-3 w-3";
       switch (type) {
         case "received":
-          return <PlusIcon className={iconClasses} aria-hidden="true" />;
+          return <PlusIcon className={iconClasses} />;
         case "sent":
         case "sending":
-          return <MinusIcon className={iconClasses} aria-hidden="true" />;
+          return <MinusIcon className={iconClasses} />;
       }
     }
 
@@ -71,7 +74,7 @@ export default function TransactionsTable({ transactions }: Props) {
                         <p className="text-xs text-gray-400">{tx.date}</p>
                       </div>
                       <Disclosure.Button className="block h-0 mt-2 text-gray-500 hover:text-black transition-color duration-200">
-                        <ChevronDownIcon
+                        <CaretDownIcon
                           className={`${
                             open ? "transform rotate-180" : ""
                           } w-5 h-5`}

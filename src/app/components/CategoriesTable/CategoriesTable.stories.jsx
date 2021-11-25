@@ -1,4 +1,4 @@
-import { BellIcon, RssIcon } from "@heroicons/react/solid";
+import { BellIcon, SofaIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import CategoriesTable from ".";
 
@@ -12,7 +12,7 @@ let categories = [
     color: "red-bitcoin",
   },
   {
-    icon: RssIcon,
+    icon: SofaIcon,
     name: "Entertainment",
     transactionsCount: 10,
     percentage: 10,

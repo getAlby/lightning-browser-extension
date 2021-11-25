@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { LockOpenIcon } from "@heroicons/react/solid";
+import { UnlockIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import utils from "../../../common/lib/utils";
 import { useAuth } from "../../context/AuthContext";
@@ -41,10 +41,7 @@ function Unlock() {
 
   return (
     <div className="p-8 text-center">
-      <LockOpenIcon
-        className="inline mb-4 h-16 w-16 text-blue-500"
-        aria-hidden="true"
-      />
+      <UnlockIcon className="inline mb-4 h-16 w-16 text-blue-500" />
       <h2 className="text-2xl font-bold mb-4">Unlock:</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">

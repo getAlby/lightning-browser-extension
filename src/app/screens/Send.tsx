@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CaretLeftIcon from "@bitcoin-design/bitcoin-icons/svg/filled/caret-left.svg";
-import { QrcodeIcon } from "@heroicons/react/outline";
-import CrossIcon from "@bitcoin-design/bitcoin-icons/svg/filled/cross.svg";
+import {
+  CaretLeftIcon,
+  CrossIcon,
+  QrCodeIcon,
+} from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import utils from "../../common/lib/utils";
 import getOriginData from "../../extension/content-script/originData";
@@ -61,14 +63,7 @@ function Send() {
           headerRight={
             <IconButton
               onClick={() => setQrIsOpen(false)}
-              icon={
-                <img
-                  className="w-4 h-4"
-                  src={CrossIcon}
-                  alt=""
-                  aria-hidden="true"
-                />
-              }
+              icon={<CrossIcon className="w-4 h-4" />}
             />
           }
         />
@@ -95,25 +90,13 @@ function Send() {
         headerLeft={
           <IconButton
             onClick={() => navigate("/")}
-            icon={
-              <img
-                className="w-4 h-4"
-                src={CaretLeftIcon}
-                alt=""
-                aria-hidden="true"
-              />
-            }
+            icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
         headerRight={
           <IconButton
             onClick={() => setQrIsOpen(true)}
-            icon={
-              <QrcodeIcon
-                className="h-6 w-6 text-blue-500"
-                aria-hidden="true"
-              />
-            }
+            icon={<QrCodeIcon className="h-6 w-6 text-blue-500" />}
           />
         }
       />

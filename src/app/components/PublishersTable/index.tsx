@@ -1,4 +1,4 @@
-import { ChevronRightIcon } from "@heroicons/react/solid";
+import { CaretRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import Badge from "../Badge";
 import Progressbar from "../Progressbar";
@@ -94,10 +94,7 @@ export default function PublishersTable({
                 )}
               </td>
               <td className="w-10">
-                <ChevronRightIcon
-                  className="h-6 w-6 text-gray-500"
-                  aria-hidden="true"
-                />
+                <CaretRightIcon className="h-6 w-6 text-gray-500" />
               </td>
             </tr>
           ))}
