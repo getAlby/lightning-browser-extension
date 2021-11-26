@@ -1,5 +1,3 @@
-import React from "react";
-
 function CurrencyInput({
   id,
   name,
@@ -13,7 +11,7 @@ function CurrencyInput({
         <span className="text-gray-500 sm:text-sm">$</span>
       </div> */}
       <input
-        type="text"
+        type="number"
         name={name}
         id={id}
         className="focus:ring-orange-bitcoin focus:border-orange-bitcoin block w-full px-3 sm:text-sm border-gray-300 rounded-md"

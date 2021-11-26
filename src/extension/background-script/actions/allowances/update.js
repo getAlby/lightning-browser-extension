@@ -5,11 +5,11 @@ const updateAllowance = async (message, sender) => {
 
   console.log(message.args);
   const update = {};
-  if (message.args.hasOwnProperty("totalBudget")) {
+  if (Object.prototype.hasOwnProperty.call(message.args, "totalBudget")) {
     update.totalBudget = parseInt(message.args.totalBudget);
     update.remainingBudget = parseInt(message.args.totalBudget);
   }
-  if (message.args.hasOwnProperty("enabled")) {
+  if (Object.prototype.hasOwnProperty.call(message.args, "enabled")) {
     update.enabled = message.args.enabled;
   }
 

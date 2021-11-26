@@ -6,7 +6,7 @@ import { Battery } from "../../../types";
 const urlMatcher = /^https:\/\/www\.youtube.com\/(channel|c)\/([^/]+).*/;
 
 const battery = (): Promise<[Battery] | void> => {
-  let match = document.location.toString().match(urlMatcher);
+  const match = document.location.toString().match(urlMatcher);
   if (!match) {
     return Promise.resolve();
   }

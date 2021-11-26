@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Features({ features }) {
   return (
     <div className="space-y-10 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10">

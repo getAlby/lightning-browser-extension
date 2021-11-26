@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Input from "../../../components/Form/Input";
 import Button from "../../../components/Button";
-import { useHistory } from "react-router-dom";
 
 import utils from "../../../../common/lib/utils";
 
 const url = process.env.GALOY_URL || "https://api.staging.galoy.io/graphql/";
 
 export default function ConnectGaloy() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [smsCode, setSmsCode] = useState<string | undefined>();
@@ -111,7 +111,7 @@ export default function ConnectGaloy() {
           await utils.call("selectAccount", {
             id: addResult.accountId,
           });
-          history.push("/test-connection");
+          navigate("/test-connection");
         }
       } else {
         alert(`Connection failed (${validation.error})`);
@@ -168,7 +168,7 @@ export default function ConnectGaloy() {
             label="Back"
             onClick={(e) => {
               e.preventDefault();
-              history.goBack();
+              navigate(-1);
               return false;
             }}
           />

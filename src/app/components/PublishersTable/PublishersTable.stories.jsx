@@ -1,5 +1,3 @@
-import React from "react";
-
 import PublishersTable from ".";
 
 const publishers = [
