@@ -7,12 +7,10 @@ import Button from "../../../components/Button";
 import utils from "../../../../common/lib/utils";
 
 const url = process.env.GALOY_URL || "https://api.staging.galoy.io/graphql/";
-const requestConfig = {
-  headers: {
-    Accept: "application/json",
-    "Access-Control-Allow-Origin": "*",
-    "Content-Type": "application/json",
-  },
+const defaultHeaders = {
+  Accept: "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Content-Type": "application/json",
 };
 
 export default function ConnectGaloy() {
@@ -53,8 +51,12 @@ export default function ConnectGaloy() {
     };
 
     try {
-      const { data } = await axios.post<any>(url, query, requestConfig);
-      console.log(data.data);
+      const { data } = await axios.post<any>(url, query, {
+        headers: defaultHeaders,
+      });
+      if (data.data.userRequestAuthCode.errors.length > 0) {
+        alert(data.data.userRequestAuthCode.errors[0].message);
+      }
       setSmsCodeRequested(data.data.userRequestAuthCode.success);
     } catch (e: unknown) {
       console.error(e);
@@ -68,7 +70,7 @@ export default function ConnectGaloy() {
 
   async function requestAuthToken(event: React.MouseEvent<HTMLButtonElement>) {
     setLoading(true);
-    const query = {
+    const authQuery = {
       query: `
         mutation userLogin($input: UserLoginInput!) {
           userLogin(input: $input) {
@@ -86,27 +88,58 @@ export default function ConnectGaloy() {
         },
       },
     };
+    const meQuery = {
+      query: `
+          query getinfo {
+            me {
+                id
+                username
+                defaultAccount {
+                  wallets {
+                    id
+                }
+              }
+            }
+          }
+        `,
+    };
     try {
-      const { data } = await axios.post<any>(url, query, requestConfig);
-      saveAccount(data.data.userLogin.authToken);
+      const authResponse = await axios.post<any>(url, authQuery, {
+        headers: defaultHeaders,
+      });
+      if (authResponse.data.data.userLogin.errors.length > 0) {
+        throw new Error(authResponse.data.data.userLogin.errors[0].message);
+      }
+      const authToken = authResponse.data.data.userLogin.authToken as string;
+      const meResponse = await axios.post<any>(url, meQuery, {
+        headers: {
+          ...defaultHeaders,
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+      const walletId = meResponse.data.data.me.defaultAccount.wallets[0]
+        .id as string;
+
+      saveAccount({ authToken, walletId });
     } catch (e: unknown) {
       console.error(e);
       if (e instanceof Error) {
-        alert(`Setup failed (${e.message})`);
+        alert(`Setup failed: ${e.message}`);
       }
     } finally {
       setLoading(false);
     }
   }
 
-  async function saveAccount(authToken: string) {
+  async function saveAccount(config: { authToken: string; walletId: string }) {
     setLoading(true);
 
     const account = {
       name: "Galoy",
       config: {
         url,
-        accessToken: authToken,
+        accessToken: config.authToken,
+        walletId: config.walletId,
       },
       connector: "galoy",
     };
@@ -161,7 +194,7 @@ export default function ConnectGaloy() {
           {smsCodeRequested && (
             <div className="mt-6">
               <label htmlFor="url" className="block font-medium text-gray-700">
-                Enter the SMS Code
+                Enter your SMS verifcation code
               </label>
               <div className="mt-1">
                 <Input

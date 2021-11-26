@@ -69,6 +69,7 @@ export default class Galoy extends Base {
       `,
       variables: {
         input: {
+          walletId: this.config.walletId,
           paymentRequest: args.paymentRequest,
           memo: "Sent via Alby",
         },
@@ -122,6 +123,7 @@ export default class Galoy extends Base {
             `,
       variables: {
         input: {
+          walletId: this.config.walletId,
           amount: args.amount,
           memo: args.memo,
         },
