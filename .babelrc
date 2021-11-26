@@ -30,5 +30,12 @@
         "regenerator": true
       }
     ]
-  ]
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        ["@babel/preset-env", { "modules": "auto" }]
+      ]
+    }
+  }
 }
