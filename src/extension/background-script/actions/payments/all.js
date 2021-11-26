@@ -1,6 +1,6 @@
 import db from "../../db";
 
-const all = async (message, sender) => {
+const all = async () => {
   // TODO load transactions from the node and merge it
   // with the payments data stored locally
   let payments = await db.payments.toCollection().reverse().sortBy("createdAt");

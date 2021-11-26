@@ -1,6 +1,6 @@
 import state from "../../state";
 
-const getInfo = async (message, sender) => {
+const getInfo = async () => {
   const connector = state.getState().getConnector();
   const info = await connector.getInfo();
 

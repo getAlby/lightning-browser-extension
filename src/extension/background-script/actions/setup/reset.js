@@ -1,6 +1,6 @@
 import state from "../../state";
 
-const reset = async (message, sender) => {
+const reset = async () => {
   state.setState({
     settings: { debug: true },
     accounts: {},

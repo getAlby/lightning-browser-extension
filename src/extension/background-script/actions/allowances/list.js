@@ -1,6 +1,6 @@
 import db from "../../db";
 
-const list = async (message, sender) => {
+const list = async () => {
   // TODO add filter and ordering?
   let allowances = await db.allowances
     .toCollection()

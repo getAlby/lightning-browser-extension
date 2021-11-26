@@ -1,6 +1,6 @@
 import state from "../../state";
 
-const status = (message, sender) => {
+const status = () => {
   const unlocked = state.getState().password !== null;
   const account = state.getState().getAccount();
   const currentAccountId = state.getState().currentAccountId;

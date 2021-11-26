@@ -7,7 +7,7 @@ import makeInvoice from "./makeInvoice";
 import verifyMessage from "./verifyMessage";
 
 const connectorCall = (method) => {
-  return (message, sender) => {
+  return (message) => {
     console.log(`Lightning call: ${message.type}`);
     const connector = state.getState().getConnector();
 

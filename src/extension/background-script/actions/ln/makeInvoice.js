@@ -1,7 +1,7 @@
 import PubSub from "pubsub-js";
 import state from "../../state";
 
-const makeInvoice = async (message, sender) => {
+const makeInvoice = async (message) => {
   if (message.args.memo === undefined) {
     message.args.memo = "Alby invoice memo";
   }
