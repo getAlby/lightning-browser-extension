@@ -23,10 +23,11 @@ export default class Galoy extends Base {
         }
       `,
     };
-    return this.request("POST", "", query, {}).then((data) => {
+    return this.request(query).then((data) => {
+      const alias = (data.data.me.username || data.data.me.id).substr(0, 10);
       return {
         data: {
-          alias: data.data.me.username,
+          alias,
         },
       };
     });
@@ -48,7 +49,7 @@ export default class Galoy extends Base {
         }
       `,
     };
-    return this.request("POST", "", query, {}).then((data) => {
+    return this.request(query).then((data) => {
       return {
         data: {
           balance: data.data.me.defaultAccount.wallets[0].balance,
@@ -78,7 +79,7 @@ export default class Galoy extends Base {
       request: args.paymentRequest,
     });
 
-    return this.request("POST", "", query, {}).then((data) => {
+    return this.request(query).then((data) => {
       if (data.data.lnInvoicePaymentSend.errors?.message) {
         return { error: data.data.lnInvoicePaymentSend.errors?.message };
       }
@@ -93,50 +94,15 @@ export default class Galoy extends Base {
   }
 
   signMessage(args) {
-    // make sure we got the config to create a new key
-    if (!this.config.url || !this.config.login || !this.config.password) {
-      return Promise.reject(new Error("Missing config"));
-    }
-    if (!args.message) {
-      return Promise.reject(new Error("Invalid message"));
-    }
-    const message = utils.stringToUint8Array(args.message);
-    // create a signing key from the lndhub URL and the login/password combination
-    const keyHex = sha256(
-      `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
-    ).toString(Hex);
-    if (!keyHex) {
-      return Promise.reject(new Error("Could not create key"));
-    }
-    const signer = new HashKeySigner(keyHex);
-    const signedMessageDERHex = signer.sign(message).toDER("hex");
-    // make sure we got some signed message
-    if (!signedMessageDERHex) {
-      return Promise.reject(new Error("Signing failed"));
-    }
-    return Promise.resolve({
-      data: {
-        signature: signedMessageDERHex,
-      },
-    });
+    return Promise.reject(new Error("Not yet supported with Galoy."));
   }
 
   verifyMessage(args) {
-    // create a signing key from the lndhub URL and the login/password combination
-    const keyHex = sha256(
-      `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
-    ).toString(Hex);
-    if (!keyHex) {
-      return Promise.reject(new Error("Could not create key"));
-    }
-    const signer = new HashKeySigner(keyHex);
-    return Promise.resolve({
-      data: {
-        valid: signer.verify(args.message, args.signature),
-      },
-    });
+    return Promise.reject(new Error("Not yet supported with Galoy."));
   }
 
+  // TODO: walletId is required here
+  // error:  message: "Variable \"$input\" got invalid value { amount: 200, memo: \"test\" }; Field \"walletId\" of required type \"WalletId!\" was not provided.", code: "BAD_USER_INPUT", locations: […]
   makeInvoice(args) {
     const query = {
       query: `
@@ -161,7 +127,7 @@ export default class Galoy extends Base {
         },
       },
     };
-    return this.request("POST", "", query, {}).then((data) => {
+    return this.request(query).then((data) => {
       return {
         data: {
           paymentRequest: data.data.lnInvoiceCreate.invoice.paymentRequest,
@@ -171,52 +137,27 @@ export default class Galoy extends Base {
     });
   }
 
-  async request(method, path, args, defaultValues) {
-    if (!this.accessToken) {
-      this.accessToken = this.config.accessToken;
-    }
-
+  async request(query) {
     const reqConfig = {
-      method: method,
-      url: this.config.url + path,
+      method: "POST",
+      url: this.config.url,
       responseType: "json",
       headers: {
         Accept: "application/json",
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.accessToken}`,
+        Authorization: `Bearer ${this.config.accessToken}`,
       },
     };
-    if (method === "POST") {
-      reqConfig.data = args;
-    } else if (args !== undefined) {
-      reqConfig.params = args;
-    }
+    reqConfig.data = query;
     let data;
     try {
       const res = await axios(reqConfig);
       data = res.data;
     } catch (e) {
-      console.log(e);
+      console.error(e);
       throw new Error(e.message);
     }
-    // if (data && data.error) {
-    //   if (data.code * 1 === 1 && !this.noRetry) {
-    //     try {
-    //       await this.authorize();
-    //     } catch (e) {
-    //       console.log(e);
-    //       throw new Error(e.message);
-    //     }
-    //     this.noRetry = true;
-    //     return this.request(method, path, args, defaultValues);
-    //   } else {
-    //     throw new Error(data.message);
-    //   }
-    // }
-    // if (defaultValues) {
-    //   data = Object.assign(Object.assign({}, defaultValues), data);
-    // }
     return data;
   }
 }

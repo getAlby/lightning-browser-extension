@@ -7,14 +7,21 @@ import Button from "../../../components/Button";
 import utils from "../../../../common/lib/utils";
 
 const url = process.env.GALOY_URL || "https://api.staging.galoy.io/graphql/";
+const requestConfig = {
+  headers: {
+    Accept: "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
+  },
+};
 
 export default function ConnectGaloy() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [smsCode, setSmsCode] = useState<string | undefined>();
-  const [SmsCodeRequested, setSmsCodeRequested] = useState<
-    string | undefined
+  const [smsCodeRequested, setSmsCodeRequested] = useState<
+    boolean | undefined
   >();
 
   function handlePhoneNumberChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -27,7 +34,6 @@ export default function ConnectGaloy() {
 
   async function requestSmsCode(event: React.MouseEvent<HTMLButtonElement>) {
     setLoading(true);
-    const url = "https://api.staging.galoy.io/graphql/";
     const query = {
       query: `
         mutation userRequestAuthCode($input: UserRequestAuthCodeInput!) {
@@ -45,22 +51,23 @@ export default function ConnectGaloy() {
         },
       },
     };
-    const config = {
-      headers: {
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-    };
-    const { data } = await axios.post<any>(url, query, config);
-    console.log(data);
-    setSmsCodeRequested(data.data.userRequestAuthCode.success);
-    setLoading(false);
+
+    try {
+      const { data } = await axios.post<any>(url, query, requestConfig);
+      console.log(data.data);
+      setSmsCodeRequested(data.data.userRequestAuthCode.success);
+    } catch (e: unknown) {
+      console.error(e);
+      if (e instanceof Error) {
+        alert(`Failed to request a SMS code: ${e.message}`);
+      }
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function requestAuthToken(event: React.MouseEvent<HTMLButtonElement>) {
     setLoading(true);
-    const url = "https://api.staging.galoy.io/graphql/";
     const query = {
       query: `
         mutation userLogin($input: UserLoginInput!) {
@@ -79,16 +86,17 @@ export default function ConnectGaloy() {
         },
       },
     };
-    const config = {
-      headers: {
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-    };
-    const { data } = await axios.post<any>(url, query, config);
-    setLoading(false);
-    saveAccount(data.data.userLogin.authToken);
+    try {
+      const { data } = await axios.post<any>(url, query, requestConfig);
+      saveAccount(data.data.userLogin.authToken);
+    } catch (e: unknown) {
+      console.error(e);
+      if (e instanceof Error) {
+        alert(`Setup failed (${e.message})`);
+      }
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function saveAccount(authToken: string) {
@@ -144,24 +152,27 @@ export default function ConnectGaloy() {
                 name="phone"
                 type="tel"
                 required
+                placeholder="+503"
+                disabled={smsCodeRequested}
                 onChange={handlePhoneNumberChange}
               />
             </div>
           </div>
-
-          <div className="mt-6">
-            <label htmlFor="url" className="block font-medium text-gray-700">
-              Enter the SMS Code
-            </label>
-            <div className="mt-1">
-              <Input
-                name="2fa"
-                type="text"
-                required
-                onChange={handleSmsCodeChange}
-              />
+          {smsCodeRequested && (
+            <div className="mt-6">
+              <label htmlFor="url" className="block font-medium text-gray-700">
+                Enter the SMS Code
+              </label>
+              <div className="mt-1">
+                <Input
+                  name="2fa"
+                  type="text"
+                  required
+                  onChange={handleSmsCodeChange}
+                />
+              </div>
             </div>
-          </div>
+          )}
         </div>
         <div className="mt-8 flex space-x-4">
           <Button
@@ -173,12 +184,12 @@ export default function ConnectGaloy() {
             }}
           />
           <Button
-            label={SmsCodeRequested || smsCode ? "Login" : "Request SMS Code"}
+            label={smsCodeRequested || smsCode ? "Login" : "Request SMS Code"}
             primary
             loading={loading}
             disabled={!phoneNumber}
             onClick={
-              SmsCodeRequested || smsCode ? requestAuthToken : requestSmsCode
+              smsCodeRequested || smsCode ? requestAuthToken : requestSmsCode
             }
           />
         </div>

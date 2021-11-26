@@ -13,6 +13,7 @@ import LnBits from "./lnbits";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: implicitly has 'any' type error
 import Galoy from "./galoy";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: implicitly has 'any' type error
 import Base from "./base";
 
