@@ -79,9 +79,6 @@
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/plugin-proposal-class-properties": "^7.16.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.16.0",
-    "@babel/plugin-transform-destructuring": "^7.16.0",
-    "@babel/plugin-transform-modules-commonjs": "^7.16.0",
     "@babel/plugin-transform-runtime": "^7.16.4",
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-react": "^7.16.0",
@@ -116,7 +113,6 @@
     "css-minimizer-webpack-plugin": "^3.2.0",
     "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-flowtype": "^8.0.3",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.27.1",
@@ -142,7 +138,6 @@
     "typescript": "^4.5.2",
     "webpack": "^5.64.4",
     "webpack-cli": "^4.9.1",
-    "webpack-extension-reloader": "^1.1.4",
     "wext-manifest-loader": "^2.3.0",
     "wext-manifest-webpack-plugin": "^1.2.1"
   }
