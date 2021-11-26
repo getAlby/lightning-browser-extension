@@ -7,11 +7,8 @@ import state from "./state";
 import db from "./db";
 import connectors from "./connectors";
 
-import connectors from "./connectors";
-
 import * as events from "./events";
 
-window.connectors = connectors;
 /* debug help to check the current state
 setInterval(() => {
   console.log(state.getState());
@@ -102,7 +99,6 @@ async function init() {
 
   //await browser.storage.sync.set({ settings: { debug: true }, allowances: [] });
   await state.getState().init();
-  window.state = state;
   console.log("State loaded");
   await db.open();
 
