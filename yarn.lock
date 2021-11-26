@@ -3956,16 +3956,7 @@
     "@types/source-list-map" "*"
     source-map "^0.7.3"
 
-"@types/webpack-sources@^0.1.5":
-  version "0.1.8"
-  resolved "https://registry.npmjs.org/@types/webpack-sources/-/webpack-sources-0.1.8.tgz"
-  integrity sha512-JHB2/xZlXOjzjBB6fMOpH1eQAfsrpqVVIbneE0Rok16WXwFaznaI5vfg75U5WgGJm7V9W1c4xeRQDjX/zwvghA==
-  dependencies:
-    "@types/node" "*"
-    "@types/source-list-map" "*"
-    source-map "^0.6.1"
-
-"@types/webpack@^4.39.8", "@types/webpack@^4.41.26", "@types/webpack@^4.41.8":
+"@types/webpack@^4.41.26", "@types/webpack@^4.41.8":
   version "4.41.29"
   resolved "https://registry.npmjs.org/@types/webpack/-/webpack-4.41.29.tgz"
   integrity sha512-6pLaORaVNZxiB3FSHbyBiWM7QdazAWda1zvAq4SbZObZqHSDbWLi62iFdblVea6SK9eyBIVp5yHhKt/yNQdR7Q==
@@ -6228,7 +6219,7 @@ colorette@^2.0.10, colorette@^2.0.14, colorette@^2.0.16:
   resolved "https://registry.yarnpkg.com/colorette/-/colorette-2.0.16.tgz#713b9af84fdb000139f04546bd4a93f62a5085da"
   integrity sha512-hUewv7oMjCp+wkBv5Rm0v87eJhq4woh5rSR+42YSQJKecCqgIqNkZ6lAlQms/BwHPJA5NKMRlpxPRv0n8HQW6g==
 
-colors@^1.1.2, colors@^1.4.0:
+colors@^1.1.2:
   version "1.4.0"
   resolved "https://registry.npmjs.org/colors/-/colors-1.4.0.tgz"
   integrity sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==
@@ -11134,14 +11125,6 @@ lowlight@^1.14.0:
     fault "^1.0.0"
     highlight.js "~10.7.0"
 
-lru-cache@4.1.x:
-  version "4.1.5"
-  resolved "https://registry.npmjs.org/lru-cache/-/lru-cache-4.1.5.tgz"
-  integrity sha512-sWZlbEP2OsHNkXrMl5GYk/jKk70MBng6UU4YI/qGDYbgf6YbP4EvmqISbXCoJiRKs+1bSpFHVgQxvJ17F2li5g==
-  dependencies:
-    pseudomap "^1.0.2"
-    yallist "^2.1.2"
-
 lru-cache@^5.1.1:
   version "5.1.1"
   resolved "https://registry.npmjs.org/lru-cache/-/lru-cache-5.1.1.tgz"
@@ -12088,11 +12071,6 @@ os-browserify@^0.3.0:
   version "0.3.0"
   resolved "https://registry.npmjs.org/os-browserify/-/os-browserify-0.3.0.tgz"
   integrity sha1-hUNzx/XCMVkU/Jv8a9gjj92h7Cc=
-
-os-tmpdir@~1.0.2:
-  version "1.0.2"
-  resolved "https://registry.npmjs.org/os-tmpdir/-/os-tmpdir-1.0.2.tgz"
-  integrity sha1-u+Z0BseaqFxc/sdm/lc0VV36EnQ=
 
 overlayscrollbars@^1.13.1:
   version "1.13.1"
@@ -13134,11 +13112,6 @@ prr@~1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/prr/-/prr-1.0.1.tgz"
   integrity sha1-0/wRS6BplaRexok/SEzrHXj19HY=
-
-pseudomap@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.npmjs.org/pseudomap/-/pseudomap-1.0.2.tgz"
-  integrity sha1-8FKijacOYYkX7wqKw0wa5aaChrM=
 
 psl@^1.1.33:
   version "1.8.0"
@@ -15399,13 +15372,6 @@ tinycolor2@^1.4.1:
   resolved "https://registry.npmjs.org/tinycolor2/-/tinycolor2-1.4.2.tgz"
   integrity sha512-vJhccZPs965sV/L2sU4oRQVAos0pQXwsvTLkWYdqJ+a8Q5kPFzJTuOFwy7UniPli44NKQGAglksjvOcpo95aZA==
 
-tmp@0.0.x:
-  version "0.0.33"
-  resolved "https://registry.npmjs.org/tmp/-/tmp-0.0.33.tgz"
-  integrity sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==
-  dependencies:
-    os-tmpdir "~1.0.2"
-
 tmp@^0.2.1:
   version "0.2.1"
   resolved "https://registry.npmjs.org/tmp/-/tmp-0.2.1.tgz"
@@ -15902,14 +15868,6 @@ use@^3.1.0:
   resolved "https://registry.npmjs.org/use/-/use-3.1.1.tgz"
   integrity sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==
 
-useragent@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.npmjs.org/useragent/-/useragent-2.3.0.tgz"
-  integrity sha512-4AoH4pxuSvHCjqLO04sU6U/uE65BYza8l/KKBS0b0hnUPWi+cQ2BpeTEwejCSx9SPV5/U03nniDTrWx5NrmKdw==
-  dependencies:
-    lru-cache "4.1.x"
-    tmp "0.0.x"
-
 utif@^2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/utif/-/utif-2.0.1.tgz"
@@ -16143,11 +16101,6 @@ webext-options-sync@^3.0.0:
   dependencies:
     webext-detect-page "^3.0.2"
 
-webextension-polyfill@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.npmjs.org/webextension-polyfill/-/webextension-polyfill-0.5.0.tgz"
-  integrity sha512-aFrl38x43t1bTboX/paCT8I97+idzX/TY0+fuM52hrIkCpYfROEF9kSn0BXuEIi3J9LTYt2ZZKkhx9NB1qF3nA==
-
 webextension-polyfill@^0.8.0:
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/webextension-polyfill/-/webextension-polyfill-0.8.0.tgz#f80e9f4b7f81820c420abd6ffbebfa838c60e041"
@@ -16245,21 +16198,6 @@ webpack-dev-server@^4.5.0:
     url "^0.11.0"
     webpack-dev-middleware "^5.2.1"
     ws "^8.1.0"
-
-webpack-extension-reloader@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.npmjs.org/webpack-extension-reloader/-/webpack-extension-reloader-1.1.4.tgz"
-  integrity sha512-PyssJvAiKhztc//QmhpU8yfg7LBR7Bn/cjSM7jadfQJPIDNN1Djxc+SJQRk8uHQ3GQbyWhsWu2DLCMBRcWHIPA==
-  dependencies:
-    "@types/webpack" "^4.39.8"
-    "@types/webpack-sources" "^0.1.5"
-    colors "^1.4.0"
-    lodash "^4.17.15"
-    minimist "^1.2.0"
-    useragent "^2.3.0"
-    webextension-polyfill "^0.5.0"
-    webpack-sources "^1.4.3"
-    ws "^7.2.0"
 
 webpack-filter-warnings-plugin@^1.2.1:
   version "1.2.1"
@@ -16600,7 +16538,7 @@ ws@^6.1.0:
   dependencies:
     async-limiter "~1.0.0"
 
-ws@^7.2.0, ws@^7.4.5:
+ws@^7.4.5:
   version "7.5.0"
   resolved "https://registry.npmjs.org/ws/-/ws-7.5.0.tgz"
   integrity sha512-6ezXvzOZupqKj4jUqbQ9tXuJNo+BR2gU8fFRk3XCP3e0G6WT414u5ELe6Y0vtp7kmSJ3F7YWObSNr1ESsgi4vw==
@@ -16667,11 +16605,6 @@ y18n@^5.0.5:
   version "5.0.8"
   resolved "https://registry.npmjs.org/y18n/-/y18n-5.0.8.tgz"
   integrity sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==
-
-yallist@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.npmjs.org/yallist/-/yallist-2.1.2.tgz"
-  integrity sha1-HBH5IY8HYImkfdUS+TxmmaaoHVI=
 
 yallist@^3.0.2:
   version "3.1.1"
