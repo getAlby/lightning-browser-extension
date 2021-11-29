@@ -61,7 +61,7 @@ function AccountMenu({ onAccountSwitch }: Props) {
                 selectAccount(accountId);
               }}
             >
-              <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75" />
+              <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-500" />
               {account.name}&nbsp;
               <Badge
                 label={account.connector}
