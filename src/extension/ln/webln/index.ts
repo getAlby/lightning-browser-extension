@@ -1,4 +1,16 @@
+interface RequestInvoiceArgs {
+  amount?: string | number;
+  defaultAmount?: string | number;
+  minimumAmount?: string | number;
+  maximumAmount?: string | number;
+  defaultMemo?: string;
+}
+
 export default class WebLNProvider {
+  enabled: boolean;
+  isEnabled: boolean;
+  executing: boolean;
+
   constructor() {
     this.enabled = false;
     this.isEnabled = false; // seems some webln implementations use webln.isEnabled and some use webln.enabled
@@ -32,21 +44,21 @@ export default class WebLNProvider {
     return this.execute("getTransactions");
   }
 
-  lnurl(lnurlEncoded) {
+  lnurl(lnurlEncoded: string) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling lnurl");
     }
     return this.execute("lnurl", { lnurlEncoded });
   }
 
-  sendPayment(paymentRequest) {
+  sendPayment(paymentRequest: string) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling sendPayment");
     }
     return this.execute("sendPaymentOrPrompt", { paymentRequest });
   }
 
-  makeInvoice(args) {
+  makeInvoice(args: string | number | RequestInvoiceArgs) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling makeInvoice");
     }
@@ -57,7 +69,7 @@ export default class WebLNProvider {
     return this.execute("makeInvoice", args);
   }
 
-  signMessage(message) {
+  signMessage(message: string) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling signMessage");
     }
@@ -65,7 +77,7 @@ export default class WebLNProvider {
     return this.execute("signMessage", { message });
   }
 
-  verifyMessage(signature, message) {
+  verifyMessage(signature: string, message: string) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling verifyMessage");
     }
@@ -73,7 +85,7 @@ export default class WebLNProvider {
     return this.execute("verifyMessage", { signature, message });
   }
 
-  execute(type, args) {
+  execute(type: string, args?: any): Promise<any> {
     const p = new Promise((resolve, reject) => {
       // post the request to the content script. from there it gets passed to the background script and back
       // in page script can not directly connect to the background script
@@ -88,7 +100,7 @@ export default class WebLNProvider {
         "*" // TODO use origin
       );
 
-      function handleWindowMessage(messageEvent) {
+      function handleWindowMessage(messageEvent: any) {
         // check if it is a relevant message
         // there are some other events happening
         if (
