@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
@@ -10,19 +10,26 @@ import utils from "../../common/lib/utils";
 import Button from "../components/Button";
 import IconButton from "../components/IconButton";
 import Input from "../components/Form/Input";
-// import Select from "../components/Form/Select";
+import CurrencyInput from "../components/Form/CurrencyInput";
 import Header from "../components/Header";
+
+const AMOUNT_TYPES = ["Fixed", "Dynamic"];
+const initialFormdata = {
+  amount: "",
+  defaultAmount: "",
+  minimumAmount: "",
+  maximumAmount: "",
+  description: "",
+  expiration: "",
+};
 
 function Receive() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    amount: "",
-    description: "",
-    expiration: "",
-  });
+  const [formData, setFormData] = useState(initialFormdata);
   const [loading, setLoading] = useState(false);
   const [invoice, setInvoice] = useState<{ paymentRequest: string }>();
   const [copyLabel, setCopyLabel] = useState("Copy");
+  const [amountType, setAmountType] = useState(AMOUNT_TYPES[0].toLowerCase());
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -96,9 +103,14 @@ function Receive() {
           renderInvoice()
         ) : (
           <>
-            <Tab.Group>
+            <Tab.Group
+              onChange={(index) => {
+                setFormData(initialFormdata);
+                setAmountType(AMOUNT_TYPES[index].toLowerCase());
+              }}
+            >
               <Tab.List className="mb-4 group p-0.5 rounded-lg grid grid-cols-2 bg-gray-100 hover:bg-gray-200">
-                {["Fixed", "Dynamic"].map((tab) => (
+                {AMOUNT_TYPES.map((tab) => (
                   <Tab
                     key={tab}
                     className={({ selected }) =>
@@ -122,100 +134,94 @@ function Receive() {
                     Amount
                   </label>
                   <div className="mt-1 mb-4">
-                    <Input
+                    <CurrencyInput
                       name="amount"
                       placeholder="Amount in Satoshi..."
                       type="text"
+                      value={formData.amount}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <label
+                    htmlFor="description"
+                    className="block font-medium text-gray-700"
+                  >
+                    Description
+                  </label>
+                  <div className="mt-1 mb-4">
+                    <Input
+                      name="description"
+                      placeholder="For e.g. who is sending this payment?"
+                      type="text"
+                      value={formData.description}
                       onChange={handleChange}
                     />
                   </div>
                 </Tab.Panel>
                 <Tab.Panel>
                   <label
-                    htmlFor="amount"
+                    htmlFor="defaultAmount"
                     className="block font-medium text-gray-700"
                   >
-                    Default
+                    Default amount
                   </label>
                   <div className="mt-1 mb-4">
-                    <Input
-                      name="amount"
+                    <CurrencyInput
+                      name="defaultAmount"
                       placeholder="Amount in Satoshi..."
                       type="text"
+                      value={formData.defaultAmount}
                       onChange={handleChange}
                     />
                   </div>
                   <label
-                    htmlFor="amount"
+                    htmlFor="minimumAmount"
                     className="block font-medium text-gray-700"
                   >
                     Min
                   </label>
                   <div className="mt-1 mb-4">
-                    <Input
-                      name="amount"
+                    <CurrencyInput
+                      name="minimumAmount"
                       placeholder="Amount in Satoshi..."
                       type="text"
+                      value={formData.minimumAmount}
                       onChange={handleChange}
                     />
                   </div>
                   <label
-                    htmlFor="amount"
+                    htmlFor="maximumAmount"
                     className="block font-medium text-gray-700"
                   >
                     Max
                   </label>
                   <div className="mt-1 mb-4">
-                    <Input
-                      name="amount"
+                    <CurrencyInput
+                      name="maximumAmount"
                       placeholder="Amount in Satoshi..."
                       type="text"
+                      value={formData.maximumAmount}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <label
+                    htmlFor="description"
+                    className="block font-medium text-gray-700"
+                  >
+                    Description
+                  </label>
+                  <div className="mt-1 mb-4">
+                    <Input
+                      name="description"
+                      placeholder="For e.g. who is sending this payment?"
+                      type="text"
+                      value={formData.description}
                       onChange={handleChange}
                     />
                   </div>
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
-
-            <div className="mb-4">
-              <label
-                htmlFor="description"
-                className="block font-medium text-gray-700"
-              >
-                Description
-              </label>
-              <div className="mt-1">
-                <Input
-                  name="description"
-                  placeholder="For e.g. who is sending this payment?"
-                  type="text"
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-
-            {/* <div className="mb-5">
-          <label htmlFor="expiration" className="block font-medium text-gray-700">
-            Expiration
-          </label>
-          <div className="mt-1">
-            <Select
-              name="expiration"
-              value={formData.expiration}
-              onChange={handleChange}
-            >
-              <option key="60" value="60">
-                1 hour
-              </option>
-              <option key="120" value="120">
-                2 hours
-              </option>
-              <option key="180" value="180">
-                3 hours
-              </option>
-            </Select>
-          </div>
-        </div> */}
 
             <div className="text-center mb-4">
               <div className="mb-4">
