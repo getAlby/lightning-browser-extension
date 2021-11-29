@@ -3,7 +3,7 @@ import state from "../../state";
 
 const makeInvoice = async (message, sender) => {
   if (message.args.memo === undefined) {
-    message.args.memo = "Alby invoice memo";
+    message.args.memo = memo.args.defaultMemo || "Alby invoice memo";
   }
   PubSub.publish(`ln.makeInvoice.start`, message);
 
