@@ -15,17 +15,13 @@
         }
       }
     ],
-    "@babel/react",
+    ["@babel/preset-react", {
+      "runtime": "automatic"
+    }],
     "@babel/preset-typescript"
   ],
   "plugins": [
     ["@babel/plugin-proposal-class-properties"],
-    ["@babel/plugin-transform-destructuring", {
-      "useBuiltIns": true
-    }],
-    ["@babel/plugin-proposal-object-rest-spread", {
-      "useBuiltIns": true
-    }],
     [
       // Polyfills the runtime needed for async/await and generators
       "@babel/plugin-transform-runtime",
@@ -37,7 +33,9 @@
   ],
   "env": {
     "test": {
-      "plugins": ["@babel/plugin-transform-modules-commonjs"]
+      "presets": [
+        ["@babel/preset-env", { "modules": "auto" }]
+      ]
     }
   }
 }

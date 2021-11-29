@@ -1,6 +1,5 @@
-import React from "react";
 import Skeleton from "react-loading-skeleton";
-import WalletIcon from "@bitcoin-design/bitcoin-icons/svg/outline/wallet.svg";
+import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 
 import UserMenu from "../UserMenu";
 import AccountMenu from "../AccountMenu";
@@ -23,12 +22,7 @@ export default function Navbar({
       <div className="flex w-8/12 md:w-4/12 lg:w-3/12">
         <div className="relative pl-2 flex bg-gray-100 rounded-md">
           <div className="flex items-center">
-            <img
-              className="-ml-1 w-8 h-8 opacity-50"
-              src={WalletIcon}
-              alt=""
-              aria-hidden="true"
-            />
+            <WalletIcon className="-ml-1 w-8 h-8 opacity-50" />
           </div>
           <div
             className={`flex-auto mx-2 py-1 ${

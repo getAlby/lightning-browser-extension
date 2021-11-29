@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import { UploadIcon } from "@heroicons/react/outline";
+import { useState, useRef } from "react";
+import { SendIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import Input from "../../../components/Form/Input";
 import Button from "../../../components/Button";
@@ -152,10 +152,7 @@ export default function ConnectLnd() {
                   if (hiddenFileInput?.current) hiddenFileInput.current.click();
                 }}
               >
-                <UploadIcon
-                  className="mb-3 h-9 w-9 text-blue-500"
-                  aria-hidden="true"
-                />
+                <SendIcon className="mb-3 h-9 w-9 text-blue-500" />
                 <p>
                   Drag and drop your macaroon here or{" "}
                   <span className="underline">browse</span>

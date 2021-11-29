@@ -10,7 +10,7 @@ const fromInternetIdentifier = (address: string) => {
   // email regex: https://emailregex.com/
   if (
     address.match(
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     )
   ) {
     const [name, host] = address.split("@");
@@ -43,7 +43,7 @@ const lnurl = {
     return Boolean(fromInternetIdentifier(address));
   },
   findLnurl(text: string) {
-    let stringToText = text.trim();
+    const stringToText = text.trim();
     let match;
 
     // look for a LNURL with protocol scheme

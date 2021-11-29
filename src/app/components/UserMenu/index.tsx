@@ -1,9 +1,12 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import { CogIcon, LockClosedIcon, TableIcon } from "@heroicons/react/solid";
-import { MenuIcon } from "@heroicons/react/outline";
-import SendIcon from "@bitcoin-design/bitcoin-icons/svg/filled/send.svg";
-import ReceiveIcon from "@bitcoin-design/bitcoin-icons/svg/filled/receive.svg";
+import {
+  GearIcon,
+  LockIcon,
+  MenuIcon,
+  SendIcon,
+  TransactionsIcon,
+  ReceiveIcon,
+} from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import utils from "../../../common/lib/utils";
 import { useAuth } from "../../context/AuthContext";
@@ -37,7 +40,7 @@ export default function UserMenu() {
   return (
     <Menu as="div" className="relative">
       <Menu.Button className="flex items-center text-gray-500 hover:text-black transition-colors duration-200">
-        <MenuIcon className="h-6 w-6" aria-hidden="true" />
+        <MenuIcon className="h-6 w-6" />
       </Menu.Button>
       <Menu.List position="right">
         <Menu.ItemButton
@@ -45,23 +48,15 @@ export default function UserMenu() {
             openOptions("publishers");
           }}
         >
-          <TableIcon
-            className="h-5 w-5 mr-2 text-gray-500"
-            aria-hidden="true"
-          />
-          Allowances
+          <TransactionsIcon className="h-5 w-5 mr-2 text-gray-500" />
+          Websites
         </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
             navigate("/send");
           }}
         >
-          <img
-            className="w-6 h-6 -ml-0.5 mr-2 opacity-75"
-            src={SendIcon}
-            alt=""
-            aria-hidden="true"
-          />
+          <SendIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75" />
           Send
         </Menu.ItemButton>
         <Menu.ItemButton
@@ -69,12 +64,7 @@ export default function UserMenu() {
             navigate("/receive");
           }}
         >
-          <img
-            className="w-6 h-6 -ml-0.5 mr-2 opacity-75"
-            src={ReceiveIcon}
-            alt=""
-            aria-hidden="true"
-          />
+          <ReceiveIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75" />
           Receive
         </Menu.ItemButton>
         <Menu.ItemButton
@@ -82,15 +72,12 @@ export default function UserMenu() {
             openOptions("settings");
           }}
         >
-          <CogIcon className="h-5 w-5 mr-2 text-gray-500" aria-hidden="true" />
+          <GearIcon className="h-5 w-5 mr-2 text-gray-500" />
           Settings
         </Menu.ItemButton>
         <Menu.Divider />
         <Menu.ItemButton onClick={lock}>
-          <LockClosedIcon
-            className="h-5 w-5 mr-2 text-gray-500"
-            aria-hidden="true"
-          />
+          <LockIcon className="h-5 w-5 mr-2 text-gray-500" />
           Lock
         </Menu.ItemButton>
       </Menu.List>

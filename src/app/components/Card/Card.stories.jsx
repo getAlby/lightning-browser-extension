@@ -1,5 +1,3 @@
-import React from "react";
-
 import Card from ".";
 
 export const Primary = () => (

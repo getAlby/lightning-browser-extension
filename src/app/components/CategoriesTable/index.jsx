@@ -1,4 +1,4 @@
-import { ChevronRightIcon } from "@heroicons/react/solid";
+import { CaretRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import Progressbar from "../Progressbar";
 
@@ -48,10 +48,7 @@ export default function CategoriesTable({ categories }) {
                           {category.sumvalue}
                         </span>
                         <div className="relative left-10 mt-1">
-                          <ChevronRightIcon
-                            className="h-5 w-5 text-black text-sm font-light"
-                            aria-hidden="true"
-                          />
+                          <CaretRightIcon className="h-5 w-5 text-black text-sm font-light" />
                         </div>
                       </div>
                     </td>
