@@ -44,7 +44,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
     <>
       <Menu as="div" className="relative">
         <Menu.Button className="flex items-center text-gray-500 hover:text-black transition-color duration-200 dark:hover:text-white">
-          <CogIcon className="h-6 w-6" />
+          <GearIcon className="h-6 w-6" />
         </Menu.Button>
         <Menu.List position="right">
           <Menu.ItemButton onClick={openModal}>Edit</Menu.ItemButton>

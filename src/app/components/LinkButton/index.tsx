@@ -19,9 +19,7 @@ export default function LinkButton({ to, title, description }: Props) {
             </span>
           )}
         </div>
-        <ChevronRightIcon
-          className="h-5 w-5 inline dark:text-white"
-        />
+        <CaretRightIcon className="h-5 w-5 inline dark:text-white" />
       </div>
     </Link>
   );
