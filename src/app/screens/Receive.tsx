@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import QRCode from "react-qr-code";
+import { Tab } from "@headlessui/react";
 
 import utils from "../../common/lib/utils";
 
@@ -95,22 +96,86 @@ function Receive() {
           renderInvoice()
         ) : (
           <>
-            <div className="mt-2 mb-4">
-              <label
-                htmlFor="amount"
-                className="block font-medium text-gray-700"
-              >
-                Amount
-              </label>
-              <div className="mt-1">
-                <Input
-                  name="amount"
-                  placeholder="Amount in Satoshi..."
-                  type="text"
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+            <Tab.Group>
+              <Tab.List className="mb-4 group p-0.5 rounded-lg grid grid-cols-2 bg-gray-100 hover:bg-gray-200">
+                {["Fixed", "Dynamic"].map((tab) => (
+                  <Tab
+                    key={tab}
+                    className={({ selected }) =>
+                      `p-1.5 text-sm font-medium rounded-md focus:outline-none ${
+                        selected
+                          ? "bg-white shadow-sm ring-1 ring-black ring-opacity-5 focus-visible:ring-2 focus-visible:ring-orange-bitcoin"
+                          : "text-gray-600"
+                      }`
+                    }
+                  >
+                    {tab}
+                  </Tab>
+                ))}
+              </Tab.List>
+              <Tab.Panels>
+                <Tab.Panel>
+                  <label
+                    htmlFor="amount"
+                    className="block font-medium text-gray-700"
+                  >
+                    Amount
+                  </label>
+                  <div className="mt-1 mb-4">
+                    <Input
+                      name="amount"
+                      placeholder="Amount in Satoshi..."
+                      type="text"
+                      onChange={handleChange}
+                    />
+                  </div>
+                </Tab.Panel>
+                <Tab.Panel>
+                  <label
+                    htmlFor="amount"
+                    className="block font-medium text-gray-700"
+                  >
+                    Default
+                  </label>
+                  <div className="mt-1 mb-4">
+                    <Input
+                      name="amount"
+                      placeholder="Amount in Satoshi..."
+                      type="text"
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <label
+                    htmlFor="amount"
+                    className="block font-medium text-gray-700"
+                  >
+                    Min
+                  </label>
+                  <div className="mt-1 mb-4">
+                    <Input
+                      name="amount"
+                      placeholder="Amount in Satoshi..."
+                      type="text"
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <label
+                    htmlFor="amount"
+                    className="block font-medium text-gray-700"
+                  >
+                    Max
+                  </label>
+                  <div className="mt-1 mb-4">
+                    <Input
+                      name="amount"
+                      placeholder="Amount in Satoshi..."
+                      type="text"
+                      onChange={handleChange}
+                    />
+                  </div>
+                </Tab.Panel>
+              </Tab.Panels>
+            </Tab.Group>
 
             <div className="mb-4">
               <label
