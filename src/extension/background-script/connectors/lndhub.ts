@@ -5,13 +5,14 @@ import { parsePaymentRequest } from "invoices";
 import Base from "./base";
 import utils from "../../../common/lib/utils";
 import HashKeySigner from "../../../common/utils/signer";
+import Connector, { SendPaymentArgs, GetInfoResponse } from "./connector";
 
-export default class LndHub extends Base {
+export default class LndHub extends Base implements Connector {
   async init() {
     return this.authorize();
   }
 
-  getInfo() {
+  getInfo(): Promise<GetInfoResponse> {
     return this.request("GET", "/getinfo", undefined, {}).then((data) => {
       return {
         data: {
@@ -31,7 +32,7 @@ export default class LndHub extends Base {
     });
   }
 
-  sendPayment(args) {
+  sendPayment(args: SendPaymentArgs) {
     return this.request("POST", "/payinvoice", {
       invoice: args.paymentRequest,
     }).then((data) => {
@@ -177,7 +178,7 @@ export default class LndHub extends Base {
       });
   }
 
-  async request(method, path, args, defaultValues) {
+  async request(method: any, path: any, args: any, defaultValues?: any) {
     if (!this.access_token) {
       await this.authorize();
     }
