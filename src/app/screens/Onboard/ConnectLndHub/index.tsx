@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import utils from "../../../../common/lib/utils";
@@ -77,8 +77,8 @@ export default function ConnectLndHub() {
           <h1 className="text-3xl font-bold dark:text-white">Connect to LNDHub (BlueWallet)</h1>
           <p className="text-gray-500 mt-6 dark:text-gray-400">
             In BlueWallet, choose the wallet you want to connect, open it, click
-            on "...", click on Export/Backup to display the QR code and scan it
-            with your webcam.
+            on &quot;...&quot;, click on Export/Backup to display the QR code
+            and scan it with your webcam.
           </p>
           <div className="w-4/5">
             <div className="mt-6">

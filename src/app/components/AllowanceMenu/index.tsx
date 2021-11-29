@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Modal from "react-modal";
-import { CogIcon } from "@heroicons/react/solid";
-import CrossIcon from "@bitcoin-design/bitcoin-icons/svg/outline/cross.svg";
+import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import utils from "../../../common/lib/utils";
 
@@ -44,7 +44,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
     <>
       <Menu as="div" className="relative">
         <Menu.Button className="flex items-center text-gray-500 hover:text-black transition-color duration-200 dark:hover:text-white">
-          <CogIcon className="h-6 w-6" aria-hidden="true" />
+          <CogIcon className="h-6 w-6" />
         </Menu.Button>
         <Menu.List position="right">
           <Menu.ItemButton onClick={openModal}>Edit</Menu.ItemButton>
@@ -81,12 +81,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         <div className="p-5 flex justify-between dark:bg-gray-800">
           <h2 className="text-2xl font-bold dark:text-white">Edit Allowance</h2>
           <button onClick={closeModal}>
-            <img
-              className="w-6 h-6"
-              src={CrossIcon}
-              alt=""
-              aria-hidden="true"
-            />
+            <CrossIcon className="w-6 h-6" />
           </button>
         </div>
         <div className="p-5 border-t border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">

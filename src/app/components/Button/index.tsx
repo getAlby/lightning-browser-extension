@@ -1,5 +1,3 @@
-import React from "react";
-
 import { classNames } from "../../utils/index";
 
 import Loading from "../Loading";

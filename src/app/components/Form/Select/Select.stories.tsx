@@ -1,9 +1,13 @@
-import React from "react";
-
 import Select from ".";
 
 export const Primary = () => (
-  <Select name="user" value="" onChange={() => {}}>
+  <Select
+    name="user"
+    value=""
+    onChange={() => {
+      console.log("changed");
+    }}
+  >
     <option>Lorem ipsum</option>
     <option>Dolor sit</option>
     <option>Amet</option>

@@ -1,14 +1,12 @@
-import React from "react";
+import { Component } from "react";
 
 import utils from "../../../common/lib/utils";
 
-class DevMenu extends React.Component {
+class DevMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-
-  componentDidMount() {}
 
   reset() {
     utils.call("reset").then((response) => {

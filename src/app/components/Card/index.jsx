@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Card({ alias, satoshis, fiat, color, currency }) {
   return (
     <div className={`${color} h-36 rounded-lg pt-6`}>

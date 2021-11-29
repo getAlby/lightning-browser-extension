@@ -1,5 +1,4 @@
-import React from "react";
-import CaretLeftIcon from "@bitcoin-design/bitcoin-icons/svg/filled/caret-left.svg";
+import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import Header from ".";
 import IconButton from "../IconButton";
@@ -9,14 +8,7 @@ export const Default = () => (
     headerLeft={
       <IconButton
         onClick={() => alert("Go back")}
-        icon={
-          <img
-            className="w-4 h-4"
-            src={CaretLeftIcon}
-            alt=""
-            aria-hidden="true"
-          />
-        }
+        icon={<CaretLeftIcon className="w-4 h-4" />}
       />
     }
     title="Header bar"

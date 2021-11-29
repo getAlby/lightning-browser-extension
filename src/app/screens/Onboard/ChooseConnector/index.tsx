@@ -1,4 +1,3 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import LinkButton from "../../../components/LinkButton";
@@ -49,7 +48,12 @@ export default function ChooseConnector() {
               </p>
               <div className="space-y-4">
                 {connectors.map(({ to, title, description }) => (
-                  <LinkButton to={to} title={title} description={description} />
+                  <LinkButton
+                    key={to}
+                    to={to}
+                    title={title}
+                    description={description}
+                  />
                 ))}
               </div>
             </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import { Component } from "react";
 import { Transition } from "@headlessui/react";
 
 import Button from "../../components/Button";
@@ -9,7 +9,7 @@ import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
 import utils from "../../../common/lib/utils";
 
-class ConfirmPayment extends React.Component {
+class ConfirmPayment extends Component {
   constructor(props) {
     super(props);
     this.state = {

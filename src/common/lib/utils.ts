@@ -40,8 +40,9 @@ const utils = {
     return shajs("sha256").update(str).digest("hex");
   },
   base64ToHex: (str: string) => {
+    const hex = [];
     for (
-      var i = 0, bin = atob(str.replace(/[ \r\n]+$/, "")), hex = [];
+      let i = 0, bin = atob(str.replace(/[ \r\n]+$/, ""));
       i < bin.length;
       ++i
     ) {
