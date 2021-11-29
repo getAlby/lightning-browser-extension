@@ -26,7 +26,7 @@ export default function LinkButton({ to, title, description, logo }: Props) {
             height="75em"
             className="inline rounded-lg mr-3"
           />
-          <ChevronRightIcon className="h-5 w-5 inline" />
+          <CaretRightIcon className="h-5 w-5 inline" />
         </div>
       </div>
     </Link>
