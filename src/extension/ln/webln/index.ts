@@ -100,7 +100,7 @@ export default class WebLNProvider {
         "*" // TODO use origin
       );
 
-      function handleWindowMessage(messageEvent: any) {
+      function handleWindowMessage(messageEvent: MessageEvent) {
         // check if it is a relevant message
         // there are some other events happening
         if (
