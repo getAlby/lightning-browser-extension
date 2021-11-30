@@ -16,14 +16,15 @@ import Connector, {
   SignMessageResponse,
   VerifyMessageArgs,
   VerifyMessageResponse,
-} from "./connector";
-import { Method } from "axios";
+} from "./connector.interface";
+import { AxiosRequestConfig, Method } from "axios";
 
 export default class LndHub extends Base implements Connector {
   access_token?: string;
   access_token_created?: number;
   refresh_token?: string;
   refresh_token_created?: number;
+  noRetry?: boolean;
 
   async init() {
     return this.authorize();
@@ -80,7 +81,7 @@ export default class LndHub extends Base implements Connector {
       const paymentRequestDetails = parsePaymentRequest({
         request: args.paymentRequest,
       });
-      const amountInSats = parseInt(paymentRequestDetails.tokens);
+      const amountInSats = paymentRequestDetails.tokens;
       data.payment_route = { total_amt: amountInSats, total_fees: 0 };
     }
     return {
@@ -191,12 +192,17 @@ export default class LndHub extends Base implements Connector {
       });
   }
 
-  async request(method: Method, path: string, args: any, defaultValues?: any) {
+  async request(
+    method: Method,
+    path: string,
+    args: any,
+    defaultValues?: any
+  ): Promise<any> {
     if (!this.access_token) {
       await this.authorize();
     }
 
-    const reqConfig = {
+    const reqConfig: AxiosRequestConfig = {
       method,
       url: this.config.url + path,
       responseType: "json",
@@ -218,7 +224,7 @@ export default class LndHub extends Base implements Connector {
       data = res.data;
     } catch (e) {
       console.log(e);
-      throw new Error(e.message);
+      if (e instanceof Error) throw new Error(e.message);
     }
     if (data && data.error) {
       if (data.code * 1 === 1 && !this.noRetry) {
@@ -226,7 +232,7 @@ export default class LndHub extends Base implements Connector {
           await this.authorize();
         } catch (e) {
           console.log(e);
-          throw new Error(e.message);
+          if (e instanceof Error) throw new Error(e.message);
         }
         this.noRetry = true;
         return this.request(method, path, args, defaultValues);
