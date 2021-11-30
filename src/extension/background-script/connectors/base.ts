@@ -1,7 +1,9 @@
 interface Config {
-  login: string;
-  password: string;
-  url: string;
+  adminkey?: string;
+  login?: string;
+  macaroon?: string;
+  password?: string;
+  url?: string;
 }
 
 class Base {

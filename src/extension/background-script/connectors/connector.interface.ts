@@ -22,12 +22,18 @@ export interface GetInfoResponse {
 
 export interface GetBalanceResponse {
   data: {
-    balance: string;
+    balance: number;
   };
 }
 
 export type SendPaymentResponse =
-  | { data: { preimage: string; paymentHash: string; route: string } }
+  | {
+      data: {
+        preimage: string;
+        paymentHash: string;
+        route: { total_amt: number; total_fees: number };
+      };
+    }
   | { error: string };
 
 export interface SendPaymentArgs {
