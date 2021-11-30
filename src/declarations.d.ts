@@ -24,7 +24,7 @@ interface PaymentRequestDetails {
     public_key: string;
   };
   safe_tokens: number;
-  tokens: number;
+  tokens: string;
 }
 
 declare module "invoices" {
