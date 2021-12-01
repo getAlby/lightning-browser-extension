@@ -1,12 +1,12 @@
 import { Component } from "react";
 import qs from "query-string";
 import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
-import { parsePaymentRequest } from "invoices";
 
 import { AuthProvider } from "../../context/AuthContext";
 import RequireAuth from "../RequireAuth";
 import Unlock from "../../screens/Unlock";
 import Enable from "../../screens/Enable";
+import MakeInvoice from "../../screens/MakeInvoice";
 import ConfirmPayment from "../../screens/ConfirmPayment";
 import LNURLPay from "../../screens/LNURLPay";
 import LNURLAuth from "../../screens/LNURLAuth";
@@ -17,17 +17,13 @@ class Prompt extends Component {
     const message = qs.parse(window.location.search);
     let origin = {};
     let args = {};
-    let invoice = {};
     if (message.origin) {
       origin = JSON.parse(message.origin);
     }
     if (message.args) {
       args = JSON.parse(message.args);
-      if (args.paymentRequest) {
-        invoice = parsePaymentRequest({ request: args.paymentRequest });
-      }
     }
-    this.state = { origin, args, invoice, type: message.type };
+    this.state = { origin, args, type: message.type };
   }
 
   render() {
@@ -70,10 +66,18 @@ class Prompt extends Component {
                 }
               />
               <Route
+                path="invoice"
+                element={
+                  <MakeInvoice
+                    invoice={this.state.args.invoice}
+                    origin={this.state.origin}
+                  />
+                }
+              />
+              <Route
                 path="confirmPayment"
                 element={
                   <ConfirmPayment
-                    invoice={this.state.invoice}
                     paymentRequest={this.state.args?.paymentRequest}
                     origin={this.state.origin}
                   />
