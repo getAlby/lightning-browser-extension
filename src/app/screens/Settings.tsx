@@ -26,19 +26,41 @@ function Setting({ title, subtitle, right }: Props) {
 
 function Settings() {
   const [loading, setLoading] = useState(true);
+  const [settings, setSettings] = useState<{ websiteEnhancements: boolean }>({
+    websiteEnhancements: false,
+  });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
-  const [websiteEnhancements, setWebsiteEnhancements] = useState(false);
 
-  useEffect(() => {
+  function getSettings() {
     browser.storage.sync
       .get({
-        websiteEnhancements: true,
+        settings: {
+          websiteEnhancements: true, // defaults to true when not set.
+        },
       })
-      .then((settings) => {
-        setWebsiteEnhancements(settings.websiteEnhancements);
+      .then(({ settings }) => {
+        setSettings(settings);
         setLoading(false);
       });
+  }
+
+  function saveSetting(setting: { [key: string]: string | number | boolean }) {
+    const newSettings = {
+      ...settings,
+      ...setting,
+    };
+    browser.storage.sync
+      .set({
+        settings: newSettings,
+      })
+      .then(() => {
+        setSettings(newSettings);
+      });
+  }
+
+  useEffect(() => {
+    getSettings();
   }, []);
 
   return (
@@ -72,15 +94,11 @@ function Settings() {
           right={
             !loading && (
               <Toggle
-                checked={websiteEnhancements}
+                checked={settings.websiteEnhancements}
                 onChange={() => {
-                  browser.storage.sync
-                    .set({
-                      websiteEnhancements: !websiteEnhancements,
-                    })
-                    .then(() => {
-                      setWebsiteEnhancements(!websiteEnhancements);
-                    });
+                  saveSetting({
+                    websiteEnhancements: !settings.websiteEnhancements,
+                  });
                 }}
               />
             )
