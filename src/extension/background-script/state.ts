@@ -49,6 +49,9 @@ const state = createState<State>((set, get) => ({
     return account;
   },
   getConnector: () => {
+    if (get().connector) {
+      return get().connector;
+    }
     const currentAccountId = get().currentAccountId;
     let account = null;
     if (currentAccountId) {
