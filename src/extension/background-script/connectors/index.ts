@@ -12,6 +12,9 @@ import LndHub from "./lndhub";
 import LnBits from "./lnbits";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: implicitly has 'any' type error
+import LnTerminalConnect from "./lnTerminalConnect";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore: implicitly has 'any' type error
 import Base from "./base";
 
 /*
@@ -28,6 +31,7 @@ const connectors = {
   lnd: Lnd,
   lndhub: LndHub,
   lnbits: LnBits,
+  lnterminalconnect: LnTerminalConnect,
 };
 
 export default connectors;
