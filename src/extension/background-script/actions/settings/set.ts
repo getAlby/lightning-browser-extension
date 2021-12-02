@@ -13,7 +13,7 @@ const set = async (message: Message) => {
     settings: newSettings,
   });
 
-  // make sure we immediately persist the new account
+  // make sure we immediately persist the new settings
   state.getState().saveToStorage();
   return Promise.resolve({ data: { settings: newSettings } });
 };
