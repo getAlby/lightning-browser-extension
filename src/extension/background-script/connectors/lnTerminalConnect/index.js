@@ -5,8 +5,11 @@ import wasm from "./lnconnect-wasm";
 class LnTerminalConnect extends Base {
   constructor(config) {
     super(config);
-    this.connection = wasm.init(); // TODO: move to async init() function; how to disconnect?
-    this.connection.connectServer(this.config.server, true, this.config.password);
+  }
+
+  async init() {
+    this.connection = wasm.init();
+    return this.connection.connectServer(this.config.server, true, this.config.password);
   }
 
   getInfo() {
@@ -34,6 +37,7 @@ class LnTerminalConnect extends Base {
         "lnrpc.Lightning.ChannelBalance",
         "{}",
         (response) => {
+          console.log({response});
           const data = JSON.parse(response);
 
           resolve({
@@ -44,6 +48,25 @@ class LnTerminalConnect extends Base {
           });
         }
       );
+    });
+  }
+
+  sendPayment(args) {
+    return this.invokeRPC(
+      "routerrpc.Router.SendPaymentV2",
+      JSON.stringify({ payment_request: args.paymentRequest })
+    ).then((response) => {
+      console.log(response);
+      return response;
+    });
+  }
+
+  invokeRPC(method, request) {
+    return new Promise((resolve, reject) => {
+      this.connection.invokeRPC(method, request, (response) => {
+        // TODO: how to do error handling?
+        resolve(response);
+      })
     });
   }
 }
