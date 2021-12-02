@@ -23,6 +23,7 @@ interface State {
   currentAccountId: string | null;
   password: string | null;
   getConnector: () => Connector | null;
+  saveToStorage: () => Promise<void>;
 }
 
 // these keys get synced from the state to the browser storage

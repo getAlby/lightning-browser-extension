@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import browser from "webextension-polyfill";
 import { Html5Qrcode } from "html5-qrcode";
+
+import utils from "../../common/lib/utils";
 
 import Container from "../components/Container";
 import Button from "../components/Button";
@@ -32,35 +33,20 @@ function Settings() {
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
 
-  function getSettings() {
-    browser.storage.sync
-      .get({
-        settings: {
-          websiteEnhancements: true, // defaults to true when not set.
-        },
-      })
-      .then(({ settings }) => {
-        setSettings(settings);
-        setLoading(false);
-      });
-  }
-
-  function saveSetting(setting: { [key: string]: string | number | boolean }) {
-    const newSettings = {
-      ...settings,
-      ...setting,
-    };
-    browser.storage.sync
-      .set({
-        settings: newSettings,
-      })
-      .then(() => {
-        setSettings(newSettings);
-      });
+  async function saveSetting(setting: {
+    [key: string]: string | number | boolean;
+  }) {
+    const response = await utils.call("setSetting", {
+      setting,
+    });
+    setSettings(response.settings);
   }
 
   useEffect(() => {
-    getSettings();
+    utils.call("getSettings").then((response) => {
+      setSettings(response.settings);
+      setLoading(false);
+    });
   }, []);
 
   return (
