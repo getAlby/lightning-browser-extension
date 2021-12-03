@@ -1,5 +1,5 @@
 interface Config {
-  adminkey?: string;
+  adminkey: string;
   login?: string;
   macaroon?: string;
   password?: string;
