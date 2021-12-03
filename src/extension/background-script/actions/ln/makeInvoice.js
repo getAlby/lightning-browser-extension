@@ -5,7 +5,7 @@ const makeInvoice = async (message, sender) => {
   PubSub.publish(`ln.makeInvoice.start`, message);
 
   const amount = parseInt(message.args.amount);
-  const memo = memo.args.memo || memo.args.defaultMemo || "Alby invoice memo";
+  const memo = message.args.memo || message.args.defaultMemo || "Alby invoice";
 
   const connector = state.getState().getConnector();
   const response = await connector.makeInvoice({
