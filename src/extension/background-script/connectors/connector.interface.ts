@@ -4,6 +4,11 @@ interface WebLNNode {
   color?: string;
 }
 
+interface Route {
+  total_amt: number;
+  total_fees: number;
+}
+
 export interface MakeInvoiceArgs {
   amount: number;
   memo: string;
@@ -31,7 +36,7 @@ export type SendPaymentResponse =
       data: {
         preimage: string;
         paymentHash: string;
-        route: { total_amt: number; total_fees: number };
+        route: Route;
       };
     }
   | { error: string };
