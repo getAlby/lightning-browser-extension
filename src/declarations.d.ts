@@ -15,7 +15,7 @@ interface PaymentRequestDetails {
   is_expired: boolean;
   mtokens: string;
   network: string;
-  payment?: string;
+  payment: string;
   routes?: {
     base_fee_mtokens?: string;
     channel?: string;

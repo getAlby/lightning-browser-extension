@@ -5,79 +5,95 @@ import { parsePaymentRequest } from "invoices";
 import Base from "./base";
 import utils from "../../../common/lib/utils";
 import HashKeySigner from "../../../common/utils/signer";
+import Connector, {
+  SendPaymentArgs,
+  SendPaymentResponse,
+  GetInfoResponse,
+  GetBalanceResponse,
+  MakeInvoiceArgs,
+  MakeInvoiceResponse,
+  SignMessageArgs,
+  SignMessageResponse,
+  VerifyMessageArgs,
+  VerifyMessageResponse,
+} from "./connector.interface";
+import { AxiosRequestConfig, Method } from "axios";
 
-export default class LndHub extends Base {
+export default class LndHub extends Base implements Connector {
+  access_token?: string;
+  access_token_created?: number;
+  refresh_token?: string;
+  refresh_token_created?: number;
+  noRetry?: boolean;
+
   async init() {
     return this.authorize();
   }
 
-  getInfo() {
-    return this.request("GET", "/getinfo", undefined, {}).then((data) => {
-      return {
-        data: {
-          alias: data.alias,
-        },
-      };
-    });
+  async getInfo(): Promise<GetInfoResponse> {
+    const data = await this.request("GET", "/getinfo", undefined, {});
+    return {
+      data: {
+        alias: data.alias,
+      },
+    };
   }
 
-  getBalance() {
-    return this.request("GET", "/balance", undefined, {}).then((data) => {
-      return {
-        data: {
-          balance: data.BTC.AvailableBalance,
-        },
-      };
-    });
+  async getBalance(): Promise<GetBalanceResponse> {
+    const data = await this.request("GET", "/balance", undefined, {});
+    return {
+      data: {
+        balance: data.BTC.AvailableBalance,
+      },
+    };
   }
 
-  sendPayment(args) {
-    return this.request("POST", "/payinvoice", {
+  async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
+    const data = await this.request("POST", "/payinvoice", {
       invoice: args.paymentRequest,
-    }).then((data) => {
-      if (data.error) {
-        return { error: data.message };
-      }
-      if (data.payment_error) {
-        return { error: data.payment_error };
-      }
-      if (
-        typeof data.payment_hash === "object" &&
-        data.payment_hash.type === "Buffer"
-      ) {
-        data.payment_hash = Buffer.from(data.payment_hash.data).toString("hex");
-      }
-      if (
-        typeof data.payment_preimage === "object" &&
-        data.payment_preimage.type === "Buffer"
-      ) {
-        data.payment_preimage = Buffer.from(
-          data.payment_preimage.data
-        ).toString("hex");
-      }
-
-      // HACK!
-      // some Lnbits extension that implement the LNDHub API do not return the route information.
-      // to somewhat work around this we set a payment route and use the amount from the payment request.
-      // lnbits needs to fix this and return proper route information with a total amount and fees
-      if (!data.payment_route) {
-        const paymentRequestDetails = parsePaymentRequest({
-          request: args.paymentRequest,
-        });
-        const amountInSats = parseInt(paymentRequestDetails.tokens);
-        data.payment_route = { total_amt: amountInSats, total_fees: 0 };
-      }
-      return {
-        data: {
-          preimage: data.payment_preimage,
-          paymentHash: data.payment_hash,
-          route: data.payment_route,
-        },
-      };
     });
+    if (data.error) {
+      return { error: data.message };
+    }
+    if (data.payment_error) {
+      return { error: data.payment_error };
+    }
+    if (
+      typeof data.payment_hash === "object" &&
+      data.payment_hash.type === "Buffer"
+    ) {
+      data.payment_hash = Buffer.from(data.payment_hash.data).toString("hex");
+    }
+    if (
+      typeof data.payment_preimage === "object" &&
+      data.payment_preimage.type === "Buffer"
+    ) {
+      data.payment_preimage = Buffer.from(data.payment_preimage.data).toString(
+        "hex"
+      );
+    }
+
+    // HACK!
+    // some Lnbits extension that implement the LNDHub API do not return the route information.
+    // to somewhat work around this we set a payment route and use the amount from the payment request.
+    // lnbits needs to fix this and return proper route information with a total amount and fees
+    if (!data.payment_route) {
+      const paymentRequestDetails = parsePaymentRequest({
+        request: args.paymentRequest,
+      });
+      const amountInSats = paymentRequestDetails.tokens;
+      data.payment_route = { total_amt: amountInSats, total_fees: 0 };
+    }
+    return {
+      data: {
+        preimage: data.payment_preimage,
+        paymentHash: data.payment_hash,
+        route: data.payment_route,
+      },
+    };
   }
 
-  signMessage(args) {
+  signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
     // make sure we got the config to create a new key
     if (!this.config.url || !this.config.login || !this.config.password) {
       return Promise.reject(new Error("Missing config"));
@@ -106,7 +122,7 @@ export default class LndHub extends Base {
     });
   }
 
-  verifyMessage(args) {
+  verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse> {
     // create a signing key from the lndhub URL and the login/password combination
     const keyHex = sha256(
       `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
@@ -122,21 +138,20 @@ export default class LndHub extends Base {
     });
   }
 
-  makeInvoice(args) {
-    return this.request("POST", "/addinvoice", {
+  async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
+    const data = await this.request("POST", "/addinvoice", {
       amt: args.amount,
       memo: args.memo,
-    }).then((data) => {
-      if (typeof data.r_hash === "object" && data.r_hash.type === "Buffer") {
-        data.r_hash = Buffer.from(data.r_hash.data).toString("hex");
-      }
-      return {
-        data: {
-          paymentRequest: data.payment_request,
-          rHash: data.r_hash,
-        },
-      };
     });
+    if (typeof data.r_hash === "object" && data.r_hash.type === "Buffer") {
+      data.r_hash = Buffer.from(data.r_hash.data).toString("hex");
+    }
+    return {
+      data: {
+        paymentRequest: data.payment_request,
+        rHash: data.r_hash,
+      },
+    };
   }
 
   async authorize() {
@@ -177,13 +192,18 @@ export default class LndHub extends Base {
       });
   }
 
-  async request(method, path, args, defaultValues) {
+  async request(
+    method: Method,
+    path: string,
+    args: any,
+    defaultValues?: any
+  ): Promise<any> {
     if (!this.access_token) {
       await this.authorize();
     }
 
-    const reqConfig = {
-      method: method,
+    const reqConfig: AxiosRequestConfig = {
+      method,
       url: this.config.url + path,
       responseType: "json",
       headers: {
@@ -204,7 +224,7 @@ export default class LndHub extends Base {
       data = res.data;
     } catch (e) {
       console.log(e);
-      throw new Error(e.message);
+      if (e instanceof Error) throw new Error(e.message);
     }
     if (data && data.error) {
       if (data.code * 1 === 1 && !this.noRetry) {
@@ -212,7 +232,7 @@ export default class LndHub extends Base {
           await this.authorize();
         } catch (e) {
           console.log(e);
-          throw new Error(e.message);
+          if (e instanceof Error) throw new Error(e.message);
         }
         this.noRetry = true;
         return this.request(method, path, args, defaultValues);

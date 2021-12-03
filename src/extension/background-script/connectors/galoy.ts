@@ -2,12 +2,25 @@ import axios from "axios";
 import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
+import { AxiosRequestConfig } from "axios";
 import Base from "./base";
 import utils from "../../../common/lib/utils";
 import HashKeySigner from "../../../common/utils/signer";
+import Connector, {
+  SendPaymentArgs,
+  SendPaymentResponse,
+  GetInfoResponse,
+  GetBalanceResponse,
+  MakeInvoiceArgs,
+  MakeInvoiceResponse,
+  SignMessageArgs,
+  SignMessageResponse,
+  VerifyMessageArgs,
+  VerifyMessageResponse,
+} from "./connector.interface";
 
-export default class Galoy extends Base {
-  getInfo() {
+export default class Galoy extends Base implements Connector {
+  getInfo(): Promise<GetInfoResponse> {
     const query = {
       query: `
         query getinfo {
@@ -24,7 +37,10 @@ export default class Galoy extends Base {
       `,
     };
     return this.request(query).then((data) => {
-      const alias = (data.data.me.username || data.data.me.id).substr(0, 10);
+      const alias: string = (data.data.me.username || data.data.me.id).substr(
+        0,
+        10
+      );
       return {
         data: {
           alias,
@@ -33,7 +49,7 @@ export default class Galoy extends Base {
     });
   }
 
-  getBalance() {
+  getBalance(): Promise<GetBalanceResponse> {
     const query = {
       query: `
         query getinfo {
@@ -58,7 +74,7 @@ export default class Galoy extends Base {
     });
   }
 
-  sendPayment(args) {
+  sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
     const query = {
       query: `
         mutation lnInvoicePaymentSend($input: LnInvoicePaymentInput!) {
@@ -94,17 +110,17 @@ export default class Galoy extends Base {
     });
   }
 
-  signMessage(args) {
+  signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
     return Promise.reject(new Error("Not yet supported with Galoy."));
   }
 
-  verifyMessage(args) {
+  verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse> {
     return Promise.reject(new Error("Not yet supported with Galoy."));
   }
 
   // TODO: walletId is required here
   // error:  message: "Variable \"$input\" got invalid value { amount: 200, memo: \"test\" }; Field \"walletId\" of required type \"WalletId!\" was not provided.", code: "BAD_USER_INPUT", locations: […]
-  makeInvoice(args) {
+  makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
     const query = {
       query: `
         mutation lnInvoiceCreate($input: LnInvoiceCreateInput!) {
@@ -139,8 +155,8 @@ export default class Galoy extends Base {
     });
   }
 
-  async request(query) {
-    const reqConfig = {
+  async request(query: { query: string }) {
+    const reqConfig: AxiosRequestConfig = {
       method: "POST",
       url: this.config.url,
       responseType: "json",
@@ -158,7 +174,7 @@ export default class Galoy extends Base {
       data = res.data;
     } catch (e) {
       console.error(e);
-      throw new Error(e.message);
+      if (e instanceof Error) throw new Error(e.message);
     }
     return data;
   }

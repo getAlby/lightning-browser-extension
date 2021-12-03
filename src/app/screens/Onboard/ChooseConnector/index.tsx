@@ -8,22 +8,30 @@ import ConnectLnbits from "../ConnectLnbits";
 import ConnectGaloy from "../ConnectGaloy";
 import NewWallet from "../NewWallet";
 
+import lnbits from "/static/assets/icons/lnbits.png";
+import lndhub from "/static/assets/icons/lndhub.png";
+import lnd from "/static/assets/icons/lnd.png";
+import alby from "/static/assets/icons/alby.png";
+
 export default function ChooseConnector() {
   const connectors = [
     {
       to: "lnd",
       title: "LND",
       description: "Connect to your LND node",
+      logo: lnd,
     },
     {
       to: "lnd-hub",
       title: "LNDHub (Bluewallet)",
       description: "Connect to your Bluewallet mobile wallet",
+      logo: lndhub,
     },
     {
       to: "lnbits",
       title: "LNbits",
       description: "Connect to your LNbits account",
+      logo: lnbits,
     },
     {
       to: "galoy",
@@ -34,6 +42,7 @@ export default function ChooseConnector() {
       to: "create-wallet",
       title: "Create a new wallet",
       description: "We create and manage a lightning wallet for you",
+      logo: alby,
     },
   ];
 
@@ -53,12 +62,13 @@ export default function ChooseConnector() {
                 lightning payments!
               </p>
               <div className="space-y-4">
-                {connectors.map(({ to, title, description }) => (
+                {connectors.map(({ to, title, description, logo }) => (
                   <LinkButton
                     key={to}
                     to={to}
                     title={title}
                     description={description}
+                    logo={logo}
                   />
                 ))}
               </div>
