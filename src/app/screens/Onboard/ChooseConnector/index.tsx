@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import LinkButton from "../../../components/LinkButton";
 
 import ConnectLnd from "../ConnectLnd";
+import ConnectLnTerminal from "../../Onboard/ConnectLnTerminal";
 import ConnectLndHub from "../ConnectLndHub";
 import ConnectLnbits from "../ConnectLnbits";
 import NewWallet from "../NewWallet";
@@ -13,6 +14,11 @@ export default function ChooseConnector() {
       to: "lnd",
       title: "LND",
       description: "Connect to your LND node",
+    },
+    {
+      to: "lnterminal",
+      title: "Lightning Node Connect",
+      description: "Connect to your Lightning Terminal",
     },
     {
       to: "lnd-hub",
@@ -61,6 +67,7 @@ export default function ChooseConnector() {
         }
       />
       <Route path="lnd" element={<ConnectLnd />} />
+      <Route path="lnterminal" element={<ConnectLnTerminal />} />
       <Route path="lnd-hub" element={<ConnectLndHub />} />
       <Route path="lnbits" element={<ConnectLnbits />} />
       <Route path="create-wallet" element={<NewWallet />} />

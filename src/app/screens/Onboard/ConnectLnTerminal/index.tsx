@@ -37,18 +37,14 @@ export default function ConnectLnTerminal() {
 		};
 
 		try {
-			const validation = await utils.call("validateAccount", account);
-			if (validation.valid) {
-				const addResult = await utils.call("addAccount", account);
-				if (addResult.accountId) {
-					await utils.call("selectAccount", {
-						id: addResult.accountId,
-					});
-					navigate("/test-connection");
-				}
+			const addResult = await utils.call("addAccount", account);
+			if (addResult.accountId) {
+				await utils.call("selectAccount", {
+					id: addResult.accountId,
+				});
+				navigate("/test-connection");
 			} else {
-				alert(`
-					Connection failed. Are your credentials correct? \n\n(${validation.error})`);
+				alert(`Connection failed. Are your credentials correct?`);
 			}
 		} catch (e) {
 			console.error(e);
@@ -64,18 +60,19 @@ export default function ConnectLnTerminal() {
 	return (
 		<div className="relative mt-24 lg:flex space-x-8">
 			<div className="lg:w-1/2">
-				<h1 className="text-3xl font-bold">Connect to your Lightning Terminal</h1>
+				<h1 className="text-3xl font-bold">Lightning Node Connect</h1>
 				<p className="text-gray-500 mt-6">
 
 				</p>
 				<form onSubmit={handleSubmit}>
 					<div className="w-4/5">
 						<div className="mt-6">
-							<label className="block font-medium text-gray-700">Password</label>
+							<label className="block font-medium text-gray-700">Pairing phrase</label>
 							<div className="mt-1">
 								<Input
 									name="password"
-									placeholder="Your pairing phrase"
+									type="password"
+									placeholder="can follow satoshi..."
 									onChange={handleChange}
 									required
 								/>
