@@ -45,7 +45,7 @@ export interface LNURLDetails {
 
 export interface LNURLPaymentInfo {
   pr: string;
-  successAction: {
+  successAction?: {
     tag: string;
     description?: string;
     message?: string;
