@@ -75,6 +75,10 @@ var options = {
       assert: "assert",
       stream: "stream-browserify",
     },
+    fallback: {
+      os: require.resolve("os-browserify/browser"),
+      fs: false,
+    },
   },
 
   module: {
