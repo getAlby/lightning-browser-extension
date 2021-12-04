@@ -10,7 +10,7 @@ const makeInvoice = async (message, sender) => {
   const amount = parseInt(message.args.amount);
   const memo = message.args.memo;
 
-  const connector = state.getState().getConnector();
+  const connector = await state.getState().getConnector();
   const response = await connector.makeInvoice({
     amount,
     memo,

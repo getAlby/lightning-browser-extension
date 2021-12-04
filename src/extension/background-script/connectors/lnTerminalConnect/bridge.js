@@ -69,6 +69,20 @@ export default function(getBytes) {
     init: () => {
       let proxy;
       let go;
+
+      async function checkConnection() {
+        setTimeout(() => {
+          if (bridge.__ready__ !== true) {
+            console.error("Golang WASM Bridge (__go_wasm__.__ready__) still not true after max time");
+            throw new Error("Golang WASM Bridge (__go_wasm__.__ready__) still not true after max time");
+          }
+        }, maxTime);
+        while (bridge.__ready__ !== true) {
+          await sleep();
+        }
+        return true;
+      }
+
       async function initWrapper() {
         bridge.__wrapper__ = wrapper;
 
@@ -80,15 +94,10 @@ export default function(getBytes) {
         let bytes = await getBytes;
         let result = await WebAssembly.instantiate(bytes, go.importObject);
         go.run(result.instance);
+        return await checkConnection();
       }
 
       initWrapper();
-
-      setTimeout(() => {
-        if (bridge.__ready__ !== true) {
-          console.warn("Golang WASM Bridge (__go_wasm__.__ready__) still not true after max time");
-        }
-      }, maxTime);
 
       proxy = new Proxy({}, {
         get: (_, key) => {

@@ -210,7 +210,12 @@ export default function TestConnection() {
               </div>
             )}
 
-            {loading && <Loading />}
+            {loading && (
+              <div>
+                <Loading />
+                  <p className="text-gray-500 mt-6">Initializing account. Please wait.</p>
+              </div>
+            )}
           </div>
         </div>
 

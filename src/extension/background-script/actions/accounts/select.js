@@ -2,7 +2,7 @@ import { decryptData } from "../../../../common/lib/crypto";
 import state from "../../state";
 import connectors from "../../connectors";
 
-const select = (message, sender) => {
+const select = async (message, sender) => {
   const currentState = state.getState();
 
   const accountId = message.args.id;
@@ -10,18 +10,26 @@ const select = (message, sender) => {
 
   if (account) {
     console.log(`Loading account ${accountId}`);
-
-    const config = decryptData(account.config, currentState.password);
-    const connector = new connectors[account.connector](config);
+    // unload currently selected account
+    if (currentState.connector) {
+      console.log("unload connector");
+      await currentState.connector.unload();
+    }
     state.setState({
       account,
-      connector,
+      connector: null,
       currentAccountId: accountId,
     });
-    return Promise.resolve({ data: { unlocked: true } });
+    // init connector this also memoizes the connector in the state object
+    await state.getState().getConnector();
+    return {
+      data: { unlocked: true },
+    };
   } else {
     console.log(`Account not found: ${accountId}`);
-    return Promise.reject({ error: "Account not found" });
+    return {
+      error: "Account not found",
+    };
   }
 };
 

@@ -6,6 +6,10 @@ class Base {
   init() {
     return Promise.resolve();
   }
+
+  unload() {
+    return Promise.resolve();
+  }
 }
 
 export default Base;

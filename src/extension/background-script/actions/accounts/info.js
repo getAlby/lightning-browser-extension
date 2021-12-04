@@ -8,7 +8,7 @@ const info = async (message, sender) => {
   //} else {
   //  account = state.getState().getAccount();
   //}
-  connector = state.getState().getConnector();
+  connector = await state.getState().getConnector();
 
   const [info, balance] = await Promise.all([
     connector.getInfo(),

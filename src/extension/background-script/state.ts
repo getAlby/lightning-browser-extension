@@ -14,7 +14,7 @@ interface Account {
 }
 
 interface State {
-  connector: any;
+  connector: Connector;
   account: Account | null;
   settings: any;
   accounts: {
@@ -22,7 +22,7 @@ interface State {
   };
   currentAccountId: string | null;
   password: string | null;
-  getConnector: () => Connector | null;
+  getConnector: () => Promise<Connector | null>;
 }
 
 // these keys get synced from the state to the browser storage
@@ -48,7 +48,7 @@ const state = createState<State>((set, get) => ({
     }
     return account;
   },
-  getConnector: () => {
+  getConnector: async () => {
     if (get().connector) {
       return get().connector;
     }
@@ -63,7 +63,7 @@ const state = createState<State>((set, get) => ({
       const config = decryptData(account.config, password);
 
       const connector = new connectors[account.connector](config);
-      // TODO memoize connector?
+      await connector.init();
       set({ connector: connector });
 
       return connector;
