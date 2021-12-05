@@ -151,7 +151,7 @@ class LnBits extends Base implements Connector {
   async request(
     method: string,
     path: string,
-    apiKey: string,
+    apiKey: string | undefined, // TOOD: force string
     args?: any,
     defaultValues?: any
   ) {
@@ -160,7 +160,10 @@ class LnBits extends Base implements Connector {
     const headers = new Headers();
     headers.append("Accept", "application/json");
     headers.append("Content-Type", "application/json");
-    headers.append("X-Api-Key", apiKey);
+    if (apiKey) {
+      // TODO force presence - see type definition
+      headers.append("X-Api-Key", apiKey);
+    }
 
     if (method === "POST") {
       body = JSON.stringify(args);
