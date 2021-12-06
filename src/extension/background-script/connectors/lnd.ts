@@ -14,15 +14,15 @@ import Connector, {
   VerifyMessageResponse,
 } from "./connector.interface";
 
-interface LndConfig {
+interface Config {
   macaroon?: string;
   url: string;
 }
 
 class Lnd extends Base implements Connector {
-  config: LndConfig;
+  config: Config;
 
-  constructor(config: LndConfig) {
+  constructor(config: Config) {
     super();
     this.config = config;
   }

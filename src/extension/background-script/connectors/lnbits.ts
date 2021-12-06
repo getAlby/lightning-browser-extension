@@ -17,15 +17,15 @@ import Connector, {
   VerifyMessageResponse,
 } from "./connector.interface";
 
-interface LnBitsConfig {
+interface Config {
   adminkey: string;
   url: string;
 }
 
 class LnBits extends Base implements Connector {
-  config: LnBitsConfig;
+  config: Config;
 
-  constructor(config: LnBitsConfig) {
+  constructor(config: Config) {
     super();
     this.config = config;
   }

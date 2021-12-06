@@ -19,21 +19,21 @@ import Connector, {
 } from "./connector.interface";
 import { AxiosRequestConfig, Method } from "axios";
 
-interface LndHubConfig {
+interface Config {
   login?: string;
   password?: string;
   url?: string;
 }
 
 export default class LndHub extends Base implements Connector {
-  config: LndHubConfig;
+  config: Config;
   access_token?: string;
   access_token_created?: number;
   refresh_token?: string;
   refresh_token_created?: number;
   noRetry?: boolean;
 
-  constructor(config: LndHubConfig) {
+  constructor(config: Config) {
     super();
     this.config = config;
   }
