@@ -6,6 +6,7 @@ import Base from "./base";
 import utils from "../../../common/lib/utils";
 import HashKeySigner from "../../../common/utils/signer";
 import Connector, {
+  LndHubConfig,
   SendPaymentArgs,
   SendPaymentResponse,
   GetInfoResponse,
@@ -20,11 +21,17 @@ import Connector, {
 import { AxiosRequestConfig, Method } from "axios";
 
 export default class LndHub extends Base implements Connector {
+  config: LndHubConfig;
   access_token?: string;
   access_token_created?: number;
   refresh_token?: string;
   refresh_token_created?: number;
   noRetry?: boolean;
+
+  constructor(config: LndHubConfig) {
+    super();
+    this.config = config;
+  }
 
   async init() {
     return this.authorize();

@@ -2,6 +2,7 @@ import Base64 from "crypto-js/enc-base64";
 import UTF8 from "crypto-js/enc-utf8";
 import Base from "./base";
 import Connector, {
+  LndConfig,
   SendPaymentArgs,
   SendPaymentResponse,
   GetInfoResponse,
@@ -15,6 +16,13 @@ import Connector, {
 } from "./connector.interface";
 
 class Lnd extends Base implements Connector {
+  config: LndConfig;
+
+  constructor(config: LndConfig) {
+    super();
+    this.config = config;
+  }
+
   getInfo(): Promise<GetInfoResponse> {
     return this.request("GET", "/v1/getinfo", undefined, {}).then((res) => {
       return {

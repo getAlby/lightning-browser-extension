@@ -5,6 +5,7 @@ import Base from "./base";
 import utils from "../../../common/lib/utils";
 import HashKeySigner from "../../../common/utils/signer";
 import Connector, {
+  LnBitsConfig,
   SendPaymentArgs,
   SendPaymentResponse,
   GetInfoResponse,
@@ -18,6 +19,13 @@ import Connector, {
 } from "./connector.interface";
 
 class LnBits extends Base implements Connector {
+  config: LnBitsConfig;
+
+  constructor(config: LnBitsConfig) {
+    super();
+    this.config = config;
+  }
+
   getInfo(): Promise<GetInfoResponse> {
     return this.request(
       "GET",
