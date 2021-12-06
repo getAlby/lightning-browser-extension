@@ -74,7 +74,7 @@
     "webextension-polyfill": "^0.8.0",
     "webpack-dev-server": "^4.5.0",
     "webpack-sources": "^3.2.2",
-    "zustand": "^3.6.4"
+    "zustand": "^3.6.5"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
@@ -124,13 +124,13 @@
     "jest-transform-stub": "^2.0.0",
     "lint-staged": "^12.1.2",
     "mini-css-extract-plugin": "^2.4.5",
-    "postcss": "^8.4.1",
-    "postcss-loader": "^6.2.0",
+    "postcss": "^8.4.4",
+    "postcss-loader": "^6.2.1",
     "prettier": "^2.5.0",
     "process": "^0.11.10",
     "react-test-renderer": "^17.0.2",
     "resolve-url-loader": "^4.0.0",
-    "sass": "^1.43.5",
+    "sass": "^1.44.0",
     "sass-loader": "^12.3.0",
     "stream-browserify": "^3.0.0",
     "tailwindcss": "^2.2.19",
