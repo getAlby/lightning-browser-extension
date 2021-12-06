@@ -16,7 +16,11 @@ import Input from "../components/Form/Input";
 import Header from "../components/Header";
 import QrcodeScanner from "../components/QrcodeScanner";
 
-function Send() {
+type Props = {
+  routerType: "hash" | "memory";
+};
+
+function Send({ routerType }: Props) {
   const [invoice, setInvoice] = useState("");
   const navigate = useNavigate();
   const [qrIsOpen, setQrIsOpen] = useState(false);
@@ -32,13 +36,12 @@ function Send() {
 
       if (lnurl) {
         setLoading(true);
-        const details = await lnurlLib.getDetails(lnurl);
-        navigate("/lnurlPay", {
-          state: {
-            details,
-            origin: getOriginData(),
-          },
-        });
+        if (routerType === "hash") {
+          navigate(`lnurlPay?lnurl=${lnurl}`);
+        } else if (routerType === "memory") {
+          const details = await lnurlLib.getDetails(lnurl);
+          navigate("/lnurlPay", { state: { details } });
+        }
       } else {
         await utils.call(
           "sendPaymentOrPrompt",
