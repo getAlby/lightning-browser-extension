@@ -35,15 +35,16 @@ function LNURLPay(props: Props) {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location: {
-    state?: {
-      details: Details;
-    };
-    search?: string;
+    state: {
+      details?: Details;
+      origin?: Origin;
+    } | null;
+    search: string;
   } = useLocation();
   const [details, setDetails] = useState(
     props.details || location.state?.details
   );
-  const origin = props.origin || getOriginData();
+  const origin = props.origin || location.state?.origin || getOriginData();
   const [valueMSat, setValueMSat] = useState<number | undefined>(
     details?.minSendable
   );
