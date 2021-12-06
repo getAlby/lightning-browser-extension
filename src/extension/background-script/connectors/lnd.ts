@@ -2,7 +2,6 @@ import Base64 from "crypto-js/enc-base64";
 import UTF8 from "crypto-js/enc-utf8";
 import Base from "./base";
 import Connector, {
-  LndConfig,
   SendPaymentArgs,
   SendPaymentResponse,
   GetInfoResponse,
@@ -14,6 +13,11 @@ import Connector, {
   VerifyMessageArgs,
   VerifyMessageResponse,
 } from "./connector.interface";
+
+interface LndConfig {
+  macaroon?: string;
+  url: string;
+}
 
 class Lnd extends Base implements Connector {
   config: LndConfig;

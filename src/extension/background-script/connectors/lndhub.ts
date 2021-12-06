@@ -6,7 +6,6 @@ import Base from "./base";
 import utils from "../../../common/lib/utils";
 import HashKeySigner from "../../../common/utils/signer";
 import Connector, {
-  LndHubConfig,
   SendPaymentArgs,
   SendPaymentResponse,
   GetInfoResponse,
@@ -19,6 +18,12 @@ import Connector, {
   VerifyMessageResponse,
 } from "./connector.interface";
 import { AxiosRequestConfig, Method } from "axios";
+
+interface LndHubConfig {
+  login?: string;
+  password?: string;
+  url?: string;
+}
 
 export default class LndHub extends Base implements Connector {
   config: LndHubConfig;

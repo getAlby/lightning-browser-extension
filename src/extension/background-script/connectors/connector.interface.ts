@@ -1,19 +1,3 @@
-export interface LnBitsConfig {
-  adminkey: string;
-  url: string;
-}
-
-export interface LndConfig {
-  macaroon?: string;
-  url: string;
-}
-
-export interface LndHubConfig {
-  login?: string;
-  password?: string;
-  url?: string;
-}
-
 interface WebLNNode {
   alias: string;
   pubkey?: string;

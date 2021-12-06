@@ -12,7 +12,16 @@ import Connector, {
   VerifyMessageResponse,
 } from "./connector.interface";
 
+interface Config {}
+
 class ConnectorExample extends Base implements Connector {
+  config: Config;
+
+  constructor(config: Config) {
+    super();
+    this.config = config;
+  }
+
   getInfo(): Promise<GetInfoResponse> {
     // Add your own implementation.
   }

@@ -5,7 +5,6 @@ import Base from "./base";
 import utils from "../../../common/lib/utils";
 import HashKeySigner from "../../../common/utils/signer";
 import Connector, {
-  LnBitsConfig,
   SendPaymentArgs,
   SendPaymentResponse,
   GetInfoResponse,
@@ -17,6 +16,11 @@ import Connector, {
   VerifyMessageArgs,
   VerifyMessageResponse,
 } from "./connector.interface";
+
+interface LnBitsConfig {
+  adminkey: string;
+  url: string;
+}
 
 class LnBits extends Base implements Connector {
   config: LnBitsConfig;
