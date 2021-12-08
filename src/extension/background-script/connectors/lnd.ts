@@ -1,6 +1,5 @@
 import Base64 from "crypto-js/enc-base64";
 import UTF8 from "crypto-js/enc-utf8";
-import Base from "./base";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
@@ -15,15 +14,14 @@ import Connector, {
 } from "./connector.interface";
 
 interface Config {
-  macaroon?: string;
+  macaroon: string;
   url: string;
 }
 
-class Lnd extends Base implements Connector {
+class Lnd implements Connector {
   config: Config;
 
   constructor(config: Config) {
-    super();
     this.config = config;
   }
 

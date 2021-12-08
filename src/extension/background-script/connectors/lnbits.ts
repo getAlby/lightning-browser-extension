@@ -1,7 +1,6 @@
 import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
-import Base from "./base";
 import utils from "../../../common/lib/utils";
 import HashKeySigner from "../../../common/utils/signer";
 import Connector, {
@@ -22,11 +21,10 @@ interface Config {
   url: string;
 }
 
-class LnBits extends Base implements Connector {
+class LnBits implements Connector {
   config: Config;
 
   constructor(config: Config) {
-    super();
     this.config = config;
   }
 
