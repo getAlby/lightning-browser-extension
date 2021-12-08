@@ -69,7 +69,7 @@ class Prompt extends Component {
                 path="invoice"
                 element={
                   <MakeInvoice
-                    invoice={this.state.args.invoice}
+                    invoiceAttributes={this.state.args.invoiceAttributes}
                     origin={this.state.origin}
                   />
                 }

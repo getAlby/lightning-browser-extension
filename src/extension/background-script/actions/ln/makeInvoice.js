@@ -17,7 +17,7 @@ const makeInvoice = async (message, sender) => {
       ...message,
       type: "invoice",
       args: {
-        invoice: {
+        invoiceAttributes: {
           ...message.args,
         },
       },

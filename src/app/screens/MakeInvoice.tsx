@@ -12,7 +12,7 @@ type Origin = {
 };
 
 type Props = {
-  invoice: {
+  invoiceAttributes: {
     amount?: string | number;
     defaultAmount?: string | number;
     minimumAmount?: string | number;
@@ -23,20 +23,20 @@ type Props = {
   origin: Origin;
 };
 
-function MakeInvoice({ invoice, origin }: Props) {
-  const [value, setValue] = useState(invoice.defaultAmount);
+function MakeInvoice({ invoiceAttributes, origin }: Props) {
+  const [value, setValue] = useState(invoiceAttributes.defaultAmount);
   const [error, setError] = useState("");
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setError("");
     if (
-      invoice.minimumAmount &&
-      e.target.valueAsNumber < invoice.minimumAmount
+      invoiceAttributes.minimumAmount &&
+      e.target.valueAsNumber < invoiceAttributes.minimumAmount
     ) {
       setError("Amount is less than minimum");
     } else if (
-      invoice.maximumAmount &&
-      e.target.valueAsNumber > invoice.maximumAmount
+      invoiceAttributes.maximumAmount &&
+      e.target.valueAsNumber > invoiceAttributes.maximumAmount
     ) {
       setError("Amount exceeds maximum");
     }
@@ -63,25 +63,28 @@ function MakeInvoice({ invoice, origin }: Props) {
               <div className="mt-1 flex flex-col">
                 <Input
                   type="number"
-                  min={invoice.minimumAmount}
-                  max={invoice.maximumAmount}
+                  min={invoiceAttributes.minimumAmount}
+                  max={invoiceAttributes.maximumAmount}
                   value={value}
                   onChange={handleChange}
                 />
-                {invoice.minimumAmount && invoice.maximumAmount && (
-                  <input
-                    className="mt-2"
-                    type="range"
-                    min={invoice.minimumAmount}
-                    max={invoice.maximumAmount}
-                    value={value}
-                    onChange={handleChange}
-                  />
-                )}
+                {invoiceAttributes.minimumAmount &&
+                  invoiceAttributes.maximumAmount && (
+                    <input
+                      className="mt-2"
+                      type="range"
+                      min={invoiceAttributes.minimumAmount}
+                      max={invoiceAttributes.maximumAmount}
+                      value={value}
+                      onChange={handleChange}
+                    />
+                  )}
                 {error && <p className="text-red-500">{error}</p>}
               </div>
             }
-            description={invoice.defaultMemo || invoice.memo}
+            description={
+              invoiceAttributes.defaultMemo || invoiceAttributes.memo
+            }
           />
         </div>
 
