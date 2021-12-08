@@ -3,13 +3,10 @@ import state from "../../state";
 import utils from "../../../../common/lib/utils";
 
 const makeInvoice = async (message, sender) => {
-  if (message.args.memo === undefined) {
-    message.args.memo = "Alby invoice memo";
-  }
   PubSub.publish(`ln.makeInvoice.start`, message);
 
   let amount;
-  const memo = message.args.memo;
+  const memo = message.args.memo || message.args.defaultMemo || "Alby invoice";
   if (message.args.amount) {
     amount = parseInt(message.args.amount);
   } else {
