@@ -54,6 +54,23 @@ function Settings() {
       <h2 className="mt-12 mb-6 text-2xl font-bold">Settings</h2>
       <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y">
         <Setting
+          title="Website enhancements"
+          subtitle="Tipping enhancements for Twitter, YouTube, etc."
+          right={
+            !loading && (
+              <Toggle
+                checked={settings.websiteEnhancements}
+                onChange={() => {
+                  saveSetting({
+                    websiteEnhancements: !settings.websiteEnhancements,
+                  });
+                }}
+              />
+            )
+          }
+        />
+
+        <Setting
           title="Camera access"
           subtitle="For scanning QR codes"
           right={
@@ -71,22 +88,6 @@ function Settings() {
               />
             ) : (
               <p className="text-green-500 font-medium">Permission granted</p>
-            )
-          }
-        />
-        <Setting
-          title="Website enhancements"
-          subtitle="Tipping enhancements for Twitter, YouTube, etc."
-          right={
-            !loading && (
-              <Toggle
-                checked={settings.websiteEnhancements}
-                onChange={() => {
-                  saveSetting({
-                    websiteEnhancements: !settings.websiteEnhancements,
-                  });
-                }}
-              />
             )
           }
         />
