@@ -1,7 +1,6 @@
 import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
-import Base from "./base";
 import utils from "../../../common/lib/utils";
 import HashKeySigner from "../../../common/utils/signer";
 import Connector, {
@@ -17,7 +16,18 @@ import Connector, {
   VerifyMessageResponse,
 } from "./connector.interface";
 
-class LnBits extends Base implements Connector {
+interface Config {
+  adminkey: string;
+  url: string;
+}
+
+class LnBits implements Connector {
+  config: Config;
+
+  constructor(config: Config) {
+    this.config = config;
+  }
+
   getInfo(): Promise<GetInfoResponse> {
     return this.request(
       "GET",

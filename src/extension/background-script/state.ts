@@ -9,7 +9,7 @@ type Connector = any;
 type BrowserStorageKeys = "settings" | "accounts" | "currentAccountId";
 
 interface Account {
-  connector: "base" | "native" | "lnd" | "lndhub" | "lnbits";
+  connector: "native" | "lnd" | "lndhub" | "lnbits";
   config: any;
 }
 

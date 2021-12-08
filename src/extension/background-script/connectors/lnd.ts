@@ -1,6 +1,5 @@
 import Base64 from "crypto-js/enc-base64";
 import UTF8 from "crypto-js/enc-utf8";
-import Base from "./base";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
@@ -14,7 +13,18 @@ import Connector, {
   VerifyMessageResponse,
 } from "./connector.interface";
 
-class Lnd extends Base implements Connector {
+interface Config {
+  macaroon: string;
+  url: string;
+}
+
+class Lnd implements Connector {
+  config: Config;
+
+  constructor(config: Config) {
+    this.config = config;
+  }
+
   getInfo(): Promise<GetInfoResponse> {
     return this.request("GET", "/v1/getinfo", undefined, {}).then((res) => {
       return {
