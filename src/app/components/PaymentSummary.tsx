@@ -1,7 +1,7 @@
 type Props = {
   amount: string | React.ReactNode;
   amountAlt?: string;
-  description?: string;
+  description?: string | React.ReactNode;
 };
 
 function PaymentSummary({ amount, amountAlt, description }: Props) {

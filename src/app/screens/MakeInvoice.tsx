@@ -27,9 +27,12 @@ type Props = {
 function MakeInvoice({ invoiceAttributes, origin }: Props) {
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState(invoiceAttributes.defaultAmount);
+  const [memo, setMemo] = useState(
+    invoiceAttributes.defaultMemo || invoiceAttributes.memo
+  );
   const [error, setError] = useState("");
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleValueChange(e: React.ChangeEvent<HTMLInputElement>) {
     setError("");
     if (
       invoiceAttributes.minimumAmount &&
@@ -45,12 +48,16 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
     setValue(e.target.value);
   }
 
+  function handleMemoChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setMemo(e.target.value);
+  }
+
   async function confirm() {
     try {
       setLoading(true);
       const response = await utils.call("makeInvoice", {
         amount: value,
-        memo: invoiceAttributes.defaultMemo || invoiceAttributes.memo,
+        memo: memo,
       });
       msg.reply(response);
     } catch (e) {
@@ -79,7 +86,7 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
                   min={invoiceAttributes.minimumAmount}
                   max={invoiceAttributes.maximumAmount}
                   value={value}
-                  onChange={handleChange}
+                  onChange={handleValueChange}
                 />
                 {invoiceAttributes.minimumAmount &&
                   invoiceAttributes.maximumAmount && (
@@ -89,14 +96,16 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
                       min={invoiceAttributes.minimumAmount}
                       max={invoiceAttributes.maximumAmount}
                       value={value}
-                      onChange={handleChange}
+                      onChange={handleValueChange}
                     />
                   )}
                 {error && <p className="text-red-500">{error}</p>}
               </div>
             }
             description={
-              invoiceAttributes.defaultMemo || invoiceAttributes.memo
+              <div className="mt-1 flex flex-col">
+                <Input type="text" value={memo} onChange={handleMemoChange} />
+              </div>
             }
           />
         </div>
@@ -112,6 +121,10 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
               disabled={!value || loading || Boolean(error)}
             />
           </div>
+
+          <p className="mb-3 underline text-sm text-gray-300">
+            Only create invoices for sites you trust.
+          </p>
 
           <a
             className="underline text-sm text-gray-500"
