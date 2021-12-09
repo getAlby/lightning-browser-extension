@@ -7,28 +7,29 @@ const makeInvoice = async (message, sender) => {
 
   let amount;
   const memo = message.args.memo || message.args.defaultMemo || "Alby invoice";
+
   if (message.args.amount) {
     amount = parseInt(message.args.amount);
+
+    const connector = state.getState().getConnector();
+    const response = await connector.makeInvoice({
+      amount,
+      memo,
+    });
+
+    return response;
   } else {
-    const response = await utils.openPrompt({
+    // If amount is not defined yet, let the user generate an invoice with an amount field.
+    return await utils.openPrompt({
       ...message,
-      type: "invoice",
+      type: "makeInvoice",
       args: {
         invoiceAttributes: {
           ...message.args,
         },
       },
     });
-    amount = parseInt(response.data);
   }
-
-  const connector = state.getState().getConnector();
-  const response = await connector.makeInvoice({
-    amount,
-    memo,
-  });
-
-  return response;
 };
 
 export default makeInvoice;

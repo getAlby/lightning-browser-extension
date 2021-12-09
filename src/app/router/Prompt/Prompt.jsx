@@ -66,7 +66,7 @@ class Prompt extends Component {
                 }
               />
               <Route
-                path="invoice"
+                path="makeInvoice"
                 element={
                   <MakeInvoice
                     invoiceAttributes={this.state.args.invoiceAttributes}

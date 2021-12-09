@@ -5,6 +5,7 @@ import Input from "../components/Form/Input";
 import PaymentSummary from "../components/PaymentSummary";
 import PublisherCard from "../components/PublisherCard";
 import msg from "../../common/lib/msg";
+import utils from "../../common/lib/utils";
 
 type Origin = {
   name: string;
@@ -24,6 +25,7 @@ type Props = {
 };
 
 function MakeInvoice({ invoiceAttributes, origin }: Props) {
+  const [loading, setLoading] = useState(false);
   const [value, setValue] = useState(invoiceAttributes.defaultAmount);
   const [error, setError] = useState("");
 
@@ -43,8 +45,19 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
     setValue(e.target.value);
   }
 
-  function confirm() {
-    msg.reply(value);
+  async function confirm() {
+    try {
+      setLoading(true);
+      const response = await utils.call("makeInvoice", {
+        amount: value,
+        memo: invoiceAttributes.defaultMemo || invoiceAttributes.memo,
+      });
+      msg.reply(response);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
   }
 
   function reject(e: React.MouseEvent) {
@@ -95,7 +108,8 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
               label="Make Invoice"
               fullWidth
               primary
-              disabled={!value || Boolean(error)}
+              loading={loading}
+              disabled={!value || loading || Boolean(error)}
             />
           </div>
 
