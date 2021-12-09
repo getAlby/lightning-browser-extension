@@ -3,9 +3,15 @@ import axios from "axios";
 import getOriginData from "../originData";
 import setLightningData from "../setLightningData";
 
-const urlMatcher = /^https?:\/\/bitcointv\.com\/w\/.*/i;
+// add more peertube URLs to this regex
+const urlMatcher = /^https?:\/\/(bitcointv\.com|gegenstimme\.tv)\/w\/.*/i;
 
 const battery = (): void => {
+  const hostMatch = document.location.toString().match(urlMatcher);
+  if (!hostMatch) {
+    return;
+  }
+  const host = hostMatch[1];
   const linkTag = document.querySelector<HTMLLinkElement>(
     'link[rel="canonical"][href*="videos/watch"]'
   );
@@ -17,7 +23,7 @@ const battery = (): void => {
     return;
   }
   const id = apiMatch[1];
-  const apiURL = `https://bitcointv.com/api/v1/videos/${id}`;
+  const apiURL = `https://${host}/api/v1/videos/${id}`;
 
   axios
     .get<any>(apiURL)
@@ -25,7 +31,7 @@ const battery = (): void => {
       const data = response.data;
       const channelName = data.channel.displayName;
       const channelDescription = data.channel.description;
-      const icon = `https://bitcointv.com${data.channel.avatar.path}`;
+      const icon = `https://${host}${data.channel.avatar.path}`;
       const episodeDescription = data.description;
 
       // we search in the episode or channel description for lightning data
@@ -62,8 +68,8 @@ const battery = (): void => {
     });
 };
 
-const BitcoinTvVideo = {
+const Peertube = {
   urlMatcher,
   battery,
 };
-export default BitcoinTvVideo;
+export default Peertube;

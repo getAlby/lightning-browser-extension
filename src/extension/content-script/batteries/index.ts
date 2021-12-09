@@ -3,12 +3,12 @@ import utils from "../../../common/lib/utils";
 import Monetization from "./Monetization";
 import Twitter from "./Twitter";
 import YouTubeVideo from "./YouTubeVideo";
-import BitcoinTvVideo from "./BitcoinTvVideo";
+import Peertube from "./Peertube";
 // import YouTubeChannel from "./YouTubeChannel";
 
 // Order is important as the first one for which the URL matches will be used
 // Monetization must likely be always the last one
-const enhancements = [Twitter, YouTubeVideo, BitcoinTvVideo, Monetization];
+const enhancements = [Twitter, YouTubeVideo, Peertube, Monetization];
 
 async function extractLightningData() {
   const { settings } = await utils.call("getSettings");
