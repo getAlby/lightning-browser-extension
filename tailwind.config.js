@@ -1,3 +1,5 @@
+/* eslint @typescript-eslint/no-var-requires: "off" */
+
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
@@ -11,6 +13,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+        serif: ["Catamaran", ...defaultTheme.fontFamily.sans],
       },
       fontSize: {
         xxxs: ".5rem",
@@ -23,6 +26,9 @@ module.exports = {
         "green-bitcoin": "#27ae60",
         "blue-bitcoin": "#2d9cdb",
         "purple-bitcoin": "#bb6bd9",
+        "gray-bitcoin": "#F7F6F4",
+        "light-green-bitcoin": "#27AE60",
+        "light-gray-bitcoin": "#F3F4F6",
       },
     },
   },

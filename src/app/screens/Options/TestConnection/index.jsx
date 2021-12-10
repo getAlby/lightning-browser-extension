@@ -41,7 +41,7 @@ export default function TestConnection() {
 
   return (
     <div>
-      <div className="relative lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
+      <div className="relative lg:mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white px-10 py-10">
         <div className="relative">
           <div>
             {errorMessage && (
@@ -54,14 +54,20 @@ export default function TestConnection() {
 
             {accountInfo && accountInfo.alias && (
               <div>
-                <h1 className="text-3xl font-bold">Success! 🎉</h1>
-                <p className="text-gray-500 mt-6">
+                <div className="flex space-x-2">
+                  <h1 className="text-2xl font-bold text-light-green-bitcoin">
+                    Success!
+                  </h1>
+                  <img src="assets/icons/star.svg" alt="" />
+                </div>
+
+                <p className="text-black mt-6">
                   Awesome, you&apos;re ready to go!
                 </p>
 
-                <div className="mt-6 shadow p-4 rounded-lg">
+                <div className="mt-6 shadow-lg p-4 rounded-xl">
                   <Card
-                    color="bg-green-bitcoin"
+                    color="bg-light-gray-bitcoin"
                     alias={accountInfo.alias}
                     satoshis={
                       typeof accountInfo.balance === "number"

@@ -9,13 +9,13 @@ export default function Steps({ steps }) {
         outerStyles =
           "group pl-4 py-2 flex flex-col border-l-4 border-orange-bitcoin md:pl-0 md:pt-4 md:pb-0 md:border-l-0 md:border-t-4";
         innerStyles =
-          "text-xs text-orange-bitcoin font-semibold tracking-wide uppercase";
+          "text-xs text-black font-semibold tracking-wide uppercase";
         break;
       case "current":
         outerStyles =
           "pl-4 py-2 flex flex-col border-l-4 border-orange-bitcoin md:pl-0 md:pt-4 md:pb-0 md:border-l-0 md:border-t-4";
         innerStyles =
-          "text-xs text-orange-bitcoin font-semibold tracking-wide uppercase";
+          "text-xs text-black font-semibold tracking-wide uppercase";
         break;
       default:
         outerStyles =

@@ -15,7 +15,8 @@
 	"plugins": ["@typescript-eslint"],
 	"env": {
 		"browser": true,
-		"webextensions": true
+		"webextensions": true,
+		"node": true
 	},
 	"rules": {
     "react/prop-types": "off"

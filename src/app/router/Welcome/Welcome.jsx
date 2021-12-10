@@ -62,9 +62,14 @@ function App() {
   }, [location]);
 
   return (
-    <div>
+    <div className="bg-gray-bitcoin min-h-full">
       {process.env.NODE_ENV === "development" && <DevMenu />}
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center font-serif  font-medium text-2xl py-8  ">
+          <p>The power of lightning in your browser</p>
+        </div>
+
         <Steps steps={steps} />
       </div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

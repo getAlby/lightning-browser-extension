@@ -63,80 +63,82 @@ export default function SetPassword() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="relative mt-24 lg:flex space-x-8">
-        <div className="lg:w-1/2">
-          <h1 className="text-3xl font-bold">Protect your wallet</h1>
-          <p className="text-gray-500 mt-6">
-            Your wallet is securely encrypted with a password and needs to be
-            unlocked before usage.
-          </p>
-          <div className="w-4/5">
-            <div className="mt-6">
-              <label
-                htmlFor="password"
-                className="block font-medium text-gray-700"
-              >
-                Choose a password:
-              </label>
-              <div className="mt-1">
-                <Input
-                  name="password"
-                  type="password"
-                  autoFocus
-                  required
-                  onChange={handleChange}
-                />
-                {errors.password && (
-                  <div className="mt-1 text-red-500">{errors.password}</div>
-                )}
+    <div className="min-h-screen">
+      <form onSubmit={handleSubmit}>
+        <div className="relative mt-14 lg:flex space-x-8 bg-white py-10 px-10">
+          <div className="lg:w-1/2">
+            <h1 className="text-2xl font-bold">Protect your wallet</h1>
+            <p className="text-gray-500 mt-6">
+              Your wallet is securely encrypted with a password and needs to be
+              unlocked before usage.
+            </p>
+            <div className="w-4/5">
+              <div className="mt-6">
+                <label
+                  htmlFor="password"
+                  className="block font-medium text-gray-700"
+                >
+                  Choose a password:
+                </label>
+                <div className="mt-1">
+                  <Input
+                    name="password"
+                    type="password"
+                    autoFocus
+                    required
+                    onChange={handleChange}
+                  />
+                  {errors.password && (
+                    <div className="mt-1 text-red-500">{errors.password}</div>
+                  )}
+                </div>
+              </div>
+              <div className="mt-6">
+                <label
+                  htmlFor="passwordConfirmation"
+                  className="block font-medium text-gray-700"
+                >
+                  Lets confirm you typed it correct:
+                </label>
+                <div className="mt-1">
+                  <Input
+                    name="passwordConfirmation"
+                    type="password"
+                    required
+                    onChange={handleChange}
+                    onBlur={validate}
+                  />
+                  {errors.passwordConfirmation && (
+                    <div className="mt-1 text-red-500">
+                      {errors.passwordConfirmation}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-            <div className="mt-6">
-              <label
-                htmlFor="passwordConfirmation"
-                className="block font-medium text-gray-700"
-              >
-                Lets confirm you typed it correct:
-              </label>
-              <div className="mt-1">
-                <Input
-                  name="passwordConfirmation"
-                  type="password"
-                  required
-                  onChange={handleChange}
-                  onBlur={validate}
-                />
-                {errors.passwordConfirmation && (
-                  <div className="mt-1 text-red-500">
-                    {errors.passwordConfirmation}
-                  </div>
-                )}
-              </div>
+          </div>
+          <div className="mt-16 lg:mt-0 lg:w-1/2">
+            <div className="lg:flex h-full justify-center items-center">
+              <img
+                src="assets/icons/satsymbol.svg"
+                alt="sat"
+                className="max-w-xs"
+              />
             </div>
           </div>
-          <div className="mt-8">
-            <Button
-              label="Next"
-              type="submit"
-              primary
-              disabled={
-                !formData.password ||
-                formData.password !== formData.passwordConfirmation
-              }
-            />
-          </div>
         </div>
-        <div className="mt-16 lg:mt-0 lg:w-1/2">
-          <div className="lg:flex h-full justify-center items-center">
-            <img
-              src="assets/icons/satsymbol.svg"
-              alt="sat"
-              className="max-w-xs"
-            />
-          </div>
+        <div className="mt-8 flex justify-center">
+          <Button
+            label="Next"
+            fixed
+            type="submit"
+            disabled={
+              !formData.password ||
+              formData.password !== formData.passwordConfirmation
+            }
+          />
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }

@@ -38,8 +38,8 @@ export default function Intro() {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <div className="relative lg:grid lg:grid-cols-3 lg:gap-x-8 mt-24">
+    <div className="h-screen">
+      <div className="relative lg:grid lg:grid-cols-3 lg:gap-x-8 mt-14 bg-white px-10 py-10 items-center">
         <div className="lg:col-span-1">
           <div className="max-w-xs">
             <img
@@ -48,20 +48,17 @@ export default function Intro() {
               className="max-w-xs"
             />
           </div>
-          <h2 className="mt-10 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl lg:max-w-xs">
-            The power of lightning in your browser
-          </h2>
         </div>
         <div className="mt-10 lg:mt-0 lg:col-span-2">
           <Features features={features} />
         </div>
       </div>
-      <div className="mt-8 float-right">
+      <div className="mt-8 flex justify-center">
         <Button
           onClick={() => navigate("/set-password")}
           type="button"
           label="Get Started"
-          primary
+          fixed
         />
       </div>
     </div>
