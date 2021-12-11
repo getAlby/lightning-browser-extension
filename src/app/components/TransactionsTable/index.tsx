@@ -36,7 +36,7 @@ export default function TransactionsTable({ transactions }: Props) {
   return (
     <div className="shadow overflow-hidden rounded-lg">
       <div className="bg-white divide-y divide-gray-200">
-        {transactions.map((tx) => (
+        {transactions.slice(0, 10).map((tx) => (
           <div key={tx.id} className="px-3 py-2">
             <Disclosure>
               {({ open }) => (

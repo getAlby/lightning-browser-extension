@@ -172,7 +172,7 @@ function Home() {
         ) : (
           <div>
             <h2 className="mb-2 text-lg text-gray-900 font-semibold">
-              Transactions
+              Recent Transactions
             </h2>
             {payments.length > 0 ? (
               <TransactionsTable
