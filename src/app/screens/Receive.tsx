@@ -5,6 +5,7 @@ import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import QRCode from "react-qr-code";
 
 import utils from "../../common/lib/utils";
+import { poll } from "../../common/utils/helpers";
 
 import Button from "../components/Button";
 import IconButton from "../components/IconButton";
@@ -35,12 +36,14 @@ function Receive() {
 
   useEffect(() => {
     if (invoice) {
-      // utils
-      //   .call("checkPayment", { paymentHash: invoice.rHash })
-      //   .then(({ paid }) => {
-      //     console.log("paid", paid);
-      //   });
-      console.log(invoice);
+      const pollForPayment = poll({
+        fn: () => utils.call("checkPayment", { paymentHash: invoice.rHash }),
+        validate: (payment) => payment.paid,
+        interval: 5000,
+        maxAttempts: 10,
+      })
+        .then((payment) => console.log(payment))
+        .catch((err) => console.error(err));
     }
   }, [invoice]);
 
