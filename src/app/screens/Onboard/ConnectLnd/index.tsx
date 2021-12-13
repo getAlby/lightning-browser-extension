@@ -108,7 +108,7 @@ export default function ConnectLnd() {
 
   return (
     <div className="h-screen">
-      <div className="relative mt-14 lg:flex space-x-8 bg-white px-10 py-10">
+      <div className="relative mt-14 lg:flex space-x-8 bg-white px-12 py-10">
         <div className="lg:w-1/2">
           <h1 className="text-2xl font-bold">Connect to your LND node</h1>
           <p className="text-gray-500 mt-6">
@@ -180,11 +180,7 @@ export default function ConnectLnd() {
         </div>
         <div className="mt-16 lg:mt-0 lg:w-1/2">
           <div className="lg:flex h-full justify-center items-center">
-            <img
-              src="assets/icons/satsymbol.svg"
-              alt="sat"
-              className="max-w-xs"
-            />
+            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
           </div>
         </div>
       </div>

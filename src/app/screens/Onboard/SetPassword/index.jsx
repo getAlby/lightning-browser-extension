@@ -65,7 +65,7 @@ export default function SetPassword() {
   return (
     <div className="min-h-screen">
       <form onSubmit={handleSubmit}>
-        <div className="relative mt-14 lg:flex space-x-8 bg-white py-10 px-10">
+        <div className="relative mt-14 lg:flex space-x-8 bg-white py-12 px-10">
           <div className="lg:w-1/2">
             <h1 className="text-2xl font-bold">Protect your wallet</h1>
             <p className="text-gray-500 mt-6">
@@ -122,7 +122,7 @@ export default function SetPassword() {
               <img
                 src="assets/icons/satsymbol.svg"
                 alt="sat"
-                className="max-w-xs"
+                className="w-64"
               />
             </div>
           </div>

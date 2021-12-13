@@ -10,7 +10,7 @@ type Props = {
 export default function LinkButton({ to, title, description, logo }: Props) {
   return (
     <Link to={to} className="block">
-      <div className="p-4 bg-white h-96 text-center shadow overflow-hidden border-b border-gray-200 rounded-lg hover:bg-gray-50 transition duration-200">
+      <div className="p-4 bg-white h-96 text-center shadow-lg overflow-hidden border-b border-gray-200 rounded-lg hover:bg-gray-50 transition duration-200">
         <div className="my-12">
           <img
             src={logo}

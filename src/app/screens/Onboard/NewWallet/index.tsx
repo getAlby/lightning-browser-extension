@@ -91,7 +91,7 @@ export default function NewWallet() {
 
   return (
     <div className="h-screen">
-      <div className="relative lg:flex mt-14 bg-white px-10 py-10 items-center ">
+      <div className="relative lg:flex mt-14 bg-white px-10 py-12 items-center ">
         <div className="lg:w-1/2  ">
           <h1 className="text-2xl font-bold">Get a new lightning wallet</h1>
           <p className="text-gray-500 mt-6"></p>
@@ -139,11 +139,7 @@ export default function NewWallet() {
         </div>
         <div className="mt-16 lg:mt-0 lg:w-1/2">
           <div className="lg:flex h-full justify-center items-center">
-            <img
-              src="assets/icons/satsymbol.svg"
-              alt="sat"
-              className="max-w-xs"
-            />
+            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
           </div>
         </div>
       </div>

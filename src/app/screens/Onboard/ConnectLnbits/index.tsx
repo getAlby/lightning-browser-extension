@@ -64,7 +64,7 @@ export default function ConnectLnbits() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="h-screen">
-        <div className="relative lg:flex mt-14 bg-white px-10 py-10">
+        <div className="relative lg:flex mt-14 bg-white px-10 py-12">
           <div className="lg:w-1/2">
             <h1 className="text-2xl font-bold">Connect to LNbits</h1>
             <p className="text-gray-500 mt-6"></p>
@@ -109,7 +109,7 @@ export default function ConnectLnbits() {
               <img
                 src="assets/icons/satsymbol.svg"
                 alt="sat"
-                className="max-w-xs"
+                className="w-64"
               />
             </div>
           </div>

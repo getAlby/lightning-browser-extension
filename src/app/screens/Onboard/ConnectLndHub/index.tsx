@@ -73,7 +73,7 @@ export default function ConnectLndHub() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="h-screen">
-        <div className="relative mt-14 lg:flex space-x-8 bg-white px-10 py-10">
+        <div className="relative mt-14 lg:flex space-x-8 bg-white px-10 py-12">
           <div className="lg:w-1/2">
             <h1 className="text-2xl font-bold">
               Connect to LNDHub (BlueWallet)
@@ -123,7 +123,7 @@ export default function ConnectLndHub() {
               <img
                 src="assets/icons/satsymbol.svg"
                 alt="sat"
-                className="max-w-xs"
+                className="w-64"
               />
             </div>
           </div>

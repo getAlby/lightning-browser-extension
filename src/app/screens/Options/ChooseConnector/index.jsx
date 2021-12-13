@@ -45,12 +45,12 @@ export default function ChooseConnector() {
       <Route
         path="/"
         element={
-          <div className="relative mt-14 lg:grid  lg:gap-8 items-center text-center">
+          <div className="relative mt-7 lg:grid  lg:gap-8 items-center text-center">
             <div className="relative">
-              <h1 className="text-3xl font-bold">
+              <h1 className="text-2xl font-bold mb-7">
                 Add a new lightning account
               </h1>
-              <p className="text-gray-500 my-6"></p>
+
               <div className="grid grid-cols-4 gap-4">
                 {connectors.map(({ to, title, description, logo }) => (
                   <LinkButton

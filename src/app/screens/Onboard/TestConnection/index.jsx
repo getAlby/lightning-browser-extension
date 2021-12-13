@@ -148,7 +148,7 @@ export default function TestConnection() {
 
   return (
     <div className="min-h-screen">
-      <div className="relative lg:mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white px-10 py-10">
+      <div className="relative lg:mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white px-10 py-12">
         <div className="relative">
           <div>
             {errorMessage && (
@@ -165,9 +165,13 @@ export default function TestConnection() {
                   <h1 className="text-2xl font-bold text-light-green-bitcoin">
                     Success!
                   </h1>
-                  <img src="assets/icons/star.svg" alt="" />
+                  <img
+                    src="assets/icons/star.svg"
+                    alt="image"
+                    className="w-8"
+                  />
                 </div>
-                <p className="text-black mt-6">
+                <p className="text-dark-bitcoin mt-6 ">
                   Awesome, you&apos;re ready to go!
                 </p>
                 <div>
@@ -201,7 +205,7 @@ export default function TestConnection() {
                   />
                 </div>
                 <div>
-                  <p className="text-black mt-8">
+                  <p className="text-dark-bitcoin mt-8">
                     Now you’ve connected your node would you like to go through
                     a tutorial?
                   </p>
