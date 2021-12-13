@@ -50,6 +50,9 @@ const state = createState<State>((set, get) => ({
     return account;
   },
   getConnector: () => {
+    if (get().connector) {
+      return get().connector;
+    }
     const currentAccountId = get().currentAccountId;
     let account = null;
     if (currentAccountId) {
@@ -61,7 +64,6 @@ const state = createState<State>((set, get) => ({
       const config = decryptData(account.config, password);
 
       const connector = new connectors[account.connector](config);
-      // TODO memoize connector?
       set({ connector: connector });
 
       return connector;
