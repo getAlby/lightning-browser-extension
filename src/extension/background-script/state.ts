@@ -63,7 +63,6 @@ const state = createState<State>((set, get) => ({
       const config = decryptData(account.config, password);
 
       const connector = new connectors[account.connector](config);
-      // TODO memoize connector?
       set({ connector: connector });
 
       return connector;
