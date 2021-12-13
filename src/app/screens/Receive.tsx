@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
@@ -20,7 +20,8 @@ function Receive() {
     expiration: "",
   });
   const [loading, setLoading] = useState(false);
-  const [invoice, setInvoice] = useState<{ paymentRequest: string }>();
+  const [invoice, setInvoice] =
+    useState<{ paymentRequest: string; rHash: string }>();
   const [copyLabel, setCopyLabel] = useState("Copy");
 
   function handleChange(
@@ -31,6 +32,17 @@ function Receive() {
       [event.target.name]: event.target.value.trim(),
     });
   }
+
+  useEffect(() => {
+    if (invoice) {
+      // utils
+      //   .call("checkPayment", { paymentHash: invoice.rHash })
+      //   .then(({ paid }) => {
+      //     console.log("paid", paid);
+      //   });
+      console.log(invoice);
+    }
+  }, [invoice]);
 
   async function createInvoice() {
     try {

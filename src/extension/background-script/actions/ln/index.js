@@ -1,6 +1,7 @@
 import PubSub from "pubsub-js";
 import state from "../../state";
 import sendPayment from "./sendPayment";
+import checkPayment from "./checkPayment";
 import signMessage from "./signMessage";
 import getInfo from "./getInfo";
 import makeInvoice from "./makeInvoice";
@@ -36,6 +37,7 @@ export {
   getBalance,
   getTransactions,
   sendPayment,
+  checkPayment,
   signMessage,
   makeInvoice,
   verifyMessage,

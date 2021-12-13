@@ -6,6 +6,8 @@ import HashKeySigner from "../../../common/utils/signer";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
+  CheckPaymentArgs,
+  CheckPaymentResponse,
   GetInfoResponse,
   GetBalanceResponse,
   MakeInvoiceArgs,
@@ -73,27 +75,35 @@ class LnBits implements Connector {
     })
       .then((data) => {
         // TODO: how do we get the total amount here??
-        return this.checkPayment(data.payment_hash).then((checkData) => {
-          return {
-            data: {
-              preimage: checkData.preimage,
-              paymentHash: data.payment_hash,
-              route: { total_amt: amountInSats, total_fees: 0 },
-            },
-          };
-        });
+        return this.checkPayment({ paymentHash: data.payment_hash }).then(
+          ({ data: checkData }) => {
+            return {
+              data: {
+                preimage: checkData.preimage || "",
+                paymentHash: data.payment_hash,
+                route: { total_amt: amountInSats, total_fees: 0 },
+              },
+            };
+          }
+        );
       })
       .catch((e) => {
         return { error: e.message };
       });
   }
 
-  checkPayment(paymentHash: string) {
-    return this.request(
+  async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
+    const data = await this.request(
       "GET",
-      `/api/v1/payments/${paymentHash}`,
+      `/api/v1/payments/${args.paymentHash}`,
       this.config.adminkey
     );
+    return {
+      data: {
+        paid: data.isPaid,
+        ...data,
+      },
+    };
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {

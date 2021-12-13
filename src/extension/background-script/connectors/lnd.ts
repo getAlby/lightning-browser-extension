@@ -3,6 +3,8 @@ import UTF8 from "crypto-js/enc-utf8";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
+  CheckPaymentArgs,
+  CheckPaymentResponse,
   GetInfoResponse,
   GetBalanceResponse,
   MakeInvoiceArgs,
@@ -61,6 +63,17 @@ class Lnd implements Connector {
         },
       };
     });
+  }
+
+  async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
+    const res = await this.request("GET", "/v2/invoices/lookup", {
+      payment_hash: args.paymentHash,
+    });
+    return {
+      data: {
+        paid: res.data.settled,
+      },
+    };
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
