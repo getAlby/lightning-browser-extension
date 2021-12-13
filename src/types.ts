@@ -74,6 +74,7 @@ export type Transaction = {
   badges: IBadge[];
   totalAmount: string;
   description: string;
+  location: string;
 };
 
 export interface Allowance {
