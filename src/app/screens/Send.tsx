@@ -6,8 +6,6 @@ import {
   QrCodeIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 
-import utils from "../../common/lib/utils";
-import getOriginData from "../../extension/content-script/originData";
 import lnurlLib from "../../common/lib/lnurl";
 
 import Button from "../components/Button";
@@ -16,11 +14,7 @@ import Input from "../components/Form/Input";
 import Header from "../components/Header";
 import QrcodeScanner from "../components/QrcodeScanner";
 
-type Props = {
-  routerType: "hash" | "memory";
-};
-
-function Send({ routerType }: Props) {
+function Send() {
   const [invoice, setInvoice] = useState("");
   const navigate = useNavigate();
   const [qrIsOpen, setQrIsOpen] = useState(false);
@@ -29,25 +23,16 @@ function Send({ routerType }: Props) {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
+      setLoading(true);
       let lnurl = lnurlLib.findLnurl(invoice);
       if (!lnurl && lnurlLib.isLightningAddress(invoice)) {
         lnurl = invoice;
       }
 
       if (lnurl) {
-        setLoading(true);
-        if (routerType === "hash") {
-          navigate(`lnurlPay?lnurl=${lnurl}`);
-        } else if (routerType === "memory") {
-          const details = await lnurlLib.getDetails(lnurl);
-          navigate("/lnurlPay", { state: { details } });
-        }
+        navigate(`/lnurlPay?lnurl=${lnurl}`);
       } else {
-        await utils.call(
-          "sendPaymentOrPrompt",
-          { paymentRequest: invoice },
-          { origin: getOriginData() }
-        );
+        navigate(`/confirmPayment?paymentRequest=${invoice}`);
       }
     } catch (e) {
       if (e instanceof Error) {

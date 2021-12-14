@@ -1,6 +1,6 @@
 import { Fragment, useState, useEffect, MouseEvent } from "react";
 import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { LNURLPaymentInfo, LNURLPaymentSuccessAction } from "../../types";
 import msg from "../../common/lib/msg";
@@ -32,19 +32,16 @@ type Props = {
 };
 
 function LNURLPay(props: Props) {
+  const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const location: {
-    state: {
-      details?: Details;
-      origin?: Origin;
-    } | null;
-    search: string;
-  } = useLocation();
-  const [details, setDetails] = useState(
-    props.details || location.state?.details
+  const [details, setDetails] = useState(props.details);
+  const [origin] = useState(
+    props.origin ||
+      (searchParams.get("origin") &&
+        JSON.parse(searchParams.get("origin") as string)) ||
+      getOriginData()
   );
-  const origin = props.origin || location.state?.origin || getOriginData();
   const [valueMSat, setValueMSat] = useState<number | undefined>(
     details?.minSendable
   );
@@ -55,11 +52,9 @@ function LNURLPay(props: Props) {
   >();
 
   useEffect(() => {
-    if (location.search) {
+    if (searchParams) {
       // lnurl was passed as querystring
-      const queryString = location.search;
-      const sp = new URLSearchParams(queryString);
-      const lnurlString = sp.get("lnurl");
+      const lnurlString = searchParams.get("lnurl");
       if (lnurlString) {
         lnurl.getDetails(lnurlString).then((lnurlDetails) => {
           if (lnurlDetails.tag === "payRequest") {
@@ -72,7 +67,7 @@ function LNURLPay(props: Props) {
     } else {
       setLoading(false);
     }
-  }, [location.search]);
+  }, [searchParams]);
 
   async function confirm() {
     if (!details) return;
@@ -281,53 +276,51 @@ function LNURLPay(props: Props) {
     );
   }
 
-  if (loading) {
-    return null;
-  }
-
   return (
     <div>
       <PublisherCard title={origin.name} image={origin.icon} />
-      <div className="p-4 max-w-screen-sm mx-auto">
-        {!successAction ? (
-          <>
-            <dl className="shadow bg-white pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-              {elements().map(([t, d], i) => (
-                <Fragment key={`element-${i}`}>
-                  <dt className="text-sm font-semibold text-gray-500">{t}</dt>
-                  <dd className="text-sm mb-4">{d}</dd>
-                </Fragment>
-              ))}
-            </dl>
-            <div className="text-center">
-              <div className="mb-5">
-                <Button
-                  onClick={confirm}
-                  label="Confirm"
-                  fullWidth
-                  primary
-                  loading={loadingConfirm}
-                  disabled={loadingConfirm || !valueMSat}
-                />
+      {!loading && (
+        <div className="p-4 max-w-screen-sm mx-auto">
+          {!successAction ? (
+            <>
+              <dl className="shadow bg-white pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+                {elements().map(([t, d], i) => (
+                  <Fragment key={`element-${i}`}>
+                    <dt className="text-sm font-semibold text-gray-500">{t}</dt>
+                    <dd className="text-sm mb-4">{d}</dd>
+                  </Fragment>
+                ))}
+              </dl>
+              <div className="text-center">
+                <div className="mb-5">
+                  <Button
+                    onClick={confirm}
+                    label="Confirm"
+                    fullWidth
+                    primary
+                    loading={loadingConfirm}
+                    disabled={loadingConfirm || !valueMSat}
+                  />
+                </div>
+
+                <p className="mb-3 underline text-sm text-gray-300">
+                  Only connect with sites you trust.
+                </p>
+
+                <a
+                  className="underline text-sm text-gray-500"
+                  href="#"
+                  onClick={reject}
+                >
+                  Cancel
+                </a>
               </div>
-
-              <p className="mb-3 underline text-sm text-gray-300">
-                Only connect with sites you trust.
-              </p>
-
-              <a
-                className="underline text-sm text-gray-500"
-                href="#"
-                onClick={reject}
-              >
-                Cancel
-              </a>
-            </div>
-          </>
-        ) : (
-          renderSuccessAction(successAction)
-        )}
-      </div>
+            </>
+          ) : (
+            renderSuccessAction(successAction)
+          )}
+        </div>
+      )}
     </div>
   );
 }

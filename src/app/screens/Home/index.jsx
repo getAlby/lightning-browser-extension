@@ -223,7 +223,7 @@ function Home() {
             onClick={async () => {
               try {
                 setLoadingSendSats(true);
-                const details = await lnurl.getDetails(lnData[0].recipient);
+                // const details = await lnurl.getDetails(lnData[0].recipient);
                 const origin = {
                   external: true,
                   name: lnData[0].name,
@@ -231,12 +231,11 @@ function Home() {
                   description: lnData[0].description,
                   icon: lnData[0].icon,
                 };
-                navigate("/lnurlPay", {
-                  state: {
-                    details,
-                    origin,
-                  },
-                });
+                navigate(
+                  `/lnurlPay?lnurl=${
+                    lnData[0].recipient
+                  }&origin=${JSON.stringify(origin)}`
+                );
               } catch (e) {
                 alert(e.message);
               } finally {
