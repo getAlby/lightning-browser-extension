@@ -11,7 +11,7 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   disabled?: boolean;
   secondary?: boolean;
   fixed?: boolean;
-  isWhat?: boolean;
+
   direction?: "row" | "column";
 };
 
@@ -27,7 +27,6 @@ export default function Button({
   loading = false,
   secondary = false,
   fixed = false,
-  isWhat = false,
 }: Props) {
   return (
     <button
@@ -35,13 +34,14 @@ export default function Button({
       className={classNames(
         direction === "row" ? "flex-row" : "flex-col",
         fullWidth && "w-full",
-        isWhat == fixed || primary,
+
         fixed
           ? "bg-orange-bitcoin text-white border border-transparent w-48"
           : `bg-white text-gray-700 border border-gray-200`,
         secondary
           ? " text-orange-bitcoin border-none shadow-none bg-transparent"
           : `bg-white text-gray-700 border border-gray-200`,
+
         primary
           ? "bg-orange-bitcoin text-white border border-transparent"
           : `bg-white text-gray-700 border border-gray-200`,
