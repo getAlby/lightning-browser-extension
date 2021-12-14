@@ -31,7 +31,9 @@ export interface Battery extends OriginData {
 }
 
 export interface Message {
-  args: { lnurlEncoded?: string; message: string; paymentRequest?: string };
+  args: {
+    [key: string]: any;
+  };
   origin: OriginData;
 }
 

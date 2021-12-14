@@ -1,7 +1,7 @@
 type Props = {
-  amount: string;
+  amount: string | React.ReactNode;
   amountAlt?: string;
-  description: string;
+  description?: string | React.ReactNode;
 };
 
 function PaymentSummary({ amount, amountAlt, description }: Props) {
@@ -11,8 +11,8 @@ function PaymentSummary({ amount, amountAlt, description }: Props) {
         <dt className="uppercase font-semibold text-gray-500 text-xs">
           Amount
         </dt>
-        <dd className="mb-0">{amount} sat</dd>
-        {amountAlt && <dd className="text-gray-500">{amountAlt} sat</dd>}
+        <dd className="mb-0">{amount}</dd>
+        {amountAlt && <dd className="text-gray-500">{amountAlt}</dd>}
         <dt className="mt-4 uppercase font-semibold text-gray-500 text-xs">
           Description
         </dt>

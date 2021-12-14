@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { Transition } from "@headlessui/react";
 import { useSearchParams, useNavigate } from "react-router-dom";
+
 import { parsePaymentRequest } from "invoices";
 
 import Button from "../../components/Button";
@@ -16,8 +17,9 @@ function ConfirmPayment(props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const invoiceRef = useRef(
-    props.invoice ||
-      parsePaymentRequest({ request: searchParams.get("paymentRequest") })
+    parsePaymentRequest({
+      request: props.paymentRequest || searchParams.get("paymentRequest"),
+    })
   );
   const originRef = useRef(props.origin || getOriginData());
   const paymentRequestRef = useRef(

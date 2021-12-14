@@ -2,7 +2,6 @@ import axios from "axios";
 import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
-import Base from "./base";
 import utils from "../../../common/lib/utils";
 import HashKeySigner from "../../../common/utils/signer";
 import Connector, {
@@ -19,12 +18,23 @@ import Connector, {
 } from "./connector.interface";
 import { AxiosRequestConfig, Method } from "axios";
 
-export default class LndHub extends Base implements Connector {
+interface Config {
+  login: string;
+  password: string;
+  url: string;
+}
+
+export default class LndHub implements Connector {
+  config: Config;
   access_token?: string;
   access_token_created?: number;
   refresh_token?: string;
   refresh_token_created?: number;
   noRetry?: boolean;
+
+  constructor(config: Config) {
+    this.config = config;
+  }
 
   async init() {
     return this.authorize();
