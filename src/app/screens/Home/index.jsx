@@ -223,7 +223,6 @@ function Home() {
             onClick={async () => {
               try {
                 setLoadingSendSats(true);
-                // const details = await lnurl.getDetails(lnData[0].recipient);
                 const origin = {
                   external: true,
                   name: lnData[0].name,
