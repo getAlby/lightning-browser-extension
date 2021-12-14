@@ -25,7 +25,7 @@ function ConfirmPayment(props) {
   const paymentRequestRef = useRef(
     props.paymentRequest || searchParams.get("paymentRequest")
   );
-  const [budget, setBudget] = useState((props.invoice?.tokens || 0) * 10);
+  const [budget, setBudget] = useState((invoiceRef.current?.tokens || 0) * 10);
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -53,7 +53,7 @@ function ConfirmPayment(props) {
 
   function reject(e) {
     e.preventDefault();
-    if (props.invoice && props.paymentRequest && props.origin) {
+    if (props.paymentRequest && props.origin) {
       msg.error("User rejected");
     } else {
       navigate(-1);
