@@ -71,7 +71,6 @@ export async function poll({
     const result = await fn();
     attempts++;
 
-    console.log("result", result);
     if (validate(result)) {
       return resolve(result);
     } else if (maxAttempts && attempts === maxAttempts) {

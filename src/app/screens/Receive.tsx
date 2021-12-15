@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
@@ -12,6 +12,7 @@ import IconButton from "../components/IconButton";
 import Input from "../components/Form/Input";
 // import Select from "../components/Form/Select";
 import Header from "../components/Header";
+import Loading from "../components/Loading";
 
 function Receive() {
   const navigate = useNavigate();
@@ -24,6 +25,8 @@ function Receive() {
   const [invoice, setInvoice] =
     useState<{ paymentRequest: string; rHash: string }>();
   const [copyLabel, setCopyLabel] = useState("Copy");
+  const [paid, setPaid] = useState(true);
+  const [pollingForPayment, setPollingForPayment] = useState(false);
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -34,18 +37,23 @@ function Receive() {
     });
   }
 
-  useEffect(() => {
-    if (invoice) {
-      const pollForPayment = poll({
-        fn: () => utils.call("checkPayment", { paymentHash: invoice.rHash }),
-        validate: (payment) => payment.paid,
-        interval: 5000,
-        maxAttempts: 10,
+  function checkPayment(paymentHash: string) {
+    setPollingForPayment(true);
+    poll({
+      fn: () => utils.call("checkPayment", { paymentHash }),
+      validate: (payment) => payment.paid,
+      interval: 3000,
+      maxAttempts: 20,
+    })
+      .then(() => {
+        setPaid(true);
+        // Update balance.
       })
-        .then((payment) => console.log(payment))
-        .catch((err) => console.error(err));
-    }
-  }, [invoice]);
+      .catch((err) => console.error(err))
+      .finally(() => {
+        setPollingForPayment(false);
+      });
+  }
 
   async function createInvoice() {
     try {
@@ -55,6 +63,7 @@ function Receive() {
         memo: formData.description,
       });
       setInvoice(response);
+      checkPayment(response.rHash);
     } catch (e) {
       if (e instanceof Error) {
         alert(e.message);
@@ -89,6 +98,21 @@ function Receive() {
             icon={<CopyIcon className="w-6 h-6" />}
             label={copyLabel}
           />
+        </div>
+        <div className="flex justify-center">
+          {pollingForPayment && (
+            <div className="flex items-center space-x-2">
+              <Loading />
+              <span>waiting for payment...</span>
+            </div>
+          )}
+          {!paid && !pollingForPayment && (
+            <Button
+              onClick={() => checkPayment(invoice.rHash)}
+              label="Check payment status"
+            />
+          )}
+          {paid && <p>Payment received!</p>}
         </div>
       </div>
     );
