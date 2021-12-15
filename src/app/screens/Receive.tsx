@@ -6,6 +6,7 @@ import QRCode from "react-qr-code";
 
 import utils from "../../common/lib/utils";
 import { poll } from "../../common/utils/helpers";
+import { useAuth } from "../context/AuthContext";
 
 import Button from "../components/Button";
 import IconButton from "../components/IconButton";
@@ -15,6 +16,7 @@ import Header from "../components/Header";
 import Loading from "../components/Loading";
 
 function Receive() {
+  const auth = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     amount: "",
@@ -25,7 +27,7 @@ function Receive() {
   const [invoice, setInvoice] =
     useState<{ paymentRequest: string; rHash: string }>();
   const [copyLabel, setCopyLabel] = useState("Copy");
-  const [paid, setPaid] = useState(true);
+  const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
 
   function handleChange(
@@ -47,7 +49,7 @@ function Receive() {
     })
       .then(() => {
         setPaid(true);
-        // Update balance.
+        auth.getAccountInfo(); // Update balance.
       })
       .catch((err) => console.error(err))
       .finally(() => {
