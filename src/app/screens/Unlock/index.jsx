@@ -65,20 +65,6 @@ function Unlock() {
           primary
           disabled={password === ""}
         />
-        <div className="flex space-x-1 justify-center mt-7">
-          <TextButton
-            label="Restore Account?"
-            primary
-            className="flex-auto font-serif font-bold  text-base"
-          />
-          <span className="flex-none text-text-gray-bitcoin">or</span>
-
-          <TextButton
-            label="Connect Wallet here"
-            primary
-            className="flex-auto font-serif font-bold  text-base"
-          />
-        </div>
 
         <div className="flex justify-center space-x-1 mt-5">
           <span className="text-text-gray-bitcoin ">Need help? Contact </span>
