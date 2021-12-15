@@ -78,7 +78,7 @@ export default function UserMenu() {
         </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
-            window.open("https://feedback.getalby.com");
+            utils.openUrl("https://feedback.getalby.com");
           }}
         >
           <QuestionIcon className="h-5 w-5 mr-2 text-gray-500" />
