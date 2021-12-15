@@ -4,7 +4,7 @@ import getOriginData from "../originData";
 import setLightningData from "../setLightningData";
 
 // add more peertube URLs to this regex
-const urlMatcher = /^https?:\/\/(bitcointv\.com|gegenstimme\.tv)\/w\/.*/i;
+const urlMatcher = /^https?:\/\/(bitcointv\.com)\/w\/.*/i;
 
 const battery = (): void => {
   const hostMatch = document.location.toString().match(urlMatcher);
