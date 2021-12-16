@@ -64,7 +64,7 @@ export interface IBadge {
 export type Transaction = {
   type: string;
   id: string;
-  title: any;
+  title: string | React.ReactNode;
   subTitle: string;
   date: string;
   amount: string;
