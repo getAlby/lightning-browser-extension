@@ -88,6 +88,13 @@ export default function TransactionsTable({ transactions }: Props) {
                       {tx.preimage && (
                         <p className="truncate">Preimage: {tx.preimage}</p>
                       )}
+                      {tx.location ? (
+                        <a href={tx.location} target="_blank" rel="noreferrer">
+                          {tx.location}
+                        </a>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   </Disclosure.Panel>
                 </>
