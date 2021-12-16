@@ -61,6 +61,7 @@
     "pubsub-js": "^1.9.4",
     "query-string": "^7.0.0",
     "react": "^17.0.2",
+    "react-confetti": "^6.0.1",
     "react-dom": "^17.0.2",
     "react-loading-skeleton": "^3.0.1",
     "react-modal": "^3.14.4",

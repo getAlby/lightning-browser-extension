@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import QRCode from "react-qr-code";
+import Confetti from "react-confetti";
 
 import utils from "../../common/lib/utils";
 import { poll } from "../../common/utils/helpers";
@@ -114,7 +115,21 @@ function Receive() {
               label="Check payment status"
             />
           )}
-          {paid && <p>Payment received!</p>}
+          {paid && (
+            <>
+              <p>Payment received!</p>
+              <Confetti
+                numberOfPieces={500}
+                width={window.innerWidth}
+                height={window.innerHeight}
+                recycle={false}
+                onConfettiComplete={(confetti) => {
+                  confetti && confetti.reset();
+                }}
+                style={{ pointerEvents: "none" }}
+              />
+            </>
+          )}
         </div>
       </div>
     );
