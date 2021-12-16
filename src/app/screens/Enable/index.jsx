@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
-import { createHashHistory } from "history";
+import { useState, useEffect } from "react";
 
-import Button from "../../components/button";
+import Button from "../../components/Button";
 import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
 
@@ -10,7 +9,6 @@ function Enable(props) {
   const [remember, setRemember] = useState(true);
   const [enabled, setEnabled] = useState(false);
   const [budget, setBudget] = useState(null);
-  const history = useRef(createHashHistory());
 
   function enable() {
     setEnabled(true);

@@ -5,6 +5,7 @@ import utils from "../../common/lib/utils";
 import { router } from "./router";
 import state from "./state";
 import db from "./db";
+import connectors from "./connectors";
 
 import * as events from "./events";
 
@@ -14,31 +15,45 @@ setInterval(() => {
 }, 5000);
 */
 
+const extractLightningData = (tabId, changeInfo, tab) => {
+  if (changeInfo.status === "complete" && tab.url?.startsWith("http")) {
+    browser.tabs.sendMessage(tabId, {
+      type: "extractLightningData",
+    });
+  }
+};
+
 const updateIcon = async (tabId, changeInfo, tabInfo) => {
-  if (!changeInfo.url) {
+  if (changeInfo.status !== "complete" || !tabInfo.url?.startsWith("http")) {
     return;
   }
-  if (!changeInfo.url.startsWith("http")) {
-    return;
-  }
-  const url = new URL(changeInfo.url);
+  const url = new URL(tabInfo.url);
 
   const allowance = await db.allowances
     .where("host")
     .equalsIgnoreCase(url.host)
     .first();
 
+  // TODO: move to some config file
+  const names = {
+    active: "alby_icon_yellow",
+    off: "alby_icon_sleeping",
+  };
+  let name;
   if (allowance) {
-    return browser.browserAction.setIcon({
-      path: {
-        16: "assets/icons/satsymbol-16.png",
-        32: "assets/icons/satsymbol-32.png",
-        48: "assets/icons/satsymbol-48.png",
-        128: "assets/icons/satsymbol-128.png",
-      },
-      tabId: tabId,
-    });
+    name = names.active;
+  } else {
+    name = names.off;
   }
+  return browser.browserAction.setIcon({
+    path: {
+      16: `assets/icons/${name}_16x16.png`,
+      32: `assets/icons/${name}_32x32.png`,
+      48: `assets/icons/${name}_48x48.png`,
+      128: `assets/icons/${name}_128x128.png`,
+    },
+    tabId: tabId,
+  });
 };
 
 const debugLogger = (message, sender) => {
@@ -59,7 +74,7 @@ const handleInstalled = (details) => {
 // returns a promise to be handled in the content script
 const routeCalls = (message, sender) => {
   // if the application does not match or if it is not a prompt we ignore the call
-  if (message.application !== "Joule" || !message.prompt) {
+  if (message.application !== "LBE" || !message.prompt) {
     return;
   }
   const debug = state.getState().settings.debug;
@@ -94,15 +109,25 @@ async function init() {
   // this is the only handler that may and must return a Promise which resolve with the response to the content script
   browser.runtime.onMessage.addListener(routeCalls);
 
-  browser.runtime.onInstalled.addListener(handleInstalled);
+  // TODO: make optional
+  browser.tabs.onUpdated.addListener(updateIcon); // update Icon when there is an allowance
 
-  browser.tabs.onUpdated.addListener(updateIcon);
-  /*
-  if (settings.enableLsats) {
-    await browser.storage.sync.set({ lsats: {} });
-    initLsatInterceptor(connector);
+  // Notify the content script that the tab has been updated.
+  browser.tabs.onUpdated.addListener(extractLightningData);
+
+  if (state.getState().settings.debug) {
+    console.log("Debug mode enabled, use window.debugAlby");
+    window.debugAlby = {
+      state,
+      db,
+      connectors,
+      router,
+    };
   }
-  */
 }
+
+// The onInstalled event is fired directly after the code is loaded.
+// When we subscribe to that event asynchronously in the init() function it is too late and we miss the event.
+browser.runtime.onInstalled.addListener(handleInstalled);
 
 init();

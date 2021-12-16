@@ -11,10 +11,14 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 // init env variables otherwise the EnvironmentPlugin complains if those are not set.
 if (!process.env.FAUCET_URL) {
-  process.env.FAUCET_URL = null;
+  process.env.FAUCET_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
 if (!process.env.FAUCET_K) {
-  process.env.FAUCET_K = null;
+  process.env.FAUCET_K = ""; // env variables are passed as string. empty strings are still falsy
+}
+// default value is set in the code where it is used
+if (!process.env.ALBY_LNDHUB_URL) {
+  process.env.ALBY_LNDHUB_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
 
 const viewsPath = path.join(__dirname, "static", "views");
@@ -35,9 +39,7 @@ const getExtensionFileType = (browser) => {
   return "zip";
 };
 
-module.exports = {
-  devtool: nodeEnv === "development" ? "inline-source-map" : false,
-
+var options = {
   stats: {
     all: false,
     builtAt: true,
@@ -56,7 +58,6 @@ module.exports = {
     prompt: "./src/app/router/Prompt/index.jsx",
     options: "./src/app/router/Options/index.jsx",
     welcome: "./src/app/router/Welcome/index.jsx",
-    lsat: "./src/extension/ln/lsat/index.js",
   },
 
   output: {
@@ -133,10 +134,11 @@ module.exports = {
     // new webpack.SourceMapDevToolPlugin({ filename: false }),
     // environmental variables
     new webpack.EnvironmentPlugin([
-      "NODE_ENV",
-      "TARGET_BROWSER",
+      "ALBY_LNDHUB_URL",
       "FAUCET_URL",
       "FAUCET_K",
+      "NODE_ENV",
+      "TARGET_BROWSER",
     ]),
     // delete previous build files
     new CleanWebpackPlugin({
@@ -180,13 +182,6 @@ module.exports = {
       hash: true,
       filename: "welcome.html",
     }),
-    new HtmlWebpackPlugin({
-      template: path.join(viewsPath, "lsat.html"),
-      inject: "body",
-      chunks: ["lsat"],
-      hash: true,
-      filename: "lsat.html",
-    }),
     // write css file(s) to build folder
     new MiniCssExtractPlugin({ filename: "[name].css" }), // No css subfolder has been used as this breaks path's to url's such as fonts.
     // copy static assets
@@ -194,8 +189,12 @@ module.exports = {
       patterns: [{ from: "static/assets", to: "assets" }],
     }),
   ],
+};
 
-  optimization: {
+if (nodeEnv === "development") {
+  options.devtool = "inline-source-map";
+} else {
+  options.optimization = {
     minimize: true,
     minimizer: [
       new TerserPlugin(),
@@ -218,5 +217,7 @@ module.exports = {
         },
       }),
     ],
-  },
-};
+  };
+}
+
+module.exports = options;

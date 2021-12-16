@@ -1,11 +1,7 @@
 import WebLNProvider from "../ln/webln";
-import Donation from "./donation";
 
 if (document) {
   window.webln = new WebLNProvider();
-
-  const donation = new Donation(document.location.toString());
-  donation.execute();
 
   // Intercept any `lightning:` requests
   window.addEventListener("click", (ev) => {
@@ -14,13 +10,13 @@ if (document) {
       return;
     }
     const lightningLink = target.closest('[href^="lightning:" i]');
-    const bitcoinLinkWithLighting = target.closest(
-      '[href*="lightning=lnbc" i]'
-    );
+    const lnurlLink = target.closest('[href^="lnurl" i]');
+    const bitcoinLinkWithLighting = target.closest('[href*="lightning=ln" i]'); // links with a lightning parameter and a value that starts with ln: payment requests (lnbc...) or lnurl (lnurl*)
     let href;
     let paymentRequest;
+    let lnurl;
 
-    if (!lightningLink && !bitcoinLinkWithLighting) {
+    if (!lightningLink && !bitcoinLinkWithLighting && !lnurlLink) {
       return;
     }
     ev.preventDefault();
@@ -30,23 +26,31 @@ if (document) {
       paymentRequest = href.replace("lightning:", "");
     } else if (bitcoinLinkWithLighting) {
       href = bitcoinLinkWithLighting.getAttribute("href");
-      const matches = href.match(/lightning=(\w+)/);
-      if (!matches) {
-        return;
-      }
-      paymentRequest = matches[0];
+      const url = new URL(href);
+      const query = new URLSearchParams(url.search);
+      paymentRequest = query.get("lightning");
+    } else if (lnurlLink) {
+      href = lnurlLink.getAttribute("href").toLowerCase();
+      lnurl = href.replace(/^lnurl[pwc]:/i, "");
     }
-    if (!paymentRequest) {
+
+    // if we did not find any paymentRequest and no LNURL we give up and return
+    if (!paymentRequest && !lnurl) {
       return;
+    }
+
+    // it could be it is a LNURL behind a lightning: link
+    if (paymentRequest && paymentRequest.startsWith("lnurl")) {
+      lnurl = paymentRequest.replace(/^lnurl[pwc]:/i, ""); // replace potential scheme. the different lnurl types are handled in the lnurl action (by checking the type in the LNURL response)
     }
 
     window.webln.enable().then((response) => {
       if (!response.enabled) {
         return;
       }
-      if (paymentRequest.toLowerCase().startsWith("lnurl")) {
+      if (lnurl) {
         return window.webln
-          .lnurl(paymentRequest)
+          .lnurl(lnurl)
           .then((r) => {
             console.log(r);
           })
@@ -58,7 +62,8 @@ if (document) {
       return window.webln
         .sendPayment(paymentRequest)
         .then((r) => {
-          alert(JSON.stringify(r));
+          console.log(r);
+          //alert(JSON.stringify(r));
         })
         .catch((e) => {
           console.log(e);

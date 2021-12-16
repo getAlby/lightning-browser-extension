@@ -1,55 +1,84 @@
-import React from "react";
-import { createHashHistory } from "history";
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { Fragment, useState, useEffect } from "react";
+import { MemoryRouter, Outlet, Route, Routes } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";
+
 import Home from "../../screens/Home";
 import Unlock from "../../screens/Unlock";
-import Loading from "../../components/Loading";
+import Send from "../../screens/Send";
+import Receive from "../../screens/Receive";
+import LNURLPay from "../../screens/LNURLPay";
 
-import "./styles.scss";
+import { AuthProvider } from "../../context/AuthContext";
+import RequireAuth from "../RequireAuth";
+import Navbar from "../../components/Navbar";
 
-class Popup extends React.Component {
-  constructor(props) {
-    super(props);
-    this.history = createHashHistory();
-  }
-
-  componentDidMount() {
-    utils
-      .call("status")
-      .then((response) => {
-        if (!response.configured) {
-          utils.openPage("welcome.html");
-          window.close();
-        } else if (response.unlocked) {
-          this.history.replace("/home");
-        } else {
-          this.history.replace("/unlock");
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
-
-  render() {
-    return (
-      <HashRouter>
+function Popup() {
+  return (
+    <AuthProvider>
+      <MemoryRouter>
         <section id="popup">
-          <Switch>
-            <Route exact path="/" render={(props) => <Loading />} />
-            <Route exact path="/home" render={(props) => <Home />} />
+          <Routes>
             <Route
-              exact
-              path="/unlock"
-              render={(props) => <Unlock next="/home" />}
-            />
-          </Switch>
+              path="/"
+              element={
+                <RequireAuth>
+                  <Layout />
+                </RequireAuth>
+              }
+            >
+              <Route index element={<Home />} />
+              <Route path="send" element={<Send />} />
+              <Route path="receive" element={<Receive />} />
+              <Route path="lnurlPay" element={<LNURLPay />} />
+            </Route>
+            <Route path="unlock" element={<Unlock />} />
+          </Routes>
         </section>
-      </HashRouter>
-    );
-  }
+      </MemoryRouter>
+    </AuthProvider>
+  );
 }
+
+const Layout = () => {
+  const [accountInfo, setAccountInfo] = useState({});
+  const [key, setKey] = useState(Date.now());
+
+  useEffect(() => {
+    getAccountInfo();
+  }, []);
+
+  function getAccountInfo() {
+    setAccountInfo({});
+    utils.call("accountInfo").then((response) => {
+      const { alias } = response.info;
+      const balance = parseInt(response.balance.balance); // TODO: handle amounts
+      setAccountInfo({ alias, balance });
+    });
+  }
+
+  return (
+    <div>
+      <Navbar
+        title={accountInfo.alias}
+        subtitle={
+          typeof accountInfo.balance === "number"
+            ? `${accountInfo.balance} sat`
+            : ""
+        }
+        onAccountSwitch={() => {
+          getAccountInfo();
+
+          // TODO: this should be done in an eloquent way. Maybe use context?
+          setKey(Date.now()); // Refresh Home.
+        }}
+      />
+
+      <Fragment key={key}>
+        <Outlet />
+      </Fragment>
+    </div>
+  );
+};
 
 export default Popup;

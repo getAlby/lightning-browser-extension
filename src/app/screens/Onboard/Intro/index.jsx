@@ -1,21 +1,19 @@
-import React from "react";
 import Features from "./features";
-import Button from "../../../components/button";
+import Button from "../../../components/Button";
 import {
-  LightningBoltIcon,
-  ArrowRightIcon,
-  EyeOffIcon,
   CodeIcon,
   KeyIcon,
-} from "@heroicons/react/outline";
-import { useHistory } from "react-router-dom";
+  LightningIcon,
+  ShieldIcon,
+} from "@bitcoin-design/bitcoin-icons-react/filled";
+import { useNavigate } from "react-router-dom";
 
 const features = [
   {
     name: "Send in One Click",
     description:
       "Lightning transactions happen all in your browser. No alt+tab or QR-code scanning needed.",
-    icon: LightningBoltIcon,
+    icon: LightningIcon,
   },
   {
     name: "No more annoying paywalls",
@@ -26,7 +24,7 @@ const features = [
   {
     name: "Privacy first",
     description: "Use lightning to authenticate and control your privacy.",
-    icon: EyeOffIcon,
+    icon: ShieldIcon,
   },
   {
     name: "Free and Open Source",
@@ -37,7 +35,7 @@ const features = [
 ];
 
 export default function Intro() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -46,7 +44,7 @@ export default function Intro() {
           <div className="max-w-xs">
             <img
               src="assets/icons/satsymbol.svg"
-              alt="Sats"
+              alt="sat"
               className="max-w-xs"
             />
           </div>
@@ -60,11 +58,11 @@ export default function Intro() {
       </div>
       <div className="mt-8 float-right">
         <Button
-          onClick={() => history.push("/set-password")}
+          onClick={() => navigate("/set-password")}
           type="button"
           label="Get Started"
           primary
-        ></Button>
+        />
       </div>
     </div>
   );

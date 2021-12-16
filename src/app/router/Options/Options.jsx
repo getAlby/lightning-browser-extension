@@ -1,79 +1,101 @@
-import React, { useState, useEffect } from "react";
-import { HashRouter, Switch, Redirect, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";
+import { AuthProvider } from "../../context/AuthContext";
+import RequireAuth from "../RequireAuth";
 import Container from "../../components/Container";
 import Navbar from "../../components/Navbar";
-import UserMenu from "../../components/UserMenu";
 import Publishers from "../../screens/Publishers";
 import Publisher from "../../screens/Publisher";
+import ChooseConnector from "../../screens/Options/ChooseConnector";
+import TestConnection from "../../screens/Options/TestConnection";
+import Send from "../../screens/Send";
+import Receive from "../../screens/Receive";
+import Settings from "../../screens/Settings";
+import Unlock from "../../screens/Unlock";
 
 function Options() {
+  return (
+    <AuthProvider>
+      <HashRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <RequireAuth>
+                <Layout />
+              </RequireAuth>
+            }
+          >
+            <Route index element={<Navigate to="/publishers" replace />} />
+            <Route path="publishers">
+              <Route path=":id" element={<Publisher />} />
+              <Route index element={<Publishers />} />
+            </Route>
+            <Route path="send" element={<Send />} />
+            <Route path="receive" element={<Receive />} />
+            <Route path="settings" element={<Settings />} />
+            <Route
+              path="accounts/new/*"
+              element={
+                <Container>
+                  <ChooseConnector />
+                </Container>
+              }
+            />
+            <Route
+              path="test-connection"
+              element={
+                <Container>
+                  <TestConnection />
+                </Container>
+              }
+            />
+          </Route>
+          <Route path="unlock" element={<Unlock />} />
+        </Routes>
+      </HashRouter>
+    </AuthProvider>
+  );
+}
+
+const Layout = () => {
   const [accountInfo, setAccountInfo] = useState({});
 
   useEffect(() => {
+    getAccountInfo();
+  }, []);
+
+  function getAccountInfo() {
+    setAccountInfo({});
     utils.call("accountInfo").then((response) => {
       const { alias } = response.info;
       const balance = parseInt(response.balance.balance); // TODO: handle amounts
       setAccountInfo({ alias, balance });
     });
-  }, []);
+  }
 
   return (
-    <HashRouter>
+    <div>
       <Navbar
         title={accountInfo.alias}
         subtitle={
           typeof accountInfo.balance === "number"
-            ? `${accountInfo.balance} Sats`
+            ? `${accountInfo.balance} sat`
             : ""
         }
-        right={<UserMenu />}
+        onAccountSwitch={getAccountInfo}
       >
-        <Navbar.Link href="/publishers">Publishers</Navbar.Link>
+        <Navbar.Link href="/publishers">Websites</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>
         <Navbar.Link href="/receive">Receive</Navbar.Link>
+        <Navbar.Link href="/settings">Settings</Navbar.Link>
       </Navbar>
 
-      <Switch>
-        <Route exact path="/">
-          <Redirect to="/publishers" />
-        </Route>
-        <Route exact path="/publishers">
-          <Publishers />
-        </Route>
-        <Route path="/publishers/:id">
-          <Publisher />
-        </Route>
-        <Route path="/send">
-          <Container>
-            <h2 className="mt-12 mb-6 text-2xl font-bold">Send</h2>
-            <p>
-              We are still working on this feature.
-              <br />
-              You can{" "}
-              <a href="https://github.com/bumi/lightning-browser-extension/">
-                join the development on GitHub
-              </a>
-            </p>
-          </Container>
-        </Route>
-        <Route path="/receive">
-          <Container>
-            <h2 className="mt-12 mb-6 text-2xl font-bold">Receive</h2>
-            <p>
-              We are still working on this feature.
-              <br />
-              You can{" "}
-              <a href="https://github.com/bumi/lightning-browser-extension/">
-                join the development on GitHub
-              </a>
-            </p>
-          </Container>
-        </Route>
-      </Switch>
-    </HashRouter>
+      <Outlet />
+    </div>
   );
-}
+};
 
 export default Options;

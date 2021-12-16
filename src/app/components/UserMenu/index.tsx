@@ -1,56 +1,85 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
-  ChevronDownIcon,
-  CogIcon,
-  LockClosedIcon,
-  UserIcon,
-} from "@heroicons/react/solid";
+  GearIcon,
+  LockIcon,
+  MenuIcon,
+  SendIcon,
+  TransactionsIcon,
+  ReceiveIcon,
+} from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import utils from "../../../common/lib/utils";
+import { useAuth } from "../../context/AuthContext";
 import Menu from "../Menu";
 
 export default function UserMenu() {
-  function openOptions() {
+  const navigate = useNavigate();
+  const auth = useAuth();
+
+  function openOptions(path: string) {
+    // if we are in the popup
     if (window.location.pathname !== "/options.html") {
-      utils.openPage("options.html");
+      utils.openPage(`options.html#/${path}`);
+      // close the popup
       window.close();
+    } else {
+      navigate(`/${path}`);
     }
   }
 
   async function lock() {
     try {
-      await utils.call("lock");
-      window.close();
+      auth.lock(() => {
+        window.close();
+      });
     } catch (e) {
-      console.log(e.message);
+      console.error(e);
     }
   }
 
   return (
-    <Menu>
-      <Menu.Button className="inline-flex items-center text-gray-500 hover:text-black transition-color duration-200">
-        <UserIcon className="h-6 w-6" aria-hidden="true" />
-        <ChevronDownIcon className="h-4 w-4" aria-hidden="true" />
+    <Menu as="div" className="relative">
+      <Menu.Button className="flex items-center text-gray-500 hover:text-black transition-colors duration-200">
+        <MenuIcon className="h-6 w-6" />
       </Menu.Button>
-      <Menu.List>
-        <Menu.Item onClick={openOptions}>
-          <div className="flex">
-            <CogIcon
-              className="h-5 w-5 mr-2 text-gray-500"
-              aria-hidden="true"
-            />
-            Options
-          </div>
-        </Menu.Item>
-        <Menu.Item onClick={lock}>
-          <div className="flex">
-            <LockClosedIcon
-              className="h-5 w-5 mr-2 text-gray-500"
-              aria-hidden="true"
-            />
-            Lock
-          </div>
-        </Menu.Item>
+      <Menu.List position="right">
+        <Menu.ItemButton
+          onClick={() => {
+            openOptions("publishers");
+          }}
+        >
+          <TransactionsIcon className="h-5 w-5 mr-2 text-gray-500" />
+          Websites
+        </Menu.ItemButton>
+        <Menu.ItemButton
+          onClick={() => {
+            navigate("/send");
+          }}
+        >
+          <SendIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75" />
+          Send
+        </Menu.ItemButton>
+        <Menu.ItemButton
+          onClick={() => {
+            navigate("/receive");
+          }}
+        >
+          <ReceiveIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75" />
+          Receive
+        </Menu.ItemButton>
+        <Menu.ItemButton
+          onClick={() => {
+            openOptions("settings");
+          }}
+        >
+          <GearIcon className="h-5 w-5 mr-2 text-gray-500" />
+          Settings
+        </Menu.ItemButton>
+        <Menu.Divider />
+        <Menu.ItemButton onClick={lock}>
+          <LockIcon className="h-5 w-5 mr-2 text-gray-500" />
+          Lock
+        </Menu.ItemButton>
       </Menu.List>
     </Menu>
   );

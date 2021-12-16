@@ -1,9 +1,11 @@
 import * as accounts from "./actions/accounts";
 import * as ln from "./actions/ln";
 import lnurl, { lnurlPay } from "./actions/lnurl";
+import * as webln from "./actions/webln";
 import * as allowances from "./actions/allowances";
 import * as setup from "./actions/setup";
 import * as payments from "./actions/payments";
+import * as settings from "./actions/settings";
 
 // TODO: potential nesting/grouping of actions for better organization
 const routes = {
@@ -29,19 +31,25 @@ const routes = {
   getInfo: ln.getInfo,
   lnurl,
   lnurlPay,
+  sendPaymentOrPrompt: webln.sendPaymentOrPrompt,
   sendPayment: ln.sendPayment,
   signMessage: ln.signMessage,
+  verifyMessage: ln.verifyMessage,
   makeInvoice: ln.makeInvoice,
   getBalance: ln.getBalance,
   getPayments: payments.all,
   setPassword: setup.setPassword,
   accountInfo: accounts.info,
   addAccount: accounts.add,
+  getAccounts: accounts.all,
   removeAccount: accounts.remove,
   selectAccount: accounts.select,
   reset: setup.reset,
   status: setup.status,
   validateAccount: setup.validateAccount,
+  setIcon: setup.setIcon,
+  setSetting: settings.set,
+  getSettings: settings.get,
 };
 
 const router = (path) => {

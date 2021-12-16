@@ -1,7 +1,11 @@
 import memoizee from "memoizee";
 import browser from "webextension-polyfill";
 
-const nativeApplication = "joule";
+const nativeApplication = "LBE";
+
+// !!!!!
+// TODO: needs updating. not used currently
+// !!!!!
 
 export default class Native {
   constructor(config) {

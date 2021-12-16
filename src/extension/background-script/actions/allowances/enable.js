@@ -1,6 +1,6 @@
-import state from "../../state";
 import db from "../../db";
 import utils from "../../../../common/lib/utils";
+import setIcon from "../setup/setIcon";
 
 const enable = async (message, sender) => {
   const host = message.origin.host || message.args.host;
@@ -10,13 +10,17 @@ const enable = async (message, sender) => {
     .first();
 
   if (allowance && allowance.enabled) {
+    setIcon({ args: { icon: "active" } }, sender); // highlight the icon when enabled
     return {
       data: { enabled: true },
     };
   } else {
     try {
       const response = await utils.openPrompt(message);
-      // if the response should be saved/rememberd we update the allowance for the domain
+      if (response.data.enabled) {
+        setIcon({ args: { icon: "active" } }, sender); // highlight the icon when enabled
+      }
+      // if the response should be saved/remembered we update the allowance for the domain
       // as this returns a promise we must wait until it resolves
       if (response.data.enabled && response.data.remember) {
         if (allowance) {

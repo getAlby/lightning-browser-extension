@@ -3,34 +3,93 @@ import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
 
+import { LNURLDetails, LNURLPaymentInfo } from "../../types";
 import { bech32Decode } from "../utils/helpers";
 
+const fromInternetIdentifier = (address: string) => {
+  // email regex: https://emailregex.com/
+  if (
+    address.match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    )
+  ) {
+    const [name, host] = address.split("@");
+    return `https://${host}/.well-known/lnurlp/${name}`;
+  }
+  return null;
+};
+
+const normalizeLnurl = (lnurlString: string) => {
+  // maybe it's bech32 encoded?
+  try {
+    const url = bech32Decode(lnurlString);
+    return new URL(url);
+  } catch (e) {
+    console.log("ignoring bech32 parsing error", e);
+  }
+
+  // maybe it's a lightning address?
+  const urlFromAddress = fromInternetIdentifier(lnurlString);
+  if (urlFromAddress) {
+    return new URL(urlFromAddress);
+  }
+
+  //maybe it's already a URL?
+  return new URL(`https://${lnurlString.replace(/^lnurl[pwc]/i, "")}`);
+};
+
 const lnurl = {
-  async getDetails(lnurlEncoded) {
-    const lnurlDecoded = bech32Decode(lnurlEncoded);
-    const url = new URL(lnurlDecoded);
-    let lnurlDetails = {};
-    lnurlDetails.tag = url.searchParams.get("tag");
+  isLightningAddress(address: string) {
+    return Boolean(fromInternetIdentifier(address));
+  },
+  findLnurl(text: string) {
+    const stringToText = text.trim();
+    let match;
+
+    // look for a LNURL with protocol scheme
+    if ((match = stringToText.match(/lnurl[pwc]:(\S+)/i))) {
+      return match[1];
+    }
+
+    // look for LNURL bech32 in the string
+    if ((match = stringToText.match(/(lnurl[a-zA-HJ-NP-Z0-9]+)/i))) {
+      return match[1];
+    }
+
+    return null;
+  },
+  async getDetails(lnurlString: string) {
+    const url = normalizeLnurl(lnurlString);
+    let lnurlDetails = {} as LNURLDetails;
+    lnurlDetails.tag = url.searchParams.get("tag") as LNURLDetails["tag"];
     if (lnurlDetails.tag === "login") {
-      lnurlDetails.k1 = url.searchParams.get("k1");
-      lnurlDetails.action = url.searchParams.get("action");
+      lnurlDetails.k1 = url.searchParams.get("k1") || "";
+      lnurlDetails.action = url.searchParams.get("action") || "";
     } else {
-      const res = await axios.get(lnurlDecoded);
+      const res = await axios.get<LNURLDetails>(url.toString());
       lnurlDetails = res.data;
     }
     lnurlDetails.domain = url.hostname;
     lnurlDetails.url = url;
     return lnurlDetails;
   },
-  async verifyInvoice({ paymentInfo, metadata, amount }) {
+  verifyInvoice({
+    paymentInfo,
+    metadata,
+    amount,
+  }: {
+    paymentInfo: LNURLPaymentInfo;
+    metadata: string;
+    amount: number;
+  }) {
     const paymentRequestDetails = parsePaymentRequest({
       request: paymentInfo.pr,
     });
     let metadataHash = "";
     try {
-      metadataHash = await sha256(metadata).toString(Hex);
+      metadataHash = sha256(metadata).toString(Hex);
     } catch (e) {
-      console.log(e.message);
+      console.error();
     }
     switch (true) {
       case paymentRequestDetails.description_hash !== metadataHash: // LN WALLET Verifies that h tag (description_hash) in provided invoice is a hash of metadata string converted to byte array in UTF-8 encoding
