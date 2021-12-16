@@ -119,7 +119,6 @@ function Receive() {
             <>
               <p>Payment received!</p>
               <Confetti
-                numberOfPieces={500}
                 width={window.innerWidth}
                 height={window.innerHeight}
                 recycle={false}
