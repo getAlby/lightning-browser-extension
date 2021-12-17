@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import {
+  CaretLeftIcon,
+  CheckIcon,
+} from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import QRCode from "react-qr-code";
 import Confetti from "react-confetti";
@@ -80,56 +83,67 @@ function Receive() {
     if (!invoice) return null;
     return (
       <div>
-        <div className="mb-8 p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center">
+        <div className="relative p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center overflow-hidden">
           <QRCode value={invoice.paymentRequest} level="M" />
-        </div>
-        <div className="mb-4 flex justify-center">
-          <Button
-            onClick={async () => {
-              try {
-                navigator.clipboard.writeText(invoice.paymentRequest);
-                setCopyLabel("Copied!");
-                setTimeout(() => {
-                  setCopyLabel("Copy");
-                }, 1000);
-              } catch (e) {
-                if (e instanceof Error) {
-                  alert(e.message);
-                }
-              }
-            }}
-            icon={<CopyIcon className="w-6 h-6" />}
-            label={copyLabel}
-          />
-        </div>
-        <div className="flex justify-center">
-          {pollingForPayment && (
-            <div className="flex items-center space-x-2">
-              <Loading />
-              <span>waiting for payment...</span>
+          {paid && (
+            <div className="absolute inset-0 flex justify-center items-center bg-white/90">
+              <div className="text-center">
+                <div className="inline-block bg-green-bitcoin p-1 rounded-full mb-2">
+                  <CheckIcon className="w-7 h-7 text-white" />
+                </div>
+                <p className="text-lg font-bold">Payment received!</p>
+              </div>
             </div>
           )}
-          {!paid && !pollingForPayment && (
-            <Button
-              onClick={() => checkPayment(invoice.rHash)}
-              label="Check payment status"
-            />
-          )}
-          {paid && (
-            <>
-              <p>Payment received!</p>
-              <Confetti
-                width={window.innerWidth}
-                height={window.innerHeight}
-                recycle={false}
-                onConfettiComplete={(confetti) => {
-                  confetti && confetti.reset();
-                }}
-                style={{ pointerEvents: "none" }}
-              />
-            </>
-          )}
         </div>
+        {!paid && (
+          <>
+            <div className="mt-8 mb-4 flex justify-center">
+              <Button
+                onClick={async () => {
+                  try {
+                    navigator.clipboard.writeText(invoice.paymentRequest);
+                    setCopyLabel("Copied!");
+                    setTimeout(() => {
+                      setCopyLabel("Copy");
+                    }, 1000);
+                  } catch (e) {
+                    if (e instanceof Error) {
+                      alert(e.message);
+                    }
+                  }
+                }}
+                icon={<CopyIcon className="w-6 h-6" />}
+                label={copyLabel}
+              />
+            </div>
+            <div className="flex justify-center">
+              {pollingForPayment && (
+                <div className="flex items-center space-x-2">
+                  <Loading />
+                  <span>waiting for payment...</span>
+                </div>
+              )}
+              {!pollingForPayment && (
+                <Button
+                  onClick={() => checkPayment(invoice.rHash)}
+                  label="Check payment status"
+                />
+              )}
+            </div>
+          </>
+        )}
+        {paid && (
+          <Confetti
+            width={window.innerWidth}
+            height={window.innerHeight}
+            recycle={false}
+            onConfettiComplete={(confetti) => {
+              confetti && confetti.reset();
+            }}
+            style={{ pointerEvents: "none" }}
+          />
+        )}
       </div>
     );
   }
@@ -145,7 +159,11 @@ function Receive() {
           />
         }
       />
-      <div className="p-4 max-w-screen-sm mx-auto">
+      <div
+        className={`p-4 max-w-screen-sm mx-auto ${
+          paid ? "bg-green-bitcoin" : ""
+        }`}
+      >
         {invoice ? (
           renderInvoice()
         ) : (
