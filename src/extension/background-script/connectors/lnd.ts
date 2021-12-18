@@ -1,5 +1,6 @@
 import Base64 from "crypto-js/enc-base64";
 import UTF8 from "crypto-js/enc-utf8";
+import utils from "../../../common/lib/utils";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
@@ -112,7 +113,7 @@ class Lnd implements Connector {
       return {
         data: {
           paymentRequest: res.data.payment_request,
-          rHash: res.data.r_hash,
+          rHash: utils.base64ToHex(res.data.r_hash),
         },
       };
     });
