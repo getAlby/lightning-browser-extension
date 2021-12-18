@@ -67,9 +67,7 @@ class Lnd implements Connector {
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    const res = await this.request("GET", "/v2/invoices/lookup", {
-      payment_hash: args.paymentHash,
-    });
+    const res = await this.request("GET", `/v1/invoice/${args.paymentHash}`);
     return {
       data: {
         paid: res.data.settled,
