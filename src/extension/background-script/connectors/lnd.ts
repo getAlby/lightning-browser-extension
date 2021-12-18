@@ -151,22 +151,24 @@ class Lnd implements Connector {
     });
   };
 
-  async request(method: string, path: string, args: any, defaultValues?: any) {
+  async request(method: string, path: string, args?: any, defaultValues?: any) {
+    const url = new URL(this.config.url);
+    url.pathname = path;
     let body = null;
-    let query = "";
+    const query = "";
     const headers = new Headers();
     headers.append("Accept", "application/json");
     if (method === "POST") {
       body = JSON.stringify(args);
       headers.append("Content-Type", "application/json");
     } else if (args !== undefined) {
-      query = `?`; //`?${stringify(args)}`;
+      url.search = new URLSearchParams(args).toString();
     }
     if (this.config.macaroon) {
       headers.append("Grpc-Metadata-macaroon", this.config.macaroon);
     }
     try {
-      const res = await fetch(this.config.url + path + query, {
+      const res = await fetch(url.toString(), {
         method,
         headers,
         body,
