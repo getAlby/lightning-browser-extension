@@ -1,9 +1,31 @@
 import Base64 from "crypto-js/enc-base64";
 import UTF8 from "crypto-js/enc-utf8";
-import Base from "./base";
+import Connector, {
+  SendPaymentArgs,
+  SendPaymentResponse,
+  GetInfoResponse,
+  GetBalanceResponse,
+  MakeInvoiceArgs,
+  MakeInvoiceResponse,
+  SignMessageArgs,
+  SignMessageResponse,
+  VerifyMessageArgs,
+  VerifyMessageResponse,
+} from "./connector.interface";
 
-class Lnd extends Base {
-  getInfo() {
+interface Config {
+  macaroon: string;
+  url: string;
+}
+
+class Lnd implements Connector {
+  config: Config;
+
+  constructor(config: Config) {
+    this.config = config;
+  }
+
+  getInfo(): Promise<GetInfoResponse> {
     return this.request("GET", "/v1/getinfo", undefined, {}).then((res) => {
       return {
         data: {
@@ -15,11 +37,11 @@ class Lnd extends Base {
     });
   }
 
-  getBalance() {
+  getBalance(): Promise<GetBalanceResponse> {
     return this.getChannelsBalance();
   }
 
-  sendPayment(args) {
+  sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
     return this.request(
       "POST",
       "/v1/channels/transactions",
@@ -41,7 +63,7 @@ class Lnd extends Base {
     });
   }
 
-  signMessage(args) {
+  signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
     // use v2 to use the key locator (key_loc)
     // return this.request("POST", "/v2/signer/signmessage", {
     return this.request("POST", "/v1/signmessage", {
@@ -56,7 +78,7 @@ class Lnd extends Base {
     });
   }
 
-  verifyMessage(args) {
+  verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse> {
     return this.request("POST", "/v1/verifymessage", {
       msg: Base64.stringify(UTF8.parse(args.message)),
       signature: args.signature,
@@ -69,7 +91,7 @@ class Lnd extends Base {
     });
   }
 
-  makeInvoice(args) {
+  makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
     return this.request("POST", "/v1/invoices", {
       memo: args.memo,
       value: args.amount,
@@ -115,7 +137,7 @@ class Lnd extends Base {
     });
   };
 
-  async request(method, path, args, defaultValues) {
+  async request(method: string, path: string, args: any, defaultValues?: any) {
     let body = null;
     let query = "";
     const headers = new Headers();
@@ -143,10 +165,7 @@ class Lnd extends Base {
             throw new Error();
           }
         } catch (err) {
-          throw new Error({
-            statusText: res.statusText,
-            status: res.status,
-          });
+          throw new Error(res.statusText);
         }
         console.log("errBody", errBody);
         throw errBody;
@@ -156,7 +175,7 @@ class Lnd extends Base {
         data = Object.assign(Object.assign({}, defaultValues), data);
       }
       return { data };
-    } catch (err) {
+    } catch (err: any) {
       console.error(`API error calling ${method} ${path}`, err);
       // Thrown errors must be JSON serializable, so include metadata if possible
       if (err.code || err.status || !err.message) {

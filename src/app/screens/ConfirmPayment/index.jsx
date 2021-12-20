@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Transition } from "@headlessui/react";
+import { parsePaymentRequest } from "invoices";
 
 import Button from "../../components/Button";
 import Checkbox from "../../components/Form/Checkbox";
@@ -12,8 +13,14 @@ import utils from "../../../common/lib/utils";
 class ConfirmPayment extends Component {
   constructor(props) {
     super(props);
+    this.invoice = {};
+    if (this.props.paymentRequest) {
+      this.invoice = parsePaymentRequest({
+        request: this.props.paymentRequest,
+      });
+    }
     this.state = {
-      budget: (this.props.invoice?.tokens || 0) * 10,
+      budget: (this.invoice?.tokens || 0) * 10,
       rememberMe: false,
       loading: false,
     };
@@ -69,8 +76,8 @@ class ConfirmPayment extends Component {
         <div className="p-6">
           <div className="mb-8">
             <PaymentSummary
-              amount={this.props.invoice?.tokens}
-              description={this.props.invoice?.description}
+              amount={`${this.invoice?.tokens} sat`}
+              description={this.invoice?.description}
             />
           </div>
 

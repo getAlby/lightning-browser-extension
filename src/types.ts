@@ -31,7 +31,9 @@ export interface Battery extends OriginData {
 }
 
 export interface Message {
-  args: { lnurlEncoded?: string; message: string; paymentRequest?: string };
+  args: {
+    [key: string]: any;
+  };
   origin: OriginData;
 }
 
@@ -45,7 +47,7 @@ export interface LNURLDetails {
 
 export interface LNURLPaymentInfo {
   pr: string;
-  successAction: {
+  successAction?: {
     tag: string;
     description?: string;
     message?: string;
@@ -62,7 +64,7 @@ export interface IBadge {
 export type Transaction = {
   type: string;
   id: string;
-  title: string;
+  title: string | React.ReactNode;
   subTitle: string;
   date: string;
   amount: string;
@@ -72,6 +74,7 @@ export type Transaction = {
   badges: IBadge[];
   totalAmount: string;
   description: string;
+  location: string;
 };
 
 export interface Allowance {

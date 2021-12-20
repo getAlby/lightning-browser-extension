@@ -87,7 +87,18 @@ function Publisher() {
                 ...payment,
                 type: "sent",
                 date: dayjs(payment.createdAt).fromNow(),
-                title: payment.name,
+                title: (
+                  <p className="truncate">
+                    <a
+                      target="_blank"
+                      title={payment.name}
+                      href={payment.location}
+                      rel="noreferrer"
+                    >
+                      {payment.name}
+                    </a>
+                  </p>
+                ),
               })
             )}
           />

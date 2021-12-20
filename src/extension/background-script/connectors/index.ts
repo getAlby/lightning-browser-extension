@@ -1,18 +1,9 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: implicitly has 'any' type error
 import Native from "./native";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore: implicitly has 'any' type error
 import Lnd from "./lnd";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore: implicitly has 'any' type error
 import LndHub from "./lndhub";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore: implicitly has 'any' type error
 import LnBits from "./lnbits";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore: implicitly has 'any' type error
-import Base from "./base";
 
 /*
 const initialize = (account, password) => {
@@ -23,7 +14,6 @@ const initialize = (account, password) => {
 */
 
 const connectors = {
-  base: Base,
   native: Native,
   lnd: Lnd,
   lndhub: LndHub,

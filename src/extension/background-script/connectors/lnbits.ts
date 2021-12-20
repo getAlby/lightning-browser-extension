@@ -1,12 +1,34 @@
 import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
-import Base from "./base";
 import utils from "../../../common/lib/utils";
 import HashKeySigner from "../../../common/utils/signer";
+import Connector, {
+  SendPaymentArgs,
+  SendPaymentResponse,
+  GetInfoResponse,
+  GetBalanceResponse,
+  MakeInvoiceArgs,
+  MakeInvoiceResponse,
+  SignMessageArgs,
+  SignMessageResponse,
+  VerifyMessageArgs,
+  VerifyMessageResponse,
+} from "./connector.interface";
 
-class LnBits extends Base {
-  getInfo() {
+interface Config {
+  adminkey: string;
+  url: string;
+}
+
+class LnBits implements Connector {
+  config: Config;
+
+  constructor(config: Config) {
+    this.config = config;
+  }
+
+  getInfo(): Promise<GetInfoResponse> {
     return this.request(
       "GET",
       "/api/v1/wallet",
@@ -22,7 +44,7 @@ class LnBits extends Base {
     });
   }
 
-  getBalance() {
+  getBalance(): Promise<GetBalanceResponse> {
     return this.request(
       "GET",
       "/api/v1/wallet",
@@ -40,11 +62,11 @@ class LnBits extends Base {
     });
   }
 
-  sendPayment(args) {
+  sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
     const paymentRequestDetails = parsePaymentRequest({
       request: args.paymentRequest,
     });
-    const amountInSats = parseInt(paymentRequestDetails.tokens);
+    const amountInSats = paymentRequestDetails.tokens;
     return this.request("POST", "/api/v1/payments", this.config.adminkey, {
       bolt11: args.paymentRequest,
       out: true,
@@ -66,7 +88,7 @@ class LnBits extends Base {
       });
   }
 
-  checkPayment(paymentHash) {
+  checkPayment(paymentHash: string) {
     return this.request(
       "GET",
       `/api/v1/payments/${paymentHash}`,
@@ -74,7 +96,7 @@ class LnBits extends Base {
     );
   }
 
-  signMessage(args) {
+  signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
     // make sure we got the config to create a new key
     if (!this.config.url || !this.config.adminkey) {
       return Promise.reject(new Error("Missing config"));
@@ -104,7 +126,7 @@ class LnBits extends Base {
     });
   }
 
-  verifyMessage(args) {
+  verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse> {
     // create a signing key from the lnbits URL and the adminkey
     const keyHex = sha256(
       `LBE-LNBITS-${this.config.url}-${this.config.adminkey}`
@@ -121,7 +143,7 @@ class LnBits extends Base {
     });
   }
 
-  makeInvoice(args) {
+  makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
     return this.request("POST", "/api/v1/payments", this.config.adminkey, {
       amount: args.amount,
       memo: args.memo,
@@ -136,7 +158,13 @@ class LnBits extends Base {
     });
   }
 
-  async request(method, path, apiKey, args, defaultValues) {
+  async request(
+    method: string,
+    path: string,
+    apiKey: string,
+    args?: any,
+    defaultValues?: any
+  ) {
     let body = null;
     let query = "";
     const headers = new Headers();

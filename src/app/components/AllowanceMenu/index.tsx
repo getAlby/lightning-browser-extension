@@ -51,9 +51,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
           <Menu.ItemButton
             onClick={async () => {
               if (
-                window.confirm(
-                  "Are you sure you want to delete this publisher?"
-                )
+                window.confirm("Are you sure you want to delete this website?")
               ) {
                 try {
                   await utils.call("deleteAllowance", {
