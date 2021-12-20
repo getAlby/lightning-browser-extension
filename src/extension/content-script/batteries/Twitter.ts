@@ -99,9 +99,9 @@ function battery(): void {
         //  );
         //});
         // if we find a ⚡ emoji we use the text of the next sibling and try to extract a lnurl
-        for (let i = 0; i < zapElements.length; i++) {
+        for (const zapElement of Array.from(zapElements)) {
           if (
-            (match = (zapElements[i].nextSibling?.textContent || "").match(
+            (match = (zapElement.nextSibling?.textContent || "").match(
               /(\S+@\S+)/
             ))
           ) {
