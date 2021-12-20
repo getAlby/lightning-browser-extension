@@ -1,18 +1,26 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import {
+  CaretLeftIcon,
+  CheckIcon,
+} from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import QRCode from "react-qr-code";
+import Confetti from "react-confetti";
 
 import utils from "../../common/lib/utils";
+import { poll } from "../../common/utils/helpers";
+import { useAuth } from "../context/AuthContext";
 
 import Button from "../components/Button";
 import IconButton from "../components/IconButton";
 import Input from "../components/Form/Input";
 // import Select from "../components/Form/Select";
 import Header from "../components/Header";
+import Loading from "../components/Loading";
 
 function Receive() {
+  const auth = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     amount: "",
@@ -20,8 +28,11 @@ function Receive() {
     expiration: "",
   });
   const [loading, setLoading] = useState(false);
-  const [invoice, setInvoice] = useState<{ paymentRequest: string }>();
+  const [invoice, setInvoice] =
+    useState<{ paymentRequest: string; rHash: string }>();
   const [copyLabel, setCopyLabel] = useState("Copy");
+  const [paid, setPaid] = useState(false);
+  const [pollingForPayment, setPollingForPayment] = useState(false);
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -32,6 +43,24 @@ function Receive() {
     });
   }
 
+  function checkPayment(paymentHash: string) {
+    setPollingForPayment(true);
+    poll({
+      fn: () => utils.call("checkPayment", { paymentHash }),
+      validate: (payment) => payment.paid,
+      interval: 3000,
+      maxAttempts: 20,
+    })
+      .then(() => {
+        setPaid(true);
+        auth.getAccountInfo(); // Update balance.
+      })
+      .catch((err) => console.error(err))
+      .finally(() => {
+        setPollingForPayment(false);
+      });
+  }
+
   async function createInvoice() {
     try {
       setLoading(true);
@@ -40,6 +69,7 @@ function Receive() {
         memo: formData.description,
       });
       setInvoice(response);
+      checkPayment(response.rHash);
     } catch (e) {
       if (e instanceof Error) {
         alert(e.message);
@@ -53,28 +83,67 @@ function Receive() {
     if (!invoice) return null;
     return (
       <div>
-        <div className="mb-8 p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center">
+        <div className="relative p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center overflow-hidden">
           <QRCode value={invoice.paymentRequest} level="M" />
+          {paid && (
+            <div className="absolute inset-0 flex justify-center items-center bg-white/90">
+              <div className="text-center">
+                <div className="inline-block bg-green-bitcoin p-1 rounded-full mb-2">
+                  <CheckIcon className="w-7 h-7 text-white" />
+                </div>
+                <p className="text-lg font-bold">Payment received!</p>
+              </div>
+            </div>
+          )}
         </div>
-        <div className="mb-4 flex justify-center">
-          <Button
-            onClick={async () => {
-              try {
-                navigator.clipboard.writeText(invoice.paymentRequest);
-                setCopyLabel("Copied!");
-                setTimeout(() => {
-                  setCopyLabel("Copy");
-                }, 1000);
-              } catch (e) {
-                if (e instanceof Error) {
-                  alert(e.message);
-                }
-              }
+        {!paid && (
+          <>
+            <div className="mt-8 mb-4 flex justify-center">
+              <Button
+                onClick={async () => {
+                  try {
+                    navigator.clipboard.writeText(invoice.paymentRequest);
+                    setCopyLabel("Copied!");
+                    setTimeout(() => {
+                      setCopyLabel("Copy");
+                    }, 1000);
+                  } catch (e) {
+                    if (e instanceof Error) {
+                      alert(e.message);
+                    }
+                  }
+                }}
+                icon={<CopyIcon className="w-6 h-6" />}
+                label={copyLabel}
+              />
+            </div>
+            <div className="flex justify-center">
+              {pollingForPayment && (
+                <div className="flex items-center space-x-2">
+                  <Loading />
+                  <span>waiting for payment...</span>
+                </div>
+              )}
+              {!pollingForPayment && (
+                <Button
+                  onClick={() => checkPayment(invoice.rHash)}
+                  label="Check payment status"
+                />
+              )}
+            </div>
+          </>
+        )}
+        {paid && (
+          <Confetti
+            width={window.innerWidth}
+            height={window.innerHeight}
+            recycle={false}
+            onConfettiComplete={(confetti) => {
+              confetti && confetti.reset();
             }}
-            icon={<CopyIcon className="w-6 h-6" />}
-            label={copyLabel}
+            style={{ pointerEvents: "none" }}
           />
-        </div>
+        )}
       </div>
     );
   }
@@ -90,7 +159,11 @@ function Receive() {
           />
         }
       />
-      <div className="p-4 max-w-screen-sm mx-auto">
+      <div
+        className={`p-4 max-w-screen-sm mx-auto ${
+          paid ? "bg-green-bitcoin" : ""
+        }`}
+      >
         {invoice ? (
           renderInvoice()
         ) : (

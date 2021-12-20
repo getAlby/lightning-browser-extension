@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { Fragment, useState } from "react";
 import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
 
-import utils from "../../../common/lib/utils";
 import { AuthProvider } from "../../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import RequireAuth from "../RequireAuth";
 import Container from "../../components/Container";
 import Navbar from "../../components/Navbar";
@@ -61,31 +61,24 @@ function Options() {
 }
 
 const Layout = () => {
-  const [accountInfo, setAccountInfo] = useState({});
-
-  useEffect(() => {
-    getAccountInfo();
-  }, []);
-
-  function getAccountInfo() {
-    setAccountInfo({});
-    utils.call("accountInfo").then((response) => {
-      const { alias } = response.info;
-      const balance = parseInt(response.balance.balance); // TODO: handle amounts
-      setAccountInfo({ alias, balance });
-    });
-  }
+  const auth = useAuth();
+  const [key, setKey] = useState(Date.now());
 
   return (
     <div>
       <Navbar
-        title={accountInfo.alias}
+        title={auth.account?.alias}
         subtitle={
-          typeof accountInfo.balance === "number"
-            ? `${accountInfo.balance} sat`
+          typeof auth.account?.balance === "number"
+            ? `${auth.account.balance} sat`
             : ""
         }
-        onAccountSwitch={getAccountInfo}
+        onAccountSwitch={() => {
+          auth.getAccountInfo();
+
+          // TODO: this should be done in an eloquent way.
+          setKey(Date.now()); // Refresh screens.
+        }}
       >
         <Navbar.Link href="/publishers">Websites</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>
@@ -93,7 +86,9 @@ const Layout = () => {
         <Navbar.Link href="/settings">Settings</Navbar.Link>
       </Navbar>
 
-      <Outlet />
+      <Fragment key={key}>
+        <Outlet />
+      </Fragment>
     </div>
   );
 };
