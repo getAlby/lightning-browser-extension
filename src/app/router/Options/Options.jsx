@@ -14,6 +14,7 @@ import Send from "../../screens/Send";
 import Receive from "../../screens/Receive";
 import Settings from "../../screens/Settings";
 import Unlock from "../../screens/Unlock";
+import Websites from "../../screens/websites";
 
 function Options() {
   return (
@@ -28,10 +29,10 @@ function Options() {
               </RequireAuth>
             }
           >
-            <Route index element={<Navigate to="/publishers" replace />} />
-            <Route path="publishers">
+            <Route index element={<Navigate to="/websites" replace />} />
+            <Route path="websites">
               <Route path=":id" element={<Publisher />} />
-              <Route index element={<Publishers />} />
+              <Route index element={<Websites />} />
             </Route>
             <Route path="send" element={<Send />} />
             <Route path="receive" element={<Receive />} />
@@ -87,7 +88,7 @@ const Layout = () => {
         }
         onAccountSwitch={getAccountInfo}
       >
-        <Navbar.Link href="/publishers">Websites</Navbar.Link>
+        <Navbar.Link href="/websites">Websites</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>
         <Navbar.Link href="/receive">Receive</Navbar.Link>
         <Navbar.Link href="/settings">Settings</Navbar.Link>
