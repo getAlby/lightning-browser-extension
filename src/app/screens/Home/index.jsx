@@ -41,7 +41,7 @@ function Home() {
   }
 
   function loadPayments() {
-    utils.call("getPayments").then((result) => {
+    utils.call("getPayments", { limit: 10 }).then((result) => {
       setPayments(result?.payments);
       setLoadingPayments(false);
     });
