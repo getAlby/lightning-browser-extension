@@ -187,21 +187,17 @@ export default function ConnectLnd() {
       <div className="my-8 flex space-x-4 justify-center">
         <Button
           label="Back"
-          secondary
           onClick={(e) => {
             e.preventDefault();
             navigate(-1);
             return false;
           }}
-          fixed={false}
         />
         <Button
           type="submit"
           label="Continue"
-          fixed
           loading={loading}
           disabled={formData.url === "" || formData.macaroon === ""}
-          secondary={false}
         />
       </div>
     </div>

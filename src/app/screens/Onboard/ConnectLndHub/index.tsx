@@ -124,7 +124,6 @@ export default function ConnectLndHub() {
       <div className="my-8 flex space-x-4 justify-center">
         <Button
           label="Back"
-          secondary
           onClick={(e) => {
             e.preventDefault();
             navigate(-1);
@@ -134,7 +133,6 @@ export default function ConnectLndHub() {
         <Button
           type="submit"
           label="Continue"
-          fixed
           loading={loading}
           disabled={formData.uri === ""}
         />

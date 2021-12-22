@@ -54,7 +54,6 @@ export default function Intro() {
           onClick={() => navigate("/set-password")}
           type="button"
           label="Get Started"
-          fixed
         />
       </div>
     </div>

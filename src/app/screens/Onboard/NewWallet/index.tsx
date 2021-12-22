@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";
 
 import utils from "../../../../common/lib/utils";
-import { Primary } from "../../../components/Button/Button.stories";
 
 const url = process.env.ALBY_LNDHUB_URL || "https://lndhub.getalby.com";
 
@@ -146,7 +145,6 @@ export default function NewWallet() {
       <div className="my-8 flex space-x-4 justify-center">
         <Button
           label="Back"
-          secondary
           onClick={(e) => {
             e.preventDefault();
             navigate(-1);

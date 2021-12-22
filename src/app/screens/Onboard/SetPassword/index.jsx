@@ -125,7 +125,6 @@ export default function SetPassword() {
       <div className="mt-8 flex justify-center">
         <Button
           label="Next"
-          fixed
           type="submit"
           disabled={
             !formData.password ||

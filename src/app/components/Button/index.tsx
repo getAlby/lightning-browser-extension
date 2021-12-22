@@ -9,9 +9,6 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   primary?: boolean;
   loading?: boolean;
   disabled?: boolean;
-  secondary?: boolean;
-  fixed?: boolean;
-
   direction?: "row" | "column";
 };
 
@@ -25,8 +22,6 @@ export default function Button({
   fullWidth = false,
   primary = false,
   loading = false,
-  secondary = false,
-  fixed = false,
 }: Props) {
   return (
     <button
@@ -34,25 +29,13 @@ export default function Button({
       className={classNames(
         direction === "row" ? "flex-row" : "flex-col",
         fullWidth && "w-full",
-
-        fixed
-          ? "bg-orange-bitcoin text-white border border-transparent w-48"
-          : `bg-white text-gray-700 border border-gray-200`,
-        secondary
-          ? " text-orange-bitcoin border-none shadow-none bg-transparent"
-          : `bg-white text-gray-700 border border-gray-200`,
-
         primary
           ? "bg-orange-bitcoin text-white border border-transparent"
           : `bg-white text-gray-700 border border-gray-200`,
-        primary &&
-          !disabled &&
-          fixed &&
-          !secondary &&
-          "hover:bg-orange-bitcoin-700",
-        !primary && !disabled && !fixed && !secondary && "hover:bg-gray-100",
+        primary && !disabled && "hover:bg-orange-bitcoin-700",
+        !primary && !disabled && "hover:bg-gray-100",
         disabled ? "cursor-default opacity-60" : "cursor-pointer",
-        "inline-flex justify-center items-center  px-6 py-2 md:font-medium rounded-md shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-bitcoin transition duration-150 "
+        "inline-flex justify-center items-center px-7 py-2 font-medium rounded-md shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-bitcoin transition duration-150"
       )}
       onClick={onClick}
       disabled={disabled}
