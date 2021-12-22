@@ -55,7 +55,7 @@ export default function TestConnection() {
             {accountInfo && accountInfo.alias && (
               <div>
                 <div className="flex space-x-2">
-                  <h1 className="text-2xl font-bold text-light-green-bitcoin">
+                  <h1 className="text-2xl font-bold text-green-bitcoin">
                     Success!
                   </h1>
                   <img
@@ -65,9 +65,7 @@ export default function TestConnection() {
                   />
                 </div>
 
-                <p className="text-dark-bitcoin mt-6">
-                  Awesome, you&apos;re ready to go!
-                </p>
+                <p className="mt-6">Awesome, you&apos;re ready to go!</p>
 
                 <div className="mt-6 shadow-lg p-4 rounded-xl">
                   <Card

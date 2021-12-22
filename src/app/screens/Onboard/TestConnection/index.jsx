@@ -161,14 +161,12 @@ export default function TestConnection() {
           {accountInfo && accountInfo.alias && (
             <div>
               <div className="flex space-x-2">
-                <h1 className="text-2xl font-bold text-light-green-bitcoin">
+                <h1 className="text-2xl font-bold text-green-bitcoin">
                   Success!
                 </h1>
                 <img src="assets/icons/star.svg" alt="image" className="w-8" />
               </div>
-              <p className="text-dark-bitcoin mt-6 ">
-                Awesome, you&apos;re ready to go!
-              </p>
+              <p className="mt-6 ">Awesome, you&apos;re ready to go!</p>
               <div>
                 {faucetURL && accountInfo.balance === 0 && (
                   <div className="text-gray-500">
@@ -200,7 +198,7 @@ export default function TestConnection() {
                 />
               </div>
               <div>
-                <p className="text-dark-bitcoin mt-8">
+                <p className="mt-8">
                   Now you’ve connected your node would you like to go through a
                   tutorial?
                 </p>
