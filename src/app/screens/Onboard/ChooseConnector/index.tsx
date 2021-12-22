@@ -45,17 +45,17 @@ export default function ChooseConnector() {
       <Route
         path="/"
         element={
-          <div className="relative mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
+          <div className="relative mt-14 lg:grid  lg:gap-8 text-center">
             <div className="relative">
               <h1 className="text-3xl font-bold">
                 Do you have a lightning wallet?
               </h1>
               <p className="text-gray-500 my-6">
                 You need to first connect to a lightning wallet so that you can
-                interact with your favorite websites that accept bitcoin
+                interact with <br /> your favorite websites that accept bitcoin
                 lightning payments!
               </p>
-              <div className="space-y-4">
+              <div className="grid grid-cols-4 gap-4">
                 {connectors.map(({ to, title, description, logo }) => (
                   <LinkButton
                     key={to}
