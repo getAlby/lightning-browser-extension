@@ -118,6 +118,7 @@ export default function ConnectLnbits() {
         <Button
           type="submit"
           label="Continue"
+          primary
           loading={loading}
           disabled={formData.adminkey === "" || formData.url === ""}
         />

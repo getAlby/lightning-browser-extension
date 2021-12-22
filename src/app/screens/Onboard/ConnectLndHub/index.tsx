@@ -133,6 +133,7 @@ export default function ConnectLndHub() {
         <Button
           type="submit"
           label="Continue"
+          primary
           loading={loading}
           disabled={formData.uri === ""}
         />

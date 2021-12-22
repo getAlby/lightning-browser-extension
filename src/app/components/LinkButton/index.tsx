@@ -12,13 +12,7 @@ export default function LinkButton({ to, title, description, logo }: Props) {
     <Link to={to} className="block">
       <div className="p-4 bg-white h-96 text-center shadow-lg overflow-hidden border-b border-gray-200 rounded-lg hover:bg-gray-50 transition duration-200">
         <div className="my-12">
-          <img
-            src={logo}
-            alt="logo"
-            width="135px"
-            height="110px"
-            className="inline rounded-3xl "
-          />
+          <img src={logo} alt="logo" className="inline rounded-3xl w-32" />
         </div>
         <div className="">
           <span className="block text-lg">{title}</span>

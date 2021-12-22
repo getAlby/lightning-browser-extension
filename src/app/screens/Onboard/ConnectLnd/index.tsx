@@ -196,6 +196,7 @@ export default function ConnectLnd() {
         <Button
           type="submit"
           label="Continue"
+          primary
           loading={loading}
           disabled={formData.url === "" || formData.macaroon === ""}
         />

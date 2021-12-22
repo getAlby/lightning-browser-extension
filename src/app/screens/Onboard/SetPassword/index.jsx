@@ -126,6 +126,7 @@ export default function SetPassword() {
         <Button
           label="Next"
           type="submit"
+          primary
           disabled={
             !formData.password ||
             formData.password !== formData.passwordConfirmation
