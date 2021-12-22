@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { QrCodeIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Html5Qrcode, Html5QrcodeScannerState } from "html5-qrcode";
 
 import Button from "../Button";
@@ -110,24 +111,18 @@ function QrcodeScanner({
   }
 
   return (
-    <div className="shadow-sm bg-white rounded-md border border-gray-300 flex flex-col items-center px-5 py-5">
+    <div className="shadow-sm bg-white rounded-md border border-gray-300 flex flex-col items-center p-6">
       {!isScanning && (
         <>
-          <div className="flex justify-center space-x-4 text-center items-center">
-            <div className="">
-              <h4 className="text-lg font-bold my-2 ">Scan QR Code</h4>
+          <div className="flex justify-center text-center items-center">
+            <div>
+              <h4 className="text-lg font-bold mb-2">Scan QR Code</h4>
               <Button
                 label="Start scanning"
                 onClick={handleRequestCameraPermissions}
               />
             </div>
-
-            <img
-              src="assets/icons/qr.svg"
-              alt="image"
-              width="130px"
-              height="120px"
-            />
+            <QrCodeIcon className="h-40 w-40 ml-4 -mr-8 text-blue-500" />
           </div>
         </>
       )}
@@ -135,7 +130,7 @@ function QrcodeScanner({
       <div className="bg-black w-full" id="reader" />
 
       {isScanning && (
-        <div className="my-6 text-center">
+        <div className="mt-6 text-center">
           <div className="mb-4">
             <select
               className="w-72 border-gray-300 rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50"

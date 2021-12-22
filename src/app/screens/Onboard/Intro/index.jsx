@@ -38,7 +38,7 @@ export default function Intro() {
   const navigate = useNavigate();
 
   return (
-    <div className="h-screen">
+    <div>
       <div className="relative lg:grid lg:grid-cols-3 lg:gap-x-8 mt-14 bg-white px-10 py-12 items-center">
         <div className="lg:col-span-1">
           <div className="max-w-xs">

@@ -90,7 +90,7 @@ export default function NewWallet() {
   }
 
   return (
-    <div className="h-screen">
+    <div>
       <div className="relative lg:flex mt-14 bg-white px-10 py-12 items-center ">
         <div className="lg:w-1/2  ">
           <h1 className="text-2xl font-bold">Get a new lightning wallet</h1>
@@ -143,7 +143,7 @@ export default function NewWallet() {
           </div>
         </div>
       </div>
-      <div className="mt-8 flex space-x-4 justify-center">
+      <div className="my-8 flex space-x-4 justify-center">
         <Button
           label="Back"
           secondary

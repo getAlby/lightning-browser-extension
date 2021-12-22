@@ -72,80 +72,72 @@ export default function ConnectLndHub() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="h-screen">
-        <div className="relative mt-14 lg:flex space-x-8 bg-white px-10 py-12">
-          <div className="lg:w-1/2">
-            <h1 className="text-2xl font-bold">
-              Connect to LNDHub (BlueWallet)
-            </h1>
-            <p className="text-gray-500 mt-6">
-              In BlueWallet, choose the wallet you want to connect, open it,
-              click on &quot;...&quot;, click on Export/Backup to display the QR
-              code and scan it with your webcam.
-            </p>
-            <div className="w-4/5">
-              <div className="mt-6">
-                <label
-                  htmlFor="login"
-                  className="block font-medium text-gray-700"
-                >
-                  LNDHub Export URI
-                </label>
-                <div className="mt-1">
-                  <Input
-                    name="uri"
-                    type="text"
-                    required
-                    placeholder="lndhub://..."
-                    value={formData.uri}
-                    onChange={handleChange}
-                  />
-                </div>
-                <p className="text-center my-4">OR</p>
-                <QrcodeScanner
-                  fps={10}
-                  qrbox={250}
-                  qrCodeSuccessCallback={(decodedText: string) => {
-                    if (formData.uri !== decodedText) {
-                      setFormData({
-                        ...formData,
-                        uri: decodedText,
-                      });
-                    }
-                  }}
-                  qrCodeErrorCallback={console.error}
+      <div className="relative mt-14 lg:flex space-x-8 bg-white px-10 py-12">
+        <div className="lg:w-1/2">
+          <h1 className="text-2xl font-bold">Connect to LNDHub (BlueWallet)</h1>
+          <p className="text-gray-500 mt-6">
+            In BlueWallet, choose the wallet you want to connect, open it, click
+            on &quot;...&quot;, click on Export/Backup to display the QR code
+            and scan it with your webcam.
+          </p>
+          <div className="w-4/5">
+            <div className="mt-6">
+              <label
+                htmlFor="login"
+                className="block font-medium text-gray-700"
+              >
+                LNDHub Export URI
+              </label>
+              <div className="mt-1">
+                <Input
+                  name="uri"
+                  type="text"
+                  required
+                  placeholder="lndhub://..."
+                  value={formData.uri}
+                  onChange={handleChange}
                 />
               </div>
-            </div>
-          </div>
-          <div className="mt-16 lg:mt-0 lg:w-1/2">
-            <div className="lg:flex h-full justify-center items-center">
-              <img
-                src="assets/icons/satsymbol.svg"
-                alt="sat"
-                className="w-64"
+              <p className="text-center my-4">OR</p>
+              <QrcodeScanner
+                fps={10}
+                qrbox={250}
+                qrCodeSuccessCallback={(decodedText: string) => {
+                  if (formData.uri !== decodedText) {
+                    setFormData({
+                      ...formData,
+                      uri: decodedText,
+                    });
+                  }
+                }}
+                qrCodeErrorCallback={console.error}
               />
             </div>
           </div>
         </div>
-        <div className="mt-8 flex space-x-4 justify-center">
-          <Button
-            label="Back"
-            secondary
-            onClick={(e) => {
-              e.preventDefault();
-              navigate(-1);
-              return false;
-            }}
-          />
-          <Button
-            type="submit"
-            label="Continue"
-            fixed
-            loading={loading}
-            disabled={formData.uri === ""}
-          />
+        <div className="mt-16 lg:mt-0 lg:w-1/2">
+          <div className="lg:flex h-full justify-center items-center">
+            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
+          </div>
         </div>
+      </div>
+      <div className="my-8 flex space-x-4 justify-center">
+        <Button
+          label="Back"
+          secondary
+          onClick={(e) => {
+            e.preventDefault();
+            navigate(-1);
+            return false;
+          }}
+        />
+        <Button
+          type="submit"
+          label="Continue"
+          fixed
+          loading={loading}
+          disabled={formData.uri === ""}
+        />
       </div>
     </form>
   );

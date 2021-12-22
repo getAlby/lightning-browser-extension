@@ -62,7 +62,7 @@ function App() {
   }, [location]);
 
   return (
-    <div className="bg-gray-bitcoin min-h-full">
+    <div>
       {process.env.NODE_ENV === "development" && <DevMenu />}
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

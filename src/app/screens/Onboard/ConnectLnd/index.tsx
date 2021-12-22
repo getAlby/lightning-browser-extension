@@ -107,7 +107,7 @@ export default function ConnectLnd() {
   }
 
   return (
-    <div className="h-screen">
+    <div>
       <div className="relative mt-14 lg:flex space-x-8 bg-white px-12 py-10">
         <div className="lg:w-1/2">
           <h1 className="text-2xl font-bold">Connect to your LND node</h1>
@@ -184,7 +184,7 @@ export default function ConnectLnd() {
           </div>
         </div>
       </div>
-      <div className="mt-8 flex space-x-4 justify-center">
+      <div className="my-8 flex space-x-4 justify-center">
         <Button
           label="Back"
           secondary

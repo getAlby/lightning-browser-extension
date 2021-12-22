@@ -63,75 +63,66 @@ export default function ConnectLnbits() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="h-screen">
-        <div className="relative lg:flex mt-14 bg-white px-10 py-12">
-          <div className="lg:w-1/2">
-            <h1 className="text-2xl font-bold">Connect to LNbits</h1>
-            <p className="text-gray-500 mt-6"></p>
-            <div className="w-4/5">
-              <div className="mt-6">
-                <label
-                  htmlFor="adminkey"
-                  className="block font-medium text-gray-700"
-                >
-                  LNbits Admin Key
-                </label>
-                <div className="mt-1">
-                  <Input
-                    name="adminkey"
-                    type="text"
-                    required
-                    onChange={handleChange}
-                  />
-                </div>
+      <div className="relative lg:flex mt-14 bg-white px-10 py-12">
+        <div className="lg:w-1/2">
+          <h1 className="text-2xl font-bold">Connect to LNbits</h1>
+          <p className="text-gray-500 mt-6"></p>
+          <div className="w-4/5">
+            <div className="mt-6">
+              <label
+                htmlFor="adminkey"
+                className="block font-medium text-gray-700"
+              >
+                LNbits Admin Key
+              </label>
+              <div className="mt-1">
+                <Input
+                  name="adminkey"
+                  type="text"
+                  required
+                  onChange={handleChange}
+                />
               </div>
-              <div className="mt-6">
-                <label
-                  htmlFor="url"
-                  className="block font-medium text-gray-700"
-                >
-                  LNbits URL
-                </label>
-                <div className="mt-1">
-                  <Input
-                    name="url"
-                    type="text"
-                    value={formData.url}
-                    required
-                    onChange={handleChange}
-                  />
-                </div>
+            </div>
+            <div className="mt-6">
+              <label htmlFor="url" className="block font-medium text-gray-700">
+                LNbits URL
+              </label>
+              <div className="mt-1">
+                <Input
+                  name="url"
+                  type="text"
+                  value={formData.url}
+                  required
+                  onChange={handleChange}
+                />
               </div>
             </div>
           </div>
-          <div className="mt-16 lg:mt-0 lg:w-1/2">
-            <div className="lg:flex h-full justify-center items-center">
-              <img
-                src="assets/icons/satsymbol.svg"
-                alt="sat"
-                className="w-64"
-              />
-            </div>
+        </div>
+        <div className="mt-16 lg:mt-0 lg:w-1/2">
+          <div className="lg:flex h-full justify-center items-center">
+            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
           </div>
         </div>
-        <div className="mt-8 flex space-x-4 justify-center">
-          <Button
-            label="Back"
-            secondary
-            onClick={(e) => {
-              e.preventDefault();
-              navigate(-1);
-              return false;
-            }}
-          />
-          <Button
-            type="submit"
-            label="Continue"
-            fixed
-            loading={loading}
-            disabled={formData.adminkey === "" || formData.url === ""}
-          />
-        </div>
+      </div>
+      <div className="my-8 flex space-x-4 justify-center">
+        <Button
+          label="Back"
+          secondary
+          onClick={(e) => {
+            e.preventDefault();
+            navigate(-1);
+            return false;
+          }}
+        />
+        <Button
+          type="submit"
+          label="Continue"
+          fixed
+          loading={loading}
+          disabled={formData.adminkey === "" || formData.url === ""}
+        />
       </div>
     </form>
   );

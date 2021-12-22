@@ -147,87 +147,81 @@ export default function TestConnection() {
   }
 
   return (
-    <div className="min-h-screen">
-      <div className="relative lg:mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white px-10 py-12">
-        <div className="relative">
-          <div>
-            {errorMessage && (
-              <div>
-                <h1 className="text-3xl font-bold">Connection Error</h1>
-                <p>{errorMessage}</p>
-                <Button label="Edit" onClick={handleEdit} primary />
+    <div className="relative lg:mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white px-10 py-12">
+      <div className="relative">
+        <div>
+          {errorMessage && (
+            <div>
+              <h1 className="text-3xl font-bold">Connection Error</h1>
+              <p>{errorMessage}</p>
+              <Button label="Edit" onClick={handleEdit} primary />
+            </div>
+          )}
+
+          {accountInfo && accountInfo.alias && (
+            <div>
+              <div className="flex space-x-2">
+                <h1 className="text-2xl font-bold text-light-green-bitcoin">
+                  Success!
+                </h1>
+                <img src="assets/icons/star.svg" alt="image" className="w-8" />
               </div>
-            )}
-
-            {accountInfo && accountInfo.alias && (
+              <p className="text-dark-bitcoin mt-6 ">
+                Awesome, you&apos;re ready to go!
+              </p>
               <div>
-                <div className="flex space-x-2">
-                  <h1 className="text-2xl font-bold text-light-green-bitcoin">
-                    Success!
-                  </h1>
-                  <img
-                    src="assets/icons/star.svg"
-                    alt="image"
-                    className="w-8"
-                  />
-                </div>
-                <p className="text-dark-bitcoin mt-6 ">
-                  Awesome, you&apos;re ready to go!
-                </p>
-                <div>
-                  {faucetURL && accountInfo.balance === 0 && (
-                    <div className="text-gray-500">
-                      You&apos;re wallet is currently empty. &nbsp;
-                      <a
-                        href="#"
-                        className="underline"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setShowFaucet(true);
-                        }}
-                      >
-                        To get started we can send you some Satoshis...
-                      </a>
-                      {renderFaucet()}
-                    </div>
-                  )}
-                </div>
-
-                <div className="mt-6 shadow-lg p-4 rounded-xl">
-                  <Card
-                    color="bg-light-gray-bitcoin"
-                    alias={accountInfo.alias}
-                    satoshis={
-                      typeof accountInfo.balance === "number"
-                        ? `${accountInfo.balance} sat`
-                        : ""
-                    }
-                  />
-                </div>
-                <div>
-                  <p className="text-dark-bitcoin mt-8">
-                    Now you’ve connected your node would you like to go through
-                    a tutorial?
-                  </p>
-
-                  <div className="mt-8">
-                    <a href="https://getalby.com/demo">
-                      <Button label="Give it a try now" primary />
+                {faucetURL && accountInfo.balance === 0 && (
+                  <div className="text-gray-500">
+                    You&apos;re wallet is currently empty. &nbsp;
+                    <a
+                      href="#"
+                      className="underline"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setShowFaucet(true);
+                      }}
+                    >
+                      To get started we can send you some Satoshis...
                     </a>
+                    {renderFaucet()}
                   </div>
+                )}
+              </div>
+
+              <div className="mt-6 shadow-lg p-4 rounded-xl">
+                <Card
+                  color="bg-gray-100"
+                  alias={accountInfo.alias}
+                  satoshis={
+                    typeof accountInfo.balance === "number"
+                      ? `${accountInfo.balance} sat`
+                      : ""
+                  }
+                />
+              </div>
+              <div>
+                <p className="text-dark-bitcoin mt-8">
+                  Now you’ve connected your node would you like to go through a
+                  tutorial?
+                </p>
+
+                <div className="mt-8">
+                  <a href="https://getalby.com/demo">
+                    <Button label="Give it a try now" primary />
+                  </a>
                 </div>
               </div>
-            )}
+            </div>
+          )}
 
-            {loading && <Loading />}
-          </div>
+          {loading && <Loading />}
         </div>
-
-        <div
-          className="mt-10 -mx-4 relative lg:mt-0 lg:flex lg:items-center"
-          aria-hidden="true"
-        ></div>
       </div>
+
+      <div
+        className="mt-10 -mx-4 relative lg:mt-0 lg:flex lg:items-center"
+        aria-hidden="true"
+      ></div>
     </div>
   );
 }
