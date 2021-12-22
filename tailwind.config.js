@@ -32,7 +32,6 @@ module.exports = {
         "dark-bitcoin": "#434343",
         "dark-text-bitcoin": "#3A3A3A",
         "text-gray-bitcoin": "#878988",
-        "light-gray-bitcoin2": "#66676D",
       },
     },
   },
