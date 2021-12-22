@@ -14,7 +14,7 @@ export default function LinkButton({ to, title, description, logo }: Props) {
         <div className="my-12">
           <img src={logo} alt="logo" className="inline rounded-3xl w-32" />
         </div>
-        <div className="">
+        <div>
           <span className="block text-lg">{title}</span>
           {description && (
             <span className="text-sm text-gray-500">{description}</span>
