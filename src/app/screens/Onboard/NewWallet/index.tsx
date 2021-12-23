@@ -90,9 +90,11 @@ export default function NewWallet() {
 
   return (
     <div>
-      <div className="relative lg:flex mt-14 bg-white px-10 py-12 items-center">
+      <div className="relative lg:flex mt-14 bg-white dark:bg-gray-800 px-10 py-12 items-center">
         <div className="lg:w-1/2">
-          <h1 className="text-2xl font-bold dark:text-white">Get a new lightning wallet</h1>
+          <h1 className="text-2xl font-bold dark:text-white">
+            Get a new lightning wallet
+          </h1>
           <p className="text-gray-500 mt-6"></p>
           {lndHubData.login ? (
             <div className="w-4/5">

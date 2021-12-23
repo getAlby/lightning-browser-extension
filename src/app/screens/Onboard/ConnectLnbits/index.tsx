@@ -63,9 +63,11 @@ export default function ConnectLnbits() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="relative lg:flex mt-14 bg-white px-10 py-12">
+      <div className="relative lg:flex mt-14 bg-white dark:bg-gray-800 px-10 py-12">
         <div className="lg:w-1/2">
-          <h1 className="text-2xl font-bold dark:text-white">Connect to LNbits</h1>
+          <h1 className="text-2xl font-bold dark:text-white">
+            Connect to LNbits
+          </h1>
           <p className="text-gray-500 mt-6"></p>
           <div className="w-4/5">
             <div className="mt-6">

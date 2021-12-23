@@ -119,7 +119,7 @@ function Receive() {
             </div>
             <div className="flex justify-center">
               {pollingForPayment && (
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 dark:text-white">
                   <Loading />
                   <span>waiting for payment...</span>
                 </div>

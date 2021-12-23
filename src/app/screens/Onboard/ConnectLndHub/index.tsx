@@ -72,9 +72,11 @@ export default function ConnectLndHub() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="relative mt-14 lg:flex space-x-8 bg-white px-10 py-12">
+      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 px-10 py-12">
         <div className="lg:w-1/2">
-          <h1 className="text-2xl font-bold dark:text-white">Connect to LNDHub (BlueWallet)</h1>
+          <h1 className="text-2xl font-bold dark:text-white">
+            Connect to LNDHub (BlueWallet)
+          </h1>
           <p className="text-gray-500 mt-6 dark:text-gray-400">
             In BlueWallet, choose the wallet you want to connect, open it, click
             on &quot;...&quot;, click on Export/Backup to display the QR code

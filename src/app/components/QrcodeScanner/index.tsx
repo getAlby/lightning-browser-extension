@@ -116,7 +116,9 @@ function QrcodeScanner({
         <>
           <div className="flex justify-center text-center items-center">
             <div>
-              <h4 className="text-lg font-bold mb-2">Scan QR Code</h4>
+              <h4 className="text-lg font-bold mb-2 dark:text-white">
+                Scan QR Code
+              </h4>
               <Button
                 label="Start scanning"
                 onClick={handleRequestCameraPermissions}

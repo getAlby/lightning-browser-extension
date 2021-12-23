@@ -79,7 +79,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         <div className="p-5 flex justify-between dark:bg-gray-800">
           <h2 className="text-2xl font-bold dark:text-white">Edit Allowance</h2>
           <button onClick={closeModal}>
-            <CrossIcon className="w-6 h-6" />
+            <CrossIcon className="w-6 h-6 dark:text-white" />
           </button>
         </div>
         <div className="p-5 border-t border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">

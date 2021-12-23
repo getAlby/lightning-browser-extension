@@ -64,9 +64,11 @@ export default function SetPassword() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="relative mt-14 lg:flex space-x-8 bg-white py-12 px-10">
+      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 py-12 px-10">
         <div className="lg:w-1/2">
-          <h1 className="text-2xl font-bold dark:text-white">Protect your wallet</h1>
+          <h1 className="text-2xl font-bold dark:text-white">
+            Protect your wallet
+          </h1>
           <p className="text-gray-500 mt-6 dark:text-gray-400">
             Your wallet is securely encrypted with a password and needs to be
             unlocked before usage.
@@ -97,7 +99,7 @@ export default function SetPassword() {
                 htmlFor="passwordConfirmation"
                 className="block font-medium text-gray-700 dark:text-white"
               >
-                Let's confirm you typed it correct:
+                Let&apos;s confirm you typed it correct:
               </label>
               <div className="mt-1">
                 <Input

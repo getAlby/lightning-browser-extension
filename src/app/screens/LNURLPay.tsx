@@ -232,12 +232,12 @@ function LNURLPay(props: Props) {
 
     return (
       <>
-        <dl className="shadow bg-white pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+        <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
           {descriptionList &&
             descriptionList.map(([dt, dd]) => (
               <>
                 <dt className="text-sm font-semibold text-gray-500">{dt}</dt>
-                <dd className="text-sm mb-4">{dd}</dd>
+                <dd className="text-sm mb-4 dark:text-white">{dd}</dd>
               </>
             ))}
         </dl>
@@ -259,11 +259,11 @@ function LNURLPay(props: Props) {
       <div className="p-6">
         {!successAction ? (
           <>
-            <dl className="shadow bg-white pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+            <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
               {elements().map(([t, d]) => (
                 <>
                   <dt className="text-sm font-semibold text-gray-500">{t}</dt>
-                  <dd className="text-sm mb-4">{d}</dd>
+                  <dd className="text-sm mb-4 dark:text-white">{d}</dd>
                 </>
               ))}
             </dl>

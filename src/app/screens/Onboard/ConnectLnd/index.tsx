@@ -108,9 +108,11 @@ export default function ConnectLnd() {
 
   return (
     <div>
-      <div className="relative mt-14 lg:flex space-x-8 bg-white px-12 py-10">
+      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 px-12 py-10">
         <div className="lg:w-1/2">
-          <h1 className="text-2xl font-bold dark:text-white">Connect to your LND node</h1>
+          <h1 className="text-2xl font-bold dark:text-white">
+            Connect to your LND node
+          </h1>
           <p className="text-gray-500 mt-6 dark:text-gray-400">
             You will need to retrieve the node url and an admin <br /> macaroon.
           </p>
