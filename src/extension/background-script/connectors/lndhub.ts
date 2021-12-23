@@ -7,6 +7,8 @@ import HashKeySigner from "../../../common/utils/signer";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
+  CheckPaymentArgs,
+  CheckPaymentResponse,
   GetInfoResponse,
   GetBalanceResponse,
   MakeInvoiceArgs,
@@ -99,6 +101,20 @@ export default class LndHub implements Connector {
         preimage: data.payment_preimage,
         paymentHash: data.payment_hash,
         route: data.payment_route,
+      },
+    };
+  }
+
+  async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
+    const data = await this.request(
+      "GET",
+      `/checkpayment/${args.paymentHash}`,
+      undefined,
+      {}
+    );
+    return {
+      data: {
+        paid: data.paid,
       },
     };
   }

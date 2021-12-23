@@ -1,7 +1,7 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState } from "react";
 import { MemoryRouter, Outlet, Route, Routes } from "react-router-dom";
 
-import utils from "../../../common/lib/utils";
+import { useAuth } from "../../context/AuthContext";
 
 import Home from "../../screens/Home";
 import Unlock from "../../screens/Unlock";
@@ -41,36 +41,23 @@ function Popup() {
 }
 
 const Layout = () => {
-  const [accountInfo, setAccountInfo] = useState({});
+  const auth = useAuth();
   const [key, setKey] = useState(Date.now());
-
-  useEffect(() => {
-    getAccountInfo();
-  }, []);
-
-  function getAccountInfo() {
-    setAccountInfo({});
-    utils.call("accountInfo").then((response) => {
-      const { alias } = response.info;
-      const balance = parseInt(response.balance.balance); // TODO: handle amounts
-      setAccountInfo({ alias, balance });
-    });
-  }
 
   return (
     <div>
       <Navbar
-        title={accountInfo.alias}
+        title={auth.account?.alias}
         subtitle={
-          typeof accountInfo.balance === "number"
-            ? `${accountInfo.balance} sat`
+          typeof auth.account?.balance === "number"
+            ? `${auth.account.balance} sat`
             : ""
         }
         onAccountSwitch={() => {
-          getAccountInfo();
+          auth.getAccountInfo();
 
-          // TODO: this should be done in an eloquent way. Maybe use context?
-          setKey(Date.now()); // Refresh Home.
+          // TODO: this should be done in an eloquent way.
+          setKey(Date.now()); // Refresh screens.
         }}
       />
 

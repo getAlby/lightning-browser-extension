@@ -50,3 +50,35 @@ export function bech32Decode(str: string) {
   const requestByteArray = bech32.fromWords(dataPart);
   return Buffer.from(requestByteArray).toString();
 }
+
+export async function poll({
+  fn,
+  validate,
+  interval,
+  maxAttempts,
+}: {
+  fn: () => Promise<any>;
+  validate: (value: any) => boolean;
+  interval: number;
+  maxAttempts: number;
+}) {
+  let attempts = 0;
+
+  const executePoll = async (
+    resolve: (value: unknown) => void,
+    reject: (reason?: any) => void
+  ) => {
+    const result = await fn();
+    attempts++;
+
+    if (validate(result)) {
+      return resolve(result);
+    } else if (maxAttempts && attempts === maxAttempts) {
+      return reject(new Error("Exceeded max attempts"));
+    } else {
+      setTimeout(executePoll, interval, resolve, reject);
+    }
+  };
+
+  return new Promise(executePoll);
+}

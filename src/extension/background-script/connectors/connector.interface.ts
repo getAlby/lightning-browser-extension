@@ -45,6 +45,17 @@ export interface SendPaymentArgs {
   paymentRequest: string;
 }
 
+export interface CheckPaymentArgs {
+  paymentHash: string;
+}
+
+export interface CheckPaymentResponse {
+  data: {
+    paid: boolean;
+    preimage?: string;
+  };
+}
+
 export interface SignMessageArgs {
   message: string;
 }
