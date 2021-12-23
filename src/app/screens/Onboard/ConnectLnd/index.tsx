@@ -107,102 +107,99 @@ export default function ConnectLnd() {
   }
 
   return (
-    <div className="relative mt-24 lg:flex space-x-8">
-      <div className="lg:w-1/2">
-        <h1 className="text-3xl font-bold dark:text-white">
-          Connect to your LND node
-        </h1>
-        <p className="text-gray-500 mt-6 dark:text-gray-400">
-          You will need to retrieve the node url and an admin macaroon.
-        </p>
-        <form onSubmit={handleSubmit}>
-          <div className="w-4/5">
-            <div className="mt-6">
-              <label className="block font-medium text-gray-700 dark:text-white">
-                Address
-              </label>
-              <div className="mt-1">
-                <Input
-                  name="url"
-                  placeholder="https://"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
-            <div className="mt-6">
-              <div>
+    <div>
+      <div className="relative mt-14 lg:flex space-x-8 bg-white px-12 py-10">
+        <div className="lg:w-1/2">
+          <h1 className="text-2xl font-bold dark:text-white">Connect to your LND node</h1>
+          <p className="text-gray-500 mt-6 dark:text-gray-400">
+            You will need to retrieve the node url and an admin <br /> macaroon.
+          </p>
+          <form onSubmit={handleSubmit}>
+            <div className="w-4/5">
+              <div className="mt-6">
                 <label className="block font-medium text-gray-700 dark:text-white">
-                  Macaroon
+                  Address
                 </label>
                 <div className="mt-1">
                   <Input
-                    name="macaroon"
-                    value={formData.macaroon}
+                    name="url"
+                    placeholder="https://"
                     onChange={handleChange}
                     required
                   />
                 </div>
               </div>
-              <p className="text-center my-4 dark:text-white">OR</p>
-              <div
-                className={`cursor-pointer bg-white dark:bg-gray-800 flex flex-col items-center p-4 py-10 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
-                  isDragging ? "border-blue-500 bg-blue-50" : ""
-                }`}
-                onDrop={dropHandler}
-                onDragOver={dragOverHandler}
-                onDragLeave={dragLeaveHandler}
-                onClick={() => {
-                  if (hiddenFileInput?.current) hiddenFileInput.current.click();
-                }}
-              >
-                <SendIcon className="mb-3 h-9 w-9 text-blue-500" />
-                <p className="dark:text-white">
-                  Drag and drop your macaroon here or{" "}
-                  <span className="underline">browse</span>
-                </p>
-                <input
-                  ref={hiddenFileInput}
-                  onChange={(event) => {
-                    if (event.target.files) {
-                      const file = event.target.files[0];
-                      readFile(file);
-                    }
+              <div className="mt-6">
+                <div>
+                  <label className="block font-medium text-gray-700">
+                    Macaroon
+                  </label>
+                  <div className="mt-1">
+                    <Input
+                      name="macaroon"
+                      value={formData.macaroon}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </div>
+                <p className="text-center my-4 dark:text-white">OR</p>
+                <div
+                  className={`cursor-pointer flex flex-col items-center dark:bg-gray-800 p-4 py-10 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
+                    isDragging ? "border-blue-500 bg-blue-50" : ""
+                  }`}
+                  onDrop={dropHandler}
+                  onDragOver={dragOverHandler}
+                  onDragLeave={dragLeaveHandler}
+                  onClick={() => {
+                    if (hiddenFileInput?.current)
+                      hiddenFileInput.current.click();
                   }}
-                  type="file"
-                  accept=".macaroon"
-                  hidden
-                />
+                >
+                  <SendIcon className="mb-3 h-9 w-9 text-blue-500" />
+                  <p className="dark:text-white">
+                    Drag and drop your macaroon here or{" "}
+                    <span className="underline">browse</span>
+                  </p>
+                  <input
+                    ref={hiddenFileInput}
+                    onChange={(event) => {
+                      if (event.target.files) {
+                        const file = event.target.files[0];
+                        readFile(file);
+                      }
+                    }}
+                    type="file"
+                    accept=".macaroon"
+                    hidden
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="mt-8 flex space-x-4">
-            <Button
-              label="Back"
-              onClick={(e) => {
-                e.preventDefault();
-                navigate(-1);
-                return false;
-              }}
-            />
-            <Button
-              type="submit"
-              label="Continue"
-              primary
-              loading={loading}
-              disabled={formData.url === "" || formData.macaroon === ""}
-            />
-          </div>
-        </form>
-      </div>
-      <div className="mt-16 lg:mt-0 lg:w-1/2">
-        <div className="lg:flex h-full justify-center items-center">
-          <img
-            src="assets/icons/satsymbol.svg"
-            alt="sat"
-            className="max-w-xs"
-          />
+          </form>
         </div>
+        <div className="mt-16 lg:mt-0 lg:w-1/2">
+          <div className="lg:flex h-full justify-center items-center">
+            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
+          </div>
+        </div>
+      </div>
+      <div className="my-8 flex space-x-4 justify-center">
+        <Button
+          label="Back"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate(-1);
+            return false;
+          }}
+        />
+        <Button
+          type="submit"
+          label="Continue"
+          primary
+          loading={loading}
+          disabled={formData.url === "" || formData.macaroon === ""}
+        />
       </div>
     </div>
   );

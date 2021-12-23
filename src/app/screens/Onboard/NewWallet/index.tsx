@@ -90,11 +90,9 @@ export default function NewWallet() {
 
   return (
     <div>
-      <div className="relative lg:flex mt-24">
+      <div className="relative lg:flex mt-14 bg-white px-10 py-12 items-center">
         <div className="lg:w-1/2">
-          <h1 className="text-3xl font-bold dark:text-white">
-            Get a new lightning wallet
-          </h1>
+          <h1 className="text-2xl font-bold dark:text-white">Get a new lightning wallet</h1>
           <p className="text-gray-500 mt-6"></p>
           {lndHubData.login ? (
             <div className="w-4/5">
@@ -106,59 +104,60 @@ export default function NewWallet() {
                   disabled
                 />
               </div>
-              <div className="mt-6 dark:text-white">
-                <p>
-                  <strong>
-                    We have created a new wallet for you. <br />
-                    Please save this backup!
-                  </strong>
-                </p>
-                <div className="float-right m-1">
+              <div className="mt-6 flex justify-center space-x-3 items-center dark:text-white">
+                <div className="flex-1">
+                  <p className="my-2">
+                    <strong>
+                      We have created a new wallet for you. <br />
+                      Please save this backup!
+                    </strong>
+                  </p>
+                  If you loose access you will need this backup to recover your
+                  wallet. You can also import the wallet into your BlueWallet
+                  mobile app using the QR Code.
+                </div>
+                <div className="float-right">
                   <QRCode
                     value={`lndhub://${lndHubData.login}:${lndHubData.password}@${url}/`}
                     level="M"
-                    size={96}
+                    size={130}
                   />
                 </div>
-                If you loose access you will need this backup to recover your
-                wallet. You can also import the wallet into your BlueWallet
-                mobile app using the QR Code.
               </div>
             </div>
           ) : (
             <div className="w-4/5">
               <div className="mt-6 dark:text-white">
                 <strong>Remember, not your keys, not your coins. </strong>
-                This quick setup uses a custodial service to manage your wallet.
+                <br />
+                This quick setup uses a custodial service <br /> to manage your
+                wallet.
               </div>
             </div>
           )}
-          <div className="mt-8 flex space-x-4">
-            <Button
-              label="Back"
-              onClick={(e) => {
-                e.preventDefault();
-                navigate(-1);
-                return false;
-              }}
-            />
-            <Button
-              label={lndHubData.login ? "Next" : "Create a wallet"}
-              loading={loading}
-              onClick={lndHubData.login ? next : signup}
-              primary
-            />
-          </div>
         </div>
         <div className="mt-16 lg:mt-0 lg:w-1/2">
           <div className="lg:flex h-full justify-center items-center">
-            <img
-              src="assets/icons/satsymbol.svg"
-              alt="sat"
-              className="max-w-xs"
-            />
+            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
           </div>
         </div>
+      </div>
+      <div className="my-8 flex space-x-4 justify-center">
+        <Button
+          label="Back"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate(-1);
+            return false;
+          }}
+        />
+
+        <Button
+          label={lndHubData.login ? "Next" : "Create a wallet"}
+          loading={loading}
+          primary
+          onClick={lndHubData.login ? next : signup}
+        />
       </div>
     </div>
   );

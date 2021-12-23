@@ -1,6 +1,8 @@
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
+  CheckPaymentArgs,
+  CheckPaymentResponse,
   GetInfoResponse,
   GetBalanceResponse,
   MakeInvoiceArgs,
@@ -29,6 +31,10 @@ class ConnectorExample implements Connector {
   }
 
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
+    // Add your own implementation.
+  }
+
+  checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
     // Add your own implementation.
   }
 

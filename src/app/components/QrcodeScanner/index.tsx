@@ -111,17 +111,18 @@ function QrcodeScanner({
   }
 
   return (
-    <div className="shadow-sm bg-white rounded-md border border-gray-300 flex flex-col items-center dark:bg-gray-800">
-      <h4 className="text-xl font-bold my-4 dark:text-white">Scan QR Code</h4>
-
+    <div className="shadow-sm bg-white rounded-md border border-gray-300 flex flex-col items-center dark:bg-gray-800 p-6">
       {!isScanning && (
         <>
-          <QrCodeIcon className="h-24 w-24 text-blue-500" />
-          <div className="my-6">
-            <Button
-              label="Start scanning"
-              onClick={handleRequestCameraPermissions}
-            />
+          <div className="flex justify-center text-center items-center">
+            <div>
+              <h4 className="text-lg font-bold mb-2">Scan QR Code</h4>
+              <Button
+                label="Start scanning"
+                onClick={handleRequestCameraPermissions}
+              />
+            </div>
+            <QrCodeIcon className="h-40 w-40 ml-4 -mr-8 text-blue-500" />
           </div>
         </>
       )}
@@ -129,7 +130,7 @@ function QrcodeScanner({
       <div className="bg-black w-full" id="reader" />
 
       {isScanning && (
-        <div className="my-6 text-center">
+        <div className="mt-6 text-center">
           <div className="mb-4">
             <select
               className="w-72 border-gray-300 rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50"
