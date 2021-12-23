@@ -18,7 +18,11 @@ const LNURLAUTH_CANONICAL_PHRASE =
 
 async function lnurl(message: Message) {
   try {
-    if (!message.args.lnurlEncoded) return;
+    if (
+      !message.args.lnurlEncoded ||
+      typeof message.args.lnurlEncoded !== "string"
+    )
+      return;
     const lnurlDetails = await lnurlLib.getDetails(message.args.lnurlEncoded);
 
     switch (lnurlDetails.tag) {
@@ -186,7 +190,7 @@ async function payWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
 
 export async function lnurlPay(message: Message) {
   const { paymentRequest } = message.args;
-  if (!paymentRequest) {
+  if (!paymentRequest || typeof paymentRequest !== "string") {
     return {
       error: "Payment request missing.",
     };

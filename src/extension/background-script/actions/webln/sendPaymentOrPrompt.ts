@@ -8,7 +8,7 @@ import sendPayment from "../ln/sendPayment";
 
 const sendPaymentOrPrompt = async (message: Message) => {
   const paymentRequest = message.args.paymentRequest;
-  if (!paymentRequest) {
+  if (!paymentRequest || typeof paymentRequest !== "string") {
     return {
       error: "Payment request missing.",
     };

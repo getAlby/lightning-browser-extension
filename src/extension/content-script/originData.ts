@@ -11,7 +11,7 @@ interface Context {
 interface RuleSet {
   rules: MetadataRule[];
   defaultValue?: (context: Context) => string | string[];
-  scorer?: (el: Element, score: any) => any;
+  scorer?: (el: Element, score: unknown) => any;
   processor?: (input: any, context: Context) => any;
 }
 

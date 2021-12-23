@@ -31,9 +31,7 @@ export interface Battery extends OriginData {
 }
 
 export interface Message {
-  args: {
-    [key: string]: any;
-  };
+  args: Record<string, unknown>;
   origin: OriginData;
 }
 
