@@ -22,7 +22,7 @@ export default function Navbar({
       <div className="flex w-8/12 md:w-4/12 lg:w-3/12">
         <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-gray-600">
           <div className="flex items-center">
-            <WalletIcon className="-ml-1 w-8 h-8 opacity-50" />
+            <WalletIcon className="-ml-1 w-8 h-8 opacity-50 dark:text-white" />
           </div>
           <div
             className={`flex-auto mx-2 py-1 ${
