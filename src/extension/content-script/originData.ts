@@ -11,8 +11,8 @@ interface Context {
 interface RuleSet {
   rules: MetadataRule[];
   defaultValue?: (context: Context) => string | string[];
-  scorer?: (el: Element, score: unknown) => any;
-  processor?: (input: any, context: Context) => any;
+  scorer?: (el: Element, score: unknown) => number | undefined;
+  processor?: (input: string, context: Context) => string | string[];
 }
 
 interface Options {
@@ -61,7 +61,7 @@ const metaDataRules: Record<string, RuleSet> = {
         'meta[name="sailthru.title"][content]',
         (element) => element.getAttribute("content"),
       ],
-      ["title", (element: any) => element.text],
+      ["title", (element) => element.textContent],
     ],
   },
   description: {
@@ -352,8 +352,8 @@ const metaDataRules: Record<string, RuleSet> = {
         'meta[name="sailthru.author"][content]',
         (element) => element.getAttribute("content"),
       ],
-      ['a[class*="author" i]', (element: any) => element.text],
-      ['[rel="author"]', (element: any) => element.text],
+      ['a[class*="author" i]', (element) => element.textContent],
+      ['[rel="author"]', (element) => element.textContent],
       [
         'meta[property="twitter:creator"][content]',
         (element) => element.getAttribute("content"),

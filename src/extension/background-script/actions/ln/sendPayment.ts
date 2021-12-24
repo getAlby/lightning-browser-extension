@@ -8,7 +8,7 @@ import utils from "../../../../common/lib/utils";
 export default async function sendPayment(message: Message) {
   PubSub.publish(`ln.sendPayment.start`, message);
   const { paymentRequest } = message.args;
-  if (!paymentRequest || typeof paymentRequest !== "string") {
+  if (typeof paymentRequest !== "string") {
     return {
       error: "Payment request missing.",
     };

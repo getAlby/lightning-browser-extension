@@ -190,7 +190,7 @@ async function payWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
 
 export async function lnurlPay(message: Message) {
   const { paymentRequest } = message.args;
-  if (!paymentRequest || typeof paymentRequest !== "string") {
+  if (typeof paymentRequest !== "string") {
     return {
       error: "Payment request missing.",
     };
