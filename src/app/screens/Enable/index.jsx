@@ -5,10 +5,10 @@ import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
 
 function Enable(props) {
-  const [loading, setLoading] = useState(true);
-  const [remember, setRemember] = useState(true);
-  const [enabled, setEnabled] = useState(false);
-  const [budget, setBudget] = useState(null);
+  const [, setLoading] = useState(true);
+  const [remember] = useState(true);
+  const [, setEnabled] = useState(false);
+  const [budget] = useState(null);
 
   function enable() {
     setEnabled(true);

@@ -1,5 +1,4 @@
 import { encryptData } from "../../../../common/lib/crypto";
-import utils from "../../../../common/lib/utils";
 import state from "../../state";
 
 const add = (message, sender) => {

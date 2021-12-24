@@ -58,6 +58,10 @@ export interface CheckPaymentResponse {
 
 export interface SignMessageArgs {
   message: string;
+  key_loc: {
+    key_family: number;
+    key_index: number;
+  };
 }
 
 export interface SignMessageResponse {
@@ -82,6 +86,7 @@ export default interface Connector {
   getBalance(): Promise<GetBalanceResponse>;
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse>;
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse>;
+  checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse>;
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse>;
   verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse>;
 }

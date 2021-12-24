@@ -116,7 +116,7 @@ const utils = {
           }
 
           const onMessageListener = (
-            responseMessage: any,
+            responseMessage: { response?: unknown; error?: string },
             sender: Runtime.MessageSender
           ) => {
             if (
@@ -126,13 +126,15 @@ const utils = {
               sender.tab.id === tabId
             ) {
               browser.tabs.onRemoved.removeListener(onRemovedListener);
-              return browser.windows.remove(sender.tab.windowId!).then(() => {
-                if (responseMessage.error) {
-                  return reject(new Error(responseMessage.error));
-                } else {
-                  return resolve(responseMessage);
-                }
-              });
+              if (sender.tab.windowId) {
+                return browser.windows.remove(sender.tab.windowId).then(() => {
+                  if (responseMessage.error) {
+                    return reject(new Error(responseMessage.error));
+                  } else {
+                    return resolve(responseMessage);
+                  }
+                });
+              }
             }
           };
 

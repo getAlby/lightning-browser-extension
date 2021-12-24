@@ -153,7 +153,6 @@ class Lnd implements Connector {
     const url = new URL(this.config.url);
     url.pathname = path;
     let body = null;
-    const query = "";
     const headers = new Headers();
     headers.append("Accept", "application/json");
     if (method === "POST") {
