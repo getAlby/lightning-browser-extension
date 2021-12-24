@@ -172,8 +172,8 @@ class LnBits implements Connector {
     method: string,
     path: string,
     apiKey: string,
-    args?: any,
-    defaultValues?: any
+    args?: Record<string, unknown>,
+    defaultValues?: Record<string, unknown>
   ) {
     let body = null;
     let query = "";

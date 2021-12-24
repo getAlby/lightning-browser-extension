@@ -95,11 +95,15 @@ async function auth(message: Message, lnurlDetails: LNURLDetails) {
       loginURL.toString()
     );
     return authResponse;
-  } catch (e: any) {
-    console.log("LNURL-AUTH FAIL:", e);
-    console.log(e.response?.data);
-    const error = e.response?.data?.reason || e.message; // lnurl error or exception message
-    throw new Error(error);
+  } catch (e) {
+    if (axios.isAxiosError(e)) {
+      console.log("LNURL-AUTH FAIL:", e);
+      console.log(e.response?.data);
+      const error = e.response?.data?.reason || e.message; // lnurl error or exception message
+      throw new Error(error);
+    } else if (e instanceof Error) {
+      throw new Error(e.message);
+    }
   }
 }
 

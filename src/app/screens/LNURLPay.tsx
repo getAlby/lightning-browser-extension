@@ -71,7 +71,7 @@ function LNURLPay(props: Props) {
       const isValidInvoice = lnurl.verifyInvoice({
         paymentInfo,
         metadata: details.metadata,
-        amount: valueMSat!,
+        amount: valueMSat || 0,
       });
       if (!isValidInvoice) {
         alert("Payment aborted. Invalid invoice");
@@ -218,7 +218,9 @@ function LNURLPay(props: Props) {
             {successAction.url}
             <div className="mt-4">
               <Button
-                onClick={() => utils.openUrl(successAction.url!)}
+                onClick={() => {
+                  if (successAction.url) utils.openUrl(successAction.url);
+                }}
                 label="Open"
                 primary
               />
