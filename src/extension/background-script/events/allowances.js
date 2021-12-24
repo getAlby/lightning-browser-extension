@@ -1,4 +1,3 @@
-import PubSub from "pubsub-js";
 import db from "../db";
 
 const updateAllowance = async (message, data) => {

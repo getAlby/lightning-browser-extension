@@ -10,7 +10,7 @@ if (shouldInject()) {
   injectScript();
 
   // extract LN data from websites
-  browser.runtime.onMessage.addListener((request) => {
+  browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.type === "extractLightningData") {
       extractLightningData();
     }
