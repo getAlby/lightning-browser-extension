@@ -1,8 +1,11 @@
 import Base64 from "crypto-js/enc-base64";
 import UTF8 from "crypto-js/enc-utf8";
+import utils from "../../../common/lib/utils";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
+  CheckPaymentArgs,
+  CheckPaymentResponse,
   GetInfoResponse,
   GetBalanceResponse,
   MakeInvoiceArgs,
@@ -63,6 +66,15 @@ class Lnd implements Connector {
     });
   }
 
+  async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
+    const res = await this.request("GET", `/v1/invoice/${args.paymentHash}`);
+    return {
+      data: {
+        paid: res.data.settled,
+      },
+    };
+  }
+
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
     // use v2 to use the key locator (key_loc)
     // return this.request("POST", "/v2/signer/signmessage", {
@@ -99,7 +111,7 @@ class Lnd implements Connector {
       return {
         data: {
           paymentRequest: res.data.payment_request,
-          rHash: res.data.r_hash,
+          rHash: utils.base64ToHex(res.data.r_hash),
         },
       };
     });
@@ -137,22 +149,24 @@ class Lnd implements Connector {
     });
   };
 
-  async request(method: string, path: string, args: any, defaultValues?: any) {
+  async request(method: string, path: string, args?: any, defaultValues?: any) {
+    const url = new URL(this.config.url);
+    url.pathname = path;
     let body = null;
-    let query = "";
+    const query = "";
     const headers = new Headers();
     headers.append("Accept", "application/json");
     if (method === "POST") {
       body = JSON.stringify(args);
       headers.append("Content-Type", "application/json");
     } else if (args !== undefined) {
-      query = `?`; //`?${stringify(args)}`;
+      url.search = new URLSearchParams(args).toString();
     }
     if (this.config.macaroon) {
       headers.append("Grpc-Metadata-macaroon", this.config.macaroon);
     }
     try {
-      const res = await fetch(this.config.url + path + query, {
+      const res = await fetch(url.toString(), {
         method,
         headers,
         body,

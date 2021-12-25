@@ -72,9 +72,9 @@ export default function ConnectLndHub() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="relative mt-24 lg:flex space-x-8">
+      <div className="relative mt-14 lg:flex space-x-8 bg-white px-10 py-12">
         <div className="lg:w-1/2">
-          <h1 className="text-3xl font-bold">Connect to LNDHub (BlueWallet)</h1>
+          <h1 className="text-2xl font-bold">Connect to LNDHub (BlueWallet)</h1>
           <p className="text-gray-500 mt-6">
             In BlueWallet, choose the wallet you want to connect, open it, click
             on &quot;...&quot;, click on Export/Backup to display the QR code
@@ -114,33 +114,29 @@ export default function ConnectLndHub() {
               />
             </div>
           </div>
-          <div className="mt-8 flex space-x-4">
-            <Button
-              label="Back"
-              onClick={(e) => {
-                e.preventDefault();
-                navigate(-1);
-                return false;
-              }}
-            />
-            <Button
-              type="submit"
-              label="Continue"
-              primary
-              loading={loading}
-              disabled={formData.uri === ""}
-            />
-          </div>
         </div>
         <div className="mt-16 lg:mt-0 lg:w-1/2">
           <div className="lg:flex h-full justify-center items-center">
-            <img
-              src="assets/icons/satsymbol.svg"
-              alt="sat"
-              className="max-w-xs"
-            />
+            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
           </div>
         </div>
+      </div>
+      <div className="my-8 flex space-x-4 justify-center">
+        <Button
+          label="Back"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate(-1);
+            return false;
+          }}
+        />
+        <Button
+          type="submit"
+          label="Continue"
+          primary
+          loading={loading}
+          disabled={formData.uri === ""}
+        />
       </div>
     </form>
   );

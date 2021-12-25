@@ -64,9 +64,9 @@ export default function SetPassword() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="relative mt-24 lg:flex space-x-8">
+      <div className="relative mt-14 lg:flex space-x-8 bg-white py-12 px-10">
         <div className="lg:w-1/2">
-          <h1 className="text-3xl font-bold">Protect your wallet</h1>
+          <h1 className="text-2xl font-bold">Protect your wallet</h1>
           <p className="text-gray-500 mt-6">
             Your wallet is securely encrypted with a password and needs to be
             unlocked before usage.
@@ -115,27 +115,23 @@ export default function SetPassword() {
               </div>
             </div>
           </div>
-          <div className="mt-8">
-            <Button
-              label="Next"
-              type="submit"
-              primary
-              disabled={
-                !formData.password ||
-                formData.password !== formData.passwordConfirmation
-              }
-            />
-          </div>
         </div>
         <div className="mt-16 lg:mt-0 lg:w-1/2">
           <div className="lg:flex h-full justify-center items-center">
-            <img
-              src="assets/icons/satsymbol.svg"
-              alt="sat"
-              className="max-w-xs"
-            />
+            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
           </div>
         </div>
+      </div>
+      <div className="mt-8 flex justify-center">
+        <Button
+          label="Next"
+          type="submit"
+          primary
+          disabled={
+            !formData.password ||
+            formData.password !== formData.passwordConfirmation
+          }
+        />
       </div>
     </form>
   );

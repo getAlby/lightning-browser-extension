@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { UnlockIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import utils from "../../../common/lib/utils";
 import { useAuth } from "../../context/AuthContext";
@@ -40,11 +39,15 @@ function Unlock() {
   }
 
   return (
-    <div className="p-8 text-center">
-      <UnlockIcon className="inline mb-4 h-16 w-16 text-blue-500" />
-      <h2 className="text-2xl font-bold mb-4">Unlock:</h2>
+    <div className="p-8 bg-white shadow-lg">
+      <div className="flex space-x-2 justify-center pt-5">
+        <img src="assets/icons/alby_icon_transp.svg" alt="logo" />
+      </div>
+      <p className="text-center text-xl font-normal font-serif mt-8 mb-5">
+        Unlock to continue
+      </p>
       <form onSubmit={handleSubmit}>
-        <div className="mb-4">
+        <div className="mb-5">
           <Input
             placeholder="Password"
             size="small"
@@ -53,6 +56,19 @@ function Unlock() {
             value={password}
             onChange={handlePasswordChange}
           />
+          {error && (
+            <p className="mt-1 text-red-500">
+              {error} (
+              <span
+                onClick={(event) => {
+                  reset();
+                }}
+              >
+                config
+              </span>
+              )
+            </p>
+          )}
         </div>
         <Button
           type="submit"
@@ -61,20 +77,17 @@ function Unlock() {
           primary
           disabled={password === ""}
         />
-      </form>
-      {error && (
-        <p>
-          {error} (
-          <span
-            onClick={(event) => {
-              reset();
-            }}
+
+        <div className="flex justify-center space-x-1 mt-5">
+          <span className="text-gray-500">Need help? Contact </span>
+          <a
+            className="text-orange-bitcoin font-semibold"
+            href="mailto:support@getalby.com"
           >
-            config
-          </span>
-          )
-        </p>
-      )}
+            Alby Support
+          </a>
+        </div>
+      </form>
     </div>
   );
 }

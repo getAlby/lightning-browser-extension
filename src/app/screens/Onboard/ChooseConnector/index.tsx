@@ -1,11 +1,4 @@
-import { Routes, Route } from "react-router-dom";
-
 import LinkButton from "../../../components/LinkButton";
-
-import ConnectLnd from "../ConnectLnd";
-import ConnectLndHub from "../ConnectLndHub";
-import ConnectLnbits from "../ConnectLnbits";
-import NewWallet from "../NewWallet";
 
 import lnbits from "/static/assets/icons/lnbits.png";
 import lndhub from "/static/assets/icons/lndhub.png";
@@ -41,39 +34,26 @@ export default function ChooseConnector() {
   ];
 
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <div className="relative mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
-            <div className="relative">
-              <h1 className="text-3xl font-bold">
-                Do you have a lightning wallet?
-              </h1>
-              <p className="text-gray-500 my-6">
-                You need to first connect to a lightning wallet so that you can
-                interact with your favorite websites that accept bitcoin
-                lightning payments!
-              </p>
-              <div className="space-y-4">
-                {connectors.map(({ to, title, description, logo }) => (
-                  <LinkButton
-                    key={to}
-                    to={to}
-                    title={title}
-                    description={description}
-                    logo={logo}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        }
-      />
-      <Route path="lnd" element={<ConnectLnd />} />
-      <Route path="lnd-hub" element={<ConnectLndHub />} />
-      <Route path="lnbits" element={<ConnectLnbits />} />
-      <Route path="create-wallet" element={<NewWallet />} />
-    </Routes>
+    <div className="relative mt-14 lg:grid  lg:gap-8 text-center">
+      <div className="relative">
+        <h1 className="text-3xl font-bold">Do you have a lightning wallet?</h1>
+        <p className="text-gray-500 my-6">
+          You need to first connect to a lightning wallet so that you can
+          interact with <br /> your favorite websites that accept bitcoin
+          lightning payments!
+        </p>
+        <div className="grid grid-cols-4 gap-4">
+          {connectors.map(({ to, title, description, logo }) => (
+            <LinkButton
+              key={to}
+              to={to}
+              title={title}
+              description={description}
+              logo={logo}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
