@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { MemoryRouter, Outlet, Route, Routes } from "react-router-dom";
+import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 
 import { useAuth } from "../../context/AuthContext";
 
@@ -8,6 +8,7 @@ import Unlock from "../../screens/Unlock";
 import Send from "../../screens/Send";
 import Receive from "../../screens/Receive";
 import LNURLPay from "../../screens/LNURLPay";
+import ConfirmPayment from "../../screens/ConfirmPayment";
 
 import { AuthProvider } from "../../context/AuthContext";
 import RequireAuth from "../RequireAuth";
@@ -16,7 +17,7 @@ import Navbar from "../../components/Navbar";
 function Popup() {
   return (
     <AuthProvider>
-      <MemoryRouter>
+      <HashRouter>
         <section id="popup">
           <Routes>
             <Route
@@ -31,11 +32,12 @@ function Popup() {
               <Route path="send" element={<Send />} />
               <Route path="receive" element={<Receive />} />
               <Route path="lnurlPay" element={<LNURLPay />} />
+              <Route path="confirmPayment" element={<ConfirmPayment />} />
             </Route>
             <Route path="unlock" element={<Unlock />} />
           </Routes>
         </section>
-      </MemoryRouter>
+      </HashRouter>
     </AuthProvider>
   );
 }
