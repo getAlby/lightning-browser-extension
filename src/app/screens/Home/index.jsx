@@ -59,7 +59,9 @@ function Home() {
 
     // Enhancement data is loaded asynchronously (for example because we need to fetch additional data).
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
-      browser.tabs.sendMessage(tabs[0].id, { type: "extractLightningData" });
+      if (tabs.length > 0 && tabs[0].url?.startsWith("http")) {
+        browser.tabs.sendMessage(tabs[0].id, { type: "extractLightningData" });
+      }
     });
     browser.runtime.onMessage.addListener(handleLightningDataMessage);
 
