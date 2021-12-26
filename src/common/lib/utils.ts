@@ -4,12 +4,13 @@ import shajs from "sha.js";
 import PubSub from "pubsub-js";
 
 import { Message, OriginData } from "../../types";
+import { SendPaymentResponse } from "../../extension/background-script/connectors/connector.interface";
 
 const utils = {
-  call: (
+  call: <T = Record<string, unknown>>(
     type: string,
-    args?: { [key: string]: any },
-    overwrites?: { [key: string]: any }
+    args?: Record<string, unknown>,
+    overwrites?: Record<string, unknown>
   ) => {
     return browser.runtime
       .sendMessage({
@@ -20,7 +21,7 @@ const utils = {
         origin: { internal: true },
         ...overwrites,
       })
-      .then((response: { data: any; error?: string }) => {
+      .then((response: { data: T; error?: string }) => {
         if (response.error) {
           throw new Error(response.error);
         }
@@ -72,10 +73,10 @@ const utils = {
   publishPaymentNotification: (
     message: Message,
     paymentRequestDetails: PaymentRequestDetails,
-    response: any
+    response: SendPaymentResponse
   ) => {
     let status = "success"; // default. let's hope for success
-    if (response.error || (response.data && response.data.payment_error)) {
+    if ("error" in response) {
       status = "failed";
     }
     PubSub.publish(`ln.sendPayment.${status}`, {
@@ -90,11 +91,11 @@ const utils = {
   openUrl: (url: string) => {
     browser.tabs.create({ url });
   },
-  openPrompt: (message: {
-    args: { [key: string]: any };
+  openPrompt: <Type>(message: {
+    args: Record<string, unknown>;
     origin: OriginData;
     type: string;
-  }): any => {
+  }): Promise<{ data: Type }> => {
     const urlParams = qs.stringify({
       args: JSON.stringify(message.args),
       origin: JSON.stringify(message.origin),
@@ -116,7 +117,11 @@ const utils = {
           }
 
           const onMessageListener = (
-            responseMessage: { response?: unknown; error?: string },
+            responseMessage: {
+              response?: unknown;
+              error?: string;
+              data: Type;
+            },
             sender: Runtime.MessageSender
           ) => {
             if (

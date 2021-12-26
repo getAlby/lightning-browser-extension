@@ -22,7 +22,7 @@
     "build:opera": "cross-env NODE_ENV=production cross-env TARGET_BROWSER=opera webpack",
     "build": "yarn run build:chrome && yarn run build:firefox && yarn run build:opera",
     "package": "yarn run build && ./create-packages.sh",
-    "lint": "yarn run lint:js && tsc:compile",
+    "lint": "yarn run lint:js && yarn run tsc:compile",
     "lint:js": "eslint src --ext .js,.jsx,.ts,.tsx --max-warnings 0",
     "lint:js:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
     "tsc:compile": "tsc --noEmit",

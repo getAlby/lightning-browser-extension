@@ -8,10 +8,8 @@ const get = async () => {
   const settings = state.getState().settings;
   return {
     data: {
-      settings: {
-        ...DEFAULT_SETTINGS,
-        ...settings,
-      },
+      ...DEFAULT_SETTINGS,
+      ...settings,
     },
   };
 };

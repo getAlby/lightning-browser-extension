@@ -16,7 +16,7 @@ const set = async (message: Message) => {
 
     // make sure we immediately persist the new settings
     state.getState().saveToStorage();
-    return Promise.resolve({ data: { settings: newSettings } });
+    return Promise.resolve({ data: newSettings });
   } else {
     return Promise.reject(new Error("Incorrect setting"));
   }

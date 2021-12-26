@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 
 import utils from "../../common/lib/utils";
+import type { Settings as SettingsType } from "../../types";
 
 import Container from "../components/Container";
 import Button from "../components/Button";
@@ -27,24 +28,24 @@ function Setting({ title, subtitle, right }: Props) {
 
 function Settings() {
   const [loading, setLoading] = useState(true);
-  const [settings, setSettings] = useState<{ websiteEnhancements: boolean }>({
+  const [settings, setSettings] = useState<SettingsType>({
     websiteEnhancements: false,
   });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
 
-  async function saveSetting(setting: {
-    [key: string]: string | number | boolean;
-  }) {
-    const response = await utils.call("setSetting", {
+  async function saveSetting(
+    setting: Record<string, string | number | boolean>
+  ) {
+    const response = await utils.call<SettingsType>("setSetting", {
       setting,
     });
-    setSettings(response.settings);
+    setSettings(response);
   }
 
   useEffect(() => {
-    utils.call("getSettings").then((response) => {
-      setSettings(response.settings);
+    utils.call<SettingsType>("getSettings").then((response) => {
+      setSettings(response);
       setLoading(false);
     });
   }, []);

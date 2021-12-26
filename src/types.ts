@@ -60,7 +60,7 @@ export interface IBadge {
 }
 
 export type Transaction = {
-  type: string;
+  type?: string;
   id: string;
   title: string | React.ReactNode;
   subTitle: string;
@@ -76,7 +76,24 @@ export type Transaction = {
 };
 
 export interface Allowance {
-  badge: IBadge;
   enabled: boolean;
+  host: string;
+  id: string;
+  imageURL: string;
+  lastPaymendAt: number;
+  name: string;
+  payments: ({
+    createdAt: string;
+    name: string;
+    location: string;
+  } & Transaction)[];
+  paymentsCount: number;
+  percentage: string;
   remainingBudget: number;
+  totalBudget: number;
+  usedBudget: number;
+}
+
+export interface Settings {
+  websiteEnhancements: boolean;
 }

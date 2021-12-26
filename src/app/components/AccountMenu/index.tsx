@@ -15,14 +15,14 @@ type Props = {
   onAccountSwitch?: () => void;
 };
 
+type Accounts = Record<string, { name: string; connector: string }>;
+
 function AccountMenu({ onAccountSwitch }: Props) {
   const navigate = useNavigate();
-  const [accounts, setAccounts] = useState<{
-    [key: string]: { name: "string"; connector: "string" };
-  }>({});
+  const [accounts, setAccounts] = useState<Accounts>({});
 
   useEffect(() => {
-    utils.call("getAccounts").then((response) => {
+    utils.call<Accounts>("getAccounts").then((response) => {
       setAccounts(response);
     });
   }, []);
