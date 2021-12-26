@@ -6,8 +6,6 @@ import {
   QrCodeIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 
-import utils from "../../common/lib/utils";
-import getOriginData from "../../extension/content-script/originData";
 import lnurlLib from "../../common/lib/lnurl";
 
 import Button from "../components/Button";
@@ -25,26 +23,16 @@ function Send() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
+      setLoading(true);
       let lnurl = lnurlLib.findLnurl(invoice);
       if (!lnurl && lnurlLib.isLightningAddress(invoice)) {
         lnurl = invoice;
       }
 
       if (lnurl) {
-        setLoading(true);
-        const details = await lnurlLib.getDetails(lnurl);
-        navigate("/lnurlPay", {
-          state: {
-            details,
-            origin: getOriginData(),
-          },
-        });
+        navigate(`/lnurlPay?lnurl=${lnurl}`);
       } else {
-        await utils.call(
-          "sendPaymentOrPrompt",
-          { paymentRequest: invoice },
-          { origin: getOriginData() }
-        );
+        navigate(`/confirmPayment?paymentRequest=${invoice}`);
       }
     } catch (e) {
       if (e instanceof Error) {

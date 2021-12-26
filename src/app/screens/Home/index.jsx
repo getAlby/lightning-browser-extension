@@ -9,7 +9,6 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import utils from "../../../common/lib/utils";
-import lnurl from "../../../common/lib/lnurl";
 
 import Button from "../../components/Button";
 import TransactionsTable from "../../components/TransactionsTable";
@@ -59,7 +58,9 @@ function Home() {
 
     // Enhancement data is loaded asynchronously (for example because we need to fetch additional data).
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
-      browser.tabs.sendMessage(tabs[0].id, { type: "extractLightningData" });
+      if (tabs.length > 0 && tabs[0].url?.startsWith("http")) {
+        browser.tabs.sendMessage(tabs[0].id, { type: "extractLightningData" });
+      }
     });
     browser.runtime.onMessage.addListener(handleLightningDataMessage);
 
@@ -223,7 +224,6 @@ function Home() {
             onClick={async () => {
               try {
                 setLoadingSendSats(true);
-                const details = await lnurl.getDetails(lnData[0].recipient);
                 const origin = {
                   external: true,
                   name: lnData[0].name,
@@ -231,12 +231,11 @@ function Home() {
                   description: lnData[0].description,
                   icon: lnData[0].icon,
                 };
-                navigate("/lnurlPay", {
-                  state: {
-                    details,
-                    origin,
-                  },
-                });
+                navigate(
+                  `/lnurlPay?lnurl=${
+                    lnData[0].recipient
+                  }&origin=${JSON.stringify(origin)}`
+                );
               } catch (e) {
                 alert(e.message);
               } finally {
