@@ -18,11 +18,7 @@ const LNURLAUTH_CANONICAL_PHRASE =
 
 async function lnurl(message: Message) {
   try {
-    if (
-      !message.args.lnurlEncoded ||
-      typeof message.args.lnurlEncoded !== "string"
-    )
-      return;
+    if (typeof message.args.lnurlEncoded !== "string") return;
     const lnurlDetails = await lnurlLib.getDetails(message.args.lnurlEncoded);
 
     switch (lnurlDetails.tag) {
