@@ -43,7 +43,7 @@ async function lnurl(message: Message) {
 }
 
 async function auth(message: Message, lnurlDetails: LNURLDetails) {
-  const connector = state.getState().getConnector();
+  const connector = await state.getState().getConnector();
   const signResponse = await connector.signMessage({
     message: LNURLAUTH_CANONICAL_PHRASE,
     key_loc: {
@@ -191,7 +191,7 @@ export async function lnurlPay(message: Message) {
       error: "Payment request missing.",
     };
   }
-  const connector = state.getState().getConnector();
+  const connector = await state.getState().getConnector();
   const paymentRequestDetails = parsePaymentRequest({
     request: paymentRequest,
   });

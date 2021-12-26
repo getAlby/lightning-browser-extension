@@ -22,7 +22,7 @@ interface State {
   };
   currentAccountId: string | null;
   password: string | null;
-  getConnector: () => Connector | null;
+  getConnector: () => Promise<Connector | null>;
   saveToStorage: () => Promise<void>;
 }
 
@@ -49,7 +49,7 @@ const state = createState<State>((set, get) => ({
     }
     return account;
   },
-  getConnector: () => {
+  getConnector: async () => {
     if (get().connector) {
       return get().connector;
     }
@@ -64,6 +64,8 @@ const state = createState<State>((set, get) => ({
       const config = decryptData(account.config, password);
 
       const connector = new connectors[account.connector](config);
+      await connector.init();
+
       set({ connector: connector });
 
       return connector;

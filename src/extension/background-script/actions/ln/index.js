@@ -8,9 +8,9 @@ import makeInvoice from "./makeInvoice";
 import verifyMessage from "./verifyMessage";
 
 const connectorCall = (method) => {
-  return (message, sender) => {
+  return async (message, sender) => {
     console.log(`Lightning call: ${message.type}`);
-    const connector = state.getState().getConnector();
+    const connector = await state.getState().getConnector();
 
     if (!connector) {
       // TODO: add unlock prompt
