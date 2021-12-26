@@ -11,7 +11,9 @@ import Publisher from "../../screens/Publisher";
 import ChooseConnector from "../../screens/Options/ChooseConnector";
 import TestConnection from "../../screens/Options/TestConnection";
 import Send from "../../screens/Send";
+import ConfirmPayment from "../../screens/ConfirmPayment";
 import Receive from "../../screens/Receive";
+import LNURLPay from "../../screens/LNURLPay";
 import Settings from "../../screens/Settings";
 import Unlock from "../../screens/Unlock";
 
@@ -35,6 +37,8 @@ function Options() {
             </Route>
             <Route path="send" element={<Send />} />
             <Route path="receive" element={<Receive />} />
+            <Route path="lnurlPay" element={<LNURLPay />} />
+            <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="settings" element={<Settings />} />
             <Route
               path="accounts/new/*"

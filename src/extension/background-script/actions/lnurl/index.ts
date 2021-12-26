@@ -43,6 +43,11 @@ async function lnurl(message: Message) {
 }
 
 async function auth(message: Message, lnurlDetails: LNURLDetails) {
+  if (lnurlDetails.tag !== "login")
+    throw new Error(
+      `LNURL-AUTH FAIL: incorrect tag: ${lnurlDetails.tag} was used`
+    );
+
   const connector = state.getState().getConnector();
   const signResponse = await connector.signMessage({
     message: LNURLAUTH_CANONICAL_PHRASE,

@@ -64,9 +64,10 @@ const lnurl = {
     lnurlDetails.tag = url.searchParams.get("tag") as LNURLDetails["tag"];
     if (lnurlDetails.tag === "login") {
       lnurlDetails.k1 = url.searchParams.get("k1") || "";
-      lnurlDetails.action = url.searchParams.get("action") || "";
+      lnurlDetails.action = url.searchParams.get("action") || undefined;
     } else {
-      const res = await axios.get<LNURLDetails>(url.toString());
+      const res = await axios.get(url.toString());
+      console.log("res", res);
       lnurlDetails = res.data;
     }
     lnurlDetails.domain = url.hostname;
