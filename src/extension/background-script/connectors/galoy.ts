@@ -1,11 +1,7 @@
 import axios from "axios";
-import sha256 from "crypto-js/sha256";
-import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
 import { AxiosRequestConfig } from "axios";
 import Base from "./base";
-import utils from "../../../common/lib/utils";
-import HashKeySigner from "../../../common/utils/signer";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
@@ -27,11 +23,6 @@ export default class Galoy extends Base implements Connector {
           me {
               id
               username
-              defaultAccount {
-                wallets {
-                  id
-              }
-            }
           }
         }
       `,
@@ -176,3 +167,11 @@ export default class Galoy extends Base implements Connector {
     return data;
   }
 }
+
+type GaloyDefaultAccount = {
+  defaultWalletId: string;
+  wallets: {
+    id: string;
+    balance: number;
+  }[];
+};

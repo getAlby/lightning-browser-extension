@@ -92,12 +92,8 @@ export default function ConnectGaloy() {
       query: `
           query getinfo {
             me {
-                id
-                username
-                defaultAccount {
-                  wallets {
-                    id
-                }
+              defaultAccount {
+                defaultWalletId
               }
             }
           }
@@ -117,8 +113,8 @@ export default function ConnectGaloy() {
           Authorization: `Bearer ${authToken}`,
         },
       });
-      const walletId = meResponse.data.data.me.defaultAccount.wallets[0]
-        .id as string;
+      const walletId = meResponse.data.data.me.defaultAccount
+        .defaultWalletId as string;
 
       saveAccount({ authToken, walletId });
     } catch (e: unknown) {
