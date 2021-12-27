@@ -14,22 +14,26 @@ export interface MakeInvoiceArgs {
   memo: string;
 }
 
-export interface MakeInvoiceResponse {
-  data: {
-    paymentRequest: string;
-    rHash: string;
-  };
-}
+export type MakeInvoiceResponse =
+  | {
+      data: {
+        paymentRequest: string;
+        rHash: string;
+      };
+    }
+  | { error: string };
 
 export interface GetInfoResponse {
   data: WebLNNode;
 }
 
-export interface GetBalanceResponse {
-  data: {
-    balance: number;
-  };
-}
+export type GetBalanceResponse =
+  | {
+      data: {
+        balance: number;
+      };
+    }
+  | { error: string };
 
 export type SendPaymentResponse =
   | {

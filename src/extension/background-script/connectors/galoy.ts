@@ -1,11 +1,7 @@
 import axios from "axios";
-import sha256 from "crypto-js/sha256";
-import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
 import { AxiosRequestConfig } from "axios";
 import Base from "./base";
-import utils from "../../../common/lib/utils";
-import HashKeySigner from "../../../common/utils/signer";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
@@ -27,11 +23,6 @@ export default class Galoy extends Base implements Connector {
           me {
               id
               username
-              defaultAccount {
-                wallets {
-                  id
-              }
-            }
           }
         }
       `,
@@ -51,11 +42,11 @@ export default class Galoy extends Base implements Connector {
       query: `
         query getinfo {
           me {
-              id
-              username
-              defaultAccount {
-                wallets {
-                  balance
+            defaultAccount {
+              defaultWalletId
+              wallets {
+                id
+                balance
               }
             }
           }
@@ -63,11 +54,21 @@ export default class Galoy extends Base implements Connector {
       `,
     };
     return this.request(query).then((data) => {
-      return {
-        data: {
-          balance: data.data.me.defaultAccount.wallets[0].balance,
-        },
-      };
+      if (data.error) {
+        return {
+          error: data.error?.errors?.[0]?.message || JSON.stringify(data.error),
+        };
+      }
+      const { defaultWalletId, wallets }: GaloyDefaultAccount =
+        data.data.me.defaultAccount;
+      const defaultWallet = wallets.find((w) => w.id === defaultWalletId);
+      return defaultWallet
+        ? {
+            data: {
+              balance: defaultWallet.balance,
+            },
+          }
+        : { error: "Valid wallet not found" };
     });
   }
 
@@ -77,6 +78,9 @@ export default class Galoy extends Base implements Connector {
         mutation lnInvoicePaymentSend($input: LnInvoicePaymentInput!) {
           lnInvoicePaymentSend(input:$input) {
             status
+            errors {
+              message
+            }
           }
         }
       `,
@@ -94,8 +98,13 @@ export default class Galoy extends Base implements Connector {
     });
 
     return this.request(query).then((data) => {
-      if (data.data.lnInvoicePaymentSend.errors?.message) {
-        return { error: data.data.lnInvoicePaymentSend.errors?.message };
+      if (data.data.lnInvoicePaymentSend.errors?.[0]?.message) {
+        return { error: data.data.lnInvoicePaymentSend.errors[0].message };
+      }
+      if (data.error) {
+        return {
+          error: data.error?.errors?.[0]?.message || JSON.stringify(data.error),
+        };
       }
       return {
         data: {
@@ -143,6 +152,14 @@ export default class Galoy extends Base implements Connector {
       },
     };
     return this.request(query).then((data) => {
+      if (data.data.lnInvoiceCreate.errors?.[0]?.message) {
+        return { error: data.data.lnInvoiceCreate.errors[0].message };
+      }
+      if (data.error) {
+        return {
+          error: data.error?.errors?.[0]?.message || JSON.stringify(data.error),
+        };
+      }
       return {
         data: {
           paymentRequest: data.data.lnInvoiceCreate.invoice.paymentRequest,
@@ -176,3 +193,11 @@ export default class Galoy extends Base implements Connector {
     return data;
   }
 }
+
+type GaloyDefaultAccount = {
+  defaultWalletId: string;
+  wallets: {
+    id: string;
+    balance: number;
+  }[];
+};
