@@ -72,10 +72,12 @@ export default function ConnectLndHub() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="relative mt-14 lg:flex space-x-8 bg-white px-10 py-12">
+      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 px-10 py-12">
         <div className="lg:w-1/2">
-          <h1 className="text-2xl font-bold">Connect to LNDHub (BlueWallet)</h1>
-          <p className="text-gray-500 mt-6">
+          <h1 className="text-2xl font-bold dark:text-white">
+            Connect to LNDHub (BlueWallet)
+          </h1>
+          <p className="text-gray-500 mt-6 dark:text-gray-400">
             In BlueWallet, choose the wallet you want to connect, open it, click
             on &quot;...&quot;, click on Export/Backup to display the QR code
             and scan it with your webcam.
@@ -84,7 +86,7 @@ export default function ConnectLndHub() {
             <div className="mt-6">
               <label
                 htmlFor="login"
-                className="block font-medium text-gray-700"
+                className="block font-medium text-gray-700 dark:text-white"
               >
                 LNDHub Export URI
               </label>
@@ -98,7 +100,7 @@ export default function ConnectLndHub() {
                   onChange={handleChange}
                 />
               </div>
-              <p className="text-center my-4">OR</p>
+              <p className="text-center my-4 dark:text-white">OR</p>
               <QrcodeScanner
                 fps={10}
                 qrbox={250}

@@ -57,7 +57,7 @@ export default function UserMenu() {
             navigate("/send");
           }}
         >
-          <SendIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75" />
+          <SendIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-500" />
           Send
         </Menu.ItemButton>
         <Menu.ItemButton
@@ -65,7 +65,7 @@ export default function UserMenu() {
             navigate("/receive");
           }}
         >
-          <ReceiveIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75" />
+          <ReceiveIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-500" />
           Receive
         </Menu.ItemButton>
         <Menu.ItemButton

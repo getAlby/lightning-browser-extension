@@ -118,7 +118,7 @@ function ConfirmPayment(props) {
             <div>
               <label
                 htmlFor="budget"
-                className="mb-1 block text-sm font-medium text-gray-700"
+                className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
               >
                 Budget
               </label>
@@ -152,7 +152,7 @@ function ConfirmPayment(props) {
           </p>
 
           <a
-            className="underline text-sm text-gray-500"
+            className="underline text-sm text-gray-500 dark:text-gray-400"
             href="#"
             onClick={reject}
           >

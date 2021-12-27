@@ -41,7 +41,7 @@ export default function TestConnection() {
 
   return (
     <div>
-      <div className="relative lg:mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white px-10 py-12">
+      <div className="relative lg:mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white dark:bg-gray-800 px-10 py-12">
         <div className="relative">
           <div>
             {errorMessage && (
@@ -65,7 +65,9 @@ export default function TestConnection() {
                   />
                 </div>
 
-                <p className="mt-6">Awesome, you&apos;re ready to go!</p>
+                <p className="mt-6 dark:text-gray-400">
+                  Awesome, you&apos;re ready to go!
+                </p>
 
                 <div className="mt-6 shadow-lg p-4 rounded-xl">
                   <Card
