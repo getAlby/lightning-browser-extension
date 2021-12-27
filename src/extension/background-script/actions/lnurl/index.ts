@@ -49,9 +49,7 @@ async function auth(message: Message, lnurlDetails: LNURLDetails) {
     );
 
   const connector = await state.getState().getConnector();
-  if (!connector) {
-    throw new Error("Connector absent.");
-  }
+
   const signResponse = await connector.signMessage({
     message: LNURLAUTH_CANONICAL_PHRASE,
     key_loc: {
@@ -207,11 +205,7 @@ export async function lnurlPay(message: Message) {
     };
   }
   const connector = await state.getState().getConnector();
-  if (!connector) {
-    return {
-      error: "Connector absent.",
-    };
-  }
+
   const paymentRequestDetails = parsePaymentRequest({
     request: paymentRequest,
   });

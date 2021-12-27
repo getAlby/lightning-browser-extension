@@ -18,11 +18,6 @@ export default async function sendPayment(message: Message) {
     request: paymentRequest,
   });
   const connector = await state.getState().getConnector();
-  if (!connector) {
-    return {
-      error: "Connector absent.",
-    };
-  }
 
   const response = await connector.sendPayment({
     paymentRequest,
