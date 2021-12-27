@@ -9,14 +9,12 @@ const info = async (message, sender) => {
   //  account = state.getState().getAccount();
   //}
   connector = await state.getState().getConnector();
-  const info = await connector.getInfo();
-  const balance = await connector.getBalance();
-  //const [info, balance] = await Promise.all([
-  //  connector.getInfo(),
-  //  connector.getBalance(),
-  //]);
-
-  console.log({info, balance});
+  //const info = await connector.getInfo();
+  //const balance = await connector.getBalance();
+  const [info, balance] = await Promise.all([
+    connector.getInfo(),
+    connector.getBalance(),
+  ]);
 
   // TODO error handling
   return {
