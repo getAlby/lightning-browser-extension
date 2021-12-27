@@ -1,5 +1,4 @@
-import utils from "../../../common/lib/utils";
-import type { Settings } from "../../../types";
+import api from "../../../common/lib/api";
 // import GitHubRepo from "./GitHubRepo";
 import Monetization from "./Monetization";
 import Twitter from "./Twitter";
@@ -12,7 +11,7 @@ import Peertube from "./Peertube";
 const enhancements = [Twitter, YouTubeVideo, Peertube, Monetization];
 
 async function extractLightningData() {
-  const settings = await utils.call<Settings>("getSettings");
+  const settings = await api.getSettings();
   if (!settings.websiteEnhancements) return;
 
   const match = enhancements.find((e) =>

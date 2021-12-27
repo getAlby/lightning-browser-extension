@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 
-import utils from "../../common/lib/utils";
+import api from "../../common/lib/api";
 import type { Settings as SettingsType } from "../../types";
 
 import Container from "../components/Container";
@@ -37,14 +37,12 @@ function Settings() {
   async function saveSetting(
     setting: Record<string, string | number | boolean>
   ) {
-    const response = await utils.call<SettingsType>("setSetting", {
-      setting,
-    });
+    const response = await api.setSetting(setting);
     setSettings(response);
   }
 
   useEffect(() => {
-    utils.call<SettingsType>("getSettings").then((response) => {
+    api.getSettings().then((response) => {
       setSettings(response);
       setLoading(false);
     });

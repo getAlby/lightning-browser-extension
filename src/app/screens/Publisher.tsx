@@ -25,7 +25,6 @@ function Publisher() {
         const response = await utils.call<Allowance>("getAllowanceById", {
           id: parseInt(id),
         });
-        console.log(response);
         setAllowance(response);
       }
     } catch (e) {
