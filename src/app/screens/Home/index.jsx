@@ -78,8 +78,10 @@ function Home() {
             {parseInt(allowance.totalBudget) > 0 ? (
               <>
                 <dl className="mb-0">
-                  <dt className="text-xs text-gray-500">Allowance</dt>
-                  <dd className="mb-0 text-sm font-medium">
+                  <dt className="text-xs text-gray-500 dark:tex-gray-400">
+                    Allowance
+                  </dt>
+                  <dd className="mb-0 text-sm font-medium dark:text-gray-400">
                     {allowance.usedBudget} / {allowance.totalBudget} sat used
                   </dd>
                 </dl>
@@ -172,7 +174,7 @@ function Home() {
           </div>
         ) : (
           <div>
-            <h2 className="mb-2 text-lg text-gray-900 font-semibold">
+            <h2 className="mb-2 text-lg text-gray-900 font-semibold dark:text-white">
               Recent Transactions
             </h2>
             {payments.length > 0 ? (
@@ -208,7 +210,9 @@ function Home() {
                 }))}
               />
             ) : (
-              <p className="text-gray-500">No transactions yet.</p>
+              <p className="text-gray-500 dark:text-gray-400">
+                No transactions yet.
+              </p>
             )}
           </div>
         )}

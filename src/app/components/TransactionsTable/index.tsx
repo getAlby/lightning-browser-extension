@@ -35,7 +35,7 @@ export default function TransactionsTable({ transactions }: Props) {
 
   return (
     <div className="shadow overflow-hidden rounded-lg">
-      <div className="bg-white divide-y divide-gray-200">
+      <div className="bg-white divide-y divide-gray-200 dark:bg-gray-700">
         {transactions.map((tx) => (
           <div key={tx.id} className="px-3 py-2">
             <Disclosure>
@@ -46,10 +46,10 @@ export default function TransactionsTable({ transactions }: Props) {
                       {tx.type && renderIcon(tx.type)}
                     </div>
                     <div className="overflow-hidden mr-3">
-                      <div className="text-sm font-medium text-gray-900 truncate">
+                      <div className="text-sm font-medium text-gray-900 truncate dark:text-white">
                         {tx.title}
                       </div>
-                      <p className="text-xs text-gray-500 capitalize">
+                      <p className="text-xs text-gray-500 capitalize dark:text-gray-400">
                         {tx.type}
                       </p>
                     </div>
@@ -67,7 +67,7 @@ export default function TransactionsTable({ transactions }: Props) {
                     )}
                     <div className="flex ml-auto text-right space-x-3 flex-shrink-0">
                       <div>
-                        <p className="text-sm font-medium">
+                        <p className="text-sm font-medium dark:text-white">
                           {[tx.type && "sent", "sending"].includes(tx.type)
                             ? "-"
                             : "+"}
@@ -85,7 +85,7 @@ export default function TransactionsTable({ transactions }: Props) {
                     </div>
                   </div>
                   <Disclosure.Panel>
-                    <div className="mt-1 ml-9 text-xs text-gray-500">
+                    <div className="mt-1 ml-9 text-xs text-gray-500 dark:text-gray-400">
                       {tx.description}
                       {tx.preimage && (
                         <p className="truncate">Preimage: {tx.preimage}</p>

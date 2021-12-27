@@ -17,7 +17,9 @@ function Setting({ title, subtitle, right }: Props) {
   return (
     <div className="py-4 flex justify-between items-center">
       <div>
-        <span className="text-gray-700 font-medium">{title}</span>
+        <span className="text-gray-700 dark:text-white font-medium">
+          {title}
+        </span>
         <p className="text-gray-400 text-sm">{subtitle}</p>
       </div>
       {right}
@@ -49,8 +51,10 @@ function Settings() {
 
   return (
     <Container>
-      <h2 className="mt-12 mb-6 text-2xl font-bold">Settings</h2>
-      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y">
+      <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
+        Settings
+      </h2>
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y dark:bg-gray-800">
         <Setting
           title="Website enhancements"
           subtitle="Tipping enhancements for Twitter, YouTube, etc."

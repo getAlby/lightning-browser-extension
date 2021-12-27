@@ -47,7 +47,7 @@ export default function ChooseConnector() {
         element={
           <div className="relative mt-7 lg:grid  lg:gap-8 items-center text-center">
             <div className="relative">
-              <h1 className="text-2xl font-bold mb-7">
+              <h1 className="text-2xl font-bold mb-7 dark:text-white">
                 Add a new lightning account
               </h1>
 

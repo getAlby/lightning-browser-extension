@@ -43,7 +43,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   return (
     <>
       <Menu as="div" className="relative">
-        <Menu.Button className="flex items-center text-gray-500 hover:text-black transition-color duration-200">
+        <Menu.Button className="flex items-center text-gray-500 hover:text-black transition-color duration-200 dark:hover:text-white">
           <GearIcon className="h-6 w-6" />
         </Menu.Button>
         <Menu.List position="right">
@@ -76,16 +76,16 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
         className="rounded-lg bg-white w-full max-w-lg"
       >
-        <div className="p-5 flex justify-between">
-          <h2 className="text-2xl font-bold">Edit Allowance</h2>
+        <div className="p-5 flex justify-between dark:bg-gray-800">
+          <h2 className="text-2xl font-bold dark:text-white">Edit Allowance</h2>
           <button onClick={closeModal}>
-            <CrossIcon className="w-6 h-6" />
+            <CrossIcon className="w-6 h-6 dark:text-white" />
           </button>
         </div>
-        <div className="p-5 border-t border-b border-gray-200">
+        <div className="p-5 border-t border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">
           <label
             htmlFor="budget"
-            className="mb-1 block text-sm font-medium text-gray-700"
+            className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
           >
             Budget
           </label>
@@ -105,7 +105,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             />
           </div>
         </div>
-        <div className="flex justify-end p-5">
+        <div className="flex justify-end p-5 dark:bg-gray-800">
           <Button
             onClick={updateAllowance}
             label="Save"

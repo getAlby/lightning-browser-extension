@@ -47,8 +47,8 @@ function AccountMenu({ onAccountSwitch }: Props) {
 
   return (
     <Menu as="div">
-      <Menu.Button className="h-full px-2 rounded-r-md hover:bg-gray-200 transition-colors duration-200">
-        <CaretDownIcon className="h-4 w-4" />
+      <Menu.Button className="h-full px-2 rounded-r-md hover:bg-gray-200 dark:hover:bg-gray-500 transition-colors duration-200">
+        <CaretDownIcon className="h-4 w-4 dark:text-white" />
       </Menu.Button>
       <Menu.List position="left">
         <Menu.Subheader>Switch account</Menu.Subheader>
@@ -61,7 +61,7 @@ function AccountMenu({ onAccountSwitch }: Props) {
                 selectAccount(accountId);
               }}
             >
-              <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75" />
+              <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-500" />
               {account.name}&nbsp;
               <Badge
                 label={account.connector}

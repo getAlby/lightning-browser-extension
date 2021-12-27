@@ -257,12 +257,12 @@ function LNURLPay(props: Props) {
 
     return (
       <>
-        <dl className="shadow bg-white pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+        <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
           {descriptionList &&
             descriptionList.map(([dt, dd], i) => (
               <Fragment key={`dl-item-${i}`}>
                 <dt className="text-sm font-semibold text-gray-500">{dt}</dt>
-                <dd className="text-sm mb-4">{dd}</dd>
+                <dd className="text-sm mb-4 dark:text-white">{dd}</dd>
               </Fragment>
             ))}
         </dl>
@@ -285,11 +285,11 @@ function LNURLPay(props: Props) {
         <div className="p-4 max-w-screen-sm mx-auto">
           {!successAction ? (
             <>
-              <dl className="shadow bg-white pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+              <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
                 {elements().map(([t, d], i) => (
                   <Fragment key={`element-${i}`}>
                     <dt className="text-sm font-semibold text-gray-500">{t}</dt>
-                    <dd className="text-sm mb-4">{d}</dd>
+                    <dd className="text-sm mb-4 dark:text-white">{d}</dd>
                   </Fragment>
                 ))}
               </dl>

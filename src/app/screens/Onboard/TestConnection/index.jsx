@@ -147,7 +147,7 @@ export default function TestConnection() {
   }
 
   return (
-    <div className="relative lg:mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white px-10 py-12">
+    <div className="relative lg:mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white dark:bg-gray-800 px-10 py-12">
       <div className="relative">
         <div>
           {errorMessage && (
@@ -166,10 +166,12 @@ export default function TestConnection() {
                 </h1>
                 <img src="assets/icons/star.svg" alt="image" className="w-8" />
               </div>
-              <p className="mt-6 ">Awesome, you&apos;re ready to go!</p>
+              <p className="mt-6 dark:text-white">
+                Awesome, you&apos;re ready to go!
+              </p>
               <div>
                 {faucetURL && accountInfo.balance === 0 && (
-                  <div className="text-gray-500">
+                  <div className="text-gray-500 dark:text-white">
                     You&apos;re wallet is currently empty. &nbsp;
                     <a
                       href="#"
@@ -198,11 +200,10 @@ export default function TestConnection() {
                 />
               </div>
               <div>
-                <p className="mt-8">
+                <p className="mt-8 dark:text-white">
                   Now you’ve connected your node would you like to go through a
                   tutorial?
                 </p>
-
                 <div className="mt-8">
                   <a href="https://getalby.com/demo">
                     <Button label="Give it a try now" primary />
