@@ -8,7 +8,7 @@ const nativeApplication = "LBE";
 // !!!!!
 
 export default class Native {
-  constructor(config) {
+  constructor() {
     this.isExecuting = false;
     this.getInfo = memoizee((args) => this.call("getInfo", args), {
       promise: true,
@@ -69,7 +69,7 @@ export default class Native {
       return Promise.resolve({ error: "User is busy" });
     }
     this.isExecuting = true;
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       const data = { command, ...args };
       browser.runtime
         .sendNativeMessage(nativeApplication, data)

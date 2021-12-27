@@ -1,6 +1,4 @@
-import { decryptData } from "../../../../common/lib/crypto";
 import state from "../../state";
-import connectors from "../../connectors";
 
 const select = (message, sender) => {
   const currentState = state.getState();

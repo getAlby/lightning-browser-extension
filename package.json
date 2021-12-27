@@ -22,9 +22,10 @@
     "build:opera": "cross-env NODE_ENV=production cross-env TARGET_BROWSER=opera webpack",
     "build": "yarn run build:chrome && yarn run build:firefox && yarn run build:opera",
     "package": "yarn run build && ./create-packages.sh",
-    "lint": "eslint src --ext .js,.jsx,.ts,.tsx --max-warnings 0",
-    "lint:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
-    "typescript": "tsc --noEmit",
+    "lint": "yarn run lint:js && yarn run tsc:compile",
+    "lint:js": "eslint src --ext .js,.jsx,.ts,.tsx --max-warnings 0",
+    "lint:js:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
+    "tsc:compile": "tsc --noEmit",
     "format": "prettier --loglevel silent --write 'src/**/*.(js|ts|jsx|tsx)'",
     "test-ext": "jest ./src/extension",
     "test-app": "jest ./src/app",
@@ -36,7 +37,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
+      "eslint --fix --max-warnings 0",
       "prettier --write"
     ]
   },

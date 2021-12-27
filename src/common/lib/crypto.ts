@@ -1,6 +1,6 @@
 import { AES, enc } from "crypto-js";
 
-export function encryptData(data: any, password: string) {
+export function encryptData(data: unknown, password: string) {
   return AES.encrypt(JSON.stringify(data), password).toString();
 }
 

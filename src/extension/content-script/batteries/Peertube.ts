@@ -3,6 +3,17 @@ import axios from "axios";
 import getOriginData from "../originData";
 import setLightningData from "../setLightningData";
 
+interface PeertubeRes {
+  channel: {
+    displayName: string;
+    description: string;
+    avatar: {
+      path: string;
+    };
+  };
+  description: string;
+}
+
 // add more peertube URLs to this regex
 const urlMatcher = /^https?:\/\/(bitcointv\.com)\/w\/.*/i;
 
@@ -26,7 +37,7 @@ const battery = (): void => {
   const apiURL = `https://${host}/api/v1/videos/${id}`;
 
   axios
-    .get<any>(apiURL)
+    .get<PeertubeRes>(apiURL)
     .then((response) => {
       const data = response.data;
       const channelName = data.channel.displayName;

@@ -8,7 +8,7 @@ import { Allowance } from "../../types";
 import utils from "../../common/lib/utils";
 
 function Publishers() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Allowance[]>([]);
   const navigate = useNavigate();
 
   function navigateToPublisher(id: string) {
@@ -17,13 +17,18 @@ function Publishers() {
 
   async function fetchData() {
     try {
-      const response = await utils.call("listAllowances");
-      const allowances = response.allowances.map((allowance: Allowance) => {
+      const response = await utils.call<{
+        allowances: Allowance[];
+      }>("listAllowances");
+      const allowances = response.allowances.map((allowance) => {
         if (allowance.enabled && allowance.remainingBudget > 0) {
-          allowance.badge = {
-            label: "ACTIVE",
-            color: "green-bitcoin",
-            textColor: "white",
+          return {
+            ...allowance,
+            badge: {
+              label: "ACTIVE",
+              color: "green-bitcoin",
+              textColor: "white",
+            },
           };
         }
         return allowance;

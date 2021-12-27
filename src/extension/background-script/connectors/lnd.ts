@@ -149,54 +149,51 @@ class Lnd implements Connector {
     });
   };
 
-  async request(method: string, path: string, args?: any, defaultValues?: any) {
+  async request(
+    method: string,
+    path: string,
+    args?: Record<string, unknown>,
+    defaultValues?: Record<string, unknown>
+  ) {
     const url = new URL(this.config.url);
     url.pathname = path;
     let body = null;
-    const query = "";
     const headers = new Headers();
     headers.append("Accept", "application/json");
     if (method === "POST") {
       body = JSON.stringify(args);
       headers.append("Content-Type", "application/json");
     } else if (args !== undefined) {
-      url.search = new URLSearchParams(args).toString();
+      url.search = new URLSearchParams(
+        args as Record<string, string>
+      ).toString();
     }
     if (this.config.macaroon) {
       headers.append("Grpc-Metadata-macaroon", this.config.macaroon);
     }
-    try {
-      const res = await fetch(url.toString(), {
-        method,
-        headers,
-        body,
-      });
-      if (!res.ok) {
-        let errBody;
-        try {
-          errBody = await res.json();
-          if (!errBody.error) {
-            throw new Error();
-          }
-        } catch (err) {
-          throw new Error(res.statusText);
+    const res = await fetch(url.toString(), {
+      method,
+      headers,
+      body,
+    });
+    if (!res.ok) {
+      let errBody;
+      try {
+        errBody = await res.json();
+        if (!errBody.error) {
+          throw new Error();
         }
-        console.log("errBody", errBody);
-        throw errBody;
+      } catch (err) {
+        throw new Error(res.statusText);
       }
-      let data = await res.json();
-      if (defaultValues) {
-        data = Object.assign(Object.assign({}, defaultValues), data);
-      }
-      return { data };
-    } catch (err: any) {
-      console.error(`API error calling ${method} ${path}`, err);
-      // Thrown errors must be JSON serializable, so include metadata if possible
-      if (err.code || err.status || !err.message) {
-        throw err;
-      }
-      throw err.message;
+      console.log("errBody", errBody);
+      throw errBody;
     }
+    let data = await res.json();
+    if (defaultValues) {
+      data = Object.assign(Object.assign({}, defaultValues), data);
+    }
+    return { data };
   }
 }
 

@@ -9,7 +9,6 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import utils from "../../../common/lib/utils";
-import lnurl from "../../../common/lib/lnurl";
 
 import Button from "../../components/Button";
 import TransactionsTable from "../../components/TransactionsTable";
