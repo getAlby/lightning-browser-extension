@@ -46,7 +46,10 @@ function Receive() {
   function checkPayment(paymentHash: string) {
     setPollingForPayment(true);
     poll({
-      fn: () => utils.call("checkPayment", { paymentHash }),
+      fn: () =>
+        utils.call("checkPayment", { paymentHash }) as Promise<{
+          paid: boolean;
+        }>,
       validate: (payment) => payment.paid,
       interval: 3000,
       maxAttempts: 20,
@@ -64,7 +67,10 @@ function Receive() {
   async function createInvoice() {
     try {
       setLoading(true);
-      const response = await utils.call("makeInvoice", {
+      const response = await utils.call<{
+        paymentRequest: string;
+        rHash: string;
+      }>("makeInvoice", {
         amount: formData.amount,
         memo: formData.description,
       });

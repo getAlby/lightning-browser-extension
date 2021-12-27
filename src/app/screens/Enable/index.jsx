@@ -1,23 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 import Button from "../../components/Button";
 import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
 
 function Enable(props) {
-  const [loading, setLoading] = useState(true);
-  const [remember, setRemember] = useState(true);
-  const [enabled, setEnabled] = useState(false);
-  const [budget, setBudget] = useState(null);
+  const hasFetchedData = useRef(false);
+  const [, setLoading] = useState(true);
+  const [remember] = useState(true);
+  const [, setEnabled] = useState(false);
+  const [budget] = useState(null);
 
-  function enable() {
+  const enable = useCallback(() => {
     setEnabled(true);
     msg.reply({
       enabled: true,
       remember,
       budget,
     });
-  }
+  }, [budget, remember]);
 
   function reject(event) {
     msg.error("User rejected");
@@ -39,8 +40,13 @@ function Enable(props) {
         console.log(e.message);
       }
     }
-    getAllowance();
-  }, []);
+
+    // Run once.
+    if (!hasFetchedData.current) {
+      getAllowance();
+      hasFetchedData.current = true;
+    }
+  }, [enable, props.origin.domain, props.origin.host]);
 
   return (
     <div>

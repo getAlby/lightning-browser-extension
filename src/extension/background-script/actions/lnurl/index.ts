@@ -18,7 +18,7 @@ const LNURLAUTH_CANONICAL_PHRASE =
 
 async function lnurl(message: Message) {
   try {
-    if (!message.args.lnurlEncoded) return;
+    if (typeof message.args.lnurlEncoded !== "string") return;
     const lnurlDetails = await lnurlLib.getDetails(message.args.lnurlEncoded);
 
     switch (lnurlDetails.tag) {
@@ -49,6 +49,7 @@ async function auth(message: Message, lnurlDetails: LNURLDetails) {
     );
 
   const connector = state.getState().getConnector();
+
   const signResponse = await connector.signMessage({
     message: LNURLAUTH_CANONICAL_PHRASE,
     key_loc: {
@@ -93,11 +94,15 @@ async function auth(message: Message, lnurlDetails: LNURLDetails) {
       loginURL.toString()
     );
     return authResponse;
-  } catch (e: any) {
-    console.log("LNURL-AUTH FAIL:", e);
-    console.log(e.response?.data);
-    const error = e.response?.data?.reason || e.message; // lnurl error or exception message
-    throw new Error(error);
+  } catch (e) {
+    if (axios.isAxiosError(e)) {
+      console.log("LNURL-AUTH FAIL:", e);
+      console.log(e.response?.data);
+      const error = e.response?.data?.reason || e.message; // lnurl error or exception message
+      throw new Error(error);
+    } else if (e instanceof Error) {
+      throw new Error(e.message);
+    }
   }
 }
 
@@ -117,7 +122,10 @@ async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
   let loginStatus = { confirmed: true, remember: true };
   // if there is no publisher or lnurlAuth is not enabled we prompt the user
   if (!isUnlocked || !allowance || !allowance.enabled || !allowance.lnurlAuth) {
-    const { data } = await utils.openPrompt({
+    const { data } = await utils.openPrompt<{
+      confirmed: boolean;
+      remember: boolean;
+    }>({
       ...message,
       type: "lnurlAuth",
       args: {
@@ -191,7 +199,7 @@ async function payWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
 
 export async function lnurlPay(message: Message) {
   const { paymentRequest } = message.args;
-  if (!paymentRequest) {
+  if (typeof paymentRequest !== "string") {
     return {
       error: "Payment request missing.",
     };

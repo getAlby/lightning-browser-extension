@@ -16,7 +16,7 @@ function getUsername() {
 }
 
 // can we get the user description from the primary column that looks like a profile?
-function isOnProfilePage(username: string) {
+function isOnProfilePage() {
   return (
     document.querySelector(
       '[data-testid="primaryColumn"] [data-testid="UserDescription"]'
@@ -34,7 +34,7 @@ function isOnTweet(username: string) {
 }
 
 function getUserData(username: string) {
-  if (isOnProfilePage(username)) {
+  if (isOnProfilePage()) {
     const element = document.querySelector(
       '[data-testid="primaryColumn"] [data-testid="UserDescription"]'
     );

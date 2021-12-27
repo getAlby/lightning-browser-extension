@@ -1,7 +1,6 @@
-import { useState, MouseEvent } from "react";
+import { MouseEvent } from "react";
 
 import msg from "../../common/lib/msg";
-import utils from "../../common/lib/utils";
 
 import Button from "../components/Button";
 import PublisherCard from "../components/PublisherCard";

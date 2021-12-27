@@ -43,7 +43,12 @@ export default class LndHub implements Connector {
   }
 
   async getInfo(): Promise<GetInfoResponse> {
-    const data = await this.request("GET", "/getinfo", undefined, {});
+    const data = await this.request<{ alias: string }>(
+      "GET",
+      "/getinfo",
+      undefined,
+      {}
+    );
     return {
       data: {
         alias: data.alias,
@@ -52,7 +57,12 @@ export default class LndHub implements Connector {
   }
 
   async getBalance(): Promise<GetBalanceResponse> {
-    const data = await this.request("GET", "/balance", undefined, {});
+    const data = await this.request<{ BTC: { AvailableBalance: number } }>(
+      "GET",
+      "/balance",
+      undefined,
+      {}
+    );
     return {
       data: {
         balance: data.BTC.AvailableBalance,
@@ -61,7 +71,24 @@ export default class LndHub implements Connector {
   }
 
   async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
-    const data = await this.request("POST", "/payinvoice", {
+    const data = await this.request<{
+      error?: string;
+      message: string;
+      payment_error?: string;
+      payment_hash:
+        | {
+            type: string;
+            data: ArrayBuffer;
+          }
+        | string;
+      payment_preimage:
+        | {
+            type: string;
+            data: ArrayBuffer;
+          }
+        | string;
+      payment_route?: { total_amt: number; total_fees: number };
+    }>("POST", "/payinvoice", {
       invoice: args.paymentRequest,
     });
     if (data.error) {
@@ -98,15 +125,15 @@ export default class LndHub implements Connector {
     }
     return {
       data: {
-        preimage: data.payment_preimage,
-        paymentHash: data.payment_hash,
+        preimage: data.payment_preimage as string,
+        paymentHash: data.payment_hash as string,
         route: data.payment_route,
       },
     };
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    const data = await this.request(
+    const data = await this.request<{ paid: boolean }>(
       "GET",
       `/checkpayment/${args.paymentHash}`,
       undefined,
@@ -165,7 +192,10 @@ export default class LndHub implements Connector {
   }
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
-    const data = await this.request("POST", "/addinvoice", {
+    const data = await this.request<{
+      payment_request: string;
+      r_hash: { type: string; data: ArrayBuffer } | string;
+    }>("POST", "/addinvoice", {
       amt: args.amount,
       memo: args.memo,
     });
@@ -175,7 +205,7 @@ export default class LndHub implements Connector {
     return {
       data: {
         paymentRequest: data.payment_request,
-        rHash: data.r_hash,
+        rHash: data.r_hash as string,
       },
     };
   }
@@ -218,12 +248,12 @@ export default class LndHub implements Connector {
       });
   }
 
-  async request(
+  async request<Type>(
     method: Method,
     path: string,
-    args: any,
-    defaultValues?: any
-  ): Promise<any> {
+    args?: Record<string, unknown>,
+    defaultValues?: Record<string, unknown>
+  ): Promise<Type> {
     if (!this.access_token) {
       await this.authorize();
     }
