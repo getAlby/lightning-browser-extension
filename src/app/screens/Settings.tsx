@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 
 import api from "../../common/lib/api";
-import type { Settings as SettingsType } from "../../types";
 
 import Container from "../components/Container";
 import Button from "../components/Button";
@@ -28,7 +27,7 @@ function Setting({ title, subtitle, right }: Props) {
 
 function Settings() {
   const [loading, setLoading] = useState(true);
-  const [settings, setSettings] = useState<SettingsType>({
+  const [settings, setSettings] = useState({
     websiteEnhancements: false,
   });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
