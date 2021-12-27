@@ -8,7 +8,7 @@ import utils from "../../../../common/lib/utils";
 export default async function sendPayment(message: Message) {
   PubSub.publish(`ln.sendPayment.start`, message);
   const { paymentRequest } = message.args;
-  if (!paymentRequest) {
+  if (typeof paymentRequest !== "string") {
     return {
       error: "Payment request missing.",
     };
@@ -18,6 +18,11 @@ export default async function sendPayment(message: Message) {
     request: paymentRequest,
   });
   const connector = await state.getState().getConnector();
+  if (!connector) {
+    return {
+      error: "Connector absent.",
+    };
+  }
 
   const response = await connector.sendPayment({
     paymentRequest,

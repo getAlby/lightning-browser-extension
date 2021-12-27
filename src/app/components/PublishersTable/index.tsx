@@ -14,8 +14,8 @@ type Publisher = {
     textColor: string;
   };
   paymentsCount: number;
-  totalBudget: string;
-  usedBudget: string;
+  totalBudget: number;
+  usedBudget: number;
   percentage: string;
 };
 
@@ -73,7 +73,7 @@ export default function PublishersTable({
                 </div>
               </td>
               <td className="px-6 py-6 whitespace-nowrap text-right">
-                {parseInt(publisher.totalBudget) > 0 && (
+                {publisher.totalBudget > 0 && (
                   <div className="ml-40">
                     <p className="text-lg text-gray-700 mb-0">
                       {publisher.usedBudget} / {publisher.totalBudget} sat used

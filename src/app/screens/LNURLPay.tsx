@@ -1,11 +1,12 @@
-import { useState, MouseEvent } from "react";
+import { Fragment, useState, useEffect, MouseEvent } from "react";
 import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-import { LNURLPaymentInfo } from "../../types";
+import { LNURLPaymentInfo, LNURLPaymentSuccessAction } from "../../types";
 import msg from "../../common/lib/msg";
 import utils from "../../common/lib/utils";
 import lnurl from "../../common/lib/lnurl";
+import getOriginData from "../../extension/content-script/originData";
 
 import Button from "../components/Button";
 import Input from "../components/Form/Input";
@@ -31,27 +32,47 @@ type Props = {
 };
 
 function LNURLPay(props: Props) {
+  const [searchParams] = useSearchParams();
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const location: {
-    state: {
-      details: Details;
-      origin: Origin;
-    };
-  } = useLocation();
-  const details = props.details || location.state?.details;
-  const origin = props.origin || location.state?.origin;
+  const [details, setDetails] = useState(props.details);
+  const [origin] = useState(
+    props.origin ||
+      (searchParams.get("origin") &&
+        JSON.parse(searchParams.get("origin") as string)) ||
+      getOriginData()
+  );
   const [valueMSat, setValueMSat] = useState<number | undefined>(
-    details.minSendable
+    details?.minSendable
   );
   const [comment, setComment] = useState<string | undefined>();
-  const [loading, setLoading] = useState(false);
+  const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successAction, setSuccessAction] = useState<
-    LNURLPaymentInfo["successAction"] | undefined
+    LNURLPaymentSuccessAction | undefined
   >();
 
+  useEffect(() => {
+    if (searchParams) {
+      // lnurl was passed as querystring
+      const lnurlString = searchParams.get("lnurl");
+      if (lnurlString) {
+        lnurl.getDetails(lnurlString).then((lnurlDetails) => {
+          if (lnurlDetails.tag === "payRequest") {
+            setDetails(lnurlDetails);
+            setValueMSat(lnurlDetails.minSendable);
+            setLoading(false);
+          }
+        });
+      }
+    } else {
+      setLoading(false);
+    }
+  }, [searchParams]);
+
   async function confirm() {
+    if (!details) return;
     try {
-      setLoading(true);
+      setLoadingConfirm(true);
       // Get the invoice
       const params = {
         amount: valueMSat, // user specified sum in MilliSatoshi
@@ -71,7 +92,7 @@ function LNURLPay(props: Props) {
       const isValidInvoice = lnurl.verifyInvoice({
         paymentInfo,
         metadata: details.metadata,
-        amount: valueMSat!,
+        amount: valueMSat || 0,
       });
       if (!isValidInvoice) {
         alert("Payment aborted. Invalid invoice");
@@ -110,7 +131,7 @@ function LNURLPay(props: Props) {
         alert(`Error: ${e.message}`);
       }
     } finally {
-      setLoading(false);
+      setLoadingConfirm(false);
     }
   }
 
@@ -123,16 +144,16 @@ function LNURLPay(props: Props) {
     }
   }
 
-  function renderAmount() {
-    if (details.minSendable === details.maxSendable) {
-      return <p>{`${details.minSendable / 1000} sat`}</p>;
+  function renderAmount(minSendable: number, maxSendable: number) {
+    if (minSendable === maxSendable) {
+      return <p>{`${minSendable / 1000} sat`}</p>;
     } else {
       return (
         <div className="mt-1 flex flex-col">
           <Input
             type="number"
-            min={details.minSendable / 1000}
-            max={details.maxSendable / 1000}
+            min={minSendable / 1000}
+            max={maxSendable / 1000}
             value={valueMSat ? valueMSat / 1000 : undefined}
             onChange={(e) => {
               let newValue;
@@ -145,8 +166,8 @@ function LNURLPay(props: Props) {
           <input
             className="mt-2"
             type="range"
-            min={details.minSendable}
-            max={details.maxSendable}
+            min={minSendable}
+            max={maxSendable}
             step="1000"
             value={valueMSat || 0}
             onChange={(e) => setValueMSat(parseInt(e.target.value))}
@@ -170,9 +191,9 @@ function LNURLPay(props: Props) {
     );
   }
 
-  function formattedMetadata() {
+  function formattedMetadata(metadataJSON: string) {
     try {
-      const metadata = JSON.parse(details.metadata);
+      const metadata = JSON.parse(metadataJSON);
       return metadata
         .map(([type, content]: [string, string]) => {
           if (type === "text/plain") {
@@ -195,30 +216,34 @@ function LNURLPay(props: Props) {
   }
 
   function elements() {
+    if (!details) return [];
     const elements = [];
     elements.push(["Send payment to", details.domain]);
-    elements.push(...formattedMetadata());
-    elements.push(["Amount (Satoshi)", renderAmount()]);
+    elements.push(...formattedMetadata(details.metadata));
+    elements.push([
+      "Amount (Satoshi)",
+      renderAmount(details.minSendable, details.maxSendable),
+    ]);
     if (details.commentAllowed && details.commentAllowed > 0) {
       elements.push(["Comment", renderComment()]);
     }
     return elements;
   }
 
-  function renderSuccessAction() {
-    if (!successAction) return;
-
+  function renderSuccessAction(action: LNURLPaymentSuccessAction) {
     let descriptionList;
-    if (successAction.tag === "url") {
+    if (action.tag === "url") {
       descriptionList = [
-        ["Description", successAction.description],
+        ["Description", action.description],
         [
           "Url",
           <>
-            {successAction.url}
+            {action.url}
             <div className="mt-4">
               <Button
-                onClick={() => utils.openUrl(successAction.url!)}
+                onClick={() => {
+                  if (action.url) utils.openUrl(action.url);
+                }}
                 label="Open"
                 primary
               />
@@ -226,19 +251,19 @@ function LNURLPay(props: Props) {
           </>,
         ],
       ];
-    } else if (successAction.tag === "message") {
-      descriptionList = [["Message", successAction.message]];
+    } else if (action.tag === "message") {
+      descriptionList = [["Message", action.message]];
     }
 
     return (
       <>
         <dl className="shadow bg-white pt-4 px-4 rounded-lg mb-6 overflow-hidden">
           {descriptionList &&
-            descriptionList.map(([dt, dd]) => (
-              <>
+            descriptionList.map(([dt, dd], i) => (
+              <Fragment key={`dl-item-${i}`}>
                 <dt className="text-sm font-semibold text-gray-500">{dt}</dt>
                 <dd className="text-sm mb-4">{dd}</dd>
-              </>
+              </Fragment>
             ))}
         </dl>
         <div className="text-center">
@@ -256,46 +281,48 @@ function LNURLPay(props: Props) {
   return (
     <div>
       <PublisherCard title={origin.name} image={origin.icon} />
-      <div className="p-6">
-        {!successAction ? (
-          <>
-            <dl className="shadow bg-white pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-              {elements().map(([t, d]) => (
-                <>
-                  <dt className="text-sm font-semibold text-gray-500">{t}</dt>
-                  <dd className="text-sm mb-4">{d}</dd>
-                </>
-              ))}
-            </dl>
-            <div className="text-center">
-              <div className="mb-5">
-                <Button
-                  onClick={confirm}
-                  label="Confirm"
-                  fullWidth
-                  primary
-                  loading={loading}
-                  disabled={loading || !valueMSat}
-                />
+      {!loading && (
+        <div className="p-4 max-w-screen-sm mx-auto">
+          {!successAction ? (
+            <>
+              <dl className="shadow bg-white pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+                {elements().map(([t, d], i) => (
+                  <Fragment key={`element-${i}`}>
+                    <dt className="text-sm font-semibold text-gray-500">{t}</dt>
+                    <dd className="text-sm mb-4">{d}</dd>
+                  </Fragment>
+                ))}
+              </dl>
+              <div className="text-center">
+                <div className="mb-5">
+                  <Button
+                    onClick={confirm}
+                    label="Confirm"
+                    fullWidth
+                    primary
+                    loading={loadingConfirm}
+                    disabled={loadingConfirm || !valueMSat}
+                  />
+                </div>
+
+                <p className="mb-3 underline text-sm text-gray-300">
+                  Only connect with sites you trust.
+                </p>
+
+                <a
+                  className="underline text-sm text-gray-500"
+                  href="#"
+                  onClick={reject}
+                >
+                  Cancel
+                </a>
               </div>
-
-              <p className="mb-3 underline text-sm text-gray-300">
-                Only connect with sites you trust.
-              </p>
-
-              <a
-                className="underline text-sm text-gray-500"
-                href="#"
-                onClick={reject}
-              >
-                Cancel
-              </a>
-            </div>
-          </>
-        ) : (
-          renderSuccessAction()
-        )}
-      </div>
+            </>
+          ) : (
+            renderSuccessAction(successAction)
+          )}
+        </div>
+      )}
     </div>
   );
 }

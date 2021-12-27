@@ -3,23 +3,20 @@ import createState from "zustand";
 
 import { decryptData } from "../../common/lib/crypto";
 import connectors from "./connectors";
-
-type Connector = any;
+import type Connector from "./connectors/connector.interface";
 
 type BrowserStorageKeys = "settings" | "accounts" | "currentAccountId";
 
 interface Account {
   connector: "native" | "lnd" | "lndhub" | "lnbits";
-  config: any;
+  config: string;
 }
 
 interface State {
-  connector: any;
+  connector: Connector | null;
   account: Account | null;
-  settings: any;
-  accounts: {
-    [key: string]: Account;
-  };
+  settings: Record<string, unknown>;
+  accounts: Record<string, Account>;
   currentAccountId: string | null;
   password: string | null;
   getConnector: () => Promise<Connector | null>;
@@ -28,7 +25,11 @@ interface State {
 
 // these keys get synced from the state to the browser storage
 // the values are the default values
-const browserStorage = {
+const browserStorage: {
+  settings: Record<string, unknown>;
+  accounts: Record<string, Account>;
+  currentAccountId: string | null;
+} = {
   settings: {},
   accounts: {},
   currentAccountId: null,
@@ -77,7 +78,7 @@ const state = createState<State>((set, get) => ({
     return browser.storage.sync
       .get(Object.keys(browserStorage))
       .then((result) => {
-        const data: State[BrowserStorageKeys] = {};
+        const data = { ...browserStorage };
         const browserStorageKeys = Object.keys(
           browserStorage
         ) as BrowserStorageKeys[];

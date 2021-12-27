@@ -18,7 +18,8 @@
 		"webextensions": true
 	},
 	"rules": {
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+		"@typescript-eslint/no-unused-vars":["warn", { "args": "none" }] // No warnings for unused function arguments, which might be used in the future.
   },
 	"settings": {
     "react": {

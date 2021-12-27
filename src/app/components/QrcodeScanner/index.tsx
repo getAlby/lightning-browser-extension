@@ -13,7 +13,7 @@ type Props = {
   fps?: number;
   qrbox: number;
   qrCodeSuccessCallback: (decodedText: string) => void;
-  qrCodeErrorCallback?: () => void;
+  qrCodeErrorCallback?: (errorMessage: string) => void;
 };
 
 function QrcodeScanner({
@@ -78,7 +78,7 @@ function QrcodeScanner({
               qrCodeSuccessCallback(decodedText);
             },
             (errorMessage: string) => {
-              // qrCodeErrorCallback(errorMessage);
+              qrCodeErrorCallback && qrCodeErrorCallback(errorMessage);
             }
           )
           .catch(() => {
