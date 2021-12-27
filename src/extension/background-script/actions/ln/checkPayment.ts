@@ -8,11 +8,6 @@ const checkPayment = async (message: Message) => {
     };
   }
   const connector = state.getState().getConnector();
-  if (!connector) {
-    return {
-      error: "Connector absent.",
-    };
-  }
   try {
     const response = await connector.checkPayment({
       paymentHash: message.args.paymentHash,

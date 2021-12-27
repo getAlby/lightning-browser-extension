@@ -19,7 +19,7 @@ interface State {
   accounts: Record<string, Account>;
   currentAccountId: string | null;
   password: string | null;
-  getConnector: () => Connector | null;
+  getConnector: () => Connector;
   saveToStorage: () => Promise<void>;
 }
 
@@ -69,7 +69,6 @@ const state = createState<State>((set, get) => ({
 
       return connector;
     }
-    return null;
   },
   lock: () => set({ password: null, connector: null, account: null }),
   init: () => {
