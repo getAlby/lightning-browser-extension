@@ -27,7 +27,7 @@ export default function TransactionsTable({ transactions }: Props) {
     }
 
     return (
-      <div className="flex justify-center items-center w-6 h-6 border-2 border-gray-200 rounded-full">
+      <div className="flex justify-center items-center w-6 h-6 border-2 border-gray-200 rounded-full dark:text-white">
         {getIcon()}
       </div>
     );
