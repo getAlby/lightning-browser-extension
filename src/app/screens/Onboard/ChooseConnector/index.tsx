@@ -11,6 +11,7 @@ import NewWallet from "../NewWallet";
 import lnbits from "/static/assets/icons/lnbits.png";
 import lndhub from "/static/assets/icons/lndhub.png";
 import lnd from "/static/assets/icons/lnd.png";
+import galoy from "/static/assets/icons/galoy.png";
 import alby from "/static/assets/icons/alby.png";
 
 export default function ChooseConnector() {
@@ -37,6 +38,7 @@ export default function ChooseConnector() {
       to: "galoy",
       title: "Galoy",
       description: "Create or connect to a Galoy account",
+      logo: galoy,
     },
     {
       to: "create-wallet",
