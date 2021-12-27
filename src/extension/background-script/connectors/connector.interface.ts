@@ -25,11 +25,13 @@ export interface GetInfoResponse {
   data: WebLNNode;
 }
 
-export interface GetBalanceResponse {
-  data: {
-    balance: number;
-  };
-}
+export type GetBalanceResponse =
+  | {
+      data: {
+        balance: number;
+      };
+    }
+  | { error: string };
 
 export type SendPaymentResponse =
   | {

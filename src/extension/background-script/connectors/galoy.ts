@@ -42,11 +42,11 @@ export default class Galoy extends Base implements Connector {
       query: `
         query getinfo {
           me {
-              id
-              username
-              defaultAccount {
-                wallets {
-                  balance
+            defaultAccount {
+              defaultWalletId
+              wallets {
+                id
+                balance
               }
             }
           }
@@ -54,11 +54,16 @@ export default class Galoy extends Base implements Connector {
       `,
     };
     return this.request(query).then((data) => {
-      return {
-        data: {
-          balance: data.data.me.defaultAccount.wallets[0].balance,
-        },
-      };
+      const { defaultWalletId, wallets }: GaloyDefaultAccount =
+        data.data.me.defaultAccount;
+      const defaultWallet = wallets.find((w) => w.id === defaultWalletId);
+      return defaultWallet
+        ? {
+            data: {
+              balance: defaultWallet.balance,
+            },
+          }
+        : { error: "Valid wallet not found" };
     });
   }
 
