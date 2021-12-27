@@ -54,6 +54,11 @@ export default class Galoy extends Base implements Connector {
       `,
     };
     return this.request(query).then((data) => {
+      if (data.error) {
+        return {
+          error: data.error?.errors?.[0]?.message || JSON.stringify(data.error),
+        };
+      }
       const { defaultWalletId, wallets }: GaloyDefaultAccount =
         data.data.me.defaultAccount;
       const defaultWallet = wallets.find((w) => w.id === defaultWalletId);
@@ -73,6 +78,9 @@ export default class Galoy extends Base implements Connector {
         mutation lnInvoicePaymentSend($input: LnInvoicePaymentInput!) {
           lnInvoicePaymentSend(input:$input) {
             status
+            errors {
+              message
+            }
           }
         }
       `,
@@ -90,8 +98,13 @@ export default class Galoy extends Base implements Connector {
     });
 
     return this.request(query).then((data) => {
-      if (data.data.lnInvoicePaymentSend.errors?.message) {
-        return { error: data.data.lnInvoicePaymentSend.errors?.message };
+      if (data.data.lnInvoicePaymentSend.errors?.[0]?.message) {
+        return { error: data.data.lnInvoicePaymentSend.errors[0].message };
+      }
+      if (data.error) {
+        return {
+          error: data.error?.errors?.[0]?.message || JSON.stringify(data.error),
+        };
       }
       return {
         data: {
@@ -139,6 +152,14 @@ export default class Galoy extends Base implements Connector {
       },
     };
     return this.request(query).then((data) => {
+      if (data.data.lnInvoiceCreate.errors?.[0]?.message) {
+        return { error: data.data.lnInvoiceCreate.errors[0].message };
+      }
+      if (data.error) {
+        return {
+          error: data.error?.errors?.[0]?.message || JSON.stringify(data.error),
+        };
+      }
       return {
         data: {
           paymentRequest: data.data.lnInvoiceCreate.invoice.paymentRequest,

@@ -57,6 +57,13 @@ export default function ConnectGaloy() {
       if (data.data.userRequestAuthCode.errors.length > 0) {
         alert(data.data.userRequestAuthCode.errors[0].message);
       }
+      if (data.error) {
+        console.error(data.error);
+        const alertMsg = data.error?.errors?.[0]?.message
+          ? `Failed to request a SMS code: ${data.error.errors[0].message}`
+          : `Failed to request a SMS code`;
+        alert(alertMsg);
+      }
       setSmsCodeRequested(data.data.userRequestAuthCode.success);
     } catch (e: unknown) {
       console.error(e);
@@ -106,6 +113,12 @@ export default function ConnectGaloy() {
       if (authResponse.data.data.userLogin.errors.length > 0) {
         throw new Error(authResponse.data.data.userLogin.errors[0].message);
       }
+      if (authResponse.data.error) {
+        const errorMsg = authResponse.data.error.errors?.[0]?.message
+          ? `Failed to login with SMS code: ${authResponse.data.error.errors[0].message}`
+          : `Failed to login with SMS code`;
+        throw new Error(errorMsg);
+      }
       const authToken = authResponse.data.data.userLogin.authToken as string;
       const meResponse = await axios.post<any>(url, meQuery, {
         headers: {
@@ -113,10 +126,18 @@ export default function ConnectGaloy() {
           Authorization: `Bearer ${authToken}`,
         },
       });
-      const walletId = meResponse.data.data.me.defaultAccount
-        .defaultWalletId as string;
 
-      saveAccount({ authToken, walletId });
+      const walletId =
+        meResponse?.data?.data?.me?.defaultAccount?.defaultWalletId;
+      if (walletId) {
+        saveAccount({ authToken, walletId });
+      } else {
+        console.error(meResponse);
+        const alertMsg = meResponse?.data?.error?.errors?.[0]?.message
+          ? `Setup failed ${meResponse.data.error.errors[0].message}`
+          : `Setup failed`;
+        alert(alertMsg);
+      }
     } catch (e: unknown) {
       console.error(e);
       if (e instanceof Error) {
