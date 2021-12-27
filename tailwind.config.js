@@ -1,3 +1,4 @@
+/* eslint-disable */
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
@@ -27,6 +28,13 @@ module.exports = {
         "green-bitcoin": "#27ae60",
         "blue-bitcoin": "#2d9cdb",
         "purple-bitcoin": "#bb6bd9",
+        "gray-bitcoin": "#F7F6F4",
+        "light-green-bitcoin": "#27AE60",
+        "light-gray-bitcoin": "#F3F4F6",
+        "dark-bitcoin": "#434343",
+        "dark-text-bitcoin": "#3A3A3A",
+        "text-gray-bitcoin": "#878988",
+        "light-gray-bitcoin2": "#66676D",
       },
     },
   },
