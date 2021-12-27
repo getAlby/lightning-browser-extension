@@ -40,7 +40,7 @@ function Home() {
   }
 
   function loadPayments() {
-    utils.call("getPayments").then((result) => {
+    utils.call("getPayments", { limit: 10 }).then((result) => {
       setPayments(result?.payments);
       setLoadingPayments(false);
     });
@@ -175,7 +175,7 @@ function Home() {
         ) : (
           <div>
             <h2 className="mb-2 text-lg text-gray-900 font-semibold dark:text-white">
-              Transactions
+              Recent Transactions
             </h2>
             {payments.length > 0 ? (
               <TransactionsTable
