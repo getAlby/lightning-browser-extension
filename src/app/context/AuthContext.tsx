@@ -54,7 +54,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const getAccountInfo = () => {
     const id = account?.id;
     if (!id) return;
-    setAccount({ id }); // Clear current info.
+    setAccount({ id }); // Clear current info which causes a loading indicator for the alias/balance
     return api.getAccountInfo().then((response) => {
       const { alias } = response.info;
       const balance = parseInt(response.balance.balance); // TODO: handle amounts
