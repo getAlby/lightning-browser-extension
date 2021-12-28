@@ -238,7 +238,7 @@ function Home() {
                 navigate(
                   `/lnurlPay?lnurl=${
                     lnData[0].recipient
-                  }&origin=${JSON.stringify(origin)}`
+                  }&origin=${encodeURIComponent(JSON.stringify(origin))}`
                 );
               } catch (e) {
                 alert(e.message);
