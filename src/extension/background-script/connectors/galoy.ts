@@ -28,7 +28,9 @@ export default class Galoy extends Base implements Connector {
       `,
     };
     return this.request(query).then((data) => {
-      const alias = (data.data.me.username || data.data.me.id).substr(0, 10);
+      const alias = data.data.me.username
+        ? data.data.me.username.substr(0, 10)
+        : data.data.me.id.substr(0, 8);
       return {
         data: {
           alias,
