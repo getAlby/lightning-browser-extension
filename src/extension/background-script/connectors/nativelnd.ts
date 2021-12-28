@@ -50,7 +50,6 @@ export default class NativeLnd extends Lnd {
 
     return new Promise((resolve, reject) => {
       const handler = (response) => {
-        console.log(response);
         if (response.id !== path) {
           return;
         }
