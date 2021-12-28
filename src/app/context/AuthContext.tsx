@@ -24,7 +24,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const unlock = (password: string, callback: VoidFunction) => {
     return api.unlock(password).then((response) => {
-      setAccount({ id: response.currentAccountId });
+      // set the account id to indicate the unlock for other components
+      setAccount({
+        id: response.currentAccountId,
+      });
+      // asynchronously load the account info
+      api.getAccountInfo().then((response) => {
+        const { alias } = response.info;
+        const balance = parseInt(response.balance.balance); // TODO: handle amounts
+        setAccount({
+          id: response.currentAccountId,
+          alias,
+          balance,
+        });
+      });
+
+      // callback - e.g. navigate to the requested route after unlocking
       callback();
     });
   };
@@ -40,7 +55,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const id = account?.id;
     if (!id) return;
     setAccount({ id }); // Clear current info.
-    api.getAccountInfo().then((response) => {
+    return api.getAccountInfo().then((response) => {
       const { alias } = response.info;
       const balance = parseInt(response.balance.balance); // TODO: handle amounts
       setAccount({ id, alias, balance });
