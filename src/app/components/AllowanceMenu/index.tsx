@@ -104,6 +104,12 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               }}
             />
           </div>
+          <div className="mt-4">
+            <input type="checkbox" id="lnurl-auth" name="lnurl-auth" />
+            <label htmlFor="lnurl-auth" className="dark:text-white ml-2">
+              Enable website login
+            </label>
+          </div>
         </div>
         <div className="flex justify-end p-5 dark:bg-gray-800">
           <Button
