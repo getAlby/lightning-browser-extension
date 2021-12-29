@@ -96,7 +96,7 @@ function ConfirmPayment(props) {
             />
             <label
               htmlFor="remember_me"
-              className="ml-2 block text-sm text-gray-900 font-medium"
+              className="ml-2 block text-sm text-gray-900 font-medium dark:text-white"
             >
               Remember and set a budget
             </label>
