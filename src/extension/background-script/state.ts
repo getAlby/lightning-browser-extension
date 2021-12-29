@@ -72,7 +72,13 @@ const state = createState<State>((set, get) => ({
       return connector;
     }
   },
-  lock: () => set({ password: null, connector: null, account: null }),
+  lock: async () => {
+    const connector = get().connector;
+    if (connector) {
+      await connector.unload();
+    }
+    set({ password: null, connector: null, account: null });
+  },
   init: () => {
     return browser.storage.sync
       .get(Object.keys(browserStorage))

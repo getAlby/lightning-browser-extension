@@ -28,6 +28,13 @@ class Lnd implements Connector {
     this.config = config;
   }
 
+  init() {
+    return Promise.resolve();
+  }
+  unload() {
+    return Promise.resolve();
+  }
+
   getInfo(): Promise<GetInfoResponse> {
     return this.request("GET", "/v1/getinfo", undefined, {}).then((res) => {
       return {

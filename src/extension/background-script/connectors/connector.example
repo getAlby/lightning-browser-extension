@@ -22,6 +22,14 @@ class ConnectorExample implements Connector {
     this.config = config;
   }
 
+  init() {
+    // add your own implementation or return Promise.resolve();
+  }
+
+  unload() {
+    // add your own implementation or return Promise.resolve();
+  }
+
   getInfo(): Promise<GetInfoResponse> {
     // Add your own implementation.
   }
