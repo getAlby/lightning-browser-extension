@@ -12,7 +12,7 @@ import Badge from "../Badge";
 import Menu from "../Menu";
 
 type Props = {
-  onAccountSwitch?: () => void;
+  onAccountSwitch?: (id: string) => void;
 };
 
 type Accounts = Record<string, { name: string; connector: string }>;
@@ -31,7 +31,7 @@ function AccountMenu({ onAccountSwitch }: Props) {
     await utils.call("selectAccount", {
       id: accountId,
     });
-    onAccountSwitch && onAccountSwitch();
+    onAccountSwitch && onAccountSwitch(accountId);
   }
 
   function openOptions(path: string) {
