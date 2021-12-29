@@ -6,28 +6,41 @@ const nativeApplication = "alby";
 
 export default class NativeLnd extends Lnd {
   running: boolean | null;
-  port: any
+  _port: any
 
-  init() {
-    return new Promise((resolve, reject) => {
-      if (!this.port) {
-        this.port = browser.runtime.connectNative(nativeApplication);
-        this.port.onDisconnect.addListener((p) => {
-          if (p.error) {
-            console.log(`Disconnected due to an error: ${p.error.message}`);
-          }
-          console.log("native app disconnected");
-          this.port = null;
-        });
+  get port() {
+    if (this._port) {
+      return this._port;
+    } else {
+      this.connectNativeCompanion();
+      return this._port;
+    }
+  }
+
+  connectNativeCompanion() {
+    this._port = browser.runtime.connectNative(nativeApplication);
+    this._port.onDisconnect.addListener((p) => {
+      console.error("Native companion disconnected");
+      if (p.error) {
+        console.error(`Native companion error: ${p.error.message}`);
       }
-      setTimeout(() => {
-        console.log("init done");
-        resolve();
-      }, 7000);
+      this._port = null;
     });
   }
 
-  request(method: string, path: string, args?: any, defaultValues?: any) {
+  async init() {
+    if (!this._port) {
+      this.connectNativeCompanion();
+    }
+  }
+
+  async unload() {
+    if (this._port) {
+      this._port.disconnect(); // stop the native companion app
+    }
+  }
+
+  request(method: string, path: string, args?: any, defaultValues?: any): Promise<unknown> {
     //if (this.running) {
     //  throw new Error("request already running");
     //}
