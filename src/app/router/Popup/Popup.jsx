@@ -1,4 +1,3 @@
-import { Fragment, useState } from "react";
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 
 import { useAuth } from "../../context/AuthContext";
@@ -44,7 +43,6 @@ function Popup() {
 
 const Layout = () => {
   const auth = useAuth();
-  const [key, setKey] = useState(Date.now());
 
   return (
     <div>
@@ -55,17 +53,10 @@ const Layout = () => {
             ? `${auth.account.balance} sat`
             : ""
         }
-        onAccountSwitch={() => {
-          auth.getAccountInfo();
-
-          // TODO: this should be done in an eloquent way.
-          setKey(Date.now()); // Refresh screens.
-        }}
+        onAccountSwitch={auth.getAccountInfo}
       />
 
-      <Fragment key={key}>
-        <Outlet />
-      </Fragment>
+      <Outlet />
     </div>
   );
 };

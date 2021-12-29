@@ -13,7 +13,7 @@ interface AuthContextType {
   loading: boolean;
   unlock: (user: string, callback: VoidFunction) => void;
   lock: (callback: VoidFunction) => void;
-  getAccountInfo: () => void;
+  getAccountInfo: (id?: string) => void;
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
@@ -24,20 +24,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const unlock = (password: string, callback: VoidFunction) => {
     return api.unlock(password).then((response) => {
-      // set the account id to indicate the unlock for other components
-      setAccount({
-        id: response.currentAccountId,
-      });
-      // asynchronously load the account info
-      api.getAccountInfo().then((response) => {
-        const { alias } = response.info;
-        const balance = parseInt(response.balance.balance); // TODO: handle amounts
-        setAccount({
-          id: response.currentAccountId,
-          alias,
-          balance,
-        });
-      });
+      getAccountInfo(response.currentAccountId);
 
       // callback - e.g. navigate to the requested route after unlocking
       callback();
@@ -51,10 +38,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
-  const getAccountInfo = () => {
-    const id = account?.id;
+  const getAccountInfo = (accountId?: string) => {
+    const id = accountId || account?.id;
     if (!id) return;
-    setAccount({ id }); // Clear current info which causes a loading indicator for the alias/balance
+    // set the account id to indicate the unlock for other components
+    // also clears current info which causes a loading indicator for the alias/balance
+    setAccount({ id });
     return api.getAccountInfo().then((response) => {
       const { alias } = response.info;
       const balance = parseInt(response.balance.balance); // TODO: handle amounts
@@ -62,6 +51,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
+  // Invoked only on on mount.
   useEffect(() => {
     api
       .getStatus()
@@ -70,12 +60,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           utils.openPage("welcome.html");
           window.close();
         } else if (response.unlocked) {
-          setAccount({ id: response.currentAccountId });
-          api.getAccountInfo().then((response) => {
-            const { alias } = response.info;
-            const balance = parseInt(response.balance.balance); // TODO: handle amounts
-            setAccount({ id: response.currentAccountId, alias, balance });
-          });
+          getAccountInfo(response.currentAccountId);
         } else {
           setAccount(null);
         }
@@ -86,6 +71,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       .finally(() => {
         setLoading(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const value = { account, getAccountInfo, loading, unlock, lock };
