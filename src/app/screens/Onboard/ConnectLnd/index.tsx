@@ -153,8 +153,7 @@ export default function ConnectLnd() {
                 onDragOver={dragOverHandler}
                 onDragLeave={dragLeaveHandler}
                 onClick={() => {
-                  if (hiddenFileInput?.current)
-                    hiddenFileInput.current.click();
+                  if (hiddenFileInput?.current) hiddenFileInput.current.click();
                 }}
               >
                 <SendIcon className="mb-3 h-9 w-9 text-blue-500" />
