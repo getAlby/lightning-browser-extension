@@ -40,7 +40,7 @@ export default function UserMenu() {
 
   return (
     <Menu as="div" className="relative">
-      <Menu.Button className="flex items-center text-gray-500 hover:text-black transition-colors duration-200">
+      <Menu.Button className="flex items-center text-gray-500 hover:text-black dark:hover:text-white transition-colors duration-200">
         <MenuIcon className="h-6 w-6" />
       </Menu.Button>
       <Menu.List position="right">
