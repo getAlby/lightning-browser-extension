@@ -5,7 +5,6 @@ import Lnd from "./lnd";
 const nativeApplication = "alby";
 
 export default class NativeLnd extends Lnd {
-  running: boolean | null;
   _port: unknown;
 
   get port() {
@@ -46,19 +45,19 @@ export default class NativeLnd extends Lnd {
     });
   }
 
-  request(method: string, path: string, args?: any, defaultValues?: any): Promise<unknown> {
-    //if (this.running) {
-    //  throw new Error("request already running");
-    //}
-    this.running = true;
+  request(
+    method: string,
+    path: string,
+    args?: Record<string, unknown>,
+    defaultValues?: Record<string, unknown>
+  ): Promise<unknown> {
     const url = new URL(this.config.url);
     url.pathname = path;
     let body = null;
-    const query = "";
     const headers = {};
     headers["Accept"] = "application/json";
     if (method === "POST") {
-      body = JSON.stringify(args);
+      body = JSON.stringify(args) as string;
       headers["Content-Type"] = "application/json";
     } else if (args !== undefined) {
       url.search = new URLSearchParams(args).toString();
@@ -73,7 +72,6 @@ export default class NativeLnd extends Lnd {
           return;
         }
         this.port.onMessage.removeListener(handler);
-        this.running = false;
         // TODO: think how to handle errors
         if (response.status > 299) {
           reject(new Error(response.body));

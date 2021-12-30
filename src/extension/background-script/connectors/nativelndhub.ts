@@ -87,7 +87,6 @@ export default class NativeLndHub extends LndHub {
       params,
       headers,
     }).then((response) => {
-      console.log(response.body);
       const json = JSON.parse(response.body);
       if (json && json.error) {
         throw new Error(
@@ -143,7 +142,6 @@ export default class NativeLndHub extends LndHub {
     let data;
     try {
       const res = await this._nativeRequest(reqConfig);
-      console.log({res});
       data = JSON.parse(res.body);
     } catch (e) {
       console.log(e);
