@@ -1,6 +1,7 @@
 import Lnd from "./lnd";
 import NativeLnd from "./nativelnd";
 import LndHub from "./lndhub";
+import NativeLndHub from "./nativelndhub";
 import LnBits from "./lnbits";
 
 /*
@@ -15,6 +16,7 @@ const connectors = {
   lnd: Lnd,
   nativelnd: NativeLnd,
   lndhub: LndHub,
+  nativelndhub: NativeLndHub,
   lnbits: LnBits,
 };
 

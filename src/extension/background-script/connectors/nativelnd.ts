@@ -6,7 +6,7 @@ const nativeApplication = "alby";
 
 export default class NativeLnd extends Lnd {
   running: boolean | null;
-  _port: any
+  _port: unknown;
 
   get port() {
     if (this._port) {
