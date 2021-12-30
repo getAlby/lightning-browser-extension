@@ -1,4 +1,3 @@
-import { Fragment, useState } from "react";
 import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
 
 import { AuthProvider } from "../../context/AuthContext";
@@ -66,7 +65,6 @@ function Options() {
 
 const Layout = () => {
   const auth = useAuth();
-  const [key, setKey] = useState(Date.now());
 
   return (
     <div>
@@ -77,12 +75,7 @@ const Layout = () => {
             ? `${auth.account.balance} sat`
             : ""
         }
-        onAccountSwitch={() => {
-          auth.getAccountInfo();
-
-          // TODO: this should be done in an eloquent way.
-          setKey(Date.now()); // Refresh screens.
-        }}
+        onAccountSwitch={auth.getAccountInfo}
       >
         <Navbar.Link href="/publishers">Websites</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>
@@ -90,9 +83,7 @@ const Layout = () => {
         <Navbar.Link href="/settings">Settings</Navbar.Link>
       </Navbar>
 
-      <Fragment key={key}>
-        <Outlet />
-      </Fragment>
+      <Outlet />
     </div>
   );
 };
