@@ -1,6 +1,6 @@
 {
   "name": "lightning-browser-extension",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Lightning browser extension",
   "private": true,
   "repository": "https://github.com/bumi/lightning-browser-extension.git",
@@ -36,7 +36,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "src/**/*.{js,jsx,ts,tsx}": [
       "eslint --fix --max-warnings 0",
       "prettier --write"
     ]
