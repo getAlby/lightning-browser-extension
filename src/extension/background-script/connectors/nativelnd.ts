@@ -34,10 +34,16 @@ export default class NativeLnd extends Lnd {
     }
   }
 
-  async unload() {
-    if (this._port) {
-      this._port.disconnect(); // stop the native companion app
-    }
+  unload(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      if (this._port) {
+        this._port.disconnect(); // stop the native companion app
+        this._port = null;
+        setTimeout(resolve, 5000); // we wait for 2 seconds for the native app to shut down. Sadly we do not know when exactly it exited
+      } else {
+        resolve();
+      }
+    });
   }
 
   request(method: string, path: string, args?: any, defaultValues?: any): Promise<unknown> {

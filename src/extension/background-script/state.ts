@@ -75,7 +75,7 @@ const state = createState<State>((set, get) => ({
   lock: async () => {
     const connector = get().connector;
     if (connector) {
-      await connector.unload();
+      connector.unload();
     }
     set({ password: null, connector: null, account: null });
   },
