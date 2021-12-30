@@ -1,4 +1,9 @@
 # #### This all good standard ###
+
+.node-version
+
+.nova
+
 # Logs
 logs
 *.log
