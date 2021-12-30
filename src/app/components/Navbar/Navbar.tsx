@@ -7,7 +7,7 @@ import AccountMenu from "../AccountMenu";
 type Props = {
   title: string;
   subtitle: string;
-  onAccountSwitch?: () => void;
+  onAccountSwitch?: (id: string) => void;
   children?: React.ReactNode;
 };
 
