@@ -42,7 +42,6 @@ export default class LndHub implements Connector {
     return this.authorize();
   }
 
-
   unload() {
     return Promise.resolve();
   }
