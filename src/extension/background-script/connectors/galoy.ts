@@ -110,7 +110,7 @@ class Galoy implements Connector {
       },
     };
 
-    const { tokens: amountInSats, payment: paymentHash } = parsePaymentRequest({
+    const { tokens: amountInSats, id: paymentHash } = parsePaymentRequest({
       request: args.paymentRequest,
     });
 
