@@ -1,7 +1,9 @@
 import axios from "axios";
 import { bech32 } from "bech32";
 
-export const normalizeAccountsData = (data: { [key: string]: any } = {}) => {
+export const normalizeAccountsData = (
+  data: Record<string, { config: unknown }> = {}
+) => {
   const accountDataKeys = Object.keys(data);
 
   return accountDataKeys.map((item) => ({
@@ -49,4 +51,36 @@ export function bech32Decode(str: string) {
   const { words: dataPart } = bech32.decode(str, 2000);
   const requestByteArray = bech32.fromWords(dataPart);
   return Buffer.from(requestByteArray).toString();
+}
+
+export async function poll<T>({
+  fn,
+  validate,
+  interval,
+  maxAttempts,
+}: {
+  fn: () => Promise<T>;
+  validate: (value: T) => boolean;
+  interval: number;
+  maxAttempts: number;
+}) {
+  let attempts = 0;
+
+  const executePoll = async (
+    resolve: (value: unknown) => void,
+    reject: (reason?: Error) => void
+  ) => {
+    const result = await fn();
+    attempts++;
+
+    if (validate(result)) {
+      return resolve(result);
+    } else if (maxAttempts && attempts === maxAttempts) {
+      return reject(new Error("Exceeded max attempts"));
+    } else {
+      setTimeout(executePoll, interval, resolve, reject);
+    }
+  };
+
+  return new Promise(executePoll);
 }

@@ -1,10 +1,10 @@
-interface RequestInvoiceArgs {
+type RequestInvoiceArgs = {
   amount?: string | number;
   defaultAmount?: string | number;
   minimumAmount?: string | number;
   maximumAmount?: string | number;
   defaultMemo?: string;
-}
+};
 
 export default class WebLNProvider {
   enabled: boolean;
@@ -22,8 +22,10 @@ export default class WebLNProvider {
       return Promise.resolve({ enabled: true });
     }
     return this.execute("enable").then((result) => {
-      this.enabled = result.enabled;
-      this.isEnabled = result.enabled;
+      if (typeof result.enabled === "boolean") {
+        this.enabled = result.enabled;
+        this.isEnabled = result.enabled;
+      }
       return result;
     });
   }
@@ -85,8 +87,11 @@ export default class WebLNProvider {
     return this.execute("verifyMessage", { signature, message });
   }
 
-  execute(type: string, args?: any): Promise<any> {
-    const p = new Promise((resolve, reject) => {
+  execute(
+    type: string,
+    args?: Record<string, unknown>
+  ): Promise<Record<string, unknown>> {
+    return new Promise((resolve, reject) => {
       // post the request to the content script. from there it gets passed to the background script and back
       // in page script can not directly connect to the background script
       window.postMessage(
@@ -124,6 +129,5 @@ export default class WebLNProvider {
 
       window.addEventListener("message", handleWindowMessage);
     });
-    return p;
   }
 }

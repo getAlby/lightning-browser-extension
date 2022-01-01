@@ -41,27 +41,39 @@ export default function TestConnection() {
 
   return (
     <div>
-      <div className="relative lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
+      <div className="relative lg:mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white dark:bg-gray-800 px-10 py-12">
         <div className="relative">
           <div>
             {errorMessage && (
               <div>
-                <h1 className="text-3xl font-bold">Connection Error</h1>
-                <p>{errorMessage}</p>
+                <h1 className="text-3xl font-bold dark:text-white">
+                  Connection Error
+                </h1>
+                <p className="dark:text-gray-500">{errorMessage}</p>
                 <Button label="Edit" onClick={handleEdit} primary />
               </div>
             )}
 
             {accountInfo && accountInfo.alias && (
               <div>
-                <h1 className="text-3xl font-bold">Success! 🎉</h1>
-                <p className="text-gray-500 mt-6">
+                <div className="flex space-x-2">
+                  <h1 className="text-2xl font-bold text-green-bitcoin">
+                    Success!
+                  </h1>
+                  <img
+                    src="assets/icons/star.svg"
+                    alt="image"
+                    className="w-8"
+                  />
+                </div>
+
+                <p className="mt-6 dark:text-gray-400">
                   Awesome, you&apos;re ready to go!
                 </p>
 
-                <div className="mt-6 shadow p-4 rounded-lg">
+                <div className="mt-6 shadow-lg p-4 rounded-xl">
                   <Card
-                    color="bg-green-bitcoin"
+                    color="bg-gray-100"
                     alias={accountInfo.alias}
                     satoshis={
                       typeof accountInfo.balance === "number"

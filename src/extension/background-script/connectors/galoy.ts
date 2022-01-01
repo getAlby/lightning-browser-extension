@@ -1,10 +1,11 @@
 import axios from "axios";
 import { parsePaymentRequest } from "invoices";
 import { AxiosRequestConfig } from "axios";
-import Base from "./base";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
+  CheckPaymentArgs,
+  CheckPaymentResponse,
   GetInfoResponse,
   GetBalanceResponse,
   MakeInvoiceArgs,
@@ -15,7 +16,19 @@ import Connector, {
   VerifyMessageResponse,
 } from "./connector.interface";
 
-export default class Galoy extends Base implements Connector {
+interface Config {
+  walletId: string;
+  url: string;
+  accessToken: string;
+}
+
+class Galoy implements Connector {
+  config: Config;
+
+  constructor(config: Config) {
+    this.config = config;
+  }
+
   getInfo(): Promise<GetInfoResponse> {
     const query = {
       query: `
@@ -118,6 +131,15 @@ export default class Galoy extends Base implements Connector {
     });
   }
 
+  async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
+    return {
+      data: {
+        paid: false,
+        preimage: "",
+      },
+    };
+  }
+
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
     return Promise.reject(new Error("Not yet supported with Galoy."));
   }
@@ -203,3 +225,5 @@ type GaloyDefaultAccount = {
     balance: number;
   }[];
 };
+
+export default Galoy;

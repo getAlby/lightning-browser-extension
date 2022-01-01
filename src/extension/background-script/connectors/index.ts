@@ -5,7 +5,6 @@ import Lnd from "./lnd";
 import LndHub from "./lndhub";
 import LnBits from "./lnbits";
 import Galoy from "./galoy";
-import Base from "./base";
 
 /*
 const initialize = (account, password) => {
@@ -16,7 +15,6 @@ const initialize = (account, password) => {
 */
 
 const connectors = {
-  base: Base,
   native: Native,
   lnd: Lnd,
   lndhub: LndHub,

@@ -1,22 +1,32 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import utils from "../../common/lib/utils";
+import api from "../../common/lib/api";
+
+interface Account {
+  id: string;
+  alias?: string;
+  balance?: number;
+}
 
 interface AuthContextType {
-  account: string | null;
+  account: Account | null;
   loading: boolean;
   unlock: (user: string, callback: VoidFunction) => void;
   lock: (callback: VoidFunction) => void;
+  getAccountInfo: (id?: string) => void;
 }
 
-const AuthContext = createContext<AuthContextType>(null!);
+const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [account, setAccount] = useState<string | null>(null);
+  const [account, setAccount] = useState<Account | null>(null);
   const [loading, setLoading] = useState(true);
 
   const unlock = (password: string, callback: VoidFunction) => {
-    return utils.call("unlock", { password }).then((response) => {
-      setAccount(response.currentAccountId);
+    return api.unlock(password).then((response) => {
+      getAccountInfo(response.currentAccountId);
+
+      // callback - e.g. navigate to the requested route after unlocking
       callback();
     });
   };
@@ -28,15 +38,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
+  const getAccountInfo = (accountId?: string) => {
+    const id = accountId || account?.id;
+    if (!id) return;
+    // set the account id to indicate the unlock for other components
+    // also clears current info which causes a loading indicator for the alias/balance
+    setAccount({ id });
+    return api.getAccountInfo().then((response) => {
+      const { alias } = response.info;
+      const balance = parseInt(response.balance.balance); // TODO: handle amounts
+      setAccount({ id, alias, balance });
+    });
+  };
+
+  // Invoked only on on mount.
   useEffect(() => {
-    utils
-      .call("status")
+    api
+      .getStatus()
       .then((response) => {
         if (!response.configured) {
           utils.openPage("welcome.html");
           window.close();
         } else if (response.unlocked) {
-          setAccount(response.currentAccountId);
+          getAccountInfo(response.currentAccountId);
         } else {
           setAccount(null);
         }
@@ -47,9 +71,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       .finally(() => {
         setLoading(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const value = { account, loading, unlock, lock };
+  const value = { account, getAccountInfo, loading, unlock, lock };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

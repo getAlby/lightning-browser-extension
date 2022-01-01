@@ -64,10 +64,12 @@ export default function SetPassword() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="relative mt-24 lg:flex space-x-8">
+      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 py-12 px-10">
         <div className="lg:w-1/2">
-          <h1 className="text-3xl font-bold">Protect your wallet</h1>
-          <p className="text-gray-500 mt-6">
+          <h1 className="text-2xl font-bold dark:text-white">
+            Protect your wallet
+          </h1>
+          <p className="text-gray-500 mt-6 dark:text-gray-400">
             Your wallet is securely encrypted with a password and needs to be
             unlocked before usage.
           </p>
@@ -75,7 +77,7 @@ export default function SetPassword() {
             <div className="mt-6">
               <label
                 htmlFor="password"
-                className="block font-medium text-gray-700"
+                className="block font-medium text-gray-700 dark:text-white"
               >
                 Choose a password:
               </label>
@@ -95,9 +97,9 @@ export default function SetPassword() {
             <div className="mt-6">
               <label
                 htmlFor="passwordConfirmation"
-                className="block font-medium text-gray-700"
+                className="block font-medium text-gray-700 dark:text-white"
               >
-                Lets confirm you typed it correct:
+                Let&apos;s confirm you typed it correct:
               </label>
               <div className="mt-1">
                 <Input
@@ -115,27 +117,23 @@ export default function SetPassword() {
               </div>
             </div>
           </div>
-          <div className="mt-8">
-            <Button
-              label="Next"
-              type="submit"
-              primary
-              disabled={
-                !formData.password ||
-                formData.password !== formData.passwordConfirmation
-              }
-            />
-          </div>
         </div>
         <div className="mt-16 lg:mt-0 lg:w-1/2">
           <div className="lg:flex h-full justify-center items-center">
-            <img
-              src="assets/icons/satsymbol.svg"
-              alt="sat"
-              className="max-w-xs"
-            />
+            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
           </div>
         </div>
+      </div>
+      <div className="mt-8 flex justify-center">
+        <Button
+          label="Next"
+          type="submit"
+          primary
+          disabled={
+            !formData.password ||
+            formData.password !== formData.passwordConfirmation
+          }
+        />
       </div>
     </form>
   );

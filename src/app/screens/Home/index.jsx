@@ -9,7 +9,6 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import utils from "../../../common/lib/utils";
-import lnurl from "../../../common/lib/lnurl";
 
 import Button from "../../components/Button";
 import TransactionsTable from "../../components/TransactionsTable";
@@ -41,7 +40,7 @@ function Home() {
   }
 
   function loadPayments() {
-    utils.call("getPayments").then((result) => {
+    utils.call("getPayments", { limit: 10 }).then((result) => {
       setPayments(result?.payments);
       setLoadingPayments(false);
     });
@@ -59,7 +58,9 @@ function Home() {
 
     // Enhancement data is loaded asynchronously (for example because we need to fetch additional data).
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
-      browser.tabs.sendMessage(tabs[0].id, { type: "extractLightningData" });
+      if (tabs.length > 0 && tabs[0].url?.startsWith("http")) {
+        browser.tabs.sendMessage(tabs[0].id, { type: "extractLightningData" });
+      }
     });
     browser.runtime.onMessage.addListener(handleLightningDataMessage);
 
@@ -77,8 +78,10 @@ function Home() {
             {parseInt(allowance.totalBudget) > 0 ? (
               <>
                 <dl className="mb-0">
-                  <dt className="text-xs text-gray-500">Allowance</dt>
-                  <dd className="mb-0 text-sm font-medium">
+                  <dt className="text-xs text-gray-500 dark:tex-gray-400">
+                    Allowance
+                  </dt>
+                  <dd className="mb-0 text-sm font-medium dark:text-gray-400">
                     {allowance.usedBudget} / {allowance.totalBudget} sat used
                   </dd>
                 </dl>
@@ -171,8 +174,8 @@ function Home() {
           </div>
         ) : (
           <div>
-            <h2 className="mb-2 text-lg text-gray-900 font-semibold">
-              Transactions
+            <h2 className="mb-2 text-lg text-gray-900 font-semibold dark:text-white">
+              Recent Transactions
             </h2>
             {payments.length > 0 ? (
               <TransactionsTable
@@ -207,7 +210,9 @@ function Home() {
                 }))}
               />
             ) : (
-              <p className="text-gray-500">No transactions yet.</p>
+              <p className="text-gray-500 dark:text-gray-400">
+                No transactions yet.
+              </p>
             )}
           </div>
         )}
@@ -223,7 +228,6 @@ function Home() {
             onClick={async () => {
               try {
                 setLoadingSendSats(true);
-                const details = await lnurl.getDetails(lnData[0].recipient);
                 const origin = {
                   external: true,
                   name: lnData[0].name,
@@ -231,12 +235,11 @@ function Home() {
                   description: lnData[0].description,
                   icon: lnData[0].icon,
                 };
-                navigate("/lnurlPay", {
-                  state: {
-                    details,
-                    origin,
-                  },
-                });
+                navigate(
+                  `/lnurlPay?lnurl=${
+                    lnData[0].recipient
+                  }&origin=${encodeURIComponent(JSON.stringify(origin))}`
+                );
               } catch (e) {
                 alert(e.message);
               } finally {

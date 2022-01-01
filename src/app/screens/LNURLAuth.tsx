@@ -1,7 +1,6 @@
-import { useState, MouseEvent } from "react";
+import { MouseEvent } from "react";
 
 import msg from "../../common/lib/msg";
-import utils from "../../common/lib/utils";
 
 import Button from "../components/Button";
 import PublisherCard from "../components/PublisherCard";
@@ -34,7 +33,7 @@ function LNURLAuth({ details, origin }: Props) {
     <div>
       <PublisherCard title={origin.name} image={origin.icon} />
       <div className="p-6">
-        <dl className="shadow bg-white p-4 rounded-lg mb-8">
+        <dl className="shadow bg-white dark:bg-gray-700 p-4 rounded-lg mb-8">
           <dt className="font-semibold text-gray-500">
             {origin.name} asks you to login to
           </dt>

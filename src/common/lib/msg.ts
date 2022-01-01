@@ -22,7 +22,7 @@ const msg = {
         return response.data;
       });
   },
-  reply: (data: any) => {
+  reply: (data: unknown) => {
     return browser.runtime.sendMessage({
       application: "LBE",
       response: true,

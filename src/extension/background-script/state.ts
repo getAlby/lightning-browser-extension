@@ -3,31 +3,33 @@ import createState from "zustand";
 
 import { decryptData } from "../../common/lib/crypto";
 import connectors from "./connectors";
-
-type Connector = any;
+import type Connector from "./connectors/connector.interface";
 
 type BrowserStorageKeys = "settings" | "accounts" | "currentAccountId";
 
 interface Account {
-  connector: "base" | "native" | "lnd" | "lndhub" | "lnbits";
-  config: any;
+  connector: "native" | "lnd" | "lndhub" | "lnbits";
+  config: string;
 }
 
 interface State {
-  connector: any;
+  connector: Connector | null;
   account: Account | null;
-  settings: any;
-  accounts: {
-    [key: string]: Account;
-  };
+  settings: Record<string, unknown>;
+  accounts: Record<string, Account>;
   currentAccountId: string | null;
   password: string | null;
-  getConnector: () => Connector | null;
+  getConnector: () => Connector;
+  saveToStorage: () => Promise<void>;
 }
 
 // these keys get synced from the state to the browser storage
 // the values are the default values
-const browserStorage = {
+const browserStorage: {
+  settings: Record<string, unknown>;
+  accounts: Record<string, Account>;
+  currentAccountId: string | null;
+} = {
   settings: {},
   accounts: {},
   currentAccountId: null,
@@ -49,6 +51,9 @@ const state = createState<State>((set, get) => ({
     return account;
   },
   getConnector: () => {
+    if (get().connector) {
+      return get().connector;
+    }
     const currentAccountId = get().currentAccountId;
     let account = null;
     if (currentAccountId) {
@@ -60,19 +65,17 @@ const state = createState<State>((set, get) => ({
       const config = decryptData(account.config, password);
 
       const connector = new connectors[account.connector](config);
-      // TODO memoize connector?
       set({ connector: connector });
 
       return connector;
     }
-    return null;
   },
   lock: () => set({ password: null, connector: null, account: null }),
   init: () => {
     return browser.storage.sync
       .get(Object.keys(browserStorage))
       .then((result) => {
-        const data: State[BrowserStorageKeys] = {};
+        const data = { ...browserStorage };
         const browserStorageKeys = Object.keys(
           browserStorage
         ) as BrowserStorageKeys[];

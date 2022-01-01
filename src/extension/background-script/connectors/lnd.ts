@@ -1,9 +1,11 @@
 import Base64 from "crypto-js/enc-base64";
 import UTF8 from "crypto-js/enc-utf8";
-import Base from "./base";
+import utils from "../../../common/lib/utils";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
+  CheckPaymentArgs,
+  CheckPaymentResponse,
   GetInfoResponse,
   GetBalanceResponse,
   MakeInvoiceArgs,
@@ -14,7 +16,18 @@ import Connector, {
   VerifyMessageResponse,
 } from "./connector.interface";
 
-class Lnd extends Base implements Connector {
+interface Config {
+  macaroon: string;
+  url: string;
+}
+
+class Lnd implements Connector {
+  config: Config;
+
+  constructor(config: Config) {
+    this.config = config;
+  }
+
   getInfo(): Promise<GetInfoResponse> {
     return this.request("GET", "/v1/getinfo", undefined, {}).then((res) => {
       return {
@@ -53,6 +66,15 @@ class Lnd extends Base implements Connector {
     });
   }
 
+  async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
+    const res = await this.request("GET", `/v1/invoice/${args.paymentHash}`);
+    return {
+      data: {
+        paid: res.data.settled,
+      },
+    };
+  }
+
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
     // use v2 to use the key locator (key_loc)
     // return this.request("POST", "/v2/signer/signmessage", {
@@ -89,7 +111,7 @@ class Lnd extends Base implements Connector {
       return {
         data: {
           paymentRequest: res.data.payment_request,
-          rHash: res.data.r_hash,
+          rHash: utils.base64ToHex(res.data.r_hash),
         },
       };
     });
@@ -127,52 +149,51 @@ class Lnd extends Base implements Connector {
     });
   };
 
-  async request(method: string, path: string, args: any, defaultValues?: any) {
+  async request(
+    method: string,
+    path: string,
+    args?: Record<string, unknown>,
+    defaultValues?: Record<string, unknown>
+  ) {
+    const url = new URL(this.config.url);
+    url.pathname = path;
     let body = null;
-    let query = "";
     const headers = new Headers();
     headers.append("Accept", "application/json");
     if (method === "POST") {
       body = JSON.stringify(args);
       headers.append("Content-Type", "application/json");
     } else if (args !== undefined) {
-      query = `?`; //`?${stringify(args)}`;
+      url.search = new URLSearchParams(
+        args as Record<string, string>
+      ).toString();
     }
     if (this.config.macaroon) {
       headers.append("Grpc-Metadata-macaroon", this.config.macaroon);
     }
-    try {
-      const res = await fetch(this.config.url + path + query, {
-        method,
-        headers,
-        body,
-      });
-      if (!res.ok) {
-        let errBody;
-        try {
-          errBody = await res.json();
-          if (!errBody.error) {
-            throw new Error();
-          }
-        } catch (err) {
-          throw new Error(res.statusText);
+    const res = await fetch(url.toString(), {
+      method,
+      headers,
+      body,
+    });
+    if (!res.ok) {
+      let errBody;
+      try {
+        errBody = await res.json();
+        if (!errBody.error) {
+          throw new Error();
         }
-        console.log("errBody", errBody);
-        throw errBody;
+      } catch (err) {
+        throw new Error(res.statusText);
       }
-      let data = await res.json();
-      if (defaultValues) {
-        data = Object.assign(Object.assign({}, defaultValues), data);
-      }
-      return { data };
-    } catch (err: any) {
-      console.error(`API error calling ${method} ${path}`, err);
-      // Thrown errors must be JSON serializable, so include metadata if possible
-      if (err.code || err.status || !err.message) {
-        throw err;
-      }
-      throw err.message;
+      console.log("errBody", errBody);
+      throw errBody;
     }
+    let data = await res.json();
+    if (defaultValues) {
+      data = Object.assign(Object.assign({}, defaultValues), data);
+    }
+    return { data };
   }
 }
 

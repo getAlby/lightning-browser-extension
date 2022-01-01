@@ -11,6 +11,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+        serif: ["Catamaran", ...defaultTheme.fontFamily.sans],
       },
       fontSize: {
         xxxs: ".5rem",
@@ -26,4 +27,5 @@ module.exports = {
       },
     },
   },
+  darkMode: "media",
 };

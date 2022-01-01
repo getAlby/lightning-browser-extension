@@ -1,23 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 import Button from "../../components/Button";
 import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
 
 function Enable(props) {
-  const [loading, setLoading] = useState(true);
-  const [remember, setRemember] = useState(true);
-  const [enabled, setEnabled] = useState(false);
-  const [budget, setBudget] = useState(null);
+  const hasFetchedData = useRef(false);
+  const [, setLoading] = useState(true);
+  const [remember] = useState(true);
+  const [, setEnabled] = useState(false);
+  const [budget] = useState(null);
 
-  function enable() {
+  const enable = useCallback(() => {
     setEnabled(true);
     msg.reply({
       enabled: true,
       remember,
       budget,
     });
-  }
+  }, [budget, remember]);
 
   function reject(event) {
     msg.error("User rejected");
@@ -39,23 +40,30 @@ function Enable(props) {
         console.log(e.message);
       }
     }
-    getAllowance();
-  }, []);
+
+    // Run once.
+    if (!hasFetchedData.current) {
+      getAllowance();
+      hasFetchedData.current = true;
+    }
+  }, [enable, props.origin.domain, props.origin.host]);
 
   return (
     <div>
       <PublisherCard title={props.origin.name} image={props.origin.icon} />
 
       <div className="text-center p-6">
-        <h3 className="text-xl mb-4">
+        <h3 className="text-xl mb-4 dark:text-white">
           Connect with <i>{props.origin.host}</i>
         </h3>
 
-        <p className="text-gray-500 mb-4">
+        <p className="text-gray-500 mb-4 dark:text-gray-400">
           <strong>{props.origin.name}</strong> does not have access to your
           account.
         </p>
-        <p className="text-gray-500 mb-4">Do you want to grant them access?</p>
+        <p className="text-gray-500 mb-4 dark:text-gray-400">
+          Do you want to grant them access?
+        </p>
 
         <div className="mt-8 mb-5">
           <Button
@@ -72,7 +80,7 @@ function Enable(props) {
         </p>
 
         <a
-          className="underline text-sm text-gray-500"
+          className="underline text-sm text-gray-500 dark:text-gray-400"
           href="#"
           onClick={reject}
         >

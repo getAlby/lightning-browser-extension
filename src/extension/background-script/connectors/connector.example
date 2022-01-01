@@ -1,7 +1,8 @@
-import Base from "./base";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
+  CheckPaymentArgs,
+  CheckPaymentResponse,
   GetInfoResponse,
   GetBalanceResponse,
   MakeInvoiceArgs,
@@ -12,7 +13,15 @@ import Connector, {
   VerifyMessageResponse,
 } from "./connector.interface";
 
-class ConnectorExample extends Base implements Connector {
+interface Config {}
+
+class ConnectorExample implements Connector {
+  config: Config;
+
+  constructor(config: Config) {
+    this.config = config;
+  }
+
   getInfo(): Promise<GetInfoResponse> {
     // Add your own implementation.
   }
@@ -22,6 +31,10 @@ class ConnectorExample extends Base implements Connector {
   }
 
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
+    // Add your own implementation.
+  }
+
+  checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
     // Add your own implementation.
   }
 

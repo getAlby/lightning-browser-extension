@@ -6,6 +6,7 @@ import {
   SendIcon,
   TransactionsIcon,
   ReceiveIcon,
+  QuestionIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import utils from "../../../common/lib/utils";
@@ -56,7 +57,7 @@ export default function UserMenu() {
             navigate("/send");
           }}
         >
-          <SendIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75" />
+          <SendIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-500" />
           Send
         </Menu.ItemButton>
         <Menu.ItemButton
@@ -64,7 +65,7 @@ export default function UserMenu() {
             navigate("/receive");
           }}
         >
-          <ReceiveIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75" />
+          <ReceiveIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-500" />
           Receive
         </Menu.ItemButton>
         <Menu.ItemButton
@@ -74,6 +75,14 @@ export default function UserMenu() {
         >
           <GearIcon className="h-5 w-5 mr-2 text-gray-500" />
           Settings
+        </Menu.ItemButton>
+        <Menu.ItemButton
+          onClick={() => {
+            utils.openUrl("https://feedback.getalby.com");
+          }}
+        >
+          <QuestionIcon className="h-5 w-5 mr-2 text-gray-500" />
+          Feedback
         </Menu.ItemButton>
         <Menu.Divider />
         <Menu.ItemButton onClick={lock}>

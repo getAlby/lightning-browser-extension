@@ -16,7 +16,7 @@ function getUsername() {
 }
 
 // can we get the user description from the primary column that looks like a profile?
-function isOnProfilePage(username: string) {
+function isOnProfilePage() {
   return (
     document.querySelector(
       '[data-testid="primaryColumn"] [data-testid="UserDescription"]'
@@ -34,7 +34,7 @@ function isOnTweet(username: string) {
 }
 
 function getUserData(username: string) {
-  if (isOnProfilePage(username)) {
+  if (isOnProfilePage()) {
     const element = document.querySelector(
       '[data-testid="primaryColumn"] [data-testid="UserDescription"]'
     );
@@ -85,7 +85,7 @@ function battery(): void {
         recipient = match[1];
       } else {
         // if we did not find anything let's look for an ⚡ emoji
-        const zapElement = userData.element.querySelector(
+        const zapElements = userData.element.querySelectorAll(
           'img[src*="26a1.svg"]'
         );
         // it is hard to find the :zap: emoij. Twitter uses images for that but has an alt text with the emoij
@@ -99,13 +99,14 @@ function battery(): void {
         //  );
         //});
         // if we find a ⚡ emoji we use the text of the next sibling and try to extract a lnurl
-        if (zapElement) {
+        for (const zapElement of zapElements) {
           if (
             (match = (zapElement.nextSibling?.textContent || "").match(
               /(\S+@\S+)/
             ))
           ) {
             recipient = match[1];
+            break;
           }
         }
       }

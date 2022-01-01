@@ -1,12 +1,13 @@
 import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
-import Base from "./base";
 import utils from "../../../common/lib/utils";
 import HashKeySigner from "../../../common/utils/signer";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
+  CheckPaymentArgs,
+  CheckPaymentResponse,
   GetInfoResponse,
   GetBalanceResponse,
   MakeInvoiceArgs,
@@ -17,7 +18,18 @@ import Connector, {
   VerifyMessageResponse,
 } from "./connector.interface";
 
-class LnBits extends Base implements Connector {
+interface Config {
+  adminkey: string;
+  url: string;
+}
+
+class LnBits implements Connector {
+  config: Config;
+
+  constructor(config: Config) {
+    this.config = config;
+  }
+
   getInfo(): Promise<GetInfoResponse> {
     return this.request(
       "GET",
@@ -63,27 +75,35 @@ class LnBits extends Base implements Connector {
     })
       .then((data) => {
         // TODO: how do we get the total amount here??
-        return this.checkPayment(data.payment_hash).then((checkData) => {
-          return {
-            data: {
-              preimage: checkData.preimage,
-              paymentHash: data.payment_hash,
-              route: { total_amt: amountInSats, total_fees: 0 },
-            },
-          };
-        });
+        return this.checkPayment({ paymentHash: data.payment_hash }).then(
+          ({ data: checkData }) => {
+            return {
+              data: {
+                preimage: checkData.preimage || "",
+                paymentHash: data.payment_hash,
+                route: { total_amt: amountInSats, total_fees: 0 },
+              },
+            };
+          }
+        );
       })
       .catch((e) => {
         return { error: e.message };
       });
   }
 
-  checkPayment(paymentHash: string) {
-    return this.request(
+  async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
+    const data = await this.request(
       "GET",
-      `/api/v1/payments/${paymentHash}`,
+      `/api/v1/payments/${args.paymentHash}`,
       this.config.adminkey
     );
+    return {
+      data: {
+        paid: data.isPaid,
+        ...data,
+      },
+    };
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
@@ -152,8 +172,8 @@ class LnBits extends Base implements Connector {
     method: string,
     path: string,
     apiKey: string,
-    args?: any,
-    defaultValues?: any
+    args?: Record<string, unknown>,
+    defaultValues?: Record<string, unknown>
   ) {
     let body = null;
     let query = "";

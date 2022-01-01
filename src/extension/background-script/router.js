@@ -5,6 +5,7 @@ import * as webln from "./actions/webln";
 import * as allowances from "./actions/allowances";
 import * as setup from "./actions/setup";
 import * as payments from "./actions/payments";
+import * as settings from "./actions/settings";
 
 // TODO: potential nesting/grouping of actions for better organization
 const routes = {
@@ -32,6 +33,7 @@ const routes = {
   lnurlPay,
   sendPaymentOrPrompt: webln.sendPaymentOrPrompt,
   sendPayment: ln.sendPayment,
+  checkPayment: ln.checkPayment,
   signMessage: ln.signMessage,
   verifyMessage: ln.verifyMessage,
   makeInvoice: ln.makeInvoice,
@@ -47,6 +49,8 @@ const routes = {
   status: setup.status,
   validateAccount: setup.validateAccount,
   setIcon: setup.setIcon,
+  setSetting: settings.set,
+  getSettings: settings.get,
 };
 
 const router = (path) => {

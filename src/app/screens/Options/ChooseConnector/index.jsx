@@ -5,11 +5,13 @@ import LinkButton from "../../../components/LinkButton";
 import ConnectLnd from "../../Onboard/ConnectLnd";
 import ConnectLndHub from "../../Onboard/ConnectLndHub";
 import ConnectLnbits from "../../Onboard/ConnectLnbits";
+import ConnectGaloy from "../../Onboard/ConnectGaloy";
 import NewWallet from "../../Onboard/NewWallet";
 
 import lnbits from "/static/assets/icons/lnbits.png";
 import lndhub from "/static/assets/icons/lndhub.png";
 import lnd from "/static/assets/icons/lnd.png";
+import galoy from "/static/assets/icons/galoy.png";
 import alby from "/static/assets/icons/alby.png";
 
 export default function ChooseConnector() {
@@ -38,6 +40,12 @@ export default function ChooseConnector() {
       description: "We create and manage a lightning wallet for you",
       logo: alby,
     },
+    {
+      to: "galoy",
+      title: "Galoy",
+      description: "Create or connect to a Galoy account",
+      logo: galoy,
+    },
   ];
 
   return (
@@ -45,13 +53,13 @@ export default function ChooseConnector() {
       <Route
         path="/"
         element={
-          <div className="relative mt-24 lg:grid lg:grid-cols-2 lg:gap-8">
+          <div className="relative mt-7 lg:grid  lg:gap-8 items-center text-center">
             <div className="relative">
-              <h1 className="text-3xl font-bold">
+              <h1 className="text-2xl font-bold mb-7 dark:text-white">
                 Add a new lightning account
               </h1>
-              <p className="text-gray-500 my-6"></p>
-              <div className="space-y-4">
+
+              <div className="grid grid-cols-4 gap-4">
                 {connectors.map(({ to, title, description, logo }) => (
                   <LinkButton
                     key={to}
@@ -69,6 +77,7 @@ export default function ChooseConnector() {
       <Route path="lnd" element={<ConnectLnd />} />
       <Route path="lnd-hub" element={<ConnectLndHub />} />
       <Route path="lnbits" element={<ConnectLnbits />} />
+      <Route path="galoy" element={<ConnectGaloy />} />
       <Route path="create-wallet" element={<NewWallet />} />
     </Routes>
   );
