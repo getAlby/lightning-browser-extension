@@ -18,6 +18,20 @@ export default class NativeLndHub extends LndHub {
 
   connectNativeCompanion() {
     this._port = browser.runtime.connectNative(nativeApplication);
+    // Add status listener
+    // If the native app sends an error (e.g. Tor failed) we simply try to restart for now.
+    // Sadly we do not have any way to notify the user from here
+    this._port.onMessage.addListener((response) => {
+      if (response.id !== 'status') {
+        return;
+      }
+      // TODO: test this
+      if (response.status === 502 && response.header['X-Alby-Internal']) {
+        console.error("Error in the native companion. Shutting it down");
+        console.error(response);
+        this.unload();
+      }
+    });
     this._port.onDisconnect.addListener((p) => {
       console.error("Native companion disconnected");
       if (p.error) {
