@@ -121,13 +121,32 @@ class Galoy implements Connector {
           error: data.error?.errors?.[0]?.message || JSON.stringify(data.error),
         };
       }
-      return {
-        data: {
-          preimage: "No preimage received",
-          paymentHash,
-          route: { total_amt: amountInSats, total_fees: 0 },
-        },
-      };
+      switch (data.data.lnInvoicePaymentSend.status) {
+        case "ALREADY_PAID":
+          return {
+            error: "Invoice was already paid.",
+          };
+        case "FAILURE":
+          return {
+            error: "Payment failed.",
+          };
+        case "PENDING":
+          return {
+            data: {
+              preimage: "No preimage, payment still pending",
+              paymentHash,
+              route: { total_amt: amountInSats, total_fees: 0 },
+            },
+          };
+        default:
+          return {
+            data: {
+              preimage: "No preimage received",
+              paymentHash,
+              route: { total_amt: amountInSats, total_fees: 0 },
+            },
+          };
+      }
     });
   }
 
