@@ -6,7 +6,7 @@ import Button from "../../../components/Button";
 
 import utils from "../../../../common/lib/utils";
 
-const url = process.env.GALOY_URL || "https://api.staging.galoy.io/graphql/";
+const url = process.env.GALOY_URL || "https://api.mainnet.galoy.io/graphql/";
 const defaultHeaders = {
   Accept: "application/json",
   "Access-Control-Allow-Origin": "*",
