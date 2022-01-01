@@ -69,9 +69,11 @@ class Galoy implements Connector {
       `,
     };
     return this.request(query).then((data) => {
-      if (data.error) {
+      if (data.error || data.errors) {
+        const error = data.error || data.errors;
+        const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
         return {
-          error: data.error?.errors?.[0]?.message || JSON.stringify(data.error),
+          error: errMessage || JSON.stringify(error),
         };
       }
       const { defaultWalletId, wallets }: GaloyDefaultAccount =
@@ -113,13 +115,15 @@ class Galoy implements Connector {
     });
 
     return this.request(query).then((data) => {
+      if (data.error || data.errors) {
+        const error = data.error || data.errors;
+        const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
+        return {
+          error: errMessage || JSON.stringify(error),
+        };
+      }
       if (data.data.lnInvoicePaymentSend.errors?.[0]?.message) {
         return { error: data.data.lnInvoicePaymentSend.errors[0].message };
-      }
-      if (data.error) {
-        return {
-          error: data.error?.errors?.[0]?.message || JSON.stringify(data.error),
-        };
       }
       switch (data.data.lnInvoicePaymentSend.status) {
         case "ALREADY_PAID":
@@ -195,13 +199,15 @@ class Galoy implements Connector {
       },
     };
     return this.request(query).then((data) => {
+      if (data.error || data.errors) {
+        const error = data.error || data.errors;
+        const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
+        return {
+          error: errMessage || JSON.stringify(error),
+        };
+      }
       if (data.data.lnInvoiceCreate.errors?.[0]?.message) {
         return { error: data.data.lnInvoiceCreate.errors[0].message };
-      }
-      if (data.error) {
-        return {
-          error: data.error?.errors?.[0]?.message || JSON.stringify(data.error),
-        };
       }
       return {
         data: {
