@@ -120,10 +120,11 @@ Then run the following:
   - Load the extension via `opera:extensions`
   - Check the `Developer Mode` and load as unpacked from extension’s extracted directory.
 
-** Use the development LND account**
-
 To connect to a remote development LND node you can use a [test account](https://github.com/bumi/lightning-browser-extension/wiki/Test-setup)
-Configure BOB in the extension and pay ALICE on [https://regtest-alice.herokuapp.com/](https://regtest-alice.herokuapp.com/)
+
+### Debugging
+
+Most logs are written to the background script. Make sure to "inspect" the background script to see the console. Help for [Chrome](https://developer.chrome.com/docs/extensions/mv3/tut_debugging/), [Firefox](https://extensionworkshop.com/documentation/develop/debugging/)
 
 
 ### ⌨️ Production package files

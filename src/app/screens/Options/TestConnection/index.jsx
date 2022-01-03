@@ -46,8 +46,10 @@ export default function TestConnection() {
           <div>
             {errorMessage && (
               <div>
-                <h1 className="text-3xl font-bold">Connection Error</h1>
-                <p>{errorMessage}</p>
+                <h1 className="text-3xl font-bold dark:text-white">
+                  Connection Error
+                </h1>
+                <p className="dark:text-gray-500">{errorMessage}</p>
                 <Button label="Edit" onClick={handleEdit} primary />
               </div>
             )}
