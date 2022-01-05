@@ -41,8 +41,8 @@ Download Nightly releases
 
 ## Browser Support
 
-* Chrome (and all Chromium based browsers)
-* Firefox
+* [Chrome](https://chrome.google.com/webstore/detail/alby/iokeahhehimjnekafflcihljlcjccdbe) (Opera, Brave, and all Chromium based browsers)
+* [Firefox](https://addons.mozilla.org/en-US/firefox/addon/alby/)
 * more coming soon...
 
 ## Architecture idea
