@@ -3,9 +3,12 @@ import { Html5Qrcode } from "html5-qrcode";
 
 import api from "../../common/lib/api";
 
+import { Settings } from "../../types";
+
 import Container from "../components/Container";
 import Button from "../components/Button";
 import Toggle from "../components/Toggle";
+import Input from "../components/Form/Input";
 
 type Props = {
   title: string;
@@ -29,8 +32,9 @@ function Setting({ title, subtitle, right }: Props) {
 
 function Settings() {
   const [loading, setLoading] = useState(true);
-  const [settings, setSettings] = useState({
+  const [settings, setSettings] = useState<Settings>({
     websiteEnhancements: false,
+    userName: '',
   });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
@@ -90,6 +94,27 @@ function Settings() {
               />
             ) : (
               <p className="text-green-500 font-medium">Permission granted</p>
+            )
+          }
+        />
+
+        <Setting
+          title="User Display Name"
+          subtitle="For sending along with LNURL payments when supported"
+          right={
+            !loading && (
+              <div className="w-64">
+                <Input
+                  placeholder="Alice"
+                  type="text"
+                  value={settings.userName}
+                  onChange={(ev) => {
+                    saveSetting({
+                      userName: ev.target.value,
+                    });
+                  }}
+                />
+              </div>
             )
           }
         />

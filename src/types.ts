@@ -48,6 +48,13 @@ interface LNURLPayServiceResponse {
   minSendable: number; // Min amount LN SERVICE is willing to receive, can not be less than 1 or more than `maxSendable`
   metadata: string; // Metadata json which must be presented as raw string here, this is required to pass signature verification at a later step
   tag: "payRequest"; // Type of LNURL
+  payerData: {
+    name: { mandatory: boolean },
+    pubkey: { mandatory: boolean },
+    identifier: { mandatory: boolean },
+    email: { mandatory: boolean },
+    auth: { mandatory: boolean, k1: string },
+  };
 }
 
 interface LNURLAuthServiceResponse {
@@ -127,4 +134,5 @@ export interface Allowance {
 
 export interface Settings {
   websiteEnhancements: boolean;
+  userName: string;
 }
