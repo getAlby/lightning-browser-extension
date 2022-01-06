@@ -12,7 +12,8 @@
           "firefox": "52",
           "opera": "36",
           "edge": "79"
-        }
+        },
+        "loose": true
       }
     ],
     ["@babel/preset-react", {
@@ -21,7 +22,7 @@
     "@babel/preset-typescript"
   ],
   "plugins": [
-    ["@babel/plugin-proposal-class-properties"],
+    ["@babel/plugin-proposal-class-properties", {"loose": true}],
     [
       // Polyfills the runtime needed for async/await and generators
       "@babel/plugin-transform-runtime",
