@@ -41,7 +41,7 @@ function Unlock() {
   return (
     <div className="p-8 bg-white dark:bg-gray-800 shadow-lg">
       <div className="flex space-x-2 justify-center pt-5">
-        <img src="assets/icons/alby_icon_transp.svg" alt="logo" />
+        <img src="assets/icons/tip-with-yellow.png" alt="logo" />
       </div>
       <p className="text-center text-xl font-normal font-serif mt-8 mb-5 dark:text-white">
         Unlock to continue
