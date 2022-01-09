@@ -2,7 +2,7 @@ import state from "../../state";
 
 const DEFAULT_SETTINGS = {
   websiteEnhancements: true,
-  userName: ''
+  userName: "",
 };
 
 const get = async () => {
