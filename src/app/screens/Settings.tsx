@@ -77,6 +77,27 @@ function Settings() {
         />
 
         <Setting
+          title="User Display Name"
+          subtitle="For sending along with LNURL payments when supported"
+          right={
+            !loading && (
+              <div className="w-64">
+                <Input
+                  placeholder="Alice"
+                  type="text"
+                  value={settings.userName}
+                  onChange={(ev) => {
+                    saveSetting({
+                      userName: ev.target.value,
+                    });
+                  }}
+                />
+              </div>
+            )
+          }
+        />
+
+        <Setting
           title="Camera access"
           subtitle="For scanning QR codes"
           right={
@@ -94,27 +115,6 @@ function Settings() {
               />
             ) : (
               <p className="text-green-500 font-medium">Permission granted</p>
-            )
-          }
-        />
-
-        <Setting
-          title="User Display Name"
-          subtitle="For sending along with LNURL payments when supported"
-          right={
-            !loading && (
-              <div className="w-64">
-                <Input
-                  placeholder="Alice"
-                  type="text"
-                  value={settings.userName}
-                  onChange={(ev) => {
-                    saveSetting({
-                      userName: ev.target.value,
-                    });
-                  }}
-                />
-              </div>
             )
           }
         />
