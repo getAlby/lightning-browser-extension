@@ -3,7 +3,7 @@ import { Html5Qrcode } from "html5-qrcode";
 
 import api from "../../common/lib/api";
 
-import { Settings } from "../../types";
+import { SettingsStorage } from "../../types";
 
 import Container from "../components/Container";
 import Button from "../components/Button";
@@ -32,9 +32,9 @@ function Setting({ title, subtitle, right }: Props) {
 
 function Settings() {
   const [loading, setLoading] = useState(true);
-  const [settings, setSettings] = useState<Settings>({
+  const [settings, setSettings] = useState<SettingsStorage>({
     websiteEnhancements: false,
-    userName: '',
+    userName: "",
   });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
