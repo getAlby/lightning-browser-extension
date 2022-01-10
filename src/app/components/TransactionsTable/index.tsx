@@ -77,9 +77,7 @@ export default function TransactionsTable({ transactions }: Props) {
                       </div>
                       <Disclosure.Button className="block h-0 mt-2 text-gray-500 hover:text-black dark:hover:text-white transition-color duration-200">
                         <CaretDownIcon
-                          className={`${
-                            open ? "transform rotate-180" : ""
-                          } w-5 h-5`}
+                          className={`${open ? "rotate-180" : ""} w-5 h-5`}
                         />
                       </Disclosure.Button>
                     </div>
