@@ -14,7 +14,7 @@ export default function Toggle({ checked, onChange }: Props) {
       onChange={onChange}
       className={classNames(
         checked ? "bg-orange-bitcoin" : "bg-gray-200",
-        "relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-bitcoin"
+        "relative inline-flex shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-bitcoin"
       )}
     >
       <span

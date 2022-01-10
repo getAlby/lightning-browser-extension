@@ -15,7 +15,7 @@ export default function CategoriesTable({ categories }) {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div
-                          className={`flex-shrink-0 h-10 w-10 bg-${category.color} rounded-full`}
+                          className={`shrink-0 h-10 w-10 bg-${category.color} rounded-full`}
                         >
                           <category.icon
                             className="h-10 w-10 p-1 text-white"
