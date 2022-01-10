@@ -42,7 +42,7 @@ export default function TransactionsTable({ transactions }: Props) {
               {({ open }) => (
                 <>
                   <div className="flex">
-                    <div className="flex items-center flex-shrink-0 mr-3">
+                    <div className="flex items-center shrink-0 mr-3">
                       {tx.type && renderIcon(tx.type)}
                     </div>
                     <div className="overflow-hidden mr-3">
@@ -65,7 +65,7 @@ export default function TransactionsTable({ transactions }: Props) {
                         ))}
                       </div>
                     )}
-                    <div className="flex ml-auto text-right space-x-3 flex-shrink-0">
+                    <div className="flex ml-auto text-right space-x-3 shrink-0">
                       <div>
                         <p className="text-sm font-medium dark:text-white">
                           {[tx.type && "sent", "sending"].includes(tx.type)
