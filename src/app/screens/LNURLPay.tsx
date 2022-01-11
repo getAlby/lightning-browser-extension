@@ -70,7 +70,7 @@ function LNURLPay(props: Props) {
 
   useEffect(() => {
     api.getSettings().then((response) => {
-      if (response.userName && response.userName.length) {
+      if (response.userName) {
         setUserName(response.userName);
       }
     });
