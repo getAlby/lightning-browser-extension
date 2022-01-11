@@ -40,12 +40,14 @@ interface LNURLChannelServiceResponse {
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node
   k1: string; // random or non-random string to identify the user's LN WALLET when using the callback URL
   tag: "channelRequest"; // type of LNURL
+  domain: string;
 }
 
-interface LNURLPayServiceResponse {
+export interface LNURLPayServiceResponse {
   callback: string; // The URL from LN SERVICE which will accept the pay request parameters
   maxSendable: number; // Max amount LN SERVICE is willing to receive
   minSendable: number; // Min amount LN SERVICE is willing to receive, can not be less than 1 or more than `maxSendable`
+  domain: string;
   metadata: string; // Metadata json which must be presented as raw string here, this is required to pass signature verification at a later step
   tag: "payRequest"; // Type of LNURL
   payerData: {
@@ -55,12 +57,14 @@ interface LNURLPayServiceResponse {
     email: { mandatory: boolean };
     auth: { mandatory: boolean; k1: string };
   };
+  commentAllowed: number;
 }
 
 interface LNURLAuthServiceResponse {
   tag: "login"; // Type of LNURL
   k1: string; // (hex encoded 32 bytes of challenge) which is going to be signed by user's linkingPrivKey.
   action?: string; // optional action enum which can be one of four strings: register | login | link | auth.
+  domain: string;
 }
 
 interface LNURLWithdrawServiceResponse {
@@ -70,6 +74,7 @@ interface LNURLWithdrawServiceResponse {
   defaultDescription: string; // A default withdrawal invoice description
   minWithdrawable: number; // Min amount (in millisatoshis) the user can withdraw from LN SERVICE, or 0
   maxWithdrawable: number; // Max amount (in millisatoshis) the user can withdraw from LN SERVICE, or equal to minWithdrawable if the user has no choice over the amounts
+  domain: string;
 }
 
 export type LNURLDetails = (
@@ -77,7 +82,7 @@ export type LNURLDetails = (
   | LNURLPayServiceResponse
   | LNURLAuthServiceResponse
   | LNURLWithdrawServiceResponse
-) & { domain: string; url: URL };
+) & { url: URL };
 
 export interface LNURLPaymentSuccessAction {
   tag: string;

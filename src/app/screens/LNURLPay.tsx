@@ -2,7 +2,11 @@ import { Fragment, useState, useEffect, MouseEvent } from "react";
 import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import { LNURLPaymentInfo, LNURLPaymentSuccessAction } from "../../types";
+import {
+  LNURLPaymentInfo,
+  LNURLPaymentSuccessAction,
+  LNURLPayServiceResponse,
+} from "../../types";
 import api from "../../common/lib/api";
 import msg from "../../common/lib/msg";
 import utils from "../../common/lib/utils";
@@ -13,29 +17,13 @@ import Button from "../components/Button";
 import Input from "../components/Form/Input";
 import PublisherCard from "../components/PublisherCard";
 
-type Details = {
-  minSendable: number;
-  maxSendable: number;
-  callback: string;
-  domain: string;
-  metadata: string;
-  commentAllowed?: number;
-  payerData: {
-    name: { mandatory: boolean },
-    pubkey: { mandatory: boolean },
-    identifier: { mandatory: boolean },
-    email: { mandatory: boolean },
-    auth: { mandatory: boolean, k1: string },
-  };
-};
-
 type Origin = {
   name: string;
   icon: string;
 };
 
 type Props = {
-  details?: Details;
+  details?: LNURLPayServiceResponse;
   origin?: Origin;
 };
 
@@ -83,17 +71,18 @@ function LNURLPay(props: Props) {
   useEffect(() => {
     api.getSettings().then((response) => {
       if (response.userName && response.userName.length) {
-        setUserName(response.userName)
+        setUserName(response.userName);
       }
     });
-  }, [])
+  }, []);
 
   async function confirm() {
     if (!details) return;
 
-    const payerdata = details.payerData && details.payerData.name && userName && userName.length
-      ? { name: userName }
-      : undefined;
+    const payerdata =
+      details.payerData && details.payerData.name && userName && userName.length
+        ? { name: userName }
+        : undefined;
 
     try {
       setLoadingConfirm(true);
@@ -115,7 +104,7 @@ function LNURLPay(props: Props) {
         paymentInfo,
         metadata: details.metadata,
         amount: valueMSat || 0,
-        payerdata
+        payerdata,
       });
       if (!isValidInvoice) {
         alert("Payment aborted. Invalid invoice");

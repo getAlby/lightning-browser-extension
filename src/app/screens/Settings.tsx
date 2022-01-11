@@ -83,7 +83,7 @@ function Settings() {
             !loading && (
               <div className="w-64">
                 <Input
-                  placeholder="Alice"
+                  placeholder="Enter your username"
                   type="text"
                   value={settings.userName}
                   onChange={(ev) => {
