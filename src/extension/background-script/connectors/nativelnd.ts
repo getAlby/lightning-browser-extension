@@ -22,11 +22,11 @@ export default class NativeLnd extends Lnd {
     // If the native app sends an error (e.g. Tor failed) we simply try to restart for now.
     // Sadly we do not have any way to notify the user from here
     this._port.onMessage.addListener((response) => {
-      if (response.id !== 'status') {
+      if (response.id !== "status") {
         return;
       }
       // TODO: test this
-      if (response.status === 502 && response.header['X-Alby-Internal']) {
+      if (response.status === 502 && response.header["X-Alby-Internal"]) {
         console.error("Error in the native companion. Shutting it down");
         console.error(response);
         this.unload();
@@ -36,6 +36,12 @@ export default class NativeLnd extends Lnd {
       console.error("Native companion disconnected");
       if (p.error) {
         console.error(`Native companion error: ${p.error.message}`);
+      }
+      if (
+        browser.runtime.lastError?.message ===
+        "Specified native messaging host not found."
+      ) {
+        alert("Please install the companion app.");
       }
       this._port = null;
     });

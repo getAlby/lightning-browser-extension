@@ -50,6 +50,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const getAccountInfo = (accountId?: string) => {
     const id = accountId || account?.id;
     if (!id) return;
+    setAccountId(id);
     return api.getAccountInfo().then((response) => {
       const { alias } = response.info;
       const balance = parseInt(response.balance.balance); // TODO: handle amounts
