@@ -43,7 +43,7 @@ export default function PublishersTable({
             >
               <td className="px-4 py-6 whitespace-nowrap">
                 <div className="flex items-center">
-                  <div className="flex-shrink-0">
+                  <div className="shrink-0">
                     <img
                       className="h-12 w-12 object-cover rounded-full shadow-lg"
                       src={publisher.imageURL || DEFAULT_IMAGE}

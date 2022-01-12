@@ -23,6 +23,11 @@ interface State {
   saveToStorage: () => Promise<void>;
 }
 
+const DEFAULT_SETTINGS = {
+  websiteEnhancements: true,
+  userName: "",
+};
+
 // these keys get synced from the state to the browser storage
 // the values are the default values
 const browserStorage: {
@@ -30,7 +35,7 @@ const browserStorage: {
   accounts: Record<string, Account>;
   currentAccountId: string | null;
 } = {
-  settings: {},
+  settings: DEFAULT_SETTINGS,
   accounts: {},
   currentAccountId: null,
 };

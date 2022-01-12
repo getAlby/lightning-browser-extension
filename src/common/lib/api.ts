@@ -1,5 +1,5 @@
 import utils from "./utils";
-import type { Settings } from "../../types";
+import type { SettingsStorage } from "../../types";
 
 interface AccountInfoRes {
   currentAccountId: string;
@@ -24,12 +24,12 @@ interface UnlockRes {
 }
 
 export const getAccountInfo = () => utils.call<AccountInfoRes>("accountInfo");
-export const getSettings = () => utils.call<Settings>("getSettings");
+export const getSettings = () => utils.call<SettingsStorage>("getSettings");
 export const getStatus = () => utils.call<StatusRes>("status");
 export const setSetting = (
   setting: Record<string, string | number | boolean>
 ) =>
-  utils.call<Settings>("setSetting", {
+  utils.call<SettingsStorage>("setSetting", {
     setting,
   });
 export const unlock = (password: string) =>
