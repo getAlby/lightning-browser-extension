@@ -31,6 +31,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const unlock = (password: string, callback: VoidFunction) => {
     return api.unlock(password).then((response) => {
+      setAccountId(response.currentAccountId);
       getAccountInfo(response.currentAccountId);
 
       // callback - e.g. navigate to the requested route after unlocking
@@ -50,7 +51,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const getAccountInfo = (accountId?: string) => {
     const id = accountId || account?.id;
     if (!id) return;
-    setAccountId(id);
     return api.getAccountInfo().then((response) => {
       const { alias } = response.info;
       const balance = parseInt(response.balance.balance); // TODO: handle amounts
