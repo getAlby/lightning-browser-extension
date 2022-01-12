@@ -13,6 +13,13 @@ interface AuthContextType {
   loading: boolean;
   unlock: (user: string, callback: VoidFunction) => void;
   lock: (callback: VoidFunction) => void;
+  /**
+   * Set new id and clears current info, which causes a loading indicator for the alias/balance
+   */
+  setAccountId: (id: string) => void;
+  /**
+   * Get's the additional account info: alias/balance
+   */
   getAccountInfo: (id?: string) => void;
 }
 
@@ -38,12 +45,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
+  const setAccountId = (id: string) => setAccount({ id });
+
   const getAccountInfo = (accountId?: string) => {
     const id = accountId || account?.id;
     if (!id) return;
-    // set the account id to indicate the unlock for other components
-    // also clears current info which causes a loading indicator for the alias/balance
-    setAccount({ id });
     return api.getAccountInfo().then((response) => {
       const { alias } = response.info;
       const balance = parseInt(response.balance.balance); // TODO: handle amounts
@@ -60,6 +66,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           utils.openPage("welcome.html");
           window.close();
         } else if (response.unlocked) {
+          setAccountId(response.currentAccountId);
           getAccountInfo(response.currentAccountId);
         } else {
           setAccount(null);
@@ -74,7 +81,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const value = { account, getAccountInfo, loading, unlock, lock };
+  const value = {
+    account,
+    setAccountId,
+    getAccountInfo,
+    loading,
+    unlock,
+    lock,
+  };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

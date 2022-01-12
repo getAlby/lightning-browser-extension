@@ -75,7 +75,6 @@ const Layout = () => {
             ? `${auth.account.balance} sat`
             : ""
         }
-        onAccountSwitch={auth.getAccountInfo}
       >
         <Navbar.Link href="/publishers">Websites</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>
