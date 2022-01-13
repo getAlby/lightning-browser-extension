@@ -1,11 +1,31 @@
-import nativeConnectorClassCreator from "./nativeConnectorClassCreator";
+import { Method } from "axios";
 
-const NativeConnector = nativeConnectorClassCreator("lndhub");
+import LndHub from "./lndhub";
+import Native from "./Native";
+
+const NativeConnector = Native(LndHub);
+
+type PostMessage = {
+  id: string;
+  method: string;
+  url: string;
+  body?: string;
+  params?: Record<string, unknown>;
+  headers: Record<string, string>;
+};
 
 export default class NativeLndHub extends NativeConnector {
-  _nativeRequest(postMessage) {
-    return new Promise((resolve, reject) => {
-      const handler = (response) => {
+  _nativeRequest(postMessage: PostMessage) {
+    return new Promise<{
+      id: string;
+      status: number;
+      body: string;
+    }>((resolve, reject) => {
+      const handler = (response: {
+        id: string;
+        status: number;
+        body: string;
+      }) => {
         if (response.id !== postMessage.id) {
           return;
         }
@@ -82,8 +102,8 @@ export default class NativeLndHub extends NativeConnector {
 
     const url = new URL(this.config.url);
     url.pathname = path;
-    let body = null;
-    let params = null;
+    let body;
+    let params;
     if (method === "POST") {
       body = JSON.stringify(args);
     } else {

@@ -1,18 +1,20 @@
-import nativeConnectorClassCreator from "./nativeConnectorClassCreator";
+import Lnd from "./lnd";
 
-const NativeConnector = nativeConnectorClassCreator("lnd");
+import Native from "./Native";
+
+const NativeConnector = Native(Lnd);
 
 export default class NativeLnd extends NativeConnector {
-  request(
+  request<Type>(
     method: string,
     path: string,
-    args?: Record<string, unknown>,
+    args?: Record<string, string>,
     defaultValues?: Record<string, unknown>
-  ): Promise<unknown> {
+  ): Promise<Type> {
     const url = new URL(this.config.url);
     url.pathname = path;
-    let body = null;
-    const headers = {};
+    let body = "";
+    const headers: Record<string, string> = {};
     headers["Accept"] = "application/json";
     if (method === "POST") {
       body = JSON.stringify(args) as string;
@@ -23,9 +25,12 @@ export default class NativeLnd extends NativeConnector {
     if (this.config.macaroon) {
       headers["Grpc-Metadata-macaroon"] = this.config.macaroon;
     }
-
     return new Promise((resolve, reject) => {
-      const handler = (response) => {
+      const handler = (response: {
+        id: string;
+        status: number;
+        body: string;
+      }) => {
         if (response.id !== path) {
           return;
         }
@@ -38,7 +43,7 @@ export default class NativeLnd extends NativeConnector {
           if (defaultValues) {
             data = Object.assign(Object.assign({}, defaultValues), data);
           }
-          resolve({ data });
+          resolve(data);
         }
       };
       this.port.onMessage.addListener(handler);

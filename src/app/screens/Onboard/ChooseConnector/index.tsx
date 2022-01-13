@@ -5,7 +5,12 @@ import lndhub from "/static/assets/icons/lndhub.png";
 import lnd from "/static/assets/icons/lnd.png";
 import alby from "/static/assets/icons/alby.png";
 
-export default function ChooseConnector() {
+type Props = {
+  title: string;
+  description?: string;
+};
+
+export default function ChooseConnector({ title, description }: Props) {
   const connectors = [
     {
       to: "lnd",
@@ -36,14 +41,14 @@ export default function ChooseConnector() {
   return (
     <div className="relative mt-14 lg:grid  lg:gap-8 text-center">
       <div className="relative">
-        <h1 className="text-3xl font-bold dark:text-white">
-          Do you have a lightning wallet?
-        </h1>
-        <p className="text-gray-500 my-6 dark:text-gray-400">
-          You need to first connect to a lightning wallet so that you can
-          interact with <br /> your favorite websites that accept bitcoin
-          lightning payments!
-        </p>
+        <div className="mb-6">
+          <h1 className="text-3xl font-bold dark:text-white">{title}</h1>
+          {description && (
+            <p className="text-gray-500 mt-6 dark:text-gray-400">
+              {description}
+            </p>
+          )}
+        </div>
         <div className="grid grid-cols-4 gap-4">
           {connectors.map(({ to, title, description, logo }) => (
             <LinkButton

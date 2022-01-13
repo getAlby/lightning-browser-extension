@@ -40,7 +40,7 @@ export default function ConnectLnd() {
     };
 
     try {
-      const validation = { valid: true }; //await utils.call("validateAccount", account);
+      const validation = { valid: true, error: "" }; //await utils.call("validateAccount", account);
       if (validation.valid) {
         const addResult = await utils.call("addAccount", account);
         if (addResult.accountId) {

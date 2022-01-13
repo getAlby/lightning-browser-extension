@@ -36,12 +36,16 @@ class Lnd implements Connector {
   }
 
   getInfo(): Promise<GetInfoResponse> {
-    return this.request("GET", "/v1/getinfo", undefined, {}).then((res) => {
+    return this.request<{
+      alias: string;
+      identity_pubkey: string;
+      color: string;
+    }>("GET", "/v1/getinfo", undefined, {}).then((data) => {
       return {
         data: {
-          alias: res.data.alias,
-          pubkey: res.data.identity_pubkey,
-          color: res.data.color,
+          alias: data.alias,
+          pubkey: data.identity_pubkey,
+          color: data.color,
         },
       };
     });
@@ -52,32 +56,40 @@ class Lnd implements Connector {
   }
 
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
-    return this.request(
+    return this.request<{
+      payment_preimage: string;
+      payment_hash: string;
+      payment_route: { total_amt: number; total_fees: number };
+      payment_error?: string;
+    }>(
       "POST",
       "/v1/channels/transactions",
       {
         payment_request: args.paymentRequest,
       },
       {}
-    ).then((res) => {
-      if (res.data.payment_error) {
-        return { error: res.data.payment_error };
+    ).then((data) => {
+      if (data.payment_error) {
+        return { error: data.payment_error };
       }
       return {
         data: {
-          preimage: res.data.payment_preimage,
-          paymentHash: res.data.payment_hash,
-          route: res.data.payment_route,
+          preimage: utils.base64ToHex(data.payment_preimage),
+          paymentHash: data.payment_hash,
+          route: data.payment_route,
         },
       };
     });
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    const res = await this.request("GET", `/v1/invoice/${args.paymentHash}`);
+    const data = await this.request<{ settled: boolean }>(
+      "GET",
+      `/v1/invoice/${args.paymentHash}`
+    );
     return {
       data: {
-        paid: res.data.settled,
+        paid: data.settled,
       },
     };
   }
@@ -85,40 +97,44 @@ class Lnd implements Connector {
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
     // use v2 to use the key locator (key_loc)
     // return this.request("POST", "/v2/signer/signmessage", {
-    return this.request("POST", "/v1/signmessage", {
+    return this.request<{ signature: string }>("POST", "/v1/signmessage", {
       msg: Base64.stringify(UTF8.parse(args.message)),
-    }).then((res) => {
+    }).then((data) => {
       return {
         data: {
           message: args.message,
-          signature: res.data.signature,
+          signature: data.signature,
         },
       };
     });
   }
 
   verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse> {
-    return this.request("POST", "/v1/verifymessage", {
+    return this.request<{ valid: boolean }>("POST", "/v1/verifymessage", {
       msg: Base64.stringify(UTF8.parse(args.message)),
       signature: args.signature,
-    }).then((res) => {
+    }).then((data) => {
       return {
         data: {
-          valid: res.data.valid,
+          valid: data.valid,
         },
       };
     });
   }
 
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
-    return this.request("POST", "/v1/invoices", {
-      memo: args.memo,
-      value: args.amount,
-    }).then((res) => {
+    return this.request<{ payment_request: string; r_hash: string }>(
+      "POST",
+      "/v1/invoices",
+      {
+        memo: args.memo,
+        value: args.amount,
+      }
+    ).then((data) => {
       return {
         data: {
-          paymentRequest: res.data.payment_request,
-          rHash: utils.base64ToHex(res.data.r_hash),
+          paymentRequest: data.payment_request,
+          rHash: utils.base64ToHex(data.r_hash),
         },
       };
     });
@@ -137,14 +153,19 @@ class Lnd implements Connector {
   };
 
   getChannelsBalance = () => {
-    return this.request("GET", "/v1/balance/channels", undefined, {
-      pending_open_balance: "0",
-      balance: "0",
-    }).then((res) => {
+    return this.request<{ balance: number; pending_open_balance: number }>(
+      "GET",
+      "/v1/balance/channels",
+      undefined,
+      {
+        pending_open_balance: "0",
+        balance: "0",
+      }
+    ).then((data) => {
       return {
         data: {
-          balance: res.data.balance,
-          pending_open_balance: res.data.pending_open_balance,
+          balance: data.balance,
+          pending_open_balance: data.pending_open_balance,
         },
       };
     });
@@ -156,12 +177,12 @@ class Lnd implements Connector {
     });
   };
 
-  async request(
+  async request<Type>(
     method: string,
     path: string,
     args?: Record<string, unknown>,
     defaultValues?: Record<string, unknown>
-  ) {
+  ): Promise<Type> {
     const url = new URL(this.config.url);
     url.pathname = path;
     let body = null;
@@ -200,7 +221,7 @@ class Lnd implements Connector {
     if (defaultValues) {
       data = Object.assign(Object.assign({}, defaultValues), data);
     }
-    return { data };
+    return data;
   }
 }
 

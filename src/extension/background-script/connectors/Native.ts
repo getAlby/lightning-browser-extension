@@ -1,29 +1,21 @@
 import browser from "webextension-polyfill";
 
-import Lnd from "./lnd";
-import LndHub from "./lndhub";
-
 const nativeApplication = "alby";
 
-const parentClasses = {
-  lnd: Lnd,
-  lndhub: LndHub,
-};
+// https://www.typescriptlang.org/docs/handbook/mixins.html
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
+type Constructor = new (...args: any[]) => {};
 
-export default function nativeConnectorClassCreator(
-  connectorType: "lnd" | "lndhub"
-) {
-  const parentClass = parentClasses[connectorType];
-
-  return class extends parentClass {
-    _port: unknown;
+export default function Native<TBase extends Constructor>(Base: TBase) {
+  return class extends Base {
+    _port: browser.Runtime.Port | undefined | null;
 
     get port() {
       if (this._port) {
         return this._port;
       } else {
         this.connectNativeCompanion();
-        return this._port;
+        return this._port as unknown as browser.Runtime.Port;
       }
     }
 

@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
 
+import connectorRoutes from "../connectorRoutes";
+
 import DevMenu from "../../components/DevMenu";
 import Steps from "../../components/Steps";
 import Intro from "../../screens/Onboard/Intro";
 import SetPassword from "../../screens/Onboard/SetPassword";
 import ChooseConnector from "../../screens/Onboard/ChooseConnector";
 import TestConnection from "../../screens/Onboard/TestConnection";
-import ConnectLnd from "../../screens/Onboard/ConnectLnd";
-import ConnectLndHub from "../../screens/Onboard/ConnectLndHub";
-import ConnectLnbits from "../../screens/Onboard/ConnectLnbits";
-import NewWallet from "../../screens/Onboard/NewWallet";
 
 const routes = [
   { path: "/", element: <Intro />, name: "Welcome" },
@@ -19,11 +17,16 @@ const routes = [
     path: "/choose-connector",
     name: "Connect to Lightning",
     children: [
-      { index: true, element: <ChooseConnector /> },
-      { path: "lnd", element: <ConnectLnd /> },
-      { path: "lnd-hub", element: <ConnectLndHub /> },
-      { path: "lnbits", element: <ConnectLnbits /> },
-      { path: "create-wallet", element: <NewWallet /> },
+      {
+        index: true,
+        element: (
+          <ChooseConnector
+            title="Do you have a lightning wallet?"
+            description="You need to first connect to a lightning wallet so that you can interact with your favorite websites that accept bitcoin lightning payments!"
+          />
+        ),
+      },
+      ...connectorRoutes,
     ],
   },
   { path: "/test-connection", element: <TestConnection />, name: "Done" },

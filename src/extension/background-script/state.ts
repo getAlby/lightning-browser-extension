@@ -8,7 +8,7 @@ import type Connector from "./connectors/connector.interface";
 type BrowserStorageKeys = "settings" | "accounts" | "currentAccountId";
 
 interface Account {
-  connector: "native" | "lnd" | "lndhub" | "lnbits";
+  connector: keyof typeof connectors;
   config: string;
 }
 
@@ -19,7 +19,10 @@ interface State {
   accounts: Record<string, Account>;
   currentAccountId: string | null;
   password: string | null;
+  getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
+  lock: () => Promise<void>;
+  init: () => Promise<void>;
   saveToStorage: () => Promise<void>;
 }
 
@@ -57,25 +60,20 @@ const state = createState<State>((set, get) => ({
   },
   getConnector: async () => {
     if (get().connector) {
-      return get().connector;
+      return get().connector as Connector;
     }
-    const currentAccountId = get().currentAccountId;
-    let account = null;
-    if (currentAccountId) {
-      account = get().accounts[currentAccountId];
-    }
+    const currentAccountId = get().currentAccountId as string;
+    const account = get().accounts[currentAccountId];
 
-    let password = null;
-    if ((password = get().password) && account) {
-      const config = decryptData(account.config, password);
+    const password = get().password as string;
+    const config = decryptData(account.config, password);
 
-      const connector = new connectors[account.connector](config);
-      await connector.init();
+    const connector = new connectors[account.connector](config);
+    await connector.init();
 
-      set({ connector: connector });
+    set({ connector: connector });
 
-      return connector;
-    }
+    return connector;
   },
   lock: async () => {
     const connector = get().connector;
