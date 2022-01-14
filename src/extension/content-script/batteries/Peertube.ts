@@ -17,7 +17,7 @@ interface PeertubeRes {
 }
 
 // add more peertube URLs to this regex
-const urlMatcher = /^https?:\/\/(bitcointv\.com)\/w\/.*/i;
+const urlMatcher = /^https?:\/\/(bitcointv\.com|www\.bitcast\.online)\/w\/.*/i;
 
 const battery = (): void => {
   const hostMatch = document.location.toString().match(urlMatcher);
