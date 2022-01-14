@@ -131,11 +131,10 @@ function LNURLPay(props: Props) {
             alert(
               `Not implemented yet. Please submit an issue to support success action: ${successAction.tag}`
             );
-            window.close();
             break;
         }
       } else {
-        window.close();
+        setSuccessAction({ tag: "message", message: "Success, payment sent!" });
       }
     } catch (e) {
       console.log(e);
