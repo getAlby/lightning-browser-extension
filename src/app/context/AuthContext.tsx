@@ -1,4 +1,6 @@
 import { useState, useEffect, createContext, useContext } from "react";
+import browser from "webextension-polyfill";
+
 import utils from "../../common/lib/utils";
 import api from "../../common/lib/api";
 
@@ -38,16 +40,34 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
-  const getAccountInfo = (accountId?: string) => {
+  const getAccountInfo = async (accountId?: string) => {
     const id = accountId || account?.id;
     if (!id) return;
     // set the account id to indicate the unlock for other components
     // also clears current info which causes a loading indicator for the alias/balance
     setAccount({ id });
+
+    // Load account info from cache.
+    let accountsCache: { [id: string]: Account } = {};
+    const result = await browser.storage.local.get(["accounts"]);
+    if (result.accounts) {
+      accountsCache = JSON.parse(result.accounts);
+      if (accountsCache[id]) {
+        setAccount(accountsCache[id]);
+      }
+    }
+
+    // Update account info with most recent data, save to cache.
     return api.getAccountInfo().then((response) => {
       const { alias } = response.info;
       const balance = parseInt(response.balance.balance); // TODO: handle amounts
       setAccount({ id, alias, balance });
+      browser.storage.local.set({
+        accounts: JSON.stringify({
+          ...accountsCache,
+          [id]: { id, alias, balance },
+        }),
+      });
     });
   };
 
