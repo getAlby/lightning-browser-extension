@@ -7,11 +7,13 @@ interface PeertubeRes {
   channel: {
     displayName: string;
     description: string;
+    support: string | null;
     avatar: {
       path: string;
     };
   };
   description: string;
+  support: string | null;
 }
 
 // add more peertube URLs to this regex
@@ -44,9 +46,10 @@ const battery = (): void => {
       const channelDescription = data.channel.description;
       const icon = `https://${host}${data.channel.avatar.path}`;
       const episodeDescription = data.description;
+      const support = `${data.support} ${data.channel.support}`;
 
       // we search in the episode or channel description for lightning data
-      const text = `${episodeDescription} ${channelDescription}`;
+      const text = `${episodeDescription} ${channelDescription} ${support}`;
 
       let match;
       let recipient;
