@@ -42,7 +42,6 @@ function ConfirmPayment(props) {
         { origin: originRef.current }
       );
       msg.reply(response);
-      window.close();
     } catch (e) {
       console.error(e);
       alert(`Error: ${e.message}`);
