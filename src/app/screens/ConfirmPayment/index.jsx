@@ -42,7 +42,6 @@ function ConfirmPayment(props) {
         { origin: originRef.current }
       );
       msg.reply(response);
-      window.close();
     } catch (e) {
       console.error(e);
       alert(`Error: ${e.message}`);
@@ -105,11 +104,11 @@ function ConfirmPayment(props) {
           <Transition
             show={rememberMe}
             enter="transition duration-100 ease-out"
-            enterFrom="transform scale-95 opacity-0"
-            enterTo="transform scale-100 opacity-100"
+            enterFrom="scale-95 opacity-0"
+            enterTo="scale-100 opacity-100"
             leave="transition duration-75 ease-out"
-            leaveFrom="transform scale-100 opacity-100"
-            leaveTo="transform scale-95 opacity-0"
+            leaveFrom="scale-100 opacity-100"
+            leaveTo="scale-95 opacity-0"
           >
             <p className="mt-4 mb-3 text-gray-500 text-sm">
               You may set a balance to not be asked for confirmation on payments
