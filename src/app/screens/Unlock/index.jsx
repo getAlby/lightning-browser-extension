@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";
 import { useAuth } from "../../context/AuthContext";
+import AlbyLogo from "../../components/AlbyLogo";
 import Button from "../../components/Button";
 import Input from "../../components/Form/Input";
 
@@ -41,11 +42,9 @@ function Unlock() {
   return (
     <div className="p-8 bg-white dark:bg-gray-800 shadow-lg">
       <div className="flex justify-center">
-        <img
-          className="w-40"
-          src="assets/icons/Alby-logo-figure-full.svg"
-          alt="logo"
-        />
+        <div className="w-40 dark:text-white">
+          <AlbyLogo />
+        </div>
       </div>
       <p className="text-center text-xl font-normal font-serif mt-8 mb-5 dark:text-white">
         Unlock to continue
