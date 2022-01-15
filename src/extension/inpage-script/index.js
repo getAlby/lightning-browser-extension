@@ -43,6 +43,10 @@ if (document) {
     if (paymentRequest && paymentRequest.startsWith("lnurl")) {
       lnurl = paymentRequest.replace(/^lnurl[pwc]:/i, ""); // replace potential scheme. the different lnurl types are handled in the lnurl action (by checking the type in the LNURL response)
     }
+    // it could be a lightning address behind a lightning: link
+    if (paymentRequest && paymentRequest.match(/(\S+@\S+)/)) {
+      lnurl = paymentRequest.match(/(\S+@\S+)/)[1];
+    }
 
     window.webln.enable().then((response) => {
       if (!response.enabled) {
