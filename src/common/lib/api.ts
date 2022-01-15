@@ -1,5 +1,7 @@
+import browser from "webextension-polyfill";
+
 import utils from "./utils";
-import type { SettingsStorage } from "../../types";
+import type { Account, SettingsStorage } from "../../types";
 
 interface AccountInfoRes {
   currentAccountId: string;
@@ -24,6 +26,38 @@ interface UnlockRes {
 }
 
 export const getAccountInfo = () => utils.call<AccountInfoRes>("accountInfo");
+/**
+ * stale-while-revalidate get account info
+ * @param id - account id
+ * @param callback - will be called first with cached (stale) data first, then with fresh data.
+ */
+export const swrGetAccountInfo = async (
+  id: string,
+  callback: (account: Account) => void
+) => {
+  // Load account info from cache.
+  let accountsCache: { [id: string]: Account } = {};
+  const result = await browser.storage.local.get(["accounts"]);
+  if (result.accounts) {
+    accountsCache = JSON.parse(result.accounts);
+    if (accountsCache[id]) {
+      callback(accountsCache[id]);
+    }
+  }
+
+  // Update account info with most recent data, save to cache.
+  return getAccountInfo().then((response) => {
+    const { alias } = response.info;
+    const balance = parseInt(response.balance.balance); // TODO: handle amounts
+    browser.storage.local.set({
+      accounts: JSON.stringify({
+        ...accountsCache,
+        [id]: { id, alias, balance },
+      }),
+    });
+    callback({ id, alias, balance });
+  });
+};
 export const getSettings = () => utils.call<SettingsStorage>("getSettings");
 export const getStatus = () => utils.call<StatusRes>("status");
 export const setSetting = (
@@ -40,5 +74,8 @@ export default {
   getSettings,
   getStatus,
   setSetting,
+  swr: {
+    getAccountInfo: swrGetAccountInfo,
+  },
   unlock,
 };
