@@ -11,7 +11,7 @@ interface IAllowance {
   totalBudget: number;
   remainingBudget: number;
   lastPaymentAt: string;
-  lnurlAuth: string;
+  lnurlAuth: boolean;
   createdAt: string;
 }
 

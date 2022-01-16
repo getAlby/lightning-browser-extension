@@ -33,6 +33,7 @@ const enable = async (message, sender) => {
             enabled: true,
             lastPaymentAt: 0,
             totalBudget: 0,
+						lnurlAuth: false,
             remainingBudget: 0,
           });
         }

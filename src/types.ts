@@ -122,6 +122,7 @@ export interface Allowance {
   percentage: string;
   remainingBudget: number;
   totalBudget: number;
+	lnurlAuth: boolean;
   usedBudget: number;
 }
 
