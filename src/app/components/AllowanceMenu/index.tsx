@@ -6,6 +6,7 @@ import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import utils from "../../../common/lib/utils";
 
 import Button from "../Button";
+import Checkbox from "../Form/Checkbox";
 import Menu from "../Menu";
 import CurrencyInput from "../Form/CurrencyInput";
 
@@ -105,7 +106,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             />
           </div>
           <div className="mt-4">
-            <input type="checkbox" id="lnurl-auth" name="lnurl-auth" />
+            <Checkbox id="lnurl_auth" name="lnurl-auth" />
             <label htmlFor="lnurl-auth" className="dark:text-white ml-2">
               Enable website login
             </label>
