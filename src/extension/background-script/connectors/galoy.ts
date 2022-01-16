@@ -75,11 +75,7 @@ class Galoy implements Connector {
       `,
     };
     return this.request(query).then(({ data, errors }) => {
-      const errs = errors
-        ? errors.map((error: GaloyError) => {
-            return { message: error.message };
-          })
-        : data.me.errors;
+      const errs = errors || data.me.errors;
       if (errs && errs.length)
         return {
           error: errs[0].message || JSON.stringify(errs),
@@ -124,11 +120,7 @@ class Galoy implements Connector {
     });
 
     return this.request(query).then(({ data, errors }) => {
-      const errs = errors
-        ? errors.map((error: GaloyError) => {
-            return { message: error.message };
-          })
-        : data.lnInvoicePaymentSend.errors;
+      const errs = errors || data.lnInvoicePaymentSend.errors;
       if (errs && errs.length)
         return {
           error: errs[0].message || JSON.stringify(errs),
@@ -218,11 +210,7 @@ class Galoy implements Connector {
       });
 
       result = await this.request(query).then(({ data, errors }) => {
-        const errs = errors
-          ? errors.map((error: GaloyError) => {
-              return { message: error.message };
-            })
-          : data.me.errors;
+        const errs = errors || data.me.errors;
         if (errs && errs.length)
           return {
             error: errs[0].message || JSON.stringify(errs),
@@ -310,11 +298,7 @@ class Galoy implements Connector {
       },
     };
     return this.request(query).then(({ data, errors }) => {
-      const errs = errors
-        ? errors.map((error: GaloyError) => {
-            return { message: error.message };
-          })
-        : data.lnInvoiceCreate.errors;
+      const errs = errors || data.lnInvoiceCreate.errors;
       if (errs && errs.length)
         return {
           error: errs[0].message || JSON.stringify(errs),
@@ -394,10 +378,6 @@ type GaloyWallet = {
       };
     }[];
   };
-};
-
-type GaloyError = {
-  message?: string;
 };
 
 export default Galoy;

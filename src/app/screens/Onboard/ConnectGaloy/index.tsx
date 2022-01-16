@@ -56,11 +56,7 @@ export default function ConnectGaloy() {
       } = await axios.post(url, query, {
         headers: defaultHeaders,
       });
-      const errs = errors
-        ? errors.map((error: GaloyError) => {
-            return { message: error.message };
-          })
-        : data.userRequestAuthCode.errors;
+      const errs = errors || data.userRequestAuthCode.errors;
       if (errs && errs.length) {
         console.error(errs);
         const errMessage = errs[0].message;
@@ -263,7 +259,3 @@ export default function ConnectGaloy() {
     </div>
   );
 }
-
-type GaloyError = {
-  message?: string;
-};
