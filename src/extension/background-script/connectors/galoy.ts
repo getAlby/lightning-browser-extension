@@ -40,10 +40,20 @@ class Galoy implements Connector {
         }
       `,
     };
-    return this.request(query).then((data) => {
-      const alias = data.data.me.username
-        ? data.data.me.username.substr(0, 10)
-        : data.data.me.id.substr(0, 8);
+    return this.request(query).then(({ data, errors }) => {
+      const errs = errors
+        ? errors.map((error: GaloyError) => {
+            return { message: error.message };
+          })
+        : data.me.errors;
+      if (errs && errs.length)
+        return {
+          error: errs[0].message || JSON.stringify(errs),
+        };
+
+      const alias = data.me.username
+        ? data.me.username.substr(0, 10)
+        : data.me.id.substr(0, 8);
       return {
         data: {
           alias,
