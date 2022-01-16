@@ -14,7 +14,7 @@ type Props = {
   allowance: {
     id: string;
     totalBudget: number;
-		lnurlAuth: boolean;
+    lnurlAuth: boolean;
   };
   onEdit?: () => void;
   onDelete?: () => void;
@@ -23,11 +23,11 @@ type Props = {
 function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [budget, setBudget] = useState<number | undefined>(0);
-	const [login, setLogin] = useState<boolean>(false);
+  const [login, setLogin] = useState<boolean>(false);
 
   function openModal() {
     setBudget(allowance.totalBudget);
-		setLogin(allowance.lnurlAuth);
+    setLogin(allowance.lnurlAuth);
     setIsOpen(true);
   }
 
@@ -39,7 +39,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
     await utils.call("updateAllowance", {
       id: parseInt(allowance.id),
       totalBudget: budget,
-			lnurlAuth: login,
+      lnurlAuth: login,
     });
     onEdit && onEdit();
     closeModal();
@@ -110,9 +110,14 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             />
           </div>
           <div className="mt-4">
-            <Checkbox id="lnurl_auth" name="lnurl-auth" checked={login} onChange={() => {
-							setLogin(!login);
-						}}/>
+            <Checkbox
+              id="lnurl_auth"
+              name="lnurl-auth"
+              checked={login}
+              onChange={() => {
+                setLogin(!login);
+              }}
+            />
             <label htmlFor="lnurl-auth" className="dark:text-white ml-2">
               Enable website login
             </label>

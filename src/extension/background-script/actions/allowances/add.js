@@ -5,7 +5,7 @@ const add = async (message, sender) => {
   const name = message.args.name;
   const imageURL = message.args.imageURL;
   const totalBudget = message.args.totalBudget;
-	const lnurlAuth = message.args.lnurlAuth;
+  const lnurlAuth = message.args.lnurlAuth;
 
   const allowance = await db.allowances
     .where("host")
@@ -18,7 +18,7 @@ const add = async (message, sender) => {
       imageURL: imageURL,
       enabled: true,
       totalBudget: totalBudget,
-			lnurlAuth: lnurlAuth,
+      lnurlAuth: lnurlAuth,
       remainingBudget: totalBudget,
     });
   } else {
@@ -28,7 +28,7 @@ const add = async (message, sender) => {
       imageURL: imageURL,
       enabled: true,
       totalBudget: totalBudget,
-			lnurlAuth: lnurlAuth,
+      lnurlAuth: lnurlAuth,
       remainingBudget: totalBudget,
       lastPaymentAt: 0,
     });
