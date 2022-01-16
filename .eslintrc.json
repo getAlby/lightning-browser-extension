@@ -5,7 +5,7 @@
 		"plugin:react/recommended",
 		"plugin:react-hooks/recommended",
 		"plugin:react/jsx-runtime",
-		"plugin:prettier/recommended"
+		"prettier"
 	],
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
