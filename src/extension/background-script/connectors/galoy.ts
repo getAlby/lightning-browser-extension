@@ -68,16 +68,19 @@ class Galoy implements Connector {
         }
       `,
     };
-    return this.request(query).then((data) => {
-      if (data.error || data.errors) {
-        const error = data.error || data.errors;
-        const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
+    return this.request(query).then(({ data, errors }) => {
+      const errs = errors
+        ? errors.map((error: GaloyError) => {
+            return { message: error.message };
+          })
+        : data.me.errors;
+      if (errs && errs.length)
         return {
-          error: errMessage || JSON.stringify(error),
+          error: errs[0].message || JSON.stringify(errs),
         };
-      }
+
       const { defaultWalletId, wallets }: GaloyDefaultAccount =
-        data.data.me.defaultAccount;
+        data.me.defaultAccount;
       const defaultWallet = wallets.find((w) => w.id === defaultWalletId);
       return defaultWallet
         ? {
@@ -114,18 +117,18 @@ class Galoy implements Connector {
       request: args.paymentRequest,
     });
 
-    return this.request(query).then((data) => {
-      if (data.error || data.errors) {
-        const error = data.error || data.errors;
-        const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
+    return this.request(query).then(({ data, errors }) => {
+      const errs = errors
+        ? errors.map((error: GaloyError) => {
+            return { message: error.message };
+          })
+        : data.lnInvoicePaymentSend.errors;
+      if (errs && errs.length)
         return {
-          error: errMessage || JSON.stringify(error),
+          error: errs[0].message || JSON.stringify(errs),
         };
-      }
-      if (data.data.lnInvoicePaymentSend.errors?.[0]?.message) {
-        return { error: data.data.lnInvoicePaymentSend.errors[0].message };
-      }
-      switch (data.data.lnInvoicePaymentSend.status) {
+
+      switch (data.lnInvoicePaymentSend.status) {
         case "ALREADY_PAID":
           return {
             error: "Invoice was already paid.",
@@ -208,16 +211,18 @@ class Galoy implements Connector {
         after: lastSeenCursor,
       });
 
-      result = await this.request(query).then((data) => {
-        if (data.error || data.errors) {
-          const error = data.error || data.errors;
-          const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
+      result = await this.request(query).then(({ data, errors }) => {
+        const errs = errors
+          ? errors.map((error: GaloyError) => {
+              return { message: error.message };
+            })
+          : data.me.errors;
+        if (errs && errs.length)
           return {
-            error: errMessage || JSON.stringify(data.error),
+            error: errs[0].message || JSON.stringify(errs),
           };
-        }
 
-        const account: GaloyTransactionsAccount = data.data.me.defaultAccount;
+        const account: GaloyTransactionsAccount = data.me.defaultAccount;
         const wallet = account.wallets.find(
           (w) => w.id === account.defaultWalletId
         );
@@ -298,21 +303,21 @@ class Galoy implements Connector {
         },
       },
     };
-    return this.request(query).then((data) => {
-      if (data.error || data.errors) {
-        const error = data.error || data.errors;
-        const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
+    return this.request(query).then(({ data, errors }) => {
+      const errs = errors
+        ? errors.map((error: GaloyError) => {
+            return { message: error.message };
+          })
+        : data.lnInvoiceCreate.errors;
+      if (errs && errs.length)
         return {
-          error: errMessage || JSON.stringify(error),
+          error: errs[0].message || JSON.stringify(errs),
         };
-      }
-      if (data.data.lnInvoiceCreate.errors?.[0]?.message) {
-        return { error: data.data.lnInvoiceCreate.errors[0].message };
-      }
+
       return {
         data: {
-          paymentRequest: data.data.lnInvoiceCreate.invoice.paymentRequest,
-          rHash: data.data.lnInvoiceCreate.invoice.paymentHash,
+          paymentRequest: data.lnInvoiceCreate.invoice.paymentRequest,
+          rHash: data.lnInvoiceCreate.invoice.paymentHash,
         },
       };
     });
@@ -383,6 +388,10 @@ type GaloyWallet = {
       };
     }[];
   };
+};
+
+type GaloyError = {
+  message?: string;
 };
 
 export default Galoy;

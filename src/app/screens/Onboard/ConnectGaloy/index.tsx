@@ -51,21 +51,25 @@ export default function ConnectGaloy() {
     };
 
     try {
-      const { data } = await axios.post(url, query, {
+      const {
+        data: { data, errors },
+      } = await axios.post(url, query, {
         headers: defaultHeaders,
       });
-      if (data.error || data.errors) {
-        const error = data.error || data.errors;
-        console.error(error);
-        const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
+      const errs = errors
+        ? errors.map((error: GaloyError) => {
+            return { message: error.message };
+          })
+        : data.userRequestAuthCode.errors;
+      if (errs && errs.length) {
+        console.error(errs);
+        const errMessage = errs[0].message;
         const alertMsg = `Failed to request a SMS code${
           errMessage ? `: ${errMessage}` : ""
         }`;
         alert(alertMsg);
-      } else if (data.data.userRequestAuthCode.errors.length > 0) {
-        alert(data.data.userRequestAuthCode.errors[0].message);
       } else {
-        setSmsCodeRequested(data.data.userRequestAuthCode.success);
+        setSmsCodeRequested(data.userRequestAuthCode.success);
       }
     } catch (e: unknown) {
       console.error(e);
@@ -259,3 +263,7 @@ export default function ConnectGaloy() {
     </div>
   );
 }
+
+type GaloyError = {
+  message?: string;
+};
