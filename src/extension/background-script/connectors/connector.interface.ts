@@ -23,9 +23,11 @@ export type MakeInvoiceResponse =
     }
   | { error: string };
 
-export interface GetInfoResponse {
-  data: WebLNNode;
-}
+export type GetInfoResponse =
+  | {
+      data: WebLNNode;
+    }
+  | { error: string };
 
 export type GetBalanceResponse =
   | {
@@ -53,12 +55,14 @@ export interface CheckPaymentArgs {
   paymentHash: string;
 }
 
-export interface CheckPaymentResponse {
-  data: {
-    paid: boolean;
-    preimage?: string;
-  };
-}
+export type CheckPaymentResponse =
+  | {
+      data: {
+        paid: boolean;
+        preimage?: string;
+      };
+    }
+  | { data: undefined; error: string };
 
 export interface SignMessageArgs {
   message: string;

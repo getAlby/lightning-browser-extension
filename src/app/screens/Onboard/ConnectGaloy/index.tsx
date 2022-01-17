@@ -6,7 +6,7 @@ import Button from "../../../components/Button";
 
 import utils from "../../../../common/lib/utils";
 
-const url = process.env.GALOY_URL || "https://api.staging.galoy.io/graphql/";
+const url = process.env.GALOY_URL || "https://api.mainnet.galoy.io/graphql/";
 const defaultHeaders = {
   Accept: "application/json",
   "Access-Control-Allow-Origin": "*",
@@ -51,20 +51,22 @@ export default function ConnectGaloy() {
     };
 
     try {
-      const { data } = await axios.post<any>(url, query, {
+      const {
+        data: { data, errors },
+      } = await axios.post(url, query, {
         headers: defaultHeaders,
       });
-      if (data.data.userRequestAuthCode.errors.length > 0) {
-        alert(data.data.userRequestAuthCode.errors[0].message);
-      }
-      if (data.error) {
-        console.error(data.error);
-        const alertMsg = data.error?.errors?.[0]?.message
-          ? `Failed to request a SMS code: ${data.error.errors[0].message}`
-          : `Failed to request a SMS code`;
+      const errs = errors || data.userRequestAuthCode.errors;
+      if (errs && errs.length) {
+        console.error(errs);
+        const errMessage = errs[0].message;
+        const alertMsg = `Failed to request a SMS code${
+          errMessage ? `: ${errMessage}` : ""
+        }`;
         alert(alertMsg);
+      } else {
+        setSmsCodeRequested(data.userRequestAuthCode.success);
       }
-      setSmsCodeRequested(data.data.userRequestAuthCode.success);
     } catch (e: unknown) {
       console.error(e);
       if (e instanceof Error) {
@@ -107,36 +109,37 @@ export default function ConnectGaloy() {
         `,
     };
     try {
-      const authResponse = await axios.post<any>(url, authQuery, {
+      const { data: authData } = await axios.post(url, authQuery, {
         headers: defaultHeaders,
       });
-      if (authResponse.data.data.userLogin.errors.length > 0) {
-        throw new Error(authResponse.data.data.userLogin.errors[0].message);
-      }
-      if (authResponse.data.error) {
-        const errorMsg = authResponse.data.error.errors?.[0]?.message
-          ? `Failed to login with SMS code: ${authResponse.data.error.errors[0].message}`
-          : `Failed to login with SMS code`;
+      if (authData.error || authData.errors) {
+        const error = authData.error || authData.errors;
+        const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
+        const errorMsg = `Failed to login with SMS code${
+          errMessage ? `: ${errMessage}` : ""
+        }`;
         throw new Error(errorMsg);
       }
-      const authToken = authResponse.data.data.userLogin.authToken as string;
-      const meResponse = await axios.post<any>(url, meQuery, {
+      if (authData.data.userLogin.errors.length > 0) {
+        throw new Error(authData.data.userLogin.errors[0].message);
+      }
+      const authToken = authData.data.userLogin.authToken as string;
+
+      const { data: meData } = await axios.post(url, meQuery, {
         headers: {
           ...defaultHeaders,
           Authorization: `Bearer ${authToken}`,
         },
       });
-
-      const walletId =
-        meResponse?.data?.data?.me?.defaultAccount?.defaultWalletId;
-      if (walletId) {
-        saveAccount({ authToken, walletId });
-      } else {
-        console.error(meResponse);
-        const alertMsg = meResponse?.data?.error?.errors?.[0]?.message
-          ? `Setup failed ${meResponse.data.error.errors[0].message}`
-          : `Setup failed`;
+      if (meData.error || meData.errors) {
+        const error = meData.error || meData.errors;
+        console.error(error);
+        const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
+        const alertMsg = `Setup failed${errMessage ? `: ${errMessage}` : ""}`;
         alert(alertMsg);
+      } else {
+        const walletId = meData.data.me.defaultAccount.defaultWalletId;
+        saveAccount({ authToken, walletId });
       }
     } catch (e: unknown) {
       console.error(e);

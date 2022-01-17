@@ -2,12 +2,13 @@ import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
 
 import { AuthProvider } from "../../context/AuthContext";
 import { useAuth } from "../../context/AuthContext";
+import connectorRoutes from "../connectorRoutes";
+
 import RequireAuth from "../RequireAuth";
 import Container from "../../components/Container";
 import Navbar from "../../components/Navbar";
 import Publishers from "../../screens/Publishers";
 import Publisher from "../../screens/Publisher";
-import ChooseConnector from "../../screens/Options/ChooseConnector";
 import TestConnection from "../../screens/Options/TestConnection";
 import Send from "../../screens/Send";
 import ConfirmPayment from "../../screens/ConfirmPayment";
@@ -15,6 +16,7 @@ import Receive from "../../screens/Receive";
 import LNURLPay from "../../screens/LNURLPay";
 import Settings from "../../screens/Settings";
 import Unlock from "../../screens/Unlock";
+import ChooseConnector from "../../screens/Onboard/ChooseConnector";
 
 function Options() {
   return (
@@ -40,13 +42,27 @@ function Options() {
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="settings" element={<Settings />} />
             <Route
-              path="accounts/new/*"
+              path="accounts/new"
               element={
                 <Container>
-                  <ChooseConnector />
+                  <Outlet />
                 </Container>
               }
-            />
+            >
+              <Route
+                index
+                element={
+                  <ChooseConnector title="Add a new lightning account" />
+                }
+              />
+              {connectorRoutes.map((connectorRoute) => (
+                <Route
+                  key={connectorRoute.path}
+                  path={connectorRoute.path}
+                  element={connectorRoute.element}
+                />
+              ))}
+            </Route>
             <Route
               path="test-connection"
               element={

@@ -76,10 +76,12 @@ const lnurl = {
   },
   verifyInvoice({
     paymentInfo,
+    payerdata,
     metadata,
     amount,
   }: {
     paymentInfo: LNURLPaymentInfo;
+    payerdata: undefined | Record<string, string>;
     metadata: string;
     amount: number;
   }) {
@@ -88,7 +90,10 @@ const lnurl = {
     });
     let metadataHash = "";
     try {
-      metadataHash = sha256(metadata).toString(Hex);
+      const dataToHash = payerdata
+        ? metadata + JSON.stringify(payerdata)
+        : metadata;
+      metadataHash = sha256(dataToHash).toString(Hex);
     } catch (e) {
       console.error();
     }

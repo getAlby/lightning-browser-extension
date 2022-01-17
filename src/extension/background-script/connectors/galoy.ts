@@ -40,10 +40,16 @@ class Galoy implements Connector {
         }
       `,
     };
-    return this.request(query).then((data) => {
-      const alias = data.data.me.username
-        ? data.data.me.username.substr(0, 10)
-        : data.data.me.id.substr(0, 8);
+    return this.request(query).then(({ data, errors }) => {
+      const errs = errors || data.me.errors;
+      if (errs && errs.length)
+        return {
+          error: errs[0].message || JSON.stringify(errs),
+        };
+
+      const alias = data.me.username
+        ? data.me.username.substr(0, 10)
+        : data.me.id.substr(0, 8);
       return {
         data: {
           alias,
@@ -68,14 +74,15 @@ class Galoy implements Connector {
         }
       `,
     };
-    return this.request(query).then((data) => {
-      if (data.error) {
+    return this.request(query).then(({ data, errors }) => {
+      const errs = errors || data.me.errors;
+      if (errs && errs.length)
         return {
-          error: data.error?.errors?.[0]?.message || JSON.stringify(data.error),
+          error: errs[0].message || JSON.stringify(errs),
         };
-      }
+
       const { defaultWalletId, wallets }: GaloyDefaultAccount =
-        data.data.me.defaultAccount;
+        data.me.defaultAccount;
       const defaultWallet = wallets.find((w) => w.id === defaultWalletId);
       return defaultWallet
         ? {
@@ -108,36 +115,151 @@ class Galoy implements Connector {
       },
     };
 
-    const { tokens: amountInSats, payment: paymentHash } = parsePaymentRequest({
+    const { tokens: amountInSats, id: paymentHash } = parsePaymentRequest({
       request: args.paymentRequest,
     });
 
-    return this.request(query).then((data) => {
-      if (data.data.lnInvoicePaymentSend.errors?.[0]?.message) {
-        return { error: data.data.lnInvoicePaymentSend.errors[0].message };
-      }
-      if (data.error) {
+    return this.request(query).then(({ data, errors }) => {
+      const errs = errors || data.lnInvoicePaymentSend.errors;
+      if (errs && errs.length)
         return {
-          error: data.error?.errors?.[0]?.message || JSON.stringify(data.error),
+          error: errs[0].message || JSON.stringify(errs),
         };
+
+      switch (data.lnInvoicePaymentSend.status) {
+        case "ALREADY_PAID":
+          return {
+            error: "Invoice was already paid.",
+          };
+        case "FAILURE":
+          return {
+            error: "Payment failed.",
+          };
+        case "PENDING":
+          return {
+            data: {
+              preimage: "No preimage, payment still pending",
+              paymentHash,
+              route: { total_amt: amountInSats, total_fees: 0 },
+            },
+          };
+        default:
+          return {
+            data: {
+              preimage: "No preimage received",
+              paymentHash,
+              route: { total_amt: amountInSats, total_fees: 0 },
+            },
+          };
       }
-      return {
-        data: {
-          preimage: "No preimage received",
-          paymentHash,
-          route: { total_amt: amountInSats, total_fees: 0 },
-        },
-      };
     });
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    return {
-      data: {
-        paid: false,
-        preimage: "",
-      },
+    const TRANSACTIONS_PER_PAGE = 20;
+
+    const query = {
+      query: `
+        query transactionsList($first: Int, $after: String) {
+          me {
+            defaultAccount {
+              defaultWalletId
+              wallets {
+                id
+                walletCurrency
+                transactions(first: $first, after: $after) {
+                  pageInfo {
+                      hasNextPage
+                  }
+                  edges {
+                    cursor
+                    node {
+                      status
+                      initiationVia {
+                        ... on InitiationViaLn {
+                            paymentHash
+                        }
+                      }
+                      settlementVia {
+                        ... on SettlementViaLn {
+                            paymentSecret
+                        }
+                        ... on SettlementViaIntraLedger {
+                          __typename
+                          counterPartyWalletId
+                          counterPartyUsername
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `,
+      variables: "",
     };
+
+    let lastSeenCursor = null;
+    let result: true | CheckPaymentResponse = true;
+    while (result === true) {
+      query.variables = JSON.stringify({
+        first: TRANSACTIONS_PER_PAGE,
+        after: lastSeenCursor,
+      });
+
+      result = await this.request(query).then(({ data, errors }) => {
+        const errs = errors || data.me.errors;
+        if (errs && errs.length)
+          return {
+            error: errs[0].message || JSON.stringify(errs),
+          };
+
+        const account: GaloyTransactionsAccount = data.me.defaultAccount;
+        const wallet = account.wallets.find(
+          (w) => w.id === account.defaultWalletId
+        );
+
+        // There should always be a wallet that corresponds to 'defaultWalletId'
+        if (wallet === undefined) {
+          return {
+            error: "Bad data received.",
+          };
+        }
+
+        if (wallet.walletCurrency !== "BTC") {
+          return {
+            error: "Non-BTC wallets not implemented yet.",
+          };
+        }
+
+        const txEdges = wallet.transactions.edges;
+        const tx = txEdges.find(
+          (tx) => tx.node.initiationVia.paymentHash === args.paymentHash
+        );
+        if (tx !== undefined) {
+          return {
+            data: {
+              paid: tx.node.status === "SUCCESS",
+              preimage: tx.node.settlementVia.__typename
+                ? "Payment executed internally"
+                : tx.node.settlementVia.paymentSecret || "No preimage received",
+            },
+          };
+        }
+
+        if (!wallet.transactions.pageInfo.hasNextPage) {
+          return {
+            error: `Transaction not found for payment hash: ${args.paymentHash}`,
+          };
+        }
+
+        lastSeenCursor = txEdges[txEdges.length - 1].cursor;
+        return true;
+      });
+    }
+    return result;
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
@@ -175,19 +297,17 @@ class Galoy implements Connector {
         },
       },
     };
-    return this.request(query).then((data) => {
-      if (data.data.lnInvoiceCreate.errors?.[0]?.message) {
-        return { error: data.data.lnInvoiceCreate.errors[0].message };
-      }
-      if (data.error) {
+    return this.request(query).then(({ data, errors }) => {
+      const errs = errors || data.lnInvoiceCreate.errors;
+      if (errs && errs.length)
         return {
-          error: data.error?.errors?.[0]?.message || JSON.stringify(data.error),
+          error: errs[0].message || JSON.stringify(errs),
         };
-      }
+
       return {
         data: {
-          paymentRequest: data.data.lnInvoiceCreate.invoice.paymentRequest,
-          rHash: data.data.lnInvoiceCreate.invoice.paymentHash,
+          paymentRequest: data.lnInvoiceCreate.invoice.paymentRequest,
+          rHash: data.lnInvoiceCreate.invoice.paymentHash,
         },
       };
     });
@@ -224,6 +344,40 @@ type GaloyDefaultAccount = {
     id: string;
     balance: number;
   }[];
+};
+
+type GaloyTransactionsAccount = {
+  defaultWalletId: string;
+  wallets: GaloyWallet[];
+};
+
+type GaloyWallet = {
+  id: string;
+  walletCurrency: string;
+  transactions: {
+    pageInfo: {
+      hasNextPage: boolean;
+    };
+    edges: {
+      cursor: string;
+      node: {
+        status: "FAILURE" | "PENDING" | "SUCCESS";
+        initiationVia: {
+          paymentHash: string;
+        };
+        settlementVia:
+          | {
+              __typename: undefined;
+              paymentSecret: string;
+            }
+          | {
+              __typename: "SettlementViaIntraledger";
+              counterPartyWalletId: string;
+              counterPartyUsername: string;
+            };
+      };
+    }[];
+  };
 };
 
 export default Galoy;
