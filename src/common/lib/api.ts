@@ -33,29 +33,35 @@ export const getAccountInfo = () => utils.call<AccountInfoRes>("accountInfo");
  */
 export const swrGetAccountInfo = async (
   id: string,
-  callback: (account: Account) => void
-) => {
+  callback?: (account: Account) => void
+): Promise<Account> => {
   // Load account info from cache.
   let accountsCache: { [id: string]: Account } = {};
   const result = await browser.storage.local.get(["accounts"]);
   if (result.accounts) {
     accountsCache = JSON.parse(result.accounts);
-    if (accountsCache[id]) {
-      callback(accountsCache[id]);
-    }
   }
 
-  // Update account info with most recent data, save to cache.
-  return getAccountInfo().then((response) => {
-    const { alias } = response.info;
-    const balance = parseInt(response.balance.balance); // TODO: handle amounts
-    browser.storage.local.set({
-      accounts: JSON.stringify({
-        ...accountsCache,
-        [id]: { id, alias, balance },
-      }),
+  return new Promise((resolve) => {
+    if (accountsCache[id]) {
+      if (callback) callback(accountsCache[id]);
+      resolve(accountsCache[id]);
+    }
+
+    // Update account info with most recent data, save to cache.
+    getAccountInfo().then((response) => {
+      const { alias } = response.info;
+      const balance = parseInt(response.balance.balance); // TODO: handle amounts
+      const account = { id, alias, balance };
+      browser.storage.local.set({
+        accounts: JSON.stringify({
+          ...accountsCache,
+          [id]: account,
+        }),
+      });
+      if (callback) callback(account);
+      return resolve(account);
     });
-    callback({ id, alias, balance });
   });
 };
 export const getSettings = () => utils.call<SettingsStorage>("getSettings");
