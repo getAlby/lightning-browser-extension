@@ -1,12 +1,8 @@
 import { useState, useEffect, createContext, useContext } from "react";
+
 import utils from "../../common/lib/utils";
 import api from "../../common/lib/api";
-
-interface Account {
-  id: string;
-  alias?: string;
-  balance?: number;
-}
+import type { Account } from "../../types";
 
 interface AuthContextType {
   account: Account | null;
@@ -38,17 +34,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
-  const getAccountInfo = (accountId?: string) => {
+  const getAccountInfo = async (accountId?: string) => {
     const id = accountId || account?.id;
     if (!id) return;
     // set the account id to indicate the unlock for other components
     // also clears current info which causes a loading indicator for the alias/balance
     setAccount({ id });
-    return api.getAccountInfo().then((response) => {
-      const { alias } = response.info;
-      const balance = parseInt(response.balance.balance); // TODO: handle amounts
-      setAccount({ id, alias, balance });
-    });
+    return api.swr.getAccountInfo(id, setAccount);
   };
 
   // Invoked only on on mount.
