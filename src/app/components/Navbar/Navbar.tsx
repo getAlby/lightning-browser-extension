@@ -7,16 +7,10 @@ import AccountMenu from "../AccountMenu";
 type Props = {
   title: string;
   subtitle: string;
-  onAccountSwitch?: (id: string) => void;
   children?: React.ReactNode;
 };
 
-export default function Navbar({
-  title,
-  subtitle,
-  onAccountSwitch,
-  children,
-}: Props) {
+export default function Navbar({ title, subtitle, children }: Props) {
   return (
     <div className="px-4 py-2 bg-white flex justify-between items-center border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">
       <div className="flex w-8/12 md:w-4/12 lg:w-3/12">
@@ -36,7 +30,7 @@ export default function Navbar({
               {subtitle || <Skeleton />}
             </div>
           </div>
-          <AccountMenu onAccountSwitch={onAccountSwitch} />
+          <AccountMenu />
         </div>
       </div>
       {children && (

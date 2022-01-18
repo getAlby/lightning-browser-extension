@@ -1,7 +1,7 @@
 import { encryptData } from "../../../../common/lib/crypto";
 import state from "../../state";
 
-const add = (message, sender) => {
+const add = async (message, sender) => {
   const newAccount = message.args;
   const accounts = state.getState().accounts;
 
@@ -24,8 +24,8 @@ const add = (message, sender) => {
   }
 
   // make sure we immediately persist the new account
-  state.getState().saveToStorage();
-  return Promise.resolve({ data: { accountId: accountId } });
+  await state.getState().saveToStorage();
+  return { data: { accountId: accountId } };
 };
 
 export default add;

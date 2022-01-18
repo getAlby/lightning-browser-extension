@@ -53,7 +53,6 @@ const Layout = () => {
             ? `${auth.account.balance} sat`
             : ""
         }
-        onAccountSwitch={auth.getAccountInfo}
       />
 
       <Outlet />
