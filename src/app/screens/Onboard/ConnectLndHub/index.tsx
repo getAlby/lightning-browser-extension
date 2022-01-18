@@ -21,6 +21,14 @@ export default function ConnectLndHub() {
     });
   }
 
+  function getConnectorType() {
+    if (formData.uri.match(/\.onion/i)) {
+      return "nativelndhub";
+    }
+    // default to LndHub
+    return "lndhub";
+  }
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
@@ -40,11 +48,18 @@ export default function ConnectLndHub() {
         password,
         url,
       },
-      connector: "nativelndhub",
+      connector: getConnectorType(),
     };
 
     try {
-      const validation = { valid: true, error: "" }; // await utils.call("validateAccount", account);
+      let validation;
+      // TODO: for native connectors we currently skip the validation because it is too slow (booting up Tor etc.)
+      if (account.connector === "nativelndhub") {
+        validation = { valid: true, error: "" };
+      } else {
+        validation = await utils.call("validateAccount", account);
+      }
+
       if (validation.valid) {
         const addResult = await utils.call("addAccount", account);
         if (addResult.accountId) {
