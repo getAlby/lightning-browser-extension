@@ -59,7 +59,7 @@ class Lnd implements Connector {
       return {
         data: {
           preimage: utils.base64ToHex(res.data.payment_preimage),
-          paymentHash: res.data.payment_hash,
+          paymentHash: utils.base64ToHex(res.data.payment_hash),
           route: res.data.payment_route,
         },
       };

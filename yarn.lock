@@ -2200,7 +2200,7 @@
     jest-util "^27.4.2"
     slash "^3.0.0"
 
-"@jest/core@^27.4.5", "@jest/core@^27.4.7":
+"@jest/core@^27.4.7":
   version "27.4.7"
   resolved "https://registry.yarnpkg.com/@jest/core/-/core-27.4.7.tgz#84eabdf42a25f1fa138272ed229bcf0a1b5e6913"
   integrity sha512-n181PurSJkVMS+kClIFSX/LLvw9ExSb+4IMtD6YnfxZVerw9ANYtW0bPrm0MJu2pfe9SY9FJ9FtQ+MdZkrZwjg==
@@ -2346,7 +2346,7 @@
     source-map "^0.6.1"
     write-file-atomic "^3.0.0"
 
-"@jest/transform@^27.4.5", "@jest/transform@^27.4.6":
+"@jest/transform@^27.4.6":
   version "27.4.6"
   resolved "https://registry.yarnpkg.com/@jest/transform/-/transform-27.4.6.tgz#153621940b1ed500305eacdb31105d415dc30231"
   integrity sha512-9MsufmJC8t5JTpWEQJ0OcOOAXaH5ioaIX6uHVBLBMoCZPfKKQF+EqP8kACAvCZ0Y1h2Zr3uOccg8re+Dr5jxyw==
@@ -5291,20 +5291,6 @@ babel-core@^7.0.0-bridge.0:
   resolved "https://registry.npmjs.org/babel-core/-/babel-core-7.0.0-bridge.0.tgz"
   integrity sha512-poPX9mZH/5CSanm50Q+1toVci6pv5KSRv/5TWCwtzQS5XEwn40BcCrgIeMFWP9CKKIniKXNxoIOnOq4VVlGXhg==
 
-babel-jest@^27.4.5:
-  version "27.4.5"
-  resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-27.4.5.tgz#d38bd0be8ea71d8b97853a5fc9f76deeb095c709"
-  integrity sha512-3uuUTjXbgtODmSv/DXO9nZfD52IyC2OYTFaXGRzL0kpykzroaquCrD5+lZNafTvZlnNqZHt5pb0M08qVBZnsnA==
-  dependencies:
-    "@jest/transform" "^27.4.5"
-    "@jest/types" "^27.4.2"
-    "@types/babel__core" "^7.1.14"
-    babel-plugin-istanbul "^6.0.0"
-    babel-preset-jest "^27.4.0"
-    chalk "^4.0.0"
-    graceful-fs "^4.2.4"
-    slash "^3.0.0"
-
 babel-jest@^27.4.6:
   version "27.4.6"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-27.4.6.tgz#4d024e69e241cdf4f396e453a07100f44f7ce314"
@@ -7920,10 +7906,10 @@ eslint-plugin-react-hooks@^4.3.0:
   resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.3.0.tgz#318dbf312e06fab1c835a4abef00121751ac1172"
   integrity sha512-XslZy0LnMn+84NEG9jSGR6eGqaZB3133L8xewQo3fQagbQuGt7a63gf+P1NGKZavEYEC3UXaWEAA/AqDkuN6xA==
 
-eslint-plugin-react@^7.27.1:
-  version "7.27.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.27.1.tgz#469202442506616f77a854d91babaae1ec174b45"
-  integrity sha512-meyunDjMMYeWr/4EBLTV1op3iSG3mjT/pz5gti38UzfM4OPpNc2m0t2xvKCOMU5D6FSdd34BIMFOvQbW+i8GAA==
+eslint-plugin-react@^7.28.0:
+  version "7.28.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.28.0.tgz#8f3ff450677571a659ce76efc6d80b6a525adbdf"
+  integrity sha512-IOlFIRHzWfEQQKcAD4iyYDndHwTQiCMcJVJjxempf203jnNLUnW34AXLrV33+nEXoifJE2ZEGmcjKPL8957eSw==
   dependencies:
     array-includes "^3.1.4"
     array.prototype.flatmap "^1.2.5"
@@ -10374,7 +10360,7 @@ jest-circus@^27.4.6:
     stack-utils "^2.0.3"
     throat "^6.0.1"
 
-jest-cli@^27.4.5:
+jest-cli@^27.4.7:
   version "27.4.7"
   resolved "https://registry.yarnpkg.com/jest-cli/-/jest-cli-27.4.7.tgz#d00e759e55d77b3bcfea0715f527c394ca314e5a"
   integrity sha512-zREYhvjjqe1KsGV15mdnxjThKNDgza1fhDT+iUsXWLCq3sxe9w5xnvyctcYVT5PcdLSjv7Y5dCwTS3FCF1tiuw==
@@ -10804,14 +10790,14 @@ jest-worker@^27.4.1, jest-worker@^27.4.6:
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
 
-jest@^27.4.5:
-  version "27.4.5"
-  resolved "https://registry.yarnpkg.com/jest/-/jest-27.4.5.tgz#66e45acba44137fac26be9d3cc5bb031e136dc0f"
-  integrity sha512-uT5MiVN3Jppt314kidCk47MYIRilJjA/l2mxwiuzzxGUeJIvA8/pDaJOAX5KWvjAo7SCydcW0/4WEtgbLMiJkg==
+jest@^27.4.7:
+  version "27.4.7"
+  resolved "https://registry.yarnpkg.com/jest/-/jest-27.4.7.tgz#87f74b9026a1592f2da05b4d258e57505f28eca4"
+  integrity sha512-8heYvsx7nV/m8m24Vk26Y87g73Ba6ueUd0MWed/NXMhSZIm62U/llVbS0PJe1SHunbyXjJ/BqG1z9bFjGUIvTg==
   dependencies:
-    "@jest/core" "^27.4.5"
+    "@jest/core" "^27.4.7"
     import-local "^3.0.2"
-    jest-cli "^27.4.5"
+    jest-cli "^27.4.7"
 
 jpeg-js@0.4.2:
   version "0.4.2"
@@ -11656,10 +11642,10 @@ min-indent@^1.0.0:
   resolved "https://registry.npmjs.org/min-indent/-/min-indent-1.0.1.tgz"
   integrity sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
 
-mini-css-extract-plugin@^2.4.5:
-  version "2.4.5"
-  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-2.4.5.tgz#191d6c170226037212c483af1180b4010b7b9eef"
-  integrity sha512-oEIhRucyn1JbT/1tU2BhnwO6ft1jjH1iCX9Gc59WFMg0n5773rQU0oyQ0zzeYFFuBfONaRbQJyGoPtuNseMxjA==
+mini-css-extract-plugin@^2.4.6:
+  version "2.4.6"
+  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-2.4.6.tgz#0f925aaa02dd26513bac40802062a87ebe32e7cc"
+  integrity sha512-khHpc29bdsE9EQiGSLqQieLyMbGca+bkC42/BBL1gXC8yAS0nHpOTUCBYUK6En1FuRdfE9wKXhGtsab8vmsugg==
   dependencies:
     schema-utils "^4.0.0"
 
@@ -16450,6 +16436,11 @@ webpack-sources@^3.2.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-3.2.2.tgz#d88e3741833efec57c4c789b6010db9977545260"
   integrity sha512-cp5qdmHnu5T8wRg2G3vZZHoJPN14aqQ89SyQ11NpGH5zEMDCclt49rzo+MaRazk7/UeILhAI+/sEtcM+7Fr0nw==
+
+webpack-sources@^3.2.3:
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-3.2.3.tgz#2d4daab8451fd4b240cc27055ff6a0c2ccea0cde"
+  integrity sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==
 
 webpack-virtual-modules@^0.2.2:
   version "0.2.2"
