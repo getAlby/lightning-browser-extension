@@ -47,9 +47,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const getAccountInfo = async (accountId?: string) => {
     const id = accountId || account?.id;
     if (!id) return;
-    // set the account id to indicate the unlock for other components
-    // also clears current info which causes a loading indicator for the alias/balance
-    setAccount({ id });
     return api.swr.getAccountInfo(id, setAccount);
   };
 
