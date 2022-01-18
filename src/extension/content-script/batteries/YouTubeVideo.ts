@@ -22,7 +22,7 @@ const battery = (): void => {
   }
   // if there is no lnurl we check for a zap emoji with a lightning address
   // we check for the @-sign to try to limit the possibility to match some invalid text (e.g. random emoji usage)
-  else if ((match = text.match(/(⚡️:?|lightning:|lnurl:)(\S+@\S+)/i))) {
+  else if ((match = text.match(/(⚡:?|lightning:|lnurl:)(\S+@\S+)/i))) {
     recipient = match[2];
   } else {
     return;
