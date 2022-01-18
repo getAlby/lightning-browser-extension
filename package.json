@@ -75,7 +75,7 @@
     "webext-options-sync": "^3.0.0",
     "webextension-polyfill": "^0.8.0",
     "webpack-dev-server": "^4.7.1",
-    "webpack-sources": "^3.2.2",
+    "webpack-sources": "^3.2.3",
     "zustand": "^3.6.8"
   },
   "devDependencies": {
