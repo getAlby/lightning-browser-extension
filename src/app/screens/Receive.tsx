@@ -9,6 +9,7 @@ import QRCode from "react-qr-code";
 import Confetti from "react-confetti";
 
 import utils from "../../common/lib/utils";
+import api from "../../common/lib/api";
 import { poll } from "../../common/utils/helpers";
 import { useAuth } from "../context/AuthContext";
 
@@ -67,10 +68,7 @@ function Receive() {
   async function createInvoice() {
     try {
       setLoading(true);
-      const response = await utils.call<{
-        paymentRequest: string;
-        rHash: string;
-      }>("makeInvoice", {
+      const response = await api.makeInvoice({
         amount: formData.amount,
         memo: formData.description,
       });

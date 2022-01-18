@@ -1,4 +1,9 @@
 import utils from "./utils";
+import {
+  getAccountsCache,
+  removeAccountFromCache,
+  storeAccounts,
+} from "./cache";
 import type {
   Accounts,
   AccountInfo,
@@ -7,10 +12,9 @@ import type {
   SettingsStorage,
 } from "../../types";
 import {
-  getAccountsCache,
-  removeAccountFromCache,
-  storeAccounts,
-} from "./cache";
+  MakeInvoiceArgs,
+  MakeInvoiceResponse,
+} from "../../extension/background-script/connectors/connector.interface";
 
 interface AccountInfoRes {
   currentAccountId: string;
@@ -69,6 +73,8 @@ export const getPayments = (options: { limit: number }) =>
   utils.call<{ payments: Transaction[] }>("getPayments", options);
 export const getSettings = () => utils.call<SettingsStorage>("getSettings");
 export const getStatus = () => utils.call<StatusRes>("status");
+export const makeInvoice = ({ amount, memo }: MakeInvoiceArgs) =>
+  utils.call<MakeInvoiceResponse["data"]>("makeInvoice", { amount, memo });
 export const setSetting = (
   setting: Record<string, string | number | boolean>
 ) =>
@@ -91,6 +97,7 @@ export default {
   getPayments,
   getSettings,
   getStatus,
+  makeInvoice,
   setSetting,
   swr: {
     getAccountInfo: swrGetAccountInfo,
