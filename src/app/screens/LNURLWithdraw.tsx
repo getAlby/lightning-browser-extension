@@ -22,7 +22,7 @@ function LNURLWithdraw(props: Props) {
   const [origin] = useState(props.origin || getOriginData());
   const { minWithdrawable, maxWithdrawable } = props.details;
   const [valueMSat, setValueMSat] = useState<number | undefined>(
-    minWithdrawable
+    maxWithdrawable
   );
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
