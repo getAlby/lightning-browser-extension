@@ -4,7 +4,7 @@ import state from "../../state";
 const verifyMessage = async (message, sender) => {
   PubSub.publish(`ln.verifyMessage.start`, message);
 
-  const connector = state.getState().getConnector();
+  const connector = await state.getState().getConnector();
   try {
     const response = await connector.verifyMessage({
       message: message.args.message,

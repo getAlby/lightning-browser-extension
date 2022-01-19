@@ -4,7 +4,7 @@ import state from "../../state";
 const signMessage = async (message, sender) => {
   PubSub.publish(`ln.signMessage.start`, message);
 
-  const connector = state.getState().getConnector();
+  const connector = await state.getState().getConnector();
   try {
     const response = await connector.signMessage({
       message: message.args.message,

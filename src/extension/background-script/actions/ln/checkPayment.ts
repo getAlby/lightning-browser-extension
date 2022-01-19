@@ -7,7 +7,8 @@ const checkPayment = async (message: Message) => {
       error: "Payment hash missing.",
     };
   }
-  const connector = state.getState().getConnector();
+  const connector = await state.getState().getConnector();
+
   try {
     const response = await connector.checkPayment({
       paymentHash: message.args.paymentHash,
