@@ -5,8 +5,6 @@ import { decryptData } from "../../common/lib/crypto";
 import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
 
-type BrowserStorageKeys = "settings" | "accounts" | "currentAccountId";
-
 interface Account {
   connector: keyof typeof connectors;
   config: string;
@@ -26,7 +24,7 @@ interface State {
   saveToStorage: () => Promise<void>;
 }
 
-const DEFAULT_SETTINGS = {
+export const DEFAULT_SETTINGS = {
   websiteEnhancements: true,
   userName: "",
 };
@@ -34,7 +32,7 @@ const DEFAULT_SETTINGS = {
 // these keys get synced from the state to the browser storage
 // the values are the default values
 const browserStorage: {
-  settings: Record<string, unknown>;
+  settings: typeof DEFAULT_SETTINGS;
   accounts: Record<string, Account>;
   currentAccountId: string | null;
 } = {
@@ -42,6 +40,10 @@ const browserStorage: {
   accounts: {},
   currentAccountId: null,
 };
+
+const browserStorageKeys = Object.keys(browserStorage) as Array<
+  keyof typeof browserStorage
+>;
 
 const state = createState<State>((set, get) => ({
   connector: null,
@@ -83,25 +85,26 @@ const state = createState<State>((set, get) => ({
     set({ password: null, connector: null, account: null });
   },
   init: () => {
-    return browser.storage.sync
-      .get(Object.keys(browserStorage))
-      .then((result) => {
-        const data = { ...browserStorage };
-        const browserStorageKeys = Object.keys(
-          browserStorage
-        ) as BrowserStorageKeys[];
-        browserStorageKeys.forEach((key) => {
-          data[key] = result[key] || browserStorage[key];
-        });
-        set(data);
+    return browser.storage.sync.get(browserStorageKeys).then((result) => {
+      const data = { ...browserStorage };
+      browserStorageKeys.forEach((key) => {
+        data[key] = result[key] || browserStorage[key];
       });
+
+      /**
+       * MIGRATION CODE
+       * This is needed for existing users that upgrade and are missing (new) defaults
+       * in their stored settings object.
+       * TODO: delete this migration code in the future.
+       */
+      data.settings = Object.assign({}, DEFAULT_SETTINGS, data.settings);
+
+      set(data);
+    });
   },
   saveToStorage: () => {
     const current = get();
-    const data: State[BrowserStorageKeys] = {};
-    const browserStorageKeys = Object.keys(
-      browserStorage
-    ) as BrowserStorageKeys[];
+    const data: State[keyof typeof browserStorage] = {};
     browserStorageKeys.forEach((key) => {
       data[key] = current[key] || browserStorage[key];
     });
@@ -109,13 +112,12 @@ const state = createState<State>((set, get) => ({
   },
 }));
 
-const browserStorageKeys = Object.keys(browserStorage) as BrowserStorageKeys[];
 browserStorageKeys.forEach((key) => {
   console.log(`Adding state subscription for ${key}`);
   state.subscribe(
     (newValue, previousValue) => {
       //if (previous && Object.keys(previous) > 0) {
-      const data: State[BrowserStorageKeys] = {};
+      const data: State[keyof typeof browserStorage] = {};
       data[key] = newValue;
       return browser.storage.sync.set(data);
       //}
