@@ -146,4 +146,5 @@ export interface Allowance {
 export interface SettingsStorage {
   websiteEnhancements: boolean;
   userName: string;
+  userEmail: string;
 }
