@@ -47,7 +47,7 @@ function LNURLPay(props: Props) {
   const [successAction, setSuccessAction] = useState<
     LNURLPaymentSuccessAction | undefined
   >();
-
+  const [clear, setClear] = useState<boolean>(false);
   useEffect(() => {
     if (searchParams) {
       // lnurl was passed as querystring
@@ -174,15 +174,60 @@ function LNURLPay(props: Props) {
               setValueMSat(newValue);
             }}
           />
-          <input
-            className="mt-2"
-            type="range"
-            min={minSendable}
-            max={maxSendable}
-            step="1000"
-            value={valueMSat || 0}
-            onChange={(e) => setValueMSat(parseInt(e.target.value))}
-          />
+          <div className="flex flex-wrap justify-center mt-2">
+            <div className="m-2">
+              <Button
+                label="10"
+                onClick={() => {
+                  if (clear === false) {
+                    setValueMSat(10000);
+                    setClear(true);
+                  } else {
+                    setValueMSat(valueMSat + 10000);
+                  }
+                }}
+              />
+            </div>
+            <div className="m-2">
+              <Button
+                label="100"
+                onClick={() => {
+                  if (clear === false) {
+                    setValueMSat(100000);
+                    setClear(true);
+                  } else {
+                    setValueMSat(valueMSat + 100000);
+                  }
+                }}
+              />
+            </div>
+            <div className="m-2">
+              <Button
+                label="1000"
+                onClick={() => {
+                  if (clear === false) {
+                    setValueMSat(1000000);
+                    setClear(true);
+                  } else {
+                    setValueMSat(valueMSat + 1000000);
+                  }
+                }}
+              />
+            </div>
+            <div className="mt-2 ml-2 mr-2">
+              <Button
+                label="10000"
+                onClick={() => {
+                  if (clear === false) {
+                    setValueMSat(10000000);
+                    setClear(true);
+                  } else {
+                    setValueMSat(valueMSat + 10000000);
+                  }
+                }}
+              />
+            </div>
+          </div>
         </div>
       );
     }
@@ -190,7 +235,7 @@ function LNURLPay(props: Props) {
 
   function renderComment() {
     return (
-      <div className="mt-1 flex flex-col">
+      <div className="flex flex-col">
         <Input
           type="text"
           placeholder="optional"
