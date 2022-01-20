@@ -56,7 +56,7 @@
     "dexie": "^3.2.0",
     "elliptic": "^6.5.4",
     "html5-qrcode": "^2.1.6",
-    "invoices": "^2.0.2",
+    "invoices": "^2.0.3",
     "memoizee": "^0.4.15",
     "postcss-cli": "^9.1.0",
     "pubsub-js": "^1.9.4",

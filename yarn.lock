@@ -5611,10 +5611,10 @@ bip174@^2.0.1:
   resolved "https://registry.npmjs.org/bip174/-/bip174-2.0.1.tgz"
   integrity sha512-i3X26uKJOkDTAalYAp0Er+qGMDhrbbh2o93/xiPyAN2s25KrClSpe3VXo/7mNJoqA5qfko8rLS2l3RWZgYmjKQ==
 
-bitcoinjs-lib@6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/bitcoinjs-lib/-/bitcoinjs-lib-6.0.0.tgz#42e6a3d7be47da050f371d37e5a88762b603bd95"
-  integrity sha512-KYx81rVE4LDbZcHfE375NCX4CDeZuz7HECZm/KAmqKMY2jpD3ZcUnI7Fm+QX5EMF/xmtzzfrNL/BNxo8o0iOQg==
+bitcoinjs-lib@6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/bitcoinjs-lib/-/bitcoinjs-lib-6.0.1.tgz#4fa9438bb86a0449451ac58607e83d9b5a7732e6"
+  integrity sha512-x/7D4jDj/MMkmO6t3p2CSDXTqpwZ/jRsRiJDmaiXabrR9XRo7jwby8HRn7EyK1h24rKFFI7vI0ay4czl6bDOZQ==
   dependencies:
     bech32 "^2.0.0"
     bip174 "^2.0.1"
@@ -5669,17 +5669,17 @@ body-parser@1.19.0:
     raw-body "2.4.0"
     type-is "~1.6.17"
 
-bolt07@1.7.4:
-  version "1.7.4"
-  resolved "https://registry.yarnpkg.com/bolt07/-/bolt07-1.7.4.tgz#40787ed2c8e744224ffc2d828d5737907289ae56"
-  integrity sha512-y82Na9vEBY+rqjJhjYMFAch70nWvbL5OiEPFqNf7cGTtQfG7g/Vui2KnemrX1mxEw2SgccF+Rn1NSRm9HFtu3w==
+bolt07@1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/bolt07/-/bolt07-1.8.0.tgz#931d95c5691f7954e1e8c58fec8b4ced5210f23d"
+  integrity sha512-UJq+p94UK9QsU3P1npJyWF3r8TuJd6kv6P4m656VQK/m5ifw0bWCkYF0ngcHbFGq3j8u3gP8/tkGtB8WwPPRbQ==
   dependencies:
     bn.js "5.2.0"
 
-bolt09@0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/bolt09/-/bolt09-0.2.0.tgz#dd34a527359a834d90ae3ad3895d4dca775706ab"
-  integrity sha512-s6QWo7qqu6fKGLISGMSG+vFxIRzeUT3KQHDiHpvhflyI3TQD6zdaMu4fEpP7PoyMFJt2Ve26SBvvRP3MM7V0bw==
+bolt09@0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/bolt09/-/bolt09-0.2.1.tgz#1b03b6731faaa60e274bf8854a675d074cae52a0"
+  integrity sha512-ON1CY0awM/VsOxcmCtz7WggxjGRH+G5rSEAdWp1UoU43BHiGw1T6eEt1t4gFvLi8eUSV0hB7vF1QOba65k/7FA==
 
 bonjour@^3.5.0:
   version "3.5.0"
@@ -7536,7 +7536,7 @@ element-resize-detector@^1.2.2:
   dependencies:
     batch-processor "1.0.0"
 
-elliptic@^6.5.2, elliptic@^6.5.3, elliptic@^6.5.4:
+elliptic@^6.5.3, elliptic@^6.5.4:
   version "6.5.4"
   resolved "https://registry.npmjs.org/elliptic/-/elliptic-6.5.4.tgz"
   integrity sha512-iLhC6ULemrljPZb+QutR5TQGB+pdW6KGD5RSegS+8sorOZT+rdQFbsQFJgvN3eRqNALqJer4oQ16YvJHlU8hzQ==
@@ -9692,17 +9692,17 @@ invariant@^2.2.4:
   dependencies:
     loose-envify "^1.0.0"
 
-invoices@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/invoices/-/invoices-2.0.2.tgz#d2f92be075fc0adedbcd6a53e09b3f7e2bf163eb"
-  integrity sha512-d1PX0ivZUw5u5kqIZ4bEajzTmKMe6EHXry4ZypsKT6SuvG4bTmn3sdCz867EhuMNZY2/Yj3/R1LXqCVTtsDPmA==
+invoices@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/invoices/-/invoices-2.0.3.tgz#0a30be9c6664e4f077b7d65014065054a52de821"
+  integrity sha512-yCAFA3CtbRIiLOdybrZhV1UQ4Rjy20dXBL/5PzlqaZjDbz+RFWtuk3BWsUF12WJo1ikSeVhFXjp6hGAGIG690g==
   dependencies:
     bech32 "2.0.0"
-    bitcoinjs-lib "6.0.0"
+    bitcoinjs-lib "6.0.1"
     bn.js "5.2.0"
-    bolt07 "1.7.4"
-    bolt09 "0.2.0"
-    secp256k1 "4.0.2"
+    bolt07 "1.8.0"
+    bolt09 "0.2.1"
+    secp256k1 "4.0.3"
 
 ip@^1.1.0, ip@^1.1.5:
   version "1.1.5"
@@ -14397,12 +14397,12 @@ schema-utils@^4.0.0:
     ajv-formats "^2.1.1"
     ajv-keywords "^5.0.0"
 
-secp256k1@4.0.2:
-  version "4.0.2"
-  resolved "https://registry.npmjs.org/secp256k1/-/secp256k1-4.0.2.tgz"
-  integrity sha512-UDar4sKvWAksIlfX3xIaQReADn+WFnHvbVujpcbr+9Sf/69odMwy2MUsz5CKLQgX9nsIyrjuxL2imVyoNHa3fg==
+secp256k1@4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/secp256k1/-/secp256k1-4.0.3.tgz#c4559ecd1b8d3c1827ed2d1b94190d69ce267303"
+  integrity sha512-NLZVf+ROMxwtEj3Xa562qgv2BK5e2WNmXPiOdVIPLgs6lyTzMvBq0aWTYMI5XCP9jZMVKOcqZLw/Wc4vDkuxhA==
   dependencies:
-    elliptic "^6.5.2"
+    elliptic "^6.5.4"
     node-addon-api "^2.0.0"
     node-gyp-build "^4.2.0"
 
