@@ -43,6 +43,7 @@ function LNURLPay(props: Props) {
   );
   const [comment, setComment] = useState<string | undefined>();
   const [userName, setUserName] = useState<string | undefined>();
+  const [userEmail, setUserEmail] = useState<string | undefined>();
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successAction, setSuccessAction] = useState<
     LNURLPaymentSuccessAction | undefined
@@ -73,16 +74,34 @@ function LNURLPay(props: Props) {
       if (response.userName) {
         setUserName(response.userName);
       }
+      if (response.userEmail) {
+        setUserEmail(response.userEmail);
+      }
     });
   }, []);
 
+  const getPayerData = (details: LNURLPayServiceResponse) => {
+    if (
+      userName &&
+      userEmail &&
+      userName.length &&
+      userEmail.length &&
+      details.payerData.email &&
+      details.payerData.name
+    ) {
+      return { name: userName, email: userEmail };
+    } else if (userName && userName.length && details.payerData.name) {
+      return { name: userName };
+    } else if (userEmail && userEmail.length && details.payerData.email) {
+      return { email: userEmail };
+    } else {
+      return undefined;
+    }
+  };
+
   async function confirm() {
     if (!details) return;
-
-    const payerdata =
-      details.payerData && details.payerData.name && userName && userName.length
-        ? { name: userName }
-        : undefined;
+    const payerdata = getPayerData(details);
 
     try {
       setLoadingConfirm(true);
@@ -217,6 +236,21 @@ function LNURLPay(props: Props) {
     );
   }
 
+  function renderEmail() {
+    return (
+      <div className="mt-1 flex flex-col">
+        <Input
+          type="text"
+          placeholder="optional"
+          value={userEmail}
+          onChange={(e) => {
+            setUserEmail(e.target.value);
+          }}
+        />
+      </div>
+    );
+  }
+
   function formattedMetadata(metadataJSON: string) {
     try {
       const metadata = JSON.parse(metadataJSON);
@@ -255,6 +289,9 @@ function LNURLPay(props: Props) {
     }
     if (details.payerData && details.payerData.name) {
       elements.push(["Name", renderName()]);
+    }
+    if (details.payerData && details.payerData.email) {
+      elements.push(["Email", renderEmail()]);
     }
     return elements;
   }

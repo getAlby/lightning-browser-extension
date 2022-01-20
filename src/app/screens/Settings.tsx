@@ -35,6 +35,7 @@ function Settings() {
   const [settings, setSettings] = useState<SettingsStorage>({
     websiteEnhancements: false,
     userName: "",
+    userEmail: "",
   });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
@@ -89,6 +90,27 @@ function Settings() {
                   onChange={(ev) => {
                     saveSetting({
                       userName: ev.target.value,
+                    });
+                  }}
+                />
+              </div>
+            )
+          }
+        />
+
+        <Setting
+          title="User Email"
+          subtitle="For sending along with LNURL payments when supported"
+          right={
+            !loading && (
+              <div className="w-64">
+                <Input
+                  placeholder="Enter your email address"
+                  type="email"
+                  value={settings.userEmail}
+                  onChange={(ev) => {
+                    saveSetting({
+                      userEmail: ev.target.value,
                     });
                   }}
                 />
