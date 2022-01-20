@@ -91,7 +91,7 @@ const state = createState<State>((set, get) => ({
        * in their stored settings object.
        * TODO: delete this migration code in the future.
        */
-      data.settings = Object.assign(DEFAULT_SETTINGS, data.settings);
+      data.settings = Object.assign({}, DEFAULT_SETTINGS, data.settings);
 
       set(data);
     });
