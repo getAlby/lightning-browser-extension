@@ -1,9 +1,12 @@
 import browser from "webextension-polyfill";
 import createState from "zustand";
+import merge from "lodash/merge";
+import pick from "lodash/pick";
 
 import { decryptData } from "../../common/lib/crypto";
 import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
+import type { SettingsStorage } from "../../types";
 
 interface Account {
   connector: keyof typeof connectors;
@@ -13,7 +16,7 @@ interface Account {
 interface State {
   connector: Connector | null;
   account: Account | null;
-  settings: Record<string, unknown>;
+  settings: SettingsStorage;
   accounts: Record<string, Account>;
   currentAccountId: string | null;
   password: string | null;
@@ -24,6 +27,12 @@ interface State {
   saveToStorage: () => Promise<void>;
 }
 
+interface BrowserStorage {
+  settings: SettingsStorage;
+  accounts: Record<string, Account>;
+  currentAccountId: string | null;
+}
+
 export const DEFAULT_SETTINGS = {
   websiteEnhancements: true,
   userName: "",
@@ -31,24 +40,20 @@ export const DEFAULT_SETTINGS = {
 
 // these keys get synced from the state to the browser storage
 // the values are the default values
-const browserStorage: {
-  settings: typeof DEFAULT_SETTINGS;
-  accounts: Record<string, Account>;
-  currentAccountId: string | null;
-} = {
+const browserStorageDefaults: BrowserStorage = {
   settings: DEFAULT_SETTINGS,
   accounts: {},
   currentAccountId: null,
 };
 
-const browserStorageKeys = Object.keys(browserStorage) as Array<
-  keyof typeof browserStorage
+const browserStorageKeys = Object.keys(browserStorageDefaults) as Array<
+  keyof BrowserStorage
 >;
 
 const state = createState<State>((set, get) => ({
   connector: null,
   account: null,
-  settings: {},
+  settings: DEFAULT_SETTINGS,
   accounts: {},
   currentAccountId: null,
   password: null,
@@ -86,28 +91,17 @@ const state = createState<State>((set, get) => ({
   },
   init: () => {
     return browser.storage.sync.get(browserStorageKeys).then((result) => {
-      const data = { ...browserStorage };
-      browserStorageKeys.forEach((key) => {
-        data[key] = result[key] || browserStorage[key];
-      });
-
-      /**
-       * MIGRATION CODE
-       * This is needed for existing users that upgrade and are missing (new) defaults
-       * in their stored settings object.
-       * TODO: delete this migration code in the future.
-       */
-      data.settings = Object.assign({}, DEFAULT_SETTINGS, data.settings);
-
+      // Deep merge to ensure that nested defaults are also merged instead of overwritten.
+      const data = merge(browserStorageDefaults, result as BrowserStorage);
       set(data);
     });
   },
   saveToStorage: () => {
     const current = get();
-    const data: State[keyof typeof browserStorage] = {};
-    browserStorageKeys.forEach((key) => {
-      data[key] = current[key] || browserStorage[key];
-    });
+    const data = {
+      ...browserStorageDefaults,
+      ...pick(current, browserStorageKeys),
+    };
     return browser.storage.sync.set(data);
   },
 }));
@@ -117,8 +111,7 @@ browserStorageKeys.forEach((key) => {
   state.subscribe(
     (newValue, previousValue) => {
       //if (previous && Object.keys(previous) > 0) {
-      const data: State[keyof typeof browserStorage] = {};
-      data[key] = newValue;
+      const data = { [key]: newValue };
       return browser.storage.sync.set(data);
       //}
       //return Promise.resolve();
