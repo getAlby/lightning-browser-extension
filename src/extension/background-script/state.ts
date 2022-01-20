@@ -93,16 +93,11 @@ const state = createState<State>((set, get) => ({
 
       /**
        * MIGRATION CODE
-       * This check is currently needed for existing users that upgrade
-       * as they already have a stored settings object, but without the new defaults.
+       * This is needed for existing users that upgrade and are missing (new) defaults
+       * in their stored settings object.
        * TODO: delete this migration code in the future.
        */
-      if (
-        !("userName" in data.settings) ||
-        !("websiteEnhancements" in data.settings)
-      ) {
-        data.settings = DEFAULT_SETTINGS;
-      }
+      data.settings = Object.assign(DEFAULT_SETTINGS, data.settings);
 
       set(data);
     });
