@@ -31,7 +31,7 @@ function LNURLWithdraw(props: Props) {
     try {
       setLoadingConfirm(true);
       const invoice = await api.makeInvoice({
-        amount: valueMSat || 0,
+        amount: valueMSat ? valueMSat / 1000 : 0,
         memo: props.details.defaultDescription,
       });
 
