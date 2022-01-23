@@ -174,8 +174,8 @@ function LNURLPay(props: Props) {
               setValueMSat(newValue);
             }}
           />
-          <div className="flex flex-wrap justify-center mt-2">
-            <div className="m-1">
+          <div className="flex flex-wrap justify-between mt-2">
+            <div>
               <Button
 								lessPadding
                 label="10 sat⚡"
@@ -189,7 +189,7 @@ function LNURLPay(props: Props) {
                 }}
               />
             </div>
-            <div className="m-1">
+            <div>
               <Button
 								lessPadding
                 label="100 sat⚡"
@@ -203,7 +203,7 @@ function LNURLPay(props: Props) {
                 }}
               />
             </div>
-            <div className="m-1">
+            <div>
               <Button
 								lessPadding
                 label="1K sat⚡"
@@ -217,7 +217,7 @@ function LNURLPay(props: Props) {
                 }}
               />
             </div>
-            <div className="m-1">
+            <div>
               <Button
 								lessPadding
                 label="10K sat⚡"
