@@ -16266,23 +16266,6 @@ web-namespaces@^1.0.0:
   resolved "https://registry.npmjs.org/web-namespaces/-/web-namespaces-1.1.4.tgz"
   integrity sha512-wYxSGajtmoP4WxfejAPIr4l0fVh+jeMXZb08wNc0tMg6xsfZXj3cECqIK0G7ZAqUq0PP8WlMDtaOGVBTAWztNw==
 
-webext-base-css@^1.3.2:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/webext-base-css/-/webext-base-css-1.3.2.tgz#d87d93fdfd1757ecd1942fc06e0915ff603b3d43"
-  integrity sha512-A4g+L7KcBSBJElLpZvW+N6e/kqMlDkT9jsImJhkwBgB6Cewxdj6z9AYmJz6refSOwyCFprELQj1cqIwiyAOJZg==
-
-webext-detect-page@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/webext-detect-page/-/webext-detect-page-3.0.2.tgz#a7431b0e58830b091d9c77fb862b20d5a7e578c2"
-  integrity sha512-CdU8W+6g05YAYrkdOfqUNrG9A4AybemgPGC+xeKnffRO4tbBrdYYy77qO0jlj7Udw9HXcE2xeFlEoW1ywjwTZw==
-
-webext-options-sync@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/webext-options-sync/-/webext-options-sync-3.0.0.tgz#5a8c103922a3e3fd52106c528703684d27312a5c"
-  integrity sha512-JOlKQSESBzqEwXmSWZi0/R4PoAfy42I1nHzX323P8slEbJpRdUDJByo7OUq0ySbzwmHXXNg6YxAL5ALMZ3JU7A==
-  dependencies:
-    webext-detect-page "^3.0.2"
-
 webextension-polyfill@^0.8.0:
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/webextension-polyfill/-/webextension-polyfill-0.8.0.tgz#f80e9f4b7f81820c420abd6ffbebfa838c60e041"
