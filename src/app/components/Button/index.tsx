@@ -38,7 +38,7 @@ export default function Button({
         !primary && !disabled && "hover:bg-gray-100 dark:hover:bg-gray-600",
         disabled ? "cursor-default opacity-60" : "cursor-pointer",
         "inline-flex justify-center items-center px-7 py-2 font-medium rounded-md shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-bitcoin transition duration-150",
-				lessPadding && "!px-2"
+				lessPadding && "!px-[0.425rem]"
       )}
       onClick={onClick}
       disabled={disabled}
