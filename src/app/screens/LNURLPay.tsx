@@ -175,8 +175,9 @@ function LNURLPay(props: Props) {
             }}
           />
           <div className="flex flex-wrap justify-center mt-2">
-            <div className="m-2">
+            <div className="m-1">
               <Button
+								lessPadding
                 label="10 sat⚡"
                 onClick={() => {
                   if (clear === false) {
@@ -188,8 +189,9 @@ function LNURLPay(props: Props) {
                 }}
               />
             </div>
-            <div className="m-2">
+            <div className="m-1">
               <Button
+								lessPadding
                 label="100 sat⚡"
                 onClick={() => {
                   if (clear === false) {
@@ -201,8 +203,9 @@ function LNURLPay(props: Props) {
                 }}
               />
             </div>
-            <div className="m-2">
+            <div className="m-1">
               <Button
+								lessPadding
                 label="1K sat⚡"
                 onClick={() => {
                   if (clear === false) {
@@ -214,8 +217,9 @@ function LNURLPay(props: Props) {
                 }}
               />
             </div>
-            <div className="mt-2 ml-2 mr-2">
+            <div className="m-1">
               <Button
+								lessPadding
                 label="10K sat⚡"
                 onClick={() => {
                   if (clear === false) {

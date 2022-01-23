@@ -10,6 +10,7 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   loading?: boolean;
   disabled?: boolean;
   direction?: "row" | "column";
+	lessPadding?: boolean;
 };
 
 export default function Button({
@@ -22,6 +23,7 @@ export default function Button({
   fullWidth = false,
   primary = false,
   loading = false,
+	lessPadding = false,
 }: Props) {
   return (
     <button
@@ -35,7 +37,8 @@ export default function Button({
         primary && !disabled && "hover:bg-orange-bitcoin-700",
         !primary && !disabled && "hover:bg-gray-100 dark:hover:bg-gray-600",
         disabled ? "cursor-default opacity-60" : "cursor-pointer",
-        "inline-flex justify-center items-center px-7 py-2 font-medium rounded-md shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-bitcoin transition duration-150"
+        "inline-flex justify-center items-center px-7 py-2 font-medium rounded-md shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-bitcoin transition duration-150",
+				lessPadding && "!px-1"
       )}
       onClick={onClick}
       disabled={disabled}
