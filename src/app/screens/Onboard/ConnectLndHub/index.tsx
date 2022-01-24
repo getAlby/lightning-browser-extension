@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import browser from "webextension-polyfill";
 
 import utils from "../../../../common/lib/utils";
 
@@ -56,6 +57,7 @@ export default function ConnectLndHub() {
       // TODO: for native connectors we currently skip the validation because it is too slow (booting up Tor etc.)
       if (account.connector === "nativelndhub") {
         validation = { valid: true, error: "" };
+        browser.permissions.request({ permissions: ["nativeMessaging"] });
       } else {
         validation = await utils.call("validateAccount", account);
       }
