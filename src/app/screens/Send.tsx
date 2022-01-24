@@ -31,14 +31,11 @@ function Send() {
       }
 
       if (lnurl) {
+        await lnurlLib.getDetails(lnurl); // throws if invalid/network error.
         navigate(`/lnurlPay?lnurl=${lnurl}`);
       } else {
-        try {
-          parsePaymentRequest({ request: invoice });
-          navigate(`/confirmPayment?paymentRequest=${invoice}`);
-        } catch (e) {
-          if (e instanceof Error) alert(e.message);
-        }
+        parsePaymentRequest({ request: invoice }); // throws if invalid.
+        navigate(`/confirmPayment?paymentRequest=${invoice}`);
       }
     } catch (e) {
       if (e instanceof Error) {
