@@ -31,8 +31,14 @@ function Send() {
       }
 
       if (lnurl) {
-        await lnurlLib.getDetails(lnurl); // throws if invalid/network error.
-        navigate(`/lnurlPay?lnurl=${lnurl}`);
+        try {
+          await lnurlLib.getDetails(lnurl); // throws if invalid/network error.
+          navigate(`/lnurlPay?lnurl=${lnurl}`);
+        } catch (e) {
+          throw new Error(
+            "Connection problem or invalid lnurl / lightning address."
+          );
+        }
       } else {
         parsePaymentRequest({ request: invoice }); // throws if invalid.
         navigate(`/confirmPayment?paymentRequest=${invoice}`);
