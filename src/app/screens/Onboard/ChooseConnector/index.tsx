@@ -3,6 +3,7 @@ import LinkButton from "../../../components/LinkButton";
 import lnbits from "/static/assets/icons/lnbits.png";
 import lndhub from "/static/assets/icons/lndhub.png";
 import lnd from "/static/assets/icons/lnd.png";
+import eclair from "/static/assets/icons/eclair.jpg";
 import alby from "/static/assets/icons/alby.png";
 
 type Props = {
@@ -29,6 +30,12 @@ export default function ChooseConnector({ title, description }: Props) {
       title: "LNbits",
       description: "Connect to your LNbits account",
       logo: lnbits,
+    },
+    {
+      to: "eclair",
+      title: "Eclair",
+      description: "Connect to your Eclair node",
+      logo: eclair,
     },
     {
       to: "create-wallet",

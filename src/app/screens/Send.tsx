@@ -5,6 +5,7 @@ import {
   CrossIcon,
   QrCodeIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { parsePaymentRequest } from "invoices";
 
 import lnurlLib from "../../common/lib/lnurl";
 
@@ -30,8 +31,10 @@ function Send() {
       }
 
       if (lnurl) {
+        await lnurlLib.getDetails(lnurl); // throws if invalid.
         navigate(`/lnurlPay?lnurl=${lnurl}`);
       } else {
+        parsePaymentRequest({ request: invoice }); // throws if invalid.
         navigate(`/confirmPayment?paymentRequest=${invoice}`);
       }
     } catch (e) {

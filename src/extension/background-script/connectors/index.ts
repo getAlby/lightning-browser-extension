@@ -3,6 +3,7 @@ import NativeLnd from "./nativelnd";
 import LndHub from "./lndhub";
 import NativeLndHub from "./nativelndhub";
 import LnBits from "./lnbits";
+import Eclair from "./eclair";
 
 /*
 const initialize = (account, password) => {
@@ -18,6 +19,7 @@ const connectors = {
   lndhub: LndHub,
   nativelndhub: NativeLndHub,
   lnbits: LnBits,
+  eclair: Eclair,
 };
 
 export default connectors;
