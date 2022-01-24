@@ -174,15 +174,36 @@ function LNURLPay(props: Props) {
               setValueMSat(newValue);
             }}
           />
-          <input
-            className="mt-2"
-            type="range"
-            min={minSendable}
-            max={maxSendable}
-            step="1000"
-            value={valueMSat || 0}
-            onChange={(e) => setValueMSat(parseInt(e.target.value))}
-          />
+          <div className="flex space-x-1.5 mt-2">
+            <Button
+              fullWidth
+              label="100 sat⚡"
+              onClick={() => {
+                setValueMSat(100000);
+              }}
+            />
+            <Button
+              fullWidth
+              label="1K sat⚡"
+              onClick={() => {
+                setValueMSat(1000000);
+              }}
+            />
+            <Button
+              fullWidth
+              label="5K sat⚡"
+              onClick={() => {
+                setValueMSat(5000000);
+              }}
+            />
+            <Button
+              fullWidth
+              label="10K sat⚡"
+              onClick={() => {
+                setValueMSat(10000000);
+              }}
+            />
+          </div>
         </div>
       );
     }
@@ -190,7 +211,7 @@ function LNURLPay(props: Props) {
 
   function renderComment() {
     return (
-      <div className="mt-1 flex flex-col">
+      <div className="flex flex-col">
         <Input
           type="text"
           placeholder="optional"
