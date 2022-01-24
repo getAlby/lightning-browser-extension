@@ -90,14 +90,40 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
                 />
                 {invoiceAttributes.minimumAmount &&
                   invoiceAttributes.maximumAmount && (
-                    <input
-                      className="mt-2"
-                      type="range"
-                      min={invoiceAttributes.minimumAmount}
-                      max={invoiceAttributes.maximumAmount}
-                      value={value}
-                      onChange={handleValueChange}
-                    />
+                    <div className="flex space-x-1.5 mt-2">
+                      <Button
+                        fullWidth
+                        noPadding
+                        label="100 sat⚡"
+                        onClick={() => {
+                          setValue(100);
+                        }}
+                      />
+                      <Button
+                        fullWidth
+                        noPadding
+                        label="1K sat⚡"
+                        onClick={() => {
+                          setValue(1000);
+                        }}
+                      />
+                      <Button
+                        fullWidth
+                        noPadding
+                        label="5K sat⚡"
+                        onClick={() => {
+                          setValue(5000);
+                        }}
+                      />
+                      <Button
+                        fullWidth
+                        noPadding
+                        label="10K sat⚡"
+                        onClick={() => {
+                          setValue(10000);
+                        }}
+                      />
+                    </div>
                   )}
                 {error && <p className="text-red-500">{error}</p>}
               </div>
