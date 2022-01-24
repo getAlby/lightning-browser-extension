@@ -56,7 +56,7 @@ function Receive() {
     })
       .then(() => {
         setPaid(true);
-        auth.getAccountInfo(); // Update balance.
+        auth.fetchAccountInfo(); // Update balance.
       })
       .catch((err) => console.error(err))
       .finally(() => {
