@@ -47,7 +47,7 @@ function LNURLPay(props: Props) {
   const [successAction, setSuccessAction] = useState<
     LNURLPaymentSuccessAction | undefined
   >();
-  const [clear, setClear] = useState<boolean>(false);
+
   useEffect(() => {
     if (searchParams) {
       // lnurl was passed as querystring
@@ -177,57 +177,37 @@ function LNURLPay(props: Props) {
           <div className="flex flex-wrap justify-between mt-2">
             <div>
               <Button
-								lessPadding
+                lessPadding
                 label="100 sat⚡"
                 onClick={() => {
-                  if (clear === false) {
-                    setValueMSat(100000);
-                    setClear(true);
-                  } else {
-                    setValueMSat(valueMSat + 100000);
-                  }
+                  setValueMSat(100000);
                 }}
               />
             </div>
             <div>
               <Button
-								lessPadding
+                lessPadding
                 label="1K sat⚡"
                 onClick={() => {
-                  if (clear === false) {
-                    setValueMSat(1000000);
-                    setClear(true);
-                  } else {
-                    setValueMSat(valueMSat + 1000000);
-                  }
+                  setValueMSat(1000000);
                 }}
               />
             </div>
             <div>
               <Button
-								lessPadding
+                lessPadding
                 label="5K sat⚡"
                 onClick={() => {
-                  if (clear === false) {
-                    setValueMSat(5000000);
-                    setClear(true);
-                  } else {
-                    setValueMSat(valueMSat + 5000000);
-                  }
+                  setValueMSat(5000000);
                 }}
               />
             </div>
             <div>
               <Button
-								lessPadding
+                lessPadding
                 label="10K sat⚡"
                 onClick={() => {
-                  if (clear === false) {
-                    setValueMSat(10000000);
-                    setClear(true);
-                  } else {
-                    setValueMSat(valueMSat + 10000000);
-                  }
+                  setValueMSat(10000000);
                 }}
               />
             </div>
