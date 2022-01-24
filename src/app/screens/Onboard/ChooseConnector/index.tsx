@@ -56,7 +56,7 @@ export default function ChooseConnector({ title, description }: Props) {
             </p>
           )}
         </div>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-5 gap-5">
           {connectors.map(({ to, title, description, logo }) => (
             <LinkButton
               key={to}
