@@ -178,20 +178,6 @@ function LNURLPay(props: Props) {
             <div>
               <Button
 								lessPadding
-                label="10 sat⚡"
-                onClick={() => {
-                  if (clear === false) {
-                    setValueMSat(10000);
-                    setClear(true);
-                  } else {
-                    setValueMSat(valueMSat + 10000);
-                  }
-                }}
-              />
-            </div>
-            <div>
-              <Button
-								lessPadding
                 label="100 sat⚡"
                 onClick={() => {
                   if (clear === false) {
@@ -213,6 +199,20 @@ function LNURLPay(props: Props) {
                     setClear(true);
                   } else {
                     setValueMSat(valueMSat + 1000000);
+                  }
+                }}
+              />
+            </div>
+            <div>
+              <Button
+								lessPadding
+                label="5K sat⚡"
+                onClick={() => {
+                  if (clear === false) {
+                    setValueMSat(5000000);
+                    setClear(true);
+                  } else {
+                    setValueMSat(valueMSat + 5000000);
                   }
                 }}
               />
