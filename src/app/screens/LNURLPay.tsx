@@ -174,43 +174,39 @@ function LNURLPay(props: Props) {
               setValueMSat(newValue);
             }}
           />
-          <div className="flex flex-wrap justify-between mt-2">
-            <div>
-              <Button
-                lessPadding
-                label="100 sat⚡"
-                onClick={() => {
-                  setValueMSat(100000);
-                }}
-              />
-            </div>
-            <div>
-              <Button
-                lessPadding
-                label="1K sat⚡"
-                onClick={() => {
-                  setValueMSat(1000000);
-                }}
-              />
-            </div>
-            <div>
-              <Button
-                lessPadding
-                label="5K sat⚡"
-                onClick={() => {
-                  setValueMSat(5000000);
-                }}
-              />
-            </div>
-            <div>
-              <Button
-                lessPadding
-                label="10K sat⚡"
-                onClick={() => {
-                  setValueMSat(10000000);
-                }}
-              />
-            </div>
+          <div className="flex space-x-1.5 mt-2">
+            <Button
+              fullWidth
+              noPadding
+              label="100 sat⚡"
+              onClick={() => {
+                setValueMSat(100000);
+              }}
+            />
+            <Button
+              fullWidth
+              noPadding
+              label="1K sat⚡"
+              onClick={() => {
+                setValueMSat(1000000);
+              }}
+            />
+            <Button
+              fullWidth
+              noPadding
+              label="5K sat⚡"
+              onClick={() => {
+                setValueMSat(5000000);
+              }}
+            />
+            <Button
+              fullWidth
+              noPadding
+              label="10K sat⚡"
+              onClick={() => {
+                setValueMSat(10000000);
+              }}
+            />
           </div>
         </div>
       );
