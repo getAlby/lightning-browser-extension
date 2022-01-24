@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import { Transition } from "@headlessui/react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-
 import { parsePaymentRequest } from "invoices";
 
 import Button from "../../components/Button";
