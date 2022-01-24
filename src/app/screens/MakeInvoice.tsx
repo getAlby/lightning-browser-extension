@@ -48,6 +48,22 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
     setValue(e.target.value);
   }
 
+  function handleButtonChange(amount: number) {
+    setError("");
+    if (
+      invoiceAttributes.minimumAmount &&
+      amount < invoiceAttributes.minimumAmount
+    ) {
+      setError("Amount is less than minimum");
+    } else if (
+      invoiceAttributes.maximumAmount &&
+      amount > invoiceAttributes.maximumAmount
+    ) {
+      setError("Amount exceeds maximum");
+    }
+    setValue(amount);
+  }
+
   function handleMemoChange(e: React.ChangeEvent<HTMLInputElement>) {
     setMemo(e.target.value);
   }
@@ -96,7 +112,7 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
                         noPadding
                         label="100 sat⚡"
                         onClick={() => {
-                          setValue(100);
+                          handleButtonChange(100);
                         }}
                       />
                       <Button
@@ -104,7 +120,7 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
                         noPadding
                         label="1K sat⚡"
                         onClick={() => {
-                          setValue(1000);
+                          handleButtonChange(1000);
                         }}
                       />
                       <Button
@@ -112,7 +128,7 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
                         noPadding
                         label="5K sat⚡"
                         onClick={() => {
-                          setValue(5000);
+                          handleButtonChange(5000);
                         }}
                       />
                       <Button
@@ -120,7 +136,7 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
                         noPadding
                         label="10K sat⚡"
                         onClick={() => {
-                          setValue(10000);
+                          handleButtonChange(10000);
                         }}
                       />
                     </div>
