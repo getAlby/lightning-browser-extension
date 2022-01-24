@@ -177,7 +177,6 @@ function LNURLPay(props: Props) {
           <div className="flex space-x-1.5 mt-2">
             <Button
               fullWidth
-              noPadding
               label="100 sat⚡"
               onClick={() => {
                 setValueMSat(100000);
@@ -185,7 +184,6 @@ function LNURLPay(props: Props) {
             />
             <Button
               fullWidth
-              noPadding
               label="1K sat⚡"
               onClick={() => {
                 setValueMSat(1000000);
@@ -193,7 +191,6 @@ function LNURLPay(props: Props) {
             />
             <Button
               fullWidth
-              noPadding
               label="5K sat⚡"
               onClick={() => {
                 setValueMSat(5000000);
@@ -201,7 +198,6 @@ function LNURLPay(props: Props) {
             />
             <Button
               fullWidth
-              noPadding
               label="10K sat⚡"
               onClick={() => {
                 setValueMSat(10000000);

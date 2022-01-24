@@ -109,7 +109,6 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
                     <div className="flex space-x-1.5 mt-2">
                       <Button
                         fullWidth
-                        noPadding
                         label="100 sat⚡"
                         onClick={() => {
                           handleButtonChange(100);
@@ -117,7 +116,6 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
                       />
                       <Button
                         fullWidth
-                        noPadding
                         label="1K sat⚡"
                         onClick={() => {
                           handleButtonChange(1000);
@@ -125,7 +123,6 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
                       />
                       <Button
                         fullWidth
-                        noPadding
                         label="5K sat⚡"
                         onClick={() => {
                           handleButtonChange(5000);
@@ -133,7 +130,6 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
                       />
                       <Button
                         fullWidth
-                        noPadding
                         label="10K sat⚡"
                         onClick={() => {
                           handleButtonChange(10000);
