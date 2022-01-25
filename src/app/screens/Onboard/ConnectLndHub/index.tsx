@@ -57,7 +57,15 @@ export default function ConnectLndHub() {
       // TODO: for native connectors we currently skip the validation because it is too slow (booting up Tor etc.)
       if (account.connector === "nativelndhub") {
         validation = { valid: true, error: "" };
-        browser.permissions.request({ permissions: ["nativeMessaging"] });
+        const permissionGranted = await browser.permissions.request({
+          permissions: ["nativeMessaging"],
+        });
+        if (!permissionGranted) {
+          validation = {
+            valid: false,
+            error: "Native permissions are required to connect through Tor.",
+          };
+        }
       } else {
         validation = await utils.call("validateAccount", account);
       }
