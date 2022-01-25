@@ -40,11 +40,11 @@ function LNURLPay(props: Props) {
         JSON.parse(searchParams.get("origin") as string)) ||
       getOriginData()
   );
-  const [valueMSat, setValueMSat] = useState<number | undefined>(
-    details?.minSendable
+  const [valueSat, setValueSat] = useState(
+    (details?.minSendable && (details?.minSendable / 1000).toString()) || ""
   );
-  const [comment, setComment] = useState<string | undefined>();
-  const [userName, setUserName] = useState<string | undefined>();
+  const [comment, setComment] = useState("");
+  const [userName, setUserName] = useState("");
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successAction, setSuccessAction] = useState<
     LNURLPaymentSuccessAction | undefined
@@ -58,7 +58,7 @@ function LNURLPay(props: Props) {
         lnurl.getDetails(lnurlString).then((lnurlDetails) => {
           if (lnurlDetails.tag === "payRequest") {
             setDetails(lnurlDetails);
-            setValueMSat(lnurlDetails.minSendable);
+            setValueSat((lnurlDetails.minSendable / 1000).toString());
             setLoading(false);
           }
         });
@@ -90,7 +90,7 @@ function LNURLPay(props: Props) {
       setLoadingConfirm(true);
       // Get the invoice
       const params = {
-        amount: valueMSat, // user specified sum in MilliSatoshi
+        amount: parseInt(valueSat) * 1000, // user specified sum in MilliSatoshi
         comment, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/12.md
         payerdata, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/18.md
       };
@@ -105,7 +105,7 @@ function LNURLPay(props: Props) {
       const isValidInvoice = lnurl.verifyInvoice({
         paymentInfo,
         metadata: details.metadata,
-        amount: valueMSat || 0,
+        amount: parseInt(valueSat) * 1000,
         payerdata,
       });
       if (!isValidInvoice) {
@@ -188,43 +188,29 @@ function LNURLPay(props: Props) {
             type="number"
             min={minSendable / 1000}
             max={maxSendable / 1000}
-            value={valueMSat ? valueMSat / 1000 : undefined}
-            onChange={(e) => {
-              let newValue;
-              if (e.target.value) {
-                newValue = parseInt(e.target.value) * 1000;
-              }
-              setValueMSat(newValue);
-            }}
+            value={valueSat}
+            onChange={(e) => setValueSat(e.target.value)}
           />
           <div className="flex space-x-1.5 mt-2">
             <Button
               fullWidth
               label="100 sat⚡"
-              onClick={() => {
-                setValueMSat(100000);
-              }}
+              onClick={() => setValueSat("100")}
             />
             <Button
               fullWidth
               label="1K sat⚡"
-              onClick={() => {
-                setValueMSat(1000000);
-              }}
+              onClick={() => setValueSat("1000")}
             />
             <Button
               fullWidth
               label="5K sat⚡"
-              onClick={() => {
-                setValueMSat(5000000);
-              }}
+              onClick={() => setValueSat("5000")}
             />
             <Button
               fullWidth
               label="10K sat⚡"
-              onClick={() => {
-                setValueMSat(10000000);
-              }}
+              onClick={() => setValueSat("10000")}
             />
           </div>
         </div>
@@ -378,7 +364,7 @@ function LNURLPay(props: Props) {
                   fullWidth
                   primary
                   loading={loadingConfirm}
-                  disabled={loadingConfirm || !valueMSat}
+                  disabled={loadingConfirm || !valueSat}
                 />
               </div>
 
