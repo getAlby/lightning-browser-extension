@@ -27,6 +27,14 @@ class Eclair implements Connector {
     this.config = config;
   }
 
+  init() {
+    return Promise.resolve();
+  }
+
+  unload() {
+    return Promise.resolve();
+  }
+
   getInfo(): Promise<GetInfoResponse> {
     return this.request("/getinfo", undefined, {}).then((data) => {
       return {
