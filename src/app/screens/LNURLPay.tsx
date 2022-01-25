@@ -12,6 +12,7 @@ import msg from "../../common/lib/msg";
 import utils from "../../common/lib/utils";
 import lnurl from "../../common/lib/lnurl";
 import getOriginData from "../../extension/content-script/originData";
+import { useAuth } from "../context/AuthContext";
 
 import Button from "../components/Button";
 import Input from "../components/Form/Input";
@@ -29,8 +30,9 @@ type Props = {
 
 function LNURLPay(props: Props) {
   const [searchParams] = useSearchParams();
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const auth = useAuth();
+  const [loading, setLoading] = useState(true);
   const [details, setDetails] = useState(props.details);
   const [origin] = useState(
     props.origin ||
@@ -98,7 +100,7 @@ function LNURLPay(props: Props) {
           params,
         }
       );
-      const { pr: paymentRequest, successAction } = paymentInfo;
+      const { pr: paymentRequest } = paymentInfo;
 
       const isValidInvoice = lnurl.verifyInvoice({
         paymentInfo,
@@ -120,22 +122,24 @@ function LNURLPay(props: Props) {
 
       // Once payment is fulfilled LN WALLET executes a non-null successAction
       // LN WALLET should also store successAction data on the transaction record
-      if (successAction && !payment.payment_error) {
-        switch (successAction.tag) {
+      if (paymentInfo.successAction && !payment.payment_error) {
+        switch (paymentInfo.successAction.tag) {
           case "url":
           case "message":
-            setSuccessAction(successAction);
+            setSuccessAction(paymentInfo.successAction);
             break;
           case "aes": // TODO: For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage
           default:
             alert(
-              `Not implemented yet. Please submit an issue to support success action: ${successAction.tag}`
+              `Not implemented yet. Please submit an issue to support success action: ${paymentInfo.successAction.tag}`
             );
             break;
         }
       } else {
         setSuccessAction({ tag: "message", message: "Success, payment sent!" });
       }
+
+      auth.fetchAccountInfo(); // Update balance.
     } catch (e) {
       console.log(e);
       if (e instanceof Error) {
@@ -280,19 +284,20 @@ function LNURLPay(props: Props) {
     return elements;
   }
 
-  function renderSuccessAction(action: LNURLPaymentSuccessAction) {
+  function renderSuccessAction() {
+    if (!successAction) return;
     let descriptionList;
-    if (action.tag === "url") {
+    if (successAction.tag === "url") {
       descriptionList = [
-        ["Description", action.description],
+        ["Description", successAction.description],
         [
           "Url",
           <>
-            {action.url}
+            {successAction.url}
             <div className="mt-4">
               <Button
                 onClick={() => {
-                  if (action.url) utils.openUrl(action.url);
+                  if (successAction.url) utils.openUrl(successAction.url);
                 }}
                 label="Open"
                 primary
@@ -301,8 +306,8 @@ function LNURLPay(props: Props) {
           </>,
         ],
       ];
-    } else if (action.tag === "message") {
-      descriptionList = [["Message", action.message]];
+    } else if (successAction.tag === "message") {
+      descriptionList = [["Message", successAction.message]];
     }
 
     return (
@@ -369,7 +374,7 @@ function LNURLPay(props: Props) {
               </div>
             </>
           ) : (
-            renderSuccessAction(successAction)
+            renderSuccessAction()
           )}
         </div>
       )}

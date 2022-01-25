@@ -11,20 +11,31 @@ import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
 import utils from "../../../common/lib/utils";
 import getOriginData from "../../../extension/content-script/originData";
+import { useAuth } from "../../context/AuthContext";
+import type { OriginData } from "../../../types";
 
-function ConfirmPayment(props) {
+type Props = {
+  origin: OriginData;
+  paymentRequest: string;
+};
+
+function ConfirmPayment(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const auth = useAuth();
   const invoiceRef = useRef(
     parsePaymentRequest({
-      request: props.paymentRequest || searchParams.get("paymentRequest"),
+      request:
+        props.paymentRequest || (searchParams.get("paymentRequest") as string),
     })
   );
   const originRef = useRef(props.origin || getOriginData());
   const paymentRequestRef = useRef(
     props.paymentRequest || searchParams.get("paymentRequest")
   );
-  const [budget, setBudget] = useState((invoiceRef.current?.tokens || 0) * 10);
+  const [budget, setBudget] = useState<number | undefined>(
+    (invoiceRef.current?.tokens || 0) * 10
+  );
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [succesMessage, setSuccessMessage] = useState("");
@@ -41,17 +52,18 @@ function ConfirmPayment(props) {
         { paymentRequest: paymentRequestRef.current },
         { origin: originRef.current }
       );
+      auth.fetchAccountInfo(); // Update balance.
       msg.reply(response);
       setSuccessMessage("Success, payment sent!");
     } catch (e) {
       console.error(e);
-      alert(`Error: ${e.message}`);
+      if (e instanceof Error) alert(`Error: ${e.message}`);
     } finally {
       setLoading(false);
     }
   }
 
-  function reject(e) {
+  function reject(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
     if (props.paymentRequest && props.origin) {
       msg.error("User rejected");
@@ -61,6 +73,7 @@ function ConfirmPayment(props) {
   }
 
   function saveBudget() {
+    if (!budget) return;
     return msg.request("addAllowance", {
       totalBudget: budget,
       host: originRef.current.host,

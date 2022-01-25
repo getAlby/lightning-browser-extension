@@ -30,7 +30,7 @@ function AccountMenu() {
     await utils.call("selectAccount", {
       id: accountId,
     });
-    auth.getAccountInfo(accountId);
+    auth.fetchAccountInfo(accountId);
   }
 
   function openOptions(path: string) {
