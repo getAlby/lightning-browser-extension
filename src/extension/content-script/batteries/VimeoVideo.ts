@@ -4,9 +4,8 @@ import setLightningData from "../setLightningData";
 const urlMatcher = /^https:\/\/vimeo.com\/.*/;
 
 const battery = (): void => {
-  document.getElementsByClassName("first")[0].innerHTML;
-  const videoDescription = document.querySelector(".first");
-  const channelLink = document.querySelector(".js-user_link");
+  const videoDescription = document.querySelector("[data-description-content]");
+  const channelLink = document.querySelector(".clip_info-subline--watch");
   if (!videoDescription || !channelLink) {
     return;
   }
