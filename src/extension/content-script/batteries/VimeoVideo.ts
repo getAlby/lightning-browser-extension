@@ -1,7 +1,7 @@
 import getOriginData from "../originData";
 import setLightningData from "../setLightningData";
 
-const urlMatcher = /^https:\/\/vimeo.com\/.*/;
+const urlMatcher = /^https:\/\/vimeo.com\/.*\d{4,}\/?$/;
 
 const battery = (): void => {
   const videoDescription = document.querySelector("[data-description-content]");
