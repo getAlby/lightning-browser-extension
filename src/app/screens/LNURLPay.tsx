@@ -117,7 +117,12 @@ function LNURLPay(props: Props) {
       const payment = await utils.call(
         "lnurlPay",
         { paymentRequest },
-        { origin }
+        {
+          origin: {
+            ...origin,
+            name: getRecipient(),
+          },
+        }
       );
 
       // Once payment is fulfilled LN WALLET executes a non-null successAction
@@ -157,6 +162,20 @@ function LNURLPay(props: Props) {
     } else {
       navigate(-1);
     }
+  }
+
+  function getRecipient() {
+    if (!details?.metadata) return;
+    try {
+      const metadata = JSON.parse(details.metadata);
+      const identifier = metadata.find(
+        ([type]: [string]) => type === "text/identifier"
+      );
+      if (identifier) return identifier[1];
+    } catch (e) {
+      console.error(e);
+    }
+    return details.domain;
   }
 
   function renderAmount(minSendable: number, maxSendable: number) {
@@ -269,7 +288,7 @@ function LNURLPay(props: Props) {
   function elements() {
     if (!details) return [];
     const elements = [];
-    elements.push(["Send payment to", details.domain]);
+    elements.push(["Send payment to", getRecipient()]);
     elements.push(...formattedMetadata(details.metadata));
     elements.push([
       "Amount (Satoshi)",
