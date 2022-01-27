@@ -84,7 +84,14 @@ export default function TestConnection() {
                 </div>
               </div>
             )}
-            {loading && <Loading />}
+            {loading && (
+              <div>
+                <Loading />
+                <p className="text-gray-500 mt-6">
+                  Initializing your account. Please wait, this can take a minute
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
