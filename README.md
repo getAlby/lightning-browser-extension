@@ -107,6 +107,7 @@ Then run the following:
   - Check the `Developer Mode` button to enable it.
   - Click on the `Load Unpacked Extension…` button.
   - Select the extension’s dist directory: `dist/development/chrome`
+  - To see the debug console check the `inspect views` in the extension details 
 
 - **Firefox**
 
