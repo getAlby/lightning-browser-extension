@@ -47,7 +47,7 @@
     "@headlessui/react": "^1.4.3",
     "@tailwindcss/forms": "^0.4.0",
     "assert": "^2.0.0",
-    "axios": "^0.24.0",
+    "axios": "^0.25.0",
     "bech32": "^2.0.0",
     "browser-polyfill": "^3.20.2",
     "crypto-browserify": "^3.12.0",
