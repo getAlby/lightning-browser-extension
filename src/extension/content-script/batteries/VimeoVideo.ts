@@ -5,7 +5,9 @@ const urlMatcher = /^https:\/\/vimeo.com\/.*\d{4,}\/?$/;
 
 const battery = (): void => {
   const videoDescription = document.querySelector("[data-description-content]");
-  const channelLink = document.querySelector(".clip_info-subline--watch span");
+  const channelLink = document.querySelector(
+    ".clip_info-subline--watch .js-user_link"
+  );
   if (!videoDescription || !channelLink) {
     return;
   }
