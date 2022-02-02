@@ -14,6 +14,7 @@ import lnurl from "../../common/lib/lnurl";
 import getOriginData from "../../extension/content-script/originData";
 import { useAuth } from "../context/AuthContext";
 
+import Loading from "../components/Loading";
 import Button from "../components/Button";
 import Input from "../components/Form/Input";
 import PublisherCard from "../components/PublisherCard";
@@ -355,6 +356,11 @@ function LNURLPay(props: Props) {
   return (
     <div>
       <PublisherCard title={origin.name} image={origin.icon} />
+      {loading && (
+        <div className="flex justify-center">
+          <Loading />
+        </div>
+      )}
       {!loading && (
         <div className="p-4 max-w-screen-sm mx-auto">
           {!successAction ? (
