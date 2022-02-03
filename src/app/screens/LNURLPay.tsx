@@ -41,7 +41,7 @@ function LNURLPay(props: Props) {
       getOriginData()
   );
   const [valueSat, setValueSat] = useState(
-    (details?.minSendable && (details?.minSendable / 1000).toString()) || ""
+    (details?.minSendable && (+details?.minSendable / 1000).toString()) || ""
   );
   const [comment, setComment] = useState("");
   const [userName, setUserName] = useState("");
@@ -58,7 +58,9 @@ function LNURLPay(props: Props) {
         lnurl.getDetails(lnurlString).then((lnurlDetails) => {
           if (lnurlDetails.tag === "payRequest") {
             setDetails(lnurlDetails);
-            setValueSat((lnurlDetails.minSendable / 1000).toString());
+            if (lnurlDetails.minSendable) {
+              setValueSat((+lnurlDetails.minSendable / 1000).toString());
+            }
             setLoading(false);
           }
         });
@@ -180,14 +182,14 @@ function LNURLPay(props: Props) {
 
   function renderAmount(minSendable: number, maxSendable: number) {
     if (minSendable === maxSendable) {
-      return <p>{`${minSendable / 1000} sat`}</p>;
+      return <p>{`${+minSendable / 1000} sat`}</p>;
     } else {
       return (
         <div className="mt-1 flex flex-col">
           <Input
             type="number"
-            min={minSendable / 1000}
-            max={maxSendable / 1000}
+            min={+minSendable / 1000}
+            max={+maxSendable / 1000}
             value={valueSat}
             onChange={(e) => setValueSat(e.target.value)}
           />
