@@ -14,7 +14,6 @@ import lnurl from "../../common/lib/lnurl";
 import getOriginData from "../../extension/content-script/originData";
 import { useAuth } from "../context/AuthContext";
 
-import Loading from "../components/Loading";
 import Button from "../components/Button";
 import Input from "../components/Form/Input";
 import PublisherCard from "../components/PublisherCard";
@@ -287,7 +286,12 @@ function LNURLPay(props: Props) {
   }
 
   function elements() {
-    if (!details) return [];
+    if (loading || !details)
+      return [
+        ["Send payment to", "loading..."],
+        ["Description", "loading..."],
+        ["Amount (Satoshi)", "loading..."],
+      ];
     const elements = [];
     elements.push(["Send payment to", getRecipient()]);
     elements.push(...formattedMetadata(details.metadata));
@@ -295,10 +299,10 @@ function LNURLPay(props: Props) {
       "Amount (Satoshi)",
       renderAmount(details.minSendable, details.maxSendable),
     ]);
-    if (details.commentAllowed && details.commentAllowed > 0) {
+    if (details?.commentAllowed > 0) {
       elements.push(["Comment", renderComment()]);
     }
-    if (details.payerData && details.payerData.name) {
+    if (details?.payerData?.name) {
       elements.push(["Name", renderName()]);
     }
     return elements;
@@ -355,54 +359,51 @@ function LNURLPay(props: Props) {
 
   return (
     <div>
-      <PublisherCard title={origin.name} image={origin.icon} />
-      {loading && (
-        <div className="flex justify-center">
-          <Loading />
-        </div>
-      )}
-      {!loading && (
-        <div className="p-4 max-w-screen-sm mx-auto">
-          {!successAction ? (
-            <>
-              <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-                {elements().map(([t, d], i) => (
-                  <Fragment key={`element-${i}`}>
-                    <dt className="text-sm font-semibold text-gray-500">{t}</dt>
-                    <dd className="text-sm mb-4 dark:text-white">{d}</dd>
-                  </Fragment>
-                ))}
-              </dl>
-              <div className="text-center">
-                <div className="mb-5">
-                  <Button
-                    onClick={confirm}
-                    label="Confirm"
-                    fullWidth
-                    primary
-                    loading={loadingConfirm}
-                    disabled={loadingConfirm || !valueMSat}
-                  />
-                </div>
-
-                <p className="mb-3 underline text-sm text-gray-300">
-                  Only connect with sites you trust.
-                </p>
-
-                <a
-                  className="underline text-sm text-gray-500"
-                  href="#"
-                  onClick={reject}
-                >
-                  Cancel
-                </a>
+      <PublisherCard
+        title={origin.name}
+        description={origin.description}
+        image={origin.icon}
+      />
+      <div className="p-4 max-w-screen-sm mx-auto">
+        {!successAction ? (
+          <>
+            <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+              {elements().map(([t, d], i) => (
+                <Fragment key={`element-${i}`}>
+                  <dt className="text-sm font-semibold text-gray-500">{t}</dt>
+                  <dd className="text-sm mb-4 dark:text-white">{d}</dd>
+                </Fragment>
+              ))}
+            </dl>
+            <div className="text-center">
+              <div className="mb-5">
+                <Button
+                  onClick={confirm}
+                  label="Confirm"
+                  fullWidth
+                  primary
+                  loading={loadingConfirm}
+                  disabled={loadingConfirm || !valueMSat}
+                />
               </div>
-            </>
-          ) : (
-            renderSuccessAction()
-          )}
-        </div>
-      )}
+
+              <p className="mb-3 underline text-sm text-gray-300">
+                Only connect with sites you trust.
+              </p>
+
+              <a
+                className="underline text-sm text-gray-500"
+                href="#"
+                onClick={reject}
+              >
+                Cancel
+              </a>
+            </div>
+          </>
+        ) : (
+          renderSuccessAction()
+        )}
+      </div>
     </div>
   );
 }
