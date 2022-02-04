@@ -7,6 +7,7 @@ import RequireAuth from "../RequireAuth";
 import Unlock from "../../screens/Unlock";
 import Enable from "../../screens/Enable";
 import MakeInvoice from "../../screens/MakeInvoice";
+import ConfirmSignMessage from "../../screens/ConfirmSignMessage";
 import ConfirmPayment from "../../screens/ConfirmPayment";
 import LNURLPay from "../../screens/LNURLPay";
 import LNURLAuth from "../../screens/LNURLAuth";
@@ -79,6 +80,15 @@ class Prompt extends Component {
                 element={
                   <ConfirmPayment
                     paymentRequest={this.state.args?.paymentRequest}
+                    origin={this.state.origin}
+                  />
+                }
+              />
+              <Route
+                path="confirmSignMessage"
+                element={
+                  <ConfirmSignMessage
+                    message={this.state.args?.message}
                     origin={this.state.origin}
                   />
                 }
