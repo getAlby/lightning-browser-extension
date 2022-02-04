@@ -55,7 +55,7 @@ export default function PublisherCard({
             )}
           </h2>
           {description && (
-            <p className="text-white opacity-75 truncate">{description}</p>
+            <p className="text-white opacity-60 truncate">{description}</p>
           )}
         </div>
       </div>
