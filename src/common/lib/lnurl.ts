@@ -13,7 +13,10 @@ const fromInternetIdentifier = (address: string) => {
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     )
   ) {
-    const [name, host] = address.split("@");
+    let [name, host] = address.split("@");
+    // remove invisible characters %EF%B8%8F
+    name = name.replace(/[^ -~]+/g, "");
+    host = host.replace(/[^ -~]+/g, "");
     return `https://${host}/.well-known/lnurlp/${name}`;
   }
   return null;
