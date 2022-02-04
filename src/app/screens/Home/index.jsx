@@ -223,7 +223,11 @@ function Home() {
   return (
     <div>
       {!allowance && lnData.length > 0 && (
-        <PublisherCard title={lnData[0].name} image={lnData[0].icon}>
+        <PublisherCard
+          title={lnData[0].name}
+          description={lnData[0].description}
+          image={lnData[0].icon}
+        >
           <Button
             onClick={async () => {
               try {

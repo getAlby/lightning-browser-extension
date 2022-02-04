@@ -16,6 +16,7 @@ import { useAuth } from "../context/AuthContext";
 
 import Button from "../components/Button";
 import Input from "../components/Form/Input";
+import PublisherCard from "../components/PublisherCard";
 
 type Origin = {
   name: string;
@@ -358,6 +359,11 @@ function LNURLPay(props: Props) {
 
   return (
     <div>
+      <PublisherCard
+        title={origin.name}
+        description={origin.description}
+        image={origin.icon}
+      />
       <div className="p-4 max-w-screen-sm mx-auto">
         {!successAction ? (
           <>
