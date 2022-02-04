@@ -40,7 +40,10 @@ export default function PublisherCard({
           }}
         />
         <div className="overflow-hidden">
-          <h2 className="text-lg leading-5 font-bold text-white truncate">
+          <h2
+            className="text-lg leading-5 font-bold text-white truncate"
+            title={title}
+          >
             {title}
 
             {url && (
@@ -55,7 +58,9 @@ export default function PublisherCard({
             )}
           </h2>
           {description && (
-            <p className="text-white opacity-60 truncate">{description}</p>
+            <p className="text-white opacity-60 truncate" title={description}>
+              {description}
+            </p>
           )}
         </div>
       </div>
