@@ -1,7 +1,5 @@
 # Lightning Web Extension
 
-## STATUS: alpha
-
 ### A general browser extension to bring the Bitcoin Lightning network to the browser
 
 The extension provides deep Lightning Network integration for websites (for payments and authentication flows).
@@ -25,6 +23,7 @@ The extension can connect to different node implementations and supports custodi
 - [x] WebLN dynamic makeInvoice support
 - [ ] [Lsat](https://lsat.tech/) support
 
+### STATUS: 🚀
 
 ## Join the conversation
 
