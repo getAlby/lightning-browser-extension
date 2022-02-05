@@ -144,12 +144,12 @@ export default function ConnectLnd() {
           <div className="w-4/5">
             <div className="mt-6">
               <label className="block font-medium text-gray-700 dark:text-white">
-                Address
+                REST address and port
               </label>
               <div className="mt-1">
                 <Input
                   name="url"
-                  placeholder="https://"
+                  placeholder="https://yournode:8080"
                   onChange={handleChange}
                   required
                 />
