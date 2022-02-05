@@ -76,7 +76,7 @@ export default class WebLNProvider {
       throw new Error("Provider must be enabled before calling signMessage");
     }
 
-    return this.execute("signMessage", { message });
+    return this.execute("signMessageOrPrompt", { message });
   }
 
   verifyMessage(signature: string, message: string) {

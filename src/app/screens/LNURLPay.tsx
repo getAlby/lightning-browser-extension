@@ -117,7 +117,12 @@ function LNURLPay(props: Props) {
       const payment = await utils.call(
         "lnurlPay",
         { paymentRequest },
-        { origin }
+        {
+          origin: {
+            ...origin,
+            name: getRecipient(),
+          },
+        }
       );
 
       // Once payment is fulfilled LN WALLET executes a non-null successAction
@@ -157,6 +162,20 @@ function LNURLPay(props: Props) {
     } else {
       navigate(-1);
     }
+  }
+
+  function getRecipient() {
+    if (!details?.metadata) return;
+    try {
+      const metadata = JSON.parse(details.metadata);
+      const identifier = metadata.find(
+        ([type]: [string]) => type === "text/identifier"
+      );
+      if (identifier) return identifier[1];
+    } catch (e) {
+      console.error(e);
+    }
+    return details.domain;
   }
 
   function renderAmount(minSendable: number, maxSendable: number) {
@@ -251,11 +270,6 @@ function LNURLPay(props: Props) {
             return ["Description", content];
           } else if (type === "text/long-desc") {
             return ["Full Description", <p key={type}>{content}</p>];
-          } else if (["image/png;base64", "image/jpeg;base64"].includes(type)) {
-            return [
-              "lnurl",
-              <img key={type} src={`data:${type},${content}`} alt="lnurl" />,
-            ];
           }
           return undefined;
         })
@@ -267,18 +281,23 @@ function LNURLPay(props: Props) {
   }
 
   function elements() {
-    if (!details) return [];
+    if (loading || !details)
+      return [
+        ["Send payment to", "loading..."],
+        ["Description", "loading..."],
+        ["Amount (Satoshi)", "loading..."],
+      ];
     const elements = [];
-    elements.push(["Send payment to", details.domain]);
+    elements.push(["Send payment to", getRecipient()]);
     elements.push(...formattedMetadata(details.metadata));
     elements.push([
       "Amount (Satoshi)",
       renderAmount(details.minSendable, details.maxSendable),
     ]);
-    if (details.commentAllowed && details.commentAllowed > 0) {
+    if (details?.commentAllowed > 0) {
       elements.push(["Comment", renderComment()]);
     }
-    if (details.payerData && details.payerData.name) {
+    if (details?.payerData?.name) {
       elements.push(["Name", renderName()]);
     }
     return elements;
@@ -335,49 +354,51 @@ function LNURLPay(props: Props) {
 
   return (
     <div>
-      <PublisherCard title={origin.name} image={origin.icon} />
-      {!loading && (
-        <div className="p-4 max-w-screen-sm mx-auto">
-          {!successAction ? (
-            <>
-              <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-                {elements().map(([t, d], i) => (
-                  <Fragment key={`element-${i}`}>
-                    <dt className="text-sm font-semibold text-gray-500">{t}</dt>
-                    <dd className="text-sm mb-4 dark:text-white">{d}</dd>
-                  </Fragment>
-                ))}
-              </dl>
-              <div className="text-center">
-                <div className="mb-5">
-                  <Button
-                    onClick={confirm}
-                    label="Confirm"
-                    fullWidth
-                    primary
-                    loading={loadingConfirm}
-                    disabled={loadingConfirm || !valueMSat}
-                  />
-                </div>
-
-                <p className="mb-3 underline text-sm text-gray-300">
-                  Only connect with sites you trust.
-                </p>
-
-                <a
-                  className="underline text-sm text-gray-500"
-                  href="#"
-                  onClick={reject}
-                >
-                  Cancel
-                </a>
+      <PublisherCard
+        title={origin.name}
+        description={origin.description}
+        image={origin.icon}
+      />
+      <div className="p-4 max-w-screen-sm mx-auto">
+        {!successAction ? (
+          <>
+            <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+              {elements().map(([t, d], i) => (
+                <Fragment key={`element-${i}`}>
+                  <dt className="text-sm font-semibold text-gray-500">{t}</dt>
+                  <dd className="text-sm mb-4 dark:text-white">{d}</dd>
+                </Fragment>
+              ))}
+            </dl>
+            <div className="text-center">
+              <div className="mb-5">
+                <Button
+                  onClick={confirm}
+                  label="Confirm"
+                  fullWidth
+                  primary
+                  loading={loadingConfirm}
+                  disabled={loadingConfirm || !valueMSat}
+                />
               </div>
-            </>
-          ) : (
-            renderSuccessAction()
-          )}
-        </div>
-      )}
+
+              <p className="mb-3 underline text-sm text-gray-300">
+                Only connect with sites you trust.
+              </p>
+
+              <a
+                className="underline text-sm text-gray-500"
+                href="#"
+                onClick={reject}
+              >
+                Cancel
+              </a>
+            </div>
+          </>
+        ) : (
+          renderSuccessAction()
+        )}
+      </div>
     </div>
   );
 }

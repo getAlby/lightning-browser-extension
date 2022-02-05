@@ -157,7 +157,7 @@ export default function ConnectLnd() {
             </div>
             <div className="mt-6">
               <div>
-                <label className="block font-medium text-gray-700">
+                <label className="block font-medium text-gray-700 dark:text-white">
                   Macaroon
                 </label>
                 <div className="mt-1">
