@@ -14,12 +14,17 @@ import { useAuth } from "../../context/AuthContext";
 import type { OriginData } from "../../../types";
 import TextField from "../../components/Form/TextField";
 
-type Props = {
+
+
+export type Props = {
   origin: OriginData;
   paymentRequest: string;
 };
 
 function ConfirmPayment(props: Props) {
+  console.log('ORIGIN!', props.origin);
+
+
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAuth();
