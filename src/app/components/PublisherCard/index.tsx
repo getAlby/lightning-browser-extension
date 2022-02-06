@@ -24,8 +24,8 @@ export default function PublisherCard({
     <div
       className="p-4 bg-gray-300"
       style={{
-        backgroundColor: data.muted,
-        backgroundImage: `linear-gradient(${data.muted}, rgba(0, 0, 0, 0.25) 75%)`,
+        backgroundColor: data.vibrant,
+        backgroundImage: `linear-gradient(${data.vibrant}, rgba(0, 0, 0, 0.15))`,
       }}
     >
       <div className="flex sm:justify-center items-center">
@@ -58,7 +58,10 @@ export default function PublisherCard({
             )}
           </h2>
           {description && (
-            <p className="text-white opacity-60 truncate" title={description}>
+            <p
+              className="text-sm text-white opacity-60 truncate"
+              title={description}
+            >
               {description}
             </p>
           )}
