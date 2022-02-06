@@ -27,12 +27,6 @@ const props: Props = {
 describe("ConfirmPayment", () => {
 
   test("render", async () => {
-    // jest.mock('jimp', () => {
-    //   return {
-    //     read: jest.fn().mockImplementation(),
-    //   };
-    // });
-    
       render(
         <ConfirmPayment {...props} />
     );
@@ -40,10 +34,6 @@ describe("ConfirmPayment", () => {
     expect(
       await screen.findByText("Remember and set a budget")
     ).toBeInTheDocument();
-    // expect(await screen.findByLabelText("wallet.invoice")).toBeInTheDocument();
-    // expect(
-    //   await screen.findByRole("button", { name: "wallet.send" })
-    // ).not.toBeDisabled();
   });
 
 

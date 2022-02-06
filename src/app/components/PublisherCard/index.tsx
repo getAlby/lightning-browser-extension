@@ -1,4 +1,4 @@
-import { usePalette } from "react-palette";
+// import { usePalette } from "react-palette";
 import { LinkIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 const DEFAULT_IMAGE =
@@ -19,13 +19,13 @@ export default function PublisherCard({
   url,
   children,
 }: Props) {
-  const { data } = usePalette(image);
+  // const { data } = usePalette(image);
   return (
     <div
       className="p-4 bg-gray-300"
       style={{
-        backgroundColor: data.vibrant,
-        backgroundImage: `linear-gradient(${data.vibrant}, rgba(0, 0, 0, 0.15))`,
+        // backgroundColor: data.vibrant,
+        // backgroundImage: `linear-gradient(${data.vibrant}, rgba(0, 0, 0, 0.15))`,
       }}
     >
       <div className="flex sm:justify-center items-center">
