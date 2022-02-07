@@ -7,17 +7,15 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import utils from "../../../common/lib/utils";
+import { useAuth } from "../../context/AuthContext";
 
 import Badge from "../Badge";
 import Menu from "../Menu";
 
-type Props = {
-  onAccountSwitch?: (id: string) => void;
-};
-
 type Accounts = Record<string, { name: string; connector: string }>;
 
-function AccountMenu({ onAccountSwitch }: Props) {
+function AccountMenu() {
+  const auth = useAuth();
   const navigate = useNavigate();
   const [accounts, setAccounts] = useState<Accounts>({});
 
@@ -28,10 +26,11 @@ function AccountMenu({ onAccountSwitch }: Props) {
   }, []);
 
   async function selectAccount(accountId: string) {
+    auth.setAccountId(accountId);
     await utils.call("selectAccount", {
       id: accountId,
     });
-    onAccountSwitch && onAccountSwitch(accountId);
+    auth.fetchAccountInfo(accountId);
   }
 
   function openOptions(path: string) {

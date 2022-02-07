@@ -3,12 +3,21 @@ import api from "../../../common/lib/api";
 import Monetization from "./Monetization";
 import Twitter from "./Twitter";
 import YouTubeVideo from "./YouTubeVideo";
+import YouTubeChannel from "./YouTubeChannel";
 import Peertube from "./Peertube";
 // import YouTubeChannel from "./YouTubeChannel";
+import VimeoVideo from "./VimeoVideo";
 
 // Order is important as the first one for which the URL matches will be used
 // Monetization must likely be always the last one
-const enhancements = [Twitter, YouTubeVideo, Peertube, Monetization];
+const enhancements = [
+  Twitter,
+  YouTubeVideo,
+  YouTubeChannel,
+  Peertube,
+  VimeoVideo,
+  Monetization,
+];
 
 async function extractLightningData() {
   const settings = await api.getSettings();

@@ -84,6 +84,7 @@ export default function SetPassword() {
               <div className="mt-1">
                 <Input
                   name="password"
+                  id="password"
                   type="password"
                   autoFocus
                   required
@@ -104,6 +105,7 @@ export default function SetPassword() {
               <div className="mt-1">
                 <Input
                   name="passwordConfirmation"
+                  id="passwordConfirmation"
                   type="password"
                   required
                   onChange={handleChange}

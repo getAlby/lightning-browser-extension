@@ -1,7 +1,5 @@
 # Lightning Web Extension
 
-## STATUS: alpha
-
 ### A general browser extension to bring the Bitcoin Lightning network to the browser
 
 The extension provides deep Lightning Network integration for websites (for payments and authentication flows).
@@ -25,6 +23,7 @@ The extension can connect to different node implementations and supports custodi
 - [x] WebLN dynamic makeInvoice support
 - [ ] [Lsat](https://lsat.tech/) support
 
+### STATUS: 🚀
 
 ## Join the conversation
 
@@ -107,10 +106,11 @@ Then run the following:
   - Check the `Developer Mode` button to enable it.
   - Click on the `Load Unpacked Extension…` button.
   - Select the extension’s dist directory: `dist/development/chrome`
+  - To see the debug console check the `inspect views` in the extension details 
 
 - **Firefox**
 
-  - Load the Add-on via `about:debugging` => `This Firefox` as temporary Add-on. (`about:debugging#/runtime/this-firfox`)
+  - Load the Add-on via `about:debugging` => `This Firefox` as temporary Add-on. (`about:debugging#/runtime/this-firefox`)
   - Choose a .xpi file or the `manifest.json` file in the extension's dist directory: `dist/development/firefox`
   - [debugging details](https://extensionworkshop.com/documentation/develop/debugging/#debugging_popups)
   - To see the debug console click "inspect" on the list of temporary extensions (`about:debugging#/runtime/this-firefox`)

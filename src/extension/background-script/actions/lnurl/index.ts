@@ -48,7 +48,7 @@ async function auth(message: Message, lnurlDetails: LNURLDetails) {
       `LNURL-AUTH FAIL: incorrect tag: ${lnurlDetails.tag} was used`
     );
 
-  const connector = state.getState().getConnector();
+  const connector = await state.getState().getConnector();
 
   const signResponse = await connector.signMessage({
     message: LNURLAUTH_CANONICAL_PHRASE,
@@ -204,7 +204,8 @@ export async function lnurlPay(message: Message) {
       error: "Payment request missing.",
     };
   }
-  const connector = state.getState().getConnector();
+  const connector = await state.getState().getConnector();
+
   const paymentRequestDetails = parsePaymentRequest({
     request: paymentRequest,
   });

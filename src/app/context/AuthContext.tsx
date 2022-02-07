@@ -1,19 +1,22 @@
 import { useState, useEffect, createContext, useContext } from "react";
+
 import utils from "../../common/lib/utils";
 import api from "../../common/lib/api";
-
-interface Account {
-  id: string;
-  alias?: string;
-  balance?: number;
-}
+import type { Account } from "../../types";
 
 interface AuthContextType {
   account: Account | null;
   loading: boolean;
   unlock: (user: string, callback: VoidFunction) => void;
   lock: (callback: VoidFunction) => void;
-  getAccountInfo: (id?: string) => void;
+  /**
+   * Set new id and clears current info, which causes a loading indicator for the alias/balance
+   */
+  setAccountId: (id: string) => void;
+  /**
+   * Fetch the additional account info: alias/balance and update account
+   */
+  fetchAccountInfo: (id?: string) => void;
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
@@ -24,7 +27,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const unlock = (password: string, callback: VoidFunction) => {
     return api.unlock(password).then((response) => {
-      getAccountInfo(response.currentAccountId);
+      setAccountId(response.currentAccountId);
+      fetchAccountInfo(response.currentAccountId);
 
       // callback - e.g. navigate to the requested route after unlocking
       callback();
@@ -38,17 +42,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
-  const getAccountInfo = (accountId?: string) => {
+  const setAccountId = (id: string) => setAccount({ id });
+
+  const fetchAccountInfo = async (accountId?: string) => {
     const id = accountId || account?.id;
     if (!id) return;
-    // set the account id to indicate the unlock for other components
-    // also clears current info which causes a loading indicator for the alias/balance
-    setAccount({ id });
-    return api.getAccountInfo().then((response) => {
-      const { alias } = response.info;
-      const balance = parseInt(response.balance.balance); // TODO: handle amounts
-      setAccount({ id, alias, balance });
-    });
+    return api.swr.getAccountInfo(id, setAccount);
   };
 
   // Invoked only on on mount.
@@ -60,7 +59,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           utils.openPage("welcome.html");
           window.close();
         } else if (response.unlocked) {
-          getAccountInfo(response.currentAccountId);
+          setAccountId(response.currentAccountId);
+          fetchAccountInfo(response.currentAccountId);
         } else {
           setAccount(null);
         }
@@ -74,7 +74,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const value = { account, getAccountInfo, loading, unlock, lock };
+  const value = {
+    account,
+    setAccountId,
+    fetchAccountInfo,
+    loading,
+    unlock,
+    lock,
+  };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

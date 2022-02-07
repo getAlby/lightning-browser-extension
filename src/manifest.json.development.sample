@@ -23,6 +23,9 @@
     "http://*/*",
     "https://*/*"
   ],
+  "optional_permissions": [
+    "nativeMessaging"
+  ],
 
  "content_security_policy": "script-src 'self' http://localhost:8097; object-src 'self'; connect-src ws://localhost:8097 ws://localhost:9090 https://alice-wallet.webln.external.myzel.io:443 https://blockchain.info/ticker",
 

@@ -1,3 +1,9 @@
+export interface Account {
+  id: string;
+  alias?: string;
+  balance?: number;
+}
+
 export interface MetaData {
   title?: string;
   description?: string;

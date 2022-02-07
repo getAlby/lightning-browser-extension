@@ -17,7 +17,7 @@ export default async function sendPayment(message: Message) {
   const paymentRequestDetails = parsePaymentRequest({
     request: paymentRequest,
   });
-  const connector = state.getState().getConnector();
+  const connector = await state.getState().getConnector();
 
   const response = await connector.sendPayment({
     paymentRequest,

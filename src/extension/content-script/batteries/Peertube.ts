@@ -7,15 +7,17 @@ interface PeertubeRes {
   channel: {
     displayName: string;
     description: string;
+    support: string | null;
     avatar: {
       path: string;
     };
   };
   description: string;
+  support: string | null;
 }
 
 // add more peertube URLs to this regex
-const urlMatcher = /^https?:\/\/(bitcointv\.com)\/w\/.*/i;
+const urlMatcher = /^https?:\/\/(bitcointv\.com|www\.bitcast\.online)\/w\/.*/i;
 
 const battery = (): void => {
   const hostMatch = document.location.toString().match(urlMatcher);
@@ -44,9 +46,10 @@ const battery = (): void => {
       const channelDescription = data.channel.description;
       const icon = `https://${host}${data.channel.avatar.path}`;
       const episodeDescription = data.description;
+      const support = `${data.support} ${data.channel.support}`;
 
       // we search in the episode or channel description for lightning data
-      const text = `${episodeDescription} ${channelDescription}`;
+      const text = `${episodeDescription} ${channelDescription} ${support}`;
 
       let match;
       let recipient;
@@ -56,7 +59,7 @@ const battery = (): void => {
       }
       // if there is no lnurl we check for a zap emoji with a lightning address
       // we check for the @-sign to try to limit the possibility to match some invalid text (e.g. random emoji usage)
-      else if ((match = text.match(/(⚡️:?|lightning:|lnurl:)(\S+@\S+)/i))) {
+      else if ((match = text.match(/(⚡️:?|lightning:|lnurl:)\s?(\S+@\S+)/i))) {
         recipient = match[2];
       } else {
         return;

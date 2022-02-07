@@ -6,46 +6,68 @@ const DEFAULT_IMAGE =
 
 export type Props = {
   title: string;
+  description?: string;
   image: string;
   url?: string;
   children?: React.ReactNode;
 };
 
-export default function PublisherCard({ title, image, url, children }: Props) {
+export default function PublisherCard({
+  title,
+  description,
+  image,
+  url,
+  children,
+}: Props) {
   const { data } = usePalette(image);
   return (
     <div
-      className="p-6 bg-gray-300 text-center"
+      className="p-4 bg-gray-300"
       style={{
         backgroundColor: data.vibrant,
-        backgroundImage: `linear-gradient(${data.vibrant}, rgba(0, 0, 0, 0.3) 85%)`,
+        backgroundImage: `linear-gradient(${data.vibrant}, rgba(0, 0, 0, 0.15))`,
       }}
     >
-      <img
-        className="w-24 h-24 object-cover rounded-xl shadow-xl mx-auto mb-4"
-        src={image}
-        alt=""
-        onError={(e) => {
-          const target = e.target as HTMLImageElement;
-          target.onerror = null;
-          target.src = DEFAULT_IMAGE;
-        }}
-      />
-      <h2 className="text-center mb-0 text-xl font-medium text-white">
-        {title}
-
-        {url && (
-          <a
-            href={url}
-            target="_blank"
-            className="inline-flex"
-            rel="noreferrer"
+      <div className="flex sm:justify-center items-center">
+        <img
+          className="mr-3 w-18 h-18 shrink-0 border-solid border-2 border-white object-cover rounded-full shadow-xl"
+          src={image}
+          alt=""
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.onerror = null;
+            target.src = DEFAULT_IMAGE;
+          }}
+        />
+        <div className="overflow-hidden">
+          <h2
+            className="text-lg leading-5 font-bold text-white truncate"
+            title={title}
           >
-            <LinkIcon className="inline-flex h-5 w-5" />
-          </a>
-        )}
-      </h2>
-      {children && <div className="mt-2">{children}</div>}
+            {title}
+
+            {url && (
+              <a
+                href={url}
+                target="_blank"
+                className="inline-flex"
+                rel="noreferrer"
+              >
+                <LinkIcon className="inline-flex h-5 w-5" />
+              </a>
+            )}
+          </h2>
+          {description && (
+            <p
+              className="text-sm text-white opacity-60 truncate"
+              title={description}
+            >
+              {description}
+            </p>
+          )}
+        </div>
+      </div>
+      {children && <div className="mt-4 text-center">{children}</div>}
     </div>
   );
 }

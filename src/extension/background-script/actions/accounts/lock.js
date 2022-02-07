@@ -1,8 +1,10 @@
 import state from "../../state";
 
-const lock = (message, sender) => {
-  state.getState().lock();
-  return Promise.resolve({ data: { unlocked: false } });
+const lock = async (message, sender) => {
+  await state.getState().lock();
+  return {
+    data: { unlocked: false },
+  };
 };
 
 export default lock;

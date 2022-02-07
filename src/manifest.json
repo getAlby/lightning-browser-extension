@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Alby - Bitcoin Lightning Wallet",
-  "version": "1.0.1",
+  "version": "0.0.0",
 
   "icons": {
     "16": "assets/icons/alby_icon_yellow_16x16.png",
@@ -9,7 +9,7 @@
     "48": "assets/icons/alby_icon_yellow_48x48.png",
     "128": "assets/icons/alby_icon_yellow_128x128.png"
   },
-  "description": "The Bitcoin Lightning wallet for direct payments across the globe, Bitcoin Lightning applications and passwordless logins in your browser.",
+  "description": "The Bitcoin Lightning wallet for direct payments across the globe, Bitcoin Lightning applications and passwordless logins.",
   "homepage_url": "https://getAlby.com/",
   "web_accessible_resources": ["js/inpageScript.bundle.js"],
   "permissions": [
@@ -19,6 +19,9 @@
     "storage",
     "unlimitedStorage",
     "*://*/*"
+  ],
+  "optional_permissions": [
+    "nativeMessaging"
   ],
 
   "content_security_policy": "script-src 'self'; object-src 'self'",

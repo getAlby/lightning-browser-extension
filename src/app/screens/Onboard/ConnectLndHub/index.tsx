@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import browser from "webextension-polyfill";
 
 import utils from "../../../../common/lib/utils";
 
@@ -21,6 +22,14 @@ export default function ConnectLndHub() {
     });
   }
 
+  function getConnectorType() {
+    if (formData.uri.match(/\.onion/i)) {
+      return "nativelndhub";
+    }
+    // default to LndHub
+    return "lndhub";
+  }
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
@@ -40,11 +49,27 @@ export default function ConnectLndHub() {
         password,
         url,
       },
-      connector: "lndhub",
+      connector: getConnectorType(),
     };
 
     try {
-      const validation = await utils.call("validateAccount", account);
+      let validation;
+      // TODO: for native connectors we currently skip the validation because it is too slow (booting up Tor etc.)
+      if (account.connector === "nativelndhub") {
+        validation = { valid: true, error: "" };
+        const permissionGranted = await browser.permissions.request({
+          permissions: ["nativeMessaging"],
+        });
+        if (!permissionGranted) {
+          validation = {
+            valid: false,
+            error: "Native permissions are required to connect through Tor.",
+          };
+        }
+      } else {
+        validation = await utils.call("validateAccount", account);
+      }
+
       if (validation.valid) {
         const addResult = await utils.call("addAccount", account);
         if (addResult.accountId) {
@@ -85,7 +110,7 @@ export default function ConnectLndHub() {
           <div className="w-4/5">
             <div className="mt-6">
               <label
-                htmlFor="login"
+                htmlFor="uri"
                 className="block font-medium text-gray-700 dark:text-white"
               >
                 LNDHub Export URI
@@ -93,6 +118,7 @@ export default function ConnectLndHub() {
               <div className="mt-1">
                 <Input
                   name="uri"
+                  id="uri"
                   type="text"
                   required
                   placeholder="lndhub://..."

@@ -1,14 +1,12 @@
 import getOriginData from "../originData";
 import setLightningData from "../setLightningData";
 
-const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
+const urlMatcher = /^https:\/\/vimeo.com\/.*\d{4,}\/?$/;
 
 const battery = (): void => {
-  const videoDescription = document.querySelector(
-    "#columns #primary #primary-inner #meta-contents #description .content"
-  );
+  const videoDescription = document.querySelector("[data-description-content]");
   const channelLink = document.querySelector(
-    "#columns #primary #primary-inner #meta-contents .ytd-channel-name a"
+    ".clip_info-subline--watch .js-user_link"
   );
   if (!videoDescription || !channelLink) {
     return;
@@ -30,9 +28,8 @@ const battery = (): void => {
 
   const name = channelLink.textContent || "";
   const imageUrl =
-    document.querySelector<HTMLImageElement>(
-      "#columns #primary #primary-inner #meta-contents img"
-    )?.src || "";
+    document.querySelector<HTMLImageElement>(".clip_info-subline--watch img")
+      ?.src || "";
   setLightningData([
     {
       method: "lnurl",
@@ -44,9 +41,9 @@ const battery = (): void => {
   ]);
 };
 
-const YouTubeVideo = {
+const VimeoVideo = {
   urlMatcher,
   battery,
 };
 
-export default YouTubeVideo;
+export default VimeoVideo;

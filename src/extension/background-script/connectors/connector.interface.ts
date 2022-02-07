@@ -90,6 +90,8 @@ export interface VerifyMessageResponse {
 }
 
 export default interface Connector {
+  init(): Promise<void>;
+  unload(): Promise<void>;
   getInfo(): Promise<GetInfoResponse>;
   getBalance(): Promise<GetBalanceResponse>;
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse>;
