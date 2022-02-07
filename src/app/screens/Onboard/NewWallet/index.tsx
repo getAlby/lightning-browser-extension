@@ -35,16 +35,13 @@ export default function NewWallet() {
     })
       .then((res) => {
         res.json().then((data) => {
-          if (
-            data.lndhub &&
-            data.lndhub.login &&
-            data.lndhub.password &&
-            data.lndhub.url
-          ) {
+          if (data.lndhub?.login && data.lndhub?.password && data.lndhub?.url) {
             setLndHubData(data.lndhub);
           } else {
             console.error(data);
-            alert("Failed to create a new wallet. Please contact support.");
+            alert(
+              "Failed to create a new wallet. Please try again and contact support."
+            );
           }
         });
       })
@@ -145,7 +142,7 @@ export default function NewWallet() {
 
               <div className="mt-6">
                 <label
-                  htmlFor="password"
+                  htmlFor="email"
                   className="block font-medium text-gray-700 dark:text-gray-400"
                 >
                   Email Address
@@ -154,6 +151,7 @@ export default function NewWallet() {
                   <Input
                     name="email"
                     type="email"
+                    id="email"
                     onChange={(e) => {
                       setEmail(e.target.value.trim());
                     }}
