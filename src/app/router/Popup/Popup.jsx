@@ -55,7 +55,7 @@ const Layout = () => {
         }
       />
 
-      <div className="overflow-y-auto">
+      <div className="overflow-y-auto h-full">
         <Outlet />
       </div>
     </div>
