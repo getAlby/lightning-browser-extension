@@ -10,5 +10,8 @@ module.exports = {
   setupFiles: [
     "jest-webextension-mock"
   ],
-  testEnvironment: "jsdom"
+  testEnvironment: "jsdom",
+  setupFilesAfterEnv: [
+    "./jest.setup.ts"
+  ]
 };
