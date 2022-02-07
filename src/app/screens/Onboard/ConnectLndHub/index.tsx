@@ -110,7 +110,7 @@ export default function ConnectLndHub() {
           <div className="w-4/5">
             <div className="mt-6">
               <label
-                htmlFor="login"
+                htmlFor="uri"
                 className="block font-medium text-gray-700 dark:text-white"
               >
                 LNDHub Export URI
@@ -118,6 +118,7 @@ export default function ConnectLndHub() {
               <div className="mt-1">
                 <Input
                   name="uri"
+                  id="uri"
                   type="text"
                   required
                   placeholder="lndhub://..."

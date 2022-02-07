@@ -80,6 +80,7 @@ export default function ConnectLnbits() {
               <div className="mt-1">
                 <Input
                   name="adminkey"
+                  id="adminkey"
                   type="text"
                   required
                   onChange={handleChange}
@@ -96,6 +97,7 @@ export default function ConnectLnbits() {
               <div className="mt-1">
                 <Input
                   name="url"
+                  id="url"
                   type="text"
                   value={formData.url}
                   required

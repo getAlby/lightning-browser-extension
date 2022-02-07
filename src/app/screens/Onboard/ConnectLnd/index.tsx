@@ -143,12 +143,16 @@ export default function ConnectLnd() {
           </p>
           <div className="w-4/5">
             <div className="mt-6">
-              <label className="block font-medium text-gray-700 dark:text-white">
+              <label
+                htmlFor="url"
+                className="block font-medium text-gray-700 dark:text-white"
+              >
                 Address
               </label>
               <div className="mt-1">
                 <Input
                   name="url"
+                  id="url"
                   placeholder="https://"
                   onChange={handleChange}
                   required
@@ -157,12 +161,16 @@ export default function ConnectLnd() {
             </div>
             <div className="mt-6">
               <div>
-                <label className="block font-medium text-gray-700 dark:text-white">
+                <label
+                  htmlFor="macaroon"
+                  className="block font-medium text-gray-700 dark:text-white"
+                >
                   Macaroon
                 </label>
                 <div className="mt-1">
                   <Input
                     name="macaroon"
+                    id="macaroon"
                     value={formData.macaroon}
                     onChange={handleChange}
                     required
