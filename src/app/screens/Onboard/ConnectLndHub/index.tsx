@@ -4,9 +4,9 @@ import browser from "webextension-polyfill";
 
 import utils from "../../../../common/lib/utils";
 
-import Input from "../../../components/Form/Input";
 import Button from "../../../components/Button";
 import QrcodeScanner from "../../../components/QrcodeScanner";
+import TextField from "../../../components/Form/TextField";
 
 export default function ConnectLndHub() {
   const navigate = useNavigate();
@@ -109,23 +109,15 @@ export default function ConnectLndHub() {
           </p>
           <div className="w-4/5">
             <div className="mt-6">
-              <label
-                htmlFor="uri"
-                className="block font-medium text-gray-700 dark:text-white"
-              >
-                LNDHub Export URI
-              </label>
-              <div className="mt-1">
-                <Input
-                  name="uri"
-                  id="uri"
-                  type="text"
-                  required
-                  placeholder="lndhub://..."
-                  value={formData.uri}
-                  onChange={handleChange}
-                />
-              </div>
+              <TextField
+                id="uri"
+                label="LNDHub Export URI"
+                type="text"
+                required
+                placeholder="lndhub://..."
+                value={formData.uri}
+                onChange={handleChange}
+              />
               <p className="text-center my-4 dark:text-white">OR</p>
               <QrcodeScanner
                 fps={10}
