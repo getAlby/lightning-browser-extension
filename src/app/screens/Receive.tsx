@@ -184,6 +184,7 @@ function Receive() {
               <div className="mt-1">
                 <Input
                   name="amount"
+                  id="amount"
                   placeholder="Amount in Satoshi..."
                   type="text"
                   onChange={handleChange}
@@ -201,6 +202,7 @@ function Receive() {
               <div className="mt-1">
                 <Input
                   name="description"
+                  id="description"
                   placeholder="For e.g. who is sending this payment?"
                   type="text"
                   onChange={handleChange}
@@ -215,6 +217,7 @@ function Receive() {
           <div className="mt-1">
             <Select
               name="expiration"
+              id="expiration"
               value={formData.expiration}
               onChange={handleChange}
             >
