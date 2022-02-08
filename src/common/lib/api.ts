@@ -1,7 +1,7 @@
 import browser from "webextension-polyfill";
 
 import utils from "./utils";
-import type { Account, SettingsStorage } from "../../types";
+import type { Accounts, AccountInfo, SettingsStorage } from "../../types";
 
 interface AccountInfoRes {
   currentAccountId: string;
@@ -27,10 +27,10 @@ export const getAccountInfo = () => utils.call<AccountInfoRes>("accountInfo");
  */
 export const swrGetAccountInfo = async (
   id: string,
-  callback?: (account: Account) => void
-): Promise<Account> => {
+  callback?: (account: AccountInfo) => void
+): Promise<AccountInfo> => {
   // Load account info from cache.
-  let accountsCache: { [id: string]: Account } = {};
+  let accountsCache: { [id: string]: AccountInfo } = {};
   const result = await browser.storage.local.get(["accounts"]);
   if (result.accounts) {
     accountsCache = JSON.parse(result.accounts);
@@ -58,10 +58,7 @@ export const swrGetAccountInfo = async (
     });
   });
 };
-export const getAccounts = () =>
-  utils.call<Record<string, { name: string; connector: string }>>(
-    "getAccounts"
-  );
+export const getAccounts = () => utils.call<Accounts>("getAccounts");
 export const getSettings = () => utils.call<SettingsStorage>("getSettings");
 export const getStatus = () => utils.call<StatusRes>("status");
 export const setSetting = (

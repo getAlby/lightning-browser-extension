@@ -1,4 +1,16 @@
+import connectors from "./extension/background-script/connectors";
+
 export interface Account {
+  connector: keyof typeof connectors;
+  config: string;
+  name: string;
+}
+
+export interface Accounts {
+  [id: string]: Account;
+}
+
+export interface AccountInfo {
   id: string;
   alias?: string;
   balance?: number;

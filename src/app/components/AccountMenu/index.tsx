@@ -9,11 +9,10 @@ import {
 import api from "../../../common/lib/api";
 import utils from "../../../common/lib/utils";
 import { useAuth } from "../../context/AuthContext";
+import type { Accounts } from "../../../types";
 
 import Badge from "../Badge";
 import Menu from "../Menu";
-
-type Accounts = Record<string, { name: string; connector: string }>;
 
 function AccountMenu() {
   const auth = useAuth();
