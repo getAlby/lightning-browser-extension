@@ -4,10 +4,6 @@ export interface Account {
   balance?: number;
 }
 
-export interface Accounts {
-  [id: string]: { name: string; connector: string };
-}
-
 export interface MetaData {
   title?: string;
   description?: string;
