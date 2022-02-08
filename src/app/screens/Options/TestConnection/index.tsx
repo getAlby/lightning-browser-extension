@@ -1,32 +1,42 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+import utils from "../../../../common/lib/utils";
+import api from "../../../../common/lib/api";
+import { useAuth } from "../../../context/AuthContext";
+
 import Button from "../../../components/Button";
 import Card from "../../../components/Card";
-import utils from "../../../../common/lib/utils";
 import Loading from "../../../components/Loading";
 
 export default function TestConnection() {
-  const [accountInfo, setAccountInfo] = useState({});
-  const [errorMessage, setErrorMessage] = useState();
+  const auth = useAuth();
+  const [accountInfo, setAccountInfo] =
+    useState<{ alias: string; balance: number }>();
+  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
-  function handleEdit(event) {
+  function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
     utils.call("removeAccount").then(() => {
       navigate(-1);
     });
   }
 
-  function loadAccountInfo() {
+  async function loadAccountInfo() {
     setLoading(true);
-    utils
-      .call("accountInfo")
-      .then((response) => {
-        console.log(response);
+    api
+      .getAccountInfo()
+      .then(async (response) => {
         const { alias } = response.info;
         const balance = parseInt(response.balance.balance);
         setAccountInfo({ alias, balance });
+
+        // Update AuthContext so the app is aware of the new active account.
+        const { currentAccountId } = await api.getStatus();
+        auth.setAccountId(currentAccountId);
+        auth.fetchAccountInfo(currentAccountId);
       })
       .catch((e) => {
         console.log(e);
@@ -37,6 +47,7 @@ export default function TestConnection() {
 
   useEffect(() => {
     loadAccountInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
