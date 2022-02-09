@@ -142,7 +142,7 @@ function Home() {
             />
           ) : (
             <p className="text-gray-500 dark:text-gray-400">
-              No transactions yet.
+              No transactions on <strong>{allowance.name}</strong> yet.
             </p>
           )}
         </div>
