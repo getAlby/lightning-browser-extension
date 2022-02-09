@@ -26,23 +26,24 @@ export default function TestConnection() {
 
   async function loadAccountInfo() {
     setLoading(true);
-    api
-      .getAccountInfo()
-      .then(async (response) => {
-        const { alias } = response.info;
-        const balance = parseInt(response.balance.balance);
-        setAccountInfo({ alias, balance });
-
-        // Update AuthContext so the app is aware of the new active account.
-        const { currentAccountId } = await api.getStatus();
-        auth.setAccountId(currentAccountId);
-        auth.fetchAccountInfo(currentAccountId);
-      })
-      .catch((e) => {
-        console.log(e);
+    try {
+      const { currentAccountId } = await api.getStatus();
+      auth.setAccountId(currentAccountId);
+      const accountInfo = await auth.fetchAccountInfo(currentAccountId);
+      if (accountInfo) {
+        setAccountInfo({
+          alias: accountInfo.alias,
+          balance: accountInfo.balance,
+        });
+      }
+    } catch (e) {
+      console.log(e);
+      if (e instanceof Error) {
         setErrorMessage(e.message);
-      })
-      .finally(() => setLoading(false));
+      }
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {

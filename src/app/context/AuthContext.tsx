@@ -5,7 +5,7 @@ import api from "../../common/lib/api";
 import type { AccountInfo } from "../../types";
 
 interface AuthContextType {
-  account: AccountInfo | null;
+  account: { id: string } | AccountInfo | null;
   loading: boolean;
   unlock: (user: string, callback: VoidFunction) => void;
   lock: (callback: VoidFunction) => void;
@@ -16,13 +16,13 @@ interface AuthContextType {
   /**
    * Fetch the additional account info: alias/balance and update account
    */
-  fetchAccountInfo: (id?: string) => void;
+  fetchAccountInfo: (id?: string) => Promise<AccountInfo | undefined>;
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [account, setAccount] = useState<AccountInfo | null>(null);
+  const [account, setAccount] = useState<AuthContextType["account"]>(null);
   const [loading, setLoading] = useState(true);
 
   const unlock = (password: string, callback: VoidFunction) => {

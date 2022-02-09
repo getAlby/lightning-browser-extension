@@ -12,8 +12,8 @@ export interface Accounts {
 
 export interface AccountInfo {
   id: string;
-  alias?: string;
-  balance?: number;
+  alias: string;
+  balance: number;
 }
 
 export interface MetaData {
