@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import {
+  AddressBookIcon,
   CaretDownIcon,
   PlusIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
@@ -71,6 +72,7 @@ function AccountMenu() {
             </Menu.ItemButton>
           );
         })}
+        <Menu.Divider />
         <Menu.ItemButton
           onClick={() => {
             openOptions("accounts/new");
@@ -78,6 +80,14 @@ function AccountMenu() {
         >
           <PlusIcon className="h-5 w-5 mr-2 text-gray-500" />
           Add a new account
+        </Menu.ItemButton>
+        <Menu.ItemButton
+          onClick={() => {
+            openOptions("accounts");
+          }}
+        >
+          <AddressBookIcon className="h-5 w-5 mr-2 text-gray-500" />
+          Accounts
         </Menu.ItemButton>
       </Menu.List>
     </Menu>
