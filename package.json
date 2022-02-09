@@ -97,7 +97,6 @@
     "@types/memoizee": "^0.4.7",
     "@types/pubsub-js": "^1.8.3",
     "@types/react-modal": "^3.13.1",
-    "@types/react-router-dom": "^5.3.3",
     "@types/sha.js": "^2.4.0",
     "@types/webextension-polyfill": "^0.8.2",
     "@typescript-eslint/eslint-plugin": "^5.9.0",
