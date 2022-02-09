@@ -17,6 +17,7 @@ import LNURLPay from "../../screens/LNURLPay";
 import Settings from "../../screens/Settings";
 import Unlock from "../../screens/Unlock";
 import ChooseConnector from "../../screens/Onboard/ChooseConnector";
+import Accounts from "../../screens/Accounts";
 
 function Options() {
   return (
@@ -41,27 +42,30 @@ function Options() {
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="settings" element={<Settings />} />
-            <Route
-              path="accounts/new"
-              element={
-                <Container>
-                  <Outlet />
-                </Container>
-              }
-            >
+            <Route path="accounts">
               <Route
-                index
+                path="new"
                 element={
-                  <ChooseConnector title="Add a new lightning account" />
+                  <Container>
+                    <Outlet />
+                  </Container>
                 }
-              />
-              {connectorRoutes.map((connectorRoute) => (
+              >
                 <Route
-                  key={connectorRoute.path}
-                  path={connectorRoute.path}
-                  element={connectorRoute.element}
+                  index
+                  element={
+                    <ChooseConnector title="Add a new lightning account" />
+                  }
                 />
-              ))}
+                {connectorRoutes.map((connectorRoute) => (
+                  <Route
+                    key={connectorRoute.path}
+                    path={connectorRoute.path}
+                    element={connectorRoute.element}
+                  />
+                ))}
+              </Route>
+              <Route index element={<Accounts />} />
             </Route>
             <Route
               path="test-connection"
