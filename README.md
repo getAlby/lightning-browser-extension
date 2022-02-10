@@ -169,6 +169,10 @@ Also we focus on supporting multipe different node backends (non-custodial and c
 
 WebLN is a library and set of specifications for lightning apps and client providers to facilitate communication between apps and users' lightning nodes in a secure way. It provides a programmatic, permissioned interface for letting applications ask users to send payments, generate invoices to receive payments, and much more. This [documentation](https://webln.dev/#/) covers how to use WebLN in your Lightning-driven applications.
 
+#### Is there a bounty program and can I contribute? 
+
+Yes. Thanks to generous donors, Alby is able to offer several bounties. You can find them on our [Wiki page](https://github.com/getAlby/lightning-browser-extension/wiki/Bounties). If you want to support Alby's bounty program or bump a feature on the roadmap, please donate [here](https://getalby.com/bounties). We would appreciate your contribution a lot! 🙏
+
 ### Thanks
 
 Based on the web extension starter kit: [/abhijithvijayan/web-extension-starter](https://github.com/abhijithvijayan/web-extension-starter")
