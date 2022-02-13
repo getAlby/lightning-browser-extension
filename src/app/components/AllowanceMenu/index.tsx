@@ -7,7 +7,7 @@ import utils from "../../../common/lib/utils";
 
 import Button from "../Button";
 import Menu from "../Menu";
-import CurrencyInput from "../Form/CurrencyInput";
+import TextField from "../Form/TextField";
 
 type Props = {
   allowance: {
@@ -83,18 +83,13 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
           </button>
         </div>
         <div className="p-5 border-t border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">
-          <label
-            htmlFor="budget"
-            className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
-          >
-            Budget
-          </label>
           <div className="w-60">
-            <CurrencyInput
+            <TextField
               id="budget"
-              name="budget"
+              label="Budget"
               placeholder="sat"
               value={budget}
+              type="number"
               onChange={(event) => {
                 setBudget(
                   !isNaN(event.target.valueAsNumber)

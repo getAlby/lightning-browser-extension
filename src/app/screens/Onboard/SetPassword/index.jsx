@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Input from "../../../components/Form/Input";
+import TextField from "../../../components/Form/TextField";
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 import utils from "../../../../common/lib/utils";
@@ -75,48 +75,32 @@ export default function SetPassword() {
           </p>
           <div className="w-4/5">
             <div className="mt-6">
-              <label
-                htmlFor="password"
-                className="block font-medium text-gray-700 dark:text-white"
-              >
-                Choose a password:
-              </label>
-              <div className="mt-1">
-                <Input
-                  name="password"
-                  id="password"
-                  type="password"
-                  autoFocus
-                  required
-                  onChange={handleChange}
-                />
-                {errors.password && (
-                  <div className="mt-1 text-red-500">{errors.password}</div>
-                )}
-              </div>
+              <TextField
+                id="password"
+                label="Choose a password:"
+                type="password"
+                autoFocus
+                required
+                onChange={handleChange}
+              />
+              {errors.password && (
+                <div className="mt-1 text-red-500">{errors.password}</div>
+              )}
             </div>
             <div className="mt-6">
-              <label
-                htmlFor="passwordConfirmation"
-                className="block font-medium text-gray-700 dark:text-white"
-              >
-                Let&apos;s confirm you typed it correct:
-              </label>
-              <div className="mt-1">
-                <Input
-                  name="passwordConfirmation"
-                  id="passwordConfirmation"
-                  type="password"
-                  required
-                  onChange={handleChange}
-                  onBlur={validate}
-                />
-                {errors.passwordConfirmation && (
-                  <div className="mt-1 text-red-500">
-                    {errors.passwordConfirmation}
-                  </div>
-                )}
-              </div>
+              <TextField
+                id="passwordConfirmation"
+                label="Let's confirm you typed it correct:"
+                type="password"
+                required
+                onChange={handleChange}
+                onBlur={validate}
+              />
+              {errors.passwordConfirmation && (
+                <div className="mt-1 text-red-500">
+                  {errors.passwordConfirmation}
+                </div>
+              )}
             </div>
           </div>
         </div>
