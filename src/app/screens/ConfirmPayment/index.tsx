@@ -33,8 +33,8 @@ function ConfirmPayment(props: Props) {
   const paymentRequestRef = useRef(
     props.paymentRequest || searchParams.get("paymentRequest")
   );
-  const [budget, setBudget] = useState<number | undefined>(
-    (invoiceRef.current?.tokens || 0) * 10
+  const [budget, setBudget] = useState(
+    ((invoiceRef.current?.tokens || 0) * 10).toString()
   );
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -75,7 +75,7 @@ function ConfirmPayment(props: Props) {
   function saveBudget() {
     if (!budget) return;
     return msg.request("addAllowance", {
-      totalBudget: budget,
+      totalBudget: parseInt(budget),
       host: originRef.current.host,
       name: originRef.current.name,
       imageURL: originRef.current.icon,
@@ -156,9 +156,7 @@ function ConfirmPayment(props: Props) {
                     placeholder="sat"
                     value={budget}
                     type="number"
-                    onChange={(event) => {
-                      setBudget(parseInt(event.target.value) || undefined);
-                    }}
+                    onChange={(event) => setBudget(event.target.value)}
                   />
                 </div>
               </Transition>
