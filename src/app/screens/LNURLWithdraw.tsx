@@ -1,7 +1,7 @@
 import { useState, MouseEvent } from "react";
 import axios from "axios";
 
-import { LNURLWithdrawServiceResponse } from "../../types";
+import type { LNURLWithdrawServiceResponse } from "../../types";
 import getOriginData from "../../extension/content-script/originData";
 import msg from "../../common/lib/msg";
 import api from "../../common/lib/api";
@@ -21,17 +21,19 @@ type Props = {
 function LNURLWithdraw(props: Props) {
   const [origin] = useState(props.origin || getOriginData());
   const { minWithdrawable, maxWithdrawable } = props.details;
-  const [valueMSat, setValueMSat] = useState<number | undefined>(
-    maxWithdrawable
+  const [valueSat, setValueSat] = useState(
+    (maxWithdrawable && (+maxWithdrawable / 1000).toString()) || ""
   );
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function confirm() {
     try {
+      setErrorMessage("");
       setLoadingConfirm(true);
       const invoice = await api.makeInvoice({
-        amount: valueMSat ? valueMSat / 1000 : 0,
+        amount: parseInt(valueSat),
         memo: props.details.defaultDescription,
       });
 
@@ -45,6 +47,9 @@ function LNURLWithdraw(props: Props) {
       setSuccessMessage("Withdraw request sent successfully.");
     } catch (e) {
       console.error(e);
+      if (e instanceof Error) {
+        setErrorMessage(e.message);
+      }
     } finally {
       setLoadingConfirm(false);
     }
@@ -60,15 +65,10 @@ function LNURLWithdraw(props: Props) {
             type="number"
             min={minWithdrawable / 1000}
             max={maxWithdrawable / 1000}
-            value={valueMSat ? valueMSat / 1000 : undefined}
-            onChange={(e) => {
-              let newValue;
-              if (e.target.value) {
-                newValue = parseInt(e.target.value) * 1000;
-              }
-              setValueMSat(newValue);
-            }}
+            value={valueSat}
+            onChange={(e) => setValueSat(e.target.value)}
           />
+          {errorMessage && <p className="mt-1 text-red-500">{errorMessage}</p>}
         </div>
       );
     }
@@ -119,7 +119,7 @@ function LNURLWithdraw(props: Props) {
                   fullWidth
                   primary
                   loading={loadingConfirm}
-                  disabled={loadingConfirm || !valueMSat}
+                  disabled={loadingConfirm || !valueSat}
                 />
               </div>
 
