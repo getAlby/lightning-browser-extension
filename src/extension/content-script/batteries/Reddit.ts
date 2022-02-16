@@ -52,7 +52,6 @@ function battery(): void {
           userData.element.textContent.includes("⚡")
         ) {
           const descriptionText = userData.element.textContent.split(" ");
-          console.log({ descriptionText });
           // If we detect the empji we can iterate through the text seperated by whitespace to try and find a match
           for (const text of descriptionText) {
             if ((match = (text || "").match(/(\S+@\S+)/))) {
@@ -88,8 +87,7 @@ function battery(): void {
     childList: true,
     subtree: true,
   });
-  // On slow connections the observer is added after the DOM is fully loaded.
-  // Therefore the callback twitterDOMChanged needs to also be called manually.
+
   redditDOMChanged([], window.LBE_REDDIT_MUTATION_OBSERVER);
 }
 
