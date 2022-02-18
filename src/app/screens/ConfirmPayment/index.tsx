@@ -19,9 +19,6 @@ export type Props = {
 };
 
 function ConfirmPayment(props: Props) {
-  console.log("ORIGIN!", props.origin);
-  console.log("paymentRequest!", props.paymentRequest);
-
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAuth();
