@@ -5,7 +5,6 @@ import { parsePaymentRequest } from "invoices";
 
 import Button from "../../components/Button";
 import Checkbox from "../../components/Form/Checkbox";
-import CurrencyInput from "../../components/Form/CurrencyInput";
 import PaymentSummary from "../../components/PaymentSummary";
 import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
@@ -13,6 +12,7 @@ import utils from "../../../common/lib/utils";
 import getOriginData from "../../../extension/content-script/originData";
 import { useAuth } from "../../context/AuthContext";
 import type { OriginData } from "../../../types";
+import TextField from "../../components/Form/TextField";
 
 type Props = {
   origin: OriginData;
@@ -33,8 +33,8 @@ function ConfirmPayment(props: Props) {
   const paymentRequestRef = useRef(
     props.paymentRequest || searchParams.get("paymentRequest")
   );
-  const [budget, setBudget] = useState<number | undefined>(
-    (invoiceRef.current?.tokens || 0) * 10
+  const [budget, setBudget] = useState(
+    ((invoiceRef.current?.tokens || 0) * 10).toString()
   );
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -75,7 +75,7 @@ function ConfirmPayment(props: Props) {
   function saveBudget() {
     if (!budget) return;
     return msg.request("addAllowance", {
-      totalBudget: budget,
+      totalBudget: parseInt(budget),
       host: originRef.current.host,
       name: originRef.current.name,
       imageURL: originRef.current.icon,
@@ -150,20 +150,13 @@ function ConfirmPayment(props: Props) {
                   payments until it is exhausted.
                 </p>
                 <div>
-                  <label
-                    htmlFor="budget"
-                    className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
-                  >
-                    Budget
-                  </label>
-                  <CurrencyInput
+                  <TextField
                     id="budget"
-                    name="budget"
+                    label="Budget"
                     placeholder="sat"
                     value={budget}
-                    onChange={(event) => {
-                      setBudget(parseInt(event.target.value) || undefined);
-                    }}
+                    type="number"
+                    onChange={(event) => setBudget(event.target.value)}
                   />
                 </div>
               </Transition>

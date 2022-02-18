@@ -7,7 +7,7 @@ import utils from "../../../common/lib/utils";
 
 import Button from "../Button";
 import Menu from "../Menu";
-import CurrencyInput from "../Form/CurrencyInput";
+import TextField from "../Form/TextField";
 
 type Props = {
   allowance: {
@@ -20,10 +20,10 @@ type Props = {
 
 function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [budget, setBudget] = useState<number | undefined>(0);
+  const [budget, setBudget] = useState("0");
 
   function openModal() {
-    setBudget(allowance.totalBudget);
+    setBudget(allowance.totalBudget.toString());
     setIsOpen(true);
   }
 
@@ -34,7 +34,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   async function updateAllowance() {
     await utils.call("updateAllowance", {
       id: parseInt(allowance.id),
-      totalBudget: budget,
+      totalBudget: parseInt(budget),
     });
     onEdit && onEdit();
     closeModal();
@@ -83,25 +83,14 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
           </button>
         </div>
         <div className="p-5 border-t border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">
-          <label
-            htmlFor="budget"
-            className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
-          >
-            Budget
-          </label>
           <div className="w-60">
-            <CurrencyInput
+            <TextField
               id="budget"
-              name="budget"
+              label="Budget"
               placeholder="sat"
               value={budget}
-              onChange={(event) => {
-                setBudget(
-                  !isNaN(event.target.valueAsNumber)
-                    ? event.target.valueAsNumber
-                    : undefined
-                );
-              }}
+              type="number"
+              onChange={(e) => setBudget(e.target.value)}
             />
           </div>
         </div>
@@ -110,7 +99,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             onClick={updateAllowance}
             label="Save"
             primary
-            disabled={budget === undefined}
+            disabled={budget === ""}
           />
         </div>
       </Modal>

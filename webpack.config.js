@@ -17,10 +17,9 @@ if (!process.env.FAUCET_K) {
   process.env.FAUCET_K = ""; // env variables are passed as string. empty strings are still falsy
 }
 // default value is set in the code where it is used
-if (!process.env.ALBY_LNDHUB_URL) {
-  process.env.ALBY_LNDHUB_URL = ""; // env variables are passed as string. empty strings are still falsy
+if (!process.env.WALLET_CREATE_URL) {
+  process.env.WALLET_CREATE_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
-
 // default value is set in the code where it is used
 if (!process.env.GALOY_URL) {
   process.env.GALOY_URL = ""; // env variables are passed as string. empty strings are still falsy
@@ -139,12 +138,12 @@ var options = {
     // new webpack.SourceMapDevToolPlugin({ filename: false }),
     // environmental variables
     new webpack.EnvironmentPlugin([
-      "ALBY_LNDHUB_URL",
-      "GALOY_URL",
-      "FAUCET_URL",
       "FAUCET_K",
+      "FAUCET_URL",
+      "GALOY_URL",
       "NODE_ENV",
       "TARGET_BROWSER",
+      "WALLET_CREATE_URL",
     ]),
     // delete previous build files
     new CleanWebpackPlugin({

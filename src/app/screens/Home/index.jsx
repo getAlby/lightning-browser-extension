@@ -104,8 +104,10 @@ function Home() {
               />
             </div>
           </div>
-
-          {allowance.payments && (
+          <h2 className="mb-2 text-lg text-gray-900 font-semibold dark:text-white">
+            Recent Transactions
+          </h2>
+          {allowance?.payments.length > 0 ? (
             <TransactionsTable
               transactions={allowance.payments.map((payment) => ({
                 ...payment,
@@ -138,6 +140,10 @@ function Home() {
                 ),
               }))}
             />
+          ) : (
+            <p className="text-gray-500 dark:text-gray-400">
+              No transactions on <strong>{allowance.name}</strong> yet.
+            </p>
           )}
         </div>
       </>
