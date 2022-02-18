@@ -32,20 +32,20 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
   );
   const [error, setError] = useState("");
 
-  function handleValueChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleValueChange(amount: string) {
     setError("");
     if (
       invoiceAttributes.minimumAmount &&
-      e.target.valueAsNumber < invoiceAttributes.minimumAmount
+      parseInt(amount) < invoiceAttributes.minimumAmount
     ) {
       setError("Amount is less than minimum");
     } else if (
       invoiceAttributes.maximumAmount &&
-      e.target.valueAsNumber > invoiceAttributes.maximumAmount
+      parseInt(amount) > invoiceAttributes.maximumAmount
     ) {
       setError("Amount exceeds maximum");
     }
-    setValue(e.target.value);
+    setValue(amount);
   }
 
   function handleMemoChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -86,20 +86,34 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
                   min={invoiceAttributes.minimumAmount}
                   max={invoiceAttributes.maximumAmount}
                   value={value}
-                  onChange={handleValueChange}
+                  onChange={(e) => handleValueChange(e.target.value)}
                 />
                 {invoiceAttributes.minimumAmount &&
                   invoiceAttributes.maximumAmount && (
-                    <input
-                      className="mt-2"
-                      type="range"
-                      min={invoiceAttributes.minimumAmount}
-                      max={invoiceAttributes.maximumAmount}
-                      value={value}
-                      onChange={handleValueChange}
-                    />
+                    <div className="flex space-x-1.5 mt-2">
+                      <Button
+                        fullWidth
+                        label="100 sat⚡"
+                        onClick={() => handleValueChange("100")}
+                      />
+                      <Button
+                        fullWidth
+                        label="1K sat⚡"
+                        onClick={() => handleValueChange("1000")}
+                      />
+                      <Button
+                        fullWidth
+                        label="5K sat⚡"
+                        onClick={() => handleValueChange("5000")}
+                      />
+                      <Button
+                        fullWidth
+                        label="10K sat⚡"
+                        onClick={() => handleValueChange("10000")}
+                      />
+                    </div>
                   )}
-                {error && <p className="text-red-500">{error}</p>}
+                {error && <p className="mt-1 text-red-500">{error}</p>}
               </div>
             }
             description={

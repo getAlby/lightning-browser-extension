@@ -1,7 +1,8 @@
 import { useState, useRef } from "react";
 import { SendIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import browser from "webextension-polyfill";
 
-import Input from "../../../components/Form/Input";
+import TextField from "../../../components/Form/TextField";
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 
@@ -52,6 +53,15 @@ export default function ConnectLnd() {
       // TODO: for native connectors we currently skip the validation because it is too slow (booting up Tor etc.)
       if (account.connector === "nativelnd") {
         validation = { valid: true, error: "" };
+        const permissionGranted = await browser.permissions.request({
+          permissions: ["nativeMessaging"],
+        });
+        if (!permissionGranted) {
+          validation = {
+            valid: false,
+            error: "Native permissions are required to connect through Tor.",
+          };
+        }
       } else {
         validation = await utils.call("validateAccount", account);
       }
@@ -133,31 +143,23 @@ export default function ConnectLnd() {
           </p>
           <div className="w-4/5">
             <div className="mt-6">
-              <label className="block font-medium text-gray-700 dark:text-white">
-                Address
-              </label>
-              <div className="mt-1">
-                <Input
-                  name="url"
-                  placeholder="https://"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+              <TextField
+                id="url"
+                label="Address"
+                placeholder="https://"
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="mt-6">
               <div>
-                <label className="block font-medium text-gray-700">
-                  Macaroon
-                </label>
-                <div className="mt-1">
-                  <Input
-                    name="macaroon"
-                    value={formData.macaroon}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
+                <TextField
+                  id="macaroon"
+                  label="Macaroon"
+                  value={formData.macaroon}
+                  onChange={handleChange}
+                  required
+                />
               </div>
               <p className="text-center my-4 dark:text-white">OR</p>
               <div

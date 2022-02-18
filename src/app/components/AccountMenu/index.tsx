@@ -6,13 +6,13 @@ import {
   PlusIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 
+import api from "../../../common/lib/api";
 import utils from "../../../common/lib/utils";
 import { useAuth } from "../../context/AuthContext";
+import type { Accounts } from "../../../types";
 
 import Badge from "../Badge";
 import Menu from "../Menu";
-
-type Accounts = Record<string, { name: string; connector: string }>;
 
 function AccountMenu() {
   const auth = useAuth();
@@ -20,17 +20,17 @@ function AccountMenu() {
   const [accounts, setAccounts] = useState<Accounts>({});
 
   useEffect(() => {
-    utils.call<Accounts>("getAccounts").then((response) => {
+    api.getAccounts().then((response) => {
       setAccounts(response);
     });
-  }, []);
+  }, [auth.account]);
 
   async function selectAccount(accountId: string) {
     auth.setAccountId(accountId);
     await utils.call("selectAccount", {
       id: accountId,
     });
-    auth.getAccountInfo(accountId);
+    auth.fetchAccountInfo(accountId);
   }
 
   function openOptions(path: string) {

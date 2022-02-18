@@ -8,8 +8,8 @@ import TextField from "../../../components/Form/TextField";
 export default function ConnectLnbits() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    adminkey: "",
-    url: "https://legend.lnbits.com",
+    password: "",
+    url: "http://localhost:8080",
   });
   const [loading, setLoading] = useState(false);
 
@@ -23,14 +23,14 @@ export default function ConnectLnbits() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
-    const { adminkey, url } = formData;
+    const { password, url } = formData;
     const account = {
-      name: "LNBits",
+      name: "Eclair",
       config: {
-        adminkey,
+        password,
         url,
       },
-      connector: "lnbits",
+      connector: "eclair",
     };
 
     try {
@@ -46,13 +46,13 @@ export default function ConnectLnbits() {
       } else {
         console.log(validation);
         alert(
-          `Connection failed. Do you have the correct URL and Admin Key? \n\n(${validation.error})`
+          `Connection failed. Do you have the correct URL and password? \n\n(${validation.error})`
         );
       }
     } catch (e) {
       console.error(e);
       let message =
-        "Connection failed. Do you have the correct URL and Admin Key?";
+        "Connection failed. Do you have the correct URL and password?";
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
@@ -66,14 +66,14 @@ export default function ConnectLnbits() {
       <div className="relative lg:flex mt-14 bg-white dark:bg-gray-800 px-10 py-12">
         <div className="lg:w-1/2">
           <h1 className="text-2xl font-bold dark:text-white">
-            Connect to LNbits
+            Connect to Eclair
           </h1>
           <p className="text-gray-500 mt-6"></p>
           <div className="w-4/5">
             <div className="mt-6">
               <TextField
-                id="adminkey"
-                label="LNbits Admin Key"
+                id="password"
+                label="Eclair Password"
                 type="text"
                 required
                 onChange={handleChange}
@@ -82,7 +82,7 @@ export default function ConnectLnbits() {
             <div className="mt-6">
               <TextField
                 id="url"
-                label="LNbits URL"
+                label="Eclair URL"
                 type="text"
                 value={formData.url}
                 required
@@ -111,7 +111,7 @@ export default function ConnectLnbits() {
           label="Continue"
           primary
           loading={loading}
-          disabled={formData.adminkey === "" || formData.url === ""}
+          disabled={formData.password === "" || formData.url === ""}
         />
       </div>
     </form>

@@ -104,8 +104,10 @@ function Home() {
               />
             </div>
           </div>
-
-          {allowance.payments && (
+          <h2 className="mb-2 text-lg text-gray-900 font-semibold dark:text-white">
+            Recent Transactions
+          </h2>
+          {allowance?.payments.length > 0 ? (
             <TransactionsTable
               transactions={allowance.payments.map((payment) => ({
                 ...payment,
@@ -138,6 +140,10 @@ function Home() {
                 ),
               }))}
             />
+          ) : (
+            <p className="text-gray-500 dark:text-gray-400">
+              No transactions on <strong>{allowance.name}</strong> yet.
+            </p>
           )}
         </div>
       </>
@@ -223,7 +229,11 @@ function Home() {
   return (
     <div>
       {!allowance && lnData.length > 0 && (
-        <PublisherCard title={lnData[0].name} image={lnData[0].icon}>
+        <PublisherCard
+          title={lnData[0].name}
+          description={lnData[0].description}
+          image={lnData[0].icon}
+        >
           <Button
             onClick={async () => {
               try {

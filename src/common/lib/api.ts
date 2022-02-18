@@ -1,7 +1,7 @@
 import browser from "webextension-polyfill";
 
 import utils from "./utils";
-import type { Account, SettingsStorage } from "../../types";
+import type { Accounts, AccountInfo, SettingsStorage } from "../../types";
 
 interface AccountInfoRes {
   currentAccountId: string;
@@ -13,12 +13,6 @@ interface StatusRes {
   configured: boolean;
   unlocked: boolean;
   currentAccountId: string;
-  info: {
-    alias: string;
-  };
-  balance: {
-    balance: string;
-  };
 }
 
 interface UnlockRes {
@@ -33,10 +27,10 @@ export const getAccountInfo = () => utils.call<AccountInfoRes>("accountInfo");
  */
 export const swrGetAccountInfo = async (
   id: string,
-  callback?: (account: Account) => void
-): Promise<Account> => {
+  callback?: (account: AccountInfo) => void
+): Promise<AccountInfo> => {
   // Load account info from cache.
-  let accountsCache: { [id: string]: Account } = {};
+  let accountsCache: { [id: string]: AccountInfo } = {};
   const result = await browser.storage.local.get(["accounts"]);
   if (result.accounts) {
     accountsCache = JSON.parse(result.accounts);
@@ -64,6 +58,7 @@ export const swrGetAccountInfo = async (
     });
   });
 };
+export const getAccounts = () => utils.call<Accounts>("getAccounts");
 export const getSettings = () => utils.call<SettingsStorage>("getSettings");
 export const getStatus = () => utils.call<StatusRes>("status");
 export const setSetting = (
@@ -77,6 +72,7 @@ export const unlock = (password: string) =>
 
 export default {
   getAccountInfo,
+  getAccounts,
   getSettings,
   getStatus,
   setSetting,

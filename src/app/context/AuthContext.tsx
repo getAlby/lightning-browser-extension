@@ -2,10 +2,10 @@ import { useState, useEffect, createContext, useContext } from "react";
 
 import utils from "../../common/lib/utils";
 import api from "../../common/lib/api";
-import type { Account } from "../../types";
+import type { AccountInfo } from "../../types";
 
 interface AuthContextType {
-  account: Account | null;
+  account: { id: string } | AccountInfo | null;
   loading: boolean;
   unlock: (user: string, callback: VoidFunction) => void;
   lock: (callback: VoidFunction) => void;
@@ -14,21 +14,21 @@ interface AuthContextType {
    */
   setAccountId: (id: string) => void;
   /**
-   * Get's the additional account info: alias/balance
+   * Fetch the additional account info: alias/balance and update account
    */
-  getAccountInfo: (id?: string) => void;
+  fetchAccountInfo: (id?: string) => Promise<AccountInfo | undefined>;
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [account, setAccount] = useState<Account | null>(null);
+  const [account, setAccount] = useState<AuthContextType["account"]>(null);
   const [loading, setLoading] = useState(true);
 
   const unlock = (password: string, callback: VoidFunction) => {
     return api.unlock(password).then((response) => {
       setAccountId(response.currentAccountId);
-      getAccountInfo(response.currentAccountId);
+      fetchAccountInfo(response.currentAccountId);
 
       // callback - e.g. navigate to the requested route after unlocking
       callback();
@@ -44,7 +44,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const setAccountId = (id: string) => setAccount({ id });
 
-  const getAccountInfo = async (accountId?: string) => {
+  const fetchAccountInfo = async (accountId?: string) => {
     const id = accountId || account?.id;
     if (!id) return;
     return api.swr.getAccountInfo(id, setAccount);
@@ -60,7 +60,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           window.close();
         } else if (response.unlocked) {
           setAccountId(response.currentAccountId);
-          getAccountInfo(response.currentAccountId);
+          fetchAccountInfo(response.currentAccountId);
         } else {
           setAccount(null);
         }
@@ -77,7 +77,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const value = {
     account,
     setAccountId,
-    getAccountInfo,
+    fetchAccountInfo,
     loading,
     unlock,
     lock,

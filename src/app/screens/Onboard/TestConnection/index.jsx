@@ -7,6 +7,7 @@ import Input from "../../../components/Form/Input";
 import Button from "../../../components/Button";
 import Card from "../../../components/Card";
 import utils from "../../../../common/lib/utils";
+import api from "../../../../common/lib/api";
 import Loading from "../../../components/Loading";
 
 const customStyles = {
@@ -82,8 +83,8 @@ export default function TestConnection() {
 
   function loadAccountInfo() {
     setLoading(true);
-    utils
-      .call("accountInfo")
+    api
+      .getAccountInfo()
       .then((response) => {
         const { alias } = response.info;
         const balance = parseInt(response.balance.balance);
@@ -215,7 +216,15 @@ export default function TestConnection() {
             </div>
           )}
 
-          {loading && <Loading />}
+          {loading && (
+            <div>
+              <Loading />
+              <p className="text-gray-500 dark:text-white mt-6">
+                Initializing your account. Please wait, this can take a
+                minute...
+              </p>
+            </div>
+          )}
         </div>
       </div>
 

@@ -3,6 +3,7 @@ import LinkButton from "../../../components/LinkButton";
 import lnbits from "/static/assets/icons/lnbits.png";
 import lndhub from "/static/assets/icons/lndhub.png";
 import lnd from "/static/assets/icons/lnd.png";
+import eclair from "/static/assets/icons/eclair.jpg";
 import alby from "/static/assets/icons/alby.png";
 
 type Props = {
@@ -31,6 +32,12 @@ export default function ChooseConnector({ title, description }: Props) {
       logo: lnbits,
     },
     {
+      to: "eclair",
+      title: "Eclair",
+      description: "Connect to your Eclair node",
+      logo: eclair,
+    },
+    {
       to: "create-wallet",
       title: "Create a new wallet",
       description: "We create and manage a lightning wallet for you",
@@ -49,7 +56,7 @@ export default function ChooseConnector({ title, description }: Props) {
             </p>
           )}
         </div>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-5 gap-5">
           {connectors.map(({ to, title, description, logo }) => (
             <LinkButton
               key={to}

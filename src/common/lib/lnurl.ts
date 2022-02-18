@@ -13,7 +13,10 @@ const fromInternetIdentifier = (address: string) => {
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     )
   ) {
-    const [name, host] = address.split("@");
+    let [name, host] = address.split("@");
+    // remove invisible characters %EF%B8%8F
+    name = name.replace(/[^ -~]+/g, "");
+    host = host.replace(/[^ -~]+/g, "");
     return `https://${host}/.well-known/lnurlp/${name}`;
   }
   return null;
@@ -66,9 +69,14 @@ const lnurl = {
       lnurlDetails.k1 = url.searchParams.get("k1") || "";
       lnurlDetails.action = url.searchParams.get("action") || undefined;
     } else {
-      const res = await axios.get(url.toString());
-      console.log("res", res);
-      lnurlDetails = res.data;
+      try {
+        const res = await axios.get(url.toString());
+        lnurlDetails = res.data;
+      } catch (e) {
+        throw new Error(
+          "Connection problem or invalid lnurl / lightning address."
+        );
+      }
     }
     lnurlDetails.domain = url.hostname;
     lnurlDetails.url = url;
@@ -81,7 +89,9 @@ const lnurl = {
     amount,
   }: {
     paymentInfo: LNURLPaymentInfo;
-    payerdata: undefined | {
+    payerdata:
+      | undefined
+      | {
           name?: string;
           email?: string;
         };

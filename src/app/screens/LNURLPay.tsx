@@ -12,6 +12,7 @@ import msg from "../../common/lib/msg";
 import utils from "../../common/lib/utils";
 import lnurl from "../../common/lib/lnurl";
 import getOriginData from "../../extension/content-script/originData";
+import { useAuth } from "../context/AuthContext";
 
 import Button from "../components/Button";
 import Input from "../components/Form/Input";
@@ -29,8 +30,9 @@ type Props = {
 
 function LNURLPay(props: Props) {
   const [searchParams] = useSearchParams();
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const auth = useAuth();
+  const [loading, setLoading] = useState(true);
   const [details, setDetails] = useState(props.details);
   const [origin] = useState(
     props.origin ||
@@ -38,12 +40,12 @@ function LNURLPay(props: Props) {
         JSON.parse(searchParams.get("origin") as string)) ||
       getOriginData()
   );
-  const [valueMSat, setValueMSat] = useState<number | undefined>(
-    details?.minSendable
+  const [valueSat, setValueSat] = useState(
+    (details?.minSendable && (+details?.minSendable / 1000).toString()) || ""
   );
-  const [comment, setComment] = useState<string | undefined>();
-  const [userName, setUserName] = useState<string | undefined>();
-  const [userEmail, setUserEmail] = useState<string | undefined>();
+  const [comment, setComment] = useState("");
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successAction, setSuccessAction] = useState<
     LNURLPaymentSuccessAction | undefined
@@ -57,7 +59,9 @@ function LNURLPay(props: Props) {
         lnurl.getDetails(lnurlString).then((lnurlDetails) => {
           if (lnurlDetails.tag === "payRequest") {
             setDetails(lnurlDetails);
-            setValueMSat(lnurlDetails.minSendable);
+            if (lnurlDetails.minSendable) {
+              setValueSat((+lnurlDetails.minSendable / 1000).toString());
+            }
             setLoading(false);
           }
         });
@@ -107,7 +111,7 @@ function LNURLPay(props: Props) {
       setLoadingConfirm(true);
       // Get the invoice
       const params = {
-        amount: valueMSat, // user specified sum in MilliSatoshi
+        amount: parseInt(valueSat) * 1000, // user specified sum in MilliSatoshi
         comment, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/12.md
         payerdata, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/18.md
       };
@@ -117,12 +121,12 @@ function LNURLPay(props: Props) {
           params,
         }
       );
-      const { pr: paymentRequest, successAction } = paymentInfo;
+      const { pr: paymentRequest } = paymentInfo;
 
       const isValidInvoice = lnurl.verifyInvoice({
         paymentInfo,
         metadata: details.metadata,
-        amount: valueMSat || 0,
+        amount: parseInt(valueSat) * 1000,
         payerdata,
       });
       if (!isValidInvoice) {
@@ -134,27 +138,34 @@ function LNURLPay(props: Props) {
       const payment = await utils.call(
         "lnurlPay",
         { paymentRequest },
-        { origin }
+        {
+          origin: {
+            ...origin,
+            name: getRecipient(),
+          },
+        }
       );
 
       // Once payment is fulfilled LN WALLET executes a non-null successAction
       // LN WALLET should also store successAction data on the transaction record
-      if (successAction && !payment.payment_error) {
-        switch (successAction.tag) {
+      if (paymentInfo.successAction && !payment.payment_error) {
+        switch (paymentInfo.successAction.tag) {
           case "url":
           case "message":
-            setSuccessAction(successAction);
+            setSuccessAction(paymentInfo.successAction);
             break;
           case "aes": // TODO: For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage
           default:
             alert(
-              `Not implemented yet. Please submit an issue to support success action: ${successAction.tag}`
+              `Not implemented yet. Please submit an issue to support success action: ${paymentInfo.successAction.tag}`
             );
             break;
         }
       } else {
         setSuccessAction({ tag: "message", message: "Success, payment sent!" });
       }
+
+      auth.fetchAccountInfo(); // Update balance.
     } catch (e) {
       console.log(e);
       if (e instanceof Error) {
@@ -174,34 +185,55 @@ function LNURLPay(props: Props) {
     }
   }
 
+  function getRecipient() {
+    if (!details?.metadata) return;
+    try {
+      const metadata = JSON.parse(details.metadata);
+      const identifier = metadata.find(
+        ([type]: [string]) => type === "text/identifier"
+      );
+      if (identifier) return identifier[1];
+    } catch (e) {
+      console.error(e);
+    }
+    return details.domain;
+  }
+
   function renderAmount(minSendable: number, maxSendable: number) {
     if (minSendable === maxSendable) {
-      return <p>{`${minSendable / 1000} sat`}</p>;
+      return <p>{`${+minSendable / 1000} sat`}</p>;
     } else {
       return (
         <div className="mt-1 flex flex-col">
           <Input
             type="number"
-            min={minSendable / 1000}
-            max={maxSendable / 1000}
-            value={valueMSat ? valueMSat / 1000 : undefined}
-            onChange={(e) => {
-              let newValue;
-              if (e.target.value) {
-                newValue = parseInt(e.target.value) * 1000;
-              }
-              setValueMSat(newValue);
-            }}
+            min={+minSendable / 1000}
+            max={+maxSendable / 1000}
+            value={valueSat}
+            onChange={(e) => setValueSat(e.target.value)}
           />
-          <input
-            className="mt-2"
-            type="range"
-            min={minSendable}
-            max={maxSendable}
-            step="1000"
-            value={valueMSat || 0}
-            onChange={(e) => setValueMSat(parseInt(e.target.value))}
-          />
+          <div className="flex space-x-1.5 mt-2">
+            <Button
+              fullWidth
+              label="100 sat⚡"
+              onClick={() => setValueSat("100")}
+            />
+            <Button
+              fullWidth
+              label="1K sat⚡"
+              onClick={() => setValueSat("1000")}
+            />
+            <Button
+              fullWidth
+              label="5K sat⚡"
+              onClick={() => setValueSat("5000")}
+            />
+            <Button
+              fullWidth
+              label="10K sat⚡"
+              onClick={() => setValueSat("10000")}
+            />
+          </div>
         </div>
       );
     }
@@ -209,7 +241,7 @@ function LNURLPay(props: Props) {
 
   function renderComment() {
     return (
-      <div className="mt-1 flex flex-col">
+      <div className="flex flex-col">
         <Input
           type="text"
           placeholder="optional"
@@ -260,11 +292,6 @@ function LNURLPay(props: Props) {
             return ["Description", content];
           } else if (type === "text/long-desc") {
             return ["Full Description", <p key={type}>{content}</p>];
-          } else if (["image/png;base64", "image/jpeg;base64"].includes(type)) {
-            return [
-              "lnurl",
-              <img key={type} src={`data:${type},${content}`} alt="lnurl" />,
-            ];
           }
           return undefined;
         })
@@ -276,18 +303,23 @@ function LNURLPay(props: Props) {
   }
 
   function elements() {
-    if (!details) return [];
+    if (loading || !details)
+      return [
+        ["Send payment to", "loading..."],
+        ["Description", "loading..."],
+        ["Amount (Satoshi)", "loading..."],
+      ];
     const elements = [];
-    elements.push(["Send payment to", details.domain]);
+    elements.push(["Send payment to", getRecipient()]);
     elements.push(...formattedMetadata(details.metadata));
     elements.push([
       "Amount (Satoshi)",
       renderAmount(details.minSendable, details.maxSendable),
     ]);
-    if (details.commentAllowed && details.commentAllowed > 0) {
+    if (details?.commentAllowed > 0) {
       elements.push(["Comment", renderComment()]);
     }
-    if (details.payerData && details.payerData.name) {
+    if (details?.payerData?.name) {
       elements.push(["Name", renderName()]);
     }
     if (details.payerData && details.payerData.email) {
@@ -296,19 +328,20 @@ function LNURLPay(props: Props) {
     return elements;
   }
 
-  function renderSuccessAction(action: LNURLPaymentSuccessAction) {
+  function renderSuccessAction() {
+    if (!successAction) return;
     let descriptionList;
-    if (action.tag === "url") {
+    if (successAction.tag === "url") {
       descriptionList = [
-        ["Description", action.description],
+        ["Description", successAction.description],
         [
           "Url",
           <>
-            {action.url}
+            {successAction.url}
             <div className="mt-4">
               <Button
                 onClick={() => {
-                  if (action.url) utils.openUrl(action.url);
+                  if (successAction.url) utils.openUrl(successAction.url);
                 }}
                 label="Open"
                 primary
@@ -317,8 +350,8 @@ function LNURLPay(props: Props) {
           </>,
         ],
       ];
-    } else if (action.tag === "message") {
-      descriptionList = [["Message", action.message]];
+    } else if (successAction.tag === "message") {
+      descriptionList = [["Message", successAction.message]];
     }
 
     return (
@@ -346,49 +379,51 @@ function LNURLPay(props: Props) {
 
   return (
     <div>
-      <PublisherCard title={origin.name} image={origin.icon} />
-      {!loading && (
-        <div className="p-4 max-w-screen-sm mx-auto">
-          {!successAction ? (
-            <>
-              <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-                {elements().map(([t, d], i) => (
-                  <Fragment key={`element-${i}`}>
-                    <dt className="text-sm font-semibold text-gray-500">{t}</dt>
-                    <dd className="text-sm mb-4 dark:text-white">{d}</dd>
-                  </Fragment>
-                ))}
-              </dl>
-              <div className="text-center">
-                <div className="mb-5">
-                  <Button
-                    onClick={confirm}
-                    label="Confirm"
-                    fullWidth
-                    primary
-                    loading={loadingConfirm}
-                    disabled={loadingConfirm || !valueMSat}
-                  />
-                </div>
-
-                <p className="mb-3 underline text-sm text-gray-300">
-                  Only connect with sites you trust.
-                </p>
-
-                <a
-                  className="underline text-sm text-gray-500"
-                  href="#"
-                  onClick={reject}
-                >
-                  Cancel
-                </a>
+      <PublisherCard
+        title={origin.name}
+        description={origin.description}
+        image={origin.icon}
+      />
+      <div className="p-4 max-w-screen-sm mx-auto">
+        {!successAction ? (
+          <>
+            <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+              {elements().map(([t, d], i) => (
+                <Fragment key={`element-${i}`}>
+                  <dt className="text-sm font-semibold text-gray-500">{t}</dt>
+                  <dd className="text-sm mb-4 dark:text-white">{d}</dd>
+                </Fragment>
+              ))}
+            </dl>
+            <div className="text-center">
+              <div className="mb-5">
+                <Button
+                  onClick={confirm}
+                  label="Confirm"
+                  fullWidth
+                  primary
+                  loading={loadingConfirm}
+                  disabled={loadingConfirm || !valueSat}
+                />
               </div>
-            </>
-          ) : (
-            renderSuccessAction(successAction)
-          )}
-        </div>
-      )}
+
+              <p className="mb-3 underline text-sm text-gray-300">
+                Only connect with sites you trust.
+              </p>
+
+              <a
+                className="underline text-sm text-gray-500"
+                href="#"
+                onClick={reject}
+              >
+                Cancel
+              </a>
+            </div>
+          </>
+        ) : (
+          renderSuccessAction()
+        )}
+      </div>
     </div>
   );
 }

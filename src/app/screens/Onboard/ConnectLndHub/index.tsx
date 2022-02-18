@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import browser from "webextension-polyfill";
 
 import utils from "../../../../common/lib/utils";
 
-import Input from "../../../components/Form/Input";
 import Button from "../../../components/Button";
 import QrcodeScanner from "../../../components/QrcodeScanner";
+import TextField from "../../../components/Form/TextField";
 
 export default function ConnectLndHub() {
   const navigate = useNavigate();
@@ -56,6 +57,15 @@ export default function ConnectLndHub() {
       // TODO: for native connectors we currently skip the validation because it is too slow (booting up Tor etc.)
       if (account.connector === "nativelndhub") {
         validation = { valid: true, error: "" };
+        const permissionGranted = await browser.permissions.request({
+          permissions: ["nativeMessaging"],
+        });
+        if (!permissionGranted) {
+          validation = {
+            valid: false,
+            error: "Native permissions are required to connect through Tor.",
+          };
+        }
       } else {
         validation = await utils.call("validateAccount", account);
       }
@@ -99,22 +109,15 @@ export default function ConnectLndHub() {
           </p>
           <div className="w-4/5">
             <div className="mt-6">
-              <label
-                htmlFor="login"
-                className="block font-medium text-gray-700 dark:text-white"
-              >
-                LNDHub Export URI
-              </label>
-              <div className="mt-1">
-                <Input
-                  name="uri"
-                  type="text"
-                  required
-                  placeholder="lndhub://..."
-                  value={formData.uri}
-                  onChange={handleChange}
-                />
-              </div>
+              <TextField
+                id="uri"
+                label="LNDHub Export URI"
+                type="text"
+                required
+                placeholder="lndhub://..."
+                value={formData.uri}
+                onChange={handleChange}
+              />
               <p className="text-center my-4 dark:text-white">OR</p>
               <QrcodeScanner
                 fps={10}
