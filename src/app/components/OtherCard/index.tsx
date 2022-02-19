@@ -28,7 +28,7 @@ export default function OtherCard({
         />
         <div>
           <h2 className="font-medium  font-serif text-base">{title}</h2>
-          <p className="font-serif text-sm font-normal text-light-gray-bitcoin2">
+          <p className="font-serif text-sm font-normal text-gray-500">
             {subtitle}
           </p>
         </div>

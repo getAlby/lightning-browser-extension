@@ -29,7 +29,7 @@ export default function FlashList({
         <span>{suffix}</span>
       </div>
       <div className="my-1">
-        <span className="font-serif text-base font-normal text-light-gray-bitcoin2">
+        <span className="font-serif text-base font-normal text-gray-500	">
           {subtitle}
         </span>
       </div>

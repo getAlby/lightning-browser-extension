@@ -1,5 +1,4 @@
 import Container from "../components/Container";
-import UsedCard from "../components/WebsitesUsedCard";
 import m1 from "/static/assets/icons/makers1.svg";
 import m2 from "/static/assets/icons/makers2.svg";
 import FlashList from "../components/FlashList";
@@ -184,13 +183,30 @@ function Websites() {
       </div>
       <div className=" ">
         {usedcard.map(({ title, payment, logo, url }) => (
-          <UsedCard
-            title={title}
-            url={url}
-            payment={payment}
-            logo={logo}
-            key={logo}
-          />
+          <div
+            className="bg-white shadow-lg w-full rounded-lg h-28 hover:bg-gray-50 my-3  cursor-pointer"
+            key={title}
+          >
+            <div className="flex px-5 justify-between py-6">
+              <div className="flex items-center space-x-2">
+                <img src={logo} alt="image" className="w-16 rounded-full" />
+                <div>
+                  <h4 className="text-lg text-black font-serif">{title}</h4>
+                  <p className="text-base font-serif text-gray-500 m-0 p-0">
+                    {" "}
+                    {url} <span>{payment} payment</span>
+                  </p>
+                </div>
+              </div>
+              <div className=" flex items-center">
+                <img
+                  src="assets/icons/arrow-right.svg"
+                  alt="image"
+                  className="w-2"
+                />
+              </div>
+            </div>
+          </div>
         ))}
       </div>
       <div className="mt-8">
