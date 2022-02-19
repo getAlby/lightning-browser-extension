@@ -1,20 +1,19 @@
-import { useState, useRef } from "react";
 import { Transition } from "@headlessui/react";
-import { useSearchParams, useNavigate } from "react-router-dom";
 import { parsePaymentRequest } from "invoices";
-
+import { useRef, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import msg from "../../../common/lib/msg";
+import utils from "../../../common/lib/utils";
+import getOriginData from "../../../extension/content-script/originData";
+import type { OriginData } from "../../../types";
 import Button from "../../components/Button";
 import Checkbox from "../../components/Form/Checkbox";
 import PaymentSummary from "../../components/PaymentSummary";
 import PublisherCard from "../../components/PublisherCard";
-import msg from "../../../common/lib/msg";
-import utils from "../../../common/lib/utils";
-import getOriginData from "../../../extension/content-script/originData";
 import { useAuth } from "../../context/AuthContext";
-import type { OriginData } from "../../../types";
 import TextField from "../../components/Form/TextField";
 
-type Props = {
+export type Props = {
   origin: OriginData;
   paymentRequest: string;
 };

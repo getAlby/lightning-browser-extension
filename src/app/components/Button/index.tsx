@@ -1,8 +1,7 @@
 import { classNames } from "../../utils/index";
-
 import Loading from "../Loading";
 
-type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+export type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   fullWidth?: boolean;
   label: string;
   icon?: React.ReactNode;
