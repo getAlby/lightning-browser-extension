@@ -33,7 +33,8 @@
     "test:coverage": "jest --coverage --collectCoverageFrom='src/**/*.(js|ts|jsx|tsx)'",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "patch-package"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
@@ -49,6 +50,7 @@
     "assert": "^2.0.0",
     "axios": "^0.25.0",
     "bech32": "^2.0.0",
+    "bolt11": "^1.3.4",
     "browser-polyfill": "^3.20.2",
     "crypto-browserify": "^3.12.0",
     "crypto-js": "^4.1.1",
@@ -128,6 +130,7 @@
     "jest-webextension-mock": "^3.7.19",
     "lint-staged": "^12.3.2",
     "mini-css-extract-plugin": "^2.5.3",
+    "patch-package": "^6.4.7",
     "postcss": "^8.4.6",
     "postcss-loader": "^6.2.1",
     "prettier": "^2.5.1",

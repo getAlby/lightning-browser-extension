@@ -1,9 +1,8 @@
-import { render, screen } from "@testing-library/react";
+import { parsePaymentRequest } from "invoices";
+import { render, fireEvent, waitFor, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import type { Props } from "./index";
 import ConfirmPayment from "./index";
-
-jest.mock("invoices");
 
 const props: Props = {
   origin: {
@@ -38,5 +37,18 @@ describe("ConfirmPayment", () => {
     expect(
       await screen.findByText("Remember and set a budget")
     ).toBeInTheDocument();
+  });
+
+  test("toggles set budget, displays input with a default budget", async () => {
+    render(
+      <MemoryRouter>
+        <ConfirmPayment {...props} />
+      </MemoryRouter>
+    );
+    fireEvent.click(screen.getByText("Remember and set a budget"));
+    await waitFor(() => screen.getByLabelText("Budget"));
+    expect(screen.getByLabelText("Budget")).toHaveValue(
+      parsePaymentRequest({ request: props.paymentRequest }).tokens * 10
+    );
   });
 });
