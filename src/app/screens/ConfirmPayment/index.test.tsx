@@ -1,5 +1,5 @@
 import { parsePaymentRequest } from "invoices";
-import { render, fireEvent, waitFor, screen } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import type { Props } from "./index";
 import ConfirmPayment from "./index";
@@ -46,8 +46,8 @@ describe("ConfirmPayment", () => {
       </MemoryRouter>
     );
     fireEvent.click(screen.getByText("Remember and set a budget"));
-    await waitFor(() => screen.getByLabelText("Budget"));
-    expect(screen.getByLabelText("Budget")).toHaveValue(
+    const input = await screen.findByLabelText("Budget");
+    expect(input).toHaveValue(
       parsePaymentRequest({ request: props.paymentRequest }).tokens * 10
     );
   });
