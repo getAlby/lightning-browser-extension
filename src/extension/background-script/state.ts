@@ -6,18 +6,13 @@ import pick from "lodash/pick";
 import { decryptData } from "../../common/lib/crypto";
 import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
-import type { SettingsStorage } from "../../types";
-
-interface Account {
-  connector: keyof typeof connectors;
-  config: string;
-}
+import type { Account, Accounts, SettingsStorage } from "../../types";
 
 interface State {
   connector: Connector | null;
   account: Account | null;
   settings: SettingsStorage;
-  accounts: Record<string, Account>;
+  accounts: Accounts;
   currentAccountId: string | null;
   password: string | null;
   getAccount: () => Account | null;
@@ -29,7 +24,7 @@ interface State {
 
 interface BrowserStorage {
   settings: SettingsStorage;
-  accounts: Record<string, Account>;
+  accounts: Accounts;
   currentAccountId: string | null;
 }
 
