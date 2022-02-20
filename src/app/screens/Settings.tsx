@@ -9,6 +9,7 @@ import Container from "../components/Container";
 import Button from "../components/Button";
 import Toggle from "../components/Toggle";
 import Input from "../components/Form/Input";
+import Select from "../components/Form/Select";
 
 type Props = {
   title: string;
@@ -115,6 +116,29 @@ function Settings() {
               />
             ) : (
               <p className="text-green-500 font-medium">Permission granted</p>
+            )
+          }
+        />
+        <Setting
+          title="Theme"
+          subtitle="Change the app theme to dark or light"
+          right={
+            !loading && (
+              <div className="w-64">
+                <Select
+                  name="theme"
+                  value={settings.theme}
+                  onChange={(ev) => {
+                    saveSetting({
+                      theme: ev.target.value,
+                    });
+                  }}
+                >
+                  <option value="dark">Dark</option>
+                  <option value="light">Light</option>
+                  <option value="system">System</option>
+                </Select>
+              </div>
             )
           }
         />

@@ -36,6 +36,7 @@ interface BrowserStorage {
 export const DEFAULT_SETTINGS = {
   websiteEnhancements: true,
   userName: "",
+  theme: "system",
 };
 
 // these keys get synced from the state to the browser storage
