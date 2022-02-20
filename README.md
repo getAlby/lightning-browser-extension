@@ -175,7 +175,7 @@ Yes. Thanks to generous donors, Alby is able to offer several bounties. You can 
 
 ### Thanks
 
-Based on the web extension starter kit: [/abhijithvijayan/web-extension-starter](https://github.com/abhijithvijayan/web-extension-starter")
+Based on the web extension starter kit: [/abhijithvijayan/web-extension-starter](https://github.com/abhijithvijayan/web-extension-starter)
 heavily inspired by the super amazing work of the [Joule extension](https://lightningjoule.com/)
 
 ## License
