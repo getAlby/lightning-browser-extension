@@ -2,10 +2,10 @@ import { useState, useEffect, createContext, useContext } from "react";
 
 import utils from "../../common/lib/utils";
 import api from "../../common/lib/api";
-import type { Account } from "../../types";
+import type { AccountInfo } from "../../types";
 
 interface AuthContextType {
-  account: Account | null;
+  account: { id: string } | AccountInfo | null;
   loading: boolean;
   unlock: (user: string, callback: VoidFunction) => void;
   lock: (callback: VoidFunction) => void;
@@ -16,13 +16,13 @@ interface AuthContextType {
   /**
    * Fetch the additional account info: alias/balance and update account
    */
-  fetchAccountInfo: (id?: string) => void;
+  fetchAccountInfo: (id?: string) => Promise<AccountInfo | undefined>;
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [account, setAccount] = useState<Account | null>(null);
+  const [account, setAccount] = useState<AuthContextType["account"]>(null);
   const [loading, setLoading] = useState(true);
 
   const unlock = (password: string, callback: VoidFunction) => {

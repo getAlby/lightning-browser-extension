@@ -11,9 +11,9 @@ import lnurlLib from "../../common/lib/lnurl";
 
 import Button from "../components/Button";
 import IconButton from "../components/IconButton";
-import Input from "../components/Form/Input";
 import Header from "../components/Header";
 import QrcodeScanner from "../components/QrcodeScanner";
+import TextField from "../components/Form/TextField";
 
 function Send() {
   const [invoice, setInvoice] = useState("");
@@ -92,31 +92,25 @@ function Send() {
         }
       />
       <form className="p-4 max-w-screen-sm mx-auto" onSubmit={handleSubmit}>
-        <label
-          htmlFor="invoice"
-          className="mt-2 block font-medium text-gray-700 dark:text-white"
-        >
-          Lightning Invoice
-        </label>
-        <div className="mt-1 mb-4">
-          <Input
-            name="invoice"
-            id="invoice"
-            placeholder="Paste invoice, lnurl or lightning address"
-            value={invoice}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setInvoice(event.target.value)
-            }
+        <TextField
+          id="invoice"
+          label="Lightning Invoice"
+          placeholder="Paste invoice, lnurl or lightning address"
+          value={invoice}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setInvoice(event.target.value)
+          }
+        />
+        <div className="mt-4">
+          <Button
+            type="submit"
+            label="Continue"
+            primary
+            fullWidth
+            loading={loading}
+            disabled={invoice === ""}
           />
         </div>
-        <Button
-          type="submit"
-          label="Continue"
-          primary
-          fullWidth
-          loading={loading}
-          disabled={invoice === ""}
-        />
       </form>
     </div>
   );
