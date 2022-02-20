@@ -72,7 +72,36 @@ function Home() {
   function renderAllowanceView() {
     return (
       <>
-        <PublisherCard title={allowance.name} image={allowance.imageURL} />
+        <PublisherCard title={allowance.name} image={allowance.imageURL}>
+          {lnData.length > 0 && (
+            <Button
+              onClick={async () => {
+                try {
+                  setLoadingSendSats(true);
+                  const origin = {
+                    external: true,
+                    name: lnData[0].name,
+                    host: lnData[0].host,
+                    description: lnData[0].description,
+                    icon: lnData[0].icon,
+                  };
+                  navigate(
+                    `/lnurlPay?lnurl=${
+                      lnData[0].recipient
+                    }&origin=${encodeURIComponent(JSON.stringify(origin))}`
+                  );
+                } catch (e) {
+                  alert(e.message);
+                } finally {
+                  setLoadingSendSats(false);
+                }
+              }}
+              label="⚡️ Send Satoshis ⚡️"
+              primary
+              loading={loadingSendSats}
+            />
+          )}
+        </PublisherCard>
         <div className="px-4 pb-5">
           <div className="flex justify-between items-center py-3">
             {parseInt(allowance.totalBudget) > 0 ? (
