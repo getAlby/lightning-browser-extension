@@ -159,6 +159,8 @@ We use the [Development Project Board](https://github.com/getAlby/lightning-brow
 
 If you're a developer looking to help but not sure where to begin, check out the issues that have specifically been marked as being friendly to new contributors [here](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22+project%3AgetAlby%2Flightning-browser-extension%2F2).
 
+> Alby enforces [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/) for adding human and machine readable meaning to commit messages, make sure to read and follow them.
+
 If you're looking for a bigger challenge, before opening a pull request please [create an issue](https://github.com/bumi/lightning-browser-extension/issues/new) or [join our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2) to get feedback, discuss the best way to tackle the challenge, and to ensure that there's no duplication of work.
 
 ## ❔ FAQs
