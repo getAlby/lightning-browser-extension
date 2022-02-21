@@ -3,8 +3,13 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import Button from "../../components/Button";
 import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
+import type { OriginData } from "../../../types";
 
-function Enable(props) {
+type Props = {
+  origin: OriginData;
+};
+
+function Enable(props: Props) {
   const hasFetchedData = useRef(false);
   const [, setLoading] = useState(true);
   const [remember] = useState(true);
@@ -20,7 +25,7 @@ function Enable(props) {
     });
   }, [budget, remember]);
 
-  function reject(event) {
+  function reject(event: React.MouseEvent<HTMLAnchorElement>) {
     msg.error("User rejected");
     event.preventDefault();
   }
@@ -37,7 +42,7 @@ function Enable(props) {
         }
         setLoading(false);
       } catch (e) {
-        console.log(e.message);
+        if (e instanceof Error) console.log(e.message);
       }
     }
 
@@ -66,13 +71,7 @@ function Enable(props) {
         </p>
 
         <div className="mt-8 mb-5">
-          <Button
-            type="primary"
-            label="Enable"
-            fullWidth
-            onClick={enable}
-            primary
-          />
+          <Button label="Enable" fullWidth onClick={enable} primary />
         </div>
 
         <p className="mb-3 underline text-sm text-gray-300">

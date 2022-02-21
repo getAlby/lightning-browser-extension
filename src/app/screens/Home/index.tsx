@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import browser from "webextension-polyfill";
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import {
   SendIcon,
   ReceiveIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 
-import utils from "../../../common/lib/utils";
+import api from "../../../common/lib/api";
+import type { Allowance, Battery, Transaction } from "../../../types";
 
 import Button from "../../components/Button";
 import TransactionsTable from "../../components/TransactionsTable";
@@ -20,18 +21,18 @@ import Progressbar from "../../components/Progressbar";
 dayjs.extend(relativeTime);
 
 function Home() {
-  const [allowance, setAllowance] = useState(null);
-  const [payments, setPayments] = useState({});
+  const [allowance, setAllowance] = useState<Allowance | null>(null);
+  const [payments, setPayments] = useState<Transaction[]>([]);
   const [loadingPayments, setLoadingPayments] = useState(true);
   const [loadingSendSats, setLoadingSendSats] = useState(false);
-  const [lnData, setLnData] = useState([]);
+  const [lnData, setLnData] = useState<Battery[]>([]);
   const navigate = useNavigate();
 
   function loadAllowance() {
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
       const [currentTab] = tabs;
-      const url = new URL(currentTab.url);
-      utils.call("getAllowance", { host: url.host }).then((result) => {
+      const url = new URL(currentTab.url as string);
+      api.getAllowance(url.host).then((result) => {
         if (result.enabled) {
           setAllowance(result);
         }
@@ -40,13 +41,16 @@ function Home() {
   }
 
   function loadPayments() {
-    utils.call("getPayments", { limit: 10 }).then((result) => {
+    api.getPayments({ limit: 10 }).then((result) => {
       setPayments(result?.payments);
       setLoadingPayments(false);
     });
   }
 
-  function handleLightningDataMessage(response) {
+  function handleLightningDataMessage(response: {
+    type: string;
+    args: Battery[];
+  }) {
     if (response.type === "lightningData") {
       setLnData(response.args);
     }
@@ -59,7 +63,9 @@ function Home() {
     // Enhancement data is loaded asynchronously (for example because we need to fetch additional data).
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
       if (tabs.length > 0 && tabs[0].url?.startsWith("http")) {
-        browser.tabs.sendMessage(tabs[0].id, { type: "extractLightningData" });
+        browser.tabs.sendMessage(tabs[0].id as number, {
+          type: "extractLightningData",
+        });
       }
     });
     browser.runtime.onMessage.addListener(handleLightningDataMessage);
@@ -70,12 +76,13 @@ function Home() {
   }, []);
 
   function renderAllowanceView() {
+    if (!allowance) return;
     return (
       <>
         <PublisherCard title={allowance.name} image={allowance.imageURL} />
         <div className="px-4 pb-5">
           <div className="flex justify-between items-center py-3">
-            {parseInt(allowance.totalBudget) > 0 ? (
+            {+allowance.totalBudget > 0 ? (
               <>
                 <dl className="mb-0">
                   <dt className="text-xs text-gray-500 dark:tex-gray-400">
@@ -90,7 +97,7 @@ function Home() {
               <div />
             )}
             <div className="flex items-center">
-              {parseInt(allowance.totalBudget) > 0 && (
+              {+allowance.totalBudget > 0 && (
                 <div className="w-24 mr-4">
                   <Progressbar percentage={allowance.percentage} />
                 </div>
@@ -251,7 +258,7 @@ function Home() {
                   }&origin=${encodeURIComponent(JSON.stringify(origin))}`
                 );
               } catch (e) {
-                alert(e.message);
+                if (e instanceof Error) alert(e.message);
               } finally {
                 setLoadingSendSats(false);
               }

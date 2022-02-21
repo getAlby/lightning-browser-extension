@@ -7,7 +7,7 @@ import type { AccountInfo } from "../../types";
 interface AuthContextType {
   account: { id: string } | AccountInfo | null;
   loading: boolean;
-  unlock: (user: string, callback: VoidFunction) => void;
+  unlock: (user: string, callback: VoidFunction) => Promise<void>;
   lock: (callback: VoidFunction) => void;
   /**
    * Set new id and clears current info, which causes a loading indicator for the alias/balance
