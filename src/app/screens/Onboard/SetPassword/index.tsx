@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import TextField from "../../../components/Form/TextField";
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +19,7 @@ export default function SetPassword() {
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState(initialErrors);
 
-  function handleChange(event) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value.trim(),
@@ -36,13 +36,13 @@ export default function SetPassword() {
     }
   }
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
       await utils.call("setPassword", { password: formData.password });
       navigate("/choose-connector");
     } catch (e) {
-      console.log(e.message);
+      if (e instanceof Error) console.log(e.message);
     }
   }
 

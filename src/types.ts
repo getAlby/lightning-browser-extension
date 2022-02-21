@@ -123,8 +123,11 @@ export interface IBadge {
 export type Transaction = {
   type?: string;
   id: string;
+  createdAt: string;
+  name: string;
+  host: string;
   title: string | React.ReactNode;
-  subTitle: string;
+  subTitle: string | React.ReactNode;
   date: string;
   amount: string;
   currency: string;
@@ -143,11 +146,7 @@ export interface Allowance {
   imageURL: string;
   lastPaymendAt: number;
   name: string;
-  payments: ({
-    createdAt: string;
-    name: string;
-    location: string;
-  } & Transaction)[];
+  payments: Transaction[];
   paymentsCount: number;
   percentage: string;
   remainingBudget: number;

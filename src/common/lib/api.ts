@@ -1,7 +1,13 @@
 import browser from "webextension-polyfill";
 
 import utils from "./utils";
-import type { Accounts, AccountInfo, SettingsStorage } from "../../types";
+import type {
+  Accounts,
+  AccountInfo,
+  Allowance,
+  Transaction,
+  SettingsStorage,
+} from "../../types";
 
 interface AccountInfoRes {
   currentAccountId: string;
@@ -59,6 +65,10 @@ export const swrGetAccountInfo = async (
   });
 };
 export const getAccounts = () => utils.call<Accounts>("getAccounts");
+export const getAllowance = (host: string) =>
+  utils.call<Allowance>("getAllowance", { host });
+export const getPayments = (options: { limit: number }) =>
+  utils.call<{ payments: Transaction[] }>("getPayments", options);
 export const getSettings = () => utils.call<SettingsStorage>("getSettings");
 export const getStatus = () => utils.call<StatusRes>("status");
 export const setSetting = (
@@ -73,6 +83,8 @@ export const unlock = (password: string) =>
 export default {
   getAccountInfo,
   getAccounts,
+  getAllowance,
+  getPayments,
   getSettings,
   getStatus,
   setSetting,

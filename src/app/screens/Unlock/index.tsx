@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import utils from "../../../common/lib/utils";
@@ -11,16 +11,18 @@ function Unlock() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const location = useLocation();
+  const location = useLocation() as {
+    state: { from?: { pathname?: string } };
+  };
   const auth = useAuth();
-  const from = location.state?.from?.pathname || "/";
+  const from = location.state.from?.pathname || "/";
 
-  function handlePasswordChange(event) {
-    setError(null);
+  function handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setError("");
     setPassword(event.target.value);
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     unlock();
     event.preventDefault();
   }
@@ -53,7 +55,6 @@ function Unlock() {
         <div className="mb-5">
           <Input
             placeholder="Password"
-            size="small"
             type="password"
             autoFocus
             value={password}
