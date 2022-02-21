@@ -49,7 +49,7 @@ export default function Intro() {
           <Features features={features} />
         </div>
       </div>
-      <div className="mt-8 flex justify-center">
+      <div className="mt-8 flex justify-center" id="get-started-button">
         <Button
           onClick={() => navigate("/set-password")}
           type="button"
