@@ -2656,6 +2656,16 @@
   resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.9.2.tgz"
   integrity sha512-VZMYa7+fXHdwIq1TDhSXoVmSPEGM/aa+6Aiq3nVVJ9bXr24zScr+NlKFKC3iPljA7ho/GAZr+d2jOf5GIRC30Q==
 
+"@runcitadel/lndconnect@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@runcitadel/lndconnect/-/lndconnect-0.0.4.tgz#6dcec42a6c892db6ff89bf87f509cf70f5bd908c"
+  integrity sha512-f79FX3WLhmRv1f4YDEiZSnKBu59tDbkjf6kSoNZEH602/1+PpmCzWMm0OYIN6D45P4W02dTIM2VwzENBZVv3YQ==
+  dependencies:
+    base64url "^3.0.1"
+    decode-uri-component "^0.2.0"
+    strict-uri-encode "^2.0.0"
+    url "^0.11.0"
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.npmjs.org/@sindresorhus/is/-/is-0.14.0.tgz"
@@ -5674,6 +5684,11 @@ base64-js@^1.0.2, base64-js@^1.3.1:
   version "1.5.1"
   resolved "https://registry.npmjs.org/base64-js/-/base64-js-1.5.1.tgz"
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
+
+base64url@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/base64url/-/base64url-3.0.1.tgz#6399d572e2bc3f90a9a8b22d5dbb0a32d33f788d"
+  integrity sha512-ir1UPr3dkwexU7FdV8qBBbNDRUhMmIekYMFZfi+C/sLNnRESKPl23nB9b2pltqfOQNnGzsDdId90AEtG5tCx4A==
 
 base@^0.11.1:
   version "0.11.2"

@@ -20,6 +20,12 @@ export default function ChooseConnector({ title, description }: Props) {
       logo: lnd,
     },
     {
+      to: "lndconnect",
+      title: "LND (via lndconnect)",
+      description: "Connect to your LND node with a lndconnect URL",
+      logo: lnd,
+    },
+    {
       to: "lnd-hub",
       title: "LNDHub (Bluewallet)",
       description: "Connect to your Bluewallet mobile wallet",
