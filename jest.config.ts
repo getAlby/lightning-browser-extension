@@ -8,6 +8,6 @@ module.exports = {
       "jest-transform-stub",
   },
   setupFiles: ["jest-webextension-mock"],
-  testEnvironment: "jsdom",
+  testEnvironment: "./jest.custom-test-environment.ts",
   setupFilesAfterEnv: ["./jest.setup.ts"],
 };
