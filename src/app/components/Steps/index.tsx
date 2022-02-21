@@ -1,7 +1,18 @@
 import { Link } from "react-router-dom";
 
-export default function Steps({ steps }) {
-  function createStep(step) {
+export interface Step {
+  id: string;
+  name: string;
+  href: string;
+  status: "upcoming" | "current" | "complete";
+}
+
+type Props = {
+  steps: Step[];
+};
+
+export default function Steps({ steps }: Props) {
+  function createStep(step: Step) {
     let outerStyles = "";
     let innerStyles = "";
     switch (step.status) {
@@ -33,7 +44,7 @@ export default function Steps({ steps }) {
         <Link
           to={step.href}
           className={outerStyles}
-          aria-current={step.status === "current" ? "step" : ""}
+          aria-current={step.status === "current" ? "step" : undefined}
         >
           <span className={innerStyles}>{step.id}</span>
         </Link>
