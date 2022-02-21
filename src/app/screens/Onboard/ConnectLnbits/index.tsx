@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Input from "../../../components/Form/Input";
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 
 import utils from "../../../../common/lib/utils";
+import TextField from "../../../components/Form/TextField";
 
 export default function ConnectLnbits() {
   const navigate = useNavigate();
@@ -71,39 +71,23 @@ export default function ConnectLnbits() {
           <p className="text-gray-500 mt-6"></p>
           <div className="w-4/5">
             <div className="mt-6">
-              <label
-                htmlFor="adminkey"
-                className="block font-medium text-gray-700 dark:text-gray-400"
-              >
-                LNbits Admin Key
-              </label>
-              <div className="mt-1">
-                <Input
-                  name="adminkey"
-                  id="adminkey"
-                  type="text"
-                  required
-                  onChange={handleChange}
-                />
-              </div>
+              <TextField
+                id="adminkey"
+                label="LNbits Admin Key"
+                type="text"
+                required
+                onChange={handleChange}
+              />
             </div>
             <div className="mt-6">
-              <label
-                htmlFor="url"
-                className="block font-medium text-gray-700 dark:text-gray-400"
-              >
-                LNbits URL
-              </label>
-              <div className="mt-1">
-                <Input
-                  name="url"
-                  id="url"
-                  type="text"
-                  value={formData.url}
-                  required
-                  onChange={handleChange}
-                />
-              </div>
+              <TextField
+                id="url"
+                label="LNbits URL"
+                type="text"
+                value={formData.url}
+                required
+                onChange={handleChange}
+              />
             </div>
           </div>
         </div>

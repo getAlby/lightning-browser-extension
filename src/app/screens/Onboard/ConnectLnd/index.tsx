@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { SendIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import browser from "webextension-polyfill";
 
-import Input from "../../../components/Form/Input";
+import TextField from "../../../components/Form/TextField";
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 
@@ -143,39 +143,23 @@ export default function ConnectLnd() {
           </p>
           <div className="w-4/5">
             <div className="mt-6">
-              <label
-                htmlFor="url"
-                className="block font-medium text-gray-700 dark:text-white"
-              >
-                Address
-              </label>
-              <div className="mt-1">
-                <Input
-                  name="url"
-                  id="url"
-                  placeholder="https://"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+              <TextField
+                id="url"
+                label="Address"
+                placeholder="https://"
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="mt-6">
               <div>
-                <label
-                  htmlFor="macaroon"
-                  className="block font-medium text-gray-700 dark:text-white"
-                >
-                  Macaroon
-                </label>
-                <div className="mt-1">
-                  <Input
-                    name="macaroon"
-                    id="macaroon"
-                    value={formData.macaroon}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
+                <TextField
+                  id="macaroon"
+                  label="Macaroon"
+                  value={formData.macaroon}
+                  onChange={handleChange}
+                  required
+                />
               </div>
               <p className="text-center my-4 dark:text-white">OR</p>
               <div
