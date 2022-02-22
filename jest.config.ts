@@ -12,4 +12,5 @@ module.exports = {
   setupFiles: ["jest-webextension-mock"],
   testEnvironment: "./jest.custom-test-environment.ts",
   setupFilesAfterEnv: ["./jest.setup.ts"],
+  testTimeout: 20000,
 };
