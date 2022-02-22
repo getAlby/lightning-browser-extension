@@ -47,12 +47,10 @@ Add Alby to your browser
 - [Add to Chrome, Opera, Brave, and all Chromium based browsers](https://chrome.google.com/webstore/detail/alby/iokeahhehimjnekafflcihljlcjccdbe)
 - [Add to Firefox](https://addons.mozilla.org/en-US/firefox/addon/alby/)
 
-Try out the most recent version of Alby (Nightly Releases)
+### Try out the most recent version of Alby (Nightly Releases)
 
 - [Firefox Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-firefox-nightly-master.xpi) - best to install it as a temporary add-on as discussed in the "Load extension into browser" section
 - [Chrome Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-chrome-nightly-master.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right) and drag & drop the file in the browser
-
-(Note: You might need to reconfigure your wallet after installing new versions)
 
 ## Architecture Idea
 
@@ -60,7 +58,7 @@ Try out the most recent version of Alby (Nightly Releases)
 
 ## Project Structure
 
-```
+```bash
 ./lightning-browser-extension
 ├── src                     # Source Code
 │   ├── app                     # React UI App
@@ -102,7 +100,7 @@ Then run the following:
 
 ### 🛠 Development
 
-- `yarn install` to install dependencies
+- `yarn install -D` to install all dependencies including dev dependencies
 - To watch file changes in development
 
   - Chrome
@@ -126,6 +124,15 @@ If this is not reachable please let us know.
 
 We have a working [Storybook](https://storybook.js.org)-setup and some components have stories.  
 You can find the deployed Storybook here: https://lbe-stories.netlify.app
+
+### :heavy_check_mark: Tests
+
+Don't forget to run the tests before committing anything!
+Just run the command below to run all tests:
+
+```bash
+yarn run test
+```
 
 ### 💻 Load extension into browser
 
@@ -161,7 +168,7 @@ Most logs are written to the background script. Make sure to "inspect" the backg
 
 You can also use a Docker container and run the yarn commands within a container:
 
-```
+```bash
 docker run --rm --volume="$(pwd):/app" --workdir="/app" -t -i node:lts "yarn install && yarn run package"
 ```
 
