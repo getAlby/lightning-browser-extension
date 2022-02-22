@@ -6,6 +6,7 @@ import PaymentSummary from "../components/PaymentSummary";
 import PublisherCard from "../components/PublisherCard";
 import msg from "../../common/lib/msg";
 import utils from "../../common/lib/utils";
+import type { RequestInvoiceArgs } from "../../types";
 
 type Origin = {
   name: string;
@@ -13,14 +14,7 @@ type Origin = {
 };
 
 type Props = {
-  invoiceAttributes: {
-    amount?: string | number;
-    defaultAmount?: string | number;
-    minimumAmount?: string | number;
-    maximumAmount?: string | number;
-    defaultMemo?: string;
-    memo?: string;
-  };
+  invoiceAttributes: RequestInvoiceArgs;
   origin: Origin;
 };
 
