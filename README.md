@@ -24,7 +24,6 @@ The extension can connect to different node implementations and supports custodi
 - [x] Keysend
 - [ ] [Lsat](https://lsat.tech/) support
 
-
 ### STATUS: 🚀
 
 ## Join the conversation
@@ -33,11 +32,37 @@ We have a channel on the [bitcoin.design](https://bitcoin.design/) Slack communi
 
 We also do a weekly call on Monday at [14:00 UTC](https://www.worldtimebuddy.com/?qm=1&lid=100&h=100&date=2022-4-25&sln=14-15&hf=1) on [Jitsi](https://meet.fulmo.org/AlbyCommunityCall)
 
+<<<<<<< HEAD
+||||||| parent of 8f8b1bf2 (fix: add readme test instructions)
+
+## Try out the most recent version
+
+Download Nightly releases
+
+- [Firefox Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-firefox-nightly-master.xpi) - best install it as temporary add-on as discussed in the "Load extension into browser" section
+- [Chrome Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-chrome-nightly-master.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right) and drag& drop the file
+
+(Note: You might need to reconfigure your wallet after installing new versions)
+
+=======
+
+## Try out the most recent version
+
+Download Nightly releases
+
+- [Firefox Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-firefox-nightly-master.xpi) - best install it as temporary add-on as discussed in the "Load extension into browser" section
+- [Chrome Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-chrome-nightly-master.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right) and drag& drop the file
+
+(Note: You might need to reconfigure your wallet after installing new versions)
+
+> > > > > > > 8f8b1bf2 (fix: add readme test instructions)
+
 ## Browser Support
 
+<<<<<<< HEAD
 Alby supports
 
-- All [Chromium based browsers](https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium) - Chrome Opera, Brave etc.
+- All [Chromium based browsers](<https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium>) - Chrome Opera, Brave etc.
 - Firefox
 - more coming soon...
 
@@ -54,6 +79,16 @@ Try out the most recent version of Alby (Nightly Releases)
 - [Chrome Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-chrome-nightly-master.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right) and drag& drop the file
 
 (Note: You might need to reconfigure your wallet after installing new versions)
+||||||| parent of 8f8b1bf2 (fix: add readme test instructions)
+
+- [Chrome](https://chrome.google.com/webstore/detail/alby/iokeahhehimjnekafflcihljlcjccdbe) (Opera, Brave, and all Chromium based browsers)
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/alby/)
+- # more coming soon...
+
+* [Chrome](https://chrome.google.com/webstore/detail/alby/iokeahhehimjnekafflcihljlcjccdbe) (Opera, Brave, and all Chromium based browsers)
+* [Firefox](https://addons.mozilla.org/en-US/firefox/addon/alby/)
+* more coming soon...
+  > > > > > > > 8f8b1bf2 (fix: add readme test instructions)
 
 ## Architecture idea
 
@@ -61,7 +96,7 @@ Try out the most recent version of Alby (Nightly Releases)
 
 ## Project Structure
 
-```
+```bash
 ./lightning-browser-extension
 ├── src                     # Source Code
 │   ├── app                     # React UI App
@@ -103,7 +138,7 @@ Then run the following:
 
 ### 🛠 Development
 
-- `yarn install` to install dependencies
+- `yarn install -D` to install all dependencies including dev dependencies
 - To watch file changes in development
 
   - Chrome
@@ -112,6 +147,15 @@ Then run the following:
     - `yarn run dev:firefox`
   - Opera
     - `yarn run dev:opera`
+
+### :heavy_check_mark: Tests
+
+Don't forget to run the tests before committing anything!
+Just run the command below to run all tests:
+
+```bash
+yarn run test
+```
 
 ### 💻 Load extension into browser
 
@@ -147,7 +191,7 @@ Most logs are written to the background script. Make sure to "inspect" the backg
 
 You can also use a Docker container and run the yarn commands within a container:
 
-```
+```bash
 docker run --rm --volume="$(pwd):/app" --workdir="/app" -t -i node:lts "yarn install && yarn run package"
 ```
 
