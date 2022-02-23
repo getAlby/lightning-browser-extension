@@ -10,6 +10,7 @@ import LNURLPay from "../../screens/LNURLPay";
 import ConfirmPayment from "../../screens/ConfirmPayment";
 
 import { AuthProvider } from "../../context/AuthContext";
+import { AccountsProvider } from "../../context/AccountsContext";
 import RequireAuth from "../RequireAuth";
 import Navbar from "../../components/Navbar";
 
@@ -18,25 +19,27 @@ const POPUP_MAX_HEIGHT = 600;
 function Popup() {
   return (
     <AuthProvider>
-      <HashRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <RequireAuth>
-                <Layout />
-              </RequireAuth>
-            }
-          >
-            <Route index element={<Home />} />
-            <Route path="send" element={<Send />} />
-            <Route path="receive" element={<Receive />} />
-            <Route path="lnurlPay" element={<LNURLPay />} />
-            <Route path="confirmPayment" element={<ConfirmPayment />} />
-          </Route>
-          <Route path="unlock" element={<Unlock />} />
-        </Routes>
-      </HashRouter>
+      <AccountsProvider>
+        <HashRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <RequireAuth>
+                  <Layout />
+                </RequireAuth>
+              }
+            >
+              <Route index element={<Home />} />
+              <Route path="send" element={<Send />} />
+              <Route path="receive" element={<Receive />} />
+              <Route path="lnurlPay" element={<LNURLPay />} />
+              <Route path="confirmPayment" element={<ConfirmPayment />} />
+            </Route>
+            <Route path="unlock" element={<Unlock />} />
+          </Routes>
+        </HashRouter>
+      </AccountsProvider>
     </AuthProvider>
   );
 }

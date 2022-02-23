@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import utils from "../../../../common/lib/utils";
 import api from "../../../../common/lib/api";
 import { useAuth } from "../../../context/AuthContext";
+import { useAccounts } from "../../../context/AccountsContext";
 
 import Button from "../../../components/Button";
 import Card from "../../../components/Card";
@@ -11,6 +12,7 @@ import Loading from "../../../components/Loading";
 
 export default function TestConnection() {
   const auth = useAuth();
+  const { getAccounts } = useAccounts();
   const [accountInfo, setAccountInfo] =
     useState<{ alias: string; balance: number }>();
   const [errorMessage, setErrorMessage] = useState("");
@@ -36,6 +38,7 @@ export default function TestConnection() {
           balance: accountInfo.balance,
         });
       }
+      getAccounts();
     } catch (e) {
       console.log(e);
       if (e instanceof Error) {
