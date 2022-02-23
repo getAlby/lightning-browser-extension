@@ -7,9 +7,9 @@ function battery(): void {
   const descriptionElement = document.querySelector<HTMLMetaElement>(
     'head > meta[name="description"]'
   );
-  const imageUrl = document.querySelector<HTMLImageElement>(
-    `img[alt="User avatar"]`
-  )?.src;
+  const imageUrl = document.querySelector<HTMLMetaElement>(
+    'head > meta[property="og:image"]'
+  )?.content;
 
   if (!descriptionElement || !imageUrl) {
     return;
