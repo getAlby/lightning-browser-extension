@@ -86,17 +86,15 @@ function LNURLPay(props: Props) {
 
   const getPayerData = (details: LNURLPayServiceResponse) => {
     if (
-      userName &&
-      userEmail &&
-      userName.length &&
-      userEmail.length &&
+      userName?.length &&
+      userEmail?.length &&
       details.payerData.email &&
       details.payerData.name
     ) {
       return { name: userName, email: userEmail };
-    } else if (userName && userName.length && details.payerData.name) {
+    } else if (userName?.length && details.payerData.name) {
       return { name: userName };
-    } else if (userEmail && userEmail.length && details.payerData.email) {
+    } else if (userEmail?.length && details.payerData.email) {
       return { email: userEmail };
     } else {
       return undefined;
