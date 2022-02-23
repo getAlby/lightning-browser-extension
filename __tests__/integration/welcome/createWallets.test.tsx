@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 import { getDocument, queries, wait } from "pptr-testing-library";
-const { getByText } = queries;
+const { getByText, getByLabelText } = queries;
 import { USER } from "complete-randomer";
 
 const delay = async (time) => {
@@ -44,8 +44,6 @@ describe("Create or connect wallets", () => {
       // go through welcome page
       const $document = await getDocument(page);
 
-      await wait(() => getByText($document, "Get Started"));
-
       // go through welcome page
       const startedButton = await getByText($document, "Get Started");
       startedButton.click();
@@ -53,11 +51,17 @@ describe("Create or connect wallets", () => {
       await wait(() => getByText($document, "Protect your wallet"));
 
       // type user password and confirm password
-      await page.focus("#password");
-      await page.keyboard.type(user.password);
+      const passwordField = await getByLabelText(
+        $document,
+        "Choose a password:"
+      );
+      await passwordField.type(user.password);
 
-      await page.focus("#passwordConfirmation");
-      await page.keyboard.type(user.password);
+      const passwordConfirmationField = await getByLabelText(
+        $document,
+        "Let's confirm you typed it correct:"
+      );
+      await passwordConfirmationField.type(user.password);
 
       // submit password form
       const passwordFormNextButton = await getByText($document, "Next");
@@ -75,8 +79,8 @@ describe("Create or connect wallets", () => {
       await wait(() => getByText($document, "Get a new lightning wallet"));
 
       // type user email
-      await page.focus("#email");
-      await page.keyboard.type(user.email);
+      const emailField = await getByLabelText($document, "Email Address");
+      await emailField.type(user.email);
 
       // click create a wallet button
       const createWalletButton = await getByText($document, "Create a wallet");
@@ -106,8 +110,6 @@ describe("Create or connect wallets", () => {
       // go through welcome page
       const $document = await getDocument(page);
 
-      await wait(() => getByText($document, "Get Started"));
-
       // go through welcome page
       const startedButton = await getByText($document, "Get Started");
       startedButton.click();
@@ -115,11 +117,17 @@ describe("Create or connect wallets", () => {
       await wait(() => getByText($document, "Protect your wallet"));
 
       // type user password and confirm password
-      await page.focus("#password");
-      await page.keyboard.type(user.password);
+      const passwordField = await getByLabelText(
+        $document,
+        "Choose a password:"
+      );
+      await passwordField.type(user.password);
 
-      await page.focus("#passwordConfirmation");
-      await page.keyboard.type(user.password);
+      const passwordConfirmationField = await getByLabelText(
+        $document,
+        "Let's confirm you typed it correct:"
+      );
+      await passwordConfirmationField.type(user.password);
 
       // submit password form
       const passwordFormNextButton = await getByText($document, "Next");
@@ -134,8 +142,8 @@ describe("Create or connect wallets", () => {
       await wait(() => getByText($document, "Connect to LNbits"));
 
       const lnBitsAdminKey = "d8de4f373561446aa298cae2b9424325";
-      await page.focus("#adminkey");
-      await page.keyboard.type(lnBitsAdminKey);
+      const adminKeyField = await getByLabelText($document, "LNbits Admin Key");
+      await adminKeyField.type(lnBitsAdminKey);
 
       // submit form
       const continueButton = await getByText($document, "Continue");
@@ -157,8 +165,6 @@ describe("Create or connect wallets", () => {
       // go through welcome page
       const $document = await getDocument(page);
 
-      await wait(() => getByText($document, "Get Started"));
-
       // go through welcome page
       const startedButton = await getByText($document, "Get Started");
       startedButton.click();
@@ -166,11 +172,17 @@ describe("Create or connect wallets", () => {
       await wait(() => getByText($document, "Protect your wallet"));
 
       // type user password and confirm password
-      await page.focus("#password");
-      await page.keyboard.type(user.password);
+      const passwordField = await getByLabelText(
+        $document,
+        "Choose a password:"
+      );
+      await passwordField.type(user.password);
 
-      await page.focus("#passwordConfirmation");
-      await page.keyboard.type(user.password);
+      const passwordConfirmationField = await getByLabelText(
+        $document,
+        "Let's confirm you typed it correct:"
+      );
+      await passwordConfirmationField.type(user.password);
 
       // submit password form
       const passwordFormNextButton = await getByText($document, "Next");
@@ -178,7 +190,7 @@ describe("Create or connect wallets", () => {
 
       await wait(() => getByText($document, "Do you have a lightning wallet?"));
 
-      // click at "LNDHub (Bluewallet)"
+      // click at "LNDHub (BlueWallet)"
       const createNewWalletButton = await getByText(
         $document,
         "LNDHub (Bluewallet)"
@@ -189,8 +201,8 @@ describe("Create or connect wallets", () => {
 
       const lndHubUrl =
         "lndhub://c269ebb962f1a94f9c29:f6f16f35e935edc05ee7@https://lndhub.io";
-      await page.focus("#uri");
-      await page.keyboard.type(lndHubUrl);
+      const lndUrlField = await getByLabelText($document, "LNDHub Export URI");
+      await lndUrlField.type(lndHubUrl);
 
       // submit form
       const continueButton = await getByText($document, "Continue");
