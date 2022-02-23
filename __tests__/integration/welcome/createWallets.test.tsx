@@ -47,9 +47,10 @@ describe("Create or connect wallets", () => {
       await wait(() => getByText($document, "Get Started"));
 
       // go through welcome page
-      await getByText($document, "Get Started").then((button) =>
-        button.click()
-      );
+      const startedButton = await getByText($document, "Get Started");
+      startedButton.click();
+
+      await wait(() => getByText($document, "Protect your wallet"));
 
       // type user password and confirm password
       await page.focus("#password");
@@ -59,26 +60,37 @@ describe("Create or connect wallets", () => {
       await page.keyboard.type(user.password);
 
       // submit password form
-      await getByText($document, "Next").then((button) => button.click());
+      const passwordFormNextButton = await getByText($document, "Next");
+      passwordFormNextButton.click();
+
+      await wait(() => getByText($document, "Do you have a lightning wallet?"));
 
       // click at "Create Alby Wallet"
-      await getByText($document, "Create a new wallet").then((button) =>
-        button.click()
+      const createNewWalletButton = await getByText(
+        $document,
+        "Create a new wallet"
       );
+      createNewWalletButton.click();
+
+      await wait(() => getByText($document, "Get a new lightning wallet"));
 
       // type user email
       await page.focus("#email");
       await page.keyboard.type(user.email);
 
-      // submit email form
-      await getByText($document, "Create a wallet").then((button) =>
-        button.click()
-      );
+      // click create a wallet button
+      const createWalletButton = await getByText($document, "Create a wallet");
+      createWalletButton.click();
 
       await page.waitForResponse(() => true);
 
+      await wait(() => getByText($document, "Get a new lightning wallet"));
+
       // submit form
-      await getByText($document, "Next").then((button) => button.click());
+      const nextButton = await getByText($document, "Next");
+      nextButton.click();
+
+      await wait(() => getByText($document, "Success!"));
 
       await browser.close();
     } catch (error) {
@@ -97,9 +109,10 @@ describe("Create or connect wallets", () => {
       await wait(() => getByText($document, "Get Started"));
 
       // go through welcome page
-      await getByText($document, "Get Started").then((button) =>
-        button.click()
-      );
+      const startedButton = await getByText($document, "Get Started");
+      startedButton.click();
+
+      await wait(() => getByText($document, "Protect your wallet"));
 
       // type user password and confirm password
       await page.focus("#password");
@@ -109,17 +122,24 @@ describe("Create or connect wallets", () => {
       await page.keyboard.type(user.password);
 
       // submit password form
-      await getByText($document, "Next").then((button) => button.click());
+      const passwordFormNextButton = await getByText($document, "Next");
+      passwordFormNextButton.click();
+
+      await wait(() => getByText($document, "Do you have a lightning wallet?"));
 
       // click at "Create Alby Wallet"
-      await getByText($document, "LNbits").then((button) => button.click());
+      const createNewWalletButton = await getByText($document, "LNbits");
+      createNewWalletButton.click();
+
+      await wait(() => getByText($document, "Connect to LNbits"));
 
       const lnBitsAdminKey = "d8de4f373561446aa298cae2b9424325";
       await page.focus("#adminkey");
       await page.keyboard.type(lnBitsAdminKey);
 
       // submit form
-      await getByText($document, "Continue").then((button) => button.click());
+      const continueButton = await getByText($document, "Continue");
+      continueButton.click();
 
       await page.waitForResponse(() => true);
 
@@ -140,9 +160,10 @@ describe("Create or connect wallets", () => {
       await wait(() => getByText($document, "Get Started"));
 
       // go through welcome page
-      await getByText($document, "Get Started").then((button) =>
-        button.click()
-      );
+      const startedButton = await getByText($document, "Get Started");
+      startedButton.click();
+
+      await wait(() => getByText($document, "Protect your wallet"));
 
       // type user password and confirm password
       await page.focus("#password");
@@ -152,12 +173,19 @@ describe("Create or connect wallets", () => {
       await page.keyboard.type(user.password);
 
       // submit password form
-      await getByText($document, "Next").then((button) => button.click());
+      const passwordFormNextButton = await getByText($document, "Next");
+      passwordFormNextButton.click();
 
-      // click at "Create Alby Wallet"
-      await getByText($document, "LNDHub (Bluewallet)").then((button) =>
-        button.click()
+      await wait(() => getByText($document, "Do you have a lightning wallet?"));
+
+      // click at "LNDHub (Bluewallet)"
+      const createNewWalletButton = await getByText(
+        $document,
+        "LNDHub (Bluewallet)"
       );
+      createNewWalletButton.click();
+
+      await wait(() => getByText($document, "Connect to LNDHub (BlueWallet)"));
 
       const lndHubUrl =
         "lndhub://c269ebb962f1a94f9c29:f6f16f35e935edc05ee7@https://lndhub.io";
@@ -165,7 +193,8 @@ describe("Create or connect wallets", () => {
       await page.keyboard.type(lndHubUrl);
 
       // submit form
-      await getByText($document, "Continue").then((button) => button.click());
+      const continueButton = await getByText($document, "Continue");
+      continueButton.click();
 
       await page.waitForResponse(() => true);
 
