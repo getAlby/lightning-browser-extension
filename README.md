@@ -138,7 +138,7 @@ Then run the following:
 
 ### 🛠 Development
 
-- `yarn install -D` to install all dependencies including dev dependencies
+- `yarn install` to install dependencies
 - To watch file changes in development
 
   - Chrome
