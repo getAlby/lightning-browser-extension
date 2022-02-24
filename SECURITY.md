@@ -13,7 +13,7 @@ The following key may be used to communicate sensitive information to Alby devel
 
 | Name | PGP Fingerprint |
 |------|-------------|
-| Michael Bumann | 60E0 4E32 C48B 6900 41ED 99E4 8ABD EEC3 CEF8 5746 |
+| Michael Bumann | 163A 86B4 B913 FF60 A84E  2AB8 FFE0 5711 E1D0 A2B0 |
 
 We also accept vulnerability reports through https://huntr.dev platform.
 
