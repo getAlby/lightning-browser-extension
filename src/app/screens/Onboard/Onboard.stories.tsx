@@ -1,4 +1,5 @@
 import { MemoryRouter } from "react-router-dom";
+import { Meta } from "@storybook/react/types-6-0";
 
 import IntroScreen from "./Intro";
 import ChooseConnectorScreen from "./ChooseConnector";
@@ -8,11 +9,13 @@ import SetPasswordScreen from "./SetPassword";
 
 export const Intro = () => <IntroScreen />;
 export const SetPassword = () => <SetPasswordScreen />;
-export const ChooseConnector = () => <ChooseConnectorScreen />;
+export const ChooseConnector = () => (
+  <ChooseConnectorScreen title="Add a new lightning account" />
+);
 export const ConnectLnd = () => <ConnectLndScreen />;
 export const TestConnection = () => <TestConnectionScreen />;
 
-export default {
+const metadata: Meta = {
   title: "Screens/Onboard",
   decorators: [
     (Story) => (
@@ -24,3 +27,5 @@ export default {
     ),
   ],
 };
+
+export default metadata;

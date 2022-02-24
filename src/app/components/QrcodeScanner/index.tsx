@@ -11,8 +11,8 @@ interface CameraDevice {
 
 type Props = {
   fps?: number;
-  qrbox: number;
-  qrCodeSuccessCallback: (decodedText: string) => void;
+  qrbox?: number;
+  qrCodeSuccessCallback?: (decodedText: string) => void;
   qrCodeErrorCallback?: (errorMessage: string) => void;
 };
 
@@ -75,7 +75,7 @@ function QrcodeScanner({
             },
             (decodedText: string) => {
               handleStopScanning();
-              qrCodeSuccessCallback(decodedText);
+              qrCodeSuccessCallback && qrCodeSuccessCallback(decodedText);
             },
             (errorMessage: string) => {
               qrCodeErrorCallback && qrCodeErrorCallback(errorMessage);

@@ -1,6 +1,6 @@
 import Skeleton from "react-loading-skeleton";
 
-type Props = {
+export type Props = {
   alias: string;
   crypto: string;
   fiat: string;
