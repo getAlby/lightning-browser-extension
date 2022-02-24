@@ -8,7 +8,6 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -24,6 +23,11 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 *.lcov
+
+# unit/integration tets
+test-results/
+playwright-report/
+trace.zip
 
 # nyc test coverage
 .nyc_output
@@ -123,7 +127,7 @@ dist
 *.sass.map
 *.scss.map
 
-## Build directory
+# Build directory
 dist/
 .awcache
 
