@@ -1,3 +1,4 @@
+import { test } from "@playwright/test";
 import puppeteer from "puppeteer";
 import { getDocument, queries, wait } from "pptr-testing-library";
 const { getByText, getByLabelText } = queries;
@@ -35,10 +36,11 @@ const loadExtension = async () => {
   return { page, browser };
 };
 
-describe("Create or connect wallets", () => {
-  it("successfully creates an Alby wallet", async () => {
+test.describe("Create or connect wallets", () => {
+  test("successfully creates an Alby wallet", async () => {
     const user = USER.SINGLE();
-    const { page, browser } = await loadExtension();
+
+    const { page } = await loadExtension();
 
     // go through welcome page
     const $document = await getDocument(page);
@@ -91,11 +93,9 @@ describe("Create or connect wallets", () => {
     nextButton.click();
 
     await wait(() => getByText($document, "Success!"));
-
-    await browser.close();
   });
 
-  it("successfully connects to LNBits wallet", async () => {
+  test("successfully connects to LNBits wallet", async () => {
     const user = USER.SINGLE();
     const { page, browser } = await loadExtension();
 
@@ -143,7 +143,7 @@ describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  it("successfully connects to BlueWallet", async () => {
+  test("successfully connects to BlueWallet", async () => {
     const user = USER.SINGLE();
     const { page, browser } = await loadExtension();
 
