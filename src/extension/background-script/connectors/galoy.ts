@@ -29,6 +29,14 @@ class Galoy implements Connector {
     this.config = config;
   }
 
+  init() {
+    return Promise.resolve();
+  }
+
+  unload() {
+    return Promise.resolve();
+  }
+
   getInfo(): Promise<GetInfoResponse> {
     const query = {
       query: `
