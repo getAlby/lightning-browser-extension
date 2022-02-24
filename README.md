@@ -131,7 +131,7 @@ Don't forget to run the tests before committing anything!
 Just run the command below to run all tests:
 
 ```bash
-yarn run test
+yarn playwright test
 ```
 
 ### 💻 Load extension into browser
