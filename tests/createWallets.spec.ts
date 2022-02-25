@@ -20,8 +20,6 @@ const loadExtension = async () => {
     args: [
       `--disable-extensions-except=${extensionPath}`,
       `--load-extension=${extensionPath}`,
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
       "--start-maximized",
     ],
   });
@@ -30,7 +28,7 @@ const loadExtension = async () => {
   await delay(1000);
   const page = await browser.newPage();
   await page.bringToFront();
-  await page.setViewport({ width: 1366, height: 768 });
+  // await page.setViewport({ width: 1366, height: 768 });
   await page.goto(extPage);
 
   return { page, browser };
