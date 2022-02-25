@@ -1,18 +1,16 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import {
   EllipsisIcon,
   PlusIcon,
   WalletIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-
-import type { Accounts } from "../../types";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../common/lib/api";
-import { useAuth } from "../context/AuthContext";
-
+import type { Accounts } from "../../types";
 import Button from "../components/Button";
 import Container from "../components/Container";
 import Menu from "../components/Menu";
+import { useAuth } from "../context/AuthContext";
 
 function AccountsScreen() {
   const [accounts, setAccounts] = useState<Accounts>({});

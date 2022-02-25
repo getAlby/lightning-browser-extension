@@ -51,6 +51,9 @@ export interface Battery extends OriginData {
 export interface Message {
   args: Record<string, unknown>;
   origin: OriginData;
+  application?: string;
+  prompt?: boolean;
+  type?: string;
 }
 
 interface LNURLChannelServiceResponse {

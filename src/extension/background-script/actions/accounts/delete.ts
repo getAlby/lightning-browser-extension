@@ -1,6 +1,5 @@
+import type { Message } from "../../../../types";
 import state from "../../state";
-
-import { Message } from "../../../../types";
 
 const deleteAccount = async (message: Message) => {
   const accounts = state.getState().accounts;

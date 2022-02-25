@@ -32,3 +32,9 @@ declare module "invoices" {
     request: string;
   }): PaymentRequestDetails;
 }
+
+// can be removed with TS 4.6
+// https://github.com/denoland/deno/issues/12754#issuecomment-1016111068
+interface Crypto {
+  randomUUID: () => string;
+}
