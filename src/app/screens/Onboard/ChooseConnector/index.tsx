@@ -3,7 +3,8 @@ import LinkButton from "../../../components/LinkButton";
 import lnbits from "/static/assets/icons/lnbits.png";
 import lndhub from "/static/assets/icons/lndhub.png";
 import lnd from "/static/assets/icons/lnd.png";
-import galoy from "/static/assets/icons/galoy.png";
+import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.jpg";
+import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
 import eclair from "/static/assets/icons/eclair.jpg";
 import alby from "/static/assets/icons/alby.png";
 
@@ -45,10 +46,16 @@ export default function ChooseConnector({ title, description }: Props) {
       logo: alby,
     },
     {
-      to: "galoy",
-      title: "Galoy",
-      description: "Create or connect to a Galoy account",
-      logo: galoy,
+      to: "galoy-bitcoin-beach",
+      title: "Bitcoin Beach Wallet",
+      description: "Create or connect to a Bitcoin Beach (Galoy) account",
+      logo: galoyBitcoinBeach,
+    },
+    {
+      to: "galoy-bitcoin-jungle",
+      title: "Bitcoin Jungle Wallet",
+      description: "Create or connect to a Bitcoin Jungle (Galoy) account",
+      logo: galoyBitcoinJungle,
     },
   ];
 

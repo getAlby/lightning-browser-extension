@@ -6,14 +6,35 @@ import Button from "../../../components/Button";
 
 import utils from "../../../../common/lib/utils";
 
-const url = process.env.GALOY_URL || "https://api.mainnet.galoy.io/graphql/";
+export const galoyUrls = {
+  "galoy-bitcoin-beach": {
+    label: "Bitcoin Beach Wallet",
+    url:
+      process.env.BITCOIN_BEACH_GALOY_URL ||
+      "https://api.mainnet.galoy.io/graphql/",
+  },
+  "galoy-bitcoin-jungle": {
+    label: "Bitcoin Jungle Wallet",
+    url:
+      process.env.BITCOIN_JUNGLE_GALOY_URL ||
+      "https://api.mainnet.bitcoinjungle.app/graphql",
+  },
+} as const;
+
 const defaultHeaders = {
   Accept: "application/json",
   "Access-Control-Allow-Origin": "*",
   "Content-Type": "application/json",
 };
 
-export default function ConnectGaloy() {
+type Props = {
+  instance: keyof typeof galoyUrls;
+};
+
+export default function ConnectGaloy(props: Props) {
+  const { instance } = props;
+  const { url, label } = galoyUrls[instance];
+
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState<string>("");
@@ -155,7 +176,7 @@ export default function ConnectGaloy() {
     setLoading(true);
 
     const account = {
-      name: "Galoy",
+      name: label,
       config: {
         url,
         accessToken: config.authToken,
@@ -190,7 +211,7 @@ export default function ConnectGaloy() {
   return (
     <div className="relative lg:flex mt-24">
       <div className="lg:w-1/2">
-        <h1 className="text-3xl font-bold">Connect to Galoy</h1>
+        <h1 className="text-3xl font-bold">Connect to {label}</h1>
         <p className="text-gray-500 mt-6"></p>
         <div className="w-4/5">
           <div className="mt-6">

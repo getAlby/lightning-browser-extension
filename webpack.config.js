@@ -21,8 +21,13 @@ if (!process.env.WALLET_CREATE_URL) {
   process.env.WALLET_CREATE_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
 // default value is set in the code where it is used
-if (!process.env.GALOY_URL) {
-  process.env.GALOY_URL = ""; // env variables are passed as string. empty strings are still falsy
+if (!process.env.BITCOIN_BEACH_GALOY_URL) {
+  process.env.BITCOIN_BEACH_GALOY_URL = ""; // env variables are passed as string. empty strings are still falsy
+}
+
+// default value is set in the code where it is used
+if (!process.env.BITCOIN_JUNGLE_GALOY_URL) {
+  process.env.BITCOIN_JUNGLE_GALOY_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
 
 const viewsPath = path.join(__dirname, "static", "views");
@@ -140,7 +145,8 @@ var options = {
     new webpack.EnvironmentPlugin([
       "FAUCET_K",
       "FAUCET_URL",
-      "GALOY_URL",
+      "BITCOIN_BEACH_GALOY_URL",
+      "BITCOIN_JUNGLE_GALOY_URL",
       "NODE_ENV",
       "TARGET_BROWSER",
       "WALLET_CREATE_URL",
