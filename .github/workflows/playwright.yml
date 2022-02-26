@@ -15,21 +15,22 @@ jobs:
           node-version: "14.x"
 
       - name: Install dependencies
-      - uses: borales/actions-yarn@v2.3.0
+        uses: borales/actions-yarn@v2.3.0
         with:
           cmd: install # will run `yarn install` command
 
       - name: Build
-      - uses: borales/actions-yarn@v2.3.0
+        uses: borales/actions-yarn@v2.3.0
         with:
           cmd: build # will run `yarn build` command
 
       - name: Test
-      - uses: borales/actions-yarn@v2.3.0
+        uses: borales/actions-yarn@v2.3.0
         with:
           cmd: playwright test # will run `yarn playwright test` command
 
-      - uses: actions/upload-artifact@v2
+      - name: Artifact
+        uses: actions/upload-artifact@v2
         if: always()
         with:
           name: playwright-report
