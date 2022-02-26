@@ -183,30 +183,14 @@ function Websites() {
       </div>
       <div className=" ">
         {usedcard.map(({ title, payment, logo, url }) => (
-          <div
-            className="bg-white shadow-lg w-full rounded-lg h-28 hover:bg-gray-50 my-3  cursor-pointer"
+          <OtherCard
+            title={title}
+            subtitle={url}
+            payment={payment}
+            logo={logo}
+            to={url}
             key={title}
-          >
-            <div className="flex px-5 justify-between py-6">
-              <div className="flex items-center space-x-2">
-                <img src={logo} alt="image" className="w-16 rounded-full" />
-                <div>
-                  <h4 className="text-lg text-black font-serif">{title}</h4>
-                  <p className="text-base font-serif text-gray-500 m-0 p-0">
-                    {" "}
-                    {url} <span>{payment} payment</span>
-                  </p>
-                </div>
-              </div>
-              <div className=" flex items-center">
-                <img
-                  src="assets/icons/arrow-right.svg"
-                  alt="image"
-                  className="w-2"
-                />
-              </div>
-            </div>
-          </div>
+          />
         ))}
       </div>
       <div className="mt-8">
@@ -225,6 +209,7 @@ function Websites() {
             <div className=" grid gap-4 md:grid-cols-4">
               {data.map(({ title, subtitle, logo, to, shadow }) => (
                 <OtherCard
+                  primary
                   title={title}
                   subtitle={subtitle}
                   logo={logo}
