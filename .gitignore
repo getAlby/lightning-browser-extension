@@ -130,3 +130,5 @@ dist/
 .awcache
 
 .pnp.*
+
+keys.json

@@ -1,0 +1,36 @@
+name: Build and submit nightly release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      FAUCET_URL: ${{ secrets.FAUCET_URL }}
+      FAUCET_K: ${{ secrets.FAUCET_K }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+          cache: "yarn"
+
+      - run: yarn install
+
+      - name: Build production
+        run: yarn build
+
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: latest
+
+      - name: Browser Plugin Publish
+        uses: plasmo-corp/bpp@v1
+        env:
+          PUPPETEER_EXECUTABLE_PATH: /opt/hostedtoolcache/chromium/latest/x64/chrome
+        with:
+          keys: ${{ secrets.SUBMIT_KEYS }}
+
