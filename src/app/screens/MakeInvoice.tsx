@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
 import Button from "../components/Button";
-import Input from "../components/Form/Input";
-import PaymentSummary from "../components/PaymentSummary";
+import TextField from "../components/Form/TextField";
 import PublisherCard from "../components/PublisherCard";
 import msg from "../../common/lib/msg";
 import utils from "../../common/lib/utils";
@@ -78,50 +77,54 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
 
       <div className="p-4">
         <div className="mb-8">
-          <PaymentSummary
-            amount={
-              <div className="mt-1 flex flex-col">
-                <Input
-                  type="number"
-                  min={invoiceAttributes.minimumAmount}
-                  max={invoiceAttributes.maximumAmount}
-                  value={value}
-                  onChange={(e) => handleValueChange(e.target.value)}
-                />
-                {invoiceAttributes.minimumAmount &&
-                  invoiceAttributes.maximumAmount && (
-                    <div className="flex space-x-1.5 mt-2">
-                      <Button
-                        fullWidth
-                        label="100 sat⚡"
-                        onClick={() => handleValueChange("100")}
-                      />
-                      <Button
-                        fullWidth
-                        label="1K sat⚡"
-                        onClick={() => handleValueChange("1000")}
-                      />
-                      <Button
-                        fullWidth
-                        label="5K sat⚡"
-                        onClick={() => handleValueChange("5000")}
-                      />
-                      <Button
-                        fullWidth
-                        label="10K sat⚡"
-                        onClick={() => handleValueChange("10000")}
-                      />
-                    </div>
-                  )}
-                {error && <p className="mt-1 text-red-500">{error}</p>}
-              </div>
-            }
-            description={
-              <div className="mt-1 flex flex-col">
-                <Input type="text" value={memo} onChange={handleMemoChange} />
-              </div>
-            }
-          />
+          <div className="p-4 shadow bg-white border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600">
+            <div>
+              <TextField
+                id="amount"
+                label="Amount"
+                type="number"
+                min={invoiceAttributes.minimumAmount}
+                max={invoiceAttributes.maximumAmount}
+                value={value}
+                onChange={(e) => handleValueChange(e.target.value)}
+              />
+              {invoiceAttributes.minimumAmount &&
+                invoiceAttributes.maximumAmount && (
+                  <div className="flex space-x-1.5 mt-2">
+                    <Button
+                      fullWidth
+                      label="100 sat⚡"
+                      onClick={() => handleValueChange("100")}
+                    />
+                    <Button
+                      fullWidth
+                      label="1K sat⚡"
+                      onClick={() => handleValueChange("1000")}
+                    />
+                    <Button
+                      fullWidth
+                      label="5K sat⚡"
+                      onClick={() => handleValueChange("5000")}
+                    />
+                    <Button
+                      fullWidth
+                      label="10K sat⚡"
+                      onClick={() => handleValueChange("10000")}
+                    />
+                  </div>
+                )}
+              {error && <p className="mt-1 text-red-500">{error}</p>}
+            </div>
+
+            <div className="mt-4">
+              <TextField
+                id="memo"
+                label="Description"
+                value={memo}
+                onChange={handleMemoChange}
+              />
+            </div>
+          </div>
         </div>
 
         <div className="text-center">
