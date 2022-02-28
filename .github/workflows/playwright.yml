@@ -5,14 +5,17 @@ on:
   pull_request:
     branches: [main, master]
 jobs:
-  test:
+  e2e-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
+        env:
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
         with:
           node-version: "14.x"
+          args: install
 
       - name: Install dependencies
         uses: borales/actions-yarn@v2.3.0
@@ -25,9 +28,11 @@ jobs:
           cmd: build # will run `yarn build` command
 
       - name: Test
-        uses: borales/actions-yarn@v2.3.0
+        uses: mujo-code/puppeteer-headful@v2
+        env:
+          CI: "true"
         with:
-          cmd: playwright test # will run `yarn playwright test` command
+          args: npx playwright test --reporter=line
 
       - name: Artifact
         uses: actions/upload-artifact@v2
