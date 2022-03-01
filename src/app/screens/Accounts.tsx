@@ -1,21 +1,46 @@
 import {
   EllipsisIcon,
   PlusIcon,
-  WalletIcon,
+  WalletIcon
 } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import { useState } from "react";
+import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
-
 import api from "../../common/lib/api";
+import utils from "../../common/lib/utils";
 import Button from "../components/Button";
 import Container from "../components/Container";
+import TextField from "../components/Form/TextField";
 import Menu from "../components/Menu";
-import { useAuth } from "../context/AuthContext";
 import { useAccounts } from "../context/AccountsContext";
+import { useAuth } from "../context/AuthContext";
 
 function AccountsScreen() {
   const auth = useAuth();
   const { accounts, getAccounts } = useAccounts();
   const navigate = useNavigate();
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [newAccountName, setNewAccountName] = useState("");
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  async function updateAccountName(accountId: string) {
+    console.log("account:::", accountId);
+
+    await utils.call("editAccount", {
+      name: newAccountName,
+      id: accountId,
+      // id: parseInt(allowance.id),
+      // totalBudget: parseInt(budget),
+    });
+    // onEdit && onEdit();
+    getAccounts();
+    closeModal();
+  }
 
   async function selectAccount(accountId: string) {
     auth.setAccountId(accountId);
@@ -89,8 +114,58 @@ function AccountsScreen() {
                         >
                           Delete
                         </Menu.ItemButton>
+
+                        <Menu.ItemButton
+                          onClick={() => {
+                            setIsOpen(true);
+                            setNewAccountName(account.name);
+                          }}
+                        >
+                          HI {accountId}
+                        </Menu.ItemButton>
                       </Menu.List>
                     </Menu>
+
+                    <Modal
+                      closeTimeoutMS={200}
+                      isOpen={modalIsOpen}
+                      onRequestClose={closeModal}
+                      contentLabel="Allowance Options"
+                      overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
+                      className="rounded-lg bg-white w-full max-w-lg"
+                    >
+                      <div className="p-5 flex justify-between dark:bg-gray-800">
+                        <h2 className="text-2xl font-bold dark:text-white">
+                          HI MODAL
+                        </h2>
+                        <button onClick={closeModal}>
+                          <CrossIcon className="w-6 h-6 dark:text-white" />
+                        </button>
+                      </div>
+
+                      <div className="p-5 border-t border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">
+                        <div className="w-60">
+                          <TextField
+                            id="budget"
+                            label="Budget"
+                            // placeholder="sat"
+                            value={newAccountName}
+                            // type="number"
+                            onChange={(e) => setNewAccountName(e.target.value)}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="flex justify-end p-5 dark:bg-gray-800">
+                        {accountId}
+                        <Button
+                          onClick={() => updateAccountName(accountId)}
+                          label="Save"
+                          primary
+                          // disabled={budget === ""}
+                        />
+                      </div>
+                    </Modal>
                   </td>
                 </tr>
               );

@@ -1,12 +1,13 @@
-import all from "./all";
-import unlock from "./unlock";
-import lock from "./lock";
-import isUnlocked from "./isUnlocked";
 import add from "./add";
-import select from "./select";
-import info from "./info";
-import remove from "./remove";
+import all from "./all";
 import deleteAccount from "./delete";
+import edit from "./edit";
+import info from "./info";
+import isUnlocked from "./isUnlocked";
+import lock from "./lock";
+import remove from "./remove";
+import select from "./select";
+import unlock from "./unlock";
 
 export {
   all,
@@ -14,6 +15,7 @@ export {
   lock,
   isUnlocked,
   add,
+  edit,
   select,
   info,
   remove,
