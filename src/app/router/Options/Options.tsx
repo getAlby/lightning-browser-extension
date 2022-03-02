@@ -89,7 +89,7 @@ const Layout = () => {
   return (
     <div>
       <Navbar
-        title={auth.account?.alias}
+        title={auth.account?.alias || ""}
         subtitle={
           typeof auth.account?.balance === "number"
             ? `${auth.account.balance} sat`

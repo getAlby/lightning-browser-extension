@@ -54,10 +54,10 @@ var options = {
     background: "./src/extension/background-script/index.js",
     contentScript: "./src/extension/content-script/index.js",
     inpageScript: "./src/extension/inpage-script/index.js",
-    popup: "./src/app/router/Popup/index.jsx",
-    prompt: "./src/app/router/Prompt/index.jsx",
-    options: "./src/app/router/Options/index.jsx",
-    welcome: "./src/app/router/Welcome/index.jsx",
+    popup: "./src/app/router/Popup/index.tsx",
+    prompt: "./src/app/router/Prompt/index.tsx",
+    options: "./src/app/router/Options/index.tsx",
+    welcome: "./src/app/router/Welcome/index.tsx",
   },
 
   output: {
