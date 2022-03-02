@@ -174,7 +174,7 @@ function Receive() {
           renderInvoice()
         ) : (
           <>
-            <div className="mt-2 mb-4">
+            <div className="mb-4">
               <TextField
                 id="amount"
                 label="Amount"
