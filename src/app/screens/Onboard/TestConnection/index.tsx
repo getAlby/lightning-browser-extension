@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
@@ -21,28 +21,31 @@ const customStyles = {
   },
 };
 
-const faucetURL = process.env.FAUCET_URL;
+const faucetURL = process.env.FAUCET_URL || "";
 const faucetK = process.env.FAUCET_K;
 const faucetAmount = 210;
 const faucetMemo = "LN Faucet";
 
 export default function TestConnection() {
-  const [accountInfo, setAccountInfo] = useState({});
+  const [accountInfo, setAccountInfo] = useState<{
+    alias: string;
+    balance: number;
+  }>();
   const [errorMessage, setErrorMessage] = useState();
-  const [faucetEmail, setFaucetEmail] = useState();
+  const [faucetEmail, setFaucetEmail] = useState("");
   const [showFaucet, setShowFaucet] = useState(false);
   const [faucetLoading, setFaucetLoading] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
-  function handleEdit(event) {
+  function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
     utils.call("removeAccount").then(() => {
       navigate(-1);
     });
   }
 
-  function handleEmailChange(event) {
+  function handleEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFaucetEmail(event.target.value.trim());
   }
 
@@ -50,7 +53,7 @@ export default function TestConnection() {
     setShowFaucet(false);
   }
 
-  function claimSats(event) {
+  function claimSats(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     setFaucetLoading(true);
     utils

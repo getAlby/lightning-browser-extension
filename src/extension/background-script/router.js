@@ -45,6 +45,7 @@ const routes = {
   addAccount: accounts.add,
   getAccounts: accounts.all,
   removeAccount: accounts.remove,
+  deleteAccount: accounts.deleteAccount,
   selectAccount: accounts.select,
   reset: setup.reset,
   status: setup.status,

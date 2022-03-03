@@ -1,9 +1,11 @@
-import { render, screen } from "@testing-library/react";
+import { parsePaymentRequest } from "invoices";
+import { render, fireEvent, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import type { Props } from "./index";
 import ConfirmPayment from "./index";
 
-jest.mock("invoices");
+const paymentRequest =
+  "lnbc250n1p3qzycupp58uc2wa29470f98wrxmy4xwuqt8cywjygf5t2cp0s376y7nwdyq3sdqhf35kw6r5de5kueeqg3jk6mccqzpgxqyz5vqsp5wfdmwtv5rmru00ajsnn3f8lzpxa4snug2tmqvc8zj8semr4kjjts9qyyssq83h74pte8nrkqs8sr2hscv5zcdmhwunwnd6xr3mskeayh96pu7ksswa6p7trknlpp6t3js4k6uytxutv5ecgcwaxz7fj4zfy5khjcjcpf66muy";
 
 const props: Props = {
   origin: {
@@ -24,8 +26,7 @@ const props: Props = {
     },
     external: true,
   },
-  paymentRequest:
-    "lnbc250n1p3qzycupp58uc2wa29470f98wrxmy4xwuqt8cywjygf5t2cp0s376y7nwdyq3sdqhf35kw6r5de5kueeqg3jk6mccqzpgxqyz5vqsp5wfdmwtv5rmru00ajsnn3f8lzpxa4snug2tmqvc8zj8semr4kjjts9qyyssq83h74pte8nrkqs8sr2hscv5zcdmhwunwnd6xr3mskeayh96pu7ksswa6p7trknlpp6t3js4k6uytxutv5ecgcwaxz7fj4zfy5khjcjcpf66muy",
+  paymentRequest,
 };
 
 describe("ConfirmPayment", () => {
@@ -38,5 +39,18 @@ describe("ConfirmPayment", () => {
     expect(
       await screen.findByText("Remember and set a budget")
     ).toBeInTheDocument();
+  });
+
+  test("toggles set budget, displays input with a default budget", async () => {
+    render(
+      <MemoryRouter>
+        <ConfirmPayment {...props} />
+      </MemoryRouter>
+    );
+    fireEvent.click(screen.getByText("Remember and set a budget"));
+    const input = await screen.findByLabelText("Budget");
+    expect(input).toHaveValue(
+      parsePaymentRequest({ request: paymentRequest }).tokens * 10
+    );
   });
 });

@@ -5,6 +5,7 @@ import Twitter from "./Twitter";
 import YouTubeVideo from "./YouTubeVideo";
 import YouTubeChannel from "./YouTubeChannel";
 import Peertube from "./Peertube";
+import Reddit from "./Reddit";
 // import YouTubeChannel from "./YouTubeChannel";
 import VimeoVideo from "./VimeoVideo";
 
@@ -12,6 +13,7 @@ import VimeoVideo from "./VimeoVideo";
 // Monetization must likely be always the last one
 const enhancements = [
   Twitter,
+  Reddit,
   YouTubeVideo,
   YouTubeChannel,
   Peertube,

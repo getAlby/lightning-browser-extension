@@ -78,7 +78,7 @@ export interface LNURLPayServiceResponse {
   commentAllowed: number;
 }
 
-interface LNURLAuthServiceResponse {
+export interface LNURLAuthServiceResponse {
   tag: "login"; // Type of LNURL
   k1: string; // (hex encoded 32 bytes of challenge) which is going to be signed by user's linkingPrivKey.
   action?: string; // optional action enum which can be one of four strings: register | login | link | auth.
@@ -114,6 +114,15 @@ export interface LNURLPaymentInfo {
   successAction?: LNURLPaymentSuccessAction;
 }
 
+export interface RequestInvoiceArgs {
+  amount?: string | number;
+  defaultAmount?: string | number;
+  minimumAmount?: string | number;
+  maximumAmount?: string | number;
+  defaultMemo?: string;
+  memo?: string;
+}
+
 export interface IBadge {
   label: string;
   color: string;
@@ -123,8 +132,11 @@ export interface IBadge {
 export type Transaction = {
   type?: string;
   id: string;
+  createdAt: string;
+  name: string;
+  host: string;
   title: string | React.ReactNode;
-  subTitle: string;
+  subTitle: string | React.ReactNode;
   date: string;
   amount: string;
   currency: string;
@@ -143,11 +155,7 @@ export interface Allowance {
   imageURL: string;
   lastPaymendAt: number;
   name: string;
-  payments: ({
-    createdAt: string;
-    name: string;
-    location: string;
-  } & Transaction)[];
+  payments: Transaction[];
   paymentsCount: number;
   percentage: string;
   remainingBudget: number;
