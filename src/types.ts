@@ -1,8 +1,10 @@
 import connectors from "./extension/background-script/connectors";
 
+export type ConnectorType = keyof typeof connectors;
+
 export interface Account {
-  connector: keyof typeof connectors;
-  config: string;
+  connector: ConnectorType;
+  config: string | Record<string, unknown>;
   name: string;
 }
 

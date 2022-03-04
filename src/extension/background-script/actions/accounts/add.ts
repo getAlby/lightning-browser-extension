@@ -1,9 +1,20 @@
 import type { Runtime } from "webextension-polyfill";
 import { encryptData } from "../../../../common/lib/crypto";
-import type { Message } from "../../../../types";
+import type { OriginData, Account } from "../../../../types";
 import state from "../../state";
 
-const add = async (message: Message, _sender: Runtime.MessageSender) => {
+interface AddAccountMessage {
+  args: Account;
+  origin: OriginData;
+  application?: string;
+  prompt?: boolean;
+  type?: string;
+}
+
+const add = async (
+  message: AddAccountMessage,
+  _sender: Runtime.MessageSender
+) => {
   const newAccount = message.args;
   const accounts = state.getState().accounts;
 
