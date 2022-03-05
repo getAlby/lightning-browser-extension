@@ -3,6 +3,8 @@ import { encryptData } from "../../../../common/lib/crypto";
 import type { OriginData, Account } from "../../../../types";
 import state from "../../state";
 
+// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652
+// align Message-Types
 interface AddAccountMessage {
   args: Account;
   origin: OriginData;

@@ -1,6 +1,8 @@
 import type { Message } from "../../../../types";
 import state from "../../state";
 
+// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652
+// align Message-Types
 const deleteAccount = async (message: Message) => {
   const accounts = state.getState().accounts;
 
