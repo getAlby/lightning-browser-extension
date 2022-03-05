@@ -18,10 +18,8 @@
     "tabs",
     "storage",
     "unlimitedStorage",
+    "nativeMessaging",
     "*://*/*"
-  ],
-  "optional_permissions": [
-    "nativeMessaging"
   ],
 
   "content_security_policy": "script-src 'self'; object-src 'self'",

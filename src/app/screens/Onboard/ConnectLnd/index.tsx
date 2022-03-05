@@ -1,10 +1,10 @@
 import { SendIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import browser from "webextension-polyfill";
 import utils from "../../../../common/lib/utils";
 import Button from "../../../components/Button";
 import TextField from "../../../components/Form/TextField";
+import CompanionDownloadInfo from "../../../components/CompanionDownloadInfo";
 
 const initialFormData = Object.freeze({
   url: "",
@@ -51,15 +51,6 @@ export default function ConnectLnd() {
       // TODO: for native connectors we currently skip the validation because it is too slow (booting up Tor etc.)
       if (account.connector === "nativelnd") {
         validation = { valid: true, error: "" };
-        const permissionGranted = await browser.permissions.request({
-          permissions: ["nativeMessaging"],
-        });
-        if (!permissionGranted) {
-          validation = {
-            valid: false,
-            error: "Native permissions are required to connect through Tor.",
-          };
-        }
       } else {
         validation = await utils.call("validateAccount", account);
       }
@@ -137,23 +128,25 @@ export default function ConnectLnd() {
             Connect to your LND node
           </h1>
           <p className="text-gray-500 mt-6 dark:text-gray-400">
-            You will need to retrieve the node url and an admin <br /> macaroon.
+            You need your node URL and a macaroon with read and send permissions
+            (e.g. admin.macaroon)
           </p>
           <div className="w-4/5">
             <div className="mt-6">
               <TextField
                 id="url"
-                label="Address"
-                placeholder="https://"
+                label="REST API host and port"
+                placeholder="https://your-node:8080"
                 onChange={handleChange}
                 required
               />
             </div>
+            {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
             <div className="mt-6">
               <div>
                 <TextField
                   id="macaroon"
-                  label="Macaroon"
+                  label="Macaroon (HEX format)"
                   value={formData.macaroon}
                   onChange={handleChange}
                   required
