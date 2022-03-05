@@ -3,11 +3,9 @@ import {
   PlusIcon,
   WalletIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import api from "../../common/lib/api";
-import type { Accounts } from "../../types";
 import Button from "../components/Button";
 import Container from "../components/Container";
 import Menu from "../components/Menu";
