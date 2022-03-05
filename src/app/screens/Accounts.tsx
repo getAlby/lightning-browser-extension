@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   EllipsisIcon,
@@ -6,24 +5,18 @@ import {
   WalletIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 
-import type { Accounts } from "../../types";
 import api from "../../common/lib/api";
 import { useAuth } from "../context/AuthContext";
+import { useAccounts } from "../context/AccountsContext";
 
 import Button from "../components/Button";
 import Container from "../components/Container";
 import Menu from "../components/Menu";
 
 function AccountsScreen() {
-  const [accounts, setAccounts] = useState<Accounts>({});
   const auth = useAuth();
+  const { accounts, getAccounts } = useAccounts();
   const navigate = useNavigate();
-
-  function getAccounts() {
-    api.getAccounts().then((response) => {
-      setAccounts(response);
-    });
-  }
 
   async function selectAccount(accountId: string) {
     auth.setAccountId(accountId);
@@ -50,10 +43,6 @@ function AccountsScreen() {
       }
     }
   }
-
-  useEffect(() => {
-    getAccounts();
-  }, []);
 
   return (
     <Container>
