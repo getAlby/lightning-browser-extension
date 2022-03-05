@@ -31,20 +31,27 @@ We have a channel on the [bitcoin.design](https://bitcoin.design/) Slack communi
 
 We also do a weekly call on Monday at 14:00 UTC - ([15:00 CET/CAT - 10:00 EDT](https://www.worldtimebuddy.com/?qm=1&lid=100,12,5&h=100&date=2021-11-4&sln=14-15&hf=1)) on [Jitsi](https://meet.fulmo.org/AlbyCommunityCall)
 
-## Try out the most recent version
+## Browser Support
 
-Download Nightly releases
+Alby supports
 
-- [Firefox Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-firefox-nightly-master.xpi) - best install it as temporary add-on as discussed in the "Load extension into browser" section
+- All [Chromium based browsers](https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium) - Chrome Opera, Brave etc.
+- Firefox
+- more coming soon...
+
+## Installation
+
+Add Alby to your Browser
+
+- [Add To Chrome, Opera, Brave, and all Chromium based browsers](https://chrome.google.com/webstore/detail/alby/iokeahhehimjnekafflcihljlcjccdbe)
+- [Add to Firefox](https://addons.mozilla.org/en-US/firefox/addon/alby/)
+
+Try out the most recent version of Alby (Nightly Releases)
+
+- [Firefox Nightly](https://alby-releases-public.s3.eu-scentral-1.amazonaws.com/alby-firefox-nightly-master.xpi) - best install it as temporary add-on as discussed in the "Load extension into browser" section
 - [Chrome Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-chrome-nightly-master.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right) and drag& drop the file
 
 (Note: You might need to reconfigure your wallet after installing new versions)
-
-## Browser Support
-
-- [Chrome](https://chrome.google.com/webstore/detail/alby/iokeahhehimjnekafflcihljlcjccdbe) (Opera, Brave, and all Chromium based browsers)
-- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/alby/)
-- more coming soon...
 
 ## Architecture idea
 
@@ -159,7 +166,7 @@ We use the [Development Project Board](https://github.com/getAlby/lightning-brow
 
 If you're a developer looking to help but not sure where to begin, check out the issues that have specifically been marked as being friendly to new contributors [here](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22+project%3AgetAlby%2Flightning-browser-extension%2F2).
 
-> Alby enforces [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/) for adding human and machine readable meaning to commit messages, make sure to read and follow them.
+> Alby enforces [Conventional Commits specification](https://www.conventionalcommits.org/en/) for adding human and machine readable meaning to commit messages, make sure to read and follow them.
 
 If you're looking for a bigger challenge, before opening a pull request please [create an issue](https://github.com/bumi/lightning-browser-extension/issues/new) or [join our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2) to get feedback, discuss the best way to tackle the challenge, and to ensure that there's no duplication of work.
 
