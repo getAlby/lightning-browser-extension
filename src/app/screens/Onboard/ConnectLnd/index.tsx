@@ -1,7 +1,6 @@
 import { SendIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import browser from "webextension-polyfill";
 import utils from "../../../../common/lib/utils";
 import Button from "../../../components/Button";
 import TextField from "../../../components/Form/TextField";
@@ -51,15 +50,6 @@ export default function ConnectLnd() {
       // TODO: for native connectors we currently skip the validation because it is too slow (booting up Tor etc.)
       if (account.connector === "nativelnd") {
         validation = { valid: true, error: "" };
-        const permissionGranted = await browser.permissions.request({
-          permissions: ["nativeMessaging"],
-        });
-        if (!permissionGranted) {
-          validation = {
-            valid: false,
-            error: "Native permissions are required to connect through Tor.",
-          };
-        }
       } else {
         validation = await utils.call("validateAccount", account);
       }
