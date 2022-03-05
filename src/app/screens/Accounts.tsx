@@ -5,23 +5,19 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import api from "../../common/lib/api";
 import type { Accounts } from "../../types";
 import Button from "../components/Button";
 import Container from "../components/Container";
 import Menu from "../components/Menu";
 import { useAuth } from "../context/AuthContext";
+import { useAccounts } from "../context/AccountsContext";
 
 function AccountsScreen() {
-  const [accounts, setAccounts] = useState<Accounts>({});
   const auth = useAuth();
+  const { accounts, getAccounts } = useAccounts();
   const navigate = useNavigate();
-
-  function getAccounts() {
-    api.getAccounts().then((response) => {
-      setAccounts(response);
-    });
-  }
 
   async function selectAccount(accountId: string) {
     auth.setAccountId(accountId);
@@ -48,10 +44,6 @@ function AccountsScreen() {
       }
     }
   }
-
-  useEffect(() => {
-    getAccounts();
-  }, []);
 
   return (
     <Container>

@@ -19,7 +19,7 @@ interface AuthContextType {
   fetchAccountInfo: (id?: string) => Promise<AccountInfo | undefined>;
 }
 
-const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+const AuthContext = createContext({} as AuthContextType);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [account, setAccount] = useState<AuthContextType["account"]>(null);
