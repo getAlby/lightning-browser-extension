@@ -1,12 +1,10 @@
-import { useState, useRef } from "react";
 import { SendIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-import browser from "webextension-polyfill";
-
-import TextField from "../../../components/Form/TextField";
-import Button from "../../../components/Button";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import browser from "webextension-polyfill";
 import utils from "../../../../common/lib/utils";
+import Button from "../../../components/Button";
+import TextField from "../../../components/Form/TextField";
 
 const initialFormData = Object.freeze({
   url: "",
