@@ -6,6 +6,7 @@ import utils from "../../../../common/lib/utils";
 import Button from "../../../components/Button";
 import QrcodeScanner from "../../../components/QrcodeScanner";
 import TextField from "../../../components/Form/TextField";
+import CompanionDownloadInfo from "../../../components/CompanionDownloadInfo";
 
 export default function ConnectLndHub() {
   const navigate = useNavigate();
@@ -108,6 +109,9 @@ export default function ConnectLndHub() {
                 value={formData.uri}
                 onChange={handleChange}
               />
+            </div>
+            {formData.uri.match(/\.onion/i) && <CompanionDownloadInfo />}
+            <div className="mt-6">
               <p className="text-center my-4 dark:text-white">OR</p>
               <QrcodeScanner
                 fps={10}
