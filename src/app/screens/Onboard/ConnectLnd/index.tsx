@@ -146,7 +146,7 @@ export default function ConnectLnd() {
               <div>
                 <TextField
                   id="macaroon"
-                  label="Macaroon"
+                  label="Macaroon (HEX format)"
                   value={formData.macaroon}
                   onChange={handleChange}
                   required

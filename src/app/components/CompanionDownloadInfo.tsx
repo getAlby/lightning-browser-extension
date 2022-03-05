@@ -11,9 +11,9 @@ function CompanionDownloadInfo() {
   // TODO: check if the companion app is already installed
   return (
     <div className="mt-6">
-      You are trying to connect to your node through Tor. Because browsers
-      cannot directly connect to your node please make sure you have the Alby
-      companion app installed. You can download it from{" "}
+      You are trying to connect to a node behind Tor. Because browsers cannot
+      directly connect to your node please make sure you have the Alby companion
+      app installed. You can download it from{" "}
       <a
         href={`https://getalby.com/install/companion/${getOS()}`}
         target="_blank"
