@@ -48,7 +48,7 @@ Add Alby to your Browser
 
 Try out the most recent version of Alby (Nightly Releases)
 
-- [Firefox Nightly](https://alby-releases-public.s3.eu-scentral-1.amazonaws.com/alby-firefox-nightly-master.xpi) - best install it as temporary add-on as discussed in the "Load extension into browser" section
+- [Firefox Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-firefox-nightly-master.xpi) - best install it as temporary add-on as discussed in the "Load extension into browser" section
 - [Chrome Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-chrome-nightly-master.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right) and drag& drop the file
 
 (Note: You might need to reconfigure your wallet after installing new versions)
