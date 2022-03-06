@@ -7,14 +7,8 @@ import * as settings from "./actions/settings";
 import * as setup from "./actions/setup";
 import * as webln from "./actions/webln";
 
-import type { Message } from "../../types";
-
-interface Routes {
-  [key: string]: string | ((message: Message) => void)
-}
-
 // TODO: potential nesting/grouping of actions for better organization
-const routes: Routes = {
+const routes = {
   /*
   webln: {
     enable: allowances.enable,
@@ -63,15 +57,13 @@ const routes: Routes = {
 };
 
 const router = (path: FixMe) => {
-
-  console.log('PATH', path);
-  
+  console.log("PATH", path);
 
   if (!path) {
     throw new Error("No action path provided to router");
   }
   const routeParts = path.split("/");
-  const route = routeParts.reduce((route, path) => {
+  const route = routeParts.reduce((route: FixMe, path: FixMe) => {
     return route[path];
   }, routes);
 

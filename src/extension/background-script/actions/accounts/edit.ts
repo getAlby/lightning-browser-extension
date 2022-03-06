@@ -28,6 +28,7 @@ const edit = async (
     state.setState({ accounts });
     // make sure we immediately persist the updated accounts
     await state.getState().saveToStorage();
+    return {};
   } else {
     console.log(`Account not found: ${accountId}`);
     return {
