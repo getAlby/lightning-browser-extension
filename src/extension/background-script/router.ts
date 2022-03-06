@@ -7,8 +7,14 @@ import * as settings from "./actions/settings";
 import * as setup from "./actions/setup";
 import * as webln from "./actions/webln";
 
+import type { Message } from "../../types";
+
+interface Routes {
+  [key: string]: string | ((message: Message) => void)
+}
+
 // TODO: potential nesting/grouping of actions for better organization
-const routes = {
+const routes: Routes = {
   /*
   webln: {
     enable: allowances.enable,
@@ -56,7 +62,11 @@ const routes = {
   getSettings: settings.get,
 };
 
-const router = (path) => {
+const router = (path: FixMe) => {
+
+  console.log('PATH', path);
+  
+
   if (!path) {
     throw new Error("No action path provided to router");
   }
