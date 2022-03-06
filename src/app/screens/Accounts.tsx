@@ -48,7 +48,7 @@ function AccountsScreen() {
       <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
         Accounts
       </h2>
-      <div className="shadow border-b border-gray-200 sm:rounded-lg bg-white">
+      <div className="shadow border-b border-gray-200 dark:border-gray-500 sm:rounded-lg bg-white dark:bg-gray-800">
         <div className="p-6">
           <Button
             icon={<PlusIcon className="w-5 h-5" />}
@@ -69,10 +69,12 @@ function AccountsScreen() {
                         <WalletIcon className="w-8 h-8 text-black" />
                       </div>
                       <div className="ml-4">
-                        <div className="font-bold text-gray-900">
+                        <div className="font-bold text-gray-900 dark:text-white">
                           {account.name}
                         </div>
-                        <div className="text-gray-500">{account.connector}</div>
+                        <div className="text-gray-500 dark:text-gray-400">
+                          {account.connector}
+                        </div>
                       </div>
                     </div>
                   </td>
