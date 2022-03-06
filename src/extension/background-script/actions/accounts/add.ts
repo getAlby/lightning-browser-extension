@@ -1,4 +1,5 @@
 import type { Runtime } from "webextension-polyfill";
+import { v4 as uuidv4 } from "uuid";
 import { encryptData } from "../../../../common/lib/crypto";
 import type { OriginData, Account } from "../../../../types";
 import state from "../../state";
@@ -28,7 +29,7 @@ const add = async (
 
   if (!password) return { error: "Password is missing" };
 
-  const accountId = crypto.randomUUID();
+  const accountId = uuidv4();
   newAccount.config = encryptData(newAccount.config, password);
   accounts[accountId] = newAccount;
 
