@@ -1,13 +1,26 @@
 import state from "../../state";
+import type { Runtime } from "webextension-polyfill";
+import type { OriginData, Account } from "../../../../types";
 
-const edit = async (message, sender) => {
-  console.log("EDIT ACCOUNT", message);
+// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652
+// align Message-Types
+interface EditAccountMessage {
+  args: {
+    id: Account["id"];
+    name: Account["name"];
+  };
+  origin: OriginData;
+  application?: string;
+  prompt?: boolean;
+  type?: string;
+}
+
+const edit = async (
+  message: EditAccountMessage,
+  _sender: Runtime.MessageSender
+) => {
   const accounts = state.getState().accounts;
-
-  let accountId = message.args.id;
-  if (accountId === undefined) {
-    accountId = state.getState().currentAccountId;
-  }
+  const accountId = message.args.id;
 
   if (typeof accountId === "string" || typeof accountId === "number") {
     accounts[accountId].name = message.args.name;
@@ -15,9 +28,6 @@ const edit = async (message, sender) => {
     state.setState({ accounts });
     // make sure we immediately persist the updated accounts
     await state.getState().saveToStorage();
-    return {
-      // data: { deleted: accountId },
-    };
   } else {
     console.log(`Account not found: ${accountId}`);
     return {
@@ -25,9 +35,8 @@ const edit = async (message, sender) => {
     };
   }
 
-  // // make sure we immediately persist the new account
-  // await state.getState().saveToStorage();
-  // return { data: { accountId: accountId } };
+  // make sure we immediately persist the edited account
+  await state.getState().saveToStorage();
 };
 
 export default edit;

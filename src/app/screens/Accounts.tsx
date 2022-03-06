@@ -34,10 +34,7 @@ function AccountsScreen() {
     await utils.call("editAccount", {
       name: newAccountName,
       id: accountId,
-      // id: parseInt(allowance.id),
-      // totalBudget: parseInt(budget),
     });
-    // onEdit && onEdit();
     getAccounts();
     closeModal();
   }
@@ -121,7 +118,7 @@ function AccountsScreen() {
                             setNewAccountName(account.name);
                           }}
                         >
-                          HI {accountId}
+                          Edit
                         </Menu.ItemButton>
                       </Menu.List>
                     </Menu>
@@ -130,13 +127,13 @@ function AccountsScreen() {
                       closeTimeoutMS={200}
                       isOpen={modalIsOpen}
                       onRequestClose={closeModal}
-                      contentLabel="Allowance Options"
+                      contentLabel="Edit account"
                       overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
                       className="rounded-lg bg-white w-full max-w-lg"
                     >
                       <div className="p-5 flex justify-between dark:bg-gray-800">
                         <h2 className="text-2xl font-bold dark:text-white">
-                          HI MODAL
+                          Edit account
                         </h2>
                         <button onClick={closeModal}>
                           <CrossIcon className="w-6 h-6 dark:text-white" />
@@ -146,23 +143,20 @@ function AccountsScreen() {
                       <div className="p-5 border-t border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">
                         <div className="w-60">
                           <TextField
-                            id="budget"
-                            label="Budget"
-                            // placeholder="sat"
+                            id="acountName"
+                            label="Name"
                             value={newAccountName}
-                            // type="number"
                             onChange={(e) => setNewAccountName(e.target.value)}
                           />
                         </div>
                       </div>
 
                       <div className="flex justify-end p-5 dark:bg-gray-800">
-                        {accountId}
                         <Button
                           onClick={() => updateAccountName(accountId)}
                           label="Save"
                           primary
-                          // disabled={budget === ""}
+                          disabled={newAccountName === ""}
                         />
                       </div>
                     </Modal>
