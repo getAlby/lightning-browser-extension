@@ -133,6 +133,7 @@ export default function TestConnection() {
             <Input
               name="uri"
               type="text"
+              autoFocus
               onChange={handleEmailChange}
               required
               placeholder="you@email.com"

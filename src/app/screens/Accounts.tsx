@@ -4,6 +4,7 @@ import {
   WalletIcon
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import type { FormEvent } from "react";
 import { useState } from "react";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
@@ -29,12 +30,11 @@ function AccountsScreen() {
   }
 
   async function updateAccountName(accountId: string) {
-    console.log("account:::", accountId);
-
     await utils.call("editAccount", {
       name: newAccountName,
       id: accountId,
     });
+
     getAccounts();
     closeModal();
   }
@@ -140,25 +140,35 @@ function AccountsScreen() {
                         </button>
                       </div>
 
-                      <div className="p-5 border-t border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">
-                        <div className="w-60">
-                          <TextField
-                            id="acountName"
-                            label="Name"
-                            value={newAccountName}
-                            onChange={(e) => setNewAccountName(e.target.value)}
+                      <form
+                        onSubmit={(e: FormEvent) => {
+                          e.preventDefault();
+                          updateAccountName(accountId);
+                        }}
+                      >
+                        <div className="p-5 border-t border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">
+                          <div className="w-60">
+                            <TextField
+                              autoFocus
+                              id="acountName"
+                              label="Name"
+                              onChange={(e) =>
+                                setNewAccountName(e.target.value)
+                              }
+                              value={newAccountName}
+                            />
+                          </div>
+                        </div>
+
+                        <div className="flex justify-end p-5 dark:bg-gray-800">
+                          <Button
+                            label="Save"
+                            type="submit"
+                            primary
+                            disabled={newAccountName === ""}
                           />
                         </div>
-                      </div>
-
-                      <div className="flex justify-end p-5 dark:bg-gray-800">
-                        <Button
-                          onClick={() => updateAccountName(accountId)}
-                          label="Save"
-                          primary
-                          disabled={newAccountName === ""}
-                        />
-                      </div>
+                      </form>
                     </Modal>
                   </td>
                 </tr>
