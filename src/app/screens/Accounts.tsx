@@ -48,7 +48,7 @@ function AccountsScreen() {
       <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
         Accounts
       </h2>
-      <div className="shadow border-b border-gray-200 dark:border-gray-600 sm:rounded-lg bg-white dark:bg-gray-800">
+      <div className="shadow border-b border-gray-200 dark:border-gray-500 sm:rounded-lg bg-white dark:bg-gray-800">
         <div className="p-6">
           <Button
             icon={<PlusIcon className="w-5 h-5" />}
