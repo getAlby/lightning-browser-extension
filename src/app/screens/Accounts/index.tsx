@@ -8,14 +8,14 @@ import type { FormEvent } from "react";
 import { useState } from "react";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
-import api from "../../common/lib/api";
-import utils from "../../common/lib/utils";
-import Button from "../components/Button";
-import Container from "../components/Container";
-import TextField from "../components/Form/TextField";
-import Menu from "../components/Menu";
-import { useAccounts } from "../context/AccountsContext";
-import { useAuth } from "../context/AuthContext";
+import api from "../../../common/lib/api";
+import utils from "../../../common/lib/utils";
+import Button from "../../components/Button";
+import Container from "../../components/Container";
+import TextField from "../../components/Form/TextField";
+import Menu from "../../components/Menu";
+import { useAccounts } from "../../context/AccountsContext";
+import { useAuth } from "../../context/AuthContext";
 
 function AccountsScreen() {
   const auth = useAuth();

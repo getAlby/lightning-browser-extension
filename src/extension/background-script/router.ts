@@ -57,8 +57,6 @@ const routes = {
 };
 
 const router = (path: FixMe) => {
-  console.log("PATH", path);
-
   if (!path) {
     throw new Error("No action path provided to router");
   }
