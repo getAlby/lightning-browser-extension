@@ -1,7 +1,5 @@
 # #### This all good standard ###
 
-.nova
-
 # Logs
 logs
 *.log
@@ -133,6 +131,7 @@ dist/
 
 # Editor directories and files
 .idea
+.nova
 .vscode
 *.suo
 *.ntvs*
