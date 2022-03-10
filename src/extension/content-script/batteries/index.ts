@@ -8,6 +8,7 @@ import Peertube from "./Peertube";
 import Reddit from "./Reddit";
 // import YouTubeChannel from "./YouTubeChannel";
 import VimeoVideo from "./VimeoVideo";
+import Medium from "./Medium";
 
 // Order is important as the first one for which the URL matches will be used
 // Monetization must likely be always the last one
@@ -18,6 +19,7 @@ const enhancements = [
   YouTubeChannel,
   Peertube,
   VimeoVideo,
+  Medium,
   Monetization,
 ];
 
