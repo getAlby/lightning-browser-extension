@@ -1,5 +1,7 @@
 import Base64 from "crypto-js/enc-base64";
+import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
+import sha256 from "crypto-js/sha256";
 import utils from "../../../common/lib/utils";
 import Connector, {
   SendPaymentArgs,
@@ -84,7 +86,42 @@ class Lnd implements Connector {
   async sendPaymentKeySend(
     args: SendPaymentArgs
   ): Promise<SendPaymentResponse> {
-    throw new Error("not supported");
+    //let randomByteArray = new Uint8Array(32);
+    //var paymentHash = crypto.getRandomValues(randomByteArray);
+    //let buffer = crypto.randomBytes(32);
+    //buffer.toString('hex');
+    const preImage = utils.genRanHex(64);
+    const paymentHash = sha256(preImage);
+    return this.request<{
+      payment_preimage: string;
+      payment_hash: string;
+      payment_route: { total_amt: number; total_fees: number };
+      payment_error?: string;
+    }>(
+      "POST",
+      "/v1/channels/transactions",
+      {
+        dest: Base64.stringify(Hex.parse(args.pubkey)),
+        amt: args.amount,
+        payment_hash: Base64.stringify(paymentHash),
+        dest_custom_records: {
+          34349334: Base64.stringify(UTF8.parse(args.memo)),
+          5482373484: Base64.stringify(UTF8.parse(preImage)),
+        },
+      },
+      {}
+    ).then((data) => {
+      if (data.payment_error) {
+        return { error: data.payment_error };
+      }
+      return {
+        data: {
+          preimage: utils.base64ToHex(data.payment_preimage),
+          paymentHash: utils.base64ToHex(data.payment_hash),
+          route: data.payment_route,
+        },
+      };
+    });
   }
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
     const data = await this.request<{ settled: boolean }>(
