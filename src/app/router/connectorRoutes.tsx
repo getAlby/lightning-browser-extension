@@ -3,6 +3,7 @@ import ConnectLndHub from "../screens/Onboard/ConnectLndHub";
 import ConnectLnbits from "../screens/Onboard/ConnectLnbits";
 import ConnectEclair from "../screens/Onboard/ConnectEclair";
 import NewWallet from "../screens/Onboard/NewWallet";
+import ConnectUmbrel from "../screens/Onboard/ConnectUmbrel";
 
 export default [
   { path: "lnd", element: <ConnectLnd /> },
@@ -10,4 +11,5 @@ export default [
   { path: "lnbits", element: <ConnectLnbits /> },
   { path: "eclair", element: <ConnectEclair /> },
   { path: "create-wallet", element: <NewWallet /> },
+  { path: "umbrel", element: <ConnectUmbrel /> },
 ];

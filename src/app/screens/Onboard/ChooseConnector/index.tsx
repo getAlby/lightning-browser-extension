@@ -5,6 +5,7 @@ import lndhub from "/static/assets/icons/lndhub.png";
 import lnd from "/static/assets/icons/lnd.png";
 import eclair from "/static/assets/icons/eclair.jpg";
 import alby from "/static/assets/icons/alby.png";
+import umbrel from "/static/assets/icons/umbrel.png";
 
 type Props = {
   title: string;
@@ -43,10 +44,16 @@ export default function ChooseConnector({ title, description }: Props) {
       description: "We create and manage a lightning wallet for you",
       logo: alby,
     },
+    {
+      to: "umbrel",
+      title: "Umbrel",
+      description: "Connect to your Umbrel",
+      logo: umbrel,
+    },
   ];
 
   return (
-    <div className="relative mt-14 lg:grid  lg:gap-8 text-center">
+    <div className="relative my-14 lg:grid  lg:gap-8 text-center">
       <div className="relative">
         <div className="mb-6">
           <h1 className="text-3xl font-bold dark:text-white">{title}</h1>
@@ -56,7 +63,7 @@ export default function ChooseConnector({ title, description }: Props) {
             </p>
           )}
         </div>
-        <div className="grid grid-cols-5 gap-5">
+        <div className="grid grid-cols-4 gap-5">
           {connectors.map(({ to, title, description, logo }) => (
             <LinkButton
               key={to}
