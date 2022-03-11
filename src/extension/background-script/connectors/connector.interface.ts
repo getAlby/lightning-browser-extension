@@ -43,6 +43,10 @@ export type SendPaymentResponse =
 
 export interface SendPaymentArgs {
   paymentRequest: string;
+  offer: string;
+  pubkey: string;
+  amount: number;
+  memo: string;
 }
 
 export interface CheckPaymentArgs {
@@ -88,6 +92,7 @@ export default interface Connector {
   getBalance(): Promise<GetBalanceResponse>;
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse>;
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse>;
+  sendPaymentKeySend(args: SendPaymentArgs): Promise<SendPaymentResponse>;
   checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse>;
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse>;
   verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse>;

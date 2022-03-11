@@ -135,6 +135,60 @@ export default class LndHub implements Connector {
       },
     };
   }
+  async sendPaymentKeySend(
+    args: SendPaymentArgs
+  ): Promise<SendPaymentResponse> {
+    const data = await this.request<{
+      error: string;
+      message: string;
+      payment_error?: string;
+      payment_hash:
+        | {
+            type: string;
+            data: ArrayBuffer;
+          }
+        | string;
+      payment_preimage:
+        | {
+            type: string;
+            data: ArrayBuffer;
+          }
+        | string;
+      payment_route: { total_amt: number; total_fees: number };
+    }>("POST", "/keysend", {
+      destination: args.pubkey,
+      amount: args.amount,
+      memo: args.memo,
+    });
+    if (data.error) {
+      return { error: data.message };
+    }
+    if (data.payment_error) {
+      return { error: data.payment_error };
+    }
+    if (
+      typeof data.payment_hash === "object" &&
+      data.payment_hash.type === "Buffer"
+    ) {
+      data.payment_hash = Buffer.from(data.payment_hash.data).toString("hex");
+    }
+    if (
+      typeof data.payment_preimage === "object" &&
+      data.payment_preimage.type === "Buffer"
+    ) {
+      data.payment_preimage = Buffer.from(data.payment_preimage.data).toString(
+        "hex"
+      );
+    }
+
+    return {
+      data: {
+        preimage: data.payment_preimage as string,
+        paymentHash: data.payment_hash as string,
+        route: data.payment_route,
+      },
+    };
+  }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
     const data = await this.request<{ paid: boolean }>(

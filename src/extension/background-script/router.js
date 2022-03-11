@@ -34,6 +34,7 @@ const routes = {
   sendPaymentOrPrompt: webln.sendPaymentOrPrompt,
   signMessageOrPrompt: webln.signMessageOrPrompt,
   sendPayment: ln.sendPayment,
+  sendPaymentKeySend: ln.sendPaymentKeySend,
   checkPayment: ln.checkPayment,
   signMessage: ln.signMessage,
   verifyMessage: ln.verifyMessage,
