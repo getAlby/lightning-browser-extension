@@ -1,5 +1,4 @@
-import { SendIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import utils from "../../../../common/lib/utils";
 import Button from "../../../components/Button";
@@ -14,15 +13,24 @@ const initialFormData = Object.freeze({
 export default function ConnectUmbrel() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
-  const [isDragging, setDragging] = useState(false);
-  const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value.trim(),
-    });
+  function handleLndconnectUrl(event: React.ChangeEvent<HTMLInputElement>) {
+    try {
+      const lndconnectUrl = event.target.value.trim();
+      const lndconnect = new URL(lndconnectUrl);
+      const url = "https:" + lndconnect.pathname;
+      let macaroon = lndconnect.searchParams.get("macaroon") || "";
+      macaroon = utils.urlSafeBase64ToHex(macaroon);
+      // const cert = lndconnect.searchParams.get("cert"); // TODO: handle LND certs with the native connector
+      setFormData({
+        ...formData,
+        url,
+        macaroon,
+      });
+    } catch (e) {
+      console.log("invalid lndconnect string");
+    }
   }
 
   function getConnectorType() {
@@ -78,48 +86,6 @@ export default function ConnectUmbrel() {
     setLoading(false);
   }
 
-  function dropHandler(event: React.DragEvent<HTMLDivElement>) {
-    event.preventDefault();
-    if (
-      event.dataTransfer.items &&
-      event.dataTransfer.items[0].kind === "file"
-    ) {
-      const file = event.dataTransfer.items[0].getAsFile();
-      if (file) {
-        const extension = file.name.split(".").pop();
-        if (extension === "macaroon") readFile(file);
-      }
-    }
-    if (isDragging) setDragging(false);
-  }
-
-  function readFile(file: File) {
-    const reader = new FileReader();
-    reader.onload = function (evt) {
-      if (evt.target?.result) {
-        const macaroon = utils.bytesToHexString(
-          new Uint8Array(evt.target.result as ArrayBuffer)
-        );
-        if (macaroon) {
-          setFormData({
-            ...formData,
-            macaroon,
-          });
-        }
-      }
-    };
-    reader.readAsArrayBuffer(file);
-  }
-
-  function dragOverHandler(event: React.DragEvent<HTMLDivElement>) {
-    event.preventDefault();
-    if (!isDragging) setDragging(true);
-  }
-
-  function dragLeaveHandler(event: React.DragEvent<HTMLDivElement>) {
-    if (isDragging) setDragging(false);
-  }
-
   return (
     <form onSubmit={handleSubmit}>
       <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 px-12 py-10">
@@ -128,61 +94,22 @@ export default function ConnectUmbrel() {
             Connect to your Umbrel node
           </h1>
           <p className="text-gray-500 mt-6 dark:text-gray-400">
-            You need your node URL and a macaroon with read and send permissions
-            (e.g. admin.macaroon)
+            In your Umbrel dashboard go to <b>Connect Wallet</b>.<br />
+            Select <b>lndconnect REST</b> and copy the <b>lndconnect URL</b>.
+            (Depending on your setup you can either use the <i>local</i>{" "}
+            connection or the <i>Tor</i> connection.)
           </p>
           <div className="w-4/5">
             <div className="mt-6">
               <TextField
-                id="url"
-                label="REST API host and port"
-                placeholder="https://your-node:8080"
-                onChange={handleChange}
+                id="lndconnect"
+                label="lndconnect REST URL"
+                placeholder="lndconnect://yournode:8080?..."
+                onChange={handleLndconnectUrl}
                 required
               />
             </div>
             {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
-            <div className="mt-6">
-              <div>
-                <TextField
-                  id="macaroon"
-                  label="Macaroon (HEX format)"
-                  value={formData.macaroon}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <p className="text-center my-4 dark:text-white">OR</p>
-              <div
-                className={`cursor-pointer flex flex-col items-center dark:bg-gray-800 p-4 py-10 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
-                  isDragging ? "border-blue-500 bg-blue-50" : ""
-                }`}
-                onDrop={dropHandler}
-                onDragOver={dragOverHandler}
-                onDragLeave={dragLeaveHandler}
-                onClick={() => {
-                  if (hiddenFileInput?.current) hiddenFileInput.current.click();
-                }}
-              >
-                <SendIcon className="mb-3 h-9 w-9 text-blue-500" />
-                <p className="dark:text-white">
-                  Drag and drop your macaroon here or{" "}
-                  <span className="underline">browse</span>
-                </p>
-                <input
-                  ref={hiddenFileInput}
-                  onChange={(event) => {
-                    if (event.target.files) {
-                      const file = event.target.files[0];
-                      readFile(file);
-                    }
-                  }}
-                  type="file"
-                  accept=".macaroon"
-                  hidden
-                />
-              </div>
-            </div>
           </div>
         </div>
         <div className="mt-16 lg:mt-0 lg:w-1/2">
