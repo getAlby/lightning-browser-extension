@@ -46,6 +46,12 @@ export default function ChooseConnector({ title, description }: Props) {
       logo: eclair,
     },
     {
+      to: "create-wallet",
+      title: "Create a new wallet",
+      description: "We create and manage a lightning wallet for you",
+      logo: alby,
+    },
+    {
       to: "citadel",
       title: "Citadel",
       description: "Connect to your local Citadel",
@@ -56,12 +62,6 @@ export default function ChooseConnector({ title, description }: Props) {
       title: "Umbrel",
       description: "Connect to your Umbrel",
       logo: umbrel,
-    },
-    {
-      to: "create-wallet",
-      title: "Create a new wallet",
-      description: "We create and manage a lightning wallet for you",
-      logo: alby,
     },
   ];
 
