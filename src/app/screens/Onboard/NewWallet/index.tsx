@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Input from "../../../components/Form/Input";
+import TextField from "../../../components/Form/TextField";
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";
@@ -141,22 +142,14 @@ export default function NewWallet() {
               </div>
 
               <div className="mt-6">
-                <label
-                  htmlFor="email"
-                  className="block font-medium text-gray-700 dark:text-gray-400"
-                >
-                  Email Address
-                </label>
-                <div className="mt-1">
-                  <Input
-                    name="email"
-                    type="email"
-                    id="email"
-                    onChange={(e) => {
-                      setEmail(e.target.value.trim());
-                    }}
-                  />
-                </div>
+                <TextField
+                  id="email"
+                  label="Email Address"
+                  type="email"
+                  onChange={(e) => {
+                    setEmail(e.target.value.trim());
+                  }}
+                />
               </div>
             </div>
           )}

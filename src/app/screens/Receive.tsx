@@ -174,7 +174,7 @@ function Receive() {
           renderInvoice()
         ) : (
           <>
-            <div className="mt-2 mb-4">
+            <div className="mb-4">
               <TextField
                 id="amount"
                 label="Amount"
@@ -232,16 +232,6 @@ function Receive() {
                   }
                 />
               </div>
-              <a
-                className="underline text-sm text-gray-500 dark:text-gray-400"
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigate("/");
-                }}
-              >
-                Cancel
-              </a>
             </div>
           </>
         )}

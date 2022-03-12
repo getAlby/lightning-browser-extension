@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect, MouseEvent } from "react";
+import React, { useState, useEffect, MouseEvent } from "react";
 import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
@@ -15,7 +15,7 @@ import getOriginData from "../../extension/content-script/originData";
 import { useAuth } from "../context/AuthContext";
 
 import Button from "../components/Button";
-import Input from "../components/Form/Input";
+import TextField from "../components/Form/TextField";
 import PublisherCard from "../components/PublisherCard";
 
 type Origin = {
@@ -27,6 +27,14 @@ type Props = {
   details?: LNURLPayServiceResponse;
   origin?: Origin;
 };
+
+const Dt = ({ children }: { children: React.ReactNode }) => (
+  <dt className="font-medium text-gray-500">{children}</dt>
+);
+
+const Dd = ({ children }: { children: React.ReactNode }) => (
+  <dd className="mb-4 dark:text-white">{children}</dd>
+);
 
 function LNURLPay(props: Props) {
   const [searchParams] = useSearchParams();
@@ -180,76 +188,9 @@ function LNURLPay(props: Props) {
     return details.domain;
   }
 
-  function renderAmount(minSendable: number, maxSendable: number) {
-    if (minSendable === maxSendable) {
-      return <p>{`${+minSendable / 1000} sat`}</p>;
-    } else {
-      return (
-        <div className="mt-1 flex flex-col">
-          <Input
-            type="number"
-            min={+minSendable / 1000}
-            max={+maxSendable / 1000}
-            value={valueSat}
-            onChange={(e) => setValueSat(e.target.value)}
-          />
-          <div className="flex space-x-1.5 mt-2">
-            <Button
-              fullWidth
-              label="100 sat⚡"
-              onClick={() => setValueSat("100")}
-            />
-            <Button
-              fullWidth
-              label="1K sat⚡"
-              onClick={() => setValueSat("1000")}
-            />
-            <Button
-              fullWidth
-              label="5K sat⚡"
-              onClick={() => setValueSat("5000")}
-            />
-            <Button
-              fullWidth
-              label="10K sat⚡"
-              onClick={() => setValueSat("10000")}
-            />
-          </div>
-        </div>
-      );
-    }
-  }
-
-  function renderComment() {
-    return (
-      <div className="flex flex-col">
-        <Input
-          type="text"
-          placeholder="optional"
-          onChange={(e) => {
-            setComment(e.target.value);
-          }}
-        />
-      </div>
-    );
-  }
-
-  function renderName() {
-    return (
-      <div className="mt-1 flex flex-col">
-        <Input
-          type="text"
-          placeholder="optional"
-          value={userName}
-          onChange={(e) => {
-            setUserName(e.target.value);
-          }}
-        />
-      </div>
-    );
-  }
-
-  function formattedMetadata(metadataJSON: string) {
+  function formattedMetadata(
+    metadataJSON: string
+  ): [string, string | React.ReactNode][] {
     try {
       const metadata = JSON.parse(metadataJSON);
       return metadata
@@ -268,32 +209,9 @@ function LNURLPay(props: Props) {
     return [];
   }
 
-  function elements() {
-    if (loading || !details)
-      return [
-        ["Send payment to", "loading..."],
-        ["Description", "loading..."],
-        ["Amount (Satoshi)", "loading..."],
-      ];
-    const elements = [];
-    elements.push(["Send payment to", getRecipient()]);
-    elements.push(...formattedMetadata(details.metadata));
-    elements.push([
-      "Amount (Satoshi)",
-      renderAmount(details.minSendable, details.maxSendable),
-    ]);
-    if (details?.commentAllowed > 0) {
-      elements.push(["Comment", renderComment()]);
-    }
-    if (details?.payerData?.name) {
-      elements.push(["Name", renderName()]);
-    }
-    return elements;
-  }
-
   function renderSuccessAction() {
     if (!successAction) return;
-    let descriptionList;
+    let descriptionList: [string, string | React.ReactNode][] = [];
     if (successAction.tag === "url") {
       descriptionList = [
         ["Description", successAction.description],
@@ -320,13 +238,12 @@ function LNURLPay(props: Props) {
     return (
       <>
         <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-          {descriptionList &&
-            descriptionList.map(([dt, dd], i) => (
-              <Fragment key={`dl-item-${i}`}>
-                <dt className="text-sm font-semibold text-gray-500">{dt}</dt>
-                <dd className="text-sm mb-4 dark:text-white">{dd}</dd>
-              </Fragment>
-            ))}
+          {descriptionList.map(([dt, dd]) => (
+            <>
+              <Dt>{dt}</Dt>
+              <Dd>{dd}</Dd>
+            </>
+          ))}
         </dl>
         <div className="text-center">
           <button
@@ -350,14 +267,97 @@ function LNURLPay(props: Props) {
       <div className="p-4 max-w-screen-sm mx-auto">
         {!successAction ? (
           <>
-            <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-              {elements().map(([t, d], i) => (
-                <Fragment key={`element-${i}`}>
-                  <dt className="text-sm font-semibold text-gray-500">{t}</dt>
-                  <dd className="text-sm mb-4 dark:text-white">{d}</dd>
-                </Fragment>
-              ))}
-            </dl>
+            <div className="shadow bg-white dark:bg-gray-700 py-4 px-4 rounded-lg mb-6 overflow-hidden">
+              <dl>
+                {loading || !details ? (
+                  <>
+                    <Dt>Send payment to</Dt>
+                    <Dd>loading...</Dd>
+                    <Dt>Description</Dt>
+                    <Dd>loading...</Dd>
+                    <Dt>Amount (Satoshi)</Dt>
+                    <Dd>loading...</Dd>
+                  </>
+                ) : (
+                  <>
+                    <Dt>Send payment to</Dt>
+                    <Dd>{getRecipient()}</Dd>
+                    {formattedMetadata(details.metadata).map(([dt, dd]) => (
+                      <>
+                        <Dt>{dt}</Dt>
+                        <Dd>{dd}</Dd>
+                      </>
+                    ))}
+                    {details.minSendable === details.maxSendable && (
+                      <>
+                        <Dt>Amount (Satoshi)</Dt>
+                        <Dd>{`${+details.minSendable / 1000} sat`}</Dd>
+                      </>
+                    )}
+                  </>
+                )}
+              </dl>
+              {details && details.minSendable !== details.maxSendable && (
+                <div>
+                  <TextField
+                    id="amount"
+                    label="Amount (Satoshi)"
+                    type="number"
+                    min={+details.minSendable / 1000}
+                    max={+details.maxSendable / 1000}
+                    value={valueSat}
+                    onChange={(e) => setValueSat(e.target.value)}
+                  />
+                  <div className="flex space-x-1.5 mt-2">
+                    <Button
+                      fullWidth
+                      label="100 sat⚡"
+                      onClick={() => setValueSat("100")}
+                    />
+                    <Button
+                      fullWidth
+                      label="1K sat⚡"
+                      onClick={() => setValueSat("1000")}
+                    />
+                    <Button
+                      fullWidth
+                      label="5K sat⚡"
+                      onClick={() => setValueSat("5000")}
+                    />
+                    <Button
+                      fullWidth
+                      label="10K sat⚡"
+                      onClick={() => setValueSat("10000")}
+                    />
+                  </div>
+                </div>
+              )}
+              {details && details?.commentAllowed > 0 && (
+                <div className="mt-4">
+                  <TextField
+                    id="comment"
+                    label="Comment"
+                    placeholder="optional"
+                    onChange={(e) => {
+                      setComment(e.target.value);
+                    }}
+                  />
+                </div>
+              )}
+              {details && details?.payerData?.name && (
+                <div className="mt-4">
+                  <TextField
+                    id="name"
+                    label="Name"
+                    placeholder="optional"
+                    value={userName}
+                    onChange={(e) => {
+                      setUserName(e.target.value);
+                    }}
+                  />
+                </div>
+              )}
+            </div>
             <div className="text-center">
               <div className="mb-5">
                 <Button

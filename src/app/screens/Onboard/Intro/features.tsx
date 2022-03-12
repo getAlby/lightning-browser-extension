@@ -1,4 +1,14 @@
-export default function Features({ features }) {
+type Feature = {
+  name: string;
+  description: string;
+  icon: (props: React.ComponentProps<"svg">) => JSX.Element;
+};
+
+type Props = {
+  features: Feature[];
+};
+
+export default function Features({ features }: Props) {
   return (
     <div className="space-y-10 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10">
       {features.map((feature) => (

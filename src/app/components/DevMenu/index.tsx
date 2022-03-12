@@ -3,11 +3,6 @@ import { Component } from "react";
 import utils from "../../../common/lib/utils";
 
 class DevMenu extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   reset() {
     utils.call("reset").then((response) => {
       console.log(response);

@@ -1,7 +1,16 @@
-import browser from "webextension-polyfill";
-
 import utils from "./utils";
-import type { Accounts, AccountInfo, SettingsStorage } from "../../types";
+import type {
+  Accounts,
+  AccountInfo,
+  Allowance,
+  Transaction,
+  SettingsStorage,
+} from "../../types";
+import {
+  getAccountsCache,
+  removeAccountFromCache,
+  storeAccounts,
+} from "./cache";
 
 interface AccountInfoRes {
   currentAccountId: string;
@@ -29,12 +38,7 @@ export const swrGetAccountInfo = async (
   id: string,
   callback?: (account: AccountInfo) => void
 ): Promise<AccountInfo> => {
-  // Load account info from cache.
-  let accountsCache: { [id: string]: AccountInfo } = {};
-  const result = await browser.storage.local.get(["accounts"]);
-  if (result.accounts) {
-    accountsCache = JSON.parse(result.accounts);
-  }
+  const accountsCache = await getAccountsCache();
 
   return new Promise((resolve) => {
     if (accountsCache[id]) {
@@ -47,11 +51,9 @@ export const swrGetAccountInfo = async (
       const { alias } = response.info;
       const balance = parseInt(response.balance.balance); // TODO: handle amounts
       const account = { id, alias, balance };
-      browser.storage.local.set({
-        accounts: JSON.stringify({
-          ...accountsCache,
-          [id]: account,
-        }),
+      storeAccounts({
+        ...accountsCache,
+        [id]: account,
       });
       if (callback) callback(account);
       return resolve(account);
@@ -59,6 +61,12 @@ export const swrGetAccountInfo = async (
   });
 };
 export const getAccounts = () => utils.call<Accounts>("getAccounts");
+export const selectAccount = (id: string) =>
+  utils.call("selectAccount", { id });
+export const getAllowance = (host: string) =>
+  utils.call<Allowance>("getAllowance", { host });
+export const getPayments = (options: { limit: number }) =>
+  utils.call<{ payments: Transaction[] }>("getPayments", options);
 export const getSettings = () => utils.call<SettingsStorage>("getSettings");
 export const getStatus = () => utils.call<StatusRes>("status");
 export const setSetting = (
@@ -67,17 +75,26 @@ export const setSetting = (
   utils.call<SettingsStorage>("setSetting", {
     setting,
   });
+export const deleteAccount = (id: string) =>
+  Promise.all([
+    utils.call("deleteAccount", { id }),
+    removeAccountFromCache(id),
+  ]);
 export const unlock = (password: string) =>
   utils.call<UnlockRes>("unlock", { password });
 
 export default {
   getAccountInfo,
   getAccounts,
+  selectAccount,
+  getAllowance,
+  getPayments,
   getSettings,
   getStatus,
   setSetting,
   swr: {
     getAccountInfo: swrGetAccountInfo,
   },
+  deleteAccount,
   unlock,
 };

@@ -46,6 +46,14 @@ const metaDataRules: Record<string, RuleSet> = {
         (element) => element.getAttribute("content"),
       ],
       [
+        'meta[property="reddit:title"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
+        'meta[name="reddit:title"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
         'meta[property="parsely-title"][content]',
         (element) => element.getAttribute("content"),
       ],
@@ -96,6 +104,14 @@ const metaDataRules: Record<string, RuleSet> = {
       ],
       [
         'meta[name="twitter:description"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
+        'meta[property="reddit:description"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
+        'meta[name="reddit:description"][content]',
         (element) => element.getAttribute("content"),
       ],
       [
@@ -253,6 +269,30 @@ const metaDataRules: Record<string, RuleSet> = {
         'meta[name="twitter:app:name:googleplay"][content]',
         (element) => element.getAttribute("content"),
       ],
+      [
+        'meta[property="reddit:app:name:iphone"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
+        'meta[name="reddit:app:name:iphone"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
+        'meta[property="reddit:app:name:ipad"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
+        'meta[name="reddit:app:name:ipad"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
+        'meta[property="reddit:app:name:googleplay"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
+        'meta[name="reddit:app:name:googleplay"][content]',
+        (element) => element.getAttribute("content"),
+      ],
     ],
     defaultValue: (context) => getProvider(new URL(context.url).hostname),
   },
@@ -363,6 +403,14 @@ const metaDataRules: Record<string, RuleSet> = {
         (element) => element.getAttribute("content"),
       ],
       [
+        'meta[property="reddit:creator"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
+        'meta[name="reddit:creator"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
         'meta[property="profile:username"][content]',
         (element) => element.getAttribute("content"),
       ],
@@ -412,6 +460,18 @@ const metaDataRules: Record<string, RuleSet> = {
       ],
       [
         'meta[name="twitter:site"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+    ],
+  },
+  reddit: {
+    rules: [
+      [
+        'meta[property="reddit:site"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
+        'meta[name="reddit:site"][content]',
         (element) => element.getAttribute("content"),
       ],
     ],
@@ -468,6 +528,22 @@ const metaDataRules: Record<string, RuleSet> = {
       ],
       [
         'meta[name="twitter:image:src"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
+        'meta[property="reddit:image"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
+        'meta[name="reddit:image"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
+        'meta[property="reddit:image:src"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
+        'meta[name="reddit:image:src"][content]',
         (element) => element.getAttribute("content"),
       ],
       [
