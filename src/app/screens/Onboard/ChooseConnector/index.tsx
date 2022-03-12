@@ -6,6 +6,7 @@ import lnd from "/static/assets/icons/lnd.png";
 import eclair from "/static/assets/icons/eclair.jpg";
 import alby from "/static/assets/icons/alby.png";
 import umbrel from "/static/assets/icons/umbrel.png";
+import citadel from "/static/assets/icons/citadel.png";
 
 type Props = {
   title: string;
@@ -45,6 +46,12 @@ export default function ChooseConnector({ title, description }: Props) {
       logo: alby,
     },
     {
+      to: "citadel",
+      title: "Citadel",
+      description: "Connect to your local Citadel",
+      logo: citadel,
+    },
+    {
       to: "umbrel",
       title: "Umbrel",
       description: "Connect to your Umbrel",
@@ -63,7 +70,7 @@ export default function ChooseConnector({ title, description }: Props) {
             </p>
           )}
         </div>
-        <div className="grid grid-cols-4 gap-5">
+        <div className="grid grid-cols-5 gap-5">
           {connectors.map(({ to, title, description, logo }) => (
             <LinkButton
               key={to}
