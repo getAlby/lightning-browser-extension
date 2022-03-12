@@ -6,6 +6,7 @@ import lnd from "/static/assets/icons/lnd.png";
 import eclair from "/static/assets/icons/eclair.jpg";
 import alby from "/static/assets/icons/alby.png";
 import umbrel from "/static/assets/icons/umbrel.png";
+import citadel from "/static/assets/icons/citadel.png";
 
 type Props = {
   title: string;
@@ -43,6 +44,12 @@ export default function ChooseConnector({ title, description }: Props) {
       title: "Eclair",
       description: "Connect to your Eclair node",
       logo: eclair,
+    },
+    {
+      to: "citadel",
+      title: "Citadel",
+      description: "Connect to your local Citadel",
+      logo: citadel,
     },
     {
       to: "umbrel",
