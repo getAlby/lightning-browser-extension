@@ -5,6 +5,7 @@ import lndhub from "/static/assets/icons/lndhub.png";
 import lnd from "/static/assets/icons/lnd.png";
 import eclair from "/static/assets/icons/eclair.jpg";
 import alby from "/static/assets/icons/alby.png";
+import citadel from "/static/assets/icons/citadel.png";
 
 type Props = {
   title: string;
@@ -42,6 +43,12 @@ export default function ChooseConnector({ title, description }: Props) {
       title: "Create a new wallet",
       description: "We create and manage a lightning wallet for you",
       logo: alby,
+    },
+    {
+      to: "citadel",
+      title: "Citadel",
+      description: "Connect to your local Citadel",
+      logo: citadel,
     },
   ];
 
