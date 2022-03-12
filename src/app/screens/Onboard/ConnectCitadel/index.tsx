@@ -6,8 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 import utils from "../../../../common/lib/utils";
 
-import browser from "webextension-polyfill";
-
 export default function ConnectCitadel() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -53,15 +51,6 @@ export default function ConnectCitadel() {
       // TODO: for native connectors we currently skip the validation because it is too slow (booting up Tor etc.)
       if (account.connector === "nativecitadel") {
         validation = { valid: true, error: "" };
-        const permissionGranted = await browser.permissions.request({
-          permissions: ["nativeMessaging"],
-        });
-        if (!permissionGranted) {
-          validation = {
-            valid: false,
-            error: "Native permissions are required to connect through Tor.",
-          };
-        }
       } else {
         validation = await utils.call("validateAccount", account);
       }
