@@ -13,7 +13,7 @@ function CompanionDownloadInfo() {
     <div className="mt-6">
       You are trying to connect to a node behind Tor. Because browsers cannot
       directly connect to your node please make sure you have the Alby companion
-      app installed. You can download it from{" "}
+      app installed. Download it{" "}
       <a
         href={`https://getalby.com/install/companion/${getOS()}`}
         target="_blank"
