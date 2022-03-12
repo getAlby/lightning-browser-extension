@@ -36,20 +36,12 @@ export default function ConnectLnd() {
     event.preventDefault();
     setLoading(true);
     const { url: lndConnectUrl } = formData;
-    const { host, macaroon, cert } = parse(lndConnectUrl);
-    const file = new File([cert], "tls.cert", {
-      type: "text/plain",
-    });
-    // This is the easiest way to "download" a file I found
-    const link = document.createElement("a");
-    link.download = "tls.cert";
-    link.href = URL.createObjectURL(file);
-    link.click();
+    const { host, macaroon } = parse(lndConnectUrl);
     const account = {
       name: "LND (lndconnect)",
       config: {
         macaroon,
-        url: `https://${host}`,
+        url: `http://${host}`,
       },
       connector: getConnectorType(host),
     };
@@ -69,7 +61,10 @@ export default function ConnectLnd() {
           };
         }
       } else {
-        validation = await utils.call("validateAccount", account);
+        validation = {
+          valid: false,
+          error: "Non-tor connections are not yet supported.",
+        };
       }
 
       if (validation.valid) {
