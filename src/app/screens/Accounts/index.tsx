@@ -1,7 +1,7 @@
 import {
   EllipsisIcon,
   PlusIcon,
-  WalletIcon
+  WalletIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import type { FormEvent } from "react";
@@ -22,14 +22,15 @@ function AccountsScreen() {
   const { accounts, getAccounts } = useAccounts();
   const navigate = useNavigate();
 
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [currentAccountId, setCurrentAccountId] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [newAccountName, setNewAccountName] = useState("");
 
   function closeModal() {
-    setIsOpen(false);
+    setModalIsOpen(false);
   }
 
-  async function updateAccountName(accountId: string) {
+  async function updateAccountName(accountId: string | number) {
     await utils.call("editAccount", {
       name: newAccountName,
       id: accountId,
@@ -114,68 +115,65 @@ function AccountsScreen() {
 
                         <Menu.ItemButton
                           onClick={() => {
-                            setIsOpen(true);
+                            setCurrentAccountId(accountId);
                             setNewAccountName(account.name);
+                            setModalIsOpen(true);
                           }}
                         >
                           Edit
                         </Menu.ItemButton>
                       </Menu.List>
                     </Menu>
-
-                    <Modal
-                      closeTimeoutMS={200}
-                      isOpen={modalIsOpen}
-                      onRequestClose={closeModal}
-                      contentLabel="Edit account"
-                      overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
-                      className="rounded-lg bg-white w-full max-w-lg"
-                    >
-                      <div className="p-5 flex justify-between dark:bg-gray-800">
-                        <h2 className="text-2xl font-bold dark:text-white">
-                          Edit account
-                        </h2>
-                        <button onClick={closeModal}>
-                          <CrossIcon className="w-6 h-6 dark:text-white" />
-                        </button>
-                      </div>
-
-                      <form
-                        onSubmit={(e: FormEvent) => {
-                          e.preventDefault();
-                          updateAccountName(accountId);
-                        }}
-                      >
-                        <div className="p-5 border-t border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">
-                          <div className="w-60">
-                            <TextField
-                              autoFocus
-                              id="acountName"
-                              label="Name"
-                              onChange={(e) =>
-                                setNewAccountName(e.target.value)
-                              }
-                              value={newAccountName}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="flex justify-end p-5 dark:bg-gray-800">
-                          <Button
-                            label="Save"
-                            type="submit"
-                            primary
-                            disabled={newAccountName === ""}
-                          />
-                        </div>
-                      </form>
-                    </Modal>
                   </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
+
+        <Modal
+          closeTimeoutMS={200}
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          contentLabel="Edit account name"
+          overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
+          className="rounded-lg bg-white w-full max-w-lg"
+        >
+          <div className="p-5 flex justify-between dark:bg-gray-800">
+            <h2 className="text-2xl font-bold dark:text-white">Edit account</h2>
+            <button onClick={closeModal}>
+              <CrossIcon className="w-6 h-6 dark:text-white" />
+            </button>
+          </div>
+
+          <form
+            onSubmit={(e: FormEvent) => {
+              e.preventDefault();
+              updateAccountName(currentAccountId);
+            }}
+          >
+            <div className="p-5 border-t border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">
+              <div className="w-60">
+                <TextField
+                  autoFocus
+                  id="acountName"
+                  label="Name"
+                  onChange={(e) => setNewAccountName(e.target.value)}
+                  value={newAccountName}
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-end p-5 dark:bg-gray-800">
+              <Button
+                label="Save"
+                type="submit"
+                primary
+                disabled={newAccountName === ""}
+              />
+            </div>
+          </form>
+        </Modal>
       </div>
     </Container>
   );
