@@ -100,9 +100,7 @@ export default function ConnectStart9() {
             <b>Lightning Network Daemon</b> service.
             <br />
             Select the <b>Properties</b> tab.
-            <br /> Now copy the <b>LND Connect REST URL</b>. (LND is only
-            available over Tor on the Embassy so you will need to install the
-            Alby compnaion app to access it.)
+            <br /> Now copy the <b>LND Connect REST URL</b>.
           </p>
           <div className="w-4/5">
             <div className="mt-6">
