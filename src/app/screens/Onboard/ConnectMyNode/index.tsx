@@ -10,7 +10,7 @@ const initialFormData = Object.freeze({
   macaroon: "",
 });
 
-export default function ConnectUmbrel() {
+export default function ConnectMyNode() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
@@ -46,7 +46,7 @@ export default function ConnectUmbrel() {
     setLoading(true);
     const { url, macaroon } = formData;
     const account = {
-      name: "Umbrel",
+      name: "myNode",
       config: {
         macaroon,
         url,
@@ -73,11 +73,11 @@ export default function ConnectUmbrel() {
         }
       } else {
         alert(`
-          Connection failed. Are your Umbrel credentials correct? \n\n(${validation.error})`);
+          Connection failed. Are your myNode credentials correct? \n\n(${validation.error})`);
       }
     } catch (e) {
       console.error(e);
-      let message = "Connection failed. Are your Umbrel credentials correct?";
+      let message = "Connection failed. Are your myNode credentials correct?";
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
@@ -91,13 +91,19 @@ export default function ConnectUmbrel() {
       <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 px-12 py-10">
         <div className="lg:w-1/2">
           <h1 className="text-2xl font-bold dark:text-white">
-            Connect to your Umbrel node
+            Connect to myNode
           </h1>
           <p className="text-gray-500 mt-6 dark:text-gray-400">
-            In your Umbrel dashboard go to <b>Connect Wallet</b>.<br />
-            Select <b>lndconnect REST</b> and copy the <b>lndconnect URL</b>.
-            (Depending on your setup you can either use the <i>local</i>{" "}
-            connection or the <i>Tor</i> connection.)
+            On your myNode homepage click on the <b>Wallet</b> button for your{" "}
+            <b>Lightning</b> service.
+            <br />
+            Now click on the <b>Pair Wallet</b> button under the <b>Status</b>{" "}
+            tab. Enter your password when prompted. <br />
+            Select the dropdown menu and choose a pairing option. Depending on
+            your setup you can either use the <b>
+              Lightning (REST + Local IP)
+            </b>{" "}
+            connection or the <b>Lightning (REST + Tor)</b> connection.
           </p>
           <div className="w-4/5">
             <div className="mt-6">
