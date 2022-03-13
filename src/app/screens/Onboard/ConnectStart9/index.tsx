@@ -73,11 +73,11 @@ export default function ConnectStart9() {
         }
       } else {
         alert(`
-          Connection failed. Are your Start9 credentials correct? \n\n(${validation.error})`);
+          Connection failed. Are your Embassy credentials correct? \n\n(${validation.error})`);
       }
     } catch (e) {
       console.error(e);
-      let message = "Connection failed. Are your Start9 credentials correct?";
+      let message = "Connection failed. Are your Embassy credentials correct?";
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
