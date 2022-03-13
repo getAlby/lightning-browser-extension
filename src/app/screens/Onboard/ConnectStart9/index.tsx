@@ -10,7 +10,7 @@ const initialFormData = Object.freeze({
   macaroon: "",
 });
 
-export default function ConnectUmbrel() {
+export default function ConnectStart9() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
@@ -46,7 +46,7 @@ export default function ConnectUmbrel() {
     setLoading(true);
     const { url, macaroon } = formData;
     const account = {
-      name: "Umbrel",
+      name: "Start9",
       config: {
         macaroon,
         url,
@@ -73,11 +73,11 @@ export default function ConnectUmbrel() {
         }
       } else {
         alert(`
-          Connection failed. Are your Umbrel credentials correct? \n\n(${validation.error})`);
+          Connection failed. Are your Start9 credentials correct? \n\n(${validation.error})`);
       }
     } catch (e) {
       console.error(e);
-      let message = "Connection failed. Are your Umbrel credentials correct?";
+      let message = "Connection failed. Are your Start9 credentials correct?";
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
@@ -91,13 +91,18 @@ export default function ConnectUmbrel() {
       <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 px-12 py-10">
         <div className="lg:w-1/2">
           <h1 className="text-2xl font-bold dark:text-white">
-            Connect to your Umbrel node
+            Connect to your Embassy node
           </h1>
           <p className="text-gray-500 mt-6 dark:text-gray-400">
-            In your Umbrel dashboard go to <b>Connect Wallet</b>.<br />
-            Select <b>lndconnect REST</b> and copy the <b>lndconnect URL</b>.
-            (Depending on your setup you can either use the <i>local</i>{" "}
-            connection or the <i>Tor</i> connection.)
+            <b>Note</b>: Currently we only support LND but we will be adding
+            c-lightning support in the future! <br />
+            On your Embassy dashboard click on the{" "}
+            <b>Lightning Network Daemon</b> service.
+            <br />
+            Select the <b>Properties</b> tab.
+            <br /> Now copy the <b>LND Connect REST URL</b>. (LND is only
+            available over Tor on the Embassy so you will need to install the
+            Alby compnaion app to access it.)
           </p>
           <div className="w-4/5">
             <div className="mt-6">
