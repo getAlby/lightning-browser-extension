@@ -1,7 +1,7 @@
 import Base64 from "crypto-js/enc-base64";
-import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
-import sha256 from "crypto-js/sha256";
+import CryptoJS from "crypto-js";
+import _ from "lodash";
 import utils from "../../../common/lib/utils";
 import Connector, {
   SendPaymentArgs,
@@ -86,12 +86,24 @@ class Lnd implements Connector {
   async sendPaymentKeySend(
     args: SendPaymentArgs
   ): Promise<SendPaymentResponse> {
-    //let randomByteArray = new Uint8Array(32);
-    //var paymentHash = crypto.getRandomValues(randomByteArray);
-    //let buffer = crypto.randomBytes(32);
-    //buffer.toString('hex');
-    const preImage = utils.genRanHex(64);
-    const paymentHash = sha256(preImage);
+    //See: https://gist.github.com/dellagustin/c3793308b75b6b0faf134e64db7dc915
+    const byteArray = new Uint8Array(32);
+
+    const dest_pubkey_hex = args.pubkey;
+    const dest_pubkey_base64 = Buffer.from(dest_pubkey_hex, "hex").toString(
+      "base64"
+    );
+    console.log(dest_pubkey_base64);
+
+    for (let i = 0; i < 32; i++) {
+      const randomNumber = _.random(0, 255);
+      byteArray[i] = randomNumber;
+    }
+
+    const encoded = Buffer.from(byteArray).toString("base64");
+    const hash = CryptoJS.enc.Base64.stringify(
+      CryptoJS.SHA256(CryptoJS.enc.Base64.parse(encoded))
+    );
     return this.request<{
       payment_preimage: string;
       payment_hash: string;
@@ -101,12 +113,12 @@ class Lnd implements Connector {
       "POST",
       "/v1/channels/transactions",
       {
-        dest: Base64.stringify(Hex.parse(args.pubkey)),
+        dest: dest_pubkey_base64,
         amt: args.amount,
-        payment_hash: Base64.stringify(paymentHash),
+        payment_hash: hash,
         dest_custom_records: {
           34349334: Base64.stringify(UTF8.parse(args.memo)),
-          5482373484: Base64.stringify(UTF8.parse(preImage)),
+          5482373484: encoded,
         },
       },
       {}
