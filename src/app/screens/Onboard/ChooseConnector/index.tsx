@@ -16,6 +16,12 @@ type Props = {
 export default function ChooseConnector({ title, description }: Props) {
   const connectors = [
     {
+      to: "create-wallet",
+      title: "Create a new wallet",
+      description: "We create and manage a lightning wallet for you",
+      logo: alby,
+    },
+    {
       to: "lnd",
       title: "LND",
       description: "Connect to your LND node",
@@ -38,12 +44,6 @@ export default function ChooseConnector({ title, description }: Props) {
       title: "Eclair",
       description: "Connect to your Eclair node",
       logo: eclair,
-    },
-    {
-      to: "create-wallet",
-      title: "Create a new wallet",
-      description: "We create and manage a lightning wallet for you",
-      logo: alby,
     },
     {
       to: "citadel",
