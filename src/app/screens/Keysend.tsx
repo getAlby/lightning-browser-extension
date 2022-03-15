@@ -1,22 +1,21 @@
-import { Fragment, useState, MouseEvent } from "react";
+import { Fragment, useState, MouseEvent, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { Transition } from "@headlessui/react";
 
-import { LNURLPaymentSuccessAction } from "../../types";
+import { LNURLPaymentSuccessAction, OriginData } from "../../types";
 import utils from "../../common/lib/utils";
 import getOriginData from "../../extension/content-script/originData";
 import { useAuth } from "../context/AuthContext";
+import msg from "../../common/lib/msg";
+import Checkbox from "../components/Form/Checkbox";
+import TextField from "../components/Form/TextField";
 
 import Button from "../components/Button";
 import Input from "../components/Form/Input";
 import PublisherCard from "../components/PublisherCard";
 
-type Origin = {
-  name: string;
-  icon: string;
-};
-
 type Props = {
-  origin?: Origin;
+  origin?: OriginData;
   destination?: string;
   comment?: string;
   valueSat?: string;
@@ -26,16 +25,21 @@ function Keysend(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAuth();
+  const [rememberMe, setRememberMe] = useState(false);
   const [origin] = useState(
     props.origin ||
       (searchParams.get("origin") &&
         JSON.parse(searchParams.get("origin") as string)) ||
       getOriginData()
   );
+  const originRef = useRef(props.origin || getOriginData());
   const [comment, setComment] = useState(props.comment || "");
-  const [valueSat, setValueSat] = useState(props.valueSat || "");
-  const [pubkey] = useState(
+  const [amount, setAmount] = useState(props.valueSat || "");
+  const [destination] = useState(
     props.destination || searchParams.get("destination")
+  );
+  const [budget, setBudget] = useState(
+    ((parseInt(amount) || 0) * 10).toString()
   );
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successAction, setSuccessAction] = useState<
@@ -43,15 +47,18 @@ function Keysend(props: Props) {
   >();
 
   async function confirm() {
+    if (rememberMe && budget) {
+      await saveBudget();
+    }
     try {
       setLoadingConfirm(true);
       const payment = await utils.call(
         "sendPaymentKeySend",
-        { pubkey, valueSat, comment },
+        { destination, amount, comment },
         {
           origin: {
             ...origin,
-            name: pubkey,
+            name: destination,
           },
         }
       );
@@ -87,29 +94,29 @@ function Keysend(props: Props) {
           type="number"
           min={+0 / 1000}
           max={+1000000 / 1000}
-          value={valueSat}
-          onChange={(e) => setValueSat(e.target.value)}
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
         />
         <div className="flex space-x-1.5 mt-2">
           <Button
             fullWidth
             label="100 sat⚡"
-            onClick={() => setValueSat("100")}
+            onClick={() => setAmount("100")}
           />
           <Button
             fullWidth
             label="1K sat⚡"
-            onClick={() => setValueSat("1000")}
+            onClick={() => setAmount("1000")}
           />
           <Button
             fullWidth
             label="5K sat⚡"
-            onClick={() => setValueSat("5000")}
+            onClick={() => setAmount("5000")}
           />
           <Button
             fullWidth
             label="10K sat⚡"
-            onClick={() => setValueSat("10000")}
+            onClick={() => setAmount("10000")}
           />
         </div>
       </div>
@@ -133,10 +140,19 @@ function Keysend(props: Props) {
 
   function elements() {
     const elements = [];
-    elements.push(["Send payment to", pubkey]);
+    elements.push(["Send payment to", destination]);
     elements.push(["Amount (Satoshi)", renderAmount()]);
     elements.push(["Comment", renderComment()]);
     return elements;
+  }
+  function saveBudget() {
+    if (!budget) return;
+    return msg.request("addAllowance", {
+      totalBudget: parseInt(budget),
+      host: originRef.current.host,
+      name: originRef.current.name,
+      imageURL: originRef.current.icon,
+    });
   }
 
   function renderSuccessAction() {
@@ -214,8 +230,51 @@ function Keysend(props: Props) {
                   fullWidth
                   primary
                   loading={loadingConfirm}
-                  disabled={loadingConfirm || !valueSat}
+                  disabled={loadingConfirm || !amount}
                 />
+              </div>
+              <div className="mb-8">
+                <div className="flex items-center">
+                  <Checkbox
+                    id="remember_me"
+                    name="remember_me"
+                    checked={rememberMe}
+                    onChange={(event) => {
+                      setRememberMe(event.target.checked);
+                    }}
+                  />
+                  <label
+                    htmlFor="remember_me"
+                    className="ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+                  >
+                    Remember and set a budget
+                  </label>
+                </div>
+
+                <Transition
+                  show={rememberMe}
+                  enter="transition duration-100 ease-out"
+                  enterFrom="scale-95 opacity-0"
+                  enterTo="scale-100 opacity-100"
+                  leave="transition duration-75 ease-out"
+                  leaveFrom="scale-100 opacity-100"
+                  leaveTo="scale-95 opacity-0"
+                >
+                  <p className="mt-4 mb-3 text-gray-500 text-sm">
+                    You may set a balance to not be asked for confirmation on
+                    payments until it is exhausted.
+                  </p>
+                  <div>
+                    <TextField
+                      id="budget"
+                      label="Budget"
+                      placeholder="sat"
+                      value={budget}
+                      type="number"
+                      onChange={(event) => setBudget(event.target.value)}
+                    />
+                  </div>
+                </Transition>
               </div>
 
               <p className="mb-3 underline text-sm text-gray-300">
