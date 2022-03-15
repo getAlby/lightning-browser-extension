@@ -106,6 +106,8 @@ export default function ConnectLndHub() {
                 type="text"
                 required
                 placeholder="lndhub://..."
+                pattern="lndhub://.+"
+                title="lndhub://..."
                 value={formData.uri}
                 onChange={handleChange}
               />

@@ -136,7 +136,9 @@ export default function ConnectLnd() {
               <TextField
                 id="url"
                 label="REST API host and port"
-                placeholder="https://your-node:8080"
+                placeholder="https://your-node-url:8080"
+                pattern="https://.+"
+                title="https://your-node-url:8080"
                 onChange={handleChange}
                 required
               />
