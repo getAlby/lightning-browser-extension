@@ -1,4 +1,5 @@
-import sendPaymentOrPrompt from "./sendPaymentOrPrompt";
+import { sendPaymentOrPrompt } from "./sendPaymentOrPrompt";
+import keysendOrPrompt from "./keysendOrPrompt";
 import signMessageOrPrompt from "./signMessageOrPrompt";
 
-export { sendPaymentOrPrompt, signMessageOrPrompt };
+export { sendPaymentOrPrompt, keysendOrPrompt, signMessageOrPrompt };

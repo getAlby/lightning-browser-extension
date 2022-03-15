@@ -60,6 +60,13 @@ export default class WebLNProvider {
     return this.execute("sendPaymentOrPrompt", { paymentRequest });
   }
 
+  keysend(destination: string, amount: number, memo: string) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling sendPayment");
+    }
+    return this.execute("keysendOrPrompt", { destination, amount, memo });
+  }
+
   makeInvoice(args: string | number | RequestInvoiceArgs) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling makeInvoice");

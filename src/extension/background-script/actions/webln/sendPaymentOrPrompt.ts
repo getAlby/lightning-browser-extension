@@ -5,6 +5,7 @@ import { Message } from "../../../../types";
 
 import db from "../../db";
 import sendPayment from "../ln/sendPayment";
+import sendPaymentKeySend from "../ln/sendPaymentKeySend";
 
 const sendPaymentOrPrompt = async (message: Message) => {
   const paymentRequest = message.args.paymentRequest;
@@ -17,24 +18,31 @@ const sendPaymentOrPrompt = async (message: Message) => {
   const paymentRequestDetails = parsePaymentRequest({
     request: paymentRequest,
   });
+  if (await checkAllowance(message.origin.host, paymentRequestDetails.tokens)) {
+    return sendPaymentWithAllowance(message, false);
+  } else {
+    return payWithPrompt(message, "confirmPayment");
+  }
+};
 
-  const host = message.origin.host;
+async function checkAllowance(host: string, amount: number) {
   const allowance = await db.allowances
     .where("host")
     .equalsIgnoreCase(host)
     .first();
 
-  if (allowance && allowance.remainingBudget >= paymentRequestDetails.tokens) {
-    return sendPaymentWithAllowance(message);
-  } else {
-    return payWithPrompt(message);
-  }
-};
+  return allowance && allowance.remainingBudget >= amount;
+}
 
-async function sendPaymentWithAllowance(message: Message) {
+async function sendPaymentWithAllowance(message: Message, keysend: boolean) {
   try {
-    const response = await sendPayment(message);
-    return response;
+    if (keysend) {
+      const response = await sendPaymentKeySend(message);
+      return response;
+    } else {
+      const response = await sendPayment(message);
+      return response;
+    }
   } catch (e) {
     console.error(e);
     if (e instanceof Error) {
@@ -43,11 +51,11 @@ async function sendPaymentWithAllowance(message: Message) {
   }
 }
 
-async function payWithPrompt(message: Message) {
+async function payWithPrompt(message: Message, type: string) {
   try {
     const response = await utils.openPrompt({
       ...message,
-      type: "confirmPayment",
+      type: type,
     });
     return response;
   } catch (e) {
@@ -58,4 +66,9 @@ async function payWithPrompt(message: Message) {
   }
 }
 
-export default sendPaymentOrPrompt;
+export {
+  sendPaymentOrPrompt,
+  payWithPrompt,
+  checkAllowance,
+  sendPaymentWithAllowance,
+};

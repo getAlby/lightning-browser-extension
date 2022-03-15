@@ -17,6 +17,9 @@ type Origin = {
 
 type Props = {
   origin?: Origin;
+  destination?: string;
+  comment?: string;
+  valueSat?: string;
 };
 
 function Keysend(props: Props) {
@@ -29,16 +32,17 @@ function Keysend(props: Props) {
         JSON.parse(searchParams.get("origin") as string)) ||
       getOriginData()
   );
-  const [comment, setComment] = useState("");
-  const [valueSat, setValueSat] = useState("");
+  const [comment, setComment] = useState(props.comment || "");
+  const [valueSat, setValueSat] = useState(props.valueSat || "");
+  const [pubkey] = useState(
+    props.destination || searchParams.get("destination")
+  );
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successAction, setSuccessAction] = useState<
     LNURLPaymentSuccessAction | undefined
   >();
 
   async function confirm() {
-    const pubkey = searchParams.get("destination");
-
     try {
       setLoadingConfirm(true);
       const payment = await utils.call(
@@ -47,7 +51,7 @@ function Keysend(props: Props) {
         {
           origin: {
             ...origin,
-            name: getRecipient(),
+            name: pubkey,
           },
         }
       );
@@ -74,10 +78,6 @@ function Keysend(props: Props) {
     if (!props.origin) {
       navigate(-1);
     }
-  }
-
-  function getRecipient() {
-    return searchParams.get("destination");
   }
 
   function renderAmount() {
@@ -122,6 +122,7 @@ function Keysend(props: Props) {
         <Input
           type="text"
           placeholder="optional"
+          value={comment}
           onChange={(e) => {
             setComment(e.target.value);
           }}
@@ -132,7 +133,7 @@ function Keysend(props: Props) {
 
   function elements() {
     const elements = [];
-    elements.push(["Send payment to", getRecipient()]);
+    elements.push(["Send payment to", pubkey]);
     elements.push(["Amount (Satoshi)", renderAmount()]);
     elements.push(["Comment", renderComment()]);
     return elements;
