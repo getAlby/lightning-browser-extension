@@ -16,6 +16,7 @@ import Connector, {
   SignMessageResponse,
   VerifyMessageArgs,
   VerifyMessageResponse,
+  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -99,9 +100,7 @@ class LnBits implements Connector {
         return { error: e.message };
       });
   }
-  async sendPaymentKeySend(
-    args: SendPaymentArgs
-  ): Promise<SendPaymentResponse> {
+  async keySend(args: KeysendArgs): Promise<SendPaymentResponse> {
     throw new Error("not supported");
   }
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {

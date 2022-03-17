@@ -8,7 +8,7 @@ type RequestInvoiceArgs = {
 
 type KeysendArgs = {
   destination: string;
-  comment: string;
+  customRecords: Map<string, string>;
   amount: string;
 };
 

@@ -1,8 +1,8 @@
 import Base64 from "crypto-js/enc-base64";
 import UTF8 from "crypto-js/enc-utf8";
-import CryptoJS from "crypto-js";
-import _ from "lodash";
+import SHA256 from "crypto-js/sha256";
 import utils from "../../../common/lib/utils";
+import random from "lodash/random";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
@@ -16,6 +16,7 @@ import Connector, {
   SignMessageResponse,
   VerifyMessageArgs,
   VerifyMessageResponse,
+  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -83,9 +84,7 @@ class Lnd implements Connector {
       };
     });
   }
-  async sendPaymentKeySend(
-    args: SendPaymentArgs
-  ): Promise<SendPaymentResponse> {
+  async keySend(args: KeysendArgs): Promise<SendPaymentResponse> {
     //See: https://gist.github.com/dellagustin/c3793308b75b6b0faf134e64db7dc915
     const byteArray = new Uint8Array(32);
 
@@ -96,14 +95,23 @@ class Lnd implements Connector {
     console.log(dest_pubkey_base64);
 
     for (let i = 0; i < 32; i++) {
-      const randomNumber = _.random(0, 255);
+      const randomNumber = random(0, 255);
       byteArray[i] = randomNumber;
     }
 
     const encoded = Buffer.from(byteArray).toString("base64");
     const hash = CryptoJS.enc.Base64.stringify(
-      CryptoJS.SHA256(CryptoJS.enc.Base64.parse(encoded))
+      SHA256(CryptoJS.enc.Base64.parse(encoded))
     );
+    const records = new Map<string, string>();
+
+    //mandatory record for keysend
+    records.set("5482373484", encoded);
+    //optional records
+    for (const [key, value] of args.customRecords) {
+      records.set(key, value);
+    }
+
     return this.request<{
       payment_preimage: string;
       payment_hash: string;
@@ -116,10 +124,7 @@ class Lnd implements Connector {
         dest: dest_pubkey_base64,
         amt: args.amount,
         payment_hash: hash,
-        dest_custom_records: {
-          34349334: Base64.stringify(UTF8.parse(args.memo)),
-          5482373484: encoded,
-        },
+        dest_custom_records: records,
       },
       {}
     ).then((data) => {

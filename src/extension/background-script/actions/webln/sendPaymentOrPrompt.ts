@@ -5,7 +5,7 @@ import { Message } from "../../../../types";
 
 import db from "../../db";
 import sendPayment from "../ln/sendPayment";
-import sendPaymentKeySend from "../ln/sendPaymentKeySend";
+import sendPaymentKeySend from "../ln/keySend";
 
 const sendPaymentOrPrompt = async (message: Message) => {
   const paymentRequest = message.args.paymentRequest;

@@ -6,7 +6,7 @@ import signMessage from "./signMessage";
 import getInfo from "./getInfo";
 import makeInvoice from "./makeInvoice";
 import verifyMessage from "./verifyMessage";
-import sendPaymentKeySend from "./sendPaymentKeySend";
+import keySend from "./keySend";
 
 const connectorCall = (method) => {
   return async (message, sender) => {
@@ -38,7 +38,7 @@ export {
   getBalance,
   getTransactions,
   sendPayment,
-  sendPaymentKeySend,
+  keySend,
   checkPayment,
   signMessage,
   makeInvoice,

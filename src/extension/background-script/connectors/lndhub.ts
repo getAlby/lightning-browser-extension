@@ -17,6 +17,7 @@ import Connector, {
   SignMessageResponse,
   VerifyMessageArgs,
   VerifyMessageResponse,
+  KeysendArgs,
 } from "./connector.interface";
 import { AxiosRequestConfig, Method } from "axios";
 
@@ -135,9 +136,7 @@ export default class LndHub implements Connector {
       },
     };
   }
-  async sendPaymentKeySend(
-    args: SendPaymentArgs
-  ): Promise<SendPaymentResponse> {
+  async keySend(args: KeysendArgs): Promise<SendPaymentResponse> {
     const data = await this.request<{
       error: string;
       message: string;
@@ -158,7 +157,7 @@ export default class LndHub implements Connector {
     }>("POST", "/keysend", {
       destination: args.pubkey,
       amount: args.amount,
-      memo: args.memo,
+      dest_custom_records: args.customRecords,
     });
     if (data.error) {
       return { error: data.message };

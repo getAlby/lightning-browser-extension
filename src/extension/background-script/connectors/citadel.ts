@@ -21,6 +21,7 @@ import Connector, {
   VerifyMessageResponse,
   CheckPaymentArgs,
   CheckPaymentResponse,
+  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -69,9 +70,7 @@ class CitadelConnector implements Connector {
       },
     };
   }
-  async sendPaymentKeySend(
-    args: SendPaymentArgs
-  ): Promise<SendPaymentResponse> {
+  async keySend(args: KeysendArgs): Promise<SendPaymentResponse> {
     throw new Error("not supported");
   }
   async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {

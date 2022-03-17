@@ -4,9 +4,9 @@ import { Message } from "../../../../types";
 import state from "../../state";
 import utils from "../../../../common/lib/utils";
 
-export default async function sendPaymentKeySend(message: Message) {
-  PubSub.publish(`ln.sendPaymentKeySend.start`, message);
-  const { destination, amount, comment } = message.args;
+export default async function keySend(message: Message) {
+  PubSub.publish(`ln.keySend.start`, message);
+  const { destination, amount, customRecords } = message.args;
   if (typeof destination !== "string" || typeof amount !== "string") {
     return {
       error: "destination or amount missing.",
@@ -15,19 +15,18 @@ export default async function sendPaymentKeySend(message: Message) {
 
   const connector = await state.getState().getConnector();
 
-  const response = await connector.sendPaymentKeySend({
-    paymentRequest: "",
-    offer: "",
+  const response = await connector.keySend({
     pubkey: destination,
     amount: parseInt(amount),
-    memo: typeof comment == "string" ? comment : "",
+    customRecords: customRecords as Map<string, string>,
   });
   utils.publishPaymentNotification(
     message,
     {
       cltv_delta: 0,
       created_at: "",
-      description: comment as string,
+      //what to do with the description here?
+      description: "",
       destination: destination,
       expires_at: "",
       features: [],

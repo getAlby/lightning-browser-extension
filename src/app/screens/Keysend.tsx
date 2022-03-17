@@ -52,9 +52,12 @@ function Keysend(props: Props) {
     }
     try {
       setLoadingConfirm(true);
+      const customRecords = new Map<string, string>();
+      //TLV_WHATSAT_MESSAGE code
+      customRecords.set("34349334", comment);
       const payment = await utils.call(
-        "sendPaymentKeySend",
-        { destination, amount, comment },
+        "keySend",
+        { destination, amount, customRecords },
         {
           origin: {
             ...origin,
@@ -66,7 +69,7 @@ function Keysend(props: Props) {
 
       setSuccessAction({
         tag: "message",
-        message: `Keysend paid! Preimage: ${payment.preimage}`,
+        message: `Payment sent! Preimage: ${payment.preimage}`,
       });
 
       auth.fetchAccountInfo(); // Update balance.
