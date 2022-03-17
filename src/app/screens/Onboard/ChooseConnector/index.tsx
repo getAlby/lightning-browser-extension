@@ -6,6 +6,7 @@ import lnd from "/static/assets/icons/lnd.png";
 import eclair from "/static/assets/icons/eclair.jpg";
 import alby from "/static/assets/icons/alby.png";
 import umbrel from "/static/assets/icons/umbrel.png";
+import start9 from "/static/assets/icons/start9.png";
 import citadel from "/static/assets/icons/citadel.png";
 import mynode from "/static/assets/icons/mynode.png";
 
@@ -63,6 +64,12 @@ export default function ChooseConnector({ title, description }: Props) {
       title: "myNode",
       description: "Connect to your myNode",
       logo: mynode,
+    },
+    {
+      to: "start9",
+      title: "Start9",
+      description: "Connect to your Embassy",
+      logo: start9,
     },
   ];
 
