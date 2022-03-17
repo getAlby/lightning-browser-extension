@@ -53,6 +53,9 @@ const utils = {
     }
     return hex.join("");
   },
+  urlSafeBase64ToHex: (str: string) => {
+    return utils.base64ToHex(str.replace(/_/g, "/").replace(/-/g, "+"));
+  },
   bytesToHexString: (bytes: Uint8Array) => {
     return Array.from(bytes, (byte) => {
       return ("0" + (byte & 0xff).toString(16)).slice(-2);
