@@ -51,8 +51,9 @@ export interface SendPaymentArgs {
 export interface KeysendArgs {
   pubkey: string;
   amount: number;
-  customRecords: Map<string, string>;
+  customRecords: Record<string, string>;
 }
+
 export interface CheckPaymentArgs {
   paymentHash: string;
 }

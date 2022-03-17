@@ -1,6 +1,8 @@
 import { Fragment, useState, MouseEvent, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Transition } from "@headlessui/react";
+import Base64 from "crypto-js/enc-base64";
+import UTF8 from "crypto-js/enc-utf8";
 
 import { LNURLPaymentSuccessAction, OriginData } from "../../types";
 import utils from "../../common/lib/utils";
@@ -52,9 +54,9 @@ function Keysend(props: Props) {
     }
     try {
       setLoadingConfirm(true);
-      const customRecords = new Map<string, string>();
+      const customRecords: Record<string, string> = {};
       //TLV_WHATSAT_MESSAGE code
-      customRecords.set("34349334", comment);
+      customRecords["34349334"] = Base64.stringify(UTF8.parse(comment));
       const payment = await utils.call(
         "keySend",
         { destination, amount, customRecords },

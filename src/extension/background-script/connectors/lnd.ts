@@ -92,7 +92,6 @@ class Lnd implements Connector {
     const dest_pubkey_base64 = Buffer.from(dest_pubkey_hex, "hex").toString(
       "base64"
     );
-    console.log(dest_pubkey_base64);
 
     for (let i = 0; i < 32; i++) {
       const randomNumber = random(0, 255);
@@ -100,17 +99,10 @@ class Lnd implements Connector {
     }
 
     const encoded = Buffer.from(byteArray).toString("base64");
-    const hash = CryptoJS.enc.Base64.stringify(
-      SHA256(CryptoJS.enc.Base64.parse(encoded))
-    );
-    const records = new Map<string, string>();
+    const hash = Base64.stringify(SHA256(Base64.parse(encoded)));
 
     //mandatory record for keysend
-    records.set("5482373484", encoded);
-    //optional records
-    for (const [key, value] of args.customRecords) {
-      records.set(key, value);
-    }
+    args.customRecords["5482373484"] = encoded;
 
     return this.request<{
       payment_preimage: string;
@@ -124,7 +116,7 @@ class Lnd implements Connector {
         dest: dest_pubkey_base64,
         amt: args.amount,
         payment_hash: hash,
-        dest_custom_records: records,
+        dest_custom_records: args.customRecords,
       },
       {}
     ).then((data) => {

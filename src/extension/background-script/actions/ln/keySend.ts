@@ -18,7 +18,7 @@ export default async function keySend(message: Message) {
   const response = await connector.keySend({
     pubkey: destination,
     amount: parseInt(amount),
-    customRecords: customRecords as Map<string, string>,
+    customRecords: customRecords as Record<string, string>,
   });
   utils.publishPaymentNotification(
     message,
