@@ -1,11 +1,11 @@
 import * as accounts from "./actions/accounts";
+import * as allowances from "./actions/allowances";
 import * as ln from "./actions/ln";
 import lnurl, { lnurlPay } from "./actions/lnurl";
-import * as webln from "./actions/webln";
-import * as allowances from "./actions/allowances";
-import * as setup from "./actions/setup";
 import * as payments from "./actions/payments";
 import * as settings from "./actions/settings";
+import * as setup from "./actions/setup";
+import * as webln from "./actions/webln";
 
 // TODO: potential nesting/grouping of actions for better organization
 const routes = {
@@ -43,6 +43,7 @@ const routes = {
   setPassword: setup.setPassword,
   accountInfo: accounts.info,
   addAccount: accounts.add,
+  editAccount: accounts.edit,
   getAccounts: accounts.all,
   removeAccount: accounts.remove,
   deleteAccount: accounts.deleteAccount,
@@ -55,12 +56,12 @@ const routes = {
   getSettings: settings.get,
 };
 
-const router = (path) => {
+const router = (path: FixMe) => {
   if (!path) {
     throw new Error("No action path provided to router");
   }
   const routeParts = path.split("/");
-  const route = routeParts.reduce((route, path) => {
+  const route = routeParts.reduce((route: FixMe, path: FixMe) => {
     return route[path];
   }, routes);
 

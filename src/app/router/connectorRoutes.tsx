@@ -6,6 +6,7 @@ import ConnectCitadel from "../screens/Onboard/ConnectCitadel";
 import NewWallet from "../screens/Onboard/NewWallet";
 import ConnectUmbrel from "../screens/Onboard/ConnectUmbrel";
 import ConnectStart9 from "../screens/Onboard/ConnectStart9";
+import ConnectMyNode from "../screens/Onboard/ConnectMyNode";
 
 export default [
   { path: "lnd", element: <ConnectLnd /> },
@@ -16,4 +17,5 @@ export default [
   { path: "create-wallet", element: <NewWallet /> },
   { path: "umbrel", element: <ConnectUmbrel /> },
   { path: "start9", element: <ConnectStart9 /> },
+  { path: "mynode", element: <ConnectMyNode /> },
 ];

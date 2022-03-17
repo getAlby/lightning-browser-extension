@@ -6,6 +6,7 @@ export type ConnectorType = keyof typeof connectors;
 // align Message-Types
 // Where is this used? Do we still need this if 652 is solved?
 export interface Account {
+  id: string;
   connector: ConnectorType;
   config: string | Record<string, unknown>;
   name: string;
