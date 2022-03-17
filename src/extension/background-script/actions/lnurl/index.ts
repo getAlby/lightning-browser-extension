@@ -6,7 +6,7 @@ import sha256 from "crypto-js/sha256";
 import hmacSHA256 from "crypto-js/hmac-sha256";
 import Hex from "crypto-js/enc-hex";
 
-import { Message, LNURLDetails } from "../../../../types";
+import type { Message, LNURLDetails } from "../../../../types";
 import HashKeySigner from "../../../../common/utils/signer";
 import utils from "../../../../common/lib/utils";
 import lnurlLib from "../../../../common/lib/lnurl";
