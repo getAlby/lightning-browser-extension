@@ -90,7 +90,7 @@ function Receive() {
     return (
       <div>
         <div className="relative p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center overflow-hidden">
-          <QRCode value={invoice.paymentRequest} level="M" />
+          <QRCode value={invoice.paymentRequest.toUpperCase()} level="M" />
           {paid && (
             <div className="absolute inset-0 flex justify-center items-center bg-white/90">
               <div className="text-center">
