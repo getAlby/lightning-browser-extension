@@ -10,12 +10,15 @@ import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import api from "../../../common/lib/api";
 import utils from "../../../common/lib/utils";
+import type { Account } from "../../../types";
 import Button from "../../components/Button";
 import Container from "../../components/Container";
 import TextField from "../../components/Form/TextField";
 import Menu from "../../components/Menu";
 import { useAccounts } from "../../context/AccountsContext";
 import { useAuth } from "../../context/AuthContext";
+
+type AccountAction = Omit<Account, "connector" | "config">;
 
 function AccountsScreen() {
   const auth = useAuth();
@@ -30,23 +33,23 @@ function AccountsScreen() {
     setModalIsOpen(false);
   }
 
-  async function updateAccountName(accountId: string | number) {
-    await utils.call("editAccount", {
-      name: newAccountName,
-      id: accountId,
-    });
-
-    getAccounts();
-    closeModal();
-  }
-
   async function selectAccount(accountId: string) {
     auth.setAccountId(accountId);
     await api.selectAccount(accountId);
     auth.fetchAccountInfo(accountId);
   }
 
-  async function removeAccount(id: string, name: string) {
+  async function updateAccountName({ id, name }: AccountAction) {
+    await utils.call("editAccount", {
+      name,
+      id,
+    });
+
+    getAccounts();
+    closeModal();
+  }
+
+  async function removeAccount({ id, name }: AccountAction) {
     if (window.confirm(`Are you sure you want to delete account: ${name}?`)) {
       let nextAccountId;
       let accountIds = Object.keys(accounts);
@@ -92,12 +95,12 @@ function AccountsScreen() {
                         <WalletIcon className="w-8 h-8 text-black" />
                       </div>
                       <div className="ml-4">
-                        <div className="font-bold text-gray-900 dark:text-white">
+                        <h3 className="font-bold text-gray-900 dark:text-white">
                           {account.name}
-                        </div>
-                        <div className="text-gray-500 dark:text-gray-400">
+                        </h3>
+                        <p className="text-gray-500 dark:text-gray-400">
                           {account.connector}
-                        </div>
+                        </p>
                       </div>
                     </div>
                   </td>
@@ -106,13 +109,8 @@ function AccountsScreen() {
                       <Menu.Button className="ml-auto flex items-center text-gray-500 hover:text-black transition-color duration-200 dark:hover:text-white">
                         <EllipsisIcon className="h-6 w-6 rotate-90" />
                       </Menu.Button>
-                      <Menu.List position="right">
-                        <Menu.ItemButton
-                          onClick={() => removeAccount(accountId, account.name)}
-                        >
-                          Delete
-                        </Menu.ItemButton>
 
+                      <Menu.List position="right">
                         <Menu.ItemButton
                           onClick={() => {
                             setCurrentAccountId(accountId);
@@ -121,6 +119,17 @@ function AccountsScreen() {
                           }}
                         >
                           Edit
+                        </Menu.ItemButton>
+
+                        <Menu.ItemButton
+                          onClick={() =>
+                            removeAccount({
+                              id: accountId,
+                              name: account.name,
+                            })
+                          }
+                        >
+                          Delete
                         </Menu.ItemButton>
                       </Menu.List>
                     </Menu>
@@ -149,7 +158,10 @@ function AccountsScreen() {
           <form
             onSubmit={(e: FormEvent) => {
               e.preventDefault();
-              updateAccountName(currentAccountId);
+              updateAccountName({
+                id: currentAccountId,
+                name: newAccountName,
+              });
             }}
           >
             <div className="p-5 border-t border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">
