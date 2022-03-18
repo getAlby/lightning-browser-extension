@@ -1,5 +1,4 @@
-import { SendIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import utils from "../../../../common/lib/utils";
 import Button from "../../../components/Button";
@@ -14,8 +13,6 @@ const initialFormData = Object.freeze({
 export default function ConnectRaspiBlitz() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
-  const [isDragging, setDragging] = useState(false);
-  const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -79,48 +76,6 @@ export default function ConnectRaspiBlitz() {
     setLoading(false);
   }
 
-  function dropHandler(event: React.DragEvent<HTMLDivElement>) {
-    event.preventDefault();
-    if (
-      event.dataTransfer.items &&
-      event.dataTransfer.items[0].kind === "file"
-    ) {
-      const file = event.dataTransfer.items[0].getAsFile();
-      if (file) {
-        const extension = file.name.split(".").pop();
-        if (extension === "macaroon") readFile(file);
-      }
-    }
-    if (isDragging) setDragging(false);
-  }
-
-  function readFile(file: File) {
-    const reader = new FileReader();
-    reader.onload = function (evt) {
-      if (evt.target?.result) {
-        const macaroon = utils.bytesToHexString(
-          new Uint8Array(evt.target.result as ArrayBuffer)
-        );
-        if (macaroon) {
-          setFormData({
-            ...formData,
-            macaroon,
-          });
-        }
-      }
-    };
-    reader.readAsArrayBuffer(file);
-  }
-
-  function dragOverHandler(event: React.DragEvent<HTMLDivElement>) {
-    event.preventDefault();
-    if (!isDragging) setDragging(true);
-  }
-
-  function dragLeaveHandler(event: React.DragEvent<HTMLDivElement>) {
-    if (isDragging) setDragging(false);
-  }
-
   return (
     <form onSubmit={handleSubmit}>
       <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 px-12 py-10">
@@ -138,7 +93,7 @@ export default function ConnectRaspiBlitz() {
             <br />
             Copy your <b>.onion</b> address.
             <br />
-            Add <b>https://</b> at the beginning and <b>:800</b> at the end.
+            Add <b>https://</b> at the beginning and <b>:8080</b> at the end.
             <br />
             Paste the URL in the input below.
           </p>
@@ -147,7 +102,9 @@ export default function ConnectRaspiBlitz() {
               <TextField
                 id="url"
                 label="REST API host and port"
-                placeholder="https://your-node:8080"
+                placeholder="https://your-node-url:8080"
+                pattern="https://.+"
+                title="https://your-node-url:8080"
                 onChange={handleChange}
                 required
               />
@@ -168,36 +125,6 @@ export default function ConnectRaspiBlitz() {
                   value={formData.macaroon}
                   onChange={handleChange}
                   required
-                />
-              </div>
-              <p className="text-center my-4 dark:text-white">OR</p>
-              <div
-                className={`cursor-pointer flex flex-col items-center dark:bg-gray-800 p-4 py-10 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
-                  isDragging ? "border-blue-500 bg-blue-50" : ""
-                }`}
-                onDrop={dropHandler}
-                onDragOver={dragOverHandler}
-                onDragLeave={dragLeaveHandler}
-                onClick={() => {
-                  if (hiddenFileInput?.current) hiddenFileInput.current.click();
-                }}
-              >
-                <SendIcon className="mb-3 h-9 w-9 text-blue-500" />
-                <p className="dark:text-white">
-                  Drag and drop your macaroon here or{" "}
-                  <span className="underline">browse</span>
-                </p>
-                <input
-                  ref={hiddenFileInput}
-                  onChange={(event) => {
-                    if (event.target.files) {
-                      const file = event.target.files[0];
-                      readFile(file);
-                    }
-                  }}
-                  type="file"
-                  accept=".macaroon"
-                  hidden
                 />
               </div>
             </div>
