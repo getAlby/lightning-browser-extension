@@ -136,7 +136,9 @@ export default function ConnectLnd() {
               <TextField
                 id="url"
                 label="REST API host and port"
-                placeholder="https://your-node:8080"
+                placeholder="https://your-node-url:8080"
+                pattern="https://.+"
+                title="https://your-node-url:8080"
                 onChange={handleChange}
                 required
               />
@@ -154,7 +156,7 @@ export default function ConnectLnd() {
               </div>
               <p className="text-center my-4 dark:text-white">OR</p>
               <div
-                className={`cursor-pointer flex flex-col items-center dark:bg-gray-800 p-4 py-10 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
+                className={`cursor-pointer flex flex-col items-center dark:bg-gray-800 p-4 py-3 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
                   isDragging ? "border-blue-500 bg-blue-50" : ""
                 }`}
                 onDrop={dropHandler}
@@ -164,7 +166,7 @@ export default function ConnectLnd() {
                   if (hiddenFileInput?.current) hiddenFileInput.current.click();
                 }}
               >
-                <SendIcon className="mb-3 h-9 w-9 text-blue-500" />
+                <SendIcon className="mb-3 h-6 w-6 text-blue-500" />
                 <p className="dark:text-white">
                   Drag and drop your macaroon here or{" "}
                   <span className="underline">browse</span>

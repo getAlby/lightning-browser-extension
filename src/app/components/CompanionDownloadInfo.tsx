@@ -10,17 +10,17 @@ function CompanionDownloadInfo() {
 
   // TODO: check if the companion app is already installed
   return (
-    <div className="mt-6">
+    <div className="mt-6 dark:text-white">
       You are trying to connect to a node behind Tor. Because browsers cannot
       directly connect to your node please make sure you have the Alby companion
-      app installed. You can download it from{" "}
+      app installed. Download it{" "}
       <a
         href={`https://getalby.com/install/companion/${getOS()}`}
         target="_blank"
         rel="noreferrer"
       >
         it here
-        <ReceiveIcon className="w-6 h-6 inline" />
+        <ReceiveIcon className="w-6 h-6 inline" />.
       </a>
     </div>
   );

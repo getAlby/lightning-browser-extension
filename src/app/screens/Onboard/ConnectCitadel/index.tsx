@@ -1,17 +1,16 @@
 import { useState } from "react";
+
+import Input from "../../../components/Form/Input";
+import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 
 import utils from "../../../../common/lib/utils";
 
-import Button from "../../../components/Button";
-import QrcodeScanner from "../../../components/QrcodeScanner";
-import TextField from "../../../components/Form/TextField";
-import CompanionDownloadInfo from "../../../components/CompanionDownloadInfo";
-
-export default function ConnectLndHub() {
+export default function ConnectCitadel() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    uri: "",
+    password: "",
+    url: "http://citadel.local",
   });
   const [loading, setLoading] = useState(false);
 
@@ -23,31 +22,26 @@ export default function ConnectLndHub() {
   }
 
   function getConnectorType() {
-    if (formData.uri.match(/\.onion/i)) {
-      return "nativelndhub";
+    if (formData.url.match(/\.onion/i)) {
+      return "nativecitadel";
     }
-    // default to LndHub
-    return "lndhub";
+    return "citadel";
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
-    const match = formData.uri.match(/lndhub:\/\/(\S+):(\S+)@(\S+)/i);
-    if (!match) {
-      alert("Invalid LNDHub URI");
-      setLoading(false);
-      return;
-    }
-    const login = match[1];
-    const password = match[2];
-    const url = match[3].replace(/\/$/, "");
+    const { password, url } = formData;
+    /** The URL with an http:// in front if the protocol is missing */
+    const fullUrl =
+      url.startsWith("http://") || url.startsWith("https://")
+        ? url
+        : `http://${url}`;
     const account = {
-      name: "LNDHub",
+      name: "Citadel",
       config: {
-        login,
+        url: fullUrl,
         password,
-        url,
       },
       connector: getConnectorType(),
     };
@@ -55,12 +49,11 @@ export default function ConnectLndHub() {
     try {
       let validation;
       // TODO: for native connectors we currently skip the validation because it is too slow (booting up Tor etc.)
-      if (account.connector === "nativelndhub") {
+      if (account.connector === "nativecitadel") {
         validation = { valid: true, error: "" };
       } else {
         validation = await utils.call("validateAccount", account);
       }
-
       if (validation.valid) {
         const addResult = await utils.call("addAccount", account);
         if (addResult.accountId) {
@@ -70,14 +63,12 @@ export default function ConnectLndHub() {
           navigate("/test-connection");
         }
       } else {
-        console.log(validation);
-        alert(
-          `Connection failed. Is your LNDHub URI correct? \n\n(${validation.error})`
-        );
+        alert(`
+          Connection failed. Is your password correct? \n\n(${validation.error})`);
       }
     } catch (e) {
       console.error(e);
-      let message = "Connection failed. Is your LNDHub URI correct?";
+      let message = "Connection failed. Is your password correct?";
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
@@ -88,46 +79,48 @@ export default function ConnectLndHub() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 px-10 py-12">
+      <div className="relative lg:flex mt-14 bg-white dark:bg-gray-800 px-10 py-12">
         <div className="lg:w-1/2">
           <h1 className="text-2xl font-bold dark:text-white">
-            Connect to LNDHub (BlueWallet)
+            Connect to your Citadel Node
           </h1>
-          <p className="text-gray-500 mt-6 dark:text-gray-400">
-            In BlueWallet, choose the wallet you want to connect, open it, click
-            on &quot;...&quot;, click on Export/Backup to display the QR code
-            and scan it with your webcam.
+          <p className="text-gray-500 mt-6">
+            This currently doesn&apos;t work if 2FA is enabled.
           </p>
           <div className="w-4/5">
             <div className="mt-6">
-              <TextField
-                id="uri"
-                label="LNDHub Export URI"
-                type="text"
-                required
-                placeholder="lndhub://..."
-                pattern="lndhub://.+"
-                title="lndhub://..."
-                value={formData.uri}
-                onChange={handleChange}
-              />
+              <label
+                htmlFor="password"
+                className="block font-medium text-gray-700 dark:text-gray-400"
+              >
+                Password
+              </label>
+              <div className="mt-1">
+                <Input
+                  name="password"
+                  type="password"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
             </div>
-            {formData.uri.match(/\.onion/i) && <CompanionDownloadInfo />}
             <div className="mt-6">
-              <p className="text-center my-4 dark:text-white">OR</p>
-              <QrcodeScanner
-                fps={10}
-                qrbox={250}
-                qrCodeSuccessCallback={(decodedText: string) => {
-                  if (formData.uri !== decodedText) {
-                    setFormData({
-                      ...formData,
-                      uri: decodedText,
-                    });
-                  }
-                }}
-                qrCodeErrorCallback={console.error}
-              />
+              <label
+                htmlFor="url"
+                className="block font-medium text-gray-700 dark:text-gray-400"
+              >
+                Citadel URL
+              </label>
+              <div className="mt-1">
+                <Input
+                  name="url"
+                  placeholder="citadel.local"
+                  type="text"
+                  value={formData.url}
+                  required
+                  onChange={handleChange}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -151,7 +144,7 @@ export default function ConnectLndHub() {
           label="Continue"
           primary
           loading={loading}
-          disabled={formData.uri === ""}
+          disabled={formData.password === "" || formData.url === ""}
         />
       </div>
     </form>

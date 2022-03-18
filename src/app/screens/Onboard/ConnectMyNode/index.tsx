@@ -1,52 +1,54 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import utils from "../../../../common/lib/utils";
-
 import Button from "../../../components/Button";
-import QrcodeScanner from "../../../components/QrcodeScanner";
 import TextField from "../../../components/Form/TextField";
 import CompanionDownloadInfo from "../../../components/CompanionDownloadInfo";
 
-export default function ConnectLndHub() {
+const initialFormData = Object.freeze({
+  url: "",
+  macaroon: "",
+});
+
+export default function ConnectMyNode() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    uri: "",
-  });
+  const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value.trim(),
-    });
+  function handleLndconnectUrl(event: React.ChangeEvent<HTMLInputElement>) {
+    try {
+      const lndconnectUrl = event.target.value.trim();
+      const lndconnect = new URL(lndconnectUrl);
+      const url = "https:" + lndconnect.pathname;
+      let macaroon = lndconnect.searchParams.get("macaroon") || "";
+      macaroon = utils.urlSafeBase64ToHex(macaroon);
+      // const cert = lndconnect.searchParams.get("cert"); // TODO: handle LND certs with the native connector
+      setFormData({
+        ...formData,
+        url,
+        macaroon,
+      });
+    } catch (e) {
+      console.log("invalid lndconnect string");
+    }
   }
 
   function getConnectorType() {
-    if (formData.uri.match(/\.onion/i)) {
-      return "nativelndhub";
+    if (formData.url.match(/\.onion/i)) {
+      return "nativelnd";
     }
-    // default to LndHub
-    return "lndhub";
+    // default to LND
+    return "lnd";
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
-    const match = formData.uri.match(/lndhub:\/\/(\S+):(\S+)@(\S+)/i);
-    if (!match) {
-      alert("Invalid LNDHub URI");
-      setLoading(false);
-      return;
-    }
-    const login = match[1];
-    const password = match[2];
-    const url = match[3].replace(/\/$/, "");
+    const { url, macaroon } = formData;
     const account = {
-      name: "LNDHub",
+      name: "myNode",
       config: {
-        login,
-        password,
+        macaroon,
         url,
       },
       connector: getConnectorType(),
@@ -55,7 +57,7 @@ export default function ConnectLndHub() {
     try {
       let validation;
       // TODO: for native connectors we currently skip the validation because it is too slow (booting up Tor etc.)
-      if (account.connector === "nativelndhub") {
+      if (account.connector === "nativelnd") {
         validation = { valid: true, error: "" };
       } else {
         validation = await utils.call("validateAccount", account);
@@ -70,14 +72,12 @@ export default function ConnectLndHub() {
           navigate("/test-connection");
         }
       } else {
-        console.log(validation);
-        alert(
-          `Connection failed. Is your LNDHub URI correct? \n\n(${validation.error})`
-        );
+        alert(`
+          Connection failed. Are your credentials correct? \n\n(${validation.error})`);
       }
     } catch (e) {
       console.error(e);
-      let message = "Connection failed. Is your LNDHub URI correct?";
+      let message = "Connection failed. Are your credentials correct?";
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
@@ -88,47 +88,34 @@ export default function ConnectLndHub() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 px-10 py-12">
+      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 px-12 py-10">
         <div className="lg:w-1/2">
           <h1 className="text-2xl font-bold dark:text-white">
-            Connect to LNDHub (BlueWallet)
+            Connect to your myNode
           </h1>
           <p className="text-gray-500 mt-6 dark:text-gray-400">
-            In BlueWallet, choose the wallet you want to connect, open it, click
-            on &quot;...&quot;, click on Export/Backup to display the QR code
-            and scan it with your webcam.
+            On your myNode homepage click on the <b>Wallet</b> button for your{" "}
+            <b>Lightning</b> service.
+            <br />
+            Now click on the <b>Pair Wallet</b> button under the <b>Status</b>{" "}
+            tab. Enter your password when prompted. <br />
+            Select the dropdown menu and choose a pairing option. Depending on
+            your setup you can either use the <b>
+              Lightning (REST + Local IP)
+            </b>{" "}
+            connection or the <b>Lightning (REST + Tor)</b> connection.
           </p>
           <div className="w-4/5">
             <div className="mt-6">
               <TextField
-                id="uri"
-                label="LNDHub Export URI"
-                type="text"
+                id="lndconnect"
+                label="lndconnect REST URL"
+                placeholder="lndconnect://yournode:8080?..."
+                onChange={handleLndconnectUrl}
                 required
-                placeholder="lndhub://..."
-                pattern="lndhub://.+"
-                title="lndhub://..."
-                value={formData.uri}
-                onChange={handleChange}
               />
             </div>
-            {formData.uri.match(/\.onion/i) && <CompanionDownloadInfo />}
-            <div className="mt-6">
-              <p className="text-center my-4 dark:text-white">OR</p>
-              <QrcodeScanner
-                fps={10}
-                qrbox={250}
-                qrCodeSuccessCallback={(decodedText: string) => {
-                  if (formData.uri !== decodedText) {
-                    setFormData({
-                      ...formData,
-                      uri: decodedText,
-                    });
-                  }
-                }}
-                qrCodeErrorCallback={console.error}
-              />
-            </div>
+            {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
           </div>
         </div>
         <div className="mt-16 lg:mt-0 lg:w-1/2">
@@ -151,7 +138,7 @@ export default function ConnectLndHub() {
           label="Continue"
           primary
           loading={loading}
-          disabled={formData.uri === ""}
+          disabled={formData.url === "" || formData.macaroon === ""}
         />
       </div>
     </form>
