@@ -1,9 +1,6 @@
 import { Fragment, useState, MouseEvent, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Transition } from "@headlessui/react";
-import Base64 from "crypto-js/enc-base64";
-import UTF8 from "crypto-js/enc-utf8";
-
 import { LNURLPaymentSuccessAction, OriginData } from "../../types";
 import utils from "../../common/lib/utils";
 import getOriginData from "../../extension/content-script/originData";
@@ -19,7 +16,7 @@ import PublisherCard from "../components/PublisherCard";
 type Props = {
   origin?: OriginData;
   destination?: string;
-  comment?: string;
+  customRecords?: Record<string, string>;
   valueSat?: string;
 };
 
@@ -35,7 +32,7 @@ function Keysend(props: Props) {
       getOriginData()
   );
   const originRef = useRef(props.origin || getOriginData());
-  const [comment, setComment] = useState(props.comment || "");
+  const [customRecords] = useState(props.customRecords || {});
   const [amount, setAmount] = useState(props.valueSat || "");
   const [destination] = useState(
     props.destination || searchParams.get("destination")
@@ -54,9 +51,6 @@ function Keysend(props: Props) {
     }
     try {
       setLoadingConfirm(true);
-      const customRecords: Record<string, string> = {};
-      //TLV_WHATSAT_MESSAGE code
-      customRecords["34349334"] = Base64.stringify(UTF8.parse(comment));
       const payment = await utils.call(
         "keySend",
         { destination, amount, customRecords },
@@ -91,7 +85,6 @@ function Keysend(props: Props) {
       navigate(-1);
     }
   }
-
   function renderAmount() {
     return (
       <div className="mt-1 flex flex-col">
@@ -128,26 +121,10 @@ function Keysend(props: Props) {
     );
   }
 
-  function renderComment() {
-    return (
-      <div className="flex flex-col">
-        <Input
-          type="text"
-          placeholder="optional"
-          value={comment}
-          onChange={(e) => {
-            setComment(e.target.value);
-          }}
-        />
-      </div>
-    );
-  }
-
   function elements() {
     const elements = [];
     elements.push(["Send payment to", destination]);
     elements.push(["Amount (Satoshi)", renderAmount()]);
-    elements.push(["Comment", renderComment()]);
     return elements;
   }
   function saveBudget() {

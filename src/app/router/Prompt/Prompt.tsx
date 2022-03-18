@@ -108,7 +108,9 @@ class Prompt extends Component<
                   <Keysend
                     destination={this.state.args?.destination as string}
                     valueSat={this.state.args?.amount as string}
-                    comment={this.state.args?.customRecords as string}
+                    customRecords={
+                      this.state.args?.customRecords as Record<string, string>
+                    }
                     origin={this.state.origin}
                   />
                 }

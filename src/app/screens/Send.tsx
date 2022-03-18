@@ -33,8 +33,6 @@ function Send() {
       if (lnurl) {
         await lnurlLib.getDetails(lnurl); // throws if invalid.
         navigate(`/lnurlPay?lnurl=${lnurl}`);
-      } else if (isPubKey(invoice)) {
-        navigate(`/keysend?destination=${invoice}`);
       } else {
         parsePaymentRequest({ request: invoice }); // throws if invalid.
         navigate(`/confirmPayment?paymentRequest=${invoice}`);
@@ -119,9 +117,3 @@ function Send() {
 }
 
 export default Send;
-function isPubKey(invoice: string) {
-  return (
-    invoice.length == 66 &&
-    (invoice.startsWith("02") || invoice.startsWith("03"))
-  );
-}
