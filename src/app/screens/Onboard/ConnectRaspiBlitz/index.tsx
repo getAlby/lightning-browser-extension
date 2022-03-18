@@ -130,7 +130,17 @@ export default function ConnectRaspiBlitz() {
           </h1>
           <p className="text-gray-500 mt-6 dark:text-gray-400">
             You need your node URL and a macaroon with read and send permissions
-            (e.g. admin.macaroon)
+            (e.g. admin.macaroon).
+            <br />
+            <br />
+            <b>SSH</b> into your <b>RaspiBlitz</b>.<br />
+            Run the command <b>sudo cat /mnt/hdd/tor/lndrest8080/hostname</b>.
+            <br />
+            Copy your <b>.onion</b> address.
+            <br />
+            Add <b>https://</b> at the beginning and <b>:800</b> at the end.
+            <br />
+            Paste the URL in the input below.
           </p>
           <div className="w-4/5">
             <div className="mt-6">
@@ -144,6 +154,13 @@ export default function ConnectRaspiBlitz() {
             </div>
             {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
             <div className="mt-6">
+              <p className="mb-6 text-gray-500 mt-6 dark:text-gray-400">
+                Select <b>CONNECT</b>.<br />
+                Select <b>EXPORT</b>.<br />
+                Select <b>HEX</b>.<br />
+                Copy the <b>adminMacaroon</b>.<br />
+                Paste the macaroon in the input below.
+              </p>
               <div>
                 <TextField
                   id="macaroon"
