@@ -4,7 +4,7 @@ import { Message } from "../../../../types";
 import state from "../../state";
 import utils from "../../../../common/lib/utils";
 
-export default async function keySend(message: Message) {
+export default async function keysend(message: Message) {
   PubSub.publish(`ln.keySend.start`, message);
   const { destination, amount, customRecords } = message.args;
   if (typeof destination !== "string" || typeof amount !== "string") {
