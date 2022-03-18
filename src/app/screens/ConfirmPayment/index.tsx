@@ -37,7 +37,7 @@ function ConfirmPayment(props: Props) {
   );
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [succesMessage, setSuccessMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   async function confirm() {
     if (rememberMe && budget) {
@@ -81,12 +81,12 @@ function ConfirmPayment(props: Props) {
     });
   }
 
-  function renderSuccesMessage() {
+  function renderSuccessMessage() {
     return (
       <>
         <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
           <dt className="text-sm font-semibold text-gray-500">Message</dt>
-          <dd className="text-sm mb-4 dark:text-white">{succesMessage}</dd>
+          <dd className="text-sm mb-4 dark:text-white">{successMessage}</dd>
         </dl>
         <div className="text-center">
           <button
@@ -108,7 +108,7 @@ function ConfirmPayment(props: Props) {
       />
 
       <div className="p-4 max-w-screen-sm mx-auto">
-        {!succesMessage ? (
+        {!successMessage ? (
           <>
             <div className="mb-8">
               <PaymentSummary
@@ -187,7 +187,7 @@ function ConfirmPayment(props: Props) {
             </div>
           </>
         ) : (
-          renderSuccesMessage()
+          renderSuccessMessage()
         )}
       </div>
     </div>
