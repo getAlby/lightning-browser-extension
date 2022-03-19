@@ -111,7 +111,7 @@ function QrcodeScanner({
   }
 
   return (
-    <div className="shadow-sm bg-white rounded-md border border-gray-300 flex flex-col items-center dark:bg-gray-800 p-6">
+    <div className="shadow-sm bg-white rounded-md border border-gray-300 flex flex-col items-center dark:bg-gray-800 p-3">
       {!isScanning && (
         <>
           <div className="flex justify-center text-center items-center">
@@ -124,7 +124,7 @@ function QrcodeScanner({
                 onClick={handleRequestCameraPermissions}
               />
             </div>
-            <QrCodeIcon className="h-40 w-40 ml-4 -mr-8 text-blue-500" />
+            <QrCodeIcon className="h-28 w-28 ml-4 -mr-8 text-blue-500" />
           </div>
         </>
       )}
