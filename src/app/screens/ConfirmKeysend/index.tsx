@@ -4,7 +4,6 @@ import { Transition } from "@headlessui/react";
 import PaymentSummary from "../../components/PaymentSummary";
 import utils from "../../../common/lib/utils";
 import getOriginData from "../../../extension/content-script/originData";
-import { useAuth } from "../../context/AuthContext";
 import msg from "../../../common/lib/msg";
 import Checkbox from "../../components/Form/Checkbox";
 import TextField from "../../components/Form/TextField";
@@ -24,7 +23,6 @@ type Props = {
 function Keysend(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const auth = useAuth();
   const [rememberMe, setRememberMe] = useState(false);
   const [origin] = useState(
     props.origin ||
@@ -60,12 +58,9 @@ function Keysend(props: Props) {
           },
         }
       );
-      console.log(payment);
 
+      msg.reply(payment); // resolves the prompt promise and closes the prompt window
       setSuccessMessage(`Payment sent! Preimage: ${payment.preimage}`);
-
-      auth.fetchAccountInfo(); // Update balance.
-      msg.reply(payment);
     } catch (e) {
       console.log(e);
       if (e instanceof Error) {
