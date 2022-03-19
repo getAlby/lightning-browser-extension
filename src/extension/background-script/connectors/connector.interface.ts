@@ -14,14 +14,12 @@ export interface MakeInvoiceArgs {
   memo: string;
 }
 
-export type MakeInvoiceResponse =
-  | {
-      data: {
-        paymentRequest: string;
-        rHash: string;
-      };
-    }
-  | { error: string };
+export type MakeInvoiceResponse = {
+  data: {
+    paymentRequest: string;
+    rHash: string;
+  };
+};
 
 export type GetInfoResponse = {
   data: WebLNNode;
