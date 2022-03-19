@@ -37,11 +37,9 @@ export default function ConnectGaloy(props: Props) {
 
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
-  const [smsCode, setSmsCode] = useState<string | undefined>();
-  const [smsCodeRequested, setSmsCodeRequested] = useState<
-    boolean | undefined
-  >();
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [smsCode, setSmsCode] = useState("");
+  const [smsCodeRequested, setSmsCodeRequested] = useState(false);
 
   function handlePhoneNumberChange(event: React.ChangeEvent<HTMLInputElement>) {
     setPhoneNumber(event.target.value.trim());
