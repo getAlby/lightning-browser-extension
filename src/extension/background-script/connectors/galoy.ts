@@ -83,20 +83,17 @@ class Galoy implements Connector {
     return this.request(query).then(({ data, errors }) => {
       const errs = errors || data.me.errors;
       if (errs && errs.length)
-        return {
-          error: errs[0].message || JSON.stringify(errs),
-        };
+        throw new Error(errs[0].message || JSON.stringify(errs));
 
       const { defaultWalletId, wallets }: GaloyDefaultAccount =
         data.me.defaultAccount;
       const defaultWallet = wallets.find((w) => w.id === defaultWalletId);
-      return defaultWallet
-        ? {
-            data: {
-              balance: defaultWallet.balance,
-            },
-          }
-        : { error: "Valid wallet not found" };
+      if (!defaultWallet) throw new Error("Valid wallet not found");
+      return {
+        data: {
+          balance: defaultWallet.balance,
+        },
+      };
     });
   }
 

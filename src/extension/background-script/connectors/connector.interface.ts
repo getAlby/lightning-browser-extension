@@ -27,13 +27,11 @@ export type GetInfoResponse = {
   data: WebLNNode;
 };
 
-export type GetBalanceResponse =
-  | {
-      data: {
-        balance: number;
-      };
-    }
-  | { error: string };
+export type GetBalanceResponse = {
+  data: {
+    balance: number;
+  };
+};
 
 export type SendPaymentResponse =
   | {
