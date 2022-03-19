@@ -23,11 +23,9 @@ export type MakeInvoiceResponse =
     }
   | { error: string };
 
-export type GetInfoResponse =
-  | {
-      data: WebLNNode;
-    }
-  | { error: string };
+export type GetInfoResponse = {
+  data: WebLNNode;
+};
 
 export type GetBalanceResponse =
   | {

@@ -51,9 +51,7 @@ class Galoy implements Connector {
     return this.request(query).then(({ data, errors }) => {
       const errs = errors || data.me.errors;
       if (errs && errs.length)
-        return {
-          error: errs[0].message || JSON.stringify(errs),
-        };
+        throw new Error(errs[0].message || JSON.stringify(errs));
 
       const alias = data.me.username
         ? data.me.username.substr(0, 10)
