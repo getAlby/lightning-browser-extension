@@ -220,9 +220,7 @@ class Galoy implements Connector {
       result = await this.request(query).then(({ data, errors }) => {
         const errs = errors || data.me.errors;
         if (errs && errs.length)
-          return {
-            error: errs[0].message || JSON.stringify(errs),
-          };
+          throw new Error(errs[0].message || JSON.stringify(errs));
 
         const account: GaloyTransactionsAccount = data.me.defaultAccount;
         const wallet = account.wallets.find(
@@ -231,15 +229,11 @@ class Galoy implements Connector {
 
         // There should always be a wallet that corresponds to 'defaultWalletId'
         if (wallet === undefined) {
-          return {
-            error: "Bad data received.",
-          };
+          throw new Error("Bad data received.");
         }
 
         if (wallet.walletCurrency !== "BTC") {
-          return {
-            error: "Non-BTC wallets not implemented yet.",
-          };
+          throw "Non-BTC wallets not implemented yet.";
         }
 
         const txEdges = wallet.transactions.edges;
@@ -258,9 +252,9 @@ class Galoy implements Connector {
         }
 
         if (!wallet.transactions.pageInfo.hasNextPage) {
-          return {
-            error: `Transaction not found for payment hash: ${args.paymentHash}`,
-          };
+          throw new Error(
+            `Transaction not found for payment hash: ${args.paymentHash}`
+          );
         }
 
         lastSeenCursor = txEdges[txEdges.length - 1].cursor;

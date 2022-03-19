@@ -55,14 +55,12 @@ export interface CheckPaymentArgs {
   paymentHash: string;
 }
 
-export type CheckPaymentResponse =
-  | {
-      data: {
-        paid: boolean;
-        preimage?: string;
-      };
-    }
-  | { data: undefined; error: string };
+export type CheckPaymentResponse = {
+  data: {
+    paid: boolean;
+    preimage?: string;
+  };
+};
 
 export interface SignMessageArgs {
   message: string;
