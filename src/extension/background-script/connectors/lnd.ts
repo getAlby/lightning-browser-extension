@@ -84,6 +84,7 @@ class Lnd implements Connector {
     });
   }
   async keySend(args: KeysendArgs): Promise<SendPaymentResponse> {
+    //See: https://gist.github.com/dellagustin/c3793308b75b6b0faf134e64db7dc915
     const dest_pubkey_hex = args.pubkey;
     const dest_pubkey_base64 = Buffer.from(dest_pubkey_hex, "hex").toString(
       "base64"
