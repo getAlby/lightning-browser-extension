@@ -106,7 +106,9 @@ function Keysend(props: Props) {
       <>
         <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
           <dt className="text-sm font-semibold text-gray-500">Message</dt>
-          <dd className="text-sm mb-4 dark:text-white">{successMessage}</dd>
+          <dd className="text-sm mb-4 dark:text-white break-all">
+            {successMessage}
+          </dd>
         </dl>
         <div className="text-center">
           <button className="underline text-sm text-gray-500" onClick={reject}>
@@ -135,7 +137,9 @@ function Keysend(props: Props) {
               {elements().map(([t, d], i) => (
                 <Fragment key={`element-${i}`}>
                   <dt className="text-sm font-semibold text-gray-500">{t}</dt>
-                  <dd className="text-sm mb-4 dark:text-white">{d}</dd>
+                  <dd className="text-sm mb-4 dark:text-white break-all">
+                    {d}
+                  </dd>
                 </Fragment>
               ))}
             </dl>
