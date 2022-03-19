@@ -2,7 +2,6 @@ import Base64 from "crypto-js/enc-base64";
 import UTF8 from "crypto-js/enc-utf8";
 import SHA256 from "crypto-js/sha256";
 import utils from "../../../common/lib/utils";
-import random from "lodash/random";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
@@ -85,24 +84,16 @@ class Lnd implements Connector {
     });
   }
   async keySend(args: KeysendArgs): Promise<SendPaymentResponse> {
-    //See: https://gist.github.com/dellagustin/c3793308b75b6b0faf134e64db7dc915
-    const byteArray = new Uint8Array(32);
-
     const dest_pubkey_hex = args.pubkey;
     const dest_pubkey_base64 = Buffer.from(dest_pubkey_hex, "hex").toString(
       "base64"
     );
 
-    for (let i = 0; i < 32; i++) {
-      const randomNumber = random(0, 255);
-      byteArray[i] = randomNumber;
-    }
-
-    const encoded = Buffer.from(byteArray).toString("base64");
-    const hash = Base64.stringify(SHA256(Base64.parse(encoded)));
+    const preimage_base64 = Buffer.from(utils.randomHex(32)).toString("base64");
+    const hash = Base64.stringify(SHA256(Base64.parse(preimage_base64)));
 
     //mandatory record for keysend
-    args.customRecords["5482373484"] = encoded;
+    args.customRecords["5482373484"] = preimage_base64;
 
     return this.request<{
       payment_preimage: string;
@@ -132,6 +123,7 @@ class Lnd implements Connector {
       };
     });
   }
+
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
     const data = await this.request<{ settled: boolean }>(
       "GET",

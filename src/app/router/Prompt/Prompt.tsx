@@ -17,7 +17,7 @@ import ConfirmSignMessage from "../../screens/ConfirmSignMessage";
 import ConfirmPayment from "../../screens/ConfirmPayment";
 import LNURLPay from "../../screens/LNURLPay";
 import LNURLAuth from "../../screens/LNURLAuth";
-import Keysend from "../../screens/Keysend";
+import Keysend from "../../screens/ConfirmKeysend";
 
 class Prompt extends Component<
   Record<string, unknown>,
@@ -103,7 +103,7 @@ class Prompt extends Component<
                 }
               />
               <Route
-                path="keysend"
+                path="confirmKeysend"
                 element={
                   <Keysend
                     destination={this.state.args?.destination as string}

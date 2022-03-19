@@ -73,7 +73,7 @@ const utils = {
   stringToUint8Array: (str: string) => {
     return Uint8Array.from(str, (x) => x.charCodeAt(0));
   },
-  genRanHex: (size: number) => {
+  randomHex: (size: number) => {
     return [...Array(size)]
       .map(() => Math.floor(Math.random() * 16).toString(16))
       .join("");

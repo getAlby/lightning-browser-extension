@@ -1,9 +1,9 @@
 import { Message } from "../../../../types";
-import {
-  checkAllowance,
-  sendPaymentWithAllowance,
-  payWithPrompt,
-} from "./sendPaymentOrPrompt";
+import utils from "../../../../common/lib/utils";
+import keysend from "../ln/keySend";
+
+// TODO: move checkAllowance to some helpers/models?
+import { checkAllowance } from "./sendPaymentOrPrompt";
 
 const keysendOrPrompt = async (message: Message) => {
   const destination = message.args.destination;
@@ -15,10 +15,37 @@ const keysendOrPrompt = async (message: Message) => {
   }
 
   if (await checkAllowance(message.origin.host, parseInt(amount))) {
-    return sendPaymentWithAllowance(message, true);
+    return keysendWithAllowance(message);
   } else {
-    return payWithPrompt(message, "keysend");
+    return keysendWithPrompt(message);
   }
 };
+
+async function keysendWithAllowance(message: Message) {
+  try {
+    const response = await keysend(message);
+    return response;
+  } catch (e) {
+    console.error(e);
+    if (e instanceof Error) {
+      return { error: e.message };
+    }
+  }
+}
+
+async function keysendWithPrompt(message: Message) {
+  try {
+    const response = await utils.openPrompt({
+      ...message,
+      type: "confirmKeysend",
+    });
+    return response;
+  } catch (e) {
+    console.log("Payment cancelled", e);
+    if (e instanceof Error) {
+      return { error: e.message };
+    }
+  }
+}
 
 export default keysendOrPrompt;

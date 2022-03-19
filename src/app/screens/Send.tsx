@@ -21,6 +21,10 @@ function Send() {
   const [qrIsOpen, setQrIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  function isPubKey(str: string) {
+    return str.length == 66 && (str.startsWith("02") || str.startsWith("03"));
+  }
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
@@ -33,6 +37,8 @@ function Send() {
       if (lnurl) {
         await lnurlLib.getDetails(lnurl); // throws if invalid.
         navigate(`/lnurlPay?lnurl=${lnurl}`);
+      } else if (isPubKey(invoice)) {
+        navigate(`/keysend?destination=${invoice}`);
       } else {
         parsePaymentRequest({ request: invoice }); // throws if invalid.
         navigate(`/confirmPayment?paymentRequest=${invoice}`);
@@ -77,7 +83,7 @@ function Send() {
   return (
     <div>
       <Header
-        title="Send a payment"
+        title="Send"
         headerLeft={
           <IconButton
             onClick={() => navigate("/")}
