@@ -38,6 +38,8 @@ export default function NewWallet() {
         res.json().then((data) => {
           if (data.lndhub?.login && data.lndhub?.password && data.lndhub?.url) {
             setLndHubData(data.lndhub);
+          } else if (data.email[0] === "has already been taken") {
+            alert("Email already in use.");
           } else {
             console.error(data);
             alert(
