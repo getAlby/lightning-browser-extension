@@ -92,8 +92,15 @@ class Lnd implements Connector {
     const preimage_base64 = Buffer.from(utils.randomHex(32)).toString("base64");
     const hash = Base64.stringify(SHA256(Base64.parse(preimage_base64)));
 
+    //base64 encode the record values
+    const records_base64: Record<string, string> = {};
+    for (const key in args.customRecords) {
+      records_base64[key] = Buffer.from(args.customRecords[key]).toString(
+        "base64"
+      );
+    }
     //mandatory record for keysend
-    args.customRecords["5482373484"] = preimage_base64;
+    records_base64["5482373484"] = preimage_base64;
 
     return this.request<{
       payment_preimage: string;
@@ -107,7 +114,7 @@ class Lnd implements Connector {
         dest: dest_pubkey_base64,
         amt: args.amount,
         payment_hash: hash,
-        dest_custom_records: args.customRecords,
+        dest_custom_records: records_base64,
       },
       {}
     ).then((data) => {
