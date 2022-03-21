@@ -24,7 +24,15 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
 
   function openModal() {
     setBudget(allowance.totalBudget.toString());
-    setIsOpen(true);
+    /**
+     * @HACK
+     * @headless-ui/menu restores focus after closing a menu, to the button that opened it.
+     * By slightly delaying opening the modal, react-modal's focus management won't be overruled.
+     * {@link https://github.com/tailwindlabs/headlessui/issues/259}
+     */
+    setTimeout(() => {
+      setIsOpen(true);
+    }, 50);
   }
 
   function closeModal() {
