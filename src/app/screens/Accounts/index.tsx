@@ -115,9 +115,12 @@ function AccountsScreen() {
                           onClick={() => {
                             setCurrentAccountId(accountId);
                             setNewAccountName(account.name);
-                            // HACK!
-                            // @headless-ui/menu restores focus after closing a menu, to the button that opened it.
-                            // By slightly delaying opening the modal, react-modal's focus management won't be overruled.
+                            /**
+                             * @HACK
+                             * @headless-ui/menu restores focus after closing a menu, to the button that opened it.
+                             * By slightly delaying opening the modal, react-modal's focus management won't be overruled.
+                             * {@link https://github.com/tailwindlabs/headlessui/issues/259}
+                             */
                             setTimeout(() => {
                               setModalIsOpen(true);
                             }, 50);
