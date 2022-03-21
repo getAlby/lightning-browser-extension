@@ -121,7 +121,7 @@ export default function TestConnection() {
             Get some Satoshi
           </h2>
           <button onClick={closeFaucet}>
-            <CrossIcon className="w-6 h-6" />
+            <CrossIcon className="w-6 h-6 dark:text-white" />
           </button>
         </div>
         <div className="p-5 border-t border-b border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200">
