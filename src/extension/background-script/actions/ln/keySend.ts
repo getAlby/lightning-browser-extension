@@ -15,11 +15,16 @@ export default async function keysend(message: Message) {
 
   const connector = await state.getState().getConnector();
 
-  const response = await connector.keySend({
-    pubkey: destination,
-    amount: parseInt(amount),
-    customRecords: customRecords as Record<string, string>,
-  });
+  let response;
+  try {
+    response = await connector.keySend({
+      pubkey: destination,
+      amount: parseInt(amount),
+      customRecords: customRecords as Record<string, string>,
+    });
+  } catch (e) {
+    response = { error: e instanceof Error ? e.message : "" };
+  }
   utils.publishPaymentNotification(
     message,
     {

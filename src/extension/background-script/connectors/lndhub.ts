@@ -164,10 +164,10 @@ export default class LndHub implements Connector {
       dest_custom_records: records_hex,
     });
     if (data.error) {
-      return { error: data.message };
+      throw new Error(data.message);
     }
     if (data.payment_error) {
-      return { error: data.payment_error };
+      throw new Error(data.payment_error);
     }
     if (
       typeof data.payment_hash === "object" &&
