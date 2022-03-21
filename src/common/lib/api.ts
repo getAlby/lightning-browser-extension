@@ -40,24 +40,26 @@ export const swrGetAccountInfo = async (
 ): Promise<AccountInfo> => {
   const accountsCache = await getAccountsCache();
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     if (accountsCache[id]) {
       if (callback) callback(accountsCache[id]);
       resolve(accountsCache[id]);
     }
 
     // Update account info with most recent data, save to cache.
-    getAccountInfo().then((response) => {
-      const { alias } = response.info;
-      const balance = parseInt(response.balance.balance); // TODO: handle amounts
-      const account = { id, alias, balance };
-      storeAccounts({
-        ...accountsCache,
-        [id]: account,
-      });
-      if (callback) callback(account);
-      return resolve(account);
-    });
+    getAccountInfo()
+      .then((response) => {
+        const { alias } = response.info;
+        const balance = parseInt(response.balance.balance); // TODO: handle amounts
+        const account = { id, alias, balance };
+        storeAccounts({
+          ...accountsCache,
+          [id]: account,
+        });
+        if (callback) callback(account);
+        return resolve(account);
+      })
+      .catch(reject);
   });
 };
 export const getAccounts = () => utils.call<Accounts>("getAccounts");

@@ -1,7 +1,5 @@
 # #### This all good standard ###
 
-.nova
-
 # Logs
 logs
 *.log
@@ -130,3 +128,12 @@ dist/
 .awcache
 
 .pnp.*
+
+# Editor directories and files
+.idea
+.nova
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

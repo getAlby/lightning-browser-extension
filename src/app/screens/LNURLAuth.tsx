@@ -1,15 +1,13 @@
 import { MouseEvent } from "react";
 
+import type { LNURLAuthServiceResponse } from "../../types";
 import msg from "../../common/lib/msg";
 
 import Button from "../components/Button";
 import PublisherCard from "../components/PublisherCard";
 
 type Props = {
-  details: {
-    domain: string;
-    k1: string;
-  };
+  details: LNURLAuthServiceResponse;
   origin: {
     name: string;
     icon: string;
