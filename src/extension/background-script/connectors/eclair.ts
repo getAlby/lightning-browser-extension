@@ -93,7 +93,7 @@ class Eclair implements Connector {
     };
   }
 
-  async keySend(args: KeysendArgs): Promise<SendPaymentResponse> {
+  async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
     throw new Error("not supported");
   }
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {

@@ -35,7 +35,7 @@ const routes = {
   keysendOrPrompt: webln.keysendOrPrompt,
   signMessageOrPrompt: webln.signMessageOrPrompt,
   sendPayment: ln.sendPayment,
-  keySend: ln.keySend,
+  keysend: ln.keysend,
   checkPayment: ln.checkPayment,
   signMessage: ln.signMessage,
   verifyMessage: ln.verifyMessage,

@@ -261,7 +261,7 @@ class Galoy implements Connector {
     return result;
   }
 
-  async keySend(args: KeysendArgs): Promise<SendPaymentResponse> {
+  async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
     throw new Error("not supported");
   }
 

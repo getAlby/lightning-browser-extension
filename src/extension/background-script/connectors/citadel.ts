@@ -70,7 +70,7 @@ class CitadelConnector implements Connector {
       },
     };
   }
-  async keySend(args: KeysendArgs): Promise<SendPaymentResponse> {
+  async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
     throw new Error("not supported");
   }
   async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {

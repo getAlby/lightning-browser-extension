@@ -135,7 +135,7 @@ export default class LndHub implements Connector {
       },
     };
   }
-  async keySend(args: KeysendArgs): Promise<SendPaymentResponse> {
+  async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
     //hex encode the record values
     const records_hex: Record<string, string> = {};
     for (const key in args.customRecords) {

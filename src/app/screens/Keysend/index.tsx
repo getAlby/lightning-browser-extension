@@ -31,7 +31,7 @@ function Keysend(props: Props) {
     try {
       setLoading(true);
       const payment = await utils.call(
-        "keySend",
+        "keysend",
         { destination, amount, customRecords },
         {
           origin: {

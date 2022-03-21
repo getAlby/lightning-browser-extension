@@ -5,7 +5,7 @@ import state from "../../state";
 import utils from "../../../../common/lib/utils";
 
 export default async function keysend(message: Message) {
-  PubSub.publish(`ln.keySend.start`, message);
+  PubSub.publish(`ln.keysend.start`, message);
   const { destination, amount, customRecords } = message.args;
   if (typeof destination !== "string" || typeof amount !== "string") {
     return {
@@ -17,7 +17,7 @@ export default async function keysend(message: Message) {
 
   let response;
   try {
-    response = await connector.keySend({
+    response = await connector.keysend({
       pubkey: destination,
       amount: parseInt(amount),
       customRecords: customRecords as Record<string, string>,

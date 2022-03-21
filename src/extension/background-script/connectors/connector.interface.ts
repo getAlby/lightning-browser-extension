@@ -92,7 +92,7 @@ export default interface Connector {
   getBalance(): Promise<GetBalanceResponse>;
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse>;
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse>;
-  keySend(args: KeysendArgs): Promise<SendPaymentResponse>;
+  keysend(args: KeysendArgs): Promise<SendPaymentResponse>;
   checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse>;
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse>;
   verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse>;
