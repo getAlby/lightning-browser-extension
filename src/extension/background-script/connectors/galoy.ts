@@ -51,10 +51,9 @@ class Galoy implements Connector {
     };
     return this.request(query).then(({ data, errors }) => {
       const errs = errors || data.me.errors;
-      if (errs && errs.length)
-        return {
-          error: errs[0].message || JSON.stringify(errs),
-        };
+      if (errs && errs.length) {
+        throw new Error(errs[0].message || JSON.stringify(errs));
+      }
 
       const alias = data.me.username
         ? data.me.username.substr(0, 10)
@@ -85,21 +84,22 @@ class Galoy implements Connector {
     };
     return this.request(query).then(({ data, errors }) => {
       const errs = errors || data.me.errors;
-      if (errs && errs.length)
-        return {
-          error: errs[0].message || JSON.stringify(errs),
-        };
+      if (errs && errs.length) {
+        throw new Error(errs[0].message || JSON.stringify(errs));
+      }
 
       const { defaultWalletId, wallets }: GaloyDefaultAccount =
         data.me.defaultAccount;
       const defaultWallet = wallets.find((w) => w.id === defaultWalletId);
-      return defaultWallet
-        ? {
-            data: {
-              balance: defaultWallet.balance,
-            },
-          }
-        : { error: "Valid wallet not found" };
+      if (defaultWallet) {
+        return {
+          data: {
+            balance: defaultWallet.balance,
+          },
+        };
+      } else {
+        throw new Error("Valid wallet not found");
+      }
     });
   }
 
@@ -130,20 +130,15 @@ class Galoy implements Connector {
 
     return this.request(query).then(({ data, errors }) => {
       const errs = errors || data.lnInvoicePaymentSend.errors;
-      if (errs && errs.length)
-        return {
-          error: errs[0].message || JSON.stringify(errs),
-        };
+      if (errs && errs.length) {
+        throw new Error(errs[0].message || JSON.stringify(errs));
+      }
 
       switch (data.lnInvoicePaymentSend.status) {
         case "ALREADY_PAID":
-          return {
-            error: "Invoice was already paid.",
-          };
+          throw new Error("Invoice was already paid.");
         case "FAILURE":
-          return {
-            error: "Payment failed.",
-          };
+          throw new Error("Payment failed.");
         case "PENDING":
           return {
             data: {
@@ -220,10 +215,9 @@ class Galoy implements Connector {
 
       result = await this.request(query).then(({ data, errors }) => {
         const errs = errors || data.me.errors;
-        if (errs && errs.length)
-          return {
-            error: errs[0].message || JSON.stringify(errs),
-          };
+        if (errs && errs.length) {
+          throw new Error(errs[0].message || JSON.stringify(errs));
+        }
 
         const account: GaloyTransactionsAccount = data.me.defaultAccount;
         const wallet = account.wallets.find(
@@ -232,15 +226,11 @@ class Galoy implements Connector {
 
         // There should always be a wallet that corresponds to 'defaultWalletId'
         if (wallet === undefined) {
-          return {
-            error: "Bad data received.",
-          };
+          throw new Error("Bad data received.");
         }
 
         if (wallet.walletCurrency !== "BTC") {
-          return {
-            error: "Non-BTC wallets not implemented yet.",
-          };
+          throw new Error("Non-BTC wallets not implemented yet.");
         }
 
         const txEdges = wallet.transactions.edges;
@@ -259,9 +249,9 @@ class Galoy implements Connector {
         }
 
         if (!wallet.transactions.pageInfo.hasNextPage) {
-          return {
-            error: `Transaction not found for payment hash: ${args.paymentHash}`,
-          };
+          throw new Error(
+            `Transaction not found for payment hash: ${args.paymentHash}`
+          );
         }
 
         lastSeenCursor = txEdges[txEdges.length - 1].cursor;
@@ -312,10 +302,9 @@ class Galoy implements Connector {
     };
     return this.request(query).then(({ data, errors }) => {
       const errs = errors || data.lnInvoiceCreate.errors;
-      if (errs && errs.length)
-        return {
-          error: errs[0].message || JSON.stringify(errs),
-        };
+      if (errs && errs.length) {
+        throw new Error(errs[0].message || JSON.stringify(errs));
+      }
 
       return {
         data: {
