@@ -18,7 +18,7 @@ export default function ConnectRaspiBlitz() {
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
       ...formData,
-      [event.target.name]: event.target.value.trim(),
+      [event.target.name]: `https://${event.target.value.trim()}:8080`,
     });
   }
 
@@ -93,16 +93,14 @@ export default function ConnectRaspiBlitz() {
             <br />
             Copy your <b>.onion</b> address.
             <br />
-            Add <b>https://</b> at the beginning and <b>:8080</b> at the end.
-            <br />
             Paste the URL in the input below.
           </p>
           <div className="w-4/5">
             <div className="mt-6">
               <TextField
                 id="url"
-                label="REST API host and port"
-                placeholder="https://your-node-url:8080"
+                label="REST API host"
+                placeholder="your-node-url"
                 pattern="https://.+"
                 title="https://your-node-url:8080"
                 onChange={handleChange}
