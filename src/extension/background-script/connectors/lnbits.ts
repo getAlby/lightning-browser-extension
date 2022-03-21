@@ -84,7 +84,11 @@ class LnBits implements Connector {
       .then((data) => {
         // TODO: how do we get the total amount here??
         return this.checkPayment({ paymentHash: data.payment_hash }).then(
-          ({ data: checkData }) => {
+          (response) => {
+            if ("error" in response) {
+              throw new Error(response.error);
+            }
+            const { data: checkData } = response;
             return {
               data: {
                 preimage: checkData?.preimage || "",
