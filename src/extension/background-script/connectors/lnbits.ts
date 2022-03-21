@@ -87,7 +87,7 @@ class LnBits implements Connector {
           ({ data: checkData }) => {
             return {
               data: {
-                preimage: checkData.preimage || "",
+                preimage: checkData?.preimage || "",
                 paymentHash: data.payment_hash,
                 route: { total_amt: amountInSats, total_fees: 0 },
               },

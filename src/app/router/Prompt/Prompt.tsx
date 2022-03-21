@@ -2,6 +2,13 @@ import { Component } from "react";
 import qs from "query-string";
 import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 
+import type {
+  LNURLAuthServiceResponse,
+  LNURLPayServiceResponse,
+  LNURLWithdrawServiceResponse,
+  OriginData,
+  RequestInvoiceArgs,
+} from "../../../types";
 import { AuthProvider } from "../../context/AuthContext";
 import RequireAuth from "../RequireAuth";
 import Unlock from "../../screens/Unlock";
@@ -11,20 +18,26 @@ import ConfirmSignMessage from "../../screens/ConfirmSignMessage";
 import ConfirmPayment from "../../screens/ConfirmPayment";
 import LNURLPay from "../../screens/LNURLPay";
 import LNURLAuth from "../../screens/LNURLAuth";
+import LNURLWithdraw from "../../screens/LNURLWithdraw";
 
-class Prompt extends Component {
-  constructor(props) {
+class Prompt extends Component<
+  Record<string, unknown>,
+  { origin: OriginData; args: Record<string, unknown>; type: string }
+> {
+  constructor(props: Record<string, unknown>) {
     super(props);
     const message = qs.parse(window.location.search);
-    let origin = {};
+    let origin = {} as OriginData;
     let args = {};
-    if (message.origin) {
+    let type = "";
+    if (message.origin && typeof message.origin === "string") {
       origin = JSON.parse(message.origin);
     }
-    if (message.args) {
+    if (message.args && typeof message.args === "string") {
       args = JSON.parse(message.args);
     }
-    this.state = { origin, args, type: message.type };
+    if (typeof message.type === "string") type = message.type;
+    this.state = { origin, args, type };
   }
 
   render() {
@@ -49,19 +62,35 @@ class Prompt extends Component {
                 element={<Enable origin={this.state.origin} />}
               />
               <Route
-                path="lnurlPay"
+                path="lnurlAuth"
                 element={
-                  <LNURLPay
-                    details={this.state.args?.lnurlDetails}
+                  <LNURLAuth
+                    details={
+                      this.state.args?.lnurlDetails as LNURLAuthServiceResponse
+                    }
                     origin={this.state.origin}
                   />
                 }
               />
               <Route
-                path="lnurlAuth"
+                path="lnurlPay"
                 element={
-                  <LNURLAuth
-                    details={this.state.args?.lnurlDetails}
+                  <LNURLPay
+                    details={
+                      this.state.args?.lnurlDetails as LNURLPayServiceResponse
+                    }
+                    origin={this.state.origin}
+                  />
+                }
+              />
+              <Route
+                path="lnurlWithdraw"
+                element={
+                  <LNURLWithdraw
+                    details={
+                      this.state.args
+                        ?.lnurlDetails as LNURLWithdrawServiceResponse
+                    }
                     origin={this.state.origin}
                   />
                 }
@@ -70,7 +99,9 @@ class Prompt extends Component {
                 path="makeInvoice"
                 element={
                   <MakeInvoice
-                    invoiceAttributes={this.state.args.invoiceAttributes}
+                    invoiceAttributes={
+                      this.state.args.invoiceAttributes as RequestInvoiceArgs
+                    }
                     origin={this.state.origin}
                   />
                 }
@@ -79,7 +110,7 @@ class Prompt extends Component {
                 path="confirmPayment"
                 element={
                   <ConfirmPayment
-                    paymentRequest={this.state.args?.paymentRequest}
+                    paymentRequest={this.state.args?.paymentRequest as string}
                     origin={this.state.origin}
                   />
                 }
@@ -88,7 +119,7 @@ class Prompt extends Component {
                 path="confirmSignMessage"
                 element={
                   <ConfirmSignMessage
-                    message={this.state.args?.message}
+                    message={this.state.args?.message as string}
                     origin={this.state.origin}
                   />
                 }

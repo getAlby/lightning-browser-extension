@@ -3,8 +3,14 @@ import LinkButton from "../../../components/LinkButton";
 import lnbits from "/static/assets/icons/lnbits.png";
 import lndhub from "/static/assets/icons/lndhub.png";
 import lnd from "/static/assets/icons/lnd.png";
+import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.jpg";
+import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
 import eclair from "/static/assets/icons/eclair.jpg";
 import alby from "/static/assets/icons/alby.png";
+import umbrel from "/static/assets/icons/umbrel.png";
+import start9 from "/static/assets/icons/start9.png";
+import citadel from "/static/assets/icons/citadel.png";
+import mynode from "/static/assets/icons/mynode.png";
 
 type Props = {
   title: string;
@@ -13,6 +19,12 @@ type Props = {
 
 export default function ChooseConnector({ title, description }: Props) {
   const connectors = [
+    {
+      to: "create-wallet",
+      title: "Create a new wallet",
+      description: "We create and manage a lightning wallet for you",
+      logo: alby,
+    },
     {
       to: "lnd",
       title: "LND",
@@ -38,15 +50,45 @@ export default function ChooseConnector({ title, description }: Props) {
       logo: eclair,
     },
     {
-      to: "create-wallet",
-      title: "Create a new wallet",
-      description: "We create and manage a lightning wallet for you",
-      logo: alby,
+      to: "citadel",
+      title: "Citadel",
+      description: "Connect to your local Citadel",
+      logo: citadel,
+    },
+    {
+      to: "umbrel",
+      title: "Umbrel",
+      description: "Connect to your Umbrel",
+      logo: umbrel,
+    },
+    {
+      to: "mynode",
+      title: "myNode",
+      description: "Connect to your myNode",
+      logo: mynode,
+    },
+    {
+      to: "start9",
+      title: "Start9",
+      description: "Connect to your Embassy",
+      logo: start9,
+    },
+    {
+      to: "galoy-bitcoin-beach",
+      title: "Bitcoin Beach Wallet",
+      description: "Create or connect to a Bitcoin Beach (Galoy) account",
+      logo: galoyBitcoinBeach,
+    },
+    {
+      to: "galoy-bitcoin-jungle",
+      title: "Bitcoin Jungle Wallet",
+      description: "Create or connect to a Bitcoin Jungle (Galoy) account",
+      logo: galoyBitcoinJungle,
     },
   ];
 
   return (
-    <div className="relative mt-14 lg:grid  lg:gap-8 text-center">
+    <div className="relative my-14 lg:grid  lg:gap-8 text-center">
       <div className="relative">
         <div className="mb-6">
           <h1 className="text-3xl font-bold dark:text-white">{title}</h1>

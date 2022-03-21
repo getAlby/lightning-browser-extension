@@ -14,8 +14,8 @@ import { useAuth } from "../../context/AuthContext";
 import TextField from "../../components/Form/TextField";
 
 export type Props = {
-  origin: OriginData;
-  paymentRequest: string;
+  origin?: OriginData;
+  paymentRequest?: string;
 };
 
 function ConfirmPayment(props: Props) {

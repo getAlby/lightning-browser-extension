@@ -1,7 +1,5 @@
 # #### This all good standard ###
 
-.nova
-
 # Logs
 logs
 *.log
@@ -132,3 +130,12 @@ dist/
 .pnp.*
 
 keys.json
+
+# Editor directories and files
+.idea
+.nova
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

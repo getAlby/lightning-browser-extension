@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
 import Button from "../components/Button";
-import Input from "../components/Form/Input";
-import PaymentSummary from "../components/PaymentSummary";
+import TextField from "../components/Form/TextField";
 import PublisherCard from "../components/PublisherCard";
 import msg from "../../common/lib/msg";
-import utils from "../../common/lib/utils";
+import type { RequestInvoiceArgs } from "../../types";
+import api from "../../common/lib/api";
 
 type Origin = {
   name: string;
@@ -13,14 +13,7 @@ type Origin = {
 };
 
 type Props = {
-  invoiceAttributes: {
-    amount?: string | number;
-    defaultAmount?: string | number;
-    minimumAmount?: string | number;
-    maximumAmount?: string | number;
-    defaultMemo?: string;
-    memo?: string;
-  };
+  invoiceAttributes: RequestInvoiceArgs;
   origin: Origin;
 };
 
@@ -28,7 +21,7 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState(invoiceAttributes.defaultAmount);
   const [memo, setMemo] = useState(
-    invoiceAttributes.defaultMemo || invoiceAttributes.memo
+    invoiceAttributes.defaultMemo || invoiceAttributes.memo || ""
   );
   const [error, setError] = useState("");
 
@@ -53,9 +46,10 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
   }
 
   async function confirm() {
+    if (!value) return;
     try {
       setLoading(true);
-      const response = await utils.call("makeInvoice", {
+      const response = await api.makeInvoice({
         amount: value,
         memo: memo,
       });
@@ -78,50 +72,54 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
 
       <div className="p-4">
         <div className="mb-8">
-          <PaymentSummary
-            amount={
-              <div className="mt-1 flex flex-col">
-                <Input
-                  type="number"
-                  min={invoiceAttributes.minimumAmount}
-                  max={invoiceAttributes.maximumAmount}
-                  value={value}
-                  onChange={(e) => handleValueChange(e.target.value)}
-                />
-                {invoiceAttributes.minimumAmount &&
-                  invoiceAttributes.maximumAmount && (
-                    <div className="flex space-x-1.5 mt-2">
-                      <Button
-                        fullWidth
-                        label="100 sat⚡"
-                        onClick={() => handleValueChange("100")}
-                      />
-                      <Button
-                        fullWidth
-                        label="1K sat⚡"
-                        onClick={() => handleValueChange("1000")}
-                      />
-                      <Button
-                        fullWidth
-                        label="5K sat⚡"
-                        onClick={() => handleValueChange("5000")}
-                      />
-                      <Button
-                        fullWidth
-                        label="10K sat⚡"
-                        onClick={() => handleValueChange("10000")}
-                      />
-                    </div>
-                  )}
-                {error && <p className="mt-1 text-red-500">{error}</p>}
-              </div>
-            }
-            description={
-              <div className="mt-1 flex flex-col">
-                <Input type="text" value={memo} onChange={handleMemoChange} />
-              </div>
-            }
-          />
+          <div className="p-4 shadow bg-white border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600">
+            <div>
+              <TextField
+                id="amount"
+                label="Amount"
+                type="number"
+                min={invoiceAttributes.minimumAmount}
+                max={invoiceAttributes.maximumAmount}
+                value={value}
+                onChange={(e) => handleValueChange(e.target.value)}
+              />
+              {invoiceAttributes.minimumAmount &&
+                invoiceAttributes.maximumAmount && (
+                  <div className="flex space-x-1.5 mt-2">
+                    <Button
+                      fullWidth
+                      label="100 sat⚡"
+                      onClick={() => handleValueChange("100")}
+                    />
+                    <Button
+                      fullWidth
+                      label="1K sat⚡"
+                      onClick={() => handleValueChange("1000")}
+                    />
+                    <Button
+                      fullWidth
+                      label="5K sat⚡"
+                      onClick={() => handleValueChange("5000")}
+                    />
+                    <Button
+                      fullWidth
+                      label="10K sat⚡"
+                      onClick={() => handleValueChange("10000")}
+                    />
+                  </div>
+                )}
+              {error && <p className="mt-1 text-red-500">{error}</p>}
+            </div>
+
+            <div className="mt-4">
+              <TextField
+                id="memo"
+                label="Description"
+                value={memo}
+                onChange={handleMemoChange}
+              />
+            </div>
+          </div>
         </div>
 
         <div className="text-center">
