@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig, Method } from "axios";
 import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
@@ -18,7 +18,6 @@ import Connector, {
   VerifyMessageArgs,
   VerifyMessageResponse,
 } from "./connector.interface";
-import { AxiosRequestConfig, Method } from "axios";
 
 interface Config {
   login: string;

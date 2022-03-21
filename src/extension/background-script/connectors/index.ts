@@ -5,6 +5,8 @@ import NativeLndHub from "./nativelndhub";
 import LnBits from "./lnbits";
 import Galoy from "./galoy";
 import Eclair from "./eclair";
+import Citadel from "./citadel";
+import NativeCitadel from "./nativecitadel";
 
 /*
 const initialize = (account, password) => {
@@ -22,6 +24,8 @@ const connectors = {
   lnbits: LnBits,
   galoy: Galoy,
   eclair: Eclair,
+  citadel: Citadel,
+  nativecitadel: NativeCitadel,
 };
 
 export default connectors;

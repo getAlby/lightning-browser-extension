@@ -1,5 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npx lint-staged
-npx tsc --noEmit
+yarn lint-staged
+yarn tsc --noEmit

@@ -1,8 +1,14 @@
 import connectors from "./extension/background-script/connectors";
 
+export type ConnectorType = keyof typeof connectors;
+
+// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652
+// align Message-Types
+// Where is this used? Do we still need this if 652 is solved?
 export interface Account {
-  connector: keyof typeof connectors;
-  config: string;
+  id: string;
+  connector: ConnectorType;
+  config: string | Record<string, unknown>;
   name: string;
 }
 
@@ -48,9 +54,14 @@ export interface Battery extends OriginData {
   icon: string;
 }
 
+// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652
+// align Message-Types
 export interface Message {
   args: Record<string, unknown>;
   origin: OriginData;
+  application?: string;
+  prompt?: boolean;
+  type?: string;
 }
 
 interface LNURLChannelServiceResponse {
@@ -78,14 +89,14 @@ export interface LNURLPayServiceResponse {
   commentAllowed: number;
 }
 
-interface LNURLAuthServiceResponse {
+export interface LNURLAuthServiceResponse {
   tag: "login"; // Type of LNURL
   k1: string; // (hex encoded 32 bytes of challenge) which is going to be signed by user's linkingPrivKey.
   action?: string; // optional action enum which can be one of four strings: register | login | link | auth.
   domain: string;
 }
 
-interface LNURLWithdrawServiceResponse {
+export interface LNURLWithdrawServiceResponse {
   tag: "withdrawRequest"; // type of LNURL
   callback: string; // The URL which LN SERVICE would accept a withdrawal Lightning invoice as query parameter
   k1: string; // Random or non-random string to identify the user's LN WALLET when using the callback URL
@@ -112,6 +123,15 @@ export interface LNURLPaymentSuccessAction {
 export interface LNURLPaymentInfo {
   pr: string;
   successAction?: LNURLPaymentSuccessAction;
+}
+
+export interface RequestInvoiceArgs {
+  amount?: string | number;
+  defaultAmount?: string | number;
+  minimumAmount?: string | number;
+  maximumAmount?: string | number;
+  defaultMemo?: string;
+  memo?: string;
 }
 
 export interface IBadge {
