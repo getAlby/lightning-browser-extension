@@ -76,7 +76,7 @@ const utils = {
   publishPaymentNotification: (
     message: Message,
     paymentRequestDetails: PaymentRequestDetails,
-    response: SendPaymentResponse
+    response: SendPaymentResponse | { error: string }
   ) => {
     let status = "success"; // default. let's hope for success
     if ("error" in response) {

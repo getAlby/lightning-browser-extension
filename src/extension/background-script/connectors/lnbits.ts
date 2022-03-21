@@ -80,28 +80,20 @@ class LnBits implements Connector {
     return this.request("POST", "/api/v1/payments", this.config.adminkey, {
       bolt11: args.paymentRequest,
       out: true,
-    })
-      .then((data) => {
-        // TODO: how do we get the total amount here??
-        return this.checkPayment({ paymentHash: data.payment_hash }).then(
-          (response) => {
-            if ("error" in response) {
-              throw new Error(response.error);
-            }
-            const { data: checkData } = response;
-            return {
-              data: {
-                preimage: checkData?.preimage || "",
-                paymentHash: data.payment_hash,
-                route: { total_amt: amountInSats, total_fees: 0 },
-              },
-            };
-          }
-        );
-      })
-      .catch((e) => {
-        return { error: e.message };
-      });
+    }).then((data) => {
+      // TODO: how do we get the total amount here??
+      return this.checkPayment({ paymentHash: data.payment_hash }).then(
+        ({ data: checkData }) => {
+          return {
+            data: {
+              preimage: checkData?.preimage || "",
+              paymentHash: data.payment_hash,
+              route: { total_amt: amountInSats, total_fees: 0 },
+            },
+          };
+        }
+      );
+    });
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {

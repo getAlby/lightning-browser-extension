@@ -209,9 +209,14 @@ export async function lnurlPay(message: Message) {
     request: paymentRequest,
   });
 
-  const response = await connector.sendPayment({
-    paymentRequest,
-  });
+  let response;
+  try {
+    response = await connector.sendPayment({
+      paymentRequest,
+    });
+  } catch (e) {
+    response = { error: e instanceof Error ? e.message : "" };
+  }
   utils.publishPaymentNotification(message, paymentRequestDetails, response);
   return response;
 }

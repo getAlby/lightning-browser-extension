@@ -14,42 +14,30 @@ export interface MakeInvoiceArgs {
   memo: string;
 }
 
-type ErrorResponse = {
-  error: string;
+export type MakeInvoiceResponse = {
+  data: {
+    paymentRequest: string;
+    rHash: string;
+  };
 };
 
-export type MakeInvoiceResponse =
-  | {
-      data: {
-        paymentRequest: string;
-        rHash: string;
-      };
-    }
-  | ErrorResponse;
+export type GetInfoResponse = {
+  data: WebLNNode;
+};
 
-export type GetInfoResponse =
-  | {
-      data: WebLNNode;
-    }
-  | ErrorResponse;
+export type GetBalanceResponse = {
+  data: {
+    balance: number;
+  };
+};
 
-export type GetBalanceResponse =
-  | {
-      data: {
-        balance: number;
-      };
-    }
-  | ErrorResponse;
-
-export type SendPaymentResponse =
-  | {
-      data: {
-        preimage: string;
-        paymentHash: string;
-        route: Route;
-      };
-    }
-  | ErrorResponse;
+export type SendPaymentResponse = {
+  data: {
+    preimage: string;
+    paymentHash: string;
+    route: Route;
+  };
+};
 
 export interface SendPaymentArgs {
   paymentRequest: string;
@@ -59,14 +47,12 @@ export interface CheckPaymentArgs {
   paymentHash: string;
 }
 
-export type CheckPaymentResponse =
-  | {
-      data: {
-        paid: boolean;
-        preimage?: string;
-      };
-    }
-  | ErrorResponse;
+export type CheckPaymentResponse = {
+  data: {
+    paid: boolean;
+    preimage?: string;
+  };
+};
 
 export interface SignMessageArgs {
   message: string;
