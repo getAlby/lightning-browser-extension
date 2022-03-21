@@ -32,8 +32,7 @@ async function lnurl(message: Message) {
       case "payRequest":
         return payWithPrompt(message, lnurlDetails);
       case "withdrawRequest":
-        console.log("lnurl-withdraw");
-        return;
+        return withdrawWithPrompt(message, lnurlDetails);
       default:
         return;
     }
@@ -210,11 +209,27 @@ export async function lnurlPay(message: Message) {
     request: paymentRequest,
   });
 
-  const response = await connector.sendPayment({
-    paymentRequest,
-  });
+  let response;
+  try {
+    response = await connector.sendPayment({
+      paymentRequest,
+    });
+  } catch (e) {
+    response = { error: e instanceof Error ? e.message : "" };
+  }
   utils.publishPaymentNotification(message, paymentRequestDetails, response);
   return response;
+}
+
+async function withdrawWithPrompt(
+  message: Message,
+  lnurlDetails: LNURLDetails
+) {
+  return await utils.openPrompt({
+    ...message,
+    type: "lnurlWithdraw",
+    args: { ...message.args, lnurlDetails },
+  });
 }
 
 export default lnurl;

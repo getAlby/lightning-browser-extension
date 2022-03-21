@@ -70,7 +70,7 @@ class Lnd implements Connector {
       {}
     ).then((data) => {
       if (data.payment_error) {
-        return { error: data.payment_error };
+        throw new Error(data.payment_error);
       }
       return {
         data: {
