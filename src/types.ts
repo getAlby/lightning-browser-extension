@@ -96,7 +96,7 @@ export interface LNURLAuthServiceResponse {
   domain: string;
 }
 
-interface LNURLWithdrawServiceResponse {
+export interface LNURLWithdrawServiceResponse {
   tag: "withdrawRequest"; // type of LNURL
   callback: string; // The URL which LN SERVICE would accept a withdrawal Lightning invoice as query parameter
   k1: string; // Random or non-random string to identify the user's LN WALLET when using the callback URL
