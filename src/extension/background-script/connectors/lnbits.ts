@@ -96,7 +96,7 @@ class LnBits implements Connector {
         );
       })
       .catch((e) => {
-        throw new Error(e.message);
+        return { error: e.message };
       });
   }
 
