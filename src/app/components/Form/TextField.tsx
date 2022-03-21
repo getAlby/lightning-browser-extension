@@ -6,8 +6,6 @@ const TextField = ({
   placeholder,
   type = "text",
   required = false,
-  pattern,
-  title,
   onChange,
   onFocus,
   onBlur,
@@ -32,8 +30,6 @@ const TextField = ({
         id={id}
         placeholder={placeholder}
         required={required}
-        pattern={pattern}
-        title={title}
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}

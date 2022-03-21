@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import {
@@ -7,9 +7,10 @@ import {
   PlusIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 
+import api from "../../../common/lib/api";
 import utils from "../../../common/lib/utils";
 import { useAuth } from "../../context/AuthContext";
-import { useAccounts } from "../../context/AccountsContext";
+import type { Accounts } from "../../../types";
 
 import Badge from "../Badge";
 import Menu from "../Menu";
@@ -17,12 +18,13 @@ import Menu from "../Menu";
 function AccountMenu() {
   const auth = useAuth();
   const navigate = useNavigate();
-  const { accounts, getAccounts } = useAccounts();
+  const [accounts, setAccounts] = useState<Accounts>({});
 
   useEffect(() => {
-    getAccounts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    api.getAccounts().then((response) => {
+      setAccounts(response);
+    });
+  }, [auth.account]);
 
   async function selectAccount(accountId: string) {
     auth.setAccountId(accountId);

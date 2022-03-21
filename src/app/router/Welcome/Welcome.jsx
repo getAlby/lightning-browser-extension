@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
 
 import connectorRoutes from "../connectorRoutes";
-import type { Step } from "../../components/Steps";
 
 import DevMenu from "../../components/DevMenu";
 import Steps from "../../components/Steps";
@@ -33,7 +32,7 @@ const routes = [
   { path: "/test-connection", element: <TestConnection />, name: "Done" },
 ];
 
-const initialSteps: Step[] = routes.map((route) => ({
+const initialSteps = routes.map((route) => ({
   id: route.name,
   status: "upcoming",
 }));
@@ -48,7 +47,7 @@ function WelcomeRouter() {
 
 function App() {
   const [steps, setSteps] = useState(initialSteps);
-  const location = useLocation();
+  let location = useLocation();
   const routesElement = useRoutes(routes);
 
   // Update step progress based on active location.
@@ -59,7 +58,7 @@ function App() {
       if (pathname.includes(route.path)) activeStepIndex = index;
     });
     const updatedSteps = initialSteps.map((step, index) => {
-      let status: Step["status"] = "upcoming";
+      let status = "upcoming";
       if (index < activeStepIndex) {
         status = "complete";
       } else if (index === activeStepIndex) {

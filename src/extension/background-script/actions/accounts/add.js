@@ -1,23 +1,7 @@
-import { v4 as uuidv4 } from "uuid";
-import type { Runtime } from "webextension-polyfill";
 import { encryptData } from "../../../../common/lib/crypto";
-import type { Account, OriginData } from "../../../../types";
 import state from "../../state";
 
-// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652
-// align Message-Types
-interface AddAccountMessage {
-  args: Account;
-  origin: OriginData;
-  application?: string;
-  prompt?: boolean;
-  type?: string;
-}
-
-const add = async (
-  message: AddAccountMessage,
-  _sender: Runtime.MessageSender
-) => {
+const add = async (message, sender) => {
   const newAccount = message.args;
   const accounts = state.getState().accounts;
 
@@ -27,9 +11,9 @@ const add = async (
   const password = state.getState().password;
   const currentAccountId = state.getState().currentAccountId;
 
-  if (!password) return { error: "Password is missing" };
+  const accountId = Object.keys(accounts).length + 1;
+  console.log(`Created account ${accountId}`);
 
-  const accountId = uuidv4();
   newAccount.config = encryptData(newAccount.config, password);
   accounts[accountId] = newAccount;
 

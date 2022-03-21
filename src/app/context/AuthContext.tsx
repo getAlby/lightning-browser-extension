@@ -5,7 +5,7 @@ import api from "../../common/lib/api";
 import type { AccountInfo } from "../../types";
 
 interface AuthContextType {
-  account: { id: string; alias?: string; balance?: number } | null;
+  account: { id: string } | AccountInfo | null;
   loading: boolean;
   unlock: (user: string, callback: VoidFunction) => Promise<void>;
   lock: (callback: VoidFunction) => void;
@@ -19,7 +19,7 @@ interface AuthContextType {
   fetchAccountInfo: (id?: string) => Promise<AccountInfo | undefined>;
 }
 
-const AuthContext = createContext({} as AuthContextType);
+const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [account, setAccount] = useState<AuthContextType["account"]>(null);

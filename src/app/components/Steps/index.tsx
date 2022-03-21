@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 
 export interface Step {
   id: string;
-  href?: string;
+  name: string;
+  href: string;
   status: "upcoming" | "current" | "complete";
 }
 

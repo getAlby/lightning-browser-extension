@@ -2,12 +2,6 @@ import { Component } from "react";
 import qs from "query-string";
 import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 
-import type {
-  LNURLAuthServiceResponse,
-  LNURLPayServiceResponse,
-  OriginData,
-  RequestInvoiceArgs,
-} from "../../../types";
 import { AuthProvider } from "../../context/AuthContext";
 import RequireAuth from "../RequireAuth";
 import Unlock from "../../screens/Unlock";
@@ -18,24 +12,19 @@ import ConfirmPayment from "../../screens/ConfirmPayment";
 import LNURLPay from "../../screens/LNURLPay";
 import LNURLAuth from "../../screens/LNURLAuth";
 
-class Prompt extends Component<
-  Record<string, unknown>,
-  { origin: OriginData; args: Record<string, unknown>; type: string }
-> {
-  constructor(props: Record<string, unknown>) {
+class Prompt extends Component {
+  constructor(props) {
     super(props);
     const message = qs.parse(window.location.search);
-    let origin = {} as OriginData;
+    let origin = {};
     let args = {};
-    let type = "";
-    if (message.origin && typeof message.origin === "string") {
+    if (message.origin) {
       origin = JSON.parse(message.origin);
     }
-    if (message.args && typeof message.args === "string") {
+    if (message.args) {
       args = JSON.parse(message.args);
     }
-    if (typeof message.type === "string") type = message.type;
-    this.state = { origin, args, type };
+    this.state = { origin, args, type: message.type };
   }
 
   render() {
@@ -63,9 +52,7 @@ class Prompt extends Component<
                 path="lnurlPay"
                 element={
                   <LNURLPay
-                    details={
-                      this.state.args?.lnurlDetails as LNURLPayServiceResponse
-                    }
+                    details={this.state.args?.lnurlDetails}
                     origin={this.state.origin}
                   />
                 }
@@ -74,9 +61,7 @@ class Prompt extends Component<
                 path="lnurlAuth"
                 element={
                   <LNURLAuth
-                    details={
-                      this.state.args?.lnurlDetails as LNURLAuthServiceResponse
-                    }
+                    details={this.state.args?.lnurlDetails}
                     origin={this.state.origin}
                   />
                 }
@@ -85,9 +70,7 @@ class Prompt extends Component<
                 path="makeInvoice"
                 element={
                   <MakeInvoice
-                    invoiceAttributes={
-                      this.state.args.invoiceAttributes as RequestInvoiceArgs
-                    }
+                    invoiceAttributes={this.state.args.invoiceAttributes}
                     origin={this.state.origin}
                   />
                 }
@@ -96,7 +79,7 @@ class Prompt extends Component<
                 path="confirmPayment"
                 element={
                   <ConfirmPayment
-                    paymentRequest={this.state.args?.paymentRequest as string}
+                    paymentRequest={this.state.args?.paymentRequest}
                     origin={this.state.origin}
                   />
                 }
@@ -105,7 +88,7 @@ class Prompt extends Component<
                 path="confirmSignMessage"
                 element={
                   <ConfirmSignMessage
-                    message={this.state.args?.message as string}
+                    message={this.state.args?.message}
                     origin={this.state.origin}
                   />
                 }

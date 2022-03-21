@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import utils from "../../../../common/lib/utils";
 import api from "../../../../common/lib/api";
 import { useAuth } from "../../../context/AuthContext";
-import { useAccounts } from "../../../context/AccountsContext";
 
 import Button from "../../../components/Button";
 import Card from "../../../components/Card";
@@ -12,7 +11,6 @@ import Loading from "../../../components/Loading";
 
 export default function TestConnection() {
   const auth = useAuth();
-  const { getAccounts } = useAccounts();
   const [accountInfo, setAccountInfo] =
     useState<{ alias: string; balance: number }>();
   const [errorMessage, setErrorMessage] = useState("");
@@ -21,19 +19,13 @@ export default function TestConnection() {
   const navigate = useNavigate();
 
   function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
-    utils.call("deleteAccount").then(() => {
+    utils.call("removeAccount").then(() => {
       navigate(-1);
     });
   }
 
   async function loadAccountInfo() {
     setLoading(true);
-    // show an error message after 45 seconds. Then probably something is wrong
-    const timer = setTimeout(() => {
-      setErrorMessage(
-        "Trying to connect takes longer than expected... Are you details correct? Is your node reachable?"
-      );
-    }, 45000);
     try {
       const { currentAccountId } = await api.getStatus();
       auth.setAccountId(currentAccountId);
@@ -44,7 +36,6 @@ export default function TestConnection() {
           balance: accountInfo.balance,
         });
       }
-      getAccounts();
     } catch (e) {
       console.log(e);
       if (e instanceof Error) {
@@ -52,7 +43,6 @@ export default function TestConnection() {
       }
     } finally {
       setLoading(false);
-      clearTimeout(timer);
     }
   }
 
@@ -71,22 +61,8 @@ export default function TestConnection() {
                 <h1 className="text-3xl font-bold dark:text-white">
                   Connection Error
                 </h1>
-                <p className="text-gray-500 dark:text-white">
-                  Please review your connection details.
-                </p>
-
-                <p className="text-gray-500 dark:text-grey-500 mt-4 mb-4">
-                  <i>{errorMessage}</i>
-                </p>
-
-                <Button
-                  label="Delete invalid account and edit again"
-                  onClick={handleEdit}
-                  primary
-                />
-                <p className="text-gray-500 dark:text-white">
-                  If you need help please contact support@getalby.com
-                </p>
+                <p className="dark:text-gray-500">{errorMessage}</p>
+                <Button label="Edit" onClick={handleEdit} primary />
               </div>
             )}
 
@@ -124,8 +100,7 @@ export default function TestConnection() {
               <div>
                 <Loading />
                 <p className="text-gray-500 dark:text-white mt-6">
-                  Initializing your account. <br />
-                  Please wait, this can take a minute
+                  Initializing your account. Please wait, this can take a minute
                 </p>
               </div>
             )}

@@ -87,7 +87,6 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             <TextField
               id="budget"
               label="Budget"
-              autoFocus
               placeholder="sat"
               value={budget}
               type="number"

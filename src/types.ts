@@ -1,14 +1,8 @@
 import connectors from "./extension/background-script/connectors";
 
-export type ConnectorType = keyof typeof connectors;
-
-// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652
-// align Message-Types
-// Where is this used? Do we still need this if 652 is solved?
 export interface Account {
-  id: string;
-  connector: ConnectorType;
-  config: string | Record<string, unknown>;
+  connector: keyof typeof connectors;
+  config: string;
   name: string;
 }
 
@@ -54,14 +48,9 @@ export interface Battery extends OriginData {
   icon: string;
 }
 
-// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652
-// align Message-Types
 export interface Message {
   args: Record<string, unknown>;
   origin: OriginData;
-  application?: string;
-  prompt?: boolean;
-  type?: string;
 }
 
 interface LNURLChannelServiceResponse {
@@ -89,7 +78,7 @@ export interface LNURLPayServiceResponse {
   commentAllowed: number;
 }
 
-export interface LNURLAuthServiceResponse {
+interface LNURLAuthServiceResponse {
   tag: "login"; // Type of LNURL
   k1: string; // (hex encoded 32 bytes of challenge) which is going to be signed by user's linkingPrivKey.
   action?: string; // optional action enum which can be one of four strings: register | login | link | auth.
@@ -123,15 +112,6 @@ export interface LNURLPaymentSuccessAction {
 export interface LNURLPaymentInfo {
   pr: string;
   successAction?: LNURLPaymentSuccessAction;
-}
-
-export interface RequestInvoiceArgs {
-  amount?: string | number;
-  defaultAmount?: string | number;
-  minimumAmount?: string | number;
-  maximumAmount?: string | number;
-  defaultMemo?: string;
-  memo?: string;
 }
 
 export interface IBadge {

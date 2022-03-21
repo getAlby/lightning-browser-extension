@@ -4,8 +4,6 @@ export default function Input({
   placeholder,
   type = "text",
   required = false,
-  pattern,
-  title,
   onChange,
   onFocus,
   onBlur,
@@ -24,8 +22,6 @@ export default function Input({
       className="shadow-sm focus:ring-orange-bitcoin focus:border-orange-bitcoin block w-full sm:text-sm border-gray-300 rounded-md placeholder-gray-400 dark:bg-gray-200 dark:placeholder-gray-600 dark:text-black"
       placeholder={placeholder}
       required={required}
-      pattern={pattern}
-      title={title}
       onChange={onChange}
       onFocus={onFocus}
       onBlur={onBlur}
