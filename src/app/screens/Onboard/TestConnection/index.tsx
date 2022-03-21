@@ -56,8 +56,8 @@ export default function TestConnection() {
   function claimSats(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     setFaucetLoading(true);
-    utils
-      .call("makeInvoice", { amount: faucetAmount, memo: faucetMemo })
+    api
+      .makeInvoice({ amount: faucetAmount, memo: faucetMemo })
       .then((invoice) => {
         axios
           .post(faucetURL, {

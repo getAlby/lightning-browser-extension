@@ -5,6 +5,7 @@ import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import type {
   LNURLAuthServiceResponse,
   LNURLPayServiceResponse,
+  LNURLWithdrawServiceResponse,
   OriginData,
   RequestInvoiceArgs,
 } from "../../../types";
@@ -17,6 +18,7 @@ import ConfirmSignMessage from "../../screens/ConfirmSignMessage";
 import ConfirmPayment from "../../screens/ConfirmPayment";
 import LNURLPay from "../../screens/LNURLPay";
 import LNURLAuth from "../../screens/LNURLAuth";
+import LNURLWithdraw from "../../screens/LNURLWithdraw";
 
 class Prompt extends Component<
   Record<string, unknown>,
@@ -60,6 +62,17 @@ class Prompt extends Component<
                 element={<Enable origin={this.state.origin} />}
               />
               <Route
+                path="lnurlAuth"
+                element={
+                  <LNURLAuth
+                    details={
+                      this.state.args?.lnurlDetails as LNURLAuthServiceResponse
+                    }
+                    origin={this.state.origin}
+                  />
+                }
+              />
+              <Route
                 path="lnurlPay"
                 element={
                   <LNURLPay
@@ -71,11 +84,12 @@ class Prompt extends Component<
                 }
               />
               <Route
-                path="lnurlAuth"
+                path="lnurlWithdraw"
                 element={
-                  <LNURLAuth
+                  <LNURLWithdraw
                     details={
-                      this.state.args?.lnurlDetails as LNURLAuthServiceResponse
+                      this.state.args
+                        ?.lnurlDetails as LNURLWithdrawServiceResponse
                     }
                     origin={this.state.origin}
                   />

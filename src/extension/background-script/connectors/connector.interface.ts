@@ -10,7 +10,7 @@ interface Route {
 }
 
 export interface MakeInvoiceArgs {
-  amount: number;
+  amount: string | number;
   memo: string;
 }
 

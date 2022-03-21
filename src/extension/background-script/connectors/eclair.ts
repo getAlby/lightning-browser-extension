@@ -132,7 +132,7 @@ class Eclair implements Connector {
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
     const res = await this.request("/createinvoice", {
       description: args.memo,
-      amountMsat: args.amount * 1000,
+      amountMsat: +args.amount * 1000,
     });
 
     return {
