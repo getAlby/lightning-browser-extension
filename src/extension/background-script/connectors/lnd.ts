@@ -1,4 +1,6 @@
+import CryptoJS from "crypto-js";
 import Base64 from "crypto-js/enc-base64";
+import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
 import SHA256 from "crypto-js/sha256";
 import utils from "../../../common/lib/utils";
@@ -86,19 +88,18 @@ class Lnd implements Connector {
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
     //See: https://gist.github.com/dellagustin/c3793308b75b6b0faf134e64db7dc915
     const dest_pubkey_hex = args.pubkey;
-    const dest_pubkey_base64 = Buffer.from(dest_pubkey_hex, "hex").toString(
-      "base64"
-    );
+    const dest_pubkey_base64 = Hex.parse(dest_pubkey_hex).toString(Base64);
 
-    const preimage_base64 = Buffer.from(utils.randomHex(32)).toString("base64");
-    const hash = Base64.stringify(SHA256(Base64.parse(preimage_base64)));
+    const preimage = CryptoJS.lib.WordArray.random(32);
+    const preimage_base64 = preimage.toString(Base64);
+    const hash = SHA256(preimage).toString(Base64);
 
     //base64 encode the record values
     const records_base64: Record<string, string> = {};
     for (const key in args.customRecords) {
-      records_base64[key] = Buffer.from(args.customRecords[key]).toString(
-        "base64"
-      );
+      records_base64[key] = CryptoJS.enc.Utf8.parse(
+        args.customRecords[key]
+      ).toString(Base64);
     }
     //mandatory record for keysend
     records_base64["5482373484"] = preimage_base64;
