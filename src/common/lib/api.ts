@@ -76,10 +76,7 @@ export const getPayments = (options: { limit: number }) =>
 export const getSettings = () => utils.call<SettingsStorage>("getSettings");
 export const getStatus = () => utils.call<StatusRes>("status");
 export const makeInvoice = ({ amount, memo }: MakeInvoiceArgs) =>
-  utils.call<MakeInvoiceResponse["data"]>("makeInvoice", {
-    amount,
-    memo,
-  });
+  utils.call<MakeInvoiceResponse["data"]>("makeInvoice", { amount, memo });
 export const setSetting = (
   setting: Record<string, string | number | boolean>
 ) =>
