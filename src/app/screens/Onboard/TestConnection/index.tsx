@@ -56,8 +56,8 @@ export default function TestConnection() {
   function claimSats(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     setFaucetLoading(true);
-    utils
-      .call("makeInvoice", { amount: faucetAmount, memo: faucetMemo })
+    api
+      .makeInvoice({ amount: faucetAmount, memo: faucetMemo })
       .then((invoice) => {
         axios
           .post(faucetURL, {
@@ -116,13 +116,15 @@ export default function TestConnection() {
         overlayClassName="bg-black bg-opacity-25 fixed inset-0"
         className="absolute rounded-lg bg-white w-full max-w-lg"
       >
-        <div className="p-5 flex justify-between">
-          <h2 className="text-2xl font-bold">Get some Satoshi</h2>
+        <div className="p-5 flex justify-between dark:bg-gray-800">
+          <h2 className="text-2xl font-bold dark:text-white">
+            Get some Satoshi
+          </h2>
           <button onClick={closeFaucet}>
-            <CrossIcon className="w-6 h-6" />
+            <CrossIcon className="w-6 h-6 dark:text-white" />
           </button>
         </div>
-        <div className="p-5 border-t border-b border-gray-200">
+        <div className="p-5 border-t border-b border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200">
           <p className="mb-2">
             To get started we send {faucetAmount} sat to your wallet.
             <br />
@@ -140,7 +142,7 @@ export default function TestConnection() {
             />
           </div>
         </div>
-        <div className="flex justify-end p-5">
+        <div className="flex justify-end p-5 dark:bg-gray-800">
           {faucetLoading ? (
             <Loading />
           ) : (

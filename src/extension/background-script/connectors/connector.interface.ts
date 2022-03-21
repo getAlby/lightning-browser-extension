@@ -10,36 +10,34 @@ interface Route {
 }
 
 export interface MakeInvoiceArgs {
-  amount: number;
+  amount: string | number;
   memo: string;
 }
 
-export interface MakeInvoiceResponse {
+export type MakeInvoiceResponse = {
   data: {
     paymentRequest: string;
     rHash: string;
   };
-}
+};
 
-export interface GetInfoResponse {
+export type GetInfoResponse = {
   data: WebLNNode;
-}
+};
 
-export interface GetBalanceResponse {
+export type GetBalanceResponse = {
   data: {
     balance: number;
   };
-}
+};
 
-export type SendPaymentResponse =
-  | {
-      data: {
-        preimage: string;
-        paymentHash: string;
-        route: Route;
-      };
-    }
-  | { error: string };
+export type SendPaymentResponse = {
+  data: {
+    preimage: string;
+    paymentHash: string;
+    route: Route;
+  };
+};
 
 export interface SendPaymentArgs {
   paymentRequest: string;
@@ -49,12 +47,12 @@ export interface CheckPaymentArgs {
   paymentHash: string;
 }
 
-export interface CheckPaymentResponse {
+export type CheckPaymentResponse = {
   data: {
     paid: boolean;
     preimage?: string;
   };
-}
+};
 
 export interface SignMessageArgs {
   message: string;
