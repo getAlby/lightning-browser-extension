@@ -137,6 +137,11 @@ export default class LndHub implements Connector {
     };
   }
   async keySend(args: KeysendArgs): Promise<SendPaymentResponse> {
+    //hex encode the record values
+    const records_hex: Record<string, string> = {};
+    for (const key in args.customRecords) {
+      records_hex[key] = Buffer.from(args.customRecords[key]).toString("hex");
+    }
     const data = await this.request<{
       error: string;
       message: string;
@@ -157,7 +162,7 @@ export default class LndHub implements Connector {
     }>("POST", "/keysend", {
       destination: args.pubkey,
       amount: args.amount,
-      dest_custom_records: args.customRecords,
+      dest_custom_records: records_hex,
     });
     if (data.error) {
       return { error: data.message };
