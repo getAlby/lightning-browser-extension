@@ -49,11 +49,8 @@ export type SendPaymentResponse =
 
 export interface SendPaymentArgs {
   paymentRequest: string;
-  offer: string;
-  pubkey: string;
-  amount: number;
-  memo: string;
 }
+
 export interface KeysendArgs {
   pubkey: string;
   amount: number;

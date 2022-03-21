@@ -211,10 +211,6 @@ export async function lnurlPay(message: Message) {
 
   const response = await connector.sendPayment({
     paymentRequest,
-    offer: "",
-    pubkey: "",
-    amount: 0,
-    memo: "",
   });
   utils.publishPaymentNotification(message, paymentRequestDetails, response);
   return response;

@@ -5,7 +5,6 @@ import { Message } from "../../../../types";
 
 import db from "../../db";
 import sendPayment from "../ln/sendPayment";
-import sendPaymentKeySend from "../ln/keySend";
 
 const sendPaymentOrPrompt = async (message: Message) => {
   const paymentRequest = message.args.paymentRequest;
@@ -19,9 +18,9 @@ const sendPaymentOrPrompt = async (message: Message) => {
     request: paymentRequest,
   });
   if (await checkAllowance(message.origin.host, paymentRequestDetails.tokens)) {
-    return sendPaymentWithAllowance(message, false);
+    return sendPaymentWithAllowance(message);
   } else {
-    return payWithPrompt(message, "confirmPayment");
+    return payWithPrompt(message);
   }
 };
 
@@ -34,15 +33,10 @@ async function checkAllowance(host: string, amount: number) {
   return allowance && allowance.remainingBudget >= amount;
 }
 
-async function sendPaymentWithAllowance(message: Message, keysend: boolean) {
+async function sendPaymentWithAllowance(message: Message) {
   try {
-    if (keysend) {
-      const response = await sendPaymentKeySend(message);
-      return response;
-    } else {
-      const response = await sendPayment(message);
-      return response;
-    }
+    const response = await sendPayment(message);
+    return response;
   } catch (e) {
     console.error(e);
     if (e instanceof Error) {
@@ -51,11 +45,11 @@ async function sendPaymentWithAllowance(message: Message, keysend: boolean) {
   }
 }
 
-async function payWithPrompt(message: Message, type: string) {
+async function payWithPrompt(message: Message) {
   try {
     const response = await utils.openPrompt({
       ...message,
-      type: type,
+      type: "confirmPayment",
     });
     return response;
   } catch (e) {

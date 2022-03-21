@@ -32,6 +32,7 @@ export default async function keysend(message: Message) {
       features: [],
       id: "",
       is_expired: false,
+      payment: "",
       mtokens: "",
       network: "",
       safe_tokens: 0,
