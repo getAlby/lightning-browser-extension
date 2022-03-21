@@ -91,25 +91,23 @@ export default function ConnectRaspiBlitz() {
             Connect to your RaspiBlitz node
           </h1>
           <p className="text-gray-500 mt-6 dark:text-gray-400">
-            You need your node URL and a macaroon with read and send permissions
-            (e.g. admin.macaroon).
+            You need your node onion address and a macaroon with read and send
+            permissions (e.g. admin.macaroon).
             <br />
             <br />
             <b>SSH</b> into your <b>RaspiBlitz</b>.<br />
             Run the command <b>sudo cat /mnt/hdd/tor/lndrest8080/hostname</b>.
             <br />
-            Copy your <b>.onion</b> address.
-            <br />
-            Paste the URL in the input below.
+            Copy and paste the <b>.onion</b> address in the input below.
           </p>
           <div className="w-4/5">
             <div className="mt-6">
               <TextField
                 id="url"
                 label="REST API host"
-                placeholder="your-node-url"
+                placeholder="your-node-onion-address"
                 pattern="^[A-Za-z0-9]*\.onion$"
-                title="your-node-url.onion"
+                title="your-node-address.onion"
                 onChange={handleChange}
                 required
               />
