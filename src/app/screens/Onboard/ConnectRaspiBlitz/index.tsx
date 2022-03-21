@@ -16,10 +16,17 @@ export default function ConnectRaspiBlitz() {
   const [loading, setLoading] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setFormData({
-      ...formData,
-      [event.target.name]: `https://${event.target.value.trim()}:8080`,
-    });
+    if (event.target.name === "url") {
+      setFormData({
+        ...formData,
+        [event.target.name]: `https://${event.target.value.trim()}:8080`,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [event.target.name]: event.target.value.trim(),
+      });
+    }
   }
 
   function getConnectorType() {
@@ -101,8 +108,8 @@ export default function ConnectRaspiBlitz() {
                 id="url"
                 label="REST API host"
                 placeholder="your-node-url"
-                pattern="https://.+"
-                title="https://your-node-url:8080"
+                pattern="^[A-Za-z0-9]*\.onion$"
+                title="your-node-url.onion"
                 onChange={handleChange}
                 required
               />
