@@ -14,7 +14,7 @@ type PostMessage = {
   headers: Record<string, string>;
 };
 
-export default class NativeLndHub extends NativeConnector {
+export default class NativeLnBits extends NativeConnector {
   _nativeRequest(postMessage: PostMessage) {
     return new Promise<{
       id: string;
