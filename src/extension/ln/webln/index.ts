@@ -68,7 +68,7 @@ export default class WebLNProvider {
 
   keysend(args: KeysendArgs) {
     if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling sendPayment");
+      throw new Error("Provider must be enabled before calling keysend");
     }
     return this.execute("keysendOrPrompt", args);
   }
