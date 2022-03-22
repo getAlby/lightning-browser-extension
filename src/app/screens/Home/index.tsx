@@ -23,21 +23,29 @@ dayjs.extend(relativeTime);
 function Home() {
   const [allowance, setAllowance] = useState<Allowance | null>(null);
   const [payments, setPayments] = useState<Transaction[]>([]);
+  const [loadingAllowance, setLoadingAllowance] = useState(true);
   const [loadingPayments, setLoadingPayments] = useState(true);
   const [loadingSendSats, setLoadingSendSats] = useState(false);
   const [lnData, setLnData] = useState<Battery[]>([]);
   const navigate = useNavigate();
 
-  function loadAllowance() {
-    browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+  async function loadAllowance() {
+    try {
+      const tabs = await browser.tabs.query({
+        active: true,
+        currentWindow: true,
+      });
       const [currentTab] = tabs;
       const url = new URL(currentTab.url as string);
-      api.getAllowance(url.host).then((result) => {
-        if (result.enabled) {
-          setAllowance(result);
-        }
-      });
-    });
+      const result = await api.getAllowance(url.host);
+      if (result.enabled) {
+        setAllowance(result);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoadingAllowance(false);
+    }
   }
 
   function loadPayments() {
@@ -231,6 +239,10 @@ function Home() {
         )}
       </div>
     );
+  }
+
+  if (loadingAllowance) {
+    return null;
   }
 
   return (
