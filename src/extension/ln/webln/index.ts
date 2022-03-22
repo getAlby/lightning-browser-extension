@@ -6,6 +6,12 @@ type RequestInvoiceArgs = {
   defaultMemo?: string;
 };
 
+type KeysendArgs = {
+  destination: string;
+  customRecords: Record<string, string>;
+  amount: string;
+};
+
 export default class WebLNProvider {
   enabled: boolean;
   isEnabled: boolean;
@@ -58,6 +64,13 @@ export default class WebLNProvider {
       throw new Error("Provider must be enabled before calling sendPayment");
     }
     return this.execute("sendPaymentOrPrompt", { paymentRequest });
+  }
+
+  keysend(args: KeysendArgs) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling sendPayment");
+    }
+    return this.execute("keysendOrPrompt", args);
   }
 
   makeInvoice(args: string | number | RequestInvoiceArgs) {

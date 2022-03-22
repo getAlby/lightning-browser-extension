@@ -19,6 +19,7 @@ import Settings from "../../screens/Settings";
 import Unlock from "../../screens/Unlock";
 import ChooseConnector from "../../screens/Onboard/ChooseConnector";
 import Accounts from "../../screens/Accounts";
+import Keysend from "../../screens/Keysend";
 
 function Options() {
   return (
@@ -40,6 +41,7 @@ function Options() {
                 <Route index element={<Publishers />} />
               </Route>
               <Route path="send" element={<Send />} />
+              <Route path="keysend" element={<Keysend />} />
               <Route path="receive" element={<Receive />} />
               <Route path="lnurlPay" element={<LNURLPay />} />
               <Route path="confirmPayment" element={<ConfirmPayment />} />
