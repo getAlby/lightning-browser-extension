@@ -17,6 +17,7 @@ import Connector, {
   SignMessageResponse,
   VerifyMessageArgs,
   VerifyMessageResponse,
+  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -126,6 +127,63 @@ export default class LndHub implements Connector {
       const amountInSats = paymentRequestDetails.tokens;
       data.payment_route = { total_amt: amountInSats, total_fees: 0 };
     }
+    return {
+      data: {
+        preimage: data.payment_preimage as string,
+        paymentHash: data.payment_hash as string,
+        route: data.payment_route,
+      },
+    };
+  }
+  async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
+    //hex encode the record values
+    const records_hex: Record<string, string> = {};
+    for (const key in args.customRecords) {
+      records_hex[key] = Buffer.from(args.customRecords[key]).toString("hex");
+    }
+    const data = await this.request<{
+      error: string;
+      message: string;
+      payment_error?: string;
+      payment_hash:
+        | {
+            type: string;
+            data: ArrayBuffer;
+          }
+        | string;
+      payment_preimage:
+        | {
+            type: string;
+            data: ArrayBuffer;
+          }
+        | string;
+      payment_route: { total_amt: number; total_fees: number };
+    }>("POST", "/keysend", {
+      destination: args.pubkey,
+      amount: args.amount,
+      dest_custom_records: records_hex,
+    });
+    if (data.error) {
+      throw new Error(data.message);
+    }
+    if (data.payment_error) {
+      throw new Error(data.payment_error);
+    }
+    if (
+      typeof data.payment_hash === "object" &&
+      data.payment_hash.type === "Buffer"
+    ) {
+      data.payment_hash = Buffer.from(data.payment_hash.data).toString("hex");
+    }
+    if (
+      typeof data.payment_preimage === "object" &&
+      data.payment_preimage.type === "Buffer"
+    ) {
+      data.payment_preimage = Buffer.from(data.payment_preimage.data).toString(
+        "hex"
+      );
+    }
+
     return {
       data: {
         preimage: data.payment_preimage as string,

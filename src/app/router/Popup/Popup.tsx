@@ -13,6 +13,7 @@ import { AuthProvider } from "../../context/AuthContext";
 import { AccountsProvider } from "../../context/AccountsContext";
 import RequireAuth from "../RequireAuth";
 import Navbar from "../../components/Navbar";
+import Keysend from "../../screens/Keysend";
 
 const POPUP_MAX_HEIGHT = 600;
 
@@ -34,6 +35,7 @@ function Popup() {
               <Route path="send" element={<Send />} />
               <Route path="receive" element={<Receive />} />
               <Route path="lnurlPay" element={<LNURLPay />} />
+              <Route path="keysend" element={<Keysend />} />
               <Route path="confirmPayment" element={<ConfirmPayment />} />
             </Route>
             <Route path="unlock" element={<Unlock />} />

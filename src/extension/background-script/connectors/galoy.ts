@@ -14,6 +14,7 @@ import Connector, {
   SignMessageResponse,
   VerifyMessageArgs,
   VerifyMessageResponse,
+  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -258,6 +259,10 @@ class Galoy implements Connector {
       });
     }
     return result;
+  }
+
+  async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
+    throw new Error("not supported");
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {

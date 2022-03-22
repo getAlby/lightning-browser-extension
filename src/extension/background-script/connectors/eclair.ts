@@ -13,6 +13,7 @@ import Connector, {
   SignMessageResponse,
   VerifyMessageArgs,
   VerifyMessageResponse,
+  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -92,6 +93,9 @@ class Eclair implements Connector {
     };
   }
 
+  async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
+    throw new Error("not supported");
+  }
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
     const data = await this.request("/getreceivedinfo", {
       paymentHash: args.paymentHash,
