@@ -20,6 +20,14 @@ export default function ConnectLnbits() {
     });
   }
 
+  function getConnectorType() {
+    if (formData.url.match(/\.onion/i)) {
+      return "nativelnbits";
+    }
+    // default to LNbits
+    return "lnbits";
+  }
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
@@ -30,11 +38,18 @@ export default function ConnectLnbits() {
         adminkey,
         url,
       },
-      connector: "lnbits",
+      connector: getConnectorType(),
     };
 
     try {
-      const validation = await utils.call("validateAccount", account);
+      let validation;
+      // TODO: for native connectors we currently skip the validation because it is too slow (booting up Tor etc.)
+      if (account.connector === "nativelnbits") {
+        validation = { valid: true, error: "" };
+      } else {
+        validation = await utils.call("validateAccount", account);
+      }
+
       if (validation.valid) {
         const addResult = await utils.call("addAccount", account);
         if (addResult.accountId) {
