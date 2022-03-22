@@ -14,7 +14,11 @@ import { useAccounts } from "../../context/AccountsContext";
 import Badge from "../Badge";
 import Menu from "../Menu";
 
-function AccountMenu() {
+type Props = {
+  advanced?: boolean;
+};
+
+function AccountMenu({ advanced = true }: Props) {
   const auth = useAuth();
   const navigate = useNavigate();
   const { accounts, getAccounts } = useAccounts();
@@ -70,23 +74,27 @@ function AccountMenu() {
             </Menu.ItemButton>
           );
         })}
-        <Menu.Divider />
-        <Menu.ItemButton
-          onClick={() => {
-            openOptions("accounts/new");
-          }}
-        >
-          <PlusIcon className="h-5 w-5 mr-2 text-gray-500" />
-          Add a new account
-        </Menu.ItemButton>
-        <Menu.ItemButton
-          onClick={() => {
-            openOptions("accounts");
-          }}
-        >
-          <AddressBookIcon className="h-5 w-5 mr-2 text-gray-500" />
-          Accounts
-        </Menu.ItemButton>
+        {advanced && (
+          <>
+            <Menu.Divider />
+            <Menu.ItemButton
+              onClick={() => {
+                openOptions("accounts/new");
+              }}
+            >
+              <PlusIcon className="h-5 w-5 mr-2 text-gray-500" />
+              Add a new account
+            </Menu.ItemButton>
+            <Menu.ItemButton
+              onClick={() => {
+                openOptions("accounts");
+              }}
+            >
+              <AddressBookIcon className="h-5 w-5 mr-2 text-gray-500" />
+              Accounts
+            </Menu.ItemButton>
+          </>
+        )}
       </Menu.List>
     </Menu>
   );
