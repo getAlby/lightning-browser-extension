@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-import Button from "../components/Button";
 import ConfirmOrCancel from "../components/ConfirmOrCancel";
 import TextField from "../components/form/TextField";
 import PublisherCard from "../components/PublisherCard";
 import msg from "../../common/lib/msg";
 import type { RequestInvoiceArgs } from "../../types";
 import api from "../../common/lib/api";
+import SatButtons from "../components/SatButtons";
 
 type Origin = {
   name: string;
@@ -86,28 +86,7 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
               />
               {invoiceAttributes.minimumAmount &&
                 invoiceAttributes.maximumAmount && (
-                  <div className="flex space-x-1.5 mt-2">
-                    <Button
-                      fullWidth
-                      label="100 sat⚡"
-                      onClick={() => handleValueChange("100")}
-                    />
-                    <Button
-                      fullWidth
-                      label="1K sat⚡"
-                      onClick={() => handleValueChange("1000")}
-                    />
-                    <Button
-                      fullWidth
-                      label="5K sat⚡"
-                      onClick={() => handleValueChange("5000")}
-                    />
-                    <Button
-                      fullWidth
-                      label="10K sat⚡"
-                      onClick={() => handleValueChange("10000")}
-                    />
-                  </div>
+                  <SatButtons onClick={handleValueChange} />
                 )}
               {error && <p className="mt-1 text-red-500">{error}</p>}
             </div>

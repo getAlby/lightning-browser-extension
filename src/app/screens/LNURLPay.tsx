@@ -18,6 +18,7 @@ import Button from "../components/Button";
 import TextField from "../components/form/TextField";
 import PublisherCard from "../components/PublisherCard";
 import ConfirmOrCancel from "../components/ConfirmOrCancel";
+import SatButtons from "../components/SatButtons";
 
 type Origin = {
   name: string;
@@ -309,28 +310,7 @@ function LNURLPay(props: Props) {
                     value={valueSat}
                     onChange={(e) => setValueSat(e.target.value)}
                   />
-                  <div className="flex space-x-1.5 mt-2">
-                    <Button
-                      fullWidth
-                      label="100 sat⚡"
-                      onClick={() => setValueSat("100")}
-                    />
-                    <Button
-                      fullWidth
-                      label="1K sat⚡"
-                      onClick={() => setValueSat("1000")}
-                    />
-                    <Button
-                      fullWidth
-                      label="5K sat⚡"
-                      onClick={() => setValueSat("5000")}
-                    />
-                    <Button
-                      fullWidth
-                      label="10K sat⚡"
-                      onClick={() => setValueSat("10000")}
-                    />
-                  </div>
+                  <SatButtons onClick={setValueSat} />
                 </div>
               )}
               {details && details?.commentAllowed > 0 && (

@@ -10,6 +10,7 @@ import Header from "../../components/Header";
 import IconButton from "../../components/IconButton";
 import Button from "../../components/Button";
 import SuccessMessage from "../../components/SuccessMessage";
+import SatButtons from "../../components/SatButtons";
 
 type Props = {
   destination?: string;
@@ -70,28 +71,7 @@ function Keysend(props: Props) {
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />
-        <div className="flex space-x-1.5 mt-2">
-          <Button
-            fullWidth
-            label="100 sat⚡"
-            onClick={() => setAmount("100")}
-          />
-          <Button
-            fullWidth
-            label="1K sat⚡"
-            onClick={() => setAmount("1000")}
-          />
-          <Button
-            fullWidth
-            label="5K sat⚡"
-            onClick={() => setAmount("5000")}
-          />
-          <Button
-            fullWidth
-            label="10K sat⚡"
-            onClick={() => setAmount("10000")}
-          />
-        </div>
+        <SatButtons onClick={setAmount} />
       </div>
     );
   }
