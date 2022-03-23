@@ -9,26 +9,7 @@ import Container from "../components/Container";
 import Button from "../components/Button";
 import Toggle from "../components/form/Toggle";
 import Input from "../components/form/Input";
-
-type Props = {
-  title: string;
-  subtitle: string;
-  right: React.ReactNode;
-};
-
-function Setting({ title, subtitle, right }: Props) {
-  return (
-    <div className="py-4 flex justify-between items-center">
-      <div>
-        <span className="text-gray-700 dark:text-white font-medium">
-          {title}
-        </span>
-        <p className="text-gray-400 text-sm">{subtitle}</p>
-      </div>
-      {right}
-    </div>
-  );
-}
+import Setting from "../components/Setting";
 
 function Settings() {
   const [loading, setLoading] = useState(true);
