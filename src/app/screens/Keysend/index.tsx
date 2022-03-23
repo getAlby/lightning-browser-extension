@@ -1,13 +1,15 @@
 import { Fragment, useState, MouseEvent } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+
 import utils from "../../../common/lib/utils";
 import { useAuth } from "../../context/AuthContext";
+
 import Input from "../../components/form/Input";
 import Header from "../../components/Header";
 import IconButton from "../../components/IconButton";
-
 import Button from "../../components/Button";
+import SuccessMessage from "../../components/SuccessMessage";
 
 type Props = {
   destination?: string;
@@ -101,24 +103,6 @@ function Keysend(props: Props) {
     return elements;
   }
 
-  function renderSuccessMessage() {
-    return (
-      <>
-        <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-          <dt className="text-sm font-semibold text-gray-500">Message</dt>
-          <dd className="text-sm mb-4 dark:text-white break-all">
-            {successMessage}
-          </dd>
-        </dl>
-        <div className="text-center">
-          <button className="underline text-sm text-gray-500" onClick={reject}>
-            Close
-          </button>
-        </div>
-      </>
-    );
-  }
-
   return (
     <div>
       <Header
@@ -165,7 +149,7 @@ function Keysend(props: Props) {
             </div>
           </>
         ) : (
-          renderSuccessMessage()
+          <SuccessMessage message={successMessage} onClose={reject} />
         )}
       </div>
     </div>
