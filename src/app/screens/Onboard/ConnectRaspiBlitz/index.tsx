@@ -15,18 +15,18 @@ export default function ConnectRaspiBlitz() {
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    if (event.target.name === "url") {
-      setFormData({
-        ...formData,
-        [event.target.name]: `https://${event.target.value.trim()}:8080`,
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [event.target.name]: event.target.value.trim(),
-      });
-    }
+  function handleUrl(event: React.ChangeEvent<HTMLInputElement>) {
+    setFormData({
+      ...formData,
+      [event.target.name]: `https://${event.target.value.trim()}:8080`,
+    });
+  }
+
+  function handleMacaroon(event: React.ChangeEvent<HTMLInputElement>) {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value.trim(),
+    });
   }
 
   function getConnectorType() {
@@ -106,9 +106,7 @@ export default function ConnectRaspiBlitz() {
                 id="url"
                 label="REST API host"
                 placeholder="your-node-onion-address"
-                pattern="^[A-Za-z0-9]*\.onion$"
-                title="your-node-address.onion"
-                onChange={handleChange}
+                onChange={handleUrl}
                 required
               />
             </div>
@@ -126,7 +124,7 @@ export default function ConnectRaspiBlitz() {
                   id="macaroon"
                   label="Macaroon (HEX format)"
                   value={formData.macaroon}
-                  onChange={handleChange}
+                  onChange={handleMacaroon}
                   required
                 />
               </div>
