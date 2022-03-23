@@ -10,28 +10,25 @@ const battery = (): void => {
   const shortBio = document.querySelector<HTMLParagraphElement>(
     `${authorLinkSelector}~p:last-of-type`
   )?.innerText;
+  if (!shortBio) return;
 
-  if (shortBio) {
-    const match = shortBio.match(/(⚡:?)\s?(\S+@\S+)/i);
+  const match = shortBio.match(/(⚡:?|lightning:|lnurl:)\s?(\S+@\S+)/i);
+  if (!match) return;
 
-    if (match) {
-      setLightningData([
-        {
-          method: "lnurl",
-          recipient: match[2],
-          ...getOriginData(),
-          description: shortBio,
-          name:
-            document.querySelector<HTMLHeadingElement>(".pw-author-name")
-              ?.innerText ?? "",
-          icon:
-            document.querySelector<HTMLImageElement>(
-              `${authorLinkSelector} img`
-            )?.src ?? "",
-        },
-      ]);
-    }
-  }
+  setLightningData([
+    {
+      method: "lnurl",
+      recipient: match[2],
+      ...getOriginData(),
+      description: shortBio,
+      name:
+        document.querySelector<HTMLHeadingElement>(".pw-author-name")
+          ?.innerText ?? "",
+      icon:
+        document.querySelector<HTMLImageElement>(`${authorLinkSelector} img`)
+          ?.src ?? "",
+    },
+  ]);
 };
 
 function getAuthorLinkSelector(): string | null {
