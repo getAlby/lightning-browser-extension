@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Input from "../../../components/Form/Input";
+import Input from "../../../components/form/Input";
 import Button from "../../../components/Button";
 
 import utils from "../../../../common/lib/utils";

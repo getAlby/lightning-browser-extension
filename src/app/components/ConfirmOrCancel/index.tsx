@@ -1,6 +1,6 @@
 import { MouseEventHandler } from "react";
 
-import Button from "../../Button";
+import Button from "../Button";
 
 type Props = {
   disabled?: boolean;

@@ -13,7 +13,7 @@ import Button from "../components/Button";
 import IconButton from "../components/IconButton";
 import Header from "../components/Header";
 import QrcodeScanner from "../components/QrcodeScanner";
-import TextField from "../components/Form/TextField";
+import TextField from "../components/form/TextField";
 
 function Send() {
   const [invoice, setInvoice] = useState("");

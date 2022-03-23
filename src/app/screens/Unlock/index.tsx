@@ -5,7 +5,7 @@ import utils from "../../../common/lib/utils";
 import { useAuth } from "../../context/AuthContext";
 import AlbyLogo from "../../components/AlbyLogo";
 import Button from "../../components/Button";
-import Input from "../../components/Form/Input";
+import Input from "../../components/form/Input";
 
 function Unlock() {
   const [password, setPassword] = useState("");

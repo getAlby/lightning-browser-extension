@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 import Button from "../components/Button";
-import ConfirmOrCancel from "../components/layout/ConfirmOrCancel";
-import TextField from "../components/Form/TextField";
+import ConfirmOrCancel from "../components/ConfirmOrCancel";
+import TextField from "../components/form/TextField";
 import PublisherCard from "../components/PublisherCard";
 import msg from "../../common/lib/msg";
 import type { RequestInvoiceArgs } from "../../types";

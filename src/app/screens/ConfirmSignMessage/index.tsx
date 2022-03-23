@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 
-import ConfirmOrCancel from "../../components/layout/ConfirmOrCancel";
+import ConfirmOrCancel from "../../components/ConfirmOrCancel";
 //import Checkbox from "../../components/Form/Checkbox";
 import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";

@@ -5,11 +5,11 @@ import PaymentSummary from "../../components/PaymentSummary";
 import utils from "../../../common/lib/utils";
 import getOriginData from "../../../extension/content-script/originData";
 import msg from "../../../common/lib/msg";
-import Checkbox from "../../components/Form/Checkbox";
-import TextField from "../../components/Form/TextField";
+import Checkbox from "../../components/form/Checkbox";
+import TextField from "../../components/form/TextField";
 
 import PublisherCard from "../../components/PublisherCard";
-import ConfirmOrCancel from "../../components/layout/ConfirmOrCancel";
+import ConfirmOrCancel from "../../components/ConfirmOrCancel";
 
 import type { OriginData } from "../../../types";
 

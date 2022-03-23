@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import utils from "../../../common/lib/utils";
 import { useAuth } from "../../context/AuthContext";
-import Input from "../../components/Form/Input";
+import Input from "../../components/form/Input";
 import Header from "../../components/Header";
 import IconButton from "../../components/IconButton";
 

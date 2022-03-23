@@ -15,9 +15,9 @@ import getOriginData from "../../extension/content-script/originData";
 import { useAuth } from "../context/AuthContext";
 
 import Button from "../components/Button";
-import TextField from "../components/Form/TextField";
+import TextField from "../components/form/TextField";
 import PublisherCard from "../components/PublisherCard";
-import ConfirmOrCancel from "../components/layout/ConfirmOrCancel";
+import ConfirmOrCancel from "../components/ConfirmOrCancel";
 
 type Origin = {
   name: string;

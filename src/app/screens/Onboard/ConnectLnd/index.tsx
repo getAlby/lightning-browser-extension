@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import utils from "../../../../common/lib/utils";
 import Button from "../../../components/Button";
-import TextField from "../../../components/Form/TextField";
+import TextField from "../../../components/form/TextField";
 import CompanionDownloadInfo from "../../../components/CompanionDownloadInfo";
 
 const initialFormData = Object.freeze({

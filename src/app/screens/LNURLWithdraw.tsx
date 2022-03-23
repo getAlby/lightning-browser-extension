@@ -6,8 +6,8 @@ import getOriginData from "../../extension/content-script/originData";
 import msg from "../../common/lib/msg";
 import api from "../../common/lib/api";
 
-import ConfirmOrCancel from "../components/layout/ConfirmOrCancel";
-import Input from "../components/Form/Input";
+import ConfirmOrCancel from "../components/ConfirmOrCancel";
+import Input from "../components/form/Input";
 import PublisherCard from "../components/PublisherCard";
 
 type Props = {

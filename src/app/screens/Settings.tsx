@@ -7,8 +7,8 @@ import { SettingsStorage } from "../../types";
 
 import Container from "../components/Container";
 import Button from "../components/Button";
-import Toggle from "../components/Form/Toggle";
-import Input from "../components/Form/Input";
+import Toggle from "../components/form/Toggle";
+import Input from "../components/form/Input";
 
 type Props = {
   title: string;

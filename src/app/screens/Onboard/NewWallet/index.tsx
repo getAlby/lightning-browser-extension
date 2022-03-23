@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Input from "../../../components/Form/Input";
-import TextField from "../../../components/Form/TextField";
+import Input from "../../../components/form/Input";
+import TextField from "../../../components/form/TextField";
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";

@@ -3,7 +3,7 @@ import { MouseEvent } from "react";
 import type { LNURLAuthServiceResponse } from "../../types";
 import msg from "../../common/lib/msg";
 
-import ConfirmOrCancel from "../components/layout/ConfirmOrCancel";
+import ConfirmOrCancel from "../components/ConfirmOrCancel";
 import PublisherCard from "../components/PublisherCard";
 
 type Props = {

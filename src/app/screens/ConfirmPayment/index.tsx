@@ -6,12 +6,12 @@ import msg from "../../../common/lib/msg";
 import utils from "../../../common/lib/utils";
 import getOriginData from "../../../extension/content-script/originData";
 import type { OriginData } from "../../../types";
-import Checkbox from "../../components/Form/Checkbox";
+import Checkbox from "../../components/form/Checkbox";
 import PaymentSummary from "../../components/PaymentSummary";
 import PublisherCard from "../../components/PublisherCard";
 import { useAuth } from "../../context/AuthContext";
-import TextField from "../../components/Form/TextField";
-import ConfirmOrCancel from "../../components/layout/ConfirmOrCancel";
+import TextField from "../../components/form/TextField";
+import ConfirmOrCancel from "../../components/ConfirmOrCancel";
 
 export type Props = {
   origin?: OriginData;
