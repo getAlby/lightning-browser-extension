@@ -9,6 +9,7 @@ import api from "../../common/lib/api";
 import ConfirmOrCancel from "../components/ConfirmOrCancel";
 import Input from "../components/form/Input";
 import PublisherCard from "../components/PublisherCard";
+import SuccessMessage from "../components/SuccessMessage";
 
 type Props = {
   details: LNURLWithdrawServiceResponse;
@@ -74,25 +75,6 @@ function LNURLWithdraw(props: Props) {
     }
   }
 
-  function renderSuccess() {
-    return (
-      <>
-        <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-          <dt className="text-sm font-semibold text-gray-500">Message</dt>
-          <dd className="text-sm mb-4 dark:text-white">{successMessage}</dd>
-        </dl>
-        <div className="text-center">
-          <button
-            className="underline text-sm text-gray-500"
-            onClick={() => window.close()}
-          >
-            Close
-          </button>
-        </div>
-      </>
-    );
-  }
-
   function reject(e: MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
     msg.error("User rejected");
@@ -119,7 +101,10 @@ function LNURLWithdraw(props: Props) {
             />
           </>
         ) : (
-          renderSuccess()
+          <SuccessMessage
+            message={successMessage}
+            onClose={() => window.close()}
+          />
         )}
       </div>
     </div>
