@@ -18,7 +18,7 @@ export default function ConnectRaspiBlitz() {
   function handleUrl(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
       ...formData,
-      [event.target.name]: `https://${event.target.value.trim()}:8080`,
+      [event.target.name]: `https://${event.target.value.trim()}`,
     });
   }
 
@@ -91,21 +91,26 @@ export default function ConnectRaspiBlitz() {
             Connect to your RaspiBlitz node
           </h1>
           <p className="text-gray-500 mt-6 dark:text-gray-400">
-            You need your node onion address and a macaroon with read and send
-            permissions (e.g. admin.macaroon).
+            You need your node onion address, port, and a macaroon with read and
+            send permissions (e.g. admin.macaroon).
             <br />
             <br />
             <b>SSH</b> into your <b>RaspiBlitz</b>.<br />
             Run the command <b>sudo cat /mnt/hdd/tor/lndrest8080/hostname</b>.
             <br />
             Copy and paste the <b>.onion</b> address in the input below.
+            <br />
+            Add your <b>port</b> after the onion address, the default port is{" "}
+            <b>:8080</b>.
+            <br />
+            You do not need to add https://
           </p>
           <div className="w-4/5">
             <div className="mt-6">
               <TextField
                 id="url"
                 label="REST API host"
-                placeholder="your-node-onion-address"
+                placeholder="your-node-onion-address:port"
                 onChange={handleUrl}
                 required
               />
