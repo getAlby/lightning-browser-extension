@@ -6,7 +6,7 @@ import getOriginData from "../../extension/content-script/originData";
 import msg from "../../common/lib/msg";
 import api from "../../common/lib/api";
 
-import Button from "../components/Button";
+import ConfirmOrCancel from "../components/layout/ConfirmOrCancel";
 import Input from "../components/Form/Input";
 import PublisherCard from "../components/PublisherCard";
 
@@ -111,30 +111,12 @@ function LNURLWithdraw(props: Props) {
               </dt>
               <dd className="text-sm mb-4 dark:text-white">{renderAmount()}</dd>
             </dl>
-            <div className="text-center">
-              <div className="mb-5">
-                <Button
-                  onClick={confirm}
-                  label="Confirm"
-                  fullWidth
-                  primary
-                  loading={loadingConfirm}
-                  disabled={loadingConfirm || !valueSat}
-                />
-              </div>
-
-              <p className="mb-3 underline text-sm text-gray-300">
-                Only connect with sites you trust.
-              </p>
-
-              <a
-                className="underline text-sm text-gray-500"
-                href="#"
-                onClick={reject}
-              >
-                Cancel
-              </a>
-            </div>
+            <ConfirmOrCancel
+              disabled={loadingConfirm || !valueSat}
+              loading={loadingConfirm}
+              onConfirm={confirm}
+              onCancel={reject}
+            />
           </>
         ) : (
           renderSuccess()

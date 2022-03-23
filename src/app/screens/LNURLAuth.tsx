@@ -3,7 +3,7 @@ import { MouseEvent } from "react";
 import type { LNURLAuthServiceResponse } from "../../types";
 import msg from "../../common/lib/msg";
 
-import Button from "../components/Button";
+import ConfirmOrCancel from "../components/layout/ConfirmOrCancel";
 import PublisherCard from "../components/PublisherCard";
 
 type Props = {
@@ -37,23 +37,7 @@ function LNURLAuth({ details, origin }: Props) {
           </dt>
           <dd className="mb-6 dark:text-white">{details.domain}</dd>
         </dl>
-        <div className="text-center">
-          <div className="mb-5">
-            <Button onClick={confirm} label="Login" fullWidth primary />
-          </div>
-
-          <p className="mb-3 underline text-sm text-gray-300">
-            Only connect with sites you trust.
-          </p>
-
-          <a
-            className="underline text-sm text-gray-500"
-            href="#"
-            onClick={reject}
-          >
-            Cancel
-          </a>
-        </div>
+        <ConfirmOrCancel onConfirm={confirm} onCancel={reject} />
       </div>
     </div>
   );

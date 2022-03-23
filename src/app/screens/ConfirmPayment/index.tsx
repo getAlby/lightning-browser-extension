@@ -6,12 +6,12 @@ import msg from "../../../common/lib/msg";
 import utils from "../../../common/lib/utils";
 import getOriginData from "../../../extension/content-script/originData";
 import type { OriginData } from "../../../types";
-import Button from "../../components/Button";
 import Checkbox from "../../components/Form/Checkbox";
 import PaymentSummary from "../../components/PaymentSummary";
 import PublisherCard from "../../components/PublisherCard";
 import { useAuth } from "../../context/AuthContext";
 import TextField from "../../components/Form/TextField";
+import ConfirmOrCancel from "../../components/layout/ConfirmOrCancel";
 
 export type Props = {
   origin?: OriginData;
@@ -161,30 +161,12 @@ function ConfirmPayment(props: Props) {
               </Transition>
             </div>
 
-            <div className="text-center">
-              <div className="mb-5">
-                <Button
-                  onClick={confirm}
-                  label="Confirm"
-                  fullWidth
-                  primary
-                  disabled={loading}
-                  loading={loading}
-                />
-              </div>
-
-              <p className="mb-3 underline text-sm text-gray-300">
-                Only connect with sites you trust.
-              </p>
-
-              <a
-                className="underline text-sm text-gray-500 dark:text-gray-400"
-                href="#"
-                onClick={reject}
-              >
-                Cancel
-              </a>
-            </div>
+            <ConfirmOrCancel
+              disabled={loading}
+              loading={loading}
+              onConfirm={confirm}
+              onCancel={reject}
+            />
           </>
         ) : (
           renderSuccessMessage()

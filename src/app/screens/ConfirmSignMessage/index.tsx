@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 
-import Button from "../../components/Button";
+import ConfirmOrCancel from "../../components/layout/ConfirmOrCancel";
 //import Checkbox from "../../components/Form/Checkbox";
 import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
@@ -108,30 +108,12 @@ function ConfirmSignMessage(props: Props) {
               */}
             </div>
 
-            <div className="text-center">
-              <div className="mb-5">
-                <Button
-                  onClick={confirm}
-                  label="Confirm"
-                  fullWidth
-                  primary
-                  disabled={loading}
-                  loading={loading}
-                />
-              </div>
-
-              <p className="mb-3 underline text-sm text-gray-300">
-                Only connect with sites you trust.
-              </p>
-
-              <a
-                className="underline text-sm text-gray-500 dark:text-gray-400"
-                href="#"
-                onClick={reject}
-              >
-                Cancel
-              </a>
-            </div>
+            <ConfirmOrCancel
+              disabled={loading}
+              loading={loading}
+              onConfirm={confirm}
+              onCancel={reject}
+            />
           </>
         ) : (
           renderSuccesMessage()

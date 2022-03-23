@@ -8,8 +8,8 @@ import msg from "../../../common/lib/msg";
 import Checkbox from "../../components/Form/Checkbox";
 import TextField from "../../components/Form/TextField";
 
-import Button from "../../components/Button";
 import PublisherCard from "../../components/PublisherCard";
+import ConfirmOrCancel from "../../components/layout/ConfirmOrCancel";
 
 import type { OriginData } from "../../../types";
 
@@ -167,30 +167,12 @@ function Keysend(props: Props) {
                 </div>
               </Transition>
             </div>
-            <div className="text-center">
-              <div className="mb-5">
-                <Button
-                  onClick={confirm}
-                  label="Confirm"
-                  fullWidth
-                  primary
-                  disabled={loading}
-                  loading={loading}
-                />
-              </div>
-
-              <p className="mb-3 underline text-sm text-gray-300">
-                Only connect with sites you trust.
-              </p>
-
-              <a
-                className="underline text-sm text-gray-500"
-                href="#"
-                onClick={reject}
-              >
-                Cancel
-              </a>
-            </div>
+            <ConfirmOrCancel
+              disabled={loading}
+              loading={loading}
+              onConfirm={confirm}
+              onCancel={reject}
+            />
           </>
         ) : (
           renderSuccessMessage()

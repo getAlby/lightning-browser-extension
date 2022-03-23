@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import Button from "../components/Button";
+import ConfirmOrCancel from "../components/layout/ConfirmOrCancel";
 import TextField from "../components/Form/TextField";
 import PublisherCard from "../components/PublisherCard";
 import msg from "../../common/lib/msg";
@@ -122,30 +123,12 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
           </div>
         </div>
 
-        <div className="text-center">
-          <div className="mb-5">
-            <Button
-              onClick={confirm}
-              label="Make Invoice"
-              fullWidth
-              primary
-              loading={loading}
-              disabled={!value || loading || Boolean(error)}
-            />
-          </div>
-
-          <p className="mb-3 underline text-sm text-gray-300">
-            Only create invoices for sites you trust.
-          </p>
-
-          <a
-            className="underline text-sm text-gray-500"
-            href="#"
-            onClick={reject}
-          >
-            Cancel
-          </a>
-        </div>
+        <ConfirmOrCancel
+          disabled={!value || loading || Boolean(error)}
+          loading={loading}
+          onConfirm={confirm}
+          onCancel={reject}
+        />
       </div>
     </div>
   );

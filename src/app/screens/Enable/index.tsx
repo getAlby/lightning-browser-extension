@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 
-import Button from "../../components/Button";
+import ConfirmOrCancel from "../../components/layout/ConfirmOrCancel";
 import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
 import type { OriginData } from "../../../types";
@@ -66,25 +66,11 @@ function Enable(props: Props) {
           <strong>{props.origin.name}</strong> does not have access to your
           account.
         </p>
-        <p className="text-gray-500 mb-4 dark:text-gray-400">
+        <p className="mb-8 text-gray-500 mb-4 dark:text-gray-400">
           Do you want to grant them access?
         </p>
 
-        <div className="mt-8 mb-5">
-          <Button label="Enable" fullWidth onClick={enable} primary />
-        </div>
-
-        <p className="mb-3 underline text-sm text-gray-300">
-          Only connect with sites you trust.
-        </p>
-
-        <a
-          className="underline text-sm text-gray-500 dark:text-gray-400"
-          href="#"
-          onClick={reject}
-        >
-          Cancel
-        </a>
+        <ConfirmOrCancel label="Enable" onConfirm={enable} onCancel={reject} />
       </div>
     </div>
   );
