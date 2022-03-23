@@ -1,41 +1,44 @@
-import { Transition } from "@headlessui/react";
-import { parsePaymentRequest } from "invoices";
-import { useRef, useState } from "react";
+import { useState, MouseEvent, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import msg from "../../../common/lib/msg";
+import { Transition } from "@headlessui/react";
+import PaymentSummary from "../../components/PaymentSummary";
 import utils from "../../../common/lib/utils";
 import getOriginData from "../../../extension/content-script/originData";
-import type { OriginData } from "../../../types";
-import Button from "../../components/Button";
+import msg from "../../../common/lib/msg";
 import Checkbox from "../../components/Form/Checkbox";
-import PaymentSummary from "../../components/PaymentSummary";
-import PublisherCard from "../../components/PublisherCard";
-import { useAuth } from "../../context/AuthContext";
 import TextField from "../../components/Form/TextField";
 
-export type Props = {
+import Button from "../../components/Button";
+import PublisherCard from "../../components/PublisherCard";
+
+import type { OriginData } from "../../../types";
+
+type Props = {
   origin?: OriginData;
-  paymentRequest?: string;
+  destination?: string;
+  customRecords?: Record<string, string>;
+  valueSat?: string;
 };
 
-function ConfirmPayment(props: Props) {
+function Keysend(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const auth = useAuth();
-  const invoiceRef = useRef(
-    parsePaymentRequest({
-      request:
-        props.paymentRequest || (searchParams.get("paymentRequest") as string),
-    })
+  const [rememberMe, setRememberMe] = useState(false);
+  const [origin] = useState(
+    props.origin ||
+      (searchParams.get("origin") &&
+        JSON.parse(searchParams.get("origin") as string)) ||
+      getOriginData()
   );
   const originRef = useRef(props.origin || getOriginData());
-  const paymentRequestRef = useRef(
-    props.paymentRequest || searchParams.get("paymentRequest")
+  const [customRecords] = useState(props.customRecords || {});
+  const [amount] = useState(props.valueSat || "");
+  const [destination] = useState(
+    props.destination || searchParams.get("destination")
   );
   const [budget, setBudget] = useState(
-    ((invoiceRef.current?.tokens || 0) * 10).toString()
+    ((parseInt(amount) || 0) * 10).toString()
   );
-  const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -43,28 +46,34 @@ function ConfirmPayment(props: Props) {
     if (rememberMe && budget) {
       await saveBudget();
     }
-
     try {
       setLoading(true);
-      const response = await utils.call(
-        "sendPayment",
-        { paymentRequest: paymentRequestRef.current },
-        { origin: originRef.current }
+      const payment = await utils.call(
+        "keysend",
+        { destination, amount, customRecords },
+        {
+          origin: {
+            ...origin,
+            name: destination,
+          },
+        }
       );
-      auth.fetchAccountInfo(); // Update balance.
-      msg.reply(response);
-      setSuccessMessage("Success, payment sent!");
+
+      msg.reply(payment); // resolves the prompt promise and closes the prompt window
+      setSuccessMessage(`Payment sent! Preimage: ${payment.preimage}`);
     } catch (e) {
-      console.error(e);
-      if (e instanceof Error) alert(`Error: ${e.message}`);
+      console.log(e);
+      if (e instanceof Error) {
+        alert(`Error: ${e.message}`);
+      }
     } finally {
       setLoading(false);
     }
   }
 
-  function reject(e: React.MouseEvent<HTMLAnchorElement>) {
+  function reject(e: MouseEvent) {
     e.preventDefault();
-    if (props.paymentRequest && props.origin) {
+    if (props.origin) {
       msg.error("User rejected");
     } else {
       navigate(-1);
@@ -103,20 +112,19 @@ function ConfirmPayment(props: Props) {
   return (
     <div>
       <PublisherCard
-        title={originRef.current.name}
-        image={originRef.current.icon}
+        title={origin.name}
+        description={origin.description}
+        image={origin.icon}
       />
-
       <div className="p-4 max-w-screen-sm mx-auto">
         {!successMessage ? (
           <>
             <div className="mb-8">
               <PaymentSummary
-                amount={invoiceRef.current?.tokens}
-                description={invoiceRef.current?.description}
+                amount={amount}
+                description={`Send payment to ${destination}`}
               />
             </div>
-
             <div className="mb-8">
               <div className="flex items-center">
                 <Checkbox
@@ -134,7 +142,6 @@ function ConfirmPayment(props: Props) {
                   Remember and set a budget
                 </label>
               </div>
-
               <Transition
                 show={rememberMe}
                 enter="transition duration-100 ease-out"
@@ -160,7 +167,6 @@ function ConfirmPayment(props: Props) {
                 </div>
               </Transition>
             </div>
-
             <div className="text-center">
               <div className="mb-5">
                 <Button
@@ -178,7 +184,7 @@ function ConfirmPayment(props: Props) {
               </p>
 
               <a
-                className="underline text-sm text-gray-500 dark:text-gray-400"
+                className="underline text-sm text-gray-500"
                 href="#"
                 onClick={reject}
               >
@@ -194,4 +200,4 @@ function ConfirmPayment(props: Props) {
   );
 }
 
-export default ConfirmPayment;
+export default Keysend;

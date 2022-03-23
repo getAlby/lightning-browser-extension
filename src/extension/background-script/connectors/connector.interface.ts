@@ -43,6 +43,12 @@ export interface SendPaymentArgs {
   paymentRequest: string;
 }
 
+export interface KeysendArgs {
+  pubkey: string;
+  amount: number;
+  customRecords: Record<string, string>;
+}
+
 export interface CheckPaymentArgs {
   paymentHash: string;
 }
@@ -86,6 +92,7 @@ export default interface Connector {
   getBalance(): Promise<GetBalanceResponse>;
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse>;
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse>;
+  keysend(args: KeysendArgs): Promise<SendPaymentResponse>;
   checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse>;
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse>;
   verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse>;

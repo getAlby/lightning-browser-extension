@@ -21,6 +21,7 @@ import Connector, {
   VerifyMessageResponse,
   CheckPaymentArgs,
   CheckPaymentResponse,
+  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -69,7 +70,9 @@ class CitadelConnector implements Connector {
       },
     };
   }
-
+  async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
+    throw new Error("not supported");
+  }
   async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
     await this.ensureLogin();
     const res = await this.citadel.middleware.lnd.lightning.payInvoice(

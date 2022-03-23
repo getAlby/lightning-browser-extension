@@ -17,19 +17,21 @@ const sendPaymentOrPrompt = async (message: Message) => {
   const paymentRequestDetails = parsePaymentRequest({
     request: paymentRequest,
   });
-
-  const host = message.origin.host;
-  const allowance = await db.allowances
-    .where("host")
-    .equalsIgnoreCase(host)
-    .first();
-
-  if (allowance && allowance.remainingBudget >= paymentRequestDetails.tokens) {
+  if (await checkAllowance(message.origin.host, paymentRequestDetails.tokens)) {
     return sendPaymentWithAllowance(message);
   } else {
     return payWithPrompt(message);
   }
 };
+
+async function checkAllowance(host: string, amount: number) {
+  const allowance = await db.allowances
+    .where("host")
+    .equalsIgnoreCase(host)
+    .first();
+
+  return allowance && allowance.remainingBudget >= amount;
+}
 
 async function sendPaymentWithAllowance(message: Message) {
   try {
@@ -58,4 +60,9 @@ async function payWithPrompt(message: Message) {
   }
 }
 
-export default sendPaymentOrPrompt;
+export {
+  sendPaymentOrPrompt,
+  payWithPrompt,
+  checkAllowance,
+  sendPaymentWithAllowance,
+};

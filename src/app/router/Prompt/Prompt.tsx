@@ -19,6 +19,7 @@ import ConfirmPayment from "../../screens/ConfirmPayment";
 import LNURLPay from "../../screens/LNURLPay";
 import LNURLAuth from "../../screens/LNURLAuth";
 import LNURLWithdraw from "../../screens/LNURLWithdraw";
+import Keysend from "../../screens/ConfirmKeysend";
 
 class Prompt extends Component<
   Record<string, unknown>,
@@ -111,6 +112,19 @@ class Prompt extends Component<
                 element={
                   <ConfirmPayment
                     paymentRequest={this.state.args?.paymentRequest as string}
+                    origin={this.state.origin}
+                  />
+                }
+              />
+              <Route
+                path="confirmKeysend"
+                element={
+                  <Keysend
+                    destination={this.state.args?.destination as string}
+                    valueSat={this.state.args?.amount as string}
+                    customRecords={
+                      this.state.args?.customRecords as Record<string, string>
+                    }
                     origin={this.state.origin}
                   />
                 }

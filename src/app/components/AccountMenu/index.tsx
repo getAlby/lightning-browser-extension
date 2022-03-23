@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import {
@@ -18,6 +18,7 @@ function AccountMenu() {
   const auth = useAuth();
   const navigate = useNavigate();
   const { accounts, getAccounts } = useAccounts();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getAccounts();
@@ -25,11 +26,13 @@ function AccountMenu() {
   }, []);
 
   async function selectAccount(accountId: string) {
+    setLoading(true);
     auth.setAccountId(accountId);
     await utils.call("selectAccount", {
       id: accountId,
     });
-    auth.fetchAccountInfo(accountId);
+    await auth.fetchAccountInfo(accountId);
+    setLoading(false);
   }
 
   function openOptions(path: string) {
@@ -58,6 +61,7 @@ function AccountMenu() {
               onClick={() => {
                 selectAccount(accountId);
               }}
+              disabled={loading}
             >
               <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-500" />
               {account.name}&nbsp;

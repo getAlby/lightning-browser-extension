@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import utils from "../../../../common/lib/utils";
 import TextField from "../../../components/Form/TextField";
 
-export default function ConnectLnbits() {
+export default function ConnectEclair() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     password: "",
