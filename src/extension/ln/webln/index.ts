@@ -8,8 +8,8 @@ type RequestInvoiceArgs = {
 
 type KeysendArgs = {
   destination: string;
-  customRecords: Record<string, string>;
-  amount: string;
+  customRecords?: Record<string, string>;
+  amount: string | number;
 };
 
 export default class WebLNProvider {

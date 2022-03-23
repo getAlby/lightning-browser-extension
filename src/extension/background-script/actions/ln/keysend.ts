@@ -7,7 +7,10 @@ import utils from "../../../../common/lib/utils";
 export default async function keysend(message: Message) {
   PubSub.publish(`ln.keysend.start`, message);
   const { destination, amount, customRecords } = message.args;
-  if (typeof destination !== "string" || typeof amount !== "string") {
+  if (
+    typeof destination !== "string" ||
+    (typeof amount !== "string" && typeof amount !== "number")
+  ) {
     return {
       error: "destination or amount missing.",
     };
@@ -19,7 +22,7 @@ export default async function keysend(message: Message) {
   try {
     response = await connector.keysend({
       pubkey: destination,
-      amount: parseInt(amount),
+      amount: parseInt(amount as string),
       customRecords: customRecords as Record<string, string>,
     });
   } catch (e) {
