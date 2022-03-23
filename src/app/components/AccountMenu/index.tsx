@@ -15,10 +15,10 @@ import Badge from "../Badge";
 import Menu from "../Menu";
 
 type Props = {
-  advanced?: boolean;
+  showOptions?: boolean;
 };
 
-function AccountMenu({ advanced = true }: Props) {
+function AccountMenu({ showOptions = true }: Props) {
   const auth = useAuth();
   const navigate = useNavigate();
   const { accounts, getAccounts } = useAccounts();
@@ -74,7 +74,7 @@ function AccountMenu({ advanced = true }: Props) {
             </Menu.ItemButton>
           );
         })}
-        {advanced && (
+        {showOptions && (
           <>
             <Menu.Divider />
             <Menu.ItemButton

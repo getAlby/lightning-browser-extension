@@ -7,14 +7,16 @@ import UserMenu from "../UserMenu";
 type Props = {
   title: string;
   subtitle: string;
-  advanced?: boolean;
+  showAccountMenuOptions?: boolean;
+  showUserMenu?: boolean;
   children?: React.ReactNode;
 };
 
 export default function Navbar({
   title,
   subtitle,
-  advanced = true,
+  showAccountMenuOptions = true,
+  showUserMenu = true,
   children,
 }: Props) {
   return (
@@ -36,7 +38,7 @@ export default function Navbar({
               {subtitle || <Skeleton />}
             </div>
           </div>
-          <AccountMenu advanced={advanced} />
+          <AccountMenu showOptions={showAccountMenuOptions} />
         </div>
       </div>
       {children && (
@@ -44,7 +46,7 @@ export default function Navbar({
           <nav className="flex space-x-8">{children}</nav>
         </div>
       )}
-      {advanced && (
+      {showUserMenu && (
         <div className="md:w-4/12 lg:w-3/12 flex justify-end items-center">
           <UserMenu />
         </div>

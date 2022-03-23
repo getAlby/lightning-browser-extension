@@ -165,7 +165,8 @@ const Layout = () => {
             ? `${auth.account.balance} sat`
             : ""
         }
-        advanced={false}
+        showAccountMenuOptions={false}
+        showUserMenu={false}
       />
 
       <Outlet />
