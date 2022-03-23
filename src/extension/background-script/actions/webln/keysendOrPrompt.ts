@@ -8,13 +8,15 @@ import { checkAllowance } from "./sendPaymentOrPrompt";
 const keysendOrPrompt = async (message: Message) => {
   const destination = message.args.destination;
   const amount = message.args.amount;
-  if (typeof destination !== "string" || typeof amount !== "string") {
+  if (
+    typeof destination !== "string" ||
+    (typeof amount !== "string" && typeof amount !== "number")
+  ) {
     return {
       error: "Destination or amount missing.",
     };
   }
-
-  if (await checkAllowance(message.origin.host, parseInt(amount))) {
+  if (await checkAllowance(message.origin.host, parseInt(amount as string))) {
     return keysendWithAllowance(message);
   } else {
     return keysendWithPrompt(message);
