@@ -43,62 +43,56 @@ function Settings() {
         <Setting
           title="Website enhancements"
           subtitle="Tipping enhancements for Twitter, YouTube, etc."
-          right={
-            !loading && (
-              <Toggle
-                checked={settings.websiteEnhancements}
-                onChange={() => {
-                  saveSetting({
-                    websiteEnhancements: !settings.websiteEnhancements,
-                  });
-                }}
-              />
-            )
-          }
-        />
+        >
+          {!loading && (
+            <Toggle
+              checked={settings.websiteEnhancements}
+              onChange={() => {
+                saveSetting({
+                  websiteEnhancements: !settings.websiteEnhancements,
+                });
+              }}
+            />
+          )}
+        </Setting>
 
         <Setting
           title="User Display Name"
           subtitle="For sending along with LNURL payments when supported"
-          right={
-            !loading && (
-              <div className="w-64">
-                <Input
-                  placeholder="Enter your username"
-                  type="text"
-                  value={settings.userName}
-                  onChange={(ev) => {
-                    saveSetting({
-                      userName: ev.target.value,
-                    });
-                  }}
-                />
-              </div>
-            )
-          }
-        />
-
-        <Setting
-          title="Camera access"
-          subtitle="For scanning QR codes"
-          right={
-            !cameraPermissionsGranted ? (
-              <Button
-                label="Allow camera access"
-                onClick={async () => {
-                  try {
-                    await Html5Qrcode.getCameras();
-                    setCameraPermissionsGranted(true);
-                  } catch (e) {
-                    alert(e);
-                  }
+        >
+          {!loading && (
+            <div className="w-64">
+              <Input
+                placeholder="Enter your username"
+                type="text"
+                value={settings.userName}
+                onChange={(ev) => {
+                  saveSetting({
+                    userName: ev.target.value,
+                  });
                 }}
               />
-            ) : (
-              <p className="text-green-500 font-medium">Permission granted</p>
-            )
-          }
-        />
+            </div>
+          )}
+        </Setting>
+
+        <Setting title="Camera access" subtitle="For scanning QR codes">
+          {!cameraPermissionsGranted ? (
+            <Button
+              label="Allow camera access"
+              onClick={async () => {
+                try {
+                  await Html5Qrcode.getCameras();
+                  setCameraPermissionsGranted(true);
+                } catch (e) {
+                  alert(e);
+                }
+              }}
+            />
+          ) : (
+            <p className="text-green-500 font-medium">Permission granted</p>
+          )}
+        </Setting>
       </div>
     </Container>
   );

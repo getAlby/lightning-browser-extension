@@ -1,10 +1,10 @@
 type Props = {
   title: string;
   subtitle: string;
-  right: React.ReactNode;
+  children: React.ReactNode;
 };
 
-function Setting({ title, subtitle, right }: Props) {
+function Setting({ title, subtitle, children }: Props) {
   return (
     <div className="py-4 flex justify-between items-center">
       <div>
@@ -13,7 +13,7 @@ function Setting({ title, subtitle, right }: Props) {
         </span>
         <p className="text-gray-400 text-sm">{subtitle}</p>
       </div>
-      {right}
+      {children}
     </div>
   );
 }
