@@ -15,8 +15,10 @@ import getOriginData from "../../extension/content-script/originData";
 import { useAuth } from "../context/AuthContext";
 
 import Button from "../components/Button";
-import TextField from "../components/Form/TextField";
+import TextField from "../components/form/TextField";
 import PublisherCard from "../components/PublisherCard";
+import ConfirmOrCancel from "../components/ConfirmOrCancel";
+import SatButtons from "../components/SatButtons";
 
 type Origin = {
   name: string;
@@ -308,28 +310,7 @@ function LNURLPay(props: Props) {
                     value={valueSat}
                     onChange={(e) => setValueSat(e.target.value)}
                   />
-                  <div className="flex space-x-1.5 mt-2">
-                    <Button
-                      fullWidth
-                      label="100 sat⚡"
-                      onClick={() => setValueSat("100")}
-                    />
-                    <Button
-                      fullWidth
-                      label="1K sat⚡"
-                      onClick={() => setValueSat("1000")}
-                    />
-                    <Button
-                      fullWidth
-                      label="5K sat⚡"
-                      onClick={() => setValueSat("5000")}
-                    />
-                    <Button
-                      fullWidth
-                      label="10K sat⚡"
-                      onClick={() => setValueSat("10000")}
-                    />
-                  </div>
+                  <SatButtons onClick={setValueSat} />
                 </div>
               )}
               {details && details?.commentAllowed > 0 && (
@@ -358,30 +339,13 @@ function LNURLPay(props: Props) {
                 </div>
               )}
             </div>
-            <div className="text-center">
-              <div className="mb-5">
-                <Button
-                  onClick={confirm}
-                  label="Confirm"
-                  fullWidth
-                  primary
-                  loading={loadingConfirm}
-                  disabled={loadingConfirm || !valueSat}
-                />
-              </div>
 
-              <p className="mb-3 underline text-sm text-gray-300">
-                Only connect with sites you trust.
-              </p>
-
-              <a
-                className="underline text-sm text-gray-500"
-                href="#"
-                onClick={reject}
-              >
-                Cancel
-              </a>
-            </div>
+            <ConfirmOrCancel
+              disabled={loadingConfirm || !valueSat}
+              loading={loadingConfirm}
+              onConfirm={confirm}
+              onCancel={reject}
+            />
           </>
         ) : (
           renderSuccessAction()

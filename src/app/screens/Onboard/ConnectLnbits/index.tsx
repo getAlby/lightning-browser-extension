@@ -3,7 +3,7 @@ import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 
 import utils from "../../../../common/lib/utils";
-import TextField from "../../../components/Form/TextField";
+import TextField from "../../../components/form/TextField";
 
 export default function ConnectLnbits() {
   const navigate = useNavigate();

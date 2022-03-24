@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
-import Button from "../components/Button";
-import TextField from "../components/Form/TextField";
+import ConfirmOrCancel from "../components/ConfirmOrCancel";
+import TextField from "../components/form/TextField";
 import PublisherCard from "../components/PublisherCard";
 import msg from "../../common/lib/msg";
 import type { RequestInvoiceArgs } from "../../types";
 import api from "../../common/lib/api";
+import SatButtons from "../components/SatButtons";
 
 type Origin = {
   name: string;
@@ -85,28 +86,7 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
               />
               {invoiceAttributes.minimumAmount &&
                 invoiceAttributes.maximumAmount && (
-                  <div className="flex space-x-1.5 mt-2">
-                    <Button
-                      fullWidth
-                      label="100 sat⚡"
-                      onClick={() => handleValueChange("100")}
-                    />
-                    <Button
-                      fullWidth
-                      label="1K sat⚡"
-                      onClick={() => handleValueChange("1000")}
-                    />
-                    <Button
-                      fullWidth
-                      label="5K sat⚡"
-                      onClick={() => handleValueChange("5000")}
-                    />
-                    <Button
-                      fullWidth
-                      label="10K sat⚡"
-                      onClick={() => handleValueChange("10000")}
-                    />
-                  </div>
+                  <SatButtons onClick={handleValueChange} />
                 )}
               {error && <p className="mt-1 text-red-500">{error}</p>}
             </div>
@@ -122,30 +102,12 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
           </div>
         </div>
 
-        <div className="text-center">
-          <div className="mb-5">
-            <Button
-              onClick={confirm}
-              label="Make Invoice"
-              fullWidth
-              primary
-              loading={loading}
-              disabled={!value || loading || Boolean(error)}
-            />
-          </div>
-
-          <p className="mb-3 underline text-sm text-gray-300">
-            Only create invoices for sites you trust.
-          </p>
-
-          <a
-            className="underline text-sm text-gray-500"
-            href="#"
-            onClick={reject}
-          >
-            Cancel
-          </a>
-        </div>
+        <ConfirmOrCancel
+          disabled={!value || loading || Boolean(error)}
+          loading={loading}
+          onConfirm={confirm}
+          onCancel={reject}
+        />
       </div>
     </div>
   );

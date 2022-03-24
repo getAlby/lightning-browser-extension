@@ -7,7 +7,7 @@ import utils from "../../../common/lib/utils";
 
 import Button from "../Button";
 import Menu from "../Menu";
-import TextField from "../Form/TextField";
+import TextField from "../form/TextField";
 
 type Props = {
   allowance: {
