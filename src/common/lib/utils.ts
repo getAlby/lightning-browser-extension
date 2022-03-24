@@ -1,10 +1,8 @@
-import browser, { Runtime } from "webextension-polyfill";
-import qs from "query-string";
-import shajs from "sha.js";
 import PubSub from "pubsub-js";
-
-import { Message, OriginData } from "../../types";
+import qs from "query-string";
+import browser, { Runtime } from "webextension-polyfill";
 import { SendPaymentResponse } from "../../extension/background-script/connectors/connector.interface";
+import { Message, OriginData } from "../../types";
 
 const utils = {
   call: <T = Record<string, unknown>>(
@@ -36,9 +34,6 @@ const utils = {
     };
 
     return browser.notifications.create(notification);
-  },
-  getHash: (str: string) => {
-    return shajs("sha256").update(str).digest("hex");
   },
   base64ToHex: (str: string) => {
     const hex = [];
