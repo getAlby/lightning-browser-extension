@@ -6,6 +6,7 @@ export default function Input({
   required = false,
   pattern,
   title,
+  className,
   onChange,
   onFocus,
   onBlur,
