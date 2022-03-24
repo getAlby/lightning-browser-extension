@@ -132,7 +132,8 @@ dist/
 # Editor directories and files
 .idea
 .nova
-.vscode
+.vscode/**/*
+!.vscode/extensions.json
 *.suo
 *.ntvs*
 *.njsproj
