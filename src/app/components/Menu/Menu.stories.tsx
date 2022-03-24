@@ -19,7 +19,9 @@ export const Default = () => (
         <Badge label="Badge" color="blue-500" textColor="white" small />
       </Menu.ItemButton>
       <Menu.Divider />
-      <Menu.ItemButton onClick={() => alert("Delete")}>Delete</Menu.ItemButton>
+      <Menu.ItemButton danger onClick={() => alert("Delete")}>
+        Delete
+      </Menu.ItemButton>
     </Menu.List>
   </Menu>
 );
