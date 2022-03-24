@@ -17,9 +17,13 @@ setInterval(() => {
 
 const extractLightningData = (tabId, changeInfo, tab) => {
   if (changeInfo.status === "complete" && tab.url?.startsWith("http")) {
-    browser.tabs.sendMessage(tabId, {
-      type: "extractLightningData",
-    });
+    // Adding a short delay because I've seen cases where this call has happened too fast
+    // before the receiving side in the content-script was connected/listening
+    setTimeout(() => {
+      browser.tabs.sendMessage(tabId, {
+        type: "extractLightningData",
+      });
+    }, 150);
   }
 };
 
