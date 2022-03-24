@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TextField from "../../../components/form/TextField";
+import PasswordInput from "../../../components/Form/PasswordInput";
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 import utils from "../../../../common/lib/utils";
@@ -75,7 +75,7 @@ export default function SetPassword() {
           </p>
           <div className="w-4/5">
             <div className="mt-6">
-              <TextField
+              <PasswordInput
                 id="password"
                 label="Choose a password:"
                 type="password"
@@ -88,7 +88,7 @@ export default function SetPassword() {
               )}
             </div>
             <div className="mt-6">
-              <TextField
+              <PasswordInput
                 id="passwordConfirmation"
                 label="Let's confirm you typed it correct:"
                 type="password"

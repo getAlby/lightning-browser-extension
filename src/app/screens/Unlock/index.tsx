@@ -5,7 +5,7 @@ import utils from "../../../common/lib/utils";
 import { useAuth } from "../../context/AuthContext";
 import AlbyLogo from "../../components/AlbyLogo";
 import Button from "../../components/Button";
-import Input from "../../components/form/Input";
+import PasswordInput from "../../components/Form/PasswordInput";
 
 function Unlock() {
   const [password, setPassword] = useState("");
@@ -53,7 +53,7 @@ function Unlock() {
       </p>
       <form onSubmit={handleSubmit}>
         <div className="mb-5">
-          <Input
+          <PasswordInput
             placeholder="Password"
             type="password"
             autoFocus

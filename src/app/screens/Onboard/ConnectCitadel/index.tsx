@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-import Input from "../../../components/form/Input";
+import Input from "../../../components/Form/Input";
+import PasswordInput from "../../../components/Form/PasswordInput";
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 
@@ -96,7 +97,7 @@ export default function ConnectCitadel() {
                 Password
               </label>
               <div className="mt-1">
-                <Input
+                <PasswordInput
                   name="password"
                   type="password"
                   required
