@@ -53,7 +53,7 @@ const state = createState<State>((set, get) => ({
   currentAccountId: null,
   password: null,
   getAccount: () => {
-    const currentAccountId = get().currentAccountId;
+    const currentAccountId = get().currentAccountId as string;
     let account = null;
     if (currentAccountId) {
       account = get().accounts[currentAccountId];
