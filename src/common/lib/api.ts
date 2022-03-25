@@ -18,6 +18,7 @@ import {
 
 interface AccountInfoRes {
   currentAccountId: string;
+  name: string;
   info: { alias: string };
   balance: { balance: string };
 }
@@ -54,8 +55,9 @@ export const swrGetAccountInfo = async (
     getAccountInfo()
       .then((response) => {
         const { alias } = response.info;
+        const name = response.name;
         const balance = parseInt(response.balance.balance); // TODO: handle amounts
-        const account = { id, alias, balance };
+        const account = { id, name, alias, balance };
         storeAccounts({
           ...accountsCache,
           [id]: account,
