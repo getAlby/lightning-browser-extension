@@ -57,6 +57,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         <Menu.List position="right">
           <Menu.ItemButton onClick={openModal}>Edit</Menu.ItemButton>
           <Menu.ItemButton
+            danger
             onClick={async () => {
               if (
                 window.confirm("Are you sure you want to delete this website?")

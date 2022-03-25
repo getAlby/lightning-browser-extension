@@ -130,6 +130,7 @@ function AccountsScreen() {
                         </Menu.ItemButton>
 
                         <Menu.ItemButton
+                          danger
                           onClick={() =>
                             removeAccount({
                               id: accountId,
