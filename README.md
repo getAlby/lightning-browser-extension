@@ -21,8 +21,9 @@ The extension can connect to different node implementations and supports custodi
 - [x] [LNURL-withdraw](https://xn--57h.bigsun.xyz/lnurl-withdraw-flow.txt) support
 - [x] WebLN signMessage, verifyMessage support
 - [x] WebLN dynamic makeInvoice support
+- [x] Keysend
 - [ ] [Lsat](https://lsat.tech/) support
-- [ ] Keysend
+
 
 ### STATUS: 🚀
 
