@@ -10,6 +10,7 @@ import Button from "../components/Button";
 import Toggle from "../components/form/Toggle";
 import Input from "../components/form/Input";
 import Setting from "../components/Setting";
+import LocaleSwitcher from "../components/LocaleSwitcher/LocaleSwitcher";
 
 function Settings() {
   const [loading, setLoading] = useState(true);
@@ -18,6 +19,7 @@ function Settings() {
     legacyLnurlAuth: false,
     userName: "",
     userEmail: "",
+    locale: "",
   });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
@@ -129,6 +131,14 @@ function Settings() {
           ) : (
             <p className="text-green-500 font-medium">Permission granted</p>
           )}
+        </Setting>
+        <Setting
+          title="Language"
+          subtitle="Alby goes international! help us translate Alby in your language"
+        >
+          <div className="w-64">
+            <LocaleSwitcher />
+          </div>
         </Setting>
       </div>
     </Container>

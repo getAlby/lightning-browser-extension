@@ -180,4 +180,5 @@ export interface SettingsStorage {
   legacyLnurlAuth: boolean;
   userName: string;
   userEmail: string;
+  locale: string;
 }
