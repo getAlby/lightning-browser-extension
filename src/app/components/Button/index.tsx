@@ -3,6 +3,7 @@ import Loading from "../Loading";
 
 export type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   fullWidth?: boolean;
+  nowrap?: boolean;
   label: string;
   icon?: React.ReactNode;
   primary?: boolean;
@@ -21,6 +22,7 @@ export default function Button({
   fullWidth = false,
   primary = false,
   loading = false,
+  nowrap = false,
 }: Props) {
   return (
     <button
@@ -28,6 +30,7 @@ export default function Button({
       className={classNames(
         direction === "row" ? "flex-row" : "flex-col",
         fullWidth ? "w-full px-0" : "px-7",
+        nowrap && "whitespace-nowrap",
         primary
           ? "bg-orange-bitcoin text-white border border-transparent"
           : `bg-white text-gray-700 border border-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-500`,
