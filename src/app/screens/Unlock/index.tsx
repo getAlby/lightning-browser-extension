@@ -42,7 +42,7 @@ function Unlock() {
   }
 
   return (
-    <div className="p-8 bg-white dark:bg-gray-800 shadow-lg">
+    <div className="p-8">
       <div className="flex justify-center">
         <div className="w-40 dark:text-white">
           <AlbyLogo />
