@@ -37,15 +37,16 @@ export interface MetaData {
 }
 
 export interface OriginData {
-  location: string;
-  domain: string;
-  host: string;
-  pathname: string;
-  name: string;
-  description: string;
-  icon: string;
-  metaData: MetaData;
-  external: boolean;
+  location?: string;
+  domain?: string;
+  host?: string;
+  pathname?: string;
+  name?: string;
+  description?: string;
+  icon?: string;
+  metaData?: MetaData;
+  external?: boolean;
+  internal?: boolean;
 }
 
 export interface Battery extends OriginData {
