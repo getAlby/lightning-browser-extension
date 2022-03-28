@@ -14,7 +14,7 @@ import { useAccounts } from "../../context/AccountsContext";
 import Badge from "../Badge";
 import Menu from "../Menu";
 
-type Props = {
+export type Props = {
   showOptions?: boolean;
 };
 
@@ -51,6 +51,7 @@ function AccountMenu({ showOptions = true }: Props) {
     <Menu as="div">
       <Menu.Button className="h-full px-2 rounded-r-md hover:bg-gray-200 dark:hover:bg-gray-500 transition-colors duration-200">
         <CaretDownIcon className="h-4 w-4 dark:text-white" />
+        <span className="sr-only">Toggle Dropdown</span>
       </Menu.Button>
       <Menu.List position="left">
         <Menu.Subheader>Switch account</Menu.Subheader>
