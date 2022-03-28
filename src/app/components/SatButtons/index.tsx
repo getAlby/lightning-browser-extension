@@ -6,31 +6,11 @@ type Props = {
 
 function SatButtons({ onClick }: Props) {
   return (
-    <div className="flex space-x-1.5 mt-2">
-      <Button
-        nowrap
-        fullWidth
-        label="100 sat⚡"
-        onClick={() => onClick("100")}
-      />
-      <Button
-        nowrap
-        fullWidth
-        label="1K sat⚡"
-        onClick={() => onClick("1000")}
-      />
-      <Button
-        nowrap
-        fullWidth
-        label="5K sat⚡"
-        onClick={() => onClick("5000")}
-      />
-      <Button
-        nowrap
-        fullWidth
-        label="10K sat⚡"
-        onClick={() => onClick("10000")}
-      />
+    <div className="grid grid-rows-2 lg:grid-rows-1 grid-flow-col gap-2 mt-2 text-sm">
+      <Button label="100 sat⚡" onClick={() => onClick("100")} small />
+      <Button label="1K sat⚡" onClick={() => onClick("1000")} small />
+      <Button label="5K sat⚡" onClick={() => onClick("5000")} small />
+      <Button label="10K sat⚡" onClick={() => onClick("10000")} small />
     </div>
   );
 }
