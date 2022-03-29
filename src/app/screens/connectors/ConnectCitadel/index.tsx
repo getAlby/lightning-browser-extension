@@ -85,7 +85,7 @@ export default function ConnectCitadel() {
       submitDisabled={formData.password === "" || formData.url === ""}
       onSubmit={handleSubmit}
     >
-      <div className="mt-6">
+      <div className="mb-6">
         <TextField
           label="Password"
           id="password"
@@ -94,17 +94,15 @@ export default function ConnectCitadel() {
           onChange={handleChange}
         />
       </div>
-      <div className="mt-6">
-        <TextField
-          label="Citadel URL"
-          id="url"
-          placeholder="citadel.local"
-          type="text"
-          value={formData.url}
-          required
-          onChange={handleChange}
-        />
-      </div>
+      <TextField
+        label="Citadel URL"
+        id="url"
+        placeholder="citadel.local"
+        type="text"
+        value={formData.url}
+        required
+        onChange={handleChange}
+      />
     </ConnectorForm>
   );
 }

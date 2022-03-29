@@ -96,7 +96,7 @@ export default function ConnectLndHub() {
       submitDisabled={formData.uri === ""}
       onSubmit={handleSubmit}
     >
-      <div className="mt-6">
+      <div className="mb-6">
         <TextField
           id="uri"
           label="LNDHub Export URI"
@@ -109,8 +109,12 @@ export default function ConnectLndHub() {
           onChange={handleChange}
         />
       </div>
-      {formData.uri.match(/\.onion/i) && <CompanionDownloadInfo />}
-      <div className="mt-6">
+      {formData.uri.match(/\.onion/i) && (
+        <div className="mb-6">
+          <CompanionDownloadInfo />
+        </div>
+      )}
+      <div>
         <p className="text-center my-4 dark:text-white">OR</p>
         <QrcodeScanner
           fps={10}

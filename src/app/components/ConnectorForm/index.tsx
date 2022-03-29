@@ -28,9 +28,9 @@ function ConnectorForm({
     <form onSubmit={onSubmit}>
       <div className="relative lg:flex mt-14 bg-white dark:bg-gray-800 px-10 py-12">
         <div className="lg:w-1/2">
-          <h1 className="text-2xl font-bold dark:text-white">{title}</h1>
+          <h1 className="mb-6 text-2xl font-bold dark:text-white">{title}</h1>
           {description && (
-            <div className="text-gray-500 mt-6 dark:text-gray-400">
+            <div className="mb-6 text-gray-500 dark:text-gray-400">
               {typeof description === "string" ? (
                 <p>{description}</p>
               ) : (

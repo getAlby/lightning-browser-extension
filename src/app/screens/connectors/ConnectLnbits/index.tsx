@@ -84,7 +84,7 @@ export default function ConnectLnbits() {
       submitDisabled={formData.adminkey === "" || formData.url === ""}
       onSubmit={handleSubmit}
     >
-      <div className="mt-6">
+      <div className="mb-6">
         <TextField
           id="adminkey"
           label="LNbits Admin Key"
@@ -93,16 +93,14 @@ export default function ConnectLnbits() {
           onChange={handleChange}
         />
       </div>
-      <div className="mt-6">
-        <TextField
-          id="url"
-          label="LNbits URL"
-          type="text"
-          value={formData.url}
-          required
-          onChange={handleChange}
-        />
-      </div>
+      <TextField
+        id="url"
+        label="LNbits URL"
+        type="text"
+        value={formData.url}
+        required
+        onChange={handleChange}
+      />
     </ConnectorForm>
   );
 }

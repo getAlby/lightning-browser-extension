@@ -130,7 +130,7 @@ export default function ConnectLnd() {
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
     >
-      <div className="mt-6">
+      <div className="mb-6">
         <TextField
           id="url"
           label="REST API host and port"
@@ -141,8 +141,12 @@ export default function ConnectLnd() {
           required
         />
       </div>
-      {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
-      <div className="mt-6">
+      {formData.url.match(/\.onion/i) && (
+        <div className="mb-6">
+          <CompanionDownloadInfo />
+        </div>
+      )}
+      <div>
         <div>
           <TextField
             id="macaroon"

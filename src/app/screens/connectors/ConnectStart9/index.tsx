@@ -106,7 +106,7 @@ export default function ConnectStart9() {
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
     >
-      <div className="mt-6">
+      <div className="mb-6">
         <TextField
           id="lndconnect"
           label="lndconnect REST URL"

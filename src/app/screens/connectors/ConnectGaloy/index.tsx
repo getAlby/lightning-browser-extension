@@ -219,7 +219,7 @@ export default function ConnectGaloy(props: Props) {
       submitDisabled={!phoneNumber}
       onSubmit={smsCodeRequested || smsCode ? requestAuthToken : requestSmsCode}
     >
-      <div className="mt-6">
+      <div>
         <label htmlFor="adminkey" className="block font-medium text-gray-700">
           Enter your phone number
         </label>
@@ -235,7 +235,7 @@ export default function ConnectGaloy(props: Props) {
         </div>
       </div>
       {smsCodeRequested && (
-        <div className="mt-6">
+        <div>
           <label htmlFor="url" className="block font-medium text-gray-700">
             Enter your SMS verifcation code
           </label>

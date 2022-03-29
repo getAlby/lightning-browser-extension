@@ -69,7 +69,7 @@ export default function ConnectEclair() {
       submitDisabled={formData.password === "" || formData.url === ""}
       onSubmit={handleSubmit}
     >
-      <div className="mt-6">
+      <div className="mb-6">
         <TextField
           id="password"
           label="Eclair Password"
@@ -78,16 +78,14 @@ export default function ConnectEclair() {
           onChange={handleChange}
         />
       </div>
-      <div className="mt-6">
-        <TextField
-          id="url"
-          label="Eclair URL"
-          type="text"
-          value={formData.url}
-          required
-          onChange={handleChange}
-        />
-      </div>
+      <TextField
+        id="url"
+        label="Eclair URL"
+        type="text"
+        value={formData.url}
+        required
+        onChange={handleChange}
+      />
     </ConnectorForm>
   );
 }
