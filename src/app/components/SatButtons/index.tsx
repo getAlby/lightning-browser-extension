@@ -1,4 +1,5 @@
 import Button from "../Button";
+import { SatoshiV2Icon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 type Props = {
   onClick: (amount: string) => void;
@@ -6,11 +7,35 @@ type Props = {
 
 function SatButtons({ onClick }: Props) {
   return (
-    <div className="grid grid-rows-2 lg:grid-rows-1 grid-flow-col gap-2 mt-2 text-sm">
-      <Button label="100 sat⚡" onClick={() => onClick("100")} small />
-      <Button label="1K sat⚡" onClick={() => onClick("1000")} small />
-      <Button label="5K sat⚡" onClick={() => onClick("5000")} small />
-      <Button label="10K sat⚡" onClick={() => onClick("10000")} small />
+    <div className="flex gap-2 mt-2">
+      <Button
+        icon={<SatoshiV2Icon className="w-4 h-4" />}
+        label="100 ⚡"
+        onClick={() => onClick("100")}
+        fullWidth
+        compact
+      />
+      <Button
+        icon={<SatoshiV2Icon className="w-4 h-4" />}
+        label="1K ⚡"
+        onClick={() => onClick("1000")}
+        fullWidth
+        compact
+      />
+      <Button
+        icon={<SatoshiV2Icon className="w-4 h-4" />}
+        label="5K ⚡"
+        onClick={() => onClick("5000")}
+        fullWidth
+        compact
+      />
+      <Button
+        icon={<SatoshiV2Icon className="w-4 h-4" />}
+        label="10K ⚡"
+        onClick={() => onClick("10000")}
+        fullWidth
+        compact
+      />
     </div>
   );
 }

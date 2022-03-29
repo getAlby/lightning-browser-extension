@@ -14,6 +14,12 @@ export const Disabled = () => (
     <Button label="Button" primary loading disabled />
   </div>
 );
+export const Size = () => (
+  <div className="space-x-3">
+    <Button label="Normal" />
+    <Button label="Compact" compact />
+  </div>
+);
 
 export default {
   title: "Components/Buttons/Button",
