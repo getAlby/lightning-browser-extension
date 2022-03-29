@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import utils from "../../../../common/lib/utils";
-import Button from "../../../components/Button";
+
+import ConnectorForm from "../../../components/ConnectorForm";
 import TextField from "../../../components/form/TextField";
 import CompanionDownloadInfo from "../../../components/CompanionDownloadInfo";
 
@@ -87,54 +89,31 @@ export default function ConnectUmbrel() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 px-12 py-10">
-        <div className="lg:w-1/2">
-          <h1 className="text-2xl font-bold dark:text-white">
-            Connect to your Umbrel node
-          </h1>
-          <p className="text-gray-500 mt-6 dark:text-gray-400">
-            In your Umbrel dashboard go to <b>Connect Wallet</b>.<br />
-            Select <b>lndconnect REST</b> and copy the <b>lndconnect URL</b>.
-            (Depending on your setup you can either use the <i>local</i>{" "}
-            connection or the <i>Tor</i> connection.)
-          </p>
-          <div className="w-4/5">
-            <div className="mt-6">
-              <TextField
-                id="lndconnect"
-                label="lndconnect REST URL"
-                placeholder="lndconnect://yournode:8080?..."
-                onChange={handleLndconnectUrl}
-                required
-              />
-            </div>
-            {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
-          </div>
-        </div>
-        <div className="mt-16 lg:mt-0 lg:w-1/2">
-          <div className="lg:flex h-full justify-center items-center">
-            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
-          </div>
-        </div>
-      </div>
-      <div className="my-8 flex space-x-4 justify-center">
-        <Button
-          label="Back"
-          onClick={(e) => {
-            e.preventDefault();
-            navigate(-1);
-            return false;
-          }}
-        />
-        <Button
-          type="submit"
-          label="Continue"
-          primary
-          loading={loading}
-          disabled={formData.url === "" || formData.macaroon === ""}
+    <ConnectorForm
+      title="Connect to your Umbrel node"
+      description={
+        <p>
+          In your Umbrel dashboard go to <strong>Connect Wallet</strong>.<br />
+          Select <strong>lndconnect REST</strong> and copy the{" "}
+          <strong>lndconnect URL</strong>. (Depending on your setup you can
+          either use the <em>local</em> connection or the <em>Tor</em>{" "}
+          connection.)
+        </p>
+      }
+      submitLoading={loading}
+      submitDisabled={formData.url === "" || formData.macaroon === ""}
+      onSubmit={handleSubmit}
+    >
+      <div className="mt-6">
+        <TextField
+          id="lndconnect"
+          label="lndconnect REST URL"
+          placeholder="lndconnect://yournode:8080?..."
+          onChange={handleLndconnectUrl}
+          required
         />
       </div>
-    </form>
+      {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
+    </ConnectorForm>
   );
 }

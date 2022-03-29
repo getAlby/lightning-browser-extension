@@ -1,8 +1,10 @@
 import { SendIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import utils from "../../../../common/lib/utils";
-import Button from "../../../components/Button";
+
+import ConnectorForm from "../../../components/ConnectorForm";
 import TextField from "../../../components/form/TextField";
 import CompanionDownloadInfo from "../../../components/CompanionDownloadInfo";
 
@@ -121,95 +123,66 @@ export default function ConnectLnd() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 px-12 py-10">
-        <div className="lg:w-1/2">
-          <h1 className="text-2xl font-bold dark:text-white">
-            Connect to your LND node
-          </h1>
-          <p className="text-gray-500 mt-6 dark:text-gray-400">
-            You need your node URL and a macaroon with read and send permissions
-            (e.g. admin.macaroon)
-          </p>
-          <div className="w-4/5">
-            <div className="mt-6">
-              <TextField
-                id="url"
-                label="REST API host and port"
-                placeholder="https://your-node-url:8080"
-                pattern="https://.+"
-                title="https://your-node-url:8080"
-                onChange={handleChange}
-                required
-              />
-            </div>
-            {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
-            <div className="mt-6">
-              <div>
-                <TextField
-                  id="macaroon"
-                  label="Macaroon (HEX format)"
-                  value={formData.macaroon}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <p className="text-center my-4 dark:text-white">OR</p>
-              <div
-                className={`cursor-pointer flex flex-col items-center dark:bg-gray-800 p-4 py-3 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
-                  isDragging ? "border-blue-500 bg-blue-50" : ""
-                }`}
-                onDrop={dropHandler}
-                onDragOver={dragOverHandler}
-                onDragLeave={dragLeaveHandler}
-                onClick={() => {
-                  if (hiddenFileInput?.current) hiddenFileInput.current.click();
-                }}
-              >
-                <SendIcon className="mb-3 h-6 w-6 text-blue-500" />
-                <p className="dark:text-white">
-                  Drag and drop your macaroon here or{" "}
-                  <span className="underline">browse</span>
-                </p>
-                <input
-                  ref={hiddenFileInput}
-                  onChange={(event) => {
-                    if (event.target.files) {
-                      const file = event.target.files[0];
-                      readFile(file);
-                    }
-                  }}
-                  type="file"
-                  accept=".macaroon"
-                  hidden
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="mt-16 lg:mt-0 lg:w-1/2">
-          <div className="lg:flex h-full justify-center items-center">
-            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
-          </div>
-        </div>
+    <ConnectorForm
+      title="Connect to your LND node"
+      description="You need your node URL and a macaroon with read and send permissions (e.g. admin.macaroon)"
+      submitLoading={loading}
+      submitDisabled={formData.url === "" || formData.macaroon === ""}
+      onSubmit={handleSubmit}
+    >
+      <div className="mt-6">
+        <TextField
+          id="url"
+          label="REST API host and port"
+          placeholder="https://your-node-url:8080"
+          pattern="https://.+"
+          title="https://your-node-url:8080"
+          onChange={handleChange}
+          required
+        />
       </div>
-      <div className="my-8 flex space-x-4 justify-center">
-        <Button
-          label="Back"
-          onClick={(e) => {
-            e.preventDefault();
-            navigate(-1);
-            return false;
+      {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
+      <div className="mt-6">
+        <div>
+          <TextField
+            id="macaroon"
+            label="Macaroon (HEX format)"
+            value={formData.macaroon}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <p className="text-center my-4 dark:text-white">OR</p>
+        <div
+          className={`cursor-pointer flex flex-col items-center dark:bg-gray-800 p-4 py-3 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
+            isDragging ? "border-blue-500 bg-blue-50" : ""
+          }`}
+          onDrop={dropHandler}
+          onDragOver={dragOverHandler}
+          onDragLeave={dragLeaveHandler}
+          onClick={() => {
+            if (hiddenFileInput?.current) hiddenFileInput.current.click();
           }}
-        />
-        <Button
-          type="submit"
-          label="Continue"
-          primary
-          loading={loading}
-          disabled={formData.url === "" || formData.macaroon === ""}
-        />
+        >
+          <SendIcon className="mb-3 h-6 w-6 text-blue-500" />
+          <p className="dark:text-white">
+            Drag and drop your macaroon here or{" "}
+            <span className="underline">browse</span>
+          </p>
+          <input
+            ref={hiddenFileInput}
+            onChange={(event) => {
+              if (event.target.files) {
+                const file = event.target.files[0];
+                readFile(file);
+              }
+            }}
+            type="file"
+            accept=".macaroon"
+            hidden
+          />
+        </div>
       </div>
-    </form>
+    </ConnectorForm>
   );
 }

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import utils from "../../../../common/lib/utils";
-import Button from "../../../components/Button";
+
+import ConnectorForm from "../../../components/ConnectorForm";
 import TextField from "../../../components/form/TextField";
 import CompanionDownloadInfo from "../../../components/CompanionDownloadInfo";
 
@@ -87,60 +89,35 @@ export default function ConnectMyNode() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 px-12 py-10">
-        <div className="lg:w-1/2">
-          <h1 className="text-2xl font-bold dark:text-white">
-            Connect to your myNode
-          </h1>
-          <p className="text-gray-500 mt-6 dark:text-gray-400">
-            On your myNode homepage click on the <b>Wallet</b> button for your{" "}
-            <b>Lightning</b> service.
-            <br />
-            Now click on the <b>Pair Wallet</b> button under the <b>Status</b>{" "}
-            tab. Enter your password when prompted. <br />
-            Select the dropdown menu and choose a pairing option. Depending on
-            your setup you can either use the <b>
-              Lightning (REST + Local IP)
-            </b>{" "}
-            connection or the <b>Lightning (REST + Tor)</b> connection.
-          </p>
-          <div className="w-4/5">
-            <div className="mt-6">
-              <TextField
-                id="lndconnect"
-                label="lndconnect REST URL"
-                placeholder="lndconnect://yournode:8080?..."
-                onChange={handleLndconnectUrl}
-                required
-              />
-            </div>
-            {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
-          </div>
-        </div>
-        <div className="mt-16 lg:mt-0 lg:w-1/2">
-          <div className="lg:flex h-full justify-center items-center">
-            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
-          </div>
-        </div>
-      </div>
-      <div className="my-8 flex space-x-4 justify-center">
-        <Button
-          label="Back"
-          onClick={(e) => {
-            e.preventDefault();
-            navigate(-1);
-            return false;
-          }}
-        />
-        <Button
-          type="submit"
-          label="Continue"
-          primary
-          loading={loading}
-          disabled={formData.url === "" || formData.macaroon === ""}
+    <ConnectorForm
+      title="Connect to your myNode"
+      description={
+        <p>
+          On your myNode homepage click on the <strong>Wallet</strong> button
+          for your <strong>Lightning</strong> service.
+          <br />
+          Now click on the <strong>Pair Wallet</strong> button under the{" "}
+          <strong>Status</strong> tab. Enter your password when prompted. <br />
+          Select the dropdown menu and choose a pairing option. Depending on
+          your setup you can either use the{" "}
+          <strong>Lightning (REST + Local IP)</strong> connection or the{" "}
+          <b>Lightning (REST + Tor)</b> connection.
+        </p>
+      }
+      submitLoading={loading}
+      submitDisabled={formData.url === "" || formData.macaroon === ""}
+      onSubmit={handleSubmit}
+    >
+      <div className="mt-6">
+        <TextField
+          id="lndconnect"
+          label="lndconnect REST URL"
+          placeholder="lndconnect://yournode:8080?..."
+          onChange={handleLndconnectUrl}
+          required
         />
       </div>
-    </form>
+      {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
+    </ConnectorForm>
   );
 }
