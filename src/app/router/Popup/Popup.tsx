@@ -52,7 +52,11 @@ const Layout = () => {
   return (
     <div className="flex flex-col" style={{ height: `${POPUP_MAX_HEIGHT}px` }}>
       <Navbar
-        title={auth.account?.alias || ""}
+        title={
+          typeof auth.account?.name === "string"
+            ? `${auth.account?.name} - ${auth.account?.alias}`.substring(0, 21)
+            : ""
+        }
         subtitle={
           typeof auth.account?.balance === "number"
             ? `${auth.account.balance} sat`

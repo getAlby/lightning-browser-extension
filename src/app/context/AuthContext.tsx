@@ -5,7 +5,12 @@ import api from "../../common/lib/api";
 import type { AccountInfo } from "../../types";
 
 interface AuthContextType {
-  account: { id: string; alias?: string; balance?: number } | null;
+  account: {
+    id: string;
+    name?: string;
+    alias?: string;
+    balance?: number;
+  } | null;
   loading: boolean;
   unlock: (user: string, callback: VoidFunction) => Promise<void>;
   lock: (callback: VoidFunction) => void;
