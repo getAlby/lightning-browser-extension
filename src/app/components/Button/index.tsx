@@ -3,7 +3,6 @@ import Loading from "../Loading";
 
 export type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   fullWidth?: boolean;
-  compact?: boolean;
   label: string;
   icon?: React.ReactNode;
   primary?: boolean;
@@ -22,9 +21,7 @@ export default function Button({
   fullWidth = false,
   primary = false,
   loading = false,
-  compact = false,
 }: Props) {
-  const iconMargin = compact ? "" : direction === "row" ? "mr-2" : "";
   return (
     <button
       type={type}
@@ -44,11 +41,11 @@ export default function Button({
       disabled={disabled}
     >
       {loading && (
-        <div className={iconMargin}>
+        <div className={direction === "row" ? "mr-2" : ""}>
           <Loading color={primary ? "white" : "black"} />
         </div>
       )}
-      {icon && <div className={iconMargin}>{icon}</div>}
+      {icon}
       {label}
     </button>
   );

@@ -77,7 +77,7 @@ function AccountsScreen() {
       <div className="shadow border-b border-gray-200 dark:border-gray-500 sm:rounded-lg bg-white dark:bg-gray-800">
         <div className="p-6">
           <Button
-            icon={<PlusIcon className="w-5 h-5" />}
+            icon={<PlusIcon className="w-5 h-5 mr-2" />}
             label="Add account"
             primary
             onClick={() => navigate(`/accounts/new`)}
