@@ -104,16 +104,18 @@ export default function ConnectUmbrel() {
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
     >
-      <div className="mb-6">
-        <TextField
-          id="lndconnect"
-          label="lndconnect REST URL"
-          placeholder="lndconnect://yournode:8080?..."
-          onChange={handleLndconnectUrl}
-          required
-        />
-      </div>
-      {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
+      <TextField
+        id="lndconnect"
+        label="lndconnect REST URL"
+        placeholder="lndconnect://yournode:8080?..."
+        onChange={handleLndconnectUrl}
+        required
+      />
+      {formData.url.match(/\.onion/i) && (
+        <div className="mt-6">
+          <CompanionDownloadInfo />
+        </div>
+      )}
     </ConnectorForm>
   );
 }
