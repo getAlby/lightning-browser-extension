@@ -1,8 +1,9 @@
 import { useState } from "react";
-import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 
 import utils from "../../../../common/lib/utils";
+
+import ConnectorForm from "../../../components/ConnectorForm";
 import TextField from "../../../components/form/TextField";
 
 export default function ConnectLnbits() {
@@ -77,58 +78,29 @@ export default function ConnectLnbits() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="relative lg:flex mt-14 bg-white dark:bg-gray-800 px-10 py-12">
-        <div className="lg:w-1/2">
-          <h1 className="text-2xl font-bold dark:text-white">
-            Connect to LNbits
-          </h1>
-          <p className="text-gray-500 mt-6"></p>
-          <div className="w-4/5">
-            <div className="mt-6">
-              <TextField
-                id="adminkey"
-                label="LNbits Admin Key"
-                type="text"
-                required
-                onChange={handleChange}
-              />
-            </div>
-            <div className="mt-6">
-              <TextField
-                id="url"
-                label="LNbits URL"
-                type="text"
-                value={formData.url}
-                required
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="mt-16 lg:mt-0 lg:w-1/2">
-          <div className="lg:flex h-full justify-center items-center">
-            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
-          </div>
-        </div>
-      </div>
-      <div className="my-8 flex space-x-4 justify-center">
-        <Button
-          label="Back"
-          onClick={(e) => {
-            e.preventDefault();
-            navigate(-1);
-            return false;
-          }}
-        />
-        <Button
-          type="submit"
-          label="Continue"
-          primary
-          loading={loading}
-          disabled={formData.adminkey === "" || formData.url === ""}
+    <ConnectorForm
+      title="Connect to LNbits"
+      submitLoading={loading}
+      submitDisabled={formData.adminkey === "" || formData.url === ""}
+      onSubmit={handleSubmit}
+    >
+      <div className="mb-6">
+        <TextField
+          id="adminkey"
+          label="LNbits Admin Key"
+          type="text"
+          required
+          onChange={handleChange}
         />
       </div>
-    </form>
+      <TextField
+        id="url"
+        label="LNbits URL"
+        type="text"
+        value={formData.url}
+        required
+        onChange={handleChange}
+      />
+    </ConnectorForm>
   );
 }

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import utils from "../../../../common/lib/utils";
-import Button from "../../../components/Button";
+
+import ConnectorForm from "../../../components/ConnectorForm";
 import TextField from "../../../components/form/TextField";
 import CompanionDownloadInfo from "../../../components/CompanionDownloadInfo";
 
@@ -10,7 +12,7 @@ const initialFormData = Object.freeze({
   macaroon: "",
 });
 
-export default function ConnectUmbrel() {
+export default function ConnectStart9() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
@@ -46,7 +48,7 @@ export default function ConnectUmbrel() {
     setLoading(true);
     const { url, macaroon } = formData;
     const account = {
-      name: "Umbrel",
+      name: "Start9",
       config: {
         macaroon,
         url,
@@ -73,11 +75,11 @@ export default function ConnectUmbrel() {
         }
       } else {
         alert(`
-          Connection failed. Are your Umbrel credentials correct? \n\n(${validation.error})`);
+          Connection failed. Are your Embassy credentials correct? \n\n(${validation.error})`);
       }
     } catch (e) {
       console.error(e);
-      let message = "Connection failed. Are your Umbrel credentials correct?";
+      let message = "Connection failed. Are your Embassy credentials correct?";
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
@@ -87,54 +89,35 @@ export default function ConnectUmbrel() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 px-12 py-10">
-        <div className="lg:w-1/2">
-          <h1 className="text-2xl font-bold dark:text-white">
-            Connect to your Umbrel node
-          </h1>
-          <p className="text-gray-500 mt-6 dark:text-gray-400">
-            In your Umbrel dashboard go to <b>Connect Wallet</b>.<br />
-            Select <b>lndconnect REST</b> and copy the <b>lndconnect URL</b>.
-            (Depending on your setup you can either use the <i>local</i>{" "}
-            connection or the <i>Tor</i> connection.)
-          </p>
-          <div className="w-4/5">
-            <div className="mt-6">
-              <TextField
-                id="lndconnect"
-                label="lndconnect REST URL"
-                placeholder="lndconnect://yournode:8080?..."
-                onChange={handleLndconnectUrl}
-                required
-              />
-            </div>
-            {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
-          </div>
+    <ConnectorForm
+      title="Connect to your Embassy node"
+      description={
+        <p>
+          <strong>Note</strong>: Currently we only support LND but we will be
+          adding c-lightning support in the future! <br />
+          On your Embassy dashboard click on the{" "}
+          <strong>Lightning Network Daemon</strong> service.
+          <br />
+          Select the <strong>Properties</strong> tab.
+          <br /> Now copy the <strong>LND Connect REST URL</strong>.
+        </p>
+      }
+      submitLoading={loading}
+      submitDisabled={formData.url === "" || formData.macaroon === ""}
+      onSubmit={handleSubmit}
+    >
+      <TextField
+        id="lndconnect"
+        label="lndconnect REST URL"
+        placeholder="lndconnect://yournode:8080?..."
+        onChange={handleLndconnectUrl}
+        required
+      />
+      {formData.url.match(/\.onion/i) && (
+        <div className="mt-6">
+          <CompanionDownloadInfo />
         </div>
-        <div className="mt-16 lg:mt-0 lg:w-1/2">
-          <div className="lg:flex h-full justify-center items-center">
-            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
-          </div>
-        </div>
-      </div>
-      <div className="my-8 flex space-x-4 justify-center">
-        <Button
-          label="Back"
-          onClick={(e) => {
-            e.preventDefault();
-            navigate(-1);
-            return false;
-          }}
-        />
-        <Button
-          type="submit"
-          label="Continue"
-          primary
-          loading={loading}
-          disabled={formData.url === "" || formData.macaroon === ""}
-        />
-      </div>
-    </form>
+      )}
+    </ConnectorForm>
   );
 }

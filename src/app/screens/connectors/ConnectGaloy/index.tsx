@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Input from "../../../components/form/Input";
-import Button from "../../../components/Button";
 
 import utils from "../../../../common/lib/utils";
+
+import Input from "../../../components/form/Input";
+import ConnectorForm from "../../../components/ConnectorForm";
 
 export const galoyUrls = {
   "galoy-bitcoin-beach": {
@@ -51,7 +52,8 @@ export default function ConnectGaloy(props: Props) {
     setSmsCode(event.target.value.trim());
   }
 
-  async function requestSmsCode(event: React.MouseEvent<HTMLButtonElement>) {
+  async function requestSmsCode(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     setLoading(true);
     const query = {
       query: `
@@ -98,7 +100,8 @@ export default function ConnectGaloy(props: Props) {
     }
   }
 
-  async function requestAuthToken(event: React.MouseEvent<HTMLButtonElement>) {
+  async function requestAuthToken(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     setLoading(true);
     const authQuery = {
       query: `
@@ -209,74 +212,43 @@ export default function ConnectGaloy(props: Props) {
   }
 
   return (
-    <div className="relative lg:flex mt-24">
-      <div className="lg:w-1/2">
-        <h1 className="text-3xl font-bold">Connect to {label}</h1>
-        <p className="text-gray-500 mt-6"></p>
-        <div className="w-4/5">
-          <div className="mt-6">
-            <label
-              htmlFor="adminkey"
-              className="block font-medium text-gray-700"
-            >
-              Enter your phone number
-            </label>
-            <div className="mt-1">
-              <Input
-                name="phone"
-                type="tel"
-                required
-                placeholder="+503"
-                disabled={smsCodeRequested}
-                onChange={handlePhoneNumberChange}
-              />
-            </div>
+    <ConnectorForm
+      title={`Connect to ${label}`}
+      submitLabel={smsCodeRequested || smsCode ? "Login" : "Request SMS Code"}
+      submitLoading={loading}
+      submitDisabled={!phoneNumber}
+      onSubmit={smsCodeRequested || smsCode ? requestAuthToken : requestSmsCode}
+    >
+      <div>
+        <label htmlFor="adminkey" className="block font-medium text-gray-700">
+          Enter your phone number
+        </label>
+        <div className="mt-1">
+          <Input
+            name="phone"
+            type="tel"
+            required
+            placeholder="+503"
+            disabled={smsCodeRequested}
+            onChange={handlePhoneNumberChange}
+          />
+        </div>
+      </div>
+      {smsCodeRequested && (
+        <div>
+          <label htmlFor="url" className="block font-medium text-gray-700">
+            Enter your SMS verifcation code
+          </label>
+          <div className="mt-1">
+            <Input
+              name="2fa"
+              type="text"
+              required
+              onChange={handleSmsCodeChange}
+            />
           </div>
-          {smsCodeRequested && (
-            <div className="mt-6">
-              <label htmlFor="url" className="block font-medium text-gray-700">
-                Enter your SMS verifcation code
-              </label>
-              <div className="mt-1">
-                <Input
-                  name="2fa"
-                  type="text"
-                  required
-                  onChange={handleSmsCodeChange}
-                />
-              </div>
-            </div>
-          )}
         </div>
-        <div className="mt-8 flex space-x-4">
-          <Button
-            label="Back"
-            onClick={(e) => {
-              e.preventDefault();
-              navigate(-1);
-              return false;
-            }}
-          />
-          <Button
-            label={smsCodeRequested || smsCode ? "Login" : "Request SMS Code"}
-            primary
-            loading={loading}
-            disabled={!phoneNumber}
-            onClick={
-              smsCodeRequested || smsCode ? requestAuthToken : requestSmsCode
-            }
-          />
-        </div>
-      </div>
-      <div className="mt-16 lg:mt-0 lg:w-1/2">
-        <div className="lg:flex h-full justify-center items-center">
-          <img
-            src="assets/icons/satsymbol.svg"
-            alt="sat"
-            className="max-w-xs"
-          />
-        </div>
-      </div>
-    </div>
+      )}
+    </ConnectorForm>
   );
 }

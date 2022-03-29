@@ -8,7 +8,7 @@ import DevMenu from "../../components/DevMenu";
 import Steps from "../../components/Steps";
 import Intro from "../../screens/Onboard/Intro";
 import SetPassword from "../../screens/Onboard/SetPassword";
-import ChooseConnector from "../../screens/Onboard/ChooseConnector";
+import ChooseConnector from "../../screens/connectors/ChooseConnector";
 import TestConnection from "../../screens/Onboard/TestConnection";
 
 const routes = [

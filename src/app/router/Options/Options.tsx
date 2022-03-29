@@ -17,7 +17,7 @@ import Receive from "../../screens/Receive";
 import LNURLPay from "../../screens/LNURLPay";
 import Settings from "../../screens/Settings";
 import Unlock from "../../screens/Unlock";
-import ChooseConnector from "../../screens/Onboard/ChooseConnector";
+import ChooseConnector from "../../screens/connectors/ChooseConnector";
 import Accounts from "../../screens/Accounts";
 import Keysend from "../../screens/Keysend";
 

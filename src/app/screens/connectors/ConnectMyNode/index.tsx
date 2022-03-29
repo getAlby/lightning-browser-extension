@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import utils from "../../../../common/lib/utils";
-import Button from "../../../components/Button";
+
+import ConnectorForm from "../../../components/ConnectorForm";
 import TextField from "../../../components/form/TextField";
 import CompanionDownloadInfo from "../../../components/CompanionDownloadInfo";
 
@@ -10,7 +12,7 @@ const initialFormData = Object.freeze({
   macaroon: "",
 });
 
-export default function ConnectStart9() {
+export default function ConnectMyNode() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
@@ -46,7 +48,7 @@ export default function ConnectStart9() {
     setLoading(true);
     const { url, macaroon } = formData;
     const account = {
-      name: "Start9",
+      name: "myNode",
       config: {
         macaroon,
         url,
@@ -73,11 +75,11 @@ export default function ConnectStart9() {
         }
       } else {
         alert(`
-          Connection failed. Are your Embassy credentials correct? \n\n(${validation.error})`);
+          Connection failed. Are your credentials correct? \n\n(${validation.error})`);
       }
     } catch (e) {
       console.error(e);
-      let message = "Connection failed. Are your Embassy credentials correct?";
+      let message = "Connection failed. Are your credentials correct?";
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
@@ -87,57 +89,37 @@ export default function ConnectStart9() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 px-12 py-10">
-        <div className="lg:w-1/2">
-          <h1 className="text-2xl font-bold dark:text-white">
-            Connect to your Embassy node
-          </h1>
-          <p className="text-gray-500 mt-6 dark:text-gray-400">
-            <b>Note</b>: Currently we only support LND but we will be adding
-            c-lightning support in the future! <br />
-            On your Embassy dashboard click on the{" "}
-            <b>Lightning Network Daemon</b> service.
-            <br />
-            Select the <b>Properties</b> tab.
-            <br /> Now copy the <b>LND Connect REST URL</b>.
-          </p>
-          <div className="w-4/5">
-            <div className="mt-6">
-              <TextField
-                id="lndconnect"
-                label="lndconnect REST URL"
-                placeholder="lndconnect://yournode:8080?..."
-                onChange={handleLndconnectUrl}
-                required
-              />
-            </div>
-            {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
-          </div>
+    <ConnectorForm
+      title="Connect to your myNode"
+      description={
+        <p>
+          On your myNode homepage click on the <strong>Wallet</strong> button
+          for your <strong>Lightning</strong> service.
+          <br />
+          Now click on the <strong>Pair Wallet</strong> button under the{" "}
+          <strong>Status</strong> tab. Enter your password when prompted. <br />
+          Select the dropdown menu and choose a pairing option. Depending on
+          your setup you can either use the{" "}
+          <strong>Lightning (REST + Local IP)</strong> connection or the{" "}
+          <b>Lightning (REST + Tor)</b> connection.
+        </p>
+      }
+      submitLoading={loading}
+      submitDisabled={formData.url === "" || formData.macaroon === ""}
+      onSubmit={handleSubmit}
+    >
+      <TextField
+        id="lndconnect"
+        label="lndconnect REST URL"
+        placeholder="lndconnect://yournode:8080?..."
+        onChange={handleLndconnectUrl}
+        required
+      />
+      {formData.url.match(/\.onion/i) && (
+        <div className="mt-6">
+          <CompanionDownloadInfo />
         </div>
-        <div className="mt-16 lg:mt-0 lg:w-1/2">
-          <div className="lg:flex h-full justify-center items-center">
-            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
-          </div>
-        </div>
-      </div>
-      <div className="my-8 flex space-x-4 justify-center">
-        <Button
-          label="Back"
-          onClick={(e) => {
-            e.preventDefault();
-            navigate(-1);
-            return false;
-          }}
-        />
-        <Button
-          type="submit"
-          label="Continue"
-          primary
-          loading={loading}
-          disabled={formData.url === "" || formData.macaroon === ""}
-        />
-      </div>
-    </form>
+      )}
+    </ConnectorForm>
   );
 }
