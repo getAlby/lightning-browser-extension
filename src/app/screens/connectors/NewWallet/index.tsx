@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Input from "../../../components/form/Input";
 import TextField from "../../../components/form/TextField";
 import { useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";
@@ -16,8 +15,11 @@ export default function NewWallet() {
     login: "",
     password: "",
     url: "",
+    lnAddress: "",
   });
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [lnAddress, setLnAddress] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -33,19 +35,23 @@ export default function NewWallet() {
     return fetch(walletCreateUrl, {
       method: "POST",
       headers,
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({
+        email,
+        password,
+        lightning_addresses_attributes: [{ address: lnAddress }], // address must be provided as array, in theory we support multiple addresses per account
+      }),
     })
-      .then((res) => {
-        res.json().then((data) => {
-          if (data.lndhub?.login && data.lndhub?.password && data.lndhub?.url) {
-            setLndHubData(data.lndhub);
-          } else {
-            console.error(data);
-            alert(
-              "Failed to create a new wallet. Please try again and contact support."
-            );
-          }
-        });
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.lndhub?.login && data.lndhub?.password && data.lndhub?.url) {
+          setLndHubData({
+            ...data.lndhub,
+            lnAddress: data.lightning_address,
+          });
+        } else {
+          console.error(data);
+          alert(`Failed to create a new wallet. ${JSON.stringify(data)}`);
+        }
       })
       .catch((e) => {
         console.error(e);
@@ -60,13 +66,15 @@ export default function NewWallet() {
     setLoading(true);
     event.preventDefault();
 
-    const { login, password, url } = lndHubData;
+    const { login, password, url, lnAddress } = lndHubData;
+    const name = lnAddress || "Alby"; // use the ln address as name or Alby to default
     const account = {
-      name: "Alby",
+      name,
       config: {
         login,
         password,
         url,
+        lnAddress,
       },
       connector: "lndhub",
     };
@@ -97,32 +105,34 @@ export default function NewWallet() {
 
   return (
     <ConnectorForm
-      title="Get a new lightning wallet"
+      title={
+        lndHubData.login === ""
+          ? "Get a new lightning wallet"
+          : "🎉Your account is ready"
+      }
       submitLabel={lndHubData.login ? "Continue" : "Create a wallet"}
       submitLoading={loading}
       onSubmit={lndHubData.login ? next : signup}
+      submitDisabled={password === "" || email === ""}
     >
       {lndHubData.login ? (
         <>
-          <div className="mt-6">
-            <Input
-              name="uri"
-              type="text"
-              value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
-              disabled
-            />
+          <div className="mt-6 dark:text-white">
+            <p>
+              <strong>
+                We have created a new wallet for you. <br />
+              </strong>
+            </p>
+            {lndHubData.lnAddress && (
+              <p>Your lightning address: {lndHubData.lnAddress}</p>
+            )}
           </div>
           <div className="mt-6 flex justify-center space-x-3 items-center dark:text-white">
             <div className="flex-1">
-              <p className="my-2">
-                <strong>
-                  We have created a new wallet for you. <br />
-                  Please save this backup!
-                </strong>
-              </p>
-              If you loose access you will need this backup to recover your
-              wallet. You can also import the wallet into your BlueWallet mobile
-              app using the QR Code.
+              <strong>Want to use your wallet on your mobile?</strong>
+              <br />
+              Import the wallet into your BlueWallet mobile app using the QR
+              Code.
             </div>
             <div className="float-right">
               <QRCode
@@ -136,9 +146,9 @@ export default function NewWallet() {
       ) : (
         <>
           <div className="mt-6 dark:text-white">
-            <strong>We host a lightning wallet for you!</strong>
+            <strong>Create a getAlby.com account</strong>
             <br />
-            ...but remember: not your keys, not your coins.
+            ...and let us host a lightning wallet for you!
           </div>
 
           <div className="mt-6">
@@ -146,8 +156,53 @@ export default function NewWallet() {
               id="email"
               label="Email Address"
               type="email"
+              required
               onChange={(e) => {
                 setEmail(e.target.value.trim());
+              }}
+            />
+          </div>
+          <div className="mt-6">
+            <TextField
+              id="password"
+              label="Password"
+              type="password"
+              minLength={6}
+              pattern=".{6,}"
+              title="at least 6 characters"
+              required
+              onChange={(e) => {
+                setPassword(e.target.value.trim());
+              }}
+            />
+          </div>
+          <div className="mt-6">
+            <p className="text-gray-500 dark:text-gray-400">
+              Your Alby account also comes with an optional{" "}
+              <a
+                href="https://lightningaddress.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Lightning Address
+              </a>
+              . This is a simple way for anyone to send you Bitcoin on the
+              Lightning Network. (
+              <a
+                href="https://lightningaddress.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                learn more
+              </a>
+              )
+            </p>
+            <TextField
+              id="lnAddress"
+              label="Choose your Lightning Address (optional)"
+              type="text"
+              onChange={(e) => {
+                setLnAddress(e.target.value.trim().split("@")[0]); // in case somebody enters a full address we simple remove the domain
               }}
             />
           </div>

@@ -15,6 +15,8 @@ const TextField = ({
   autoFocus = false,
   autoComplete = "off",
   disabled,
+  minLength,
+  maxLength,
   min,
   max,
 }: React.InputHTMLAttributes<HTMLInputElement> & { label: string }) => (
@@ -41,6 +43,8 @@ const TextField = ({
         autoFocus={autoFocus}
         autoComplete={autoComplete}
         disabled={disabled}
+        minLength={minLength}
+        maxLength={maxLength}
         min={min}
         max={max}
       />
