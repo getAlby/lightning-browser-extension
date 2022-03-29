@@ -24,25 +24,20 @@ export default function Button({
   loading = false,
   compact = false,
 }: Props) {
-  const px = fullWidth ? "px-0" : compact ? "px-4" : "px-7";
-  const py = compact ? "py-1" : "py-2";
   const iconMargin = compact ? "" : direction === "row" ? "mr-2" : "";
-
   return (
     <button
       type={type}
       className={classNames(
         direction === "row" ? "flex-row" : "flex-col",
         fullWidth && "w-full",
-        px,
-        py,
+        fullWidth ? "px-0 py-2" : "px-7 py-2",
         primary
           ? "bg-orange-bitcoin text-white border border-transparent"
           : `bg-white text-gray-700 border border-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-500`,
         primary && !disabled && "hover:bg-orange-bitcoin-700",
         !primary && !disabled && "hover:bg-gray-100 dark:hover:bg-gray-600",
         disabled ? "cursor-default opacity-60" : "cursor-pointer",
-        compact ? "text-sm" : "",
         "inline-flex justify-center items-center font-medium rounded-md shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-bitcoin transition duration-150"
       )}
       onClick={onClick}
