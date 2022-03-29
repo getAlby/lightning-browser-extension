@@ -2,8 +2,8 @@ import { MemoryRouter } from "react-router-dom";
 import { Meta } from "@storybook/react/types-6-0";
 
 import IntroScreen from "./Intro";
-import ChooseConnectorScreen from "./ChooseConnector";
-import ConnectLndScreen from "./ConnectLnd";
+import ChooseConnectorScreen from "../connectors/ChooseConnector";
+import ConnectLndScreen from "../connectors/ConnectLnd";
 import TestConnectionScreen from "./TestConnection";
 import SetPasswordScreen from "./SetPassword";
 

@@ -1,13 +1,13 @@
-import ConnectLnd from "../screens/Onboard/ConnectLnd";
-import ConnectLndHub from "../screens/Onboard/ConnectLndHub";
-import ConnectLnbits from "../screens/Onboard/ConnectLnbits";
-import ConnectGaloy, { galoyUrls } from "../screens/Onboard/ConnectGaloy";
-import ConnectEclair from "../screens/Onboard/ConnectEclair";
-import ConnectCitadel from "../screens/Onboard/ConnectCitadel";
+import ConnectLnd from "../screens/connectors/ConnectLnd";
+import ConnectLndHub from "../screens/connectors/ConnectLndHub";
+import ConnectLnbits from "../screens/connectors/ConnectLnbits";
+import ConnectGaloy, { galoyUrls } from "../screens/connectors/ConnectGaloy";
+import ConnectEclair from "../screens/connectors/ConnectEclair";
+import ConnectCitadel from "../screens/connectors/ConnectCitadel";
 import NewWallet from "../screens/Onboard/NewWallet";
-import ConnectUmbrel from "../screens/Onboard/ConnectUmbrel";
-import ConnectStart9 from "../screens/Onboard/ConnectStart9";
-import ConnectMyNode from "../screens/Onboard/ConnectMyNode";
+import ConnectUmbrel from "../screens/connectors/ConnectUmbrel";
+import ConnectStart9 from "../screens/connectors/ConnectStart9";
+import ConnectMyNode from "../screens/connectors/ConnectMyNode";
 
 const galoyPaths: { [key: string]: keyof typeof galoyUrls } = {
   bitcoinBeach: "galoy-bitcoin-beach",
