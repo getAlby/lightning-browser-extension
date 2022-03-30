@@ -17,7 +17,6 @@ const info = async (message, sender) => {
     connector.getBalance(),
   ]);
 
-  console.log(currentAccount.name);
   // TODO error handling
   return {
     data: {

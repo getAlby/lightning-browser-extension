@@ -74,7 +74,6 @@ function battery(): void {
     let userData;
     if ((userData = getUserData(username))) {
       observer.disconnect();
-      console.log({ userData });
 
       let match;
       let recipient;

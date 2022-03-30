@@ -4,7 +4,6 @@ const getById = async (message, sender) => {
   const { id } = message.args;
   const allowance = await db.allowances.get({ id });
 
-  console.log(allowance);
   if (allowance) {
     allowance.usedBudget =
       parseInt(allowance.totalBudget) - parseInt(allowance.remainingBudget);

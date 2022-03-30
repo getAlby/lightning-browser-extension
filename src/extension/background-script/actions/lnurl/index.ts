@@ -27,7 +27,6 @@ async function lnurl(message: Message) {
         return;
       case "login":
         console.log("lnurl-auth");
-        console.log(lnurlDetails);
         return authWithPrompt(message, lnurlDetails);
       case "payRequest":
         return payWithPrompt(message, lnurlDetails);

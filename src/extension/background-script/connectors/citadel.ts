@@ -78,7 +78,6 @@ class CitadelConnector implements Connector {
     const res = await this.citadel.middleware.lnd.lightning.payInvoice(
       args.paymentRequest
     );
-    console.log(res);
     return {
       data: {
         preimage: res.paymentPreimage,
