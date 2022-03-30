@@ -89,7 +89,12 @@ const lnurl = {
     amount,
   }: {
     paymentInfo: LNURLPaymentInfo;
-    payerdata: undefined | Record<string, string>;
+    payerdata:
+      | undefined
+      | {
+          name?: string;
+          email?: string;
+        };
     metadata: string;
     amount: number;
   }) {

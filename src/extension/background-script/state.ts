@@ -32,6 +32,7 @@ export const DEFAULT_SETTINGS = {
   websiteEnhancements: true,
   legacyLnurlAuth: false,
   userName: "",
+  userEmail: "",
 };
 
 // these keys get synced from the state to the browser storage

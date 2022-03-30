@@ -55,6 +55,7 @@ function LNURLPay(props: Props) {
   );
   const [comment, setComment] = useState("");
   const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successAction, setSuccessAction] = useState<
     LNURLPaymentSuccessAction | undefined
@@ -87,16 +88,33 @@ function LNURLPay(props: Props) {
       if (response.userName) {
         setUserName(response.userName);
       }
+      if (response.userEmail) {
+        setUserEmail(response.userEmail);
+      }
     });
   }, []);
+
+  const getPayerData = (details: LNURLPayServiceResponse) => {
+    if (
+      userName?.length &&
+      userEmail?.length &&
+      details.payerData.email &&
+      details.payerData.name
+    ) {
+      return { name: userName, email: userEmail };
+    } else if (userName?.length && details.payerData.name) {
+      return { name: userName };
+    } else if (userEmail?.length && details.payerData.email) {
+      return { email: userEmail };
+    } else {
+      return undefined;
+    }
+  };
 
   async function confirm() {
     if (!details) return;
 
-    const payerdata =
-      details.payerData && details.payerData.name && userName && userName.length
-        ? { name: userName }
-        : undefined;
+    const payerdata = getPayerData(details);
 
     try {
       setLoadingConfirm(true);
@@ -334,6 +352,19 @@ function LNURLPay(props: Props) {
                     value={userName}
                     onChange={(e) => {
                       setUserName(e.target.value);
+                    }}
+                  />
+                </div>
+              )}
+              {details && details?.payerData?.email && (
+                <div className="mt-4">
+                  <TextField
+                    id="email"
+                    label="Email"
+                    placeholder="optional"
+                    value={userEmail}
+                    onChange={(e) => {
+                      setUserEmail(e.target.value);
                     }}
                   />
                 </div>
