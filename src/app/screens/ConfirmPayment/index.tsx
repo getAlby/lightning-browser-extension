@@ -1,22 +1,22 @@
-import { useState, useRef } from "react";
-import { Transition } from "@headlessui/react";
-import { useSearchParams, useNavigate } from "react-router-dom";
 import { parsePaymentRequest } from "invoices";
+import { useRef, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-import Button from "../../components/Button";
-import Checkbox from "../../components/Form/Checkbox";
-import PaymentSummary from "../../components/PaymentSummary";
-import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
 import utils from "../../../common/lib/utils";
 import getOriginData from "../../../extension/content-script/originData";
-import { useAuth } from "../../context/AuthContext";
 import type { OriginData } from "../../../types";
-import TextField from "../../components/Form/TextField";
 
-type Props = {
-  origin: OriginData;
-  paymentRequest: string;
+import PaymentSummary from "../../components/PaymentSummary";
+import PublisherCard from "../../components/PublisherCard";
+import { useAuth } from "../../context/AuthContext";
+import BudgetControl from "../../components/BudgetControl";
+import ConfirmOrCancel from "../../components/ConfirmOrCancel";
+import SuccessMessage from "../../components/SuccessMessage";
+
+export type Props = {
+  origin?: OriginData;
+  paymentRequest?: string;
 };
 
 function ConfirmPayment(props: Props) {
@@ -38,7 +38,7 @@ function ConfirmPayment(props: Props) {
   );
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [succesMessage, setSuccessMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   async function confirm() {
     if (rememberMe && budget) {
@@ -82,25 +82,6 @@ function ConfirmPayment(props: Props) {
     });
   }
 
-  function renderSuccesMessage() {
-    return (
-      <>
-        <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-          <dt className="text-sm font-semibold text-gray-500">Message</dt>
-          <dd className="text-sm mb-4 dark:text-white">{succesMessage}</dd>
-        </dl>
-        <div className="text-center">
-          <button
-            className="underline text-sm text-gray-500"
-            onClick={() => window.close()}
-          >
-            Close
-          </button>
-        </div>
-      </>
-    );
-  }
-
   return (
     <div>
       <PublisherCard
@@ -109,7 +90,7 @@ function ConfirmPayment(props: Props) {
       />
 
       <div className="p-4 max-w-screen-sm mx-auto">
-        {!succesMessage ? (
+        {!successMessage ? (
           <>
             <div className="mb-8">
               <PaymentSummary
@@ -118,77 +99,27 @@ function ConfirmPayment(props: Props) {
               />
             </div>
 
-            <div className="mb-8">
-              <div className="flex items-center">
-                <Checkbox
-                  id="remember_me"
-                  name="remember_me"
-                  checked={rememberMe}
-                  onChange={(event) => {
-                    setRememberMe(event.target.checked);
-                  }}
-                />
-                <label
-                  htmlFor="remember_me"
-                  className="ml-2 block text-sm text-gray-900 font-medium dark:text-white"
-                >
-                  Remember and set a budget
-                </label>
-              </div>
+            <BudgetControl
+              remember={rememberMe}
+              onRememberChange={(event) => {
+                setRememberMe(event.target.checked);
+              }}
+              budget={budget}
+              onBudgetChange={(event) => setBudget(event.target.value)}
+            />
 
-              <Transition
-                show={rememberMe}
-                enter="transition duration-100 ease-out"
-                enterFrom="scale-95 opacity-0"
-                enterTo="scale-100 opacity-100"
-                leave="transition duration-75 ease-out"
-                leaveFrom="scale-100 opacity-100"
-                leaveTo="scale-95 opacity-0"
-              >
-                <p className="mt-4 mb-3 text-gray-500 text-sm">
-                  You may set a balance to not be asked for confirmation on
-                  payments until it is exhausted.
-                </p>
-                <div>
-                  <TextField
-                    id="budget"
-                    label="Budget"
-                    placeholder="sat"
-                    value={budget}
-                    type="number"
-                    onChange={(event) => setBudget(event.target.value)}
-                  />
-                </div>
-              </Transition>
-            </div>
-
-            <div className="text-center">
-              <div className="mb-5">
-                <Button
-                  onClick={confirm}
-                  label="Confirm"
-                  fullWidth
-                  primary
-                  disabled={loading}
-                  loading={loading}
-                />
-              </div>
-
-              <p className="mb-3 underline text-sm text-gray-300">
-                Only connect with sites you trust.
-              </p>
-
-              <a
-                className="underline text-sm text-gray-500 dark:text-gray-400"
-                href="#"
-                onClick={reject}
-              >
-                Cancel
-              </a>
-            </div>
+            <ConfirmOrCancel
+              disabled={loading}
+              loading={loading}
+              onConfirm={confirm}
+              onCancel={reject}
+            />
           </>
         ) : (
-          renderSuccesMessage()
+          <SuccessMessage
+            message={successMessage}
+            onClose={() => window.close()}
+          />
         )}
       </div>
     </div>

@@ -12,12 +12,15 @@ const makeInvoice = async (message, sender) => {
     amount = parseInt(message.args.amount);
 
     const connector = await state.getState().getConnector();
-    const response = await connector.makeInvoice({
-      amount,
-      memo,
-    });
-
-    return response;
+    try {
+      const response = await connector.makeInvoice({
+        amount,
+        memo,
+      });
+      return response;
+    } catch (e) {
+      return { error: e.message };
+    }
   } else {
     // If amount is not defined yet, let the user generate an invoice with an amount field.
     return await utils.openPrompt({

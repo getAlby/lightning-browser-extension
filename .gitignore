@@ -1,9 +1,5 @@
 # #### This all good standard ###
 
-.node-version
-
-.nova
-
 # Logs
 logs
 *.log
@@ -132,3 +128,13 @@ dist/
 .awcache
 
 .pnp.*
+
+# Editor directories and files
+.idea
+.nova
+.vscode/**/*
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

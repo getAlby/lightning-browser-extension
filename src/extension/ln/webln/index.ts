@@ -6,6 +6,12 @@ type RequestInvoiceArgs = {
   defaultMemo?: string;
 };
 
+type KeysendArgs = {
+  destination: string;
+  customRecords?: Record<string, string>;
+  amount: string | number;
+};
+
 export default class WebLNProvider {
   enabled: boolean;
   isEnabled: boolean;
@@ -60,6 +66,13 @@ export default class WebLNProvider {
     return this.execute("sendPaymentOrPrompt", { paymentRequest });
   }
 
+  keysend(args: KeysendArgs) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling keysend");
+    }
+    return this.execute("keysendOrPrompt", args);
+  }
+
   makeInvoice(args: string | number | RequestInvoiceArgs) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling makeInvoice");
@@ -87,6 +100,7 @@ export default class WebLNProvider {
     return this.execute("verifyMessage", { signature, message });
   }
 
+  // NOTE: new call `type`s must be specified also in the content script
   execute(
     type: string,
     args?: Record<string, unknown>
@@ -98,7 +112,7 @@ export default class WebLNProvider {
         {
           application: "LBE",
           prompt: true,
-          //action: `webln/${type}`, // TODO: think about a convention to cal the actions
+          //action: `webln/${type}`, // TODO: think about a convention to call the actions
           type: `${type}`,
           args,
         },

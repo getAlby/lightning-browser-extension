@@ -30,6 +30,7 @@ interface BrowserStorage {
 
 export const DEFAULT_SETTINGS = {
   websiteEnhancements: true,
+  legacyLnurlAuth: false,
   userName: "",
   userEmail: "",
 };
@@ -54,7 +55,7 @@ const state = createState<State>((set, get) => ({
   currentAccountId: null,
   password: null,
   getAccount: () => {
-    const currentAccountId = get().currentAccountId;
+    const currentAccountId = get().currentAccountId as string;
     let account = null;
     if (currentAccountId) {
       account = get().accounts[currentAccountId];
@@ -69,7 +70,7 @@ const state = createState<State>((set, get) => ({
     const account = get().accounts[currentAccountId];
 
     const password = get().password as string;
-    const config = decryptData(account.config, password);
+    const config = decryptData(account.config as string, password);
 
     const connector = new connectors[account.connector](config);
     await connector.init();

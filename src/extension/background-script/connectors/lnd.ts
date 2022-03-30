@@ -1,5 +1,8 @@
 import Base64 from "crypto-js/enc-base64";
+import WordArray from "crypto-js/lib-typedarrays";
+import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
+import SHA256 from "crypto-js/sha256";
 import utils from "../../../common/lib/utils";
 import Connector, {
   SendPaymentArgs,
@@ -14,6 +17,7 @@ import Connector, {
   SignMessageResponse,
   VerifyMessageArgs,
   VerifyMessageResponse,
+  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -70,7 +74,54 @@ class Lnd implements Connector {
       {}
     ).then((data) => {
       if (data.payment_error) {
-        return { error: data.payment_error };
+        throw new Error(data.payment_error);
+      }
+      return {
+        data: {
+          preimage: utils.base64ToHex(data.payment_preimage),
+          paymentHash: utils.base64ToHex(data.payment_hash),
+          route: data.payment_route,
+        },
+      };
+    });
+  }
+  async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
+    //See: https://gist.github.com/dellagustin/c3793308b75b6b0faf134e64db7dc915
+    const dest_pubkey_hex = args.pubkey;
+    const dest_pubkey_base64 = Hex.parse(dest_pubkey_hex).toString(Base64);
+
+    const preimage = WordArray.random(32);
+    const preimage_base64 = preimage.toString(Base64);
+    const hash = SHA256(preimage).toString(Base64);
+
+    //base64 encode the record values
+    const records_base64: Record<string, string> = {};
+    for (const key in args.customRecords) {
+      records_base64[key] = UTF8.parse(args.customRecords[key]).toString(
+        Base64
+      );
+    }
+    //mandatory record for keysend
+    records_base64["5482373484"] = preimage_base64;
+
+    return this.request<{
+      payment_preimage: string;
+      payment_hash: string;
+      payment_route: { total_amt: number; total_fees: number };
+      payment_error?: string;
+    }>(
+      "POST",
+      "/v1/channels/transactions",
+      {
+        dest: dest_pubkey_base64,
+        amt: args.amount,
+        payment_hash: hash,
+        dest_custom_records: records_base64,
+      },
+      {}
+    ).then((data) => {
+      if (data.payment_error) {
+        throw new Error(data.payment_error);
       }
       return {
         data: {

@@ -1,8 +1,7 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig, Method } from "axios";
 import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
-import utils from "../../../common/lib/utils";
 import HashKeySigner from "../../../common/utils/signer";
 import Connector, {
   SendPaymentArgs,
@@ -17,8 +16,10 @@ import Connector, {
   SignMessageResponse,
   VerifyMessageArgs,
   VerifyMessageResponse,
+  KeysendArgs,
 } from "./connector.interface";
-import { AxiosRequestConfig, Method } from "axios";
+import state from "../state";
+import utils from "../../../common/lib/utils";
 
 interface Config {
   login: string;
@@ -96,10 +97,10 @@ export default class LndHub implements Connector {
       invoice: args.paymentRequest,
     });
     if (data.error) {
-      return { error: data.message };
+      throw new Error(data.message);
     }
     if (data.payment_error) {
-      return { error: data.payment_error };
+      throw new Error(data.payment_error);
     }
     if (
       typeof data.payment_hash === "object" &&
@@ -135,6 +136,58 @@ export default class LndHub implements Connector {
       },
     };
   }
+  async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
+    const data = await this.request<{
+      error: string;
+      message: string;
+      payment_error?: string;
+      payment_hash:
+        | {
+            type: string;
+            data: ArrayBuffer;
+          }
+        | string;
+      payment_preimage:
+        | {
+            type: string;
+            data: ArrayBuffer;
+          }
+        | string;
+      payment_route: { total_amt: number; total_fees: number };
+    }>("POST", "/keysend", {
+      destination: args.pubkey,
+      amount: args.amount,
+      customRecords: args.customRecords,
+    });
+    if (data.error) {
+      throw new Error(data.message);
+    }
+    if (data.payment_error) {
+      throw new Error(data.payment_error);
+    }
+    if (
+      typeof data.payment_hash === "object" &&
+      data.payment_hash.type === "Buffer"
+    ) {
+      data.payment_hash = Buffer.from(data.payment_hash.data).toString("hex");
+    }
+    if (
+      typeof data.payment_preimage === "object" &&
+      data.payment_preimage.type === "Buffer"
+    ) {
+      data.payment_preimage = Buffer.from(data.payment_preimage.data).toString(
+        "hex"
+      );
+    }
+
+    return {
+      data: {
+        preimage: data.payment_preimage as string,
+        paymentHash: data.payment_hash as string,
+        route: data.payment_route,
+      },
+    };
+  }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
     const data = await this.request<{ paid: boolean }>(
@@ -158,11 +211,18 @@ export default class LndHub implements Connector {
     if (!args.message) {
       return Promise.reject(new Error("Invalid message"));
     }
-    const message = utils.stringToUint8Array(args.message);
-    // create a signing key from the lndhub URL and the login/password combination
-    const keyHex = sha256(
-      `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
+    let message: string | Uint8Array;
+    message = sha256(args.message).toString(Hex);
+    let keyHex = sha256(
+      `lndhub://${this.config.login}:${this.config.password}`
     ).toString(Hex);
+    const { settings } = state.getState();
+    if (settings.legacyLnurlAuth) {
+      message = utils.stringToUint8Array(args.message);
+      keyHex = sha256(
+        `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
+      ).toString(Hex);
+    }
     if (!keyHex) {
       return Promise.reject(new Error("Could not create key"));
     }
@@ -181,9 +241,15 @@ export default class LndHub implements Connector {
 
   verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse> {
     // create a signing key from the lndhub URL and the login/password combination
-    const keyHex = sha256(
-      `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
+    let keyHex = sha256(
+      `lndhub://${this.config.login}:${this.config.password}`
     ).toString(Hex);
+    const { settings } = state.getState();
+    if (settings.legacyLnurlAuth) {
+      keyHex = sha256(
+        `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
+      ).toString(Hex);
+    }
     if (!keyHex) {
       return Promise.reject(new Error("Could not create key"));
     }

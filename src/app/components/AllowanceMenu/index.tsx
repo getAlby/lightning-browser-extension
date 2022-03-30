@@ -7,7 +7,7 @@ import utils from "../../../common/lib/utils";
 
 import Button from "../Button";
 import Menu from "../Menu";
-import TextField from "../Form/TextField";
+import TextField from "../form/TextField";
 
 type Props = {
   allowance: {
@@ -24,7 +24,15 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
 
   function openModal() {
     setBudget(allowance.totalBudget.toString());
-    setIsOpen(true);
+    /**
+     * @HACK
+     * @headless-ui/menu restores focus after closing a menu, to the button that opened it.
+     * By slightly delaying opening the modal, react-modal's focus management won't be overruled.
+     * {@link https://github.com/tailwindlabs/headlessui/issues/259}
+     */
+    setTimeout(() => {
+      setIsOpen(true);
+    }, 50);
   }
 
   function closeModal() {
@@ -49,6 +57,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         <Menu.List position="right">
           <Menu.ItemButton onClick={openModal}>Edit</Menu.ItemButton>
           <Menu.ItemButton
+            danger
             onClick={async () => {
               if (
                 window.confirm("Are you sure you want to delete this website?")
@@ -87,6 +96,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             <TextField
               id="budget"
               label="Budget"
+              autoFocus
               placeholder="sat"
               value={budget}
               type="number"

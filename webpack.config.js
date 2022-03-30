@@ -20,6 +20,15 @@ if (!process.env.FAUCET_K) {
 if (!process.env.WALLET_CREATE_URL) {
   process.env.WALLET_CREATE_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
+// default value is set in the code where it is used
+if (!process.env.BITCOIN_BEACH_GALOY_URL) {
+  process.env.BITCOIN_BEACH_GALOY_URL = ""; // env variables are passed as string. empty strings are still falsy
+}
+
+// default value is set in the code where it is used
+if (!process.env.BITCOIN_JUNGLE_GALOY_URL) {
+  process.env.BITCOIN_JUNGLE_GALOY_URL = ""; // env variables are passed as string. empty strings are still falsy
+}
 
 const viewsPath = path.join(__dirname, "static", "views");
 const nodeEnv = process.env.NODE_ENV || "development";
@@ -54,10 +63,10 @@ var options = {
     background: "./src/extension/background-script/index.js",
     contentScript: "./src/extension/content-script/index.js",
     inpageScript: "./src/extension/inpage-script/index.js",
-    popup: "./src/app/router/Popup/index.jsx",
-    prompt: "./src/app/router/Prompt/index.jsx",
-    options: "./src/app/router/Options/index.jsx",
-    welcome: "./src/app/router/Welcome/index.jsx",
+    popup: "./src/app/router/Popup/index.tsx",
+    prompt: "./src/app/router/Prompt/index.tsx",
+    options: "./src/app/router/Options/index.tsx",
+    welcome: "./src/app/router/Welcome/index.tsx",
   },
 
   output: {
@@ -134,11 +143,13 @@ var options = {
     // new webpack.SourceMapDevToolPlugin({ filename: false }),
     // environmental variables
     new webpack.EnvironmentPlugin([
-      "WALLET_CREATE_URL",
-      "FAUCET_URL",
       "FAUCET_K",
+      "FAUCET_URL",
+      "BITCOIN_BEACH_GALOY_URL",
+      "BITCOIN_JUNGLE_GALOY_URL",
       "NODE_ENV",
       "TARGET_BROWSER",
+      "WALLET_CREATE_URL",
     ]),
     // delete previous build files
     new CleanWebpackPlugin({

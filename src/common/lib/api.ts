@@ -1,10 +1,24 @@
-import browser from "webextension-polyfill";
-
 import utils from "./utils";
-import type { Accounts, AccountInfo, SettingsStorage } from "../../types";
+import {
+  getAccountsCache,
+  removeAccountFromCache,
+  storeAccounts,
+} from "./cache";
+import type {
+  Accounts,
+  AccountInfo,
+  Allowance,
+  Transaction,
+  SettingsStorage,
+} from "../../types";
+import {
+  MakeInvoiceArgs,
+  MakeInvoiceResponse,
+} from "../../extension/background-script/connectors/connector.interface";
 
 interface AccountInfoRes {
   currentAccountId: string;
+  name: string;
   info: { alias: string };
   balance: { balance: string };
 }
@@ -29,55 +43,69 @@ export const swrGetAccountInfo = async (
   id: string,
   callback?: (account: AccountInfo) => void
 ): Promise<AccountInfo> => {
-  // Load account info from cache.
-  let accountsCache: { [id: string]: AccountInfo } = {};
-  const result = await browser.storage.local.get(["accounts"]);
-  if (result.accounts) {
-    accountsCache = JSON.parse(result.accounts);
-  }
+  const accountsCache = await getAccountsCache();
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     if (accountsCache[id]) {
       if (callback) callback(accountsCache[id]);
       resolve(accountsCache[id]);
     }
 
     // Update account info with most recent data, save to cache.
-    getAccountInfo().then((response) => {
-      const { alias } = response.info;
-      const balance = parseInt(response.balance.balance); // TODO: handle amounts
-      const account = { id, alias, balance };
-      browser.storage.local.set({
-        accounts: JSON.stringify({
+    getAccountInfo()
+      .then((response) => {
+        const { alias } = response.info;
+        const name = response.name;
+        const balance = parseInt(response.balance.balance); // TODO: handle amounts
+        const account = { id, name, alias, balance };
+        storeAccounts({
           ...accountsCache,
           [id]: account,
-        }),
-      });
-      if (callback) callback(account);
-      return resolve(account);
-    });
+        });
+        if (callback) callback(account);
+        return resolve(account);
+      })
+      .catch(reject);
   });
 };
 export const getAccounts = () => utils.call<Accounts>("getAccounts");
+export const selectAccount = (id: string) =>
+  utils.call("selectAccount", { id });
+export const getAllowance = (host: string) =>
+  utils.call<Allowance>("getAllowance", { host });
+export const getPayments = (options: { limit: number }) =>
+  utils.call<{ payments: Transaction[] }>("getPayments", options);
 export const getSettings = () => utils.call<SettingsStorage>("getSettings");
 export const getStatus = () => utils.call<StatusRes>("status");
+export const makeInvoice = ({ amount, memo }: MakeInvoiceArgs) =>
+  utils.call<MakeInvoiceResponse["data"]>("makeInvoice", { amount, memo });
 export const setSetting = (
   setting: Record<string, string | number | boolean>
 ) =>
   utils.call<SettingsStorage>("setSetting", {
     setting,
   });
+export const deleteAccount = (id: string) =>
+  Promise.all([
+    utils.call("deleteAccount", { id }),
+    removeAccountFromCache(id),
+  ]);
 export const unlock = (password: string) =>
   utils.call<UnlockRes>("unlock", { password });
 
 export default {
   getAccountInfo,
   getAccounts,
+  selectAccount,
+  getAllowance,
+  getPayments,
   getSettings,
   getStatus,
+  makeInvoice,
   setSetting,
   swr: {
     getAccountInfo: swrGetAccountInfo,
   },
+  deleteAccount,
   unlock,
 };

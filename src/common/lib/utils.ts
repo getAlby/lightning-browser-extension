@@ -1,10 +1,8 @@
-import browser, { Runtime } from "webextension-polyfill";
-import qs from "query-string";
-import shajs from "sha.js";
 import PubSub from "pubsub-js";
-
-import { Message, OriginData } from "../../types";
+import qs from "query-string";
+import browser, { Runtime } from "webextension-polyfill";
 import { SendPaymentResponse } from "../../extension/background-script/connectors/connector.interface";
+import { Message, OriginData } from "../../types";
 
 const utils = {
   call: <T = Record<string, unknown>>(
@@ -37,9 +35,6 @@ const utils = {
 
     return browser.notifications.create(notification);
   },
-  getHash: (str: string) => {
-    return shajs("sha256").update(str).digest("hex");
-  },
   base64ToHex: (str: string) => {
     const hex = [];
     for (
@@ -52,6 +47,9 @@ const utils = {
       hex[hex.length] = tmp;
     }
     return hex.join("");
+  },
+  urlSafeBase64ToHex: (str: string) => {
+    return utils.base64ToHex(str.replace(/_/g, "/").replace(/-/g, "+"));
   },
   bytesToHexString: (bytes: Uint8Array) => {
     return Array.from(bytes, (byte) => {
@@ -73,7 +71,7 @@ const utils = {
   publishPaymentNotification: (
     message: Message,
     paymentRequestDetails: PaymentRequestDetails,
-    response: SendPaymentResponse
+    response: SendPaymentResponse | { error: string }
   ) => {
     let status = "success"; // default. let's hope for success
     if ("error" in response) {

@@ -7,33 +7,15 @@ import { SettingsStorage } from "../../types";
 
 import Container from "../components/Container";
 import Button from "../components/Button";
-import Toggle from "../components/Toggle";
-import Input from "../components/Form/Input";
-
-type Props = {
-  title: string;
-  subtitle: string;
-  right: React.ReactNode;
-};
-
-function Setting({ title, subtitle, right }: Props) {
-  return (
-    <div className="py-4 flex justify-between items-center">
-      <div>
-        <span className="text-gray-700 dark:text-white font-medium">
-          {title}
-        </span>
-        <p className="text-gray-400 text-sm">{subtitle}</p>
-      </div>
-      {right}
-    </div>
-  );
-}
+import Toggle from "../components/form/Toggle";
+import Input from "../components/form/Input";
+import Setting from "../components/Setting";
 
 function Settings() {
   const [loading, setLoading] = useState(true);
   const [settings, setSettings] = useState<SettingsStorage>({
     websiteEnhancements: false,
+    legacyLnurlAuth: false,
     userName: "",
     userEmail: "",
   });
@@ -63,83 +45,91 @@ function Settings() {
         <Setting
           title="Website enhancements"
           subtitle="Tipping enhancements for Twitter, YouTube, etc."
-          right={
-            !loading && (
-              <Toggle
-                checked={settings.websiteEnhancements}
-                onChange={() => {
-                  saveSetting({
-                    websiteEnhancements: !settings.websiteEnhancements,
-                  });
-                }}
-              />
-            )
-          }
-        />
+        >
+          {!loading && (
+            <Toggle
+              checked={settings.websiteEnhancements}
+              onChange={() => {
+                saveSetting({
+                  websiteEnhancements: !settings.websiteEnhancements,
+                });
+              }}
+            />
+          )}
+        </Setting>
 
+        <Setting
+          title="Legacy signing for LNDhub and LNBits"
+          subtitle="Message signing and login with LNDhub and LNbits accounts has been changed. If you logged in with these accounts you can still enable the old signing method. This option will be removed later, make sure to switch to the new login."
+        >
+          {!loading && (
+            <Toggle
+              checked={settings.legacyLnurlAuth}
+              onChange={() => {
+                saveSetting({
+                  legacyLnurlAuth: !settings.legacyLnurlAuth,
+                });
+              }}
+            />
+          )}
+        </Setting>
         <Setting
           title="User Display Name"
           subtitle="For sending along with LNURL payments when supported"
-          right={
-            !loading && (
-              <div className="w-64">
-                <Input
-                  placeholder="Enter your username"
-                  type="text"
-                  value={settings.userName}
-                  onChange={(ev) => {
-                    saveSetting({
-                      userName: ev.target.value,
-                    });
-                  }}
-                />
-              </div>
-            )
-          }
-        />
+        >
+          {!loading && (
+            <div className="w-64">
+              <Input
+                placeholder="Enter your username"
+                type="text"
+                value={settings.userName}
+                onChange={(ev) => {
+                  saveSetting({
+                    userName: ev.target.value,
+                  });
+                }}
+              />
+            </div>
+          )}
+        </Setting>
 
         <Setting
           title="User Email"
           subtitle="For sending along with LNURL payments when supported"
-          right={
-            !loading && (
-              <div className="w-64">
-                <Input
-                  placeholder="Enter your email address"
-                  type="email"
-                  value={settings.userEmail}
-                  onChange={(ev) => {
-                    saveSetting({
-                      userEmail: ev.target.value,
-                    });
-                  }}
-                />
-              </div>
-            )
-          }
-        />
-
-        <Setting
-          title="Camera access"
-          subtitle="For scanning QR codes"
-          right={
-            !cameraPermissionsGranted ? (
-              <Button
-                label="Allow camera access"
-                onClick={async () => {
-                  try {
-                    await Html5Qrcode.getCameras();
-                    setCameraPermissionsGranted(true);
-                  } catch (e) {
-                    alert(e);
-                  }
+        >
+          {!loading && (
+            <div className="w-64">
+              <Input
+                placeholder="Enter your email address"
+                type="email"
+                value={settings.userEmail}
+                onChange={(ev) => {
+                  saveSetting({
+                    userEmail: ev.target.value,
+                  });
                 }}
               />
-            ) : (
-              <p className="text-green-500 font-medium">Permission granted</p>
-            )
-          }
-        />
+            </div>
+          )}
+        </Setting>
+
+        <Setting title="Camera access" subtitle="For scanning QR codes">
+          {!cameraPermissionsGranted ? (
+            <Button
+              label="Allow camera access"
+              onClick={async () => {
+                try {
+                  await Html5Qrcode.getCameras();
+                  setCameraPermissionsGranted(true);
+                } catch (e) {
+                  alert(e);
+                }
+              }}
+            />
+          ) : (
+            <p className="text-green-500 font-medium">Permission granted</p>
+          )}
+        </Setting>
       </div>
     </Container>
   );

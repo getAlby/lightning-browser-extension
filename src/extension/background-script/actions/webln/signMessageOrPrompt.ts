@@ -6,8 +6,6 @@ import { Message } from "../../../../types";
 
 const signMessageOrPrompt = async (message: Message) => {
   const messageToSign = message.args.message;
-  console.log(message);
-  console.log(message.args);
   if (typeof messageToSign !== "string") {
     return {
       error: "Message missing.",

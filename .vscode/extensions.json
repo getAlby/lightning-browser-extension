@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "ecmel.vscode-html-css",
+    "bradlc.vscode-tailwindcss",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint"
+  ]
+}

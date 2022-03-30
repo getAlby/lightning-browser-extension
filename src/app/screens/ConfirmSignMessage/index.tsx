@@ -1,12 +1,13 @@
 import { useState, useRef } from "react";
 
-import Button from "../../components/Button";
+import ConfirmOrCancel from "../../components/ConfirmOrCancel";
 //import Checkbox from "../../components/Form/Checkbox";
 import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
 import utils from "../../../common/lib/utils";
 import getOriginData from "../../../extension/content-script/originData";
 import type { OriginData } from "../../../types";
+import SuccessMessage from "../../components/SuccessMessage";
 
 type Props = {
   origin: OriginData;
@@ -45,25 +46,6 @@ function ConfirmSignMessage(props: Props) {
   //function autoSign() {
   // TODO
   //}
-
-  function renderSuccesMessage() {
-    return (
-      <>
-        <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-          <dt className="text-sm font-semibold text-gray-500">Message</dt>
-          <dd className="text-sm mb-4 dark:text-white">{succesMessage}</dd>
-        </dl>
-        <div className="text-center">
-          <button
-            className="underline text-sm text-gray-500"
-            onClick={() => window.close()}
-          >
-            Close
-          </button>
-        </div>
-      </>
-    );
-  }
 
   function reject(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
@@ -108,33 +90,18 @@ function ConfirmSignMessage(props: Props) {
               */}
             </div>
 
-            <div className="text-center">
-              <div className="mb-5">
-                <Button
-                  onClick={confirm}
-                  label="Confirm"
-                  fullWidth
-                  primary
-                  disabled={loading}
-                  loading={loading}
-                />
-              </div>
-
-              <p className="mb-3 underline text-sm text-gray-300">
-                Only connect with sites you trust.
-              </p>
-
-              <a
-                className="underline text-sm text-gray-500 dark:text-gray-400"
-                href="#"
-                onClick={reject}
-              >
-                Cancel
-              </a>
-            </div>
+            <ConfirmOrCancel
+              disabled={loading}
+              loading={loading}
+              onConfirm={confirm}
+              onCancel={reject}
+            />
           </>
         ) : (
-          renderSuccesMessage()
+          <SuccessMessage
+            message={succesMessage}
+            onClose={() => window.close()}
+          />
         )}
       </div>
     </div>

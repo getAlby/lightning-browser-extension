@@ -1,10 +1,23 @@
-import all from "./all";
-import unlock from "./unlock";
-import lock from "./lock";
-import isUnlocked from "./isUnlocked";
 import add from "./add";
-import select from "./select";
+import all from "./all";
+import deleteAccount from "./delete";
+import edit from "./edit";
 import info from "./info";
+import isUnlocked from "./isUnlocked";
+import lock from "./lock";
 import remove from "./remove";
+import select from "./select";
+import unlock from "./unlock";
 
-export { all, unlock, lock, isUnlocked, add, select, info, remove };
+export {
+  all,
+  unlock,
+  lock,
+  isUnlocked,
+  add,
+  edit,
+  select,
+  info,
+  remove,
+  deleteAccount,
+};

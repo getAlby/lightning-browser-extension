@@ -53,15 +53,10 @@ if (document) {
         return;
       }
       if (lnurl) {
-        return window.webln
-          .lnurl(lnurl)
-          .then((r) => {
-            console.log(r);
-          })
-          .catch((e) => {
-            console.log(e);
-            alert(`Error: ${e.message}`);
-          });
+        return window.webln.lnurl(lnurl).catch((e) => {
+          console.log(e);
+          alert(`Error: ${e.message}`);
+        });
       }
       return window.webln
         .sendPayment(paymentRequest)
