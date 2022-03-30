@@ -124,15 +124,15 @@ class LnBits implements Connector {
     }
     let message: string | Uint8Array;
     message = sha256(args.message).toString(Hex);
-    // create a signing key from the lnbits URL and the adminkey
-    const keyHex = sha256(
-      `LBE-LNBITS-${this.config.url}-${this.config.adminkey}`
-    ).toString(Hex);
+    // create a signing key from the lnbits adminkey
+    let keyHex = sha256(`lnbits://${this.config.adminkey}`).toString(Hex);
 
     const { settings } = state.getState();
     if (settings.legacyLnurlAuth) {
       message = utils.stringToUint8Array(args.message);
-      //TODO: does keyHex also need to be changed here?
+      keyHex = sha256(
+        `LBE-LNBITS-${this.config.url}-${this.config.adminkey}`
+      ).toString(Hex);
     }
     if (!keyHex) {
       return Promise.reject(new Error("Could not create key"));
@@ -151,12 +151,15 @@ class LnBits implements Connector {
   }
 
   verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse> {
-    // create a signing key from the lnbits URL and the adminkey
-    const keyHex = sha256(
-      `LBE-LNBITS-${this.config.url}-${this.config.adminkey}`
-    ).toString(Hex);
+    // create a signing key from the lnbits adminkey
+    let keyHex = sha256(`lnbits://${this.config.adminkey}`).toString(Hex);
 
-    //TODO: does keyHex also need to be changed here?
+    const { settings } = state.getState();
+    if (settings.legacyLnurlAuth) {
+      keyHex = sha256(
+        `LBE-LNBITS-${this.config.url}-${this.config.adminkey}`
+      ).toString(Hex);
+    }
     if (!keyHex) {
       return Promise.reject(new Error("Could not create key"));
     }
