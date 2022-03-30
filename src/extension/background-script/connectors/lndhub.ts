@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, Method } from "axios";
 import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
-import utils from "../../../common/lib/utils";
+import api from "../../../common/lib/api";
 import HashKeySigner from "../../../common/utils/signer";
 import Connector, {
   SendPaymentArgs,
@@ -202,7 +202,7 @@ export default class LndHub implements Connector {
     };
   }
 
-  signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
+  async signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
     // make sure we got the config to create a new key
     if (!this.config.url || !this.config.login || !this.config.password) {
       return Promise.reject(new Error("Missing config"));
@@ -210,11 +210,17 @@ export default class LndHub implements Connector {
     if (!args.message) {
       return Promise.reject(new Error("Invalid message"));
     }
-    const message = utils.stringToUint8Array(args.message);
-    // create a signing key from the lndhub URL and the login/password combination
-    const keyHex = sha256(
-      `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
+    let message = sha256(args.message).toString(Hex);
+    let keyHex = sha256(
+      `lndhub://${this.config.login}:${this.config.password}`
     ).toString(Hex);
+    const settings = await api.getSettings();
+    if (settings.legacyLnurlAuth) {
+      message = args.message;
+      keyHex = sha256(
+        `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
+      ).toString(Hex);
+    }
     if (!keyHex) {
       return Promise.reject(new Error("Could not create key"));
     }

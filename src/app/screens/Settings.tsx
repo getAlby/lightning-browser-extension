@@ -15,6 +15,7 @@ function Settings() {
   const [loading, setLoading] = useState(true);
   const [settings, setSettings] = useState<SettingsStorage>({
     websiteEnhancements: false,
+    legacyLnurlAuth: false,
     userName: "",
   });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
@@ -56,6 +57,21 @@ function Settings() {
           )}
         </Setting>
 
+        <Setting
+          title="Legacy LNURL Auth"
+          subtitle="Login with the deprecated LNURL Auth method"
+        >
+          {!loading && (
+            <Toggle
+              checked={settings.legacyLnurlAuth}
+              onChange={() => {
+                saveSetting({
+                  legacyLnurlAuth: !settings.legacyLnurlAuth,
+                });
+              }}
+            />
+          )}
+        </Setting>
         <Setting
           title="User Display Name"
           subtitle="For sending along with LNURL payments when supported"

@@ -30,6 +30,7 @@ interface BrowserStorage {
 
 export const DEFAULT_SETTINGS = {
   websiteEnhancements: true,
+  legacyLnurlAuth: false,
   userName: "",
 };
 
