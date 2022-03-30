@@ -79,14 +79,14 @@ export interface LNURLPayServiceResponse {
   domain: string;
   metadata: string; // Metadata json which must be presented as raw string here, this is required to pass signature verification at a later step
   tag: "payRequest"; // Type of LNURL
-  payerData: {
+  payerData?: {
     name: { mandatory: boolean };
     pubkey: { mandatory: boolean };
     identifier: { mandatory: boolean };
     email: { mandatory: boolean };
     auth: { mandatory: boolean; k1: string };
   };
-  commentAllowed: number;
+  commentAllowed?: number;
 }
 
 export interface LNURLAuthServiceResponse {

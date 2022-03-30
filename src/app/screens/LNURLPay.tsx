@@ -98,13 +98,13 @@ function LNURLPay(props: Props) {
     if (
       userName?.length &&
       userEmail?.length &&
-      details.payerData.email &&
-      details.payerData.name
+      details.payerData?.email &&
+      details.payerData?.name
     ) {
       return { name: userName, email: userEmail };
-    } else if (userName?.length && details.payerData.name) {
+    } else if (userName?.length && details.payerData?.name) {
       return { name: userName };
-    } else if (userEmail?.length && details.payerData.email) {
+    } else if (userEmail?.length && details.payerData?.email) {
       return { email: userEmail };
     } else {
       return undefined;
@@ -124,6 +124,7 @@ function LNURLPay(props: Props) {
         comment, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/12.md
         payerdata, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/18.md
       };
+      // TODO: handle errors
       const { data: paymentInfo } = await axios.get<LNURLPaymentInfo>(
         details.callback,
         {
@@ -331,18 +332,20 @@ function LNURLPay(props: Props) {
                   <SatButtons onClick={setValueSat} />
                 </div>
               )}
-              {details && details?.commentAllowed > 0 && (
-                <div className="mt-4">
-                  <TextField
-                    id="comment"
-                    label="Comment"
-                    placeholder="optional"
-                    onChange={(e) => {
-                      setComment(e.target.value);
-                    }}
-                  />
-                </div>
-              )}
+              {details &&
+                typeof details?.commentAllowed === "number" &&
+                details?.commentAllowed > 0 && (
+                  <div className="mt-4">
+                    <TextField
+                      id="comment"
+                      label="Comment"
+                      placeholder="optional"
+                      onChange={(e) => {
+                        setComment(e.target.value);
+                      }}
+                    />
+                  </div>
+                )}
               {details && details?.payerData?.name && (
                 <div className="mt-4">
                   <TextField
