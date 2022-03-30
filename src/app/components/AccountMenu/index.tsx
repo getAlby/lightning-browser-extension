@@ -14,7 +14,11 @@ import { useAccounts } from "../../context/AccountsContext";
 import Badge from "../Badge";
 import Menu from "../Menu";
 
-function AccountMenu() {
+export type Props = {
+  showOptions?: boolean;
+};
+
+function AccountMenu({ showOptions = true }: Props) {
   const auth = useAuth();
   const navigate = useNavigate();
   const { accounts, getAccounts } = useAccounts();
@@ -50,6 +54,7 @@ function AccountMenu() {
     <Menu as="div">
       <Menu.Button className="h-full px-2 rounded-r-md hover:bg-gray-200 dark:hover:bg-gray-500 transition-colors duration-200">
         <CaretDownIcon className="h-4 w-4 dark:text-white" />
+        <span className="sr-only">Toggle Dropdown</span>
       </Menu.Button>
       <Menu.List position="left">
         <Menu.Subheader>Switch account</Menu.Subheader>
@@ -74,23 +79,27 @@ function AccountMenu() {
             </Menu.ItemButton>
           );
         })}
-        <Menu.Divider />
-        <Menu.ItemButton
-          onClick={() => {
-            openOptions("accounts/new");
-          }}
-        >
-          <PlusIcon className="h-5 w-5 mr-2 text-gray-500" />
-          Add a new account
-        </Menu.ItemButton>
-        <Menu.ItemButton
-          onClick={() => {
-            openOptions("accounts");
-          }}
-        >
-          <AddressBookIcon className="h-5 w-5 mr-2 text-gray-500" />
-          Accounts
-        </Menu.ItemButton>
+        {showOptions && (
+          <>
+            <Menu.Divider />
+            <Menu.ItemButton
+              onClick={() => {
+                openOptions("accounts/new");
+              }}
+            >
+              <PlusIcon className="h-5 w-5 mr-2 text-gray-500" />
+              Add a new account
+            </Menu.ItemButton>
+            <Menu.ItemButton
+              onClick={() => {
+                openOptions("accounts");
+              }}
+            >
+              <AddressBookIcon className="h-5 w-5 mr-2 text-gray-500" />
+              Accounts
+            </Menu.ItemButton>
+          </>
+        )}
       </Menu.List>
     </Menu>
   );
