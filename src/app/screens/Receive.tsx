@@ -117,7 +117,7 @@ function Receive() {
                     }
                   }
                 }}
-                icon={<CopyIcon className="w-6 h-6" />}
+                icon={<CopyIcon className="w-6 h-6 mr-2" />}
                 label={copyLabel}
               />
             </div>
