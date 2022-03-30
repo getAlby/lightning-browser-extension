@@ -2,7 +2,6 @@ import axios, { AxiosRequestConfig, Method } from "axios";
 import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
-import api from "../../../common/lib/api";
 import HashKeySigner from "../../../common/utils/signer";
 import Connector, {
   SendPaymentArgs,
@@ -19,6 +18,7 @@ import Connector, {
   VerifyMessageResponse,
   KeysendArgs,
 } from "./connector.interface";
+import state from "../state";
 
 interface Config {
   login: string;
@@ -214,7 +214,7 @@ export default class LndHub implements Connector {
     let keyHex = sha256(
       `lndhub://${this.config.login}:${this.config.password}`
     ).toString(Hex);
-    const settings = await api.getSettings();
+    const { settings } = state.getState();
     if (settings.legacyLnurlAuth) {
       message = args.message;
       keyHex = sha256(
