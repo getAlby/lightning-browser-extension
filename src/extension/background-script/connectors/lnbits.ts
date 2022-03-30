@@ -1,7 +1,6 @@
 import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
-import utils from "../../../common/lib/utils";
 import HashKeySigner from "../../../common/utils/signer";
 import Connector, {
   SendPaymentArgs,
@@ -18,6 +17,7 @@ import Connector, {
   VerifyMessageResponse,
   KeysendArgs,
 } from "./connector.interface";
+import state from "../state";
 
 interface Config {
   adminkey: string;
@@ -121,12 +121,17 @@ class LnBits implements Connector {
     if (!args.message) {
       return Promise.reject(new Error("Invalid message"));
     }
-    const message = utils.stringToUint8Array(args.message);
+    let message = sha256(args.message).toString(Hex);
     // create a signing key from the lnbits URL and the adminkey
     const keyHex = sha256(
       `LBE-LNBITS-${this.config.url}-${this.config.adminkey}`
     ).toString(Hex);
 
+    const { settings } = state.getState();
+    if (settings.legacyLnurlAuth) {
+      message = args.message;
+      //TODO: does keyHex also need to be changed here?
+    }
     if (!keyHex) {
       return Promise.reject(new Error("Could not create key"));
     }
@@ -149,6 +154,7 @@ class LnBits implements Connector {
       `LBE-LNBITS-${this.config.url}-${this.config.adminkey}`
     ).toString(Hex);
 
+    //TODO: does keyHex also need to be changed here?
     if (!keyHex) {
       return Promise.reject(new Error("Could not create key"));
     }
