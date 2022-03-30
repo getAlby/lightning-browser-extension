@@ -58,8 +58,8 @@ function Settings() {
         </Setting>
 
         <Setting
-          title="Legacy LNURL Auth"
-          subtitle="Login with the deprecated LNURL Auth method"
+          title="Legacy signing for LNDhub and LNBits"
+          subtitle="Message signing and login with LNDhub and LNbits accounts has been changed. If you logged in with these accounts you can enable the old signing method."
         >
           {!loading && (
             <Toggle
