@@ -3,6 +3,8 @@ import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
 import injectScript from "./injectScript";
 
+// WebLN calls that can be executed from the WebLNProvider.
+// Update when new calls are added
 const weblnCalls = [
   "enable",
   "getInfo",
@@ -34,11 +36,17 @@ if (shouldInject()) {
       return;
     }
     if (ev.data && ev.data.application === "LBE" && !ev.data.response) {
+      // limit the calls that can be made from webln
+      // only listed calls can be executed
       if (!weblnCalls.includes(ev.data.type)) {
         return;
       }
       const messageWithOrigin = {
-        ...ev.data,
+        type: ev.data.type, // TODO: rename type to action
+        args: ev.data.args,
+        application: "LBE",
+        public: true, // indicate that this is a public call from the content script
+        prompt: true,
         origin: getOriginData(),
       };
       const replyFunction = (response) => {
