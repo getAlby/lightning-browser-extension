@@ -37,16 +37,19 @@ export interface MetaData {
 }
 
 export interface OriginData {
-  location?: string;
-  domain?: string;
-  host?: string;
-  pathname?: string;
-  name?: string;
-  description?: string;
-  icon?: string;
-  metaData?: MetaData;
-  external?: boolean;
-  internal?: boolean;
+  location: string;
+  domain: string;
+  host: string;
+  pathname: string;
+  name: string;
+  description: string;
+  icon: string;
+  metaData: MetaData;
+  external: boolean;
+}
+
+export interface OriginDataInternal {
+  internal: boolean;
 }
 
 export interface Battery extends OriginData {
@@ -60,7 +63,7 @@ export interface Battery extends OriginData {
 // align Message-Types
 export interface Message {
   args: Record<string, unknown>;
-  origin: OriginData;
+  origin: OriginData | OriginDataInternal;
   application?: string;
   prompt?: boolean;
   type?: string;

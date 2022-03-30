@@ -94,7 +94,7 @@ const utils = {
   },
   openPrompt: <Type>(message: {
     args: Record<string, unknown>;
-    origin: OriginData;
+    origin: OriginData | OriginDataInternal;
     type: string;
   }): Promise<{ data: Type }> => {
     const urlParams = new URLSearchParams();
