@@ -202,7 +202,7 @@ export default class LndHub implements Connector {
     };
   }
 
-  async signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
+  signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
     // make sure we got the config to create a new key
     if (!this.config.url || !this.config.login || !this.config.password) {
       return Promise.reject(new Error("Missing config"));
