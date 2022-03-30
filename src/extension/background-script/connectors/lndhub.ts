@@ -19,6 +19,7 @@ import Connector, {
   KeysendArgs,
 } from "./connector.interface";
 import state from "../state";
+import utils from "../../../common/lib/utils";
 
 interface Config {
   login: string;
@@ -210,13 +211,14 @@ export default class LndHub implements Connector {
     if (!args.message) {
       return Promise.reject(new Error("Invalid message"));
     }
-    let message = sha256(args.message).toString(Hex);
+    let message: string | Uint8Array;
+    message = sha256(args.message).toString(Hex);
     let keyHex = sha256(
       `lndhub://${this.config.login}:${this.config.password}`
     ).toString(Hex);
     const { settings } = state.getState();
     if (settings.legacyLnurlAuth) {
-      message = args.message;
+      message = utils.stringToUint8Array(args.message);
       keyHex = sha256(
         `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
       ).toString(Hex);
