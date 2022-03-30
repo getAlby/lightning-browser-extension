@@ -7,6 +7,8 @@ import db from "../../db";
 import sendPayment from "../ln/sendPayment";
 
 const sendPaymentOrPrompt = async (message: Message) => {
+  if (!("host" in message.origin)) return;
+
   const paymentRequest = message.args.paymentRequest;
   if (typeof paymentRequest !== "string") {
     return {

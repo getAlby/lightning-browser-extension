@@ -6,6 +6,8 @@ import keysend from "../ln/keysend";
 import { checkAllowance } from "./sendPaymentOrPrompt";
 
 const keysendOrPrompt = async (message: Message) => {
+  if (!("host" in message.origin)) return;
+
   const destination = message.args.destination;
   const amount = message.args.amount;
   if (

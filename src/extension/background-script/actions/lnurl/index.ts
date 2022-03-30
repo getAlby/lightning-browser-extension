@@ -106,6 +106,8 @@ async function auth(message: Message, lnurlDetails: LNURLDetails) {
 }
 
 async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
+  if (!("host" in message.origin)) return;
+
   PubSub.publish(`lnurl.auth.start`, { message, lnurlDetails });
 
   // get the publisher to check if lnurlAuth for auto-login is enabled
@@ -121,17 +123,19 @@ async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
   let loginStatus = { confirmed: true, remember: true };
   // if there is no publisher or lnurlAuth is not enabled we prompt the user
   if (!isUnlocked || !allowance || !allowance.enabled || !allowance.lnurlAuth) {
-    const { data } = await utils.openPrompt<{
-      confirmed: boolean;
-      remember: boolean;
-    }>({
+    const promptMessage = {
       ...message,
       type: "lnurlAuth",
       args: {
         ...message.args,
         lnurlDetails,
       },
-    });
+    };
+
+    const { data } = await utils.openPrompt<{
+      confirmed: boolean;
+      remember: boolean;
+    }>(promptMessage);
     loginStatus = data;
   }
 
