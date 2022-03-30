@@ -18,6 +18,7 @@ import Connector, {
   VerifyMessageResponse,
   KeysendArgs,
 } from "./connector.interface";
+import state from "../state";
 
 interface Config {
   adminkey: string;
@@ -121,12 +122,18 @@ class LnBits implements Connector {
     if (!args.message) {
       return Promise.reject(new Error("Invalid message"));
     }
-    const message = utils.stringToUint8Array(args.message);
-    // create a signing key from the lnbits URL and the adminkey
-    const keyHex = sha256(
-      `LBE-LNBITS-${this.config.url}-${this.config.adminkey}`
-    ).toString(Hex);
+    let message: string | Uint8Array;
+    message = sha256(args.message).toString(Hex);
+    // create a signing key from the lnbits adminkey
+    let keyHex = sha256(`lnbits://${this.config.adminkey}`).toString(Hex);
 
+    const { settings } = state.getState();
+    if (settings.legacyLnurlAuth) {
+      message = utils.stringToUint8Array(args.message);
+      keyHex = sha256(
+        `LBE-LNBITS-${this.config.url}-${this.config.adminkey}`
+      ).toString(Hex);
+    }
     if (!keyHex) {
       return Promise.reject(new Error("Could not create key"));
     }
@@ -144,11 +151,15 @@ class LnBits implements Connector {
   }
 
   verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse> {
-    // create a signing key from the lnbits URL and the adminkey
-    const keyHex = sha256(
-      `LBE-LNBITS-${this.config.url}-${this.config.adminkey}`
-    ).toString(Hex);
+    // create a signing key from the lnbits adminkey
+    let keyHex = sha256(`lnbits://${this.config.adminkey}`).toString(Hex);
 
+    const { settings } = state.getState();
+    if (settings.legacyLnurlAuth) {
+      keyHex = sha256(
+        `LBE-LNBITS-${this.config.url}-${this.config.adminkey}`
+      ).toString(Hex);
+    }
     if (!keyHex) {
       return Promise.reject(new Error("Could not create key"));
     }

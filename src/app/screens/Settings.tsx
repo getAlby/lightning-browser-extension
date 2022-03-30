@@ -15,6 +15,7 @@ function Settings() {
   const [loading, setLoading] = useState(true);
   const [settings, setSettings] = useState<SettingsStorage>({
     websiteEnhancements: false,
+    legacyLnurlAuth: false,
     userName: "",
   });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
@@ -56,6 +57,21 @@ function Settings() {
           )}
         </Setting>
 
+        <Setting
+          title="Legacy signing for LNDhub and LNBits"
+          subtitle="Message signing and login with LNDhub and LNbits accounts has been changed. If you logged in with these accounts you can still enable the old signing method. This option will be removed later, make sure to switch to the new login."
+        >
+          {!loading && (
+            <Toggle
+              checked={settings.legacyLnurlAuth}
+              onChange={() => {
+                saveSetting({
+                  legacyLnurlAuth: !settings.legacyLnurlAuth,
+                });
+              }}
+            />
+          )}
+        </Setting>
         <Setting
           title="User Display Name"
           subtitle="For sending along with LNURL payments when supported"

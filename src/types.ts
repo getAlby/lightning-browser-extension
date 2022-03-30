@@ -176,5 +176,6 @@ export interface Allowance {
 
 export interface SettingsStorage {
   websiteEnhancements: boolean;
+  legacyLnurlAuth: boolean;
   userName: string;
 }
