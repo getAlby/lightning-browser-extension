@@ -7,19 +7,32 @@ import * as settings from "./actions/settings";
 import * as setup from "./actions/setup";
 import * as webln from "./actions/webln";
 
+import { Message } from "../../types";
+
+const checkWebsitePermissions = (action: FixMe) => {
+  return (message: Message, sender: FixMe) => {
+    // TODO check permission
+    const hasPermission = false;
+    if (hasPermission) {
+      return Promise.resolve({ error: "not enabled" });
+    } else {
+      return action(message, sender);
+    }
+  };
+};
 // TODO: potential nesting/grouping of actions for better organization
 const routes = {
-  /*
   webln: {
     enable: allowances.enable,
-    getInfo: ln.getInfo,
-    sendPayment: ln.sendPayment,
+    getInfo: checkWebsitePermissions(ln.getInfo),
+    sendPaymentOrPrompt: checkWebsitePermissions(webln.sendPaymentOrPrompt),
+    keysendOrPrompt: checkWebsitePermissions(webln.keysendOrPrompt),
+    lnurl: checkWebsitePermissions(lnurl),
+    makeInvoice: checkWebsitePermissions(ln.makeInvoice),
+    signMessage: checkWebsitePermissions(ln.signMessage),
+    verifyMessage: checkWebsitePermissions(ln.verifyMessage),
   },
-  ln: ln,
-  accounts: accounts,
-  */
   addAllowance: allowances.add,
-  enable: allowances.enable,
   getAllowance: allowances.get,
   getAllowanceById: allowances.getById,
   listAllowances: allowances.list,
@@ -29,11 +42,7 @@ const routes = {
   isUnlocked: accounts.isUnlocked,
   unlock: accounts.unlock,
   getInfo: ln.getInfo,
-  lnurl,
   lnurlPay,
-  sendPaymentOrPrompt: webln.sendPaymentOrPrompt,
-  keysendOrPrompt: webln.keysendOrPrompt,
-  signMessageOrPrompt: webln.signMessageOrPrompt,
   sendPayment: ln.sendPayment,
   keysend: ln.keysend,
   checkPayment: ln.checkPayment,

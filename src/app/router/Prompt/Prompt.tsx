@@ -63,7 +63,7 @@ class Prompt extends Component<
                   element={<Navigate to={`/${this.state.type}`} replace />}
                 />
                 <Route
-                  path="enable"
+                  path="webln/enable"
                   element={<Enable origin={this.state.origin} />}
                 />
                 <Route
