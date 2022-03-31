@@ -20,6 +20,7 @@ export interface AccountInfo {
   id: string;
   alias: string;
   balance: number;
+  name: string;
 }
 
 export interface MetaData {

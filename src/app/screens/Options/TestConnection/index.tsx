@@ -13,8 +13,11 @@ import Loading from "../../../components/Loading";
 export default function TestConnection() {
   const auth = useAuth();
   const { getAccounts } = useAccounts();
-  const [accountInfo, setAccountInfo] =
-    useState<{ alias: string; balance: number }>();
+  const [accountInfo, setAccountInfo] = useState<{
+    alias: string;
+    name: string;
+    balance: number;
+  }>();
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -42,6 +45,7 @@ export default function TestConnection() {
         setAccountInfo({
           alias: accountInfo.alias,
           balance: accountInfo.balance,
+          name: accountInfo.name,
         });
       }
       getAccounts();
@@ -110,7 +114,7 @@ export default function TestConnection() {
                 <div className="mt-6 shadow-lg p-4 rounded-xl">
                   <Card
                     color="bg-gray-100"
-                    alias={accountInfo.alias}
+                    alias={`${accountInfo.name} - ${accountInfo.alias}`}
                     satoshis={
                       typeof accountInfo.balance === "number"
                         ? `${accountInfo.balance} sat`

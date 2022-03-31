@@ -29,6 +29,7 @@ const faucetMemo = "LN Faucet";
 export default function TestConnection() {
   const [accountInfo, setAccountInfo] = useState<{
     alias: string;
+    name: string;
     balance: number;
   }>();
   const [errorMessage, setErrorMessage] = useState();
@@ -89,10 +90,11 @@ export default function TestConnection() {
     api
       .getAccountInfo()
       .then((response) => {
+        const name = response.name;
         const { alias } = response.info;
         const balance = parseInt(response.balance.balance);
 
-        setAccountInfo({ alias, balance });
+        setAccountInfo({ alias, balance, name });
       })
       .catch((e) => {
         console.error(e);
@@ -200,7 +202,7 @@ export default function TestConnection() {
               <div className="mt-6 shadow-lg p-4 rounded-xl">
                 <Card
                   color="bg-gray-100"
-                  alias={accountInfo.alias}
+                  alias={`${accountInfo.name} - ${accountInfo.alias}`}
                   satoshis={
                     typeof accountInfo.balance === "number"
                       ? `${accountInfo.balance} sat`
