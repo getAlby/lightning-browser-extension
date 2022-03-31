@@ -9,17 +9,17 @@ import * as webln from "./actions/webln";
 
 // TODO: potential nesting/grouping of actions for better organization
 const routes = {
-  /*
   webln: {
     enable: allowances.enable,
     getInfo: ln.getInfo,
-    sendPayment: ln.sendPayment,
+    sendPaymentOrPrompt: webln.sendPaymentOrPrompt,
+    keysendOrPrompt: webln.keysendOrPrompt,
+    lnurl: lnurl,
+    makeInvoice: ln.makeInvoice,
+    signMessage: ln.signMessage,
+    verifyMessage: ln.verifyMessage,
   },
-  ln: ln,
-  accounts: accounts,
-  */
   addAllowance: allowances.add,
-  enable: allowances.enable,
   getAllowance: allowances.get,
   getAllowanceById: allowances.getById,
   listAllowances: allowances.list,
@@ -29,16 +29,11 @@ const routes = {
   isUnlocked: accounts.isUnlocked,
   unlock: accounts.unlock,
   getInfo: ln.getInfo,
-  lnurl,
   lnurlPay,
-  sendPaymentOrPrompt: webln.sendPaymentOrPrompt,
-  keysendOrPrompt: webln.keysendOrPrompt,
-  signMessageOrPrompt: webln.signMessageOrPrompt,
   sendPayment: ln.sendPayment,
   keysend: ln.keysend,
   checkPayment: ln.checkPayment,
   signMessage: ln.signMessage,
-  verifyMessage: ln.verifyMessage,
   makeInvoice: ln.makeInvoice,
   getBalance: ln.getBalance,
   getPayments: payments.all,
