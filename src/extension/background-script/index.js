@@ -2,7 +2,7 @@ import browser from "webextension-polyfill";
 
 import utils from "../../common/lib/utils";
 
-import { router } from "./router";
+import * as routing from "./routing";
 import state from "./state";
 import db from "./db";
 import connectors from "./connectors";
@@ -85,8 +85,14 @@ const routeCalls = (message, sender) => {
 
   const action = message.type || message.action; // TODO: what is a good message format to route to an action?
   console.log(`Routing call: ${action}`);
-  // Potentially check for internal vs. public calls
-  const call = router(action)(message, sender);
+  let call;
+
+  if (routing.hasPermission(action, message, sender)) {
+    call = routing.route(action)(message, sender);
+  } else {
+    console.log(`invalid permissions for call ${action}`);
+    call = Promise.resolve({ error: `invalid call ${action}` });
+  }
 
   // Log the action response if we are in debug mode
   if (debug) {
@@ -125,7 +131,7 @@ async function init() {
       state,
       db,
       connectors,
-      router,
+      routing,
     };
   }
 }

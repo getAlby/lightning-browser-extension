@@ -67,7 +67,18 @@ const routes = {
   getSettings: settings.get,
 };
 
-const router = (path: FixMe) => {
+const hasPermission = (action: FixMe, message: FixMe, sender: FixMe) => {
+  const webLnCalls = Object.keys(routes.webln).map((r) => `webln/${r}`);
+  if (message.origin.internal) {
+    return true;
+  } else if (message.public && webLnCalls.includes(action)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const route = (path: FixMe) => {
   if (!path) {
     throw new Error("No action path provided to router");
   }
@@ -86,4 +97,4 @@ const router = (path: FixMe) => {
   return route;
 };
 
-export { routes, router };
+export { routes, route, hasPermission };
