@@ -3064,12 +3064,12 @@
   resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.9.2.tgz"
   integrity sha512-VZMYa7+fXHdwIq1TDhSXoVmSPEGM/aa+6Aiq3nVVJ9bXr24zScr+NlKFKC3iPljA7ho/GAZr+d2jOf5GIRC30Q==
 
-"@runcitadel/sdk@^0.3.3":
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/@runcitadel/sdk/-/sdk-0.3.3.tgz#1b41bd9832551e7f5c7025e281e7aeceb2fd07c3"
-  integrity sha512-CRUMowUMgWc6cN2Zk/ZkjvKnuKjmSWbT8b4wy2LOGbkPiHSAeb9iodVLu0ulJMGi/iYoVSH716mEiku+Y81wzg==
+"@runcitadel/sdk@^0.3.4":
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/@runcitadel/sdk/-/sdk-0.3.4.tgz#1b0a22cf965fda8535ccee19ab7e70fa44ed6ae9"
+  integrity sha512-7PtL7wRRpXuArcGBf3FwIUERF6qud6CjTV6xcJeLt1FMIIY4CHihz7KEwaK/Zf+PabVI3/IogRHHlzjsobsHvA==
   dependencies:
-    undici "^4.14.1"
+    undici "^4.15.1"
 
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
@@ -16700,10 +16700,10 @@ unbox-primitive@^1.0.1:
     has-symbols "^1.0.2"
     which-boxed-primitive "^1.0.2"
 
-undici@^4.14.1:
-  version "4.15.1"
-  resolved "https://registry.yarnpkg.com/undici/-/undici-4.15.1.tgz#c2c0e75f232178f0e6781f6b46c81ccc15065f6e"
-  integrity sha512-h8LJybhMKD09IyQZoQadNtIR/GmugVhTOVREunJrpV6RStriKBFdSVoFzEzTihwXi/27DIBO+Z0OGF+Mzfi0lA==
+undici@^4.15.1:
+  version "4.16.0"
+  resolved "https://registry.yarnpkg.com/undici/-/undici-4.16.0.tgz#469bb87b3b918818d3d7843d91a1d08da357d5ff"
+  integrity sha512-tkZSECUYi+/T1i4u+4+lwZmQgLXd4BLGlrc7KZPcLIW7Jpq99+Xpc30ONv7nS6F5UNOxp/HBZSSL9MafUrvJbw==
 
 unfetch@^4.2.0:
   version "4.2.0"
