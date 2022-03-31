@@ -177,9 +177,10 @@ export default function NewWallet() {
             />
           </div>
           <div className="mt-6">
-            <p className="text-gray-500 dark:text-gray-400">
+            <p className="mb-2 text-gray-500 dark:text-gray-400">
               Your Alby account also comes with an optional{" "}
               <a
+                className="underline"
                 href="https://lightningaddress.com/"
                 target="_blank"
                 rel="noreferrer"
@@ -189,6 +190,7 @@ export default function NewWallet() {
               . This is a simple way for anyone to send you Bitcoin on the
               Lightning Network. (
               <a
+                className="underline"
                 href="https://lightningaddress.com/"
                 target="_blank"
                 rel="noreferrer"
@@ -197,14 +199,17 @@ export default function NewWallet() {
               </a>
               )
             </p>
-            <TextField
-              id="lnAddress"
-              label="Choose your Lightning Address (optional)"
-              type="text"
-              onChange={(e) => {
-                setLnAddress(e.target.value.trim().split("@")[0]); // in case somebody enters a full address we simple remove the domain
-              }}
-            />
+            <div>
+              <TextField
+                id="lnAddress"
+                label="Choose your Lightning Address (optional)"
+                suffix="@getalby.com"
+                type="text"
+                onChange={(e) => {
+                  setLnAddress(e.target.value.trim().split("@")[0]); // in case somebody enters a full address we simple remove the domain
+                }}
+              />
+            </div>
           </div>
         </>
       )}

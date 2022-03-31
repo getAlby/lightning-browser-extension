@@ -1,5 +1,10 @@
 import Input from "./Input";
 
+type Props = {
+  label: string;
+  suffix?: string;
+};
+
 const TextField = ({
   id,
   label,
@@ -19,7 +24,8 @@ const TextField = ({
   maxLength,
   min,
   max,
-}: React.InputHTMLAttributes<HTMLInputElement> & { label: string }) => (
+  suffix,
+}: React.InputHTMLAttributes<HTMLInputElement> & Props) => (
   <>
     <label
       htmlFor={id}
@@ -47,6 +53,7 @@ const TextField = ({
         maxLength={maxLength}
         min={min}
         max={max}
+        suffix={suffix}
       />
     </div>
   </>
