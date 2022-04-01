@@ -1,5 +1,6 @@
 import api from "../../../common/lib/api";
 // import GitHubRepo from "./GitHubRepo";
+import GitHubProfile from "./GitHubProfile";
 import Monetization from "./Monetization";
 import Twitter from "./Twitter";
 import YouTubeVideo from "./YouTubeVideo";
@@ -11,7 +12,6 @@ import VimeoVideo from "./VimeoVideo";
 import Medium from "./Medium";
 
 // Order is important as the first one for which the URL matches will be used
-// Monetization must likely be always the last one
 const enhancements = [
   Twitter,
   Reddit,
@@ -20,6 +20,9 @@ const enhancements = [
   Peertube,
   VimeoVideo,
   Medium,
+  GitHubProfile,
+
+  // Monetization must likely be always the last one
   Monetization,
 ];
 
