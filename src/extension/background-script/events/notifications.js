@@ -17,7 +17,7 @@ const paymentSuccessNotification = (message, data) => {
     title: `✅ Successfully paid ${formatAmount(
       paymentAmount
     )} to »${recipient}«`,
-    message: `Payment fee: ${formatAmount(total_fees)}`,
+    message: `Fee: ${formatAmount(total_fees)}`,
   });
 };
 
