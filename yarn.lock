@@ -3064,12 +3064,14 @@
   resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.9.2.tgz"
   integrity sha512-VZMYa7+fXHdwIq1TDhSXoVmSPEGM/aa+6Aiq3nVVJ9bXr24zScr+NlKFKC3iPljA7ho/GAZr+d2jOf5GIRC30Q==
 
-"@runcitadel/sdk@^0.3.3":
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/@runcitadel/sdk/-/sdk-0.3.3.tgz#1b41bd9832551e7f5c7025e281e7aeceb2fd07c3"
-  integrity sha512-CRUMowUMgWc6cN2Zk/ZkjvKnuKjmSWbT8b4wy2LOGbkPiHSAeb9iodVLu0ulJMGi/iYoVSH716mEiku+Y81wzg==
-  dependencies:
-    undici "^4.14.1"
+"@runcitadel/sdk@^0.3.8":
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/@runcitadel/sdk/-/sdk-0.3.8.tgz#106987b805ffb3c46fbbefb6d60fa8c8adb53f99"
+  integrity sha512-JicJMdtu1FEMNGIoPrJseMYfsftCjAPu9y4FykmxGN5aA8YcNhGVbMwaDQ4oyA/Ju6DFwD9Jy+WHxwQkkjdA8Q==
+  optionalDependencies:
+    "@types/react" "^17.0.43"
+    react "^18.0.0"
+    undici "^5.0.0"
 
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
@@ -4617,6 +4619,15 @@
   version "17.0.11"
   resolved "https://registry.npmjs.org/@types/react/-/react-17.0.11.tgz"
   integrity sha512-yFRQbD+whVonItSk7ZzP/L+gPTJVBkL/7shLEF+i9GC/1cV3JmUxEQz6+9ylhUpWSDuqo1N9qEvqS6vTj4USUA==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
+    csstype "^3.0.2"
+
+"@types/react@^17.0.43":
+  version "17.0.43"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.43.tgz#4adc142887dd4a2601ce730bc56c3436fdb07a55"
+  integrity sha512-8Q+LNpdxf057brvPu1lMtC5Vn7J119xrP1aq4qiaefNioQUYANF/CYeK4NsKorSZyUGJ66g0IM+4bbjwx45o2A==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -16712,10 +16723,10 @@ unbox-primitive@^1.0.1:
     has-symbols "^1.0.2"
     which-boxed-primitive "^1.0.2"
 
-undici@^4.14.1:
-  version "4.15.1"
-  resolved "https://registry.yarnpkg.com/undici/-/undici-4.15.1.tgz#c2c0e75f232178f0e6781f6b46c81ccc15065f6e"
-  integrity sha512-h8LJybhMKD09IyQZoQadNtIR/GmugVhTOVREunJrpV6RStriKBFdSVoFzEzTihwXi/27DIBO+Z0OGF+Mzfi0lA==
+undici@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/undici/-/undici-5.0.0.tgz#3c1e08c7f0df90c485d5d8dbb0517e11e34f2090"
+  integrity sha512-VhUpiZ3No1DOPPQVQnsDZyfcbTTcHdcgWej1PdFnSvOeJmOVDgiOHkunJmBLfmjt4CqgPQddPVjSWW0dsTs5Yg==
 
 unfetch@^4.2.0:
   version "4.2.0"

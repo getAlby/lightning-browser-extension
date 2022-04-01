@@ -1,13 +1,5 @@
 import Citadel from "@runcitadel/sdk/browser/index.js";
 
-enum Invoice_InvoiceState {
-  OPEN = 0,
-  SETTLED = 1,
-  CANCELED = 2,
-  ACCEPTED = 3,
-  UNRECOGNIZED = -1,
-}
-
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
@@ -48,7 +40,7 @@ class CitadelConnector implements Connector {
 
   async getInfo(): Promise<GetInfoResponse> {
     await this.ensureLogin();
-    const info = await this.citadel.middleware.lnd.info.generalInfo();
+    const info = await this.citadel.middleware.lightning.info.generalInfo();
     return {
       data: {
         alias: info.alias,
@@ -61,8 +53,8 @@ class CitadelConnector implements Connector {
   async getBalance(): Promise<GetBalanceResponse> {
     await this.ensureLogin();
     const balance = parseInt(
-      (await this.citadel.middleware.lnd.wallet.lightningBalance()).localBalance
-        ?.sat as string
+      (await this.citadel.middleware.lightning.wallet.lightningBalance())
+        .localBalance?.sat as string
     );
     return {
       data: {
@@ -75,7 +67,7 @@ class CitadelConnector implements Connector {
   }
   async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
     await this.ensureLogin();
-    const res = await this.citadel.middleware.lnd.lightning.payInvoice(
+    const res = await this.citadel.middleware.lightning.lightning.payInvoice(
       args.paymentRequest
     );
     return {
@@ -96,14 +88,16 @@ class CitadelConnector implements Connector {
     await this.ensureLogin();
     return {
       data: {
-        signature: await this.citadel.middleware.lnd.signMessage(args.message),
+        signature: await this.citadel.middleware.lightning.signMessage(
+          args.message
+        ),
       },
     };
   }
 
   async verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse> {
     await this.ensureLogin();
-    const res = await this.citadel.middleware.lnd.validateMessage(
+    const res = await this.citadel.middleware.lightning.validateMessage(
       args.message,
       args.signature
     );
@@ -122,7 +116,7 @@ class CitadelConnector implements Connector {
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
     await this.ensureLogin();
-    const res = await this.citadel.middleware.lnd.lightning.addInvoice(
+    const res = await this.citadel.middleware.lightning.lightning.addInvoice(
       args.amount.toString(),
       args.memo
     );
@@ -135,12 +129,12 @@ class CitadelConnector implements Connector {
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    const res = await this.citadel.middleware.lnd.lightning.invoiceInfo(
-      args.paymentHash
-    );
+    await this.ensureLogin();
     return {
       data: {
-        paid: res.state === Invoice_InvoiceState.SETTLED,
+        paid: await this.citadel.middleware.lightning.lightning.isPaid(
+          args.paymentHash
+        ),
       },
     };
   }
