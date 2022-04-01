@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
 
 import connectorRoutes from "../connectorRoutes";
@@ -76,12 +76,14 @@ function App() {
   return (
     <div>
       {process.env.NODE_ENV === "development" && (
-        <Fragment>
+        <>
           <DevMenu />
-          <LocaleSwitcher />
-        </Fragment>
+          <div className="w-32 mr-4 mt-1 pt-3 float-right">
+            <LocaleSwitcher />
+          </div>
+        </>
       )}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center font-serif font-medium text-2xl pt-7 pb-3 dark:text-white">
           <p>{t("heading")}</p>
         </div>

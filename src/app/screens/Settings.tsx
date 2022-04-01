@@ -136,7 +136,7 @@ function Settings() {
           title="Language"
           subtitle="Alby goes international! help us translate Alby in your language"
         >
-          <div className="w-64">
+          <div className="w-32">
             <LocaleSwitcher />
           </div>
         </Setting>
