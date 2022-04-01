@@ -125,19 +125,27 @@ function LNURLPay(props: Props) {
         payerdata, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/18.md
       };
 
-      let paymentInfo,
-        paymentRequest = null;
+      let request;
 
       try {
-        const request = await axios.get<LNURLPaymentInfo>(details.callback, {
+        request = await axios.get<LNURLPaymentInfo>(details.callback, {
           params,
         });
-        paymentInfo = request.data;
-        paymentRequest = paymentInfo.pr;
       } catch (e) {
-        alert("Payment aborted: Could not fetch invoice.");
+        let message = "";
+        if (axios.isAxiosError(e)) {
+          // https://github.com/fiatjaf/lnurl-rfc/blob/luds/06.md --> ERROR
+          message = e.response?.data?.reason
+            ? `(${e.response?.data.reason})`
+            : "";
+        }
+
+        alert(`Payment aborted: Could not fetch invoice. ${message}`);
         return;
       }
+
+      const paymentInfo = request.data;
+      const paymentRequest = paymentInfo.pr;
 
       const isValidInvoice = lnurl.verifyInvoice({
         paymentInfo,
