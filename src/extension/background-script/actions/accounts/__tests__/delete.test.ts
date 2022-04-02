@@ -51,7 +51,7 @@ describe("delete account", () => {
     });
   });
 
-  test("if non-current account is being deleted current account will stay current", async () => {
+  test("if other account is being deleted the current account is not updated", async () => {
     const spy = jest.spyOn(state, "setState");
 
     expect(
