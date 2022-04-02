@@ -1,6 +1,5 @@
 import api from "../../../common/lib/api";
-// import GitHubRepo from "./GitHubRepo";
-import GitHubProfile from "./GitHubProfile";
+import GitHub from "./GitHub";
 import Monetization from "./Monetization";
 import Twitter from "./Twitter";
 import YouTubeVideo from "./YouTubeVideo";
@@ -20,9 +19,9 @@ const enhancements = [
   Peertube,
   VimeoVideo,
   Medium,
-  GitHubProfile,
+  GitHub,
 
-  // Monetization must likely be always the last one
+  // Monetization must likely always be the last one as this is the fallback option if no specific enhancement matched
   Monetization,
 ];
 
