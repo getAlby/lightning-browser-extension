@@ -16,10 +16,17 @@ export default function ConnectRaspiBlitz() {
   const [loading, setLoading] = useState(false);
 
   function handleUrl(event: React.ChangeEvent<HTMLInputElement>) {
-    setFormData({
-      ...formData,
-      [event.target.name]: `https://${event.target.value.trim()}`,
-    });
+    if (event.target.value.substring(0, 4) === "http") {
+      setFormData({
+        ...formData,
+        [event.target.name]: event.target.value.trim(),
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [event.target.name]: `https://${event.target.value.trim()}`,
+      });
+    }
   }
 
   function handleMacaroon(event: React.ChangeEvent<HTMLInputElement>) {
@@ -102,8 +109,6 @@ export default function ConnectRaspiBlitz() {
             <br />
             Add your <b>port</b> after the onion address, the default port is{" "}
             <b>:8080</b>.
-            <br />
-            You do not need to add https://
           </p>
           <div className="w-4/5">
             <div className="mt-6">
