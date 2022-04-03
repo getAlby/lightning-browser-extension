@@ -1,4 +1,4 @@
-import Citadel from "@runcitadel/sdk/browser/index.js";
+import Citadel from "@runcitadel/sdk";
 
 enum Invoice_InvoiceState {
   OPEN = 0,

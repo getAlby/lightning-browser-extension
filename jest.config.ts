@@ -3,6 +3,7 @@ module.exports = {
   transform: {
     "^.+\\.[t|j]sx?$": "babel-jest",
   },
+  transformIgnorePatterns: ["node_modules/(?!(@runcitadel))/"],
   moduleNameMapper: {
     "^.+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$":
       "jest-transform-stub",
