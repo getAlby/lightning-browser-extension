@@ -146,7 +146,7 @@ function LNURLPay(props: Props) {
 
       // LN WALLET pays the invoice, no additional user confirmation is required at this point
       const payment = await utils.call(
-        "lnurlPay",
+        "sendPayment",
         { paymentRequest },
         {
           origin: {
