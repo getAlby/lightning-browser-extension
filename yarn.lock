@@ -2471,6 +2471,18 @@
   dependencies:
     chalk "^4.0.0"
 
+"@core-ln/base@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@core-ln/base/-/base-0.0.2.tgz#4ac15f436c99dbf952348c205bbe6ee2e4c3f8ae"
+  integrity sha512-rAomlX+HSpPkiNNnwy4TcldjiFL2dekD/uAr3fVeGA5+LOKWnvL6L4khsHyISLz5WdMAz8Hfj/aiIvjf7uu2MA==
+
+"@core-ln/rest@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@core-ln/rest/-/rest-0.0.2.tgz#07cec98532a9aac59c2a277e47f4f10a63c01a57"
+  integrity sha512-CNbaxXqADPmGwQdogi42Azdc6RQvHJVIJulZWYtwK5f6HnVeAHLOkeFVmLZVzPj+ieJVJcGMNo32F/z1oFJ6JA==
+  dependencies:
+    "@core-ln/base" "^0.0.2"
+
 "@cspotcode/source-map-consumer@0.8.0":
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/@cspotcode/source-map-consumer/-/source-map-consumer-0.8.0.tgz#33bf4b7b39c178821606f669bbc447a6a629786b"
