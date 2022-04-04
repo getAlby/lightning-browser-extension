@@ -46,15 +46,15 @@ function Send() {
     }
   }
 
-  function checkInvoice(data: string) {
+  function extractInvoiceFrom(data: string) {
     const reqExp = /lightning=([^&|\b]+)/i;
 
     const invoice = data.match(reqExp);
 
     if (invoice) {
-      setInvoice(invoice[1]);
+      return (invoice[1]);
     } else {
-      setInvoice(data);
+      return (data);
     }
   }
 
@@ -75,7 +75,7 @@ function Send() {
             qrbox={200}
             qrCodeSuccessCallback={(decodedText) => {
               if (invoice !== decodedText) {
-                checkInvoice(decodedText);
+                setInvoice(extractInvoiceFrom(decodedText));
                 setQrIsOpen(false);
               }
             }}
