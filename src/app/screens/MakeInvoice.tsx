@@ -81,7 +81,7 @@ function MakeInvoice({
         <div className="mb-8">
           <div className="p-4 shadow bg-white border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600">
             <p className="font-semibold text-gray-500 mb-4">
-              {origin.host} requests an invoice from you:
+              {origin.host} requests an invoice:
             </p>
             <div>
               <TextField
