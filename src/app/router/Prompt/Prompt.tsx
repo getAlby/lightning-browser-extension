@@ -162,7 +162,10 @@ const Layout = () => {
         <AccountMenu
           title={
             typeof auth.account?.name === "string"
-              ? `${auth.account?.name} - ${auth.account?.alias}`
+              ? `${auth.account?.name} - ${auth.account?.alias}`.substring(
+                  0,
+                  21
+                )
               : ""
           }
           subtitle={
