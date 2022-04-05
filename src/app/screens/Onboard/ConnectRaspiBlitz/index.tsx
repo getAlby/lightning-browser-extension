@@ -16,17 +16,14 @@ export default function ConnectRaspiBlitz() {
   const [loading, setLoading] = useState(false);
 
   function handleUrl(event: React.ChangeEvent<HTMLInputElement>) {
-    if (event.target.value.substring(0, 4) === "http") {
-      setFormData({
-        ...formData,
-        [event.target.name]: event.target.value.trim(),
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [event.target.name]: `https://${event.target.value.trim()}`,
-      });
+    let url = event.target.value.trim();
+    if (event.target.value.substring(0, 4) !== "http") {
+      url = `https://${url}`;
     }
+    setFormData({
+      ...formData,
+      [event.target.name]: url,
+    });
   }
 
   function handleMacaroon(event: React.ChangeEvent<HTMLInputElement>) {
