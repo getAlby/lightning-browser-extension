@@ -22,7 +22,7 @@ import LNURLPay from "../../screens/LNURLPay";
 import LNURLAuth from "../../screens/LNURLAuth";
 import LNURLWithdraw from "../../screens/LNURLWithdraw";
 import Keysend from "../../screens/ConfirmKeysend";
-import Navbar from "../../components/Navbar";
+import AccountMenu from "../../components/AccountMenu";
 
 class Prompt extends Component<
   Record<string, unknown>,
@@ -158,20 +158,21 @@ const Layout = () => {
 
   return (
     <>
-      <Navbar
-        title={
-          typeof auth.account?.name === "string"
-            ? `${auth.account?.name} - ${auth.account?.alias}`
-            : ""
-        }
-        subtitle={
-          typeof auth.account?.balance === "number"
-            ? `${auth.account.balance} sat`
-            : ""
-        }
-        showAccountMenuOptions={false}
-        showUserMenu={false}
-      />
+      <div className="px-4 py-2 bg-white flex border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">
+        <AccountMenu
+          title={
+            typeof auth.account?.name === "string"
+              ? `${auth.account?.name} - ${auth.account?.alias}`
+              : ""
+          }
+          subtitle={
+            typeof auth.account?.balance === "number"
+              ? `${auth.account.balance} sat`
+              : ""
+          }
+          showOptions={false}
+        />
+      </div>
 
       <Outlet />
     </>
