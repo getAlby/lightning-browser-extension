@@ -18,7 +18,7 @@ import ConnectGaloy, { galoyUrls } from "../screens/connectors/ConnectGaloy";
 import ConnectEclair from "../screens/connectors/ConnectEclair";
 import ConnectCitadel from "../screens/connectors/ConnectCitadel";
 import NewWallet from "../screens/connectors/NewWallet";
-import ConnectRaspiBlitz from "../screens/Onboard/ConnectRaspiBlitz";
+import ConnectRaspiBlitz from "../screens/connectors/ConnectRaspiBlitz";
 import ConnectUmbrel from "../screens/connectors/ConnectUmbrel";
 import ConnectStart9 from "../screens/connectors/ConnectStart9";
 import ConnectMyNode from "../screens/connectors/ConnectMyNode";
