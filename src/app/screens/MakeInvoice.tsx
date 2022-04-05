@@ -10,20 +10,26 @@ import SatButtons from "../components/SatButtons";
 
 type Origin = {
   name: string;
+  host: string;
   icon: string;
 };
 
 type Props = {
+  amountDisabled: boolean;
+  memoDisabled: boolean;
   invoiceAttributes: RequestInvoiceArgs;
   origin: Origin;
 };
 
-function MakeInvoice({ invoiceAttributes, origin }: Props) {
+function MakeInvoice({
+  amountDisabled,
+  memoDisabled,
+  invoiceAttributes,
+  origin,
+}: Props) {
   const [loading, setLoading] = useState(false);
-  const [value, setValue] = useState(invoiceAttributes.defaultAmount);
-  const [memo, setMemo] = useState(
-    invoiceAttributes.defaultMemo || invoiceAttributes.memo || ""
-  );
+  const [value, setValue] = useState(invoiceAttributes.amount || "");
+  const [memo, setMemo] = useState(invoiceAttributes.memo || "");
   const [error, setError] = useState("");
 
   function handleValueChange(amount: string) {
@@ -74,6 +80,9 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
       <div className="p-4">
         <div className="mb-8">
           <div className="p-4 shadow bg-white border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600">
+            <p className="font-semibold text-gray-500 mb-4">
+              {origin.host} requests an invoice from you:
+            </p>
             <div>
               <TextField
                 id="amount"
@@ -82,20 +91,22 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
                 min={invoiceAttributes.minimumAmount}
                 max={invoiceAttributes.maximumAmount}
                 value={value}
+                disabled={amountDisabled}
                 onChange={(e) => handleValueChange(e.target.value)}
               />
-              {invoiceAttributes.minimumAmount &&
+              {!amountDisabled &&
+                invoiceAttributes.minimumAmount &&
                 invoiceAttributes.maximumAmount && (
                   <SatButtons onClick={handleValueChange} />
                 )}
               {error && <p className="mt-1 text-red-500">{error}</p>}
             </div>
-
             <div className="mt-4">
               <TextField
                 id="memo"
                 label="Description"
                 value={memo}
+                disabled={memoDisabled}
                 onChange={handleMemoChange}
               />
             </div>

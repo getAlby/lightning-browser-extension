@@ -105,6 +105,8 @@ class Prompt extends Component<
                   path="makeInvoice"
                   element={
                     <MakeInvoice
+                      amountDisabled={this.state.args.amountDisabled as boolean}
+                      memoDisabled={this.state.args.memoDisabled as boolean}
                       invoiceAttributes={
                         this.state.args.invoiceAttributes as RequestInvoiceArgs
                       }
