@@ -5,7 +5,7 @@ type Props = React.SelectHTMLAttributes<HTMLSelectElement> & {
 function Select({ children, value, name, onChange }: Props) {
   return (
     <select
-      className="w-full h-14 border-gray-300 rounded-md shadow-sm text-gray-700 bg-white"
+      className="w-full h-14 border-gray-300 rounded-md shadow-sm text-gray-700 bg-white dark:bg-gray-800 dark:text-gray-200 dark:border-gray-500"
       name={name}
       value={value}
       onChange={onChange}
