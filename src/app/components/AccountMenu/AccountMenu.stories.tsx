@@ -6,7 +6,7 @@ import AcountMenu from ".";
 export const Default = () => (
   <div className="relative bg-gray-100 w-40 flex justify-between pl-3 rounded-md">
     <span>Wallet</span>
-    <AcountMenu />
+    <AcountMenu title="node" subtitle="1000 sats" />
   </div>
 );
 

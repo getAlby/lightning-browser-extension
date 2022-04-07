@@ -5,6 +5,11 @@ import * as AccountsContext from "../../context/AccountsContext";
 import AccountMenu from ".";
 import type { Accounts } from "../../../types";
 
+const defaultProps = {
+  title: "node",
+  subtitle: "1000 sats",
+};
+
 const mockAccounts: Accounts = {
   "1": { id: "1", connector: "lnd", config: "", name: "LND account" },
   "2": { id: "2", connector: "galoy", config: "", name: "Galoy account" },
@@ -19,7 +24,7 @@ describe("AccountMenu", () => {
   test("renders the toggle button", async () => {
     render(
       <BrowserRouter>
-        <AccountMenu />
+        <AccountMenu {...defaultProps} />
       </BrowserRouter>
     );
 
@@ -29,7 +34,7 @@ describe("AccountMenu", () => {
   test("displays accounts and options", async () => {
     render(
       <BrowserRouter>
-        <AccountMenu />
+        <AccountMenu {...defaultProps} />
       </BrowserRouter>
     );
 
@@ -46,7 +51,7 @@ describe("AccountMenu", () => {
   test("displays accounts without options", async () => {
     render(
       <BrowserRouter>
-        <AccountMenu showOptions={false} />
+        <AccountMenu showOptions={false} {...defaultProps} />
       </BrowserRouter>
     );
 
