@@ -6,6 +6,7 @@ import {
   LNURLPaymentInfo,
   LNURLPaymentSuccessAction,
   LNURLPayServiceResponse,
+  Payment,
 } from "../../types";
 import api from "../../common/lib/api";
 import msg from "../../common/lib/msg";
@@ -60,6 +61,7 @@ function LNURLPay(props: Props) {
   const [successAction, setSuccessAction] = useState<
     LNURLPaymentSuccessAction | undefined
   >();
+  const [payment, setPayment] = useState<Payment | undefined>();
 
   useEffect(() => {
     if (searchParams) {
@@ -145,7 +147,7 @@ function LNURLPay(props: Props) {
       }
 
       // LN WALLET pays the invoice, no additional user confirmation is required at this point
-      const payment = await utils.call(
+      const paymentResponse = await utils.call(
         "sendPayment",
         { paymentRequest },
         {
@@ -155,10 +157,11 @@ function LNURLPay(props: Props) {
           },
         }
       );
+      setPayment(paymentResponse as Payment); // TODO: proper type definitions for utils.call()
 
       // Once payment is fulfilled LN WALLET executes a non-null successAction
       // LN WALLET should also store successAction data on the transaction record
-      if (paymentInfo.successAction && !payment.payment_error) {
+      if (paymentInfo.successAction) {
         switch (paymentInfo.successAction.tag) {
           case "url":
           case "message":
@@ -192,6 +195,15 @@ function LNURLPay(props: Props) {
       msg.error("User rejected");
     } else {
       navigate(-1);
+    }
+  }
+
+  function close(e: MouseEvent) {
+    e.preventDefault();
+    if (props.details && props.origin) {
+      msg.reply(payment);
+    } else {
+      window.close();
     }
   }
 
@@ -267,10 +279,7 @@ function LNURLPay(props: Props) {
           ))}
         </dl>
         <div className="text-center">
-          <button
-            className="underline text-sm text-gray-500"
-            onClick={() => window.close()}
-          >
+          <button className="underline text-sm text-gray-500" onClick={close}>
             Close
           </button>
         </div>

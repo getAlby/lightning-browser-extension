@@ -160,6 +160,15 @@ export type Transaction = {
   location: string;
 };
 
+export type Payment = {
+  preimage: string;
+  paymentHash: string;
+  route: {
+    total_amt: number;
+    total_fees: number;
+  };
+};
+
 export interface Allowance {
   enabled: boolean;
   host: string;
