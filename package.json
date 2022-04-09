@@ -35,12 +35,6 @@
     "build-storybook": "build-storybook",
     "prepare": "husky install"
   },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json}": [
-      "eslint --fix --max-warnings 0",
-      "prettier --write"
-    ]
-  },
   "dependencies": {
     "@babel/runtime": "^7.15.4",
     "@bitcoin-design/bitcoin-icons-react": "^0.1.9",
