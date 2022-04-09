@@ -85,7 +85,7 @@ function App() {
       )}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center font-serif font-medium text-2xl pt-7 pb-3 dark:text-white">
-          <p>{t("heading")}</p>
+          <p>{t("heading") as string}</p>
         </div>
 
         <Steps steps={steps} />
