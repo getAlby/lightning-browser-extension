@@ -36,7 +36,7 @@ export default function Input({
       name={name}
       id={id}
       className={classNames(
-        "sm:text-sm block w-full placeholder-gray-400 dark:placeholder-gray-600 dark:text-black",
+        "sm:text-sm block w-full placeholder-gray-400 dark:placeholder-gray-600 dark:text-black transition-colors",
         !suffix ? outerStyles : "border-0 focus:ring-0"
       )}
       placeholder={placeholder}

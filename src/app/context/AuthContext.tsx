@@ -27,6 +27,24 @@ interface AuthContextType {
 const AuthContext = createContext({} as AuthContextType);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+  //theme
+  useEffect(() => {
+    api.getSettings().then((response) => {
+      const settings = response;
+      if (settings.theme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else if (settings.theme === "system") {
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      } else if (settings.theme === "light") {
+        document.documentElement.classList.remove("dark");
+      }
+    });
+  }, []);
+
   const [account, setAccount] = useState<AuthContextType["account"]>(null);
   const [loading, setLoading] = useState(true);
 
