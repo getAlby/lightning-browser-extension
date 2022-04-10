@@ -50,6 +50,12 @@ function App() {
   const [steps, setSteps] = useState(initialSteps);
   const location = useLocation();
   const routesElement = useRoutes(routes);
+  //theme
+  useEffect(() => {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
 
   // Update step progress based on active location.
   useEffect(() => {

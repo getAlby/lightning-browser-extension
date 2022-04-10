@@ -21,7 +21,7 @@ function Setting({ title, subtitle, right }: Props) {
   return (
     <div className="py-4 flex justify-between items-center">
       <div>
-        <span className="text-gray-700 dark:text-white font-medium">
+        <span className="text-gray-700 dark:text-white font-medium transition-colors">
           {title}
         </span>
         <p className="text-gray-400 text-sm">{subtitle}</p>
@@ -36,6 +36,7 @@ function Settings() {
   const [settings, setSettings] = useState<SettingsStorage>({
     websiteEnhancements: false,
     userName: "",
+    theme: "system",
   });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
@@ -49,17 +50,30 @@ function Settings() {
 
   useEffect(() => {
     api.getSettings().then((response) => {
-      setSettings(response);
+      const settings = response;
+      setSettings(settings);
       setLoading(false);
+      //theme
+      if (settings.theme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else if (settings.theme === "system") {
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      } else if (settings.theme === "light") {
+        document.documentElement.classList.remove("dark");
+      }
     });
-  }, []);
+  }, [settings.theme]);
 
   return (
     <Container>
-      <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
+      <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white transition-colors">
         Settings
       </h2>
-      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y dark:bg-gray-800">
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y dark:bg-gray-800 transition-colors">
         <Setting
           title="Website enhancements"
           subtitle="Tipping enhancements for Twitter, YouTube, etc."

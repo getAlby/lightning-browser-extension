@@ -1,6 +1,7 @@
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
-
+import { useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
+import api from "../../../common/lib/api";
 
 import Home from "../../screens/Home";
 import Unlock from "../../screens/Unlock";
@@ -16,6 +17,24 @@ import Navbar from "../../components/Navbar";
 const POPUP_MAX_HEIGHT = 600;
 
 function Popup() {
+  //theme
+  useEffect(() => {
+    api.getSettings().then((response) => {
+      const settings = response;
+      if (settings.theme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else if (settings.theme === "system") {
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      } else if (settings.theme === "light") {
+        document.documentElement.classList.remove("dark");
+      }
+    });
+  }, []);
+
   return (
     <AuthProvider>
       <HashRouter>

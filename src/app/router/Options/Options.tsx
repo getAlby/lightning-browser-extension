@@ -1,8 +1,9 @@
 import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
-
+import { useEffect } from "react";
 import { AuthProvider } from "../../context/AuthContext";
 import { useAuth } from "../../context/AuthContext";
 import connectorRoutes from "../connectorRoutes";
+import api from "../../../common/lib/api";
 
 import RequireAuth from "../RequireAuth";
 import Container from "../../components/Container";
@@ -20,6 +21,24 @@ import ChooseConnector from "../../screens/Onboard/ChooseConnector";
 import Accounts from "../../screens/Accounts";
 
 function Options() {
+  //theme
+  useEffect(() => {
+    api.getSettings().then((response) => {
+      const settings = response;
+      if (settings.theme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else if (settings.theme === "system") {
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      } else if (settings.theme === "light") {
+        document.documentElement.classList.remove("dark");
+      }
+    });
+  }, []);
+
   return (
     <AuthProvider>
       <HashRouter>

@@ -12,21 +12,21 @@ type Props = {
 
 export default function Navbar({ title, subtitle, children }: Props) {
   return (
-    <div className="px-4 py-2 bg-white flex justify-between items-center border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">
+    <div className="px-4 py-2 bg-white flex justify-between items-center border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500 transition-colors">
       <div className="flex w-8/12 md:w-4/12 lg:w-3/12">
-        <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-gray-600">
+        <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-gray-600 transition-colors">
           <div className="flex items-center">
-            <WalletIcon className="-ml-1 w-8 h-8 opacity-50 dark:text-white" />
+            <WalletIcon className="-ml-1 w-8 h-8 opacity-50 dark:text-white transition-colors" />
           </div>
           <div
             className={`flex-auto mx-2 py-1 ${
               !title && !subtitle ? "w-28" : ""
             }`}
           >
-            <div className="text-xs text-gray-500 dark:text-gray-400">
+            <div className="text-xs text-gray-500 dark:text-gray-400 transition-colors">
               {title || <Skeleton />}
             </div>
-            <div className="text-xs dark:text-white">
+            <div className="text-xs dark:text-white transition-colors">
               {subtitle || <Skeleton />}
             </div>
           </div>
