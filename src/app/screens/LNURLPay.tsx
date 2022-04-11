@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import {
+  LNURLPaymentInfoError,
   LNURLPaymentInfo,
   LNURLPaymentSuccessAction,
   LNURLPayServiceResponse,
@@ -124,14 +125,36 @@ function LNURLPay(props: Props) {
         comment, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/12.md
         payerdata, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/18.md
       };
-      // TODO: handle errors
-      const { data: paymentInfo } = await axios.get<LNURLPaymentInfo>(
-        details.callback,
-        {
-          params,
+
+      let response;
+
+      try {
+        response = await axios.get<LNURLPaymentInfo | LNURLPaymentInfoError>(
+          details.callback,
+          {
+            params,
+            // https://github.com/fiatjaf/lnurl-rfc/blob/luds/01.md#http-status-codes-and-content-type
+            validateStatus: () => true,
+          }
+        );
+
+        const isSuccessResponse = function (
+          obj: LNURLPaymentInfo | LNURLPaymentInfoError
+        ): obj is LNURLPaymentInfo {
+          return Object.prototype.hasOwnProperty.call(obj, "pr");
+        };
+
+        if (!isSuccessResponse(response.data)) {
+          throw new Error(response.data.reason);
         }
-      );
-      const { pr: paymentRequest } = paymentInfo;
+      } catch (e) {
+        const message = e instanceof Error ? `(${e.message})` : "";
+        alert(`Payment aborted: Could not fetch invoice. ${message}`);
+        return;
+      }
+
+      const paymentInfo = response.data;
+      const paymentRequest = paymentInfo.pr;
 
       const isValidInvoice = lnurl.verifyInvoice({
         paymentInfo,
@@ -140,7 +163,7 @@ function LNURLPay(props: Props) {
         payerdata,
       });
       if (!isValidInvoice) {
-        alert("Payment aborted. Invalid invoice");
+        alert("Payment aborted: Invalid invoice.");
         return;
       }
 
