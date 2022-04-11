@@ -1,8 +1,6 @@
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
-import { useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
-import api from "../../../common/lib/api";
-
+import { useThemeEffect } from "../../utils";
 import Home from "../../screens/Home";
 import Unlock from "../../screens/Unlock";
 import Send from "../../screens/Send";
@@ -20,22 +18,8 @@ const POPUP_MAX_HEIGHT = 600;
 
 function Popup() {
   //theme
-  useEffect(() => {
-    api.getSettings().then((response) => {
-      const settings = response;
-      if (settings.theme === "system") {
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-        }
-      } else if (settings.theme === "dark") {
-        document.documentElement.classList.add("dark");
-      } else if (settings.theme === "light") {
-        document.documentElement.classList.remove("dark");
-      }
-    });
-  }, []);
+  let noDependencies;
+  useThemeEffect(noDependencies);
 
   return (
     <AuthProvider>

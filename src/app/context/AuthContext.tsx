@@ -1,6 +1,7 @@
 import { useState, useEffect, createContext, useContext } from "react";
 
 import utils from "../../common/lib/utils";
+import { useThemeEffect } from "../utils";
 import api from "../../common/lib/api";
 import type { AccountInfo } from "../../types";
 
@@ -28,22 +29,8 @@ const AuthContext = createContext({} as AuthContextType);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   //theme
-  useEffect(() => {
-    api.getSettings().then((response) => {
-      const settings = response;
-      if (settings.theme === "system") {
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-        }
-      } else if (settings.theme === "dark") {
-        document.documentElement.classList.add("dark");
-      } else if (settings.theme === "light") {
-        document.documentElement.classList.remove("dark");
-      }
-    });
-  }, []);
+  let noDependencies;
+  useThemeEffect(noDependencies);
 
   const [account, setAccount] = useState<AuthContextType["account"]>(null);
   const [loading, setLoading] = useState(true);
