@@ -39,14 +39,14 @@ function Settings() {
       setSettings(settings);
       setLoading(false);
       //theme
-      if (settings.theme === "dark") {
-        document.documentElement.classList.add("dark");
-      } else if (settings.theme === "system") {
+      if (settings.theme === "system") {
         if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
           document.documentElement.classList.add("dark");
         } else {
           document.documentElement.classList.remove("dark");
         }
+      } else if (settings.theme === "dark") {
+        document.documentElement.classList.add("dark");
       } else if (settings.theme === "light") {
         document.documentElement.classList.remove("dark");
       }
