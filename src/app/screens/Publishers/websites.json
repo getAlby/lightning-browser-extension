@@ -11,7 +11,7 @@
       {
         "title": "Kollider",
         "subtitle": "Instant Bitcoin derivatives trading",
-        "logo": "https://kollider.xyz/favicon0.ico",
+        "logo": "https://pbs.twimg.com/profile_images/1357027183227715585/o7Y7I5Ru_400x400.png",
         "url": "https://kollider.xyz/"
       },
       {
@@ -32,15 +32,15 @@
         "url": "https://lngames.net/"
       },
       {
-        "title": "Lightining Poker",
+        "title": "Lightning Poker",
         "subtitle": "Play Poker with Bitcoin",
-        "logo": "https://lightning-poker.com/favicon.ico",
+        "logo": "https://pbs.twimg.com/profile_images/1244240245060747264/zaL6V1li_400x400.jpg",
         "url": "https://lightning-poker.com/"
       },
       {
         "title": "LNBlackJack",
         "subtitle": "Play Blackjack with Bitcoin",
-        "logo": "https://www.lnblackjack.com/images/table.png",
+        "logo": "https://pbs.twimg.com/profile_images/1482701753237839877/XvzEhR3v_400x400.jpg",
         "url": "https://www.lnblackjack.com/"
       },
       {
@@ -60,16 +60,16 @@
         "logo": "https://stacker.news/favicon.png",
         "url": "https://stacker.news/"
       },
-	{
+      {
         "title": "Wavlake",
         "subtitle": "Lightning powered music player",
         "logo": "https://www.wavlake.com/images/social.png",
         "url": "https://www.wavlake.com/"
       },
-	{
+      {
         "title": "Y'alls",
         "subtitle": "Articles about the Lightning Network",
-        "logo": "https://yalls.org/favicon.ico",
+        "logo": "https://pbs.twimg.com/profile_images/947351277293338624/fE1wDin7_400x400.jpg",
         "url": "https://yalls.org/"
       }
     ]
@@ -86,7 +86,7 @@
       {
         "title": "Lightning Network Stores",
         "subtitle": "Collection of stores and websites accepting Bitcoin payments",
-        "logo": "https://lightningnetworkstores.com/favicon-32x32.png",
+        "logo": "https://pbs.twimg.com/profile_images/1130185744855838722/qLvtvFI9_400x400.png",
         "url": "https://lightningnetworkstores.com/"
       }
     ]
@@ -94,13 +94,13 @@
   {
     "title": "Miscellaneous",
     "items": [
-	{
+      {
         "title": "WebLN Experiments",
         "subtitle": "A collection of Lightning web apps",
         "logo": "https://webln.twentyuno.net/favicon.png",
         "url": "https://webln.twentyuno.net/"
-      },      
-	{
+      },
+      {
         "title": "Sparkshot",
         "subtitle": "Art created and funded by the community",
         "logo": "https://sparkshot.io/favicon/android-icon-192x192.png",
@@ -115,7 +115,7 @@
       {
         "title": "Amboss Space",
         "subtitle": "Lightning Network node explorer",
-        "logo": "https://amboss.space/favicon.ico",
+        "logo": "https://pbs.twimg.com/profile_images/1434620342593544194/HaB5PWzc_400x400.jpg",
         "url": "https://amboss.space/"
       }
     ]
