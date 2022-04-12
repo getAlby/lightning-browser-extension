@@ -1,7 +1,7 @@
 import getOriginData from "../originData";
 import setLightningData from "../setLightningData";
 
-const urlMatcher = /^https:\/\/github.com\/([^/]+)(\/([^/]+))?$/;
+const urlMatcher = /^https:\/\/github.com\/\S+$/;
 
 const battery = (): void => {
   const urlParts = document.location.pathname.split("/");
@@ -24,32 +24,35 @@ function parseElement(elementSelector: string) {
 }
 
 function handleProfilePage() {
-  const shortBioElement =
-    document.querySelector<HTMLHeadingElement>("[data-bio-text]");
+  const shortBioElement = document.querySelector<HTMLHeadingElement>(
+    ".Layout-sidebar .h-card [data-bio-text]"
+  );
 
   // This is not a GitHub profile
   if (!shortBioElement) return;
 
-  const address = parseElement("[data-bio-text]") || parseElement("article");
+  const address =
+    parseElement(".Layout-sidebar .h-card [data-bio-text]") ||
+    parseElement(".Layout-main article");
 
-  if (address) {
-    setLightningData([
-      {
-        method: "lnurl",
-        recipient: address,
-        ...getOriginData(),
-        description:
-          document.querySelector<HTMLHeadingElement>("[data-bio-text]")
-            ?.innerText ?? "",
-        name:
-          document.querySelector<HTMLHeadingElement>('[itemprop="name"]')
-            ?.innerText ?? "",
-        icon:
-          document.querySelector<HTMLImageElement>(`img.avatar-user`)?.src ??
-          "",
-      },
-    ]);
-  }
+  if (!address) return;
+
+  setLightningData([
+    {
+      method: "lnurl",
+      recipient: address,
+      ...getOriginData(),
+      description: shortBioElement?.innerText ?? "",
+      name:
+        document.querySelector<HTMLHeadingElement>(
+          '.Layout-sidebar .h-card [itemprop="name"]'
+        )?.innerText ?? "",
+      icon:
+        document.querySelector<HTMLImageElement>(
+          `.Layout-sidebar .h-card img.avatar-user`
+        )?.src ?? "",
+    },
+  ]);
 }
 
 function handleRepositoryPage(username: string) {
