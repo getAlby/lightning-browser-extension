@@ -1,7 +1,7 @@
 import getOriginData from "../originData";
 import setLightningData from "../setLightningData";
 
-const urlMatcher = /^https:\/\/github.com\/\S+$/;
+const urlMatcher = /^https:\/\/github.com\/([^/]+)(\/([^/]+))?$/;
 
 const battery = (): void => {
   const urlParts = document.location.pathname.split("/");
