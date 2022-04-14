@@ -45,10 +45,10 @@ function Settings() {
 
   return (
     <Container>
-      <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white transition-colors">
+      <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
         Settings
       </h2>
-      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y dark:bg-gray-800 transition-colors">
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y dark:bg-gray-800">
         <Setting
           title="Website enhancements"
           subtitle="Tipping enhancements for Twitter, YouTube, etc."

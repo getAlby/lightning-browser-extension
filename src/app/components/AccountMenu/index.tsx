@@ -54,24 +54,24 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
   }
 
   return (
-    <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-gray-600 transition-colors">
+    <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-gray-600">
       <div className="flex items-center">
-        <WalletIcon className="-ml-1 w-8 h-8 opacity-50 dark:text-white transition-colors" />
+        <WalletIcon className="-ml-1 w-8 h-8 opacity-50 dark:text-white" />
       </div>
       <div
         className={`flex-auto mx-2 py-1 ${!title && !subtitle ? "w-28" : ""}`}
       >
-        <div className="text-xs text-gray-500 dark:text-gray-400 transition-colors">
+        <div className="text-xs text-gray-500 dark:text-gray-400">
           {title || <Skeleton />}
         </div>
-        <div className="text-xs dark:text-white transition-colors">
+        <div className="text-xs dark:text-white">
           {subtitle || <Skeleton />}
         </div>
       </div>
 
       <Menu as="div">
         <Menu.Button className="h-full px-2 rounded-r-md hover:bg-gray-200 dark:hover:bg-gray-500 transition-colors duration-200">
-          <CaretDownIcon className="h-4 w-4 dark:text-white transition-colors" />
+          <CaretDownIcon className="h-4 w-4 dark:text-white" />
           <span className="sr-only">Toggle Dropdown</span>
         </Menu.Button>
         <Menu.List position="left">
