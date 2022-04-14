@@ -52,6 +52,18 @@ function Send() {
     }
   }
 
+  function extractInvoiceFrom(data: string) {
+    const reqExp = /lightning=([^&|\b]+)/i;
+
+    const invoice = data.match(reqExp);
+
+    if (invoice) {
+      return (invoice[1]);
+    } else {
+      return (data);
+    }
+  }
+
   if (qrIsOpen) {
     return (
       <div>
@@ -69,7 +81,7 @@ function Send() {
             qrbox={200}
             qrCodeSuccessCallback={(decodedText) => {
               if (invoice !== decodedText) {
-                setInvoice(decodedText);
+                setInvoice(extractInvoiceFrom(decodedText));
                 setQrIsOpen(false);
               }
             }}
