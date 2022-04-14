@@ -17,7 +17,7 @@ export default function ConnectRaspiBlitz() {
 
   function handleUrl(event: React.ChangeEvent<HTMLInputElement>) {
     let url = event.target.value.trim();
-    if (event.target.value.substring(0, 4) !== "http") {
+    if (url.substring(0, 4) !== "http") {
       url = `https://${url}`;
     }
     setFormData({
