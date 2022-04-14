@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import utils from "../../../../common/lib/utils";
-import Button from "../../../components/Button";
 import TextField from "../../../components/form/TextField";
 import CompanionDownloadInfo from "../../../components/CompanionDownloadInfo";
+import ConnectorForm from "../../../components/ConnectorForm";
 
 const initialFormData = Object.freeze({
   url: "",
@@ -88,79 +88,56 @@ export default function ConnectRaspiBlitz() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 px-12 py-10">
-        <div className="lg:w-1/2">
-          <h1 className="text-2xl font-bold dark:text-white">
-            Connect to your RaspiBlitz node
-          </h1>
-          <p className="text-gray-500 mt-6 dark:text-gray-400">
-            You need your node onion address, port, and a macaroon with read and
-            send permissions (e.g. admin.macaroon).
-            <br />
-            <br />
-            <b>SSH</b> into your <b>RaspiBlitz</b>.<br />
-            Run the command <b>sudo cat /mnt/hdd/tor/lndrest8080/hostname</b>.
-            <br />
-            Copy and paste the <b>.onion</b> address in the input below.
-            <br />
-            Add your <b>port</b> after the onion address, the default port is{" "}
-            <b>:8080</b>.
-          </p>
-          <div className="w-4/5">
-            <div className="mt-6">
-              <TextField
-                id="url"
-                label="REST API host"
-                placeholder="your-node-onion-address:port"
-                onChange={handleUrl}
-                required
-              />
-            </div>
-            {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
-            <div className="mt-6">
-              <p className="mb-6 text-gray-500 mt-6 dark:text-gray-400">
-                Select <b>CONNECT</b>.<br />
-                Select <b>EXPORT</b>.<br />
-                Select <b>HEX</b>.<br />
-                Copy the <b>adminMacaroon</b>.<br />
-                Paste the macaroon in the input below.
-              </p>
-              <div>
-                <TextField
-                  id="macaroon"
-                  label="Macaroon (HEX format)"
-                  value={formData.macaroon}
-                  onChange={handleMacaroon}
-                  required
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="mt-16 lg:mt-0 lg:w-1/2">
-          <div className="lg:flex h-full justify-center items-center">
-            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
-          </div>
-        </div>
-      </div>
-      <div className="my-8 flex space-x-4 justify-center">
-        <Button
-          label="Back"
-          onClick={(e) => {
-            e.preventDefault();
-            navigate(-1);
-            return false;
-          }}
-        />
-        <Button
-          type="submit"
-          label="Continue"
-          primary
-          loading={loading}
-          disabled={formData.url === "" || formData.macaroon === ""}
+    <ConnectorForm
+      title="Connect to your RaspiBlitz node"
+      description={
+        <p>
+          You need your node onion address, port, and a macaroon with read and
+          send permissions (e.g. admin.macaroon).
+          <br />
+          <br />
+          <strong>SSH</strong> into your <strong>RaspiBlitz</strong>.<br />
+          Run the command{" "}
+          <strong>sudo cat /mnt/hdd/tor/lndrest8080/hostname</strong>.
+          <br />
+          Copy and paste the <strong>.onion</strong> address in the input below.
+          <br />
+          Add your <strong>port</strong> after the onion address, the default
+          port is <strong>:8080</strong>.
+        </p>
+      }
+      submitLoading={loading}
+      submitDisabled={formData.url === "" || formData.macaroon === ""}
+      onSubmit={handleSubmit}
+    >
+      <div className="mt-6">
+        <TextField
+          id="url"
+          label="REST API host"
+          placeholder="your-node-onion-address:port"
+          onChange={handleUrl}
+          required
         />
       </div>
-    </form>
+      {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
+      <div className="mt-6">
+        <p className="mb-6 text-gray-500 mt-6 dark:text-gray-400">
+          Select <b>CONNECT</b>.<br />
+          Select <b>EXPORT</b>.<br />
+          Select <b>HEX</b>.<br />
+          Copy the <b>adminMacaroon</b>.<br />
+          Paste the macaroon in the input below.
+        </p>
+        <div>
+          <TextField
+            id="macaroon"
+            label="Macaroon (HEX format)"
+            value={formData.macaroon}
+            onChange={handleMacaroon}
+            required
+          />
+        </div>
+      </div>
+    </ConnectorForm>
   );
 }
