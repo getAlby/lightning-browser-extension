@@ -8,15 +8,15 @@ import {
   ReceiveIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 
-import api from "../../../common/lib/api";
-import type { Allowance, Battery, Transaction } from "../../../types";
+import api from "~/common/lib/api";
+import type { Allowance, Battery, Transaction } from "~/types";
 
-import Button from "../../components/Button";
-import TransactionsTable from "../../components/TransactionsTable";
-import AllowanceMenu from "../../components/AllowanceMenu";
-import Loading from "../../components/Loading";
-import PublisherCard from "../../components/PublisherCard";
-import Progressbar from "../../components/Progressbar";
+import Button from "~/app/components/Button";
+import TransactionsTable from "~/app/components/TransactionsTable";
+import AllowanceMenu from "~/app/components/AllowanceMenu";
+import Loading from "~/app/components/Loading";
+import PublisherCard from "~/app/components/PublisherCard";
+import Progressbar from "~/app/components/Progressbar";
 
 dayjs.extend(relativeTime);
 

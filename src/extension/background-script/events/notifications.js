@@ -1,4 +1,4 @@
-import utils from "../../../common/lib/utils";
+import utils from "~/common/lib/utils";
 
 // TODO: add settings check if a notification should be sent
 

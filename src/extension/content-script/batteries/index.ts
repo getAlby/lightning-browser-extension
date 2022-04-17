@@ -1,4 +1,4 @@
-import api from "../../../common/lib/api";
+import api from "~/common/lib/api";
 import GitHub from "./GitHub";
 import Monetization from "./Monetization";
 import Twitter from "./Twitter";

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import TextField from "../../../components/form/TextField";
-import ConnectorForm from "../../../components/ConnectorForm";
+import TextField from "~/app/components/form/TextField";
+import ConnectorForm from "~/app/components/ConnectorForm";
 
-import utils from "../../../../common/lib/utils";
+import utils from "~/common/lib/utils";
 
 export default function ConnectCitadel() {
   const navigate = useNavigate();

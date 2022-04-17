@@ -2,11 +2,11 @@ import { SendIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import utils from "../../../../common/lib/utils";
+import utils from "~/common/lib/utils";
 
-import ConnectorForm from "../../../components/ConnectorForm";
-import TextField from "../../../components/form/TextField";
-import CompanionDownloadInfo from "../../../components/CompanionDownloadInfo";
+import ConnectorForm from "~/app/components/ConnectorForm";
+import TextField from "~/app/components/form/TextField";
+import CompanionDownloadInfo from "~/app/components/CompanionDownloadInfo";
 
 const initialFormData = Object.freeze({
   url: "",

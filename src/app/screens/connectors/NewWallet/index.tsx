@@ -1,11 +1,11 @@
 import { useState } from "react";
-import TextField from "../../../components/form/TextField";
 import { useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";
 
-import utils from "../../../../common/lib/utils";
+import utils from "~/common/lib/utils";
 
-import ConnectorForm from "../../../components/ConnectorForm";
+import TextField from "~/app/components/form/TextField";
+import ConnectorForm from "~/app/components/ConnectorForm";
 
 const walletCreateUrl =
   process.env.WALLET_CREATE_URL || "https://getalby.com/api/users";

@@ -1,19 +1,19 @@
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "~/app/context/AuthContext";
 
-import Home from "../../screens/Home";
-import Unlock from "../../screens/Unlock";
-import Send from "../../screens/Send";
-import Receive from "../../screens/Receive";
-import LNURLPay from "../../screens/LNURLPay";
-import ConfirmPayment from "../../screens/ConfirmPayment";
+import Home from "~/app/screens/Home";
+import Unlock from "~/app/screens/Unlock";
+import Send from "~/app/screens/Send";
+import Receive from "~/app/screens/Receive";
+import LNURLPay from "~/app/screens/LNURLPay";
+import ConfirmPayment from "~/app/screens/ConfirmPayment";
 
-import { AuthProvider } from "../../context/AuthContext";
-import { AccountsProvider } from "../../context/AccountsContext";
+import { AuthProvider } from "~/app/context/AuthContext";
+import { AccountsProvider } from "~/app/context/AccountsContext";
 import RequireAuth from "../RequireAuth";
-import Navbar from "../../components/Navbar";
-import Keysend from "../../screens/Keysend";
+import Navbar from "~/app/components/Navbar";
+import Keysend from "~/app/screens/Keysend";
 
 const POPUP_MAX_HEIGHT = 600;
 

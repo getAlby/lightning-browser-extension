@@ -1,5 +1,5 @@
-import LinkButton from "../../../components/LinkButton";
-import connectorRoutes from "../../../router/connectorRoutes";
+import LinkButton from "~/app/components/LinkButton";
+import connectorRoutes from "~/app/router/connectorRoutes";
 
 type Props = {
   title: string;

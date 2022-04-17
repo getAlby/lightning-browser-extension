@@ -8,9 +8,9 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Skeleton from "react-loading-skeleton";
 
-import utils from "../../../common/lib/utils";
-import { useAuth } from "../../context/AuthContext";
-import { useAccounts } from "../../context/AccountsContext";
+import utils from "~/common/lib/utils";
+import { useAuth } from "~/app/context/AuthContext";
+import { useAccounts } from "~/app/context/AccountsContext";
 
 import Badge from "../Badge";
 import Menu from "../Menu";

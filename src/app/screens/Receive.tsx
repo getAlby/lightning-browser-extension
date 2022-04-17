@@ -8,17 +8,17 @@ import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import QRCode from "react-qr-code";
 import Confetti from "react-confetti";
 
-import utils from "../../common/lib/utils";
-import api from "../../common/lib/api";
-import { poll } from "../../common/utils/helpers";
-import { useAuth } from "../context/AuthContext";
+import utils from "~/common/lib/utils";
+import api from "~/common/lib/api";
+import { poll } from "~/common/utils/helpers";
+import { useAuth } from "~/app/context/AuthContext";
 
-import Button from "../components/Button";
-import IconButton from "../components/IconButton";
-import TextField from "../components/form/TextField";
-// import Select from "../components/Form/Select";
-import Header from "../components/Header";
-import Loading from "../components/Loading";
+import Button from "~/app/components/Button";
+import IconButton from "~/app/components/IconButton";
+import TextField from "~/app/components/form/TextField";
+// import Select from "~/app/components/Form/Select";
+import Header from "~/app/components/Header";
+import Loading from "~/app/components/Loading";
 
 function Receive() {
   const auth = useAuth();
