@@ -5,19 +5,19 @@
       {
         "title": "LNMarkets",
         "subtitle": "Instant Bitcoin derivatives trading",
-        "logo": "https://lnmarkets.com/apple-touch-icon.png",
+        "logo": "https://fra1.digitaloceanspaces.com/alby-storage/Alby-Extension_website_screen/lnmarketes.svg",
         "url": "https://lnmarkets.com/"
       },
       {
         "title": "Kollider",
         "subtitle": "Instant Bitcoin derivatives trading",
-        "logo": "https://pbs.twimg.com/profile_images/1357027183227715585/o7Y7I5Ru_400x400.png",
+        "logo": "https://fra1.digitaloceanspaces.com/alby-storage/Alby-Extension_website_screen/kollider_thumbnail.svg",
         "url": "https://kollider.xyz/"
       },
       {
         "title": "LOFT",
         "subtitle": "Trade investment products in Bitcoin",
-        "logo": "https://loft.trade/assets/logo-small.svg",
+        "logo": "https://fra1.digitaloceanspaces.com/alby-storage/Alby-Extension_website_screen/loft-trade_thumbnail.svg",
         "url": "https://loft.trade/"
       }
     ]
@@ -28,25 +28,25 @@
       {
         "title": "LNGames",
         "subtitle": "Simple Lightning Network games",
-        "logo": "https://avatars.githubusercontent.com/u/50196254",
+        "logo": "https://fra1.digitaloceanspaces.com/alby-storage/Alby-Extension_website_screen/lngames_thumbnail.svg",
         "url": "https://lngames.net/"
       },
       {
         "title": "Lightning Poker",
         "subtitle": "Play Poker with Bitcoin",
-        "logo": "https://pbs.twimg.com/profile_images/1244240245060747264/zaL6V1li_400x400.jpg",
+        "logo": "https://fra1.digitaloceanspaces.com/alby-storage/Alby-Extension_website_screen/lightning-poker_thumbnail.svg",
         "url": "https://lightning-poker.com/"
       },
       {
         "title": "LNBlackJack",
         "subtitle": "Play Blackjack with Bitcoin",
-        "logo": "https://pbs.twimg.com/profile_images/1482701753237839877/XvzEhR3v_400x400.jpg",
+        "logo": "https://fra1.digitaloceanspaces.com/alby-storage/Alby-Extension_website_screen/lnblackjack_thumbnail.svg",
         "url": "https://www.lnblackjack.com/"
       },
       {
         "title": "Lightning Roulette",
         "subtitle": "Play Roulette with Bitcoin",
-        "logo": "https://lightning-roulette.com/favicon.ico",
+        "logo": "https://fra1.digitaloceanspaces.com/alby-storage/Alby-Extension_website_screen/lightning-roulette_thumbnail.svg",
         "url": "https://lightning-roulette.com/"
       }
     ]
@@ -57,19 +57,19 @@
       {
         "title": "Stacker.News",
         "subtitle": "Lightning powered Bitcoin news site",
-        "logo": "https://stacker.news/favicon.png",
+        "logo": "https://fra1.digitaloceanspaces.com/alby-storage/Alby-Extension_website_screen/stacker-news_thumbnail.svg",
         "url": "https://stacker.news/"
       },
       {
         "title": "Wavlake",
         "subtitle": "Lightning powered music player",
-        "logo": "https://www.wavlake.com/images/social.png",
+        "logo": "https://fra1.digitaloceanspaces.com/alby-storage/Alby-Extension_website_screen/wavlake.svg",
         "url": "https://www.wavlake.com/"
       },
       {
         "title": "Y'alls",
         "subtitle": "Articles about the Lightning Network",
-        "logo": "https://pbs.twimg.com/profile_images/947351277293338624/fE1wDin7_400x400.jpg",
+        "logo": "https://fra1.digitaloceanspaces.com/alby-storage/Alby-Extension_website_screen/yalls.svg",
         "url": "https://yalls.org/"
       }
     ]
@@ -80,13 +80,13 @@
       {
         "title": "Bitrefill",
         "subtitle": "Buy vouchers, refill your phone or pay your bills",
-        "logo": "https://www.bitrefill.com/favicon.svg",
+        "logo": "https://fra1.digitaloceanspaces.com/alby-storage/Alby-Extension_website_screen/bitrefill_thumbnail.svg",
         "url": "https://www.bitrefill.com/?hl=en"
       },
       {
         "title": "Lightning Network Stores",
         "subtitle": "Collection of stores and websites accepting Bitcoin payments",
-        "logo": "https://pbs.twimg.com/profile_images/1130185744855838722/qLvtvFI9_400x400.png",
+        "logo": "https://fra1.digitaloceanspaces.com/alby-storage/Alby-Extension_website_screen/lightning-network-stores_thumbnail.svg",
         "url": "https://lightningnetworkstores.com/"
       }
     ]
@@ -97,25 +97,25 @@
       {
         "title": "WebLN Experiments",
         "subtitle": "A collection of Lightning web apps",
-        "logo": "https://webln.twentyuno.net/favicon.png",
+        "logo": "https://fra1.digitaloceanspaces.com/alby-storage/Alby-Extension_website_screen/twentyuno.svg",
         "url": "https://webln.twentyuno.net/"
       },
       {
         "title": "Sparkshot",
         "subtitle": "Art created and funded by the community",
-        "logo": "https://sparkshot.io/favicon/android-icon-192x192.png",
+        "logo": "https://fra1.digitaloceanspaces.com/alby-storage/Alby-Extension_website_screen/sparkshot_thumbnail.svg",
         "url": "https://sparkshot.io/"
       },
       {
         "title": "Sats for Likes",
         "subtitle": "Earn sats for accomplishing tasks",
-        "logo": "https://kriptode.com/satsforlikes/web_hi_res_512.webp",
+        "logo": "https://fra1.digitaloceanspaces.com/alby-storage/Alby-Extension_website_screen/sats4likes.svg",
         "url": "https://kriptode.com/satsforlikes/index.html"
       },
       {
         "title": "Amboss Space",
         "subtitle": "Lightning Network node explorer",
-        "logo": "https://pbs.twimg.com/profile_images/1434620342593544194/HaB5PWzc_400x400.jpg",
+        "logo": "https://fra1.digitaloceanspaces.com/alby-storage/Alby-Extension_website_screen/amboss-space_thumbnail.svg",
         "url": "https://amboss.space/"
       }
     ]
