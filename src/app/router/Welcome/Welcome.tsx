@@ -3,7 +3,7 @@ import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
 
 import connectorRoutes from "../connectorRoutes";
 import type { Step } from "../../components/Steps";
-
+import { useThemeEffect } from "../../utils";
 import DevMenu from "../../components/DevMenu";
 import Steps from "../../components/Steps";
 import Intro from "../../screens/Onboard/Intro";
@@ -53,12 +53,10 @@ function App() {
   const { t } = useTranslation(["welcome"]);
   const location = useLocation();
   const routesElement = useRoutes(routes);
+
   //theme
-  useEffect(() => {
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
+  let noDependencies;
+  useThemeEffect(noDependencies);
 
   // Update step progress based on active location.
   useEffect(() => {
