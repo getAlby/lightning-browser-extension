@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import TextField from "~/app/components/form/TextField";
-import Button from "~/app/components/Button";
+import TextField from "@components/form/TextField";
+import Button from "@components/Button";
 import { useNavigate } from "react-router-dom";
 import utils from "~/common/lib/utils";
 

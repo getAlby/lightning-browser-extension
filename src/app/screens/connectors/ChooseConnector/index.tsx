@@ -1,4 +1,4 @@
-import LinkButton from "~/app/components/LinkButton";
+import LinkButton from "@components/LinkButton";
 import connectorRoutes from "~/app/router/connectorRoutes";
 
 type Props = {

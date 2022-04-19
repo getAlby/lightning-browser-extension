@@ -5,11 +5,11 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 import { Allowance } from "~/types";
 import utils from "~/common/lib/utils";
-import Container from "~/app/components/Container";
-import AllowanceMenu from "~/app/components/AllowanceMenu";
-import PublisherCard from "~/app/components/PublisherCard";
-import Progressbar from "~/app/components/Progressbar";
-import TransactionsTable from "~/app/components/TransactionsTable";
+import Container from "@components/Container";
+import AllowanceMenu from "@components/AllowanceMenu";
+import PublisherCard from "@components/PublisherCard";
+import Progressbar from "@components/Progressbar";
+import TransactionsTable from "@components/TransactionsTable";
 
 dayjs.extend(relativeTime);
 

@@ -7,12 +7,12 @@ import utils from "~/common/lib/utils";
 import getOriginData from "~/extension/content-script/originData";
 import type { OriginData } from "~/types";
 
-import PaymentSummary from "~/app/components/PaymentSummary";
-import PublisherCard from "~/app/components/PublisherCard";
+import PaymentSummary from "@components/PaymentSummary";
+import PublisherCard from "@components/PublisherCard";
 import { useAuth } from "~/app/context/AuthContext";
-import BudgetControl from "~/app/components/BudgetControl";
-import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
-import SuccessMessage from "~/app/components/SuccessMessage";
+import BudgetControl from "@components/BudgetControl";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import SuccessMessage from "@components/SuccessMessage";
 
 export type Props = {
   origin?: OriginData;

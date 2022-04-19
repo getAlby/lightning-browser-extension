@@ -6,10 +6,10 @@ import getOriginData from "~/extension/content-script/originData";
 import msg from "~/common/lib/msg";
 import api from "~/common/lib/api";
 
-import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
-import Input from "~/app/components/form/Input";
-import PublisherCard from "~/app/components/PublisherCard";
-import SuccessMessage from "~/app/components/SuccessMessage";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import Input from "@components/form/Input";
+import PublisherCard from "@components/PublisherCard";
+import SuccessMessage from "@components/SuccessMessage";
 
 type Props = {
   details: LNURLWithdrawServiceResponse;

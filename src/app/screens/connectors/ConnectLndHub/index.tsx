@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 import utils from "~/common/lib/utils";
 
-import ConnectorForm from "~/app/components/ConnectorForm";
-import QrcodeScanner from "~/app/components/QrcodeScanner";
-import TextField from "~/app/components/form/TextField";
-import CompanionDownloadInfo from "~/app/components/CompanionDownloadInfo";
+import ConnectorForm from "@components/ConnectorForm";
+import QrcodeScanner from "@components/QrcodeScanner";
+import TextField from "@components/form/TextField";
+import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 
 export default function ConnectLndHub() {
   const navigate = useNavigate();

@@ -4,8 +4,8 @@ import QRCode from "react-qr-code";
 
 import utils from "~/common/lib/utils";
 
-import TextField from "~/app/components/form/TextField";
-import ConnectorForm from "~/app/components/ConnectorForm";
+import TextField from "@components/form/TextField";
+import ConnectorForm from "@components/ConnectorForm";
 
 const walletCreateUrl =
   process.env.WALLET_CREATE_URL || "https://getalby.com/api/users";

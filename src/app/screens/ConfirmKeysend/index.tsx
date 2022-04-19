@@ -1,15 +1,15 @@
 import { useState, MouseEvent, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import PaymentSummary from "~/app/components/PaymentSummary";
+import PaymentSummary from "@components/PaymentSummary";
 import utils from "~/common/lib/utils";
 import getOriginData from "~/extension/content-script/originData";
 import msg from "~/common/lib/msg";
 
-import BudgetControl from "~/app/components/BudgetControl";
-import PublisherCard from "~/app/components/PublisherCard";
-import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
-import SuccessMessage from "~/app/components/SuccessMessage";
+import BudgetControl from "@components/BudgetControl";
+import PublisherCard from "@components/PublisherCard";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import SuccessMessage from "@components/SuccessMessage";
 
 import type { OriginData } from "~/types";
 

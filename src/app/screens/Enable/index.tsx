@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 
-import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
-import PublisherCard from "~/app/components/PublisherCard";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import PublisherCard from "@components/PublisherCard";
 import msg from "~/common/lib/msg";
 import type { OriginData } from "~/types";
 

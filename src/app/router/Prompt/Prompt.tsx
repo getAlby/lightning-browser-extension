@@ -13,16 +13,16 @@ import type {
 import { AuthProvider } from "~/app/context/AuthContext";
 import { AccountsProvider } from "~/app/context/AccountsContext";
 import RequireAuth from "../RequireAuth";
-import Unlock from "~/app/screens/Unlock";
-import Enable from "~/app/screens/Enable";
-import MakeInvoice from "~/app/screens/MakeInvoice";
-import ConfirmSignMessage from "~/app/screens/ConfirmSignMessage";
-import ConfirmPayment from "~/app/screens/ConfirmPayment";
-import LNURLPay from "~/app/screens/LNURLPay";
-import LNURLAuth from "~/app/screens/LNURLAuth";
-import LNURLWithdraw from "~/app/screens/LNURLWithdraw";
-import Keysend from "~/app/screens/ConfirmKeysend";
-import AccountMenu from "~/app/components/AccountMenu";
+import Unlock from "@screens/Unlock";
+import Enable from "@screens/Enable";
+import MakeInvoice from "@screens/MakeInvoice";
+import ConfirmSignMessage from "@screens/ConfirmSignMessage";
+import ConfirmPayment from "@screens/ConfirmPayment";
+import LNURLPay from "@screens/LNURLPay";
+import LNURLAuth from "@screens/LNURLAuth";
+import LNURLWithdraw from "@screens/LNURLWithdraw";
+import Keysend from "@screens/ConfirmKeysend";
+import AccountMenu from "@components/AccountMenu";
 
 class Prompt extends Component<
   Record<string, unknown>,

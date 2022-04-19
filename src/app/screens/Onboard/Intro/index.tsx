@@ -1,5 +1,5 @@
 import Features from "./features";
-import Button from "~/app/components/Button";
+import Button from "@components/Button";
 import {
   CodeIcon,
   KeyIcon,

@@ -3,8 +3,8 @@ import { MouseEvent } from "react";
 import type { LNURLAuthServiceResponse } from "~/types";
 import msg from "~/common/lib/msg";
 
-import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
-import PublisherCard from "~/app/components/PublisherCard";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import PublisherCard from "@components/PublisherCard";
 
 type Props = {
   details: LNURLAuthServiceResponse;

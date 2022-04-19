@@ -9,11 +9,11 @@ import { parsePaymentRequest } from "invoices";
 
 import lnurlLib from "~/common/lib/lnurl";
 
-import Button from "~/app/components/Button";
-import IconButton from "~/app/components/IconButton";
-import Header from "~/app/components/Header";
-import QrcodeScanner from "~/app/components/QrcodeScanner";
-import TextField from "~/app/components/form/TextField";
+import Button from "@components/Button";
+import IconButton from "@components/IconButton";
+import Header from "@components/Header";
+import QrcodeScanner from "@components/QrcodeScanner";
+import TextField from "@components/form/TextField";
 
 function Send() {
   const [invoice, setInvoice] = useState("");

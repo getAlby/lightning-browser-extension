@@ -10,16 +10,16 @@ import start9 from "/static/assets/icons/start9.png";
 import citadel from "/static/assets/icons/citadel.png";
 import mynode from "/static/assets/icons/mynode.png";
 
-import ConnectLnd from "~/app/screens/connectors/ConnectLnd";
-import ConnectLndHub from "~/app/screens/connectors/ConnectLndHub";
-import ConnectLnbits from "~/app/screens/connectors/ConnectLnbits";
-import ConnectGaloy, { galoyUrls } from "~/app/screens/connectors/ConnectGaloy";
-import ConnectEclair from "~/app/screens/connectors/ConnectEclair";
-import ConnectCitadel from "~/app/screens/connectors/ConnectCitadel";
-import NewWallet from "~/app/screens/connectors/NewWallet";
-import ConnectUmbrel from "~/app/screens/connectors/ConnectUmbrel";
-import ConnectStart9 from "~/app/screens/connectors/ConnectStart9";
-import ConnectMyNode from "~/app/screens/connectors/ConnectMyNode";
+import ConnectLnd from "@screens/connectors/ConnectLnd";
+import ConnectLndHub from "@screens/connectors/ConnectLndHub";
+import ConnectLnbits from "@screens/connectors/ConnectLnbits";
+import ConnectGaloy, { galoyUrls } from "@screens/connectors/ConnectGaloy";
+import ConnectEclair from "@screens/connectors/ConnectEclair";
+import ConnectCitadel from "@screens/connectors/ConnectCitadel";
+import NewWallet from "@screens/connectors/NewWallet";
+import ConnectUmbrel from "@screens/connectors/ConnectUmbrel";
+import ConnectStart9 from "@screens/connectors/ConnectStart9";
+import ConnectMyNode from "@screens/connectors/ConnectMyNode";
 
 const galoyPaths: { [key: string]: keyof typeof galoyUrls } = {
   bitcoinBeach: "galoy-bitcoin-beach",

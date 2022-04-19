@@ -5,12 +5,12 @@ import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import utils from "~/common/lib/utils";
 import { useAuth } from "~/app/context/AuthContext";
 
-import Input from "~/app/components/form/Input";
-import Header from "~/app/components/Header";
-import IconButton from "~/app/components/IconButton";
-import Button from "~/app/components/Button";
-import SuccessMessage from "~/app/components/SuccessMessage";
-import SatButtons from "~/app/components/SatButtons";
+import Input from "@components/form/Input";
+import Header from "@components/Header";
+import IconButton from "@components/IconButton";
+import Button from "@components/Button";
+import SuccessMessage from "@components/SuccessMessage";
+import SatButtons from "@components/SatButtons";
 
 type Props = {
   destination?: string;

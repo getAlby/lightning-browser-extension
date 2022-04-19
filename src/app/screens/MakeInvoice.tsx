@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
-import TextField from "~/app/components/form/TextField";
-import PublisherCard from "~/app/components/PublisherCard";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import TextField from "@components/form/TextField";
+import PublisherCard from "@components/PublisherCard";
 import msg from "~/common/lib/msg";
 import type { RequestInvoiceArgs } from "~/types";
 import api from "~/common/lib/api";
-import SatButtons from "~/app/components/SatButtons";
+import SatButtons from "@components/SatButtons";
 
 type Origin = {
   name: string;

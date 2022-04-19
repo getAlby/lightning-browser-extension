@@ -12,10 +12,10 @@ import { useNavigate } from "react-router-dom";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
 import type { Account } from "~/types";
-import Button from "~/app/components/Button";
-import Container from "~/app/components/Container";
-import TextField from "~/app/components/form/TextField";
-import Menu from "~/app/components/Menu";
+import Button from "@components/Button";
+import Container from "@components/Container";
+import TextField from "@components/form/TextField";
+import Menu from "@components/Menu";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useAuth } from "~/app/context/AuthContext";
 

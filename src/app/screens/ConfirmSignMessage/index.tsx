@@ -1,13 +1,13 @@
 import { useState, useRef } from "react";
 
-import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
 //import Checkbox from "../../components/Form/Checkbox";
-import PublisherCard from "~/app/components/PublisherCard";
+import PublisherCard from "@components/PublisherCard";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import getOriginData from "~/extension/content-script/originData";
 import type { OriginData } from "~/types";
-import SuccessMessage from "~/app/components/SuccessMessage";
+import SuccessMessage from "@components/SuccessMessage";
 
 type Props = {
   origin: OriginData;

@@ -6,8 +6,12 @@
     "jsx": "react-jsx",
     "outDir": "built",
     "strict": true,
-    "baseUrl": "./",
-    "paths": { "~/*": ["./src/*"] },
+    "baseUrl": ".",
+    "paths": { 
+      "~/*": ["./src/*"],
+      "@components/*": ["./src/app/components/*"],
+      "@screens/*": ["./src/app/screens/*"]
+    },
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,

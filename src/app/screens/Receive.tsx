@@ -13,12 +13,12 @@ import api from "~/common/lib/api";
 import { poll } from "~/common/utils/helpers";
 import { useAuth } from "~/app/context/AuthContext";
 
-import Button from "~/app/components/Button";
-import IconButton from "~/app/components/IconButton";
-import TextField from "~/app/components/form/TextField";
-// import Select from "~/app/components/Form/Select";
-import Header from "~/app/components/Header";
-import Loading from "~/app/components/Loading";
+import Button from "@components/Button";
+import IconButton from "@components/IconButton";
+import TextField from "@components/form/TextField";
+// import Select from "@components/Form/Select";
+import Header from "@components/Header";
+import Loading from "@components/Loading";
 
 function Receive() {
   const auth = useAuth();

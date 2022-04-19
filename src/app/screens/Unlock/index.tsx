@@ -3,9 +3,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import utils from "~/common/lib/utils";
 import { useAuth } from "~/app/context/AuthContext";
-import AlbyLogo from "~/app/components/AlbyLogo";
-import Button from "~/app/components/Button";
-import Input from "~/app/components/form/Input";
+import AlbyLogo from "@components/AlbyLogo";
+import Button from "@components/Button";
+import Input from "@components/form/Input";
 
 function Unlock() {
   const [password, setPassword] = useState("");

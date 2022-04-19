@@ -15,11 +15,11 @@ import lnurl from "~/common/lib/lnurl";
 import getOriginData from "~/extension/content-script/originData";
 import { useAuth } from "~/app/context/AuthContext";
 
-import Button from "~/app/components/Button";
-import TextField from "~/app/components/form/TextField";
-import PublisherCard from "~/app/components/PublisherCard";
-import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
-import SatButtons from "~/app/components/SatButtons";
+import Button from "@components/Button";
+import TextField from "@components/form/TextField";
+import PublisherCard from "@components/PublisherCard";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import SatButtons from "@components/SatButtons";
 
 type Origin = {
   name: string;

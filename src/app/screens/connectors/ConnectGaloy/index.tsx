@@ -4,8 +4,8 @@ import axios from "axios";
 
 import utils from "~/common/lib/utils";
 
-import Input from "~/app/components/form/Input";
-import ConnectorForm from "~/app/components/ConnectorForm";
+import Input from "@components/form/Input";
+import ConnectorForm from "@components/ConnectorForm";
 
 export const galoyUrls = {
   "galoy-bitcoin-beach": {
