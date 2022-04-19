@@ -1,7 +1,6 @@
-import { Component } from "react";
-import qs from "query-string";
 import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 
+import { ThemeProvider } from "../../context/ThemeContext";
 import { useAuth } from "../../context/AuthContext";
 import type {
   LNURLAuthServiceResponse,
@@ -24,28 +23,27 @@ import LNURLWithdraw from "../../screens/LNURLWithdraw";
 import Keysend from "../../screens/ConfirmKeysend";
 import AccountMenu from "../../components/AccountMenu";
 
-class Prompt extends Component<
-  Record<string, unknown>,
-  { origin: OriginData; args: Record<string, unknown>; type: string }
-> {
-  constructor(props: Record<string, unknown>) {
-    super(props);
-    const message = qs.parse(window.location.search);
-    let origin = {} as OriginData;
-    let args = {};
-    let type = "";
-    if (message.origin && typeof message.origin === "string") {
-      origin = JSON.parse(message.origin);
-    }
-    if (message.args && typeof message.args === "string") {
-      args = JSON.parse(message.args);
-    }
-    if (typeof message.type === "string") type = message.type;
-    this.state = { origin, args, type };
-  }
+// Parse out the parameters from the querystring.
+const params = new URLSearchParams(window.location.search);
+let origin = {} as OriginData;
+let args = {};
+let type = "";
+if (params.get("origin") && typeof params.get("origin") === "string") {
+  origin = JSON.parse(params.get("origin") as string);
+}
+if (params.get("args") && typeof params.get("args") === "string") {
+  args = JSON.parse(params.get("args") as string);
+}
+if (typeof params.get("type") === "string") type = params.get("type") as string;
+const routeParams: {
+  origin: OriginData;
+  args: Record<string, unknown>;
+  type: string;
+} = { origin, args, type };
 
-  render() {
-    return (
+function Prompt() {
+  return (
+    <ThemeProvider>
       <AuthProvider>
         <AccountsProvider>
           <HashRouter>
@@ -60,21 +58,21 @@ class Prompt extends Component<
               >
                 <Route
                   index
-                  element={<Navigate to={`/${this.state.type}`} replace />}
+                  element={<Navigate to={`/${routeParams.type}`} replace />}
                 />
                 <Route
                   path="webln/enable"
-                  element={<Enable origin={this.state.origin} />}
+                  element={<Enable origin={routeParams.origin} />}
                 />
                 <Route
                   path="lnurlAuth"
                   element={
                     <LNURLAuth
                       details={
-                        this.state.args
+                        routeParams.args
                           ?.lnurlDetails as LNURLAuthServiceResponse
                       }
-                      origin={this.state.origin}
+                      origin={routeParams.origin}
                     />
                   }
                 />
@@ -83,9 +81,10 @@ class Prompt extends Component<
                   element={
                     <LNURLPay
                       details={
-                        this.state.args?.lnurlDetails as LNURLPayServiceResponse
+                        routeParams.args
+                          ?.lnurlDetails as LNURLPayServiceResponse
                       }
-                      origin={this.state.origin}
+                      origin={routeParams.origin}
                     />
                   }
                 />
@@ -94,10 +93,10 @@ class Prompt extends Component<
                   element={
                     <LNURLWithdraw
                       details={
-                        this.state.args
+                        routeParams.args
                           ?.lnurlDetails as LNURLWithdrawServiceResponse
                       }
-                      origin={this.state.origin}
+                      origin={routeParams.origin}
                     />
                   }
                 />
@@ -106,9 +105,9 @@ class Prompt extends Component<
                   element={
                     <MakeInvoice
                       invoiceAttributes={
-                        this.state.args.invoiceAttributes as RequestInvoiceArgs
+                        routeParams.args.invoiceAttributes as RequestInvoiceArgs
                       }
-                      origin={this.state.origin}
+                      origin={routeParams.origin}
                     />
                   }
                 />
@@ -116,8 +115,10 @@ class Prompt extends Component<
                   path="confirmPayment"
                   element={
                     <ConfirmPayment
-                      paymentRequest={this.state.args?.paymentRequest as string}
-                      origin={this.state.origin}
+                      paymentRequest={
+                        routeParams.args?.paymentRequest as string
+                      }
+                      origin={routeParams.origin}
                     />
                   }
                 />
@@ -125,12 +126,15 @@ class Prompt extends Component<
                   path="confirmKeysend"
                   element={
                     <Keysend
-                      destination={this.state.args?.destination as string}
-                      valueSat={this.state.args?.amount as string}
+                      destination={routeParams.args?.destination as string}
+                      valueSat={routeParams.args?.amount as string}
                       customRecords={
-                        this.state.args?.customRecords as Record<string, string>
+                        routeParams.args?.customRecords as Record<
+                          string,
+                          string
+                        >
                       }
-                      origin={this.state.origin}
+                      origin={routeParams.origin}
                     />
                   }
                 />
@@ -138,8 +142,8 @@ class Prompt extends Component<
                   path="confirmSignMessage"
                   element={
                     <ConfirmSignMessage
-                      message={this.state.args?.message as string}
-                      origin={this.state.origin}
+                      message={routeParams.args?.message as string}
+                      origin={routeParams.origin}
                     />
                   }
                 />
@@ -149,8 +153,8 @@ class Prompt extends Component<
           </HashRouter>
         </AccountsProvider>
       </AuthProvider>
-    );
-  }
+    </ThemeProvider>
+  );
 }
 
 const Layout = () => {

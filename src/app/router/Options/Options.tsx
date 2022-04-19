@@ -1,9 +1,9 @@
 import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "../../context/AuthContext";
+
+import { ThemeProvider } from "../../context/ThemeContext";
+import { AuthProvider, useAuth } from "../../context/AuthContext";
 import { AccountsProvider } from "../../context/AccountsContext";
-import { useAuth } from "../../context/AuthContext";
 import connectorRoutes from "../connectorRoutes";
-import { useThemeEffect } from "../../utils";
 import RequireAuth from "../RequireAuth";
 import Container from "../../components/Container";
 import Navbar from "../../components/Navbar";
@@ -21,73 +21,71 @@ import Accounts from "../../screens/Accounts";
 import Keysend from "../../screens/Keysend";
 
 function Options() {
-  //theme
-  let noDependencies;
-  useThemeEffect(noDependencies);
-
   return (
-    <AuthProvider>
-      <AccountsProvider>
-        <HashRouter>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <RequireAuth>
-                  <Layout />
-                </RequireAuth>
-              }
-            >
-              <Route index element={<Navigate to="/publishers" replace />} />
-              <Route path="publishers">
-                <Route path=":id" element={<Publisher />} />
-                <Route index element={<Publishers />} />
-              </Route>
-              <Route path="send" element={<Send />} />
-              <Route path="keysend" element={<Keysend />} />
-              <Route path="receive" element={<Receive />} />
-              <Route path="lnurlPay" element={<LNURLPay />} />
-              <Route path="confirmPayment" element={<ConfirmPayment />} />
-              <Route path="settings" element={<Settings />} />
-              <Route path="accounts">
+    <ThemeProvider>
+      <AuthProvider>
+        <AccountsProvider>
+          <HashRouter>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <RequireAuth>
+                    <Layout />
+                  </RequireAuth>
+                }
+              >
+                <Route index element={<Navigate to="/publishers" replace />} />
+                <Route path="publishers">
+                  <Route path=":id" element={<Publisher />} />
+                  <Route index element={<Publishers />} />
+                </Route>
+                <Route path="send" element={<Send />} />
+                <Route path="keysend" element={<Keysend />} />
+                <Route path="receive" element={<Receive />} />
+                <Route path="lnurlPay" element={<LNURLPay />} />
+                <Route path="confirmPayment" element={<ConfirmPayment />} />
+                <Route path="settings" element={<Settings />} />
+                <Route path="accounts">
+                  <Route
+                    path="new"
+                    element={
+                      <Container>
+                        <Outlet />
+                      </Container>
+                    }
+                  >
+                    <Route
+                      index
+                      element={
+                        <ChooseConnector title="Add a new lightning account" />
+                      }
+                    />
+                    {connectorRoutes.map((connectorRoute) => (
+                      <Route
+                        key={connectorRoute.path}
+                        path={connectorRoute.path}
+                        element={connectorRoute.element}
+                      />
+                    ))}
+                  </Route>
+                  <Route index element={<Accounts />} />
+                </Route>
                 <Route
-                  path="new"
+                  path="test-connection"
                   element={
                     <Container>
-                      <Outlet />
+                      <TestConnection />
                     </Container>
                   }
-                >
-                  <Route
-                    index
-                    element={
-                      <ChooseConnector title="Add a new lightning account" />
-                    }
-                  />
-                  {connectorRoutes.map((connectorRoute) => (
-                    <Route
-                      key={connectorRoute.path}
-                      path={connectorRoute.path}
-                      element={connectorRoute.element}
-                    />
-                  ))}
-                </Route>
-                <Route index element={<Accounts />} />
+                />
               </Route>
-              <Route
-                path="test-connection"
-                element={
-                  <Container>
-                    <TestConnection />
-                  </Container>
-                }
-              />
-            </Route>
-            <Route path="unlock" element={<Unlock />} />
-          </Routes>
-        </HashRouter>
-      </AccountsProvider>
-    </AuthProvider>
+              <Route path="unlock" element={<Unlock />} />
+            </Routes>
+          </HashRouter>
+        </AccountsProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

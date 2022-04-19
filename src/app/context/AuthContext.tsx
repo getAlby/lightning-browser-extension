@@ -1,7 +1,6 @@
 import { useState, useEffect, createContext, useContext } from "react";
 
 import utils from "../../common/lib/utils";
-import { useThemeEffect } from "../utils";
 import api from "../../common/lib/api";
 import type { AccountInfo } from "../../types";
 
@@ -28,10 +27,6 @@ interface AuthContextType {
 const AuthContext = createContext({} as AuthContextType);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  //theme
-  let noDependencies;
-  useThemeEffect(noDependencies);
-
   const [account, setAccount] = useState<AuthContextType["account"]>(null);
   const [loading, setLoading] = useState(true);
 

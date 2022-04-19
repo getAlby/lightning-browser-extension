@@ -1,6 +1,7 @@
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
+
+import { ThemeProvider } from "../../context/ThemeContext";
 import { useAuth } from "../../context/AuthContext";
-import { useThemeEffect } from "../../utils";
 import Home from "../../screens/Home";
 import Unlock from "../../screens/Unlock";
 import Send from "../../screens/Send";
@@ -17,35 +18,33 @@ import Keysend from "../../screens/Keysend";
 const POPUP_MAX_HEIGHT = 600;
 
 function Popup() {
-  //theme
-  let noDependencies;
-  useThemeEffect(noDependencies);
-
   return (
-    <AuthProvider>
-      <AccountsProvider>
-        <HashRouter>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <RequireAuth>
-                  <Layout />
-                </RequireAuth>
-              }
-            >
-              <Route index element={<Home />} />
-              <Route path="send" element={<Send />} />
-              <Route path="receive" element={<Receive />} />
-              <Route path="lnurlPay" element={<LNURLPay />} />
-              <Route path="keysend" element={<Keysend />} />
-              <Route path="confirmPayment" element={<ConfirmPayment />} />
-            </Route>
-            <Route path="unlock" element={<Unlock />} />
-          </Routes>
-        </HashRouter>
-      </AccountsProvider>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <AccountsProvider>
+          <HashRouter>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <RequireAuth>
+                    <Layout />
+                  </RequireAuth>
+                }
+              >
+                <Route index element={<Home />} />
+                <Route path="send" element={<Send />} />
+                <Route path="receive" element={<Receive />} />
+                <Route path="lnurlPay" element={<LNURLPay />} />
+                <Route path="keysend" element={<Keysend />} />
+                <Route path="confirmPayment" element={<ConfirmPayment />} />
+              </Route>
+              <Route path="unlock" element={<Unlock />} />
+            </Routes>
+          </HashRouter>
+        </AccountsProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

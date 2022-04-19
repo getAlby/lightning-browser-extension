@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 
 import api from "../../common/lib/api";
-import { useThemeEffect } from "../utils";
 import { SettingsStorage } from "../../types";
+import { useTheme } from "../context/ThemeContext";
 
 import Container from "../components/Container";
 import Button from "../components/Button";
@@ -25,6 +25,7 @@ function Settings() {
   });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
+  const theme = useTheme();
 
   async function saveSetting(
     setting: Record<string, string | number | boolean>
@@ -39,9 +40,6 @@ function Settings() {
       setLoading(false);
     });
   }, []);
-
-  //theme
-  useThemeEffect(settings.theme);
 
   return (
     <Container>
@@ -154,10 +152,11 @@ function Settings() {
               <Select
                 name="theme"
                 value={settings.theme}
-                onChange={(ev) => {
-                  saveSetting({
+                onChange={async (ev) => {
+                  await saveSetting({
                     theme: ev.target.value,
                   });
+                  theme.getTheme();
                 }}
               >
                 <option value="dark">Dark</option>
