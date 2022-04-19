@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
 import { ThemeProvider } from "../../context/ThemeContext";
 import connectorRoutes from "../connectorRoutes";
 import type { Step } from "../../components/Steps";

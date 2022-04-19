@@ -1,5 +1,5 @@
 // https://github.com/BetaHuhn/metadata-scraper <3
-import { MetaData, OriginData } from "../../types";
+import { MetaData, OriginData } from "~/types";
 
 type MetadataRule = [string, (el: Element) => string | null];
 

@@ -3,11 +3,11 @@ import createState from "zustand";
 import merge from "lodash/merge";
 import pick from "lodash/pick";
 
-import { decryptData } from "../../common/lib/crypto";
+import { decryptData } from "~/common/lib/crypto";
 import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
-import type { Account, Accounts, SettingsStorage } from "../../types";
-import i18n from "../../i18n/i18nConfig";
+import type { Account, Accounts, SettingsStorage } from "~/types";
+import i18n from "~/i18n/i18nConfig";
 
 interface State {
   connector: Connector | null;

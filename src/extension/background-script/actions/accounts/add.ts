@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import type { Runtime } from "webextension-polyfill";
-import { encryptData } from "../../../../common/lib/crypto";
-import type { Account, OriginData } from "../../../../types";
+import { encryptData } from "~/common/lib/crypto";
+import type { Account, OriginData } from "~/types";
 import state from "../../state";
 
 // @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652

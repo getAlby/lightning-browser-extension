@@ -1,5 +1,4 @@
 import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
-
 import { ThemeProvider } from "../../context/ThemeContext";
 import { AuthProvider, useAuth } from "../../context/AuthContext";
 import { AccountsProvider } from "../../context/AccountsContext";

@@ -2,17 +2,17 @@ import { parsePaymentRequest } from "invoices";
 import { useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import msg from "../../../common/lib/msg";
-import utils from "../../../common/lib/utils";
-import getOriginData from "../../../extension/content-script/originData";
-import type { OriginData } from "../../../types";
+import msg from "~/common/lib/msg";
+import utils from "~/common/lib/utils";
+import getOriginData from "~/extension/content-script/originData";
+import type { OriginData } from "~/types";
 
-import PaymentSummary from "../../components/PaymentSummary";
-import PublisherCard from "../../components/PublisherCard";
-import { useAuth } from "../../context/AuthContext";
-import BudgetControl from "../../components/BudgetControl";
-import ConfirmOrCancel from "../../components/ConfirmOrCancel";
-import SuccessMessage from "../../components/SuccessMessage";
+import PaymentSummary from "@components/PaymentSummary";
+import PublisherCard from "@components/PublisherCard";
+import { useAuth } from "~/app/context/AuthContext";
+import BudgetControl from "@components/BudgetControl";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import SuccessMessage from "@components/SuccessMessage";
 
 export type Props = {
   origin?: OriginData;

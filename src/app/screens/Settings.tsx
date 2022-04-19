@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { Html5Qrcode } from "html5-qrcode";
-
 import api from "../../common/lib/api";
 import { SettingsStorage } from "../../types";
 import { useTheme } from "../context/ThemeContext";
-
 import Container from "../components/Container";
 import Button from "../components/Button";
 import Toggle from "../components/form/Toggle";

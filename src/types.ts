@@ -126,6 +126,11 @@ export interface LNURLPaymentInfo {
   successAction?: LNURLPaymentSuccessAction;
 }
 
+export interface LNURLPaymentInfoError {
+  status: string;
+  reason: string;
+}
+
 export interface RequestInvoiceArgs {
   amount?: string | number;
   defaultAmount?: string | number;

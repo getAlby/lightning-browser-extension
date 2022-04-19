@@ -9,8 +9,8 @@ import {
   QuestionIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 
-import utils from "../../../common/lib/utils";
-import { useAuth } from "../../context/AuthContext";
+import utils from "~/common/lib/utils";
+import { useAuth } from "~/app/context/AuthContext";
 import Menu from "../Menu";
 
 export default function UserMenu() {

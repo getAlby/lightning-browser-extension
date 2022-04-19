@@ -1,5 +1,5 @@
 import db from "../../db";
-import utils from "../../../../common/lib/utils";
+import utils from "~/common/lib/utils";
 import setIcon from "../setup/setIcon";
 
 const enable = async (message, sender) => {

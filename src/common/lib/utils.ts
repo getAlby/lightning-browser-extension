@@ -1,7 +1,7 @@
 import PubSub from "pubsub-js";
 import browser, { Runtime } from "webextension-polyfill";
-import { SendPaymentResponse } from "../../extension/background-script/connectors/connector.interface";
-import { Message, OriginData } from "../../types";
+import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
+import { Message, OriginData } from "~/types";
 
 const utils = {
   call: <T = Record<string, unknown>>(
@@ -28,7 +28,7 @@ const utils = {
   notify: (options: { title: string; message: string }) => {
     const notification: browser.Notifications.CreateNotificationOptions = {
       type: "basic",
-      iconUrl: "assets/icons/satsymbol-48.png",
+      iconUrl: "assets/icons/alby_icon_yellow_48x48.png",
       ...options,
     };
 

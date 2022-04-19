@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, Method } from "axios";
 import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
-import HashKeySigner from "../../../common/utils/signer";
+import HashKeySigner from "~/common/utils/signer";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
@@ -19,7 +19,7 @@ import Connector, {
   KeysendArgs,
 } from "./connector.interface";
 import state from "../state";
-import utils from "../../../common/lib/utils";
+import utils from "~/common/lib/utils";
 
 interface Config {
   login: string;

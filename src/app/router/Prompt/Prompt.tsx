@@ -1,5 +1,4 @@
 import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
-
 import { ThemeProvider } from "../../context/ThemeContext";
 import { useAuth } from "../../context/AuthContext";
 import type {
@@ -8,20 +7,20 @@ import type {
   LNURLWithdrawServiceResponse,
   OriginData,
   RequestInvoiceArgs,
-} from "../../../types";
-import { AuthProvider } from "../../context/AuthContext";
-import { AccountsProvider } from "../../context/AccountsContext";
+} from "~/types";
+import { AuthProvider } from "~/app/context/AuthContext";
+import { AccountsProvider } from "~/app/context/AccountsContext";
 import RequireAuth from "../RequireAuth";
-import Unlock from "../../screens/Unlock";
-import Enable from "../../screens/Enable";
-import MakeInvoice from "../../screens/MakeInvoice";
-import ConfirmSignMessage from "../../screens/ConfirmSignMessage";
-import ConfirmPayment from "../../screens/ConfirmPayment";
-import LNURLPay from "../../screens/LNURLPay";
-import LNURLAuth from "../../screens/LNURLAuth";
-import LNURLWithdraw from "../../screens/LNURLWithdraw";
-import Keysend from "../../screens/ConfirmKeysend";
-import AccountMenu from "../../components/AccountMenu";
+import Unlock from "@screens/Unlock";
+import Enable from "@screens/Enable";
+import MakeInvoice from "@screens/MakeInvoice";
+import ConfirmSignMessage from "@screens/ConfirmSignMessage";
+import ConfirmPayment from "@screens/ConfirmPayment";
+import LNURLPay from "@screens/LNURLPay";
+import LNURLAuth from "@screens/LNURLAuth";
+import LNURLWithdraw from "@screens/LNURLWithdraw";
+import Keysend from "@screens/ConfirmKeysend";
+import AccountMenu from "@components/AccountMenu";
 
 // Parse out the parameters from the querystring.
 const params = new URLSearchParams(window.location.search);
