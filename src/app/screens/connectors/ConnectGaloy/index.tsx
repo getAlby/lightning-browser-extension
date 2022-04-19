@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import utils from "../../../../common/lib/utils";
+import utils from "~/common/lib/utils";
 
-import Input from "../../../components/form/Input";
-import ConnectorForm from "../../../components/ConnectorForm";
+import Input from "@components/form/Input";
+import ConnectorForm from "@components/ConnectorForm";
 
 export const galoyUrls = {
   "galoy-bitcoin-beach": {

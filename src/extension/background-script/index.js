@@ -1,6 +1,6 @@
 import browser from "webextension-polyfill";
 
-import utils from "../../common/lib/utils";
+import utils from "~/common/lib/utils";
 
 import { router } from "./router";
 import state from "./state";

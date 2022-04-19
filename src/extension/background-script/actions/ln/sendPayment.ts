@@ -1,9 +1,9 @@
 import PubSub from "pubsub-js";
 import { parsePaymentRequest } from "invoices";
 
-import { Message } from "../../../../types";
+import { Message } from "~/types";
 import state from "../../state";
-import utils from "../../../../common/lib/utils";
+import utils from "~/common/lib/utils";
 
 export default async function sendPayment(message: Message) {
   PubSub.publish(`ln.sendPayment.start`, message);

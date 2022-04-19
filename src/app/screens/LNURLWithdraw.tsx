@@ -1,15 +1,15 @@
 import { useState, MouseEvent } from "react";
 import axios from "axios";
 
-import type { LNURLWithdrawServiceResponse } from "../../types";
-import getOriginData from "../../extension/content-script/originData";
-import msg from "../../common/lib/msg";
-import api from "../../common/lib/api";
+import type { LNURLWithdrawServiceResponse } from "~/types";
+import getOriginData from "~/extension/content-script/originData";
+import msg from "~/common/lib/msg";
+import api from "~/common/lib/api";
 
-import ConfirmOrCancel from "../components/ConfirmOrCancel";
-import Input from "../components/form/Input";
-import PublisherCard from "../components/PublisherCard";
-import SuccessMessage from "../components/SuccessMessage";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import Input from "@components/form/Input";
+import PublisherCard from "@components/PublisherCard";
+import SuccessMessage from "@components/SuccessMessage";
 
 type Props = {
   details: LNURLWithdrawServiceResponse;

@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 
-import api from "../../common/lib/api";
+import api from "~/common/lib/api";
+import { SettingsStorage } from "~/types";
 
-import { SettingsStorage } from "../../types";
-
-import Container from "../components/Container";
-import Button from "../components/Button";
-import Toggle from "../components/form/Toggle";
-import Input from "../components/form/Input";
-import Setting from "../components/Setting";
-import LocaleSwitcher from "../components/LocaleSwitcher/LocaleSwitcher";
+import Container from "@components/Container";
+import Button from "@components/Button";
+import Toggle from "@components/form/Toggle";
+import Input from "@components/form/Input";
+import Setting from "@components/Setting";
+import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
 
 function Settings() {
   const [loading, setLoading] = useState(true);

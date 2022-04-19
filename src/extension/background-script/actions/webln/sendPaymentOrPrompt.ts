@@ -1,7 +1,7 @@
 import { parsePaymentRequest } from "invoices";
 
-import utils from "../../../../common/lib/utils";
-import { Message } from "../../../../types";
+import utils from "~/common/lib/utils";
+import { Message } from "~/types";
 
 import db from "../../db";
 import sendPayment from "../ln/sendPayment";

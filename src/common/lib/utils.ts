@@ -1,8 +1,8 @@
 import PubSub from "pubsub-js";
 import qs from "query-string";
 import browser, { Runtime } from "webextension-polyfill";
-import { SendPaymentResponse } from "../../extension/background-script/connectors/connector.interface";
-import { Message, OriginData } from "../../types";
+import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
+import { Message, OriginData } from "~/types";
 
 const utils = {
   call: <T = Record<string, unknown>>(

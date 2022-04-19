@@ -1,8 +1,9 @@
 import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
-import utils from "../../../common/lib/utils";
-import HashKeySigner from "../../../common/utils/signer";
+
+import utils from "~/common/lib/utils";
+import HashKeySigner from "~/common/utils/signer";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,

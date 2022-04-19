@@ -7,13 +7,13 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { parsePaymentRequest } from "invoices";
 
-import lnurlLib from "../../common/lib/lnurl";
+import lnurlLib from "~/common/lib/lnurl";
 
-import Button from "../components/Button";
-import IconButton from "../components/IconButton";
-import Header from "../components/Header";
-import QrcodeScanner from "../components/QrcodeScanner";
-import TextField from "../components/form/TextField";
+import Button from "@components/Button";
+import IconButton from "@components/IconButton";
+import Header from "@components/Header";
+import QrcodeScanner from "@components/QrcodeScanner";
+import TextField from "@components/form/TextField";
 
 function Send() {
   const [invoice, setInvoice] = useState("");
@@ -58,9 +58,9 @@ function Send() {
     const invoice = data.match(reqExp);
 
     if (invoice) {
-      return (invoice[1]);
+      return invoice[1];
     } else {
-      return (data);
+      return data;
     }
   }
 
