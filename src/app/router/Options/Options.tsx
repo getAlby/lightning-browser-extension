@@ -3,7 +3,7 @@ import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
 import { AuthProvider, useAuth } from "~/app/context/AuthContext";
 import { AccountsProvider } from "~/app/context/AccountsContext";
 import connectorRoutes from "~/app/router/connectorRoutes";
-import RequireAuth from "../RequireAuth";
+import RequireAuth from "~/app/router/RequireAuth";
 import Container from "@components/Container";
 import Navbar from "@components/Navbar";
 import Publishers from "@screens/Publishers";

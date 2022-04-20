@@ -1,5 +1,5 @@
 import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "~/app/context/AuthContext";
 import type {
   LNURLAuthServiceResponse,
   LNURLPayServiceResponse,
@@ -9,7 +9,7 @@ import type {
 } from "~/types";
 import { AuthProvider } from "~/app/context/AuthContext";
 import { AccountsProvider } from "~/app/context/AccountsContext";
-import RequireAuth from "../RequireAuth";
+import RequireAuth from "~/app/router/RequireAuth";
 import Unlock from "@screens/Unlock";
 import Enable from "@screens/Enable";
 import MakeInvoice from "@screens/MakeInvoice";
