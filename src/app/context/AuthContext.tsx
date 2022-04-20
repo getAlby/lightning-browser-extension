@@ -63,7 +63,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const onWelcomePage =
           window.location.pathname.indexOf("welcome.html") >= 0;
         if (!response.configured && !onWelcomePage) {
-          utils.redirectPage("welcome.html");
+          utils.openPage("welcome.html");
+          window.close();
         } else if (response.unlocked) {
           if (onWelcomePage) {
             utils.redirectPage("options.html");
