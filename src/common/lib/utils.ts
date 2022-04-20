@@ -86,6 +86,9 @@ const utils = {
   openPage: (page: string) => {
     browser.tabs.create({ url: browser.runtime.getURL(page) });
   },
+  redirectPage: (page: string) => {
+    browser.tabs.update({ url: browser.runtime.getURL(page) });
+  },
   openUrl: (url: string) => {
     browser.tabs.create({ url });
   },
