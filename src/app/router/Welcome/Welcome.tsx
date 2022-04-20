@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ThemeProvider } from "../../context/ThemeContext";
 import connectorRoutes from "../connectorRoutes";
 import type { Step } from "../../components/Steps";
 import DevMenu from "../../components/DevMenu";
@@ -41,11 +40,9 @@ const initialSteps: Step[] = routes.map((route) => ({
 
 function WelcomeRouter() {
   return (
-    <ThemeProvider>
-      <Router>
-        <App />
-      </Router>
-    </ThemeProvider>
+    <Router>
+      <App />
+    </Router>
   );
 }
 

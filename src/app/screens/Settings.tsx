@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { Html5Qrcode } from "html5-qrcode";
-import api from "../../common/lib/api";
-import { SettingsStorage } from "../../types";
-import { useTheme } from "../context/ThemeContext";
-import Container from "../components/Container";
-import Button from "../components/Button";
-import Toggle from "../components/form/Toggle";
-import Input from "../components/form/Input";
-import Setting from "../components/Setting";
-import Select from "../components/form/Select";
-import LocaleSwitcher from "../components/LocaleSwitcher/LocaleSwitcher";
+
+import api from "~/common/lib/api";
+import { SettingsStorage } from "~/types";
+import { getTheme } from "~/app/utils";
+import Container from "@components/Container";
+import Button from "@components/Button";
+import Toggle from "@components/form/Toggle";
+import Input from "@components/form/Input";
+import Setting from "@components/Setting";
+import Select from "@components/form/Select";
+import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
 
 function Settings() {
   const [loading, setLoading] = useState(true);
@@ -23,7 +24,6 @@ function Settings() {
   });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
-  const theme = useTheme();
 
   async function saveSetting(
     setting: Record<string, string | number | boolean>
@@ -154,7 +154,7 @@ function Settings() {
                   await saveSetting({
                     theme: ev.target.value,
                   });
-                  theme.getTheme();
+                  getTheme(); // Get the active theme and apply corresponding Tailwind classes to the document
                 }}
               >
                 <option value="dark">Dark</option>
