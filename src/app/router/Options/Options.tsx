@@ -1,10 +1,8 @@
 import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
 
-import { AuthProvider } from "~/app/context/AuthContext";
+import { AuthProvider, useAuth } from "~/app/context/AuthContext";
 import { AccountsProvider } from "~/app/context/AccountsContext";
-import { useAuth } from "~/app/context/AuthContext";
-import connectorRoutes from "../connectorRoutes";
-
+import connectorRoutes from "~/app/router/connectorRoutes";
 import RequireAuth from "~/app/router/RequireAuth";
 import Container from "@components/Container";
 import Navbar from "@components/Navbar";

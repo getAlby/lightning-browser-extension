@@ -3,12 +3,13 @@ import { Html5Qrcode } from "html5-qrcode";
 
 import api from "~/common/lib/api";
 import { SettingsStorage } from "~/types";
-
+import { getTheme } from "~/app/utils";
 import Container from "@components/Container";
 import Button from "@components/Button";
 import Toggle from "@components/form/Toggle";
 import Input from "@components/form/Input";
 import Setting from "@components/Setting";
+import Select from "@components/form/Select";
 import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
 
 function Settings() {
@@ -19,6 +20,7 @@ function Settings() {
     userName: "",
     userEmail: "",
     locale: "",
+    theme: "system",
   });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
@@ -74,6 +76,7 @@ function Settings() {
             />
           )}
         </Setting>
+
         <Setting
           title="User Display Name"
           subtitle="For sending along with LNURL payments when supported"
@@ -131,6 +134,7 @@ function Settings() {
             <p className="text-green-500 font-medium">Permission granted</p>
           )}
         </Setting>
+
         <Setting
           title="Language"
           subtitle="Alby goes international! help us translate Alby in your language"
@@ -138,6 +142,27 @@ function Settings() {
           <div className="w-32">
             <LocaleSwitcher />
           </div>
+        </Setting>
+
+        <Setting title="Theme" subtitle="Change the app theme to dark or light">
+          {!loading && (
+            <div className="w-64">
+              <Select
+                name="theme"
+                value={settings.theme}
+                onChange={async (ev) => {
+                  await saveSetting({
+                    theme: ev.target.value,
+                  });
+                  getTheme(); // Get the active theme and apply corresponding Tailwind classes to the document
+                }}
+              >
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+                <option value="system">System</option>
+              </Select>
+            </div>
+          )}
         </Setting>
       </div>
     </Container>

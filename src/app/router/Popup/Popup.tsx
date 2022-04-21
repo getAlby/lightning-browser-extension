@@ -1,14 +1,12 @@
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 
 import { useAuth } from "~/app/context/AuthContext";
-
 import Home from "@screens/Home";
 import Unlock from "@screens/Unlock";
 import Send from "@screens/Send";
 import Receive from "@screens/Receive";
 import LNURLPay from "@screens/LNURLPay";
 import ConfirmPayment from "@screens/ConfirmPayment";
-
 import { AuthProvider } from "~/app/context/AuthContext";
 import { AccountsProvider } from "~/app/context/AccountsContext";
 import RequireAuth from "../RequireAuth";

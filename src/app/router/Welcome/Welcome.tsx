@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import connectorRoutes from "../connectorRoutes";
+import connectorRoutes from "~/app/router/connectorRoutes";
 import type { Step } from "@components/Steps";
-
 import DevMenu from "@components/DevMenu";
 import Steps from "@components/Steps";
 import Intro from "@screens/Onboard/Intro";

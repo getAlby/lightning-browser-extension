@@ -186,4 +186,5 @@ export interface SettingsStorage {
   userName: string;
   userEmail: string;
   locale: string;
+  theme: string;
 }

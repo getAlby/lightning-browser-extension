@@ -1,5 +1,4 @@
 import PubSub from "pubsub-js";
-import qs from "query-string";
 import browser, { Runtime } from "webextension-polyfill";
 import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
 import { Message, OriginData } from "~/types";
@@ -94,11 +93,11 @@ const utils = {
     origin: OriginData;
     type: string;
   }): Promise<{ data: Type }> => {
-    const urlParams = qs.stringify({
+    const urlParams = new URLSearchParams({
       args: JSON.stringify(message.args),
       origin: JSON.stringify(message.origin),
       type: message.type,
-    });
+    }).toString();
 
     return new Promise((resolve, reject) => {
       browser.windows
