@@ -6322,17 +6322,17 @@ body-parser@1.19.2:
     raw-body "2.4.3"
     type-is "~1.6.18"
 
-bolt07@1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/bolt07/-/bolt07-1.8.0.tgz#931d95c5691f7954e1e8c58fec8b4ced5210f23d"
-  integrity sha512-UJq+p94UK9QsU3P1npJyWF3r8TuJd6kv6P4m656VQK/m5ifw0bWCkYF0ngcHbFGq3j8u3gP8/tkGtB8WwPPRbQ==
+bolt07@1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/bolt07/-/bolt07-1.8.1.tgz#7861a6bc101916f0eaf2d7b26552664a9c69ee99"
+  integrity sha512-vgh796VOdJBunZZZX0YuW1DmkS9SbW93rCLPOmWPsAHS/mStEs4+5d0KM1bYX6QBHshY9ecg4kgJaB18jrZsIA==
   dependencies:
     bn.js "5.2.0"
 
-bolt09@0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/bolt09/-/bolt09-0.2.1.tgz#1b03b6731faaa60e274bf8854a675d074cae52a0"
-  integrity sha512-ON1CY0awM/VsOxcmCtz7WggxjGRH+G5rSEAdWp1UoU43BHiGw1T6eEt1t4gFvLi8eUSV0hB7vF1QOba65k/7FA==
+bolt09@0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/bolt09/-/bolt09-0.2.3.tgz#2646b0467de7c312a464e924e253d02fcc032b36"
+  integrity sha512-xEt5GE6pXB8wMIWHAoyF28k0Yt2rFqIou1LCyIeNadAOQhu/F7GTjZwreFwLl07YYkhOH23avewRt5PD8JnKKg==
 
 bonjour-service@^1.0.11:
   version "1.0.11"
@@ -10534,17 +10534,17 @@ invariant@^2.2.4:
   dependencies:
     loose-envify "^1.0.0"
 
-invoices@2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/invoices/-/invoices-2.0.3.tgz#0a30be9c6664e4f077b7d65014065054a52de821"
-  integrity sha512-yCAFA3CtbRIiLOdybrZhV1UQ4Rjy20dXBL/5PzlqaZjDbz+RFWtuk3BWsUF12WJo1ikSeVhFXjp6hGAGIG690g==
+invoices@2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/invoices/-/invoices-2.0.6.tgz#7b888e199f13696e88f3591f87637adff67030ca"
+  integrity sha512-adGV6WmSItMWzuZXmgR2sbaiLKXMg4YTybNgmSc+TsNDCVgTFluJFUWaihyn1ewK483z6/vNZ9VMP2tYw5tMug==
   dependencies:
     bech32 "2.0.0"
     bitcoinjs-lib "6.0.1"
     bn.js "5.2.0"
-    bolt07 "1.8.0"
-    bolt09 "0.2.1"
-    secp256k1 "4.0.3"
+    bolt07 "1.8.1"
+    bolt09 "0.2.3"
+    tiny-secp256k1 "2.2.1"
 
 ip@^1.1.5:
   version "1.1.5"
@@ -12792,11 +12792,6 @@ no-case@^3.0.4:
     lower-case "^2.0.2"
     tslib "^2.0.3"
 
-node-addon-api@^2.0.0:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-2.0.2.tgz#432cfa82962ce494b132e9d72a15b29f71ff5d32"
-  integrity sha512-Ntyt4AIXyaLIuMHF6IOoTakB3K+RWxwtsHNRxllEoA6vPwP9o4866g6YWDLUdnucilZhmkxiHwHr11gAENw+QA==
-
 node-dir@^0.1.10, node-dir@^0.1.17:
   version "0.1.17"
   resolved "https://registry.npmjs.org/node-dir/-/node-dir-0.1.17.tgz"
@@ -12813,11 +12808,6 @@ node-forge@^1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-1.3.1.tgz#be8da2af243b2417d5f646a770663a92b7e9ded3"
   integrity sha512-dPEtOeMvF9VMcYV/1Wb8CPoVAXtp6MKMlcbAt4ddqmGqUJ6fQZFXkNZNkNlfevtNkGtaSoXf/vNNNSvgrdXwtA==
-
-node-gyp-build@^4.2.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-4.3.0.tgz#9f256b03e5826150be39c764bf51e993946d71a3"
-  integrity sha512-iWjXZvmboq0ja1pUGULQBexmxq8CV4xBhX7VDOTbL7ZR4FOowwY/VOtRxBN/yKxmdGoIp4j5ysNT4u3S2pDQ3Q==
 
 node-int64@^0.4.0:
   version "0.4.0"
@@ -15355,15 +15345,6 @@ schema-utils@^4.0.0:
     ajv-formats "^2.1.1"
     ajv-keywords "^5.0.0"
 
-secp256k1@4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/secp256k1/-/secp256k1-4.0.3.tgz#c4559ecd1b8d3c1827ed2d1b94190d69ce267303"
-  integrity sha512-NLZVf+ROMxwtEj3Xa562qgv2BK5e2WNmXPiOdVIPLgs6lyTzMvBq0aWTYMI5XCP9jZMVKOcqZLw/Wc4vDkuxhA==
-  dependencies:
-    elliptic "^6.5.4"
-    node-addon-api "^2.0.0"
-    node-gyp-build "^4.2.0"
-
 select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/select-hose/-/select-hose-2.0.0.tgz"
@@ -16558,6 +16539,13 @@ tiny-emitter@^2.0.0:
   resolved "https://registry.npmjs.org/tiny-emitter/-/tiny-emitter-2.1.0.tgz"
   integrity sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==
 
+tiny-secp256k1@2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/tiny-secp256k1/-/tiny-secp256k1-2.2.1.tgz#a61d4791b7031aa08a9453178a131349c3e10f9b"
+  integrity sha512-/U4xfVqnVxJXN4YVsru0E6t5wVncu2uunB8+RVR40fYUxkKYUPS10f+ePQZgFBoE/Jbf9H1NBveupF2VmB58Ng==
+  dependencies:
+    uint8array-tools "0.0.7"
+
 tinycolor2@^1.4.1:
   version "1.4.2"
   resolved "https://registry.npmjs.org/tinycolor2/-/tinycolor2-1.4.2.tgz"
@@ -16877,6 +16865,11 @@ uglify-js@^3.1.4:
   version "3.14.2"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.14.2.tgz#d7dd6a46ca57214f54a2d0a43cad0f35db82ac99"
   integrity sha512-rtPMlmcO4agTUfz10CbgJ1k6UAoXM2gWb3GoMPPZB/+/Ackf8lNWk11K4rYi2D0apgoFRLtQOZhb+/iGNJq26A==
+
+uint8array-tools@0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/uint8array-tools/-/uint8array-tools-0.0.7.tgz#a7a2bb5d8836eae2fade68c771454e6a438b390d"
+  integrity sha512-vrrNZJiusLWoFWBqz5Y5KMCgP9W9hnjZHzZiZRT8oNAkq3d5Z5Oe76jAvVVSRh4U8GGR90N2X1dWtrhvx6L8UQ==
 
 unbox-primitive@^1.0.1:
   version "1.0.1"
