@@ -1,6 +1,6 @@
 import { Switch } from "@headlessui/react";
 
-import { classNames } from "../../../utils/index";
+import { classNames } from "~/app/utils/index";
 
 type Props = {
   checked: boolean;

@@ -1,8 +1,7 @@
 import PubSub from "pubsub-js";
-import qs from "query-string";
 import browser, { Runtime } from "webextension-polyfill";
-import { SendPaymentResponse } from "../../extension/background-script/connectors/connector.interface";
-import { Message, OriginData } from "../../types";
+import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
+import { Message, OriginData } from "~/types";
 
 const utils = {
   call: <T = Record<string, unknown>>(
@@ -29,7 +28,7 @@ const utils = {
   notify: (options: { title: string; message: string }) => {
     const notification: browser.Notifications.CreateNotificationOptions = {
       type: "basic",
-      iconUrl: "assets/icons/satsymbol-48.png",
+      iconUrl: "assets/icons/alby_icon_yellow_48x48.png",
       ...options,
     };
 
@@ -94,11 +93,11 @@ const utils = {
     origin: OriginData;
     type: string;
   }): Promise<{ data: Type }> => {
-    const urlParams = qs.stringify({
+    const urlParams = new URLSearchParams({
       args: JSON.stringify(message.args),
       origin: JSON.stringify(message.origin),
       type: message.type,
-    });
+    }).toString();
 
     return new Promise((resolve, reject) => {
       browser.windows

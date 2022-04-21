@@ -3,12 +3,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
-import Input from "../../../components/form/Input";
-import Button from "../../../components/Button";
-import Card from "../../../components/Card";
-import utils from "../../../../common/lib/utils";
-import api from "../../../../common/lib/api";
-import Loading from "../../../components/Loading";
+import Input from "@components/form/Input";
+import Button from "@components/Button";
+import Card from "@components/Card";
+import utils from "~/common/lib/utils";
+import api from "~/common/lib/api";
+import Loading from "@components/Loading";
 
 const customStyles = {
   content: {
