@@ -52,6 +52,8 @@ Add Alby to your browser
 - [Firefox Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-firefox-nightly-master.xpi) - best to install it as a temporary add-on as discussed in the "Load extension into browser" section
 - [Chrome Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-chrome-nightly-master.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right) and drag & drop the file in the browser
 
+(Note: You might need to reconfigure your wallet after installing new versions)
+
 ## Architecture Idea
 
 ![architecture](/doc/ln-browser-architecture.png)
@@ -130,7 +132,7 @@ You can find the deployed Storybook here: https://lbe-stories.netlify.app
 Just run the command below to run all tests:
 
 ```bash
-yarn playwright test
+npx playwright test
 ```
 
 ### 💻 Load extension into browser
