@@ -8,7 +8,7 @@ import TextField from "@components/form/TextField";
 import ConnectorForm from "@components/ConnectorForm";
 
 const walletCreateUrl =
-  process.env.WALLET_CREATE_URL || "https://getalby.com/api/users";
+  process.env.WALLET_CREATE_URL || "https://app.regtest.getalby.com/api/users";
 
 export default function NewWallet() {
   const [lndHubData, setLndHubData] = useState({
