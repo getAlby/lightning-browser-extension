@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import utils from "../../../../common/lib/utils";
-import TextField from "../../../components/form/TextField";
-import CompanionDownloadInfo from "../../../components/CompanionDownloadInfo";
-import ConnectorForm from "../../../components/ConnectorForm";
+import utils from "~/common/lib/utils";
+import TextField from "@components/form/TextField";
+import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
+import ConnectorForm from "@components/ConnectorForm";
 
 const initialFormData = Object.freeze({
   url: "",
