@@ -127,7 +127,6 @@ You can find the deployed Storybook here: https://lbe-stories.netlify.app
 
 ### :heavy_check_mark: Tests
 
-Don't forget to run the tests before committing anything!
 Just run the command below to run all tests:
 
 ```bash
