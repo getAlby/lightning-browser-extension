@@ -148,9 +148,8 @@ Then run the following:
   - Opera
     - `yarn run dev:opera`
 
-### :heavy_check_mark: Tests
+### :white_check_mark: Tests
 
-Don't forget to run the tests before committing anything!
 Just run the command below to run all tests:
 
 ```bash
