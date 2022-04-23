@@ -1,7 +1,12 @@
+import msg from "../../common/lib/msg";
+
 // https://github.com/joule-labs/joule-extension/blob/develop/src/content_script/shouldInject.ts
 // Whether or not to inject the WebLN listeners
 // TODO: Add user settings for whether or not to inject
 export default function shouldInject() {
+  console.log("1shouldInject");
+  const isBlocked = checkBlocklist();
+  console.log("shouldInject isBlocked? ", isBlocked);
   return doctypeCheck() && suffixCheck() && documentElementCheck();
 }
 
@@ -38,4 +43,18 @@ function documentElementCheck() {
     return docNode.toLowerCase() === "html";
   }
   return true;
+}
+
+function checkBlocklist() {
+  try {
+    const currentUrl = window.location.pathname;
+    console.log("shouldinject currentUrl, ", currentUrl);
+    const isBlocked = msg.request("getBlocklist", {
+      domain: currentUrl,
+      host: currentUrl,
+    });
+    console.log("2shouldinject isBlocked? ", isBlocked);
+  } catch (e) {
+    if (e instanceof Error) console.log(e.message);
+  }
 }
