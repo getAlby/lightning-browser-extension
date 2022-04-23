@@ -12,6 +12,7 @@ export default function shouldInject() {
 
 // Checks the doctype of the current document if it exists
 function doctypeCheck() {
+  console.log("doctypeCheck");
   const doctype = window.document.doctype;
   if (doctype) {
     return doctype.name === "html";
@@ -22,6 +23,7 @@ function doctypeCheck() {
 
 // Returns whether or not the extension (suffix) of the current document is prohibited
 function suffixCheck() {
+  console.log("suffixCheck");
   const prohibitedTypes = [/\.xml$/, /\.pdf$/];
   const currentUrl = window.location.pathname;
   for (const type of prohibitedTypes) {

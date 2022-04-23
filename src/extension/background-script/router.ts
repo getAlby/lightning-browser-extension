@@ -6,6 +6,7 @@ import * as payments from "./actions/payments";
 import * as settings from "./actions/settings";
 import * as setup from "./actions/setup";
 import * as webln from "./actions/webln";
+import * as blocklist from "./actions/blocklist";
 
 // TODO: potential nesting/grouping of actions for better organization
 const routes = {
@@ -51,6 +52,10 @@ const routes = {
   setIcon: setup.setIcon,
   setSetting: settings.set,
   getSettings: settings.get,
+  addBlocklist: blocklist.add,
+  deleteBlocklist: blocklist.deleteBlocklist,
+  getBlocklist: blocklist.get,
+  listBlocklist: blocklist.list,
 };
 
 const router = (path: FixMe) => {

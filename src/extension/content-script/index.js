@@ -18,6 +18,7 @@ const weblnCalls = [
 import extractLightningData from "./batteries";
 
 if (shouldInject()) {
+  console.log("content-script shouldInject");
   injectScript();
 
   // extract LN data from websites

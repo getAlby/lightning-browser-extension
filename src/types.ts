@@ -181,3 +181,10 @@ export interface SettingsStorage {
   userName: string;
   userEmail: string;
 }
+
+export interface Blocklist {
+  isBlocked: boolean;
+  host: string;
+  id: string;
+  imageURL: string;
+}
