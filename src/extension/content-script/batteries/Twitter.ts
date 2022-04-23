@@ -91,7 +91,7 @@ function battery(): void {
         const zapElements = new Set([
           ...userData.element.querySelectorAll('img[src*="26a1.svg"]'),
           ...(userData.location
-            ? userData.location.querySelectorAll('img[src*="26a1.svg"')
+            ? userData.location.querySelectorAll('img[src*="26a1.svg"]')
             : []),
         ]);
         // it is hard to find the :zap: emoij. Twitter uses images for that but has an alt text with the emoij
