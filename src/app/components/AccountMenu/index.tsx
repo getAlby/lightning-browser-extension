@@ -6,6 +6,7 @@ import {
   CaretDownIcon,
   PlusIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
+import Skeleton from "react-loading-skeleton";
 
 import utils from "../../../common/lib/utils";
 import { useAuth } from "../../context/AuthContext";
@@ -15,10 +16,12 @@ import Badge from "../Badge";
 import Menu from "../Menu";
 
 export type Props = {
+  title: string;
+  subtitle: string;
   showOptions?: boolean;
 };
 
-function AccountMenu({ showOptions = true }: Props) {
+function AccountMenu({ title, subtitle, showOptions = true }: Props) {
   const auth = useAuth();
   const navigate = useNavigate();
   const { accounts, getAccounts } = useAccounts();
@@ -51,57 +54,73 @@ function AccountMenu({ showOptions = true }: Props) {
   }
 
   return (
-    <Menu as="div">
-      <Menu.Button className="h-full px-2 rounded-r-md hover:bg-gray-200 dark:hover:bg-gray-500 transition-colors duration-200">
-        <CaretDownIcon className="h-4 w-4 dark:text-white" />
-        <span className="sr-only">Toggle Dropdown</span>
-      </Menu.Button>
-      <Menu.List position="left">
-        <Menu.Subheader>Switch account</Menu.Subheader>
-        {Object.keys(accounts).map((accountId) => {
-          const account = accounts[accountId];
-          return (
-            <Menu.ItemButton
-              key={accountId}
-              onClick={() => {
-                selectAccount(accountId);
-              }}
-              disabled={loading}
-            >
-              <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-500" />
-              {account.name}&nbsp;
-              <Badge
-                label={account.connector}
-                color="blue-500"
-                textColor="white"
-                small
-              />
-            </Menu.ItemButton>
-          );
-        })}
-        {showOptions && (
-          <>
-            <Menu.Divider />
-            <Menu.ItemButton
-              onClick={() => {
-                openOptions("accounts/new");
-              }}
-            >
-              <PlusIcon className="h-5 w-5 mr-2 text-gray-500" />
-              Add a new account
-            </Menu.ItemButton>
-            <Menu.ItemButton
-              onClick={() => {
-                openOptions("accounts");
-              }}
-            >
-              <AddressBookIcon className="h-5 w-5 mr-2 text-gray-500" />
-              Accounts
-            </Menu.ItemButton>
-          </>
-        )}
-      </Menu.List>
-    </Menu>
+    <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-gray-600">
+      <div className="flex items-center">
+        <WalletIcon className="-ml-1 w-8 h-8 opacity-50 dark:text-white" />
+      </div>
+      <div
+        className={`flex-auto mx-2 py-1 ${!title && !subtitle ? "w-28" : ""}`}
+      >
+        <div className="text-xs text-gray-500 dark:text-gray-400">
+          {title || <Skeleton />}
+        </div>
+        <div className="text-xs dark:text-white">
+          {subtitle || <Skeleton />}
+        </div>
+      </div>
+
+      <Menu as="div">
+        <Menu.Button className="h-full px-2 rounded-r-md hover:bg-gray-200 dark:hover:bg-gray-500 transition-colors duration-200">
+          <CaretDownIcon className="h-4 w-4 dark:text-white" />
+          <span className="sr-only">Toggle Dropdown</span>
+        </Menu.Button>
+        <Menu.List position="left">
+          <Menu.Subheader>Switch account</Menu.Subheader>
+          {Object.keys(accounts).map((accountId) => {
+            const account = accounts[accountId];
+            return (
+              <Menu.ItemButton
+                key={accountId}
+                onClick={() => {
+                  selectAccount(accountId);
+                }}
+                disabled={loading}
+              >
+                <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-500" />
+                {account.name}&nbsp;
+                <Badge
+                  label={account.connector}
+                  color="blue-500"
+                  textColor="white"
+                  small
+                />
+              </Menu.ItemButton>
+            );
+          })}
+          {showOptions && (
+            <>
+              <Menu.Divider />
+              <Menu.ItemButton
+                onClick={() => {
+                  openOptions("accounts/new");
+                }}
+              >
+                <PlusIcon className="h-5 w-5 mr-2 text-gray-500" />
+                Add a new account
+              </Menu.ItemButton>
+              <Menu.ItemButton
+                onClick={() => {
+                  openOptions("accounts");
+                }}
+              >
+                <AddressBookIcon className="h-5 w-5 mr-2 text-gray-500" />
+                Accounts
+              </Menu.ItemButton>
+            </>
+          )}
+        </Menu.List>
+      </Menu>
+    </div>
   );
 }
 

@@ -42,7 +42,7 @@ if (shouldInject()) {
         return;
       }
       const messageWithOrigin = {
-        type: ev.data.type, // TODO: rename type to action
+        type: `webln/${ev.data.type}`, // TODO: rename type to action
         args: ev.data.args,
         application: "LBE",
         public: true, // indicate that this is a public call from the content script

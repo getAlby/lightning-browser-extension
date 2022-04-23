@@ -1,5 +1,10 @@
 import Input from "./Input";
 
+type Props = {
+  label: string;
+  suffix?: string;
+};
+
 const TextField = ({
   id,
   label,
@@ -15,9 +20,12 @@ const TextField = ({
   autoFocus = false,
   autoComplete = "off",
   disabled,
+  minLength,
+  maxLength,
   min,
   max,
-}: React.InputHTMLAttributes<HTMLInputElement> & { label: string }) => (
+  suffix,
+}: React.InputHTMLAttributes<HTMLInputElement> & Props) => (
   <>
     <label
       htmlFor={id}
@@ -41,8 +49,11 @@ const TextField = ({
         autoFocus={autoFocus}
         autoComplete={autoComplete}
         disabled={disabled}
+        minLength={minLength}
+        maxLength={maxLength}
         min={min}
         max={max}
+        suffix={suffix}
       />
     </div>
   </>

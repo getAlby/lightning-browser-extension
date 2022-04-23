@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import {
+  LNURLPaymentInfoError,
   LNURLPaymentInfo,
   LNURLPaymentSuccessAction,
   LNURLPayServiceResponse,
@@ -98,13 +99,13 @@ function LNURLPay(props: Props) {
     if (
       userName?.length &&
       userEmail?.length &&
-      details.payerData.email &&
-      details.payerData.name
+      details.payerData?.email &&
+      details.payerData?.name
     ) {
       return { name: userName, email: userEmail };
-    } else if (userName?.length && details.payerData.name) {
+    } else if (userName?.length && details.payerData?.name) {
       return { name: userName };
-    } else if (userEmail?.length && details.payerData.email) {
+    } else if (userEmail?.length && details.payerData?.email) {
       return { email: userEmail };
     } else {
       return undefined;
@@ -124,13 +125,36 @@ function LNURLPay(props: Props) {
         comment, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/12.md
         payerdata, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/18.md
       };
-      const { data: paymentInfo } = await axios.get<LNURLPaymentInfo>(
-        details.callback,
-        {
-          params,
+
+      let response;
+
+      try {
+        response = await axios.get<LNURLPaymentInfo | LNURLPaymentInfoError>(
+          details.callback,
+          {
+            params,
+            // https://github.com/fiatjaf/lnurl-rfc/blob/luds/01.md#http-status-codes-and-content-type
+            validateStatus: () => true,
+          }
+        );
+
+        const isSuccessResponse = function (
+          obj: LNURLPaymentInfo | LNURLPaymentInfoError
+        ): obj is LNURLPaymentInfo {
+          return Object.prototype.hasOwnProperty.call(obj, "pr");
+        };
+
+        if (!isSuccessResponse(response.data)) {
+          throw new Error(response.data.reason);
         }
-      );
-      const { pr: paymentRequest } = paymentInfo;
+      } catch (e) {
+        const message = e instanceof Error ? `(${e.message})` : "";
+        alert(`Payment aborted: Could not fetch invoice. ${message}`);
+        return;
+      }
+
+      const paymentInfo = response.data;
+      const paymentRequest = paymentInfo.pr;
 
       const isValidInvoice = lnurl.verifyInvoice({
         paymentInfo,
@@ -139,7 +163,7 @@ function LNURLPay(props: Props) {
         payerdata,
       });
       if (!isValidInvoice) {
-        alert("Payment aborted. Invalid invoice");
+        alert("Payment aborted: Invalid invoice.");
         return;
       }
 
@@ -331,18 +355,20 @@ function LNURLPay(props: Props) {
                   <SatButtons onClick={setValueSat} />
                 </div>
               )}
-              {details && details?.commentAllowed > 0 && (
-                <div className="mt-4">
-                  <TextField
-                    id="comment"
-                    label="Comment"
-                    placeholder="optional"
-                    onChange={(e) => {
-                      setComment(e.target.value);
-                    }}
-                  />
-                </div>
-              )}
+              {details &&
+                typeof details?.commentAllowed === "number" &&
+                details?.commentAllowed > 0 && (
+                  <div className="mt-4">
+                    <TextField
+                      id="comment"
+                      label="Comment"
+                      placeholder="optional"
+                      onChange={(e) => {
+                        setComment(e.target.value);
+                      }}
+                    />
+                  </div>
+                )}
               {details && details?.payerData?.name && (
                 <div className="mt-4">
                   <TextField
