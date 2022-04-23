@@ -1,6 +1,6 @@
 import state from "../../state";
 import type { Runtime } from "webextension-polyfill";
-import type { OriginData, Account } from "../../../../types";
+import type { OriginData, Account } from "~/types";
 
 // @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652
 // align Message-Types

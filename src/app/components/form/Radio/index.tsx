@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 
-import { classNames } from "../../../utils/index";
+import { classNames } from "~/app/utils/index";
 
-export default function Radio({ options }) {
+type Props = {
+  options: Array<{ speed: string; time: string; value: string }>;
+};
+
+export default function Radio({ options }: Props) {
   const [selected, setSelected] = useState(options[0]);
 
   return (

@@ -1,4 +1,4 @@
-import { classNames } from "../../utils/index";
+import { classNames } from "~/app/utils/index";
 
 type Tab = {
   name: string;

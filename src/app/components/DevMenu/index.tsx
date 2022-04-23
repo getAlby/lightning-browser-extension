@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-import utils from "../../../common/lib/utils";
+import utils from "~/common/lib/utils";
 
 class DevMenu extends Component {
   reset() {

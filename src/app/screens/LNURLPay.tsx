@@ -7,19 +7,19 @@ import {
   LNURLPaymentInfo,
   LNURLPaymentSuccessAction,
   LNURLPayServiceResponse,
-} from "../../types";
-import api from "../../common/lib/api";
-import msg from "../../common/lib/msg";
-import utils from "../../common/lib/utils";
-import lnurl from "../../common/lib/lnurl";
-import getOriginData from "../../extension/content-script/originData";
-import { useAuth } from "../context/AuthContext";
+} from "~/types";
+import api from "~/common/lib/api";
+import msg from "~/common/lib/msg";
+import utils from "~/common/lib/utils";
+import lnurl from "~/common/lib/lnurl";
+import getOriginData from "~/extension/content-script/originData";
+import { useAuth } from "~/app/context/AuthContext";
 
-import Button from "../components/Button";
-import TextField from "../components/form/TextField";
-import PublisherCard from "../components/PublisherCard";
-import ConfirmOrCancel from "../components/ConfirmOrCancel";
-import SatButtons from "../components/SatButtons";
+import Button from "@components/Button";
+import TextField from "@components/form/TextField";
+import PublisherCard from "@components/PublisherCard";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import SatButtons from "@components/SatButtons";
 
 type Origin = {
   name: string;

@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
-
-import connectorRoutes from "../connectorRoutes";
-import type { Step } from "../../components/Steps";
-
-import DevMenu from "../../components/DevMenu";
-import Steps from "../../components/Steps";
-import Intro from "../../screens/Onboard/Intro";
-import SetPassword from "../../screens/Onboard/SetPassword";
-import ChooseConnector from "../../screens/connectors/ChooseConnector";
-import TestConnection from "../../screens/Onboard/TestConnection";
 import { useTranslation } from "react-i18next";
-import LocaleSwitcher from "../../components/LocaleSwitcher/LocaleSwitcher";
+
+import connectorRoutes from "~/app/router/connectorRoutes";
+import type { Step } from "@components/Steps";
+import DevMenu from "@components/DevMenu";
+import Steps from "@components/Steps";
+import Intro from "@screens/Onboard/Intro";
+import SetPassword from "@screens/Onboard/SetPassword";
+import ChooseConnector from "@screens/connectors/ChooseConnector";
+import TestConnection from "@screens/Onboard/TestConnection";
+import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
 
 const routes = [
   { path: "/", element: <Intro />, name: "Welcome" },

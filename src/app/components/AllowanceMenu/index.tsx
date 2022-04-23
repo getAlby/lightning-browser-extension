@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
-import utils from "../../../common/lib/utils";
+import utils from "~/common/lib/utils";
 
 import Button from "../Button";
 import Menu from "../Menu";

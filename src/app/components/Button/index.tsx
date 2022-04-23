@@ -1,4 +1,4 @@
-import { classNames } from "../../utils/index";
+import { classNames } from "~/app/utils/index";
 import Loading from "../Loading";
 
 export type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
