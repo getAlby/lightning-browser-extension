@@ -4,6 +4,7 @@ import ConfirmOrCancel from "../../components/ConfirmOrCancel";
 import PublisherCard from "../../components/PublisherCard";
 import msg from "../../../common/lib/msg";
 import type { OriginData } from "../../../types";
+import utils from "../../../common/lib/utils";
 
 type Props = {
   origin: OriginData;
@@ -27,6 +28,20 @@ function Enable(props: Props) {
 
   function reject(event: React.MouseEvent<HTMLAnchorElement>) {
     msg.error("User rejected");
+    event.preventDefault();
+  }
+
+  async function block(event: React.MouseEvent<HTMLAnchorElement>) {
+    msg.error(
+      "User added site to blocklist domain, host " +
+        props.origin.domain +
+        ", " +
+        props.origin.host
+    );
+    await utils.call("addBlocklist", {
+      domain: props.origin.domain,
+      host: props.origin.host,
+    });
     event.preventDefault();
   }
 
@@ -71,6 +86,14 @@ function Enable(props: Props) {
         </p>
 
         <ConfirmOrCancel label="Enable" onConfirm={enable} onCancel={reject} />
+
+        <a
+          className="underline mt-8 text-sm text-gray-500 dark:text-gray-400"
+          href="#"
+          onClick={block}
+        >
+          Don{`'`}t ask for this site again
+        </a>
       </div>
     </div>
   );
