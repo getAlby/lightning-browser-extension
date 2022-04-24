@@ -1,5 +1,4 @@
 import PubSub from "pubsub-js";
-import qs from "query-string";
 import browser, { Runtime } from "webextension-polyfill";
 import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
 import { Message, OriginData } from "~/types";
@@ -97,16 +96,26 @@ const utils = {
     origin: OriginData;
     type: string;
   }): Promise<{ data: Type }> => {
-    const urlParams = qs.stringify({
-      args: JSON.stringify(message.args),
-      origin: JSON.stringify(message.origin),
-      type: message.type,
-    });
+    const urlParams = new URLSearchParams();
+    // passing on the message args to the prompt if present
+    if (message.args) {
+      urlParams.set("args", JSON.stringify(message.args));
+    }
+    // passing on the message origin to the prompt if present
+    if (message.origin) {
+      urlParams.set("origin", JSON.stringify(message.origin));
+    }
+    // type must always be present, this is used to route the request
+    urlParams.set("type", message.type);
+
+    const url = `${browser.runtime.getURL(
+      "prompt.html"
+    )}?${urlParams.toString()}`;
 
     return new Promise((resolve, reject) => {
       browser.windows
         .create({
-          url: `${browser.runtime.getURL("prompt.html")}?${urlParams}`,
+          url: url,
           type: "popup",
           width: 400,
           height: 600,

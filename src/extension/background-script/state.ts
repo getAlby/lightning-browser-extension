@@ -35,6 +35,7 @@ export const DEFAULT_SETTINGS = {
   userName: "",
   userEmail: "",
   locale: i18n.resolvedLanguage,
+  theme: "system",
 };
 
 // these keys get synced from the state to the browser storage
