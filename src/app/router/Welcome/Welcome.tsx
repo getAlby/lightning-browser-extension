@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
+import { AuthProvider } from "~/app/context/AuthContext";
 import connectorRoutes from "~/app/router/connectorRoutes";
 import type { Step } from "@components/Steps";
 import DevMenu from "@components/DevMenu";
@@ -73,26 +74,28 @@ function App() {
   }, [location]);
 
   return (
-    <div>
-      {process.env.NODE_ENV === "development" && (
-        <>
-          <DevMenu />
-          <div className="w-32 mr-4 mt-1 pt-3 float-right">
-            <LocaleSwitcher />
+    <AuthProvider>
+      <div>
+        {process.env.NODE_ENV === "development" && (
+          <>
+            <DevMenu />
+            <div className="w-32 mr-4 mt-1 pt-3 float-right">
+              <LocaleSwitcher />
+            </div>
+          </>
+        )}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center font-serif font-medium text-2xl pt-7 pb-3 dark:text-white">
+            <p>{t("heading")}</p>
           </div>
-        </>
-      )}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center font-serif font-medium text-2xl pt-7 pb-3 dark:text-white">
-          <p>{t("heading")}</p>
-        </div>
 
-        <Steps steps={steps} />
+          <Steps steps={steps} />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {routesElement}
+        </div>
       </div>
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {routesElement}
-      </div>
-    </div>
+    </AuthProvider>
   );
 }
 
