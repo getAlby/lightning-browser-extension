@@ -60,10 +60,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     api
       .getStatus()
       .then((response) => {
-        if (!response.configured) {
+        const onWelcomePage =
+          window.location.pathname.indexOf("welcome.html") >= 0;
+        if (!response.configured && !onWelcomePage) {
           utils.openPage("welcome.html");
           window.close();
         } else if (response.unlocked) {
+          if (onWelcomePage) {
+            utils.redirectPage("options.html");
+          }
           setAccountId(response.currentAccountId);
           fetchAccountInfo(response.currentAccountId);
         } else {

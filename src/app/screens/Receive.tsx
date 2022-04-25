@@ -223,11 +223,7 @@ function Receive() {
                   fullWidth
                   primary
                   loading={loading}
-                  disabled={
-                    loading ||
-                    formData.amount === "" ||
-                    formData.description === ""
-                  }
+                  disabled={loading || formData.amount === ""}
                 />
               </div>
             </div>
