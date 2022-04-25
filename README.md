@@ -31,7 +31,7 @@ The extension can connect to different node implementations and supports custodi
 
 We have a channel on the [bitcoin.design](https://bitcoin.design/) Slack community [#lightning-browser-extension](https://bitcoindesign.slack.com/archives/C02591ADXM2) and a [Telegram group](https://t.me/getAlby) Come and join us!
 
-We also do a weekly call on Monday at 14:00 UTC - ([15:00 CET/CAT - 10:00 EDT](https://www.worldtimebuddy.com/?qm=1&lid=100,12,5&h=100&date=2021-11-4&sln=14-15&hf=1)) on [Jitsi](https://meet.fulmo.org/AlbyCommunityCall)
+We also do a weekly call on Monday at [14:00 UTC](https://www.worldtimebuddy.com/?qm=1&lid=100&h=100&date=2022-4-25&sln=14-15&hf=1) on [Jitsi](https://meet.fulmo.org/AlbyCommunityCall)
 
 ## Browser Support
 
