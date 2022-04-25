@@ -1,9 +1,9 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  darkMode: 'class',
+  darkMode: "class",
   content: ["./static/views/**/*.html", "./src/app/**/*.{js,ts,jsx,tsx}"],
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],
   theme: {
     extend: {
       animation: {

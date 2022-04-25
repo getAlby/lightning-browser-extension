@@ -7,7 +7,7 @@
     "outDir": "built",
     "strict": true,
     "baseUrl": ".",
-    "paths": { 
+    "paths": {
       "~/*": ["./src/*"],
       "@components/*": ["./src/app/components/*"],
       "@screens/*": ["./src/app/screens/*"]
