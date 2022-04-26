@@ -67,7 +67,7 @@ function Publishers() {
       <div className="mb-12">
         {websites.map(({ title, items }) => (
           <div className="mb-6" key={title}>
-            <h4 className="mb-4 text-xl font-bold">{title}</h4>
+            <h4 className="mb-4 text-xl font-bold dark:text-white">{title}</h4>
             <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {items.map(({ title, subtitle, logo, url }) => (
                 <a key={url} href={url} target="_blank" rel="noreferrer">
