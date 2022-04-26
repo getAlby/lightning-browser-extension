@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Container from "../components/Container";
 import PublishersTable from "../components/PublishersTable";
 
-import { Allowance } from "../../types";
+import { Allowance, Blocklist } from "../../types";
 import utils from "../../common/lib/utils";
 
 function Publishers() {
@@ -20,9 +20,14 @@ function Publishers() {
       const response = await utils.call<{
         allowances: Allowance[];
       }>("listAllowances");
+      const response2 = await utils.call<{
+        blocklist: Blocklist[];
+      }>("listBlocklist");
       const allowances = response.allowances.map((allowance) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let retobj: any = allowance;
         if (allowance.enabled && allowance.remainingBudget > 0) {
-          return {
+          retobj = {
             ...allowance,
             badge: {
               label: "ACTIVE",
@@ -31,7 +36,10 @@ function Publishers() {
             },
           };
         }
-        return allowance;
+        if (response2.blocklist.find((item) => item.host === allowance.host)) {
+          retobj.blocked = true;
+        }
+        return retobj;
       });
       setData(allowances);
     } catch (e) {
