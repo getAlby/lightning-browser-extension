@@ -1,4 +1,4 @@
-import { parsePaymentRequest } from "invoices";
+import lightningPayReq from "bolt11";
 
 import utils from "~/common/lib/utils";
 import { Message } from "~/types";
@@ -14,10 +14,13 @@ const sendPaymentOrPrompt = async (message: Message) => {
     };
   }
 
-  const paymentRequestDetails = parsePaymentRequest({
-    request: paymentRequest,
-  });
-  if (await checkAllowance(message.origin.host, paymentRequestDetails.tokens)) {
+  const paymentRequestDetails = lightningPayReq.decode(paymentRequest);
+  if (
+    await checkAllowance(
+      message.origin.host,
+      paymentRequestDetails.satoshis || 0
+    )
+  ) {
     return sendPaymentWithAllowance(message);
   } else {
     return payWithPrompt(message);

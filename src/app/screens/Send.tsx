@@ -5,7 +5,7 @@ import {
   CrossIcon,
   QrCodeIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { parsePaymentRequest } from "invoices";
+import lightningPayReq from "bolt11";
 
 import lnurlLib from "~/common/lib/lnurl";
 
@@ -40,7 +40,7 @@ function Send() {
       } else if (isPubKey(invoice)) {
         navigate(`/keysend?destination=${invoice}`);
       } else {
-        parsePaymentRequest({ request: invoice }); // throws if invalid.
+        lightningPayReq.decode(invoice); // throws if invalid.
         navigate(`/confirmPayment?paymentRequest=${invoice}`);
       }
     } catch (e) {

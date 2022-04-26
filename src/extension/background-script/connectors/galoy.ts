@@ -1,5 +1,5 @@
 import axios from "axios";
-import { parsePaymentRequest } from "invoices";
+import lightningPayReq from "bolt11";
 import { AxiosRequestConfig } from "axios";
 import Connector, {
   SendPaymentArgs,
@@ -124,9 +124,11 @@ class Galoy implements Connector {
       },
     };
 
-    const { tokens: amountInSats, id: paymentHash } = parsePaymentRequest({
-      request: args.paymentRequest,
-    });
+    const paymentRequestDetails = lightningPayReq.decode(args.paymentRequest);
+    const amountInSats = paymentRequestDetails.satoshis || 0;
+    const paymentHash = paymentRequestDetails.tags.find(
+      (t) => t.tagName === "payment_hash"
+    )?.data as string;
 
     return this.request(query).then(({ data, errors }) => {
       const errs = errors || data.lnInvoicePaymentSend.errors;

@@ -12,10 +12,12 @@ const persistSuccessfullPayment = async (message, data) => {
     host: host,
     location: data.origin.location,
     name: recipientName,
-    description: paymentRequestDetails.description,
+    description: paymentRequestDetails.tags.find(
+      (t) => t.tagName === "description"
+    )?.data,
     preimage: paymentResponse.data.preimage,
     paymentHash: paymentResponse.data.paymentHash,
-    destination: paymentRequestDetails.destination,
+    destination: paymentRequestDetails.network.pubKeyHash,
     totalAmount: total_amt,
     totalFees: total_fees,
     createdAt: Date.now(),
