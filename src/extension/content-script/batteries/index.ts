@@ -9,6 +9,7 @@ import Reddit from "./Reddit";
 // import YouTubeChannel from "./YouTubeChannel";
 import VimeoVideo from "./VimeoVideo";
 import Medium from "./Medium";
+import Mastodon from "./Mastodon";
 
 // Order is important as the first one for which the URL matches will be used
 const enhancements = [
@@ -20,6 +21,7 @@ const enhancements = [
   VimeoVideo,
   Medium,
   GitHub,
+  Mastodon,
 
   // Monetization must likely always be the last one as this is the fallback option if no specific enhancement matched
   Monetization,
