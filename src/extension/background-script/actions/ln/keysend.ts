@@ -31,20 +31,7 @@ export default async function keysend(message: Message) {
   utils.publishPaymentNotification(
     message,
     {
-      cltv_delta: 0,
-      created_at: "",
-      //what to do with the description here?
-      description: "",
-      destination: destination,
-      expires_at: "",
-      features: [],
-      id: "",
-      is_expired: false,
-      payment: "",
-      mtokens: "",
-      network: "",
-      safe_tokens: 0,
-      tokens: 0,
+      tags: [],
     },
     response
   );
