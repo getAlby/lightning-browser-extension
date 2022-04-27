@@ -49,14 +49,8 @@ function ConnectorForm({
                 className="flex-1 relative h-0"
                 style={{ paddingBottom: "56.25%" }}
               >
-                <video
-                  className="absolute t-0 l-0 w-full h-full"
-                  width="1920"
-                  height="1080"
-                  controls
-                >
+                <video className="absolute t-0 l-0 w-full h-full" controls>
                   <source src={video} type="video/mp4" />
-                  Your browser does not support the video tag.
                 </video>
               </div>
             ) : (
