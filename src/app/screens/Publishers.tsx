@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Container from "../components/Container";
 import PublishersTable from "../components/PublishersTable";
 
-import { Allowance, Blocklist } from "../../types";
+import { Allowance, Blocklist, Publisher } from "../../types";
 import utils from "../../common/lib/utils";
 
 function Publishers() {
@@ -24,8 +24,7 @@ function Publishers() {
         blocklist: Blocklist[];
       }>("listBlocklist");
       const allowances = response.allowances.map((allowance) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        let retobj: any = allowance;
+        let retobj: Publisher = allowance;
         if (allowance.enabled && allowance.remainingBudget > 0) {
           retobj = {
             ...allowance,
