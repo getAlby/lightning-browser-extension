@@ -33,10 +33,9 @@ function Enable(props: Props) {
 
   async function block(event: React.MouseEvent<HTMLAnchorElement>) {
     msg.error(
-      "User added site to blocklist domain, host " +
-        props.origin.domain +
-        ", " +
-        props.origin.host
+      `User added site to blocklist domain, host
+        ${props.origin.domain}, 
+        ${props.origin.host}`
     );
     await utils.call("addBlocklist", {
       domain: props.origin.domain,

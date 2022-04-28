@@ -50,12 +50,12 @@ function documentElementCheck() {
 function checkBlocklist() {
   try {
     const currentUrl = window.location.pathname;
-    console.log("shouldinject currentUrl, ", currentUrl);
+    console.error("shouldinject currentUrl, ", currentUrl);
     const isBlocked = msg.request("getBlocklist", {
       domain: currentUrl,
       host: currentUrl,
     });
-    console.log("2shouldinject isBlocked? ", isBlocked);
+    console.error("2shouldinject isBlocked? ", isBlocked);
   } catch (e) {
     if (e instanceof Error) console.log(e.message);
   }
