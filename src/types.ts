@@ -183,10 +183,11 @@ export interface SettingsStorage {
 }
 
 export interface Blocklist {
-  isBlocked: boolean;
+  id?: number;
   host: string;
-  id: string;
+  name: string;
   imageURL: string;
+  isBlocked: boolean;
 }
 
 export interface Badge {

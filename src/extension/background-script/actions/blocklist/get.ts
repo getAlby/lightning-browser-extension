@@ -1,6 +1,6 @@
 import db from "../../db";
 
-const get = async (message, sender) => {
+const get = async (message: { args: { host: string } }, sender: unknown) => {
   const host = message.args.host;
   const isBlocked = await db.blocklist
     .where("host")
