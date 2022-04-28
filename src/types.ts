@@ -188,3 +188,13 @@ export interface Blocklist {
   id: string;
   imageURL: string;
 }
+
+export interface Badge {
+  label: string;
+  color: string;
+  textColor: string;
+}
+export type Publisher = Allowance & {
+  badge?: Badge;
+  blocked?: boolean;
+};
