@@ -17,13 +17,13 @@ function Publishers() {
 
   async function fetchData() {
     try {
-      const response = await utils.call<{
+      const allowanceResponse = await utils.call<{
         allowances: Allowance[];
       }>("listAllowances");
-      const response2 = await utils.call<{
+      const blocklistResponse = await utils.call<{
         blocklist: Blocklist[];
       }>("listBlocklist");
-      const allowances = response.allowances.map((allowance) => {
+      const allowances = allowanceResponse.allowances.map((allowance) => {
         let retobj: Publisher = allowance;
         if (allowance.enabled && allowance.remainingBudget > 0) {
           retobj = {
@@ -35,7 +35,11 @@ function Publishers() {
             },
           };
         }
-        if (response2.blocklist.find((item) => item.host === allowance.host)) {
+        if (
+          blocklistResponse.blocklist.find(
+            (item) => item.host === allowance.host
+          )
+        ) {
           retobj.blocked = true;
         }
         return retobj;
