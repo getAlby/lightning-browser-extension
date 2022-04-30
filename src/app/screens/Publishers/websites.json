@@ -85,7 +85,7 @@
       },
       {
         "title": "Lightning Network Stores",
-        "subtitle": "Collection of stores and websites accepting Bitcoin payments",
+        "subtitle": "Collection of stores and websites accepting bitcoin",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lightning-network-stores_thumbnail.svg",
         "url": "https://lightningnetworkstores.com/"
       }
@@ -96,27 +96,39 @@
     "items": [
       {
         "title": "WebLN Experiments",
-        "subtitle": "A collection of Lightning web apps",
+        "subtitle": "A collection of Lightning web widgets",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/twentyuno.svg",
         "url": "https://webln.twentyuno.net/"
       },
       {
+        "title": "Bolt.Fun",
+        "subtitle": "A fun directory of Lighting web apps",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/bolt-fun_thumbnail.svg",
+        "url": "https://makers.bolt.fun/"
+      },
+      {
+        "title": "Geyser",
+        "subtitle": "Crowdfunding projects with Bitcoin Lightning",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/geyser_thumbnail.svg",
+        "url": "https://geyser.fund/"
+      },
+      {
+        "title": "Amboss",
+        "subtitle": "Lightning Network node explorer",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/amboss-space_thumbnail.svg",
+        "url": "https://amboss.space/"
+      },
+	{
         "title": "Sparkshot",
         "subtitle": "Art created and funded by the community",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/sparkshot_thumbnail.svg",
         "url": "https://sparkshot.io/"
       },
-      {
+	{
         "title": "Sats for Likes",
         "subtitle": "Earn sats for accomplishing tasks",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/sats4likes.svg",
         "url": "https://kriptode.com/satsforlikes/index.html"
-      },
-      {
-        "title": "Amboss Space",
-        "subtitle": "Lightning Network node explorer",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/amboss-space_thumbnail.svg",
-        "url": "https://amboss.space/"
       }
     ]
   }
