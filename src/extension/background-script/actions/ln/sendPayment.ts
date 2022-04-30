@@ -1,5 +1,5 @@
 import PubSub from "pubsub-js";
-import { parsePaymentRequest } from "invoices";
+import lightningPayReq from "bolt11";
 
 import { Message } from "~/types";
 import state from "../../state";
@@ -14,9 +14,7 @@ export default async function sendPayment(message: Message) {
     };
   }
 
-  const paymentRequestDetails = parsePaymentRequest({
-    request: paymentRequest,
-  });
+  const paymentRequestDetails = lightningPayReq.decode(paymentRequest);
   const connector = await state.getState().getConnector();
 
   let response;

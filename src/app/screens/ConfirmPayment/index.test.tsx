@@ -1,4 +1,4 @@
-import { parsePaymentRequest } from "invoices";
+import lightningPayReq from "bolt11";
 import { render, fireEvent, screen, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import type { Props } from "./index";
@@ -56,8 +56,7 @@ describe("ConfirmPayment", () => {
     fireEvent.click(screen.getByText("Remember and set a budget"));
 
     const input = await screen.findByLabelText("Budget");
-    expect(input).toHaveValue(
-      parsePaymentRequest({ request: paymentRequest }).tokens * 10
-    );
+    const satoshis = lightningPayReq.decode(paymentRequest).satoshis || 0;
+    expect(input).toHaveValue(satoshis * 10);
   });
 });

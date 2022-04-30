@@ -1,3 +1,4 @@
+import { PaymentRequestObject } from "bolt11";
 import PubSub from "pubsub-js";
 import browser, { Runtime } from "webextension-polyfill";
 import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
@@ -69,7 +70,7 @@ const utils = {
   },
   publishPaymentNotification: (
     message: Message,
-    paymentRequestDetails: PaymentRequestDetails,
+    paymentRequestDetails: PaymentRequestObject,
     response: SendPaymentResponse | { error: string }
   ) => {
     let status = "success"; // default. let's hope for success

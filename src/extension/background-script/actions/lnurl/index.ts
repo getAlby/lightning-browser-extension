@@ -1,6 +1,6 @@
 import axios from "axios";
 import PubSub from "pubsub-js";
-import { parsePaymentRequest } from "invoices";
+import lightningPayReq from "bolt11";
 
 import sha256 from "crypto-js/sha256";
 import hmacSHA256 from "crypto-js/hmac-sha256";
@@ -204,9 +204,7 @@ export async function lnurlPay(message: Message) {
   }
   const connector = await state.getState().getConnector();
 
-  const paymentRequestDetails = parsePaymentRequest({
-    request: paymentRequest,
-  });
+  const paymentRequestDetails = lightningPayReq.decode(paymentRequest);
 
   let response;
   try {
