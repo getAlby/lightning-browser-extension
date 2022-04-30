@@ -4,6 +4,7 @@ import { classNames } from "../../../utils";
 
 type Props = {
   suffix?: string;
+  endAdornment?: React.ReactNode;
 };
 
 export default function Input({
@@ -24,6 +25,7 @@ export default function Input({
   min,
   max,
   suffix,
+  endAdornment,
 }: React.InputHTMLAttributes<HTMLInputElement> & Props) {
   const inputEl = useRef<HTMLInputElement>(null);
   const outerStyles =
@@ -36,8 +38,8 @@ export default function Input({
       name={name}
       id={id}
       className={classNames(
-        "sm:text-sm block w-full placeholder-gray-400 dark:placeholder-gray-600 dark:text-black",
-        !suffix ? outerStyles : "border-0 focus:ring-0"
+        "block w-full placeholder-gray-400 dark:placeholder-gray-600 dark:text-black",
+        !suffix && !endAdornment ? outerStyles : "border-0 focus:ring-0"
       )}
       placeholder={placeholder}
       required={required}
@@ -55,7 +57,7 @@ export default function Input({
     />
   );
 
-  if (!suffix) return inputNode;
+  if (!suffix && !endAdornment) return inputNode;
 
   return (
     <div
@@ -65,14 +67,19 @@ export default function Input({
       )}
     >
       {inputNode}
-      <span
-        className="flex items-center pr-3 font-medium bg-white"
-        onClick={() => {
-          inputEl.current?.focus();
-        }}
-      >
-        {suffix}
-      </span>
+      {suffix && (
+        <span
+          className="flex items-center pr-3 font-medium bg-white"
+          onClick={() => {
+            inputEl.current?.focus();
+          }}
+        >
+          {suffix}
+        </span>
+      )}
+      {endAdornment && (
+        <span className="flex items-center bg-white">{endAdornment}</span>
+      )}
     </div>
   );
 }
