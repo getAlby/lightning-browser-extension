@@ -66,7 +66,7 @@ export default function Input({
     >
       {inputNode}
       <span
-        className="flex items-center pr-3 font-medium"
+        className="flex items-center pr-3 font-medium bg-white"
         onClick={() => {
           inputEl.current?.focus();
         }}
