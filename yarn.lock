@@ -14480,10 +14480,10 @@ react-popper@^2.2.4:
     react-fast-compare "^3.0.1"
     warning "^4.0.2"
 
-react-qr-code@^2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/react-qr-code/-/react-qr-code-2.0.5.tgz#ceb470d441230e93f676d070a15f1354b2c5c1ad"
-  integrity sha512-8R/n/5X9n5JsND+npJYYCcrf1jEcphG7o0d5aXl7cx/tpDF0kfSoYucG8BUG3EN/LCzf5Ehf2yl7zdnxdpKGBQ==
+react-qr-code@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/react-qr-code/-/react-qr-code-2.0.7.tgz#508304e031e82426a044f5e9490aca87d7c3de38"
+  integrity sha512-NpknL80p7dWbLdHfBSIxQIqLCu3+kBlyzYD692rO0UnVwfCSziIxc1xn/p3JhPEv1RV1lRD8j0w+hR3L7tawTQ==
   dependencies:
     prop-types "^15.7.2"
     qr.js "0.0.0"
