@@ -6334,10 +6334,10 @@ body-parser@1.19.2:
     raw-body "2.4.3"
     type-is "~1.6.18"
 
-bolt11@^1.3.4:
-  version "1.3.4"
-  resolved "https://registry.yarnpkg.com/bolt11/-/bolt11-1.3.4.tgz#4f2c2fa529f2dc1d60ee7c932aa47d90a0c17ed9"
-  integrity sha512-x4lHDv0oid13lGlZU7cl/5gx9nRwjB2vgK/uB3c50802Wh+9WjWQMwzD2PCETHylUijx2iBAqUQYbx3ZgwF06Q==
+bolt11@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/bolt11/-/bolt11-1.4.0.tgz#d8ff0f6b8f89aaa07ed8c02e330a344b8c158263"
+  integrity sha512-TeGIOpFNrvNA1XGvwBr+lYmzKfoJeyMRt7nsGmIci+5gbmSz7s46jwKLNYXH3IoxV7fjmYUEUu2NM19n9w0msg==
   dependencies:
     "@types/bn.js" "^4.11.3"
     bech32 "^1.1.2"

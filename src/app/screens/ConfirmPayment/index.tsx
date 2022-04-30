@@ -94,11 +94,7 @@ function ConfirmPayment(props: Props) {
             <div className="mb-8">
               <PaymentSummary
                 amount={invoiceRef.current?.satoshis}
-                description={
-                  invoiceRef.current?.tags.find(
-                    (t) => t.tagName === "description"
-                  )?.data as string
-                }
+                description={invoiceRef.current?.tagsObject.description}
               />
             </div>
 

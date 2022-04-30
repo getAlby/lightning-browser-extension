@@ -126,9 +126,7 @@ class Galoy implements Connector {
 
     const paymentRequestDetails = lightningPayReq.decode(args.paymentRequest);
     const amountInSats = paymentRequestDetails.satoshis || 0;
-    const paymentHash = paymentRequestDetails.tags.find(
-      (t) => t.tagName === "payment_hash"
-    )?.data as string;
+    const paymentHash = paymentRequestDetails.tagsObject.payment_hash || "";
 
     return this.request(query).then(({ data, errors }) => {
       const errs = errors || data.lnInvoicePaymentSend.errors;
