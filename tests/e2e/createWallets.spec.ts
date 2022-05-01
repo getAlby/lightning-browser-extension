@@ -81,16 +81,22 @@ test.describe("Create or connect wallets", () => {
     const emailField = await getByLabelText($document, "Email Address");
     await emailField.type(user.email);
 
+    // type user password and confirm password
+    const walletPasswordField = await getByLabelText($document, "Password");
+    await walletPasswordField.type(user.password);
+
     // click create a wallet button
     const createWalletButton = await getByText($document, "Create a wallet");
     createWalletButton.click();
 
     await page.waitForResponse(() => true);
 
-    await wait(() => getByText($document, "Get a new lightning wallet"));
+    await wait(() =>
+      getByText($document, "We have created a new wallet for you.")
+    );
 
     // submit form
-    const nextButton = await getByText($document, "Next");
+    const nextButton = await getByText($document, "Continue");
     nextButton.click();
 
     await wait(() => getByText($document, "Success!"));
