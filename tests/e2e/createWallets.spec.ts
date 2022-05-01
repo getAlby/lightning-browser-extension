@@ -11,7 +11,7 @@ const delay = async (time) => {
 };
 
 const loadExtension = async () => {
-  const extensionID = "lmcohpmphdnfjpoejmnpeffoffngmkoi";
+  const extensionID = "illmemocmhbdlcejaopkmeegcbjbnmnm";
   const extensionPath = "./dist/development/chrome";
   const extensionOptionHtml = "welcome.html";
   const extPage = `chrome-extension://${extensionID}/${extensionOptionHtml}`;
@@ -38,7 +38,7 @@ const loadExtension = async () => {
 };
 
 test.describe("Create or connect wallets", () => {
-  test("successfully creates an Alby wallet", async () => {
+  test.only("successfully creates an Alby wallet", async () => {
     const user = USER.SINGLE();
 
     const { page } = await loadExtension();
@@ -125,7 +125,7 @@ test.describe("Create or connect wallets", () => {
 
     await wait(() => getByText($document, "Do you have a lightning wallet?"));
 
-    // click at "Create Alby Wallet"
+    // click at "Create LNbits Wallet"
     const createNewWalletButton = await getByText($document, "LNbits");
     createNewWalletButton.click();
 
