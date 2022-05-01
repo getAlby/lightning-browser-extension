@@ -2,7 +2,7 @@ import { PaymentRequestObject } from "bolt11";
 import PubSub from "pubsub-js";
 import browser, { Runtime } from "webextension-polyfill";
 import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
-import { Message, OriginData } from "~/types";
+import { Message, OriginData, OriginDataInternal } from "~/types";
 
 const utils = {
   call: <T = Record<string, unknown>>(
