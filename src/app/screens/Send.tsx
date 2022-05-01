@@ -114,6 +114,7 @@ function Send() {
           }
           endAdornment={
             <button
+              type="button"
               className="flex justify-center items-center w-10 h-8"
               onClick={() => setQrIsOpen(true)}
             >
