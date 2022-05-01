@@ -102,12 +102,6 @@ function Send() {
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
-        headerRight={
-          <IconButton
-            onClick={() => setQrIsOpen(true)}
-            icon={<QrCodeIcon className="h-6 w-6 text-blue-500" />}
-          />
-        }
       />
       <form className="p-4 max-w-screen-sm mx-auto" onSubmit={handleSubmit}>
         <TextField
@@ -117,6 +111,14 @@ function Send() {
           value={invoice}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             setInvoice(event.target.value)
+          }
+          endAdornment={
+            <button
+              className="flex justify-center items-center w-10 h-8"
+              onClick={() => setQrIsOpen(true)}
+            >
+              <QrCodeIcon className="h-6 w-6 text-blue-500" />
+            </button>
           }
         />
         <div className="mt-4">
