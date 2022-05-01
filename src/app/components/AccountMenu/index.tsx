@@ -54,7 +54,7 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
   }
 
   return (
-    <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-gray-600">
+    <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-surface-12dp">
       <div className="flex items-center">
         <WalletIcon className="-ml-1 w-8 h-8 opacity-50 dark:text-white" />
       </div>
@@ -70,7 +70,7 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
       </div>
 
       <Menu as="div">
-        <Menu.Button className="h-full px-2 rounded-r-md hover:bg-gray-200 dark:hover:bg-gray-500 transition-colors duration-200">
+        <Menu.Button className="h-full px-2 rounded-r-md hover:bg-gray-200 dark:hover:bg-white/10 transition-colors duration-200">
           <CaretDownIcon className="h-4 w-4 dark:text-white" />
           <span className="sr-only">Toggle Dropdown</span>
         </Menu.Button>

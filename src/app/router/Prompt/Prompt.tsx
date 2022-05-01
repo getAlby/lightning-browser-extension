@@ -151,7 +151,7 @@ const Layout = () => {
 
   return (
     <>
-      <div className="px-4 py-2 bg-white flex border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">
+      <div className="px-4 py-2 bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-gray-500">
         <AccountMenu
           title={
             typeof auth.account?.name === "string"

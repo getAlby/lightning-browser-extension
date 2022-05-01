@@ -64,7 +64,7 @@ export default function SetPassword() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 py-12 px-10">
+      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-surface-02dp py-12 px-10">
         <div className="lg:w-1/2">
           <h1 className="text-2xl font-bold dark:text-white">
             Protect your wallet

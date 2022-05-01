@@ -158,7 +158,7 @@ export default function ConnectLnd() {
         </div>
         <p className="text-center my-4 dark:text-white">OR</p>
         <div
-          className={`cursor-pointer flex flex-col items-center dark:bg-gray-800 p-4 py-3 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
+          className={`cursor-pointer flex flex-col items-center dark:bg-surface-02dp p-4 py-3 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
             isDragging ? "border-blue-500 bg-blue-50" : ""
           }`}
           onDrop={dropHandler}

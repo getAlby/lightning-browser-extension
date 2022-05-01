@@ -39,7 +39,7 @@ export default function Intro() {
 
   return (
     <div>
-      <div className="relative lg:grid lg:grid-cols-3 lg:gap-x-8 mt-14 bg-white dark:bg-gray-800 px-10 py-12 items-center">
+      <div className="relative lg:grid lg:grid-cols-3 lg:gap-x-8 mt-14 bg-white dark:bg-surface-02dp px-10 py-12 items-center">
         <div className="lg:col-span-1">
           <div className="max-w-xs">
             <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />

@@ -87,7 +87,7 @@ function LNURLWithdraw(props: Props) {
       <div className="p-4 max-w-screen-sm mx-auto">
         {!successMessage ? (
           <>
-            <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+            <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
               <dt className="text-sm font-semibold text-gray-500">
                 Amount (Satoshi)
               </dt>

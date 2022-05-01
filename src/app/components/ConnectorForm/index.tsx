@@ -26,7 +26,7 @@ function ConnectorForm({
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="relative lg:flex mt-14 bg-white dark:bg-gray-800 px-10 py-12">
+      <div className="relative lg:flex mt-14 bg-white dark:bg-surface-02dp px-10 py-12">
         <div className="lg:w-1/2">
           <h1 className="mb-6 text-2xl font-bold dark:text-white">{title}</h1>
           {description && (
