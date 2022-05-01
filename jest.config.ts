@@ -13,5 +13,4 @@ module.exports = {
   testEnvironment: "./jest.custom-test-environment.ts",
   setupFilesAfterEnv: ["./jest.setup.ts"],
   modulePathIgnorePatterns: ["<rootDir>/tests"],
-  testTimeout: 20000,
 };

@@ -114,10 +114,22 @@ Then run the following:
 
 ### :white_check_mark: Tests
 
-Just run the command below to run all tests:
+#### E2E tests via playwright
 
 ```bash
-npx playwright test
+yarn run dev:chrome
+yarn playwright test
+```
+
+:warning:
+
+- You need to first import the extension into the browser(s)
+- You might need to adjust the `extensionID` in playwright spec(s)
+
+#### Unit tests tests via Jest
+
+```bash
+yarn test
 ```
 
 ### 💻 Load extension into browser
