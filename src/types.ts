@@ -161,6 +161,7 @@ export type Transaction = {
   preimage: string;
   badges: IBadge[];
   totalAmount: string;
+  totalFees: string;
   description: string;
   location: string;
 };
