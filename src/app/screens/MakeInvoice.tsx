@@ -73,7 +73,7 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
 
       <div className="p-4">
         <div className="mb-8">
-          <div className="p-4 shadow bg-white border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600">
+          <div className="p-4 shadow bg-white border-gray-200 rounded-lg dark:bg-surface-02dp dark:border-gray-600">
             <div>
               <TextField
                 id="amount"

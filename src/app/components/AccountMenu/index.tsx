@@ -54,14 +54,14 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
   }
 
   return (
-    <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-gray-600">
+    <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-surface-12dp">
       <div className="flex items-center">
         <WalletIcon className="-ml-1 w-8 h-8 opacity-50 dark:text-white" />
       </div>
       <div
         className={`flex-auto mx-2 py-1 ${!title && !subtitle ? "w-28" : ""}`}
       >
-        <div className="text-xs text-gray-500 dark:text-gray-400">
+        <div className="text-xs text-gray-700 dark:text-gray-400">
           {title || <Skeleton />}
         </div>
         <div className="text-xs dark:text-white">
@@ -70,7 +70,7 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
       </div>
 
       <Menu as="div">
-        <Menu.Button className="h-full px-2 rounded-r-md hover:bg-gray-200 dark:hover:bg-gray-500 transition-colors duration-200">
+        <Menu.Button className="h-full px-2 rounded-r-md hover:bg-gray-200 dark:hover:bg-white/10 transition-colors duration-200">
           <CaretDownIcon className="h-4 w-4 dark:text-white" />
           <span className="sr-only">Toggle Dropdown</span>
         </Menu.Button>
@@ -86,7 +86,7 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
                 }}
                 disabled={loading}
               >
-                <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-500" />
+                <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-700 dark:text-gray-300" />
                 {account.name}&nbsp;
                 <Badge
                   label={account.connector}
@@ -105,7 +105,7 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
                   openOptions("accounts/new");
                 }}
               >
-                <PlusIcon className="h-5 w-5 mr-2 text-gray-500" />
+                <PlusIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-gray-300" />
                 Add a new account
               </Menu.ItemButton>
               <Menu.ItemButton
@@ -113,7 +113,7 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
                   openOptions("accounts");
                 }}
               >
-                <AddressBookIcon className="h-5 w-5 mr-2 text-gray-500" />
+                <AddressBookIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-gray-300" />
                 Accounts
               </Menu.ItemButton>
             </>

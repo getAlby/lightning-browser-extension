@@ -281,7 +281,7 @@ function LNURLPay(props: Props) {
 
     return (
       <>
-        <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+        <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
           {descriptionList.map(([dt, dd]) => (
             <>
               <Dt>{dt}</Dt>
@@ -311,7 +311,7 @@ function LNURLPay(props: Props) {
       <div className="p-4 max-w-screen-sm mx-auto">
         {!successAction ? (
           <>
-            <div className="shadow bg-white dark:bg-gray-700 py-4 px-4 rounded-lg mb-6 overflow-hidden">
+            <div className="shadow bg-white dark:bg-surface-02dp py-4 px-4 rounded-lg mb-6 overflow-hidden">
               <dl>
                 {loading || !details ? (
                   <>

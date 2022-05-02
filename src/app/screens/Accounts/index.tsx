@@ -75,7 +75,7 @@ function AccountsScreen() {
       <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
         Accounts
       </h2>
-      <div className="shadow border-b border-gray-200 dark:border-gray-500 sm:rounded-lg bg-white dark:bg-gray-800">
+      <div className="shadow border-b border-gray-200 dark:border-gray-500 sm:rounded-lg bg-white dark:bg-surface-02dp">
         <div className="p-6">
           <Button
             icon={<PlusIcon className="w-5 h-5 mr-2" />}
@@ -99,7 +99,7 @@ function AccountsScreen() {
                         <h3 className="font-bold text-gray-900 dark:text-white">
                           {account.name}
                         </h3>
-                        <p className="text-gray-500 dark:text-gray-400">
+                        <p className="text-gray-700 dark:text-gray-400">
                           {account.connector}
                         </p>
                       </div>
@@ -107,7 +107,7 @@ function AccountsScreen() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <Menu as="div" className="relative">
-                      <Menu.Button className="ml-auto flex items-center text-gray-500 hover:text-black transition-color duration-200 dark:hover:text-white">
+                      <Menu.Button className="ml-auto flex items-center text-gray-700 hover:text-black transition-color duration-200 dark:hover:text-white">
                         <EllipsisIcon className="h-6 w-6 rotate-90" />
                       </Menu.Button>
 
@@ -158,7 +158,7 @@ function AccountsScreen() {
           overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
           className="rounded-lg bg-white w-full max-w-lg"
         >
-          <div className="p-5 flex justify-between dark:bg-gray-800">
+          <div className="p-5 flex justify-between dark:bg-surface-02dp">
             <h2 className="text-2xl font-bold dark:text-white">Edit account</h2>
             <button onClick={closeModal}>
               <CrossIcon className="w-6 h-6 dark:text-white" />
@@ -174,7 +174,7 @@ function AccountsScreen() {
               });
             }}
           >
-            <div className="p-5 border-t border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">
+            <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-gray-500">
               <div className="w-60">
                 <TextField
                   autoFocus
@@ -186,7 +186,7 @@ function AccountsScreen() {
               </div>
             </div>
 
-            <div className="flex justify-end p-5 dark:bg-gray-800">
+            <div className="flex justify-end p-5 dark:bg-surface-02dp">
               <Button
                 label="Save"
                 type="submit"
