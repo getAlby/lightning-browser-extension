@@ -17,8 +17,13 @@ const weblnCalls = [
 ];
 import extractLightningData from "./batteries";
 
-if (shouldInject()) {
-  injectScript();
+async function init() {
+  const inject = await shouldInject();
+  if (!inject) {
+    return;
+  }
+
+  injectScript(); // injects the webln object
 
   // extract LN data from websites
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -66,4 +71,7 @@ if (shouldInject()) {
     }
   });
 }
+
+init();
+
 export {};

@@ -8,9 +8,9 @@ const get = async (message: { args: { host: string } }, sender: unknown) => {
     .first();
 
   if (isBlocked) {
-    return { data: { enabled: true } };
+    return { data: { blocked: true } };
   } else {
-    return { data: { enabled: false } };
+    return { data: { blocked: false } };
   }
 };
 

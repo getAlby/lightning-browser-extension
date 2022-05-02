@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Container from "@components/Container";
 import PublishersTable from "@components/PublishersTable";
 
-import { Allowance } from "~/types";
+import { Allowance, Blocklist, Publisher } from "~/types";
 import utils from "~/common/lib/utils";
 import websites from "./websites.json";
 
@@ -18,12 +18,16 @@ function Publishers() {
 
   async function fetchData() {
     try {
-      const response = await utils.call<{
+      const allowanceResponse = await utils.call<{
         allowances: Allowance[];
       }>("listAllowances");
-      const allowances = response.allowances.map((allowance) => {
+      const blocklistResponse = await utils.call<{
+        blocklist: Blocklist[];
+      }>("listBlocklist");
+      const allowances = allowanceResponse.allowances.map((allowance) => {
+        let retobj: Publisher = allowance;
         if (allowance.enabled && allowance.remainingBudget > 0) {
-          return {
+          retobj = {
             ...allowance,
             badge: {
               label: "ACTIVE",
@@ -32,7 +36,14 @@ function Publishers() {
             },
           };
         }
-        return allowance;
+        if (
+          blocklistResponse.blocklist.find(
+            (item) => item.host === allowance.host
+          )
+        ) {
+          retobj.blocked = true;
+        }
+        return retobj;
       });
       setData(allowances);
     } catch (e) {
