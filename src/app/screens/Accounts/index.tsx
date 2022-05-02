@@ -99,7 +99,7 @@ function AccountsScreen() {
                         <h3 className="font-bold text-gray-900 dark:text-white">
                           {account.name}
                         </h3>
-                        <p className="text-gray-500 dark:text-gray-400">
+                        <p className="text-gray-700 dark:text-gray-400">
                           {account.connector}
                         </p>
                       </div>
@@ -107,7 +107,7 @@ function AccountsScreen() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <Menu as="div" className="relative">
-                      <Menu.Button className="ml-auto flex items-center text-gray-500 hover:text-black transition-color duration-200 dark:hover:text-white">
+                      <Menu.Button className="ml-auto flex items-center text-gray-700 hover:text-black transition-color duration-200 dark:hover:text-white">
                         <EllipsisIcon className="h-6 w-6 rotate-90" />
                       </Menu.Button>
 

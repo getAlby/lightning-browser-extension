@@ -17,7 +17,7 @@ export default function LinkButton({ to, title, description, logo }: Props) {
         <div>
           <span className="block dark:text-white text-lg">{title}</span>
           {description && (
-            <span className="text-sm text-gray-500 dark:text-gray-300">
+            <span className="text-sm text-gray-700 dark:text-gray-300">
               {description}
             </span>
           )}

@@ -68,7 +68,7 @@ export default function PublishersTable({
                         />
                       )}
                     </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                    <div className="text-sm text-gray-700 dark:text-gray-400">
                       {publisher.host} • {publisher.paymentsCount} payments
                     </div>
                   </div>

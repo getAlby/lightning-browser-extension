@@ -31,7 +31,7 @@ const TextField = ({
   <>
     <label
       htmlFor={id}
-      className="block font-medium text-gray-700 dark:text-white"
+      className="block font-medium text-gray-800 dark:text-white"
     >
       {label}
     </label>
