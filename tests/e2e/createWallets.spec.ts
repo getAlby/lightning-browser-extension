@@ -1,8 +1,8 @@
 import { test } from "@playwright/test";
-import puppeteer from "puppeteer";
-import { getDocument, queries, wait } from "pptr-testing-library";
-const { getByText, getByLabelText } = queries;
 import { USER } from "complete-randomer";
+import { getDocument, queries, wait } from "pptr-testing-library";
+import puppeteer from "puppeteer";
+const { getByText, getByLabelText } = queries;
 
 const delay = async (time) => {
   return new Promise(function (resolve) {
@@ -38,7 +38,7 @@ const loadExtension = async () => {
 };
 
 test.describe("Create or connect wallets", () => {
-  test.only("successfully creates an Alby wallet", async () => {
+  test("successfully creates an Alby wallet", async () => {
     const user = USER.SINGLE();
 
     const { page } = await loadExtension();
@@ -102,103 +102,103 @@ test.describe("Create or connect wallets", () => {
     await wait(() => getByText($document, "Success!"));
   });
 
-  test("successfully connects to LNBits wallet", async () => {
-    const user = USER.SINGLE();
-    const { page, browser } = await loadExtension();
+  // test("successfully connects to LNBits wallet", async () => {
+  //   const user = USER.SINGLE();
+  //   const { page, browser } = await loadExtension();
 
-    // go through welcome page
-    const $document = await getDocument(page);
+  //   // go through welcome page
+  //   const $document = await getDocument(page);
 
-    // go through welcome page
-    const startedButton = await getByText($document, "Get Started");
-    startedButton.click();
+  //   // go through welcome page
+  //   const startedButton = await getByText($document, "Get Started");
+  //   startedButton.click();
 
-    await wait(() => getByText($document, "Protect your wallet"));
+  //   await wait(() => getByText($document, "Protect your wallet"));
 
-    // type user password and confirm password
-    const passwordField = await getByLabelText($document, "Choose a password:");
-    await passwordField.type(user.password);
+  //   // type user password and confirm password
+  //   const passwordField = await getByLabelText($document, "Choose a password:");
+  //   await passwordField.type(user.password);
 
-    const passwordConfirmationField = await getByLabelText(
-      $document,
-      "Let's confirm you typed it correct:"
-    );
-    await passwordConfirmationField.type(user.password);
+  //   const passwordConfirmationField = await getByLabelText(
+  //     $document,
+  //     "Let's confirm you typed it correct:"
+  //   );
+  //   await passwordConfirmationField.type(user.password);
 
-    // submit password form
-    const passwordFormNextButton = await getByText($document, "Next");
-    passwordFormNextButton.click();
+  //   // submit password form
+  //   const passwordFormNextButton = await getByText($document, "Next");
+  //   passwordFormNextButton.click();
 
-    await wait(() => getByText($document, "Do you have a lightning wallet?"));
+  //   await wait(() => getByText($document, "Do you have a lightning wallet?"));
 
-    // click at "Create LNbits Wallet"
-    const createNewWalletButton = await getByText($document, "LNbits");
-    createNewWalletButton.click();
+  //   // click at "Create LNbits Wallet"
+  //   const createNewWalletButton = await getByText($document, "LNbits");
+  //   createNewWalletButton.click();
 
-    await wait(() => getByText($document, "Connect to LNbits"));
+  //   await wait(() => getByText($document, "Connect to LNbits"));
 
-    const lnBitsAdminKey = "d8de4f373561446aa298cae2b9424325";
-    const adminKeyField = await getByLabelText($document, "LNbits Admin Key");
-    await adminKeyField.type(lnBitsAdminKey);
+  //   const lnBitsAdminKey = "d8de4f373561446aa298cae2b9424325";
+  //   const adminKeyField = await getByLabelText($document, "LNbits Admin Key");
+  //   await adminKeyField.type(lnBitsAdminKey);
 
-    // submit form
-    const continueButton = await getByText($document, "Continue");
-    continueButton.click();
+  //   // submit form
+  //   const continueButton = await getByText($document, "Continue");
+  //   continueButton.click();
 
-    await page.waitForResponse(() => true);
+  //   await page.waitForResponse(() => true);
 
-    await browser.close();
-  });
+  //   await browser.close();
+  // });
 
-  test("successfully connects to BlueWallet", async () => {
-    const user = USER.SINGLE();
-    const { page, browser } = await loadExtension();
+  // test("successfully connects to BlueWallet", async () => {
+  //   const user = USER.SINGLE();
+  //   const { page, browser } = await loadExtension();
 
-    // go through welcome page
-    const $document = await getDocument(page);
+  //   // go through welcome page
+  //   const $document = await getDocument(page);
 
-    // go through welcome page
-    const startedButton = await getByText($document, "Get Started");
-    startedButton.click();
+  //   // go through welcome page
+  //   const startedButton = await getByText($document, "Get Started");
+  //   startedButton.click();
 
-    await wait(() => getByText($document, "Protect your wallet"));
+  //   await wait(() => getByText($document, "Protect your wallet"));
 
-    // type user password and confirm password
-    const passwordField = await getByLabelText($document, "Choose a password:");
-    await passwordField.type(user.password);
+  //   // type user password and confirm password
+  //   const passwordField = await getByLabelText($document, "Choose a password:");
+  //   await passwordField.type(user.password);
 
-    const passwordConfirmationField = await getByLabelText(
-      $document,
-      "Let's confirm you typed it correct:"
-    );
-    await passwordConfirmationField.type(user.password);
+  //   const passwordConfirmationField = await getByLabelText(
+  //     $document,
+  //     "Let's confirm you typed it correct:"
+  //   );
+  //   await passwordConfirmationField.type(user.password);
 
-    // submit password form
-    const passwordFormNextButton = await getByText($document, "Next");
-    passwordFormNextButton.click();
+  //   // submit password form
+  //   const passwordFormNextButton = await getByText($document, "Next");
+  //   passwordFormNextButton.click();
 
-    await wait(() => getByText($document, "Do you have a lightning wallet?"));
+  //   await wait(() => getByText($document, "Do you have a lightning wallet?"));
 
-    // click at "LNDHub (BlueWallet)"
-    const createNewWalletButton = await getByText(
-      $document,
-      "LNDHub (Bluewallet)"
-    );
-    createNewWalletButton.click();
+  //   // click at "LNDHub (BlueWallet)"
+  //   const createNewWalletButton = await getByText(
+  //     $document,
+  //     "LNDHub (Bluewallet)"
+  //   );
+  //   createNewWalletButton.click();
 
-    await wait(() => getByText($document, "Connect to LNDHub (BlueWallet)"));
+  //   await wait(() => getByText($document, "Connect to LNDHub (BlueWallet)"));
 
-    const lndHubUrl =
-      "lndhub://c269ebb962f1a94f9c29:f6f16f35e935edc05ee7@https://lndhub.io";
-    const lndUrlField = await getByLabelText($document, "LNDHub Export URI");
-    await lndUrlField.type(lndHubUrl);
+  //   const lndHubUrl =
+  //     "lndhub://c269ebb962f1a94f9c29:f6f16f35e935edc05ee7@https://lndhub.io";
+  //   const lndUrlField = await getByLabelText($document, "LNDHub Export URI");
+  //   await lndUrlField.type(lndHubUrl);
 
-    // submit form
-    const continueButton = await getByText($document, "Continue");
-    continueButton.click();
+  //   // submit form
+  //   const continueButton = await getByText($document, "Continue");
+  //   continueButton.click();
 
-    await page.waitForResponse(() => true);
+  //   await page.waitForResponse(() => true);
 
-    await browser.close();
-  });
+  //   await browser.close();
+  // });
 });
