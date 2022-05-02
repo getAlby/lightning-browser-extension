@@ -11,11 +11,11 @@ import type {
   Transaction,
   SettingsStorage,
   Blocklist,
-} from "../../types";
+} from "~/types";
 import {
   MakeInvoiceArgs,
   MakeInvoiceResponse,
-} from "../../extension/background-script/connectors/connector.interface";
+} from "~/extension/background-script/connectors/connector.interface";
 
 interface AccountInfoRes {
   currentAccountId: string;

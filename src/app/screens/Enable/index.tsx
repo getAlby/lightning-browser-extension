@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 
-import ConfirmOrCancel from "../../components/ConfirmOrCancel";
-import PublisherCard from "../../components/PublisherCard";
-import msg from "../../../common/lib/msg";
-import type { OriginData } from "../../../types";
-import utils from "../../../common/lib/utils";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import PublisherCard from "@components/PublisherCard";
+import msg from "~/common/lib/msg";
+import type { OriginData } from "~/types";
+import utils from "~/common/lib/utils";
 
 type Props = {
   origin: OriginData;
@@ -34,7 +34,7 @@ function Enable(props: Props) {
   async function block(event: React.MouseEvent<HTMLAnchorElement>) {
     msg.error(
       `User added site to blocklist domain, host
-        ${props.origin.domain}, 
+        ${props.origin.domain},
         ${props.origin.host}`
     );
     await utils.call("addBlocklist", {

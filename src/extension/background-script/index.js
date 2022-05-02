@@ -1,6 +1,6 @@
 import browser from "webextension-polyfill";
 
-import utils from "../../common/lib/utils";
+import utils from "~/common/lib/utils";
 
 import { router } from "./router";
 import state from "./state";
@@ -8,6 +8,8 @@ import db from "./db";
 import connectors from "./connectors";
 
 import * as events from "./events";
+
+let isFirstInstalled = false;
 
 /* debug help to check the current state
 setInterval(() => {
@@ -70,7 +72,7 @@ const handleInstalled = (details) => {
   console.log(`Handle installed: ${details.reason}`);
   // TODO: maybe check if accounts are already configured?
   if (details.reason === "install") {
-    utils.openUrl("welcome.html");
+    isFirstInstalled = true;
   }
 };
 
@@ -134,4 +136,8 @@ async function init() {
 // When we subscribe to that event asynchronously in the init() function it is too late and we miss the event.
 browser.runtime.onInstalled.addListener(handleInstalled);
 
-init();
+init().then(() => {
+  if (isFirstInstalled) {
+    utils.openUrl("welcome.html");
+  }
+});

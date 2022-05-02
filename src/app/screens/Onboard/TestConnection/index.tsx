@@ -3,12 +3,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
-import Input from "../../../components/form/Input";
-import Button from "../../../components/Button";
-import Card from "../../../components/Card";
-import utils from "../../../../common/lib/utils";
-import api from "../../../../common/lib/api";
-import Loading from "../../../components/Loading";
+import Input from "@components/form/Input";
+import Button from "@components/Button";
+import Card from "@components/Card";
+import utils from "~/common/lib/utils";
+import api from "~/common/lib/api";
+import Loading from "@components/Loading";
 
 const customStyles = {
   content: {
@@ -118,7 +118,7 @@ export default function TestConnection() {
         overlayClassName="bg-black bg-opacity-25 fixed inset-0"
         className="absolute rounded-lg bg-white w-full max-w-lg"
       >
-        <div className="p-5 flex justify-between dark:bg-gray-800">
+        <div className="p-5 flex justify-between dark:bg-surface-02dp">
           <h2 className="text-2xl font-bold dark:text-white">
             Get some Satoshi
           </h2>
@@ -126,7 +126,7 @@ export default function TestConnection() {
             <CrossIcon className="w-6 h-6 dark:text-white" />
           </button>
         </div>
-        <div className="p-5 border-t border-b border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200">
+        <div className="p-5 border-t border-b border-gray-200 dark:border-gray-600 dark:bg-surface-02dp dark:text-gray-200">
           <p className="mb-2">
             To get started we send {faucetAmount} sat to your wallet.
             <br />
@@ -144,7 +144,7 @@ export default function TestConnection() {
             />
           </div>
         </div>
-        <div className="flex justify-end p-5 dark:bg-gray-800">
+        <div className="flex justify-end p-5 dark:bg-surface-02dp">
           {faucetLoading ? (
             <Loading />
           ) : (
@@ -156,7 +156,7 @@ export default function TestConnection() {
   }
 
   return (
-    <div className="relative lg:mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white dark:bg-gray-800 px-10 py-12">
+    <div className="relative lg:mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white dark:bg-surface-02dp px-10 py-12">
       <div className="relative">
         <div>
           {errorMessage && (

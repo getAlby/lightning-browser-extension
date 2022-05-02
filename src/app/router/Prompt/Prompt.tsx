@@ -1,156 +1,149 @@
-import { Component } from "react";
-import qs from "query-string";
 import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
-
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "~/app/context/AuthContext";
 import type {
   LNURLAuthServiceResponse,
   LNURLPayServiceResponse,
   LNURLWithdrawServiceResponse,
   OriginData,
   RequestInvoiceArgs,
-} from "../../../types";
-import { AuthProvider } from "../../context/AuthContext";
-import { AccountsProvider } from "../../context/AccountsContext";
-import RequireAuth from "../RequireAuth";
-import Unlock from "../../screens/Unlock";
-import Enable from "../../screens/Enable";
-import MakeInvoice from "../../screens/MakeInvoice";
-import ConfirmSignMessage from "../../screens/ConfirmSignMessage";
-import ConfirmPayment from "../../screens/ConfirmPayment";
-import LNURLPay from "../../screens/LNURLPay";
-import LNURLAuth from "../../screens/LNURLAuth";
-import LNURLWithdraw from "../../screens/LNURLWithdraw";
-import Keysend from "../../screens/ConfirmKeysend";
-import Navbar from "../../components/Navbar";
+} from "~/types";
+import { AuthProvider } from "~/app/context/AuthContext";
+import { AccountsProvider } from "~/app/context/AccountsContext";
+import RequireAuth from "~/app/router/RequireAuth";
+import Unlock from "@screens/Unlock";
+import Enable from "@screens/Enable";
+import MakeInvoice from "@screens/MakeInvoice";
+import ConfirmSignMessage from "@screens/ConfirmSignMessage";
+import ConfirmPayment from "@screens/ConfirmPayment";
+import LNURLPay from "@screens/LNURLPay";
+import LNURLAuth from "@screens/LNURLAuth";
+import LNURLWithdraw from "@screens/LNURLWithdraw";
+import Keysend from "@screens/ConfirmKeysend";
+import AccountMenu from "@components/AccountMenu";
 
-class Prompt extends Component<
-  Record<string, unknown>,
-  { origin: OriginData; args: Record<string, unknown>; type: string }
-> {
-  constructor(props: Record<string, unknown>) {
-    super(props);
-    const message = qs.parse(window.location.search);
-    let origin = {} as OriginData;
-    let args = {};
-    let type = "";
-    if (message.origin && typeof message.origin === "string") {
-      origin = JSON.parse(message.origin);
-    }
-    if (message.args && typeof message.args === "string") {
-      args = JSON.parse(message.args);
-    }
-    if (typeof message.type === "string") type = message.type;
-    this.state = { origin, args, type };
-  }
+// Parse out the parameters from the querystring.
+const params = new URLSearchParams(window.location.search);
+let origin = {} as OriginData;
+let args = {};
+let type = "";
+if (params.get("origin") && typeof params.get("origin") === "string") {
+  origin = JSON.parse(params.get("origin") as string);
+}
+if (params.get("args") && typeof params.get("args") === "string") {
+  args = JSON.parse(params.get("args") as string);
+}
+if (typeof params.get("type") === "string") type = params.get("type") as string;
+const routeParams: {
+  origin: OriginData;
+  args: Record<string, unknown>;
+  type: string;
+} = { origin, args, type };
 
-  render() {
-    return (
-      <AuthProvider>
-        <AccountsProvider>
-          <HashRouter>
-            <Routes>
+function Prompt() {
+  return (
+    <AuthProvider>
+      <AccountsProvider>
+        <HashRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <RequireAuth>
+                  <Layout />
+                </RequireAuth>
+              }
+            >
               <Route
-                path="/"
+                index
+                element={<Navigate to={`/${routeParams.type}`} replace />}
+              />
+              <Route
+                path="webln/enable"
+                element={<Enable origin={routeParams.origin} />}
+              />
+              <Route
+                path="lnurlAuth"
                 element={
-                  <RequireAuth>
-                    <Layout />
-                  </RequireAuth>
+                  <LNURLAuth
+                    details={
+                      routeParams.args?.lnurlDetails as LNURLAuthServiceResponse
+                    }
+                    origin={routeParams.origin}
+                  />
                 }
-              >
-                <Route
-                  index
-                  element={<Navigate to={`/${this.state.type}`} replace />}
-                />
-                <Route
-                  path="webln/enable"
-                  element={<Enable origin={this.state.origin} />}
-                />
-                <Route
-                  path="lnurlAuth"
-                  element={
-                    <LNURLAuth
-                      details={
-                        this.state.args
-                          ?.lnurlDetails as LNURLAuthServiceResponse
-                      }
-                      origin={this.state.origin}
-                    />
-                  }
-                />
-                <Route
-                  path="lnurlPay"
-                  element={
-                    <LNURLPay
-                      details={
-                        this.state.args?.lnurlDetails as LNURLPayServiceResponse
-                      }
-                      origin={this.state.origin}
-                    />
-                  }
-                />
-                <Route
-                  path="lnurlWithdraw"
-                  element={
-                    <LNURLWithdraw
-                      details={
-                        this.state.args
-                          ?.lnurlDetails as LNURLWithdrawServiceResponse
-                      }
-                      origin={this.state.origin}
-                    />
-                  }
-                />
-                <Route
-                  path="makeInvoice"
-                  element={
-                    <MakeInvoice
-                      invoiceAttributes={
-                        this.state.args.invoiceAttributes as RequestInvoiceArgs
-                      }
-                      origin={this.state.origin}
-                    />
-                  }
-                />
-                <Route
-                  path="confirmPayment"
-                  element={
-                    <ConfirmPayment
-                      paymentRequest={this.state.args?.paymentRequest as string}
-                      origin={this.state.origin}
-                    />
-                  }
-                />
-                <Route
-                  path="confirmKeysend"
-                  element={
-                    <Keysend
-                      destination={this.state.args?.destination as string}
-                      valueSat={this.state.args?.amount as string}
-                      customRecords={
-                        this.state.args?.customRecords as Record<string, string>
-                      }
-                      origin={this.state.origin}
-                    />
-                  }
-                />
-                <Route
-                  path="confirmSignMessage"
-                  element={
-                    <ConfirmSignMessage
-                      message={this.state.args?.message as string}
-                      origin={this.state.origin}
-                    />
-                  }
-                />
-              </Route>
-              <Route path="unlock" element={<Unlock />} />
-            </Routes>
-          </HashRouter>
-        </AccountsProvider>
-      </AuthProvider>
-    );
-  }
+              />
+              <Route
+                path="lnurlPay"
+                element={
+                  <LNURLPay
+                    details={
+                      routeParams.args?.lnurlDetails as LNURLPayServiceResponse
+                    }
+                    origin={routeParams.origin}
+                  />
+                }
+              />
+              <Route
+                path="lnurlWithdraw"
+                element={
+                  <LNURLWithdraw
+                    details={
+                      routeParams.args
+                        ?.lnurlDetails as LNURLWithdrawServiceResponse
+                    }
+                    origin={routeParams.origin}
+                  />
+                }
+              />
+              <Route
+                path="makeInvoice"
+                element={
+                  <MakeInvoice
+                    invoiceAttributes={
+                      routeParams.args.invoiceAttributes as RequestInvoiceArgs
+                    }
+                    origin={routeParams.origin}
+                  />
+                }
+              />
+              <Route
+                path="confirmPayment"
+                element={
+                  <ConfirmPayment
+                    paymentRequest={routeParams.args?.paymentRequest as string}
+                    origin={routeParams.origin}
+                  />
+                }
+              />
+              <Route
+                path="confirmKeysend"
+                element={
+                  <Keysend
+                    destination={routeParams.args?.destination as string}
+                    valueSat={routeParams.args?.amount as string}
+                    customRecords={
+                      routeParams.args?.customRecords as Record<string, string>
+                    }
+                    origin={routeParams.origin}
+                  />
+                }
+              />
+              <Route
+                path="confirmSignMessage"
+                element={
+                  <ConfirmSignMessage
+                    message={routeParams.args?.message as string}
+                    origin={routeParams.origin}
+                  />
+                }
+              />
+            </Route>
+            <Route path="unlock" element={<Unlock />} />
+          </Routes>
+        </HashRouter>
+      </AccountsProvider>
+    </AuthProvider>
+  );
 }
 
 const Layout = () => {
@@ -158,20 +151,24 @@ const Layout = () => {
 
   return (
     <>
-      <Navbar
-        title={
-          typeof auth.account?.name === "string"
-            ? `${auth.account?.name} - ${auth.account?.alias}`
-            : ""
-        }
-        subtitle={
-          typeof auth.account?.balance === "number"
-            ? `${auth.account.balance} sat`
-            : ""
-        }
-        showAccountMenuOptions={false}
-        showUserMenu={false}
-      />
+      <div className="px-4 py-2 bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-gray-500">
+        <AccountMenu
+          title={
+            typeof auth.account?.name === "string"
+              ? `${auth.account?.name} - ${auth.account?.alias}`.substring(
+                  0,
+                  21
+                )
+              : ""
+          }
+          subtitle={
+            typeof auth.account?.balance === "number"
+              ? `${auth.account.balance} sat`
+              : ""
+          }
+          showOptions={false}
+        />
+      </div>
 
       <Outlet />
     </>

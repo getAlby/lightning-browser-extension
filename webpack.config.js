@@ -8,6 +8,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 // init env variables otherwise the EnvironmentPlugin complains if those are not set.
 if (!process.env.FAUCET_URL) {
@@ -84,6 +85,7 @@ var options = {
       assert: "assert",
       stream: "stream-browserify",
     },
+    plugins: [new TsconfigPathsPlugin()],
   },
 
   module: {

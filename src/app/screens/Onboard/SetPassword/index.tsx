@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import TextField from "../../../components/form/TextField";
-import Button from "../../../components/Button";
+import TextField from "@components/form/TextField";
+import Button from "@components/Button";
 import { useNavigate } from "react-router-dom";
-import utils from "../../../../common/lib/utils";
+import utils from "~/common/lib/utils";
 
 const initialFormData = Object.freeze({
   password: "",
@@ -64,7 +64,7 @@ export default function SetPassword() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-gray-800 py-12 px-10">
+      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-surface-02dp py-12 px-10">
         <div className="lg:w-1/2">
           <h1 className="text-2xl font-bold dark:text-white">
             Protect your wallet

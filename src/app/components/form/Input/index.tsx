@@ -4,6 +4,7 @@ import { classNames } from "../../../utils";
 
 type Props = {
   suffix?: string;
+  endAdornment?: React.ReactNode;
 };
 
 export default function Input({
@@ -24,10 +25,11 @@ export default function Input({
   min,
   max,
   suffix,
+  endAdornment,
 }: React.InputHTMLAttributes<HTMLInputElement> & Props) {
   const inputEl = useRef<HTMLInputElement>(null);
   const outerStyles =
-    "shadow-sm rounded-md border border-gray-300 dark:bg-gray-200 focus:ring-orange-bitcoin focus:border-orange-bitcoin focus:ring-1 transition duration-300";
+    "shadow-sm rounded-md border border-gray-300 dark:border-gray-800 bg-white dark:bg-black transition duration-300";
 
   const inputNode = (
     <input
@@ -36,8 +38,10 @@ export default function Input({
       name={name}
       id={id}
       className={classNames(
-        "sm:text-sm block w-full placeholder-gray-400 dark:placeholder-gray-600 dark:text-black",
-        !suffix ? outerStyles : "border-0 focus:ring-0"
+        "block w-full placeholder-gray-500 dark:placeholder-gray-600 dark:text-white",
+        !suffix && !endAdornment
+          ? `${outerStyles} focus:ring-orange-bitcoin focus:border-orange-bitcoin focus:dark:border-orange-bitcoin focus:ring-1`
+          : "pr-0 border-0 focus:ring-0 bg-transparent"
       )}
       placeholder={placeholder}
       required={required}
@@ -55,24 +59,32 @@ export default function Input({
     />
   );
 
-  if (!suffix) return inputNode;
+  if (!suffix && !endAdornment) return inputNode;
 
   return (
     <div
       className={classNames(
         "flex items-stretch overflow-hidden",
-        outerStyles.replace(/focus/g, "focus-within")
+        "focus-within:ring-orange-bitcoin focus-within:border-orange-bitcoin focus-within:dark:border-orange-bitcoin focus-within:ring-1",
+        outerStyles
       )}
     >
       {inputNode}
-      <span
-        className="flex items-center pr-3 font-medium"
-        onClick={() => {
-          inputEl.current?.focus();
-        }}
-      >
-        {suffix}
-      </span>
+      {suffix && (
+        <span
+          className="flex items-center px-3 font-medium bg-white dark:bg-surface-00dp dark:text-white"
+          onClick={() => {
+            inputEl.current?.focus();
+          }}
+        >
+          {suffix}
+        </span>
+      )}
+      {endAdornment && (
+        <span className="flex items-center bg-white dark:bg-black">
+          {endAdornment}
+        </span>
+      )}
     </div>
   );
 }

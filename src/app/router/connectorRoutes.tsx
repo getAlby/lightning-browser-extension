@@ -9,17 +9,18 @@ import umbrel from "/static/assets/icons/umbrel.png";
 import start9 from "/static/assets/icons/start9.png";
 import citadel from "/static/assets/icons/citadel.png";
 import mynode from "/static/assets/icons/mynode.png";
-
-import ConnectLnd from "../screens/connectors/ConnectLnd";
-import ConnectLndHub from "../screens/connectors/ConnectLndHub";
-import ConnectLnbits from "../screens/connectors/ConnectLnbits";
-import ConnectGaloy, { galoyUrls } from "../screens/connectors/ConnectGaloy";
-import ConnectEclair from "../screens/connectors/ConnectEclair";
-import ConnectCitadel from "../screens/connectors/ConnectCitadel";
-import NewWallet from "../screens/connectors/NewWallet";
-import ConnectUmbrel from "../screens/connectors/ConnectUmbrel";
-import ConnectStart9 from "../screens/connectors/ConnectStart9";
-import ConnectMyNode from "../screens/connectors/ConnectMyNode";
+import raspiblitz from "/static/assets/icons/raspiblitz.png";
+import ConnectLnd from "@screens/connectors/ConnectLnd";
+import ConnectLndHub from "@screens/connectors/ConnectLndHub";
+import ConnectLnbits from "@screens/connectors/ConnectLnbits";
+import ConnectGaloy, { galoyUrls } from "@screens/connectors/ConnectGaloy";
+import ConnectEclair from "@screens/connectors/ConnectEclair";
+import ConnectCitadel from "@screens/connectors/ConnectCitadel";
+import NewWallet from "@screens/connectors/NewWallet";
+import ConnectRaspiBlitz from "@screens/connectors/ConnectRaspiBlitz";
+import ConnectUmbrel from "@screens/connectors/ConnectUmbrel";
+import ConnectStart9 from "@screens/connectors/ConnectStart9";
+import ConnectMyNode from "@screens/connectors/ConnectMyNode";
 
 const galoyPaths: { [key: string]: keyof typeof galoyUrls } = {
   bitcoinBeach: "galoy-bitcoin-beach",
@@ -89,6 +90,13 @@ export default [
     title: "Start9",
     description: "Connect to your Embassy",
     logo: start9,
+  },
+  {
+    path: "raspiblitz",
+    element: <ConnectRaspiBlitz />,
+    title: "RaspiBlitz",
+    description: "Connect to your RaspiBlitz",
+    logo: raspiblitz,
   },
   {
     path: galoyPaths.bitcoinBeach,

@@ -1,18 +1,18 @@
-import { parsePaymentRequest } from "invoices";
 import { useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import lightningPayReq from "bolt11";
 
-import msg from "../../../common/lib/msg";
-import utils from "../../../common/lib/utils";
-import getOriginData from "../../../extension/content-script/originData";
-import type { OriginData } from "../../../types";
+import msg from "~/common/lib/msg";
+import utils from "~/common/lib/utils";
+import getOriginData from "~/extension/content-script/originData";
+import type { OriginData } from "~/types";
 
-import PaymentSummary from "../../components/PaymentSummary";
-import PublisherCard from "../../components/PublisherCard";
-import { useAuth } from "../../context/AuthContext";
-import BudgetControl from "../../components/BudgetControl";
-import ConfirmOrCancel from "../../components/ConfirmOrCancel";
-import SuccessMessage from "../../components/SuccessMessage";
+import PaymentSummary from "@components/PaymentSummary";
+import PublisherCard from "@components/PublisherCard";
+import { useAuth } from "~/app/context/AuthContext";
+import BudgetControl from "@components/BudgetControl";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import SuccessMessage from "@components/SuccessMessage";
 
 export type Props = {
   origin?: OriginData;
@@ -24,17 +24,16 @@ function ConfirmPayment(props: Props) {
   const navigate = useNavigate();
   const auth = useAuth();
   const invoiceRef = useRef(
-    parsePaymentRequest({
-      request:
-        props.paymentRequest || (searchParams.get("paymentRequest") as string),
-    })
+    lightningPayReq.decode(
+      props.paymentRequest || (searchParams.get("paymentRequest") as string)
+    )
   );
   const originRef = useRef(props.origin || getOriginData());
   const paymentRequestRef = useRef(
     props.paymentRequest || searchParams.get("paymentRequest")
   );
   const [budget, setBudget] = useState(
-    ((invoiceRef.current?.tokens || 0) * 10).toString()
+    ((invoiceRef.current?.satoshis || 0) * 10).toString()
   );
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -94,8 +93,8 @@ function ConfirmPayment(props: Props) {
           <>
             <div className="mb-8">
               <PaymentSummary
-                amount={invoiceRef.current?.tokens}
-                description={invoiceRef.current?.description}
+                amount={invoiceRef.current?.satoshis}
+                description={invoiceRef.current?.tagsObject.description}
               />
             </div>
 

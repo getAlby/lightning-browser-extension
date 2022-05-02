@@ -1,14 +1,10 @@
 import { MemoryRouter } from "react-router-dom";
 import { Meta } from "@storybook/react/types-6-0";
 
+import { AccountsProvider } from "~/app/context/AccountsContext";
 import AcountMenu from ".";
 
-export const Default = () => (
-  <div className="relative bg-gray-100 w-40 flex justify-between pl-3 rounded-md">
-    <span>Wallet</span>
-    <AcountMenu />
-  </div>
-);
+export const Default = () => <AcountMenu title="node" subtitle="1000 sats" />;
 
 const metadata: Meta = {
   title: "Components/AcountMenu",
@@ -16,7 +12,9 @@ const metadata: Meta = {
   decorators: [
     (Story) => (
       <MemoryRouter>
-        <Story />
+        <AccountsProvider>
+          <Story />
+        </AccountsProvider>
       </MemoryRouter>
     ),
   ],

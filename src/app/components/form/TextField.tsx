@@ -3,6 +3,7 @@ import Input from "./Input";
 type Props = {
   label: string;
   suffix?: string;
+  endAdornment?: React.ReactNode;
 };
 
 const TextField = ({
@@ -25,11 +26,12 @@ const TextField = ({
   min,
   max,
   suffix,
+  endAdornment,
 }: React.InputHTMLAttributes<HTMLInputElement> & Props) => (
   <>
     <label
       htmlFor={id}
-      className="block font-medium text-gray-700 dark:text-white"
+      className="block font-medium text-gray-800 dark:text-white"
     >
       {label}
     </label>
@@ -54,6 +56,7 @@ const TextField = ({
         min={min}
         max={max}
         suffix={suffix}
+        endAdornment={endAdornment}
       />
     </div>
   </>

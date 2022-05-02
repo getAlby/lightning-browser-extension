@@ -1,4 +1,4 @@
-import { classNames } from "../../utils/index";
+import { classNames } from "~/app/utils/index";
 import Loading from "../Loading";
 
 export type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -31,9 +31,9 @@ export default function Button({
         fullWidth ? "px-0 py-2" : "px-7 py-2",
         primary
           ? "bg-orange-bitcoin text-white border border-transparent"
-          : `bg-white text-gray-700 border border-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-500`,
+          : `bg-white text-gray-700 border border-gray-300 dark:bg-surface-02dp dark:text-gray-200 dark:border-gray-800`,
         primary && !disabled && "hover:bg-orange-bitcoin-700",
-        !primary && !disabled && "hover:bg-gray-100 dark:hover:bg-gray-600",
+        !primary && !disabled && "hover:bg-gray-100 dark:hover:bg-surface-16dp",
         disabled ? "cursor-default opacity-60" : "cursor-pointer",
         "inline-flex justify-center items-center font-medium rounded-md shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-bitcoin transition duration-150"
       )}

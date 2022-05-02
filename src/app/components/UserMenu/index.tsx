@@ -9,8 +9,8 @@ import {
   QuestionIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 
-import utils from "../../../common/lib/utils";
-import { useAuth } from "../../context/AuthContext";
+import utils from "~/common/lib/utils";
+import { useAuth } from "~/app/context/AuthContext";
 import Menu from "../Menu";
 
 export default function UserMenu() {
@@ -40,7 +40,7 @@ export default function UserMenu() {
 
   return (
     <Menu as="div" className="relative">
-      <Menu.Button className="flex items-center text-gray-500 hover:text-black dark:hover:text-white transition-colors duration-200">
+      <Menu.Button className="flex items-center text-gray-700 hover:text-black dark:hover:text-white transition-colors duration-200">
         <MenuIcon className="h-6 w-6" />
       </Menu.Button>
       <Menu.List position="right">
@@ -49,7 +49,7 @@ export default function UserMenu() {
             openOptions("publishers");
           }}
         >
-          <TransactionsIcon className="h-5 w-5 mr-2 text-gray-500" />
+          <TransactionsIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-gray-300" />
           Websites
         </Menu.ItemButton>
         <Menu.ItemButton
@@ -57,7 +57,7 @@ export default function UserMenu() {
             navigate("/send");
           }}
         >
-          <SendIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-500" />
+          <SendIcon className="w-6 h-6 -ml-0.5 mr-2 text-gray-700 dark:text-gray-300" />
           Send
         </Menu.ItemButton>
         <Menu.ItemButton
@@ -65,7 +65,7 @@ export default function UserMenu() {
             navigate("/receive");
           }}
         >
-          <ReceiveIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-500" />
+          <ReceiveIcon className="w-6 h-6 -ml-0.5 mr-2 text-gray-700 dark:text-gray-300" />
           Receive
         </Menu.ItemButton>
         <Menu.ItemButton
@@ -73,7 +73,7 @@ export default function UserMenu() {
             openOptions("settings");
           }}
         >
-          <GearIcon className="h-5 w-5 mr-2 text-gray-500" />
+          <GearIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-gray-300" />
           Settings
         </Menu.ItemButton>
         <Menu.ItemButton
@@ -81,12 +81,12 @@ export default function UserMenu() {
             utils.openUrl("https://feedback.getalby.com");
           }}
         >
-          <QuestionIcon className="h-5 w-5 mr-2 text-gray-500" />
+          <QuestionIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-gray-300" />
           Feedback
         </Menu.ItemButton>
         <Menu.Divider />
         <Menu.ItemButton onClick={lock}>
-          <LockIcon className="h-5 w-5 mr-2 text-gray-500" />
+          <LockIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-gray-300" />
           Lock
         </Menu.ItemButton>
       </Menu.List>

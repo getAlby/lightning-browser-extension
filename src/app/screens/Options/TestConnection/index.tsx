@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import utils from "../../../../common/lib/utils";
-import api from "../../../../common/lib/api";
-import { useAuth } from "../../../context/AuthContext";
-import { useAccounts } from "../../../context/AccountsContext";
+import utils from "~/common/lib/utils";
+import api from "~/common/lib/api";
+import { useAuth } from "~/app/context/AuthContext";
+import { useAccounts } from "~/app/context/AccountsContext";
 
-import Button from "../../../components/Button";
-import Card from "../../../components/Card";
-import Loading from "../../../components/Loading";
+import Button from "@components/Button";
+import Card from "@components/Card";
+import Loading from "@components/Loading";
 
 export default function TestConnection() {
   const auth = useAuth();
@@ -67,7 +67,7 @@ export default function TestConnection() {
 
   return (
     <div>
-      <div className="relative lg:mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white dark:bg-gray-800 px-10 py-12">
+      <div className="relative lg:mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white dark:bg-surface-02dp px-10 py-12">
         <div className="relative">
           <div>
             {errorMessage && (

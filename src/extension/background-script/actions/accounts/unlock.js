@@ -1,4 +1,4 @@
-import { decryptData } from "../../../../common/lib/crypto";
+import { decryptData } from "~/common/lib/crypto";
 import state from "../../state";
 
 const unlock = (message, sender) => {
