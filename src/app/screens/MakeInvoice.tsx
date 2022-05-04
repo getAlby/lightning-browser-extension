@@ -107,7 +107,7 @@ function MakeInvoice({
                 </>
               )}
               {!amountEditable && (
-                <dl className="bg-white dark:bg-surface-02dp pt-4 overflow-hidden">
+                <dl className="dark:bg-surface-02dp pt-4 overflow-hidden">
                   <Dt>Amount</Dt>
                   <Dd>{invoiceAttributes.amount}</Dd>
                 </dl>
@@ -124,7 +124,7 @@ function MakeInvoice({
                 />
               )}
               {!memoEditable && (
-                <dl className="bg-white dark:bg-surface-02dp overflow-hidden">
+                <dl className="dark:bg-surface-02dp overflow-hidden">
                   <Dt>Memo</Dt>
                   <Dd>{invoiceAttributes.memo}</Dd>
                 </dl>
