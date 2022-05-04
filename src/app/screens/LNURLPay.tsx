@@ -32,11 +32,11 @@ type Props = {
 };
 
 const Dt = ({ children }: { children: React.ReactNode }) => (
-  <dt className="font-medium text-gray-500">{children}</dt>
+  <dt className="font-medium text-gray-800 dark:text-white">{children}</dt>
 );
 
 const Dd = ({ children }: { children: React.ReactNode }) => (
-  <dd className="mb-4 dark:text-white">{children}</dd>
+  <dd className="mb-4 dark:text-gray-400">{children}</dd>
 );
 
 function LNURLPay(props: Props) {
@@ -311,7 +311,7 @@ function LNURLPay(props: Props) {
       <div className="p-4 max-w-screen-sm mx-auto">
         {!successAction ? (
           <>
-            <div className="shadow bg-white dark:bg-surface-02dp py-4 px-4 rounded-lg mb-6 overflow-hidden">
+            <div className="mb-4">
               <dl>
                 {loading || !details ? (
                   <>
