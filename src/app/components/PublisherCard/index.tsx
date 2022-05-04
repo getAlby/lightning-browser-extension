@@ -30,7 +30,7 @@ export default function PublisherCard({
     >
       <div className="flex sm:justify-center items-center">
         <img
-          className="mr-3 w-18 h-18 shrink-0 border-solid border-2 border-white object-cover rounded-full shadow-xl"
+          className="mr-3 w-14 h-14 shrink-0 border-solid border-2 border-white object-cover rounded-full shadow-xl"
           src={image}
           alt=""
           onError={(e) => {

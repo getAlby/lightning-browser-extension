@@ -23,6 +23,15 @@ body {
   font-size: 100%;
 }
 
+main::-webkit-scrollbar { 
+  display: none;
+}
+
+main {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .ReactModal__Overlay {
   opacity: 0;
   transition: opacity 200ms ease;
