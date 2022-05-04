@@ -1,6 +1,8 @@
+import "react-toastify/dist/ReactToastify.css";
 import { useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import lightningPayReq from "bolt11";
+import { ToastContainer, toast } from "react-toastify";
 
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -56,7 +58,7 @@ function ConfirmPayment(props: Props) {
       setSuccessMessage("Success, payment sent!");
     } catch (e) {
       console.error(e);
-      if (e instanceof Error) alert(`Error: ${e.message}`);
+      if (e instanceof Error) toast.error(`Error: ${e.message}`);
     } finally {
       setLoading(false);
     }
@@ -83,6 +85,7 @@ function ConfirmPayment(props: Props) {
 
   return (
     <div>
+      <ToastContainer />
       <PublisherCard
         title={originRef.current.name}
         image={originRef.current.icon}
@@ -106,7 +109,6 @@ function ConfirmPayment(props: Props) {
               budget={budget}
               onBudgetChange={(event) => setBudget(event.target.value)}
             />
-
             <ConfirmOrCancel
               disabled={loading}
               loading={loading}
