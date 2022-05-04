@@ -107,10 +107,10 @@ export default function NewWallet() {
     <ConnectorForm
       title={
         lndHubData.login === ""
-          ? "Get a new lightning wallet"
+          ? "Your Alby Lightning Wallet"
           : "🎉Your account is ready"
       }
-      submitLabel={lndHubData.login ? "Continue" : "Create a wallet"}
+      submitLabel="Continue"
       submitLoading={loading}
       onSubmit={lndHubData.login ? next : signup}
       submitDisabled={password === "" || email === ""}
@@ -146,9 +146,11 @@ export default function NewWallet() {
       ) : (
         <>
           <div className="mt-6 dark:text-white">
-            <strong>Create a getAlby.com account</strong>
-            <br />
-            ...and let us host a lightning wallet for you!
+            <strong>
+              Create or login to your Alby account.
+              <br />
+              We host a Lightning wallet for you!
+            </strong>
           </div>
 
           <div className="mt-6">
