@@ -34,7 +34,7 @@ export default function TestConnection() {
     // show an error message after 45 seconds. Then probably something is wrong
     const timer = setTimeout(() => {
       setErrorMessage(
-        "Trying to connect takes longer than expected... Are you details correct? Is your node reachable?"
+        "Trying to connect takes longer than expected... Are your details correct? Is your node reachable?"
       );
     }, 45000);
     try {

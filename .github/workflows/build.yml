@@ -10,9 +10,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      FAUCET_URL: ${{ secrets.FAUCET_URL }}
-      FAUCET_K: ${{ secrets.FAUCET_K }}
 
     name: build-prod
 
