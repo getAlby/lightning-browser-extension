@@ -99,8 +99,8 @@ function Prompt() {
                 path="makeInvoice"
                 element={
                   <MakeInvoice
-                    amountDisabled={routeParams.args.amountDisabled as boolean}
-                    memoDisabled={routeParams.args.memoDisabled as boolean}
+                    amountEditable={routeParams.args.amountEditable as boolean}
+                    memoEditable={routeParams.args.memoEditable as boolean}
                     invoiceAttributes={
                       routeParams.args.invoiceAttributes as RequestInvoiceArgs
                     }

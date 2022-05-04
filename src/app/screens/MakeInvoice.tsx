@@ -15,15 +15,23 @@ type Origin = {
 };
 
 type Props = {
-  amountDisabled: boolean;
-  memoDisabled: boolean;
+  amountEditable: boolean;
+  memoEditable: boolean;
   invoiceAttributes: RequestInvoiceArgs;
   origin: Origin;
 };
 
+const Dt = ({ children }: { children: React.ReactNode }) => (
+  <dt className="font-medium text-gray-500">{children}</dt>
+);
+
+const Dd = ({ children }: { children: React.ReactNode }) => (
+  <dd className="mb-4 dark:text-white">{children}</dd>
+);
+
 function MakeInvoice({
-  amountDisabled,
-  memoDisabled,
+  amountEditable,
+  memoEditable,
   invoiceAttributes,
   origin,
 }: Props) {
@@ -84,31 +92,43 @@ function MakeInvoice({
               {origin.host} requests an invoice:
             </p>
             <div>
-              <TextField
-                id="amount"
-                label="Amount"
-                type="number"
-                min={invoiceAttributes.minimumAmount}
-                max={invoiceAttributes.maximumAmount}
-                value={value}
-                disabled={amountDisabled}
-                onChange={(e) => handleValueChange(e.target.value)}
-              />
-              {!amountDisabled &&
-                invoiceAttributes.minimumAmount &&
-                invoiceAttributes.maximumAmount && (
+              {amountEditable && (
+                <>
+                  <TextField
+                    id="amount"
+                    label="Amount"
+                    type="number"
+                    min={invoiceAttributes.minimumAmount}
+                    max={invoiceAttributes.maximumAmount}
+                    value={value}
+                    onChange={(e) => handleValueChange(e.target.value)}
+                  />
                   <SatButtons onClick={handleValueChange} />
-                )}
+                </>
+              )}
+              {!amountEditable && (
+                <dl className="bg-white dark:bg-surface-02dp pt-4 overflow-hidden">
+                  <Dt>Amount</Dt>
+                  <Dd>{invoiceAttributes.amount}</Dd>
+                </dl>
+              )}
               {error && <p className="mt-1 text-red-500">{error}</p>}
             </div>
-            <div className="mt-4">
-              <TextField
-                id="memo"
-                label="Description"
-                value={memo}
-                disabled={memoDisabled}
-                onChange={handleMemoChange}
-              />
+            <div>
+              {memoEditable && (
+                <TextField
+                  id="memo"
+                  label="Memo"
+                  value={memo}
+                  onChange={handleMemoChange}
+                />
+              )}
+              {!memoEditable && (
+                <dl className="bg-white dark:bg-surface-02dp overflow-hidden">
+                  <Dt>Memo</Dt>
+                  <Dd>{invoiceAttributes.memo}</Dd>
+                </dl>
+              )}
             </div>
           </div>
         </div>
