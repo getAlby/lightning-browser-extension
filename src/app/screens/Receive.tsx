@@ -8,17 +8,17 @@ import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import QRCode from "react-qr-code";
 import Confetti from "react-confetti";
 
-import utils from "../../common/lib/utils";
-import api from "../../common/lib/api";
-import { poll } from "../../common/utils/helpers";
-import { useAuth } from "../context/AuthContext";
+import utils from "~/common/lib/utils";
+import api from "~/common/lib/api";
+import { poll } from "~/common/utils/helpers";
+import { useAuth } from "~/app/context/AuthContext";
 
-import Button from "../components/Button";
-import IconButton from "../components/IconButton";
-import TextField from "../components/form/TextField";
-// import Select from "../components/Form/Select";
-import Header from "../components/Header";
-import Loading from "../components/Loading";
+import Button from "@components/Button";
+import IconButton from "@components/IconButton";
+import TextField from "@components/form/TextField";
+// import Select from "@components/Form/Select";
+import Header from "@components/Header";
+import Loading from "@components/Loading";
 
 function Receive() {
   const auth = useAuth();
@@ -29,8 +29,10 @@ function Receive() {
     expiration: "",
   });
   const [loading, setLoading] = useState(false);
-  const [invoice, setInvoice] =
-    useState<{ paymentRequest: string; rHash: string }>();
+  const [invoice, setInvoice] = useState<{
+    paymentRequest: string;
+    rHash: string;
+  }>();
   const [copyLabel, setCopyLabel] = useState("Copy");
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
@@ -223,11 +225,7 @@ function Receive() {
                   fullWidth
                   primary
                   loading={loading}
-                  disabled={
-                    loading ||
-                    formData.amount === "" ||
-                    formData.description === ""
-                  }
+                  disabled={loading || formData.amount === ""}
                 />
               </div>
             </div>

@@ -1,6 +1,5 @@
-import type { Message } from "../../../../types";
-import lnurlLib from "../../../../common/lib/lnurl";
-
+import type { Message } from "~/types";
+import lnurlLib from "~/common/lib/lnurl";
 import authWithPrompt from "./auth";
 import payWithPrompt from "./pay";
 import withdrawWithPrompt from "./withdraw";

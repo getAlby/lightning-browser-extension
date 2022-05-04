@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import utils from "../../../../common/lib/utils";
+import utils from "~/common/lib/utils";
 
-import ConnectorForm from "../../../components/ConnectorForm";
-import TextField from "../../../components/form/TextField";
-import CompanionDownloadInfo from "../../../components/CompanionDownloadInfo";
+import ConnectorForm from "@components/ConnectorForm";
+import TextField from "@components/form/TextField";
+import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 
 const initialFormData = Object.freeze({
   url: "",
@@ -103,6 +103,7 @@ export default function ConnectUmbrel() {
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
+      video="https://cdn.getalby-assets.com/connector-guides/in_extension_guide_umbrel.mp4"
     >
       <TextField
         id="lndconnect"

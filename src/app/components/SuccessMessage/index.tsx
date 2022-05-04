@@ -8,7 +8,7 @@ type Props = {
 function SuccessMessage({ message, onClose }: Props) {
   return (
     <>
-      <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+      <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
         <dt className="text-sm font-semibold text-gray-500">Message</dt>
         <dd className="text-sm mb-4 dark:text-white break-all">{message}</dd>
       </dl>

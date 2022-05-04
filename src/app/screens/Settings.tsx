@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 
-import api from "../../common/lib/api";
-
-import { SettingsStorage } from "../../types";
-
-import Container from "../components/Container";
-import Button from "../components/Button";
-import Toggle from "../components/form/Toggle";
-import Input from "../components/form/Input";
-import Setting from "../components/Setting";
+import api from "~/common/lib/api";
+import { SettingsStorage } from "~/types";
+import { getTheme } from "~/app/utils";
+import Container from "@components/Container";
+import Button from "@components/Button";
+import Toggle from "@components/form/Toggle";
+import Input from "@components/form/Input";
+import Setting from "@components/Setting";
+import Select from "@components/form/Select";
+import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
 
 function Settings() {
   const [loading, setLoading] = useState(true);
@@ -18,6 +19,8 @@ function Settings() {
     legacyLnurlAuth: false,
     userName: "",
     userEmail: "",
+    locale: "",
+    theme: "system",
   });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
@@ -41,7 +44,7 @@ function Settings() {
       <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
         Settings
       </h2>
-      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y dark:bg-gray-800">
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting
           title="Website enhancements"
           subtitle="Tipping enhancements for Twitter, YouTube, etc."
@@ -73,6 +76,7 @@ function Settings() {
             />
           )}
         </Setting>
+
         <Setting
           title="User Display Name"
           subtitle="For sending along with LNURL payments when supported"
@@ -128,6 +132,36 @@ function Settings() {
             />
           ) : (
             <p className="text-green-500 font-medium">Permission granted</p>
+          )}
+        </Setting>
+
+        <Setting
+          title="Language"
+          subtitle="Alby goes international! help us translate Alby in your language"
+        >
+          <div className="w-32">
+            <LocaleSwitcher />
+          </div>
+        </Setting>
+
+        <Setting title="Theme" subtitle="Change the app theme to dark or light">
+          {!loading && (
+            <div className="w-64">
+              <Select
+                name="theme"
+                value={settings.theme}
+                onChange={async (ev) => {
+                  await saveSetting({
+                    theme: ev.target.value,
+                  });
+                  getTheme(); // Get the active theme and apply corresponding Tailwind classes to the document
+                }}
+              >
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+                <option value="system">System</option>
+              </Select>
+            </div>
           )}
         </Setting>
       </div>

@@ -1,13 +1,13 @@
 import { useState, useRef } from "react";
 
-import ConfirmOrCancel from "../../components/ConfirmOrCancel";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
 //import Checkbox from "../../components/Form/Checkbox";
-import PublisherCard from "../../components/PublisherCard";
-import msg from "../../../common/lib/msg";
-import utils from "../../../common/lib/utils";
-import getOriginData from "../../../extension/content-script/originData";
-import type { OriginData } from "../../../types";
-import SuccessMessage from "../../components/SuccessMessage";
+import PublisherCard from "@components/PublisherCard";
+import msg from "~/common/lib/msg";
+import utils from "~/common/lib/utils";
+import getOriginData from "~/extension/content-script/originData";
+import type { OriginData } from "~/types";
+import SuccessMessage from "@components/SuccessMessage";
 
 type Props = {
   origin: OriginData;
@@ -62,7 +62,7 @@ function ConfirmSignMessage(props: Props) {
       <div className="p-4 max-w-screen-sm mx-auto">
         {!succesMessage ? (
           <>
-            <dl className="shadow bg-white dark:bg-gray-700 p-4 rounded-lg mb-8">
+            <dl className="shadow bg-white dark:bg-surface-02dp p-4 rounded-lg mb-8">
               <dt className="font-semibold text-gray-500">
                 {originRef.current.host} asks you to sign:
               </dt>

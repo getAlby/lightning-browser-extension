@@ -1,19 +1,17 @@
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 
-import { useAuth } from "../../context/AuthContext";
-
-import Home from "../../screens/Home";
-import Unlock from "../../screens/Unlock";
-import Send from "../../screens/Send";
-import Receive from "../../screens/Receive";
-import LNURLPay from "../../screens/LNURLPay";
-import ConfirmPayment from "../../screens/ConfirmPayment";
-
-import { AuthProvider } from "../../context/AuthContext";
-import { AccountsProvider } from "../../context/AccountsContext";
+import { useAuth } from "~/app/context/AuthContext";
+import Home from "@screens/Home";
+import Unlock from "@screens/Unlock";
+import Send from "@screens/Send";
+import Receive from "@screens/Receive";
+import LNURLPay from "@screens/LNURLPay";
+import ConfirmPayment from "@screens/ConfirmPayment";
+import { AuthProvider } from "~/app/context/AuthContext";
+import { AccountsProvider } from "~/app/context/AccountsContext";
 import RequireAuth from "../RequireAuth";
-import Navbar from "../../components/Navbar";
-import Keysend from "../../screens/Keysend";
+import Navbar from "@components/Navbar";
+import Keysend from "@screens/Keysend";
 
 const POPUP_MAX_HEIGHT = 600;
 
@@ -64,9 +62,9 @@ const Layout = () => {
         }
       />
 
-      <div className="overflow-y-auto grow">
+      <main className="overflow-y-auto grow">
         <Outlet />
-      </div>
+      </main>
     </div>
   );
 };

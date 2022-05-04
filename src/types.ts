@@ -126,6 +126,11 @@ export interface LNURLPaymentInfo {
   successAction?: LNURLPaymentSuccessAction;
 }
 
+export interface LNURLPaymentInfoError {
+  status: string;
+  reason: string;
+}
+
 export interface RequestInvoiceArgs {
   amount?: string | number;
   defaultAmount?: string | number;
@@ -156,6 +161,7 @@ export type Transaction = {
   preimage: string;
   badges: IBadge[];
   totalAmount: string;
+  totalFees: string;
   description: string;
   location: string;
 };
@@ -189,4 +195,6 @@ export interface SettingsStorage {
   legacyLnurlAuth: boolean;
   userName: string;
   userEmail: string;
+  locale: string;
+  theme: string;
 }

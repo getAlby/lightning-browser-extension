@@ -1,11 +1,11 @@
 import { useState } from "react";
-import TextField from "../../../components/form/TextField";
 import { useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";
 
-import utils from "../../../../common/lib/utils";
+import utils from "~/common/lib/utils";
 
-import ConnectorForm from "../../../components/ConnectorForm";
+import TextField from "@components/form/TextField";
+import ConnectorForm from "@components/ConnectorForm";
 
 const walletCreateUrl =
   process.env.WALLET_CREATE_URL || "https://getalby.com/api/users";
@@ -177,7 +177,7 @@ export default function NewWallet() {
             />
           </div>
           <div className="mt-6">
-            <p className="mb-2 text-gray-500 dark:text-gray-400">
+            <p className="mb-2 text-gray-700 dark:text-gray-400">
               Your Alby account also comes with an optional{" "}
               <a
                 className="underline"

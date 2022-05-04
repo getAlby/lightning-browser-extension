@@ -3,23 +3,25 @@ import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import {
+  LNURLPaymentInfoError,
   LNURLPaymentInfo,
   LNURLPaymentSuccessAction,
   LNURLPayServiceResponse,
   Payment,
-} from "../../types";
-import api from "../../common/lib/api";
-import msg from "../../common/lib/msg";
-import utils from "../../common/lib/utils";
-import lnurl from "../../common/lib/lnurl";
-import getOriginData from "../../extension/content-script/originData";
-import { useAuth } from "../context/AuthContext";
+} from "~/types";
 
-import Button from "../components/Button";
-import TextField from "../components/form/TextField";
-import PublisherCard from "../components/PublisherCard";
-import ConfirmOrCancel from "../components/ConfirmOrCancel";
-import SatButtons from "../components/SatButtons";
+import api from "~/common/lib/api";
+import msg from "~/common/lib/msg";
+import utils from "~/common/lib/utils";
+import lnurl from "~/common/lib/lnurl";
+import getOriginData from "~/extension/content-script/originData";
+import { useAuth } from "~/app/context/AuthContext";
+
+import Button from "@components/Button";
+import TextField from "@components/form/TextField";
+import PublisherCard from "@components/PublisherCard";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import SatButtons from "@components/SatButtons";
 
 type Origin = {
   name: string;
@@ -32,11 +34,11 @@ type Props = {
 };
 
 const Dt = ({ children }: { children: React.ReactNode }) => (
-  <dt className="font-medium text-gray-500">{children}</dt>
+  <dt className="font-medium text-gray-800 dark:text-white">{children}</dt>
 );
 
 const Dd = ({ children }: { children: React.ReactNode }) => (
-  <dd className="mb-4 dark:text-white">{children}</dd>
+  <dd className="mb-4 text-gray-600 dark:text-gray-500">{children}</dd>
 );
 
 function LNURLPay(props: Props) {
@@ -126,14 +128,36 @@ function LNURLPay(props: Props) {
         comment, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/12.md
         payerdata, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/18.md
       };
-      // TODO: handle errors
-      const { data: paymentInfo } = await axios.get<LNURLPaymentInfo>(
-        details.callback,
-        {
-          params,
+
+      let response;
+
+      try {
+        response = await axios.get<LNURLPaymentInfo | LNURLPaymentInfoError>(
+          details.callback,
+          {
+            params,
+            // https://github.com/fiatjaf/lnurl-rfc/blob/luds/01.md#http-status-codes-and-content-type
+            validateStatus: () => true,
+          }
+        );
+
+        const isSuccessResponse = function (
+          obj: LNURLPaymentInfo | LNURLPaymentInfoError
+        ): obj is LNURLPaymentInfo {
+          return Object.prototype.hasOwnProperty.call(obj, "pr");
+        };
+
+        if (!isSuccessResponse(response.data)) {
+          throw new Error(response.data.reason);
         }
-      );
-      const { pr: paymentRequest } = paymentInfo;
+      } catch (e) {
+        const message = e instanceof Error ? `(${e.message})` : "";
+        alert(`Payment aborted: Could not fetch invoice. ${message}`);
+        return;
+      }
+
+      const paymentInfo = response.data;
+      const paymentRequest = paymentInfo.pr;
 
       const isValidInvoice = lnurl.verifyInvoice({
         paymentInfo,
@@ -142,7 +166,7 @@ function LNURLPay(props: Props) {
         payerdata,
       });
       if (!isValidInvoice) {
-        alert("Payment aborted. Invalid invoice");
+        alert("Payment aborted: Invalid invoice.");
         return;
       }
 
@@ -270,7 +294,7 @@ function LNURLPay(props: Props) {
 
     return (
       <>
-        <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+        <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
           {descriptionList.map(([dt, dd]) => (
             <>
               <Dt>{dt}</Dt>
@@ -297,7 +321,7 @@ function LNURLPay(props: Props) {
       <div className="p-4 max-w-screen-sm mx-auto">
         {!successAction ? (
           <>
-            <div className="shadow bg-white dark:bg-gray-700 py-4 px-4 rounded-lg mb-6 overflow-hidden">
+            <div className="mb-4">
               <dl>
                 {loading || !details ? (
                   <>
