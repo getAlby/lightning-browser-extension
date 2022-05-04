@@ -59,7 +59,6 @@ async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
       // Sign the message and do the authentication request to the service
       authResponse = await auth(lnurlDetails);
     } catch (e) {
-      console.log("LNURL-auth failed");
       console.error(e);
       if (e instanceof Error) {
         PubSub.publish(`lnurl.auth.failed`, {
@@ -165,7 +164,7 @@ async function auth(lnurlDetails: LNURLDetails) {
     return authResponse;
   } catch (e) {
     if (axios.isAxiosError(e)) {
-      console.log("LNURL-AUTH FAIL:", e);
+      console.error("LNURL-AUTH FAIL:", e);
       console.log(e.response?.data);
       const error = e.response?.data?.reason || e.message; // lnurl error or exception message
       throw new Error(error);
