@@ -22,11 +22,11 @@ type Props = {
 };
 
 const Dt = ({ children }: { children: React.ReactNode }) => (
-  <dt className="font-medium text-gray-500">{children}</dt>
+  <dt className="font-medium text-gray-800 dark:text-white">{children}</dt>
 );
 
 const Dd = ({ children }: { children: React.ReactNode }) => (
-  <dd className="mb-4 dark:text-white">{children}</dd>
+  <dd className="mb-4 text-gray-600 dark:text-gray-500">{children}</dd>
 );
 
 function MakeInvoice({
@@ -87,7 +87,7 @@ function MakeInvoice({
 
       <div className="p-4">
         <div className="mb-8">
-          <div className="p-4 shadow bg-white border-gray-200 rounded-lg dark:bg-surface-02dp dark:border-gray-600">
+          <div className="mb-4">
             <p className="font-semibold text-gray-500 mb-4">
               {origin.host} requests an invoice:
             </p>
