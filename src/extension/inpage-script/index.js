@@ -3,6 +3,9 @@ import WebLNProvider from "../ln/webln";
 if (document) {
   window.webln = new WebLNProvider();
 
+  const readyEvent = new Event("webln:ready");
+  document.dispatchEvent(readyEvent);
+
   // Intercept any `lightning:` requests
   window.addEventListener("click", (ev) => {
     const target = ev.target;
@@ -15,6 +18,7 @@ if (document) {
     let href;
     let paymentRequest;
     let lnurl;
+    let link; // used to dispatch a succcess event
 
     if (!lightningLink && !bitcoinLinkWithLighting && !lnurlLink) {
       return;
@@ -24,13 +28,16 @@ if (document) {
     if (lightningLink) {
       href = lightningLink.getAttribute("href").toLowerCase();
       paymentRequest = href.replace("lightning:", "");
+      link = lightningLink;
     } else if (bitcoinLinkWithLighting) {
       href = bitcoinLinkWithLighting.getAttribute("href");
+      link = bitcoinLinkWithLighting;
       const url = new URL(href);
       const query = new URLSearchParams(url.search);
       paymentRequest = query.get("lightning");
     } else if (lnurlLink) {
       href = lnurlLink.getAttribute("href").toLowerCase();
+      link = lnurlLink;
       lnurl = href.replace(/^lnurl[pwc]:/i, "");
     }
 
@@ -53,6 +60,7 @@ if (document) {
         return;
       }
       if (lnurl) {
+        // TODO: dispatch success event
         return window.webln.lnurl(lnurl).catch((e) => {
           console.log(e);
           alert(`Error: ${e.message}`);
@@ -61,8 +69,12 @@ if (document) {
       return window.webln
         .sendPayment(paymentRequest)
         .then((r) => {
-          console.log(r);
-          //alert(JSON.stringify(r));
+          const responseEvent = new CustomEvent("lightning:success", {
+            paymentRequest: paymentRequest,
+            response: r,
+          });
+          document.dispatchEvent(responseEvent);
+          link.dispatchEvent(responseEvent);
         })
         .catch((e) => {
           console.log(e);
