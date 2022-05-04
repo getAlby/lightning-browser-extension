@@ -1,8 +1,8 @@
 import axios, { AxiosRequestConfig, Method } from "axios";
 import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
-import { parsePaymentRequest } from "invoices";
-import HashKeySigner from "../../../common/utils/signer";
+import lightningPayReq from "bolt11";
+import HashKeySigner from "~/common/utils/signer";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
@@ -19,7 +19,7 @@ import Connector, {
   KeysendArgs,
 } from "./connector.interface";
 import state from "../state";
-import utils from "../../../common/lib/utils";
+import utils from "~/common/lib/utils";
 
 interface Config {
   login: string;
@@ -122,10 +122,8 @@ export default class LndHub implements Connector {
     // to somewhat work around this we set a payment route and use the amount from the payment request.
     // lnbits needs to fix this and return proper route information with a total amount and fees
     if (!data.payment_route) {
-      const paymentRequestDetails = parsePaymentRequest({
-        request: args.paymentRequest,
-      });
-      const amountInSats = paymentRequestDetails.tokens;
+      const paymentRequestDetails = lightningPayReq.decode(args.paymentRequest);
+      const amountInSats = paymentRequestDetails.satoshis || 0;
       data.payment_route = { total_amt: amountInSats, total_fees: 0 };
     }
     return {

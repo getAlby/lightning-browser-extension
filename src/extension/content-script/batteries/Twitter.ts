@@ -41,9 +41,13 @@ function getUserData(username: string) {
     const imageUrl = document.querySelector<HTMLImageElement>(
       `[data-testid="primaryColumn"] a[href="/${username}/photo" i] img`
     )?.src;
+    const location = document.querySelector<HTMLElement>(
+      `[data-testid="primaryColumn"] [data-testid="UserLocation"]`
+    );
     if (element && imageUrl) {
       return {
         element,
+        location,
         imageUrl,
         name: document.title,
       };
@@ -84,9 +88,11 @@ function battery(): void {
         recipient = match[1];
       } else {
         // if we did not find anything let's look for an ⚡ emoji
-        const zapElements = userData.element.querySelectorAll(
-          'img[src*="26a1.svg"]'
-        );
+        const zapElements = new Set([
+          ...userData.element.querySelectorAll('img[src*="26a1.svg"]'),
+          ...(userData.location?.querySelectorAll('img[src*="26a1.svg"]') ||
+            []),
+        ]);
         // it is hard to find the :zap: emoij. Twitter uses images for that but has an alt text with the emoij
         // but there could be some control characters somewhere...somehow...no idea...
         // for that reason we check if there is any character with the zap char code in the alt string.

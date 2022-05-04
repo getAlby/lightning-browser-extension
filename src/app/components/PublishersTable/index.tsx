@@ -34,11 +34,11 @@ export default function PublishersTable({
   return (
     <div className="shadow overflow-hidden rounded-lg">
       <table className="min-w-full">
-        <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800">
+        <tbody className="bg-white divide-y divide-gray-200 dark:bg-surface-02dp">
           {publishers.map((publisher) => (
             <tr
               key={publisher.id}
-              className="cursor-pointer hover:bg-gray-50 transition duration-200 dark:hover:bg-gray-700"
+              className="cursor-pointer hover:bg-gray-50 transition duration-200 dark:hover:bg-gray-800"
               onClick={() => navigateToPublisher(publisher.id)}
             >
               <td className="px-4 py-6 whitespace-nowrap">
@@ -68,7 +68,7 @@ export default function PublishersTable({
                         />
                       )}
                     </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                    <div className="text-sm text-gray-700 dark:text-gray-400">
                       {publisher.host} • {publisher.paymentsCount} payments
                     </div>
                   </div>

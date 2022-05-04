@@ -1,5 +1,5 @@
-import { parsePaymentRequest } from "invoices";
-import { render, fireEvent, screen } from "@testing-library/react";
+import lightningPayReq from "bolt11";
+import { render, fireEvent, screen, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import type { Props } from "./index";
 import ConfirmPayment from "./index";
@@ -31,26 +31,32 @@ const props: Props = {
 
 describe("ConfirmPayment", () => {
   test("render", async () => {
-    render(
-      <MemoryRouter>
-        <ConfirmPayment {...props} />
-      </MemoryRouter>
-    );
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <ConfirmPayment {...props} />
+        </MemoryRouter>
+      );
+    });
+
     expect(
       await screen.findByText("Remember and set a budget")
     ).toBeInTheDocument();
   });
 
   test("toggles set budget, displays input with a default budget", async () => {
-    render(
-      <MemoryRouter>
-        <ConfirmPayment {...props} />
-      </MemoryRouter>
-    );
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <ConfirmPayment {...props} />
+        </MemoryRouter>
+      );
+    });
+
     fireEvent.click(screen.getByText("Remember and set a budget"));
+
     const input = await screen.findByLabelText("Budget");
-    expect(input).toHaveValue(
-      parsePaymentRequest({ request: paymentRequest }).tokens * 10
-    );
+    const satoshis = lightningPayReq.decode(paymentRequest).satoshis || 0;
+    expect(input).toHaveValue(satoshis * 10);
   });
 });

@@ -1,7 +1,14 @@
-import ReactDOM from "react-dom";
-import "../../styles/index.css";
+import { createRoot } from "react-dom/client";
+
 import "react-loading-skeleton/dist/skeleton.css";
+import "~/app/styles/index.css";
 
 import Prompt from "./Prompt";
+import { getTheme } from "~/app/utils";
 
-ReactDOM.render(<Prompt />, document.getElementById("prompt-root"));
+// Get the active theme and apply corresponding Tailwind classes to the document
+getTheme();
+
+const container = document.getElementById("prompt-root") as HTMLElement;
+const root = createRoot(container);
+root.render(<Prompt />);

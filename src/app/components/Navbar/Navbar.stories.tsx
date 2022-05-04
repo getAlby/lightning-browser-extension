@@ -1,6 +1,7 @@
 import { MemoryRouter } from "react-router-dom";
 import { Meta } from "@storybook/react/types-6-0";
 
+import { AccountsProvider } from "~/app/context/AccountsContext";
 import Navbar from ".";
 
 const metadata: Meta = {
@@ -9,7 +10,9 @@ const metadata: Meta = {
   decorators: [
     (Story) => (
       <MemoryRouter>
-        <Story />
+        <AccountsProvider>
+          <Story />
+        </AccountsProvider>
       </MemoryRouter>
     ),
   ],

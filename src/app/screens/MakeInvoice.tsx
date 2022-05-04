@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-import ConfirmOrCancel from "../components/ConfirmOrCancel";
-import TextField from "../components/form/TextField";
-import PublisherCard from "../components/PublisherCard";
-import msg from "../../common/lib/msg";
-import type { RequestInvoiceArgs } from "../../types";
-import api from "../../common/lib/api";
-import SatButtons from "../components/SatButtons";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import TextField from "@components/form/TextField";
+import PublisherCard from "@components/PublisherCard";
+import msg from "~/common/lib/msg";
+import type { RequestInvoiceArgs } from "~/types";
+import api from "~/common/lib/api";
+import SatButtons from "@components/SatButtons";
 
 type Origin = {
   name: string;
@@ -79,7 +79,7 @@ function MakeInvoice({
 
       <div className="p-4">
         <div className="mb-8">
-          <div className="p-4 shadow bg-white border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600">
+          <div className="p-4 shadow bg-white border-gray-200 rounded-lg dark:bg-surface-02dp dark:border-gray-600">
             <p className="font-semibold text-gray-500 mb-4">
               {origin.host} requests an invoice:
             </p>

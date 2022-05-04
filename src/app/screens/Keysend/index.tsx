@@ -2,15 +2,15 @@ import { Fragment, useState, MouseEvent } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
-import utils from "../../../common/lib/utils";
-import { useAuth } from "../../context/AuthContext";
+import utils from "~/common/lib/utils";
+import { useAuth } from "~/app/context/AuthContext";
 
-import Input from "../../components/form/Input";
-import Header from "../../components/Header";
-import IconButton from "../../components/IconButton";
-import Button from "../../components/Button";
-import SuccessMessage from "../../components/SuccessMessage";
-import SatButtons from "../../components/SatButtons";
+import Input from "@components/form/Input";
+import Header from "@components/Header";
+import IconButton from "@components/IconButton";
+import Button from "@components/Button";
+import SuccessMessage from "@components/SuccessMessage";
+import SatButtons from "@components/SatButtons";
 
 type Props = {
   destination?: string;
@@ -97,7 +97,7 @@ function Keysend(props: Props) {
       <div className="p-4 max-w-screen-sm mx-auto">
         {!successMessage ? (
           <>
-            <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+            <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
               {elements().map(([t, d], i) => (
                 <Fragment key={`element-${i}`}>
                   <dt className="text-sm font-semibold text-gray-500">{t}</dt>

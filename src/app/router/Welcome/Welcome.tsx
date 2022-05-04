@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-import connectorRoutes from "../connectorRoutes";
-import type { Step } from "../../components/Steps";
-
-import DevMenu from "../../components/DevMenu";
-import Steps from "../../components/Steps";
-import Intro from "../../screens/Onboard/Intro";
-import SetPassword from "../../screens/Onboard/SetPassword";
-import ChooseConnector from "../../screens/connectors/ChooseConnector";
-import TestConnection from "../../screens/Onboard/TestConnection";
+import { AuthProvider } from "~/app/context/AuthContext";
+import connectorRoutes from "~/app/router/connectorRoutes";
+import type { Step } from "@components/Steps";
+import DevMenu from "@components/DevMenu";
+import Steps from "@components/Steps";
+import Intro from "@screens/Onboard/Intro";
+import SetPassword from "@screens/Onboard/SetPassword";
+import ChooseConnector from "@screens/connectors/ChooseConnector";
+import TestConnection from "@screens/Onboard/TestConnection";
+import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
 
 const routes = [
   { path: "/", element: <Intro />, name: "Welcome" },
@@ -48,6 +50,7 @@ function WelcomeRouter() {
 
 function App() {
   const [steps, setSteps] = useState(initialSteps);
+  const { t } = useTranslation(["welcome"]);
   const location = useLocation();
   const routesElement = useRoutes(routes);
 
@@ -71,20 +74,28 @@ function App() {
   }, [location]);
 
   return (
-    <div>
-      {process.env.NODE_ENV === "development" && <DevMenu />}
+    <AuthProvider>
+      <div>
+        {process.env.NODE_ENV === "development" && (
+          <>
+            <DevMenu />
+            <div className="w-32 mr-4 mt-1 pt-3 float-right">
+              <LocaleSwitcher />
+            </div>
+          </>
+        )}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center font-serif font-medium text-2xl pt-7 pb-3 dark:text-white">
+            <p>{t("heading")}</p>
+          </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center font-serif font-medium text-2xl pt-7 pb-3 dark:text-white">
-          <p>The power of lightning in your browser</p>
+          <Steps steps={steps} />
         </div>
-
-        <Steps steps={steps} />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {routesElement}
+        </div>
       </div>
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {routesElement}
-      </div>
-    </div>
+    </AuthProvider>
   );
 }
 

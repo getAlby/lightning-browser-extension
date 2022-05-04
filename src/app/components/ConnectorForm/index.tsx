@@ -11,6 +11,7 @@ type Props = {
   submitDisabled?: boolean;
   onSubmit: FormEventHandler;
   children: React.ReactNode;
+  video?: string;
 };
 
 function ConnectorForm({
@@ -21,12 +22,13 @@ function ConnectorForm({
   submitDisabled = false,
   onSubmit,
   children,
+  video,
 }: Props) {
   const navigate = useNavigate();
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="relative lg:flex mt-14 bg-white dark:bg-gray-800 px-10 py-12">
+      <div className="relative lg:flex mt-14 bg-white dark:bg-surface-02dp px-10 py-12">
         <div className="lg:w-1/2">
           <h1 className="mb-6 text-2xl font-bold dark:text-white">{title}</h1>
           {description && (
@@ -42,7 +44,22 @@ function ConnectorForm({
         </div>
         <div className="mt-16 lg:mt-0 lg:w-1/2">
           <div className="lg:flex h-full justify-center items-center">
-            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
+            {video ? (
+              <div
+                className="flex-1 relative h-0"
+                style={{ paddingBottom: "56.25%" }}
+              >
+                <video className="absolute t-0 l-0 w-full h-full" controls>
+                  <source src={video} type="video/mp4" />
+                </video>
+              </div>
+            ) : (
+              <img
+                src="assets/icons/satsymbol.svg"
+                alt="sat"
+                className="w-64"
+              />
+            )}
           </div>
         </div>
       </div>

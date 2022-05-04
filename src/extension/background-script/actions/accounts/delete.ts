@@ -1,4 +1,4 @@
-import type { Message } from "../../../../types";
+import type { Message } from "~/types";
 import state from "../../state";
 
 // @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652

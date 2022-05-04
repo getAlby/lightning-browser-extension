@@ -1,25 +1,23 @@
 import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
 
-import { AuthProvider } from "../../context/AuthContext";
-import { AccountsProvider } from "../../context/AccountsContext";
-import { useAuth } from "../../context/AuthContext";
-import connectorRoutes from "../connectorRoutes";
-
-import RequireAuth from "../RequireAuth";
-import Container from "../../components/Container";
-import Navbar from "../../components/Navbar";
-import Publishers from "../../screens/Publishers";
-import Publisher from "../../screens/Publisher";
-import TestConnection from "../../screens/Options/TestConnection";
-import Send from "../../screens/Send";
-import ConfirmPayment from "../../screens/ConfirmPayment";
-import Receive from "../../screens/Receive";
-import LNURLPay from "../../screens/LNURLPay";
-import Settings from "../../screens/Settings";
-import Unlock from "../../screens/Unlock";
-import ChooseConnector from "../../screens/connectors/ChooseConnector";
-import Accounts from "../../screens/Accounts";
-import Keysend from "../../screens/Keysend";
+import { AuthProvider, useAuth } from "~/app/context/AuthContext";
+import { AccountsProvider } from "~/app/context/AccountsContext";
+import connectorRoutes from "~/app/router/connectorRoutes";
+import RequireAuth from "~/app/router/RequireAuth";
+import Container from "@components/Container";
+import Navbar from "@components/Navbar";
+import Publishers from "@screens/Publishers";
+import Publisher from "@screens/Publisher";
+import TestConnection from "@screens/Options/TestConnection";
+import Send from "@screens/Send";
+import ConfirmPayment from "@screens/ConfirmPayment";
+import Receive from "@screens/Receive";
+import LNURLPay from "@screens/LNURLPay";
+import Settings from "@screens/Settings";
+import Unlock from "@screens/Unlock";
+import ChooseConnector from "@screens/connectors/ChooseConnector";
+import Accounts from "@screens/Accounts";
+import Keysend from "@screens/Keysend";
 
 function Options() {
   return (

@@ -5,15 +5,15 @@ import {
   CrossIcon,
   QrCodeIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { parsePaymentRequest } from "invoices";
+import lightningPayReq from "bolt11";
 
-import lnurlLib from "../../common/lib/lnurl";
+import lnurlLib from "~/common/lib/lnurl";
 
-import Button from "../components/Button";
-import IconButton from "../components/IconButton";
-import Header from "../components/Header";
-import QrcodeScanner from "../components/QrcodeScanner";
-import TextField from "../components/form/TextField";
+import Button from "@components/Button";
+import IconButton from "@components/IconButton";
+import Header from "@components/Header";
+import QrcodeScanner from "@components/QrcodeScanner";
+import TextField from "@components/form/TextField";
 
 function Send() {
   const [invoice, setInvoice] = useState("");
@@ -40,7 +40,7 @@ function Send() {
       } else if (isPubKey(invoice)) {
         navigate(`/keysend?destination=${invoice}`);
       } else {
-        parsePaymentRequest({ request: invoice }); // throws if invalid.
+        lightningPayReq.decode(invoice); // throws if invalid.
         navigate(`/confirmPayment?paymentRequest=${invoice}`);
       }
     } catch (e) {
@@ -49,6 +49,18 @@ function Send() {
       }
     } finally {
       setLoading(false);
+    }
+  }
+
+  function extractInvoiceFrom(data: string) {
+    const reqExp = /lightning=([^&|\b]+)/i;
+
+    const invoice = data.match(reqExp);
+
+    if (invoice) {
+      return invoice[1];
+    } else {
+      return data;
     }
   }
 
@@ -69,7 +81,7 @@ function Send() {
             qrbox={200}
             qrCodeSuccessCallback={(decodedText) => {
               if (invoice !== decodedText) {
-                setInvoice(decodedText);
+                setInvoice(extractInvoiceFrom(decodedText));
                 setQrIsOpen(false);
               }
             }}
@@ -90,12 +102,6 @@ function Send() {
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
-        headerRight={
-          <IconButton
-            onClick={() => setQrIsOpen(true)}
-            icon={<QrCodeIcon className="h-6 w-6 text-blue-500" />}
-          />
-        }
       />
       <form className="p-4 max-w-screen-sm mx-auto" onSubmit={handleSubmit}>
         <TextField
@@ -105,6 +111,15 @@ function Send() {
           value={invoice}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             setInvoice(event.target.value)
+          }
+          endAdornment={
+            <button
+              type="button"
+              className="flex justify-center items-center w-10 h-8"
+              onClick={() => setQrIsOpen(true)}
+            >
+              <QrCodeIcon className="h-6 w-6 text-blue-500" />
+            </button>
           }
         />
         <div className="mt-4">
