@@ -91,7 +91,7 @@ function MakeInvoice({
             <p className="font-semibold text-gray-500 mb-4">
               {origin.host} requests an invoice:
             </p>
-            <div>
+            <div className="mt-4">
               {amountEditable && (
                 <>
                   <TextField
@@ -114,7 +114,7 @@ function MakeInvoice({
               )}
               {error && <p className="mt-1 text-red-500">{error}</p>}
             </div>
-            <div>
+            <div className="mt-4">
               {memoEditable && (
                 <TextField
                   id="memo"
