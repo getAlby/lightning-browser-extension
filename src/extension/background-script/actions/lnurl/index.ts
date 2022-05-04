@@ -19,7 +19,7 @@ async function lnurl(message: Message) {
 
   switch (lnurlDetails.tag) {
     case "channelRequest":
-      console.log("lnurl-channel");
+      console.error("lnurl-channel is not implemented");
       // TODO: add support for LNURL channel
       return { error: "not implemented" };
     case "login":
