@@ -31,8 +31,8 @@ export default [
   {
     path: "create-wallet",
     element: <NewWallet />,
-    title: "Alby wallet",
-    description: "We manage a lightning wallet for you",
+    title: "Alby Wallet",
+    description: "Create or login to your Alby account",
     logo: alby,
   },
   {
