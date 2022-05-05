@@ -106,9 +106,7 @@ export default function NewWallet() {
   return (
     <ConnectorForm
       title={
-        lndHubData.login === ""
-          ? "Your Alby Lightning Wallet"
-          : "🎉Your account is ready"
+        lndHubData.login === "" ? "Your Alby Lightning Wallet" : "🎉Success!"
       }
       submitLabel="Continue"
       submitLoading={loading}
@@ -120,7 +118,7 @@ export default function NewWallet() {
           <div className="mt-6 dark:text-white">
             <p>
               <strong>
-                We have created a new wallet for you. <br />
+                Your Alby account is ready. <br />
               </strong>
             </p>
             {lndHubData.lnAddress && (
@@ -131,7 +129,7 @@ export default function NewWallet() {
             <div className="flex-1">
               <strong>Want to use your wallet on your mobile?</strong>
               <br />
-              Import the wallet into your BlueWallet mobile app using the QR
+              Import the wallet into Zeus or BlueWallet mobile app using the QR
               Code.
             </div>
             <div className="float-right">
