@@ -56,6 +56,14 @@
     "__firefox__browser_style": false
   },
 
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+A"
+      }
+    }
+  },
+
   "__chrome|opera__options_page": "options.html",
   "options_ui": {
     "page": "options.html",
