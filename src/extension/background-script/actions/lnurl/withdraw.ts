@@ -12,7 +12,7 @@ async function withdrawWithPrompt(
       type: "lnurlWithdraw",
       args: { ...message.args, lnurlDetails },
     });
-    return response; // { data: ... }
+    return response; // response is an object like: `{ data: ... }`
   } catch (e) {
     return { error: e instanceof Error ? e.message : e };
   }
