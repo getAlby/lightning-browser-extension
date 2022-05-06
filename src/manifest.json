@@ -67,20 +67,16 @@
   },
 
   "background": {
-    "scripts": [
-      "js/background.bundle.js"
-    ],
+    "scripts": ["js/background.bundle.js"],
     "__chrome|opera__persistent": true
   },
 
-  "content_scripts": [{
-    "all_frames": true,
-    "matches": [
-      "*://*/*"
-    ],
-    "run_at": "document_end",
-    "js": [
-      "js/contentScript.bundle.js"
-    ]
-  }]
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": ["*://*/*"],
+      "run_at": "document_end",
+      "js": ["js/contentScript.bundle.js"]
+    }
+  ]
 }

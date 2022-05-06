@@ -1,21 +1,21 @@
 import * as accounts from "./actions/accounts";
 import * as allowances from "./actions/allowances";
 import * as ln from "./actions/ln";
-import lnurl, { lnurlPay } from "./actions/lnurl";
 import * as payments from "./actions/payments";
 import * as settings from "./actions/settings";
 import * as setup from "./actions/setup";
 import * as webln from "./actions/webln";
+import lnurl from "./actions/lnurl";
 
-// TODO: potential nesting/grouping of actions for better organization
 const routes = {
+  // webln calls can be made from the webln object injected in the websites. See inject-script
   webln: {
     enable: allowances.enable,
     getInfo: ln.getInfo,
     sendPaymentOrPrompt: webln.sendPaymentOrPrompt,
     keysendOrPrompt: webln.keysendOrPrompt,
     signMessageOrPrompt: webln.signMessageOrPrompt,
-    lnurl: lnurl,
+    lnurl: webln.lnurl,
     makeInvoice: webln.makeInvoiceOrPrompt,
     verifyMessage: ln.verifyMessage,
   },
@@ -29,7 +29,6 @@ const routes = {
   isUnlocked: accounts.isUnlocked,
   unlock: accounts.unlock,
   getInfo: ln.getInfo,
-  lnurlPay,
   sendPayment: ln.sendPayment,
   keysend: ln.keysend,
   checkPayment: ln.checkPayment,
@@ -37,7 +36,6 @@ const routes = {
   makeInvoice: ln.makeInvoice,
   getBalance: ln.getBalance,
   getPayments: payments.all,
-  setPassword: setup.setPassword,
   accountInfo: accounts.info,
   addAccount: accounts.add,
   editAccount: accounts.edit,
@@ -45,12 +43,14 @@ const routes = {
   removeAccount: accounts.remove,
   deleteAccount: accounts.deleteAccount,
   selectAccount: accounts.select,
+  setPassword: setup.setPassword,
   reset: setup.reset,
   status: setup.status,
   validateAccount: setup.validateAccount,
   setIcon: setup.setIcon,
   setSetting: settings.set,
   getSettings: settings.get,
+  lnurl: lnurl,
 };
 
 const router = (path: FixMe) => {
