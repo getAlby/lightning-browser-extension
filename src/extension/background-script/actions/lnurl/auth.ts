@@ -121,7 +121,7 @@ async function auth(lnurlDetails: LNURLDetails) {
 
   const connector = await state.getState().getConnector();
 
-  // TOOD: the signMessage call can fail
+  // Note: the signMessage call can fail / this is currently not caught.
   const signResponse = await connector.signMessage({
     message: LNURLAUTH_CANONICAL_PHRASE,
     key_loc: {
