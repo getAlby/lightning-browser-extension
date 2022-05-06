@@ -155,10 +155,10 @@ Note: By default the `manifest.json` is set with version `0.0.0`. The webpack lo
 
 ## Native Companions
 
-For native connections the extension passes each call to a native application (using [native messaging](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging)).
-The native application does all the user interaction and connections to the lightning wallet.
+Alby supports native connectors to native applications on the host computer. For this the extension passes each call to a native application (using [native messaging](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging)).
+This allows Alby also to connect to nodes behind Tor (through this native "proxy" application).
 
-Currently, there is one prototype of a native companion app which can connect to LND: [lnd-native-companion](https://github.com/bumi/lnd-native-companion)
+Currently, there is one native companion app available to connect to Tor nodes: [https://github.com/getAlby/alby-companion-rs](https://github.com/getAlby/alby-companion-rs)
 
 ## ⭐ Contributing
 
