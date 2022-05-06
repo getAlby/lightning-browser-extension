@@ -6,6 +6,7 @@ module.exports = {
   transform: {
     "^.+\\.[t|j]sx?$": "babel-jest",
   },
+  transformIgnorePatterns: ["node_modules/(?!(@runcitadel))/"],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: "<rootDir>/",
   }),

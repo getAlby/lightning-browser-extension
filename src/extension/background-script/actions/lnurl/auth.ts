@@ -15,6 +15,8 @@ const LNURLAUTH_CANONICAL_PHRASE =
   "DO NOT EVER SIGN THIS TEXT WITH YOUR PRIVATE KEYS! IT IS ONLY USED FOR DERIVATION OF LNURL-AUTH HASHING-KEY, DISCLOSING ITS SIGNATURE WILL COMPROMISE YOUR LNURL-AUTH IDENTITY AND MAY LEAD TO LOSS OF FUNDS!";
 
 async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
+  if (!("host" in message.origin)) return;
+
   PubSub.publish(`lnurl.auth.start`, { message, lnurlDetails });
 
   // get the publisher to check if lnurlAuth for auto-login is enabled
@@ -34,17 +36,19 @@ async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
     loginStatus = { confirmed: true, remember: true };
   } else {
     try {
-      const { data } = await utils.openPrompt<{
-        confirmed: boolean;
-        remember: boolean;
-      }>({
-        origin: message.origin,
+      const promptMessage = {
+        ...message,
         type: "lnurlAuth",
         args: {
           ...message.args,
           lnurlDetails,
         },
-      });
+      };
+      const { data } = await utils.openPrompt<{
+        confirmed: boolean;
+        remember: boolean;
+      }>(promptMessage);
+
       loginStatus = data;
     } catch (e) {
       // user rejected

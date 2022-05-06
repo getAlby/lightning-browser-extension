@@ -10,20 +10,34 @@ import SatButtons from "@components/SatButtons";
 
 type Origin = {
   name: string;
+  host: string;
   icon: string;
 };
 
 type Props = {
+  amountEditable: boolean;
+  memoEditable: boolean;
   invoiceAttributes: RequestInvoiceArgs;
   origin: Origin;
 };
 
-function MakeInvoice({ invoiceAttributes, origin }: Props) {
+const Dt = ({ children }: { children: React.ReactNode }) => (
+  <dt className="font-medium text-gray-800 dark:text-white">{children}</dt>
+);
+
+const Dd = ({ children }: { children: React.ReactNode }) => (
+  <dd className="mb-4 text-gray-600 dark:text-gray-500">{children}</dd>
+);
+
+function MakeInvoice({
+  amountEditable,
+  memoEditable,
+  invoiceAttributes,
+  origin,
+}: Props) {
   const [loading, setLoading] = useState(false);
-  const [value, setValue] = useState(invoiceAttributes.defaultAmount);
-  const [memo, setMemo] = useState(
-    invoiceAttributes.defaultMemo || invoiceAttributes.memo || ""
-  );
+  const [value, setValue] = useState(invoiceAttributes.amount || "");
+  const [memo, setMemo] = useState(invoiceAttributes.memo || "");
   const [error, setError] = useState("");
 
   function handleValueChange(amount: string) {
@@ -73,31 +87,48 @@ function MakeInvoice({ invoiceAttributes, origin }: Props) {
 
       <div className="p-4">
         <div className="mb-8">
-          <div className="p-4 shadow bg-white border-gray-200 rounded-lg dark:bg-surface-02dp dark:border-gray-600">
-            <div>
-              <TextField
-                id="amount"
-                label="Amount"
-                type="number"
-                min={invoiceAttributes.minimumAmount}
-                max={invoiceAttributes.maximumAmount}
-                value={value}
-                onChange={(e) => handleValueChange(e.target.value)}
-              />
-              {invoiceAttributes.minimumAmount &&
-                invoiceAttributes.maximumAmount && (
+          <div className="mb-4">
+            <p className="font-semibold text-gray-500 mb-4">
+              {origin.host} requests an invoice:
+            </p>
+            <div className="mt-4">
+              {amountEditable && (
+                <>
+                  <TextField
+                    id="amount"
+                    label="Amount"
+                    type="number"
+                    min={invoiceAttributes.minimumAmount}
+                    max={invoiceAttributes.maximumAmount}
+                    value={value}
+                    onChange={(e) => handleValueChange(e.target.value)}
+                  />
                   <SatButtons onClick={handleValueChange} />
-                )}
+                </>
+              )}
+              {!amountEditable && (
+                <dl className="dark:bg-surface-02dp pt-4 overflow-hidden">
+                  <Dt>Amount</Dt>
+                  <Dd>{invoiceAttributes.amount}</Dd>
+                </dl>
+              )}
               {error && <p className="mt-1 text-red-500">{error}</p>}
             </div>
-
             <div className="mt-4">
-              <TextField
-                id="memo"
-                label="Description"
-                value={memo}
-                onChange={handleMemoChange}
-              />
+              {memoEditable && (
+                <TextField
+                  id="memo"
+                  label="Memo"
+                  value={memo}
+                  onChange={handleMemoChange}
+                />
+              )}
+              {!memoEditable && (
+                <dl className="dark:bg-surface-02dp overflow-hidden">
+                  <Dt>Memo</Dt>
+                  <Dd>{invoiceAttributes.memo}</Dd>
+                </dl>
+              )}
             </div>
           </div>
         </div>

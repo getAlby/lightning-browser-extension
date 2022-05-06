@@ -43,6 +43,10 @@ export default function ConnectGaloy(props: Props) {
   const [smsCodeRequested, setSmsCodeRequested] = useState<
     boolean | undefined
   >();
+  const [jwt, setJwt] = useState<string | undefined>();
+  const [acceptJwtDirectly, setAcceptJwtDirectly] = useState<
+    boolean | undefined
+  >();
 
   function handlePhoneNumberChange(event: React.ChangeEvent<HTMLInputElement>) {
     setPhoneNumber(event.target.value.trim());
@@ -50,6 +54,10 @@ export default function ConnectGaloy(props: Props) {
 
   function handleSmsCodeChange(event: React.ChangeEvent<HTMLInputElement>) {
     setSmsCode(event.target.value.trim());
+  }
+
+  function handleJwtChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setJwt(event.target.value.trim());
   }
 
   async function requestSmsCode(event: React.FormEvent<HTMLFormElement>) {
@@ -83,10 +91,16 @@ export default function ConnectGaloy(props: Props) {
       if (errs && errs.length) {
         console.error(errs);
         const errMessage = errs[0].message;
-        const alertMsg = `Failed to request a SMS code${
-          errMessage ? `: ${errMessage}` : ""
-        }`;
-        alert(alertMsg);
+
+        const captchaRegex = /use captcha/;
+        if (errMessage.match(captchaRegex)) {
+          setAcceptJwtDirectly(true);
+        } else {
+          const alertMsg = `Failed to request a SMS code${
+            errMessage ? `: ${errMessage}` : ""
+          }`;
+          alert(alertMsg);
+        }
       } else {
         setSmsCodeRequested(data.userRequestAuthCode.success);
       }
@@ -175,6 +189,58 @@ export default function ConnectGaloy(props: Props) {
     }
   }
 
+  async function loginWithJwt(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setLoading(true);
+    const meQuery = {
+      query: `
+          query getinfo {
+            me {
+              defaultAccount {
+                defaultWalletId
+              }
+            }
+          }
+        `,
+    };
+    try {
+      if (!jwt) {
+        const errorMsg = `JWT missing, couldn't log in.`;
+        throw new Error(errorMsg);
+      }
+      const authToken = jwt;
+
+      const { data: meData } = await axios.post(url, meQuery, {
+        headers: {
+          ...defaultHeaders,
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+      if (meData.error || meData.errors) {
+        const error = meData.error || meData.errors;
+        console.error(error);
+        const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
+        const alertMsg = `Setup failed${errMessage ? `: ${errMessage}` : ""}`;
+        alert(alertMsg);
+      } else {
+        const walletId = meData.data.me.defaultAccount.defaultWalletId;
+        saveAccount({ authToken, walletId });
+      }
+    } catch (e: unknown) {
+      console.error(e);
+      if (e instanceof Error) {
+        const unauthedRegex = /status code 401/;
+        alert(
+          `Setup failed: ${
+            e.message.match(unauthedRegex) ? `invalid JWT passed` : e.message
+          }`
+        );
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
+
   async function saveAccount(config: { authToken: string; walletId: string }) {
     setLoading(true);
 
@@ -214,30 +280,42 @@ export default function ConnectGaloy(props: Props) {
   return (
     <ConnectorForm
       title={`Connect to ${label}`}
-      submitLabel={smsCodeRequested || smsCode ? "Login" : "Request SMS Code"}
+      submitLabel={
+        smsCodeRequested || smsCode || acceptJwtDirectly || jwt
+          ? "Login"
+          : "Request SMS Code"
+      }
       submitLoading={loading}
       submitDisabled={!phoneNumber}
-      onSubmit={smsCodeRequested || smsCode ? requestAuthToken : requestSmsCode}
+      onSubmit={
+        smsCodeRequested || smsCode
+          ? requestAuthToken
+          : acceptJwtDirectly || jwt
+          ? loginWithJwt
+          : requestSmsCode
+      }
     >
-      <div>
-        <label htmlFor="adminkey" className="block font-medium text-gray-700">
-          Enter your phone number
-        </label>
-        <div className="mt-1">
-          <Input
-            name="phone"
-            type="tel"
-            required
-            placeholder="+503"
-            disabled={smsCodeRequested}
-            onChange={handlePhoneNumberChange}
-          />
+      {!acceptJwtDirectly && (
+        <div>
+          <label htmlFor="adminkey" className="block font-medium text-gray-700">
+            Enter your phone number
+          </label>
+          <div className="mt-1">
+            <Input
+              name="phone"
+              type="tel"
+              required
+              placeholder="+503"
+              disabled={smsCodeRequested}
+              onChange={handlePhoneNumberChange}
+            />
+          </div>
         </div>
-      </div>
+      )}
       {smsCodeRequested && (
         <div>
           <label htmlFor="url" className="block font-medium text-gray-700">
-            Enter your SMS verifcation code
+            Enter your SMS verification code
           </label>
           <div className="mt-1">
             <Input
@@ -246,6 +324,28 @@ export default function ConnectGaloy(props: Props) {
               required
               onChange={handleSmsCodeChange}
             />
+          </div>
+        </div>
+      )}
+      {acceptJwtDirectly && (
+        <div>
+          <p>
+            The {label} login is currently being upgraded. If you are an
+            advanced user, you can grab your JWT token by logging in via the{" "}
+            <a href="https://wallet.mainnet.galoy.io">
+              Web Wallet (wallet.mainnet.galoy.io).
+            </a>
+          </p>
+          <br />
+          <p>
+            The JWT looks like: <b>eyJhbG...</b>
+          </p>
+          <br />
+          <label htmlFor="jwt" className="block font-medium text-gray-700">
+            Enter your JWT token
+          </label>
+          <div className="mt-1">
+            <Input name="jwt" type="text" required onChange={handleJwtChange} />
           </div>
         </div>
       )}
