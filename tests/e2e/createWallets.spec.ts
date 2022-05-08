@@ -11,10 +11,8 @@ const delay = async (time) => {
 };
 
 const loadExtension = async () => {
-  const extensionID = "illmemocmhbdlcejaopkmeegcbjbnmnm";
   const extensionPath = "./dist/development/chrome";
-  const extensionOptionHtml = "welcome.html";
-  const extPage = `chrome-extension://${extensionID}/${extensionOptionHtml}`;
+
   const browser = await puppeteer.launch({
     headless: false,
     args: [
@@ -30,8 +28,27 @@ const loadExtension = async () => {
   // trick to bring the new welcome page to the front
   await delay(1000);
   const page = await browser.newPage();
-  await page.bringToFront();
   await page.setViewport({ width: 1366, height: 768 });
+
+  // get extensionId
+  // https://github.com/microsoft/playwright/issues/5593#issuecomment-949813218
+  await page.goto("chrome://inspect/#extensions");
+  // https://techoverflow.net/2019/01/26/puppeteer-get-text-content-inner-html-of-an-element/
+  // TODO: check if just `page.$('...') will work because it should:
+  // https://puppeteer.github.io/puppeteer/docs/puppeteer.elementhandle
+  const url = await page.evaluate(
+    () =>
+      (
+        document.querySelector(
+          '#extensions-list div[class="url"]'
+        ) as HTMLElement
+      ).innerText
+  );
+  const [, , extensionId] = url.split("/");
+
+  const extensionOptionHtml = "welcome.html";
+  const extPage = `chrome-extension://${extensionId}/${extensionOptionHtml}`;
+
   await page.goto(extPage);
 
   return { page, browser };
@@ -45,9 +62,7 @@ test.describe("Create or connect wallets", () => {
 
     // go through welcome page
     const $document = await getDocument(page);
-
-    // go through welcome page
-    const startedButton = await getByText($document, "Get Started");
+    const startedButton = await getByText($document, "Get 1234555 Started");
     startedButton.click();
 
     await wait(() => getByText($document, "Protect your wallet"));
