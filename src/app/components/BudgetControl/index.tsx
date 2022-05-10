@@ -18,7 +18,7 @@ function BudgetControl({
   onBudgetChange,
 }: Props) {
   return (
-    <div className="mb-8">
+    <div className="mb-6">
       <div className="flex items-center">
         <Checkbox
           id="remember_me"
@@ -43,7 +43,7 @@ function BudgetControl({
         leaveFrom="scale-100 opacity-100"
         leaveTo="scale-95 opacity-0"
       >
-        <p className="mt-4 mb-3 text-gray-500 text-sm">
+        <p className="my-3 text-gray-500 text-sm">
           You may set a balance to not be asked for confirmation on payments
           until it is exhausted.
         </p>
