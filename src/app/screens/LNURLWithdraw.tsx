@@ -5,6 +5,7 @@ import type { LNURLWithdrawServiceResponse } from "~/types";
 import getOriginData from "~/extension/content-script/originData";
 import msg from "~/common/lib/msg";
 import api from "~/common/lib/api";
+import { USER_REJECTED_ERROR } from "~/common/constants";
 
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Input from "@components/form/Input";
@@ -77,7 +78,7 @@ function LNURLWithdraw(props: Props) {
 
   function reject(e: MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
-    msg.error("User rejected");
+    msg.error(USER_REJECTED_ERROR);
   }
 
   return (
