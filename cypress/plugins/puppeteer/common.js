@@ -12,14 +12,14 @@ const loadExtension = async () => {
   const extensionOptionHtml = "welcome.html";
   const extPage = `chrome-extension://${extensionID}/${extensionOptionHtml}`;
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: false, // https://github.com/puppeteer/puppeteer/blob/main/docs/api.md#working-with-chrome-extensions
     slowMo: 25,
     args: [
       `--disable-extensions-except=${extensionPath}`,
       `--load-extension=${extensionPath}`,
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
-      "--start-maximized",
+      // "--no-sandbox",
+      // "--disable-setuid-sandbox",
+      // "--start-maximized",
     ],
   });
 
