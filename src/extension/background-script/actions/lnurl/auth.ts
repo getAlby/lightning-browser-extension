@@ -170,7 +170,8 @@ async function auth(lnurlDetails: LNURLDetails) {
     if (axios.isAxiosError(e)) {
       console.error("LNURL-AUTH FAIL:", e);
       console.log(e.response?.data);
-      const error = e.response?.data?.reason || e.message; // lnurl error or exception message
+      const error =
+        (e.response?.data as { reason?: string })?.reason || e.message; // lnurl error or exception message
       throw new Error(error);
     } else if (e instanceof Error) {
       throw new Error(e.message);
