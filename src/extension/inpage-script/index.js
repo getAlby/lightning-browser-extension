@@ -70,10 +70,12 @@ if (document) {
         .sendPayment(paymentRequest)
         .then((r) => {
           const responseEvent = new CustomEvent("lightning:success", {
-            paymentRequest: paymentRequest,
-            response: r,
+            bubbles: true,
+            detail: {
+              paymentRequest: paymentRequest,
+              response: r,
+            },
           });
-          document.dispatchEvent(responseEvent);
           link.dispatchEvent(responseEvent);
         })
         .catch((e) => {
