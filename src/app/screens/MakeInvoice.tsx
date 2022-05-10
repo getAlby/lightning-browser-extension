@@ -7,6 +7,7 @@ import msg from "~/common/lib/msg";
 import type { RequestInvoiceArgs } from "~/types";
 import api from "~/common/lib/api";
 import SatButtons from "@components/SatButtons";
+import { USER_REJECTED_ERROR } from "~/common/constants";
 
 type Origin = {
   name: string;
@@ -78,7 +79,7 @@ function MakeInvoice({
 
   function reject(e: React.MouseEvent) {
     e.preventDefault();
-    msg.error("User rejected");
+    msg.error(USER_REJECTED_ERROR);
   }
 
   return (
