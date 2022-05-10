@@ -10,13 +10,6 @@ const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
-// init env variables otherwise the EnvironmentPlugin complains if those are not set.
-if (!process.env.FAUCET_URL) {
-  process.env.FAUCET_URL = ""; // env variables are passed as string. empty strings are still falsy
-}
-if (!process.env.FAUCET_K) {
-  process.env.FAUCET_K = ""; // env variables are passed as string. empty strings are still falsy
-}
 // default value is set in the code where it is used
 if (!process.env.WALLET_CREATE_URL) {
   process.env.WALLET_CREATE_URL = ""; // env variables are passed as string. empty strings are still falsy
@@ -145,8 +138,6 @@ var options = {
     // new webpack.SourceMapDevToolPlugin({ filename: false }),
     // environmental variables
     new webpack.EnvironmentPlugin([
-      "FAUCET_K",
-      "FAUCET_URL",
       "BITCOIN_BEACH_GALOY_URL",
       "BITCOIN_JUNGLE_GALOY_URL",
       "NODE_ENV",

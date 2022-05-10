@@ -1,6 +1,6 @@
-# Lightning Web Extension
+# Lightning Browser Extension
 
-### A general browser extension to bring the Bitcoin Lightning network to the browser
+### A browser extension to bring the Bitcoin Lightning Network to the browser
 
 The extension provides deep Lightning Network integration for websites (for payments and authentication flows).
 
@@ -29,7 +29,7 @@ The extension can connect to different node implementations and supports custodi
 
 ## Join the conversation
 
-We have a channel on the [bitcoin.design](https://bitcoin.design/) Slack community [#lightning-browser-extension](https://bitcoindesign.slack.com/archives/C02591ADXM2) and a [Telegram group](https://t.me/getAlby) Come and join us!
+We have a channel on the [bitcoin.design](https://bitcoin.design/) Slack community [#lightning-browser-extension](https://bitcoindesign.slack.com/archives/C02591ADXM2) and a [Telegram group](https://t.me/getAlby). Come and join us!
 
 We also do a weekly call on Monday at [14:00 UTC](https://www.worldtimebuddy.com/?qm=1&lid=100&h=100&date=2022-4-25&sln=14-15&hf=1) on [Jitsi](https://meet.fulmo.org/AlbyCommunityCall)
 
@@ -43,19 +43,19 @@ Alby supports
 
 ## Installation
 
-Add Alby to your Browser
+Add Alby to your browser
 
-- [Add To Chrome, Opera, Brave, and all Chromium based browsers](https://chrome.google.com/webstore/detail/alby/iokeahhehimjnekafflcihljlcjccdbe)
+- [Add to Chrome, Opera, Brave, and all Chromium based browsers](https://chrome.google.com/webstore/detail/alby/iokeahhehimjnekafflcihljlcjccdbe)
 - [Add to Firefox](https://addons.mozilla.org/en-US/firefox/addon/alby/)
 
 Try out the most recent version of Alby (Nightly Releases)
 
-- [Firefox Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-firefox-nightly-master.xpi) - best install it as temporary add-on as discussed in the "Load extension into browser" section
-- [Chrome Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-chrome-nightly-master.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right) and drag& drop the file
+- [Firefox Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-firefox-nightly-master.xpi) - best to install it as a temporary add-on as discussed in the "Load extension into browser" section
+- [Chrome Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-chrome-nightly-master.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right) and drag & drop the file in the browser
 
 (Note: You might need to reconfigure your wallet after installing new versions)
 
-## Architecture idea
+## Architecture Idea
 
 ![architecture](/doc/ln-browser-architecture.png)
 
@@ -155,20 +155,20 @@ Note: By default the `manifest.json` is set with version `0.0.0`. The webpack lo
 
 ## Native Companions
 
-For native connections the extension passes each call to a native application (using [native messaging](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging)).
-The native application does all the user interaction and connections to the lightning wallet.
+Alby supports native connectors to native applications on the host computer. For this the extension passes each call to a native application (using [native messaging](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging)).
+This allows Alby also to connect to nodes behind Tor (through this native "proxy" application).
 
-Currently there is one prototype of a native companion app which can connect to LND: [lnd-native-companion](https://github.com/bumi/lnd-native-companion)
+Currently, there is one native companion app available to connect to Tor nodes: [https://github.com/getAlby/alby-companion-rs](https://github.com/getAlby/alby-companion-rs)
 
 ## ⭐ Contributing
 
 We welcome and appreciate new contributions.
 
-We use the [Development Project Board](https://github.com/getAlby/lightning-browser-extension/projects/2) to plan the next ToDos. Best choose something from the ToDo Column. (If there is nothing for you, feel free to pick something from the backlog)
+We use the [Development Project Board](https://github.com/getAlby/lightning-browser-extension/projects/2) to plan to-dos. Best choose something from the to-do column. (If there is nothing for you, feel free to pick something from the backlog)
 
 If you're a developer looking to help but not sure where to begin, check out the issues that have specifically been marked as being friendly to new contributors [here](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22+project%3AgetAlby%2Flightning-browser-extension%2F2).
 
-> Alby enforces [Conventional Commits specification](https://www.conventionalcommits.org/en/) for adding human and machine readable meaning to commit messages, make sure to read and follow them.
+> Alby enforces [Conventional Commits Specification](https://www.conventionalcommits.org/en/) for adding human and machine readable meaning to commit messages, make sure to read and follow them.
 
 If you're looking for a bigger challenge, before opening a pull request please [create an issue](https://github.com/bumi/lightning-browser-extension/issues/new) or [join our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2) to get feedback, discuss the best way to tackle the challenge, and to ensure that there's no duplication of work.
 
@@ -182,16 +182,16 @@ Also we focus on supporting multipe different node backends (non-custodial and c
 
 #### What is WebLN?
 
-WebLN is a library and set of specifications for lightning apps and client providers to facilitate communication between apps and users' lightning nodes in a secure way. It provides a programmatic, permissioned interface for letting applications ask users to send payments, generate invoices to receive payments, and much more. This [documentation](https://webln.dev/#/) covers how to use WebLN in your Lightning-driven applications.
+WebLN is a library and set of specifications for lightning apps and client providers to facilitate communication between apps and users' lightning nodes in a secure way. It provides a programmatic, permissioned interface for letting applications ask users to send payments, generate invoices to receive payments, and much more. [This documentation](https://webln.dev/#/) covers how to use WebLN in your Lightning-driven applications.
 
 #### Is there a bounty program and can I contribute?
 
-Yes. Thanks to generous donors, Alby is able to offer several bounties. You can find them on our [Wiki page](https://github.com/getAlby/lightning-browser-extension/wiki/Bounties). If you want to support Alby's bounty program, please donate [here](https://getalby.com/bounties). We would appreciate your contribution a lot! 🙏
+Yes. Thanks to generous donors, Alby is able to offer several bounties. You can find them on our [Wiki page](https://github.com/getAlby/lightning-browser-extension/wiki/Bounties). If you want to support Alby's bounty program, please donate [here](https://getalby.com/bounties). We greatly appreciate your contribution! 🙏
 
 ### Thanks
 
 Based on the web extension starter kit: [/abhijithvijayan/web-extension-starter](https://github.com/abhijithvijayan/web-extension-starter)
-heavily inspired by the super amazing work of the [Joule extension](https://lightningjoule.com/)
+heavily inspired by the super-amazing work of the [Joule extension](https://lightningjoule.com/)
 
 ## License
 

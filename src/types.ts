@@ -48,6 +48,10 @@ export interface OriginData {
   external: boolean;
 }
 
+export interface OriginDataInternal {
+  internal: boolean;
+}
+
 export interface Battery extends OriginData {
   method: string;
   recipient: string;
@@ -59,7 +63,7 @@ export interface Battery extends OriginData {
 // align Message-Types
 export interface Message {
   args: Record<string, unknown>;
-  origin: OriginData;
+  origin: OriginData | OriginDataInternal;
   application?: string;
   prompt?: boolean;
   type?: string;
@@ -164,6 +168,15 @@ export type Transaction = {
   totalFees: string;
   description: string;
   location: string;
+};
+
+export type Payment = {
+  preimage: string;
+  paymentHash: string;
+  route: {
+    total_amt: number;
+    total_fees: number;
+  };
 };
 
 export interface Allowance {

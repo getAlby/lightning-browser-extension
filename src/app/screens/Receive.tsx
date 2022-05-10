@@ -29,8 +29,10 @@ function Receive() {
     expiration: "",
   });
   const [loading, setLoading] = useState(false);
-  const [invoice, setInvoice] =
-    useState<{ paymentRequest: string; rHash: string }>();
+  const [invoice, setInvoice] = useState<{
+    paymentRequest: string;
+    rHash: string;
+  }>();
   const [copyLabel, setCopyLabel] = useState("Copy");
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);

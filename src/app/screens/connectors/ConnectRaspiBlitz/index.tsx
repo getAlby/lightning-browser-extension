@@ -109,6 +109,7 @@ export default function ConnectRaspiBlitz() {
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
+      video="https://cdn.getalby-assets.com/connector-guides/in_extension_guide_raspiblitz.mp4"
     >
       <div className="mt-6">
         <TextField
