@@ -11,7 +11,8 @@ const delay = async (time) => {
 };
 
 const loadExtension = async () => {
-  const extensionPath = "./dist/development/chrome";
+  // const extensionPath = "./dist/development/chrome";
+  const extensionPath = "./dist/production/chrome";
 
   const browser = await puppeteer.launch({
     headless: false, // https://github.com/puppeteer/puppeteer/blob/main/docs/api.md#working-with-chrome-extensions
@@ -63,7 +64,7 @@ test.describe("Create or connect wallets", () => {
 
     // go through welcome page
     const $document = await getDocument(page);
-    const startedButton = await getByText($document, "Get 1234555 Started");
+    const startedButton = await getByText($document, "Get Started");
     startedButton.click();
 
     await wait(() => getByText($document, "Protect your wallet"));

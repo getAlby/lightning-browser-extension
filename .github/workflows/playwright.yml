@@ -28,7 +28,7 @@ jobs:
       - name: Build
         uses: borales/actions-yarn@v2.3.0
         with:
-          cmd: build # will run `yarn build` command
+          cmd: build:chrome # will run `yarn build` command
 
       - name: Test Code
         uses: mujo-code/puppeteer-headful@v2
