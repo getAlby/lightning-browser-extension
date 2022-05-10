@@ -1,4 +1,4 @@
-name: Playwright Tests
+name: E2E Tests
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
         with:
           cmd: build # will run `yarn build` command
 
-      - name: Test
+      - name: Test Code
         uses: mujo-code/puppeteer-headful@v2
         env:
           CI: "true"

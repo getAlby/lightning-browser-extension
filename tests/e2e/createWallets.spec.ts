@@ -14,7 +14,8 @@ const loadExtension = async () => {
   const extensionPath = "./dist/development/chrome";
 
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: false, // https://github.com/puppeteer/puppeteer/blob/main/docs/api.md#working-with-chrome-extensions
+    executablePath: process.env.PUPPETEER_EXEC_PATH, // set by docker container - https://github.com/mujo-code/puppeteer-headful
     args: [
       `--disable-extensions-except=${extensionPath}`,
       `--load-extension=${extensionPath}`,
