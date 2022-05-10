@@ -2,7 +2,7 @@ import { test } from "@playwright/test";
 import { USER } from "complete-randomer";
 import { getDocument, queries, wait } from "pptr-testing-library";
 import puppeteer from "puppeteer";
-const { getByText, getByLabelText } = queries;
+const { findByText, getByText, getByLabelText } = queries;
 
 const delay = async (time) => {
   return new Promise(function (resolve) {
@@ -86,13 +86,10 @@ test.describe("Create or connect wallets", () => {
     await wait(() => getByText($document, "Do you have a lightning wallet?"));
 
     // click at "Create Alby Wallet"
-    const createNewWalletButton = await getByText(
-      $document,
-      "Create a new wallet"
-    );
+    const createNewWalletButton = await getByText($document, "Alby Wallet");
     createNewWalletButton.click();
 
-    await wait(() => getByText($document, "Get a new lightning wallet"));
+    await findByText($document, "Your Alby Lightning Wallet");
 
     // type user email
     const emailField = await getByLabelText($document, "Email Address");
@@ -103,14 +100,12 @@ test.describe("Create or connect wallets", () => {
     await walletPasswordField.type(user.password);
 
     // click create a wallet button
-    const createWalletButton = await getByText($document, "Create a wallet");
+    const createWalletButton = await getByText($document, "Continue");
     createWalletButton.click();
 
     await page.waitForResponse(() => true);
 
-    await wait(() =>
-      getByText($document, "We have created a new wallet for you.")
-    );
+    await wait(() => getByText($document, "Your Alby account is ready."));
 
     // submit form
     const nextButton = await getByText($document, "Continue");
