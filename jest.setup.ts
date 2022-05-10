@@ -3,3 +3,6 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
+
+// fix "This script should only be loaded in a browser extension."
+if (!chrome.runtime.id) chrome.runtime.id = "history-delete";
