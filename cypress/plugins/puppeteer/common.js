@@ -7,7 +7,7 @@ const delay = async (time) => {
 };
 
 const loadExtension = async () => {
-  const extensionID = "lmcohpmphdnfjpoejmnpeffoffngmkoi";
+  const extensionID = "lcgmmkgiegfnfcmdbokmllidnhbdmdmg";
   const extensionPath = "./dist/development/chrome";
   const extensionOptionHtml = "welcome.html";
   const extPage = `chrome-extension://${extensionID}/${extensionOptionHtml}`;
