@@ -13,6 +13,7 @@ import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import SuccessMessage from "@components/SuccessMessage";
 
 import type { OriginData } from "~/types";
+import { toast } from "react-toastify";
 
 type Props = {
   origin?: OriginData;
@@ -65,7 +66,7 @@ function Keysend(props: Props) {
     } catch (e) {
       console.log(e);
       if (e instanceof Error) {
-        alert(`Error: ${e.message}`);
+        toast.error(`Error: ${e.message}`);
       }
     } finally {
       setLoading(false);

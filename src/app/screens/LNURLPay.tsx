@@ -154,7 +154,7 @@ function LNURLPay(props: Props) {
         }
       } catch (e) {
         const message = e instanceof Error ? `(${e.message})` : "";
-        alert(`Payment aborted: Could not fetch invoice. ${message}`);
+        toast.error(`Payment aborted: Could not fetch invoice. ${message}`);
         return;
       }
 
@@ -168,7 +168,7 @@ function LNURLPay(props: Props) {
         payerdata,
       });
       if (!isValidInvoice) {
-        toast("Payment aborted: Invalid invoice.");
+        toast.warn("Payment aborted: Invalid invoice.");
         return;
       }
 

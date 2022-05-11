@@ -11,6 +11,7 @@ import IconButton from "@components/IconButton";
 import Button from "@components/Button";
 import SuccessMessage from "@components/SuccessMessage";
 import SatButtons from "@components/SatButtons";
+import { toast } from "react-toastify";
 
 type Props = {
   destination?: string;
@@ -49,7 +50,7 @@ function Keysend(props: Props) {
     } catch (e) {
       console.log(e);
       if (e instanceof Error) {
-        alert(`Error: ${e.message}`);
+        toast.error(`Error: ${e.message}`);
       }
     } finally {
       setLoading(false);

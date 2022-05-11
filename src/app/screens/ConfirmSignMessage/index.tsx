@@ -9,6 +9,7 @@ import getOriginData from "~/extension/content-script/originData";
 import type { OriginData } from "~/types";
 import SuccessMessage from "@components/SuccessMessage";
 import { USER_REJECTED_ERROR } from "~/common/constants";
+import { toast } from "react-toastify";
 
 type Props = {
   origin: OriginData;
@@ -38,7 +39,7 @@ function ConfirmSignMessage(props: Props) {
       setSuccessMessage("Success!");
     } catch (e) {
       console.error(e);
-      if (e instanceof Error) alert(`Error: ${e.message}`);
+      if (e instanceof Error) toast.error(`Error: ${e.message}`);
     } finally {
       setLoading(false);
     }

@@ -116,7 +116,7 @@ function Receive() {
                     }, 1000);
                   } catch (e) {
                     if (e instanceof Error) {
-                      alert(e.message);
+                      toast.error(e.message);
                     }
                   }
                 }}
