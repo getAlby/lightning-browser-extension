@@ -110,6 +110,7 @@ function Send() {
           label="Lightning Invoice"
           placeholder="Paste invoice, lnurl or lightning address"
           value={invoice}
+          disabled={loading}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             setInvoice(event.target.value)
           }
@@ -130,7 +131,7 @@ function Send() {
             primary
             fullWidth
             loading={loading}
-            disabled={invoice === ""}
+            disabled={invoice === "" || loading}
           />
         </div>
       </form>
