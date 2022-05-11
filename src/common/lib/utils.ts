@@ -2,7 +2,8 @@ import { PaymentRequestObject } from "bolt11";
 import PubSub from "pubsub-js";
 import browser, { Runtime } from "webextension-polyfill";
 import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
-import { Message, OriginData } from "~/types";
+import { Message, OriginData, OriginDataInternal } from "~/types";
+import { ABORT_PROMPT_ERROR } from "~/common/constants";
 
 const utils = {
   call: <T = Record<string, unknown>>(
@@ -94,7 +95,7 @@ const utils = {
   },
   openPrompt: <Type>(message: {
     args: Record<string, unknown>;
-    origin: OriginData;
+    origin: OriginData | OriginDataInternal;
     type: string;
   }): Promise<{ data: Type }> => {
     const urlParams = new URLSearchParams();
@@ -157,7 +158,7 @@ const utils = {
           const onRemovedListener = (tid: number) => {
             if (tabId === tid) {
               browser.runtime.onMessage.removeListener(onMessageListener);
-              reject(new Error("Prompt was closed"));
+              reject(new Error(ABORT_PROMPT_ERROR));
             }
           };
 

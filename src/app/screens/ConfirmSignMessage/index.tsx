@@ -8,6 +8,7 @@ import utils from "~/common/lib/utils";
 import getOriginData from "~/extension/content-script/originData";
 import type { OriginData } from "~/types";
 import SuccessMessage from "@components/SuccessMessage";
+import { USER_REJECTED_ERROR } from "~/common/constants";
 
 type Props = {
   origin: OriginData;
@@ -49,7 +50,7 @@ function ConfirmSignMessage(props: Props) {
 
   function reject(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
-    msg.error("User rejected");
+    msg.error(USER_REJECTED_ERROR);
   }
 
   return (

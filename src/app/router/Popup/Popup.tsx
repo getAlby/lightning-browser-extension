@@ -62,10 +62,10 @@ const Layout = () => {
         }
       />
 
-      <div className="overflow-y-auto grow">
+      <main className="overflow-y-auto grow">
         <Outlet />
         <ToastContainer />
-      </div>
+      </main>
     </div>
   );
 };

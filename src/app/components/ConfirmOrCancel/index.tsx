@@ -19,7 +19,7 @@ function ConfirmOrCancel({
 }: Props) {
   return (
     <div className="text-center">
-      <div className="mb-5">
+      <div className="mb-4">
         <Button
           onClick={onConfirm}
           label="Confirm"
@@ -30,12 +30,12 @@ function ConfirmOrCancel({
         />
       </div>
 
-      <p className="mb-3 underline text-sm text-gray-300">
-        Only connect with sites you trust.
+      <p className="mb-2 text-sm text-gray-400">
+        <em>Only connect with sites you trust.</em>
       </p>
 
       <a
-        className="underline text-sm text-gray-500 dark:text-gray-400"
+        className="underline text-sm text-gray-600 dark:text-gray-400"
         href="#"
         onClick={onCancel}
       >

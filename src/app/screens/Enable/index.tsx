@@ -4,6 +4,7 @@ import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import PublisherCard from "@components/PublisherCard";
 import msg from "~/common/lib/msg";
 import type { OriginData } from "~/types";
+import { USER_REJECTED_ERROR } from "~/common/constants";
 
 type Props = {
   origin: OriginData;
@@ -26,7 +27,7 @@ function Enable(props: Props) {
   }, [budget, remember]);
 
   function reject(event: React.MouseEvent<HTMLAnchorElement>) {
-    msg.error("User rejected");
+    msg.error(USER_REJECTED_ERROR);
     event.preventDefault();
   }
 

@@ -51,6 +51,14 @@
     "__firefox__browser_style": false
   },
 
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+A"
+      }
+    }
+  },
+
   "options_ui": {
     "page": "options.html",
     "open_in_tab": true,
@@ -59,20 +67,16 @@
   },
 
   "background": {
-    "scripts": [
-      "js/background.bundle.js"
-    ],
+    "scripts": ["js/background.bundle.js"],
     "__chrome|opera__persistent": true
   },
 
-  "content_scripts": [{
-    "all_frames": true,
-    "matches": [
-      "*://*/*"
-    ],
-    "run_at": "document_end",
-    "js": [
-      "js/contentScript.bundle.js"
-    ]
-  }]
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": ["*://*/*"],
+      "run_at": "document_end",
+      "js": ["js/contentScript.bundle.js"]
+    }
+  ]
 }

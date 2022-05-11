@@ -66,7 +66,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           utils.openPage("welcome.html");
           window.close();
         } else if (response.unlocked) {
-          if (onWelcomePage) {
+          if (response.configured && onWelcomePage) {
             utils.redirectPage("options.html");
           }
           setAccountId(response.currentAccountId);

@@ -7,13 +7,16 @@ import {
   LNURLPaymentInfo,
   LNURLPaymentSuccessAction,
   LNURLPayServiceResponse,
+  Payment,
 } from "~/types";
+
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import lnurl from "~/common/lib/lnurl";
 import getOriginData from "~/extension/content-script/originData";
 import { useAuth } from "~/app/context/AuthContext";
+import { USER_REJECTED_ERROR } from "~/common/constants";
 
 import Button from "@components/Button";
 import TextField from "@components/form/TextField";
@@ -33,11 +36,11 @@ type Props = {
 };
 
 const Dt = ({ children }: { children: React.ReactNode }) => (
-  <dt className="font-medium text-gray-500">{children}</dt>
+  <dt className="font-medium text-gray-800 dark:text-white">{children}</dt>
 );
 
 const Dd = ({ children }: { children: React.ReactNode }) => (
-  <dd className="mb-4 dark:text-white">{children}</dd>
+  <dd className="mb-4 text-gray-600 dark:text-gray-500">{children}</dd>
 );
 
 function LNURLPay(props: Props) {
@@ -62,6 +65,7 @@ function LNURLPay(props: Props) {
   const [successAction, setSuccessAction] = useState<
     LNURLPaymentSuccessAction | undefined
   >();
+  const [payment, setPayment] = useState<Payment | undefined>();
 
   useEffect(() => {
     if (searchParams) {
@@ -169,8 +173,8 @@ function LNURLPay(props: Props) {
       }
 
       // LN WALLET pays the invoice, no additional user confirmation is required at this point
-      const payment = await utils.call(
-        "lnurlPay",
+      const paymentResponse = await utils.call(
+        "sendPayment",
         { paymentRequest },
         {
           origin: {
@@ -179,10 +183,11 @@ function LNURLPay(props: Props) {
           },
         }
       );
+      setPayment(paymentResponse as Payment); // TODO: proper type definitions for utils.call()
 
       // Once payment is fulfilled LN WALLET executes a non-null successAction
       // LN WALLET should also store successAction data on the transaction record
-      if (paymentInfo.successAction && !payment.payment_error) {
+      if (paymentInfo.successAction) {
         switch (paymentInfo.successAction.tag) {
           case "url":
           case "message":
@@ -200,8 +205,14 @@ function LNURLPay(props: Props) {
       }
 
       auth.fetchAccountInfo(); // Update balance.
+
+      // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the payment response. This closes the window which means the user will NOT see the above successAction.
+      // We assume this is OK when it is called through webln.
+      if (props.details && props.origin) {
+        msg.reply(paymentResponse);
+      }
     } catch (e) {
-      console.log(e);
+      console.error(e);
       if (e instanceof Error) {
         toast.error(`Error: ${e.message}`);
       }
@@ -213,9 +224,18 @@ function LNURLPay(props: Props) {
   function reject(e: MouseEvent) {
     e.preventDefault();
     if (props.details && props.origin) {
-      msg.error("User rejected");
+      msg.error(USER_REJECTED_ERROR);
     } else {
       navigate(-1);
+    }
+  }
+
+  function close(e: MouseEvent) {
+    e.preventDefault();
+    if (props.details && props.origin) {
+      msg.reply(payment);
+    } else {
+      window.close();
     }
   }
 
@@ -291,10 +311,7 @@ function LNURLPay(props: Props) {
           ))}
         </dl>
         <div className="text-center">
-          <button
-            className="underline text-sm text-gray-500"
-            onClick={() => window.close()}
-          >
+          <button className="underline text-sm text-gray-500" onClick={close}>
             Close
           </button>
         </div>
@@ -312,7 +329,7 @@ function LNURLPay(props: Props) {
       <div className="p-4 max-w-screen-sm mx-auto">
         {!successAction ? (
           <>
-            <div className="shadow bg-white dark:bg-surface-02dp py-4 px-4 rounded-lg mb-6 overflow-hidden">
+            <div className="mb-4">
               <dl>
                 {loading || !details ? (
                   <>
