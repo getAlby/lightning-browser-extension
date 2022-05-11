@@ -14,25 +14,25 @@ import ChooseConnector from "@screens/connectors/ChooseConnector";
 import TestConnection from "@screens/Onboard/TestConnection";
 import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
 
-const namespace = { ns: "welcome" };
+const namespaceI18n = { ns: "welcome" };
 
 const routes = [
-  { path: "/", element: <Intro />, name: i18n.t("nav.welcome", namespace) },
+  { path: "/", element: <Intro />, name: i18n.t("nav.welcome", namespaceI18n) },
   {
     path: "/set-password",
     element: <SetPassword />,
-    name: i18n.t("nav.password", namespace),
+    name: i18n.t("nav.password", namespaceI18n),
   },
   {
     path: "/choose-connector",
-    name: i18n.t("nav.connect", namespace),
+    name: i18n.t("nav.connect", namespaceI18n),
     children: [
       {
         index: true,
         element: (
           <ChooseConnector
-            title={i18n.t("choose_connector.title", namespace)}
-            description={i18n.t("choose_connector.description", namespace)}
+            title={i18n.t("choose_connector.title", namespaceI18n)}
+            description={i18n.t("choose_connector.description", namespaceI18n)}
           />
         ),
       },
@@ -42,7 +42,7 @@ const routes = [
   {
     path: "/test-connection",
     element: <TestConnection />,
-    name: i18n.t("nav.done", namespace),
+    name: i18n.t("nav.done", namespaceI18n),
   },
 ];
 

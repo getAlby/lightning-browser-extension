@@ -9,27 +9,27 @@ import {
 import { useNavigate } from "react-router-dom";
 import i18n from "~/i18n/i18nConfig";
 
-const namespace = { ns: "welcome" };
+const namespaceI18n = { ns: "welcome" };
 
 const features = [
   {
-    name: i18n.t("intro.send", namespace),
-    description: i18n.t("intro.send_desc", namespace),
+    name: i18n.t("intro.send", namespaceI18n),
+    description: i18n.t("intro.send_desc", namespaceI18n),
     icon: LightningIcon,
   },
   {
-    name: i18n.t("intro.paywall", namespace),
-    description: i18n.t("intro.paywall_desc", namespace),
+    name: i18n.t("intro.paywall", namespaceI18n),
+    description: i18n.t("intro.paywall_desc", namespaceI18n),
     icon: KeyIcon,
   },
   {
-    name: i18n.t("intro.privacy", namespace),
-    description: i18n.t("intro.privacy_desc", namespace),
+    name: i18n.t("intro.privacy", namespaceI18n),
+    description: i18n.t("intro.privacy_desc", namespaceI18n),
     icon: ShieldIcon,
   },
   {
-    name: i18n.t("intro.foss", namespace),
-    description: i18n.t("intro.foss_desc", namespace),
+    name: i18n.t("intro.foss", namespaceI18n),
+    description: i18n.t("intro.foss_desc", namespaceI18n),
     icon: CodeIcon,
   },
 ];
@@ -53,7 +53,7 @@ export default function Intro() {
         <Button
           onClick={() => navigate("/set-password")}
           type="button"
-          label={i18n.t("intro.get_started", namespace)}
+          label={i18n.t("intro.get_started", namespaceI18n)}
           primary
         />
       </div>

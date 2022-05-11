@@ -6,7 +6,7 @@ import utils from "~/common/lib/utils";
 import i18n from "~/i18n/i18nConfig";
 import { useTranslation } from "react-i18next";
 
-const namespace = { ns: "welcome" };
+const namespaceI18n = { ns: "welcome" };
 
 const initialFormData = Object.freeze({
   password: "",
@@ -56,13 +56,16 @@ export default function SetPassword() {
     let passwordConfirmation = "";
 
     if (!formData.password)
-      password = i18n.t("set_password.enter_password", namespace);
+      password = i18n.t("set_password.enter_password", namespaceI18n);
     if (!formData.passwordConfirmation) {
-      passwordConfirmation = i18n.t("set_password.confirm_password", namespace);
+      passwordConfirmation = i18n.t(
+        "set_password.confirm_password",
+        namespaceI18n
+      );
     } else if (formData.password !== formData.passwordConfirmation) {
       passwordConfirmation = i18n.t(
         "set_password.mismatched_password",
-        namespace
+        namespaceI18n
       );
     }
     setErrors({
