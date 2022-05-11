@@ -6,6 +6,7 @@ import {
   QrCodeIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import lightningPayReq from "bolt11";
+import { toast } from "react-toastify";
 
 import lnurlLib from "~/common/lib/lnurl";
 
@@ -45,7 +46,7 @@ function Send() {
       }
     } catch (e) {
       if (e instanceof Error) {
-        alert(e.message);
+        toast.error(e.message);
       }
     } finally {
       setLoading(false);

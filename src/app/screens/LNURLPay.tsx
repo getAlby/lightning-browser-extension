@@ -20,6 +20,7 @@ import TextField from "@components/form/TextField";
 import PublisherCard from "@components/PublisherCard";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import SatButtons from "@components/SatButtons";
+import { toast } from "react-toastify";
 
 type Origin = {
   name: string;
@@ -163,7 +164,7 @@ function LNURLPay(props: Props) {
         payerdata,
       });
       if (!isValidInvoice) {
-        alert("Payment aborted: Invalid invoice.");
+        toast("Payment aborted: Invalid invoice.");
         return;
       }
 
@@ -189,7 +190,7 @@ function LNURLPay(props: Props) {
             break;
           case "aes": // TODO: For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage
           default:
-            alert(
+            toast.warn(
               `Not implemented yet. Please submit an issue to support success action: ${paymentInfo.successAction.tag}`
             );
             break;
@@ -202,7 +203,7 @@ function LNURLPay(props: Props) {
     } catch (e) {
       console.log(e);
       if (e instanceof Error) {
-        alert(`Error: ${e.message}`);
+        toast.error(`Error: ${e.message}`);
       }
     } finally {
       setLoadingConfirm(false);

@@ -19,6 +19,7 @@ import TextField from "@components/form/TextField";
 // import Select from "@components/Form/Select";
 import Header from "@components/Header";
 import Loading from "@components/Loading";
+import { toast } from "react-toastify";
 
 function Receive() {
   const auth = useAuth();
@@ -29,8 +30,10 @@ function Receive() {
     expiration: "",
   });
   const [loading, setLoading] = useState(false);
-  const [invoice, setInvoice] =
-    useState<{ paymentRequest: string; rHash: string }>();
+  const [invoice, setInvoice] = useState<{
+    paymentRequest: string;
+    rHash: string;
+  }>();
   const [copyLabel, setCopyLabel] = useState("Copy");
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
@@ -76,7 +79,7 @@ function Receive() {
       checkPayment(response.rHash);
     } catch (e) {
       if (e instanceof Error) {
-        alert(e.message);
+        toast.error(e.message);
       }
     } finally {
       setLoading(false);
