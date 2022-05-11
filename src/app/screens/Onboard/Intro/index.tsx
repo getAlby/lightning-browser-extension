@@ -7,29 +7,29 @@ import {
   ShieldIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useNavigate } from "react-router-dom";
+import i18n from "~/i18n/i18nConfig";
+
+const namespace = { ns: "welcome" };
 
 const features = [
   {
-    name: "Send in One Click",
-    description:
-      "Lightning transactions happen all in your browser. No alt+tab or QR-code scanning needed.",
+    name: i18n.t("intro.send", namespace),
+    description: i18n.t("intro.send_desc", namespace),
     icon: LightningIcon,
   },
   {
-    name: "No more annoying paywalls",
-    description:
-      "Define individual budgets for websites to enable seamless payment streams. No more annoying paywalls.",
+    name: i18n.t("intro.paywall", namespace),
+    description: i18n.t("intro.paywall_desc", namespace),
     icon: KeyIcon,
   },
   {
-    name: "Privacy first",
-    description: "Use lightning to authenticate and control your privacy.",
+    name: i18n.t("intro.privacy", namespace),
+    description: i18n.t("intro.privacy_desc", namespace),
     icon: ShieldIcon,
   },
   {
-    name: "Free and Open Source",
-    description:
-      "Completely open code that can be audited by anyone. No stats or trackers. You are in control.",
+    name: i18n.t("intro.foss", namespace),
+    description: i18n.t("intro.foss_desc", namespace),
     icon: CodeIcon,
   },
 ];
@@ -53,7 +53,7 @@ export default function Intro() {
         <Button
           onClick={() => navigate("/set-password")}
           type="button"
-          label="Get Started"
+          label={i18n.t("intro.get_started", namespace)}
           primary
         />
       </div>

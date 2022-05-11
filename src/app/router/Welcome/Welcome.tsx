@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import i18n from "~/i18n/i18nConfig";
 
 import { AuthProvider } from "~/app/context/AuthContext";
 import connectorRoutes from "~/app/router/connectorRoutes";
@@ -13,26 +14,36 @@ import ChooseConnector from "@screens/connectors/ChooseConnector";
 import TestConnection from "@screens/Onboard/TestConnection";
 import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
 
+const namespace = { ns: "welcome" };
+
 const routes = [
-  { path: "/", element: <Intro />, name: "Welcome" },
-  { path: "/set-password", element: <SetPassword />, name: "Your Password" },
+  { path: "/", element: <Intro />, name: i18n.t("nav.welcome", namespace) },
+  {
+    path: "/set-password",
+    element: <SetPassword />,
+    name: i18n.t("nav.password", namespace),
+  },
   {
     path: "/choose-connector",
-    name: "Connect to Lightning",
+    name: i18n.t("nav.connect", namespace),
     children: [
       {
         index: true,
         element: (
           <ChooseConnector
-            title="Do you have a lightning wallet?"
-            description="You need to first connect to a lightning wallet so that you can interact with your favorite websites that accept bitcoin lightning payments!"
+            title={i18n.t("choose_connector.title", namespace)}
+            description={i18n.t("choose_connector.description", namespace)}
           />
         ),
       },
       ...connectorRoutes,
     ],
   },
-  { path: "/test-connection", element: <TestConnection />, name: "Done" },
+  {
+    path: "/test-connection",
+    element: <TestConnection />,
+    name: i18n.t("nav.done", namespace),
+  },
 ];
 
 const initialSteps: Step[] = routes.map((route) => ({

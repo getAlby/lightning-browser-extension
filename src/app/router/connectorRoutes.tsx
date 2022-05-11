@@ -21,95 +21,98 @@ import ConnectRaspiBlitz from "@screens/connectors/ConnectRaspiBlitz";
 import ConnectUmbrel from "@screens/connectors/ConnectUmbrel";
 import ConnectStart9 from "@screens/connectors/ConnectStart9";
 import ConnectMyNode from "@screens/connectors/ConnectMyNode";
+import i18n from "~/i18n/i18nConfig";
 
 const galoyPaths: { [key: string]: keyof typeof galoyUrls } = {
   bitcoinBeach: "galoy-bitcoin-beach",
   bitcoinJungle: "galoy-bitcoin-jungle",
 };
 
+const namespace = { ns: "welcome" };
+
 export default [
   {
     path: "create-wallet",
     element: <NewWallet />,
-    title: "Alby Wallet",
-    description: "Create or login to your Alby account",
+    title: i18n.t("choose_connector.alby", namespace),
+    description: i18n.t("choose_connector.alby_desc", namespace),
     logo: alby,
   },
   {
     path: "lnd",
     element: <ConnectLnd />,
-    title: "LND",
-    description: "Connect to your LND node",
+    title: i18n.t("choose_connector.lnd", namespace),
+    description: i18n.t("choose_connector.lnd_desc", namespace),
     logo: lnd,
   },
   {
     path: "lnd-hub",
     element: <ConnectLndHub />,
-    title: "LNDHub (Bluewallet)",
-    description: "Connect to your Bluewallet mobile wallet",
+    title: i18n.t("choose_connector.lndhub", namespace),
+    description: i18n.t("choose_connector.lndhub_desc", namespace),
     logo: lndhub,
   },
   {
     path: "lnbits",
     element: <ConnectLnbits />,
-    title: "LNbits",
-    description: "Connect to your LNbits account",
+    title: i18n.t("choose_connector.lnbits", namespace),
+    description: i18n.t("choose_connector.lnbits_desc", namespace),
     logo: lnbits,
   },
   {
     path: "eclair",
     element: <ConnectEclair />,
-    title: "Eclair",
-    description: "Connect to your Eclair node",
+    title: i18n.t("choose_connector.eclair", namespace),
+    description: i18n.t("choose_connector.eclair_desc", namespace),
     logo: eclair,
   },
   {
     path: "citadel",
     element: <ConnectCitadel />,
-    title: "Citadel",
-    description: "Connect to your local Citadel",
+    title: i18n.t("choose_connector.citadel", namespace),
+    description: i18n.t("choose_connector.citadel_desc", namespace),
     logo: citadel,
   },
   {
     path: "umbrel",
     element: <ConnectUmbrel />,
-    title: "Umbrel",
-    description: "Connect to your Umbrel",
+    title: i18n.t("choose_connector.umbrel", namespace),
+    description: i18n.t("choose_connector.umbrel_desc", namespace),
     logo: umbrel,
   },
   {
     path: "mynode",
     element: <ConnectMyNode />,
-    title: "myNode",
-    description: "Connect to your myNode",
+    title: i18n.t("choose_connector.mynode", namespace),
+    description: i18n.t("choose_connector.mynode_desc", namespace),
     logo: mynode,
   },
   {
     path: "start9",
     element: <ConnectStart9 />,
-    title: "Start9",
-    description: "Connect to your Embassy",
+    title: i18n.t("choose_connector.start9", namespace),
+    description: i18n.t("choose_connector.start9_desc", namespace),
     logo: start9,
   },
   {
     path: "raspiblitz",
     element: <ConnectRaspiBlitz />,
-    title: "RaspiBlitz",
-    description: "Connect to your RaspiBlitz",
+    title: i18n.t("choose_connector.raspiblitz", namespace),
+    description: i18n.t("choose_connector.raspiblitz_desc", namespace),
     logo: raspiblitz,
   },
   {
     path: galoyPaths.bitcoinBeach,
     element: <ConnectGaloy instance={galoyPaths.bitcoinBeach} />,
-    title: "Bitcoin Beach Wallet",
-    description: "Create or connect to a Bitcoin Beach (Galoy) account",
+    title: i18n.t("choose_connector.bitcoin_beach", namespace),
+    description: i18n.t("choose_connector.bitcoin_beach_desc", namespace),
     logo: galoyBitcoinBeach,
   },
   {
     path: galoyPaths.bitcoinJungle,
     element: <ConnectGaloy instance={galoyPaths.bitcoinJungle} />,
-    title: "Bitcoin Jungle Wallet",
-    description: "Create or connect to a Bitcoin Jungle (Galoy) account",
+    title: i18n.t("choose_connector.bitcoin_jungle", namespace),
+    description: i18n.t("choose_connector.bitcoin_jungle_desc", namespace),
     logo: galoyBitcoinJungle,
   },
 ];
