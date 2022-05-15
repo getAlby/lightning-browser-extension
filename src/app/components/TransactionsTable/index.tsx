@@ -67,6 +67,12 @@ export default function TransactionsTable({ transactions }: Props) {
                     <div className="flex ml-auto text-right space-x-3 shrink-0">
                       <div>
                         <p className="text-sm font-medium dark:text-white">
+                          {[tx.type && "sent", "sending"].includes(tx.type)
+                            ? "-"
+                            : "+"}
+                          {tx.totalAmount} sats
+                        </p>
+                        <p className="text-xs text-gray-600 dark:text-neutral-400">
                           ~{tx.totalAmountFiat}
                         </p>
                       </div>
