@@ -3,7 +3,7 @@ import UserMenu from "../UserMenu";
 
 type Props = {
   title: string;
-  subtitle: string;
+  subtitle: { satsBalance: string; fiatBalance: string };
   children?: React.ReactNode;
 };
 

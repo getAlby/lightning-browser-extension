@@ -11,9 +11,12 @@ import Input from "@components/form/Input";
 import Setting from "@components/Setting";
 import Select from "@components/form/Select";
 import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
+import { useCurreny } from "../context/CurrencyContext";
+import { SupportedCurrencies } from "bitcoin-conversion";
 
 function Settings() {
   const [loading, setLoading] = useState(true);
+  const { setCurrencyValue, currencies } = useCurreny();
   const [settings, setSettings] = useState<SettingsStorage>({
     websiteEnhancements: false,
     legacyLnurlAuth: false,
@@ -21,6 +24,7 @@ function Settings() {
     userEmail: "",
     locale: "",
     theme: "system",
+    currency: "USD",
   });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
@@ -120,6 +124,32 @@ function Settings() {
                 <option value="dark">Dark</option>
                 <option value="light">Light</option>
                 <option value="system">System</option>
+              </Select>
+            </div>
+          )}
+        </Setting>
+
+        <Setting
+          title="Currency"
+          subtitle="Change the currency display within Alby"
+        >
+          {!loading && (
+            <div className="w-64">
+              <Select
+                name="currency"
+                value={settings.currency}
+                onChange={async (ev) => {
+                  setCurrencyValue(ev.target.value as SupportedCurrencies);
+                  await saveSetting({
+                    currency: ev.target.value,
+                  });
+                }}
+              >
+                {currencies.map((currency) => (
+                  <option key={currency} value={currency}>
+                    {currency}
+                  </option>
+                ))}
               </Select>
             </div>
           )}

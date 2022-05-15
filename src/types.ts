@@ -1,3 +1,4 @@
+import { SupportedCurrencies } from "bitcoin-conversion";
 import connectors from "./extension/background-script/connectors";
 import { PaymentRequestObject } from "bolt11";
 import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
@@ -213,4 +214,5 @@ export interface SettingsStorage {
   userEmail: string;
   locale: string;
   theme: string;
+  currency: SupportedCurrencies;
 }

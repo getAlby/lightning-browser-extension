@@ -8,6 +8,7 @@ import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
 import type { Account, Accounts, SettingsStorage } from "~/types";
 import i18n from "~/i18n/i18nConfig";
+import { SupportedCurrencies } from "bitcoin-conversion";
 
 interface State {
   connector: Connector | null;
@@ -36,6 +37,7 @@ export const DEFAULT_SETTINGS = {
   userEmail: "",
   locale: i18n.resolvedLanguage,
   theme: "system",
+  currency: "USD" as SupportedCurrencies,
 };
 
 // these keys get synced from the state to the browser storage

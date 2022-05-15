@@ -21,6 +21,7 @@ import LNURLAuth from "@screens/LNURLAuth";
 import LNURLWithdraw from "@screens/LNURLWithdraw";
 import Keysend from "@screens/ConfirmKeysend";
 import AccountMenu from "@components/AccountMenu";
+import { CurrencyProvider, useCurreny } from "~/app/context/CurrencyContext";
 
 // Parse out the parameters from the querystring.
 const params = new URLSearchParams(window.location.search);
@@ -44,106 +45,117 @@ function Prompt() {
   return (
     <AuthProvider>
       <AccountsProvider>
-        <HashRouter>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <RequireAuth>
-                  <Layout />
-                </RequireAuth>
-              }
-            >
+        <CurrencyProvider>
+          <HashRouter>
+            <Routes>
               <Route
-                index
-                element={<Navigate to={`/${routeParams.type}`} replace />}
-              />
-              <Route
-                path="webln/enable"
-                element={<Enable origin={routeParams.origin} />}
-              />
-              <Route
-                path="lnurlAuth"
+                path="/"
                 element={
-                  <LNURLAuth
-                    details={
-                      routeParams.args?.lnurlDetails as LNURLAuthServiceResponse
-                    }
-                    origin={routeParams.origin}
-                  />
+                  <RequireAuth>
+                    <Layout />
+                  </RequireAuth>
                 }
-              />
-              <Route
-                path="lnurlPay"
-                element={
-                  <LNURLPay
-                    details={
-                      routeParams.args?.lnurlDetails as LNURLPayServiceResponse
-                    }
-                    origin={routeParams.origin}
-                  />
-                }
-              />
-              <Route
-                path="lnurlWithdraw"
-                element={
-                  <LNURLWithdraw
-                    details={
-                      routeParams.args
-                        ?.lnurlDetails as LNURLWithdrawServiceResponse
-                    }
-                    origin={routeParams.origin}
-                  />
-                }
-              />
-              <Route
-                path="makeInvoice"
-                element={
-                  <MakeInvoice
-                    amountEditable={routeParams.args.amountEditable as boolean}
-                    memoEditable={routeParams.args.memoEditable as boolean}
-                    invoiceAttributes={
-                      routeParams.args.invoiceAttributes as RequestInvoiceArgs
-                    }
-                    origin={routeParams.origin}
-                  />
-                }
-              />
-              <Route
-                path="confirmPayment"
-                element={
-                  <ConfirmPayment
-                    paymentRequest={routeParams.args?.paymentRequest as string}
-                    origin={routeParams.origin}
-                  />
-                }
-              />
-              <Route
-                path="confirmKeysend"
-                element={
-                  <Keysend
-                    destination={routeParams.args?.destination as string}
-                    valueSat={routeParams.args?.amount as string}
-                    customRecords={
-                      routeParams.args?.customRecords as Record<string, string>
-                    }
-                    origin={routeParams.origin}
-                  />
-                }
-              />
-              <Route
-                path="confirmSignMessage"
-                element={
-                  <ConfirmSignMessage
-                    message={routeParams.args?.message as string}
-                    origin={routeParams.origin}
-                  />
-                }
-              />
-            </Route>
-            <Route path="unlock" element={<Unlock />} />
-          </Routes>
-        </HashRouter>
+              >
+                <Route
+                  index
+                  element={<Navigate to={`/${routeParams.type}`} replace />}
+                />
+                <Route
+                  path="webln/enable"
+                  element={<Enable origin={routeParams.origin} />}
+                />
+                <Route
+                  path="lnurlAuth"
+                  element={
+                    <LNURLAuth
+                      details={
+                        routeParams.args
+                          ?.lnurlDetails as LNURLAuthServiceResponse
+                      }
+                      origin={routeParams.origin}
+                    />
+                  }
+                />
+                <Route
+                  path="lnurlPay"
+                  element={
+                    <LNURLPay
+                      details={
+                        routeParams.args
+                          ?.lnurlDetails as LNURLPayServiceResponse
+                      }
+                      origin={routeParams.origin}
+                    />
+                  }
+                />
+                <Route
+                  path="lnurlWithdraw"
+                  element={
+                    <LNURLWithdraw
+                      details={
+                        routeParams.args
+                          ?.lnurlDetails as LNURLWithdrawServiceResponse
+                      }
+                      origin={routeParams.origin}
+                    />
+                  }
+                />
+                <Route
+                  path="makeInvoice"
+                  element={
+                    <MakeInvoice
+                      amountEditable={
+                        routeParams.args.amountEditable as boolean
+                      }
+                      memoEditable={routeParams.args.memoEditable as boolean}
+                      invoiceAttributes={
+                        routeParams.args.invoiceAttributes as RequestInvoiceArgs
+                      }
+                      origin={routeParams.origin}
+                    />
+                  }
+                />
+                <Route
+                  path="confirmPayment"
+                  element={
+                    <ConfirmPayment
+                      paymentRequest={
+                        routeParams.args?.paymentRequest as string
+                      }
+                      origin={routeParams.origin}
+                    />
+                  }
+                />
+                <Route
+                  path="confirmKeysend"
+                  element={
+                    <Keysend
+                      destination={routeParams.args?.destination as string}
+                      valueSat={routeParams.args?.amount as string}
+                      customRecords={
+                        routeParams.args?.customRecords as Record<
+                          string,
+                          string
+                        >
+                      }
+                      origin={routeParams.origin}
+                    />
+                  }
+                />
+                <Route
+                  path="confirmSignMessage"
+                  element={
+                    <ConfirmSignMessage
+                      message={routeParams.args?.message as string}
+                      origin={routeParams.origin}
+                    />
+                  }
+                />
+              </Route>
+              <Route path="unlock" element={<Unlock />} />
+            </Routes>
+          </HashRouter>
+        </CurrencyProvider>
       </AccountsProvider>
     </AuthProvider>
   );
@@ -151,6 +163,7 @@ function Prompt() {
 
 const Layout = () => {
   const auth = useAuth();
+  const { balances } = useCurreny();
 
   return (
     <>
@@ -165,11 +178,7 @@ const Layout = () => {
                 )
               : ""
           }
-          subtitle={
-            typeof auth.account?.balance === "number"
-              ? `${auth.account.balance} sat`
-              : ""
-          }
+          subtitle={balances}
           showOptions={false}
         />
       </div>
