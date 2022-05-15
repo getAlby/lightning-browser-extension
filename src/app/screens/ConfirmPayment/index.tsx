@@ -1,4 +1,3 @@
-import "react-toastify/dist/ReactToastify.css";
 import { useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import lightningPayReq from "bolt11";
