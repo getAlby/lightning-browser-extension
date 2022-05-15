@@ -28,8 +28,8 @@ function Settings() {
     userEmail: "",
     locale: "",
     theme: "system",
-    currency: "USD" as SupportedCurrencies,
     exchange: "Coindesk",
+    currency: "USD",
   });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);

@@ -1,8 +1,8 @@
 import { PaymentRequestObject } from "bolt11";
 import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
 
-import connectors from "./extension/background-script/connectors";
 import currencies from "./app/utils/supportedCurrencies";
+import connectors from "./extension/background-script/connectors";
 
 export type ConnectorType = keyof typeof connectors;
 
