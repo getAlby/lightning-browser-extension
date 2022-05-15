@@ -5,6 +5,7 @@ import Setting from "@components/Setting";
 import Input from "@components/form/Input";
 import Select from "@components/form/Select";
 import Toggle from "@components/form/Toggle";
+import { SupportedCurrencies } from "bitcoin-conversion";
 import { Html5Qrcode } from "html5-qrcode";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
@@ -12,8 +13,11 @@ import { getTheme } from "~/app/utils";
 import api from "~/common/lib/api";
 import { SettingsStorage } from "~/types";
 
+import { useCurreny } from "../context/CurrencyContext";
+
 function Settings() {
   const [loading, setLoading] = useState(true);
+  const { setCurrencyValue, currencies } = useCurreny();
   const [settings, setSettings] = useState<SettingsStorage>({
     websiteEnhancements: false,
     legacyLnurlAuth: false,
@@ -21,6 +25,7 @@ function Settings() {
     userEmail: "",
     locale: "",
     theme: "system",
+    currency: "USD",
   });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
@@ -120,6 +125,32 @@ function Settings() {
                 <option value="dark">Dark</option>
                 <option value="light">Light</option>
                 <option value="system">System</option>
+              </Select>
+            </div>
+          )}
+        </Setting>
+
+        <Setting
+          title="Currency"
+          subtitle="Change the currency display within Alby"
+        >
+          {!loading && (
+            <div className="w-64">
+              <Select
+                name="currency"
+                value={settings.currency}
+                onChange={async (ev) => {
+                  setCurrencyValue(ev.target.value as SupportedCurrencies);
+                  await saveSetting({
+                    currency: ev.target.value,
+                  });
+                }}
+              >
+                {currencies.map((currency) => (
+                  <option key={currency} value={currency}>
+                    {currency}
+                  </option>
+                ))}
               </Select>
             </div>
           )}

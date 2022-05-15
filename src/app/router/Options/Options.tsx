@@ -16,6 +16,7 @@ import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { AccountsProvider } from "~/app/context/AccountsContext";
 import { AuthProvider, useAuth } from "~/app/context/AuthContext";
+import { CurrencyProvider, useCurreny } from "~/app/context/CurrencyContext";
 import RequireAuth from "~/app/router/RequireAuth";
 import connectorRoutes from "~/app/router/connectorRoutes";
 
@@ -23,64 +24,66 @@ function Options() {
   return (
     <AuthProvider>
       <AccountsProvider>
-        <HashRouter>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <RequireAuth>
-                  <Layout />
-                </RequireAuth>
-              }
-            >
-              <Route index element={<Navigate to="/publishers" replace />} />
-              <Route path="publishers">
-                <Route path=":id" element={<Publisher />} />
-                <Route index element={<Publishers />} />
-              </Route>
-              <Route path="send" element={<Send />} />
-              <Route path="keysend" element={<Keysend />} />
-              <Route path="receive" element={<Receive />} />
-              <Route path="lnurlPay" element={<LNURLPay />} />
-              <Route path="confirmPayment" element={<ConfirmPayment />} />
-              <Route path="settings" element={<Settings />} />
-              <Route path="accounts">
+        <CurrencyProvider>
+          <HashRouter>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <RequireAuth>
+                    <Layout />
+                  </RequireAuth>
+                }
+              >
+                <Route index element={<Navigate to="/publishers" replace />} />
+                <Route path="publishers">
+                  <Route path=":id" element={<Publisher />} />
+                  <Route index element={<Publishers />} />
+                </Route>
+                <Route path="send" element={<Send />} />
+                <Route path="keysend" element={<Keysend />} />
+                <Route path="receive" element={<Receive />} />
+                <Route path="lnurlPay" element={<LNURLPay />} />
+                <Route path="confirmPayment" element={<ConfirmPayment />} />
+                <Route path="settings" element={<Settings />} />
+                <Route path="accounts">
+                  <Route
+                    path="new"
+                    element={
+                      <Container>
+                        <Outlet />
+                      </Container>
+                    }
+                  >
+                    <Route
+                      index
+                      element={
+                        <ChooseConnector title="Add a new lightning account" />
+                      }
+                    />
+                    {connectorRoutes.map((connectorRoute) => (
+                      <Route
+                        key={connectorRoute.path}
+                        path={connectorRoute.path}
+                        element={connectorRoute.element}
+                      />
+                    ))}
+                  </Route>
+                  <Route index element={<Accounts />} />
+                </Route>
                 <Route
-                  path="new"
+                  path="test-connection"
                   element={
                     <Container>
-                      <Outlet />
+                      <TestConnection />
                     </Container>
                   }
-                >
-                  <Route
-                    index
-                    element={
-                      <ChooseConnector title="Add a new lightning account" />
-                    }
-                  />
-                  {connectorRoutes.map((connectorRoute) => (
-                    <Route
-                      key={connectorRoute.path}
-                      path={connectorRoute.path}
-                      element={connectorRoute.element}
-                    />
-                  ))}
-                </Route>
-                <Route index element={<Accounts />} />
+                />
               </Route>
-              <Route
-                path="test-connection"
-                element={
-                  <Container>
-                    <TestConnection />
-                  </Container>
-                }
-              />
-            </Route>
-            <Route path="unlock" element={<Unlock />} />
-          </Routes>
-        </HashRouter>
+              <Route path="unlock" element={<Unlock />} />
+            </Routes>
+          </HashRouter>
+        </CurrencyProvider>
       </AccountsProvider>
     </AuthProvider>
   );
@@ -88,6 +91,7 @@ function Options() {
 
 const Layout = () => {
   const auth = useAuth();
+  const { balances } = useCurreny();
 
   return (
     <div>
@@ -97,11 +101,7 @@ const Layout = () => {
             ? `${auth.account?.name} - ${auth.account?.alias}`.substring(0, 21)
             : ""
         }
-        subtitle={
-          typeof auth.account?.balance === "number"
-            ? `${auth.account.balance} sats`
-            : ""
-        }
+        subtitle={balances}
       >
         <Navbar.Link href="/publishers">Websites</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>

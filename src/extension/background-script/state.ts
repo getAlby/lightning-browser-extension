@@ -1,3 +1,4 @@
+import { SupportedCurrencies } from "bitcoin-conversion";
 import merge from "lodash/merge";
 import pick from "lodash/pick";
 import browser from "webextension-polyfill";
@@ -37,6 +38,7 @@ export const DEFAULT_SETTINGS = {
   userEmail: "",
   locale: i18n.resolvedLanguage,
   theme: "system",
+  currency: "USD" as SupportedCurrencies,
 };
 
 // these keys get synced from the state to the browser storage

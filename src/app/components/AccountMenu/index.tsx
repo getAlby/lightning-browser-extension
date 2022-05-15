@@ -16,7 +16,7 @@ import Menu from "../Menu";
 
 export type Props = {
   title: string;
-  subtitle: string;
+  subtitle: { satsBalance: string; fiatBalance: string };
   showOptions?: boolean;
 };
 
@@ -63,8 +63,13 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
         <div className="text-xs text-gray-700 dark:text-neutral-400">
           {title || <Skeleton />}
         </div>
-        <div className="text-xs dark:text-white">
-          {subtitle || <Skeleton />}
+        <div className="flex justify-between">
+          <div className="text-xs dark:text-white">
+            {subtitle.satsBalance || <Skeleton />}
+          </div>
+          <div className="text-xs text-gray-600">
+            {subtitle.fiatBalance || <Skeleton />}
+          </div>
         </div>
       </div>
 

@@ -45,6 +45,7 @@
     "@tailwindcss/line-clamp": "^0.4.0",
     "axios": "^0.27.2",
     "bech32": "^2.0.0",
+    "bitcoin-conversion": "^0.4.0",
     "bolt11": "^1.4.0",
     "browser-polyfill": "^3.20.2",
     "crypto-browserify": "^3.12.0",
