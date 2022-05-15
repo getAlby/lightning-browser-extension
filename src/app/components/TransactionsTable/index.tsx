@@ -50,7 +50,7 @@ export default function TransactionsTable({ transactions }: Props) {
                         {tx.title}
                       </div>
                       <p className="text-xs text-gray-600 capitalize dark:text-gray-400">
-                        {tx.type}
+                        {tx.type} - {tx.date}
                       </p>
                     </div>
                     {tx.badges && (
@@ -71,9 +71,11 @@ export default function TransactionsTable({ transactions }: Props) {
                           {[tx.type && "sent", "sending"].includes(tx.type)
                             ? "-"
                             : "+"}
-                          {tx.totalAmount} sat
+                          {tx.totalAmount} sats
                         </p>
-                        <p className="text-xs text-gray-600">{tx.date}</p>
+                        <p className="text-xs text-gray-600">
+                          ~{tx.totalAmountFiat}
+                        </p>
                       </div>
                       <Disclosure.Button className="block h-0 mt-2 text-gray-500 hover:text-black dark:hover:text-white transition-color duration-200">
                         <CaretDownIcon

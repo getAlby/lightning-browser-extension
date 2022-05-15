@@ -17,6 +17,7 @@ import AllowanceMenu from "@components/AllowanceMenu";
 import Loading from "@components/Loading";
 import PublisherCard from "@components/PublisherCard";
 import Progressbar from "@components/Progressbar";
+import { useCurreny } from "~/app/context/CurrencyContext";
 
 dayjs.extend(relativeTime);
 
@@ -28,6 +29,7 @@ function Home() {
   const [loadingSendSats, setLoadingSendSats] = useState(false);
   const [lnData, setLnData] = useState<Battery[]>([]);
   const navigate = useNavigate();
+  const { getFiatValue } = useCurreny();
 
   async function loadAllowance() {
     try {
@@ -48,11 +50,14 @@ function Home() {
     }
   }
 
-  function loadPayments() {
-    api.getPayments({ limit: 10 }).then((result) => {
-      setPayments(result?.payments);
-      setLoadingPayments(false);
-    });
+  async function loadPayments() {
+    const result = await api.getPayments({ limit: 10 });
+    for await (const payment of result.payments) {
+      const totalAmountFiat = await getFiatValue(payment.totalAmount);
+      payment.totalAmountFiat = totalAmountFiat;
+    }
+    setPayments(result?.payments);
+    setLoadingPayments(false);
   }
 
   function handleLightningDataMessage(response: {
@@ -81,6 +86,7 @@ function Home() {
     return () => {
       browser.runtime.onMessage.removeListener(handleLightningDataMessage);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function renderPublisherCard() {
