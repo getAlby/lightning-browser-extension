@@ -17,6 +17,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import browser from "webextension-polyfill";
+import { useCurreny } from "~/app/context/CurrencyContext";
 import api from "~/common/lib/api";
 import type { Allowance, Battery, Transaction } from "~/types";
 
@@ -30,6 +31,7 @@ function Home() {
   const [loadingSendSats, setLoadingSendSats] = useState(false);
   const [lnData, setLnData] = useState<Battery[]>([]);
   const navigate = useNavigate();
+  const { getFiatValue } = useCurreny();
 
   async function loadAllowance() {
     try {
@@ -50,11 +52,14 @@ function Home() {
     }
   }
 
-  function loadPayments() {
-    api.getPayments({ limit: 10 }).then((result) => {
-      setPayments(result?.payments);
-      setLoadingPayments(false);
-    });
+  async function loadPayments() {
+    const result = await api.getPayments({ limit: 10 });
+    for await (const payment of result.payments) {
+      const totalAmountFiat = await getFiatValue(payment.totalAmount);
+      payment.totalAmountFiat = totalAmountFiat;
+    }
+    setPayments(result?.payments);
+    setLoadingPayments(false);
   }
 
   function handleLightningDataMessage(response: {
@@ -83,6 +88,7 @@ function Home() {
     return () => {
       browser.runtime.onMessage.removeListener(handleLightningDataMessage);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function renderPublisherCard() {

@@ -10,6 +10,7 @@ interface CurrencyContextType {
   };
   setCurrencyValue: (currency: SupportedCurrencies) => void;
   currencies: string[];
+  getFiatValue: (amount: number | string) => Promise<string>;
 }
 
 const CurrencyContext = createContext({} as CurrencyContextType);
@@ -203,6 +204,15 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
     };
   };
 
+  const getFiatValue = async (amount: number | string) => {
+    const fiatValue = await satoshisToFiat(amount, currency);
+    const localeFiatValue = fiatValue.toLocaleString("en", {
+      style: "currency",
+      currency: currency,
+    });
+    return localeFiatValue;
+  };
+
   const setCurrencyValue = (currency: SupportedCurrencies) =>
     setCurrency(currency);
 
@@ -223,6 +233,7 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
     balances,
     setCurrencyValue,
     currencies,
+    getFiatValue,
   };
 
   return (
