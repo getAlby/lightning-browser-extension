@@ -14,6 +14,7 @@ type Publisher = {
     textColor: string;
   };
   paymentsCount: number;
+  paymentsAmount: number;
   totalBudget: number;
   usedBudget: number;
   percentage: string;
@@ -69,7 +70,8 @@ export default function PublishersTable({
                       )}
                     </div>
                     <div className="text-sm text-gray-700 dark:text-gray-400">
-                      {publisher.host} • {publisher.paymentsCount} payments
+                      {publisher.host} • {publisher.paymentsCount} payments (
+                      {publisher.paymentsAmount} sat)
                     </div>
                   </div>
                 </div>

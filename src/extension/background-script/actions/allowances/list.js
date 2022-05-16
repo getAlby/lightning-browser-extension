@@ -19,6 +19,15 @@ const list = async (message, sender) => {
       .where("host")
       .equalsIgnoreCase(allowance.host)
       .count();
+    const payments = await db.payments
+      .where("host")
+      .equalsIgnoreCase(allowance.host)
+      .reverse()
+      .toArray();
+    allowance.paymentsAmount = payments.reduce(
+      (total, currentValue) => total + parseInt(currentValue.totalAmount),
+      0
+    );
 
     return allowance;
   });
