@@ -70,8 +70,10 @@ export default function PublishersTable({
                       )}
                     </div>
                     <div className="text-sm text-gray-700 dark:text-gray-400">
-                      {publisher.host} • {publisher.paymentsCount} payments (
-                      {publisher.paymentsAmount} sat)
+                      {publisher.host} • {publisher.paymentsCount} payments{" "}
+                      {publisher.paymentsAmount > 0 && (
+                        <span>({publisher.paymentsAmount} sat)</span>
+                      )}
                     </div>
                   </div>
                 </div>
