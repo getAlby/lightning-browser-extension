@@ -172,6 +172,9 @@ If you're a developer looking to help but not sure where to begin, check out the
 
 If you're looking for a bigger challenge, before opening a pull request please [create an issue](https://github.com/bumi/lightning-browser-extension/issues/new) or [join our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2) to get feedback, discuss the best way to tackle the challenge, and to ensure that there's no duplication of work.
 
+### Translations
+Alby uses [Weblate](https://weblate.org/en/) to manage translations for different locales. If you'd like to contribute, you can add translations [here](https://hosted.weblate.org/projects/getalby-lightning-browser-extension/getalby-lightning-browser-extension/).
+
 ## ❔ FAQs
 
 #### Why not use Joule?
