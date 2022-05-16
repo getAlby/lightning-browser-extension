@@ -64,10 +64,11 @@ test.describe("Create or connect wallets", () => {
 
     // go through welcome page
     const $document = await getDocument(page);
+
     const startedButton = await getByText($document, "Get Started");
     startedButton.click();
 
-    await wait(() => getByText($document, "Protect your wallet"));
+    await findByText($document, "Protect your wallet");
 
     // type user password and confirm password
     const passwordField = await getByLabelText($document, "Choose a password:");
