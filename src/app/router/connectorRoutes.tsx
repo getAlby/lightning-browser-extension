@@ -22,13 +22,12 @@ import ConnectUmbrel from "@screens/connectors/ConnectUmbrel";
 import ConnectStart9 from "@screens/connectors/ConnectStart9";
 import ConnectMyNode from "@screens/connectors/ConnectMyNode";
 import i18n from "~/i18n/i18nConfig";
+import { welcomeI18nNamespace } from "~/i18n/namespaces/welcome";
 
 const galoyPaths: { [key: string]: keyof typeof galoyUrls } = {
   bitcoinBeach: "galoy-bitcoin-beach",
   bitcoinJungle: "galoy-bitcoin-jungle",
 };
-
-const welcomeI18nNamespace = { ns: "welcome" };
 
 export default [
   {

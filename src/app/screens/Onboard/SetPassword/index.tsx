@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 import utils from "~/common/lib/utils";
 import i18n from "~/i18n/i18nConfig";
 import { useTranslation } from "react-i18next";
-
-const welcomeI18nNamespace = { ns: "welcome" };
+import { welcomeI18nNamespace } from "~/i18n/namespaces/welcome";
 
 const initialFormData = Object.freeze({
   password: "",

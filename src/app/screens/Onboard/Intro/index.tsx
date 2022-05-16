@@ -9,8 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import i18n from "~/i18n/i18nConfig";
 import { useTranslation } from "react-i18next";
-
-const welcomeI18nNamespace = { ns: "welcome" };
+import { welcomeI18nNamespace } from "~/i18n/namespaces/welcome";
 
 const features = [
   {
