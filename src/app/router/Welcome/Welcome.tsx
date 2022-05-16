@@ -14,25 +14,32 @@ import ChooseConnector from "@screens/connectors/ChooseConnector";
 import TestConnection from "@screens/Onboard/TestConnection";
 import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
 
-const namespaceI18n = { ns: "welcome" };
+const welcomeI18nNamespace = { ns: "welcome" };
 
 const routes = [
-  { path: "/", element: <Intro />, name: i18n.t("nav.welcome", namespaceI18n) },
+  {
+    path: "/",
+    element: <Intro />,
+    name: i18n.t("nav.welcome", welcomeI18nNamespace),
+  },
   {
     path: "/set-password",
     element: <SetPassword />,
-    name: i18n.t("nav.password", namespaceI18n),
+    name: i18n.t("nav.password", welcomeI18nNamespace),
   },
   {
     path: "/choose-connector",
-    name: i18n.t("nav.connect", namespaceI18n),
+    name: i18n.t("nav.connect", welcomeI18nNamespace),
     children: [
       {
         index: true,
         element: (
           <ChooseConnector
-            title={i18n.t("choose_connector.title", namespaceI18n)}
-            description={i18n.t("choose_connector.description", namespaceI18n)}
+            title={i18n.t("choose_connector.title", welcomeI18nNamespace)}
+            description={i18n.t(
+              "choose_connector.description",
+              welcomeI18nNamespace
+            )}
           />
         ),
       },
@@ -42,7 +49,7 @@ const routes = [
   {
     path: "/test-connection",
     element: <TestConnection />,
-    name: i18n.t("nav.done", namespaceI18n),
+    name: i18n.t("nav.done", welcomeI18nNamespace),
   },
 ];
 

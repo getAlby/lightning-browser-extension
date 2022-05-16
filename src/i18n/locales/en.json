@@ -9,14 +9,16 @@
     },
     "intro": {
       "send": "Send in One Click",
-      "send_desc": "Lightning transactions happen all in your browser. No alt+tab or QR-code scanning needed.",
+      "send_description": "Lightning transactions happen all in your browser. No alt+tab or QR-code scanning needed.",
       "paywall": "No more annoying paywalls",
-      "paywall_desc": "Define individual budgets for websites to enable seamless payment streams. No more annoying paywalls.",
+      "paywall_description": "Define individual budgets for websites to enable seamless payment streams. No more annoying paywalls.",
       "privacy": "Privacy first",
-      "privacy_desc": "Use lightning to authenticate and control your privacy.",
+      "privacy_description": "Use lightning to authenticate and control your privacy.",
       "foss": "Free and Open Source",
-      "foss_desc": "Completely open code that can be audited by anyone. No stats or trackers. You are in control.",
-      "get_started": "Get Started"
+      "foss_description": "Completely open code that can be audited by anyone. No stats or trackers. You are in control.",
+      "buttons": {
+        "get_started": "Get Started"
+      }
     },
     "set_password": {
       "title": "Protect your wallet",
@@ -30,30 +32,54 @@
     "choose_connector": {
       "title": "Do you have a lightning wallet?",
       "description": "You need to first connect to a lightning wallet so that you can interact with your favorite websites that accept bitcoin lightning payments!",
-      "alby": "Alby Wallet",
-      "alby_desc": "Create or login to your Alby account",
-      "lnd": "LND",
-      "lnd_desc": "Connect to your LND node",
-      "lndhub": "LNDHub (Bluewallet)",
-      "lndhub_desc": "Connect to your Bluewallet mobile wallet",
-      "lnbits": "LNbits",
-      "lnbits_desc": "Connect to your LNbits account",
-      "eclair": "Eclair",
-      "eclair_desc": "Connect to your Eclair node",
-      "citadel": "Citadel",
-      "citadel_desc": "Connect to your local Citadel",
-      "umbrel": "Umbrel",
-      "umbrel_desc": "Connect to your Umbrel",
-      "mynode": "myNode",
-      "mynode_desc": "Connect to your myNode",
-      "start9": "Start9",
-      "start9_desc": "Connect to your Embassy",
-      "raspiblitz": "RaspiBlitz",
-      "raspiblitz_desc": "Connect to your RaspiBlitz",
-      "bitcoin_beach": "Bitcoin Beach Wallet",
-      "bitcoin_beach_desc": "Create or connect to a Bitcoin Beach (Galoy) account",
-      "bitcoin_jungle": "Bitcoin Jungle Wallet",
-      "bitcoin_jungle_desc": "Create or connect to a Bitcoin Jungle (Galoy) account"
+      "alby": {
+        "title": "Alby Wallet",
+        "description": "Create or login to your Alby account"
+      },
+      "lnd": {
+        "title": "LND",
+        "description": "Connect to your LND node"
+      },
+      "lndhub": {
+        "title": "LNDHub (Bluewallet)",
+        "description": "Connect to your Bluewallet mobile wallet"
+      },
+      "lnbits": {
+        "title": "LNbits",
+        "description": "Connect to your LNbits account"
+      },
+      "eclair": {
+        "title": "Eclair",
+        "description": "Connect to your Eclair node"
+      },
+      "citadel": {
+        "title": "Citadel",
+        "description": "Connect to your local Citadel"
+      },
+      "umbrel": {
+        "title": "Umbrel",
+        "description": "Connect to your Umbrel"
+      },
+      "mynode": {
+        "title": "myNode",
+        "description": "Connect to your myNode"
+      },
+      "start9": {
+        "title": "Start9",
+        "description": "Connect to your Embassy"
+      },
+      "raspiblitz": {
+        "title": "RaspiBlitz",
+        "description": "Connect to your RaspiBlitz"
+      },
+      "bitcoin_beach": {
+        "title": "Bitcoin Beach Wallet",
+        "description": "Create or connect to a Bitcoin Beach (Galoy) account"
+      },
+      "bitcoin_jungle": {
+        "title": "Bitcoin Jungle Wallet",
+        "description": "Create or connect to a Bitcoin Jungle (Galoy) account"
+      }
     },
     "test_connection": {
       "connection_error": "Connection Error",

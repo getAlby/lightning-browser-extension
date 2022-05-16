@@ -8,34 +8,36 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useNavigate } from "react-router-dom";
 import i18n from "~/i18n/i18nConfig";
+import { useTranslation } from "react-i18next";
 
-const namespaceI18n = { ns: "welcome" };
+const welcomeI18nNamespace = { ns: "welcome" };
 
 const features = [
   {
-    name: i18n.t("intro.send", namespaceI18n),
-    description: i18n.t("intro.send_desc", namespaceI18n),
+    name: i18n.t("intro.send", welcomeI18nNamespace),
+    description: i18n.t("intro.send_description", welcomeI18nNamespace),
     icon: LightningIcon,
   },
   {
-    name: i18n.t("intro.paywall", namespaceI18n),
-    description: i18n.t("intro.paywall_desc", namespaceI18n),
+    name: i18n.t("intro.paywall", welcomeI18nNamespace),
+    description: i18n.t("intro.paywall_description", welcomeI18nNamespace),
     icon: KeyIcon,
   },
   {
-    name: i18n.t("intro.privacy", namespaceI18n),
-    description: i18n.t("intro.privacy_desc", namespaceI18n),
+    name: i18n.t("intro.privacy", welcomeI18nNamespace),
+    description: i18n.t("intro.privacy_description", welcomeI18nNamespace),
     icon: ShieldIcon,
   },
   {
-    name: i18n.t("intro.foss", namespaceI18n),
-    description: i18n.t("intro.foss_desc", namespaceI18n),
+    name: i18n.t("intro.foss", welcomeI18nNamespace),
+    description: i18n.t("intro.foss_description", welcomeI18nNamespace),
     icon: CodeIcon,
   },
 ];
 
 export default function Intro() {
   const navigate = useNavigate();
+  const { t } = useTranslation(["welcome"]);
 
   return (
     <div>
@@ -53,7 +55,7 @@ export default function Intro() {
         <Button
           onClick={() => navigate("/set-password")}
           type="button"
-          label={i18n.t("intro.get_started", namespaceI18n)}
+          label={t("intro.buttons.get_started")}
           primary
         />
       </div>
