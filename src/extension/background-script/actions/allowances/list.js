@@ -24,10 +24,9 @@ const list = async (message, sender) => {
       .equalsIgnoreCase(allowance.host)
       .reverse()
       .toArray();
-    allowance.paymentsAmount = payments.reduce(
-      (total, currentValue) => total + parseInt(currentValue.totalAmount),
-      0
-    );
+    allowance.paymentsAmount = payments
+      .map((p) => parseInt(p.totalAmount))
+      .reduce((p, c) => p + c, 0);
 
     return allowance;
   });
