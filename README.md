@@ -4,7 +4,7 @@
 
 The extension provides deep Lightning Network integration for websites (for payments and authentication flows).
 
-The goal is to write a minimal web extension to allow browsers to interact with the Lightning Network programmatically. It focusses on the web-payments process and does not try to be a full node UI with advanced channel-management or similar features.
+The goal is to write a minimal web extension to allow browsers to interact with the Lightning Network programmatically. It focuses on the web-payments process and does not try to be a full node UI with advanced channel-management or similar features.
 
 The extension implements the WebLN standard as the interface that allows websites to connect to Lightning Network nodes (to request payments, invoices, signatures, login, etc.) and enable seamless UX of web payments and authentications.
 
