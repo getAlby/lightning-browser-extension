@@ -1,7 +1,7 @@
-import { SupportedCurrencies } from "bitcoin-conversion";
 import { PaymentRequestObject } from "bolt11";
 import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
 
+import { SupportedCurrencies } from "./app/utils/currencyConversion";
 import connectors from "./extension/background-script/connectors";
 
 export type ConnectorType = keyof typeof connectors;
@@ -248,4 +248,5 @@ export interface SettingsStorage {
   locale: string;
   theme: string;
   currency: SupportedCurrencies;
+  exchange: string;
 }
