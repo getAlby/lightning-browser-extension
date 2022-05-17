@@ -5,6 +5,7 @@ import PaymentSummary from "@components/PaymentSummary";
 import utils from "~/common/lib/utils";
 import getOriginData from "~/extension/content-script/originData";
 import msg from "~/common/lib/msg";
+import { USER_REJECTED_ERROR } from "~/common/constants";
 
 import BudgetControl from "@components/BudgetControl";
 import PublisherCard from "@components/PublisherCard";
@@ -74,7 +75,7 @@ function Keysend(props: Props) {
   function reject(e: MouseEvent) {
     e.preventDefault();
     if (props.origin) {
-      msg.error("User rejected");
+      msg.error(USER_REJECTED_ERROR);
     } else {
       navigate(-1);
     }

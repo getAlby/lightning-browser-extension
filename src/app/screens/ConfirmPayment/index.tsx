@@ -6,6 +6,7 @@ import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import getOriginData from "~/extension/content-script/originData";
 import type { OriginData } from "~/types";
+import { USER_REJECTED_ERROR } from "~/common/constants";
 
 import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
@@ -65,7 +66,7 @@ function ConfirmPayment(props: Props) {
   function reject(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
     if (props.paymentRequest && props.origin) {
-      msg.error("User rejected");
+      msg.error(USER_REJECTED_ERROR);
     } else {
       navigate(-1);
     }

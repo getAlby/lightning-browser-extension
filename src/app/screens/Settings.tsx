@@ -77,46 +77,6 @@ function Settings() {
           )}
         </Setting>
 
-        <Setting
-          title="User Display Name"
-          subtitle="For sending along with LNURL payments when supported"
-        >
-          {!loading && (
-            <div className="w-64">
-              <Input
-                placeholder="Enter your username"
-                type="text"
-                value={settings.userName}
-                onChange={(ev) => {
-                  saveSetting({
-                    userName: ev.target.value,
-                  });
-                }}
-              />
-            </div>
-          )}
-        </Setting>
-
-        <Setting
-          title="User Email"
-          subtitle="For sending along with LNURL payments when supported"
-        >
-          {!loading && (
-            <div className="w-64">
-              <Input
-                placeholder="Enter your email address"
-                type="email"
-                value={settings.userEmail}
-                onChange={(ev) => {
-                  saveSetting({
-                    userEmail: ev.target.value,
-                  });
-                }}
-              />
-            </div>
-          )}
-        </Setting>
-
         <Setting title="Camera access" subtitle="For scanning QR codes">
           {!cameraPermissionsGranted ? (
             <Button
@@ -161,6 +121,48 @@ function Settings() {
                 <option value="light">Light</option>
                 <option value="system">System</option>
               </Select>
+            </div>
+          )}
+        </Setting>
+      </div>
+      <h2 className="mt-12 text-2xl font-bold dark:text-white">
+        Personal data
+      </h2>
+      <div className="mb-6 text-gray-700 dark:text-gray-300 text-sm">
+        Payees can request for additional data to be sent with a payment. This
+        data is not shared with anyone without your consent, you will always be
+        prompted before this data is sent along with a payment.
+      </div>
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+        <Setting title="Name" subtitle="">
+          {!loading && (
+            <div className="w-64">
+              <Input
+                placeholder="Enter your name"
+                type="text"
+                value={settings.userName}
+                onChange={(ev) => {
+                  saveSetting({
+                    userName: ev.target.value,
+                  });
+                }}
+              />
+            </div>
+          )}
+        </Setting>
+        <Setting title="Email" subtitle="">
+          {!loading && (
+            <div className="w-64">
+              <Input
+                placeholder="Enter your email address"
+                type="email"
+                value={settings.userEmail}
+                onChange={(ev) => {
+                  saveSetting({
+                    userEmail: ev.target.value,
+                  });
+                }}
+              />
             </div>
           )}
         </Setting>

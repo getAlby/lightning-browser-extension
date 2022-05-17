@@ -15,7 +15,12 @@ const weblnCalls = [
   "signMessageOrPrompt",
   "verifyMessage",
 ];
+// calls that can be executed when webln is not enabled for the current content page
+const disabledCalls = ["enable"];
+
 import extractLightningData from "./batteries";
+
+let isEnabled = false; // store if webln is enabled for this content page
 
 async function init() {
   const inject = await shouldInject();
@@ -43,9 +48,13 @@ async function init() {
     if (ev.data && ev.data.application === "LBE" && !ev.data.response) {
       // limit the calls that can be made from webln
       // only listed calls can be executed
-      if (!weblnCalls.includes(ev.data.type)) {
+      // if not enabled only enable can be called.
+      const availableCalls = isEnabled ? weblnCalls : disabledCalls;
+      if (!availableCalls.includes(ev.data.type)) {
+        console.error("Function not available. Is the provider enabled?");
         return;
       }
+
       const messageWithOrigin = {
         type: `webln/${ev.data.type}`, // TODO: rename type to action
         args: ev.data.args,
@@ -55,6 +64,10 @@ async function init() {
         origin: getOriginData(),
       };
       const replyFunction = (response) => {
+        // if it is the enable call we store if webln is enabled for this content script
+        if (ev.data.type == "enable") {
+          isEnabled = response.data?.enabled;
+        }
         window.postMessage(
           {
             application: "LBE",
