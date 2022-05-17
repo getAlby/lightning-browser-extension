@@ -133,15 +133,16 @@ You can find the deployed Storybook here: https://lbe-stories.netlify.app
 
 ```bash
 yarn run dev:chrome
-yarn playwright test
+yarn test:e2e
 ```
 
-:warning:
-
-- You need to first import the extension into the browser(s)
-- You might need to adjust the `extensionID` in playwright spec(s)
-
 #### Unit tests tests via Jest
+
+```bash
+yarn test:unit
+```
+
+#### Run all tests
 
 ```bash
 yarn test
