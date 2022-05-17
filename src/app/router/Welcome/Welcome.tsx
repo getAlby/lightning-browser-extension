@@ -13,7 +13,7 @@ import SetPassword from "@screens/Onboard/SetPassword";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
 import TestConnection from "@screens/Onboard/TestConnection";
 import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
-import { welcomeI18nNamespace } from "~/i18n/namespaces/welcome";
+import { welcomeI18nNamespace } from "~/i18n/namespaces";
 
 const routes = [
   {
