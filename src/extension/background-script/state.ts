@@ -6,9 +6,14 @@ import pick from "lodash/pick";
 import { decryptData } from "~/common/lib/crypto";
 import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
-import type { Account, Accounts, SettingsStorage } from "~/types";
+import type {
+  Account,
+  Accounts,
+  SettingsStorage,
+  SupportedCurrencies,
+  SupportedExchanges,
+} from "~/types";
 import i18n from "~/i18n/i18nConfig";
-import { SupportedCurrencies } from "~/app/utils/currencyConversion";
 
 interface State {
   connector: Connector | null;
@@ -38,7 +43,7 @@ export const DEFAULT_SETTINGS = {
   locale: i18n.resolvedLanguage,
   theme: "system",
   currency: "USD" as SupportedCurrencies,
-  exchange: "",
+  exchange: "Coindesk" as SupportedExchanges,
 };
 
 // these keys get synced from the state to the browser storage

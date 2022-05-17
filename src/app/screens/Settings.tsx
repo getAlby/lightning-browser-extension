@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 
 import api from "~/common/lib/api";
-import { SettingsStorage } from "~/types";
+import {
+  SettingsStorage,
+  SupportedCurrencies,
+  SupportedExchanges,
+} from "~/types";
 import { getTheme } from "~/app/utils";
 import Container from "@components/Container";
 import Button from "@components/Button";
@@ -12,7 +16,6 @@ import Setting from "@components/Setting";
 import Select from "@components/form/Select";
 import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
 import { useCurreny } from "../context/CurrencyContext";
-import { SupportedCurrencies } from "../utils/currencyConversion";
 
 function Settings() {
   const [loading, setLoading] = useState(true);
@@ -25,7 +28,7 @@ function Settings() {
     locale: "",
     theme: "system",
     currency: "USD",
-    exchange: "",
+    exchange: "Coindesk",
   });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
@@ -166,11 +169,12 @@ function Settings() {
                 value={settings.exchange}
                 onChange={async (ev) => {
                   await saveSetting({
-                    exchange: ev.target.value,
+                    exchange: ev.target.value as SupportedExchanges,
                   });
                 }}
               >
-                <option value="coindesk">Coindesk</option>
+                <option value="Coindesk">Coindesk</option>
+                <option value="Yad.io">Yad.io</option>
               </Select>
             </div>
           )}
