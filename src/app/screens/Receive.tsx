@@ -202,6 +202,11 @@ function Receive() {
                     secondaryValue={fiatAmount}
                     type="number"
                     onChange={handleChange}
+                    endAdornment={
+                      <span className="text-xs text-slate-500 mr-1">
+                        {fiatAmount}
+                      </span>
+                    }
                   />
                 </div>
 
