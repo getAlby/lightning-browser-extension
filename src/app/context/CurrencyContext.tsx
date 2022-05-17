@@ -289,7 +289,7 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth.account?.balance, currency]);
 
-  const value = {
+  const value: CurrencyContextType = {
     balances,
     setCurrencyValue,
     currencies,
