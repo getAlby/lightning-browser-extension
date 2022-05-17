@@ -22,6 +22,8 @@ import {
   Payment,
 } from "~/types";
 
+import { useCurreny } from "../context/CurrencyContext";
+
 type Origin = {
   name: string;
   icon: string;
@@ -44,6 +46,7 @@ function LNURLPay(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAuth();
+  const { getFiatValue } = useCurreny();
   const [loading, setLoading] = useState(true);
   const [details, setDetails] = useState(props.details);
   const [origin] = useState(
@@ -55,6 +58,8 @@ function LNURLPay(props: Props) {
   const [valueSat, setValueSat] = useState(
     (details?.minSendable && (+details?.minSendable / 1000).toString()) || ""
   );
+
+  const [fiatValue, setFiatValue] = useState("");
   const [comment, setComment] = useState("");
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -63,6 +68,10 @@ function LNURLPay(props: Props) {
     LNURLPaymentSuccessAction | undefined
   >();
   const [payment, setPayment] = useState<Payment | undefined>();
+
+  useEffect(() => {
+    getFiatValue(valueSat).then((res) => setFiatValue(res));
+  }, [valueSat, getFiatValue]);
 
   useEffect(() => {
     if (searchParams) {
@@ -375,6 +384,11 @@ function LNURLPay(props: Props) {
                         max={+details.maxSendable / 1000}
                         value={valueSat}
                         onChange={(e) => setValueSat(e.target.value)}
+                        endAdornment={
+                          <span className="text-xs text-slate-500 mr-1">
+                            {fiatValue}
+                          </span>
+                        }
                       />
                       <SatButtons onClick={setValueSat} />
                     </div>
@@ -393,7 +407,7 @@ function LNURLPay(props: Props) {
                         />
                       </div>
                     )}
-                  {details && details?.payerData?.name && (
+                  {details && details.minSendable !== details.maxSendable && (
                     <div className="mt-4">
                       <TextField
                         id="name"
