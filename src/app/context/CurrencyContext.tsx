@@ -1,7 +1,5 @@
 import { useState, useEffect, createContext, useContext } from "react";
-// https://www.npmjs.com/package/currency.js 0 dependencies, 135,987k weekly downloads
 import currencyJs from "currency.js";
-// https://github.com/MikeMcl/decimal.js-light 0 dependencies, 826,917 weekly downloads
 import { Decimal } from "decimal.js-light";
 import axios from "axios";
 
