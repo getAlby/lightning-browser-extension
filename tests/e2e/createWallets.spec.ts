@@ -71,8 +71,6 @@ test.describe("Create or connect wallets", () => {
 
     await waitFor(() => getByText($document, "Protect your wallet"));
 
-    // await findByText($document, "Protect your wallet");
-
     // type user password and confirm password
     const passwordField = await getByLabelText($document, "Choose a password:");
     await passwordField.type(user.password);

@@ -136,7 +136,7 @@ yarn run dev:chrome
 yarn test:e2e
 ```
 
-:info: For now we only do E2E tests for Chrome
+:tipping_hand_woman: For now we only do E2E tests for Chrome
 
 #### Unit tests tests via [Jest](https://jestjs.io)
 
