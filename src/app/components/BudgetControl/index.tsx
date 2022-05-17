@@ -57,6 +57,9 @@ function BudgetControl({
             placeholder="sats"
             value={budget}
             type="number"
+            endAdornment={
+              <span className="text-xs text-slate-500 mr-1">{fiatAmount}</span>
+            }
             onChange={onBudgetChange}
           />
         </div>
