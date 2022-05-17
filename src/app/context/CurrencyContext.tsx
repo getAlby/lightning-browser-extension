@@ -4,7 +4,6 @@ import { useState, useEffect, createContext, useContext } from "react";
 import api from "~/common/lib/api";
 import { SupportedCurrencies, SupportedExchanges } from "~/types";
 
-import currencies from "../utils/supportedCurrencies";
 import { useAuth } from "./AuthContext";
 
 interface CurrencyContextType {
