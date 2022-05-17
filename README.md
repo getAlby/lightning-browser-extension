@@ -24,7 +24,6 @@ The extension can connect to different node implementations and supports custodi
 - [x] Keysend
 - [ ] [Lsat](https://lsat.tech/) support
 
-
 ### STATUS: 🚀
 
 ## Join the conversation
@@ -37,7 +36,7 @@ We also do a weekly call on Monday at [14:00 UTC](https://www.worldtimebuddy.com
 
 Alby supports
 
-- All [Chromium based browsers](https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium) - Chrome Opera, Brave etc.
+- All [Chromium based browsers](<https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium>) - Chrome Opera, Brave etc.
 - Firefox
 - more coming soon...
 
@@ -112,6 +111,11 @@ Then run the following:
     - `yarn run dev:firefox`
   - Opera
     - `yarn run dev:opera`
+
+#### Storybook.js
+
+We have a working [Storybook](https://storybook.js.org)-setup and some components have stories.  
+You can find the deployed Storybook here: https://lbe-stories.netlify.app
 
 ### 💻 Load extension into browser
 
