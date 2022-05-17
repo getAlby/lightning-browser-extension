@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   CaretLeftIcon,
@@ -19,10 +19,12 @@ import TextField from "@components/form/TextField";
 // import Select from "@components/Form/Select";
 import Header from "@components/Header";
 import Loading from "@components/Loading";
+import { useCurreny } from "../context/CurrencyContext";
 
 function Receive() {
   const auth = useAuth();
   const navigate = useNavigate();
+  const { getFiatValue } = useCurreny();
   const [formData, setFormData] = useState({
     amount: "",
     description: "",
@@ -36,6 +38,12 @@ function Receive() {
   const [copyLabel, setCopyLabel] = useState("Copy");
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
+
+  const [fiatAmount, setFiatAmount] = useState("");
+
+  useEffect(() => {
+    getFiatValue(formData.amount).then((res) => setFiatAmount(res));
+  }, [formData, getFiatValue]);
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -181,6 +189,11 @@ function Receive() {
                 placeholder="Amount in Satoshi..."
                 type="number"
                 onChange={handleChange}
+                endAdornment={
+                  <span className="text-xs text-slate-500 mr-1">
+                    {fiatAmount}
+                  </span>
+                }
               />
             </div>
 
