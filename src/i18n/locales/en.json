@@ -16,7 +16,7 @@
       "privacy_description": "Use lightning to authenticate and control your privacy.",
       "foss": "Free and Open Source",
       "foss_description": "Completely open code that can be audited by anyone. No stats or trackers. You are in control.",
-      "buttons": {
+      "actions": {
         "get_started": "Get Started"
       }
     },

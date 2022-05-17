@@ -54,7 +54,7 @@ export default function Intro() {
         <Button
           onClick={() => navigate("/set-password")}
           type="button"
-          label={t("intro.buttons.get_started")}
+          label={t("intro.actions.get_started")}
           primary
         />
       </div>
