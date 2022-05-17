@@ -9,6 +9,7 @@ type Props = {
   onRememberChange: ChangeEventHandler<HTMLInputElement>;
   budget: string;
   onBudgetChange: ChangeEventHandler<HTMLInputElement>;
+  fiatAmount: string;
 };
 
 function BudgetControl({
@@ -16,6 +17,7 @@ function BudgetControl({
   onRememberChange,
   budget,
   onBudgetChange,
+  fiatAmount,
 }: Props) {
   return (
     <div className="mb-6">
@@ -54,6 +56,9 @@ function BudgetControl({
             placeholder="sats"
             value={budget}
             type="number"
+            endAdornment={
+              <span className="text-xs text-slate-500 mr-1">{fiatAmount}</span>
+            }
             onChange={onBudgetChange}
           />
         </div>
