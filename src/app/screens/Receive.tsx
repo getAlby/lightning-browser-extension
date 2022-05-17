@@ -20,9 +20,12 @@ import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
 import { poll } from "~/common/utils/helpers";
 
+import { useCurreny } from "../context/CurrencyContext";
+
 function Receive() {
   const auth = useAuth();
   const navigate = useNavigate();
+  const { getFiatValue } = useCurreny();
   const [formData, setFormData] = useState({
     amount: "",
     description: "",
@@ -45,6 +48,12 @@ function Receive() {
       mounted.current = false;
     };
   }, []);
+
+  const [fiatAmount, setFiatAmount] = useState("");
+
+  useEffect(() => {
+    getFiatValue(formData.amount).then((res) => setFiatAmount(res));
+  }, [formData, getFiatValue]);
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -189,6 +198,11 @@ function Receive() {
                     placeholder="Amount in Satoshi..."
                     type="number"
                     onChange={handleChange}
+                    endAdornment={
+                      <span className="text-xs text-slate-500 mr-1">
+                        {fiatAmount}
+                      </span>
+                    }
                   />
                 </div>
 
