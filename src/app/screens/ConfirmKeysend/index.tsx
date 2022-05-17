@@ -1,4 +1,4 @@
-import { useState, MouseEvent, useRef } from "react";
+import { useState, MouseEvent, useRef, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import PaymentSummary from "@components/PaymentSummary";
@@ -13,6 +13,7 @@ import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import SuccessMessage from "@components/SuccessMessage";
 
 import type { OriginData } from "~/types";
+import { useCurreny } from "~/app/context/CurrencyContext";
 
 type Props = {
   origin?: OriginData;
@@ -24,6 +25,7 @@ type Props = {
 function Keysend(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { getFiatValue } = useCurreny();
   const [rememberMe, setRememberMe] = useState(false);
   const [origin] = useState(
     props.origin ||
@@ -34,6 +36,7 @@ function Keysend(props: Props) {
   const originRef = useRef(props.origin || getOriginData());
   const [customRecords] = useState(props.customRecords || {});
   const [amount] = useState(props.valueSat || "");
+  const [fiatAmount, setFiatAmount] = useState("");
   const [destination] = useState(
     props.destination || searchParams.get("destination")
   );
@@ -42,6 +45,10 @@ function Keysend(props: Props) {
   );
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    getFiatValue(budget).then((res) => setFiatAmount(res));
+  }, [budget, getFiatValue]);
 
   async function confirm() {
     if (rememberMe && budget) {
@@ -108,6 +115,7 @@ function Keysend(props: Props) {
               />
             </div>
             <BudgetControl
+              fiatAmount={fiatAmount}
               remember={rememberMe}
               onRememberChange={(event) => {
                 setRememberMe(event.target.checked);

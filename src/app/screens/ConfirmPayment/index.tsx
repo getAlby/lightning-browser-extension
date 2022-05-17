@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import lightningPayReq from "bolt11";
 
@@ -14,6 +14,7 @@ import { useAuth } from "~/app/context/AuthContext";
 import BudgetControl from "@components/BudgetControl";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import SuccessMessage from "@components/SuccessMessage";
+import { useCurreny } from "~/app/context/CurrencyContext";
 
 export type Props = {
   origin?: OriginData;
@@ -24,6 +25,7 @@ function ConfirmPayment(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAuth();
+  const { getFiatValue } = useCurreny();
   const invoiceRef = useRef(
     lightningPayReq.decode(
       props.paymentRequest || (searchParams.get("paymentRequest") as string)
@@ -36,6 +38,12 @@ function ConfirmPayment(props: Props) {
   const [budget, setBudget] = useState(
     ((invoiceRef.current?.satoshis || 0) * 10).toString()
   );
+  const [fiatAmount, setFiatAmount] = useState("");
+
+  useEffect(() => {
+    getFiatValue(budget).then((res) => setFiatAmount(res));
+  }, [budget, getFiatValue]);
+
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -100,6 +108,7 @@ function ConfirmPayment(props: Props) {
             </div>
 
             <BudgetControl
+              fiatAmount={fiatAmount}
               remember={rememberMe}
               onRememberChange={(event) => {
                 setRememberMe(event.target.checked);
