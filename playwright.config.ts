@@ -35,11 +35,16 @@ const config: PlaywrightTestConfig = {
     // actionTimeout: 0,
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://localhost:3000',
-
+    //
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "on",
-    video: "on",
-    screenshot: "on",
+    // Not working because (electron relate dbut same issue):
+    // - https://github.com/microsoft/playwright/issues/8208
+    // - https://github.com/microsoft/playwright/issues/12774
+    // - https://github.com/microsoft/playwright/issues/12125
+    //
+    // trace: "on",
+    // video: "on",
+    // screenshot: "on",
   },
 
   /* Configure projects for major browsers */
