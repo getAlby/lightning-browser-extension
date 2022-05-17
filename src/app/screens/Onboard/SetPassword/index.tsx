@@ -3,6 +3,9 @@ import TextField from "@components/form/TextField";
 import Button from "@components/Button";
 import { useNavigate } from "react-router-dom";
 import utils from "~/common/lib/utils";
+import i18n from "~/i18n/i18nConfig";
+import { useTranslation } from "react-i18next";
+import { welcomeI18nNamespace } from "~/i18n/namespaces";
 
 const initialFormData = Object.freeze({
   password: "",
@@ -18,6 +21,7 @@ export default function SetPassword() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState(initialErrors);
+  const { t } = useTranslation(["welcome"]);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -50,11 +54,18 @@ export default function SetPassword() {
     let password = "";
     let passwordConfirmation = "";
 
-    if (!formData.password) password = "Please enter a password.";
+    if (!formData.password)
+      password = i18n.t("set_password.enter_password", welcomeI18nNamespace);
     if (!formData.passwordConfirmation) {
-      passwordConfirmation = "Please confirm your password.";
+      passwordConfirmation = i18n.t(
+        "set_password.confirm_password",
+        welcomeI18nNamespace
+      );
     } else if (formData.password !== formData.passwordConfirmation) {
-      passwordConfirmation = "Passwords don't match.";
+      passwordConfirmation = i18n.t(
+        "set_password.mismatched_password",
+        welcomeI18nNamespace
+      );
     }
     setErrors({
       password,
@@ -67,17 +78,16 @@ export default function SetPassword() {
       <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-surface-02dp py-12 px-10">
         <div className="lg:w-1/2">
           <h1 className="text-2xl font-bold dark:text-white">
-            Protect your wallet
+            {t("set_password.title")}
           </h1>
           <p className="text-gray-500 mt-6 dark:text-gray-400">
-            Your wallet is securely encrypted with a password and needs to be
-            unlocked before usage.
+            {t("set_password.description")}
           </p>
           <div className="w-4/5">
             <div className="mt-6">
               <TextField
                 id="password"
-                label="Choose a password:"
+                label={t("set_password.choose_password_label")}
                 type="password"
                 autoFocus
                 required
@@ -90,7 +100,7 @@ export default function SetPassword() {
             <div className="mt-6">
               <TextField
                 id="passwordConfirmation"
-                label="Let's confirm you typed it correct:"
+                label={t("set_password.confirm_password_label")}
                 type="password"
                 required
                 onChange={handleChange}

@@ -4,7 +4,7 @@
 
 The extension provides deep Lightning Network integration for websites (for payments and authentication flows).
 
-The goal is to write a minimal web extension to allow browsers to interact with the Lightning Network programmatically. It focusses on the web-payments process and does not try to be a full node UI with advanced channel-management or similar features.
+The goal is to write a minimal web extension to allow browsers to interact with the Lightning Network programmatically. It focuses on the web-payments process and does not try to be a full node UI with advanced channel-management or similar features.
 
 The extension implements the WebLN standard as the interface that allows websites to connect to Lightning Network nodes (to request payments, invoices, signatures, login, etc.) and enable seamless UX of web payments and authentications.
 
@@ -171,6 +171,9 @@ If you're a developer looking to help but not sure where to begin, check out the
 > Alby enforces [Conventional Commits Specification](https://www.conventionalcommits.org/en/) for adding human and machine readable meaning to commit messages, make sure to read and follow them.
 
 If you're looking for a bigger challenge, before opening a pull request please [create an issue](https://github.com/bumi/lightning-browser-extension/issues/new) or [join our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2) to get feedback, discuss the best way to tackle the challenge, and to ensure that there's no duplication of work.
+
+### Translations
+Alby uses [Weblate](https://weblate.org/en/) to manage translations for different locales. If you'd like to contribute, you can [add translations here](https://hosted.weblate.org/projects/getalby-lightning-browser-extension/getalby-lightning-browser-extension/).
 
 ## ❔ FAQs
 

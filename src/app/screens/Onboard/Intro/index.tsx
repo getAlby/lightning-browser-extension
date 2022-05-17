@@ -7,35 +7,36 @@ import {
   ShieldIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useNavigate } from "react-router-dom";
+import i18n from "~/i18n/i18nConfig";
+import { useTranslation } from "react-i18next";
+import { welcomeI18nNamespace } from "~/i18n/namespaces";
 
 const features = [
   {
-    name: "Send in One Click",
-    description:
-      "Lightning transactions happen all in your browser. No alt+tab or QR-code scanning needed.",
+    name: i18n.t("intro.send", welcomeI18nNamespace),
+    description: i18n.t("intro.send_description", welcomeI18nNamespace),
     icon: LightningIcon,
   },
   {
-    name: "No more annoying paywalls",
-    description:
-      "Define individual budgets for websites to enable seamless payment streams. No more annoying paywalls.",
+    name: i18n.t("intro.paywall", welcomeI18nNamespace),
+    description: i18n.t("intro.paywall_description", welcomeI18nNamespace),
     icon: KeyIcon,
   },
   {
-    name: "Privacy first",
-    description: "Use lightning to authenticate and control your privacy.",
+    name: i18n.t("intro.privacy", welcomeI18nNamespace),
+    description: i18n.t("intro.privacy_description", welcomeI18nNamespace),
     icon: ShieldIcon,
   },
   {
-    name: "Free and Open Source",
-    description:
-      "Completely open code that can be audited by anyone. No stats or trackers. You are in control.",
+    name: i18n.t("intro.foss", welcomeI18nNamespace),
+    description: i18n.t("intro.foss_description", welcomeI18nNamespace),
     icon: CodeIcon,
   },
 ];
 
 export default function Intro() {
   const navigate = useNavigate();
+  const { t } = useTranslation(["welcome"]);
 
   return (
     <div>
@@ -53,7 +54,7 @@ export default function Intro() {
         <Button
           onClick={() => navigate("/set-password")}
           type="button"
-          label="Get Started"
+          label={t("intro.actions.get_started")}
           primary
         />
       </div>
