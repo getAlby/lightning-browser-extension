@@ -1,7 +1,10 @@
 import { useState, useEffect, createContext, useContext } from "react";
-import { satoshisToFiat, SupportedCurrencies } from "bitcoin-conversion";
 import { useAuth } from "./AuthContext";
 import api from "~/common/lib/api";
+import {
+  satoshisToFiat,
+  SupportedCurrencies,
+} from "../utils/currencyConversion";
 
 interface CurrencyContextType {
   balances: {
@@ -185,6 +188,7 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
     "ZMW",
     "ZWL",
   ];
+
   const [balances, setBalances] = useState<{
     satsBalance: string;
     fiatBalance: string;
