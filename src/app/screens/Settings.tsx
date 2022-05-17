@@ -12,7 +12,7 @@ import Setting from "@components/Setting";
 import Select from "@components/form/Select";
 import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
 import { useCurreny } from "../context/CurrencyContext";
-import { SupportedCurrencies } from "bitcoin-conversion";
+import { SupportedCurrencies } from "../utils/currencyConversion";
 
 function Settings() {
   const [loading, setLoading] = useState(true);
@@ -25,6 +25,7 @@ function Settings() {
     locale: "",
     theme: "system",
     currency: "USD",
+    exchange: "",
   });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
@@ -190,6 +191,26 @@ function Settings() {
                     {currency}
                   </option>
                 ))}
+              </Select>
+            </div>
+          )}
+        </Setting>
+        <Setting
+          title="Exchange Source"
+          subtitle="Change the source where Alby get currency info"
+        >
+          {!loading && (
+            <div className="w-64">
+              <Select
+                name="exchange"
+                value={settings.exchange}
+                onChange={async (ev) => {
+                  await saveSetting({
+                    exchange: ev.target.value,
+                  });
+                }}
+              >
+                <option value="coindesk">Coindesk</option>
               </Select>
             </div>
           )}

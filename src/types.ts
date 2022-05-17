@@ -1,4 +1,4 @@
-import { SupportedCurrencies } from "bitcoin-conversion";
+import { SupportedCurrencies } from "./app/utils/currencyConversion";
 import connectors from "./extension/background-script/connectors";
 
 export type ConnectorType = keyof typeof connectors;
@@ -204,4 +204,5 @@ export interface SettingsStorage {
   locale: string;
   theme: string;
   currency: SupportedCurrencies;
+  exchange: string;
 }
