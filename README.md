@@ -129,14 +129,16 @@ You can find the deployed Storybook here: https://lbe-stories.netlify.app
 
 ### :heavy_check_mark: Tests
 
-#### E2E tests via playwright
+#### E2E tests via [playwright](https://playwright.dev) ([using testing-library](https://testing-library.com/docs/pptr-testing-library/intro/))
 
 ```bash
 yarn run dev:chrome
 yarn test:e2e
 ```
 
-#### Unit tests tests via Jest
+:info: For now we only do E2E tests for Chrome
+
+#### Unit tests tests via [Jest](https://jestjs.io)
 
 ```bash
 yarn test:unit
