@@ -1,5 +1,6 @@
 import axios from "axios";
 import currencyJs from "currency.js";
+import { Decimal } from "decimal.js-light";
 import { useState, useEffect, createContext, useContext } from "react";
 import api from "~/common/lib/api";
 import { SupportedCurrencies, SupportedExchanges } from "~/types";
@@ -195,9 +196,7 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
     satsBalance: string;
     fiatBalance: string;
   }>({ satsBalance: "", fiatBalance: "" });
-  const [currency, setCurrency] = useState<SupportedCurrencies>(
-    "USD" as SupportedCurrencies
-  );
+  const [currency, setCurrency] = useState<SupportedCurrencies>("USD");
   const [exchange, setExchange] = useState<SupportedExchanges>("Coindesk");
   const auth = useAuth();
 
@@ -205,8 +204,9 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
     amountInBtc: number | string,
     convertTo: SupportedCurrencies
   ) => {
+    const btc = new Decimal(amountInBtc);
     const rate = await getFiatBtcRate(convertTo);
-    return Number(amountInBtc) * Number(rate);
+    return btc.mul(rate).toNumber();
   };
 
   const getFiatBtcRate = async (
@@ -236,7 +236,8 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
   };
 
   const satoshisToBitcoin = (amountInSatoshis: number | string) => {
-    return Number(amountInSatoshis) / numSatsInBtc;
+    const sats = new Decimal(amountInSatoshis);
+    return sats.div(numSatsInBtc).toNumber();
   };
 
   const satoshisToFiat = async (
