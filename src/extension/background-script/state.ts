@@ -89,6 +89,9 @@ const state = createState<State>((set, get) => ({
     }
     set({ password: null, connector: null, account: null });
   },
+  isUnlocked: () => {
+    return get().password !== null;
+  },
   init: () => {
     return browser.storage.sync.get(browserStorageKeys).then((result) => {
       // Deep merge to ensure that nested defaults are also merged instead of overwritten.
