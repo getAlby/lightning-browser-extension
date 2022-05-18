@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import utils from "~/common/lib/utils";
 import api from "~/common/lib/api";
@@ -22,6 +23,7 @@ export default function TestConnection() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const { t } = useTranslation(["welcome"]);
 
   function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
     utils.call("deleteAccount").then(() => {
@@ -33,9 +35,7 @@ export default function TestConnection() {
     setLoading(true);
     // show an error message after 45 seconds. Then probably something is wrong
     const timer = setTimeout(() => {
-      setErrorMessage(
-        "Trying to connect takes longer than expected... Are your details correct? Is your node reachable?"
-      );
+      setErrorMessage(t("test_connection.errors.connection_taking_long"));
     }, 45000);
     try {
       const { currentAccountId } = await api.getStatus();
@@ -73,10 +73,10 @@ export default function TestConnection() {
             {errorMessage && (
               <div>
                 <h1 className="text-3xl font-bold dark:text-white">
-                  Connection Error
+                  {t("test_connection.errors.connection_error")}
                 </h1>
                 <p className="text-gray-500 dark:text-white">
-                  Please review your connection details.
+                  {t("test_connection.errors.review_connection_details")}
                 </p>
 
                 <p className="text-gray-500 dark:text-grey-500 mt-4 mb-4">
@@ -84,12 +84,12 @@ export default function TestConnection() {
                 </p>
 
                 <Button
-                  label="Delete invalid account and edit again"
+                  label={t("test_connection.actions.delete_edit_account")}
                   onClick={handleEdit}
                   primary
                 />
                 <p className="text-gray-500 dark:text-white">
-                  If you need help please contact support@getalby.com
+                  {t("test_connection.errors.contact_support")}
                 </p>
               </div>
             )}
@@ -98,7 +98,7 @@ export default function TestConnection() {
               <div>
                 <div className="flex space-x-2">
                   <h1 className="text-2xl font-bold text-green-bitcoin">
-                    Success!
+                    {t("test_connection.success")}
                   </h1>
                   <img
                     src="assets/icons/star.svg"
@@ -108,7 +108,7 @@ export default function TestConnection() {
                 </div>
 
                 <p className="mt-6 dark:text-gray-400">
-                  Awesome, you&apos;re ready to go!
+                  {t("test_connection.ready")}
                 </p>
 
                 <div className="mt-6 shadow-lg p-4 rounded-xl">
@@ -128,8 +128,8 @@ export default function TestConnection() {
               <div>
                 <Loading />
                 <p className="text-gray-500 dark:text-white mt-6">
-                  Initializing your account. <br />
-                  Please wait, this can take a minute
+                  {t("test_connection.initializing")} <br />
+                  {t("test_connection.please_wait")}
                 </p>
               </div>
             )}

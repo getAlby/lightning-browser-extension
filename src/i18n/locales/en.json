@@ -111,13 +111,22 @@
       }
     },
     "test_connection": {
-      "connection_error": "Connection Error",
       "edit": "Edit",
       "success": "Success!",
       "ready": "Awesome, you’re ready to go!",
       "tutorial": "Now you’ve connected your node would you like to go through a tutorial?",
       "try_tutorial": "Give it a try now",
-      "loading": "Initializing your account. Please wait, this can take a minute..."
+      "initializing": "Initializing your account.",
+      "please_wait": "Please wait, this can take a minute...",
+      "errors": {
+        "connection_error": "Connection Error",
+        "review_connection_details": "Please review your connection details.",
+        "connection_taking_long": "Trying to connect takes longer than expected... Are your details correct? Is your node reachable?",
+        "contact_support": "If you need help please contact support@getalby.com"
+      },
+      "actions": {
+        "delete_edit_account": "Delete invalid account and edit again"
+      }
     }
   }
 }
