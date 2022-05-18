@@ -34,7 +34,36 @@
       "description": "You need to first connect to a lightning wallet so that you can interact with your favorite websites that accept bitcoin lightning payments!",
       "alby": {
         "title": "Alby Wallet",
-        "description": "Create or login to your Alby account"
+        "description": "Create or login to your Alby account",
+        "pre_login": {
+          "title": "Your Alby Lightning Wallet",
+          "login_account": "Create or login to your Alby account.",
+          "host_wallet": "We host a Lightning wallet for you!",
+          "email_label": "Email Address",
+          "password_label": "Password",
+          "optional_lightning_note": {
+            "1": "Your Alby account also comes with an optional",
+            "2": "Lightning Address",
+            "3": ". This is a simple way for anyone to send you Bitcoin on the Lightning Network.",
+            "4": "learn more"
+          },
+          "optional_lightning_address_label": "Choose your Lightning Address (optional)",
+          "optional_lightning_address_suffix": "@getalby.com",
+          "errors": {
+            "create_wallet_error": "Failed to create a new wallet",
+            "connection_failed_error": "Connection failed"
+          }
+        },
+        "post_login": {
+          "title": "🎉Success!",
+          "account_ready": "Your Alby account is ready.",
+          "lightning_address": "Your lightning address:",
+          "wallet_mobile_title": "Want to use your wallet on your mobile?",
+          "wallet_mobile_description": "Import the wallet into Zeus or BlueWallet mobile app using the QR Code."
+        },
+        "actions": {
+          "continue": "Continue"
+        }
       },
       "lnd": {
         "title": "LND",

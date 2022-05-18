@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 
 import utils from "~/common/lib/utils";
@@ -22,6 +23,7 @@ export default function NewWallet() {
   const [lnAddress, setLnAddress] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation(["welcome"]);
 
   function signup(event: React.FormEvent<HTMLFormElement>) {
     setLoading(true);
@@ -50,12 +52,20 @@ export default function NewWallet() {
           });
         } else {
           console.error(data);
-          alert(`Failed to create a new wallet. ${JSON.stringify(data)}`);
+          alert(
+            `${t(
+              "choose_connector.alby.pre_login.errors.create_wallet_error"
+            )}. ${JSON.stringify(data)}`
+          );
         }
       })
       .catch((e) => {
         console.error(e);
-        alert(`Failed to create a new wallet: ${e.message}`);
+        alert(
+          `${t(
+            "choose_connector.alby.pre_login.errors.create_wallet_error"
+          )}: ${e.message}`
+        );
       })
       .finally(() => {
         setLoading(false);
@@ -91,12 +101,20 @@ export default function NewWallet() {
         }
       } else {
         console.log({ validation });
-        alert(`Connection failed (${validation.error})`);
+        alert(
+          `${t(
+            "choose_connector.alby.pre_login.errors.connection_failed_error"
+          )} (${validation.error})`
+        );
       }
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        alert(`Connection failed (${e.message})`);
+        alert(
+          `${t(
+            "choose_connector.alby.pre_login.errors.connection_failed_error"
+          )} (${e.message})`
+        );
       }
     } finally {
       setLoading(false);
@@ -106,9 +124,11 @@ export default function NewWallet() {
   return (
     <ConnectorForm
       title={
-        lndHubData.login === "" ? "Your Alby Lightning Wallet" : "🎉Success!"
+        lndHubData.login === ""
+          ? t("choose_connector.alby.pre_login.title")
+          : t("choose_connector.alby.post_login.title")
       }
-      submitLabel="Continue"
+      submitLabel={t("choose_connector.alby.actions.continue")}
       submitLoading={loading}
       onSubmit={lndHubData.login ? next : signup}
       submitDisabled={password === "" || email === ""}
@@ -118,19 +138,23 @@ export default function NewWallet() {
           <div className="mt-6 dark:text-white">
             <p>
               <strong>
-                Your Alby account is ready. <br />
+                <br />
               </strong>
             </p>
             {lndHubData.lnAddress && (
-              <p>Your lightning address: {lndHubData.lnAddress}</p>
+              <p>
+                {t("choose_connector.alby.post_login.lightning_address")}{" "}
+                {lndHubData.lnAddress}
+              </p>
             )}
           </div>
           <div className="mt-6 flex justify-center space-x-3 items-center dark:text-white">
             <div className="flex-1">
-              <strong>Want to use your wallet on your mobile?</strong>
+              <strong>
+                {t("choose_connector.alby.post_login.wallet_mobile_title")}
+              </strong>
               <br />
-              Import the wallet into Zeus or BlueWallet mobile app using the QR
-              Code.
+              {t("choose_connector.alby.post_login.wallet_mobile_description")}
             </div>
             <div className="float-right">
               <QRCode
@@ -145,16 +169,16 @@ export default function NewWallet() {
         <>
           <div className="mt-6 dark:text-white">
             <strong>
-              Create or login to your Alby account.
+              {t("choose_connector.alby.pre_login.login_account")}
               <br />
-              We host a Lightning wallet for you!
+              {t("choose_connector.alby.pre_login.host_wallet")}
             </strong>
           </div>
 
           <div className="mt-6">
             <TextField
               id="email"
-              label="Email Address"
+              label={t("choose_connector.alby.pre_login.email_label")}
               type="email"
               required
               onChange={(e) => {
@@ -165,7 +189,7 @@ export default function NewWallet() {
           <div className="mt-6">
             <TextField
               id="password"
-              label="Password"
+              label={t("choose_connector.alby.pre_login.password_label")}
               type="password"
               minLength={6}
               pattern=".{6,}"
@@ -178,32 +202,35 @@ export default function NewWallet() {
           </div>
           <div className="mt-6">
             <p className="mb-2 text-gray-700 dark:text-gray-400">
-              Your Alby account also comes with an optional{" "}
+              {t("choose_connector.alby.pre_login.optional_lightning_note.1")}{" "}
               <a
                 className="underline"
                 href="https://lightningaddress.com/"
                 target="_blank"
                 rel="noreferrer"
               >
-                Lightning Address
+                {t("choose_connector.alby.pre_login.optional_lightning_note.2")}
               </a>
-              . This is a simple way for anyone to send you Bitcoin on the
-              Lightning Network. (
+              {t("choose_connector.alby.pre_login.optional_lightning_note.3")} (
               <a
                 className="underline"
                 href="https://lightningaddress.com/"
                 target="_blank"
                 rel="noreferrer"
               >
-                learn more
+                {t("choose_connector.alby.pre_login.optional_lightning_note.4")}
               </a>
               )
             </p>
             <div>
               <TextField
                 id="lnAddress"
-                label="Choose your Lightning Address (optional)"
-                suffix="@getalby.com"
+                label={t(
+                  "choose_connector.alby.pre_login.optional_lightning_address_label"
+                )}
+                suffix={t(
+                  "choose_connector.alby.pre_login.optional_lightning_address_suffix"
+                )}
                 type="text"
                 onChange={(e) => {
                   setLnAddress(e.target.value.trim().split("@")[0]); // in case somebody enters a full address we simple remove the domain
