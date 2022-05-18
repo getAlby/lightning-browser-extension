@@ -1,13 +1,22 @@
 import db from "../../db";
 
 const deleteBlocklist = async (
-  message: { args: { id: number } },
+  message: { args: { host: string } },
   sender: unknown
 ) => {
-  const id = message.args.id;
-  await db.blocklist.delete(id);
-  await db.saveToStorage();
-  return { data: true };
+  const host = message.args.host;
+  const blocklist = await db.blocklist
+    .where("host")
+    .equalsIgnoreCase(host)
+    .first();
+
+  if (blocklist?.id) {
+    await db.blocklist.delete(blocklist.id);
+    await db.saveToStorage();
+    return { data: true };
+  } else {
+    return { data: false };
+  }
 };
 
 export default deleteBlocklist;
