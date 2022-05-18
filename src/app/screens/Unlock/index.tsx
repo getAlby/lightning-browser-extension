@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import utils from "~/common/lib/utils";
 import { useAuth } from "~/app/context/AuthContext";
@@ -15,6 +16,7 @@ function Unlock() {
     state: { from?: { pathname?: string } };
   };
   const auth = useAuth();
+  const { t } = useTranslation(["unlock"]);
   const from = location.state.from?.pathname || "/";
 
   function handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -49,7 +51,7 @@ function Unlock() {
         </div>
       </div>
       <p className="text-center text-xl font-normal font-serif mt-8 mb-5 dark:text-white">
-        Unlock to continue
+        {t("unlock_to_continue")}
       </p>
       <form onSubmit={handleSubmit}>
         <div className="mb-5">
@@ -76,19 +78,19 @@ function Unlock() {
         </div>
         <Button
           type="submit"
-          label="Unlock"
+          label={t("actions.unlock")}
           fullWidth
           primary
           disabled={password === ""}
         />
 
         <div className="flex justify-center space-x-1 mt-5">
-          <span className="text-gray-500">Need help? Contact </span>
+          <span className="text-gray-500">{t("help_contact.1")} </span>
           <a
             className="text-orange-bitcoin font-semibold"
             href="mailto:support@getalby.com"
           >
-            Alby Support
+            {t("help_contact.2")}
           </a>
         </div>
       </form>

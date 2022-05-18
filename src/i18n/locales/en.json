@@ -130,5 +130,15 @@
         "delete_edit_account": "Delete invalid account and edit again"
       }
     }
+  },
+  "unlock": {
+    "unlock_to_continue": "Unlock to continue",
+    "help_contact": {
+      "1": "Need help? Contact",
+      "2": "Alby Support"
+    },
+    "actions": {
+      "unlock": "Unlock"
+    }
   }
 }
