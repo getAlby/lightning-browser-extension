@@ -10,7 +10,6 @@ import type {
   Allowance,
   Transaction,
   SettingsStorage,
-  Blocklist,
 } from "~/types";
 import {
   MakeInvoiceArgs,
@@ -94,7 +93,7 @@ export const deleteAccount = (id: string) =>
 export const unlock = (password: string) =>
   utils.call<UnlockRes>("unlock", { password });
 export const getBlocklist = (host: string) =>
-  utils.call<Blocklist>("getBlocklist", { host });
+  utils.call<{ blocked: boolean }>("getBlocklist", { host });
 
 export default {
   getAccountInfo,
