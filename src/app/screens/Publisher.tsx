@@ -10,6 +10,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import utils from "~/common/lib/utils";
 import { Allowance } from "~/types";
 
+import { useCurreny } from "../context/CurrencyContext";
+
 dayjs.extend(relativeTime);
 
 function Publisher() {
@@ -17,6 +19,7 @@ function Publisher() {
   const [allowance, setAllowance] = useState<Allowance | undefined>();
   const { id } = useParams();
   const navigate = useNavigate();
+  const { getFiatValue } = useCurreny();
 
   const fetchData = useCallback(async () => {
     try {
@@ -24,12 +27,16 @@ function Publisher() {
         const response = await utils.call<Allowance>("getAllowanceById", {
           id: parseInt(id),
         });
+        for await (const payment of response.payments) {
+          const totalAmountFiat = await getFiatValue(payment.totalAmount);
+          payment.totalAmountFiat = totalAmountFiat;
+        }
         setAllowance(response);
       }
     } catch (e) {
       console.error(e);
     }
-  }, [id]);
+  }, [id, getFiatValue]);
 
   useEffect(() => {
     // Run once.

@@ -252,6 +252,8 @@ export interface SettingsStorage {
 
 export type SupportedExchanges = "Coindesk" | "Yad.io";
 
+// Supported currencies by Coindesk and Yad.io
+// https://github.com/AryanJ-NYC/bitcoin-conversion/blob/master/src/index.ts#L143
 export type SupportedCurrencies =
   | "AED" // United Arab Emirates Dirham"
   | "AFN" // Afghan Afghani"
