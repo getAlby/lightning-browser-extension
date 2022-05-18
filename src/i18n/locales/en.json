@@ -35,7 +35,7 @@
       "alby": {
         "title": "Alby Wallet",
         "description": "Create or login to your Alby account",
-        "pre_login": {
+        "pre_connect": {
           "title": "Your Alby Lightning Wallet",
           "login_account": "Create or login to your Alby account.",
           "host_wallet": "We host a Lightning wallet for you!",
@@ -54,7 +54,7 @@
             "connection_failed_error": "Connection failed"
           }
         },
-        "post_login": {
+        "post_connect": {
           "title": "🎉Success!",
           "account_ready": "Your Alby account is ready.",
           "lightning_address": "Your lightning address:",
@@ -67,7 +67,9 @@
       },
       "lnd": {
         "title": "LND",
-        "description": "Connect to your LND node"
+        "description": "Connect to your LND node",
+        "pre_connect": {},
+        "post_connect": {}
       },
       "lndhub": {
         "title": "LNDHub (Bluewallet)",

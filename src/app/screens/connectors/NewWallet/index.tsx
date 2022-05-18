@@ -54,7 +54,7 @@ export default function NewWallet() {
           console.error(data);
           alert(
             `${t(
-              "choose_connector.alby.pre_login.errors.create_wallet_error"
+              "choose_connector.alby.pre_connect.errors.create_wallet_error"
             )}. ${JSON.stringify(data)}`
           );
         }
@@ -63,7 +63,7 @@ export default function NewWallet() {
         console.error(e);
         alert(
           `${t(
-            "choose_connector.alby.pre_login.errors.create_wallet_error"
+            "choose_connector.alby.pre_connect.errors.create_wallet_error"
           )}: ${e.message}`
         );
       })
@@ -103,7 +103,7 @@ export default function NewWallet() {
         console.log({ validation });
         alert(
           `${t(
-            "choose_connector.alby.pre_login.errors.connection_failed_error"
+            "choose_connector.alby.pre_connect.errors.connection_failed_error"
           )} (${validation.error})`
         );
       }
@@ -112,7 +112,7 @@ export default function NewWallet() {
       if (e instanceof Error) {
         alert(
           `${t(
-            "choose_connector.alby.pre_login.errors.connection_failed_error"
+            "choose_connector.alby.pre_connect.errors.connection_failed_error"
           )} (${e.message})`
         );
       }
@@ -125,8 +125,8 @@ export default function NewWallet() {
     <ConnectorForm
       title={
         lndHubData.login === ""
-          ? t("choose_connector.alby.pre_login.title")
-          : t("choose_connector.alby.post_login.title")
+          ? t("choose_connector.alby.pre_connect.title")
+          : t("choose_connector.alby.post_connect.title")
       }
       submitLabel={t("choose_connector.alby.actions.continue")}
       submitLoading={loading}
@@ -143,7 +143,7 @@ export default function NewWallet() {
             </p>
             {lndHubData.lnAddress && (
               <p>
-                {t("choose_connector.alby.post_login.lightning_address")}{" "}
+                {t("choose_connector.alby.post_connect.lightning_address")}{" "}
                 {lndHubData.lnAddress}
               </p>
             )}
@@ -151,10 +151,12 @@ export default function NewWallet() {
           <div className="mt-6 flex justify-center space-x-3 items-center dark:text-white">
             <div className="flex-1">
               <strong>
-                {t("choose_connector.alby.post_login.wallet_mobile_title")}
+                {t("choose_connector.alby.post_connect.wallet_mobile_title")}
               </strong>
               <br />
-              {t("choose_connector.alby.post_login.wallet_mobile_description")}
+              {t(
+                "choose_connector.alby.post_connect.wallet_mobile_description"
+              )}
             </div>
             <div className="float-right">
               <QRCode
@@ -169,16 +171,16 @@ export default function NewWallet() {
         <>
           <div className="mt-6 dark:text-white">
             <strong>
-              {t("choose_connector.alby.pre_login.login_account")}
+              {t("choose_connector.alby.pre_connect.login_account")}
               <br />
-              {t("choose_connector.alby.pre_login.host_wallet")}
+              {t("choose_connector.alby.pre_connect.host_wallet")}
             </strong>
           </div>
 
           <div className="mt-6">
             <TextField
               id="email"
-              label={t("choose_connector.alby.pre_login.email_label")}
+              label={t("choose_connector.alby.pre_connect.email_label")}
               type="email"
               required
               onChange={(e) => {
@@ -189,7 +191,7 @@ export default function NewWallet() {
           <div className="mt-6">
             <TextField
               id="password"
-              label={t("choose_connector.alby.pre_login.password_label")}
+              label={t("choose_connector.alby.pre_connect.password_label")}
               type="password"
               minLength={6}
               pattern=".{6,}"
@@ -202,23 +204,28 @@ export default function NewWallet() {
           </div>
           <div className="mt-6">
             <p className="mb-2 text-gray-700 dark:text-gray-400">
-              {t("choose_connector.alby.pre_login.optional_lightning_note.1")}{" "}
+              {t("choose_connector.alby.pre_connect.optional_lightning_note.1")}{" "}
               <a
                 className="underline"
                 href="https://lightningaddress.com/"
                 target="_blank"
                 rel="noreferrer"
               >
-                {t("choose_connector.alby.pre_login.optional_lightning_note.2")}
+                {t(
+                  "choose_connector.alby.pre_connect.optional_lightning_note.2"
+                )}
               </a>
-              {t("choose_connector.alby.pre_login.optional_lightning_note.3")} (
+              {t("choose_connector.alby.pre_connect.optional_lightning_note.3")}{" "}
+              (
               <a
                 className="underline"
                 href="https://lightningaddress.com/"
                 target="_blank"
                 rel="noreferrer"
               >
-                {t("choose_connector.alby.pre_login.optional_lightning_note.4")}
+                {t(
+                  "choose_connector.alby.pre_connect.optional_lightning_note.4"
+                )}
               </a>
               )
             </p>
@@ -226,10 +233,10 @@ export default function NewWallet() {
               <TextField
                 id="lnAddress"
                 label={t(
-                  "choose_connector.alby.pre_login.optional_lightning_address_label"
+                  "choose_connector.alby.pre_connect.optional_lightning_address_label"
                 )}
                 suffix={t(
-                  "choose_connector.alby.pre_login.optional_lightning_address_suffix"
+                  "choose_connector.alby.pre_connect.optional_lightning_address_suffix"
                 )}
                 type="text"
                 onChange={(e) => {
