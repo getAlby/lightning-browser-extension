@@ -10,6 +10,7 @@ import AllowanceMenu from "@components/AllowanceMenu";
 import PublisherCard from "@components/PublisherCard";
 import Progressbar from "@components/Progressbar";
 import TransactionsTable from "@components/TransactionsTable";
+import { useCurreny } from "../context/CurrencyContext";
 
 dayjs.extend(relativeTime);
 
@@ -18,6 +19,7 @@ function Publisher() {
   const [allowance, setAllowance] = useState<Allowance | undefined>();
   const { id } = useParams();
   const navigate = useNavigate();
+  const { getFiatValue } = useCurreny();
 
   const fetchData = useCallback(async () => {
     try {
@@ -25,12 +27,16 @@ function Publisher() {
         const response = await utils.call<Allowance>("getAllowanceById", {
           id: parseInt(id),
         });
+        for await (const payment of response.payments) {
+          const totalAmountFiat = await getFiatValue(payment.totalAmount);
+          payment.totalAmountFiat = totalAmountFiat;
+        }
         setAllowance(response);
       }
     } catch (e) {
       console.error(e);
     }
-  }, [id]);
+  }, [id, getFiatValue]);
 
   useEffect(() => {
     // Run once.
@@ -51,7 +57,9 @@ function Publisher() {
         <Container>
           <div className="flex justify-between items-center pt-8 pb-4">
             <dl>
-              <dt className="text-sm font-medium text-gray-500">Allowance</dt>
+              <dt className="text-sm font-medium text-gray-500">
+                Allowancessss
+              </dt>
               <dd className="flex items-center font-bold text-xl dark:text-gray-400">
                 {allowance.usedBudget} / {allowance.totalBudget} sat used
                 <div className="ml-3 w-24">
