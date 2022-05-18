@@ -16,6 +16,7 @@ import utils from "~/common/lib/utils";
 import lnurl from "~/common/lib/lnurl";
 import getOriginData from "~/extension/content-script/originData";
 import { useAuth } from "~/app/context/AuthContext";
+import { USER_REJECTED_ERROR } from "~/common/constants";
 
 import Button from "@components/Button";
 import TextField from "@components/form/TextField";
@@ -222,7 +223,7 @@ function LNURLPay(props: Props) {
   function reject(e: MouseEvent) {
     e.preventDefault();
     if (props.details && props.origin) {
-      msg.error("User rejected");
+      msg.error(USER_REJECTED_ERROR);
     } else {
       navigate(-1);
     }

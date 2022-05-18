@@ -107,6 +107,7 @@ export default function ConnectMyNode() {
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
+      video="https://cdn.getalby-assets.com/connector-guides/in_extension_guide_mynode.mp4"
     >
       <TextField
         id="lndconnect"
