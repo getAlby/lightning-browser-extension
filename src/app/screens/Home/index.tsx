@@ -17,11 +17,14 @@ import AllowanceMenu from "@components/AllowanceMenu";
 import Loading from "@components/Loading";
 import PublisherCard from "@components/PublisherCard";
 import Progressbar from "@components/Progressbar";
+import utils from "~/common/lib/utils";
 
 dayjs.extend(relativeTime);
 
 function Home() {
   const [allowance, setAllowance] = useState<Allowance | null>(null);
+  const [blocklist, setBlocklist] = useState<boolean | null>(null);
+  const [currentUrl, setCurrentUrl] = useState<URL | null>(null);
   const [payments, setPayments] = useState<Transaction[]>([]);
   const [loadingAllowance, setLoadingAllowance] = useState(true);
   const [loadingPayments, setLoadingPayments] = useState(true);
@@ -37,14 +40,31 @@ function Home() {
       });
       const [currentTab] = tabs;
       const url = new URL(currentTab.url as string);
+      setCurrentUrl(url);
       const result = await api.getAllowance(url.host);
       if (result.enabled) {
         setAllowance(result);
+      }
+      const blocklistResult = await api.getBlocklist(url.host);
+      if (blocklistResult.blocked) {
+        setBlocklist(blocklistResult.blocked);
       }
     } catch (e) {
       console.error(e);
     } finally {
       setLoadingAllowance(false);
+    }
+  }
+
+  async function unblock() {
+    try {
+      if (currentUrl?.host)
+        await utils.call("deleteBlocklist", {
+          host: currentUrl.host,
+        });
+      window.location.reload(); // refresh home page
+    } catch (e) {
+      console.error(e);
     }
   }
 
@@ -233,6 +253,21 @@ function Home() {
             }}
           />
         </div>
+
+        {blocklist && (
+          <div className="mb-2 items-center py-3 dark:text-white">
+            <p className="py-1">This site is currently in blocklist.</p>
+            <Button
+              fullWidth
+              // icon={<ReceiveIcon className="w-6 h-6" />}
+              label="Unblock"
+              direction="column"
+              onClick={async () => {
+                await unblock();
+              }}
+            />
+          </div>
+        )}
 
         {loadingPayments ? (
           <div className="flex justify-center">
