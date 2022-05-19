@@ -23,7 +23,7 @@ export default function NewWallet() {
   const [lnAddress, setLnAddress] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t } = useTranslation(["translation", "common"]);
 
   function signup(event: React.FormEvent<HTMLFormElement>) {
     setLoading(true);
@@ -191,7 +191,7 @@ export default function NewWallet() {
           <div className="mt-6">
             <TextField
               id="password"
-              label={t("choose_connector.alby.pre_connect.password_label")}
+              label={t("password", { ns: "common" })}
               type="password"
               minLength={6}
               pattern=".{6,}"

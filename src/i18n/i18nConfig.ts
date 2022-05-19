@@ -1,12 +1,21 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
-import en from "./locales/en.json";
-import hi from "./locales/hi.json";
+import en from "./locales/en/translation.json";
+import en_common from "./locales/en/common.json";
+import hi from "./locales/hi/translation.json";
+import hi_common from "./locales/en/common.json";
 
+// Load namespaces
 export const resources = {
-  en,
-  hi,
+  en: {
+    translation: en,
+    common: en_common,
+  },
+  hi: {
+    translation: hi,
+    common: hi_common,
+  },
 };
 
 i18n
@@ -21,6 +30,9 @@ i18n
     //debug: true,
     fallbackLng: "en",
     resources,
+    interpolation: {
+      escapeValue: false,
+    },
   });
 
 export default i18n;
