@@ -44,3 +44,18 @@ main {
 .ReactModal__Overlay--before-close {
   opacity: 0;
 }
+
+
+
+/* Hide number spinner */
+/* Webkit */
+#numberInput input::-webkit-outer-spin-button,
+#numberInput input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+#numberInput input[type=number] {
+  -moz-appearance: textfield;
+}
