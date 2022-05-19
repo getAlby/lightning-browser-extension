@@ -2,7 +2,7 @@ import { Transition } from "@headlessui/react";
 import { ChangeEventHandler } from "react";
 
 import Checkbox from "../form/Checkbox";
-import TextField from "../form/TextField";
+import DualCurrencyInput from "../form/NumberField";
 
 type Props = {
   remember: boolean;
@@ -50,15 +50,13 @@ function BudgetControl({
           until it is exhausted.
         </p>
         <div>
-          <TextField
+          <DualCurrencyInput
+            secondaryValue={fiatAmount}
             id="budget"
             label="Budget"
             placeholder="sats"
             value={budget}
             type="number"
-            endAdornment={
-              <span className="text-xs text-slate-500 mr-1">{fiatAmount}</span>
-            }
             onChange={onBudgetChange}
           />
         </div>
