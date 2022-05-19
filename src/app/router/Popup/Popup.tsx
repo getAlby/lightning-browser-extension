@@ -12,7 +12,7 @@ import { AccountsProvider } from "~/app/context/AccountsContext";
 import RequireAuth from "../RequireAuth";
 import Navbar from "@components/Navbar";
 import Keysend from "@screens/Keysend";
-import { CurrencyProvider, useCurreny } from "~/app/context/CurrencyContext";
+import { CurrencyProvider, useCurrency } from "~/app/context/CurrencyContext";
 
 const POPUP_MAX_HEIGHT = 600;
 
@@ -49,7 +49,7 @@ function Popup() {
 
 const Layout = () => {
   const auth = useAuth();
-  const { balances } = useCurreny();
+  const { balances } = useCurrency();
 
   return (
     <div className="flex flex-col" style={{ height: `${POPUP_MAX_HEIGHT}px` }}>

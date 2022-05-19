@@ -18,7 +18,7 @@ import Unlock from "@screens/Unlock";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
 import Accounts from "@screens/Accounts";
 import Keysend from "@screens/Keysend";
-import { CurrencyProvider, useCurreny } from "~/app/context/CurrencyContext";
+import { CurrencyProvider, useCurrency } from "~/app/context/CurrencyContext";
 
 function Options() {
   return (
@@ -91,7 +91,7 @@ function Options() {
 
 const Layout = () => {
   const auth = useAuth();
-  const { balances } = useCurreny();
+  const { balances } = useCurrency();
 
   return (
     <div>

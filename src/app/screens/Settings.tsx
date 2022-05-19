@@ -15,11 +15,11 @@ import Input from "@components/form/Input";
 import Setting from "@components/Setting";
 import Select from "@components/form/Select";
 import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
-import { useCurreny } from "../context/CurrencyContext";
+import { useCurrency } from "../context/CurrencyContext";
 
 function Settings() {
   const [loading, setLoading] = useState(true);
-  const { setCurrencyValue, currencies } = useCurreny();
+  const { setCurrencyValue, currencies } = useCurrency();
   const [settings, setSettings] = useState<SettingsStorage>({
     websiteEnhancements: false,
     legacyLnurlAuth: false,

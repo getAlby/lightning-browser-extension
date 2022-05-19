@@ -19,13 +19,13 @@ import TextField from "@components/form/TextField";
 // import Select from "@components/Form/Select";
 import Header from "@components/Header";
 import Loading from "@components/Loading";
-import { useCurreny } from "../context/CurrencyContext";
+import { useCurrency } from "../context/CurrencyContext";
 import DualCurrencyInput from "../components/form/NumberField";
 
 function Receive() {
   const auth = useAuth();
   const navigate = useNavigate();
-  const { getFiatValue } = useCurreny();
+  const { getFiatValue } = useCurrency();
   const [formData, setFormData] = useState({
     amount: "0",
     description: "",
