@@ -197,7 +197,9 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
     satsBalance: string;
     fiatBalance: string;
   }>({ satsBalance: "", fiatBalance: "" });
-  const [currency, setCurrency] = useState<SupportedCurrencies>("USD");
+  const [currency, setCurrency] = useState<SupportedCurrencies>(
+    "USD" as SupportedCurrencies
+  );
   const [exchange, setExchange] = useState<SupportedExchanges>("Coindesk");
   const auth = useAuth();
 
