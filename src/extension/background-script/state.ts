@@ -35,7 +35,7 @@ interface BrowserStorage {
   currentAccountId: string | null;
 }
 
-export const DEFAULT_SETTINGS = {
+export const DEFAULT_SETTINGS: SettingsStorage = {
   websiteEnhancements: true,
   legacyLnurlAuth: false,
   userName: "",
