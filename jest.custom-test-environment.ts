@@ -12,9 +12,6 @@ class CustomEnvironment extends TestEnvironment {
       },
       context
     );
-    const config = projectConfig;
-  }
-}
   }
 }
 
