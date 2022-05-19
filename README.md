@@ -120,7 +120,7 @@ If this is not reachable please let us know.
 - [Test-setup](https://github.com/getAlby/lightning-browser-extension/wiki/Test-setup) for different connectors (i.e. LND)
 - [RTL](https://rtl.regtest.getalby.com) for testing nodes (PW: `getalby`)
   Currently only lists LND nodes
-- [LNDhub.go API Swagger](https://ln.getalby.com/swagger/index.html)
+- [LNDhub.go API Swagger](https://lndhub.regtest.getalby.com/swagger/index.html)
 
 #### Storybook.js
 
