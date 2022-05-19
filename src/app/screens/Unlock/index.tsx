@@ -16,7 +16,7 @@ function Unlock() {
     state: { from?: { pathname?: string } };
   };
   const auth = useAuth();
-  const { t } = useTranslation(["unlock"]);
+  const { t } = useTranslation();
   const from = location.state.from?.pathname || "/";
 
   function handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -51,7 +51,7 @@ function Unlock() {
         </div>
       </div>
       <p className="text-center text-xl font-normal font-serif mt-8 mb-5 dark:text-white">
-        {t("unlock_to_continue")}
+        {t("unlock.unlock_to_continue")}
       </p>
       <form onSubmit={handleSubmit}>
         <div className="mb-5">
@@ -78,19 +78,21 @@ function Unlock() {
         </div>
         <Button
           type="submit"
-          label={t("actions.unlock")}
+          label={t("unlock.actions.unlock")}
           fullWidth
           primary
           disabled={password === ""}
         />
 
         <div className="flex justify-center space-x-1 mt-5">
-          <span className="text-gray-500">{t("help_contact.1")} </span>
+          <span className="text-gray-500">
+            {t("unlock.help_contact.part1")}{" "}
+          </span>
           <a
             className="text-orange-bitcoin font-semibold"
             href="mailto:support@getalby.com"
           >
-            {t("help_contact.2")}
+            {t("unlock.help_contact.part2")}
           </a>
         </div>
       </form>

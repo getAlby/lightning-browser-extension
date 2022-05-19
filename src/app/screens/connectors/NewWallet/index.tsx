@@ -23,7 +23,7 @@ export default function NewWallet() {
   const [lnAddress, setLnAddress] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { t } = useTranslation(["welcome"]);
+  const { t } = useTranslation();
 
   function signup(event: React.FormEvent<HTMLFormElement>) {
     setLoading(true);
@@ -204,7 +204,9 @@ export default function NewWallet() {
           </div>
           <div className="mt-6">
             <p className="mb-2 text-gray-700 dark:text-gray-400">
-              {t("choose_connector.alby.pre_connect.optional_lightning_note.1")}{" "}
+              {t(
+                "choose_connector.alby.pre_connect.optional_lightning_note.part1"
+              )}{" "}
               <a
                 className="underline"
                 href="https://lightningaddress.com/"
@@ -212,10 +214,12 @@ export default function NewWallet() {
                 rel="noreferrer"
               >
                 {t(
-                  "choose_connector.alby.pre_connect.optional_lightning_note.2"
+                  "choose_connector.alby.pre_connect.optional_lightning_note.part2"
                 )}
               </a>
-              {t("choose_connector.alby.pre_connect.optional_lightning_note.3")}{" "}
+              {t(
+                "choose_connector.alby.pre_connect.optional_lightning_note.part3"
+              )}{" "}
               (
               <a
                 className="underline"
@@ -224,7 +228,7 @@ export default function NewWallet() {
                 rel="noreferrer"
               >
                 {t(
-                  "choose_connector.alby.pre_connect.optional_lightning_note.4"
+                  "choose_connector.alby.pre_connect.optional_lightning_note.part4"
                 )}
               </a>
               )

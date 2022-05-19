@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import utils from "~/common/lib/utils";
 import i18n from "~/i18n/i18nConfig";
 import { useTranslation } from "react-i18next";
-import { welcomeI18nNamespace } from "~/i18n/namespaces";
 
 const initialFormData = Object.freeze({
   password: "",
@@ -21,7 +20,7 @@ export default function SetPassword() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState(initialErrors);
-  const { t } = useTranslation(["welcome"]);
+  const { t } = useTranslation();
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -55,17 +54,11 @@ export default function SetPassword() {
     let passwordConfirmation = "";
 
     if (!formData.password)
-      password = i18n.t("set_password.enter_password", welcomeI18nNamespace);
+      password = i18n.t("welcome.set_password.enter_password");
     if (!formData.passwordConfirmation) {
-      passwordConfirmation = i18n.t(
-        "set_password.confirm_password",
-        welcomeI18nNamespace
-      );
+      passwordConfirmation = i18n.t("welcome.set_password.confirm_password");
     } else if (formData.password !== formData.passwordConfirmation) {
-      passwordConfirmation = i18n.t(
-        "set_password.mismatched_password",
-        welcomeI18nNamespace
-      );
+      passwordConfirmation = i18n.t("welcome.set_password.mismatched_password");
     }
     setErrors({
       password,
@@ -78,16 +71,16 @@ export default function SetPassword() {
       <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-surface-02dp py-12 px-10">
         <div className="lg:w-1/2">
           <h1 className="text-2xl font-bold dark:text-white">
-            {t("set_password.title")}
+            {t("welcome.set_password.title")}
           </h1>
           <p className="text-gray-500 mt-6 dark:text-gray-400">
-            {t("set_password.description")}
+            {t("welcome.set_password.description")}
           </p>
           <div className="w-4/5">
             <div className="mt-6">
               <TextField
                 id="password"
-                label={t("set_password.choose_password_label")}
+                label={t("welcome.set_password.choose_password_label")}
                 type="password"
                 autoFocus
                 required
@@ -100,7 +93,7 @@ export default function SetPassword() {
             <div className="mt-6">
               <TextField
                 id="passwordConfirmation"
-                label={t("set_password.confirm_password_label")}
+                label={t("welcome.set_password.confirm_password_label")}
                 type="password"
                 required
                 onChange={handleChange}
@@ -122,7 +115,7 @@ export default function SetPassword() {
       </div>
       <div className="mt-8 flex justify-center">
         <Button
-          label="Next"
+          label={t("welcome.set_password.actions.next")}
           type="submit"
           primary
           disabled={

@@ -9,34 +9,33 @@ import {
 import { useNavigate } from "react-router-dom";
 import i18n from "~/i18n/i18nConfig";
 import { useTranslation } from "react-i18next";
-import { welcomeI18nNamespace } from "~/i18n/namespaces";
 
 const features = [
   {
-    name: i18n.t("intro.send", welcomeI18nNamespace),
-    description: i18n.t("intro.send_description", welcomeI18nNamespace),
+    name: i18n.t("welcome.intro.send"),
+    description: i18n.t("welcome.intro.send_description"),
     icon: LightningIcon,
   },
   {
-    name: i18n.t("intro.paywall", welcomeI18nNamespace),
-    description: i18n.t("intro.paywall_description", welcomeI18nNamespace),
+    name: i18n.t("welcome.intro.paywall"),
+    description: i18n.t("welcome.intro.paywall_description"),
     icon: KeyIcon,
   },
   {
-    name: i18n.t("intro.privacy", welcomeI18nNamespace),
-    description: i18n.t("intro.privacy_description", welcomeI18nNamespace),
+    name: i18n.t("welcome.intro.privacy"),
+    description: i18n.t("welcome.intro.privacy_description"),
     icon: ShieldIcon,
   },
   {
-    name: i18n.t("intro.foss", welcomeI18nNamespace),
-    description: i18n.t("intro.foss_description", welcomeI18nNamespace),
+    name: i18n.t("welcome.intro.foss"),
+    description: i18n.t("welcome.intro.foss_description"),
     icon: CodeIcon,
   },
 ];
 
 export default function Intro() {
   const navigate = useNavigate();
-  const { t } = useTranslation(["welcome"]);
+  const { t } = useTranslation();
 
   return (
     <div>
@@ -54,7 +53,7 @@ export default function Intro() {
         <Button
           onClick={() => navigate("/set-password")}
           type="button"
-          label={t("intro.actions.get_started")}
+          label={t("welcome.intro.actions.get_started")}
           primary
         />
       </div>

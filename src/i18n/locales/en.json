@@ -1,33 +1,53 @@
 {
-  "welcome": {
-    "heading": "The power of lightning in your browser",
-    "nav": {
-      "welcome": "Welcome",
-      "password": "Your Password",
-      "connect": "Connect to Lightning",
-      "done": "Done"
-    },
-    "intro": {
-      "send": "Send in One Click",
-      "send_description": "Lightning transactions happen all in your browser. No alt+tab or QR-code scanning needed.",
-      "paywall": "No more annoying paywalls",
-      "paywall_description": "Define individual budgets for websites to enable seamless payment streams. No more annoying paywalls.",
-      "privacy": "Privacy first",
-      "privacy_description": "Use lightning to authenticate and control your privacy.",
-      "foss": "Free and Open Source",
-      "foss_description": "Completely open code that can be audited by anyone. No stats or trackers. You are in control.",
-      "actions": {
-        "get_started": "Get Started"
+  "translation": {
+    "welcome": {
+      "heading": "The power of lightning in your browser",
+      "nav": {
+        "welcome": "Welcome",
+        "password": "Your Password",
+        "connect": "Connect to Lightning",
+        "done": "Done"
+      },
+      "intro": {
+        "send": "Send in One Click",
+        "send_description": "Lightning transactions happen all in your browser. No alt+tab or QR-code scanning needed.",
+        "paywall": "No more annoying paywalls",
+        "paywall_description": "Define individual budgets for websites to enable seamless payment streams. No more annoying paywalls.",
+        "privacy": "Privacy first",
+        "privacy_description": "Use lightning to authenticate and control your privacy.",
+        "foss": "Free and Open Source",
+        "foss_description": "Completely open code that can be audited by anyone. No stats or trackers. You are in control.",
+        "actions": {
+          "get_started": "Get Started"
+        }
+      },
+      "set_password": {
+        "title": "Protect your wallet",
+        "description": "Your wallet is securely encrypted with a password and needs to be unlocked before usage.",
+        "enter_password": "Please enter a password.",
+        "confirm_password": "Please confirm your password.",
+        "mismatched_password": "Passwords don't match.",
+        "choose_password_label": "Choose a password:",
+        "confirm_password_label": "Let's confirm you typed it correct:",
+        "actions": {
+          "next": "Next"
+        }
+      },
+      "test_connection": {
+        "edit": "Edit",
+        "success": "Success!",
+        "ready": "Awesome, you’re ready to go!",
+        "tutorial": "Now you’ve connected your node would you like to go through a tutorial?",
+        "try_tutorial": "Give it a try now",
+        "initializing": "Initializing your account. Please wait, this can take a minute...",
+        "connection_error": "Connection Error",
+        "review_connection_details": "Please review your connection details.",
+        "connection_taking_long": "Trying to connect takes longer than expected... Are your details correct? Is your node reachable?",
+        "contact_support": "If you need help please contact support@getalby.com",
+        "actions": {
+          "delete_edit_account": "Delete invalid account and edit again"
+        }
       }
-    },
-    "set_password": {
-      "title": "Protect your wallet",
-      "description": "Your wallet is securely encrypted with a password and needs to be unlocked before usage.",
-      "enter_password": "Please enter a password.",
-      "confirm_password": "Please confirm your password.",
-      "mismatched_password": "Passwords don't match.",
-      "choose_password_label": "Choose a password:",
-      "confirm_password_label": "Let's confirm you typed it correct:"
     },
     "choose_connector": {
       "title": "Do you have a lightning wallet?",
@@ -42,10 +62,10 @@
           "email_label": "Email Address",
           "password_label": "Password",
           "optional_lightning_note": {
-            "1": "Your Alby account also comes with an optional",
-            "2": "Lightning Address",
-            "3": ". This is a simple way for anyone to send you Bitcoin on the Lightning Network.",
-            "4": "learn more"
+            "part1": "Your Alby account also comes with an optional",
+            "part2": "Lightning Address",
+            "part3": ". This is a simple way for anyone to send you Bitcoin on the Lightning Network.",
+            "part4": "learn more"
           },
           "optional_lightning_address_label": "Choose your Lightning Address (optional)",
           "optional_lightning_address_suffix": "@getalby.com",
@@ -112,33 +132,16 @@
         "description": "Create or connect to a Bitcoin Jungle (Galoy) account"
       }
     },
-    "test_connection": {
-      "edit": "Edit",
-      "success": "Success!",
-      "ready": "Awesome, you’re ready to go!",
-      "tutorial": "Now you’ve connected your node would you like to go through a tutorial?",
-      "try_tutorial": "Give it a try now",
-      "initializing": "Initializing your account.",
-      "please_wait": "Please wait, this can take a minute...",
-      "errors": {
-        "connection_error": "Connection Error",
-        "review_connection_details": "Please review your connection details.",
-        "connection_taking_long": "Trying to connect takes longer than expected... Are your details correct? Is your node reachable?",
-        "contact_support": "If you need help please contact support@getalby.com"
+    "unlock": {
+      "unlock_to_continue": "Unlock to continue",
+      "help_contact": {
+        "part1": "Need help? Contact",
+        "part2": "Alby Support"
       },
       "actions": {
-        "delete_edit_account": "Delete invalid account and edit again"
+        "unlock": "Unlock",
+        "next": "Next"
       }
-    }
-  },
-  "unlock": {
-    "unlock_to_continue": "Unlock to continue",
-    "help_contact": {
-      "1": "Need help? Contact",
-      "2": "Alby Support"
-    },
-    "actions": {
-      "unlock": "Unlock"
     }
   }
 }
