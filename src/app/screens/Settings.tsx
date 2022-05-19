@@ -28,7 +28,7 @@ function Settings() {
     userEmail: "",
     locale: "",
     theme: "system",
-    currency: "USD",
+    currency: "USD" as SupportedCurrencies,
     exchange: "Coindesk",
   });
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
