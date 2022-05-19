@@ -25,7 +25,7 @@ import TextField from "@components/form/TextField";
 import PublisherCard from "@components/PublisherCard";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import SatButtons from "@components/SatButtons";
-import { useCurreny } from "../context/CurrencyContext";
+import { useCurrency } from "../context/CurrencyContext";
 import DualCurrencyInput from "../components/form/NumberField";
 
 type Origin = {
@@ -50,7 +50,7 @@ function LNURLPay(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAuth();
-  const { getFiatValue } = useCurreny();
+  const { getFiatValue } = useCurrency();
   const [loading, setLoading] = useState(true);
   const [details, setDetails] = useState(props.details);
   const [origin] = useState(

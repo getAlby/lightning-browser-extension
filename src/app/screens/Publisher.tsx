@@ -10,7 +10,7 @@ import AllowanceMenu from "@components/AllowanceMenu";
 import PublisherCard from "@components/PublisherCard";
 import Progressbar from "@components/Progressbar";
 import TransactionsTable from "@components/TransactionsTable";
-import { useCurreny } from "../context/CurrencyContext";
+import { useCurrency } from "../context/CurrencyContext";
 
 dayjs.extend(relativeTime);
 
@@ -19,7 +19,7 @@ function Publisher() {
   const [allowance, setAllowance] = useState<Allowance | undefined>();
   const { id } = useParams();
   const navigate = useNavigate();
-  const { getFiatValue } = useCurreny();
+  const { getFiatValue } = useCurrency();
 
   const fetchData = useCallback(async () => {
     try {

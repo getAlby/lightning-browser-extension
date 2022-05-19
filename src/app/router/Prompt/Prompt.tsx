@@ -21,7 +21,7 @@ import LNURLAuth from "@screens/LNURLAuth";
 import LNURLWithdraw from "@screens/LNURLWithdraw";
 import Keysend from "@screens/ConfirmKeysend";
 import AccountMenu from "@components/AccountMenu";
-import { CurrencyProvider, useCurreny } from "~/app/context/CurrencyContext";
+import { CurrencyProvider, useCurrency } from "~/app/context/CurrencyContext";
 
 // Parse out the parameters from the querystring.
 const params = new URLSearchParams(window.location.search);
@@ -163,7 +163,7 @@ function Prompt() {
 
 const Layout = () => {
   const auth = useAuth();
-  const { balances } = useCurreny();
+  const { balances } = useCurrency();
 
   return (
     <>

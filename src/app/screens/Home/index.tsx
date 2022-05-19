@@ -17,7 +17,7 @@ import AllowanceMenu from "@components/AllowanceMenu";
 import Loading from "@components/Loading";
 import PublisherCard from "@components/PublisherCard";
 import Progressbar from "@components/Progressbar";
-import { useCurreny } from "~/app/context/CurrencyContext";
+import { useCurrency } from "~/app/context/CurrencyContext";
 
 dayjs.extend(relativeTime);
 
@@ -29,7 +29,7 @@ function Home() {
   const [loadingSendSats, setLoadingSendSats] = useState(false);
   const [lnData, setLnData] = useState<Battery[]>([]);
   const navigate = useNavigate();
-  const { getFiatValue } = useCurreny();
+  const { getFiatValue } = useCurrency();
 
   async function loadAllowance() {
     try {

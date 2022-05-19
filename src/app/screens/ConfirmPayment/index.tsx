@@ -16,7 +16,7 @@ import { useAuth } from "~/app/context/AuthContext";
 import BudgetControl from "@components/BudgetControl";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import SuccessMessage from "@components/SuccessMessage";
-import { useCurreny } from "~/app/context/CurrencyContext";
+import { useCurrency } from "~/app/context/CurrencyContext";
 
 export type Props = {
   origin?: OriginData;
@@ -27,7 +27,7 @@ function ConfirmPayment(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAuth();
-  const { getFiatValue } = useCurreny();
+  const { getFiatValue } = useCurrency();
   const invoiceRef = useRef(
     lightningPayReq.decode(
       props.paymentRequest || (searchParams.get("paymentRequest") as string)
