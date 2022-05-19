@@ -15,7 +15,9 @@ export default function TestConnection() {
   }>();
   const [errorMessage, setErrorMessage] = useState();
   const [loading, setLoading] = useState(false);
-  const { t } = useTranslation();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "welcome.test_connection",
+  });
 
   const navigate = useNavigate();
 
@@ -54,14 +56,10 @@ export default function TestConnection() {
           {errorMessage && (
             <div>
               <h1 className="text-3xl font-bold dark:text-white">
-                {t("welcome.test_connection.connection_error")}
+                {t("connection_error")}
               </h1>
               <p className="dark:text-gray-500">{errorMessage}</p>
-              <Button
-                label={t("welcome.test_connection.edit")}
-                onClick={handleEdit}
-                primary
-              />
+              <Button label={t("edit")} onClick={handleEdit} primary />
             </div>
           )}
 
@@ -69,13 +67,11 @@ export default function TestConnection() {
             <div>
               <div className="flex space-x-2">
                 <h1 className="text-2xl font-bold text-green-bitcoin">
-                  {t("welcome.test_connection.success")}
+                  {t("success")}
                 </h1>
                 <img src="assets/icons/star.svg" alt="image" className="w-8" />
               </div>
-              <p className="mt-6 dark:text-white">
-                {t("welcome.test_connection.ready")}
-              </p>
+              <p className="mt-6 dark:text-white">{t("ready")}</p>
 
               <div className="mt-6 shadow-lg p-4 rounded-xl">
                 <Card
@@ -89,15 +85,10 @@ export default function TestConnection() {
                 />
               </div>
               <div>
-                <p className="mt-8 dark:text-white">
-                  {t("welcome.test_connection.tutorial")}
-                </p>
+                <p className="mt-8 dark:text-white">{t("tutorial")}</p>
                 <div className="mt-8">
                   <a href="https://getalby.com/demo">
-                    <Button
-                      label={t("welcome.test_connection.try_tutorial")}
-                      primary
-                    />
+                    <Button label={t("try_tutorial")} primary />
                   </a>
                 </div>
               </div>
@@ -108,7 +99,7 @@ export default function TestConnection() {
             <div>
               <Loading />
               <p className="text-gray-500 dark:text-white mt-6">
-                {t("welcome.test_connection.initializing")}
+                {t("initializing")}
               </p>
             </div>
           )}

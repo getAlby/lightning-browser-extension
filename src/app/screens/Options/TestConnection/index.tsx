@@ -23,7 +23,9 @@ export default function TestConnection() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "welcome.test_connection",
+  });
 
   function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
     utils.call("deleteAccount").then(() => {
@@ -35,7 +37,7 @@ export default function TestConnection() {
     setLoading(true);
     // show an error message after 45 seconds. Then probably something is wrong
     const timer = setTimeout(() => {
-      setErrorMessage(t("welcome.test_connection.connection_taking_long"));
+      setErrorMessage(t("connection_taking_long"));
     }, 45000);
     try {
       const { currentAccountId } = await api.getStatus();
@@ -73,10 +75,10 @@ export default function TestConnection() {
             {errorMessage && (
               <div>
                 <h1 className="text-3xl font-bold dark:text-white">
-                  {t("welcome.test_connection.connection_error")}
+                  {t("connection_error")}
                 </h1>
                 <p className="text-gray-500 dark:text-white">
-                  {t("welcome.test_connection.review_connection_details")}
+                  {t("review_connection_details")}
                 </p>
 
                 <p className="text-gray-500 dark:text-grey-500 mt-4 mb-4">
@@ -84,14 +86,12 @@ export default function TestConnection() {
                 </p>
 
                 <Button
-                  label={t(
-                    "welcome.test_connection.actions.delete_edit_account"
-                  )}
+                  label={t("actions.delete_edit_account")}
                   onClick={handleEdit}
                   primary
                 />
                 <p className="text-gray-500 dark:text-white">
-                  {t("welcome.test_connection.contact_support")}
+                  {t("contact_support")}
                 </p>
               </div>
             )}
@@ -100,7 +100,7 @@ export default function TestConnection() {
               <div>
                 <div className="flex space-x-2">
                   <h1 className="text-2xl font-bold text-green-bitcoin">
-                    {t("welcome.test_connection.success")}
+                    {t("success")}
                   </h1>
                   <img
                     src="assets/icons/star.svg"
@@ -109,9 +109,7 @@ export default function TestConnection() {
                   />
                 </div>
 
-                <p className="mt-6 dark:text-gray-400">
-                  {t("welcome.test_connection.ready")}
-                </p>
+                <p className="mt-6 dark:text-gray-400">{t("ready")}</p>
 
                 <div className="mt-6 shadow-lg p-4 rounded-xl">
                   <Card
@@ -130,7 +128,7 @@ export default function TestConnection() {
               <div>
                 <Loading />
                 <p className="text-gray-500 dark:text-white mt-6">
-                  {t("welcome.test_connection.initializing")} <br />
+                  {t("initializing")} <br />
                 </p>
               </div>
             )}
