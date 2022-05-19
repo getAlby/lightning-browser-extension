@@ -123,6 +123,9 @@ dist
 *.sass.map
 *.scss.map
 
+# OS files
+.DS_Store
+
 ## Build directory
 dist/
 .awcache

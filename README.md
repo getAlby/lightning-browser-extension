@@ -24,7 +24,6 @@ The extension can connect to different node implementations and supports custodi
 - [x] Keysend
 - [ ] [Lsat](https://lsat.tech/) support
 
-
 ### STATUS: 🚀
 
 ## Join the conversation
@@ -37,7 +36,7 @@ We also do a weekly call on Monday at [14:00 UTC](https://www.worldtimebuddy.com
 
 Alby supports
 
-- All [Chromium based browsers](https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium) - Chrome Opera, Brave etc.
+- All [Chromium based browsers](<https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium>) - Chrome Opera, Brave etc.
 - Firefox
 - more coming soon...
 
@@ -113,6 +112,21 @@ Then run the following:
   - Opera
     - `yarn run dev:opera`
 
+#### Testnet/testing-accounts for development
+
+We set up our own internal testnet, which can be used for your development.  
+If this is not reachable please let us know.
+
+- [Test-setup](https://github.com/getAlby/lightning-browser-extension/wiki/Test-setup) for different connectors (i.e. LND)
+- [RTL](https://rtl.regtest.getalby.com) for testing nodes (PW: `getalby`)
+  Currently only lists LND nodes
+- [LNDhub.go API Swagger](https://lndhub.regtest.getalby.com/swagger/index.html)
+
+#### Storybook.js
+
+We have a working [Storybook](https://storybook.js.org)-setup and some components have stories.  
+You can find the deployed Storybook here: https://lbe-stories.netlify.app
+
 ### 💻 Load extension into browser
 
 - **Chrome**
@@ -173,6 +187,7 @@ If you're a developer looking to help but not sure where to begin, check out the
 If you're looking for a bigger challenge, before opening a pull request please [create an issue](https://github.com/bumi/lightning-browser-extension/issues/new) or [join our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2) to get feedback, discuss the best way to tackle the challenge, and to ensure that there's no duplication of work.
 
 ### Translations
+
 Alby uses [Weblate](https://weblate.org/en/) to manage translations for different locales. If you'd like to contribute, you can [add translations here](https://hosted.weblate.org/projects/getalby-lightning-browser-extension/getalby-lightning-browser-extension/).
 
 ## ❔ FAQs

@@ -188,6 +188,7 @@ export interface Allowance {
   name: string;
   payments: Transaction[];
   paymentsCount: number;
+  paymentsAmount: number;
   percentage: string;
   remainingBudget: number;
   totalBudget: number;
