@@ -7,7 +7,7 @@ import SuccessMessage from "@components/SuccessMessage";
 import { useState, MouseEvent, useRef, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useCurreny } from "~/app/context/CurrencyContext";
+import { useCurrency } from "~/app/context/CurrencyContext";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -24,7 +24,7 @@ type Props = {
 function Keysend(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { getFiatValue } = useCurreny();
+  const { getFiatValue } = useCurrency();
   const [rememberMe, setRememberMe] = useState(false);
   const [origin] = useState(
     props.origin ||

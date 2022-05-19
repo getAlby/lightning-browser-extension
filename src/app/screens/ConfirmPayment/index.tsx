@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "~/app/context/AuthContext";
-import { useCurreny } from "~/app/context/CurrencyContext";
+import { useCurrency } from "~/app/context/CurrencyContext";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -25,7 +25,7 @@ function ConfirmPayment(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAuth();
-  const { getFiatValue } = useCurreny();
+  const { getFiatValue } = useCurrency();
   const invoiceRef = useRef(
     lightningPayReq.decode(
       props.paymentRequest || (searchParams.get("paymentRequest") as string)

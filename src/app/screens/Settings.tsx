@@ -16,11 +16,11 @@ import {
   SupportedExchanges,
 } from "~/types";
 
-import { useCurreny } from "../context/CurrencyContext";
+import { useCurrency } from "../context/CurrencyContext";
 
 function Settings() {
   const [loading, setLoading] = useState(true);
-  const { setCurrencyValue, currencies } = useCurreny();
+  const { setCurrencyValue, currencies } = useCurrency();
   const [settings, setSettings] = useState<SettingsStorage>({
     websiteEnhancements: false,
     legacyLnurlAuth: false,

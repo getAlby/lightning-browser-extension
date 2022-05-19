@@ -10,7 +10,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import utils from "~/common/lib/utils";
 import { Allowance } from "~/types";
 
-import { useCurreny } from "../context/CurrencyContext";
+import { useCurrency } from "../context/CurrencyContext";
 
 dayjs.extend(relativeTime);
 
@@ -19,7 +19,7 @@ function Publisher() {
   const [allowance, setAllowance] = useState<Allowance | undefined>();
   const { id } = useParams();
   const navigate = useNavigate();
-  const { getFiatValue } = useCurreny();
+  const { getFiatValue } = useCurrency();
 
   const fetchData = useCallback(async () => {
     try {

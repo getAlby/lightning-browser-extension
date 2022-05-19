@@ -16,7 +16,7 @@ import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { AccountsProvider } from "~/app/context/AccountsContext";
 import { AuthProvider, useAuth } from "~/app/context/AuthContext";
-import { CurrencyProvider, useCurreny } from "~/app/context/CurrencyContext";
+import { CurrencyProvider, useCurrency } from "~/app/context/CurrencyContext";
 import RequireAuth from "~/app/router/RequireAuth";
 import connectorRoutes from "~/app/router/connectorRoutes";
 
@@ -91,7 +91,7 @@ function Options() {
 
 const Layout = () => {
   const auth = useAuth();
-  const { balances } = useCurreny();
+  const { balances } = useCurrency();
 
   return (
     <div>

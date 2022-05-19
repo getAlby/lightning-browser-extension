@@ -21,12 +21,12 @@ import utils from "~/common/lib/utils";
 import { poll } from "~/common/utils/helpers";
 
 import DualCurrencyInput from "../components/form/NumberField";
-import { useCurreny } from "../context/CurrencyContext";
+import { useCurrency } from "../context/CurrencyContext";
 
 function Receive() {
   const auth = useAuth();
   const navigate = useNavigate();
-  const { getFiatValue } = useCurreny();
+  const { getFiatValue } = useCurrency();
   const [formData, setFormData] = useState({
     amount: "0",
     description: "",

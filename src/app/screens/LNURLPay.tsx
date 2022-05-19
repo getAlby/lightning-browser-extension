@@ -23,7 +23,7 @@ import {
 } from "~/types";
 
 import DualCurrencyInput from "../components/form/NumberField";
-import { useCurreny } from "../context/CurrencyContext";
+import { useCurrency } from "../context/CurrencyContext";
 
 type Origin = {
   name: string;
@@ -47,7 +47,7 @@ function LNURLPay(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAuth();
-  const { getFiatValue } = useCurreny();
+  const { getFiatValue } = useCurrency();
   const [loading, setLoading] = useState(true);
   const [details, setDetails] = useState(props.details);
   const [origin] = useState(

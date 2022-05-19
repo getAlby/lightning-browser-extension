@@ -11,7 +11,7 @@ import { ToastContainer } from "react-toastify";
 import { AccountsProvider } from "~/app/context/AccountsContext";
 import { useAuth } from "~/app/context/AuthContext";
 import { AuthProvider } from "~/app/context/AuthContext";
-import { CurrencyProvider, useCurreny } from "~/app/context/CurrencyContext";
+import { CurrencyProvider, useCurrency } from "~/app/context/CurrencyContext";
 
 import RequireAuth from "../RequireAuth";
 
@@ -48,7 +48,7 @@ function Popup() {
 
 const Layout = () => {
   const auth = useAuth();
-  const { balances } = useCurreny();
+  const { balances } = useCurrency();
 
   return (
     <div className="flex flex-col h-full">
