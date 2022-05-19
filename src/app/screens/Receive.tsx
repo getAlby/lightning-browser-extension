@@ -22,13 +22,14 @@ import TextField from "@components/form/TextField";
 import Header from "@components/Header";
 import Loading from "@components/Loading";
 import { useCurreny } from "../context/CurrencyContext";
+import DualCurrencyInput from "../components/form/NumberField";
 
 function Receive() {
   const auth = useAuth();
   const navigate = useNavigate();
   const { getFiatValue } = useCurreny();
   const [formData, setFormData] = useState({
-    amount: "",
+    amount: "0",
     description: "",
     expiration: "",
   });
@@ -53,7 +54,9 @@ function Receive() {
   const [fiatAmount, setFiatAmount] = useState("");
 
   useEffect(() => {
-    getFiatValue(formData.amount).then((res) => setFiatAmount(res));
+    if (formData.amount !== "") {
+      getFiatValue(formData.amount).then((res) => setFiatAmount(res));
+    }
   }, [formData, getFiatValue]);
 
   function handleChange(
@@ -193,17 +196,13 @@ function Receive() {
             ) : (
               <>
                 <div className="mb-4">
-                  <TextField
+                  <DualCurrencyInput
                     id="amount"
                     label="Amount"
                     placeholder="Amount in Satoshi..."
+                    secondaryValue={fiatAmount}
                     type="number"
                     onChange={handleChange}
-                    endAdornment={
-                      <span className="text-xs text-slate-500 mr-1">
-                        {fiatAmount}
-                      </span>
-                    }
                   />
                 </div>
 
