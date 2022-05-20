@@ -7,7 +7,12 @@
         "useBuiltIns": false,
         // Do not transform modules to CJS
         "modules": false,
-        "targets": "last 5 versions, not dead",
+        "targets": {
+          "chrome": "49",
+          "firefox": "52",
+          "opera": "36",
+          "edge": "79"
+        },
         "loose": true
       }
     ],
