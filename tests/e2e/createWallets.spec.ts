@@ -9,10 +9,10 @@ test.describe("Create or connect wallets", () => {
   test("successfully creates an Alby wallet", async () => {
     const user = USER.SINGLE();
 
-    const { page } = await loadExtension();
+    const { page: welcomePage } = await loadExtension();
 
     // go through welcome page
-    const $document = await getDocument(page);
+    const $document = await getDocument(welcomePage);
 
     const startedButton = await getByText($document, "Get Started");
     startedButton.click();
@@ -55,7 +55,7 @@ test.describe("Create or connect wallets", () => {
     const createWalletButton = await getByText($document, "Continue");
     createWalletButton.click();
 
-    await page.waitForResponse(() => true);
+    await welcomePage.waitForResponse(() => true);
 
     await waitFor(() => getByText($document, "Your Alby account is ready."));
 
