@@ -28,12 +28,11 @@ export default async function keysend(message: Message) {
   } catch (e) {
     response = { error: e instanceof Error ? e.message : "" };
   }
-  utils.publishPaymentNotification(
-    message,
-    {
-      tags: [],
+  utils.publishPaymentNotification(message, {
+    response,
+    details: {
+      destination: destination,
     },
-    response
-  );
+  });
   return response;
 }
