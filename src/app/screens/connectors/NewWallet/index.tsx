@@ -138,6 +138,7 @@ export default function NewWallet() {
           <div className="mt-6 dark:text-white">
             <p>
               <strong>
+                {t("choose_connector.alby.post_connect.account_ready")}
                 <br />
               </strong>
             </p>
