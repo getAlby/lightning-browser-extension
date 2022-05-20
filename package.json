@@ -51,7 +51,6 @@
     "crypto-js": "^4.1.1",
     "currency.js": "^2.0.4",
     "dayjs": "^1.11.3",
-    "decimal.js-light": "^2.5.1",
     "dexie": "^3.2.2",
     "elliptic": "^6.5.4",
     "html5-qrcode": "^2.2.1",
