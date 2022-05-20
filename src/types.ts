@@ -1,5 +1,6 @@
 import { PaymentRequestObject } from "bolt11";
 import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
+import currencies from "./app/utils/supportedCurrencies";
 
 import currencies from "./app/utils/supportedCurrencies";
 import connectors from "./extension/background-script/connectors";
