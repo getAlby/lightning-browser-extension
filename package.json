@@ -49,7 +49,6 @@
     "crypto-browserify": "^3.12.0",
     "crypto-js": "^4.1.1",
     "currency.js": "^2.0.4",
-    "decimal.js-light": "^2.5.1",
     "dayjs": "^1.11.2",
     "dexie": "^3.2.2",
     "elliptic": "^6.5.4",
