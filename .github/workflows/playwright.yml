@@ -1,0 +1,48 @@
+name: E2E Tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  e2e-tests:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        env:
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
+        with:
+          node-version: "14.x"
+          args: install
+
+      - name: Install dependencies
+        uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: install # will run `yarn install` command
+
+      - name: Build
+        uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: build:chrome # will run `yarn build` command
+
+      - name: Test Code
+        uses: mujo-code/puppeteer-headful@v2
+        env:
+          CI: "true"
+        with:
+          args: npx playwright test
+
+      - name: Artifact
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: playwright-artifcats
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 30
