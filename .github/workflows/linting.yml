@@ -1,4 +1,4 @@
-name: Code quality - lint, typecheck, tests
+name: Code quality - linting
 
 on:
   push:
@@ -22,9 +22,3 @@ jobs:
 
       - name: Linting
         run: yarn lint:js
-
-      - name: Typechecking
-        run: yarn tsc:compile
-
-      - name: Testing
-        run: yarn test
