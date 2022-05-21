@@ -55,18 +55,15 @@ test.describe("Create or connect wallets", () => {
     const createWalletButton = await getByText($document, "Continue");
     createWalletButton.click();
 
-    // @TODO: we have an DNS issue
-    // a ticket was opened at DigitalOcean
+    await welcomePage.waitForResponse(() => true);
 
-    // await welcomePage.waitForResponse(() => true);
-
-    // await waitFor(() => getByText($document, "Your Alby account is ready."));
+    await waitFor(() => getByText($document, "Your Alby account is ready."));
 
     // submit form
-    // const nextButton = await getByText($document, "Continue");
-    // nextButton.click();
+    const nextButton = await getByText($document, "Continue");
+    nextButton.click();
 
-    // await wait(() => getByText($document, "Success!"));
+    await waitFor(() => getByText($document, "Success!"));
   });
 
   // test("successfully connects to LNBits wallet", async () => {
