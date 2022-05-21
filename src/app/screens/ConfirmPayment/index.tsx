@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import lightningPayReq from "bolt11";
-import { ToastContainer, toast } from "react-toastify";
 
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -85,7 +85,6 @@ function ConfirmPayment(props: Props) {
 
   return (
     <div>
-      <ToastContainer />
       <PublisherCard
         title={originRef.current.name}
         image={originRef.current.icon}
