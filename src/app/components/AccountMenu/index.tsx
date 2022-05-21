@@ -12,7 +12,6 @@ import utils from "~/common/lib/utils";
 import { useAuth } from "~/app/context/AuthContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 
-import Badge from "../Badge";
 import Menu from "../Menu";
 
 export type Props = {
@@ -88,12 +87,6 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
               >
                 <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-700 dark:text-gray-300" />
                 {account.name}&nbsp;
-                <Badge
-                  label={account.connector}
-                  color="blue-500"
-                  textColor="white"
-                  small
-                />
               </Menu.ItemButton>
             );
           })}
