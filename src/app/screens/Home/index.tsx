@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import browser from "webextension-polyfill";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -28,6 +29,7 @@ function Home() {
   const [loadingSendSats, setLoadingSendSats] = useState(false);
   const [lnData, setLnData] = useState<Battery[]>([]);
   const navigate = useNavigate();
+  const { t } = useTranslation("translation", { keyPrefix: "home" });
 
   async function loadAllowance() {
     try {
@@ -120,7 +122,7 @@ function Home() {
                 setLoadingSendSats(false);
               }
             }}
-            label="⚡️ Send Satoshis ⚡️"
+            label={t("send_satoshis")}
             primary
             loading={loadingSendSats}
           />
@@ -139,10 +141,11 @@ function Home() {
               <>
                 <dl className="mb-0">
                   <dt className="text-xs text-gray-500 dark:tex-gray-400">
-                    Allowance
+                    {t("allowance_view.allowance")}
                   </dt>
                   <dd className="mb-0 text-sm font-medium dark:text-gray-400">
-                    {allowance.usedBudget} / {allowance.totalBudget} sat used
+                    {allowance.usedBudget} {t("allowance_view.budget.part1")}{" "}
+                    {allowance.totalBudget} {t("allowance_view.budget.part2")}
                   </dd>
                 </dl>
               </>
@@ -165,7 +168,7 @@ function Home() {
             </div>
           </div>
           <h2 className="mb-2 text-lg text-gray-900 font-semibold dark:text-white">
-            Recent Transactions
+            {t("recent_transactions")}
           </h2>
           {allowance?.payments.length > 0 ? (
             <TransactionsTable
@@ -202,7 +205,9 @@ function Home() {
             />
           ) : (
             <p className="text-gray-500 dark:text-gray-400">
-              No transactions on <strong>{allowance.name}</strong> yet.
+              {t("allowance_view.no_transactions.part1")}{" "}
+              <strong>{allowance.name}</strong>{" "}
+              {t("allowance_view.no_transactions.part2")}
             </p>
           )}
         </div>
@@ -217,7 +222,7 @@ function Home() {
           <Button
             fullWidth
             icon={<SendIcon className="w-6 h-6" />}
-            label="Send"
+            label={t("default_view.send")}
             direction="column"
             onClick={() => {
               navigate("/send");
@@ -226,7 +231,7 @@ function Home() {
           <Button
             fullWidth
             icon={<ReceiveIcon className="w-6 h-6" />}
-            label="Receive"
+            label={t("default_view.receive")}
             direction="column"
             onClick={() => {
               navigate("/receive");
@@ -241,7 +246,7 @@ function Home() {
         ) : (
           <div>
             <h2 className="mb-2 text-lg text-gray-900 font-semibold dark:text-white">
-              Recent Transactions
+              {t("recent_transactions")}
             </h2>
             {payments.length > 0 ? (
               <TransactionsTable
@@ -277,7 +282,7 @@ function Home() {
               />
             ) : (
               <p className="text-gray-500 dark:text-gray-400">
-                No transactions yet.
+                {t("default_view.no_transactions")}
               </p>
             )}
           </div>

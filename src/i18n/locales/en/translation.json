@@ -130,6 +130,26 @@
       "description": "Create or connect to a Bitcoin Jungle (Galoy) account"
     }
   },
+  "home": {
+    "send_satoshis": "⚡️ Send Satoshis ⚡️",
+    "recent_transactions": "Recent Transactions",
+    "allowance_view": {
+      "allowance": "Allowance",
+      "budget": {
+        "part1": "/",
+        "part2": "sat used"
+      },
+      "no_transactions": {
+        "part1": "No transactions on",
+        "part2": "yet."
+      }
+    },
+    "default_view": {
+      "send": "Send",
+      "receive": "Receive",
+      "no_transactions": "No transactions yet."
+    }
+  },
   "unlock": {
     "unlock_to_continue": "Unlock to continue",
     "help_contact": {
