@@ -1,6 +1,7 @@
 import React, { useState, useEffect, MouseEvent } from "react";
 import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import {
   LNURLPaymentInfoError,
@@ -23,7 +24,6 @@ import TextField from "@components/form/TextField";
 import PublisherCard from "@components/PublisherCard";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import SatButtons from "@components/SatButtons";
-import { toast } from "react-toastify";
 
 type Origin = {
   name: string;

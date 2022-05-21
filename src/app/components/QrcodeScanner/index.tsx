@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
+import { toast } from "react-toastify";
 import { QrCodeIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Html5Qrcode, Html5QrcodeScannerState } from "html5-qrcode";
 
 import Button from "../Button";
-import { toast } from "react-toastify";
 
 interface CameraDevice {
   id: string;

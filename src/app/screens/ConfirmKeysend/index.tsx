@@ -1,5 +1,6 @@
 import { useState, MouseEvent, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import PaymentSummary from "@components/PaymentSummary";
 import utils from "~/common/lib/utils";
@@ -13,7 +14,6 @@ import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import SuccessMessage from "@components/SuccessMessage";
 
 import type { OriginData } from "~/types";
-import { toast } from "react-toastify";
 
 type Props = {
   origin?: OriginData;

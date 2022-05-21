@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { toast } from "react-toastify";
 
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 //import Checkbox from "../../components/Form/Checkbox";
@@ -9,7 +10,6 @@ import getOriginData from "~/extension/content-script/originData";
 import type { OriginData } from "~/types";
 import SuccessMessage from "@components/SuccessMessage";
 import { USER_REJECTED_ERROR } from "~/common/constants";
-import { toast } from "react-toastify";
 
 type Props = {
   origin: OriginData;

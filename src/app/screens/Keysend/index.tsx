@@ -1,5 +1,6 @@
 import { Fragment, useState, MouseEvent } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import utils from "~/common/lib/utils";
@@ -11,7 +12,6 @@ import IconButton from "@components/IconButton";
 import Button from "@components/Button";
 import SuccessMessage from "@components/SuccessMessage";
 import SatButtons from "@components/SatButtons";
-import { toast } from "react-toastify";
 
 type Props = {
   destination?: string;
