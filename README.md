@@ -47,7 +47,7 @@ Add Alby to your browser
 - [Add to Chrome, Opera, Brave, and all Chromium based browsers](https://chrome.google.com/webstore/detail/alby/iokeahhehimjnekafflcihljlcjccdbe)
 - [Add to Firefox](https://addons.mozilla.org/en-US/firefox/addon/alby/)
 
-Try out the most recent version of Alby (Nightly Releases)
+### Try out the most recent version of Alby (Nightly Releases)
 
 - [Firefox Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-firefox-nightly-master.xpi) - best to install it as a temporary add-on as discussed in the "Load extension into browser" section
 - [Chrome Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-chrome-nightly-master.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right) and drag & drop the file in the browser
@@ -60,7 +60,7 @@ Try out the most recent version of Alby (Nightly Releases)
 
 ## Project Structure
 
-```
+```bash
 ./lightning-browser-extension
 ├── src                     # Source Code
 │   ├── app                     # React UI App
@@ -127,6 +127,29 @@ If this is not reachable please let us know.
 We have a working [Storybook](https://storybook.js.org)-setup and some components have stories.  
 You can find the deployed Storybook here: https://lbe-stories.netlify.app
 
+### :heavy_check_mark: Tests
+
+#### E2E tests via [playwright](https://playwright.dev) ([using testing-library](https://testing-library.com/docs/pptr-testing-library/intro/))
+
+```bash
+yarn run dev:chrome
+yarn test:e2e
+```
+
+:tipping_hand_woman: For now we only do E2E tests for Chrome
+
+#### Unit tests tests via [Jest](https://jestjs.io)
+
+```bash
+yarn test:unit
+```
+
+#### Run all tests
+
+```bash
+yarn test
+```
+
 ### 💻 Load extension into browser
 
 - **Chrome**
@@ -161,7 +184,7 @@ Most logs are written to the background script. Make sure to "inspect" the backg
 
 You can also use a Docker container and run the yarn commands within a container:
 
-```
+```bash
 docker run --rm --volume="$(pwd):/app" --workdir="/app" -t -i node:lts "yarn install && yarn run package"
 ```
 
