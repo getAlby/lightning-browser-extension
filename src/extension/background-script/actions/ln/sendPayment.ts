@@ -25,6 +25,13 @@ export default async function sendPayment(message: Message) {
   } catch (e) {
     response = { error: e instanceof Error ? e.message : "" };
   }
-  utils.publishPaymentNotification(message, paymentRequestDetails, response);
+  utils.publishPaymentNotification(message, {
+    paymentRequestDetails,
+    response,
+    details: {
+      description: paymentRequestDetails.tagsObject.description,
+      destination: paymentRequestDetails.payeeNodeKey,
+    },
+  });
   return response;
 }
