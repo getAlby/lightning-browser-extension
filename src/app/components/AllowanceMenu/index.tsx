@@ -12,7 +12,7 @@ import Menu from "../Menu";
 import DualCurrencyField from "../form/DualCurrencyField/index";
 
 export type Props = {
-  allowance: Pick<Allowance, "id" | "totalBudget">;
+  allowance: Pick<Allowance, "id" | "totalBudget" | "remainingBudget">;
   onEdit?: () => void;
   onDelete?: () => void;
 };
@@ -52,6 +52,13 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   }
 
   async function updateAllowance() {
+    if (parseInt(budget) < allowance.remainingBudget) {
+      alert(
+        `New budget is lower than remaining budget ${allowance.remainingBudget}`
+      );
+      return;
+    }
+
     await utils.call("updateAllowance", {
       id: allowance.id,
       totalBudget: parseInt(budget),
@@ -110,7 +117,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
           <div className="w-60">
             <DualCurrencyField
               id="budget"
-              label="Budget"
+              label="Set a new Budget"
               autoFocus
               placeholder="sats"
               value={budget}
