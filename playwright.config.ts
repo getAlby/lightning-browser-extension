@@ -7,6 +7,18 @@ import { devices } from "@playwright/test";
  */
 // require('dotenv').config();
 
+if (process.env.WALLET_CREATE_URL === "https://getalby.com/api/users") {
+  console.error(
+    `
+    ----
+    🚧 🚧 🚧
+    Careful! Do not run tests against production!
+    🚧 🚧 🚧
+    ----
+    `
+  );
+  process.exit(1);
+}
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
