@@ -5,37 +5,57 @@ const { getByText, getByLabelText } = queries;
 
 import { loadExtension } from "./helpers/loadExtension";
 
+const commonCreateWalletUserCreate = async () => {
+  const user = USER.SINGLE();
+  const { page: welcomePage, browser } = await loadExtension();
+
+  // go through welcome page
+  const $document = await getDocument(welcomePage);
+
+  // go through welcome page
+  const startedButton = await getByText($document, "Get Started");
+  startedButton.click();
+
+  await waitFor(() => getByText($document, "Protect your wallet"));
+
+  // type user password and confirm password
+  const passwordField = await getByLabelText($document, "Choose a password:");
+  await passwordField.type(user.password);
+
+  const passwordConfirmationField = await getByLabelText(
+    $document,
+    "Let's confirm you typed it correct:"
+  );
+  await passwordConfirmationField.type(user.password);
+
+  // submit password form
+  const passwordFormNextButton = await getByText($document, "Next");
+  passwordFormNextButton.click();
+
+  await waitFor(() => getByText($document, "Do you have a lightning wallet?"));
+
+  return { user, browser, welcomePage, $document };
+};
+
+const commonCreateWalletSuccessCheck = async ({
+  browser,
+  welcomePage,
+  $document,
+}) => {
+  // submit form
+  const continueButton = await getByText($document, "Continue");
+  continueButton.click();
+
+  await welcomePage.waitForResponse(() => true);
+  await waitFor(() => getByText($document, "Success!"));
+
+  await browser.close();
+};
+
 test.describe("Create or connect wallets", () => {
   test("successfully creates an Alby wallet", async () => {
-    const user = USER.SINGLE();
-
-    const { page: welcomePage } = await loadExtension();
-
-    // go through welcome page
-    const $document = await getDocument(welcomePage);
-
-    const startedButton = await getByText($document, "Get Started");
-    startedButton.click();
-
-    await waitFor(() => getByText($document, "Protect your wallet"));
-
-    // type user password and confirm password
-    const passwordField = await getByLabelText($document, "Choose a password:");
-    await passwordField.type(user.password);
-
-    const passwordConfirmationField = await getByLabelText(
-      $document,
-      "Let's confirm you typed it correct:"
-    );
-    await passwordConfirmationField.type(user.password);
-
-    // submit password form
-    const passwordFormNextButton = await getByText($document, "Next");
-    passwordFormNextButton.click();
-
-    await waitFor(() =>
-      getByText($document, "Do you have a lightning wallet?")
-    );
+    const { user, browser, welcomePage, $document } =
+      await commonCreateWalletUserCreate();
 
     // click at "Create Alby Wallet"
     const createNewWalletButton = await getByText($document, "Alby Wallet");
@@ -59,110 +79,44 @@ test.describe("Create or connect wallets", () => {
 
     await waitFor(() => getByText($document, "Your Alby account is ready."));
 
-    // submit form
-    const nextButton = await getByText($document, "Continue");
-    nextButton.click();
-
-    await waitFor(() => getByText($document, "Success!"));
+    await commonCreateWalletSuccessCheck({ browser, welcomePage, $document });
   });
 
-  // test("successfully connects to LNBits wallet", async () => {
-  //   const user = USER.SINGLE();
-  //   const { page, browser } = await loadExtension();
+  test("successfully connects to LNBits wallet", async () => {
+    const { browser, welcomePage, $document } =
+      await commonCreateWalletUserCreate();
 
-  //   // go through welcome page
-  //   const $document = await getDocument(page);
+    // click at "Create LNbits Wallet"
+    const createNewWalletButton = await getByText($document, "LNbits");
+    createNewWalletButton.click();
 
-  //   // go through welcome page
-  //   const startedButton = await getByText($document, "Get Started");
-  //   startedButton.click();
+    await waitFor(() => getByText($document, "Connect to LNbits"));
 
-  //   await wait(() => getByText($document, "Protect your wallet"));
+    const lnBitsAdminKey = "d8de4f373561446aa298cae2b9424325";
+    const adminKeyField = await getByLabelText($document, "LNbits Admin Key");
+    await adminKeyField.type(lnBitsAdminKey);
 
-  //   // type user password and confirm password
-  //   const passwordField = await getByLabelText($document, "Choose a password:");
-  //   await passwordField.type(user.password);
+    await commonCreateWalletSuccessCheck({ browser, welcomePage, $document });
+  });
 
-  //   const passwordConfirmationField = await getByLabelText(
-  //     $document,
-  //     "Let's confirm you typed it correct:"
-  //   );
-  //   await passwordConfirmationField.type(user.password);
+  test("successfully connects to BlueWallet", async () => {
+    const { browser, welcomePage, $document } =
+      await commonCreateWalletUserCreate();
 
-  //   // submit password form
-  //   const passwordFormNextButton = await getByText($document, "Next");
-  //   passwordFormNextButton.click();
+    // click at "LNDHub (BlueWallet)"
+    const createNewWalletButton = await getByText(
+      $document,
+      "LNDHub (Bluewallet)"
+    );
+    createNewWalletButton.click();
 
-  //   await wait(() => getByText($document, "Do you have a lightning wallet?"));
+    await waitFor(() => getByText($document, "Connect to LNDHub (BlueWallet)"));
 
-  //   // click at "Create LNbits Wallet"
-  //   const createNewWalletButton = await getByText($document, "LNbits");
-  //   createNewWalletButton.click();
+    const lndHubUrl =
+      "lndhub://c269ebb962f1a94f9c29:f6f16f35e935edc05ee7@https://lndhub.io";
+    const lndUrlField = await getByLabelText($document, "LNDHub Export URI");
+    await lndUrlField.type(lndHubUrl);
 
-  //   await wait(() => getByText($document, "Connect to LNbits"));
-
-  //   const lnBitsAdminKey = "d8de4f373561446aa298cae2b9424325";
-  //   const adminKeyField = await getByLabelText($document, "LNbits Admin Key");
-  //   await adminKeyField.type(lnBitsAdminKey);
-
-  //   // submit form
-  //   const continueButton = await getByText($document, "Continue");
-  //   continueButton.click();
-
-  //   await page.waitForResponse(() => true);
-
-  //   await browser.close();
-  // });
-
-  // test("successfully connects to BlueWallet", async () => {
-  //   const user = USER.SINGLE();
-  //   const { page, browser } = await loadExtension();
-
-  //   // go through welcome page
-  //   const $document = await getDocument(page);
-
-  //   // go through welcome page
-  //   const startedButton = await getByText($document, "Get Started");
-  //   startedButton.click();
-
-  //   await wait(() => getByText($document, "Protect your wallet"));
-
-  //   // type user password and confirm password
-  //   const passwordField = await getByLabelText($document, "Choose a password:");
-  //   await passwordField.type(user.password);
-
-  //   const passwordConfirmationField = await getByLabelText(
-  //     $document,
-  //     "Let's confirm you typed it correct:"
-  //   );
-  //   await passwordConfirmationField.type(user.password);
-
-  //   // submit password form
-  //   const passwordFormNextButton = await getByText($document, "Next");
-  //   passwordFormNextButton.click();
-
-  //   await wait(() => getByText($document, "Do you have a lightning wallet?"));
-
-  //   // click at "LNDHub (BlueWallet)"
-  //   const createNewWalletButton = await getByText(
-  //     $document,
-  //     "LNDHub (Bluewallet)"
-  //   );
-  //   createNewWalletButton.click();
-
-  //   await wait(() => getByText($document, "Connect to LNDHub (BlueWallet)"));
-
-  //   const lndHubUrl =
-  //     "lndhub://c269ebb962f1a94f9c29:f6f16f35e935edc05ee7@https://lndhub.io";
-  //   const lndUrlField = await getByLabelText($document, "LNDHub Export URI");
-  //   await lndUrlField.type(lndHubUrl);
-
-  //   // submit form
-  //   const continueButton = await getByText($document, "Continue");
-  //   continueButton.click();
-
-  //   await page.waitForResponse(() => true);
-
-  //   await browser.close();
-  // });
+    await commonCreateWalletSuccessCheck({ browser, welcomePage, $document });
+  });
 });
