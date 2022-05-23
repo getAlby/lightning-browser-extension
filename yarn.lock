@@ -6878,6 +6878,11 @@ clone-response@^1.0.2:
   dependencies:
     mimic-response "^1.0.0"
 
+clsx@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
+  integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
+
 co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.npmjs.org/co/-/co-4.6.0.tgz"
@@ -14416,6 +14421,13 @@ react-syntax-highlighter@^15.4.5:
     lowlight "^1.17.0"
     prismjs "^1.27.0"
     refractor "^3.6.0"
+
+react-toastify@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-9.0.0.tgz#bd31a38567ccc7fd801acb00a11fb4983ee365f0"
+  integrity sha512-gmxAFTKV0VVN7s5UEcZdC+bBR1EQtsqXgHJWQgB0G5J8m3Mdxz1Pacm7BJ1nTHkMMNfupruKCu7wUwAq46Z1jg==
+  dependencies:
+    clsx "^1.1.1"
 
 react@^18.0.0:
   version "18.0.0"

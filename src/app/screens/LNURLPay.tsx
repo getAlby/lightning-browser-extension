@@ -1,6 +1,7 @@
 import React, { useState, useEffect, MouseEvent } from "react";
 import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import {
   LNURLPaymentInfoError,
@@ -153,7 +154,7 @@ function LNURLPay(props: Props) {
         }
       } catch (e) {
         const message = e instanceof Error ? `(${e.message})` : "";
-        alert(`Payment aborted: Could not fetch invoice. ${message}`);
+        toast.error(`Payment aborted: Could not fetch invoice. \n${message}`);
         return;
       }
 
@@ -167,7 +168,7 @@ function LNURLPay(props: Props) {
         payerdata,
       });
       if (!isValidInvoice) {
-        alert("Payment aborted: Invalid invoice.");
+        toast.warn("Payment aborted: Invalid invoice.");
         return;
       }
 
@@ -194,7 +195,7 @@ function LNURLPay(props: Props) {
             break;
           case "aes": // TODO: For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage
           default:
-            alert(
+            toast.warn(
               `Not implemented yet. Please submit an issue to support success action: ${paymentInfo.successAction.tag}`
             );
             break;
@@ -213,7 +214,7 @@ function LNURLPay(props: Props) {
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        alert(`Error: ${e.message}`);
+        toast.error(`Error: ${e.message}`);
       }
     } finally {
       setLoadingConfirm(false);

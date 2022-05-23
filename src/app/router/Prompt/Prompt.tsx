@@ -1,4 +1,5 @@
 import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { useAuth } from "~/app/context/AuthContext";
 import type {
   LNURLAuthServiceResponse,
@@ -153,6 +154,7 @@ const Layout = () => {
 
   return (
     <>
+      <ToastContainer />
       <div className="px-4 py-2 bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-gray-500">
         <AccountMenu
           title={

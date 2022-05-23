@@ -3,6 +3,7 @@ import { useState, useEffect, createContext, useContext } from "react";
 import utils from "../../common/lib/utils";
 import api from "../../common/lib/api";
 import type { AccountInfo } from "../../types";
+import { toast } from "react-toastify";
 
 interface AuthContextType {
   account: {
@@ -76,7 +77,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
       })
       .catch((e) => {
-        alert(`An unexpected error occurred (${e.message})`);
+        toast.error(`An unexpected error occurred (${e.message})`);
       })
       .finally(() => {
         setLoading(false);

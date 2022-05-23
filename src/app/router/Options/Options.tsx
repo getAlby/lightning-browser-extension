@@ -18,6 +18,7 @@ import Unlock from "@screens/Unlock";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
 import Accounts from "@screens/Accounts";
 import Keysend from "@screens/Keysend";
+import { ToastContainer } from "react-toastify";
 
 function Options() {
   return (
@@ -99,7 +100,7 @@ const Layout = () => {
         }
         subtitle={
           typeof auth.account?.balance === "number"
-            ? `${auth.account.balance} sat`
+            ? `${auth.account.balance} sats`
             : ""
         }
       >
@@ -108,6 +109,7 @@ const Layout = () => {
         <Navbar.Link href="/receive">Receive</Navbar.Link>
         <Navbar.Link href="/settings">Settings</Navbar.Link>
       </Navbar>
+      <ToastContainer />
 
       <Outlet />
     </div>

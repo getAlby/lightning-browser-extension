@@ -1,5 +1,5 @@
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
-
+import { ToastContainer } from "react-toastify";
 import { useAuth } from "~/app/context/AuthContext";
 import Home from "@screens/Home";
 import Unlock from "@screens/Unlock";
@@ -64,6 +64,7 @@ const Layout = () => {
 
       <main className="overflow-y-auto grow">
         <Outlet />
+        <ToastContainer />
       </main>
     </div>
   );

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   CaretLeftIcon,
   CheckIcon,
@@ -78,7 +79,7 @@ function Receive() {
       checkPayment(response.rHash);
     } catch (e) {
       if (e instanceof Error) {
-        alert(e.message);
+        toast.error(e.message);
       }
     } finally {
       setLoading(false);
@@ -115,7 +116,7 @@ function Receive() {
                     }, 1000);
                   } catch (e) {
                     if (e instanceof Error) {
-                      alert(e.message);
+                      toast.error(e.message);
                     }
                   }
                 }}

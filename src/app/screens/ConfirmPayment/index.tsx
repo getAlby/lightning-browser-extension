@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import lightningPayReq from "bolt11";
 
 import msg from "~/common/lib/msg";
@@ -57,7 +58,7 @@ function ConfirmPayment(props: Props) {
       setSuccessMessage("Success, payment sent!");
     } catch (e) {
       console.error(e);
-      if (e instanceof Error) alert(`Error: ${e.message}`);
+      if (e instanceof Error) toast.error(`Error: ${e.message}`);
     } finally {
       setLoading(false);
     }
@@ -107,7 +108,6 @@ function ConfirmPayment(props: Props) {
               budget={budget}
               onBudgetChange={(event) => setBudget(event.target.value)}
             />
-
             <ConfirmOrCancel
               disabled={loading}
               loading={loading}

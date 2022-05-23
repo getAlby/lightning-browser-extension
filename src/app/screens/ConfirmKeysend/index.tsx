@@ -1,5 +1,6 @@
 import { useState, MouseEvent, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import PaymentSummary from "@components/PaymentSummary";
 import utils from "~/common/lib/utils";
@@ -65,7 +66,7 @@ function Keysend(props: Props) {
     } catch (e) {
       console.log(e);
       if (e instanceof Error) {
-        alert(`Error: ${e.message}`);
+        toast.error(`Error: ${e.message}`);
       }
     } finally {
       setLoading(false);
