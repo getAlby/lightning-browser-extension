@@ -29,7 +29,12 @@ class HashKeySigner {
   }
 
   verify(message: string, signature: string) {
-    return this.sk.verify(message, signature);
+    try {
+      return this.sk.verify(message, signature);
+    } catch (e) {
+      console.error(e);
+      return false;
+    }
   }
 }
 
