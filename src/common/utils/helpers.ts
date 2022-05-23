@@ -58,11 +58,13 @@ export async function poll<T>({
   validate,
   interval,
   maxAttempts,
+  shouldStopPolling,
 }: {
   fn: () => Promise<T>;
   validate: (value: T) => boolean;
   interval: number;
   maxAttempts: number;
+  shouldStopPolling: () => boolean;
 }) {
   let attempts = 0;
 
@@ -70,6 +72,9 @@ export async function poll<T>({
     resolve: (value: unknown) => void,
     reject: (reason?: Error) => void
   ) => {
+    if (shouldStopPolling()) {
+      return reject(new Error("Polling aborted manually"));
+    }
     const result = await fn();
     attempts++;
 

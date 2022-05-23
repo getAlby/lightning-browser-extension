@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
@@ -37,6 +37,15 @@ function Receive() {
   const [copyLabel, setCopyLabel] = useState("Copy");
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
+  const mounted = useRef(false)
+
+  useEffect(() => {
+    mounted.current = true;
+
+    return () => {
+      mounted.current = false
+    }
+  }, [])
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -57,6 +66,7 @@ function Receive() {
       validate: (payment) => payment.paid,
       interval: 3000,
       maxAttempts: 20,
+      shouldStopPolling: () => !mounted.current
     })
       .then(() => {
         setPaid(true);
