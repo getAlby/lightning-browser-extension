@@ -8,7 +8,7 @@ import Button from "../Button";
 import Menu from "../Menu";
 import TextField from "../form/TextField";
 
-type Props = {
+export type Props = {
   allowance: {
     id: string;
     totalBudget: number;
@@ -85,7 +85,9 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         className="rounded-lg bg-white w-full max-w-lg"
       >
         <div className="p-5 flex justify-between dark:bg-surface-02dp">
-          <h2 className="text-2xl font-bold dark:text-white">Edit Allowance</h2>
+          <h2 className="text-2xl font-bold dark:text-white">
+            Set a new budget
+          </h2>
           <button onClick={closeModal}>
             <CrossIcon className="w-6 h-6 dark:text-white" />
           </button>
@@ -102,6 +104,9 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               onChange={(e) => setBudget(e.target.value)}
             />
           </div>
+          <p className="my-1 dark:text-white">
+            This will reset the current budget
+          </p>
         </div>
         <div className="flex justify-end p-5 dark:bg-surface-02dp">
           <Button
