@@ -148,7 +148,7 @@ test.describe("Create or connect wallets", () => {
     await commonCreateWalletSuccessCheck({ browser, welcomePage, $document });
   });
 
-  test.only("successfully connects to Eclair", async () => {
+  test("successfully connects to Eclair", async () => {
     const { browser, welcomePage, $document } =
       await commonCreateWalletUserCreate();
 
@@ -158,8 +158,6 @@ test.describe("Create or connect wallets", () => {
     await waitFor(() => getByText($document, "Connect to Eclair"));
 
     const eclairUrlField = await getByLabelText($document, "Eclair URL");
-    // empty text in field
-    await eclairUrlField.click({ clickCount: 3 });
     await eclairUrlField.type("https://eclair-1.regtest.getalby.com");
 
     const eclairPasswordField = await getByLabelText(
