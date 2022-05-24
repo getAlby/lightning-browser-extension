@@ -124,7 +124,6 @@ test.describe("Create or connect wallets", () => {
     const { browser, welcomePage, $document } =
       await commonCreateWalletUserCreate();
 
-    // click at "LNDHub (BlueWallet)"
     const createNewWalletButton = await getByText($document, "LND");
     createNewWalletButton.click();
 
@@ -145,6 +144,29 @@ test.describe("Create or connect wallets", () => {
       "Macaroon (HEX format)"
     );
     await macroonField.type(macroon);
+
+    await commonCreateWalletSuccessCheck({ browser, welcomePage, $document });
+  });
+
+  test.only("successfully connects to Eclair", async () => {
+    const { browser, welcomePage, $document } =
+      await commonCreateWalletUserCreate();
+
+    const createNewWalletButton = await getByText($document, "Eclair");
+    createNewWalletButton.click();
+
+    await waitFor(() => getByText($document, "Connect to Eclair"));
+
+    const eclairUrlField = await getByLabelText($document, "Eclair URL");
+    // empty text in field
+    await eclairUrlField.click({ clickCount: 3 });
+    await eclairUrlField.type("https://eclair-1.regtest.getalby.com");
+
+    const eclairPasswordField = await getByLabelText(
+      $document,
+      "Eclair Password"
+    );
+    await eclairPasswordField.type("getalby");
 
     await commonCreateWalletSuccessCheck({ browser, welcomePage, $document });
   });
