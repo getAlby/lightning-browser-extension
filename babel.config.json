@@ -16,13 +16,16 @@
         "loose": true
       }
     ],
-    ["@babel/preset-react", {
-      "runtime": "automatic"
-    }],
+    [
+      "@babel/preset-react",
+      {
+        "runtime": "automatic"
+      }
+    ],
     "@babel/preset-typescript"
   ],
   "plugins": [
-    ["@babel/plugin-proposal-class-properties", {"loose": true}],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
     [
       // Polyfills the runtime needed for async/await and generators
       "@babel/plugin-transform-runtime",
@@ -34,9 +37,7 @@
   ],
   "env": {
     "test": {
-      "presets": [
-        ["@babel/preset-env", { "modules": "auto" }]
-      ]
+      "presets": [["@babel/preset-env", { "modules": "auto", "loose": true }]]
     }
   }
 }
