@@ -30,9 +30,6 @@ i18n
     //debug: true,
     fallbackLng: "en",
     resources,
-    interpolation: {
-      escapeValue: false,
-    },
   });
 
 export default i18n;

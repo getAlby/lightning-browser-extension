@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import i18n from "~/i18n/i18nConfig";
-import {} from "~/i18n/namespaces";
 
 import { AuthProvider } from "~/app/context/AuthContext";
 import connectorRoutes from "~/app/router/connectorRoutes";
