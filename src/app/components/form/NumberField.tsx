@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { classNames } from "~/app/utils";
 
-type Props = {
+export type Props = {
   suffix?: string;
   endAdornment?: React.ReactNode;
   secondaryValue: string | number;
