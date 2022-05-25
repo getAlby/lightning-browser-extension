@@ -10,7 +10,7 @@ export default function ConnectEclair() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     password: "",
-    url: "http://localhost:8080",
+    url: "",
   });
   const [loading, setLoading] = useState(false);
 
@@ -82,6 +82,7 @@ export default function ConnectEclair() {
         id="url"
         label="Eclair URL"
         type="text"
+        placeholder="http://localhost:8080"
         value={formData.url}
         required
         onChange={handleChange}
