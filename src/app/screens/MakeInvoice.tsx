@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import Container from "@components/Container";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import TextField from "@components/form/TextField";
 import PublisherCard from "@components/PublisherCard";
@@ -85,61 +86,62 @@ function MakeInvoice({
   return (
     <div>
       <PublisherCard title={origin.name} image={origin.icon} />
-
-      <div className="p-4">
-        <div className="mb-8">
-          <div className="mb-4">
-            <p className="font-semibold text-gray-500 mb-4">
-              {origin.host} requests an invoice:
-            </p>
-            <div className="mt-4">
-              {amountEditable && (
-                <>
+      <div className="py-4">
+        <Container maxWidth="sm">
+          <div className="mb-8">
+            <div className="mb-4">
+              <p className="font-semibold text-gray-500 mb-4">
+                {origin.host} requests an invoice:
+              </p>
+              <div className="mt-4">
+                {amountEditable && (
+                  <>
+                    <TextField
+                      id="amount"
+                      label="Amount"
+                      type="number"
+                      min={invoiceAttributes.minimumAmount}
+                      max={invoiceAttributes.maximumAmount}
+                      value={value}
+                      onChange={(e) => handleValueChange(e.target.value)}
+                    />
+                    <SatButtons onClick={handleValueChange} />
+                  </>
+                )}
+                {!amountEditable && (
+                  <dl className="dark:bg-surface-02dp pt-4 overflow-hidden">
+                    <Dt>Amount</Dt>
+                    <Dd>{invoiceAttributes.amount}</Dd>
+                  </dl>
+                )}
+                {error && <p className="mt-1 text-red-500">{error}</p>}
+              </div>
+              <div className="mt-4">
+                {memoEditable && (
                   <TextField
-                    id="amount"
-                    label="Amount"
-                    type="number"
-                    min={invoiceAttributes.minimumAmount}
-                    max={invoiceAttributes.maximumAmount}
-                    value={value}
-                    onChange={(e) => handleValueChange(e.target.value)}
+                    id="memo"
+                    label="Memo"
+                    value={memo}
+                    onChange={handleMemoChange}
                   />
-                  <SatButtons onClick={handleValueChange} />
-                </>
-              )}
-              {!amountEditable && (
-                <dl className="dark:bg-surface-02dp pt-4 overflow-hidden">
-                  <Dt>Amount</Dt>
-                  <Dd>{invoiceAttributes.amount}</Dd>
-                </dl>
-              )}
-              {error && <p className="mt-1 text-red-500">{error}</p>}
-            </div>
-            <div className="mt-4">
-              {memoEditable && (
-                <TextField
-                  id="memo"
-                  label="Memo"
-                  value={memo}
-                  onChange={handleMemoChange}
-                />
-              )}
-              {!memoEditable && (
-                <dl className="dark:bg-surface-02dp overflow-hidden">
-                  <Dt>Memo</Dt>
-                  <Dd>{invoiceAttributes.memo}</Dd>
-                </dl>
-              )}
+                )}
+                {!memoEditable && (
+                  <dl className="dark:bg-surface-02dp overflow-hidden">
+                    <Dt>Memo</Dt>
+                    <Dd>{invoiceAttributes.memo}</Dd>
+                  </dl>
+                )}
+              </div>
             </div>
           </div>
-        </div>
 
-        <ConfirmOrCancel
-          disabled={!value || loading || Boolean(error)}
-          loading={loading}
-          onConfirm={confirm}
-          onCancel={reject}
-        />
+          <ConfirmOrCancel
+            disabled={!value || loading || Boolean(error)}
+            loading={loading}
+            onConfirm={confirm}
+            onCancel={reject}
+          />
+        </Container>
       </div>
     </div>
   );

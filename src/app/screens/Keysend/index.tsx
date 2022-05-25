@@ -12,6 +12,7 @@ import IconButton from "@components/IconButton";
 import Button from "@components/Button";
 import SuccessMessage from "@components/SuccessMessage";
 import SatButtons from "@components/SatButtons";
+import Container from "~/app/components/Container";
 
 type Props = {
   destination?: string;
@@ -95,43 +96,45 @@ function Keysend(props: Props) {
           />
         }
       />
-      <div className="p-4 max-w-screen-sm mx-auto">
-        {!successMessage ? (
-          <>
-            <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-              {elements().map(([t, d], i) => (
-                <Fragment key={`element-${i}`}>
-                  <dt className="text-sm font-semibold text-gray-500">{t}</dt>
-                  <dd className="text-sm mb-4 dark:text-white break-all">
-                    {d}
-                  </dd>
-                </Fragment>
-              ))}
-            </dl>
-            <div className="text-center">
-              <div className="mb-5">
-                <Button
-                  onClick={confirm}
-                  label="Confirm"
-                  fullWidth
-                  primary
-                  loading={loading}
-                  disabled={loading || !amount}
-                />
-              </div>
+      <div className="py-4">
+        <Container maxWidth="sm">
+          {!successMessage ? (
+            <>
+              <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+                {elements().map(([t, d], i) => (
+                  <Fragment key={`element-${i}`}>
+                    <dt className="text-sm font-semibold text-gray-500">{t}</dt>
+                    <dd className="text-sm mb-4 dark:text-white break-all">
+                      {d}
+                    </dd>
+                  </Fragment>
+                ))}
+              </dl>
+              <div className="text-center">
+                <div className="mb-5">
+                  <Button
+                    onClick={confirm}
+                    label="Confirm"
+                    fullWidth
+                    primary
+                    loading={loading}
+                    disabled={loading || !amount}
+                  />
+                </div>
 
-              <a
-                className="underline text-sm text-gray-500"
-                href="#"
-                onClick={reject}
-              >
-                Cancel
-              </a>
-            </div>
-          </>
-        ) : (
-          <SuccessMessage message={successMessage} onClose={reject} />
-        )}
+                <a
+                  className="underline text-sm text-gray-500"
+                  href="#"
+                  onClick={reject}
+                >
+                  Cancel
+                </a>
+              </div>
+            </>
+          ) : (
+            <SuccessMessage message={successMessage} onClose={reject} />
+          )}
+        </Container>
       </div>
     </div>
   );
