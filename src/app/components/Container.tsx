@@ -1,6 +1,6 @@
 type Props = {
   children: React.ReactNode;
-  maxWidth?: string;
+  maxWidth?: "sm" | "md" | "lg" | "xl" | "2xl";
 };
 
 function Container({ children, maxWidth = "lg" }: Props) {
