@@ -7,6 +7,7 @@ import utils from "~/common/lib/utils";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
+import { toast } from "react-toastify";
 
 const initialFormData = Object.freeze({
   url: "",
@@ -66,7 +67,7 @@ export default function ConnectLnd() {
           navigate("/test-connection");
         }
       } else {
-        alert(`
+        toast.error(`
           Connection failed. Are your LND credentials correct? \n\n(${validation.error})`);
       }
     } catch (e) {
@@ -75,7 +76,7 @@ export default function ConnectLnd() {
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
-      alert(message);
+      toast.error(message);
     }
     setLoading(false);
   }

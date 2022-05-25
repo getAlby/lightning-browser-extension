@@ -1,17 +1,18 @@
 import { Component } from "react";
 
 import utils from "~/common/lib/utils";
+import { toast } from "react-toastify";
 
 class DevMenu extends Component {
   reset() {
     utils.call("reset").then((response) => {
       console.log(response);
-      alert("Done, you can start over");
+      toast.success("Done, you can start over");
     });
   }
 
   initDevelopmentAccount() {
-    alert("not implemented");
+    toast.error("not implemented");
   }
 
   render() {

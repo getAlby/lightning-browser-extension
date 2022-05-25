@@ -5,6 +5,7 @@ import utils from "~/common/lib/utils";
 
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
+import { toast } from "react-toastify";
 
 export default function ConnectEclair() {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ export default function ConnectEclair() {
         }
       } else {
         console.log(validation);
-        alert(
+        toast.error(
           `Connection failed. Do you have the correct URL and password? \n\n(${validation.error})`
         );
       }
@@ -57,7 +58,7 @@ export default function ConnectEclair() {
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
-      alert(message);
+      toast.error(message);
     }
     setLoading(false);
   }

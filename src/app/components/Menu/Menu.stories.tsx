@@ -2,6 +2,7 @@ import { EditIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import Menu from ".";
 import Badge from "../Badge";
+import { toast } from "react-toastify";
 
 export const Default = () => (
   <Menu as="div" className="relative">
@@ -10,16 +11,16 @@ export const Default = () => (
     </Menu.Button>
     <Menu.List>
       <Menu.Subheader>Actions</Menu.Subheader>
-      <Menu.ItemButton onClick={() => alert("Edit")}>
+      <Menu.ItemButton onClick={() => toast.success("Edit")}>
         <EditIcon className="h-5 w-5 mr-2 text-gray-500" />
         Edit
       </Menu.ItemButton>
-      <Menu.ItemButton onClick={() => alert("Copy")}>
+      <Menu.ItemButton onClick={() => toast.success("Copy")}>
         Copy&nbsp;
         <Badge label="Badge" color="blue-500" textColor="white" small />
       </Menu.ItemButton>
       <Menu.Divider />
-      <Menu.ItemButton danger onClick={() => alert("Delete")}>
+      <Menu.ItemButton danger onClick={() => toast.success("Delete")}>
         Delete
       </Menu.ItemButton>
     </Menu.List>

@@ -7,6 +7,7 @@ import ConnectorForm from "@components/ConnectorForm";
 import QrcodeScanner from "@components/QrcodeScanner";
 import TextField from "@components/form/TextField";
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
+import { toast } from "react-toastify";
 
 export default function ConnectLndHub() {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ export default function ConnectLndHub() {
     setLoading(true);
     const match = formData.uri.match(/lndhub:\/\/(\S+):(\S+)@(\S+)/i);
     if (!match) {
-      alert("Invalid LNDHub URI");
+      toast.error("Invalid LNDHub URI");
       setLoading(false);
       return;
     }
@@ -71,7 +72,7 @@ export default function ConnectLndHub() {
         }
       } else {
         console.log(validation);
-        alert(
+        toast.error(
           `Connection failed. Is your LNDHub URI correct? \n\n(${validation.error})`
         );
       }
@@ -81,7 +82,7 @@ export default function ConnectLndHub() {
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
-      alert(message);
+      toast.error(message);
     }
     setLoading(false);
   }

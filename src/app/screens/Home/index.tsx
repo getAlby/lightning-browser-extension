@@ -17,6 +17,7 @@ import AllowanceMenu from "@components/AllowanceMenu";
 import Loading from "@components/Loading";
 import PublisherCard from "@components/PublisherCard";
 import Progressbar from "@components/Progressbar";
+import { toast } from "react-toastify";
 
 dayjs.extend(relativeTime);
 
@@ -115,7 +116,7 @@ function Home() {
                   }&origin=${encodeURIComponent(JSON.stringify(origin))}`
                 );
               } catch (e) {
-                if (e instanceof Error) alert(e.message);
+                if (e instanceof Error) toast.error(e.message);
               } finally {
                 setLoadingSendSats(false);
               }

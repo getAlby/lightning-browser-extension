@@ -11,6 +11,7 @@ import Input from "@components/form/Input";
 import Setting from "@components/Setting";
 import Select from "@components/form/Select";
 import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
+import { toast } from "react-toastify";
 
 function Settings() {
   const [loading, setLoading] = useState(true);
@@ -86,7 +87,7 @@ function Settings() {
                   await Html5Qrcode.getCameras();
                   setCameraPermissionsGranted(true);
                 } catch (e) {
-                  alert(e);
+                  if (e instanceof Error) toast.error(e.message);
                 }
               }}
             />

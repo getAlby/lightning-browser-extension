@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import TextField from "@components/form/TextField";
 import ConnectorForm from "@components/ConnectorForm";
+import { toast } from "react-toastify";
 
 import utils from "~/common/lib/utils";
 
@@ -63,7 +64,7 @@ export default function ConnectCitadel() {
           navigate("/test-connection");
         }
       } else {
-        alert(`
+        toast.error(`
           Connection failed. Is your password correct? \n\n(${validation.error})`);
       }
     } catch (e) {
@@ -72,7 +73,7 @@ export default function ConnectCitadel() {
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
-      alert(message);
+      toast.error(message);
     }
     setLoading(false);
   }
