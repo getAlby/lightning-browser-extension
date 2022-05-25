@@ -1,15 +1,11 @@
 import state from "../../state";
-import type { Runtime } from "webextension-polyfill";
 import type { MessageAccountEdit } from "~/types";
 
-const edit = async (
-  message: MessageAccountEdit,
-  _sender: Runtime.MessageSender
-) => {
+const edit = async (message: MessageAccountEdit) => {
   const accounts = state.getState().accounts;
   const accountId = message.args.id;
 
-  if (typeof accountId === "string" || typeof accountId === "number") {
+  if (accountId in accounts) {
     accounts[accountId].name = message.args.name;
 
     state.setState({ accounts });
@@ -17,14 +13,10 @@ const edit = async (
     await state.getState().saveToStorage();
     return {};
   } else {
-    console.log(`Account not found: ${accountId}`);
     return {
-      error: "Account not found",
+      error: `Account not found: ${accountId}`,
     };
   }
-
-  // make sure we immediately persist the edited account
-  await state.getState().saveToStorage();
 };
 
 export default edit;
