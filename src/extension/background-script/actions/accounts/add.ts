@@ -1,21 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
 import type { Runtime } from "webextension-polyfill";
 import { encryptData } from "~/common/lib/crypto";
-import type { Account, OriginData } from "~/types";
-import state from "../../state";
-
-// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652
-// align Message-Types
-interface AddAccountMessage {
-  args: Account;
-  origin: OriginData;
-  application?: string;
-  prompt?: boolean;
-  type?: string;
-}
+import state from "~/extension/background-script/state";
+import type { MessageAccountAdd } from "~/types";
 
 const add = async (
-  message: AddAccountMessage,
+  message: MessageAccountAdd,
   _sender: Runtime.MessageSender
 ) => {
   const newAccount = message.args;
@@ -31,7 +21,10 @@ const add = async (
 
   const accountId = uuidv4();
   newAccount.config = encryptData(newAccount.config, password);
-  accounts[accountId] = newAccount;
+  accounts[accountId] = {
+    id: accountId,
+    ...newAccount,
+  };
 
   state.setState({ accounts });
 

@@ -1,22 +1,9 @@
 import state from "../../state";
 import type { Runtime } from "webextension-polyfill";
-import type { OriginData, Account } from "~/types";
-
-// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652
-// align Message-Types
-interface EditAccountMessage {
-  args: {
-    id: Account["id"];
-    name: Account["name"];
-  };
-  origin: OriginData;
-  application?: string;
-  prompt?: boolean;
-  type?: string;
-}
+import type { MessageAccountEdit } from "~/types";
 
 const edit = async (
-  message: EditAccountMessage,
+  message: MessageAccountEdit,
   _sender: Runtime.MessageSender
 ) => {
   const accounts = state.getState().accounts;
