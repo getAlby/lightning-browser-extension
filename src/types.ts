@@ -1,5 +1,7 @@
 import connectors from "./extension/background-script/connectors";
 import currencies from "./app/utils/supportedCurrencies";
+import { PaymentRequestObject } from "bolt11";
+import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
 
 export type ConnectorType = keyof typeof connectors;
 
@@ -47,6 +49,15 @@ export interface OriginData {
   icon: string;
   metaData: MetaData;
   external: boolean;
+}
+
+export interface PaymentNotificationData {
+  paymentRequestDetails?: PaymentRequestObject | undefined;
+  response: SendPaymentResponse | { error: string };
+  details: {
+    destination?: string | undefined;
+    description?: string | undefined;
+  };
 }
 
 export interface OriginDataInternal {
@@ -190,6 +201,7 @@ export interface Allowance {
   name: string;
   payments: Transaction[];
   paymentsCount: number;
+  paymentsAmount: number;
   percentage: string;
   remainingBudget: number;
   totalBudget: number;

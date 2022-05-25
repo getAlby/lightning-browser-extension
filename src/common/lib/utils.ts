@@ -1,8 +1,11 @@
-import { PaymentRequestObject } from "bolt11";
 import PubSub from "pubsub-js";
 import browser, { Runtime } from "webextension-polyfill";
-import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
-import { Message, OriginData, OriginDataInternal } from "~/types";
+import {
+  Message,
+  OriginData,
+  OriginDataInternal,
+  PaymentNotificationData,
+} from "~/types";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
 
 const utils = {
@@ -71,16 +74,16 @@ const utils = {
   },
   publishPaymentNotification: (
     message: Message,
-    paymentRequestDetails: PaymentRequestObject,
-    response: SendPaymentResponse | { error: string }
+    data: PaymentNotificationData
   ) => {
     let status = "success"; // default. let's hope for success
-    if ("error" in response) {
+    if ("error" in data.response) {
       status = "failed";
     }
     PubSub.publish(`ln.sendPayment.${status}`, {
-      response,
-      paymentRequestDetails,
+      response: data.response,
+      details: data.details,
+      paymentRequestDetails: data.paymentRequestDetails,
       origin: message.origin,
     });
   },

@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, Method } from "axios";
+import type { AxiosResponse } from "axios";
 import sha256 from "crypto-js/sha256";
 import Hex from "crypto-js/enc-hex";
 import lightningPayReq from "bolt11";
@@ -347,8 +348,13 @@ export default class LndHub implements Connector {
       const res = await axios(reqConfig);
       data = res.data;
     } catch (e) {
-      console.log(e);
-      if (e instanceof Error) throw new Error(e.message);
+      console.error(e);
+
+      if (axios.isAxiosError(e)) {
+        const errResponse = e.response as AxiosResponse;
+        const errorMessage = `${errResponse?.data.message}\n(${e.message})`;
+        throw new Error(errorMessage);
+      }
     }
     if (data && data.error) {
       if (data.code * 1 === 1 && !this.noRetry) {

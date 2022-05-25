@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { toast } from "react-toastify";
 
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 //import Checkbox from "../../components/Form/Checkbox";
@@ -38,7 +39,7 @@ function ConfirmSignMessage(props: Props) {
       setSuccessMessage("Success!");
     } catch (e) {
       console.error(e);
-      if (e instanceof Error) alert(`Error: ${e.message}`);
+      if (e instanceof Error) toast.error(`Error: ${e.message}`);
     } finally {
       setLoading(false);
     }

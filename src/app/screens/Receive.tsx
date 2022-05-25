@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   CaretLeftIcon,
   CheckIcon,
@@ -39,6 +40,15 @@ function Receive() {
   const [copyLabel, setCopyLabel] = useState("Copy");
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
+  const mounted = useRef(false);
+
+  useEffect(() => {
+    mounted.current = true;
+
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
 
   const [fiatAmount, setFiatAmount] = useState("");
 
@@ -67,6 +77,7 @@ function Receive() {
       validate: (payment) => payment.paid,
       interval: 3000,
       maxAttempts: 20,
+      shouldStopPolling: () => !mounted.current,
     })
       .then(() => {
         setPaid(true);
@@ -89,7 +100,7 @@ function Receive() {
       checkPayment(response.rHash);
     } catch (e) {
       if (e instanceof Error) {
-        alert(e.message);
+        toast.error(e.message);
       }
     } finally {
       setLoading(false);
@@ -126,7 +137,7 @@ function Receive() {
                     }, 1000);
                   } catch (e) {
                     if (e instanceof Error) {
-                      alert(e.message);
+                      toast.error(e.message);
                     }
                   }
                 }}

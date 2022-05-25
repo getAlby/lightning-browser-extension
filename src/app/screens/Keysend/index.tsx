@@ -1,5 +1,6 @@
 import { Fragment, useState, MouseEvent } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import utils from "~/common/lib/utils";
@@ -49,7 +50,7 @@ function Keysend(props: Props) {
     } catch (e) {
       console.log(e);
       if (e instanceof Error) {
-        alert(`Error: ${e.message}`);
+        toast.error(`Error: ${e.message}`);
       }
     } finally {
       setLoading(false);

@@ -6,6 +6,7 @@ import {
   QrCodeIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import lightningPayReq from "bolt11";
+import { toast } from "react-toastify";
 
 import lnurlLib from "~/common/lib/lnurl";
 
@@ -45,7 +46,7 @@ function Send() {
       }
     } catch (e) {
       if (e instanceof Error) {
-        alert(e.message);
+        toast.error(e.message);
       }
     } finally {
       setLoading(false);
@@ -109,6 +110,7 @@ function Send() {
           label="Lightning Invoice"
           placeholder="Paste invoice, lnurl or lightning address"
           value={invoice}
+          disabled={loading}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             setInvoice(event.target.value)
           }
@@ -129,7 +131,7 @@ function Send() {
             primary
             fullWidth
             loading={loading}
-            disabled={invoice === ""}
+            disabled={invoice === "" || loading}
           />
         </div>
       </form>

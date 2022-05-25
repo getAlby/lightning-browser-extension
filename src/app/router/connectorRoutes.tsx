@@ -21,6 +21,8 @@ import ConnectRaspiBlitz from "@screens/connectors/ConnectRaspiBlitz";
 import ConnectUmbrel from "@screens/connectors/ConnectUmbrel";
 import ConnectStart9 from "@screens/connectors/ConnectStart9";
 import ConnectMyNode from "@screens/connectors/ConnectMyNode";
+import i18n from "~/i18n/i18nConfig";
+import { welcomeI18nNamespace } from "~/i18n/namespaces";
 
 const galoyPaths: { [key: string]: keyof typeof galoyUrls } = {
   bitcoinBeach: "galoy-bitcoin-beach",
@@ -31,85 +33,124 @@ export default [
   {
     path: "create-wallet",
     element: <NewWallet />,
-    title: "Alby Wallet",
-    description: "Create or login to your Alby account",
+    title: i18n.t("choose_connector.alby.title", welcomeI18nNamespace),
+    description: i18n.t(
+      "choose_connector.alby.description",
+      welcomeI18nNamespace
+    ),
     logo: alby,
   },
   {
     path: "lnd",
     element: <ConnectLnd />,
-    title: "LND",
-    description: "Connect to your LND node",
+    title: i18n.t("choose_connector.lnd.title", welcomeI18nNamespace),
+    description: i18n.t(
+      "choose_connector.lnd.description",
+      welcomeI18nNamespace
+    ),
     logo: lnd,
   },
   {
     path: "lnd-hub",
     element: <ConnectLndHub />,
-    title: "LNDHub (Bluewallet)",
-    description: "Connect to your Bluewallet mobile wallet",
+    title: i18n.t("choose_connector.lndhub.title", welcomeI18nNamespace),
+    description: i18n.t(
+      "choose_connector.lndhub.description",
+      welcomeI18nNamespace
+    ),
     logo: lndhub,
   },
   {
     path: "lnbits",
     element: <ConnectLnbits />,
-    title: "LNbits",
-    description: "Connect to your LNbits account",
+    title: i18n.t("choose_connector.lnbits.title", welcomeI18nNamespace),
+    description: i18n.t(
+      "choose_connector.lnbits.description",
+      welcomeI18nNamespace
+    ),
     logo: lnbits,
   },
   {
     path: "eclair",
     element: <ConnectEclair />,
-    title: "Eclair",
-    description: "Connect to your Eclair node",
+    title: i18n.t("choose_connector.eclair.title", welcomeI18nNamespace),
+    description: i18n.t(
+      "choose_connector.eclair.description",
+      welcomeI18nNamespace
+    ),
     logo: eclair,
   },
   {
     path: "citadel",
     element: <ConnectCitadel />,
-    title: "Citadel",
-    description: "Connect to your local Citadel",
+    title: i18n.t("choose_connector.citadel.title", welcomeI18nNamespace),
+    description: i18n.t(
+      "choose_connector.citadel.description",
+      welcomeI18nNamespace
+    ),
     logo: citadel,
   },
   {
     path: "umbrel",
     element: <ConnectUmbrel />,
-    title: "Umbrel",
-    description: "Connect to your Umbrel",
+    title: i18n.t("choose_connector.umbrel.title", welcomeI18nNamespace),
+    description: i18n.t(
+      "choose_connector.umbrel.description",
+      welcomeI18nNamespace
+    ),
     logo: umbrel,
   },
   {
     path: "mynode",
     element: <ConnectMyNode />,
-    title: "myNode",
-    description: "Connect to your myNode",
+    title: i18n.t("choose_connector.mynode.title", welcomeI18nNamespace),
+    description: i18n.t(
+      "choose_connector.mynode.description",
+      welcomeI18nNamespace
+    ),
     logo: mynode,
   },
   {
     path: "start9",
     element: <ConnectStart9 />,
-    title: "Start9",
-    description: "Connect to your Embassy",
+    title: i18n.t("choose_connector.start9.title", welcomeI18nNamespace),
+    description: i18n.t(
+      "choose_connector.start9.description",
+      welcomeI18nNamespace
+    ),
     logo: start9,
   },
   {
     path: "raspiblitz",
     element: <ConnectRaspiBlitz />,
-    title: "RaspiBlitz",
-    description: "Connect to your RaspiBlitz",
+    title: i18n.t("choose_connector.raspiblitz.title", welcomeI18nNamespace),
+    description: i18n.t(
+      "choose_connector.raspiblitz.description",
+      welcomeI18nNamespace
+    ),
     logo: raspiblitz,
   },
   {
     path: galoyPaths.bitcoinBeach,
     element: <ConnectGaloy instance={galoyPaths.bitcoinBeach} />,
-    title: "Bitcoin Beach Wallet",
-    description: "Create or connect to a Bitcoin Beach (Galoy) account",
+    title: i18n.t("choose_connector.bitcoin_beach.title", welcomeI18nNamespace),
+    description: i18n.t(
+      "choose_connector.bitcoin_beach.description",
+      welcomeI18nNamespace
+    ),
     logo: galoyBitcoinBeach,
   },
   {
     path: galoyPaths.bitcoinJungle,
     element: <ConnectGaloy instance={galoyPaths.bitcoinJungle} />,
-    title: "Bitcoin Jungle Wallet",
-    description: "Create or connect to a Bitcoin Jungle (Galoy) account",
+    title: i18n.t(
+      "choose_connector.bitcoin_jungle.title",
+      welcomeI18nNamespace
+    ),
+    description: i18n.t(
+      "choose_connector.bitcoin_jungle.description",
+      welcomeI18nNamespace
+    ),
     logo: galoyBitcoinJungle,
   },
 ];

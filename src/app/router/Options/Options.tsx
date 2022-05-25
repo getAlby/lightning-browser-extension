@@ -19,6 +19,7 @@ import ChooseConnector from "@screens/connectors/ChooseConnector";
 import Accounts from "@screens/Accounts";
 import Keysend from "@screens/Keysend";
 import { CurrencyProvider, useCurrency } from "~/app/context/CurrencyContext";
+import { ToastContainer } from "react-toastify";
 
 function Options() {
   return (
@@ -108,6 +109,7 @@ const Layout = () => {
         <Navbar.Link href="/receive">Receive</Navbar.Link>
         <Navbar.Link href="/settings">Settings</Navbar.Link>
       </Navbar>
+      <ToastContainer />
 
       <Outlet />
     </div>

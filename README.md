@@ -4,7 +4,7 @@
 
 The extension provides deep Lightning Network integration for websites (for payments and authentication flows).
 
-The goal is to write a minimal web extension to allow browsers to interact with the Lightning Network programmatically. It focusses on the web-payments process and does not try to be a full node UI with advanced channel-management or similar features.
+The goal is to write a minimal web extension to allow browsers to interact with the Lightning Network programmatically. It focuses on the web-payments process and does not try to be a full node UI with advanced channel-management or similar features.
 
 The extension implements the WebLN standard as the interface that allows websites to connect to Lightning Network nodes (to request payments, invoices, signatures, login, etc.) and enable seamless UX of web payments and authentications.
 
@@ -24,20 +24,19 @@ The extension can connect to different node implementations and supports custodi
 - [x] Keysend
 - [ ] [Lsat](https://lsat.tech/) support
 
-
 ### STATUS: 🚀
 
 ## Join the conversation
 
 We have a channel on the [bitcoin.design](https://bitcoin.design/) Slack community [#lightning-browser-extension](https://bitcoindesign.slack.com/archives/C02591ADXM2) and a [Telegram group](https://t.me/getAlby). Come and join us!
 
-We also do a weekly call on Monday at [14:00 UTC](https://www.worldtimebuddy.com/?qm=1&lid=100&h=100&date=2022-4-25&sln=14-15&hf=1) on [Jitsi](https://meet.fulmo.org/AlbyCommunityCall)
+We also do a weekly call on Thursday at [13:00 UTC](https://everytimezone.com/s/436cf0d2) on [Jitsi](https://meet.fulmo.org/AlbyCommunityCall)
 
 ## Browser Support
 
 Alby supports
 
-- All [Chromium based browsers](https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium) - Chrome Opera, Brave etc.
+- All [Chromium based browsers](<https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium>) - Chrome Opera, Brave etc.
 - Firefox
 - more coming soon...
 
@@ -48,7 +47,7 @@ Add Alby to your browser
 - [Add to Chrome, Opera, Brave, and all Chromium based browsers](https://chrome.google.com/webstore/detail/alby/iokeahhehimjnekafflcihljlcjccdbe)
 - [Add to Firefox](https://addons.mozilla.org/en-US/firefox/addon/alby/)
 
-Try out the most recent version of Alby (Nightly Releases)
+### Try out the most recent version of Alby (Nightly Releases)
 
 - [Firefox Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-firefox-nightly-master.xpi) - best to install it as a temporary add-on as discussed in the "Load extension into browser" section
 - [Chrome Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-chrome-nightly-master.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right) and drag & drop the file in the browser
@@ -61,7 +60,7 @@ Try out the most recent version of Alby (Nightly Releases)
 
 ## Project Structure
 
-```
+```bash
 ./lightning-browser-extension
 ├── src                     # Source Code
 │   ├── app                     # React UI App
@@ -113,6 +112,44 @@ Then run the following:
   - Opera
     - `yarn run dev:opera`
 
+#### Testnet/testing-accounts for development
+
+We set up our own internal testnet, which can be used for your development.  
+If this is not reachable please let us know.
+
+- [Test-setup](https://github.com/getAlby/lightning-browser-extension/wiki/Test-setup) for different connectors (i.e. LND)
+- [RTL](https://rtl.regtest.getalby.com) for testing nodes (PW: `getalby`)
+  Currently only lists LND nodes
+- [LNDhub.go API Swagger](https://lndhub.regtest.getalby.com/swagger/index.html)
+
+#### Storybook.js
+
+We have a working [Storybook](https://storybook.js.org)-setup and some components have stories.  
+You can find the deployed Storybook here: https://lbe-stories.netlify.app
+
+### :heavy_check_mark: Tests
+
+#### E2E tests via [playwright](https://playwright.dev) ([using testing-library](https://testing-library.com/docs/pptr-testing-library/intro/))
+
+```bash
+yarn run dev:chrome
+yarn test:e2e
+```
+
+:tipping_hand_woman: For now we only do E2E tests for Chrome
+
+#### Unit tests tests via [Jest](https://jestjs.io)
+
+```bash
+yarn test:unit
+```
+
+#### Run all tests
+
+```bash
+yarn test
+```
+
 ### 💻 Load extension into browser
 
 - **Chrome**
@@ -147,7 +184,7 @@ Most logs are written to the background script. Make sure to "inspect" the backg
 
 You can also use a Docker container and run the yarn commands within a container:
 
-```
+```bash
 docker run --rm --volume="$(pwd):/app" --workdir="/app" -t -i node:lts "yarn install && yarn run package"
 ```
 
@@ -171,6 +208,10 @@ If you're a developer looking to help but not sure where to begin, check out the
 > Alby enforces [Conventional Commits Specification](https://www.conventionalcommits.org/en/) for adding human and machine readable meaning to commit messages, make sure to read and follow them.
 
 If you're looking for a bigger challenge, before opening a pull request please [create an issue](https://github.com/bumi/lightning-browser-extension/issues/new) or [join our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2) to get feedback, discuss the best way to tackle the challenge, and to ensure that there's no duplication of work.
+
+### Translations
+
+Alby uses [Weblate](https://weblate.org/en/) to manage translations for different locales. If you'd like to contribute, you can [add translations here](https://hosted.weblate.org/projects/getalby-lightning-browser-extension/getalby-lightning-browser-extension/).
 
 ## ❔ FAQs
 
