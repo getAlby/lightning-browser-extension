@@ -49,6 +49,8 @@ describe("delete account", () => {
     expect(spy).toHaveBeenNthCalledWith(2, {
       currentAccountId: "d892e2d7-ac72-49b7-94c2-9fa024c5c1d3",
     });
+
+    expect(spy).toHaveBeenCalledTimes(2);
   });
 
   test("if other account is being deleted the current account is not updated", async () => {

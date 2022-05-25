@@ -32,7 +32,7 @@ const message: MessageAccountAdd = {
   type: "addAccount",
 };
 
-describe("add account to empty account list", () => {
+describe("add account to account-list", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
