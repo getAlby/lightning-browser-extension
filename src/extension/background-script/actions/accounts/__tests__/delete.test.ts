@@ -1,8 +1,8 @@
 import deleteAccount from "../delete";
-import type { Message } from "../../../../../types";
-import state from "../../../state";
+import type { MessageAccountDelete } from "~/types";
+import state from "~/extension/background-script/state";
 
-jest.mock("../../../state");
+jest.mock("~/extension/background-script/state");
 
 const mockState = {
   currentAccountId: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
@@ -26,7 +26,7 @@ const mockState = {
 state.getState = jest.fn().mockReturnValue(mockState);
 state.setState = () => jest.fn;
 
-const message: Message = {
+const message: MessageAccountDelete = {
   application: "LBE",
   args: { id: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e" },
   origin: { internal: true },

@@ -1,16 +1,14 @@
-import type { Message } from "~/types";
+import type { MessageAccountDelete } from "~/types";
 import state from "../../state";
 
-// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652
-// align Message-Types
-const deleteAccount = async (message: Message) => {
+const deleteAccount = async (message: MessageAccountDelete) => {
   const accounts = state.getState().accounts;
 
   let currentAccountId = state.getState().currentAccountId;
-  let accountId = message.args?.id;
+  let accountId = message.args.id;
 
   // if no account is specified, delete the current account
-  if (accountId === undefined) {
+  if (accountId === undefined && currentAccountId !== null) {
     accountId = currentAccountId;
   }
 
