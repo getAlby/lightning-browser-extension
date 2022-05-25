@@ -1,13 +1,9 @@
 import { v4 as uuidv4 } from "uuid";
-import type { Runtime } from "webextension-polyfill";
 import { encryptData } from "~/common/lib/crypto";
 import state from "~/extension/background-script/state";
 import type { MessageAccountAdd } from "~/types";
 
-const add = async (
-  message: MessageAccountAdd,
-  _sender: Runtime.MessageSender
-) => {
+const add = async (message: MessageAccountAdd) => {
   const newAccount = message.args;
   const accounts = state.getState().accounts;
 
