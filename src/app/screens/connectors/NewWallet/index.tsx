@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";
+import { toast } from "react-toastify";
 
 import utils from "~/common/lib/utils";
 
 import TextField from "@components/form/TextField";
 import ConnectorForm from "@components/ConnectorForm";
-import { toast } from "react-toastify";
 
 const walletCreateUrl =
   process.env.WALLET_CREATE_URL || "https://app.regtest.getalby.com/api/users";

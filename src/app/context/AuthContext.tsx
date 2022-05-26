@@ -1,9 +1,9 @@
 import { useState, useEffect, createContext, useContext } from "react";
+import { toast } from "react-toastify";
 
 import utils from "../../common/lib/utils";
 import api from "../../common/lib/api";
 import type { AccountInfo } from "../../types";
-import { toast } from "react-toastify";
 
 interface AuthContextType {
   account: {

@@ -1,7 +1,7 @@
 import { Component } from "react";
+import { toast } from "react-toastify";
 
 import utils from "~/common/lib/utils";
-import { toast } from "react-toastify";
 
 class DevMenu extends Component {
   reset() {

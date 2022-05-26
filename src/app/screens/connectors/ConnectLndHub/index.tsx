@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import utils from "~/common/lib/utils";
 
@@ -7,7 +8,6 @@ import ConnectorForm from "@components/ConnectorForm";
 import QrcodeScanner from "@components/QrcodeScanner";
 import TextField from "@components/form/TextField";
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
-import { toast } from "react-toastify";
 
 export default function ConnectLndHub() {
   const navigate = useNavigate();

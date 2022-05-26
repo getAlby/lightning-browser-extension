@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import browser from "webextension-polyfill";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -17,7 +18,6 @@ import AllowanceMenu from "@components/AllowanceMenu";
 import Loading from "@components/Loading";
 import PublisherCard from "@components/PublisherCard";
 import Progressbar from "@components/Progressbar";
-import { toast } from "react-toastify";
 
 dayjs.extend(relativeTime);
 

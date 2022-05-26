@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Html5Qrcode } from "html5-qrcode";
+import { toast } from "react-toastify";
 
 import api from "~/common/lib/api";
 import { SettingsStorage } from "~/types";
@@ -11,7 +12,6 @@ import Input from "@components/form/Input";
 import Setting from "@components/Setting";
 import Select from "@components/form/Select";
 import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
-import { toast } from "react-toastify";
 
 function Settings() {
   const [loading, setLoading] = useState(true);
