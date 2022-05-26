@@ -1,5 +1,4 @@
 import PublishersTable from ".";
-import { toast } from "react-toastify";
 
 const publishers = [
   {
@@ -35,7 +34,9 @@ const publishers = [
 export const Primary = () => (
   <PublishersTable
     publishers={publishers}
-    navigateToPublisher={() => toast.warn("I should navigate to the publisher")}
+    navigateToPublisher={() =>
+      window.alert("I should navigate to the publisher")
+    }
   />
 );
 

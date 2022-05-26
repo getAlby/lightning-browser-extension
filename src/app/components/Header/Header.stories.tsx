@@ -2,13 +2,12 @@ import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 import Header from ".";
 import IconButton from "../IconButton";
-import { toast } from "react-toastify";
 
 export const Default = () => (
   <Header
     headerLeft={
       <IconButton
-        onClick={() => toast.success("Go back")}
+        onClick={() => alert("Go back")}
         icon={<CaretLeftIcon className="w-4 h-4" />}
       />
     }
