@@ -11,6 +11,7 @@ import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Input from "@components/form/Input";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
+import Container from "@components/Container";
 
 type Props = {
   details: LNURLWithdrawServiceResponse;
@@ -85,28 +86,32 @@ function LNURLWithdraw(props: Props) {
     <div>
       <h1 className="py-2 font-bold text-lg text-center">Withdraw</h1>
       <PublisherCard title={origin.name} image={origin.icon} />
-      <div className="p-4 max-w-screen-sm mx-auto">
-        {!successMessage ? (
-          <>
-            <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-              <dt className="text-sm font-semibold text-gray-500">
-                Amount (Satoshi)
-              </dt>
-              <dd className="text-sm mb-4 dark:text-white">{renderAmount()}</dd>
-            </dl>
-            <ConfirmOrCancel
-              disabled={loadingConfirm || !valueSat}
-              loading={loadingConfirm}
-              onConfirm={confirm}
-              onCancel={reject}
+      <div className="py-4">
+        <Container maxWidth="sm">
+          {!successMessage ? (
+            <>
+              <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+                <dt className="text-sm font-semibold text-gray-500">
+                  Amount (Satoshi)
+                </dt>
+                <dd className="text-sm mb-4 dark:text-white">
+                  {renderAmount()}
+                </dd>
+              </dl>
+              <ConfirmOrCancel
+                disabled={loadingConfirm || !valueSat}
+                loading={loadingConfirm}
+                onConfirm={confirm}
+                onCancel={reject}
+              />
+            </>
+          ) : (
+            <SuccessMessage
+              message={successMessage}
+              onClose={() => window.close()}
             />
-          </>
-        ) : (
-          <SuccessMessage
-            message={successMessage}
-            onClose={() => window.close()}
-          />
-        )}
+          )}
+        </Container>
       </div>
     </div>
   );

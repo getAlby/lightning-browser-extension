@@ -15,6 +15,7 @@ import { poll } from "~/common/utils/helpers";
 import { useAuth } from "~/app/context/AuthContext";
 
 import Button from "@components/Button";
+import Container from "@components/Container";
 import IconButton from "@components/IconButton";
 import TextField from "@components/form/TextField";
 // import Select from "@components/Form/Select";
@@ -37,15 +38,15 @@ function Receive() {
   const [copyLabel, setCopyLabel] = useState("Copy");
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
-  const mounted = useRef(false)
+  const mounted = useRef(false);
 
   useEffect(() => {
     mounted.current = true;
 
     return () => {
-      mounted.current = false
-    }
-  }, [])
+      mounted.current = false;
+    };
+  }, []);
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -66,7 +67,7 @@ function Receive() {
       validate: (payment) => payment.paid,
       interval: 3000,
       maxAttempts: 20,
-      shouldStopPolling: () => !mounted.current
+      shouldStopPolling: () => !mounted.current,
     })
       .then(() => {
         setPaid(true);
@@ -176,35 +177,33 @@ function Receive() {
           />
         }
       />
-      <div
-        className={`p-4 max-w-screen-sm mx-auto ${
-          paid ? "bg-green-bitcoin" : ""
-        }`}
-      >
-        {invoice ? (
-          renderInvoice()
-        ) : (
-          <>
-            <div className="mb-4">
-              <TextField
-                id="amount"
-                label="Amount"
-                placeholder="Amount in Satoshi..."
-                type="number"
-                onChange={handleChange}
-              />
-            </div>
+      <div className="py-4">
+        <Container maxWidth="sm">
+          <div className={`${paid ? "bg-green-bitcoin" : ""}`}>
+            {invoice ? (
+              renderInvoice()
+            ) : (
+              <>
+                <div className="mb-4">
+                  <TextField
+                    id="amount"
+                    label="Amount"
+                    placeholder="Amount in Satoshi..."
+                    type="number"
+                    onChange={handleChange}
+                  />
+                </div>
 
-            <div className="mb-4">
-              <TextField
-                id="description"
-                label="Description"
-                placeholder="For e.g. who is sending this payment?"
-                onChange={handleChange}
-              />
-            </div>
+                <div className="mb-4">
+                  <TextField
+                    id="description"
+                    label="Description"
+                    placeholder="For e.g. who is sending this payment?"
+                    onChange={handleChange}
+                  />
+                </div>
 
-            {/* <div className="mb-5">
+                {/* <div className="mb-5">
           <label htmlFor="expiration" className="block font-medium text-gray-700">
             Expiration
           </label>
@@ -228,20 +227,22 @@ function Receive() {
           </div>
         </div> */}
 
-            <div className="text-center mb-4">
-              <div className="mb-4">
-                <Button
-                  onClick={createInvoice}
-                  label="Create Invoice"
-                  fullWidth
-                  primary
-                  loading={loading}
-                  disabled={loading || formData.amount === ""}
-                />
-              </div>
-            </div>
-          </>
-        )}
+                <div className="text-center mb-4">
+                  <div className="mb-4">
+                    <Button
+                      onClick={createInvoice}
+                      label="Create Invoice"
+                      fullWidth
+                      primary
+                      loading={loading}
+                      disabled={loading || formData.amount === ""}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </Container>
       </div>
     </div>
   );

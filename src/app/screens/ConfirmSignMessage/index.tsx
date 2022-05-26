@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { toast } from "react-toastify";
 
+import Container from "@components/Container";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 //import Checkbox from "../../components/Form/Checkbox";
 import PublisherCard from "@components/PublisherCard";
@@ -60,19 +61,19 @@ function ConfirmSignMessage(props: Props) {
         title={originRef.current.name}
         image={originRef.current.icon}
       />
+      <div className="py-4">
+        <Container maxWidth="sm">
+          {!succesMessage ? (
+            <>
+              <dl className="shadow bg-white dark:bg-surface-02dp p-4 rounded-lg mb-8">
+                <dt className="font-semibold text-gray-500">
+                  {originRef.current.host} asks you to sign:
+                </dt>
+                <dd className="mb-6 dark:text-white">{messageRef.current}</dd>
+              </dl>
 
-      <div className="p-4 max-w-screen-sm mx-auto">
-        {!succesMessage ? (
-          <>
-            <dl className="shadow bg-white dark:bg-surface-02dp p-4 rounded-lg mb-8">
-              <dt className="font-semibold text-gray-500">
-                {originRef.current.host} asks you to sign:
-              </dt>
-              <dd className="mb-6 dark:text-white">{messageRef.current}</dd>
-            </dl>
-
-            <div className="mb-8">
-              {/*
+              <div className="mb-8">
+                {/*
               <div className="flex items-center">
                 <Checkbox
                   id="remember_me"
@@ -90,21 +91,22 @@ function ConfirmSignMessage(props: Props) {
                 </label>
               </div>
               */}
-            </div>
+              </div>
 
-            <ConfirmOrCancel
-              disabled={loading}
-              loading={loading}
-              onConfirm={confirm}
-              onCancel={reject}
+              <ConfirmOrCancel
+                disabled={loading}
+                loading={loading}
+                onConfirm={confirm}
+                onCancel={reject}
+              />
+            </>
+          ) : (
+            <SuccessMessage
+              message={succesMessage}
+              onClose={() => window.close()}
             />
-          </>
-        ) : (
-          <SuccessMessage
-            message={succesMessage}
-            onClose={() => window.close()}
-          />
-        )}
+          )}
+        </Container>
       </div>
     </div>
   );
