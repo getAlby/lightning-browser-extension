@@ -236,7 +236,7 @@ class Lnd implements Connector {
     defaultValues?: Record<string, unknown>
   ): Promise<Type> {
     const url = new URL(this.config.url);
-    url.pathname = path;
+    url.pathname = `${url.pathname.replace(/\/$/, "")}${path}`;
     let body = null;
     const headers = new Headers();
     headers.append("Accept", "application/json");
