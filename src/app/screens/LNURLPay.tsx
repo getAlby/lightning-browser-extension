@@ -399,21 +399,19 @@ function LNURLPay(props: Props) {
                       />
                     </div>
                   )}
-                {details &&
-                  typeof details?.commentAllowed === "number" &&
-                  details?.commentAllowed > 0 && (
-                    <div className="mt-4">
-                      <TextField
-                        id="name"
-                        label="Name"
-                        placeholder="optional"
-                        value={userName}
-                        onChange={(e) => {
-                          setUserName(e.target.value);
-                        }}
-                      />
-                    </div>
-                  )}
+                {details && details?.payerData?.name && (
+                  <div className="mt-4">
+                    <TextField
+                      id="name"
+                      label="Name"
+                      placeholder="optional"
+                      value={userName}
+                      onChange={(e) => {
+                        setUserName(e.target.value);
+                      }}
+                    />
+                  </div>
+                )}
                 {details && details?.payerData?.email && (
                   <div className="mt-4">
                     <TextField
