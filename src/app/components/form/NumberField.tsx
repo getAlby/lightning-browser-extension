@@ -38,7 +38,7 @@ export default function DualCurrencyInput({
     <input
       ref={inputEl}
       type={type}
-      name={id}
+      name={name}
       id={id}
       className={classNames(
         "block w-full placeholder-gray-500 dark:placeholder-gray-600 dark:text-white ",
@@ -68,6 +68,7 @@ export default function DualCurrencyInput({
       >
         {label}
       </label>
+
       <div
         className={classNames(
           "flex items-stretch overflow-hidden field mt-1 mb-6 pb-6 relative",
@@ -76,9 +77,11 @@ export default function DualCurrencyInput({
         )}
       >
         {inputNode}
+
         <p className="helper text-xs text-gray-600 absolute z-1 top-0 left-0 font-semibold pointer-events-none translate-x-4 translate-y-10">
           ~{secondaryValue}
         </p>
+
         {suffix && (
           <span
             className="flex items-center px-3 font-medium bg-white dark:bg-surface-00dp dark:text-white"
@@ -89,6 +92,7 @@ export default function DualCurrencyInput({
             {suffix}
           </span>
         )}
+
         {endAdornment && (
           <span className="flex items-center bg-white dark:bg-black">
             {endAdornment}

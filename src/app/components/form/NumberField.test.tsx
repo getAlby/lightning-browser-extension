@@ -13,11 +13,13 @@ describe("NumberField", () => {
   test("render", async () => {
     render(
       <MemoryRouter>
-        <NumberField {...props} />
+        <NumberField id="aTestId" {...props} />
       </MemoryRouter>
     );
 
-    expect(await screen.getByText("1000")).toBeInTheDocument();
-    expect(await screen.getByText("Amount")).toBeInTheDocument();
+    const input = screen.getByLabelText("Amount");
+
+    expect(input).toBeInTheDocument();
+    expect(await screen.getByText("~1000")).toBeInTheDocument();
   });
 });
