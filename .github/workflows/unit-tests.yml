@@ -8,7 +8,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  codequality:
+  unit-tests:
     runs-on: ubuntu-latest
 
     steps:
