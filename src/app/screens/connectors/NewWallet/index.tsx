@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";
+import { toast } from "react-toastify";
 
 import utils from "~/common/lib/utils";
 
@@ -50,12 +51,12 @@ export default function NewWallet() {
           });
         } else {
           console.error(data);
-          alert(`Failed to create a new wallet. ${JSON.stringify(data)}`);
+          toast.error(`Failed to create a new wallet. ${JSON.stringify(data)}`);
         }
       })
       .catch((e) => {
         console.error(e);
-        alert(`Failed to create a new wallet: ${e.message}`);
+        toast.error(`Failed to create a new wallet: ${e.message}`);
       })
       .finally(() => {
         setLoading(false);
@@ -91,12 +92,12 @@ export default function NewWallet() {
         }
       } else {
         console.log({ validation });
-        alert(`Connection failed (${validation.error})`);
+        toast.error(`Connection failed (${validation.error})`);
       }
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        alert(`Connection failed (${e.message})`);
+        toast.error(`Connection failed (${e.message})`);
       }
     } finally {
       setLoading(false);

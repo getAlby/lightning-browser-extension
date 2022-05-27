@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
 import TextField from "@components/form/TextField";
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
@@ -72,7 +73,7 @@ export default function ConnectRaspiBlitz() {
           navigate("/test-connection");
         }
       } else {
-        alert(`
+        toast.error(`
           Connection failed. Are your RaspiBlitz credentials correct? \n\n(${validation.error})`);
       }
     } catch (e) {
@@ -82,7 +83,7 @@ export default function ConnectRaspiBlitz() {
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
-      alert(message);
+      toast.error(message);
     }
     setLoading(false);
   }

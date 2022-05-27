@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 import utils from "~/common/lib/utils";
 
@@ -99,7 +100,7 @@ export default function ConnectGaloy(props: Props) {
           const alertMsg = `Failed to request a SMS code${
             errMessage ? `: ${errMessage}` : ""
           }`;
-          alert(alertMsg);
+          toast.error(alertMsg);
         }
       } else {
         setSmsCodeRequested(data.userRequestAuthCode.success);
@@ -107,7 +108,7 @@ export default function ConnectGaloy(props: Props) {
     } catch (e: unknown) {
       console.error(e);
       if (e instanceof Error) {
-        alert(`Failed to request a SMS code: ${e.message}`);
+        toast.error(`Failed to request a SMS code: ${e.message}`);
       }
     } finally {
       setLoading(false);
@@ -174,7 +175,7 @@ export default function ConnectGaloy(props: Props) {
         console.error(error);
         const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
         const alertMsg = `Setup failed${errMessage ? `: ${errMessage}` : ""}`;
-        alert(alertMsg);
+        toast.error(alertMsg);
       } else {
         const walletId = meData.data.me.defaultAccount.defaultWalletId;
         saveAccount({ authToken, walletId });
@@ -182,7 +183,7 @@ export default function ConnectGaloy(props: Props) {
     } catch (e: unknown) {
       console.error(e);
       if (e instanceof Error) {
-        alert(`Setup failed: ${e.message}`);
+        toast.error(`Setup failed: ${e.message}`);
       }
     } finally {
       setLoading(false);
@@ -221,7 +222,7 @@ export default function ConnectGaloy(props: Props) {
         console.error(error);
         const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
         const alertMsg = `Setup failed${errMessage ? `: ${errMessage}` : ""}`;
-        alert(alertMsg);
+        toast.error(alertMsg);
       } else {
         const walletId = meData.data.me.defaultAccount.defaultWalletId;
         saveAccount({ authToken, walletId });
@@ -230,7 +231,7 @@ export default function ConnectGaloy(props: Props) {
       console.error(e);
       if (e instanceof Error) {
         const unauthedRegex = /status code 401/;
-        alert(
+        toast.error(
           `Setup failed: ${
             e.message.match(unauthedRegex) ? `invalid JWT passed` : e.message
           }`
@@ -265,12 +266,12 @@ export default function ConnectGaloy(props: Props) {
           navigate("/test-connection");
         }
       } else {
-        alert(`Connection failed (${validation.error})`);
+        toast.error(`Connection failed (${validation.error})`);
       }
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        alert(`Connection failed (${e.message})`);
+        toast.error(`Connection failed (${e.message})`);
       }
     } finally {
       setLoading(false);

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import browser from "webextension-polyfill";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -115,7 +116,7 @@ function Home() {
                   }&origin=${encodeURIComponent(JSON.stringify(origin))}`
                 );
               } catch (e) {
-                if (e instanceof Error) alert(e.message);
+                if (e instanceof Error) toast.error(e.message);
               } finally {
                 setLoadingSendSats(false);
               }

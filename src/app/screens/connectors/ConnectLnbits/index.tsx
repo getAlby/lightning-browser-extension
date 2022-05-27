@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import utils from "~/common/lib/utils";
 
@@ -61,7 +62,7 @@ export default function ConnectLnbits() {
         }
       } else {
         console.log(validation);
-        alert(
+        toast.error(
           `Connection failed. Do you have the correct URL and Admin Key? \n\n(${validation.error})`
         );
       }
@@ -72,7 +73,7 @@ export default function ConnectLnbits() {
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
-      alert(message);
+      toast.error(message);
     }
     setLoading(false);
   }

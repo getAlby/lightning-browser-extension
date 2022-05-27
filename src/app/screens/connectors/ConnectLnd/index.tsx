@@ -1,6 +1,7 @@
 import { SendIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import utils from "~/common/lib/utils";
 
@@ -66,7 +67,7 @@ export default function ConnectLnd() {
           navigate("/test-connection");
         }
       } else {
-        alert(`
+        toast.error(`
           Connection failed. Are your LND credentials correct? \n\n(${validation.error})`);
       }
     } catch (e) {
@@ -75,7 +76,7 @@ export default function ConnectLnd() {
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
-      alert(message);
+      toast.error(message);
     }
     setLoading(false);
   }

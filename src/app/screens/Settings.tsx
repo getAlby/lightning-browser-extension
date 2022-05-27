@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Html5Qrcode } from "html5-qrcode";
+import { toast } from "react-toastify";
 
 import api from "~/common/lib/api";
 import { SettingsStorage } from "~/types";
@@ -86,7 +87,7 @@ function Settings() {
                   await Html5Qrcode.getCameras();
                   setCameraPermissionsGranted(true);
                 } catch (e) {
-                  alert(e);
+                  if (e instanceof Error) toast.error(e.message);
                 }
               }}
             />
