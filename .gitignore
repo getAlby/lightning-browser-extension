@@ -29,6 +29,9 @@ test-results/
 playwright-report/
 trace.zip
 
+# storybook
+storybook-static/
+
 # nyc test coverage
 .nyc_output
 
