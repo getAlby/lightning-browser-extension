@@ -352,6 +352,10 @@ export default class LndHub implements Connector {
 
       if (axios.isAxiosError(e)) {
         const errResponse = e.response as AxiosResponse;
+        if (errResponse?.status === 404) {
+          const method = path.replace("/", "");
+          throw new Error(`${method} not supported by the connected account.`);
+        }
         const errorMessage = `${errResponse?.data.message}\n(${e.message})`;
         throw new Error(errorMessage);
       }
