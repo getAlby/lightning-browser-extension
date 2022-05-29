@@ -37,6 +37,7 @@ function Settings() {
   const [settings, setSettings] = useState<SettingsStorage>({
     websiteEnhancements: false,
     legacyLnurlAuth: false,
+    legacyLnurlAuthKey: false,
     userName: "",
     userEmail: "",
     locale: "",
@@ -107,6 +108,22 @@ function Settings() {
               onChange={() => {
                 saveSetting({
                   legacyLnurlAuth: !settings.legacyLnurlAuth,
+                });
+              }}
+            />
+          )}
+        </Setting>
+
+        <Setting
+          title="Legacy LNURL-Auth"
+          subtitle="The key generation for LNURL-auth has changed. Due to an error Alby was not compatible with other implementations. This was fixed, but now different keys are used. If you used LNURL-auth to login before you can still enable the old method. This option will be removed later, make sure to switch to the new login."
+        >
+          {!loading && (
+            <Toggle
+              checked={settings.legacyLnurlAuthKey}
+              onChange={() => {
+                saveSetting({
+                  legacyLnurlAuthKey: !settings.legacyLnurlAuthKey,
                 });
               }}
             />
