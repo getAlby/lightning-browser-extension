@@ -11,32 +11,40 @@ import i18n from "~/i18n/i18nConfig";
 import { useTranslation } from "react-i18next";
 import { welcomeI18nNamespace } from "~/i18n/namespaces";
 
-const features = [
-  {
-    name: i18n.t("intro.send", welcomeI18nNamespace),
-    description: i18n.t("intro.send_description", welcomeI18nNamespace),
-    icon: LightningIcon,
-  },
-  {
-    name: i18n.t("intro.paywall", welcomeI18nNamespace),
-    description: i18n.t("intro.paywall_description", welcomeI18nNamespace),
-    icon: KeyIcon,
-  },
-  {
-    name: i18n.t("intro.privacy", welcomeI18nNamespace),
-    description: i18n.t("intro.privacy_description", welcomeI18nNamespace),
-    icon: ShieldIcon,
-  },
-  {
-    name: i18n.t("intro.foss", welcomeI18nNamespace),
-    description: i18n.t("intro.foss_description", welcomeI18nNamespace),
-    icon: CodeIcon,
-  },
-];
+function getFeatures() {
+  return [
+    {
+      name: i18n.t("intro.send", welcomeI18nNamespace),
+      description: i18n.t("intro.send_description", welcomeI18nNamespace),
+      icon: LightningIcon,
+    },
+    {
+      name: i18n.t("intro.paywall", welcomeI18nNamespace),
+      description: i18n.t("intro.paywall_description", welcomeI18nNamespace),
+      icon: KeyIcon,
+    },
+    {
+      name: i18n.t("intro.privacy", welcomeI18nNamespace),
+      description: i18n.t("intro.privacy_description", welcomeI18nNamespace),
+      icon: ShieldIcon,
+    },
+    {
+      name: i18n.t("intro.foss", welcomeI18nNamespace),
+      description: i18n.t("intro.foss_description", welcomeI18nNamespace),
+      icon: CodeIcon,
+    },
+  ];
+}
+
+let features = getFeatures();
 
 export default function Intro() {
   const navigate = useNavigate();
   const { t } = useTranslation(["welcome"]);
+
+  i18n.on("languageChanged", () => {
+    features = getFeatures();
+  });
 
   return (
     <div>

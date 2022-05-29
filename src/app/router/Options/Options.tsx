@@ -2,7 +2,7 @@ import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
 
 import { AuthProvider, useAuth } from "~/app/context/AuthContext";
 import { AccountsProvider } from "~/app/context/AccountsContext";
-import connectorRoutes from "~/app/router/connectorRoutes";
+import getConnectorRoutes from "~/app/router/connectorRoutes";
 import RequireAuth from "~/app/router/RequireAuth";
 import Container from "@components/Container";
 import Navbar from "@components/Navbar";
@@ -21,6 +21,7 @@ import Keysend from "@screens/Keysend";
 import { ToastContainer } from "react-toastify";
 
 function Options() {
+  const connectorRoutes = getConnectorRoutes();
   return (
     <AuthProvider>
       <AccountsProvider>
