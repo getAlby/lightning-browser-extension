@@ -26,12 +26,6 @@
     "title": "Gaming",
     "items": [
       {
-        "title": "LNGames",
-        "subtitle": "Simple Lightning Network games",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lngames_thumbnail.svg",
-        "url": "https://lngames.net/"
-      },
-      {
         "title": "Lightning Poker",
         "subtitle": "Play Poker with Bitcoin",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lightning-poker_thumbnail.svg",
