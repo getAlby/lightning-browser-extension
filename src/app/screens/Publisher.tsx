@@ -52,7 +52,7 @@ function Publisher() {
           <div className="flex justify-between items-center pt-8 pb-4">
             <dl>
               <dt className="text-sm font-medium text-gray-500">Allowance</dt>
-              <dd className="flex items-center font-bold text-xl dark:text-gray-400">
+              <dd className="flex items-center font-bold text-xl dark:text-neutral-400">
                 {allowance.usedBudget} / {allowance.totalBudget} sat used
                 <div className="ml-3 w-24">
                   <Progressbar percentage={allowance.percentage} />

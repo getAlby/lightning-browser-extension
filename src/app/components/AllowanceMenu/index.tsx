@@ -91,7 +91,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             <CrossIcon className="w-6 h-6 dark:text-white" />
           </button>
         </div>
-        <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-gray-500">
+        <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
           <div className="w-60">
             <TextField
               id="budget"

@@ -60,7 +60,7 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
       <div
         className={`flex-auto mx-2 py-1 ${!title && !subtitle ? "w-28" : ""}`}
       >
-        <div className="text-xs text-gray-700 dark:text-gray-400">
+        <div className="text-xs text-gray-700 dark:text-neutral-400">
           {title || <Skeleton />}
         </div>
         <div className="text-xs dark:text-white">
@@ -85,7 +85,7 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
                 }}
                 disabled={loading}
               >
-                <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-700 dark:text-gray-300" />
+                <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-700 dark:text-neutral-300" />
                 {account.name}&nbsp;
               </Menu.ItemButton>
             );
@@ -98,7 +98,7 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
                   openOptions("accounts/new");
                 }}
               >
-                <PlusIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-gray-300" />
+                <PlusIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
                 Add a new account
               </Menu.ItemButton>
               <Menu.ItemButton
@@ -106,7 +106,7 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
                   openOptions("accounts");
                 }}
               >
-                <AddressBookIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-gray-300" />
+                <AddressBookIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
                 Accounts
               </Menu.ItemButton>
             </>
