@@ -56,6 +56,7 @@ export const swrGetAccountInfo = async (
     // Update account info with most recent data, save to cache.
     getAccountInfo()
       .then((response) => {
+        console.log("getAccountInfo - response", response);
         const { alias } = response.info;
         const { balance: resBalance } = response.balance;
         const name = response.name;
