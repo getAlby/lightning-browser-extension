@@ -35,7 +35,7 @@ export default function PublishersTable({
   return (
     <div className="shadow overflow-hidden rounded-lg">
       <table className="min-w-full">
-        <tbody className="bg-white divide-y divide-gray-200 dark:bg-surface-02dp">
+        <tbody className="bg-white divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
           {publishers.map((publisher) => (
             <tr
               key={publisher.id}
