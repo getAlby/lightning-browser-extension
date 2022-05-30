@@ -1,6 +1,8 @@
-import state from "../../state";
+import type { MessageAccountInfo } from "~/types";
+import state from "~/extension/background-script/state";
 
-const info = async (message, sender) => {
+const info = async (message: MessageAccountInfo) => {
+  // WHAT TO DO WITH THIS?
   // TODO!
   //if (message.args.id) {
   //  account = state.getState().accounts[message.args.id];
@@ -10,14 +12,16 @@ const info = async (message, sender) => {
   const connector = await state.getState().getConnector();
   const currentAccountId = state.getState().currentAccountId;
   const currentAccount = state.getState().getAccount();
-  //const info = await connector.getInfo();
-  //const balance = await connector.getBalance();
+
   const [info, balance] = await Promise.all([
     connector.getInfo(),
     connector.getBalance(),
   ]);
 
-  // TODO error handling
+  if (!currentAccount) {
+    return { error: "No current account set" };
+  }
+
   return {
     data: {
       currentAccountId: currentAccountId,

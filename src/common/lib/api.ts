@@ -17,6 +17,7 @@ import {
 } from "./cache";
 import utils from "./utils";
 
+// TODO: might be teh same as AccountInfo btu with currentAccountId
 interface AccountInfoRes {
   currentAccountId: string;
   name: string;
@@ -35,6 +36,7 @@ interface UnlockRes {
 }
 
 export const getAccountInfo = () => utils.call<AccountInfoRes>("accountInfo");
+
 /**
  * stale-while-revalidate get account info
  * @param id - account id
@@ -55,6 +57,7 @@ export const swrGetAccountInfo = async (
     // Update account info with most recent data, save to cache.
     getAccountInfo()
       .then((response) => {
+        console.log("getAccountInfo - response", response);
         const { alias } = response.info;
         const name = response.name;
         const balance = parseInt(response.balance.balance); // TODO: handle amounts

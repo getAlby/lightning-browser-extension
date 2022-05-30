@@ -1,6 +1,5 @@
+import state from "~/extension/background-script/state";
 import type { MessageAccountDelete } from "~/types";
-
-import state from "../../state";
 
 const deleteAccount = async (message: MessageAccountDelete) => {
   const accounts = state.getState().accounts;
@@ -32,9 +31,8 @@ const deleteAccount = async (message: MessageAccountDelete) => {
       data: { deleted: accountId },
     };
   } else {
-    console.log(`Account not found: ${accountId}`);
     return {
-      error: "Account not found",
+      error: `Account not found: ${accountId}`,
     };
   }
 };
