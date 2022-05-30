@@ -75,7 +75,7 @@ function AccountsScreen() {
       <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
         Accounts
       </h2>
-      <div className="shadow border-b border-gray-200 dark:border-gray-500 sm:rounded-lg bg-white dark:bg-surface-02dp">
+      <div className="shadow border-b border-gray-200 dark:border-neutral-500 sm:rounded-lg bg-white dark:bg-surface-02dp">
         <div className="p-6">
           <Button
             icon={<PlusIcon className="w-5 h-5 mr-2" />}
@@ -99,7 +99,7 @@ function AccountsScreen() {
                         <h3 className="font-bold text-gray-900 dark:text-white">
                           {account.name}
                         </h3>
-                        <p className="text-gray-700 dark:text-gray-400">
+                        <p className="text-gray-700 dark:text-neutral-400">
                           {account.connector}
                         </p>
                       </div>
@@ -174,7 +174,7 @@ function AccountsScreen() {
               });
             }}
           >
-            <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-gray-500">
+            <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
               <div className="w-60">
                 <TextField
                   autoFocus

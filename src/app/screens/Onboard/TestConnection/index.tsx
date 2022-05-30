@@ -56,7 +56,7 @@ export default function TestConnection() {
               <h1 className="text-3xl font-bold dark:text-white">
                 {t("test_connection.connection_error")}
               </h1>
-              <p className="dark:text-gray-500">{errorMessage}</p>
+              <p className="dark:text-neutral-500">{errorMessage}</p>
               <Button
                 label={t("test_connection.edit")}
                 onClick={handleEdit}

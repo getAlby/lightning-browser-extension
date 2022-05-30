@@ -49,7 +49,7 @@ export default function TransactionsTable({ transactions }: Props) {
                       <div className="text-sm font-medium text-gray-900 truncate dark:text-white">
                         {tx.title}
                       </div>
-                      <p className="text-xs text-gray-600 capitalize dark:text-gray-400">
+                      <p className="text-xs text-gray-600 capitalize dark:text-neutral-400">
                         {tx.type}
                       </p>
                     </div>
@@ -83,7 +83,7 @@ export default function TransactionsTable({ transactions }: Props) {
                     </div>
                   </div>
                   <Disclosure.Panel>
-                    <div className="mt-1 ml-9 text-xs text-gray-600 dark:text-gray-400">
+                    <div className="mt-1 ml-9 text-xs text-gray-600 dark:text-neutral-400">
                       {tx.description}
                       <p>Fee: {tx.totalFees} sat</p>
                       {tx.preimage && (

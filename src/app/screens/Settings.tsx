@@ -129,7 +129,7 @@ function Settings() {
       <h2 className="mt-12 text-2xl font-bold dark:text-white">
         Personal data
       </h2>
-      <div className="mb-6 text-gray-700 dark:text-gray-300 text-sm">
+      <div className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
         Payees can request for additional data to be sent with a payment. This
         data is not shared with anyone without your consent, you will always be
         prompted before this data is sent along with a payment.

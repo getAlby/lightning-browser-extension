@@ -137,10 +137,10 @@ function Home() {
         <div className="px-4 pb-5">
           <div className="flex justify-between items-center py-3">
             <dl className="mb-0">
-              <dt className="text-xs text-gray-500 dark:tex-gray-400">
+              <dt className="text-xs text-gray-500 dark:text-neutral-400">
                 Allowance
               </dt>
-              <dd className="flex items-center mb-0 text-sm font-medium dark:text-gray-400">
+              <dd className="flex items-center mb-0 text-sm font-medium dark:text-neutral-400">
                 {+allowance.totalBudget > 0
                   ? `${allowance.usedBudget} / ${allowance.totalBudget} `
                   : "0 / 0 "}
@@ -197,7 +197,7 @@ function Home() {
               }))}
             />
           ) : (
-            <p className="text-gray-500 dark:text-gray-400">
+            <p className="text-gray-500 dark:text-neutral-400">
               No transactions on <strong>{allowance.name}</strong> yet.
             </p>
           )}
@@ -272,7 +272,7 @@ function Home() {
                 }))}
               />
             ) : (
-              <p className="text-gray-500 dark:text-gray-400">
+              <p className="text-gray-500 dark:text-neutral-400">
                 No transactions yet.
               </p>
             )}

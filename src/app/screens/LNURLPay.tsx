@@ -41,7 +41,7 @@ const Dt = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Dd = ({ children }: { children: React.ReactNode }) => (
-  <dd className="mb-4 text-gray-600 dark:text-gray-500">{children}</dd>
+  <dd className="mb-4 text-gray-600 dark:text-neutral-500">{children}</dd>
 );
 
 function LNURLPay(props: Props) {

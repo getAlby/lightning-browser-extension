@@ -178,7 +178,7 @@ export default function NewWallet() {
             />
           </div>
           <div className="mt-6">
-            <p className="mb-2 text-gray-700 dark:text-gray-400">
+            <p className="mb-2 text-gray-700 dark:text-neutral-400">
               Your Alby account also comes with an optional{" "}
               <a
                 className="underline"

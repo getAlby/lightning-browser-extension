@@ -80,7 +80,7 @@ export default function SetPassword() {
           <h1 className="text-2xl font-bold dark:text-white">
             {t("set_password.title")}
           </h1>
-          <p className="text-gray-500 mt-6 dark:text-gray-400">
+          <p className="text-gray-500 mt-6 dark:text-neutral-400">
             {t("set_password.description")}
           </p>
           <div className="w-4/5">

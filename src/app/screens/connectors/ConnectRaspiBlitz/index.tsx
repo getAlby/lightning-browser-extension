@@ -123,7 +123,7 @@ export default function ConnectRaspiBlitz() {
       </div>
       {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
       <div className="mt-6">
-        <p className="mb-6 text-gray-500 mt-6 dark:text-gray-400">
+        <p className="mb-6 text-gray-500 mt-6 dark:text-neutral-400">
           Select <b>CONNECT</b>.<br />
           Select <b>EXPORT</b>.<br />
           Select <b>HEX</b>.<br />

@@ -107,7 +107,7 @@ export default function TestConnection() {
                   />
                 </div>
 
-                <p className="mt-6 dark:text-gray-400">
+                <p className="mt-6 dark:text-neutral-400">
                   Awesome, you&apos;re ready to go!
                 </p>
 

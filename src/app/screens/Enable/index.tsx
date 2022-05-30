@@ -63,11 +63,11 @@ function Enable(props: Props) {
           Connect with <i>{props.origin.host}</i>
         </h3>
 
-        <p className="text-gray-500 mb-4 dark:text-gray-400">
+        <p className="text-gray-500 mb-4 dark:text-neutral-400">
           <strong>{props.origin.name}</strong> does not have access to your
           account.
         </p>
-        <p className="mb-8 text-gray-500 mb-4 dark:text-gray-400">
+        <p className="mb-8 text-gray-500 mb-4 dark:text-neutral-400">
           Do you want to grant them access?
         </p>
 
