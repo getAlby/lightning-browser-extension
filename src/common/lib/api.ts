@@ -10,6 +10,7 @@ import type {
   SettingsStorage,
 } from "~/types";
 
+<<<<<<< HEAD
 import {
   getAccountsCache,
   removeAccountFromCache,
@@ -17,6 +18,8 @@ import {
 } from "./cache";
 import utils from "./utils";
 
+=======
+>>>>>>> cef89fb0 (refactor(account): use accountInfoResult type #652)
 export interface AccountInfoRes {
   balance: { balance: string | number };
   currentAccountId: string;
@@ -56,7 +59,6 @@ export const swrGetAccountInfo = async (
     // Update account info with most recent data, save to cache.
     getAccountInfo()
       .then((response) => {
-        console.log("getAccountInfo - response", response);
         const { alias } = response.info;
         const { balance: resBalance } = response.balance;
         const name = response.name;
