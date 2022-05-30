@@ -158,7 +158,7 @@ function Home() {
               />
             </div>
           </div>
-          <h2 className="mb-2 text-lg text-gray-900 font-semibold dark:text-white">
+          <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
             Recent Transactions
           </h2>
           {allowance?.payments.length > 0 ? (
@@ -234,7 +234,7 @@ function Home() {
           </div>
         ) : (
           <div>
-            <h2 className="mb-2 text-lg text-gray-900 font-semibold dark:text-white">
+            <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
               Recent Transactions
             </h2>
             {payments.length > 0 ? (

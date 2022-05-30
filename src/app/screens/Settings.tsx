@@ -44,7 +44,7 @@ function Settings() {
       <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
         Settings
       </h2>
-      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting
           title="Website enhancements"
           subtitle="Tipping enhancements for Twitter, YouTube, etc."
@@ -133,7 +133,7 @@ function Settings() {
         data is not shared with anyone without your consent, you will always be
         prompted before this data is sent along with a payment.
       </div>
-      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting title="Name" subtitle="">
           {!loading && (
             <div className="w-64">
