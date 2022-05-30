@@ -92,12 +92,12 @@ function App() {
 
     // Update name to new language only, don't update status
     const tempSteps: Step[] = [];
-    for (let i = 0; i < routes.length; i++) {
+    routes.forEach((_, i) => {
       tempSteps.push({
         id: routes[i].name,
         status: steps[i].status,
       });
-    }
+    });
     setSteps(tempSteps);
 
     // Trigger rerender to update displayed language
