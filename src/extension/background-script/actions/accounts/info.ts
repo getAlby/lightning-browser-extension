@@ -1,4 +1,5 @@
 import type { MessageAccountInfo } from "~/types";
+import type { AccountInfoRes } from "~/common/lib/api";
 import state from "~/extension/background-script/state";
 
 const info = async (message: MessageAccountInfo) => {
@@ -18,17 +19,19 @@ const info = async (message: MessageAccountInfo) => {
     connector.getBalance(),
   ]);
 
-  if (!currentAccount) {
+  if (!currentAccount || !currentAccountId) {
     return { error: "No current account set" };
   }
 
+  const result: AccountInfoRes = {
+    currentAccountId: currentAccountId,
+    name: currentAccount.name,
+    info: info.data,
+    balance: balance.data,
+  };
+
   return {
-    data: {
-      currentAccountId: currentAccountId,
-      name: currentAccount.name,
-      info: info.data,
-      balance: balance.data,
-    },
+    data: result,
   };
 };
 

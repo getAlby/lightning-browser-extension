@@ -1,5 +1,6 @@
 import infoAccount from "../info";
 import type { MessageAccountInfo } from "~/types";
+import type { AccountInfoRes } from "~/common/lib/api";
 import state from "~/extension/background-script/state";
 
 jest.mock("~/extension/background-script/state");
@@ -34,13 +35,15 @@ describe("account info", () => {
 
     state.getState = jest.fn().mockReturnValue(mockState);
 
+    const result: AccountInfoRes = {
+      currentAccountId: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
+      name: "Alby",
+      info: { alias: "getalby.com" },
+      balance: { balance: 0 },
+    };
+
     expect(await infoAccount(message)).toStrictEqual({
-      data: {
-        currentAccountId: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
-        name: "Alby",
-        info: { alias: "getalby.com" },
-        balance: { balance: 0 },
-      },
+      data: result,
     });
   });
 });

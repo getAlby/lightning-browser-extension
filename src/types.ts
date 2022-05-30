@@ -17,9 +17,9 @@ export interface Accounts {
 }
 
 export interface AccountInfo {
-  id: string;
   alias: string;
   balance: number;
+  id: string;
   name: string;
 }
 
@@ -70,9 +70,9 @@ export interface Battery extends OriginData {
 
 // deprecated message type,please stop using this
 export interface Message {
+  application?: string;
   args: Record<string, unknown>;
   origin: OriginData | OriginDataInternal;
-  application?: string;
   prompt?: boolean;
   type?: string;
 }
