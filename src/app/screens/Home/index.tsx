@@ -136,26 +136,21 @@ function Home() {
       <>
         <div className="px-4 pb-5">
           <div className="flex justify-between items-center py-3">
-            {+allowance.totalBudget > 0 ? (
-              <>
-                <dl className="mb-0">
-                  <dt className="text-xs text-gray-500 dark:tex-gray-400">
-                    Allowance
-                  </dt>
-                  <dd className="mb-0 text-sm font-medium dark:text-gray-400">
-                    {allowance.usedBudget} / {allowance.totalBudget} sat used
-                  </dd>
-                </dl>
-              </>
-            ) : (
-              <div />
-            )}
-            <div className="flex items-center">
-              {+allowance.totalBudget > 0 && (
-                <div className="w-24 mr-4">
+            <dl className="mb-0">
+              <dt className="text-xs text-gray-500 dark:tex-gray-400">
+                Allowance
+              </dt>
+              <dd className="flex items-center mb-0 text-sm font-medium dark:text-gray-400">
+                {+allowance.totalBudget > 0
+                  ? `${allowance.usedBudget} / ${allowance.totalBudget} `
+                  : "0 / 0 "}
+                sats used
+                <div className="ml-3 w-24">
                   <Progressbar percentage={allowance.percentage} />
                 </div>
-              )}
+              </dd>
+            </dl>
+            <div className="flex items-center">
               <AllowanceMenu
                 allowance={allowance}
                 onEdit={loadAllowance}
