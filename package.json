@@ -93,6 +93,7 @@
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^14.1.1",
+    "@trivago/prettier-plugin-sort-imports": "^3.2.0",
     "@types/chrome": "^0.0.188",
     "@types/crypto-js": "^4.1.1",
     "@types/elliptic": "^6.4.14",
