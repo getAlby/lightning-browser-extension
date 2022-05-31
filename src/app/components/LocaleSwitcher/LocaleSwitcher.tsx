@@ -1,10 +1,9 @@
-import { useState } from "react";
-import type { FallbackLng } from "i18next";
-import type { ChangeEvent } from "react";
-
-import i18n from "~/i18n/i18nConfig";
-import api from "~/common/lib/api";
 import Select from "../form/Select";
+import type { FallbackLng } from "i18next";
+import { useState } from "react";
+import type { ChangeEvent } from "react";
+import api from "~/common/lib/api";
+import i18n from "~/i18n/i18nConfig";
 
 export default function LocaleSwitcher() {
   const fallbackLng = i18n.options.fallbackLng?.[0 as keyof FallbackLng];

@@ -1,7 +1,6 @@
-import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-
 import Header from ".";
 import IconButton from "../IconButton";
+import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 export const Default = () => (
   <Header

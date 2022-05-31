@@ -1,6 +1,5 @@
-import { useState } from "react";
-
 import Toggle from ".";
+import { useState } from "react";
 
 export const Primary = () => {
   const [checked, setChecked] = useState(true);

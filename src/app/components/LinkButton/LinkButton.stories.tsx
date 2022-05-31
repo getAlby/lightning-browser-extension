@@ -1,7 +1,6 @@
-import { MemoryRouter } from "react-router-dom";
-import { Meta } from "@storybook/react/types-6-0";
-
 import LinkButton from ".";
+import { Meta } from "@storybook/react/types-6-0";
+import { MemoryRouter } from "react-router-dom";
 
 const metadata: Meta = {
   title: "Components/Buttons/LinkButton",

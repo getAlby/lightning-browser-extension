@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import Menu from "../Menu";
 import {
   GearIcon,
   LockIcon,
@@ -8,10 +8,9 @@ import {
   ReceiveIcon,
   QuestionIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-
-import utils from "~/common/lib/utils";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "~/app/context/AuthContext";
-import Menu from "../Menu";
+import utils from "~/common/lib/utils";
 
 export default function UserMenu() {
   const navigate = useNavigate();

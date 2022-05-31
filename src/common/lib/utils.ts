@@ -1,12 +1,12 @@
 import PubSub from "pubsub-js";
 import browser, { Runtime } from "webextension-polyfill";
+import { ABORT_PROMPT_ERROR } from "~/common/constants";
 import {
   Message,
   OriginData,
   OriginDataInternal,
   PaymentNotificationData,
 } from "~/types";
-import { ABORT_PROMPT_ERROR } from "~/common/constants";
 
 const utils = {
   call: <T = Record<string, unknown>>(

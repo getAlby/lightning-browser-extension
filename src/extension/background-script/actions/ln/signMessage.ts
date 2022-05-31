@@ -1,5 +1,5 @@
-import PubSub from "pubsub-js";
 import state from "../../state";
+import PubSub from "pubsub-js";
 import { Message } from "~/types";
 
 const signMessage = async (message: Message) => {

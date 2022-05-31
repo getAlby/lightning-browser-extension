@@ -1,5 +1,3 @@
-import Citadel from "@runcitadel/sdk";
-
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
@@ -15,6 +13,7 @@ import Connector, {
   CheckPaymentResponse,
   KeysendArgs,
 } from "./connector.interface";
+import Citadel from "@runcitadel/sdk";
 
 interface Config {
   url: string;

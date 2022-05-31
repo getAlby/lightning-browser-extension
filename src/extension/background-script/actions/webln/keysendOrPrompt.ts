@@ -1,9 +1,8 @@
-import { Message } from "~/types";
-import utils from "~/common/lib/utils";
 import keysend from "../ln/keysend";
-
 // TODO: move checkAllowance to some helpers/models?
 import { checkAllowance } from "./sendPaymentOrPrompt";
+import utils from "~/common/lib/utils";
+import { Message } from "~/types";
 
 const keysendOrPrompt = async (message: Message) => {
   if (!("host" in message.origin)) return;

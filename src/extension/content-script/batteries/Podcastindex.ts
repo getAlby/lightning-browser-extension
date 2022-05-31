@@ -1,6 +1,5 @@
-import axios from "axios";
-
 import getOriginData from "../originData";
+import axios from "axios";
 import { Battery } from "~/types";
 
 interface Podcast {

@@ -1,5 +1,5 @@
-import PubSub from "pubsub-js";
 import state from "../../state";
+import PubSub from "pubsub-js";
 import utils from "~/common/lib/utils";
 
 const makeInvoice = async (message, sender) => {

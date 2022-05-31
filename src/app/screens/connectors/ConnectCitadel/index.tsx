@@ -1,10 +1,8 @@
+import ConnectorForm from "@components/ConnectorForm";
+import TextField from "@components/form/TextField";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
-import TextField from "@components/form/TextField";
-import ConnectorForm from "@components/ConnectorForm";
-
 import utils from "~/common/lib/utils";
 
 export default function ConnectCitadel() {

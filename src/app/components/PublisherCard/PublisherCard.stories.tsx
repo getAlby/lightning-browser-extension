@@ -1,6 +1,5 @@
-import { Story } from "@storybook/react/types-6-0";
-
 import PublisherCard, { Props } from "./";
+import { Story } from "@storybook/react/types-6-0";
 
 const Template: Story<Props> = (args) => <PublisherCard {...args} />;
 

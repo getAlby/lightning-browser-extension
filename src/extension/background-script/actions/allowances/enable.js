@@ -1,7 +1,7 @@
-import state from "../../state";
 import db from "../../db";
-import utils from "~/common/lib/utils";
+import state from "../../state";
 import setIcon from "../setup/setIcon";
+import utils from "~/common/lib/utils";
 
 const enable = async (message, sender) => {
   const isUnlocked = state.getState().isUnlocked();

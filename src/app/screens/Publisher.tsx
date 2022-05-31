@@ -1,15 +1,14 @@
-import { useState, useEffect, useRef, useCallback } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import AllowanceMenu from "@components/AllowanceMenu";
+import Container from "@components/Container";
+import Progressbar from "@components/Progressbar";
+import PublisherCard from "@components/PublisherCard";
+import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-
-import { Allowance } from "~/types";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import utils from "~/common/lib/utils";
-import Container from "@components/Container";
-import AllowanceMenu from "@components/AllowanceMenu";
-import PublisherCard from "@components/PublisherCard";
-import Progressbar from "@components/Progressbar";
-import TransactionsTable from "@components/TransactionsTable";
+import { Allowance } from "~/types";
 
 dayjs.extend(relativeTime);
 

@@ -1,10 +1,9 @@
-import axios from "axios";
-import sha256 from "crypto-js/sha256";
-import Hex from "crypto-js/enc-hex";
-import lightningPayReq from "bolt11";
-
-import { LNURLDetails, LNURLPaymentInfo } from "~/types";
 import { bech32Decode } from "../utils/helpers";
+import axios from "axios";
+import lightningPayReq from "bolt11";
+import Hex from "crypto-js/enc-hex";
+import sha256 from "crypto-js/sha256";
+import { LNURLDetails, LNURLPaymentInfo } from "~/types";
 
 const fromInternetIdentifier = (address: string) => {
   // email regex: https://emailregex.com/

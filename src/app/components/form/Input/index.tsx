@@ -1,6 +1,5 @@
-import { useRef } from "react";
-
 import { classNames } from "../../../utils";
+import { useRef } from "react";
 
 type Props = {
   suffix?: string;

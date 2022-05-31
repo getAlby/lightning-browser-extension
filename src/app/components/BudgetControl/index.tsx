@@ -1,8 +1,7 @@
-import { ChangeEventHandler } from "react";
-import { Transition } from "@headlessui/react";
-
 import Checkbox from "../form/Checkbox";
 import TextField from "../form/TextField";
+import { Transition } from "@headlessui/react";
+import { ChangeEventHandler } from "react";
 
 type Props = {
   remember: boolean;

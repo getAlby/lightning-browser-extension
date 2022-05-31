@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
+import websites from "./websites.json";
 import Container from "@components/Container";
 import PublishersTable from "@components/PublishersTable";
-
-import { Allowance } from "~/types";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import utils from "~/common/lib/utils";
-import websites from "./websites.json";
+import { Allowance } from "~/types";
 
 function Publishers() {
   const [data, setData] = useState<Allowance[]>([]);

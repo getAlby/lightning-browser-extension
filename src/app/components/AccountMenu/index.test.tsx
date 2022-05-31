@@ -1,8 +1,7 @@
+import AccountMenu from ".";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-
 import * as AccountsContext from "~/app/context/AccountsContext";
-import AccountMenu from ".";
 import type { Accounts } from "~/types";
 
 const defaultProps = {

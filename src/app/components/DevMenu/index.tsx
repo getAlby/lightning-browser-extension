@@ -1,6 +1,5 @@
 import { Component } from "react";
 import { toast } from "react-toastify";
-
 import utils from "~/common/lib/utils";
 
 class DevMenu extends Component {

@@ -1,12 +1,12 @@
-import PubSub from "pubsub-js";
 import state from "../../state";
-import sendPayment from "./sendPayment";
 import checkPayment from "./checkPayment";
-import signMessage from "./signMessage";
 import getInfo from "./getInfo";
-import makeInvoice from "./makeInvoice";
-import verifyMessage from "./verifyMessage";
 import keysend from "./keysend";
+import makeInvoice from "./makeInvoice";
+import sendPayment from "./sendPayment";
+import signMessage from "./signMessage";
+import verifyMessage from "./verifyMessage";
+import PubSub from "pubsub-js";
 
 const connectorCall = (method) => {
   return async (message, sender) => {

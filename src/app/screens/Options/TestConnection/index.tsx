@@ -1,14 +1,12 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
-import utils from "~/common/lib/utils";
-import api from "~/common/lib/api";
-import { useAuth } from "~/app/context/AuthContext";
-import { useAccounts } from "~/app/context/AccountsContext";
-
 import Button from "@components/Button";
 import Card from "@components/Card";
 import Loading from "@components/Loading";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAccounts } from "~/app/context/AccountsContext";
+import { useAuth } from "~/app/context/AuthContext";
+import api from "~/common/lib/api";
+import utils from "~/common/lib/utils";
 
 export default function TestConnection() {
   const auth = useAuth();

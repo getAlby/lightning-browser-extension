@@ -1,7 +1,6 @@
+import Button from "../Button";
 import { FormEventHandler } from "react";
 import { useNavigate } from "react-router-dom";
-
-import Button from "../Button";
 
 type Props = {
   title: string;

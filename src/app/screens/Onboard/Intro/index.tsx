@@ -1,14 +1,14 @@
 import Features from "./features";
-import Button from "@components/Button";
 import {
   CodeIcon,
   KeyIcon,
   LightningIcon,
   ShieldIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
+import Button from "@components/Button";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import i18n from "~/i18n/i18nConfig";
-import { useTranslation } from "react-i18next";
 import { welcomeI18nNamespace } from "~/i18n/namespaces";
 
 const features = [

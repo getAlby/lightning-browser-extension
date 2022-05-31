@@ -1,7 +1,6 @@
-import { CaretRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-
 import Badge from "../Badge";
 import Progressbar from "../Progressbar";
+import { CaretRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 type Publisher = {
   id: string;

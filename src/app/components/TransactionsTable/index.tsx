@@ -1,13 +1,11 @@
+import Badge from "../Badge";
 import {
   PlusIcon,
   MinusIcon,
   CaretDownIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Disclosure } from "@headlessui/react";
-
 import { Transaction } from "~/types";
-
-import Badge from "../Badge";
 
 type Props = {
   transactions: Transaction[];

@@ -1,8 +1,7 @@
-import { MemoryRouter } from "react-router-dom";
-import { Meta } from "@storybook/react/types-6-0";
-
 import type { Step } from ".";
 import Steps from ".";
+import { Meta } from "@storybook/react/types-6-0";
+import { MemoryRouter } from "react-router-dom";
 
 const steps: Step[] = [
   { id: "Step 1", href: "#", status: "complete" },

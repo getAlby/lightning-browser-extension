@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Button from "@components/Button";
 import Card from "@components/Card";
-import utils from "~/common/lib/utils";
-import api from "~/common/lib/api";
 import Loading from "@components/Loading";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import api from "~/common/lib/api";
+import utils from "~/common/lib/utils";
 
 export default function TestConnection() {
   const [accountInfo, setAccountInfo] = useState<{

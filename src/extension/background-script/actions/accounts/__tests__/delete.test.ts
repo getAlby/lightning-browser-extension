@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import deleteAccount from "../delete";
 import type { MessageAccountDelete } from "~/types";
 import state from "~/extension/background-script/state";
+=======
+import type { Message } from "../../../../../types";
+import state from "../../../state";
+import deleteAccount from "../delete";
+>>>>>>> 9aeadf2e (style: sort imports)
 
 jest.mock("~/extension/background-script/state");
 

@@ -1,16 +1,15 @@
-import { useState, useRef } from "react";
-import { toast } from "react-toastify";
-
-import Container from "@components/Container";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import Container from "@components/Container";
 //import Checkbox from "../../components/Form/Checkbox";
 import PublisherCard from "@components/PublisherCard";
+import SuccessMessage from "@components/SuccessMessage";
+import { useState, useRef } from "react";
+import { toast } from "react-toastify";
+import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import getOriginData from "~/extension/content-script/originData";
 import type { OriginData } from "~/types";
-import SuccessMessage from "@components/SuccessMessage";
-import { USER_REJECTED_ERROR } from "~/common/constants";
 
 type Props = {
   origin: OriginData;
