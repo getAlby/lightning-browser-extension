@@ -10,7 +10,6 @@ import type {
   SettingsStorage,
 } from "~/types";
 
-<<<<<<< HEAD
 import {
   getAccountsCache,
   removeAccountFromCache,
@@ -18,8 +17,6 @@ import {
 } from "./cache";
 import utils from "./utils";
 
-=======
->>>>>>> cef89fb0 (refactor(account): use accountInfoResult type #652)
 export interface AccountInfoRes {
   balance: { balance: string | number };
   currentAccountId: string;
