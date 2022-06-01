@@ -1,15 +1,3 @@
-import alby from "/static/assets/icons/alby.png";
-import citadel from "/static/assets/icons/citadel.png";
-import eclair from "/static/assets/icons/eclair.jpg";
-import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.jpg";
-import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
-import lnbits from "/static/assets/icons/lnbits.png";
-import lnd from "/static/assets/icons/lnd.png";
-import lndhub from "/static/assets/icons/lndhub.png";
-import mynode from "/static/assets/icons/mynode.png";
-import raspiblitz from "/static/assets/icons/raspiblitz.png";
-import start9 from "/static/assets/icons/start9.png";
-import umbrel from "/static/assets/icons/umbrel.png";
 import ConnectCitadel from "@screens/connectors/ConnectCitadel";
 import ConnectEclair from "@screens/connectors/ConnectEclair";
 import ConnectGaloy, { galoyUrls } from "@screens/connectors/ConnectGaloy";
@@ -23,6 +11,18 @@ import ConnectUmbrel from "@screens/connectors/ConnectUmbrel";
 import NewWallet from "@screens/connectors/NewWallet";
 import i18n from "~/i18n/i18nConfig";
 import { welcomeI18nNamespace } from "~/i18n/namespaces";
+import alby from "/static/assets/icons/alby.png";
+import citadel from "/static/assets/icons/citadel.png";
+import eclair from "/static/assets/icons/eclair.jpg";
+import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.jpg";
+import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
+import lnbits from "/static/assets/icons/lnbits.png";
+import lnd from "/static/assets/icons/lnd.png";
+import lndhub from "/static/assets/icons/lndhub.png";
+import mynode from "/static/assets/icons/mynode.png";
+import raspiblitz from "/static/assets/icons/raspiblitz.png";
+import start9 from "/static/assets/icons/start9.png";
+import umbrel from "/static/assets/icons/umbrel.png";
 
 const galoyPaths: { [key: string]: keyof typeof galoyUrls } = {
   bitcoinBeach: "galoy-bitcoin-beach",

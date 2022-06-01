@@ -1,8 +1,8 @@
+import browser from "webextension-polyfill";
 import extractLightningData from "./batteries";
 import injectScript from "./injectScript";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
-import browser from "webextension-polyfill";
 
 // WebLN calls that can be executed from the WebLNProvider.
 // Update when new calls are added

@@ -1,12 +1,12 @@
+import axios from "axios";
+import Hex from "crypto-js/enc-hex";
+import hmacSHA256 from "crypto-js/hmac-sha256";
+import sha256 from "crypto-js/sha256";
 import utils from "../../../../common/lib/utils";
 import HashKeySigner from "../../../../common/utils/signer";
 import type { Message, LNURLDetails } from "../../../../types";
 import db from "../../db";
 import state from "../../state";
-import axios from "axios";
-import Hex from "crypto-js/enc-hex";
-import hmacSHA256 from "crypto-js/hmac-sha256";
-import sha256 from "crypto-js/sha256";
 
 const LNURLAUTH_CANONICAL_PHRASE =
   "DO NOT EVER SIGN THIS TEXT WITH YOUR PRIVATE KEYS! IT IS ONLY USED FOR DERIVATION OF LNURL-AUTH HASHING-KEY, DISCLOSING ITS SIGNATURE WILL COMPROMISE YOUR LNURL-AUTH IDENTITY AND MAY LEAD TO LOSS OF FUNDS!";

@@ -1,8 +1,8 @@
+import lnurlLib from "~/common/lib/lnurl";
+import type { Message } from "~/types";
 import authWithPrompt from "./auth";
 import payWithPrompt from "./pay";
 import withdrawWithPrompt from "./withdraw";
-import lnurlLib from "~/common/lib/lnurl";
-import type { Message } from "~/types";
 
 /*
   Main entry point for LNURL calls

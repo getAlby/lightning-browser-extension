@@ -1,3 +1,6 @@
+import axios from "axios";
+import { AxiosRequestConfig } from "axios";
+import lightningPayReq from "bolt11";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
@@ -13,9 +16,6 @@ import Connector, {
   VerifyMessageResponse,
   KeysendArgs,
 } from "./connector.interface";
-import axios from "axios";
-import { AxiosRequestConfig } from "axios";
-import lightningPayReq from "bolt11";
 
 interface Config {
   walletId: string;

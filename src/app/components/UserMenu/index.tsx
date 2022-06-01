@@ -1,4 +1,3 @@
-import Menu from "../Menu";
 import {
   GearIcon,
   LockIcon,
@@ -11,6 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "~/app/context/AuthContext";
 import utils from "~/common/lib/utils";
+import Menu from "../Menu";
 
 export default function UserMenu() {
   const navigate = useNavigate();

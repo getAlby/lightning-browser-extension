@@ -1,9 +1,9 @@
-import Prompt from "./Prompt";
 import { createRoot } from "react-dom/client";
 import "react-loading-skeleton/dist/skeleton.css";
 import "react-toastify/dist/ReactToastify.css";
 import "~/app/styles/index.css";
 import { getTheme } from "~/app/utils";
+import Prompt from "./Prompt";
 
 // Get the active theme and apply corresponding Tailwind classes to the document
 getTheme();

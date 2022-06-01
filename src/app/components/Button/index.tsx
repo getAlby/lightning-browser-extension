@@ -1,5 +1,5 @@
-import Loading from "../Loading";
 import { classNames } from "~/app/utils/index";
+import Loading from "../Loading";
 
 export type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   fullWidth?: boolean;

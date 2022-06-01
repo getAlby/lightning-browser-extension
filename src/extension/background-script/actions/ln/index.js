@@ -1,3 +1,4 @@
+import PubSub from "pubsub-js";
 import state from "../../state";
 import checkPayment from "./checkPayment";
 import getInfo from "./getInfo";
@@ -6,7 +7,6 @@ import makeInvoice from "./makeInvoice";
 import sendPayment from "./sendPayment";
 import signMessage from "./signMessage";
 import verifyMessage from "./verifyMessage";
-import PubSub from "pubsub-js";
 
 const connectorCall = (method) => {
   return async (message, sender) => {

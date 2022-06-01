@@ -1,10 +1,10 @@
+import browser from "webextension-polyfill";
+import utils from "~/common/lib/utils";
 import connectors from "./connectors";
 import db from "./db";
 import * as events from "./events";
 import { router } from "./router";
 import state from "./state";
-import browser from "webextension-polyfill";
-import utils from "~/common/lib/utils";
 
 let isFirstInstalled = false;
 

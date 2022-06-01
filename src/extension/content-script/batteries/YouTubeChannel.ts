@@ -1,6 +1,6 @@
+import axios from "axios";
 import getOriginData from "../originData";
 import setLightningData from "../setLightningData";
-import axios from "axios";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/(channel|c)\/([^/]+).*/;
 

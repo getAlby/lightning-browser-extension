@@ -1,10 +1,4 @@
 import {
-  getAccountsCache,
-  removeAccountFromCache,
-  storeAccounts,
-} from "./cache";
-import utils from "./utils";
-import {
   MakeInvoiceArgs,
   MakeInvoiceResponse,
 } from "~/extension/background-script/connectors/connector.interface";
@@ -15,6 +9,12 @@ import type {
   Transaction,
   SettingsStorage,
 } from "~/types";
+import {
+  getAccountsCache,
+  removeAccountFromCache,
+  storeAccounts,
+} from "./cache";
+import utils from "./utils";
 
 interface AccountInfoRes {
   currentAccountId: string;

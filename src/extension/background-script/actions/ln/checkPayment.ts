@@ -1,5 +1,5 @@
-import state from "../../state";
 import { Message } from "~/types";
+import state from "../../state";
 
 const checkPayment = async (message: Message) => {
   if (typeof message.args.paymentHash !== "string") {

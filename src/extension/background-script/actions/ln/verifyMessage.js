@@ -1,5 +1,5 @@
-import state from "../../state";
 import PubSub from "pubsub-js";
+import state from "../../state";
 
 const verifyMessage = async (message, sender) => {
   PubSub.publish(`ln.verifyMessage.start`, message);

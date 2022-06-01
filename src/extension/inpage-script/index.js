@@ -1,5 +1,5 @@
-import WebLNProvider from "../ln/webln";
 import { ABORT_PROMPT_ERROR, USER_REJECTED_ERROR } from "~/common/constants";
+import WebLNProvider from "../ln/webln";
 
 if (document) {
   window.webln = new WebLNProvider();

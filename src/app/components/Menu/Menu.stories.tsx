@@ -1,6 +1,6 @@
+import { EditIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Menu from ".";
 import Badge from "../Badge";
-import { EditIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 export const Default = () => (
   <Menu as="div" className="relative">

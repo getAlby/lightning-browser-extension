@@ -1,5 +1,5 @@
-import state from "../../state";
 import { decryptData } from "~/common/lib/crypto";
+import state from "../../state";
 
 const unlock = (message, sender) => {
   const password = message.args.password;

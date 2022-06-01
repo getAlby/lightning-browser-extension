@@ -1,6 +1,6 @@
-import UserMenu from ".";
 import { Meta } from "@storybook/react/types-6-0";
 import { MemoryRouter } from "react-router-dom";
+import UserMenu from ".";
 
 const metadata: Meta = {
   title: "Components/UserMenu",
