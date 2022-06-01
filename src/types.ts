@@ -111,6 +111,11 @@ export interface MessageAccountAll extends Omit<MessageDefault, "args"> {
 export interface MessageAccountAll extends Omit<MessageDefault, "args"> {
   type: "getAccounts";
 }
+
+export interface MessageAccountLock extends Omit<MessageDefault, "args"> {
+  type: "lock";
+}
+
 interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node
