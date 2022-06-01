@@ -13,36 +13,44 @@ export default function TestConnection() {
     name: string;
     balance: number;
   }>();
-  const [errorMessage, setErrorMessage] = useState();
+  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation(["welcome"]);
 
   const navigate = useNavigate();
 
-  function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
-    utils.call("removeAccount").then(() => {
-      navigate(-1);
-    });
+  async function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
+    await utils.call("deleteAccount");
+    navigate(-1);
   }
 
-  function loadAccountInfo() {
+  async function loadAccountInfo() {
     setLoading(true);
-    api
-      .getAccountInfo()
-      .then((response) => {
-        const name = response.name;
-        const { alias } = response.info;
-        const { balance: resBalance } = response.balance;
-        const balance =
-          typeof resBalance === "number" ? resBalance : parseInt(resBalance);
+    try {
+      const response = await api.getAccountInfo();
 
-        setAccountInfo({ alias, balance, name });
-      })
-      .catch((e) => {
+      if ("error" in response) {
+        throw new Error(response.error);
+      }
+
+      const name = response.name;
+      const { alias } = response.info;
+      const { balance: resBalance } = response.balance;
+      const balance =
+        typeof resBalance === "number" ? resBalance : parseInt(resBalance);
+
+      setAccountInfo({ alias, balance, name });
+    } catch (e) {
+      if (typeof e === "string") {
         console.error(e);
+        setErrorMessage(e);
+      } else if (e instanceof Error) {
+        console.error(e.message);
         setErrorMessage(e.message);
-      })
-      .finally(() => setLoading(false));
+      }
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {

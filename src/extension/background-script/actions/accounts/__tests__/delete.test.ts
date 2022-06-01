@@ -5,7 +5,7 @@ import deleteAccount from "../delete";
 
 jest.mock("~/extension/background-script/state");
 
-const mockState = {
+const defaultMockState = {
   currentAccountId: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
   saveToStorage: jest.fn,
   accounts: {
@@ -24,9 +24,6 @@ const mockState = {
   },
 };
 
-state.getState = jest.fn().mockReturnValue(mockState);
-state.setState = () => jest.fn;
-
 const message: MessageAccountDelete = {
   application: "LBE",
   args: { id: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e" },
@@ -40,7 +37,12 @@ describe("delete account", () => {
     jest.clearAllMocks();
   });
 
-  test("if current account is being deleted first existing account will be set as current", async () => {
+  test("current account is being deleted first existing account will be set as current", async () => {
+    const mockState = defaultMockState;
+
+    state.getState = jest.fn().mockReturnValue(mockState);
+    state.setState = () => jest.fn;
+
     const spy = jest.spyOn(state, "setState");
 
     expect(await deleteAccount(message)).toStrictEqual({
@@ -54,7 +56,12 @@ describe("delete account", () => {
     expect(spy).toHaveBeenCalledTimes(2);
   });
 
-  test("if other account is being deleted the current account is not updated", async () => {
+  test("other account is being deleted the current account is not updated", async () => {
+    const mockState = defaultMockState;
+
+    state.getState = jest.fn().mockReturnValue(mockState);
+    state.setState = () => jest.fn;
+
     const spy = jest.spyOn(state, "setState");
 
     expect(
@@ -67,5 +74,34 @@ describe("delete account", () => {
     });
 
     expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  test("account is being removed if test-connection fails during on-boarding", async () => {
+    const mockState = {
+      ...defaultMockState,
+      accounts: {
+        "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e": {
+          config:
+            "U2FsdGVkX1+tXOG9qx3u4SC7zeEGB0bN7eI1YTJtxGGsit3qrjJTLaYe1eGnjN+sPFv1C0iPxJWKJps/pT76Nux/OZVXZAvfQvRnvCI0iHoIgvcCeGGb2eKGQyYYevt9bw/Uu1fzN2dq+uDlUkHRkQhJIhoqnQBdjdTv14s4QqGshF5dT9OrKkUWq1MUbUCpsfMnYu9i4nQj1i3Hve0oA/4OEAn36J05MfKQcxp8yNJjTPu2yGH9edGh8iwvcI2dnFw90YmSu/stLsF5739aTaPLUV0dYz+fje8s6n5dcHcnIK5x3GuGylSGQkteN2UUh0gjMtX6Ih4WmTbwhJBmLAhmDwM+2k/lLd13bbOoYbLCusvoKUDl8pdLkvYZr8qM7GcuCYfmr8+R/5JN0CCs6jbsg3GvF9h0SqdPDzaJf5xGWIOll2yHcPbCV/Xpe096BEN/Ehh3L8xFeS4i9+t8YNtFDo+d+1R0xPPNplf3/P4PZy5uHbKSKNkCp/MMs42cOdS4qKCGMwTN/lPNbzkTzw3Krh/m6m2sRO7RVBl+SQlv/wODPr05Pd+D1kmRn/FMgZkDKI0O8ShapWP7YEJCqzR3Rya6ChlaO+UDMuahBJmprXylrTCpeyRI8xw9m5ifwkgi2Rgi61dll31d8rQljOxJQZeSpXVnluwMG6eGiyUN+Kd6IGGFaPc0PBWQuUDDkIApbYGuK1tA6Gkd3MWqzxACj0w+2hGR5JKbydtSTIrBMdQ1dRNXZ0tVGyjvvNWwHm+oeH2qEBpqqzCVGVOxXQlbx3qp/9LliOxLQxQDpkOttP5QtjKyPNVOC+5w8kscZR/0W+jD11zn/rt9oFoIGOj5VpDV069PFS+52cmTngQhe0w7lLKvUbRt6h3bqIAx",
+          connector: "lnd",
+          name: "BLUE",
+        },
+      },
+    };
+
+    state.getState = jest.fn().mockReturnValue(mockState);
+    state.setState = () => jest.fn;
+
+    const spy = jest.spyOn(state, "setState");
+    const messageTestConnection = message;
+    delete messageTestConnection["args"];
+
+    expect(await deleteAccount(messageTestConnection)).toStrictEqual({
+      data: { deleted: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e" },
+    });
+
+    expect(spy).toHaveBeenNthCalledWith(1, {
+      accounts: {},
+    });
   });
 });
