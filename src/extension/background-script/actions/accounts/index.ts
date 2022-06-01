@@ -5,6 +5,7 @@ import edit from "./edit";
 import info from "./info";
 import isUnlocked from "./isUnlocked";
 import lock from "./lock";
+import remove from "./remove";
 import select from "./select";
 import unlock from "./unlock";
 
@@ -17,5 +18,6 @@ export {
   edit,
   select,
   info,
+  remove,
   deleteAccount,
 };
