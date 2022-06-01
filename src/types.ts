@@ -88,6 +88,7 @@ export interface MessageAccountRemove extends MessageDefault {
   args?: { id: Account["id"] };
   action: "removeAccount";
 }
+
 export interface MessageAccountAdd extends MessageDefault {
   args: Omit<Account, "id">;
   action: "addAccount";
