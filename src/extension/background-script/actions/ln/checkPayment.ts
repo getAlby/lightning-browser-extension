@@ -1,4 +1,5 @@
 import { Message } from "~/types";
+
 import state from "../../state";
 
 const checkPayment = async (message: Message) => {

@@ -1,4 +1,5 @@
 import browser from "webextension-polyfill";
+
 import extractLightningData from "./batteries";
 import injectScript from "./injectScript";
 import getOriginData from "./originData";

@@ -5,6 +5,7 @@ import createState from "zustand";
 import { decryptData } from "~/common/lib/crypto";
 import i18n from "~/i18n/i18nConfig";
 import type { Account, Accounts, SettingsStorage } from "~/types";
+
 import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
 

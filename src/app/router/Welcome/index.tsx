@@ -3,6 +3,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import Modal from "react-modal";
 import "~/app/styles/index.css";
 import { getTheme } from "~/app/utils";
+
 import Welcome from "./Welcome";
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)

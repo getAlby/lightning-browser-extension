@@ -1,4 +1,5 @@
 import { EditIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+
 import Menu from ".";
 import Badge from "../Badge";
 

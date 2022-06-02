@@ -11,6 +11,7 @@ import ConnectUmbrel from "@screens/connectors/ConnectUmbrel";
 import NewWallet from "@screens/connectors/NewWallet";
 import i18n from "~/i18n/i18nConfig";
 import { welcomeI18nNamespace } from "~/i18n/namespaces";
+
 import alby from "/static/assets/icons/alby.png";
 import citadel from "/static/assets/icons/citadel.png";
 import eclair from "/static/assets/icons/eclair.jpg";

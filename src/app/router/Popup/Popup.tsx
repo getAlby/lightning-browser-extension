@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import { AccountsProvider } from "~/app/context/AccountsContext";
 import { useAuth } from "~/app/context/AuthContext";
 import { AuthProvider } from "~/app/context/AuthContext";
+
 import RequireAuth from "../RequireAuth";
 
 const POPUP_MAX_HEIGHT = 600;

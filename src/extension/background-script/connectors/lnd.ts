@@ -4,6 +4,7 @@ import UTF8 from "crypto-js/enc-utf8";
 import WordArray from "crypto-js/lib-typedarrays";
 import SHA256 from "crypto-js/sha256";
 import utils from "~/common/lib/utils";
+
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,

@@ -1,5 +1,6 @@
 import browser from "webextension-polyfill";
 import utils from "~/common/lib/utils";
+
 import connectors from "./connectors";
 import db from "./db";
 import * as events from "./events";

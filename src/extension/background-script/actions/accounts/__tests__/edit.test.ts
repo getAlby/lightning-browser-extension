@@ -1,5 +1,6 @@
 import state from "~/extension/background-script/state";
 import type { MessageAccountEdit } from "~/types";
+
 import editAccount from "../edit";
 
 jest.mock("~/extension/background-script/state");

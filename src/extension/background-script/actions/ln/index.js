@@ -1,4 +1,5 @@
 import PubSub from "pubsub-js";
+
 import state from "../../state";
 import checkPayment from "./checkPayment";
 import getInfo from "./getInfo";

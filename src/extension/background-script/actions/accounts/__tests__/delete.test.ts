@@ -1,5 +1,6 @@
 import state from "~/extension/background-script/state";
 import type { MessageAccountDelete } from "~/types";
+
 import deleteAccount from "../delete";
 
 jest.mock("~/extension/background-script/state");

@@ -9,6 +9,7 @@ import type {
   Transaction,
   SettingsStorage,
 } from "~/types";
+
 import {
   getAccountsCache,
   removeAccountFromCache,

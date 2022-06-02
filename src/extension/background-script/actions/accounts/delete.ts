@@ -1,4 +1,5 @@
 import type { MessageAccountDelete } from "~/types";
+
 import state from "../../state";
 
 const deleteAccount = async (message: MessageAccountDelete) => {

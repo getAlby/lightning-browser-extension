@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import "react-toastify/dist/ReactToastify.css";
 import "~/app/styles/index.css";
 import { getTheme } from "~/app/utils";
+
 import Options from "./Options";
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
