@@ -1,26 +1,24 @@
-import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import {
   CaretLeftIcon,
   CheckIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
-import QRCode from "react-qr-code";
-import Confetti from "react-confetti";
-
-import utils from "~/common/lib/utils";
-import api from "~/common/lib/api";
-import { poll } from "~/common/utils/helpers";
-import { useAuth } from "~/app/context/AuthContext";
-
 import Button from "@components/Button";
 import Container from "@components/Container";
-import IconButton from "@components/IconButton";
-import TextField from "@components/form/TextField";
 // import Select from "@components/Form/Select";
 import Header from "@components/Header";
+import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
+import TextField from "@components/form/TextField";
+import { useState, useEffect, useRef } from "react";
+import Confetti from "react-confetti";
+import QRCode from "react-qr-code";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useAuth } from "~/app/context/AuthContext";
+import api from "~/common/lib/api";
+import utils from "~/common/lib/utils";
+import { poll } from "~/common/utils/helpers";
 
 function Receive() {
   const auth = useAuth();

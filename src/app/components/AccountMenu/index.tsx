@@ -1,16 +1,15 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import {
   AddressBookIcon,
   CaretDownIcon,
   PlusIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import { useState, useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
-
-import utils from "~/common/lib/utils";
-import { useAuth } from "~/app/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { useAccounts } from "~/app/context/AccountsContext";
+import { useAuth } from "~/app/context/AuthContext";
+import utils from "~/common/lib/utils";
 
 import Menu from "../Menu";
 

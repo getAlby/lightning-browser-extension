@@ -4,20 +4,19 @@ import {
   WalletIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import Button from "@components/Button";
+import Container from "@components/Container";
+import Menu from "@components/Menu";
+import TextField from "@components/form/TextField";
 import type { FormEvent } from "react";
 import { useState } from "react";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
-
+import { useAccounts } from "~/app/context/AccountsContext";
+import { useAuth } from "~/app/context/AuthContext";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
 import type { Account } from "~/types";
-import Button from "@components/Button";
-import Container from "@components/Container";
-import TextField from "@components/form/TextField";
-import Menu from "@components/Menu";
-import { useAccounts } from "~/app/context/AccountsContext";
-import { useAuth } from "~/app/context/AuthContext";
 
 type AccountAction = Omit<Account, "connector" | "config">;
 

@@ -4,7 +4,6 @@ import {
   CaretDownIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Disclosure } from "@headlessui/react";
-
 import { Transaction } from "~/types";
 
 import Badge from "../Badge";

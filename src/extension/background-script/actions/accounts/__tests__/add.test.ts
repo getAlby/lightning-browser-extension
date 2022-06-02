@@ -1,6 +1,7 @@
-import addAccount from "../add";
-import type { MessageAccountAdd } from "~/types";
 import state from "~/extension/background-script/state";
+import type { MessageAccountAdd } from "~/types";
+
+import addAccount from "../add";
 
 jest.mock("~/extension/background-script/state");
 jest.mock("uuid", () => {

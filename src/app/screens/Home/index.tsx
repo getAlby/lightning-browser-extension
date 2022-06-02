@@ -1,23 +1,21 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import browser from "webextension-polyfill";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 import {
   SendIcon,
   ReceiveIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-
+import AllowanceMenu from "@components/AllowanceMenu";
+import Button from "@components/Button";
+import Loading from "@components/Loading";
+import Progressbar from "@components/Progressbar";
+import PublisherCard from "@components/PublisherCard";
+import TransactionsTable from "@components/TransactionsTable";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import browser from "webextension-polyfill";
 import api from "~/common/lib/api";
 import type { Allowance, Battery, Transaction } from "~/types";
-
-import Button from "@components/Button";
-import TransactionsTable from "@components/TransactionsTable";
-import AllowanceMenu from "@components/AllowanceMenu";
-import Loading from "@components/Loading";
-import PublisherCard from "@components/PublisherCard";
-import Progressbar from "@components/Progressbar";
 
 dayjs.extend(relativeTime);
 

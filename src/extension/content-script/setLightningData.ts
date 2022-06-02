@@ -1,5 +1,4 @@
 import browser from "webextension-polyfill";
-
 import utils from "~/common/lib/utils";
 import { Battery } from "~/types";
 

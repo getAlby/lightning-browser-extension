@@ -1,11 +1,9 @@
+import ConnectorForm from "@components/ConnectorForm";
+import TextField from "@components/form/TextField";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
 import utils from "~/common/lib/utils";
-
-import ConnectorForm from "@components/ConnectorForm";
-import TextField from "@components/form/TextField";
 
 export default function ConnectEclair() {
   const navigate = useNavigate();

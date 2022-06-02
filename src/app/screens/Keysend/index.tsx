@@ -1,18 +1,16 @@
+import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import Button from "@components/Button";
+import Header from "@components/Header";
+import IconButton from "@components/IconButton";
+import SatButtons from "@components/SatButtons";
+import SuccessMessage from "@components/SuccessMessage";
+import Input from "@components/form/Input";
 import { Fragment, useState, MouseEvent } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-
-import utils from "~/common/lib/utils";
-import { useAuth } from "~/app/context/AuthContext";
-
-import Input from "@components/form/Input";
-import Header from "@components/Header";
-import IconButton from "@components/IconButton";
-import Button from "@components/Button";
-import SuccessMessage from "@components/SuccessMessage";
-import SatButtons from "@components/SatButtons";
 import Container from "~/app/components/Container";
+import { useAuth } from "~/app/context/AuthContext";
+import utils from "~/common/lib/utils";
 
 type Props = {
   destination?: string;
