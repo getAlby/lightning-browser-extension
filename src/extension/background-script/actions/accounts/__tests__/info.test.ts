@@ -1,7 +1,8 @@
-import infoAccount from "../info";
-import type { MessageAccountInfo } from "~/types";
 import type { AccountInfoRes } from "~/common/lib/api";
 import state from "~/extension/background-script/state";
+import type { MessageAccountInfo } from "~/types";
+
+import infoAccount from "../info";
 
 jest.mock("~/extension/background-script/state");
 

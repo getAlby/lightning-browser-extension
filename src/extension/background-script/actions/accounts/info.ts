@@ -1,6 +1,6 @@
-import type { MessageAccountInfo } from "~/types";
 import type { AccountInfoRes } from "~/common/lib/api";
 import state from "~/extension/background-script/state";
+import type { MessageAccountInfo } from "~/types";
 
 const info = async (message: MessageAccountInfo) => {
   // WHAT TO DO WITH THIS?
