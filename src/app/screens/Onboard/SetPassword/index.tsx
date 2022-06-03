@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import TextField from "@components/form/TextField";
 import Button from "@components/Button";
+import TextField from "@components/form/TextField";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import utils from "~/common/lib/utils";
 import i18n from "~/i18n/i18nConfig";
-import { useTranslation } from "react-i18next";
 import { welcomeI18nNamespace } from "~/i18n/namespaces";
 
 const initialFormData = Object.freeze({
@@ -80,7 +80,7 @@ export default function SetPassword() {
           <h1 className="text-2xl font-bold dark:text-white">
             {t("set_password.title")}
           </h1>
-          <p className="text-gray-500 mt-6 dark:text-gray-400">
+          <p className="text-gray-500 mt-6 dark:text-neutral-400">
             {t("set_password.description")}
           </p>
           <div className="w-4/5">

@@ -1,4 +1,4 @@
-name: Code quality - typecheck
+name: Storybook (build check only)
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  typecheck:
+  build-storybook:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,5 +20,5 @@ jobs:
 
       - run: yarn install
 
-      - name: Typechecking
-        run: yarn tsc:compile
+      - name: Storybook build
+        run: yarn build-storybook

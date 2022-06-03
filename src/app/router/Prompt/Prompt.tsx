@@ -1,6 +1,20 @@
+import AccountMenu from "@components/AccountMenu";
+import Keysend from "@screens/ConfirmKeysend";
+import ConfirmPayment from "@screens/ConfirmPayment";
+import ConfirmSignMessage from "@screens/ConfirmSignMessage";
+import Enable from "@screens/Enable";
+import LNURLAuth from "@screens/LNURLAuth";
+import LNURLPay from "@screens/LNURLPay";
+import LNURLWithdraw from "@screens/LNURLWithdraw";
+import MakeInvoice from "@screens/MakeInvoice";
+import Unlock from "@screens/Unlock";
 import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { AccountsProvider } from "~/app/context/AccountsContext";
 import { useAuth } from "~/app/context/AuthContext";
+import { AuthProvider } from "~/app/context/AuthContext";
+import RequireAuth from "~/app/router/RequireAuth";
+import { CurrencyProvider, useCurrency } from "~/app/context/CurrencyContext";
 import type {
   LNURLAuthServiceResponse,
   LNURLPayServiceResponse,
@@ -8,20 +22,6 @@ import type {
   OriginData,
   RequestInvoiceArgs,
 } from "~/types";
-import { AuthProvider } from "~/app/context/AuthContext";
-import { AccountsProvider } from "~/app/context/AccountsContext";
-import RequireAuth from "~/app/router/RequireAuth";
-import Unlock from "@screens/Unlock";
-import Enable from "@screens/Enable";
-import MakeInvoice from "@screens/MakeInvoice";
-import ConfirmSignMessage from "@screens/ConfirmSignMessage";
-import ConfirmPayment from "@screens/ConfirmPayment";
-import LNURLPay from "@screens/LNURLPay";
-import LNURLAuth from "@screens/LNURLAuth";
-import LNURLWithdraw from "@screens/LNURLWithdraw";
-import Keysend from "@screens/ConfirmKeysend";
-import AccountMenu from "@components/AccountMenu";
-import { CurrencyProvider, useCurrency } from "~/app/context/CurrencyContext";
 
 // Parse out the parameters from the querystring.
 const params = new URLSearchParams(window.location.search);
@@ -168,7 +168,7 @@ const Layout = () => {
   return (
     <>
       <ToastContainer />
-      <div className="px-4 py-2 bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-gray-500">
+      <div className="px-4 py-2 bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
         <AccountMenu
           title={
             typeof auth.account?.name === "string"

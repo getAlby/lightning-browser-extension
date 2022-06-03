@@ -21,7 +21,7 @@ export default function Features({ features }: Props) {
               {feature.name}
             </p>
           </dt>
-          <dd className="mt-2 text-gray-500 dark:text-gray-400">
+          <dd className="mt-2 text-gray-500 dark:text-neutral-400">
             {feature.description}
           </dd>
         </div>

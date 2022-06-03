@@ -1,27 +1,26 @@
-import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import {
   CaretLeftIcon,
   CheckIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
-import QRCode from "react-qr-code";
-import Confetti from "react-confetti";
-
-import utils from "~/common/lib/utils";
-import api from "~/common/lib/api";
-import { poll } from "~/common/utils/helpers";
-import { useAuth } from "~/app/context/AuthContext";
-
 import Button from "@components/Button";
-import IconButton from "@components/IconButton";
-import TextField from "@components/form/TextField";
+import Container from "@components/Container";
 // import Select from "@components/Form/Select";
 import Header from "@components/Header";
+import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
 import { useCurrency } from "../context/CurrencyContext";
 import DualCurrencyInput from "../components/form/NumberField";
+import TextField from "@components/form/TextField";
+import { useState, useEffect, useRef } from "react";
+import Confetti from "react-confetti";
+import QRCode from "react-qr-code";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useAuth } from "~/app/context/AuthContext";
+import api from "~/common/lib/api";
+import utils from "~/common/lib/utils";
+import { poll } from "~/common/utils/helpers";
 
 function Receive() {
   const auth = useAuth();
@@ -187,36 +186,34 @@ function Receive() {
           />
         }
       />
-      <div
-        className={`p-4 max-w-screen-sm mx-auto ${
-          paid ? "bg-green-bitcoin" : ""
-        }`}
-      >
-        {invoice ? (
-          renderInvoice()
-        ) : (
-          <>
-            <div className="mb-4">
-              <DualCurrencyInput
-                id="amount"
-                label="Amount"
-                placeholder="Amount in Satoshi..."
-                secondaryValue={fiatAmount}
-                type="number"
-                onChange={handleChange}
-              />
-            </div>
+      <div className="py-4">
+        <Container maxWidth="sm">
+          <div className={`${paid ? "bg-green-bitcoin" : ""}`}>
+            {invoice ? (
+              renderInvoice()
+            ) : (
+              <>
+                <div className="mb-4">
+                  <DualCurrencyInput
+                    id="amount"
+                    label="Amount"
+                    placeholder="Amount in Satoshi..."
+                    secondaryValue={fiatAmount}
+                    type="number"
+                    onChange={handleChange}
+                  />
+                </div>
 
-            <div className="mb-4">
-              <TextField
-                id="description"
-                label="Description"
-                placeholder="For e.g. who is sending this payment?"
-                onChange={handleChange}
-              />
-            </div>
+                <div className="mb-4">
+                  <TextField
+                    id="description"
+                    label="Description"
+                    placeholder="For e.g. who is sending this payment?"
+                    onChange={handleChange}
+                  />
+                </div>
 
-            {/* <div className="mb-5">
+                {/* <div className="mb-5">
           <label htmlFor="expiration" className="block font-medium text-gray-700">
             Expiration
           </label>
@@ -240,20 +237,22 @@ function Receive() {
           </div>
         </div> */}
 
-            <div className="text-center mb-4">
-              <div className="mb-4">
-                <Button
-                  onClick={createInvoice}
-                  label="Create Invoice"
-                  fullWidth
-                  primary
-                  loading={loading}
-                  disabled={loading || formData.amount === ""}
-                />
-              </div>
-            </div>
-          </>
-        )}
+                <div className="text-center mb-4">
+                  <div className="mb-4">
+                    <Button
+                      onClick={createInvoice}
+                      label="Create Invoice"
+                      fullWidth
+                      primary
+                      loading={loading}
+                      disabled={loading || formData.amount === ""}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </Container>
       </div>
     </div>
   );

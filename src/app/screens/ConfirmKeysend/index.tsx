@@ -1,18 +1,16 @@
 import { useState, MouseEvent, useRef, useEffect } from "react";
+import BudgetControl from "@components/BudgetControl";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import Container from "@components/Container";
+import PaymentSummary from "@components/PaymentSummary";
+import PublisherCard from "@components/PublisherCard";
+import SuccessMessage from "@components/SuccessMessage";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
-
-import PaymentSummary from "@components/PaymentSummary";
+import { USER_REJECTED_ERROR } from "~/common/constants";
+import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import getOriginData from "~/extension/content-script/originData";
-import msg from "~/common/lib/msg";
-import { USER_REJECTED_ERROR } from "~/common/constants";
-
-import BudgetControl from "@components/BudgetControl";
-import PublisherCard from "@components/PublisherCard";
-import ConfirmOrCancel from "@components/ConfirmOrCancel";
-import SuccessMessage from "@components/SuccessMessage";
-
 import type { OriginData } from "~/types";
 import { useCurrency } from "~/app/context/CurrencyContext";
 
@@ -106,37 +104,40 @@ function Keysend(props: Props) {
         description={origin.description}
         image={origin.icon}
       />
-      <div className="p-4 max-w-screen-sm mx-auto">
-        {!successMessage ? (
-          <>
-            <div className="mb-8">
-              <PaymentSummary
-                amount={amount}
-                description={`Send payment to ${destination}`}
+      <div className="py-4">
+        <Container maxWidth="sm">
+          {!successMessage ? (
+            <>
+              <div className="mb-8">
+                <PaymentSummary
+                  amount={amount}
+                  description={`Send payment to ${destination}`}
+                />
+              </div>
+              <BudgetControl
+                fiatAmount={fiatAmount}
+                remember={rememberMe}
+                onRememberChange={(event) => {
+                  setRememberMe(event.target.checked);
+                }}
+                budget={budget}
+                onBudgetChange={(event) => setBudget(event.target.value)}
               />
-            </div>
-            <BudgetControl
-              fiatAmount={fiatAmount}
-              remember={rememberMe}
-              onRememberChange={(event) => {
-                setRememberMe(event.target.checked);
-              }}
-              budget={budget}
-              onBudgetChange={(event) => setBudget(event.target.value)}
+
+              <ConfirmOrCancel
+                disabled={loading}
+                loading={loading}
+                onConfirm={confirm}
+                onCancel={reject}
+              />
+            </>
+          ) : (
+            <SuccessMessage
+              message={successMessage}
+              onClose={() => window.close()}
             />
-            <ConfirmOrCancel
-              disabled={loading}
-              loading={loading}
-              onConfirm={confirm}
-              onCancel={reject}
-            />
-          </>
-        ) : (
-          <SuccessMessage
-            message={successMessage}
-            onClose={() => window.close()}
-          />
-        )}
+          )}
+        </Container>
       </div>
     </div>
   );

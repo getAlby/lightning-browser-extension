@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Button from "@components/Button";
 import Card from "@components/Card";
-import utils from "~/common/lib/utils";
-import api from "~/common/lib/api";
 import Loading from "@components/Loading";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import api from "~/common/lib/api";
+import utils from "~/common/lib/utils";
 
 export default function TestConnection() {
   const [accountInfo, setAccountInfo] = useState<{
@@ -56,7 +56,7 @@ export default function TestConnection() {
               <h1 className="text-3xl font-bold dark:text-white">
                 {t("test_connection.connection_error")}
               </h1>
-              <p className="dark:text-gray-500">{errorMessage}</p>
+              <p className="dark:text-neutral-500">{errorMessage}</p>
               <Button
                 label={t("test_connection.edit")}
                 onClick={handleEdit}

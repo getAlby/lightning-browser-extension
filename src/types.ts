@@ -1,13 +1,11 @@
-import connectors from "./extension/background-script/connectors";
-import currencies from "./app/utils/supportedCurrencies";
 import { PaymentRequestObject } from "bolt11";
 import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
 
+import connectors from "./extension/background-script/connectors";
+import currencies from "./app/utils/supportedCurrencies";
+
 export type ConnectorType = keyof typeof connectors;
 
-// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652
-// align Message-Types
-// Where is this used? Do we still need this if 652 is solved?
 export interface Account {
   id: string;
   connector: ConnectorType;
@@ -71,14 +69,36 @@ export interface Battery extends OriginData {
   icon: string;
 }
 
-// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652
-// align Message-Types
+// deprecated message type,please stop using this
 export interface Message {
   args: Record<string, unknown>;
   origin: OriginData | OriginDataInternal;
   application?: string;
   prompt?: boolean;
   type?: string;
+}
+
+// new message  type, please use this
+export interface MessageDefault {
+  origin: OriginData | OriginDataInternal;
+  application?: string;
+  prompt?: boolean;
+}
+
+export interface MessageAccountDelete extends MessageDefault {
+  args: { id: Account["id"] };
+  type: "deleteAccount";
+}
+export interface MessageAccountAdd extends MessageDefault {
+  args: Omit<Account, "id">;
+  type: "addAccount";
+}
+export interface MessageAccountEdit extends MessageDefault {
+  args: {
+    id: Account["id"];
+    name: Account["name"];
+  };
+  type: "editAccount";
 }
 
 interface LNURLChannelServiceResponse {

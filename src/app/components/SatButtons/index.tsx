@@ -1,5 +1,6 @@
-import Button from "../Button";
 import { SatoshiV2Icon } from "@bitcoin-design/bitcoin-icons-react/filled";
+
+import Button from "../Button";
 
 type Props = {
   onClick: (amount: string) => void;
