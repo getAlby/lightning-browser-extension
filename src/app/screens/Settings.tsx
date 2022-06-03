@@ -1,3 +1,12 @@
+import { useState, useEffect } from "react";
+import { Html5Qrcode } from "html5-qrcode";
+import api from "~/common/lib/api";
+import {
+  SettingsStorage,
+  SupportedCurrencies,
+  SupportedExchanges,
+} from "~/types";
+import { getTheme } from "~/app/utils";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
@@ -5,16 +14,7 @@ import Setting from "@components/Setting";
 import Input from "@components/form/Input";
 import Select from "@components/form/Select";
 import Toggle from "@components/form/Toggle";
-import { Html5Qrcode } from "html5-qrcode";
-import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { getTheme } from "~/app/utils";
-import api from "~/common/lib/api";
-import {
-  SettingsStorage,
-  SupportedCurrencies,
-  SupportedExchanges,
-} from "~/types";
 import { useCurrency } from "../context/CurrencyContext";
 
 function Settings() {

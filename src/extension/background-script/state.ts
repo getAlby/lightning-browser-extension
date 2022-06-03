@@ -11,7 +11,6 @@ import type {
   SupportedCurrencies,
   SupportedExchanges,
 } from "~/types";
-
 import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
 

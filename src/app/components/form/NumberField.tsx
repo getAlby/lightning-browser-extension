@@ -68,6 +68,7 @@ export default function DualCurrencyInput({
       >
         {label}
       </label>
+
       <div
         className={classNames(
           "flex items-stretch overflow-hidden field mt-1 mb-6 pb-6 relative",

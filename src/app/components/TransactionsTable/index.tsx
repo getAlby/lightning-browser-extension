@@ -5,7 +5,6 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Disclosure } from "@headlessui/react";
 import { Transaction } from "~/types";
-
 import Badge from "../Badge";
 
 type Props = {
@@ -48,7 +47,7 @@ export default function TransactionsTable({ transactions }: Props) {
                       <div className="text-sm font-medium text-gray-900 truncate dark:text-white">
                         {tx.title}
                       </div>
-                      <p className="text-xs text-gray-600 capitalize dark:text-neutral-400">
+                      <p className="text-xs text-gray-600 capitalize dark:text-gray-400">
                         {tx.type} - {tx.date}
                       </p>
                     </div>
