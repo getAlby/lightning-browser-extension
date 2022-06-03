@@ -1,7 +1,7 @@
 import axios from "axios";
+import { Battery } from "~/types";
 
 import getOriginData from "../originData";
-import { Battery } from "~/types";
 
 interface Podcast {
   feed: {

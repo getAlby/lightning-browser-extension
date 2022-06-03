@@ -1,5 +1,5 @@
-const { pathsToModuleNameMapper } = require("ts-jest");
-const { compilerOptions } = require("./tsconfig");
+import { pathsToModuleNameMapper } from "ts-jest";
+import { compilerOptions } from "./tsconfig.json";
 
 module.exports = {
   verbose: true,
@@ -13,4 +13,5 @@ module.exports = {
   setupFiles: ["jest-webextension-mock"],
   testEnvironment: "./jest.custom-test-environment.ts",
   setupFilesAfterEnv: ["./jest.setup.ts"],
+  modulePathIgnorePatterns: ["<rootDir>/tests"],
 };

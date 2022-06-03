@@ -1,9 +1,9 @@
-import PubSub from "pubsub-js";
 import lightningPayReq from "bolt11";
-
-import { Message } from "~/types";
-import state from "../../state";
+import PubSub from "pubsub-js";
 import utils from "~/common/lib/utils";
+import { Message } from "~/types";
+
+import state from "../../state";
 
 export default async function sendPayment(message: Message) {
   PubSub.publish(`ln.sendPayment.start`, message);
@@ -25,6 +25,13 @@ export default async function sendPayment(message: Message) {
   } catch (e) {
     response = { error: e instanceof Error ? e.message : "" };
   }
-  utils.publishPaymentNotification(message, paymentRequestDetails, response);
+  utils.publishPaymentNotification(message, {
+    paymentRequestDetails,
+    response,
+    details: {
+      description: paymentRequestDetails.tagsObject.description,
+      destination: paymentRequestDetails.payeeNodeKey,
+    },
+  });
   return response;
 }

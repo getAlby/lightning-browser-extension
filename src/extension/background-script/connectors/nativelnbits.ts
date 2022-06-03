@@ -1,7 +1,7 @@
 import { Method } from "axios";
 
-import LnBits from "./lnbits";
 import Native from "./Native";
+import LnBits from "./lnbits";
 
 const NativeConnector = Native(LnBits);
 

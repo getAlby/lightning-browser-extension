@@ -1,5 +1,5 @@
 import PubSub from "pubsub-js";
-import { persistSuccessfullPayment } from "./persistPayments";
+
 import { updateAllowance } from "./allowances";
 import {
   paymentSuccessNotification,
@@ -7,6 +7,7 @@ import {
   lnurlAuthSuccessNotification,
   lnurlAuthFailedNotification,
 } from "./notifications";
+import { persistSuccessfullPayment } from "./persistPayments";
 
 const subscribe = () => {
   PubSub.subscribe("ln.sendPayment.success", paymentSuccessNotification);

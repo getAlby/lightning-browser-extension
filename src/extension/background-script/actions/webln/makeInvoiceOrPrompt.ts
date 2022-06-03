@@ -1,6 +1,5 @@
-import { Message } from "../../../../types";
-
 import utils from "../../../../common/lib/utils";
+import { Message } from "../../../../types";
 
 const makeInvoiceOrPrompt = async (message: Message) => {
   // TODO: support to remember the prompt decision and allow auto-create invoices

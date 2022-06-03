@@ -1,5 +1,5 @@
-import browser from "webextension-polyfill";
 import Dexie from "dexie";
+import browser from "webextension-polyfill";
 
 interface IAllowance {
   id?: number;

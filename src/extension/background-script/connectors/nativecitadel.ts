@@ -1,6 +1,5 @@
-import Citadel from "./citadel";
-
 import Native from "./Native";
+import Citadel from "./citadel";
 
 const NativeConnector = Native(Citadel);
 

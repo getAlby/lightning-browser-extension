@@ -1,4 +1,5 @@
 import elliptic from "elliptic";
+
 const ec = new elliptic.ec("secp256k1");
 
 class HashKeySigner {
@@ -29,7 +30,12 @@ class HashKeySigner {
   }
 
   verify(message: string, signature: string) {
-    return this.sk.verify(message, signature);
+    try {
+      return this.sk.verify(message, signature);
+    } catch (e) {
+      console.error(e);
+      return false;
+    }
   }
 }
 

@@ -1,5 +1,4 @@
 import lightningPayReq from "bolt11";
-
 import utils from "~/common/lib/utils";
 import { Message } from "~/types";
 

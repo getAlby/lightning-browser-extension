@@ -1,10 +1,10 @@
 import Base64 from "crypto-js/enc-base64";
-import WordArray from "crypto-js/lib-typedarrays";
 import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
+import WordArray from "crypto-js/lib-typedarrays";
 import SHA256 from "crypto-js/sha256";
-
 import utils from "~/common/lib/utils";
+
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
@@ -236,7 +236,7 @@ class Lnd implements Connector {
     defaultValues?: Record<string, unknown>
   ): Promise<Type> {
     const url = new URL(this.config.url);
-    url.pathname = path;
+    url.pathname = `${url.pathname.replace(/\/$/, "")}${path}`;
     let body = null;
     const headers = new Headers();
     headers.append("Accept", "application/json");

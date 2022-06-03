@@ -14,8 +14,8 @@ jobs:
     name: build-prod
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: "14"
           cache: "yarn"
@@ -26,19 +26,19 @@ jobs:
         run: yarn build
 
       - name: Archive firefox production zip file
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: firefox.xpi
           path: dist/production/firefox.xpi
 
       - name: Archive chrome production zip file
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: chrome.zip
           path: dist/production/chrome.zip
 
       - name: Archive opera production zip file
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: opera.crx
           path: dist/production/opera.crx
@@ -132,7 +132,7 @@ jobs:
     steps:
       - name: Find Comment
         if: ${{ env.S3_BUCKET }}
-        uses: peter-evans/find-comment@v1
+        uses: peter-evans/find-comment@v2
         id: fc
         with:
           issue-number: ${{ github.event.pull_request.number }}
@@ -141,7 +141,7 @@ jobs:
 
       - name: Create or update comment
         if: ${{ env.S3_BUCKET }}
-        uses: peter-evans/create-or-update-comment@v1
+        uses: peter-evans/create-or-update-comment@v2
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
