@@ -1,15 +1,13 @@
 import axios from "axios";
-
-import sha256 from "crypto-js/sha256";
-import hmacSHA256 from "crypto-js/hmac-sha256";
 import Hex from "crypto-js/enc-hex";
+import hmacSHA256 from "crypto-js/hmac-sha256";
+import sha256 from "crypto-js/sha256";
 
-import state from "../../state";
-import db from "../../db";
 import utils from "../../../../common/lib/utils";
-
-import type { Message, LNURLDetails } from "../../../../types";
 import HashKeySigner from "../../../../common/utils/signer";
+import type { Message, LNURLDetails } from "../../../../types";
+import db from "../../db";
+import state from "../../state";
 
 const LNURLAUTH_CANONICAL_PHRASE =
   "DO NOT EVER SIGN THIS TEXT WITH YOUR PRIVATE KEYS! IT IS ONLY USED FOR DERIVATION OF LNURL-AUTH HASHING-KEY, DISCLOSING ITS SIGNATURE WILL COMPROMISE YOUR LNURL-AUTH IDENTITY AND MAY LEAD TO LOSS OF FUNDS!";
@@ -170,7 +168,8 @@ async function auth(lnurlDetails: LNURLDetails) {
     if (axios.isAxiosError(e)) {
       console.error("LNURL-AUTH FAIL:", e);
       console.log(e.response?.data);
-      const error = e.response?.data?.reason || e.message; // lnurl error or exception message
+      const error =
+        (e.response?.data as { reason?: string })?.reason || e.message; // lnurl error or exception message
       throw new Error(error);
     } else if (e instanceof Error) {
       throw new Error(e.message);

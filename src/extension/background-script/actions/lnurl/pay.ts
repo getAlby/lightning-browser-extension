@@ -1,5 +1,4 @@
 import utils from "../../../../common/lib/utils";
-
 import type { Message, LNURLDetails } from "../../../../types";
 
 async function payWithPrompt(message: Message, lnurlDetails: LNURLDetails) {

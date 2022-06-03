@@ -1,10 +1,9 @@
-import { MouseEvent } from "react";
-
-import type { LNURLAuthServiceResponse } from "~/types";
-import msg from "~/common/lib/msg";
-
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import PublisherCard from "@components/PublisherCard";
+import { MouseEvent } from "react";
+import { USER_REJECTED_ERROR } from "~/common/constants";
+import msg from "~/common/lib/msg";
+import type { LNURLAuthServiceResponse } from "~/types";
 
 type Props = {
   details: LNURLAuthServiceResponse;
@@ -24,7 +23,7 @@ function LNURLAuth({ details, origin }: Props) {
 
   function reject(e: MouseEvent) {
     e.preventDefault();
-    msg.error("User rejected");
+    msg.error(USER_REJECTED_ERROR);
   }
 
   return (

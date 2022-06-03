@@ -1,17 +1,18 @@
-import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
-
-import { useAuth } from "~/app/context/AuthContext";
-import Home from "@screens/Home";
-import Unlock from "@screens/Unlock";
-import Send from "@screens/Send";
-import Receive from "@screens/Receive";
-import LNURLPay from "@screens/LNURLPay";
-import ConfirmPayment from "@screens/ConfirmPayment";
-import { AuthProvider } from "~/app/context/AuthContext";
-import { AccountsProvider } from "~/app/context/AccountsContext";
-import RequireAuth from "../RequireAuth";
 import Navbar from "@components/Navbar";
+import ConfirmPayment from "@screens/ConfirmPayment";
+import Home from "@screens/Home";
 import Keysend from "@screens/Keysend";
+import LNURLPay from "@screens/LNURLPay";
+import Receive from "@screens/Receive";
+import Send from "@screens/Send";
+import Unlock from "@screens/Unlock";
+import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { AccountsProvider } from "~/app/context/AccountsContext";
+import { useAuth } from "~/app/context/AuthContext";
+import { AuthProvider } from "~/app/context/AuthContext";
+
+import RequireAuth from "../RequireAuth";
 
 const POPUP_MAX_HEIGHT = 600;
 
@@ -64,6 +65,7 @@ const Layout = () => {
 
       <main className="overflow-y-auto grow">
         <Outlet />
+        <ToastContainer />
       </main>
     </div>
   );

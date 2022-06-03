@@ -1,7 +1,7 @@
 import { Method } from "axios";
 
-import LndHub from "./lndhub";
 import Native from "./Native";
+import LndHub from "./lndhub";
 
 const NativeConnector = Native(LndHub);
 

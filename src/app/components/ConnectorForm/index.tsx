@@ -32,7 +32,7 @@ function ConnectorForm({
         <div className="lg:w-1/2">
           <h1 className="mb-6 text-2xl font-bold dark:text-white">{title}</h1>
           {description && (
-            <div className="mb-6 text-gray-500 dark:text-gray-400">
+            <div className="mb-6 text-gray-500 dark:text-neutral-400">
               {typeof description === "string" ? (
                 <p>{description}</p>
               ) : (

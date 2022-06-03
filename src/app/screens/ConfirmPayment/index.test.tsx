@@ -1,6 +1,7 @@
-import lightningPayReq from "bolt11";
 import { render, fireEvent, screen, act } from "@testing-library/react";
+import lightningPayReq from "bolt11";
 import { MemoryRouter } from "react-router-dom";
+
 import type { Props } from "./index";
 import ConfirmPayment from "./index";
 

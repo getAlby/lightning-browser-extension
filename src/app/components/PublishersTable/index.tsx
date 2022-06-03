@@ -14,6 +14,7 @@ type Publisher = {
     textColor: string;
   };
   paymentsCount: number;
+  paymentsAmount: number;
   totalBudget: number;
   usedBudget: number;
   percentage: string;
@@ -38,7 +39,7 @@ export default function PublishersTable({
           {publishers.map((publisher) => (
             <tr
               key={publisher.id}
-              className="cursor-pointer hover:bg-gray-50 transition duration-200 dark:hover:bg-gray-800"
+              className="cursor-pointer hover:bg-gray-50 transition duration-200 dark:hover:bg-neutral-800"
               onClick={() => navigateToPublisher(publisher.id)}
             >
               <td className="px-4 py-6 whitespace-nowrap">
@@ -68,8 +69,11 @@ export default function PublishersTable({
                         />
                       )}
                     </div>
-                    <div className="text-sm text-gray-700 dark:text-gray-400">
-                      {publisher.host} • {publisher.paymentsCount} payments
+                    <div className="text-sm text-gray-500 dark:text-neutral-400">
+                      {publisher.host} • {publisher.paymentsCount} payments{" "}
+                      {publisher.paymentsAmount > 0 && (
+                        <span>({publisher.paymentsAmount} sats)</span>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -77,7 +81,7 @@ export default function PublishersTable({
               <td className="px-6 py-6 whitespace-nowrap text-right">
                 {publisher.totalBudget > 0 && (
                   <div className="ml-40">
-                    <p className="text-lg text-gray-700 mb-0 dark:text-gray-400">
+                    <p className="text-lg text-gray-500 mb-0 dark:text-neutral-400">
                       {publisher.usedBudget} / {publisher.totalBudget} sat used
                     </p>
                     <div className="relative mt-2 ml-auto">

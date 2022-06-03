@@ -1,7 +1,8 @@
 import { useState, useEffect, createContext, useContext } from "react";
+import { toast } from "react-toastify";
 
-import utils from "../../common/lib/utils";
 import api from "../../common/lib/api";
+import utils from "../../common/lib/utils";
 import type { AccountInfo } from "../../types";
 
 interface AuthContextType {
@@ -66,7 +67,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           utils.openPage("welcome.html");
           window.close();
         } else if (response.unlocked) {
-          if (onWelcomePage) {
+          if (response.configured && onWelcomePage) {
             utils.redirectPage("options.html");
           }
           setAccountId(response.currentAccountId);
@@ -76,7 +77,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
       })
       .catch((e) => {
-        alert(`An unexpected error occurred (${e.message})`);
+        toast.error(`An unexpected error occurred (${e.message})`);
       })
       .finally(() => {
         setLoading(false);
