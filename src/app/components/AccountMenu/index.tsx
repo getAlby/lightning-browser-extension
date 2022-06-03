@@ -83,6 +83,7 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
                   selectAccount(accountId);
                 }}
                 disabled={loading}
+                selected={accountId === auth.account?.id}
               >
                 <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-700 dark:text-neutral-300" />
                 {account.name}&nbsp;
