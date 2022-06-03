@@ -1,39 +1,10 @@
 import Dexie from "dexie";
 import browser from "webextension-polyfill";
-
-interface IAllowance {
-  id?: number;
-  host: string;
-  name: string;
-  imageURL: string;
-  tag: string;
-  enabled: boolean;
-  totalBudget: number;
-  remainingBudget: number;
-  lastPaymentAt: string;
-  lnurlAuth: string;
-  createdAt: string;
-}
-
-interface IPayment {
-  id?: number;
-  allowanceId: string;
-  host: string;
-  location: string;
-  name: string;
-  description: string;
-  totalAmount: number;
-  totalFees: number;
-  preimage: string;
-  paymentRequest: string;
-  paymentHash: string;
-  destination: string;
-  createdAt: string;
-}
+import type { Allowance, Payment } from "~/types";
 
 class DB extends Dexie {
-  allowances: Dexie.Table<IAllowance, number>;
-  payments: Dexie.Table<IPayment, number>;
+  allowances: Dexie.Table<Allowance, number>;
+  payments: Dexie.Table<Payment, number>;
 
   constructor() {
     super("LBE");

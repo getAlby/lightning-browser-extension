@@ -3,16 +3,14 @@ import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useState } from "react";
 import Modal from "react-modal";
 import utils from "~/common/lib/utils";
+import type { Allowance } from "~/types";
 
 import Button from "../Button";
 import Menu from "../Menu";
 import TextField from "../form/TextField";
 
 export type Props = {
-  allowance: {
-    id: string;
-    totalBudget: number;
-  };
+  allowance: Pick<Allowance, "id" | "totalBudget">;
   onEdit?: () => void;
   onDelete?: () => void;
 };
@@ -40,7 +38,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
 
   async function updateAllowance() {
     await utils.call("updateAllowance", {
-      id: parseInt(allowance.id),
+      id: typeof allowance.id === "number" ? `$(allowance.id)` : allowance.id,
       totalBudget: parseInt(budget),
     });
     onEdit && onEdit();
@@ -63,7 +61,10 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               ) {
                 try {
                   await utils.call("deleteAllowance", {
-                    id: parseInt(allowance.id),
+                    id:
+                      typeof allowance.id === "number"
+                        ? `$(allowance.id)`
+                        : allowance.id,
                   });
                   onDelete && onDelete();
                 } catch (e) {

@@ -3,37 +3,203 @@ import PublishersTable from "@components/PublishersTable";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import utils from "~/common/lib/utils";
-import { Allowance } from "~/types";
+import { Allowance, Publisher } from "~/types";
 
 import websites from "./websites.json";
 
 function Publishers() {
-  const [data, setData] = useState<Allowance[]>([]);
+  const [publishers, setPublishers] = useState<Publisher[]>([]);
   const navigate = useNavigate();
 
-  function navigateToPublisher(id: string) {
+  function navigateToPublisher(id: string | number) {
     navigate(`/publishers/${id}`);
   }
 
   async function fetchData() {
+    // interface FooAloowance {
+    //   id?: number | string;
+    //   createdAt: string;
+    //   host: string;
+    // }
+
+    // interface FooPublisher
+    //   extends Pick<Allowance, "host" | "imageURL" | "name"> {
+    //   id: number | string;
+    // }
+
+    // const fooAllowances: Allowance[] = [
+    //   {
+    //     id: 1,
+    //     createdAt: "blue",
+    //     host: "blue",
+    //     imageURL: "blue",
+    //     name: "blue",
+    //   },
+    //   {
+    //     id: 2,
+    //     createdAt: "blue",
+    //     host: "blue",
+    //     imageURL: "blue",
+    //     name: "blue",
+    //   },
+    //   {
+    //     id: 3,
+    //     createdAt: "blue",
+    //     host: "blue",
+    //     imageURL: "blue",
+    //     name: "blue",
+    //   },
+    //   {
+    //     createdAt: "blue",
+    //     host: "blue",
+    //     imageURL: "blue",
+    //     name: "blue",
+    //   },
+    // ];
+
+    // const fooPublishers: FooPublisher[] = fooAllowances.filter(
+    //   (allowance): allowance is FooPublisher => !!allowance.id
+    // );
+
+    // const tmp: Publisher[] = fooAllowances
+    //   .filter(
+    //     (allowance) => typeof allowance?.id !== "undefined"
+    //     //!!allowance?.id
+    //     //  && typeof allowance?.id !== "undefined"
+    //   )
+    //   .map((allowance): Publisher => {
+    //     const id = allowance.id;
+    //     return {
+    //       host: allowance.host,
+    //       id,
+    //       imageURL: allowance.imageURL,
+    //       name: allowance.name,
+    //     };
+    //   });
+
+    // const strictTree4 = fooAllowances.reduce<Publisher[]>((acc, allowance) => {
+    //   if (!allowance?.id) return acc;
+    //   acc.push({
+    //     host: allowance.host,
+    //     id: allowance.id,
+    //     imageURL: allowance.imageURL,
+    //     name: allowance.name,
+    //   });
+
+    //   return acc;
+    // }, []);
+
+    // const fooPublishers: Publisher[] = tmp.length > 0 ? tmp : [];
+    // const fooPublishers: Publisher[] = fooAllowances.map(
+    //   (allowance) => {
+    //     // !!allowance.id
+    //     return {
+    //       host: allowance.host,
+    //       id: "2",
+    //       imageURL: allowance.imageURL,
+    //       name: allowance.name,
+    //     };
+    //   }
+    // );
+    // .map((tree) => ({ ...tree, banana: 1 }));
+
+    // console.log(fooPublishers);
+
+    // const usagePublishers: Publisher[] = fooPublishers;
+
     try {
       const response = await utils.call<{
         allowances: Allowance[];
       }>("listAllowances");
-      const allowances = response.allowances.map((allowance) => {
-        if (allowance.enabled && allowance.remainingBudget > 0) {
-          return {
-            ...allowance,
+
+      // !!allowance.id && allowance.enabled && allowance.remainingBudget > 0
+
+      const resAllowances = response.allowances;
+
+      // const allowances: Publisher[] = resAllowances.filter(
+      //   (allowance): allowance is Publisher => !!allowance.id
+      // );
+
+      const allowances: Publisher[] = resAllowances.reduce<Publisher[]>(
+        (acc, allowance) => {
+          if (!allowance?.id) return acc;
+          acc.push({
+            id: allowance.id,
+            host: allowance.host,
+            imageURL: allowance.imageURL,
+            name: allowance.name,
+            payments: allowance.payments,
+            paymentsAmount: allowance.paymentsAmount,
+            paymentsCount: allowance.paymentsCount,
+            percentage: allowance.percentage,
+            totalBudget: allowance.totalBudget,
+            usedBudget: allowance.usedBudget,
             badge: {
               label: "ACTIVE",
               color: "green-bitcoin",
               textColor: "white",
             },
-          };
-        }
-        return allowance;
-      });
-      setData(allowances);
+          });
+
+          return acc;
+        },
+        []
+      );
+
+      // const allowances = response.allowances.reduce<Publisher[]>(
+      //   (acc, allowance) => {
+      //     if (!allowance?.id) return acc;
+      //     acc.push({
+      //       host: allowance.host,
+      //       id: allowance.id,
+      //       imageURL: allowance.imageURL,
+      //       name: allowance.name,
+      //     });
+
+      //     return acc;
+      //   },
+      //   []
+      // );
+      // .map((allowance) => {
+      //   return {
+
+      //   };
+      // });
+
+      // const allowances: Publisher[] = resAllowances.map(
+      //   (allowance): allowance is Publisher => {
+      //     if (
+      //       !!allowance.id &&
+      //       allowance.enabled &&
+      //       allowance.remainingBudget > 0
+      //     ) {
+      //       return {
+      //         host: allowance.host,
+      //         imageURL: allowance.imageURL,
+      //         name: allowance.name,
+      //         payments: allowance.payments,
+      //         paymentsAmount: allowance.paymentsAmount,
+      //         paymentsCount: allowance.paymentsCount,
+      //         percentage: allowance.percentage,
+      //         totalBudget: allowance.totalBudget,
+      //         usedBudget: allowance.usedBudget,
+      //       };
+      //     } else {
+      //       return false;
+      //     }
+      //   }
+      // );
+
+      // .map((allowance) => ({
+      //   ...allowance,
+      //   badge: {
+      //     label: "ACTIVE",
+      //     color: "green-bitcoin",
+      //     textColor: "white",
+      //   },
+      // }));
+
+      setPublishers(allowances);
     } catch (e) {
       console.error(e);
     }
@@ -51,9 +217,9 @@ function Publishers() {
       <p className="mb-6 text-gray-500 dark:text-neutral-500">
         Websites where you have used Alby before
       </p>
-      {data.length > 0 ? (
+      {publishers.length > 0 ? (
         <PublishersTable
-          publishers={data}
+          publishers={publishers}
           navigateToPublisher={navigateToPublisher}
         />
       ) : (
