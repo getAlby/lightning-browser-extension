@@ -20,11 +20,8 @@ import {
   LNURLPaymentInfo,
   LNURLPaymentSuccessAction,
   LNURLPayServiceResponse,
-  Payment,
   PaymentResponse,
 } from "~/types";
-
-console.log("LNURLPay!");
 
 type Origin = {
   name: string;
@@ -45,8 +42,6 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
 );
 
 function LNURLPay(props: Props) {
-  console.log("LNURLPay()");
-
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAuth();
@@ -121,7 +116,6 @@ function LNURLPay(props: Props) {
   };
 
   async function confirm() {
-    console.log("LNURLPay! - confirm");
     if (!details) return;
 
     const payerdata = getPayerData(details);
@@ -176,7 +170,6 @@ function LNURLPay(props: Props) {
         toast.warn("Payment aborted: Invalid invoice.");
         return;
       }
-      console.log("LNURLPay! - sendPayment");
 
       // LN WALLET pays the invoice, no additional user confirmation is required at this point
       const paymentResponse: PaymentResponse = await utils.call(

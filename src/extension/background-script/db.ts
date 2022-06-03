@@ -30,46 +30,49 @@ class DB extends Dexie {
   }
 
   async loadFromStorage() {
-    console.info("Loading DB data from storage");
-    return browser.storage.local
-      .get(["allowances", "payments"])
-      .then((result) => {
-        const allowancePromise = this.allowances.count().then((count) => {
-          // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
-          if (count > 0) {
-            console.info(`Found ${count} allowances already in the DB`);
-            return;
-          } else if (result.allowances && result.allowances.length > 0) {
-            // adding the data from the browser storage
-            return this.allowances
-              .bulkAdd(result.allowances)
-              .catch(Dexie.BulkError, function (e) {
-                console.error("Failed to add allowances; ignoring", e);
-              });
-          }
-        });
+    try {
+      console.info("Loading DB data from storage");
 
-        const paymentsPromise = this.payments.count().then((count) => {
-          // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
-          if (count > 0) {
-            console.info(`Found ${count} payments already in the DB`);
-            return;
-          } else if (result.payments && result.payments.length > 0) {
-            // adding the data from the browser storage
-            return this.payments
-              .bulkAdd(result.payments)
-              .catch(Dexie.BulkError, function (e) {
-                console.error("Failed to add payments; ignoring", e);
-              });
-          }
-        });
+      const result = await browser.storage.local.get([
+        "allowances",
+        "payments",
+      ]);
 
-        // wait for all allowances and payments to be loaded
-        return Promise.all([allowancePromise, paymentsPromise]);
-      })
-      .catch((e) => {
-        console.error("Failed to load DB data from storage", e);
+      const allowancePromise = this.allowances.count().then((count) => {
+        // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
+        if (count > 0) {
+          console.info(`Found ${count} allowances already in the DB`);
+          return;
+        } else if (result.allowances && result.allowances.length > 0) {
+          // adding the data from the browser storage
+          return this.allowances
+            .bulkAdd(result.allowances)
+            .catch(Dexie.BulkError, function (e) {
+              console.error("Failed to add allowances; ignoring", e);
+            });
+        }
       });
+
+      const paymentsPromise = this.payments.count().then((count) => {
+        // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
+        if (count > 0) {
+          console.info(`Found ${count} payments already in the DB`);
+          return;
+        } else if (result.payments && result.payments.length > 0) {
+          // adding the data from the browser storage
+          return this.payments
+            .bulkAdd(result.payments)
+            .catch(Dexie.BulkError, function (e) {
+              console.error("Failed to add payments; ignoring", e);
+            });
+        }
+      });
+
+      // wait for all allowances and payments to be loaded
+      return Promise.all([allowancePromise, paymentsPromise]);
+    } catch (e) {
+      console.error("Failed to load DB data from storage", e);
+    }
   }
 }
 
