@@ -3,13 +3,6 @@ import state from "~/extension/background-script/state";
 import type { MessageAccountInfo } from "~/types";
 
 const info = async (message: MessageAccountInfo) => {
-  // WHAT TO DO WITH THIS?
-  // TODO!
-  //if (message.args.id) {
-  //  account = state.getState().accounts[message.args.id];
-  //} else {
-  //  account = state.getState().getAccount();
-  //}
   const connector = await state.getState().getConnector();
   const currentAccountId = state.getState().currentAccountId;
   const currentAccount = state.getState().getAccount();
