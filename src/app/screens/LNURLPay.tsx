@@ -2,6 +2,7 @@ import Button from "@components/Button";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import SatButtons from "@components/SatButtons";
+import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
 import axios from "axios";
 import React, { useState, useEffect, MouseEvent } from "react";
@@ -20,15 +21,8 @@ import {
   LNURLPaymentInfo,
   LNURLPaymentSuccessAction,
   LNURLPayServiceResponse,
-  Payment,
   PaymentResponse,
 } from "~/types";
-
-<<<<<<< HEAD
-import DualCurrencyField from "../components/form/DualCurrencyField";
-=======
-console.log("LNURLPay!");
->>>>>>> 5778dd27 (refactor(allowance): types, touching publishers as well)
 
 type Origin = {
   name: string;
@@ -49,8 +43,6 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
 );
 
 function LNURLPay(props: Props) {
-  console.log("LNURLPay()");
-
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAuth();
@@ -134,7 +126,6 @@ function LNURLPay(props: Props) {
   };
 
   async function confirm() {
-    console.log("LNURLPay! - confirm");
     if (!details) return;
 
     const payerdata = getPayerData(details);
@@ -189,7 +180,6 @@ function LNURLPay(props: Props) {
         toast.warn("Payment aborted: Invalid invoice.");
         return;
       }
-      console.log("LNURLPay! - sendPayment");
 
       // LN WALLET pays the invoice, no additional user confirmation is required at this point
       const paymentResponse: PaymentResponse = await utils.call(
