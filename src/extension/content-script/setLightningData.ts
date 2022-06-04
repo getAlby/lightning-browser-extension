@@ -5,7 +5,7 @@ import { Battery } from "~/types";
 const setLightningData = (data: [Battery]): void => {
   browser.runtime.sendMessage({
     application: "LBE",
-    type: "lightningData",
+    action: "lightningData",
     args: data,
   });
   utils.call("setIcon", { icon: "active" });

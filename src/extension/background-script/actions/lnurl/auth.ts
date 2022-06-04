@@ -36,7 +36,7 @@ async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
     try {
       const promptMessage = {
         ...message,
-        type: "lnurlAuth",
+        action: "lnurlAuth",
         args: {
           ...message.args,
           lnurlDetails,

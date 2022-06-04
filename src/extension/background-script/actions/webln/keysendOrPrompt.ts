@@ -41,7 +41,7 @@ async function keysendWithPrompt(message: Message) {
   try {
     const response = await utils.openPrompt({
       ...message,
-      type: "confirmKeysend",
+      action: "confirmKeysend",
     });
     return response;
   } catch (e) {

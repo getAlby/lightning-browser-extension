@@ -21,7 +21,7 @@ const extractLightningData = (tabId, changeInfo, tab) => {
     // before the receiving side in the content-script was connected/listening
     setTimeout(() => {
       browser.tabs.sendMessage(tabId, {
-        type: "extractLightningData",
+        action: "extractLightningData",
       });
     }, 150);
   }
@@ -83,7 +83,7 @@ const routeCalls = (message, sender) => {
   }
   const debug = state.getState().settings.debug;
 
-  const action = message.type; //|| message.action; // TODO: what is a good message format to route to an action?
+  const action = message.action; //|| message.action; // TODO: what is a good message format to route to an action?
   console.log(`Routing call: ${action}`);
   // Potentially check for internal vs. public calls
   const call = router(action)(message, sender);

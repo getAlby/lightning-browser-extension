@@ -26,19 +26,20 @@ import type {
 const params = new URLSearchParams(window.location.search);
 let origin = {} as OriginData;
 let args = {};
-let type = "";
+let action = "";
 if (params.get("origin") && typeof params.get("origin") === "string") {
   origin = JSON.parse(params.get("origin") as string);
 }
 if (params.get("args") && typeof params.get("args") === "string") {
   args = JSON.parse(params.get("args") as string);
 }
-if (typeof params.get("type") === "string") type = params.get("type") as string;
+if (typeof params.get("action") === "string")
+  action = params.get("action") as string;
 const routeParams: {
   origin: OriginData;
   args: Record<string, unknown>;
-  type: string;
-} = { origin, args, type };
+  action: string;
+} = { origin, args, action };
 
 function Prompt() {
   return (
@@ -56,7 +57,7 @@ function Prompt() {
             >
               <Route
                 index
-                element={<Navigate to={`/${routeParams.type}`} replace />}
+                element={<Navigate to={`/${routeParams.action}`} replace />}
               />
               <Route
                 path="webln/enable"

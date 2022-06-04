@@ -55,10 +55,10 @@ function Home() {
   }
 
   function handleLightningDataMessage(response: {
-    type: string;
+    action: string;
     args: Battery[];
   }) {
-    if (response.type === "lightningData") {
+    if (response.action === "lightningData") {
       setLnData(response.args);
     }
   }
@@ -71,7 +71,7 @@ function Home() {
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
       if (tabs.length > 0 && tabs[0].url?.startsWith("http")) {
         browser.tabs.sendMessage(tabs[0].id as number, {
-          type: "extractLightningData",
+          action: "extractLightningData",
         });
       }
     });
