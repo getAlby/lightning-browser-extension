@@ -84,7 +84,7 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
                 }}
                 disabled={loading}
               >
-                <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-700 dark:text-neutral-300" />
+                <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 shrink-0 opacity-75 text-gray-700 dark:text-neutral-300" />
                 <div className="overflow-hidden text-ellipsis whitespace-nowrap">
                   {account.name}&nbsp;
                 </div>
