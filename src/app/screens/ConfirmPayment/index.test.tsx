@@ -1,4 +1,5 @@
-import { render, fireEvent, screen, act } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import lightningPayReq from "bolt11";
 import { MemoryRouter } from "react-router-dom";
 
@@ -54,7 +55,7 @@ describe("ConfirmPayment", () => {
       );
     });
 
-    fireEvent.click(screen.getByText("Remember and set a budget"));
+    userEvent.click(screen.getByText("Remember and set a budget"));
 
     const input = await screen.findByLabelText("Budget");
     const satoshis = lightningPayReq.decode(paymentRequest).satoshis || 0;

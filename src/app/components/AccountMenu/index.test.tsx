@@ -1,4 +1,6 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { act } from "react-dom/test-utils";
 import { BrowserRouter } from "react-router-dom";
 import * as AccountsContext from "~/app/context/AccountsContext";
 import type { Accounts } from "~/types";
@@ -38,7 +40,9 @@ describe("AccountMenu", () => {
       </BrowserRouter>
     );
 
-    fireEvent.click(screen.getByText("Toggle Dropdown"));
+    await act(async () => {
+      userEvent.click(screen.getByText("Toggle Dropdown"));
+    });
 
     await waitFor(() => screen.getByText("Switch account"));
 
@@ -55,7 +59,7 @@ describe("AccountMenu", () => {
       </BrowserRouter>
     );
 
-    fireEvent.click(screen.getByText("Toggle Dropdown"));
+    await userEvent.click(screen.getByText("Toggle Dropdown"));
 
     expect(screen.getByText("LND account")).toBeInTheDocument();
     expect(screen.getByText("Galoy account")).toBeInTheDocument();
