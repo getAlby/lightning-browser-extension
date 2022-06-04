@@ -116,7 +116,7 @@ export default function SetPassword() {
         </div>
         <div className="mt-16 lg:mt-0 lg:w-1/2">
           <div className="lg:flex h-full justify-center items-center">
-            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
+            <img src="assets/icons/satsymbol.svg" alt="sats" className="w-64" />
           </div>
         </div>
       </div>

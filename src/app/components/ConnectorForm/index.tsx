@@ -56,7 +56,7 @@ function ConnectorForm({
             ) : (
               <img
                 src="assets/icons/satsymbol.svg"
-                alt="sat"
+                alt="sats"
                 className="w-64"
               />
             )}

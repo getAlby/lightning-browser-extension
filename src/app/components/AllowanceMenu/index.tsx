@@ -96,7 +96,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               id="budget"
               label="Budget"
               autoFocus
-              placeholder="sat"
+              placeholder="sats"
               value={budget}
               type="number"
               onChange={(e) => setBudget(e.target.value)}
