@@ -6,6 +6,7 @@ type Props = {
   danger?: boolean;
   disabled?: boolean;
   onClick: () => void;
+  title?: string;
   selected?: boolean;
 };
 
@@ -14,6 +15,7 @@ function MenuItemButton({
   danger = false,
   disabled = false,
   onClick,
+  title = "",
   selected = false,
 }: Props) {
   return (
@@ -29,6 +31,7 @@ function MenuItemButton({
           )}
           disabled={disabled}
           onClick={onClick}
+          title={title}
         >
           {children}
         </button>
