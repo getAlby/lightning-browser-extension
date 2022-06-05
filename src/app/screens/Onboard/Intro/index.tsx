@@ -44,7 +44,7 @@ export default function Intro() {
       <div className="relative lg:grid lg:grid-cols-3 lg:gap-x-8 mt-14 bg-white dark:bg-surface-02dp px-10 py-12 items-center">
         <div className="lg:col-span-1">
           <div className="max-w-xs">
-            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
+            <img src="assets/icons/satsymbol.svg" alt="sats" className="w-64" />
           </div>
         </div>
         <div className="mt-10 lg:mt-0 lg:col-span-2">

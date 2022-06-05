@@ -84,6 +84,7 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
                 }}
                 disabled={loading}
                 title={account.name}
+                selected={accountId === auth.account?.id}
               >
                 <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 shrink-0 opacity-75 text-gray-700 dark:text-neutral-300" />
                 <span className="overflow-hidden text-ellipsis whitespace-nowrap">
