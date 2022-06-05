@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { act } from "react-dom/test-utils";
 import { BrowserRouter } from "react-router-dom";
 import * as AccountsContext from "~/app/context/AccountsContext";
+import * as AuthContext from "~/app/context/AuthContext";
 import type { Accounts } from "~/types";
 
 import AccountMenu from ".";
@@ -20,6 +21,15 @@ const mockAccounts: Accounts = {
 jest.spyOn(AccountsContext, "useAccounts").mockReturnValue({
   accounts: mockAccounts,
   getAccounts: jest.fn(),
+});
+
+jest.spyOn(AuthContext, "useAuth").mockReturnValue({
+  account: { id: "1", name: "LND account" },
+  loading: false,
+  unlock: jest.fn(),
+  lock: jest.fn(),
+  setAccountId: jest.fn(),
+  fetchAccountInfo: jest.fn(),
 });
 
 describe("AccountMenu", () => {
@@ -50,6 +60,21 @@ describe("AccountMenu", () => {
     expect(screen.getByText("Galoy account")).toBeInTheDocument();
     expect(screen.getByText("Add a new account")).toBeInTheDocument();
     expect(screen.getByText("Accounts")).toBeInTheDocument();
+  });
+
+  test("highlights current account", async () => {
+    render(
+      <BrowserRouter>
+        <AccountMenu {...defaultProps} />
+      </BrowserRouter>
+    );
+
+    await userEvent.click(screen.getByText("Toggle Dropdown"));
+
+    // As we have set the active account as "LND account above"
+    expect(
+      screen.getByText("LND account").classList.contains("font-bold")
+    ).toBe(true);
   });
 
   test("displays accounts without options", async () => {
