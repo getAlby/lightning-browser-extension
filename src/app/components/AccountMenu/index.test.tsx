@@ -69,7 +69,10 @@ describe("AccountMenu", () => {
       </BrowserRouter>
     );
 
-    await userEvent.click(screen.getByText("Toggle Dropdown"));
+    await act(async () => {
+      userEvent.click(screen.getByText("Toggle Dropdown"));
+    });
+    await waitFor(() => screen.getByText("Switch account"));
 
     // As we have set the active account as "LND account above"
     const item = screen.getByTitle("LND account");
@@ -85,7 +88,10 @@ describe("AccountMenu", () => {
       </BrowserRouter>
     );
 
-    await userEvent.click(screen.getByText("Toggle Dropdown"));
+    await act(async () => {
+      userEvent.click(screen.getByText("Toggle Dropdown"));
+    });
+    await waitFor(() => screen.getByText("Switch account"));
 
     expect(screen.getByText("LND account")).toBeInTheDocument();
     expect(screen.getByText("Galoy account")).toBeInTheDocument();
