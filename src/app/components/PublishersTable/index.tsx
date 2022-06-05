@@ -82,7 +82,7 @@ export default function PublishersTable({
                 {publisher.totalBudget > 0 && (
                   <div className="ml-40">
                     <p className="text-lg text-gray-500 mb-0 dark:text-neutral-400">
-                      {publisher.usedBudget} / {publisher.totalBudget} sat used
+                      {publisher.usedBudget} / {publisher.totalBudget} sats used
                     </p>
                     <div className="relative mt-2 ml-auto">
                       <div className="flex items-center justify-end">

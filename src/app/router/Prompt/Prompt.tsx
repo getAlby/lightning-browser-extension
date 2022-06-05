@@ -167,7 +167,7 @@ const Layout = () => {
           }
           subtitle={
             typeof auth.account?.balance === "number"
-              ? `${auth.account.balance} sat`
+              ? `${auth.account.balance} sats`
               : ""
           }
           showOptions={false}

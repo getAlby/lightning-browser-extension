@@ -51,7 +51,7 @@ function BudgetControl({
           <TextField
             id="budget"
             label="Budget"
-            placeholder="sat"
+            placeholder="sats"
             value={budget}
             type="number"
             onChange={onBudgetChange}

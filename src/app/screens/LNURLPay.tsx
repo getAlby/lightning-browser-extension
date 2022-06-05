@@ -352,7 +352,7 @@ function LNURLPay(props: Props) {
                       {details.minSendable === details.maxSendable && (
                         <>
                           <Dt>Amount (Satoshi)</Dt>
-                          <Dd>{`${+details.minSendable / 1000} sat`}</Dd>
+                          <Dd>{`${+details.minSendable / 1000} sats`}</Dd>
                         </>
                       )}
                     </>

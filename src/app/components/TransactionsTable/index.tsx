@@ -70,7 +70,7 @@ export default function TransactionsTable({ transactions }: Props) {
                           {[tx.type && "sent", "sending"].includes(tx.type)
                             ? "-"
                             : "+"}
-                          {tx.totalAmount} sat
+                          {tx.totalAmount} sats
                         </p>
                         <p className="text-xs text-gray-600">{tx.date}</p>
                       </div>
@@ -84,7 +84,7 @@ export default function TransactionsTable({ transactions }: Props) {
                   <Disclosure.Panel>
                     <div className="mt-1 ml-9 text-xs text-gray-600 dark:text-neutral-400">
                       {tx.description}
-                      <p>Fee: {tx.totalFees} sat</p>
+                      <p>Fee: {tx.totalFees} sats</p>
                       {tx.preimage && (
                         <p className="truncate">Preimage: {tx.preimage}</p>
                       )}
