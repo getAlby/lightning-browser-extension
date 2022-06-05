@@ -72,9 +72,10 @@ describe("AccountMenu", () => {
     await userEvent.click(screen.getByText("Toggle Dropdown"));
 
     // As we have set the active account as "LND account above"
-    expect(
-      screen.getByText("LND account").classList.contains("font-bold")
-    ).toBe(true);
+    const item = screen.getByTitle("LND account");
+    // check if there is a selected icon
+    const icon = item.querySelector('[data-testid="selected"]');
+    expect(icon).not.toBe(null);
   });
 
   test("displays accounts without options", async () => {

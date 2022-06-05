@@ -36,7 +36,10 @@ function MenuItemButton({
           {children}
           {selected && (
             <span className="ml-auto w-3.5 h-3.5 rounded-full bg-orange-bitcoin flex justify-center items-center">
-              <CheckIcon className="w-3 h-3 text-white" />
+              <CheckIcon
+                data-testid="selected"
+                className="w-3 h-3 text-white"
+              />
             </span>
           )}
         </button>
