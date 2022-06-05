@@ -19,8 +19,10 @@ export default function ConnectMyNode() {
   function handleLndconnectUrl(event: React.ChangeEvent<HTMLInputElement>) {
     try {
       const lndconnectUrl = event.target.value.trim();
-      const lndconnect = new URL(lndconnectUrl);
-      const url = "https:" + lndconnect.pathname;
+      let lndconnect = new URL(lndconnectUrl);
+      lndconnect.protocol = "http:";
+      lndconnect = new URL(lndconnect.toString());
+      const url = `https://${lndconnect.hostname}${lndconnect.pathname}`;
       let macaroon = lndconnect.searchParams.get("macaroon") || "";
       macaroon = utils.urlSafeBase64ToHex(macaroon);
       // const cert = lndconnect.searchParams.get("cert"); // TODO: handle LND certs with the native connector
