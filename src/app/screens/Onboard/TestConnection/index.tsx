@@ -32,7 +32,9 @@ export default function TestConnection() {
       .then((response) => {
         const name = response.name;
         const { alias } = response.info;
-        const balance = parseInt(response.balance.balance);
+        const { balance: resBalance } = response.balance;
+        const balance =
+          typeof resBalance === "number" ? resBalance : parseInt(resBalance);
 
         setAccountInfo({ alias, balance, name });
       })

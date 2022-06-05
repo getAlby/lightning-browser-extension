@@ -1,6 +1,5 @@
+import state from "~/extension/background-script/state";
 import type { MessageAccountEdit } from "~/types";
-
-import state from "../../state";
 
 const edit = async (message: MessageAccountEdit) => {
   const accounts = state.getState().accounts;
