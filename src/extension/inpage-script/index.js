@@ -63,19 +63,31 @@ if (document) {
       }
       if (lnurl) {
         // TODO: dispatch success event
-        return window.webln.lnurl(lnurl).catch((e) => {
-          console.log(e);
-          alert(`Error: ${e.message}`);
-        });
+        return window.webln
+          .lnurl(lnurl)
+          .catch((e) => {
+            console.log(e);
+            alert(`Error: ${e.message}`);
+          })
+          .then((response) => {
+            const responseEvent = new CustomEvent("lightning:success", {
+              bubbles: true,
+              detail: {
+                lnurl,
+                response,
+              },
+            });
+            link.dispatchEvent(responseEvent);
+          });
       }
       return window.webln
         .sendPayment(paymentRequest)
-        .then((r) => {
+        .then((response) => {
           const responseEvent = new CustomEvent("lightning:success", {
             bubbles: true,
             detail: {
-              paymentRequest: paymentRequest,
-              response: r,
+              paymentRequest,
+              response,
             },
           });
           link.dispatchEvent(responseEvent);
