@@ -1,3 +1,5 @@
+import { ABORT_PROMPT_ERROR, USER_REJECTED_ERROR } from "~/common/constants";
+
 import WebLNProvider from "../ln/webln";
 
 if (document) {
@@ -80,7 +82,9 @@ if (document) {
         })
         .catch((e) => {
           console.log(e);
-          alert(`Error: ${e.message}`);
+          if (![ABORT_PROMPT_ERROR, USER_REJECTED_ERROR].includes(e.message)) {
+            alert(`Error: ${e.message}`);
+          }
         });
     });
   });

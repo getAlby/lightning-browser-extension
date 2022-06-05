@@ -1,22 +1,21 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import browser from "webextension-polyfill";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 import {
   SendIcon,
   ReceiveIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-
+import AllowanceMenu from "@components/AllowanceMenu";
+import Button from "@components/Button";
+import Loading from "@components/Loading";
+import Progressbar from "@components/Progressbar";
+import PublisherCard from "@components/PublisherCard";
+import TransactionsTable from "@components/TransactionsTable";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import browser from "webextension-polyfill";
 import api from "~/common/lib/api";
 import type { Allowance, Battery, Transaction } from "~/types";
-
-import Button from "@components/Button";
-import TransactionsTable from "@components/TransactionsTable";
-import AllowanceMenu from "@components/AllowanceMenu";
-import Loading from "@components/Loading";
-import PublisherCard from "@components/PublisherCard";
-import Progressbar from "@components/Progressbar";
 
 dayjs.extend(relativeTime);
 
@@ -115,7 +114,7 @@ function Home() {
                   }&origin=${encodeURIComponent(JSON.stringify(origin))}`
                 );
               } catch (e) {
-                if (e instanceof Error) alert(e.message);
+                if (e instanceof Error) toast.error(e.message);
               } finally {
                 setLoadingSendSats(false);
               }
@@ -135,26 +134,21 @@ function Home() {
       <>
         <div className="px-4 pb-5">
           <div className="flex justify-between items-center py-3">
-            {+allowance.totalBudget > 0 ? (
-              <>
-                <dl className="mb-0">
-                  <dt className="text-xs text-gray-500 dark:tex-gray-400">
-                    Allowance
-                  </dt>
-                  <dd className="mb-0 text-sm font-medium dark:text-gray-400">
-                    {allowance.usedBudget} / {allowance.totalBudget} sat used
-                  </dd>
-                </dl>
-              </>
-            ) : (
-              <div />
-            )}
-            <div className="flex items-center">
-              {+allowance.totalBudget > 0 && (
-                <div className="w-24 mr-4">
+            <dl className="mb-0">
+              <dt className="text-xs text-gray-500 dark:text-neutral-400">
+                Allowance
+              </dt>
+              <dd className="flex items-center mb-0 text-sm font-medium dark:text-neutral-400">
+                {+allowance.totalBudget > 0
+                  ? `${allowance.usedBudget} / ${allowance.totalBudget} `
+                  : "0 / 0 "}
+                sats used
+                <div className="ml-3 w-24">
                   <Progressbar percentage={allowance.percentage} />
                 </div>
-              )}
+              </dd>
+            </dl>
+            <div className="flex items-center">
               <AllowanceMenu
                 allowance={allowance}
                 onEdit={loadAllowance}
@@ -164,7 +158,7 @@ function Home() {
               />
             </div>
           </div>
-          <h2 className="mb-2 text-lg text-gray-900 font-semibold dark:text-white">
+          <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
             Recent Transactions
           </h2>
           {allowance?.payments.length > 0 ? (
@@ -201,7 +195,7 @@ function Home() {
               }))}
             />
           ) : (
-            <p className="text-gray-500 dark:text-gray-400">
+            <p className="text-gray-500 dark:text-neutral-400">
               No transactions on <strong>{allowance.name}</strong> yet.
             </p>
           )}
@@ -240,7 +234,7 @@ function Home() {
           </div>
         ) : (
           <div>
-            <h2 className="mb-2 text-lg text-gray-900 font-semibold dark:text-white">
+            <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
               Recent Transactions
             </h2>
             {payments.length > 0 ? (
@@ -276,7 +270,7 @@ function Home() {
                 }))}
               />
             ) : (
-              <p className="text-gray-500 dark:text-gray-400">
+              <p className="text-gray-500 dark:text-neutral-400">
                 No transactions yet.
               </p>
             )}

@@ -1,5 +1,6 @@
 import Base64 from "crypto-js/enc-base64";
 import UTF8 from "crypto-js/enc-utf8";
+
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,

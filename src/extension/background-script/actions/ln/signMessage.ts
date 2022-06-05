@@ -1,6 +1,7 @@
 import PubSub from "pubsub-js";
-import state from "../../state";
 import { Message } from "~/types";
+
+import state from "../../state";
 
 const signMessage = async (message: Message) => {
   PubSub.publish(`ln.signMessage.start`, message);

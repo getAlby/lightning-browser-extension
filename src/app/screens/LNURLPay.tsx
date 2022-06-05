@@ -1,7 +1,20 @@
-import React, { useState, useEffect, MouseEvent } from "react";
+import Button from "@components/Button";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import Container from "@components/Container";
+import PublisherCard from "@components/PublisherCard";
+import SatButtons from "@components/SatButtons";
+import TextField from "@components/form/TextField";
 import axios from "axios";
+import React, { useState, useEffect, MouseEvent } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-
+import { toast } from "react-toastify";
+import { useAuth } from "~/app/context/AuthContext";
+import { USER_REJECTED_ERROR } from "~/common/constants";
+import api from "~/common/lib/api";
+import lnurl from "~/common/lib/lnurl";
+import msg from "~/common/lib/msg";
+import utils from "~/common/lib/utils";
+import getOriginData from "~/extension/content-script/originData";
 import {
   LNURLPaymentInfoError,
   LNURLPaymentInfo,
@@ -9,19 +22,6 @@ import {
   LNURLPayServiceResponse,
   Payment,
 } from "~/types";
-
-import api from "~/common/lib/api";
-import msg from "~/common/lib/msg";
-import utils from "~/common/lib/utils";
-import lnurl from "~/common/lib/lnurl";
-import getOriginData from "~/extension/content-script/originData";
-import { useAuth } from "~/app/context/AuthContext";
-
-import Button from "@components/Button";
-import TextField from "@components/form/TextField";
-import PublisherCard from "@components/PublisherCard";
-import ConfirmOrCancel from "@components/ConfirmOrCancel";
-import SatButtons from "@components/SatButtons";
 
 type Origin = {
   name: string;
@@ -38,7 +38,7 @@ const Dt = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Dd = ({ children }: { children: React.ReactNode }) => (
-  <dd className="mb-4 text-gray-600 dark:text-gray-500">{children}</dd>
+  <dd className="mb-4 text-gray-600 dark:text-neutral-500">{children}</dd>
 );
 
 function LNURLPay(props: Props) {
@@ -152,7 +152,7 @@ function LNURLPay(props: Props) {
         }
       } catch (e) {
         const message = e instanceof Error ? `(${e.message})` : "";
-        alert(`Payment aborted: Could not fetch invoice. ${message}`);
+        toast.error(`Payment aborted: Could not fetch invoice. \n${message}`);
         return;
       }
 
@@ -166,7 +166,7 @@ function LNURLPay(props: Props) {
         payerdata,
       });
       if (!isValidInvoice) {
-        alert("Payment aborted: Invalid invoice.");
+        toast.warn("Payment aborted: Invalid invoice.");
         return;
       }
 
@@ -193,7 +193,7 @@ function LNURLPay(props: Props) {
             break;
           case "aes": // TODO: For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage
           default:
-            alert(
+            toast.warn(
               `Not implemented yet. Please submit an issue to support success action: ${paymentInfo.successAction.tag}`
             );
             break;
@@ -212,7 +212,7 @@ function LNURLPay(props: Props) {
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        alert(`Error: ${e.message}`);
+        toast.error(`Error: ${e.message}`);
       }
     } finally {
       setLoadingConfirm(false);
@@ -222,7 +222,7 @@ function LNURLPay(props: Props) {
   function reject(e: MouseEvent) {
     e.preventDefault();
     if (props.details && props.origin) {
-      msg.error("User rejected");
+      msg.error(USER_REJECTED_ERROR);
     } else {
       navigate(-1);
     }
@@ -324,105 +324,107 @@ function LNURLPay(props: Props) {
         description={origin.description}
         image={origin.icon}
       />
-      <div className="p-4 max-w-screen-sm mx-auto">
-        {!successAction ? (
-          <>
-            <div className="mb-4">
-              <dl>
-                {loading || !details ? (
-                  <>
-                    <Dt>Send payment to</Dt>
-                    <Dd>loading...</Dd>
-                    <Dt>Description</Dt>
-                    <Dd>loading...</Dd>
-                    <Dt>Amount (Satoshi)</Dt>
-                    <Dd>loading...</Dd>
-                  </>
-                ) : (
-                  <>
-                    <Dt>Send payment to</Dt>
-                    <Dd>{getRecipient()}</Dd>
-                    {formattedMetadata(details.metadata).map(([dt, dd]) => (
-                      <>
-                        <Dt>{dt}</Dt>
-                        <Dd>{dd}</Dd>
-                      </>
-                    ))}
-                    {details.minSendable === details.maxSendable && (
-                      <>
-                        <Dt>Amount (Satoshi)</Dt>
-                        <Dd>{`${+details.minSendable / 1000} sat`}</Dd>
-                      </>
-                    )}
-                  </>
+      <div className="py-4">
+        <Container maxWidth="sm">
+          {!successAction ? (
+            <>
+              <div className="mb-4">
+                <dl>
+                  {loading || !details ? (
+                    <>
+                      <Dt>Send payment to</Dt>
+                      <Dd>loading...</Dd>
+                      <Dt>Description</Dt>
+                      <Dd>loading...</Dd>
+                      <Dt>Amount (Satoshi)</Dt>
+                      <Dd>loading...</Dd>
+                    </>
+                  ) : (
+                    <>
+                      <Dt>Send payment to</Dt>
+                      <Dd>{getRecipient()}</Dd>
+                      {formattedMetadata(details.metadata).map(([dt, dd]) => (
+                        <>
+                          <Dt>{dt}</Dt>
+                          <Dd>{dd}</Dd>
+                        </>
+                      ))}
+                      {details.minSendable === details.maxSendable && (
+                        <>
+                          <Dt>Amount (Satoshi)</Dt>
+                          <Dd>{`${+details.minSendable / 1000} sats`}</Dd>
+                        </>
+                      )}
+                    </>
+                  )}
+                </dl>
+                {details && details.minSendable !== details.maxSendable && (
+                  <div>
+                    <TextField
+                      id="amount"
+                      label="Amount (Satoshi)"
+                      type="number"
+                      min={+details.minSendable / 1000}
+                      max={+details.maxSendable / 1000}
+                      value={valueSat}
+                      onChange={(e) => setValueSat(e.target.value)}
+                    />
+                    <SatButtons onClick={setValueSat} />
+                  </div>
                 )}
-              </dl>
-              {details && details.minSendable !== details.maxSendable && (
-                <div>
-                  <TextField
-                    id="amount"
-                    label="Amount (Satoshi)"
-                    type="number"
-                    min={+details.minSendable / 1000}
-                    max={+details.maxSendable / 1000}
-                    value={valueSat}
-                    onChange={(e) => setValueSat(e.target.value)}
-                  />
-                  <SatButtons onClick={setValueSat} />
-                </div>
-              )}
-              {details &&
-                typeof details?.commentAllowed === "number" &&
-                details?.commentAllowed > 0 && (
+                {details &&
+                  typeof details?.commentAllowed === "number" &&
+                  details?.commentAllowed > 0 && (
+                    <div className="mt-4">
+                      <TextField
+                        id="comment"
+                        label="Comment"
+                        placeholder="optional"
+                        onChange={(e) => {
+                          setComment(e.target.value);
+                        }}
+                      />
+                    </div>
+                  )}
+                {details && details?.payerData?.name && (
                   <div className="mt-4">
                     <TextField
-                      id="comment"
-                      label="Comment"
+                      id="name"
+                      label="Name"
                       placeholder="optional"
+                      value={userName}
                       onChange={(e) => {
-                        setComment(e.target.value);
+                        setUserName(e.target.value);
                       }}
                     />
                   </div>
                 )}
-              {details && details?.payerData?.name && (
-                <div className="mt-4">
-                  <TextField
-                    id="name"
-                    label="Name"
-                    placeholder="optional"
-                    value={userName}
-                    onChange={(e) => {
-                      setUserName(e.target.value);
-                    }}
-                  />
-                </div>
-              )}
-              {details && details?.payerData?.email && (
-                <div className="mt-4">
-                  <TextField
-                    id="email"
-                    label="Email"
-                    placeholder="optional"
-                    value={userEmail}
-                    onChange={(e) => {
-                      setUserEmail(e.target.value);
-                    }}
-                  />
-                </div>
-              )}
-            </div>
+                {details && details?.payerData?.email && (
+                  <div className="mt-4">
+                    <TextField
+                      id="email"
+                      label="Email"
+                      placeholder="optional"
+                      value={userEmail}
+                      onChange={(e) => {
+                        setUserEmail(e.target.value);
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
 
-            <ConfirmOrCancel
-              disabled={loadingConfirm || !valueSat}
-              loading={loadingConfirm}
-              onConfirm={confirm}
-              onCancel={reject}
-            />
-          </>
-        ) : (
-          renderSuccessAction()
-        )}
+              <ConfirmOrCancel
+                disabled={loadingConfirm || !valueSat}
+                loading={loadingConfirm}
+                onConfirm={confirm}
+                onCancel={reject}
+              />
+            </>
+          ) : (
+            renderSuccessAction()
+          )}
+        </Container>
       </div>
     </div>
   );

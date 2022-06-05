@@ -8,7 +8,6 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -24,6 +23,14 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 *.lcov
+
+# unit/integration tets
+test-results/
+playwright-report/
+trace.zip
+
+# storybook
+storybook-static/
 
 # nyc test coverage
 .nyc_output
@@ -43,6 +50,7 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+.pnp.*
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
@@ -123,11 +131,12 @@ dist
 *.sass.map
 *.scss.map
 
-## Build directory
+# OS files
+.DS_Store
+
+# Build directory
 dist/
 .awcache
-
-.pnp.*
 
 # Editor directories and files
 .idea

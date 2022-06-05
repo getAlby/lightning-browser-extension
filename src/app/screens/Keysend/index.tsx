@@ -1,16 +1,16 @@
-import { Fragment, useState, MouseEvent } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
 import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-
-import utils from "~/common/lib/utils";
-import { useAuth } from "~/app/context/AuthContext";
-
-import Input from "@components/form/Input";
+import Button from "@components/Button";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
-import Button from "@components/Button";
-import SuccessMessage from "@components/SuccessMessage";
 import SatButtons from "@components/SatButtons";
+import SuccessMessage from "@components/SuccessMessage";
+import Input from "@components/form/Input";
+import { Fragment, useState, MouseEvent } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import Container from "~/app/components/Container";
+import { useAuth } from "~/app/context/AuthContext";
+import utils from "~/common/lib/utils";
 
 type Props = {
   destination?: string;
@@ -49,7 +49,7 @@ function Keysend(props: Props) {
     } catch (e) {
       console.log(e);
       if (e instanceof Error) {
-        alert(`Error: ${e.message}`);
+        toast.error(`Error: ${e.message}`);
       }
     } finally {
       setLoading(false);
@@ -79,7 +79,7 @@ function Keysend(props: Props) {
   function elements() {
     const elements = [];
     elements.push(["Send payment to", destination]);
-    elements.push(["Amount (Satoshi)", renderAmount()]);
+    elements.push(["Amount (Satoshis)", renderAmount()]);
     return elements;
   }
 
@@ -94,43 +94,45 @@ function Keysend(props: Props) {
           />
         }
       />
-      <div className="p-4 max-w-screen-sm mx-auto">
-        {!successMessage ? (
-          <>
-            <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-              {elements().map(([t, d], i) => (
-                <Fragment key={`element-${i}`}>
-                  <dt className="text-sm font-semibold text-gray-500">{t}</dt>
-                  <dd className="text-sm mb-4 dark:text-white break-all">
-                    {d}
-                  </dd>
-                </Fragment>
-              ))}
-            </dl>
-            <div className="text-center">
-              <div className="mb-5">
-                <Button
-                  onClick={confirm}
-                  label="Confirm"
-                  fullWidth
-                  primary
-                  loading={loading}
-                  disabled={loading || !amount}
-                />
-              </div>
+      <div className="py-4">
+        <Container maxWidth="sm">
+          {!successMessage ? (
+            <>
+              <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+                {elements().map(([t, d], i) => (
+                  <Fragment key={`element-${i}`}>
+                    <dt className="text-sm font-semibold text-gray-500">{t}</dt>
+                    <dd className="text-sm mb-4 dark:text-white break-all">
+                      {d}
+                    </dd>
+                  </Fragment>
+                ))}
+              </dl>
+              <div className="text-center">
+                <div className="mb-5">
+                  <Button
+                    onClick={confirm}
+                    label="Confirm"
+                    fullWidth
+                    primary
+                    loading={loading}
+                    disabled={loading || !amount}
+                  />
+                </div>
 
-              <a
-                className="underline text-sm text-gray-500"
-                href="#"
-                onClick={reject}
-              >
-                Cancel
-              </a>
-            </div>
-          </>
-        ) : (
-          <SuccessMessage message={successMessage} onClose={reject} />
-        )}
+                <a
+                  className="underline text-sm text-gray-500"
+                  href="#"
+                  onClick={reject}
+                >
+                  Cancel
+                </a>
+              </div>
+            </>
+          ) : (
+            <SuccessMessage message={successMessage} onClose={reject} />
+          )}
+        </Container>
       </div>
     </div>
   );

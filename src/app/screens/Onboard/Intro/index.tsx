@@ -1,48 +1,50 @@
-import Features from "./features";
-import Button from "@components/Button";
 import {
   CodeIcon,
   KeyIcon,
   LightningIcon,
   ShieldIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
+import Button from "@components/Button";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import i18n from "~/i18n/i18nConfig";
+import { welcomeI18nNamespace } from "~/i18n/namespaces";
+
+import Features from "./features";
 
 const features = [
   {
-    name: "Send in One Click",
-    description:
-      "Lightning transactions happen all in your browser. No alt+tab or QR-code scanning needed.",
+    name: i18n.t("intro.send", welcomeI18nNamespace),
+    description: i18n.t("intro.send_description", welcomeI18nNamespace),
     icon: LightningIcon,
   },
   {
-    name: "No more annoying paywalls",
-    description:
-      "Define individual budgets for websites to enable seamless payment streams. No more annoying paywalls.",
+    name: i18n.t("intro.paywall", welcomeI18nNamespace),
+    description: i18n.t("intro.paywall_description", welcomeI18nNamespace),
     icon: KeyIcon,
   },
   {
-    name: "Privacy first",
-    description: "Use lightning to authenticate and control your privacy.",
+    name: i18n.t("intro.privacy", welcomeI18nNamespace),
+    description: i18n.t("intro.privacy_description", welcomeI18nNamespace),
     icon: ShieldIcon,
   },
   {
-    name: "Free and Open Source",
-    description:
-      "Completely open code that can be audited by anyone. No stats or trackers. You are in control.",
+    name: i18n.t("intro.foss", welcomeI18nNamespace),
+    description: i18n.t("intro.foss_description", welcomeI18nNamespace),
     icon: CodeIcon,
   },
 ];
 
 export default function Intro() {
   const navigate = useNavigate();
+  const { t } = useTranslation(["welcome"]);
 
   return (
     <div>
       <div className="relative lg:grid lg:grid-cols-3 lg:gap-x-8 mt-14 bg-white dark:bg-surface-02dp px-10 py-12 items-center">
         <div className="lg:col-span-1">
           <div className="max-w-xs">
-            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
+            <img src="assets/icons/satsymbol.svg" alt="sats" className="w-64" />
           </div>
         </div>
         <div className="mt-10 lg:mt-0 lg:col-span-2">
@@ -53,7 +55,7 @@ export default function Intro() {
         <Button
           onClick={() => navigate("/set-password")}
           type="button"
-          label="Get Started"
+          label={t("intro.actions.get_started")}
           primary
         />
       </div>

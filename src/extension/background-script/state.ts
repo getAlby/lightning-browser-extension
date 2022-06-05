@@ -1,13 +1,13 @@
-import browser from "webextension-polyfill";
-import createState from "zustand";
 import merge from "lodash/merge";
 import pick from "lodash/pick";
-
+import browser from "webextension-polyfill";
+import createState from "zustand";
 import { decryptData } from "~/common/lib/crypto";
+import i18n from "~/i18n/i18nConfig";
+import type { Account, Accounts, SettingsStorage } from "~/types";
+
 import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
-import type { Account, Accounts, SettingsStorage } from "~/types";
-import i18n from "~/i18n/i18nConfig";
 
 interface State {
   connector: Connector | null;
@@ -88,6 +88,9 @@ const state = createState<State>((set, get) => ({
       connector.unload();
     }
     set({ password: null, connector: null, account: null });
+  },
+  isUnlocked: () => {
+    return get().password !== null;
   },
   init: () => {
     return browser.storage.sync.get(browserStorageKeys).then((result) => {

@@ -1,38 +1,54 @@
-import { useEffect, useState } from "react";
-import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-
-import { AuthProvider } from "~/app/context/AuthContext";
-import connectorRoutes from "~/app/router/connectorRoutes";
-import type { Step } from "@components/Steps";
 import DevMenu from "@components/DevMenu";
+import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
+import type { Step } from "@components/Steps";
 import Steps from "@components/Steps";
 import Intro from "@screens/Onboard/Intro";
 import SetPassword from "@screens/Onboard/SetPassword";
-import ChooseConnector from "@screens/connectors/ChooseConnector";
 import TestConnection from "@screens/Onboard/TestConnection";
-import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
+import ChooseConnector from "@screens/connectors/ChooseConnector";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
+import { AuthProvider } from "~/app/context/AuthContext";
+import connectorRoutes from "~/app/router/connectorRoutes";
+import i18n from "~/i18n/i18nConfig";
+import { welcomeI18nNamespace } from "~/i18n/namespaces";
 
 const routes = [
-  { path: "/", element: <Intro />, name: "Welcome" },
-  { path: "/set-password", element: <SetPassword />, name: "Your Password" },
+  {
+    path: "/",
+    element: <Intro />,
+    name: i18n.t("nav.welcome", welcomeI18nNamespace),
+  },
+  {
+    path: "/set-password",
+    element: <SetPassword />,
+    name: i18n.t("nav.password", welcomeI18nNamespace),
+  },
   {
     path: "/choose-connector",
-    name: "Connect to Lightning",
+    name: i18n.t("nav.connect", welcomeI18nNamespace),
     children: [
       {
         index: true,
         element: (
           <ChooseConnector
-            title="Do you have a lightning wallet?"
-            description="You need to first connect to a lightning wallet so that you can interact with your favorite websites that accept bitcoin lightning payments!"
+            title={i18n.t("choose_connector.title", welcomeI18nNamespace)}
+            description={i18n.t(
+              "choose_connector.description",
+              welcomeI18nNamespace
+            )}
           />
         ),
       },
       ...connectorRoutes,
     ],
   },
-  { path: "/test-connection", element: <TestConnection />, name: "Done" },
+  {
+    path: "/test-connection",
+    element: <TestConnection />,
+    name: i18n.t("nav.done", welcomeI18nNamespace),
+  },
 ];
 
 const initialSteps: Step[] = routes.map((route) => ({

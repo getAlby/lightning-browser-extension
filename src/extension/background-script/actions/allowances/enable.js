@@ -1,15 +1,18 @@
-import db from "../../db";
 import utils from "~/common/lib/utils";
+
+import db from "../../db";
+import state from "../../state";
 import setIcon from "../setup/setIcon";
 
 const enable = async (message, sender) => {
+  const isUnlocked = state.getState().isUnlocked();
   const host = message.origin.host || message.args.host;
   const allowance = await db.allowances
     .where("host")
     .equalsIgnoreCase(host)
     .first();
 
-  if (allowance && allowance.enabled) {
+  if (isUnlocked && allowance && allowance.enabled) {
     setIcon({ args: { icon: "active" } }, sender); // highlight the icon when enabled
     return {
       data: { enabled: true },
@@ -45,7 +48,7 @@ const enable = async (message, sender) => {
         },
       };
     } catch (e) {
-      console.log(e);
+      console.error(e);
       return { error: e.message };
     }
   }

@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import Accounts from "./index";
+
 import { AccountsProvider } from "../../context/AccountsContext";
+import Accounts from "./index";
 
 describe("Accounts", () => {
   test("render", async () => {

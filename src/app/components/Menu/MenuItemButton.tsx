@@ -1,5 +1,4 @@
 import { Menu } from "@headlessui/react";
-
 import { classNames } from "~/app/utils/index";
 
 type Props = {
@@ -7,6 +6,8 @@ type Props = {
   danger?: boolean;
   disabled?: boolean;
   onClick: () => void;
+  title?: string;
+  selected?: boolean;
 };
 
 function MenuItemButton({
@@ -14,6 +15,8 @@ function MenuItemButton({
   danger = false,
   disabled = false,
   onClick,
+  title = "",
+  selected = false,
 }: Props) {
   return (
     <Menu.Item>
@@ -23,10 +26,12 @@ function MenuItemButton({
             active ? "bg-gray-100 dark:bg-white/10" : "",
             danger ? "text-red-700" : "text-gray-700",
             disabled ? "cursor-not-allowed" : "cursor-pointer",
+            selected ? "font-bold" : "",
             "flex items-center block w-full text-left px-4 py-2 text-sm dark:text-white"
           )}
           disabled={disabled}
           onClick={onClick}
+          title={title}
         >
           {children}
         </button>

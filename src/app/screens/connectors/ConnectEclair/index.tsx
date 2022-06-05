@@ -1,16 +1,15 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-import utils from "~/common/lib/utils";
-
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import utils from "~/common/lib/utils";
 
 export default function ConnectEclair() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     password: "",
-    url: "http://localhost:8080",
+    url: "",
   });
   const [loading, setLoading] = useState(false);
 
@@ -46,7 +45,7 @@ export default function ConnectEclair() {
         }
       } else {
         console.log(validation);
-        alert(
+        toast.error(
           `Connection failed. Do you have the correct URL and password? \n\n(${validation.error})`
         );
       }
@@ -57,7 +56,7 @@ export default function ConnectEclair() {
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
-      alert(message);
+      toast.error(message);
     }
     setLoading(false);
   }
@@ -82,6 +81,7 @@ export default function ConnectEclair() {
         id="url"
         label="Eclair URL"
         type="text"
+        placeholder="http://localhost:8080"
         value={formData.url}
         required
         onChange={handleChange}
