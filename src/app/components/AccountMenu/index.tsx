@@ -3,6 +3,7 @@ import {
   CaretDownIcon,
   PlusIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useState, useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
@@ -84,12 +85,19 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
                 }}
                 disabled={loading}
                 title={account.name}
-                selected={accountId === auth.account?.id}
               >
                 <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 shrink-0 opacity-75 text-gray-700 dark:text-neutral-300" />
                 <span className="overflow-hidden text-ellipsis whitespace-nowrap">
                   {account.name}&nbsp;
                 </span>
+                {accountId === auth.account?.id && (
+                  <span
+                    data-testid="selected"
+                    className="ml-auto w-3.5 h-3.5 rounded-full bg-orange-bitcoin flex justify-center items-center"
+                  >
+                    <CheckIcon className="w-3 h-3 text-white" />
+                  </span>
+                )}
               </Menu.ItemButton>
             );
           })}
