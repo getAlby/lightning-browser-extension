@@ -94,6 +94,10 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         </div>
         <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
           <div className="w-60">
+            {/*
+              @TODO: needs to use DualCurrenyField 
+              - create new issue
+            */}
             <TextField
               id="budget"
               label="Budget"

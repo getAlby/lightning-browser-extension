@@ -16,7 +16,10 @@ import Menu from "../Menu";
 
 export type Props = {
   title: string;
-  subtitle: { satsBalance: string; fiatBalance: string };
+  subtitle: {
+    satsBalance: string | null;
+    fiatBalance: string | null;
+  };
   showOptions?: boolean;
 };
 
@@ -64,6 +67,7 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
           {title || <Skeleton />}
         </div>
         <div className="flex justify-between">
+          {/* THIS DESIGN BREAKS IF TOOOOO MUCH SATS */}
           <div className="text-xs dark:text-white">
             {subtitle.satsBalance || <Skeleton />}
           </div>

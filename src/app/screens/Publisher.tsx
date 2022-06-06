@@ -8,9 +8,8 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import utils from "~/common/lib/utils";
+import { getFiatValue } from "~/common/utils/currencyConvert";
 import { Allowance } from "~/types";
-
-import { useCurrency } from "../context/CurrencyContext";
 
 dayjs.extend(relativeTime);
 
@@ -19,7 +18,6 @@ function Publisher() {
   const [allowance, setAllowance] = useState<Allowance | undefined>();
   const { id } = useParams();
   const navigate = useNavigate();
-  const { getFiatValue } = useCurrency();
 
   const fetchData = useCallback(async () => {
     try {
@@ -36,7 +34,7 @@ function Publisher() {
     } catch (e) {
       console.error(e);
     }
-  }, [id, getFiatValue]);
+  }, [id]);
 
   useEffect(() => {
     // Run once.

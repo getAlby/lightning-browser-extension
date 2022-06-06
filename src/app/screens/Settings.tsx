@@ -9,18 +9,19 @@ import { Html5Qrcode } from "html5-qrcode";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { getTheme } from "~/app/utils";
+import currencies from "~/app/utils/supportedCurrencies";
 import api from "~/common/lib/api";
+// import { useCurrency } from "../context/CurrencyContext";
+// import { saveCurrencySetting } from "~/common/utils/currencyConvert";
 import {
-  SettingsStorage,
-  SupportedCurrencies,
-  SupportedExchanges,
+  SettingsStorage, // SupportedCurrencies,
+  // SupportedExchanges,
 } from "~/types";
-
-import { useCurrency } from "../context/CurrencyContext";
 
 function Settings() {
   const [loading, setLoading] = useState(true);
-  const { setCurrencyValue, currencies } = useCurrency();
+  // const { setCurrencyValue, currencies } = useCurrency();
+
   const [settings, setSettings] = useState<SettingsStorage>({
     websiteEnhancements: false,
     legacyLnurlAuth: false,
@@ -28,9 +29,10 @@ function Settings() {
     userEmail: "",
     locale: "",
     theme: "system",
-    exchange: "Coindesk",
     currency: "USD",
+    exchange: "Coindesk",
   });
+
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
 
@@ -119,9 +121,9 @@ function Settings() {
               <Select
                 name="theme"
                 value={settings.theme}
-                onChange={async (ev) => {
+                onChange={async (event) => {
                   await saveSetting({
-                    theme: ev.target.value,
+                    theme: event.target.value,
                   });
                   getTheme(); // Get the active theme and apply corresponding Tailwind classes to the document
                 }}
@@ -143,10 +145,11 @@ function Settings() {
               <Select
                 name="currency"
                 value={settings.currency}
-                onChange={async (ev) => {
-                  setCurrencyValue(ev.target.value as SupportedCurrencies);
+                onChange={async (eventent) => {
+                  // value and currency change should be reflected in the upper account-menu after select?
+                  // saveCurrencySetting(eventent.target.value);
                   await saveSetting({
-                    currency: ev.target.value,
+                    currency: eventent.target.value,
                   });
                 }}
               >
@@ -159,6 +162,7 @@ function Settings() {
             </div>
           )}
         </Setting>
+
         <Setting
           title="Exchange Source"
           subtitle="Change the source where Alby get currency info"
@@ -168,9 +172,10 @@ function Settings() {
               <Select
                 name="exchange"
                 value={settings.exchange}
-                onChange={async (ev) => {
+                onChange={async (event) => {
+                  // exchange/value change should be reflected in the upper account-menu after select?
                   await saveSetting({
-                    exchange: ev.target.value as SupportedExchanges,
+                    exchange: event.target.value,
                   });
                 }}
               >
@@ -181,15 +186,18 @@ function Settings() {
           )}
         </Setting>
       </div>
+
       <h2 className="mt-12 text-2xl font-bold dark:text-white">
         Personal data
       </h2>
-      <div className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
+
+      <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
         Payees can request for additional data to be sent with a payment. This
         data is not shared with anyone without your consent, you will always be
         prompted before this data is sent along with a payment.
-      </div>
-      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
+      </p>
+
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting title="Name" subtitle="">
           {!loading && (
             <div className="w-64">
@@ -197,15 +205,16 @@ function Settings() {
                 placeholder="Enter your name"
                 type="text"
                 value={settings.userName}
-                onChange={(ev) => {
+                onChange={(event) => {
                   saveSetting({
-                    userName: ev.target.value,
+                    userName: event.target.value,
                   });
                 }}
               />
             </div>
           )}
         </Setting>
+
         <Setting title="Email" subtitle="">
           {!loading && (
             <div className="w-64">
@@ -213,9 +222,9 @@ function Settings() {
                 placeholder="Enter your email address"
                 type="email"
                 value={settings.userEmail}
-                onChange={(ev) => {
+                onChange={(event) => {
                   saveSetting({
-                    userEmail: ev.target.value,
+                    userEmail: event.target.value,
                   });
                 }}
               />

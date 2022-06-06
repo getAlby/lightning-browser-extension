@@ -18,15 +18,14 @@ import { toast } from "react-toastify";
 import { useAuth } from "~/app/context/AuthContext";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
+import { getFiatValue } from "~/common/utils/currencyConvert";
 import { poll } from "~/common/utils/helpers";
 
 import DualCurrencyInput from "../components/form/NumberField";
-import { useCurrency } from "../context/CurrencyContext";
 
 function Receive() {
   const auth = useAuth();
   const navigate = useNavigate();
-  const { getFiatValue } = useCurrency();
   const [formData, setFormData] = useState({
     amount: "0",
     description: "",
@@ -54,9 +53,15 @@ function Receive() {
 
   useEffect(() => {
     if (formData.amount !== "") {
-      getFiatValue(formData.amount).then((res) => setFiatAmount(res));
+      // TODO: use debounce?
+      // we do not need this on every keypress
+      // https://stackoverflow.com/questions/60787396/react-debounce-with-useeffect
+      (async () => {
+        const res = await getFiatValue(formData.amount);
+        setFiatAmount(res);
+      })();
     }
-  }, [formData, getFiatValue]);
+  }, [formData]);
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -214,29 +219,32 @@ function Receive() {
                   />
                 </div>
 
-                {/* <div className="mb-5">
-          <label htmlFor="expiration" className="block font-medium text-gray-700">
-            Expiration
-          </label>
-          <div className="mt-1">
-            <Select
-              name="expiration"
-              id="expiration"
-              value={formData.expiration}
-              onChange={handleChange}
-            >
-              <option key="60" value="60">
-                1 hour
-              </option>
-              <option key="120" value="120">
-                2 hours
-              </option>
-              <option key="180" value="180">
-                3 hours
-              </option>
-            </Select>
-          </div>
-        </div> */}
+                {/*
+                // DO WE NEED THIS?
+                <div className="mb-5">
+                  <label htmlFor="expiration" className="block font-medium text-gray-700">
+                    Expiration
+                  </label>
+                  <div className="mt-1">
+                    <Select
+                      name="expiration"
+                      id="expiration"
+                      value={formData.expiration}
+                      onChange={handleChange}
+                    >
+                      <option key="60" value="60">
+                        1 hour
+                      </option>
+                      <option key="120" value="120">
+                        2 hours
+                      </option>
+                      <option key="180" value="180">
+                        3 hours
+                      </option>
+                    </Select>
+                  </div>
+                </div>
+                */}
 
                 <div className="text-center mb-4">
                   <div className="mb-4">

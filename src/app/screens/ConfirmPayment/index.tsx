@@ -13,6 +13,7 @@ import { useCurrency } from "~/app/context/CurrencyContext";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
+import { getFiatValue } from "~/common/utils/currencyConvert";
 import getOriginData from "~/extension/content-script/originData";
 import type { OriginData } from "~/types";
 
@@ -25,7 +26,7 @@ function ConfirmPayment(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAuth();
-  const { getFiatValue } = useCurrency();
+
   const invoiceRef = useRef(
     lightningPayReq.decode(
       props.paymentRequest || (searchParams.get("paymentRequest") as string)
@@ -41,8 +42,11 @@ function ConfirmPayment(props: Props) {
   const [fiatAmount, setFiatAmount] = useState("");
 
   useEffect(() => {
-    getFiatValue(budget).then((res) => setFiatAmount(res));
-  }, [budget, getFiatValue]);
+    (async () => {
+      const res = await getFiatValue(budget);
+      setFiatAmount(res);
+    })();
+  }, [budget]);
 
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);

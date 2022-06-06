@@ -13,6 +13,7 @@ import api from "~/common/lib/api";
 import lnurl from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
+import { getFiatValue } from "~/common/utils/currencyConvert";
 import getOriginData from "~/extension/content-script/originData";
 import {
   LNURLPaymentInfoError,
@@ -47,7 +48,6 @@ function LNURLPay(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAuth();
-  const { getFiatValue } = useCurrency();
   const [loading, setLoading] = useState(true);
   const [details, setDetails] = useState(props.details);
   const [origin] = useState(
@@ -71,8 +71,11 @@ function LNURLPay(props: Props) {
   const [payment, setPayment] = useState<Payment | undefined>();
 
   useEffect(() => {
-    getFiatValue(valueSat).then((res) => setFiatValue(res));
-  }, [valueSat, getFiatValue]);
+    (async () => {
+      const res = await getFiatValue(valueSat);
+      setFiatValue(res);
+    })();
+  }, [valueSat]);
 
   useEffect(() => {
     if (searchParams) {

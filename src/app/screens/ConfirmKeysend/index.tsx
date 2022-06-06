@@ -11,6 +11,7 @@ import { useCurrency } from "~/app/context/CurrencyContext";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
+import { getFiatValue } from "~/common/utils/currencyConvert";
 import getOriginData from "~/extension/content-script/originData";
 import type { OriginData } from "~/types";
 
@@ -24,7 +25,7 @@ type Props = {
 function Keysend(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { getFiatValue } = useCurrency();
+
   const [rememberMe, setRememberMe] = useState(false);
   const [origin] = useState(
     props.origin ||
@@ -46,8 +47,11 @@ function Keysend(props: Props) {
   const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
-    getFiatValue(budget).then((res) => setFiatAmount(res));
-  }, [budget, getFiatValue]);
+    (async () => {
+      const res = await getFiatValue(budget);
+      setFiatAmount(res);
+    })();
+  }, [budget]);
 
   async function confirm() {
     if (rememberMe && budget) {

@@ -8,13 +8,14 @@ import LNURLPay from "@screens/LNURLPay";
 import LNURLWithdraw from "@screens/LNURLWithdraw";
 import MakeInvoice from "@screens/MakeInvoice";
 import Unlock from "@screens/Unlock";
+import { useState, useEffect } from "react";
 import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { AccountsProvider } from "~/app/context/AccountsContext";
 import { useAuth } from "~/app/context/AuthContext";
 import { AuthProvider } from "~/app/context/AuthContext";
-import { CurrencyProvider, useCurrency } from "~/app/context/CurrencyContext";
 import RequireAuth from "~/app/router/RequireAuth";
+import { getBalances } from "~/common/utils/currencyConvert";
 import type {
   LNURLAuthServiceResponse,
   LNURLPayServiceResponse,
@@ -28,14 +29,18 @@ const params = new URLSearchParams(window.location.search);
 let origin = {} as OriginData;
 let args = {};
 let action = "";
+
 if (params.get("origin") && typeof params.get("origin") === "string") {
   origin = JSON.parse(params.get("origin") as string);
 }
+
 if (params.get("args") && typeof params.get("args") === "string") {
   args = JSON.parse(params.get("args") as string);
 }
+
 if (typeof params.get("action") === "string")
   action = params.get("action") as string;
+
 const routeParams: {
   origin: OriginData;
   args: Record<string, unknown>;
@@ -46,117 +51,106 @@ function Prompt() {
   return (
     <AuthProvider>
       <AccountsProvider>
-        <CurrencyProvider>
-          <HashRouter>
-            <Routes>
+        <HashRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <RequireAuth>
+                  <Layout />
+                </RequireAuth>
+              }
+            >
               <Route
-                path="/"
+                index
+                element={<Navigate to={`/${routeParams.action}`} replace />}
+              />
+              <Route
+                path="webln/enable"
+                element={<Enable origin={routeParams.origin} />}
+              />
+              <Route
+                path="lnurlAuth"
                 element={
-                  <RequireAuth>
-                    <Layout />
-                  </RequireAuth>
+                  <LNURLAuth
+                    details={
+                      routeParams.args?.lnurlDetails as LNURLAuthServiceResponse
+                    }
+                    origin={routeParams.origin}
+                  />
                 }
-              >
-                <Route
-                  index
-                  element={<Navigate to={`/${routeParams.action}`} replace />}
-                />
-                <Route
-                  path="webln/enable"
-                  element={<Enable origin={routeParams.origin} />}
-                />
-                <Route
-                  path="lnurlAuth"
-                  element={
-                    <LNURLAuth
-                      details={
-                        routeParams.args
-                          ?.lnurlDetails as LNURLAuthServiceResponse
-                      }
-                      origin={routeParams.origin}
-                    />
-                  }
-                />
-                <Route
-                  path="lnurlPay"
-                  element={
-                    <LNURLPay
-                      details={
-                        routeParams.args
-                          ?.lnurlDetails as LNURLPayServiceResponse
-                      }
-                      origin={routeParams.origin}
-                    />
-                  }
-                />
-                <Route
-                  path="lnurlWithdraw"
-                  element={
-                    <LNURLWithdraw
-                      details={
-                        routeParams.args
-                          ?.lnurlDetails as LNURLWithdrawServiceResponse
-                      }
-                      origin={routeParams.origin}
-                    />
-                  }
-                />
-                <Route
-                  path="makeInvoice"
-                  element={
-                    <MakeInvoice
-                      amountEditable={
-                        routeParams.args.amountEditable as boolean
-                      }
-                      memoEditable={routeParams.args.memoEditable as boolean}
-                      invoiceAttributes={
-                        routeParams.args.invoiceAttributes as RequestInvoiceArgs
-                      }
-                      origin={routeParams.origin}
-                    />
-                  }
-                />
-                <Route
-                  path="confirmPayment"
-                  element={
-                    <ConfirmPayment
-                      paymentRequest={
-                        routeParams.args?.paymentRequest as string
-                      }
-                      origin={routeParams.origin}
-                    />
-                  }
-                />
-                <Route
-                  path="confirmKeysend"
-                  element={
-                    <Keysend
-                      destination={routeParams.args?.destination as string}
-                      valueSat={routeParams.args?.amount as string}
-                      customRecords={
-                        routeParams.args?.customRecords as Record<
-                          string,
-                          string
-                        >
-                      }
-                      origin={routeParams.origin}
-                    />
-                  }
-                />
-                <Route
-                  path="confirmSignMessage"
-                  element={
-                    <ConfirmSignMessage
-                      message={routeParams.args?.message as string}
-                      origin={routeParams.origin}
-                    />
-                  }
-                />
-              </Route>
-              <Route path="unlock" element={<Unlock />} />
-            </Routes>
-          </HashRouter>
-        </CurrencyProvider>
+              />
+              <Route
+                path="lnurlPay"
+                element={
+                  <LNURLPay
+                    details={
+                      routeParams.args?.lnurlDetails as LNURLPayServiceResponse
+                    }
+                    origin={routeParams.origin}
+                  />
+                }
+              />
+              <Route
+                path="lnurlWithdraw"
+                element={
+                  <LNURLWithdraw
+                    details={
+                      routeParams.args
+                        ?.lnurlDetails as LNURLWithdrawServiceResponse
+                    }
+                    origin={routeParams.origin}
+                  />
+                }
+              />
+              <Route
+                path="makeInvoice"
+                element={
+                  <MakeInvoice
+                    amountEditable={routeParams.args.amountEditable as boolean}
+                    memoEditable={routeParams.args.memoEditable as boolean}
+                    invoiceAttributes={
+                      routeParams.args.invoiceAttributes as RequestInvoiceArgs
+                    }
+                    origin={routeParams.origin}
+                  />
+                }
+              />
+              <Route
+                path="confirmPayment"
+                element={
+                  <ConfirmPayment
+                    paymentRequest={routeParams.args?.paymentRequest as string}
+                    origin={routeParams.origin}
+                  />
+                }
+              />
+              <Route
+                path="confirmKeysend"
+                element={
+                  <Keysend
+                    destination={routeParams.args?.destination as string}
+                    valueSat={routeParams.args?.amount as string}
+                    customRecords={
+                      routeParams.args?.customRecords as Record<string, string>
+                    }
+                    origin={routeParams.origin}
+                  />
+                }
+              />
+              <Route
+                path="confirmSignMessage"
+                element={
+                  <ConfirmSignMessage
+                    message={routeParams.args?.message as string}
+                    origin={routeParams.origin}
+                  />
+                }
+              />
+            </Route>
+            <Route path="unlock" element={<Unlock />} />
+          </Routes>
+        </HashRouter>
       </AccountsProvider>
     </AuthProvider>
   );
@@ -164,7 +158,18 @@ function Prompt() {
 
 const Layout = () => {
   const auth = useAuth();
-  const { balances } = useCurrency();
+  const [balances, setBalances] = useState<{
+    satsBalance: string;
+    fiatBalance: string;
+  }>({ satsBalance: "", fiatBalance: "" });
+
+  useEffect(() => {
+    if (typeof auth.account?.balance === "number") {
+      getBalances(auth.account?.balance).then((balances) =>
+        setBalances(balances)
+      );
+    }
+  }, [auth.account?.balance]);
 
   return (
     <>
@@ -179,8 +184,8 @@ const Layout = () => {
                 )
               : ""
           }
-          subtitle={balances}
           showOptions={false}
+          subtitle={balances}
         />
       </div>
 
