@@ -7,15 +7,15 @@ import utils from "~/common/lib/utils";
 import i18n from "~/i18n/i18nConfig";
 import { welcomeI18nNamespace } from "~/i18n/namespaces";
 
-const initialFormData = Object.freeze({
+const initialFormData = {
   password: "",
   passwordConfirmation: "",
-});
+};
 
-const initialErrors = Object.freeze({
+const initialErrors = {
   password: "",
   passwordConfirmation: "",
-});
+};
 
 export default function SetPassword() {
   const navigate = useNavigate();
