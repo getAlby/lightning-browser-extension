@@ -1,5 +1,5 @@
-import { ChangeEventHandler } from "react";
 import { Transition } from "@headlessui/react";
+import { ChangeEventHandler } from "react";
 
 import Checkbox from "../form/Checkbox";
 import TextField from "../form/TextField";
@@ -51,7 +51,7 @@ function BudgetControl({
           <TextField
             id="budget"
             label="Budget"
-            placeholder="sat"
+            placeholder="sats"
             value={budget}
             type="number"
             onChange={onBudgetChange}

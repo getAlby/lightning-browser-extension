@@ -1,8 +1,7 @@
+import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useState } from "react";
 import Modal from "react-modal";
-import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
-import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-
 import utils from "~/common/lib/utils";
 
 import Button from "../Button";
@@ -91,13 +90,13 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             <CrossIcon className="w-6 h-6 dark:text-white" />
           </button>
         </div>
-        <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-gray-500">
+        <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
           <div className="w-60">
             <TextField
               id="budget"
               label="Budget"
               autoFocus
-              placeholder="sat"
+              placeholder="sats"
               value={budget}
               type="number"
               onChange={(e) => setBudget(e.target.value)}

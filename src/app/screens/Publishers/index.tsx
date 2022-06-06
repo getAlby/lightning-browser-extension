@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
 import Container from "@components/Container";
 import PublishersTable from "@components/PublishersTable";
-
-import { Allowance, Blocklist, Publisher } from "~/types";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import utils from "~/common/lib/utils";
+import { Allowance, Blocklist, Publisher } from "~/types";
+
 import websites from "./websites.json";
 
 function Publishers() {
@@ -60,7 +59,7 @@ function Publishers() {
       <h2 className="mt-12 mb-2 text-2xl font-bold dark:text-white">
         Your ⚡️ Websites
       </h2>
-      <p className="mb-6 text-gray-700 dark:text-gray-500">
+      <p className="mb-6 text-gray-500 dark:text-neutral-500">
         Websites where you have used Alby before
       </p>
       {data.length > 0 ? (
@@ -74,7 +73,7 @@ function Publishers() {
       <h2 className="mt-12 mb-2 text-2xl font-bold dark:text-white">
         Other ⚡️ Websites
       </h2>
-      <p className="mb-6 text-gray-700 dark:text-gray-500">
+      <p className="mb-6 text-gray-500 dark:text-neutral-500">
         Websites where you can use Alby
       </p>
       <div className="mb-12">
@@ -95,7 +94,7 @@ function Publishers() {
                         <h2 className="font-medium font-serif text-base dark:text-white">
                           {title}
                         </h2>
-                        <p className="font-serif text-sm font-normal text-gray-700 dark:text-gray-500 line-clamp-3">
+                        <p className="font-serif text-sm font-normal text-gray-500 dark:text-neutral-500 line-clamp-3">
                           {subtitle}
                         </p>
                       </div>

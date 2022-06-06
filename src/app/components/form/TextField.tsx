@@ -29,10 +29,7 @@ const TextField = ({
   endAdornment,
 }: React.InputHTMLAttributes<HTMLInputElement> & Props) => (
   <>
-    <label
-      htmlFor={id}
-      className="block font-medium text-gray-800 dark:text-white"
-    >
+    <label htmlFor={id} className="font-medium text-gray-800 dark:text-white">
       {label}
     </label>
     <div className="mt-1">

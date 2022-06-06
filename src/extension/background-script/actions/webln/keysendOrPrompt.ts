@@ -1,7 +1,7 @@
-import { Message } from "~/types";
 import utils from "~/common/lib/utils";
-import keysend from "../ln/keysend";
+import { Message } from "~/types";
 
+import keysend from "../ln/keysend";
 // TODO: move checkAllowance to some helpers/models?
 import { checkAllowance } from "./sendPaymentOrPrompt";
 

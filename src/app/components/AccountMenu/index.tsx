@@ -1,18 +1,17 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import {
   AddressBookIcon,
   CaretDownIcon,
   PlusIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import { useState, useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
-
-import utils from "~/common/lib/utils";
-import { useAuth } from "~/app/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { useAccounts } from "~/app/context/AccountsContext";
+import { useAuth } from "~/app/context/AuthContext";
+import utils from "~/common/lib/utils";
 
-import Badge from "../Badge";
 import Menu from "../Menu";
 
 export type Props = {
@@ -61,7 +60,7 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
       <div
         className={`flex-auto mx-2 py-1 ${!title && !subtitle ? "w-28" : ""}`}
       >
-        <div className="text-xs text-gray-700 dark:text-gray-400">
+        <div className="text-xs text-gray-700 dark:text-neutral-400">
           {title || <Skeleton />}
         </div>
         <div className="text-xs dark:text-white">
@@ -85,15 +84,20 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
                   selectAccount(accountId);
                 }}
                 disabled={loading}
+                title={account.name}
               >
-                <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-700 dark:text-gray-300" />
-                {account.name}&nbsp;
-                <Badge
-                  label={account.connector}
-                  color="blue-500"
-                  textColor="white"
-                  small
-                />
+                <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 shrink-0 opacity-75 text-gray-700 dark:text-neutral-300" />
+                <span className="overflow-hidden text-ellipsis whitespace-nowrap">
+                  {account.name}&nbsp;
+                </span>
+                {accountId === auth.account?.id && (
+                  <span
+                    data-testid="selected"
+                    className="ml-auto w-3.5 h-3.5 rounded-full bg-orange-bitcoin flex justify-center items-center"
+                  >
+                    <CheckIcon className="w-3 h-3 text-white" />
+                  </span>
+                )}
               </Menu.ItemButton>
             );
           })}
@@ -105,7 +109,7 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
                   openOptions("accounts/new");
                 }}
               >
-                <PlusIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-gray-300" />
+                <PlusIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
                 Add a new account
               </Menu.ItemButton>
               <Menu.ItemButton
@@ -113,7 +117,7 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
                   openOptions("accounts");
                 }}
               >
-                <AddressBookIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-gray-300" />
+                <AddressBookIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
                 Accounts
               </Menu.ItemButton>
             </>

@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from "react";
 import { QrCodeIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Html5Qrcode, Html5QrcodeScannerState } from "html5-qrcode";
+import { useState, useEffect, useRef } from "react";
+import { toast } from "react-toastify";
 
 import Button from "../Button";
 
@@ -42,7 +43,7 @@ function QrcodeScanner({
         handleStartScanning(devices[0].id);
       }
     } catch (error) {
-      alert("Please allow camera access in the settings screen.");
+      toast.error("Please allow camera access in the settings screen.");
     }
   }
 

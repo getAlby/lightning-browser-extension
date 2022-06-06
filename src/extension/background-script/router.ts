@@ -1,12 +1,12 @@
 import * as accounts from "./actions/accounts";
 import * as allowances from "./actions/allowances";
+import * as blocklist from "./actions/blocklist";
 import * as ln from "./actions/ln";
+import lnurl from "./actions/lnurl";
 import * as payments from "./actions/payments";
 import * as settings from "./actions/settings";
 import * as setup from "./actions/setup";
 import * as webln from "./actions/webln";
-import * as blocklist from "./actions/blocklist";
-import lnurl from "./actions/lnurl";
 
 const routes = {
   // webln calls can be made from the webln object injected in the websites. See inject-script

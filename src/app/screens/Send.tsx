@@ -1,19 +1,19 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import {
   CaretLeftIcon,
   CrossIcon,
   QrCodeIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import lightningPayReq from "bolt11";
-
-import lnurlLib from "~/common/lib/lnurl";
-
 import Button from "@components/Button";
-import IconButton from "@components/IconButton";
+import Container from "@components/Container";
 import Header from "@components/Header";
+import IconButton from "@components/IconButton";
 import QrcodeScanner from "@components/QrcodeScanner";
 import TextField from "@components/form/TextField";
+import lightningPayReq from "bolt11";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import lnurlLib from "~/common/lib/lnurl";
 
 function Send() {
   const [invoice, setInvoice] = useState("");
@@ -45,7 +45,7 @@ function Send() {
       }
     } catch (e) {
       if (e instanceof Error) {
-        alert(e.message);
+        toast.error(e.message);
       }
     } finally {
       setLoading(false);
@@ -76,7 +76,7 @@ function Send() {
             />
           }
         />
-        <div className="p-4 max-w-screen-sm mx-auto">
+        <Container maxWidth="sm">
           <QrcodeScanner
             qrbox={200}
             qrCodeSuccessCallback={(decodedText) => {
@@ -87,7 +87,7 @@ function Send() {
             }}
             qrCodeErrorCallback={console.error}
           />
-        </div>
+        </Container>
       </div>
     );
   }
@@ -103,36 +103,41 @@ function Send() {
           />
         }
       />
-      <form className="p-4 max-w-screen-sm mx-auto" onSubmit={handleSubmit}>
-        <TextField
-          id="invoice"
-          label="Lightning Invoice"
-          placeholder="Paste invoice, lnurl or lightning address"
-          value={invoice}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setInvoice(event.target.value)
-          }
-          endAdornment={
-            <button
-              type="button"
-              className="flex justify-center items-center w-10 h-8"
-              onClick={() => setQrIsOpen(true)}
-            >
-              <QrCodeIcon className="h-6 w-6 text-blue-500" />
-            </button>
-          }
-        />
-        <div className="mt-4">
-          <Button
-            type="submit"
-            label="Continue"
-            primary
-            fullWidth
-            loading={loading}
-            disabled={invoice === ""}
-          />
-        </div>
-      </form>
+      <div className="py-4">
+        <Container maxWidth="sm">
+          <form onSubmit={handleSubmit}>
+            <TextField
+              id="invoice"
+              label="Lightning Invoice"
+              placeholder="Paste invoice, lnurl or lightning address"
+              value={invoice}
+              disabled={loading}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setInvoice(event.target.value)
+              }
+              endAdornment={
+                <button
+                  type="button"
+                  className="flex justify-center items-center w-10 h-8"
+                  onClick={() => setQrIsOpen(true)}
+                >
+                  <QrCodeIcon className="h-6 w-6 text-blue-500" />
+                </button>
+              }
+            />
+            <div className="mt-4">
+              <Button
+                type="submit"
+                label="Continue"
+                primary
+                fullWidth
+                loading={loading}
+                disabled={invoice === "" || loading}
+              />
+            </div>
+          </form>
+        </Container>
+      </div>
     </div>
   );
 }

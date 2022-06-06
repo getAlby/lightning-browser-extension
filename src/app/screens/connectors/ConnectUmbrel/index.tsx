@@ -1,11 +1,10 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-import utils from "~/common/lib/utils";
-
+import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
-import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import utils from "~/common/lib/utils";
 
 const initialFormData = Object.freeze({
   url: "",
@@ -20,8 +19,10 @@ export default function ConnectUmbrel() {
   function handleLndconnectUrl(event: React.ChangeEvent<HTMLInputElement>) {
     try {
       const lndconnectUrl = event.target.value.trim();
-      const lndconnect = new URL(lndconnectUrl);
-      const url = "https:" + lndconnect.pathname;
+      let lndconnect = new URL(lndconnectUrl);
+      lndconnect.protocol = "http:";
+      lndconnect = new URL(lndconnect.toString());
+      const url = `https://${lndconnect.hostname}${lndconnect.pathname}`;
       let macaroon = lndconnect.searchParams.get("macaroon") || "";
       macaroon = utils.urlSafeBase64ToHex(macaroon);
       // const cert = lndconnect.searchParams.get("cert"); // TODO: handle LND certs with the native connector
@@ -74,7 +75,7 @@ export default function ConnectUmbrel() {
           navigate("/test-connection");
         }
       } else {
-        alert(`
+        toast.error(`
           Connection failed. Are your Umbrel credentials correct? \n\n(${validation.error})`);
       }
     } catch (e) {
@@ -83,7 +84,7 @@ export default function ConnectUmbrel() {
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
-      alert(message);
+      toast.error(message);
     }
     setLoading(false);
   }

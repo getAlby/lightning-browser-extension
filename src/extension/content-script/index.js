@@ -1,7 +1,9 @@
 import browser from "webextension-polyfill";
+
+import extractLightningData from "./batteries";
+import injectScript from "./injectScript";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
-import injectScript from "./injectScript";
 
 // WebLN calls that can be executed from the WebLNProvider.
 // Update when new calls are added
@@ -18,9 +20,8 @@ const weblnCalls = [
 // calls that can be executed when webln is not enabled for the current content page
 const disabledCalls = ["enable"];
 
-import extractLightningData from "./batteries";
-
 let isEnabled = false; // store if webln is enabled for this content page
+let callActive = false; // store if a webln is currently active. Used to prevent multiple calls in parallel
 
 async function init() {
   const inject = await shouldInject();
@@ -46,6 +47,11 @@ async function init() {
       return;
     }
     if (ev.data && ev.data.application === "LBE" && !ev.data.response) {
+      // if a call is active we ignore the request
+      if (callActive) {
+        console.error("WebLN call already executing");
+        return;
+      }
       // limit the calls that can be made from webln
       // only listed calls can be executed
       // if not enabled only enable can be called.
@@ -64,6 +70,7 @@ async function init() {
         origin: getOriginData(),
       };
       const replyFunction = (response) => {
+        callActive = false; // reset call is active
         // if it is the enable call we store if webln is enabled for this content script
         if (ev.data.type == "enable") {
           isEnabled = response.data?.enabled;
@@ -77,6 +84,7 @@ async function init() {
           "*" // TODO use origin
         );
       };
+      callActive = true;
       return browser.runtime
         .sendMessage(messageWithOrigin)
         .then(replyFunction)

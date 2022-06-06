@@ -1,6 +1,7 @@
 import axios from "axios";
-import lightningPayReq from "bolt11";
 import { AxiosRequestConfig } from "axios";
+import lightningPayReq from "bolt11";
+
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,

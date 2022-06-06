@@ -1,14 +1,12 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
-import utils from "~/common/lib/utils";
-import api from "~/common/lib/api";
-import { useAuth } from "~/app/context/AuthContext";
-import { useAccounts } from "~/app/context/AccountsContext";
-
 import Button from "@components/Button";
 import Card from "@components/Card";
 import Loading from "@components/Loading";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAccounts } from "~/app/context/AccountsContext";
+import { useAuth } from "~/app/context/AuthContext";
+import api from "~/common/lib/api";
+import utils from "~/common/lib/utils";
 
 export default function TestConnection() {
   const auth = useAuth();
@@ -107,7 +105,7 @@ export default function TestConnection() {
                   />
                 </div>
 
-                <p className="mt-6 dark:text-gray-400">
+                <p className="mt-6 dark:text-neutral-400">
                   Awesome, you&apos;re ready to go!
                 </p>
 
@@ -117,7 +115,7 @@ export default function TestConnection() {
                     alias={`${accountInfo.name} - ${accountInfo.alias}`}
                     satoshis={
                       typeof accountInfo.balance === "number"
-                        ? `${accountInfo.balance} sat`
+                        ? `${accountInfo.balance} sats`
                         : ""
                     }
                   />

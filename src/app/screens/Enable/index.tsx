@@ -1,11 +1,10 @@
-import { useState, useEffect, useCallback, useRef } from "react";
-
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import PublisherCard from "@components/PublisherCard";
-import msg from "~/common/lib/msg";
-import type { OriginData } from "~/types";
-import utils from "~/common/lib/utils";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { USER_REJECTED_ERROR } from "~/common/constants";
+import msg from "~/common/lib/msg";
+import utils from "~/common/lib/utils";
+import type { OriginData } from "~/types";
 
 type Props = {
   origin: OriginData;
@@ -77,11 +76,11 @@ function Enable(props: Props) {
           Connect with <i>{props.origin.host}</i>
         </h3>
 
-        <p className="text-gray-500 mb-4 dark:text-gray-400">
+        <p className="text-gray-500 mb-4 dark:text-neutral-400">
           <strong>{props.origin.name}</strong> does not have access to your
           account.
         </p>
-        <p className="mb-8 text-gray-500 mb-4 dark:text-gray-400">
+        <p className="mb-8 text-gray-500 mb-4 dark:text-neutral-400">
           Do you want to grant them access?
         </p>
 
