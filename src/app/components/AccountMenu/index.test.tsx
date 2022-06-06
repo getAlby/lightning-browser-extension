@@ -75,10 +75,9 @@ describe("AccountMenu", () => {
     await waitFor(() => screen.getByText("Switch account"));
 
     // As we have set the active account as "LND account above"
-    const item = screen.getByTitle("LND account");
-    // check if there is a selected icon
-    const icon = item.querySelector('[data-testid="selected"]');
-    expect(icon).not.toBe(null);
+    expect(
+      screen.getByTitle("LND account").querySelector('[data-testid="selected"]')
+    ).toBeInTheDocument();
   });
 
   test("displays accounts without options", async () => {

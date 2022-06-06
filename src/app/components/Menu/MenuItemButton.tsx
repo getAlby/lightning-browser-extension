@@ -1,4 +1,3 @@
-import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Menu } from "@headlessui/react";
 import { classNames } from "~/app/utils/index";
 
@@ -8,7 +7,6 @@ type Props = {
   disabled?: boolean;
   onClick: () => void;
   title?: string;
-  selected?: boolean;
 };
 
 function MenuItemButton({
@@ -17,7 +15,6 @@ function MenuItemButton({
   disabled = false,
   onClick,
   title = "",
-  selected = false,
 }: Props) {
   return (
     <Menu.Item>
@@ -34,14 +31,6 @@ function MenuItemButton({
           title={title}
         >
           {children}
-          {selected && (
-            <span className="ml-auto w-3.5 h-3.5 rounded-full bg-orange-bitcoin flex justify-center items-center">
-              <CheckIcon
-                data-testid="selected"
-                className="w-3 h-3 text-white"
-              />
-            </span>
-          )}
         </button>
       )}
     </Menu.Item>
