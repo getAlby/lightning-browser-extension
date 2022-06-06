@@ -66,8 +66,12 @@ if (document) {
         return window.webln
           .lnurl(lnurl)
           .catch((e) => {
-            console.log(e);
-            alert(`Error: ${e.message}`);
+            console.error(e);
+            if (
+              ![ABORT_PROMPT_ERROR, USER_REJECTED_ERROR].includes(e.message)
+            ) {
+              alert(`Error: ${e.message}`);
+            }
           })
           .then((response) => {
             const responseEvent = new CustomEvent("lightning:success", {
@@ -93,7 +97,7 @@ if (document) {
           link.dispatchEvent(responseEvent);
         })
         .catch((e) => {
-          console.log(e);
+          console.error(e);
           if (![ABORT_PROMPT_ERROR, USER_REJECTED_ERROR].includes(e.message)) {
             alert(`Error: ${e.message}`);
           }
