@@ -27,6 +27,8 @@ interface AuthContextType {
 
 const AuthContext = createContext({} as AuthContextType);
 
+// rename to "accountProvider"?
+// proposae in a new PR
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [account, setAccount] = useState<AuthContextType["account"]>(null);
   const [loading, setLoading] = useState(true);
@@ -88,7 +90,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const value = {
     account,
     setAccountId,
-    fetchAccountInfo,
+    fetchAccountInfo, ///extend it with fiat balance
     loading,
     unlock,
     lock,
