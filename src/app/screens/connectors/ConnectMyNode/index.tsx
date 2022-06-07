@@ -6,10 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
 
-const initialFormData = Object.freeze({
+const initialFormData = {
   url: "",
   macaroon: "",
-});
+};
 
 export default function ConnectMyNode() {
   const navigate = useNavigate();
