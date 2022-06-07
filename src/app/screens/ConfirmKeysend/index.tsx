@@ -7,7 +7,6 @@ import SuccessMessage from "@components/SuccessMessage";
 import { useState, MouseEvent, useRef, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useCurrency } from "~/app/context/CurrencyContext";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";

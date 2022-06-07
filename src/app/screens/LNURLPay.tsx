@@ -24,7 +24,6 @@ import {
 } from "~/types";
 
 import DualCurrencyInput from "../components/form/NumberField";
-import { useCurrency } from "../context/CurrencyContext";
 
 type Origin = {
   name: string;

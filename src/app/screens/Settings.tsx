@@ -9,18 +9,12 @@ import { Html5Qrcode } from "html5-qrcode";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { getTheme } from "~/app/utils";
-import currencies from "~/app/utils/supportedCurrencies";
+import { CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
-// import { useCurrency } from "../context/CurrencyContext";
-// import { saveCurrencySetting } from "~/common/utils/currencyConvert";
-import {
-  SettingsStorage, // SupportedCurrencies,
-  // SupportedExchanges,
-} from "~/types";
+import { SettingsStorage } from "~/types";
 
 function Settings() {
   const [loading, setLoading] = useState(true);
-  // const { setCurrencyValue, currencies } = useCurrency();
 
   const [settings, setSettings] = useState<SettingsStorage>({
     websiteEnhancements: false,
@@ -153,7 +147,7 @@ function Settings() {
                   });
                 }}
               >
-                {currencies.map((currency) => (
+                {CURRENCIES.map((currency) => (
                   <option key={currency} value={currency}>
                     {currency}
                   </option>

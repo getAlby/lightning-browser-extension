@@ -17,7 +17,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import browser from "webextension-polyfill";
-import { useCurrency } from "~/app/context/CurrencyContext";
 import api from "~/common/lib/api";
 import { getFiatValue } from "~/common/utils/currencyConvert";
 import type { Allowance, Battery, Transaction } from "~/types";
