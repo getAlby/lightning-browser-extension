@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+
 import type { Props } from "./NumberField";
 import NumberField from "./NumberField";
 
