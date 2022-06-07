@@ -87,7 +87,6 @@ function Home() {
     return () => {
       browser.runtime.onMessage.removeListener(handleLightningDataMessage);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function renderPublisherCard() {

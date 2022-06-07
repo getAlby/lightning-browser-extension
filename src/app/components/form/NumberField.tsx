@@ -11,7 +11,6 @@ export type Props = {
 export default function DualCurrencyInput({
   label,
   secondaryValue,
-  name,
   id,
   placeholder,
   type = "text",
@@ -38,7 +37,7 @@ export default function DualCurrencyInput({
     <input
       ref={inputEl}
       type={type}
-      name={name}
+      name={id}
       id={id}
       className={classNames(
         "block w-full placeholder-gray-500 dark:placeholder-gray-600 dark:text-white ",
