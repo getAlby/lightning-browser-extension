@@ -92,7 +92,7 @@ function ConfirmPayment(props: Props) {
         <Container maxWidth="sm">
           {!successMessage ? (
             <>
-              <div className="mb-8">
+              <div className="mb-6">
                 <PaymentSummary
                   amount={invoiceRef.current?.satoshis}
                   description={invoiceRef.current?.tagsObject.description}

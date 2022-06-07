@@ -285,7 +285,7 @@ function Home() {
   }
 
   return (
-    <div>
+    <div className="overflow-y-auto no-scrollbar">
       {renderPublisherCard()}
       {allowance ? renderAllowanceView() : renderDefaultView()}
     </div>
