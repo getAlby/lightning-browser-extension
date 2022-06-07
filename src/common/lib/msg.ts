@@ -10,7 +10,7 @@ const msg = {
       .sendMessage({
         application: "LBE",
         prompt: true,
-        action: action,
+        action,
         args: args,
         origin: { internal: true },
         ...overwrites,
