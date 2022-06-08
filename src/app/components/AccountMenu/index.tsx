@@ -71,7 +71,7 @@ function AccountMenu({ title, balances, showOptions = true }: Props) {
           <span className="text-xs dark:text-white">
             {balances.satsBalance || <Skeleton />}
           </span>
-          <span className="text-xs text-gray-600">
+          <span className="text-xs text-gray-600 dark:text-neutral-400">
             {balances.fiatBalance || <Skeleton />}
           </span>
         </p>
