@@ -3,14 +3,8 @@
  */
 import axios from "axios";
 import currencyJs from "currency.js";
-import {
-  getSettings,
-  /*, setSetting */
-} from "~/common/lib/api";
-import {
-  SupportedCurrencies,
-  /* , SupportedExchanges */
-} from "~/types";
+import { getSettings } from "~/common/lib/api";
+import { SupportedCurrencies } from "~/types";
 
 const settings = async () => {
   const { currency, exchange } = await getSettings();
@@ -20,14 +14,6 @@ const settings = async () => {
     exchange,
   };
 };
-
-// export const saveCurrencySetting = (currency: SupportedCurrencies) => {
-//   console.log("CIURRENSEY SETTT");
-
-//   setSetting({
-//     currency,
-//   });
-// };
 
 const numSatsInBtc = 100_000_000;
 
