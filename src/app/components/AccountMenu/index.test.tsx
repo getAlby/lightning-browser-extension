@@ -30,6 +30,10 @@ jest.spyOn(AuthContext, "useAuth").mockReturnValue({
   lock: jest.fn(),
   setAccountId: jest.fn(),
   fetchAccountInfo: jest.fn(),
+  balancesDecorated: {
+    fiatBalance: "",
+    satsBalance: "",
+  },
 });
 
 describe("AccountMenu", () => {

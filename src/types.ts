@@ -20,8 +20,10 @@ export interface Accounts {
 export interface AccountInfo {
   alias: string;
   balance: number;
+  fiatBalance?: string;
   id: string;
   name: string;
+  satsBalance?: string;
 }
 
 export interface MetaData {

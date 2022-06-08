@@ -8,14 +8,12 @@ import LNURLPay from "@screens/LNURLPay";
 import LNURLWithdraw from "@screens/LNURLWithdraw";
 import MakeInvoice from "@screens/MakeInvoice";
 import Unlock from "@screens/Unlock";
-import { useState, useEffect } from "react";
 import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { AccountsProvider } from "~/app/context/AccountsContext";
 import { useAuth } from "~/app/context/AuthContext";
 import { AuthProvider } from "~/app/context/AuthContext";
 import RequireAuth from "~/app/router/RequireAuth";
-import { getBalances } from "~/common/utils/currencyConvert";
 import type {
   LNURLAuthServiceResponse,
   LNURLPayServiceResponse,
@@ -157,19 +155,7 @@ function Prompt() {
 }
 
 const Layout = () => {
-  const auth = useAuth();
-  const [balances, setBalances] = useState<{
-    satsBalance: string;
-    fiatBalance: string;
-  }>({ satsBalance: "", fiatBalance: "" });
-
-  useEffect(() => {
-    if (typeof auth.account?.balance === "number") {
-      getBalances(auth.account?.balance).then((balances) =>
-        setBalances(balances)
-      );
-    }
-  }, [auth.account?.balance]);
+  const { account, balancesDecorated } = useAuth();
 
   return (
     <>
@@ -177,15 +163,12 @@ const Layout = () => {
       <div className="px-4 py-2 bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
         <AccountMenu
           title={
-            typeof auth.account?.name === "string"
-              ? `${auth.account?.name} - ${auth.account?.alias}`.substring(
-                  0,
-                  21
-                )
+            typeof account?.name === "string"
+              ? `${account?.name} - ${account?.alias}`.substring(0, 21)
               : ""
           }
           showOptions={false}
-          balances={balances}
+          balances={balancesDecorated}
         />
       </div>
 

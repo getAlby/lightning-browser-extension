@@ -8,12 +8,15 @@ import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { useAuth } from "~/app/context/AuthContext";
 import { getTheme } from "~/app/utils";
 import { CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
 import { SettingsStorage } from "~/types";
 
 function Settings() {
+  const { fetchAccountInfo } = useAuth();
+
   const [loading, setLoading] = useState(true);
 
   const [settings, setSettings] = useState<SettingsStorage>({
@@ -140,8 +143,7 @@ function Settings() {
                 name="currency"
                 value={settings.currency}
                 onChange={async (eventent) => {
-                  // value and currency change should be reflected in the upper account-menu after select?
-                  // saveCurrencySetting(eventent.target.value);
+                  fetchAccountInfo();
                   await saveSetting({
                     currency: eventent.target.value,
                   });

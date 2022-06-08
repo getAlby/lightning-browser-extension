@@ -6,13 +6,11 @@ import LNURLPay from "@screens/LNURLPay";
 import Receive from "@screens/Receive";
 import Send from "@screens/Send";
 import Unlock from "@screens/Unlock";
-import { useState, useEffect } from "react";
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { AccountsProvider } from "~/app/context/AccountsContext";
 import { useAuth } from "~/app/context/AuthContext";
 import { AuthProvider } from "~/app/context/AuthContext";
-import { getBalances } from "~/common/utils/currencyConvert";
 
 import RequireAuth from "../RequireAuth";
 
@@ -46,29 +44,17 @@ function Popup() {
 }
 
 const Layout = () => {
-  const auth = useAuth();
-  const [balances, setBalances] = useState<{
-    satsBalance: string;
-    fiatBalance: string;
-  }>({ satsBalance: "", fiatBalance: "" });
-
-  useEffect(() => {
-    if (typeof auth.account?.balance === "number") {
-      getBalances(auth.account?.balance).then((balances) =>
-        setBalances(balances)
-      );
-    }
-  }, [auth.account?.balance]);
+  const { account, balancesDecorated } = useAuth();
 
   return (
     <div className="flex flex-col h-full">
       <Navbar
         title={
-          typeof auth.account?.name === "string"
-            ? `${auth.account?.name} - ${auth.account?.alias}`.substring(0, 21)
+          typeof account?.name === "string"
+            ? `${account?.name} - ${account?.alias}`.substring(0, 21)
             : ""
         }
-        balances={balances}
+        balances={balancesDecorated}
       />
 
       <main className="flex flex-col grow min-h-0">

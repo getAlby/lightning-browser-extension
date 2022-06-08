@@ -1,9 +1,9 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import { toast } from "react-toastify";
-
-import api from "../../common/lib/api";
-import utils from "../../common/lib/utils";
-import type { AccountInfo } from "../../types";
+import api from "~/common/lib/api";
+import utils from "~/common/lib/utils";
+import { getBalances } from "~/common/utils/currencyConvert";
+import type { AccountInfo } from "~/types";
 
 interface AuthContextType {
   account: {
@@ -12,6 +12,10 @@ interface AuthContextType {
     alias?: string;
     balance?: number;
   } | null;
+  balancesDecorated: {
+    fiatBalance: string;
+    satsBalance: string;
+  };
   loading: boolean;
   unlock: (user: string, callback: VoidFunction) => Promise<void>;
   lock: (callback: VoidFunction) => void;
@@ -27,11 +31,16 @@ interface AuthContextType {
 
 const AuthContext = createContext({} as AuthContextType);
 
+// @TODO: open new issue
 // rename to "accountProvider"?
 // proposae in a new PR
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [account, setAccount] = useState<AuthContextType["account"]>(null);
   const [loading, setLoading] = useState(true);
+  const [balancesDecorated, setBalancesDecorated] = useState<{
+    fiatBalance: string;
+    satsBalance: string;
+  }>({ fiatBalance: "", satsBalance: "" });
 
   const unlock = (password: string, callback: VoidFunction) => {
     return api.unlock(password).then((response) => {
@@ -55,7 +64,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const fetchAccountInfo = async (accountId?: string) => {
     const id = accountId || account?.id;
     if (!id) return;
-    return api.swr.getAccountInfo(id, setAccount);
+
+    const accountInfo = await api.swr.getAccountInfo(id, setAccount);
+    const { fiatBalance, satsBalance } = await getBalances(accountInfo.balance);
+
+    setBalancesDecorated({
+      fiatBalance,
+      satsBalance,
+    });
+
+    return { ...accountInfo, fiatBalance, satsBalance };
   };
 
   // Invoked only on on mount.
@@ -89,11 +107,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const value = {
     account,
-    setAccountId,
-    fetchAccountInfo, ///extend it with fiat balance
+    balancesDecorated,
+    fetchAccountInfo,
     loading,
-    unlock,
     lock,
+    setAccountId,
+    unlock,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

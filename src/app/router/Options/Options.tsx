@@ -12,14 +12,12 @@ import Send from "@screens/Send";
 import Settings from "@screens/Settings";
 import Unlock from "@screens/Unlock";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
-import { useState, useEffect } from "react";
 import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { AccountsProvider } from "~/app/context/AccountsContext";
 import { AuthProvider, useAuth } from "~/app/context/AuthContext";
 import RequireAuth from "~/app/router/RequireAuth";
 import connectorRoutes from "~/app/router/connectorRoutes";
-import { getBalances } from "~/common/utils/currencyConvert";
 
 function Options() {
   return (
@@ -89,29 +87,17 @@ function Options() {
 }
 
 const Layout = () => {
-  const auth = useAuth();
-  const [balances, setBalances] = useState<{
-    satsBalance: string;
-    fiatBalance: string;
-  }>({ satsBalance: "", fiatBalance: "" });
-
-  useEffect(() => {
-    if (typeof auth.account?.balance === "number") {
-      getBalances(auth.account?.balance).then((balances) =>
-        setBalances(balances)
-      );
-    }
-  }, [auth.account?.balance]);
+  const { account, balancesDecorated } = useAuth();
 
   return (
     <div>
       <Navbar
         title={
-          typeof auth.account?.name === "string"
-            ? `${auth.account?.name} - ${auth.account?.alias}`.substring(0, 21)
+          typeof account?.name === "string"
+            ? `${account?.name} - ${account?.alias}`.substring(0, 21)
             : ""
         }
-        balances={balances}
+        balances={balancesDecorated}
       >
         <Navbar.Link href="/publishers">Websites</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>
