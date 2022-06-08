@@ -54,7 +54,7 @@ const getFiatBtcRate = async (
 
   let response;
 
-  if (exchange === "Yad.io") {
+  if (exchange === "yadio") {
     response = await axios.get(
       `https://api.yadio.io/exrates/${currency.toLowerCase()}`
     );

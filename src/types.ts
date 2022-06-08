@@ -253,9 +253,9 @@ export interface SettingsStorage {
   exchange: SupportedExchanges;
 }
 
-export type SupportedExchanges = "Coindesk" | "Yad.io";
+export type SupportedExchanges = "coindesk" | "yadio";
 
-// Supported currencies by Coindesk and Yad.io
-// FYI: YAD.IO is i.e. not supporting "ISK", maybe more?
+// Supported currencies by Coindesk and yadio
+// FYI: yadio is i.e. not supporting "ISK", maybe more?
 // https://github.com/AryanJ-NYC/bitcoin-conversion/blob/master/src/index.ts#L143
 export type SupportedCurrencies = typeof CURRENCIES[number];

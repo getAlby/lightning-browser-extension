@@ -27,7 +27,7 @@ function Settings() {
     locale: "",
     theme: "system",
     currency: "USD",
-    exchange: "Coindesk",
+    exchange: "coindesk",
   });
 
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
@@ -175,8 +175,8 @@ function Settings() {
                   });
                 }}
               >
-                <option value="Coindesk">Coindesk</option>
-                <option value="Yad.io">Yad.io</option>
+                <option value="coindesk">Coindesk</option>
+                <option value="yadio">yadio</option>
               </Select>
             </div>
           )}

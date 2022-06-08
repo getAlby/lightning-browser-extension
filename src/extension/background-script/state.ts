@@ -38,7 +38,7 @@ export const DEFAULT_SETTINGS: SettingsStorage = {
   locale: i18n.resolvedLanguage,
   theme: "system",
   currency: "USD",
-  exchange: "Coindesk",
+  exchange: "coindesk",
 };
 
 // these keys get synced from the state to the browser storage
