@@ -101,7 +101,7 @@ export interface MessageAccountEdit extends MessageDefault {
 }
 
 export interface MessageAccountInfo extends Omit<MessageDefault, "args"> {
-  type: "accountInfo";
+  action: "accountInfo";
 }
 
 interface LNURLChannelServiceResponse {
