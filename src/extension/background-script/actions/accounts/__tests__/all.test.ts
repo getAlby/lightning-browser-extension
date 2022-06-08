@@ -1,6 +1,7 @@
-import getAccounts from "../all";
-import type { MessageAccountAll } from "~/types";
 import state from "~/extension/background-script/state";
+import type { MessageAccountAll } from "~/types";
+
+import getAccounts from "../all";
 
 jest.mock("~/extension/background-script/state");
 
