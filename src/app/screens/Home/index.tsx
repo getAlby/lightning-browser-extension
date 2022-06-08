@@ -291,7 +291,7 @@ function Home() {
     <div>
       {allowance && (
         <Header
-          title="Back to Home"
+          title={allowance.host}
           headerLeft={
             <IconButton
               onClick={() => setAllowance(null)}
