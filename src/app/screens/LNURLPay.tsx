@@ -23,7 +23,7 @@ import {
   Payment,
 } from "~/types";
 
-import DualCurrencyInput from "../components/form/NumberField";
+import DualCurrencyField from "../components/form/DualCurrencyField";
 
 type Origin = {
   name: string;
@@ -379,7 +379,7 @@ function LNURLPay(props: Props) {
                   </dl>
                   {details && details.minSendable !== details.maxSendable && (
                     <div>
-                      <DualCurrencyInput
+                      <DualCurrencyField
                         id="amount"
                         label="Amount (Satoshi)"
                         min={+details.minSendable / 1000}
@@ -387,7 +387,6 @@ function LNURLPay(props: Props) {
                         value={valueSat}
                         onChange={(e) => setValueSat(e.target.value)}
                         secondaryValue={fiatValue}
-                        endAdornment={<div />}
                       />
                       <SatButtons onClick={setValueSat} />
                     </div>

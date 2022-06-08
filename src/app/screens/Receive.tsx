@@ -21,7 +21,7 @@ import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
 import { poll } from "~/common/utils/helpers";
 
-import DualCurrencyInput from "../components/form/NumberField";
+import DualCurrencyField from "../components/form/DualCurrencyField";
 
 function Receive() {
   const auth = useAuth();
@@ -200,7 +200,7 @@ function Receive() {
             ) : (
               <>
                 <div className="mb-4">
-                  <DualCurrencyInput
+                  <DualCurrencyField
                     id="amount"
                     label="Amount"
                     placeholder="Amount in Satoshi..."

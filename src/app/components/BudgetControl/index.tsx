@@ -2,7 +2,7 @@ import { Transition } from "@headlessui/react";
 import { ChangeEventHandler } from "react";
 
 import Checkbox from "../form/Checkbox";
-import DualCurrencyInput from "../form/NumberField";
+import DualCurrencyField from "../form/DualCurrencyField";
 
 type Props = {
   remember: boolean;
@@ -50,7 +50,7 @@ function BudgetControl({
           until it is exhausted.
         </p>
         <div>
-          <DualCurrencyInput
+          <DualCurrencyField
             secondaryValue={fiatAmount}
             id="budget"
             label="Budget"
