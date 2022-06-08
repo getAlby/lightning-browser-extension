@@ -3,75 +3,115 @@ import setLightningData from "../setLightningData";
 
 const urlMatcher = /^https:\/\/github.com\/([^/]+)(\/([^/]+))?$/;
 
-const battery = (): void => {
+const battery = async (): Promise<void> => {
   const urlParts = document.location.pathname.split("/");
   const username = urlParts[1];
   const repo = urlParts[2];
 
+  let found = false;
+
   if (username && repo) {
-    handleRepositoryPage(username);
-  } else if (username) {
-    handleProfilePage();
+    found = await handleRepositoryPage(username, repo);
+  }
+
+  if (!found && username) {
+    await handleProfilePage(username);
   }
 };
 
-function parseElement(elementSelector: string) {
-  const text = document.querySelector<HTMLElement>(elementSelector)?.innerText;
-  if (text) {
-    const match = text.match(/(⚡:?|lightning:|lnurl:)\s?(\S+@\S+)/i);
-    if (match) return match[2];
-  }
+function parseText(text: string) {
+  const match = text.match(/(⚡:?|lightning:|lnurl:)\s?(\S+@\S+)/i);
+  if (match) return match[2];
 }
 
-function handleProfilePage() {
-  const shortBioElement = document.querySelector<HTMLHeadingElement>(
-    ".Layout-sidebar .h-card [data-bio-text]"
-  );
+async function handleProfilePage(username: string): Promise<boolean> {
+  const userProfile = await fetch(
+    // fetch user data
+    `https://api.github.com/users/${username}`
+  ).then((res) => res.json());
 
-  // This is not a GitHub profile
-  if (!shortBioElement) return;
+  if (!userProfile || !userProfile.login) return false; // not an user profile
 
-  const address =
-    parseElement(".Layout-sidebar .h-card [data-bio-text]") ||
-    parseElement(".Layout-main article");
+  let address = null;
 
-  if (!address) return;
+  if (userProfile.bio) {
+    // load from bio
+    address = parseText(userProfile.bio);
+  }
+
+  if (!address) {
+    // load from profile's readme
+    const userRepoReadmeData = await fetch(
+      `https://api.github.com/repos/${username}/${username}/readme`
+    ).then((res) => res.json());
+
+    if (userRepoReadmeData.download_url) {
+      const userRepoReadmeContent = await fetch(
+        userRepoReadmeData.download_url
+      ).then((res) => res.text());
+      address = parseText(userRepoReadmeContent);
+    }
+  }
+
+  if (!address) return false; // address was not found
 
   setLightningData([
     {
       method: "lnurl",
       recipient: address,
       ...getOriginData(),
-      description: shortBioElement?.innerText ?? "",
-      name:
-        document.querySelector<HTMLHeadingElement>(
-          '.Layout-sidebar .h-card [itemprop="name"]'
-        )?.innerText ?? "",
-      icon:
-        document.querySelector<HTMLImageElement>(
-          `.Layout-sidebar .h-card img.avatar-user`
-        )?.src ?? "",
+      description: userProfile.bio ?? "",
+      name: userProfile.name,
+      icon: userProfile.avatar_url ?? "",
     },
   ]);
+
+  return true;
 }
 
-function handleRepositoryPage(username: string) {
-  const address = parseElement("article");
+async function handleRepositoryPage(
+  owner: string,
+  repo: string
+): Promise<boolean> {
+  const repoData = await fetch(
+    `https://api.github.com/repos/${owner}/${repo}`
+  ).then((res) => res.json());
 
-  if (address) {
-    setLightningData([
-      {
-        method: "lnurl",
-        recipient: address,
-        ...getOriginData(),
-        description:
-          document.querySelector<HTMLHeadingElement>("article")?.innerText ??
-          "",
-        name: username,
-        icon: "",
-      },
-    ]);
+  if (!repoData || !repoData.id) return false; // not a repo
+
+  let address = null;
+
+  if (repoData.description) {
+    address = parseText(repoData.description);
   }
+
+  if (!address) {
+    const repoReadmeData = await fetch(
+      `https://api.github.com/repos/${owner}/${repo}/readme`
+    ).then((res) => res.json());
+
+    if (repoReadmeData.download_url) {
+      const repoReadmeDataContent = await fetch(
+        repoReadmeData.download_url
+      ).then((res) => res.text());
+      address = parseText(repoReadmeDataContent);
+    }
+  }
+
+  if (!address) return false; // address was not found
+
+  setLightningData([
+    {
+      method: "lnurl",
+      recipient: address,
+      ...getOriginData(),
+      description: repoData.description,
+      name: repoData.full_name,
+      icon: "",
+    },
+  ]);
+
+  return true;
 }
 
 const GitHubProfile = {
