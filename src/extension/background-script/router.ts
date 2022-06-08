@@ -38,6 +38,7 @@ const routes = {
   accountInfo: accounts.info,
   addAccount: accounts.add,
   editAccount: accounts.edit,
+  exportAccount: accounts.exportAccount,
   getAccounts: accounts.all,
   removeAccount: accounts.remove,
   selectAccount: accounts.select,

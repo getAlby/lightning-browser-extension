@@ -101,6 +101,13 @@ export interface MessageAccountEdit extends MessageDefault {
   };
   action: "editAccount";
 }
+export interface MessageAccountExport extends MessageDefault {
+  args: {
+    id: Account["id"];
+    name: Account["name"];
+  };
+  action: "exportAccount";
+}
 
 export interface MessageAccountInfo extends Omit<MessageDefault, "args"> {
   action: "accountInfo";

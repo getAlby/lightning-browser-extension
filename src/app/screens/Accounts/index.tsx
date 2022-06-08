@@ -6,11 +6,13 @@ import {
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import Container from "@components/Container";
+import Loading from "@components/Loading";
 import Menu from "@components/Menu";
 import TextField from "@components/form/TextField";
 import type { FormEvent } from "react";
 import { useState } from "react";
 import Modal from "react-modal";
+import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useAuth } from "~/app/context/AuthContext";
@@ -26,11 +28,23 @@ function AccountsScreen() {
   const navigate = useNavigate();
 
   const [currentAccountId, setCurrentAccountId] = useState("");
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [editModalIsOpen, setEditModalIsOpen] = useState(false);
+  const [exportModalIsOpen, setExportModalIsOpen] = useState(false);
   const [newAccountName, setNewAccountName] = useState("");
+  const [lndHubData, setLndHubData] = useState({
+    login: "",
+    password: "",
+    url: "",
+    lnAddress: "",
+  });
+  const [loading, setLoading] = useState(false);
 
-  function closeModal() {
-    setModalIsOpen(false);
+  function closeEditModal() {
+    setEditModalIsOpen(false);
+  }
+
+  function closeExportModal() {
+    setExportModalIsOpen(false);
   }
 
   async function selectAccount(accountId: string) {
@@ -46,7 +60,21 @@ function AccountsScreen() {
     });
 
     getAccounts();
-    closeModal();
+    closeEditModal();
+  }
+
+  async function exportAccount({ id, name }: AccountAction) {
+    setLoading(true);
+    setTimeout(() => {
+      setExportModalIsOpen(true);
+    }, 50);
+    setLndHubData(
+      await utils.call("exportAccount", {
+        name,
+        id,
+      })
+    );
+    setLoading(false);
   }
 
   async function removeAccount({ id, name }: AccountAction) {
@@ -126,12 +154,25 @@ function AccountsScreen() {
                              * {@link https://github.com/tailwindlabs/headlessui/issues/259}
                              */
                             setTimeout(() => {
-                              setModalIsOpen(true);
+                              setEditModalIsOpen(true);
                             }, 50);
                           }}
                         >
                           Edit
                         </Menu.ItemButton>
+
+                        {account.connector === "lndhub" && (
+                          <Menu.ItemButton
+                            onClick={() =>
+                              exportAccount({
+                                id: accountId,
+                                name: account.name,
+                              })
+                            }
+                          >
+                            Export
+                          </Menu.ItemButton>
+                        )}
 
                         <Menu.ItemButton
                           danger
@@ -155,15 +196,15 @@ function AccountsScreen() {
 
         <Modal
           closeTimeoutMS={200}
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
+          isOpen={editModalIsOpen}
+          onRequestClose={closeEditModal}
           contentLabel="Edit account name"
           overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
           className="rounded-lg bg-white w-full max-w-lg"
         >
           <div className="p-5 flex justify-between dark:bg-surface-02dp">
             <h2 className="text-2xl font-bold dark:text-white">Edit account</h2>
-            <button onClick={closeModal}>
+            <button onClick={closeEditModal}>
               <CrossIcon className="w-6 h-6 dark:text-white" />
             </button>
           </div>
@@ -198,6 +239,70 @@ function AccountsScreen() {
               />
             </div>
           </form>
+        </Modal>
+
+        <Modal
+          closeTimeoutMS={200}
+          isOpen={exportModalIsOpen}
+          onRequestClose={closeExportModal}
+          contentLabel="Edit account name"
+          overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
+          className="rounded-lg bg-white w-full max-w-lg"
+        >
+          <div className="p-5 flex justify-between dark:bg-surface-02dp">
+            <h2 className="text-2xl font-bold dark:text-white">
+              Export account
+            </h2>
+            <button onClick={closeExportModal}>
+              <CrossIcon className="w-6 h-6 dark:text-white" />
+            </button>
+          </div>
+
+          {loading && (
+            <div className="p-5 flex justify-center items-center space-x-2 dark:text-white">
+              <Loading />
+              <span>waiting for LndHub data...</span>
+            </div>
+          )}
+          {!loading && (
+            <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
+              {lndHubData.lnAddress && (
+                <div className="dark:text-white mb-6">
+                  <p>
+                    <strong>Your lightning address:</strong>
+                  </p>
+                  {lndHubData.lnAddress && <p>{lndHubData.lnAddress}</p>}
+                </div>
+              )}
+              <div className="flex justify-center space-x-3 items-center dark:text-white">
+                <div className="flex-1">
+                  <p>
+                    <strong>To use your wallet on your mobile:</strong>
+                  </p>
+                  <p>
+                    Import the wallet into Zeus or BlueWallet mobile app by
+                    scanning the QR Code or pasting the below link.
+                  </p>
+                </div>
+                <div className="float-right">
+                  <QRCode
+                    value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
+                    level="M"
+                    size={130}
+                  />
+                </div>
+              </div>
+              <div className="mt-6">
+                <TextField
+                  id="uri"
+                  label="LNDHub Export URI"
+                  type="text"
+                  readOnly
+                  value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
+                />
+              </div>
+            </div>
+          )}
         </Modal>
       </div>
     </Container>
