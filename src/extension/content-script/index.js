@@ -28,7 +28,7 @@ if (shouldInject()) {
 
   // extract LN data from websites
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.type === "extractLightningData") {
+    if (request.action === "extractLightningData") {
       extractLightningData();
     }
   });
