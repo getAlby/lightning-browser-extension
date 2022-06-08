@@ -51,13 +51,13 @@ if (shouldInject()) {
       // only listed calls can be executed
       // if not enabled only enable can be called.
       const availableCalls = isEnabled ? weblnCalls : disabledCalls;
-      if (!availableCalls.includes(ev.data.type)) {
+      if (!availableCalls.includes(ev.data.action)) {
         console.error("Function not available. Is the provider enabled?");
         return;
       }
 
       const messageWithOrigin = {
-        action: `webln/${ev.data.type}`,
+        action: `webln/${ev.data.action}`, // every webln call must be scoped under `webln/` we do this to indicate that those actions are callable from the websites
         args: ev.data.args,
         application: "LBE",
         public: true, // indicate that this is a public call from the content script
@@ -67,7 +67,7 @@ if (shouldInject()) {
       const replyFunction = (response) => {
         callActive = false; // reset call is active
         // if it is the enable call we store if webln is enabled for this content script
-        if (ev.data.type == "enable") {
+        if (ev.data.action === "enable") {
           isEnabled = response.data?.enabled;
         }
         window.postMessage(

@@ -112,7 +112,7 @@ export default class WebLNProvider {
         {
           application: "LBE",
           prompt: true,
-          action: `webln/${action}`,
+          action: `${action}`,
           args,
         },
         "*" // TODO use origin

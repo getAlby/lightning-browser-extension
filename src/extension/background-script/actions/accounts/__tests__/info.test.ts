@@ -31,7 +31,7 @@ describe("account info", () => {
       application: "LBE",
       origin: { internal: true },
       prompt: true,
-      type: "accountInfo",
+      action: "accountInfo",
     };
 
     state.getState = jest.fn().mockReturnValue(mockState);
