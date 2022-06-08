@@ -34,7 +34,7 @@ interface BrowserStorage {
 export const DEFAULT_SETTINGS: SettingsStorage = {
   websiteEnhancements: true,
   legacyLnurlAuth: false,
-  legacyLnurlAuthKey: false,
+  isUsingLegacyLnurlAuthKey: true,
   userName: "",
   userEmail: "",
   locale: i18n.resolvedLanguage,

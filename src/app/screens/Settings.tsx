@@ -37,7 +37,7 @@ function Settings() {
   const [settings, setSettings] = useState<SettingsStorage>({
     websiteEnhancements: false,
     legacyLnurlAuth: false,
-    legacyLnurlAuthKey: false,
+    isUsingLegacyLnurlAuthKey: false,
     userName: "",
     userEmail: "",
     locale: "",
@@ -120,10 +120,10 @@ function Settings() {
         >
           {!loading && (
             <Toggle
-              checked={settings.legacyLnurlAuthKey}
+              checked={settings.isUsingLegacyLnurlAuthKey}
               onChange={() => {
                 saveSetting({
-                  legacyLnurlAuthKey: !settings.legacyLnurlAuthKey,
+                  legacyLnurlAuthKey: !settings.isUsingLegacyLnurlAuthKey,
                 });
               }}
             />
