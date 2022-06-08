@@ -111,7 +111,7 @@ const Layout = () => {
             ? `${auth.account?.name} - ${auth.account?.alias}`.substring(0, 21)
             : ""
         }
-        subtitle={balances}
+        balances={balances}
       >
         <Navbar.Link href="/publishers">Websites</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>

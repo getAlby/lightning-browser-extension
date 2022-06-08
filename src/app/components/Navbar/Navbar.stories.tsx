@@ -23,14 +23,14 @@ export default metadata;
 export const Default = () => (
   <Navbar
     title="John Doe"
-    subtitle={{ satsBalance: "1000 sats", fiatBalance: "$0.10" }}
+    balances={{ satsBalance: "1000 sats", fiatBalance: "$0.10" }}
   />
 );
 
 export const WithLinks = () => (
   <Navbar
     title="John Doe"
-    subtitle={{ satsBalance: "1000 sats", fiatBalance: "$0.10" }}
+    balances={{ satsBalance: "1000 sats", fiatBalance: "$0.10" }}
   >
     <Navbar.Link href="/">Screen 1</Navbar.Link>
     <Navbar.Link href="/screen-2">Screen 2</Navbar.Link>
@@ -39,5 +39,5 @@ export const WithLinks = () => (
 );
 
 export const Loading = () => (
-  <Navbar title="" subtitle={{ satsBalance: "", fiatBalance: "" }} />
+  <Navbar title="" balances={{ satsBalance: "", fiatBalance: "" }} />
 );

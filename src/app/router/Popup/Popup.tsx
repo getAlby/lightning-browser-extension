@@ -68,7 +68,7 @@ const Layout = () => {
             ? `${auth.account?.name} - ${auth.account?.alias}`.substring(0, 21)
             : ""
         }
-        subtitle={balances}
+        balances={balances}
       />
 
       <main className="flex flex-col grow min-h-0">

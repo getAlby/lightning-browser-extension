@@ -16,14 +16,14 @@ import Menu from "../Menu";
 
 export type Props = {
   title: string;
-  subtitle: {
+  balances: {
     satsBalance: string | null;
     fiatBalance: string | null;
   };
   showOptions?: boolean;
 };
 
-function AccountMenu({ title, subtitle, showOptions = true }: Props) {
+function AccountMenu({ title, balances, showOptions = true }: Props) {
   const auth = useAuth();
   const navigate = useNavigate();
   const { accounts, getAccounts } = useAccounts();
@@ -62,17 +62,17 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
       </p>
 
       <div
-        className={`flex-auto mx-2 py-1 ${!title && !subtitle ? "w-28" : ""}`}
+        className={`flex-auto mx-2 py-1 ${!title && !balances ? "w-28" : ""}`}
       >
         <p className="text-xs text-gray-700 dark:text-neutral-400">
           {title || <Skeleton />}
         </p>
         <p className="flex justify-between">
           <span className="text-xs dark:text-white">
-            {subtitle.satsBalance || <Skeleton />}
+            {balances.satsBalance || <Skeleton />}
           </span>
           <span className="text-xs text-gray-600">
-            {subtitle.fiatBalance || <Skeleton />}
+            {balances.fiatBalance || <Skeleton />}
           </span>
         </p>
       </div>

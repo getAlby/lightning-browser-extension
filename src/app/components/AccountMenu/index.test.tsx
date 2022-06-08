@@ -10,7 +10,7 @@ import AccountMenu from ".";
 
 const defaultProps = {
   title: "node",
-  subtitle: { satsBalance: "1000 sats", fiatBalance: "$0.10" },
+  balances: { satsBalance: "1000 sats", fiatBalance: "$0.10" },
 };
 
 const mockAccounts: Accounts = {

@@ -185,7 +185,7 @@ const Layout = () => {
               : ""
           }
           showOptions={false}
-          subtitle={balances}
+          balances={balances}
         />
       </div>
 
