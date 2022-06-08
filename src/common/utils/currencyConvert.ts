@@ -1,3 +1,6 @@
+/**
+ * Highly inspired by: https://github.com/AryanJ-NYC/bitcoin-conversion
+ */
 import axios from "axios";
 import currencyJs from "currency.js";
 import {

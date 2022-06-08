@@ -219,33 +219,6 @@ function Receive() {
                   />
                 </div>
 
-                {/*
-                // DO WE NEED THIS?
-                <div className="mb-5">
-                  <label htmlFor="expiration" className="block font-medium text-gray-700">
-                    Expiration
-                  </label>
-                  <div className="mt-1">
-                    <Select
-                      name="expiration"
-                      id="expiration"
-                      value={formData.expiration}
-                      onChange={handleChange}
-                    >
-                      <option key="60" value="60">
-                        1 hour
-                      </option>
-                      <option key="120" value="120">
-                        2 hours
-                      </option>
-                      <option key="180" value="180">
-                        3 hours
-                      </option>
-                    </Select>
-                  </div>
-                </div>
-                */}
-
                 <div className="text-center mb-4">
                   <div className="mb-4">
                     <Button

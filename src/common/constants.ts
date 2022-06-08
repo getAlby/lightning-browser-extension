@@ -1,3 +1,8 @@
+// Eventually this file might become too large
+// Could be split up into i.e.
+// constants/messages
+// constants/[...etc]
+
 export const ABORT_PROMPT_ERROR = "Prompt was closed";
 export const USER_REJECTED_ERROR = "User rejected";
 export const CURRENCIES = [
