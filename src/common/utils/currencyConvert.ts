@@ -54,7 +54,6 @@ const getFiatBtcRate = async (
 
   let response;
 
-  // FYI: YAD.IO is i.e. not supporting "ISK", maybe more?
   if (exchange === "Yad.io") {
     response = await axios.get(
       `https://api.yadio.io/exrates/${currency.toLowerCase()}`
