@@ -4,13 +4,7 @@ import browser from "webextension-polyfill";
 import createState from "zustand";
 import { decryptData } from "~/common/lib/crypto";
 import i18n from "~/i18n/i18nConfig";
-import type {
-  Account,
-  Accounts,
-  SettingsStorage,
-  SupportedCurrencies,
-  SupportedExchanges,
-} from "~/types";
+import type { Account, Accounts, SettingsStorage } from "~/types";
 
 import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
@@ -43,8 +37,8 @@ export const DEFAULT_SETTINGS: SettingsStorage = {
   userEmail: "",
   locale: i18n.resolvedLanguage,
   theme: "system",
-  currency: "USD" as SupportedCurrencies,
-  exchange: "Coindesk" as SupportedExchanges,
+  currency: "USD",
+  exchange: "Coindesk",
 };
 
 // these keys get synced from the state to the browser storage
