@@ -32,7 +32,7 @@ const message: MessageAccountDelete = {
   args: { id: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e" },
   origin: { internal: true },
   prompt: true,
-  type: "deleteAccount",
+  action: "deleteAccount",
 };
 
 describe("delete account", () => {

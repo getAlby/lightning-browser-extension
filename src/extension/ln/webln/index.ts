@@ -100,9 +100,9 @@ export default class WebLNProvider {
     return this.execute("verifyMessage", { signature, message });
   }
 
-  // NOTE: new call `type`s must be specified also in the content script
+  // NOTE: new call `action`s must be specified also in the content script
   execute(
-    type: string,
+    action: string,
     args?: Record<string, unknown>
   ): Promise<Record<string, unknown>> {
     return new Promise((resolve, reject) => {
@@ -112,8 +112,7 @@ export default class WebLNProvider {
         {
           application: "LBE",
           prompt: true,
-          //action: `webln/${type}`, // TODO: think about a convention to call the actions
-          type: `${type}`,
+          action: `webln/${action}`,
           args,
         },
         "*" // TODO use origin

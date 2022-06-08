@@ -74,7 +74,7 @@ export interface Message {
   args: Record<string, unknown>;
   origin: OriginData | OriginDataInternal;
   prompt?: boolean;
-  type?: string;
+  action?: string;
 }
 
 // new message  type, please use this
@@ -86,18 +86,18 @@ export interface MessageDefault {
 
 export interface MessageAccountDelete extends MessageDefault {
   args: { id: Account["id"] };
-  type: "deleteAccount";
+  action: "deleteAccount";
 }
 export interface MessageAccountAdd extends MessageDefault {
   args: Omit<Account, "id">;
-  type: "addAccount";
+  action: "addAccount";
 }
 export interface MessageAccountEdit extends MessageDefault {
   args: {
     id: Account["id"];
     name: Account["name"];
   };
-  type: "editAccount";
+  action: "editAccount";
 }
 
 export interface MessageAccountInfo extends Omit<MessageDefault, "args"> {
