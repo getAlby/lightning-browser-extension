@@ -105,7 +105,7 @@ export interface MessageAccountInfo extends Omit<MessageDefault, "args"> {
 }
 
 export interface MessageAccountAll extends Omit<MessageDefault, "args"> {
-  type: "getAccounts";
+  action: "getAccounts";
 }
 interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
