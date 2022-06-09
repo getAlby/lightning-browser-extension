@@ -4,11 +4,15 @@ import getOriginData from "../originData";
 import setLightningData from "../setLightningData";
 
 const urlMatcher = /^https:\/\/github.com\/([^/]+)(\/([^/]+))?$/;
+const validationRegex = /^[a-z0-9_.-]+$/i;
 
 const battery = async (): Promise<void> => {
   const urlParts = document.location.pathname.split("/");
   const username = urlParts[1];
   const repo = urlParts[2];
+
+  if (username && !validationRegex.test(username)) return; // invalid username
+  if (username && repo && !validationRegex.test(repo)) return; // invalid repo
 
   let lightningData = null;
 
