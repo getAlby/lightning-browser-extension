@@ -1,3 +1,5 @@
+import { Battery } from "~/types";
+
 import getOriginData from "../originData";
 import setLightningData from "../setLightningData";
 
@@ -8,39 +10,46 @@ const battery = async (): Promise<void> => {
   const username = urlParts[1];
   const repo = urlParts[2];
 
-  let found = false;
+  let lightningData = null;
 
+  // Search lightning data in the repository if the current page is a repository page
   if (username && repo) {
-    found = await handleRepositoryPage(username, repo);
+    lightningData = await getLightningDataFromRepository(username, repo);
   }
 
-  if (!found && username) {
-    await handleProfilePage(username);
+  // Search lightning data in the user profile if the current page is a profile page
+  // or if the current page is a repository page but the lightning data is not set at repository level
+  if (!lightningData && username) {
+    lightningData = await getLightningDataFromProfile(username);
   }
+
+  if (lightningData) setLightningData([lightningData]);
 };
 
-function parseText(text: string) {
+function findLightningAddressInText(text: string) {
   const match = text.match(/(⚡:?|lightning:|lnurl:)\s?(\S+@\S+)/i);
   if (match) return match[2];
 }
 
-async function handleProfilePage(username: string): Promise<boolean> {
+async function getLightningDataFromProfile(
+  username: string
+): Promise<Battery | null> {
   const userProfile = await fetch(
     // fetch user data
     `https://api.github.com/users/${username}`
   ).then((res) => res.json());
 
-  if (!userProfile || !userProfile.login) return false; // not an user profile
+  if (!userProfile || !userProfile.login) return null; // not an user profile
 
   let address = null;
 
   if (userProfile.bio) {
-    // load from bio
-    address = parseText(userProfile.bio);
+    // search in bio
+    address = findLightningAddressInText(userProfile.bio);
   }
 
   if (!address) {
-    // load from profile's readme
+    // search in profile's readme
     const userRepoReadmeData = await fetch(
       `https://api.github.com/repos/${username}/${username}/readme`
     ).then((res) => res.json());
@@ -49,43 +58,42 @@ async function handleProfilePage(username: string): Promise<boolean> {
       const userRepoReadmeContent = await fetch(
         userRepoReadmeData.download_url
       ).then((res) => res.text());
-      address = parseText(userRepoReadmeContent);
+      address = findLightningAddressInText(userRepoReadmeContent);
     }
   }
 
-  if (!address) return false; // address was not found
+  if (!address) return null; // address was not found
 
-  setLightningData([
-    {
-      method: "lnurl",
-      recipient: address,
-      ...getOriginData(),
-      description: userProfile.bio ?? "",
-      name: userProfile.name,
-      icon: userProfile.avatar_url ?? "",
-    },
-  ]);
-
-  return true;
+  return {
+    method: "lnurl",
+    recipient: address,
+    ...getOriginData(),
+    description: userProfile.bio ?? "",
+    name: userProfile.name,
+    icon: userProfile.avatar_url ?? "",
+  };
 }
 
-async function handleRepositoryPage(
+async function getLightningDataFromRepository(
   owner: string,
   repo: string
-): Promise<boolean> {
+): Promise<Battery | null> {
   const repoData = await fetch(
+    // fetch repo data
     `https://api.github.com/repos/${owner}/${repo}`
   ).then((res) => res.json());
 
-  if (!repoData || !repoData.id) return false; // not a repo
+  if (!repoData || !repoData.id) return null; // not a repo
 
   let address = null;
 
   if (repoData.description) {
-    address = parseText(repoData.description);
+    // search in description
+    address = findLightningAddressInText(repoData.description);
   }
 
   if (!address) {
+    // searcg in readme
     const repoReadmeData = await fetch(
       `https://api.github.com/repos/${owner}/${repo}/readme`
     ).then((res) => res.json());
@@ -94,24 +102,20 @@ async function handleRepositoryPage(
       const repoReadmeDataContent = await fetch(
         repoReadmeData.download_url
       ).then((res) => res.text());
-      address = parseText(repoReadmeDataContent);
+      address = findLightningAddressInText(repoReadmeDataContent);
     }
   }
 
-  if (!address) return false; // address was not found
+  if (!address) return null; // address was not found
 
-  setLightningData([
-    {
-      method: "lnurl",
-      recipient: address,
-      ...getOriginData(),
-      description: repoData.description,
-      name: repoData.full_name,
-      icon: "",
-    },
-  ]);
-
-  return true;
+  return {
+    method: "lnurl",
+    recipient: address,
+    ...getOriginData(),
+    description: repoData.description,
+    name: repoData.full_name,
+    icon: "",
+  };
 }
 
 const GitHubProfile = {
