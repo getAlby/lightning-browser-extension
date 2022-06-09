@@ -1,9 +1,12 @@
 import {
+  CaretLeftIcon,
   SendIcon,
   ReceiveIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import AllowanceMenu from "@components/AllowanceMenu";
 import Button from "@components/Button";
+import Header from "@components/Header";
+import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
 import Progressbar from "@components/Progressbar";
 import PublisherCard from "@components/PublisherCard";
@@ -286,6 +289,17 @@ function Home() {
 
   return (
     <div>
+      {allowance && (
+        <Header
+          title={allowance.host}
+          headerLeft={
+            <IconButton
+              onClick={() => setAllowance(null)}
+              icon={<CaretLeftIcon className="w-4 h-4" />}
+            />
+          }
+        />
+      )}
       {renderPublisherCard()}
       {allowance ? renderAllowanceView() : renderDefaultView()}
     </div>
