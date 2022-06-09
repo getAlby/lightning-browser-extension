@@ -69,7 +69,7 @@ async function getLightningDataFromProfile(
     recipient: address,
     ...getOriginData(),
     description: userProfile.bio ?? "",
-    name: userProfile.name,
+    name: userProfile.name ?? userProfile.login,
     icon: userProfile.avatar_url ?? "",
   };
 }
