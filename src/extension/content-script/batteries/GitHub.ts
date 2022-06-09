@@ -17,7 +17,7 @@ const battery = async (): Promise<void> => {
     lightningData = await getLightningDataFromRepository(username, repo);
   }
 
-  // Search lightning data in the user profile if the current page is a profile page
+  // Search lightning data in the user profile or organization profile if the current page is a profile page
   // or if the current page is a repository page but the lightning data is not set at repository level
   if (!lightningData && username) {
     lightningData = await getLightningDataFromProfile(username);
