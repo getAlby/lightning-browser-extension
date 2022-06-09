@@ -42,7 +42,7 @@ describe("account all", () => {
       application: "LBE",
       origin: { internal: true },
       prompt: true,
-      type: "getAccounts",
+      action: "getAccounts",
     };
 
     state.getState = jest.fn().mockReturnValue(mockState);
