@@ -3,6 +3,7 @@
  */
 import axios from "axios";
 import currencyJs from "currency.js";
+import debounce from "lodash/debounce";
 import { getSettings } from "~/common/lib/api";
 import { SupportedCurrencies } from "~/types";
 
@@ -36,6 +37,7 @@ export const getBalances = async (balance: number) => {
 const getFiatBtcRate = async (
   currency: SupportedCurrencies
 ): Promise<string> => {
+  console.log("getFiatBtcRate", currency);
   const { exchange } = await settings();
 
   let response;
@@ -56,6 +58,7 @@ const getFiatBtcRate = async (
   );
 
   const data = await response?.data;
+  console.log("DATA", data);
 
   return currencyJs(data.bpi[currency].rate, {
     separator: "",
@@ -63,11 +66,28 @@ const getFiatBtcRate = async (
   }).format();
 };
 
+// https://github.com/lodash/lodash/issues/4400#issuecomment-834800398
+const debouncedGetFiatBtcRate = debounce(
+  async function (callback) {
+    return await callback();
+  },
+  60000,
+  {
+    leading: true,
+    trailing: false,
+  }
+);
+
 const bitcoinToFiat = async (
   amountInBtc: number | string,
   convertTo: SupportedCurrencies
 ) => {
-  const rate = await getFiatBtcRate(convertTo);
+  console.log("bitcoinToFiat");
+
+  const rate = await debouncedGetFiatBtcRate(() => getFiatBtcRate(convertTo));
+
+  console.log("bitcoinToFiat - rate", rate);
+
   return Number(amountInBtc) * Number(rate);
 };
 
