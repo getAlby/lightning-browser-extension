@@ -386,7 +386,7 @@ function LNURLPay(props: Props) {
                         max={+details.maxSendable / 1000}
                         value={valueSat}
                         onChange={(e) => setValueSat(e.target.value)}
-                        secondaryValue={fiatValue}
+                        fiatValue={fiatValue}
                       />
                       <SatButtons onClick={setValueSat} />
                     </div>

@@ -4,13 +4,13 @@ import { classNames } from "~/app/utils";
 export type Props = {
   suffix?: string;
   endAdornment?: React.ReactNode;
-  secondaryValue: string | number;
+  fiatValue: string | number;
   label: string;
 };
 
 export default function DualCurrencyField({
   label,
-  secondaryValue,
+  fiatValue,
   id,
   placeholder,
   required = false,
@@ -78,7 +78,7 @@ export default function DualCurrencyField({
         {inputNode}
 
         <p className="helper text-xs text-gray-600 absolute z-1 top-0 left-0 font-semibold pointer-events-none translate-x-4 translate-y-10">
-          ~{secondaryValue}
+          ~{fiatValue}
         </p>
 
         {suffix && (

@@ -51,7 +51,7 @@ function BudgetControl({
         </p>
         <div>
           <DualCurrencyField
-            secondaryValue={fiatAmount}
+            fiatValue={fiatAmount}
             id="budget"
             label="Budget"
             placeholder="sats"

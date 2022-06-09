@@ -5,7 +5,7 @@ import type { Props } from "./index";
 import DualCurrencyField from "./index";
 
 const props: Props = {
-  secondaryValue: 1000,
+  fiatValue: 1000,
   label: "Amount",
 };
 
