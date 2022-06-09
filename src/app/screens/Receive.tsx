@@ -205,7 +205,6 @@ function Receive() {
                     label="Amount"
                     placeholder="Amount in Satoshi..."
                     secondaryValue={fiatAmount}
-                    type="number"
                     onChange={handleChange}
                   />
                 </div>

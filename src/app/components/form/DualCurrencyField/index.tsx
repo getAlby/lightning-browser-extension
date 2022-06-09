@@ -13,7 +13,6 @@ export default function DualCurrencyField({
   secondaryValue,
   id,
   placeholder,
-  type = "text",
   required = false,
   pattern,
   title,
@@ -36,10 +35,11 @@ export default function DualCurrencyField({
   const inputNode = (
     <input
       ref={inputEl}
-      type={type}
+      type="number"
       name={id}
       id={id}
       className={classNames(
+        "dual-currency-field",
         "block w-full placeholder-gray-500 dark:placeholder-gray-600 dark:text-white ",
         "pr-0 border-0 focus:ring-0 bg-transparent"
       )}
@@ -60,7 +60,7 @@ export default function DualCurrencyField({
   );
 
   return (
-    <div id="numberInput" className="relative block m-0">
+    <div className="relative block m-0">
       <label
         htmlFor={id}
         className="block font-medium text-gray-800 dark:text-white"

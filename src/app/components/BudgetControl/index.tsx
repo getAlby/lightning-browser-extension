@@ -56,7 +56,6 @@ function BudgetControl({
             label="Budget"
             placeholder="sats"
             value={budget}
-            type="number"
             onChange={onBudgetChange}
           />
         </div>
