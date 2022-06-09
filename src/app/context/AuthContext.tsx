@@ -37,10 +37,10 @@ const AuthContext = createContext({} as AuthContextType);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [account, setAccount] = useState<AuthContextType["account"]>(null);
   const [loading, setLoading] = useState(true);
-  const [balancesDecorated, setBalancesDecorated] = useState<{
-    fiatBalance: string;
-    satsBalance: string;
-  }>({ fiatBalance: "", satsBalance: "" });
+  const [balancesDecorated, setBalancesDecorated] = useState({
+    fiatBalance: "",
+    satsBalance: "",
+  });
 
   const unlock = (password: string, callback: VoidFunction) => {
     return api.unlock(password).then((response) => {

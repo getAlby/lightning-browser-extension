@@ -142,10 +142,10 @@ function Settings() {
               <Select
                 name="currency"
                 value={settings.currency}
-                onChange={async (eventent) => {
+                onChange={async (event) => {
                   fetchAccountInfo();
                   await saveSetting({
-                    currency: eventent.target.value,
+                    currency: event.target.value,
                   });
                 }}
               >

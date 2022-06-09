@@ -17,8 +17,8 @@ import Menu from "../Menu";
 export type Props = {
   title: string;
   balances: {
-    satsBalance: string | null;
-    fiatBalance: string | null;
+    satsBalance: string;
+    fiatBalance: string;
   };
   showOptions?: boolean;
 };
