@@ -66,6 +66,9 @@ const getFiatBtcRate = async (
   }).format();
 };
 
+// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/1021
+// Replace decounce by saving rate to app-cache and only get it every minute for the whole app
+//
 // https://github.com/lodash/lodash/issues/4400#issuecomment-834800398
 const debouncedGetFiatBtcRate = debounce(
   async function (callback) {

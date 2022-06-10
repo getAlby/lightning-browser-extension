@@ -53,9 +53,6 @@ function Receive() {
 
   useEffect(() => {
     if (formData.amount !== "") {
-      // TODO: use debounce?
-      // we do not need this on every keypress
-      // https://stackoverflow.com/questions/60787396/react-debounce-with-useeffect
       (async () => {
         const res = await getFiatValue(formData.amount);
         setFiatAmount(res);
