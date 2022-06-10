@@ -3,7 +3,7 @@ import { Battery } from "~/types";
 import getOriginData from "../originData";
 import setLightningData from "../setLightningData";
 
-const urlMatcher = /^https:\/\/github.com\/([^/]+)(\/([^/]+))?$/;
+const urlMatcher = /^https:\/\/github.com\/([^/]+)(\/([^/]+))?.*$/;
 const validationRegex = /^[a-z0-9_.-]+$/i;
 
 const battery = async (): Promise<void> => {
