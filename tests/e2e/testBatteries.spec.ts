@@ -109,6 +109,15 @@ const Units = {
         startsWith:"https://yt3.ggpht.com/Tc6PqXPoqlh2zFZH0Qzwo8i50ygq"
       }
     }
+  },
+  "monetization":{
+    url:"https://getalby.com/",
+    output:{
+      recipient:'hello@getalby.com',
+      name:"Alby",
+      description:"Alby brings Bitcoin to the web with in-browser payments and identity.",
+      icon:"https://getalby.com/website/_assets/alby_icon_head_icon-ICVYH45J.png"
+    }
   }
 }
 
