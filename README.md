@@ -263,6 +263,13 @@ Yes. Thanks to generous donors, Alby is able to offer several bounties. You can 
 Based on the web extension starter kit: [/abhijithvijayan/web-extension-starter](https://github.com/abhijithvijayan/web-extension-starter)
 heavily inspired by the super-amazing work of the [Joule extension](https://lightningjoule.com/)
 
+## ⚡️Donations
+
+Want to support the work on Alby?
+
+Support the Alby team ⚡️hello@getalby.com  
+You can also contribute to our [bounty program](https://github.com/getAlby/lightning-browser-extension/wiki/Bounties): ⚡️bounties@getalby.com
+
 ## License
 
 MIT
