@@ -33,8 +33,7 @@ if (shouldInject()) {
     }
   });
 
-  let debug = true; // FIXME
-  if (debug) {
+  if (process.env.NODE_ENV == "development") {
     window.addEventListener(
       "message",
       async (ev) => {

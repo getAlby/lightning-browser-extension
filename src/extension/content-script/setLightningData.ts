@@ -3,8 +3,7 @@ import utils from "~/common/lib/utils";
 import { Battery } from "~/types";
 
 const setLightningData = (data: [Battery]): void => {
-  const debug = true; // FIXME
-  if (debug) {
+  if (process.env.NODE_ENV == "development") {
     window.postMessage({
       application: "e2e",
       lightningData: data,
