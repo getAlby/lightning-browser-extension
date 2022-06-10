@@ -1,6 +1,7 @@
 import api from "~/common/lib/api";
 
 import GitHub from "./GitHub";
+import Instagram from "./Instagram";
 import Medium from "./Medium";
 import Monetization from "./Monetization";
 import Peertube from "./Peertube";
@@ -23,6 +24,7 @@ const enhancements = [
   Medium,
   GitHub,
   Twitch,
+  Instagram,
 
   // Monetization must likely always be the last one as this is the fallback option if no specific enhancement matched
   Monetization,
