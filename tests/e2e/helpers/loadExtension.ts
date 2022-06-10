@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 
-const delay = async (time) => {
+export const delay = async (time) => {
   return new Promise(function (resolve) {
     setTimeout(resolve, time);
   });
