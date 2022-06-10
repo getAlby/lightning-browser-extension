@@ -109,7 +109,7 @@ async function testUnit(page, unit) {
   if (!unitData) throw "Unit " + unit + " not configured";
 
   console.log("Loading page",unitData.url);
-  
+
   await page.goto(unitData.url, {
     waitUntil: 'networkidle0',
   });
@@ -129,7 +129,7 @@ async function testUnit(page, unit) {
       if (lightningData[k] != v) throw "Invalid " + k + ". Got " + lightningData[k] + " but " + v + " was expected";
     }
   }
-
+  
 }
 
 const getLightningData = async (page): Promise<any> => {
@@ -149,6 +149,10 @@ const getLightningData = async (page): Promise<any> => {
 const loginToInstagram = async(page)=>{
   const userName=process.env.ALBY_E2E_INSTAGRAM_USERNAME;
   const password=process.env.ALBY_E2E_INSTAGRAM_PASSWORD;
+  if(!userName||!password) {
+    console.warn(`Missing environment variables: ALBY_E2E_INSTAGRAM_USERNAME  ALBY_E2E_INSTAGRAM_PASSWORD\nThe Instagram Battery test has been disabled for this run`);
+    return false;
+  }
 
   console.log("Prepare instagram login")
 
@@ -158,16 +162,6 @@ const loginToInstagram = async(page)=>{
 
   await page.waitForSelector('input[name="username"]');
   await clickButton(page, "Allow essential");
-
-  if(!userName||!password){
-    console.warn(`Instagram Battery Test
-    Missing environment variables: ALBY_E2E_INSTAGRAM_USERNAME , ALBY_E2E_INSTAGRAM_PASSWORD 
-    The test will proceed using an unathenticated session. 
-    Instagram limits unathenticated requests so you should set those variables as soon as possible.
-    `);
-    return;
-  }
-
 
 
   await delay(650);
@@ -186,6 +180,8 @@ const loginToInstagram = async(page)=>{
   await clickButton(page, "Log In");
   await delay(5000);
 
+  return true;
+
 }
 
 
@@ -195,7 +191,10 @@ test.describe("Test Batteries", () => {
     test(unitName, async () => {
       const { page, browser } = await loadExtension();
       if (unitName == "instagram") {
-        await loginToInstagram(page);
+        if(!await loginToInstagram(page)){
+          await page.close();
+          return;
+        }
       }
       await testUnit(page, unitName);
       await page.close();
