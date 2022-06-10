@@ -107,16 +107,17 @@ async function init() {
   //await browser.storage.sync.set({ settings: { debug: true }, allowances: [] });
   await state.getState().init();
   console.log("State loaded");
+
   await db.open();
+  console.log("DB opened");
 
   events.subscribe();
+  console.log("Events subscribed");
 
-  // initialize a connector for the current account
   browser.runtime.onMessage.addListener(debugLogger);
   // this is the only handler that may and must return a Promise which resolve with the response to the content script
   browser.runtime.onMessage.addListener(routeCalls);
 
-  // TODO: make optional
   browser.tabs.onUpdated.addListener(updateIcon); // update Icon when there is an allowance
 
   // Notify the content script that the tab has been updated.
@@ -131,12 +132,14 @@ async function init() {
       router,
     };
   }
+  console.log("Loading completed");
 }
 
 // The onInstalled event is fired directly after the code is loaded.
 // When we subscribe to that event asynchronously in the init() function it is too late and we miss the event.
 browser.runtime.onInstalled.addListener(handleInstalled);
 
+console.log("Welcome to Alby");
 init().then(() => {
   if (isFirstInstalled) {
     utils.openUrl("welcome.html");
