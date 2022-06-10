@@ -78,24 +78,63 @@ const Units = {
       description: "⚡rblb@getalby.com",
       icon: "https://pbs.twimg.com/profile_images/1308131707149746182/TxUCNiSC_200x200.jpg"
     }
+  },
+
+  "youtube-video":{
+    url:"https://www.youtube.com/watch?v=0DlhslNvNBs",
+    output: {
+      recipient: 'hello@getalby.com',
+      name: 'Alby - Send and Receive Bitcoin on the Web',
+      description: "You can use your Lightning address to receive sats on your website, your Twitter profile, on YouTube or Bitcoin TV. This video shows where you find detailed ...",
+      icon: {
+        startsWith:"https://yt3.ggpht.com/Tc6PqXPoqlh2zFZH0Qzwo"
+      }
+    }
+  },
+  "youtube-channel":{
+    url:"https://www.youtube.com/channel/UCIICdm6mox3VkCAv-yHMeMw",
+    cookieButtonSelector:{
+      innerText:"Accept all",
+      $:'button[aria-label="Accept all"]',
+      scrollDown:true,
+      waitNavigator:true
+    },
+    output: {
+      recipient: 'hello@getalby.com',
+      name: 'Alby - Send and Receive Bitcoin on the Web',
+      description: {
+        startsWith:"Alby’s mission is to provide the most convenient to use building blocks for bitcoin"
+      },
+      icon: {
+        startsWith:"https://yt3.ggpht.com/Tc6PqXPoqlh2zFZH0Qzwo8i50ygq"
+      }
+    }
   }
- 
 }
 
-async function clickButton(page, text) {
+async function clickButton(page, selectionData) {
+  const selector=typeof selectionData=="object"&&selectionData.$?selectionData.$:"button";
+  
   return new Promise<void>((rr) => {
     const findAndClickButton = async () => {
-      const buttons = await page.$$("button");
+      const buttons = await page.$$(selector);
       for (const button of buttons) {
         const buttonText = await page.evaluate(el => el.textContent, button);
-        if (buttonText.indexOf(text) != -1) {
-          console.log("Click", buttonText);
-          await button.click();
+        if (buttonText && selectionData.innerText && buttonText.indexOf(selectionData.innerText ) == -1) continue;
+        if(selectionData.scrollDown)await page.evaluate(()=>window.scrollBy(0, window.innerHeight));
+        await delay(100);
+        await button.click();
+        if(selectionData.waitNavigator){
+          await page.waitForNavigation({waitUntil: 'networkidle2'})
+        }else{
           await delay(100);
-          rr();
-          return;
         }
+
+        rr();
+        return;
       }
+      console.log("Looking for button ...", selectionData);
+
       setTimeout(() => findAndClickButton(), 1000);
     }
     setTimeout(() => findAndClickButton(), 1000);
@@ -114,6 +153,9 @@ async function testUnit(page, unit) {
     waitUntil: 'networkidle0',
   });
 
+  if(unitData.cookieButtonSelector){
+    await clickButton(page,unitData.cookieButtonSelector);
+  }
 
   const lightningData = (await getLightningData(page)??[])[0];
   console.info("Received lightning data", lightningData)
@@ -129,7 +171,7 @@ async function testUnit(page, unit) {
       if (lightningData[k] != v) throw "Invalid " + k + ". Got " + lightningData[k] + " but " + v + " was expected";
     }
   }
-  
+
 }
 
 const getLightningData = async (page): Promise<any> => {
