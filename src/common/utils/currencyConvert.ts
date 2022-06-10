@@ -18,26 +18,9 @@ const settings = async () => {
 
 const numSatsInBtc = 100_000_000;
 
-export const getBalances = async (balance: number) => {
-  const { currency } = await settings();
-  const fiatValue = await satoshisToFiat({
-    amountInSats: balance,
-    convertTo: currency,
-  });
-  const localeFiatValue = fiatValue.toLocaleString("en", {
-    style: "currency",
-    currency: currency,
-  });
-  return {
-    satsBalance: `${balance} sats`,
-    fiatBalance: localeFiatValue,
-  };
-};
-
 const getFiatBtcRate = async (
   currency: SupportedCurrencies
 ): Promise<string> => {
-  console.log("getFiatBtcRate", currency);
   const { exchange } = await settings();
 
   let response;
@@ -46,7 +29,9 @@ const getFiatBtcRate = async (
     response = await axios.get(
       `https://api.yadio.io/exrates/${currency.toLowerCase()}`
     );
+
     const data = await response?.data;
+
     return currencyJs(data.BTC, {
       separator: "",
       symbol: "",
@@ -58,7 +43,6 @@ const getFiatBtcRate = async (
   );
 
   const data = await response?.data;
-  console.log("DATA", data);
 
   return currencyJs(data.bpi[currency].rate, {
     separator: "",
@@ -85,11 +69,7 @@ const bitcoinToFiat = async (
   amountInBtc: number | string,
   convertTo: SupportedCurrencies
 ) => {
-  console.log("bitcoinToFiat");
-
   const rate = await debouncedGetFiatBtcRate(() => getFiatBtcRate(convertTo));
-
-  console.log("bitcoinToFiat - rate", rate);
 
   return Number(amountInBtc) * Number(rate);
 };
@@ -120,5 +100,23 @@ export const getFiatValue = async (amount: number | string) => {
     style: "currency",
     currency: currency,
   });
+
   return localeFiatValue;
+};
+
+export const getBalances = async (balance: number) => {
+  const { currency } = await settings();
+  const fiatValue = await satoshisToFiat({
+    amountInSats: balance,
+    convertTo: currency,
+  });
+  const localeFiatValue = fiatValue.toLocaleString("en", {
+    style: "currency",
+    currency: currency,
+  });
+
+  return {
+    satsBalance: `${balance} sats`,
+    fiatBalance: localeFiatValue,
+  };
 };
