@@ -241,7 +241,7 @@ const loginToInstagram = async(page)=>{
 test.describe("Test Batteries", () => {  
   for (const [unitName, unitData] of Object.entries(Units)) {
     test(unitName, async () => {
-      const { page, browser } = await loadExtension();
+      const { page, browser } = await loadExtension(false);
       if (unitName == "instagram") {
         if(!await loginToInstagram(page)){
           await page.close();

@@ -6,8 +6,9 @@ export const delay = async (time) => {
   });
 };
 
-export const loadExtension = async () => {
-  const extensionPath = process.env.CI
+export const loadExtension = async (production?) => {
+  if(typeof production=="undefined")production=process.env.CI;
+  const extensionPath = production
     ? "./dist/production/chrome"
     : "./dist/development/chrome";
 
