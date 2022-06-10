@@ -100,7 +100,7 @@ class DB extends Dexie {
       })
       .catch((e) => {
         console.log("Failed to load DB data from storage");
-        console.log(e);
+        console.error(e);
       });
   }
 }
