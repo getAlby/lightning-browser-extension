@@ -59,7 +59,7 @@ const Units = {
       icon: "https://avatars.githubusercontent.com/u/107254982?v=4"
     }
   },
-  
+
   "twitch": {
     url: "https://www.twitch.tv/rblb0/schedule", // TODO: changeme
     output: {
@@ -69,7 +69,7 @@ const Units = {
       icon: "https://static-cdn.jtvnw.net/user-default-pictures-uv/cdd517fe-def4-11e9-948e-784f43822e80-profile_image-300x300.png"
     }
   },
-  
+
   "twitter": {
     url: "https://twitter.com/rblb_/with_replies", // TODO: changeme
     output: {
@@ -80,43 +80,101 @@ const Units = {
     }
   },
 
-  "youtube-video":{
-    url:"https://www.youtube.com/watch?v=0DlhslNvNBs",
+  "youtube-video": {
+    url: "https://www.youtube.com/watch?v=0DlhslNvNBs",
     output: {
       recipient: 'hello@getalby.com',
       name: 'Alby - Send and Receive Bitcoin on the Web',
       description: "You can use your Lightning address to receive sats on your website, your Twitter profile, on YouTube or Bitcoin TV. This video shows where you find detailed ...",
-      icon: {
-        startsWith:"https://yt3.ggpht.com/Tc6PqXPoqlh2zFZH0Qzwo"
-      }
+      // don't check icon because it is lazy loaded
+      cookieButtonSelector: {
+        innerText: "Accept all",
+        $: 'button[aria-label="Accept all"]',
+        waitNavigator: true
+      },
     }
   },
-  "youtube-channel":{
-    url:"https://www.youtube.com/channel/UCIICdm6mox3VkCAv-yHMeMw",
-    cookieButtonSelector:{
-      innerText:"Accept all",
-      $:'button[aria-label="Accept all"]',
-      scrollDown:true,
-      waitNavigator:true
+  "youtube-channel": {
+    url: "https://www.youtube.com/channel/UCIICdm6mox3VkCAv-yHMeMw",
+    cookieButtonSelector: {
+      innerText: "Accept all",
+      $: 'button[aria-label="Accept all"]',
+      scrollDown: true,
+      waitNavigator: true
     },
     output: {
       recipient: 'hello@getalby.com',
       name: 'Alby - Send and Receive Bitcoin on the Web',
       description: {
-        startsWith:"Alby’s mission is to provide the most convenient to use building blocks for bitcoin"
+        startsWith: "Alby’s mission is to provide the most convenient to use building blocks for bitcoin"
       },
       icon: {
-        startsWith:"https://yt3.ggpht.com/Tc6PqXPoqlh2zFZH0Qzwo8i50ygq"
+        startsWith: "https://yt3.ggpht.com/Tc6PqXPoqlh2zFZH0Qzwo8i50ygq"
       }
     }
   },
-  "monetization":{
-    url:"https://getalby.com/",
-    output:{
-      recipient:'hello@getalby.com',
-      name:"Alby",
-      description:"Alby brings Bitcoin to the web with in-browser payments and identity.",
-      icon:"https://getalby.com/website/_assets/alby_icon_head_icon-ICVYH45J.png"
+  "monetization": {
+    url: "https://getalby.com/",
+    output: {
+      recipient: 'hello@getalby.com',
+      name: "Alby",
+      description: "Alby brings Bitcoin to the web with in-browser payments and identity.",
+      icon: "https://getalby.com/website/_assets/alby_icon_head_icon-ICVYH45J.png"
+    }
+  },
+  "reddit": {
+    url: "https://www.reddit.com/user/derbumi",
+    output: {
+      recipient: '️bumi@getalby.com',
+      name: "derbumi (u/derbumi) - Reddit",
+      description: "u/derbumi: ⚡️bumi@getalby.com",
+      icon: {
+        startsWith: "https://styles.redditmedia.com/t5_d43db/styles/profileIcon"
+      }
+    }
+  },
+  "vimeo-video": {
+    url: "https://vimeo.com/670055676",
+    output: {
+      recipient: '️pseudozach@lntxbot.com',
+      name: "pseudozach",
+      description: "I accept instant Bitcoin tips over Lightning with @getAlby ⚡️pseudozach@lntxbot.com  https://getalby.com",
+      icon: {
+        startsWith: "https://i.vimeocdn.com/portrait/"
+      }
+    }
+  },
+  "medium-post": {
+    url: "https://medium.com/@getalby-test/getalby-test-coinos-io-1502ee1cd33f",
+    output: {
+      recipient: "getalby-test@coinos.io",
+      name: "Name | Appears on Profile page and as your byline",
+      description: "Short bio: Some description of yourself but not too much space for any extra info laksdf jlaskf djlaksjdf lasjdf lkajsdlf kjasldkf | ⚡getalby-test@coinos.io",
+      icon: {
+        startsWith: "https://miro.medium.com/fit/"
+      }
+    }
+  },
+  "medium-author-page": {
+    url: "https://medium.com/@getalby-test",
+    output: {
+      recipient: "getalby-test@coinos.io",
+      name: "Name | Appears on Profile page and as your byline",
+      description: "Short bio: Some description of yourself but not too much space for any extra info laksdf jlaskf djlaksjdf lasjdf lkajsdlf kjasldkf | ⚡getalby-test@coinos.io",
+      icon: {
+        startsWith: "https://miro.medium.com/fit/"
+      }
+    }
+  },
+  "medium-author-about-page": {
+    url: "https://medium.com/@getalby-test/about",
+    output: {
+      recipient: "getalby-test@coinos.io",
+      name: "Name | Appears on Profile page and as your byline",
+      description: "Short bio: Some description of yourself but not too much space for any extra info laksdf jlaskf djlaksjdf lasjdf lkajsdlf kjasldkf | ⚡getalby-test@coinos.io",
+      icon: {
+        startsWith: "https://miro.medium.com/fit/"
+      }
     }
   }
 }
@@ -158,10 +216,15 @@ async function testUnit(page, unit) {
   if (!unitData) throw "Unit " + unit + " not configured";
 
   console.log("Loading page",unitData.url);
+  
+
 
   await page.goto(unitData.url, {
-    waitUntil: 'networkidle0',
+    waitUntil: 'networkidle2',
   });
+
+  await delay(1000);
+
 
   if(unitData.cookieButtonSelector){
     await clickButton(page,unitData.cookieButtonSelector);
