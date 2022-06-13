@@ -62,7 +62,7 @@ const router = (path: FixMe) => {
   }, routes);
 
   if (!route) {
-    console.log(`Route not found: ${path}`);
+    console.warn(`Route not found: ${path}`);
     // return a function to keep the expected method signature
     return () => {
       return Promise.reject({ error: `${path} not found}` });

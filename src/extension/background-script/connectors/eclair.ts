@@ -192,7 +192,7 @@ class Eclair implements Connector {
       } catch (err) {
         throw new Error(res.statusText);
       }
-      console.log("eclair error", errBody.error);
+      console.error("eclair error", errBody.error);
       throw new Error(errBody.error);
     }
 

@@ -25,7 +25,7 @@ const signMessage = async (message: Message) => {
     });
     return response;
   } catch (e) {
-    console.log(e);
+    console.error(e);
     if (e instanceof Error) {
       PubSub.publish(`ln.signMessage.failed`, {
         error: e.message,

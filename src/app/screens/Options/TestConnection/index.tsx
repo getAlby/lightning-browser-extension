@@ -48,7 +48,7 @@ export default function TestConnection() {
       }
       getAccounts();
     } catch (e) {
-      console.log(e);
+      console.error(e);
       if (e instanceof Error) {
         setErrorMessage(e.message);
       }

@@ -45,7 +45,7 @@ async function keysendWithPrompt(message: Message) {
     });
     return response;
   } catch (e) {
-    console.log("Payment cancelled", e);
+    console.error("Payment cancelled", e);
     if (e instanceof Error) {
       return { error: e.message };
     }

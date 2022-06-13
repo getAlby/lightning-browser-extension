@@ -211,7 +211,7 @@ class LnBits implements Connector {
     });
     if (!res.ok) {
       const errBody = await res.json();
-      console.log("errBody", errBody);
+      console.error("errBody", errBody);
       throw new Error(errBody.detail);
     }
     let data = await res.json();
