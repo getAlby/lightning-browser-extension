@@ -28,11 +28,6 @@ export default function TestConnection() {
     setLoading(true);
     try {
       const response = await api.getAccountInfo();
-
-      if ("error" in response) {
-        throw new Error(response.error);
-      }
-
       const name = response.name;
       const { alias } = response.info;
       const { balance: resBalance } = response.balance;
