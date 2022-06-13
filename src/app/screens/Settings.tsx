@@ -1,24 +1,43 @@
+import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
 import Setting from "@components/Setting";
 import Input from "@components/form/Input";
 import Select from "@components/form/Select";
+import TextField from "@components/form/TextField";
 import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
+import type { FormEvent } from "react";
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { getTheme } from "~/app/utils";
 import { CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
+import utils from "~/common/lib/utils";
 import { SettingsStorage } from "~/types";
+
+const initialFormData = {
+  newPassword: "",
+  passwordConfirmation: "",
+};
+
+const initialErrors = {
+  newPassword: "",
+  passwordConfirmation: "",
+};
 
 function Settings() {
   const { fetchAccountInfo } = useAccount();
 
   const [loading, setLoading] = useState(true);
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [formData, setFormData] = useState(initialFormData);
+  const [errors, setErrors] = useState(initialErrors);
   const [settings, setSettings] = useState<SettingsStorage>({
     websiteEnhancements: false,
     legacyLnurlAuth: false,
@@ -33,6 +52,53 @@ function Settings() {
 
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
+  const { t } = useTranslation("translation", {
+    keyPrefix: "welcome.set_password",
+  });
+
+  function closeModal() {
+    setModalIsOpen(false);
+  }
+
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value.trim(),
+    });
+
+    if (event.target.name === "password" && errors.newPassword) {
+      setErrors({ ...errors, newPassword: "" });
+    } else if (
+      event.target.name === "passwordConfirmation" &&
+      errors.passwordConfirmation &&
+      formData.newPassword === event.target.value.trim()
+    ) {
+      setErrors({ ...errors, passwordConfirmation: "" });
+    }
+  }
+
+  function validate() {
+    let newPassword = "";
+    let passwordConfirmation = "";
+
+    if (!formData.newPassword) newPassword = t("enter_password");
+    if (!formData.passwordConfirmation) {
+      passwordConfirmation = t("confirm_password");
+    } else if (formData.newPassword !== formData.passwordConfirmation) {
+      passwordConfirmation = t("mismatched_password");
+    }
+    setErrors({
+      newPassword,
+      passwordConfirmation,
+    });
+  }
+
+  async function updateAccountPassword(password: string) {
+    await utils.call("changePassword", {
+      password: formData.newPassword,
+    });
+    closeModal();
+  }
 
   async function saveSetting(
     setting: Record<string, string | number | boolean>
@@ -195,7 +261,7 @@ function Settings() {
         prompted before this data is sent along with a payment.
       </p>
 
-      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+      <div className="mb-12 shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting title="Name" subtitle="">
           {!loading && (
             <div className="w-64">
@@ -229,6 +295,90 @@ function Settings() {
             </div>
           )}
         </Setting>
+        <Setting title="Change Password" subtitle="">
+          {!loading && (
+            <div className="w-64">
+              <Button
+                onClick={() => {
+                  setModalIsOpen(true);
+                }}
+                label="Change Password"
+                primary
+                fullWidth
+                loading={loading}
+                disabled={loading}
+              />
+            </div>
+          )}
+        </Setting>
+
+        <Modal
+          closeTimeoutMS={200}
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          contentLabel="Edit account name"
+          overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
+          className="rounded-lg bg-white w-full max-w-lg"
+        >
+          <div className="p-5 flex justify-between dark:bg-surface-02dp">
+            <h2 className="text-2xl font-bold dark:text-white">
+              Change Password
+            </h2>
+            <button onClick={closeModal}>
+              <CrossIcon className="w-6 h-6 dark:text-white" />
+            </button>
+          </div>
+
+          <form
+            onSubmit={(e: FormEvent) => {
+              e.preventDefault();
+              updateAccountPassword(formData.newPassword);
+            }}
+          >
+            <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
+              <div className="w-full mb-6">
+                <TextField
+                  autoFocus
+                  id="newPassword"
+                  label={t("choose_password_label")}
+                  type="password"
+                  required
+                  onChange={handleChange}
+                />
+                {errors.newPassword && (
+                  <div className="mt-1 text-red-500">{errors.newPassword}</div>
+                )}
+              </div>
+              <div className="w-full">
+                <TextField
+                  id="passwordConfirmation"
+                  label={t("confirm_password_label")}
+                  type="password"
+                  required
+                  onChange={handleChange}
+                  onBlur={validate}
+                />
+                {errors.passwordConfirmation && (
+                  <div className="mt-1 text-red-500">
+                    {errors.passwordConfirmation}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="flex justify-end p-5 dark:bg-surface-02dp">
+              <Button
+                label="Change"
+                type="submit"
+                primary
+                disabled={
+                  !formData.newPassword ||
+                  formData.newPassword !== formData.passwordConfirmation
+                }
+              />
+            </div>
+          </form>
+        </Modal>
       </div>
     </Container>
   );
