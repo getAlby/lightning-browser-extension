@@ -171,6 +171,50 @@ test.describe("Create or connect wallets", () => {
     await commonCreateWalletSuccessCheck({ browser, welcomePage, $document });
   });
 
+  test("successfully connects to myNode", async () => {
+    const { browser, welcomePage, $document } =
+      await commonCreateWalletUserCreate();
+
+    const connectButton = await getByText($document, "myNode");
+    connectButton.click();
+
+    // wait for the field label instead of headline (headline text already exists on the page before)
+    await waitFor(() => getByText($document, "lndconnect REST URL"));
+
+    const macaroon =
+      "AgEDbG5kAvgBAwoQ4hM6HKwsW01W5E4y3GTIVRIBMBoWCgdhZGRyZXNzEgRyZWFkEgV3cml0ZRoTCgRpbmZvEgRyZWFkEgV3cml0ZRoXCghpbnZvaWNlcxIEcmVhZBIFd3JpdGUaIQoIbWFjYXJvb24SCGdlbmVyYXRlEgRyZWFkEgV3cml0ZRoWCgdtZXNzYWdlEgRyZWFkEgV3cml0ZRoXCghvZmZjaGFpbhIEcmVhZBIFd3JpdGUaFgoHb25jaGFpbhIEcmVhZBIFd3JpdGUaFAoFcGVlcnMSBHJlYWQSBXdyaXRlGhgKBnNpZ25lchIIZ2VuZXJhdGUSBHJlYWQAAAYgxPl4Pghz-lCiCRgG9eu5GcXcQy4zgAtAFGOtpkhd8O0";
+    const restApiUrl = `lndconnect://lnd1.regtest.getalby.com?cert=&macaroon=${macaroon}`;
+    const lndConnectUrlField = await getByLabelText(
+      $document,
+      "lndconnect REST URL"
+    );
+    await lndConnectUrlField.type(restApiUrl);
+
+    await commonCreateWalletSuccessCheck({ browser, welcomePage, $document });
+  });
+
+  test("successfully connects to Start9", async () => {
+    const { browser, welcomePage, $document } =
+      await commonCreateWalletUserCreate();
+
+    const connectButton = await getByText($document, "Start9");
+    connectButton.click();
+
+    // wait for the field label instead of headline (headline text already exists on the page before)
+    await waitFor(() => getByText($document, "lndconnect REST URL"));
+
+    const macaroon =
+      "AgEDbG5kAvgBAwoQ4hM6HKwsW01W5E4y3GTIVRIBMBoWCgdhZGRyZXNzEgRyZWFkEgV3cml0ZRoTCgRpbmZvEgRyZWFkEgV3cml0ZRoXCghpbnZvaWNlcxIEcmVhZBIFd3JpdGUaIQoIbWFjYXJvb24SCGdlbmVyYXRlEgRyZWFkEgV3cml0ZRoWCgdtZXNzYWdlEgRyZWFkEgV3cml0ZRoXCghvZmZjaGFpbhIEcmVhZBIFd3JpdGUaFgoHb25jaGFpbhIEcmVhZBIFd3JpdGUaFAoFcGVlcnMSBHJlYWQSBXdyaXRlGhgKBnNpZ25lchIIZ2VuZXJhdGUSBHJlYWQAAAYgxPl4Pghz-lCiCRgG9eu5GcXcQy4zgAtAFGOtpkhd8O0";
+    const restApiUrl = `lndconnect://lnd1.regtest.getalby.com?cert=&macaroon=${macaroon}`;
+    const lndConnectUrlField = await getByLabelText(
+      $document,
+      "lndconnect REST URL"
+    );
+    await lndConnectUrlField.type(restApiUrl);
+
+    await commonCreateWalletSuccessCheck({ browser, welcomePage, $document });
+  });
+
   test("successfully connects to Eclair", async () => {
     const { browser, welcomePage, $document } =
       await commonCreateWalletUserCreate();
