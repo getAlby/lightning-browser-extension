@@ -32,7 +32,7 @@ export default function ConnectUmbrel() {
         macaroon,
       });
     } catch (e) {
-      console.log("invalid lndconnect string");
+      console.error("invalid lndconnect string", e);
     }
   }
 

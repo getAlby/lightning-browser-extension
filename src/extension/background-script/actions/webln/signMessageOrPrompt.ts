@@ -39,7 +39,7 @@ async function signWithPrompt(message: Message) {
     });
     return response;
   } catch (e) {
-    console.log("SignMessage cancelled", e);
+    console.error("SignMessage cancelled", e);
     if (e instanceof Error) {
       return { error: e.message };
     }

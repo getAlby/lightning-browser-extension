@@ -20,7 +20,7 @@ const persistSuccessfullPayment = async (message, data) => {
     createdAt: Date.now(),
   });
   await db.saveToStorage();
-  console.log(`Persisted payment ${paymentResponse.data.paymentHash}`);
+  console.info(`Persisted payment ${paymentResponse.data.paymentHash}`);
   return true;
 };
 

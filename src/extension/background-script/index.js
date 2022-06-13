@@ -62,12 +62,12 @@ const updateIcon = async (tabId, changeInfo, tabInfo) => {
 
 const debugLogger = (message, sender) => {
   if (state.getState().settings.debug) {
-    console.log("Background onMessage: ", message, sender);
+    console.info("Background onMessage: ", message, sender);
   }
 };
 
 const handleInstalled = (details) => {
-  console.log(`Handle installed: ${details.reason}`);
+  console.info(`Handle installed: ${details.reason}`);
   // TODO: maybe check if accounts are already configured?
   if (details.reason === "install") {
     isFirstInstalled = true;
@@ -84,17 +84,17 @@ const routeCalls = (message, sender) => {
   const debug = state.getState().settings.debug;
 
   if (message.type) {
-    console.debug("Invalid message, using type", message);
+    console.error("Invalid message, using type: ", message);
   }
   const action = message.action || message.type;
-  console.log(`Routing call: ${action}`);
+  console.info(`Routing call: ${action}`);
   // Potentially check for internal vs. public calls
   const call = router(action)(message, sender);
 
   // Log the action response if we are in debug mode
   if (debug) {
     call.then((r) => {
-      console.log(`${action} response:`, r);
+      console.info(`${action} response:`, r);
       return r;
     });
   }
@@ -102,17 +102,17 @@ const routeCalls = (message, sender) => {
 };
 
 async function init() {
-  console.log("Loading background script");
+  console.info("Loading background script");
 
   //await browser.storage.sync.set({ settings: { debug: true }, allowances: [] });
   await state.getState().init();
-  console.log("State loaded");
+  console.info("State loaded");
 
   await db.open();
-  console.log("DB opened");
+  console.info("DB opened");
 
   events.subscribe();
-  console.log("Events subscribed");
+  console.info("Events subscribed");
 
   browser.runtime.onMessage.addListener(debugLogger);
   // this is the only handler that may and must return a Promise which resolve with the response to the content script
@@ -124,7 +124,7 @@ async function init() {
   browser.tabs.onUpdated.addListener(extractLightningData);
 
   if (state.getState().settings.debug) {
-    console.log("Debug mode enabled, use window.debugAlby");
+    console.info("Debug mode enabled, use window.debugAlby");
     window.debugAlby = {
       state,
       db,
@@ -132,14 +132,14 @@ async function init() {
       router,
     };
   }
-  console.log("Loading completed");
+  console.info("Loading completed");
 }
 
 // The onInstalled event is fired directly after the code is loaded.
 // When we subscribe to that event asynchronously in the init() function it is too late and we miss the event.
 browser.runtime.onInstalled.addListener(handleInstalled);
 
-console.log("Welcome to Alby");
+console.info("Welcome to Alby");
 init().then(() => {
   if (isFirstInstalled) {
     utils.openUrl("welcome.html");
