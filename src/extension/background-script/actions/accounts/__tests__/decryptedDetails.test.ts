@@ -1,7 +1,7 @@
 import state from "~/extension/background-script/state";
-import type { MessageAccountExport } from "~/types";
+import type { MessageAccountDecryptedDetails } from "~/types";
 
-import exportAccount from "../export";
+import accountDecryptedDetails from "../decryptedDetails";
 
 jest.mock("~/extension/background-script/state");
 jest.mock("uuid", () => {
@@ -45,7 +45,7 @@ describe("export account", () => {
   });
 
   test("export existing lndhub account", async () => {
-    const message: MessageAccountExport = {
+    const message: MessageAccountDecryptedDetails = {
       application: "LBE",
       args: {
         id: "888",
@@ -53,12 +53,12 @@ describe("export account", () => {
       },
       origin: { internal: true },
       prompt: true,
-      action: "exportAccount",
+      action: "accountDecryptedDetails",
     };
 
     state.getState = jest.fn().mockReturnValue(mockState);
 
-    expect(await exportAccount(message)).toStrictEqual({
+    expect(await accountDecryptedDetails(message)).toStrictEqual({
       data: {
         lnAddress: "test@app.regtest.getalby.com",
         login: "123456789",
@@ -68,27 +68,8 @@ describe("export account", () => {
     });
   });
 
-  test("export account with other connector should error", async () => {
-    const message: MessageAccountExport = {
-      application: "LBE",
-      args: {
-        id: "666",
-        name: "GREEN",
-      },
-      origin: { internal: true },
-      prompt: true,
-      action: "exportAccount",
-    };
-
-    state.getState = jest.fn().mockReturnValue(mockState);
-
-    expect(await exportAccount(message)).toStrictEqual({
-      error: "Account: 666 not an LndHub Account; cannot be exported",
-    });
-  });
-
   test("export non-existing account should error", async () => {
-    const message: MessageAccountExport = {
+    const message: MessageAccountDecryptedDetails = {
       application: "LBE",
       args: {
         id: "123",
@@ -96,12 +77,12 @@ describe("export account", () => {
       },
       origin: { internal: true },
       prompt: true,
-      action: "exportAccount",
+      action: "accountDecryptedDetails",
     };
 
     state.getState = jest.fn().mockReturnValue(mockState);
 
-    expect(await exportAccount(message)).toStrictEqual({
+    expect(await accountDecryptedDetails(message)).toStrictEqual({
       error: "Account not found: 123",
     });
   });

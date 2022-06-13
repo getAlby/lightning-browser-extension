@@ -69,7 +69,7 @@ function AccountsScreen() {
       setExportModalIsOpen(true);
     }, 50);
     setLndHubData(
-      await utils.call("exportAccount", {
+      await utils.call("accountDecryptedDetails", {
         name,
         id,
       })
@@ -277,11 +277,13 @@ function AccountsScreen() {
               <div className="flex justify-center space-x-3 items-center dark:text-white">
                 <div className="flex-1">
                   <p>
-                    <strong>To use your wallet on your mobile:</strong>
+                    <strong>
+                      Tip: Use this wallet with your mobile device
+                    </strong>
                   </p>
                   <p>
-                    Import the wallet into Zeus or BlueWallet mobile app by
-                    scanning the QR Code or pasting the below link.
+                    Import this wallet into Zeus or BlueWallet by scanning the
+                    QRCode.
                   </p>
                 </div>
                 <div className="float-right">
