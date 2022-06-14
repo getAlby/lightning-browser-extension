@@ -2,7 +2,6 @@ import { Blocklist } from "../../../../types";
 import db from "../../db";
 
 const list = async (message: string, sender: unknown) => {
-  // TODO add filter and ordering?
   let blocklist = await db.blocklist
     .toCollection()
     .reverse()
