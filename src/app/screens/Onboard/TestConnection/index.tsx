@@ -36,13 +36,9 @@ export default function TestConnection() {
 
       setAccountInfo({ alias, balance, name });
     } catch (e) {
-      if (typeof e === "string") {
-        console.error(e);
-        setErrorMessage(e);
-      } else if (e instanceof Error) {
-        console.error(e.message);
-        setErrorMessage(e.message);
-      }
+      const message = e instanceof Error ? `(${e.message})` : "";
+      console.error(message);
+      setErrorMessage(message);
     } finally {
       setLoading(false);
     }
