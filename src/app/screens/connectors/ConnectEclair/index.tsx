@@ -44,7 +44,7 @@ export default function ConnectEclair() {
           navigate("/test-connection");
         }
       } else {
-        console.log(validation);
+        console.error(validation);
         toast.error(
           `Connection failed. Do you have the correct URL and password? \n\n(${validation.error})`
         );

@@ -26,7 +26,7 @@ const makeInvoice = async (message, sender) => {
     // If amount is not defined yet, let the user generate an invoice with an amount field.
     return await utils.openPrompt({
       ...message,
-      type: "makeInvoice",
+      action: "makeInvoice",
       args: {
         invoiceAttributes: {
           ...message.args,

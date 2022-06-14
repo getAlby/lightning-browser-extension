@@ -47,7 +47,7 @@ function Keysend(props: Props) {
 
       auth.fetchAccountInfo(); // Update balance.
     } catch (e) {
-      console.log(e);
+      console.error(e);
       if (e instanceof Error) {
         toast.error(`Error: ${e.message}`);
       }

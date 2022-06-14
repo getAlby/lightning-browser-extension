@@ -11,7 +11,7 @@ import verifyMessage from "./verifyMessage";
 
 const connectorCall = (method) => {
   return async (message, sender) => {
-    console.log(`Lightning call: ${message.type}`);
+    console.info(`Lightning call: ${message.action}`);
     const connector = await state.getState().getConnector();
 
     if (!connector) {
@@ -26,7 +26,7 @@ const connectorCall = (method) => {
     return connector[method]({
       args: message.args,
       origin: message.origin,
-      type: method,
+      action: method,
     });
   };
 };

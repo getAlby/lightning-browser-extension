@@ -71,28 +71,67 @@ class DB extends Dexie {
     return true;
   }
 
+  // TODO: DRY up the duplication here.
   async loadFromStorage() {
-    try {
-      const result = await browser.storage.local.get([
-        "allowances",
-        "payments",
-        "blocklist",
-      ]);
-      console.log("Loading DB data from storage");
-      if (result.allowances) {
-        await this.allowances.bulkAdd(result.allowances);
-      }
-      if (result.payments) {
-        await this.payments.bulkAdd(result.payments);
-      }
-      if (result.blocklist) {
-        await this.blocklist.bulkAdd(result.blocklist);
-      }
-      return true;
-    } catch (e) {
-      console.log("Failed to load DB data from storage");
-      console.log(e);
-    }
+    console.info("Loading DB data from storage");
+    return browser.storage.local
+      .get(["allowances", "payments", "blocklist"])
+      .then((result) => {
+        const allowancePromise = this.allowances.count().then((count) => {
+          // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
+          if (count > 0) {
+            console.info(`Found ${count} allowances already in the DB`);
+            return;
+          } else if (result.allowances && result.allowances.length > 0) {
+            // adding the data from the browser storage
+            return this.allowances
+              .bulkAdd(result.allowances)
+              .catch(Dexie.BulkError, function (e) {
+                console.error("Failed to add allowances; ignoring", e);
+              });
+          }
+        });
+
+        const paymentsPromise = this.payments.count().then((count) => {
+          // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
+          if (count > 0) {
+            console.info(`Found ${count} payments already in the DB`);
+            return;
+          } else if (result.payments && result.payments.length > 0) {
+            // adding the data from the browser storage
+            return this.payments
+              .bulkAdd(result.payments)
+              .catch(Dexie.BulkError, function (e) {
+                console.error("Failed to add payments; ignoring", e);
+              });
+          }
+        });
+
+        const blocklistPromise = this.blocklist.count().then((count) => {
+          // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
+          if (count > 0) {
+            console.info(`Found ${count} blocklist already in the DB`);
+            return;
+          } else if (result.blocklist && result.blocklist.length > 0) {
+            // adding the data from the browser storage
+            return this.blocklist
+              .bulkAdd(result.blocklist)
+              .catch(Dexie.BulkError, function (e) {
+                console.error("Failed to add blocklist; ignoring", e);
+              });
+          }
+        });
+
+        // wait for all allowances and payments to be loaded
+        return Promise.all([
+          allowancePromise,
+          paymentsPromise,
+          blocklistPromise,
+        ]);
+      })
+      .catch((e) => {
+        console.error("Failed to load DB data from storage", e);
+      });
   }
 }
 

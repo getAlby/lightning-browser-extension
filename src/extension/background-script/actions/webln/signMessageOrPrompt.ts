@@ -35,11 +35,11 @@ async function signWithPrompt(message: Message) {
   try {
     const response = await utils.openPrompt({
       ...message,
-      type: "confirmSignMessage",
+      action: "confirmSignMessage",
     });
     return response;
   } catch (e) {
-    console.log("SignMessage cancelled", e);
+    console.error("SignMessage cancelled", e);
     if (e instanceof Error) {
       return { error: e.message };
     }

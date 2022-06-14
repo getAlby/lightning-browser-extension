@@ -56,7 +56,7 @@ function Enable(props: Props) {
         }
         setLoading(false);
       } catch (e) {
-        if (e instanceof Error) console.log(e.message);
+        if (e instanceof Error) console.error(e.message);
       }
     }
 

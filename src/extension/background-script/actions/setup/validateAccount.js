@@ -11,7 +11,7 @@ const validateAccount = async (message, sender) => {
 
     return { data: { valid: true, info: info } };
   } catch (e) {
-    console.log(e);
+    console.error(e);
     return { data: { valid: false, error: e.message } };
   }
 };

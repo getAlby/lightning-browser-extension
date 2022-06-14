@@ -15,7 +15,7 @@ const makeInvoiceWithPrompt = async (message: Message) => {
   try {
     const response = await utils.openPrompt({
       origin: message.origin,
-      type: "makeInvoice",
+      action: "makeInvoice",
       args: {
         amountEditable,
         memoEditable,

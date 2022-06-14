@@ -89,7 +89,7 @@ export default function NewWallet() {
           navigate("/test-connection");
         }
       } else {
-        console.log({ validation });
+        console.error({ validation });
         toast.error(`Connection failed (${validation.error})`);
       }
     } catch (e) {

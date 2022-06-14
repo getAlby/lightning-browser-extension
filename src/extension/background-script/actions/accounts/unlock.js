@@ -8,13 +8,13 @@ const unlock = (message, sender) => {
   const account = state.getState().getAccount();
   const currentAccountId = state.getState().currentAccountId;
   if (!account) {
-    console.log("No account configured");
+    console.warn("No account configured");
     return Promise.resolve({ error: "No account configured" });
   }
   try {
     decryptData(account.config, password);
   } catch (e) {
-    console.log("Invalid password");
+    console.error("Invalid password");
     return Promise.resolve({ error: "Invalid password" });
   }
 
