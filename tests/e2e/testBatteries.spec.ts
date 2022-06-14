@@ -45,7 +45,7 @@ const Units = {
 async function clickButton(page, selectionData) {
   const selector = typeof selectionData == "object" && selectionData.$ ? selectionData.$ : "button";
   const start = Date.now();
-  return new Promise<void>((rr) => {
+  return new Promise<void>((resolve) => {
     const findAndClickButton = async () => {
       const buttons = await page.$$(selector);
       for (const button of buttons) {
@@ -59,11 +59,11 @@ async function clickButton(page, selectionData) {
         } else {
           await delay(100);
         }
-        rr();
+        resolve();
         return;
       }
       console.info("Looking for button ...", selectionData);
-      if (Date.now() - start > 1 * 60 * 1000) rr(); // timeout after 1 minute
+      if (Date.now() - start > 1 * 60 * 1000) resolve(); // timeout after 1 minute
       else setTimeout(() => findAndClickButton(), 1000);
     }
     setTimeout(() => findAndClickButton(), 1000);
