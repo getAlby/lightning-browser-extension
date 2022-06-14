@@ -1,8 +1,7 @@
 import { PaymentRequestObject } from "bolt11";
+import { CURRENCIES } from "~/common/constants";
+import connectors from "~/extension/background-script/connectors";
 import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
-
-import { CURRENCIES } from "./common/constants";
-import connectors from "./extension/background-script/connectors";
 
 export type ConnectorType = keyof typeof connectors;
 
@@ -249,13 +248,8 @@ export interface SettingsStorage {
   userEmail: string;
   locale: string;
   theme: string;
-  currency: SupportedCurrencies;
+  currency: CURRENCIES;
   exchange: SupportedExchanges;
 }
 
 export type SupportedExchanges = "coindesk" | "yadio";
-
-// Supported currencies by Coindesk and yadio
-// FYI: yadio is i.e. not supporting "ISK", maybe more?
-// https://github.com/AryanJ-NYC/bitcoin-conversion/blob/master/src/index.ts#L143
-export type SupportedCurrencies = typeof CURRENCIES[number];

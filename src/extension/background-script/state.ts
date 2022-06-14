@@ -2,6 +2,7 @@ import merge from "lodash/merge";
 import pick from "lodash/pick";
 import browser from "webextension-polyfill";
 import createState from "zustand";
+import { CURRENCIES } from "~/common/constants";
 import { decryptData } from "~/common/lib/crypto";
 import i18n from "~/i18n/i18nConfig";
 import type { Account, Accounts, SettingsStorage } from "~/types";
@@ -37,7 +38,7 @@ export const DEFAULT_SETTINGS: SettingsStorage = {
   userEmail: "",
   locale: i18n.resolvedLanguage,
   theme: "system",
-  currency: "USD",
+  currency: CURRENCIES.USD,
   exchange: "coindesk",
 };
 

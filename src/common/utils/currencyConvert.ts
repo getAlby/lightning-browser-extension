@@ -3,8 +3,8 @@
  */
 import axios from "axios";
 import debounce from "lodash/debounce";
+import { CURRENCIES } from "~/common/constants";
 import { getSettings } from "~/common/lib/api";
-import { SupportedCurrencies } from "~/types";
 
 const settings = async () => {
   const { currency, exchange } = await getSettings();
@@ -17,9 +17,7 @@ const settings = async () => {
 
 const numSatsInBtc = 100_000_000;
 
-const getFiatBtcRate = async (
-  currency: SupportedCurrencies
-): Promise<string> => {
+const getFiatBtcRate = async (currency: CURRENCIES): Promise<string> => {
   const { exchange } = await settings();
 
   let response;
@@ -60,7 +58,7 @@ const debouncedGetFiatBtcRate = debounce(
 
 const bitcoinToFiat = async (
   amountInBtc: number | string,
-  convertTo: SupportedCurrencies,
+  convertTo: CURRENCIES,
   isLatestRate?: boolean
 ) => {
   const rate = isLatestRate
@@ -80,7 +78,7 @@ const satoshisToFiat = async ({
   isLatestRate,
 }: {
   amountInSats: number | string;
-  convertTo: SupportedCurrencies;
+  convertTo: CURRENCIES;
   isLatestRate?: boolean;
 }) => {
   const btc = satoshisToBitcoin(amountInSats);

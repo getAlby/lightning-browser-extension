@@ -26,7 +26,7 @@ function Settings() {
     userEmail: "",
     locale: "",
     theme: "system",
-    currency: "USD",
+    currency: CURRENCIES.USD,
     exchange: "coindesk",
   });
 
@@ -149,7 +149,7 @@ function Settings() {
                   });
                 }}
               >
-                {CURRENCIES.map((currency) => (
+                {Object.keys(CURRENCIES).map((currency) => (
                   <option key={currency} value={currency}>
                     {currency}
                   </option>
