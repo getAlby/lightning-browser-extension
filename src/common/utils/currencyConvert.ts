@@ -2,7 +2,6 @@
  * Highly inspired by: https://github.com/AryanJ-NYC/bitcoin-conversion
  */
 import axios from "axios";
-import currencyJs from "currency.js";
 import debounce from "lodash/debounce";
 import { getSettings } from "~/common/lib/api";
 import { SupportedCurrencies } from "~/types";
@@ -32,10 +31,7 @@ const getFiatBtcRate = async (
 
     const data = await response?.data;
 
-    return currencyJs(data.BTC, {
-      separator: "",
-      symbol: "",
-    }).format();
+    return data.BTC;
   }
 
   response = await axios.get(
@@ -44,10 +40,7 @@ const getFiatBtcRate = async (
 
   const data = await response?.data;
 
-  return currencyJs(data.bpi[currency].rate, {
-    separator: "",
-    symbol: "",
-  }).format();
+  return data.bpi[currency].rate_float;
 };
 
 // @TODO: https://github.com/getAlby/lightning-browser-extension/issues/1021

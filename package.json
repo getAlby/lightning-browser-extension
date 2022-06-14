@@ -49,7 +49,6 @@
     "browser-polyfill": "^3.20.2",
     "crypto-browserify": "^3.12.0",
     "crypto-js": "^4.1.1",
-    "currency.js": "^2.0.4",
     "dayjs": "^1.11.3",
     "dexie": "^3.2.2",
     "elliptic": "^6.5.4",
