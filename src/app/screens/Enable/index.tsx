@@ -27,21 +27,21 @@ function Enable(props: Props) {
   }, [budget, remember]);
 
   function reject(event: React.MouseEvent<HTMLAnchorElement>) {
-    msg.error(USER_REJECTED_ERROR);
     event.preventDefault();
+    msg.error(USER_REJECTED_ERROR);
   }
 
   async function block(event: React.MouseEvent<HTMLAnchorElement>) {
+    event.preventDefault();
+    await utils.call("addBlocklist", {
+      domain: props.origin.domain,
+      host: props.origin.host,
+    });
     msg.error(
       `User added site to blocklist domain, host
         ${props.origin.domain},
         ${props.origin.host}`
     );
-    await utils.call("addBlocklist", {
-      domain: props.origin.domain,
-      host: props.origin.host,
-    });
-    event.preventDefault();
   }
 
   useEffect(() => {
