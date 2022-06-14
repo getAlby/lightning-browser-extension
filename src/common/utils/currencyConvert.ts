@@ -67,9 +67,12 @@ const debouncedGetFiatBtcRate = debounce(
 
 const bitcoinToFiat = async (
   amountInBtc: number | string,
-  convertTo: SupportedCurrencies
+  convertTo: SupportedCurrencies,
+  isLatestRate?: boolean
 ) => {
-  const rate = await debouncedGetFiatBtcRate(() => getFiatBtcRate(convertTo));
+  const rate = isLatestRate
+    ? await getFiatBtcRate(convertTo)
+    : await debouncedGetFiatBtcRate(() => getFiatBtcRate(convertTo));
 
   return Number(amountInBtc) * Number(rate);
 };
@@ -81,12 +84,14 @@ const satoshisToBitcoin = (amountInSatoshis: number | string) => {
 const satoshisToFiat = async ({
   amountInSats,
   convertTo,
+  isLatestRate,
 }: {
   amountInSats: number | string;
   convertTo: SupportedCurrencies;
+  isLatestRate?: boolean;
 }) => {
   const btc = satoshisToBitcoin(amountInSats);
-  const fiat = await bitcoinToFiat(btc, convertTo);
+  const fiat = await bitcoinToFiat(btc, convertTo, isLatestRate);
   return fiat;
 };
 
@@ -104,11 +109,12 @@ export const getFiatValue = async (amount: number | string) => {
   return localeFiatValue;
 };
 
-export const getBalances = async (balance: number) => {
+export const getBalances = async (balance: number, isLatestRate?: boolean) => {
   const { currency } = await settings();
   const fiatValue = await satoshisToFiat({
     amountInSats: balance,
     convertTo: currency,
+    isLatestRate,
   });
   const localeFiatValue = fiatValue.toLocaleString("en", {
     style: "currency",

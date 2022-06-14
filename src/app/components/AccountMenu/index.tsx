@@ -40,7 +40,7 @@ function AccountMenu({ title, balances, showOptions = true }: Props) {
     await utils.call("selectAccount", {
       id: accountId,
     });
-    await auth.fetchAccountInfo(accountId);
+    await auth.fetchAccountInfo({ accountId });
     setLoading(false);
   }
 

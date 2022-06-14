@@ -36,7 +36,7 @@ function AccountsScreen() {
   async function selectAccount(accountId: string) {
     auth.setAccountId(accountId);
     await api.selectAccount(accountId);
-    auth.fetchAccountInfo(accountId);
+    auth.fetchAccountInfo({ accountId });
   }
 
   async function updateAccountName({ id, name }: AccountAction) {

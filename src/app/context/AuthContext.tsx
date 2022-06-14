@@ -26,14 +26,16 @@ interface AuthContextType {
   /**
    * Fetch the additional account info: alias/balance and update account
    */
-  fetchAccountInfo: (id?: string) => Promise<AccountInfo | undefined>;
+  fetchAccountInfo: (options?: {
+    accountId?: string;
+    isLatestRate?: boolean;
+  }) => Promise<AccountInfo | undefined>;
 }
 
 const AuthContext = createContext({} as AuthContextType);
 
-// @TODO: open new issue
-// rename to "accountProvider"?
-// proposae in a new PR
+// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/1040
+// rename to "accountProvider"
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [account, setAccount] = useState<AuthContextType["account"]>(null);
   const [loading, setLoading] = useState(true);
@@ -45,7 +47,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const unlock = (password: string, callback: VoidFunction) => {
     return api.unlock(password).then((response) => {
       setAccountId(response.currentAccountId);
-      fetchAccountInfo(response.currentAccountId);
+      fetchAccountInfo({ accountId: response.currentAccountId });
 
       // callback - e.g. navigate to the requested route after unlocking
       callback();
@@ -61,12 +63,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const setAccountId = (id: string) => setAccount({ id });
 
-  const fetchAccountInfo = async (accountId?: string) => {
-    const id = accountId || account?.id;
+  const fetchAccountInfo = async (options?: {
+    accountId?: string;
+    isLatestRate?: boolean;
+  }) => {
+    const id = options?.accountId || account?.id;
     if (!id) return;
 
     const accountInfo = await api.swr.getAccountInfo(id, setAccount);
-    const { fiatBalance, satsBalance } = await getBalances(accountInfo.balance);
+    const { fiatBalance, satsBalance } = await getBalances(
+      accountInfo.balance,
+      options?.isLatestRate
+    );
 
     setBalancesDecorated({
       fiatBalance,
@@ -91,7 +99,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             utils.redirectPage("options.html");
           }
           setAccountId(response.currentAccountId);
-          fetchAccountInfo(response.currentAccountId);
+          fetchAccountInfo({ accountId: response.currentAccountId });
         } else {
           setAccount(null);
         }
