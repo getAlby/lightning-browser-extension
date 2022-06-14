@@ -13,10 +13,8 @@ const deleteBlocklist = async (
   if (blocklist?.id) {
     await db.blocklist.delete(blocklist.id);
     await db.saveToStorage();
-    return { data: true };
-  } else {
-    return { data: false };
   }
+  return { data: true };
 };
 
 export default deleteBlocklist;
