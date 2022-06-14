@@ -101,12 +101,10 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               placeholder="sats"
               value={budget}
               type="number"
+              hint="This will reset the current budget"
               onChange={(e) => setBudget(e.target.value)}
             />
           </div>
-          <p className="my-1 dark:text-white">
-            This will reset the current budget
-          </p>
         </div>
         <div className="flex justify-end p-5 dark:bg-surface-02dp">
           <Button
