@@ -5,7 +5,7 @@ import setLightningData from "../setLightningData";
 
 const urlMatcher = /^https:\/\/(?:www\.)?twitch.tv\/([^/]+).+$/;
 const validationRegex = /^[a-z0-9_.-]+$/i;
-const clientIdExtractor = /clientId="([^"]+)"/i;
+const clientIdExtractor = /clientId="([A-Z0-9]+)"/i;
 
 const battery = async (): Promise<void> => {
   const urlParts = document.location.pathname.split("/");
@@ -22,11 +22,13 @@ const battery = async (): Promise<void> => {
       "twitch-clientId"
     ];
 
+    // Grab and cache client ID from the page HTML. This shouldn't change too often
     if (!clientId) {
-      // Grab and cache client ID from the page HTML. This shouldn't change too often
-      const clientIdMatch =
-        document.documentElement.outerHTML.match(clientIdExtractor);
-      clientId = clientIdMatch ? clientIdMatch[1] : "";
+      for (const scriptEl of document.querySelectorAll("script")) {
+        const clientIdMatch = scriptEl.innerHTML.match(clientIdExtractor);
+        clientId = clientIdMatch ? clientIdMatch[1] : "";
+        if (clientId) break;
+      }
       if (!clientId) return; // client id not found
       else {
         await browser.storage.local.set({
