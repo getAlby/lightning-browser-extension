@@ -3,7 +3,7 @@ import PublishersTable from "@components/PublishersTable";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import utils from "~/common/lib/utils";
-import { Allowance, Blocklist, Publisher } from "~/types";
+import { Allowance, Publisher } from "~/types";
 
 import websites from "./websites.json";
 
@@ -20,9 +20,6 @@ function Publishers() {
       const allowanceResponse = await utils.call<{
         allowances: Allowance[];
       }>("listAllowances");
-      const blocklistResponse = await utils.call<{
-        blocklist: Blocklist[];
-      }>("listBlocklist");
       const allowances = allowanceResponse.allowances.map((allowance) => {
         let retobj: Publisher = allowance;
         if (allowance.enabled && allowance.remainingBudget > 0) {
@@ -34,13 +31,6 @@ function Publishers() {
               textColor: "white",
             },
           };
-        }
-        if (
-          blocklistResponse.blocklist.find(
-            (item) => item.host === allowance.host
-          )
-        ) {
-          retobj.blocked = true;
         }
         return retobj;
       });
