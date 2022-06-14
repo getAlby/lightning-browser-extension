@@ -51,6 +51,8 @@ class DB extends Dexie {
         "++id,&host,name,imageURL,tag,enabled,totalBudget,remainingBudget,lastPaymentAt,lnurlAuth,createdAt",
       payments:
         "++id,allowanceId,host,location,name,description,totalAmount,totalFees,preimage,paymentRequest,paymentHash,destination,createdAt",
+    });
+    this.version(2).stores({
       blocklist: "++id,host,name,imageURL,isBlocked,createdAt",
     });
     this.on("ready", this.loadFromStorage.bind(this));
