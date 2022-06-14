@@ -4,14 +4,12 @@ const add = async (
   message: { args: { host: string; name: string; imageURL: string } },
   sender: unknown
 ) => {
-  const host = message.args.host;
-  const name = message.args.name;
-  const imageURL = message.args.imageURL;
+  const { host, name, imageURL } = message.args;
 
   await db.blocklist.add({
-    host: host,
-    name: name,
-    imageURL: imageURL,
+    host,
+    name,
+    imageURL,
     isBlocked: true,
   });
 
