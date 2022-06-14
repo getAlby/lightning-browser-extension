@@ -163,6 +163,17 @@ export interface MessageAccountSelect extends MessageDefault {
   args: { id: Account["id"] };
   action: "selectAccount";
 }
+
+export interface MessageAllowanceAdd extends MessageDefault {
+  args: {
+    name: Allowance["name"];
+    host: Allowance["host"];
+    imageURL: Allowance["imageURL"];
+    totalBudget: Allowance["totalBudget"];
+  };
+  action: "addAllowance";
+}
+
 export interface MessageAllowanceList extends MessageDefault {
   action: "listAllowances";
 }
@@ -330,12 +341,12 @@ export interface PaymentResponse
 }
 
 export interface Allowance {
-  createdAt: string;
+  createdAt: number;
   enabled: boolean;
   host: string;
-  id: number;
+  id?: number;
   imageURL: string;
-  lastPaymentAt: string;
+  lastPaymentAt: number;
   lnurlAuth: boolean;
   name: string;
   payments: Transaction[];

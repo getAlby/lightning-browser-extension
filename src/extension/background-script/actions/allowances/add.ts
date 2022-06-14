@@ -1,6 +1,8 @@
+import type { MessageAllowanceAdd } from "~/types";
+
 import db from "../../db";
 
-const add = async (message, sender) => {
+const add = async (message: MessageAllowanceAdd) => {
   const host = message.args.host;
   const name = message.args.name;
   const imageURL = message.args.imageURL;
@@ -12,7 +14,7 @@ const add = async (message, sender) => {
     .first();
 
   if (allowance) {
-    await db.allowances.update(allowance.id, {
+    await db.allowances.update(allowance.id as number, {
       name: name,
       imageURL: imageURL,
       enabled: true,
@@ -28,6 +30,14 @@ const add = async (message, sender) => {
       totalBudget: totalBudget,
       remainingBudget: totalBudget,
       lastPaymentAt: 0,
+      createdAt: Date.now(),
+      lnurlAuth: false,
+      payments: [],
+      paymentsAmount: 0,
+      paymentsCount: 0,
+      percentage: "0",
+      tag: "",
+      usedBudget: 0,
     });
   }
   await db.saveToStorage();
