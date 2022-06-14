@@ -54,7 +54,7 @@ async function blocklistCheck() {
     });
     return !blocklistData.blocked; // return true if not blocked
   } catch (e) {
-    if (e instanceof Error) console.log(e.message);
+    if (e instanceof Error) console.error(e);
     return false;
   }
 }
