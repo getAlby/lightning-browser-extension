@@ -62,7 +62,7 @@ async function clickButton(page, selectionData) {
         rr();
         return;
       }
-      console.log("Looking for button ...", selectionData);
+      console.info("Looking for button ...", selectionData);
       if (Date.now() - start > 1 * 60 * 1000) rr(); // timeout after 1 minute
       else setTimeout(() => findAndClickButton(), 1000);
     }
@@ -78,8 +78,8 @@ async function clickButton(page, selectionData) {
  */
 async function testUnit(page, unit) {
   const unitData = Units[unit];
-  if (!unitData) throw "Unit " + unit + " not configured";
-  console.log("Loading page", unitData.url);
+  if (!unitData) throw `Unit ${unit} not configured`;
+  console.info("Loading page", unitData.url);
   await page.goto(unitData.url, {
     waitUntil: 'networkidle2',
   });
@@ -93,10 +93,10 @@ async function testUnit(page, unit) {
     const v = unitData.output[k];
     if (typeof v === "object") {
       if (v.startsWith) {
-        if (!lightningData[k].startsWith(v.startsWith)) throw "Invalid " + k + ". Got " + lightningData[k] + " but " + v.startsWith + "... was expected";
+        if (!lightningData[k].startsWith(v.startsWith)) throw `Invalid ${k}. Got ${lightningData[k]} but ${v.startsWith}... was expected`;
       }
     } else {
-      if (lightningData[k] != v) throw "Invalid " + k + ". Got " + lightningData[k] + " but " + v + " was expected";
+      if (lightningData[k] != v) throw `Invalid ${k}. Got ${lightningData[k]} but ${v} was expected`;
     }
   }
 
@@ -133,7 +133,7 @@ test.describe("Test Batteries", () => {
       try{
         ({ page,  } = await loadExtension(false));        
       }catch(e){ // continue without failing the test if the extension is not found
-        console.warn("Batteries test cannot continue:",e);
+        console.error("Batteries test cannot continue:",e);
         return;
       }
 
