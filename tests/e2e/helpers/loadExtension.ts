@@ -1,13 +1,18 @@
 import puppeteer from "puppeteer";
 
-const delay = async (time) => {
+export const delay = async (time) => {
   return new Promise(function (resolve) {
     setTimeout(resolve, time);
   });
 };
 
-export const loadExtension = async () => {
-  const extensionPath = process.env.CI
+/**
+ * Load the extension
+ * @param production specify if you want to load the production or development mode
+ */
+export const loadExtension = async (production?) => {
+  if(typeof production=="undefined")production=process.env.CI;
+  const extensionPath = production
     ? "./dist/production/chrome"
     : "./dist/development/chrome";
 
