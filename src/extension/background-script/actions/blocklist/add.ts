@@ -1,9 +1,8 @@
+import type { MessageBlocklistAdd } from "~/types";
+
 import db from "../../db";
 
-const add = async (
-  message: { args: { host: string; name: string; imageURL: string } },
-  sender: unknown
-) => {
+const add = async (message: MessageBlocklistAdd, sender: unknown) => {
   const { host, name, imageURL } = message.args;
 
   await db.blocklist.add({
