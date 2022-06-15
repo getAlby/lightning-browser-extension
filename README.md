@@ -232,7 +232,7 @@ When creating a PR please take this points as a reminder:
 
 - If there's not yet an issue for your PR please first [create an issue](https://github.com/bumi/lightning-browser-extension/issues/new) with a proposal what you would like to do. This allows us to give feedback and helps you no wasting time and motivation
 - Think in iterations (babysteps)\
-  You can always start a PR and if you feel like adding on more things to it, better branch off and create a new i.e. _draft_-PR
+  You can always start a PR and if you feel like adding on more things to it, better branch off and [create a new i.e. _draft_-PR](https://github.blog/2019-02-14-introducing-draft-pull-requests/)
 - Newly added components should have a unit-test
 - If you work on a more complex PR please [join our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2) to get feedback, discuss the best way to tackle the challenge, and to ensure that there's no duplication of work. It's often faster and nicer to chat or call about questions than to do ping-pong comments in PRs
 
@@ -244,14 +244,14 @@ When creating a PR please take this points as a reminder:
 
 #### Editor
 
-We mainly use [VS Code](https://code.visualstudio.com/)\
+We mainly use [VS Code](https://code.visualstudio.com/)
 
 For better support we reccomend these extensions:
 
-- https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
-- https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
-- https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss
-- https://marketplace.visualstudio.com/items?itemName=ecmel.vscode-html-css
+- [vscode-eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [vscode-tailwindcss](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+- [vscode-html-css](https://marketplace.visualstudio.com/items?itemName=ecmel.vscode-html-css)
 
 ### Commit message format
 
