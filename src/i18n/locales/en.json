@@ -90,5 +90,8 @@
       "try_tutorial": "Give it a try now",
       "loading": "Initializing your account. Please wait, this can take a minute..."
     }
+  },
+  "blocklist": {
+    "blocklisted": "Site blocklisted!"
   }
 }

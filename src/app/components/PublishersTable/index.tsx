@@ -1,4 +1,5 @@
 import { CaretRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { useTranslation } from "react-i18next";
 
 import Badge from "../Badge";
 import Progressbar from "../Progressbar";
@@ -33,6 +34,7 @@ export default function PublishersTable({
   publishers,
   navigateToPublisher,
 }: Props) {
+  const { t } = useTranslation(["blocklist"]);
   return (
     <div className="shadow overflow-hidden rounded-lg">
       <table className="min-w-full">
@@ -102,7 +104,7 @@ export default function PublishersTable({
               </td>
               <td className="px-6 py-6 whitespace-nowrap text-right">
                 {publisher.blocked && (
-                  <div className="ml-40">Site blocklisted!</div>
+                  <div className="ml-40">{t("blocklisted")}</div>
                 )}
               </td>
               <td className="w-10">
