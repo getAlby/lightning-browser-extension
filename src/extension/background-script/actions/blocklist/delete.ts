@@ -1,6 +1,8 @@
+import { MessageBlocklistDelete } from "~/types";
+
 import db from "../../db";
 
-const deleteBlocklist = async (message: { args: { host: string } }) => {
+const deleteBlocklist = async (message: MessageBlocklistDelete) => {
   const host = message.args.host;
   const blocklist = await db.blocklist
     .where("host")

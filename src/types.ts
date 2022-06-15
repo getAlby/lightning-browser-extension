@@ -116,6 +116,12 @@ export interface MessageBlocklistAdd extends MessageDefault {
   };
   action: "addBlocklist";
 }
+export interface MessageBlocklistDelete extends MessageDefault {
+  args: {
+    host: string;
+  };
+  action: "deleteBlocklist";
+}
 
 interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
