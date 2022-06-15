@@ -64,7 +64,7 @@ function Home() {
         await utils.call("deleteBlocklist", {
           host: currentUrl.host,
         });
-      window.location.reload(); // refresh home page
+      setIsBlocked(false);
     } catch (e) {
       console.error(e);
     }
