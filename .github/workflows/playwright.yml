@@ -1,6 +1,8 @@
 name: E2E Tests
 
 on:
+  schedule:
+    - cron: "0 12 * * 1"
   push:
     branches:
       - master
@@ -29,6 +31,11 @@ jobs:
         uses: borales/actions-yarn@v3.0.0
         with:
           cmd: build:chrome # will run `yarn build` command
+
+      - name: Build Dev
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: build-dev:chrome 
 
       - name: Test Code
         uses: mujo-code/puppeteer-headful@v2
