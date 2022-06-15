@@ -25,7 +25,7 @@ dayjs.extend(relativeTime);
 
 function Home() {
   const [allowance, setAllowance] = useState<Allowance | null>(null);
-  const [blocklist, setBlocklist] = useState<boolean | null>(null);
+  const [isBlocked, setIsBlocked] = useState<boolean | null>(null);
   const [currentUrl, setCurrentUrl] = useState<URL | null>(null);
   const [payments, setPayments] = useState<Transaction[]>([]);
   const [loadingAllowance, setLoadingAllowance] = useState(true);
@@ -49,7 +49,7 @@ function Home() {
       }
       const blocklistResult = await api.getBlocklist(url.host);
       if (blocklistResult.blocked) {
-        setBlocklist(blocklistResult.blocked);
+        setIsBlocked(blocklistResult.blocked);
       }
     } catch (e) {
       console.error(e);
@@ -251,7 +251,7 @@ function Home() {
           />
         </div>
 
-        {blocklist && (
+        {isBlocked && (
           <div className="mb-2 items-center py-3 dark:text-white">
             <p className="py-1">This site is currently in blocklist.</p>
             <Button
