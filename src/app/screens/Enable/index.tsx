@@ -91,7 +91,7 @@ function Enable(props: Props) {
           href="#"
           onClick={block}
         >
-          Don{`'`}t ask for this site again
+          Do not ask for this site again
         </a>
       </div>
     </div>
