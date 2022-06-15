@@ -1,7 +1,7 @@
 import { Blocklist } from "../../../../types";
 import db from "../../db";
 
-const list = async (message: string, sender: unknown) => {
+const list = async () => {
   let blocklist = await db.blocklist
     .toCollection()
     .reverse()

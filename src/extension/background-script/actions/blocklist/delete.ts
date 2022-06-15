@@ -1,9 +1,6 @@
 import db from "../../db";
 
-const deleteBlocklist = async (
-  message: { args: { host: string } },
-  sender: unknown
-) => {
+const deleteBlocklist = async (message: { args: { host: string } }) => {
   const host = message.args.host;
   const blocklist = await db.blocklist
     .where("host")

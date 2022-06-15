@@ -256,7 +256,6 @@ function Home() {
             <p className="py-1">This site is currently in blocklist.</p>
             <Button
               fullWidth
-              // icon={<ReceiveIcon className="w-6 h-6" />}
               label="Unblock"
               direction="column"
               onClick={async () => {
