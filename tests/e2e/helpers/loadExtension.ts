@@ -1,5 +1,5 @@
+import fs from "fs";
 import puppeteer from "puppeteer";
-import fs from 'fs';
 
 export const delay = async (time) => {
   return new Promise(function (resolve) {
@@ -7,12 +7,12 @@ export const delay = async (time) => {
   });
 };
 
-async function fileExists(f){
+async function fileExists(f) {
   try {
-      await fs.promises.access(f, fs.constants.F_OK)
-      return true;
+    await fs.promises.access(f, fs.constants.F_OK);
+    return true;
   } catch (e) {
-      return false;
+    return false;
   }
 }
 
@@ -21,13 +21,17 @@ async function fileExists(f){
  * @param production specify if you want to load the production or development mode
  */
 export const loadExtension = async (production?) => {
-  if(typeof production=="undefined")production=process.env.CI;
+  if (typeof production == "undefined") production = process.env.CI;
   const extensionPath = production
     ? "./dist/production/chrome"
     : "./dist/development/chrome";
 
-  if(!await fileExists(extensionPath)){
-    throw `${production?"production":"development"} extension not found. Make sure it is built by calling ${production?"npm run build:chrome":"npm run build-dev:chrome"}`;   
+  if (!(await fileExists(extensionPath))) {
+    throw `${
+      production ? "production" : "development"
+    } extension not found. Make sure it is built by calling ${
+      production ? "npm run build:chrome" : "npm run build-dev:chrome"
+    }`;
   }
 
   const browser = await puppeteer.launch({
