@@ -100,7 +100,7 @@ async function testUnit(page, unit) {
   const lightningData = ((await getLightningData(page)) ?? [])[0];
   console.info("Received lightning data", lightningData);
   if (!lightningData) throw `Lightning data not found for unit ${unit} :(`;
-  for (let k in unitData.output) {
+  for (const k in unitData.output) {
     const v = unitData.output[k];
     if (typeof v === "object") {
       if (v.startsWith) {
@@ -119,7 +119,7 @@ async function testUnit(page, unit) {
  * @param page page object to query
  * @returns the lightning data
  */
-const getLightningData = async (page): Promise<any> => {
+const getLightningData = async (page): Promise<void> => {
   return page.evaluate(() => {
     return new Promise((res, rej) => {
       window.addEventListener("message", (ev) => {
@@ -140,7 +140,7 @@ const getLightningData = async (page): Promise<any> => {
  * Entry point for the test
  */
 test.describe("Test Batteries", () => {
-  for (const [unitName, unitData] of Object.entries(Units)) {
+  for (const [unitName] of Object.entries(Units)) {
     test(unitName, async () => {
       let page;
 
