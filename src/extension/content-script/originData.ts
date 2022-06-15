@@ -194,7 +194,7 @@ const metaDataRules: Record<string, RuleSet> = {
   provider: {
     rules: [
       [
-        'meta[property="alby:site_name"][content]',
+        'meta[property="alby:name"][content]',
         (element) => element.getAttribute("content"),
       ],
       [
