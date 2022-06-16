@@ -242,9 +242,9 @@ When creating a PR please take this points as a reminder:
 - [Prettier](https://prettier.io/) for code (and more) formatting
 - We prefer [Axios](https://axios-http.com/) over [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 
-#### Editor
+#### Code Editors
 
-We mainly use [VS Code](https://code.visualstudio.com/)
+##### [VS Code](https://code.visualstudio.com/)
 
 For better support we reccomend these extensions:
 
