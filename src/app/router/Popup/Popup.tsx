@@ -6,13 +6,11 @@ import LNURLPay from "@screens/LNURLPay";
 import Receive from "@screens/Receive";
 import Send from "@screens/Send";
 import Unlock from "@screens/Unlock";
-import { I18nextProvider } from "react-i18next";
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { AccountsProvider } from "~/app/context/AccountsContext";
 import { useAuth } from "~/app/context/AuthContext";
 import { AuthProvider } from "~/app/context/AuthContext";
-import i18n from "~/i18n/i18nConfig";
 
 import RequireAuth from "../RequireAuth";
 
@@ -20,28 +18,26 @@ function Popup() {
   return (
     <AuthProvider>
       <AccountsProvider>
-        <I18nextProvider i18n={i18n}>
-          <HashRouter>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <RequireAuth>
-                    <Layout />
-                  </RequireAuth>
-                }
-              >
-                <Route index element={<Home />} />
-                <Route path="send" element={<Send />} />
-                <Route path="receive" element={<Receive />} />
-                <Route path="lnurlPay" element={<LNURLPay />} />
-                <Route path="keysend" element={<Keysend />} />
-                <Route path="confirmPayment" element={<ConfirmPayment />} />
-              </Route>
-              <Route path="unlock" element={<Unlock />} />
-            </Routes>
-          </HashRouter>
-        </I18nextProvider>
+        <HashRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <RequireAuth>
+                  <Layout />
+                </RequireAuth>
+              }
+            >
+              <Route index element={<Home />} />
+              <Route path="send" element={<Send />} />
+              <Route path="receive" element={<Receive />} />
+              <Route path="lnurlPay" element={<LNURLPay />} />
+              <Route path="keysend" element={<Keysend />} />
+              <Route path="confirmPayment" element={<ConfirmPayment />} />
+            </Route>
+            <Route path="unlock" element={<Unlock />} />
+          </Routes>
+        </HashRouter>
       </AccountsProvider>
     </AuthProvider>
   );
