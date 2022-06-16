@@ -288,7 +288,7 @@ function Home() {
   }
 
   return (
-    <div>
+    <div className="overflow-y-auto no-scrollbar">
       {allowance && (
         <Header
           title={allowance.host}

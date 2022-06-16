@@ -175,7 +175,9 @@ const Layout = () => {
         />
       </div>
 
-      <Outlet />
+      <main className="flex flex-col grow min-h-0">
+        <Outlet />
+      </main>
     </>
   );
 };
