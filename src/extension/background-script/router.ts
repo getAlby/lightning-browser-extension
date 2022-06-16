@@ -39,7 +39,7 @@ const routes = {
   addAccount: accounts.add,
   editAccount: accounts.edit,
   getAccounts: accounts.all,
-  deleteAccount: accounts.deleteAccount,
+  removeAccount: accounts.remove,
   selectAccount: accounts.select,
   setPassword: setup.setPassword,
   reset: setup.reset,

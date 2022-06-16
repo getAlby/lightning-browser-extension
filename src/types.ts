@@ -84,9 +84,9 @@ export interface MessageDefault {
   prompt?: boolean;
 }
 
-export interface MessageAccountDelete extends MessageDefault {
+export interface MessageAccountRemove extends MessageDefault {
   args?: { id: Account["id"] };
-  action: "deleteAccount";
+  action: "removeAccount";
 }
 export interface MessageAccountAdd extends MessageDefault {
   args: Omit<Account, "id">;

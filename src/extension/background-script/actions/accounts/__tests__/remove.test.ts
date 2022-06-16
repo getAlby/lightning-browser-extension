@@ -1,7 +1,7 @@
 import state from "~/extension/background-script/state";
-import type { MessageAccountDelete } from "~/types";
+import type { MessageAccountRemove } from "~/types";
 
-import deleteAccount from "../delete";
+import remove from "../remove";
 
 jest.mock("~/extension/background-script/state");
 
@@ -24,20 +24,20 @@ const defaultMockState = {
   },
 };
 
-const message: MessageAccountDelete = {
+const message: MessageAccountRemove = {
   application: "LBE",
   args: { id: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e" },
   origin: { internal: true },
   prompt: true,
-  action: "deleteAccount",
+  action: "removeAccount",
 };
 
-describe("delete account", () => {
+describe("remove account", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  test("current account is being deleted first existing account will be set as current", async () => {
+  test("current account is being removed first existing account will be set as current", async () => {
     const mockState = defaultMockState;
 
     state.getState = jest.fn().mockReturnValue(mockState);
@@ -45,8 +45,8 @@ describe("delete account", () => {
 
     const spy = jest.spyOn(state, "setState");
 
-    expect(await deleteAccount(message)).toStrictEqual({
-      data: { deleted: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e" },
+    expect(await remove(message)).toStrictEqual({
+      data: { removed: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e" },
     });
 
     expect(spy).toHaveBeenNthCalledWith(2, {
@@ -56,7 +56,7 @@ describe("delete account", () => {
     expect(spy).toHaveBeenCalledTimes(2);
   });
 
-  test("other account is being deleted the current account is not updated", async () => {
+  test("other account is being removed the current account is not updated", async () => {
     const mockState = defaultMockState;
 
     state.getState = jest.fn().mockReturnValue(mockState);
@@ -65,12 +65,12 @@ describe("delete account", () => {
     const spy = jest.spyOn(state, "setState");
 
     expect(
-      await deleteAccount({
+      await remove({
         ...message,
         args: { id: "d892e2d7-ac72-49b7-94c2-9fa024c5c1d3" },
       })
     ).toStrictEqual({
-      data: { deleted: "d892e2d7-ac72-49b7-94c2-9fa024c5c1d3" },
+      data: { removed: "d892e2d7-ac72-49b7-94c2-9fa024c5c1d3" },
     });
 
     expect(spy).toHaveBeenCalledTimes(1);
@@ -96,8 +96,8 @@ describe("delete account", () => {
     const messageTestConnection = message;
     delete messageTestConnection["args"];
 
-    expect(await deleteAccount(messageTestConnection)).toStrictEqual({
-      data: { deleted: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e" },
+    expect(await remove(messageTestConnection)).toStrictEqual({
+      data: { removed: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e" },
     });
 
     expect(spy).toHaveBeenNthCalledWith(1, {
