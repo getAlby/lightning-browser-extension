@@ -13,36 +13,35 @@ export default function TestConnection() {
     name: string;
     balance: number;
   }>();
-  const [errorMessage, setErrorMessage] = useState();
+  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation(["welcome"]);
 
   const navigate = useNavigate();
 
-  function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
-    utils.call("removeAccount").then(() => {
-      navigate(-1);
-    });
+  async function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
+    await utils.call("deleteAccount");
+    navigate(-1);
   }
 
-  function loadAccountInfo() {
+  async function loadAccountInfo() {
     setLoading(true);
-    api
-      .getAccountInfo()
-      .then((response) => {
-        const name = response.name;
-        const { alias } = response.info;
-        const { balance: resBalance } = response.balance;
-        const balance =
-          typeof resBalance === "number" ? resBalance : parseInt(resBalance);
+    try {
+      const response = await api.getAccountInfo();
+      const name = response.name;
+      const { alias } = response.info;
+      const { balance: resBalance } = response.balance;
+      const balance =
+        typeof resBalance === "number" ? resBalance : parseInt(resBalance);
 
-        setAccountInfo({ alias, balance, name });
-      })
-      .catch((e) => {
-        console.error(e);
-        setErrorMessage(e.message);
-      })
-      .finally(() => setLoading(false));
+      setAccountInfo({ alias, balance, name });
+    } catch (e) {
+      const message = e instanceof Error ? `(${e.message})` : "";
+      console.error(message);
+      setErrorMessage(message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
