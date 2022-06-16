@@ -14,7 +14,7 @@ import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import browser from "webextension-polyfill";
@@ -142,13 +142,13 @@ function Home() {
           <div className="flex justify-between items-center py-3">
             <dl className="mb-0">
               <dt className="text-xs text-gray-500 dark:text-neutral-400">
-                Allowance
+                {t("allowance_view.allowance")}
               </dt>
               <dd className="flex items-center mb-0 text-sm font-medium dark:text-neutral-400">
                 {+allowance.totalBudget > 0
                   ? `${allowance.usedBudget} / ${allowance.totalBudget} `
                   : "0 / 0 "}
-                sats used
+                {t("allowance_view.sats_used")}
                 <div className="ml-3 w-24">
                   <Progressbar percentage={allowance.percentage} />
                 </div>
@@ -165,7 +165,7 @@ function Home() {
             </div>
           </div>
           <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
-            Recent Transactions
+            {t("recent_transactions")}
           </h2>
           {allowance?.payments.length > 0 ? (
             <TransactionsTable
@@ -202,7 +202,13 @@ function Home() {
             />
           ) : (
             <p className="text-gray-500 dark:text-neutral-400">
-              No transactions on <strong>{allowance.name}</strong> yet.
+              <Trans
+                i18nKey={"allowance_view.no_transactions"}
+                t={t}
+                values={{ name: allowance.name }}
+                // eslint-disable-next-line react/jsx-key
+                components={[<strong></strong>]}
+              />
             </p>
           )}
         </div>
