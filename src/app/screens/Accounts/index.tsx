@@ -275,7 +275,7 @@ function AccountsScreen() {
               {lndHubData.lnAddress && (
                 <div className="dark:text-white mb-6">
                   <p>
-                    <strong>Your lightning address:</strong>
+                    <strong>Your Lightning Address:</strong>
                   </p>
                   {lndHubData.lnAddress && <p>{lndHubData.lnAddress}</p>}
                 </div>
