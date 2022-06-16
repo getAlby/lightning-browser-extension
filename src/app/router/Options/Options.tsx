@@ -1,9 +1,3 @@
-import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
-
-import { AuthProvider, useAuth } from "~/app/context/AuthContext";
-import { AccountsProvider } from "~/app/context/AccountsContext";
-import getConnectorRoutes from "~/app/router/connectorRoutes";
-import RequireAuth from "~/app/router/RequireAuth";
 import Container from "@components/Container";
 import Navbar from "@components/Navbar";
 import Accounts from "@screens/Accounts";
@@ -18,7 +12,12 @@ import Send from "@screens/Send";
 import Settings from "@screens/Settings";
 import Unlock from "@screens/Unlock";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
+import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { AccountsProvider } from "~/app/context/AccountsContext";
+import { AuthProvider, useAuth } from "~/app/context/AuthContext";
+import RequireAuth from "~/app/router/RequireAuth";
+import getConnectorRoutes from "~/app/router/connectorRoutes";
 
 function Options() {
   const connectorRoutes = getConnectorRoutes();

@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import i18n from "~/i18n/i18nConfig";
 import { welcomeI18nNamespace } from "~/i18n/namespaces";
+
 import Features from "./features";
 
 function getFeatures() {

@@ -1,9 +1,9 @@
 import Button from "@components/Button";
 import TextField from "@components/form/TextField";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import utils from "~/common/lib/utils";
-import { useTranslation } from "react-i18next";
 
 const initialFormData = {
   password: "",
