@@ -1,9 +1,9 @@
-import { MessageBlocklistDelete } from "~/types";
+import { MessageBlocklistGet } from "~/types";
 
 import db from "../../db";
 
 const get = async (
-  message: MessageBlocklistDelete
+  message: MessageBlocklistGet
 ): Promise<{ data: { blocked: boolean } }> => {
   const host = message.args.host;
   const isBlocked = await db.blocklist
