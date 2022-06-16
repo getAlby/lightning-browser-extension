@@ -24,6 +24,7 @@ export default function TestConnection() {
   const { t } = useTranslation("translation", {
     keyPrefix: "welcome.test_connection",
   });
+  const { t: tCommon } = useTranslation("common");
 
   async function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
     await utils.call("deleteAccount");
@@ -97,7 +98,7 @@ export default function TestConnection() {
               <div>
                 <div className="flex space-x-2">
                   <h1 className="text-2xl font-bold text-green-bitcoin">
-                    {t("success")}
+                    {tCommon("success")}
                   </h1>
                   <img
                     src="assets/icons/star.svg"
