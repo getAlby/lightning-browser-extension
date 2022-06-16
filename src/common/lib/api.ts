@@ -34,8 +34,7 @@ interface UnlockRes {
   currentAccountId: string;
 }
 
-export const getAccountInfo = () =>
-  utils.call<AccountInfoRes | { error: string }>("accountInfo");
+export const getAccountInfo = () => utils.call<AccountInfoRes>("accountInfo");
 
 /**
  * stale-while-revalidate get account info
@@ -57,9 +56,6 @@ export const swrGetAccountInfo = async (
     // Update account info with most recent data, save to cache.
     getAccountInfo()
       .then((response) => {
-        if ("error" in response) {
-          throw new Error(response.error);
-        }
         const { alias } = response.info;
         const { balance: resBalance } = response.balance;
         const name = response.name;

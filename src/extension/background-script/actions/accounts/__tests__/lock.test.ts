@@ -1,6 +1,7 @@
-import lock from "../lock";
 import state from "~/extension/background-script/state";
 import type { MessageAccountLock } from "~/types";
+
+import lock from "../lock";
 
 jest.mock("~/extension/background-script/state");
 
@@ -12,7 +13,7 @@ const message: MessageAccountLock = {
   application: "LBE",
   origin: { internal: true },
   prompt: true,
-  type: "lock",
+  action: "lock",
 };
 
 describe("lock extension", () => {
