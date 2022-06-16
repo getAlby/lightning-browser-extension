@@ -16,6 +16,7 @@ function Unlock() {
   };
   const auth = useAuth();
   const { t } = useTranslation("translation", { keyPrefix: "unlock" });
+  const { t: tCommon } = useTranslation("common");
   const from = location.state.from?.pathname || "/";
 
   function handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -77,7 +78,7 @@ function Unlock() {
         </div>
         <Button
           type="submit"
-          label={t("actions.unlock")}
+          label={tCommon("actions.unlock")}
           fullWidth
           primary
           disabled={password === ""}

@@ -23,6 +23,7 @@ export default function SetPassword() {
   const { t } = useTranslation("translation", {
     keyPrefix: "welcome.set_password",
   });
+  const { t: tCommon } = useTranslation("common");
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -114,7 +115,7 @@ export default function SetPassword() {
       </div>
       <div className="mt-8 flex justify-center">
         <Button
-          label={t("actions.next")}
+          label={tCommon("actions.next")}
           type="submit"
           primary
           disabled={
