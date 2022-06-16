@@ -1,4 +1,5 @@
 import Dexie from "dexie";
+import "fake-indexeddb/auto";
 import browser from "webextension-polyfill";
 import type { Allowance, Payment } from "~/types";
 

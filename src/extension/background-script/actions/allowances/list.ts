@@ -2,8 +2,6 @@ import db from "~/extension/background-script/db";
 import type { MessageAllowanceList } from "~/types";
 
 const list = async (message: MessageAllowanceList) => {
-  console.log("message", message);
-
   const dbAllowances = await db.allowances
     .toCollection()
     .reverse()
