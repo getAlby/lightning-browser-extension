@@ -28,7 +28,7 @@ const normalizeLnurl = (lnurlString: string) => {
     const url = bech32Decode(lnurlString);
     return new URL(url);
   } catch (e) {
-    console.log("ignoring bech32 parsing error", e);
+    console.error("ignoring bech32 parsing error", e);
   }
 
   // maybe it's a lightning address?

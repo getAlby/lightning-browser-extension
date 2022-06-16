@@ -69,7 +69,7 @@ export default function ConnectLndHub() {
           navigate("/test-connection");
         }
       } else {
-        console.log(validation);
+        console.error(validation);
         toast.error(
           `Connection failed. Is your LNDHub URI correct? \n\n(${validation.error})`
         );

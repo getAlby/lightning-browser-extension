@@ -26,7 +26,6 @@ const routes = {
   deleteAllowance: allowances.deleteAllowance,
   updateAllowance: allowances.updateAllowance,
   lock: accounts.lock,
-  isUnlocked: accounts.isUnlocked,
   unlock: accounts.unlock,
   getInfo: ln.getInfo,
   sendPayment: ln.sendPayment,
@@ -40,7 +39,6 @@ const routes = {
   addAccount: accounts.add,
   editAccount: accounts.edit,
   getAccounts: accounts.all,
-  removeAccount: accounts.remove,
   deleteAccount: accounts.deleteAccount,
   selectAccount: accounts.select,
   setPassword: setup.setPassword,
@@ -63,7 +61,7 @@ const router = (path: FixMe) => {
   }, routes);
 
   if (!route) {
-    console.log(`Route not found: ${path}`);
+    console.warn(`Route not found: ${path}`);
     // return a function to keep the expected method signature
     return () => {
       return Promise.reject({ error: `${path} not found}` });

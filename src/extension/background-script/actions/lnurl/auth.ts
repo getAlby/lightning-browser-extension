@@ -25,7 +25,7 @@ async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
 
   // we have the check the unlock status manually. The account can still be locked
   // If it is locked we must show a prompt to unlock
-  const isUnlocked = state.getState().password !== null;
+  const isUnlocked = state.getState().isUnlocked();
 
   let loginStatus;
   // check if there is a publisher and lnurlAuth is enabled,
@@ -36,7 +36,7 @@ async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
     try {
       const promptMessage = {
         ...message,
-        type: "lnurlAuth",
+        action: "lnurlAuth",
         args: {
           ...message.args,
           lnurlDetails,
@@ -167,7 +167,6 @@ async function auth(lnurlDetails: LNURLDetails) {
   } catch (e) {
     if (axios.isAxiosError(e)) {
       console.error("LNURL-AUTH FAIL:", e);
-      console.log(e.response?.data);
       const error =
         (e.response?.data as { reason?: string })?.reason || e.message; // lnurl error or exception message
       throw new Error(error);

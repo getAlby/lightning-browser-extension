@@ -177,7 +177,7 @@ function AccountsScreen() {
               <div className="w-60">
                 <TextField
                   autoFocus
-                  id="acountName"
+                  id="accountName"
                   label="Name"
                   onChange={(e) => setNewAccountName(e.target.value)}
                   value={newAccountName}

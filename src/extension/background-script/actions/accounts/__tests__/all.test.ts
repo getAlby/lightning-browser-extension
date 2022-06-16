@@ -1,8 +1,7 @@
-import type { AccountInfoRes } from "~/common/lib/api";
 import state from "~/extension/background-script/state";
-import type { MessageAccountInfo } from "~/types";
+import type { MessageAccountAll } from "~/types";
 
-import infoAccount from "../info";
+import getAccounts from "../all";
 
 jest.mock("~/extension/background-script/state");
 
@@ -19,32 +18,37 @@ const mockState = {
     name: "Alby",
   }),
   currentAccountId: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
+  accounts: {
+    "888": {
+      config: "abc",
+      connector: "lnd",
+      name: "BLUE",
+    },
+    "666": {
+      config: "xyz",
+      connector: "lnd",
+      name: "GREEN",
+    },
+  },
 };
 
-describe("account info", () => {
+describe("account all", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  test("get account info", async () => {
-    const message: MessageAccountInfo = {
+  test("get all accounts", async () => {
+    const message: MessageAccountAll = {
       application: "LBE",
       origin: { internal: true },
       prompt: true,
-      action: "accountInfo",
+      action: "getAccounts",
     };
 
     state.getState = jest.fn().mockReturnValue(mockState);
 
-    const result: AccountInfoRes = {
-      currentAccountId: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
-      name: "Alby",
-      info: { alias: "getalby.com" },
-      balance: { balance: 0 },
-    };
-
-    expect(await infoAccount(message)).toStrictEqual({
-      data: result,
+    expect(await getAccounts(message)).toStrictEqual({
+      data: mockState.accounts,
     });
   });
 });

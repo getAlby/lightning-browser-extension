@@ -1,9 +1,12 @@
 import {
+  CaretLeftIcon,
   SendIcon,
   ReceiveIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import AllowanceMenu from "@components/AllowanceMenu";
 import Button from "@components/Button";
+import Header from "@components/Header";
+import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
 import Progressbar from "@components/Progressbar";
 import PublisherCard from "@components/PublisherCard";
@@ -55,10 +58,10 @@ function Home() {
   }
 
   function handleLightningDataMessage(response: {
-    type: string;
+    action: string;
     args: Battery[];
   }) {
-    if (response.type === "lightningData") {
+    if (response.action === "lightningData") {
       setLnData(response.args);
     }
   }
@@ -71,7 +74,7 @@ function Home() {
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
       if (tabs.length > 0 && tabs[0].url?.startsWith("http")) {
         browser.tabs.sendMessage(tabs[0].id as number, {
-          type: "extractLightningData",
+          action: "extractLightningData",
         });
       }
     });
@@ -286,6 +289,17 @@ function Home() {
 
   return (
     <div className="overflow-y-auto no-scrollbar">
+      {allowance && (
+        <Header
+          title={allowance.host}
+          headerLeft={
+            <IconButton
+              onClick={() => setAllowance(null)}
+              icon={<CaretLeftIcon className="w-4 h-4" />}
+            />
+          }
+        />
+      )}
       {renderPublisherCard()}
       {allowance ? renderAllowanceView() : renderDefaultView()}
     </div>

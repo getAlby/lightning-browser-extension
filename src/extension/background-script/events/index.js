@@ -21,7 +21,7 @@ const subscribe = () => {
   PubSub.subscribe("lnurl.auth.success", lnurlAuthSuccessNotification);
   PubSub.subscribe("lnurl.auth.failed", lnurlAuthFailedNotification);
 
-  console.log(`Event subscriptions registered`);
+  console.info(`Event subscriptions registered`);
 };
 
 export { subscribe };

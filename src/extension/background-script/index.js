@@ -21,7 +21,7 @@ const extractLightningData = (tabId, changeInfo, tab) => {
     // before the receiving side in the content-script was connected/listening
     setTimeout(() => {
       browser.tabs.sendMessage(tabId, {
-        type: "extractLightningData",
+        action: "extractLightningData",
       });
     }, 150);
   }
@@ -62,12 +62,12 @@ const updateIcon = async (tabId, changeInfo, tabInfo) => {
 
 const debugLogger = (message, sender) => {
   if (state.getState().settings.debug) {
-    console.log("Background onMessage: ", message, sender);
+    console.info("Background onMessage: ", message, sender);
   }
 };
 
 const handleInstalled = (details) => {
-  console.log(`Handle installed: ${details.reason}`);
+  console.info(`Handle installed: ${details.reason}`);
   // TODO: maybe check if accounts are already configured?
   if (details.reason === "install") {
     isFirstInstalled = true;
@@ -83,15 +83,18 @@ const routeCalls = (message, sender) => {
   }
   const debug = state.getState().settings.debug;
 
-  const action = message.type; //|| message.action; // TODO: what is a good message format to route to an action?
-  console.log(`Routing call: ${action}`);
+  if (message.type) {
+    console.error("Invalid message, using type: ", message);
+  }
+  const action = message.action || message.type;
+  console.info(`Routing call: ${action}`);
   // Potentially check for internal vs. public calls
   const call = router(action)(message, sender);
 
   // Log the action response if we are in debug mode
   if (debug) {
     call.then((r) => {
-      console.log(`${action} response:`, r);
+      console.info(`${action} response:`, r);
       return r;
     });
   }
@@ -99,28 +102,29 @@ const routeCalls = (message, sender) => {
 };
 
 async function init() {
-  console.log("Loading background script");
+  console.info("Loading background script");
 
   //await browser.storage.sync.set({ settings: { debug: true }, allowances: [] });
   await state.getState().init();
-  console.log("State loaded");
+  console.info("State loaded");
+
   await db.open();
+  console.info("DB opened");
 
   events.subscribe();
+  console.info("Events subscribed");
 
-  // initialize a connector for the current account
   browser.runtime.onMessage.addListener(debugLogger);
   // this is the only handler that may and must return a Promise which resolve with the response to the content script
   browser.runtime.onMessage.addListener(routeCalls);
 
-  // TODO: make optional
   browser.tabs.onUpdated.addListener(updateIcon); // update Icon when there is an allowance
 
   // Notify the content script that the tab has been updated.
   browser.tabs.onUpdated.addListener(extractLightningData);
 
   if (state.getState().settings.debug) {
-    console.log("Debug mode enabled, use window.debugAlby");
+    console.info("Debug mode enabled, use window.debugAlby");
     window.debugAlby = {
       state,
       db,
@@ -128,12 +132,14 @@ async function init() {
       router,
     };
   }
+  console.info("Loading completed");
 }
 
 // The onInstalled event is fired directly after the code is loaded.
 // When we subscribe to that event asynchronously in the init() function it is too late and we miss the event.
 browser.runtime.onInstalled.addListener(handleInstalled);
 
+console.info("Welcome to Alby");
 init().then(() => {
   if (isFirstInstalled) {
     utils.openUrl("welcome.html");

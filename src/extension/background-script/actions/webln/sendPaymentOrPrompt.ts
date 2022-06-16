@@ -53,11 +53,11 @@ async function payWithPrompt(message: Message) {
   try {
     const response = await utils.openPrompt({
       ...message,
-      type: "confirmPayment",
+      action: "confirmPayment",
     });
     return response;
   } catch (e) {
-    console.log("Payment cancelled", e);
+    console.error("Payment cancelled", e);
     if (e instanceof Error) {
       return { error: e.message };
     }

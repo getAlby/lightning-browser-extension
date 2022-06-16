@@ -21,10 +21,9 @@ export default function TestConnection() {
 
   const navigate = useNavigate();
 
-  function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
-    utils.call("deleteAccount").then(() => {
-      navigate(-1);
-    });
+  async function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
+    await utils.call("deleteAccount");
+    navigate(-1);
   }
 
   async function loadAccountInfo() {
@@ -48,7 +47,7 @@ export default function TestConnection() {
       }
       getAccounts();
     } catch (e) {
-      console.log(e);
+      console.error(e);
       if (e instanceof Error) {
         setErrorMessage(e.message);
       }

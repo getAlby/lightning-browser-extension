@@ -10,17 +10,18 @@ import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
 
 interface State {
-  connector: Connector | null;
   account: Account | null;
-  settings: SettingsStorage;
   accounts: Accounts;
+  connector: Connector | null;
   currentAccountId: string | null;
-  password: string | null;
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
-  lock: () => Promise<void>;
   init: () => Promise<void>;
+  isUnlocked: () => boolean;
+  lock: () => Promise<void>;
+  password: string | null;
   saveToStorage: () => Promise<void>;
+  settings: SettingsStorage;
 }
 
 interface BrowserStorage {
@@ -110,7 +111,7 @@ const state = createState<State>((set, get) => ({
 }));
 
 browserStorageKeys.forEach((key) => {
-  console.log(`Adding state subscription for ${key}`);
+  console.info(`Adding state subscription for ${key}`);
   state.subscribe(
     (newValue, previousValue) => {
       //if (previous && Object.keys(previous) > 0) {

@@ -62,7 +62,7 @@ function Keysend(props: Props) {
       msg.reply(payment); // resolves the prompt promise and closes the prompt window
       setSuccessMessage(`Payment sent! Preimage: ${payment.preimage}`);
     } catch (e) {
-      console.log(e);
+      console.error(e);
       if (e instanceof Error) {
         toast.error(`Error: ${e.message}`);
       }

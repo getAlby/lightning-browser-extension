@@ -46,7 +46,7 @@ describe("edit account", () => {
       },
       origin: { internal: true },
       prompt: true,
-      type: "editAccount",
+      action: "editAccount",
     };
 
     state.getState = jest.fn().mockReturnValue(mockState);
@@ -83,7 +83,7 @@ describe("edit account", () => {
       },
       origin: { internal: true },
       prompt: true,
-      type: "editAccount",
+      action: "editAccount",
     };
 
     state.getState = jest.fn().mockReturnValue(mockState);
