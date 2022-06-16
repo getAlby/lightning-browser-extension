@@ -1,12 +1,10 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import QRCode from "react-qr-code";
-import { toast } from "react-toastify";
-
-import utils from "~/common/lib/utils";
-
-import TextField from "@components/form/TextField";
 import ConnectorForm from "@components/ConnectorForm";
+import TextField from "@components/form/TextField";
+import { useState } from "react";
+import QRCode from "react-qr-code";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import utils from "~/common/lib/utils";
 
 const walletCreateUrl =
   process.env.WALLET_CREATE_URL || "https://app.regtest.getalby.com/api/users";
@@ -91,7 +89,7 @@ export default function NewWallet() {
           navigate("/test-connection");
         }
       } else {
-        console.log({ validation });
+        console.error({ validation });
         toast.error(`Connection failed (${validation.error})`);
       }
     } catch (e) {
@@ -178,7 +176,7 @@ export default function NewWallet() {
             />
           </div>
           <div className="mt-6">
-            <p className="mb-2 text-gray-700 dark:text-gray-400">
+            <p className="mb-2 text-gray-700 dark:text-neutral-400">
               Your Alby account also comes with an optional{" "}
               <a
                 className="underline"

@@ -1,16 +1,14 @@
-import type { Message } from "~/types";
-import state from "../../state";
+import state from "~/extension/background-script/state";
+import type { MessageAccountDelete } from "~/types";
 
-// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652
-// align Message-Types
-const deleteAccount = async (message: Message) => {
+const deleteAccount = async (message: MessageAccountDelete) => {
   const accounts = state.getState().accounts;
 
   let currentAccountId = state.getState().currentAccountId;
-  let accountId = message.args?.id;
+  let accountId = message.args.id;
 
   // if no account is specified, delete the current account
-  if (accountId === undefined) {
+  if (accountId === undefined && currentAccountId !== null) {
     accountId = currentAccountId;
   }
 
@@ -33,9 +31,8 @@ const deleteAccount = async (message: Message) => {
       data: { deleted: accountId },
     };
   } else {
-    console.log(`Account not found: ${accountId}`);
     return {
-      error: "Account not found",
+      error: `Account not found: ${accountId}`,
     };
   }
 };

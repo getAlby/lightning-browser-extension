@@ -201,13 +201,42 @@ Currently, there is one native companion app available to connect to Tor nodes: 
 
 We welcome and appreciate new contributions.
 
-We use the [Development Project Board](https://github.com/getAlby/lightning-browser-extension/projects/2) to plan to-dos. Best choose something from the to-do column. (If there is nothing for you, feel free to pick something from the backlog)
+### Find a task
 
-If you're a developer looking to help but not sure where to begin, check out the issues that have specifically been marked as being friendly to new contributors [here](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22+project%3AgetAlby%2Flightning-browser-extension%2F2).
+We use the [Development Project Board](https://github.com/orgs/getAlby/projects/10/views/2) to plan to-dos. Best choose something from the to-do column. (If there is nothing for you, feel free to pick something from the backlog)
 
-> Alby enforces [Conventional Commits Specification](https://www.conventionalcommits.org/en/) for adding human and machine readable meaning to commit messages, make sure to read and follow them.
+#### Developer
 
-If you're looking for a bigger challenge, before opening a pull request please [create an issue](https://github.com/bumi/lightning-browser-extension/issues/new) or [join our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2) to get feedback, discuss the best way to tackle the challenge, and to ensure that there's no duplication of work.
+- Check out the issues that have specifically been [marked as being friendly to new contributors](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3Adesign+label%3A%22good+first+issue%22)
+- You can also review open PRs
+
+#### Designer
+
+- Check out the issues that have specifically been [marked with "design"](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3A%22design%22)
+- We also have a [Figma Design Guide Project](https://www.figma.com/file/xwGXHxW4FWpV03Tt37atZv/Extension-1.10.0) which you can have a look at
+
+#### Anyone
+
+- Have a look at this Readme. Can it be improved? Do you see typos? You can open a PR or reach out to us in [our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2).
+- You can help with [translations](#translations)
+
+### Creating a PR
+
+When creating a PR please take this points as a reminder:
+
+- Not too big
+- Try to split things up
+- Think in iterations (babysteps)  
+  You can always start a PR and if you feel like adding on more things to it, better branch off and create a new i.e. _draft_-PR
+- Newly added components should have a unit-test
+- If there's not yet an issue for your PR please first [create an issue](https://github.com/bumi/lightning-browser-extension/issues/new) with a proposal what you would like to do. This allows us to give feedback and helps you no wasting time and motivation
+- If you work on a more complex PR please [join our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2) to get feedback, discuss the best way to tackle the challenge, and to ensure that there's no duplication of work. It's often faster and nicer to chat or call about questions than to do ping-pong comments in PRs
+
+### Commit message format
+
+Alby enforces [Conventional Commits Specification](https://www.conventionalcommits.org/en/)
+
+> A specification for adding human and machine readable meaning to commit messages
 
 ### Translations
 
@@ -233,6 +262,13 @@ Yes. Thanks to generous donors, Alby is able to offer several bounties. You can 
 
 Based on the web extension starter kit: [/abhijithvijayan/web-extension-starter](https://github.com/abhijithvijayan/web-extension-starter)
 heavily inspired by the super-amazing work of the [Joule extension](https://lightningjoule.com/)
+
+## ⚡️Donations
+
+Want to support the work on Alby?
+
+Support the Alby team ⚡️hello@getalby.com  
+You can also contribute to our [bounty program](https://github.com/getAlby/lightning-browser-extension/wiki/Bounties): ⚡️bounties@getalby.com
 
 ## License
 

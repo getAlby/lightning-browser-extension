@@ -1,14 +1,13 @@
-import React, { useState } from "react";
-
-import Container from "@components/Container";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
-import TextField from "@components/form/TextField";
+import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
+import SatButtons from "@components/SatButtons";
+import TextField from "@components/form/TextField";
+import React, { useState } from "react";
+import { USER_REJECTED_ERROR } from "~/common/constants";
+import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import type { RequestInvoiceArgs } from "~/types";
-import api from "~/common/lib/api";
-import SatButtons from "@components/SatButtons";
-import { USER_REJECTED_ERROR } from "~/common/constants";
 
 type Origin = {
   name: string;
@@ -28,7 +27,7 @@ const Dt = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Dd = ({ children }: { children: React.ReactNode }) => (
-  <dd className="mb-4 text-gray-600 dark:text-gray-500">{children}</dd>
+  <dd className="mb-4 text-gray-600 dark:text-neutral-500">{children}</dd>
 );
 
 function MakeInvoice({

@@ -1,8 +1,20 @@
-import React, { useState, useEffect, MouseEvent } from "react";
+import Button from "@components/Button";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import Container from "@components/Container";
+import PublisherCard from "@components/PublisherCard";
+import SatButtons from "@components/SatButtons";
+import TextField from "@components/form/TextField";
 import axios from "axios";
+import React, { useState, useEffect, MouseEvent } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import { useAuth } from "~/app/context/AuthContext";
+import { USER_REJECTED_ERROR } from "~/common/constants";
+import api from "~/common/lib/api";
+import lnurl from "~/common/lib/lnurl";
+import msg from "~/common/lib/msg";
+import utils from "~/common/lib/utils";
+import getOriginData from "~/extension/content-script/originData";
 import {
   LNURLPaymentInfoError,
   LNURLPaymentInfo,
@@ -10,21 +22,6 @@ import {
   LNURLPayServiceResponse,
   Payment,
 } from "~/types";
-
-import api from "~/common/lib/api";
-import msg from "~/common/lib/msg";
-import utils from "~/common/lib/utils";
-import lnurl from "~/common/lib/lnurl";
-import getOriginData from "~/extension/content-script/originData";
-import { useAuth } from "~/app/context/AuthContext";
-import { USER_REJECTED_ERROR } from "~/common/constants";
-
-import Button from "@components/Button";
-import Container from "@components/Container";
-import TextField from "@components/form/TextField";
-import PublisherCard from "@components/PublisherCard";
-import ConfirmOrCancel from "@components/ConfirmOrCancel";
-import SatButtons from "@components/SatButtons";
 
 type Origin = {
   name: string;
@@ -41,7 +38,7 @@ const Dt = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Dd = ({ children }: { children: React.ReactNode }) => (
-  <dd className="mb-4 text-gray-600 dark:text-gray-500">{children}</dd>
+  <dd className="mb-4 text-gray-600 dark:text-neutral-500">{children}</dd>
 );
 
 function LNURLPay(props: Props) {
@@ -355,7 +352,7 @@ function LNURLPay(props: Props) {
                       {details.minSendable === details.maxSendable && (
                         <>
                           <Dt>Amount (Satoshi)</Dt>
-                          <Dd>{`${+details.minSendable / 1000} sat`}</Dd>
+                          <Dd>{`${+details.minSendable / 1000} sats`}</Dd>
                         </>
                       )}
                     </>

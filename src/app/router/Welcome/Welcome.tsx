@@ -7,12 +7,12 @@ import { AuthProvider } from "~/app/context/AuthContext";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
 import type { Step } from "@components/Steps";
 import DevMenu from "@components/DevMenu";
+import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
 import Steps from "@components/Steps";
 import Intro from "@screens/Onboard/Intro";
 import SetPassword from "@screens/Onboard/SetPassword";
-import ChooseConnector from "@screens/connectors/ChooseConnector";
 import TestConnection from "@screens/Onboard/TestConnection";
-import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
+import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { welcomeI18nNamespace } from "~/i18n/namespaces";
 
 let connectorRoutes = getConnectorRoutes();

@@ -1,4 +1,5 @@
 import elliptic from "elliptic";
+
 const ec = new elliptic.ec("secp256k1");
 
 class HashKeySigner {

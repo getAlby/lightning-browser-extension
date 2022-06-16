@@ -1,15 +1,14 @@
-import { useState, useEffect, useRef, useCallback } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import AllowanceMenu from "@components/AllowanceMenu";
+import Container from "@components/Container";
+import Progressbar from "@components/Progressbar";
+import PublisherCard from "@components/PublisherCard";
+import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-
-import { Allowance } from "~/types";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import utils from "~/common/lib/utils";
-import Container from "@components/Container";
-import AllowanceMenu from "@components/AllowanceMenu";
-import PublisherCard from "@components/PublisherCard";
-import Progressbar from "@components/Progressbar";
-import TransactionsTable from "@components/TransactionsTable";
+import { Allowance } from "~/types";
 
 dayjs.extend(relativeTime);
 
@@ -52,8 +51,8 @@ function Publisher() {
           <div className="flex justify-between items-center pt-8 pb-4">
             <dl>
               <dt className="text-sm font-medium text-gray-500">Allowance</dt>
-              <dd className="flex items-center font-bold text-xl dark:text-gray-400">
-                {allowance.usedBudget} / {allowance.totalBudget} sat used
+              <dd className="flex items-center font-bold text-xl dark:text-neutral-400">
+                {allowance.usedBudget} / {allowance.totalBudget} sats used
                 <div className="ml-3 w-24">
                   <Progressbar percentage={allowance.percentage} />
                 </div>

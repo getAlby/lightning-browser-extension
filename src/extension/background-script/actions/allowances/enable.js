@@ -1,6 +1,7 @@
-import state from "../../state";
-import db from "../../db";
 import utils from "~/common/lib/utils";
+
+import db from "../../db";
+import state from "../../state";
 import setIcon from "../setup/setIcon";
 
 const enable = async (message, sender) => {

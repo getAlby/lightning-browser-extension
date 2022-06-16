@@ -4,20 +4,19 @@ import {
   WalletIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import Button from "@components/Button";
+import Container from "@components/Container";
+import Menu from "@components/Menu";
+import TextField from "@components/form/TextField";
 import type { FormEvent } from "react";
 import { useState } from "react";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
-
+import { useAccounts } from "~/app/context/AccountsContext";
+import { useAuth } from "~/app/context/AuthContext";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
 import type { Account } from "~/types";
-import Button from "@components/Button";
-import Container from "@components/Container";
-import TextField from "@components/form/TextField";
-import Menu from "@components/Menu";
-import { useAccounts } from "~/app/context/AccountsContext";
-import { useAuth } from "~/app/context/AuthContext";
 
 type AccountAction = Omit<Account, "connector" | "config">;
 
@@ -75,7 +74,7 @@ function AccountsScreen() {
       <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
         Accounts
       </h2>
-      <div className="shadow border-b border-gray-200 dark:border-gray-500 sm:rounded-lg bg-white dark:bg-surface-02dp">
+      <div className="shadow border-b border-gray-200 dark:border-neutral-500 sm:rounded-lg bg-white dark:bg-surface-02dp">
         <div className="p-6">
           <Button
             icon={<PlusIcon className="w-5 h-5 mr-2" />}
@@ -99,7 +98,7 @@ function AccountsScreen() {
                         <h3 className="font-bold text-gray-900 dark:text-white">
                           {account.name}
                         </h3>
-                        <p className="text-gray-700 dark:text-gray-400">
+                        <p className="text-gray-700 dark:text-neutral-400">
                           {account.connector}
                         </p>
                       </div>
@@ -174,11 +173,11 @@ function AccountsScreen() {
               });
             }}
           >
-            <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-gray-500">
+            <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
               <div className="w-60">
                 <TextField
                   autoFocus
-                  id="acountName"
+                  id="accountName"
                   label="Name"
                   onChange={(e) => setNewAccountName(e.target.value)}
                   value={newAccountName}

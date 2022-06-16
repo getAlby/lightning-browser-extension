@@ -1,10 +1,10 @@
+import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
+import ConnectorForm from "@components/ConnectorForm";
+import TextField from "@components/form/TextField";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
-import TextField from "@components/form/TextField";
-import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
-import ConnectorForm from "@components/ConnectorForm";
 
 const initialFormData = Object.freeze({
   url: "",
@@ -123,7 +123,7 @@ export default function ConnectRaspiBlitz() {
       </div>
       {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
       <div className="mt-6">
-        <p className="mb-6 text-gray-500 mt-6 dark:text-gray-400">
+        <p className="mb-6 text-gray-500 mt-6 dark:text-neutral-400">
           Select <b>CONNECT</b>.<br />
           Select <b>EXPORT</b>.<br />
           Select <b>HEX</b>.<br />

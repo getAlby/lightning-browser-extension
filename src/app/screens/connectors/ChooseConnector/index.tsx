@@ -18,7 +18,7 @@ export default function ChooseConnector({ title, description }: Props) {
         <div className="mb-6">
           <h1 className="text-3xl font-bold dark:text-white">{title}</h1>
           {description && (
-            <p className="text-gray-500 mt-6 dark:text-gray-400">
+            <p className="text-gray-500 mt-6 dark:text-neutral-400">
               {description}
             </p>
           )}

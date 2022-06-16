@@ -1,15 +1,13 @@
 import axios from "axios";
-
-import sha256 from "crypto-js/sha256";
-import hmacSHA256 from "crypto-js/hmac-sha256";
 import Hex from "crypto-js/enc-hex";
+import hmacSHA256 from "crypto-js/hmac-sha256";
+import sha256 from "crypto-js/sha256";
 
-import state from "../../state";
-import db from "../../db";
 import utils from "../../../../common/lib/utils";
-
-import type { Message, LNURLDetails } from "../../../../types";
 import HashKeySigner from "../../../../common/utils/signer";
+import type { Message, LNURLDetails } from "../../../../types";
+import db from "../../db";
+import state from "../../state";
 
 const LNURLAUTH_CANONICAL_PHRASE =
   "DO NOT EVER SIGN THIS TEXT WITH YOUR PRIVATE KEYS! IT IS ONLY USED FOR DERIVATION OF LNURL-AUTH HASHING-KEY, DISCLOSING ITS SIGNATURE WILL COMPROMISE YOUR LNURL-AUTH IDENTITY AND MAY LEAD TO LOSS OF FUNDS!";
@@ -27,7 +25,7 @@ async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
 
   // we have the check the unlock status manually. The account can still be locked
   // If it is locked we must show a prompt to unlock
-  const isUnlocked = state.getState().password !== null;
+  const isUnlocked = state.getState().isUnlocked();
 
   let loginStatus;
   // check if there is a publisher and lnurlAuth is enabled,
@@ -38,7 +36,7 @@ async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
     try {
       const promptMessage = {
         ...message,
-        type: "lnurlAuth",
+        action: "lnurlAuth",
         args: {
           ...message.args,
           lnurlDetails,
@@ -169,7 +167,6 @@ async function auth(lnurlDetails: LNURLDetails) {
   } catch (e) {
     if (axios.isAxiosError(e)) {
       console.error("LNURL-AUTH FAIL:", e);
-      console.log(e.response?.data);
       const error =
         (e.response?.data as { reason?: string })?.reason || e.message; // lnurl error or exception message
       throw new Error(error);
