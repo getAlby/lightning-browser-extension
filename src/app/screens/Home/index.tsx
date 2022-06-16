@@ -25,7 +25,7 @@ dayjs.extend(relativeTime);
 
 function Home() {
   const [allowance, setAllowance] = useState<Allowance | null>(null);
-  const [isBlocked, setIsBlocked] = useState<boolean | null>(null);
+  const [isBlocked, setIsBlocked] = useState<boolean>(false);
   const [currentUrl, setCurrentUrl] = useState<URL | null>(null);
   const [payments, setPayments] = useState<Transaction[]>([]);
   const [loadingAllowance, setLoadingAllowance] = useState(true);
