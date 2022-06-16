@@ -1,12 +1,11 @@
+import ConnectorForm from "@components/ConnectorForm";
+import TextField from "@components/form/TextField";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
-
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
-
-import TextField from "@components/form/TextField";
-import ConnectorForm from "@components/ConnectorForm";
 
 const walletCreateUrl =
   process.env.WALLET_CREATE_URL || "https://app.regtest.getalby.com/api/users";
@@ -52,20 +51,12 @@ export default function NewWallet() {
           });
         } else {
           console.error(data);
-          alert(
-            `${t(
-              "choose_connector.alby.pre_connect.errors.create_wallet_error"
-            )}. ${JSON.stringify(data)}`
-          );
+          toast.error(`Failed to create a new wallet. ${JSON.stringify(data)}`);
         }
       })
       .catch((e) => {
         console.error(e);
-        alert(
-          `${t(
-            "choose_connector.alby.pre_connect.errors.create_wallet_error"
-          )}: ${e.message}`
-        );
+        toast.error(`Failed to create a new wallet: ${e.message}`);
       })
       .finally(() => {
         setLoading(false);
@@ -100,21 +91,13 @@ export default function NewWallet() {
           navigate("/test-connection");
         }
       } else {
-        console.log({ validation });
-        alert(
-          `${t(
-            "choose_connector.alby.pre_connect.errors.connection_failed_error"
-          )} (${validation.error})`
-        );
+        console.error({ validation });
+        toast.error(`Connection failed (${validation.error})`);
       }
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        alert(
-          `${t(
-            "choose_connector.alby.pre_connect.errors.connection_failed_error"
-          )} (${e.message})`
-        );
+        toast.error(`Connection failed (${e.message})`);
       }
     } finally {
       setLoading(false);
@@ -204,10 +187,8 @@ export default function NewWallet() {
             />
           </div>
           <div className="mt-6">
-            <p className="mb-2 text-gray-700 dark:text-gray-400">
-              {t(
-                "choose_connector.alby.pre_connect.optional_lightning_note.part1"
-              )}{" "}
+            <p className="mb-2 text-gray-700 dark:text-neutral-400">
+              Your Alby account also comes with an optional{" "}
               <a
                 className="underline"
                 href="https://lightningaddress.com/"

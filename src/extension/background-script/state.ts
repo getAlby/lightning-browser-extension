@@ -1,26 +1,27 @@
-import browser from "webextension-polyfill";
-import createState from "zustand";
 import merge from "lodash/merge";
 import pick from "lodash/pick";
-
+import browser from "webextension-polyfill";
+import createState from "zustand";
 import { decryptData } from "~/common/lib/crypto";
+import i18n from "~/i18n/i18nConfig";
+import type { Account, Accounts, SettingsStorage } from "~/types";
+
 import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
-import type { Account, Accounts, SettingsStorage } from "~/types";
-import i18n from "~/i18n/i18nConfig";
 
 interface State {
-  connector: Connector | null;
   account: Account | null;
-  settings: SettingsStorage;
   accounts: Accounts;
+  connector: Connector | null;
   currentAccountId: string | null;
-  password: string | null;
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
-  lock: () => Promise<void>;
   init: () => Promise<void>;
+  isUnlocked: () => boolean;
+  lock: () => Promise<void>;
+  password: string | null;
   saveToStorage: () => Promise<void>;
+  settings: SettingsStorage;
 }
 
 interface BrowserStorage {
@@ -110,7 +111,7 @@ const state = createState<State>((set, get) => ({
 }));
 
 browserStorageKeys.forEach((key) => {
-  console.log(`Adding state subscription for ${key}`);
+  console.info(`Adding state subscription for ${key}`);
   state.subscribe(
     (newValue, previousValue) => {
       //if (previous && Object.keys(previous) > 0) {

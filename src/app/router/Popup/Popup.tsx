@@ -1,21 +1,20 @@
-import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
-
-import { useAuth } from "~/app/context/AuthContext";
-import Home from "@screens/Home";
-import Unlock from "@screens/Unlock";
-import Send from "@screens/Send";
-import Receive from "@screens/Receive";
-import LNURLPay from "@screens/LNURLPay";
-import ConfirmPayment from "@screens/ConfirmPayment";
-import { AuthProvider } from "~/app/context/AuthContext";
-import { AccountsProvider } from "~/app/context/AccountsContext";
-import { I18nextProvider } from "react-i18next";
-import i18n from "~/i18n/i18nConfig";
-import RequireAuth from "../RequireAuth";
 import Navbar from "@components/Navbar";
+import ConfirmPayment from "@screens/ConfirmPayment";
+import Home from "@screens/Home";
 import Keysend from "@screens/Keysend";
+import LNURLPay from "@screens/LNURLPay";
+import Receive from "@screens/Receive";
+import Send from "@screens/Send";
+import Unlock from "@screens/Unlock";
+import { I18nextProvider } from "react-i18next";
+import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { AccountsProvider } from "~/app/context/AccountsContext";
+import { useAuth } from "~/app/context/AuthContext";
+import { AuthProvider } from "~/app/context/AuthContext";
+import i18n from "~/i18n/i18nConfig";
 
-const POPUP_MAX_HEIGHT = 600;
+import RequireAuth from "../RequireAuth";
 
 function Popup() {
   return (
@@ -52,7 +51,7 @@ const Layout = () => {
   const auth = useAuth();
 
   return (
-    <div className="flex flex-col" style={{ height: `${POPUP_MAX_HEIGHT}px` }}>
+    <div className="flex flex-col h-full">
       <Navbar
         title={
           typeof auth.account?.name === "string"
@@ -61,13 +60,14 @@ const Layout = () => {
         }
         subtitle={
           typeof auth.account?.balance === "number"
-            ? `${auth.account.balance} sat`
+            ? `${auth.account.balance} sats`
             : ""
         }
       />
 
-      <main className="overflow-y-auto grow">
+      <main className="flex flex-col grow min-h-0">
         <Outlet />
+        <ToastContainer />
       </main>
     </div>
   );

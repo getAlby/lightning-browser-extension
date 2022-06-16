@@ -616,7 +616,6 @@ const metaDataRules: Record<string, RuleSet> = {
         }
       }
     },
-    defaultValue: (context) => makeUrlAbsolute(context.url, "/favicon.ico"),
     processor: (iconUrl, context) =>
       context.options.forceImageHttps === true
         ? makeUrlSecure(makeUrlAbsolute(context.url, iconUrl))
@@ -718,7 +717,7 @@ export default function getOriginData(): OriginData {
     pathname: window.location.pathname,
     name: metaData.provider || metaData.title || "",
     description: metaData.description || "",
-    icon: metaData.image || metaData.icon || "",
+    icon: metaData.icon || metaData.image || "",
     metaData: metaData,
     external: true, // indicate that the call is coming from the website (and not made internally within the extension)
   };

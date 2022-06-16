@@ -1,7 +1,9 @@
 import browser from "webextension-polyfill";
+
+import extractLightningData from "./batteries";
+import injectScript from "./injectScript";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
-import injectScript from "./injectScript";
 
 // WebLN calls that can be executed from the WebLNProvider.
 // Update when new calls are added
@@ -18,16 +20,15 @@ const weblnCalls = [
 // calls that can be executed when webln is not enabled for the current content page
 const disabledCalls = ["enable"];
 
-import extractLightningData from "./batteries";
-
 let isEnabled = false; // store if webln is enabled for this content page
+let callActive = false; // store if a webln is currently active. Used to prevent multiple calls in parallel
 
 if (shouldInject()) {
   injectScript();
 
   // extract LN data from websites
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.type === "extractLightningData") {
+    if (request.action === "extractLightningData") {
       extractLightningData();
     }
   });
@@ -41,17 +42,22 @@ if (shouldInject()) {
       return;
     }
     if (ev.data && ev.data.application === "LBE" && !ev.data.response) {
+      // if a call is active we ignore the request
+      if (callActive) {
+        console.error("WebLN call already executing");
+        return;
+      }
       // limit the calls that can be made from webln
       // only listed calls can be executed
       // if not enabled only enable can be called.
       const availableCalls = isEnabled ? weblnCalls : disabledCalls;
-      if (!availableCalls.includes(ev.data.type)) {
+      if (!availableCalls.includes(ev.data.action)) {
         console.error("Function not available. Is the provider enabled?");
         return;
       }
 
       const messageWithOrigin = {
-        type: `webln/${ev.data.type}`, // TODO: rename type to action
+        action: `webln/${ev.data.action}`, // every webln call must be scoped under `webln/` we do this to indicate that those actions are callable from the websites
         args: ev.data.args,
         application: "LBE",
         public: true, // indicate that this is a public call from the content script
@@ -59,8 +65,9 @@ if (shouldInject()) {
         origin: getOriginData(),
       };
       const replyFunction = (response) => {
+        callActive = false; // reset call is active
         // if it is the enable call we store if webln is enabled for this content script
-        if (ev.data.type == "enable") {
+        if (ev.data.action === "enable") {
           isEnabled = response.data?.enabled;
         }
         window.postMessage(
@@ -72,6 +79,7 @@ if (shouldInject()) {
           "*" // TODO use origin
         );
       };
+      callActive = true;
       return browser.runtime
         .sendMessage(messageWithOrigin)
         .then(replyFunction)

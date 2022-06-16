@@ -1,8 +1,8 @@
 import PubSub from "pubsub-js";
-
-import { Message } from "~/types";
-import state from "../../state";
 import utils from "~/common/lib/utils";
+import { Message } from "~/types";
+
+import state from "../../state";
 
 export default async function keysend(message: Message) {
   PubSub.publish(`ln.keysend.start`, message);
@@ -28,12 +28,11 @@ export default async function keysend(message: Message) {
   } catch (e) {
     response = { error: e instanceof Error ? e.message : "" };
   }
-  utils.publishPaymentNotification(
-    message,
-    {
-      tags: [],
+  utils.publishPaymentNotification(message, {
+    response,
+    details: {
+      destination: destination,
     },
-    response
-  );
+  });
   return response;
 }

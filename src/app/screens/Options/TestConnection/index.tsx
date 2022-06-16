@@ -1,15 +1,13 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-
-import utils from "~/common/lib/utils";
-import api from "~/common/lib/api";
-import { useAuth } from "~/app/context/AuthContext";
-import { useAccounts } from "~/app/context/AccountsContext";
-
 import Button from "@components/Button";
 import Card from "@components/Card";
 import Loading from "@components/Loading";
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { useAccounts } from "~/app/context/AccountsContext";
+import { useAuth } from "~/app/context/AuthContext";
+import api from "~/common/lib/api";
+import utils from "~/common/lib/utils";
 
 export default function TestConnection() {
   const auth = useAuth();
@@ -27,10 +25,9 @@ export default function TestConnection() {
     keyPrefix: "welcome.test_connection",
   });
 
-  function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
-    utils.call("deleteAccount").then(() => {
-      navigate(-1);
-    });
+  async function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
+    await utils.call("deleteAccount");
+    navigate(-1);
   }
 
   async function loadAccountInfo() {
@@ -52,7 +49,7 @@ export default function TestConnection() {
       }
       getAccounts();
     } catch (e) {
-      console.log(e);
+      console.error(e);
       if (e instanceof Error) {
         setErrorMessage(e.message);
       }
@@ -109,7 +106,8 @@ export default function TestConnection() {
                   />
                 </div>
 
-                <p className="mt-6 dark:text-gray-400">{t("ready")}</p>
+                <p className="mt-6 dark:text-gray-400"></p>
+                <p className="mt-6 dark:text-neutral-400">{t("ready")}</p>
 
                 <div className="mt-6 shadow-lg p-4 rounded-xl">
                   <Card
@@ -117,7 +115,7 @@ export default function TestConnection() {
                     alias={`${accountInfo.name} - ${accountInfo.alias}`}
                     satoshis={
                       typeof accountInfo.balance === "number"
-                        ? `${accountInfo.balance} sat`
+                        ? `${accountInfo.balance} sats`
                         : ""
                     }
                   />

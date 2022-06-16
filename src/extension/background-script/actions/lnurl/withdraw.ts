@@ -1,5 +1,4 @@
 import utils from "../../../../common/lib/utils";
-
 import type { Message, LNURLDetails } from "../../../../types";
 
 async function withdrawWithPrompt(
@@ -9,7 +8,7 @@ async function withdrawWithPrompt(
   try {
     const response = await utils.openPrompt({
       origin: message.origin,
-      type: "lnurlWithdraw",
+      action: "lnurlWithdraw",
       args: { ...message.args, lnurlDetails },
     });
     return response; // response is an object like: `{ data: ... }`

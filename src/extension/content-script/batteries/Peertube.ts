@@ -78,7 +78,7 @@ const battery = (): void => {
       ]);
     })
     .catch((e) => {
-      console.log("Alby could not load video data", e);
+      console.error("Alby could not load video data", e);
     });
 };
 

@@ -1,23 +1,25 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import browser from "webextension-polyfill";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 import {
+  CaretLeftIcon,
   SendIcon,
   ReceiveIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-
+import AllowanceMenu from "@components/AllowanceMenu";
+import Button from "@components/Button";
+import Header from "@components/Header";
+import IconButton from "@components/IconButton";
+import Loading from "@components/Loading";
+import Progressbar from "@components/Progressbar";
+import PublisherCard from "@components/PublisherCard";
+import TransactionsTable from "@components/TransactionsTable";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import browser from "webextension-polyfill";
 import api from "~/common/lib/api";
 import type { Allowance, Battery, Transaction } from "~/types";
-
-import Button from "@components/Button";
-import TransactionsTable from "@components/TransactionsTable";
-import AllowanceMenu from "@components/AllowanceMenu";
-import Loading from "@components/Loading";
-import PublisherCard from "@components/PublisherCard";
-import Progressbar from "@components/Progressbar";
 
 dayjs.extend(relativeTime);
 
@@ -58,10 +60,10 @@ function Home() {
   }
 
   function handleLightningDataMessage(response: {
-    type: string;
+    action: string;
     args: Battery[];
   }) {
-    if (response.type === "lightningData") {
+    if (response.action === "lightningData") {
       setLnData(response.args);
     }
   }
@@ -74,7 +76,7 @@ function Home() {
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
       if (tabs.length > 0 && tabs[0].url?.startsWith("http")) {
         browser.tabs.sendMessage(tabs[0].id as number, {
-          type: "extractLightningData",
+          action: "extractLightningData",
         });
       }
     });
@@ -117,7 +119,7 @@ function Home() {
                   }&origin=${encodeURIComponent(JSON.stringify(origin))}`
                 );
               } catch (e) {
-                if (e instanceof Error) alert(e.message);
+                if (e instanceof Error) toast.error(e.message);
               } finally {
                 setLoadingSendSats(false);
               }
@@ -137,27 +139,21 @@ function Home() {
       <>
         <div className="px-4 pb-5">
           <div className="flex justify-between items-center py-3">
-            {+allowance.totalBudget > 0 ? (
-              <>
-                <dl className="mb-0">
-                  <dt className="text-xs text-gray-500 dark:tex-gray-400">
-                    {t("allowance_view.allowance")}
-                  </dt>
-                  <dd className="mb-0 text-sm font-medium dark:text-gray-400">
-                    {allowance.usedBudget} {t("allowance_view.budget.part1")}{" "}
-                    {allowance.totalBudget} {t("allowance_view.budget.part2")}
-                  </dd>
-                </dl>
-              </>
-            ) : (
-              <div />
-            )}
-            <div className="flex items-center">
-              {+allowance.totalBudget > 0 && (
-                <div className="w-24 mr-4">
+            <dl className="mb-0">
+              <dt className="text-xs text-gray-500 dark:text-neutral-400">
+                Allowance
+              </dt>
+              <dd className="flex items-center mb-0 text-sm font-medium dark:text-neutral-400">
+                {+allowance.totalBudget > 0
+                  ? `${allowance.usedBudget} / ${allowance.totalBudget} `
+                  : "0 / 0 "}
+                sats used
+                <div className="ml-3 w-24">
                   <Progressbar percentage={allowance.percentage} />
                 </div>
-              )}
+              </dd>
+            </dl>
+            <div className="flex items-center">
               <AllowanceMenu
                 allowance={allowance}
                 onEdit={loadAllowance}
@@ -167,8 +163,8 @@ function Home() {
               />
             </div>
           </div>
-          <h2 className="mb-2 text-lg text-gray-900 font-semibold dark:text-white">
-            {t("recent_transactions")}
+          <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
+            Recent Transactions
           </h2>
           {allowance?.payments.length > 0 ? (
             <TransactionsTable
@@ -204,10 +200,8 @@ function Home() {
               }))}
             />
           ) : (
-            <p className="text-gray-500 dark:text-gray-400">
-              {t("allowance_view.no_transactions.part1")}{" "}
-              <strong>{allowance.name}</strong>{" "}
-              {t("allowance_view.no_transactions.part2")}
+            <p className="text-gray-500 dark:text-neutral-400">
+              No transactions on <strong>{allowance.name}</strong> yet.
             </p>
           )}
         </div>
@@ -245,8 +239,8 @@ function Home() {
           </div>
         ) : (
           <div>
-            <h2 className="mb-2 text-lg text-gray-900 font-semibold dark:text-white">
-              {t("recent_transactions")}
+            <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
+              Recent Transactions
             </h2>
             {payments.length > 0 ? (
               <TransactionsTable
@@ -281,8 +275,8 @@ function Home() {
                 }))}
               />
             ) : (
-              <p className="text-gray-500 dark:text-gray-400">
-                {t("default_view.no_transactions")}
+              <p className="text-gray-500 dark:text-neutral-400">
+                No transactions yet.
               </p>
             )}
           </div>
@@ -296,7 +290,18 @@ function Home() {
   }
 
   return (
-    <div>
+    <div className="overflow-y-auto no-scrollbar">
+      {allowance && (
+        <Header
+          title={allowance.host}
+          headerLeft={
+            <IconButton
+              onClick={() => setAllowance(null)}
+              icon={<CaretLeftIcon className="w-4 h-4" />}
+            />
+          }
+        />
+      )}
       {renderPublisherCard()}
       {allowance ? renderAllowanceView() : renderDefaultView()}
     </div>

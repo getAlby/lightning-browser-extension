@@ -1,13 +1,16 @@
-import { PaymentRequestObject } from "bolt11";
 import PubSub from "pubsub-js";
 import browser, { Runtime } from "webextension-polyfill";
-import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
-import { Message, OriginData, OriginDataInternal } from "~/types";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
+import {
+  Message,
+  OriginData,
+  OriginDataInternal,
+  PaymentNotificationData,
+} from "~/types";
 
 const utils = {
   call: <T = Record<string, unknown>>(
-    type: string,
+    action: string,
     args?: Record<string, unknown>,
     overwrites?: Record<string, unknown>
   ) => {
@@ -15,7 +18,7 @@ const utils = {
       .sendMessage({
         application: "LBE",
         prompt: true,
-        type: type,
+        action: action,
         args: args,
         origin: { internal: true },
         ...overwrites,
@@ -71,16 +74,16 @@ const utils = {
   },
   publishPaymentNotification: (
     message: Message,
-    paymentRequestDetails: PaymentRequestObject,
-    response: SendPaymentResponse | { error: string }
+    data: PaymentNotificationData
   ) => {
     let status = "success"; // default. let's hope for success
-    if ("error" in response) {
+    if ("error" in data.response) {
       status = "failed";
     }
     PubSub.publish(`ln.sendPayment.${status}`, {
-      response,
-      paymentRequestDetails,
+      response: data.response,
+      details: data.details,
+      paymentRequestDetails: data.paymentRequestDetails,
       origin: message.origin,
     });
   },
@@ -96,7 +99,7 @@ const utils = {
   openPrompt: <Type>(message: {
     args: Record<string, unknown>;
     origin: OriginData | OriginDataInternal;
-    type: string;
+    action: string;
   }): Promise<{ data: Type }> => {
     const urlParams = new URLSearchParams();
     // passing on the message args to the prompt if present
@@ -107,8 +110,8 @@ const utils = {
     if (message.origin) {
       urlParams.set("origin", JSON.stringify(message.origin));
     }
-    // type must always be present, this is used to route the request
-    urlParams.set("type", message.type);
+    // action must always be present, this is used to route the request
+    urlParams.set("action", message.action);
 
     const url = `${browser.runtime.getURL(
       "prompt.html"

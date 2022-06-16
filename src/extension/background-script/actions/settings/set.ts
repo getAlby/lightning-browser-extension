@@ -1,6 +1,6 @@
-import state from "../../state";
-
 import { Message } from "~/types";
+
+import state from "../../state";
 
 const set = async (message: Message) => {
   const { settings } = state.getState();

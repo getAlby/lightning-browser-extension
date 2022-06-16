@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-
-import utils from "~/common/lib/utils";
-import { useAuth } from "~/app/context/AuthContext";
 import AlbyLogo from "@components/AlbyLogo";
 import Button from "@components/Button";
 import Input from "@components/form/Input";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "~/app/context/AuthContext";
+import utils from "~/common/lib/utils";
 
 function Unlock() {
   const [password, setPassword] = useState("");

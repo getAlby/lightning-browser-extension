@@ -1,7 +1,7 @@
 import { Method } from "axios";
 
-import LndHub from "./lndhub";
 import Native from "./Native";
+import LndHub from "./lndhub";
 
 const NativeConnector = Native(LndHub);
 
@@ -122,7 +122,7 @@ export default class NativeLndHub extends NativeConnector {
       const res = await this._nativeRequest(reqConfig);
       data = JSON.parse(res.body);
     } catch (e) {
-      console.log(e);
+      console.error(e);
       if (e instanceof Error) throw new Error(e.message);
     }
     if (data && data.error) {
@@ -130,7 +130,7 @@ export default class NativeLndHub extends NativeConnector {
         try {
           await this.authorize();
         } catch (e) {
-          console.log(e);
+          console.error(e);
           if (e instanceof Error) throw new Error(e.message);
         }
         this.noRetry = true;

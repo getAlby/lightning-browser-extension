@@ -1,5 +1,6 @@
 import Base64 from "crypto-js/enc-base64";
 import UTF8 from "crypto-js/enc-utf8";
+
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
@@ -191,7 +192,7 @@ class Eclair implements Connector {
       } catch (err) {
         throw new Error(res.statusText);
       }
-      console.log("eclair error", errBody.error);
+      console.error("eclair error", errBody.error);
       throw new Error(errBody.error);
     }
 

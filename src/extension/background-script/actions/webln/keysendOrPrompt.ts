@@ -1,7 +1,7 @@
-import { Message } from "~/types";
 import utils from "~/common/lib/utils";
-import keysend from "../ln/keysend";
+import { Message } from "~/types";
 
+import keysend from "../ln/keysend";
 // TODO: move checkAllowance to some helpers/models?
 import { checkAllowance } from "./sendPaymentOrPrompt";
 
@@ -41,11 +41,11 @@ async function keysendWithPrompt(message: Message) {
   try {
     const response = await utils.openPrompt({
       ...message,
-      type: "confirmKeysend",
+      action: "confirmKeysend",
     });
     return response;
   } catch (e) {
-    console.log("Payment cancelled", e);
+    console.error("Payment cancelled", e);
     if (e instanceof Error) {
       return { error: e.message };
     }

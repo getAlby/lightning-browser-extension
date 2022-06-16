@@ -8,7 +8,7 @@ const select = async (message, sender) => {
 
   if (account) {
     if (currentState.connector) {
-      console.log("Unloading connector");
+      console.info("Unloading connector");
       await currentState.connector.unload();
     }
     state.setState({
@@ -23,7 +23,7 @@ const select = async (message, sender) => {
       data: { unlocked: true },
     };
   } else {
-    console.log(`Account not found: ${accountId}`);
+    console.error(`Account not found: ${accountId}`);
     return {
       error: "Account not found",
     };

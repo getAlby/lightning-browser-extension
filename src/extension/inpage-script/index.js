@@ -1,5 +1,6 @@
-import WebLNProvider from "../ln/webln";
 import { ABORT_PROMPT_ERROR, USER_REJECTED_ERROR } from "~/common/constants";
+
+import WebLNProvider from "../ln/webln";
 
 if (document) {
   window.webln = new WebLNProvider();
@@ -55,18 +56,17 @@ if (document) {
       }
       if (lnurl) {
         return window.webln.lnurl(lnurl).catch((e) => {
-          console.log(e);
+          console.error(e);
           alert(`Error: ${e.message}`);
         });
       }
       return window.webln
         .sendPayment(paymentRequest)
         .then((r) => {
-          console.log(r);
-          //alert(JSON.stringify(r));
+          console.info(r);
         })
         .catch((e) => {
-          console.log(e);
+          console.error(e);
           if (![ABORT_PROMPT_ERROR, USER_REJECTED_ERROR].includes(e.message)) {
             alert(`Error: ${e.message}`);
           }

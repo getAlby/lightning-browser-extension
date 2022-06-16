@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Button from "@components/Button";
 import Card from "@components/Card";
-import utils from "~/common/lib/utils";
-import api from "~/common/lib/api";
 import Loading from "@components/Loading";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import api from "~/common/lib/api";
+import utils from "~/common/lib/utils";
 
 export default function TestConnection() {
   const [accountInfo, setAccountInfo] = useState<{
@@ -13,7 +13,7 @@ export default function TestConnection() {
     name: string;
     balance: number;
   }>();
-  const [errorMessage, setErrorMessage] = useState();
+  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation("translation", {
     keyPrefix: "welcome.test_connection",
@@ -21,28 +21,29 @@ export default function TestConnection() {
 
   const navigate = useNavigate();
 
-  function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
-    utils.call("removeAccount").then(() => {
-      navigate(-1);
-    });
+  async function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
+    await utils.call("deleteAccount");
+    navigate(-1);
   }
 
-  function loadAccountInfo() {
+  async function loadAccountInfo() {
     setLoading(true);
-    api
-      .getAccountInfo()
-      .then((response) => {
-        const name = response.name;
-        const { alias } = response.info;
-        const balance = parseInt(response.balance.balance);
+    try {
+      const response = await api.getAccountInfo();
+      const name = response.name;
+      const { alias } = response.info;
+      const { balance: resBalance } = response.balance;
+      const balance =
+        typeof resBalance === "number" ? resBalance : parseInt(resBalance);
 
-        setAccountInfo({ alias, balance, name });
-      })
-      .catch((e) => {
-        console.error(e);
-        setErrorMessage(e.message);
-      })
-      .finally(() => setLoading(false));
+      setAccountInfo({ alias, balance, name });
+    } catch (e) {
+      const message = e instanceof Error ? `(${e.message})` : "";
+      console.error(message);
+      setErrorMessage(message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -58,7 +59,7 @@ export default function TestConnection() {
               <h1 className="text-3xl font-bold dark:text-white">
                 {t("connection_error")}
               </h1>
-              <p className="dark:text-gray-500">{errorMessage}</p>
+              <p className="dark:text-neutral-500">{errorMessage}</p>
               <Button label={t("edit")} onClick={handleEdit} primary />
             </div>
           )}
@@ -79,7 +80,7 @@ export default function TestConnection() {
                   alias={`${accountInfo.name} - ${accountInfo.alias}`}
                   satoshis={
                     typeof accountInfo.balance === "number"
-                      ? `${accountInfo.balance} sat`
+                      ? `${accountInfo.balance} sats`
                       : ""
                   }
                 />

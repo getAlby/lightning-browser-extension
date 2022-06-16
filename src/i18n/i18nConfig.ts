@@ -1,10 +1,11 @@
 import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
-import en from "./locales/en/translation.json";
+import { initReactI18next } from "react-i18next";
+
 import en_common from "./locales/en/common.json";
-import hi from "./locales/hi/translation.json";
 import hi_common from "./locales/en/common.json";
+import en from "./locales/en/translation.json";
+import hi from "./locales/hi/translation.json";
 
 // Load namespaces
 export const resources = {

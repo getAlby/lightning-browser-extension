@@ -11,7 +11,9 @@ function Setting({ title, subtitle, children }: Props) {
         <span className="text-gray-900 dark:text-white font-medium">
           {title}
         </span>
-        <p className="text-gray-700 dark:text-gray-500 text-sm">{subtitle}</p>
+        <p className="text-gray-500 dark:text-neutral-500 text-sm">
+          {subtitle}
+        </p>
       </div>
       {children}
     </div>

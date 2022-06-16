@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import TextField from "@components/form/TextField";
 import Button from "@components/Button";
+import TextField from "@components/form/TextField";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import utils from "~/common/lib/utils";
 import i18n from "~/i18n/i18nConfig";
-import { useTranslation } from "react-i18next";
 
-const initialFormData = Object.freeze({
+const initialFormData = {
   password: "",
   passwordConfirmation: "",
-});
+};
 
-const initialErrors = Object.freeze({
+const initialErrors = {
   password: "",
   passwordConfirmation: "",
-});
+};
 
 export default function SetPassword() {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ export default function SetPassword() {
       await utils.call("setPassword", { password: formData.password });
       navigate("/choose-connector");
     } catch (e) {
-      if (e instanceof Error) console.log(e.message);
+      if (e instanceof Error) console.error(e.message);
     }
   }
 
@@ -108,7 +108,7 @@ export default function SetPassword() {
         </div>
         <div className="mt-16 lg:mt-0 lg:w-1/2">
           <div className="lg:flex h-full justify-center items-center">
-            <img src="assets/icons/satsymbol.svg" alt="sat" className="w-64" />
+            <img src="assets/icons/satsymbol.svg" alt="sats" className="w-64" />
           </div>
         </div>
       </div>

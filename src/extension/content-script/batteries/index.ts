@@ -1,14 +1,15 @@
 import api from "~/common/lib/api";
+
 import GitHub from "./GitHub";
+import Medium from "./Medium";
 import Monetization from "./Monetization";
-import Twitter from "./Twitter";
-import YouTubeVideo from "./YouTubeVideo";
-import YouTubeChannel from "./YouTubeChannel";
 import Peertube from "./Peertube";
 import Reddit from "./Reddit";
+import Twitter from "./Twitter";
 // import YouTubeChannel from "./YouTubeChannel";
 import VimeoVideo from "./VimeoVideo";
-import Medium from "./Medium";
+import YouTubeChannel from "./YouTubeChannel";
+import YouTubeVideo from "./YouTubeVideo";
 
 // Order is important as the first one for which the URL matches will be used
 const enhancements = [

@@ -1,10 +1,10 @@
+import { PaymentRequestObject } from "bolt11";
+import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
+
 import connectors from "./extension/background-script/connectors";
 
 export type ConnectorType = keyof typeof connectors;
 
-// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652
-// align Message-Types
-// Where is this used? Do we still need this if 652 is solved?
 export interface Account {
   id: string;
   connector: ConnectorType;
@@ -17,9 +17,9 @@ export interface Accounts {
 }
 
 export interface AccountInfo {
-  id: string;
   alias: string;
   balance: number;
+  id: string;
   name: string;
 }
 
@@ -48,6 +48,15 @@ export interface OriginData {
   external: boolean;
 }
 
+export interface PaymentNotificationData {
+  paymentRequestDetails?: PaymentRequestObject | undefined;
+  response: SendPaymentResponse | { error: string };
+  details: {
+    destination?: string | undefined;
+    description?: string | undefined;
+  };
+}
+
 export interface OriginDataInternal {
   internal: boolean;
 }
@@ -59,16 +68,45 @@ export interface Battery extends OriginData {
   icon: string;
 }
 
-// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652
-// align Message-Types
+// deprecated message type,please stop using this
 export interface Message {
+  application?: string;
   args: Record<string, unknown>;
+  origin: OriginData | OriginDataInternal;
+  prompt?: boolean;
+  action?: string;
+}
+
+// new message  type, please use this
+export interface MessageDefault {
   origin: OriginData | OriginDataInternal;
   application?: string;
   prompt?: boolean;
-  type?: string;
 }
 
+export interface MessageAccountDelete extends MessageDefault {
+  args?: { id: Account["id"] };
+  action: "deleteAccount";
+}
+export interface MessageAccountAdd extends MessageDefault {
+  args: Omit<Account, "id">;
+  action: "addAccount";
+}
+export interface MessageAccountEdit extends MessageDefault {
+  args: {
+    id: Account["id"];
+    name: Account["name"];
+  };
+  action: "editAccount";
+}
+
+export interface MessageAccountInfo extends Omit<MessageDefault, "args"> {
+  action: "accountInfo";
+}
+
+export interface MessageAccountAll extends Omit<MessageDefault, "args"> {
+  action: "getAccounts";
+}
 interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node
