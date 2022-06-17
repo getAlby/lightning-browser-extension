@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import browser from "webextension-polyfill";
 import api from "~/common/lib/api";
+import { getFiatValue } from "~/common/utils/currencyConvert";
 import type { Allowance, Battery, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
@@ -53,11 +54,14 @@ function Home() {
     }
   }
 
-  function loadPayments() {
-    api.getPayments({ limit: 10 }).then((result) => {
-      setPayments(result?.payments);
-      setLoadingPayments(false);
-    });
+  async function loadPayments() {
+    const result = await api.getPayments({ limit: 10 });
+    for await (const payment of result.payments) {
+      const totalAmountFiat = await getFiatValue(payment.totalAmount);
+      payment.totalAmountFiat = totalAmountFiat;
+    }
+    setPayments(result?.payments);
+    setLoadingPayments(false);
   }
 
   function handleLightningDataMessage(response: {

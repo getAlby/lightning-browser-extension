@@ -27,14 +27,18 @@ const params = new URLSearchParams(window.location.search);
 let origin = {} as OriginData;
 let args = {};
 let action = "";
+
 if (params.get("origin") && typeof params.get("origin") === "string") {
   origin = JSON.parse(params.get("origin") as string);
 }
+
 if (params.get("args") && typeof params.get("args") === "string") {
   args = JSON.parse(params.get("args") as string);
 }
+
 if (typeof params.get("action") === "string")
   action = params.get("action") as string;
+
 const routeParams: {
   origin: OriginData;
   args: Record<string, unknown>;
@@ -151,7 +155,7 @@ function Prompt() {
 }
 
 const Layout = () => {
-  const auth = useAuth();
+  const { account, balancesDecorated } = useAuth();
 
   return (
     <>
@@ -159,19 +163,12 @@ const Layout = () => {
       <div className="px-4 py-2 bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
         <AccountMenu
           title={
-            typeof auth.account?.name === "string"
-              ? `${auth.account?.name} - ${auth.account?.alias}`.substring(
-                  0,
-                  21
-                )
-              : ""
-          }
-          subtitle={
-            typeof auth.account?.balance === "number"
-              ? `${auth.account.balance} sats`
+            typeof account?.name === "string"
+              ? `${account?.name} - ${account?.alias}`.substring(0, 21)
               : ""
           }
           showOptions={false}
+          balances={balancesDecorated}
         />
       </div>
 

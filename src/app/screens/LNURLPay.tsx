@@ -13,6 +13,7 @@ import api from "~/common/lib/api";
 import lnurl from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
+import { getFiatValue } from "~/common/utils/currencyConvert";
 import getOriginData from "~/extension/content-script/originData";
 import {
   LNURLPaymentInfoError,
@@ -21,6 +22,8 @@ import {
   LNURLPayServiceResponse,
   Payment,
 } from "~/types";
+
+import DualCurrencyField from "../components/form/DualCurrencyField";
 
 type Origin = {
   name: string;
@@ -55,6 +58,8 @@ function LNURLPay(props: Props) {
   const [valueSat, setValueSat] = useState(
     (details?.minSendable && (+details?.minSendable / 1000).toString()) || ""
   );
+
+  const [fiatValue, setFiatValue] = useState("");
   const [comment, setComment] = useState("");
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -63,6 +68,13 @@ function LNURLPay(props: Props) {
     LNURLPaymentSuccessAction | undefined
   >();
   const [payment, setPayment] = useState<Payment | undefined>();
+
+  useEffect(() => {
+    (async () => {
+      const res = await getFiatValue(valueSat);
+      setFiatValue(res);
+    })();
+  }, [valueSat]);
 
   useEffect(() => {
     if (searchParams) {
@@ -367,14 +379,14 @@ function LNURLPay(props: Props) {
                   </dl>
                   {details && details.minSendable !== details.maxSendable && (
                     <div>
-                      <TextField
+                      <DualCurrencyField
                         id="amount"
                         label="Amount (Satoshi)"
-                        type="number"
                         min={+details.minSendable / 1000}
                         max={+details.maxSendable / 1000}
                         value={valueSat}
                         onChange={(e) => setValueSat(e.target.value)}
+                        fiatValue={fiatValue}
                       />
                       <SatButtons onClick={setValueSat} />
                     </div>
