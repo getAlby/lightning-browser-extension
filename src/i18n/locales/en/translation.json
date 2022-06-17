@@ -77,8 +77,16 @@
     "lnd": {
       "title": "LND",
       "description": "Connect to your LND node",
-      "pre_connect": {},
-      "post_connect": {}
+      "page_title": "Connect to your LND node",
+      "page_description": "You need your node URL and a macaroon with read and send permissions (e.g. admin.macaroon)",
+      "port_label": "REST API host and port",
+      "url_placeholder": "https://your-node-url:8080",
+      "macaroon_label": "Macaroon (HEX format)",
+      "or": "OR",
+      "drag_and_drop": "Drag and drop your macaroon here or <0>browse</0>",
+      "errors": {
+        "connection_failed": "Connection failed. Are your LND credentials correct?"
+      }
     },
     "lndhub": {
       "title": "LNDHub (Bluewallet)",
