@@ -54,12 +54,18 @@ export default function NewWallet() {
           });
         } else {
           console.error(data);
-          toast.error(`Failed to create a new wallet. ${JSON.stringify(data)}`);
+          toast.error(
+            `${t("pre_connect.errors.create_wallet_error")} ${JSON.stringify(
+              data
+            )}`
+          );
         }
       })
       .catch((e) => {
         console.error(e);
-        toast.error(`Failed to create a new wallet: ${e.message}`);
+        toast.error(
+          `${t("pre_connect.errors.create_wallet_error")} ${e.message}`
+        );
       })
       .finally(() => {
         setLoading(false);
@@ -95,12 +101,14 @@ export default function NewWallet() {
         }
       } else {
         console.error({ validation });
-        toast.error(`Connection failed (${validation.error})`);
+        toast.error(
+          `${tCommon("errors.connection_failed")} (${validation.error})`
+        );
       }
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        toast.error(`Connection failed (${e.message})`);
+        toast.error(`${tCommon("errors.connection_failed")} (${e.message})`);
       }
     } finally {
       setLoading(false);
