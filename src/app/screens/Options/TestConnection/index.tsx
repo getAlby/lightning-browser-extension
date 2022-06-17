@@ -2,6 +2,7 @@ import Button from "@components/Button";
 import Card from "@components/Card";
 import Loading from "@components/Loading";
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useAuth } from "~/app/context/AuthContext";
@@ -20,6 +21,10 @@ export default function TestConnection() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "welcome.test_connection",
+  });
+  const { t: tCommon } = useTranslation("common");
 
   async function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
     await utils.call("removeAccount");
@@ -30,9 +35,7 @@ export default function TestConnection() {
     setLoading(true);
     // show an error message after 45 seconds. Then probably something is wrong
     const timer = setTimeout(() => {
-      setErrorMessage(
-        "Trying to connect takes longer than expected... Are your details correct? Is your node reachable?"
-      );
+      setErrorMessage(t("connection_taking_long"));
     }, 45000);
     try {
       const { currentAccountId } = await api.getStatus();
@@ -70,10 +73,10 @@ export default function TestConnection() {
             {errorMessage && (
               <div>
                 <h1 className="text-3xl font-bold dark:text-white">
-                  Connection Error
+                  {t("connection_error")}
                 </h1>
                 <p className="text-gray-500 dark:text-white">
-                  Please review your connection details.
+                  {t("review_connection_details")}
                 </p>
 
                 <p className="text-gray-500 dark:text-grey-500 mt-4 mb-4">
@@ -81,12 +84,12 @@ export default function TestConnection() {
                 </p>
 
                 <Button
-                  label="Delete invalid account and edit again"
+                  label={t("actions.delete_edit_account")}
                   onClick={handleEdit}
                   primary
                 />
                 <p className="text-gray-500 dark:text-white">
-                  If you need help please contact support@getalby.com
+                  {t("contact_support")}
                 </p>
               </div>
             )}
@@ -95,7 +98,7 @@ export default function TestConnection() {
               <div>
                 <div className="flex space-x-2">
                   <h1 className="text-2xl font-bold text-green-bitcoin">
-                    Success!
+                    {tCommon("success")}
                   </h1>
                   <img
                     src="assets/icons/star.svg"
@@ -104,9 +107,8 @@ export default function TestConnection() {
                   />
                 </div>
 
-                <p className="mt-6 dark:text-neutral-400">
-                  Awesome, you&apos;re ready to go!
-                </p>
+                <p className="mt-6 dark:text-gray-400"></p>
+                <p className="mt-6 dark:text-neutral-400">{t("ready")}</p>
 
                 <div className="mt-6 shadow-lg p-4 rounded-xl">
                   <Card
@@ -125,8 +127,7 @@ export default function TestConnection() {
               <div>
                 <Loading />
                 <p className="text-gray-500 dark:text-white mt-6">
-                  Initializing your account. <br />
-                  Please wait, this can take a minute
+                  {t("initializing")} <br />
                 </p>
               </div>
             )}

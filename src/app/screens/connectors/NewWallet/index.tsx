@@ -1,6 +1,7 @@
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -21,6 +22,10 @@ export default function NewWallet() {
   const [lnAddress, setLnAddress] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "choose_connector.alby",
+  });
+  const { t: tCommon } = useTranslation("common");
 
   function signup(event: React.FormEvent<HTMLFormElement>) {
     setLoading(true);
@@ -105,9 +110,11 @@ export default function NewWallet() {
   return (
     <ConnectorForm
       title={
-        lndHubData.login === "" ? "Your Alby Lightning Wallet" : "🎉Success!"
+        lndHubData.login === ""
+          ? t("pre_connect.title")
+          : t("post_connect.title")
       }
-      submitLabel="Continue"
+      submitLabel={tCommon("actions.continue")}
       submitLoading={loading}
       onSubmit={lndHubData.login ? next : signup}
       submitDisabled={password === "" || email === ""}
@@ -117,19 +124,21 @@ export default function NewWallet() {
           <div className="mt-6 dark:text-white">
             <p>
               <strong>
-                Your Alby account is ready. <br />
+                {t("post_connect.account_ready")}
+                <br />
               </strong>
             </p>
             {lndHubData.lnAddress && (
-              <p>Your lightning address: {lndHubData.lnAddress}</p>
+              <p>
+                {t("post_connect.lightning_address")} {lndHubData.lnAddress}
+              </p>
             )}
           </div>
           <div className="mt-6 flex justify-center space-x-3 items-center dark:text-white">
             <div className="flex-1">
-              <strong>Want to use your wallet on your mobile?</strong>
+              <strong>{t("post_connect.wallet_mobile_title")}</strong>
               <br />
-              Import the wallet into Zeus or BlueWallet mobile app using the QR
-              Code.
+              {t("post_connect.wallet_mobile_description")}
             </div>
             <div className="float-right">
               <QRCode
@@ -144,16 +153,16 @@ export default function NewWallet() {
         <>
           <div className="mt-6 dark:text-white">
             <strong>
-              Create or login to your Alby account.
+              {t("pre_connect.login_account")}
               <br />
-              We host a Lightning wallet for you!
+              {t("pre_connect.host_wallet")}
             </strong>
           </div>
 
           <div className="mt-6">
             <TextField
               id="email"
-              label="Email Address"
+              label={t("pre_connect.email_label")}
               type="email"
               required
               onChange={(e) => {
@@ -164,7 +173,7 @@ export default function NewWallet() {
           <div className="mt-6">
             <TextField
               id="password"
-              label="Password"
+              label={tCommon("password")}
               type="password"
               minLength={6}
               pattern=".{6,}"
@@ -184,25 +193,24 @@ export default function NewWallet() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Lightning Address
+                {t("pre_connect.optional_lightning_note.part2")}
               </a>
-              . This is a simple way for anyone to send you Bitcoin on the
-              Lightning Network. (
+              {t("pre_connect.optional_lightning_note.part3")} (
               <a
                 className="underline"
                 href="https://lightningaddress.com/"
                 target="_blank"
                 rel="noreferrer"
               >
-                learn more
+                {t("pre_connect.optional_lightning_note.part4")}
               </a>
               )
             </p>
             <div>
               <TextField
                 id="lnAddress"
-                label="Choose your Lightning Address (optional)"
-                suffix="@getalby.com"
+                label={t("pre_connect.optional_lightning_address_label")}
+                suffix={t("pre_connect.optional_lightning_address_suffix")}
                 type="text"
                 onChange={(e) => {
                   setLnAddress(e.target.value.trim().split("@")[0]); // in case somebody enters a full address we simple remove the domain
