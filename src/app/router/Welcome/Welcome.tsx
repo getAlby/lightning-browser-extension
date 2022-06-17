@@ -29,16 +29,16 @@ function getRoutes(
     {
       path: "/",
       element: <Intro />,
-      name: i18n.t("nav.welcome", translationI18nNamespace),
+      name: i18n.t("welcome.nav.welcome", translationI18nNamespace),
     },
     {
       path: "/set-password",
       element: <SetPassword />,
-      name: i18n.t("nav.password", translationI18nNamespace),
+      name: i18n.t("welcome.nav.password", translationI18nNamespace),
     },
     {
       path: "/choose-connector",
-      name: i18n.t("nav.connect", translationI18nNamespace),
+      name: i18n.t("welcome.nav.connect", translationI18nNamespace),
       children: [
         {
           index: true,
@@ -58,7 +58,7 @@ function getRoutes(
     {
       path: "/test-connection",
       element: <TestConnection />,
-      name: i18n.t("nav.done", translationI18nNamespace),
+      name: i18n.t("welcome.nav.done", translationI18nNamespace),
     },
   ];
 }
