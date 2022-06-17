@@ -36,7 +36,7 @@ function AccountsScreen() {
   async function selectAccount(accountId: string) {
     auth.setAccountId(accountId);
     await api.selectAccount(accountId);
-    auth.fetchAccountInfo(accountId);
+    auth.fetchAccountInfo({ accountId });
   }
 
   async function updateAccountName({ id, name }: AccountAction) {
@@ -50,14 +50,18 @@ function AccountsScreen() {
   }
 
   async function removeAccount({ id, name }: AccountAction) {
-    if (window.confirm(`Are you sure you want to delete account: ${name}?`)) {
+    if (
+      window.confirm(
+        `Are you sure you want to remove account: ${name}? \nThis can not be undone. If you used this account to login to websites you might loose access to those.`
+      )
+    ) {
       let nextAccountId;
       let accountIds = Object.keys(accounts);
       if (auth.account?.id === id && accountIds.length > 1) {
         nextAccountId = accountIds.filter((accountId) => accountId !== id)[0];
       }
 
-      await api.deleteAccount(id);
+      await api.removeAccount(id);
       accountIds = accountIds.filter((accountId) => accountId !== id);
 
       if (accountIds.length > 0) {
@@ -138,7 +142,7 @@ function AccountsScreen() {
                             })
                           }
                         >
-                          Delete
+                          Remove
                         </Menu.ItemButton>
                       </Menu.List>
                     </Menu>

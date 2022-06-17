@@ -1,7 +1,7 @@
 import { PaymentRequestObject } from "bolt11";
+import { CURRENCIES } from "~/common/constants";
+import connectors from "~/extension/background-script/connectors";
 import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
-
-import connectors from "./extension/background-script/connectors";
 
 export type ConnectorType = keyof typeof connectors;
 
@@ -19,8 +19,10 @@ export interface Accounts {
 export interface AccountInfo {
   alias: string;
   balance: number;
+  fiatBalance?: string;
   id: string;
   name: string;
+  satsBalance?: string;
 }
 
 export interface MetaData {
@@ -84,9 +86,9 @@ export interface MessageDefault {
   prompt?: boolean;
 }
 
-export interface MessageAccountDelete extends MessageDefault {
+export interface MessageAccountRemove extends MessageDefault {
   args?: { id: Account["id"] };
-  action: "deleteAccount";
+  action: "removeAccount";
 }
 export interface MessageAccountAdd extends MessageDefault {
   args: Omit<Account, "id">;
@@ -107,6 +109,11 @@ export interface MessageAccountInfo extends Omit<MessageDefault, "args"> {
 export interface MessageAccountAll extends Omit<MessageDefault, "args"> {
   action: "getAccounts";
 }
+
+export interface MessageAccountLock extends Omit<MessageDefault, "args"> {
+  action: "lock";
+}
+
 interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node
@@ -206,6 +213,7 @@ export type Transaction = {
   totalFees: string;
   description: string;
   location: string;
+  totalAmountFiat: string;
 };
 
 export type Payment = {
@@ -240,4 +248,8 @@ export interface SettingsStorage {
   userEmail: string;
   locale: string;
   theme: string;
+  currency: CURRENCIES;
+  exchange: SupportedExchanges;
 }
+
+export type SupportedExchanges = "coindesk" | "yadio";

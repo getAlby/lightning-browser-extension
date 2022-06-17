@@ -3,6 +3,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import "react-toastify/dist/ReactToastify.css";
 import "~/app/styles/index.css";
 import { getTheme } from "~/app/utils";
+import "~/i18n/i18nConfig";
 
 import Popup from "./Popup";
 

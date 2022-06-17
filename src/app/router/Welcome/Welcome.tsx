@@ -12,7 +12,7 @@ import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
 import { AuthProvider } from "~/app/context/AuthContext";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
 import i18n from "~/i18n/i18nConfig";
-import { welcomeI18nNamespace } from "~/i18n/namespaces";
+import { translationI18nNamespace } from "~/i18n/namespaces";
 
 let connectorRoutes = getConnectorRoutes();
 
@@ -29,25 +29,25 @@ function getRoutes(
     {
       path: "/",
       element: <Intro />,
-      name: i18n.t("nav.welcome", welcomeI18nNamespace),
+      name: i18n.t("nav.welcome", translationI18nNamespace),
     },
     {
       path: "/set-password",
       element: <SetPassword />,
-      name: i18n.t("nav.password", welcomeI18nNamespace),
+      name: i18n.t("nav.password", translationI18nNamespace),
     },
     {
       path: "/choose-connector",
-      name: i18n.t("nav.connect", welcomeI18nNamespace),
+      name: i18n.t("nav.connect", translationI18nNamespace),
       children: [
         {
           index: true,
           element: (
             <ChooseConnector
-              title={i18n.t("choose_connector.title", welcomeI18nNamespace)}
+              title={i18n.t("choose_connector.title", translationI18nNamespace)}
               description={i18n.t(
                 "choose_connector.description",
-                welcomeI18nNamespace
+                translationI18nNamespace
               )}
             />
           ),
@@ -58,7 +58,7 @@ function getRoutes(
     {
       path: "/test-connection",
       element: <TestConnection />,
-      name: i18n.t("nav.done", welcomeI18nNamespace),
+      name: i18n.t("nav.done", translationI18nNamespace),
     },
   ];
 }
@@ -80,7 +80,7 @@ function WelcomeRouter() {
 
 function App() {
   const [steps, setSteps] = useState(initialSteps);
-  const { t } = useTranslation(["welcome"]);
+  const { t } = useTranslation();
   const location = useLocation();
   const routesElement = useRoutes(routes);
 
@@ -135,7 +135,7 @@ function App() {
         )}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center font-serif font-medium text-2xl pt-7 pb-3 dark:text-white">
-            <p>{t("heading")}</p>
+            <p>{t("welcome.heading")}</p>
           </div>
 
           <Steps steps={steps} />

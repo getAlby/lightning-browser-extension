@@ -10,7 +10,7 @@ import AccountMenu from ".";
 
 const defaultProps = {
   title: "node",
-  subtitle: "1000 sats",
+  balances: { satsBalance: "1000 sats", fiatBalance: "$0.10" },
 };
 
 const mockAccounts: Accounts = {
@@ -30,6 +30,10 @@ jest.spyOn(AuthContext, "useAuth").mockReturnValue({
   lock: jest.fn(),
   setAccountId: jest.fn(),
   fetchAccountInfo: jest.fn(),
+  balancesDecorated: {
+    fiatBalance: "",
+    satsBalance: "",
+  },
 });
 
 describe("AccountMenu", () => {

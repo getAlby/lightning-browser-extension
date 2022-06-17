@@ -14,8 +14,6 @@ import { AuthProvider } from "~/app/context/AuthContext";
 
 import RequireAuth from "../RequireAuth";
 
-const POPUP_MAX_HEIGHT = 600;
-
 function Popup() {
   return (
     <AuthProvider>
@@ -46,24 +44,20 @@ function Popup() {
 }
 
 const Layout = () => {
-  const auth = useAuth();
+  const { account, balancesDecorated } = useAuth();
 
   return (
-    <div className="flex flex-col" style={{ height: `${POPUP_MAX_HEIGHT}px` }}>
+    <div className="flex flex-col h-full">
       <Navbar
         title={
-          typeof auth.account?.name === "string"
-            ? `${auth.account?.name} - ${auth.account?.alias}`.substring(0, 21)
+          typeof account?.name === "string"
+            ? `${account?.name} - ${account?.alias}`.substring(0, 21)
             : ""
         }
-        subtitle={
-          typeof auth.account?.balance === "number"
-            ? `${auth.account.balance} sats`
-            : ""
-        }
+        balances={balancesDecorated}
       />
 
-      <main className="overflow-y-auto grow">
+      <main className="flex flex-col grow min-h-0">
         <Outlet />
         <ToastContainer />
       </main>

@@ -94,6 +94,10 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         </div>
         <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
           <div className="w-60">
+            {/*
+              @TODO: https://github.com/getAlby/lightning-browser-extension/issues/1016
+              needs to use DualCurrenyField 
+            */}
             <TextField
               id="budget"
               label="Budget"

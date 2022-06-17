@@ -89,9 +89,9 @@ export const setSetting = (
   utils.call<SettingsStorage>("setSetting", {
     setting,
   });
-export const deleteAccount = (id: string) =>
+export const removeAccount = (id: string) =>
   Promise.all([
-    utils.call("deleteAccount", { id }),
+    utils.call("removeAccount", { id }),
     removeAccountFromCache(id),
   ]);
 export const unlock = (password: string) =>
@@ -110,6 +110,6 @@ export default {
   swr: {
     getAccountInfo: swrGetAccountInfo,
   },
-  deleteAccount,
+  removeAccount,
   unlock,
 };
