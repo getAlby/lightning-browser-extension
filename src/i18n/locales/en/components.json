@@ -2,6 +2,7 @@
   "qrcode_scanner": {
     "scan_qrcode": "Scan QR Code",
     "start_scanning": "Start scanning",
-    "stop_scanning": "Stop scanning"
+    "stop_scanning": "Stop scanning",
+    "allow_camera_access": "Please allow camera access in the settings screen."
   }
 }
