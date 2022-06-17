@@ -30,11 +30,16 @@ const props: Props = {
   allowance: {
     id: 1,
     totalBudget: 2000,
+    remainingBudget: 1234,
   },
   onEdit: mock,
 };
 
 describe("AllowanceMenu", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   test("set new budget", async () => {
     const user = userEvent.setup();
 
@@ -61,18 +66,65 @@ describe("AllowanceMenu", () => {
 
     await screen.findByText("Set a new budget");
 
-    await act(() => {
-      userEvent.type(screen.getByLabelText("Budget"), "250");
+    await act(async () => {
+      await user.clear(screen.getByLabelText("New budget"));
+      await user.type(screen.getByLabelText("New budget"), "250");
     });
+
+    expect(screen.getByLabelText("New budget")).toHaveValue(250);
 
     const saveButton = await screen.findByRole("button", {
       name: "Save",
     });
 
-    await act(() => {
-      user.click(saveButton);
+    await act(async () => {
+      await user.click(saveButton);
     });
 
     await waitFor(() => expect(mock).toHaveBeenCalled());
+  });
+
+  test("setting a budget higher than total will fail", async () => {
+    const user = userEvent.setup();
+
+    render(
+      <MemoryRouter>
+        <AllowanceMenu {...props} />
+      </MemoryRouter>
+    );
+
+    const settingsButton = await screen.getByRole("button");
+    await act(() => {
+      user.click(settingsButton); // click settings-button
+    });
+
+    expect(await screen.findByRole("menu")).toBeInTheDocument(); // allowence-menu opens
+
+    const editButton = await screen.findByRole("menuitem", {
+      name: "Edit",
+    });
+
+    await act(() => {
+      user.click(editButton);
+    });
+
+    await screen.findByText("Set a new budget");
+
+    await act(async () => {
+      await user.clear(screen.getByLabelText("New budget"));
+      await user.type(screen.getByLabelText("New budget"), "818283");
+    });
+
+    expect(screen.getByLabelText("New budget")).toHaveValue(818283);
+
+    const saveButton = await screen.findByRole("button", {
+      name: "Save",
+    });
+
+    await act(async () => {
+      await user.click(saveButton);
+    });
+
+    expect(mock).not.toHaveBeenCalled();
   });
 });

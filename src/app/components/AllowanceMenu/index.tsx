@@ -1,7 +1,9 @@
 import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useState, useEffect } from "react";
+import type { FormEvent } from "react";
 import Modal from "react-modal";
+import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
@@ -52,8 +54,8 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   }
 
   async function updateAllowance() {
-    if (parseInt(budget) < allowance.remainingBudget) {
-      alert(
+    if (parseInt(budget) > allowance.remainingBudget) {
+      toast.error(
         `New budget is lower than remaining budget ${allowance.remainingBudget}`
       );
       return;
@@ -63,6 +65,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
       id: allowance.id,
       totalBudget: parseInt(budget),
     });
+
     onEdit && onEdit();
     closeModal();
   }
@@ -96,6 +99,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
           </Menu.ItemButton>
         </Menu.List>
       </Menu>
+
       <Modal
         ariaHideApp={false}
         closeTimeoutMS={200}
@@ -113,29 +117,38 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             <CrossIcon className="w-6 h-6 dark:text-white" />
           </button>
         </div>
-        <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
-          <div className="w-60">
-            <DualCurrencyField
-              id="budget"
-              label="Set a new Budget"
-              autoFocus
-              placeholder="sats"
-              value={budget}
-              type="number"
-              hint="This will reset the current budget"
-              fiatValue={fiatAmount}
-              onChange={(e) => setBudget(e.target.value)}
+
+        <form
+          onSubmit={(e: FormEvent) => {
+            e.preventDefault();
+            updateAllowance();
+          }}
+        >
+          <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
+            <div className="w-60">
+              <DualCurrencyField
+                id="budget"
+                label="Set a new Budget"
+                autoFocus
+                placeholder="sats"
+                value={budget}
+                type="number"
+                hint="This will reset the current budget"
+                fiatValue={fiatAmount}
+                onChange={(e) => setBudget(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="flex justify-end p-5 dark:bg-surface-02dp">
+            <Button
+              type="submit"
+              label="Save"
+              primary
+              disabled={budget === ""}
             />
           </div>
-        </div>
-        <div className="flex justify-end p-5 dark:bg-surface-02dp">
-          <Button
-            onClick={updateAllowance}
-            label="Save"
-            primary
-            disabled={budget === ""}
-          />
-        </div>
+        </form>
       </Modal>
     </>
   );
