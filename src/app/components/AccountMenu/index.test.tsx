@@ -48,6 +48,8 @@ describe("AccountMenu", () => {
   });
 
   test("displays accounts and options", async () => {
+    const user = userEvent.setup();
+
     render(
       <BrowserRouter>
         <AccountMenu {...defaultProps} />
@@ -55,7 +57,7 @@ describe("AccountMenu", () => {
     );
 
     await act(async () => {
-      userEvent.click(screen.getByText("Toggle Dropdown"));
+      await user.click(screen.getByText("Toggle Dropdown"));
     });
 
     await waitFor(() => screen.getByText("Switch account"));
@@ -67,6 +69,8 @@ describe("AccountMenu", () => {
   });
 
   test("highlights current account", async () => {
+    const user = userEvent.setup();
+
     render(
       <BrowserRouter>
         <AccountMenu {...defaultProps} />
@@ -74,7 +78,7 @@ describe("AccountMenu", () => {
     );
 
     await act(async () => {
-      userEvent.click(screen.getByText("Toggle Dropdown"));
+      await user.click(screen.getByText("Toggle Dropdown"));
     });
     await waitFor(() => screen.getByText("Switch account"));
 
@@ -85,6 +89,8 @@ describe("AccountMenu", () => {
   });
 
   test("displays accounts without options", async () => {
+    const user = userEvent.setup();
+
     render(
       <BrowserRouter>
         <AccountMenu showOptions={false} {...defaultProps} />
@@ -92,7 +98,7 @@ describe("AccountMenu", () => {
     );
 
     await act(async () => {
-      userEvent.click(screen.getByText("Toggle Dropdown"));
+      await user.click(screen.getByText("Toggle Dropdown"));
     });
     await waitFor(() => screen.getByText("Switch account"));
 

@@ -61,6 +61,8 @@ describe("ConfirmPayment", () => {
   });
 
   test("toggles set budget, displays input with a default budget", async () => {
+    const user = userEvent.setup();
+
     await act(async () => {
       render(
         <MemoryRouter>
@@ -69,7 +71,7 @@ describe("ConfirmPayment", () => {
       );
     });
 
-    userEvent.click(screen.getByText("Remember and set a budget"));
+    await user.click(screen.getByText("Remember and set a budget"));
 
     const input = await screen.findByLabelText("Budget");
     const satoshis = lightningPayReq.decode(paymentRequest).satoshis || 0;
