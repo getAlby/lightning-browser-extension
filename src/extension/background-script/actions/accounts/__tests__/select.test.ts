@@ -1,6 +1,7 @@
-import select from "../select";
 import state from "~/extension/background-script/state";
 import type { MessageAccountSelect } from "~/types";
+
+import select from "../select";
 
 jest.mock("~/extension/background-script/state");
 
@@ -30,7 +31,7 @@ const message: MessageAccountSelect = {
   },
   origin: { internal: true },
   prompt: true,
-  type: "selectAccount",
+  action: "selectAccount",
 };
 
 describe("select account", () => {

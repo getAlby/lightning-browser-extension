@@ -113,20 +113,9 @@ export interface MessageAccountLock extends Omit<MessageDefault, "args"> {
   action: "lock";
 }
 
-export interface MessageAccountInfo extends Omit<MessageDefault, "args"> {
-  type: "accountInfo";
-}
-
-export interface MessageAccountAll extends Omit<MessageDefault, "args"> {
-  type: "getAccounts";
-}
-
-export interface MessageAccountLock extends Omit<MessageDefault, "args"> {
-  type: "lock";
-}
 export interface MessageAccountSelect extends MessageDefault {
   args: { id: Account["id"] };
-  type: "selectAccount";
+  action: "selectAccount";
 }
 
 interface LNURLChannelServiceResponse {
