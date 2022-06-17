@@ -8,5 +8,8 @@
     "unlock": "Unlock",
     "send": "Send",
     "receive": "Receive"
+  },
+  "errors": {
+    "connection_failed": "Connection failed"
   }
 }
