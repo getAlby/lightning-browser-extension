@@ -63,8 +63,7 @@
         "optional_lightning_address_label": "Choose your Lightning Address (optional)",
         "optional_lightning_address_suffix": "@getalby.com",
         "errors": {
-          "create_wallet_error": "Failed to create a new wallet",
-          "connection_failed_error": "Connection failed"
+          "create_wallet_error": "Failed to create a new wallet"
         }
       },
       "post_connect": {
