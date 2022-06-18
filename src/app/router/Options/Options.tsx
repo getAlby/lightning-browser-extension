@@ -17,9 +17,10 @@ import { ToastContainer } from "react-toastify";
 import { AccountsProvider } from "~/app/context/AccountsContext";
 import { AuthProvider, useAuth } from "~/app/context/AuthContext";
 import RequireAuth from "~/app/router/RequireAuth";
-import connectorRoutes from "~/app/router/connectorRoutes";
+import getConnectorRoutes from "~/app/router/connectorRoutes";
 
 function Options() {
+  const connectorRoutes = getConnectorRoutes();
   return (
     <AuthProvider>
       <AccountsProvider>

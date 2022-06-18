@@ -10,42 +10,60 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
 import { AuthProvider } from "~/app/context/AuthContext";
-import connectorRoutes from "~/app/router/connectorRoutes";
+import getConnectorRoutes from "~/app/router/connectorRoutes";
 import i18n from "~/i18n/i18nConfig";
+import { translationI18nNamespace } from "~/i18n/namespaces";
 
-const routes = [
-  {
-    path: "/",
-    element: <Intro />,
-    name: i18n.t("welcome.nav.welcome"),
-  },
-  {
-    path: "/set-password",
-    element: <SetPassword />,
-    name: i18n.t("welcome.nav.password"),
-  },
-  {
-    path: "/choose-connector",
-    name: i18n.t("welcome.nav.connect"),
-    children: [
-      {
-        index: true,
-        element: (
-          <ChooseConnector
-            title={i18n.t("choose_connector.title")}
-            description={i18n.t("choose_connector.description")}
-          />
-        ),
-      },
-      ...connectorRoutes,
-    ],
-  },
-  {
-    path: "/test-connection",
-    element: <TestConnection />,
-    name: i18n.t("welcome.nav.done"),
-  },
-];
+let connectorRoutes = getConnectorRoutes();
+
+function getRoutes(
+  connectorRoutes: {
+    path: string;
+    element: JSX.Element;
+    title: string;
+    description: string;
+    logo: string;
+  }[]
+) {
+  return [
+    {
+      path: "/",
+      element: <Intro />,
+      name: i18n.t("welcome.nav.welcome", translationI18nNamespace),
+    },
+    {
+      path: "/set-password",
+      element: <SetPassword />,
+      name: i18n.t("welcome.nav.password", translationI18nNamespace),
+    },
+    {
+      path: "/choose-connector",
+      name: i18n.t("welcome.nav.connect", translationI18nNamespace),
+      children: [
+        {
+          index: true,
+          element: (
+            <ChooseConnector
+              title={i18n.t("choose_connector.title", translationI18nNamespace)}
+              description={i18n.t(
+                "choose_connector.description",
+                translationI18nNamespace
+              )}
+            />
+          ),
+        },
+        ...connectorRoutes,
+      ],
+    },
+    {
+      path: "/test-connection",
+      element: <TestConnection />,
+      name: i18n.t("welcome.nav.done", translationI18nNamespace),
+    },
+  ];
+}
+
+let routes = getRoutes(connectorRoutes);
 
 const initialSteps: Step[] = routes.map((route) => ({
   id: route.name,
@@ -65,6 +83,25 @@ function App() {
   const { t } = useTranslation();
   const location = useLocation();
   const routesElement = useRoutes(routes);
+
+  const [languageChanged, setLanguageChanged] = useState(false);
+  i18n.on("languageChanged", () => {
+    connectorRoutes = getConnectorRoutes();
+    routes = getRoutes(connectorRoutes);
+
+    // Update name to new language only, don't update status
+    const tempSteps: Step[] = [];
+    routes.forEach((_, i) => {
+      tempSteps.push({
+        id: routes[i].name,
+        status: steps[i].status,
+      });
+    });
+    setSteps(tempSteps);
+
+    // Trigger rerender to update displayed language
+    setLanguageChanged(!languageChanged);
+  });
 
   // Update step progress based on active location.
   useEffect(() => {

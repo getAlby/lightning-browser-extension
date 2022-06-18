@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import utils from "~/common/lib/utils";
-import i18n from "~/i18n/i18nConfig";
 
 const initialFormData = {
   password: "",
@@ -56,11 +55,11 @@ export default function SetPassword() {
     let password = "";
     let passwordConfirmation = "";
 
-    if (!formData.password) password = i18n.t("enter_password");
+    if (!formData.password) password = t("enter_password");
     if (!formData.passwordConfirmation) {
-      passwordConfirmation = i18n.t("confirm_password");
+      passwordConfirmation = t("confirm_password");
     } else if (formData.password !== formData.passwordConfirmation) {
-      passwordConfirmation = i18n.t("mismatched_password");
+      passwordConfirmation = t("mismatched_password");
     }
     setErrors({
       password,
