@@ -15,7 +15,7 @@ import { translationI18nNamespace } from "~/i18n/namespaces";
 import alby from "/static/assets/icons/alby.png";
 import citadel from "/static/assets/icons/citadel.png";
 import eclair from "/static/assets/icons/eclair.jpg";
-import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.jpg";
+import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.png";
 import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
 import lnbits from "/static/assets/icons/lnbits.png";
 import lnd from "/static/assets/icons/lnd.png";
