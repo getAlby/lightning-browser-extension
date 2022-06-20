@@ -32,11 +32,11 @@ interface AuthContextType {
   }) => Promise<AccountInfo | undefined>;
 }
 
-const AuthContext = createContext({} as AuthContextType);
+const AccountContext = createContext({} as AuthContextType);
 
 // @TODO: https://github.com/getAlby/lightning-browser-extension/issues/1040
 // rename to "accountProvider"
-export function AuthProvider({ children }: { children: React.ReactNode }) {
+export function AccountProvider({ children }: { children: React.ReactNode }) {
   const [account, setAccount] = useState<AuthContextType["account"]>(null);
   const [loading, setLoading] = useState(true);
   const [balancesDecorated, setBalancesDecorated] = useState({
@@ -123,9 +123,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     unlock,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AccountContext.Provider value={value}>{children}</AccountContext.Provider>
+  );
 }
 
 export function useAuth() {
-  return useContext(AuthContext);
+  return useContext(AccountContext);
 }
