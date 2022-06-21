@@ -1,8 +1,8 @@
-import state from "../../state";
+import state from "~/extension/background-script/state";
+import type { MessageAccountSelect } from "~/types";
 
-const select = async (message, sender) => {
+const select = async (message: MessageAccountSelect) => {
   const currentState = state.getState();
-
   const accountId = message.args.id;
   const account = currentState.accounts[accountId];
 
@@ -11,11 +11,13 @@ const select = async (message, sender) => {
       console.info("Unloading connector");
       await currentState.connector.unload();
     }
+
     state.setState({
       account,
       connector: null, // reset memoized connector
       currentAccountId: accountId,
     });
+
     // init connector this also memoizes the connector in the state object
     await state.getState().getConnector();
 
@@ -25,7 +27,7 @@ const select = async (message, sender) => {
   } else {
     console.error(`Account not found: ${accountId}`);
     return {
-      error: "Account not found",
+      error: `Account not found: ${accountId}`,
     };
   }
 };

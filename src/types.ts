@@ -90,6 +90,7 @@ export interface MessageAccountRemove extends MessageDefault {
   args?: { id: Account["id"] };
   action: "removeAccount";
 }
+
 export interface MessageAccountAdd extends MessageDefault {
   args: Omit<Account, "id">;
   action: "addAccount";
@@ -112,6 +113,11 @@ export interface MessageAccountAll extends Omit<MessageDefault, "args"> {
 
 export interface MessageAccountLock extends Omit<MessageDefault, "args"> {
   action: "lock";
+}
+
+export interface MessageAccountSelect extends MessageDefault {
+  args: { id: Account["id"] };
+  action: "selectAccount";
 }
 
 interface LNURLChannelServiceResponse {
