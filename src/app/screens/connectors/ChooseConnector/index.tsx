@@ -1,5 +1,6 @@
 import LinkButton from "@components/LinkButton";
-import connectorRoutes from "~/app/router/connectorRoutes";
+import getConnectorRoutes from "~/app/router/connectorRoutes";
+import i18n from "~/i18n/i18nConfig";
 
 type Props = {
   title: string;
@@ -7,6 +8,10 @@ type Props = {
 };
 
 export default function ChooseConnector({ title, description }: Props) {
+  let connectorRoutes = getConnectorRoutes();
+  i18n.on("languageChanged", () => {
+    connectorRoutes = getConnectorRoutes();
+  });
   return (
     <div className="relative my-14 lg:grid  lg:gap-8 text-center">
       <div className="relative">

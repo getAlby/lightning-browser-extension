@@ -1,7 +1,7 @@
 import { PaymentRequestObject } from "bolt11";
+import { CURRENCIES } from "~/common/constants";
+import connectors from "~/extension/background-script/connectors";
 import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
-
-import connectors from "./extension/background-script/connectors";
 
 export type ConnectorType = keyof typeof connectors;
 
@@ -19,8 +19,10 @@ export interface Accounts {
 export interface AccountInfo {
   alias: string;
   balance: number;
+  fiatBalance?: string;
   id: string;
   name: string;
+  satsBalance?: string;
 }
 
 export interface MetaData {
@@ -84,9 +86,9 @@ export interface MessageDefault {
   prompt?: boolean;
 }
 
-export interface MessageAccountDelete extends MessageDefault {
-  args: { id: Account["id"] };
-  action: "deleteAccount";
+export interface MessageAccountRemove extends MessageDefault {
+  args?: { id: Account["id"] };
+  action: "removeAccount";
 }
 export interface MessageAccountAdd extends MessageDefault {
   args: Omit<Account, "id">;
@@ -116,6 +118,7 @@ export interface MessageBlocklistAdd extends MessageDefault {
   };
   action: "addBlocklist";
 }
+
 export interface MessageBlocklistDelete extends MessageDefault {
   args: {
     host: string;
@@ -128,6 +131,10 @@ export interface MessageBlocklistGet extends MessageDefault {
     host: string;
   };
   action: "getBlocklist";
+}
+
+export interface MessageAccountLock extends Omit<MessageDefault, "args"> {
+  action: "lock";
 }
 
 interface LNURLChannelServiceResponse {
@@ -229,6 +236,7 @@ export type Transaction = {
   totalFees: string;
   description: string;
   location: string;
+  totalAmountFiat: string;
 };
 
 export type Payment = {
@@ -263,6 +271,8 @@ export interface SettingsStorage {
   userEmail: string;
   locale: string;
   theme: string;
+  currency: CURRENCIES;
+  exchange: SupportedExchanges;
 }
 
 export interface Blocklist {
@@ -278,7 +288,10 @@ export interface Badge {
   color: string;
   textColor: string;
 }
+
 export type Publisher = Allowance & {
   badge?: Badge;
   blocked?: boolean;
 };
+
+export type SupportedExchanges = "coindesk" | "yadio";

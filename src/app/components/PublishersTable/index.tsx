@@ -34,7 +34,7 @@ export default function PublishersTable({
   publishers,
   navigateToPublisher,
 }: Props) {
-  const { t } = useTranslation(["blocklist"]);
+  const { t } = useTranslation("translation");
   return (
     <div className="shadow overflow-hidden rounded-lg">
       <table className="min-w-full">
@@ -104,7 +104,7 @@ export default function PublishersTable({
               </td>
               <td className="px-6 py-6 whitespace-nowrap text-right">
                 {publisher.blocked && (
-                  <div className="ml-40">{t("blocklisted")}</div>
+                  <div className="ml-40">{t("blocklist.blocklisted")}</div>
                 )}
               </td>
               <td className="w-10">

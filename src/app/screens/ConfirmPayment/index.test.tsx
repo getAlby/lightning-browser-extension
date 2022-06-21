@@ -6,6 +6,12 @@ import { MemoryRouter } from "react-router-dom";
 import type { Props } from "./index";
 import ConfirmPayment from "./index";
 
+jest.mock("~/common/utils/currencyConvert", () => {
+  return {
+    getFiatValue: jest.fn(() => "€12,345.67"),
+  };
+});
+
 const paymentRequest =
   "lnbc250n1p3qzycupp58uc2wa29470f98wrxmy4xwuqt8cywjygf5t2cp0s376y7nwdyq3sdqhf35kw6r5de5kueeqg3jk6mccqzpgxqyz5vqsp5wfdmwtv5rmru00ajsnn3f8lzpxa4snug2tmqvc8zj8semr4kjjts9qyyssq83h74pte8nrkqs8sr2hscv5zcdmhwunwnd6xr3mskeayh96pu7ksswa6p7trknlpp6t3js4k6uytxutv5ecgcwaxz7fj4zfy5khjcjcpf66muy";
 
