@@ -291,7 +291,6 @@ export interface Badge {
 
 export type Publisher = Allowance & {
   badge?: Badge;
-  blocked?: boolean;
 };
 
 export type SupportedExchanges = "coindesk" | "yadio";

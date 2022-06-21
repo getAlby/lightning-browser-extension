@@ -1,5 +1,4 @@
 import { CaretRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { useTranslation } from "react-i18next";
 
 import Badge from "../Badge";
 import Progressbar from "../Progressbar";
@@ -19,7 +18,6 @@ type Publisher = {
   totalBudget: number;
   usedBudget: number;
   percentage: string;
-  blocked?: boolean;
 };
 
 type Props = {
@@ -34,7 +32,6 @@ export default function PublishersTable({
   publishers,
   navigateToPublisher,
 }: Props) {
-  const { t } = useTranslation("translation");
   return (
     <div className="shadow overflow-hidden rounded-lg">
       <table className="min-w-full">
@@ -100,11 +97,6 @@ export default function PublishersTable({
                       </div>
                     </div>
                   </div>
-                )}
-              </td>
-              <td className="px-6 py-6 whitespace-nowrap text-right">
-                {publisher.blocked && (
-                  <div className="ml-40">{t("blocklist.blocklisted")}</div>
                 )}
               </td>
               <td className="w-10">
