@@ -73,7 +73,11 @@ class DB extends Dexie {
     return true;
   }
 
-  // TODO: DRY up the duplication here.
+  // Loads the data from the browser.storage and adds the data to the IndexedDB.
+  // This is needed because the IndexedDB is not necessarily persistent,
+  // BUT maybe there are already entries in the IndexedDB (that depends on the browser).
+  // In that case we don't do anything as this would cause conflicts and errors.
+  // (this could use some DRY-up)
   async loadFromStorage() {
     console.info("Loading DB data from storage");
     return browser.storage.local
