@@ -34,6 +34,10 @@ interface UnlockRes {
   currentAccountId: string;
 }
 
+interface BlocklistRes {
+  blocked: boolean;
+}
+
 export const getAccountInfo = () => utils.call<AccountInfoRes>("accountInfo");
 
 /**
@@ -97,7 +101,7 @@ export const removeAccount = (id: string) =>
 export const unlock = (password: string) =>
   utils.call<UnlockRes>("unlock", { password });
 export const getBlocklist = (host: string) =>
-  utils.call<{ blocked: boolean }>("getBlocklist", { host });
+  utils.call<BlocklistRes>("getBlocklist", { host });
 
 export default {
   getAccountInfo,
