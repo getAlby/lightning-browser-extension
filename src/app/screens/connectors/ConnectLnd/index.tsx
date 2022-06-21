@@ -3,6 +3,7 @@ import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import { useRef, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
@@ -14,6 +15,9 @@ const initialFormData = {
 
 export default function ConnectLnd() {
   const navigate = useNavigate();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "choose_connector.lnd",
+  });
   const [formData, setFormData] = useState(initialFormData);
   const [isDragging, setDragging] = useState(false);
   const hiddenFileInput = useRef<HTMLInputElement>(null);
@@ -66,11 +70,11 @@ export default function ConnectLnd() {
         }
       } else {
         toast.error(`
-          Connection failed. Are your LND credentials correct? \n\n(${validation.error})`);
+          ${t("errors.connection_failed")} \n\n(${validation.error})`);
       }
     } catch (e) {
       console.error(e);
-      let message = "Connection failed. Are your LND credentials correct?";
+      let message = t("errors.connection_failed");
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
@@ -123,8 +127,8 @@ export default function ConnectLnd() {
 
   return (
     <ConnectorForm
-      title="Connect to your LND node"
-      description="You need your node URL and a macaroon with read and send permissions (e.g. admin.macaroon)"
+      title={t("page_title")}
+      description={t("page_description")}
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
@@ -132,10 +136,10 @@ export default function ConnectLnd() {
       <div className="mb-6">
         <TextField
           id="url"
-          label="REST API host and port"
-          placeholder="https://your-node-url:8080"
+          label={t("port_label")}
+          placeholder={t("url_placeholder")}
           pattern="https://.+"
-          title="https://your-node-url:8080"
+          title={t("url_placeholder")}
           onChange={handleChange}
           required
         />
@@ -149,7 +153,7 @@ export default function ConnectLnd() {
         <div>
           <TextField
             id="macaroon"
-            label="Macaroon (HEX format)"
+            label={t("macaroon_label")}
             value={formData.macaroon}
             onChange={handleChange}
             required
@@ -169,8 +173,12 @@ export default function ConnectLnd() {
         >
           <SendIcon className="mb-3 h-6 w-6 text-blue-500" />
           <p className="dark:text-white">
-            Drag and drop your macaroon here or{" "}
-            <span className="underline">browse</span>
+            <Trans
+              i18nKey={"drag_and_drop"}
+              t={t}
+              // eslint-disable-next-line react/jsx-key
+              components={[<span className="underline"></span>]}
+            />
           </p>
           <input
             ref={hiddenFileInput}
