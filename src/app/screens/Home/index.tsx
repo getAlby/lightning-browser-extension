@@ -64,10 +64,11 @@ function Home() {
 
   async function unblock() {
     try {
-      if (currentUrl?.host)
+      if (currentUrl?.host) {
         await utils.call("deleteBlocklist", {
           host: currentUrl.host,
         });
+      }
       setIsBlocked(false);
     } catch (e) {
       console.error(e);
@@ -273,9 +274,7 @@ function Home() {
               fullWidth
               label="Enable now"
               direction="column"
-              onClick={async () => {
-                await unblock();
-              }}
+              onClick={() => unblock()}
             />
           </div>
         )}
