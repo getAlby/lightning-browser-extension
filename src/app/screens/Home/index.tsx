@@ -266,10 +266,12 @@ function Home() {
 
         {isBlocked && (
           <div className="mb-2 items-center py-3 dark:text-white">
-            <p className="py-1">This site is currently in blocklist.</p>
+            <p className="py-1">
+              Alby is currently disabled on {currentUrl?.host}
+            </p>
             <Button
               fullWidth
-              label="Unblock"
+              label="Enable now"
               direction="column"
               onClick={async () => {
                 await unblock();
