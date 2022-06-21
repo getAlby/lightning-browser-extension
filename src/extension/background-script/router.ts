@@ -36,6 +36,7 @@ const routes = {
   getBalance: ln.getBalance,
   getPayments: payments.all,
   accountInfo: accounts.info,
+  accountDecryptedDetails: accounts.decryptedDetails,
   addAccount: accounts.add,
   editAccount: accounts.edit,
   getAccounts: accounts.all,
