@@ -23,8 +23,13 @@ const disabledCalls = ["enable"];
 let isEnabled = false; // store if webln is enabled for this content page
 let callActive = false; // store if a webln is currently active. Used to prevent multiple calls in parallel
 
-if (shouldInject()) {
-  injectScript();
+async function init() {
+  const inject = await shouldInject();
+  if (!inject) {
+    return;
+  }
+
+  injectScript(); // injects the webln object
 
   // extract LN data from websites
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -87,4 +92,7 @@ if (shouldInject()) {
     }
   });
 }
+
+init();
+
 export {};

@@ -3,7 +3,7 @@ import PublishersTable from "@components/PublishersTable";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import utils from "~/common/lib/utils";
-import { Allowance } from "~/types";
+import { Allowance, Publisher } from "~/types";
 
 import websites from "./websites.json";
 
@@ -17,12 +17,13 @@ function Publishers() {
 
   async function fetchData() {
     try {
-      const response = await utils.call<{
+      const allowanceResponse = await utils.call<{
         allowances: Allowance[];
       }>("listAllowances");
-      const allowances = response.allowances.map((allowance) => {
+      const allowances = allowanceResponse.allowances.map((allowance) => {
+        let retobj: Publisher = allowance;
         if (allowance.enabled && allowance.remainingBudget > 0) {
-          return {
+          retobj = {
             ...allowance,
             badge: {
               label: "ACTIVE",
@@ -31,7 +32,7 @@ function Publishers() {
             },
           };
         }
-        return allowance;
+        return retobj;
       });
       setData(allowances);
     } catch (e) {

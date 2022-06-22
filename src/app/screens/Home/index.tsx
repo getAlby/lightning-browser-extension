@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import browser from "webextension-polyfill";
 import api from "~/common/lib/api";
+import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
 import type { Allowance, Battery, Transaction } from "~/types";
 
@@ -26,6 +27,8 @@ dayjs.extend(relativeTime);
 
 function Home() {
   const [allowance, setAllowance] = useState<Allowance | null>(null);
+  const [isBlocked, setIsBlocked] = useState<boolean>(false);
+  const [currentUrl, setCurrentUrl] = useState<URL | null>(null);
   const [payments, setPayments] = useState<Transaction[]>([]);
   const [loadingAllowance, setLoadingAllowance] = useState(true);
   const [loadingPayments, setLoadingPayments] = useState(true);
@@ -43,14 +46,32 @@ function Home() {
       });
       const [currentTab] = tabs;
       const url = new URL(currentTab.url as string);
+      setCurrentUrl(url);
       const result = await api.getAllowance(url.host);
       if (result.enabled) {
         setAllowance(result);
+      }
+      const blocklistResult = await api.getBlocklist(url.host);
+      if (blocklistResult.blocked) {
+        setIsBlocked(blocklistResult.blocked);
       }
     } catch (e) {
       console.error(e);
     } finally {
       setLoadingAllowance(false);
+    }
+  }
+
+  async function unblock() {
+    try {
+      if (currentUrl?.host) {
+        await utils.call("deleteBlocklist", {
+          host: currentUrl.host,
+        });
+      }
+      setIsBlocked(false);
+    } catch (e) {
+      console.error(e);
     }
   }
 
@@ -243,6 +264,20 @@ function Home() {
             }}
           />
         </div>
+
+        {isBlocked && (
+          <div className="mb-2 items-center py-3 dark:text-white">
+            <p className="py-1">
+              Alby is currently disabled on {currentUrl?.host}
+            </p>
+            <Button
+              fullWidth
+              label="Enable now"
+              direction="column"
+              onClick={() => unblock()}
+            />
+          </div>
+        )}
 
         {loadingPayments ? (
           <div className="flex justify-center">
