@@ -1,6 +1,7 @@
-import unlock from "../unlock";
 import state from "~/extension/background-script/state";
 import type { MessageAccountUnlock } from "~/types";
+
+import unlock from "../unlock";
 
 jest.mock("~/extension/background-script/state");
 
@@ -27,7 +28,7 @@ describe("edit account", () => {
       args: { password: 1 },
       origin: { internal: true },
       prompt: true,
-      type: "unlock",
+      action: "unlock",
     };
 
     state.getState = jest.fn().mockReturnValue(mockState);
