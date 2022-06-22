@@ -58,7 +58,7 @@ function LNURLWithdraw(props: Props) {
 
   function renderAmount() {
     if (minWithdrawable === maxWithdrawable) {
-      return <p>{`${minWithdrawable / 1000} sat`}</p>;
+      return <p>{`${minWithdrawable / 1000} sats`}</p>;
     } else {
       return (
         <div className="mt-1 flex flex-col">

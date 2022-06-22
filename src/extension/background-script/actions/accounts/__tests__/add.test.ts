@@ -30,7 +30,7 @@ const message: MessageAccountAdd = {
   },
   origin: { internal: true },
   prompt: true,
-  type: "addAccount",
+  action: "addAccount",
 };
 
 describe("add account to account-list", () => {

@@ -6,10 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
 
-const initialFormData = Object.freeze({
+const initialFormData = {
   url: "",
   macaroon: "",
-});
+};
 
 export default function ConnectUmbrel() {
   const navigate = useNavigate();
@@ -19,8 +19,10 @@ export default function ConnectUmbrel() {
   function handleLndconnectUrl(event: React.ChangeEvent<HTMLInputElement>) {
     try {
       const lndconnectUrl = event.target.value.trim();
-      const lndconnect = new URL(lndconnectUrl);
-      const url = "https:" + lndconnect.pathname;
+      let lndconnect = new URL(lndconnectUrl);
+      lndconnect.protocol = "http:";
+      lndconnect = new URL(lndconnect.toString());
+      const url = `https://${lndconnect.host}${lndconnect.pathname}`;
       let macaroon = lndconnect.searchParams.get("macaroon") || "";
       macaroon = utils.urlSafeBase64ToHex(macaroon);
       // const cert = lndconnect.searchParams.get("cert"); // TODO: handle LND certs with the native connector
@@ -30,7 +32,7 @@ export default function ConnectUmbrel() {
         macaroon,
       });
     } catch (e) {
-      console.log("invalid lndconnect string");
+      console.error("invalid lndconnect string", e);
     }
   }
 

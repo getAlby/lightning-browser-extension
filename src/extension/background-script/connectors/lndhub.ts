@@ -366,7 +366,7 @@ export default class LndHub implements Connector {
         try {
           await this.authorize();
         } catch (e) {
-          console.log(e);
+          console.error(e);
           if (e instanceof Error) throw new Error(e.message);
         }
         this.noRetry = true;

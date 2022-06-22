@@ -10,7 +10,7 @@ import {
 
 const utils = {
   call: <T = Record<string, unknown>>(
-    type: string,
+    action: string,
     args?: Record<string, unknown>,
     overwrites?: Record<string, unknown>
   ) => {
@@ -18,7 +18,7 @@ const utils = {
       .sendMessage({
         application: "LBE",
         prompt: true,
-        type: type,
+        action: action,
         args: args,
         origin: { internal: true },
         ...overwrites,
@@ -99,7 +99,7 @@ const utils = {
   openPrompt: <Type>(message: {
     args: Record<string, unknown>;
     origin: OriginData | OriginDataInternal;
-    type: string;
+    action: string;
   }): Promise<{ data: Type }> => {
     const urlParams = new URLSearchParams();
     // passing on the message args to the prompt if present
@@ -110,8 +110,8 @@ const utils = {
     if (message.origin) {
       urlParams.set("origin", JSON.stringify(message.origin));
     }
-    // type must always be present, this is used to route the request
-    urlParams.set("type", message.type);
+    // action must always be present, this is used to route the request
+    urlParams.set("action", message.action);
 
     const url = `${browser.runtime.getURL(
       "prompt.html"

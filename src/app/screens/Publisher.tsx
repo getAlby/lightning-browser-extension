@@ -8,6 +8,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import utils from "~/common/lib/utils";
+import { getFiatValue } from "~/common/utils/currencyConvert";
 import { Allowance } from "~/types";
 
 dayjs.extend(relativeTime);
@@ -24,6 +25,10 @@ function Publisher() {
         const response = await utils.call<Allowance>("getAllowanceById", {
           id: parseInt(id),
         });
+        for await (const payment of response.payments) {
+          const totalAmountFiat = await getFiatValue(payment.totalAmount);
+          payment.totalAmountFiat = totalAmountFiat;
+        }
         setAllowance(response);
       }
     } catch (e) {
@@ -52,7 +57,7 @@ function Publisher() {
             <dl>
               <dt className="text-sm font-medium text-gray-500">Allowance</dt>
               <dd className="flex items-center font-bold text-xl dark:text-neutral-400">
-                {allowance.usedBudget} / {allowance.totalBudget} sat used
+                {allowance.usedBudget} / {allowance.totalBudget} sats used
                 <div className="ml-3 w-24">
                   <Progressbar percentage={allowance.percentage} />
                 </div>

@@ -47,7 +47,7 @@ function Keysend(props: Props) {
 
       auth.fetchAccountInfo(); // Update balance.
     } catch (e) {
-      console.log(e);
+      console.error(e);
       if (e instanceof Error) {
         toast.error(`Error: ${e.message}`);
       }
@@ -79,7 +79,7 @@ function Keysend(props: Props) {
   function elements() {
     const elements = [];
     elements.push(["Send payment to", destination]);
-    elements.push(["Amount (Satoshi)", renderAmount()]);
+    elements.push(["Amount (Satoshis)", renderAmount()]);
     return elements;
   }
 

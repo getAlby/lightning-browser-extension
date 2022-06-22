@@ -273,7 +273,7 @@ class Lnd implements Connector {
       } catch (err) {
         throw new Error(res.statusText);
       }
-      console.log("errBody", errBody);
+      console.error("errBody", errBody);
       throw errBody;
     }
     let data = await res.json();

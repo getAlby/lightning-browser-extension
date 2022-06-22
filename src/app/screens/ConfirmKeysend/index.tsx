@@ -4,12 +4,13 @@ import Container from "@components/Container";
 import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-import { useState, MouseEvent, useRef } from "react";
+import { useState, MouseEvent, useRef, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
+import { getFiatValue } from "~/common/utils/currencyConvert";
 import getOriginData from "~/extension/content-script/originData";
 import type { OriginData } from "~/types";
 
@@ -23,6 +24,7 @@ type Props = {
 function Keysend(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+
   const [rememberMe, setRememberMe] = useState(false);
   const [origin] = useState(
     props.origin ||
@@ -33,6 +35,7 @@ function Keysend(props: Props) {
   const originRef = useRef(props.origin || getOriginData());
   const [customRecords] = useState(props.customRecords || {});
   const [amount] = useState(props.valueSat || "");
+  const [fiatAmount, setFiatAmount] = useState("");
   const [destination] = useState(
     props.destination || searchParams.get("destination")
   );
@@ -41,6 +44,13 @@ function Keysend(props: Props) {
   );
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      const res = await getFiatValue(budget);
+      setFiatAmount(res);
+    })();
+  }, [budget]);
 
   async function confirm() {
     if (rememberMe && budget) {
@@ -62,7 +72,7 @@ function Keysend(props: Props) {
       msg.reply(payment); // resolves the prompt promise and closes the prompt window
       setSuccessMessage(`Payment sent! Preimage: ${payment.preimage}`);
     } catch (e) {
-      console.log(e);
+      console.error(e);
       if (e instanceof Error) {
         toast.error(`Error: ${e.message}`);
       }
@@ -107,7 +117,9 @@ function Keysend(props: Props) {
                   description={`Send payment to ${destination}`}
                 />
               </div>
+
               <BudgetControl
+                fiatAmount={fiatAmount}
                 remember={rememberMe}
                 onRememberChange={(event) => {
                   setRememberMe(event.target.checked);
@@ -115,6 +127,7 @@ function Keysend(props: Props) {
                 budget={budget}
                 onBudgetChange={(event) => setBudget(event.target.value)}
               />
+
               <ConfirmOrCancel
                 disabled={loading}
                 loading={loading}

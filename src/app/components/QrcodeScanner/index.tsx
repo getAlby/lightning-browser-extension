@@ -1,6 +1,7 @@
 import { QrCodeIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Html5Qrcode, Html5QrcodeScannerState } from "html5-qrcode";
 import { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 
 import Button from "../Button";
@@ -27,6 +28,9 @@ function QrcodeScanner({
   const [cameras, setCameras] = useState<CameraDevice[]>([]);
   const [selectedCamera, setSelectedCamera] = useState("");
   const html5QrCodeRef = useRef<Html5Qrcode>();
+  const { t } = useTranslation("components", {
+    keyPrefix: "qrcode_scanner",
+  });
 
   useEffect(() => {
     return () => {
@@ -43,7 +47,7 @@ function QrcodeScanner({
         handleStartScanning(devices[0].id);
       }
     } catch (error) {
-      toast.error("Please allow camera access in the settings screen.");
+      toast.error(t("allow_camera_access"));
     }
   }
 
@@ -118,10 +122,10 @@ function QrcodeScanner({
           <div className="flex justify-center text-center items-center">
             <div>
               <h4 className="text-lg font-bold mb-2 dark:text-white">
-                Scan QR Code
+                {t("scan_qrcode")}
               </h4>
               <Button
-                label="Start scanning"
+                label={t("start_scanning")}
                 onClick={handleRequestCameraPermissions}
               />
             </div>
@@ -149,7 +153,10 @@ function QrcodeScanner({
               ))}
             </select>
           </div>
-          <Button label="Stop scanning" onClick={() => handleStopScanning()} />
+          <Button
+            label={t("stop_scanning")}
+            onClick={() => handleStopScanning()}
+          />
         </div>
       )}
     </div>

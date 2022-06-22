@@ -3,6 +3,7 @@ import {
   CaretDownIcon,
   PlusIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useState, useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
@@ -15,11 +16,14 @@ import Menu from "../Menu";
 
 export type Props = {
   title: string;
-  subtitle: string;
+  balances: {
+    satsBalance: string;
+    fiatBalance: string;
+  };
   showOptions?: boolean;
 };
 
-function AccountMenu({ title, subtitle, showOptions = true }: Props) {
+function AccountMenu({ title, balances, showOptions = true }: Props) {
   const auth = useAuth();
   const navigate = useNavigate();
   const { accounts, getAccounts } = useAccounts();
@@ -36,7 +40,7 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
     await utils.call("selectAccount", {
       id: accountId,
     });
-    await auth.fetchAccountInfo(accountId);
+    await auth.fetchAccountInfo({ accountId });
     setLoading(false);
   }
 
@@ -53,18 +57,25 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
 
   return (
     <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-surface-12dp">
-      <div className="flex items-center">
+      <p className="flex items-center">
         <WalletIcon className="-ml-1 w-8 h-8 opacity-50 dark:text-white" />
-      </div>
+      </p>
+
       <div
-        className={`flex-auto mx-2 py-1 ${!title && !subtitle ? "w-28" : ""}`}
+        className={`flex-auto mx-2 py-1 ${!title && !balances ? "w-28" : ""}`}
       >
-        <div className="text-xs text-gray-700 dark:text-neutral-400">
+        <p className="text-xs text-gray-700 dark:text-neutral-400">
           {title || <Skeleton />}
-        </div>
-        <div className="text-xs dark:text-white">
-          {subtitle || <Skeleton />}
-        </div>
+        </p>
+
+        <p className="flex justify-between">
+          <span className="text-xs dark:text-white">
+            {balances.satsBalance || <Skeleton />}
+          </span>
+          <span className="text-xs text-gray-600 dark:text-neutral-400">
+            ~{balances.fiatBalance || <Skeleton />}
+          </span>
+        </p>
       </div>
 
       <Menu as="div">
@@ -83,9 +94,20 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
                   selectAccount(accountId);
                 }}
                 disabled={loading}
+                title={account.name}
               >
-                <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-700 dark:text-neutral-300" />
-                {account.name}&nbsp;
+                <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 shrink-0 opacity-75 text-gray-700 dark:text-neutral-300" />
+                <span className="overflow-hidden text-ellipsis whitespace-nowrap">
+                  {account.name}&nbsp;
+                </span>
+                {accountId === auth.account?.id && (
+                  <span
+                    data-testid="selected"
+                    className="ml-auto w-3.5 h-3.5 rounded-full bg-orange-bitcoin flex justify-center items-center"
+                  >
+                    <CheckIcon className="w-3 h-3 text-white" />
+                  </span>
+                )}
               </Menu.ItemButton>
             );
           })}

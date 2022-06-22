@@ -1,7 +1,7 @@
 import { PaymentRequestObject } from "bolt11";
+import { CURRENCIES } from "~/common/constants";
+import connectors from "~/extension/background-script/connectors";
 import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
-
-import connectors from "./extension/background-script/connectors";
 
 export type ConnectorType = keyof typeof connectors;
 
@@ -17,10 +17,12 @@ export interface Accounts {
 }
 
 export interface AccountInfo {
-  id: string;
   alias: string;
   balance: number;
+  fiatBalance?: string;
+  id: string;
   name: string;
+  satsBalance?: string;
 }
 
 export interface MetaData {
@@ -70,11 +72,11 @@ export interface Battery extends OriginData {
 
 // deprecated message type,please stop using this
 export interface Message {
+  application?: string;
   args: Record<string, unknown>;
   origin: OriginData | OriginDataInternal;
-  application?: string;
   prompt?: boolean;
-  type?: string;
+  action?: string;
 }
 
 // new message  type, please use this
@@ -84,20 +86,45 @@ export interface MessageDefault {
   prompt?: boolean;
 }
 
-export interface MessageAccountDelete extends MessageDefault {
-  args: { id: Account["id"] };
-  type: "deleteAccount";
+export interface MessageAccountRemove extends MessageDefault {
+  args?: { id: Account["id"] };
+  action: "removeAccount";
 }
+
 export interface MessageAccountAdd extends MessageDefault {
   args: Omit<Account, "id">;
-  type: "addAccount";
+  action: "addAccount";
 }
 export interface MessageAccountEdit extends MessageDefault {
   args: {
     id: Account["id"];
     name: Account["name"];
   };
-  type: "editAccount";
+  action: "editAccount";
+}
+export interface MessageAccountDecryptedDetails extends MessageDefault {
+  args: {
+    id: Account["id"];
+    name: Account["name"];
+  };
+  action: "accountDecryptedDetails";
+}
+
+export interface MessageAccountInfo extends Omit<MessageDefault, "args"> {
+  action: "accountInfo";
+}
+
+export interface MessageAccountAll extends Omit<MessageDefault, "args"> {
+  action: "getAccounts";
+}
+
+export interface MessageAccountLock extends Omit<MessageDefault, "args"> {
+  action: "lock";
+}
+
+export interface MessageAccountSelect extends MessageDefault {
+  args: { id: Account["id"] };
+  action: "selectAccount";
 }
 
 interface LNURLChannelServiceResponse {
@@ -199,6 +226,7 @@ export type Transaction = {
   totalFees: string;
   description: string;
   location: string;
+  totalAmountFiat: string;
 };
 
 export type Payment = {
@@ -233,4 +261,8 @@ export interface SettingsStorage {
   userEmail: string;
   locale: string;
   theme: string;
+  currency: CURRENCIES;
+  exchange: SupportedExchanges;
 }
+
+export type SupportedExchanges = "coindesk" | "yadio";

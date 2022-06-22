@@ -73,6 +73,7 @@ Add Alby to your browser
 ├── dist                    # Build
 │   └── development             # Developer Builds (not to be shared)
 │   └── production              # Production Builds
+├── tests                   # E2E tests and related helpers
 └
 ```
 
@@ -88,29 +89,34 @@ Suppported but not required
 - [nodenv](https://github.com/nodenv/nodenv)
 - [nvm](https://github.com/nvm-sh/nvm#intro)
 
-Then run the following:
+Then run the following
 
-- `yarn install` to install dependencies.
-- `yarn run dev:chrome` to start the development server for chrome extension
-- `yarn run dev:firefox` to start the development server for firefox addon
-- `yarn run dev:opera` to start the development server for opera extension
-- `yarn run build:chrome` to build chrome extension
-- `yarn run build:firefox` to build firefox addon
-- `yarn run build:opera` to build opera extension
-- `yarn run build` builds and packs extensions all at once to the `dist/production` directory
-- `yarn run package` build the production packages in the `dist/production` directory
+1. Install dependencies\
+   `yarn install`
+1. Start the development server for the extension
+   - `yarn run dev:chrome`
+   - `yarn run dev:firefox`
+   - `yarn run dev:opera`
+1. To build the extension
+   - `yarn run build:chrome`
+   - `yarn run build:firefox`
+   - `yarn run build:opera`
+1. Build and pack extensions all at once to the `dist/production` directory\
+   `yarn run build`
+1. Build the production packages in the `dist/production` directory\
+   `yarn run package`
 
 ### 🛠 Development
 
-- `yarn install` to install dependencies
+- Install dependencies\
+  `yarn install`
 - To watch file changes in development
-
-  - Chrome
-    - `yarn run dev:chrome`
-  - Firefox
-    - `yarn run dev:firefox`
-  - Opera
-    - `yarn run dev:opera`
+  - Chrome\
+    `yarn run dev:chrome`
+  - Firefox\
+    `yarn run dev:firefox`
+  - Opera\
+    `yarn run dev:opera`
 
 #### Testnet/testing-accounts for development
 
@@ -127,7 +133,7 @@ If this is not reachable please let us know.
 We have a working [Storybook](https://storybook.js.org)-setup and some components have stories.  
 You can find the deployed Storybook here: https://lbe-stories.netlify.app
 
-### :heavy_check_mark: Tests
+### :white_check_mark: Tests
 
 #### E2E tests via [playwright](https://playwright.dev) ([using testing-library](https://testing-library.com/docs/pptr-testing-library/intro/))
 
@@ -212,6 +218,7 @@ We use the [Development Project Board](https://github.com/orgs/getAlby/projects/
 
 #### Designer
 
+- Have a look at our [Open source Design guide](https://github.com/getAlby/lightning-browser-extension/wiki/Open-source-Design)
 - Check out the issues that have specifically been [marked with "design"](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3A%22design%22)
 - We also have a [Figma Design Guide Project](https://www.figma.com/file/xwGXHxW4FWpV03Tt37atZv/Extension-1.10.0) which you can have a look at
 
@@ -224,13 +231,28 @@ We use the [Development Project Board](https://github.com/orgs/getAlby/projects/
 
 When creating a PR please take this points as a reminder:
 
-- Not too big
-- Try to split things up
-- Think in iterations (babysteps)  
-  You can always start a PR and if you feel like adding on more things to it, better branch off and create a new i.e. _draft_-PR
-- Newly added components should have a unit-test
 - If there's not yet an issue for your PR please first [create an issue](https://github.com/bumi/lightning-browser-extension/issues/new) with a proposal what you would like to do. This allows us to give feedback and helps you no wasting time and motivation
+- Think in iterations (babysteps)\
+  You can always start a PR and if you feel like adding on more things to it, better branch off and [create a new i.e. _draft_-PR](https://github.blog/2019-02-14-introducing-draft-pull-requests/)
+- Newly added components should have a unit-test
 - If you work on a more complex PR please [join our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2) to get feedback, discuss the best way to tackle the challenge, and to ensure that there's no duplication of work. It's often faster and nicer to chat or call about questions than to do ping-pong comments in PRs
+
+### Code format & preferences
+
+- [ESLint](https://eslint.org/) for code linting
+- [Prettier](https://prettier.io/) for code (and more) formatting
+- We prefer [Axios](https://axios-http.com/) over [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+
+#### Code Editors
+
+##### [VS Code](https://code.visualstudio.com/)
+
+For better support we reccomend these extensions:
+
+- [vscode-eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [vscode-tailwindcss](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+- [vscode-html-css](https://marketplace.visualstudio.com/items?itemName=ecmel.vscode-html-css)
 
 ### Commit message format
 
@@ -262,6 +284,13 @@ Yes. Thanks to generous donors, Alby is able to offer several bounties. You can 
 
 Based on the web extension starter kit: [/abhijithvijayan/web-extension-starter](https://github.com/abhijithvijayan/web-extension-starter)
 heavily inspired by the super-amazing work of the [Joule extension](https://lightningjoule.com/)
+
+## ⚡️Donations
+
+Want to support the work on Alby?
+
+Support the Alby team ⚡️hello@getalby.com  
+You can also contribute to our [bounty program](https://github.com/getAlby/lightning-browser-extension/wiki/Bounties): ⚡️bounties@getalby.com
 
 ## License
 
