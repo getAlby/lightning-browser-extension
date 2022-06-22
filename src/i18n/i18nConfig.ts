@@ -11,10 +11,12 @@ export const settings: CustomDetector = {
   name: "settings",
 
   lookup(_options) {
+    let settingsLang;
     api.getSettings().then((setting) => {
       i18n.changeLanguage(setting.locale);
+      settingsLang = setting.locale;
     });
-    return undefined;
+    return settingsLang;
   },
 
   cacheUserLanguage(_lng, _options) {
