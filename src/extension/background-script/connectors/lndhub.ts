@@ -285,6 +285,8 @@ export default class LndHub implements Connector {
     headers.append("Accept", "application/json");
     headers.append("Access-Control-Allow-Origin", "*");
     headers.append("Content-Type", "application/json");
+
+    // axios?
     return fetch(this.config.url + "/auth?type=auth", {
       method: "POST",
       headers: headers,
@@ -339,12 +341,15 @@ export default class LndHub implements Connector {
         Authorization: `Bearer ${this.access_token}`,
       },
     };
+
     if (method === "POST") {
       reqConfig.data = args;
     } else if (args !== undefined) {
       reqConfig.params = args;
     }
+
     let data;
+
     try {
       const res = await axios(reqConfig);
       data = res.data;
@@ -353,14 +358,30 @@ export default class LndHub implements Connector {
 
       if (axios.isAxiosError(e)) {
         const errResponse = e.response as AxiosResponse;
+
         if (errResponse?.status === 404) {
           const method = path.replace("/", "");
           throw new Error(`${method} not supported by the connected account.`);
         }
+
+        if (errResponse?.status === 401) {
+          console.warn(
+            "TOKEN MIGHT BE EXPIERED, LET'S TRY TO GET YOU LOGGED IN"
+          );
+          try {
+            await this.authorize();
+          } catch (e) {
+            console.error(e);
+            if (e instanceof Error) throw new Error(e.message);
+          }
+          return this.request(method, path, args, defaultValues);
+        }
+
         const errorMessage = `${errResponse?.data.message}\n(${e.message})`;
         throw new Error(errorMessage);
       }
     }
+
     if (data && data.error) {
       if (data.code * 1 === 1 && !this.noRetry) {
         try {
@@ -375,9 +396,12 @@ export default class LndHub implements Connector {
         throw new Error(data.message);
       }
     }
+
     if (defaultValues) {
-      data = Object.assign(Object.assign({}, defaultValues), data);
+      data = Object.assign(Object.assign({}, defaultValues), data); // double assign?
+      // console.log("--> defaultValues", data);
     }
+
     return data;
   }
 }
