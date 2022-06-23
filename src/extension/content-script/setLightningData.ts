@@ -8,6 +8,6 @@ const setLightningData = (data: [Battery]): void => {
     action: "lightningData",
     args: data,
   });
-  utils.call("setIcon", { icon: "active" });
+  utils.call("setIcon", { icon: "available" });
 };
 export default setLightningData;
