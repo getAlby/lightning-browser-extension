@@ -118,6 +118,29 @@ export interface MessageAccountAll extends Omit<MessageDefault, "args"> {
   action: "getAccounts";
 }
 
+export interface MessageBlocklistAdd extends MessageDefault {
+  args: {
+    host: string;
+    name: string;
+    imageURL: string;
+  };
+  action: "addBlocklist";
+}
+
+export interface MessageBlocklistDelete extends MessageDefault {
+  args: {
+    host: string;
+  };
+  action: "deleteBlocklist";
+}
+
+export interface MessageBlocklistGet extends MessageDefault {
+  args: {
+    host: string;
+  };
+  action: "getBlocklist";
+}
+
 export interface MessageAccountLock extends Omit<MessageDefault, "args"> {
   action: "lock";
 }
@@ -294,6 +317,30 @@ export interface Allowance {
   totalBudget: number;
   usedBudget: number;
 }
+export interface SettingsStorage {
+  websiteEnhancements: boolean;
+  legacyLnurlAuth: boolean;
+  userName: string;
+  userEmail: string;
+  locale: string;
+  theme: string;
+  currency: CURRENCIES;
+  exchange: SupportedExchanges;
+}
+
+export interface Blocklist {
+  id?: number;
+  host: string;
+  name: string;
+  imageURL: string;
+  isBlocked: boolean;
+}
+
+export interface Badge {
+  label: string;
+  color: string;
+  textColor: string;
+}
 
 export interface Publisher
   extends Pick<
@@ -315,17 +362,6 @@ export interface Publisher
     color: string;
     textColor: string;
   };
-}
-
-export interface SettingsStorage {
-  websiteEnhancements: boolean;
-  legacyLnurlAuth: boolean;
-  userName: string;
-  userEmail: string;
-  locale: string;
-  theme: string;
-  currency: CURRENCIES;
-  exchange: SupportedExchanges;
 }
 
 export type SupportedExchanges = "coindesk" | "yadio";

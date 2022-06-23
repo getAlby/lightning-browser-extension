@@ -17,49 +17,53 @@ function Publishers() {
 
   async function fetchData() {
     try {
-      const response = await utils.call<{
+      const allowanceResponse = await utils.call<{
         allowances: Allowance[];
       }>("listAllowances");
 
-      const allowances: Publisher[] = response.allowances.reduce<Publisher[]>(
-        (acc, allowance) => {
-          if (!allowance?.id) return acc;
-
-          const {
-            id,
-            host,
-            imageURL,
-            name,
-            payments,
-            paymentsAmount,
-            paymentsCount,
-            percentage,
-            totalBudget,
-            usedBudget,
-          } = allowance;
-
-          acc.push({
-            id,
-            host,
-            imageURL,
-            name,
-            payments,
-            paymentsAmount,
-            paymentsCount,
-            percentage,
-            totalBudget,
-            usedBudget,
-            badge: {
-              label: "ACTIVE",
-              color: "green-bitcoin",
-              textColor: "white",
-            },
-          });
-
+      const allowances: Publisher[] = allowanceResponse.allowances.reduce<
+        Publisher[]
+      >((acc, allowance) => {
+        if (
+          !allowance?.id ||
+          !allowance.enabled ||
+          allowance.remainingBudget <= 0
+        )
           return acc;
-        },
-        []
-      );
+
+        const {
+          id,
+          host,
+          imageURL,
+          name,
+          payments,
+          paymentsAmount,
+          paymentsCount,
+          percentage,
+          totalBudget,
+          usedBudget,
+        } = allowance;
+
+        acc.push({
+          id,
+          host,
+          imageURL,
+          name,
+          payments,
+          paymentsAmount,
+          paymentsCount,
+          percentage,
+          totalBudget,
+          usedBudget,
+          badge: {
+            label: "ACTIVE",
+            color: "green-bitcoin",
+            textColor: "white",
+          },
+        });
+
+        return acc;
+      }, []);
 
       setPublishers(allowances);
     } catch (e) {
