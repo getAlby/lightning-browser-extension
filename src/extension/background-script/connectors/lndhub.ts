@@ -29,6 +29,12 @@ interface Config {
   url: string;
 }
 
+const defaultHeaders = {
+  Accept: "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Content-Type": "application/json",
+};
+
 export default class LndHub implements Connector {
   config: Config;
   access_token?: string;
@@ -50,7 +56,7 @@ export default class LndHub implements Connector {
   }
 
   async getInfo(): Promise<GetInfoResponse> {
-    const data = await this.request<{ alias: string }>(
+    const { alias } = await this.request<{ alias: string }>(
       "GET",
       "/getinfo",
       undefined,
@@ -58,21 +64,22 @@ export default class LndHub implements Connector {
     );
     return {
       data: {
-        alias: data.alias,
+        alias,
       },
     };
   }
 
   async getBalance(): Promise<GetBalanceResponse> {
-    const data = await this.request<{ BTC: { AvailableBalance: number } }>(
+    const { BTC } = await this.request<{ BTC: { AvailableBalance: number } }>(
       "GET",
       "/balance",
       undefined,
       {}
     );
+
     return {
       data: {
-        balance: data.BTC.AvailableBalance,
+        balance: BTC.AvailableBalance,
       },
     };
   }
@@ -136,6 +143,7 @@ export default class LndHub implements Connector {
       },
     };
   }
+
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
     const data = await this.request<{
       error: string;
@@ -190,7 +198,7 @@ export default class LndHub implements Connector {
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    const data = await this.request<{ paid: boolean }>(
+    const { paid } = await this.request<{ paid: boolean }>(
       "GET",
       `/checkpayment/${args.paymentHash}`,
       undefined,
@@ -198,7 +206,7 @@ export default class LndHub implements Connector {
     );
     return {
       data: {
-        paid: data.paid,
+        paid,
       },
     };
   }
@@ -281,12 +289,6 @@ export default class LndHub implements Connector {
   }
 
   async authorize() {
-    const defaultHeaders = {
-      Accept: "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-    };
-
     const { data: authData } = await axios.post(
       `${this.config.url}/auth?type=auth`,
       {
@@ -326,12 +328,10 @@ export default class LndHub implements Connector {
 
     const reqConfig: AxiosRequestConfig = {
       method,
-      url: this.config.url + path,
+      url: `${this.config.url}${path}`,
       responseType: "json",
       headers: {
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
+        ...defaultHeaders,
         Authorization: `Bearer ${this.access_token}`,
       },
     };
@@ -376,7 +376,7 @@ export default class LndHub implements Connector {
       }
     }
 
-    if (data && data.error) {
+    if (data?.error) {
       if (data.code * 1 === 1 && !this.noRetry) {
         try {
           await this.authorize();
