@@ -281,43 +281,37 @@ export default class LndHub implements Connector {
   }
 
   async authorize() {
-    const headers = new Headers();
-    headers.append("Accept", "application/json");
-    headers.append("Access-Control-Allow-Origin", "*");
-    headers.append("Content-Type", "application/json");
+    const defaultHeaders = {
+      Accept: "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    };
 
-    // axios?
-    return fetch(this.config.url + "/auth?type=auth", {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify({
+    const { data: authData } = await axios.post(
+      `${this.config.url}/auth?type=auth`,
+      {
         login: this.config.login,
         password: this.config.password,
-      }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("API error: " + response.status);
-        }
-      })
-      .then((json) => {
-        if (json && json.error) {
-          throw new Error(
-            "API error: " + json.message + " (code " + json.code + ")"
-          );
-        }
-        if (!json.access_token || !json.refresh_token) {
-          throw new Error("API unexpected response: " + JSON.stringify(json));
-        }
+      },
+      {
+        headers: defaultHeaders,
+      }
+    );
 
-        this.refresh_token = json.refresh_token;
-        this.access_token = json.access_token;
-        this.refresh_token_created = +new Date();
-        this.access_token_created = +new Date();
-        return json;
-      });
+    if (authData.error || authData.errors) {
+      const error = authData.error || authData.errors;
+      const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
+
+      console.error(errMessage);
+      throw new Error("API error: " + errMessage);
+    } else {
+      this.refresh_token = authData.refresh_token;
+      this.access_token = authData.access_token;
+      this.refresh_token_created = +new Date();
+      this.access_token_created = +new Date();
+
+      return authData;
+    }
   }
 
   async request<Type>(
@@ -398,8 +392,7 @@ export default class LndHub implements Connector {
     }
 
     if (defaultValues) {
-      data = Object.assign(Object.assign({}, defaultValues), data); // double assign?
-      // console.log("--> defaultValues", data);
+      data = Object.assign({}, defaultValues, data);
     }
 
     return data;
