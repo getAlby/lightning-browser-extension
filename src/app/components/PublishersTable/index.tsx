@@ -4,7 +4,7 @@ import Badge from "../Badge";
 import Progressbar from "../Progressbar";
 
 type Publisher = {
-  id: string;
+  id: number;
   imageURL?: string;
   host: string;
   name: string;
@@ -22,7 +22,7 @@ type Publisher = {
 
 type Props = {
   publishers: Publisher[];
-  navigateToPublisher: (id: string) => void;
+  navigateToPublisher: (id: number) => void;
 };
 
 const DEFAULT_IMAGE =

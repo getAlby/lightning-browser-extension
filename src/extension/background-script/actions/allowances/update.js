@@ -1,7 +1,7 @@
 import db from "../../db";
 
 const updateAllowance = async (message, sender) => {
-  const id = parseInt(message.args.id);
+  const id = message.args.id;
 
   const update = {};
   if (Object.prototype.hasOwnProperty.call(message.args, "totalBudget")) {

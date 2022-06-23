@@ -264,7 +264,7 @@ export type Payment = {
 export interface Allowance {
   enabled: boolean;
   host: string;
-  id: string;
+  id: number;
   imageURL: string;
   lastPaymendAt: number;
   name: string;
