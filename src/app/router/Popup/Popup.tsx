@@ -10,13 +10,13 @@ import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { AccountsProvider } from "~/app/context/AccountsContext";
 import { useAuth } from "~/app/context/AuthContext";
-import { AuthProvider } from "~/app/context/AuthContext";
+import { AccountProvider } from "~/app/context/AuthContext";
 
 import RequireAuth from "../RequireAuth";
 
 function Popup() {
   return (
-    <AuthProvider>
+    <AccountProvider>
       <AccountsProvider>
         <HashRouter>
           <Routes>
@@ -39,7 +39,7 @@ function Popup() {
           </Routes>
         </HashRouter>
       </AccountsProvider>
-    </AuthProvider>
+    </AccountProvider>
   );
 }
 
