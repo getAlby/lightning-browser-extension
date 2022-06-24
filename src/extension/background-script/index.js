@@ -1,6 +1,7 @@
 import browser from "webextension-polyfill";
 import utils from "~/common/lib/utils";
 
+import { setIcon, extensionIcons } from "./actions/setup/setIcon";
 import connectors from "./connectors";
 import db from "./db";
 import * as events from "./events";
@@ -27,10 +28,13 @@ const extractLightningData = (tabId, changeInfo, tab) => {
   }
 };
 
-const updateIcon = async (tabId, changeInfo, tabInfo) => {
+const onTabUpdated = async (tabId, changeInfo, tabInfo) => {
   if (changeInfo.status !== "complete" || !tabInfo.url?.startsWith("http")) {
     return;
   }
+
+  // console.log("background-script->index.js->onTabUpdated()");
+
   const url = new URL(tabInfo.url);
 
   const allowance = await db.allowances
@@ -38,31 +42,10 @@ const updateIcon = async (tabId, changeInfo, tabInfo) => {
     .equalsIgnoreCase(url.host)
     .first();
 
-  // TODO: move to some config file
-  const names = {
-    active: "alby_icon_green",
-    available: "alby_icon_blue",
-    default: "alby_icon_yellow",
-  };
-
-  let name;
-  if (allowance) {
-    name = names.active;
-  } else {
-    name = names.default;
-  }
-
-  const theme = state.getState().settings.theme == "dark" ? "_dark" : "";
-
-  return browser.browserAction.setIcon({
-    path: {
-      16: `assets/icons/${name}${theme}_16x16.png`,
-      32: `assets/icons/${name}${theme}_32x32.png`,
-      48: `assets/icons/${name}${theme}_48x48.png`,
-      128: `assets/icons/${name}${theme}_128x128.png`,
-    },
-    tabId: tabId,
-  });
+  return setIcon(
+    allowance ? extensionIcons.active : extensionIcons.default,
+    tabId
+  );
 };
 
 const debugLogger = (message, sender) => {
@@ -123,7 +106,7 @@ async function init() {
   // this is the only handler that may and must return a Promise which resolve with the response to the content script
   browser.runtime.onMessage.addListener(routeCalls);
 
-  browser.tabs.onUpdated.addListener(updateIcon); // update Icon when there is an allowance
+  browser.tabs.onUpdated.addListener(onTabUpdated); // update Icon when there is an allowance
 
   // Notify the content script that the tab has been updated.
   browser.tabs.onUpdated.addListener(extractLightningData);

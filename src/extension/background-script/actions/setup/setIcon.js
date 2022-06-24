@@ -1,49 +1,52 @@
 import browser from "webextension-polyfill";
+
 import state from "../../state";
+
+const extensionIcons = {
+  active: "alby_icon_green",
+  tipping: "alby_icon_blue",
+  default: "alby_icon_yellow",
+};
+
+const setIconMessageHandler = async (message, sender) => {
+  // console.log("setIconMessageHandler()", message.args.icon, extensionIcons[message.args.icon], extensionIcons );
+
+  await setIcon(message.args.icon, sender.tab.id);
+
+  return new Promise().then(() => {
+    return {
+      data: true,
+    };
+  });
+};
 
 const icons = [];
 
-const setIcon = async (message, sender) => {
+const setIcon = async (icon, tabId) => {
+  let currentIcon = icons[tabId] ?? null;
 
-  // TODO: refactor names / rename files?
-  const names = {
-    active: "alby_icon_green",
-    available: "alby_icon_blue",
-    default: "alby_icon_yellow",
-  };
-
-  icons[sender.tab.id.toString()] = message.args.icon;
-
-  let name = names[message.args.icon];
-
-  console.log("backgroundScript: setIcon", icons[sender.tab.id.toString()] , icons[sender.tab.id.toString()],  message.args.icon );
-
-  if(icons[sender.tab.id.toString()] 
-      && icons[sender.tab.id.toString()] == names.active
-      && message.args.icon == names.available) {
-      name = names.active;
-      console.log("overwrite icon");
+  // Ignore subsequent events
+  if (
+    currentIcon &&
+    currentIcon == extensionIcons.active &&
+    icon == extensionIcons.tipping
+  ) {
+    // console.log("ignoring new icon", tabId, icons);
+    return Promise.resolve();
   }
 
-  console.log(icons);
+  icons[tabId] = icon;
 
   const theme = state.getState().settings.theme == "dark" ? "_dark" : "";
-
-  return browser.browserAction
-    .setIcon({
-      path: {
-        16: `assets/icons/${name}${theme}_16x16.png`,
-        32: `assets/icons/${name}${theme}_32x32.png`,
-        48: `assets/icons/${name}${theme}_48x48.png`,
-        128: `assets/icons/${name}${theme}_128x128.png`,
-      },
-      tabId: sender.tab.id,
-    })
-    .then(() => {
-      return {
-        data: true,
-      };
-    });
+  return browser.browserAction.setIcon({
+    path: {
+      16: `assets/icons/${icon}${theme}_16x16.png`,
+      32: `assets/icons/${icon}${theme}_32x32.png`,
+      48: `assets/icons/${icon}${theme}_48x48.png`,
+      128: `assets/icons/${icon}${theme}_128x128.png`,
+    },
+    tabId: tabId,
+  });
 };
 
-export default setIcon;
+export { setIcon, setIconMessageHandler, extensionIcons };
