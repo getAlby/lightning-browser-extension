@@ -1,3 +1,7 @@
+import {
+  HiddenIcon,
+  VisibleIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import { useState } from "react";
@@ -19,6 +23,7 @@ export default function NewWallet() {
   });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordView, setPasswordView] = useState(false);
   const [lnAddress, setLnAddress] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -182,7 +187,7 @@ export default function NewWallet() {
             <TextField
               id="password"
               label={tCommon("password")}
-              type="password"
+              type={passwordView ? "text" : "password"}
               minLength={6}
               pattern=".{6,}"
               title="at least 6 characters"
@@ -190,6 +195,19 @@ export default function NewWallet() {
               onChange={(e) => {
                 setPassword(e.target.value.trim());
               }}
+              endAdornment={
+                <button
+                  type="button"
+                  className="flex justify-center items-center w-10 h-8"
+                  onClick={() => setPasswordView(!passwordView)}
+                >
+                  {passwordView ? (
+                    <HiddenIcon className="h-6 w-6" />
+                  ) : (
+                    <VisibleIcon className="h-6 w-6" />
+                  )}
+                </button>
+              }
             />
           </div>
           <div className="mt-6">
