@@ -9,7 +9,7 @@ import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
-import { AuthProvider } from "~/app/context/AuthContext";
+import { AccountProvider } from "~/app/context/AuthContext";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
 import i18n from "~/i18n/i18nConfig";
 import { translationI18nNamespace } from "~/i18n/namespaces";
@@ -123,7 +123,7 @@ function App() {
   }, [location]);
 
   return (
-    <AuthProvider>
+    <AccountProvider>
       <div>
         {process.env.NODE_ENV === "development" && (
           <>
@@ -144,7 +144,7 @@ function App() {
           {routesElement}
         </div>
       </div>
-    </AuthProvider>
+    </AccountProvider>
   );
 }
 

@@ -15,14 +15,14 @@ import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { AccountsProvider } from "~/app/context/AccountsContext";
-import { AuthProvider, useAuth } from "~/app/context/AuthContext";
+import { AccountProvider, useAuth } from "~/app/context/AuthContext";
 import RequireAuth from "~/app/router/RequireAuth";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
 
 function Options() {
   const connectorRoutes = getConnectorRoutes();
   return (
-    <AuthProvider>
+    <AccountProvider>
       <AccountsProvider>
         <HashRouter>
           <Routes>
@@ -83,7 +83,7 @@ function Options() {
           </Routes>
         </HashRouter>
       </AccountsProvider>
-    </AuthProvider>
+    </AccountProvider>
   );
 }
 

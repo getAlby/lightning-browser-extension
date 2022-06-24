@@ -8,7 +8,7 @@ export type ConnectorType = keyof typeof connectors;
 export interface Account {
   id: string;
   connector: ConnectorType;
-  config: string | Record<string, unknown>;
+  config: string;
   name: string;
 }
 
@@ -143,6 +143,11 @@ export interface MessageBlocklistGet extends MessageDefault {
 
 export interface MessageAccountLock extends Omit<MessageDefault, "args"> {
   action: "lock";
+}
+
+export interface MessageAccountUnlock extends Omit<MessageDefault, "args"> {
+  args: { password: string | number };
+  action: "unlock";
 }
 
 export interface MessageAccountSelect extends MessageDefault {
