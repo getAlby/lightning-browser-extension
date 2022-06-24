@@ -35,7 +35,7 @@ function ConfirmOrCancel({
       </p>
 
       <a
-        className="underline text-sm text-gray-600 dark:text-gray-400"
+        className="underline text-sm text-gray-600 dark:text-neutral-400"
         href="#"
         onClick={onCancel}
       >

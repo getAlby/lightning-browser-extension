@@ -1,4 +1,5 @@
 import PubSub from "pubsub-js";
+
 import state from "../../state";
 
 const verifyMessage = async (message, sender) => {

@@ -1,16 +1,15 @@
-import { useState, MouseEvent } from "react";
-import axios from "axios";
-
-import type { LNURLWithdrawServiceResponse } from "~/types";
-import getOriginData from "~/extension/content-script/originData";
-import msg from "~/common/lib/msg";
-import api from "~/common/lib/api";
-import { USER_REJECTED_ERROR } from "~/common/constants";
-
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
-import Input from "@components/form/Input";
+import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
+import Input from "@components/form/Input";
+import axios from "axios";
+import { useState, MouseEvent } from "react";
+import { USER_REJECTED_ERROR } from "~/common/constants";
+import api from "~/common/lib/api";
+import msg from "~/common/lib/msg";
+import getOriginData from "~/extension/content-script/originData";
+import type { LNURLWithdrawServiceResponse } from "~/types";
 
 type Props = {
   details: LNURLWithdrawServiceResponse;
@@ -59,7 +58,7 @@ function LNURLWithdraw(props: Props) {
 
   function renderAmount() {
     if (minWithdrawable === maxWithdrawable) {
-      return <p>{`${minWithdrawable / 1000} sat`}</p>;
+      return <p>{`${minWithdrawable / 1000} sats`}</p>;
     } else {
       return (
         <div className="mt-1 flex flex-col">
@@ -85,28 +84,32 @@ function LNURLWithdraw(props: Props) {
     <div>
       <h1 className="py-2 font-bold text-lg text-center">Withdraw</h1>
       <PublisherCard title={origin.name} image={origin.icon} />
-      <div className="p-4 max-w-screen-sm mx-auto">
-        {!successMessage ? (
-          <>
-            <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-              <dt className="text-sm font-semibold text-gray-500">
-                Amount (Satoshi)
-              </dt>
-              <dd className="text-sm mb-4 dark:text-white">{renderAmount()}</dd>
-            </dl>
-            <ConfirmOrCancel
-              disabled={loadingConfirm || !valueSat}
-              loading={loadingConfirm}
-              onConfirm={confirm}
-              onCancel={reject}
+      <div className="py-4">
+        <Container maxWidth="sm">
+          {!successMessage ? (
+            <>
+              <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+                <dt className="text-sm font-semibold text-gray-500">
+                  Amount (Satoshi)
+                </dt>
+                <dd className="text-sm mb-4 dark:text-white">
+                  {renderAmount()}
+                </dd>
+              </dl>
+              <ConfirmOrCancel
+                disabled={loadingConfirm || !valueSat}
+                loading={loadingConfirm}
+                onConfirm={confirm}
+                onCancel={reject}
+              />
+            </>
+          ) : (
+            <SuccessMessage
+              message={successMessage}
+              onClose={() => window.close()}
             />
-          </>
-        ) : (
-          <SuccessMessage
-            message={successMessage}
-            onClose={() => window.close()}
-          />
-        )}
+          )}
+        </Container>
       </div>
     </div>
   );

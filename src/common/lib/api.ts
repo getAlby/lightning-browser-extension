@@ -1,9 +1,7 @@
-import utils from "./utils";
 import {
-  getAccountsCache,
-  removeAccountFromCache,
-  storeAccounts,
-} from "./cache";
+  MakeInvoiceArgs,
+  MakeInvoiceResponse,
+} from "~/extension/background-script/connectors/connector.interface";
 import type {
   Accounts,
   AccountInfo,
@@ -11,16 +9,19 @@ import type {
   Transaction,
   SettingsStorage,
 } from "~/types";
-import {
-  MakeInvoiceArgs,
-  MakeInvoiceResponse,
-} from "~/extension/background-script/connectors/connector.interface";
 
-interface AccountInfoRes {
+import {
+  getAccountsCache,
+  removeAccountFromCache,
+  storeAccounts,
+} from "./cache";
+import utils from "./utils";
+
+export interface AccountInfoRes {
+  balance: { balance: string | number };
   currentAccountId: string;
-  name: string;
   info: { alias: string };
-  balance: { balance: string };
+  name: string;
 }
 
 interface StatusRes {
@@ -33,7 +34,12 @@ interface UnlockRes {
   currentAccountId: string;
 }
 
+interface BlocklistRes {
+  blocked: boolean;
+}
+
 export const getAccountInfo = () => utils.call<AccountInfoRes>("accountInfo");
+
 /**
  * stale-while-revalidate get account info
  * @param id - account id
@@ -55,8 +61,10 @@ export const swrGetAccountInfo = async (
     getAccountInfo()
       .then((response) => {
         const { alias } = response.info;
+        const { balance: resBalance } = response.balance;
         const name = response.name;
-        const balance = parseInt(response.balance.balance); // TODO: handle amounts
+        const balance =
+          typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
         const account = { id, name, alias, balance };
         storeAccounts({
           ...accountsCache,
@@ -85,13 +93,15 @@ export const setSetting = (
   utils.call<SettingsStorage>("setSetting", {
     setting,
   });
-export const deleteAccount = (id: string) =>
+export const removeAccount = (id: string) =>
   Promise.all([
-    utils.call("deleteAccount", { id }),
+    utils.call("removeAccount", { id }),
     removeAccountFromCache(id),
   ]);
 export const unlock = (password: string) =>
   utils.call<UnlockRes>("unlock", { password });
+export const getBlocklist = (host: string) =>
+  utils.call<BlocklistRes>("getBlocklist", { host });
 
 export default {
   getAccountInfo,
@@ -106,6 +116,7 @@ export default {
   swr: {
     getAccountInfo: swrGetAccountInfo,
   },
-  deleteAccount,
+  removeAccount,
   unlock,
+  getBlocklist,
 };

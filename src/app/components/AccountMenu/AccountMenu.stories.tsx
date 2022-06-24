@@ -1,10 +1,15 @@
-import { MemoryRouter } from "react-router-dom";
 import { Meta } from "@storybook/react/types-6-0";
-
+import { MemoryRouter } from "react-router-dom";
 import { AccountsProvider } from "~/app/context/AccountsContext";
+
 import AcountMenu from ".";
 
-export const Default = () => <AcountMenu title="node" subtitle="1000 sats" />;
+export const Default = () => (
+  <AcountMenu
+    title="node"
+    balances={{ satsBalance: "1000 sats", fiatBalance: "$0.10" }}
+  />
+);
 
 const metadata: Meta = {
   title: "Components/AcountMenu",

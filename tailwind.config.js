@@ -1,15 +1,26 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
 
 function lighten(color, percent) {
-  var num = parseInt(color.replace("#",""),16),
-  amt = Math.round(2.55 * percent),
-  R = (num >> 16) + amt,
-  B = (num >> 8 & 0x00FF) + amt,
-  G = (num & 0x0000FF) + amt;
-  return "#" + (0x1000000 + (R<255?R<1?0:R:255)*0x10000 + (B<255?B<1?0:B:255)*0x100 + (G<255?G<1?0:G:255)).toString(16).slice(1);
-};
+  var num = parseInt(color.replace("#", ""), 16),
+    amt = Math.round(2.55 * percent),
+    R = (num >> 16) + amt,
+    B = ((num >> 8) & 0x00ff) + amt,
+    G = (num & 0x0000ff) + amt;
+  return (
+    "#" +
+    (
+      0x1000000 +
+      (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+      (B < 255 ? (B < 1 ? 0 : B) : 255) * 0x100 +
+      (G < 255 ? (G < 1 ? 0 : G) : 255)
+    )
+      .toString(16)
+      .slice(1)
+  );
+}
 
-const surfaceColor = '#121212'
+const surfaceColor = "#121212";
 
 module.exports = {
   darkMode: "class",
@@ -39,18 +50,6 @@ module.exports = {
         "green-bitcoin": "#27ae60",
         "blue-bitcoin": "#2d9cdb",
         "purple-bitcoin": "#bb6bd9",
-
-        // Material Design Gray Palette
-        "gray-50": "#fafafa",
-        "gray-100": "#f5f5f5",
-        "gray-200": "#eeeeee",
-        "gray-300": "#e0e0e0",
-        "gray-400": "#bdbdbd",
-        "gray-500": "#9e9e9e",
-        "gray-600": "#757575",
-        "gray-700": "#616161",
-        "gray-800": "#424242",
-        "gray-900": "#212121",
 
         // Material Design Surface Colors
         "surface-00dp": surfaceColor,

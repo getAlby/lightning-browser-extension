@@ -1,15 +1,14 @@
+import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useState } from "react";
 import Modal from "react-modal";
-import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
-import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-
 import utils from "~/common/lib/utils";
 
 import Button from "../Button";
 import Menu from "../Menu";
 import TextField from "../form/TextField";
 
-type Props = {
+export type Props = {
   allowance: {
     id: string;
     totalBudget: number;
@@ -86,20 +85,27 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         className="rounded-lg bg-white w-full max-w-lg"
       >
         <div className="p-5 flex justify-between dark:bg-surface-02dp">
-          <h2 className="text-2xl font-bold dark:text-white">Edit Allowance</h2>
+          <h2 className="text-2xl font-bold dark:text-white">
+            Set a new budget
+          </h2>
           <button onClick={closeModal}>
             <CrossIcon className="w-6 h-6 dark:text-white" />
           </button>
         </div>
-        <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-gray-500">
+        <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
           <div className="w-60">
+            {/*
+              @TODO: https://github.com/getAlby/lightning-browser-extension/issues/1016
+              needs to use DualCurrenyField 
+            */}
             <TextField
               id="budget"
               label="Budget"
               autoFocus
-              placeholder="sat"
+              placeholder="sats"
               value={budget}
               type="number"
+              hint="This will reset the current budget"
               onChange={(e) => setBudget(e.target.value)}
             />
           </div>

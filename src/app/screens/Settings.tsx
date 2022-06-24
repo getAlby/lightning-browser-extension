@@ -1,19 +1,24 @@
-import { useState, useEffect } from "react";
+import Button from "@components/Button";
+import Container from "@components/Container";
+import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
+import Setting from "@components/Setting";
+import Input from "@components/form/Input";
+import Select from "@components/form/Select";
+import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
-
+import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import { useAuth } from "~/app/context/AuthContext";
+import { getTheme } from "~/app/utils";
+import { CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
 import { SettingsStorage } from "~/types";
-import { getTheme } from "~/app/utils";
-import Container from "@components/Container";
-import Button from "@components/Button";
-import Toggle from "@components/form/Toggle";
-import Input from "@components/form/Input";
-import Setting from "@components/Setting";
-import Select from "@components/form/Select";
-import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
 
 function Settings() {
+  const { fetchAccountInfo } = useAuth();
+
   const [loading, setLoading] = useState(true);
+
   const [settings, setSettings] = useState<SettingsStorage>({
     websiteEnhancements: false,
     legacyLnurlAuth: false,
@@ -21,7 +26,10 @@ function Settings() {
     userEmail: "",
     locale: "",
     theme: "system",
+    currency: CURRENCIES.USD,
+    exchange: "coindesk",
   });
+
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
 
@@ -44,7 +52,7 @@ function Settings() {
       <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
         Settings
       </h2>
-      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting
           title="Website enhancements"
           subtitle="Tipping enhancements for Twitter, YouTube, etc."
@@ -86,7 +94,7 @@ function Settings() {
                   await Html5Qrcode.getCameras();
                   setCameraPermissionsGranted(true);
                 } catch (e) {
-                  alert(e);
+                  if (e instanceof Error) toast.error(e.message);
                 }
               }}
             />
@@ -110,9 +118,9 @@ function Settings() {
               <Select
                 name="theme"
                 value={settings.theme}
-                onChange={async (ev) => {
+                onChange={async (event) => {
                   await saveSetting({
-                    theme: ev.target.value,
+                    theme: event.target.value,
                   });
                   getTheme(); // Get the active theme and apply corresponding Tailwind classes to the document
                 }}
@@ -124,15 +132,67 @@ function Settings() {
             </div>
           )}
         </Setting>
+
+        <Setting
+          title="Currency"
+          subtitle="Change the currency display within Alby"
+        >
+          {!loading && (
+            <div className="w-64">
+              <Select
+                name="currency"
+                value={settings.currency}
+                onChange={async (event) => {
+                  fetchAccountInfo({ isLatestRate: true });
+                  await saveSetting({
+                    currency: event.target.value,
+                  });
+                }}
+              >
+                {Object.keys(CURRENCIES).map((currency) => (
+                  <option key={currency} value={currency}>
+                    {currency}
+                  </option>
+                ))}
+              </Select>
+            </div>
+          )}
+        </Setting>
+
+        <Setting
+          title="Exchange Source"
+          subtitle="Change the source where Alby get currency info"
+        >
+          {!loading && (
+            <div className="w-64">
+              <Select
+                name="exchange"
+                value={settings.exchange}
+                onChange={async (event) => {
+                  // exchange/value change should be reflected in the upper account-menu after select?
+                  await saveSetting({
+                    exchange: event.target.value,
+                  });
+                }}
+              >
+                <option value="coindesk">Coindesk</option>
+                <option value="yadio">yadio</option>
+              </Select>
+            </div>
+          )}
+        </Setting>
       </div>
+
       <h2 className="mt-12 text-2xl font-bold dark:text-white">
         Personal data
       </h2>
-      <div className="mb-6 text-gray-700 dark:text-gray-300 text-sm">
+
+      <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
         Payees can request for additional data to be sent with a payment. This
         data is not shared with anyone without your consent, you will always be
         prompted before this data is sent along with a payment.
-      </div>
+      </p>
+
       <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting title="Name" subtitle="">
           {!loading && (
@@ -141,15 +201,16 @@ function Settings() {
                 placeholder="Enter your name"
                 type="text"
                 value={settings.userName}
-                onChange={(ev) => {
+                onChange={(event) => {
                   saveSetting({
-                    userName: ev.target.value,
+                    userName: event.target.value,
                   });
                 }}
               />
             </div>
           )}
         </Setting>
+
         <Setting title="Email" subtitle="">
           {!loading && (
             <div className="w-64">
@@ -157,9 +218,9 @@ function Settings() {
                 placeholder="Enter your email address"
                 type="email"
                 value={settings.userEmail}
-                onChange={(ev) => {
+                onChange={(event) => {
                   saveSetting({
-                    userEmail: ev.target.value,
+                    userEmail: event.target.value,
                   });
                 }}
               />

@@ -1,19 +1,28 @@
 import { decryptData } from "~/common/lib/crypto";
-import state from "../../state";
+import state from "~/extension/background-script/state";
+import type { MessageAccountUnlock } from "~/types";
 
-const unlock = (message, sender) => {
-  const password = message.args.password;
+const unlock = (message: MessageAccountUnlock) => {
+  const passwordArg = message.args.password;
+  const password =
+    typeof passwordArg === "number" ? `${passwordArg}` : passwordArg;
 
   const account = state.getState().getAccount();
   const currentAccountId = state.getState().currentAccountId;
   if (!account) {
-    console.log("No account configured");
+    console.error("No account configured");
     return Promise.resolve({ error: "No account configured" });
   }
+
+  if (typeof account.config !== "string") {
+    console.error("Config must be a string");
+    return Promise.resolve({ error: "Config must be a string" });
+  }
+
   try {
     decryptData(account.config, password);
   } catch (e) {
-    console.log("Invalid password");
+    console.error("Invalid password");
     return Promise.resolve({ error: "Invalid password" });
   }
 

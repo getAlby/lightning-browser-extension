@@ -4,7 +4,6 @@ import {
   CaretDownIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Disclosure } from "@headlessui/react";
-
 import { Transaction } from "~/types";
 
 import Badge from "../Badge";
@@ -35,7 +34,7 @@ export default function TransactionsTable({ transactions }: Props) {
 
   return (
     <div className="shadow overflow-hidden rounded-lg">
-      <div className="bg-white divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+      <div className="bg-white divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
         {transactions.map((tx) => (
           <div key={tx.id} className="px-3 py-2">
             <Disclosure>
@@ -49,8 +48,8 @@ export default function TransactionsTable({ transactions }: Props) {
                       <div className="text-sm font-medium text-gray-900 truncate dark:text-white">
                         {tx.title}
                       </div>
-                      <p className="text-xs text-gray-600 capitalize dark:text-gray-400">
-                        {tx.type}
+                      <p className="text-xs text-gray-600 capitalize dark:text-neutral-400">
+                        {tx.type} - {tx.date}
                       </p>
                     </div>
                     {tx.badges && (
@@ -71,9 +70,11 @@ export default function TransactionsTable({ transactions }: Props) {
                           {[tx.type && "sent", "sending"].includes(tx.type)
                             ? "-"
                             : "+"}
-                          {tx.totalAmount} sat
+                          {tx.totalAmount} sats
                         </p>
-                        <p className="text-xs text-gray-600">{tx.date}</p>
+                        <p className="text-xs text-gray-600 dark:text-neutral-400">
+                          ~{tx.totalAmountFiat}
+                        </p>
                       </div>
                       <Disclosure.Button className="block h-0 mt-2 text-gray-500 hover:text-black dark:hover:text-white transition-color duration-200">
                         <CaretDownIcon
@@ -83,9 +84,9 @@ export default function TransactionsTable({ transactions }: Props) {
                     </div>
                   </div>
                   <Disclosure.Panel>
-                    <div className="mt-1 ml-9 text-xs text-gray-600 dark:text-gray-400">
+                    <div className="mt-1 ml-9 text-xs text-gray-600 dark:text-neutral-400">
                       {tx.description}
-                      <p>Fee: {tx.totalFees} sat</p>
+                      <p>Fee: {tx.totalFees} sats</p>
                       {tx.preimage && (
                         <p className="truncate">Preimage: {tx.preimage}</p>
                       )}

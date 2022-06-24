@@ -1,8 +1,12 @@
 import axios, { AxiosRequestConfig, Method } from "axios";
-import sha256 from "crypto-js/sha256";
-import Hex from "crypto-js/enc-hex";
+import type { AxiosResponse } from "axios";
 import lightningPayReq from "bolt11";
+import Hex from "crypto-js/enc-hex";
+import sha256 from "crypto-js/sha256";
+import utils from "~/common/lib/utils";
 import HashKeySigner from "~/common/utils/signer";
+
+import state from "../state";
 import Connector, {
   SendPaymentArgs,
   SendPaymentResponse,
@@ -18,8 +22,6 @@ import Connector, {
   VerifyMessageResponse,
   KeysendArgs,
 } from "./connector.interface";
-import state from "../state";
-import utils from "~/common/lib/utils";
 
 interface Config {
   login: string;
@@ -347,15 +349,24 @@ export default class LndHub implements Connector {
       const res = await axios(reqConfig);
       data = res.data;
     } catch (e) {
-      console.log(e);
-      if (e instanceof Error) throw new Error(e.message);
+      console.error(e);
+
+      if (axios.isAxiosError(e)) {
+        const errResponse = e.response as AxiosResponse;
+        if (errResponse?.status === 404) {
+          const method = path.replace("/", "");
+          throw new Error(`${method} not supported by the connected account.`);
+        }
+        const errorMessage = `${errResponse?.data.message}\n(${e.message})`;
+        throw new Error(errorMessage);
+      }
     }
     if (data && data.error) {
       if (data.code * 1 === 1 && !this.noRetry) {
         try {
           await this.authorize();
         } catch (e) {
-          console.log(e);
+          console.error(e);
           if (e instanceof Error) throw new Error(e.message);
         }
         this.noRetry = true;

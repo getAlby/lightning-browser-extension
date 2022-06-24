@@ -1,14 +1,15 @@
-import { ChangeEventHandler } from "react";
 import { Transition } from "@headlessui/react";
+import { ChangeEventHandler } from "react";
 
 import Checkbox from "../form/Checkbox";
-import TextField from "../form/TextField";
+import DualCurrencyField from "../form/DualCurrencyField";
 
 type Props = {
   remember: boolean;
   onRememberChange: ChangeEventHandler<HTMLInputElement>;
   budget: string;
   onBudgetChange: ChangeEventHandler<HTMLInputElement>;
+  fiatAmount: string;
 };
 
 function BudgetControl({
@@ -16,6 +17,7 @@ function BudgetControl({
   onRememberChange,
   budget,
   onBudgetChange,
+  fiatAmount,
 }: Props) {
   return (
     <div className="mb-6">
@@ -48,12 +50,12 @@ function BudgetControl({
           until it is exhausted.
         </p>
         <div>
-          <TextField
+          <DualCurrencyField
+            fiatValue={fiatAmount}
             id="budget"
             label="Budget"
-            placeholder="sat"
+            placeholder="sats"
             value={budget}
-            type="number"
             onChange={onBudgetChange}
           />
         </div>

@@ -2,7 +2,7 @@ import browser from "webextension-polyfill";
 
 const msg = {
   request: (
-    type: string,
+    action: string,
     args?: { [key: string]: string | number },
     overwrites?: { [key: string]: string }
   ) => {
@@ -10,7 +10,7 @@ const msg = {
       .sendMessage({
         application: "LBE",
         prompt: true,
-        type: type,
+        action,
         args: args,
         origin: { internal: true },
         ...overwrites,

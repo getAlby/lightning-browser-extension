@@ -1,14 +1,14 @@
-import connectors from "./extension/background-script/connectors";
+import { PaymentRequestObject } from "bolt11";
+import { CURRENCIES } from "~/common/constants";
+import connectors from "~/extension/background-script/connectors";
+import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
 
 export type ConnectorType = keyof typeof connectors;
 
-// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652
-// align Message-Types
-// Where is this used? Do we still need this if 652 is solved?
 export interface Account {
   id: string;
   connector: ConnectorType;
-  config: string | Record<string, unknown>;
+  config: string;
   name: string;
 }
 
@@ -17,10 +17,12 @@ export interface Accounts {
 }
 
 export interface AccountInfo {
-  id: string;
   alias: string;
   balance: number;
+  fiatBalance?: string;
+  id: string;
   name: string;
+  satsBalance?: string;
 }
 
 export interface MetaData {
@@ -48,6 +50,15 @@ export interface OriginData {
   external: boolean;
 }
 
+export interface PaymentNotificationData {
+  paymentRequestDetails?: PaymentRequestObject | undefined;
+  response: SendPaymentResponse | { error: string };
+  details: {
+    destination?: string | undefined;
+    description?: string | undefined;
+  };
+}
+
 export interface OriginDataInternal {
   internal: boolean;
 }
@@ -59,14 +70,89 @@ export interface Battery extends OriginData {
   icon: string;
 }
 
-// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/652
-// align Message-Types
+// deprecated message type,please stop using this
 export interface Message {
+  application?: string;
   args: Record<string, unknown>;
+  origin: OriginData | OriginDataInternal;
+  prompt?: boolean;
+  action?: string;
+}
+
+// new message  type, please use this
+export interface MessageDefault {
   origin: OriginData | OriginDataInternal;
   application?: string;
   prompt?: boolean;
-  type?: string;
+}
+
+export interface MessageAccountRemove extends MessageDefault {
+  args?: { id: Account["id"] };
+  action: "removeAccount";
+}
+
+export interface MessageAccountAdd extends MessageDefault {
+  args: Omit<Account, "id">;
+  action: "addAccount";
+}
+export interface MessageAccountEdit extends MessageDefault {
+  args: {
+    id: Account["id"];
+    name: Account["name"];
+  };
+  action: "editAccount";
+}
+export interface MessageAccountDecryptedDetails extends MessageDefault {
+  args: {
+    id: Account["id"];
+    name: Account["name"];
+  };
+  action: "accountDecryptedDetails";
+}
+
+export interface MessageAccountInfo extends Omit<MessageDefault, "args"> {
+  action: "accountInfo";
+}
+
+export interface MessageAccountAll extends Omit<MessageDefault, "args"> {
+  action: "getAccounts";
+}
+
+export interface MessageBlocklistAdd extends MessageDefault {
+  args: {
+    host: string;
+    name: string;
+    imageURL: string;
+  };
+  action: "addBlocklist";
+}
+
+export interface MessageBlocklistDelete extends MessageDefault {
+  args: {
+    host: string;
+  };
+  action: "deleteBlocklist";
+}
+
+export interface MessageBlocklistGet extends MessageDefault {
+  args: {
+    host: string;
+  };
+  action: "getBlocklist";
+}
+
+export interface MessageAccountLock extends Omit<MessageDefault, "args"> {
+  action: "lock";
+}
+
+export interface MessageAccountUnlock extends Omit<MessageDefault, "args"> {
+  args: { password: string | number };
+  action: "unlock";
+}
+
+export interface MessageAccountSelect extends MessageDefault {
+  args: { id: Account["id"] };
+  action: "selectAccount";
 }
 
 interface LNURLChannelServiceResponse {
@@ -168,6 +254,7 @@ export type Transaction = {
   totalFees: string;
   description: string;
   location: string;
+  totalAmountFiat: string;
 };
 
 export type Payment = {
@@ -188,6 +275,7 @@ export interface Allowance {
   name: string;
   payments: Transaction[];
   paymentsCount: number;
+  paymentsAmount: number;
   percentage: string;
   remainingBudget: number;
   totalBudget: number;
@@ -201,4 +289,26 @@ export interface SettingsStorage {
   userEmail: string;
   locale: string;
   theme: string;
+  currency: CURRENCIES;
+  exchange: SupportedExchanges;
 }
+
+export interface Blocklist {
+  id?: number;
+  host: string;
+  name: string;
+  imageURL: string;
+  isBlocked: boolean;
+}
+
+export interface Badge {
+  label: string;
+  color: string;
+  textColor: string;
+}
+
+export type Publisher = Allowance & {
+  badge?: Badge;
+};
+
+export type SupportedExchanges = "coindesk" | "yadio";

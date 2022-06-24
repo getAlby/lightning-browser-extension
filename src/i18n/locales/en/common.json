@@ -1,0 +1,15 @@
+{
+  "password": "Password",
+  "success": "Success!",
+  "actions": {
+    "edit": "Edit",
+    "next": "Next",
+    "continue": "Continue",
+    "unlock": "Unlock",
+    "send": "Send",
+    "receive": "Receive"
+  },
+  "errors": {
+    "connection_failed": "Connection failed"
+  }
+}

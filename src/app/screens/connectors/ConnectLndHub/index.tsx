@@ -1,15 +1,18 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-import utils from "~/common/lib/utils";
-
+import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import QrcodeScanner from "@components/QrcodeScanner";
 import TextField from "@components/form/TextField";
-import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import utils from "~/common/lib/utils";
 
 export default function ConnectLndHub() {
   const navigate = useNavigate();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "choose_connector.lndhub",
+  });
   const [formData, setFormData] = useState({
     uri: "",
   });
@@ -35,7 +38,7 @@ export default function ConnectLndHub() {
     setLoading(true);
     const match = formData.uri.match(/lndhub:\/\/(\S+):(\S+)@(\S+)/i);
     if (!match) {
-      alert("Invalid LNDHub URI");
+      toast.error(t("errors.invalid_uri"));
       setLoading(false);
       return;
     }
@@ -70,28 +73,26 @@ export default function ConnectLndHub() {
           navigate("/test-connection");
         }
       } else {
-        console.log(validation);
-        alert(
-          `Connection failed. Is your LNDHub URI correct? \n\n(${validation.error})`
+        console.error(validation);
+        toast.error(
+          `${t("errors.connection_failed")} \n\n(${validation.error})`
         );
       }
     } catch (e) {
       console.error(e);
-      let message = "Connection failed. Is your LNDHub URI correct?";
+      let message = t("errors.connection_failed");
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
-      alert(message);
+      toast.error(message);
     }
     setLoading(false);
   }
 
   return (
     <ConnectorForm
-      title="Connect to LNDHub (BlueWallet)"
-      description='In BlueWallet, choose the wallet you want to connect, open it, click
-      on "...", click on Export/Backup to display the QR code
-      and scan it with your webcam.'
+      title={t("page_title")}
+      description={t("page_description")}
       submitLoading={loading}
       submitDisabled={formData.uri === ""}
       onSubmit={handleSubmit}
@@ -99,7 +100,7 @@ export default function ConnectLndHub() {
       <div className="mb-6">
         <TextField
           id="uri"
-          label="LNDHub Export URI"
+          label={t("lndhub_uri")}
           type="text"
           required
           placeholder="lndhub://..."

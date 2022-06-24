@@ -1,6 +1,5 @@
-import Lnd from "./lnd";
-
 import Native from "./Native";
+import Lnd from "./lnd";
 
 const NativeConnector = Native(Lnd);
 

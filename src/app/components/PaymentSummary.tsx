@@ -13,7 +13,7 @@ function PaymentSummary({ amount, amountAlt, description }: Props) {
       <dt className="mt-4 font-medium text-gray-800 dark:text-white">
         Description
       </dt>
-      <dd className="mb-0 text-gray-600 dark:text-gray-500 break-all">
+      <dd className="mb-0 text-gray-600 dark:text-neutral-500 break-all">
         {description}
       </dd>
     </dl>

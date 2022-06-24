@@ -1,14 +1,15 @@
-import { useState, useRef } from "react";
-
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import Container from "@components/Container";
 //import Checkbox from "../../components/Form/Checkbox";
 import PublisherCard from "@components/PublisherCard";
+import SuccessMessage from "@components/SuccessMessage";
+import { useState, useRef } from "react";
+import { toast } from "react-toastify";
+import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import getOriginData from "~/extension/content-script/originData";
 import type { OriginData } from "~/types";
-import SuccessMessage from "@components/SuccessMessage";
-import { USER_REJECTED_ERROR } from "~/common/constants";
 
 type Props = {
   origin: OriginData;
@@ -38,7 +39,7 @@ function ConfirmSignMessage(props: Props) {
       setSuccessMessage("Success!");
     } catch (e) {
       console.error(e);
-      if (e instanceof Error) alert(`Error: ${e.message}`);
+      if (e instanceof Error) toast.error(`Error: ${e.message}`);
     } finally {
       setLoading(false);
     }
@@ -59,19 +60,19 @@ function ConfirmSignMessage(props: Props) {
         title={originRef.current.name}
         image={originRef.current.icon}
       />
+      <div className="py-4">
+        <Container maxWidth="sm">
+          {!succesMessage ? (
+            <>
+              <dl className="shadow bg-white dark:bg-surface-02dp p-4 rounded-lg mb-8">
+                <dt className="font-semibold text-gray-500">
+                  {originRef.current.host} asks you to sign:
+                </dt>
+                <dd className="mb-6 dark:text-white">{messageRef.current}</dd>
+              </dl>
 
-      <div className="p-4 max-w-screen-sm mx-auto">
-        {!succesMessage ? (
-          <>
-            <dl className="shadow bg-white dark:bg-surface-02dp p-4 rounded-lg mb-8">
-              <dt className="font-semibold text-gray-500">
-                {originRef.current.host} asks you to sign:
-              </dt>
-              <dd className="mb-6 dark:text-white">{messageRef.current}</dd>
-            </dl>
-
-            <div className="mb-8">
-              {/*
+              <div className="mb-8">
+                {/*
               <div className="flex items-center">
                 <Checkbox
                   id="remember_me"
@@ -89,21 +90,22 @@ function ConfirmSignMessage(props: Props) {
                 </label>
               </div>
               */}
-            </div>
+              </div>
 
-            <ConfirmOrCancel
-              disabled={loading}
-              loading={loading}
-              onConfirm={confirm}
-              onCancel={reject}
+              <ConfirmOrCancel
+                disabled={loading}
+                loading={loading}
+                onConfirm={confirm}
+                onCancel={reject}
+              />
+            </>
+          ) : (
+            <SuccessMessage
+              message={succesMessage}
+              onClose={() => window.close()}
             />
-          </>
-        ) : (
-          <SuccessMessage
-            message={succesMessage}
-            onClose={() => window.close()}
-          />
-        )}
+          )}
+        </Container>
       </div>
     </div>
   );

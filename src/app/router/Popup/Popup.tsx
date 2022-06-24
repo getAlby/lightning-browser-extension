@@ -1,23 +1,22 @@
-import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
-
-import { useAuth } from "~/app/context/AuthContext";
-import Home from "@screens/Home";
-import Unlock from "@screens/Unlock";
-import Send from "@screens/Send";
-import Receive from "@screens/Receive";
-import LNURLPay from "@screens/LNURLPay";
-import ConfirmPayment from "@screens/ConfirmPayment";
-import { AuthProvider } from "~/app/context/AuthContext";
-import { AccountsProvider } from "~/app/context/AccountsContext";
-import RequireAuth from "../RequireAuth";
 import Navbar from "@components/Navbar";
+import ConfirmPayment from "@screens/ConfirmPayment";
+import Home from "@screens/Home";
 import Keysend from "@screens/Keysend";
+import LNURLPay from "@screens/LNURLPay";
+import Receive from "@screens/Receive";
+import Send from "@screens/Send";
+import Unlock from "@screens/Unlock";
+import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { AccountsProvider } from "~/app/context/AccountsContext";
+import { useAuth } from "~/app/context/AuthContext";
+import { AccountProvider } from "~/app/context/AuthContext";
 
-const POPUP_MAX_HEIGHT = 600;
+import RequireAuth from "../RequireAuth";
 
 function Popup() {
   return (
-    <AuthProvider>
+    <AccountProvider>
       <AccountsProvider>
         <HashRouter>
           <Routes>
@@ -40,30 +39,27 @@ function Popup() {
           </Routes>
         </HashRouter>
       </AccountsProvider>
-    </AuthProvider>
+    </AccountProvider>
   );
 }
 
 const Layout = () => {
-  const auth = useAuth();
+  const { account, balancesDecorated } = useAuth();
 
   return (
-    <div className="flex flex-col" style={{ height: `${POPUP_MAX_HEIGHT}px` }}>
+    <div className="flex flex-col h-full">
       <Navbar
         title={
-          typeof auth.account?.name === "string"
-            ? `${auth.account?.name} - ${auth.account?.alias}`.substring(0, 21)
+          typeof account?.name === "string"
+            ? `${account?.name} - ${account?.alias}`.substring(0, 21)
             : ""
         }
-        subtitle={
-          typeof auth.account?.balance === "number"
-            ? `${auth.account.balance} sat`
-            : ""
-        }
+        balances={balancesDecorated}
       />
 
-      <main className="overflow-y-auto grow">
+      <main className="flex flex-col grow min-h-0">
         <Outlet />
+        <ToastContainer />
       </main>
     </div>
   );

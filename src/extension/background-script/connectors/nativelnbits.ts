@@ -1,7 +1,7 @@
 import { Method } from "axios";
 
-import LnBits from "./lnbits";
 import Native from "./Native";
+import LnBits from "./lnbits";
 
 const NativeConnector = Native(LnBits);
 
@@ -74,7 +74,7 @@ export default class NativeLnBits extends NativeConnector {
       const res = await this._nativeRequest(reqConfig);
       data = JSON.parse(res.body);
     } catch (e) {
-      console.log(e);
+      console.error(e);
       if (e instanceof Error) throw new Error(e.message);
     }
 

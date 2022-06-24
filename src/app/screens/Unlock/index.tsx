@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-
-import utils from "~/common/lib/utils";
-import { useAuth } from "~/app/context/AuthContext";
 import AlbyLogo from "@components/AlbyLogo";
 import Button from "@components/Button";
 import Input from "@components/form/Input";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "~/app/context/AuthContext";
+import utils from "~/common/lib/utils";
 
 function Unlock() {
   const [password, setPassword] = useState("");
@@ -15,6 +15,8 @@ function Unlock() {
     state: { from?: { pathname?: string } };
   };
   const auth = useAuth();
+  const { t } = useTranslation("translation", { keyPrefix: "unlock" });
+  const { t: tCommon } = useTranslation("common");
   const from = location.state.from?.pathname || "/";
 
   function handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -49,7 +51,7 @@ function Unlock() {
         </div>
       </div>
       <p className="text-center text-xl font-normal font-serif mt-8 mb-5 dark:text-white">
-        Unlock to continue
+        {t("unlock_to_continue")}
       </p>
       <form onSubmit={handleSubmit}>
         <div className="mb-5">
@@ -76,19 +78,19 @@ function Unlock() {
         </div>
         <Button
           type="submit"
-          label="Unlock"
+          label={tCommon("actions.unlock")}
           fullWidth
           primary
           disabled={password === ""}
         />
 
         <div className="flex justify-center space-x-1 mt-5">
-          <span className="text-gray-500">Need help? Contact </span>
+          <span className="text-gray-500">{t("help_contact.part1")} </span>
           <a
             className="text-orange-bitcoin font-semibold"
             href="mailto:support@getalby.com"
           >
-            Alby Support
+            {t("help_contact.part2")}
           </a>
         </div>
       </form>

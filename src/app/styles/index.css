@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
 @font-face {
   font-family: 'Inter var';
   font-weight: 100 900;
@@ -23,15 +35,6 @@ body {
   font-size: 100%;
 }
 
-main::-webkit-scrollbar { 
-  display: none;
-}
-
-main {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
 .ReactModal__Overlay {
   opacity: 0;
   transition: opacity 200ms ease;
@@ -43,4 +46,18 @@ main {
 
 .ReactModal__Overlay--before-close {
   opacity: 0;
+}
+
+
+/* Hide number spinner */
+/* Webkit */
+input.dual-currency-field::-webkit-outer-spin-button,
+input.dual-currency-field::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input.dual-currency-field[type=number] {
+  -moz-appearance: textfield;
 }

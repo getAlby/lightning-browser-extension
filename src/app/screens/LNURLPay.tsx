@@ -1,7 +1,20 @@
-import React, { useState, useEffect, MouseEvent } from "react";
+import Button from "@components/Button";
+import Container from "@components/Container";
+import PublisherCard from "@components/PublisherCard";
+import SatButtons from "@components/SatButtons";
+import TextField from "@components/form/TextField";
 import axios from "axios";
+import React, { useState, useEffect, MouseEvent } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-
+import { toast } from "react-toastify";
+import { useAuth } from "~/app/context/AuthContext";
+import { USER_REJECTED_ERROR } from "~/common/constants";
+import api from "~/common/lib/api";
+import lnurl from "~/common/lib/lnurl";
+import msg from "~/common/lib/msg";
+import utils from "~/common/lib/utils";
+import { getFiatValue } from "~/common/utils/currencyConvert";
+import getOriginData from "~/extension/content-script/originData";
 import {
   LNURLPaymentInfoError,
   LNURLPaymentInfo,
@@ -10,19 +23,7 @@ import {
   Payment,
 } from "~/types";
 
-import api from "~/common/lib/api";
-import msg from "~/common/lib/msg";
-import utils from "~/common/lib/utils";
-import lnurl from "~/common/lib/lnurl";
-import getOriginData from "~/extension/content-script/originData";
-import { useAuth } from "~/app/context/AuthContext";
-import { USER_REJECTED_ERROR } from "~/common/constants";
-
-import Button from "@components/Button";
-import TextField from "@components/form/TextField";
-import PublisherCard from "@components/PublisherCard";
-import ConfirmOrCancel from "@components/ConfirmOrCancel";
-import SatButtons from "@components/SatButtons";
+import DualCurrencyField from "../components/form/DualCurrencyField";
 
 type Origin = {
   name: string;
@@ -39,7 +40,7 @@ const Dt = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Dd = ({ children }: { children: React.ReactNode }) => (
-  <dd className="mb-4 text-gray-600 dark:text-gray-500">{children}</dd>
+  <dd className="mb-4 text-gray-600 dark:text-neutral-500">{children}</dd>
 );
 
 function LNURLPay(props: Props) {
@@ -57,6 +58,8 @@ function LNURLPay(props: Props) {
   const [valueSat, setValueSat] = useState(
     (details?.minSendable && (+details?.minSendable / 1000).toString()) || ""
   );
+
+  const [fiatValue, setFiatValue] = useState("");
   const [comment, setComment] = useState("");
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -65,6 +68,13 @@ function LNURLPay(props: Props) {
     LNURLPaymentSuccessAction | undefined
   >();
   const [payment, setPayment] = useState<Payment | undefined>();
+
+  useEffect(() => {
+    (async () => {
+      const res = await getFiatValue(valueSat);
+      setFiatValue(res);
+    })();
+  }, [valueSat]);
 
   useEffect(() => {
     if (searchParams) {
@@ -153,7 +163,7 @@ function LNURLPay(props: Props) {
         }
       } catch (e) {
         const message = e instanceof Error ? `(${e.message})` : "";
-        alert(`Payment aborted: Could not fetch invoice. ${message}`);
+        toast.error(`Payment aborted: Could not fetch invoice. \n${message}`);
         return;
       }
 
@@ -167,7 +177,7 @@ function LNURLPay(props: Props) {
         payerdata,
       });
       if (!isValidInvoice) {
-        alert("Payment aborted: Invalid invoice.");
+        toast.warn("Payment aborted: Invalid invoice.");
         return;
       }
 
@@ -194,7 +204,7 @@ function LNURLPay(props: Props) {
             break;
           case "aes": // TODO: For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage
           default:
-            alert(
+            toast.warn(
               `Not implemented yet. Please submit an issue to support success action: ${paymentInfo.successAction.tag}`
             );
             break;
@@ -213,7 +223,7 @@ function LNURLPay(props: Props) {
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        alert(`Error: ${e.message}`);
+        toast.error(`Error: ${e.message}`);
       }
     } finally {
       setLoadingConfirm(false);
@@ -301,131 +311,161 @@ function LNURLPay(props: Props) {
 
     return (
       <>
-        <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-          {descriptionList.map(([dt, dd]) => (
-            <>
-              <Dt>{dt}</Dt>
-              <Dd>{dd}</Dd>
-            </>
-          ))}
-        </dl>
-        <div className="text-center">
-          <button className="underline text-sm text-gray-500" onClick={close}>
-            Close
-          </button>
-        </div>
+        <PublisherCard
+          title={origin.name}
+          description={origin.description}
+          image={origin.icon}
+        />
+        <Container maxWidth="sm">
+          <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+            {descriptionList.map(([dt, dd]) => (
+              <>
+                <Dt>{dt}</Dt>
+                <Dd>{dd}</Dd>
+              </>
+            ))}
+          </dl>
+          <div className="text-center">
+            <button className="underline text-sm text-gray-500" onClick={close}>
+              Close
+            </button>
+          </div>
+        </Container>
       </>
     );
   }
 
   return (
-    <div>
-      <PublisherCard
-        title={origin.name}
-        description={origin.description}
-        image={origin.icon}
-      />
-      <div className="p-4 max-w-screen-sm mx-auto">
+    <>
+      <div className="flex flex-col grow overflow-hidden">
         {!successAction ? (
           <>
-            <div className="mb-4">
-              <dl>
-                {loading || !details ? (
-                  <>
-                    <Dt>Send payment to</Dt>
-                    <Dd>loading...</Dd>
-                    <Dt>Description</Dt>
-                    <Dd>loading...</Dd>
-                    <Dt>Amount (Satoshi)</Dt>
-                    <Dd>loading...</Dd>
-                  </>
-                ) : (
-                  <>
-                    <Dt>Send payment to</Dt>
-                    <Dd>{getRecipient()}</Dd>
-                    {formattedMetadata(details.metadata).map(([dt, dd]) => (
+            <div className="grow overflow-y-auto no-scrollbar">
+              <PublisherCard
+                title={origin.name}
+                description={origin.description}
+                image={origin.icon}
+              />
+              <Container maxWidth="sm">
+                <div className="my-4">
+                  <dl>
+                    {loading || !details ? (
                       <>
-                        <Dt>{dt}</Dt>
-                        <Dd>{dd}</Dd>
-                      </>
-                    ))}
-                    {details.minSendable === details.maxSendable && (
-                      <>
+                        <Dt>Send payment to</Dt>
+                        <Dd>loading...</Dd>
+                        <Dt>Description</Dt>
+                        <Dd>loading...</Dd>
                         <Dt>Amount (Satoshi)</Dt>
-                        <Dd>{`${+details.minSendable / 1000} sat`}</Dd>
+                        <Dd>loading...</Dd>
+                      </>
+                    ) : (
+                      <>
+                        <Dt>Send payment to</Dt>
+                        <Dd>{getRecipient()}</Dd>
+                        {formattedMetadata(details.metadata).map(([dt, dd]) => (
+                          <>
+                            <Dt>{dt}</Dt>
+                            <Dd>{dd}</Dd>
+                          </>
+                        ))}
+                        {details.minSendable === details.maxSendable && (
+                          <>
+                            <Dt>Amount (Satoshi)</Dt>
+                            <Dd>{`${+details.minSendable / 1000} sats`}</Dd>
+                          </>
+                        )}
                       </>
                     )}
-                  </>
-                )}
-              </dl>
-              {details && details.minSendable !== details.maxSendable && (
-                <div>
-                  <TextField
-                    id="amount"
-                    label="Amount (Satoshi)"
-                    type="number"
-                    min={+details.minSendable / 1000}
-                    max={+details.maxSendable / 1000}
-                    value={valueSat}
-                    onChange={(e) => setValueSat(e.target.value)}
-                  />
-                  <SatButtons onClick={setValueSat} />
-                </div>
-              )}
-              {details &&
-                typeof details?.commentAllowed === "number" &&
-                details?.commentAllowed > 0 && (
-                  <div className="mt-4">
-                    <TextField
-                      id="comment"
-                      label="Comment"
-                      placeholder="optional"
-                      onChange={(e) => {
-                        setComment(e.target.value);
-                      }}
-                    />
-                  </div>
-                )}
-              {details && details?.payerData?.name && (
-                <div className="mt-4">
-                  <TextField
-                    id="name"
-                    label="Name"
-                    placeholder="optional"
-                    value={userName}
-                    onChange={(e) => {
-                      setUserName(e.target.value);
-                    }}
-                  />
-                </div>
-              )}
-              {details && details?.payerData?.email && (
-                <div className="mt-4">
-                  <TextField
-                    id="email"
-                    label="Email"
-                    placeholder="optional"
-                    value={userEmail}
-                    onChange={(e) => {
-                      setUserEmail(e.target.value);
-                    }}
-                  />
-                </div>
-              )}
-            </div>
+                  </dl>
+                  {details && details.minSendable !== details.maxSendable && (
+                    <div>
+                      <DualCurrencyField
+                        id="amount"
+                        label="Amount (Satoshi)"
+                        min={+details.minSendable / 1000}
+                        max={+details.maxSendable / 1000}
+                        value={valueSat}
+                        onChange={(e) => setValueSat(e.target.value)}
+                        fiatValue={fiatValue}
+                      />
+                      <SatButtons onClick={setValueSat} />
+                    </div>
+                  )}
+                  {details &&
+                    typeof details?.commentAllowed === "number" &&
+                    details?.commentAllowed > 0 && (
+                      <div className="mt-4">
+                        <TextField
+                          id="comment"
+                          label="Comment"
+                          placeholder="optional"
+                          onChange={(e) => {
+                            setComment(e.target.value);
+                          }}
+                        />
+                      </div>
+                    )}
+                  {details && details?.payerData?.name && (
+                    <div className="mt-4">
+                      <TextField
+                        id="name"
+                        label="Name"
+                        placeholder="optional"
+                        value={userName}
+                        onChange={(e) => {
+                          setUserName(e.target.value);
+                        }}
+                      />
+                    </div>
+                  )}
+                  {details && details?.payerData?.email && (
+                    <div className="mt-4">
+                      <TextField
+                        id="email"
+                        label="Email"
+                        placeholder="optional"
+                        value={userEmail}
+                        onChange={(e) => {
+                          setUserEmail(e.target.value);
+                        }}
+                      />
+                    </div>
+                  )}
 
-            <ConfirmOrCancel
-              disabled={loadingConfirm || !valueSat}
-              loading={loadingConfirm}
-              onConfirm={confirm}
-              onCancel={reject}
-            />
+                  <div className="mt-4 text-center">
+                    <p className="mb-2 text-sm text-gray-400">
+                      <em>Only connect with sites you trust.</em>
+                    </p>
+
+                    <a
+                      className="underline text-sm text-gray-600 dark:text-neutral-400"
+                      href="#"
+                      onClick={reject}
+                    >
+                      Cancel
+                    </a>
+                  </div>
+                </div>
+              </Container>
+            </div>
+            <div className="p-4 border-t border-gray-200 dark:border-white/10">
+              <Container maxWidth="sm">
+                <Button
+                  onClick={confirm}
+                  label="Confirm"
+                  fullWidth
+                  primary
+                  disabled={loadingConfirm || !valueSat}
+                  loading={loadingConfirm}
+                />
+              </Container>
+            </div>
           </>
         ) : (
           renderSuccessAction()
         )}
       </div>
-    </div>
+    </>
   );
 }
 

@@ -1,13 +1,16 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { act } from "react-dom/test-utils";
 import { BrowserRouter } from "react-router-dom";
-
 import * as AccountsContext from "~/app/context/AccountsContext";
-import AccountMenu from ".";
+import * as AuthContext from "~/app/context/AuthContext";
 import type { Accounts } from "~/types";
+
+import AccountMenu from ".";
 
 const defaultProps = {
   title: "node",
-  subtitle: "1000 sats",
+  balances: { satsBalance: "1000 sats", fiatBalance: "$0.10" },
 };
 
 const mockAccounts: Accounts = {
@@ -18,6 +21,19 @@ const mockAccounts: Accounts = {
 jest.spyOn(AccountsContext, "useAccounts").mockReturnValue({
   accounts: mockAccounts,
   getAccounts: jest.fn(),
+});
+
+jest.spyOn(AuthContext, "useAuth").mockReturnValue({
+  account: { id: "1", name: "LND account" },
+  loading: false,
+  unlock: jest.fn(),
+  lock: jest.fn(),
+  setAccountId: jest.fn(),
+  fetchAccountInfo: jest.fn(),
+  balancesDecorated: {
+    fiatBalance: "",
+    satsBalance: "",
+  },
 });
 
 describe("AccountMenu", () => {
@@ -38,7 +54,9 @@ describe("AccountMenu", () => {
       </BrowserRouter>
     );
 
-    fireEvent.click(screen.getByText("Toggle Dropdown"));
+    await act(async () => {
+      userEvent.click(screen.getByText("Toggle Dropdown"));
+    });
 
     await waitFor(() => screen.getByText("Switch account"));
 
@@ -48,6 +66,24 @@ describe("AccountMenu", () => {
     expect(screen.getByText("Accounts")).toBeInTheDocument();
   });
 
+  test("highlights current account", async () => {
+    render(
+      <BrowserRouter>
+        <AccountMenu {...defaultProps} />
+      </BrowserRouter>
+    );
+
+    await act(async () => {
+      userEvent.click(screen.getByText("Toggle Dropdown"));
+    });
+    await waitFor(() => screen.getByText("Switch account"));
+
+    // As we have set the active account as "LND account above"
+    expect(
+      screen.getByTitle("LND account").querySelector('[data-testid="selected"]')
+    ).toBeInTheDocument();
+  });
+
   test("displays accounts without options", async () => {
     render(
       <BrowserRouter>
@@ -55,7 +91,10 @@ describe("AccountMenu", () => {
       </BrowserRouter>
     );
 
-    fireEvent.click(screen.getByText("Toggle Dropdown"));
+    await act(async () => {
+      userEvent.click(screen.getByText("Toggle Dropdown"));
+    });
+    await waitFor(() => screen.getByText("Switch account"));
 
     expect(screen.getByText("LND account")).toBeInTheDocument();
     expect(screen.getByText("Galoy account")).toBeInTheDocument();

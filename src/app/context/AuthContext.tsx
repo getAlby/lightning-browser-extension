@@ -1,8 +1,9 @@
 import { useState, useEffect, createContext, useContext } from "react";
-
-import utils from "../../common/lib/utils";
-import api from "../../common/lib/api";
-import type { AccountInfo } from "../../types";
+import { toast } from "react-toastify";
+import api from "~/common/lib/api";
+import utils from "~/common/lib/utils";
+import { getBalances } from "~/common/utils/currencyConvert";
+import type { AccountInfo } from "~/types";
 
 interface AuthContextType {
   account: {
@@ -11,6 +12,10 @@ interface AuthContextType {
     alias?: string;
     balance?: number;
   } | null;
+  balancesDecorated: {
+    fiatBalance: string;
+    satsBalance: string;
+  };
   loading: boolean;
   unlock: (user: string, callback: VoidFunction) => Promise<void>;
   lock: (callback: VoidFunction) => void;
@@ -21,19 +26,28 @@ interface AuthContextType {
   /**
    * Fetch the additional account info: alias/balance and update account
    */
-  fetchAccountInfo: (id?: string) => Promise<AccountInfo | undefined>;
+  fetchAccountInfo: (options?: {
+    accountId?: string;
+    isLatestRate?: boolean;
+  }) => Promise<AccountInfo | undefined>;
 }
 
-const AuthContext = createContext({} as AuthContextType);
+const AccountContext = createContext({} as AuthContextType);
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
+// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/1040
+// rename to "accountProvider"
+export function AccountProvider({ children }: { children: React.ReactNode }) {
   const [account, setAccount] = useState<AuthContextType["account"]>(null);
   const [loading, setLoading] = useState(true);
+  const [balancesDecorated, setBalancesDecorated] = useState({
+    fiatBalance: "",
+    satsBalance: "",
+  });
 
   const unlock = (password: string, callback: VoidFunction) => {
     return api.unlock(password).then((response) => {
       setAccountId(response.currentAccountId);
-      fetchAccountInfo(response.currentAccountId);
+      fetchAccountInfo({ accountId: response.currentAccountId });
 
       // callback - e.g. navigate to the requested route after unlocking
       callback();
@@ -49,10 +63,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const setAccountId = (id: string) => setAccount({ id });
 
-  const fetchAccountInfo = async (accountId?: string) => {
-    const id = accountId || account?.id;
+  const fetchAccountInfo = async (options?: {
+    accountId?: string;
+    isLatestRate?: boolean;
+  }) => {
+    const id = options?.accountId || account?.id;
     if (!id) return;
-    return api.swr.getAccountInfo(id, setAccount);
+
+    const accountInfo = await api.swr.getAccountInfo(id, setAccount);
+    const { fiatBalance, satsBalance } = await getBalances(
+      accountInfo.balance,
+      options?.isLatestRate
+    );
+
+    setBalancesDecorated({
+      fiatBalance,
+      satsBalance,
+    });
+
+    return { ...accountInfo, fiatBalance, satsBalance };
   };
 
   // Invoked only on on mount.
@@ -70,13 +99,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             utils.redirectPage("options.html");
           }
           setAccountId(response.currentAccountId);
-          fetchAccountInfo(response.currentAccountId);
+          fetchAccountInfo({ accountId: response.currentAccountId });
         } else {
           setAccount(null);
         }
       })
       .catch((e) => {
-        alert(`An unexpected error occurred (${e.message})`);
+        toast.error(`An unexpected error occurred (${e.message})`);
       })
       .finally(() => {
         setLoading(false);
@@ -86,16 +115,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const value = {
     account,
-    setAccountId,
+    balancesDecorated,
     fetchAccountInfo,
     loading,
-    unlock,
     lock,
+    setAccountId,
+    unlock,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AccountContext.Provider value={value}>{children}</AccountContext.Provider>
+  );
 }
 
 export function useAuth() {
-  return useContext(AuthContext);
+  return useContext(AccountContext);
 }

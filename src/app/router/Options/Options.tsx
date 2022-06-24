@@ -1,27 +1,28 @@
-import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
-
-import { AuthProvider, useAuth } from "~/app/context/AuthContext";
-import { AccountsProvider } from "~/app/context/AccountsContext";
-import connectorRoutes from "~/app/router/connectorRoutes";
-import RequireAuth from "~/app/router/RequireAuth";
 import Container from "@components/Container";
 import Navbar from "@components/Navbar";
-import Publishers from "@screens/Publishers";
-import Publisher from "@screens/Publisher";
-import TestConnection from "@screens/Options/TestConnection";
-import Send from "@screens/Send";
+import Accounts from "@screens/Accounts";
 import ConfirmPayment from "@screens/ConfirmPayment";
-import Receive from "@screens/Receive";
+import Keysend from "@screens/Keysend";
 import LNURLPay from "@screens/LNURLPay";
+import TestConnection from "@screens/Options/TestConnection";
+import Publisher from "@screens/Publisher";
+import Publishers from "@screens/Publishers";
+import Receive from "@screens/Receive";
+import Send from "@screens/Send";
 import Settings from "@screens/Settings";
 import Unlock from "@screens/Unlock";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
-import Accounts from "@screens/Accounts";
-import Keysend from "@screens/Keysend";
+import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { AccountsProvider } from "~/app/context/AccountsContext";
+import { AccountProvider, useAuth } from "~/app/context/AuthContext";
+import RequireAuth from "~/app/router/RequireAuth";
+import getConnectorRoutes from "~/app/router/connectorRoutes";
 
 function Options() {
+  const connectorRoutes = getConnectorRoutes();
   return (
-    <AuthProvider>
+    <AccountProvider>
       <AccountsProvider>
         <HashRouter>
           <Routes>
@@ -82,32 +83,29 @@ function Options() {
           </Routes>
         </HashRouter>
       </AccountsProvider>
-    </AuthProvider>
+    </AccountProvider>
   );
 }
 
 const Layout = () => {
-  const auth = useAuth();
+  const { account, balancesDecorated } = useAuth();
 
   return (
     <div>
       <Navbar
         title={
-          typeof auth.account?.name === "string"
-            ? `${auth.account?.name} - ${auth.account?.alias}`.substring(0, 21)
+          typeof account?.name === "string"
+            ? `${account?.name} - ${account?.alias}`.substring(0, 21)
             : ""
         }
-        subtitle={
-          typeof auth.account?.balance === "number"
-            ? `${auth.account.balance} sat`
-            : ""
-        }
+        balances={balancesDecorated}
       >
         <Navbar.Link href="/publishers">Websites</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>
         <Navbar.Link href="/receive">Receive</Navbar.Link>
         <Navbar.Link href="/settings">Settings</Navbar.Link>
       </Navbar>
+      <ToastContainer />
 
       <Outlet />
     </div>

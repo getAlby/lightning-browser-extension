@@ -75,6 +75,10 @@ const metaDataRules: Record<string, RuleSet> = {
   description: {
     rules: [
       [
+        'meta[property="alby:description"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
         'meta[property="og:description"][content]',
         (element) => element.getAttribute("content"),
       ],
@@ -189,6 +193,10 @@ const metaDataRules: Record<string, RuleSet> = {
   },
   provider: {
     rules: [
+      [
+        'meta[property="alby:name"][content]',
+        (element) => element.getAttribute("content"),
+      ],
       [
         'meta[property="og:site_name"][content]',
         (element) => element.getAttribute("content"),
@@ -491,6 +499,10 @@ const metaDataRules: Record<string, RuleSet> = {
   image: {
     rules: [
       [
+        'meta[property="alby:image"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
         'meta[property="og:image:secure_url"][content]',
         (element) => element.getAttribute("content"),
       ],
@@ -579,6 +591,10 @@ const metaDataRules: Record<string, RuleSet> = {
   icon: {
     rules: [
       [
+        'meta[property="alby:image"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
         'link[rel="apple-touch-icon"][href]',
         (element) => element.getAttribute("href"),
       ],
@@ -616,7 +632,6 @@ const metaDataRules: Record<string, RuleSet> = {
         }
       }
     },
-    defaultValue: (context) => makeUrlAbsolute(context.url, "/favicon.ico"),
     processor: (iconUrl, context) =>
       context.options.forceImageHttps === true
         ? makeUrlSecure(makeUrlAbsolute(context.url, iconUrl))
@@ -718,7 +733,7 @@ export default function getOriginData(): OriginData {
     pathname: window.location.pathname,
     name: metaData.provider || metaData.title || "",
     description: metaData.description || "",
-    icon: metaData.image || metaData.icon || "",
+    icon: metaData.icon || metaData.image || "",
     metaData: metaData,
     external: true, // indicate that the call is coming from the website (and not made internally within the extension)
   };

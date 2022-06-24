@@ -1,19 +1,20 @@
-import { useRef, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import lightningPayReq from "bolt11";
-
-import msg from "~/common/lib/msg";
-import utils from "~/common/lib/utils";
-import getOriginData from "~/extension/content-script/originData";
-import type { OriginData } from "~/types";
-import { USER_REJECTED_ERROR } from "~/common/constants";
-
-import PaymentSummary from "@components/PaymentSummary";
-import PublisherCard from "@components/PublisherCard";
-import { useAuth } from "~/app/context/AuthContext";
 import BudgetControl from "@components/BudgetControl";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import Container from "@components/Container";
+import PaymentSummary from "@components/PaymentSummary";
+import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
+import lightningPayReq from "bolt11";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useAuth } from "~/app/context/AuthContext";
+import { USER_REJECTED_ERROR } from "~/common/constants";
+import msg from "~/common/lib/msg";
+import utils from "~/common/lib/utils";
+import { getFiatValue } from "~/common/utils/currencyConvert";
+import getOriginData from "~/extension/content-script/originData";
+import type { OriginData } from "~/types";
 
 export type Props = {
   origin?: OriginData;
@@ -24,6 +25,7 @@ function ConfirmPayment(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAuth();
+
   const invoiceRef = useRef(
     lightningPayReq.decode(
       props.paymentRequest || (searchParams.get("paymentRequest") as string)
@@ -36,6 +38,15 @@ function ConfirmPayment(props: Props) {
   const [budget, setBudget] = useState(
     ((invoiceRef.current?.satoshis || 0) * 10).toString()
   );
+  const [fiatAmount, setFiatAmount] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      const res = await getFiatValue(budget);
+      setFiatAmount(res);
+    })();
+  }, [budget]);
+
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -57,7 +68,7 @@ function ConfirmPayment(props: Props) {
       setSuccessMessage("Success, payment sent!");
     } catch (e) {
       console.error(e);
-      if (e instanceof Error) alert(`Error: ${e.message}`);
+      if (e instanceof Error) toast.error(`Error: ${e.message}`);
     } finally {
       setLoading(false);
     }
@@ -88,41 +99,41 @@ function ConfirmPayment(props: Props) {
         title={originRef.current.name}
         image={originRef.current.icon}
       />
-
-      <div className="p-4 max-w-screen-sm mx-auto">
-        {!successMessage ? (
-          <>
-            <h1 className="text-white font-bold mb-4">Approve payment</h1>
-            <div className="mb-8">
-              <PaymentSummary
-                amount={invoiceRef.current?.satoshis}
-                description={invoiceRef.current?.tagsObject.description}
+      <div className="py-4">
+        <Container maxWidth="sm">
+          {!successMessage ? (
+            <>
+              <h1 className="text-white font-bold mb-4">Approve payment</h1>
+              <div className="mb-6">
+                <PaymentSummary
+                  amount={invoiceRef.current?.satoshis}
+                  description={invoiceRef.current?.tagsObject.description}
+                />
+              </div>
+              <BudgetControl
+                fiatAmount={fiatAmount}
+                remember={rememberMe}
+                onRememberChange={(event) => {
+                  setRememberMe(event.target.checked);
+                }}
+                budget={budget}
+                onBudgetChange={(event) => setBudget(event.target.value)}
               />
-            </div>
-
-            <BudgetControl
-              remember={rememberMe}
-              onRememberChange={(event) => {
-                setRememberMe(event.target.checked);
-              }}
-              budget={budget}
-              onBudgetChange={(event) => setBudget(event.target.value)}
+              <ConfirmOrCancel
+                disabled={loading}
+                loading={loading}
+                onConfirm={confirm}
+                onCancel={reject}
+                label="Pay now"
+              />
+            </>
+          ) : (
+            <SuccessMessage
+              message={successMessage}
+              onClose={() => window.close()}
             />
-
-            <ConfirmOrCancel
-              disabled={loading}
-              loading={loading}
-              onConfirm={confirm}
-              onCancel={reject}
-              label="Pay now"
-            />
-          </>
-        ) : (
-          <SuccessMessage
-            message={successMessage}
-            onClose={() => window.close()}
-          />
-        )}
+          )}
+        </Container>
       </div>
     </div>
   );

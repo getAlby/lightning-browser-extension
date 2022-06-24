@@ -1,5 +1,4 @@
 import utils from "../../../../common/lib/utils";
-
 import type { Message, LNURLDetails } from "../../../../types";
 
 async function payWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
@@ -8,7 +7,7 @@ async function payWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
   try {
     const response = await utils.openPrompt({
       origin: message.origin,
-      type: "lnurlPay",
+      action: "lnurlPay",
       args: { ...message.args, lnurlDetails },
     });
     return response; // response is an object like: `{ data: ... }`
