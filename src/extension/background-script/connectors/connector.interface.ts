@@ -31,6 +31,12 @@ export type GetBalanceResponse = {
   };
 };
 
+export type GetInvoicesResponse = {
+  data: {
+    invoices: Record<string, string>;
+  };
+};
+
 export type SendPaymentResponse = {
   data: {
     preimage: string;
@@ -90,6 +96,7 @@ export default interface Connector {
   unload(): Promise<void>;
   getInfo(): Promise<GetInfoResponse>;
   getBalance(): Promise<GetBalanceResponse>;
+  getInvoices(): Promise<GetInvoicesResponse>;
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse>;
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse>;
   keysend(args: KeysendArgs): Promise<SendPaymentResponse>;

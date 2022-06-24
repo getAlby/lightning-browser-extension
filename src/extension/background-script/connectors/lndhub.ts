@@ -55,6 +55,21 @@ export default class LndHub implements Connector {
     return Promise.resolve();
   }
 
+  async getInvoices(): Promise<any> {
+    const data = await this.request<{ alias: string }>(
+      "GET",
+      "/getuserinvoices"
+    );
+
+    console.log("INCMOJ G", data);
+
+    return {
+      data: {
+        alias: data.alias,
+      },
+    };
+  }
+
   async getInfo(): Promise<GetInfoResponse> {
     const { alias } = await this.request<{ alias: string }>(
       "GET",

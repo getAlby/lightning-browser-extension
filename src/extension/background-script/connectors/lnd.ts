@@ -223,6 +223,7 @@ class Lnd implements Connector {
     });
   };
 
+  // can this go?
   getTransactions = () => {
     return this.request("GET", "/v1/payments", undefined, {
       transactions: [],
