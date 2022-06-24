@@ -59,8 +59,7 @@ export default class LndHub implements Connector {
     const { alias } = await this.request<{ alias: string }>(
       "GET",
       "/getinfo",
-      undefined,
-      {}
+      undefined
     );
     return {
       data: {
@@ -73,8 +72,7 @@ export default class LndHub implements Connector {
     const { BTC } = await this.request<{ BTC: { AvailableBalance: number } }>(
       "GET",
       "/balance",
-      undefined,
-      {}
+      undefined
     );
 
     return {
@@ -201,8 +199,7 @@ export default class LndHub implements Connector {
     const { paid } = await this.request<{ paid: boolean }>(
       "GET",
       `/checkpayment/${args.paymentHash}`,
-      undefined,
-      {}
+      undefined
     );
     return {
       data: {
@@ -319,8 +316,7 @@ export default class LndHub implements Connector {
   async request<Type>(
     method: Method,
     path: string,
-    args?: Record<string, unknown>,
-    defaultValues?: Record<string, unknown>
+    args?: Record<string, unknown>
   ): Promise<Type> {
     if (!this.access_token) {
       await this.authorize();
@@ -368,7 +364,7 @@ export default class LndHub implements Connector {
             console.error(e);
             if (e instanceof Error) throw new Error(e.message);
           }
-          return this.request(method, path, args, defaultValues);
+          return this.request(method, path, args);
         }
 
         const errorMessage = `${errResponse?.data.message}\n(${e.message})`;
@@ -385,14 +381,10 @@ export default class LndHub implements Connector {
           if (e instanceof Error) throw new Error(e.message);
         }
         this.noRetry = true;
-        return this.request(method, path, args, defaultValues);
+        return this.request(method, path, args);
       } else {
         throw new Error(data.message);
       }
-    }
-
-    if (defaultValues) {
-      data = Object.assign({}, defaultValues, data);
     }
 
     return data;

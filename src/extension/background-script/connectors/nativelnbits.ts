@@ -45,8 +45,7 @@ export default class NativeLnBits extends NativeConnector {
     method: Method,
     path: string,
     apiKey: string,
-    args?: Record<string, unknown>,
-    defaultValues?: Record<string, unknown>
+    args?: Record<string, unknown>
   ): Promise<Type> {
     let body;
     const headers = {
@@ -78,9 +77,6 @@ export default class NativeLnBits extends NativeConnector {
       if (e instanceof Error) throw new Error(e.message);
     }
 
-    if (defaultValues) {
-      data = Object.assign(Object.assign({}, defaultValues), data);
-    }
     return data;
   }
 }
