@@ -12,7 +12,7 @@ import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { AccountsProvider } from "~/app/context/AccountsContext";
 import { useAuth } from "~/app/context/AuthContext";
-import { AuthProvider } from "~/app/context/AuthContext";
+import { AccountProvider } from "~/app/context/AuthContext";
 import RequireAuth from "~/app/router/RequireAuth";
 import type {
   LNURLAuthServiceResponse,
@@ -47,7 +47,7 @@ const routeParams: {
 
 function Prompt() {
   return (
-    <AuthProvider>
+    <AccountProvider>
       <AccountsProvider>
         <HashRouter>
           <Routes>
@@ -150,7 +150,7 @@ function Prompt() {
           </Routes>
         </HashRouter>
       </AccountsProvider>
-    </AuthProvider>
+    </AccountProvider>
   );
 }
 

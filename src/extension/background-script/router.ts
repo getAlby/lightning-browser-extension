@@ -1,5 +1,6 @@
 import * as accounts from "./actions/accounts";
 import * as allowances from "./actions/allowances";
+import * as blocklist from "./actions/blocklist";
 import * as ln from "./actions/ln";
 import lnurl from "./actions/lnurl";
 import * as payments from "./actions/payments";
@@ -49,6 +50,10 @@ const routes = {
   setIcon: setup.setIcon,
   setSetting: settings.set,
   getSettings: settings.get,
+  addBlocklist: blocklist.add,
+  deleteBlocklist: blocklist.deleteBlocklist,
+  getBlocklist: blocklist.get,
+  listBlocklist: blocklist.list,
   lnurl: lnurl,
 };
 

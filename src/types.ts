@@ -8,7 +8,7 @@ export type ConnectorType = keyof typeof connectors;
 export interface Account {
   id: string;
   connector: ConnectorType;
-  config: string | Record<string, unknown>;
+  config: string;
   name: string;
 }
 
@@ -118,8 +118,36 @@ export interface MessageAccountAll extends Omit<MessageDefault, "args"> {
   action: "getAccounts";
 }
 
+export interface MessageBlocklistAdd extends MessageDefault {
+  args: {
+    host: string;
+    name: string;
+    imageURL: string;
+  };
+  action: "addBlocklist";
+}
+
+export interface MessageBlocklistDelete extends MessageDefault {
+  args: {
+    host: string;
+  };
+  action: "deleteBlocklist";
+}
+
+export interface MessageBlocklistGet extends MessageDefault {
+  args: {
+    host: string;
+  };
+  action: "getBlocklist";
+}
+
 export interface MessageAccountLock extends Omit<MessageDefault, "args"> {
   action: "lock";
+}
+
+export interface MessageAccountUnlock extends Omit<MessageDefault, "args"> {
+  args: { password: string | number };
+  action: "unlock";
 }
 
 export interface MessageAccountSelect extends MessageDefault {
@@ -264,5 +292,23 @@ export interface SettingsStorage {
   currency: CURRENCIES;
   exchange: SupportedExchanges;
 }
+
+export interface Blocklist {
+  id?: number;
+  host: string;
+  name: string;
+  imageURL: string;
+  isBlocked: boolean;
+}
+
+export interface Badge {
+  label: string;
+  color: string;
+  textColor: string;
+}
+
+export type Publisher = Allowance & {
+  badge?: Badge;
+};
 
 export type SupportedExchanges = "coindesk" | "yadio";
