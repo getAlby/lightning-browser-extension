@@ -355,9 +355,6 @@ export default class LndHub implements Connector {
         }
 
         if (errResponse?.status === 401) {
-          console.warn(
-            "TOKEN MIGHT BE EXPIERED, LET'S TRY TO GET YOU LOGGED IN"
-          );
           try {
             await this.authorize();
           } catch (e) {
