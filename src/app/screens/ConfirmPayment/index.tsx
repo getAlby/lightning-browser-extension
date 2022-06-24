@@ -110,6 +110,7 @@ function ConfirmPayment(props: Props) {
                   description={invoiceRef.current?.tagsObject.description}
                 />
               </div>
+
               <BudgetControl
                 fiatAmount={fiatAmount}
                 remember={rememberMe}
@@ -119,6 +120,7 @@ function ConfirmPayment(props: Props) {
                 budget={budget}
                 onBudgetChange={(event) => setBudget(event.target.value)}
               />
+
               <ConfirmOrCancel
                 disabled={loading}
                 loading={loading}
