@@ -1,17 +1,19 @@
 import puppeteer from "puppeteer";
 
-const delay = async (time) => {
+export const delay = async (time) => {
   return new Promise(function (resolve) {
     setTimeout(resolve, time);
   });
 };
 
-export const loadExtension = async () => {
-  const extensionPath = process.env.CI
+export const loadExtension = async (production?) => {
+  if(typeof production=="undefined")production=process.env.CI;
+  const extensionPath = production
     ? "./dist/production/chrome"
     : "./dist/development/chrome";
 
   const browser = await puppeteer.launch({
+    timeout:  1 * 60 * 1000,
     headless: false, // https://github.com/puppeteer/puppeteer/blob/main/docs/api.md#working-with-chrome-extensions
     executablePath: process.env.PUPPETEER_EXEC_PATH, // set by docker container - https://github.com/mujo-code/puppeteer-headful
     args: [

@@ -1,10 +1,12 @@
 import api from "~/common/lib/api";
 
 import GitHub from "./GitHub";
+import Instagram from "./Instagram";
 import Medium from "./Medium";
 import Monetization from "./Monetization";
 import Peertube from "./Peertube";
 import Reddit from "./Reddit";
+import Twitch from "./Twitch";
 import Twitter from "./Twitter";
 // import YouTubeChannel from "./YouTubeChannel";
 import VimeoVideo from "./VimeoVideo";
@@ -21,6 +23,8 @@ const enhancements = [
   VimeoVideo,
   Medium,
   GitHub,
+  Twitch,
+  Instagram,
 
   // Monetization must likely always be the last one as this is the fallback option if no specific enhancement matched
   Monetization,
@@ -35,7 +39,7 @@ async function extractLightningData() {
   );
 
   if (match) {
-    match.battery();
+    await match.battery();
   }
 }
 export default extractLightningData;
