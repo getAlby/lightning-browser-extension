@@ -2,6 +2,8 @@ import browser from "webextension-polyfill";
 
 import state from "../../state";
 
+const tabIcons = new Map();
+
 const extensionIcons = {
   active: "alby_icon_green",
   tipping: "alby_icon_blue",
@@ -9,8 +11,6 @@ const extensionIcons = {
 };
 
 const setIconMessageHandler = async (message, sender) => {
-  // console.log("setIconMessageHandler()", message.args.icon, extensionIcons[message.args.icon], extensionIcons );
-
   await setIcon(message.args.icon, sender.tab.id);
 
   return new Promise().then(() => {
@@ -20,24 +20,22 @@ const setIconMessageHandler = async (message, sender) => {
   });
 };
 
-const icons = [];
-
 const setIcon = async (icon, tabId) => {
-  let currentIcon = icons[tabId] ?? null;
+  let currentIcon = tabIcons.get(tabId);
 
-  // Ignore subsequent events
+  // The active icon has priority over tipping
   if (
     currentIcon &&
     currentIcon == extensionIcons.active &&
     icon == extensionIcons.tipping
   ) {
-    // console.log("ignoring new icon", tabId, icons);
     return Promise.resolve();
   }
 
-  icons[tabId] = icon;
+  tabIcons.set(tabId, icon);
 
   const theme = state.getState().settings.theme == "dark" ? "_dark" : "";
+
   return browser.browserAction.setIcon({
     path: {
       16: `assets/icons/${icon}${theme}_16x16.png`,

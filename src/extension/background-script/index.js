@@ -33,8 +33,6 @@ const onTabUpdated = async (tabId, changeInfo, tabInfo) => {
     return;
   }
 
-  // console.log("background-script->index.js->onTabUpdated()");
-
   const url = new URL(tabInfo.url);
 
   const allowance = await db.allowances
@@ -103,10 +101,12 @@ async function init() {
   console.info("Events subscribed");
 
   browser.runtime.onMessage.addListener(debugLogger);
+
   // this is the only handler that may and must return a Promise which resolve with the response to the content script
   browser.runtime.onMessage.addListener(routeCalls);
 
-  browser.tabs.onUpdated.addListener(onTabUpdated); // update Icon when there is an allowance
+  // Update the extension icon
+  browser.tabs.onUpdated.addListener(onTabUpdated);
 
   // Notify the content script that the tab has been updated.
   browser.tabs.onUpdated.addListener(extractLightningData);
