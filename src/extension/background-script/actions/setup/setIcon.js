@@ -5,9 +5,9 @@ import state from "../../state";
 const tabIcons = new Map();
 
 const extensionIcons = {
-  active: "alby_icon_green",
-  tipping: "alby_icon_blue",
   default: "alby_icon_yellow",
+  tipping: "alby_icon_blue",
+  active: "alby_icon_green",
 };
 
 const setIconMessageHandler = async (message, sender) => {
