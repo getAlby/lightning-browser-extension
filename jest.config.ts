@@ -1,10 +1,22 @@
 import { pathsToModuleNameMapper } from "ts-jest";
+
 import { compilerOptions } from "./tsconfig.json";
 
 module.exports = {
   verbose: true,
   transform: {
-    "^.+\\.[t|j]sx?$": "babel-jest",
+    "^.+\\.(t|j)sx?$": [
+      "@swc/jest",
+      {
+        jsc: {
+          transform: {
+            react: {
+              runtime: "automatic",
+            },
+          },
+        },
+      },
+    ],
   },
   transformIgnorePatterns: ["node_modules/(?!(@runcitadel))/"],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
