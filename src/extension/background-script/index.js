@@ -28,7 +28,7 @@ const extractLightningData = (tabId, changeInfo, tab) => {
   }
 };
 
-const onTabUpdated = async (tabId, changeInfo, tabInfo) => {
+const updateIcon = async (tabId, changeInfo, tabInfo) => {
   if (changeInfo.status !== "complete" || !tabInfo.url?.startsWith("http")) {
     return;
   }
@@ -106,7 +106,7 @@ async function init() {
   browser.runtime.onMessage.addListener(routeCalls);
 
   // Update the extension icon
-  browser.tabs.onUpdated.addListener(onTabUpdated);
+  browser.tabs.onUpdated.addListener(updateIcon);
 
   // Notify the content script that the tab has been updated.
   browser.tabs.onUpdated.addListener(extractLightningData);
