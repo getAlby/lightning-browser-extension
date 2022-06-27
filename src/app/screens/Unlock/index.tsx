@@ -1,3 +1,7 @@
+import {
+  HiddenIcon,
+  VisibleIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
 import AlbyLogo from "@components/AlbyLogo";
 import Button from "@components/Button";
 import Input from "@components/form/Input";
@@ -9,6 +13,7 @@ import utils from "~/common/lib/utils";
 
 function Unlock() {
   const [password, setPassword] = useState("");
+  const [passwordView, setPasswordView] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation() as {
@@ -57,10 +62,25 @@ function Unlock() {
         <div className="mb-5">
           <Input
             placeholder="Password"
-            type="password"
+            type={passwordView ? "text" : "password"}
             autoFocus
             value={password}
             onChange={handlePasswordChange}
+            endAdornment={
+              <button
+                type="button"
+                className="flex justify-center items-center w-10 h-8"
+                onClick={() => {
+                  setPasswordView(!passwordView);
+                }}
+              >
+                {passwordView ? (
+                  <HiddenIcon className="h-6 w-6" />
+                ) : (
+                  <VisibleIcon className="h-6 w-6" />
+                )}
+              </button>
+            }
           />
           {error && (
             <p className="mt-1 text-red-500">
