@@ -120,6 +120,7 @@ function Prompt() {
                   <ConfirmPayment
                     paymentRequest={routeParams.args?.paymentRequest as string}
                     origin={routeParams.origin}
+                    metadata={routeParams.args?.metadata as string}
                   />
                 }
               />
