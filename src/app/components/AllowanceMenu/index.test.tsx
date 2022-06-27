@@ -11,7 +11,7 @@ const mock = jest.fn();
 
 const props: Props = {
   allowance: {
-    id: "1",
+    id: 1,
     totalBudget: 2000,
   },
   onEdit: mock,

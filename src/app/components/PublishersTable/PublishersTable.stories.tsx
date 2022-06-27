@@ -2,7 +2,7 @@ import PublishersTable from ".";
 
 const publishers = [
   {
-    id: "1",
+    id: 1,
     name: "Imagine Bitcoin 2140",
     host: "stacker.news",
     title: "Regional Paradigm Technician",
@@ -16,7 +16,7 @@ const publishers = [
     usedBudget: 0,
   },
   {
-    id: "2",
+    id: 2,
     name: "Imagine Bitcoin 2140",
     host: "stacker.news",
     title: "Regional Paradigm Technician",

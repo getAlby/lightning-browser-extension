@@ -10,7 +10,7 @@ import TextField from "../form/TextField";
 
 export type Props = {
   allowance: {
-    id: string;
+    id: number;
     totalBudget: number;
   };
   onEdit?: () => void;
@@ -40,7 +40,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
 
   async function updateAllowance() {
     await utils.call("updateAllowance", {
-      id: parseInt(allowance.id),
+      id: allowance.id,
       totalBudget: parseInt(budget),
     });
     onEdit && onEdit();
@@ -63,7 +63,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               ) {
                 try {
                   await utils.call("deleteAllowance", {
-                    id: parseInt(allowance.id),
+                    id: allowance.id,
                   });
                   onDelete && onDelete();
                 } catch (e) {

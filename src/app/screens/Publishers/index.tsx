@@ -11,7 +11,7 @@ function Publishers() {
   const [data, setData] = useState<Allowance[]>([]);
   const navigate = useNavigate();
 
-  function navigateToPublisher(id: string) {
+  function navigateToPublisher(id: number) {
     navigate(`/publishers/${id}`);
   }
 
