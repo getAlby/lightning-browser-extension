@@ -102,6 +102,7 @@ export const unlock = (password: string) =>
   utils.call<UnlockRes>("unlock", { password });
 export const getBlocklist = (host: string) =>
   utils.call<BlocklistRes>("getBlocklist", { host });
+export const getInvoices = () => utils.call<any>("getInvoices");
 
 export default {
   getAccountInfo,
@@ -119,4 +120,5 @@ export default {
   removeAccount,
   unlock,
   getBlocklist,
+  getInvoices,
 };

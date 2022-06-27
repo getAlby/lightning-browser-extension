@@ -94,9 +94,17 @@ function Home() {
     }
   }
 
+  async function loadInvoices() {
+    const invoices = await api.getInvoices();
+    console.log("rx list invoices", invoices);
+
+    return invoices;
+  }
+
   useEffect(() => {
     loadPayments();
     loadAllowance();
+    loadInvoices();
 
     // Enhancement data is loaded asynchronously (for example because we need to fetch additional data).
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {

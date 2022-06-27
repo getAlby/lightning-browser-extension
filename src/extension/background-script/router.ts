@@ -30,6 +30,7 @@ const routes = {
   lock: accounts.lock,
   unlock: accounts.unlock,
   getInfo: ln.getInfo,
+  getInvoices: ln.invoices,
   sendPayment: ln.sendPayment,
   keysend: ln.keysend,
   checkPayment: ln.checkPayment,
