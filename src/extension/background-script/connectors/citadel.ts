@@ -50,6 +50,11 @@ class CitadelConnector implements Connector {
     };
   }
 
+  // not yet implemenetd
+  getInvoices() {
+    return new Error("has not been implemneted on this connector");
+  }
+
   async getBalance(): Promise<GetBalanceResponse> {
     await this.ensureLogin();
     const balance = parseInt(

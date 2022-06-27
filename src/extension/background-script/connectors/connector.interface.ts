@@ -9,6 +9,25 @@ interface Route {
   total_fees: number;
 }
 
+//this might be lndhub only, please check
+export interface Invoice {
+  r_hash: {
+    type: string;
+    data: ArrayBuffer;
+  };
+  payment_hash: string;
+  payment_request: string;
+  description: string;
+  pay_req: string;
+  timestamp: number;
+  type: string;
+  expire_time: number;
+  amt: number;
+  ispaid: boolean;
+  keysend: boolean;
+  custom_records?: null;
+}
+
 export interface MakeInvoiceArgs {
   amount: string | number;
   memo: string;
@@ -33,7 +52,7 @@ export type GetBalanceResponse = {
 
 export type GetInvoicesResponse = {
   data: {
-    invoices: Record<string, string>;
+    invoices: Invoice[];
   };
 };
 
@@ -96,7 +115,7 @@ export default interface Connector {
   unload(): Promise<void>;
   getInfo(): Promise<GetInfoResponse>;
   getBalance(): Promise<GetBalanceResponse>;
-  getInvoices(): Promise<GetInvoicesResponse>;
+  getInvoices(): Promise<GetInvoicesResponse> | Error;
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse>;
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse>;
   keysend(args: KeysendArgs): Promise<SendPaymentResponse>;

@@ -36,6 +36,7 @@ class Lnd implements Connector {
   init() {
     return Promise.resolve();
   }
+
   unload() {
     return Promise.resolve();
   }
@@ -54,6 +55,11 @@ class Lnd implements Connector {
         },
       };
     });
+  }
+
+  // not yet implemenetd
+  getInvoices() {
+    return new Error("has not been implemneted on this connector");
   }
 
   getBalance(): Promise<GetBalanceResponse> {
@@ -86,6 +92,7 @@ class Lnd implements Connector {
       };
     });
   }
+
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
     //See: https://gist.github.com/dellagustin/c3793308b75b6b0faf134e64db7dc915
     const dest_pubkey_hex = args.pubkey;
@@ -227,6 +234,12 @@ class Lnd implements Connector {
   getTransactions = () => {
     return this.request("GET", "/v1/payments", undefined, {
       transactions: [],
+    });
+  };
+
+  getInvoices = () => {
+    return this.request("GET", "/v1/payments", undefined, {
+      invoices: [],
     });
   };
 

@@ -4,7 +4,7 @@ const getInfo = async (message) => {
   const connector = await state.getState().getConnector();
   const invoices = await connector.getInvoices();
 
-  console.log("invoices", invoices);
+  console.log("Ln action - invoices", invoices);
 
   // return {
 

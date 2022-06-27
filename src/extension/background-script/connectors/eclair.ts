@@ -49,6 +49,11 @@ class Eclair implements Connector {
     });
   }
 
+  // not yet implemenetd
+  getInvoices() {
+    return new Error("has not been implemneted on this connector");
+  }
+
   async getBalance(): Promise<GetBalanceResponse> {
     const channels = await this.request("/channels");
     const total = channels

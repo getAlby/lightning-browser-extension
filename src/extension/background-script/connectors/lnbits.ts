@@ -56,6 +56,11 @@ class LnBits implements Connector {
     });
   }
 
+  // not yet implemenetd
+  getInvoices() {
+    return new Error("has not been implemneted on this connector");
+  }
+
   getBalance(): Promise<GetBalanceResponse> {
     return this.request(
       "GET",

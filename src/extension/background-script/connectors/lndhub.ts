@@ -14,6 +14,8 @@ import Connector, {
   CheckPaymentResponse,
   GetInfoResponse,
   GetBalanceResponse,
+  GetInvoicesResponse,
+  Invoice,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
   SignMessageArgs,
@@ -55,17 +57,14 @@ export default class LndHub implements Connector {
     return Promise.resolve();
   }
 
-  async getInvoices(): Promise<any> {
-    const data = await this.request<{ alias: string }>(
-      "GET",
-      "/getuserinvoices"
-    );
+  async getInvoices(): Promise<GetInvoicesResponse> {
+    const data = await this.request<Invoice[]>("GET", "/getuserinvoices");
 
-    console.log("INCMOJ G", data);
+    console.log("getInvoices", data);
 
     return {
       data: {
-        alias: data.alias,
+        invoices: data,
       },
     };
   }
