@@ -201,6 +201,7 @@ function AccountsScreen() {
         </table>
 
         <Modal
+          ariaHideApp={false}
           closeTimeoutMS={200}
           isOpen={editModalIsOpen}
           onRequestClose={closeEditModal}
@@ -248,6 +249,7 @@ function AccountsScreen() {
         </Modal>
 
         <Modal
+          ariaHideApp={false}
           closeTimeoutMS={200}
           isOpen={exportModalIsOpen}
           onRequestClose={closeExportModal}

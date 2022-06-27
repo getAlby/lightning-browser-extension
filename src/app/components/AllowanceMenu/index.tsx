@@ -77,6 +77,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         </Menu.List>
       </Menu>
       <Modal
+        ariaHideApp={false}
         closeTimeoutMS={200}
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
