@@ -1,33 +1,35 @@
 import browser from "webextension-polyfill";
+import { SetIconMessage } from "~/types";
 
 import state from "../../state";
 
-const tabIcons = new Map();
+const tabIcons = new Map<number, string>();
 
-const extensionIcons = {
-  default: "alby_icon_yellow",
-  tipping: "alby_icon_blue",
-  active: "alby_icon_green",
-};
+enum ExtensionIcon {
+  Default = "alby_icon_yellow",
+  Tipping = "alby_icon_blue",
+  Active = "alby_icon_green",
+}
 
-const setIconMessageHandler = async (message, sender) => {
+const setIconMessageHandler = async (
+  message: SetIconMessage,
+  sender: { tab: { id: number } }
+) => {
   await setIcon(message.args.icon, sender.tab.id);
 
-  return new Promise().then(() => {
-    return {
-      data: true,
-    };
+  return Promise.resolve({
+    data: true,
   });
 };
 
-const setIcon = async (icon, tabId) => {
-  let currentIcon = tabIcons.get(tabId);
+const setIcon = async (icon: string, tabId: number): Promise<void> => {
+  const currentIcon = tabIcons.get(tabId);
 
   // The active icon has priority over tipping
   if (
     currentIcon &&
-    currentIcon == extensionIcons.active &&
-    icon == extensionIcons.tipping
+    currentIcon == ExtensionIcon.Active &&
+    icon == ExtensionIcon.Tipping
   ) {
     return Promise.resolve();
   }
@@ -47,4 +49,4 @@ const setIcon = async (icon, tabId) => {
   });
 };
 
-export { setIcon, setIconMessageHandler, extensionIcons };
+export { setIcon, setIconMessageHandler, ExtensionIcon };

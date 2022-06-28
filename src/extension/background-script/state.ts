@@ -40,6 +40,7 @@ export const DEFAULT_SETTINGS: SettingsStorage = {
   theme: "system",
   currency: CURRENCIES.USD,
   exchange: "coindesk",
+  debug: false,
 };
 
 // these keys get synced from the state to the browser storage

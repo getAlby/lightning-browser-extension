@@ -141,6 +141,13 @@ export interface MessageBlocklistGet extends MessageDefault {
   action: "getBlocklist";
 }
 
+export interface SetIconMessage extends MessageDefault {
+  action: "setIcon";
+  args: {
+    icon: string;
+  };
+}
+
 export interface MessageAccountLock extends Omit<MessageDefault, "args"> {
   action: "lock";
 }
@@ -291,6 +298,7 @@ export interface SettingsStorage {
   theme: string;
   currency: CURRENCIES;
   exchange: SupportedExchanges;
+  debug: boolean;
 }
 
 export interface Blocklist {

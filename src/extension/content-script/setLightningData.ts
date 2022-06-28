@@ -2,7 +2,7 @@ import browser from "webextension-polyfill";
 import utils from "~/common/lib/utils";
 import { Battery } from "~/types";
 
-import { extensionIcons } from "../background-script/actions/setup/setIcon";
+import { ExtensionIcon } from "../background-script/actions/setup/setIcon";
 
 const setLightningData = (data: [Battery]): void => {
   browser.runtime.sendMessage({
@@ -10,6 +10,6 @@ const setLightningData = (data: [Battery]): void => {
     action: "lightningData",
     args: data,
   });
-  utils.call("setIcon", { icon: extensionIcons.tipping });
+  utils.call("setIcon", { icon: ExtensionIcon.Tipping });
 };
 export default setLightningData;
