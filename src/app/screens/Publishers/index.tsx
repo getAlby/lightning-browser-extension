@@ -24,12 +24,7 @@ function Publishers() {
       const allowances: Publisher[] = allowanceResponse.allowances.reduce<
         Publisher[]
       >((acc, allowance) => {
-        if (
-          !allowance?.id ||
-          !allowance.enabled ||
-          allowance.remainingBudget <= 0
-        )
-          return acc;
+        if (!allowance?.id || !allowance.enabled) return acc;
 
         const {
           id,
@@ -55,11 +50,13 @@ function Publishers() {
           percentage,
           totalBudget,
           usedBudget,
-          badge: {
-            label: "ACTIVE",
-            color: "green-bitcoin",
-            textColor: "white",
-          },
+          ...(allowance.remainingBudget > 0 && {
+            badge: {
+              label: "ACTIVE",
+              color: "green-bitcoin",
+              textColor: "white",
+            },
+          }),
         });
 
         return acc;
