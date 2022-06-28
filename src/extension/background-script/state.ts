@@ -1,8 +1,7 @@
 import merge from "lodash/merge";
 import pick from "lodash/pick";
 import browser from "webextension-polyfill";
-import create from "zustand";
-import { subscribeWithSelector } from "zustand/middleware";
+import createState from "zustand";
 import { CURRENCIES } from "~/common/constants";
 import { decryptData } from "~/common/lib/crypto";
 import i18n from "~/i18n/i18nConfig";
@@ -55,66 +54,64 @@ const browserStorageKeys = Object.keys(browserStorageDefaults) as Array<
   keyof BrowserStorage
 >;
 
-const state = create<State>(
-  subscribeWithSelector((set, get) => ({
-    connector: null,
-    account: null,
-    settings: DEFAULT_SETTINGS,
-    accounts: {},
-    currentAccountId: null,
-    password: null,
-    getAccount: () => {
-      const currentAccountId = get().currentAccountId as string;
-      let account = null;
-      if (currentAccountId) {
-        account = get().accounts[currentAccountId];
-      }
-      return account;
-    },
-    getConnector: async () => {
-      if (get().connector) {
-        return get().connector as Connector;
-      }
-      const currentAccountId = get().currentAccountId as string;
-      const account = get().accounts[currentAccountId];
+const state = createState<State>((set, get) => ({
+  connector: null,
+  account: null,
+  settings: DEFAULT_SETTINGS,
+  accounts: {},
+  currentAccountId: null,
+  password: null,
+  getAccount: () => {
+    const currentAccountId = get().currentAccountId as string;
+    let account = null;
+    if (currentAccountId) {
+      account = get().accounts[currentAccountId];
+    }
+    return account;
+  },
+  getConnector: async () => {
+    if (get().connector) {
+      return get().connector as Connector;
+    }
+    const currentAccountId = get().currentAccountId as string;
+    const account = get().accounts[currentAccountId];
 
-      const password = get().password as string;
-      const config = decryptData(account.config as string, password);
+    const password = get().password as string;
+    const config = decryptData(account.config as string, password);
 
-      const connector = new connectors[account.connector](config);
-      await connector.init();
+    const connector = new connectors[account.connector](config);
+    await connector.init();
 
-      set({ connector: connector });
+    set({ connector: connector });
 
-      return connector;
-    },
-    lock: async () => {
-      const connector = get().connector;
-      if (connector) {
-        connector.unload();
-      }
-      set({ password: null, connector: null, account: null });
-    },
-    isUnlocked: () => {
-      return get().password !== null;
-    },
-    init: () => {
-      return browser.storage.sync.get(browserStorageKeys).then((result) => {
-        // Deep merge to ensure that nested defaults are also merged instead of overwritten.
-        const data = merge(browserStorageDefaults, result as BrowserStorage);
-        set(data);
-      });
-    },
-    saveToStorage: () => {
-      const current = get();
-      const data = {
-        ...browserStorageDefaults,
-        ...pick(current, browserStorageKeys),
-      };
-      return browser.storage.sync.set(data);
-    },
-  }))
-);
+    return connector;
+  },
+  lock: async () => {
+    const connector = get().connector;
+    if (connector) {
+      connector.unload();
+    }
+    set({ password: null, connector: null, account: null });
+  },
+  isUnlocked: () => {
+    return get().password !== null;
+  },
+  init: () => {
+    return browser.storage.sync.get(browserStorageKeys).then((result) => {
+      // Deep merge to ensure that nested defaults are also merged instead of overwritten.
+      const data = merge(browserStorageDefaults, result as BrowserStorage);
+      set(data);
+    });
+  },
+  saveToStorage: () => {
+    const current = get();
+    const data = {
+      ...browserStorageDefaults,
+      ...pick(current, browserStorageKeys),
+    };
+    return browser.storage.sync.set(data);
+  },
+}));
 
 browserStorageKeys.forEach((key) => {
   console.info(`Adding state subscription for ${key}`);
