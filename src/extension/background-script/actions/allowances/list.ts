@@ -1,15 +1,15 @@
-import db from "../../db";
+import db from "~/extension/background-script/db";
+import type { MessageAllowanceList } from "~/types";
 
-const list = async (message, sender) => {
-  // TODO add filter and ordering?
-  let allowances = await db.allowances
+const list = async (message: MessageAllowanceList) => {
+  const dbAllowances = await db.allowances
     .toCollection()
     .reverse()
     .sortBy("lastPaymentAt");
 
-  const allowancePromises = allowances.map(async (allowance) => {
-    allowance.usedBudget =
-      parseInt(allowance.totalBudget) - parseInt(allowance.remainingBudget);
+  const allowancePromises = dbAllowances.map(async (allowance) => {
+    allowance.usedBudget = allowance.totalBudget - allowance.remainingBudget;
+
     allowance.percentage = (
       (allowance.usedBudget / allowance.totalBudget) *
       100
@@ -19,19 +19,22 @@ const list = async (message, sender) => {
       .where("host")
       .equalsIgnoreCase(allowance.host)
       .count();
+
     const payments = await db.payments
       .where("host")
       .equalsIgnoreCase(allowance.host)
       .reverse()
       .toArray();
+
     allowance.paymentsAmount = payments
-      .map((p) => parseInt(p.totalAmount))
-      .reduce((p, c) => p + c, 0);
+      .map((payment) => payment.totalAmount)
+      .reduce((previous, current) => previous + current, 0);
 
     return allowance;
   });
 
-  allowances = await Promise.all(allowancePromises);
+  const allowances = await Promise.all(allowancePromises);
+
   return {
     data: {
       allowances,

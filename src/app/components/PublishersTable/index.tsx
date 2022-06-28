@@ -1,24 +1,8 @@
 import { CaretRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { Publisher } from "~/types";
 
 import Badge from "../Badge";
 import Progressbar from "../Progressbar";
-
-type Publisher = {
-  id: number;
-  imageURL?: string;
-  host: string;
-  name: string;
-  badge?: {
-    label: string;
-    color: string;
-    textColor: string;
-  };
-  paymentsCount: number;
-  paymentsAmount: number;
-  totalBudget: number;
-  usedBudget: number;
-  percentage: string;
-};
 
 type Props = {
   publishers: Publisher[];

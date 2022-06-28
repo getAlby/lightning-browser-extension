@@ -1,48 +1,12 @@
 import Dexie from "dexie";
+import "fake-indexeddb/auto";
 import browser from "webextension-polyfill";
-
-interface IAllowance {
-  id?: number;
-  host: string;
-  name: string;
-  imageURL: string;
-  tag: string;
-  enabled: boolean;
-  totalBudget: number;
-  remainingBudget: number;
-  lastPaymentAt: string;
-  lnurlAuth: string;
-  createdAt: string;
-}
-
-interface IPayment {
-  id?: number;
-  allowanceId: string;
-  host: string;
-  location: string;
-  name: string;
-  description: string;
-  totalAmount: number;
-  totalFees: number;
-  preimage: string;
-  paymentRequest: string;
-  paymentHash: string;
-  destination: string;
-  createdAt: string;
-}
-
-interface IBlocklist {
-  id?: number;
-  host: string;
-  name: string;
-  imageURL: string;
-  isBlocked: boolean;
-}
+import type { Allowance, Payment, Blocklist } from "~/types";
 
 class DB extends Dexie {
-  allowances: Dexie.Table<IAllowance, number>;
-  payments: Dexie.Table<IPayment, number>;
-  blocklist: Dexie.Table<IBlocklist, number>;
+  allowances: Dexie.Table<Allowance, number>;
+  payments: Dexie.Table<Payment, number>;
+  blocklist: Dexie.Table<Blocklist, number>;
 
   constructor() {
     super("LBE");

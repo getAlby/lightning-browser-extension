@@ -3,16 +3,14 @@ import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useState } from "react";
 import Modal from "react-modal";
 import utils from "~/common/lib/utils";
+import type { Allowance } from "~/types";
 
 import Button from "../Button";
 import Menu from "../Menu";
 import TextField from "../form/TextField";
 
 export type Props = {
-  allowance: {
-    id: number;
-    totalBudget: number;
-  };
+  allowance: Pick<Allowance, "id" | "totalBudget">;
   onEdit?: () => void;
   onDelete?: () => void;
 };
