@@ -1,41 +1,62 @@
+import { Battery } from "~/types";
+
 import getOriginData from "../originData";
 import setLightningData from "../setLightningData";
 
 const urlMatcher =
-  /^https:\/\/stackoverflow\.com\/users\/(\d+)\/(\w+)(\?tab=(\w+))?.*/;
+  /^https:\/\/stackoverflow\.com\/(users|questions)\/(\d+)\/(\w+).*/;
 
-const battery = (): void => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const tab = urlParams.get("tab");
+const battery = async (): Promise<void> => {
+  const urlParts = document.location.pathname.split("/");
+  const route = urlParts[1];
+  const userOrQuestionId = urlParts[2];
+  let lightningData = null;
 
-  if (tab === "profile") {
-    handleProfilePage();
+  if (route === "users") {
+    lightningData = await handleProfilePage(userOrQuestionId);
   }
+
+  if (lightningData) setLightningData([lightningData]);
 };
 
-function handleProfilePage() {
-  const aboutElement = document.querySelector<HTMLElement>(
-    ".js-about-me-content"
-  );
+function findLightningAddressInText(text: string) {
+  const match = text.match(/(⚡:?|lightning:|lnurl:)\s?(\S+@[\w-.]+)/i);
+  if (match) return match[2];
+}
 
-  const text = aboutElement?.innerText as string;
-  const match = text.match(/(⚡:?|lightning:|lnurl:)\s?(\S+@\S+)/i);
+function htmlToText(html: string) {
+  const temp = document.createElement("div");
+  temp.innerHTML = html;
+  return temp.textContent;
+}
 
-  if (match) {
-    setLightningData([
-      {
-        method: "lnurl",
-        address: match[2],
-        ...getOriginData(),
-        description: aboutElement?.innerText ?? "",
-        icon:
-          document.querySelector<HTMLImageElement>(
-            `.js-usermini-avatar-container img`
-          )?.src ?? "",
-        name: document.title,
-      },
-    ]);
+async function handleProfilePage(userId: string): Promise<Battery | null> {
+  const userProfile = await fetch(
+    // The filter can be generated here: https://api.stackexchange.com/docs/users-by-ids
+    `https://api.stackexchange.com/2.2/users/${userId}?site=stackoverflow&filter=!-B3yqvQ2YYGK1t-Hg_ydU`
+  ).then((res) => res.json());
+  const userData = userProfile.items[0];
+
+  if (!userData) {
+    return null;
   }
+
+  let address = null;
+
+  if (userData.about_me) {
+    address = findLightningAddressInText(userData.about_me);
+  }
+
+  if (!address) return null;
+
+  return {
+    method: "lnurl",
+    address: address,
+    ...getOriginData(),
+    description: htmlToText(userData.about_me) ?? "",
+    icon: userData.profile_image ?? "",
+    name: userData.display_name,
+  };
 }
 
 const StackOverflow = {
