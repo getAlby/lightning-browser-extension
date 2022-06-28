@@ -6,7 +6,7 @@ import Progressbar from "../Progressbar";
 
 type Props = {
   publishers: Publisher[];
-  navigateToPublisher: (id: string | number) => void;
+  navigateToPublisher: (id: number) => void;
 };
 
 const DEFAULT_IMAGE =

@@ -308,7 +308,7 @@ export interface Allowance {
   createdAt: string;
   enabled: boolean;
   host: string;
-  id?: number | string;
+  id: number;
   imageURL: string;
   lastPaymentAt: string;
   lnurlAuth: string;
@@ -360,7 +360,7 @@ export interface Publisher
     | "totalBudget"
     | "usedBudget"
   > {
-  id: number | string;
+  id: number;
   title?: string;
   badge?: {
     label: string;

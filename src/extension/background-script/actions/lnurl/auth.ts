@@ -95,12 +95,9 @@ async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
         .where("host")
         .equalsIgnoreCase(message.origin.host)
         .first();
+
       if (allowance?.id) {
-        const id =
-          typeof allowance.id === "string"
-            ? parseInt(allowance.id)
-            : allowance.id;
-        await db.allowances.update(id, {
+        await db.allowances.update(allowance.id, {
           lnurlAuth: true,
         });
       }

@@ -4,7 +4,7 @@ import PublishersTable from ".";
 
 const publishers: Publisher[] = [
   {
-    id: "1",
+    id: 1,
     name: "Imagine Bitcoin 2140",
     host: "stacker.news",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },
@@ -17,7 +17,7 @@ const publishers: Publisher[] = [
     payments: [],
   },
   {
-    id: "2",
+    id: 2,
     name: "Imagine Bitcoin 2140",
     host: "stacker.news",
     badge: { label: "ACTIVE", color: "green-bitcoin", textColor: "white" },

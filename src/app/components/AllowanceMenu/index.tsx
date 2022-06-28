@@ -38,7 +38,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
 
   async function updateAllowance() {
     await utils.call("updateAllowance", {
-      id: typeof allowance.id === "number" ? `$(allowance.id)` : allowance.id,
+      id: allowance.id,
       totalBudget: parseInt(budget),
     });
     onEdit && onEdit();
@@ -61,10 +61,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               ) {
                 try {
                   await utils.call("deleteAllowance", {
-                    id:
-                      typeof allowance.id === "number"
-                        ? `$(allowance.id)`
-                        : allowance.id,
+                    id: allowance.id,
                   });
                   onDelete && onDelete();
                 } catch (e) {
@@ -78,6 +75,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         </Menu.List>
       </Menu>
       <Modal
+        ariaHideApp={false}
         closeTimeoutMS={200}
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

@@ -11,7 +11,7 @@ function Publishers() {
   const [publishers, setPublishers] = useState<Publisher[]>([]);
   const navigate = useNavigate();
 
-  function navigateToPublisher(id: string | number) {
+  function navigateToPublisher(id: number) {
     navigate(`/publishers/${id}`);
   }
 
