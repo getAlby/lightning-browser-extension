@@ -1,4 +1,4 @@
-import browser from "webextension-polyfill";
+import browser, { Runtime } from "webextension-polyfill";
 import { SetIconMessage } from "~/types";
 
 import state from "../../state";
@@ -13,8 +13,15 @@ enum ExtensionIcon {
 
 const setIconMessageHandler = async (
   message: SetIconMessage,
-  sender: { tab: { id: number } }
-) => {
+  sender: Runtime.MessageSender
+): Promise<{ data: boolean }> => {
+  // Under some circumstances a Tab may not be assigned an ID
+  if (!sender.tab || !sender.tab.id) {
+    return Promise.resolve({
+      data: false,
+    });
+  }
+
   await setIcon(message.args.icon, sender.tab.id);
 
   return Promise.resolve({
