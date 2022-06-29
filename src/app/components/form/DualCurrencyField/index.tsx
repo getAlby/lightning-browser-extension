@@ -6,6 +6,7 @@ export type Props = {
   endAdornment?: React.ReactNode;
   fiatValue: string | number;
   label: string;
+  hint?: string;
 };
 
 export default function DualCurrencyField({
@@ -27,6 +28,7 @@ export default function DualCurrencyField({
   max,
   suffix,
   endAdornment,
+  hint,
 }: React.InputHTMLAttributes<HTMLInputElement> & Props) {
   const inputEl = useRef<HTMLInputElement>(null);
   const outerStyles =
@@ -70,7 +72,9 @@ export default function DualCurrencyField({
 
       <div
         className={classNames(
-          "flex items-stretch overflow-hidden field mt-1 mb-6 pb-6 relative",
+          `flex items-stretch overflow-hidden field mt-1 ${
+            !hint && "mb-6"
+          } pb-6 relative`,
           "focus-within:ring-orange-bitcoin focus-within:border-orange-bitcoin focus-within:dark:border-orange-bitcoin focus-within:ring-1",
           outerStyles
         )}
@@ -98,6 +102,11 @@ export default function DualCurrencyField({
           </span>
         )}
       </div>
+      {hint && (
+        <p className="my-1 text-xs text-gray-700 dark:text-neutral-400">
+          {hint}
+        </p>
+      )}
     </div>
   );
 }

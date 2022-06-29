@@ -7,6 +7,15 @@ import AllowanceMenu from "./index";
 
 jest.mock("~/common/lib/utils");
 
+jest.mock("~/common/lib/api", () => {
+  return {
+    getSettings: jest.fn(() => ({
+      currency: "USD",
+      exchange: "coindesk",
+    })),
+  };
+});
+
 const mock = jest.fn();
 
 const props: Props = {
