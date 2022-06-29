@@ -147,7 +147,7 @@ export default function SetPassword() {
           </div>
         </div>
       </div>
-      <div className="mt-8 flex justify-center">
+      <div className="my-8 flex justify-center">
         <Button
           label={tCommon("actions.next")}
           type="submit"
