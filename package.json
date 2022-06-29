@@ -13,12 +13,6 @@
     "node": ">= 14",
     "yarn": ">= 1.0.0"
   },
-  "browserslist": [
-    "last 5 Chrome versions",
-    "last 5 Edge versions",
-    "last 5 Opera versions",
-    "last 5 Firefox versions"
-  ],
   "scripts": {
     "dev:chrome": "cross-env NODE_ENV=development TARGET_BROWSER=chrome webpack --watch",
     "dev:firefox": "cross-env NODE_ENV=development TARGET_BROWSER=firefox webpack --watch",
