@@ -1,13 +1,20 @@
 import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
-import { CURRENCIES } from "~/common/constants";
-import api from "~/common/lib/api";
 
 import type { Props } from "./index";
 import AllowanceMenu from "./index";
 
 jest.mock("~/common/lib/utils");
+
+jest.mock("~/common/lib/api", () => {
+  return {
+    getSettings: jest.fn(() => ({
+      currency: "USD",
+      exchange: "coindesk",
+    })),
+  };
+});
 
 const mock = jest.fn();
 
@@ -21,7 +28,6 @@ const props: Props = {
 
 describe("AllowanceMenu", () => {
   test("set new budget", async () => {
-    await api.setSetting({ currency: CURRENCIES.USD });
     const user = userEvent.setup();
 
     render(
