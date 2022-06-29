@@ -2,6 +2,7 @@ import Button from "@components/Button";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import SatButtons from "@components/SatButtons";
+import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
 import axios from "axios";
 import React, { useState, useEffect, MouseEvent } from "react";
@@ -20,10 +21,8 @@ import {
   LNURLPaymentInfo,
   LNURLPaymentSuccessAction,
   LNURLPayServiceResponse,
-  Payment,
+  PaymentResponse,
 } from "~/types";
-
-import DualCurrencyField from "../components/form/DualCurrencyField";
 
 type Origin = {
   name: string;
@@ -67,7 +66,7 @@ function LNURLPay(props: Props) {
   const [successAction, setSuccessAction] = useState<
     LNURLPaymentSuccessAction | undefined
   >();
-  const [payment, setPayment] = useState<Payment | undefined>();
+  const [payment, setPayment] = useState<PaymentResponse | undefined>();
 
   useEffect(() => {
     (async () => {
@@ -176,13 +175,14 @@ function LNURLPay(props: Props) {
         amount: parseInt(valueSat) * 1000,
         payerdata,
       });
+
       if (!isValidInvoice) {
         toast.warn("Payment aborted: Invalid invoice.");
         return;
       }
 
       // LN WALLET pays the invoice, no additional user confirmation is required at this point
-      const paymentResponse = await utils.call(
+      const paymentResponse: PaymentResponse = await utils.call(
         "sendPayment",
         { paymentRequest },
         {
@@ -192,7 +192,8 @@ function LNURLPay(props: Props) {
           },
         }
       );
-      setPayment(paymentResponse as Payment); // TODO: proper type definitions for utils.call()
+
+      setPayment(paymentResponse);
 
       // Once payment is fulfilled LN WALLET executes a non-null successAction
       // LN WALLET should also store successAction data on the transaction record

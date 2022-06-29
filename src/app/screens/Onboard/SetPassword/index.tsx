@@ -1,3 +1,7 @@
+import {
+  HiddenIcon,
+  VisibleIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import TextField from "@components/form/TextField";
 import React, { useState } from "react";
@@ -19,6 +23,9 @@ export default function SetPassword() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState(initialErrors);
+  const [passwordView, setPasswordView] = useState(false);
+  const [passwordConfirmationView, setPasswordConfirmationView] =
+    useState(false);
   const { t } = useTranslation("translation", {
     keyPrefix: "welcome.set_password",
   });
@@ -80,10 +87,23 @@ export default function SetPassword() {
               <TextField
                 id="password"
                 label={t("choose_password_label")}
-                type="password"
+                type={passwordView ? "text" : "password"}
                 autoFocus
                 required
                 onChange={handleChange}
+                endAdornment={
+                  <button
+                    type="button"
+                    className="flex justify-center items-center w-10 h-8"
+                    onClick={() => setPasswordView(!passwordView)}
+                  >
+                    {passwordView ? (
+                      <HiddenIcon className="h-6 w-6" />
+                    ) : (
+                      <VisibleIcon className="h-6 w-6" />
+                    )}
+                  </button>
+                }
               />
               {errors.password && (
                 <div className="mt-1 text-red-500">{errors.password}</div>
@@ -93,10 +113,25 @@ export default function SetPassword() {
               <TextField
                 id="passwordConfirmation"
                 label={t("confirm_password_label")}
-                type="password"
+                type={passwordConfirmationView ? "text" : "password"}
                 required
                 onChange={handleChange}
                 onBlur={validate}
+                endAdornment={
+                  <button
+                    type="button"
+                    className="flex justify-center items-center w-10 h-8"
+                    onClick={() =>
+                      setPasswordConfirmationView(!passwordConfirmationView)
+                    }
+                  >
+                    {passwordConfirmationView ? (
+                      <HiddenIcon className="h-6 w-6" />
+                    ) : (
+                      <VisibleIcon className="h-6 w-6" />
+                    )}
+                  </button>
+                }
               />
               {errors.passwordConfirmation && (
                 <div className="mt-1 text-red-500">
@@ -112,7 +147,7 @@ export default function SetPassword() {
           </div>
         </div>
       </div>
-      <div className="mt-8 flex justify-center">
+      <div className="my-8 flex justify-center">
         <Button
           label={tCommon("actions.next")}
           type="submit"

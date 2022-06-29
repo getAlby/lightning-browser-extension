@@ -154,6 +154,9 @@ export interface MessageAccountSelect extends MessageDefault {
   args: { id: Account["id"] };
   action: "selectAccount";
 }
+export interface MessageAllowanceList extends Omit<MessageDefault, "args"> {
+  action: "listAllowances";
+}
 
 interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
@@ -257,31 +260,68 @@ export type Transaction = {
   totalAmountFiat: string;
 };
 
-export type Payment = {
+export interface Payment {
+  id?: number;
+  allowanceId: string;
+  host: string;
+  location: string;
+  name: string;
+  description: string;
+  totalAmount: number;
+  totalFees: number;
   preimage: string;
+  paymentRequest: string;
   paymentHash: string;
+  destination: string;
+  createdAt: string;
+}
+
+export interface PaymentResponse
+  extends Pick<Payment, "destination" | "preimage" | "paymentHash"> {
   route: {
-    total_amt: number;
-    total_fees: number;
+    total_time_lock: number;
+    total_fees: string;
+    total_amt: string;
+    hops: {
+      chan_id: string;
+      chan_capacity: string;
+      amt_to_forward: string;
+      fee: string;
+      expiry: number;
+      amt_to_forward_msat: string;
+      fee_msat: string;
+      pub_key: string;
+      tlv_payload: true;
+      mpp_record: {
+        payment_addr: string;
+        total_amt_msat: string;
+      };
+      amp_record: null;
+      custom_records: unknown;
+    };
+    total_fees_msat: string;
+    total_amt_msat: string;
   };
-};
+}
 
 export interface Allowance {
+  createdAt: string;
   enabled: boolean;
   host: string;
-  id: string;
+  id: number;
   imageURL: string;
-  lastPaymendAt: number;
+  lastPaymentAt: string;
+  lnurlAuth: string;
   name: string;
   payments: Transaction[];
-  paymentsCount: number;
   paymentsAmount: number;
+  paymentsCount: number;
   percentage: string;
   remainingBudget: number;
+  tag: string;
   totalBudget: number;
   usedBudget: number;
 }
-
 export interface SettingsStorage {
   websiteEnhancements: boolean;
   legacyLnurlAuth: boolean;
@@ -307,8 +347,26 @@ export interface Badge {
   textColor: string;
 }
 
-export type Publisher = Allowance & {
-  badge?: Badge;
-};
+export interface Publisher
+  extends Pick<
+    Allowance,
+    | "host"
+    | "imageURL"
+    | "name"
+    | "payments"
+    | "paymentsAmount"
+    | "paymentsCount"
+    | "percentage"
+    | "totalBudget"
+    | "usedBudget"
+  > {
+  id: number;
+  title?: string;
+  badge?: {
+    label: string;
+    color: string;
+    textColor: string;
+  };
+}
 
 export type SupportedExchanges = "coindesk" | "yadio";

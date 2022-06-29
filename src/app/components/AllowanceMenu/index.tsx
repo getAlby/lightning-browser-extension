@@ -4,16 +4,14 @@ import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
+import type { Allowance } from "~/types";
 
 import Button from "../Button";
 import Menu from "../Menu";
 import DualCurrencyField from "../form/DualCurrencyField/index";
 
 export type Props = {
-  allowance: {
-    id: string;
-    totalBudget: number;
-  };
+  allowance: Pick<Allowance, "id" | "totalBudget">;
   onEdit?: () => void;
   onDelete?: () => void;
 };
@@ -51,7 +49,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
 
   async function updateAllowance() {
     await utils.call("updateAllowance", {
-      id: parseInt(allowance.id),
+      id: allowance.id,
       totalBudget: parseInt(budget),
     });
     onEdit && onEdit();
@@ -74,7 +72,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               ) {
                 try {
                   await utils.call("deleteAllowance", {
-                    id: parseInt(allowance.id),
+                    id: allowance.id,
                   });
                   onDelete && onDelete();
                 } catch (e) {
@@ -88,6 +86,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         </Menu.List>
       </Menu>
       <Modal
+        ariaHideApp={false}
         closeTimeoutMS={200}
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
