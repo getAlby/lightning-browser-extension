@@ -128,7 +128,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             <div className="w-60">
               <DualCurrencyField
                 id="budget"
-                label="Set a new Budget"
+                label="New budget"
                 autoFocus
                 placeholder="sats"
                 value={budget}
