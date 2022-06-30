@@ -1,5 +1,5 @@
 import browser, { Runtime } from "webextension-polyfill";
-import { SetIconMessage } from "~/types";
+import { MessageSetIcon } from "~/types";
 
 import state from "../../state";
 
@@ -12,11 +12,11 @@ enum ExtensionIcon {
 }
 
 const setIconMessageHandler = async (
-  message: SetIconMessage,
+  message: MessageSetIcon,
   sender: Runtime.MessageSender
 ): Promise<{ data: boolean }> => {
   // Under some circumstances a Tab may not be assigned an ID
-  if (!sender.tab || !sender.tab.id) {
+  if (!sender.tab?.id) {
     return Promise.resolve({
       data: false,
     });
@@ -35,8 +35,8 @@ const setIcon = async (icon: string, tabId: number): Promise<void> => {
   // The active icon has priority over tipping
   if (
     currentIcon &&
-    currentIcon == ExtensionIcon.Active &&
-    icon == ExtensionIcon.Tipping
+    currentIcon === ExtensionIcon.Active &&
+    icon === ExtensionIcon.Tipping
   ) {
     return Promise.resolve();
   }

@@ -70,13 +70,15 @@ export interface Battery extends OriginData {
   icon: string;
 }
 
-// deprecated message type,please stop using this
+/**
+ * @deprecated Use MessageDefault instead
+ */
 export interface Message {
+  action?: string;
   application?: string;
   args: Record<string, unknown>;
   origin: OriginData | OriginDataInternal;
   prompt?: boolean;
-  action?: string;
 }
 
 // new message  type, please use this
@@ -141,7 +143,7 @@ export interface MessageBlocklistGet extends MessageDefault {
   action: "getBlocklist";
 }
 
-export interface SetIconMessage extends MessageDefault {
+export interface MessageSetIcon extends MessageDefault {
   action: "setIcon";
   args: {
     icon: string;
