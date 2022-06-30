@@ -81,7 +81,7 @@ export default function Input({
         </span>
       )}
       {endAdornment && (
-        <span className="flex items-center bg-white dark:bg-black">
+        <span className="flex items-center bg-white dark:bg-black dark:text-neutral-400">
           {endAdornment}
         </span>
       )}

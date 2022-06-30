@@ -46,8 +46,7 @@ class LnBits implements Connector {
       "GET",
       "/api/v1/wallet",
       this.config.adminkey,
-      undefined,
-      {}
+      undefined
     ).then((data) => {
       return {
         data: {
@@ -62,8 +61,7 @@ class LnBits implements Connector {
       "GET",
       "/api/v1/wallet",
       this.config.adminkey,
-      undefined,
-      {}
+      undefined
     ).then((data) => {
       // TODO better amount handling
       const balanceInSats = data.balance / 1000;
@@ -189,8 +187,7 @@ class LnBits implements Connector {
     method: string,
     path: string,
     apiKey: string,
-    args?: Record<string, unknown>,
-    defaultValues?: Record<string, unknown>
+    args?: Record<string, unknown>
   ) {
     let body = null;
     let query = "";
@@ -214,11 +211,7 @@ class LnBits implements Connector {
       console.error("errBody", errBody);
       throw new Error(errBody.detail);
     }
-    let data = await res.json();
-    if (defaultValues) {
-      data = Object.assign(Object.assign({}, defaultValues), data);
-    }
-    return data;
+    return await res.json();
   }
 }
 

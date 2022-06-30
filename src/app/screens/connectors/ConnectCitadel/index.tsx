@@ -1,3 +1,7 @@
+import {
+  HiddenIcon,
+  VisibleIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import { useState } from "react";
@@ -7,6 +11,7 @@ import utils from "~/common/lib/utils";
 
 export default function ConnectCitadel() {
   const navigate = useNavigate();
+  const [passwordView, setPasswordView] = useState(false);
   const [formData, setFormData] = useState({
     password: "",
     url: "http://citadel.local",
@@ -88,9 +93,22 @@ export default function ConnectCitadel() {
         <TextField
           label="Password"
           id="password"
-          type="password"
+          type={passwordView ? "text" : "password"}
           required
           onChange={handleChange}
+          endAdornment={
+            <button
+              type="button"
+              className="flex justify-center items-center w-10 h-8"
+              onClick={() => setPasswordView(!passwordView)}
+            >
+              {passwordView ? (
+                <HiddenIcon className="h-6 w-6" />
+              ) : (
+                <VisibleIcon className="h-6 w-6" />
+              )}
+            </button>
+          }
         />
       </div>
       <TextField

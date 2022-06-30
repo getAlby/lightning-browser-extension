@@ -8,10 +8,10 @@ import { Allowance, Publisher } from "~/types";
 import websites from "./websites.json";
 
 function Publishers() {
-  const [data, setData] = useState<Allowance[]>([]);
+  const [publishers, setPublishers] = useState<Publisher[]>([]);
   const navigate = useNavigate();
 
-  function navigateToPublisher(id: string) {
+  function navigateToPublisher(id: number) {
     navigate(`/publishers/${id}`);
   }
 
@@ -20,21 +20,49 @@ function Publishers() {
       const allowanceResponse = await utils.call<{
         allowances: Allowance[];
       }>("listAllowances");
-      const allowances = allowanceResponse.allowances.map((allowance) => {
-        let retobj: Publisher = allowance;
-        if (allowance.enabled && allowance.remainingBudget > 0) {
-          retobj = {
-            ...allowance,
+
+      const allowances: Publisher[] = allowanceResponse.allowances.reduce<
+        Publisher[]
+      >((acc, allowance) => {
+        if (!allowance?.id || !allowance.enabled) return acc;
+
+        const {
+          id,
+          host,
+          imageURL,
+          name,
+          payments,
+          paymentsAmount,
+          paymentsCount,
+          percentage,
+          totalBudget,
+          usedBudget,
+        } = allowance;
+
+        acc.push({
+          id,
+          host,
+          imageURL,
+          name,
+          payments,
+          paymentsAmount,
+          paymentsCount,
+          percentage,
+          totalBudget,
+          usedBudget,
+          ...(allowance.remainingBudget > 0 && {
             badge: {
               label: "ACTIVE",
               color: "green-bitcoin",
               textColor: "white",
             },
-          };
-        }
-        return retobj;
-      });
-      setData(allowances);
+          }),
+        });
+
+        return acc;
+      }, []);
+
+      setPublishers(allowances);
     } catch (e) {
       console.error(e);
     }
@@ -52,9 +80,9 @@ function Publishers() {
       <p className="mb-6 text-gray-500 dark:text-neutral-500">
         Websites where you have used Alby before
       </p>
-      {data.length > 0 ? (
+      {publishers.length > 0 ? (
         <PublishersTable
-          publishers={data}
+          publishers={publishers}
           navigateToPublisher={navigateToPublisher}
         />
       ) : (

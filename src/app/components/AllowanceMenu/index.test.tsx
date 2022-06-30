@@ -1,4 +1,4 @@
-import { act, render, screen } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 
@@ -7,11 +7,20 @@ import AllowanceMenu from "./index";
 
 jest.mock("~/common/lib/utils");
 
+jest.mock("~/common/lib/api", () => {
+  return {
+    getSettings: jest.fn(() => ({
+      currency: "USD",
+      exchange: "coindesk",
+    })),
+  };
+});
+
 const mock = jest.fn();
 
 const props: Props = {
   allowance: {
-    id: "1",
+    id: 1,
     totalBudget: 2000,
   },
   onEdit: mock,
@@ -56,6 +65,6 @@ describe("AllowanceMenu", () => {
       user.click(saveButton);
     });
 
-    expect(mock).toHaveBeenCalled();
+    await waitFor(() => expect(mock).toHaveBeenCalled());
   });
 });

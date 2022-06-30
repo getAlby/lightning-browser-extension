@@ -22,7 +22,7 @@ function ConfirmOrCancel({
       <div className="mb-4">
         <Button
           onClick={onConfirm}
-          label="Confirm"
+          label={label}
           fullWidth
           primary
           disabled={disabled}

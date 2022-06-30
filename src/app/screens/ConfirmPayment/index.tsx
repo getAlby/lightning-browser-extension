@@ -103,6 +103,9 @@ function ConfirmPayment(props: Props) {
         <Container maxWidth="sm">
           {!successMessage ? (
             <>
+              <h1 className="dark:text-white font-bold mb-4">
+                Approve payment
+              </h1>
               <div className="mb-6">
                 <PaymentSummary
                   amount={invoiceRef.current?.satoshis}
@@ -125,6 +128,7 @@ function ConfirmPayment(props: Props) {
                 loading={loading}
                 onConfirm={confirm}
                 onCancel={reject}
+                label="Pay now"
               />
             </>
           ) : (
