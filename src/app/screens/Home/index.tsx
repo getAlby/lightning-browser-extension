@@ -124,7 +124,7 @@ function Home() {
   useEffect(() => {
     loadPayments();
     loadAllowance();
-    loadInvoices();
+    loadInvoices(); // do this on tab click once tabs exist
 
     // Enhancement data is loaded asynchronously (for example because we need to fetch additional data).
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {

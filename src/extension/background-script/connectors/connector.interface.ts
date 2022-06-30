@@ -9,8 +9,9 @@ interface Route {
   total_fees: number;
 }
 
-//this might be lndhub only, please check
-export interface Invoice {
+// this is lndhub only, please check
+// lnd is different
+export interface LNDHUBInvoice {
   r_hash: {
     type: string;
     data: ArrayBuffer;
@@ -26,6 +27,16 @@ export interface Invoice {
   ispaid: boolean;
   keysend: boolean;
   custom_records?: null;
+}
+
+export interface Invoice {
+  id: string;
+  memo: string;
+  type: string; //should be enum?
+  settleDate: string;
+  totalAmount: string;
+  totalAmountFiat?: string;
+  preimage: string;
 }
 
 export interface MakeInvoiceArgs {
