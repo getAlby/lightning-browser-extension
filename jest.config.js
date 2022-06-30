@@ -1,5 +1,22 @@
 /** @type {import('@jest/types').Config.InitialOptions} */
 
+// we need this to avoid conflcits with .scwrc
+// - `jsc`-entry isn't recognized
+// - `env`-entry is recognized but supporting our build targets breaks tests
+const swcConfig = {
+  jsc: {
+    transform: {
+      react: {
+        runtime: "automatic",
+      },
+    },
+    target: "es2016",
+  },
+  env: {
+    targets: "",
+  },
+};
+
 // eslint-disable-next-line no-undef
 module.exports = {
   verbose: true,
@@ -7,30 +24,9 @@ module.exports = {
     "^.+\\.mjs?$": [
       // "dexie" needs this
       "@swc/jest",
-      {
-        jsc: {
-          transform: {
-            react: {
-              runtime: "automatic",
-            },
-          },
-        },
-        target: "es2016",
-      },
+      swcConfig,
     ],
-    "^.+\\.(t|j)sx?$": [
-      "@swc/jest",
-      {
-        jsc: {
-          transform: {
-            react: {
-              runtime: "automatic",
-            },
-          },
-          target: "es2016",
-        },
-      },
-    ],
+    "^.+\\.(t|j)sx?$": ["@swc/jest", swcConfig],
   },
   transformIgnorePatterns: ["node_modules/(?!(@runcitadel))/"],
   moduleNameMapper: {

@@ -96,8 +96,10 @@ var options = {
       },
       {
         test: /\.(js|ts)x?$/,
-        loader: "babel-loader",
         exclude: /node_modules/,
+        use: {
+          loader: "swc-loader",
+        },
       },
       {
         test: /\.(sa|sc|c)ss$/,
