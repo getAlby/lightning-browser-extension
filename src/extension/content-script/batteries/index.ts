@@ -37,7 +37,7 @@ async function extractLightningData() {
   );
 
   if (match) {
-    match.battery();
+    await match.battery();
   }
 }
 export default extractLightningData;
