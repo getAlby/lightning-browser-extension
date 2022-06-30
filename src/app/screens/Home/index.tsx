@@ -30,6 +30,7 @@ function Home() {
   const [isBlocked, setIsBlocked] = useState<boolean>(false);
   const [currentUrl, setCurrentUrl] = useState<URL | null>(null);
   const [payments, setPayments] = useState<Transaction[]>([]);
+  const [invoices, setInvoices] = useState<Transaction[]>([]);
   const [loadingAllowance, setLoadingAllowance] = useState(true);
   const [loadingPayments, setLoadingPayments] = useState(true);
   const [loadingSendSats, setLoadingSendSats] = useState(false);
@@ -95,10 +96,29 @@ function Home() {
   }
 
   async function loadInvoices() {
-    const invoices = await api.getInvoices();
-    console.log("rx list invoices", invoices);
+    const result = await api.getInvoices();
+    console.log("rx list invoices", result);
 
-    return invoices;
+    const invoices = result.invoices.map((invoice) => ({
+      id: null,
+      title: invoice.memo,
+      type: "received",
+      date: invoice.settle_date,
+      badges: null,
+      totalAmount: invoice.value,
+      totalAmountFiat: null,
+      description: null,
+      totalFees: null,
+      preimage: invoice.r_preimage,
+      location: null,
+    }));
+
+    for await (const invoice of invoices) {
+      const totalAmountFiat = await getFiatValue(invoice.totalAmount);
+      invoice.totalAmountFiat = totalAmountFiat;
+    }
+
+    setInvoices(invoices);
   }
 
   useEffect(() => {
@@ -323,8 +343,18 @@ function Home() {
         ) : (
           <div>
             <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
-              Recent Transactions
+              Recent Transactions JA ACH NE
             </h2>
+
+            {invoices.length > 0 && (
+              <TransactionsTable
+                transactions={invoices.map((invoice) => ({
+                  ...invoice,
+                  date: dayjs(invoice.date).fromNow(),
+                }))}
+              />
+            )}
+
             {payments.length > 0 ? (
               <TransactionsTable
                 transactions={payments.map((payment) => ({

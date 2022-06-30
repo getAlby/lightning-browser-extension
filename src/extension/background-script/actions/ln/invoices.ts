@@ -13,12 +13,11 @@ const invoices = async (message) => {
   console.log("Ln action - message", message);
   const connector = await state.getState().getConnector();
   const data = await connector.getInvoices();
+  console.log("Ln action - data", data);
 
   if (data instanceof Error) {
     return false;
   } else {
-    console.log("Ln action - invoices", data.data.invoices);
-
     return {
       data: {
         invoices: data.data.invoices,

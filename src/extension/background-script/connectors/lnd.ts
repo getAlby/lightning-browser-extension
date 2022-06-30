@@ -57,11 +57,6 @@ class Lnd implements Connector {
     });
   }
 
-  // not yet implemenetd
-  getInvoices() {
-    return new Error("has not been implemneted on this connector");
-  }
-
   getBalance(): Promise<GetBalanceResponse> {
     return this.getChannelsBalance();
   }
@@ -237,11 +232,20 @@ class Lnd implements Connector {
     });
   };
 
-  getInvoices = () => {
-    return this.request("GET", "/v1/payments", undefined, {
-      invoices: [],
-    });
-  };
+  // types missing/wrong
+  async getInvoices(): Promise<any> {
+    const data = await this.request<{
+      invoices: unknown;
+    }>("GET", "/v1/invoices", undefined, {});
+
+    console.log("LND invoices", data);
+
+    return {
+      data: {
+        invoices: data.invoices,
+      },
+    };
+  }
 
   async request<Type>(
     method: string,
