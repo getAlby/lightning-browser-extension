@@ -1,3 +1,6 @@
+/** @type {import('@jest/types').Config.InitialOptions} */
+
+// eslint-disable-next-line no-undef
 module.exports = {
   verbose: true,
   transform: {
@@ -38,7 +41,7 @@ module.exports = {
     "^@screens/(.*)$": "<rootDir>/src/app/screens/$1",
   },
   setupFiles: ["jest-webextension-mock", "fake-indexeddb/auto"],
-  testEnvironment: "./jest.custom-test-environment.ts",
-  setupFilesAfterEnv: ["./jest.setup.ts"],
+  testEnvironment: "./jest.custom-test-environment.js",
+  setupFilesAfterEnv: ["./jest.setup.js"],
   modulePathIgnorePatterns: ["<rootDir>/tests"],
 };
