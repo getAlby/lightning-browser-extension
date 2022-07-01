@@ -1,22 +1,12 @@
 import state from "~/extension/background-script/state";
+import { MessageInvoices } from "~/types";
 
-// message: {
-//   "application": "LBE",
-//   "prompt": true,
-//   "action": "getInvoices",
-//   "origin": {
-//       "internal": true
-//   }
-// }
-
-const invoices = async (message) => {
-  console.log("Ln action - message", message);
+const invoices = async (message: MessageInvoices) => {
   const connector = await state.getState().getConnector();
   const data = await connector.getInvoices();
-  console.log("Ln action - data", data);
 
   if (data instanceof Error) {
-    return false;
+    return { error: data.message };
   } else {
     return {
       data: {

@@ -8,21 +8,21 @@ import HashKeySigner from "~/common/utils/signer";
 
 import state from "../state";
 import Connector, {
-  SendPaymentArgs,
-  SendPaymentResponse,
   CheckPaymentArgs,
   CheckPaymentResponse,
-  GetInfoResponse,
   GetBalanceResponse,
+  GetInfoResponse,
   GetInvoicesResponse,
   Invoice,
+  KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  SendPaymentArgs,
+  SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
   VerifyMessageArgs,
   VerifyMessageResponse,
-  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -57,10 +57,9 @@ export default class LndHub implements Connector {
     return Promise.resolve();
   }
 
+  // TODO: FINISH THIS
   async getInvoices(): Promise<GetInvoicesResponse> {
     const data = await this.request<Invoice[]>("GET", "/getuserinvoices");
-
-    console.log("LNDHUB - getInvoices", data);
 
     return {
       data: {

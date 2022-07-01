@@ -177,6 +177,9 @@ export interface MessageAllowanceAdd extends MessageDefault {
 export interface MessageAllowanceList extends MessageDefault {
   action: "listAllowances";
 }
+export interface MessageInvoices extends Omit<MessageDefault, "args"> {
+  action: "getInvoices";
+}
 
 export interface MessageAllowanceDelete extends MessageDefault {
   args: {

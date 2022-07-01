@@ -6,20 +6,21 @@ import SHA256 from "crypto-js/sha256";
 import utils from "~/common/lib/utils";
 
 import Connector, {
-  SendPaymentArgs,
-  SendPaymentResponse,
   CheckPaymentArgs,
   CheckPaymentResponse,
-  GetInfoResponse,
   GetBalanceResponse,
+  GetInfoResponse,
+  GetInvoicesResponse,
+  Invoice,
+  KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  SendPaymentArgs,
+  SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
   VerifyMessageArgs,
   VerifyMessageResponse,
-  KeysendArgs,
-  GetInvoicesResponse,
 } from "./connector.interface";
 
 interface Config {
@@ -233,7 +234,6 @@ class Lnd implements Connector {
     });
   };
 
-  // types missing/wrong
   async getInvoices(): Promise<GetInvoicesResponse> {
     const data = await this.request<{
       invoices: {
@@ -267,7 +267,7 @@ class Lnd implements Connector {
       first_index_offset: string;
     }>("GET", "/v1/invoices", undefined, {});
 
-    const invoices = data.invoices.map((invoice) => ({
+    const invoices: Invoice[] = data.invoices.map((invoice) => ({
       id: invoice.payment_request,
       memo: invoice.memo,
       type: "received",

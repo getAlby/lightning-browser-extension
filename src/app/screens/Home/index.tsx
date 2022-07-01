@@ -109,8 +109,6 @@ function Home() {
   async function loadInvoices() {
     setLoadingInvoices(true);
     const result = await api.getInvoices();
-    console.log("rx list invoices", result);
-
     const invoices: Transaction[] = result.invoices
       .filter((invoice) => invoice.settled)
       .map((invoice) => ({

@@ -1,4 +1,6 @@
 import PubSub from "pubsub-js";
+import type Connector from "~/extension/background-script/connectors/connector.interface";
+import { Message } from "~/types";
 
 import state from "../../state";
 import checkPayment from "./checkPayment";
@@ -10,8 +12,15 @@ import sendPayment from "./sendPayment";
 import signMessage from "./signMessage";
 import verifyMessage from "./verifyMessage";
 
-const connectorCall = (method) => {
-  return async (message) => {
+type PickMatching<T, V> = {
+  [K in keyof T as T[K] extends V ? K : never]: T[K];
+};
+// eslint-disable-next-line @typescript-eslint/ban-types
+type ExtractMethods<T> = PickMatching<T, Function>;
+type ConnectorMethods = ExtractMethods<Connector>;
+
+const connectorCall = (method: keyof ConnectorMethods) => {
+  return async (message: Message) => {
     console.info(`Lightning call: ${message.action}`);
     const connector = await state.getState().getConnector();
 
@@ -33,7 +42,7 @@ const connectorCall = (method) => {
 };
 
 const getBalance = connectorCall("getBalance");
-const getTransactions = connectorCall("getTransactions"); // can this go?
+const getTransactions = connectorCall("getTransactions"); // can this go? does not exists on type connector
 
 export {
   invoices,
