@@ -237,43 +237,42 @@ class Lnd implements Connector {
   async getInvoices(): Promise<GetInvoicesResponse> {
     const data = await this.request<{
       invoices: {
-        memo: string;
-        r_preimage: string;
-        r_hash: string;
-        value: string;
-        value_msat: string;
-        settled: boolean;
+        add_index: string;
+        amt_paid_msat: string;
+        amt_paid_sat: string;
+        amt_paid: string;
+        cltv_expiry: string;
         creation_date: string;
-        settle_date: string;
-        payment_request: string;
         description_hash?: string;
         expiry: string;
         fallback_addr: string;
-        cltv_expiry: string;
-        route_hints: [];
-        private: boolean;
-        add_index: string;
-        settle_index: string;
-        amt_paid: string;
-        amt_paid_sat: string;
-        amt_paid_msat: string;
-        state: string;
-        htlcs: [];
         features: unknown[];
+        htlcs: [];
         is_keysend: boolean;
+        memo: string;
         payment_addr: string;
+        payment_request: string;
+        private: boolean;
+        r_hash: string;
+        r_preimage: string;
+        route_hints: [];
+        settle_date: string;
+        settle_index: string;
+        settled: boolean;
+        state: string;
+        value_msat: string;
+        value: string;
       }[];
       last_index_offset: string;
       first_index_offset: string;
     }>("GET", "/v1/invoices", undefined, {});
 
-    console.log("LND invoices", data);
-
     const invoices = data.invoices.map((invoice) => ({
       id: invoice.payment_request,
       memo: invoice.memo,
       type: "received",
-      settleDate: invoice.settle_date,
+      settled: invoice.settled,
+      settleDate: parseInt(`${invoice.settle_date}000`), //lnd cuts of the 3 zeros...
       totalAmount: invoice.value,
       totalAmountFiat: "",
       preimage: invoice.r_preimage,

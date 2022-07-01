@@ -101,12 +101,14 @@ function Home() {
     const result = await api.getInvoices();
     console.log("rx list invoices", result);
 
-    const invoices: Transaction[] = result.data.invoices.map((invoice) => ({
-      ...invoice,
-      title: invoice.memo,
-      type: "received",
-      date: dayjs(invoice.settleDate).fromNow(),
-    }));
+    const invoices: Transaction[] = result.invoices
+      .filter((invoice) => invoice.settled)
+      .map((invoice) => ({
+        ...invoice,
+        title: invoice.memo,
+        date: dayjs(invoice.settleDate).fromNow(),
+      }))
+      .reverse();
 
     for await (const invoice of invoices) {
       const totalAmountFiat = await getFiatValue(invoice.totalAmount);
@@ -338,7 +340,7 @@ function Home() {
         ) : (
           <div>
             <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
-              Recent Transactions JA ACH NE
+              Recent Transactions
             </h2>
 
             {invoiceTransactions.length > 0 && (

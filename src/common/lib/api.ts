@@ -103,7 +103,8 @@ export const unlock = (password: string) =>
   utils.call<UnlockRes>("unlock", { password });
 export const getBlocklist = (host: string) =>
   utils.call<BlocklistRes>("getBlocklist", { host });
-export const getInvoices = () => utils.call<GetInvoicesResponse>("getInvoices");
+export const getInvoices = () =>
+  utils.call<GetInvoicesResponse["data"]>("getInvoices");
 
 export default {
   getAccountInfo,

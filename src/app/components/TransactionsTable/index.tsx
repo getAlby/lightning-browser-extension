@@ -86,7 +86,7 @@ export default function TransactionsTable({ transactions }: Props) {
                   <Disclosure.Panel>
                     <div className="mt-1 ml-9 text-xs text-gray-600 dark:text-neutral-400">
                       {tx.description}
-                      <p>Fee: {tx.totalFees} sats</p>
+                      {tx.totalFees && <p>Fee: {tx.totalFees} sats</p>}
                       {tx.preimage && (
                         <p className="truncate">Preimage: {tx.preimage}</p>
                       )}

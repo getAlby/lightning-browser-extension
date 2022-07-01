@@ -12,8 +12,9 @@ interface Route {
 export interface Invoice {
   id: string;
   memo: string;
-  type: string; //should be enum?
-  settleDate: string;
+  type: "received";
+  settled: boolean;
+  settleDate: number;
   totalAmount: string;
   totalAmountFiat?: string;
   preimage: string;
