@@ -1,6 +1,7 @@
 import {
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  GetInvoicesResponse,
 } from "~/extension/background-script/connectors/connector.interface";
 import type {
   Accounts,
@@ -102,7 +103,7 @@ export const unlock = (password: string) =>
   utils.call<UnlockRes>("unlock", { password });
 export const getBlocklist = (host: string) =>
   utils.call<BlocklistRes>("getBlocklist", { host });
-export const getInvoices = () => utils.call<any>("getInvoices");
+export const getInvoices = () => utils.call<GetInvoicesResponse>("getInvoices");
 
 export default {
   getAccountInfo,

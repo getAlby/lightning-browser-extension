@@ -30,7 +30,9 @@ function Home() {
   const [isBlocked, setIsBlocked] = useState<boolean>(false);
   const [currentUrl, setCurrentUrl] = useState<URL | null>(null);
   const [payments, setPayments] = useState<Transaction[]>([]);
-  const [invoices, setInvoices] = useState<Transaction[]>([]);
+  const [invoiceTransactions, setInvoiceTransactions] = useState<Transaction[]>(
+    []
+  );
   const [loadingAllowance, setLoadingAllowance] = useState(true);
   const [loadingPayments, setLoadingPayments] = useState(true);
   const [loadingSendSats, setLoadingSendSats] = useState(false);
@@ -99,18 +101,11 @@ function Home() {
     const result = await api.getInvoices();
     console.log("rx list invoices", result);
 
-    const invoices = result.invoices.map((invoice) => ({
-      id: null,
+    const invoices: Transaction[] = result.data.invoices.map((invoice) => ({
+      ...invoice,
       title: invoice.memo,
       type: "received",
-      date: invoice.settle_date,
-      badges: null,
-      totalAmount: invoice.value,
-      totalAmountFiat: null,
-      description: null,
-      totalFees: null,
-      preimage: invoice.r_preimage,
-      location: null,
+      date: dayjs(invoice.settleDate).fromNow(),
     }));
 
     for await (const invoice of invoices) {
@@ -118,7 +113,7 @@ function Home() {
       invoice.totalAmountFiat = totalAmountFiat;
     }
 
-    setInvoices(invoices);
+    setInvoiceTransactions(invoices);
   }
 
   useEffect(() => {
@@ -346,13 +341,8 @@ function Home() {
               Recent Transactions JA ACH NE
             </h2>
 
-            {invoices.length > 0 && (
-              <TransactionsTable
-                transactions={invoices.map((invoice) => ({
-                  ...invoice,
-                  date: dayjs(invoice.date).fromNow(),
-                }))}
-              />
+            {invoiceTransactions.length > 0 && (
+              <TransactionsTable transactions={invoiceTransactions} />
             )}
 
             {payments.length > 0 ? (

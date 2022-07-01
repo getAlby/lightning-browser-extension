@@ -9,26 +9,6 @@ interface Route {
   total_fees: number;
 }
 
-// this is lndhub only, please check
-// lnd is different
-export interface LNDHUBInvoice {
-  r_hash: {
-    type: string;
-    data: ArrayBuffer;
-  };
-  payment_hash: string;
-  payment_request: string;
-  description: string;
-  pay_req: string;
-  timestamp: number;
-  type: string;
-  expire_time: number;
-  amt: number;
-  ispaid: boolean;
-  keysend: boolean;
-  custom_records?: null;
-}
-
 export interface Invoice {
   id: string;
   memo: string;

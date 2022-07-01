@@ -19,6 +19,7 @@ import Connector, {
   VerifyMessageArgs,
   VerifyMessageResponse,
   KeysendArgs,
+  GetInvoicesResponse,
 } from "./connector.interface";
 
 interface Config {
@@ -233,16 +234,54 @@ class Lnd implements Connector {
   };
 
   // types missing/wrong
-  async getInvoices(): Promise<any> {
+  async getInvoices(): Promise<GetInvoicesResponse> {
     const data = await this.request<{
-      invoices: unknown;
+      invoices: {
+        memo: string;
+        r_preimage: string;
+        r_hash: string;
+        value: string;
+        value_msat: string;
+        settled: boolean;
+        creation_date: string;
+        settle_date: string;
+        payment_request: string;
+        description_hash?: string;
+        expiry: string;
+        fallback_addr: string;
+        cltv_expiry: string;
+        route_hints: [];
+        private: boolean;
+        add_index: string;
+        settle_index: string;
+        amt_paid: string;
+        amt_paid_sat: string;
+        amt_paid_msat: string;
+        state: string;
+        htlcs: [];
+        features: unknown[];
+        is_keysend: boolean;
+        payment_addr: string;
+      }[];
+      last_index_offset: string;
+      first_index_offset: string;
     }>("GET", "/v1/invoices", undefined, {});
 
     console.log("LND invoices", data);
 
+    const invoices = data.invoices.map((invoice) => ({
+      id: invoice.payment_request,
+      memo: invoice.memo,
+      type: "received",
+      settleDate: invoice.settle_date,
+      totalAmount: invoice.value,
+      totalAmountFiat: "",
+      preimage: invoice.r_preimage,
+    }));
+
     return {
       data: {
-        invoices: data.invoices,
+        invoices,
       },
     };
   }
