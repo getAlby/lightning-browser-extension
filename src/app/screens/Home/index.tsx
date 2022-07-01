@@ -38,6 +38,7 @@ function Home() {
   const [loadingAllowance, setLoadingAllowance] = useState(true);
   const [loadingPayments, setLoadingPayments] = useState(true);
   const [loadingSendSats, setLoadingSendSats] = useState(false);
+  const [loadingInvoices, setLoadingInvoices] = useState(false);
   const [lnData, setLnData] = useState<Battery[]>([]);
   const navigate = useNavigate();
   const { t } = useTranslation("translation", { keyPrefix: "home" });
@@ -99,7 +100,14 @@ function Home() {
     }
   }
 
+  async function onTabChangeHandler(index: number) {
+    if (index === 1) {
+      await loadInvoices();
+    }
+  }
+
   async function loadInvoices() {
+    setLoadingInvoices(true);
     const result = await api.getInvoices();
     console.log("rx list invoices", result);
 
@@ -118,14 +126,12 @@ function Home() {
     }
 
     setInvoiceTransactions(invoices);
+    setLoadingInvoices(false);
   }
 
   useEffect(() => {
     loadPayments();
     loadAllowance();
-    // do this on tab click once tabs exist
-    // https://headlessui.com/react/tabs#listening-for-changes
-    loadInvoices();
 
     // Enhancement data is loaded asynchronously (for example because we need to fetch additional data).
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
@@ -225,6 +231,7 @@ function Home() {
 
           {
             // DO NOT FORGET TO ADD INVOCES HERE AS WELL
+            // AH NO, THIS IS ALLOWNCE. NO NEED TO :P
           }
 
           {allowance?.payments.length > 0 ? (
@@ -353,7 +360,7 @@ function Home() {
               Recent Transactions
             </h2>
 
-            <Tab.Group>
+            <Tab.Group onChange={onTabChangeHandler}>
               <Tab.List className="mb-2">
                 {Object.keys({ Outgoing: true, Incoming: true }).map(
                   (category) => (
@@ -417,8 +424,16 @@ function Home() {
                   )}
                 </Tab.Panel>
                 <Tab.Panel>
-                  {invoiceTransactions.length > 0 && (
+                  {loadingInvoices ? (
+                    <div className="flex justify-center">
+                      <Loading />
+                    </div>
+                  ) : invoiceTransactions.length > 0 ? (
                     <TransactionsTable transactions={invoiceTransactions} />
+                  ) : (
+                    <p className="text-gray-500 dark:text-neutral-400">
+                      No transactions yet.
+                    </p>
                   )}
                 </Tab.Panel>
               </Tab.Panels>
