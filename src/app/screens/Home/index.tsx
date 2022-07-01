@@ -354,18 +354,19 @@ function Home() {
             </h2>
 
             <Tab.Group>
-              <Tab.List>
+              <Tab.List className="mb-2">
                 {Object.keys({ Outgoing: true, Incoming: true }).map(
                   (category) => (
                     <Tab
                       key={category}
                       className={({ selected }) =>
                         classNames(
-                          "w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700",
-                          "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
+                          "w-1/2 rounded-lg py-2.5 font-bold transition duration-150",
+                          "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-bitcoin",
+                          "hover:bg-gray-50 dark:hover:bg-surface-16dp",
                           selected
-                            ? "bg-white shadow"
-                            : "text-blue-100 hover:bg-white/[0.12] hover:text-white"
+                            ? "text-orange-bitcoin"
+                            : "text-gray-700  dark:text-neutral-200"
                         )
                       }
                     >
