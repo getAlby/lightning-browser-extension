@@ -57,13 +57,41 @@ export default class LndHub implements Connector {
     return Promise.resolve();
   }
 
-  // TODO: FINISH THIS
   async getInvoices(): Promise<GetInvoicesResponse> {
-    const data = await this.request<Invoice[]>("GET", "/getuserinvoices");
+    const data = await this.request<
+      {
+        r_hash: {
+          type: "Buffer";
+          data: number[];
+        };
+        payment_hash: string;
+        payment_request: string;
+        description: string;
+        pay_req: string;
+        timestamp: number;
+        type: "user_invoice";
+        expire_time: number;
+        amt: number;
+        ispaid: boolean;
+        keysend: boolean;
+        custom_records: unknown;
+      }[]
+    >("GET", "/getuserinvoices", undefined);
+
+    const invoices: Invoice[] = data.map((invoice) => ({
+      id: invoice.payment_request,
+      memo: invoice.description,
+      type: "received",
+      settled: invoice.ispaid,
+      settleDate: parseInt(`${invoice.timestamp}000`), //lndhub cuts of the 3 zeros...
+      totalAmount: `${invoice.amt}`,
+      totalAmountFiat: "",
+      preimage: "", // no idea
+    }));
 
     return {
       data: {
-        invoices: data,
+        invoices,
       },
     };
   }
