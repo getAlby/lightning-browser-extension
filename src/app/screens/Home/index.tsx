@@ -11,6 +11,7 @@ import Loading from "@components/Loading";
 import Progressbar from "@components/Progressbar";
 import PublisherCard from "@components/PublisherCard";
 import TransactionsTable from "@components/TransactionsTable";
+import { Tab } from "@headlessui/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useState, useEffect } from "react";
@@ -18,6 +19,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import browser from "webextension-polyfill";
+import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
@@ -121,7 +123,9 @@ function Home() {
   useEffect(() => {
     loadPayments();
     loadAllowance();
-    loadInvoices(); // do this on tab click once tabs exist
+    // do this on tab click once tabs exist
+    // https://headlessui.com/react/tabs#listening-for-changes
+    loadInvoices();
 
     // Enhancement data is loaded asynchronously (for example because we need to fetch additional data).
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
@@ -214,9 +218,15 @@ function Home() {
               />
             </div>
           </div>
+
           <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
             {t("recent_transactions")}
           </h2>
+
+          {
+            // DO NOT FORGET TO ADD INVOCES HERE AS WELL
+          }
+
           {allowance?.payments.length > 0 ? (
             <TransactionsTable
               transactions={allowance.payments.map((payment) => {
@@ -343,47 +353,75 @@ function Home() {
               Recent Transactions
             </h2>
 
-            {invoiceTransactions.length > 0 && (
-              <TransactionsTable transactions={invoiceTransactions} />
-            )}
+            <Tab.Group>
+              <Tab.List>
+                {Object.keys({ Outgoing: true, Incoming: true }).map(
+                  (category) => (
+                    <Tab
+                      key={category}
+                      className={({ selected }) =>
+                        classNames(
+                          "w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700",
+                          "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
+                          selected
+                            ? "bg-white shadow"
+                            : "text-blue-100 hover:bg-white/[0.12] hover:text-white"
+                        )
+                      }
+                    >
+                      {category}
+                    </Tab>
+                  )
+                )}
+              </Tab.List>
 
-            {payments.length > 0 ? (
-              <TransactionsTable
-                transactions={payments.map((payment) => ({
-                  ...payment,
-                  type: "sent",
-                  date: dayjs(payment.createdAt).fromNow(),
-                  title: (
-                    <p className="truncate">
-                      <a
-                        target="_blank"
-                        title={payment.name}
-                        href={`options.html#/publishers`}
-                        rel="noreferrer"
-                      >
-                        {payment.name}
-                      </a>
+              <Tab.Panels>
+                <Tab.Panel>
+                  {payments.length > 0 ? (
+                    <TransactionsTable
+                      transactions={payments.map((payment) => ({
+                        ...payment,
+                        type: "sent",
+                        date: dayjs(payment.createdAt).fromNow(),
+                        title: (
+                          <p className="truncate">
+                            <a
+                              target="_blank"
+                              title={payment.name}
+                              href={`options.html#/publishers`}
+                              rel="noreferrer"
+                            >
+                              {payment.name}
+                            </a>
+                          </p>
+                        ),
+                        subTitle: (
+                          <p className="truncate">
+                            <a
+                              target="_blank"
+                              title={payment.name}
+                              href={`options.html#/publishers`}
+                              rel="noreferrer"
+                            >
+                              {payment.host}
+                            </a>
+                          </p>
+                        ),
+                      }))}
+                    />
+                  ) : (
+                    <p className="text-gray-500 dark:text-neutral-400">
+                      No transactions yet.
                     </p>
-                  ),
-                  subTitle: (
-                    <p className="truncate">
-                      <a
-                        target="_blank"
-                        title={payment.name}
-                        href={`options.html#/publishers`}
-                        rel="noreferrer"
-                      >
-                        {payment.host}
-                      </a>
-                    </p>
-                  ),
-                }))}
-              />
-            ) : (
-              <p className="text-gray-500 dark:text-neutral-400">
-                No transactions yet.
-              </p>
-            )}
+                  )}
+                </Tab.Panel>
+                <Tab.Panel>
+                  {invoiceTransactions.length > 0 && (
+                    <TransactionsTable transactions={invoiceTransactions} />
+                  )}
+                </Tab.Panel>
+              </Tab.Panels>
+            </Tab.Group>
           </div>
         )}
       </div>
