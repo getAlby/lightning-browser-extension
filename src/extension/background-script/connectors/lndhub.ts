@@ -83,10 +83,10 @@ export default class LndHub implements Connector {
       memo: invoice.description,
       type: "received",
       settled: invoice.ispaid,
-      settleDate: parseInt(`${invoice.timestamp}000`), //lndhub cuts of the 3 zeros...
+      settleDate: invoice.timestamp * 1000,
       totalAmount: `${invoice.amt}`,
       totalAmountFiat: "",
-      preimage: "", // no idea
+      preimage: "", // lndhub doesn't support preimage (yet)
     }));
 
     return {

@@ -272,7 +272,7 @@ class Lnd implements Connector {
       memo: invoice.memo,
       type: "received",
       settled: invoice.settled,
-      settleDate: parseInt(`${invoice.settle_date}000`), //lnd cuts of the 3 zeros...
+      settleDate: parseInt(invoice.settle_date) * 1000,
       totalAmount: invoice.value,
       totalAmountFiat: "",
       preimage: invoice.r_preimage,
