@@ -34,7 +34,7 @@ class ConnectorExample implements Connector {
     // Add your own implementation.
   }
 
-  getBalance(): Promise<GetBalanceResponse> {
+  getBalance(): Promise<GetBalanceResponse> { // we could remove this
     // Add your own implementation.
   }
 
