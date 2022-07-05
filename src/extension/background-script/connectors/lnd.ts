@@ -227,13 +227,6 @@ class Lnd implements Connector {
     });
   };
 
-  // can this go?
-  getTransactions = () => {
-    return this.request("GET", "/v1/payments", undefined, {
-      transactions: [],
-    });
-  };
-
   async getInvoices(): Promise<GetInvoicesResponse> {
     const data = await this.request<{
       invoices: {

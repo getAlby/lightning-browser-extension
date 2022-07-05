@@ -227,11 +227,6 @@ function Home() {
             {t("recent_transactions")}
           </h2>
 
-          {
-            // DO NOT FORGET TO ADD INVOCES HERE AS WELL
-            // AH NO, THIS IS ALLOWNCE. NO NEED TO :P
-          }
-
           {allowance?.payments.length > 0 ? (
             <TransactionsTable
               transactions={allowance.payments.map((payment) => {
