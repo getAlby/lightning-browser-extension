@@ -75,7 +75,7 @@ describe("TransactionsTable", () => {
     expect(screen.getByText(/-1234000 sats/)).toBeInTheDocument();
     expect(screen.getByText(/~\$241.02/)).toBeInTheDocument();
 
-    const disclosureButton = await screen.findByRole("button");
+    const disclosureButton = screen.getByRole("button");
 
     await act(() => {
       user.click(disclosureButton);
@@ -89,8 +89,6 @@ describe("TransactionsTable", () => {
   });
 
   test("renders invoices", async () => {
-    const user = userEvent.setup();
-
     render(
       <BrowserRouter>
         <TransactionsTable {...invoices} />
@@ -102,16 +100,7 @@ describe("TransactionsTable", () => {
     expect(screen.getByText(/\+66666 sats/)).toBeInTheDocument();
     expect(screen.getByText(/~\$13.02/)).toBeInTheDocument();
 
-    const disclosureButtons = await screen.findAllByRole("button");
-
-    await act(() => {
-      user.click(disclosureButtons[0]);
-    });
-
-    // await waitFor(() =>
-    //   expect(
-    //     screen.getByText("https://openai.com/dall-e-2/")
-    //   ).toBeInTheDocument()
-    // );
+    const disclosureButtons = screen.queryByRole("button");
+    expect(disclosureButtons).not.toBeInTheDocument();
   });
 });
