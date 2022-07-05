@@ -8,10 +8,10 @@ const { getByText, getByLabelText } = queries;
 
 const commonCreateWalletUserCreate = async () => {
   const user = USER.SINGLE();
-  const { page: welcomePage, browser } = await loadExtension();
+  const { page: page, browser } = await loadExtension();
 
-  // go through welcome page
-  const $document = await getDocument(welcomePage);
+  // get document from welcome page
+  const $document = await getDocument(page);
 
   // go through welcome page
   const startedButton = await getByText($document, "Get Started");
@@ -35,27 +35,21 @@ const commonCreateWalletUserCreate = async () => {
 
   await waitFor(() => getByText($document, "Do you have a lightning wallet?"));
 
-  return { user, browser, welcomePage, $document };
+  return { user, browser, page, $document };
 };
 
-const commonCreateWalletSuccessCheck = async ({
-  browser,
-  welcomePage,
-  $document,
-}) => {
+const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
   // submit form
   const continueButton = await getByText($document, "Continue");
   continueButton.click();
 
-  await welcomePage.waitForResponse(() => true);
+  await page.waitForResponse(() => true);
   await waitFor(() => getByText($document, "Success!"));
-
-  await browser.close();
 };
 
 test.describe("Create or connect wallets", () => {
-  test("successfully creates an Alby wallet", async () => {
-    const { user, browser, welcomePage, $document } =
+  test("successfully creates an Alby wallet and opens publishers screen", async () => {
+    const { user, browser, page, $document } =
       await commonCreateWalletUserCreate();
 
     // click at "Create Alby Wallet"
@@ -76,16 +70,28 @@ test.describe("Create or connect wallets", () => {
     const createWalletButton = await getByText($document, "Continue");
     createWalletButton.click();
 
-    await welcomePage.waitForResponse(() => true);
+    await page.waitForResponse(() => true);
 
     await waitFor(() => getByText($document, "Your Alby account is ready."));
 
-    await commonCreateWalletSuccessCheck({ browser, welcomePage, $document });
+    await commonCreateWalletSuccessCheck({ page, $document });
+
+    // reload and expect to be on publishers screen
+    await Promise.all([
+      page.waitForNavigation(), // The promise resolves after navigation has finished
+      page.reload({ waitUntil: ["networkidle0", "domcontentloaded"] }),
+    ]);
+
+    const $optionsdocument = await getDocument(page);
+
+    await waitFor(() => getByText($optionsdocument, "Your ⚡️ Websites"));
+    await waitFor(() => getByText($optionsdocument, "Other ⚡️ Websites"));
+
+    await browser.close();
   });
 
   test("successfully connects to LNBits wallet", async () => {
-    const { browser, welcomePage, $document } =
-      await commonCreateWalletUserCreate();
+    const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     // click at "Create LNbits Wallet"
     const createNewWalletButton = await getByText($document, "LNbits");
@@ -97,12 +103,12 @@ test.describe("Create or connect wallets", () => {
     const adminKeyField = await getByLabelText($document, "LNbits Admin Key");
     await adminKeyField.type(lnBitsAdminKey);
 
-    await commonCreateWalletSuccessCheck({ browser, welcomePage, $document });
+    await commonCreateWalletSuccessCheck({ page, $document });
+    await browser.close();
   });
 
   test("successfully connects to BlueWallet", async () => {
-    const { browser, welcomePage, $document } =
-      await commonCreateWalletUserCreate();
+    const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     // click at "LNDHub (BlueWallet)"
     const createNewWalletButton = await getByText(
@@ -118,12 +124,12 @@ test.describe("Create or connect wallets", () => {
     const lndUrlField = await getByLabelText($document, "LNDHub Export URI");
     await lndUrlField.type(lndHubUrl);
 
-    await commonCreateWalletSuccessCheck({ browser, welcomePage, $document });
+    await commonCreateWalletSuccessCheck({ page, $document });
+    await browser.close();
   });
 
   test("successfully connects to LND", async () => {
-    const { browser, welcomePage, $document } =
-      await commonCreateWalletUserCreate();
+    const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     const createNewWalletButton = await getByText($document, "LND");
     createNewWalletButton.click();
@@ -146,12 +152,12 @@ test.describe("Create or connect wallets", () => {
     );
     await macroonField.type(macroon);
 
-    await commonCreateWalletSuccessCheck({ browser, welcomePage, $document });
+    await commonCreateWalletSuccessCheck({ page, $document });
+    await browser.close();
   });
 
   test("successfully connects to Umbrel", async () => {
-    const { browser, welcomePage, $document } =
-      await commonCreateWalletUserCreate();
+    const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     const connectButton = await getByText($document, "Umbrel");
     connectButton.click();
@@ -168,12 +174,12 @@ test.describe("Create or connect wallets", () => {
     );
     await lndConnectUrlField.type(restApiUrl);
 
-    await commonCreateWalletSuccessCheck({ browser, welcomePage, $document });
+    await commonCreateWalletSuccessCheck({ page, $document });
+    await browser.close();
   });
 
   test("successfully connects to myNode", async () => {
-    const { browser, welcomePage, $document } =
-      await commonCreateWalletUserCreate();
+    const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     const connectButton = await getByText($document, "myNode");
     connectButton.click();
@@ -190,12 +196,12 @@ test.describe("Create or connect wallets", () => {
     );
     await lndConnectUrlField.type(restApiUrl);
 
-    await commonCreateWalletSuccessCheck({ browser, welcomePage, $document });
+    await commonCreateWalletSuccessCheck({ page, $document });
+    await browser.close();
   });
 
   test("successfully connects to Start9", async () => {
-    const { browser, welcomePage, $document } =
-      await commonCreateWalletUserCreate();
+    const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     const connectButton = await getByText($document, "Start9");
     connectButton.click();
@@ -212,12 +218,12 @@ test.describe("Create or connect wallets", () => {
     );
     await lndConnectUrlField.type(restApiUrl);
 
-    await commonCreateWalletSuccessCheck({ browser, welcomePage, $document });
+    await commonCreateWalletSuccessCheck({ page, $document });
+    await browser.close();
   });
 
   test("successfully connects to Eclair", async () => {
-    const { browser, welcomePage, $document } =
-      await commonCreateWalletUserCreate();
+    const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     const createNewWalletButton = await getByText($document, "Eclair");
     createNewWalletButton.click();
@@ -233,6 +239,7 @@ test.describe("Create or connect wallets", () => {
     );
     await eclairPasswordField.type("getalby");
 
-    await commonCreateWalletSuccessCheck({ browser, welcomePage, $document });
+    await commonCreateWalletSuccessCheck({ page, $document });
+    await browser.close();
   });
 });
