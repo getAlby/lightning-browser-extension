@@ -8,7 +8,7 @@ import { Transaction } from "~/types";
 
 import Badge from "../Badge";
 
-type Props = {
+export type Props = {
   transactions: Transaction[];
 };
 
