@@ -51,7 +51,7 @@ class Eclair implements Connector {
 
   // not yet implemenetd
   getInvoices() {
-    return new Error("has not been implemneted on this connector");
+    return new Error("Has not been implemneted on this connector: getInvoices");
   }
 
   async getBalance(): Promise<GetBalanceResponse> {
