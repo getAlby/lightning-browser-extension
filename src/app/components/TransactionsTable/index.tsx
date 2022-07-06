@@ -103,7 +103,11 @@ export default function TransactionsTable({ transactions }: Props) {
                           <li>app_name: {tx.boostagram.app_name}</li>
                           <li>name: {tx.boostagram.name}</li>
                           <li>podcast: {tx.boostagram.podcast}</li>
-                          <li>message: {tx.boostagram.message}</li>
+                          <li>
+                            message:{" "}
+                            {tx.boostagram.message &&
+                              decodeURI(tx.boostagram.message)}
+                          </li>
                         </ul>
                       )}
                     </div>
