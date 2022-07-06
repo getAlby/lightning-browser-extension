@@ -1,6 +1,7 @@
-import ConfirmOrCancel from "@components/ConfirmOrCancel";
-import PublisherCard from "@components/PublisherCard";
+import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useState, useEffect, useCallback, useRef } from "react";
+import NewConfirmOrCancel from "~/app/newcomponents/NewConfirmOrCancel";
+import NewPublisherCard from "~/app/newcomponents/NewPublisherCard";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -68,31 +69,54 @@ function Enable(props: Props) {
   }, [enable, props.origin.domain, props.origin.host]);
 
   return (
-    <div>
-      <PublisherCard title={props.origin.name} image={props.origin.icon} />
+    <div className="flex flex-col h-full">
+      <div className="text-center text-xl font-semibold dark:text-white py-2 border-b border-gray-200 dark:border-neutral-500">
+        Connect
+      </div>
+      <div className="h-full">
+        <div className="h-2/5 border-b border-gray-200 dark:border-neutral-500">
+          <NewPublisherCard
+            title={props.origin.name}
+            image={props.origin.icon}
+            url={props.origin.location}
+          />
+        </div>
 
-      <div className="text-center p-6">
-        <h3 className="text-xl mb-4 dark:text-white">
-          Connect with <i>{props.origin.host}</i>
-        </h3>
+        <div className="flex flex-col justify-between h-3/5">
+          <div className="font-medium dark:text-white p-6">
+            <p className="mb-4">This app would like to:</p>
 
-        <p className="text-gray-500 mb-4 dark:text-neutral-400">
-          <strong>{props.origin.name}</strong> does not have access to your
-          account.
-        </p>
-        <p className="mb-8 text-gray-500 mb-4 dark:text-neutral-400">
-          Do you want to grant them access?
-        </p>
+            <div className="mb-4 flex items-center">
+              <CheckIcon className="w-5 h-5 mr-2" />
+              <p className="dark:text-white">
+                View your wallet balance & activity
+              </p>
+            </div>
 
-        <ConfirmOrCancel label="Enable" onConfirm={enable} onCancel={reject} />
+            <div className="mb-4 flex items-center">
+              <CheckIcon className="w-5 h-5 mr-2" />
+              <p className="dark:text-white">
+                Request approval for transactions
+              </p>
+            </div>
 
-        <a
-          className="underline mt-8 text-sm text-gray-500 dark:text-gray-400"
-          href="#"
-          onClick={block}
-        >
-          Do not ask for this site again
-        </a>
+            <a
+              className="underline mt-8 text-sm text-gray-500 dark:text-gray-400"
+              href="#"
+              onClick={block}
+            >
+              Do not ask for this site again
+            </a>
+          </div>
+
+          <div className="text-center p-2">
+            <NewConfirmOrCancel
+              label="Connect"
+              onConfirm={enable}
+              onCancel={reject}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
