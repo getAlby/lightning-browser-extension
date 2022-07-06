@@ -74,20 +74,32 @@ export default class LndHub implements Connector {
         amt: number;
         ispaid: boolean;
         keysend: boolean;
-        custom_records: unknown;
+        custom_records: { [key: number]: string };
       }[]
     >("GET", "/getuserinvoices", undefined);
 
-    const invoices: Invoice[] = data.map((invoice) => ({
-      id: invoice.payment_request,
-      memo: invoice.description,
-      type: "received",
-      settled: invoice.ispaid,
-      settleDate: invoice.timestamp * 1000,
-      totalAmount: `${invoice.amt}`,
-      totalAmountFiat: "",
-      preimage: "", // lndhub doesn't support preimage (yet)
-    }));
+    const invoices: Invoice[] = data.map((invoice, index): Invoice => {
+      const hasBoostagram =
+        invoice.custom_records && 7629169 in invoice.custom_records;
+      const boostagramDecoded = hasBoostagram
+        ? atob(invoice.custom_records[7629169])
+        : undefined;
+      const boostagram = boostagramDecoded
+        ? JSON.parse(boostagramDecoded)
+        : undefined;
+
+      return {
+        id: `${invoice.payment_request}-${index}`,
+        memo: invoice.description,
+        type: "received",
+        settled: invoice.ispaid,
+        settleDate: invoice.timestamp * 1000,
+        totalAmount: `${invoice.amt}`,
+        totalAmountFiat: "",
+        preimage: "", // lndhub doesn't support preimage (yet)
+        boostagram,
+      };
+    });
 
     return {
       data: {

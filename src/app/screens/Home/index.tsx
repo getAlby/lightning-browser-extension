@@ -109,6 +109,7 @@ function Home() {
   async function loadInvoices() {
     setLoadingInvoices(true);
     const result = await api.getInvoices();
+
     const invoices: Transaction[] = result.invoices
       .filter((invoice) => invoice.settled)
       .map((invoice) => ({

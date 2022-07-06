@@ -260,16 +260,18 @@ class Lnd implements Connector {
       first_index_offset: string;
     }>("GET", "/v1/invoices", undefined, {});
 
-    const invoices: Invoice[] = data.invoices.map((invoice) => ({
-      id: invoice.payment_request,
-      memo: invoice.memo,
-      type: "received",
-      settled: invoice.settled,
-      settleDate: parseInt(invoice.settle_date) * 1000,
-      totalAmount: invoice.value,
-      totalAmountFiat: "",
-      preimage: invoice.r_preimage,
-    }));
+    const invoices: Invoice[] = data.invoices.map(
+      (invoice, index): Invoice => ({
+        id: `${invoice.payment_request}-${index}`,
+        memo: invoice.memo,
+        type: "received",
+        settled: invoice.settled,
+        settleDate: parseInt(invoice.settle_date) * 1000,
+        totalAmount: invoice.value,
+        totalAmountFiat: "",
+        preimage: invoice.r_preimage,
+      })
+    );
 
     return {
       data: {

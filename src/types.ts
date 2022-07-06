@@ -1,7 +1,10 @@
 import { PaymentRequestObject } from "bolt11";
 import { CURRENCIES } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
-import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
+import {
+  Invoice,
+  SendPaymentResponse,
+} from "~/extension/background-script/connectors/connector.interface";
 
 export type ConnectorType = keyof typeof connectors;
 
@@ -285,6 +288,7 @@ export interface IBadge {
 
 export type Transaction = {
   amount?: string;
+  boostagram?: Invoice["boostagram"];
   badges?: IBadge[];
   createdAt?: string;
   currency?: string;

@@ -76,13 +76,14 @@ export default function TransactionsTable({ transactions }: Props) {
                           ~{tx.totalAmountFiat}
                         </p>
                       </div>
-                      {tx.type !== "received" && (
-                        <Disclosure.Button className="block h-0 mt-2 text-gray-500 hover:text-black dark:hover:text-white transition-color duration-200">
-                          <CaretDownIcon
-                            className={`${open ? "rotate-180" : ""} w-5 h-5`}
-                          />
-                        </Disclosure.Button>
-                      )}
+                      {[tx.type && "sent", "sending"].includes(tx.type) ||
+                        (tx.type === "received" && tx.boostagram && (
+                          <Disclosure.Button className="block h-0 mt-2 text-gray-500 hover:text-black dark:hover:text-white transition-color duration-200">
+                            <CaretDownIcon
+                              className={`${open ? "rotate-180" : ""} w-5 h-5`}
+                            />
+                          </Disclosure.Button>
+                        ))}
                     </div>
                   </div>
                   <Disclosure.Panel>
@@ -92,12 +93,18 @@ export default function TransactionsTable({ transactions }: Props) {
                       {tx.preimage && (
                         <p className="truncate">Preimage: {tx.preimage}</p>
                       )}
-                      {tx.location ? (
+                      {tx.location && (
                         <a href={tx.location} target="_blank" rel="noreferrer">
                           {tx.location}
                         </a>
-                      ) : (
-                        ""
+                      )}
+                      {tx.boostagram && (
+                        <ul>
+                          <li>app_name: {tx.boostagram.app_name}</li>
+                          <li>name: {tx.boostagram.name}</li>
+                          <li>podcast: {tx.boostagram.podcast}</li>
+                          <li>message: {tx.boostagram.message}</li>
+                        </ul>
                       )}
                     </div>
                   </Disclosure.Panel>
