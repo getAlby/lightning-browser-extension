@@ -54,7 +54,7 @@ export default function TransactionsTable({ transactions }: Props) {
                     </div>
                     {tx.badges && (
                       <div className="ml-6 space-x-3">
-                        {tx.badges.map((badge, i) => (
+                        {tx.badges.map((badge) => (
                           <Badge
                             key={badge.label}
                             label={badge.label}

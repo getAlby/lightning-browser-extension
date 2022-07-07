@@ -151,13 +151,21 @@
     "home": {
       "send_satoshis": "⚡️ Send Satoshis ⚡️",
       "recent_transactions": "Recent Transactions",
+      "transaction_list": {
+        "tabs": {
+          "outgoing": "Outgoing",
+          "incoming": "Incoming"
+        }
+      },
       "allowance_view": {
         "allowance": "Allowance",
         "sats_used": "sats used",
         "no_transactions": "No transactions on <0>{{name}}</0> yet."
       },
       "default_view": {
-        "no_transactions": "No transactions yet."
+        "recent_transactions": "$t(translation.home.recent_transactions)",
+        "no_transactions": "No transactions yet.",
+        "is_blocked_hint": "Alby is currently disabled on {{host}}"
       }
     },
     "accounts": {

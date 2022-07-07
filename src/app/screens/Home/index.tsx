@@ -333,7 +333,7 @@ function Home() {
         {isBlocked && (
           <div className="mb-2 items-center py-3 dark:text-white">
             <p className="py-1">
-              Alby is currently disabled on {currentUrl?.host}
+              {t("default_view.is_blocked_hint", { host: currentUrl?.host })}
             </p>
             <Button
               fullWidth
@@ -351,30 +351,31 @@ function Home() {
         ) : (
           <div>
             <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
-              Recent Transactions
+              {t("default_view.recent_transactions")}
             </h2>
 
             <Tab.Group onChange={onTabChangeHandler}>
               <Tab.List className="mb-2">
-                {Object.keys({ Outgoing: true, Incoming: true }).map(
-                  (category) => (
-                    <Tab
-                      key={category}
-                      className={({ selected }) =>
-                        classNames(
-                          "w-1/2 rounded-lg py-2.5 font-bold transition duration-150",
-                          "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-bitcoin",
-                          "hover:bg-gray-50 dark:hover:bg-surface-16dp",
-                          selected
-                            ? "text-orange-bitcoin"
-                            : "text-gray-700  dark:text-neutral-200"
-                        )
-                      }
-                    >
-                      {category}
-                    </Tab>
-                  )
-                )}
+                {Object.keys({
+                  [t("transaction_list.tabs.outgoing")]: true,
+                  [t("transaction_list.tabs.incoming")]: true,
+                }).map((category) => (
+                  <Tab
+                    key={category}
+                    className={({ selected }) =>
+                      classNames(
+                        "w-1/2 rounded-lg py-2.5 font-bold transition duration-150",
+                        "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-bitcoin",
+                        "hover:bg-gray-50 dark:hover:bg-surface-16dp",
+                        selected
+                          ? "text-orange-bitcoin"
+                          : "text-gray-700  dark:text-neutral-200"
+                      )
+                    }
+                  >
+                    {category}
+                  </Tab>
+                ))}
               </Tab.List>
 
               <Tab.Panels>
@@ -413,7 +414,7 @@ function Home() {
                     />
                   ) : (
                     <p className="text-gray-500 dark:text-neutral-400">
-                      No transactions yet.
+                      {t("default_view.no_transactions")}
                     </p>
                   )}
                 </Tab.Panel>
@@ -426,7 +427,7 @@ function Home() {
                     <TransactionsTable transactions={invoiceTransactions} />
                   ) : (
                     <p className="text-gray-500 dark:text-neutral-400">
-                      No transactions yet.
+                      {t("default_view.no_transactions")}
                     </p>
                   )}
                 </Tab.Panel>
