@@ -172,6 +172,21 @@ const utils = {
         });
     });
   },
+  getBoostagramFromInvoice: (
+    custom_records:
+      | {
+          "696969": string;
+          "7629169": string;
+          "5482373484": string;
+        }
+      | undefined
+  ) => {
+    const hasBoostagram = custom_records && 7629169 in custom_records;
+    const boostagramDecoded = hasBoostagram
+      ? atob(custom_records[7629169])
+      : undefined;
+    return boostagramDecoded ? JSON.parse(boostagramDecoded) : undefined;
+  },
 };
 
 export default utils;

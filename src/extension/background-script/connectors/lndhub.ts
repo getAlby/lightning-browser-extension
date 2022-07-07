@@ -74,19 +74,16 @@ export default class LndHub implements Connector {
         amt: number;
         ispaid: boolean;
         keysend: boolean;
-        custom_records: { [key: number]: string };
+        custom_records: {
+          "696969": string;
+          "7629169": string;
+          "5482373484": string;
+        };
       }[]
     >("GET", "/getuserinvoices", undefined);
 
     const invoices: Invoice[] = data.map((invoice, index): Invoice => {
-      const hasBoostagram =
-        invoice.custom_records && 7629169 in invoice.custom_records;
-      const boostagramDecoded = hasBoostagram
-        ? atob(invoice.custom_records[7629169])
-        : undefined;
-      const boostagram = boostagramDecoded
-        ? JSON.parse(boostagramDecoded)
-        : undefined;
+      const boostagram = utils.getBoostagramFromInvoice(invoice.custom_records);
 
       return {
         id: `${invoice.payment_request}-${index}`,

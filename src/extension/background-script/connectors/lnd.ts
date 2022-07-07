@@ -240,7 +240,23 @@ class Lnd implements Connector {
         expiry: string;
         fallback_addr: string;
         features: unknown[];
-        htlcs: [];
+        htlcs: {
+          chan_id: string;
+          htlc_index: string;
+          amt_msat: string;
+          accept_height: number;
+          accept_time: string;
+          resolve_time: string;
+          expiry_height: number;
+          state: "SETTLED";
+          custom_records: {
+            "696969": string;
+            "7629169": string;
+            "5482373484": string;
+          };
+          mpp_total_amt_msat: string;
+          amp?: unknown;
+        }[];
         is_keysend: boolean;
         memo: string;
         payment_addr: string;
@@ -260,8 +276,13 @@ class Lnd implements Connector {
       first_index_offset: string;
     }>("GET", "/v1/invoices", undefined, {});
 
-    const invoices: Invoice[] = data.invoices.map(
-      (invoice, index): Invoice => ({
+    const invoices: Invoice[] = data.invoices.map((invoice, index): Invoice => {
+      const custom_records =
+        invoice.htlcs[0] && invoice.htlcs[0].custom_records;
+
+      const boostagram = utils.getBoostagramFromInvoice(custom_records);
+
+      return {
         id: `${invoice.payment_request}-${index}`,
         memo: invoice.memo,
         type: "received",
@@ -270,8 +291,9 @@ class Lnd implements Connector {
         totalAmount: invoice.value,
         totalAmountFiat: "",
         preimage: invoice.r_preimage,
-      })
-    );
+        boostagram,
+      };
+    });
 
     return {
       data: {
