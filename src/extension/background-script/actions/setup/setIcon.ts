@@ -3,6 +3,7 @@ import { MessageSetIcon } from "~/types";
 
 import state from "../../state";
 
+// Store all tabs with their respective icon
 const tabIcons = new Map<number, string>();
 
 enum ExtensionIcon {
