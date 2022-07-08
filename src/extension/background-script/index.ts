@@ -10,6 +10,7 @@ import state from "./state";
 
 let isFirstInstalled = false;
 
+// when debugging is enabled in development mode a window.debugAlby object is defined that can be used within the console. This is the type interface for that
 declare global {
   interface Window {
     debugAlby: unknown;
