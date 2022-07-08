@@ -34,6 +34,7 @@ const extractLightningData = (
     // Adding a short delay because I've seen cases where this call has happened too fast
     // before the receiving side in the content-script was connected/listening
     setTimeout(() => {
+      // double check: https://developer.chrome.com/docs/extensions/mv3/migrating_to_service_workers/#alarms
       browser.tabs.sendMessage(tabId, {
         action: "extractLightningData",
       });
@@ -57,10 +58,26 @@ const updateIcon = async (
     .equalsIgnoreCase(url.host)
     .first();
 
-  await setIcon(
-    allowance ? ExtensionIcon.Active : ExtensionIcon.Default,
-    tabId
-  );
+  // TODO: move to some config file
+  const names = {
+    active: "alby_icon_yellow",
+    off: "alby_icon_sleeping",
+  };
+  let name;
+  if (allowance) {
+    name = names.active;
+  } else {
+    name = names.off;
+  }
+  return browser.action.setIcon({
+    path: {
+      16: `assets/icons/${name}_16x16.png`,
+      32: `assets/icons/${name}_32x32.png`,
+      48: `assets/icons/${name}_48x48.png`,
+      128: `assets/icons/${name}_128x128.png`,
+    },
+    tabId: tabId,
+  });
 };
 
 const debugLogger = (message: unknown, sender: Runtime.MessageSender) => {
