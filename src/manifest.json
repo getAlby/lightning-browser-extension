@@ -15,7 +15,8 @@
   "COMMENT_web_accessible_resources": "https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/#web-accessible-resources",
   "web_accessible_resources": [
     {
-      "resources": ["js/inpageScript.bundle.js"]
+      "resources": ["js/inpageScript.bundle.js"],
+      "matches": ["https://*/*"]
     }
   ],
 
@@ -80,7 +81,6 @@
       }
     ],
     "default_title": "Alby - Bitcoin Lightning Wallet",
-    "__chrome|opera__chrome_style": false,
     "__firefox__browser_style": false
   },
 
@@ -95,7 +95,6 @@
   "options_ui": {
     "page": "options.html",
     "open_in_tab": true,
-    "__chrome|opera__chrome_style": false,
     "__firefox__browser_style": false
   },
 
