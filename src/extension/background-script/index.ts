@@ -1,6 +1,7 @@
-import browser from "webextension-polyfill";
+import browser, { Runtime, Tabs } from "webextension-polyfill";
 import utils from "~/common/lib/utils";
 
+import { ExtensionIcon, setIcon } from "./actions/setup/setIcon";
 import connectors from "./connectors";
 import db from "./db";
 import * as events from "./events";
@@ -9,14 +10,25 @@ import state from "./state";
 
 let isFirstInstalled = false;
 
+// when debugging is enabled in development mode a window.debugAlby object is defined that can be used within the console. This is the type interface for that
+declare global {
+  interface Window {
+    debugAlby: unknown;
+  }
+}
+
 /* debug help to check the current state
 setInterval(() => {
   console.log(state.getState());
 }, 5000);
 */
 
-const extractLightningData = (tabId, changeInfo, tab) => {
-  if (changeInfo.status === "complete" && tab.url?.startsWith("http")) {
+const extractLightningData = (
+  tabId: number,
+  changeInfo: Tabs.OnUpdatedChangeInfoType,
+  tabInfo: Tabs.Tab
+) => {
+  if (changeInfo.status === "complete" && tabInfo.url?.startsWith("http")) {
     // Adding a short delay because I've seen cases where this call has happened too fast
     // before the receiving side in the content-script was connected/listening
     setTimeout(() => {
@@ -27,10 +39,15 @@ const extractLightningData = (tabId, changeInfo, tab) => {
   }
 };
 
-const updateIcon = async (tabId, changeInfo, tabInfo) => {
+const updateIcon = async (
+  tabId: number,
+  changeInfo: Tabs.OnUpdatedChangeInfoType,
+  tabInfo: Tabs.Tab
+) => {
   if (changeInfo.status !== "complete" || !tabInfo.url?.startsWith("http")) {
     return;
   }
+
   const url = new URL(tabInfo.url);
 
   const allowance = await db.allowances
@@ -38,35 +55,19 @@ const updateIcon = async (tabId, changeInfo, tabInfo) => {
     .equalsIgnoreCase(url.host)
     .first();
 
-  // TODO: move to some config file
-  const names = {
-    active: "alby_icon_yellow",
-    off: "alby_icon_sleeping",
-  };
-  let name;
-  if (allowance) {
-    name = names.active;
-  } else {
-    name = names.off;
-  }
-  return browser.browserAction.setIcon({
-    path: {
-      16: `assets/icons/${name}_16x16.png`,
-      32: `assets/icons/${name}_32x32.png`,
-      48: `assets/icons/${name}_48x48.png`,
-      128: `assets/icons/${name}_128x128.png`,
-    },
-    tabId: tabId,
-  });
+  await setIcon(
+    allowance ? ExtensionIcon.Active : ExtensionIcon.Default,
+    tabId
+  );
 };
 
-const debugLogger = (message, sender) => {
+const debugLogger = (message: unknown, sender: Runtime.MessageSender) => {
   if (state.getState().settings.debug) {
     console.info("Background onMessage: ", message, sender);
   }
 };
 
-const handleInstalled = (details) => {
+const handleInstalled = (details: { reason: string }) => {
   console.info(`Handle installed: ${details.reason}`);
   // TODO: maybe check if accounts are already configured?
   if (details.reason === "install") {
@@ -76,7 +77,15 @@ const handleInstalled = (details) => {
 
 // listen to calls from the content script and calls the actions through the router
 // returns a promise to be handled in the content script
-const routeCalls = (message, sender) => {
+const routeCalls = (
+  message: {
+    application: string;
+    prompt: boolean;
+    type: string;
+    action: string;
+  },
+  sender: Runtime.MessageSender
+) => {
   // if the application does not match or if it is not a prompt we ignore the call
   if (message.application !== "LBE" || !message.prompt) {
     return;
@@ -93,7 +102,7 @@ const routeCalls = (message, sender) => {
 
   // Log the action response if we are in debug mode
   if (debug) {
-    call.then((r) => {
+    call.then((r: unknown) => {
       console.info(`${action} response:`, r);
       return r;
     });
@@ -115,10 +124,12 @@ async function init() {
   console.info("Events subscribed");
 
   browser.runtime.onMessage.addListener(debugLogger);
+
   // this is the only handler that may and must return a Promise which resolve with the response to the content script
   browser.runtime.onMessage.addListener(routeCalls);
 
-  browser.tabs.onUpdated.addListener(updateIcon); // update Icon when there is an allowance
+  // Update the extension icon
+  browser.tabs.onUpdated.addListener(updateIcon);
 
   // Notify the content script that the tab has been updated.
   browser.tabs.onUpdated.addListener(extractLightningData);

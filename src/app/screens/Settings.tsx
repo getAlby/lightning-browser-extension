@@ -28,6 +28,7 @@ function Settings() {
     theme: "system",
     currency: CURRENCIES.USD,
     exchange: "coindesk",
+    debug: false,
   });
 
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =

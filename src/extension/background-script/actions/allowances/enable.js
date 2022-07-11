@@ -2,7 +2,7 @@ import utils from "~/common/lib/utils";
 
 import db from "../../db";
 import state from "../../state";
-import setIcon from "../setup/setIcon";
+import { setIcon, ExtensionIcon } from "../setup/setIcon";
 
 const enable = async (message, sender) => {
   const isUnlocked = state.getState().isUnlocked();
@@ -13,7 +13,6 @@ const enable = async (message, sender) => {
     .first();
 
   if (isUnlocked && allowance && allowance.enabled) {
-    setIcon({ args: { icon: "active" } }, sender); // highlight the icon when enabled
     return {
       data: { enabled: true },
     };
@@ -21,7 +20,7 @@ const enable = async (message, sender) => {
     try {
       const response = await utils.openPrompt(message);
       if (response.data.enabled) {
-        setIcon({ args: { icon: "active" } }, sender); // highlight the icon when enabled
+        await setIcon(ExtensionIcon.Active, sender.tab.id); // highlight the icon when enabled
       }
       // if the response should be saved/remembered we update the allowance for the domain
       // as this returns a promise we must wait until it resolves
