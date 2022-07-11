@@ -4,13 +4,13 @@ import Loading from "@components/Loading";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
-import { useAuth } from "~/app/context/AuthContext";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
 
 export default function TestConnection() {
-  const auth = useAuth();
+  const auth = useAccount();
   const { getAccounts } = useAccounts();
   const [accountInfo, setAccountInfo] = useState<{
     alias: string;
