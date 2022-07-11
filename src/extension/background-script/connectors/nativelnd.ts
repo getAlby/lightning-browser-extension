@@ -7,8 +7,7 @@ export default class NativeLnd extends NativeConnector {
   request<Type>(
     method: string,
     path: string,
-    args?: Record<string, string>,
-    defaultValues?: Record<string, unknown>
+    args?: Record<string, string>
   ): Promise<Type> {
     const url = new URL(this.config.url);
     url.pathname = path;
@@ -38,10 +37,7 @@ export default class NativeLnd extends NativeConnector {
         if (response.status > 299) {
           reject(new Error(response.body));
         } else {
-          let data = JSON.parse(response.body);
-          if (defaultValues) {
-            data = Object.assign(Object.assign({}, defaultValues), data);
-          }
+          const data = JSON.parse(response.body);
           resolve(data);
         }
       };

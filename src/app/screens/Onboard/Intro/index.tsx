@@ -8,36 +8,56 @@ import Button from "@components/Button";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import i18n from "~/i18n/i18nConfig";
-import { welcomeI18nNamespace } from "~/i18n/namespaces";
+import { translationI18nNamespace } from "~/i18n/namespaces";
 
 import Features from "./features";
 
-const features = [
-  {
-    name: i18n.t("intro.send", welcomeI18nNamespace),
-    description: i18n.t("intro.send_description", welcomeI18nNamespace),
-    icon: LightningIcon,
-  },
-  {
-    name: i18n.t("intro.paywall", welcomeI18nNamespace),
-    description: i18n.t("intro.paywall_description", welcomeI18nNamespace),
-    icon: KeyIcon,
-  },
-  {
-    name: i18n.t("intro.privacy", welcomeI18nNamespace),
-    description: i18n.t("intro.privacy_description", welcomeI18nNamespace),
-    icon: ShieldIcon,
-  },
-  {
-    name: i18n.t("intro.foss", welcomeI18nNamespace),
-    description: i18n.t("intro.foss_description", welcomeI18nNamespace),
-    icon: CodeIcon,
-  },
-];
+function getFeatures() {
+  return [
+    {
+      name: i18n.t("welcome.intro.send", translationI18nNamespace),
+      description: i18n.t(
+        "welcome.intro.send_description",
+        translationI18nNamespace
+      ),
+      icon: LightningIcon,
+    },
+    {
+      name: i18n.t("welcome.intro.paywall", translationI18nNamespace),
+      description: i18n.t(
+        "welcome.intro.paywall_description",
+        translationI18nNamespace
+      ),
+      icon: KeyIcon,
+    },
+    {
+      name: i18n.t("welcome.intro.privacy", translationI18nNamespace),
+      description: i18n.t(
+        "welcome.intro.privacy_description",
+        translationI18nNamespace
+      ),
+      icon: ShieldIcon,
+    },
+    {
+      name: i18n.t("welcome.intro.foss", translationI18nNamespace),
+      description: i18n.t(
+        "welcome.intro.foss_description",
+        translationI18nNamespace
+      ),
+      icon: CodeIcon,
+    },
+  ];
+}
+
+let features = getFeatures();
 
 export default function Intro() {
   const navigate = useNavigate();
-  const { t } = useTranslation(["welcome"]);
+  const { t } = useTranslation();
+
+  i18n.on("languageChanged", () => {
+    features = getFeatures();
+  });
 
   return (
     <div>
@@ -51,11 +71,11 @@ export default function Intro() {
           <Features features={features} />
         </div>
       </div>
-      <div className="mt-8 flex justify-center">
+      <div className="my-8 flex justify-center">
         <Button
           onClick={() => navigate("/set-password")}
           type="button"
-          label={t("intro.actions.get_started")}
+          label={t("welcome.intro.actions.get_started")}
           primary
         />
       </div>

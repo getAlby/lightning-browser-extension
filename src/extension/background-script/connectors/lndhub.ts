@@ -29,6 +29,12 @@ interface Config {
   url: string;
 }
 
+const defaultHeaders = {
+  Accept: "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Content-Type": "application/json",
+};
+
 export default class LndHub implements Connector {
   config: Config;
   access_token?: string;
@@ -50,29 +56,28 @@ export default class LndHub implements Connector {
   }
 
   async getInfo(): Promise<GetInfoResponse> {
-    const data = await this.request<{ alias: string }>(
+    const { alias } = await this.request<{ alias: string }>(
       "GET",
       "/getinfo",
-      undefined,
-      {}
+      undefined
     );
     return {
       data: {
-        alias: data.alias,
+        alias,
       },
     };
   }
 
   async getBalance(): Promise<GetBalanceResponse> {
-    const data = await this.request<{ BTC: { AvailableBalance: number } }>(
+    const { BTC } = await this.request<{ BTC: { AvailableBalance: number } }>(
       "GET",
       "/balance",
-      undefined,
-      {}
+      undefined
     );
+
     return {
       data: {
-        balance: data.BTC.AvailableBalance,
+        balance: BTC.AvailableBalance,
       },
     };
   }
@@ -136,6 +141,7 @@ export default class LndHub implements Connector {
       },
     };
   }
+
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
     const data = await this.request<{
       error: string;
@@ -190,15 +196,14 @@ export default class LndHub implements Connector {
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    const data = await this.request<{ paid: boolean }>(
+    const { paid } = await this.request<{ paid: boolean }>(
       "GET",
       `/checkpayment/${args.paymentHash}`,
-      undefined,
-      {}
+      undefined
     );
     return {
       data: {
-        paid: data.paid,
+        paid,
       },
     };
   }
@@ -281,48 +286,37 @@ export default class LndHub implements Connector {
   }
 
   async authorize() {
-    const headers = new Headers();
-    headers.append("Accept", "application/json");
-    headers.append("Access-Control-Allow-Origin", "*");
-    headers.append("Content-Type", "application/json");
-    return fetch(this.config.url + "/auth?type=auth", {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify({
+    const { data: authData } = await axios.post(
+      `${this.config.url}/auth?type=auth`,
+      {
         login: this.config.login,
         password: this.config.password,
-      }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("API error: " + response.status);
-        }
-      })
-      .then((json) => {
-        if (json && json.error) {
-          throw new Error(
-            "API error: " + json.message + " (code " + json.code + ")"
-          );
-        }
-        if (!json.access_token || !json.refresh_token) {
-          throw new Error("API unexpected response: " + JSON.stringify(json));
-        }
+      },
+      {
+        headers: defaultHeaders,
+      }
+    );
 
-        this.refresh_token = json.refresh_token;
-        this.access_token = json.access_token;
-        this.refresh_token_created = +new Date();
-        this.access_token_created = +new Date();
-        return json;
-      });
+    if (authData.error || authData.errors) {
+      const error = authData.error || authData.errors;
+      const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
+
+      console.error(errMessage);
+      throw new Error("API error: " + errMessage);
+    } else {
+      this.refresh_token = authData.refresh_token;
+      this.access_token = authData.access_token;
+      this.refresh_token_created = +new Date();
+      this.access_token_created = +new Date();
+
+      return authData;
+    }
   }
 
   async request<Type>(
     method: Method,
     path: string,
-    args?: Record<string, unknown>,
-    defaultValues?: Record<string, unknown>
+    args?: Record<string, unknown>
   ): Promise<Type> {
     if (!this.access_token) {
       await this.authorize();
@@ -330,21 +324,22 @@ export default class LndHub implements Connector {
 
     const reqConfig: AxiosRequestConfig = {
       method,
-      url: this.config.url + path,
+      url: `${this.config.url}${path}`,
       responseType: "json",
       headers: {
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
+        ...defaultHeaders,
         Authorization: `Bearer ${this.access_token}`,
       },
     };
+
     if (method === "POST") {
       reqConfig.data = args;
     } else if (args !== undefined) {
       reqConfig.params = args;
     }
+
     let data;
+
     try {
       const res = await axios(reqConfig);
       data = res.data;
@@ -353,31 +348,42 @@ export default class LndHub implements Connector {
 
       if (axios.isAxiosError(e)) {
         const errResponse = e.response as AxiosResponse;
+
         if (errResponse?.status === 404) {
           const method = path.replace("/", "");
           throw new Error(`${method} not supported by the connected account.`);
         }
+
+        if (errResponse?.status === 401) {
+          try {
+            await this.authorize();
+          } catch (e) {
+            console.error(e);
+            if (e instanceof Error) throw new Error(e.message);
+          }
+          return this.request(method, path, args);
+        }
+
         const errorMessage = `${errResponse?.data.message}\n(${e.message})`;
         throw new Error(errorMessage);
       }
     }
-    if (data && data.error) {
+
+    if (data?.error) {
       if (data.code * 1 === 1 && !this.noRetry) {
         try {
           await this.authorize();
         } catch (e) {
-          console.log(e);
+          console.error(e);
           if (e instanceof Error) throw new Error(e.message);
         }
         this.noRetry = true;
-        return this.request(method, path, args, defaultValues);
+        return this.request(method, path, args);
       } else {
         throw new Error(data.message);
       }
     }
-    if (defaultValues) {
-      data = Object.assign(Object.assign({}, defaultValues), data);
-    }
+
     return data;
   }
 }

@@ -8,20 +8,23 @@ import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useState, useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
+import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
-import { useAuth } from "~/app/context/AuthContext";
 import utils from "~/common/lib/utils";
 
 import Menu from "../Menu";
 
 export type Props = {
   title: string;
-  subtitle: string;
+  balances: {
+    satsBalance: string;
+    fiatBalance: string;
+  };
   showOptions?: boolean;
 };
 
-function AccountMenu({ title, subtitle, showOptions = true }: Props) {
-  const auth = useAuth();
+function AccountMenu({ title, balances, showOptions = true }: Props) {
+  const auth = useAccount();
   const navigate = useNavigate();
   const { accounts, getAccounts } = useAccounts();
   const [loading, setLoading] = useState(false);
@@ -37,7 +40,7 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
     await utils.call("selectAccount", {
       id: accountId,
     });
-    await auth.fetchAccountInfo(accountId);
+    await auth.fetchAccountInfo({ accountId });
     setLoading(false);
   }
 
@@ -54,18 +57,25 @@ function AccountMenu({ title, subtitle, showOptions = true }: Props) {
 
   return (
     <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-surface-12dp">
-      <div className="flex items-center">
+      <p className="flex items-center">
         <WalletIcon className="-ml-1 w-8 h-8 opacity-50 dark:text-white" />
-      </div>
+      </p>
+
       <div
-        className={`flex-auto mx-2 py-1 ${!title && !subtitle ? "w-28" : ""}`}
+        className={`flex-auto mx-2 py-1 ${!title && !balances ? "w-28" : ""}`}
       >
-        <div className="text-xs text-gray-700 dark:text-neutral-400">
+        <p className="text-xs text-gray-700 dark:text-neutral-400">
           {title || <Skeleton />}
-        </div>
-        <div className="text-xs dark:text-white">
-          {subtitle || <Skeleton />}
-        </div>
+        </p>
+
+        <p className="flex justify-between">
+          <span className="text-xs dark:text-white">
+            {balances.satsBalance || <Skeleton />}
+          </span>
+          <span className="text-xs text-gray-600 dark:text-neutral-400">
+            ~{balances.fiatBalance || <Skeleton />}
+          </span>
+        </p>
       </div>
 
       <Menu as="div">

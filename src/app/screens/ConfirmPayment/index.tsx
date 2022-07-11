@@ -5,13 +5,14 @@ import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import lightningPayReq from "bolt11";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useAuth } from "~/app/context/AuthContext";
+import { useAccount } from "~/app/context/AccountContext";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
+import { getFiatValue } from "~/common/utils/currencyConvert";
 import getOriginData from "~/extension/content-script/originData";
 import type { OriginData } from "~/types";
 
@@ -23,7 +24,8 @@ export type Props = {
 function ConfirmPayment(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const auth = useAuth();
+  const auth = useAccount();
+
   const invoiceRef = useRef(
     lightningPayReq.decode(
       props.paymentRequest || (searchParams.get("paymentRequest") as string)
@@ -36,6 +38,15 @@ function ConfirmPayment(props: Props) {
   const [budget, setBudget] = useState(
     ((invoiceRef.current?.satoshis || 0) * 10).toString()
   );
+  const [fiatAmount, setFiatAmount] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      const res = await getFiatValue(budget);
+      setFiatAmount(res);
+    })();
+  }, [budget]);
+
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -92,7 +103,10 @@ function ConfirmPayment(props: Props) {
         <Container maxWidth="sm">
           {!successMessage ? (
             <>
-              <div className="mb-8">
+              <h1 className="dark:text-white font-bold mb-4">
+                Approve payment
+              </h1>
+              <div className="mb-6">
                 <PaymentSummary
                   amount={invoiceRef.current?.satoshis}
                   description={invoiceRef.current?.tagsObject.description}
@@ -100,6 +114,7 @@ function ConfirmPayment(props: Props) {
               </div>
 
               <BudgetControl
+                fiatAmount={fiatAmount}
                 remember={rememberMe}
                 onRememberChange={(event) => {
                   setRememberMe(event.target.checked);
@@ -107,11 +122,13 @@ function ConfirmPayment(props: Props) {
                 budget={budget}
                 onBudgetChange={(event) => setBudget(event.target.value)}
               />
+
               <ConfirmOrCancel
                 disabled={loading}
                 loading={loading}
                 onConfirm={confirm}
                 onCancel={reject}
+                label="Pay now"
               />
             </>
           ) : (

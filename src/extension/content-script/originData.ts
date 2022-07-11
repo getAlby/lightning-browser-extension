@@ -75,6 +75,10 @@ const metaDataRules: Record<string, RuleSet> = {
   description: {
     rules: [
       [
+        'meta[property="alby:description"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
         'meta[property="og:description"][content]',
         (element) => element.getAttribute("content"),
       ],
@@ -189,6 +193,10 @@ const metaDataRules: Record<string, RuleSet> = {
   },
   provider: {
     rules: [
+      [
+        'meta[property="alby:name"][content]',
+        (element) => element.getAttribute("content"),
+      ],
       [
         'meta[property="og:site_name"][content]',
         (element) => element.getAttribute("content"),
@@ -491,6 +499,10 @@ const metaDataRules: Record<string, RuleSet> = {
   image: {
     rules: [
       [
+        'meta[property="alby:image"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
         'meta[property="og:image:secure_url"][content]',
         (element) => element.getAttribute("content"),
       ],
@@ -578,6 +590,10 @@ const metaDataRules: Record<string, RuleSet> = {
   },
   icon: {
     rules: [
+      [
+        'meta[property="alby:image"][content]',
+        (element) => element.getAttribute("content"),
+      ],
       [
         'link[rel="apple-touch-icon"][href]',
         (element) => element.getAttribute("href"),

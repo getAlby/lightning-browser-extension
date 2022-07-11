@@ -1,18 +1,17 @@
 import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import utils from "~/common/lib/utils";
+import { getFiatValue } from "~/common/utils/currencyConvert";
+import type { Allowance } from "~/types";
 
 import Button from "../Button";
 import Menu from "../Menu";
-import TextField from "../form/TextField";
+import DualCurrencyField from "../form/DualCurrencyField/index";
 
-type Props = {
-  allowance: {
-    id: string;
-    totalBudget: number;
-  };
+export type Props = {
+  allowance: Pick<Allowance, "id" | "totalBudget">;
   onEdit?: () => void;
   onDelete?: () => void;
 };
@@ -20,6 +19,16 @@ type Props = {
 function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [budget, setBudget] = useState("0");
+  const [fiatAmount, setFiatAmount] = useState("");
+
+  useEffect(() => {
+    if (budget !== "") {
+      (async () => {
+        const res = await getFiatValue(budget);
+        setFiatAmount(res);
+      })();
+    }
+  }, [budget]);
 
   function openModal() {
     setBudget(allowance.totalBudget.toString());
@@ -40,7 +49,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
 
   async function updateAllowance() {
     await utils.call("updateAllowance", {
-      id: parseInt(allowance.id),
+      id: allowance.id,
       totalBudget: parseInt(budget),
     });
     onEdit && onEdit();
@@ -63,7 +72,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               ) {
                 try {
                   await utils.call("deleteAllowance", {
-                    id: parseInt(allowance.id),
+                    id: allowance.id,
                   });
                   onDelete && onDelete();
                 } catch (e) {
@@ -77,6 +86,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         </Menu.List>
       </Menu>
       <Modal
+        ariaHideApp={false}
         closeTimeoutMS={200}
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -85,20 +95,24 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         className="rounded-lg bg-white w-full max-w-lg"
       >
         <div className="p-5 flex justify-between dark:bg-surface-02dp">
-          <h2 className="text-2xl font-bold dark:text-white">Edit Allowance</h2>
+          <h2 className="text-2xl font-bold dark:text-white">
+            Set a new budget
+          </h2>
           <button onClick={closeModal}>
             <CrossIcon className="w-6 h-6 dark:text-white" />
           </button>
         </div>
         <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
           <div className="w-60">
-            <TextField
+            <DualCurrencyField
               id="budget"
               label="Budget"
               autoFocus
               placeholder="sats"
               value={budget}
               type="number"
+              hint="This will reset the current budget"
+              fiatValue={fiatAmount}
               onChange={(e) => setBudget(e.target.value)}
             />
           </div>

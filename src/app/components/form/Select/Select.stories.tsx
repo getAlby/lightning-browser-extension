@@ -5,7 +5,7 @@ export const Primary = () => (
     name="user"
     value=""
     onChange={() => {
-      console.log("changed");
+      console.info("changed");
     }}
   >
     <option>Lorem ipsum</option>

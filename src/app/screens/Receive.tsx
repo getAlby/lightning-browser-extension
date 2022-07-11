@@ -15,16 +15,19 @@ import Confetti from "react-confetti";
 import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useAuth } from "~/app/context/AuthContext";
+import { useAccount } from "~/app/context/AccountContext";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
+import { getFiatValue } from "~/common/utils/currencyConvert";
 import { poll } from "~/common/utils/helpers";
 
+import DualCurrencyField from "../components/form/DualCurrencyField";
+
 function Receive() {
-  const auth = useAuth();
+  const auth = useAccount();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    amount: "",
+    amount: "0",
     description: "",
     expiration: "",
   });
@@ -45,6 +48,17 @@ function Receive() {
       mounted.current = false;
     };
   }, []);
+
+  const [fiatAmount, setFiatAmount] = useState("");
+
+  useEffect(() => {
+    if (formData.amount !== "") {
+      (async () => {
+        const res = await getFiatValue(formData.amount);
+        setFiatAmount(res);
+      })();
+    }
+  }, [formData]);
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -183,11 +197,11 @@ function Receive() {
             ) : (
               <>
                 <div className="mb-4">
-                  <TextField
+                  <DualCurrencyField
                     id="amount"
                     label="Amount"
                     placeholder="Amount in Satoshi..."
-                    type="number"
+                    fiatValue={fiatAmount}
                     onChange={handleChange}
                   />
                 </div>
@@ -200,30 +214,6 @@ function Receive() {
                     onChange={handleChange}
                   />
                 </div>
-
-                {/* <div className="mb-5">
-          <label htmlFor="expiration" className="block font-medium text-gray-700">
-            Expiration
-          </label>
-          <div className="mt-1">
-            <Select
-              name="expiration"
-              id="expiration"
-              value={formData.expiration}
-              onChange={handleChange}
-            >
-              <option key="60" value="60">
-                1 hour
-              </option>
-              <option key="120" value="120">
-                2 hours
-              </option>
-              <option key="180" value="180">
-                3 hours
-              </option>
-            </Select>
-          </div>
-        </div> */}
 
                 <div className="text-center mb-4">
                   <div className="mb-4">

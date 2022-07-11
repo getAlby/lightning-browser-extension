@@ -14,14 +14,15 @@ import Unlock from "@screens/Unlock";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { AccountProvider, useAccount } from "~/app/context/AccountContext";
 import { AccountsProvider } from "~/app/context/AccountsContext";
-import { AuthProvider, useAuth } from "~/app/context/AuthContext";
 import RequireAuth from "~/app/router/RequireAuth";
-import connectorRoutes from "~/app/router/connectorRoutes";
+import getConnectorRoutes from "~/app/router/connectorRoutes";
 
 function Options() {
+  const connectorRoutes = getConnectorRoutes();
   return (
-    <AuthProvider>
+    <AccountProvider>
       <AccountsProvider>
         <HashRouter>
           <Routes>
@@ -82,26 +83,22 @@ function Options() {
           </Routes>
         </HashRouter>
       </AccountsProvider>
-    </AuthProvider>
+    </AccountProvider>
   );
 }
 
 const Layout = () => {
-  const auth = useAuth();
+  const { account, balancesDecorated } = useAccount();
 
   return (
     <div>
       <Navbar
         title={
-          typeof auth.account?.name === "string"
-            ? `${auth.account?.name} - ${auth.account?.alias}`.substring(0, 21)
+          typeof account?.name === "string"
+            ? `${account?.name} - ${account?.alias}`.substring(0, 21)
             : ""
         }
-        subtitle={
-          typeof auth.account?.balance === "number"
-            ? `${auth.account.balance} sats`
-            : ""
-        }
+        balances={balancesDecorated}
       >
         <Navbar.Link href="/publishers">Websites</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>

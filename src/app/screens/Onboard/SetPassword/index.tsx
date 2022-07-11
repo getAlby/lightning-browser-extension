@@ -1,27 +1,35 @@
+import {
+  HiddenIcon,
+  VisibleIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import TextField from "@components/form/TextField";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import utils from "~/common/lib/utils";
-import i18n from "~/i18n/i18nConfig";
-import { welcomeI18nNamespace } from "~/i18n/namespaces";
 
-const initialFormData = Object.freeze({
+const initialFormData = {
   password: "",
   passwordConfirmation: "",
-});
+};
 
-const initialErrors = Object.freeze({
+const initialErrors = {
   password: "",
   passwordConfirmation: "",
-});
+};
 
 export default function SetPassword() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState(initialErrors);
-  const { t } = useTranslation(["welcome"]);
+  const [passwordView, setPasswordView] = useState(false);
+  const [passwordConfirmationView, setPasswordConfirmationView] =
+    useState(false);
+  const { t } = useTranslation("translation", {
+    keyPrefix: "welcome.set_password",
+  });
+  const { t: tCommon } = useTranslation("common");
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -46,7 +54,7 @@ export default function SetPassword() {
       await utils.call("setPassword", { password: formData.password });
       navigate("/choose-connector");
     } catch (e) {
-      if (e instanceof Error) console.log(e.message);
+      if (e instanceof Error) console.error(e.message);
     }
   }
 
@@ -54,18 +62,11 @@ export default function SetPassword() {
     let password = "";
     let passwordConfirmation = "";
 
-    if (!formData.password)
-      password = i18n.t("set_password.enter_password", welcomeI18nNamespace);
+    if (!formData.password) password = t("enter_password");
     if (!formData.passwordConfirmation) {
-      passwordConfirmation = i18n.t(
-        "set_password.confirm_password",
-        welcomeI18nNamespace
-      );
+      passwordConfirmation = t("confirm_password");
     } else if (formData.password !== formData.passwordConfirmation) {
-      passwordConfirmation = i18n.t(
-        "set_password.mismatched_password",
-        welcomeI18nNamespace
-      );
+      passwordConfirmation = t("mismatched_password");
     }
     setErrors({
       password,
@@ -77,21 +78,32 @@ export default function SetPassword() {
     <form onSubmit={handleSubmit}>
       <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-surface-02dp py-12 px-10">
         <div className="lg:w-1/2">
-          <h1 className="text-2xl font-bold dark:text-white">
-            {t("set_password.title")}
-          </h1>
-          <p className="text-gray-500 mt-6 dark:text-neutral-400">
-            {t("set_password.description")}
+          <h1 className="text-2xl font-bold dark:text-white">{t("title")}</h1>
+          <p className="text-gray-500 mt-6 dark:text-gray-400">
+            {t("description")}
           </p>
           <div className="w-4/5">
             <div className="mt-6">
               <TextField
                 id="password"
-                label={t("set_password.choose_password_label")}
-                type="password"
+                label={t("choose_password_label")}
+                type={passwordView ? "text" : "password"}
                 autoFocus
                 required
                 onChange={handleChange}
+                endAdornment={
+                  <button
+                    type="button"
+                    className="flex justify-center items-center w-10 h-8"
+                    onClick={() => setPasswordView(!passwordView)}
+                  >
+                    {passwordView ? (
+                      <HiddenIcon className="h-6 w-6" />
+                    ) : (
+                      <VisibleIcon className="h-6 w-6" />
+                    )}
+                  </button>
+                }
               />
               {errors.password && (
                 <div className="mt-1 text-red-500">{errors.password}</div>
@@ -100,11 +112,26 @@ export default function SetPassword() {
             <div className="mt-6">
               <TextField
                 id="passwordConfirmation"
-                label={t("set_password.confirm_password_label")}
-                type="password"
+                label={t("confirm_password_label")}
+                type={passwordConfirmationView ? "text" : "password"}
                 required
                 onChange={handleChange}
                 onBlur={validate}
+                endAdornment={
+                  <button
+                    type="button"
+                    className="flex justify-center items-center w-10 h-8"
+                    onClick={() =>
+                      setPasswordConfirmationView(!passwordConfirmationView)
+                    }
+                  >
+                    {passwordConfirmationView ? (
+                      <HiddenIcon className="h-6 w-6" />
+                    ) : (
+                      <VisibleIcon className="h-6 w-6" />
+                    )}
+                  </button>
+                }
               />
               {errors.passwordConfirmation && (
                 <div className="mt-1 text-red-500">
@@ -120,9 +147,9 @@ export default function SetPassword() {
           </div>
         </div>
       </div>
-      <div className="mt-8 flex justify-center">
+      <div className="my-8 flex justify-center">
         <Button
-          label="Next"
+          label={tCommon("actions.next")}
           type="submit"
           primary
           disabled={

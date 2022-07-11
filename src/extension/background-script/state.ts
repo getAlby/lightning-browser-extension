@@ -2,6 +2,7 @@ import merge from "lodash/merge";
 import pick from "lodash/pick";
 import browser from "webextension-polyfill";
 import createState from "zustand";
+import { CURRENCIES } from "~/common/constants";
 import { decryptData } from "~/common/lib/crypto";
 import i18n from "~/i18n/i18nConfig";
 import type { Account, Accounts, SettingsStorage } from "~/types";
@@ -10,17 +11,18 @@ import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
 
 interface State {
-  connector: Connector | null;
   account: Account | null;
-  settings: SettingsStorage;
   accounts: Accounts;
+  connector: Connector | null;
   currentAccountId: string | null;
-  password: string | null;
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
-  lock: () => Promise<void>;
   init: () => Promise<void>;
+  isUnlocked: () => boolean;
+  lock: () => Promise<void>;
+  password: string | null;
   saveToStorage: () => Promise<void>;
+  settings: SettingsStorage;
 }
 
 interface BrowserStorage {
@@ -29,13 +31,16 @@ interface BrowserStorage {
   currentAccountId: string | null;
 }
 
-export const DEFAULT_SETTINGS = {
+export const DEFAULT_SETTINGS: SettingsStorage = {
   websiteEnhancements: true,
   legacyLnurlAuth: false,
   userName: "",
   userEmail: "",
   locale: i18n.resolvedLanguage,
   theme: "system",
+  currency: CURRENCIES.USD,
+  exchange: "coindesk",
+  debug: false,
 };
 
 // these keys get synced from the state to the browser storage
@@ -110,7 +115,7 @@ const state = createState<State>((set, get) => ({
 }));
 
 browserStorageKeys.forEach((key) => {
-  console.log(`Adding state subscription for ${key}`);
+  console.info(`Adding state subscription for ${key}`);
   state.subscribe(
     (newValue, previousValue) => {
       //if (previous && Object.keys(previous) > 0) {

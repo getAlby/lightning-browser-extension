@@ -54,7 +54,7 @@ var options = {
 
   entry: {
     manifest: "./src/manifest.json",
-    background: "./src/extension/background-script/index.js",
+    background: "./src/extension/background-script/index.ts",
     contentScript: "./src/extension/content-script/index.js",
     inpageScript: "./src/extension/inpage-script/index.js",
     popup: "./src/app/router/Popup/index.tsx",
@@ -96,8 +96,10 @@ var options = {
       },
       {
         test: /\.(js|ts)x?$/,
-        loader: "babel-loader",
         exclude: /node_modules/,
+        use: {
+          loader: "swc-loader",
+        },
       },
       {
         test: /\.(sa|sc|c)ss$/,

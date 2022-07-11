@@ -13,36 +13,38 @@ export default function TestConnection() {
     name: string;
     balance: number;
   }>();
-  const [errorMessage, setErrorMessage] = useState();
+  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const { t } = useTranslation(["welcome"]);
+  const { t } = useTranslation("translation", {
+    keyPrefix: "welcome.test_connection",
+  });
+  const { t: tCommon } = useTranslation("common");
 
   const navigate = useNavigate();
 
-  function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
-    utils.call("removeAccount").then(() => {
-      navigate(-1);
-    });
+  async function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
+    await utils.call("removeAccount");
+    navigate(-1);
   }
 
-  function loadAccountInfo() {
+  async function loadAccountInfo() {
     setLoading(true);
-    api
-      .getAccountInfo()
-      .then((response) => {
-        const name = response.name;
-        const { alias } = response.info;
-        const { balance: resBalance } = response.balance;
-        const balance =
-          typeof resBalance === "number" ? resBalance : parseInt(resBalance);
+    try {
+      const response = await api.getAccountInfo();
+      const name = response.name;
+      const { alias } = response.info;
+      const { balance: resBalance } = response.balance;
+      const balance =
+        typeof resBalance === "number" ? resBalance : parseInt(resBalance);
 
-        setAccountInfo({ alias, balance, name });
-      })
-      .catch((e) => {
-        console.error(e);
-        setErrorMessage(e.message);
-      })
-      .finally(() => setLoading(false));
+      setAccountInfo({ alias, balance, name });
+    } catch (e) {
+      const message = e instanceof Error ? `(${e.message})` : "";
+      console.error(message);
+      setErrorMessage(message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -50,17 +52,17 @@ export default function TestConnection() {
   }, []);
 
   return (
-    <div className="relative lg:mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white dark:bg-surface-02dp px-10 py-12">
+    <div className="relative mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white dark:bg-surface-02dp px-10 py-12">
       <div className="relative">
         <div>
           {errorMessage && (
             <div>
               <h1 className="text-3xl font-bold dark:text-white">
-                {t("test_connection.connection_error")}
+                {t("connection_error")}
               </h1>
               <p className="dark:text-neutral-500">{errorMessage}</p>
               <Button
-                label={t("test_connection.edit")}
+                label={tCommon("actions.edit")}
                 onClick={handleEdit}
                 primary
               />
@@ -71,13 +73,11 @@ export default function TestConnection() {
             <div>
               <div className="flex space-x-2">
                 <h1 className="text-2xl font-bold text-green-bitcoin">
-                  {t("test_connection.success")}
+                  {tCommon("success")}
                 </h1>
                 <img src="assets/icons/star.svg" alt="image" className="w-8" />
               </div>
-              <p className="mt-6 dark:text-white">
-                {t("test_connection.ready")}
-              </p>
+              <p className="mt-6 dark:text-white">{t("ready")}</p>
 
               <div className="mt-6 shadow-lg p-4 rounded-xl">
                 <Card
@@ -91,12 +91,10 @@ export default function TestConnection() {
                 />
               </div>
               <div>
-                <p className="mt-8 dark:text-white">
-                  {t("test_connection.tutorial")}
-                </p>
+                <p className="mt-8 dark:text-white">{t("tutorial")}</p>
                 <div className="mt-8">
                   <a href="https://getalby.com/demo">
-                    <Button label={t("test_connection.try_tutorial")} primary />
+                    <Button label={t("try_tutorial")} primary />
                   </a>
                 </div>
               </div>
@@ -107,7 +105,7 @@ export default function TestConnection() {
             <div>
               <Loading />
               <p className="text-gray-500 dark:text-white mt-6">
-                {t("loading")}
+                {t("initializing")}
               </p>
             </div>
           )}

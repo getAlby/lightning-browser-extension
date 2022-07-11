@@ -21,6 +21,16 @@ function parseElement(elementSelector: string) {
     const match = text.match(/(⚡:?|lightning:|lnurl:)\s?(\S+@\S+)/i);
     if (match) return match[2];
   }
+
+  // Fallback for Windows and Linux
+  const zap = document
+    .querySelector<HTMLElement>(elementSelector)
+    ?.querySelector('[alias="zap"]');
+  if (zap) {
+    const lnaddress = zap.nextSibling?.textContent as string;
+    const match = lnaddress.match(/(:?)\s?(\S+@\S+)/i);
+    if (match) return match[2];
+  }
 }
 
 function handleProfilePage() {

@@ -9,7 +9,7 @@ import { Fragment, useState, MouseEvent } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Container from "~/app/components/Container";
-import { useAuth } from "~/app/context/AuthContext";
+import { useAccount } from "~/app/context/AccountContext";
 import utils from "~/common/lib/utils";
 
 type Props = {
@@ -21,7 +21,7 @@ type Props = {
 function Keysend(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const auth = useAuth();
+  const auth = useAccount();
   const [amount, setAmount] = useState(props.valueSat || "");
   const [customRecords] = useState(props.customRecords || {});
   const [destination] = useState(
@@ -47,7 +47,7 @@ function Keysend(props: Props) {
 
       auth.fetchAccountInfo(); // Update balance.
     } catch (e) {
-      console.log(e);
+      console.error(e);
       if (e instanceof Error) {
         toast.error(`Error: ${e.message}`);
       }

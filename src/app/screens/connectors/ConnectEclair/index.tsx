@@ -1,3 +1,7 @@
+import {
+  HiddenIcon,
+  VisibleIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import { useState } from "react";
@@ -12,6 +16,7 @@ export default function ConnectEclair() {
     url: "",
   });
   const [loading, setLoading] = useState(false);
+  const [passwordView, setPasswordView] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -44,7 +49,7 @@ export default function ConnectEclair() {
           navigate("/test-connection");
         }
       } else {
-        console.log(validation);
+        console.error(validation);
         toast.error(
           `Connection failed. Do you have the correct URL and password? \n\n(${validation.error})`
         );
@@ -72,9 +77,22 @@ export default function ConnectEclair() {
         <TextField
           id="password"
           label="Eclair Password"
-          type="text"
+          type={passwordView ? "text" : "password"}
           required
           onChange={handleChange}
+          endAdornment={
+            <button
+              type="button"
+              className="flex justify-center items-center w-10 h-8"
+              onClick={() => setPasswordView(!passwordView)}
+            >
+              {passwordView ? (
+                <HiddenIcon className="h-6 w-6" />
+              ) : (
+                <VisibleIcon className="h-6 w-6" />
+              )}
+            </button>
+          }
         />
       </div>
       <TextField

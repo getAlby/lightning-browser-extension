@@ -38,7 +38,7 @@ class Eclair implements Connector {
   }
 
   getInfo(): Promise<GetInfoResponse> {
-    return this.request("/getinfo", undefined, {}).then((data) => {
+    return this.request("/getinfo", undefined).then((data) => {
       return {
         data: {
           alias: data.alias,
@@ -148,11 +148,7 @@ class Eclair implements Connector {
     };
   }
 
-  async request(
-    path: string,
-    params?: Record<string, unknown>,
-    defaultValues?: Record<string, unknown>
-  ) {
+  async request(path: string, params?: Record<string, unknown>) {
     const url = new URL(
       this.config.url.startsWith("http")
         ? this.config.url
@@ -192,15 +188,11 @@ class Eclair implements Connector {
       } catch (err) {
         throw new Error(res.statusText);
       }
-      console.log("eclair error", errBody.error);
+      console.error("eclair error", errBody.error);
       throw new Error(errBody.error);
     }
 
-    let data = await res.json();
-    if (defaultValues) {
-      data = Object.assign(Object.assign({}, defaultValues), data);
-    }
-    return data;
+    return await res.json();
   }
 }
 

@@ -10,9 +10,9 @@ import MakeInvoice from "@screens/MakeInvoice";
 import Unlock from "@screens/Unlock";
 import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { useAccount } from "~/app/context/AccountContext";
+import { AccountProvider } from "~/app/context/AccountContext";
 import { AccountsProvider } from "~/app/context/AccountsContext";
-import { useAuth } from "~/app/context/AuthContext";
-import { AuthProvider } from "~/app/context/AuthContext";
 import RequireAuth from "~/app/router/RequireAuth";
 import type {
   LNURLAuthServiceResponse,
@@ -26,23 +26,28 @@ import type {
 const params = new URLSearchParams(window.location.search);
 let origin = {} as OriginData;
 let args = {};
-let type = "";
+let action = "";
+
 if (params.get("origin") && typeof params.get("origin") === "string") {
   origin = JSON.parse(params.get("origin") as string);
 }
+
 if (params.get("args") && typeof params.get("args") === "string") {
   args = JSON.parse(params.get("args") as string);
 }
-if (typeof params.get("type") === "string") type = params.get("type") as string;
+
+if (typeof params.get("action") === "string")
+  action = params.get("action") as string;
+
 const routeParams: {
   origin: OriginData;
   args: Record<string, unknown>;
-  type: string;
-} = { origin, args, type };
+  action: string;
+} = { origin, args, action };
 
 function Prompt() {
   return (
-    <AuthProvider>
+    <AccountProvider>
       <AccountsProvider>
         <HashRouter>
           <Routes>
@@ -56,7 +61,7 @@ function Prompt() {
             >
               <Route
                 index
-                element={<Navigate to={`/${routeParams.type}`} replace />}
+                element={<Navigate to={`/${routeParams.action}`} replace />}
               />
               <Route
                 path="webln/enable"
@@ -145,12 +150,12 @@ function Prompt() {
           </Routes>
         </HashRouter>
       </AccountsProvider>
-    </AuthProvider>
+    </AccountProvider>
   );
 }
 
 const Layout = () => {
-  const auth = useAuth();
+  const { account, balancesDecorated } = useAccount();
 
   return (
     <>
@@ -158,23 +163,18 @@ const Layout = () => {
       <div className="px-4 py-2 bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
         <AccountMenu
           title={
-            typeof auth.account?.name === "string"
-              ? `${auth.account?.name} - ${auth.account?.alias}`.substring(
-                  0,
-                  21
-                )
-              : ""
-          }
-          subtitle={
-            typeof auth.account?.balance === "number"
-              ? `${auth.account.balance} sats`
+            typeof account?.name === "string"
+              ? `${account?.name} - ${account?.alias}`.substring(0, 21)
               : ""
           }
           showOptions={false}
+          balances={balancesDecorated}
         />
       </div>
 
-      <Outlet />
+      <main className="flex flex-col grow min-h-0">
+        <Outlet />
+      </main>
     </>
   );
 };

@@ -61,8 +61,8 @@ if (document) {
       if (!response.enabled) {
         return;
       }
+
       if (lnurl) {
-        // TODO: dispatch success event
         return window.webln
           .lnurl(lnurl)
           .catch((e) => {
@@ -84,9 +84,11 @@ if (document) {
             link.dispatchEvent(responseEvent);
           });
       }
+
       return window.webln
         .sendPayment(paymentRequest)
         .then((response) => {
+          console.info(response);
           const responseEvent = new CustomEvent("lightning:success", {
             bubbles: true,
             detail: {

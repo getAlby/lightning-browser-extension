@@ -3,6 +3,7 @@ import PublisherCard from "@components/PublisherCard";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
+import utils from "~/common/lib/utils";
 import type { OriginData } from "~/types";
 
 type Props = {
@@ -26,8 +27,21 @@ function Enable(props: Props) {
   }, [budget, remember]);
 
   function reject(event: React.MouseEvent<HTMLAnchorElement>) {
-    msg.error(USER_REJECTED_ERROR);
     event.preventDefault();
+    msg.error(USER_REJECTED_ERROR);
+  }
+
+  async function block(event: React.MouseEvent<HTMLAnchorElement>) {
+    event.preventDefault();
+    await utils.call("addBlocklist", {
+      domain: props.origin.domain,
+      host: props.origin.host,
+    });
+    msg.error(
+      `User added site to blocklist domain, host
+        ${props.origin.domain},
+        ${props.origin.host}`
+    );
   }
 
   useEffect(() => {
@@ -42,7 +56,7 @@ function Enable(props: Props) {
         }
         setLoading(false);
       } catch (e) {
-        if (e instanceof Error) console.log(e.message);
+        if (e instanceof Error) console.error(e.message);
       }
     }
 
@@ -71,6 +85,14 @@ function Enable(props: Props) {
         </p>
 
         <ConfirmOrCancel label="Enable" onConfirm={enable} onCancel={reject} />
+
+        <a
+          className="underline mt-8 text-sm text-gray-500 dark:text-gray-400"
+          href="#"
+          onClick={block}
+        >
+          Do not ask for this site again
+        </a>
       </div>
     </div>
   );
