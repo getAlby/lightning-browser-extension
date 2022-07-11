@@ -1,6 +1,7 @@
-import db from "../../db";
+import db from "~/extension/background-script/db";
+import type { MessageAllowanceGet } from "~/types";
 
-const get = async (message, sender) => {
+const get = async (message: MessageAllowanceGet) => {
   const host = message.args.host;
   const allowance = await db.allowances
     .where("host")
@@ -8,8 +9,7 @@ const get = async (message, sender) => {
     .first();
 
   if (allowance) {
-    allowance.usedBudget =
-      parseInt(allowance.totalBudget) - parseInt(allowance.remainingBudget);
+    allowance.usedBudget = allowance.totalBudget - allowance.remainingBudget;
     allowance.percentage = (
       (allowance.usedBudget / allowance.totalBudget) *
       100

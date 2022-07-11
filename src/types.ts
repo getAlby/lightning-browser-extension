@@ -194,6 +194,11 @@ export interface MessageAllowanceUpdate extends MessageDefault {
   action: "updateAllowance";
 }
 
+export interface MessageAllowanceGet extends MessageDefault {
+  args: { host: Allowance["host"] };
+  action: "getAllowance";
+}
+
 interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node
@@ -289,7 +294,7 @@ export type Transaction = {
   value: string;
   preimage: string;
   badges: IBadge[];
-  totalAmount: string;
+  totalAmount: number;
   totalFees: string;
   description: string;
   location: string;
