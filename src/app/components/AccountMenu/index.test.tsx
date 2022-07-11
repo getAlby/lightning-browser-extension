@@ -2,8 +2,8 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { act } from "react-dom/test-utils";
 import { BrowserRouter } from "react-router-dom";
+import * as AccountContext from "~/app/context/AccountContext";
 import * as AccountsContext from "~/app/context/AccountsContext";
-import * as AuthContext from "~/app/context/AuthContext";
 import type { Accounts } from "~/types";
 
 import AccountMenu from ".";
@@ -23,7 +23,7 @@ jest.spyOn(AccountsContext, "useAccounts").mockReturnValue({
   getAccounts: jest.fn(),
 });
 
-jest.spyOn(AuthContext, "useAuth").mockReturnValue({
+jest.spyOn(AccountContext, "useAccount").mockReturnValue({
   account: { id: "1", name: "LND account" },
   loading: false,
   unlock: jest.fn(),

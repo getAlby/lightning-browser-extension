@@ -5,7 +5,7 @@ import utils from "~/common/lib/utils";
 import { getBalances } from "~/common/utils/currencyConvert";
 import type { AccountInfo } from "~/types";
 
-interface AuthContextType {
+interface AccountContextType {
   account: {
     id: string;
     name?: string;
@@ -32,10 +32,10 @@ interface AuthContextType {
   }) => Promise<AccountInfo | undefined>;
 }
 
-const AccountContext = createContext({} as AuthContextType);
+const AccountContext = createContext({} as AccountContextType);
 
 export function AccountProvider({ children }: { children: React.ReactNode }) {
-  const [account, setAccount] = useState<AuthContextType["account"]>(null);
+  const [account, setAccount] = useState<AccountContextType["account"]>(null);
   const [loading, setLoading] = useState(true);
   const [balancesDecorated, setBalancesDecorated] = useState({
     fiatBalance: "",
@@ -126,6 +126,6 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function useAuth() {
+export function useAccount() {
   return useContext(AccountContext);
 }

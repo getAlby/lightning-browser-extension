@@ -8,7 +8,7 @@ import lightningPayReq from "bolt11";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useAuth } from "~/app/context/AuthContext";
+import { useAccount } from "~/app/context/AccountContext";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -24,7 +24,7 @@ export type Props = {
 function ConfirmPayment(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const auth = useAuth();
+  const auth = useAccount();
 
   const invoiceRef = useRef(
     lightningPayReq.decode(

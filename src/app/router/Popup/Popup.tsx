@@ -8,9 +8,9 @@ import Send from "@screens/Send";
 import Unlock from "@screens/Unlock";
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { useAccount } from "~/app/context/AccountContext";
+import { AccountProvider } from "~/app/context/AccountContext";
 import { AccountsProvider } from "~/app/context/AccountsContext";
-import { useAuth } from "~/app/context/AuthContext";
-import { AccountProvider } from "~/app/context/AuthContext";
 
 import RequireAuth from "../RequireAuth";
 
@@ -44,7 +44,7 @@ function Popup() {
 }
 
 const Layout = () => {
-  const { account, balancesDecorated } = useAuth();
+  const { account, balancesDecorated } = useAccount();
 
   return (
     <div className="flex flex-col h-full">

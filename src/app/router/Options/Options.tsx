@@ -14,8 +14,8 @@ import Unlock from "@screens/Unlock";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { AccountProvider, useAccount } from "~/app/context/AccountContext";
 import { AccountsProvider } from "~/app/context/AccountsContext";
-import { AccountProvider, useAuth } from "~/app/context/AuthContext";
 import RequireAuth from "~/app/router/RequireAuth";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
 
@@ -88,7 +88,7 @@ function Options() {
 }
 
 const Layout = () => {
-  const { account, balancesDecorated } = useAuth();
+  const { account, balancesDecorated } = useAccount();
 
   return (
     <div>

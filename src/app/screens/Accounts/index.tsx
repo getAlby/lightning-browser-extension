@@ -14,8 +14,8 @@ import { useState } from "react";
 import Modal from "react-modal";
 import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
+import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
-import { useAuth } from "~/app/context/AuthContext";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
 import type { Account } from "~/types";
@@ -23,7 +23,7 @@ import type { Account } from "~/types";
 type AccountAction = Omit<Account, "connector" | "config">;
 
 function AccountsScreen() {
-  const auth = useAuth();
+  const auth = useAccount();
   const { accounts, getAccounts } = useAccounts();
   const navigate = useNavigate();
 

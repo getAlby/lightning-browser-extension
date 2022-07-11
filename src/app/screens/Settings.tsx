@@ -8,14 +8,14 @@ import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { useAuth } from "~/app/context/AuthContext";
+import { useAccount } from "~/app/context/AccountContext";
 import { getTheme } from "~/app/utils";
 import { CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
 import { SettingsStorage } from "~/types";
 
 function Settings() {
-  const { fetchAccountInfo } = useAuth();
+  const { fetchAccountInfo } = useAccount();
 
   const [loading, setLoading] = useState(true);
 
