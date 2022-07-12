@@ -116,8 +116,7 @@ function Home() {
         ...invoice,
         title: invoice.memo,
         date: dayjs(invoice.settleDate).fromNow(),
-      }))
-      .reverse();
+      }));
 
     for await (const invoice of invoices) {
       const totalAmountFiat = await getFiatValue(invoice.totalAmount);
