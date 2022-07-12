@@ -1,3 +1,4 @@
+import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios, { AxiosRequestConfig, Method } from "axios";
 import type { AxiosResponse } from "axios";
 import lightningPayReq from "bolt11";
@@ -338,6 +339,7 @@ export default class LndHub implements Connector {
           "X-TS": Math.floor(Date.now() / 1000),
           "X-VERIFY": this.generateHmacVerification(url),
         },
+        adapter: fetchAdapter,
       }
     );
 
@@ -382,6 +384,7 @@ export default class LndHub implements Connector {
         "X-TS": Math.floor(Date.now() / 1000),
         "X-VERIFY": this.generateHmacVerification(url),
       },
+      adapter: fetchAdapter,
     };
 
     if (method === "POST") {
