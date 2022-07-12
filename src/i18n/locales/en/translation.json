@@ -148,6 +148,16 @@
       "no_transactions": "No transactions yet."
     }
   },
+  "accounts": {
+    "export": {
+      "name": "Export account details",
+      "waiting": "waiting for LndHub data...",
+      "your_ln_address": "Your Lightning Address:",
+      "tip_mobile": "Tip: Use this wallet with your mobile device",
+      "export_uri": "LNDHub Export URI",
+      "scan_qr": "Import this wallet into Zeus or BlueWallet by scanning the QRCode."
+    }
+  },
   "unlock": {
     "unlock_to_continue": "Unlock to continue",
     "help_contact": {
