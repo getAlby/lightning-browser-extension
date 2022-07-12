@@ -189,5 +189,14 @@
       "stop_scanning": "Stop scanning",
       "allow_camera_access": "Please allow camera access in the settings screen."
     }
+  },
+  "settings": {
+    "change_password": {
+      "enter_password": "Please enter a password.",
+      "confirm_password": "Please confirm your password.",
+      "mismatched_password": "Passwords don't match.",
+      "choose_password_label": "Enter new password:",
+      "confirm_password_label": "Confirm new password:"
+    }
   }
 }
