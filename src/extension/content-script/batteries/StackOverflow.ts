@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Battery } from "~/types";
 
 import getOriginData from "../originData";
@@ -35,10 +36,17 @@ function htmlToText(html: string) {
 }
 
 async function handleQuestionPage(questionId: string): Promise<Battery | null> {
-  const questionInfo = await fetch(
+  const questionResponse = await axios.get(
     // The filter can be generated here: https://api.stackexchange.com/docs/users-by-ids
     `https://api.stackexchange.com/2.2/questions/${questionId}?site=stackoverflow&filter=!9bOY8fLl6`
-  ).then((res) => res.json());
+  );
+
+  if (!questionResponse) {
+    return null;
+  }
+
+  const questionInfo = await questionResponse.data;
+
   if (questionInfo.error_id) {
     return null;
   }
@@ -49,10 +57,16 @@ async function handleQuestionPage(questionId: string): Promise<Battery | null> {
     return null;
   }
 
-  const answerInfo = await fetch(
+  const answerResponse = await axios.get(
     // The filter can be generated here: https://api.stackexchange.com/docs/users-by-ids
     `https://api.stackexchange.com/2.2/answers/${questionData.accepted_answer_id}?site=stackoverflow&filter=!-)QWsbXSB(JQ`
-  ).then((res) => res.json());
+  );
+
+  if (!answerResponse) {
+    return null;
+  }
+
+  const answerInfo = await answerResponse.data;
 
   const answerData = answerInfo.items[0];
 
@@ -67,10 +81,17 @@ async function handleQuestionPage(questionId: string): Promise<Battery | null> {
 }
 
 async function handleProfilePage(userId: string): Promise<Battery | null> {
-  const userInfo = await fetch(
+  const response = await axios.get(
     // The filter can be generated here: https://api.stackexchange.com/docs/users-by-ids
     `https://api.stackexchange.com/2.2/users/${userId}?site=stackoverflow&filter=!-B3yqvQ2YYGK1t-Hg_ydU`
-  ).then((res) => res.json());
+  );
+
+  if (!response) {
+    return null;
+  }
+
+  const userInfo = await response.data;
+
   if (userInfo.error_id) {
     return null;
   }
