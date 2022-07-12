@@ -14,7 +14,9 @@ const add = async (message: MessageAllowanceAdd) => {
     .first();
 
   if (allowance) {
-    await db.allowances.update(allowance.id as number, {
+    if (!allowance.id) return { error: "id is missing" };
+
+    await db.allowances.update(allowance.id, {
       name: name,
       imageURL: imageURL,
       enabled: true,
