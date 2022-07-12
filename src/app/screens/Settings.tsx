@@ -176,6 +176,7 @@ function Settings() {
                   });
                 }}
               >
+                <option value="alby">Alby</option>
                 <option value="coindesk">Coindesk</option>
                 <option value="yadio">yadio</option>
               </Select>

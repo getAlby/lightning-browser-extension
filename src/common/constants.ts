@@ -6,7 +6,7 @@
 export const ABORT_PROMPT_ERROR = "Prompt was closed";
 export const USER_REJECTED_ERROR = "User rejected";
 
-// Supported currencies by Coindesk and yadio
+// Supported currencies by Alby API, Coindesk and yadio
 // FYI: yadio is i.e. not supporting "ISK", maybe more?
 // https://github.com/AryanJ-NYC/bitcoin-conversion/blob/master/src/index.ts#L143
 export enum CURRENCIES {
