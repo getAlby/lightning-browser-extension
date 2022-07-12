@@ -276,8 +276,8 @@ export interface Payment {
   location: string;
   name: string;
   description: string;
-  totalAmount: number;
-  totalFees: number;
+  totalAmount: number | string;
+  totalFees: number | string;
   preimage: string;
   paymentRequest: string;
   paymentHash: string;
