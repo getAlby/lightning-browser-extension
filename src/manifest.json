@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Alby - Bitcoin Lightning Wallet",
-  "version": "1.0.0",
+  "version": "0.0.0",
 
   "icons": {
     "16": "assets/icons/alby_icon_yellow_16x16.png",

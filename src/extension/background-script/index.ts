@@ -58,26 +58,10 @@ const updateIcon = async (
     .equalsIgnoreCase(url.host)
     .first();
 
-  // TODO: move to some config file
-  const names = {
-    active: "alby_icon_yellow",
-    off: "alby_icon_sleeping",
-  };
-  let name;
-  if (allowance) {
-    name = names.active;
-  } else {
-    name = names.off;
-  }
-  return browser.action.setIcon({
-    path: {
-      16: `assets/icons/${name}_16x16.png`,
-      32: `assets/icons/${name}_32x32.png`,
-      48: `assets/icons/${name}_48x48.png`,
-      128: `assets/icons/${name}_128x128.png`,
-    },
-    tabId: tabId,
-  });
+  await setIcon(
+    allowance ? ExtensionIcon.Active : ExtensionIcon.Default,
+    tabId
+  );
 };
 
 const debugLogger = (message: unknown, sender: Runtime.MessageSender) => {
