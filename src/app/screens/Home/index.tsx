@@ -121,7 +121,7 @@ function Home() {
         date: dayjs(invoice.settleDate).fromNow(),
       }));
 
-    for await (const invoice of invoices) {
+    for (const invoice of invoices) {
       const totalAmountFiat = await getFiatValue(invoice.totalAmount);
       invoice.totalAmountFiat = totalAmountFiat;
     }
