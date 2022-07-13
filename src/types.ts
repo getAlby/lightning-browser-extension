@@ -112,11 +112,11 @@ export interface MessageAccountDecryptedDetails extends MessageDefault {
   action: "accountDecryptedDetails";
 }
 
-export interface MessageAccountInfo extends Omit<MessageDefault, "args"> {
+export interface MessageAccountInfo extends MessageDefault {
   action: "accountInfo";
 }
 
-export interface MessageAccountAll extends Omit<MessageDefault, "args"> {
+export interface MessageAccountAll extends MessageDefault {
   action: "getAccounts";
 }
 
@@ -150,11 +150,11 @@ export interface MessageSetIcon extends MessageDefault {
   };
 }
 
-export interface MessageAccountLock extends Omit<MessageDefault, "args"> {
+export interface MessageAccountLock extends MessageDefault {
   action: "lock";
 }
 
-export interface MessageAccountUnlock extends Omit<MessageDefault, "args"> {
+export interface MessageAccountUnlock extends MessageDefault {
   args: { password: string | number };
   action: "unlock";
 }
@@ -163,7 +163,7 @@ export interface MessageAccountSelect extends MessageDefault {
   args: { id: Account["id"] };
   action: "selectAccount";
 }
-export interface MessageAllowanceList extends Omit<MessageDefault, "args"> {
+export interface MessageAllowanceList extends MessageDefault {
   action: "listAllowances";
 }
 
