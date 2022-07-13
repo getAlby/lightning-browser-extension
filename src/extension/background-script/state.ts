@@ -39,7 +39,7 @@ export const DEFAULT_SETTINGS: SettingsStorage = {
   locale: i18n.resolvedLanguage,
   theme: "system",
   currency: CURRENCIES.USD,
-  exchange: "coindesk",
+  exchange: "alby",
   debug: false,
 };
 

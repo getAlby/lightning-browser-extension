@@ -379,4 +379,4 @@ export interface Publisher
   };
 }
 
-export type SupportedExchanges = "coindesk" | "yadio";
+export type SupportedExchanges = "alby" | "coindesk" | "yadio";
