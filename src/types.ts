@@ -270,19 +270,19 @@ export type Transaction = {
 };
 
 export interface Payment {
-  id?: number;
   allowanceId: string;
+  createdAt: string;
+  description: string;
+  destination: string;
   host: string;
+  id?: number;
   location: string;
   name: string;
-  description: string;
+  paymentHash: string;
+  paymentRequest: string;
+  preimage: string;
   totalAmount: number | string;
   totalFees: number | string;
-  preimage: string;
-  paymentRequest: string;
-  paymentHash: string;
-  destination: string;
-  createdAt: string;
 }
 
 export interface PaymentResponse
