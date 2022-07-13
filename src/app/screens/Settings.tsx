@@ -113,7 +113,7 @@ function Settings() {
           </div>
         </Setting>
 
-        <Setting title="Theme" subtitle="Change the app theme to dark or light">
+        <Setting title="Theme" subtitle="Use Alby in dark or light mode">
           {!loading && (
             <div className="w-64">
               <Select
@@ -136,7 +136,7 @@ function Settings() {
 
         <Setting
           title="Currency"
-          subtitle="Change the currency display within Alby"
+          subtitle="Show the amounts additionally in this currency"
         >
           {!loading && (
             <div className="w-64">
@@ -162,7 +162,7 @@ function Settings() {
 
         <Setting
           title="Exchange Source"
-          subtitle="Change the source where Alby get currency info"
+          subtitle="Source of Bitcoin exchange rates"
         >
           {!loading && (
             <div className="w-64">
