@@ -358,10 +358,10 @@ function Home() {
 
             <Tab.Group onChange={onTabChangeHandler}>
               <Tab.List className="mb-2">
-                {Object.keys({
-                  [t("transaction_list.tabs.outgoing")]: true,
-                  [t("transaction_list.tabs.incoming")]: true,
-                }).map((category) => (
+                {[
+                  t("transaction_list.tabs.outgoing"),
+                  t("transaction_list.tabs.incoming"),
+                ].map((category) => (
                   <Tab
                     key={category}
                     className={({ selected }) =>
