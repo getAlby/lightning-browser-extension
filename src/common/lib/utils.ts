@@ -2,6 +2,7 @@ import PubSub from "pubsub-js";
 import { toast } from "react-toastify";
 import browser, { Runtime } from "webextension-polyfill";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
+import type { Invoice } from "~/extension/background-script/connectors/connector.interface";
 import {
   Message,
   OriginData,
@@ -173,13 +174,7 @@ const utils = {
     });
   },
   getBoostagramFromInvoice: (
-    custom_records:
-      | {
-          "696969": string;
-          "7629169": string;
-          "5482373484": string;
-        }
-      | undefined
+    custom_records: Invoice["custom_records"] | undefined
   ) => {
     const hasBoostagram = custom_records && 7629169 in custom_records;
     const boostagramDecoded = hasBoostagram

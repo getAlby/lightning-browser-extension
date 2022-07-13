@@ -18,6 +18,11 @@ export interface Invoice {
   totalAmount: string;
   totalAmountFiat?: string;
   preimage: string;
+  custom_records?: {
+    "696969": string;
+    "7629169": string;
+    "5482373484": string;
+  };
   boostagram?: {
     app_name: string;
     name: string;

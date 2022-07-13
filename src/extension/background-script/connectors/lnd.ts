@@ -249,11 +249,7 @@ class Lnd implements Connector {
           resolve_time: string;
           expiry_height: number;
           state: "SETTLED";
-          custom_records: {
-            "696969": string;
-            "7629169": string;
-            "5482373484": string;
-          };
+          custom_records: Invoice["custom_records"];
           mpp_total_amt_msat: string;
           amp?: unknown;
         }[];
@@ -281,18 +277,16 @@ class Lnd implements Connector {
         const custom_records =
           invoice.htlcs[0] && invoice.htlcs[0].custom_records;
 
-        const boostagram = utils.getBoostagramFromInvoice(custom_records);
-
         return {
+          custom_records,
           id: `${invoice.payment_request}-${index}`,
           memo: invoice.memo,
-          type: "received",
+          preimage: invoice.r_preimage,
           settled: invoice.settled,
           settleDate: parseInt(invoice.settle_date) * 1000,
           totalAmount: invoice.value,
           totalAmountFiat: "",
-          preimage: invoice.r_preimage,
-          boostagram,
+          type: "received",
         };
       })
       .reverse(); // LND sends oldest txs first
