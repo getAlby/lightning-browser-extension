@@ -11,6 +11,7 @@ import Menu from "@components/Menu";
 import TextField from "@components/form/TextField";
 import type { FormEvent } from "react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
@@ -38,6 +39,9 @@ function AccountsScreen() {
     lnAddress: "",
   });
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation("translation", {
+    keyPrefix: "accounts",
+  });
 
   function closeEditModal() {
     setEditModalIsOpen(false);
@@ -253,7 +257,7 @@ function AccountsScreen() {
           closeTimeoutMS={200}
           isOpen={exportModalIsOpen}
           onRequestClose={closeExportModal}
-          contentLabel="Edit account name"
+          contentLabel={t("export.name")}
           overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
           className="rounded-lg bg-white w-full max-w-lg"
         >
@@ -269,7 +273,7 @@ function AccountsScreen() {
           {loading && (
             <div className="p-5 flex justify-center items-center space-x-2 dark:text-white">
               <Loading />
-              <span>waiting for LndHub data...</span>
+              <span>{t("export.waiting")}</span>
             </div>
           )}
           {!loading && (
@@ -277,7 +281,7 @@ function AccountsScreen() {
               {lndHubData.lnAddress && (
                 <div className="dark:text-white mb-6">
                   <p>
-                    <strong>Your Lightning Address:</strong>
+                    <strong>{t("export.your_ln_address")}</strong>
                   </p>
                   {lndHubData.lnAddress && <p>{lndHubData.lnAddress}</p>}
                 </div>
@@ -285,14 +289,9 @@ function AccountsScreen() {
               <div className="flex justify-center space-x-3 items-center dark:text-white">
                 <div className="flex-1">
                   <p>
-                    <strong>
-                      Tip: Use this wallet with your mobile device
-                    </strong>
+                    <strong>{t("export.tip_mobile")}</strong>
                   </p>
-                  <p>
-                    Import this wallet into Zeus or BlueWallet by scanning the
-                    QRCode.
-                  </p>
+                  <p>{t("export.scan_qr")}</p>
                 </div>
                 <div className="float-right">
                   <QRCode
@@ -305,7 +304,7 @@ function AccountsScreen() {
               <div className="mt-6">
                 <TextField
                   id="uri"
-                  label="LNDHub Export URI"
+                  label={t("export.export_uri")}
                   type="text"
                   readOnly
                   value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
