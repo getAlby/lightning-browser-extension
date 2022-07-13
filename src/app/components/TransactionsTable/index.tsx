@@ -103,6 +103,7 @@ export default function TransactionsTable({ transactions }: Props) {
                           <li>app_name: {tx.boostagram.app_name}</li>
                           <li>name: {tx.boostagram.name}</li>
                           <li>podcast: {tx.boostagram.podcast}</li>
+                          <li>sender_name: {tx.boostagram.sender_name}</li>
                           <li>
                             message:{" "}
                             {tx.boostagram.message &&
