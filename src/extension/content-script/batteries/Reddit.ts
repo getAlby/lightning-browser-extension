@@ -1,5 +1,5 @@
 import getOriginData from "../originData";
-import setLightningData from "../setLightningData";
+import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher = /^https:\/\/www.reddit\.com\/user\/(\w+).*/;
 
@@ -19,12 +19,8 @@ function battery(): void {
   // attempt to extract lnurlp: from the description text
   if ((match = (descriptionElement.content || "").match(/lnurlp:(\S+)/i))) {
     recipient = match[1];
-  } else if (
-    (match = descriptionElement.content.match(
-      /(⚡:?|lightning:|lnurl:)\s?(\S+@\S+)/i
-    ))
-  ) {
-    recipient = match[2];
+  } else if ((match = findLightningAddressInText(descriptionElement.content))) {
+    recipient = match;
   }
   // if we still did not find anything ignore it.
   if (!recipient) {

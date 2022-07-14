@@ -2,7 +2,7 @@ import axios from "axios";
 import { Battery } from "~/types";
 
 import getOriginData from "../originData";
-import setLightningData from "../setLightningData";
+import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher =
   /^https:\/\/stackoverflow\.com\/(users|questions)\/(\d+)\/(\w+).*/;
@@ -23,11 +23,6 @@ const battery = async (): Promise<void> => {
 
   if (lightningData) setLightningData([lightningData]);
 };
-
-function findLightningAddressInText(text: string) {
-  const match = text.match(/(⚡:?|lightning:|lnurl:)\s?(\S+@[\w-.]+)/i);
-  if (match) return match[2];
-}
 
 function htmlToText(html: string) {
   const temp = document.createElement("div");
