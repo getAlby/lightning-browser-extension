@@ -19,6 +19,7 @@ import type { OriginData } from "~/types";
 export type Props = {
   origin?: OriginData;
   paymentRequest?: string;
+  metadata?: string;
 };
 
 function ConfirmPayment(props: Props) {
@@ -32,6 +33,7 @@ function ConfirmPayment(props: Props) {
     )
   );
   const originRef = useRef(props.origin || getOriginData());
+  const metadataRef = useRef(props.metadata);
   const paymentRequestRef = useRef(
     props.paymentRequest || searchParams.get("paymentRequest")
   );
@@ -61,7 +63,7 @@ function ConfirmPayment(props: Props) {
       const response = await utils.call(
         "sendPayment",
         { paymentRequest: paymentRequestRef.current },
-        { origin: originRef.current }
+        { origin: originRef.current, metadata: metadataRef.current }
       );
       auth.fetchAccountInfo(); // Update balance.
       msg.reply(response);
@@ -110,6 +112,7 @@ function ConfirmPayment(props: Props) {
                 <PaymentSummary
                   amount={invoiceRef.current?.satoshis}
                   description={invoiceRef.current?.tagsObject.description}
+                  metadata={props.metadata}
                 />
               </div>
 

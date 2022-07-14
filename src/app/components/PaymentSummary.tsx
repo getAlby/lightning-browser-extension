@@ -2,9 +2,10 @@ type Props = {
   amount: string | React.ReactNode;
   amountAlt?: string;
   description?: string | React.ReactNode;
+  metadata?: string;
 };
 
-function PaymentSummary({ amount, amountAlt, description }: Props) {
+function PaymentSummary({ amount, amountAlt, description, metadata }: Props) {
   return (
     <dl className="mb-0">
       <dt className="font-medium text-gray-800 dark:text-white">Amount</dt>
