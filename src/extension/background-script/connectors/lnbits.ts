@@ -58,7 +58,10 @@ class LnBits implements Connector {
 
   // not yet implemenetd
   getInvoices() {
-    return new Error("Has not been implemneted on this connector: getInvoices");
+    console.error(
+      `${this.constructor.name} does not implement the getInvoices call`
+    );
+    return new Error("Not yet supported with the currently used account.");
   }
 
   getBalance(): Promise<GetBalanceResponse> {
