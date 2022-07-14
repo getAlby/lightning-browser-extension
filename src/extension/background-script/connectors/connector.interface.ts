@@ -9,35 +9,19 @@ interface Route {
   total_fees: number;
 }
 
-export interface Invoice {
-  id: string;
-  memo: string;
-  type: "received";
-  settled: boolean;
-  settleDate: number;
-  totalAmount: string;
-  totalAmountFiat?: string;
-  preimage: string;
+export interface ConnectorInvoice {
   custom_records?: {
     "696969": string;
     "7629169": string;
     "5482373484": string;
   };
-  boostagram?: {
-    app_name: string;
-    name: string;
-    podcast: string;
-    url: string;
-    episode?: string;
-    itemID?: string;
-    ts?: string;
-    message?: string;
-    sender_id: string;
-    sender_name: string;
-    time: string;
-    action: "boost";
-    value_msat_total: number;
-  };
+  id: string;
+  memo: string;
+  preimage: string;
+  settled: boolean;
+  settleDate: number;
+  totalAmount: string;
+  type: "received";
 }
 
 export interface MakeInvoiceArgs {
@@ -64,7 +48,7 @@ export type GetBalanceResponse = {
 
 export type GetInvoicesResponse = {
   data: {
-    invoices: Invoice[];
+    invoices: ConnectorInvoice[];
   };
 };
 

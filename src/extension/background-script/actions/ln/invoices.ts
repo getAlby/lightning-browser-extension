@@ -1,7 +1,6 @@
 import utils from "~/common/lib/utils";
-import type { Invoice } from "~/extension/background-script/connectors/connector.interface";
 import state from "~/extension/background-script/state";
-import { MessageInvoices } from "~/types";
+import type { Invoice, MessageInvoices } from "~/types";
 
 const invoices = async (message: MessageInvoices) => {
   const connector = await state.getState().getConnector();

@@ -2,8 +2,8 @@ import { PaymentRequestObject } from "bolt11";
 import { CURRENCIES } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
 import {
-  Invoice,
   SendPaymentResponse,
+  ConnectorInvoice,
 } from "~/extension/background-script/connectors/connector.interface";
 
 export type ConnectorType = keyof typeof connectors;
@@ -431,3 +431,30 @@ export interface Publisher
 }
 
 export type SupportedExchanges = "alby" | "coindesk" | "yadio";
+
+export interface Invoice {
+  id: string;
+  memo: string;
+  type: "received";
+  settled: boolean;
+  settleDate: number;
+  totalAmount: string;
+  totalAmountFiat?: string;
+  preimage: string;
+  custom_records?: ConnectorInvoice["custom_records"];
+  boostagram?: {
+    app_name: string;
+    name: string;
+    podcast: string;
+    url: string;
+    episode?: string;
+    itemID?: string;
+    ts?: string;
+    message?: string;
+    sender_id: string;
+    sender_name: string;
+    time: string;
+    action: "boost";
+    value_msat_total: number;
+  };
+}

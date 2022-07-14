@@ -11,7 +11,7 @@ import Connector, {
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
-  Invoice,
+  ConnectorInvoice,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -249,7 +249,7 @@ class Lnd implements Connector {
           resolve_time: string;
           expiry_height: number;
           state: "SETTLED";
-          custom_records: Invoice["custom_records"];
+          custom_records: ConnectorInvoice["custom_records"];
           mpp_total_amt_msat: string;
           amp?: unknown;
         }[];
@@ -272,8 +272,8 @@ class Lnd implements Connector {
       first_index_offset: string;
     }>("GET", "/v1/invoices", undefined, {});
 
-    const invoices: Invoice[] = data.invoices
-      .map((invoice, index): Invoice => {
+    const invoices: ConnectorInvoice[] = data.invoices
+      .map((invoice, index): ConnectorInvoice => {
         const custom_records =
           invoice.htlcs[0] && invoice.htlcs[0].custom_records;
 
@@ -285,7 +285,6 @@ class Lnd implements Connector {
           settled: invoice.settled,
           settleDate: parseInt(invoice.settle_date) * 1000,
           totalAmount: invoice.value,
-          totalAmountFiat: "",
           type: "received",
         };
       })

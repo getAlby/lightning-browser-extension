@@ -2,8 +2,8 @@ import PubSub from "pubsub-js";
 import { toast } from "react-toastify";
 import browser, { Runtime } from "webextension-polyfill";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
-import type { Invoice } from "~/extension/background-script/connectors/connector.interface";
-import {
+import type {
+  Invoice,
   Message,
   OriginData,
   OriginDataInternal,

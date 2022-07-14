@@ -13,7 +13,7 @@ import Connector, {
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
-  Invoice,
+  ConnectorInvoice,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -65,7 +65,7 @@ export default class LndHub implements Connector {
           data: number[];
         };
         amt: number;
-        custom_records: Invoice["custom_records"];
+        custom_records: ConnectorInvoice["custom_records"];
         description: string;
         expire_time: number;
         ispaid: boolean;
@@ -78,8 +78,8 @@ export default class LndHub implements Connector {
       }[]
     >("GET", "/getuserinvoices", undefined);
 
-    const invoices: Invoice[] = data.map(
-      (invoice, index): Invoice => ({
+    const invoices: ConnectorInvoice[] = data.map(
+      (invoice, index): ConnectorInvoice => ({
         custom_records: invoice.custom_records,
         id: `${invoice.payment_request}-${index}`,
         memo: invoice.description,
@@ -87,7 +87,6 @@ export default class LndHub implements Connector {
         settled: invoice.ispaid,
         settleDate: invoice.timestamp * 1000,
         totalAmount: `${invoice.amt}`,
-        totalAmountFiat: "",
         type: "received",
       })
     );
