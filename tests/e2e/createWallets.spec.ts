@@ -47,33 +47,43 @@ const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
   await waitFor(() => getByText($document, "Success!"));
 };
 
+const createAlbyWallet = async ({ page, $document, user }) => {
+  // click at "Create Alby Wallet"
+  const createNewWalletButton = await getByText($document, "Alby Wallet");
+  createNewWalletButton.click();
+
+  await waitFor(() => getByText($document, "Your Alby Lightning Wallet"));
+
+  // type user email
+  const emailField = await getByLabelText($document, "Email Address");
+  await emailField.type(user.email);
+
+  // type user password and confirm password
+  const walletPasswordField = await getByLabelText($document, "Password");
+  await walletPasswordField.type(user.password);
+
+  // click create a wallet button
+  const createWalletButton = await getByText($document, "Continue");
+  createWalletButton.click();
+
+  await page.waitForResponse(() => true);
+
+  await waitFor(() => getByText($document, "Your Alby account is ready."));
+};
+
 test.describe("Create or connect wallets", () => {
+  test("successfully creates an Alby wallet", async () => {
+    const { user, browser, page, $document } =
+      await commonCreateWalletUserCreate();
+    await createAlbyWallet({ page, $document, user });
+    await commonCreateWalletSuccessCheck({ page, $document });
+    await browser.close();
+  });
+
   test("successfully creates an Alby wallet and opens publishers screen", async () => {
     const { user, browser, page, $document } =
       await commonCreateWalletUserCreate();
-
-    // click at "Create Alby Wallet"
-    const createNewWalletButton = await getByText($document, "Alby Wallet");
-    createNewWalletButton.click();
-
-    await waitFor(() => getByText($document, "Your Alby Lightning Wallet"));
-
-    // type user email
-    const emailField = await getByLabelText($document, "Email Address");
-    await emailField.type(user.email);
-
-    // type user password and confirm password
-    const walletPasswordField = await getByLabelText($document, "Password");
-    await walletPasswordField.type(user.password);
-
-    // click create a wallet button
-    const createWalletButton = await getByText($document, "Continue");
-    createWalletButton.click();
-
-    await page.waitForResponse(() => true);
-
-    await waitFor(() => getByText($document, "Your Alby account is ready."));
-
+    await createAlbyWallet({ page, $document, user });
     await commonCreateWalletSuccessCheck({ page, $document });
 
     // reload and expect to be on publishers screen
