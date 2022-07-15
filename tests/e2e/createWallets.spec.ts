@@ -82,7 +82,7 @@ test.describe("Create or connect wallets", () => {
 
   test("successfully creates an Alby wallet and opens publishers screen", async () => {
     const { user, browser, page, $document } =
-      await commonCreateWalletUserCreate();
+    await commonCreateWalletUserCreate();
     await createAlbyWallet({ page, $document, user });
     await commonCreateWalletSuccessCheck({ page, $document });
 
