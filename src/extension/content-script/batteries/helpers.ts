@@ -1,6 +1,6 @@
 import browser from "webextension-polyfill";
 import utils from "~/common/lib/utils";
-import { Battery } from "~/types";
+import type { Battery } from "~/types";
 
 import { ExtensionIcon } from "../../background-script/actions/setup/setIcon";
 
