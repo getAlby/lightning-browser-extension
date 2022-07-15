@@ -281,24 +281,24 @@ export interface IBadge {
 }
 
 export type Transaction = {
-  type?: string;
-  id: string;
-  createdAt: string;
-  name: string;
-  host: string;
-  title: string | React.ReactNode;
-  subTitle: string | React.ReactNode;
-  date: string;
   amount: string;
+  badges?: IBadge[];
+  createdAt: string;
   currency: string;
-  value: string;
-  preimage: string;
-  badges: IBadge[];
-  totalAmount: number;
-  totalFees: string;
+  date: string;
   description: string;
+  host: string;
+  id: string;
   location: string;
+  name: string;
+  preimage: string;
+  subTitle?: string | React.ReactNode;
+  title: string | React.ReactNode;
+  totalAmount: number;
   totalAmountFiat: string;
+  totalFees: string;
+  type?: string;
+  value: string;
 };
 
 export interface DbPayment {
@@ -373,7 +373,7 @@ export interface DbAllowance {
   totalBudget: number;
 }
 export interface Allowance extends DbAllowance {
-  payments: Transaction[];
+  payments: Payment[];
   paymentsAmount: number;
   paymentsCount: number;
   percentage: string;
