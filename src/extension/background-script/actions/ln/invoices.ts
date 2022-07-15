@@ -10,7 +10,9 @@ const invoices = async (message: MessageInvoices) => {
     return { error: data.message };
   } else {
     const invoices: Invoice[] = data.data.invoices.map((invoice: Invoice) => {
-      const boostagram = utils.getBoostagramFromInvoice(invoice.custom_records);
+      const boostagram = utils.getBoostagramFromInvoiceCustomRecords(
+        invoice.custom_records
+      );
       return { ...invoice, boostagram };
     });
 

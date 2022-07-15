@@ -173,7 +173,7 @@ const utils = {
         });
     });
   },
-  getBoostagramFromInvoice: (
+  getBoostagramFromInvoiceCustomRecords: (
     custom_records: Invoice["custom_records"] | undefined
   ) => {
     const hasBoostagram = custom_records && 7629169 in custom_records;
