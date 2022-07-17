@@ -5,7 +5,7 @@ type Props = {
   metadata?: { [key: string]: string };
 };
 
-function PaymentSummary({ amount, amountAlt, description }: Props) {
+function PaymentSummary({ amount, amountAlt, description, metadata }: Props) {
   return (
     <dl className="mb-0">
       <dt className="font-medium text-gray-800 dark:text-white">Amount</dt>

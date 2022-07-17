@@ -59,11 +59,11 @@ export default class WebLNProvider {
     return this.execute("lnurl", { lnurlEncoded });
   }
 
-  sendPayment(paymentRequest: string) {
+  sendPayment(paymentRequest: string, metadata?: string) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling sendPayment");
     }
-    return this.execute("sendPaymentOrPrompt", { paymentRequest });
+    return this.execute("sendPaymentOrPrompt", { paymentRequest, metadata });
   }
 
   keysend(args: KeysendArgs) {
