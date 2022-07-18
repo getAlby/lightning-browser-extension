@@ -11,12 +11,12 @@ const mockAllowances = [
     host: "pro.kollider.xyz",
     id: 3,
     imageURL: "https://pro.kollider.xyz/favicon.ico",
-    lastPaymentAt: 0,
-    lnurlAuth: true,
+    lastPaymentAt: "0",
+    lnurlAuth: "true",
     name: "pro kollider",
     remainingBudget: 500,
     totalBudget: 500,
-    createdAt: 123456,
+    createdAt: "123456",
     payments: [],
     paymentsAmount: 0,
     paymentsCount: 0,
@@ -31,7 +31,7 @@ describe("account all", () => {
     jest.clearAllMocks();
   });
 
-  test("update allowance", async () => {
+  test("add allowance", async () => {
     const message: MessageAllowanceAdd = {
       application: "LBE",
       prompt: true,
@@ -61,12 +61,12 @@ describe("account all", () => {
       host: "lnmarkets.com",
       id: 4,
       imageURL: "https://lnmarkets.com/apple-touch-icon.png",
-      lastPaymentAt: 0,
-      lnurlAuth: false,
+      lastPaymentAt: "0",
+      lnurlAuth: "false",
       name: "LN Markets",
       remainingBudget: 200,
       totalBudget: 200,
-      createdAt: 1487076708000,
+      createdAt: "1487076708000",
       payments: [],
       paymentsAmount: 0,
       paymentsCount: 0,

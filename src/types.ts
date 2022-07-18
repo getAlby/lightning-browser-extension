@@ -341,13 +341,13 @@ export interface PaymentResponse
 }
 
 export interface Allowance {
-  createdAt: number;
+  createdAt: string;
   enabled: boolean;
   host: string;
   id?: number;
   imageURL: string;
-  lastPaymentAt: number;
-  lnurlAuth: boolean;
+  lastPaymentAt: string;
+  lnurlAuth: string;
   name: string;
   payments: Transaction[];
   paymentsAmount: number;

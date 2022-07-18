@@ -47,7 +47,7 @@ describe("account all", () => {
     jest.clearAllMocks();
   });
 
-  test("update allowance", async () => {
+  test("delete allowance", async () => {
     const message: MessageAllowanceDelete = {
       application: "LBE",
       prompt: true,
