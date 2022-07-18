@@ -1,1 +1,13 @@
-{}
+{
+    "translation": {
+        "welcome": {
+            "nav": {
+                "welcome": "Willkommen",
+                "password": "Dein Passwort",
+                "done": "Fertig",
+                "connect": "Mit Lightning verbinden"
+            },
+            "heading": "Die Power von Lightning in Deinem Browser"
+        }
+    }
+}
