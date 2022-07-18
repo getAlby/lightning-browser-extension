@@ -5,7 +5,7 @@ import type { Props } from "./index";
 import DualCurrencyField from "./index";
 
 const props: Props = {
-  fiatValue: 1000,
+  fiatValue: "$10.00",
   label: "Amount",
 };
 
@@ -20,6 +20,6 @@ describe("DualCurrencyField", () => {
     const input = screen.getByLabelText("Amount");
 
     expect(input).toBeInTheDocument();
-    expect(await screen.getByText("~1000")).toBeInTheDocument();
+    expect(await screen.getByText("~$10.00")).toBeInTheDocument();
   });
 });

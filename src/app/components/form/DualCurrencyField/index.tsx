@@ -4,7 +4,7 @@ import { classNames } from "~/app/utils";
 export type Props = {
   suffix?: string;
   endAdornment?: React.ReactNode;
-  fiatValue: string | number;
+  fiatValue: string;
   label: string;
   hint?: string;
 };
