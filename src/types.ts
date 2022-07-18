@@ -301,7 +301,7 @@ export type Transaction = {
   preimage: string;
   subTitle?: string | React.ReactNode;
   title: string | React.ReactNode;
-  totalAmount: Allowance["payments"][number];
+  totalAmount: Allowance["payments"][number]["totalAmount"];
   totalAmountFiat?: string;
   totalFees?: string;
   type?: "sent" | "sending" | "received";

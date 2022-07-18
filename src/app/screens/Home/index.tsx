@@ -263,6 +263,8 @@ function Home() {
                   currency: "",
                   totalAmountFiat: "",
                   value: "",
+                  // @TODO: Refactor: transaction-creation #1158
+                  // https://github.com/getAlby/lightning-browser-extension/issues/1158
                   date: dayjs(payment.createdAt).fromNow(),
                   // date: dayjs.unix(payment.createdAt),
                   title: (
