@@ -42,6 +42,7 @@ function Settings() {
     userEmail: "",
     locale: "",
     theme: "system",
+    showFiat: true,
     currency: CURRENCIES.USD,
     exchange: "coindesk",
     debug: false,
