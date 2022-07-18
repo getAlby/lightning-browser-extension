@@ -4,6 +4,7 @@ import {
   CaretDownIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Disclosure } from "@headlessui/react";
+import { useTranslation } from "react-i18next";
 import { Transaction } from "~/types";
 
 import Badge from "../Badge";
@@ -13,6 +14,8 @@ export type Props = {
 };
 
 export default function TransactionsTable({ transactions }: Props) {
+  const { t: tComponents } = useTranslation("components");
+
   function renderIcon(type: string) {
     function getIcon() {
       const iconClasses = "h-3 w-3";
@@ -88,10 +91,18 @@ export default function TransactionsTable({ transactions }: Props) {
                   </div>
                   <Disclosure.Panel>
                     <div className="mt-1 ml-9 text-xs text-gray-600 dark:text-neutral-400">
-                      {tx.description}
-                      {tx.totalFees && <p>Fee: {tx.totalFees} sats</p>}
+                      <p>{tx.description}</p>
+                      {tx.totalFees && (
+                        <p>
+                          {tComponents("transactionsTable.fee")}: {tx.totalFees}{" "}
+                          sats
+                        </p>
+                      )}
                       {tx.preimage && (
-                        <p className="truncate">Preimage: {tx.preimage}</p>
+                        <p className="truncate">
+                          {tComponents("transactionsTable.preimage")}:{" "}
+                          {tx.preimage}
+                        </p>
                       )}
                       {tx.location && (
                         <a href={tx.location} target="_blank" rel="noreferrer">
@@ -100,14 +111,22 @@ export default function TransactionsTable({ transactions }: Props) {
                       )}
                       {tx.boostagram && (
                         <ul>
-                          <li>app_name: {tx.boostagram.app_name}</li>
-                          <li>name: {tx.boostagram.name}</li>
-                          <li>podcast: {tx.boostagram.podcast}</li>
-                          <li>sender_name: {tx.boostagram.sender_name}</li>
                           <li>
-                            message:{" "}
+                            label={tComponents("transactionsTable.sender_name")}
+                            : {tx.boostagram.sender_name}
+                          </li>
+                          <li>
+                            label={tComponents("transactionsTable.message")}:{" "}
                             {tx.boostagram.message &&
                               decodeURI(tx.boostagram.message)}
+                          </li>
+                          <li>
+                            label={tComponents("transactionsTable.app_name")}:{" "}
+                            {tx.boostagram.app_name}
+                          </li>
+                          <li>
+                            label={tComponents("transactionsTable.podcast")}:{" "}
+                            {tx.boostagram.podcast}
                           </li>
                         </ul>
                       )}

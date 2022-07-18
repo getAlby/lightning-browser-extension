@@ -22,6 +22,7 @@ async function lnurl(message: Message) {
     case "channelRequest":
       console.error("lnurl-channel is not implemented");
       // TODO: add support for LNURL channel
+      // connectPeer method in connector
       return { error: "not implemented" };
     case "login":
       return authWithPrompt(message, lnurlDetails);

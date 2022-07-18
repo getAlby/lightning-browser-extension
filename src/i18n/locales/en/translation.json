@@ -158,12 +158,13 @@
         }
       },
       "allowance_view": {
+        "recent_transactions": "Recent Transactions",
         "allowance": "Allowance",
         "sats_used": "sats used",
         "no_transactions": "No transactions on <0>{{name}}</0> yet."
       },
       "default_view": {
-        "recent_transactions": "$t(translation.home.recent_transactions)",
+        "recent_transactions": "Recent Transactions",
         "no_transactions": "No transactions yet.",
         "is_blocked_hint": "Alby is currently disabled on {{host}}"
       }
@@ -268,6 +269,16 @@
       "start_scanning": "Start scanning",
       "stop_scanning": "Stop scanning",
       "allow_camera_access": "Please allow camera access in the settings screen."
+    },
+    "transactionsTable": {
+      "fee": "Fee",
+      "pre_image": "Pre_image",
+      "boostagram": {
+        "sender_name": "Sender",
+        "message": "Message",
+        "app_name": "App",
+        "podcast": "Podcast"
+      }
     }
   }
 }

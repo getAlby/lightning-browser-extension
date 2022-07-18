@@ -227,7 +227,7 @@ function Home() {
           </div>
 
           <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
-            {t("recent_transactions")}
+            {t("allowance_view.recent_transactions")}
           </h2>
 
           {allowance?.payments.length > 0 ? (
