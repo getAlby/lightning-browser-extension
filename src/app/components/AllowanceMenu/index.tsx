@@ -3,7 +3,6 @@ import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
 import Modal from "react-modal";
-import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
@@ -14,7 +13,7 @@ import Menu from "../Menu";
 import DualCurrencyField from "../form/DualCurrencyField/index";
 
 export type Props = {
-  allowance: Pick<Allowance, "id" | "totalBudget" | "remainingBudget">;
+  allowance: Pick<Allowance, "id" | "totalBudget">;
   onEdit?: () => void;
   onDelete?: () => void;
 };
@@ -54,13 +53,6 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   }
 
   async function updateAllowance() {
-    if (parseInt(budget) > allowance.remainingBudget) {
-      toast.error(
-        `New budget is lower than remaining budget ${allowance.remainingBudget}`
-      );
-      return;
-    }
-
     await utils.call("updateAllowance", {
       id: allowance.id,
       totalBudget: parseInt(budget),
