@@ -1,7 +1,9 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/React";
 import userEvent from "@testing-library/user-event";
 import { act } from "react-dom/test-utils";
+import { I18nextProvider } from "react-i18next";
 import { BrowserRouter } from "react-router-dom";
+import i18n from "~/../tests/unit/helpers/i18n";
 
 import TransactionsTable from ".";
 import type { Props } from ".";
@@ -95,12 +97,14 @@ describe("TransactionsTable", () => {
 
     render(
       <BrowserRouter>
-        <TransactionsTable {...transactions} />
+        <I18nextProvider i18n={i18n}>
+          <TransactionsTable {...transactions} />
+        </I18nextProvider>
       </BrowserRouter>
     );
 
     expect(screen.getByText("Alby")).toBeInTheDocument();
-    expect(screen.getByText(/sent - 5 days ago/)).toBeInTheDocument();
+    expect(screen.getByText(/Sent - 5 days ago/)).toBeInTheDocument();
     expect(screen.getByText(/-1234000 sats/)).toBeInTheDocument();
     expect(screen.getByText(/~\$241.02/)).toBeInTheDocument();
 
@@ -118,12 +122,14 @@ describe("TransactionsTable", () => {
   test("renders invoice without boostagram", async () => {
     render(
       <BrowserRouter>
-        <TransactionsTable {...invoices} />
+        <I18nextProvider i18n={i18n}>
+          <TransactionsTable {...invoices} />
+        </I18nextProvider>
       </BrowserRouter>
     );
 
     expect(screen.getByText("lambo lambo")).toBeInTheDocument();
-    expect(screen.getByText(/received - 4 days ago/)).toBeInTheDocument();
+    expect(screen.getByText(/Received - 4 days ago/)).toBeInTheDocument();
     expect(screen.getByText(/\+66666 sats/)).toBeInTheDocument();
     expect(screen.getByText(/~\$13.02/)).toBeInTheDocument();
 
@@ -136,12 +142,14 @@ describe("TransactionsTable", () => {
 
     render(
       <BrowserRouter>
-        <TransactionsTable {...invoicesWithBoostagram} />
+        <I18nextProvider i18n={i18n}>
+          <TransactionsTable {...invoicesWithBoostagram} />
+        </I18nextProvider>
       </BrowserRouter>
     );
 
     expect(screen.getByText("dumplings")).toBeInTheDocument();
-    expect(screen.getByText(/received - 5 days ago/)).toBeInTheDocument();
+    expect(screen.getByText(/Received - 5 days ago/)).toBeInTheDocument();
     expect(screen.getByText(/\+88888 sats/)).toBeInTheDocument();
     expect(screen.getByText(/~\$17.36/)).toBeInTheDocument();
 
@@ -153,10 +161,12 @@ describe("TransactionsTable", () => {
     });
 
     expect(
-      await screen.findByText(/message: Du bist so 1 geiles podcast/)
+      await screen.findByText(/Message: Du bist so 1 geiles podcast/)
     ).toBeInTheDocument();
     expect(
-      await screen.findByText(/sender_name: bumi@getalby.com/)
+      await screen.findByText(/Sender: bumi@getalby.com/)
     ).toBeInTheDocument();
+    expect(await screen.findByText(/App: Fountain/)).toBeInTheDocument();
+    expect(await screen.findByText(/Podcast: Honigdachs/)).toBeInTheDocument();
   });
 });

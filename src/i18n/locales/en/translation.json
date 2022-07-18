@@ -272,7 +272,9 @@
     },
     "transactionsTable": {
       "fee": "Fee",
-      "pre_image": "Pre_image",
+      "preimage": "Preimage",
+      "received": "Received",
+      "sent": "Sent",
       "boostagram": {
         "sender_name": "Sender",
         "message": "Message",

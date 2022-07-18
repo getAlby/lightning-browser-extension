@@ -52,7 +52,8 @@ export default function TransactionsTable({ transactions }: Props) {
                         {tx.title}
                       </div>
                       <p className="text-xs text-gray-600 capitalize dark:text-neutral-400">
-                        {tx.type} - {tx.date}
+                        {tComponents(`transactionsTable.${tx.type}`)} -{" "}
+                        {tx.date}
                       </p>
                     </div>
                     {tx.badges && (
@@ -112,21 +113,30 @@ export default function TransactionsTable({ transactions }: Props) {
                       {tx.boostagram && (
                         <ul>
                           <li>
-                            label={tComponents("transactionsTable.sender_name")}
+                            {tComponents(
+                              "transactionsTable.boostagram.sender_name"
+                            )}
                             : {tx.boostagram.sender_name}
                           </li>
                           <li>
-                            label={tComponents("transactionsTable.message")}:{" "}
+                            {tComponents(
+                              "transactionsTable.boostagram.message"
+                            )}
+                            :{" "}
                             {tx.boostagram.message &&
                               decodeURI(tx.boostagram.message)}
                           </li>
                           <li>
-                            label={tComponents("transactionsTable.app_name")}:{" "}
-                            {tx.boostagram.app_name}
+                            {tComponents(
+                              "transactionsTable.boostagram.app_name"
+                            )}
+                            : {tx.boostagram.app_name}
                           </li>
                           <li>
-                            label={tComponents("transactionsTable.podcast")}:{" "}
-                            {tx.boostagram.podcast}
+                            {tComponents(
+                              "transactionsTable.boostagram.podcast"
+                            )}
+                            : {tx.boostagram.podcast}
                           </li>
                         </ul>
                       )}
