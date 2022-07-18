@@ -68,7 +68,7 @@
           }
         },
         "post_connect": {
-          "title": "🎉Success!",
+          "title": "🎉 Success!",
           "account_ready": "Your Alby account is ready.",
           "lightning_address": "Your lightning address:",
           "wallet_mobile_title": "Want to use your wallet on your mobile?",
