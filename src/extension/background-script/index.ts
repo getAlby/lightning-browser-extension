@@ -5,10 +5,12 @@ import { ExtensionIcon, setIcon } from "./actions/setup/setIcon";
 import connectors from "./connectors";
 import db from "./db";
 import * as events from "./events";
+import migrate from "./migrations";
 import { router } from "./router";
 import state from "./state";
 
 let isFirstInstalled = false;
+let isRecentlyUpdated = false;
 
 // when debugging is enabled in development mode a window.debugAlby object is defined that can be used within the console. This is the type interface for that
 declare global {
@@ -72,6 +74,10 @@ const handleInstalled = (details: { reason: string }) => {
   // TODO: maybe check if accounts are already configured?
   if (details.reason === "install") {
     isFirstInstalled = true;
+  }
+  if (details.reason === "update") {
+    console.info("Alby was recently updated");
+    isRecentlyUpdated = true;
   }
 };
 
@@ -154,5 +160,8 @@ console.info("Welcome to Alby");
 init().then(() => {
   if (isFirstInstalled) {
     utils.openUrl("welcome.html");
+  }
+  if (isRecentlyUpdated) {
+    migrate();
   }
 });

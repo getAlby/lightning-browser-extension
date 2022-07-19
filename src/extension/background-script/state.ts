@@ -13,6 +13,7 @@ import type Connector from "./connectors/connector.interface";
 interface State {
   account: Account | null;
   accounts: Accounts;
+  migrations: Array<string> | null;
   connector: Connector | null;
   currentAccountId: string | null;
   getAccount: () => Account | null;
@@ -29,12 +30,13 @@ interface BrowserStorage {
   settings: SettingsStorage;
   accounts: Accounts;
   currentAccountId: string | null;
+  migrations: Array<string> | null;
 }
 
 export const DEFAULT_SETTINGS: SettingsStorage = {
   websiteEnhancements: true,
   legacyLnurlAuth: false,
-  isUsingLegacyLnurlAuthKey: true,
+  isUsingLegacyLnurlAuthKey: false,
   userName: "",
   userEmail: "",
   locale: i18n.resolvedLanguage,
@@ -50,6 +52,7 @@ const browserStorageDefaults: BrowserStorage = {
   settings: DEFAULT_SETTINGS,
   accounts: {},
   currentAccountId: null,
+  migrations: [],
 };
 
 const browserStorageKeys = Object.keys(browserStorageDefaults) as Array<
@@ -60,6 +63,7 @@ const state = createState<State>((set, get) => ({
   connector: null,
   account: null,
   settings: DEFAULT_SETTINGS,
+  migrations: [],
   accounts: {},
   currentAccountId: null,
   password: null,
