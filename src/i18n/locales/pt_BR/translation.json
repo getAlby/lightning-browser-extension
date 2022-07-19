@@ -10,7 +10,7 @@
             "intro": {
                 "send": "Clicou pagou",
                 "privacy": "Privacidade",
-                "privacy_description": "Use a rede relâmpago do bitcoin para autenticar em sites e tenha controle da sua privacidade.",
+                "privacy_description": "Use a rede relâmpago do bitcoin para autenticar em sites e tenha controle sobre sua privacidade.",
                 "foss": "Gratuito e de código aberto",
                 "paywall": "Chega de paywalls irritantes",
                 "foss_description": "Código completamente aberto que pode ser auditado por qualquer pessoa. Sem estatísticas ou rastreadores. Você está no controle.",
@@ -18,10 +18,10 @@
                     "get_started": "Começar"
                 },
                 "send_description": "Realize pagamentos de forma simples e direta enquanto você navega na web.",
-                "paywall_description": "Gostou de uma página na web? Habilite pagamentos automáticos e limites personalizados para cada site."
+                "paywall_description": "Habilite pagamentos automáticos e defina limites de gastos personalizados para cada site."
             },
             "set_password": {
-                "description": "Sua carteira é protegida com uma senha e precisa ser desbloqueada antes do uso.",
+                "description": "Sua carteira é protegida por uma senha e precisa ser desbloqueada antes do uso.",
                 "enter_password": "Insira uma senha.",
                 "confirm_password": "Confirme sua senha.",
                 "mismatched_password": "As senhas não correspondem.",
@@ -31,12 +31,12 @@
             },
             "test_connection": {
                 "ready": "Perfeito, tudo configurado!",
-                "tutorial": "Agora que você já conectou seu servidor, gostaria de ler o tutorial?",
+                "tutorial": "Agora que você já conectou o servidor, gostaria de ler o tutorial?",
                 "try_tutorial": "Experimente agora",
                 "initializing": "Inicializando sua conta. Aguarde, pode demorar um pouco...",
                 "connection_error": "Erro de conexão",
-                "review_connection_details": "Revise os detalhes da sua conexão.",
-                "connection_taking_long": "A tentativa de conexão está demorando mais do que o esperado... Seus dados estão corretos? Seu servidor está acessível?",
+                "review_connection_details": "Revise os detalhes da conexão.",
+                "connection_taking_long": "A tentativa de conexão está demorando mais do que o esperado... Os dados estão corretos?O servidor está acessível?",
                 "contact_support": "Se precisar de ajuda, entre em contato com support@getalby.com",
                 "actions": {
                     "delete_edit_account": "Remover conta inválida e editar novamente"
@@ -93,16 +93,16 @@
                 "description": "Conectar carteira Bluewallet",
                 "page_title": "Conectar na LNDHub (BlueWallet)",
                 "errors": {
-                    "invalid_uri": "LNDHub URI inválida",
+                    "invalid_uri": "URI LNDHub inválida",
                     "connection_failed": "Conexão falhou. Tem certeza de que a URI da LNDHub está correta?"
                 },
                 "title": "LNDHub (Bluewallet)",
                 "page_description": "Na BlueWallet, abra a carteira que você deseja conectar, clique em \"...\", clique em Exportar/Backup para mostrar o código QR. Leia o código QR com sua webcam.",
-                "lndhub_uri": "LNDHub Exportar URI"
+                "lndhub_uri": "Exportar URI LNDHub"
             },
             "eclair": {
                 "title": "Eclair",
-                "description": "Conectar servidor Eclair"
+                "description": "Conectar em um servidor Eclair"
             },
             "lnbits": {
                 "title": "LNbits",
@@ -110,23 +110,23 @@
             },
             "citadel": {
                 "title": "Citadel",
-                "description": "Conectar na Citadel"
+                "description": "Conectar no Citadel"
             },
             "umbrel": {
                 "title": "Umbrel",
-                "description": "Conectar na Umbrel"
+                "description": "Conectar no Umbrel"
             },
             "mynode": {
                 "title": "myNode",
-                "description": "Conectar na myNode"
+                "description": "Conectar no myNode"
             },
             "start9": {
                 "title": "Start9",
-                "description": "Conectar na Embassy"
+                "description": "Conectar no Embassy"
             },
             "raspiblitz": {
                 "title": "RaspiBlitz",
-                "description": "Conectar na RaspiBlitz"
+                "description": "Conectar no RaspiBlitz"
             },
             "bitcoin_jungle": {
                 "title": "Carteira Bitcoin Jungle",
@@ -156,7 +156,7 @@
                 "tip_mobile": "Dica: Use esta carteira no seu dispositivo móvel",
                 "waiting": "aguardando dados LndHub...",
                 "scan_qr": "Leia o Código QR para importar esta carteira na Zeus ou BlueWallet.",
-                "export_uri": "LNDHub Exportar URI"
+                "export_uri": "Exportar URI LNDHub"
             }
         },
         "unlock": {
