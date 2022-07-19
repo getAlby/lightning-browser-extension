@@ -100,9 +100,7 @@ export default function PasswordForm({
           }
         />
         {errors.passwordErrorMessage && (
-          <div className="mt-1 text-red-500">
-            {t(errors.passwordErrorMessage)}
-          </div>
+          <p className="mt-1 text-red-500">{t(errors.passwordErrorMessage)}</p>
         )}
       </div>
       <div className="w-full">
@@ -130,9 +128,9 @@ export default function PasswordForm({
           }
         />
         {errors.passwordConfirmationErrorMessage && (
-          <div className="mt-1 text-red-500">
+          <p className="mt-1 text-red-500">
             {t(errors.passwordConfirmationErrorMessage)}
-          </div>
+          </p>
         )}
       </div>
     </>
