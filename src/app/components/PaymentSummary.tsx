@@ -6,6 +6,30 @@ type Props = {
 };
 
 function PaymentSummary({ amount, amountAlt, description, metadata }: Props) {
+  const metadataElements: JSX.Element[] = [];
+  if (metadata != undefined) {
+    for (const key in metadata) {
+      if (key[0] != "@") {
+        metadataElements.push(
+          <>
+            <dt className="mt-4 font-medium text-gray-800 dark:text-white">
+              {key}
+            </dt>
+            <dd className="mb-0 text-gray-600 dark:text-neutral-500 break-all">
+              {key == "image" ? (
+                <img src={`data:image/png;base64, ${metadata[key]}`} />
+              ) : (
+                metadata[key]
+              )}
+            </dd>
+          </>
+        );
+      }
+    }
+  } else {
+    metadataElements.push(<p>&quot;No Metadata Present&quot;</p>);
+  }
+
   return (
     <dl className="mb-0">
       <dt className="font-medium text-gray-800 dark:text-white">Amount</dt>
@@ -19,6 +43,12 @@ function PaymentSummary({ amount, amountAlt, description, metadata }: Props) {
       <dd className="mb-0 text-gray-600 dark:text-neutral-500 break-all">
         {description}
       </dd>
+      <dt className="mt-4 font-medium text-gray-800 dark:text-white">
+        Metadata
+      </dt>
+      {metadataElements.map((metadata) => (
+        <>{metadata}</>
+      ))}
     </dl>
   );
 }
