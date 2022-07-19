@@ -268,13 +268,13 @@ class Lnd implements Connector {
           delete errBody.message;
         }
         if (!errBody.error) {
-          throw new Error();
+          throw new Error("Something went wrong");
         }
       } catch (err) {
         throw new Error(res.statusText);
       }
-      console.error("errBody", errBody);
-      throw errBody;
+      console.error(errBody);
+      throw new Error(errBody.error);
     }
     let data = await res.json();
     if (defaultValues) {

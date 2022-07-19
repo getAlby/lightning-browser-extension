@@ -41,11 +41,33 @@
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "assets/icons/alby_icon_sleeping_16x16.png",
-      "32": "assets/icons/alby_icon_sleeping_32x32.png",
-      "48": "assets/icons/alby_icon_sleeping_48x48.png",
-      "128": "assets/icons/alby_icon_sleeping_128x128.png"
+      "16": "assets/icons/alby_icon_yellow_16x16.png",
+      "32": "assets/icons/alby_icon_yellow_32x32.png",
+      "48": "assets/icons/alby_icon_yellow_48x48.png",
+      "128": "assets/icons/alby_icon_yellow_128x128.png"
     },
+    "theme_icons": [
+      {
+        "dark": "assets/icons/alby_icon_yellow_16x16.png",
+        "light": "assets/icons/alby_icon_yellow_dark_16x16.png",
+        "size": 16
+      },
+      {
+        "dark": "assets/icons/alby_icon_yellow_32x32.png",
+        "light": "assets/icons/alby_icon_yellow_dark_32x32.png",
+        "size": 32
+      },
+      {
+        "dark": "assets/icons/alby_icon_yellow_48x48.png",
+        "light": "assets/icons/alby_icon_yellow_dark_48x48.png",
+        "size": 48
+      },
+      {
+        "dark": "assets/icons/alby_icon_yellow_128x128.png",
+        "light": "assets/icons/alby_icon_yellow_dark_128x128.png",
+        "size": 128
+      }
+    ],
     "default_title": "Alby - Bitcoin Lightning Wallet",
     "__chrome|opera__chrome_style": false,
     "__firefox__browser_style": false

@@ -5,6 +5,9 @@ import WebLNProvider from "../ln/webln";
 if (document) {
   window.webln = new WebLNProvider();
 
+  const readyEvent = new Event("webln:ready");
+  document.dispatchEvent(readyEvent);
+
   // Intercept any `lightning:` requests
   window.addEventListener("click", (ev) => {
     const target = ev.target;
@@ -17,6 +20,7 @@ if (document) {
     let href;
     let paymentRequest;
     let lnurl;
+    let link; // used to dispatch a succcess event
 
     if (!lightningLink && !bitcoinLinkWithLighting && !lnurlLink) {
       return;
@@ -26,13 +30,16 @@ if (document) {
     if (lightningLink) {
       href = lightningLink.getAttribute("href").toLowerCase();
       paymentRequest = href.replace("lightning:", "");
+      link = lightningLink;
     } else if (bitcoinLinkWithLighting) {
       href = bitcoinLinkWithLighting.getAttribute("href");
+      link = bitcoinLinkWithLighting;
       const url = new URL(href);
       const query = new URLSearchParams(url.search);
       paymentRequest = query.get("lightning");
     } else if (lnurlLink) {
       href = lnurlLink.getAttribute("href").toLowerCase();
+      link = lnurlLink;
       lnurl = href.replace(/^lnurl[pwc]:/i, "");
     }
 
@@ -54,16 +61,42 @@ if (document) {
       if (!response.enabled) {
         return;
       }
+
       if (lnurl) {
-        return window.webln.lnurl(lnurl).catch((e) => {
-          console.error(e);
-          alert(`Error: ${e.message}`);
-        });
+        return window.webln
+          .lnurl(lnurl)
+          .catch((e) => {
+            console.error(e);
+            if (
+              ![ABORT_PROMPT_ERROR, USER_REJECTED_ERROR].includes(e.message)
+            ) {
+              alert(`Error: ${e.message}`);
+            }
+          })
+          .then((response) => {
+            const responseEvent = new CustomEvent("lightning:success", {
+              bubbles: true,
+              detail: {
+                lnurl,
+                response,
+              },
+            });
+            link.dispatchEvent(responseEvent);
+          });
       }
+
       return window.webln
         .sendPayment(paymentRequest)
-        .then((r) => {
-          console.info(r);
+        .then((response) => {
+          console.info(response);
+          const responseEvent = new CustomEvent("lightning:success", {
+            bubbles: true,
+            detail: {
+              paymentRequest,
+              response,
+            },
+          });
+          link.dispatchEvent(responseEvent);
         })
         .catch((e) => {
           console.error(e);

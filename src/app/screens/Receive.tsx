@@ -15,7 +15,7 @@ import Confetti from "react-confetti";
 import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useAuth } from "~/app/context/AuthContext";
+import { useAccount } from "~/app/context/AccountContext";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
@@ -24,7 +24,7 @@ import { poll } from "~/common/utils/helpers";
 import DualCurrencyField from "../components/form/DualCurrencyField";
 
 function Receive() {
-  const auth = useAuth();
+  const auth = useAccount();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     amount: "0",

@@ -8,8 +8,8 @@ import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useState, useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
+import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
-import { useAuth } from "~/app/context/AuthContext";
 import utils from "~/common/lib/utils";
 
 import Menu from "../Menu";
@@ -24,7 +24,7 @@ export type Props = {
 };
 
 function AccountMenu({ title, balances, showOptions = true }: Props) {
-  const auth = useAuth();
+  const auth = useAccount();
   const navigate = useNavigate();
   const { accounts, getAccounts } = useAccounts();
   const [loading, setLoading] = useState(false);

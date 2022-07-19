@@ -27,7 +27,12 @@ const list = async (message: MessageAllowanceList) => {
       .toArray();
 
     allowance.paymentsAmount = payments
-      .map((payment) => payment.totalAmount)
+      .map((payment) => {
+        if (typeof payment.totalAmount === "string") {
+          return parseInt(payment.totalAmount);
+        }
+        return payment.totalAmount;
+      })
       .reduce((previous, current) => previous + current, 0);
 
     return allowance;

@@ -1,3 +1,6 @@
+import { Fragment } from "react";
+import { MetadataValidator } from "~/schema/metadataValidator";
+
 type Props = {
   amount: string | React.ReactNode;
   amountAlt?: string;
@@ -8,8 +11,10 @@ type Props = {
 function PaymentSummary({ amount, amountAlt, description, metadata }: Props) {
   const metadataElements: JSX.Element[] = [];
   if (metadata != undefined) {
-    for (const key in metadata) {
-      if (key[0] != "@") {
+    const isMetadataValid = MetadataValidator(metadata);
+
+    if (isMetadataValid) {
+      for (const key in metadata) {
         metadataElements.push(
           <>
             <dt className="mt-4 font-medium text-gray-800 dark:text-white">
@@ -25,6 +30,8 @@ function PaymentSummary({ amount, amountAlt, description, metadata }: Props) {
           </>
         );
       }
+    } else {
+      metadataElements.push(<p>&quot;No valid Metadata Provided&quot;</p>);
     }
   } else {
     metadataElements.push(<p>&quot;No Metadata Present&quot;</p>);
@@ -46,8 +53,8 @@ function PaymentSummary({ amount, amountAlt, description, metadata }: Props) {
       <dt className="mt-4 font-medium text-gray-800 dark:text-white">
         Metadata
       </dt>
-      {metadataElements.map((metadata) => (
-        <>{metadata}</>
+      {metadataElements.map((metadata, key) => (
+        <Fragment key={key}>{metadata}</Fragment>
       ))}
     </dl>
   );
