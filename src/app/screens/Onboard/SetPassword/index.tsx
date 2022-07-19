@@ -94,7 +94,7 @@ export default function SetPassword() {
                 endAdornment={
                   <button
                     type="button"
-                    className="flex justify-center items-center w-10 h-8"
+                    className="mr-1 flex justify-center items-center w-10 h-8"
                     onClick={() => setPasswordView(!passwordView)}
                   >
                     {passwordView ? (
@@ -120,7 +120,7 @@ export default function SetPassword() {
                 endAdornment={
                   <button
                     type="button"
-                    className="flex justify-center items-center w-10 h-8"
+                    className="mr-1 flex justify-center items-center w-10 h-8"
                     onClick={() =>
                       setPasswordConfirmationView(!passwordConfirmationView)
                     }
