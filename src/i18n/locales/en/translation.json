@@ -80,7 +80,7 @@
         "description": "Connect to your LND node",
         "page_title": "Connect to your LND node",
         "page_description": "You need your node URL and a macaroon with read and send permissions (e.g. admin.macaroon)",
-        "port_label": "REST API host and port",
+        "url_label": "REST API host and port",
         "url_placeholder": "https://your-node-url:8080",
         "macaroon_label": "Macaroon (HEX format)",
         "or": "OR",
