@@ -225,6 +225,13 @@ export interface LNURLWithdrawServiceResponse {
   domain: string;
 }
 
+export interface LNURLOpenChannelServiceResponse {
+  uri: string; // Remote node address of form node_key@ip_address:port_number
+  callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node
+  k1: string; // random or non-random string to identify the user's LN WALLET when using the callback URL
+  tag: "channelRequest"; // type of LNURL
+}
+
 export type LNURLDetails = (
   | LNURLChannelServiceResponse
   | LNURLPayServiceResponse

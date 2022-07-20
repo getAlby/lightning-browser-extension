@@ -2,6 +2,7 @@ import lnurlLib from "~/common/lib/lnurl";
 import type { Message } from "~/types";
 
 import authWithPrompt from "./auth";
+import channelRequestWithPrompt from "./channel";
 import payWithPrompt from "./pay";
 import withdrawWithPrompt from "./withdraw";
 
@@ -20,9 +21,7 @@ async function lnurl(message: Message) {
 
   switch (lnurlDetails.tag) {
     case "channelRequest":
-      console.error("lnurl-channel is not implemented");
-      // TODO: add support for LNURL channel
-      return { error: "not implemented" };
+      return channelRequestWithPrompt(message, lnurlDetails);
     case "login":
       return authWithPrompt(message, lnurlDetails);
     case "payRequest":

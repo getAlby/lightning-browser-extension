@@ -19,6 +19,7 @@ import Connector, {
   VerifyMessageArgs,
   VerifyMessageResponse,
   KeysendArgs,
+  ConnectPeerArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -58,6 +59,43 @@ class Lnd implements Connector {
 
   getBalance(): Promise<GetBalanceResponse> {
     return this.getChannelsBalance();
+  }
+  // 020cd30d13d5011a08830d6ad2e54b4e220c7b20457c094701b09346052343f519@127.0.0.1:9738
+  // 038a427acf097ca8853923d80c21472d85ae50114e3c3d531f2df2116e52aee106@127.0.0.1:8082
+  connectPeer(args: ConnectPeerArgs): Promise<any> {
+    // return this.request<any>(
+    //   "DELETE",
+    //   "/v1/peers/020cd30d13d5011a08830d6ad2e54b4e220c7b20457c094701b09346052343f519"
+    // ).then((data) => {
+    //   console.log("DATA: ", data);
+    // });
+
+    // host: "127.0.0.1:9738",
+    //     pubkey:
+    //       "020cd30d13d5011a08830d6ad2e54b4e220c7b20457c094701b09346052343f519",
+
+    const { pubkey, host } = args;
+
+    return this.request<any>("POST", "/v1/peers", {
+      addr: {
+        pubkey,
+        host,
+      },
+      perm: true,
+    }).then((data) => {
+      console.log("DATA: ", data);
+
+      // if (data.payment_error) {
+      //   throw new Error(data.payment_error);
+      // }
+      // return {
+      //   data: {
+      //     preimage: utils.base64ToHex(data.payment_preimage),
+      //     paymentHash: utils.base64ToHex(data.payment_hash),
+      //     route: data.payment_route,
+      //   },
+      // };
+    });
   }
 
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
