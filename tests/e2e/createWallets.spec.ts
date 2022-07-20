@@ -254,19 +254,21 @@ test.describe("Create or connect wallets", () => {
   });
 
   test("successfully connects to BTCPay", async () => {
-    const { browser, welcomePage, $document } =
-      await commonCreateWalletUserCreate();
+    const { browser, page, $document } = await commonCreateWalletUserCreate();
 
-    const createNewWalletButton = await getByText($document, "BTCPay");
+    const createNewWalletButton = await getByText($document, "BTCPay Server");
     createNewWalletButton.click();
 
-    await waitFor(() => getByText($document, "Connect to BTCPay LND"));
+    await waitFor(() =>
+      getByText($document, "Connect to your BTCPay LND node")
+    );
 
     const configField = await getByLabelText($document, "Config data");
     await configField.type(
       "config=https://gist.githubusercontent.com/bumi/71885ed90617b3ba2dd485ecfb7829eb/raw/f7e86f6d8b71b33c70b01a650be337408a0c7a11/mock-btcpay-lnd.json"
     );
 
-    await commonCreateWalletSuccessCheck({ browser, welcomePage, $document });
+    await commonCreateWalletSuccessCheck({ page, $document });
+    await browser.close();
   });
 });
