@@ -2,6 +2,7 @@ import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useState, useEffect } from "react";
 import Modal from "react-modal";
+import { useSettings } from "~/app/context/SettingsContext";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
 import type { Allowance } from "~/types";
@@ -17,18 +18,21 @@ export type Props = {
 };
 
 function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
+  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const showFiat = !isLoadingSettings && settings.showFiat;
+
   const [modalIsOpen, setIsOpen] = useState(false);
   const [budget, setBudget] = useState("0");
   const [fiatAmount, setFiatAmount] = useState("");
 
   useEffect(() => {
-    if (budget !== "") {
+    if (budget !== "" && showFiat) {
       (async () => {
         const res = await getFiatValue(budget);
         setFiatAmount(res);
       })();
     }
-  }, [budget]);
+  }, [budget, showFiat]);
 
   function openModal() {
     setBudget(allowance.totalBudget.toString());
