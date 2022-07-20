@@ -7,7 +7,10 @@
                 "done": "Fertig",
                 "connect": "Mit Lightning verbinden"
             },
-            "heading": "Die Power von Lightning in Deinem Browser"
+            "heading": "Die Power von Lightning in Deinem Browser",
+            "intro": {
+                "send": "Senden mit einem Klick"
+            }
         }
     }
 }
