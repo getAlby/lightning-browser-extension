@@ -1,4 +1,4 @@
-interface WebLNNode {
+export interface WebLNNode {
   alias: string;
   pubkey?: string;
   color?: string;
@@ -86,7 +86,7 @@ export interface VerifyMessageResponse {
 }
 
 export interface ConnectPeerResponse {
-  data: {};
+  data: Record<string, never>;
 }
 
 export interface ConnectPeerArgs {

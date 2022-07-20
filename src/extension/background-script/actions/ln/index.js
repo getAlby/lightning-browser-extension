@@ -2,6 +2,7 @@ import PubSub from "pubsub-js";
 
 import state from "../../state";
 import checkPayment from "./checkPayment";
+import connectPeer from "./connectPeer";
 import getInfo from "./getInfo";
 import keysend from "./keysend";
 import makeInvoice from "./makeInvoice";
@@ -35,6 +36,7 @@ const getBalance = connectorCall("getBalance");
 const getTransactions = connectorCall("getTransactions");
 
 export {
+  connectPeer,
   getInfo,
   getBalance,
   getTransactions,

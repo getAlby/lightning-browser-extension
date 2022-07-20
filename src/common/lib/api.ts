@@ -1,10 +1,13 @@
 import {
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  ConnectPeerArgs,
+  ConnectPeerResponse,
 } from "~/extension/background-script/connectors/connector.interface";
 import type {
   Accounts,
   AccountInfo,
+  NodeInfo,
   Allowance,
   Transaction,
   SettingsStorage,
@@ -20,7 +23,7 @@ import utils from "./utils";
 export interface AccountInfoRes {
   balance: { balance: string | number };
   currentAccountId: string;
-  info: { alias: string };
+  info: { alias: string; pubkey?: string };
   name: string;
 }
 
@@ -85,8 +88,11 @@ export const getPayments = (options: { limit: number }) =>
   utils.call<{ payments: Transaction[] }>("getPayments", options);
 export const getSettings = () => utils.call<SettingsStorage>("getSettings");
 export const getStatus = () => utils.call<StatusRes>("status");
+export const getInfo = () => utils.call<NodeInfo["data"]>("getInfo");
 export const makeInvoice = ({ amount, memo }: MakeInvoiceArgs) =>
   utils.call<MakeInvoiceResponse["data"]>("makeInvoice", { amount, memo });
+export const connectPeer = ({ host, pubkey }: ConnectPeerArgs) =>
+  utils.call<ConnectPeerResponse["data"]>("connectPeer", { host, pubkey });
 export const setSetting = (
   setting: Record<string, string | number | boolean>
 ) =>
@@ -106,12 +112,14 @@ export const getBlocklist = (host: string) =>
 export default {
   getAccountInfo,
   getAccounts,
+  getInfo,
   selectAccount,
   getAllowance,
   getPayments,
   getSettings,
   getStatus,
   makeInvoice,
+  connectPeer,
   setSetting,
   swr: {
     getAccountInfo: swrGetAccountInfo,

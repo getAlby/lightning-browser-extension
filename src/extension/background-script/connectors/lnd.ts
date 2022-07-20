@@ -82,20 +82,36 @@ class Lnd implements Connector {
         host,
       },
       perm: true,
-    }).then((data) => {
-      console.log("DATA: ", data);
+    })
+      .then((data) => {
+        console.log("DATA: ", data);
 
-      // if (data.payment_error) {
-      //   throw new Error(data.payment_error);
-      // }
-      // return {
-      //   data: {
-      //     preimage: utils.base64ToHex(data.payment_preimage),
-      //     paymentHash: utils.base64ToHex(data.payment_hash),
-      //     route: data.payment_route,
-      //   },
-      // };
-    });
+        return {
+          data: {},
+        };
+        // if (data.payment_error) {
+        //   throw new Error(data.payment_error);
+        // }
+        // return {
+        //   data: {
+        //     preimage: utils.base64ToHex(data.payment_preimage),
+        //     paymentHash: utils.base64ToHex(data.payment_hash),
+        //     route: data.payment_route,
+        //   },
+        // };
+      })
+      .catch((e) => {
+        // the request fails (HTTP 500), but if we are already connected we say it's a success
+        if (e.message.match(/already connected/)) {
+          return {
+            data: {},
+          };
+        } else {
+          return {
+            error: e.message,
+          };
+        }
+      });
   }
 
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {

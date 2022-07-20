@@ -34,6 +34,7 @@ const routes = {
   checkPayment: ln.checkPayment,
   signMessage: ln.signMessage,
   makeInvoice: ln.makeInvoice,
+  connectPeer: ln.connectPeer,
   getBalance: ln.getBalance,
   getPayments: payments.all,
   accountInfo: accounts.info,

@@ -2,29 +2,27 @@ import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-import Input from "@components/form/Input";
 import axios from "axios";
 import { useState, MouseEvent } from "react";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import getOriginData from "~/extension/content-script/originData";
-import type { LNURLWithdrawServiceResponse } from "~/types";
+import type { LNURLChannelServiceResponse } from "~/types";
 
 type Props = {
-  details: LNURLWithdrawServiceResponse;
+  details: LNURLChannelServiceResponse;
   origin?: {
     name: string;
     icon: string;
   };
 };
 
-function LNURLWithdraw(props: Props) {
+function LNURLChannel(props: Props) {
   const [origin] = useState(props.origin || getOriginData());
-  const { minWithdrawable, maxWithdrawable } = props.details;
-  const [valueSat, setValueSat] = useState(
-    (maxWithdrawable && (+maxWithdrawable / 1000).toString()) || ""
-  );
+  const { uri } = props.details;
+  const [pubkey, host] = uri.split("@");
+
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -33,19 +31,32 @@ function LNURLWithdraw(props: Props) {
     try {
       setErrorMessage("");
       setLoadingConfirm(true);
-      const invoice = await api.makeInvoice({
-        amount: parseInt(valueSat),
-        memo: props.details.defaultDescription,
+      await api.connectPeer({
+        host,
+        pubkey,
       });
+      // todo: check success
+      const infoResponse = await api.getInfo();
+      const nodeId = infoResponse.node.pubkey;
 
-      await axios.get(props.details.callback, {
+      const callbackResponse = await axios.get(props.details.callback, {
         params: {
           k1: props.details.k1,
-          pr: invoice.paymentRequest,
+          remoteid: nodeId,
         },
       });
 
-      setSuccessMessage("Withdraw request sent successfully.");
+      // TODO: check error
+
+      setSuccessMessage(
+        `Channel request sent successfully. ${props.details.k1} ${nodeId}`
+      );
+
+      // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the response. This closes the window which means the user will NOT see the above successAction.
+      // We assume this is OK when it is called through webln.
+      if (props.details && props.origin) {
+        msg.reply(callbackResponse.data);
+      }
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
@@ -56,25 +67,6 @@ function LNURLWithdraw(props: Props) {
     }
   }
 
-  function renderAmount() {
-    if (minWithdrawable === maxWithdrawable) {
-      return <p>{`${minWithdrawable / 1000} sats`}</p>;
-    } else {
-      return (
-        <div className="mt-1 flex flex-col">
-          <Input
-            type="number"
-            min={minWithdrawable / 1000}
-            max={maxWithdrawable / 1000}
-            value={valueSat}
-            onChange={(e) => setValueSat(e.target.value)}
-          />
-          {errorMessage && <p className="mt-1 text-red-500">{errorMessage}</p>}
-        </div>
-      );
-    }
-  }
-
   function reject(e: MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
     msg.error(USER_REJECTED_ERROR);
@@ -82,7 +74,7 @@ function LNURLWithdraw(props: Props) {
 
   return (
     <div>
-      <h1 className="py-2 font-bold text-lg text-center">Withdraw</h1>
+      <h1 className="py-2 font-bold text-lg text-center">Channel Request</h1>
       <PublisherCard title={origin.name} image={origin.icon} />
       <div className="py-4">
         <Container maxWidth="sm">
@@ -90,14 +82,14 @@ function LNURLWithdraw(props: Props) {
             <>
               <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
                 <dt className="text-sm font-semibold text-gray-500">
-                  Amount (Satoshi)
+                  Request a channel from the node:
                 </dt>
-                <dd className="text-sm mb-4 dark:text-white">
-                  {renderAmount()}
+                <dd className="text-sm mb-4 dark:text-white break-all">
+                  {uri}
                 </dd>
               </dl>
               <ConfirmOrCancel
-                disabled={loadingConfirm || !valueSat}
+                disabled={loadingConfirm || !uri}
                 loading={loadingConfirm}
                 onConfirm={confirm}
                 onCancel={reject}
@@ -115,4 +107,4 @@ function LNURLWithdraw(props: Props) {
   );
 }
 
-export default LNURLWithdraw;
+export default LNURLChannel;
