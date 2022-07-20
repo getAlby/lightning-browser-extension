@@ -156,3 +156,5 @@ init().then(() => {
     utils.openUrl("welcome.html");
   }
 });
+
+browser.runtime.setUninstallURL("https://form.jotform.com/221745756722057");
