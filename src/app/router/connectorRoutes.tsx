@@ -1,3 +1,4 @@
+import ConnectBtcpay from "@screens/connectors/ConnectBtcpay";
 import ConnectCitadel from "@screens/connectors/ConnectCitadel";
 import ConnectEclair from "@screens/connectors/ConnectEclair";
 import ConnectGaloy, { galoyUrls } from "@screens/connectors/ConnectGaloy";
@@ -13,6 +14,7 @@ import i18n from "~/i18n/i18nConfig";
 import { translationI18nNamespace } from "~/i18n/namespaces";
 
 import alby from "/static/assets/icons/alby.png";
+import btcpay from "/static/assets/icons/btcpay.png";
 import citadel from "/static/assets/icons/citadel.png";
 import eclair from "/static/assets/icons/eclair.jpg";
 import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.png";
@@ -160,6 +162,16 @@ function getConnectorRoutes() {
         translationI18nNamespace
       ),
       logo: galoyBitcoinJungle,
+    },
+    {
+      path: "btcpay",
+      element: <ConnectBtcpay />,
+      title: i18n.t("choose_connector.btcpay.title", translationI18nNamespace),
+      description: i18n.t(
+        "choose_connector.btcpay.description",
+        translationI18nNamespace
+      ),
+      logo: btcpay,
     },
   ];
 }

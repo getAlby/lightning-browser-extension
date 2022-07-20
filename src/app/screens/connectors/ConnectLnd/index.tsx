@@ -136,7 +136,7 @@ export default function ConnectLnd() {
       <div className="mb-6">
         <TextField
           id="url"
-          label={t("port_label")}
+          label={t("url_label")}
           placeholder={t("url_placeholder")}
           pattern="https://.+"
           title={t("url_placeholder")}
