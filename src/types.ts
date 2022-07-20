@@ -336,7 +336,7 @@ export interface Allowance {
   id: number;
   imageURL: string;
   lastPaymentAt: string;
-  lnurlAuth: string;
+  lnurlAuth: boolean;
   name: string;
   payments: Transaction[];
   paymentsAmount: number;
