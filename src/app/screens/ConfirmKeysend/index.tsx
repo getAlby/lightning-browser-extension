@@ -7,6 +7,7 @@ import SuccessMessage from "@components/SuccessMessage";
 import { useState, MouseEvent, useRef, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useSettings } from "~/app/context/SettingsContext";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -22,6 +23,9 @@ type Props = {
 };
 
 function Keysend(props: Props) {
+  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const showFiat = !isLoadingSettings && settings.showFiat;
+
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -46,11 +50,13 @@ function Keysend(props: Props) {
   const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
-    (async () => {
-      const res = await getFiatValue(budget);
-      setFiatAmount(res);
-    })();
-  }, [budget]);
+    if (showFiat) {
+      (async () => {
+        const res = await getFiatValue(budget);
+        setFiatAmount(res);
+      })();
+    }
+  }, [budget, showFiat]);
 
   async function confirm() {
     if (rememberMe && budget) {
