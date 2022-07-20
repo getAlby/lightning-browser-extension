@@ -146,7 +146,7 @@
         "errors": {
           "connection_failed": "Connection failed. Is the BTCPay connection URL correct and accessible?"
         }
-      },
+      }
     },
     "home": {
       "send_satoshis": "⚡️ Send Satoshis ⚡️",
