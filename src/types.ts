@@ -2,8 +2,9 @@ import { PaymentRequestObject } from "bolt11";
 import { CURRENCIES } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
 import {
-  SendPaymentResponse,
   ConnectorInvoice,
+  SendPaymentResponse,
+  WebLNNode,
 } from "~/extension/background-script/connectors/connector.interface";
 
 export type ConnectorType = keyof typeof connectors;
@@ -19,6 +20,9 @@ export interface Accounts {
   [id: string]: Account;
 }
 
+export interface NodeInfo {
+  node: WebLNNode;
+}
 export interface AccountInfo {
   alias: string;
   balance: number;
@@ -206,7 +210,7 @@ export interface MessageAllowanceGet extends MessageDefault {
   action: "getAllowance";
 }
 
-interface LNURLChannelServiceResponse {
+export interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node
   k1: string; // random or non-random string to identify the user's LN WALLET when using the callback URL

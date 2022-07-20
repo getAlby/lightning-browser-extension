@@ -1,4 +1,4 @@
-interface WebLNNode {
+export interface WebLNNode {
   alias: string;
   pubkey?: string;
   color?: string;
@@ -104,6 +104,15 @@ export interface VerifyMessageResponse {
   data: {
     valid: boolean;
   };
+}
+
+export interface ConnectPeerResponse {
+  data: Record<string, never>;
+}
+
+export interface ConnectPeerArgs {
+  pubkey: string;
+  host: string;
 }
 
 export default interface Connector {
