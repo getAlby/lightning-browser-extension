@@ -82,7 +82,7 @@ test.describe("Create or connect wallets", () => {
 
   test("successfully creates an Alby wallet and opens publishers screen", async () => {
     const { user, browser, page, $document } =
-    await commonCreateWalletUserCreate();
+      await commonCreateWalletUserCreate();
     await createAlbyWallet({ page, $document, user });
     await commonCreateWalletSuccessCheck({ page, $document });
 
@@ -235,8 +235,8 @@ test.describe("Create or connect wallets", () => {
   test("successfully connects to Eclair", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
-    const createNewWalletButton = await getByText($document, "Eclair");
-    createNewWalletButton.click();
+    const connectButton = await getByText($document, "Eclair");
+    connectButton.click();
 
     await waitFor(() => getByText($document, "Connect to Eclair"));
 
@@ -256,8 +256,8 @@ test.describe("Create or connect wallets", () => {
   test("successfully connects to BTCPay", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
-    const createNewWalletButton = await getByText($document, "BTCPay Server");
-    createNewWalletButton.click();
+    const connectButton = await getByText($document, "BTCPay Server");
+    connectButton.click();
 
     await waitFor(() =>
       getByText($document, "Connect to your BTCPay LND node")
