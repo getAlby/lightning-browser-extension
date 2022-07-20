@@ -111,22 +111,4 @@ export const getFiatValue = async (
   return localeFiatValue;
 };
 
-export const getBalances = async (balance: number, isLatestRate?: boolean) => {
-  const { currency } = await getCurrencySettings();
-  const fiatValue = await satoshisToFiat({
-    amountInSats: balance,
-    convertTo: currency,
-    isLatestRate,
-  });
-  const localeFiatValue = fiatValue.toLocaleString("en", {
-    style: "currency",
-    currency: currency,
-  });
-
-  return {
-    satsBalance: `${balance} sats`,
-    fiatBalance: localeFiatValue,
-  };
-};
-
 export const getSatValue = (balance: number) => `${balance} sats`;

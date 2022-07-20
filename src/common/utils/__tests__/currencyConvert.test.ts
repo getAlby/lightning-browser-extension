@@ -5,7 +5,7 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 
-import { getFiatValue, getBalances, getSatValue } from "../currencyConvert";
+import { getFiatValue, getSatValue } from "../currencyConvert";
 
 const server = setupServer(
   rest.get(
@@ -64,15 +64,6 @@ describe("Currency coversion utils", () => {
     const result = await getFiatValue(123456789);
 
     expect(result).toBe("$37,026.96");
-  });
-
-  test("getBalances", async () => {
-    const result = await getBalances(123456789);
-
-    expect(result).toMatchObject({
-      fiatBalance: "$37,026.96",
-      satsBalance: "123456789 sats",
-    });
   });
 
   test("getSatValue", async () => {
