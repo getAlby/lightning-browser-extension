@@ -93,11 +93,15 @@ const satoshisToFiat = async ({
   return fiat;
 };
 
-export const getFiatValue = async (amount: number | string) => {
+export const getFiatValue = async (
+  amount: number | string,
+  isLatestRate?: boolean
+) => {
   const { currency } = await getCurrencySettings();
   const fiatValue = await satoshisToFiat({
     amountInSats: amount,
     convertTo: currency,
+    isLatestRate,
   });
   const localeFiatValue = fiatValue.toLocaleString("en", {
     style: "currency",
