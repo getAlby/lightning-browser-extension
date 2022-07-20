@@ -6,7 +6,7 @@ import debounce from "lodash/debounce";
 import { CURRENCIES } from "~/common/constants";
 import { getSettings } from "~/common/lib/api";
 
-const settings = async () => {
+const getCurrencySettings = async () => {
   const { currency, exchange } = await getSettings();
 
   return {
@@ -18,7 +18,7 @@ const settings = async () => {
 const numSatsInBtc = 100_000_000;
 
 const getFiatBtcRate = async (currency: CURRENCIES): Promise<string> => {
-  const { exchange } = await settings();
+  const { exchange } = await getCurrencySettings();
 
   let response;
 
@@ -94,7 +94,7 @@ const satoshisToFiat = async ({
 };
 
 export const getFiatValue = async (amount: number | string) => {
-  const { currency } = await settings();
+  const { currency } = await getCurrencySettings();
   const fiatValue = await satoshisToFiat({
     amountInSats: amount,
     convertTo: currency,
@@ -108,7 +108,7 @@ export const getFiatValue = async (amount: number | string) => {
 };
 
 export const getBalances = async (balance: number, isLatestRate?: boolean) => {
-  const { currency } = await settings();
+  const { currency } = await getCurrencySettings();
   const fiatValue = await satoshisToFiat({
     amountInSats: balance,
     convertTo: currency,
