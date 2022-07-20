@@ -77,7 +77,6 @@ function Settings() {
             />
           )}
         </Setting>
-
         <Setting
           title={t("camera_access.title")}
           subtitle={t("camera_access.subtitle")}
@@ -100,13 +99,11 @@ function Settings() {
             </p>
           )}
         </Setting>
-
         <Setting title={t("language.title")} subtitle={t("language.subtitle")}>
           <div className="w-32">
             <LocaleSwitcher />
           </div>
         </Setting>
-
         <Setting title={t("theme.title")} subtitle={t("theme.subtitle")}>
           {!isLoading && (
             <div className="w-64">
