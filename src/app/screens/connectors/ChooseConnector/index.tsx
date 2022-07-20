@@ -31,6 +31,7 @@ export default function ChooseConnector({ title, description }: Props) {
               title={title}
               description={description}
               logo={logo}
+              roundedImage={path === "btcpay" ? false : true}
             />
           ))}
         </div>
