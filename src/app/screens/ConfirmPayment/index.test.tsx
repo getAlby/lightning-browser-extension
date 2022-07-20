@@ -2,9 +2,21 @@ import { render, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import lightningPayReq from "bolt11";
 import { MemoryRouter } from "react-router-dom";
+import * as SettingsContext from "~/app/context/SettingsContext";
+import type { SettingsStorage } from "~/types";
 
 import type { Props } from "./index";
 import ConfirmPayment from "./index";
+
+const mockSettings = {
+  showFiat: true,
+} as SettingsStorage;
+
+jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
+  settings: mockSettings,
+  isLoading: false,
+  updateSetting: jest.fn(),
+});
 
 jest.mock("~/common/utils/currencyConvert", () => {
   return {
