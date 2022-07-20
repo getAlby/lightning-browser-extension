@@ -9,6 +9,7 @@ const reset = async (message, sender) => {
     password: null,
     currentAccountId: null,
   });
+  await state.getState().saveToStorage();
 
   return { data: { reset: true } };
 };

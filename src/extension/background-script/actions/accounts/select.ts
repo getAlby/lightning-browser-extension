@@ -17,6 +17,7 @@ const select = async (message: MessageAccountSelect) => {
       connector: null, // reset memoized connector
       currentAccountId: accountId,
     });
+    await state.getState().saveToStorage();
 
     // init connector this also memoizes the connector in the state object
     await state.getState().getConnector();
