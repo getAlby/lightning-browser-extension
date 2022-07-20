@@ -165,6 +165,58 @@
         "part1": "Need help? Contact",
         "part2": "Alby Support"
       }
+    },
+    "settings": {
+      "headline": "Settings",
+      "website_enhancements": {
+        "title": "Website enhancements",
+        "subtitle": "Tipping enhancements for Twitter, YouTube, etc."
+      },
+      "legacy_lnurl_auth": {
+        "title": "Legacy signing for LNDhub and LNBits",
+        "subtitle": "Message signing and login with LNDhub and LNbits accounts has been changed. If you logged in with these accounts you can still enable the old signing method. This option will be removed later, make sure to switch to the new login."
+      },
+      "camera_access": {
+        "title": "Camera access",
+        "subtitle": "For scanning QR codes",
+        "label": "Allow camera access",
+        "active": "Permission granted"
+      },
+      "language": {
+        "title": "Language",
+        "subtitle": "Alby goes international! help us translate Alby in your language"
+      },
+      "theme": {
+        "title": "Theme",
+        "subtitle": "Use Alby in dark or light mode",
+        "options": {
+          "dark": "Dark",
+          "light": "Light",
+          "system": "System"
+        }
+      },
+      "currency": {
+        "title": "Currency",
+        "subtitle": "Show the amounts additionally in this currency"
+      },
+      "exchange": {
+        "title": "Exchange Source",
+        "subtitle": "Source of Bitcoin exchange rates"
+      },
+      "personal_data": {
+        "headline": "Personal data",
+        "info": "Payees can request for additional data to be sent with a payment. This data is not shared with anyone without your consent, you will always be prompted before this data is sent along with a payment."
+      },
+      "name": {
+        "title": "Name",
+        "subtitle": "",
+        "placeholder": "Enter your name"
+      },
+      "email": {
+        "title": "Email",
+        "subtitle": "",
+        "placeholder": "Enter your email address"
+      }
     }
   },
   "common": {

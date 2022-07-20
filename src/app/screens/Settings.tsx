@@ -10,6 +10,7 @@ import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
 import type { FormEvent } from "react";
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
@@ -25,6 +26,8 @@ const initialFormData = {
 };
 
 function Settings() {
+  const { t } = useTranslation("translation", { keyPrefix: "settings" });
+
   const { fetchAccountInfo } = useAccount();
 
   const [loading, setLoading] = useState(true);
@@ -75,12 +78,12 @@ function Settings() {
   return (
     <Container>
       <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
-        Settings
+        {t("headline")}
       </h2>
       <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting
-          title="Website enhancements"
-          subtitle="Tipping enhancements for Twitter, YouTube, etc."
+          title={t("website_enhancements.title")}
+          subtitle={t("website_enhancements.subtitle")}
         >
           {!loading && (
             <Toggle
@@ -95,8 +98,8 @@ function Settings() {
         </Setting>
 
         <Setting
-          title="Legacy signing for LNDhub and LNBits"
-          subtitle="Message signing and login with LNDhub and LNbits accounts has been changed. If you logged in with these accounts you can still enable the old signing method. This option will be removed later, make sure to switch to the new login."
+          title={t("legacy_lnurl_auth.title")}
+          subtitle={t("legacy_lnurl_auth.subtitle")}
         >
           {!loading && (
             <Toggle
@@ -110,10 +113,13 @@ function Settings() {
           )}
         </Setting>
 
-        <Setting title="Camera access" subtitle="For scanning QR codes">
+        <Setting
+          title={t("camera_access.title")}
+          subtitle={t("camera_access.subtitle")}
+        >
           {!cameraPermissionsGranted ? (
             <Button
-              label="Allow camera access"
+              label={t("camera_access.label")}
               onClick={async () => {
                 try {
                   await Html5Qrcode.getCameras();
@@ -124,20 +130,19 @@ function Settings() {
               }}
             />
           ) : (
-            <p className="text-green-500 font-medium">Permission granted</p>
+            <p className="text-green-500 font-medium">
+              {t("camera_access.active")}
+            </p>
           )}
         </Setting>
 
-        <Setting
-          title="Language"
-          subtitle="Alby goes international! help us translate Alby in your language"
-        >
+        <Setting title={t("language.title")} subtitle={t("language.subtitle")}>
           <div className="w-32">
             <LocaleSwitcher />
           </div>
         </Setting>
 
-        <Setting title="Theme" subtitle="Change the app theme to dark or light">
+        <Setting title={t("theme.title")} subtitle={t("theme.subtitle")}>
           {!loading && (
             <div className="w-64">
               <Select
@@ -150,18 +155,15 @@ function Settings() {
                   getTheme(); // Get the active theme and apply corresponding Tailwind classes to the document
                 }}
               >
-                <option value="dark">Dark</option>
-                <option value="light">Light</option>
-                <option value="system">System</option>
+                <option value="dark">{t("theme.options.dark")}</option>
+                <option value="light">{t("theme.options.light")}</option>
+                <option value="system">{t("theme.options.system")}</option>
               </Select>
             </div>
           )}
         </Setting>
 
-        <Setting
-          title="Currency"
-          subtitle="Change the currency display within Alby"
-        >
+        <Setting title={t("currency.title")} subtitle={t("currency.subtitle")}>
           {!loading && (
             <div className="w-64">
               <Select
@@ -184,10 +186,7 @@ function Settings() {
           )}
         </Setting>
 
-        <Setting
-          title="Exchange Source"
-          subtitle="Change the source where Alby get currency info"
-        >
+        <Setting title={t("exchange.title")} subtitle={t("exchange.subtitle")}>
           {!loading && (
             <div className="w-64">
               <Select
@@ -210,21 +209,19 @@ function Settings() {
       </div>
 
       <h2 className="mt-12 text-2xl font-bold dark:text-white">
-        Personal data
+        {t("personal_data.headline")}
       </h2>
 
       <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
-        Payees can request for additional data to be sent with a payment. This
-        data is not shared with anyone without your consent, you will always be
-        prompted before this data is sent along with a payment.
+        {t("personal_data.info")}
       </p>
 
-      <div className="mb-12 shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
-        <Setting title="Name" subtitle="">
+      <div className="mb-12 shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+        <Setting title={t("name.title")} subtitle={t("name.subtitle")}>
           {!loading && (
             <div className="w-64">
               <Input
-                placeholder="Enter your name"
+                placeholder={t("name.placeholder")}
                 type="text"
                 value={settings.userName}
                 onChange={(event) => {
@@ -237,11 +234,11 @@ function Settings() {
           )}
         </Setting>
 
-        <Setting title="Email" subtitle="">
+        <Setting title={t("email.title")} subtitle={t("email.subtitle")}>
           {!loading && (
             <div className="w-64">
               <Input
-                placeholder="Enter your email address"
+                placeholder={t("email.placeholder")}
                 type="email"
                 value={settings.userEmail}
                 onChange={(event) => {

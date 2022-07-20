@@ -1,0 +1,193 @@
+{
+  "translation": {
+    "welcome": {
+      "nav": {
+        "password": "Senha",
+        "connect": "Conectar",
+        "done": "Feito",
+        "welcome": "Bem-vindo"
+      },
+      "intro": {
+        "send": "Clicou pagou",
+        "privacy": "Privacidade",
+        "privacy_description": "Use a rede relâmpago do bitcoin para autenticar em sites e tenha controle sobre sua privacidade.",
+        "foss": "Gratuito e de código aberto",
+        "paywall": "Chega de paywalls irritantes",
+        "foss_description": "Código completamente aberto que pode ser auditado por qualquer pessoa. Sem estatísticas ou rastreadores. Você está no controle.",
+        "actions": {
+          "get_started": "Começar"
+        },
+        "send_description": "Realize pagamentos de forma simples e direta enquanto você navega na web.",
+        "paywall_description": "Habilite pagamentos automáticos e defina limites de gastos personalizados para cada site."
+      },
+      "set_password": {
+        "description": "Sua carteira é protegida por uma senha e precisa ser desbloqueada antes do uso.",
+        "enter_password": "Insira uma senha.",
+        "confirm_password": "Confirme sua senha.",
+        "mismatched_password": "As senhas não correspondem.",
+        "choose_password_label": "Escolha uma senha:",
+        "confirm_password_label": "Confirme se você digitou corretamente:",
+        "title": "Proteja sua carteira"
+      },
+      "test_connection": {
+        "ready": "Perfeito, tudo configurado!",
+        "tutorial": "Agora que você já conectou o servidor, gostaria de ler o tutorial?",
+        "try_tutorial": "Experimente agora",
+        "initializing": "Inicializando sua conta. Aguarde, pode demorar um pouco...",
+        "connection_error": "Erro de conexão",
+        "review_connection_details": "Revise os detalhes da conexão.",
+        "connection_taking_long": "A tentativa de conexão está demorando mais do que o esperado... Os dados estão corretos?O servidor está acessível?",
+        "contact_support": "Se precisar de ajuda, entre em contato com support@getalby.com",
+        "actions": {
+          "delete_edit_account": "Remover conta inválida e editar novamente"
+        }
+      },
+      "heading": "O poder do bitcoin no seu navegador"
+    },
+    "choose_connector": {
+      "alby": {
+        "title": "Carteira Alby",
+        "pre_connect": {
+          "email_label": "Endereço de e-mail",
+          "login_account": "Registrar ou acessar conta Alby.",
+          "host_wallet": "Nós hospedamos uma carteira bitcoin para você!",
+          "title": "Sua Carteira Bitcoin na Alby",
+          "optional_lightning_note": {
+            "part1": "Ao registrar uma conta Alby, você pode escolher um",
+            "part2": "Endereço Relâmpago",
+            "part4": "saiba mais",
+            "part3": ". É o modo mais simples para você receber Bitcoins na Rede Relâmpago."
+          },
+          "optional_lightning_address_suffix": "@getalby.com",
+          "errors": {
+            "create_wallet_error": "Falha ao criar uma nova carteira"
+          },
+          "optional_lightning_address_label": "Escolha um Endereço Relâmpago (opcional)"
+        },
+        "description": "Registrar ou acessar conta Alby",
+        "post_connect": {
+          "lightning_address": "Seu endereço relâmpago:",
+          "wallet_mobile_description": "Importe a carteira no aplicativo Zeus ou BlueWallet usando o Código QR.",
+          "wallet_mobile_title": "Deseja usar sua carteira no dispositivo móvel?",
+          "account_ready": "Sua carteira Alby está pronta.",
+          "title": "🎉Sucesso!"
+        }
+      },
+      "title": "Você possui uma carteira bitcoin?",
+      "description": "Você precisa primeiro conectar-se a uma conta ou servidor para poder interagir com seus sites favoritos que aceitam pagamentos bitcoin!",
+      "lnd": {
+        "title": "LND",
+        "description": "Conectar servidor LND",
+        "page_title": "Conectar servidor LND",
+        "errors": {
+          "connection_failed": "Falha na conexão. As credenciais LND estão corretas?"
+        },
+        "or": "OU",
+        "macaroon_label": "Macaroon (formato HEX)",
+        "url_placeholder": "https://seu-servidor-url:8080",
+        "port_label": "REST API porta e host",
+        "page_description": "Você precisa da URL do servidor e um macaroon com permissão de envio e leitura (ex. admin.macaroon)",
+        "drag_and_drop": "Arraste e solte seu macaroon aqui ou <0> procurar </0>"
+      },
+      "lndhub": {
+        "description": "Conectar carteira Bluewallet",
+        "page_title": "Conectar na LNDHub (BlueWallet)",
+        "errors": {
+          "invalid_uri": "URI LNDHub inválida",
+          "connection_failed": "Conexão falhou. Tem certeza de que a URI da LNDHub está correta?"
+        },
+        "title": "LNDHub (Bluewallet)",
+        "page_description": "Na BlueWallet, abra a carteira que você deseja conectar, clique em \"...\", clique em Exportar/Backup para mostrar o código QR. Leia o código QR com sua webcam.",
+        "lndhub_uri": "Exportar URI LNDHub"
+      },
+      "eclair": {
+        "title": "Eclair",
+        "description": "Conectar em um servidor Eclair"
+      },
+      "lnbits": {
+        "title": "LNbits",
+        "description": "Conectar em uma conta LNbits"
+      },
+      "citadel": {
+        "title": "Citadel",
+        "description": "Conectar no Citadel"
+      },
+      "umbrel": {
+        "title": "Umbrel",
+        "description": "Conectar no Umbrel"
+      },
+      "mynode": {
+        "title": "myNode",
+        "description": "Conectar no myNode"
+      },
+      "start9": {
+        "title": "Start9",
+        "description": "Conectar no Embassy"
+      },
+      "raspiblitz": {
+        "title": "RaspiBlitz",
+        "description": "Conectar no RaspiBlitz"
+      },
+      "bitcoin_jungle": {
+        "title": "Carteira Bitcoin Jungle",
+        "description": "Registre uma conta ou conecte sua Bitcoin Jungle (Galoy)"
+      },
+      "bitcoin_beach": {
+        "description": "Registre uma conta ou conecte sua Bitcoin Beach (Galoy)",
+        "title": "Carteira Bitcoin Beach"
+      }
+    },
+    "home": {
+      "send_satoshis": "⚡️ Enviar Satoshis ⚡️",
+      "recent_transactions": "Transações Recentes",
+      "allowance_view": {
+        "allowance": "Limite de gastos",
+        "sats_used": "sats usados",
+        "no_transactions": "Sem transações em <0>{{name}}</0>."
+      },
+      "default_view": {
+        "no_transactions": "Sem transações."
+      }
+    },
+    "accounts": {
+      "export": {
+        "your_ln_address": "Seu Endereço Relâmpago:",
+        "name": "Exportar detalhes da conta",
+        "tip_mobile": "Dica: Use esta carteira no seu dispositivo móvel",
+        "waiting": "aguardando dados LndHub...",
+        "scan_qr": "Leia o Código QR para importar esta carteira na Zeus ou BlueWallet.",
+        "export_uri": "Exportar URI LNDHub"
+      }
+    },
+    "unlock": {
+      "unlock_to_continue": "Desbloqueie para continuar",
+      "help_contact": {
+        "part1": "Precisa de ajuda? Contato",
+        "part2": "Suporte Alby"
+      }
+    }
+  },
+  "common": {
+    "success": "Sucesso!",
+    "actions": {
+      "edit": "Editar",
+      "next": "Próximo",
+      "continue": "Continuar",
+      "unlock": "Desbloquear",
+      "send": "Enviar",
+      "receive": "Receber"
+    },
+    "errors": {
+      "connection_failed": "Conexão falhou"
+    },
+    "password": "Senha"
+  },
+  "components": {
+    "qrcode_scanner": {
+      "scan_qrcode": "Ler Código QR",
+      "start_scanning": "Iniciar leitura",
+      "stop_scanning": "Parar leitura",
+      "allow_camera_access": "Permita o acesso à câmera na tela Configurações."
+    }
+  }
+}

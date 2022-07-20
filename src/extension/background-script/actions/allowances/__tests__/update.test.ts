@@ -1,7 +1,7 @@
 import db from "~/extension/background-script/db";
-import type { MessageAllowanceDelete } from "~/types";
+import type { MessageAllowanceUpdate } from "~/types";
 
-import deleteAllowance from "../delete";
+import updateAllowance from "../update";
 
 const mockAllowances = [
   {
@@ -48,48 +48,29 @@ describe("account all", () => {
   });
 
   test("update allowance", async () => {
-    const message: MessageAllowanceDelete = {
+    const message: MessageAllowanceUpdate = {
       application: "LBE",
       prompt: true,
-      action: "deleteAllowance",
+      action: "updateAllowance",
       origin: {
         internal: true,
       },
       args: {
         id: 2,
+        totalBudget: 1500,
+        enabled: true,
       },
     };
 
     await db.allowances.bulkAdd(mockAllowances);
 
-    expect(await deleteAllowance(message)).toStrictEqual({
-      data: true,
+    expect(await updateAllowance(message)).toStrictEqual({
+      data: 1,
     });
 
-    const dbAllowances = await db.allowances
-      .toCollection()
-      .reverse()
-      .sortBy("lastPaymentAt");
+    const allowance = await db.allowances.get(2);
 
-    expect(dbAllowances).toEqual([
-      {
-        enabled: true,
-        host: "pro.kollider.xyz",
-        id: 1,
-        imageURL: "https://pro.kollider.xyz/favicon.ico",
-        lastPaymentAt: "0",
-        lnurlAuth: true,
-        name: "pro kollider",
-        remainingBudget: 500,
-        totalBudget: 500,
-        createdAt: "123456",
-        payments: [],
-        paymentsAmount: 0,
-        paymentsCount: 0,
-        percentage: "0",
-        usedBudget: 0,
-        tag: "",
-      },
-    ]);
+    expect(allowance?.totalBudget).toEqual(1500);
+    expect(allowance?.enabled).toEqual(true);
   });
 });

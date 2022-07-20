@@ -116,7 +116,7 @@ function QrcodeScanner({
   }
 
   return (
-    <div className="shadow-sm bg-white rounded-md border border-gray-300 flex flex-col items-center dark:bg-surface-02dp p-3">
+    <div className="mt-5 shadow-sm bg-white rounded-md border border-gray-300 flex flex-col items-center dark:bg-surface-02dp p-3">
       {!isScanning && (
         <>
           <div className="flex justify-center text-center items-center">

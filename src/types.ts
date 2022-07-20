@@ -174,6 +174,15 @@ export interface MessageAllowanceDelete extends MessageDefault {
   action: "deleteAllowance";
 }
 
+export interface MessageAllowanceUpdate extends MessageDefault {
+  args: {
+    enabled: Allowance["enabled"];
+    id: Allowance["id"];
+    totalBudget: Allowance["totalBudget"];
+  };
+  action: "updateAllowance";
+}
+
 interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node
@@ -327,7 +336,7 @@ export interface Allowance {
   id: number;
   imageURL: string;
   lastPaymentAt: string;
-  lnurlAuth: string;
+  lnurlAuth: boolean;
   name: string;
   payments: Transaction[];
   paymentsAmount: number;
