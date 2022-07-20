@@ -124,3 +124,5 @@ export const getBalances = async (balance: number, isLatestRate?: boolean) => {
     fiatBalance: localeFiatValue,
   };
 };
+
+export const getSatValue = (balance: number) => `${balance} sats`;
