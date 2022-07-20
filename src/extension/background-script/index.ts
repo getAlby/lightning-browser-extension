@@ -157,4 +157,4 @@ init().then(() => {
   }
 });
 
-browser.runtime.setUninstallURL("https://form.jotform.com/221745756722057");
+browser.runtime.setUninstallURL("https://getalby.com/thanks");
