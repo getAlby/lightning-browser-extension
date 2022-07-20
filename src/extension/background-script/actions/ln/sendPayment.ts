@@ -23,7 +23,17 @@ export default async function sendPayment(message: Message) {
       paymentRequest,
     });
   } catch (e) {
-    response = { error: e instanceof Error ? e.message : "" };
+    let message;
+    if (typeof e === "string") {
+      message = e;
+    } else if (e instanceof Error) {
+      message = e.message;
+    } else {
+      message = "Something went wrong";
+    }
+    response = {
+      error: message,
+    };
   }
   utils.publishPaymentNotification(message, {
     paymentRequestDetails,

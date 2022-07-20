@@ -8,7 +8,7 @@ import axios from "axios";
 import React, { useState, useEffect, MouseEvent } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useAuth } from "~/app/context/AuthContext";
+import { useAccount } from "~/app/context/AccountContext";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import lnurl from "~/common/lib/lnurl";
@@ -45,7 +45,7 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
 function LNURLPay(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const auth = useAuth();
+  const auth = useAccount();
   const [loading, setLoading] = useState(true);
   const [details, setDetails] = useState(props.details);
   const [origin] = useState(

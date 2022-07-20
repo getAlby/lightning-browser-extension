@@ -8,14 +8,14 @@ import {
   QuestionIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "~/app/context/AuthContext";
+import { useAccount } from "~/app/context/AccountContext";
 import utils from "~/common/lib/utils";
 
 import Menu from "../Menu";
 
 export default function UserMenu() {
   const navigate = useNavigate();
-  const auth = useAuth();
+  const auth = useAccount();
 
   function openOptions(path: string) {
     // if we are in the popup

@@ -50,5 +50,5 @@ export const loadExtension = async () => {
 
   await page.goto(extPage);
 
-  return { page, browser };
+  return { page, browser, extensionId };
 };

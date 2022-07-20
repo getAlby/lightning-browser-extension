@@ -10,9 +10,9 @@ import MakeInvoice from "@screens/MakeInvoice";
 import Unlock from "@screens/Unlock";
 import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { useAccount } from "~/app/context/AccountContext";
+import { AccountProvider } from "~/app/context/AccountContext";
 import { AccountsProvider } from "~/app/context/AccountsContext";
-import { useAuth } from "~/app/context/AuthContext";
-import { AccountProvider } from "~/app/context/AuthContext";
 import RequireAuth from "~/app/router/RequireAuth";
 import type {
   LNURLAuthServiceResponse,
@@ -155,7 +155,7 @@ function Prompt() {
 }
 
 const Layout = () => {
-  const { account, balancesDecorated } = useAuth();
+  const { account, balancesDecorated } = useAccount();
 
   return (
     <>

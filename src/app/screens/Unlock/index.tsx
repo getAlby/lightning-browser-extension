@@ -8,7 +8,7 @@ import Input from "@components/form/Input";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "~/app/context/AuthContext";
+import { useAccount } from "~/app/context/AccountContext";
 import utils from "~/common/lib/utils";
 
 function Unlock() {
@@ -19,7 +19,7 @@ function Unlock() {
   const location = useLocation() as {
     state: { from?: { pathname?: string } };
   };
-  const auth = useAuth();
+  const auth = useAccount();
   const { t } = useTranslation("translation", { keyPrefix: "unlock" });
   const { t: tCommon } = useTranslation("common");
   const from = location.state.from?.pathname || "/";

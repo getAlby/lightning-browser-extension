@@ -70,13 +70,15 @@ export interface Battery extends OriginData {
   icon: string;
 }
 
-// deprecated message type,please stop using this
+/**
+ * @deprecated Use MessageDefault instead
+ */
 export interface Message {
+  action?: string;
   application?: string;
   args: Record<string, unknown>;
   origin: OriginData | OriginDataInternal;
   prompt?: boolean;
-  action?: string;
 }
 
 // new message  type, please use this
@@ -110,11 +112,11 @@ export interface MessageAccountDecryptedDetails extends MessageDefault {
   action: "accountDecryptedDetails";
 }
 
-export interface MessageAccountInfo extends Omit<MessageDefault, "args"> {
+export interface MessageAccountInfo extends MessageDefault {
   action: "accountInfo";
 }
 
-export interface MessageAccountAll extends Omit<MessageDefault, "args"> {
+export interface MessageAccountAll extends MessageDefault {
   action: "getAccounts";
 }
 
@@ -141,11 +143,18 @@ export interface MessageBlocklistGet extends MessageDefault {
   action: "getBlocklist";
 }
 
-export interface MessageAccountLock extends Omit<MessageDefault, "args"> {
+export interface MessageSetIcon extends MessageDefault {
+  action: "setIcon";
+  args: {
+    icon: string;
+  };
+}
+
+export interface MessageAccountLock extends MessageDefault {
   action: "lock";
 }
 
-export interface MessageAccountUnlock extends Omit<MessageDefault, "args"> {
+export interface MessageAccountUnlock extends MessageDefault {
   args: { password: string | number };
   action: "unlock";
 }
@@ -154,8 +163,24 @@ export interface MessageAccountSelect extends MessageDefault {
   args: { id: Account["id"] };
   action: "selectAccount";
 }
-export interface MessageAllowanceList extends Omit<MessageDefault, "args"> {
+export interface MessageAllowanceList extends MessageDefault {
   action: "listAllowances";
+}
+
+export interface MessageAllowanceDelete extends MessageDefault {
+  args: {
+    id: Allowance["id"];
+  };
+  action: "deleteAllowance";
+}
+
+export interface MessageAllowanceUpdate extends MessageDefault {
+  args: {
+    enabled: Allowance["enabled"];
+    id: Allowance["id"];
+    totalBudget: Allowance["totalBudget"];
+  };
+  action: "updateAllowance";
 }
 
 interface LNURLChannelServiceResponse {
@@ -261,19 +286,19 @@ export type Transaction = {
 };
 
 export interface Payment {
-  id?: number;
   allowanceId: string;
+  createdAt: string;
+  description: string;
+  destination: string;
   host: string;
+  id?: number;
   location: string;
   name: string;
-  description: string;
-  totalAmount: number;
-  totalFees: number;
-  preimage: string;
-  paymentRequest: string;
   paymentHash: string;
-  destination: string;
-  createdAt: string;
+  paymentRequest: string;
+  preimage: string;
+  totalAmount: number | string;
+  totalFees: number | string;
 }
 
 export interface PaymentResponse
@@ -311,7 +336,7 @@ export interface Allowance {
   id: number;
   imageURL: string;
   lastPaymentAt: string;
-  lnurlAuth: string;
+  lnurlAuth: boolean;
   name: string;
   payments: Transaction[];
   paymentsAmount: number;
@@ -331,6 +356,7 @@ export interface SettingsStorage {
   theme: string;
   currency: CURRENCIES;
   exchange: SupportedExchanges;
+  debug: boolean;
 }
 
 export interface Blocklist {
@@ -369,4 +395,4 @@ export interface Publisher
   };
 }
 
-export type SupportedExchanges = "coindesk" | "yadio";
+export type SupportedExchanges = "alby" | "coindesk" | "yadio";

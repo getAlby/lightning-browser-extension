@@ -8,8 +8,8 @@ import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useState, useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
+import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
-import { useAuth } from "~/app/context/AuthContext";
 import utils from "~/common/lib/utils";
 
 import Menu from "../Menu";
@@ -24,7 +24,7 @@ export type Props = {
 };
 
 function AccountMenu({ title, balances, showOptions = true }: Props) {
-  const auth = useAuth();
+  const auth = useAccount();
   const navigate = useNavigate();
   const { accounts, getAccounts } = useAccounts();
   const [loading, setLoading] = useState(false);
@@ -68,14 +68,18 @@ function AccountMenu({ title, balances, showOptions = true }: Props) {
           {title || <Skeleton />}
         </p>
 
-        <p className="flex justify-between">
-          <span className="text-xs dark:text-white">
-            {balances.satsBalance || <Skeleton />}
-          </span>
-          <span className="text-xs text-gray-600 dark:text-neutral-400">
-            ~{balances.fiatBalance || <Skeleton />}
-          </span>
-        </p>
+        {balances.satsBalance && balances.fiatBalance ? (
+          <p className="flex justify-between">
+            <span className="text-xs dark:text-white">
+              {balances.satsBalance}
+            </span>
+            <span className="text-xs text-gray-600 dark:text-neutral-400">
+              ~{balances.fiatBalance}
+            </span>
+          </p>
+        ) : (
+          <Skeleton />
+        )}
       </div>
 
       <Menu as="div">
