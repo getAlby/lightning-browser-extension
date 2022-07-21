@@ -13,7 +13,7 @@ import type Connector from "./connectors/connector.interface";
 interface State {
   account: Account | null;
   accounts: Accounts;
-  migrations: Array<string> | null;
+  migrations: string[] | null;
   connector: Connector | null;
   currentAccountId: string | null;
   getAccount: () => Account | null;

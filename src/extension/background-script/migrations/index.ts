@@ -49,6 +49,7 @@ const migrations = {
 };
 
 const migrate = async () => {
+  // going forward we can iterate through the the migrations object above and DRY this up:
   // Object.keys(migrations).forEach((name: string) => {
   if (shouldMigrate("migrateisUsingLegacyLnurlAuthKeySetting")) {
     console.info(
