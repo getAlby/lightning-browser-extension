@@ -270,10 +270,10 @@ class Lnd implements Connector {
       }[];
       last_index_offset: string;
       first_index_offset: string;
-    }>("GET", "/v1/invoices", undefined, {});
+    }>("GET", "/v1/invoices", { reversed: true });
 
-    const invoices: ConnectorInvoice[] = data.invoices
-      .map((invoice, index): ConnectorInvoice => {
+    const invoices: ConnectorInvoice[] = data.invoices.map(
+      (invoice, index): ConnectorInvoice => {
         const custom_records =
           invoice.htlcs[0] && invoice.htlcs[0].custom_records;
 
@@ -287,8 +287,8 @@ class Lnd implements Connector {
           totalAmount: invoice.value,
           type: "received",
         };
-      })
-      .reverse(); // LND sends oldest txs first
+      }
+    );
 
     return {
       data: {
@@ -308,6 +308,7 @@ class Lnd implements Connector {
     let body = null;
     const headers = new Headers();
     headers.append("Accept", "application/json");
+
     if (method === "POST") {
       body = JSON.stringify(args);
       headers.append("Content-Type", "application/json");
