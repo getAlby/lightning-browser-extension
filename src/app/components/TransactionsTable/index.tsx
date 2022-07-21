@@ -123,14 +123,17 @@ export default function TransactionsTable({ transactions }: Props) {
                       ) : (
                         ""
                       )}
-                      <p>
-                        Metadata:
+                      <dl>
+                        <dt className="mt-4 font-medium text-gray-800 dark:text-white">
+                          Metadata
+                        </dt>
+
                         {RenderMetadata(
                           tx.metadata as unknown as { [key: string]: string }
                         ).map((metadata, key) => (
                           <Fragment key={key}>{metadata}</Fragment>
                         ))}
-                      </p>
+                      </dl>
                     </div>
                   </Disclosure.Panel>
                 </>
