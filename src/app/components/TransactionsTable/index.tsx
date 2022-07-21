@@ -48,7 +48,12 @@ export default function TransactionsTable({ transactions }: Props) {
                       {tx.type && renderIcon(tx.type)}
                     </div>
                     <div className="overflow-hidden mr-3">
-                      <div className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                      <div
+                        className={`
+                      text-sm font-medium text-gray-900 truncate dark:text-white ${
+                        !tx.title && "invisible"
+                      }`}
+                      >
                         {tx.title}
                       </div>
                       <p className="text-xs text-gray-600 capitalize dark:text-neutral-400">
