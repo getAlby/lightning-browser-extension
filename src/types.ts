@@ -181,6 +181,7 @@ export interface MessageAllowanceList extends MessageDefault {
   action: "listAllowances";
 }
 export interface MessageInvoices extends Omit<MessageDefault, "args"> {
+  args: { limit?: number; isSettled?: boolean };
   action: "getInvoices";
 }
 

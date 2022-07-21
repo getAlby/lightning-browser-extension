@@ -111,15 +111,13 @@ function Home() {
     if (incomingTransactions) return incomingTransactions;
 
     setLoadingInvoices(true);
-    const result = await api.getInvoices();
+    const result = await api.getInvoices({ isSettled: true });
 
-    const invoices: Transaction[] = result.invoices
-      .filter((invoice) => invoice.settled)
-      .map((invoice) => ({
-        ...invoice,
-        title: invoice.memo,
-        date: dayjs(invoice.settleDate).fromNow(),
-      }));
+    const invoices: Transaction[] = result.invoices.map((invoice) => ({
+      ...invoice,
+      title: invoice.memo,
+      date: dayjs(invoice.settleDate).fromNow(),
+    }));
 
     for (const invoice of invoices) {
       const totalAmountFiat = await getFiatValue(invoice.totalAmount);
