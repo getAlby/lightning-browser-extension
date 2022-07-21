@@ -24,7 +24,7 @@ const transactions: Props = {
       title: "Alby",
       totalAmount: "1234000",
       totalAmountFiat: "$241.02",
-      totalFees: "0",
+      totalFees: 0,
       type: "sent",
     },
   ],
