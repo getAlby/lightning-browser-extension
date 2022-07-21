@@ -100,7 +100,7 @@ const utils = {
   /**
    *
    * @param message
-   * @metadata is optional, so that it doesnt conflict with lnurl openPrompt function call
+   * @param message.metadata is optional, so that it doesnt conflict with lnurl openPrompt function call
    */
   openPrompt: <Type>(message: {
     args: Record<string, unknown>;
