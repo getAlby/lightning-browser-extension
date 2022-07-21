@@ -32,7 +32,7 @@ function Home() {
   const [isBlocked, setIsBlocked] = useState<boolean>(false);
   const [currentUrl, setCurrentUrl] = useState<URL | null>(null);
   const [payments, setPayments] = useState<Transaction[]>([]);
-  const [invoiceTransactions, setInvoiceTransactions] = useState<
+  const [incomingTransactions, setIncomingTransactions] = useState<
     Transaction[] | null
   >(null);
   const [loadingAllowance, setLoadingAllowance] = useState(true);
@@ -108,7 +108,7 @@ function Home() {
 
   async function loadInvoices() {
     // incoives have already been loaded
-    if (invoiceTransactions) return invoiceTransactions;
+    if (incomingTransactions) return incomingTransactions;
 
     setLoadingInvoices(true);
     const result = await api.getInvoices();
@@ -126,7 +126,7 @@ function Home() {
       invoice.totalAmountFiat = totalAmountFiat;
     }
 
-    setInvoiceTransactions(invoices);
+    setIncomingTransactions(invoices);
     setLoadingInvoices(false);
   }
 
@@ -427,8 +427,9 @@ function Home() {
                     <div className="flex justify-center">
                       <Loading />
                     </div>
-                  ) : invoiceTransactions && invoiceTransactions.length > 0 ? (
-                    <TransactionsTable transactions={invoiceTransactions} />
+                  ) : incomingTransactions &&
+                    incomingTransactions.length > 0 ? (
+                    <TransactionsTable transactions={incomingTransactions} />
                   ) : (
                     <p className="text-gray-500 dark:text-neutral-400">
                       {t("default_view.no_transactions")}
