@@ -206,6 +206,26 @@ function Settings() {
             </div>
           )}
         </Setting>
+
+        <Setting
+          title={t("change_password.title")}
+          subtitle={t("change_password.subtitle")}
+        >
+          {!loading && (
+            <div className="w-64">
+              <Button
+                onClick={() => {
+                  setModalIsOpen(true);
+                }}
+                label={t("change_password.title")}
+                primary
+                fullWidth
+                loading={loading}
+                disabled={loading}
+              />
+            </div>
+          )}
+        </Setting>
       </div>
 
       <h2 className="mt-12 text-2xl font-bold dark:text-white">
@@ -246,22 +266,6 @@ function Settings() {
                     userEmail: event.target.value,
                   });
                 }}
-              />
-            </div>
-          )}
-        </Setting>
-        <Setting title="Change Password" subtitle="">
-          {!loading && (
-            <div className="w-64">
-              <Button
-                onClick={() => {
-                  setModalIsOpen(true);
-                }}
-                label="Change Password"
-                primary
-                fullWidth
-                loading={loading}
-                disabled={loading}
               />
             </div>
           )}
