@@ -153,7 +153,7 @@
             "export": {
                 "your_ln_address": "Seu Endereço Relâmpago:",
                 "name": "Exportar detalhes da conta",
-                "tip_mobile": "Dica: Use esta carteira no seu dispositivo móvel",
+                "tip_mobile": "Dica: Use esta carteira também no seu dispositivo móvel",
                 "waiting": "aguardando dados LndHub...",
                 "scan_qr": "Leia o Código QR para importar esta carteira na Zeus ou BlueWallet.",
                 "export_uri": "Exportar URI LNDHub"
@@ -164,6 +164,40 @@
             "help_contact": {
                 "part1": "Precisa de ajuda? Contato",
                 "part2": "Suporte Alby"
+            }
+        },
+        "settings": {
+            "headline": "Configurações",
+            "language": {
+                "title": "Idioma",
+                "subtitle": "Alby sem fronteiras. Não encontrou seu idioma? Nos ajude a traduzir"
+            },
+            "theme": {
+                "title": "Tema",
+                "options": {
+                    "dark": "Escuro",
+                    "system": "Sistema",
+                    "light": "Claro"
+                }
+            },
+            "currency": {
+                "title": "Moeda"
+            },
+            "personal_data": {
+                "headline": "Dados pessoais"
+            },
+            "email": {
+                "title": "E-mail",
+                "placeholder": "Insira seu endereço de e-mail"
+            },
+            "name": {
+                "title": "Nome",
+                "placeholder": "Insira seu nome"
+            },
+            "camera_access": {
+                "label": "Permitir acesso à câmera",
+                "title": "Acesso à câmera",
+                "active": "Permissão concedida"
             }
         }
     },
