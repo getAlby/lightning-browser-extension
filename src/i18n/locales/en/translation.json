@@ -216,6 +216,15 @@
         "title": "Email",
         "subtitle": "",
         "placeholder": "Enter your email address"
+      },
+      "change_password": {
+        "title": "Change Password",
+        "subtitle": "",
+        "enter_password": "Please enter a password.",
+        "confirm_password": "Please confirm your password.",
+        "mismatched_password": "Passwords don't match.",
+        "choose_password_label": "Enter new password:",
+        "confirm_password_label": "Confirm new password:"
       }
     }
   },

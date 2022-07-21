@@ -1,19 +1,29 @@
+import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
+import PasswordForm from "@components/PasswordForm";
 import Setting from "@components/Setting";
 import Input from "@components/form/Input";
 import Select from "@components/form/Select";
 import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
+import type { FormEvent } from "react";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { getTheme } from "~/app/utils";
 import { CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
+import utils from "~/common/lib/utils";
 import { SettingsStorage } from "~/types";
+
+const initialFormData = {
+  password: "",
+  passwordConfirmation: "",
+};
 
 function Settings() {
   const { t } = useTranslation("translation", { keyPrefix: "settings" });
@@ -22,6 +32,8 @@ function Settings() {
 
   const [loading, setLoading] = useState(true);
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [formData, setFormData] = useState(initialFormData);
   const [settings, setSettings] = useState<SettingsStorage>({
     websiteEnhancements: false,
     legacyLnurlAuth: false,
@@ -36,6 +48,18 @@ function Settings() {
 
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
+
+  function closeModal() {
+    setModalIsOpen(false);
+  }
+
+  async function updateAccountPassword(password: string) {
+    await utils.call("changePassword", {
+      password: formData.password,
+    });
+    toast.success("Password changed successfully!");
+    closeModal();
+  }
 
   async function saveSetting(
     setting: Record<string, string | number | boolean>
@@ -182,6 +206,26 @@ function Settings() {
             </div>
           )}
         </Setting>
+
+        <Setting
+          title={t("change_password.title")}
+          subtitle={t("change_password.subtitle")}
+        >
+          {!loading && (
+            <div className="w-64">
+              <Button
+                onClick={() => {
+                  setModalIsOpen(true);
+                }}
+                label={t("change_password.title")}
+                primary
+                fullWidth
+                loading={loading}
+                disabled={loading}
+              />
+            </div>
+          )}
+        </Setting>
       </div>
 
       <h2 className="mt-12 text-2xl font-bold dark:text-white">
@@ -226,6 +270,51 @@ function Settings() {
             </div>
           )}
         </Setting>
+
+        <Modal
+          closeTimeoutMS={200}
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          contentLabel="Edit account name"
+          overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
+          className="rounded-lg bg-white w-full max-w-lg"
+        >
+          <div className="p-5 flex justify-between dark:bg-surface-02dp">
+            <h2 className="text-2xl font-bold dark:text-white">
+              Change Password
+            </h2>
+            <button onClick={closeModal}>
+              <CrossIcon className="w-6 h-6 dark:text-white" />
+            </button>
+          </div>
+
+          <form
+            onSubmit={(e: FormEvent) => {
+              e.preventDefault();
+              updateAccountPassword(formData.password);
+            }}
+          >
+            <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
+              <PasswordForm
+                i18nKeyPrefix="settings.change_password"
+                formData={formData}
+                setFormData={setFormData}
+              />
+            </div>
+
+            <div className="flex justify-end p-5 dark:bg-surface-02dp">
+              <Button
+                label="Change"
+                type="submit"
+                primary
+                disabled={
+                  !formData.password ||
+                  formData.password !== formData.passwordConfirmation
+                }
+              />
+            </div>
+          </form>
+        </Modal>
       </div>
     </Container>
   );

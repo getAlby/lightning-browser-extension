@@ -48,6 +48,7 @@ const routes = {
   status: setup.status,
   validateAccount: setup.validateAccount,
   setIcon: setup.setIconMessageHandler,
+  changePassword: settings.changePassword,
   setSetting: settings.set,
   getSettings: settings.get,
   addBlocklist: blocklist.add,
