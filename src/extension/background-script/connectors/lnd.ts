@@ -272,8 +272,8 @@ class Lnd implements Connector {
       first_index_offset: string;
     }>("GET", "/v1/invoices", { reversed: true });
 
-    const invoices: ConnectorInvoice[] = data.invoices.map(
-      (invoice, index): ConnectorInvoice => {
+    const invoices: ConnectorInvoice[] = data.invoices
+      .map((invoice, index): ConnectorInvoice => {
         const custom_records =
           invoice.htlcs[0] && invoice.htlcs[0].custom_records;
 
@@ -287,8 +287,8 @@ class Lnd implements Connector {
           totalAmount: invoice.value,
           type: "received",
         };
-      }
-    );
+      })
+      .reverse();
 
     return {
       data: {
