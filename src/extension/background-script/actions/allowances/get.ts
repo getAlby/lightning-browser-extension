@@ -1,29 +1,50 @@
 import db from "~/extension/background-script/db";
-import type { MessageAllowanceGet } from "~/types";
+import type { MessageAllowanceGet, Allowance } from "~/types";
 
 const get = async (message: MessageAllowanceGet) => {
   const host = message.args.host;
-  const allowance = await db.allowances
+  const dbAllowance = await db.allowances
     .where("host")
     .equalsIgnoreCase(host)
     .first();
 
-  if (allowance) {
-    allowance.usedBudget = allowance.totalBudget - allowance.remainingBudget;
+  if (dbAllowance) {
+    const allowance: Allowance = {
+      ...dbAllowance,
+      payments: [],
+      paymentsAmount: 0,
+      paymentsCount: 0,
+      percentage: "0",
+      usedBudget: 0,
+    };
+
+    allowance.usedBudget =
+      dbAllowance.totalBudget - dbAllowance.remainingBudget;
+
     allowance.percentage = (
-      (allowance.usedBudget / allowance.totalBudget) *
+      (allowance.usedBudget / dbAllowance.totalBudget) *
       100
     ).toFixed(0);
 
     allowance.paymentsCount = await db.payments
       .where("host")
-      .equalsIgnoreCase(allowance.host)
+      .equalsIgnoreCase(dbAllowance.host)
       .count();
+
     allowance.payments = await db.payments
       .where("host")
-      .equalsIgnoreCase(allowance.host)
+      .equalsIgnoreCase(dbAllowance.host)
       .reverse()
       .toArray();
+
+    allowance.paymentsAmount = allowance.payments
+      .map((payment) => {
+        if (typeof payment.totalAmount === "string") {
+          return parseInt(payment.totalAmount);
+        }
+        return payment.totalAmount;
+      })
+      .reduce((previous, current) => previous + current, 0);
 
     return {
       data: allowance,
