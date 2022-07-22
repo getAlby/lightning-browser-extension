@@ -99,7 +99,7 @@ export default function ConnectRaspiBlitz() {
           <br />
           <strong>SSH</strong> into your <strong>RaspiBlitz</strong>.<br />
           Run the command{" "}
-          <strong>sudo cat /mnt/hdd/tor/lndrest8080/hostname</strong>.
+          <strong>sudo cat /mnt/hdd/tor/lndrest/hostname</strong>.
           <br />
           Copy and paste the <strong>.onion</strong> address in the input below.
           <br />
