@@ -3,7 +3,9 @@ import type { Allowance } from "~/types";
 import db from "../db";
 import state from "../state";
 
-const shouldMigrate = (name: string): boolean => {
+export type Migration = keyof typeof migrations;
+
+const shouldMigrate = (name: Migration): boolean => {
   const { migrations } = state.getState();
 
   // if migrations is blank
@@ -13,7 +15,7 @@ const shouldMigrate = (name: string): boolean => {
   return !migrations.includes(name);
 };
 
-const setMigrated = (name: string): Promise<void> => {
+const setMigrated = (name: Migration): Promise<void> => {
   let { migrations } = state.getState();
   if (!migrations) {
     migrations = [];

@@ -4,6 +4,7 @@ import browser from "webextension-polyfill";
 import createState from "zustand";
 import { CURRENCIES } from "~/common/constants";
 import { decryptData } from "~/common/lib/crypto";
+import { Migration } from "~/extension/background-script/migrations";
 import i18n from "~/i18n/i18nConfig";
 import type { Account, Accounts, SettingsStorage } from "~/types";
 
@@ -13,7 +14,7 @@ import type Connector from "./connectors/connector.interface";
 interface State {
   account: Account | null;
   accounts: Accounts;
-  migrations: string[] | null;
+  migrations: Migration[] | null;
   connector: Connector | null;
   currentAccountId: string | null;
   getAccount: () => Account | null;
@@ -31,7 +32,7 @@ interface BrowserStorage {
   settings: SettingsStorage;
   accounts: Accounts;
   currentAccountId: string | null;
-  migrations: Array<string> | null;
+  migrations: Migration[] | null;
 }
 
 export const DEFAULT_SETTINGS: SettingsStorage = {
