@@ -1,6 +1,8 @@
+import type { MessageAllowanceAdd, DbAllowance } from "~/types";
+
 import db from "../../db";
 
-const add = async (message, sender) => {
+const add = async (message: MessageAllowanceAdd) => {
   const host = message.args.host;
   const name = message.args.name;
   const imageURL = message.args.imageURL;
@@ -12,23 +14,29 @@ const add = async (message, sender) => {
     .first();
 
   if (allowance) {
+    if (!allowance.id) return { error: "id is missing" };
+
     await db.allowances.update(allowance.id, {
-      name: name,
-      imageURL: imageURL,
       enabled: true,
-      totalBudget: totalBudget,
+      imageURL: imageURL,
+      name: name,
       remainingBudget: totalBudget,
+      totalBudget: totalBudget,
     });
   } else {
-    await db.allowances.add({
-      host: host,
-      name: name,
-      imageURL: imageURL,
+    const dbAllowance: DbAllowance = {
+      createdAt: Date.now().toString(),
       enabled: true,
-      totalBudget: totalBudget,
-      remainingBudget: totalBudget,
+      host: host,
+      imageURL: imageURL,
       lastPaymentAt: 0,
-    });
+      lnurlAuth: false,
+      name: name,
+      remainingBudget: totalBudget,
+      tag: "",
+      totalBudget: totalBudget,
+    };
+    await db.allowances.add(dbAllowance);
   }
   await db.saveToStorage();
 

@@ -163,6 +163,17 @@ export interface MessageAccountSelect extends MessageDefault {
   args: { id: Account["id"] };
   action: "selectAccount";
 }
+
+export interface MessageAllowanceAdd extends MessageDefault {
+  args: {
+    name: Allowance["name"];
+    host: Allowance["host"];
+    imageURL: Allowance["imageURL"];
+    totalBudget: Allowance["totalBudget"];
+  };
+  action: "addAllowance";
+}
+
 export interface MessageAllowanceList extends MessageDefault {
   action: "listAllowances";
 }
@@ -285,7 +296,7 @@ export type Transaction = {
   totalAmountFiat: string;
 };
 
-export interface Payment {
+export interface DbPayment {
   allowanceId: string;
   createdAt: string;
   description: string;
@@ -300,6 +311,9 @@ export interface Payment {
   totalAmount: number | string;
   totalFees: number | string;
 }
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface Payment extends DbPayment {}
 
 export interface PaymentResponse
   extends Pick<Payment, "destination" | "preimage" | "paymentHash"> {
@@ -329,24 +343,38 @@ export interface PaymentResponse
   };
 }
 
-export interface Allowance {
+export interface DbBlocklist {
+  id?: number;
+  host: string;
+  name: string;
+  imageURL: string;
+  isBlocked: boolean;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface Blocklist extends DbBlocklist {}
+
+export interface DbAllowance {
   createdAt: string;
   enabled: boolean;
   host: string;
-  id: number;
+  id?: number;
   imageURL: string;
-  lastPaymentAt: string;
+  lastPaymentAt: number;
   lnurlAuth: boolean;
   name: string;
+  remainingBudget: number;
+  tag: string;
+  totalBudget: number;
+}
+export interface Allowance extends DbAllowance {
   payments: Transaction[];
   paymentsAmount: number;
   paymentsCount: number;
   percentage: string;
-  remainingBudget: number;
-  tag: string;
-  totalBudget: number;
   usedBudget: number;
 }
+
 export interface SettingsStorage {
   websiteEnhancements: boolean;
   legacyLnurlAuth: boolean;
@@ -357,14 +385,6 @@ export interface SettingsStorage {
   currency: CURRENCIES;
   exchange: SupportedExchanges;
   debug: boolean;
-}
-
-export interface Blocklist {
-  id?: number;
-  host: string;
-  name: string;
-  imageURL: string;
-  isBlocked: boolean;
 }
 
 export interface Badge {

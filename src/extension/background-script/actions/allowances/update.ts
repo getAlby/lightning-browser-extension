@@ -17,6 +17,8 @@ const updateAllowance = async (message: MessageAllowanceUpdate) => {
     update.enabled = message.args.enabled;
   }
 
+  if (!id) return { error: "id is missing" };
+
   const updated = await db.allowances.update(id, update);
   await db.saveToStorage();
   return { data: updated };
