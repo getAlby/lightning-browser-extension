@@ -1,5 +1,5 @@
 import db from "~/extension/background-script/db";
-import type { MessageAllowanceList } from "~/types";
+import type { MessageAllowanceList, Allowance } from "~/types";
 
 const list = async (message: MessageAllowanceList) => {
   const dbAllowances = await db.allowances
@@ -8,25 +8,35 @@ const list = async (message: MessageAllowanceList) => {
     .sortBy("lastPaymentAt");
 
   const allowancePromises = dbAllowances.map(async (allowance) => {
-    allowance.usedBudget = allowance.totalBudget - allowance.remainingBudget;
+    const tmpAllowance: Allowance = {
+      ...allowance,
+      payments: [],
+      paymentsAmount: 0,
+      paymentsCount: 0,
+      percentage: "0",
+      usedBudget: 0,
+    };
 
-    allowance.percentage = (
-      (allowance.usedBudget / allowance.totalBudget) *
+    tmpAllowance.usedBudget =
+      tmpAllowance.totalBudget - tmpAllowance.remainingBudget;
+
+    tmpAllowance.percentage = (
+      (tmpAllowance.usedBudget / tmpAllowance.totalBudget) *
       100
     ).toFixed(0);
 
-    allowance.paymentsCount = await db.payments
+    tmpAllowance.paymentsCount = await db.payments
       .where("host")
-      .equalsIgnoreCase(allowance.host)
+      .equalsIgnoreCase(tmpAllowance.host)
       .count();
 
     const payments = await db.payments
       .where("host")
-      .equalsIgnoreCase(allowance.host)
+      .equalsIgnoreCase(tmpAllowance.host)
       .reverse()
       .toArray();
 
-    allowance.paymentsAmount = payments
+    tmpAllowance.paymentsAmount = payments
       .map((payment) => {
         if (typeof payment.totalAmount === "string") {
           return parseInt(payment.totalAmount);
@@ -35,10 +45,10 @@ const list = async (message: MessageAllowanceList) => {
       })
       .reduce((previous, current) => previous + current, 0);
 
-    return allowance;
+    return tmpAllowance;
   });
 
-  const allowances = await Promise.all(allowancePromises);
+  const allowances: Allowance[] = await Promise.all(allowancePromises);
 
   return {
     data: {

@@ -340,7 +340,7 @@ export interface PaymentResponse
   };
 }
 
-export interface Allowance {
+export interface DbAllowance {
   createdAt: string;
   enabled: boolean;
   host: string;
@@ -349,15 +349,18 @@ export interface Allowance {
   lastPaymentAt: number;
   lnurlAuth: boolean;
   name: string;
+  remainingBudget: number;
+  tag: string;
+  totalBudget: number;
+}
+export interface Allowance extends DbAllowance {
   payments: Transaction[];
   paymentsAmount: number;
   paymentsCount: number;
   percentage: string;
-  remainingBudget: number;
-  tag: string;
-  totalBudget: number;
   usedBudget: number;
 }
+
 export interface SettingsStorage {
   websiteEnhancements: boolean;
   legacyLnurlAuth: boolean;

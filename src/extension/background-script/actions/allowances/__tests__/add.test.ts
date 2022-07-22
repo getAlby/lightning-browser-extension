@@ -57,22 +57,17 @@ describe("account all", () => {
       .sortBy("lastPaymentAt");
 
     expect(dbAllowances).toContainEqual({
+      createdAt: "1487076708000",
       enabled: true,
       host: "lnmarkets.com",
-      id: 4,
       imageURL: "https://lnmarkets.com/apple-touch-icon.png",
       lastPaymentAt: 0,
       lnurlAuth: false,
       name: "LN Markets",
       remainingBudget: 200,
-      totalBudget: 200,
-      createdAt: "1487076708000",
-      payments: [],
-      paymentsAmount: 0,
-      paymentsCount: 0,
-      percentage: "0",
-      usedBudget: 0,
       tag: "",
+      totalBudget: 200,
+      id: 4,
     });
   });
 });
