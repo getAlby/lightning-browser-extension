@@ -367,7 +367,7 @@ function Home() {
                     className={({ selected }) =>
                       classNames(
                         "w-1/2 rounded-lg py-2.5 font-bold transition duration-150",
-                        "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-bitcoin",
+                        "focus:outline-none",
                         "hover:bg-gray-50 dark:hover:bg-surface-16dp",
                         selected
                           ? "text-orange-bitcoin"
