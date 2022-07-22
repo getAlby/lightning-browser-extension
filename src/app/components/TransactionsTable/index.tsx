@@ -49,12 +49,10 @@ export default function TransactionsTable({ transactions }: Props) {
                     </div>
                     <div className="overflow-hidden mr-3">
                       <div
-                        className={`
-                      text-sm font-medium text-gray-900 truncate dark:text-white ${
-                        !tx.title && "invisible"
-                      }`}
+                        className="
+                      text-sm font-medium text-gray-900 truncate dark:text-white"
                       >
-                        {tx.title}
+                        {tx.title || "\u00A0"}
                       </div>
                       <p className="text-xs text-gray-600 capitalize dark:text-neutral-400">
                         {tComponents(`transactionsTable.${tx.type}`)} -{" "}
