@@ -296,7 +296,7 @@ export type Transaction = {
   totalAmountFiat: string;
 };
 
-export interface Payment {
+export interface DbPayment {
   allowanceId: string;
   createdAt: string;
   description: string;
@@ -311,6 +311,9 @@ export interface Payment {
   totalAmount: number | string;
   totalFees: number | string;
 }
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface Payment extends DbPayment {}
 
 export interface PaymentResponse
   extends Pick<Payment, "destination" | "preimage" | "paymentHash"> {
@@ -339,6 +342,17 @@ export interface PaymentResponse
     total_amt_msat: string;
   };
 }
+
+export interface DbBlocklist {
+  id?: number;
+  host: string;
+  name: string;
+  imageURL: string;
+  isBlocked: boolean;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface Blocklist extends DbBlocklist {}
 
 export interface DbAllowance {
   createdAt: string;
@@ -371,14 +385,6 @@ export interface SettingsStorage {
   currency: CURRENCIES;
   exchange: SupportedExchanges;
   debug: boolean;
-}
-
-export interface Blocklist {
-  id?: number;
-  host: string;
-  name: string;
-  imageURL: string;
-  isBlocked: boolean;
 }
 
 export interface Badge {
