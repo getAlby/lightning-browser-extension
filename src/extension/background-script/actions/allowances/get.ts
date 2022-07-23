@@ -1,5 +1,5 @@
 import db from "~/extension/background-script/db";
-import type { MessageAllowanceGet, Allowance } from "~/types";
+import type { MessageAllowanceGet, Allowance, Payment } from "~/types";
 
 const get = async (message: MessageAllowanceGet) => {
   const host = message.args.host;
@@ -31,11 +31,26 @@ const get = async (message: MessageAllowanceGet) => {
       .equalsIgnoreCase(dbAllowance.host)
       .count();
 
-    allowance.payments = await db.payments
+    // allowance.payments = await db.payments
+    //   .where("host")
+    //   .equalsIgnoreCase(dbAllowance.host)
+    //   .reverse()
+    //   .toArray();
+
+    const dbPayments = await db.payments
       .where("host")
       .equalsIgnoreCase(dbAllowance.host)
       .reverse()
       .toArray();
+
+    allowance.payments = dbPayments.reduce<Payment[]>((acc, dbPayment) => {
+      if (!dbPayment?.id) return acc;
+
+      const { id } = dbPayment;
+
+      acc.push({ ...dbPayment, id });
+      return acc;
+    }, []);
 
     allowance.paymentsAmount = allowance.payments
       .map((payment) => {

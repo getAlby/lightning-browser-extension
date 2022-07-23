@@ -318,7 +318,9 @@ export interface DbPayment {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface Payment extends DbPayment {}
+export interface Payment extends Omit<DbPayment, "id"> {
+  id: number;
+}
 
 export interface PaymentResponse
   extends Pick<Payment, "destination" | "preimage" | "paymentHash"> {
