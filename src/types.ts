@@ -374,7 +374,8 @@ export interface DbAllowance {
   tag: string;
   totalBudget: number;
 }
-export interface Allowance extends DbAllowance {
+export interface Allowance extends Omit<DbAllowance, "id"> {
+  id: number;
   payments: Payment[];
   paymentsAmount: number;
   paymentsCount: number;

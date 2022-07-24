@@ -8,9 +8,11 @@ const get = async (message: MessageAllowanceGet) => {
     .equalsIgnoreCase(host)
     .first();
 
-  if (dbAllowance) {
+  if (dbAllowance && dbAllowance.id) {
+    const { id } = dbAllowance;
     const allowance: Allowance = {
       ...dbAllowance,
+      id,
       payments: [],
       paymentsAmount: 0,
       paymentsCount: 0,
@@ -31,12 +33,6 @@ const get = async (message: MessageAllowanceGet) => {
       .equalsIgnoreCase(dbAllowance.host)
       .count();
 
-    // allowance.payments = await db.payments
-    //   .where("host")
-    //   .equalsIgnoreCase(dbAllowance.host)
-    //   .reverse()
-    //   .toArray();
-
     const dbPayments = await db.payments
       .where("host")
       .equalsIgnoreCase(dbAllowance.host)
@@ -45,9 +41,7 @@ const get = async (message: MessageAllowanceGet) => {
 
     allowance.payments = dbPayments.reduce<Payment[]>((acc, dbPayment) => {
       if (!dbPayment?.id) return acc;
-
       const { id } = dbPayment;
-
       acc.push({ ...dbPayment, id });
       return acc;
     }, []);
