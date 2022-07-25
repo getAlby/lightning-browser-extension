@@ -125,6 +125,26 @@ function Settings() {
           )}
         </Setting>
 
+        <Setting
+          title={t("change_password.title")}
+          subtitle={t("change_password.subtitle")}
+        >
+          {!isLoading && (
+            <div className="w-64">
+              <Button
+                onClick={() => {
+                  setModalIsOpen(true);
+                }}
+                label={t("change_password.title")}
+                primary
+                fullWidth
+                loading={isLoading}
+                disabled={isLoading}
+              />
+            </div>
+          )}
+        </Setting>
+
         {process.env.NODE_ENV === "development" && (
           <Setting
             title={t("show_fiat.title")}
@@ -195,26 +215,6 @@ function Settings() {
             </Setting>
           </>
         )}
-
-        <Setting
-          title={t("change_password.title")}
-          subtitle={t("change_password.subtitle")}
-        >
-          {!isLoading && (
-            <div className="w-64">
-              <Button
-                onClick={() => {
-                  setModalIsOpen(true);
-                }}
-                label={t("change_password.title")}
-                primary
-                fullWidth
-                loading={isLoading}
-                disabled={isLoading}
-              />
-            </div>
-          )}
-        </Setting>
       </div>
 
       <h2 className="mt-12 text-2xl font-bold dark:text-white">
