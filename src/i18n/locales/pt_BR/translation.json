@@ -87,7 +87,8 @@
                 "url_placeholder": "https://seu-servidor-url:8080",
                 "port_label": "REST API porta e host",
                 "page_description": "Você precisa da URL do servidor e um macaroon com permissão de envio e leitura (ex. admin.macaroon)",
-                "drag_and_drop": "Arraste e solte seu macaroon aqui ou <0> procurar </0>"
+                "drag_and_drop": "Arraste e solte seu macaroon aqui ou <0> procurar </0>",
+                "url_label": "REST API host e porta"
             },
             "lndhub": {
                 "description": "Conectar carteira Bluewallet",
@@ -135,6 +136,17 @@
             "bitcoin_beach": {
                 "description": "Registre uma conta ou conecte sua Bitcoin Beach (Galoy)",
                 "title": "Carteira Bitcoin Beach"
+            },
+            "btcpay": {
+                "errors": {
+                    "connection_failed": "Falha na conexão. A URL de conexão do servidor BTCPay está correta e acessível?"
+                },
+                "config_placeholder": "config=https://seu-btc-pay.org/lnd-config/212121/lnd.config",
+                "config_label": "Dados config",
+                "title": "Servidor BTCPay",
+                "page_instructions": "Navegue até a BTCPayServer e acesse como administrador. Vá até Configurações>Serviços>LND Rest - Ver informação. Depois Clique \"Ver Código QR\" e copie os dados do Código QR. Cole os dados abaixo:",
+                "description": "Conecte no servidor LND BTCPay",
+                "page_title": "Conecte no servidor LND BTCPay"
             }
         },
         "home": {
