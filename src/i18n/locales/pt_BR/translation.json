@@ -48,9 +48,9 @@
             "alby": {
                 "title": "Carteira Alby",
                 "pre_connect": {
-                    "email_label": "Endereço de e-mail",
+                    "email_label": "Endereço de E-mail",
                     "login_account": "Registrar ou acessar conta Alby.",
-                    "host_wallet": "Nós hospedamos uma carteira bitcoin para você!",
+                    "host_wallet": "Nós hospedamos uma carteira Bitcoin para você!",
                     "title": "Sua Carteira Bitcoin na Alby",
                     "optional_lightning_note": {
                         "part1": "Ao registrar uma conta Alby, você pode escolher um",
@@ -155,10 +155,19 @@
             "allowance_view": {
                 "allowance": "Limite de gastos",
                 "sats_used": "sats usados",
-                "no_transactions": "Sem transações em <0>{{name}}</0>."
+                "no_transactions": "Sem transações em <0>{{name}}</0>.",
+                "recent_transactions": "Transações Recentes"
             },
             "default_view": {
-                "no_transactions": "Sem transações."
+                "no_transactions": "Sem transações realizadas na Alby, ainda.",
+                "recent_transactions": "Transações Recentes",
+                "is_blocked_hint": "A Alby está desativada em {{host}}"
+            },
+            "transaction_list": {
+                "tabs": {
+                    "incoming": "Recebidas",
+                    "outgoing": "Enviadas"
+                }
             }
         },
         "accounts": {
@@ -199,14 +208,14 @@
             },
             "exchange": {
                 "title": "Serviço provedor de cotações",
-                "subtitle": "Escolha o serviço que fornecerá as cotações do Preço de Bitcoin"
+                "subtitle": "Escolha o serviço que fornecerá as cotações do Bitcoin mostrado na Alby"
             },
             "currency": {
                 "subtitle": "Mostrar valores na Alby também nesta moeda",
                 "title": "Moeda"
             },
             "personal_data": {
-                "info": "Alguns serviços podem solicitar o envio de dados adicionais junto com o pagamento. Esses dados não são compartilhados com ninguém sem o seu consentimento, você sempre será informado sobre quais dados estão sendo enviados.",
+                "info": "Alguns serviços podem solicitar o envio de dados adicionais junto com o pagamento. Esses dados não são compartilhados com ninguém sem o seu consentimento, você sempre será informado sobre os dados a serem enviados.",
                 "headline": "Dados pessoais"
             },
             "legacy_lnurl_auth": {
@@ -248,7 +257,7 @@
             "receive": "Receber"
         },
         "errors": {
-            "connection_failed": "Conexão falhou"
+            "connection_failed": "Falha na conexão"
         },
         "password": "Senha"
     },
@@ -258,6 +267,18 @@
             "start_scanning": "Iniciar leitura",
             "stop_scanning": "Parar leitura",
             "allow_camera_access": "Permita o acesso à câmera na tela Configurações."
+        },
+        "transactionsTable": {
+            "fee": "Taxa",
+            "preimage": "Pré-imagem",
+            "received": "Recebida",
+            "boostagram": {
+                "app_name": "App",
+                "podcast": "Podcast",
+                "sender_name": "Enviante",
+                "message": "Mensagem"
+            },
+            "sent": "Enviada"
         }
     }
 }
