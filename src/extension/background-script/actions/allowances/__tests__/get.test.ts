@@ -1,5 +1,5 @@
 import db from "~/extension/background-script/db";
-import type { MessageAllowanceGet, DbAllowance, DbPayment } from "~/types";
+import type { DbAllowance, DbPayment, MessageAllowanceGet } from "~/types";
 
 import getAllowance from "../get";
 

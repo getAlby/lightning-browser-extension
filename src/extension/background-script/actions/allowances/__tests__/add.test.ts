@@ -1,11 +1,11 @@
 import db from "~/extension/background-script/db";
-import type { MessageAllowanceAdd } from "~/types";
+import type { DbAllowance, MessageAllowanceAdd } from "~/types";
 
 import addAllowance from "../add";
 
 Date.now = jest.fn(() => 1487076708000);
 
-const mockAllowances = [
+const mockAllowances: DbAllowance[] = [
   {
     enabled: true,
     host: "pro.kollider.xyz",
@@ -17,11 +17,6 @@ const mockAllowances = [
     remainingBudget: 500,
     totalBudget: 500,
     createdAt: "123456",
-    payments: [],
-    paymentsAmount: 0,
-    paymentsCount: 0,
-    percentage: "0",
-    usedBudget: 0,
     tag: "",
   },
 ];

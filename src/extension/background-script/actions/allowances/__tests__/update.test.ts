@@ -1,9 +1,9 @@
 import db from "~/extension/background-script/db";
-import type { MessageAllowanceUpdate } from "~/types";
+import type { DbAllowance, MessageAllowanceUpdate } from "~/types";
 
 import updateAllowance from "../update";
 
-const mockAllowances = [
+const mockAllowances: DbAllowance[] = [
   {
     enabled: true,
     host: "pro.kollider.xyz",
@@ -15,11 +15,6 @@ const mockAllowances = [
     remainingBudget: 500,
     totalBudget: 500,
     createdAt: "123456",
-    payments: [],
-    paymentsAmount: 0,
-    paymentsCount: 0,
-    percentage: "0",
-    usedBudget: 0,
     tag: "",
   },
   {
@@ -33,11 +28,6 @@ const mockAllowances = [
     remainingBudget: 200,
     totalBudget: 200,
     createdAt: "123456",
-    payments: [],
-    paymentsAmount: 0,
-    paymentsCount: 0,
-    percentage: "0",
-    usedBudget: 0,
     tag: "",
   },
 ];
