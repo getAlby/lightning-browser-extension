@@ -194,36 +194,65 @@ function Home() {
           </h2>
           {allowance?.payments.length > 0 ? (
             <TransactionsTable
-              transactions={allowance.payments.map((payment) => ({
-                ...payment,
-                type: "sent",
-                date: dayjs(payment.createdAt).fromNow(),
-                // date: dayjs.unix(payment.createdAt),
-                title: (
-                  <p className="truncate">
-                    <a
-                      target="_blank"
-                      title={payment.name}
-                      href={`options.html#/publishers/${allowance.id}`}
-                      rel="noreferrer"
-                    >
-                      {payment.name}
-                    </a>
-                  </p>
-                ),
-                subTitle: (
-                  <p className="truncate">
-                    <a
-                      target="_blank"
-                      title={payment.name}
-                      href={`options.html#/publishers/${allowance.id}`}
-                      rel="noreferrer"
-                    >
-                      {payment.host}
-                    </a>
-                  </p>
-                ),
-              }))}
+              transactions={allowance.payments.map((payment) => {
+                const {
+                  createdAt,
+                  description,
+                  host,
+                  id,
+                  location,
+                  name,
+                  preimage,
+                  totalAmount,
+                  totalFees,
+                } = payment;
+
+                return {
+                  createdAt,
+                  description,
+                  id: `${id}`,
+                  location,
+                  name,
+                  preimage,
+                  host,
+                  totalAmount:
+                    typeof totalAmount === "string"
+                      ? parseInt(totalAmount)
+                      : totalAmount,
+                  totalFees:
+                    typeof totalFees === "number" ? `${totalFees}` : totalFees,
+                  amount: "",
+                  currency: "",
+                  totalAmountFiat: "",
+                  value: "",
+                  date: dayjs(payment.createdAt).fromNow(),
+                  // date: dayjs.unix(payment.createdAt),
+                  title: (
+                    <p className="truncate">
+                      <a
+                        target="_blank"
+                        title={payment.name}
+                        href={`options.html#/publishers/${allowance.id}`}
+                        rel="noreferrer"
+                      >
+                        {payment.name}
+                      </a>
+                    </p>
+                  ),
+                  subTitle: (
+                    <p className="truncate">
+                      <a
+                        target="_blank"
+                        title={payment.name}
+                        href={`options.html#/publishers/${allowance.id}`}
+                        rel="noreferrer"
+                      >
+                        {payment.host}
+                      </a>
+                    </p>
+                  ),
+                };
+              })}
             />
           ) : (
             <p className="text-gray-500 dark:text-neutral-400">

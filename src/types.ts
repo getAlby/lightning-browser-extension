@@ -194,6 +194,11 @@ export interface MessageAllowanceUpdate extends MessageDefault {
   action: "updateAllowance";
 }
 
+export interface MessageAllowanceGet extends MessageDefault {
+  args: { host: Allowance["host"] };
+  action: "getAllowance";
+}
+
 interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node
@@ -276,24 +281,24 @@ export interface IBadge {
 }
 
 export type Transaction = {
-  type?: string;
-  id: string;
-  createdAt: string;
-  name: string;
-  host: string;
-  title: string | React.ReactNode;
-  subTitle: string | React.ReactNode;
-  date: string;
   amount: string;
+  badges?: IBadge[];
+  createdAt: string;
   currency: string;
-  value: string;
-  preimage: string;
-  badges: IBadge[];
-  totalAmount: string;
-  totalFees: string;
+  date: string;
   description: string;
+  host: string;
+  id: string;
   location: string;
+  name: string;
+  preimage: string;
+  subTitle?: string | React.ReactNode;
+  title: string | React.ReactNode;
+  totalAmount: number;
   totalAmountFiat: string;
+  totalFees: string;
+  type?: string;
+  value: string;
 };
 
 export interface DbPayment {
@@ -313,7 +318,9 @@ export interface DbPayment {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface Payment extends DbPayment {}
+export interface Payment extends Omit<DbPayment, "id"> {
+  id: number;
+}
 
 export interface PaymentResponse
   extends Pick<Payment, "destination" | "preimage" | "paymentHash"> {
@@ -367,8 +374,9 @@ export interface DbAllowance {
   tag: string;
   totalBudget: number;
 }
-export interface Allowance extends DbAllowance {
-  payments: Transaction[];
+export interface Allowance extends Omit<DbAllowance, "id"> {
+  id: number;
+  payments: Payment[];
   paymentsAmount: number;
   paymentsCount: number;
   percentage: string;

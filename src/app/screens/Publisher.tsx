@@ -9,13 +9,14 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
-import { Allowance } from "~/types";
+import type { Allowance, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
 
 function Publisher() {
   const hasFetchedData = useRef(false);
   const [allowance, setAllowance] = useState<Allowance | undefined>();
+  const [payments, setPayments] = useState<Transaction[] | undefined>();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -25,11 +26,59 @@ function Publisher() {
         const response = await utils.call<Allowance>("getAllowanceById", {
           id: parseInt(id),
         });
-        for await (const payment of response.payments) {
+        setAllowance(response);
+
+        const payments: Transaction[] = response.payments.map((payment) => {
+          const {
+            createdAt,
+            description,
+            host,
+            id,
+            location,
+            name,
+            preimage,
+            totalAmount,
+            totalFees,
+          } = payment;
+          return {
+            createdAt,
+            description,
+            id: `${id}`,
+            location,
+            name,
+            preimage,
+            host,
+            totalAmount:
+              typeof totalAmount === "string"
+                ? parseInt(totalAmount)
+                : totalAmount,
+            totalFees:
+              typeof totalFees === "number" ? `${totalFees}` : totalFees,
+            amount: "",
+            currency: "",
+            totalAmountFiat: "",
+            value: "",
+            type: "sent",
+            date: dayjs(payment.createdAt).fromNow(),
+            title: (
+              <p className="truncate">
+                <a
+                  target="_blank"
+                  title={payment.name}
+                  href={payment.location}
+                  rel="noreferrer"
+                >
+                  {payment.name}
+                </a>
+              </p>
+            ),
+          };
+        });
+        for await (const payment of payments) {
           const totalAmountFiat = await getFiatValue(payment.totalAmount);
           payment.totalAmountFiat = totalAmountFiat;
         }
-        setAllowance(response);
+        setPayments(payments);
       }
     } catch (e) {
       console.error(e);
@@ -74,25 +123,9 @@ function Publisher() {
           </div>
 
           <div>
-            <TransactionsTable
-              transactions={allowance.payments.map((payment) => ({
-                ...payment,
-                type: "sent",
-                date: dayjs(payment.createdAt).fromNow(),
-                title: (
-                  <p className="truncate">
-                    <a
-                      target="_blank"
-                      title={payment.name}
-                      href={payment.location}
-                      rel="noreferrer"
-                    >
-                      {payment.name}
-                    </a>
-                  </p>
-                ),
-              }))}
-            />
+            {payments && payments?.length > 0 && (
+              <TransactionsTable transactions={payments} />
+            )}
           </div>
         </Container>
       )}

@@ -7,48 +7,52 @@ const list = async (message: MessageAllowanceList) => {
     .reverse()
     .sortBy("lastPaymentAt");
 
-  const allowancePromises = dbAllowances.map(async (allowance) => {
-    const tmpAllowance: Allowance = {
-      ...allowance,
-      payments: [],
-      paymentsAmount: 0,
-      paymentsCount: 0,
-      percentage: "0",
-      usedBudget: 0,
-    };
+  const allowances: Allowance[] = [];
 
-    tmpAllowance.usedBudget =
-      tmpAllowance.totalBudget - tmpAllowance.remainingBudget;
+  for (const dbAllowance of dbAllowances) {
+    if (dbAllowance.id) {
+      const { id } = dbAllowance;
+      const tmpAllowance: Allowance = {
+        ...dbAllowance,
+        id,
+        payments: [],
+        paymentsAmount: 0,
+        paymentsCount: 0,
+        percentage: "0",
+        usedBudget: 0,
+      };
 
-    tmpAllowance.percentage = (
-      (tmpAllowance.usedBudget / tmpAllowance.totalBudget) *
-      100
-    ).toFixed(0);
+      tmpAllowance.usedBudget =
+        tmpAllowance.totalBudget - tmpAllowance.remainingBudget;
 
-    tmpAllowance.paymentsCount = await db.payments
-      .where("host")
-      .equalsIgnoreCase(tmpAllowance.host)
-      .count();
+      tmpAllowance.percentage = (
+        (tmpAllowance.usedBudget / tmpAllowance.totalBudget) *
+        100
+      ).toFixed(0);
 
-    const payments = await db.payments
-      .where("host")
-      .equalsIgnoreCase(tmpAllowance.host)
-      .reverse()
-      .toArray();
+      tmpAllowance.paymentsCount = await db.payments
+        .where("host")
+        .equalsIgnoreCase(tmpAllowance.host)
+        .count();
 
-    tmpAllowance.paymentsAmount = payments
-      .map((payment) => {
-        if (typeof payment.totalAmount === "string") {
-          return parseInt(payment.totalAmount);
-        }
-        return payment.totalAmount;
-      })
-      .reduce((previous, current) => previous + current, 0);
+      const payments = await db.payments
+        .where("host")
+        .equalsIgnoreCase(tmpAllowance.host)
+        .reverse()
+        .toArray();
 
-    return tmpAllowance;
-  });
+      tmpAllowance.paymentsAmount = payments
+        .map((payment) => {
+          if (typeof payment.totalAmount === "string") {
+            return parseInt(payment.totalAmount);
+          }
+          return payment.totalAmount;
+        })
+        .reduce((previous, current) => previous + current, 0);
 
-  const allowances: Allowance[] = await Promise.all(allowancePromises);
+      allowances.push(tmpAllowance);
+    }
+  }
 
   return {
     data: {
