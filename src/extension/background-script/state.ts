@@ -114,22 +114,4 @@ const state = createState<State>((set, get) => ({
   },
 }));
 
-browserStorageKeys.forEach((key) => {
-  console.info(`Adding state subscription for ${key}`);
-  state.subscribe(
-    (newValue, previousValue) => {
-      //if (previous && Object.keys(previous) > 0) {
-      const data = { [key]: newValue };
-      return browser.storage.sync.set(data);
-      //}
-      //return Promise.resolve();
-    },
-    (state) => state[key],
-    (newValue, previousValue) => {
-      // NOTE: using JSON.stringify to compare objects
-      return JSON.stringify(newValue) === JSON.stringify(previousValue);
-    }
-  );
-});
-
 export default state;

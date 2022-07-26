@@ -8,6 +8,7 @@ jest.mock("~/extension/background-script/state");
 const mockState = {
   currentAccountId: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
   getConnector: jest.fn,
+  saveToStorage: jest.fn,
   accounts: {
     "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e": {
       config:
@@ -42,12 +43,14 @@ describe("select account", () => {
   test("select", async () => {
     state.getState = jest.fn().mockReturnValue(mockState);
 
-    const spy = jest.spyOn(mockState, "getConnector");
+    const connectorSpy = jest.spyOn(mockState, "getConnector");
+    const saveSpy = jest.spyOn(mockState, "saveToStorage");
 
     expect(await select(message)).toStrictEqual({
       data: { unlocked: true },
     });
 
-    expect(spy).toHaveBeenCalledTimes(1);
+    expect(connectorSpy).toHaveBeenCalledTimes(1);
+    expect(saveSpy).toHaveBeenCalledTimes(1);
   });
 });
