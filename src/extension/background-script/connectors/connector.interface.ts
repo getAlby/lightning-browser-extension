@@ -107,7 +107,7 @@ export interface VerifyMessageResponse {
 }
 
 export interface ConnectPeerResponse {
-  data: Record<string, never>;
+  data: boolean;
 }
 
 export interface ConnectPeerArgs {
@@ -127,5 +127,7 @@ export default interface Connector {
   checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse>;
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse>;
   verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse>;
-  connectPeer(args: any): Promise<any> | Error; // refactor args/messages
+  connectPeer(
+    args: ConnectPeerArgs
+  ): Promise<ConnectPeerResponse | Error> | Error;
 }

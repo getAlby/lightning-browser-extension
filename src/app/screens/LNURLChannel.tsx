@@ -88,6 +88,11 @@ function LNURLChannel(props: Props) {
                   {uri}
                 </dd>
               </dl>
+
+              {errorMessage && (
+                <p className="mt-1 text-red-500">{errorMessage}</p>
+              )}
+
               <ConfirmOrCancel
                 disabled={loadingConfirm || !uri}
                 loading={loadingConfirm}

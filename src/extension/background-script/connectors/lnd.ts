@@ -8,10 +8,12 @@ import utils from "~/common/lib/utils";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
+  ConnectorInvoice,
+  ConnectPeerArgs,
+  ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
-  ConnectorInvoice,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -62,9 +64,8 @@ class Lnd implements Connector {
   getBalance(): Promise<GetBalanceResponse> {
     return this.getChannelsBalance();
   }
-  // 020cd30d13d5011a08830d6ad2e54b4e220c7b20457c094701b09346052343f519@127.0.0.1:9738
-  // 038a427acf097ca8853923d80c21472d85ae50114e3c3d531f2df2116e52aee106@127.0.0.1:8082
-  connectPeer(args: ConnectPeerArgs): Promise<any> {
+
+  connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse | Error> {
     // return this.request<any>(
     //   "DELETE",
     //   "/v1/peers/020cd30d13d5011a08830d6ad2e54b4e220c7b20457c094701b09346052343f519"
@@ -78,7 +79,7 @@ class Lnd implements Connector {
 
     const { pubkey, host } = args;
 
-    return this.request<any>("POST", "/v1/peers", {
+    return this.request<Record<string, never>>("POST", "/v1/peers", {
       addr: {
         pubkey,
         host,
@@ -89,29 +90,17 @@ class Lnd implements Connector {
         console.log("DATA: ", data);
 
         return {
-          data: {},
+          data: true,
         };
-        // if (data.payment_error) {
-        //   throw new Error(data.payment_error);
-        // }
-        // return {
-        //   data: {
-        //     preimage: utils.base64ToHex(data.payment_preimage),
-        //     paymentHash: utils.base64ToHex(data.payment_hash),
-        //     route: data.payment_route,
-        //   },
-        // };
       })
       .catch((e) => {
         // the request fails (HTTP 500), but if we are already connected we say it's a success
         if (e.message.match(/already connected/)) {
           return {
-            data: {},
+            data: true,
           };
         } else {
-          return {
-            error: e.message,
-          };
+          return new Error(e.message);
         }
       });
   }
@@ -144,7 +133,7 @@ class Lnd implements Connector {
   }
 
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
-    //See: https://gist.github.com/dellagustin/c3793308b75b6b0faf134e64db7dc915
+    // See: https://gist.github.com/dellagustin/c3793308b75b6b0faf134e64db7dc915
     const dest_pubkey_hex = args.pubkey;
     const dest_pubkey_base64 = Hex.parse(dest_pubkey_hex).toString(Base64);
 
