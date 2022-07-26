@@ -4,13 +4,13 @@ import type { Allowance } from "~/types";
 
 import migrate from "../index";
 
-describe("With lnurlAuth enabled allowance", () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-    state.getState().reset();
-    db.allowances.toCollection().delete();
-  });
+afterEach(() => {
+  jest.clearAllMocks();
+  state.getState().reset();
+  db.allowances.toCollection().delete();
+});
 
+describe("With lnurlAuth enabled allowance", () => {
   const mockAllowances: Allowance[] = [
     {
       enabled: true,
@@ -41,12 +41,6 @@ describe("With lnurlAuth enabled allowance", () => {
 });
 
 describe("Without lnurlAuth enabled allowance", () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-    state.getState().reset();
-    db.allowances.toCollection().delete();
-  });
-
   const mockAllowances: Allowance[] = [
     {
       enabled: true,
@@ -77,12 +71,6 @@ describe("Without lnurlAuth enabled allowance", () => {
 });
 
 describe("Migrations already executed", () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-    state.getState().reset();
-    db.allowances.toCollection().delete();
-  });
-
   const mockAllowances: Allowance[] = [
     {
       enabled: true,
