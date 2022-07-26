@@ -4,11 +4,17 @@ import { getDocument, queries, waitFor } from "pptr-testing-library";
 
 import { loadExtension } from "./helpers/loadExtension";
 
-const { getByText, getByLabelText, findByLabelText, findByText } = queries;
+const {
+  getByText,
+  getByLabelText,
+  findByLabelText,
+  findByText,
+  getByPlaceholderText,
+} = queries;
+const user = USER.SINGLE();
 
 const commonCreateWalletUserCreate = async () => {
-  const user = USER.SINGLE();
-  const { page: page, browser } = await loadExtension();
+  const { page, browser } = await loadExtension();
 
   // get document from welcome page
   const $document = await getDocument(page);
@@ -80,26 +86,6 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully creates an Alby wallet and opens publishers screen", async () => {
-    const { user, browser, page, $document } =
-      await commonCreateWalletUserCreate();
-    await createAlbyWallet({ page, $document, user });
-    await commonCreateWalletSuccessCheck({ page, $document });
-
-    // reload and expect to be on publishers screen
-    await Promise.all([
-      page.waitForNavigation(), // The promise resolves after navigation has finished
-      page.reload({ waitUntil: ["networkidle0", "domcontentloaded"] }),
-    ]);
-
-    const $optionsdocument = await getDocument(page);
-
-    await findByText($optionsdocument, "Your ⚡️ Websites");
-    await findByText($optionsdocument, "Other ⚡️ Websites");
-
-    await browser.close();
-  });
-
   test("successfully connects to LNBits wallet", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
@@ -163,6 +149,7 @@ test.describe("Create or connect wallets", () => {
     await macroonField.type(macroon);
 
     await commonCreateWalletSuccessCheck({ page, $document });
+
     await browser.close();
   });
 
@@ -269,6 +256,36 @@ test.describe("Create or connect wallets", () => {
 
     await page.waitForTimeout(1000);
     await commonCreateWalletSuccessCheck({ page, $document });
+    await browser.close();
+  });
+
+  test("opens publishers screen", async () => {
+    const { page, browser, extensionId } = await loadExtension();
+    await Promise.all([
+      page.waitForNavigation(), // The promise resolves after navigation has finished
+    ]);
+
+    const optionsPage = `chrome-extension://${extensionId}/options.html`;
+    await page.goto(optionsPage);
+
+    await Promise.all([
+      page.waitForNavigation(), // The promise resolves after navigation has finished
+    ]);
+
+    const $optionsdocument = await getDocument(page);
+
+    const passwordField = await getByPlaceholderText(
+      $optionsdocument,
+      "Password"
+    );
+    await passwordField.type(user.password);
+
+    const unlockButton = await getByText($optionsdocument, "Unlock");
+    unlockButton.click();
+
+    await waitFor(() => getByText($optionsdocument, "Your ⚡️ Websites"));
+    await waitFor(() => getByText($optionsdocument, "Other ⚡️ Websites"));
+
     await browser.close();
   });
 });
