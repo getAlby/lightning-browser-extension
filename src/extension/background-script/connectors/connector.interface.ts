@@ -127,4 +127,5 @@ export default interface Connector {
   checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse>;
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse>;
   verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse>;
+  connectPeer(args: any): Promise<any> | Error; // refactor args/messages
 }
