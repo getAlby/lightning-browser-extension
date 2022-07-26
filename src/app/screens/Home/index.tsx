@@ -255,8 +255,7 @@ function Home() {
                     typeof totalAmount === "string"
                       ? parseInt(totalAmount)
                       : totalAmount,
-                  totalFees:
-                    typeof totalFees === "number" ? `${totalFees}` : totalFees,
+                  totalFees,
                   amount: "",
                   currency: "",
                   totalAmountFiat: "",

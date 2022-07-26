@@ -56,7 +56,7 @@ class LnBits implements Connector {
     });
   }
 
-  // not yet implemenetd
+  // not yet implemented
   getInvoices() {
     console.error(
       `${this.constructor.name} does not implement the getInvoices call`
