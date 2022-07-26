@@ -43,15 +43,6 @@ export default class WebLNProvider {
     return this.execute("getInfo");
   }
 
-  getTransactions() {
-    if (!this.enabled) {
-      throw new Error(
-        "Provider must be enabled before calling getTransactions"
-      );
-    }
-    return this.execute("getTransactions");
-  }
-
   lnurl(lnurlEncoded: string) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling lnurl");

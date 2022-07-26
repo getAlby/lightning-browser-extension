@@ -9,6 +9,21 @@ interface Route {
   total_fees: number;
 }
 
+export interface ConnectorInvoice {
+  custom_records?: {
+    "696969": string;
+    "7629169": string;
+    "5482373484": string;
+  };
+  id: string;
+  memo: string;
+  preimage: string;
+  settled: boolean;
+  settleDate: number;
+  totalAmount: string;
+  type: "received";
+}
+
 export interface MakeInvoiceArgs {
   amount: string | number;
   memo: string;
@@ -28,6 +43,12 @@ export type GetInfoResponse = {
 export type GetBalanceResponse = {
   data: {
     balance: number;
+  };
+};
+
+export type GetInvoicesResponse = {
+  data: {
+    invoices: ConnectorInvoice[];
   };
 };
 
@@ -90,6 +111,7 @@ export default interface Connector {
   unload(): Promise<void>;
   getInfo(): Promise<GetInfoResponse>;
   getBalance(): Promise<GetBalanceResponse>;
+  getInvoices(): Promise<GetInvoicesResponse> | Error;
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse>;
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse>;
   keysend(args: KeysendArgs): Promise<SendPaymentResponse>;

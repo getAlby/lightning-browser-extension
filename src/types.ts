@@ -1,7 +1,10 @@
 import { PaymentRequestObject } from "bolt11";
 import { CURRENCIES } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
-import { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
+import {
+  SendPaymentResponse,
+  ConnectorInvoice,
+} from "~/extension/background-script/connectors/connector.interface";
 
 export type ConnectorType = keyof typeof connectors;
 
@@ -177,6 +180,10 @@ export interface MessageAllowanceAdd extends MessageDefault {
 export interface MessageAllowanceList extends MessageDefault {
   action: "listAllowances";
 }
+export interface MessageInvoices extends Omit<MessageDefault, "args"> {
+  args: { limit?: number; isSettled?: boolean };
+  action: "getInvoices";
+}
 
 export interface MessageAllowanceDelete extends MessageDefault {
   args: {
@@ -281,24 +288,25 @@ export interface IBadge {
 }
 
 export type Transaction = {
-  amount: string;
+  amount?: string;
+  boostagram?: Invoice["boostagram"];
   badges?: IBadge[];
-  createdAt: string;
-  currency: string;
+  createdAt?: string;
+  currency?: string;
   date: string;
-  description: string;
-  host: string;
+  description?: string;
+  host?: string;
   id: string;
-  location: string;
-  name: string;
+  location?: string;
+  name?: string;
   preimage: string;
   subTitle?: string | React.ReactNode;
   title: string | React.ReactNode;
-  totalAmount: number;
-  totalAmountFiat: string;
-  totalFees: string;
-  type?: string;
-  value: string;
+  totalAmount: Allowance["payments"][number]["totalAmount"];
+  totalAmountFiat?: string;
+  totalFees?: Allowance["payments"][number]["totalFees"];
+  type?: "sent" | "sending" | "received";
+  value?: string;
 };
 
 export interface DbPayment {
@@ -314,7 +322,7 @@ export interface DbPayment {
   paymentRequest: string;
   preimage: string;
   totalAmount: number | string;
-  totalFees: number | string;
+  totalFees: number;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -424,3 +432,30 @@ export interface Publisher
 }
 
 export type SupportedExchanges = "alby" | "coindesk" | "yadio";
+
+export interface Invoice {
+  id: string;
+  memo: string;
+  type: "received";
+  settled: boolean;
+  settleDate: number;
+  totalAmount: string;
+  totalAmountFiat?: string;
+  preimage: string;
+  custom_records?: ConnectorInvoice["custom_records"];
+  boostagram?: {
+    app_name: string;
+    name: string;
+    podcast: string;
+    url: string;
+    episode?: string;
+    itemID?: string;
+    ts?: string;
+    message?: string;
+    sender_id: string;
+    sender_name: string;
+    time: string;
+    action: "boost";
+    value_msat_total: number;
+  };
+}

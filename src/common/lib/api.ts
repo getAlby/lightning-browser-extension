@@ -1,6 +1,7 @@
 import {
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  GetInvoicesResponse,
 } from "~/extension/background-script/connectors/connector.interface";
 import type {
   Accounts,
@@ -8,6 +9,7 @@ import type {
   Allowance,
   Transaction,
   SettingsStorage,
+  MessageInvoices,
 } from "~/types";
 
 import {
@@ -102,6 +104,8 @@ export const unlock = (password: string) =>
   utils.call<UnlockRes>("unlock", { password });
 export const getBlocklist = (host: string) =>
   utils.call<BlocklistRes>("getBlocklist", { host });
+export const getInvoices = (options?: MessageInvoices["args"]) =>
+  utils.call<GetInvoicesResponse["data"]>("getInvoices", options);
 
 export default {
   getAccountInfo,
@@ -119,4 +123,5 @@ export default {
   removeAccount,
   unlock,
   getBlocklist,
+  getInvoices,
 };

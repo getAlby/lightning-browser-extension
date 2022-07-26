@@ -50,6 +50,14 @@ class CitadelConnector implements Connector {
     };
   }
 
+  // not yet implemented
+  getInvoices() {
+    console.error(
+      `${this.constructor.name} does not implement the getInvoices call`
+    );
+    return new Error("Not yet supported with the currently used account.");
+  }
+
   async getBalance(): Promise<GetBalanceResponse> {
     await this.ensureLogin();
     const balance = parseInt(

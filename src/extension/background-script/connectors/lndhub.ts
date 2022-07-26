@@ -8,19 +8,21 @@ import HashKeySigner from "~/common/utils/signer";
 
 import state from "../state";
 import Connector, {
-  SendPaymentArgs,
-  SendPaymentResponse,
   CheckPaymentArgs,
   CheckPaymentResponse,
-  GetInfoResponse,
   GetBalanceResponse,
+  GetInfoResponse,
+  GetInvoicesResponse,
+  ConnectorInvoice,
+  KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  SendPaymentArgs,
+  SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
   VerifyMessageArgs,
   VerifyMessageResponse,
-  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -53,6 +55,47 @@ export default class LndHub implements Connector {
 
   unload() {
     return Promise.resolve();
+  }
+
+  async getInvoices(): Promise<GetInvoicesResponse> {
+    const data = await this.request<
+      {
+        r_hash: {
+          type: "Buffer";
+          data: number[];
+        };
+        amt: number;
+        custom_records: ConnectorInvoice["custom_records"];
+        description: string;
+        expire_time: number;
+        ispaid: boolean;
+        keysend: boolean;
+        pay_req: string;
+        payment_hash: string;
+        payment_request: string;
+        timestamp: number;
+        type: "user_invoice";
+      }[]
+    >("GET", "/getuserinvoices", undefined);
+
+    const invoices: ConnectorInvoice[] = data.map(
+      (invoice, index): ConnectorInvoice => ({
+        custom_records: invoice.custom_records,
+        id: `${invoice.payment_request}-${index}`,
+        memo: invoice.description,
+        preimage: "", // lndhub doesn't support preimage (yet)
+        settled: invoice.ispaid,
+        settleDate: invoice.timestamp * 1000,
+        totalAmount: `${invoice.amt}`,
+        type: "received",
+      })
+    );
+
+    return {
+      data: {
+        invoices,
+      },
+    };
   }
 
   async getInfo(): Promise<GetInfoResponse> {

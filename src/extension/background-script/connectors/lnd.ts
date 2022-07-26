@@ -6,19 +6,21 @@ import SHA256 from "crypto-js/sha256";
 import utils from "~/common/lib/utils";
 
 import Connector, {
-  SendPaymentArgs,
-  SendPaymentResponse,
   CheckPaymentArgs,
   CheckPaymentResponse,
-  GetInfoResponse,
   GetBalanceResponse,
+  GetInfoResponse,
+  GetInvoicesResponse,
+  ConnectorInvoice,
+  KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  SendPaymentArgs,
+  SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
   VerifyMessageArgs,
   VerifyMessageResponse,
-  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -36,6 +38,7 @@ class Lnd implements Connector {
   init() {
     return Promise.resolve();
   }
+
   unload() {
     return Promise.resolve();
   }
@@ -86,6 +89,7 @@ class Lnd implements Connector {
       };
     });
   }
+
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
     //See: https://gist.github.com/dellagustin/c3793308b75b6b0faf134e64db7dc915
     const dest_pubkey_hex = args.pubkey;
@@ -223,11 +227,75 @@ class Lnd implements Connector {
     });
   };
 
-  getTransactions = () => {
-    return this.request("GET", "/v1/payments", undefined, {
-      transactions: [],
-    });
-  };
+  async getInvoices(): Promise<GetInvoicesResponse> {
+    const data = await this.request<{
+      invoices: {
+        add_index: string;
+        amt_paid_msat: string;
+        amt_paid_sat: string;
+        amt_paid: string;
+        cltv_expiry: string;
+        creation_date: string;
+        description_hash?: string;
+        expiry: string;
+        fallback_addr: string;
+        features: unknown[];
+        htlcs: {
+          chan_id: string;
+          htlc_index: string;
+          amt_msat: string;
+          accept_height: number;
+          accept_time: string;
+          resolve_time: string;
+          expiry_height: number;
+          state: "SETTLED";
+          custom_records: ConnectorInvoice["custom_records"];
+          mpp_total_amt_msat: string;
+          amp?: unknown;
+        }[];
+        is_keysend: boolean;
+        memo: string;
+        payment_addr: string;
+        payment_request: string;
+        private: boolean;
+        r_hash: string;
+        r_preimage: string;
+        route_hints: [];
+        settle_date: string;
+        settle_index: string;
+        settled: boolean;
+        state: string;
+        value_msat: string;
+        value: string;
+      }[];
+      last_index_offset: string;
+      first_index_offset: string;
+    }>("GET", "/v1/invoices", { reversed: true });
+
+    const invoices: ConnectorInvoice[] = data.invoices
+      .map((invoice, index): ConnectorInvoice => {
+        const custom_records =
+          invoice.htlcs[0] && invoice.htlcs[0].custom_records;
+
+        return {
+          custom_records,
+          id: `${invoice.payment_request}-${index}`,
+          memo: invoice.memo,
+          preimage: invoice.r_preimage,
+          settled: invoice.settled,
+          settleDate: parseInt(invoice.settle_date) * 1000,
+          totalAmount: invoice.value,
+          type: "received",
+        };
+      })
+      .reverse();
+
+    return {
+      data: {
+        invoices,
+      },
+    };
+  }
 
   async request<Type>(
     method: string,
@@ -240,6 +308,7 @@ class Lnd implements Connector {
     let body = null;
     const headers = new Headers();
     headers.append("Accept", "application/json");
+
     if (method === "POST") {
       body = JSON.stringify(args);
       headers.append("Content-Type", "application/json");

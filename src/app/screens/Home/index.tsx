@@ -11,6 +11,7 @@ import Loading from "@components/Loading";
 import Progressbar from "@components/Progressbar";
 import PublisherCard from "@components/PublisherCard";
 import TransactionsTable from "@components/TransactionsTable";
+import { Tab } from "@headlessui/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useState, useEffect } from "react";
@@ -18,6 +19,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import browser from "webextension-polyfill";
+import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
@@ -30,9 +32,13 @@ function Home() {
   const [isBlocked, setIsBlocked] = useState<boolean>(false);
   const [currentUrl, setCurrentUrl] = useState<URL | null>(null);
   const [payments, setPayments] = useState<Transaction[]>([]);
+  const [incomingTransactions, setIncomingTransactions] = useState<
+    Transaction[] | null
+  >(null);
   const [loadingAllowance, setLoadingAllowance] = useState(true);
   const [loadingPayments, setLoadingPayments] = useState(true);
   const [loadingSendSats, setLoadingSendSats] = useState(false);
+  const [loadingInvoices, setLoadingInvoices] = useState(false);
   const [lnData, setLnData] = useState<Battery[]>([]);
   const navigate = useNavigate();
   const { t } = useTranslation("translation", { keyPrefix: "home" });
@@ -92,6 +98,34 @@ function Home() {
     if (response.action === "lightningData") {
       setLnData(response.args);
     }
+  }
+
+  async function onTabChangeHandler(index: number) {
+    if (index === 1) {
+      await loadInvoices();
+    }
+  }
+
+  async function loadInvoices() {
+    // incoives have already been loaded
+    if (incomingTransactions) return incomingTransactions;
+
+    setLoadingInvoices(true);
+    const result = await api.getInvoices({ isSettled: true });
+
+    const invoices: Transaction[] = result.invoices.map((invoice) => ({
+      ...invoice,
+      title: invoice.memo,
+      date: dayjs(invoice.settleDate).fromNow(),
+    }));
+
+    for (const invoice of invoices) {
+      const totalAmountFiat = await getFiatValue(invoice.totalAmount);
+      invoice.totalAmountFiat = totalAmountFiat;
+    }
+
+    setIncomingTransactions(invoices);
+    setLoadingInvoices(false);
   }
 
   useEffect(() => {
@@ -189,9 +223,11 @@ function Home() {
               />
             </div>
           </div>
+
           <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
-            {t("recent_transactions")}
+            {t("allowance_view.recent_transactions")}
           </h2>
+
           {allowance?.payments.length > 0 ? (
             <TransactionsTable
               transactions={allowance.payments.map((payment) => {
@@ -219,12 +255,13 @@ function Home() {
                     typeof totalAmount === "string"
                       ? parseInt(totalAmount)
                       : totalAmount,
-                  totalFees:
-                    typeof totalFees === "number" ? `${totalFees}` : totalFees,
+                  totalFees,
                   amount: "",
                   currency: "",
                   totalAmountFiat: "",
                   value: "",
+                  // @TODO: Refactor: transaction-creation #1158
+                  // https://github.com/getAlby/lightning-browser-extension/issues/1158
                   date: dayjs(payment.createdAt).fromNow(),
                   // date: dayjs.unix(payment.createdAt),
                   title: (
@@ -297,7 +334,7 @@ function Home() {
         {isBlocked && (
           <div className="mb-2 items-center py-3 dark:text-white">
             <p className="py-1">
-              Alby is currently disabled on {currentUrl?.host}
+              {t("default_view.is_blocked_hint", { host: currentUrl?.host })}
             </p>
             <Button
               fullWidth
@@ -315,45 +352,89 @@ function Home() {
         ) : (
           <div>
             <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
-              Recent Transactions
+              {t("default_view.recent_transactions")}
             </h2>
-            {payments.length > 0 ? (
-              <TransactionsTable
-                transactions={payments.map((payment) => ({
-                  ...payment,
-                  type: "sent",
-                  date: dayjs(payment.createdAt).fromNow(),
-                  title: (
-                    <p className="truncate">
-                      <a
-                        target="_blank"
-                        title={payment.name}
-                        href={`options.html#/publishers`}
-                        rel="noreferrer"
-                      >
-                        {payment.name}
-                      </a>
+
+            <Tab.Group onChange={onTabChangeHandler}>
+              <Tab.List className="mb-2">
+                {[
+                  t("transaction_list.tabs.outgoing"),
+                  t("transaction_list.tabs.incoming"),
+                ].map((category) => (
+                  <Tab
+                    key={category}
+                    className={({ selected }) =>
+                      classNames(
+                        "w-1/2 rounded-lg py-2.5 font-bold transition duration-150",
+                        "focus:outline-none",
+                        "hover:bg-gray-50 dark:hover:bg-surface-16dp",
+                        selected
+                          ? "text-orange-bitcoin"
+                          : "text-gray-700  dark:text-neutral-200"
+                      )
+                    }
+                  >
+                    {category}
+                  </Tab>
+                ))}
+              </Tab.List>
+
+              <Tab.Panels>
+                <Tab.Panel>
+                  {payments.length > 0 ? (
+                    <TransactionsTable
+                      transactions={payments.map((payment) => ({
+                        ...payment,
+                        type: "sent",
+                        date: dayjs(payment.createdAt).fromNow(),
+                        title: (
+                          <p className="truncate">
+                            <a
+                              target="_blank"
+                              title={payment.name}
+                              href={`options.html#/publishers`}
+                              rel="noreferrer"
+                            >
+                              {payment.name}
+                            </a>
+                          </p>
+                        ),
+                        subTitle: (
+                          <p className="truncate">
+                            <a
+                              target="_blank"
+                              title={payment.name}
+                              href={`options.html#/publishers`}
+                              rel="noreferrer"
+                            >
+                              {payment.host}
+                            </a>
+                          </p>
+                        ),
+                      }))}
+                    />
+                  ) : (
+                    <p className="text-gray-500 dark:text-neutral-400">
+                      {t("default_view.no_transactions")}
                     </p>
-                  ),
-                  subTitle: (
-                    <p className="truncate">
-                      <a
-                        target="_blank"
-                        title={payment.name}
-                        href={`options.html#/publishers`}
-                        rel="noreferrer"
-                      >
-                        {payment.host}
-                      </a>
+                  )}
+                </Tab.Panel>
+                <Tab.Panel>
+                  {loadingInvoices ? (
+                    <div className="flex justify-center">
+                      <Loading />
+                    </div>
+                  ) : incomingTransactions &&
+                    incomingTransactions.length > 0 ? (
+                    <TransactionsTable transactions={incomingTransactions} />
+                  ) : (
+                    <p className="text-gray-500 dark:text-neutral-400">
+                      {t("default_view.no_transactions")}
                     </p>
-                  ),
-                }))}
-              />
-            ) : (
-              <p className="text-gray-500 dark:text-neutral-400">
-                No transactions yet.
-              </p>
-            )}
+                  )}
+                </Tab.Panel>
+              </Tab.Panels>
+            </Tab.Group>
           </div>
         )}
       </div>

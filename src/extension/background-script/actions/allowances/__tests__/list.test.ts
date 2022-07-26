@@ -32,7 +32,7 @@ const mockPayments: Payment[] = [
     paymentRequest: "123",
     preimage: "123",
     totalAmount: "2000",
-    totalFees: "222",
+    totalFees: 222,
   },
 ];
 

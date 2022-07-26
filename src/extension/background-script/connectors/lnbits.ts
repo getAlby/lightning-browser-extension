@@ -56,6 +56,14 @@ class LnBits implements Connector {
     });
   }
 
+  // not yet implemented
+  getInvoices() {
+    console.error(
+      `${this.constructor.name} does not implement the getInvoices call`
+    );
+    return new Error("Not yet supported with the currently used account.");
+  }
+
   getBalance(): Promise<GetBalanceResponse> {
     return this.request(
       "GET",

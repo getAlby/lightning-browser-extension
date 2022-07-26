@@ -1,7 +1,9 @@
 import PubSub from "pubsub-js";
+import { toast } from "react-toastify";
 import browser, { Runtime } from "webextension-polyfill";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
-import {
+import type {
+  Invoice,
   Message,
   OriginData,
   OriginDataInternal,
@@ -25,6 +27,7 @@ const utils = {
       })
       .then((response: { data: T; error?: string }) => {
         if (response.error) {
+          toast.error(response.error);
           throw new Error(response.error);
         }
         return response.data;
@@ -169,6 +172,15 @@ const utils = {
           browser.tabs.onRemoved.addListener(onRemovedListener);
         });
     });
+  },
+  getBoostagramFromInvoiceCustomRecords: (
+    custom_records: Invoice["custom_records"] | undefined
+  ) => {
+    const hasBoostagram = custom_records && 7629169 in custom_records;
+    const boostagramDecoded = hasBoostagram
+      ? atob(custom_records[7629169])
+      : undefined;
+    return boostagramDecoded ? JSON.parse(boostagramDecoded) : undefined;
   },
 };
 
