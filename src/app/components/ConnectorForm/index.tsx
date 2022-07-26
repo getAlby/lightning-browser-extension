@@ -54,11 +54,18 @@ function ConnectorForm({
                 </video>
               </div>
             ) : (
-              <img
-                src="assets/icons/satsymbol.svg"
-                alt="sats"
-                className="w-64"
-              />
+              <>
+                <img
+                  src="assets/icons/alby_logo.svg"
+                  alt="Alby"
+                  className="block dark:hidden w-64"
+                />
+                <img
+                  src="assets/icons/alby_logo_dark.svg"
+                  alt="Alby"
+                  className="hidden dark:block w-64"
+                />
+              </>
             )}
           </div>
         </div>
