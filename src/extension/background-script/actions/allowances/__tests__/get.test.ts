@@ -65,7 +65,7 @@ const mockAllowances: DbAllowance[] = [
   },
 ];
 
-describe("account all", () => {
+describe("get allowance", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
