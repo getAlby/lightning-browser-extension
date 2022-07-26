@@ -189,8 +189,8 @@ export interface MessageInvoices extends Omit<MessageDefault, "args"> {
 export interface MessageAllowanceEnable extends MessageDefault {
   origin: OriginData;
   args: {
-    host: Allowance["host"]
-  }
+    host: Allowance["host"];
+  };
   action: "enableAllowance";
 }
 
