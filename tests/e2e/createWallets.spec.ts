@@ -86,7 +86,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test.skip("successfully connects to LNBits wallet", async () => {
+  test("successfully connects to LNBits wallet", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     // click at "Create LNbits Wallet"
@@ -153,7 +153,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test.skip("successfully connects to Umbrel", async () => {
+  test("successfully connects to Umbrel", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     const connectButton = await getByText($document, "Umbrel");
@@ -163,7 +163,7 @@ test.describe("Create or connect wallets", () => {
     await findByText($document, "lndconnect REST URL");
 
     const macaroon =
-      "AgEDbG5kAvgBAwoQ/6M0baViThOf9HKqz4sEWhIBMBoWCgdhZGRyZXNzEgRyZWFkEgV3cml0ZRoTCgRpbmZvEgRyZWFkEgV3cml0ZRoXCghpbnZvaWNlcxIEcmVhZBIFd3JpdGUaIQoIbWFjYXJvb24SCGdlbmVyYXRlEgRyZWFkEgV3cml0ZRoWCgdtZXNzYWdlEgRyZWFkEgV3cml0ZRoXCghvZmZjaGFpbhIEcmVhZBIFd3JpdGUaFgoHb25jaGFpbhIEcmVhZBIFd3JpdGUaFAoFcGVlcnMSBHJlYWQSBXdyaXRlGhgKBnNpZ25lchIIZ2VuZXJhdGUSBHJlYWQAAAYgf8fvHjHsWvxJgqYv9iSuVoIhJ4P7r1CAi5bN6WYVdg0=";
+      "AgEDbG5kAvgBAwoQs79pBsGTcTmsBoSsRBcTnRIBMBoWCgdhZGRyZXNzEgRyZWFkEgV3cml0ZRoTCgRpbmZvEgRyZWFkEgV3cml0ZRoXCghpbnZvaWNlcxIEcmVhZBIFd3JpdGUaIQoIbWFjYXJvb24SCGdlbmVyYXRlEgRyZWFkEgV3cml0ZRoWCgdtZXNzYWdlEgRyZWFkEgV3cml0ZRoXCghvZmZjaGFpbhIEcmVhZBIFd3JpdGUaFgoHb25jaGFpbhIEcmVhZBIFd3JpdGUaFAoFcGVlcnMSBHJlYWQSBXdyaXRlGhgKBnNpZ25lchIIZ2VuZXJhdGUSBHJlYWQAAAYgo/gQFwrZNApjB0tt3tMe2DpxQP0mx3WIVhEVg7dyWys=";
     const restApiUrl = `lndconnect://lnd1.regtest.getalby.com?cert=&macaroon=${macaroon}`;
     const lndConnectUrlField = await getByLabelText(
       $document,
@@ -175,7 +175,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test.skip("successfully connects to myNode", async () => {
+  test("successfully connects to myNode", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     const connectButton = await getByText($document, "myNode");
@@ -185,7 +185,7 @@ test.describe("Create or connect wallets", () => {
     await findByText($document, "lndconnect REST URL");
 
     const macaroon =
-      "AgEDbG5kAvgBAwoQ/6M0baViThOf9HKqz4sEWhIBMBoWCgdhZGRyZXNzEgRyZWFkEgV3cml0ZRoTCgRpbmZvEgRyZWFkEgV3cml0ZRoXCghpbnZvaWNlcxIEcmVhZBIFd3JpdGUaIQoIbWFjYXJvb24SCGdlbmVyYXRlEgRyZWFkEgV3cml0ZRoWCgdtZXNzYWdlEgRyZWFkEgV3cml0ZRoXCghvZmZjaGFpbhIEcmVhZBIFd3JpdGUaFgoHb25jaGFpbhIEcmVhZBIFd3JpdGUaFAoFcGVlcnMSBHJlYWQSBXdyaXRlGhgKBnNpZ25lchIIZ2VuZXJhdGUSBHJlYWQAAAYgf8fvHjHsWvxJgqYv9iSuVoIhJ4P7r1CAi5bN6WYVdg0=";
+      "AgEDbG5kAvgBAwoQs79pBsGTcTmsBoSsRBcTnRIBMBoWCgdhZGRyZXNzEgRyZWFkEgV3cml0ZRoTCgRpbmZvEgRyZWFkEgV3cml0ZRoXCghpbnZvaWNlcxIEcmVhZBIFd3JpdGUaIQoIbWFjYXJvb24SCGdlbmVyYXRlEgRyZWFkEgV3cml0ZRoWCgdtZXNzYWdlEgRyZWFkEgV3cml0ZRoXCghvZmZjaGFpbhIEcmVhZBIFd3JpdGUaFgoHb25jaGFpbhIEcmVhZBIFd3JpdGUaFAoFcGVlcnMSBHJlYWQSBXdyaXRlGhgKBnNpZ25lchIIZ2VuZXJhdGUSBHJlYWQAAAYgo/gQFwrZNApjB0tt3tMe2DpxQP0mx3WIVhEVg7dyWys=";
     const restApiUrl = `lndconnect://lnd1.regtest.getalby.com?cert=&macaroon=${macaroon}`;
     const lndConnectUrlField = await getByLabelText(
       $document,
@@ -197,7 +197,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test.skip("successfully connects to Start9", async () => {
+  test("successfully connects to Start9", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     const connectButton = await getByText($document, "Start9");
@@ -207,7 +207,7 @@ test.describe("Create or connect wallets", () => {
     await findByText($document, "lndconnect REST URL");
 
     const macaroon =
-      "AgEDbG5kAvgBAwoQ/6M0baViThOf9HKqz4sEWhIBMBoWCgdhZGRyZXNzEgRyZWFkEgV3cml0ZRoTCgRpbmZvEgRyZWFkEgV3cml0ZRoXCghpbnZvaWNlcxIEcmVhZBIFd3JpdGUaIQoIbWFjYXJvb24SCGdlbmVyYXRlEgRyZWFkEgV3cml0ZRoWCgdtZXNzYWdlEgRyZWFkEgV3cml0ZRoXCghvZmZjaGFpbhIEcmVhZBIFd3JpdGUaFgoHb25jaGFpbhIEcmVhZBIFd3JpdGUaFAoFcGVlcnMSBHJlYWQSBXdyaXRlGhgKBnNpZ25lchIIZ2VuZXJhdGUSBHJlYWQAAAYgf8fvHjHsWvxJgqYv9iSuVoIhJ4P7r1CAi5bN6WYVdg0=";
+      "AgEDbG5kAvgBAwoQs79pBsGTcTmsBoSsRBcTnRIBMBoWCgdhZGRyZXNzEgRyZWFkEgV3cml0ZRoTCgRpbmZvEgRyZWFkEgV3cml0ZRoXCghpbnZvaWNlcxIEcmVhZBIFd3JpdGUaIQoIbWFjYXJvb24SCGdlbmVyYXRlEgRyZWFkEgV3cml0ZRoWCgdtZXNzYWdlEgRyZWFkEgV3cml0ZRoXCghvZmZjaGFpbhIEcmVhZBIFd3JpdGUaFgoHb25jaGFpbhIEcmVhZBIFd3JpdGUaFAoFcGVlcnMSBHJlYWQSBXdyaXRlGhgKBnNpZ25lchIIZ2VuZXJhdGUSBHJlYWQAAAYgo/gQFwrZNApjB0tt3tMe2DpxQP0mx3WIVhEVg7dyWys=";
     const restApiUrl = `lndconnect://lnd1.regtest.getalby.com?cert=&macaroon=${macaroon}`;
     const lndConnectUrlField = await getByLabelText(
       $document,
@@ -240,7 +240,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test.skip("successfully connects to BTCPay", async () => {
+  test("successfully connects to BTCPay", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     const connectButton = await getByText($document, "BTCPay Server");
