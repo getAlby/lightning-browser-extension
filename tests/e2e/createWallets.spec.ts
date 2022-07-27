@@ -78,7 +78,7 @@ const createAlbyWallet = async ({ page, $document, user }) => {
 };
 
 test.describe("Create or connect wallets", () => {
-  test("successfully creates an Alby wallet", async () => {
+  test.skip("successfully creates an Alby wallet", async () => {
     const { user, browser, page, $document } =
       await commonCreateWalletUserCreate();
     await createAlbyWallet({ page, $document, user });
@@ -86,7 +86,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to LNBits wallet", async () => {
+  test.skip("successfully connects to LNBits wallet", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     // click at "Create LNbits Wallet"
@@ -103,7 +103,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to BlueWallet", async () => {
+  test.skip("successfully connects to BlueWallet", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     // click at "LNDHub (BlueWallet)"
@@ -141,7 +141,7 @@ test.describe("Create or connect wallets", () => {
     await lndUrlField.type(restApiUrl);
 
     const macroon =
-      "0201036c6e6402f801030a10ffa3346da5624e139ff472aacf8b045a1201301a160a0761646472657373120472656164120577726974651a130a04696e666f120472656164120577726974651a170a08696e766f69636573120472656164120577726974651a210a086d616361726f6f6e120867656e6572617465120472656164120577726974651a160a076d657373616765120472656164120577726974651a170a086f6666636861696e120472656164120577726974651a160a076f6e636861696e120472656164120577726974651a140a057065657273120472656164120577726974651a180a067369676e6572120867656e6572617465120472656164000006207fc7ef1e31ec5afc4982a62ff624ae5682212783fbaf50808b96cde96615760d";
+      "0201036c6e6402f801030a10b3bf6906c1937139ac0684ac4417139d1201301a160a0761646472657373120472656164120577726974651a130a04696e666f120472656164120577726974651a170a08696e766f69636573120472656164120577726974651a210a086d616361726f6f6e120867656e6572617465120472656164120577726974651a160a076d657373616765120472656164120577726974651a170a086f6666636861696e120472656164120577726974651a160a076f6e636861696e120472656164120577726974651a140a057065657273120472656164120577726974651a180a067369676e6572120867656e657261746512047265616400000620a3f810170ad9340a63074b6dded31ed83a7140fd26c7758856111583b7725b2b";
     const macroonField = await getByLabelText(
       $document,
       "Macaroon (HEX format)"
@@ -153,7 +153,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to Umbrel", async () => {
+  test.skip("successfully connects to Umbrel", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     const connectButton = await getByText($document, "Umbrel");
@@ -175,7 +175,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to myNode", async () => {
+  test.skip("successfully connects to myNode", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     const connectButton = await getByText($document, "myNode");
@@ -197,7 +197,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to Start9", async () => {
+  test.skip("successfully connects to Start9", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     const connectButton = await getByText($document, "Start9");
@@ -219,7 +219,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to Eclair", async () => {
+  test.skip("successfully connects to Eclair", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     const connectButton = await getByText($document, "Eclair");
@@ -240,7 +240,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to BTCPay", async () => {
+  test.skip("successfully connects to BTCPay", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     const connectButton = await getByText($document, "BTCPay Server");
