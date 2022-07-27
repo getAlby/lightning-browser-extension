@@ -78,7 +78,7 @@ const createAlbyWallet = async ({ page, $document, user }) => {
 };
 
 test.describe("Create or connect wallets", () => {
-  test.skip("successfully creates an Alby wallet", async () => {
+  test("successfully creates an Alby wallet", async () => {
     const { user, browser, page, $document } =
       await commonCreateWalletUserCreate();
     await createAlbyWallet({ page, $document, user });
@@ -219,7 +219,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test.skip("successfully connects to Eclair", async () => {
+  test("successfully connects to Eclair", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     const connectButton = await getByText($document, "Eclair");
