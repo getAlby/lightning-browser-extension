@@ -103,7 +103,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test.skip("successfully connects to BlueWallet", async () => {
+  test("successfully connects to BlueWallet", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     // click at "LNDHub (BlueWallet)"
