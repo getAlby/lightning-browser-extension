@@ -219,7 +219,8 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to Eclair", async () => {
+  // under maintenance for now
+  test.skip("successfully connects to Eclair", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     const connectButton = await getByText($document, "Eclair");
