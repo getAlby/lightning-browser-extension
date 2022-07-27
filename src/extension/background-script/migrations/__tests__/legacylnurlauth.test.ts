@@ -1,6 +1,6 @@
 import db from "~/extension/background-script/db";
 import state from "~/extension/background-script/state";
-import type { Allowance } from "~/types";
+import type { DbAllowance } from "~/types";
 
 import migrate from "../index";
 
@@ -11,23 +11,18 @@ afterEach(() => {
 });
 
 describe("With lnurlAuth enabled allowance", () => {
-  const mockAllowances: Allowance[] = [
+  const mockAllowances: DbAllowance[] = [
     {
       enabled: true,
       host: "numbergoup.ngu",
       id: 1,
       imageURL: "https://numbergoup.ngu/favicon.ico",
-      lastPaymentAt: "0",
+      lastPaymentAt: 0,
       lnurlAuth: true,
       name: "ngu",
       remainingBudget: 500,
       totalBudget: 500,
       createdAt: "123456",
-      payments: [],
-      paymentsAmount: 0,
-      paymentsCount: 0,
-      percentage: "0",
-      usedBudget: 0,
       tag: "",
     },
   ];
@@ -41,23 +36,18 @@ describe("With lnurlAuth enabled allowance", () => {
 });
 
 describe("Without lnurlAuth enabled allowance", () => {
-  const mockAllowances: Allowance[] = [
+  const mockAllowances: DbAllowance[] = [
     {
       enabled: true,
       host: "numbergoup.ngu",
       id: 1,
       imageURL: "https://numbergoup.ngu/favicon.ico",
-      lastPaymentAt: "0",
+      lastPaymentAt: 0,
       lnurlAuth: false,
       name: "ngu",
       remainingBudget: 500,
       totalBudget: 500,
       createdAt: "123456",
-      payments: [],
-      paymentsAmount: 0,
-      paymentsCount: 0,
-      percentage: "0",
-      usedBudget: 0,
       tag: "",
     },
   ];
@@ -71,23 +61,18 @@ describe("Without lnurlAuth enabled allowance", () => {
 });
 
 describe("Migrations already executed", () => {
-  const mockAllowances: Allowance[] = [
+  const mockAllowances: DbAllowance[] = [
     {
       enabled: true,
       host: "numbergoup.ngu",
       id: 1,
       imageURL: "https://numbergoup.ngu/favicon.ico",
-      lastPaymentAt: "0",
+      lastPaymentAt: 0,
       lnurlAuth: true,
       name: "ngu",
       remainingBudget: 500,
       totalBudget: 500,
       createdAt: "123456",
-      payments: [],
-      paymentsAmount: 0,
-      paymentsCount: 0,
-      percentage: "0",
-      usedBudget: 0,
       tag: "",
     },
   ];

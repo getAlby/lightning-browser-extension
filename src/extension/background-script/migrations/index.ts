@@ -1,5 +1,3 @@
-import type { Allowance } from "~/types";
-
 import db from "../db";
 import state from "../state";
 
@@ -31,7 +29,7 @@ const migrations = {
   migrateisUsingLegacyLnurlAuthKeySetting: async () => {
     const { settings } = state.getState();
     const allowances = await db.allowances
-      .filter((allowance: Allowance) => {
+      .filter((allowance) => {
         return !!allowance.lnurlAuth;
       })
       .toArray();

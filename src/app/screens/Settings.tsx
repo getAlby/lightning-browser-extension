@@ -10,7 +10,7 @@ import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
 import type { FormEvent } from "react";
 import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
@@ -92,38 +92,6 @@ function Settings() {
               onChange={() => {
                 saveSetting({
                   websiteEnhancements: !settings.websiteEnhancements,
-                });
-              }}
-            />
-          )}
-        </Setting>
-
-        <Setting
-          title={t("legacy_lnurl_auth.title")}
-          subtitle={t("legacy_lnurl_auth.subtitle")}
-        >
-          {!loading && (
-            <Toggle
-              checked={settings.legacyLnurlAuth}
-              onChange={() => {
-                saveSetting({
-                  legacyLnurlAuth: !settings.legacyLnurlAuth,
-                });
-              }}
-            />
-          )}
-        </Setting>
-
-        <Setting
-          title="Legacy LNURL-Auth"
-          subtitle="The key generation for LNURL-auth has changed. Due to an error Alby was not compatible with other implementations. This was fixed, but now different keys are used. If you used LNURL-auth to login before you can still enable the old method. This option will be removed later, make sure to switch to the new login."
-        >
-          {!loading && (
-            <Toggle
-              checked={settings.isUsingLegacyLnurlAuthKey}
-              onChange={() => {
-                saveSetting({
-                  legacyLnurlAuthKey: !settings.isUsingLegacyLnurlAuthKey,
                 });
               }}
             />
@@ -334,31 +302,26 @@ function Settings() {
         </Modal>
       </div>
 
-      <h2 className="mt-12 text-2xl font-bold dark:text-white">LNURL-Auth</h2>
+      <h2 className="mt-12 text-2xl font-bold dark:text-white">
+        {t("lnurl_auth.headline")}
+      </h2>
 
       <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
         <a
           href="https://lightninglogin.live/learn"
           target="_blank"
           rel="noreferrer"
+          className="underline"
         >
-          LNURL-auth
+          {t("lnurl_auth.headline")}
         </a>{" "}
-        is a generic authentication protocol. It authenticates the user using
-        digital signatures. The protocol does not require any other identifying
-        information such as passwords, emails, usernames, or similar. With Alby
-        you can use your lightning accounts to securely login to websites.
-        <br />
-        To be compatible with other wallets we had to make a few changes that
-        you can configure here. <br />
-        <strong>Ideally all those options are OFF.</strong> Use them only if you
-        have old accounts.
+        <Trans t={t}>lnurl_auth.hint</Trans>
       </p>
 
       <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting
-          title="Legacy LNURL-Auth"
-          subtitle="The key generation for LNURL-auth has changed (July 2022). Alby was not compatible with other implementations. This was changed, but now different login keys are used. If you used LNURL-auth to login before you can still enable the old method. This option will be removed later, make sure to switch to the new login."
+          title={t("lnurl_auth.legacy_lnurl_auth_202207.title")}
+          subtitle={t("lnurl_auth.legacy_lnurl_auth_202207.subtitle")}
         >
           {!loading && (
             <Toggle
@@ -374,8 +337,8 @@ function Settings() {
         </Setting>
 
         <Setting
-          title="Legacy signing for LNDhub and LNBits"
-          subtitle="Message signing and login with LNDhub (e.g. BlueWallet) and LNbits accounts has been changed (March 2022). If you logged in with these accounts you can still enable the old signing method. This option will be removed later, make sure to switch to the new login."
+          title={t("lnurl_auth.legacy_lnurl_auth.title")}
+          subtitle={t("lnurl_auth.legacy_lnurl_auth.subtitle")}
         >
           {!loading && (
             <Toggle
