@@ -252,7 +252,7 @@ test.describe("Create or connect wallets", () => {
     const configField = await findByLabelText($document, "Config data");
 
     await configField.type(
-      "config=https://gist.githubusercontent.com/bumi/71885ed90617b3ba2dd485ecfb7829eb/raw/f7e86f6d8b71b33c70b01a650be337408a0c7a11/mock-btcpay-lnd.json"
+      "config=https://gist.githubusercontent.com/bumi/71885ed90617b3ba2dd485ecfb7829eb/raw/26a91185ee273df4eaa75f6ec406001ab4a5d2cf/mock-btcpay-lnd.json"
     );
 
     await page.waitForTimeout(1000);
