@@ -28,6 +28,7 @@ coverage
 test-results/
 playwright-report/
 trace.zip
+puppeteer-user-data-dir/
 
 # storybook
 storybook-static/

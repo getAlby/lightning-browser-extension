@@ -4,11 +4,17 @@ import { getDocument, queries, waitFor } from "pptr-testing-library";
 
 import { loadExtension } from "./helpers/loadExtension";
 
-const { getByText, getByLabelText, findByLabelText, findByText } = queries;
+const {
+  getByText,
+  getByLabelText,
+  findByLabelText,
+  findByText,
+  getByPlaceholderText,
+} = queries;
+const user = USER.SINGLE();
 
 const commonCreateWalletUserCreate = async () => {
-  const user = USER.SINGLE();
-  const { page: page, browser } = await loadExtension();
+  const { page, browser } = await loadExtension();
 
   // get document from welcome page
   const $document = await getDocument(page);
@@ -48,7 +54,7 @@ const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
 };
 
 test.describe("Create or connect wallets", () => {
-  test("successfully creates an Alby wallet and opens publishers screen", async () => {
+  test("successfully creates an Alby wallet", async () => {
     const { user, browser, page, $document } =
       await commonCreateWalletUserCreate();
     // click at "Create Alby Wallet"
@@ -66,17 +72,35 @@ test.describe("Create or connect wallets", () => {
     await walletPasswordField.type(user.password);
 
     await commonCreateWalletSuccessCheck({ page, $document });
+    await browser.close();
+  });
 
-    // reload and expect to be on publishers screen
+  test("opens publishers screen", async () => {
+    const { page, browser, extensionId } = await loadExtension();
     await Promise.all([
       page.waitForNavigation(), // The promise resolves after navigation has finished
-      page.reload({ waitUntil: ["networkidle0", "domcontentloaded"] }),
+    ]);
+
+    const optionsPage = `chrome-extension://${extensionId}/options.html`;
+    await page.goto(optionsPage);
+
+    await Promise.all([
+      page.waitForNavigation(), // The promise resolves after navigation has finished
     ]);
 
     const $optionsdocument = await getDocument(page);
 
-    await findByText($optionsdocument, "Your ⚡️ Websites");
-    await findByText($optionsdocument, "Other ⚡️ Websites");
+    const passwordField = await getByPlaceholderText(
+      $optionsdocument,
+      "Password"
+    );
+    await passwordField.type(user.password);
+
+    const unlockButton = await getByText($optionsdocument, "Unlock");
+    unlockButton.click();
+
+    await waitFor(() => getByText($optionsdocument, "Your ⚡️ Websites"));
+    await waitFor(() => getByText($optionsdocument, "Other ⚡️ Websites"));
 
     await browser.close();
   });
@@ -136,7 +160,7 @@ test.describe("Create or connect wallets", () => {
     await lndUrlField.type(restApiUrl);
 
     const macroon =
-      "0201036c6e6402f801030a10ffa3346da5624e139ff472aacf8b045a1201301a160a0761646472657373120472656164120577726974651a130a04696e666f120472656164120577726974651a170a08696e766f69636573120472656164120577726974651a210a086d616361726f6f6e120867656e6572617465120472656164120577726974651a160a076d657373616765120472656164120577726974651a170a086f6666636861696e120472656164120577726974651a160a076f6e636861696e120472656164120577726974651a140a057065657273120472656164120577726974651a180a067369676e6572120867656e6572617465120472656164000006207fc7ef1e31ec5afc4982a62ff624ae5682212783fbaf50808b96cde96615760d";
+      "0201036c6e6402f801030a10b3bf6906c1937139ac0684ac4417139d1201301a160a0761646472657373120472656164120577726974651a130a04696e666f120472656164120577726974651a170a08696e766f69636573120472656164120577726974651a210a086d616361726f6f6e120867656e6572617465120472656164120577726974651a160a076d657373616765120472656164120577726974651a170a086f6666636861696e120472656164120577726974651a160a076f6e636861696e120472656164120577726974651a140a057065657273120472656164120577726974651a180a067369676e6572120867656e657261746512047265616400000620a3f810170ad9340a63074b6dded31ed83a7140fd26c7758856111583b7725b2b";
     const macroonField = await getByLabelText(
       $document,
       "Macaroon (HEX format)"
@@ -144,6 +168,7 @@ test.describe("Create or connect wallets", () => {
     await macroonField.type(macroon);
 
     await commonCreateWalletSuccessCheck({ page, $document });
+
     await browser.close();
   });
 
@@ -157,7 +182,7 @@ test.describe("Create or connect wallets", () => {
     await findByText($document, "lndconnect REST URL");
 
     const macaroon =
-      "AgEDbG5kAvgBAwoQ/6M0baViThOf9HKqz4sEWhIBMBoWCgdhZGRyZXNzEgRyZWFkEgV3cml0ZRoTCgRpbmZvEgRyZWFkEgV3cml0ZRoXCghpbnZvaWNlcxIEcmVhZBIFd3JpdGUaIQoIbWFjYXJvb24SCGdlbmVyYXRlEgRyZWFkEgV3cml0ZRoWCgdtZXNzYWdlEgRyZWFkEgV3cml0ZRoXCghvZmZjaGFpbhIEcmVhZBIFd3JpdGUaFgoHb25jaGFpbhIEcmVhZBIFd3JpdGUaFAoFcGVlcnMSBHJlYWQSBXdyaXRlGhgKBnNpZ25lchIIZ2VuZXJhdGUSBHJlYWQAAAYgf8fvHjHsWvxJgqYv9iSuVoIhJ4P7r1CAi5bN6WYVdg0=";
+      "AgEDbG5kAvgBAwoQs79pBsGTcTmsBoSsRBcTnRIBMBoWCgdhZGRyZXNzEgRyZWFkEgV3cml0ZRoTCgRpbmZvEgRyZWFkEgV3cml0ZRoXCghpbnZvaWNlcxIEcmVhZBIFd3JpdGUaIQoIbWFjYXJvb24SCGdlbmVyYXRlEgRyZWFkEgV3cml0ZRoWCgdtZXNzYWdlEgRyZWFkEgV3cml0ZRoXCghvZmZjaGFpbhIEcmVhZBIFd3JpdGUaFgoHb25jaGFpbhIEcmVhZBIFd3JpdGUaFAoFcGVlcnMSBHJlYWQSBXdyaXRlGhgKBnNpZ25lchIIZ2VuZXJhdGUSBHJlYWQAAAYgo/gQFwrZNApjB0tt3tMe2DpxQP0mx3WIVhEVg7dyWys=";
     const restApiUrl = `lndconnect://lnd1.regtest.getalby.com?cert=&macaroon=${macaroon}`;
     const lndConnectUrlField = await getByLabelText(
       $document,
@@ -179,7 +204,7 @@ test.describe("Create or connect wallets", () => {
     await findByText($document, "lndconnect REST URL");
 
     const macaroon =
-      "AgEDbG5kAvgBAwoQ/6M0baViThOf9HKqz4sEWhIBMBoWCgdhZGRyZXNzEgRyZWFkEgV3cml0ZRoTCgRpbmZvEgRyZWFkEgV3cml0ZRoXCghpbnZvaWNlcxIEcmVhZBIFd3JpdGUaIQoIbWFjYXJvb24SCGdlbmVyYXRlEgRyZWFkEgV3cml0ZRoWCgdtZXNzYWdlEgRyZWFkEgV3cml0ZRoXCghvZmZjaGFpbhIEcmVhZBIFd3JpdGUaFgoHb25jaGFpbhIEcmVhZBIFd3JpdGUaFAoFcGVlcnMSBHJlYWQSBXdyaXRlGhgKBnNpZ25lchIIZ2VuZXJhdGUSBHJlYWQAAAYgf8fvHjHsWvxJgqYv9iSuVoIhJ4P7r1CAi5bN6WYVdg0=";
+      "AgEDbG5kAvgBAwoQs79pBsGTcTmsBoSsRBcTnRIBMBoWCgdhZGRyZXNzEgRyZWFkEgV3cml0ZRoTCgRpbmZvEgRyZWFkEgV3cml0ZRoXCghpbnZvaWNlcxIEcmVhZBIFd3JpdGUaIQoIbWFjYXJvb24SCGdlbmVyYXRlEgRyZWFkEgV3cml0ZRoWCgdtZXNzYWdlEgRyZWFkEgV3cml0ZRoXCghvZmZjaGFpbhIEcmVhZBIFd3JpdGUaFgoHb25jaGFpbhIEcmVhZBIFd3JpdGUaFAoFcGVlcnMSBHJlYWQSBXdyaXRlGhgKBnNpZ25lchIIZ2VuZXJhdGUSBHJlYWQAAAYgo/gQFwrZNApjB0tt3tMe2DpxQP0mx3WIVhEVg7dyWys=";
     const restApiUrl = `lndconnect://lnd1.regtest.getalby.com?cert=&macaroon=${macaroon}`;
     const lndConnectUrlField = await getByLabelText(
       $document,
@@ -201,7 +226,7 @@ test.describe("Create or connect wallets", () => {
     await findByText($document, "lndconnect REST URL");
 
     const macaroon =
-      "AgEDbG5kAvgBAwoQ/6M0baViThOf9HKqz4sEWhIBMBoWCgdhZGRyZXNzEgRyZWFkEgV3cml0ZRoTCgRpbmZvEgRyZWFkEgV3cml0ZRoXCghpbnZvaWNlcxIEcmVhZBIFd3JpdGUaIQoIbWFjYXJvb24SCGdlbmVyYXRlEgRyZWFkEgV3cml0ZRoWCgdtZXNzYWdlEgRyZWFkEgV3cml0ZRoXCghvZmZjaGFpbhIEcmVhZBIFd3JpdGUaFgoHb25jaGFpbhIEcmVhZBIFd3JpdGUaFAoFcGVlcnMSBHJlYWQSBXdyaXRlGhgKBnNpZ25lchIIZ2VuZXJhdGUSBHJlYWQAAAYgf8fvHjHsWvxJgqYv9iSuVoIhJ4P7r1CAi5bN6WYVdg0=";
+      "AgEDbG5kAvgBAwoQs79pBsGTcTmsBoSsRBcTnRIBMBoWCgdhZGRyZXNzEgRyZWFkEgV3cml0ZRoTCgRpbmZvEgRyZWFkEgV3cml0ZRoXCghpbnZvaWNlcxIEcmVhZBIFd3JpdGUaIQoIbWFjYXJvb24SCGdlbmVyYXRlEgRyZWFkEgV3cml0ZRoWCgdtZXNzYWdlEgRyZWFkEgV3cml0ZRoXCghvZmZjaGFpbhIEcmVhZBIFd3JpdGUaFgoHb25jaGFpbhIEcmVhZBIFd3JpdGUaFAoFcGVlcnMSBHJlYWQSBXdyaXRlGhgKBnNpZ25lchIIZ2VuZXJhdGUSBHJlYWQAAAYgo/gQFwrZNApjB0tt3tMe2DpxQP0mx3WIVhEVg7dyWys=";
     const restApiUrl = `lndconnect://lnd1.regtest.getalby.com?cert=&macaroon=${macaroon}`;
     const lndConnectUrlField = await getByLabelText(
       $document,
@@ -213,7 +238,8 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to Eclair", async () => {
+  // under maintenance for now
+  test.skip("successfully connects to Eclair", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     const connectButton = await getByText($document, "Eclair");
@@ -234,7 +260,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to BTCPay", async () => {
+  test.skip("successfully connects to BTCPay", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     const connectButton = await getByText($document, "BTCPay Server");
@@ -245,7 +271,7 @@ test.describe("Create or connect wallets", () => {
     const configField = await findByLabelText($document, "Config data");
 
     await configField.type(
-      "config=https://gist.githubusercontent.com/bumi/71885ed90617b3ba2dd485ecfb7829eb/raw/f7e86f6d8b71b33c70b01a650be337408a0c7a11/mock-btcpay-lnd.json"
+      "config=https://gist.githubusercontent.com/bumi/71885ed90617b3ba2dd485ecfb7829eb/raw/26a91185ee273df4eaa75f6ec406001ab4a5d2cf/mock-btcpay-lnd.json"
     );
 
     await page.waitForTimeout(1000);
