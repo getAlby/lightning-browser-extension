@@ -1,13 +1,12 @@
 import BudgetControl from "@components/BudgetControl";
-import ConfirmOrCancel from "@components/ConfirmOrCancel";
-import Container from "@components/Container";
 import PaymentSummary from "@components/PaymentSummary";
-import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import { useState, MouseEvent, useRef, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
+import NewConfirmOrCancel from "~/app/newcomponents/NewConfirmOrCancel";
+import NewPublisherCard from "~/app/newcomponents/NewPublisherCard";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -107,48 +106,52 @@ function Keysend(props: Props) {
   }
 
   return (
-    <div>
-      <PublisherCard
-        title={origin.name}
-        description={origin.description}
-        image={origin.icon}
-      />
-      <div className="py-4">
-        <Container maxWidth="sm">
-          {!successMessage ? (
-            <>
-              <div className="mb-8">
-                <PaymentSummary
-                  amount={amount}
-                  description={`Send payment to ${destination}`}
-                />
-              </div>
-
-              <BudgetControl
-                fiatAmount={fiatAmount}
-                remember={rememberMe}
-                onRememberChange={(event) => {
-                  setRememberMe(event.target.checked);
-                }}
-                budget={budget}
-                onBudgetChange={(event) => setBudget(event.target.value)}
-              />
-
-              <ConfirmOrCancel
-                disabled={loading}
-                loading={loading}
-                onConfirm={confirm}
-                onCancel={reject}
-              />
-            </>
-          ) : (
-            <SuccessMessage
-              message={successMessage}
-              onClose={() => window.close()}
-            />
-          )}
-        </Container>
+    <div className="overflow-y-auto no-scrollbar h-full">
+      <div className="h-2/5 border-b border-gray-200 dark:border-neutral-500">
+        <NewPublisherCard
+          title={origin.name}
+          description={origin.description}
+          image={origin.icon}
+        />
       </div>
+      {!successMessage ? (
+        <div className="flex flex-col justify-between h-3/5">
+          <div className="pt-4 px-4">
+            <div className="mb-8">
+              <PaymentSummary
+                amount={amount}
+                description={`Send payment to ${destination}`}
+              />
+            </div>
+
+            <BudgetControl
+              fiatAmount={fiatAmount}
+              remember={rememberMe}
+              onRememberChange={(event) => {
+                setRememberMe(event.target.checked);
+              }}
+              budget={budget}
+              onBudgetChange={(event) => setBudget(event.target.value)}
+            />
+          </div>
+
+          <div className="text-center p-2">
+            <NewConfirmOrCancel
+              disabled={loading}
+              loading={loading}
+              onConfirm={confirm}
+              onCancel={reject}
+            />
+          </div>
+        </div>
+      ) : (
+        <div className="m-6">
+          <SuccessMessage
+            message={successMessage}
+            onClose={() => window.close()}
+          />
+        </div>
+      )}
     </div>
   );
 }
