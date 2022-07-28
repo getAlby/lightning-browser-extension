@@ -1,6 +1,5 @@
 import Button from "@components/Button";
 import Container from "@components/Container";
-import PublisherCard from "@components/PublisherCard";
 import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
@@ -10,6 +9,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import NewConfirmOrCancel from "~/app/newcomponents/NewConfirmOrCancel";
+import NewPublisherCard from "~/app/newcomponents/NewPublisherCard";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import lnurl from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
@@ -310,12 +311,14 @@ function LNURLPay(props: Props) {
     }
 
     return (
-      <>
-        <PublisherCard
-          title={origin.name}
-          description={origin.description}
-          image={origin.icon}
-        />
+      <div className="h-full">
+        <div className="h-2/5 border-b border-gray-200 dark:border-neutral-500">
+          <NewPublisherCard
+            title={origin.name}
+            description={origin.description}
+            image={origin.icon}
+          />
+        </div>
         <Container maxWidth="sm">
           <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
             {descriptionList.map(([dt, dd]) => (
@@ -331,7 +334,7 @@ function LNURLPay(props: Props) {
             </button>
           </div>
         </Container>
-      </>
+      </div>
     );
   }
 
@@ -341,11 +344,13 @@ function LNURLPay(props: Props) {
         {!successAction ? (
           <>
             <div className="grow overflow-y-auto no-scrollbar">
-              <PublisherCard
-                title={origin.name}
-                description={origin.description}
-                image={origin.icon}
-              />
+              <div className="h-48 border-b border-gray-200 dark:border-neutral-500">
+                <NewPublisherCard
+                  title={origin.name}
+                  description={origin.description}
+                  image={origin.icon}
+                />
+              </div>
               <Container maxWidth="sm">
                 <div className="my-4">
                   <dl>
@@ -431,34 +436,17 @@ function LNURLPay(props: Props) {
                       />
                     </div>
                   )}
-
-                  <div className="mt-4 text-center">
-                    <p className="mb-2 text-sm text-gray-400">
-                      <em>Only connect with sites you trust.</em>
-                    </p>
-
-                    <a
-                      className="underline text-sm text-gray-600 dark:text-neutral-400"
-                      href="#"
-                      onClick={reject}
-                    >
-                      Cancel
-                    </a>
-                  </div>
                 </div>
               </Container>
             </div>
-            <div className="p-4 border-t border-gray-200 dark:border-white/10">
-              <Container maxWidth="sm">
-                <Button
-                  onClick={confirm}
-                  label="Confirm"
-                  fullWidth
-                  primary
-                  disabled={loadingConfirm || !valueSat}
-                  loading={loadingConfirm}
-                />
-              </Container>
+            <div className="p-2 border-t border-gray-200 dark:border-white/10">
+              <NewConfirmOrCancel
+                label="Confirm"
+                loading={loadingConfirm}
+                disabled={loadingConfirm || !valueSat}
+                onConfirm={confirm}
+                onCancel={reject}
+              />
             </div>
           </>
         ) : (
