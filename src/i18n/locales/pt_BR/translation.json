@@ -50,13 +50,13 @@
                 "pre_connect": {
                     "email_label": "Endereço de E-mail",
                     "login_account": "Registrar ou acessar conta Alby.",
-                    "host_wallet": "Nós hospedamos uma carteira Bitcoin para você!",
+                    "host_wallet": "Nós cuidamos da sua carteira Bitcoin!",
                     "title": "Sua Carteira Bitcoin na Alby",
                     "optional_lightning_note": {
                         "part1": "Ao registrar uma conta Alby, você pode escolher um",
                         "part2": "Endereço Relâmpago",
                         "part4": "saiba mais",
-                        "part3": ". É o modo mais simples para você receber Bitcoins na Rede Relâmpago."
+                        "part3": ". É o jeito mais simples para você receber Bitcoins na Rede Relâmpago."
                     },
                     "optional_lightning_address_suffix": "@getalby.com",
                     "errors": {
@@ -67,14 +67,14 @@
                 "description": "Registrar ou acessar conta Alby",
                 "post_connect": {
                     "lightning_address": "Seu endereço relâmpago:",
-                    "wallet_mobile_description": "Importe a carteira no aplicativo Zeus ou BlueWallet usando o Código QR.",
-                    "wallet_mobile_title": "Deseja usar sua carteira no dispositivo móvel?",
+                    "wallet_mobile_description": "Importe a carteira no aplicativo Zeus ou na BlueWallet usando o Código QR.",
+                    "wallet_mobile_title": "Deseja usar esta carteira no seu dispositivo móvel?",
                     "account_ready": "Sua carteira Alby está pronta.",
                     "title": "🎉 Sucesso!"
                 }
             },
             "title": "Você possui uma carteira bitcoin?",
-            "description": "Você precisa primeiro conectar-se a uma conta ou servidor para poder interagir com seus sites favoritos que aceitam pagamentos bitcoin!",
+            "description": "Você precisa primeiro conectar-se a uma conta ou servidor para poder interagir com seus sites favoritos que aceitam pagamentos em bitcoin!",
             "lnd": {
                 "title": "LND",
                 "description": "Conectar servidor LND",
@@ -208,7 +208,7 @@
             },
             "exchange": {
                 "title": "Serviço provedor de cotações",
-                "subtitle": "Escolha o serviço que fornecerá as cotações do Bitcoin mostrado na Alby"
+                "subtitle": "Escolha o serviço que fornecerá as cotações do Bitcoin mostradas na Alby"
             },
             "currency": {
                 "subtitle": "Mostrar valores na Alby também nesta moeda",
