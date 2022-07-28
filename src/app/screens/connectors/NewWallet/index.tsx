@@ -6,7 +6,6 @@ import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
@@ -146,20 +145,6 @@ export default function NewWallet() {
                 {t("post_connect.lightning_address")} {lndHubData.lnAddress}
               </p>
             )}
-          </div>
-          <div className="mt-6 flex justify-center space-x-3 items-center dark:text-white">
-            <div className="flex-1">
-              <strong>{t("post_connect.wallet_mobile_title")}</strong>
-              <br />
-              {t("post_connect.wallet_mobile_description")}
-            </div>
-            <div className="float-right">
-              <QRCode
-                value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
-                level="M"
-                size={130}
-              />
-            </div>
           </div>
         </>
       ) : (
