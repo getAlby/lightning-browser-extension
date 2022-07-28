@@ -66,13 +66,6 @@
           "errors": {
             "create_wallet_error": "Failed to create a new wallet"
           }
-        },
-        "post_connect": {
-          "title": "🎉 Success!",
-          "account_ready": "Your Alby account is ready.",
-          "lightning_address": "Your lightning address:",
-          "wallet_mobile_title": "Want to use your wallet on your mobile?",
-          "wallet_mobile_description": "Import the wallet into Zeus or BlueWallet mobile app using the QR Code."
         }
       },
       "lnd": {
