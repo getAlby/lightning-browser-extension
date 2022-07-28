@@ -1,9 +1,8 @@
-import ConfirmOrCancel from "@components/ConfirmOrCancel";
-import Container from "@components/Container";
-import PublisherCard from "@components/PublisherCard";
 import SatButtons from "@components/SatButtons";
 import TextField from "@components/form/TextField";
 import React, { useState } from "react";
+import NewConfirmOrCancel from "~/app/newcomponents/NewConfirmOrCancel";
+import NewPublisherCard from "~/app/newcomponents/NewPublisherCard";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -83,64 +82,64 @@ function MakeInvoice({
   }
 
   return (
-    <div>
-      <PublisherCard title={origin.name} image={origin.icon} />
-      <div className="py-4">
-        <Container maxWidth="sm">
-          <div className="mb-8">
-            <div className="mb-4">
-              <p className="font-semibold text-gray-500 mb-4">
-                {origin.host} requests an invoice:
-              </p>
-              <div className="mt-4">
-                {amountEditable && (
-                  <>
-                    <TextField
-                      id="amount"
-                      label="Amount"
-                      type="number"
-                      min={invoiceAttributes.minimumAmount}
-                      max={invoiceAttributes.maximumAmount}
-                      value={value}
-                      onChange={(e) => handleValueChange(e.target.value)}
-                    />
-                    <SatButtons onClick={handleValueChange} />
-                  </>
-                )}
-                {!amountEditable && (
-                  <dl className="dark:bg-surface-02dp pt-4 overflow-hidden">
-                    <Dt>Amount</Dt>
-                    <Dd>{invoiceAttributes.amount}</Dd>
-                  </dl>
-                )}
-                {error && <p className="mt-1 text-red-500">{error}</p>}
+    <div className="overflow-y-auto no-scrollbar h-full">
+      <div className="h-2/5 border-b border-gray-200 dark:border-neutral-500">
+        <NewPublisherCard title={origin.name} image={origin.icon} />
+      </div>
+      <div className="flex flex-col justify-between h-3/5">
+        <div className="pt-4 px-4">
+          <p className="font-semibold text-gray-500">
+            {origin.host} requests an invoice:
+          </p>
+          <div className="mt-4">
+            {amountEditable && (
+              <div className="mb-4">
+                <TextField
+                  id="amount"
+                  label="Amount"
+                  type="number"
+                  min={invoiceAttributes.minimumAmount}
+                  max={invoiceAttributes.maximumAmount}
+                  value={value}
+                  onChange={(e) => handleValueChange(e.target.value)}
+                />
+                <SatButtons onClick={handleValueChange} />
               </div>
-              <div className="mt-4">
-                {memoEditable && (
-                  <TextField
-                    id="memo"
-                    label="Memo"
-                    value={memo}
-                    onChange={handleMemoChange}
-                  />
-                )}
-                {!memoEditable && (
-                  <dl className="dark:bg-surface-02dp overflow-hidden">
-                    <Dt>Memo</Dt>
-                    <Dd>{invoiceAttributes.memo}</Dd>
-                  </dl>
-                )}
-              </div>
-            </div>
+            )}
+            {!amountEditable && (
+              <dl className="overflow-hidden">
+                <Dt>Amount</Dt>
+                <Dd>{invoiceAttributes.amount}</Dd>
+              </dl>
+            )}
+            {error && <p className="mt-1 text-red-500">{error}</p>}
           </div>
+          <div className="mb-4">
+            {memoEditable && (
+              <TextField
+                id="memo"
+                label="Memo"
+                value={memo}
+                onChange={handleMemoChange}
+              />
+            )}
+            {!memoEditable && (
+              <dl className="dark:bg-surface-02dp overflow-hidden">
+                <Dt>Memo</Dt>
+                <Dd>{invoiceAttributes.memo}</Dd>
+              </dl>
+            )}
+          </div>
+        </div>
 
-          <ConfirmOrCancel
+        <div className="text-center p-2">
+          <NewConfirmOrCancel
             disabled={!value || loading || Boolean(error)}
             loading={loading}
             onConfirm={confirm}
             onCancel={reject}
           />
-        </Container>
+        </div>
       </div>
     </div>
   );
