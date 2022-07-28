@@ -66,17 +66,6 @@ class Lnd implements Connector {
   }
 
   connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse | Error> {
-    // return this.request<any>(
-    //   "DELETE",
-    //   "/v1/peers/020cd30d13d5011a08830d6ad2e54b4e220c7b20457c094701b09346052343f519"
-    // ).then((data) => {
-    //   console.log("DATA: ", data);
-    // });
-
-    // host: "127.0.0.1:9738",
-    //     pubkey:
-    //       "020cd30d13d5011a08830d6ad2e54b4e220c7b20457c094701b09346052343f519",
-
     const { pubkey, host } = args;
 
     return this.request<Record<string, never>>("POST", "/v1/peers", {
@@ -87,8 +76,6 @@ class Lnd implements Connector {
       perm: true,
     })
       .then((data) => {
-        console.log("DATA: ", data);
-
         return {
           data: true,
         };

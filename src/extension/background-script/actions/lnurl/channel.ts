@@ -6,20 +6,41 @@ async function channelRequestWithPrompt(
   message: Message,
   lnurlDetails: LNURLDetails
 ) {
-  try {
-    // const connector = await state.getState().getConnector();
-    //   {
-    //     "uri": string, // Remote node address of form node_key@ip_address:port_number
-    //     "callback": string, // a second-level URL which would initiate an OpenChannel message from target LN node
-    //     "k1": string, // random or non-random string to identify the user's LN WALLET when using the callback URL
-    //     "tag": "channelRequest" // type of LNURL
-    // }
-    //LNURLDetails
-    // split uri
-    // hand host/pubkey into connector
-    // if no error then callback-url with "k1"-string and our node id (get via getinfo)
-    // connector.connectPeer();
+  console.log("HALLO", message);
 
+  //   {
+  //     "action": "webln/lnurl",
+  //     "args": {
+  //         "lnurlEncoded": "lnurl1dp68gurn8ghj7emfwd6zuemfw3582cn4wdjhycm0de6x2mn59e3k7mf0vf6k66f0v5unyetpxpnxzcfe8y6nvdehxv6rgwtzv3nrqdfnxenrxcfsx5cj7unpwuhnjet9vf3xvep58ymrvc35x5mnzwrxxcmnsvpcv5uxydeevf3nzefsxy6kxde3x5cj7mrww4excttrdpskumn9dshx5um0dcu3u3uu"
+  //     },
+  //     "application": "LBE",
+  //     "public": true,
+  //     "prompt": true,
+  //     "origin": {
+  //         "location": "https://getalby.com/",
+  //         "domain": "https://getalby.com",
+  //         "host": "getalby.com",
+  //         "pathname": "/",
+  //         "name": "Alby",
+  //         "description": "Alby brings Bitcoin to the web with in-browser payments and identity.",
+  //         "icon": "https://getalby.com/website/_assets/alby_icon_head_icon-ICVYH45J.png",
+  //         "metaData": {
+  //             "title": "Alby — Lightning buzz for your Browser!",
+  //             "description": "Alby brings Bitcoin to the web with in-browser payments and identity.",
+  //             "type": "website",
+  //             "url": "https://getalby.com/",
+  //             "provider": "Alby",
+  //             "author": "@getalby",
+  //             "twitter": "@getalby",
+  //             "image": "https://getalby.com/website/_assets/og_image-2VZ2D3IA.png",
+  //             "icon": "https://getalby.com/website/_assets/alby_icon_head_icon-ICVYH45J.png",
+  //             "monetization": "lnurlp:hello@getalby.com"
+  //         },
+  //         "external": true
+  //     }
+  // }
+
+  try {
     const response = await utils.openPrompt({
       origin: message.origin,
       action: "lnurlOpenChannel",
