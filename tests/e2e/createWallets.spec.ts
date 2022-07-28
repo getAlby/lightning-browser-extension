@@ -86,6 +86,36 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
+  test("opens publishers screen", async () => {
+    const { page, browser, extensionId } = await loadExtension();
+    await Promise.all([
+      page.waitForNavigation(), // The promise resolves after navigation has finished
+    ]);
+
+    const optionsPage = `chrome-extension://${extensionId}/options.html`;
+    await page.goto(optionsPage);
+
+    await Promise.all([
+      page.waitForNavigation(), // The promise resolves after navigation has finished
+    ]);
+
+    const $optionsdocument = await getDocument(page);
+
+    const passwordField = await getByPlaceholderText(
+      $optionsdocument,
+      "Password"
+    );
+    await passwordField.type(user.password);
+
+    const unlockButton = await getByText($optionsdocument, "Unlock");
+    unlockButton.click();
+
+    await waitFor(() => getByText($optionsdocument, "Your ⚡️ Websites"));
+    await waitFor(() => getByText($optionsdocument, "Other ⚡️ Websites"));
+
+    await browser.close();
+  });
+
   test("successfully connects to LNBits wallet", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
@@ -257,36 +287,6 @@ test.describe("Create or connect wallets", () => {
 
     await page.waitForTimeout(1000);
     await commonCreateWalletSuccessCheck({ page, $document });
-    await browser.close();
-  });
-
-  test("opens publishers screen", async () => {
-    const { page, browser, extensionId } = await loadExtension();
-    await Promise.all([
-      page.waitForNavigation(), // The promise resolves after navigation has finished
-    ]);
-
-    const optionsPage = `chrome-extension://${extensionId}/options.html`;
-    await page.goto(optionsPage);
-
-    await Promise.all([
-      page.waitForNavigation(), // The promise resolves after navigation has finished
-    ]);
-
-    const $optionsdocument = await getDocument(page);
-
-    const passwordField = await getByPlaceholderText(
-      $optionsdocument,
-      "Password"
-    );
-    await passwordField.type(user.password);
-
-    const unlockButton = await getByText($optionsdocument, "Unlock");
-    unlockButton.click();
-
-    await waitFor(() => getByText($optionsdocument, "Your ⚡️ Websites"));
-    await waitFor(() => getByText($optionsdocument, "Other ⚡️ Websites"));
-
     await browser.close();
   });
 });
