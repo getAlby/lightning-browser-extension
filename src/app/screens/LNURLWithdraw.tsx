@@ -1,10 +1,9 @@
-import ConfirmOrCancel from "@components/ConfirmOrCancel";
-import Container from "@components/Container";
-import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import Input from "@components/form/Input";
 import axios from "axios";
 import { useState, MouseEvent } from "react";
+import NewConfirmOrCancel from "~/app/newcomponents/NewConfirmOrCancel";
+import NewPublisherCard from "~/app/newcomponents/NewPublisherCard";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -81,35 +80,39 @@ function LNURLWithdraw(props: Props) {
   }
 
   return (
-    <div>
-      <h1 className="py-2 font-bold text-lg text-center">Withdraw</h1>
-      <PublisherCard title={origin.name} image={origin.icon} />
-      <div className="py-4">
-        <Container maxWidth="sm">
-          {!successMessage ? (
-            <>
-              <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-                <dt className="text-sm font-semibold text-gray-500">
-                  Amount (Satoshi)
-                </dt>
-                <dd className="text-sm mb-4 dark:text-white">
-                  {renderAmount()}
-                </dd>
-              </dl>
-              <ConfirmOrCancel
+    <div className="flex flex-col h-full">
+      <div className="text-center text-xl font-semibold dark:text-white py-2 border-b border-gray-200 dark:border-neutral-500">
+        Withdraw
+      </div>
+      <div className="h-full">
+        <div className="h-2/5 border-b border-gray-200 dark:border-neutral-500">
+          <NewPublisherCard title={origin.name} image={origin.icon} />
+        </div>
+        {!successMessage ? (
+          <div className="flex flex-col justify-between h-3/5">
+            <dl className="m-6 shadow bg-white dark:bg-surface-02dp p-4 rounded-lg overflow-hidden">
+              <dt className="text-sm font-semibold text-gray-500">
+                Amount (Satoshi)
+              </dt>
+              <dd className="text-sm mb-4 dark:text-white">{renderAmount()}</dd>
+            </dl>
+            <div className="text-center p-2">
+              <NewConfirmOrCancel
                 disabled={loadingConfirm || !valueSat}
                 loading={loadingConfirm}
                 onConfirm={confirm}
                 onCancel={reject}
               />
-            </>
-          ) : (
+            </div>
+          </div>
+        ) : (
+          <div className="m-6">
             <SuccessMessage
               message={successMessage}
               onClose={() => window.close()}
             />
-          )}
-        </Container>
+          </div>
+        )}
       </div>
     </div>
   );
