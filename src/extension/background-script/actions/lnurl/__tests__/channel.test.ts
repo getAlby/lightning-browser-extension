@@ -1,8 +1,9 @@
 import type { MessageLNURLChannel, LNURLDetails } from "~/types";
 
 import channel from "../channel";
+import type { LNURLOpenChannelResponse } from "../channel";
 
-const mockResponse = {
+const mockResponse: LNURLOpenChannelResponse = {
   application: "LBE",
   response: true,
   data: "ok\n",
