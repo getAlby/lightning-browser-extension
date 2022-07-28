@@ -1,5 +1,6 @@
 import checkPayment from "./checkPayment";
 import connectPeer from "./connectPeer";
+import getBalance from "./getBalance";
 import getInfo from "./getInfo";
 import invoices from "./invoices";
 import keysend from "./keysend";
@@ -11,6 +12,7 @@ import verifyMessage from "./verifyMessage";
 export {
   checkPayment,
   connectPeer,
+  getBalance,
   getInfo,
   invoices,
   keysend,
