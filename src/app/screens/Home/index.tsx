@@ -9,7 +9,6 @@ import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
 import Progressbar from "@components/Progressbar";
-import PublisherCard from "@components/PublisherCard";
 import TransactionsTable from "@components/TransactionsTable";
 import { Tab } from "@headlessui/react";
 import dayjs from "dayjs";
@@ -20,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import browser from "webextension-polyfill";
 import { useSettings } from "~/app/context/SettingsContext";
+import NewPublisherCard from "~/app/newcomponents/NewPublisherCard";
 import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
@@ -224,53 +224,60 @@ function Home() {
       return;
     }
     return (
-      <PublisherCard title={title} description={description} image={image}>
-        {lnData.length > 0 && (
-          <Button
-            onClick={async () => {
-              try {
-                setLoadingSendSats(true);
-                const origin = {
-                  external: true,
-                  name: lnData[0].name,
-                  host: lnData[0].host,
-                  description: lnData[0].description,
-                  icon: lnData[0].icon,
-                };
-                if (lnData[0].method === "lnurl") {
-                  navigate(
-                    `/lnurlPay?lnurl=${
-                      lnData[0].address
-                    }&origin=${encodeURIComponent(JSON.stringify(origin))}`
-                  );
-                } else if (lnData[0].method === "keysend") {
-                  const params = new URLSearchParams({
-                    destination: lnData[0].address,
-                    origin: encodeURIComponent(JSON.stringify(origin)),
-                  });
-                  if (lnData[0].customKey && lnData[0].customValue) {
-                    const customRecords = {
-                      [lnData[0].customKey]: lnData[0].customValue,
-                    };
-                    params.set(
-                      "customRecords",
-                      JSON.stringify(customRecords) // encodeURIComponent() ??
+      <div
+        className={
+          "border-b border-gray-200 dark:border-neutral-500 " +
+          (lnData.length > 0 ? "h-1/2" : "h-1/3")
+        }
+      >
+        <NewPublisherCard title={title} description={description} image={image}>
+          {lnData.length > 0 && (
+            <Button
+              onClick={async () => {
+                try {
+                  setLoadingSendSats(true);
+                  const origin = {
+                    external: true,
+                    name: lnData[0].name,
+                    host: lnData[0].host,
+                    description: lnData[0].description,
+                    icon: lnData[0].icon,
+                  };
+                  if (lnData[0].method === "lnurl") {
+                    navigate(
+                      `/lnurlPay?lnurl=${
+                        lnData[0].address
+                      }&origin=${encodeURIComponent(JSON.stringify(origin))}`
                     );
+                  } else if (lnData[0].method === "keysend") {
+                    const params = new URLSearchParams({
+                      destination: lnData[0].address,
+                      origin: encodeURIComponent(JSON.stringify(origin)),
+                    });
+                    if (lnData[0].customKey && lnData[0].customValue) {
+                      const customRecords = {
+                        [lnData[0].customKey]: lnData[0].customValue,
+                      };
+                      params.set(
+                        "customRecords",
+                        JSON.stringify(customRecords) // encodeURIComponent() ??
+                      );
+                    }
+                    navigate(`/keysend?${params.toString()}`);
                   }
-                  navigate(`/keysend?${params.toString()}`);
+                } catch (e) {
+                  if (e instanceof Error) toast.error(e.message);
+                } finally {
+                  setLoadingSendSats(false);
                 }
-              } catch (e) {
-                if (e instanceof Error) toast.error(e.message);
-              } finally {
-                setLoadingSendSats(false);
-              }
-            }}
-            label={t("send_satoshis")}
-            primary
-            loading={loadingSendSats}
-          />
-        )}
-      </PublisherCard>
+              }}
+              label={t("send_satoshis")}
+              primary
+              loading={loadingSendSats}
+            />
+          )}
+        </NewPublisherCard>
+      </div>
     );
   }
 
@@ -436,7 +443,7 @@ function Home() {
   }
 
   return (
-    <div className="overflow-y-auto no-scrollbar">
+    <div className="overflow-y-auto no-scrollbar h-full">
       {allowance && (
         <Header
           title={allowance.host}
