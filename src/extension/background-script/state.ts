@@ -4,6 +4,7 @@ import browser from "webextension-polyfill";
 import createState from "zustand";
 import { CURRENCIES } from "~/common/constants";
 import { decryptData } from "~/common/lib/crypto";
+import { Migration } from "~/extension/background-script/migrations";
 import i18n from "~/i18n/i18nConfig";
 import type { Account, Accounts, SettingsStorage } from "~/types";
 
@@ -13,6 +14,7 @@ import type Connector from "./connectors/connector.interface";
 interface State {
   account: Account | null;
   accounts: Accounts;
+  migrations: Migration[] | null;
   connector: Connector | null;
   currentAccountId: string | null;
   getAccount: () => Account | null;
@@ -23,17 +25,20 @@ interface State {
   password: string | null;
   saveToStorage: () => Promise<void>;
   settings: SettingsStorage;
+  reset: () => Promise<void>;
 }
 
 interface BrowserStorage {
   settings: SettingsStorage;
   accounts: Accounts;
   currentAccountId: string | null;
+  migrations: Migration[] | null;
 }
 
 export const DEFAULT_SETTINGS: SettingsStorage = {
   websiteEnhancements: true,
   legacyLnurlAuth: false,
+  isUsingLegacyLnurlAuthKey: false,
   userName: "",
   userEmail: "",
   locale: i18n.resolvedLanguage,
@@ -46,9 +51,10 @@ export const DEFAULT_SETTINGS: SettingsStorage = {
 // these keys get synced from the state to the browser storage
 // the values are the default values
 const browserStorageDefaults: BrowserStorage = {
-  settings: DEFAULT_SETTINGS,
+  settings: { ...DEFAULT_SETTINGS }, // duplicate DEFALT_SETTINGS
   accounts: {},
   currentAccountId: null,
+  migrations: [],
 };
 
 const browserStorageKeys = Object.keys(browserStorageDefaults) as Array<
@@ -59,6 +65,7 @@ const state = createState<State>((set, get) => ({
   connector: null,
   account: null,
   settings: DEFAULT_SETTINGS,
+  migrations: [],
   accounts: {},
   currentAccountId: null,
   password: null,
@@ -90,7 +97,7 @@ const state = createState<State>((set, get) => ({
   lock: async () => {
     const connector = get().connector;
     if (connector) {
-      connector.unload();
+      await connector.unload();
     }
     set({ password: null, connector: null, account: null });
   },
@@ -103,6 +110,10 @@ const state = createState<State>((set, get) => ({
       const data = merge(browserStorageDefaults, result as BrowserStorage);
       set(data);
     });
+  },
+  reset: async () => {
+    set({ ...browserStorageDefaults });
+    get().saveToStorage();
   },
   saveToStorage: () => {
     const current = get();

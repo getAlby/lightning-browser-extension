@@ -139,9 +139,18 @@ async function auth(lnurlDetails: LNURLDetails) {
   if (!lnurlDetails.url.host || !hashingKey) {
     throw new Error("Invalid input");
   }
-  const linkingKeyPriv = hmacSHA256(lnurlDetails.url.host, hashingKey).toString(
-    Hex
-  );
+  let linkingKeyPriv;
+  const { settings } = state.getState();
+  if (settings.isUsingLegacyLnurlAuthKey) {
+    linkingKeyPriv = hmacSHA256(lnurlDetails.url.host, hashingKey).toString(
+      Hex
+    );
+  } else {
+    linkingKeyPriv = hmacSHA256(
+      lnurlDetails.url.host,
+      Hex.parse(hashingKey)
+    ).toString(Hex);
+  }
   // make sure we got a hashingKey and a linkingkey (just to be sure for whatever reason)
   if (!hashingKey || !linkingKeyPriv) {
     throw new Error("Invalid hashingKey/linkingKey");

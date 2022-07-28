@@ -394,6 +394,7 @@ export interface Allowance extends Omit<DbAllowance, "id"> {
 export interface SettingsStorage {
   websiteEnhancements: boolean;
   legacyLnurlAuth: boolean;
+  isUsingLegacyLnurlAuthKey: boolean;
   userName: string;
   userEmail: string;
   locale: string;

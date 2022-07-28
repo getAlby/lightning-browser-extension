@@ -10,7 +10,7 @@ import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
 import type { FormEvent } from "react";
 import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
@@ -37,6 +37,7 @@ function Settings() {
   const [settings, setSettings] = useState<SettingsStorage>({
     websiteEnhancements: false,
     legacyLnurlAuth: false,
+    isUsingLegacyLnurlAuthKey: false,
     userName: "",
     userEmail: "",
     locale: "",
@@ -91,22 +92,6 @@ function Settings() {
               onChange={() => {
                 saveSetting({
                   websiteEnhancements: !settings.websiteEnhancements,
-                });
-              }}
-            />
-          )}
-        </Setting>
-
-        <Setting
-          title={t("legacy_lnurl_auth.title")}
-          subtitle={t("legacy_lnurl_auth.subtitle")}
-        >
-          {!loading && (
-            <Toggle
-              checked={settings.legacyLnurlAuth}
-              onChange={() => {
-                saveSetting({
-                  legacyLnurlAuth: !settings.legacyLnurlAuth,
                 });
               }}
             />
@@ -315,6 +300,57 @@ function Settings() {
             </div>
           </form>
         </Modal>
+      </div>
+
+      <h2 className="mt-12 text-2xl font-bold dark:text-white">
+        {t("lnurl_auth.headline")}
+      </h2>
+
+      <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
+        <a
+          href="https://lightninglogin.live/learn"
+          target="_blank"
+          rel="noreferrer"
+          className="underline"
+        >
+          {t("lnurl_auth.headline")}
+        </a>{" "}
+        <Trans t={t}>lnurl_auth.hint</Trans>
+      </p>
+
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+        <Setting
+          title={t("lnurl_auth.legacy_lnurl_auth_202207.title")}
+          subtitle={t("lnurl_auth.legacy_lnurl_auth_202207.subtitle")}
+        >
+          {!loading && (
+            <Toggle
+              checked={settings.isUsingLegacyLnurlAuthKey}
+              onChange={() => {
+                saveSetting({
+                  isUsingLegacyLnurlAuthKey:
+                    !settings.isUsingLegacyLnurlAuthKey,
+                });
+              }}
+            />
+          )}
+        </Setting>
+
+        <Setting
+          title={t("lnurl_auth.legacy_lnurl_auth.title")}
+          subtitle={t("lnurl_auth.legacy_lnurl_auth.subtitle")}
+        >
+          {!loading && (
+            <Toggle
+              checked={settings.legacyLnurlAuth}
+              onChange={() => {
+                saveSetting({
+                  legacyLnurlAuth: !settings.legacyLnurlAuth,
+                });
+              }}
+            />
+          )}
+        </Setting>
       </div>
     </Container>
   );
