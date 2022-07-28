@@ -1,5 +1,5 @@
 import lnurlLib from "~/common/lib/lnurl";
-import type { Message } from "~/types";
+import type { Message, MessageLNURLChannel } from "~/types";
 
 import authWithPrompt from "./auth";
 import channelRequestWithPrompt from "./channel";
@@ -10,7 +10,7 @@ import withdrawWithPrompt from "./withdraw";
   Main entry point for LNURL calls
   returns a messagable response: an object with either a `data` or with an `error`
 */
-async function lnurl(message: Message) {
+async function lnurl(message: Message | MessageLNURLChannel) {
   if (typeof message.args.lnurlEncoded !== "string") return;
   let lnurlDetails;
   try {
@@ -21,7 +21,11 @@ async function lnurl(message: Message) {
 
   switch (lnurlDetails.tag) {
     case "channelRequest":
-      return channelRequestWithPrompt(message, lnurlDetails);
+      if ("public" in message) {
+        return channelRequestWithPrompt(message, lnurlDetails);
+      } else {
+        return;
+      }
     case "login":
       return authWithPrompt(message, lnurlDetails);
     case "payRequest":

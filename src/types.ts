@@ -210,6 +210,17 @@ export interface MessageAllowanceGet extends MessageDefault {
   action: "getAllowance";
 }
 
+export interface MessageLNURLChannel extends MessageDefault {
+  args: { lnurlEncoded: string };
+  public: boolean;
+  action: "webln/lnurl";
+}
+
+export interface MessageConnectPeer extends MessageDefault {
+  args: { pubkey: string; host: string };
+  action: "connectPeer";
+}
+
 export interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node
