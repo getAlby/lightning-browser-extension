@@ -271,7 +271,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to BTCPay", async () => {
+  test.skip("successfully connects to BTCPay", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     const connectButton = await getByText($document, "BTCPay Server");
