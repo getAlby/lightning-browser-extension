@@ -129,7 +129,9 @@ function Home() {
     }));
 
     for (const invoice of invoices) {
-      const totalAmountFiat = await getFiatValue(invoice.totalAmount);
+      const totalAmountFiat = settings.showFiat
+        ? await getFiatValue(invoice.totalAmount)
+        : "";
       invoice.totalAmountFiat = totalAmountFiat;
     }
 
