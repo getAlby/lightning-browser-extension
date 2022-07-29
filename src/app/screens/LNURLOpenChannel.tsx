@@ -4,21 +4,22 @@ import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import axios from "axios";
 import { useState, MouseEvent } from "react";
+import { toast } from "react-toastify";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import getOriginData from "~/extension/content-script/originData";
-import type { LNURLChannelServiceResponse } from "~/types";
+import type { LNURLOpenChannelServiceResponse } from "~/types";
 
 type Props = {
-  details: LNURLChannelServiceResponse;
+  details: LNURLOpenChannelServiceResponse;
   origin?: {
     name: string;
     icon: string;
   };
 };
 
-function LNURLChannel(props: Props) {
+function LNURLOpenChannel(props: Props) {
   const [origin] = useState(props.origin || getOriginData());
   const { uri } = props.details;
   const [pubkey, host] = uri.split("@");
@@ -46,7 +47,10 @@ function LNURLChannel(props: Props) {
         },
       });
 
-      // TODO: check error
+      if (axios.isAxiosError(callbackResponse)) {
+        toast.error(`Failed to call callback: ${callbackResponse.message}`);
+        throw new Error(`Failed to call callback: ${callbackResponse.message}`);
+      }
 
       setSuccessMessage(
         `Channel request sent successfully. ${props.details.k1} ${nodeId}`
@@ -55,7 +59,7 @@ function LNURLChannel(props: Props) {
       // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the response. This closes the window which means the user will NOT see the above successAction.
       // We assume this is OK when it is called through webln.
       if (props.details && props.origin) {
-        msg.reply(callbackResponse.data);
+        msg.reply(callbackResponse?.data);
       }
     } catch (e) {
       console.error(e);
@@ -112,4 +116,4 @@ function LNURLChannel(props: Props) {
   );
 }
 
-export default LNURLChannel;
+export default LNURLOpenChannel;

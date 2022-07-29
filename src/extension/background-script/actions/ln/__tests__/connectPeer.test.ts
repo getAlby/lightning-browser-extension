@@ -5,9 +5,11 @@ import connectPeer from "../connectPeer";
 
 jest.mock("~/extension/background-script/state");
 
+const connectPeerMock = jest.fn().mockResolvedValue({ data: true });
+
 const mockState = {
   getConnector: () => ({
-    connectPeer: () => Promise.resolve({ data: true }),
+    connectPeer: connectPeerMock,
   }),
 };
 
@@ -28,6 +30,13 @@ const message: MessageConnectPeer = {
 describe("open connectPeer", () => {
   test("types", async () => {
     state.getState = jest.fn().mockReturnValue(mockState);
-    expect(await connectPeer(message)).toStrictEqual({ data: true });
+
+    await connectPeer(message);
+
+    expect(connectPeerMock).toHaveBeenCalledWith({
+      host: "34.68.41.206:9735",
+      pubkey:
+        "03037dc08e9ac63b82581f79b662a4d0ceca8a8ca162b1af3551595b8f2d97b70a",
+    });
   });
 });

@@ -210,7 +210,7 @@ export interface MessageAllowanceGet extends MessageDefault {
   action: "getAllowance";
 }
 
-export interface MessageLNURLChannel extends MessageDefault {
+export interface MessageLNURLOpenChannel extends MessageDefault {
   args: { lnurlEncoded: string };
   public: boolean;
   action: "webln/lnurl";
@@ -221,7 +221,7 @@ export interface MessageConnectPeer extends MessageDefault {
   action: "connectPeer";
 }
 
-export interface LNURLChannelServiceResponse {
+export interface LNURLOpenChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node
   k1: string; // random or non-random string to identify the user's LN WALLET when using the callback URL
@@ -271,7 +271,7 @@ export interface LNURLOpenChannelServiceResponse {
 }
 
 export type LNURLDetails = (
-  | LNURLChannelServiceResponse
+  | LNURLOpenChannelServiceResponse
   | LNURLPayServiceResponse
   | LNURLAuthServiceResponse
   | LNURLWithdrawServiceResponse

@@ -1,5 +1,5 @@
 import utils from "~/common/lib/utils";
-import type { MessageLNURLChannel, LNURLDetails } from "~/types";
+import type { MessageLNURLOpenChannel, LNURLDetails } from "~/types";
 
 // relates to: src/extension/content-script/index.js
 export type LNURLOpenChannelResponse = {
@@ -12,7 +12,7 @@ export type LNURLOpenChannelResponse = {
 };
 
 async function channelRequestWithPrompt(
-  message: MessageLNURLChannel,
+  message: MessageLNURLOpenChannel,
   lnurlDetails: LNURLDetails
 ) {
   try {
