@@ -176,11 +176,16 @@ const utils = {
   getBoostagramFromInvoiceCustomRecords: (
     custom_records: Invoice["custom_records"] | undefined
   ) => {
-    const hasBoostagram = custom_records && 7629169 in custom_records;
-    const boostagramDecoded = hasBoostagram
-      ? atob(custom_records[7629169])
-      : undefined;
-    return boostagramDecoded ? JSON.parse(boostagramDecoded) : undefined;
+    try {
+      const hasBoostagram = custom_records && 7629169 in custom_records;
+      const boostagramDecoded = hasBoostagram
+        ? atob(custom_records[7629169])
+        : undefined;
+      return boostagramDecoded ? JSON.parse(boostagramDecoded) : undefined;
+    } catch (e) {
+      console.error(e);
+      return;
+    }
   },
 };
 
