@@ -49,7 +49,11 @@ const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
   const continueButton = await findByText($document, "Continue");
   continueButton.click();
 
-  await page.waitForResponse(() => true);
+  await Promise.all([
+    page.waitForResponse(() => true),
+    page.waitForNavigation(), // The promise resolves after navigation has finished
+  ]);
+
   await findByText($document, "Success!");
 };
 
