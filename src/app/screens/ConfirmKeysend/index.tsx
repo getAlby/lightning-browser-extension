@@ -1,12 +1,12 @@
 import BudgetControl from "@components/BudgetControl";
 import PaymentSummary from "@components/PaymentSummary";
 import SuccessMessage from "@components/SuccessMessage";
+import ConfirmOrCancel from "@components/new/ConfirmOrCancel";
+import PublisherCard from "@components/new/PublisherCard";
 import { useState, MouseEvent, useRef, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
-import NewConfirmOrCancel from "~/app/newcomponents/NewConfirmOrCancel";
-import NewPublisherCard from "~/app/newcomponents/NewPublisherCard";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -108,7 +108,7 @@ function Keysend(props: Props) {
   return (
     <div className="overflow-y-auto no-scrollbar h-full">
       <div className="h-2/5 border-b border-gray-200 dark:border-neutral-500">
-        <NewPublisherCard
+        <PublisherCard
           title={origin.name}
           description={origin.description}
           image={origin.icon}
@@ -136,7 +136,7 @@ function Keysend(props: Props) {
           </div>
 
           <div className="text-center p-2">
-            <NewConfirmOrCancel
+            <ConfirmOrCancel
               disabled={loading}
               loading={loading}
               onConfirm={confirm}

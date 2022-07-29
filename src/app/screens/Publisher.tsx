@@ -2,12 +2,12 @@ import AllowanceMenu from "@components/AllowanceMenu";
 import Container from "@components/Container";
 import Progressbar from "@components/Progressbar";
 import TransactionsTable from "@components/TransactionsTable";
+import PublisherCard from "@components/new/PublisherCard";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSettings } from "~/app/context/SettingsContext";
-import NewPublisherCard from "~/app/newcomponents/NewPublisherCard";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
 import type { Allowance, Transaction } from "~/types";
@@ -100,7 +100,7 @@ function Publisher() {
   return (
     <div>
       <div className="h-48 border-b border-gray-200 dark:border-neutral-500">
-        <NewPublisherCard
+        <PublisherCard
           title={allowance?.host || ""}
           image={allowance?.imageURL || ""}
           url={allowance ? `https://${allowance.host}` : ""}

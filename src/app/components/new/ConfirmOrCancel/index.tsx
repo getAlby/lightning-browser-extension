@@ -1,7 +1,7 @@
 import { MouseEventHandler } from "react";
 import { useTranslation } from "react-i18next";
 
-import Button from "../../components/Button";
+import Button from "../../Button";
 
 export type Props = {
   disabled?: boolean;
@@ -11,7 +11,7 @@ export type Props = {
   onCancel: MouseEventHandler;
 };
 
-function NewConfirmOrCancel({
+function ConfirmOrCancel({
   disabled = false,
   loading = false,
   label = "Confirm",
@@ -40,4 +40,4 @@ function NewConfirmOrCancel({
   );
 }
 
-export default NewConfirmOrCancel;
+export default ConfirmOrCancel;

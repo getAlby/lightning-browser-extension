@@ -1,8 +1,8 @@
 import SatButtons from "@components/SatButtons";
 import TextField from "@components/form/TextField";
+import ConfirmOrCancel from "@components/new/ConfirmOrCancel";
+import PublisherCard from "@components/new/PublisherCard";
 import React, { useState } from "react";
-import NewConfirmOrCancel from "~/app/newcomponents/NewConfirmOrCancel";
-import NewPublisherCard from "~/app/newcomponents/NewPublisherCard";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -84,7 +84,7 @@ function MakeInvoice({
   return (
     <div className="overflow-y-auto no-scrollbar h-full">
       <div className="h-2/5 border-b border-gray-200 dark:border-neutral-500">
-        <NewPublisherCard title={origin.name} image={origin.icon} />
+        <PublisherCard title={origin.name} image={origin.icon} />
       </div>
       <div className="flex flex-col justify-between h-3/5">
         <div className="pt-4 px-4">
@@ -133,7 +133,7 @@ function MakeInvoice({
         </div>
 
         <div className="text-center p-2">
-          <NewConfirmOrCancel
+          <ConfirmOrCancel
             disabled={!value || loading || Boolean(error)}
             loading={loading}
             onConfirm={confirm}
