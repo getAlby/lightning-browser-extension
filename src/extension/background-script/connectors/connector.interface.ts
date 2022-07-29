@@ -1,4 +1,4 @@
-interface WebLNNode {
+export interface WebLNNode {
   alias: string;
   pubkey?: string;
   color?: string;
@@ -106,6 +106,15 @@ export interface VerifyMessageResponse {
   };
 }
 
+export interface ConnectPeerResponse {
+  data: boolean;
+}
+
+export interface ConnectPeerArgs {
+  pubkey: string;
+  host: string;
+}
+
 export default interface Connector {
   init(): Promise<void>;
   unload(): Promise<void>;
@@ -118,4 +127,7 @@ export default interface Connector {
   checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse>;
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse>;
   verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse>;
+  connectPeer(
+    args: ConnectPeerArgs
+  ): Promise<ConnectPeerResponse | Error> | Error;
 }

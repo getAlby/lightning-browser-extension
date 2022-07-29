@@ -57,6 +57,14 @@ export default class LndHub implements Connector {
     return Promise.resolve();
   }
 
+  // not yet implemented
+  connectPeer() {
+    console.error(
+      `${this.constructor.name} does not implement the getInvoices call`
+    );
+    return new Error("Not yet supported with the currently used account.");
+  }
+
   async getInvoices(): Promise<GetInvoicesResponse> {
     const data = await this.request<
       {

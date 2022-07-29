@@ -26,7 +26,9 @@ export default async function keysend(message: Message) {
       customRecords: customRecords as Record<string, string>,
     });
   } catch (e) {
-    response = { error: e instanceof Error ? e.message : "" };
+    response = {
+      error: e instanceof Error ? e.message : "Something went wrong",
+    };
   }
   utils.publishPaymentNotification(message, {
     response,

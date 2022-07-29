@@ -4,6 +4,7 @@ import ConfirmPayment from "@screens/ConfirmPayment";
 import ConfirmSignMessage from "@screens/ConfirmSignMessage";
 import Enable from "@screens/Enable";
 import LNURLAuth from "@screens/LNURLAuth";
+import LNURLChannel from "@screens/LNURLChannel";
 import LNURLPay from "@screens/LNURLPay";
 import LNURLWithdraw from "@screens/LNURLWithdraw";
 import MakeInvoice from "@screens/MakeInvoice";
@@ -19,6 +20,7 @@ import type {
   LNURLAuthServiceResponse,
   LNURLPayServiceResponse,
   LNURLWithdrawServiceResponse,
+  LNURLChannelServiceResponse,
   OriginData,
   RequestInvoiceArgs,
 } from "~/types";
@@ -100,6 +102,18 @@ function Prompt() {
                       details={
                         routeParams.args
                           ?.lnurlDetails as LNURLWithdrawServiceResponse
+                      }
+                      origin={routeParams.origin}
+                    />
+                  }
+                />
+                <Route
+                  path="LNURLChannel"
+                  element={
+                    <LNURLChannel
+                      details={
+                        routeParams.args
+                          ?.lnurlDetails as LNURLChannelServiceResponse
                       }
                       origin={routeParams.origin}
                     />

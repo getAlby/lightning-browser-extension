@@ -8,10 +8,12 @@ import utils from "~/common/lib/utils";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
+  ConnectorInvoice,
+  ConnectPeerArgs,
+  ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
-  ConnectorInvoice,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -63,6 +65,33 @@ class Lnd implements Connector {
     return this.getChannelsBalance();
   }
 
+  connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse | Error> {
+    const { pubkey, host } = args;
+
+    return this.request<Record<string, never>>("POST", "/v1/peers", {
+      addr: {
+        pubkey,
+        host,
+      },
+      perm: true,
+    })
+      .then((data) => {
+        return {
+          data: true,
+        };
+      })
+      .catch((e) => {
+        // the request fails (HTTP 500), but if we are already connected we say it's a success
+        if (e.message.match(/already connected/)) {
+          return {
+            data: true,
+          };
+        } else {
+          return new Error(e.message);
+        }
+      });
+  }
+
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
     return this.request<{
       payment_preimage: string;
@@ -91,7 +120,7 @@ class Lnd implements Connector {
   }
 
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
-    //See: https://gist.github.com/dellagustin/c3793308b75b6b0faf134e64db7dc915
+    // See: https://gist.github.com/dellagustin/c3793308b75b6b0faf134e64db7dc915
     const dest_pubkey_hex = args.pubkey;
     const dest_pubkey_base64 = Hex.parse(dest_pubkey_hex).toString(Base64);
 
