@@ -6,7 +6,7 @@ import debounce from "lodash/debounce";
 import { CURRENCIES } from "~/common/constants";
 import { getSettings } from "~/common/lib/api";
 
-const settings = async () => {
+const getCurrencySettings = async () => {
   const { currency, exchange } = await getSettings();
 
   return {
@@ -18,7 +18,7 @@ const settings = async () => {
 const numSatsInBtc = 100_000_000;
 
 const getFiatBtcRate = async (currency: CURRENCIES): Promise<string> => {
-  const { exchange } = await settings();
+  const { exchange } = await getCurrencySettings();
 
   let response;
 
@@ -93,11 +93,15 @@ const satoshisToFiat = async ({
   return fiat;
 };
 
-export const getFiatValue = async (amount: number | string) => {
-  const { currency } = await settings();
+export const getFiatValue = async (
+  amount: number | string,
+  isLatestRate?: boolean
+) => {
+  const { currency } = await getCurrencySettings();
   const fiatValue = await satoshisToFiat({
     amountInSats: amount,
     convertTo: currency,
+    isLatestRate,
   });
   const localeFiatValue = fiatValue.toLocaleString("en", {
     style: "currency",
@@ -107,20 +111,4 @@ export const getFiatValue = async (amount: number | string) => {
   return localeFiatValue;
 };
 
-export const getBalances = async (balance: number, isLatestRate?: boolean) => {
-  const { currency } = await settings();
-  const fiatValue = await satoshisToFiat({
-    amountInSats: balance,
-    convertTo: currency,
-    isLatestRate,
-  });
-  const localeFiatValue = fiatValue.toLocaleString("en", {
-    style: "currency",
-    currency: currency,
-  });
-
-  return {
-    satsBalance: `${balance} sats`,
-    fiatBalance: localeFiatValue,
-  };
-};
+export const getSatValue = (balance: number) => `${balance} sats`;

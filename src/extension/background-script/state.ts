@@ -43,6 +43,7 @@ export const DEFAULT_SETTINGS: SettingsStorage = {
   userEmail: "",
   locale: i18n.resolvedLanguage,
   theme: "system",
+  showFiat: true,
   currency: CURRENCIES.USD,
   exchange: "alby",
   debug: false,

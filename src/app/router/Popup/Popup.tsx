@@ -11,35 +11,38 @@ import { ToastContainer } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { AccountProvider } from "~/app/context/AccountContext";
 import { AccountsProvider } from "~/app/context/AccountsContext";
+import { SettingsProvider } from "~/app/context/SettingsContext";
 
 import RequireAuth from "../RequireAuth";
 
 function Popup() {
   return (
-    <AccountProvider>
-      <AccountsProvider>
-        <HashRouter>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <RequireAuth>
-                  <Layout />
-                </RequireAuth>
-              }
-            >
-              <Route index element={<Home />} />
-              <Route path="send" element={<Send />} />
-              <Route path="receive" element={<Receive />} />
-              <Route path="lnurlPay" element={<LNURLPay />} />
-              <Route path="keysend" element={<Keysend />} />
-              <Route path="confirmPayment" element={<ConfirmPayment />} />
-            </Route>
-            <Route path="unlock" element={<Unlock />} />
-          </Routes>
-        </HashRouter>
-      </AccountsProvider>
-    </AccountProvider>
+    <SettingsProvider>
+      <AccountProvider>
+        <AccountsProvider>
+          <HashRouter>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <RequireAuth>
+                    <Layout />
+                  </RequireAuth>
+                }
+              >
+                <Route index element={<Home />} />
+                <Route path="send" element={<Send />} />
+                <Route path="receive" element={<Receive />} />
+                <Route path="lnurlPay" element={<LNURLPay />} />
+                <Route path="keysend" element={<Keysend />} />
+                <Route path="confirmPayment" element={<ConfirmPayment />} />
+              </Route>
+              <Route path="unlock" element={<Unlock />} />
+            </Routes>
+          </HashRouter>
+        </AccountsProvider>
+      </AccountProvider>
+    </SettingsProvider>
   );
 }
 

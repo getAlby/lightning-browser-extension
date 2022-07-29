@@ -1,9 +1,17 @@
 import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
+import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
+import * as SettingsContext from "~/app/context/SettingsContext";
 
 import type { Props } from "./index";
 import AllowanceMenu from "./index";
+
+jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
+  settings: mockSettings,
+  isLoading: false,
+  updateSetting: jest.fn(),
+});
 
 jest.mock("~/common/lib/utils");
 

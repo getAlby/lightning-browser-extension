@@ -9,16 +9,16 @@ import Select from "@components/form/Select";
 import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
 import type { FormEvent } from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
+import { useSettings } from "~/app/context/SettingsContext";
 import { getTheme } from "~/app/utils";
 import { CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
-import { SettingsStorage } from "~/types";
 
 const initialFormData = {
   password: "",
@@ -27,25 +27,11 @@ const initialFormData = {
 
 function Settings() {
   const { t } = useTranslation("translation", { keyPrefix: "settings" });
-
+  const { isLoading, settings, updateSetting } = useSettings();
   const { fetchAccountInfo } = useAccount();
-
-  const [loading, setLoading] = useState(true);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
-  const [settings, setSettings] = useState<SettingsStorage>({
-    websiteEnhancements: false,
-    legacyLnurlAuth: false,
-    isUsingLegacyLnurlAuthKey: false,
-    userName: "",
-    userEmail: "",
-    locale: "",
-    theme: "system",
-    currency: CURRENCIES.USD,
-    exchange: "coindesk",
-    debug: false,
-  });
 
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
@@ -65,16 +51,10 @@ function Settings() {
   async function saveSetting(
     setting: Record<string, string | number | boolean>
   ) {
-    const response = await api.setSetting(setting);
-    setSettings(response);
+    // ensure to update SettingsContext
+    updateSetting(setting);
+    await api.setSetting(setting);
   }
-
-  useEffect(() => {
-    api.getSettings().then((response) => {
-      setSettings(response);
-      setLoading(false);
-    });
-  }, []);
 
   return (
     <Container>
@@ -86,7 +66,7 @@ function Settings() {
           title={t("website_enhancements.title")}
           subtitle={t("website_enhancements.subtitle")}
         >
-          {!loading && (
+          {!isLoading && (
             <Toggle
               checked={settings.websiteEnhancements}
               onChange={() => {
@@ -97,7 +77,6 @@ function Settings() {
             />
           )}
         </Setting>
-
         <Setting
           title={t("camera_access.title")}
           subtitle={t("camera_access.subtitle")}
@@ -120,15 +99,13 @@ function Settings() {
             </p>
           )}
         </Setting>
-
         <Setting title={t("language.title")} subtitle={t("language.subtitle")}>
           <div className="w-32">
             <LocaleSwitcher />
           </div>
         </Setting>
-
         <Setting title={t("theme.title")} subtitle={t("theme.subtitle")}>
-          {!loading && (
+          {!isLoading && (
             <div className="w-64">
               <Select
                 name="theme"
@@ -148,55 +125,11 @@ function Settings() {
           )}
         </Setting>
 
-        <Setting title={t("currency.title")} subtitle={t("currency.subtitle")}>
-          {!loading && (
-            <div className="w-64">
-              <Select
-                name="currency"
-                value={settings.currency}
-                onChange={async (event) => {
-                  fetchAccountInfo({ isLatestRate: true });
-                  await saveSetting({
-                    currency: event.target.value,
-                  });
-                }}
-              >
-                {Object.keys(CURRENCIES).map((currency) => (
-                  <option key={currency} value={currency}>
-                    {currency}
-                  </option>
-                ))}
-              </Select>
-            </div>
-          )}
-        </Setting>
-
-        <Setting title={t("exchange.title")} subtitle={t("exchange.subtitle")}>
-          {!loading && (
-            <div className="w-64">
-              <Select
-                name="exchange"
-                value={settings.exchange}
-                onChange={async (event) => {
-                  // exchange/value change should be reflected in the upper account-menu after select?
-                  await saveSetting({
-                    exchange: event.target.value,
-                  });
-                }}
-              >
-                <option value="alby">Alby</option>
-                <option value="coindesk">Coindesk</option>
-                <option value="yadio">yadio</option>
-              </Select>
-            </div>
-          )}
-        </Setting>
-
         <Setting
           title={t("change_password.title")}
           subtitle={t("change_password.subtitle")}
         >
-          {!loading && (
+          {!isLoading && (
             <div className="w-64">
               <Button
                 onClick={() => {
@@ -205,12 +138,82 @@ function Settings() {
                 label={t("change_password.title")}
                 primary
                 fullWidth
-                loading={loading}
-                disabled={loading}
+                loading={isLoading}
+                disabled={isLoading}
               />
             </div>
           )}
         </Setting>
+
+        <Setting
+          title={t("show_fiat.title")}
+          subtitle={t("show_fiat.subtitle")}
+        >
+          {!isLoading && (
+            <Toggle
+              checked={settings.showFiat}
+              onChange={() => {
+                saveSetting({
+                  showFiat: !settings.showFiat,
+                });
+              }}
+            />
+          )}
+        </Setting>
+
+        {settings.showFiat && (
+          <>
+            <Setting
+              title={t("currency.title")}
+              subtitle={t("currency.subtitle")}
+            >
+              {!isLoading && (
+                <div className="w-64">
+                  <Select
+                    name="currency"
+                    value={settings.currency}
+                    onChange={async (event) => {
+                      fetchAccountInfo({ isLatestRate: true });
+                      await saveSetting({
+                        currency: event.target.value,
+                      });
+                    }}
+                  >
+                    {Object.keys(CURRENCIES).map((currency) => (
+                      <option key={currency} value={currency}>
+                        {currency}
+                      </option>
+                    ))}
+                  </Select>
+                </div>
+              )}
+            </Setting>
+
+            <Setting
+              title={t("exchange.title")}
+              subtitle={t("exchange.subtitle")}
+            >
+              {!isLoading && (
+                <div className="w-64">
+                  <Select
+                    name="exchange"
+                    value={settings.exchange}
+                    onChange={async (event) => {
+                      // exchange/value change should be reflected in the upper account-menu after select?
+                      await saveSetting({
+                        exchange: event.target.value,
+                      });
+                    }}
+                  >
+                    <option value="alby">Alby</option>
+                    <option value="coindesk">Coindesk</option>
+                    <option value="yadio">yadio</option>
+                  </Select>
+                </div>
+              )}
+            </Setting>
+          </>
+        )}
       </div>
 
       <h2 className="mt-12 text-2xl font-bold dark:text-white">
@@ -223,7 +226,7 @@ function Settings() {
 
       <div className="mb-12 shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting title={t("name.title")} subtitle={t("name.subtitle")}>
-          {!loading && (
+          {!isLoading && (
             <div className="w-64">
               <Input
                 placeholder={t("name.placeholder")}
@@ -240,7 +243,7 @@ function Settings() {
         </Setting>
 
         <Setting title={t("email.title")} subtitle={t("email.subtitle")}>
-          {!loading && (
+          {!isLoading && (
             <div className="w-64">
               <Input
                 placeholder={t("email.placeholder")}
@@ -323,7 +326,7 @@ function Settings() {
           title={t("lnurl_auth.legacy_lnurl_auth_202207.title")}
           subtitle={t("lnurl_auth.legacy_lnurl_auth_202207.subtitle")}
         >
-          {!loading && (
+          {!isLoading && (
             <Toggle
               checked={settings.isUsingLegacyLnurlAuthKey}
               onChange={() => {
@@ -340,7 +343,7 @@ function Settings() {
           title={t("lnurl_auth.legacy_lnurl_auth.title")}
           subtitle={t("lnurl_auth.legacy_lnurl_auth.subtitle")}
         >
-          {!loading && (
+          {!isLoading && (
             <Toggle
               checked={settings.legacyLnurlAuth}
               onChange={() => {
