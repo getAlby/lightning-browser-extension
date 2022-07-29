@@ -1,8 +1,9 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import { toast } from "react-toastify";
+import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
-import { getBalances } from "~/common/utils/currencyConvert";
+import { getSatValue, getFiatValue } from "~/common/utils/currencyConvert";
 import type { AccountInfo } from "~/types";
 
 interface AccountContextType {
@@ -35,12 +36,14 @@ interface AccountContextType {
 const AccountContext = createContext({} as AccountContextType);
 
 export function AccountProvider({ children }: { children: React.ReactNode }) {
+  const { isLoading: isLoadingSettings, settings } = useSettings();
+
   const [account, setAccount] = useState<AccountContextType["account"]>(null);
   const [loading, setLoading] = useState(true);
-  const [balancesDecorated, setBalancesDecorated] = useState({
-    fiatBalance: "",
-    satsBalance: "",
-  });
+  const [satsBalance, setSatBalance] = useState("");
+  const [fiatBalance, setFiatBalance] = useState("");
+
+  const showFiat = !isLoadingSettings && settings.showFiat && !loading;
 
   const unlock = (password: string, callback: VoidFunction) => {
     return api.unlock(password).then((response) => {
@@ -61,6 +64,14 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
 
   const setAccountId = (id: string) => setAccount({ id });
 
+  const updateFiatValue = async (
+    balance: string | number,
+    isLatestRate?: boolean
+  ) => {
+    const fiats = await getFiatValue(balance, isLatestRate);
+    setFiatBalance(fiats);
+  };
+
   const fetchAccountInfo = async (options?: {
     accountId?: string;
     isLatestRate?: boolean;
@@ -69,17 +80,14 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     if (!id) return;
 
     const accountInfo = await api.swr.getAccountInfo(id, setAccount);
-    const { fiatBalance, satsBalance } = await getBalances(
-      accountInfo.balance,
-      options?.isLatestRate
-    );
+    const sats = await getSatValue(accountInfo.balance);
+    setSatBalance(sats);
 
-    setBalancesDecorated({
-      fiatBalance,
-      satsBalance,
-    });
+    if (!isLoadingSettings && settings.showFiat) {
+      updateFiatValue(accountInfo.balance, options?.isLatestRate);
+    }
 
-    return { ...accountInfo, fiatBalance, satsBalance };
+    return { ...accountInfo, fiatBalance, satsBalance: sats };
   };
 
   // Invoked only on on mount.
@@ -111,9 +119,21 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Listen to showFiat
+  useEffect(() => {
+    if (showFiat && typeof account?.balance === "number") {
+      updateFiatValue(account.balance);
+    } else {
+      setFiatBalance("");
+    }
+  }, [showFiat, account?.balance]);
+
   const value = {
     account,
-    balancesDecorated,
+    balancesDecorated: {
+      satsBalance,
+      fiatBalance,
+    },
     fetchAccountInfo,
     loading,
     lock,

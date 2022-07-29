@@ -68,14 +68,16 @@ function AccountMenu({ title, balances, showOptions = true }: Props) {
           {title || <Skeleton />}
         </p>
 
-        {balances.satsBalance && balances.fiatBalance ? (
+        {balances.satsBalance ? (
           <p className="flex justify-between">
             <span className="text-xs dark:text-white">
               {balances.satsBalance}
             </span>
-            <span className="text-xs text-gray-600 dark:text-neutral-400">
-              ~{balances.fiatBalance}
-            </span>
+            {!!balances.fiatBalance && (
+              <span className="text-xs text-gray-600 dark:text-neutral-400">
+                ~{balances.fiatBalance}
+              </span>
+            )}
           </p>
         ) : (
           <Skeleton />

@@ -421,6 +421,7 @@ export interface SettingsStorage {
   userEmail: string;
   locale: string;
   theme: string;
+  showFiat: boolean;
   currency: CURRENCIES;
   exchange: SupportedExchanges;
   debug: boolean;

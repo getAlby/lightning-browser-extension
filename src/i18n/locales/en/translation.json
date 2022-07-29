@@ -223,6 +223,10 @@
           "system": "System"
         }
       },
+      "show_fiat": {
+        "title": "Sats to Fiat",
+        "subtitle": "Always convert into selected currency from selected exchange"
+      },
       "currency": {
         "title": "Currency",
         "subtitle": "Show the amounts additionally in this currency"

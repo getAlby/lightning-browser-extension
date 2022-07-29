@@ -14,11 +14,12 @@ import TransactionsTable from "@components/TransactionsTable";
 import { Tab } from "@headlessui/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import browser from "webextension-polyfill";
+import { useSettings } from "~/app/context/SettingsContext";
 import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
@@ -28,6 +29,8 @@ import type { Allowance, Battery, Transaction } from "~/types";
 dayjs.extend(relativeTime);
 
 function Home() {
+  const { isLoading: isLoadingSettings, settings } = useSettings();
+
   const [allowance, setAllowance] = useState<Allowance | null>(null);
   const [isBlocked, setIsBlocked] = useState<boolean>(false);
   const [currentUrl, setCurrentUrl] = useState<URL | null>(null);
@@ -81,15 +84,21 @@ function Home() {
     }
   }
 
-  async function loadPayments() {
-    const result = await api.getPayments({ limit: 10 });
-    for await (const payment of result.payments) {
-      const totalAmountFiat = await getFiatValue(payment.totalAmount);
-      payment.totalAmountFiat = totalAmountFiat;
+  const loadPayments = useCallback(async () => {
+    try {
+      const result = await api.getPayments({ limit: 10 });
+      for await (const payment of result.payments) {
+        const totalAmountFiat = settings.showFiat
+          ? await getFiatValue(payment.totalAmount)
+          : "";
+        payment.totalAmountFiat = totalAmountFiat;
+      }
+      setPayments(result?.payments);
+      setLoadingPayments(false);
+    } catch (e) {
+      console.error(e);
     }
-    setPayments(result?.payments);
-    setLoadingPayments(false);
-  }
+  }, [settings.showFiat]);
 
   function handleLightningDataMessage(response: {
     action: string;
@@ -120,7 +129,9 @@ function Home() {
     }));
 
     for (const invoice of invoices) {
-      const totalAmountFiat = await getFiatValue(invoice.totalAmount);
+      const totalAmountFiat = settings.showFiat
+        ? await getFiatValue(invoice.totalAmount)
+        : "";
       invoice.totalAmountFiat = totalAmountFiat;
     }
 
@@ -129,7 +140,12 @@ function Home() {
   }
 
   useEffect(() => {
-    loadPayments();
+    if (!isLoadingSettings) {
+      loadPayments();
+    }
+  }, [isLoadingSettings, loadPayments]);
+
+  useEffect(() => {
     loadAllowance();
 
     // Enhancement data is loaded asynchronously (for example because we need to fetch additional data).

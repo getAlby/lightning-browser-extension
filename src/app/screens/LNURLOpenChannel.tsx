@@ -36,7 +36,6 @@ function LNURLOpenChannel(props: Props) {
         host,
         pubkey,
       });
-      // todo: check success
       const infoResponse = await api.getInfo();
       const nodeId = infoResponse.node.pubkey;
 

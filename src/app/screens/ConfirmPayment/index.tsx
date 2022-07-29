@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
+import { useSettings } from "~/app/context/SettingsContext";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -22,6 +23,9 @@ export type Props = {
 };
 
 function ConfirmPayment(props: Props) {
+  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const showFiat = !isLoadingSettings && settings.showFiat;
+
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAccount();
@@ -41,11 +45,13 @@ function ConfirmPayment(props: Props) {
   const [fiatAmount, setFiatAmount] = useState("");
 
   useEffect(() => {
-    (async () => {
-      const res = await getFiatValue(budget);
-      setFiatAmount(res);
-    })();
-  }, [budget]);
+    if (showFiat) {
+      (async () => {
+        const res = await getFiatValue(budget);
+        setFiatAmount(res);
+      })();
+    }
+  }, [budget, showFiat]);
 
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);

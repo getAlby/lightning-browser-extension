@@ -79,9 +79,11 @@ export default function TransactionsTable({ transactions }: Props) {
                             : "+"}
                           {tx.totalAmount} sats
                         </p>
-                        <p className="text-xs text-gray-600 dark:text-neutral-400">
-                          ~{tx.totalAmountFiat}
-                        </p>
+                        {!!tx.totalAmountFiat && (
+                          <p className="text-xs text-gray-600 dark:text-neutral-400">
+                            ~{tx.totalAmountFiat}
+                          </p>
+                        )}
                       </div>
                       {([tx.type && "sent", "sending"].includes(tx.type) ||
                         (tx.type === "received" && tx.boostagram)) && (

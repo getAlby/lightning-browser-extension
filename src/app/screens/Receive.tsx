@@ -16,6 +16,7 @@ import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
+import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
@@ -25,6 +26,9 @@ import DualCurrencyField from "../components/form/DualCurrencyField";
 
 function Receive() {
   const auth = useAccount();
+  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const showFiat = !isLoadingSettings && settings.showFiat;
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     amount: "0",
@@ -52,13 +56,13 @@ function Receive() {
   const [fiatAmount, setFiatAmount] = useState("");
 
   useEffect(() => {
-    if (formData.amount !== "") {
+    if (formData.amount !== "" && showFiat) {
       (async () => {
         const res = await getFiatValue(formData.amount);
         setFiatAmount(res);
       })();
     }
-  }, [formData]);
+  }, [formData, showFiat]);
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>

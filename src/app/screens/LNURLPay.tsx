@@ -9,6 +9,7 @@ import React, { useState, useEffect, MouseEvent } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
+import { useSettings } from "~/app/context/SettingsContext";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import lnurl from "~/common/lib/lnurl";
@@ -43,6 +44,9 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
 );
 
 function LNURLPay(props: Props) {
+  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const showFiat = !isLoadingSettings && settings.showFiat;
+
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAccount();
@@ -69,11 +73,13 @@ function LNURLPay(props: Props) {
   const [payment, setPayment] = useState<PaymentResponse | undefined>();
 
   useEffect(() => {
-    (async () => {
-      const res = await getFiatValue(valueSat);
-      setFiatValue(res);
-    })();
-  }, [valueSat]);
+    if (showFiat) {
+      (async () => {
+        const res = await getFiatValue(valueSat);
+        setFiatValue(res);
+      })();
+    }
+  }, [valueSat, showFiat]);
 
   useEffect(() => {
     if (searchParams) {
