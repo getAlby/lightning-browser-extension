@@ -145,23 +145,22 @@ function Settings() {
           )}
         </Setting>
 
-        {process.env.NODE_ENV === "development" && (
-          <Setting
-            title={t("show_fiat.title")}
-            subtitle={t("show_fiat.subtitle")}
-          >
-            {!isLoading && (
-              <Toggle
-                checked={settings.showFiat}
-                onChange={() => {
-                  saveSetting({
-                    showFiat: !settings.showFiat,
-                  });
-                }}
-              />
-            )}
-          </Setting>
-        )}
+        <Setting
+          title={t("show_fiat.title")}
+          subtitle={t("show_fiat.subtitle")}
+        >
+          {!isLoading && (
+            <Toggle
+              checked={settings.showFiat}
+              onChange={() => {
+                saveSetting({
+                  showFiat: !settings.showFiat,
+                });
+              }}
+            />
+          )}
+        </Setting>
+
         {settings.showFiat && (
           <>
             <Setting
