@@ -1,9 +1,9 @@
-import type { MessageLNURLOpenChannel, LNURLDetails } from "~/types";
+import type { MessageLNURLChannel, LNURLDetails } from "~/types";
 
 import channel from "../channel";
-import type { LNURLOpenChannelResponse } from "../channel";
+import type { LNURLChannelResponse } from "../channel";
 
-const mockResponse: LNURLOpenChannelResponse = {
+const mockResponse: LNURLChannelResponse = {
   application: "LBE",
   response: true,
   data: "ok\n",
@@ -27,7 +27,7 @@ const lnurlDetails: LNURLDetails = {
   url: "https://gist.githubusercontent.com/bumi/e92ea0faa9956773449bdf0536f3a051/raw/9eebbfd4966b45718f67808e8b79bc1e015c7151/lnurl-channel.json" as unknown as URL,
 };
 
-const message: MessageLNURLOpenChannel = {
+const message: MessageLNURLChannel = {
   action: "webln/lnurl",
   args: {
     lnurlEncoded:

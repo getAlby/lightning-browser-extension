@@ -1,8 +1,8 @@
 import utils from "~/common/lib/utils";
-import type { MessageLNURLOpenChannel, LNURLDetails } from "~/types";
+import type { MessageLNURLChannel, LNURLDetails } from "~/types";
 
 // relates to: src/extension/content-script/index.js
-export type LNURLOpenChannelResponse = {
+export type LNURLChannelResponse = {
   application: string;
   response: boolean;
   data: string;
@@ -12,13 +12,13 @@ export type LNURLOpenChannelResponse = {
 };
 
 async function channelRequestWithPrompt(
-  message: MessageLNURLOpenChannel,
+  message: MessageLNURLChannel,
   lnurlDetails: LNURLDetails
 ) {
   try {
-    const response = await utils.openPrompt<LNURLOpenChannelResponse>({
+    const response = await utils.openPrompt<LNURLChannelResponse>({
       origin: message.origin,
-      action: "lnurlOpenChannel",
+      action: "LNURLChannel",
       args: { ...message.args, lnurlDetails },
     });
 

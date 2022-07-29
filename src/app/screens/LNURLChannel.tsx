@@ -9,17 +9,17 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import getOriginData from "~/extension/content-script/originData";
-import type { LNURLOpenChannelServiceResponse } from "~/types";
+import type { LNURLChannelServiceResponse } from "~/types";
 
 type Props = {
-  details: LNURLOpenChannelServiceResponse;
+  details: LNURLChannelServiceResponse;
   origin?: {
     name: string;
     icon: string;
   };
 };
 
-function LNURLOpenChannel(props: Props) {
+function LNURLChannel(props: Props) {
   const [origin] = useState(props.origin || getOriginData());
   const { uri } = props.details;
   const [pubkey, host] = uri.split("@");
@@ -115,4 +115,4 @@ function LNURLOpenChannel(props: Props) {
   );
 }
 
-export default LNURLOpenChannel;
+export default LNURLChannel;

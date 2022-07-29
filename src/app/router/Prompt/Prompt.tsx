@@ -4,7 +4,7 @@ import ConfirmPayment from "@screens/ConfirmPayment";
 import ConfirmSignMessage from "@screens/ConfirmSignMessage";
 import Enable from "@screens/Enable";
 import LNURLAuth from "@screens/LNURLAuth";
-import LNURLOpenChannel from "@screens/LNURLOpenChannel";
+import LNURLChannel from "@screens/LNURLChannel";
 import LNURLPay from "@screens/LNURLPay";
 import LNURLWithdraw from "@screens/LNURLWithdraw";
 import MakeInvoice from "@screens/MakeInvoice";
@@ -20,7 +20,7 @@ import type {
   LNURLAuthServiceResponse,
   LNURLPayServiceResponse,
   LNURLWithdrawServiceResponse,
-  LNURLOpenChannelServiceResponse,
+  LNURLChannelServiceResponse,
   OriginData,
   RequestInvoiceArgs,
 } from "~/types";
@@ -108,12 +108,12 @@ function Prompt() {
                   }
                 />
                 <Route
-                  path="lnurlOpenChannel"
+                  path="LNURLChannel"
                   element={
-                    <LNURLOpenChannel
+                    <LNURLChannel
                       details={
                         routeParams.args
-                          ?.lnurlDetails as LNURLOpenChannelServiceResponse
+                          ?.lnurlDetails as LNURLChannelServiceResponse
                       }
                       origin={routeParams.origin}
                     />
