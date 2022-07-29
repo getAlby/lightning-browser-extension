@@ -1,9 +1,9 @@
 import SuccessMessage from "@components/SuccessMessage";
 import Input from "@components/form/Input";
+import ConfirmOrCancel from "@components/new/ConfirmOrCancel";
+import PublisherCard from "@components/new/PublisherCard";
 import axios from "axios";
 import { useState, MouseEvent } from "react";
-import NewConfirmOrCancel from "~/app/newcomponents/NewConfirmOrCancel";
-import NewPublisherCard from "~/app/newcomponents/NewPublisherCard";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -86,7 +86,7 @@ function LNURLWithdraw(props: Props) {
       </div>
       <div className="h-full">
         <div className="h-2/5 border-b border-gray-200 dark:border-neutral-500">
-          <NewPublisherCard title={origin.name} image={origin.icon} />
+          <PublisherCard title={origin.name} image={origin.icon} />
         </div>
         {!successMessage ? (
           <div className="flex flex-col justify-between h-3/5">
@@ -97,7 +97,7 @@ function LNURLWithdraw(props: Props) {
               <dd className="text-sm mb-4 dark:text-white">{renderAmount()}</dd>
             </dl>
             <div className="text-center p-2">
-              <NewConfirmOrCancel
+              <ConfirmOrCancel
                 disabled={loadingConfirm || !valueSat}
                 loading={loadingConfirm}
                 onConfirm={confirm}

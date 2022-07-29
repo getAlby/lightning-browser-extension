@@ -10,6 +10,7 @@ import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
 import Progressbar from "@components/Progressbar";
 import TransactionsTable from "@components/TransactionsTable";
+import PublisherCard from "@components/new/PublisherCard";
 import { Tab } from "@headlessui/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -19,7 +20,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import browser from "webextension-polyfill";
 import { useSettings } from "~/app/context/SettingsContext";
-import NewPublisherCard from "~/app/newcomponents/NewPublisherCard";
 import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
@@ -230,7 +230,7 @@ function Home() {
           (lnData.length > 0 ? "h-1/2" : "h-1/3")
         }
       >
-        <NewPublisherCard title={title} description={description} image={image}>
+        <PublisherCard title={title} description={description} image={image}>
           {lnData.length > 0 && (
             <Button
               onClick={async () => {
@@ -276,7 +276,7 @@ function Home() {
               loading={loadingSendSats}
             />
           )}
-        </NewPublisherCard>
+        </PublisherCard>
       </div>
     );
   }

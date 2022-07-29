@@ -1,7 +1,7 @@
 import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import ConfirmOrCancel from "@components/new/ConfirmOrCancel";
+import PublisherCard from "@components/new/PublisherCard";
 import { useState, useEffect, useCallback, useRef } from "react";
-import NewConfirmOrCancel from "~/app/newcomponents/NewConfirmOrCancel";
-import NewPublisherCard from "~/app/newcomponents/NewPublisherCard";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -75,7 +75,7 @@ function Enable(props: Props) {
       </div>
       <div className="h-full">
         <div className="h-2/5 border-b border-gray-200 dark:border-neutral-500">
-          <NewPublisherCard
+          <PublisherCard
             title={props.origin.name}
             image={props.origin.icon}
             url={props.origin.location}
@@ -110,7 +110,7 @@ function Enable(props: Props) {
           </div>
 
           <div className="text-center p-2">
-            <NewConfirmOrCancel
+            <ConfirmOrCancel
               label="Connect"
               onConfirm={enable}
               onCancel={reject}

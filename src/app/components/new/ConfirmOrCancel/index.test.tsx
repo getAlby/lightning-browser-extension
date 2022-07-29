@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 
 import type { Props } from "./index";
-import NewConfirmOrCancel from "./index";
+import ConfirmOrCancel from "./index";
 
 const props: Props = {
   label: "Confirm Test",
@@ -14,7 +14,7 @@ describe("ConfirmOrCancel", () => {
   test("render", async () => {
     render(
       <MemoryRouter>
-        <NewConfirmOrCancel {...props} />
+        <ConfirmOrCancel {...props} />
       </MemoryRouter>
     );
 

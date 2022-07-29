@@ -3,14 +3,14 @@ import Container from "@components/Container";
 import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
+import ConfirmOrCancel from "@components/new/ConfirmOrCancel";
+import PublisherCard from "@components/new/PublisherCard";
 import axios from "axios";
 import React, { useState, useEffect, MouseEvent } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
-import NewConfirmOrCancel from "~/app/newcomponents/NewConfirmOrCancel";
-import NewPublisherCard from "~/app/newcomponents/NewPublisherCard";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import lnurl from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
@@ -313,7 +313,7 @@ function LNURLPay(props: Props) {
     return (
       <div className="h-full">
         <div className="h-2/5 border-b border-gray-200 dark:border-neutral-500">
-          <NewPublisherCard
+          <PublisherCard
             title={origin.name}
             description={origin.description}
             image={origin.icon}
@@ -345,7 +345,7 @@ function LNURLPay(props: Props) {
           <>
             <div className="grow overflow-y-auto no-scrollbar">
               <div className="h-48 border-b border-gray-200 dark:border-neutral-500">
-                <NewPublisherCard
+                <PublisherCard
                   title={origin.name}
                   description={origin.description}
                   image={origin.icon}
@@ -440,7 +440,7 @@ function LNURLPay(props: Props) {
               </Container>
             </div>
             <div className="p-2 border-t border-gray-200 dark:border-white/10">
-              <NewConfirmOrCancel
+              <ConfirmOrCancel
                 label="Confirm"
                 loading={loadingConfirm}
                 disabled={loadingConfirm || !valueSat}
