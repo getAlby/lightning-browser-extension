@@ -36,7 +36,7 @@
                 "initializing": "Inicializando sua conta. Aguarde, pode demorar um pouco...",
                 "connection_error": "Erro de conexão",
                 "review_connection_details": "Revise os detalhes da conexão.",
-                "connection_taking_long": "A tentativa de conexão está demorando mais do que o esperado... Os dados estão corretos?O servidor está acessível?",
+                "connection_taking_long": "A tentativa de conexão está demorando mais do que o esperado... Os dados estão corretos? O servidor está acessível?",
                 "contact_support": "Se precisar de ajuda, entre em contato com support@getalby.com",
                 "actions": {
                     "delete_edit_account": "Remover conta inválida e editar novamente"
@@ -87,7 +87,7 @@
                 "url_placeholder": "https://seu-servidor-url:8080",
                 "port_label": "REST API porta e host",
                 "page_description": "Você precisa da URL do servidor e um macaroon com permissão de envio e leitura (ex. admin.macaroon)",
-                "drag_and_drop": "Arraste e solte seu macaroon aqui ou <0> procurar </0>",
+                "drag_and_drop": "Arraste e solte o macaroon aqui ou clique em <0>procurar</0>",
                 "url_label": "REST API host e porta"
             },
             "lndhub": {
@@ -243,6 +243,18 @@
                 "title": "Alterar Senha",
                 "mismatched_password": "As senhas não correspondem.",
                 "confirm_password": "Confirme a senha."
+            },
+            "lnurl_auth": {
+                "headline": "LNURL-Auth",
+                "legacy_lnurl_auth_202207": {
+                    "title": "LNURL-Auth antigo",
+                    "subtitle": "A geração de chave para a LNURL-auth mudou em (julho de 2022). A Alby não era compatível com outras implementações. Isso foi corrigido, mas agora uma nova chave está sendo usada como padrão. Se você usou a LNURL-auth para acessar sites antes de julho de 2022, ainda poderá acessá-los habilitando o método antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
+                },
+                "legacy_lnurl_auth": {
+                    "title": "Método antigo de autenticação para LNDhub e LNBits",
+                    "subtitle": "A assinatura de mensagens e o login com as contas LNDhub (por exemplo, BlueWallet) e LNbits foram alteradas em (março de 2022). Se você fez login com essas contas, ainda poderá ativar o método de assinatura antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
+                },
+                "hint": "é um protocolo de autenticação. Ele autentica o usuário usando assinaturas digitais. O protocolo não requer nenhuma outra informação de identificação, como senhas, e-mails, nomes de usuário... Com a Alby, você pode usar suas contas bitcoin para acessar sites com segurança. <br /> Para ser compatível com outras carteiras tivemos que fazer algumas alterações que você pode configurar aqui. <br /> <strong>Por padrão essas opções estão DESLIGADAS.</strong> Use-as apenas se você tiver contas antigas."
             }
         }
     },
@@ -275,7 +287,7 @@
             "boostagram": {
                 "app_name": "App",
                 "podcast": "Podcast",
-                "sender_name": "Enviante",
+                "sender_name": "Enviado por",
                 "message": "Mensagem"
             },
             "sent": "Enviada"
