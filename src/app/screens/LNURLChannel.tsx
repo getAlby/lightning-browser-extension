@@ -1,10 +1,9 @@
-import ConfirmOrCancel from "@components/ConfirmOrCancel";
-import Container from "@components/Container";
-import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import axios from "axios";
 import { useState, MouseEvent } from "react";
 import { toast } from "react-toastify";
+import ConfirmOrCancel from "~/app/components/new/ConfirmOrCancel";
+import PublisherCard from "~/app/components/new/PublisherCard";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -76,40 +75,42 @@ function LNURLChannel(props: Props) {
   }
 
   return (
-    <div>
-      <h1 className="py-2 font-bold text-lg text-center">Channel Request</h1>
-      <PublisherCard title={origin.name} image={origin.icon} />
-      <div className="py-4">
-        <Container maxWidth="sm">
-          {!successMessage ? (
-            <>
-              <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-                <dt className="text-sm font-semibold text-gray-500">
-                  Request a channel from the node:
-                </dt>
-                <dd className="text-sm mb-4 dark:text-white break-all">
-                  {uri}
-                </dd>
-              </dl>
+    <div className="flex flex-col h-full">
+      <div className="text-center text-xl font-semibold dark:text-white py-2 border-b border-gray-200 dark:border-neutral-500">
+        Channel Request
+      </div>
+      <div className="h-full">
+        <div className="h-2/5 border-b border-gray-200 dark:border-neutral-500">
+          <PublisherCard title={origin.name} image={origin.icon} />
+        </div>
+        {!successMessage ? (
+          <div className="flex flex-col justify-between h-3/5">
+            <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg m-6 overflow-hidden">
+              <dt className="text-sm font-semibold text-gray-500">
+                Request a channel from the node:
+              </dt>
+              <dd className="text-sm mb-4 dark:text-white break-all">{uri}</dd>
+            </dl>
 
-              {errorMessage && (
-                <p className="mt-1 text-red-500">{errorMessage}</p>
-              )}
+            {errorMessage && (
+              <p className="mt-1 text-red-500">{errorMessage}</p>
+            )}
 
+            <div className="text-center p-2">
               <ConfirmOrCancel
                 disabled={loadingConfirm || !uri}
                 loading={loadingConfirm}
                 onConfirm={confirm}
                 onCancel={reject}
               />
-            </>
-          ) : (
-            <SuccessMessage
-              message={successMessage}
-              onClose={() => window.close()}
-            />
-          )}
-        </Container>
+            </div>
+          </div>
+        ) : (
+          <SuccessMessage
+            message={successMessage}
+            onClose={() => window.close()}
+          />
+        )}
       </div>
     </div>
   );
