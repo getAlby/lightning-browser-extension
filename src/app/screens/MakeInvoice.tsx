@@ -1,7 +1,7 @@
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import PublisherCard from "@components/PublisherCard";
 import SatButtons from "@components/SatButtons";
 import TextField from "@components/form/TextField";
-import ConfirmOrCancel from "@components/new/ConfirmOrCancel";
-import PublisherCard from "@components/new/PublisherCard";
 import React, { useState } from "react";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";

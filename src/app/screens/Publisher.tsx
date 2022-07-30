@@ -1,8 +1,8 @@
 import AllowanceMenu from "@components/AllowanceMenu";
 import Container from "@components/Container";
 import Progressbar from "@components/Progressbar";
+import PublisherCard from "@components/PublisherCard";
 import TransactionsTable from "@components/TransactionsTable";
-import PublisherCard from "@components/new/PublisherCard";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useState, useEffect, useRef, useCallback } from "react";

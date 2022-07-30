@@ -1,8 +1,9 @@
 import { MouseEventHandler } from "react";
+import { useTranslation } from "react-i18next";
 
 import Button from "../Button";
 
-type Props = {
+export type Props = {
   disabled?: boolean;
   loading?: boolean;
   label?: string;
@@ -10,39 +11,31 @@ type Props = {
   onCancel: MouseEventHandler;
 };
 
-function ConfirmOrCancel({
+export default function ConfirmOrCancel({
   disabled = false,
   loading = false,
   label = "Confirm",
   onConfirm,
   onCancel,
 }: Props) {
+  const { t } = useTranslation("components", {
+    keyPrefix: "confirmOrCancel",
+  });
   return (
     <div className="text-center">
-      <div className="mb-4">
+      <div className="flex flex-row mb-4">
+        <Button onClick={onCancel} label={"Cancel"} halfWidth />
         <Button
           onClick={onConfirm}
           label={label}
-          fullWidth
           primary
           disabled={disabled}
           loading={loading}
+          halfWidth
         />
       </div>
 
-      <p className="mb-2 text-sm text-gray-400">
-        <em>Only connect with sites you trust.</em>
-      </p>
-
-      <a
-        className="underline text-sm text-gray-600 dark:text-neutral-400"
-        href="#"
-        onClick={onCancel}
-      >
-        Cancel
-      </a>
+      <p className="mb-2 text-sm text-gray-400">{t("only_trusted")}</p>
     </div>
   );
 }
-
-export default ConfirmOrCancel;

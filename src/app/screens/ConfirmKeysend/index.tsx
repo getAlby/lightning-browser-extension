@@ -1,8 +1,8 @@
 import BudgetControl from "@components/BudgetControl";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import PaymentSummary from "@components/PaymentSummary";
+import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-import ConfirmOrCancel from "@components/new/ConfirmOrCancel";
-import PublisherCard from "@components/new/PublisherCard";
 import { useState, MouseEvent, useRef, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";

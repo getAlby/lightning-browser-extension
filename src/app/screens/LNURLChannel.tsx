@@ -1,9 +1,9 @@
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import axios from "axios";
 import { useState, MouseEvent } from "react";
 import { toast } from "react-toastify";
-import ConfirmOrCancel from "~/app/components/new/ConfirmOrCancel";
-import PublisherCard from "~/app/components/new/PublisherCard";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
