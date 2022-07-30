@@ -118,7 +118,7 @@ const utils = {
       urlParams.set("origin", JSON.stringify(message.origin));
     }
     if (message.metadata) {
-      urlParams.set("metadata", JSON.stringify(message.metadata));
+      urlParams.set("metadata", message.metadata);
     }
     // action must always be present, this is used to route the request
     urlParams.set("action", message.action);
