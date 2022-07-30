@@ -28,25 +28,27 @@ export default function PublisherCard({
           target.src = DEFAULT_IMAGE;
         }}
       />
-      <div className="overflow-hidden text-center w-full">
+      <div className="flex flex-col overflow-hidden text-center w-full">
         <h2 className="text-xl my-2 leading-5 font-bold dark:text-white">
           {title}
         </h2>
         {url && (
           <a
             href={url}
+            title={url}
             target="_blank"
-            className="text-gray-500 dark:text-gray-400 mb-2"
+            className="text-gray-500 dark:text-gray-400 overflow-hidden mx-2 mb-2 text-ellipsis whitespace-nowrap"
             rel="noreferrer"
           >
-            {url.length > 60 ? url.substring(0, 60) + "..." : url}
+            {url}
           </a>
         )}
         {!url && description && (
-          <p className="text-gray-500 dark:text-gray-400 mb-2">
-            {description.length > 60
-              ? description.substring(0, 60) + "..."
-              : description}
+          <p
+            title={description}
+            className="text-gray-500 dark:text-gray-400 mx-2 mb-2 line-clamp-2"
+          >
+            {description}
           </p>
         )}
       </div>
