@@ -49,39 +49,32 @@ const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
   const continueButton = await findByText($document, "Continue");
   continueButton.click();
 
-  await page.waitForResponse(() => true);
+  await Promise.all([
+    page.waitForResponse(() => true),
+    page.waitForNavigation(), // The promise resolves after navigation has finished
+  ]);
+
   await findByText($document, "Success!");
-};
-
-const createAlbyWallet = async ({ page, $document, user }) => {
-  // click at "Create Alby Wallet"
-  const createNewWalletButton = await getByText($document, "Alby Wallet");
-  createNewWalletButton.click();
-
-  await findByText($document, "Your Alby Lightning Wallet");
-
-  // type user email
-  const emailField = await getByLabelText($document, "Email Address");
-  await emailField.type(user.email);
-
-  // type user password and confirm password
-  const walletPasswordField = await getByLabelText($document, "Password");
-  await walletPasswordField.type(user.password);
-
-  // click create a wallet button
-  const createWalletButton = await getByText($document, "Continue");
-  createWalletButton.click();
-
-  await page.waitForResponse(() => true);
-
-  await findByText($document, "Your Alby account is ready.");
 };
 
 test.describe("Create or connect wallets", () => {
   test("successfully creates an Alby wallet", async () => {
     const { user, browser, page, $document } =
       await commonCreateWalletUserCreate();
-    await createAlbyWallet({ page, $document, user });
+    // click at "Create Alby Wallet"
+    const createNewWalletButton = await getByText($document, "Alby Wallet");
+    createNewWalletButton.click();
+
+    await findByText($document, "Your Alby Lightning Wallet");
+
+    // type user email
+    const emailField = await getByLabelText($document, "Email Address");
+    await emailField.type(user.email);
+
+    // type user password and confirm password
+    const walletPasswordField = await getByLabelText($document, "Password");
+    await walletPasswordField.type(user.password);
+
     await commonCreateWalletSuccessCheck({ page, $document });
     await browser.close();
   });
