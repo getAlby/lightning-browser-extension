@@ -23,6 +23,10 @@ const commonCreateWalletUserCreate = async () => {
   const startedButton = await getByText($document, "Get Started");
   startedButton.click();
 
+  await Promise.all([
+    page.waitForNavigation(), // The promise resolves after navigation has finished
+  ]);
+
   await findByText($document, "Protect your wallet");
 
   // type user password and confirm password
@@ -61,6 +65,7 @@ test.describe("Create or connect wallets", () => {
   test("successfully creates an Alby wallet", async () => {
     const { user, browser, page, $document } =
       await commonCreateWalletUserCreate();
+
     // click at "Create Alby Wallet"
     const createNewWalletButton = await getByText($document, "Alby Wallet");
     createNewWalletButton.click();
@@ -100,11 +105,11 @@ test.describe("Create or connect wallets", () => {
     );
     await passwordField.type(user.password);
 
-    const unlockButton = await getByText($optionsdocument, "Unlock");
+    const unlockButton = await findByText($optionsdocument, "Unlock");
     unlockButton.click();
 
-    await waitFor(() => getByText($optionsdocument, "Your ⚡️ Websites"));
-    await waitFor(() => getByText($optionsdocument, "Other ⚡️ Websites"));
+    await findByText($optionsdocument, "Your ⚡️ Websites");
+    await findByText($optionsdocument, "Other ⚡️ Websites");
 
     await browser.close();
   });
