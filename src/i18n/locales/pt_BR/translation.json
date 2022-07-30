@@ -177,7 +177,7 @@
                 "tip_mobile": "Dica: Use esta carteira no seu dispositivo móvel",
                 "waiting": "aguardando dados LndHub...",
                 "scan_qr": "Leia o Código QR para importar esta carteira na Zeus ou BlueWallet.",
-                "export_uri": "Exportar URI LNDHub"
+                "export_uri": "Credenciais URI LNDHub"
             }
         },
         "unlock": {
@@ -258,7 +258,7 @@
             },
             "show_fiat": {
                 "title": "Sats para Fiat",
-                "subtitle": "Mostrar o valores também em moeda fiat usando o serviço provedor de cotações selecionado"
+                "subtitle": "Mostrar os valores também em moeda fiat usando o serviço provedor de cotações selecionado"
             }
         }
     },
