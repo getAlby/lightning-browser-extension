@@ -1,7 +1,7 @@
 //import Checkbox from "../../components/Form/Checkbox";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-import ConfirmOrCancel from "@components/new/ConfirmOrCancel";
-import PublisherCard from "@components/new/PublisherCard";
 import { useState, useRef } from "react";
 import { toast } from "react-toastify";
 import { USER_REJECTED_ERROR } from "~/common/constants";

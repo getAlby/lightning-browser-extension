@@ -1,6 +1,6 @@
 import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-import ConfirmOrCancel from "@components/new/ConfirmOrCancel";
-import PublisherCard from "@components/new/PublisherCard";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import PublisherCard from "@components/PublisherCard";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";

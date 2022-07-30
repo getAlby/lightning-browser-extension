@@ -1,7 +1,7 @@
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import Input from "@components/form/Input";
-import ConfirmOrCancel from "@components/new/ConfirmOrCancel";
-import PublisherCard from "@components/new/PublisherCard";
 import axios from "axios";
 import { useState, MouseEvent } from "react";
 import { USER_REJECTED_ERROR } from "~/common/constants";
