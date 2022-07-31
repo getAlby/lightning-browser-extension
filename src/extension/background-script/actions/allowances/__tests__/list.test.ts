@@ -1,9 +1,14 @@
 import db from "~/extension/background-script/db";
-import type { Allowance, Payment, MessageAllowanceList } from "~/types";
+import type {
+  Allowance,
+  DbAllowance,
+  DbPayment,
+  MessageAllowanceList,
+} from "~/types";
 
 import listAllowances from "../list";
 
-const mockPayments: Payment[] = [
+const mockPayments: DbPayment[] = [
   {
     allowanceId: "3",
     createdAt: "123456",
@@ -36,7 +41,7 @@ const mockPayments: Payment[] = [
   },
 ];
 
-const mockAllowances: Allowance[] = [
+const mockAllowances: DbAllowance[] = [
   {
     enabled: true,
     host: "pro.kollider.xyz",
@@ -48,11 +53,6 @@ const mockAllowances: Allowance[] = [
     remainingBudget: 500,
     totalBudget: 500,
     createdAt: "123456",
-    payments: [],
-    paymentsAmount: 0,
-    paymentsCount: 0,
-    percentage: "0",
-    usedBudget: 0,
     tag: "",
   },
   {
@@ -66,21 +66,28 @@ const mockAllowances: Allowance[] = [
     remainingBudget: 200,
     totalBudget: 200,
     createdAt: "1487076708000",
-    payments: [],
-    paymentsAmount: 0,
-    paymentsCount: 0,
-    percentage: "0",
-    usedBudget: 0,
     tag: "",
   },
 ];
 
 const resultAllowances: Allowance[] = [
-  mockAllowances[1],
+  {
+    ...mockAllowances[1],
+    id: 4,
+    payments: [],
+    paymentsAmount: 0,
+    paymentsCount: 0,
+    percentage: "0",
+    usedBudget: 0,
+  },
   {
     ...mockAllowances[0],
+    id: 3,
+    payments: [],
     paymentsAmount: 3000,
     paymentsCount: 2,
+    percentage: "0",
+    usedBudget: 0,
   },
 ];
 

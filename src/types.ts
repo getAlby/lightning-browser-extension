@@ -184,9 +184,18 @@ export interface MessageAllowanceAdd extends MessageDefault {
 export interface MessageAllowanceList extends MessageDefault {
   action: "listAllowances";
 }
+
 export interface MessageInvoices extends Omit<MessageDefault, "args"> {
   args: { limit?: number; isSettled?: boolean };
   action: "getInvoices";
+}
+
+export interface MessageAllowanceEnable extends MessageDefault {
+  origin: OriginData;
+  args: {
+    host: Allowance["host"];
+  };
+  action: "enableAllowance";
 }
 
 export interface MessageAllowanceDelete extends MessageDefault {

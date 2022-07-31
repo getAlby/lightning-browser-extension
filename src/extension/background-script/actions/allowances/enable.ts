@@ -1,10 +1,15 @@
+import { Runtime } from "webextension-polyfill";
 import utils from "~/common/lib/utils";
+import db from "~/extension/background-script/db";
+import type { MessageAllowanceEnable } from "~/types";
 
-import db from "../../db";
 import state from "../../state";
 import { setIcon, ExtensionIcon } from "../setup/setIcon";
 
-const enable = async (message, sender) => {
+const enable = async (
+  message: MessageAllowanceEnable,
+  sender: Runtime.MessageSender
+) => {
   const isUnlocked = state.getState().isUnlocked();
   const host = message.origin.host || message.args.host;
   const allowance = await db.allowances
@@ -18,14 +23,20 @@ const enable = async (message, sender) => {
     };
   } else {
     try {
-      const response = await utils.openPrompt(message);
-      if (response.data.enabled) {
-        await setIcon(ExtensionIcon.Active, sender.tab.id); // highlight the icon when enabled
+      const response = await utils.openPrompt<{
+        enabled: boolean;
+        remember: boolean;
+      }>(message);
+      if (response.data.enabled && sender.tab) {
+        await setIcon(ExtensionIcon.Active, sender.tab.id as number); // highlight the icon when enabled
       }
       // if the response should be saved/remembered we update the allowance for the domain
       // as this returns a promise we must wait until it resolves
       if (response.data.enabled && response.data.remember) {
         if (allowance) {
+          if (!allowance.id) {
+            return { data: { error: "id is missing" } };
+          }
           await db.allowances.update(allowance.id, { enabled: true });
         } else {
           await db.allowances.add({
@@ -36,6 +47,9 @@ const enable = async (message, sender) => {
             lastPaymentAt: 0,
             totalBudget: 0,
             remainingBudget: 0,
+            createdAt: Date.now().toString(),
+            lnurlAuth: false,
+            tag: "",
           });
         }
         await db.saveToStorage();
@@ -48,7 +62,9 @@ const enable = async (message, sender) => {
       };
     } catch (e) {
       console.error(e);
-      return { error: e.message };
+      if (e instanceof Error) {
+        return { error: e.message };
+      }
     }
   }
 };
