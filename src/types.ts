@@ -210,6 +210,11 @@ export interface MessageAllowanceGet extends MessageDefault {
   action: "getAllowance";
 }
 
+export interface MessageAllowanceGetById extends MessageDefault {
+  args: { id: Allowance["id"] };
+  action: "getAllowanceById";
+}
+
 export interface MessageLNURLChannel extends MessageDefault {
   args: { lnurlEncoded: string };
   public: boolean;

@@ -84,12 +84,12 @@ const resultAllowances: Allowance[] = [
   },
 ];
 
-describe("account all", () => {
+describe("list allowances", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  test("get all accounts", async () => {
+  test("list allowances", async () => {
     const message: MessageAllowanceList = {
       application: "LBE",
       prompt: true,

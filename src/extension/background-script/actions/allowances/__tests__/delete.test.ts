@@ -42,7 +42,7 @@ const mockAllowances = [
   },
 ];
 
-describe("account all", () => {
+describe("delete allowance", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });

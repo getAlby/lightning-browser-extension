@@ -1,7 +1,7 @@
 import db from "~/extension/background-script/db";
-import type { MessageAllowanceGet, DbAllowance, DbPayment } from "~/types";
+import type { MessageAllowanceGetById, DbAllowance, DbPayment } from "~/types";
 
-import getAllowance from "../get";
+import getAllowanceById from "../getById";
 
 const mockPayments: DbPayment[] = [
   {
@@ -65,28 +65,28 @@ const mockAllowances: DbAllowance[] = [
   },
 ];
 
-describe("get allowance", () => {
+describe("get allowance by id", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  test("get allowance", async () => {
-    const message: MessageAllowanceGet = {
+  test("get allowance by id", async () => {
+    const message: MessageAllowanceGetById = {
       application: "LBE",
       prompt: true,
-      action: "getAllowance",
+      action: "getAllowanceById",
       origin: {
         internal: true,
       },
       args: {
-        host: "pro.kollider.xyz",
+        id: 1,
       },
     };
 
     await db.payments.bulkAdd(mockPayments);
     await db.allowances.bulkAdd(mockAllowances);
 
-    expect(await getAllowance(message)).toStrictEqual({
+    expect(await getAllowanceById(message)).toStrictEqual({
       data: {
         ...mockAllowances[0],
         payments: mockPayments.reverse(),
