@@ -11,7 +11,6 @@ import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { USER_REJECTED_ERROR } from "~/common/constants";
-import api from "~/common/lib/api";
 import lnurl from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -104,15 +103,9 @@ function LNURLPay(props: Props) {
   }, [searchParams]);
 
   useEffect(() => {
-    api.getSettings().then((response) => {
-      if (response.userName) {
-        setUserName(response.userName);
-      }
-      if (response.userEmail) {
-        setUserEmail(response.userEmail);
-      }
-    });
-  }, []);
+    !!settings.userName && setUserName(settings.userName);
+    !!settings.userEmail && setUserEmail(settings.userEmail);
+  }, [settings.userName, settings.userEmail]);
 
   const getPayerData = (details: LNURLPayServiceResponse) => {
     if (
