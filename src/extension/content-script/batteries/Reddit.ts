@@ -34,7 +34,7 @@ function battery(): void {
   setLightningData([
     {
       method: "lnurl",
-      recipient,
+      address: recipient,
       ...getOriginData(),
       icon: imageUrl,
       name: document.title,

@@ -23,7 +23,9 @@ function Keysend(props: Props) {
   const navigate = useNavigate();
   const auth = useAccount();
   const [amount, setAmount] = useState(props.valueSat || "");
-  const [customRecords] = useState(props.customRecords || {});
+  const [customRecords] = useState(
+    props.customRecords || JSON.parse(searchParams.get("customRecords") || "{}")
+  );
   const [destination] = useState(
     props.destination || searchParams.get("destination")
   );

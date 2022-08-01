@@ -72,7 +72,10 @@ export interface OriginDataInternal {
 
 export interface Battery extends OriginData {
   method: string;
-  recipient: string;
+  address: string;
+  customKey?: string;
+  customValue?: string;
+  suggested?: string;
   name: string;
   icon: string;
 }
