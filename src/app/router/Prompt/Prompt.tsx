@@ -12,9 +12,7 @@ import Unlock from "@screens/Unlock";
 import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
-import { AccountProvider } from "~/app/context/AccountContext";
-import { AccountsProvider } from "~/app/context/AccountsContext";
-import { SettingsProvider } from "~/app/context/SettingsContext";
+import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import type {
   LNURLAuthServiceResponse,
@@ -50,133 +48,120 @@ const routeParams: {
 
 function Prompt() {
   return (
-    <SettingsProvider>
-      <AccountProvider>
-        <AccountsProvider>
-          <HashRouter>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <RequireAuth>
-                    <Layout />
-                  </RequireAuth>
-                }
-              >
-                <Route
-                  index
-                  element={<Navigate to={`/${routeParams.action}`} replace />}
-                />
-                <Route
-                  path="webln/enable"
-                  element={<Enable origin={routeParams.origin} />}
-                />
-                <Route
-                  path="lnurlAuth"
-                  element={
-                    <LNURLAuth
-                      details={
-                        routeParams.args
-                          ?.lnurlDetails as LNURLAuthServiceResponse
-                      }
-                      origin={routeParams.origin}
-                    />
+    <Providers>
+      <HashRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <RequireAuth>
+                <Layout />
+              </RequireAuth>
+            }
+          >
+            <Route
+              index
+              element={<Navigate to={`/${routeParams.action}`} replace />}
+            />
+            <Route
+              path="webln/enable"
+              element={<Enable origin={routeParams.origin} />}
+            />
+            <Route
+              path="lnurlAuth"
+              element={
+                <LNURLAuth
+                  details={
+                    routeParams.args?.lnurlDetails as LNURLAuthServiceResponse
                   }
+                  origin={routeParams.origin}
                 />
-                <Route
-                  path="lnurlPay"
-                  element={
-                    <LNURLPay
-                      details={
-                        routeParams.args
-                          ?.lnurlDetails as LNURLPayServiceResponse
-                      }
-                      origin={routeParams.origin}
-                    />
+              }
+            />
+            <Route
+              path="lnurlPay"
+              element={
+                <LNURLPay
+                  details={
+                    routeParams.args?.lnurlDetails as LNURLPayServiceResponse
                   }
+                  origin={routeParams.origin}
                 />
-                <Route
-                  path="lnurlWithdraw"
-                  element={
-                    <LNURLWithdraw
-                      details={
-                        routeParams.args
-                          ?.lnurlDetails as LNURLWithdrawServiceResponse
-                      }
-                      origin={routeParams.origin}
-                    />
+              }
+            />
+            <Route
+              path="lnurlWithdraw"
+              element={
+                <LNURLWithdraw
+                  details={
+                    routeParams.args
+                      ?.lnurlDetails as LNURLWithdrawServiceResponse
                   }
+                  origin={routeParams.origin}
                 />
-                <Route
-                  path="LNURLChannel"
-                  element={
-                    <LNURLChannel
-                      details={
-                        routeParams.args
-                          ?.lnurlDetails as LNURLChannelServiceResponse
-                      }
-                      origin={routeParams.origin}
-                    />
+              }
+            />
+            <Route
+              path="LNURLChannel"
+              element={
+                <LNURLChannel
+                  details={
+                    routeParams.args
+                      ?.lnurlDetails as LNURLChannelServiceResponse
                   }
+                  origin={routeParams.origin}
                 />
-                <Route
-                  path="makeInvoice"
-                  element={
-                    <MakeInvoice
-                      amountEditable={
-                        routeParams.args.amountEditable as boolean
-                      }
-                      memoEditable={routeParams.args.memoEditable as boolean}
-                      invoiceAttributes={
-                        routeParams.args.invoiceAttributes as RequestInvoiceArgs
-                      }
-                      origin={routeParams.origin}
-                    />
+              }
+            />
+            <Route
+              path="makeInvoice"
+              element={
+                <MakeInvoice
+                  amountEditable={routeParams.args.amountEditable as boolean}
+                  memoEditable={routeParams.args.memoEditable as boolean}
+                  invoiceAttributes={
+                    routeParams.args.invoiceAttributes as RequestInvoiceArgs
                   }
+                  origin={routeParams.origin}
                 />
-                <Route
-                  path="confirmPayment"
-                  element={
-                    <ConfirmPayment
-                      paymentRequest={
-                        routeParams.args?.paymentRequest as string
-                      }
-                      origin={routeParams.origin}
-                    />
+              }
+            />
+            <Route
+              path="confirmPayment"
+              element={
+                <ConfirmPayment
+                  paymentRequest={routeParams.args?.paymentRequest as string}
+                  origin={routeParams.origin}
+                />
+              }
+            />
+            <Route
+              path="confirmKeysend"
+              element={
+                <Keysend
+                  destination={routeParams.args?.destination as string}
+                  valueSat={routeParams.args?.amount as string}
+                  customRecords={
+                    routeParams.args?.customRecords as Record<string, string>
                   }
+                  origin={routeParams.origin}
                 />
-                <Route
-                  path="confirmKeysend"
-                  element={
-                    <Keysend
-                      destination={routeParams.args?.destination as string}
-                      valueSat={routeParams.args?.amount as string}
-                      customRecords={
-                        routeParams.args?.customRecords as Record<
-                          string,
-                          string
-                        >
-                      }
-                      origin={routeParams.origin}
-                    />
-                  }
+              }
+            />
+            <Route
+              path="confirmSignMessage"
+              element={
+                <ConfirmSignMessage
+                  message={routeParams.args?.message as string}
+                  origin={routeParams.origin}
                 />
-                <Route
-                  path="confirmSignMessage"
-                  element={
-                    <ConfirmSignMessage
-                      message={routeParams.args?.message as string}
-                      origin={routeParams.origin}
-                    />
-                  }
-                />
-              </Route>
-              <Route path="unlock" element={<Unlock />} />
-            </Routes>
-          </HashRouter>
-        </AccountsProvider>
-      </AccountProvider>
-    </SettingsProvider>
+              }
+            />
+          </Route>
+          <Route path="unlock" element={<Unlock />} />
+        </Routes>
+      </HashRouter>
+    </Providers>
   );
 }
 
