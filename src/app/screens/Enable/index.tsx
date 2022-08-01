@@ -78,35 +78,25 @@ function Enable(props: Props) {
           <PublisherCard
             title={props.origin.name}
             image={props.origin.icon}
-            url={props.origin.location}
+            url={props.origin.host}
           />
         </div>
 
         <div className="flex flex-col justify-between h-3/5">
-          <div className="font-medium dark:text-white p-6">
-            <p className="mb-4">This app would like to:</p>
+          <div className="font-medium text-sm dark:text-white p-6">
+            <p className="mb-4">Connect and allow this site to:</p>
 
             <div className="mb-4 flex items-center">
               <CheckIcon className="w-5 h-5 mr-2" />
-              <p className="dark:text-white">
-                View your wallet balance & activity
-              </p>
+              <p className="dark:text-white">Initiate payments</p>
             </div>
 
             <div className="mb-4 flex items-center">
               <CheckIcon className="w-5 h-5 mr-2" />
               <p className="dark:text-white">
-                Request approval for transactions
+                Request invoices and lightning information
               </p>
             </div>
-
-            <a
-              className="underline mt-8 text-sm text-gray-500 dark:text-gray-400"
-              href="#"
-              onClick={block}
-            >
-              Do not ask for this site again
-            </a>
           </div>
 
           <div className="text-center p-2">
@@ -115,6 +105,18 @@ function Enable(props: Props) {
               onConfirm={enable}
               onCancel={reject}
             />
+          </div>
+
+          <div className="text-center font-medium dark:text-white p-6">
+            <p className="mb-2 text-sm text-gray-400">
+              <a
+                className="underline mt-8 text-sm text-gray-500 dark:text-gray-400"
+                href="#"
+                onClick={block}
+              >
+                Block {props.origin.host} from further requests
+              </a>
+            </p>
           </div>
         </div>
       </div>
