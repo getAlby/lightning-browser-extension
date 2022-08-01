@@ -10,12 +10,12 @@ const parseRecipient = (content: string): Battery => {
     .split(";")
     .map((e) => e.trim())
     .filter((e) => !!e);
-  const obj = {};
+  const obj: Record<string, string> = {};
   tokens.forEach((t) => {
     const kv = t.split("=").map((e) => e.trim());
     obj[kv[0]] = kv[1];
   });
-  return obj as Battery;
+  return obj as unknown as Battery; // YAY TypeScript :/
 };
 
 const battery = (): void => {
