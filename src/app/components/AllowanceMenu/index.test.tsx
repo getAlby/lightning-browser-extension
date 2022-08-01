@@ -35,6 +35,10 @@ const props: Props = {
 };
 
 describe("AllowanceMenu", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   test("set new budget", async () => {
     const user = userEvent.setup();
 
@@ -61,16 +65,19 @@ describe("AllowanceMenu", () => {
 
     await screen.findByText("Set a new budget");
 
-    await act(() => {
-      userEvent.type(screen.getByLabelText("Budget"), "250");
+    await act(async () => {
+      await user.clear(screen.getByLabelText("New budget"));
+      await user.type(screen.getByLabelText("New budget"), "250");
     });
+
+    expect(screen.getByLabelText("New budget")).toHaveValue(250);
 
     const saveButton = await screen.findByRole("button", {
       name: "Save",
     });
 
-    await act(() => {
-      user.click(saveButton);
+    await act(async () => {
+      await user.click(saveButton);
     });
 
     await waitFor(() => expect(mock).toHaveBeenCalled());

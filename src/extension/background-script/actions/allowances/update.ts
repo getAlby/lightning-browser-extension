@@ -1,14 +1,15 @@
 import db from "~/extension/background-script/db";
-import type { MessageAllowanceUpdate } from "~/types";
+import type { Allowance, MessageAllowanceUpdate } from "~/types";
+
+type OptionalPick<T, K extends keyof T> = { [P in K]?: T[P] };
 
 const updateAllowance = async (message: MessageAllowanceUpdate) => {
   const id = message.args.id;
 
-  const update: {
-    totalBudget?: number;
-    remainingBudget?: number;
-    enabled?: boolean;
-  } = {};
+  const update: OptionalPick<
+    Allowance,
+    "totalBudget" | "remainingBudget" | "enabled"
+  > = {};
   if (Object.prototype.hasOwnProperty.call(message.args, "totalBudget")) {
     update.totalBudget = message.args.totalBudget;
     update.remainingBudget = message.args.totalBudget;
