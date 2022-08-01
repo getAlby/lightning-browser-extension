@@ -9,8 +9,6 @@ import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
-import { AccountProvider } from "~/app/context/AccountContext";
-import { SettingsProvider } from "~/app/context/SettingsContext";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
 import i18n from "~/i18n/i18nConfig";
 import { translationI18nNamespace } from "~/i18n/namespaces";
@@ -124,30 +122,26 @@ function App() {
   }, [location]);
 
   return (
-    <SettingsProvider>
-      <AccountProvider>
-        <div>
-          {process.env.NODE_ENV === "development" && (
-            <>
-              <DevMenu />
-              <div className="w-32 mr-4 mt-1 pt-3 float-right">
-                <LocaleSwitcher />
-              </div>
-            </>
-          )}
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center font-serif font-medium text-2xl pt-7 pb-3 dark:text-white">
-              <p>{t("welcome.heading")}</p>
-            </div>
-
-            <Steps steps={steps} />
+    <div>
+      {process.env.NODE_ENV === "development" && (
+        <>
+          <DevMenu />
+          <div className="w-32 mr-4 mt-1 pt-3 float-right">
+            <LocaleSwitcher />
           </div>
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {routesElement}
-          </div>
+        </>
+      )}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center font-serif font-medium text-2xl pt-7 pb-3 dark:text-white">
+          <p>{t("welcome.heading")}</p>
         </div>
-      </AccountProvider>
-    </SettingsProvider>
+
+        <Steps steps={steps} />
+      </div>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {routesElement}
+      </div>
+    </div>
   );
 }
 
