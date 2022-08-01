@@ -2,6 +2,7 @@ import axios from "axios";
 import Hex from "crypto-js/enc-hex";
 import hmacSHA256 from "crypto-js/hmac-sha256";
 import sha256 from "crypto-js/sha256";
+import PubSub from "pubsub-js";
 
 import utils from "../../../../common/lib/utils";
 import HashKeySigner from "../../../../common/utils/signer";
