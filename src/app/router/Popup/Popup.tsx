@@ -8,7 +8,6 @@ import Send from "@screens/Send";
 import Unlock from "@screens/Unlock";
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { useAccount } from "~/app/context/AccountContext";
 import Providers from "~/app/context/Providers";
 
 import RequireAuth from "../RequireAuth";
@@ -41,18 +40,9 @@ function Popup() {
 }
 
 const Layout = () => {
-  const { account, balancesDecorated } = useAccount();
-
   return (
     <div className="flex flex-col h-full">
-      <Navbar
-        title={
-          typeof account?.name === "string"
-            ? `${account?.name} - ${account?.alias}`.substring(0, 21)
-            : ""
-        }
-        balances={balancesDecorated}
-      />
+      <Navbar />
 
       <main className="flex flex-col grow min-h-0">
         <Outlet />

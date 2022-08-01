@@ -85,18 +85,9 @@ function Options() {
 }
 
 const Layout = () => {
-  const { account, balancesDecorated } = useAccount();
-
   return (
     <div>
-      <Navbar
-        title={
-          typeof account?.name === "string"
-            ? `${account?.name} - ${account?.alias}`.substring(0, 21)
-            : ""
-        }
-        balances={balancesDecorated}
-      >
+      <Navbar>
         <Navbar.Link href="/publishers">Websites</Navbar.Link>
         <Navbar.Link href="/send">Send</Navbar.Link>
         <Navbar.Link href="/receive">Receive</Navbar.Link>

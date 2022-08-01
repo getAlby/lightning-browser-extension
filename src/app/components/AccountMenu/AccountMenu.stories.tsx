@@ -4,12 +4,7 @@ import { AccountsProvider } from "~/app/context/AccountsContext";
 
 import AcountMenu from ".";
 
-export const Default = () => (
-  <AcountMenu
-    title="node"
-    balances={{ satsBalance: "1000 sats", fiatBalance: "$0.10" }}
-  />
-);
+export const Default = () => <AcountMenu />;
 
 const metadata: Meta = {
   title: "Components/AcountMenu",

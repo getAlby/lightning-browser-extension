@@ -15,19 +15,25 @@ import utils from "~/common/lib/utils";
 import Menu from "../Menu";
 
 export type Props = {
-  title: string;
-  balances: {
-    satsBalance: string;
-    fiatBalance: string;
-  };
   showOptions?: boolean;
 };
 
-function AccountMenu({ title, balances, showOptions = true }: Props) {
-  const auth = useAccount();
+function AccountMenu({ showOptions = true }: Props) {
+  const {
+    setAccountId,
+    fetchAccountInfo,
+    account: authAccount,
+    balancesDecorated,
+  } = useAccount();
   const navigate = useNavigate();
   const { accounts, getAccounts } = useAccounts();
   const [loading, setLoading] = useState(false);
+
+  // update title
+  const title =
+    !!authAccount?.name &&
+    typeof authAccount?.name === "string" &&
+    `${authAccount?.name} - ${authAccount?.alias}`.substring(0, 21);
 
   useEffect(() => {
     getAccounts();
@@ -36,12 +42,17 @@ function AccountMenu({ title, balances, showOptions = true }: Props) {
 
   async function selectAccount(accountId: string) {
     setLoading(true);
-    auth.setAccountId(accountId);
-    await utils.call("selectAccount", {
-      id: accountId,
-    });
-    await auth.fetchAccountInfo({ accountId });
-    setLoading(false);
+    try {
+      setAccountId(accountId);
+      await utils.call("selectAccount", {
+        id: accountId,
+      });
+      await fetchAccountInfo({ accountId });
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
   }
 
   function openOptions(path: string) {
@@ -62,20 +73,22 @@ function AccountMenu({ title, balances, showOptions = true }: Props) {
       </p>
 
       <div
-        className={`flex-auto mx-2 py-1 ${!title && !balances ? "w-28" : ""}`}
+        className={`flex-auto mx-2 py-1 ${
+          !title && !balancesDecorated ? "w-28" : ""
+        }`}
       >
         <p className="text-xs text-gray-700 dark:text-neutral-400">
           {title || <Skeleton />}
         </p>
 
-        {balances.satsBalance ? (
+        {balancesDecorated.satsBalance ? (
           <p className="flex justify-between">
             <span className="text-xs dark:text-white">
-              {balances.satsBalance}
+              {balancesDecorated.satsBalance}
             </span>
-            {!!balances.fiatBalance && (
+            {!!balancesDecorated.fiatBalance && (
               <span className="text-xs text-gray-600 dark:text-neutral-400">
-                ~{balances.fiatBalance}
+                ~{balancesDecorated.fiatBalance}
               </span>
             )}
           </p>
@@ -106,7 +119,7 @@ function AccountMenu({ title, balances, showOptions = true }: Props) {
                 <span className="overflow-hidden text-ellipsis whitespace-nowrap">
                   {account.name}&nbsp;
                 </span>
-                {accountId === auth.account?.id && (
+                {accountId === authAccount?.id && (
                   <span
                     data-testid="selected"
                     className="ml-auto w-3.5 h-3.5 rounded-full bg-orange-bitcoin flex justify-center items-center"

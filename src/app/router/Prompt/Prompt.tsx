@@ -11,7 +11,6 @@ import MakeInvoice from "@screens/MakeInvoice";
 import Unlock from "@screens/Unlock";
 import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { useAccount } from "~/app/context/AccountContext";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import type {
@@ -166,21 +165,11 @@ function Prompt() {
 }
 
 const Layout = () => {
-  const { account, balancesDecorated } = useAccount();
-
   return (
     <>
       <ToastContainer />
       <div className="px-4 py-2 bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
-        <AccountMenu
-          title={
-            typeof account?.name === "string"
-              ? `${account?.name} - ${account?.alias}`.substring(0, 21)
-              : ""
-          }
-          showOptions={false}
-          balances={balancesDecorated}
-        />
+        <AccountMenu showOptions={false} />
       </div>
 
       <main className="flex flex-col grow min-h-0">
