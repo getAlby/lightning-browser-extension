@@ -86,30 +86,62 @@ function Home() {
 
   const loadPayments = useCallback(async () => {
     try {
+      let tmpPayments;
+
       if (allowance) {
-        const payments: Transaction[] = allowance.payments.map((payment) => ({
-          ...payment,
-          id: `${payment.id}`,
-          title: "",
-          date: "",
-        }));
-        for await (const payment of payments) {
-          const totalAmountFiat = settings.showFiat
-            ? await getFiatValue(payment.totalAmount)
-            : "";
-          payment.totalAmountFiat = totalAmountFiat;
-        }
-        setPayments(payments);
+        tmpPayments = allowance.payments;
       } else {
-        const result = await api.getPayments({ limit: 10 });
-        for await (const payment of result.payments) {
-          const totalAmountFiat = settings.showFiat
-            ? await getFiatValue(payment.totalAmount)
-            : "";
-          payment.totalAmountFiat = totalAmountFiat;
-        }
-        setPayments(result?.payments);
+        const { payments: dbPayments } = await api.getPayments({ limit: 10 });
+        tmpPayments = dbPayments;
       }
+
+      const payments: Transaction[] = tmpPayments.map((payment) => ({
+        ...payment,
+        id: `${payment.id}`,
+        type: "sent",
+        date: dayjs(payment.createdAt).fromNow(),
+        title: (
+          <p className="truncate">
+            <a
+              target="_blank"
+              title={payment.name}
+              href={
+                allowance
+                  ? `options.html#/publishers/${allowance.id}`
+                  : `options.html#/publishers`
+              }
+              rel="noreferrer"
+            >
+              {payment.name}
+            </a>
+          </p>
+        ),
+        subTitle: (
+          <p className="truncate">
+            <a
+              target="_blank"
+              title={payment.name}
+              href={
+                allowance
+                  ? `options.html#/publishers/${allowance.id}`
+                  : `options.html#/publishers`
+              }
+              rel="noreferrer"
+            >
+              {payment.host}
+            </a>
+          </p>
+        ),
+      }));
+
+      for await (const payment of payments) {
+        const totalAmountFiat = settings.showFiat
+          ? await getFiatValue(payment.totalAmount)
+          : "";
+        payment.totalAmountFiat = totalAmountFiat;
+      }
+
+      setPayments(payments);
       setLoadingPayments(false);
     } catch (e) {
       console.error(e);
@@ -261,39 +293,7 @@ function Home() {
           </h2>
 
           {payments.length > 0 ? (
-            <TransactionsTable
-              transactions={payments.map((payment) => {
-                return {
-                  ...payment,
-                  type: "sent",
-                  date: dayjs(payment.createdAt).fromNow(),
-                  title: (
-                    <p className="truncate">
-                      <a
-                        target="_blank"
-                        title={payment.name}
-                        href={`options.html#/publishers/${allowance.id}`}
-                        rel="noreferrer"
-                      >
-                        {payment.name}
-                      </a>
-                    </p>
-                  ),
-                  subTitle: (
-                    <p className="truncate">
-                      <a
-                        target="_blank"
-                        title={payment.name}
-                        href={`options.html#/publishers/${allowance.id}`}
-                        rel="noreferrer"
-                      >
-                        {payment.host}
-                      </a>
-                    </p>
-                  ),
-                };
-              })}
-            />
+            <TransactionsTable transactions={payments} />
           ) : (
             <p className="text-gray-500 dark:text-neutral-400">
               <Trans
@@ -385,37 +385,7 @@ function Home() {
               <Tab.Panels>
                 <Tab.Panel>
                   {payments.length > 0 ? (
-                    <TransactionsTable
-                      transactions={payments.map((payment) => ({
-                        ...payment,
-                        type: "sent",
-                        date: dayjs(payment.createdAt).fromNow(),
-                        title: (
-                          <p className="truncate">
-                            <a
-                              target="_blank"
-                              title={payment.name}
-                              href={`options.html#/publishers`}
-                              rel="noreferrer"
-                            >
-                              {payment.name}
-                            </a>
-                          </p>
-                        ),
-                        subTitle: (
-                          <p className="truncate">
-                            <a
-                              target="_blank"
-                              title={payment.name}
-                              href={`options.html#/publishers`}
-                              rel="noreferrer"
-                            >
-                              {payment.host}
-                            </a>
-                          </p>
-                        ),
-                      }))}
-                    />
+                    <TransactionsTable transactions={payments} />
                   ) : (
                     <p className="text-gray-500 dark:text-neutral-400">
                       {t("default_view.no_transactions")}
