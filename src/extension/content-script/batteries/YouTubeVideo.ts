@@ -4,16 +4,20 @@ import setLightningData from "../setLightningData";
 const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
 
 const battery = (): void => {
-  const videoDescription = document.querySelector(
-    "#columns #primary #primary-inner #meta-contents #description .content"
-  );
+  let text = "";
+  document
+    .querySelectorAll(
+      "#columns #primary #primary-inner #meta-contents #description .content"
+    )
+    .forEach((e) => {
+      text += ` ${e.textContent}`;
+    });
   const channelLink = document.querySelector(
     "#columns #primary #primary-inner #meta-contents .ytd-channel-name a"
   );
-  if (!videoDescription || !channelLink) {
+  if (!text || !channelLink) {
     return;
   }
-  const text = videoDescription.textContent || "";
   let match;
   let recipient;
   // check for an lnurl
