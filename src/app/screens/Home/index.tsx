@@ -86,19 +86,67 @@ function Home() {
 
   const loadPayments = useCallback(async () => {
     try {
-      const result = await api.getPayments({ limit: 10 });
-      for await (const payment of result.payments) {
+      let tmpPayments;
+
+      if (allowance) {
+        tmpPayments = allowance.payments;
+      } else {
+        const { payments: dbPayments } = await api.getPayments({ limit: 10 });
+        tmpPayments = dbPayments;
+      }
+
+      const payments: Transaction[] = tmpPayments.map((payment) => ({
+        ...payment,
+        id: `${payment.id}`,
+        type: "sent",
+        date: dayjs(payment.createdAt).fromNow(),
+        title: (
+          <p className="truncate">
+            <a
+              target="_blank"
+              title={payment.name}
+              href={
+                allowance
+                  ? `options.html#/publishers/${allowance.id}`
+                  : `options.html#/publishers`
+              }
+              rel="noreferrer"
+            >
+              {payment.name}
+            </a>
+          </p>
+        ),
+        subTitle: (
+          <p className="truncate">
+            <a
+              target="_blank"
+              title={payment.name}
+              href={
+                allowance
+                  ? `options.html#/publishers/${allowance.id}`
+                  : `options.html#/publishers`
+              }
+              rel="noreferrer"
+            >
+              {payment.host}
+            </a>
+          </p>
+        ),
+      }));
+
+      for await (const payment of payments) {
         const totalAmountFiat = settings.showFiat
           ? await getFiatValue(payment.totalAmount)
           : "";
         payment.totalAmountFiat = totalAmountFiat;
       }
-      setPayments(result?.payments);
+
+      setPayments(payments);
       setLoadingPayments(false);
     } catch (e) {
       console.error(e);
     }
-  }, [settings.showFiat]);
+  }, [allowance, settings.showFiat]);
 
   function handleLightningDataMessage(response: {
     action: string;
@@ -244,69 +292,8 @@ function Home() {
             {t("allowance_view.recent_transactions")}
           </h2>
 
-          {allowance?.payments.length > 0 ? (
-            <TransactionsTable
-              transactions={allowance.payments.map((payment) => {
-                const {
-                  createdAt,
-                  description,
-                  host,
-                  id,
-                  location,
-                  name,
-                  preimage,
-                  totalAmount,
-                  totalFees,
-                } = payment;
-
-                return {
-                  createdAt,
-                  description,
-                  id: `${id}`,
-                  location,
-                  name,
-                  preimage,
-                  host,
-                  totalAmount:
-                    typeof totalAmount === "string"
-                      ? parseInt(totalAmount)
-                      : totalAmount,
-                  totalFees,
-                  amount: "",
-                  currency: "",
-                  totalAmountFiat: "",
-                  value: "",
-                  // @TODO: Refactor: transaction-creation #1158
-                  // https://github.com/getAlby/lightning-browser-extension/issues/1158
-                  date: dayjs(payment.createdAt).fromNow(),
-                  // date: dayjs.unix(payment.createdAt),
-                  title: (
-                    <p className="truncate">
-                      <a
-                        target="_blank"
-                        title={payment.name}
-                        href={`options.html#/publishers/${allowance.id}`}
-                        rel="noreferrer"
-                      >
-                        {payment.name}
-                      </a>
-                    </p>
-                  ),
-                  subTitle: (
-                    <p className="truncate">
-                      <a
-                        target="_blank"
-                        title={payment.name}
-                        href={`options.html#/publishers/${allowance.id}`}
-                        rel="noreferrer"
-                      >
-                        {payment.host}
-                      </a>
-                    </p>
-                  ),
-                };
-              })}
-            />
+          {payments.length > 0 ? (
+            <TransactionsTable transactions={payments} />
           ) : (
             <p className="text-gray-500 dark:text-neutral-400">
               <Trans
@@ -398,37 +385,7 @@ function Home() {
               <Tab.Panels>
                 <Tab.Panel>
                   {payments.length > 0 ? (
-                    <TransactionsTable
-                      transactions={payments.map((payment) => ({
-                        ...payment,
-                        type: "sent",
-                        date: dayjs(payment.createdAt).fromNow(),
-                        title: (
-                          <p className="truncate">
-                            <a
-                              target="_blank"
-                              title={payment.name}
-                              href={`options.html#/publishers`}
-                              rel="noreferrer"
-                            >
-                              {payment.name}
-                            </a>
-                          </p>
-                        ),
-                        subTitle: (
-                          <p className="truncate">
-                            <a
-                              target="_blank"
-                              title={payment.name}
-                              href={`options.html#/publishers`}
-                              rel="noreferrer"
-                            >
-                              {payment.host}
-                            </a>
-                          </p>
-                        ),
-                      }))}
-                    />
+                    <TransactionsTable transactions={payments} />
                   ) : (
                     <p className="text-gray-500 dark:text-neutral-400">
                       {t("default_view.no_transactions")}
