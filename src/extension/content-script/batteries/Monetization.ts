@@ -12,9 +12,9 @@ const parseRecipient = (content: string): BatteryMetaTagRecipient => {
     .filter((e) => !!e);
 
   const recipient = tokens.reduce((obj, tkn) => {
-    const keysAndValues = tkn.split("=");
-    const keysAndValuesTrimmed = keysAndValues.map((e) => e.trim());
-    return { ...obj, [keysAndValuesTrimmed[0]]: keysAndValuesTrimmed[1] };
+    const keyAndValue = tkn.split("=");
+    const keyAndValueTrimmed = keyAndValue.map((e) => e.trim());
+    return { ...obj, [keyAndValueTrimmed[0]]: keyAndValueTrimmed[1] };
   }, {} as BatteryMetaTagRecipient);
 
   return recipient;
@@ -29,7 +29,7 @@ const battery = (): void => {
   }
   const content = monetizationTag.content;
 
-  let recipient;
+  let recipient: BatteryMetaTagRecipient;
   // check for backwards compatibility: supports directly a lightning address or lnurlp:xxx
   if (content.match(/^lnurlp:/) || content.indexOf("=") === -1) {
     const lnAddress = monetizationTag.content.replace(/lnurlp:/i, "");
