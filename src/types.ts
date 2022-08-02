@@ -95,6 +95,13 @@ export interface MessageDefault {
   prompt?: boolean;
 }
 
+export interface MessagePaymentAll extends MessageDefault {
+  action: "getPayments";
+  args?: {
+    limit?: number;
+  };
+}
+
 export interface MessageAccountRemove extends MessageDefault {
   args?: { id: Account["id"] };
   action: "removeAccount";

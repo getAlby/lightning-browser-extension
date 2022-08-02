@@ -10,9 +10,9 @@ import type {
   AccountInfo,
   NodeInfo,
   Allowance,
-  Transaction,
   SettingsStorage,
   MessageInvoices,
+  DbPayment,
 } from "~/types";
 
 import {
@@ -87,7 +87,7 @@ export const selectAccount = (id: string) =>
 export const getAllowance = (host: string) =>
   utils.call<Allowance>("getAllowance", { host });
 export const getPayments = (options: { limit: number }) =>
-  utils.call<{ payments: Transaction[] }>("getPayments", options);
+  utils.call<{ payments: DbPayment[] }>("getPayments", options);
 export const getSettings = () => utils.call<SettingsStorage>("getSettings");
 export const getStatus = () => utils.call<StatusRes>("status");
 export const getInfo = () => utils.call<NodeInfo>("getInfo");
