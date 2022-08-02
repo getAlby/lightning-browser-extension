@@ -20,24 +20,14 @@ const metadata: Meta = {
 
 export default metadata;
 
-export const Default = () => (
-  <Navbar
-    title="John Doe"
-    balances={{ satsBalance: "1000 sats", fiatBalance: "$0.10" }}
-  />
-);
+export const Default = () => <Navbar />;
 
 export const WithLinks = () => (
-  <Navbar
-    title="John Doe"
-    balances={{ satsBalance: "1000 sats", fiatBalance: "$0.10" }}
-  >
+  <Navbar>
     <Navbar.Link href="/">Screen 1</Navbar.Link>
     <Navbar.Link href="/screen-2">Screen 2</Navbar.Link>
     <Navbar.Link href="/screen-3">Screen 3</Navbar.Link>
   </Navbar>
 );
 
-export const Loading = () => (
-  <Navbar title="" balances={{ satsBalance: "", fiatBalance: "" }} />
-);
+export const Loading = () => <Navbar />;

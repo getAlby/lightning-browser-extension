@@ -9,8 +9,7 @@ import type { Accounts } from "~/types";
 import AccountMenu from ".";
 
 const defaultProps = {
-  title: "node",
-  balances: { satsBalance: "1000 sats", fiatBalance: "$0.10" },
+  showOptions: true,
 };
 
 const mockAccounts: Accounts = {
@@ -93,7 +92,7 @@ describe("AccountMenu", () => {
 
     render(
       <BrowserRouter>
-        <AccountMenu showOptions={false} {...defaultProps} />
+        <AccountMenu showOptions={false} />
       </BrowserRouter>
     );
 
