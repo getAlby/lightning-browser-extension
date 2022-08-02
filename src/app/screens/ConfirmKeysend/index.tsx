@@ -106,51 +106,50 @@ function Keysend(props: Props) {
   }
 
   return (
-    <div className="overflow-y-auto no-scrollbar h-full">
-      <div className="h-2/5 border-b border-gray-200 dark:border-neutral-500">
-        <PublisherCard
-          title={origin.name}
-          description={origin.description}
-          image={origin.icon}
-        />
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
+      <div className="text-center text-xl font-semibold dark:text-white py-2 border-b border-gray-200 dark:border-neutral-500">
+        Approve Payment
       </div>
       {!successMessage ? (
-        <div className="flex flex-col justify-between h-3/5">
-          <div className="pt-4 px-4">
-            <div className="mb-8">
-              <PaymentSummary
-                amount={amount}
-                description={`Send payment to ${destination}`}
+        <div className="h-full flex flex-col justify-between">
+          <div>
+            <PublisherCard title={origin.name} image={origin.icon} />
+            <div className="m-4">
+              <div className="shadow mb-4 bg-white dark:bg-surface-02dp p-4 rounded-lg">
+                <PaymentSummary
+                  amount={amount}
+                  description={`Send payment to ${destination}`}
+                />
+              </div>
+
+              <BudgetControl
+                fiatAmount={fiatAmount}
+                remember={rememberMe}
+                onRememberChange={(event) => {
+                  setRememberMe(event.target.checked);
+                }}
+                budget={budget}
+                onBudgetChange={(event) => setBudget(event.target.value)}
               />
             </div>
-
-            <BudgetControl
-              fiatAmount={fiatAmount}
-              remember={rememberMe}
-              onRememberChange={(event) => {
-                setRememberMe(event.target.checked);
-              }}
-              budget={budget}
-              onBudgetChange={(event) => setBudget(event.target.value)}
-            />
           </div>
-
-          <div className="text-center p-2">
-            <ConfirmOrCancel
-              disabled={loading}
-              loading={loading}
-              onConfirm={confirm}
-              onCancel={reject}
-            />
-          </div>
-        </div>
-      ) : (
-        <div className="m-6">
-          <SuccessMessage
-            message={successMessage}
-            onClose={() => window.close()}
+          <ConfirmOrCancel
+            disabled={loading}
+            loading={loading}
+            onConfirm={confirm}
+            onCancel={reject}
           />
         </div>
+      ) : (
+        <>
+          <PublisherCard title={origin.name} image={origin.icon} />
+          <div className="m-4">
+            <SuccessMessage
+              message={successMessage}
+              onClose={() => window.close()}
+            />
+          </div>
+        </>
       )}
     </div>
   );

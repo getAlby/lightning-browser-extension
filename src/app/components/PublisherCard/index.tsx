@@ -5,7 +5,10 @@ export type Props = {
   title: string;
   image: string;
   description?: string;
+  lnAddress?: string;
   url?: string;
+  isCard?: boolean;
+  isSmall?: boolean;
   children?: React.ReactNode;
 };
 
@@ -14,12 +17,24 @@ export default function PublisherCard({
   image,
   description,
   url,
+  lnAddress,
+  isCard = true,
+  isSmall = true,
   children,
 }: Props) {
   return (
-    <div className="h-full flex flex-col justify-center items-center bg-gray-100 dark:bg-surface-02dp">
+    <div
+      className={
+        "flex items-center bg-white dark:bg-surface-02dp " +
+        (isCard ? "drop-shadow rounded-lg mt-4 mx-4 " : "") +
+        (isSmall ? "p-2" : "flex-col justify-center p-4")
+      }
+    >
       <img
-        className="w-20 h-20 m-2 shrink-0 bg-white border-solid border-2 border-white object-cover rounded-full shadow-2xl"
+        className={
+          "m-2 shrink-0 bg-white border-solid border-2 border-white object-cover rounded-lg shadow-2xl " +
+          (isSmall ? "w-14 h-14 mr-4" : "w-20 h-20")
+        }
         src={image}
         alt={`${title} logo`}
         onError={(e) => {
@@ -28,10 +43,28 @@ export default function PublisherCard({
           target.src = DEFAULT_IMAGE;
         }}
       />
-      <div className="flex flex-col overflow-hidden text-center w-full">
-        <h2 className="text-xl my-2 leading-5 font-bold dark:text-white">
+      <div
+        className={
+          "flex flex-col overflow-hidden w-full " +
+          (isSmall ? "" : "text-center")
+        }
+      >
+        <h2
+          className={
+            "text-xl leading-5 font-semibold dark:text-white " +
+            (isSmall ? "my-1" : "my-2")
+          }
+        >
           {title}
         </h2>
+        {lnAddress && (
+          <p
+            title={lnAddress}
+            className="text-gray-500 dark:text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap"
+          >
+            {lnAddress}
+          </p>
+        )}
         {url && (
           <a
             href={url}

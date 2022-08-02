@@ -5,6 +5,7 @@ import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import lightningPayReq from "bolt11";
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
@@ -24,6 +25,9 @@ export type Props = {
 function ConfirmPayment(props: Props) {
   const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
+  const { t } = useTranslation("components", {
+    keyPrefix: "confirmOrCancel",
+  });
 
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -99,36 +103,37 @@ function ConfirmPayment(props: Props) {
   }
 
   return (
-    <div className="overflow-y-auto no-scrollbar h-full">
-      <div className="h-2/5 border-b border-gray-200 dark:border-neutral-500">
-        <PublisherCard
-          title={originRef.current.name}
-          image={originRef.current.icon}
-        />
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
+      <div className="text-center text-xl font-semibold dark:text-white py-2 border-b border-gray-200 dark:border-neutral-500">
+        Approve Payment
       </div>
       {!successMessage ? (
-        <div className="flex flex-col justify-between h-3/5">
-          <div className="pt-4 px-4">
-            <h1 className="dark:text-white font-bold mb-4">Approve payment</h1>
-            <div className="mb-6">
-              <PaymentSummary
-                amount={invoiceRef.current?.satoshis}
-                description={invoiceRef.current?.tagsObject.description}
+        <div className="h-full flex flex-col justify-between">
+          <div>
+            <PublisherCard
+              title={originRef.current.name}
+              image={originRef.current.icon}
+            />
+            <div className="m-4">
+              <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
+                <PaymentSummary
+                  amount={invoiceRef.current?.satoshis}
+                  description={invoiceRef.current?.tagsObject.description}
+                />
+              </div>
+
+              <BudgetControl
+                fiatAmount={fiatAmount}
+                remember={rememberMe}
+                onRememberChange={(event) => {
+                  setRememberMe(event.target.checked);
+                }}
+                budget={budget}
+                onBudgetChange={(event) => setBudget(event.target.value)}
               />
             </div>
-
-            <BudgetControl
-              fiatAmount={fiatAmount}
-              remember={rememberMe}
-              onRememberChange={(event) => {
-                setRememberMe(event.target.checked);
-              }}
-              budget={budget}
-              onBudgetChange={(event) => setBudget(event.target.value)}
-            />
           </div>
-
-          <div className="text-center p-2">
+          <div>
             <ConfirmOrCancel
               disabled={loading}
               loading={loading}
@@ -136,15 +141,24 @@ function ConfirmPayment(props: Props) {
               onCancel={reject}
               label="Pay now"
             />
+            <p className="mb-4 text-center italic text-sm text-gray-400">
+              {t("only_trusted")}
+            </p>
           </div>
         </div>
       ) : (
-        <div className="m-6">
-          <SuccessMessage
-            message={successMessage}
-            onClose={() => window.close()}
+        <>
+          <PublisherCard
+            title={originRef.current.name}
+            image={originRef.current.icon}
           />
-        </div>
+          <div className="m-4">
+            <SuccessMessage
+              message={successMessage}
+              onClose={() => window.close()}
+            />
+          </div>
+        </>
       )}
     </div>
   );

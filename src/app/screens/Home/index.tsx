@@ -212,13 +212,12 @@ function Home() {
   }, []);
 
   function renderPublisherCard() {
-    let title, description, image;
+    let title, image;
     if (allowance) {
       title = allowance.name;
       image = allowance.imageURL;
     } else if (lnData.length > 0) {
       title = lnData[0].name;
-      description = lnData[0].description;
       image = lnData[0].icon;
     } else {
       return;
@@ -226,11 +225,18 @@ function Home() {
     return (
       <div
         className={
-          "border-b border-gray-200 dark:border-neutral-500 " +
-          (lnData.length > 0 ? "h-1/2" : "h-1/3")
+          lnData.length > 0
+            ? "border-b border-gray-200 dark:border-neutral-500"
+            : ""
         }
       >
-        <PublisherCard title={title} description={description} image={image}>
+        <PublisherCard
+          title={title}
+          description={lnData.length > 0 ? lnData[0].description : ""}
+          image={image}
+          isCard={!(lnData.length > 0)}
+          isSmall={false}
+        >
           {lnData.length > 0 && (
             <Button
               onClick={async () => {

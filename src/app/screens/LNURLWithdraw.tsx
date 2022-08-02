@@ -20,6 +20,7 @@ type Props = {
 
 function LNURLWithdraw(props: Props) {
   const [origin] = useState(props.origin || getOriginData());
+
   const { minWithdrawable, maxWithdrawable } = props.details;
   const [valueSat, setValueSat] = useState(
     (maxWithdrawable && (+maxWithdrawable / 1000).toString()) || ""
@@ -80,40 +81,41 @@ function LNURLWithdraw(props: Props) {
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="h-full flex flex-col">
       <div className="text-center text-xl font-semibold dark:text-white py-2 border-b border-gray-200 dark:border-neutral-500">
         Withdraw
       </div>
-      <div className="h-full">
-        <div className="h-2/5 border-b border-gray-200 dark:border-neutral-500">
-          <PublisherCard title={origin.name} image={origin.icon} />
-        </div>
-        {!successMessage ? (
-          <div className="flex flex-col justify-between h-3/5">
-            <dl className="m-6 shadow bg-white dark:bg-surface-02dp p-4 rounded-lg overflow-hidden">
-              <dt className="text-sm font-semibold text-gray-500">
+      {!successMessage ? (
+        <div className="h-full flex flex-col justify-between">
+          <div>
+            <PublisherCard title={origin.name} image={origin.icon} />
+            <dl className="m-4 shadow bg-white dark:bg-surface-02dp p-4 rounded-lg overflow-hidden">
+              <dt className="font-medium mb-1 dark:text-white">
                 Amount (Satoshi)
               </dt>
-              <dd className="text-sm mb-4 dark:text-white">{renderAmount()}</dd>
+              <dd className="text-gray-500 dark:text-gray-400">
+                {renderAmount()}
+              </dd>
             </dl>
-            <div className="text-center p-2">
-              <ConfirmOrCancel
-                disabled={loadingConfirm || !valueSat}
-                loading={loadingConfirm}
-                onConfirm={confirm}
-                onCancel={reject}
-              />
-            </div>
           </div>
-        ) : (
-          <div className="m-6">
+          <ConfirmOrCancel
+            disabled={loadingConfirm || !valueSat}
+            loading={loadingConfirm}
+            onConfirm={confirm}
+            onCancel={reject}
+          />
+        </div>
+      ) : (
+        <>
+          <PublisherCard title={origin.name} image={origin.icon} />
+          <div className="m-4">
             <SuccessMessage
               message={successMessage}
               onClose={() => window.close()}
             />
           </div>
-        )}
-      </div>
+        </>
+      )}
     </div>
   );
 }

@@ -54,59 +54,64 @@ function ConfirmSignMessage(props: Props) {
   }
 
   return (
-    <div className="h-full">
-      <div className="h-2/5 border-b border-gray-200 dark:border-neutral-500">
-        <PublisherCard
-          title={originRef.current.name}
-          image={originRef.current.icon}
-        />
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
+      <div className="text-center text-xl font-semibold dark:text-white py-2 border-b border-gray-200 dark:border-neutral-500">
+        Sign
       </div>
       {!successMessage ? (
-        <div className="flex flex-col justify-between h-3/5">
-          <dl className="m-6 shadow bg-white dark:bg-surface-02dp p-4 rounded-lg">
-            <dt className="font-semibold text-gray-500">
-              {originRef.current.host} asks you to sign:
-            </dt>
-            <dd className="mb-6 dark:text-white">{messageRef.current}</dd>
-          </dl>
-
-          <div className="mb-8">
+        <div className="h-full flex flex-col justify-between">
+          <div>
+            <PublisherCard
+              title={originRef.current.name}
+              image={originRef.current.icon}
+            />
+            <dl className="m-4 shadow bg-white dark:bg-surface-02dp p-4 rounded-lg">
+              <dt className="font-medium dark:text-white">
+                {originRef.current.host} asks you to sign:
+              </dt>
+              <dd className="mb-1 text-gray-500 dark:text-neutral-400">
+                {messageRef.current}
+              </dd>
+            </dl>
             {/*
-          <div className="flex items-center">
-            <Checkbox
-              id="remember_me"
-              name="remember_me"
-              checked={rememberMe}
-              onChange={(event) => {
-                setRememberMe(event.target.checked);
-              }}
-            />
-            <label
-              htmlFor="remember_me"
-              className="ml-2 block text-sm text-gray-900 font-medium dark:text-white"
-            >
-              Remember and auto sign in the future
-            </label>
+              <div className="mb-8">
+                <div className="flex items-center">
+                  <Checkbox
+                    id="remember_me"
+                    name="remember_me"
+                    checked={rememberMe}
+                    onChange={(event) => {
+                      setRememberMe(event.target.checked);
+                    }}
+                  />
+                  <label
+                    htmlFor="remember_me"
+                    className="ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+                  >
+                    Remember and auto sign in the future
+                  </label>
+                </div>
+              </div>
+            */}
           </div>
-          */}
-          </div>
-
-          <div className="text-center p-2">
-            <ConfirmOrCancel
-              disabled={loading}
-              loading={loading}
-              onConfirm={confirm}
-              onCancel={reject}
-            />
-          </div>
+          <ConfirmOrCancel
+            disabled={loading}
+            loading={loading}
+            onConfirm={confirm}
+            onCancel={reject}
+          />
         </div>
       ) : (
-        <div className="m-6">
+        <>
+          <PublisherCard
+            title={originRef.current.name}
+            image={originRef.current.icon}
+          />
           <SuccessMessage
             message={successMessage}
             onClose={() => window.close()}
           />
-        </div>
+        </>
       )}
     </div>
   );

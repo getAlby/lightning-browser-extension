@@ -99,11 +99,13 @@ function Publisher() {
 
   return (
     <div>
-      <div className="h-48 border-b border-gray-200 dark:border-neutral-500">
+      <div className="border-b border-gray-200 dark:border-neutral-500">
         <PublisherCard
           title={allowance?.host || ""}
           image={allowance?.imageURL || ""}
           url={allowance ? `https://${allowance.host}` : ""}
+          isCard={false}
+          isSmall={false}
         />
       </div>
       {allowance && (

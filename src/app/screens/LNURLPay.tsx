@@ -312,28 +312,25 @@ function LNURLPay(props: Props) {
 
     return (
       <div className="h-full">
-        <div className="h-2/5 border-b border-gray-200 dark:border-neutral-500">
-          <PublisherCard
-            title={origin.name}
-            description={origin.description}
-            image={origin.icon}
-          />
+        <PublisherCard
+          title={origin.name}
+          description={origin.description}
+          image={origin.icon}
+          isSmall={false}
+        />
+        <dl className="shadow bg-white dark:bg-surface-02dp m-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+          {descriptionList.map(([dt, dd]) => (
+            <>
+              <Dt>{dt}</Dt>
+              <Dd>{dd}</Dd>
+            </>
+          ))}
+        </dl>
+        <div className="text-center">
+          <button className="underline text-sm text-gray-500" onClick={close}>
+            Close
+          </button>
         </div>
-        <Container maxWidth="sm">
-          <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-            {descriptionList.map(([dt, dd]) => (
-              <>
-                <Dt>{dt}</Dt>
-                <Dd>{dd}</Dd>
-              </>
-            ))}
-          </dl>
-          <div className="text-center">
-            <button className="underline text-sm text-gray-500" onClick={close}>
-              Close
-            </button>
-          </div>
-        </Container>
       </div>
     );
   }
@@ -344,20 +341,16 @@ function LNURLPay(props: Props) {
         {!successAction ? (
           <>
             <div className="grow overflow-y-auto no-scrollbar">
-              <div className="h-48 border-b border-gray-200 dark:border-neutral-500">
-                <PublisherCard
-                  title={origin.name}
-                  description={origin.description}
-                  image={origin.icon}
-                />
-              </div>
+              <PublisherCard
+                title={origin.name}
+                image={origin.icon}
+                lnAddress={loading || !details ? "loading..." : getRecipient()}
+              />
               <Container maxWidth="sm">
                 <div className="my-4">
                   <dl>
                     {loading || !details ? (
                       <>
-                        <Dt>Send payment to</Dt>
-                        <Dd>loading...</Dd>
                         <Dt>Description</Dt>
                         <Dd>loading...</Dd>
                         <Dt>Amount (Satoshi)</Dt>
@@ -365,8 +358,6 @@ function LNURLPay(props: Props) {
                       </>
                     ) : (
                       <>
-                        <Dt>Send payment to</Dt>
-                        <Dd>{getRecipient()}</Dd>
                         {formattedMetadata(details.metadata).map(([dt, dd]) => (
                           <>
                             <Dt>{dt}</Dt>
@@ -439,7 +430,7 @@ function LNURLPay(props: Props) {
                 </div>
               </Container>
             </div>
-            <div className="p-2 border-t border-gray-200 dark:border-white/10">
+            <div className="pt-2 border-t border-gray-200 dark:border-white/10">
               <ConfirmOrCancel
                 label="Confirm"
                 loading={loadingConfirm}

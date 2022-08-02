@@ -1,5 +1,4 @@
 import { MouseEventHandler } from "react";
-import { useTranslation } from "react-i18next";
 
 import Button from "../Button";
 
@@ -18,12 +17,9 @@ export default function ConfirmOrCancel({
   onConfirm,
   onCancel,
 }: Props) {
-  const { t } = useTranslation("components", {
-    keyPrefix: "confirmOrCancel",
-  });
   return (
-    <div className="text-center">
-      <div className="flex flex-row mb-4">
+    <div className="mb-2 p-2">
+      <div className="flex flex-row">
         <Button onClick={onCancel} label={"Cancel"} halfWidth />
         <Button
           onClick={onConfirm}
@@ -34,8 +30,6 @@ export default function ConfirmOrCancel({
           halfWidth
         />
       </div>
-
-      <p className="mb-2 text-sm text-gray-400">{t("only_trusted")}</p>
     </div>
   );
 }
