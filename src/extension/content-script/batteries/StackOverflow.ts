@@ -1,41 +1,118 @@
+import axios from "axios";
+import type { Battery } from "~/types";
+
 import getOriginData from "../originData";
-import setLightningData from "../setLightningData";
+import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher =
-  /^https:\/\/stackoverflow\.com\/users\/(\d+)\/(\w+)(\?tab=(\w+))?.*/;
+  /^https:\/\/stackoverflow\.com\/(users|questions)\/(\d+)\/(\w+).*/;
 
-const battery = (): void => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const tab = urlParams.get("tab");
+const battery = async (): Promise<void> => {
+  const urlParts = document.location.pathname.split("/");
+  const route = urlParts[1];
+  const userOrQuestionId = urlParts[2];
+  let lightningData = null;
 
-  if (tab === "profile") {
-    handleProfilePage();
+  if (route === "users") {
+    lightningData = await handleProfilePage(userOrQuestionId);
   }
+
+  if (route === "questions") {
+    lightningData = await handleQuestionPage(userOrQuestionId);
+  }
+
+  if (lightningData) setLightningData([lightningData]);
 };
 
-function handleProfilePage() {
-  const aboutElement = document.querySelector<HTMLElement>(
-    ".js-about-me-content"
+function htmlToText(html: string) {
+  const temp = document.createElement("div");
+  temp.innerHTML = html;
+  return temp.textContent;
+}
+
+async function handleQuestionPage(questionId: string): Promise<Battery | null> {
+  const questionResponse = await axios.get(
+    // The filter can be generated here: https://api.stackexchange.com/docs/users-by-ids
+    `https://api.stackexchange.com/2.2/questions/${questionId}?site=stackoverflow&filter=!9bOY8fLl6`
   );
 
-  const text = aboutElement?.innerText as string;
-  const match = text.match(/(⚡:?|lightning:|lnurl:)\s?(\S+@\S+)/i);
-
-  if (match) {
-    setLightningData([
-      {
-        method: "lnurl",
-        address: match[2],
-        ...getOriginData(),
-        description: aboutElement?.innerText ?? "",
-        icon:
-          document.querySelector<HTMLImageElement>(
-            `.js-usermini-avatar-container img`
-          )?.src ?? "",
-        name: document.title,
-      },
-    ]);
+  if (!questionResponse) {
+    return null;
   }
+
+  const questionInfo = await questionResponse.data;
+
+  if (questionInfo.error_id) {
+    return null;
+  }
+
+  const questionData = questionInfo.items[0];
+
+  if (!questionData || !questionData.accepted_answer_id) {
+    return null;
+  }
+
+  const answerResponse = await axios.get(
+    // The filter can be generated here: https://api.stackexchange.com/docs/users-by-ids
+    `https://api.stackexchange.com/2.2/answers/${questionData.accepted_answer_id}?site=stackoverflow&filter=!-)QWsbXSB(JQ`
+  );
+
+  if (!answerResponse) {
+    return null;
+  }
+
+  const answerInfo = await answerResponse.data;
+
+  const answerData = answerInfo.items[0];
+
+  if (!answerData || !answerData.owner) {
+    return null;
+  }
+
+  const answererId = answerData.owner.user_id;
+  const lightningData = await handleProfilePage(answererId);
+
+  return lightningData;
+}
+
+async function handleProfilePage(userId: string): Promise<Battery | null> {
+  const response = await axios.get(
+    // The filter can be generated here: https://api.stackexchange.com/docs/users-by-ids
+    `https://api.stackexchange.com/2.2/users/${userId}?site=stackoverflow&filter=!-B3yqvQ2YYGK1t-Hg_ydU`
+  );
+
+  if (!response) {
+    return null;
+  }
+
+  const userInfo = await response.data;
+
+  if (userInfo.error_id) {
+    return null;
+  }
+
+  const userData = userInfo.items[0];
+
+  if (!userData) {
+    return null;
+  }
+
+  let address = null;
+
+  if (userData.about_me) {
+    address = findLightningAddressInText(userData.about_me);
+  }
+
+  if (!address) return null;
+
+  return {
+    method: "lnurl",
+    address: address,
+    ...getOriginData(),
+    description: htmlToText(userData.about_me) ?? "",
+    icon: userData.profile_image ?? "",
+    name: userData.display_name,
+  };
 }
 
 const StackOverflow = {

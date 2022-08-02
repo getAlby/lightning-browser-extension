@@ -1,7 +1,7 @@
 import { BatteryMetaTagRecipient } from "~/types";
 
 import getOriginData from "../originData";
-import setLightningData from "../setLightningData";
+import { setLightningData } from "./helpers";
 
 const urlMatcher = /^https?:\/\/.*/i;
 

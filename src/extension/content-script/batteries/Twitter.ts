@@ -1,5 +1,5 @@
 import getOriginData from "../originData";
-import setLightningData from "../setLightningData";
+import { setLightningData } from "./helpers";
 
 declare global {
   interface Window {

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import getOriginData from "../originData";
-import setLightningData from "../setLightningData";
+import { setLightningData } from "./helpers";
 
 interface PeertubeRes {
   channel: {

@@ -1,5 +1,5 @@
 import getOriginData from "../originData";
-import setLightningData from "../setLightningData";
+import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher = /^https:\/\/(.+\.)?medium.com\/(\S+)?/;
 
@@ -12,13 +12,13 @@ const battery = (): void => {
   )?.innerText;
   if (!shortBio) return;
 
-  const match = shortBio.match(/(⚡:?|lightning:|lnurl:)\s?(\S+@\S+)/i);
+  const match = findLightningAddressInText(shortBio);
   if (!match) return;
 
   setLightningData([
     {
       method: "lnurl",
-      address: match[2],
+      address: match,
       ...getOriginData(),
       description: shortBio,
       name:
