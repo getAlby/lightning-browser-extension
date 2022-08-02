@@ -1,21 +1,23 @@
-import { Battery } from "~/types";
+import { BatteryMetaTagRecipient } from "~/types";
 
 import getOriginData from "../originData";
 import setLightningData from "../setLightningData";
 
 const urlMatcher = /^https?:\/\/.*/i;
 
-const parseRecipient = (content: string): Battery => {
+const parseRecipient = (content: string): BatteryMetaTagRecipient => {
   const tokens = content
     .split(";")
     .map((e) => e.trim())
     .filter((e) => !!e);
-  const obj: Record<string, string> = {};
-  tokens.forEach((t) => {
-    const kv = t.split("=").map((e) => e.trim());
-    obj[kv[0]] = kv[1];
-  });
-  return obj as unknown as Battery; // YAY TypeScript :/
+
+  const recipient = tokens.reduce((obj, tkn) => {
+    const keysAndValues = tkn.split("=");
+    const keysAndValuesTrimmed = keysAndValues.map((e) => e.trim());
+    return { ...obj, [keysAndValuesTrimmed[0]]: keysAndValuesTrimmed[1] };
+  }, {} as BatteryMetaTagRecipient);
+
+  return recipient;
 };
 
 const battery = (): void => {

@@ -80,6 +80,11 @@ export interface Battery extends OriginData {
   icon: string;
 }
 
+export type BatteryMetaTagRecipient = Pick<
+  Battery,
+  "address" | "customKey" | "customValue" | "method"
+>;
+
 /**
  * @deprecated Use MessageDefault instead
  */
