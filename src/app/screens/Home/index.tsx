@@ -237,11 +237,28 @@ function Home() {
                   description: lnData[0].description,
                   icon: lnData[0].icon,
                 };
-                navigate(
-                  `/lnurlPay?lnurl=${
-                    lnData[0].recipient
-                  }&origin=${encodeURIComponent(JSON.stringify(origin))}`
-                );
+                if (lnData[0].method === "lnurl") {
+                  navigate(
+                    `/lnurlPay?lnurl=${
+                      lnData[0].address
+                    }&origin=${encodeURIComponent(JSON.stringify(origin))}`
+                  );
+                } else if (lnData[0].method === "keysend") {
+                  const params = new URLSearchParams({
+                    destination: lnData[0].address,
+                    origin: encodeURIComponent(JSON.stringify(origin)),
+                  });
+                  if (lnData[0].customKey && lnData[0].customValue) {
+                    const customRecords = {
+                      [lnData[0].customKey]: lnData[0].customValue,
+                    };
+                    params.set(
+                      "customRecords",
+                      JSON.stringify(customRecords) // encodeURIComponent() ??
+                    );
+                  }
+                  navigate(`/keysend?${params.toString()}`);
+                }
               } catch (e) {
                 if (e instanceof Error) toast.error(e.message);
               } finally {

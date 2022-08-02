@@ -18,7 +18,7 @@ const battery = (): void => {
   setLightningData([
     {
       method: "lnurl",
-      recipient: match[2],
+      address: match[2],
       ...getOriginData(),
       description: shortBio,
       name:

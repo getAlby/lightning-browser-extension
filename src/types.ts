@@ -72,10 +72,18 @@ export interface OriginDataInternal {
 
 export interface Battery extends OriginData {
   method: string;
-  recipient: string;
+  address: string;
+  customKey?: string;
+  customValue?: string;
+  suggested?: string;
   name: string;
   icon: string;
 }
+
+export type BatteryMetaTagRecipient = Pick<
+  Battery,
+  "address" | "customKey" | "customValue" | "method"
+>;
 
 /**
  * @deprecated Use MessageDefault instead

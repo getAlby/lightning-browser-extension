@@ -33,7 +33,7 @@ const battery = (): void => {
   setLightningData([
     {
       method: "lnurl",
-      recipient,
+      address: recipient,
       ...getOriginData(),
       name,
       icon: imageUrl,

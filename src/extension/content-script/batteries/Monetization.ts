@@ -1,7 +1,24 @@
+import { BatteryMetaTagRecipient } from "~/types";
+
 import getOriginData from "../originData";
 import setLightningData from "../setLightningData";
 
 const urlMatcher = /^https?:\/\/.*/i;
+
+const parseRecipient = (content: string): BatteryMetaTagRecipient => {
+  const tokens = content
+    .split(";")
+    .map((e) => e.trim())
+    .filter((e) => !!e);
+
+  const recipient = tokens.reduce((obj, tkn) => {
+    const keyAndValue = tkn.split("=");
+    const keyAndValueTrimmed = keyAndValue.map((e) => e.trim());
+    return { ...obj, [keyAndValueTrimmed[0]]: keyAndValueTrimmed[1] };
+  }, {} as BatteryMetaTagRecipient);
+
+  return recipient;
+};
 
 const battery = (): void => {
   const monetizationTag = document.querySelector<HTMLMetaElement>(
@@ -10,13 +27,25 @@ const battery = (): void => {
   if (!monetizationTag) {
     return;
   }
-  const recipient = monetizationTag.content.replace(/lnurlp:/i, "");
+  const content = monetizationTag.content;
+
+  let recipient: BatteryMetaTagRecipient;
+  // check for backwards compatibility: supports directly a lightning address or lnurlp:xxx
+  if (content.match(/^lnurlp:/) || content.indexOf("=") === -1) {
+    const lnAddress = monetizationTag.content.replace(/lnurlp:/i, "");
+    recipient = {
+      method: "lnurl",
+      address: lnAddress,
+    };
+  } else {
+    recipient = parseRecipient(content);
+  }
+
   const metaData = getOriginData();
 
   setLightningData([
     {
-      method: "lnurlp",
-      recipient: recipient,
+      ...recipient,
       ...metaData,
     },
   ]);

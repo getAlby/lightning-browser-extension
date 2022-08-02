@@ -50,7 +50,7 @@ function handleProfilePage() {
   setLightningData([
     {
       method: "lnurl",
-      recipient: address,
+      address: address,
       ...getOriginData(),
       description: shortBioElement?.innerText ?? "",
       name:
@@ -72,7 +72,7 @@ function handleRepositoryPage(username: string) {
     setLightningData([
       {
         method: "lnurl",
-        recipient: address,
+        address: address,
         ...getOriginData(),
         description:
           document.querySelector<HTMLHeadingElement>("article")?.innerText ??

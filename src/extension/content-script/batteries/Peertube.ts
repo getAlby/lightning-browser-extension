@@ -70,7 +70,7 @@ const battery = (): void => {
         {
           ...metaData,
           method: "lnurlp",
-          recipient: recipient,
+          address: recipient,
           name: channelName,
           icon: icon,
           description: channelDescription,
