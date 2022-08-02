@@ -86,19 +86,35 @@ function Home() {
 
   const loadPayments = useCallback(async () => {
     try {
-      const result = await api.getPayments({ limit: 10 });
-      for await (const payment of result.payments) {
-        const totalAmountFiat = settings.showFiat
-          ? await getFiatValue(payment.totalAmount)
-          : "";
-        payment.totalAmountFiat = totalAmountFiat;
+      if (allowance) {
+        const payments: Transaction[] = allowance.payments.map((payment) => ({
+          ...payment,
+          id: `${payment.id}`,
+          title: "",
+          date: "",
+        }));
+        for await (const payment of payments) {
+          const totalAmountFiat = settings.showFiat
+            ? await getFiatValue(payment.totalAmount)
+            : "";
+          payment.totalAmountFiat = totalAmountFiat;
+        }
+        setPayments(payments);
+      } else {
+        const result = await api.getPayments({ limit: 10 });
+        for await (const payment of result.payments) {
+          const totalAmountFiat = settings.showFiat
+            ? await getFiatValue(payment.totalAmount)
+            : "";
+          payment.totalAmountFiat = totalAmountFiat;
+        }
+        setPayments(result?.payments);
       }
-      setPayments(result?.payments);
       setLoadingPayments(false);
     } catch (e) {
       console.error(e);
     }
-  }, [settings.showFiat]);
+  }, [allowance, settings.showFiat]);
 
   function handleLightningDataMessage(response: {
     action: string;
@@ -244,42 +260,13 @@ function Home() {
             {t("allowance_view.recent_transactions")}
           </h2>
 
-          {allowance?.payments.length > 0 ? (
+          {payments.length > 0 ? (
             <TransactionsTable
-              transactions={allowance.payments.map((payment) => {
-                const {
-                  createdAt,
-                  description,
-                  host,
-                  id,
-                  location,
-                  name,
-                  preimage,
-                  totalAmount,
-                  totalFees,
-                } = payment;
-
+              transactions={payments.map((payment) => {
                 return {
-                  createdAt,
-                  description,
-                  id: `${id}`,
-                  location,
-                  name,
-                  preimage,
-                  host,
-                  totalAmount:
-                    typeof totalAmount === "string"
-                      ? parseInt(totalAmount)
-                      : totalAmount,
-                  totalFees,
-                  amount: "",
-                  currency: "",
-                  totalAmountFiat: "",
-                  value: "",
-                  // @TODO: Refactor: transaction-creation #1158
-                  // https://github.com/getAlby/lightning-browser-extension/issues/1158
+                  ...payment,
+                  type: "sent",
                   date: dayjs(payment.createdAt).fromNow(),
-                  // date: dayjs.unix(payment.createdAt),
                   title: (
                     <p className="truncate">
                       <a
