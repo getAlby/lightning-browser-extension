@@ -88,7 +88,11 @@ function LNURLWithdraw(props: Props) {
       {!successMessage ? (
         <div className="h-full flex flex-col justify-between">
           <div>
-            <PublisherCard title={origin.name} image={origin.icon} />
+            <PublisherCard
+              title={origin.name}
+              image={origin.icon}
+              url={props.details?.domain}
+            />
             <dl className="m-4 shadow bg-white dark:bg-surface-02dp p-4 rounded-lg overflow-hidden">
               <dt className="font-medium mb-1 dark:text-white">
                 Amount (Satoshi)

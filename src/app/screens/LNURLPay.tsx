@@ -315,6 +315,7 @@ function LNURLPay(props: Props) {
         <PublisherCard
           title={origin.name}
           description={origin.description}
+          lnAddress={loading || !details ? "loading..." : getRecipient()}
           image={origin.icon}
           isSmall={false}
         />

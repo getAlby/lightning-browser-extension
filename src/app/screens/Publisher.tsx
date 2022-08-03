@@ -103,7 +103,7 @@ function Publisher() {
         <PublisherCard
           title={allowance?.host || ""}
           image={allowance?.imageURL || ""}
-          url={allowance ? `https://${allowance.host}` : ""}
+          url={allowance?.host}
           isCard={false}
           isSmall={false}
         />

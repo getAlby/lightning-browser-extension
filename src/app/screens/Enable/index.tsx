@@ -78,12 +78,12 @@ function Enable(props: Props) {
           <PublisherCard
             title={props.origin.name}
             image={props.origin.icon}
-            url={props.origin.location}
+            url={props.origin.host}
             isSmall={false}
           />
 
           <div className="dark:text-white p-6">
-            <p className="mb-4">This app would like to:</p>
+            <p className="mb-4">Allow {props.origin.host} to:</p>
 
             <div className="mb-4 flex items-center">
               <CheckIcon className="w-5 h-5 mr-2" />

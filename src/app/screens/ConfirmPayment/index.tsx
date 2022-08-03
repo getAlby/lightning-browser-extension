@@ -113,6 +113,7 @@ function ConfirmPayment(props: Props) {
             <PublisherCard
               title={originRef.current.name}
               image={originRef.current.icon}
+              url={originRef.current.host}
             />
             <div className="m-4">
               <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
@@ -151,6 +152,7 @@ function ConfirmPayment(props: Props) {
           <PublisherCard
             title={originRef.current.name}
             image={originRef.current.icon}
+            url={originRef.current.host}
           />
           <div className="m-4">
             <SuccessMessage
