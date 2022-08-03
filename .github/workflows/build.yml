@@ -66,7 +66,10 @@ jobs:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            Build files:
+            Build files for this pull request:
             * [Firefox](https://nightly.link/getAlby/lightning-browser-extension/actions/runs/${{ github.run_id }}/firefox.xpi.zip)
             * [Chrome](https://nightly.link/getAlby/lightning-browser-extension/actions/runs/${{ github.run_id }}/chrome.zip)
+            Use those to install this build. See the [readme](https://github.com/getAlby/lightning-browser-extension#-load-extension-into-browser) for install instructions.
+
+            keep stacking sats!
           edit-mode: replace
