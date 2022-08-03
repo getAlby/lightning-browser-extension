@@ -48,13 +48,7 @@ jobs:
   comment-build-links:
     if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
-    needs:
-      [
-        build,
-        release-firefox-nightly,
-        release-chrome-nightly,
-        release-opera-nightly,
-      ]
+    needs: [build]
     name: comment-release-links
 
     steps:
