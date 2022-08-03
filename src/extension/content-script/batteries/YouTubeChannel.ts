@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import getOriginData from "../originData";
-import setLightningData from "../setLightningData";
+import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/(channel|c)\/([^/]+).*/;
 
@@ -31,14 +31,12 @@ const battery = (): void => {
       if (!descriptionElement) {
         return;
       }
-      const lnurl = descriptionElement.content.match(
-        /(⚡:?|lightning:|lnurl:)\s?(\S+@\S+)/i
-      );
+      const lnurl = findLightningAddressInText(descriptionElement.content);
       if (lnurl) {
         setLightningData([
           {
             method: "lnurl",
-            address: lnurl[2],
+            address: lnurl,
             ...getOriginData(),
             name: name,
             icon: imageUrl,

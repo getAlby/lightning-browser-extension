@@ -1,5 +1,5 @@
 import getOriginData from "../originData";
-import setLightningData from "../setLightningData";
+import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher = /^https:\/\/github.com\/([^/]+)(\/([^/]+))?$/;
 
@@ -18,8 +18,8 @@ const battery = (): void => {
 function parseElement(elementSelector: string) {
   const text = document.querySelector<HTMLElement>(elementSelector)?.innerText;
   if (text) {
-    const match = text.match(/(⚡:?|lightning:|lnurl:)\s?(\S+@\S+)/i);
-    if (match) return match[2];
+    let match;
+    if ((match = findLightningAddressInText(text))) return match;
   }
 
   // Fallback for Windows and Linux
