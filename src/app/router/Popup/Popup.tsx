@@ -25,6 +25,16 @@ function Popup() {
               </RequireAuth>
             }
           >
+            {/* <Route
+              index
+              element={
+                <Navigate
+                  to={`/${message.action}`}
+                  replace
+                  state={{ message }}
+                />
+              }
+            /> */}
             <Route index element={<Home />} />
             <Route path="send" element={<Send />} />
             <Route path="receive" element={<Receive />} />

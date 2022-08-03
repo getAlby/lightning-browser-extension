@@ -79,7 +79,8 @@ const lnurl = {
       }
     }
     lnurlDetails.domain = url.hostname;
-    lnurlDetails.url = url;
+    //can this be removed mayeb it's not stringifible
+    // lnurlDetails.url = url;
     return lnurlDetails;
   },
   verifyInvoice({
