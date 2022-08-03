@@ -91,6 +91,12 @@ function Enable(props: Props) {
                 Request approval for transactions
               </p>
             </div>
+            <div className="mb-4 flex items-center">
+              <CheckIcon className="w-5 h-5 mr-2" />
+              <p className="dark:text-white">
+                Request invoices and lightning information
+              </p>
+            </div>
           </div>
         </div>
         <div className="mb-4 text-center">
@@ -104,7 +110,7 @@ function Enable(props: Props) {
             href="#"
             onClick={block}
           >
-            Do not ask for this site again
+            Block and ignore {props.origin.host}
           </a>
         </div>
       </div>
