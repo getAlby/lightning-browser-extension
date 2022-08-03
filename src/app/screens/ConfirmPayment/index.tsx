@@ -19,7 +19,7 @@ import type { OriginData } from "~/types";
 export type Props = {
   origin?: OriginData;
   paymentRequest?: string;
-  metadata?: { [key: string]: string };
+  metadata?: string;
 };
 
 function ConfirmPayment(props: Props) {

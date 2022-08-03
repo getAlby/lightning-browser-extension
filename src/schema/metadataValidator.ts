@@ -11,12 +11,12 @@ export function isBase64(str: string) {
   }
 }
 
-export function MetadataValidator(metadata: { [key: string]: string }) {
+export function MetadataValidator(metadata: object) {
   let hasValidType = false;
   let hasValidImage = true;
-  for (const key in metadata) {
+  for (const [key, value] of Object.entries(metadata)) {
     if (key == "type") {
-      if (metadata[key] == "AudioObject") {
+      if (value == "AudioObject") {
         const parsed = audioObjectSchema.safeParse(metadata);
         if (parsed.success) {
           hasValidType = true;
@@ -24,7 +24,7 @@ export function MetadataValidator(metadata: { [key: string]: string }) {
       }
     }
     if (key == "image") {
-      hasValidImage = isBase64(metadata[key]);
+      hasValidImage = isBase64(value);
     }
   }
 

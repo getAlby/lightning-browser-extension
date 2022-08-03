@@ -5,16 +5,17 @@ type Props = {
   amount: string | React.ReactNode;
   amountAlt?: string;
   description?: string | React.ReactNode;
-  metadata?: { [key: string]: string };
+  metadata?: string;
 };
 
 function PaymentSummary({ amount, amountAlt, description, metadata }: Props) {
   const metadataElements: JSX.Element[] = [];
   if (metadata != undefined) {
-    const isMetadataValid = MetadataValidator(metadata);
+    const metadataObject: object = JSON.parse(metadata);
+    const isMetadataValid: boolean = MetadataValidator(metadataObject);
 
     if (isMetadataValid) {
-      for (const key in metadata) {
+      for (const [key, value] of Object.entries(metadataObject)) {
         metadataElements.push(
           <>
             <dt className="mt-4 font-medium text-gray-800 dark:text-white">
@@ -22,9 +23,9 @@ function PaymentSummary({ amount, amountAlt, description, metadata }: Props) {
             </dt>
             <dd className="mb-0 text-gray-600 dark:text-neutral-500 break-all">
               {key == "image" ? (
-                <img src={`data:image/png;base64, ${metadata[key]}`} />
+                <img src={`data:image/png;base64, ${value}`} />
               ) : (
-                metadata[key]
+                value
               )}
             </dd>
           </>
