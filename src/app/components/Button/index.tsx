@@ -4,6 +4,7 @@ import Loading from "../Loading";
 
 export type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   fullWidth?: boolean;
+  halfWidth?: boolean;
   label: string;
   icon?: React.ReactNode;
   primary?: boolean;
@@ -20,6 +21,7 @@ export default function Button({
   direction = "row",
   icon,
   fullWidth = false,
+  halfWidth = false,
   primary = false,
   loading = false,
 }: Props) {
@@ -29,7 +31,10 @@ export default function Button({
       className={classNames(
         direction === "row" ? "flex-row" : "flex-col",
         fullWidth && "w-full",
-        fullWidth ? "px-0 py-2" : "px-7 py-2",
+        fullWidth ? "px-0 py-2" : "",
+        halfWidth && "w-1/2",
+        halfWidth ? "px-0 py-2 mx-2" : "",
+        !(halfWidth || fullWidth) && "px-7 py-2",
         primary
           ? "bg-orange-bitcoin text-white border border-transparent"
           : `bg-white text-gray-700 dark:bg-surface-02dp dark:text-neutral-200 dark:border-neutral-800`,

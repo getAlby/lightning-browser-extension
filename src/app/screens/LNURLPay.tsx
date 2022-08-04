@@ -1,4 +1,5 @@
 import Button from "@components/Button";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import SatButtons from "@components/SatButtons";
@@ -310,28 +311,28 @@ function LNURLPay(props: Props) {
     }
 
     return (
-      <>
+      <div className="h-full">
         <PublisherCard
           title={origin.name}
           description={origin.description}
+          lnAddress={loading || !details ? "loading..." : getRecipient()}
           image={origin.icon}
+          isSmall={false}
         />
-        <Container maxWidth="sm">
-          <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-            {descriptionList.map(([dt, dd]) => (
-              <>
-                <Dt>{dt}</Dt>
-                <Dd>{dd}</Dd>
-              </>
-            ))}
-          </dl>
-          <div className="text-center">
-            <button className="underline text-sm text-gray-500" onClick={close}>
-              Close
-            </button>
-          </div>
-        </Container>
-      </>
+        <dl className="shadow bg-white dark:bg-surface-02dp m-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+          {descriptionList.map(([dt, dd]) => (
+            <>
+              <Dt>{dt}</Dt>
+              <Dd>{dd}</Dd>
+            </>
+          ))}
+        </dl>
+        <div className="text-center">
+          <button className="underline text-sm text-gray-500" onClick={close}>
+            Close
+          </button>
+        </div>
+      </div>
     );
   }
 
@@ -343,16 +344,14 @@ function LNURLPay(props: Props) {
             <div className="grow overflow-y-auto no-scrollbar">
               <PublisherCard
                 title={origin.name}
-                description={origin.description}
                 image={origin.icon}
+                lnAddress={loading || !details ? "loading..." : getRecipient()}
               />
               <Container maxWidth="sm">
                 <div className="my-4">
                   <dl>
                     {loading || !details ? (
                       <>
-                        <Dt>Send payment to</Dt>
-                        <Dd>loading...</Dd>
                         <Dt>Description</Dt>
                         <Dd>loading...</Dd>
                         <Dt>Amount (Satoshi)</Dt>
@@ -360,8 +359,6 @@ function LNURLPay(props: Props) {
                       </>
                     ) : (
                       <>
-                        <Dt>Send payment to</Dt>
-                        <Dd>{getRecipient()}</Dd>
                         {formattedMetadata(details.metadata).map(([dt, dd]) => (
                           <>
                             <Dt>{dt}</Dt>
@@ -431,34 +428,17 @@ function LNURLPay(props: Props) {
                       />
                     </div>
                   )}
-
-                  <div className="mt-4 text-center">
-                    <p className="mb-2 text-sm text-gray-400">
-                      <em>Only connect with sites you trust.</em>
-                    </p>
-
-                    <a
-                      className="underline text-sm text-gray-600 dark:text-neutral-400"
-                      href="#"
-                      onClick={reject}
-                    >
-                      Cancel
-                    </a>
-                  </div>
                 </div>
               </Container>
             </div>
-            <div className="p-4 border-t border-gray-200 dark:border-white/10">
-              <Container maxWidth="sm">
-                <Button
-                  onClick={confirm}
-                  label="Confirm"
-                  fullWidth
-                  primary
-                  disabled={loadingConfirm || !valueSat}
-                  loading={loadingConfirm}
-                />
-              </Container>
+            <div className="pt-2 border-t border-gray-200 dark:border-white/10">
+              <ConfirmOrCancel
+                label="Confirm"
+                loading={loadingConfirm}
+                disabled={loadingConfirm || !valueSat}
+                onConfirm={confirm}
+                onCancel={reject}
+              />
             </div>
           </>
         ) : (

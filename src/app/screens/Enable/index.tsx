@@ -1,6 +1,8 @@
+import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import PublisherCard from "@components/PublisherCard";
 import { useState, useEffect, useCallback, useRef } from "react";
+import ScreenHeader from "~/app/components/ScreenHeader";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -68,31 +70,48 @@ function Enable(props: Props) {
   }, [enable, props.origin.domain, props.origin.host]);
 
   return (
-    <div>
-      <PublisherCard title={props.origin.name} image={props.origin.icon} />
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
+      <ScreenHeader title={"Connect"} />
+      <div className="h-full flex flex-col justify-between">
+        <div>
+          <PublisherCard
+            title={props.origin.name}
+            image={props.origin.icon}
+            url={props.origin.host}
+            isSmall={false}
+          />
 
-      <div className="text-center p-6">
-        <h3 className="text-xl mb-4 dark:text-white">
-          Connect with <i>{props.origin.host}</i>
-        </h3>
+          <div className="dark:text-white p-6">
+            <p className="mb-4">Allow {props.origin.host} to:</p>
 
-        <p className="text-gray-500 mb-4 dark:text-neutral-400">
-          <strong>{props.origin.name}</strong> does not have access to your
-          account.
-        </p>
-        <p className="mb-8 text-gray-500 mb-4 dark:text-neutral-400">
-          Do you want to grant them access?
-        </p>
-
-        <ConfirmOrCancel label="Enable" onConfirm={enable} onCancel={reject} />
-
-        <a
-          className="underline mt-8 text-sm text-gray-500 dark:text-gray-400"
-          href="#"
-          onClick={block}
-        >
-          Do not ask for this site again
-        </a>
+            <div className="mb-4 flex items-center">
+              <CheckIcon className="w-5 h-5 mr-2" />
+              <p className="dark:text-white">
+                Request approval for transactions
+              </p>
+            </div>
+            <div className="mb-4 flex items-center">
+              <CheckIcon className="w-5 h-5 mr-2" />
+              <p className="dark:text-white">
+                Request invoices and lightning information
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="mb-4 text-center flex flex-col">
+          <ConfirmOrCancel
+            label="Connect"
+            onConfirm={enable}
+            onCancel={reject}
+          />
+          <a
+            className="underline text-sm text-gray-400 mx-4 overflow-hidden text-ellipsis whitespace-nowrap"
+            href="#"
+            onClick={block}
+          >
+            Block and ignore {props.origin.host}
+          </a>
+        </div>
       </div>
     </div>
   );
