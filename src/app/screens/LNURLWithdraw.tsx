@@ -83,7 +83,7 @@ function LNURLWithdraw(props: Props) {
   }
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={"Withdraw"} />
       {!successMessage ? (
         <div className="h-full flex flex-col justify-between">

@@ -141,8 +141,8 @@ function ConfirmPayment(props: Props) {
               onCancel={reject}
               label="Pay now"
             />
-            <p className="mb-4 text-center italic text-sm text-gray-400">
-              {t("only_trusted")}
+            <p className="mb-4 text-center text-sm text-gray-400">
+              <em>{t("only_trusted")}</em>
             </p>
           </div>
         </div>

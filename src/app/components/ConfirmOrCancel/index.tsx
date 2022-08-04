@@ -18,7 +18,7 @@ export default function ConfirmOrCancel({
   onCancel,
 }: Props) {
   return (
-    <div className="mb-2 p-2">
+    <div className="p-2 pb-4">
       <div className="flex flex-row">
         <Button onClick={onCancel} label={"Cancel"} halfWidth />
         <Button

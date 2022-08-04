@@ -33,7 +33,7 @@ function LNURLAuth({ details, origin }: Props) {
   }
 
   return (
-    <div className="h-full flex flex-col justify-between">
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar justify-between">
       <div>
         <PublisherCard
           title={origin.name}
@@ -47,8 +47,8 @@ function LNURLAuth({ details, origin }: Props) {
       </div>
       <div>
         <ConfirmOrCancel label="Login" onConfirm={confirm} onCancel={reject} />
-        <p className="mb-4 text-center italic text-sm text-gray-400">
-          {t("only_trusted")}
+        <p className="mb-4 text-center text-sm text-gray-400">
+          <em>{t("only_trusted")}</em>
         </p>
       </div>
     </div>

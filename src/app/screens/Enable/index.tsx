@@ -70,7 +70,7 @@ function Enable(props: Props) {
   }, [enable, props.origin.domain, props.origin.host]);
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={"Connect"} />
       <div className="h-full flex flex-col justify-between">
         <div>
@@ -98,14 +98,14 @@ function Enable(props: Props) {
             </div>
           </div>
         </div>
-        <div className="mb-4 text-center">
+        <div className="mb-4 text-center flex flex-col">
           <ConfirmOrCancel
             label="Connect"
             onConfirm={enable}
             onCancel={reject}
           />
           <a
-            className="underline text-sm text-gray-400"
+            className="underline text-sm text-gray-400 mx-4 overflow-hidden text-ellipsis whitespace-nowrap"
             href="#"
             onClick={block}
           >

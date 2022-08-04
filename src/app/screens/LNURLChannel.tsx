@@ -83,7 +83,7 @@ function LNURLChannel(props: Props) {
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={"Channel Request"} />
       {!successMessage ? (
         <div className="h-full flex flex-col justify-between">
@@ -105,8 +105,8 @@ function LNURLChannel(props: Props) {
               onConfirm={confirm}
               onCancel={reject}
             />
-            <p className="mb-4 text-center italic text-sm text-gray-400">
-              {t("only_trusted")}
+            <p className="mb-4 text-center text-sm text-gray-400">
+              <em>{t("only_trusted")}</em>
             </p>
           </div>
         </div>
