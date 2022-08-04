@@ -1,4 +1,5 @@
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import Input from "@components/form/Input";
@@ -92,14 +93,10 @@ function LNURLWithdraw(props: Props) {
               image={origin.icon}
               url={props.details?.domain}
             />
-            <dl className="m-4 shadow bg-white dark:bg-surface-02dp p-4 rounded-lg overflow-hidden">
-              <dt className="font-medium mb-1 dark:text-white">
-                Amount (Satoshi)
-              </dt>
-              <dd className="text-gray-500 dark:text-gray-400">
-                {renderAmount()}
-              </dd>
-            </dl>
+            <ContentMessage
+              heading={`Amount (Satoshi)`}
+              content={renderAmount()}
+            />
           </div>
           <ConfirmOrCancel
             disabled={loadingConfirm || !valueSat}

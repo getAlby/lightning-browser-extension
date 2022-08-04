@@ -1,4 +1,5 @@
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import axios from "axios";
@@ -88,12 +89,10 @@ function LNURLChannel(props: Props) {
         <div className="h-full flex flex-col justify-between">
           <div>
             <PublisherCard title={origin.name} image={origin.icon} />
-            <dl className="shadow bg-white dark:bg-surface-02dp rounded-lg p-4 m-4 overflow-hidden">
-              <dt className="mb-1 text-sm font-semibold text-gray-500">
-                Request a channel from the node:
-              </dt>
-              <dd className="text-sm dark:text-white break-all">{uri}</dd>
-            </dl>
+            <ContentMessage
+              heading={`Request a channel from the node:`}
+              content={uri}
+            />
 
             {errorMessage && (
               <p className="mt-1 text-red-500">{errorMessage}</p>

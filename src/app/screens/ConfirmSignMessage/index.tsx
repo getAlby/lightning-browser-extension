@@ -1,5 +1,6 @@
 //import Checkbox from "../../components/Form/Checkbox";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import { useState, useRef } from "react";
@@ -65,14 +66,10 @@ function ConfirmSignMessage(props: Props) {
               image={originRef.current.icon}
               url={originRef.current.host}
             />
-            <dl className="m-4 shadow bg-white dark:bg-surface-02dp p-4 rounded-lg">
-              <dt className="font-medium dark:text-white">
-                {originRef.current.host} asks you to sign:
-              </dt>
-              <dd className="mb-1 text-gray-500 dark:text-neutral-400">
-                {messageRef.current}
-              </dd>
-            </dl>
+            <ContentMessage
+              heading={`${originRef.current.host} asks you to sign:`}
+              content={messageRef.current}
+            />
             {/*
               <div className="mb-8">
                 <div className="flex items-center">

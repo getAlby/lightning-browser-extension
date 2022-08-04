@@ -1,4 +1,5 @@
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import { MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
@@ -39,12 +40,10 @@ function LNURLAuth({ details, origin }: Props) {
           image={origin.icon}
           url={details.domain}
         />
-        <dl className="m-4 shadow bg-white dark:bg-surface-02dp p-4 rounded-lg">
-          <dt className="font-medium mb-1 dark:text-white">
-            {origin.name} asks you to login to
-          </dt>
-          <dd className="text-gray-500 dark:text-gray-400">{details.domain}</dd>
-        </dl>
+        <ContentMessage
+          heading={`${origin.name} asks you to login to`}
+          content={details.domain}
+        />
       </div>
       <div>
         <ConfirmOrCancel label="Login" onConfirm={confirm} onCancel={reject} />
