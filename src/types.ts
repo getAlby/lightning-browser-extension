@@ -6,6 +6,7 @@ import {
   SendPaymentResponse,
   WebLNNode,
 } from "~/extension/background-script/connectors/connector.interface";
+import { weblnCalls } from "~/extension/content-script";
 
 export type ConnectorType = keyof typeof connectors;
 
@@ -101,6 +102,22 @@ export interface MessageDefault {
   origin: OriginData | OriginDataInternal;
   application?: string;
   prompt?: boolean;
+}
+
+export type WebLNCall = typeof weblnCalls[number];
+export type WebLNEventData = {
+  application: "LBE";
+  action: WebLNCall;
+  prompt: true;
+  args: Record<string, unknown> | Record<string, never>; // TODO: check if args can be undefined or an empty object?
+};
+
+export type WebLNMessageAction = `webln/${WebLNCall}`;
+export interface MessageWebLNWithOrigin
+  extends Pick<WebLNEventData, "application" | "prompt" | "args"> {
+  action: WebLNMessageAction;
+  origin: OriginData;
+  public: true;
 }
 
 export interface MessagePaymentAll extends MessageDefault {
