@@ -48,12 +48,12 @@ jobs:
               core.info(e.message);
             }
 
-            let body = `🚀Thanks for the pull request!\n\nHere are the current build files:\n\n`;
+            let body = `🚀 Thanks for the pull request!\n\nHere are the current build files for testing:\n\n`;
             for (const art of artifacts) {
               body += `\n* [${art.name}.zip](https://nightly.link/${owner}/${repo}/actions/artifacts/${art.id}.zip)`;
             }
 
-            body += `\nDownload and unzip the file for your browser and refer to the [readme](https://github.com/getAlby/lightning-browser-extension#-load-extension-into-browser) for detailed install instructions.`;
+            body += `\n\nDownload and unzip the file for your browser. Refer to the [readme](https://github.com/getAlby/lightning-browser-extension#-load-extension-into-browser) for detailed install instructions.`;
 
             if (poweredBy.by) {
               body += "\n\n----";
@@ -63,7 +63,7 @@ jobs:
               body += `\n\nWant to sponsor the next build? send some sats to ⚡️builds@getalby.com`;
             }
 
-            body += `\n\nDon't forget: keep stacking sats!\n`;
+            body += `\n\nDon't forget: **keep stacking sats!**\n`;
 
             const {data: comments} = await github.rest.issues.listComments({repo, owner, issue_number});
             const existing_comment = comments.find((c) => c.user.login === 'github-actions[bot]' && c.body.match(/current build files/) );
