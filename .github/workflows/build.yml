@@ -48,27 +48,3 @@ jobs:
         with:
           name: opera.crx
           path: dist/production/opera.crx
-
-  comment-build-links:
-    permissions:
-      issues: write
-      pull-requests: write
-
-    if: ${{ github.event_name == 'pull_request' }}
-    runs-on: ubuntu-latest
-    needs: [build]
-    name: comment-release-links
-
-    steps:
-      - name: Comment Pull Request
-        uses: thollander/actions-comment-pull-request@v1.4.1
-        with:
-          message: |
-            Here are the current build files for this pull request. See the [readme](https://github.com/getAlby/lightning-browser-extension#-load-extension-into-browser) for install instructions.
-
-            * [Firefox](https://nightly.link/getAlby/lightning-browser-extension/actions/runs/${{ github.run_id }}/firefox.xpi.zip)
-            * [Chrome](https://nightly.link/getAlby/lightning-browser-extension/actions/runs/${{ github.run_id }}/chrome.zip)
-
-            keep stacking sats!
-          comment_includes: "Here are the current build files"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
