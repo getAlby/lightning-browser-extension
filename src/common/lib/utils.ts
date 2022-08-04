@@ -97,11 +97,8 @@ const utils = {
   openUrl: (url: string) => {
     browser.tabs.create({ url });
   },
-  /**
-   *
-   * @param message
-   * @param message.metadata is optional, so that it doesnt conflict with lnurl openPrompt function call
-   */
+  // @param message
+  // @param message.metadata is optional, so that it doesnt conflict with lnurl openPrompt function call
   openPrompt: <Type>(message: {
     args: Record<string, unknown>;
     origin: OriginData | OriginDataInternal;

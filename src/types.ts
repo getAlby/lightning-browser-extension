@@ -300,7 +300,7 @@ export interface Payment {
   preimage: string;
   totalAmount: number | string;
   totalFees: number | string;
-  metadata?: string;
+  metadata?: JSON;
 }
 
 export interface PaymentResponse

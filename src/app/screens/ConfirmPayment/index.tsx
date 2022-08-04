@@ -64,7 +64,8 @@ function ConfirmPayment(props: Props) {
       // not passing any metadata is also a valid metadata
       let isMetadataValid = true;
       if (props.metadata != undefined) {
-        isMetadataValid = MetadataValidator(props.metadata);
+        const metadataObject: object = JSON.parse(props.metadata);
+        isMetadataValid = MetadataValidator(metadataObject);
       }
       if (isMetadataValid) {
         const response = await utils.call(

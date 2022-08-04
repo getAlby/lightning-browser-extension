@@ -3,7 +3,10 @@ import db from "../db";
 const persistSuccessfullPayment = async (message, data) => {
   const recipientName = data.origin.name;
   const host = data.origin.host;
-  const metadata = data.metadata;
+  let metadata = data.metadata;
+  if (data.metadata != undefined) {
+    metadata = JSON.parse(data.metadata);
+  }
   const paymentResponse = data.response;
   const route = paymentResponse.data.route;
   const { total_amt, total_fees } = route;
