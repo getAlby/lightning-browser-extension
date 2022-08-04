@@ -68,6 +68,7 @@ function Prompt() {
                 />
               }
             />
+            <Route path="webln/enable" element={<Enable />} />
             <Route
               path="lnurlAuth"
               element={

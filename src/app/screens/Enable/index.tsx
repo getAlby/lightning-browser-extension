@@ -1,16 +1,14 @@
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import PublisherCard from "@components/PublisherCard";
 import { useState, useEffect, useCallback, useRef } from "react";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-import type { OriginData } from "~/types";
 
-type Props = {
-  origin: OriginData;
-};
+function Enable() {
+  const navState = useNavigationState();
 
-function Enable(props: Props) {
   const hasFetchedData = useRef(false);
   const [, setLoading] = useState(true);
   const [remember] = useState(true);
@@ -34,13 +32,13 @@ function Enable(props: Props) {
   async function block(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
     await utils.call("addBlocklist", {
-      domain: props.origin.domain,
-      host: props.origin.host,
+      domain: navState.origin.domain,
+      host: navState.origin.host,
     });
     msg.error(
       `User added site to blocklist domain, host
-        ${props.origin.domain},
-        ${props.origin.host}`
+        ${navState.origin.domain},
+        ${navState.origin.host}`
     );
   }
 
@@ -48,8 +46,8 @@ function Enable(props: Props) {
     async function getAllowance() {
       try {
         const allowance = await msg.request("getAllowance", {
-          domain: props.origin.domain,
-          host: props.origin.host,
+          domain: navState.origin.domain,
+          host: navState.origin.host,
         });
         if (allowance && allowance.enabled) {
           enable();
@@ -65,19 +63,22 @@ function Enable(props: Props) {
       getAllowance();
       hasFetchedData.current = true;
     }
-  }, [enable, props.origin.domain, props.origin.host]);
+  }, [enable, navState.origin.domain, navState.origin.host]);
 
   return (
     <div>
-      <PublisherCard title={props.origin.name} image={props.origin.icon} />
+      <PublisherCard
+        title={navState.origin.name}
+        image={navState.origin.icon}
+      />
 
       <div className="text-center p-6">
         <h3 className="text-xl mb-4 dark:text-white">
-          Connect with <i>{props.origin.host}</i>
+          Connect with <i>{navState.origin.host}</i>
         </h3>
 
         <p className="text-gray-500 mb-4 dark:text-neutral-400">
-          <strong>{props.origin.name}</strong> does not have access to your
+          <strong>{navState.origin.name}</strong> does not have access to your
           account.
         </p>
         <p className="mb-8 text-gray-500 mb-4 dark:text-neutral-400">
