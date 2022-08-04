@@ -14,6 +14,7 @@ jobs:
           # https://github.com/oprypin/nightly.link/blob/master/.github/workflows/pr-comment.yml
           script: |
             const {owner, repo} = context.repo;
+            console.log({ownder, repo});
             const run_id = ${{github.event.workflow_run.id}};
             const pull_head_sha = '${{github.event.workflow_run.head_sha}}';
             const pull_user_id = ${{github.event.sender.id}};
@@ -22,7 +23,8 @@ jobs:
               const pulls = await github.pulls.list({owner, repo});
               for await (const {data} of github.paginate.iterator(pulls)) {
                 for (const pull of data) {
-                  if (pull.head.sha === pull_head_sha && pull.user.id === pull_user_id) {
+                  console.log(pull.head.sha);
+                  if (pull.head.sha === pull_head_sha) {
                     return pull.number;
                   }
                 }
