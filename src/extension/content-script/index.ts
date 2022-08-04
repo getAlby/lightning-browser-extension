@@ -1,4 +1,5 @@
 import browser from "webextension-polyfill";
+import type { MessageWebLNWithOrigin } from "~/types";
 
 import extractLightningData from "./batteries";
 import injectScript from "./injectScript";
@@ -7,7 +8,7 @@ import shouldInject from "./shouldInject";
 
 // WebLN calls that can be executed from the WebLNProvider.
 // Update when new calls are added
-const weblnCalls = [
+export const weblnCalls = [
   "enable",
   "getInfo",
   "lnurl",
@@ -16,7 +17,7 @@ const weblnCalls = [
   "makeInvoice",
   "signMessageOrPrompt",
   "verifyMessage",
-];
+] as const;
 // calls that can be executed when webln is not enabled for the current content page
 const disabledCalls = ["enable"];
 
@@ -41,7 +42,7 @@ async function init() {
   // message listener to listen to inpage webln calls
   // those calls get passed on to the background script
   // (the inpage script can not do that directly, but only the inpage script can make webln available to the page)
-  window.addEventListener("message", (ev) => {
+  window.addEventListener("message", (ev: MessageEvent) => {
     // Only accept messages from the current window
     if (ev.source !== window) {
       return;
@@ -61,8 +62,8 @@ async function init() {
         return;
       }
 
-      const messageWithOrigin = {
-        action: `webln/${ev.data.action}`, // every webln call must be scoped under `webln/` we do this to indicate that those actions are callable from the websites
+      const messageWithOrigin: MessageWebLNWithOrigin = {
+        action: `webln/${ev.data.action}` as MessageWebLNWithOrigin["action"], // TODO: The MessageEvent above needs to be typed with <WebLNEventData>
         args: ev.data.args,
         application: "LBE",
         public: true, // indicate that this is a public call from the content script
