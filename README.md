@@ -1,4 +1,4 @@
-# Lightning Browser Extension
+# Alby - Lightning Browser Extension
 
 ### A browser extension to bring the Bitcoin Lightning Network to the browser
 
