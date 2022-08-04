@@ -10,6 +10,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import lnurl from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
@@ -43,6 +44,17 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
 );
 
 function LNURLPay(props: Props) {
+  const navState = useNavigationState();
+
+  // when calling from SEND => navState.lnurl exists
+  // when calling from Prompt => navState.origin & navState.args exist
+  console.log("navState", navState);
+
+  // TODO: extract the actual rendering of the screen into own component "LNURLPayForm"
+  // TODO: Check here in useEffect if navState is filled with origin and args.lnurlDetails
+  // => if not but navState.lnurl exists => call lnurl.getDetails(navState.lnurl)
+  // => pass all props to <LNURLPayForm origin={navState.origin || getOriginData()} details={details} />
+
   const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
