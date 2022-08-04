@@ -5,6 +5,7 @@ import axios from "axios";
 import { useState, MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import ScreenHeader from "~/app/components/ScreenHeader";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -82,9 +83,7 @@ function LNURLChannel(props: Props) {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="text-center text-xl font-semibold dark:text-white py-2 border-b border-gray-200 dark:border-neutral-500">
-        Channel Request
-      </div>
+      <ScreenHeader title={"Channel Request"} />
       {!successMessage ? (
         <div className="h-full flex flex-col justify-between">
           <div>

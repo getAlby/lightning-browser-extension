@@ -4,6 +4,7 @@ import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import { useState, useRef } from "react";
 import { toast } from "react-toastify";
+import ScreenHeader from "~/app/components/ScreenHeader";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -55,9 +56,7 @@ function ConfirmSignMessage(props: Props) {
 
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
-      <div className="text-center text-xl font-semibold dark:text-white py-2 border-b border-gray-200 dark:border-neutral-500">
-        Sign
-      </div>
+      <ScreenHeader title={"Sign"} />
       {!successMessage ? (
         <div className="h-full flex flex-col justify-between">
           <div>

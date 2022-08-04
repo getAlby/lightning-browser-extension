@@ -4,6 +4,7 @@ import SatButtons from "@components/SatButtons";
 import TextField from "@components/form/TextField";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import ScreenHeader from "~/app/components/ScreenHeader";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -87,9 +88,7 @@ function MakeInvoice({
 
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
-      <div className="text-center text-xl font-semibold dark:text-white py-2 border-b border-gray-200 dark:border-neutral-500">
-        Create Invoice
-      </div>
+      <ScreenHeader title={"Create Invoice"} />
       <div className="h-full flex flex-col justify-between">
         <div>
           <PublisherCard

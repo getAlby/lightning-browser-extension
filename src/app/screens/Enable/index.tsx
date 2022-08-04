@@ -2,6 +2,7 @@ import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import PublisherCard from "@components/PublisherCard";
 import { useState, useEffect, useCallback, useRef } from "react";
+import ScreenHeader from "~/app/components/ScreenHeader";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -70,9 +71,7 @@ function Enable(props: Props) {
 
   return (
     <div className="h-full flex flex-col">
-      <div className="text-center text-xl font-semibold dark:text-white py-2 border-b border-gray-200 dark:border-neutral-500">
-        Connect
-      </div>
+      <ScreenHeader title={"Connect"} />
       <div className="h-full flex flex-col justify-between">
         <div>
           <PublisherCard
