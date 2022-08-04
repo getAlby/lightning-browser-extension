@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v2
       - run: npm install axios
-      - uses: actions/github-script@v3
+      - uses: actions/github-script@v6
         with:
           # This snippet is public-domain, taken from
           # https://github.com/oprypin/nightly.link/blob/master/.github/workflows/pr-comment.yml
@@ -68,7 +68,7 @@ jobs:
             body += `\n\nDon't forget: keep stacking sats!\n`;
 
             const {data: comments} = await github.issues.listComments({repo, owner, issue_number});
-            const existing_comment = comments.find((c) => c.user.login === 'github-actions[bot]');
+            const existing_comment = comments.find((c) => c.user.login === 'github-actions[bot]' && c.body.match(/current build files/) );
             if (existing_comment) {
               core.info(`Updating comment ${existing_comment.id}`);
               await github.issues.updateComment({repo, owner, comment_id: existing_comment.id, body});
