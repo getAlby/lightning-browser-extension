@@ -64,6 +64,7 @@ function ConfirmSignMessage(props: Props) {
             <PublisherCard
               title={originRef.current.name}
               image={originRef.current.icon}
+              url={originRef.current.host}
             />
             <dl className="m-4 shadow bg-white dark:bg-surface-02dp p-4 rounded-lg">
               <dt className="font-medium dark:text-white">
@@ -106,6 +107,7 @@ function ConfirmSignMessage(props: Props) {
           <PublisherCard
             title={originRef.current.name}
             image={originRef.current.icon}
+            url={originRef.current.host}
           />
           <SuccessMessage
             message={successMessage}

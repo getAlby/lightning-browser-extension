@@ -92,7 +92,11 @@ function MakeInvoice({
       </div>
       <div className="h-full flex flex-col justify-between">
         <div>
-          <PublisherCard title={origin.name} image={origin.icon} />
+          <PublisherCard
+            title={origin.name}
+            image={origin.icon}
+            url={origin.host}
+          />
           <div className="pt-4 px-4">
             <div>
               {amountEditable && (

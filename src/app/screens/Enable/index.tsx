@@ -78,17 +78,23 @@ function Enable(props: Props) {
           <PublisherCard
             title={props.origin.name}
             image={props.origin.icon}
-            url={props.origin.location}
+            url={props.origin.host}
             isSmall={false}
           />
 
           <div className="dark:text-white p-6">
-            <p className="mb-4">This app would like to:</p>
+            <p className="mb-4">Allow {props.origin.host} to:</p>
 
             <div className="mb-4 flex items-center">
               <CheckIcon className="w-5 h-5 mr-2" />
               <p className="dark:text-white">
                 Request approval for transactions
+              </p>
+            </div>
+            <div className="mb-4 flex items-center">
+              <CheckIcon className="w-5 h-5 mr-2" />
+              <p className="dark:text-white">
+                Request invoices and lightning information
               </p>
             </div>
           </div>
@@ -104,7 +110,7 @@ function Enable(props: Props) {
             href="#"
             onClick={block}
           >
-            Do not ask for this site again
+            Block and ignore {props.origin.host}
           </a>
         </div>
       </div>

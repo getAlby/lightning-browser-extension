@@ -21,7 +21,8 @@ type Props = {
 
 function LNURLChannel(props: Props) {
   const [origin] = useState(props.origin || getOriginData());
-  const { uri } = props.details;
+  const details = props.details;
+  const { uri } = details;
   const [pubkey, host] = uri.split("@");
 
   const { t } = useTranslation("components", {
@@ -113,7 +114,11 @@ function LNURLChannel(props: Props) {
         </div>
       ) : (
         <>
-          <PublisherCard title={origin.name} image={origin.icon} />
+          <PublisherCard
+            title={origin.name}
+            image={origin.icon}
+            url={details.domain}
+          />
           <div className="m-4">
             <SuccessMessage
               message={successMessage}

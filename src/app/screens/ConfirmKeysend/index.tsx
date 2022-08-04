@@ -113,7 +113,11 @@ function Keysend(props: Props) {
       {!successMessage ? (
         <div className="h-full flex flex-col justify-between">
           <div>
-            <PublisherCard title={origin.name} image={origin.icon} />
+            <PublisherCard
+              title={origin.name}
+              image={origin.icon}
+              url={origin.host}
+            />
             <div className="m-4">
               <div className="shadow mb-4 bg-white dark:bg-surface-02dp p-4 rounded-lg">
                 <PaymentSummary
@@ -142,7 +146,11 @@ function Keysend(props: Props) {
         </div>
       ) : (
         <>
-          <PublisherCard title={origin.name} image={origin.icon} />
+          <PublisherCard
+            title={origin.name}
+            image={origin.icon}
+            url={origin.host}
+          />
           <div className="m-4">
             <SuccessMessage
               message={successMessage}
