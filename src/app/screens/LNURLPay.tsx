@@ -6,7 +6,7 @@ import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
 import axios from "axios";
 import React, { useState, useEffect, MouseEvent } from "react";
-import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -24,15 +24,15 @@ import {
   PaymentResponse,
 } from "~/types";
 
-// type Origin = {
-//   name: string;
-//   icon: string;
-// };
+type Origin = {
+  name: string;
+  icon: string;
+};
 
-// type Props = {
-//   details: LNURLPayServiceResponse;
-//   origin?: Origin;
-// };
+type Props = {
+  details?: LNURLPayServiceResponse;
+  origin?: Origin;
+};
 
 const Dt = ({ children }: { children: React.ReactNode }) => (
   <dt className="font-medium text-gray-800 dark:text-white">{children}</dt>
@@ -42,39 +42,23 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
   <dd className="mb-4 text-gray-600 dark:text-neutral-500">{children}</dd>
 );
 
-function LNURLPay(/* props: Props */) {
-  const location = useLocation();
-
-  const state = location.state as any;
-  // let details;
-  // let origin;
-
-  // if (state.message) {
-  //   console.log("LNURLPAY - state - message", state);
-  console.log("LNURLPAY - state", state);
-  const details = state.lnUrlDetails;
-  console.log("LNURLPAY - details", details);
-  // origin = state.message.origin;
-  // } else {
-  // const state = location.state as { lnUrlDetails: FixMe };
-
-  //   const lnUrlDetails = state.lnUrlDetails;
-  //   details = lnUrlDetails;
-  //   // origin = getOriginData(); //needs to comevia state if prompt
-  // }
-
+function LNURLPay(props: Props) {
   const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
-  // const [searchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAccount();
-  // const [loading, setLoading] = useState(true);
-  // const loading = false;
-  // const [details, setDetails] = useState();
-  const [origin] = useState(state.origin || getOriginData());
+  const [loading, setLoading] = useState(true);
+  const [details, setDetails] = useState(props.details);
+  const [origin] = useState(
+    props.origin ||
+      (searchParams.get("origin") &&
+        JSON.parse(searchParams.get("origin") as string)) ||
+      getOriginData()
+  );
   const [valueSat, setValueSat] = useState(
-    (details.minSendable && (+details.minSendable / 1000).toString()) || ""
+    (details?.minSendable && (+details?.minSendable / 1000).toString()) || ""
   );
 
   const [fiatValue, setFiatValue] = useState("");
@@ -96,27 +80,27 @@ function LNURLPay(/* props: Props */) {
     }
   }, [valueSat, showFiat]);
 
-  // useEffect(() => {
-  //   if (searchParams) {
-  //     // lnurl was passed as querystring
-  //     const lnurlString = searchParams.get("lnurl");
-  //     if (lnurlString) {
-  //       lnurl.getDetails(lnurlString).then((lnurlDetails) => {
-  //         if (lnurlDetails.tag === "payRequest") {
-  //           setDetails(lnurlDetails);
-  //           if (lnurlDetails.minSendable) {
-  //             setValueSat((+lnurlDetails.minSendable / 1000).toString());
-  //           }
-  //           setLoading(false);
-  //         }
-  //       });
-  //     } else {
-  //       setLoading(false);
-  //     }
-  //   } else {
-  //     setLoading(false);
-  //   }
-  // }, [searchParams]);
+  useEffect(() => {
+    if (searchParams) {
+      // lnurl was passed as querystring
+      const lnurlString = searchParams.get("lnurl");
+      if (lnurlString) {
+        lnurl.getDetails(lnurlString).then((lnurlDetails) => {
+          if (lnurlDetails.tag === "payRequest") {
+            setDetails(lnurlDetails);
+            if (lnurlDetails.minSendable) {
+              setValueSat((+lnurlDetails.minSendable / 1000).toString());
+            }
+            setLoading(false);
+          }
+        });
+      } else {
+        setLoading(false);
+      }
+    } else {
+      setLoading(false);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     !!settings.userName && setUserName(settings.userName);
@@ -233,7 +217,7 @@ function LNURLPay(/* props: Props */) {
 
       // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the payment response. This closes the window which means the user will NOT see the above successAction.
       // We assume this is OK when it is called through webln.
-      if (details && origin) {
+      if (props.details && props.origin) {
         msg.reply(paymentResponse);
       }
     } catch (e) {
@@ -248,7 +232,7 @@ function LNURLPay(/* props: Props */) {
 
   function reject(e: MouseEvent) {
     e.preventDefault();
-    if (details && origin) {
+    if (props.details && props.origin) {
       msg.error(USER_REJECTED_ERROR);
     } else {
       navigate(-1);
@@ -257,7 +241,7 @@ function LNURLPay(/* props: Props */) {
 
   function close(e: MouseEvent) {
     e.preventDefault();
-    if (details && origin) {
+    if (props.details && props.origin) {
       msg.reply(payment);
     } else {
       window.close();
@@ -265,7 +249,7 @@ function LNURLPay(/* props: Props */) {
   }
 
   function getRecipient() {
-    if (!details.metadata) return;
+    if (!details?.metadata) return;
     try {
       const metadata = JSON.parse(details.metadata);
       const identifier = metadata.find(
@@ -365,18 +349,31 @@ function LNURLPay(/* props: Props */) {
               <Container maxWidth="sm">
                 <div className="my-4">
                   <dl>
-                    <Dt>Send payment to</Dt>
-                    <Dd>{getRecipient()}</Dd>
-                    {formattedMetadata(details.metadata).map(([dt, dd]) => (
+                    {loading || !details ? (
                       <>
-                        <Dt>{dt}</Dt>
-                        <Dd>{dd}</Dd>
-                      </>
-                    ))}
-                    {details.minSendable === details.maxSendable && (
-                      <>
+                        <Dt>Send payment to</Dt>
+                        <Dd>loading...</Dd>
+                        <Dt>Description</Dt>
+                        <Dd>loading...</Dd>
                         <Dt>Amount (Satoshi)</Dt>
-                        <Dd>{`${+details.minSendable / 1000} sats`}</Dd>
+                        <Dd>loading...</Dd>
+                      </>
+                    ) : (
+                      <>
+                        <Dt>Send payment to</Dt>
+                        <Dd>{getRecipient()}</Dd>
+                        {formattedMetadata(details.metadata).map(([dt, dd]) => (
+                          <>
+                            <Dt>{dt}</Dt>
+                            <Dd>{dd}</Dd>
+                          </>
+                        ))}
+                        {details.minSendable === details.maxSendable && (
+                          <>
+                            <Dt>Amount (Satoshi)</Dt>
+                            <Dd>{`${+details.minSendable / 1000} sats`}</Dd>
+                          </>
+                        )}
                       </>
                     )}
                   </dl>
@@ -395,8 +392,8 @@ function LNURLPay(/* props: Props */) {
                     </div>
                   )}
                   {details &&
-                    typeof details.commentAllowed === "number" &&
-                    details.commentAllowed > 0 && (
+                    typeof details?.commentAllowed === "number" &&
+                    details?.commentAllowed > 0 && (
                       <div className="mt-4">
                         <TextField
                           id="comment"
@@ -408,7 +405,7 @@ function LNURLPay(/* props: Props */) {
                         />
                       </div>
                     )}
-                  {details && details.payerData?.name && (
+                  {details && details?.payerData?.name && (
                     <div className="mt-4">
                       <TextField
                         id="name"
@@ -421,7 +418,7 @@ function LNURLPay(/* props: Props */) {
                       />
                     </div>
                   )}
-                  {details && details.payerData?.email && (
+                  {details && details?.payerData?.email && (
                     <div className="mt-4">
                       <TextField
                         id="email"

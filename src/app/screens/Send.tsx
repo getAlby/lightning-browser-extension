@@ -35,10 +35,8 @@ function Send() {
       }
 
       if (lnurl) {
-        const lnUrlDetails = await lnurlLib.getDetails(lnurl); // throws if invalid.
-        console.log("SEND - lnUrlDetails", lnUrlDetails);
-        // const lnUrlDetailsStrinified = JSON.stringify(lnUrlDetails);
-        navigate("/lnurlPay", { state: { lnUrlDetails } });
+        await lnurlLib.getDetails(lnurl); // throws if invalid.
+        navigate(`/lnurlPay?lnurl=${lnurl}`);
       } else if (isPubKey(invoice)) {
         navigate(`/keysend?destination=${invoice}`);
       } else {

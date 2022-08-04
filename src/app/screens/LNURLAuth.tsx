@@ -1,18 +1,19 @@
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import PublisherCard from "@components/PublisherCard";
 import { MouseEvent } from "react";
-import { useLocation } from "react-router-dom";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import type { MessageLnUrlAuth } from "~/types";
+import type { LNURLAuthServiceResponse } from "~/types";
 
-function LNURLAuth() {
-  const location = useLocation();
+type Props = {
+  details: LNURLAuthServiceResponse;
+  origin: {
+    name: string;
+    icon: string;
+  };
+};
 
-  const { message } = location.state as { message: MessageLnUrlAuth };
-  const { origin } = message;
-  const { domain } = message.args;
-
+function LNURLAuth({ details, origin }: Props) {
   async function confirm() {
     return await msg.reply({
       confirmed: true,
@@ -33,7 +34,7 @@ function LNURLAuth() {
           <dt className="font-semibold text-gray-500">
             {origin.name} asks you to login to
           </dt>
-          <dd className="mb-6 dark:text-white">{domain}</dd>
+          <dd className="mb-6 dark:text-white">{details.domain}</dd>
         </dl>
         <ConfirmOrCancel onConfirm={confirm} onCancel={reject} />
       </div>

@@ -1,22 +1,21 @@
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import PublisherCard from "@components/PublisherCard";
 import { useState, useEffect, useCallback, useRef } from "react";
-import { useLocation } from "react-router-dom";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-import type { MessageWebLnEnable } from "~/types";
+import type { OriginData } from "~/types";
 
-function Enable() {
+type Props = {
+  origin: OriginData;
+};
+
+function Enable(props: Props) {
   const hasFetchedData = useRef(false);
   const [, setLoading] = useState(true);
   const [remember] = useState(true);
   const [, setEnabled] = useState(false);
   const [budget] = useState(null);
-  const location = useLocation();
-
-  const { message } = location.state as { message: MessageWebLnEnable };
-  const { origin } = message;
 
   const enable = useCallback(() => {
     setEnabled(true);
@@ -35,13 +34,13 @@ function Enable() {
   async function block(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
     await utils.call("addBlocklist", {
-      domain: origin.domain,
-      host: origin.host,
+      domain: props.origin.domain,
+      host: props.origin.host,
     });
     msg.error(
       `User added site to blocklist domain, host
-        ${origin.domain},
-        ${origin.host}`
+        ${props.origin.domain},
+        ${props.origin.host}`
     );
   }
 
@@ -49,8 +48,8 @@ function Enable() {
     async function getAllowance() {
       try {
         const allowance = await msg.request("getAllowance", {
-          domain: origin.domain,
-          host: origin.host,
+          domain: props.origin.domain,
+          host: props.origin.host,
         });
         if (allowance && allowance.enabled) {
           enable();
@@ -66,19 +65,20 @@ function Enable() {
       getAllowance();
       hasFetchedData.current = true;
     }
-  }, [enable, origin.domain, origin.host]);
+  }, [enable, props.origin.domain, props.origin.host]);
 
   return (
     <div>
-      <PublisherCard title={origin.name} image={origin.icon} />
+      <PublisherCard title={props.origin.name} image={props.origin.icon} />
 
       <div className="text-center p-6">
         <h3 className="text-xl mb-4 dark:text-white">
-          Connect with <i>{origin.host}</i>
+          Connect with <i>{props.origin.host}</i>
         </h3>
 
         <p className="text-gray-500 mb-4 dark:text-neutral-400">
-          <strong>{origin.name}</strong> does not have access to your account.
+          <strong>{props.origin.name}</strong> does not have access to your
+          account.
         </p>
         <p className="mb-8 text-gray-500 mb-4 dark:text-neutral-400">
           Do you want to grant them access?

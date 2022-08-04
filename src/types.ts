@@ -103,21 +103,6 @@ export interface MessageDefault {
   prompt?: boolean;
 }
 
-export interface MessageWebLnEnable extends Omit<MessageDefault, "origin"> {
-  origin: OriginData;
-  action: "webln/enable";
-}
-export interface MessageLnUrlAuth extends Omit<MessageDefault, "origin"> {
-  origin: OriginData;
-  args: {
-    tag: "login";
-    k1: string;
-    domain: string;
-    url: URL;
-  };
-  action: "lnurlAuth";
-}
-
 export interface MessagePaymentAll extends MessageDefault {
   action: "getPayments";
   args?: {
@@ -215,7 +200,7 @@ export interface MessageAllowanceList extends MessageDefault {
   action: "listAllowances";
 }
 
-export interface MessageInvoices extends MessageDefault {
+export interface MessageInvoices extends Omit<MessageDefault, "args"> {
   args: { limit?: number; isSettled?: boolean };
   action: "getInvoices";
 }
@@ -290,6 +275,13 @@ export interface LNURLPayServiceResponse {
   commentAllowed?: number;
 }
 
+export interface LNURLAuthServiceResponse {
+  tag: "login"; // Type of LNURL
+  k1: string; // (hex encoded 32 bytes of challenge) which is going to be signed by user's linkingPrivKey.
+  action?: string; // optional action enum which can be one of four strings: register | login | link | auth.
+  domain: string;
+}
+
 export interface LNURLWithdrawServiceResponse {
   tag: "withdrawRequest"; // type of LNURL
   callback: string; // The URL which LN SERVICE would accept a withdrawal Lightning invoice as query parameter
@@ -307,10 +299,10 @@ export interface LNURLChannelServiceResponse {
   tag: "channelRequest"; // type of LNURL
 }
 
-// is this needed after promot state refactor?
 export type LNURLDetails = (
   | LNURLChannelServiceResponse
   | LNURLPayServiceResponse
+  | LNURLAuthServiceResponse
   | LNURLWithdrawServiceResponse
 ) & { url: URL };
 
