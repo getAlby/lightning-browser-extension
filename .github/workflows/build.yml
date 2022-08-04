@@ -1,4 +1,4 @@
-name: Build and upload nightly release
+name: Build nightlies
 
 on:
   push:
