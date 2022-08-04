@@ -44,12 +44,15 @@ function getUserData(username: string) {
     const location = document.querySelector<HTMLElement>(
       `[data-testid="primaryColumn"] [data-testid="UserLocation"]`
     );
+    const name = document.querySelector<HTMLElement>(
+      `[data-testid="primaryColumn"] h2`
+    );
     if (element && imageUrl) {
       return {
         element,
         location,
         imageUrl,
-        name: document.title,
+        name: name?.textContent || document.title,
       };
     }
   } else if (isOnTweet(username)) {
