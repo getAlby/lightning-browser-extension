@@ -49,8 +49,8 @@ Add Alby to your browser
 
 ### Try out the most recent version of Alby (Nightly Releases)
 
-- [Firefox Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-firefox-nightly-master.xpi) - best to install it as a temporary add-on as discussed in the "Load extension into browser" section
-- [Chrome Nightly](https://alby-releases-public.s3.eu-central-1.amazonaws.com/alby-chrome-nightly-master.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right) and drag & drop the file in the browser
+- [Firefox Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/firefox.xpi.zip) - best to install it as a temporary add-on as discussed in the "Load extension into browser" section
+- [Chrome Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/chrome.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right) and drag & drop the file in the browser
 
 (Note: You might need to reconfigure your wallet after installing new versions)
 
@@ -120,7 +120,7 @@ Then run the following
 
 #### Testnet/testing-accounts for development
 
-We set up our own internal testnet, which can be used for your development.  
+We set up our own internal testnet, which can be used for your development.
 If this is not reachable please let us know.
 
 - [Test-setup](https://github.com/getAlby/lightning-browser-extension/wiki/Test-setup) for different connectors (i.e. LND)
@@ -130,7 +130,7 @@ If this is not reachable please let us know.
 
 #### Storybook.js
 
-We have a working [Storybook](https://storybook.js.org)-setup and some components have stories.  
+We have a working [Storybook](https://storybook.js.org)-setup and some components have stories.
 You can find the deployed Storybook here: https://lbe-stories.netlify.app
 
 ### :white_check_mark: Tests
@@ -289,7 +289,7 @@ heavily inspired by the super-amazing work of the [Joule extension](https://ligh
 
 Want to support the work on Alby?
 
-Support the Alby team ⚡️hello@getalby.com  
+Support the Alby team ⚡️hello@getalby.com
 You can also contribute to our [bounty program](https://github.com/getAlby/lightning-browser-extension/wiki/Bounties): ⚡️bounties@getalby.com
 
 ## License
