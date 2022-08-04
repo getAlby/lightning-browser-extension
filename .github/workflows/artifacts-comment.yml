@@ -57,10 +57,12 @@ jobs:
 
             if (poweredBy.by) {
               body += "\n\n----";
-              body += `\n\nThis build is brought to you by: ${poweredBy.by}:\n`
-              body += `${poweredBy.comment}\n`;
-              body += "----";
-              body += `\n\nWant to sponsor the next build? send some sats to ⚡️builds@getalby.com`;
+              body += "\n\nThis build is brought to you by: `" + poweredBy.by + "`:\n";
+              if (poweredBy.comment) {
+                body += "```\n" + poweredBy.comment + "\n```";
+              }
+              body += "\n\n----";
+              body += `\n\nWant to sponsor the next build? send some sats to ⚡️builds@getalby.com (don't forget to provide your name)`;
             }
 
             body += `\n\nDon't forget: **keep stacking sats!**\n`;
