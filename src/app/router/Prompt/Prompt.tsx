@@ -14,36 +14,38 @@ import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import type {
+  MessageWebLNWithOrigin,
   LNURLAuthServiceResponse,
   LNURLPayServiceResponse,
   LNURLWithdrawServiceResponse,
   LNURLChannelServiceResponse,
-  OriginData,
   RequestInvoiceArgs,
 } from "~/types";
 
 // Parse out the parameters from the querystring.
 const params = new URLSearchParams(window.location.search);
-let origin = {} as OriginData;
-let args = {};
-let action = "";
 
-if (params.get("origin") && typeof params.get("origin") === "string") {
-  origin = JSON.parse(params.get("origin") as string);
-}
+const getParamValues = (params: URLSearchParams, key: string) => {
+  const valueFromKey = params.get(key);
+  if (!!valueFromKey && typeof valueFromKey === "string") {
+    try {
+      return JSON.parse(valueFromKey as string);
+    } catch (e) {
+      // not valid JSON, let's return only the string
+      return valueFromKey;
+    }
+  }
+};
 
-if (params.get("args") && typeof params.get("args") === "string") {
-  args = JSON.parse(params.get("args") as string);
-}
+const createStateFromParams = (
+  params: URLSearchParams
+): Pick<MessageWebLNWithOrigin, "action" | "origin" | "args"> => ({
+  origin: getParamValues(params, "origin"),
+  args: getParamValues(params, "args") || {}, // important: args can be null
+  action: getParamValues(params, "action"),
+});
 
-if (typeof params.get("action") === "string")
-  action = params.get("action") as string;
-
-const routeParams: {
-  origin: OriginData;
-  args: Record<string, unknown>;
-  action: string;
-} = { origin, args, action };
+const navigationState = createStateFromParams(params);
 
 function Prompt() {
   return (
@@ -60,20 +62,21 @@ function Prompt() {
           >
             <Route
               index
-              element={<Navigate to={`/${routeParams.action}`} replace />}
+              element={<Navigate to={`/${navigationState.action}`} replace />}
             />
             <Route
               path="webln/enable"
-              element={<Enable origin={routeParams.origin} />}
+              element={<Enable origin={navigationState.origin} />}
             />
             <Route
               path="lnurlAuth"
               element={
                 <LNURLAuth
                   details={
-                    routeParams.args?.lnurlDetails as LNURLAuthServiceResponse
+                    navigationState.args
+                      ?.lnurlDetails as LNURLAuthServiceResponse
                   }
-                  origin={routeParams.origin}
+                  origin={navigationState.origin}
                 />
               }
             />
@@ -82,9 +85,10 @@ function Prompt() {
               element={
                 <LNURLPay
                   details={
-                    routeParams.args?.lnurlDetails as LNURLPayServiceResponse
+                    navigationState.args
+                      ?.lnurlDetails as LNURLPayServiceResponse
                   }
-                  origin={routeParams.origin}
+                  origin={navigationState.origin}
                 />
               }
             />
@@ -93,10 +97,10 @@ function Prompt() {
               element={
                 <LNURLWithdraw
                   details={
-                    routeParams.args
+                    navigationState.args
                       ?.lnurlDetails as LNURLWithdrawServiceResponse
                   }
-                  origin={routeParams.origin}
+                  origin={navigationState.origin}
                 />
               }
             />
@@ -105,10 +109,10 @@ function Prompt() {
               element={
                 <LNURLChannel
                   details={
-                    routeParams.args
+                    navigationState.args
                       ?.lnurlDetails as LNURLChannelServiceResponse
                   }
-                  origin={routeParams.origin}
+                  origin={navigationState.origin}
                 />
               }
             />
@@ -116,12 +120,14 @@ function Prompt() {
               path="makeInvoice"
               element={
                 <MakeInvoice
-                  amountEditable={routeParams.args.amountEditable as boolean}
-                  memoEditable={routeParams.args.memoEditable as boolean}
-                  invoiceAttributes={
-                    routeParams.args.invoiceAttributes as RequestInvoiceArgs
+                  amountEditable={
+                    navigationState.args.amountEditable as boolean
                   }
-                  origin={routeParams.origin}
+                  memoEditable={navigationState.args.memoEditable as boolean}
+                  invoiceAttributes={
+                    navigationState.args.invoiceAttributes as RequestInvoiceArgs
+                  }
+                  origin={navigationState.origin}
                 />
               }
             />
@@ -129,8 +135,10 @@ function Prompt() {
               path="confirmPayment"
               element={
                 <ConfirmPayment
-                  paymentRequest={routeParams.args?.paymentRequest as string}
-                  origin={routeParams.origin}
+                  paymentRequest={
+                    navigationState.args?.paymentRequest as string
+                  }
+                  origin={navigationState.origin}
                 />
               }
             />
@@ -138,12 +146,15 @@ function Prompt() {
               path="confirmKeysend"
               element={
                 <Keysend
-                  destination={routeParams.args?.destination as string}
-                  valueSat={routeParams.args?.amount as string}
+                  destination={navigationState.args?.destination as string}
+                  valueSat={navigationState.args?.amount as string}
                   customRecords={
-                    routeParams.args?.customRecords as Record<string, string>
+                    navigationState.args?.customRecords as Record<
+                      string,
+                      string
+                    >
                   }
-                  origin={routeParams.origin}
+                  origin={navigationState.origin}
                 />
               }
             />
@@ -151,8 +162,8 @@ function Prompt() {
               path="confirmSignMessage"
               element={
                 <ConfirmSignMessage
-                  message={routeParams.args?.message as string}
-                  origin={routeParams.origin}
+                  message={navigationState.args?.message as string}
+                  origin={navigationState.origin}
                 />
               }
             />
