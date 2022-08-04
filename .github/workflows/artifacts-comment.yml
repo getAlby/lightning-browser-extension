@@ -8,13 +8,15 @@ jobs:
     if: ${{ github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/setup-node@v2
+      - run: npm install axios
       - uses: actions/github-script@v3
         with:
           # This snippet is public-domain, taken from
           # https://github.com/oprypin/nightly.link/blob/master/.github/workflows/pr-comment.yml
           script: |
+            const axios = require('axios');
             const {owner, repo} = context.repo;
-            console.log({owner, repo});
             const run_id = ${{github.event.workflow_run.id}};
             const pull_head_sha = '${{github.event.workflow_run.head_sha}}';
             const pull_user_id = ${{github.event.sender.id}};
@@ -23,7 +25,6 @@ jobs:
               const pulls = await github.pulls.list({owner, repo});
               for await (const {data} of github.paginate.iterator(pulls)) {
                 for (const pull of data) {
-                  console.log(pull.head.sha);
                   if (pull.head.sha === pull_head_sha) {
                     return pull.number;
                   }
@@ -40,10 +41,31 @@ jobs:
             if (!artifacts.length) {
               return core.error(`No artifacts found`);
             }
-            let body = `Download the artifacts for this pull request:\n`;
+
+            let poweredBy = {};
+            try {
+              const response = await axios.get("https://alby-build-sponsorships.fly.dev/latest");
+              poweredBy = response.data;
+            } catch(e) {
+              core.info(e.message);
+            }
+
+            let body = `🚀Thanks for the pull request!\n\nHere are the current build files:\n\n`;
             for (const art of artifacts) {
               body += `\n* [${art.name}.zip](https://nightly.link/${owner}/${repo}/actions/artifacts/${art.id}.zip)`;
             }
+
+            body += `\nDownload and unzip the file for your browser and refer to the [readme](https://github.com/getAlby/lightning-browser-extension#-load-extension-into-browser) for detailed install instructions.`;
+
+            if (poweredBy.by) {
+              body += "\n\n----";
+              body += `\n\nThis build is brought to you by: ${poweredBy.by}:\n`
+              body += `${poweredBy.comment}\n`;
+              body += "----";
+              body += `\n\nWant to sponsor the next build? send some sats to ⚡️builds@getalby.com`;
+            }
+
+            body += `\n\nDon't forget: keep stacking sats!\n`;
 
             const {data: comments} = await github.issues.listComments({repo, owner, issue_number});
             const existing_comment = comments.find((c) => c.user.login === 'github-actions[bot]');
