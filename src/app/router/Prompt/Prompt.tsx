@@ -14,7 +14,7 @@ import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import type {
-  MessageWebLNWithOrigin,
+  NavigationState,
   LNURLAuthServiceResponse,
   LNURLPayServiceResponse,
   LNURLWithdrawServiceResponse,
@@ -37,9 +37,7 @@ const getParamValues = (params: URLSearchParams, key: string) => {
   }
 };
 
-const createStateFromParams = (
-  params: URLSearchParams
-): Pick<MessageWebLNWithOrigin, "action" | "origin" | "args"> => ({
+const createStateFromParams = (params: URLSearchParams): NavigationState => ({
   origin: getParamValues(params, "origin"),
   args: getParamValues(params, "args") || {}, // important: args can be null
   action: getParamValues(params, "action"),

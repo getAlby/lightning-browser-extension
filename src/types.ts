@@ -120,6 +120,11 @@ export interface MessageWebLNWithOrigin
   public: true;
 }
 
+export type NavigationState = Pick<
+  MessageWebLNWithOrigin,
+  "action" | "origin" | "args"
+>;
+
 export interface MessagePaymentAll extends MessageDefault {
   action: "getPayments";
   args?: {
