@@ -32,7 +32,7 @@ async function init() {
   injectScript(); // injects the webln object
 
   // extract LN data from websites
-  browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  browser.runtime.onMessage.addListener((request) => {
     if (request.action === "extractLightningData") {
       extractLightningData();
     }
@@ -69,7 +69,9 @@ async function init() {
         prompt: true,
         origin: getOriginData(),
       };
-      const replyFunction = (response) => {
+
+      // Fixme: Response from Route Calls in background-script
+      const replyFunction = (response: FixMe) => {
         callActive = false; // reset call is active
         // if it is the enable call we store if webln is enabled for this content script
         if (ev.data.action === "enable") {
