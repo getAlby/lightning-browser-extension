@@ -2,9 +2,10 @@ type Props = {
   title: string;
   subtitle: string;
   children: React.ReactNode;
+  link?: string[];
 };
 
-function Setting({ title, subtitle, children }: Props) {
+function Setting({ title, subtitle, children, link }: Props) {
   return (
     <div className="py-4 flex justify-between items-center">
       <div>
@@ -13,6 +14,7 @@ function Setting({ title, subtitle, children }: Props) {
         </span>
         <p className="text-gray-500 dark:text-neutral-500 text-sm">
           {subtitle}
+          {link && <a href={link[0]}>{link[1]}</a>}
         </p>
       </div>
       {children}
