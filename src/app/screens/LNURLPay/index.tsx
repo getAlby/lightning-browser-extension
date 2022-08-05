@@ -11,6 +11,7 @@ function LNURLPay() {
 
   const [details, setDetails] = useState<LNURLPayServiceResponse>();
   const [origin, setOrigin] = useState<OriginData>();
+  const [isPrompt, setIsPrompt] = useState(false);
 
   useEffect(() => {
     if (navState.lnurl) {
@@ -21,13 +22,14 @@ function LNURLPay() {
         if (lnurlDetails.tag === "payRequest") {
           setDetails(lnurlDetails);
           setOrigin(getOriginData());
+          setIsPrompt(true);
         }
       })();
     } else if (navState.args.lnurlDetails && navState.origin) {
       const lnurlDetails = navState.args
         .lnurlDetails as LNURLPayServiceResponse;
       if (lnurlDetails.tag === "payRequest") {
-        setDetails(lnurlDetails as LNURLPayServiceResponse);
+        setDetails(lnurlDetails);
         setOrigin(navState.origin);
       }
     } else {
@@ -37,7 +39,9 @@ function LNURLPay() {
 
   return (
     <>
-      {origin && details && <LNURLPayForm origin={origin} details={details} />}
+      {origin && details && (
+        <LNURLPayForm origin={origin} details={details} isPrompt={isPrompt} />
+      )}
     </>
   );
 }

@@ -27,6 +27,7 @@ import {
 type Props = {
   details: LNURLPayServiceResponse;
   origin: OriginData;
+  isPrompt: boolean;
 };
 
 const Dt = ({ children }: { children: React.ReactNode }) => (
@@ -37,7 +38,7 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
   <dd className="mb-4 text-gray-600 dark:text-neutral-500">{children}</dd>
 );
 
-function LNURLPayForm({ origin, details }: Props) {
+function LNURLPayForm({ origin, details, isPrompt }: Props) {
   const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
@@ -181,7 +182,7 @@ function LNURLPayForm({ origin, details }: Props) {
 
       // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the payment response. This closes the window which means the user will NOT see the above successAction.
       // We assume this is OK when it is called through webln.
-      if (details && origin) {
+      if (isPrompt) {
         msg.reply(paymentResponse);
       }
     } catch (e) {
@@ -196,7 +197,7 @@ function LNURLPayForm({ origin, details }: Props) {
 
   function reject(e: MouseEvent) {
     e.preventDefault();
-    if (details && origin) {
+    if (isPrompt) {
       msg.error(USER_REJECTED_ERROR);
     } else {
       navigate(-1);
@@ -205,7 +206,7 @@ function LNURLPayForm({ origin, details }: Props) {
 
   function close(e: MouseEvent) {
     e.preventDefault();
-    if (details && origin) {
+    if (isPrompt) {
       msg.reply(payment);
     } else {
       window.close();
