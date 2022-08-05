@@ -122,7 +122,9 @@ export interface MessageWebLNWithOrigin
 
 type OptionalNavigationState = {
   lnurl?: string; // Passed when calling `/lnurlPay` from out Extension
+  paymentRequest?: string; // Passed when calling `/confirmPayment` from out Extension
 };
+
 export type NavigationState = Pick<
   MessageWebLNWithOrigin,
   "action" | "origin" | "args"

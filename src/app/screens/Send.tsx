@@ -36,7 +36,7 @@ function Send() {
 
       if (lnurl) {
         await lnurlLib.getDetails(lnurl); // throws if invalid.
-        navigate(`/lnurlPay`, {
+        navigate("/lnurlPay", {
           state: {
             lnurl,
           },
@@ -45,7 +45,11 @@ function Send() {
         navigate(`/keysend?destination=${invoice}`);
       } else {
         lightningPayReq.decode(invoice); // throws if invalid.
-        navigate(`/confirmPayment?paymentRequest=${invoice}`);
+        navigate("/confirmPayment", {
+          state: {
+            paymentRequest: invoice,
+          },
+        });
       }
     } catch (e) {
       if (e instanceof Error) {

@@ -5,11 +5,13 @@ import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import lightningPayReq from "bolt11";
-import { useEffect, useRef, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import type { PaymentRequestObject, TagsObject } from "bolt11";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -17,32 +19,48 @@ import { getFiatValue } from "~/common/utils/currencyConvert";
 import getOriginData from "~/extension/content-script/originData";
 import type { OriginData } from "~/types";
 
-export type Props = {
-  origin?: OriginData;
-  paymentRequest?: string;
-};
+type Invoice = PaymentRequestObject & { tagsObject: TagsObject };
 
-function ConfirmPayment(props: Props) {
+function ConfirmPayment() {
+  const navState = useNavigationState();
+
+  // TODO: separate form from paymentRequest/invoice/origin handling
+
+  const [paymentRequest, setPaymentRequest] = useState("");
+  const [invoice, setInvoice] = useState<Invoice>();
+  const [origin, setOrigin] = useState<OriginData>();
+  const [isPrompt, setIsPrompt] = useState(false);
+  const [budget, setBudget] = useState("");
+  const [fiatAmount, setFiatAmount] = useState("");
+
+  useEffect(() => {
+    if (navState.paymentRequest) {
+      const paymentRequest = navState.paymentRequest;
+      setPaymentRequest(paymentRequest);
+      setInvoice(lightningPayReq.decode(paymentRequest));
+      setOrigin(getOriginData());
+      setIsPrompt(true);
+    } else if (navState.args.paymentRequest && navState.origin) {
+      const paymentRequest = navState.args.paymentRequest as string;
+      setPaymentRequest(paymentRequest);
+      setInvoice(lightningPayReq.decode(paymentRequest));
+      setOrigin(navState.origin);
+    } else {
+      throw new Error("Not a paymentRequest LNUrl");
+    }
+  }, [navState]);
+
   const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAccount();
 
-  const invoiceRef = useRef(
-    lightningPayReq.decode(
-      props.paymentRequest || (searchParams.get("paymentRequest") as string)
-    )
-  );
-  const originRef = useRef(props.origin || getOriginData());
-  const paymentRequestRef = useRef(
-    props.paymentRequest || searchParams.get("paymentRequest")
-  );
-  const [budget, setBudget] = useState(
-    ((invoiceRef.current?.satoshis || 0) * 10).toString()
-  );
-  const [fiatAmount, setFiatAmount] = useState("");
+  useEffect(() => {
+    if (invoice) {
+      setBudget(((invoice.satoshis || 0) * 10).toString());
+    }
+  }, [invoice]);
 
   useEffect(() => {
     if (showFiat) {
@@ -66,8 +84,8 @@ function ConfirmPayment(props: Props) {
       setLoading(true);
       const response = await utils.call(
         "sendPayment",
-        { paymentRequest: paymentRequestRef.current },
-        { origin: originRef.current }
+        { paymentRequest },
+        { origin }
       );
       auth.fetchAccountInfo(); // Update balance.
       msg.reply(response);
@@ -82,7 +100,7 @@ function ConfirmPayment(props: Props) {
 
   function reject(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
-    if (props.paymentRequest && props.origin) {
+    if (isPrompt) {
       msg.error(USER_REJECTED_ERROR);
     } else {
       navigate(-1);
@@ -90,62 +108,63 @@ function ConfirmPayment(props: Props) {
   }
 
   function saveBudget() {
-    if (!budget) return;
+    if (!budget || !origin) return;
     return msg.request("addAllowance", {
       totalBudget: parseInt(budget),
-      host: originRef.current.host,
-      name: originRef.current.name,
-      imageURL: originRef.current.icon,
+      host: origin.host,
+      name: origin.name,
+      imageURL: origin.icon,
     });
   }
 
   return (
-    <div>
-      <PublisherCard
-        title={originRef.current.name}
-        image={originRef.current.icon}
-      />
-      <div className="py-4">
-        <Container maxWidth="sm">
-          {!successMessage ? (
-            <>
-              <h1 className="dark:text-white font-bold mb-4">
-                Approve payment
-              </h1>
-              <div className="mb-6">
-                <PaymentSummary
-                  amount={invoiceRef.current?.satoshis}
-                  description={invoiceRef.current?.tagsObject.description}
+    <>
+      {origin && paymentRequest && invoice && (
+        <div>
+          <PublisherCard title={origin.name} image={origin.icon} />
+          <div className="py-4">
+            <Container maxWidth="sm">
+              {!successMessage ? (
+                <>
+                  <h1 className="dark:text-white font-bold mb-4">
+                    Approve payment
+                  </h1>
+                  <div className="mb-6">
+                    <PaymentSummary
+                      amount={invoice.satoshis}
+                      description={invoice.tagsObject.description}
+                    />
+                  </div>
+
+                  <BudgetControl
+                    fiatAmount={fiatAmount}
+                    remember={rememberMe}
+                    onRememberChange={(event) => {
+                      setRememberMe(event.target.checked);
+                    }}
+                    budget={budget}
+                    onBudgetChange={(event) => setBudget(event.target.value)}
+                  />
+
+                  <ConfirmOrCancel
+                    disabled={loading}
+                    loading={loading}
+                    onConfirm={confirm}
+                    onCancel={reject}
+                    label="Pay now"
+                  />
+                </>
+              ) : (
+                <SuccessMessage
+                  message={successMessage}
+                  onClose={() => window.close()}
                 />
-              </div>
-
-              <BudgetControl
-                fiatAmount={fiatAmount}
-                remember={rememberMe}
-                onRememberChange={(event) => {
-                  setRememberMe(event.target.checked);
-                }}
-                budget={budget}
-                onBudgetChange={(event) => setBudget(event.target.value)}
-              />
-
-              <ConfirmOrCancel
-                disabled={loading}
-                loading={loading}
-                onConfirm={confirm}
-                onCancel={reject}
-                label="Pay now"
-              />
-            </>
-          ) : (
-            <SuccessMessage
-              message={successMessage}
-              onClose={() => window.close()}
-            />
-          )}
-        </Container>
-      </div>
-    </div>
+              )}
+            </Container>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
