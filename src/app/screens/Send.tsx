@@ -36,8 +36,7 @@ function Send() {
 
       if (lnurl) {
         await lnurlLib.getDetails(lnurl); // throws if invalid.
-        // TODO: Remove SearchParams later
-        navigate(`/lnurlPay?lnurl=${lnurl}`, {
+        navigate(`/lnurlPay`, {
           state: {
             lnurl,
           },

@@ -16,7 +16,6 @@ import RequireAuth from "~/app/router/RequireAuth";
 import type {
   NavigationState,
   LNURLAuthServiceResponse,
-  LNURLPayServiceResponse,
   LNURLWithdrawServiceResponse,
   LNURLChannelServiceResponse,
   RequestInvoiceArgs,
@@ -81,18 +80,7 @@ function Prompt() {
                 />
               }
             />
-            <Route
-              path="lnurlPay"
-              element={
-                <LNURLPay
-                  details={
-                    navigationState.args
-                      ?.lnurlDetails as LNURLPayServiceResponse
-                  }
-                  origin={navigationState.origin}
-                />
-              }
-            />
+            <Route path="lnurlPay" element={<LNURLPay />} />
             <Route
               path="lnurlWithdraw"
               element={
