@@ -1,19 +1,16 @@
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import PublisherCard from "@components/PublisherCard";
 import { MouseEvent } from "react";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import type { LNURLAuthServiceResponse } from "~/types";
+import type { LNURLAuthServiceResponse, OriginData } from "~/types";
 
-type Props = {
-  details: LNURLAuthServiceResponse;
-  origin: {
-    name: string;
-    icon: string;
-  };
-};
+function LNURLAuth() {
+  const navState = useNavigationState();
+  const origin: OriginData = navState.origin;
+  const details = navState.args.lnurlDetails as LNURLAuthServiceResponse;
 
-function LNURLAuth({ details, origin }: Props) {
   async function confirm() {
     return await msg.reply({
       confirmed: true,

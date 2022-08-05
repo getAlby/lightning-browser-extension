@@ -15,7 +15,6 @@ import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import type {
   NavigationState,
-  LNURLAuthServiceResponse,
   LNURLWithdrawServiceResponse,
   LNURLChannelServiceResponse,
   RequestInvoiceArgs,
@@ -68,18 +67,7 @@ function Prompt() {
               }
             />
             <Route path="webln/enable" element={<Enable />} />
-            <Route
-              path="lnurlAuth"
-              element={
-                <LNURLAuth
-                  details={
-                    navigationState.args
-                      ?.lnurlDetails as LNURLAuthServiceResponse
-                  }
-                  origin={navigationState.origin}
-                />
-              }
-            />
+            <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route
               path="lnurlWithdraw"
