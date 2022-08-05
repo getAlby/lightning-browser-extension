@@ -11,6 +11,8 @@ function LNURLPay() {
 
   const [details, setDetails] = useState<LNURLPayServiceResponse>();
   const [origin, setOrigin] = useState<OriginData>();
+
+  // TODO: refactor prompt
   const [isPrompt, setIsPrompt] = useState(false);
 
   useEffect(() => {
@@ -22,7 +24,6 @@ function LNURLPay() {
         if (lnurlDetails.tag === "payRequest") {
           setDetails(lnurlDetails);
           setOrigin(getOriginData());
-          setIsPrompt(true);
         }
       })();
     } else if (navState.args.lnurlDetails && navState.origin) {
@@ -31,6 +32,7 @@ function LNURLPay() {
       if (lnurlDetails.tag === "payRequest") {
         setDetails(lnurlDetails);
         setOrigin(navState.origin);
+        // setIsPrompt(true);
       }
     } else {
       throw new Error("Not a payRequest LNUrl");
