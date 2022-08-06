@@ -1,0 +1,94 @@
+{
+    "translation": {
+        "choose_connector": {
+            "alby": {
+                "pre_connect": {
+                    "email_label": "Dirección de correo electrónico",
+                    "optional_lightning_address_label": "Elige tu dirección de correo electrónico (opcional)",
+                    "optional_lightning_note": {
+                        "part4": "aprenda más",
+                        "part3": ". Esta es una forma sencilla para que cualquier persona le envíe Bitcoin en Lightning Network.",
+                        "part1": "Su cuenta Alby también viene con una suscripción opcional",
+                        "part2": "Dirección de Lightning"
+                    },
+                    "title": "Su Billetera Alby Lightning",
+                    "login_account": "Cree o inicie sesión en su cuenta de Alby.",
+                    "host_wallet": "¡Alojamos una billetera Lightning para ti!",
+                    "optional_lightning_address_suffix": "@getalby.com",
+                    "errors": {
+                        "create_wallet_error": "Error al crear una nueva billetera"
+                    }
+                },
+                "title": "Billetera de Alby",
+                "description": "Crea o inicia sesión en tu cuenta de Alby"
+            },
+            "lndhub": {
+                "page_title": "Conéctese a LNDHub (BlueWallet)",
+                "description": "Conéctese a su billetera móvil Blue Wallet",
+                "page_description": "En la billetera BlueWallet, elija la billetera que desea conectar, ábrala, haga clic en\"...\", haga clic en Exportar / Copia de seguridad para mostrar el código QR y escanearlo con su cámara web.",
+                "title": "LNDHub (billetera Bluewallet)",
+                "lndhub_uri": "Exportar URI de LNDHub"
+            },
+            "lnd": {
+                "page_title": "Conéctese a su nodo LND",
+                "page_description": "Necesita la URL de su nodo y una frase macarrón con permisos de lectura y envío (por ejemplo, admin.macaroon)",
+                "errors": {
+                    "connection_failed": "La conexión falló. ¿Son correctas sus credenciales de LND?"
+                },
+                "url_placeholder": "https://url-de-su-nodo:8080",
+                "or": "o",
+                "title": "LND",
+                "description": "Conéctese a su nodo LND",
+                "url_label": "Host y puerto de la API REST",
+                "macaroon_label": "Frase macarrón (formato HEX)",
+                "drag_and_drop": "Arrastra y suelta tu frase macarrón aquí o <0>navegar</0>"
+            },
+            "title": "¿Tienes una billetera Lightning?",
+            "description": "¡Primero debe conectarse a una billetera lightning para poder interactuar con sus sitios web favoritos que aceptan pagos con Bitcoin lightning!"
+        },
+        "welcome": {
+            "intro": {
+                "send_description": "Las transacciones de lightning ocurren en su navegador. No se necesita alt+tab ni escaneo de códigos QR.",
+                "send": "Enviar en un Click",
+                "paywall": "No más molestos muros de pago",
+                "privacy": "Privacidad primero",
+                "foss": "Gratis y de Código Abierto",
+                "actions": {
+                    "get_started": "Comience"
+                },
+                "paywall_description": "Defina presupuestos individuales para sitios web para permitir flujos de pago sin interrupciones. No más molestos muros de pago.",
+                "privacy_description": "Utilice lightning para autenticarse y controlar su privacidad.",
+                "foss_description": "Código completamente abierto que puede ser auditado por cualquier persona. Sin estadísticas ni rastreadores. Tú tienes el control."
+            },
+            "nav": {
+                "welcome": "Bienvenido",
+                "password": "Su Contraseña",
+                "connect": "Conéctese a Lightning",
+                "done": "Hecho"
+            },
+            "set_password": {
+                "title": "Proteja su billetera",
+                "enter_password": "Por favor, introduzca una contraseña.",
+                "confirm_password": "Por favor, confirme su contraseña.",
+                "confirm_password_label": "Confirme que lo escribió correctamente:",
+                "description": "Su billetera está encriptada de forma segura con una contraseña y debe desbloquearse antes de usarla.",
+                "mismatched_password": "Las contraseñas no coinciden.",
+                "choose_password_label": "Elige una contraseña:"
+            },
+            "test_connection": {
+                "review_connection_details": "Revise los detalles de su conexión.",
+                "ready": "¡Impresionante, estás listo para comenzar!",
+                "tutorial": "Ahora que ha conectado su nodo, ¿le gustaría ir a través de un tutorial?",
+                "try_tutorial": "Pruébalo ahora",
+                "connection_error": "Error de Conexión",
+                "initializing": "Inicializando su cuenta. Por favor, espere, esto puede tardar un minuto...",
+                "connection_taking_long": "Intentar conectarse lleva más tiempo de lo esperado... ¿Sus datos son correctos? ¿Se puede acceder a su nodo?",
+                "contact_support": "Si necesita ayuda, póngase en contacto con support@getalby.com",
+                "actions": {
+                    "delete_edit_account": "Eliminar una cuenta no válida y volver a editarla"
+                }
+            },
+            "heading": "El poder de lightning en tu navegador"
+        }
+    }
+}
