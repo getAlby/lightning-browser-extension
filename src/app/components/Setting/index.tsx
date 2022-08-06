@@ -13,8 +13,7 @@ function Setting({ title, subtitle, children, link }: Props) {
           {title}
         </span>
         <p className="text-gray-500 dark:text-neutral-500 text-sm">
-          {subtitle}
-          {link && <a href={link[0]}>{link[1]}</a>}
+          {subtitle} {link && <a href={link[0]}>{link[1]}</a>}
         </p>
       </div>
       {children}

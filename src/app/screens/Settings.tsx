@@ -98,10 +98,10 @@ function Settings() {
         </Setting>
         <Setting
           title={t("language.title")}
-          subtitle={t("language.subtitle").slice(0, 40)}
+          subtitle={t("language.subtitle")}
           link={[
             "https://hosted.weblate.org/projects/getalby-lightning-browser-extension/getalby-lightning-browser-extension/",
-            t("language.subtitle").slice(40),
+            t("language.link"),
           ]}
         >
           <div className="w-32">
