@@ -16,6 +16,11 @@ const battery = (): void => {
 function handleProjectPage(name: string) {
   const address =
     document.querySelector<HTMLElement>("#lightning-address")?.innerText;
+  const title =
+    document.querySelector<HTMLElement>("#project-title")?.innerText;
+  const icon = document.querySelector<HTMLImageElement>(
+    "#project-avatar img"
+  )?.src;
 
   if (address) {
     setLightningData([
@@ -24,10 +29,9 @@ function handleProjectPage(name: string) {
         address: address,
         ...getOriginData(),
         description:
-          document.querySelector<HTMLHeadingElement>("#project-title")
-            ?.innerText ?? "Geyser - bitcoin crowdfunding.",
-        name: name,
-        icon: "https://geyser.fund/logo-brand.svg",
+          "Geyser - global bitcoin crowdfunding that helps builders and creators fund their ideas.",
+        name: title ?? name,
+        icon: icon ?? "https://geyser.fund/logo-brand.svg",
       },
     ]);
   }
