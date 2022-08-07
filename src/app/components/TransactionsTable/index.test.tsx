@@ -80,7 +80,7 @@ const invoicesWithBoostagram: Props = {
         episode: undefined,
         itemID: undefined,
         ts: undefined,
-        message: "Du bist so 1 geiles podcast",
+        message: "Du bist so 1 geiles podcast 100%",
         sender_id: "123456",
         sender_name: "bumi@getalby.com",
         time: "00:00",
@@ -161,7 +161,7 @@ describe("TransactionsTable", () => {
     });
 
     expect(
-      await screen.findByText(/Message: Du bist so 1 geiles podcast/)
+      await screen.findByText(/Message: Du bist so 1 geiles podcast 100%/)
     ).toBeInTheDocument();
     expect(
       await screen.findByText(/Sender: bumi@getalby.com/)
