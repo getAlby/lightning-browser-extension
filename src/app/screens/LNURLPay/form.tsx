@@ -27,7 +27,7 @@ import {
 type Props = {
   details: LNURLPayServiceResponse;
   origin: OriginData;
-  isPrompt: boolean;
+  isPrompt?: boolean;
 };
 
 const Dt = ({ children }: { children: React.ReactNode }) => (

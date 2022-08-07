@@ -123,6 +123,7 @@ export interface MessageWebLNWithOrigin
 type OptionalNavigationState = {
   lnurl?: string; // Passed when calling `/lnurlPay` from out Extension
   paymentRequest?: string; // Passed when calling `/confirmPayment` from out Extension
+  isPrompt?: boolean; // Indicate if this state is coming from the prompt
 };
 
 export type NavigationState = Pick<
