@@ -1,5 +1,5 @@
 import AccountMenu from "@components/AccountMenu";
-import Keysend from "@screens/ConfirmKeysend";
+import ConfirmKeysend from "@screens/ConfirmKeysend";
 import ConfirmPayment from "@screens/ConfirmPayment";
 import ConfirmSignMessage from "@screens/ConfirmSignMessage";
 import Enable from "@screens/Enable";
@@ -149,7 +149,7 @@ function Prompt() {
             <Route
               path="confirmKeysend"
               element={
-                <Keysend
+                <ConfirmKeysend
                   destination={navigationState.args?.destination as string}
                   valueSat={navigationState.args?.amount as string}
                   customRecords={
