@@ -60,7 +60,13 @@ function Prompt() {
           >
             <Route
               index
-              element={<Navigate to={`/${navigationState.action}`} replace />}
+              element={
+                <Navigate
+                  to={`/${navigationState.action}`}
+                  replace
+                  state={navigationState}
+                />
+              }
             />
             <Route
               path="webln/enable"
