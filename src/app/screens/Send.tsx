@@ -27,6 +27,7 @@ function Send() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
     try {
       setLoading(true);
       let lnurl = lnurlLib.findLnurl(invoice);
@@ -75,7 +76,6 @@ function Send() {
 
   function extractInvoiceFrom(data: string) {
     const reqExp = /lightning=([^&|\b]+)/i;
-
     const invoice = data.match(reqExp);
 
     if (invoice) {

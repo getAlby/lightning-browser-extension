@@ -89,6 +89,15 @@ function ConfirmPaymentForm({ origin, paymentRequest, isPrompt }: Props) {
     }
   }
 
+  function close(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+    if (isPrompt) {
+      window.close();
+    } else {
+      navigate(-1);
+    }
+  }
+
   function saveBudget() {
     if (!budget || !origin) return;
     return msg.request("addAllowance", {
@@ -151,10 +160,7 @@ function ConfirmPaymentForm({ origin, paymentRequest, isPrompt }: Props) {
               url={origin.host}
             />
             <div className="m-4">
-              <SuccessMessage
-                message={successMessage}
-                onClose={() => window.close()}
-              />
+              <SuccessMessage message={successMessage} onClose={close} />
             </div>
           </>
         )}

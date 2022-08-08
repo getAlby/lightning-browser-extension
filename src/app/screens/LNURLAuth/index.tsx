@@ -76,6 +76,7 @@ function LNURLAuth() {
               content={details.domain}
             />
           </div>
+
           <div>
             <ConfirmOrCancel
               label="Login"
