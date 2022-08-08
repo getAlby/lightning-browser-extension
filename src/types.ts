@@ -1,4 +1,5 @@
 import { PaymentRequestObject } from "bolt11";
+import { PATHS } from "~/app/router/routes";
 import { CURRENCIES } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
 import {
@@ -120,6 +121,8 @@ export interface MessageWebLNWithOrigin
   public: true;
 }
 
+type Path = keyof typeof PATHS;
+type RouterPaths = typeof PATHS[Path];
 export type NavigationState = {
   origin: OriginData;
   args?: {
@@ -139,7 +142,7 @@ export type NavigationState = {
   };
   lnurl?: string; // Passed when lnurlDetails have to be fetched
   isPrompt?: true; // only passed via Prompt.tsx
-  action: WebLNMessageAction; // TODO: Can be WebLNMessageAction or a PATH from 'app/router/routes, so far "action" is not used in components
+  action: WebLNMessageAction | RouterPaths;
 };
 
 export interface MessagePaymentAll extends MessageDefault {
