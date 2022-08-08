@@ -35,25 +35,12 @@ function Send() {
       }
 
       if (lnurl) {
-        const LNURLDetails = await lnurlLib.getDetails(lnurl); // throws if invalid.
-        const navState = {
+        await lnurlLib.getDetails(lnurl); // throws if invalid.
+        navigate(`/lnurlPay`, {
           state: {
             lnurl,
           },
-        };
-
-        switch (LNURLDetails.tag) {
-          case "login":
-            navigate("/lnurlAuth", navState);
-            break;
-
-          case "payRequest":
-            navigate("/lnurlPay", navState);
-            break;
-
-          default:
-            toast.error("This LNURL is not supported here yet");
-        }
+        });
       } else if (isPubKey(invoice)) {
         navigate(`/keysend?destination=${invoice}`);
       } else {
