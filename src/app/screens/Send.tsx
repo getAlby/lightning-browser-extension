@@ -15,15 +15,27 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import lnurlLib from "~/common/lib/lnurl";
 
+const extractInvoiceFrom = (data: string): string => {
+  const reqExp = /lightning=([^&|\b]+)/i;
+
+  const invoice = data.match(reqExp);
+
+  if (invoice) {
+    return invoice[1];
+  } else {
+    return data;
+  }
+};
+
+const isPubKey = (str: string) => {
+  return str.length == 66 && (str.startsWith("02") || str.startsWith("03"));
+};
+
 function Send() {
   const [invoice, setInvoice] = useState("");
   const navigate = useNavigate();
   const [qrIsOpen, setQrIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  function isPubKey(str: string) {
-    return str.length == 66 && (str.startsWith("02") || str.startsWith("03"));
-  }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -57,18 +69,6 @@ function Send() {
       }
     } finally {
       setLoading(false);
-    }
-  }
-
-  function extractInvoiceFrom(data: string) {
-    const reqExp = /lightning=([^&|\b]+)/i;
-
-    const invoice = data.match(reqExp);
-
-    if (invoice) {
-      return invoice[1];
-    } else {
-      return data;
     }
   }
 
