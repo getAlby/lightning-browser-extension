@@ -120,10 +120,25 @@ export interface MessageWebLNWithOrigin
   public: true;
 }
 
-export type NavigationState = Pick<
-  MessageWebLNWithOrigin,
-  "action" | "origin" | "args"
->;
+export type NavigationState = {
+  origin: OriginData;
+  args?: {
+    lnurlDetails:
+      | LNURLAuthServiceResponse
+      | LNURLPayServiceResponse
+      | LNURLWithdrawServiceResponse
+      | LNURLChannelServiceResponse;
+    amountEditable?: boolean;
+    memoEditable?: boolean;
+    invoiceAttributes?: RequestInvoiceArgs;
+    paymentRequest?: string;
+    destination?: string;
+    amount?: string;
+    customRecords?: Record<string, string>;
+    message?: string;
+  };
+  action: WebLNMessageAction; // TODO: Can be WebLNMessageAction or a PATH from 'app/router/routes, so far "action" is not used in components
+};
 
 export interface MessagePaymentAll extends MessageDefault {
   action: "getPayments";

@@ -126,11 +126,12 @@ function Prompt() {
               element={
                 <MakeInvoice
                   amountEditable={
-                    navigationState.args.amountEditable as boolean
+                    navigationState.args?.amountEditable as boolean
                   }
-                  memoEditable={navigationState.args.memoEditable as boolean}
+                  memoEditable={navigationState.args?.memoEditable as boolean}
                   invoiceAttributes={
-                    navigationState.args.invoiceAttributes as RequestInvoiceArgs
+                    navigationState.args
+                      ?.invoiceAttributes as RequestInvoiceArgs
                   }
                   origin={navigationState.origin}
                 />
