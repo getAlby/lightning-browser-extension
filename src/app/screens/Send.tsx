@@ -15,6 +15,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import lnurlLib from "~/common/lib/lnurl";
 
+import { URLS } from "../router/routes";
+
 function Send() {
   const [invoice, setInvoice] = useState("");
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ function Send() {
 
       if (lnurl) {
         await lnurlLib.getDetails(lnurl); // throws if invalid.
-        navigate(`/lnurlPay?lnurl=${lnurl}`);
+        navigate(`/${URLS.lnurlPay}?lnurl=${lnurl}`);
       } else if (isPubKey(invoice)) {
         navigate(`/keysend?destination=${invoice}`);
       } else {

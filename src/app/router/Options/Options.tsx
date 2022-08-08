@@ -17,6 +17,7 @@ import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
+import { PATHS } from "~/app/router/routes";
 
 function Options() {
   const connectorRoutes = getConnectorRoutes();
@@ -40,7 +41,7 @@ function Options() {
             <Route path="send" element={<Send />} />
             <Route path="keysend" element={<Keysend />} />
             <Route path="receive" element={<Receive />} />
-            <Route path="lnurlPay" element={<LNURLPay />} />
+            <Route path={PATHS.lnurlPay} element={<LNURLPay />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="settings" element={<Settings />} />
             <Route path="accounts">

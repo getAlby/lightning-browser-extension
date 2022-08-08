@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import browser from "webextension-polyfill";
 import { useSettings } from "~/app/context/SettingsContext";
+import { URLS } from "~/app/router/routes";
 import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
@@ -251,7 +252,7 @@ function Home() {
                   };
                   if (lnData[0].method === "lnurl") {
                     navigate(
-                      `/lnurlPay?lnurl=${
+                      `/${URLS.lnurlPay}?lnurl=${
                         lnData[0].address
                       }&origin=${encodeURIComponent(JSON.stringify(origin))}`
                     );

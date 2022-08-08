@@ -102,7 +102,7 @@ const utils = {
   openPrompt: <Type>(message: {
     args: Record<string, unknown>;
     origin: OriginData | OriginDataInternal;
-    action: string;
+    action: string; // TODO: here action should always match a route PATH in app/router/routes
   }): Promise<{ data: Type }> => {
     const urlParams = new URLSearchParams();
     // passing on the message args to the prompt if present
