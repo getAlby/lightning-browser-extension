@@ -1,4 +1,5 @@
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
@@ -86,7 +87,7 @@ function LNURLChannel(props: Props) {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={"Channel Request"} />
       {!successMessage ? (
-        <div className="h-full flex flex-col justify-between">
+        <Container isScreenView maxWidth="sm">
           <div>
             <PublisherCard title={origin.name} image={origin.icon} />
             <ContentMessage
@@ -109,9 +110,9 @@ function LNURLChannel(props: Props) {
               <em>{t("only_trusted")}</em>
             </p>
           </div>
-        </div>
+        </Container>
       ) : (
-        <>
+        <Container maxWidth="sm">
           <PublisherCard
             title={origin.name}
             image={origin.icon}
@@ -123,7 +124,7 @@ function LNURLChannel(props: Props) {
               onClose={() => window.close()}
             />
           </div>
-        </>
+        </Container>
       )}
     </div>
   );

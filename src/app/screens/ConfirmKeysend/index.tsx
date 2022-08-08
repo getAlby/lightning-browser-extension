@@ -1,5 +1,6 @@
 import BudgetControl from "@components/BudgetControl";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import Container from "@components/Container";
 import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
@@ -110,14 +111,14 @@ function ConfirmKeysend(props: Props) {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={"Approve Payment"} />
       {!successMessage ? (
-        <div className="h-full flex flex-col justify-between">
+        <Container isScreenView maxWidth="sm">
           <div>
             <PublisherCard
               title={origin.name}
               image={origin.icon}
               url={origin.host}
             />
-            <div className="m-4">
+            <div className="my-4">
               <div className="shadow mb-4 bg-white dark:bg-surface-02dp p-4 rounded-lg">
                 <PaymentSummary
                   amount={amount}
@@ -142,9 +143,9 @@ function ConfirmKeysend(props: Props) {
             onConfirm={confirm}
             onCancel={reject}
           />
-        </div>
+        </Container>
       ) : (
-        <>
+        <Container maxWidth="sm">
           <PublisherCard
             title={origin.name}
             image={origin.icon}
@@ -156,7 +157,7 @@ function ConfirmKeysend(props: Props) {
               onClose={() => window.close()}
             />
           </div>
-        </>
+        </Container>
       )}
     </div>
   );

@@ -1,5 +1,6 @@
 //import Checkbox from "../../components/Form/Checkbox";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
@@ -59,7 +60,7 @@ function ConfirmSignMessage(props: Props) {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={"Sign"} />
       {!successMessage ? (
-        <div className="h-full flex flex-col justify-between">
+        <Container isScreenView maxWidth="sm">
           <div>
             <PublisherCard
               title={originRef.current.name}
@@ -97,9 +98,9 @@ function ConfirmSignMessage(props: Props) {
             onConfirm={confirm}
             onCancel={reject}
           />
-        </div>
+        </Container>
       ) : (
-        <>
+        <Container maxWidth="sm">
           <PublisherCard
             title={originRef.current.name}
             image={originRef.current.icon}
@@ -109,7 +110,7 @@ function ConfirmSignMessage(props: Props) {
             message={successMessage}
             onClose={() => window.close()}
           />
-        </>
+        </Container>
       )}
     </div>
   );

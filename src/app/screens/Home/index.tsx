@@ -229,7 +229,7 @@ function Home() {
         className={
           lnData.length > 0
             ? "border-b border-gray-200 dark:border-neutral-500"
-            : ""
+            : "mx-4"
         }
       >
         <PublisherCard

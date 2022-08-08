@@ -1,4 +1,5 @@
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import { MouseEvent } from "react";
@@ -33,7 +34,7 @@ function LNURLAuth({ details, origin }: Props) {
   }
 
   return (
-    <div className="h-full flex flex-col overflow-y-auto no-scrollbar justify-between">
+    <Container isScreenView maxWidth="sm">
       <div>
         <PublisherCard
           title={origin.name}
@@ -51,7 +52,7 @@ function LNURLAuth({ details, origin }: Props) {
           <em>{t("only_trusted")}</em>
         </p>
       </div>
-    </div>
+    </Container>
   );
 }
 

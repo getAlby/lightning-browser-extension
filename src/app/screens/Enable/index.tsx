@@ -1,5 +1,6 @@
 import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import { useState, useEffect, useCallback, useRef } from "react";
 import ScreenHeader from "~/app/components/ScreenHeader";
@@ -72,7 +73,7 @@ function Enable(props: Props) {
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={"Connect"} />
-      <div className="h-full flex flex-col justify-between">
+      <Container isScreenView maxWidth="sm">
         <div>
           <PublisherCard
             title={props.origin.name}
@@ -81,7 +82,7 @@ function Enable(props: Props) {
             isSmall={false}
           />
 
-          <div className="dark:text-white p-6">
+          <div className="dark:text-white pt-6">
             <p className="mb-4">Allow {props.origin.host} to:</p>
 
             <div className="mb-4 flex items-center">
@@ -112,7 +113,7 @@ function Enable(props: Props) {
             Block and ignore {props.origin.host}
           </a>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

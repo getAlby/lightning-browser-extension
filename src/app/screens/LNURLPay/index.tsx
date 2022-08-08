@@ -273,7 +273,7 @@ function LNURLPay() {
     }
 
     return (
-      <div className="h-full">
+      <Container maxWidth="sm">
         <PublisherCard
           title={navState.origin.name}
           description={navState.origin.description}
@@ -281,7 +281,7 @@ function LNURLPay() {
           image={navState.origin.icon}
           isSmall={false}
         />
-        <dl className="shadow bg-white dark:bg-surface-02dp m-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+        <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
           {descriptionList.map(([dt, dd]) => (
             <>
               <Dt>{dt}</Dt>
@@ -294,7 +294,7 @@ function LNURLPay() {
             Close
           </button>
         </div>
-      </div>
+      </Container>
     );
   }
 
@@ -304,12 +304,12 @@ function LNURLPay() {
         {!successAction ? (
           <>
             <div className="grow overflow-y-auto no-scrollbar">
-              <PublisherCard
-                title={navState.origin.name}
-                image={navState.origin.icon}
-                lnAddress={getRecipient()}
-              />
               <Container maxWidth="sm">
+                <PublisherCard
+                  title={navState.origin.name}
+                  image={navState.origin.icon}
+                  lnAddress={getRecipient()}
+                />
                 <div className="my-4">
                   <dl>
                     <>
@@ -382,16 +382,16 @@ function LNURLPay() {
                     </div>
                   )}
                 </div>
+                <div className="pt-2 border-t border-gray-200 dark:border-white/10">
+                  <ConfirmOrCancel
+                    label="Confirm"
+                    loading={loadingConfirm}
+                    disabled={loadingConfirm || !valueSat}
+                    onConfirm={confirm}
+                    onCancel={reject}
+                  />
+                </div>
               </Container>
-            </div>
-            <div className="pt-2 border-t border-gray-200 dark:border-white/10">
-              <ConfirmOrCancel
-                label="Confirm"
-                loading={loadingConfirm}
-                disabled={loadingConfirm || !valueSat}
-                onConfirm={confirm}
-                onCancel={reject}
-              />
             </div>
           </>
         ) : (
