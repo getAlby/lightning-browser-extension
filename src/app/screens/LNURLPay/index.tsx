@@ -13,7 +13,14 @@ function LNURLPay() {
   const [origin, setOrigin] = useState<OriginData>();
 
   useEffect(() => {
-    if (navState.lnurl) {
+    if (navState?.args?.lnurlDetails && navState?.origin) {
+      const lnurlDetails = navState.args
+        .lnurlDetails as LNURLPayServiceResponse;
+      if (lnurlDetails.tag === "payRequest") {
+        setDetails(lnurlDetails);
+        setOrigin(navState.origin);
+      }
+    } else if (navState.lnurl) {
       const lnurl = navState.lnurl;
 
       (async () => {
@@ -23,13 +30,6 @@ function LNURLPay() {
           setOrigin(getOriginData());
         }
       })();
-    } else if (navState.args.lnurlDetails && navState.origin) {
-      const lnurlDetails = navState.args
-        .lnurlDetails as LNURLPayServiceResponse;
-      if (lnurlDetails.tag === "payRequest") {
-        setDetails(lnurlDetails);
-        setOrigin(navState.origin);
-      }
     } else {
       throw new Error("Not a payRequest LNURL");
     }
