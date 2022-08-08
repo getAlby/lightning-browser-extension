@@ -295,6 +295,9 @@
                 "message": "Mensagem"
             },
             "sent": "Enviada"
+        },
+        "confirmOrCancel": {
+            "only_trusted": "Conecte-se apenas em sites que você confia."
         }
     }
 }

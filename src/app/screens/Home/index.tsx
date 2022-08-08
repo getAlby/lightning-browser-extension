@@ -212,65 +212,78 @@ function Home() {
   }, []);
 
   function renderPublisherCard() {
-    let title, description, image;
+    let title, image;
     if (allowance) {
       title = allowance.name;
       image = allowance.imageURL;
     } else if (lnData.length > 0) {
       title = lnData[0].name;
-      description = lnData[0].description;
       image = lnData[0].icon;
     } else {
       return;
     }
     return (
-      <PublisherCard title={title} description={description} image={image}>
-        {lnData.length > 0 && (
-          <Button
-            onClick={async () => {
-              try {
-                setLoadingSendSats(true);
-                const origin = {
-                  external: true,
-                  name: lnData[0].name,
-                  host: lnData[0].host,
-                  description: lnData[0].description,
-                  icon: lnData[0].icon,
-                };
-                if (lnData[0].method === "lnurl") {
-                  navigate(
-                    `/lnurlPay?lnurl=${
-                      lnData[0].address
-                    }&origin=${encodeURIComponent(JSON.stringify(origin))}`
-                  );
-                } else if (lnData[0].method === "keysend") {
-                  const params = new URLSearchParams({
-                    destination: lnData[0].address,
-                    origin: encodeURIComponent(JSON.stringify(origin)),
-                  });
-                  if (lnData[0].customKey && lnData[0].customValue) {
-                    const customRecords = {
-                      [lnData[0].customKey]: lnData[0].customValue,
-                    };
-                    params.set(
-                      "customRecords",
-                      JSON.stringify(customRecords) // encodeURIComponent() ??
+      <div
+        className={
+          lnData.length > 0
+            ? "border-b border-gray-200 dark:border-neutral-500"
+            : ""
+        }
+      >
+        <PublisherCard
+          title={title}
+          description={lnData.length > 0 ? lnData[0].description : ""}
+          image={image}
+          isCard={!(lnData.length > 0)}
+          isSmall={false}
+        >
+          {lnData.length > 0 && (
+            <Button
+              onClick={async () => {
+                try {
+                  setLoadingSendSats(true);
+                  const origin = {
+                    external: true,
+                    name: lnData[0].name,
+                    host: lnData[0].host,
+                    description: lnData[0].description,
+                    icon: lnData[0].icon,
+                  };
+                  if (lnData[0].method === "lnurl") {
+                    navigate(
+                      `/lnurlPay?lnurl=${
+                        lnData[0].address
+                      }&origin=${encodeURIComponent(JSON.stringify(origin))}`
                     );
+                  } else if (lnData[0].method === "keysend") {
+                    const params = new URLSearchParams({
+                      destination: lnData[0].address,
+                      origin: encodeURIComponent(JSON.stringify(origin)),
+                    });
+                    if (lnData[0].customKey && lnData[0].customValue) {
+                      const customRecords = {
+                        [lnData[0].customKey]: lnData[0].customValue,
+                      };
+                      params.set(
+                        "customRecords",
+                        JSON.stringify(customRecords) // encodeURIComponent() ??
+                      );
+                    }
+                    navigate(`/keysend?${params.toString()}`);
                   }
-                  navigate(`/keysend?${params.toString()}`);
+                } catch (e) {
+                  if (e instanceof Error) toast.error(e.message);
+                } finally {
+                  setLoadingSendSats(false);
                 }
-              } catch (e) {
-                if (e instanceof Error) toast.error(e.message);
-              } finally {
-                setLoadingSendSats(false);
-              }
-            }}
-            label={t("send_satoshis")}
-            primary
-            loading={loadingSendSats}
-          />
-        )}
-      </PublisherCard>
+              }}
+              label={t("send_satoshis")}
+              primary
+              loading={loadingSendSats}
+            />
+          )}
+        </PublisherCard>
+      </div>
     );
   }
 
@@ -436,7 +449,7 @@ function Home() {
   }
 
   return (
-    <div className="overflow-y-auto no-scrollbar">
+    <div className="overflow-y-auto no-scrollbar h-full">
       {allowance && (
         <Header
           title={allowance.host}

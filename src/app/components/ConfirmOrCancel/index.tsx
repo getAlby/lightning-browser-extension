@@ -2,7 +2,7 @@ import { MouseEventHandler } from "react";
 
 import Button from "../Button";
 
-type Props = {
+export type Props = {
   disabled?: boolean;
   loading?: boolean;
   label?: string;
@@ -10,7 +10,7 @@ type Props = {
   onCancel: MouseEventHandler;
 };
 
-function ConfirmOrCancel({
+export default function ConfirmOrCancel({
   disabled = false,
   loading = false,
   label = "Confirm",
@@ -18,31 +18,18 @@ function ConfirmOrCancel({
   onCancel,
 }: Props) {
   return (
-    <div className="text-center">
-      <div className="mb-4">
+    <div className="p-2 pb-4">
+      <div className="flex flex-row">
+        <Button onClick={onCancel} label={"Cancel"} halfWidth />
         <Button
           onClick={onConfirm}
           label={label}
-          fullWidth
           primary
           disabled={disabled}
           loading={loading}
+          halfWidth
         />
       </div>
-
-      <p className="mb-2 text-sm text-gray-400">
-        <em>Only connect with sites you trust.</em>
-      </p>
-
-      <a
-        className="underline text-sm text-gray-600 dark:text-neutral-400"
-        href="#"
-        onClick={onCancel}
-      >
-        Cancel
-      </a>
     </div>
   );
 }
-
-export default ConfirmOrCancel;

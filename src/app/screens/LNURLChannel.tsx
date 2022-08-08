@@ -1,10 +1,12 @@
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
-import Container from "@components/Container";
+import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import axios from "axios";
 import { useState, MouseEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import ScreenHeader from "~/app/components/ScreenHeader";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -21,8 +23,13 @@ type Props = {
 
 function LNURLChannel(props: Props) {
   const [origin] = useState(props.origin || getOriginData());
-  const { uri } = props.details;
+  const details = props.details;
+  const { uri } = details;
   const [pubkey, host] = uri.split("@");
+
+  const { t } = useTranslation("components", {
+    keyPrefix: "confirmOrCancel",
+  });
 
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -76,41 +83,48 @@ function LNURLChannel(props: Props) {
   }
 
   return (
-    <div>
-      <h1 className="py-2 font-bold text-lg text-center">Channel Request</h1>
-      <PublisherCard title={origin.name} image={origin.icon} />
-      <div className="py-4">
-        <Container maxWidth="sm">
-          {!successMessage ? (
-            <>
-              <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-                <dt className="text-sm font-semibold text-gray-500">
-                  Request a channel from the node:
-                </dt>
-                <dd className="text-sm mb-4 dark:text-white break-all">
-                  {uri}
-                </dd>
-              </dl>
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
+      <ScreenHeader title={"Channel Request"} />
+      {!successMessage ? (
+        <div className="h-full flex flex-col justify-between">
+          <div>
+            <PublisherCard title={origin.name} image={origin.icon} />
+            <ContentMessage
+              heading={`Request a channel from the node:`}
+              content={uri}
+            />
 
-              {errorMessage && (
-                <p className="mt-1 text-red-500">{errorMessage}</p>
-              )}
-
-              <ConfirmOrCancel
-                disabled={loadingConfirm || !uri}
-                loading={loadingConfirm}
-                onConfirm={confirm}
-                onCancel={reject}
-              />
-            </>
-          ) : (
+            {errorMessage && (
+              <p className="mt-1 text-red-500">{errorMessage}</p>
+            )}
+          </div>
+          <div>
+            <ConfirmOrCancel
+              disabled={loadingConfirm || !uri}
+              loading={loadingConfirm}
+              onConfirm={confirm}
+              onCancel={reject}
+            />
+            <p className="mb-4 text-center text-sm text-gray-400">
+              <em>{t("only_trusted")}</em>
+            </p>
+          </div>
+        </div>
+      ) : (
+        <>
+          <PublisherCard
+            title={origin.name}
+            image={origin.icon}
+            url={details.domain}
+          />
+          <div className="m-4">
             <SuccessMessage
               message={successMessage}
               onClose={() => window.close()}
             />
-          )}
-        </Container>
-      </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

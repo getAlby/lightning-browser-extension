@@ -1,7 +1,10 @@
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import { MouseEvent } from "react";
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import lnurlLib from "~/common/lib/lnurl";
@@ -11,6 +14,10 @@ import type { LNURLAuthServiceResponse, OriginData } from "~/types";
 
 function LNURLAuth() {
   const navState = useNavigationState();
+  const navigate = useNavigate();
+  const { t } = useTranslation("components", {
+    keyPrefix: "confirmOrCancel",
+  });
 
   const [details, setDetails] = useState<LNURLAuthServiceResponse>();
   const [origin, setOrigin] = useState<OriginData>();
@@ -47,22 +54,37 @@ function LNURLAuth() {
 
   function reject(e: MouseEvent) {
     e.preventDefault();
-    msg.error(USER_REJECTED_ERROR);
+    if (navState.isPrompt) {
+      msg.error(USER_REJECTED_ERROR);
+    } else {
+      navigate(-1);
+    }
   }
 
   return (
     <>
       {origin && details && (
-        <div>
-          <PublisherCard title={origin.name} image={origin.icon} />
-          <div className="p-6">
-            <dl className="shadow bg-white dark:bg-surface-02dp p-4 rounded-lg mb-8">
-              <dt className="font-semibold text-gray-500">
-                {origin.name} asks you to login to
-              </dt>
-              <dd className="mb-6 dark:text-white">{details.domain}</dd>
-            </dl>
-            <ConfirmOrCancel onConfirm={confirm} onCancel={reject} />
+        <div className="h-full flex flex-col overflow-y-auto no-scrollbar justify-between">
+          <div>
+            <PublisherCard
+              title={origin.name}
+              image={origin.icon}
+              url={details.domain}
+            />
+            <ContentMessage
+              heading={`${origin.name} asks you to login to`}
+              content={details.domain}
+            />
+          </div>
+          <div>
+            <ConfirmOrCancel
+              label="Login"
+              onConfirm={confirm}
+              onCancel={reject}
+            />
+            <p className="mb-4 text-center text-sm text-gray-400">
+              <em>{t("only_trusted")}</em>
+            </p>
           </div>
         </div>
       )}

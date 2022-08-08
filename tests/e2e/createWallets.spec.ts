@@ -1,6 +1,6 @@
 import { test } from "@playwright/test";
 import { USER } from "complete-randomer";
-import { getDocument, queries, waitFor } from "pptr-testing-library";
+import { getDocument, queries } from "pptr-testing-library";
 
 import { loadExtension } from "./helpers/loadExtension";
 
@@ -11,6 +11,7 @@ const {
   findByText,
   getByPlaceholderText,
 } = queries;
+
 const user = USER.SINGLE();
 
 const commonCreateWalletUserCreate = async () => {
@@ -40,8 +41,13 @@ const commonCreateWalletUserCreate = async () => {
   await passwordConfirmationField.type(user.password);
 
   // submit password form
-  const passwordFormNextButton = await getByText($document, "Next");
+  const passwordFormNextButton = await findByText($document, "Next");
   passwordFormNextButton.click();
+
+  await Promise.all([
+    page.waitForResponse(() => true),
+    page.waitForNavigation(), // The promise resolves after navigation has finished
+  ]);
 
   await findByText($document, "Do you have a lightning wallet?");
 
@@ -58,7 +64,7 @@ const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
     page.waitForNavigation(), // The promise resolves after navigation has finished
   ]);
 
-  await findByText($document, "Success!");
+  await findByText($document, "Success!", undefined, { timeout: 15000 });
 };
 
 test.describe("Create or connect wallets", () => {
@@ -81,24 +87,19 @@ test.describe("Create or connect wallets", () => {
     await walletPasswordField.type(user.password);
 
     await commonCreateWalletSuccessCheck({ page, $document });
+
     await browser.close();
   });
 
   test("opens publishers screen", async () => {
     const { page, browser, extensionId } = await loadExtension();
-    await Promise.all([
-      page.waitForNavigation(), // The promise resolves after navigation has finished
-    ]);
+    await page.waitForTimeout(1000);
 
     const optionsPage = `chrome-extension://${extensionId}/options.html`;
     await page.goto(optionsPage);
-
-    await Promise.all([
-      page.waitForNavigation(), // The promise resolves after navigation has finished
-    ]);
+    await page.waitForTimeout(1000);
 
     const $optionsdocument = await getDocument(page);
-
     const passwordField = await getByPlaceholderText(
       $optionsdocument,
       "Password"
@@ -111,6 +112,7 @@ test.describe("Create or connect wallets", () => {
     await findByText($optionsdocument, "Your ⚡️ Websites");
     await findByText($optionsdocument, "Other ⚡️ Websites");
 
+    await page.waitForTimeout(2000);
     await browser.close();
   });
 

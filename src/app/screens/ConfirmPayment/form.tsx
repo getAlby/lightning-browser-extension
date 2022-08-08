@@ -1,14 +1,15 @@
 import BudgetControl from "@components/BudgetControl";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
-import Container from "@components/Container";
 import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import type { PaymentRequestObject, TagsObject } from "bolt11";
 import lightningPayReq from "bolt11";
 import { useRef, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import ScreenHeader from "~/app/components/ScreenHeader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { USER_REJECTED_ERROR } from "~/common/constants";
@@ -27,9 +28,12 @@ export type Props = {
 
 function ConfirmPaymentForm({ origin, paymentRequest, isPrompt }: Props) {
   const navigate = useNavigate();
+  const { t } = useTranslation("components", {
+    keyPrefix: "confirmOrCancel",
+  });
   const auth = useAccount();
-  const { isLoading: isLoadingSettings, settings } = useSettings();
 
+  const { isLoading: isLoadingSettings, settings } = useSettings();
   const [budget, setBudget] = useState("");
   const [fiatAmount, setFiatAmount] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -97,19 +101,21 @@ function ConfirmPaymentForm({ origin, paymentRequest, isPrompt }: Props) {
 
   return (
     <>
-      <div>
-        <PublisherCard title={origin.name} image={origin.icon} />
-        <div className="py-4">
-          <Container maxWidth="sm">
-            {!successMessage ? (
-              <>
-                <h1 className="dark:text-white font-bold mb-4">
-                  Approve payment
-                </h1>
-                <div className="mb-6">
+      <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
+        <ScreenHeader title={"Approve Payment"} />
+        {!successMessage ? (
+          <div className="h-full flex flex-col justify-between">
+            <div>
+              <PublisherCard
+                title={origin.name}
+                image={origin.icon}
+                url={origin.host}
+              />
+              <div className="m-4">
+                <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
                   <PaymentSummary
-                    amount={invoice.current.satoshis}
-                    description={invoice.current.tagsObject.description}
+                    amount={invoice.current?.satoshis}
+                    description={invoice.current?.tagsObject.description}
                   />
                 </div>
 
@@ -122,23 +128,36 @@ function ConfirmPaymentForm({ origin, paymentRequest, isPrompt }: Props) {
                   budget={budget}
                   onBudgetChange={(event) => setBudget(event.target.value)}
                 />
-
-                <ConfirmOrCancel
-                  disabled={loading}
-                  loading={loading}
-                  onConfirm={confirm}
-                  onCancel={reject}
-                  label="Pay now"
-                />
-              </>
-            ) : (
+              </div>
+            </div>
+            <div>
+              <ConfirmOrCancel
+                disabled={loading}
+                loading={loading}
+                onConfirm={confirm}
+                onCancel={reject}
+                label="Pay now"
+              />
+              <p className="mb-4 text-center text-sm text-gray-400">
+                <em>{t("only_trusted")}</em>
+              </p>
+            </div>
+          </div>
+        ) : (
+          <>
+            <PublisherCard
+              title={origin.name}
+              image={origin.icon}
+              url={origin.host}
+            />
+            <div className="m-4">
               <SuccessMessage
                 message={successMessage}
                 onClose={() => window.close()}
               />
-            )}
-          </Container>
-        </div>
+            </div>
+          </>
+        )}
       </div>
     </>
   );

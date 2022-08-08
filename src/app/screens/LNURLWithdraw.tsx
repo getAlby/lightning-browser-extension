@@ -1,10 +1,11 @@
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
-import Container from "@components/Container";
+import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import Input from "@components/form/Input";
 import axios from "axios";
 import { useState, MouseEvent } from "react";
+import ScreenHeader from "~/app/components/ScreenHeader";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -21,6 +22,7 @@ type Props = {
 
 function LNURLWithdraw(props: Props) {
   const [origin] = useState(props.origin || getOriginData());
+
   const { minWithdrawable, maxWithdrawable } = props.details;
   const [valueSat, setValueSat] = useState(
     (maxWithdrawable && (+maxWithdrawable / 1000).toString()) || ""
@@ -81,36 +83,39 @@ function LNURLWithdraw(props: Props) {
   }
 
   return (
-    <div>
-      <h1 className="py-2 font-bold text-lg text-center">Withdraw</h1>
-      <PublisherCard title={origin.name} image={origin.icon} />
-      <div className="py-4">
-        <Container maxWidth="sm">
-          {!successMessage ? (
-            <>
-              <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-                <dt className="text-sm font-semibold text-gray-500">
-                  Amount (Satoshi)
-                </dt>
-                <dd className="text-sm mb-4 dark:text-white">
-                  {renderAmount()}
-                </dd>
-              </dl>
-              <ConfirmOrCancel
-                disabled={loadingConfirm || !valueSat}
-                loading={loadingConfirm}
-                onConfirm={confirm}
-                onCancel={reject}
-              />
-            </>
-          ) : (
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
+      <ScreenHeader title={"Withdraw"} />
+      {!successMessage ? (
+        <div className="h-full flex flex-col justify-between">
+          <div>
+            <PublisherCard
+              title={origin.name}
+              image={origin.icon}
+              url={props.details?.domain}
+            />
+            <ContentMessage
+              heading={`Amount (Satoshi)`}
+              content={renderAmount()}
+            />
+          </div>
+          <ConfirmOrCancel
+            disabled={loadingConfirm || !valueSat}
+            loading={loadingConfirm}
+            onConfirm={confirm}
+            onCancel={reject}
+          />
+        </div>
+      ) : (
+        <>
+          <PublisherCard title={origin.name} image={origin.icon} />
+          <div className="m-4">
             <SuccessMessage
               message={successMessage}
               onClose={() => window.close()}
             />
-          )}
-        </Container>
-      </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -286,6 +286,9 @@
         "app_name": "App",
         "podcast": "Podcast"
       }
+    },
+    "confirmOrCancel": {
+      "only_trusted": "Only connect with sites you trust."
     }
   }
 }

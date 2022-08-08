@@ -99,11 +99,15 @@ function Publisher() {
 
   return (
     <div>
-      <PublisherCard
-        title={allowance?.host || ""}
-        image={allowance?.imageURL || ""}
-        url={allowance ? `https://${allowance.host}` : ""}
-      />
+      <div className="border-b border-gray-200 dark:border-neutral-500">
+        <PublisherCard
+          title={allowance?.host || ""}
+          image={allowance?.imageURL || ""}
+          url={allowance?.host}
+          isCard={false}
+          isSmall={false}
+        />
+      </div>
       {allowance && (
         <Container>
           <div className="flex justify-between items-center pt-8 pb-4">

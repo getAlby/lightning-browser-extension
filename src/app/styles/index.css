@@ -33,6 +33,8 @@
 
 body {
   font-size: 100%;
+  font-family: 'Inter var';
+  font-weight: normal;
 }
 
 .ReactModal__Overlay {

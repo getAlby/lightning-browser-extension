@@ -127,9 +127,7 @@ export default function TransactionsTable({ transactions }: Props) {
                             {tComponents(
                               "transactionsTable.boostagram.message"
                             )}
-                            :{" "}
-                            {tx.boostagram.message &&
-                              decodeURI(tx.boostagram.message)}
+                            : {tx.boostagram.message}
                           </li>
                           <li>
                             {tComponents(
