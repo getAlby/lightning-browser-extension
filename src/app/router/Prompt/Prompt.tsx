@@ -17,7 +17,6 @@ import { PATHS } from "~/app/router/routes";
 import type {
   NavigationState,
   LNURLAuthServiceResponse,
-  LNURLPayServiceResponse,
   LNURLWithdrawServiceResponse,
   LNURLChannelServiceResponse,
   RequestInvoiceArgs,
@@ -86,18 +85,7 @@ function Prompt() {
                 />
               }
             />
-            <Route
-              path={PATHS.lnurlPay}
-              element={
-                <LNURLPay
-                  details={
-                    navigationState.args
-                      ?.lnurlDetails as LNURLPayServiceResponse
-                  }
-                  origin={navigationState.origin}
-                />
-              }
-            />
+            <Route path={PATHS.lnurlPay} element={<LNURLPay />} />
             <Route
               path="lnurlWithdraw"
               element={

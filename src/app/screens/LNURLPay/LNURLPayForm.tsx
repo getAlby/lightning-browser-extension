@@ -6,8 +6,8 @@ import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
 import axios from "axios";
-import React, { useState, useEffect, MouseEvent } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import React, { useState, useEffect, MouseEvent, FC } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -16,23 +16,19 @@ import lnurl from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
-import getOriginData from "~/extension/content-script/originData";
 import {
   LNURLPaymentInfoError,
   LNURLPaymentInfo,
   LNURLPaymentSuccessAction,
   LNURLPayServiceResponse,
   PaymentResponse,
+  OriginData,
 } from "~/types";
 
-type Origin = {
-  name: string;
-  icon: string;
-};
-
 type Props = {
-  details?: LNURLPayServiceResponse;
-  origin?: Origin;
+  details: LNURLPayServiceResponse;
+  origin: OriginData;
+  isPrompt?: boolean;
 };
 
 const Dt = ({ children }: { children: React.ReactNode }) => (
@@ -43,21 +39,12 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
   <dd className="mb-4 text-gray-600 dark:text-neutral-500">{children}</dd>
 );
 
-function LNURLPay(props: Props) {
+const LNURLPayForm: FC<Props> = ({ origin, details, isPrompt }) => {
   const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAccount();
-  const [loading, setLoading] = useState(true);
-  const [details, setDetails] = useState(props.details);
-  const [origin] = useState(
-    props.origin ||
-      (searchParams.get("origin") &&
-        JSON.parse(searchParams.get("origin") as string)) ||
-      getOriginData()
-  );
   const [valueSat, setValueSat] = useState(
     (details?.minSendable && (+details?.minSendable / 1000).toString()) || ""
   );
@@ -80,28 +67,6 @@ function LNURLPay(props: Props) {
       })();
     }
   }, [valueSat, showFiat]);
-
-  useEffect(() => {
-    if (searchParams) {
-      // lnurl was passed as querystring
-      const lnurlString = searchParams.get("lnurl");
-      if (lnurlString) {
-        lnurl.getDetails(lnurlString).then((lnurlDetails) => {
-          if (lnurlDetails.tag === "payRequest") {
-            setDetails(lnurlDetails);
-            if (lnurlDetails.minSendable) {
-              setValueSat((+lnurlDetails.minSendable / 1000).toString());
-            }
-            setLoading(false);
-          }
-        });
-      } else {
-        setLoading(false);
-      }
-    } else {
-      setLoading(false);
-    }
-  }, [searchParams]);
 
   useEffect(() => {
     !!settings.userName && setUserName(settings.userName);
@@ -218,7 +183,7 @@ function LNURLPay(props: Props) {
 
       // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the payment response. This closes the window which means the user will NOT see the above successAction.
       // We assume this is OK when it is called through webln.
-      if (props.details && props.origin) {
+      if (isPrompt) {
         msg.reply(paymentResponse);
       }
     } catch (e) {
@@ -233,7 +198,7 @@ function LNURLPay(props: Props) {
 
   function reject(e: MouseEvent) {
     e.preventDefault();
-    if (props.details && props.origin) {
+    if (isPrompt) {
       msg.error(USER_REJECTED_ERROR);
     } else {
       navigate(-1);
@@ -242,7 +207,7 @@ function LNURLPay(props: Props) {
 
   function close(e: MouseEvent) {
     e.preventDefault();
-    if (props.details && props.origin) {
+    if (isPrompt) {
       msg.reply(payment);
     } else {
       window.close();
@@ -315,7 +280,7 @@ function LNURLPay(props: Props) {
         <PublisherCard
           title={origin.name}
           description={origin.description}
-          lnAddress={loading || !details ? "loading..." : getRecipient()}
+          lnAddress={getRecipient()}
           image={origin.icon}
           isSmall={false}
         />
@@ -345,36 +310,29 @@ function LNURLPay(props: Props) {
               <PublisherCard
                 title={origin.name}
                 image={origin.icon}
-                lnAddress={loading || !details ? "loading..." : getRecipient()}
+                lnAddress={getRecipient()}
               />
               <Container maxWidth="sm">
                 <div className="my-4">
                   <dl>
-                    {loading || !details ? (
-                      <>
-                        <Dt>Description</Dt>
-                        <Dd>loading...</Dd>
-                        <Dt>Amount (Satoshi)</Dt>
-                        <Dd>loading...</Dd>
-                      </>
-                    ) : (
-                      <>
-                        {formattedMetadata(details.metadata).map(([dt, dd]) => (
-                          <>
-                            <Dt>{dt}</Dt>
-                            <Dd>{dd}</Dd>
-                          </>
-                        ))}
-                        {details.minSendable === details.maxSendable && (
-                          <>
-                            <Dt>Amount (Satoshi)</Dt>
-                            <Dd>{`${+details.minSendable / 1000} sats`}</Dd>
-                          </>
-                        )}
-                      </>
-                    )}
+                    <>
+                      <Dt>Send payment to</Dt>
+                      <Dd>{getRecipient()}</Dd>
+                      {formattedMetadata(details.metadata).map(([dt, dd]) => (
+                        <>
+                          <Dt>{dt}</Dt>
+                          <Dd>{dd}</Dd>
+                        </>
+                      ))}
+                      {details.minSendable === details.maxSendable && (
+                        <>
+                          <Dt>Amount (Satoshi)</Dt>
+                          <Dd>{`${+details.minSendable / 1000} sats`}</Dd>
+                        </>
+                      )}
+                    </>
                   </dl>
-                  {details && details.minSendable !== details.maxSendable && (
+                  {details.minSendable !== details.maxSendable && (
                     <div>
                       <DualCurrencyField
                         id="amount"
@@ -447,6 +405,6 @@ function LNURLPay(props: Props) {
       </div>
     </>
   );
-}
+};
 
-export default LNURLPay;
+export default LNURLPayForm;

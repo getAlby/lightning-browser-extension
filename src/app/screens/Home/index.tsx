@@ -223,6 +223,7 @@ function Home() {
     } else {
       return;
     }
+
     return (
       <div
         className={
@@ -243,7 +244,7 @@ function Home() {
               onClick={async () => {
                 try {
                   setLoadingSendSats(true);
-                  const origin = {
+                  const originData = {
                     external: true,
                     name: lnData[0].name,
                     host: lnData[0].host,
@@ -251,11 +252,13 @@ function Home() {
                     icon: lnData[0].icon,
                   };
                   if (lnData[0].method === "lnurl") {
-                    navigate(
-                      `/${URLS.lnurlPay}?lnurl=${
-                        lnData[0].address
-                      }&origin=${encodeURIComponent(JSON.stringify(origin))}`
-                    );
+                    // HOW CAN THIS BE TESTED ON HOME !?!
+                    navigate(URLS.lnurlPay, {
+                      state: {
+                        lnurl: lnData[0].address,
+                        origin: originData,
+                      },
+                    });
                   } else if (lnData[0].method === "keysend") {
                     const params = new URLSearchParams({
                       destination: lnData[0].address,

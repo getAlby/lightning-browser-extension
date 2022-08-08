@@ -37,8 +37,11 @@ function Send() {
       }
 
       if (lnurl) {
-        await lnurlLib.getDetails(lnurl); // throws if invalid.
-        navigate(`/${URLS.lnurlPay}?lnurl=${lnurl}`);
+        navigate(URLS.lnurlPay, {
+          state: {
+            lnurl,
+          },
+        });
       } else if (isPubKey(invoice)) {
         navigate(`/keysend?destination=${invoice}`);
       } else {
