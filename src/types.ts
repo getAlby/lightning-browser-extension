@@ -137,6 +137,7 @@ export type NavigationState = {
     customRecords?: Record<string, string>;
     message?: string;
   };
+  isPrompt?: true; // only passed via Prompt.tsx
   action: WebLNMessageAction; // TODO: Can be WebLNMessageAction or a PATH from 'app/router/routes, so far "action" is not used in components
 };
 

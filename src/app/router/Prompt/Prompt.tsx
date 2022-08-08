@@ -42,6 +42,7 @@ const createStateFromParams = (params: URLSearchParams): NavigationState => ({
   origin: getParamValues(params, "origin"),
   args: getParamValues(params, "args") || {}, // important: args can be null
   action: getParamValues(params, "action"),
+  isPrompt: true,
 });
 
 const navigationState = createStateFromParams(params);
