@@ -31,7 +31,7 @@ function LNURLPay() {
         setOrigin(navState.origin);
       }
     } else {
-      throw new Error("Not a payRequest LNUrl");
+      throw new Error("Not a payRequest LNURL");
     }
   }, [navState]);
 
