@@ -107,10 +107,11 @@ export interface MessageDefault {
 
 export type WebLNCall = typeof weblnCalls[number];
 export type WebLNEventData = {
-  application: "LBE";
   action: WebLNCall;
-  prompt: true;
+  application: "LBE";
   args: Record<string, unknown> | Record<string, never>; // TODO: check if args can be undefined or an empty object?
+  prompt: true;
+  response?: FixMe; // QUESTION: when does this happen
 };
 
 export type WebLNMessageAction = `webln/${WebLNCall}`;
