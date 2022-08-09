@@ -27,14 +27,18 @@ async function lnurl(message: Message | MessageLNURLChannel) {
         console.error("Wrong 'message' type: ", message);
         return;
       }
+
     case "login":
       return authWithPrompt(message, lnurlDetails);
+
     case "payRequest":
       return payWithPrompt(message, lnurlDetails);
+
     case "withdrawRequest":
       return withdrawWithPrompt(message, lnurlDetails);
+
     default:
-      return { error: "not implemented" };
+      return { error: "This LNURL is not supported yet" };
   }
 }
 

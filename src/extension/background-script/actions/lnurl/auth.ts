@@ -43,6 +43,7 @@ async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
           lnurlDetails,
         },
       };
+
       const { data } = await utils.openPrompt<{
         confirmed: boolean;
         remember: boolean;

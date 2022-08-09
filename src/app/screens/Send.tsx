@@ -53,7 +53,7 @@ function Send() {
             break;
 
           default:
-            toast.error("This LNURL is not supported here yet");
+            toast.error("This LNURL is not supported yet");
         }
       } else if (isPubKey(invoice)) {
         navigate(`/keysend?destination=${invoice}`);
