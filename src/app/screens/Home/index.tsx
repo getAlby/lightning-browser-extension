@@ -252,7 +252,6 @@ function Home() {
                     icon: lnData[0].icon,
                   };
                   if (lnData[0].method === "lnurl") {
-                    // HOW CAN THIS BE TESTED ON HOME !?!
                     navigate(URLS.lnurlPay, {
                       state: {
                         lnurl: lnData[0].address,
@@ -270,7 +269,7 @@ function Home() {
                       };
                       params.set(
                         "customRecords",
-                        JSON.stringify(customRecords) // encodeURIComponent() ??
+                        JSON.stringify(customRecords)
                       );
                     }
                     navigate(`/keysend?${params.toString()}`);
