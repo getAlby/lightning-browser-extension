@@ -6,7 +6,7 @@ import PubSub from "pubsub-js";
 
 import utils from "../../../../common/lib/utils";
 import HashKeySigner from "../../../../common/utils/signer";
-import type { Message, LNURLDetails } from "../../../../types";
+import type { Message, LNURLDetails, OriginData } from "../../../../types";
 import db from "../../db";
 import state from "../../state";
 
@@ -96,6 +96,78 @@ async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
       allowance = await db.allowances
         .where("host")
         .equalsIgnoreCase(message.origin.host)
+        .first();
+
+      if (allowance?.id) {
+        await db.allowances.update(allowance.id, {
+          lnurlAuth: true,
+        });
+      }
+      await db.saveToStorage();
+    }
+    return { data: authResponse.data };
+  }
+}
+
+export async function authViaPopup({
+  loginStatus,
+  origin,
+  lnurlDetails,
+}: {
+  loginStatus: { confirmed: boolean; remember: boolean };
+  origin: OriginData;
+  lnurlDetails: LNURLDetails;
+}) {
+  if (!("host" in origin)) return;
+
+  // PubSub.publish(`lnurl.auth.start`, { message, lnurlDetails });
+
+  // get the publisher to check if lnurlAuth for auto-login is enabled
+  let allowance = await db.allowances
+    .where("host")
+    .equalsIgnoreCase(origin.host)
+    .first();
+
+  // if the user confirmed (or if we already had a publisher with lnurl auth enabled) we perform the authentication
+  if (loginStatus.confirmed) {
+    let authResponse;
+    try {
+      // Sign the message and do the authentication request to the service
+      authResponse = await auth(lnurlDetails);
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) {
+        PubSub.publish(`lnurl.auth.failed`, {
+          error: e.message,
+          lnurlDetails,
+          origin: origin,
+        });
+
+        return { error: e.message };
+      }
+    }
+
+    // if the service returned with a HTTP 200 we still check if the response data is OK
+    if (authResponse?.data.status.toUpperCase() !== "OK") {
+      PubSub.publish(`lnurl.auth.failed`, {
+        authResponse: authResponse,
+        lnurlDetails,
+        origin: origin,
+      });
+      return { error: authResponse?.data?.reason };
+    }
+
+    // PubSub.publish(`lnurl.auth.success`, {
+    //   authResponse,
+    //   lnurlDetails,
+    //   origin: origin,
+    // });
+
+    // if auto login should be enabled get the publisher and update the publisher entry
+    if (loginStatus.remember) {
+      allowance = await db.allowances
+        .where("host")
+        .equalsIgnoreCase(origin.host)
         .first();
 
       if (allowance?.id) {

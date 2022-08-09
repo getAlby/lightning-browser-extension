@@ -10,7 +10,11 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import lnurlLib from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
 import getOriginData from "~/extension/content-script/originData";
-import type { LNURLAuthServiceResponse, OriginData } from "~/types";
+import type {
+  LNURLAuthServiceResponse,
+  OriginData,
+  LNURLDetails,
+} from "~/types";
 
 function LNURLAuth() {
   const navState = useNavigationState();
@@ -46,10 +50,30 @@ function LNURLAuth() {
   }, [navState]);
 
   async function confirm() {
-    return await msg.reply({
-      confirmed: true,
-      remember: true,
-    });
+    if (navState.isPrompt) {
+      return await msg.reply({
+        confirmed: true,
+        remember: true,
+      });
+    } else {
+      if (!origin || !details) return;
+
+      // send message to auth without prompt?
+
+      // const lnurlDetails: LNURLDetails = {
+      //   ...details,
+      //   url: origin.host as unknown as URL,
+      // };
+
+      // await authViaPopup({
+      //   loginStatus: {
+      //     confirmed: true,
+      //     remember: true,
+      //   },
+      //   origin,
+      //   lnurlDetails,
+      // });
+    }
   }
 
   function reject(e: MouseEvent) {
