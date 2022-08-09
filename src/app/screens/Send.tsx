@@ -46,6 +46,7 @@ function Send() {
         switch (LNURLDetails.tag) {
           case "login":
             navigate("/lnurlAuth", navState);
+            //TODO OPEN PROMPT FROM HERE!!! HAHAHAHAH
             break;
 
           case "payRequest":
