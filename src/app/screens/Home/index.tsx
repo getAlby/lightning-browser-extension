@@ -23,6 +23,7 @@ import { useSettings } from "~/app/context/SettingsContext";
 import { URLS } from "~/app/router/routes";
 import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
+import lnurlLib from "~/common/lib/lnurl";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
 import type { Allowance, Battery, Transaction } from "~/types";
@@ -251,10 +252,16 @@ function Home() {
                     description: lnData[0].description,
                     icon: lnData[0].icon,
                   };
+
                   if (lnData[0].method === "lnurl") {
+                    const lnurl = lnData[0].address;
+                    const lnurlDetails = await lnurlLib.getDetails(lnurl); // throws if invalid.
+                    const lnurlDetailsStringified =
+                      JSON.stringify(lnurlDetails); // navstate will fial if it's not completely serializable https://stackoverflow.com/a/71831614/1667461
+
                     navigate(URLS.lnurlPay, {
                       state: {
-                        lnurl: lnData[0].address,
+                        lnurlDetailsStringified,
                         origin: originData,
                       },
                     });
