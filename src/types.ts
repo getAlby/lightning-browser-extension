@@ -111,7 +111,7 @@ export type WebLNEventData = {
   application: "LBE";
   args: Record<string, unknown> | Record<string, never>; // TODO: check if args can be undefined or an empty object?
   prompt: true;
-  response?: FixMe; // QUESTION: when does this happen
+  response?: FixMe;
 };
 
 export type WebLNMessageAction = `webln/${WebLNCall}`;

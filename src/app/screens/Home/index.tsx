@@ -257,7 +257,7 @@ function Home() {
                     const lnurl = lnData[0].address;
                     const lnurlDetails = await lnurlLib.getDetails(lnurl); // throws if invalid.
                     const lnurlDetailsStringified =
-                      JSON.stringify(lnurlDetails); // navstate will fial if it's not completely serializable https://stackoverflow.com/a/71831614/1667461
+                      JSON.stringify(lnurlDetails); // navstate will fail if it's not completely serializable https://stackoverflow.com/a/71831614/1667461
 
                     navigate(URLS.lnurlPay, {
                       state: {
