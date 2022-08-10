@@ -6,7 +6,7 @@ import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
 import axios from "axios";
-import React, { useState, useEffect, MouseEvent, FC } from "react";
+import React, { useState, useEffect, MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
@@ -33,17 +33,16 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
   <dd className="mb-4 text-gray-600 dark:text-neutral-500">{children}</dd>
 );
 
-const LNURLPay: FC = () => {
+function LNURLPay() {
+  const navState = useNavigationState();
+  const details = navState.args?.lnurlDetails as LNURLPayServiceResponse;
+
   const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
-  const navState = useNavigationState();
-  const details = JSON.parse(navState.lnurlDetailsStringified);
-  const origin = navState.origin;
-  const isPrompt = navState.isPrompt;
-
   const navigate = useNavigate();
   const auth = useAccount();
+
   const [valueSat, setValueSat] = useState(
     (details?.minSendable && (+details?.minSendable / 1000).toString()) || ""
   );
@@ -151,7 +150,7 @@ const LNURLPay: FC = () => {
         { paymentRequest },
         {
           origin: {
-            ...origin,
+            ...navState.origin,
             name: getRecipient(),
           },
         }
@@ -182,7 +181,7 @@ const LNURLPay: FC = () => {
 
       // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the payment response. This closes the window which means the user will NOT see the above successAction.
       // We assume this is OK when it is called through webln.
-      if (isPrompt) {
+      if (navState.isPrompt) {
         msg.reply(paymentResponse);
       }
     } catch (e) {
@@ -197,7 +196,7 @@ const LNURLPay: FC = () => {
 
   function reject(e: MouseEvent) {
     e.preventDefault();
-    if (isPrompt) {
+    if (navState.isPrompt) {
       msg.error(USER_REJECTED_ERROR);
     } else {
       navigate(-1);
@@ -206,7 +205,7 @@ const LNURLPay: FC = () => {
 
   function close(e: MouseEvent) {
     e.preventDefault();
-    if (isPrompt) {
+    if (navState.isPrompt) {
       msg.reply(payment);
     } else {
       window.close();
@@ -277,10 +276,10 @@ const LNURLPay: FC = () => {
     return (
       <div className="h-full">
         <PublisherCard
-          title={origin.name}
-          description={origin.description}
+          title={navState.origin.name}
+          description={navState.origin.description}
           lnAddress={getRecipient()}
-          image={origin.icon}
+          image={navState.origin.icon}
           isSmall={false}
         />
         <dl className="shadow bg-white dark:bg-surface-02dp m-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
@@ -307,16 +306,14 @@ const LNURLPay: FC = () => {
           <>
             <div className="grow overflow-y-auto no-scrollbar">
               <PublisherCard
-                title={origin.name}
-                image={origin.icon}
+                title={navState.origin.name}
+                image={navState.origin.icon}
                 lnAddress={getRecipient()}
               />
               <Container maxWidth="sm">
                 <div className="my-4">
                   <dl>
                     <>
-                      <Dt>Send payment to</Dt>
-                      <Dd>{getRecipient()}</Dd>
                       {formattedMetadata(details.metadata).map(([dt, dd]) => (
                         <>
                           <Dt>{dt}</Dt>
@@ -331,7 +328,7 @@ const LNURLPay: FC = () => {
                       )}
                     </>
                   </dl>
-                  {details.minSendable !== details.maxSendable && (
+                  {details && details.minSendable !== details.maxSendable && (
                     <div>
                       <DualCurrencyField
                         id="amount"
@@ -404,6 +401,6 @@ const LNURLPay: FC = () => {
       </div>
     </>
   );
-};
+}
 
 export default LNURLPay;
