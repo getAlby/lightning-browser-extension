@@ -20,7 +20,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import browser from "webextension-polyfill";
 import { useSettings } from "~/app/context/SettingsContext";
-import { URLS } from "~/app/router/routes";
 import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
 import lnurlLib from "~/common/lib/lnurl";
@@ -259,12 +258,12 @@ function Home() {
                     const lnurlDetailsStringified =
                       JSON.stringify(lnurlDetails); // navstate will fail if it's not completely serializable https://stackoverflow.com/a/71831614/1667461
 
-                    navigate(URLS.lnurlPay, {
                       state: {
                         lnurlDetailsStringified,
                         origin: originData,
                       },
                     });
+                      navigate("lnurlPay", {
                   } else if (lnData[0].method === "keysend") {
                     const params = new URLSearchParams({
                       destination: lnData[0].address,

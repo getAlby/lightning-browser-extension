@@ -13,7 +13,6 @@ import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
-import { PATHS } from "~/app/router/routes";
 import type {
   NavigationState,
   LNURLAuthServiceResponse,
@@ -91,7 +90,7 @@ function Prompt() {
                 />
               }
             />
-            <Route path={PATHS.lnurlPay} element={<LNURLPay />} />
+            <Route path={"lnurlPay"} element={<LNURLPay />} />
             <Route
               path="lnurlWithdraw"
               element={

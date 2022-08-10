@@ -1,5 +1,3 @@
-import { PATHS } from "~/app/router/routes";
-
 import utils from "../../../../common/lib/utils";
 import type { Message, LNURLDetails } from "../../../../types";
 
@@ -9,7 +7,7 @@ async function payWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
   try {
     const response = await utils.openPrompt({
       origin: message.origin,
-      action: PATHS.lnurlPay,
+      action: "lnurlPay",
       args: { ...message.args, lnurlDetails },
     });
     return response; // response is an object like: `{ data: ... }`

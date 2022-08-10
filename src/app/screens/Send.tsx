@@ -16,8 +16,6 @@ import { toast } from "react-toastify";
 import lnurlLib from "~/common/lib/lnurl";
 import getOriginData from "~/extension/content-script/originData";
 
-import { URLS } from "../router/routes";
-
 function Send() {
   const [invoice, setInvoice] = useState("");
   const navigate = useNavigate();
@@ -41,12 +39,12 @@ function Send() {
         const lnurlDetails = await lnurlLib.getDetails(lnurl); // throws if invalid.
         const lnurlDetailsStringified = JSON.stringify(lnurlDetails); // navstate will fail if it's not completely serializable https://stackoverflow.com/a/71831614/1667461
 
-        navigate(URLS.lnurlPay, {
           state: {
             lnurlDetailsStringified,
             origin: getOriginData(),
           },
         });
+          navigate("lnurlPay", {
       } else if (isPubKey(invoice)) {
         navigate(`/keysend?destination=${invoice}`);
       } else {

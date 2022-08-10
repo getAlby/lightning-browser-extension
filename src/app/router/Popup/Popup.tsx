@@ -9,7 +9,6 @@ import Unlock from "@screens/Unlock";
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
-import { PATHS } from "~/app/router/routes";
 
 import RequireAuth from "../RequireAuth";
 
@@ -29,7 +28,7 @@ function Popup() {
             <Route index element={<Home />} />
             <Route path="send" element={<Send />} />
             <Route path="receive" element={<Receive />} />
-            <Route path={PATHS.lnurlPay} element={<LNURLPay />} />
+            <Route path={"lnurlPay"} element={<LNURLPay />} />
             <Route path="keysend" element={<Keysend />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
           </Route>
