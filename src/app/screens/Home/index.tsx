@@ -263,7 +263,7 @@ function Home() {
                         origin: originData,
                       },
                     });
-                      navigate("lnurlPay", {
+                      navigate("/lnurlPay", {
                   } else if (lnData[0].method === "keysend") {
                     const params = new URLSearchParams({
                       destination: lnData[0].address,

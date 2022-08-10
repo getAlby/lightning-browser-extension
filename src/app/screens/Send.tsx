@@ -44,7 +44,7 @@ function Send() {
             origin: getOriginData(),
           },
         });
-          navigate("lnurlPay", {
+          navigate("/lnurlPay", {
       } else if (isPubKey(invoice)) {
         navigate(`/keysend?destination=${invoice}`);
       } else {
