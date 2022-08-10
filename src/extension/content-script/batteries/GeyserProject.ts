@@ -28,8 +28,7 @@ function handleProjectPage(name: string) {
         method: "lnurl",
         address: address,
         ...getOriginData(),
-        description:
-          "Geyser - global bitcoin crowdfunding that helps builders and creators fund their ideas.",
+        description: "geyser.fund",
         name: title ?? name,
         icon: icon ?? "https://geyser.fund/logo-brand.svg",
       },
