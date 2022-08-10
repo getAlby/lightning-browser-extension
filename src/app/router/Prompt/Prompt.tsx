@@ -86,7 +86,7 @@ function Prompt() {
                 />
               }
             />
-            <Route path={"lnurlPay"} element={<LNURLPay />} />
+            <Route path="lnurlPay" element={<LNURLPay />} />
             <Route
               path="lnurlWithdraw"
               element={

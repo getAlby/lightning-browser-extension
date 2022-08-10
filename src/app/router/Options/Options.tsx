@@ -40,7 +40,7 @@ function Options() {
             <Route path="send" element={<Send />} />
             <Route path="keysend" element={<Keysend />} />
             <Route path="receive" element={<Receive />} />
-            <Route path={"lnurlPay"} element={<LNURLPay />} />
+            <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="settings" element={<Settings />} />
             <Route path="accounts">

@@ -28,7 +28,7 @@ function Popup() {
             <Route index element={<Home />} />
             <Route path="send" element={<Send />} />
             <Route path="receive" element={<Receive />} />
-            <Route path={"lnurlPay"} element={<LNURLPay />} />
+            <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="keysend" element={<Keysend />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
           </Route>
