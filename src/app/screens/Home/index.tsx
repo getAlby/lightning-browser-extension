@@ -246,6 +246,14 @@ function Home() {
                 try {
                   setLoadingSendSats(true);
 
+                  const originData = {
+                    external: true,
+                    name: lnData[0].name,
+                    host: lnData[0].host,
+                    description: lnData[0].description,
+                    icon: lnData[0].icon,
+                  };
+
                   if (lnData[0].method === "lnurl") {
                     const lnurl = lnData[0].address;
                     const lnurlDetails = await lnurlLib.getDetails(lnurl); // throws if invalid.
@@ -264,14 +272,6 @@ function Home() {
                         "commentAllowed",
                       ]);
 
-                      const originData = {
-                        external: true,
-                        name: lnData[0].name,
-                        host: lnData[0].host,
-                        description: lnData[0].description,
-                        icon: lnData[0].icon,
-                      };
-
                       navigate("/lnurlPay", {
                         state: {
                           origin: originData,
@@ -284,7 +284,7 @@ function Home() {
                   } else if (lnData[0].method === "keysend") {
                     const params = new URLSearchParams({
                       destination: lnData[0].address,
-                      origin: encodeURIComponent(JSON.stringify(origin)),
+                      origin: encodeURIComponent(JSON.stringify(originData)),
                     });
                     if (lnData[0].customKey && lnData[0].customValue) {
                       const customRecords = {
