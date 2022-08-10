@@ -6,7 +6,6 @@ import {
   SendPaymentResponse,
   WebLNNode,
 } from "~/extension/background-script/connectors/connector.interface";
-import { weblnCalls } from "~/extension/content-script";
 
 export type ConnectorType = keyof typeof connectors;
 
@@ -104,23 +103,6 @@ export interface MessageDefault {
   prompt?: boolean;
 }
 
-export type WebLNCall = typeof weblnCalls[number];
-export type WebLNEventData = {
-  action: WebLNCall;
-  application: "LBE";
-  args: Record<string, unknown> | Record<string, never>; // TODO: check if args can be undefined or an empty object?
-  prompt: true;
-  response?: FixMe;
-};
-
-export type WebLNMessageAction = `webln/${WebLNCall}`;
-export interface MessageWebLNWithOrigin
-  extends Pick<WebLNEventData, "application" | "prompt" | "args"> {
-  action: WebLNMessageAction;
-  origin: OriginData;
-  public: true;
-}
-
 export type NavigationState = {
   origin: OriginData;
   args?: {
@@ -138,7 +120,6 @@ export type NavigationState = {
     customRecords?: Record<string, string>;
     message?: string;
   };
-  lnurl?: string; // Passed when lnurlDetails have to be fetched
   isPrompt?: true; // only passed via Prompt.tsx
   action: string;
 };
