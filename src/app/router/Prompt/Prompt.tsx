@@ -64,13 +64,9 @@ function Prompt() {
                 <Navigate
                   to={`/${navigationState.action}`}
                   replace
-                  state={{
-                    lnurlDetailsStringified: JSON.stringify(
-                      navigationState?.args?.lnurlDetails
-                    ),
-                    origin: navigationState?.origin,
-                    isPrompt: navigationState?.isPrompt,
-                  }}
+                  // no need to check for serializable data for the navState here,
+                  // navState does not fail when data is coming via a LNURL called by webLn,
+                  state={navigationState}
                 />
               }
             />
