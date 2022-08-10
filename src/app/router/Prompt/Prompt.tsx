@@ -65,7 +65,13 @@ function Prompt() {
                 <Navigate
                   to={`/${navigationState.action}`}
                   replace
-                  state={navigationState}
+                  state={{
+                    lnurlDetailsStringified: JSON.stringify(
+                      navigationState?.args?.lnurlDetails
+                    ),
+                    origin: navigationState?.origin,
+                    isPrompt: navigationState?.isPrompt,
+                  }}
                 />
               }
             />
