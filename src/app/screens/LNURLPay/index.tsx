@@ -17,7 +17,7 @@ import lnurl from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
-import {
+import type {
   LNURLPaymentInfoError,
   LNURLPaymentInfo,
   LNURLPaymentSuccessAction,
@@ -36,7 +36,6 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
 function LNURLPay() {
   const navState = useNavigationState();
   const details = navState.args?.lnurlDetails as LNURLPayServiceResponse;
-
   const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
