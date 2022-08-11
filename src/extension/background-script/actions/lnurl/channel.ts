@@ -18,7 +18,7 @@ async function channelRequestWithPrompt(
   try {
     const response = await utils.openPrompt<LNURLChannelResponse>({
       origin: message.origin,
-      action: "LNURLChannel",
+      action: "lnurlChannel",
       args: { ...message.args, lnurlDetails },
     });
 

@@ -99,7 +99,7 @@ function Prompt() {
                 />
               }
             />
-            <Route path="LNURLChannel" element={<LNURLChannel />} />
+            <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route
               path="makeInvoice"
               element={
