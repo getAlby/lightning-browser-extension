@@ -107,7 +107,7 @@ const routeCalls = (
   const call = router(action)(message, sender);
 
   // Log the action response if we are in debug mode
-  if (debug) {
+  if (true) {
     call.then((r: unknown) => {
       console.info(`${action} response:`, r);
       return r;
@@ -140,7 +140,7 @@ async function init() {
   // Notify the content script that the tab has been updated.
   browser.tabs.onUpdated.addListener(extractLightningData);
 
-  if (state.getState().settings.debug) {
+  if (true) {
     console.info("Debug mode enabled, use window.debugAlby");
     window.debugAlby = {
       state,

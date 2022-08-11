@@ -113,6 +113,12 @@ export const getBlocklist = (host: string) =>
 export const getInvoices = (options?: MessageInvoices["args"]) =>
   utils.call<GetInvoicesResponse["data"]>("getInvoices", options);
 
+export const lnurl = (options?: FixMe) => {
+  console.log("API - LNURL ");
+
+  utils.call<FixMe>("lnurl", options);
+};
+
 export default {
   getAccountInfo,
   getAccounts,
@@ -132,4 +138,5 @@ export default {
   unlock,
   getBlocklist,
   getInvoices,
+  lnurl,
 };

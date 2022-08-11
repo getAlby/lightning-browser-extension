@@ -11,6 +11,8 @@ import withdrawWithPrompt from "./withdraw";
   returns a messagable response: an object with either a `data` or with an `error`
 */
 async function lnurl(message: Message | MessageLNURLChannel) {
+  console.log("LNURL - HELLO FROm lnurl", message);
+
   if (typeof message.args.lnurlEncoded !== "string") return;
   let lnurlDetails;
   try {
@@ -18,6 +20,8 @@ async function lnurl(message: Message | MessageLNURLChannel) {
   } catch (e) {
     return { error: e instanceof Error ? e.message : "Failed to parse LNURL" };
   }
+
+  console.log("LNURL - lnurlDetails: ", lnurlDetails);
 
   switch (lnurlDetails.tag) {
     case "channelRequest":
@@ -29,7 +33,9 @@ async function lnurl(message: Message | MessageLNURLChannel) {
       }
 
     case "login":
-      return authWithPrompt(message, lnurlDetails);
+      console.log("LNURL - tag: login");
+      // return true;
+      return await authWithPrompt(message, lnurlDetails);
 
     case "payRequest":
       return payWithPrompt(message, lnurlDetails);

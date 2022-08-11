@@ -16,6 +16,9 @@ const utils = {
     args?: Record<string, unknown>,
     overwrites?: Record<string, unknown>
   ) => {
+    console.log("UTILS - action: ", action);
+    console.log("UTILS - args: ", args);
+
     return browser.runtime
       .sendMessage({
         application: "LBE",

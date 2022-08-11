@@ -13,6 +13,7 @@ import lightningPayReq from "bolt11";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import api from "~/common/lib/api";
 import lnurlLib from "~/common/lib/lnurl";
 
 function Send() {
@@ -45,8 +46,8 @@ function Send() {
 
         switch (LNURLDetails.tag) {
           case "login":
-            navigate("/lnurlAuth", navState);
-            //TODO OPEN PROMPT FROM HERE!!! HAHAHAHAH
+            console.log("AUTH LNURL-TAG");
+            await api.lnurl({ lnurlEncoded: lnurl });
             break;
 
           case "payRequest":
