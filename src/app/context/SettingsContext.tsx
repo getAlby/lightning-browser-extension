@@ -1,3 +1,4 @@
+import i18n from "i18next";
 import { useState, useEffect, createContext, useContext } from "react";
 import { toast } from "react-toastify";
 import api from "~/common/lib/api";
@@ -46,6 +47,11 @@ export const SettingsProvider = ({
         setIsLoading(false);
       });
   }, []);
+
+  // set locale from settings on mount
+  useEffect(() => {
+    i18n.changeLanguage(settings.locale);
+  }, [settings]);
 
   const value = {
     settings,
