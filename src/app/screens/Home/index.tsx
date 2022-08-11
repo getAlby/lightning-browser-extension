@@ -14,7 +14,6 @@ import TransactionsTable from "@components/TransactionsTable";
 import { Tab } from "@headlessui/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import pick from "lodash/pick";
 import { useState, useEffect, useCallback } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -259,24 +258,11 @@ function Home() {
                     const lnurlDetails = await lnurlLib.getDetails(lnurl); // throws if invalid.
 
                     if (lnurlDetails.tag === "payRequest") {
-                      // rather pick the key/value the component needs
-                      // the data coming from `getDetails` contains deep nested non-serializable values which results in a `null` navigation state
-                      // => see also https://stackoverflow.com/a/71831614/1667461
-                      const navStatePropsForPay = pick(lnurlDetails, [
-                        "callback",
-                        "maxSendable",
-                        "minSendable",
-                        "domain",
-                        "payerData",
-                        "metadata",
-                        "commentAllowed",
-                      ]);
-
                       navigate("/lnurlPay", {
                         state: {
                           origin: originData,
                           args: {
-                            lnurlDetails: navStatePropsForPay,
+                            lnurlDetails,
                           },
                         },
                       });

@@ -10,7 +10,6 @@ import IconButton from "@components/IconButton";
 import QrcodeScanner from "@components/QrcodeScanner";
 import TextField from "@components/form/TextField";
 import lightningPayReq from "bolt11";
-import pick from "lodash/pick";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -40,23 +39,11 @@ function Send() {
         const lnurlDetails = await lnurlLib.getDetails(lnurl);
 
         if (lnurlDetails.tag === "payRequest") {
-          // rather pick the key/value the component needs
-          // the data coming from `getDetails` contains deep nested non-serializable values which results in a `null` navigation state
-          // => see also https://stackoverflow.com/a/71831614/1667461
-          const navStatePropsForPay = pick(lnurlDetails, [
-            "callback",
-            "maxSendable",
-            "minSendable",
-            "domain",
-            "payerData",
-            "metadata",
-            "commentAllowed",
-          ]);
           navigate("/lnurlPay", {
             state: {
               origin: getOriginData(),
               args: {
-                lnurlDetails: navStatePropsForPay,
+                lnurlDetails,
               },
             },
           });
