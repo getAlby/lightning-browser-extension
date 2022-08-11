@@ -98,11 +98,14 @@ function Settings() {
         </Setting>
         <Setting
           title={t("language.title")}
-          subtitle={t("language.subtitle")}
-          link={[
-            "https://hosted.weblate.org/projects/getalby-lightning-browser-extension/getalby-lightning-browser-extension/",
-            t("language.link"),
-          ]}
+          subtitle={
+            <>
+              <Trans t={t}>language.subtitle</Trans>{" "}
+              <a href="https://hosted.weblate.org/projects/getalby-lightning-browser-extension/getalby-lightning-browser-extension/">
+                <Trans t={t}>language.link</Trans>
+              </a>
+            </>
+          }
         >
           <div className="w-32">
             <LocaleSwitcher />
