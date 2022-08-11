@@ -46,7 +46,6 @@ const routes = {
   makeInvoice: ln.makeInvoice,
   sendPayment: ln.sendPayment,
   signMessage: ln.signMessage,
-  auth: ln.auth,
 
   getPayments: payments.all,
 
@@ -66,6 +65,7 @@ const routes = {
   listBlocklist: blocklist.list,
 
   lnurl: lnurl,
+  lnurlAuth: lnurl.auth,
 };
 
 const router = (path: FixMe) => {

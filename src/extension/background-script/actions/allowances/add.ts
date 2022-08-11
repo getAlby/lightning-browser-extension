@@ -30,7 +30,7 @@ const add = async (message: MessageAllowanceAdd) => {
       host: host,
       imageURL: imageURL,
       lastPaymentAt: 0,
-      lnurlAuth: false,
+      lnurlAuth: false, // can be set to true via message from authWithPropt
       name: name,
       remainingBudget: totalBudget,
       tag: "",
