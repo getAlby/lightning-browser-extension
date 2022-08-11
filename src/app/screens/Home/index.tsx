@@ -22,6 +22,7 @@ import browser from "webextension-polyfill";
 import { useSettings } from "~/app/context/SettingsContext";
 import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
+import lnurlLib from "~/common/lib/lnurl";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
 import type { Allowance, Battery, Transaction } from "~/types";
@@ -222,6 +223,7 @@ function Home() {
     } else {
       return;
     }
+
     return (
       <div
         className={
@@ -242,23 +244,33 @@ function Home() {
               onClick={async () => {
                 try {
                   setLoadingSendSats(true);
-                  const origin = {
+
+                  const originData = {
                     external: true,
                     name: lnData[0].name,
                     host: lnData[0].host,
                     description: lnData[0].description,
                     icon: lnData[0].icon,
                   };
+
                   if (lnData[0].method === "lnurl") {
-                    navigate(
-                      `/lnurlPay?lnurl=${
-                        lnData[0].address
-                      }&origin=${encodeURIComponent(JSON.stringify(origin))}`
-                    );
+                    const lnurl = lnData[0].address;
+                    const lnurlDetails = await lnurlLib.getDetails(lnurl); // throws if invalid.
+
+                    if (lnurlDetails.tag === "payRequest") {
+                      navigate("/lnurlPay", {
+                        state: {
+                          origin: originData,
+                          args: {
+                            lnurlDetails,
+                          },
+                        },
+                      });
+                    }
                   } else if (lnData[0].method === "keysend") {
                     const params = new URLSearchParams({
                       destination: lnData[0].address,
-                      origin: encodeURIComponent(JSON.stringify(origin)),
+                      origin: encodeURIComponent(JSON.stringify(originData)),
                     });
                     if (lnData[0].customKey && lnData[0].customValue) {
                       const customRecords = {
@@ -266,7 +278,7 @@ function Home() {
                       };
                       params.set(
                         "customRecords",
-                        JSON.stringify(customRecords) // encodeURIComponent() ??
+                        JSON.stringify(customRecords)
                       );
                     }
                     navigate(`/keysend?${params.toString()}`);

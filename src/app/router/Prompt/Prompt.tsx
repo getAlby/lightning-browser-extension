@@ -1,5 +1,5 @@
 import AccountMenu from "@components/AccountMenu";
-import Keysend from "@screens/ConfirmKeysend";
+import ConfirmKeysend from "@screens/ConfirmKeysend";
 import ConfirmPayment from "@screens/ConfirmPayment";
 import ConfirmSignMessage from "@screens/ConfirmSignMessage";
 import Enable from "@screens/Enable";
@@ -15,6 +15,7 @@ import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import type {
   NavigationState,
+  LNURLAuthServiceResponse,
   LNURLWithdrawServiceResponse,
   LNURLChannelServiceResponse,
   RequestInvoiceArgs,
@@ -63,12 +64,26 @@ function Prompt() {
                 <Navigate
                   to={`/${navigationState.action}`}
                   replace
+                  // no need to check for serializable data for the navState here,
+                  // navState does not fail when data is coming via a LNURL called by webLn
+                  // as all data in deep nested object are serializable in this case
                   state={navigationState}
                 />
               }
             />
             <Route path="webln/enable" element={<Enable />} />
-            <Route path="lnurlAuth" element={<LNURLAuth />} />
+            <Route
+              path="lnurlAuth"
+              element={
+                <LNURLAuth
+                  details={
+                    navigationState.args
+                      ?.lnurlDetails as LNURLAuthServiceResponse
+                  }
+                  origin={navigationState.origin}
+                />
+              }
+            />
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route
               path="lnurlWithdraw"
@@ -113,7 +128,7 @@ function Prompt() {
             <Route
               path="confirmKeysend"
               element={
-                <Keysend
+                <ConfirmKeysend
                   destination={navigationState.args?.destination as string}
                   valueSat={navigationState.args?.amount as string}
                   customRecords={

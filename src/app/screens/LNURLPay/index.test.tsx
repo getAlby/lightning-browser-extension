@@ -1,0 +1,91 @@
+import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
+import * as SettingsContext from "~/app/context/SettingsContext";
+import type { LNURLDetails, OriginData } from "~/types";
+
+import LNURLPay from "./index";
+
+jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
+  settings: mockSettings,
+  isLoading: false,
+  updateSetting: jest.fn(),
+});
+
+const mockDetails: LNURLDetails = {
+  callback: "https://lnurlcallback.example.com",
+  tag: "payRequest",
+  maxSendable: 8000,
+  minSendable: 2000,
+  metadata:
+    '[["text/plain","blocktime 748949"],["text/long-desc","16sat/vB & empty"]]',
+  commentAllowed: 11,
+  payerData: {
+    name: {
+      mandatory: false,
+    },
+    pubkey: {
+      mandatory: false,
+    },
+    identifier: {
+      mandatory: false,
+    },
+    email: {
+      mandatory: false,
+    },
+    auth: {
+      mandatory: false,
+      k1: "027f16dee6284649a71b23161b2104be2f33e42133e8ed7999f99d9d35086a0f",
+    },
+  },
+  domain: "lnurl.fiatjaf.com",
+  url: "https://lnurl.fiatjaf.com/lnurl-pay?session=a798c63b416e02a33685b51d7a32cf8d5dea14f5b5fd734c5d26d246606a3521",
+};
+
+const mockOrigin: OriginData = {
+  location:
+    "chrome-extension://fbdjdcapmecooemonpmfohgeipnbcgan/popup.html#/send",
+  domain: "chrome-extension://fbdjdcapmecooemonpmfohgeipnbcgan",
+  host: "fbdjdcapmecooemonpmfohgeipnbcgan",
+  pathname: "/popup.html",
+  name: "Alby",
+  description: "",
+  icon: "chrome-extension://fbdjdcapmecooemonpmfohgeipnbcgan/assets/icons/alby_icon_yellow_128x128.png",
+  metaData: {
+    title: "Alby",
+    url: "chrome-extension://fbdjdcapmecooemonpmfohgeipnbcgan/popup.html#/send",
+    provider: "Alby",
+    image:
+      "chrome-extension://fbdjdcapmecooemonpmfohgeipnbcgan/assets/icons/alby_icon_yellow_128x128.png",
+  },
+  external: true,
+};
+
+jest.mock("~/app/hooks/useNavigationState", () => {
+  return {
+    useNavigationState: jest.fn(() => ({
+      origin: mockOrigin,
+      args: {
+        lnurlDetails: mockDetails,
+      },
+    })),
+  };
+});
+
+describe("LNURLPay", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test("renders via Send (popup)", async () => {
+    render(
+      <MemoryRouter>
+        <LNURLPay />
+      </MemoryRouter>
+    );
+
+    expect(await screen.getByText("blocktime 748949")).toBeInTheDocument();
+    expect(await screen.getByText("16sat/vB & empty")).toBeInTheDocument();
+    expect(await screen.getByLabelText("Amount (Satoshi)")).toHaveValue(2);
+  });
+});

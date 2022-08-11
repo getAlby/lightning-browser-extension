@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import api from "~/common/lib/api";
 import lnurlLib from "~/common/lib/lnurl";
+import getOriginData from "~/extension/content-script/originData";
 
 function Send() {
   const [invoice, setInvoice] = useState("");
@@ -37,21 +38,23 @@ function Send() {
       }
 
       if (lnurl) {
-        const LNURLDetails = await lnurlLib.getDetails(lnurl); // throws if invalid.
-        const navState = {
-          state: {
-            lnurl,
-          },
-        };
+        const lnurlDetails = await lnurlLib.getDetails(lnurl); // throws if invalid.
 
-        switch (LNURLDetails.tag) {
+        switch (lnurlDetails.tag) {
           case "login":
             console.log("AUTH LNURL-TAG");
             await api.lnurl({ lnurlEncoded: lnurl });
             break;
 
           case "payRequest":
-            navigate("/lnurlPay", navState);
+            navigate("/lnurlPay", {
+              state: {
+                origin: getOriginData(),
+                args: {
+                  lnurlDetails,
+                },
+              },
+            });
             break;
 
           default:
