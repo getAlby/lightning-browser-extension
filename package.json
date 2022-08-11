@@ -131,7 +131,7 @@
     "pptr-testing-library": "^0.7.0",
     "prettier": "^2.7.1",
     "process": "^0.11.10",
-    "puppeteer": "^15.4.0",
+    "puppeteer": "^16.1.0",
     "resolve-url-loader": "^5.0.0",
     "sass": "^1.54.0",
     "sass-loader": "^13.0.2",
