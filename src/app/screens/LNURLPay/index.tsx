@@ -7,33 +7,23 @@ import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
 import axios from "axios";
 import React, { useState, useEffect, MouseEvent } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import lnurl from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
-import getOriginData from "~/extension/content-script/originData";
-import {
+import type {
   LNURLPaymentInfoError,
   LNURLPaymentInfo,
   LNURLPaymentSuccessAction,
   LNURLPayServiceResponse,
   PaymentResponse,
 } from "~/types";
-
-type Origin = {
-  name: string;
-  icon: string;
-};
-
-type Props = {
-  details?: LNURLPayServiceResponse;
-  origin?: Origin;
-};
 
 const Dt = ({ children }: { children: React.ReactNode }) => (
   <dt className="font-medium text-gray-800 dark:text-white">{children}</dt>
@@ -43,21 +33,15 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
   <dd className="mb-4 text-gray-600 dark:text-neutral-500">{children}</dd>
 );
 
-function LNURLPay(props: Props) {
+function LNURLPay() {
+  const navState = useNavigationState();
+  const details = navState.args?.lnurlDetails as LNURLPayServiceResponse;
   const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAccount();
-  const [loading, setLoading] = useState(true);
-  const [details, setDetails] = useState(props.details);
-  const [origin] = useState(
-    props.origin ||
-      (searchParams.get("origin") &&
-        JSON.parse(searchParams.get("origin") as string)) ||
-      getOriginData()
-  );
+
   const [valueSat, setValueSat] = useState(
     (details?.minSendable && (+details?.minSendable / 1000).toString()) || ""
   );
@@ -80,28 +64,6 @@ function LNURLPay(props: Props) {
       })();
     }
   }, [valueSat, showFiat]);
-
-  useEffect(() => {
-    if (searchParams) {
-      // lnurl was passed as querystring
-      const lnurlString = searchParams.get("lnurl");
-      if (lnurlString) {
-        lnurl.getDetails(lnurlString).then((lnurlDetails) => {
-          if (lnurlDetails.tag === "payRequest") {
-            setDetails(lnurlDetails);
-            if (lnurlDetails.minSendable) {
-              setValueSat((+lnurlDetails.minSendable / 1000).toString());
-            }
-            setLoading(false);
-          }
-        });
-      } else {
-        setLoading(false);
-      }
-    } else {
-      setLoading(false);
-    }
-  }, [searchParams]);
 
   useEffect(() => {
     !!settings.userName && setUserName(settings.userName);
@@ -187,7 +149,7 @@ function LNURLPay(props: Props) {
         { paymentRequest },
         {
           origin: {
-            ...origin,
+            ...navState.origin,
             name: getRecipient(),
           },
         }
@@ -218,7 +180,7 @@ function LNURLPay(props: Props) {
 
       // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the payment response. This closes the window which means the user will NOT see the above successAction.
       // We assume this is OK when it is called through webln.
-      if (props.details && props.origin) {
+      if (navState.isPrompt) {
         msg.reply(paymentResponse);
       }
     } catch (e) {
@@ -233,7 +195,7 @@ function LNURLPay(props: Props) {
 
   function reject(e: MouseEvent) {
     e.preventDefault();
-    if (props.details && props.origin) {
+    if (navState.isPrompt) {
       msg.error(USER_REJECTED_ERROR);
     } else {
       navigate(-1);
@@ -242,7 +204,7 @@ function LNURLPay(props: Props) {
 
   function close(e: MouseEvent) {
     e.preventDefault();
-    if (props.details && props.origin) {
+    if (navState.isPrompt) {
       msg.reply(payment);
     } else {
       window.close();
@@ -313,10 +275,10 @@ function LNURLPay(props: Props) {
     return (
       <div className="h-full">
         <PublisherCard
-          title={origin.name}
-          description={origin.description}
-          lnAddress={loading || !details ? "loading..." : getRecipient()}
-          image={origin.icon}
+          title={navState.origin.name}
+          description={navState.origin.description}
+          lnAddress={getRecipient()}
+          image={navState.origin.icon}
           isSmall={false}
         />
         <dl className="shadow bg-white dark:bg-surface-02dp m-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
@@ -343,36 +305,27 @@ function LNURLPay(props: Props) {
           <>
             <div className="grow overflow-y-auto no-scrollbar">
               <PublisherCard
-                title={origin.name}
-                image={origin.icon}
-                lnAddress={loading || !details ? "loading..." : getRecipient()}
+                title={navState.origin.name}
+                image={navState.origin.icon}
+                lnAddress={getRecipient()}
               />
               <Container maxWidth="sm">
                 <div className="my-4">
                   <dl>
-                    {loading || !details ? (
-                      <>
-                        <Dt>Description</Dt>
-                        <Dd>loading...</Dd>
-                        <Dt>Amount (Satoshi)</Dt>
-                        <Dd>loading...</Dd>
-                      </>
-                    ) : (
-                      <>
-                        {formattedMetadata(details.metadata).map(([dt, dd]) => (
-                          <>
-                            <Dt>{dt}</Dt>
-                            <Dd>{dd}</Dd>
-                          </>
-                        ))}
-                        {details.minSendable === details.maxSendable && (
-                          <>
-                            <Dt>Amount (Satoshi)</Dt>
-                            <Dd>{`${+details.minSendable / 1000} sats`}</Dd>
-                          </>
-                        )}
-                      </>
-                    )}
+                    <>
+                      {formattedMetadata(details.metadata).map(([dt, dd]) => (
+                        <>
+                          <Dt>{dt}</Dt>
+                          <Dd>{dd}</Dd>
+                        </>
+                      ))}
+                      {details.minSendable === details.maxSendable && (
+                        <>
+                          <Dt>Amount (Satoshi)</Dt>
+                          <Dd>{`${+details.minSendable / 1000} sats`}</Dd>
+                        </>
+                      )}
+                    </>
                   </dl>
                   {details && details.minSendable !== details.maxSendable && (
                     <div>

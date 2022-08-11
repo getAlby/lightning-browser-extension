@@ -103,6 +103,27 @@ export interface MessageDefault {
   prompt?: boolean;
 }
 
+export type NavigationState = {
+  origin: OriginData;
+  args?: {
+    lnurlDetails:
+      | LNURLAuthServiceResponse
+      | LNURLPayServiceResponse
+      | LNURLWithdrawServiceResponse
+      | LNURLChannelServiceResponse;
+    amountEditable?: boolean;
+    memoEditable?: boolean;
+    invoiceAttributes?: RequestInvoiceArgs;
+    paymentRequest?: string;
+    destination?: string;
+    amount?: string;
+    customRecords?: Record<string, string>;
+    message?: string;
+  };
+  isPrompt?: true; // only passed via Prompt.tsx
+  action: string;
+};
+
 export interface MessagePaymentAll extends MessageDefault {
   action: "getPayments";
   args?: {
@@ -304,7 +325,7 @@ export type LNURLDetails = (
   | LNURLPayServiceResponse
   | LNURLAuthServiceResponse
   | LNURLWithdrawServiceResponse
-) & { url: URL };
+) & { url: string };
 
 export interface LNURLPaymentSuccessAction {
   tag: string;

@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import lnurlLib from "~/common/lib/lnurl";
+import getOriginData from "~/extension/content-script/originData";
 
 function Send() {
   const [invoice, setInvoice] = useState("");
@@ -35,8 +36,18 @@ function Send() {
       }
 
       if (lnurl) {
-        await lnurlLib.getDetails(lnurl); // throws if invalid.
-        navigate(`/lnurlPay?lnurl=${lnurl}`);
+        const lnurlDetails = await lnurlLib.getDetails(lnurl);
+
+        if (lnurlDetails.tag === "payRequest") {
+          navigate("/lnurlPay", {
+            state: {
+              origin: getOriginData(),
+              args: {
+                lnurlDetails,
+              },
+            },
+          });
+        }
       } else if (isPubKey(invoice)) {
         navigate(`/keysend?destination=${invoice}`);
       } else {

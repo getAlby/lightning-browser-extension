@@ -22,7 +22,7 @@ type Props = {
   valueSat?: string;
 };
 
-function Keysend(props: Props) {
+function ConfirmKeysend(props: Props) {
   const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
@@ -162,4 +162,4 @@ function Keysend(props: Props) {
   );
 }
 
-export default Keysend;
+export default ConfirmKeysend;
