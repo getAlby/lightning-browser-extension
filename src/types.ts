@@ -325,7 +325,7 @@ export type LNURLDetails = (
   | LNURLPayServiceResponse
   | LNURLAuthServiceResponse
   | LNURLWithdrawServiceResponse
-) & { url: URL };
+) & { url: string };
 
 export interface LNURLPaymentSuccessAction {
   tag: string;

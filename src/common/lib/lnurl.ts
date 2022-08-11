@@ -79,7 +79,7 @@ const lnurl = {
       }
     }
     lnurlDetails.domain = url.hostname;
-    lnurlDetails.url = url;
+    lnurlDetails.url = url.toString();
     return lnurlDetails;
   },
   verifyInvoice({

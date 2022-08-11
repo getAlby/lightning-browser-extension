@@ -137,20 +137,16 @@ async function auth(lnurlDetails: LNURLDetails) {
   }
 
   const hashingKey = sha256(lnSignature).toString(Hex);
-  if (!lnurlDetails.url.host || !hashingKey) {
+  const url = new URL(lnurlDetails.url);
+  if (!url.host || !hashingKey) {
     throw new Error("Invalid input");
   }
   let linkingKeyPriv;
   const { settings } = state.getState();
   if (settings.isUsingLegacyLnurlAuthKey) {
-    linkingKeyPriv = hmacSHA256(lnurlDetails.url.host, hashingKey).toString(
-      Hex
-    );
+    linkingKeyPriv = hmacSHA256(url.host, hashingKey).toString(Hex);
   } else {
-    linkingKeyPriv = hmacSHA256(
-      lnurlDetails.url.host,
-      Hex.parse(hashingKey)
-    ).toString(Hex);
+    linkingKeyPriv = hmacSHA256(url.host, Hex.parse(hashingKey)).toString(Hex);
   }
   // make sure we got a hashingKey and a linkingkey (just to be sure for whatever reason)
   if (!hashingKey || !linkingKeyPriv) {
@@ -166,7 +162,7 @@ async function auth(lnurlDetails: LNURLDetails) {
   const signedMessage = signer.sign(k1);
   const signedMessageDERHex = signedMessage.toDER("hex");
 
-  const loginURL = lnurlDetails.url;
+  const loginURL = url;
   loginURL.searchParams.set("sig", signedMessageDERHex);
   loginURL.searchParams.set("key", signer.pkHex);
   loginURL.searchParams.set("t", Date.now().toString());
