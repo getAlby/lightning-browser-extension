@@ -6,25 +6,20 @@ import SuccessMessage from "@components/SuccessMessage";
 import axios from "axios";
 import { useState, MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import getOriginData from "~/extension/content-script/originData";
 import type { LNURLChannelServiceResponse } from "~/types";
 
-type Props = {
-  details: LNURLChannelServiceResponse;
-  origin?: {
-    name: string;
-    icon: string;
-  };
-};
+function LNURLChannel() {
+  const navState = useNavigationState();
+  const details = navState.args?.lnurlDetails as LNURLChannelServiceResponse;
+  const navigate = useNavigate();
 
-function LNURLChannel(props: Props) {
-  const [origin] = useState(props.origin || getOriginData());
-  const details = props.details;
   const { uri } = details;
   const [pubkey, host] = uri.split("@");
 
@@ -47,9 +42,9 @@ function LNURLChannel(props: Props) {
       const infoResponse = await api.getInfo();
       const nodeId = infoResponse.node.pubkey;
 
-      const callbackResponse = await axios.get(props.details.callback, {
+      const callbackResponse = await axios.get(details.callback, {
         params: {
-          k1: props.details.k1,
+          k1: details.k1,
           remoteid: nodeId,
         },
       });
@@ -60,12 +55,12 @@ function LNURLChannel(props: Props) {
       }
 
       setSuccessMessage(
-        `Channel request sent successfully. ${props.details.k1} ${nodeId}`
+        `Channel request sent successfully. ${details.k1} ${nodeId}`
       );
 
       // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the response. This closes the window which means the user will NOT see the above successAction.
       // We assume this is OK when it is called through webln.
-      if (props.details && props.origin) {
+      if (details && navState.origin) {
         msg.reply(callbackResponse?.data);
       }
     } catch (e) {
@@ -80,7 +75,11 @@ function LNURLChannel(props: Props) {
 
   function reject(e: MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
-    msg.error(USER_REJECTED_ERROR);
+    if (navState.isPrompt) {
+      msg.error(USER_REJECTED_ERROR);
+    } else {
+      navigate(-1);
+    }
   }
 
   return (
@@ -89,7 +88,10 @@ function LNURLChannel(props: Props) {
       {!successMessage ? (
         <Container isScreenView maxWidth="sm">
           <div>
-            <PublisherCard title={origin.name} image={origin.icon} />
+            <PublisherCard
+              title={navState.origin.name}
+              image={navState.origin.icon}
+            />
             <ContentMessage
               heading={`Request a channel from the node:`}
               content={uri}
@@ -99,6 +101,7 @@ function LNURLChannel(props: Props) {
               <p className="mt-1 text-red-500">{errorMessage}</p>
             )}
           </div>
+
           <div>
             <ConfirmOrCancel
               disabled={loadingConfirm || !uri}
@@ -106,6 +109,7 @@ function LNURLChannel(props: Props) {
               onConfirm={confirm}
               onCancel={reject}
             />
+
             <p className="mb-4 text-center text-sm text-gray-400">
               <em>{t("only_trusted")}</em>
             </p>
@@ -114,8 +118,8 @@ function LNURLChannel(props: Props) {
       ) : (
         <Container maxWidth="sm">
           <PublisherCard
-            title={origin.name}
-            image={origin.icon}
+            title={navState.origin.name}
+            image={navState.origin.icon}
             url={details.domain}
           />
           <div className="m-4">

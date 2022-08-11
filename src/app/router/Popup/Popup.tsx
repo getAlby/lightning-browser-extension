@@ -2,6 +2,7 @@ import Navbar from "@components/Navbar";
 import ConfirmPayment from "@screens/ConfirmPayment";
 import Home from "@screens/Home";
 import Keysend from "@screens/Keysend";
+import LNURLChannel from "@screens/LNURLChannel";
 import LNURLPay from "@screens/LNURLPay";
 import Receive from "@screens/Receive";
 import Send from "@screens/Send";
@@ -29,6 +30,7 @@ function Popup() {
             <Route path="send" element={<Send />} />
             <Route path="receive" element={<Receive />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
+            <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route path="keysend" element={<Keysend />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
           </Route>
