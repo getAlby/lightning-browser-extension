@@ -17,6 +17,7 @@ import type { LNURLChannelServiceResponse } from "~/types";
 
 function LNURLChannel() {
   const navState = useNavigationState();
+
   const details = navState.args?.lnurlDetails as LNURLChannelServiceResponse;
   const navigate = useNavigate();
 
