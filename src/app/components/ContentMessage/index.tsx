@@ -1,6 +1,6 @@
 type Props = {
   heading: string;
-  content: string | React.ReactNode;
+  content: string;
 };
 
 function ContentMessage({ heading, content }: Props) {
