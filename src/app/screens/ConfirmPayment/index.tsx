@@ -1,5 +1,6 @@
 import BudgetControl from "@components/BudgetControl";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import Container from "@components/Container";
 import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
@@ -107,14 +108,14 @@ function ConfirmPayment(props: Props) {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={"Approve Payment"} />
       {!successMessage ? (
-        <div className="h-full flex flex-col justify-between">
+        <Container isScreenView maxWidth="sm">
           <div>
             <PublisherCard
               title={originRef.current.name}
               image={originRef.current.icon}
               url={originRef.current.host}
             />
-            <div className="m-4">
+            <div className="my-4">
               <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
                 <PaymentSummary
                   amount={invoiceRef.current?.satoshis}
@@ -145,9 +146,9 @@ function ConfirmPayment(props: Props) {
               <em>{t("only_trusted")}</em>
             </p>
           </div>
-        </div>
+        </Container>
       ) : (
-        <>
+        <Container maxWidth="sm">
           <PublisherCard
             title={originRef.current.name}
             image={originRef.current.icon}
@@ -159,7 +160,7 @@ function ConfirmPayment(props: Props) {
               onClose={() => window.close()}
             />
           </div>
-        </>
+        </Container>
       )}
     </div>
   );

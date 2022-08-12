@@ -1,4 +1,5 @@
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
@@ -86,7 +87,7 @@ function LNURLWithdraw(props: Props) {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={"Withdraw"} />
       {!successMessage ? (
-        <div className="h-full flex flex-col justify-between">
+        <Container isScreenView maxWidth="sm">
           <div>
             <PublisherCard
               title={origin.name}
@@ -104,9 +105,9 @@ function LNURLWithdraw(props: Props) {
             onConfirm={confirm}
             onCancel={reject}
           />
-        </div>
+        </Container>
       ) : (
-        <>
+        <Container maxWidth="sm">
           <PublisherCard title={origin.name} image={origin.icon} />
           <div className="m-4">
             <SuccessMessage
@@ -114,7 +115,7 @@ function LNURLWithdraw(props: Props) {
               onClose={() => window.close()}
             />
           </div>
-        </>
+        </Container>
       )}
     </div>
   );

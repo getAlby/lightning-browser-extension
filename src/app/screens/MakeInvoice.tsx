@@ -1,4 +1,5 @@
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import SatButtons from "@components/SatButtons";
 import TextField from "@components/form/TextField";
@@ -89,14 +90,14 @@ function MakeInvoice({
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={"Create Invoice"} />
-      <div className="h-full flex flex-col justify-between">
+      <Container isScreenView maxWidth="sm">
         <div>
           <PublisherCard
             title={origin.name}
             image={origin.icon}
             url={origin.host}
           />
-          <div className="pt-4 px-4">
+          <div className="pt-4">
             <div>
               {amountEditable && (
                 <div className="mb-4">
@@ -151,7 +152,7 @@ function MakeInvoice({
             <em>{t("only_trusted")}</em>
           </p>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }
