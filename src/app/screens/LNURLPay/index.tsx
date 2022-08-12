@@ -314,10 +314,10 @@ function LNURLPay() {
                   <dl>
                     <>
                       {formattedMetadata(details.metadata).map(([dt, dd]) => (
-                        <>
+                        <div key={dt}>
                           <Dt>{dt}</Dt>
                           <Dd>{dd}</Dd>
-                        </>
+                        </div>
                       ))}
                       {details.minSendable === details.maxSendable && (
                         <>
