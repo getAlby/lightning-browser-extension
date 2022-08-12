@@ -56,7 +56,6 @@ function LNURLPay() {
   const [successAction, setSuccessAction] = useState<
     LNURLPaymentSuccessAction | undefined
   >();
-  const [payment, setPayment] = useState<PaymentResponse | undefined>();
 
   useEffect(() => {
     if (showFiat) {
@@ -157,8 +156,6 @@ function LNURLPay() {
         }
       );
 
-      setPayment(paymentResponse);
-
       // Once payment is fulfilled LN WALLET executes a non-null successAction
       // LN WALLET should also store successAction data on the transaction record
       if (paymentInfo.successAction) {
@@ -205,12 +202,9 @@ function LNURLPay() {
   }
 
   function close(e: MouseEvent) {
+    // will never be reached via prompt
     e.preventDefault();
-    if (navState.isPrompt) {
-      msg.reply(payment);
-    } else {
-      window.close();
-    }
+    navigate(-1);
   }
 
   function getRecipient() {
