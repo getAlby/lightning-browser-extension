@@ -17,6 +17,7 @@ import type { LNURLWithdrawServiceResponse } from "~/types";
 function LNURLWithdraw() {
   const navigate = useNavigate();
   const navState = useNavigationState();
+
   const details = navState.args?.lnurlDetails as LNURLWithdrawServiceResponse;
   const { minWithdrawable, maxWithdrawable } = details;
 
