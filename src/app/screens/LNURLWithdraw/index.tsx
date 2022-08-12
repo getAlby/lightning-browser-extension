@@ -3,7 +3,7 @@ import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-import Input from "@components/form/Input";
+import TextField from "@components/form/TextField";
 import axios from "axios";
 import { useState, MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
@@ -57,11 +57,18 @@ function LNURLWithdraw() {
 
   function renderAmount() {
     if (minWithdrawable === maxWithdrawable) {
-      return <p>{`${minWithdrawable / 1000} sats`}</p>;
+      return (
+        <ContentMessage
+          heading={`Amount (Satoshi)`}
+          content={`${minWithdrawable / 1000} sats`}
+        />
+      );
     } else {
       return (
-        <div className="mt-1 flex flex-col">
-          <Input
+        <dl className="my-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden">
+          <TextField
+            id="amount"
+            label="Amount (Satoshi)"
             type="number"
             min={minWithdrawable / 1000}
             max={maxWithdrawable / 1000}
@@ -69,7 +76,7 @@ function LNURLWithdraw() {
             onChange={(e) => setValueSat(e.target.value)}
           />
           {errorMessage && <p className="mt-1 text-red-500">{errorMessage}</p>}
-        </div>
+        </dl>
       );
     }
   }
@@ -103,10 +110,7 @@ function LNURLWithdraw() {
               image={navState.origin.icon}
               url={details?.domain}
             />
-            <ContentMessage
-              heading={`Amount (Satoshi)`}
-              content={renderAmount()}
-            />
+            {renderAmount()}
           </div>
           <ConfirmOrCancel
             disabled={loadingConfirm || !valueSat}
