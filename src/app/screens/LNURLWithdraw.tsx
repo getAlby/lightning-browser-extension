@@ -6,25 +6,20 @@ import SuccessMessage from "@components/SuccessMessage";
 import Input from "@components/form/Input";
 import axios from "axios";
 import { useState, MouseEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import getOriginData from "~/extension/content-script/originData";
 import type { LNURLWithdrawServiceResponse } from "~/types";
 
-type Props = {
-  details: LNURLWithdrawServiceResponse;
-  origin?: {
-    name: string;
-    icon: string;
-  };
-};
+function LNURLWithdraw() {
+  const navigate = useNavigate();
+  const navState = useNavigationState();
+  const details = navState.args?.lnurlDetails as LNURLWithdrawServiceResponse;
+  const { minWithdrawable, maxWithdrawable } = details;
 
-function LNURLWithdraw(props: Props) {
-  const [origin] = useState(props.origin || getOriginData());
-
-  const { minWithdrawable, maxWithdrawable } = props.details;
   const [valueSat, setValueSat] = useState(
     (maxWithdrawable && (+maxWithdrawable / 1000).toString()) || ""
   );
@@ -38,12 +33,12 @@ function LNURLWithdraw(props: Props) {
       setLoadingConfirm(true);
       const invoice = await api.makeInvoice({
         amount: parseInt(valueSat),
-        memo: props.details.defaultDescription,
+        memo: details.defaultDescription,
       });
 
-      await axios.get(props.details.callback, {
+      await axios.get(details.callback, {
         params: {
-          k1: props.details.k1,
+          k1: details.k1,
           pr: invoice.paymentRequest,
         },
       });
@@ -78,9 +73,22 @@ function LNURLWithdraw(props: Props) {
     }
   }
 
-  function reject(e: MouseEvent<HTMLAnchorElement>) {
+  function reject(e: MouseEvent) {
     e.preventDefault();
-    msg.error(USER_REJECTED_ERROR);
+    if (navState.isPrompt) {
+      msg.error(USER_REJECTED_ERROR);
+    } else {
+      navigate(-1);
+    }
+  }
+
+  function close(e: MouseEvent) {
+    e.preventDefault();
+    if (navState.isPrompt) {
+      window.close();
+    } else {
+      navigate(-1);
+    }
   }
 
   return (
@@ -90,9 +98,9 @@ function LNURLWithdraw(props: Props) {
         <Container isScreenView maxWidth="sm">
           <div>
             <PublisherCard
-              title={origin.name}
-              image={origin.icon}
-              url={props.details?.domain}
+              title={navState.origin.name}
+              image={navState.origin.icon}
+              url={details?.domain}
             />
             <ContentMessage
               heading={`Amount (Satoshi)`}
@@ -108,12 +116,12 @@ function LNURLWithdraw(props: Props) {
         </Container>
       ) : (
         <Container maxWidth="sm">
-          <PublisherCard title={origin.name} image={origin.icon} />
+          <PublisherCard
+            title={navState.origin.name}
+            image={navState.origin.icon}
+          />
           <div className="m-4">
-            <SuccessMessage
-              message={successMessage}
-              onClose={() => window.close()}
-            />
+            <SuccessMessage message={successMessage} onClose={close} />
           </div>
         </Container>
       )}
