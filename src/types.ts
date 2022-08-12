@@ -300,7 +300,16 @@ export interface Payment {
   preimage: string;
   totalAmount: number | string;
   totalFees: number | string;
+}
+
+export interface Metadata {
+  createdAt: number;
+  host: string;
+  id?: number;
+  allowanceId?: number;
+  paymentHash: string;
   metadata?: JSON;
+  type: string;
 }
 
 export interface PaymentResponse

@@ -8,6 +8,7 @@ import {
   lnurlAuthFailedNotification,
 } from "./notifications";
 import { persistSuccessfullPayment } from "./persistPayments";
+import { persistMetadata } from "./persistMetadata";
 
 const subscribe = () => {
   PubSub.subscribe("ln.sendPayment.success", paymentSuccessNotification);
@@ -15,6 +16,7 @@ const subscribe = () => {
 
   PubSub.subscribe("ln.sendPayment.success", persistSuccessfullPayment);
   PubSub.subscribe("ln.sendPayment.success", updateAllowance);
+  PubSub.subscribe("ln.sendPayment.success", persistMetadata);
   PubSub.subscribe("ln.keysend.success", persistSuccessfullPayment);
   PubSub.subscribe("ln.keysend.success", updateAllowance);
 

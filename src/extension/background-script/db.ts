@@ -1,12 +1,13 @@
 import Dexie from "dexie";
 import "fake-indexeddb/auto";
 import browser from "webextension-polyfill";
-import type { Allowance, Payment, Blocklist } from "~/types";
+import type { Allowance, Payment, Blocklist, Metadata } from "~/types";
 
 class DB extends Dexie {
   allowances: Dexie.Table<Allowance, number>;
   payments: Dexie.Table<Payment, number>;
   blocklist: Dexie.Table<Blocklist, number>;
+  metadata: Dexie.Table<Metadata, number>
 
   constructor() {
     super("LBE");
@@ -20,23 +21,26 @@ class DB extends Dexie {
       blocklist: "++id,host,name,imageURL,isBlocked,createdAt",
     });
     this.version(3).stores({
-      payments:
-        "++id,allowanceId,host,location,name,description,totalAmount,totalFees,preimage,paymentRequest,metadata,paymentHash,destination,createdAt",
+      metadata:
+        "++id,allowanceId,host,metadata,paymentHash,createdAt,type",
     });
     this.on("ready", this.loadFromStorage.bind(this));
     this.allowances = this.table("allowances");
     this.payments = this.table("payments");
     this.blocklist = this.table("blocklist");
+    this.metadata = this.table("metadata");
   }
 
   async saveToStorage() {
     const allowanceArray = await this.allowances.toArray();
     const paymentsArray = await this.payments.toArray();
     const blocklistArray = await this.blocklist.toArray();
+    const metadataArray = await this.metadata.toArray();
     await browser.storage.local.set({
       allowances: allowanceArray,
       payments: paymentsArray,
       blocklist: blocklistArray,
+      metadata: metadataArray
     });
     return true;
   }
@@ -49,7 +53,7 @@ class DB extends Dexie {
   async loadFromStorage() {
     console.info("Loading DB data from storage");
     return browser.storage.local
-      .get(["allowances", "payments", "blocklist"])
+      .get(["allowances", "payments", "blocklist", "metadata"])
       .then((result) => {
         const allowancePromise = this.allowances.count().then((count) => {
           // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
@@ -96,11 +100,27 @@ class DB extends Dexie {
           }
         });
 
+        const metadataPromise = this.metadata.count().then((count) => {
+          // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
+          if (count > 0) {
+            console.info(`Found ${count} metadata's already in the DB`);
+            return;
+          } else if (result.metadata && result.metadata.length > 0) {
+            // adding the data from the browser storage
+            return this.metadata
+              .bulkAdd(result.metadata)
+              .catch(Dexie.BulkError, function (e) {
+                console.error("Failed to add metadata; ignoring", e);
+              });
+          }
+        });
+
         // wait for all allowances and payments to be loaded
         return Promise.all([
           allowancePromise,
           paymentsPromise,
           blocklistPromise,
+          metadataPromise
         ]);
       })
       .catch((e) => {

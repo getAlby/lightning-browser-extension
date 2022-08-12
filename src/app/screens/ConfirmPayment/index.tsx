@@ -61,8 +61,8 @@ function ConfirmPayment(props: Props) {
 
     try {
       setLoading(true);
-      // not passing any metadata is also a valid metadata
-      let isMetadataValid = true;
+      // Not passing any metadata is also a valid metadata
+      let isMetadataValid: boolean = true;
       if (props.metadata != undefined) {
         const metadataObject: object = JSON.parse(props.metadata);
         isMetadataValid = MetadataValidator(metadataObject);
@@ -77,7 +77,7 @@ function ConfirmPayment(props: Props) {
         msg.reply(response);
         setSuccessMessage("Success, payment sent!");
       } else {
-        toast.error(`Error: No Valid Metadata Provided`);
+        toast.error(`Error: No valid metadata provided`);
       }
     } catch (e) {
       console.error(e);
