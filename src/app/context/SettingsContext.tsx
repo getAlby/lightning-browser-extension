@@ -48,11 +48,10 @@ export const SettingsProvider = ({
       });
   }, []);
 
-  // set locale from settings on mount
+ // update i18n on every locale change
   useEffect(() => {
     i18n.changeLanguage(settings.locale);
-  }, [settings]);
-
+  }, [settings.locale]);
   const value = {
     settings,
     updateSetting,
