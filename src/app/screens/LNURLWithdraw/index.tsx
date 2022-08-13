@@ -65,7 +65,7 @@ function LNURLWithdraw() {
       );
     } else {
       return (
-        <dl className="my-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden">
+        <div className="my-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden">
           <TextField
             id="amount"
             label="Amount (Satoshi)"
@@ -76,7 +76,7 @@ function LNURLWithdraw() {
             onChange={(e) => setValueSat(e.target.value)}
           />
           {errorMessage && <p className="mt-1 text-red-500">{errorMessage}</p>}
-        </dl>
+        </div>
       );
     }
   }

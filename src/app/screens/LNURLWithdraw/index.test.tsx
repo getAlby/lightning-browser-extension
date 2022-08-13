@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import * as SettingsContext from "~/app/context/SettingsContext";
-import type { LNURLDetails, OriginData } from "~/types";
+import type { LNURLWithdrawServiceResponse, OriginData } from "~/types";
 
 import LNURLWithdraw from "./index";
 
@@ -12,7 +12,7 @@ jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
   updateSetting: jest.fn(),
 });
 
-const mockDetails: LNURLDetails = {
+const mockDetails: LNURLWithdrawServiceResponse = {
   tag: "withdrawRequest",
   k1: "ee61ff078b637aaed980706aeb55c9385b9287f651e52f79dd91fe20835cb771",
   callback:
@@ -24,7 +24,6 @@ const mockDetails: LNURLDetails = {
     "https://lnurl.fiatjaf.com/lnurl-withdraw?session=d883e4392c3f836a484c724ab07243a2c130f047294474198063d3b748a82c8e",
   payLink: "https://lnurl.fiatjaf.com/lnurl-pay",
   domain: "lnurl.fiatjaf.com",
-  url: "https://lnurl.fiatjaf.com/lnurl-withdraw?session=d883e4392c3f836a484c724ab07243a2c130f047294474198063d3b748a82c8e",
 };
 
 const mockOrigin: OriginData = {
@@ -62,7 +61,7 @@ describe("LNURLWithdraw", () => {
     jest.clearAllMocks();
   });
 
-  test("renders via Send (popup)", async () => {
+  test("renders via Withdraw (popup)", async () => {
     render(
       <MemoryRouter>
         <LNURLWithdraw />
@@ -70,7 +69,28 @@ describe("LNURLWithdraw", () => {
     );
 
     expect(await screen.getByText("lnurl.fiatjaf.com")).toBeInTheDocument();
-    // expect(await screen.getByLabelText("Amount (Satoshi)")).toHaveValue(8); this should work, @TODO: https://github.com/getAlby/lightning-browser-extension/issues/1274
     expect(await screen.getByDisplayValue(8)).toBeInTheDocument();
+  });
+
+  test("renders input component with label", async () => {
+    render(
+      <MemoryRouter>
+        <LNURLWithdraw/>
+      </MemoryRouter>
+    );
+
+    expect(await screen.getByLabelText("Amount (Satoshi)")).toHaveValue(8);
+  });
+
+  test("doesn't render input component when minWithdrawable === maxWithdrawable", async () => {
+    mockDetails.minWithdrawable = 8000;
+    render(
+      <MemoryRouter>
+        <LNURLWithdraw/>
+      </MemoryRouter>
+    );
+
+    expect(await screen.findByText("Amount (Satoshi)")).toBeInTheDocument();
+    expect(await screen.findByText("8 sats")).toBeInTheDocument();
   });
 });
