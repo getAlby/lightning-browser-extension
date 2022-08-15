@@ -4,6 +4,7 @@ import Home from "@screens/Home";
 import Keysend from "@screens/Keysend";
 import LNURLChannel from "@screens/LNURLChannel";
 import LNURLPay from "@screens/LNURLPay";
+import LNURLWithdraw from "@screens/LNURLWithdraw";
 import Receive from "@screens/Receive";
 import Send from "@screens/Send";
 import Unlock from "@screens/Unlock";
@@ -31,6 +32,7 @@ function Popup() {
             <Route path="receive" element={<Receive />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlChannel" element={<LNURLChannel />} />
+            <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
             <Route path="keysend" element={<Keysend />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
           </Route>

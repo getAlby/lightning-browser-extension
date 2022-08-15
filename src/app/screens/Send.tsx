@@ -59,6 +59,17 @@ function Send() {
             },
           });
         }
+
+        if (lnurlDetails.tag === "withdrawRequest") {
+          navigate("/lnurlWithdraw", {
+            state: {
+              origin: getOriginData(),
+              args: {
+                lnurlDetails,
+              },
+            },
+          });
+        }
       } else if (isPubKey(invoice)) {
         navigate(`/keysend?destination=${invoice}`);
       } else {
