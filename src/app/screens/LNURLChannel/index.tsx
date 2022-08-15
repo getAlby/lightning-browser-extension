@@ -16,11 +16,10 @@ import msg from "~/common/lib/msg";
 import type { LNURLChannelServiceResponse } from "~/types";
 
 function LNURLChannel() {
-  const navState = useNavigationState();
-
-  const details = navState.args?.lnurlDetails as LNURLChannelServiceResponse;
   const navigate = useNavigate();
 
+  const navState = useNavigationState();
+  const details = navState.args?.lnurlDetails as LNURLChannelServiceResponse;
   const { uri } = details;
   const [pubkey, host] = uri.split("@");
 
@@ -63,8 +62,6 @@ function LNURLChannel() {
       // We assume this is OK when it is called through webln.
       if (navState.isPrompt) {
         msg.reply(callbackResponse?.data);
-      } else {
-        navigate(-1);
       }
     } catch (e) {
       console.error(e);
@@ -85,6 +82,13 @@ function LNURLChannel() {
     }
   }
 
+  function close(e: MouseEvent) {
+    e.preventDefault();
+    if (!navState.isPrompt) {
+      navigate(-1); // success will only be shown in popup, see comment above
+    }
+  }
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={"Channel Request"} />
@@ -101,7 +105,7 @@ function LNURLChannel() {
             />
 
             {errorMessage && (
-              <p className="mt-1 text-red-500">{errorMessage}</p>
+              <p className="my-2 mx-5 text-red-500">{errorMessage}</p>
             )}
           </div>
 
@@ -126,10 +130,7 @@ function LNURLChannel() {
             url={details.domain}
           />
           <div className="m-4">
-            <SuccessMessage
-              message={successMessage}
-              onClose={() => window.close()}
-            />
+            <SuccessMessage message={successMessage} onClose={close} />
           </div>
         </Container>
       )}
