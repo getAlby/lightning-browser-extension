@@ -3,6 +3,7 @@ import type { Message, MessageLNURLChannel } from "~/types";
 
 import authWithPrompt from "./auth";
 import channelRequestWithPrompt from "./channel";
+import lnurlAuth from "./lnurlAuth";
 import payWithPrompt from "./pay";
 import withdrawWithPrompt from "./withdraw";
 
@@ -39,4 +40,4 @@ async function lnurl(message: Message | MessageLNURLChannel) {
 }
 
 export default lnurl;
-export { authWithPrompt, payWithPrompt, withdrawWithPrompt };
+export { authWithPrompt, payWithPrompt, withdrawWithPrompt, lnurlAuth };

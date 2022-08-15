@@ -1,4 +1,3 @@
-import auth from "./auth";
 import checkPayment from "./checkPayment";
 import connectPeer from "./connectPeer";
 import getInfo from "./getInfo";
@@ -19,5 +18,4 @@ export {
   sendPayment,
   signMessage,
   verifyMessage,
-  auth,
 };
