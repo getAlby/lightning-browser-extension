@@ -13,11 +13,7 @@ import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
-import type {
-  NavigationState,
-  LNURLAuthServiceResponse,
-  RequestInvoiceArgs,
-} from "~/types";
+import type { NavigationState, RequestInvoiceArgs } from "~/types";
 
 // Parse out the parameters from the querystring.
 const params = new URLSearchParams(window.location.search);
@@ -73,18 +69,7 @@ function Prompt() {
               path="webln/enable"
               element={<Enable origin={navigationState.origin} />}
             />
-            <Route
-              path="lnurlAuth"
-              element={
-                <LNURLAuth
-                  details={
-                    navigationState.args
-                      ?.lnurlDetails as LNURLAuthServiceResponse
-                  }
-                  origin={navigationState.origin}
-                />
-              }
-            />
+            <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
             <Route path="lnurlChannel" element={<LNURLChannel />} />

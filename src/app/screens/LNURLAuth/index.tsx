@@ -4,19 +4,15 @@ import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import { MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import type { LNURLAuthServiceResponse } from "~/types";
 
-type Props = {
-  details: LNURLAuthServiceResponse;
-  origin: {
-    name: string;
-    icon: string;
-  };
-};
+function LNURLAuth() {
+  const navState = useNavigationState();
+  const details = navState.args?.lnurlDetails as LNURLAuthServiceResponse;
 
-function LNURLAuth({ details, origin }: Props) {
   const { t } = useTranslation("components", {
     keyPrefix: "confirmOrCancel",
   });
@@ -37,17 +33,19 @@ function LNURLAuth({ details, origin }: Props) {
     <Container isScreenView maxWidth="sm">
       <div>
         <PublisherCard
-          title={origin.name}
-          image={origin.icon}
+          title={navState.origin.name}
+          image={navState.origin.icon}
           url={details.domain}
         />
         <ContentMessage
-          heading={`${origin.name} asks you to login to`}
+          heading={`${navState.origin.name} asks you to login to`}
           content={details.domain}
         />
       </div>
+
       <div>
         <ConfirmOrCancel label="Login" onConfirm={confirm} onCancel={reject} />
+
         <p className="mb-4 text-center text-sm text-gray-400">
           <em>{t("only_trusted")}</em>
         </p>
