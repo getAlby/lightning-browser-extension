@@ -3,20 +3,25 @@ import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-import TextField from "@components/form/TextField";
+import DualCurrencyField from "@components/form/DualCurrencyField";
 import axios from "axios";
-import { useState, MouseEvent } from "react";
+import { useState, useEffect, MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
+import { getFiatValue } from "~/common/utils/currencyConvert";
 import type { LNURLWithdrawServiceResponse } from "~/types";
 
 function LNURLWithdraw() {
   const navigate = useNavigate();
   const navState = useNavigationState();
+
+  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const showFiat = !isLoadingSettings && settings.showFiat;
 
   const details = navState.args?.lnurlDetails as LNURLWithdrawServiceResponse;
   const { minWithdrawable, maxWithdrawable } = details;
@@ -27,6 +32,16 @@ function LNURLWithdraw() {
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [fiatValue, setFiatValue] = useState("");
+
+  useEffect(() => {
+    if (valueSat !== "" && showFiat) {
+      (async () => {
+        const res = await getFiatValue(valueSat);
+        setFiatValue(res);
+      })();
+    }
+  }, [valueSat, showFiat]);
 
   async function confirm() {
     try {
@@ -66,14 +81,14 @@ function LNURLWithdraw() {
     } else {
       return (
         <div className="my-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden">
-          <TextField
+          <DualCurrencyField
             id="amount"
             label="Amount (Satoshi)"
-            type="number"
             min={minWithdrawable / 1000}
             max={maxWithdrawable / 1000}
             value={valueSat}
             onChange={(e) => setValueSat(e.target.value)}
+            fiatValue={fiatValue}
           />
           {errorMessage && <p className="mt-1 text-red-500">{errorMessage}</p>}
         </div>
