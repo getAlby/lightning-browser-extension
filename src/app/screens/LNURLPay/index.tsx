@@ -6,7 +6,7 @@ import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
 import axios from "axios";
-import React, { useState, useEffect, MouseEvent } from "react";
+import React, { Fragment, useState, useEffect, MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
@@ -313,12 +313,14 @@ function LNURLPay() {
                 <div className="my-4">
                   <dl>
                     <>
-                      {formattedMetadata(details.metadata).map(([dt, dd]) => (
-                        <>
-                          <Dt>{dt}</Dt>
-                          <Dd>{dd}</Dd>
-                        </>
-                      ))}
+                      {formattedMetadata(details.metadata).map(
+                        ([dt, dd], i) => (
+                          <Fragment key={`element-${i}`}>
+                            <Dt>{dt}</Dt>
+                            <Dd>{dd}</Dd>
+                          </Fragment>
+                        )
+                      )}
                       {details.minSendable === details.maxSendable && (
                         <>
                           <Dt>Amount (Satoshi)</Dt>

@@ -71,7 +71,9 @@ describe("ConfirmPayment", () => {
       );
     });
 
-    await user.click(screen.getByText("Remember and set a budget"));
+    await act(() => {
+      user.click(screen.getByText("Remember and set a budget"));
+    });
 
     const input = await screen.findByLabelText("Budget");
     const satoshis = lightningPayReq.decode(paymentRequest).satoshis || 0;
