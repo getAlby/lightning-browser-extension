@@ -124,7 +124,6 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                 autoFocus
                 placeholder="sats"
                 value={budget}
-                type="number"
                 hint="This will reset the current budget"
                 fiatValue={fiatAmount}
                 onChange={(e) => setBudget(e.target.value)}
