@@ -38,8 +38,13 @@ function Send() {
       if (lnurl) {
         const lnurlDetails = await lnurlLib.getDetails(lnurl);
 
+<<<<<<< HEAD
         if (lnurlDetails.tag === "channelRequest") {
           navigate("/lnurlChannel", {
+=======
+        if (lnurlDetails.tag === "login") {
+          navigate("/lnurlAuth", {
+>>>>>>> 1ce138d9 (feat(send): add lnurlAuth route #1269)
             state: {
               origin: getOriginData(),
               args: {

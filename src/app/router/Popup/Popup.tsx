@@ -2,6 +2,7 @@ import Navbar from "@components/Navbar";
 import ConfirmPayment from "@screens/ConfirmPayment";
 import Home from "@screens/Home";
 import Keysend from "@screens/Keysend";
+import LNURLAuth from "@screens/LNURLAuth";
 import LNURLChannel from "@screens/LNURLChannel";
 import LNURLPay from "@screens/LNURLPay";
 import LNURLWithdraw from "@screens/LNURLWithdraw";
@@ -35,6 +36,7 @@ function Popup() {
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
             <Route path="keysend" element={<Keysend />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
+            <Route path="lnurlAuth" element={<LNURLAuth />} />
           </Route>
           <Route path="unlock" element={<Unlock />} />
         </Routes>
