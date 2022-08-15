@@ -140,7 +140,7 @@ function LNURLWithdraw() {
             title={navState.origin.name}
             image={navState.origin.icon}
           />
-          <div className="m-4">
+          <div className="my-4">
             <SuccessMessage message={successMessage} onClose={close} />
           </div>
         </Container>

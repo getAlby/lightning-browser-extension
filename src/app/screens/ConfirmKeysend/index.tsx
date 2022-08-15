@@ -151,7 +151,7 @@ function ConfirmKeysend(props: Props) {
             image={origin.icon}
             url={origin.host}
           />
-          <div className="m-4">
+          <div className="my-4">
             <SuccessMessage
               message={successMessage}
               onClose={() => window.close()}

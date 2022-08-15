@@ -154,7 +154,7 @@ function ConfirmPayment(props: Props) {
             image={originRef.current.icon}
             url={originRef.current.host}
           />
-          <div className="m-4">
+          <div className="my-4">
             <SuccessMessage
               message={successMessage}
               onClose={() => window.close()}

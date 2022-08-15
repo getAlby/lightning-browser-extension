@@ -129,7 +129,7 @@ function LNURLChannel() {
             image={navState.origin.icon}
             url={details.domain}
           />
-          <div className="m-4">
+          <div className="my-4">
             <SuccessMessage message={successMessage} onClose={close} />
           </div>
         </Container>
