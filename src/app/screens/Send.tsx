@@ -38,6 +38,17 @@ function Send() {
       if (lnurl) {
         const lnurlDetails = await lnurlLib.getDetails(lnurl);
 
+        if (lnurlDetails.tag === "channelRequest") {
+          navigate("/lnurlChannel", {
+            state: {
+              origin: getOriginData(),
+              args: {
+                lnurlDetails,
+              },
+            },
+          });
+        }
+
         if (lnurlDetails.tag === "payRequest") {
           navigate("/lnurlPay", {
             state: {

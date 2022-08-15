@@ -17,7 +17,6 @@ import type {
   NavigationState,
   LNURLAuthServiceResponse,
   LNURLWithdrawServiceResponse,
-  LNURLChannelServiceResponse,
   RequestInvoiceArgs,
 } from "~/types";
 
@@ -100,18 +99,7 @@ function Prompt() {
                 />
               }
             />
-            <Route
-              path="LNURLChannel"
-              element={
-                <LNURLChannel
-                  details={
-                    navigationState.args
-                      ?.lnurlDetails as LNURLChannelServiceResponse
-                  }
-                  origin={navigationState.origin}
-                />
-              }
-            />
+            <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route
               path="makeInvoice"
               element={
