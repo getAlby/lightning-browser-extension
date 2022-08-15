@@ -113,7 +113,7 @@ async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
   returns the response of the LNURL-auth login request
    or throws an error
 */
-async function auth(lnurlDetails: LNURLDetails) {
+export async function auth(lnurlDetails: LNURLDetails) {
   if (lnurlDetails.tag !== "login")
     throw new Error(
       `LNURL-AUTH FAIL: incorrect tag: ${lnurlDetails.tag} was used`
@@ -141,6 +141,7 @@ async function auth(lnurlDetails: LNURLDetails) {
   if (!url.host || !hashingKey) {
     throw new Error("Invalid input");
   }
+
   let linkingKeyPriv;
   const { settings } = state.getState();
   if (settings.isUsingLegacyLnurlAuthKey) {
@@ -166,6 +167,7 @@ async function auth(lnurlDetails: LNURLDetails) {
   loginURL.searchParams.set("sig", signedMessageDERHex);
   loginURL.searchParams.set("key", signer.pkHex);
   loginURL.searchParams.set("t", Date.now().toString());
+
   try {
     const authResponse = await axios.get<{ status: string; reason?: string }>(
       loginURL.toString()

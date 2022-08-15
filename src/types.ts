@@ -271,6 +271,18 @@ export interface MessageConnectPeer extends MessageDefault {
   action: "connectPeer";
 }
 
+export interface MessageLnurlAuth extends MessageDefault {
+  args: {
+    lnurlDetails: {
+      tag: "login";
+      k1: string;
+      url: string;
+      domain: string;
+    };
+  };
+  action: "lnurlAuth";
+}
+
 export interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node

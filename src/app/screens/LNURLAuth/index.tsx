@@ -6,6 +6,7 @@ import { MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
+import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import type { LNURLAuthServiceResponse } from "~/types";
 
@@ -18,10 +19,14 @@ function LNURLAuth() {
   });
 
   async function confirm() {
-    return await msg.reply({
-      confirmed: true,
-      remember: true,
-    });
+    if (navState.isPrompt) {
+      return await msg.reply({
+        confirmed: true,
+        remember: true,
+      });
+    } else {
+      await api.lnurlAuth({ lnurlDetails: details });
+    }
   }
 
   function reject(e: MouseEvent) {
