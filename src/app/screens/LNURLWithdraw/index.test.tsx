@@ -69,16 +69,6 @@ describe("LNURLWithdraw", () => {
     );
 
     expect(await screen.getByText("lnurl.fiatjaf.com")).toBeInTheDocument();
-    expect(await screen.getByDisplayValue(8)).toBeInTheDocument();
-  });
-
-  test("renders input component with label", async () => {
-    render(
-      <MemoryRouter>
-        <LNURLWithdraw/>
-      </MemoryRouter>
-    );
-
     expect(await screen.getByLabelText("Amount (Satoshi)")).toHaveValue(8);
   });
 
@@ -86,7 +76,7 @@ describe("LNURLWithdraw", () => {
     mockDetails.minWithdrawable = 8000;
     render(
       <MemoryRouter>
-        <LNURLWithdraw/>
+        <LNURLWithdraw />
       </MemoryRouter>
     );
 
