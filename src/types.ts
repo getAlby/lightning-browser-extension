@@ -260,7 +260,7 @@ export interface MessageAllowanceGetById extends MessageDefault {
   action: "getAllowanceById";
 }
 
-export interface MessageLNURLChannel extends MessageDefault {
+export interface MessageWebLnLnurl extends MessageDefault {
   args: { lnurlEncoded: string };
   public: boolean;
   action: "webln/lnurl";

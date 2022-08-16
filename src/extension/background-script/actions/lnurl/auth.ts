@@ -6,14 +6,17 @@ import PubSub from "pubsub-js";
 
 import utils from "../../../../common/lib/utils";
 import HashKeySigner from "../../../../common/utils/signer";
-import type { Message, LNURLDetails } from "../../../../types";
+import type { MessageWebLnLnurl, LNURLDetails } from "../../../../types";
 import db from "../../db";
 import state from "../../state";
 
 const LNURLAUTH_CANONICAL_PHRASE =
   "DO NOT EVER SIGN THIS TEXT WITH YOUR PRIVATE KEYS! IT IS ONLY USED FOR DERIVATION OF LNURL-AUTH HASHING-KEY, DISCLOSING ITS SIGNATURE WILL COMPROMISE YOUR LNURL-AUTH IDENTITY AND MAY LEAD TO LOSS OF FUNDS!";
 
-async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
+async function authWithPrompt(
+  message: MessageWebLnLnurl,
+  lnurlDetails: LNURLDetails
+) {
   if (!("host" in message.origin)) return;
 
   PubSub.publish(`lnurl.auth.start`, { message, lnurlDetails });
