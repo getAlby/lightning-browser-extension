@@ -15,7 +15,6 @@ import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
-import { getTheme } from "~/app/utils";
 import { CURRENCIES } from "~/common/constants";
 import utils from "~/common/lib/utils";
 
@@ -112,7 +111,6 @@ function Settings() {
                   await saveSetting({
                     theme: event.target.value,
                   });
-                  getTheme(); // Get the active theme and apply corresponding Tailwind classes to the document
                 }}
               >
                 <option value="dark">{t("theme.options.dark")}</option>

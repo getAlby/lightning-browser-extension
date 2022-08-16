@@ -1,6 +1,7 @@
 import i18n from "i18next";
 import { useState, useEffect, createContext, useContext } from "react";
 import { toast } from "react-toastify";
+import { getTheme } from "~/app/utils";
 import api from "~/common/lib/api";
 import { DEFAULT_SETTINGS } from "~/extension/background-script/state";
 import type { SettingsStorage } from "~/types";
@@ -50,10 +51,15 @@ export const SettingsProvider = ({
       });
   }, []);
 
-  // update i18n on every locale change
+  // update locale on every change
   useEffect(() => {
     i18n.changeLanguage(settings.locale);
   }, [settings.locale]);
+
+  // update theme on every change
+  useEffect(() => {
+    getTheme(); // Get the active theme and apply corresponding Tailwind classes to the document
+  }, [settings.theme]);
 
   const value = {
     settings,
