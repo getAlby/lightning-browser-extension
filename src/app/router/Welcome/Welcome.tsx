@@ -9,6 +9,7 @@ import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
+import { SettingsProvider } from "~/app/context/SettingsContext";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
 import i18n from "~/i18n/i18nConfig";
 import { translationI18nNamespace } from "~/i18n/namespaces";
@@ -71,9 +72,11 @@ const initialSteps: Step[] = routes.map((route) => ({
 
 function WelcomeRouter() {
   return (
-    <Router>
-      <App />
-    </Router>
+    <SettingsProvider>
+      <Router>
+        <App />
+      </Router>
+    </SettingsProvider>
   );
 }
 
