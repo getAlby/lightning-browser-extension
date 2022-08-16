@@ -14,6 +14,7 @@ import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
 import getOriginData from "~/extension/content-script/originData";
+import { MetadataValidator } from "~/schema/metadataValidator";
 import type { OriginData } from "~/types";
 
 export type Props = {
@@ -60,14 +61,24 @@ function ConfirmPayment(props: Props) {
 
     try {
       setLoading(true);
-      const response = await utils.call(
-        "sendPayment",
-        { paymentRequest: paymentRequestRef.current },
-        { origin: originRef.current, metadata: metadataRef.current }
-      );
-      auth.fetchAccountInfo(); // Update balance.
-      msg.reply(response);
-      setSuccessMessage("Success, payment sent!");
+      // Not passing any metadata is also a valid metadata
+      let isMetadataValid: boolean = true;
+      if (props.metadata != undefined) {
+        const metadataObject: object = JSON.parse(props.metadata);
+        isMetadataValid = MetadataValidator(metadataObject);
+      }
+      if (isMetadataValid) {
+        const response = await utils.call(
+          "sendPayment",
+          { paymentRequest: paymentRequestRef.current },
+          { origin: originRef.current, metadata: metadataRef.current }
+        );
+        auth.fetchAccountInfo(); // Update balance.
+        msg.reply(response);
+        setSuccessMessage("Success, payment sent!");
+      } else {
+        toast.error(`Error: No valid metadata provided`);
+      }
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);

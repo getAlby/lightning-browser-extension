@@ -85,6 +85,7 @@ const utils = {
       details: data.details,
       paymentRequestDetails: data.paymentRequestDetails,
       origin: message.origin,
+      metadata: message.metadata,
     });
   },
   openPage: (page: string) => {
@@ -96,9 +97,12 @@ const utils = {
   openUrl: (url: string) => {
     browser.tabs.create({ url });
   },
+  // @param message
+  // @param message.metadata is optional, so that it doesnt conflict with lnurl openPrompt function call
   openPrompt: <Type>(message: {
     args: Record<string, unknown>;
     origin: OriginData | OriginDataInternal;
+    metadata?: string;
     action: string;
   }): Promise<{ data: Type }> => {
     const urlParams = new URLSearchParams();
@@ -109,6 +113,9 @@ const utils = {
     // passing on the message origin to the prompt if present
     if (message.origin) {
       urlParams.set("origin", JSON.stringify(message.origin));
+    }
+    if (message.metadata) {
+      urlParams.set("metadata", message.metadata);
     }
     // action must always be present, this is used to route the request
     urlParams.set("action", message.action);
