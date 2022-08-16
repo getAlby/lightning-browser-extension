@@ -48,10 +48,11 @@ export const SettingsProvider = ({
       });
   }, []);
 
- // update i18n on every locale change
+  // update i18n on every locale change
   useEffect(() => {
     i18n.changeLanguage(settings.locale);
   }, [settings.locale]);
+
   const value = {
     settings,
     updateSetting,

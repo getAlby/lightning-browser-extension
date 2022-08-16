@@ -2,6 +2,9 @@
   "translation": {
     "welcome": {
       "heading": "आपके ब्राउज़र में लाइटनिंग नेटवर्क की शक्ति"
+    },
+    "settings": {
+      "headline": "समायोजन"
     }
   },
   "common": {},
