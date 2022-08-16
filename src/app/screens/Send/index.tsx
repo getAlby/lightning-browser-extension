@@ -11,12 +11,15 @@ import QrcodeScanner from "@components/QrcodeScanner";
 import TextField from "@components/form/TextField";
 import lightningPayReq from "bolt11";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import lnurlLib from "~/common/lib/lnurl";
 import getOriginData from "~/extension/content-script/originData";
 
 function Send() {
+  const { t } = useTranslation("translation", { keyPrefix: "send" });
+
   const [invoice, setInvoice] = useState("");
   const navigate = useNavigate();
   const [qrIsOpen, setQrIsOpen] = useState(false);
@@ -101,7 +104,7 @@ function Send() {
     return (
       <div>
         <Header
-          title="Waiting to scan invoice"
+          title={t("qrcode.title")}
           headerRight={
             <IconButton
               onClick={() => setQrIsOpen(false)}
@@ -128,7 +131,7 @@ function Send() {
   return (
     <div>
       <Header
-        title="Send"
+        title={t("title")}
         headerLeft={
           <IconButton
             onClick={() => navigate("/")}
@@ -141,8 +144,8 @@ function Send() {
           <form onSubmit={handleSubmit}>
             <TextField
               id="invoice"
-              label="Lightning Invoice"
-              placeholder="Paste invoice, lnurl or lightning address"
+              label={t("input.label")}
+              placeholder={t("input.placeholder")}
               value={invoice}
               disabled={loading}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -163,7 +166,7 @@ function Send() {
             <div className="mt-4">
               <Button
                 type="submit"
-                label="Continue"
+                label={t("submit.label")}
                 primary
                 fullWidth
                 loading={loading}
