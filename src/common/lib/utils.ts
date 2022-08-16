@@ -27,7 +27,13 @@ const utils = {
       })
       .then((response: { data: T; error?: string }) => {
         if (response.error) {
-          toast.error(response.error);
+          // trigger toast only on screens which contain <ToastContainer />
+          // otherwise toast are cached and appear in a different context again => see ticket #1286
+          // Also, Screen "Unlock" has it's own UI error rendering
+          if (action !== "unlock") {
+            toast.error(response.error);
+          }
+          // TBD: Or remove toast from this file completely, and ensure that toast are triggered on all Components where needed (=> larger refactor, remove this comment before merge)
           throw new Error(response.error);
         }
         return response.data;
