@@ -146,7 +146,9 @@ function Send() {
               value={invoice}
               disabled={loading}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setInvoice(event.target.value)
+                setInvoice(
+                  event.target.value.trim().replace(/^lightning:/i, "")
+                )
               }
               endAdornment={
                 <button
