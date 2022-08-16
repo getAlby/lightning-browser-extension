@@ -17,7 +17,6 @@ import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { getTheme } from "~/app/utils";
 import { CURRENCIES } from "~/common/constants";
-import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
 
 const initialFormData = {
@@ -53,7 +52,6 @@ function Settings() {
   ) {
     // ensure to update SettingsContext
     updateSetting(setting);
-    await api.setSetting(setting);
   }
 
   return (

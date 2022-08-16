@@ -22,14 +22,16 @@ export const SettingsProvider = ({
 }) => {
   const [settings, setSettings] =
     useState<SettingsContextType["settings"]>(DEFAULT_SETTINGS);
-
   const [isLoading, setIsLoading] = useState(true);
+
   // call this to trigger a re-render on all occassions
-  const updateSetting = (setting: Setting) =>
+  const updateSetting = async (setting: Setting) => {
     setSettings((prevState) => ({
       ...prevState,
       ...setting,
     }));
+    await api.setSetting(setting); // updates browser storage as well
+  };
 
   // Invoked only on on mount.
   useEffect(() => {

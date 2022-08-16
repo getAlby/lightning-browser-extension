@@ -2,7 +2,6 @@ import type { FallbackLng } from "i18next";
 import { useState, useEffect } from "react";
 import type { ChangeEvent } from "react";
 import { useSettings } from "~/app/context/SettingsContext";
-import api from "~/common/lib/api";
 import i18n from "~/i18n/i18nConfig";
 
 import Select from "../form/Select";
@@ -27,7 +26,6 @@ export default function LocaleSwitcher() {
     if (dropdownLang !== newLanguage) {
       setDropdownLang(newLanguage);
       updateSetting({ locale: newLanguage });
-      await api.setSetting({ locale: newLanguage });
     }
   };
 
