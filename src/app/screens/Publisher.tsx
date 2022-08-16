@@ -6,6 +6,7 @@ import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSettings } from "~/app/context/SettingsContext";
 import utils from "~/common/lib/utils";
@@ -15,6 +16,9 @@ import type { Allowance, Transaction } from "~/types";
 dayjs.extend(relativeTime);
 
 function Publisher() {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "publishers",
+  });
   const { isLoading: isLoadingSettings, settings } = useSettings();
 
   const hasFetchedData = useRef(false);
@@ -108,13 +112,17 @@ function Publisher() {
           isSmall={false}
         />
       </div>
+
       {allowance && (
         <Container>
           <div className="flex justify-between items-center pt-8 pb-4">
             <dl>
-              <dt className="text-sm font-medium text-gray-500">Allowance</dt>
+              <dt className="text-sm font-medium text-gray-500">
+                {t("allowance.title")}
+              </dt>
               <dd className="flex items-center font-bold text-xl dark:text-neutral-400">
-                {allowance.usedBudget} / {allowance.totalBudget} sats used
+                {allowance.usedBudget} / {allowance.totalBudget}{" "}
+                {t("allowance.usedBudget")}
                 <div className="ml-3 w-24">
                   <Progressbar percentage={allowance.percentage} />
                 </div>

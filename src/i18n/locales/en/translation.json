@@ -252,6 +252,7 @@
         "confirm_password_label": "Confirm new password:"
       }
     },
+
     "send": {
       "title": "Send",
       "qrcode": {
@@ -291,6 +292,9 @@
         "waiting": { "info": "waiting for payment..." },
         "status": { "label": "Check payment status" }
       }
+    },
+    "publisher": {
+      "allowance": { "title": "Allowance", "usedBudget": "sats used" }
     }
   },
   "common": {
