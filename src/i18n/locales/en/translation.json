@@ -332,6 +332,7 @@
     "settings": "Settings",
     "websites": "Websites",
     "sats": "sats",
+    "loading": "loading",
     "actions": {
       "delete": "Delete",
       "edit": "Edit",
