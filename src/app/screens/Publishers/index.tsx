@@ -1,6 +1,7 @@
 import Container from "@components/Container";
 import PublishersTable from "@components/PublishersTable";
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import utils from "~/common/lib/utils";
 import { Allowance, Publisher } from "~/types";
@@ -8,6 +9,10 @@ import { Allowance, Publisher } from "~/types";
 import websites from "./websites.json";
 
 function Publishers() {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "publishers",
+  });
+
   const [publishers, setPublishers] = useState<Publisher[]>([]);
   const navigate = useNavigate();
 
@@ -75,29 +80,37 @@ function Publishers() {
   return (
     <Container>
       <h2 className="mt-12 mb-2 text-2xl font-bold dark:text-white">
-        Your ⚡️ Websites
+        {t("used.title")}
       </h2>
+
       <p className="mb-6 text-gray-500 dark:text-neutral-500">
-        Websites where you have used Alby before
+        {t("used.subtitle")}
       </p>
+
       {publishers.length > 0 ? (
         <PublishersTable
           publishers={publishers}
           navigateToPublisher={navigateToPublisher}
         />
       ) : (
-        <p className="dark:text-white">No websites yet.</p>
+        <p className="dark:text-white"> {t("used.none-info")}</p>
       )}
+
       <h2 className="mt-12 mb-2 text-2xl font-bold dark:text-white">
-        Other ⚡️ Websites
+        {t("suggestions.title")}
       </h2>
+
       <p className="mb-6 text-gray-500 dark:text-neutral-500">
-        Websites where you can use Alby
+        {t("suggestions.subtitle")}
       </p>
+
       <div className="mb-12">
         {websites.map(({ title, items }) => (
           <div className="mb-6" key={title}>
-            <h4 className="mb-4 text-xl font-bold dark:text-white">{title}</h4>
+            <h4 className="mb-4 text-xl font-bold dark:text-white">
+              {t(`suggestions.list.${title}`)}
+            </h4>
+
             <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {items.map(({ title, subtitle, logo, url }) => (
                 <a key={url} href={url} target="_blank" rel="noreferrer">
@@ -108,10 +121,12 @@ function Publishers() {
                         alt="image"
                         className="h-14 w-14 rounded-xl shadow-md object-cover"
                       />
+
                       <div>
                         <h2 className="font-medium font-serif text-base dark:text-white">
                           {title}
                         </h2>
+
                         <p className="font-serif text-sm font-normal text-gray-500 dark:text-neutral-500 line-clamp-3">
                           {subtitle}
                         </p>
