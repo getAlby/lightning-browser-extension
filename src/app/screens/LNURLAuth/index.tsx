@@ -4,6 +4,7 @@ import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import { MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
@@ -11,21 +12,32 @@ import msg from "~/common/lib/msg";
 import type { LNURLAuthServiceResponse } from "~/types";
 
 function LNURLAuth() {
+  const navigate = useNavigate();
+
   const navState = useNavigationState();
-  const details = navState.args?.lnurlDetails as LNURLAuthServiceResponse;
+  const details = navState.args?.lnurlDetails as LNURLAuthServiceResponse & {
+    url: string;
+  };
 
   const { t } = useTranslation("components", {
     keyPrefix: "confirmOrCancel",
   });
 
   async function confirm() {
-    if (navState.isPrompt) {
-      return await msg.reply({
+    const response = await api.lnurlAuth({
+      origin: navState.origin,
+      lnurlDetails: details,
+      options: {
         confirmed: true,
         remember: true,
-      });
+        isPrompt: !!navState.isPrompt,
+      },
+    });
+
+    if (navState.isPrompt) {
+      return await msg.reply(response);
     } else {
-      await api.lnurlAuth({ lnurlDetails: details });
+      navigate(-1);
     }
   }
 

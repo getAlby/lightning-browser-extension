@@ -112,7 +112,7 @@ export const getBlocklist = (host: string) =>
   utils.call<BlocklistRes>("getBlocklist", { host });
 export const getInvoices = (options?: MessageInvoices["args"]) =>
   utils.call<GetInvoicesResponse["data"]>("getInvoices", options);
-export const lnurlAuth = (options?: FixMe) => {
+export const lnurlAuth = (options: MessageLnurlAuth["args"]) => {
   utils.call<MessageLnurlAuth["args"]>("lnurlAuth", options);
 };
 

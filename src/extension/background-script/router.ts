@@ -2,7 +2,7 @@ import * as accounts from "./actions/accounts";
 import * as allowances from "./actions/allowances";
 import * as blocklist from "./actions/blocklist";
 import * as ln from "./actions/ln";
-import lnurl, { lnurlAuth } from "./actions/lnurl";
+import lnurl, { auth } from "./actions/lnurl";
 import * as payments from "./actions/payments";
 import * as settings from "./actions/settings";
 import * as setup from "./actions/setup";
@@ -57,7 +57,7 @@ const routes = {
   getBlocklist: blocklist.get,
   listBlocklist: blocklist.list,
   lnurl: lnurl,
-  lnurlAuth: lnurlAuth,
+  lnurlAuth: auth,
 };
 
 const router = (path: FixMe) => {

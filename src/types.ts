@@ -271,13 +271,19 @@ export interface MessageConnectPeer extends MessageDefault {
   action: "connectPeer";
 }
 
-export interface MessageLnurlAuth extends MessageDefault {
+export interface MessageLnurlAuth {
   args: {
+    origin: OriginData;
     lnurlDetails: {
       tag: "login";
       k1: string;
       url: string;
       domain: string;
+    };
+    options: {
+      confirmed: boolean;
+      remember: boolean;
+      isPrompt: boolean;
     };
   };
   action: "lnurlAuth";

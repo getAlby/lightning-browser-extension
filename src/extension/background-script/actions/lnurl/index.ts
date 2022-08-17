@@ -1,9 +1,9 @@
 import lnurlLib from "~/common/lib/lnurl";
 import type { MessageWebLnLnurl } from "~/types";
 
-import authWithPrompt from "./auth";
+import auth from "./auth";
+import authWithPrompt from "./authWithPrompt";
 import channelRequestWithPrompt from "./channel";
-import lnurlAuth from "./lnurlAuth";
 import payWithPrompt from "./pay";
 import withdrawWithPrompt from "./withdraw";
 
@@ -35,4 +35,4 @@ async function lnurl(message: MessageWebLnLnurl) {
 }
 
 export default lnurl;
-export { authWithPrompt, payWithPrompt, withdrawWithPrompt, lnurlAuth };
+export { authWithPrompt, payWithPrompt, withdrawWithPrompt, auth };
