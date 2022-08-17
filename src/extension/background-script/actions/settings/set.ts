@@ -1,8 +1,8 @@
-import { Message } from "~/types";
+import { MessageSettingsSet } from "~/types";
 
 import state from "../../state";
 
-const set = async (message: Message) => {
+const set = async (message: MessageSettingsSet) => {
   const { settings } = state.getState();
   const { setting } = message.args;
   if (typeof setting === "object") {

@@ -283,6 +283,11 @@ export interface MessageLnurlAuth extends MessageDefault {
   action: "lnurlAuth";
 }
 
+export interface MessageSettingsSet extends MessageDefault {
+  args: { setting: Partial<SettingsStorage> };
+  action: "setSetting";
+}
+
 export interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node

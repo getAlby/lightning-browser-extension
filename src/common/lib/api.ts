@@ -14,6 +14,7 @@ import type {
   MessageInvoices,
   DbPayment,
   MessageLnurlAuth,
+  MessageSettingsSet,
 } from "~/types";
 
 import {
@@ -96,9 +97,7 @@ export const makeInvoice = ({ amount, memo }: MakeInvoiceArgs) =>
   utils.call<MakeInvoiceResponse["data"]>("makeInvoice", { amount, memo });
 export const connectPeer = ({ host, pubkey }: ConnectPeerArgs) =>
   utils.call<ConnectPeerResponse["data"]>("connectPeer", { host, pubkey });
-export const setSetting = (
-  setting: Record<string, string | number | boolean>
-) =>
+export const setSetting = (setting: MessageSettingsSet["args"]["setting"]) =>
   utils.call<SettingsStorage>("setSetting", {
     setting,
   });
