@@ -12,6 +12,7 @@ import Loading from "@components/Loading";
 import TextField from "@components/form/TextField";
 import { useState, useEffect, useRef } from "react";
 import Confetti from "react-confetti";
+import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -25,6 +26,8 @@ import { poll } from "~/common/utils/helpers";
 import DualCurrencyField from "../components/form/DualCurrencyField";
 
 function Receive() {
+  const { t } = useTranslation("translation", { keyPrefix: "receive" });
+
   const auth = useAccount();
   const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
@@ -125,7 +128,7 @@ function Receive() {
                 <div className="inline-block bg-green-bitcoin p-1 rounded-full mb-2">
                   <CheckIcon className="w-7 h-7 text-white" />
                 </div>
-                <p className="text-lg font-bold">Payment received!</p>
+                <p className="text-lg font-bold">{t("success.title")}</p>
               </div>
             </div>
           )}
@@ -137,9 +140,9 @@ function Receive() {
                 onClick={async () => {
                   try {
                     navigator.clipboard.writeText(invoice.paymentRequest);
-                    setCopyLabel("Copied!");
+                    setCopyLabel(t("copied.label"));
                     setTimeout(() => {
-                      setCopyLabel("Copy");
+                      setCopyLabel(t("copy.label"));
                     }, 1000);
                   } catch (e) {
                     if (e instanceof Error) {
@@ -155,13 +158,13 @@ function Receive() {
               {pollingForPayment && (
                 <div className="flex items-center space-x-2 dark:text-white">
                   <Loading />
-                  <span>waiting for payment...</span>
+                  <span>{t("waiting.info")}</span>
                 </div>
               )}
               {!pollingForPayment && (
                 <Button
                   onClick={() => checkPayment(invoice.rHash)}
-                  label="Check payment status"
+                  label={t("status.label")}
                 />
               )}
             </div>
@@ -185,7 +188,7 @@ function Receive() {
   return (
     <div>
       <Header
-        title="Receive"
+        title={t("title")}
         headerLeft={
           <IconButton
             onClick={() => navigate("/")}
@@ -203,8 +206,8 @@ function Receive() {
                 <div className="mb-4">
                   <DualCurrencyField
                     id="amount"
-                    label="Amount"
-                    placeholder="Amount in Satoshi..."
+                    label={t("amount.label")}
+                    placeholder={t("amount.placeholder")}
                     fiatValue={fiatAmount}
                     onChange={handleChange}
                   />
@@ -213,8 +216,8 @@ function Receive() {
                 <div className="mb-4">
                   <TextField
                     id="description"
-                    label="Description"
-                    placeholder="For e.g. who is sending this payment?"
+                    label={t("description.label")}
+                    placeholder={t("description.placeholder")}
                     onChange={handleChange}
                   />
                 </div>
@@ -223,7 +226,7 @@ function Receive() {
                   <div className="mb-4">
                     <Button
                       onClick={createInvoice}
-                      label="Create Invoice"
+                      label={t("submit.label")}
                       fullWidth
                       primary
                       loading={loading}

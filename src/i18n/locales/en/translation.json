@@ -251,6 +251,46 @@
         "choose_password_label": "Enter new password:",
         "confirm_password_label": "Confirm new password:"
       }
+    },
+    "send": {
+      "title": "Send",
+      "qrcode": {
+        "title": "Waiting to scan invoice"
+      },
+      "input": {
+        "label": "Lightning Invoice",
+        "placeholder": "Paste invoice, lnurl or lightning address"
+      },
+      "submit": {
+        "label": "Continue"
+      }
+    },
+    "receive": {
+      "title": "Receive",
+      "amount": {
+        "label": "Amount",
+        "placeholder": "Amount in Satoshi..."
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "For e.g. who is sending this payment?"
+      },
+      "submit": {
+        "label": "Create Invoice"
+      },
+      "success": {
+        "title": "Payment received!"
+      },
+      "copy": {
+        "label": "Copy"
+      },
+      "copied": {
+        "label": "Copied!"
+      },
+      "payment": {
+        "waiting": { "info": "waiting for payment..." },
+        "status": { "label": "Check payment status" }
+      }
     }
   },
   "common": {
