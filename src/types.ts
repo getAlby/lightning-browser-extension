@@ -271,6 +271,18 @@ export interface MessageConnectPeer extends MessageDefault {
   action: "connectPeer";
 }
 
+export interface MessageLnurlAuth extends MessageDefault {
+  args: {
+    lnurlDetails: {
+      tag: "login";
+      k1: string;
+      url: string;
+      domain: string;
+    };
+  };
+  action: "lnurlAuth";
+}
+
 export interface MessageSettingsSet extends MessageDefault {
   args: { setting: Partial<SettingsStorage> };
   action: "setSetting";

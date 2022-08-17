@@ -13,6 +13,7 @@ import type {
   SettingsStorage,
   MessageInvoices,
   DbPayment,
+  MessageLnurlAuth,
   MessageSettingsSet,
 } from "~/types";
 
@@ -111,6 +112,9 @@ export const getBlocklist = (host: string) =>
   utils.call<BlocklistRes>("getBlocklist", { host });
 export const getInvoices = (options?: MessageInvoices["args"]) =>
   utils.call<GetInvoicesResponse["data"]>("getInvoices", options);
+export const lnurlAuth = (options?: FixMe) => {
+  utils.call<MessageLnurlAuth["args"]>("lnurlAuth", options);
+};
 
 export default {
   getAccountInfo,
@@ -131,4 +135,5 @@ export default {
   unlock,
   getBlocklist,
   getInvoices,
+  lnurlAuth,
 };

@@ -49,6 +49,17 @@ function Send() {
           });
         }
 
+        if (lnurlDetails.tag === "login") {
+          navigate("/lnurlAuth", {
+            state: {
+              origin: getOriginData(),
+              args: {
+                lnurlDetails,
+              },
+            },
+          });
+        }
+
         if (lnurlDetails.tag === "payRequest") {
           navigate("/lnurlPay", {
             state: {
