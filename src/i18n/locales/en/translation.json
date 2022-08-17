@@ -343,7 +343,8 @@
       "unlock": "Unlock",
       "send": "Send",
       "save": "Save",
-      "receive": "Receive"
+      "receive": "Receive",
+      "enable_now": "Enable Now"
     },
     "errors": {
       "connection_failed": "Connection failed"
