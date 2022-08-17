@@ -1,6 +1,7 @@
 import i18n from "i18next";
 import { useState, useEffect, createContext, useContext } from "react";
 import { toast } from "react-toastify";
+import { getTheme } from "~/app/utils";
 import api from "~/common/lib/api";
 import { DEFAULT_SETTINGS } from "~/extension/background-script/state";
 import type { SettingsStorage } from "~/types";
@@ -22,14 +23,16 @@ export const SettingsProvider = ({
 }) => {
   const [settings, setSettings] =
     useState<SettingsContextType["settings"]>(DEFAULT_SETTINGS);
-
   const [isLoading, setIsLoading] = useState(true);
+
   // call this to trigger a re-render on all occassions
-  const updateSetting = (setting: Setting) =>
+  const updateSetting = async (setting: Setting) => {
     setSettings((prevState) => ({
       ...prevState,
       ...setting,
     }));
+    await api.setSetting(setting); // updates browser storage as well
+  };
 
   // Invoked only on on mount.
   useEffect(() => {
@@ -48,10 +51,15 @@ export const SettingsProvider = ({
       });
   }, []);
 
-  // update i18n on every locale change
+  // update locale on every change
   useEffect(() => {
     i18n.changeLanguage(settings.locale);
   }, [settings.locale]);
+
+  // update theme on every change
+  useEffect(() => {
+    getTheme(); // Get the active theme and apply corresponding Tailwind classes to the document
+  }, [settings.theme]);
 
   const value = {
     settings,
