@@ -67,8 +67,6 @@ function LNURLAuth() {
           details,
           origin,
         });
-
-        return { error: e.message };
       }
     }
   }

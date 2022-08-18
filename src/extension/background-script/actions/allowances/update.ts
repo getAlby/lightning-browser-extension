@@ -1,7 +1,7 @@
 import db from "~/extension/background-script/db";
 import type { Allowance, MessageAllowanceUpdate } from "~/types";
 
-type OptionalPick<T, K extends keyof T> = { [P in K]?: T[P] }; // can thsi just be pick?
+type OptionalPick<T, K extends keyof T> = { [P in K]?: T[P] };
 
 const updateAllowance = async (message: MessageAllowanceUpdate) => {
   const id = message.args.id;
