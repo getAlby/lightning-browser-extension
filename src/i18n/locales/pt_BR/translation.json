@@ -260,6 +260,50 @@
                 "title": "Sats para Fiat",
                 "subtitle": "Mostrar os valores também em moeda fiat usando o serviço provedor de cotações selecionado"
             }
+        },
+        "send": {
+            "qrcode": {
+                "title": "Aguardando leitura da fatura"
+            },
+            "input": {
+                "label": "Dados de cobrança",
+                "placeholder": "Cole uma fatura, lnurl ou um endereço relâmpago"
+            },
+            "submit": {
+                "label": "Continuar"
+            },
+            "title": "Enviar"
+        },
+        "receive": {
+            "title": "Receber",
+            "amount": {
+                "label": "Quantia",
+                "placeholder": "Quantia em Satoshi..."
+            },
+            "submit": {
+                "label": "Cobrar"
+            },
+            "success": {
+                "title": "Pagamento recebido!"
+            },
+            "copy": {
+                "label": "Copiar"
+            },
+            "copied": {
+                "label": "Copiado!"
+            },
+            "payment": {
+                "waiting": {
+                    "info": "aguardando pagamento..."
+                },
+                "status": {
+                    "label": "Verificar status do pagamento"
+                }
+            },
+            "description": {
+                "label": "Descrição",
+                "placeholder": "Por ex, quem está enviando este pagamento?"
+            }
         }
     },
     "common": {
@@ -282,7 +326,7 @@
             "scan_qrcode": "Ler Código QR",
             "start_scanning": "Iniciar leitura",
             "stop_scanning": "Parar leitura",
-            "allow_camera_access": "Permita o acesso à câmera na tela Configurações."
+            "allow_camera_access": "Permita o acesso à câmera na tela configurações."
         },
         "transactionsTable": {
             "fee": "Taxa",
