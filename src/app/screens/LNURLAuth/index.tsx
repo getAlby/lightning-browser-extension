@@ -21,6 +21,7 @@ function LNURLAuth() {
   const details = navState.args?.lnurlDetails as LNURLAuthServiceResponse & {
     url: string;
   };
+  const origin = navState.origin;
 
   const { t } = useTranslation("components", {
     keyPrefix: "confirmOrCancel",
@@ -29,7 +30,7 @@ function LNURLAuth() {
   async function confirm() {
     try {
       const response = (await api.lnurlAuth({
-        origin: navState.origin,
+        origin,
         lnurlDetails: details,
       })) as unknown as AxiosResponse;
 
@@ -39,13 +40,11 @@ function LNURLAuth() {
           PubSub.publish(`lnurl.auth.failed`, {
             authResponse: response,
             details,
-            origin: navState.origin,
+            origin,
           });
-          // return { error: authResponse?.data?.reason };
         }
 
-        const allowance = await api.getAllowance(navState.origin.host);
-
+        const allowance = await api.getAllowance(origin.host);
         await utils.call("updateAllowance", {
           id: allowance.id,
           lnurlAuth: true,
@@ -54,7 +53,7 @@ function LNURLAuth() {
         PubSub.publish(`lnurl.auth.success`, {
           authResponse: response,
           details,
-          origin: navState.origin,
+          origin,
         });
 
         return await msg.reply(response);
@@ -66,7 +65,7 @@ function LNURLAuth() {
         PubSub.publish(`lnurl.auth.failed`, {
           error: e.message,
           details,
-          origin: navState.origin,
+          origin,
         });
 
         return { error: e.message };
@@ -83,12 +82,12 @@ function LNURLAuth() {
     <Container isScreenView maxWidth="sm">
       <div>
         <PublisherCard
-          title={navState.origin.name}
-          image={navState.origin.icon}
+          title={origin.name}
+          image={origin.icon}
           url={details.domain}
         />
         <ContentMessage
-          heading={`${navState.origin.name} asks you to login to`}
+          heading={`${origin.name} asks you to login to`}
           content={details.domain}
         />
       </div>
