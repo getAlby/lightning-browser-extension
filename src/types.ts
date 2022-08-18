@@ -243,9 +243,10 @@ export interface MessageAllowanceDelete extends MessageDefault {
 
 export interface MessageAllowanceUpdate extends MessageDefault {
   args: {
-    enabled: Allowance["enabled"];
+    enabled?: Allowance["enabled"];
     id: Allowance["id"];
-    totalBudget: Allowance["totalBudget"];
+    lnurlAuth?: Allowance["lnurlAuth"];
+    totalBudget?: Allowance["totalBudget"];
   };
   action: "updateAllowance";
 }
@@ -279,11 +280,6 @@ export interface MessageLnurlAuth {
       k1: string;
       url: string;
       domain: string;
-    };
-    options: {
-      confirmed: boolean;
-      remember: boolean;
-      isPrompt: boolean;
     };
   };
   action: "lnurlAuth";

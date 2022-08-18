@@ -1,14 +1,14 @@
 import db from "~/extension/background-script/db";
 import type { Allowance, MessageAllowanceUpdate } from "~/types";
 
-type OptionalPick<T, K extends keyof T> = { [P in K]?: T[P] };
+type OptionalPick<T, K extends keyof T> = { [P in K]?: T[P] }; // can thsi just be pick?
 
 const updateAllowance = async (message: MessageAllowanceUpdate) => {
   const id = message.args.id;
 
   const update: OptionalPick<
     Allowance,
-    "totalBudget" | "remainingBudget" | "enabled"
+    "totalBudget" | "remainingBudget" | "enabled" | "lnurlAuth"
   > = {};
   if (Object.prototype.hasOwnProperty.call(message.args, "totalBudget")) {
     update.totalBudget = message.args.totalBudget;

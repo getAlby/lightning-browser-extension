@@ -2,10 +2,8 @@ import axios from "axios";
 import Hex from "crypto-js/enc-hex";
 import hmacSHA256 from "crypto-js/hmac-sha256";
 import sha256 from "crypto-js/sha256";
-import PubSub from "pubsub-js";
 import utils from "~/common/lib/utils";
 import HashKeySigner from "~/common/utils/signer";
-import db from "~/extension/background-script/db";
 import state from "~/extension/background-script/state";
 import { MessageLnurlAuth, LNURLDetails } from "~/types";
 
@@ -90,68 +88,9 @@ async function authFunction(lnurlDetails: LNURLDetails) {
 }
 
 const auth = async (message: MessageLnurlAuth) => {
-  const { lnurlDetails, options, origin } = message.args;
-
-  if (options.isPrompt) {
-    try {
-      // if the user confirmed (or if we already had a publisher with lnurl auth enabled) we perform the authentication
-      if (options.confirmed) {
-        let authResponse;
-        try {
-          // Sign the message and do the authentication request to the service
-          authResponse = await authFunction(lnurlDetails);
-        } catch (e) {
-          console.error(e);
-          if (e instanceof Error) {
-            PubSub.publish(`lnurl.auth.failed`, {
-              error: e.message,
-              lnurlDetails,
-              origin: origin,
-            });
-
-            return { error: e.message };
-          }
-        }
-
-        // if the service returned with a HTTP 200 we still check if the response data is OK
-        if (authResponse?.data.status.toUpperCase() !== "OK") {
-          PubSub.publish(`lnurl.auth.failed`, {
-            authResponse: authResponse,
-            lnurlDetails,
-            origin: origin,
-          });
-          return { error: authResponse?.data?.reason };
-        }
-
-        PubSub.publish(`lnurl.auth.success`, {
-          authResponse,
-          lnurlDetails,
-          origin: origin,
-        });
-
-        // if auto login should be enabled get the publisher and update the publisher entry
-        if (options.remember) {
-          const allowance = await db.allowances
-            .where("host")
-            .equalsIgnoreCase(origin.host)
-            .first();
-
-          if (allowance?.id) {
-            await db.allowances.update(allowance.id, {
-              lnurlAuth: true,
-            });
-          }
-          await db.saveToStorage();
-        }
-        return { data: authResponse.data };
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  } else {
-    const response = await authFunction(lnurlDetails);
-    return response;
-  }
+  const { lnurlDetails } = message.args;
+  const response = await authFunction(lnurlDetails);
+  return response;
 };
 
 export default auth;

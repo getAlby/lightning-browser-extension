@@ -84,6 +84,7 @@ export const swrGetAccountInfo = async (
   });
 };
 export const getAccounts = () => utils.call<Accounts>("getAccounts");
+export const updateAllowance = () => utils.call<Accounts>("updateAllowance");
 export const selectAccount = (id: string) =>
   utils.call("selectAccount", { id });
 export const getAllowance = (host: string) =>
@@ -122,6 +123,7 @@ export default {
   getInfo,
   selectAccount,
   getAllowance,
+  updateAllowance,
   getPayments,
   getSettings,
   getStatus,
