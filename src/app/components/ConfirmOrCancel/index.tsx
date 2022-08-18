@@ -1,4 +1,5 @@
 import { MouseEventHandler } from "react";
+import { useTranslation } from "react-i18next";
 
 import Button from "../Button";
 
@@ -17,10 +18,15 @@ export default function ConfirmOrCancel({
   onConfirm,
   onCancel,
 }: Props) {
+  const { t: tCommon } = useTranslation("common");
   return (
     <div className="pt-2 pb-4">
       <div className="flex flex-row justify-between">
-        <Button onClick={onCancel} label={"Cancel"} halfWidth />
+        <Button
+          onClick={onCancel}
+          label={tCommon("actions.cancel")}
+          halfWidth
+        />
         <Button
           onClick={onConfirm}
           label={label}

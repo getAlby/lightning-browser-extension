@@ -172,6 +172,13 @@
         "scan_qr": "Import this wallet into Zeus or BlueWallet by scanning the QRCode."
       }
     },
+    "enable": {
+      "allow": "Allow {{host}} to:",
+      "request_one": "Request approval for transactions",
+      "request_two": "Request invoices and lightning information",
+      "connect": "Connect",
+      "block_and_ignore": "Block and ignore {{host}}"
+    },
     "unlock": {
       "unlock_to_continue": "Unlock to continue",
       "help_contact": {
@@ -299,7 +306,9 @@
     "actions": {
       "edit": "Edit",
       "next": "Next",
+      "cancel": "Cancel",
       "continue": "Continue",
+      "connect": "Connect",
       "unlock": "Unlock",
       "send": "Send",
       "receive": "Receive"
