@@ -10,9 +10,11 @@ const persistMetadata = async (_message, data) => {
 
   let metadata = data.metadata;
   let metadataType;
+  let contentUrl;
   if (data.metadata != undefined) {
     metadata = JSON.parse(data.metadata);
     metadataType = metadata.type;
+    contentUrl = metadata.contentUrl;
 
   }
   const paymentResponse = data.response;
@@ -23,7 +25,8 @@ const persistMetadata = async (_message, data) => {
     metadata: metadata,
     allowanceId: allowance?.id,
     createdAt: Date.now(),
-    type: metadataType
+    type: metadataType,
+    contentUrl: contentUrl
   });
   await db.saveToStorage();
   console.info(`Persisted metadata ${metadata}`);
