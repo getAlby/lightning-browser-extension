@@ -304,6 +304,13 @@
                 "label": "Descrição",
                 "placeholder": "Por ex, quem está enviando este pagamento?"
             }
+        },
+        "enable": {
+            "block_and_ignore": "Bloquear e ignorar {{host}}",
+            "allow": "Permitir {{host}}:",
+            "request_one": "Solicitar aprovação para transações",
+            "connect": "Conectar",
+            "request_two": "Solicitar faturas e informações de pagamento"
         }
     },
     "common": {
@@ -314,7 +321,9 @@
             "continue": "Continuar",
             "unlock": "Desbloquear",
             "send": "Enviar",
-            "receive": "Receber"
+            "receive": "Receber",
+            "cancel": "Cancelar",
+            "connect": "Conectar"
         },
         "errors": {
             "connection_failed": "Falha na conexão"
