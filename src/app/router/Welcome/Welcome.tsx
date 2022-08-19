@@ -44,7 +44,10 @@ function getRoutes(
           index: true,
           element: (
             <ChooseConnector
-              title={i18n.t("choose_connector.title", translationI18nNamespace)}
+              title={i18n.t(
+                "choose_connector.title.welcome",
+                translationI18nNamespace
+              )}
               description={i18n.t(
                 "choose_connector.description",
                 translationI18nNamespace
@@ -136,7 +139,7 @@ function App() {
       )}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center font-serif font-medium text-2xl pt-7 pb-3 dark:text-white">
-          <p>{t("welcome.heading")}</p>
+          <p>{t("welcome.title")}</p>
         </div>
 
         <Steps steps={steps} />

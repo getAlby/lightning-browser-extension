@@ -1,7 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "heading": "The power of lightning in your browser",
+      "title": "The power of lightning in your browser",
       "nav": {
         "welcome": "Welcome",
         "password": "Your Password",
@@ -45,8 +45,12 @@
       }
     },
     "choose_connector": {
-      "title": "Do you have a lightning wallet?",
+      "title": {
+        "welcome": "Do you have a lightning wallet?",
+        "options": "Add a new lightning account"
+      },
       "description": "You need to first connect to a lightning wallet so that you can interact with your favorite websites that accept bitcoin lightning payments!",
+      "route_label": "",
       "alby": {
         "title": "Alby Wallet",
         "description": "Create or login to your Alby account",
@@ -325,6 +329,8 @@
   "common": {
     "password": "Password",
     "success": "Success!",
+    "settings": "Settings",
+    "websites": "Websites",
     "actions": {
       "edit": "Edit",
       "next": "Next",
