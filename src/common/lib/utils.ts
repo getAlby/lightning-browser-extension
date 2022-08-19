@@ -30,6 +30,8 @@ const utils = {
           toast.error(response.error);
           throw new Error(response.error);
         }
+        console.log("UTILS", response);
+
         return response.data;
       });
   },
@@ -151,6 +153,7 @@ const utils = {
               browser.tabs.onRemoved.removeListener(onRemovedListener);
               if (sender.tab.windowId) {
                 return browser.windows.remove(sender.tab.windowId).then(() => {
+                  // remove will be moved to component for i.e. budget flow
                   if (responseMessage.error) {
                     return reject(new Error(responseMessage.error));
                   } else {

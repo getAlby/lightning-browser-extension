@@ -24,7 +24,7 @@ async function lnurl(message: MessageWebLnLnurl) {
     case "channelRequest":
       return channelRequestWithPrompt(message, lnurlDetails);
     case "login":
-      return authWithPrompt(message, lnurlDetails);
+      return authWithPrompt(message, lnurlDetails); // authOrPrompt
     case "payRequest":
       return payWithPrompt(message, lnurlDetails);
     case "withdrawRequest":

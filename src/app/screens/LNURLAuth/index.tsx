@@ -2,11 +2,13 @@ import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
-import type { AxiosResponse } from "axios";
-import PubSub from "pubsub-js";
-import { MouseEvent } from "react";
+import SuccessMessage from "@components/SuccessMessage";
+import { useState } from "react";
+import type { MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
@@ -27,77 +29,104 @@ function LNURLAuth() {
     keyPrefix: "confirmOrCancel",
   });
 
+  const [successMessage, setSuccessMessage] = useState("");
+
   async function confirm() {
+    // try catch SEE LNURLPay toast on catch
     try {
-      const response = (await api.lnurlAuth({
+      const response = await api.lnurlAuth({
         origin,
         lnurlDetails: details,
-      })) as unknown as AxiosResponse;
+      });
 
-      if (navState.isPrompt) {
-        // if the service returned with a HTTP 200 we still check if the response data is OK
-        if (response?.data.status.toUpperCase() !== "OK") {
-          PubSub.publish(`lnurl.auth.failed`, {
-            authResponse: response,
-            details,
-            origin,
-          });
-        }
+      console.log("confirm - response", response);
 
+      if (navState.isPrompt && origin.host) {
         const allowance = await api.getAllowance(origin.host);
+
+        // if  lnurlAuth: false do this:
         await utils.call("updateAllowance", {
           id: allowance.id,
           lnurlAuth: true,
         });
+      }
 
-        PubSub.publish(`lnurl.auth.success`, {
-          authResponse: response,
-          details,
-          origin,
-        });
-
-        return await msg.reply(response);
+      if (response.success) {
+        setSuccessMessage("Authenticaed successfully.");
       } else {
-        navigate(-1);
+        throw new Error("Auth status is notok");
+      }
+
+      if (navState.isPrompt) {
+        return await msg.reply(response);
       }
     } catch (e) {
+      console.error(e);
       if (e instanceof Error) {
-        PubSub.publish(`lnurl.auth.failed`, {
-          error: e.message,
-          details,
-          origin,
-        });
+        toast.error(`Error: ${e.message}`);
       }
     }
   }
 
   function reject(e: MouseEvent) {
     e.preventDefault();
-    msg.error(USER_REJECTED_ERROR);
+    if (navState.isPrompt) {
+      msg.error(USER_REJECTED_ERROR);
+    } else {
+      navigate(-1);
+    }
+  }
+
+  function close(e: MouseEvent) {
+    // will never be reached via prompt
+    e.preventDefault();
+    navigate(-1);
   }
 
   return (
-    <Container isScreenView maxWidth="sm">
-      <div>
-        <PublisherCard
-          title={origin.name}
-          image={origin.icon}
-          url={details.domain}
-        />
-        <ContentMessage
-          heading={`${origin.name} asks you to login to`}
-          content={details.domain}
-        />
-      </div>
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
+      <ScreenHeader title={"Authentication"} />
+      {!successMessage ? (
+        <>
+          <Container isScreenView maxWidth="sm">
+            <div>
+              <PublisherCard
+                title={origin.name}
+                image={origin.icon}
+                url={details.domain}
+              />
+              <ContentMessage
+                heading={`${origin.name} asks you to login to`}
+                content={details.domain}
+              />
+            </div>
 
-      <div>
-        <ConfirmOrCancel label="Login" onConfirm={confirm} onCancel={reject} />
+            <div>
+              <ConfirmOrCancel
+                label="Login"
+                onConfirm={confirm}
+                onCancel={reject}
+              />
 
-        <p className="mb-4 text-center text-sm text-gray-400">
-          <em>{t("only_trusted")}</em>
-        </p>
-      </div>
-    </Container>
+              <p className="mb-4 text-center text-sm text-gray-400">
+                <em>{t("only_trusted")}</em>
+              </p>
+            </div>
+          </Container>
+        </>
+      ) : (
+        <Container isScreenView maxWidth="sm">
+          <PublisherCard
+            title={navState.origin.name}
+            image={navState.origin.icon}
+            url={details.domain}
+          />
+          <div className="my-4">
+            <SuccessMessage message={successMessage} onClose={close} />
+          </div>
+        </Container>
+      )}
+    </div>
   );
 }
 

@@ -2,10 +2,11 @@ import axios from "axios";
 import Hex from "crypto-js/enc-hex";
 import hmacSHA256 from "crypto-js/hmac-sha256";
 import sha256 from "crypto-js/sha256";
+import PubSub from "pubsub-js";
 import utils from "~/common/lib/utils";
 import HashKeySigner from "~/common/utils/signer";
 import state from "~/extension/background-script/state";
-import { MessageLnurlAuth, LNURLDetails } from "~/types";
+import { MessageLnurlAuth, LNURLDetails, LnurlAuthResponse } from "~/types";
 
 const LNURLAUTH_CANONICAL_PHRASE =
   "DO NOT EVER SIGN THIS TEXT WITH YOUR PRIVATE KEYS! IT IS ONLY USED FOR DERIVATION OF LNURL-AUTH HASHING-KEY, DISCLOSING ITS SIGNATURE WILL COMPROMISE YOUR LNURL-AUTH IDENTITY AND MAY LEAD TO LOSS OF FUNDS!";
@@ -74,14 +75,49 @@ async function authFunction(lnurlDetails: LNURLDetails) {
     const authResponse = await axios.get<{ status: string; reason?: string }>(
       loginURL.toString()
     );
-    return authResponse;
+
+    console.log("authResponse: ", authResponse);
+
+    // if the service returned with a HTTP 200 we still check if the response data is OK
+    if (authResponse?.data.status.toUpperCase() !== "OK") {
+      throw new Error(
+        authResponse?.data?.reason || "Auth: Something went wrong"
+      );
+    } else {
+      // PubSub.publish(`lnurl.auth.success`, {
+      //   authResponse,
+      //   details: lnurlDetails,
+      //   origin,
+      // });
+
+      const response: LnurlAuthResponse = {
+        success: true,
+        status: authResponse.data.status,
+        reason: authResponse.data.reason,
+      };
+
+      return response;
+    }
   } catch (e) {
     if (axios.isAxiosError(e)) {
       console.error("LNURL-AUTH FAIL:", e);
       const error =
         (e.response?.data as { reason?: string })?.reason || e.message; // lnurl error or exception message
+
+      PubSub.publish(`lnurl.auth.failed`, {
+        error,
+        details: lnurlDetails,
+        origin,
+      });
+
       throw new Error(error);
     } else if (e instanceof Error) {
+      PubSub.publish(`lnurl.auth.failed`, {
+        error: e.message,
+        details: lnurlDetails,
+        origin,
+      });
+
       throw new Error(e.message);
     }
   }
@@ -90,7 +126,9 @@ async function authFunction(lnurlDetails: LNURLDetails) {
 const auth = async (message: MessageLnurlAuth) => {
   const { lnurlDetails } = message.args;
   const response = await authFunction(lnurlDetails);
-  return response;
+  console.log("auth - response: ", response);
+
+  return { data: response };
 };
 
 export default auth;

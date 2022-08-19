@@ -15,6 +15,7 @@ import type {
   DbPayment,
   MessageLnurlAuth,
   MessageSettingsSet,
+  LnurlAuthResponse,
 } from "~/types";
 
 import {
@@ -113,9 +114,10 @@ export const getBlocklist = (host: string) =>
   utils.call<BlocklistRes>("getBlocklist", { host });
 export const getInvoices = (options?: MessageInvoices["args"]) =>
   utils.call<GetInvoicesResponse["data"]>("getInvoices", options);
-export const lnurlAuth = (options: MessageLnurlAuth["args"]) => {
-  utils.call<MessageLnurlAuth["args"]>("lnurlAuth", options);
-};
+export const lnurlAuth = (
+  options: MessageLnurlAuth["args"]
+): Promise<LnurlAuthResponse> =>
+  utils.call<LnurlAuthResponse>("lnurlAuth", options);
 
 export default {
   getAccountInfo,

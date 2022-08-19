@@ -85,6 +85,12 @@ export type BatteryMetaTagRecipient = Pick<
   "address" | "customKey" | "customValue" | "method"
 >;
 
+export type LnurlAuthResponse = {
+  success: boolean;
+  status: string;
+  reason?: string;
+};
+
 /**
  * @deprecated Use MessageDefault instead
  */
