@@ -259,6 +259,7 @@
         "confirm_password_label": "Confirm new password:"
       }
     },
+
     "send": {
       "title": "Send",
       "qrcode": {
@@ -297,6 +298,27 @@
       "payment": {
         "waiting": { "info": "waiting for payment..." },
         "status": { "label": "Check payment status" }
+      }
+    },
+    "publishers": {
+      "used": {
+        "title": "Your ⚡️ Websites",
+        "subtitle": "Websites where you have used Alby before",
+        "none-info": "No websites yet."
+      },
+      "suggestions": {
+        "title": "Other ⚡️ Websites",
+        "subtitle": "Websites where you can use Alby",
+        "list": {
+          "Trading": "Trading",
+          "Gaming": "Gaming",
+          "Entertaiment": "Entertaiment",
+          "Shopping": "Shopping",
+          "Miscellaneous": "Miscellaneous"
+        }
+      },
+      "publisher": {
+        "allowance": { "title": "Allowance", "usedBudget": "sats used" }
       }
     }
   },
