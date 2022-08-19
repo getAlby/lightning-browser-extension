@@ -2,6 +2,7 @@ import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
+import { useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import { useSettings } from "~/app/context/SettingsContext";
 import utils from "~/common/lib/utils";
@@ -25,6 +26,8 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [budget, setBudget] = useState("0");
   const [fiatAmount, setFiatAmount] = useState("");
+  const { t } = useTranslation("components", { keyPrefix: "allowance_menu" });
+  const { t: tCommon } = useTranslation("common");
 
   useEffect(() => {
     if (budget !== "" && showFiat) {
@@ -69,13 +72,13 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
           <GearIcon className="h-6 w-6" />
         </Menu.Button>
         <Menu.List position="right">
-          <Menu.ItemButton onClick={openModal}>Edit</Menu.ItemButton>
+          <Menu.ItemButton onClick={openModal}>
+            {tCommon("actions.edit")}
+          </Menu.ItemButton>
           <Menu.ItemButton
             danger
             onClick={async () => {
-              if (
-                window.confirm("Are you sure you want to delete this website?")
-              ) {
+              if (window.confirm(t("confirm_delete"))) {
                 try {
                   await utils.call("deleteAllowance", {
                     id: allowance.id,
@@ -87,7 +90,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               }
             }}
           >
-            Delete
+            {tCommon("actions.delete")}
           </Menu.ItemButton>
         </Menu.List>
       </Menu>
@@ -97,13 +100,13 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         closeTimeoutMS={200}
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        contentLabel="Allowance Options"
+        contentLabel={t("options.label")}
         overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
         className="rounded-lg bg-white w-full max-w-lg"
       >
         <div className="p-5 flex justify-between dark:bg-surface-02dp">
           <h2 className="text-2xl font-bold dark:text-white">
-            Set a new budget
+            {t("set_budget")}
           </h2>
           <button onClick={closeModal}>
             <CrossIcon className="w-6 h-6 dark:text-white" />
@@ -120,11 +123,11 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             <div className="w-60">
               <DualCurrencyField
                 id="budget"
-                label="New budget"
+                label={t("new_budget.label")}
                 autoFocus
-                placeholder="sats"
+                placeholder={tCommon("sats")}
                 value={budget}
-                hint="This will reset the current budget"
+                hint={t("hint")}
                 fiatValue={fiatAmount}
                 onChange={(e) => setBudget(e.target.value)}
               />
@@ -134,7 +137,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
           <div className="flex justify-end p-5 dark:bg-surface-02dp">
             <Button
               type="submit"
-              label="Save"
+              label={tCommon("actions.save")}
               primary
               disabled={budget === ""}
             />

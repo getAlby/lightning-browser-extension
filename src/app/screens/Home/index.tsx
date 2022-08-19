@@ -383,7 +383,7 @@ function Home() {
             </p>
             <Button
               fullWidth
-              label="Enable now"
+              label={tCommon("actions.enable_now")}
               direction="column"
               onClick={() => unblock()}
             />
