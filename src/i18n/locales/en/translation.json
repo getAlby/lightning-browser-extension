@@ -353,9 +353,9 @@
   "components": {
     "allowance_menu": {
       "confirm_delete": "Are you sure you want to delete this website?",
-      "options_label": "Allowance Options",
+      "options": { "label": "Allowance Options" },
       "hint": "This will reset the current budget",
-      "new_budget_label": "New budget",
+      "new_budget": { "label": "New budget" },
       "set_budget": "Set a new budget"
     },
     "qrcode_scanner": {

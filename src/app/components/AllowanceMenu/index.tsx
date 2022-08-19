@@ -100,7 +100,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         closeTimeoutMS={200}
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        contentLabel={t("options_label")}
+        contentLabel={t("options.label")}
         overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
         className="rounded-lg bg-white w-full max-w-lg"
       >
@@ -123,7 +123,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             <div className="w-60">
               <DualCurrencyField
                 id="budget"
-                label={t("new_budget_label")}
+                label={t("new_budget.label")}
                 autoFocus
                 placeholder={tCommon("sats")}
                 value={budget}
