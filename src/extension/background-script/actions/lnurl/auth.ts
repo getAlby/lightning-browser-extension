@@ -16,7 +16,9 @@ const LNURLAUTH_CANONICAL_PHRASE =
   returns the response of the LNURL-auth login request
    or throws an error
 */
-async function authFunction(lnurlDetails: LNURLDetails) {
+export async function authFunction(lnurlDetails: LNURLDetails) {
+  console.log("authFunction", lnurlDetails);
+
   if (lnurlDetails.tag !== "login")
     throw new Error(
       `LNURL-AUTH FAIL: incorrect tag: ${lnurlDetails.tag} was used`
@@ -76,19 +78,19 @@ async function authFunction(lnurlDetails: LNURLDetails) {
       loginURL.toString()
     );
 
-    console.log("authResponse: ", authResponse);
-
     // if the service returned with a HTTP 200 we still check if the response data is OK
     if (authResponse?.data.status.toUpperCase() !== "OK") {
       throw new Error(
         authResponse?.data?.reason || "Auth: Something went wrong"
       );
     } else {
-      // PubSub.publish(`lnurl.auth.success`, {
-      //   authResponse,
-      //   details: lnurlDetails,
-      //   origin,
-      // });
+      console.log("origin: ", origin);
+
+      PubSub.publish(`lnurl.auth.success`, {
+        authResponse,
+        details: lnurlDetails,
+        origin,
+      });
 
       const response: LnurlAuthResponse = {
         success: true,
@@ -126,8 +128,6 @@ async function authFunction(lnurlDetails: LNURLDetails) {
 const auth = async (message: MessageLnurlAuth) => {
   const { lnurlDetails } = message.args;
   const response = await authFunction(lnurlDetails);
-  console.log("auth - response: ", response);
-
   return { data: response };
 };
 

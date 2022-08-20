@@ -4,6 +4,8 @@ import db from "~/extension/background-script/db";
 import state from "~/extension/background-script/state";
 import type { MessageWebLnLnurl, LNURLDetails } from "~/types";
 
+import { authFunction } from "./auth";
+
 async function authWithPrompt(
   message: MessageWebLnLnurl,
   lnurlDetails: LNURLDetails
@@ -25,10 +27,7 @@ async function authWithPrompt(
   // check if there is a publisher and lnurlAuth is enabled,
   // otherwise we we prompt the user
   if (isUnlocked && allowance && allowance.enabled && allowance.lnurlAuth) {
-    console.log("IS UNLOCKED UND CO");
-    // call auth
-    // loginStatus = { confirmed: true, remember: true };
-    return true;
+    return await authFunction(lnurlDetails);
   } else {
     console.log("IS LOCKED");
     try {

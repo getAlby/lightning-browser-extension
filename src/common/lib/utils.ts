@@ -30,7 +30,6 @@ const utils = {
           toast.error(response.error);
           throw new Error(response.error);
         }
-        console.log("UTILS", response);
 
         return response.data;
       });

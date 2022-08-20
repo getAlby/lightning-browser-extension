@@ -39,8 +39,6 @@ function LNURLAuth() {
         lnurlDetails: details,
       });
 
-      console.log("confirm - response", response);
-
       if (navState.isPrompt && origin.host) {
         const allowance = await api.getAllowance(origin.host);
 
