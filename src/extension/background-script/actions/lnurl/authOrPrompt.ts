@@ -10,7 +10,7 @@ import type {
 
 import { authFunction } from "./auth";
 
-async function authWithPrompt(
+async function authOrPrompt(
   message: MessageWebLnLnurl,
   lnurlDetails: LNURLDetails
 ) {
@@ -43,8 +43,7 @@ async function authWithPrompt(
         },
       };
 
-      const { data } = await utils.openPrompt<LnurlAuthResponse>(promptMessage);
-      return data;
+      return await utils.openPrompt<LnurlAuthResponse>(promptMessage);
     } catch (e) {
       // user rejected
       return { error: e instanceof Error ? e.message : e };
@@ -52,4 +51,4 @@ async function authWithPrompt(
   }
 }
 
-export default authWithPrompt;
+export default authOrPrompt;

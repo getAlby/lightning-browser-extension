@@ -2,7 +2,7 @@ import lnurlLib from "~/common/lib/lnurl";
 import type { MessageWebLnLnurl } from "~/types";
 
 import auth from "./auth";
-import authWithPrompt from "./authWithPrompt";
+import authOrPrompt from "./authOrPrompt";
 import channelRequestWithPrompt from "./channel";
 import payWithPrompt from "./pay";
 import withdrawWithPrompt from "./withdraw";
@@ -24,7 +24,7 @@ async function lnurl(message: MessageWebLnLnurl) {
     case "channelRequest":
       return channelRequestWithPrompt(message, lnurlDetails);
     case "login":
-      return authWithPrompt(message, lnurlDetails); // authOrPrompt
+      return authOrPrompt(message, lnurlDetails);
     case "payRequest":
       return payWithPrompt(message, lnurlDetails);
     case "withdrawRequest":
@@ -35,4 +35,4 @@ async function lnurl(message: MessageWebLnLnurl) {
 }
 
 export default lnurl;
-export { authWithPrompt, payWithPrompt, withdrawWithPrompt, auth };
+export { authOrPrompt, payWithPrompt, withdrawWithPrompt, auth };
