@@ -2,7 +2,11 @@ import PubSub from "pubsub-js";
 import utils from "~/common/lib/utils";
 import db from "~/extension/background-script/db";
 import state from "~/extension/background-script/state";
-import type { MessageWebLnLnurl, LNURLDetails } from "~/types";
+import type {
+  MessageWebLnLnurl,
+  LNURLDetails,
+  LnurlAuthResponse,
+} from "~/types";
 
 import { authFunction } from "./auth";
 
@@ -27,9 +31,8 @@ async function authWithPrompt(
   // check if there is a publisher and lnurlAuth is enabled,
   // otherwise we we prompt the user
   if (isUnlocked && allowance && allowance.enabled && allowance.lnurlAuth) {
-    return await authFunction(lnurlDetails);
+    return await authFunction({ lnurlDetails, origin: message.origin });
   } else {
-    console.log("IS LOCKED");
     try {
       const promptMessage = {
         ...message,
@@ -40,11 +43,7 @@ async function authWithPrompt(
         },
       };
 
-      const { data } = await utils.openPrompt<{
-        confirmed: boolean;
-        remember: boolean;
-      }>(promptMessage);
-
+      const { data } = await utils.openPrompt<LnurlAuthResponse>(promptMessage);
       return data;
     } catch (e) {
       // user rejected

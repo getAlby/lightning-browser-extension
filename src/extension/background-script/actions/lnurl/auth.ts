@@ -6,7 +6,12 @@ import PubSub from "pubsub-js";
 import utils from "~/common/lib/utils";
 import HashKeySigner from "~/common/utils/signer";
 import state from "~/extension/background-script/state";
-import { MessageLnurlAuth, LNURLDetails, LnurlAuthResponse } from "~/types";
+import {
+  MessageLnurlAuth,
+  LNURLDetails,
+  LnurlAuthResponse,
+  OriginData,
+} from "~/types";
 
 const LNURLAUTH_CANONICAL_PHRASE =
   "DO NOT EVER SIGN THIS TEXT WITH YOUR PRIVATE KEYS! IT IS ONLY USED FOR DERIVATION OF LNURL-AUTH HASHING-KEY, DISCLOSING ITS SIGNATURE WILL COMPROMISE YOUR LNURL-AUTH IDENTITY AND MAY LEAD TO LOSS OF FUNDS!";
@@ -16,9 +21,13 @@ const LNURLAUTH_CANONICAL_PHRASE =
   returns the response of the LNURL-auth login request
    or throws an error
 */
-export async function authFunction(lnurlDetails: LNURLDetails) {
-  console.log("authFunction", lnurlDetails);
-
+export async function authFunction({
+  lnurlDetails,
+  origin,
+}: {
+  lnurlDetails: LNURLDetails;
+  origin: OriginData;
+}) {
   if (lnurlDetails.tag !== "login")
     throw new Error(
       `LNURL-AUTH FAIL: incorrect tag: ${lnurlDetails.tag} was used`
@@ -84,11 +93,9 @@ export async function authFunction(lnurlDetails: LNURLDetails) {
         authResponse?.data?.reason || "Auth: Something went wrong"
       );
     } else {
-      console.log("origin: ", origin);
-
       PubSub.publish(`lnurl.auth.success`, {
         authResponse,
-        details: lnurlDetails,
+        lnurlDetails,
         origin,
       });
 
@@ -108,7 +115,7 @@ export async function authFunction(lnurlDetails: LNURLDetails) {
 
       PubSub.publish(`lnurl.auth.failed`, {
         error,
-        details: lnurlDetails,
+        lnurlDetails,
         origin,
       });
 
@@ -116,7 +123,7 @@ export async function authFunction(lnurlDetails: LNURLDetails) {
     } else if (e instanceof Error) {
       PubSub.publish(`lnurl.auth.failed`, {
         error: e.message,
-        details: lnurlDetails,
+        lnurlDetails,
         origin,
       });
 
@@ -126,8 +133,8 @@ export async function authFunction(lnurlDetails: LNURLDetails) {
 }
 
 const auth = async (message: MessageLnurlAuth) => {
-  const { lnurlDetails } = message.args;
-  const response = await authFunction(lnurlDetails);
+  const { lnurlDetails, origin } = message.args;
+  const response = await authFunction({ lnurlDetails, origin });
   return { data: response };
 };
 

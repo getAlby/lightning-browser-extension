@@ -32,7 +32,6 @@ function LNURLAuth() {
   const [successMessage, setSuccessMessage] = useState("");
 
   async function confirm() {
-    // try catch SEE LNURLPay toast on catch
     try {
       const response = await api.lnurlAuth({
         origin,
