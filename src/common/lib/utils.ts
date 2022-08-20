@@ -152,7 +152,8 @@ const utils = {
               browser.tabs.onRemoved.removeListener(onRemovedListener);
               if (sender.tab.windowId) {
                 return browser.windows.remove(sender.tab.windowId).then(() => {
-                  // remove will be moved to component for i.e. budget flow
+                  // in the future actual "remove" (closing prompt) will be moved to component for i.e. budget flow
+                  // https://github.com/getAlby/lightning-browser-extension/issues/1197
                   if (responseMessage.error) {
                     return reject(new Error(responseMessage.error));
                   } else {

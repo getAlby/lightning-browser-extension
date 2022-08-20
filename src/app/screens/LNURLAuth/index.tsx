@@ -41,17 +41,18 @@ function LNURLAuth() {
       if (navState.isPrompt && origin.host) {
         const allowance = await api.getAllowance(origin.host);
 
-        // if  lnurlAuth: false do this:
-        await utils.call("updateAllowance", {
-          id: allowance.id,
-          lnurlAuth: true,
-        });
+        if (allowance.lnurlAuth === false) {
+          await utils.call("updateAllowance", {
+            id: allowance.id,
+            lnurlAuth: true,
+          });
+        }
       }
 
       if (response.success) {
-        setSuccessMessage("Authenticaed successfully.");
+        setSuccessMessage("Authenticated successfully.");
       } else {
-        throw new Error("Auth status is notok");
+        throw new Error("Auth status is not ok");
       }
 
       if (navState.isPrompt) {
