@@ -7,6 +7,7 @@ import DualCurrencyField from "@components/form/DualCurrencyField";
 import axios from "axios";
 import { useState, useEffect, MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
@@ -52,17 +53,22 @@ function LNURLWithdraw() {
         memo: details.defaultDescription,
       });
 
-      await axios.get(details.callback, {
+      const response = await axios.get(details.callback, {
         params: {
           k1: details.k1,
           pr: invoice.paymentRequest,
         },
       });
 
-      setSuccessMessage("Withdraw request sent successfully.");
+      if (response.data.status === "OK") {
+        setSuccessMessage("Withdraw request sent successfully.");
+      } else {
+        setErrorMessage(`Error: ${response.data.reason}`);
+      }
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
+        toast.error(`Error: ${e.message}`);
         setErrorMessage(e.message);
       }
     } finally {
@@ -73,10 +79,14 @@ function LNURLWithdraw() {
   function renderAmount() {
     if (minWithdrawable === maxWithdrawable) {
       return (
-        <ContentMessage
-          heading={`Amount (Satoshi)`}
-          content={`${minWithdrawable / 1000} sats`}
-        />
+        <>
+          <ContentMessage
+            heading={`Amount (Satoshi)`}
+            content={`${minWithdrawable / 1000} sats`}
+          />
+
+          {errorMessage && <p className="mt-1 text-red-500">{errorMessage}</p>}
+        </>
       );
     } else {
       return (
@@ -90,6 +100,7 @@ function LNURLWithdraw() {
             onChange={(e) => setValueSat(e.target.value)}
             fiatValue={fiatValue}
           />
+
           {errorMessage && <p className="mt-1 text-red-500">{errorMessage}</p>}
         </div>
       );
