@@ -42,7 +42,8 @@
                     "delete_edit_account": "Remover conta inválida e editar novamente"
                 }
             },
-            "heading": "O poder do bitcoin no seu navegador"
+            "heading": "O poder do bitcoin no seu navegador",
+            "title": "O poder do bitcoin no seu navegador"
         },
         "choose_connector": {
             "alby": {
@@ -73,7 +74,10 @@
                     "title": "🎉 Sucesso!"
                 }
             },
-            "title": "Você possui uma carteira bitcoin?",
+            "title": {
+                "options": "Adicionar uma nova conta",
+                "welcome": "Você já possui uma carteira bitcoin na rede relâmpago?"
+            },
             "description": "Você precisa primeiro conectar-se a uma conta ou servidor para poder interagir com seus sites favoritos que aceitam pagamentos em bitcoin!",
             "lnd": {
                 "title": "LND",
@@ -310,7 +314,31 @@
             "allow": "Permitir {{host}}:",
             "request_one": "Solicitar aprovação para transações",
             "connect": "Conectar",
-            "request_two": "Solicitar faturas e informações de pagamento"
+            "request_two": "Solicitar faturas e informações do servidor"
+        },
+        "publishers": {
+            "suggestions": {
+                "title": "Outros sites ⚡️",
+                "subtitle": "Sugestões de sites onde você pode usar a Alby",
+                "list": {
+                    "Trading": "Negociação",
+                    "Entertaiment": "Entretenimento",
+                    "Miscellaneous": "Outros",
+                    "Shopping": "Compras",
+                    "Gaming": "Games"
+                }
+            },
+            "publisher": {
+                "allowance": {
+                    "usedBudget": "sats usados",
+                    "title": "Limite de gastos"
+                }
+            },
+            "used": {
+                "subtitle": "Sites onde você já usou a Alby",
+                "none-info": "Nenhum site ainda.",
+                "title": "Sua lista de sites⚡️"
+            }
         }
     },
     "common": {
@@ -323,12 +351,19 @@
             "send": "Enviar",
             "receive": "Receber",
             "cancel": "Cancelar",
-            "connect": "Conectar"
+            "connect": "Conectar",
+            "save": "Salvar",
+            "delete": "Remover",
+            "enable_now": "Ativar"
         },
         "errors": {
             "connection_failed": "Falha na conexão"
         },
-        "password": "Senha"
+        "password": "Senha",
+        "settings": "Configurações",
+        "websites": "Sites",
+        "loading": "carregando",
+        "sats": "sats"
     },
     "components": {
         "qrcode_scanner": {
@@ -351,6 +386,17 @@
         },
         "confirmOrCancel": {
             "only_trusted": "Conecte-se apenas em sites que você confia."
+        },
+        "allowance_menu": {
+            "hint": "O limite atual será resetado",
+            "confirm_delete": "Tem certeza de que deseja remover este site?",
+            "set_budget": "Definir um novo limite",
+            "new_budget": {
+                "label": "Novo limite"
+            },
+            "options": {
+                "label": "Opções limite de gastos"
+            }
         }
     }
 }
