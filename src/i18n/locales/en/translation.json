@@ -267,10 +267,10 @@
     "send": {
       "title": "Send",
       "qrcode": {
-        "title": "Waiting to scan invoice"
+        "title": "Waiting to scan"
       },
       "input": {
-        "label": "Lightning Invoice",
+        "label": "Invoice, Lightning Address or LNURL",
         "placeholder": "Paste invoice, lnurl or lightning address"
       },
       "submit": {
