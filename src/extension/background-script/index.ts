@@ -157,4 +157,4 @@ init().then(() => {
   }
 });
 
-browser.runtime.setUninstallURL("https://getalby.com/thanks");
+browser.runtime.setUninstallURL("https://getalby.com/goodbye");
