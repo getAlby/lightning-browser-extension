@@ -20,9 +20,7 @@ function LNURLAuth() {
   const navigate = useNavigate();
 
   const navState = useNavigationState();
-  const details = navState.args?.lnurlDetails as LNURLAuthServiceResponse & {
-    url: string;
-  };
+  const details = navState.args?.lnurlDetails as LNURLAuthServiceResponse;
   const origin = navState.origin;
 
   const { t } = useTranslation("components", {
