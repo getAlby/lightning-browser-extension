@@ -258,12 +258,12 @@
         "placeholder": "Enter your email address"
       },
       "change_password": {
-        "title": "Change Password",
+        "title": "Change unlock password",
         "subtitle": "",
-        "enter_password": "Please enter a password.",
+        "enter_password": "Please enter a new unlock password.",
         "confirm_password": "Please confirm your password.",
         "mismatched_password": "Passwords don't match.",
-        "choose_password_label": "Enter new password:",
+        "choose_password_label": "Enter a new unlock password:",
         "confirm_password_label": "Confirm new password:"
       }
     },
