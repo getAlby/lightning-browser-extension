@@ -49,19 +49,10 @@ function LNURLWithdraw() {
       setErrorMessage("");
       setLoadingConfirm(true);
 
-      console.log("CONFIRM - before", valueSat);
-      console.log(
-        "CONFIRM - bdetails.defaultDescriptionefore",
-        details.defaultDescription
-      );
-
       const invoice = await api.makeInvoice({
         amount: parseInt(valueSat),
         memo: details.defaultDescription,
       });
-
-      console.log("HERE");
-      console.log({ invoice });
 
       const response = await axios.get(details.callback, {
         params: {
