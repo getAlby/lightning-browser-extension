@@ -58,9 +58,6 @@ function Prompt() {
                 <Navigate
                   to={`/${navigationState.action}`}
                   replace
-                  // no need to check for serializable data for the navState here,
-                  // navState does not fail when data is coming via a LNURL called by webLn
-                  // as all data in deep nested object are serializable in this case
                   state={navigationState}
                 />
               }
