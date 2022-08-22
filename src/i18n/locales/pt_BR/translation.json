@@ -285,7 +285,7 @@
                 "placeholder": "Quantia em Satoshi..."
             },
             "submit": {
-                "label": "Cobrar"
+                "label": "Solicitar Fatura"
             },
             "success": {
                 "title": "Pagamento recebido!"
