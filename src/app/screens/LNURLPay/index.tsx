@@ -7,6 +7,7 @@ import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
 import axios from "axios";
 import React, { Fragment, useState, useEffect, MouseEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
@@ -41,6 +42,7 @@ function LNURLPay() {
 
   const navigate = useNavigate();
   const auth = useAccount();
+  const { t } = useTranslation("translation", { keyPrefix: "send.lnurlpay" });
 
   const [valueSat, setValueSat] = useState(
     (details?.minSendable && (+details?.minSendable / 1000).toString()) || ""
@@ -323,7 +325,7 @@ function LNURLPay() {
                       )}
                       {details.minSendable === details.maxSendable && (
                         <>
-                          <Dt>Amount (Satoshi)</Dt>
+                          <Dt>{t("amount_label")}</Dt>
                           <Dd>{`${+details.minSendable / 1000} sats`}</Dd>
                         </>
                       )}
@@ -333,7 +335,7 @@ function LNURLPay() {
                     <div>
                       <DualCurrencyField
                         id="amount"
-                        label="Amount (Satoshi)"
+                        label={t("amount_label")}
                         min={+details.minSendable / 1000}
                         max={+details.maxSendable / 1000}
                         value={valueSat}
@@ -349,8 +351,8 @@ function LNURLPay() {
                       <div className="mt-4">
                         <TextField
                           id="comment"
-                          label="Comment"
-                          placeholder="optional"
+                          label={t("comment_label")}
+                          placeholder={t("placeholder")}
                           onChange={(e) => {
                             setComment(e.target.value);
                           }}
@@ -361,8 +363,8 @@ function LNURLPay() {
                     <div className="mt-4">
                       <TextField
                         id="name"
-                        label="Name"
-                        placeholder="optional"
+                        label={t("name_label")}
+                        placeholder={t("placeholder")}
                         value={userName}
                         onChange={(e) => {
                           setUserName(e.target.value);
@@ -374,8 +376,8 @@ function LNURLPay() {
                     <div className="mt-4">
                       <TextField
                         id="email"
-                        label="Email"
-                        placeholder="optional"
+                        label={t("email_label")}
+                        placeholder={t("placeholder")}
                         value={userEmail}
                         onChange={(e) => {
                           setUserEmail(e.target.value);
@@ -386,7 +388,7 @@ function LNURLPay() {
                 </div>
                 <div className="pt-2 border-t border-gray-200 dark:border-white/10">
                   <ConfirmOrCancel
-                    label="Confirm"
+                    label={t("confirm_button")}
                     loading={loadingConfirm}
                     disabled={loadingConfirm || !valueSat}
                     onConfirm={confirm}
