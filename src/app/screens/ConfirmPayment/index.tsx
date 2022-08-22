@@ -38,7 +38,6 @@ function ConfirmPayment(props: Props) {
   const auth = useAccount();
 
   const invoiceRef = useRef(lightningPayReq.decode(paymentRequest));
-  const paymentRequestRef = useRef(paymentRequest);
   const [budget, setBudget] = useState(
     ((invoiceRef.current?.satoshis || 0) * 10).toString()
   );
@@ -66,7 +65,7 @@ function ConfirmPayment(props: Props) {
       setLoading(true);
       const response = await utils.call(
         "sendPayment",
-        { paymentRequest: paymentRequestRef.current },
+        { paymentRequest: paymentRequest },
         { origin: navState.origin }
       );
       auth.fetchAccountInfo(); // Update balance.
