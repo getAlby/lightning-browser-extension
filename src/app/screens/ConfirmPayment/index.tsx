@@ -5,7 +5,7 @@ import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import lightningPayReq from "bolt11";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -33,13 +33,13 @@ function ConfirmPayment(props: Props) {
 
   const navState = useNavigationState();
   const paymentRequest = navState.args?.paymentRequest as string;
+  const invoice = lightningPayReq.decode(paymentRequest);
 
   const navigate = useNavigate();
   const auth = useAccount();
 
-  const invoiceRef = useRef(lightningPayReq.decode(paymentRequest));
   const [budget, setBudget] = useState(
-    ((invoiceRef.current?.satoshis || 0) * 10).toString()
+    ((invoice.satoshis || 0) * 10).toString()
   );
   const [fiatAmount, setFiatAmount] = useState("");
 
@@ -112,8 +112,8 @@ function ConfirmPayment(props: Props) {
             <div className="my-4">
               <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
                 <PaymentSummary
-                  amount={invoiceRef.current?.satoshis}
-                  description={invoiceRef.current?.tagsObject.description}
+                  amount={invoice.satoshis}
+                  description={invoice.tagsObject.description}
                 />
               </div>
 
