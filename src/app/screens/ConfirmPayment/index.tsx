@@ -38,7 +38,6 @@ function ConfirmPayment(props: Props) {
   const auth = useAccount();
 
   const invoiceRef = useRef(lightningPayReq.decode(paymentRequest));
-  const originRef = useRef(navState.origin);
   const paymentRequestRef = useRef(paymentRequest);
   const [budget, setBudget] = useState(
     ((invoiceRef.current?.satoshis || 0) * 10).toString()
@@ -68,7 +67,7 @@ function ConfirmPayment(props: Props) {
       const response = await utils.call(
         "sendPayment",
         { paymentRequest: paymentRequestRef.current },
-        { origin: originRef.current }
+        { origin: navState.origin }
       );
       auth.fetchAccountInfo(); // Update balance.
       msg.reply(response);
@@ -94,9 +93,9 @@ function ConfirmPayment(props: Props) {
     if (!budget) return;
     return msg.request("addAllowance", {
       totalBudget: parseInt(budget),
-      host: originRef.current.host,
-      name: originRef.current.name,
-      imageURL: originRef.current.icon,
+      host: navState.origin.host,
+      name: navState.origin.name,
+      imageURL: navState.origin.icon,
     });
   }
 
@@ -107,9 +106,9 @@ function ConfirmPayment(props: Props) {
         <Container isScreenView maxWidth="sm">
           <div>
             <PublisherCard
-              title={originRef.current.name}
-              image={originRef.current.icon}
-              url={originRef.current.host}
+              title={navState.origin.name}
+              image={navState.origin.icon}
+              url={navState.origin.host}
             />
             <div className="my-4">
               <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
@@ -146,9 +145,9 @@ function ConfirmPayment(props: Props) {
       ) : (
         <Container maxWidth="sm">
           <PublisherCard
-            title={originRef.current.name}
-            image={originRef.current.icon}
-            url={originRef.current.host}
+            title={navState.origin.name}
+            image={navState.origin.icon}
+            url={navState.origin.host}
           />
           <div className="my-4">
             <SuccessMessage
