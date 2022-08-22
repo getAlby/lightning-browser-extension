@@ -24,6 +24,7 @@ const mockDetails: LNURLWithdrawServiceResponse = {
     "https://lnurl.fiatjaf.com/lnurl-withdraw?session=d883e4392c3f836a484c724ab07243a2c130f047294474198063d3b748a82c8e",
   payLink: "https://lnurl.fiatjaf.com/lnurl-pay",
   domain: "lnurl.fiatjaf.com",
+  url: "https://lnurl.fiatjaf.com/lnurl-withdraw?session=123",
 };
 
 const mockOrigin: OriginData = {
