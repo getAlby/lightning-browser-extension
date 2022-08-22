@@ -31,7 +31,10 @@ const commonCreateWalletUserCreate = async () => {
   await findByText($document, "Protect your wallet");
 
   // type user password and confirm password
-  const passwordField = await getByLabelText($document, "Choose a password:");
+  const passwordField = await getByLabelText(
+    $document,
+    "Choose an unlock password:"
+  );
   await passwordField.type(user.password);
 
   const passwordConfirmationField = await getByLabelText(
