@@ -13,7 +13,7 @@ function PaymentSummary({ amount, amountAlt, description, fiatAmount }: Props) {
       {amountAlt && <dd className="text-gray-400">{amountAlt}</dd>}
       {!!fiatAmount && (
         <>
-          <dt className="mt-4 font-medium dark:text-white">Amount (Fiats)</dt>
+          <dt className="mt-4 font-medium dark:text-white">Amount (Fiat)</dt>
           <dd className="text-gray-500 dark:text-neutral-400">~{fiatAmount}</dd>
         </>
       )}
