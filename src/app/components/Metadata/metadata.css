@@ -1,0 +1,25 @@
+.details-img {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.details-img img {
+  display: block;
+  margin: 50px auto;
+  border-radius: 50%;
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.8),
+    -6px -6px 12px rgba(255, 255, 255, 0.4);
+}
+
+.details-img:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 100%;
+  border: 3px dashed rgba(255, 206, 0, 1);
+}
