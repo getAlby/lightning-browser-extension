@@ -3,117 +3,31 @@ import Hex from "crypto-js/enc-hex";
 import hmacSHA256 from "crypto-js/hmac-sha256";
 import sha256 from "crypto-js/sha256";
 import PubSub from "pubsub-js";
-
-import utils from "../../../../common/lib/utils";
-import HashKeySigner from "../../../../common/utils/signer";
-import type { Message, LNURLDetails } from "../../../../types";
-import db from "../../db";
-import state from "../../state";
+import utils from "~/common/lib/utils";
+import HashKeySigner from "~/common/utils/signer";
+import state from "~/extension/background-script/state";
+import {
+  MessageLnurlAuth,
+  LNURLDetails,
+  LnurlAuthResponse,
+  OriginData,
+} from "~/types";
 
 const LNURLAUTH_CANONICAL_PHRASE =
   "DO NOT EVER SIGN THIS TEXT WITH YOUR PRIVATE KEYS! IT IS ONLY USED FOR DERIVATION OF LNURL-AUTH HASHING-KEY, DISCLOSING ITS SIGNATURE WILL COMPROMISE YOUR LNURL-AUTH IDENTITY AND MAY LEAD TO LOSS OF FUNDS!";
-
-async function authWithPrompt(message: Message, lnurlDetails: LNURLDetails) {
-  if (!("host" in message.origin)) return;
-
-  PubSub.publish(`lnurl.auth.start`, { message, lnurlDetails });
-
-  // get the publisher to check if lnurlAuth for auto-login is enabled
-  let allowance = await db.allowances
-    .where("host")
-    .equalsIgnoreCase(message.origin.host)
-    .first();
-
-  // we have the check the unlock status manually. The account can still be locked
-  // If it is locked we must show a prompt to unlock
-  const isUnlocked = state.getState().isUnlocked();
-
-  let loginStatus;
-  // check if there is a publisher and lnurlAuth is enabled,
-  // otherwise we we prompt the user
-  if (isUnlocked && allowance && allowance.enabled && allowance.lnurlAuth) {
-    loginStatus = { confirmed: true, remember: true };
-  } else {
-    try {
-      const promptMessage = {
-        ...message,
-        action: "lnurlAuth",
-        args: {
-          ...message.args,
-          lnurlDetails,
-        },
-      };
-      const { data } = await utils.openPrompt<{
-        confirmed: boolean;
-        remember: boolean;
-      }>(promptMessage);
-
-      loginStatus = data;
-    } catch (e) {
-      // user rejected
-      return { error: e instanceof Error ? e.message : e };
-    }
-  }
-
-  // if the user confirmed (or if we already had a publisher with lnurl auth enabled) we perform the authentication
-  if (loginStatus.confirmed) {
-    let authResponse;
-    try {
-      // Sign the message and do the authentication request to the service
-      authResponse = await auth(lnurlDetails);
-    } catch (e) {
-      console.error(e);
-      if (e instanceof Error) {
-        PubSub.publish(`lnurl.auth.failed`, {
-          error: e.message,
-          lnurlDetails,
-          origin: message.origin,
-        });
-
-        return { error: e.message };
-      }
-    }
-
-    // if the service returned with a HTTP 200 we still check if the response data is OK
-    if (authResponse?.data.status.toUpperCase() !== "OK") {
-      PubSub.publish(`lnurl.auth.failed`, {
-        authResponse: authResponse,
-        lnurlDetails,
-        origin: message.origin,
-      });
-      return { error: authResponse?.data?.reason };
-    }
-
-    PubSub.publish(`lnurl.auth.success`, {
-      authResponse,
-      lnurlDetails,
-      origin: message.origin,
-    });
-
-    // if auto login should be enabled get the publisher and update the publisher entry
-    if (loginStatus.remember) {
-      allowance = await db.allowances
-        .where("host")
-        .equalsIgnoreCase(message.origin.host)
-        .first();
-
-      if (allowance?.id) {
-        await db.allowances.update(allowance.id, {
-          lnurlAuth: true,
-        });
-      }
-      await db.saveToStorage();
-    }
-    return { data: authResponse.data };
-  }
-}
 
 /*
   Execute the LNURL auth
   returns the response of the LNURL-auth login request
    or throws an error
 */
-export async function auth(lnurlDetails: LNURLDetails) {
+export async function authFunction({
+  lnurlDetails,
+  origin,
+}: {
+  lnurlDetails: LNURLDetails;
+  origin: OriginData;
+}) {
   if (lnurlDetails.tag !== "login")
     throw new Error(
       `LNURL-AUTH FAIL: incorrect tag: ${lnurlDetails.tag} was used`
@@ -172,17 +86,56 @@ export async function auth(lnurlDetails: LNURLDetails) {
     const authResponse = await axios.get<{ status: string; reason?: string }>(
       loginURL.toString()
     );
-    return authResponse;
+
+    // if the service returned with a HTTP 200 we still check if the response data is OK
+    if (authResponse?.data.status.toUpperCase() !== "OK") {
+      throw new Error(
+        authResponse?.data?.reason || "Auth: Something went wrong"
+      );
+    } else {
+      PubSub.publish(`lnurl.auth.success`, {
+        authResponse,
+        lnurlDetails,
+        origin,
+      });
+
+      const response: LnurlAuthResponse = {
+        success: true,
+        status: authResponse.data.status,
+        reason: authResponse.data.reason,
+      };
+
+      return response;
+    }
   } catch (e) {
     if (axios.isAxiosError(e)) {
       console.error("LNURL-AUTH FAIL:", e);
       const error =
         (e.response?.data as { reason?: string })?.reason || e.message; // lnurl error or exception message
+
+      PubSub.publish(`lnurl.auth.failed`, {
+        error,
+        lnurlDetails,
+        origin,
+      });
+
       throw new Error(error);
     } else if (e instanceof Error) {
+      PubSub.publish(`lnurl.auth.failed`, {
+        error: e.message,
+        lnurlDetails,
+        origin,
+      });
+
       throw new Error(e.message);
     }
   }
 }
 
-export default authWithPrompt;
+const auth = async (message: MessageLnurlAuth) => {
+  const { lnurlDetails, origin } = message.args;
+  const response = await authFunction({ lnurlDetails, origin });
+  return { data: response };
+};
+
+export default auth;

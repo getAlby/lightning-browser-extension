@@ -85,6 +85,12 @@ export type BatteryMetaTagRecipient = Pick<
   "address" | "customKey" | "customValue" | "method"
 >;
 
+export type LnurlAuthResponse = {
+  success: boolean;
+  status: string;
+  reason?: string;
+};
+
 /**
  * @deprecated Use MessageDefault instead
  */
@@ -106,11 +112,7 @@ export interface MessageDefault {
 export type NavigationState = {
   origin: OriginData;
   args?: {
-    lnurlDetails:
-      | LNURLAuthServiceResponse
-      | LNURLPayServiceResponse
-      | LNURLWithdrawServiceResponse
-      | LNURLChannelServiceResponse;
+    lnurlDetails: LNURLDetails;
     amountEditable?: boolean;
     memoEditable?: boolean;
     invoiceAttributes?: RequestInvoiceArgs;
@@ -243,9 +245,10 @@ export interface MessageAllowanceDelete extends MessageDefault {
 
 export interface MessageAllowanceUpdate extends MessageDefault {
   args: {
-    enabled: Allowance["enabled"];
+    enabled?: Allowance["enabled"];
     id: Allowance["id"];
-    totalBudget: Allowance["totalBudget"];
+    lnurlAuth?: Allowance["lnurlAuth"];
+    totalBudget?: Allowance["totalBudget"];
   };
   action: "updateAllowance";
 }
@@ -260,7 +263,7 @@ export interface MessageAllowanceGetById extends MessageDefault {
   action: "getAllowanceById";
 }
 
-export interface MessageLNURLChannel extends MessageDefault {
+export interface MessageWebLnLnurl extends MessageDefault {
   args: { lnurlEncoded: string };
   public: boolean;
   action: "webln/lnurl";
@@ -271,8 +274,9 @@ export interface MessageConnectPeer extends MessageDefault {
   action: "connectPeer";
 }
 
-export interface MessageLnurlAuth extends MessageDefault {
+export interface MessageLnurlAuth {
   args: {
+    origin: OriginData;
     lnurlDetails: {
       tag: "login";
       k1: string;
@@ -311,6 +315,7 @@ export interface LNURLPayServiceResponse {
     auth: { mandatory: boolean; k1: string };
   };
   commentAllowed?: number;
+  url: string;
 }
 
 export interface LNURLAuthServiceResponse {
@@ -318,6 +323,7 @@ export interface LNURLAuthServiceResponse {
   k1: string; // (hex encoded 32 bytes of challenge) which is going to be signed by user's linkingPrivKey.
   action?: string; // optional action enum which can be one of four strings: register | login | link | auth.
   domain: string;
+  url: string;
 }
 
 export interface LNURLWithdrawServiceResponse {
@@ -330,6 +336,7 @@ export interface LNURLWithdrawServiceResponse {
   minWithdrawable: number; // Min amount (in millisatoshis) the user can withdraw from LN SERVICE, or 0
   maxWithdrawable: number; // Max amount (in millisatoshis) the user can withdraw from LN SERVICE, or equal to minWithdrawable if the user has no choice over the amounts
   domain: string;
+  url: string;
 }
 
 export interface LNURLChannelServiceResponse {
@@ -337,14 +344,14 @@ export interface LNURLChannelServiceResponse {
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node
   k1: string; // random or non-random string to identify the user's LN WALLET when using the callback URL
   tag: "channelRequest"; // type of LNURL
+  url: string;
 }
 
-export type LNURLDetails = (
+export type LNURLDetails =
   | LNURLChannelServiceResponse
   | LNURLPayServiceResponse
   | LNURLAuthServiceResponse
-  | LNURLWithdrawServiceResponse
-) & { url: string };
+  | LNURLWithdrawServiceResponse;
 
 export interface LNURLPaymentSuccessAction {
   tag: string;

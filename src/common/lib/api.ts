@@ -15,6 +15,7 @@ import type {
   DbPayment,
   MessageLnurlAuth,
   MessageSettingsSet,
+  LnurlAuthResponse,
 } from "~/types";
 
 import {
@@ -84,6 +85,7 @@ export const swrGetAccountInfo = async (
   });
 };
 export const getAccounts = () => utils.call<Accounts>("getAccounts");
+export const updateAllowance = () => utils.call<Accounts>("updateAllowance");
 export const selectAccount = (id: string) =>
   utils.call("selectAccount", { id });
 export const getAllowance = (host: string) =>
@@ -112,9 +114,10 @@ export const getBlocklist = (host: string) =>
   utils.call<BlocklistRes>("getBlocklist", { host });
 export const getInvoices = (options?: MessageInvoices["args"]) =>
   utils.call<GetInvoicesResponse["data"]>("getInvoices", options);
-export const lnurlAuth = (options?: FixMe) => {
-  utils.call<MessageLnurlAuth["args"]>("lnurlAuth", options);
-};
+export const lnurlAuth = (
+  options: MessageLnurlAuth["args"]
+): Promise<LnurlAuthResponse> =>
+  utils.call<LnurlAuthResponse>("lnurlAuth", options);
 
 export default {
   getAccountInfo,
@@ -122,6 +125,7 @@ export default {
   getInfo,
   selectAccount,
   getAllowance,
+  updateAllowance,
   getPayments,
   getSettings,
   getStatus,

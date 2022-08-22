@@ -1,6 +1,7 @@
 import utils from "~/common/lib/utils";
 
 // TODO: add settings check if a notification should be sent
+// TODO: switch to TS
 
 const paymentSuccessNotification = (message, data) => {
   const recipient = data.origin.name;

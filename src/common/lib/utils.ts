@@ -30,6 +30,7 @@ const utils = {
           toast.error(response.error);
           throw new Error(response.error);
         }
+
         return response.data;
       });
   },
@@ -151,6 +152,8 @@ const utils = {
               browser.tabs.onRemoved.removeListener(onRemovedListener);
               if (sender.tab.windowId) {
                 return browser.windows.remove(sender.tab.windowId).then(() => {
+                  // in the future actual "remove" (closing prompt) will be moved to component for i.e. budget flow
+                  // https://github.com/getAlby/lightning-browser-extension/issues/1197
                   if (responseMessage.error) {
                     return reject(new Error(responseMessage.error));
                   } else {

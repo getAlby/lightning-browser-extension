@@ -8,7 +8,7 @@ const updateAllowance = async (message: MessageAllowanceUpdate) => {
 
   const update: OptionalPick<
     Allowance,
-    "totalBudget" | "remainingBudget" | "enabled"
+    "totalBudget" | "remainingBudget" | "enabled" | "lnurlAuth"
   > = {};
   if (Object.prototype.hasOwnProperty.call(message.args, "totalBudget")) {
     update.totalBudget = message.args.totalBudget;
