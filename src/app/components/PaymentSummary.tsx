@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { MetadataRenderer } from "~/schema/MetadataRenderer";
 import { MetadataValidator } from "~/schema/metadataValidator";
 
 type Props = {
@@ -51,12 +51,12 @@ function PaymentSummary({ amount, amountAlt, description, metadata }: Props) {
       <dd className="mb-0 text-gray-600 dark:text-neutral-500 break-all">
         {description}
       </dd>
-      <dt className="mt-4 font-medium text-gray-800 dark:text-white">
-        Metadata
-      </dt>
-      {metadataElements.map((metadata, key) => (
-        <Fragment key={key}>{metadata}</Fragment>
-      ))}
+      <div>
+        <p className="mt-4 font-medium text-gray-800 dark:text-white">
+          Metadata
+        </p>
+        {MetadataRenderer(metadata)}
+      </div>
     </dl>
   );
 }
