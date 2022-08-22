@@ -36,7 +36,15 @@ function Popup() {
             <Route path="keysend" element={<Keysend />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
           </Route>
-          <Route path="unlock" element={<Unlock />} />
+          <Route
+            path="unlock"
+            element={
+              <>
+                <Unlock />
+                <ToastContainer />
+              </>
+            }
+          />
         </Routes>
       </HashRouter>
     </Providers>
