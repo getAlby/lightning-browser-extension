@@ -7,16 +7,16 @@ import SuccessMessage from "@components/SuccessMessage";
 import lightningPayReq from "bolt11";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
-import getOriginData from "~/extension/content-script/originData";
 import type { OriginData } from "~/types";
 
 export type Props = {
@@ -31,19 +31,15 @@ function ConfirmPayment(props: Props) {
     keyPrefix: "confirmOrCancel",
   });
 
-  const [searchParams] = useSearchParams();
+  const navState = useNavigationState();
+  const paymentRequest = navState.args?.paymentRequest as string;
+
   const navigate = useNavigate();
   const auth = useAccount();
 
-  const invoiceRef = useRef(
-    lightningPayReq.decode(
-      props.paymentRequest || (searchParams.get("paymentRequest") as string)
-    )
-  );
-  const originRef = useRef(props.origin || getOriginData());
-  const paymentRequestRef = useRef(
-    props.paymentRequest || searchParams.get("paymentRequest")
-  );
+  const invoiceRef = useRef(lightningPayReq.decode(paymentRequest));
+  const originRef = useRef(navState.origin);
+  const paymentRequestRef = useRef(paymentRequest);
   const [budget, setBudget] = useState(
     ((invoiceRef.current?.satoshis || 0) * 10).toString()
   );
@@ -87,7 +83,7 @@ function ConfirmPayment(props: Props) {
 
   function reject(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
-    if (props.paymentRequest && props.origin) {
+    if (navState.isPrompt) {
       msg.error(USER_REJECTED_ERROR);
     } else {
       navigate(-1);

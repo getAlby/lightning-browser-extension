@@ -88,7 +88,14 @@ function Send() {
         navigate(`/keysend?destination=${invoice}`);
       } else {
         lightningPayReq.decode(invoice); // throws if invalid.
-        navigate(`/confirmPayment?paymentRequest=${invoice}`);
+        navigate(`/confirmPayment?paymentRequest=${invoice}`, {
+          state: {
+            origin: getOriginData(),
+            args: {
+              paymentRequest: invoice,
+            },
+          },
+        });
       }
     } catch (e) {
       if (e instanceof Error) {

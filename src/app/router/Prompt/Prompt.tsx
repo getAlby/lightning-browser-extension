@@ -86,17 +86,7 @@ function Prompt() {
                 />
               }
             />
-            <Route
-              path="confirmPayment"
-              element={
-                <ConfirmPayment
-                  paymentRequest={
-                    navigationState.args?.paymentRequest as string
-                  }
-                  origin={navigationState.origin}
-                />
-              }
-            />
+            <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route
               path="confirmKeysend"
               element={
