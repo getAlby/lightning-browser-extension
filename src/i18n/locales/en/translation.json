@@ -22,8 +22,8 @@
         }
       },
       "set_password": {
-        "title": "Set your an unlock password",
-        "description": "Your Lightning account data is securely encrypted with an unlock password. Do not forget this password you need it to unlock the Alby Extension",
+        "title": "Set an unlock password",
+        "description": "Your Lightning account data is securely encrypted with an unlock password. Do not forget this password! You need it to unlock the Alby Extension (in this browser)",
         "enter_password": "Please enter a password.",
         "confirm_password": "Please confirm your password.",
         "mismatched_password": "Passwords don't match.",
