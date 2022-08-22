@@ -22,7 +22,7 @@ class DB extends Dexie {
     });
     this.version(3).stores({
       metadata:
-        "++id,allowanceId,host,metadata,paymentHash,createdAt,type",
+        "++id,allowanceId,host,metadata,paymentHash,createdAt,type,contentUrl",
     });
     this.on("ready", this.loadFromStorage.bind(this));
     this.allowances = this.table("allowances");

@@ -310,6 +310,7 @@ export interface Metadata {
   paymentHash: string;
   metadata?: JSON;
   type: string;
+  contentUrl?: string;
 }
 
 export interface PaymentResponse
