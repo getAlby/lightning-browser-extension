@@ -38,7 +38,15 @@ function Popup() {
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="lnurlAuth" element={<LNURLAuth />} />
           </Route>
-          <Route path="unlock" element={<Unlock />} />
+          <Route
+            path="unlock"
+            element={
+              <>
+                <Unlock />
+                <ToastContainer />
+              </>
+            }
+          />
         </Routes>
       </HashRouter>
     </Providers>

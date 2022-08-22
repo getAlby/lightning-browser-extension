@@ -89,7 +89,15 @@ function Options() {
               }
             />
           </Route>
-          <Route path="unlock" element={<Unlock />} />
+          <Route
+            path="unlock"
+            element={
+              <>
+                <Unlock />
+                <ToastContainer />
+              </>
+            }
+          />
         </Routes>
       </HashRouter>
     </Providers>
