@@ -7,7 +7,6 @@ import DualCurrencyField from "@components/form/DualCurrencyField";
 import axios from "axios";
 import { useState, useEffect, MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
@@ -69,7 +68,6 @@ function LNURLWithdraw() {
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        toast.error(`Error: ${e.message}`);
         setErrorMessage(e.message);
       }
     } finally {
