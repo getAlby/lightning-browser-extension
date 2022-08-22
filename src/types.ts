@@ -335,7 +335,7 @@ export interface LNURLWithdrawServiceResponse {
   payLink?: string;
   minWithdrawable: number; // Min amount (in millisatoshis) the user can withdraw from LN SERVICE, or 0
   maxWithdrawable: number; // Max amount (in millisatoshis) the user can withdraw from LN SERVICE, or equal to minWithdrawable if the user has no choice over the amounts
-  domain: string;
+  domain?: string;
   url: string;
 }
 

@@ -95,8 +95,14 @@ export const getPayments = (options: { limit: number }) =>
 export const getSettings = () => utils.call<SettingsStorage>("getSettings");
 export const getStatus = () => utils.call<StatusRes>("status");
 export const getInfo = () => utils.call<NodeInfo>("getInfo");
-export const makeInvoice = ({ amount, memo }: MakeInvoiceArgs) =>
-  utils.call<MakeInvoiceResponse["data"]>("makeInvoice", { amount, memo });
+export const makeInvoice = ({ amount, memo }: MakeInvoiceArgs) => {
+  console.log("HALLO");
+
+  return utils.call<MakeInvoiceResponse["data"]>("makeInvoice", {
+    amount,
+    memo,
+  });
+};
 export const connectPeer = ({ host, pubkey }: ConnectPeerArgs) =>
   utils.call<ConnectPeerResponse["data"]>("connectPeer", { host, pubkey });
 export const setSetting = (setting: MessageSettingsSet["args"]["setting"]) =>
