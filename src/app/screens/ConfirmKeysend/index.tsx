@@ -122,6 +122,7 @@ function ConfirmKeysend(props: Props) {
               <div className="shadow mb-4 bg-white dark:bg-surface-02dp p-4 rounded-lg">
                 <PaymentSummary
                   amount={amount}
+                  fiatAmount={fiatAmount}
                   description={`Send payment to ${destination}`}
                 />
               </div>
