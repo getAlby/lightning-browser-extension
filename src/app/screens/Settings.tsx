@@ -265,7 +265,7 @@ function Settings() {
         >
           <div className="p-5 flex justify-between dark:bg-surface-02dp">
             <h2 className="text-2xl font-bold dark:text-white">
-              Change Password
+              {t("change_password.title")}
             </h2>
             <button onClick={closeModal}>
               <CrossIcon className="w-6 h-6 dark:text-white" />

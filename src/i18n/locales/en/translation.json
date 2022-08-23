@@ -5,7 +5,7 @@
       "nav": {
         "welcome": "Welcome",
         "password": "Your Password",
-        "connect": "Connect to Lightning",
+        "connect": "Your Lightning account",
         "done": "Done"
       },
       "intro": {
@@ -22,12 +22,12 @@
         }
       },
       "set_password": {
-        "title": "Protect your wallet",
-        "description": "Your wallet is securely encrypted with a password and needs to be unlocked before usage.",
+        "title": "Set an unlock password",
+        "description": "Your Lightning account data is securely encrypted with an unlock password. Do not forget this password! You need it to unlock the Alby Extension (in this browser)",
         "enter_password": "Please enter a password.",
         "confirm_password": "Please confirm your password.",
         "mismatched_password": "Passwords don't match.",
-        "choose_password_label": "Choose a password:",
+        "choose_password_label": "Choose an unlock password:",
         "confirm_password_label": "Let's confirm you typed it correct:"
       },
       "test_connection": {
@@ -188,6 +188,10 @@
       "help_contact": {
         "part1": "Need help? Contact",
         "part2": "Alby Support"
+      },
+      "unlock_error": {
+        "help": "Your account data is encrypted with your unlock password. If you really forgot your unlock password you have to reset and add your Lightning account again.",
+        "link": "Reset now and add a new account"
       }
     },
     "settings": {
@@ -254,12 +258,12 @@
         "placeholder": "Enter your email address"
       },
       "change_password": {
-        "title": "Change Password",
+        "title": "Change unlock password",
         "subtitle": "",
-        "enter_password": "Please enter a password.",
+        "enter_password": "Please enter a new unlock password.",
         "confirm_password": "Please confirm your password.",
         "mismatched_password": "Passwords don't match.",
-        "choose_password_label": "Enter new password:",
+        "choose_password_label": "Enter a new unlock password:",
         "confirm_password_label": "Confirm new password:"
       }
     },

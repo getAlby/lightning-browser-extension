@@ -1,8 +1,7 @@
-import state, { DEFAULT_SETTINGS } from "../../state";
+import state from "../../state";
 
 const reset = async (message, sender) => {
   state.setState({
-    settings: DEFAULT_SETTINGS,
     accounts: {},
     account: null,
     connector: null,

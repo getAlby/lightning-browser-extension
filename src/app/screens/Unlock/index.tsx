@@ -34,7 +34,9 @@ function Unlock() {
     event.preventDefault();
   }
 
-  function reset() {
+  async function reset(event: React.MouseEvent<HTMLElement>) {
+    event.preventDefault();
+    await utils.call("reset");
     utils.openPage("welcome.html");
   }
 
@@ -83,17 +85,19 @@ function Unlock() {
             }
           />
           {error && (
-            <p className="mt-1 text-red-500">
-              {error} (
-              <span
-                onClick={(event) => {
-                  reset();
-                }}
-              >
-                config
-              </span>
-              )
-            </p>
+            <>
+              <p className="mt-1 text-red-500">{error}</p>
+              <p className="mt-1 text-gray-500">{t("unlock_error.help")}</p>
+              <p className="mt-1">
+                <a
+                  href="#"
+                  className="text-gray-500 underline "
+                  onClick={reset}
+                >
+                  {t("unlock_error.link")}
+                </a>
+              </p>
+            </>
           )}
         </div>
         <Button
