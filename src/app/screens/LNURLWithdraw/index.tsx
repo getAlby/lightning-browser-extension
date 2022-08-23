@@ -60,7 +60,7 @@ function LNURLWithdraw() {
         },
       });
 
-      if (response.data.status === "OK") {
+      if (response.data.status.toUpperCase() === "OK") {
         setSuccessMessage("Withdraw request sent successfully.");
       } else {
         setErrorMessage(`Error: ${response.data.reason}`);
