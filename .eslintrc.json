@@ -15,7 +15,8 @@
   "plugins": ["@typescript-eslint"],
   "env": {
     "browser": true,
-    "webextensions": true
+    "webextensions": true,
+    "jest": true
   },
   "rules": {
     "@typescript-eslint/no-unused-vars": ["warn", { "args": "none" }], // No warnings for unused function arguments, which might be used in the future.
