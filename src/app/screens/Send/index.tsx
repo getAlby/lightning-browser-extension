@@ -9,7 +9,6 @@ import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import QrcodeScanner from "@components/QrcodeScanner";
 import TextField from "@components/form/TextField";
-import lightningPayReq from "bolt11";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -34,6 +33,9 @@ function Send() {
     try {
       setLoading(true);
 
+      const originData = getOriginData(); //  Origin will always be the Alby popup and therefor originData.name will be "Alby"
+      originData.name = "";
+
       let lnurl = lnurlLib.findLnurl(invoice);
       if (!lnurl && lnurlLib.isLightningAddress(invoice)) {
         lnurl = invoice;
@@ -41,7 +43,6 @@ function Send() {
 
       if (lnurl) {
         const lnurlDetails = await lnurlLib.getDetails(lnurl);
-        const originData = getOriginData();
 
         if (lnurlDetails.tag === "channelRequest") {
           navigate("/lnurlChannel", {
@@ -66,6 +67,8 @@ function Send() {
         }
 
         if (lnurlDetails.tag === "payRequest") {
+          originData.name = lnurlDetails.domain;
+
           navigate("/lnurlPay", {
             state: {
               origin: originData,
@@ -89,10 +92,9 @@ function Send() {
       } else if (isPubKey(invoice)) {
         navigate(`/keysend?destination=${invoice}`);
       } else {
-        lightningPayReq.decode(invoice); // throws if invalid.
         navigate("/confirmPayment", {
           state: {
-            origin: getOriginData(),
+            origin: originData,
             args: {
               paymentRequest: invoice,
             },
