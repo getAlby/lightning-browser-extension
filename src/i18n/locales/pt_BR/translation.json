@@ -276,7 +276,15 @@
             "submit": {
                 "label": "Continuar"
             },
-            "title": "Enviar"
+            "title": "Enviar",
+            "lnurlpay": {
+                "name_label": "Nome",
+                "email_label": "E-mail",
+                "placeholder": "opcional",
+                "confirm_button": "Confirmar",
+                "comment_label": "Comentário",
+                "amount_label": "Quantia (Satoshi)"
+            }
         },
         "receive": {
             "title": "Receber",
