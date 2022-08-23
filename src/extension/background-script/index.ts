@@ -165,3 +165,5 @@ init().then(() => {
     migrate();
   }
 });
+
+browser.runtime.setUninstallURL("https://getalby.com/goodbye");
