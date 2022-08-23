@@ -28,28 +28,19 @@ const mockDetailsFiatJef: LNURLWithdrawServiceResponse = {
     "https://lnurl.fiatjaf.com/lnurl-withdraw?session=d883e4392c3f836a484c724ab07243a2c130f047294474198063d3b748a82c8e",
   payLink: "https://lnurl.fiatjaf.com/lnurl-pay",
   domain: "lnurl.fiatjaf.com",
+  url: "https://lnurl.fiatjaf.com/lnurl-withdraw?session=123",
 };
 
 const mockDetailsLnBits: LNURLWithdrawServiceResponse = {
   tag: "withdrawRequest",
   callback:
-<<<<<<< HEAD
-    "https://lnurl.fiatjaf.com/lnurl-withdraw/callback/d883e4392c3f836a484c724ab07243a2c130f047294474198063d3b748a82c8e",
-  maxWithdrawable: 8000,
-  minWithdrawable: 2000,
-  defaultDescription: "sample withdraw",
-  balanceCheck:
-    "https://lnurl.fiatjaf.com/lnurl-withdraw?session=d883e4392c3f836a484c724ab07243a2c130f047294474198063d3b748a82c8e",
-  payLink: "https://lnurl.fiatjaf.com/lnurl-pay",
-  domain: "lnurl.fiatjaf.com",
-  url: "https://lnurl.fiatjaf.com/lnurl-withdraw?session=123",
-=======
-    "https://legend.lnbits.com/withdraw/api/v1/lnurl/cb/D7paixQdqcsm3VJrstczsQ?id_unique_hash=a5BgmGCDZfz2eMQCofxquP",
-  k1: "XJnHjDAPwSkfZzUeT3wiDj",
+    "https://legend.lnbits.com/withdraw/api/v1/lnurl/cb/D7paixQdqcsm3VJrstczsQ?id_unique_hash=123",
+  k1: "diC83D9MSTCWKtmyNXgBoi",
   minWithdrawable: 10000,
   maxWithdrawable: 10000,
   defaultDescription: "vouchers",
->>>>>>> 4ec55994 (test(lnurlwithdraw): error case #1302)
+  domain: "legend.lnbits.com",
+  url: "https://legend.lnbits.com/withdraw/api/v1/lnurl/D7paixQdqcsm3VJrstczsQ/123",
 };
 
 const mockOrigin: OriginData = {
