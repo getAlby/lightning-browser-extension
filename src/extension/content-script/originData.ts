@@ -715,7 +715,6 @@ const getMetaData = function () {
         url: document.location.toString(),
       }) || undefined;
   });
-
   return metadata;
 };
 
@@ -735,6 +734,7 @@ export default function getOriginData(): OriginData {
     description: metaData.description || "",
     icon: metaData.icon || metaData.image || "",
     metaData: metaData,
+    // external is just always true?! should we set this via
     external: true, // indicate that the call is coming from the website (and not made internally within the extension)
   };
 }
