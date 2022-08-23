@@ -65,6 +65,12 @@ function LNURLWithdraw() {
       } else {
         setErrorMessage(`Error: ${response.data.reason}`);
       }
+
+      // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the response. This closes the window which means the user will NOT see the above successAction.
+      // We assume this is OK when it is called through webln.
+      if (navState.isPrompt) {
+        return await msg.reply(response);
+      }
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
@@ -116,12 +122,9 @@ function LNURLWithdraw() {
   }
 
   function close(e: MouseEvent) {
+    // will never be reached via prompt
     e.preventDefault();
-    if (navState.isPrompt) {
-      window.close();
-    } else {
-      navigate(-1);
-    }
+    navigate(-1);
   }
 
   return (
