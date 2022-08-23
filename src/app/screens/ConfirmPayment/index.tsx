@@ -5,18 +5,18 @@ import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import lightningPayReq from "bolt11";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
-import getOriginData from "~/extension/content-script/originData";
 import type { OriginData } from "~/types";
 
 export type Props = {
@@ -31,21 +31,15 @@ function ConfirmPayment(props: Props) {
     keyPrefix: "confirmOrCancel",
   });
 
-  const [searchParams] = useSearchParams();
+  const navState = useNavigationState();
+  const paymentRequest = navState.args?.paymentRequest as string;
+  const invoice = lightningPayReq.decode(paymentRequest);
+
   const navigate = useNavigate();
   const auth = useAccount();
 
-  const invoiceRef = useRef(
-    lightningPayReq.decode(
-      props.paymentRequest || (searchParams.get("paymentRequest") as string)
-    )
-  );
-  const originRef = useRef(props.origin || getOriginData());
-  const paymentRequestRef = useRef(
-    props.paymentRequest || searchParams.get("paymentRequest")
-  );
   const [budget, setBudget] = useState(
-    ((invoiceRef.current?.satoshis || 0) * 10).toString()
+    ((invoice.satoshis || 0) * 10).toString()
   );
   const [fiatAmount, setFiatAmount] = useState("");
 
@@ -71,8 +65,8 @@ function ConfirmPayment(props: Props) {
       setLoading(true);
       const response = await utils.call(
         "sendPayment",
-        { paymentRequest: paymentRequestRef.current },
-        { origin: originRef.current }
+        { paymentRequest: paymentRequest },
+        { origin: navState.origin }
       );
       auth.fetchAccountInfo(); // Update balance.
       msg.reply(response);
@@ -87,7 +81,7 @@ function ConfirmPayment(props: Props) {
 
   function reject(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
-    if (props.paymentRequest && props.origin) {
+    if (navState.isPrompt) {
       msg.error(USER_REJECTED_ERROR);
     } else {
       navigate(-1);
@@ -98,9 +92,9 @@ function ConfirmPayment(props: Props) {
     if (!budget) return;
     return msg.request("addAllowance", {
       totalBudget: parseInt(budget),
-      host: originRef.current.host,
-      name: originRef.current.name,
-      imageURL: originRef.current.icon,
+      host: navState.origin.host,
+      name: navState.origin.name,
+      imageURL: navState.origin.icon,
     });
   }
 
@@ -111,15 +105,15 @@ function ConfirmPayment(props: Props) {
         <Container isScreenView maxWidth="sm">
           <div>
             <PublisherCard
-              title={originRef.current.name}
-              image={originRef.current.icon}
-              url={originRef.current.host}
+              title={navState.origin.name}
+              image={navState.origin.icon}
+              url={navState.origin.host}
             />
             <div className="my-4">
               <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
                 <PaymentSummary
-                  amount={invoiceRef.current?.satoshis}
-                  description={invoiceRef.current?.tagsObject.description}
+                  amount={invoice.satoshis}
+                  description={invoice.tagsObject.description}
                 />
               </div>
 
@@ -150,9 +144,9 @@ function ConfirmPayment(props: Props) {
       ) : (
         <Container maxWidth="sm">
           <PublisherCard
-            title={originRef.current.name}
-            image={originRef.current.icon}
-            url={originRef.current.host}
+            title={navState.origin.name}
+            image={navState.origin.icon}
+            url={navState.origin.host}
           />
           <div className="my-4">
             <SuccessMessage

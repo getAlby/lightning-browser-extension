@@ -33,6 +33,7 @@ function Send() {
     event.preventDefault();
     try {
       setLoading(true);
+
       let lnurl = lnurlLib.findLnurl(invoice);
       if (!lnurl && lnurlLib.isLightningAddress(invoice)) {
         lnurl = invoice;
@@ -40,11 +41,12 @@ function Send() {
 
       if (lnurl) {
         const lnurlDetails = await lnurlLib.getDetails(lnurl);
+        const originData = getOriginData();
 
         if (lnurlDetails.tag === "channelRequest") {
           navigate("/lnurlChannel", {
             state: {
-              origin: getOriginData(),
+              origin: originData,
               args: {
                 lnurlDetails,
               },
@@ -55,7 +57,7 @@ function Send() {
         if (lnurlDetails.tag === "login") {
           navigate("/lnurlAuth", {
             state: {
-              origin: getOriginData(),
+              origin: originData,
               args: {
                 lnurlDetails,
               },
@@ -66,7 +68,7 @@ function Send() {
         if (lnurlDetails.tag === "payRequest") {
           navigate("/lnurlPay", {
             state: {
-              origin: getOriginData(),
+              origin: originData,
               args: {
                 lnurlDetails,
               },
@@ -77,7 +79,7 @@ function Send() {
         if (lnurlDetails.tag === "withdrawRequest") {
           navigate("/lnurlWithdraw", {
             state: {
-              origin: getOriginData(),
+              origin: originData,
               args: {
                 lnurlDetails,
               },
@@ -88,7 +90,14 @@ function Send() {
         navigate(`/keysend?destination=${invoice}`);
       } else {
         lightningPayReq.decode(invoice); // throws if invalid.
-        navigate(`/confirmPayment?paymentRequest=${invoice}`);
+        navigate("/confirmPayment", {
+          state: {
+            origin: getOriginData(),
+            args: {
+              paymentRequest: invoice,
+            },
+          },
+        });
       }
     } catch (e) {
       if (e instanceof Error) {
