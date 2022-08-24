@@ -11,7 +11,6 @@ const updateAllowance = async (message, data) => {
     .equalsIgnoreCase(host)
     .first();
 
-  // won't find allowance
   if (!allowance) {
     return;
   }

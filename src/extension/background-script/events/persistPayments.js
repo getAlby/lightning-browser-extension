@@ -9,7 +9,7 @@ const persistSuccessfullPayment = async (message, data) => {
 
   await db.payments.add({
     host: host,
-    location: data.origin.location, // check if payment.locationis being used anywhere
+    location: data.origin.location,
     name: recipientName,
     description: data.details.description,
     preimage: paymentResponse.data.preimage,
