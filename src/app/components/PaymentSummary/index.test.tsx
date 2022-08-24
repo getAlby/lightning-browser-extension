@@ -34,6 +34,6 @@ describe("PaymentSummary", () => {
     });
 
     expect(getByTestId("fiat_amount")).toBeDefined();
-    expect(getByText("$0,02")).toBeDefined();
+    expect(getByText(/(~\$0,02)/)).toBeInTheDocument();
   });
 });
