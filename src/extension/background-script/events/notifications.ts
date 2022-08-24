@@ -13,7 +13,7 @@ const paymentSuccessNotification = (
   const paymentResponseData = data.response;
 
   if ("error" in paymentResponseData) {
-    return; // throw error
+    return;
   }
 
   const route = paymentResponseData?.data.route;
