@@ -60,7 +60,7 @@ export interface OriginData {
 export interface PaymentNotificationData {
   paymentRequestDetails?: PaymentRequestObject | undefined;
   response: SendPaymentResponse | { error: string };
-  // origin: OriginData;
+  origin: OriginData;
   details: {
     destination?: string | undefined;
     description?: string | undefined;

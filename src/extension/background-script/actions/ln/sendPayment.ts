@@ -8,7 +8,7 @@ import state from "../../state";
 // set type
 // is being used by all "sends"
 export default async function sendPayment(message: Message) {
-  console.log("sendPayment - message: ", message);
+  // console.log("sendPayment - message: ", message);
 
   PubSub.publish(`ln.sendPayment.start`, message);
 
@@ -40,7 +40,7 @@ export default async function sendPayment(message: Message) {
       error: message,
     };
   }
-  // type
+
   utils.publishPaymentNotification(message, {
     paymentRequestDetails,
     response,

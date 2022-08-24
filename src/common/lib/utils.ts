@@ -78,7 +78,7 @@ const utils = {
   },
   publishPaymentNotification: (
     message: Message,
-    data: PaymentNotificationData
+    data: Omit<PaymentNotificationData, "origin">
   ) => {
     let status = "success"; // default. let's hope for success
     if ("error" in data.response) {
