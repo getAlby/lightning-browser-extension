@@ -114,12 +114,12 @@ function LNURLAuth() {
         </>
       ) : (
         <Container isScreenView maxWidth="sm">
-          <PublisherCard
-            title={navState.origin.name}
-            image={navState.origin.icon}
-            url={details.domain}
-          />
-          <div className="my-4">
+          <div>
+            <PublisherCard
+              title={navState.origin.name}
+              image={navState.origin.icon}
+              url={details.domain}
+            />
             <SuccessMessage message={successMessage} onClose={close} />
           </div>
         </Container>
