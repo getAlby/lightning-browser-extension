@@ -3,10 +3,8 @@ import type { PaymentNotificationData } from "~/types";
 
 const paymentSuccessNotification = (
   message: "ln.sendPayment.success",
-  // data: PaymentNotificationData
-  data: FixMe
+  data: PaymentNotificationData
 ) => {
-  console.log("paymentSuccessNotification", { message }, { data });
   function formatAmount(amount: number) {
     return `${amount} sat${amount != 1 ? "s" : ""}`;
   }
@@ -36,17 +34,21 @@ const paymentSuccessNotification = (
 
 const paymentFailedNotification = (
   message: "ln.sendPayment.failed",
-  // data: PaymentNotificationData
-  data: FixMe
+  data: PaymentNotificationData
 ) => {
   let error;
-  // general error
-  if (data.response.error) {
-    error = data.response.error;
-    // lnd payment error. TODO: improve and unify error handling
-  } else if (data.response.data && data.response.data.payment_error) {
-    error = data.response.data.payment_error;
+  const paymentResponseData = data.response;
+
+  if ("error" in paymentResponseData) {
+    // general error
+    error = paymentResponseData.error;
+  } else if (
+    // lnd payment error
+    paymentResponseData.data.payment_error
+  ) {
+    error = paymentResponseData.data.payment_error;
   }
+
   return utils.notify({
     title: `⚠️ Payment failed`,
     message: `Error: ${error}`,

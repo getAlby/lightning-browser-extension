@@ -57,6 +57,7 @@ export type SendPaymentResponse = {
     preimage: string;
     paymentHash: string;
     route: Route;
+    payment_error?: string;
   };
 };
 
