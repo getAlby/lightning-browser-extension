@@ -19,7 +19,10 @@ const PaymentSummary: FC<Props> = ({
       <dd className="text-gray-500 dark:text-neutral-400">
         {amount} sats
         {!!fiatAmount && (
-          <span className="text-gray-400"> (~{fiatAmount})</span>
+          <span className="text-gray-400" data-testid="fiat_amount">
+            {" "}
+            (~{fiatAmount})
+          </span>
         )}
       </dd>
       {amountAlt && <dd className="text-gray-400">{amountAlt}</dd>}
