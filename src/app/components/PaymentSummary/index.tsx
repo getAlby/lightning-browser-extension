@@ -23,10 +23,14 @@ const PaymentSummary: FC<Props> = ({
         )}
       </dd>
       {amountAlt && <dd className="text-gray-400">{amountAlt}</dd>}
-      <dt className="mt-4 font-medium dark:text-white">Description</dt>
-      <dd className="text-gray-500 dark:text-neutral-400 break-all">
-        {description}
-      </dd>
+      {!!description && (
+        <>
+          <dt className="mt-4 font-medium dark:text-white">Description</dt>
+          <dd className="text-gray-500 dark:text-neutral-400 break-all">
+            {description}
+          </dd>
+        </>
+      )}
     </dl>
   );
 };
