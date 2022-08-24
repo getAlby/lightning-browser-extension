@@ -17,14 +17,8 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
-import type { OriginData } from "~/types";
 
-export type Props = {
-  origin?: OriginData;
-  paymentRequest?: string;
-};
-
-function ConfirmPayment(props: Props) {
+function ConfirmPayment() {
   const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
   const { t } = useTranslation("components", {
@@ -66,7 +60,12 @@ function ConfirmPayment(props: Props) {
       const response = await utils.call(
         "sendPayment",
         { paymentRequest: paymentRequest },
-        { origin: navState.origin }
+        {
+          origin: {
+            ...navState.origin,
+            name: "",
+          },
+        }
       );
       auth.fetchAccountInfo(); // Update balance.
       msg.reply(response);
