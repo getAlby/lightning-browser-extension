@@ -113,6 +113,7 @@ function ConfirmPayment(props: Props) {
               <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
                 <PaymentSummary
                   amount={invoice.satoshis}
+                  fiatAmount={fiatAmount}
                   description={invoice.tagsObject.description}
                 />
               </div>
