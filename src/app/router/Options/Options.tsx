@@ -3,7 +3,10 @@ import Navbar from "@components/Navbar";
 import Accounts from "@screens/Accounts";
 import ConfirmPayment from "@screens/ConfirmPayment";
 import Keysend from "@screens/Keysend";
+import LNURLAuth from "@screens/LNURLAuth";
+import LNURLChannel from "@screens/LNURLChannel";
 import LNURLPay from "@screens/LNURLPay";
+import LNURLWithdraw from "@screens/LNURLWithdraw";
 import TestConnection from "@screens/Options/TestConnection";
 import Publisher from "@screens/Publisher";
 import Publishers from "@screens/Publishers";
@@ -45,10 +48,13 @@ function Options() {
               <Route index element={<Publishers />} />
             </Route>
             <Route path="send" element={<Send />} />
+            <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="keysend" element={<Keysend />} />
             <Route path="receive" element={<Receive />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
-            <Route path="confirmPayment" element={<ConfirmPayment />} />
+            <Route path="lnurlChannel" element={<LNURLChannel />} />
+            <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
+            <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="settings" element={<Settings />} />
             <Route path="accounts">
               <Route
