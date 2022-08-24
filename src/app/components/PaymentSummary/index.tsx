@@ -1,11 +1,18 @@
-type Props = {
+import { FC } from "react";
+
+export type Props = {
   amount: string | React.ReactNode;
   amountAlt?: string;
   description?: string | React.ReactNode;
   fiatAmount: string;
 };
 
-function PaymentSummary({ amount, amountAlt, description, fiatAmount }: Props) {
+const PaymentSummary: FC<Props> = ({
+  amount,
+  amountAlt,
+  description,
+  fiatAmount,
+}) => {
   return (
     <dl className="mb-0">
       <dt className="font-medium dark:text-white">Amount</dt>
@@ -22,6 +29,6 @@ function PaymentSummary({ amount, amountAlt, description, fiatAmount }: Props) {
       </dd>
     </dl>
   );
-}
+};
 
 export default PaymentSummary;
