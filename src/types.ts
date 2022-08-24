@@ -288,6 +288,13 @@ export interface MessageLnurlAuth {
   action: "lnurlAuth";
 }
 
+export interface MessageSendPayment extends MessageDefault {
+  args: {
+    paymentRequest: string;
+  };
+  action: "sendPayment";
+}
+
 export interface MessageSettingsSet extends MessageDefault {
   args: { setting: Partial<SettingsStorage> };
   action: "setSetting";
