@@ -209,16 +209,19 @@ function LNURLPay() {
 
   function getRecipient() {
     if (!details?.metadata) return;
+
     try {
       const metadata = JSON.parse(details.metadata);
       const identifier = metadata.find(
         ([type]: [string]) => type === "text/identifier"
       );
+
       if (identifier) return identifier[1];
     } catch (e) {
       console.error(e);
     }
-    return details.domain;
+
+    return "";
   }
 
   function formattedMetadata(
