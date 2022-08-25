@@ -105,7 +105,6 @@ function Home() {
           <p className="truncate">
             <a
               target="_blank"
-              title={payment.name}
               href={
                 allowance
                   ? `options.html#/publishers/${allowance.id}`
@@ -113,23 +112,7 @@ function Home() {
               }
               rel="noreferrer"
             >
-              {payment.name}
-            </a>
-          </p>
-        ),
-        subTitle: (
-          <p className="truncate">
-            <a
-              target="_blank"
-              title={payment.name}
-              href={
-                allowance
-                  ? `options.html#/publishers/${allowance.id}`
-                  : `options.html#/publishers`
-              }
-              rel="noreferrer"
-            >
-              {payment.host}
+              {payment.name || payment.description || payment.host}
             </a>
           </p>
         ),

@@ -20,7 +20,6 @@ const transactions: Props = {
       name: "Alby",
       preimage:
         "ecc5784b0834f7fcb244f789fe16356eb1121c301c7fc0aa5a7859285c1d1289",
-      subTitle: "",
       title: "Alby",
       totalAmount: "1234000",
       totalAmountFiat: "$241.02",

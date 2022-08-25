@@ -732,11 +732,20 @@ export default function getOriginData(): OriginData {
   }
 
   const metaData = getMetaData();
+  const isExtension = metaData.url?.indexOf("extension://") !== -1;
+
+  let location = window.location.toString();
+  let host = window.location.host;
+
+  if (isExtension && metaData.title === "Alby") {
+    location = "Alby";
+    host = "Alby";
+  }
 
   return {
-    location: window.location.toString(),
+    location,
     domain: window.location.origin,
-    host: window.location.host,
+    host,
     pathname: window.location.pathname,
     name: metaData.provider || metaData.title || "",
     description: metaData.description || "",

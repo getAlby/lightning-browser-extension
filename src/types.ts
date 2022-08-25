@@ -406,7 +406,6 @@ export type Transaction = {
   location?: string;
   name?: string;
   preimage: string;
-  subTitle?: string | React.ReactNode;
   title: string | React.ReactNode;
   totalAmount: Allowance["payments"][number]["totalAmount"];
   totalAmountFiat?: string;
