@@ -38,8 +38,11 @@ const createStateFromParams = (params: URLSearchParams): NavigationState => ({
 });
 
 const navigationState = createStateFromParams(params);
-
 function Prompt() {
+  if (!navigationState.origin) {
+    throw new Error("Origin is missing");
+  }
+
   return (
     <Providers>
       <HashRouter>

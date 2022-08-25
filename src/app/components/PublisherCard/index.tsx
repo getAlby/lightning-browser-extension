@@ -7,7 +7,6 @@ export type Props = {
   title: string;
   image: string;
   description?: string;
-  lnAddress?: string;
   url?: string;
   isCard?: boolean;
   isSmall?: boolean;
@@ -19,7 +18,6 @@ export default function PublisherCard({
   image,
   description,
   url,
-  lnAddress,
   isCard = true,
   isSmall = true,
   children,
@@ -58,14 +56,6 @@ export default function PublisherCard({
         >
           {title}
         </h2>
-        {lnAddress && (
-          <p
-            title={lnAddress}
-            className="text-gray-500 dark:text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap"
-          >
-            {lnAddress}
-          </p>
-        )}
         {url && (
           <a
             href={`https://${url}`}

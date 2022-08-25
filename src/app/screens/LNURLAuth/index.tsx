@@ -23,6 +23,10 @@ function LNURLAuth() {
   const details = navState.args?.lnurlDetails as LNURLAuthServiceResponse;
   const origin = navState.origin;
 
+  if (!origin) {
+    throw new Error("Origin is missing");
+  }
+
   const { t } = useTranslation("components", {
     keyPrefix: "confirmOrCancel",
   });
@@ -30,6 +34,10 @@ function LNURLAuth() {
   const [successMessage, setSuccessMessage] = useState("");
 
   async function confirm() {
+    if (!origin) {
+      throw new Error("Origin is missing");
+    }
+
     try {
       const response = await api.lnurlAuth({
         origin,
@@ -115,8 +123,8 @@ function LNURLAuth() {
       ) : (
         <Container maxWidth="sm">
           <PublisherCard
-            title={navState.origin.name}
-            image={navState.origin.icon}
+            title={origin.name}
+            image={origin.icon}
             url={details.domain}
           />
           <div className="my-4">

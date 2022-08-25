@@ -1,7 +1,6 @@
 import db from "../db";
 
 const updateAllowance = async (message, data) => {
-  console.log("updateAllowance data", data);
   if (!data.origin) {
     return;
   }

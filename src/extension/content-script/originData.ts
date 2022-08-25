@@ -724,8 +724,6 @@ const getMetaData = function () {
       }) || undefined;
   });
 
-  console.log({ metadata });
-
   return metadata;
 };
 

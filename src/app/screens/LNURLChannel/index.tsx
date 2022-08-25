@@ -17,8 +17,10 @@ import type { LNURLChannelServiceResponse } from "~/types";
 
 function LNURLChannel() {
   const navigate = useNavigate();
-
   const navState = useNavigationState();
+  if (!navState.origin) {
+    throw new Error("Origin is missing");
+  }
   const details = navState.args?.lnurlDetails as LNURLChannelServiceResponse;
   const { uri } = details;
   const [pubkey, host] = uri.split("@");
