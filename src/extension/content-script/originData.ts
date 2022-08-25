@@ -736,10 +736,12 @@ export default function getOriginData(): OriginData {
 
   let location = window.location.toString();
   let host = window.location.host;
+  let name = metaData.provider || metaData.title || "";
 
   if (isExtension && metaData.title === "Alby") {
     location = "Alby";
     host = "Alby";
+    name = "";
   }
 
   return {
@@ -747,7 +749,7 @@ export default function getOriginData(): OriginData {
     domain: window.location.origin,
     host,
     pathname: window.location.pathname,
-    name: metaData.provider || metaData.title || "",
+    name,
     description: metaData.description || "",
     icon: metaData.icon || metaData.image || "",
     metaData: metaData,

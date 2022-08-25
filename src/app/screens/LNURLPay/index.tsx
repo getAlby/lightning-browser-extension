@@ -151,7 +151,7 @@ function LNURLPay() {
         {
           origin: {
             ...navState.origin,
-            name: getRecipient(),
+            name: getLnAddress(),
           },
         }
       );
@@ -207,7 +207,7 @@ function LNURLPay() {
     navigate(-1);
   }
 
-  function getRecipient() {
+  function getLnAddress() {
     if (!details?.metadata) return;
 
     try {
@@ -221,7 +221,7 @@ function LNURLPay() {
       console.error(e);
     }
 
-    return "";
+    return;
   }
 
   function formattedMetadata(
@@ -276,7 +276,7 @@ function LNURLPay() {
         <PublisherCard
           title={navState.origin.name}
           description={navState.origin.description}
-          lnAddress={getRecipient()}
+          lnAddress={getLnAddress()}
           image={navState.origin.icon}
           isSmall={false}
         />
@@ -307,7 +307,7 @@ function LNURLPay() {
                 <PublisherCard
                   title={navState.origin.name}
                   image={navState.origin.icon}
-                  lnAddress={getRecipient()}
+                  lnAddress={getLnAddress()}
                 />
                 <div className="my-4">
                   <dl>

@@ -50,14 +50,16 @@ export default function PublisherCard({
           (isSmall ? "" : "text-center")
         }
       >
-        <h2
-          className={
-            "text-xl leading-5 font-semibold dark:text-white " +
-            (isSmall ? "my-1" : "my-2")
-          }
-        >
-          {title}
-        </h2>
+        {title !== "Alby" && (
+          <h2
+            className={
+              "text-xl leading-5 font-semibold dark:text-white " +
+              (isSmall ? "my-1" : "my-2")
+            }
+          >
+            {title}
+          </h2>
+        )}
         {lnAddress && (
           <p
             title={lnAddress}
