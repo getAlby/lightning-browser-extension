@@ -105,7 +105,7 @@ if (document) {
           }
         });
     });
-  });
+  }, { capture: true });
 } else {
   console.warn("Failed to inject WebLN provider");
 }
