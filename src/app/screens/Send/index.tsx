@@ -33,7 +33,7 @@ function Send() {
     try {
       setLoading(true);
 
-      const originData = getOriginData(); //  Origin will always be the Alby popup and therefor 'originData.name' will be "Alby"
+      const originData = getOriginData();
 
       let lnurl = lnurlLib.findLnurl(invoice);
       if (!lnurl && lnurlLib.isLightningAddress(invoice)) {
@@ -68,7 +68,6 @@ function Send() {
         if (lnurlDetails.tag === "payRequest") {
           navigate("/lnurlPay", {
             state: {
-              origin: originData,
               args: {
                 lnurlDetails,
               },
@@ -91,7 +90,6 @@ function Send() {
       } else {
         navigate("/confirmPayment", {
           state: {
-            origin: originData,
             args: {
               paymentRequest: invoice,
             },

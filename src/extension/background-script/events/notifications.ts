@@ -9,7 +9,7 @@ const paymentSuccessNotification = (
     return `${amount} sat${amount != 1 ? "s" : ""}`;
   }
 
-  const recipient = data.origin.name;
+  const recipient = data?.origin?.name;
   const paymentResponseData = data.response;
 
   if ("error" in paymentResponseData) {
@@ -20,9 +20,11 @@ const paymentSuccessNotification = (
   const { total_amt, total_fees } = route;
   const paymentAmount = total_amt - total_fees;
 
-  const notificationTitle = `✅ Successfully paid ${formatAmount(
-    paymentAmount
-  )} ${recipient && `to »${recipient}«`}`;
+  let notificationTitle = `✅ Successfully paid ${formatAmount(paymentAmount)}`;
+
+  if (recipient) {
+    notificationTitle = `${notificationTitle} to »${recipient}«`;
+  }
 
   const notificationMessage = `Fee: ${formatAmount(total_fees)}`;
 

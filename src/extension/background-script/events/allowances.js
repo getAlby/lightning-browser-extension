@@ -1,6 +1,11 @@
 import db from "../db";
 
 const updateAllowance = async (message, data) => {
+  console.log("updateAllowance data", data);
+  if (!data.origin) {
+    return;
+  }
+
   const host = data.origin.host;
   const paymentResponse = data.response;
   const route = paymentResponse.data.route;
