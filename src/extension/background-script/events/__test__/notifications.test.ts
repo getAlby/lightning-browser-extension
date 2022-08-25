@@ -92,4 +92,16 @@ describe("Payment notifications", () => {
       title: "✅ Successfully paid 1 sat to »escapedcat@getalby.com«",
     });
   });
+
+  test("success without origin skips receiver", async () => {
+    const notifySpy = jest.spyOn(utils, "notify");
+    const dataWitouthOrigin = { ...data };
+    delete dataWitouthOrigin.origin;
+    paymentSuccessNotification("ln.sendPayment.success", dataWitouthOrigin);
+
+    expect(notifySpy).toHaveBeenCalledWith({
+      message: "Fee: 0 sats",
+      title: "✅ Successfully paid 1 sat",
+    });
+  });
 });
