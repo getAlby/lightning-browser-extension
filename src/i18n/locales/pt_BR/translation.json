@@ -3,7 +3,7 @@
         "welcome": {
             "nav": {
                 "password": "Senha",
-                "connect": "Conectar",
+                "connect": "Sua conta",
                 "done": "Feito",
                 "welcome": "Bem-vindo"
             },
@@ -21,13 +21,13 @@
                 "paywall_description": "Habilite pagamentos automáticos e defina limites de gastos personalizados para cada site."
             },
             "set_password": {
-                "description": "Sua carteira é protegida por uma senha e precisa ser desbloqueada antes do uso.",
+                "description": "Os dados da sua carteira são criptografados com uma senha de desbloqueio. Não esqueça esta senha! Você precisa dela para usar a extensão Alby (neste navegador)",
                 "enter_password": "Insira uma senha.",
                 "confirm_password": "Confirme sua senha.",
                 "mismatched_password": "As senhas não correspondem.",
-                "choose_password_label": "Escolha uma senha:",
+                "choose_password_label": "Escolha uma senha de desbloqueio:",
                 "confirm_password_label": "Confirme se você digitou corretamente:",
-                "title": "Proteja sua carteira"
+                "title": "Definir uma senha de desbloqueio"
             },
             "test_connection": {
                 "ready": "Perfeito, tudo configurado!",
@@ -189,6 +189,10 @@
             "help_contact": {
                 "part1": "Precisa de ajuda? Contato",
                 "part2": "Suporte Alby"
+            },
+            "unlock_error": {
+                "link": "Redefinir e adicionar uma nova conta",
+                "help": "Os dados da sua conta são criptografados com sua senha de desbloqueio. Se você realmente esqueceu sua senha de desbloqueio, será necessário redefinir e adicionar sua conta novamente."
             }
         },
         "settings": {
@@ -241,10 +245,10 @@
                 "placeholder": "Insira seu endereço de e-mail"
             },
             "change_password": {
-                "choose_password_label": "Insira a nova senha:",
+                "choose_password_label": "Insira uma nova senha de desbloqueio:",
                 "confirm_password_label": "Confirme a nova senha:",
-                "enter_password": "Insira uma senha.",
-                "title": "Alterar Senha",
+                "enter_password": "Insira uma nova senha de desbloqueio.",
+                "title": "Alterar senha de desbloqueio",
                 "mismatched_password": "As senhas não correspondem.",
                 "confirm_password": "Confirme a senha."
             },
@@ -267,10 +271,10 @@
         },
         "send": {
             "qrcode": {
-                "title": "Aguardando leitura da fatura"
+                "title": "Aguardando leitura"
             },
             "input": {
-                "label": "Dados de cobrança",
+                "label": "Fatura, Endereço Relâmpago ou LNURL",
                 "placeholder": "Cole uma fatura, lnurl ou um endereço relâmpago"
             },
             "submit": {
