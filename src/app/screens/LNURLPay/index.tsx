@@ -284,7 +284,7 @@ function LNURLPay() {
         <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
           {getLnAddress() && (
             <>
-              <Dt>LN Address</Dt>
+              <Dt>Lightning Address</Dt>
               <Dd>{getLnAddress()}</Dd>
             </>
           )}
@@ -321,7 +321,7 @@ function LNURLPay() {
                   <dl>
                     {getLnAddress() && (
                       <>
-                        <Dt>LN Address</Dt>
+                        <Dt>Lightning Address</Dt>
                         <Dd>{getLnAddress()}</Dd>
                       </>
                     )}
