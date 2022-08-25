@@ -68,13 +68,8 @@ function Publisher() {
             date: dayjs(payment.createdAt).fromNow(),
             title: (
               <p className="truncate">
-                <a
-                  target="_blank"
-                  title={payment.name}
-                  href={payment.location}
-                  rel="noreferrer"
-                >
-                  {payment.name}
+                <a target="_blank" href={payment.location} rel="noreferrer">
+                  {payment.name || payment.description || payment.host}
                 </a>
               </p>
             ),
