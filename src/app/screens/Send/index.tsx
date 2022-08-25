@@ -33,7 +33,7 @@ function Send() {
     try {
       setLoading(true);
 
-      const originData = getOriginData(); //  Origin will always be the Alby popup and therefor originData.name will be "Alby"
+      const originData = getOriginData(); //  Origin will always be the Alby popup and therefor 'originData.name' will be "Alby"
 
       let lnurl = lnurlLib.findLnurl(invoice);
       if (!lnurl && lnurlLib.isLightningAddress(invoice)) {
