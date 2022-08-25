@@ -1,8 +1,6 @@
 import db from "../db";
 
 const persistSuccessfullPayment = async (message, data) => {
-  console.log("persistSuccessfullPayment data", data);
-
   const recipientName = data?.origin?.name || "";
   const host = data?.origin?.host || "";
   const location = data?.origin?.location || "";

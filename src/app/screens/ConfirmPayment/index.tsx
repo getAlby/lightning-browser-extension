@@ -26,9 +26,6 @@ function ConfirmPayment() {
   });
 
   const navState = useNavigationState();
-
-  console.log("confirmpayment - origin", navState.origin);
-
   const paymentRequest = navState.args?.paymentRequest as string;
   const invoice = lightningPayReq.decode(paymentRequest);
 
@@ -88,7 +85,7 @@ function ConfirmPayment() {
   }
 
   function saveBudget() {
-    if (!budget) return;
+    if (!budget || !navState.origin) return;
     return msg.request("addAllowance", {
       totalBudget: parseInt(budget),
       host: navState.origin.host,

@@ -273,14 +273,21 @@ function LNURLPay() {
 
     return (
       <Container maxWidth="sm">
-        <PublisherCard
-          title={navState.origin.name}
-          description={navState.origin.description}
-          lnAddress={getLnAddress()}
-          image={navState.origin.icon}
-          isSmall={false}
-        />
+        {navState.origin && (
+          <PublisherCard
+            title={navState.origin.name}
+            description={navState.origin.description}
+            image={navState.origin.icon}
+            isSmall={false}
+          />
+        )}
         <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+          {getLnAddress() && (
+            <>
+              <Dt>LN Address</Dt>
+              <Dd>{getLnAddress()}</Dd>
+            </>
+          )}
           {descriptionList.map(([dt, dd]) => (
             <>
               <Dt>{dt}</Dt>
@@ -304,13 +311,20 @@ function LNURLPay() {
           <>
             <div className="grow overflow-y-auto no-scrollbar">
               <Container maxWidth="sm">
-                <PublisherCard
-                  title={navState.origin.name}
-                  image={navState.origin.icon}
-                  lnAddress={getLnAddress()}
-                />
+                {navState.origin && (
+                  <PublisherCard
+                    title={navState.origin.name}
+                    image={navState.origin.icon}
+                  />
+                )}
                 <div className="my-4">
                   <dl>
+                    {getLnAddress() && (
+                      <>
+                        <Dt>LN Address</Dt>
+                        <Dd>{getLnAddress()}</Dd>
+                      </>
+                    )}
                     <>
                       {formattedMetadata(details.metadata).map(
                         ([dt, dd], i) => (

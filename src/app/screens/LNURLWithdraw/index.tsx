@@ -20,6 +20,10 @@ function LNURLWithdraw() {
   const navigate = useNavigate();
   const navState = useNavigationState();
 
+  if (!navState.origin) {
+    throw new Error("Origin is missing");
+  }
+
   const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 

@@ -33,14 +33,13 @@ function Send() {
     try {
       setLoading(true);
 
-      const originData = getOriginData();
-
       let lnurl = lnurlLib.findLnurl(invoice);
       if (!lnurl && lnurlLib.isLightningAddress(invoice)) {
         lnurl = invoice;
       }
 
       if (lnurl) {
+        const originData = getOriginData();
         const lnurlDetails = await lnurlLib.getDetails(lnurl);
 
         if (lnurlDetails.tag === "channelRequest") {

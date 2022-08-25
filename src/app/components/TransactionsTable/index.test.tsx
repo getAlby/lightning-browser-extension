@@ -14,9 +14,9 @@ const transactions: Props = {
       createdAt: "1656573909064",
       date: "5 days ago",
       description: "Polar Invoice for bob",
-      host: "Alby",
+      host: "https://openai.com/dall-e-2/",
       id: "1",
-      location: "Alby",
+      location: "https://openai.com/dall-e-2/",
       name: "Alby",
       preimage:
         "ecc5784b0834f7fcb244f789fe16356eb1121c301c7fc0aa5a7859285c1d1289",
@@ -113,7 +113,9 @@ describe("TransactionsTable", () => {
       user.click(disclosureButton);
     });
 
-    expect(await screen.findByText("Location: Alby")).toBeInTheDocument();
+    expect(
+      await screen.findByText("https://openai.com/dall-e-2/")
+    ).toBeInTheDocument();
   });
 
   test("renders invoice without boostagram", async () => {
