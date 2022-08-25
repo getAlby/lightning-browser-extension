@@ -26,6 +26,9 @@ function ConfirmPayment() {
   });
 
   const navState = useNavigationState();
+
+  console.log("confirmpayment - origin", navState.origin);
+
   const paymentRequest = navState.args?.paymentRequest as string;
   const invoice = lightningPayReq.decode(paymentRequest);
 
@@ -61,10 +64,7 @@ function ConfirmPayment() {
         "sendPayment",
         { paymentRequest: paymentRequest },
         {
-          origin: {
-            ...navState.origin,
-            name: "",
-          },
+          origin: navState.origin,
         }
       );
       auth.fetchAccountInfo(); // Update balance.
@@ -103,11 +103,13 @@ function ConfirmPayment() {
       {!successMessage ? (
         <Container justifyBetween maxWidth="sm">
           <div>
-            <PublisherCard
-              title={navState.origin.name}
-              image={navState.origin.icon}
-              url={navState.origin.host}
-            />
+            {navState.origin && (
+              <PublisherCard
+                title={navState.origin.name}
+                image={navState.origin.icon}
+                url={navState.origin.host}
+              />
+            )}
             <div className="my-4">
               <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
                 <PaymentSummary
@@ -143,11 +145,13 @@ function ConfirmPayment() {
         </Container>
       ) : (
         <Container maxWidth="sm">
-          <PublisherCard
-            title={navState.origin.name}
-            image={navState.origin.icon}
-            url={navState.origin.host}
-          />
+          {navState.origin && (
+            <PublisherCard
+              title={navState.origin.name}
+              image={navState.origin.icon}
+              url={navState.origin.host}
+            />
+          )}
           <div className="my-4">
             <SuccessMessage
               message={successMessage}

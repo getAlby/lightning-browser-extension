@@ -723,6 +723,9 @@ const getMetaData = function () {
         url: document.location.toString(),
       }) || undefined;
   });
+
+  console.log({ metadata });
+
   return metadata;
 };
 
@@ -732,27 +735,17 @@ export default function getOriginData(): OriginData {
   }
 
   const metaData = getMetaData();
-  const isExtension = metaData.url?.indexOf("extension://") !== -1;
-
-  let location = window.location.toString();
-  let host = window.location.host;
-  let name = metaData.provider || metaData.title || "";
-
-  if (isExtension && metaData.title === "Alby") {
-    location = "Alby";
-    host = "Alby";
-    name = "";
-  }
 
   return {
-    location,
+    location: window.location.toString(),
     domain: window.location.origin,
-    host,
+    host: window.location.host,
     pathname: window.location.pathname,
-    name,
+    name: metaData.provider || metaData.title || "",
     description: metaData.description || "",
     icon: metaData.icon || metaData.image || "",
     metaData: metaData,
+    // external is just always true?! should we set this via
     external: true, // indicate that the call is coming from the website (and not made internally within the extension)
   };
 }

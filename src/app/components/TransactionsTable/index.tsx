@@ -110,9 +110,7 @@ export default function TransactionsTable({ transactions }: Props) {
                           {tx.preimage}
                         </p>
                       )}
-                      {tx.location && tx.location === "Alby" ? (
-                        <span>Location: {tx.location}</span>
-                      ) : (
+                      {tx.location && (
                         <a href={tx.location} target="_blank" rel="noreferrer">
                           Location: {tx.location}
                         </a>
