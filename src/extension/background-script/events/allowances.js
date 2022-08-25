@@ -1,7 +1,7 @@
 import db from "../db";
 
 const updateAllowance = async (message, data) => {
-  if (!data.origin) {
+  if (!data.origin || !data.origin.host) {
     return;
   }
 

@@ -61,7 +61,7 @@ function ConfirmPayment() {
         "sendPayment",
         { paymentRequest: paymentRequest },
         {
-          origin: navState.origin,
+          origin: { ...navState.origin, name: "" }, // name needs to be empty because we do not know the receiver
         }
       );
       auth.fetchAccountInfo(); // Update balance.
