@@ -356,7 +356,8 @@
       "send": "Send",
       "save": "Save",
       "receive": "Receive",
-      "enable_now": "Enable Now"
+      "enable_now": "Enable Now",
+      "close": "Close"
     },
     "errors": {
       "connection_failed": "Connection failed"
