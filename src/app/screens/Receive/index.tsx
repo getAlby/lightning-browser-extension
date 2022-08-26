@@ -153,17 +153,19 @@ function Receive() {
                 label={copyLabel}
               />
             </div>
+
             <div className="flex justify-center">
               {pollingForPayment && (
                 <div className="flex items-center space-x-2 dark:text-white">
                   <Loading />
-                  <span>{t("waiting.info")}</span>
+                  <span>{t("payment.waiting.info")}</span>
                 </div>
               )}
+
               {!pollingForPayment && (
                 <Button
                   onClick={() => checkPayment(invoice.rHash)}
-                  label={t("status.label")}
+                  label={t("payment.status.label")}
                 />
               )}
             </div>
