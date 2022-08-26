@@ -114,7 +114,7 @@ export async function authFunction({
       const error =
         (e.response?.data as { reason?: string })?.reason || e.message; // lnurl error or exception message
 
-      PubSub.publish(`lnurl.auth.failed`, {
+      PubSub.publish("lnurl.auth.failed", {
         error,
         lnurlDetails,
         origin,
@@ -122,7 +122,7 @@ export async function authFunction({
 
       throw new Error(error);
     } else if (e instanceof Error) {
-      PubSub.publish(`lnurl.auth.failed`, {
+      PubSub.publish("lnurl.auth.failed", {
         error: e.message,
         lnurlDetails,
         origin,

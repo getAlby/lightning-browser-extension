@@ -75,7 +75,12 @@ const lnurlAuthSuccessNotification = (
   });
 };
 
-const lnurlAuthFailedNotification = (message: FixMe, data: FixMe) => {
+const lnurlAuthFailedNotification = (
+  message: "lnurl.auth.failed",
+  data: {
+    error: string;
+  }
+) => {
   return utils.notify({
     title: `⚠️ Login failed`,
     message: `${data.error}`,
