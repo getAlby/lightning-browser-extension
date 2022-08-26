@@ -10,7 +10,10 @@ if (document) {
 
   // Intercept any `lightning:` requests
   window.addEventListener("click", (ev) => {
-    const target = ev.target;
+    // Use composedPath() for detecting links inside a Shadow DOM
+    // https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath
+    const target = ev.composedPath()[0] || ev.target;
+    
     if (!target || !target.closest) {
       return;
     }
