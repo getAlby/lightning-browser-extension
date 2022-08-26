@@ -1,8 +1,8 @@
+import Checkbox from "@components/form/Checkbox";
+import DualCurrencyField from "@components/form/DualCurrencyField";
 import { Transition } from "@headlessui/react";
 import { ChangeEventHandler } from "react";
-
-import Checkbox from "../form/Checkbox";
-import DualCurrencyField from "../form/DualCurrencyField";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   remember: boolean;
@@ -19,6 +19,12 @@ function BudgetControl({
   onBudgetChange,
   fiatAmount,
 }: Props) {
+  const { t } = useTranslation("components", {
+    keyPrefix: "budgetControl",
+  });
+
+  const { t: tCommon } = useTranslation("common");
+
   return (
     <div className="mb-6">
       <div className="flex items-center">
@@ -32,7 +38,7 @@ function BudgetControl({
           htmlFor="remember_me"
           className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
         >
-          Remember and set a budget
+          {t("remember.label")}
         </label>
       </div>
 
@@ -45,16 +51,14 @@ function BudgetControl({
         leaveFrom="scale-100 opacity-100"
         leaveTo="scale-95 opacity-0"
       >
-        <p className="my-3 text-gray-500 text-sm">
-          You may set a balance to not be asked for confirmation on payments
-          until it is exhausted.
-        </p>
+        <p className="my-3 text-gray-500 text-sm">{t("remember.info")}</p>
+
         <div>
           <DualCurrencyField
             fiatValue={fiatAmount}
             id="budget"
-            label="Budget"
-            placeholder="sats"
+            label={t("budget.label")}
+            placeholder={tCommon("sats")}
             value={budget}
             onChange={onBudgetChange}
           />
