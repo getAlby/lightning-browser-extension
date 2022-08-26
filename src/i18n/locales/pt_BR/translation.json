@@ -366,7 +366,8 @@
             "connect": "Conectar",
             "save": "Salvar",
             "delete": "Remover",
-            "enable_now": "Ativar"
+            "enable_now": "Ativar",
+            "close": "Fechar"
         },
         "errors": {
             "connection_failed": "Falha na conexão"
