@@ -5,12 +5,13 @@ import {
 import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import Container from "@components/Container";
-// import Select from "@components/Form/Select";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
+import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
 import { useState, useEffect, useRef } from "react";
+import type { FormEvent } from "react";
 import Confetti from "react-confetti";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
@@ -22,8 +23,6 @@ import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
 import { poll } from "~/common/utils/helpers";
-
-import DualCurrencyField from "../components/form/DualCurrencyField";
 
 function Receive() {
   const { t } = useTranslation("translation", { keyPrefix: "receive" });
@@ -202,7 +201,12 @@ function Receive() {
             {invoice ? (
               renderInvoice()
             ) : (
-              <>
+              <form
+                onSubmit={(e: FormEvent) => {
+                  e.preventDefault();
+                  createInvoice();
+                }}
+              >
                 <div className="mb-4">
                   <DualCurrencyField
                     id="amount"
@@ -225,16 +229,16 @@ function Receive() {
                 <div className="text-center mb-4">
                   <div className="mb-4">
                     <Button
-                      onClick={createInvoice}
+                      type="submit"
                       label={t("submit.label")}
                       fullWidth
                       primary
                       loading={loading}
-                      disabled={loading || formData.amount === ""}
+                      disabled={loading}
                     />
                   </div>
                 </div>
-              </>
+              </form>
             )}
           </div>
         </Container>
