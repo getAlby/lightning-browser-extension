@@ -284,6 +284,7 @@ export type Transaction = {
   description: string;
   location: string;
   totalAmountFiat: string;
+  metadata?: string;
 };
 
 export interface Payment {

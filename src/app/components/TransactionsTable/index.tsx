@@ -4,6 +4,7 @@ import {
   CaretDownIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Disclosure } from "@headlessui/react";
+import { Fragment } from "react";
 import { Transaction } from "~/types";
 
 import Badge from "../Badge";
@@ -32,6 +33,31 @@ export default function TransactionsTable({ transactions }: Props) {
     );
   }
 
+  function RenderMetadata(metadata: { [key: string]: string }) {
+    const metadataElements: JSX.Element[] = [];
+    if (metadata != undefined) {
+      for (const key in metadata) {
+        metadataElements.push(
+          <>
+            <dt className="mt-4 font-medium text-gray-800 dark:text-white">
+              {key}
+            </dt>
+            <dd className="mb-0 text-gray-600 dark:text-neutral-500 break-all">
+              {key == "image" ? (
+                <img src={`data:image/png;base64, ${metadata[key]}`} />
+              ) : (
+                metadata[key]
+              )}
+            </dd>
+          </>
+        );
+      }
+    } else {
+      metadataElements.push(<p>&quot;No Metadata Present&quot;</p>);
+    }
+
+    return metadataElements;
+  }
   return (
     <div className="shadow overflow-hidden rounded-lg">
       <div className="bg-white divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
@@ -97,6 +123,17 @@ export default function TransactionsTable({ transactions }: Props) {
                       ) : (
                         ""
                       )}
+                      <dl>
+                        <dt className="mt-4 font-medium text-gray-800 dark:text-white">
+                          Metadata
+                        </dt>
+
+                        {RenderMetadata(
+                          tx.metadata as unknown as { [key: string]: string }
+                        ).map((metadata, key) => (
+                          <Fragment key={key}>{metadata}</Fragment>
+                        ))}
+                      </dl>
                     </div>
                   </Disclosure.Panel>
                 </>
