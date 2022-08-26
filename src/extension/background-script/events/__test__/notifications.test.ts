@@ -1,9 +1,16 @@
 import utils from "~/common/lib/utils";
-import type { PaymentNotificationData } from "~/types";
+import type { PaymentNotificationData, AuthNotificationData } from "~/types";
 
-import { paymentSuccessNotification } from "../notifications";
+import {
+  paymentSuccessNotification,
+  lnurlAuthSuccessNotification,
+} from "../notifications";
 
 describe("Payment notifications", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   const data: PaymentNotificationData = {
     response: {
       data: {
@@ -88,8 +95,8 @@ describe("Payment notifications", () => {
     paymentSuccessNotification("ln.sendPayment.success", data);
 
     expect(notifySpy).toHaveBeenCalledWith({
-      message: "Fee: 0 sats",
       title: "✅ Successfully paid 1 sat to »escapedcat@getalby.com«",
+      message: "Fee: 0 sats",
     });
   });
 
@@ -100,8 +107,63 @@ describe("Payment notifications", () => {
     paymentSuccessNotification("ln.sendPayment.success", dataWitouthOrigin);
 
     expect(notifySpy).toHaveBeenCalledWith({
-      message: "Fee: 0 sats",
       title: "✅ Successfully paid 1 sat",
+      message: "Fee: 0 sats",
+    });
+  });
+});
+
+describe("Auth notifications", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  const data: AuthNotificationData = {
+    authResponse: {
+      status: "OK",
+    },
+    lnurlDetails: {
+      tag: "login",
+      k1: "42033a863825a495feed197ae2c9c3777b771695e7f2251983b323e5354246d6",
+      domain: "lnurl.fiatjaf.com",
+      url: "https://lnurl.fiatjaf.com/lnurl-login?tag=login&k1=42033a863825a495feed197ae2c9c3777b771695e7f2251983b323e5354246d6",
+    },
+  };
+
+  test("success via login from popup", async () => {
+    const notifySpy = jest.spyOn(utils, "notify");
+    lnurlAuthSuccessNotification("lnurl.auth.success", data);
+
+    expect(notifySpy).toHaveBeenCalledWith({
+      title: "✅ Login",
+      message: "Successfully logged in to lnurl.fiatjaf.com",
+    });
+  });
+
+  test("success via login from prompt with origin", async () => {
+    const notifySpy = jest.spyOn(utils, "notify");
+    lnurlAuthSuccessNotification("lnurl.auth.success", {
+      ...data,
+      origin: {
+        location: "https://lnurl.fiatjaf.com/",
+        domain: "https://lnurl.fiatjaf.com",
+        host: "lnurl.fiatjaf.com",
+        pathname: "/",
+        name: "lnurl fiatjaf",
+        description: "",
+        icon: "",
+        metaData: {
+          title: "lnurl playground",
+          url: "https://lnurl.fiatjaf.com/",
+          provider: "lnurl fiatjaf",
+        },
+        external: true,
+      },
+    });
+
+    expect(notifySpy).toHaveBeenCalledWith({
+      title: "✅ Login to lnurl fiatjaf",
+      message: "Successfully logged in to lnurl.fiatjaf.com",
     });
   });
 });

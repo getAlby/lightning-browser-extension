@@ -68,12 +68,8 @@ export interface PaymentNotificationData {
 }
 
 export interface AuthResponseObject {
-  status: string;
   reason?: string;
-  data: {
-    status: string;
-  };
-  statusText: string;
+  status: string;
 }
 export interface AuthNotificationData {
   authResponse?: AuthResponseObject;
