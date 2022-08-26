@@ -67,6 +67,20 @@ export interface PaymentNotificationData {
   };
 }
 
+export interface AuthResponseObject {
+  status: string;
+  reason?: string;
+  data: {
+    status: string;
+  };
+  statusText: string;
+}
+export interface AuthNotificationData {
+  authResponse?: AuthResponseObject;
+  origin?: OriginData;
+  lnurlDetails: LNURLAuthServiceResponse;
+}
+
 export interface OriginDataInternal {
   internal: boolean;
 }
@@ -277,7 +291,7 @@ export interface MessageConnectPeer extends MessageDefault {
 
 export interface MessageLnurlAuth {
   args: {
-    origin: OriginData;
+    origin?: OriginData;
     lnurlDetails: {
       tag: "login";
       k1: string;

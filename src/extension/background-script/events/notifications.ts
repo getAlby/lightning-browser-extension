@@ -1,5 +1,5 @@
 import utils from "~/common/lib/utils";
-import type { PaymentNotificationData } from "~/types";
+import type { PaymentNotificationData, AuthNotificationData } from "~/types";
 
 const paymentSuccessNotification = (
   message: "ln.sendPayment.success",
@@ -57,9 +57,20 @@ const paymentFailedNotification = (
   });
 };
 
-const lnurlAuthSuccessNotification = (message: FixMe, data: FixMe) => {
+const lnurlAuthSuccessNotification = (
+  message: "lnurl.auth.success",
+  data: AuthNotificationData
+) => {
+  // console.log("lnurlAuthSuccessNotification", message, data);
+
+  let title = "✅ Login";
+
+  if (data?.origin?.name) {
+    title = `${title} to ${data.origin.name}`;
+  }
+
   return utils.notify({
-    title: `✅ Login to ${data.origin.name}`,
+    title,
     message: `Successfully logged into ${data.lnurlDetails.domain}`,
   });
 };
