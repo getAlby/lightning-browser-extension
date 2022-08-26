@@ -20,6 +20,7 @@ function LNURLAuth() {
   const navigate = useNavigate();
 
   const navState = useNavigationState();
+
   const details = navState.args?.lnurlDetails as LNURLAuthServiceResponse;
   const origin = navState.origin as OriginData; // this action will always have an `origin` set, just the type is optional to support usage via PopUp
 
@@ -88,13 +89,18 @@ function LNURLAuth() {
         <>
           <Container justifyBetween maxWidth="sm">
             <div>
-              <PublisherCard
-                title={origin.name}
-                image={origin.icon}
-                url={details.domain}
-              />
+              {origin && (
+                <PublisherCard
+                  title={origin.name}
+                  image={origin.icon}
+                  url={details.domain}
+                />
+              )}
+
               <ContentMessage
-                heading={`${origin.name} asks you to login to`}
+                heading={`${
+                  origin ? origin.name : details.domain
+                } asks you to login to`}
                 content={details.domain}
               />
             </div>

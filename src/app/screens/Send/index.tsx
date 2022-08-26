@@ -57,7 +57,7 @@ function Send() {
         if (lnurlDetails.tag === "login") {
           navigate("/lnurlAuth", {
             state: {
-              origin: originData,
+              // origin: originData,
               args: {
                 lnurlDetails,
               },
