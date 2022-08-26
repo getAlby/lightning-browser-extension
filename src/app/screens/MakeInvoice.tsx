@@ -42,8 +42,10 @@ function MakeInvoice({
   const [value, setValue] = useState(invoiceAttributes.amount || "");
   const [memo, setMemo] = useState(invoiceAttributes.memo || "");
   const [error, setError] = useState("");
-  const { t } = useTranslation("components", {
-    keyPrefix: "confirmOrCancel",
+  const { t: tComponents } = useTranslation("components");
+  const { t: tCommon } = useTranslation("common");
+  const { t } = useTranslation("translation", {
+    keyPrefix: "make_invoice",
   });
 
   function handleValueChange(amount: string) {
@@ -52,12 +54,12 @@ function MakeInvoice({
       invoiceAttributes.minimumAmount &&
       parseInt(amount) < invoiceAttributes.minimumAmount
     ) {
-      setError("Amount is less than minimum");
+      setError(t("errors.amount_too_small"));
     } else if (
       invoiceAttributes.maximumAmount &&
       parseInt(amount) > invoiceAttributes.maximumAmount
     ) {
-      setError("Amount exceeds maximum");
+      setError(t("errors.amount_too_big"));
     }
     setValue(amount);
   }
@@ -89,7 +91,8 @@ function MakeInvoice({
 
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
-      <ScreenHeader title={"Create Invoice"} />
+      <ScreenHeader title={t("title")} />
+
       <Container isScreenView maxWidth="sm">
         <div>
           <PublisherCard
@@ -97,13 +100,14 @@ function MakeInvoice({
             image={origin.icon}
             url={origin.host}
           />
+
           <div className="pt-4">
             <div>
-              {amountEditable && (
+              {amountEditable ? (
                 <div className="mb-4">
                   <TextField
                     id="amount"
-                    label="Amount (Satoshi)"
+                    label={t("amount.label")}
                     type="number"
                     min={invoiceAttributes.minimumAmount}
                     max={invoiceAttributes.maximumAmount}
@@ -112,28 +116,28 @@ function MakeInvoice({
                   />
                   <SatButtons onClick={handleValueChange} />
                 </div>
-              )}
-              {!amountEditable && (
+              ) : (
                 <dl className="overflow-hidden">
-                  <Dt>Amount</Dt>
+                  <Dt>{t("amount.label")}</Dt>
                   <Dd>{invoiceAttributes.amount}</Dd>
                 </dl>
               )}
+
               {error && <p className="mb-1 text-red-500">{error}</p>}
             </div>
+
             <div className="mb-4">
-              {memoEditable && (
+              {memoEditable ? (
                 <TextField
                   id="memo"
-                  label="Memo"
+                  label={t("memo.label")}
                   value={memo}
-                  placeholder="Optional"
+                  placeholder={tCommon("optional")}
                   onChange={handleMemoChange}
                 />
-              )}
-              {!memoEditable && (
+              ) : (
                 <dl className="dark:bg-surface-02dp overflow-hidden">
-                  <Dt>Memo</Dt>
+                  <Dt>{t("memo.label")}</Dt>
                   <Dd>{invoiceAttributes.memo}</Dd>
                 </dl>
               )}
@@ -148,8 +152,9 @@ function MakeInvoice({
             onConfirm={confirm}
             onCancel={reject}
           />
+
           <p className="mb-4 text-center text-sm text-gray-400">
-            <em>{t("only_trusted")}</em>
+            <em>{tComponents("confirmOrCancel.only_trusted")}</em>
           </p>
         </div>
       </Container>

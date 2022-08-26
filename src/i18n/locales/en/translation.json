@@ -336,6 +336,19 @@
       "publisher": {
         "allowance": { "title": "Allowance", "usedBudget": "sats used" }
       }
+    },
+    "make_invoice": {
+      "title": "Create Invoice",
+      "amount": {
+        "label": "Amount (Satoshi)"
+      },
+      "memo": {
+        "label": "Memo"
+      },
+      "errors": {
+        "amount_too_small": "Amount is less than minimum",
+        "amount_too_big": "Amount exceeds maximum"
+      }
     }
   },
   "common": {
@@ -345,6 +358,8 @@
     "websites": "Websites",
     "sats": "sats",
     "loading": "loading",
+    "amount": "Amount",
+    "optional": "Optional",
     "actions": {
       "delete": "Delete",
       "edit": "Edit",
