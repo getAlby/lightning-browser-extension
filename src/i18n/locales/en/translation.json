@@ -390,6 +390,15 @@
     },
     "confirmOrCancel": {
       "only_trusted": "Only connect with sites you trust."
+    },
+    "budgetControl": {
+      "remember": {
+        "label": "Remember and set a budget",
+        "info": "You may set a balance to not be asked for confirmation on payments until it is exhausted."
+      },
+      "budget": {
+        "label": "Budget"
+      }
     }
   }
 }
