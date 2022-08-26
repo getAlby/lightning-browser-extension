@@ -11,6 +11,7 @@ import {
   LNURLDetails,
   LnurlAuthResponse,
   OriginData,
+  AuthResponseObject,
 } from "~/types";
 
 const LNURLAUTH_CANONICAL_PHRASE =
@@ -26,7 +27,7 @@ export async function authFunction({
   origin,
 }: {
   lnurlDetails: LNURLDetails;
-  origin: OriginData;
+  origin?: OriginData;
 }) {
   if (lnurlDetails.tag !== "login")
     throw new Error(
@@ -83,7 +84,7 @@ export async function authFunction({
   loginURL.searchParams.set("t", Date.now().toString());
 
   try {
-    const authResponse = await axios.get<{ status: string; reason?: string }>(
+    const authResponse = await axios.get<AuthResponseObject>(
       loginURL.toString()
     );
 

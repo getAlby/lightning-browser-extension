@@ -37,7 +37,7 @@ function LNURLAuth() {
         lnurlDetails: details,
       });
 
-      if (navState.isPrompt && origin.host) {
+      if (navState.isPrompt && origin?.host) {
         const allowance = await api.getAllowance(origin.host);
 
         if (allowance.lnurlAuth === false) {
@@ -120,11 +120,13 @@ function LNURLAuth() {
         </>
       ) : (
         <Container maxWidth="sm">
-          <PublisherCard
-            title={origin.name}
-            image={origin.icon}
-            url={details.domain}
-          />
+          {origin && (
+            <PublisherCard
+              title={origin.name}
+              image={origin.icon}
+              url={details.domain}
+            />
+          )}
           <div className="my-4">
             <SuccessMessage message={successMessage} onClose={close} />
           </div>
