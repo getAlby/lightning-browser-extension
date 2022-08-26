@@ -71,7 +71,7 @@ const lnurlAuthSuccessNotification = (
 
   return utils.notify({
     title,
-    message: `Successfully logged into ${data.lnurlDetails.domain}`,
+    message: `Successfully logged in to ${data.lnurlDetails.domain}`,
   });
 };
 
