@@ -9,12 +9,14 @@ import utils from "~/common/lib/utils";
 export const galoyUrls = {
   "galoy-bitcoin-beach": {
     label: "Bitcoin Beach Wallet",
+    website: "https://galoy.io/bitcoin-beach-wallet/",
     url:
       process.env.BITCOIN_BEACH_GALOY_URL ||
       "https://api.mainnet.galoy.io/graphql/",
   },
   "galoy-bitcoin-jungle": {
     label: "Bitcoin Jungle Wallet",
+    website: "https://bitcoinjungle.app/",
     url:
       process.env.BITCOIN_JUNGLE_GALOY_URL ||
       "https://api.mainnet.bitcoinjungle.app/graphql",
@@ -33,7 +35,7 @@ type Props = {
 
 export default function ConnectGaloy(props: Props) {
   const { instance } = props;
-  const { url, label } = galoyUrls[instance];
+  const { url, label, website } = galoyUrls[instance];
 
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -278,7 +280,7 @@ export default function ConnectGaloy(props: Props) {
 
   return (
     <ConnectorForm
-      title={`Connect to ${label}`}
+      title={<h1 className="mb-6 text-2xl font-bold dark:text-white">Connect to <u><a href={website}>{label}</a></u></h1>}
       submitLabel={
         smsCodeRequested || smsCode || acceptJwtDirectly || jwt
           ? "Login"
