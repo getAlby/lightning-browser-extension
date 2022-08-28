@@ -351,6 +351,19 @@
                 "none-info": "Nenhum site ainda.",
                 "title": "Sua lista de sites⚡️"
             }
+        },
+        "make_invoice": {
+            "amount": {
+                "label": "Quantia (Satoshi)"
+            },
+            "memo": {
+                "label": "Memo"
+            },
+            "errors": {
+                "amount_too_small": "O valor é menor que o mínimo",
+                "amount_too_big": "O valor excede o máximo"
+            },
+            "title": "Solicitar Fatura"
         }
     },
     "common": {
@@ -366,7 +379,8 @@
             "connect": "Conectar",
             "save": "Salvar",
             "delete": "Remover",
-            "enable_now": "Ativar"
+            "enable_now": "Ativar",
+            "close": "Fechar"
         },
         "errors": {
             "connection_failed": "Falha na conexão"
@@ -375,7 +389,9 @@
         "settings": "Configurações",
         "websites": "Sites",
         "loading": "carregando",
-        "sats": "sats"
+        "sats": "sats",
+        "amount": "Quantia",
+        "optional": "Opcional"
     },
     "components": {
         "qrcode_scanner": {
@@ -408,6 +424,15 @@
             },
             "options": {
                 "label": "Opções limite de gastos"
+            }
+        },
+        "budgetControl": {
+            "remember": {
+                "label": "Lembrar e definir um limite de gastos",
+                "info": "Você pode definir um valor limite para pagamentos automáticos (sem necessidade de confirmação)."
+            },
+            "budget": {
+                "label": "Limite de gastos"
             }
         }
     }
