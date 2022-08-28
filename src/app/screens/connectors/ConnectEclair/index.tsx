@@ -68,7 +68,7 @@ export default function ConnectEclair() {
 
   return (
     <ConnectorForm
-      title="Connect to Eclair"
+      title={<h1 className="mb-6 text-2xl font-bold dark:text-white">Connect to <u><a href="https://github.com/ACINQ/eclair">Eclair</a></u></h1>}
       submitLoading={loading}
       submitDisabled={formData.password === "" || formData.url === ""}
       onSubmit={handleSubmit}

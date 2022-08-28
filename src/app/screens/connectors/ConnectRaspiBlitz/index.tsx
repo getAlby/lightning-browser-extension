@@ -91,6 +91,7 @@ export default function ConnectRaspiBlitz() {
   return (
     <ConnectorForm
       title="Connect to your RaspiBlitz node"
+      title={<h1 className="mb-6 text-2xl font-bold dark:text-white">Connect to your <u><a href="https://raspiblitz.org/">RaspiBlitz</a></u> node</h1>}
       description={
         <p>
           You need your node onion address, port, and a macaroon with read and

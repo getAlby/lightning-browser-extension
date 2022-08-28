@@ -91,10 +91,10 @@ export default function ConnectUmbrel() {
 
   return (
     <ConnectorForm
-      title="Connect to your Umbrel node"
+      title={<h1 className="mb-6 text-2xl font-bold dark:text-white">Connect to your <u><a href="https://umbrel.com/">Umbrel</a></u> node</h1>}
       description={
         <p>
-          In your Umbrel dashboard go to <strong>Connect Wallet</strong>.<br />
+          In your <u><a href="https://umbrel.com/">Umbrel</a></u> dashboard go to <strong>Connect Wallet</strong>.<br />
           Select <strong>lndconnect REST</strong> and copy the{" "}
           <strong>lndconnect URL</strong>. (Depending on your setup you can
           either use the <em>local</em> connection or the <em>Tor</em>{" "}
