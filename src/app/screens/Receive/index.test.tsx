@@ -21,6 +21,7 @@ jest.mock("~/common/lib/api", () => {
       exchange: "coindesk",
     })),
     makeInvoice: jest.fn(),
+    getCurrencyRate: jest.fn(() => 29991.836),
   };
 });
 
