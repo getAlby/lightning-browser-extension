@@ -2,7 +2,6 @@
  * Highly inspired by: https://github.com/AryanJ-NYC/bitcoin-conversion
  */
 import axios from "axios";
-import debounce from "lodash/debounce";
 import { CURRENCIES } from "~/common/constants";
 import { getSettings, getCurrencyRate } from "~/common/lib/api";
 
@@ -17,7 +16,7 @@ const getCurrencySettings = async () => {
 
 const numSatsInBtc = 100_000_000;
 
-export const getFiatBtcRate = async (currency: CURRENCIES): Promise<string> => {
+export const getFiatBtcRate = async (currency: CURRENCIES): Promise<number> => {
   const { exchange } = await getCurrencySettings();
 
   let response;
@@ -27,7 +26,6 @@ export const getFiatBtcRate = async (currency: CURRENCIES): Promise<string> => {
       `https://api.yadio.io/exrates/${currency.toLowerCase()}`
     );
     const data = await response?.data;
-
     return data.BTC;
   }
 
@@ -36,7 +34,6 @@ export const getFiatBtcRate = async (currency: CURRENCIES): Promise<string> => {
       `https://api.coindesk.com/v1/bpi/currentprice/${currency.toLowerCase()}.json`
     );
     const data = await response?.data;
-
     return data.bpi[currency].rate_float;
   }
 
@@ -44,20 +41,14 @@ export const getFiatBtcRate = async (currency: CURRENCIES): Promise<string> => {
     `https://getalby.com/api/rates/${currency.toLowerCase()}.json`
   );
   const data = await response?.data;
-
   return data[currency].rate_float;
 };
 
 const bitcoinToFiat = async (
   amountInBtc: number | string,
-  convertTo: CURRENCIES,
-  isLatestRate?: boolean
+  convertTo: CURRENCIES
 ) => {
-  console.log("bitcoinToFiat");
-
   const rate = await getCurrencyRate(convertTo);
-  console.log("bitcoinToFiat - rate", rate);
-
   return Number(amountInBtc) * Number(rate);
 };
 
@@ -75,7 +66,7 @@ const satoshisToFiat = async ({
   isLatestRate?: boolean;
 }) => {
   const btc = satoshisToBitcoin(amountInSats);
-  const fiat = await bitcoinToFiat(btc, convertTo, isLatestRate);
+  const fiat = await bitcoinToFiat(btc, convertTo);
   return fiat;
 };
 
