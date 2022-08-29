@@ -32,49 +32,34 @@ export const removeAccountFromCache = async (id: string) => {
 };
 
 export const getCurrencyRateFromCache = async (currency: CURRENCIES) => {
-  console.log("getCurrencyRateFromCache");
-
-  let currencyRateCache: { rate?: ""; timestamp?: number } = {};
+  let currencyRateCache: { rate?: number; timestamp?: number } = {};
   const result = await browser.storage.local.get(["currencyRate"]);
-  if (result.currencyRate) {
-    console.log("GOT RATE");
 
+  if (result.currencyRate) {
     currencyRateCache = JSON.parse(result.currencyRate);
 
     const currentTime = dayjs();
     const rateTimestamp = dayjs(currencyRateCache?.timestamp);
     const rateTimestampPlusOneMinute = dayjs(rateTimestamp).add(1, "minute");
-
-    // console.log(dayjs(currencyRateCache?.timestamp));
-
-    console.log(currentTime.isSameOrBefore(rateTimestampPlusOneMinute));
-    // console.log(currentTime.isSameOrAfter(rateTimestampPlusOneMinute));
-
     const isRateCurrent = currentTime.isSameOrBefore(
       rateTimestampPlusOneMinute
     );
 
     if (isRateCurrent) {
-      console.log("IS NEW EOUGH");
-
-      return currencyRateCache?.timestamp;
+      return currencyRateCache.rate;
     } else {
-      console.log("GET NEW RATE");
       const rate = await getFiatBtcRate(currency);
       storeCurrencyRate(rate);
       return rate;
     }
   } else {
-    console.log("GET RATE FOR FIRST TIME");
     const rate = await getFiatBtcRate(currency);
     storeCurrencyRate(rate);
     return rate;
   }
 };
 
-const storeCurrencyRate = (rate: string) => {
-  console.log("storeCurrencyRate");
-
+const storeCurrencyRate = (rate: number) => {
   const currencyRate = {
     rate,
     timestamp: Date.now(),
