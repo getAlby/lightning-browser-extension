@@ -86,7 +86,9 @@ export default function ConnectCitadel() {
       title={
         <h1 className="mb-6 text-2xl font-bold dark:text-white">
           Connect to your{" "}
-            <a className="underline"href="https://runcitadel.space/">Citadel</a>{" "}
+          <a className="underline" href="https://runcitadel.space/">
+            Citadel
+          </a>{" "}
           Node
         </h1>
       }

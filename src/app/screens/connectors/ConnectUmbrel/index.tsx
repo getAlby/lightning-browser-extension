@@ -94,7 +94,9 @@ export default function ConnectUmbrel() {
       title={
         <h1 className="mb-6 text-2xl font-bold dark:text-white">
           Connect to your{" "}
-            <a className="underline" href="https://umbrel.com/">Umbrel</a>{" "}
+          <a className="underline" href="https://umbrel.com/">
+            Umbrel
+          </a>{" "}
           node
         </h1>
       }

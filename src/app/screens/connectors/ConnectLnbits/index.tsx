@@ -81,7 +81,9 @@ export default function ConnectLnbits() {
       title={
         <h1 className="mb-6 text-2xl font-bold dark:text-white">
           Connect to{" "}
-            <a className="underline" href="https://lnbits.com/">LNbits</a>
+          <a className="underline" href="https://lnbits.com/">
+            LNbits
+          </a>
         </h1>
       }
       submitLoading={loading}

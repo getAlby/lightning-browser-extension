@@ -94,7 +94,9 @@ export default function ConnectMyNode() {
       title={
         <h1 className="mb-6 text-2xl font-bold dark:text-white">
           Connect to your{" "}
-            <a className="underline" href="https://mynodebtc.com/">myNode</a>
+          <a className="underline" href="https://mynodebtc.com/">
+            myNode
+          </a>
         </h1>
       }
       description={
