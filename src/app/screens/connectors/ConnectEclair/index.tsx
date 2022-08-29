@@ -71,7 +71,9 @@ export default function ConnectEclair() {
       title={
         <h1 className="mb-6 text-2xl font-bold dark:text-white">
           Connect to{" "}
-            <a className="underline" href="https://github.com/ACINQ/eclair">Eclair</a>
+          <a className="underline" href="https://github.com/ACINQ/eclair">
+            Eclair
+          </a>
         </h1>
       }
       submitLoading={loading}

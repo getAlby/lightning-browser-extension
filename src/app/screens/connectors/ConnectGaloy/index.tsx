@@ -283,7 +283,9 @@ export default function ConnectGaloy(props: Props) {
       title={
         <h1 className="mb-6 text-2xl font-bold dark:text-white">
           Connect to{" "}
-            <a className="underline" href={website}>{label}</a>
+          <a className="underline" href={website}>
+            {label}
+          </a>
         </h1>
       }
       submitLabel={
