@@ -1,3 +1,4 @@
+import { CURRENCIES } from "~/common/constants";
 import {
   ConnectPeerArgs,
   ConnectPeerResponse,
@@ -21,6 +22,7 @@ import type {
 
 import {
   getAccountsCache,
+  getCurrencyRateFromCache,
   removeAccountFromCache,
   storeAccounts,
 } from "./cache";
