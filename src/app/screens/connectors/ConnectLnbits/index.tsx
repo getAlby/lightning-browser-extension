@@ -78,7 +78,12 @@ export default function ConnectLnbits() {
 
   return (
     <ConnectorForm
-      title={<h1 className="mb-6 text-2xl font-bold dark:text-white">Connect to <u><a href="https://lnbits.com/">LNbits</a></u></h1>}
+      title={
+        <h1 className="mb-6 text-2xl font-bold dark:text-white">
+          Connect to{" "}
+            <a className="underline" href="https://lnbits.com/">LNbits</a>
+        </h1>
+      }
       submitLoading={loading}
       submitDisabled={formData.adminkey === "" || formData.url === ""}
       onSubmit={handleSubmit}
