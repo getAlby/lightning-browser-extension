@@ -280,7 +280,12 @@ export default function ConnectGaloy(props: Props) {
 
   return (
     <ConnectorForm
-      title={<h1 className="mb-6 text-2xl font-bold dark:text-white">Connect to <u><a href={website}>{label}</a></u></h1>}
+      title={
+        <h1 className="mb-6 text-2xl font-bold dark:text-white">
+          Connect to{" "}
+            <a className="underline" href={website}>{label}</a>
+        </h1>
+      }
       submitLabel={
         smsCodeRequested || smsCode || acceptJwtDirectly || jwt
           ? "Login"

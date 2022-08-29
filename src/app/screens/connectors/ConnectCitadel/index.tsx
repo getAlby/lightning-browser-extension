@@ -83,7 +83,13 @@ export default function ConnectCitadel() {
 
   return (
     <ConnectorForm
-      title={<h1 className="mb-6 text-2xl font-bold dark:text-white">Connect to your <u><a href="https://runcitadel.space/">Citadel</a></u> Node</h1>}
+      title={
+        <h1 className="mb-6 text-2xl font-bold dark:text-white">
+          Connect to your{" "}
+            <a className="underline"href="https://runcitadel.space/">Citadel</a>{" "}
+          Node
+        </h1>
+      }
       description="This currently doesn't work if 2FA is enabled."
       submitLoading={loading}
       submitDisabled={formData.password === "" || formData.url === ""}

@@ -91,7 +91,12 @@ export default function ConnectMyNode() {
 
   return (
     <ConnectorForm
-      title={<h1 className="mb-6 text-2xl font-bold dark:text-white">Connect to your <u><a href="https://mynodebtc.com/">myNode</a></u></h1>}
+      title={
+        <h1 className="mb-6 text-2xl font-bold dark:text-white">
+          Connect to your{" "}
+            <a className="underline" href="https://mynodebtc.com/">myNode</a>
+        </h1>
+      }
       description={
         <p>
           On your myNode homepage click on the <strong>Wallet</strong> button
