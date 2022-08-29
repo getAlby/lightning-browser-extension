@@ -4,7 +4,7 @@
 import axios from "axios";
 import debounce from "lodash/debounce";
 import { CURRENCIES } from "~/common/constants";
-import { getSettings } from "~/common/lib/api";
+import { getSettings, getCurrencyRate } from "~/common/lib/api";
 
 const getCurrencySettings = async () => {
   const { currency, exchange } = await getSettings();
@@ -17,7 +17,7 @@ const getCurrencySettings = async () => {
 
 const numSatsInBtc = 100_000_000;
 
-const getFiatBtcRate = async (currency: CURRENCIES): Promise<string> => {
+export const getFiatBtcRate = async (currency: CURRENCIES): Promise<string> => {
   const { exchange } = await getCurrencySettings();
 
   let response;
@@ -48,29 +48,15 @@ const getFiatBtcRate = async (currency: CURRENCIES): Promise<string> => {
   return data[currency].rate_float;
 };
 
-// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/1021
-// Replace decounce by saving rate to app-cache and only get it every minute for the whole app
-//
-// https://github.com/lodash/lodash/issues/4400#issuecomment-834800398
-const debouncedGetFiatBtcRate = debounce(
-  async function (callback) {
-    return await callback();
-  },
-  60000,
-  {
-    leading: true,
-    trailing: false,
-  }
-);
-
 const bitcoinToFiat = async (
   amountInBtc: number | string,
   convertTo: CURRENCIES,
   isLatestRate?: boolean
 ) => {
-  const rate = isLatestRate
-    ? await getFiatBtcRate(convertTo)
-    : await debouncedGetFiatBtcRate(() => getFiatBtcRate(convertTo));
+  console.log("bitcoinToFiat");
+
+  const rate = await getCurrencyRate(convertTo);
+  console.log("bitcoinToFiat - rate", rate);
 
   return Number(amountInBtc) * Number(rate);
 };

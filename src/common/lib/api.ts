@@ -1,3 +1,4 @@
+import { CURRENCIES } from "~/common/constants";
 import {
   ConnectPeerArgs,
   ConnectPeerResponse,
@@ -20,6 +21,7 @@ import type {
 
 import {
   getAccountsCache,
+  getCurrencyRateFromCache,
   removeAccountFromCache,
   storeAccounts,
 } from "./cache";
@@ -119,6 +121,9 @@ export const lnurlAuth = (
 ): Promise<LnurlAuthResponse> =>
   utils.call<LnurlAuthResponse>("lnurlAuth", options);
 
+export const getCurrencyRate = async (currency: CURRENCIES) =>
+  await getCurrencyRateFromCache(currency);
+
 export default {
   getAccountInfo,
   getAccounts,
@@ -140,4 +145,5 @@ export default {
   getBlocklist,
   getInvoices,
   lnurlAuth,
+  getCurrencyRate,
 };
