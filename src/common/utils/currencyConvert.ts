@@ -59,26 +59,20 @@ const satoshisToBitcoin = (amountInSatoshis: number | string) => {
 const satoshisToFiat = async ({
   amountInSats,
   convertTo,
-  isLatestRate,
 }: {
   amountInSats: number | string;
   convertTo: CURRENCIES;
-  isLatestRate?: boolean;
 }) => {
   const btc = satoshisToBitcoin(amountInSats);
   const fiat = await bitcoinToFiat(btc, convertTo);
   return fiat;
 };
 
-export const getFiatValue = async (
-  amount: number | string,
-  isLatestRate?: boolean
-) => {
+export const getFiatValue = async (amount: number | string) => {
   const { currency } = await getCurrencySettings();
   const fiatValue = await satoshisToFiat({
     amountInSats: amount,
     convertTo: currency,
-    isLatestRate,
   });
   const localeFiatValue = fiatValue.toLocaleString("en", {
     style: "currency",

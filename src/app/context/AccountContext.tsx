@@ -29,7 +29,6 @@ interface AccountContextType {
    */
   fetchAccountInfo: (options?: {
     accountId?: string;
-    isLatestRate?: boolean;
   }) => Promise<AccountInfo | undefined>;
 }
 
@@ -64,18 +63,12 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
 
   const setAccountId = (id: string) => setAccount({ id });
 
-  const updateFiatValue = async (
-    balance: string | number,
-    isLatestRate?: boolean
-  ) => {
-    const fiats = await getFiatValue(balance, isLatestRate);
+  const updateFiatValue = async (balance: string | number) => {
+    const fiats = await getFiatValue(balance);
     setFiatBalance(fiats);
   };
 
-  const fetchAccountInfo = async (options?: {
-    accountId?: string;
-    isLatestRate?: boolean;
-  }) => {
+  const fetchAccountInfo = async (options?: { accountId?: string }) => {
     const id = options?.accountId || account?.id;
     if (!id) return;
 
@@ -84,7 +77,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     setSatBalance(sats);
 
     if (!isLoadingSettings && settings.showFiat) {
-      updateFiatValue(accountInfo.balance, options?.isLatestRate);
+      updateFiatValue(accountInfo.balance);
     }
 
     return { ...accountInfo, fiatBalance, satsBalance: sats };
