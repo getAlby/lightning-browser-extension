@@ -151,7 +151,7 @@ function LNURLPay() {
         {
           origin: {
             ...navState.origin,
-            name: getLnAddress(),
+            name: getRecipient(),
           },
         }
       );
@@ -207,7 +207,7 @@ function LNURLPay() {
     navigate(-1);
   }
 
-  function getLnAddress() {
+  function getRecipient() {
     if (!details?.metadata) return;
 
     try {
@@ -282,10 +282,10 @@ function LNURLPay() {
           />
         )}
         <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-          {getLnAddress() && (
+          {getRecipient() && (
             <>
               <Dt>Lightning Address</Dt>
-              <Dd>{getLnAddress()}</Dd>
+              <Dd>{getRecipient()}</Dd>
             </>
           )}
           {descriptionList.map(([dt, dd]) => (
@@ -319,10 +319,10 @@ function LNURLPay() {
                 )}
                 <div className="my-4">
                   <dl>
-                    {getLnAddress() && (
+                    {getRecipient() && (
                       <>
                         <Dt>Lightning Address</Dt>
-                        <Dd>{getLnAddress()}</Dd>
+                        <Dd>{getRecipient()}</Dd>
                       </>
                     )}
                     <>
