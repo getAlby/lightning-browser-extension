@@ -13,7 +13,7 @@ import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
-import type { NavigationState, RequestInvoiceArgs } from "~/types";
+import type { NavigationState, RequestInvoiceArgs, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
 const params = new URLSearchParams(window.location.search);
@@ -39,10 +39,6 @@ const createStateFromParams = (params: URLSearchParams): NavigationState => ({
 
 const navigationState = createStateFromParams(params);
 function Prompt() {
-  if (!navigationState.origin) {
-    throw new Error("Origin is missing");
-  }
-
   return (
     <Providers>
       <HashRouter>
@@ -67,7 +63,7 @@ function Prompt() {
             />
             <Route
               path="webln/enable"
-              element={<Enable origin={navigationState.origin} />}
+              element={<Enable origin={navigationState.origin as OriginData} />}
             />
             <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
@@ -85,7 +81,7 @@ function Prompt() {
                     navigationState.args
                       ?.invoiceAttributes as RequestInvoiceArgs
                   }
-                  origin={navigationState.origin}
+                  origin={navigationState.origin as OriginData}
                 />
               }
             />
@@ -111,7 +107,7 @@ function Prompt() {
               element={
                 <ConfirmSignMessage
                   message={navigationState.args?.message as string}
-                  origin={navigationState.origin}
+                  origin={navigationState.origin as OriginData}
                 />
               }
             />

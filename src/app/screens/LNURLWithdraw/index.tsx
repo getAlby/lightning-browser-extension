@@ -14,19 +14,15 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import { getFiatValue } from "~/common/utils/currencyConvert";
-import type { LNURLWithdrawServiceResponse } from "~/types";
+import type { LNURLWithdrawServiceResponse, OriginData } from "~/types";
 
 function LNURLWithdraw() {
   const navigate = useNavigate();
   const navState = useNavigationState();
-
-  if (!navState.origin) {
-    throw new Error("Origin is missing");
-  }
-
   const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
+  const origin = navState.origin as OriginData;
   const details = navState.args?.lnurlDetails as LNURLWithdrawServiceResponse;
   const { minWithdrawable, maxWithdrawable } = details;
 
@@ -138,8 +134,8 @@ function LNURLWithdraw() {
         <Container justifyBetween maxWidth="sm">
           <div>
             <PublisherCard
-              title={navState.origin.name}
-              image={navState.origin.icon}
+              title={origin.name}
+              image={origin.icon}
               url={details?.domain}
             />
             {renderAmount()}
@@ -153,10 +149,7 @@ function LNURLWithdraw() {
         </Container>
       ) : (
         <Container maxWidth="sm">
-          <PublisherCard
-            title={navState.origin.name}
-            image={navState.origin.icon}
-          />
+          <PublisherCard title={origin.name} image={origin.icon} />
           <div className="my-4">
             <SuccessMessage message={successMessage} onClose={close} />
           </div>

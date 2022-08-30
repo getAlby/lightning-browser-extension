@@ -13,15 +13,13 @@ import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import type { LNURLChannelServiceResponse } from "~/types";
+import type { LNURLChannelServiceResponse, OriginData } from "~/types";
 
 function LNURLChannel() {
   const navigate = useNavigate();
   const navState = useNavigationState();
-  if (!navState.origin) {
-    throw new Error("Origin is missing");
-  }
   const details = navState.args?.lnurlDetails as LNURLChannelServiceResponse;
+  const origin = navState.origin as OriginData;
   const { uri } = details;
   const [pubkey, host] = uri.split("@");
 
@@ -97,10 +95,7 @@ function LNURLChannel() {
       {!successMessage ? (
         <Container justifyBetween maxWidth="sm">
           <div>
-            <PublisherCard
-              title={navState.origin.name}
-              image={navState.origin.icon}
-            />
+            <PublisherCard title={origin.name} image={origin.icon} />
             <ContentMessage
               heading={`Request a channel from the node:`}
               content={uri}
@@ -127,8 +122,8 @@ function LNURLChannel() {
       ) : (
         <Container maxWidth="sm">
           <PublisherCard
-            title={navState.origin.name}
-            image={navState.origin.icon}
+            title={origin.name}
+            image={origin.icon}
             url={details.domain}
           />
           <div className="my-4">
