@@ -126,7 +126,7 @@ test.describe("Create or connect wallets", () => {
     const createNewWalletButton = await getByText($document, "LNbits");
     createNewWalletButton.click();
 
-    await findByText($document, "Connect to LNbits");
+    await findByText($document, /Connect to LNbits/);
 
     const lnBitsAdminKey = "d8de4f373561446aa298cae2b9424325";
     const adminKeyField = await getByLabelText($document, "LNbits Admin Key");
