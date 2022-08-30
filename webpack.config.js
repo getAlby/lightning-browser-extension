@@ -56,6 +56,7 @@ var options = {
     manifest: "./src/manifest.json",
     background: "./src/extension/background-script/index.ts",
     contentScript: "./src/extension/content-script/index.js",
+    contentScriptOnStart: "./src/extension/content-script/onstart.js",
     inpageScript: "./src/extension/inpage-script/index.js",
     popup: "./src/app/router/Popup/index.tsx",
     prompt: "./src/app/router/Prompt/index.tsx",

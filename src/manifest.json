@@ -99,6 +99,12 @@
       "matches": ["*://*/*"],
       "run_at": "document_end",
       "js": ["js/contentScript.bundle.js"]
+    },
+    {
+      "all_frames": true,
+      "matches": ["*://*/*"],
+      "run_at": "document_start",
+      "js": ["js/contentScriptOnStart.bundle.js"]
     }
   ]
 }
