@@ -35,7 +35,7 @@ export const getCurrencyRateFromCache = async (currency: CURRENCIES) => {
   let currencyRateCache: { rate?: number; timestamp?: number } = {};
   const result = await browser.storage.local.get(["currencyRate"]);
 
-  if (result.currencyRate) {
+  if (result?.currencyRate) {
     currencyRateCache = JSON.parse(result.currencyRate);
 
     const currentTime = dayjs();
@@ -52,11 +52,11 @@ export const getCurrencyRateFromCache = async (currency: CURRENCIES) => {
       storeCurrencyRate(rate);
       return rate;
     }
-  } else {
-    const rate = await getFiatBtcRate(currency);
-    storeCurrencyRate(rate);
-    return rate;
   }
+
+  const rate = await getFiatBtcRate(currency);
+  storeCurrencyRate(rate);
+  return rate;
 };
 
 const storeCurrencyRate = (rate: number) => {
