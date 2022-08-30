@@ -1,7 +1,6 @@
 import db from "../db";
 
 const persistSuccessfullPayment = async (message, data) => {
-  const recipientName = data?.origin?.name || "";
   const host = data?.origin?.host || "";
   const location = data?.origin?.location || "";
   const paymentResponse = data.response;
@@ -11,7 +10,7 @@ const persistSuccessfullPayment = async (message, data) => {
   await db.payments.add({
     host,
     location,
-    name: recipientName,
+    name: "",
     description: data.details.description,
     preimage: paymentResponse.data.preimage,
     paymentHash: paymentResponse.data.paymentHash,
