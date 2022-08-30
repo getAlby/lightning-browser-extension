@@ -111,7 +111,7 @@ export interface MessageDefault {
 }
 
 export type NavigationState = {
-  origin?: OriginData;
+  origin?: OriginData; // only defoned if coming via "Prompt", can be empty if a LNURL-action is being used via "Send" within the "PopUp"
   args?: {
     lnurlDetails: LNURLDetails;
     amountEditable?: boolean;
