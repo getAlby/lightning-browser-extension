@@ -72,8 +72,8 @@ export interface AuthResponseObject {
   status: string;
 }
 export interface AuthNotificationData {
-  authResponse?: AuthResponseObject;
-  origin?: OriginData;
+  authResponse: AuthResponseObject;
+  origin?: OriginData; // only set if troggered via Prompt
   lnurlDetails: LNURLAuthServiceResponse;
 }
 
