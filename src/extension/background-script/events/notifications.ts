@@ -61,8 +61,6 @@ const lnurlAuthSuccessNotification = (
   message: "lnurl.auth.success",
   data: AuthNotificationData
 ) => {
-  // console.log("lnurlAuthSuccessNotification", message, data);
-
   let title = "✅ Login";
 
   if (data?.origin?.name) {

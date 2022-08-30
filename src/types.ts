@@ -287,7 +287,7 @@ export interface MessageConnectPeer extends MessageDefault {
 
 export interface MessageLnurlAuth {
   args: {
-    origin?: OriginData;
+    origin?: OriginData; // only set if troggered via Prompt
     lnurlDetails: {
       tag: "login";
       k1: string;
