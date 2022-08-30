@@ -19,7 +19,7 @@ function LNURLChannel() {
   const navigate = useNavigate();
   const navState = useNavigationState();
   const details = navState.args?.lnurlDetails as LNURLChannelServiceResponse;
-  const origin = navState.origin as OriginData;
+  const origin = navState.origin as OriginData; // this action will always have an `origin` set, just the type is optional to support usage via PopUp
   const { uri } = details;
   const [pubkey, host] = uri.split("@");
 
