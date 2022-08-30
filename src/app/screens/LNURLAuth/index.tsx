@@ -21,7 +21,7 @@ function LNURLAuth() {
 
   const navState = useNavigationState();
   const details = navState.args?.lnurlDetails as LNURLAuthServiceResponse;
-  const origin = navState.origin as OriginData;
+  const origin = navState.origin as OriginData; // this action will always have an `origin` set, just the type is optional to support usage via PopUp
 
   const { t } = useTranslation("components", {
     keyPrefix: "confirmOrCancel",
