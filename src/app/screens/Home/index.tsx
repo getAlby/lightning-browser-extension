@@ -175,12 +175,7 @@ function Home() {
     setLoadingInvoices(false);
   }
 
-  useEffect(() => {
-    if (!isLoadingSettings) {
-      loadPayments();
-    }
-  }, [isLoadingSettings, loadPayments]);
-
+  // Effects on Mount
   useEffect(() => {
     loadAllowance();
 
@@ -198,6 +193,12 @@ function Home() {
       browser.runtime.onMessage.removeListener(handleLightningDataMessage);
     };
   }, []);
+
+  useEffect(() => {
+    if (!isLoadingSettings && !loadingAllowance) {
+      loadPayments();
+    }
+  }, [isLoadingSettings, loadingAllowance, loadPayments]);
 
   function renderPublisherCard() {
     let title, image;
