@@ -6,7 +6,7 @@ if (document) {
   window.webln = new WebLNProvider();
 
   const readyEvent = new Event("webln:ready");
-  document.dispatchEvent(readyEvent);
+  window.dispatchEvent(readyEvent);
 
   // Intercept any `lightning:` requests
   window.addEventListener("click", (ev) => {
