@@ -69,6 +69,10 @@ function Publisher() {
             title: (
               <p className="truncate">
                 <a target="_blank" href={payment.location} rel="noreferrer">
+                  {/* 
+                    TODO: https://github.com/getAlby/lightning-browser-extension/issues/1356
+                    Refactor: use virtual attribute on payment for title
+                  */}
                   {payment.name || payment.description || payment.host}
                 </a>
               </p>
