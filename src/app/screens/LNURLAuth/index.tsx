@@ -14,18 +14,14 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-import type { LNURLAuthServiceResponse } from "~/types";
+import type { LNURLAuthServiceResponse, OriginData } from "~/types";
 
 function LNURLAuth() {
   const navigate = useNavigate();
 
   const navState = useNavigationState();
   const details = navState.args?.lnurlDetails as LNURLAuthServiceResponse;
-  const origin = navState.origin;
-
-  if (!origin) {
-    throw new Error("Origin is missing");
-  }
+  const origin = navState.origin as OriginData;
 
   const { t } = useTranslation("components", {
     keyPrefix: "confirmOrCancel",
@@ -34,10 +30,6 @@ function LNURLAuth() {
   const [successMessage, setSuccessMessage] = useState("");
 
   async function confirm() {
-    if (!origin) {
-      throw new Error("Origin is missing");
-    }
-
     try {
       const response = await api.lnurlAuth({
         origin,
