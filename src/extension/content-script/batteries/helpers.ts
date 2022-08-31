@@ -5,8 +5,8 @@ import type { Battery } from "~/types";
 import { ExtensionIcon } from "../../background-script/actions/setup/setIcon";
 
 export const findLightningAddressInText = (text: string): string | null => {
-  const match = text.match(/(⚡:?|lightning:|lnurl:)\s?(\S+@[\w-.]+)/i);
-  if (match) return match[2];
+  const match = text.match(/((⚡|⚡️):?|lightning:|lnurl:)\s?(\S+@[\w-.]+)/i);
+  if (match) return match[3];
   return null;
 };
 
