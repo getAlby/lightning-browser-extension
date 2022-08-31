@@ -267,7 +267,6 @@
         "confirm_password_label": "Confirm new password:"
       }
     },
-
     "send": {
       "title": "Send",
       "qrcode": {
@@ -349,11 +348,18 @@
         "amount_too_small": "Amount is less than minimum",
         "amount_too_big": "Amount exceeds maximum"
       }
+    },
+    "confirm_sign_message": {
+      "title": "Sign",
+      "content": {
+        "heading": "{{host}} asks you to sign:"
+      }
     }
   },
   "common": {
     "password": "Password",
     "success": "Success!",
+    "error": "Error",
     "settings": "Settings",
     "websites": "Websites",
     "sats": "sats",

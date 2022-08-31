@@ -5,6 +5,7 @@ import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { USER_REJECTED_ERROR } from "~/common/constants";
@@ -19,6 +20,11 @@ type Props = {
 };
 
 function ConfirmSignMessage(props: Props) {
+  const { t: tCommon } = useTranslation("common");
+  const { t } = useTranslation("translation", {
+    keyPrefix: "confirm_sign_message",
+  });
+
   const messageRef = useRef(props.message);
   const originRef = useRef(props.origin || getOriginData());
   //const [rememberMe, setRememberMe] = useState(false);
@@ -38,10 +44,10 @@ function ConfirmSignMessage(props: Props) {
         { origin: originRef.current }
       );
       msg.reply(response);
-      setSuccessMessage("Success!");
+      setSuccessMessage(tCommon("success"));
     } catch (e) {
       console.error(e);
-      if (e instanceof Error) toast.error(`Error: ${e.message}`);
+      if (e instanceof Error) toast.error(`${tCommon("error")}: ${e.message}`);
     } finally {
       setLoading(false);
     }
@@ -58,7 +64,7 @@ function ConfirmSignMessage(props: Props) {
 
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
-      <ScreenHeader title={"Sign"} />
+      <ScreenHeader title={t("title")} />
       {!successMessage ? (
         <Container isScreenView maxWidth="sm">
           <div>
@@ -68,7 +74,7 @@ function ConfirmSignMessage(props: Props) {
               url={originRef.current.host}
             />
             <ContentMessage
-              heading={`${originRef.current.host} asks you to sign:`}
+              heading={t("content.heading", { host: originRef.current.host })}
               content={messageRef.current}
             />
             {/*
