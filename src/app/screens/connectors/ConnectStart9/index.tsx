@@ -91,7 +91,15 @@ export default function ConnectStart9() {
 
   return (
     <ConnectorForm
-      title="Connect to your Embassy node"
+      title={
+        <h1 className="mb-6 text-2xl font-bold dark:text-white">
+          Connect to your{" "}
+          <a className="underline" href="https://start9.com/latest/">
+            Embassy
+          </a>{" "}
+          Node
+        </h1>
+      }
       description={
         <p>
           <strong>Note</strong>: Currently we only support LND but we will be
