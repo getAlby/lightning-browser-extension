@@ -255,7 +255,7 @@ test.describe("Create or connect wallets", () => {
       "config=https://gist.githubusercontent.com/bumi/71885ed90617b3ba2dd485ecfb7829eb/raw/26a91185ee273df4eaa75f6ec406001ab4a5d2cf/mock-btcpay-lnd.json"
     );
 
-    await page.waitForTimeout(1000);
+    await new Promise((r) => setTimeout(r, 1000));
     await commonCreateWalletSuccessCheck({ page, $document });
     await browser.close();
   });

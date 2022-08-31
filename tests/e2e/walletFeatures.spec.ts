@@ -33,7 +33,6 @@ test.describe("Wallet features", () => {
     await findByText($optionsdocument, "Your ⚡️ Websites");
     await findByText($optionsdocument, "Other ⚡️ Websites");
 
-    await page.waitForTimeout(2000);
     await browser.close();
   });
 
@@ -54,7 +53,7 @@ test.describe("Wallet features", () => {
     await descriptionField.type("It is a lucky number");
 
     await (await getByText($optionsdocument, "Create Invoice")).click();
-    await page.waitForTimeout(2000);
+    page.waitForSelector("button");
     // copy invoice
     await (await findByText($optionsdocument, "Copy")).click();
 
@@ -63,11 +62,11 @@ test.describe("Wallet features", () => {
 
   test("send to a LN-adddress", async () => {
     const { page, browser, extensionId } = await loadExtension();
-    await page.waitForTimeout(1000);
+    await new Promise((r) => setTimeout(r, 1000));
 
     const optionsPage = `chrome-extension://${extensionId}/options.html`;
     await page.goto(optionsPage);
-    await page.waitForTimeout(1000);
+    await new Promise((r) => setTimeout(r, 1000));
 
     const $optionsdocument = await getDocument(page);
     const passwordField = await getByPlaceholderText(
@@ -78,9 +77,9 @@ test.describe("Wallet features", () => {
 
     const unlockButton = await findByText($optionsdocument, "Unlock");
     unlockButton.click();
+    await new Promise((r) => setTimeout(r, 1000));
 
     // go to send
-    await page.waitForTimeout(1000);
     await (await getByText($optionsdocument, "Send")).click();
     const invoiceInput = await findByText(
       $optionsdocument,
@@ -88,8 +87,8 @@ test.describe("Wallet features", () => {
     );
     await invoiceInput.type("bumi@getalby.com");
     await (await getByText($optionsdocument, "Continue")).click();
-    await page.waitForTimeout(2000);
 
+    page.waitForSelector("label");
     await findByText($optionsdocument, "bumi@getalby.com");
     await findByText($optionsdocument, "Sats for bumi");
 
