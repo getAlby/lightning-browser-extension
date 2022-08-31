@@ -4,13 +4,7 @@ import { getDocument, queries } from "pptr-testing-library";
 
 import { loadExtension } from "./helpers/loadExtension";
 
-const {
-  getByText,
-  getByLabelText,
-  findByLabelText,
-  findByText,
-  getByPlaceholderText,
-} = queries;
+const { getByText, getByLabelText, findByLabelText, findByText } = queries;
 
 const user = USER.SINGLE();
 
@@ -35,13 +29,13 @@ const commonCreateWalletUserCreate = async () => {
     $document,
     "Choose an unlock password:"
   );
-  await passwordField.type(user.password);
+  await passwordField.type("unlock-password");
 
   const passwordConfirmationField = await getByLabelText(
     $document,
     "Let's confirm you typed it correct:"
   );
-  await passwordConfirmationField.type(user.password);
+  await passwordConfirmationField.type("unlock-password");
 
   // submit password form
   const passwordFormNextButton = await findByText($document, "Next");
@@ -91,31 +85,6 @@ test.describe("Create or connect wallets", () => {
 
     await commonCreateWalletSuccessCheck({ page, $document });
 
-    await browser.close();
-  });
-
-  test("opens publishers screen", async () => {
-    const { page, browser, extensionId } = await loadExtension();
-    await page.waitForTimeout(1000);
-
-    const optionsPage = `chrome-extension://${extensionId}/options.html`;
-    await page.goto(optionsPage);
-    await page.waitForTimeout(1000);
-
-    const $optionsdocument = await getDocument(page);
-    const passwordField = await getByPlaceholderText(
-      $optionsdocument,
-      "Password"
-    );
-    await passwordField.type(user.password);
-
-    const unlockButton = await findByText($optionsdocument, "Unlock");
-    unlockButton.click();
-
-    await findByText($optionsdocument, "Your ⚡️ Websites");
-    await findByText($optionsdocument, "Other ⚡️ Websites");
-
-    await page.waitForTimeout(2000);
     await browser.close();
   });
 
@@ -286,7 +255,7 @@ test.describe("Create or connect wallets", () => {
       "config=https://gist.githubusercontent.com/bumi/71885ed90617b3ba2dd485ecfb7829eb/raw/26a91185ee273df4eaa75f6ec406001ab4a5d2cf/mock-btcpay-lnd.json"
     );
 
-    await page.waitForTimeout(1000);
+    await new Promise((r) => setTimeout(r, 1000));
     await commonCreateWalletSuccessCheck({ page, $document });
     await browser.close();
   });
