@@ -104,6 +104,7 @@ export async function authFunction({
         success: true,
         status: authResponse.data.status,
         reason: authResponse.data.reason,
+        authResponseData: authResponse.data,
       };
 
       return response;
