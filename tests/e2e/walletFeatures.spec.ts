@@ -5,24 +5,30 @@ import { loadExtension } from "./helpers/loadExtension";
 
 const { getByText, getByLabelText, findByText, getByPlaceholderText } = queries;
 
+const unlockExtension = async ({ page, extensionId }) => {
+  await page.waitForTimeout(1000);
+
+  const optionsPage = `chrome-extension://${extensionId}/options.html`;
+  await page.goto(optionsPage);
+  await page.waitForTimeout(1000);
+
+  const $optionsdocument = await getDocument(page);
+  const passwordField = await getByPlaceholderText(
+    $optionsdocument,
+    "Password"
+  );
+  await passwordField.type("unlock-password");
+
+  const unlockButton = await findByText($optionsdocument, "Unlock");
+  unlockButton.click();
+
+  return $optionsdocument;
+};
+
 test.describe("Wallet features", () => {
   test("opens publishers screen", async () => {
     const { page, browser, extensionId } = await loadExtension();
-    await page.waitForTimeout(1000);
-
-    const optionsPage = `chrome-extension://${extensionId}/options.html`;
-    await page.goto(optionsPage);
-    await page.waitForTimeout(1000);
-
-    const $optionsdocument = await getDocument(page);
-    const passwordField = await getByPlaceholderText(
-      $optionsdocument,
-      "Password"
-    );
-    await passwordField.type("unlock-password");
-
-    const unlockButton = await findByText($optionsdocument, "Unlock");
-    unlockButton.click();
+    const $optionsdocument = await unlockExtension({ page, extensionId });
 
     await findByText($optionsdocument, "Your ⚡️ Websites");
     await findByText($optionsdocument, "Other ⚡️ Websites");
@@ -33,21 +39,7 @@ test.describe("Wallet features", () => {
 
   test("create invoice", async () => {
     const { page, browser, extensionId } = await loadExtension();
-    await page.waitForTimeout(1000);
-
-    const optionsPage = `chrome-extension://${extensionId}/options.html`;
-    await page.goto(optionsPage);
-    await page.waitForTimeout(1000);
-
-    const $optionsdocument = await getDocument(page);
-    const passwordField = await getByPlaceholderText(
-      $optionsdocument,
-      "Password"
-    );
-    await passwordField.type("unlock-password");
-
-    const unlockButton = await findByText($optionsdocument, "Unlock");
-    unlockButton.click();
+    const $optionsdocument = await unlockExtension({ page, extensionId });
 
     // create invoice
     await (await findByText($optionsdocument, "Receive")).click();
