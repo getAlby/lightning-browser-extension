@@ -5,6 +5,7 @@ import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import { useState, MouseEvent, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
@@ -24,6 +25,11 @@ type Props = {
 };
 
 function ConfirmKeysend(props: Props) {
+  const { t: tCommon } = useTranslation("common");
+  const { t } = useTranslation("translation", {
+    keyPrefix: "confirm_keysend",
+  });
+
   const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
@@ -77,11 +83,15 @@ function ConfirmKeysend(props: Props) {
       );
 
       msg.reply(payment); // resolves the prompt promise and closes the prompt window
-      setSuccessMessage(`Payment sent! Preimage: ${payment.preimage}`);
+      setSuccessMessage(
+        t("success", {
+          preimage: payment.preimage,
+        })
+      );
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        toast.error(`Error: ${e.message}`);
+        toast.error(`${tCommon("error")}: ${e.message}`);
       }
     } finally {
       setLoading(false);
@@ -109,7 +119,7 @@ function ConfirmKeysend(props: Props) {
 
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
-      <ScreenHeader title={"Approve Payment"} />
+      <ScreenHeader title={t("title")} />
       {!successMessage ? (
         <Container isScreenView maxWidth="sm">
           <div>
@@ -123,7 +133,9 @@ function ConfirmKeysend(props: Props) {
                 <PaymentSummary
                   amount={amount}
                   fiatAmount={fiatAmount}
-                  description={`Send payment to ${destination}`}
+                  description={t("payment_summary.description", {
+                    destination,
+                  })}
                 />
               </div>
 

@@ -354,6 +354,13 @@
       "content": {
         "heading": "{{host}} asks you to sign:"
       }
+    },
+    "confirm_keysend": {
+      "title": "Approve Payment",
+      "success": "Payment sent! Preimage: {{preimage}}",
+      "payment_summary": {
+        "description": "Send payment to: {{destination}}"
+      }
     }
   },
   "common": {
