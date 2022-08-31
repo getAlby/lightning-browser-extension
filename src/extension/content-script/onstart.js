@@ -1,3 +1,4 @@
+import injectScript from "./injectScript";
 import shouldInject from "./shouldInject";
 
 async function onstart() {
@@ -6,23 +7,6 @@ async function onstart() {
     return;
   }
 
-  try {
-    if (!document) {
-      return;
-    }
-    const container = document.head || document.documentElement;
-    if (!container) {
-      return;
-    }
-    const scriptEl = document.createElement("script");
-    scriptEl.setAttribute(
-      "src",
-      browser.extension.getURL("js/inpageScriptWebLN.bundle.js")
-    );
-    scriptEl.setAttribute("type", "text/javascript");
-    container.appendChild(scriptEl);
-  } catch (err) {
-    console.error("WebLN onstart failed", err);
-  }
+  injectScript(browser.extension.getURL("js/inpageScriptWebLN.bundle.js")); // injects the webln object
 }
 onstart();
