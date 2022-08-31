@@ -13,12 +13,12 @@
                 "privacy_description": "Use a rede relâmpago do bitcoin para autenticar em sites e tenha controle sobre sua privacidade.",
                 "foss": "Gratuito e de código aberto",
                 "paywall": "Chega de paywalls irritantes",
-                "foss_description": "Código completamente aberto que pode ser auditado por qualquer pessoa. Sem estatísticas ou rastreadores. Você está no controle.",
+                "foss_description": "Código completamente aberto e que pode ser auditado por qualquer pessoa. Sem estatísticas ou rastreadores. Você está no controle.",
                 "actions": {
                     "get_started": "Começar"
                 },
                 "send_description": "Realize pagamentos de forma simples e direta enquanto você navega na web.",
-                "paywall_description": "Habilite pagamentos automáticos e defina limites de gastos personalizados para cada site."
+                "paywall_description": "Habilite pagamentos automáticos e estabeleça limites de gastos personalizados para cada site."
             },
             "set_password": {
                 "description": "Os dados da sua carteira são criptografados com uma senha de desbloqueio. Não esqueça esta senha! Você precisa dela para usar a extensão Alby (neste navegador)",
@@ -364,6 +364,19 @@
                 "amount_too_big": "O valor excede o máximo"
             },
             "title": "Solicitar Fatura"
+        },
+        "confirm_sign_message": {
+            "title": "Assinar",
+            "content": {
+                "heading": "{{host}} solicita que você assine:"
+            }
+        },
+        "confirm_keysend": {
+            "title": "Aprovar Pagamento",
+            "success": "Pagamento enviado! Pré-imagem: {{preimage}}",
+            "payment_summary": {
+                "description": "Enviar pagamento para: {{destination}}"
+            }
         }
     },
     "common": {
@@ -391,7 +404,8 @@
         "loading": "carregando",
         "sats": "sats",
         "amount": "Quantia",
-        "optional": "Opcional"
+        "optional": "Opcional",
+        "error": "Erro"
     },
     "components": {
         "qrcode_scanner": {
@@ -416,7 +430,7 @@
             "only_trusted": "Conecte-se apenas em sites que você confia."
         },
         "allowance_menu": {
-            "hint": "O limite atual será resetado",
+            "hint": "O limite atual será redefinido",
             "confirm_delete": "Tem certeza de que deseja remover este site?",
             "set_budget": "Definir um novo limite",
             "new_budget": {
