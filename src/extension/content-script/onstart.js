@@ -15,11 +15,10 @@ async function onstart() {
       return;
     }
     const scriptEl = document.createElement("script");
-
-    var inlineScript = document.createTextNode(
-      "if (!window.webln) { window.webln = { loading: true }; }"
+    scriptEl.setAttribute(
+      "src",
+      browser.extension.getURL("js/inpageScriptWebLN.bundle.js")
     );
-    scriptEl.appendChild(inlineScript);
     scriptEl.setAttribute("type", "text/javascript");
     container.appendChild(scriptEl);
   } catch (err) {
