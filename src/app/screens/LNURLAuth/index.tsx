@@ -113,7 +113,7 @@ function LNURLAuth() {
           </Container>
         </>
       ) : (
-        <Container isScreenView maxWidth="sm">
+        <Container maxWidth="sm">
           <PublisherCard
             title={navState.origin.name}
             image={navState.origin.icon}
