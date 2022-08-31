@@ -98,9 +98,9 @@ function LNURLAuth() {
               )}
 
               <ContentMessage
-                heading={`${
+                heading={`Do you want to login to ${
                   origin ? origin.name : details.domain
-                } asks you to login to`}
+                }?`}
                 content={details.domain}
               />
             </div>
