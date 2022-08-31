@@ -6,6 +6,7 @@ import Medium from "./Medium";
 import Monetization from "./Monetization";
 import Peertube from "./Peertube";
 import Reddit from "./Reddit";
+import SoundCloud from "./SoundCloud";
 import StackOverflow from "./StackOverflow";
 import Twitter from "./Twitter";
 import VimeoVideo from "./VimeoVideo";
@@ -22,6 +23,7 @@ const enhancements = [
   VimeoVideo,
   Medium,
   GitHub,
+  SoundCloud,
   StackOverflow,
   GeyserProject,
 
