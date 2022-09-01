@@ -48,7 +48,7 @@
   },
 
   "__chrome__minimum_chrome_version": "88",
-  "__opera__minimum_opera_version": "36",
+  "__opera__minimum_opera_version": "74",
 
   "action": {
     "default_popup": "popup.html",
