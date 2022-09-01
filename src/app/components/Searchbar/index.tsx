@@ -1,3 +1,4 @@
+// This component is currently not in use
 import { SearchIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 export default function Searchbar() {

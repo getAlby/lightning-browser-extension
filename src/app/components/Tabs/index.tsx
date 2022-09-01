@@ -1,3 +1,4 @@
+// This component is currently not in use
 import { classNames } from "~/app/utils/index";
 
 type Tab = {
