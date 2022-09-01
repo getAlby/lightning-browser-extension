@@ -430,10 +430,10 @@ export interface DbPayment {
   createdAt: string;
   description: string;
   destination: string;
-  host: string;
+  host?: string;
   id?: number;
-  location: string;
-  name: string;
+  location?: string;
+  name?: string;
   paymentHash: string;
   paymentRequest: string;
   preimage: string;

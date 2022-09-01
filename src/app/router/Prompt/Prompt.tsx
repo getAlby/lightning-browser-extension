@@ -98,7 +98,7 @@ function Prompt() {
                       string
                     >
                   }
-                  origin={navigationState.origin}
+                  origin={navigationState.origin as OriginData} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
                 />
               }
             />

@@ -112,7 +112,7 @@ export default function TransactionsTable({ transactions }: Props) {
                       )}
                       {tx.location && (
                         <a href={tx.location} target="_blank" rel="noreferrer">
-                          Location: {tx.location}
+                          {tx.location}
                         </a>
                       )}
                       {tx.boostagram && (

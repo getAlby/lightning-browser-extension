@@ -2,8 +2,8 @@ import db from "../db";
 
 const persistSuccessfullPayment = async (message, data) => {
   const name = data?.origin?.name;
-  const host = data?.origin?.host || "";
-  const location = data?.origin?.location || "";
+  const host = data?.origin?.host;
+  const location = data?.origin?.location;
   const paymentResponse = data.response;
   const route = paymentResponse.data.route;
   const { total_amt, total_fees } = route;

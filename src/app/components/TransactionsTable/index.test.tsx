@@ -114,7 +114,7 @@ describe("TransactionsTable", () => {
     });
 
     expect(
-      await screen.findByText("Location: https://openai.com/dall-e-2/")
+      await screen.findByText("https://openai.com/dall-e-2/")
     ).toBeInTheDocument();
   });
 
