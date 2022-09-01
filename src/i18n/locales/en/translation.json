@@ -388,7 +388,8 @@
       "close": "Close"
     },
     "errors": {
-      "connection_failed": "Connection failed"
+      "connection_failed": "Connection failed",
+      "missing_id": "id is missing"
     }
   },
   "components": {
