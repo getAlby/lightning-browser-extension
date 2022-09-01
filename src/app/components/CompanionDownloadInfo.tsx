@@ -1,6 +1,11 @@
 import { ReceiveIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { useTranslation } from "react-i18next";
 
 function CompanionDownloadInfo() {
+  const { t } = useTranslation("components", {
+    keyPrefix: "companionDownloadInfo",
+  });
+
   function getOS() {
     if (navigator.appVersion.indexOf("Win") != -1) return "Windows";
     if (navigator.appVersion.indexOf("Mac") != -1) return "MacOS";
@@ -11,15 +16,13 @@ function CompanionDownloadInfo() {
   // TODO: check if the companion app is already installed
   return (
     <div className="dark:text-white">
-      You are trying to connect to a node behind Tor. Because browsers cannot
-      directly connect to your node please make sure you have the Alby companion
-      app installed. Download it{" "}
+      {t("info")}{" "}
       <a
         href={`https://getalby.com/install/companion/${getOS()}`}
         target="_blank"
         rel="noreferrer"
       >
-        it here
+        {t("download_here")}
         <ReceiveIcon className="w-6 h-6 inline" />.
       </a>
     </div>
