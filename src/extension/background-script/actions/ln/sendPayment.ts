@@ -1,6 +1,8 @@
 import lightningPayReq from "bolt11";
 import PubSub from "pubsub-js";
 import utils from "~/common/lib/utils";
+import i18n from "~/i18n/i18nConfig";
+import { commonI18nNamespace } from "~/i18n/namespaces";
 import { Message } from "~/types";
 
 import state from "../../state";
@@ -10,7 +12,7 @@ export default async function sendPayment(message: Message) {
   const { paymentRequest } = message.args;
   if (typeof paymentRequest !== "string") {
     return {
-      error: "Payment request missing.",
+      error: i18n.t("errors.missing_payment_request", commonI18nNamespace),
     };
   }
 
@@ -29,7 +31,7 @@ export default async function sendPayment(message: Message) {
     } else if (e instanceof Error) {
       message = e.message;
     } else {
-      message = "Something went wrong";
+      message = i18n.t("errors.something_went_wrong", commonI18nNamespace);
     }
     response = {
       error: message,

@@ -388,7 +388,13 @@
       "close": "Close"
     },
     "errors": {
-      "connection_failed": "Connection failed"
+      "connection_failed": "Connection failed",
+      "something_went_wrong": "Something went wrong",
+      "missing_message": "Message missing.",
+      "missing_payment_hash": "Payment hash missing.",
+      "missing_payment_request": "Payment request missing.",
+      "missing_peer_data": "Peer data missing.",
+      "missing_destination_or_amount": "destination or amount missing."
     }
   },
   "components": {

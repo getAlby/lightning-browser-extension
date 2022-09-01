@@ -1,3 +1,5 @@
+import i18n from "~/i18n/i18nConfig";
+import { commonI18nNamespace } from "~/i18n/namespaces";
 import { MessageConnectPeer } from "~/types";
 
 import state from "../../state";
@@ -7,7 +9,7 @@ const connectPeer = async (message: MessageConnectPeer) => {
 
   if (typeof pubkey !== "string" || typeof host !== "string") {
     return {
-      error: "Peer data missing.",
+      error: i18n.t("errors.missing_peer_data", commonI18nNamespace),
     };
   }
 
@@ -23,7 +25,10 @@ const connectPeer = async (message: MessageConnectPeer) => {
   } catch (e) {
     console.error(e);
     response = {
-      error: e instanceof Error ? e.message : "Something went wrong",
+      error:
+        e instanceof Error
+          ? e.message
+          : i18n.t("errors.something_went_wrong", commonI18nNamespace),
     };
   }
   return response;

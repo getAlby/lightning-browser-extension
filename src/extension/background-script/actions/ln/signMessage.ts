@@ -1,4 +1,6 @@
 import PubSub from "pubsub-js";
+import i18n from "~/i18n/i18nConfig";
+import { commonI18nNamespace } from "~/i18n/namespaces";
 import { Message } from "~/types";
 
 import state from "../../state";
@@ -9,7 +11,7 @@ const signMessage = async (message: Message) => {
   const messageToSign = message.args.message;
   if (typeof messageToSign !== "string") {
     return {
-      error: "Message missing.",
+      error: i18n.t("errors.missing_message", commonI18nNamespace),
     };
   }
 

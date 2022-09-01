@@ -1,5 +1,7 @@
 import PubSub from "pubsub-js";
 import utils from "~/common/lib/utils";
+import i18n from "~/i18n/i18nConfig";
+import { commonI18nNamespace } from "~/i18n/namespaces";
 import { Message } from "~/types";
 
 import state from "../../state";
@@ -12,7 +14,10 @@ export default async function keysend(message: Message) {
     (typeof amount !== "string" && typeof amount !== "number")
   ) {
     return {
-      error: "destination or amount missing.",
+      error: i18n.t(
+        "errors.missing_destination_or_amount",
+        commonI18nNamespace
+      ),
     };
   }
 
@@ -27,7 +32,10 @@ export default async function keysend(message: Message) {
     });
   } catch (e) {
     response = {
-      error: e instanceof Error ? e.message : "Something went wrong",
+      error:
+        e instanceof Error
+          ? e.message
+          : i18n.t("errors.something_went_wrong", commonI18nNamespace),
     };
   }
   utils.publishPaymentNotification(message, {
