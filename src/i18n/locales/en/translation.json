@@ -431,6 +431,10 @@
       "budget": {
         "label": "Budget"
       }
+    },
+    "companionDownloadInfo": {
+      "info": "You are trying to connect to a node behind Tor. Because browsers cannot directly connect to your node please make sure you have the Alby companion app installed.",
+      "download_here": "Download it here!"
     }
   }
 }
