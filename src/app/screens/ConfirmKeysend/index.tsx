@@ -121,7 +121,7 @@ function ConfirmKeysend(props: Props) {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
       {!successMessage ? (
-        <Container isScreenView maxWidth="sm">
+        <Container justifyBetween maxWidth="sm">
           <div>
             <PublisherCard
               title={origin.name}

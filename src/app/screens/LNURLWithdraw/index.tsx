@@ -131,7 +131,7 @@ function LNURLWithdraw() {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={"Withdraw"} />
       {!successMessage ? (
-        <Container isScreenView maxWidth="sm">
+        <Container justifyBetween maxWidth="sm">
           <div>
             <PublisherCard
               title={navState.origin.name}

@@ -86,7 +86,7 @@ function LNURLAuth() {
       <ScreenHeader title={"Authentication"} />
       {!successMessage ? (
         <>
-          <Container isScreenView maxWidth="sm">
+          <Container justifyBetween maxWidth="sm">
             <div>
               <PublisherCard
                 title={origin.name}
