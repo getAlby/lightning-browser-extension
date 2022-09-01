@@ -14,12 +14,17 @@ function battery(): void {
   if (!descriptionElement || !imageUrl) {
     return;
   }
+
+  const content = descriptionElement.content.split(/:(.*)/s);
+  const userName = content[0];
+  const description = content[1].slice(1);
+
   let match;
   let recipient;
   // attempt to extract lnurlp: from the description text
-  if ((match = (descriptionElement.content || "").match(/lnurlp:(\S+)/i))) {
+  if ((match = (description || "").match(/lnurlp:(\S+)/i))) {
     recipient = match[1];
-  } else if ((match = findLightningAddressInText(descriptionElement.content))) {
+  } else if ((match = findLightningAddressInText(description))) {
     recipient = match;
   }
   // if we still did not find anything ignore it.
@@ -32,8 +37,9 @@ function battery(): void {
       method: "lnurl",
       address: recipient,
       ...getOriginData(),
+      description,
       icon: imageUrl,
-      name: document.title,
+      name: userName,
     },
   ]);
 }
