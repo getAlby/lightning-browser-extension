@@ -375,7 +375,13 @@
       "close": "Close"
     },
     "errors": {
-      "connection_failed": "Connection failed"
+      "connection_failed": "Connection failed",
+      "missing_password": "Password is Missing",
+      "missing_account": "Account not found",
+      "invalid_password": "Invalid password",
+      "unconfigured_account": "No account configured",
+      "invalid_config": "Config must be a string",
+      "no_current_account": "No current account set"
     }
   },
   "components": {

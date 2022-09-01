@@ -1,4 +1,6 @@
 import state from "~/extension/background-script/state";
+import i18n from "~/i18n/i18nConfig";
+import { commonI18nNamespace } from "~/i18n/namespaces";
 import type { MessageAccountRemove } from "~/types";
 
 const remove = async (message: MessageAccountRemove) => {
@@ -30,7 +32,10 @@ const remove = async (message: MessageAccountRemove) => {
     };
   } else {
     return {
-      error: `Account not found: ${accountId}`,
+      error: `${i18n.t(
+        "errors.missing_account",
+        commonI18nNamespace
+      )}: ${accountId}`,
     };
   }
 };

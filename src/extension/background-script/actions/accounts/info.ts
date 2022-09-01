@@ -1,5 +1,7 @@
 import type { AccountInfoRes } from "~/common/lib/api";
 import state from "~/extension/background-script/state";
+import i18n from "~/i18n/i18nConfig";
+import { commonI18nNamespace } from "~/i18n/namespaces";
 import type { MessageAccountInfo } from "~/types";
 
 const info = async (message: MessageAccountInfo) => {
@@ -13,7 +15,7 @@ const info = async (message: MessageAccountInfo) => {
   ]);
 
   if (!currentAccount || !currentAccountId) {
-    return { error: "No current account set" };
+    return { error: i18n.t("errors.no_account_account", commonI18nNamespace) };
   }
 
   const result: AccountInfoRes = {

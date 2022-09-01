@@ -1,4 +1,6 @@
 import state from "~/extension/background-script/state";
+import i18n from "~/i18n/i18nConfig";
+import { commonI18nNamespace } from "~/i18n/namespaces";
 import type { MessageAccountEdit } from "~/types";
 
 const edit = async (message: MessageAccountEdit) => {
@@ -14,7 +16,10 @@ const edit = async (message: MessageAccountEdit) => {
     return {};
   } else {
     return {
-      error: `Account not found: ${accountId}`,
+      error: `${i18n.t(
+        "errors.missing_account",
+        commonI18nNamespace
+      )}: ${accountId}`,
     };
   }
 };

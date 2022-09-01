@@ -1,6 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
 import { encryptData } from "~/common/lib/crypto";
 import state from "~/extension/background-script/state";
+import i18n from "~/i18n/i18nConfig";
+import { commonI18nNamespace } from "~/i18n/namespaces";
 import type { MessageAccountAdd } from "~/types";
 
 const add = async (message: MessageAccountAdd) => {
@@ -14,7 +16,8 @@ const add = async (message: MessageAccountAdd) => {
   const password = state.getState().password;
   const currentAccountId = state.getState().currentAccountId;
 
-  if (!password) return { error: "Password is missing" };
+  if (!password)
+    return { error: i18n.t("errors.missing_password", commonI18nNamespace) };
 
   const accountId = uuidv4();
   newAccount.config = encryptData(newAccount.config, password);
