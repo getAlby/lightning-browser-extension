@@ -221,7 +221,7 @@ function LNURLPay() {
       console.error(e);
     }
 
-    return;
+    return details.domain;
   }
 
   function formattedMetadata(
@@ -273,21 +273,13 @@ function LNURLPay() {
 
     return (
       <Container maxWidth="sm">
-        {navState.origin && (
-          <PublisherCard
-            title={navState.origin.name}
-            description={navState.origin.description}
-            image={navState.origin.icon}
-            isSmall={false}
-          />
-        )}
+        <PublisherCard
+          title={getRecipient()}
+          description={navState?.origin?.description}
+          image={navState?.origin?.icon}
+        />
+
         <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-          {getRecipient() && (
-            <>
-              <Dt>Lightning Address</Dt>
-              <Dd>{getRecipient()}</Dd>
-            </>
-          )}
           {descriptionList.map(([dt, dd]) => (
             <>
               <Dt>{dt}</Dt>
@@ -295,6 +287,7 @@ function LNURLPay() {
             </>
           ))}
         </dl>
+
         <div className="text-center">
           <button className="underline text-sm text-gray-500" onClick={close}>
             Close
@@ -311,20 +304,14 @@ function LNURLPay() {
           <>
             <div className="grow overflow-y-auto no-scrollbar">
               <Container maxWidth="sm">
-                {navState.origin && (
-                  <PublisherCard
-                    title={navState.origin.name}
-                    image={navState.origin.icon}
-                  />
-                )}
+                <PublisherCard
+                  title={getRecipient()}
+                  description={navState?.origin?.description}
+                  image={navState?.origin?.icon}
+                />
+
                 <div className="my-4">
                   <dl>
-                    {getRecipient() && (
-                      <>
-                        <Dt>Lightning Address</Dt>
-                        <Dd>{getRecipient()}</Dd>
-                      </>
-                    )}
                     <>
                       {formattedMetadata(details.metadata).map(
                         ([dt, dd], i) => (

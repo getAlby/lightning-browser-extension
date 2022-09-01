@@ -15,7 +15,6 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import lnurlLib from "~/common/lib/lnurl";
-import getOriginData from "~/extension/content-script/originData";
 
 function Send() {
   const { t } = useTranslation("translation", { keyPrefix: "send" });
@@ -40,13 +39,11 @@ function Send() {
       }
 
       if (lnurl) {
-        const originData = getOriginData();
         const lnurlDetails = await lnurlLib.getDetails(lnurl);
 
         if (lnurlDetails.tag === "channelRequest") {
           navigate("/lnurlChannel", {
             state: {
-              origin: originData,
               args: {
                 lnurlDetails,
               },
@@ -77,7 +74,6 @@ function Send() {
         if (lnurlDetails.tag === "withdrawRequest") {
           navigate("/lnurlWithdraw", {
             state: {
-              origin: originData,
               args: {
                 lnurlDetails,
               },

@@ -1,6 +1,7 @@
 import db from "../db";
 
 const persistSuccessfullPayment = async (message, data) => {
+  const name = data?.origin?.name;
   const host = data?.origin?.host || "";
   const location = data?.origin?.location || "";
   const paymentResponse = data.response;
@@ -10,7 +11,7 @@ const persistSuccessfullPayment = async (message, data) => {
   await db.payments.add({
     host,
     location,
-    name: "", // we never know the "receiver" when using `confirmPayment`. To avoid setting a website as "receiver" we omit this.
+    name,
     description: data.details.description,
     preimage: paymentResponse.data.preimage,
     paymentHash: paymentResponse.data.paymentHash,

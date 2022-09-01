@@ -13,13 +13,13 @@ import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import type { LNURLChannelServiceResponse, OriginData } from "~/types";
+import type { LNURLChannelServiceResponse } from "~/types";
 
 function LNURLChannel() {
   const navigate = useNavigate();
   const navState = useNavigationState();
   const details = navState.args?.lnurlDetails as LNURLChannelServiceResponse;
-  const origin = navState.origin as OriginData; // this action will always have an `origin` set, just the type is optional to support usage via PopUp
+  const origin = navState?.origin;
   const { uri } = details;
   const [pubkey, host] = uri.split("@");
 
@@ -95,7 +95,15 @@ function LNURLChannel() {
       {!successMessage ? (
         <Container justifyBetween maxWidth="sm">
           <div>
-            <PublisherCard title={origin.name} image={origin.icon} />
+            {origin ? (
+              <PublisherCard
+                title={origin.name}
+                image={origin.icon}
+                url={details.domain}
+              />
+            ) : (
+              <PublisherCard title={details.domain} />
+            )}
             <ContentMessage
               heading={`Request a channel from the node:`}
               content={uri}
@@ -121,11 +129,16 @@ function LNURLChannel() {
         </Container>
       ) : (
         <Container maxWidth="sm">
-          <PublisherCard
-            title={origin.name}
-            image={origin.icon}
-            url={details.domain}
-          />
+          {origin ? (
+            <PublisherCard
+              title={origin.name}
+              image={origin.icon}
+              url={details.domain}
+            />
+          ) : (
+            <PublisherCard title={details.domain} />
+          )}
+
           <div className="my-4">
             <SuccessMessage message={successMessage} onClose={close} />
           </div>

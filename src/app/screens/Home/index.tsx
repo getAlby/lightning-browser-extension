@@ -116,7 +116,7 @@ function Home() {
                 TODO: https://github.com/getAlby/lightning-browser-extension/issues/1356
                 Refactor: use virtual attribute on payment for title
               */}
-              {payment.name || payment.description || payment.host}
+              {payment.name || payment.description}
             </a>
           </p>
         ),

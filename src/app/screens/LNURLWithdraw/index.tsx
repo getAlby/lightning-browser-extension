@@ -14,7 +14,7 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import { getFiatValue } from "~/common/utils/currencyConvert";
-import type { LNURLWithdrawServiceResponse, OriginData } from "~/types";
+import type { LNURLWithdrawServiceResponse } from "~/types";
 
 function LNURLWithdraw() {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ function LNURLWithdraw() {
   const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
-  const origin = navState.origin as OriginData; // this action will always have an `origin` set, just the type is optional to support usage via PopUp
+  const origin = navState.origin;
   const details = navState.args?.lnurlDetails as LNURLWithdrawServiceResponse;
   const { minWithdrawable, maxWithdrawable } = details;
 
@@ -133,13 +133,18 @@ function LNURLWithdraw() {
       {!successMessage ? (
         <Container justifyBetween maxWidth="sm">
           <div>
-            <PublisherCard
-              title={origin.name}
-              image={origin.icon}
-              url={details?.domain}
-            />
+            {origin ? (
+              <PublisherCard
+                title={origin.name}
+                image={origin.icon}
+                url={details.domain}
+              />
+            ) : (
+              <PublisherCard title={details.domain} />
+            )}
             {renderAmount()}
           </div>
+
           <ConfirmOrCancel
             disabled={loadingConfirm || !valueSat}
             loading={loadingConfirm}
@@ -149,7 +154,16 @@ function LNURLWithdraw() {
         </Container>
       ) : (
         <Container maxWidth="sm">
-          <PublisherCard title={origin.name} image={origin.icon} />
+          {origin ? (
+            <PublisherCard
+              title={origin.name}
+              image={origin.icon}
+              url={details.domain}
+            />
+          ) : (
+            <PublisherCard title={details.domain} />
+          )}
+
           <div className="my-4">
             <SuccessMessage message={successMessage} onClose={close} />
           </div>

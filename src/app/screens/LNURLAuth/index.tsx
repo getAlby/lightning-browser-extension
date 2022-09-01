@@ -89,12 +89,14 @@ function LNURLAuth() {
         <>
           <Container justifyBetween maxWidth="sm">
             <div>
-              {origin && (
+              {origin ? (
                 <PublisherCard
                   title={origin.name}
                   image={origin.icon}
                   url={details.domain}
                 />
+              ) : (
+                <PublisherCard title={details.domain} />
               )}
 
               <ContentMessage
@@ -120,12 +122,14 @@ function LNURLAuth() {
         </>
       ) : (
         <Container maxWidth="sm">
-          {origin && (
+          {origin ? (
             <PublisherCard
               title={origin.name}
               image={origin.icon}
               url={details.domain}
             />
+          ) : (
+            <PublisherCard title={details.domain} />
           )}
           <div className="my-4">
             <SuccessMessage message={successMessage} onClose={close} />
