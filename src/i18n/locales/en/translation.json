@@ -50,7 +50,6 @@
         "options": "Add a new lightning account"
       },
       "description": "You need to first connect to a lightning wallet so that you can interact with your favorite websites that accept bitcoin lightning payments!",
-      "route_label": "",
       "alby": {
         "title": "Alby Wallet",
         "description": "Create or login to your Alby account",
