@@ -43,11 +43,13 @@ function ConfirmPayment() {
   useEffect(() => {
     if (showFiat) {
       (async () => {
-        const res = await getFiatValue(budget);
-        setFiatAmount(res);
+        if (invoice.satoshis) {
+          const res = await getFiatValue(invoice.satoshis);
+          setFiatAmount(res);
+        }
       })();
     }
-  }, [budget, showFiat]);
+  }, [invoice.satoshis, showFiat]);
 
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
