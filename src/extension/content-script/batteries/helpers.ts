@@ -5,6 +5,8 @@ import type { Battery } from "~/types";
 import { ExtensionIcon } from "../../background-script/actions/setup/setIcon";
 
 export const findLightningAddressInText = (text: string): string | null => {
+  // The second lightning emoji is succeeded by an invisible
+  // variation selector-16 character: https://regex101.com/r/Bf2GpN/1
   const match = text.match(/((⚡|⚡️):?|lightning:|lnurl:)\s?(\S+@[\w-.]+)/i);
   if (match) return match[3];
   return null;
