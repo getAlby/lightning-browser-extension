@@ -1,5 +1,3 @@
-import i18n from "~/i18n/i18nConfig";
-import { commonI18nNamespace } from "~/i18n/namespaces";
 import type { MessageAllowanceAdd, DbAllowance } from "~/types";
 
 import db from "../../db";
@@ -16,8 +14,7 @@ const add = async (message: MessageAllowanceAdd) => {
     .first();
 
   if (allowance) {
-    if (!allowance.id)
-      return { error: i18n.t("errors.missing_id", commonI18nNamespace) };
+    if (!allowance.id) return { error: "id is missing" };
 
     await db.allowances.update(allowance.id, {
       enabled: true,

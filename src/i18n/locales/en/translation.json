@@ -410,8 +410,7 @@
       "close": "Close"
     },
     "errors": {
-      "connection_failed": "Connection failed",
-      "missing_id": "id is missing"
+      "connection_failed": "Connection failed"
     }
   },
   "components": {
