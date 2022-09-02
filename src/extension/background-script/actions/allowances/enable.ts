@@ -1,8 +1,6 @@
 import { Runtime } from "webextension-polyfill";
 import utils from "~/common/lib/utils";
 import db from "~/extension/background-script/db";
-import i18n from "~/i18n/i18nConfig";
-import { commonI18nNamespace } from "~/i18n/namespaces";
 import type { MessageAllowanceEnable } from "~/types";
 
 import state from "../../state";
@@ -37,9 +35,7 @@ const enable = async (
       if (response.data.enabled && response.data.remember) {
         if (allowance) {
           if (!allowance.id) {
-            return {
-              data: { error: i18n.t("errors.missing_id", commonI18nNamespace) },
-            };
+            return { data: { error: "id is missing" } };
           }
           await db.allowances.update(allowance.id, { enabled: true });
         } else {

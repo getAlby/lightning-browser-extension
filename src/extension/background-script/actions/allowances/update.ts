@@ -1,6 +1,4 @@
 import db from "~/extension/background-script/db";
-import i18n from "~/i18n/i18nConfig";
-import { commonI18nNamespace } from "~/i18n/namespaces";
 import type { Allowance, MessageAllowanceUpdate } from "~/types";
 
 type OptionalPick<T, K extends keyof T> = { [P in K]?: T[P] };
@@ -20,7 +18,7 @@ const updateAllowance = async (message: MessageAllowanceUpdate) => {
     update.enabled = message.args.enabled;
   }
 
-  if (!id) return { error: i18n.t("errors.missing_id", commonI18nNamespace) };
+  if (!id) return { error: "id is missing" };
 
   const updated = await db.allowances.update(id, update);
   await db.saveToStorage();
