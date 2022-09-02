@@ -89,11 +89,7 @@ function AccountsScreen() {
   }
 
   async function removeAccount({ id, name }: AccountAction) {
-    if (
-      window.confirm(
-        `Are you sure you want to remove account: ${name}? \nThis can not be undone. If you used this account to login to websites you might loose access to those.`
-      )
-    ) {
+    if (window.confirm(t("remove.confirm", { name }))) {
       let nextAccountId;
       let accountIds = Object.keys(accounts);
       if (auth.account?.id === id && accountIds.length > 1) {
@@ -115,13 +111,13 @@ function AccountsScreen() {
   return (
     <Container>
       <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
-        Accounts
+        {t("title")}
       </h2>
       <div className="shadow border-b border-gray-200 dark:border-neutral-500 sm:rounded-lg bg-white dark:bg-surface-02dp">
         <div className="p-6">
           <Button
             icon={<PlusIcon className="w-5 h-5 mr-2" />}
-            label="Add account"
+            label={t("add.label")}
             primary
             onClick={() => navigate(`/accounts/new`)}
           />
@@ -169,7 +165,7 @@ function AccountsScreen() {
                             }, 50);
                           }}
                         >
-                          Edit
+                          {t("edit.label")}
                         </Menu.ItemButton>
 
                         {account.connector === "lndhub" && (
@@ -181,7 +177,7 @@ function AccountsScreen() {
                               })
                             }
                           >
-                            Export
+                            {t("export.label")}
                           </Menu.ItemButton>
                         )}
 
@@ -194,7 +190,7 @@ function AccountsScreen() {
                             })
                           }
                         >
-                          Remove
+                          {t("remove.label")}
                         </Menu.ItemButton>
                       </Menu.List>
                     </Menu>
@@ -210,12 +206,14 @@ function AccountsScreen() {
           closeTimeoutMS={200}
           isOpen={editModalIsOpen}
           onRequestClose={closeEditModal}
-          contentLabel="Edit account name"
+          contentLabel={t("edit.name_label")}
           overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
           className="rounded-lg bg-white w-full max-w-lg"
         >
           <div className="p-5 flex justify-between dark:bg-surface-02dp">
-            <h2 className="text-2xl font-bold dark:text-white">Edit account</h2>
+            <h2 className="text-2xl font-bold dark:text-white">
+              {t("edit.title")}
+            </h2>
             <button onClick={closeEditModal}>
               <CrossIcon className="w-6 h-6 dark:text-white" />
             </button>
@@ -235,7 +233,7 @@ function AccountsScreen() {
                 <TextField
                   autoFocus
                   id="accountName"
-                  label="Name"
+                  label={t("name.label")}
                   onChange={(e) => setNewAccountName(e.target.value)}
                   value={newAccountName}
                 />
@@ -244,7 +242,7 @@ function AccountsScreen() {
 
             <div className="flex justify-end p-5 dark:bg-surface-02dp">
               <Button
-                label="Save"
+                label={t("save.label")}
                 type="submit"
                 primary
                 disabled={newAccountName === ""}
@@ -264,7 +262,7 @@ function AccountsScreen() {
         >
           <div className="p-5 flex justify-between dark:bg-surface-02dp">
             <h2 className="text-2xl font-bold dark:text-white">
-              Export account
+              {t("export.title")}
             </h2>
             <button onClick={closeExportModal}>
               <CrossIcon className="w-6 h-6 dark:text-white" />
