@@ -93,7 +93,7 @@ function MakeInvoice({
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
 
-      <Container isScreenView maxWidth="sm">
+      <Container justifyBetween maxWidth="sm">
         <div>
           <PublisherCard
             title={origin.name}
