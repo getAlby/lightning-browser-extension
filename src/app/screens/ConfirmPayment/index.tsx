@@ -51,12 +51,12 @@ function ConfirmPayment() {
   }, [invoice.satoshis, showFiat]);
 
   useEffect(() => {
-    if (showFiat && budget) {
-      (async () => {
+    (async () => {
+      if (showFiat && budget) {
         const res = await getFiatValue(budget);
         setFiatBudgetAmount(res);
-      })();
-    }
+      }
+    })();
   }, [budget, showFiat]);
 
   const [rememberMe, setRememberMe] = useState(false);
