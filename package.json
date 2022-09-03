@@ -91,7 +91,7 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.4.3",
     "@trivago/prettier-plugin-sort-imports": "^3.3.0",
-    "@types/chrome": "^0.0.195",
+    "@types/chrome": "^0.0.196",
     "@types/crypto-js": "^4.1.1",
     "@types/elliptic": "^6.4.14",
     "@types/pubsub-js": "^1.8.3",
