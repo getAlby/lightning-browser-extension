@@ -79,6 +79,10 @@ const metaDataRules: Record<string, RuleSet> = {
         (element) => element.getAttribute("content"),
       ],
       [
+        'meta[name="alby:description"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
         'meta[property="og:description"][content]',
         (element) => element.getAttribute("content"),
       ],
@@ -195,6 +199,10 @@ const metaDataRules: Record<string, RuleSet> = {
     rules: [
       [
         'meta[property="alby:name"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
+        'meta[name="alby:name"][content]',
         (element) => element.getAttribute("content"),
       ],
       [
