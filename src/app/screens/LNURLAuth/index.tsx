@@ -20,6 +20,7 @@ function LNURLAuth() {
   const navigate = useNavigate();
 
   const navState = useNavigationState();
+
   const details = navState.args?.lnurlDetails as LNURLAuthServiceResponse;
   const origin = navState.origin;
 
@@ -36,7 +37,7 @@ function LNURLAuth() {
         lnurlDetails: details,
       });
 
-      if (navState.isPrompt && origin.host) {
+      if (navState.isPrompt && origin?.host) {
         const allowance = await api.getAllowance(origin.host);
 
         if (allowance.lnurlAuth === false) {
@@ -88,13 +89,20 @@ function LNURLAuth() {
         <>
           <Container justifyBetween maxWidth="sm">
             <div>
-              <PublisherCard
-                title={origin.name}
-                image={origin.icon}
-                url={details.domain}
-              />
+              {origin ? (
+                <PublisherCard
+                  title={origin.name}
+                  image={origin.icon}
+                  url={details.domain}
+                />
+              ) : (
+                <PublisherCard title={details.domain} />
+              )}
+
               <ContentMessage
-                heading={`${origin.name} asks you to login to`}
+                heading={`Do you want to login to ${
+                  origin ? origin.name : details.domain
+                }?`}
                 content={details.domain}
               />
             </div>
@@ -114,11 +122,15 @@ function LNURLAuth() {
         </>
       ) : (
         <Container maxWidth="sm">
-          <PublisherCard
-            title={navState.origin.name}
-            image={navState.origin.icon}
-            url={details.domain}
-          />
+          {origin ? (
+            <PublisherCard
+              title={origin.name}
+              image={origin.icon}
+              url={details.domain}
+            />
+          ) : (
+            <PublisherCard title={details.domain} />
+          )}
           <div className="my-4">
             <SuccessMessage message={successMessage} onClose={close} />
           </div>

@@ -105,7 +105,6 @@ function Home() {
           <p className="truncate">
             <a
               target="_blank"
-              title={payment.name}
               href={
                 allowance
                   ? `options.html#/publishers/${allowance.id}`
@@ -113,23 +112,11 @@ function Home() {
               }
               rel="noreferrer"
             >
-              {payment.name}
-            </a>
-          </p>
-        ),
-        subTitle: (
-          <p className="truncate">
-            <a
-              target="_blank"
-              title={payment.name}
-              href={
-                allowance
-                  ? `options.html#/publishers/${allowance.id}`
-                  : `options.html#/publishers`
-              }
-              rel="noreferrer"
-            >
-              {payment.host}
+              {/* 
+                TODO: https://github.com/getAlby/lightning-browser-extension/issues/1356
+                Refactor: use virtual attribute on payment for title
+              */}
+              {payment.name || payment.description}
             </a>
           </p>
         ),

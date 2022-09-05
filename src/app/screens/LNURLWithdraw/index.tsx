@@ -19,10 +19,10 @@ import type { LNURLWithdrawServiceResponse } from "~/types";
 function LNURLWithdraw() {
   const navigate = useNavigate();
   const navState = useNavigationState();
-
   const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
+  const origin = navState.origin;
   const details = navState.args?.lnurlDetails as LNURLWithdrawServiceResponse;
   const { minWithdrawable, maxWithdrawable } = details;
 
@@ -133,13 +133,18 @@ function LNURLWithdraw() {
       {!successMessage ? (
         <Container justifyBetween maxWidth="sm">
           <div>
-            <PublisherCard
-              title={navState.origin.name}
-              image={navState.origin.icon}
-              url={details?.domain}
-            />
+            {origin ? (
+              <PublisherCard
+                title={origin.name}
+                image={origin.icon}
+                url={details.domain}
+              />
+            ) : (
+              <PublisherCard title={details.domain} />
+            )}
             {renderAmount()}
           </div>
+
           <ConfirmOrCancel
             disabled={loadingConfirm || !valueSat}
             loading={loadingConfirm}
@@ -149,10 +154,16 @@ function LNURLWithdraw() {
         </Container>
       ) : (
         <Container maxWidth="sm">
-          <PublisherCard
-            title={navState.origin.name}
-            image={navState.origin.icon}
-          />
+          {origin ? (
+            <PublisherCard
+              title={origin.name}
+              image={origin.icon}
+              url={details.domain}
+            />
+          ) : (
+            <PublisherCard title={details.domain} />
+          )}
+
           <div className="my-4">
             <SuccessMessage message={successMessage} onClose={close} />
           </div>

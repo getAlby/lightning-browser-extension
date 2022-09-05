@@ -60,10 +60,21 @@ export interface OriginData {
 export interface PaymentNotificationData {
   paymentRequestDetails?: PaymentRequestObject | undefined;
   response: SendPaymentResponse | { error: string };
+  origin?: OriginData;
   details: {
     destination?: string | undefined;
     description?: string | undefined;
   };
+}
+
+export interface AuthResponseObject {
+  reason?: string;
+  status: string;
+}
+export interface AuthNotificationData {
+  authResponse: AuthResponseObject;
+  origin?: OriginData; // only set if triggered via Prompt
+  lnurlDetails: LNURLAuthServiceResponse;
 }
 
 export interface OriginDataInternal {
@@ -89,6 +100,7 @@ export type LnurlAuthResponse = {
   success: boolean;
   status: string;
   reason?: string;
+  authResponseData: unknown;
 };
 
 /**
@@ -110,7 +122,7 @@ export interface MessageDefault {
 }
 
 export type NavigationState = {
-  origin: OriginData;
+  origin?: OriginData; // only defoned if coming via "Prompt", can be empty if a LNURL-action is being used via "Send" within the "PopUp"
   args?: {
     lnurlDetails: LNURLDetails;
     amountEditable?: boolean;
@@ -276,7 +288,7 @@ export interface MessageConnectPeer extends MessageDefault {
 
 export interface MessageLnurlAuth {
   args: {
-    origin: OriginData;
+    origin?: OriginData; // only set if triggered via Prompt
     lnurlDetails: {
       tag: "login";
       k1: string;
@@ -285,6 +297,13 @@ export interface MessageLnurlAuth {
     };
   };
   action: "lnurlAuth";
+}
+
+export interface MessageSendPayment extends MessageDefault {
+  args: {
+    paymentRequest: string;
+  };
+  action: "sendPayment";
 }
 
 export interface MessageSettingsSet extends MessageDefault {
@@ -398,7 +417,6 @@ export type Transaction = {
   location?: string;
   name?: string;
   preimage: string;
-  subTitle?: string | React.ReactNode;
   title: string | React.ReactNode;
   totalAmount: Allowance["payments"][number]["totalAmount"];
   totalAmountFiat?: string;
@@ -412,10 +430,10 @@ export interface DbPayment {
   createdAt: string;
   description: string;
   destination: string;
-  host: string;
+  host?: string;
   id?: number;
-  location: string;
-  name: string;
+  location?: string;
+  name?: string;
   paymentHash: string;
   paymentRequest: string;
   preimage: string;

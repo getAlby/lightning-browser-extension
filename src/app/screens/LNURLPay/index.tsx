@@ -209,15 +209,18 @@ function LNURLPay() {
 
   function getRecipient() {
     if (!details?.metadata) return;
+
     try {
       const metadata = JSON.parse(details.metadata);
       const identifier = metadata.find(
         ([type]: [string]) => type === "text/identifier"
       );
+
       if (identifier) return identifier[1];
     } catch (e) {
       console.error(e);
     }
+
     return details.domain;
   }
 
@@ -271,12 +274,11 @@ function LNURLPay() {
     return (
       <Container maxWidth="sm">
         <PublisherCard
-          title={navState.origin.name}
-          description={navState.origin.description}
-          lnAddress={getRecipient()}
-          image={navState.origin.icon}
-          isSmall={false}
+          title={getRecipient()}
+          description={navState.origin?.description}
+          image={navState.origin?.icon}
         />
+
         <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
           {descriptionList.map(([dt, dd]) => (
             <>
@@ -285,6 +287,7 @@ function LNURLPay() {
             </>
           ))}
         </dl>
+
         <div className="text-center">
           <button className="underline text-sm text-gray-500" onClick={close}>
             Close
@@ -302,10 +305,11 @@ function LNURLPay() {
             <div className="grow overflow-y-auto no-scrollbar">
               <Container maxWidth="sm">
                 <PublisherCard
-                  title={navState.origin.name}
-                  image={navState.origin.icon}
-                  lnAddress={getRecipient()}
+                  title={getRecipient()}
+                  description={navState.origin?.description}
+                  image={navState.origin?.icon}
                 />
+
                 <div className="my-4">
                   <dl>
                     <>

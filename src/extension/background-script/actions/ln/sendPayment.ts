@@ -1,12 +1,14 @@
 import lightningPayReq from "bolt11";
 import PubSub from "pubsub-js";
 import utils from "~/common/lib/utils";
-import { Message } from "~/types";
+import state from "~/extension/background-script/state";
+import { MessageSendPayment, Message } from "~/types";
 
-import state from "../../state";
-
-export default async function sendPayment(message: Message) {
+export default async function sendPayment(
+  message: MessageSendPayment | Message // 'keysend' & 'sendPaymentOrPrompt' still need the Message type
+) {
   PubSub.publish(`ln.sendPayment.start`, message);
+
   const { paymentRequest } = message.args;
   if (typeof paymentRequest !== "string") {
     return {
@@ -18,23 +20,27 @@ export default async function sendPayment(message: Message) {
   const connector = await state.getState().getConnector();
 
   let response;
+
   try {
     response = await connector.sendPayment({
       paymentRequest,
     });
   } catch (e) {
-    let message;
+    let errorMessage;
+
     if (typeof e === "string") {
-      message = e;
+      errorMessage = e;
     } else if (e instanceof Error) {
-      message = e.message;
+      errorMessage = e.message;
     } else {
-      message = "Something went wrong";
+      errorMessage = "Something went wrong";
     }
+
     response = {
-      error: message,
+      error: errorMessage,
     };
   }
+
   utils.publishPaymentNotification(message, {
     paymentRequestDetails,
     response,
@@ -43,5 +49,6 @@ export default async function sendPayment(message: Message) {
       destination: paymentRequestDetails.payeeNodeKey,
     },
   });
+
   return response;
 }

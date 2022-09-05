@@ -2,6 +2,7 @@ import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
+import PublisherCard from "@components/PublisherCard";
 import SatButtons from "@components/SatButtons";
 import SuccessMessage from "@components/SuccessMessage";
 import Input from "@components/form/Input";
@@ -100,7 +101,9 @@ function Keysend(props: Props) {
         <Container maxWidth="sm">
           {!successMessage ? (
             <>
-              <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+              {destination && <PublisherCard title={destination} />}
+
+              <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg my-6 overflow-hidden">
                 {elements().map(([t, d], i) => (
                   <Fragment key={`element-${i}`}>
                     <dt className="text-sm font-semibold text-gray-500">{t}</dt>

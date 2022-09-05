@@ -17,14 +17,8 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
-import type { OriginData } from "~/types";
 
-export type Props = {
-  origin?: OriginData;
-  paymentRequest?: string;
-};
-
-function ConfirmPayment(props: Props) {
+function ConfirmPayment() {
   const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
   const { t } = useTranslation("components", {
@@ -66,7 +60,9 @@ function ConfirmPayment(props: Props) {
       const response = await utils.call(
         "sendPayment",
         { paymentRequest: paymentRequest },
-        { origin: navState.origin }
+        {
+          origin: navState.origin,
+        }
       );
       auth.fetchAccountInfo(); // Update balance.
       msg.reply(response);
@@ -89,7 +85,7 @@ function ConfirmPayment(props: Props) {
   }
 
   function saveBudget() {
-    if (!budget) return;
+    if (!budget || !navState.origin) return;
     return msg.request("addAllowance", {
       totalBudget: parseInt(budget),
       host: navState.origin.host,
@@ -104,11 +100,13 @@ function ConfirmPayment(props: Props) {
       {!successMessage ? (
         <Container justifyBetween maxWidth="sm">
           <div>
-            <PublisherCard
-              title={navState.origin.name}
-              image={navState.origin.icon}
-              url={navState.origin.host}
-            />
+            {navState.origin && (
+              <PublisherCard
+                title={navState.origin.name}
+                image={navState.origin.icon}
+                url={navState.origin.host}
+              />
+            )}
             <div className="my-4">
               <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
                 <PaymentSummary
@@ -144,11 +142,13 @@ function ConfirmPayment(props: Props) {
         </Container>
       ) : (
         <Container maxWidth="sm">
-          <PublisherCard
-            title={navState.origin.name}
-            image={navState.origin.icon}
-            url={navState.origin.host}
-          />
+          {navState.origin && (
+            <PublisherCard
+              title={navState.origin.name}
+              image={navState.origin.icon}
+              url={navState.origin.host}
+            />
+          )}
           <div className="my-4">
             <SuccessMessage
               message={successMessage}

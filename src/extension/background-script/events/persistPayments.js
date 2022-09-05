@@ -1,16 +1,17 @@
 import db from "../db";
 
 const persistSuccessfullPayment = async (message, data) => {
-  const recipientName = data.origin.name;
-  const host = data.origin.host;
+  const name = data?.origin?.name;
+  const host = data?.origin?.host;
+  const location = data?.origin?.location;
   const paymentResponse = data.response;
   const route = paymentResponse.data.route;
   const { total_amt, total_fees } = route;
 
   await db.payments.add({
-    host: host,
-    location: data.origin.location,
-    name: recipientName,
+    host,
+    location,
+    name,
     description: data.details.description,
     preimage: paymentResponse.data.preimage,
     paymentHash: paymentResponse.data.paymentHash,

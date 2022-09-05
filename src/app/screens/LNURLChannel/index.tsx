@@ -17,9 +17,9 @@ import type { LNURLChannelServiceResponse } from "~/types";
 
 function LNURLChannel() {
   const navigate = useNavigate();
-
   const navState = useNavigationState();
   const details = navState.args?.lnurlDetails as LNURLChannelServiceResponse;
+  const origin = navState.origin;
   const { uri } = details;
   const [pubkey, host] = uri.split("@");
 
@@ -95,10 +95,15 @@ function LNURLChannel() {
       {!successMessage ? (
         <Container justifyBetween maxWidth="sm">
           <div>
-            <PublisherCard
-              title={navState.origin.name}
-              image={navState.origin.icon}
-            />
+            {origin ? (
+              <PublisherCard
+                title={origin.name}
+                image={origin.icon}
+                url={details.domain}
+              />
+            ) : (
+              <PublisherCard title={details.domain} />
+            )}
             <ContentMessage
               heading={`Request a channel from the node:`}
               content={uri}
@@ -124,11 +129,16 @@ function LNURLChannel() {
         </Container>
       ) : (
         <Container maxWidth="sm">
-          <PublisherCard
-            title={navState.origin.name}
-            image={navState.origin.icon}
-            url={details.domain}
-          />
+          {origin ? (
+            <PublisherCard
+              title={origin.name}
+              image={origin.icon}
+              url={details.domain}
+            />
+          ) : (
+            <PublisherCard title={details.domain} />
+          )}
+
           <div className="my-4">
             <SuccessMessage message={successMessage} onClose={close} />
           </div>

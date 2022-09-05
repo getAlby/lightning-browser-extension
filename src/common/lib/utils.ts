@@ -5,6 +5,7 @@ import { ABORT_PROMPT_ERROR } from "~/common/constants";
 import type {
   Invoice,
   Message,
+  MessageSendPayment,
   OriginData,
   OriginDataInternal,
   PaymentNotificationData,
@@ -77,8 +78,8 @@ const utils = {
     return Uint8Array.from(str, (x) => x.charCodeAt(0));
   },
   publishPaymentNotification: (
-    message: Message,
-    data: PaymentNotificationData
+    message: MessageSendPayment | Message, // 'keysend' & 'sendPaymentOrPrompt' still need the Message type
+    data: Omit<PaymentNotificationData, "origin">
   ) => {
     let status = "success"; // default. let's hope for success
     if ("error" in data.response) {

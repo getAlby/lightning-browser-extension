@@ -11,6 +11,7 @@ import {
   LNURLDetails,
   LnurlAuthResponse,
   OriginData,
+  AuthResponseObject,
 } from "~/types";
 
 const LNURLAUTH_CANONICAL_PHRASE =
@@ -26,7 +27,7 @@ export async function authFunction({
   origin,
 }: {
   lnurlDetails: LNURLDetails;
-  origin: OriginData;
+  origin?: OriginData;
 }) {
   if (lnurlDetails.tag !== "login")
     throw new Error(
@@ -83,7 +84,7 @@ export async function authFunction({
   loginURL.searchParams.set("t", Date.now().toString());
 
   try {
-    const authResponse = await axios.get<{ status: string; reason?: string }>(
+    const authResponse = await axios.get<AuthResponseObject>(
       loginURL.toString()
     );
 
@@ -103,6 +104,7 @@ export async function authFunction({
         success: true,
         status: authResponse.data.status,
         reason: authResponse.data.reason,
+        authResponseData: authResponse.data,
       };
 
       return response;
@@ -113,7 +115,7 @@ export async function authFunction({
       const error =
         (e.response?.data as { reason?: string })?.reason || e.message; // lnurl error or exception message
 
-      PubSub.publish(`lnurl.auth.failed`, {
+      PubSub.publish("lnurl.auth.failed", {
         error,
         lnurlDetails,
         origin,
@@ -121,7 +123,7 @@ export async function authFunction({
 
       throw new Error(error);
     } else if (e instanceof Error) {
-      PubSub.publish(`lnurl.auth.failed`, {
+      PubSub.publish("lnurl.auth.failed", {
         error: e.message,
         lnurlDetails,
         origin,

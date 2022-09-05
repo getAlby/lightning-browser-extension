@@ -15,7 +15,6 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import lnurlLib from "~/common/lib/lnurl";
-import getOriginData from "~/extension/content-script/originData";
 
 function Send() {
   const { t } = useTranslation("translation", { keyPrefix: "send" });
@@ -41,12 +40,10 @@ function Send() {
 
       if (lnurl) {
         const lnurlDetails = await lnurlLib.getDetails(lnurl);
-        const originData = getOriginData();
 
         if (lnurlDetails.tag === "channelRequest") {
           navigate("/lnurlChannel", {
             state: {
-              origin: originData,
               args: {
                 lnurlDetails,
               },
@@ -57,7 +54,6 @@ function Send() {
         if (lnurlDetails.tag === "login") {
           navigate("/lnurlAuth", {
             state: {
-              origin: originData,
               args: {
                 lnurlDetails,
               },
@@ -68,7 +64,6 @@ function Send() {
         if (lnurlDetails.tag === "payRequest") {
           navigate("/lnurlPay", {
             state: {
-              origin: originData,
               args: {
                 lnurlDetails,
               },
@@ -79,7 +74,6 @@ function Send() {
         if (lnurlDetails.tag === "withdrawRequest") {
           navigate("/lnurlWithdraw", {
             state: {
-              origin: originData,
               args: {
                 lnurlDetails,
               },
@@ -92,7 +86,6 @@ function Send() {
         lightningPayReq.decode(invoice); // throws if invalid.
         navigate("/confirmPayment", {
           state: {
-            origin: getOriginData(),
             args: {
               paymentRequest: invoice,
             },
