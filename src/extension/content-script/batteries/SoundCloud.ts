@@ -51,9 +51,27 @@ function handleTrackPage() {
 
 function handleProfilePage() {
   const webProfiles = document.querySelector<HTMLDivElement>(".web-profiles");
+  const linkElement = document.querySelector<HTMLAnchorElement>(
+    ".web-profiles a[href*='getalby.com']"
+  );
+  const descriptionElement = document.querySelector<HTMLDivElement>(
+    ".truncatedUserDescription"
+  );
+
   if (!webProfiles || !webProfiles.textContent) return;
 
-  const address = findLightningAddressInText(webProfiles.textContent);
+  let text = webProfiles.textContent;
+
+  if (linkElement) {
+    const url = new URL(linkElement.href);
+    text += url.searchParams.get("url") + " ";
+  }
+
+  if (descriptionElement) {
+    text += descriptionElement.innerText;
+  }
+
+  const address = findLightningAddressInText(text);
   if (!address) return;
 
   setLightningData([
@@ -61,9 +79,7 @@ function handleProfilePage() {
       method: "lnurl",
       address: address,
       ...getOriginData(),
-      description:
-        document.querySelector<HTMLDivElement>(".truncatedUserDescription")
-          ?.innerText ?? "",
+      description: descriptionElement?.innerText ?? "",
       name:
         document
           .querySelector<HTMLHeadingElement>(".profileHeaderInfo__userName")
