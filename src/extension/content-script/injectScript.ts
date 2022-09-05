@@ -1,7 +1,7 @@
 // load the inpage scripts
 // only an inpage script gets access to the document
 // and the document can interact with the extension through the inpage script
-export default function injectScript(url) {
+export default function injectScript(url: string) {
   try {
     if (!document) throw new Error("No document");
     const container = document.head || document.documentElement;

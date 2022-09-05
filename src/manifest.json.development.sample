@@ -84,7 +84,7 @@
       "https://*/*"
     ],
     "js": [
-      "js/contentScript.bundle.js"
+      "js/contentScriptOnEnd.bundle.js"
     ]
   }]
 }

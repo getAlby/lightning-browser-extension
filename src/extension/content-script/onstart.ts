@@ -1,3 +1,5 @@
+import browser from "webextension-polyfill";
+
 import injectScript from "./injectScript";
 import shouldInject from "./shouldInject";
 
@@ -7,6 +9,6 @@ async function onstart() {
     return;
   }
 
-  injectScript(browser.extension.getURL("js/inpageScriptWebLN.bundle.js")); // injects the webln object
+  injectScript(browser.runtime.getURL("js/inpageScriptWebLN.bundle.js")); // injects the webln object
 }
 onstart();
