@@ -33,7 +33,7 @@
         "ready": "Perfeito, tudo configurado!",
         "tutorial": "Agora que você já conectou o servidor, gostaria de ler o tutorial?",
         "try_tutorial": "Experimente agora",
-        "initializing": "Inicializando sua conta. Aguarde, pode demorar um pouco...",
+        "initializing": "Iniciando sua conta. Aguarde, pode demorar um pouco...",
         "connection_error": "Erro de conexão",
         "review_connection_details": "Revise os detalhes da conexão.",
         "connection_taking_long": "A tentativa de conexão está demorando mais do que o esperado... Os dados estão corretos? O servidor está acessível?",
@@ -181,7 +181,28 @@
         "tip_mobile": "Dica: Use esta carteira no seu dispositivo móvel",
         "waiting": "aguardando dados LndHub...",
         "scan_qr": "Leia o Código QR para importar esta carteira na Zeus ou BlueWallet.",
-        "export_uri": "Credenciais URI LNDHub"
+        "export_uri": "Credenciais URI LNDHub",
+        "title": "Exportar Conta",
+        "label": "Exportar"
+      },
+      "title": "Contas",
+      "add": {
+        "label": "Adicionar conta"
+      },
+      "edit": {
+        "title": "Editar Conta",
+        "label": "Editar",
+        "name_label": "Editar nome da conta"
+      },
+      "name": {
+        "label": "Nome"
+      },
+      "remove": {
+        "label": "Remover",
+        "confirm": "Tem certeza de que deseja remover a conta: {{name}}? \nEsta ação não pode ser desfeita. Se você usou essa conta para autenticar em sites, poderá perder o acesso a eles."
+      },
+      "save": {
+        "label": "Salvar"
       }
     },
     "unlock": {
@@ -393,7 +414,8 @@
       "save": "Salvar",
       "delete": "Remover",
       "enable_now": "Ativar",
-      "close": "Fechar"
+      "close": "Fechar",
+      "lock": "Bloquear"
     },
     "errors": {
       "connection_failed": "Falha na conexão"
@@ -405,7 +427,8 @@
     "sats": "sats",
     "amount": "Quantia",
     "optional": "Opcional",
-    "error": "Erro"
+    "error": "Erro",
+    "feedback": "Feedback"
   },
   "components": {
     "qrcode_scanner": {
@@ -448,6 +471,10 @@
       "budget": {
         "label": "Limite de gastos"
       }
+    },
+    "companionDownloadInfo": {
+      "info": "Você está tentando se conectar em um servidor que usa Tor. Como os navegadores não podem se conectar diretamente em servidores que usam Tor, verifique se o aplicativo companion da Alby está instalado.",
+      "download_here": "Faça o download aqui!"
     }
   }
 }
