@@ -85,7 +85,8 @@ export default function TransactionsTable({ transactions }: Props) {
                           </p>
                         )}
                       </div>
-                      {([tx.type && "sent", "sending"].includes(tx.type) ||
+                      {(!!tx.description ||
+                        [tx.type && "sent", "sending"].includes(tx.type) ||
                         (tx.type === "received" && tx.boostagram)) && (
                         <Disclosure.Button className="block h-0 mt-2 text-gray-500 hover:text-black dark:hover:text-white transition-color duration-200">
                           <CaretDownIcon
@@ -95,9 +96,10 @@ export default function TransactionsTable({ transactions }: Props) {
                       )}
                     </div>
                   </div>
+
                   <Disclosure.Panel>
                     <div className="mt-1 ml-9 text-xs text-gray-600 dark:text-neutral-400">
-                      <p>{tx.description}</p>
+                      {tx.description && <p>{tx.description}</p>}
                       {tx.totalFees && (
                         <p>
                           {tComponents("transactionsTable.fee")}: {tx.totalFees}{" "}

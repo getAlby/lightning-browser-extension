@@ -6,12 +6,12 @@ const invoices = async (message: MessageInvoices) => {
   const isSettled = message.args.isSettled;
 
   const connector = await state.getState().getConnector();
-  const data = await connector.getInvoices();
+  const result = await connector.getInvoices();
 
-  if (data instanceof Error) {
-    return { error: data.message };
+  if (result instanceof Error) {
+    return { error: result.message };
   } else {
-    const invoices: Invoice[] = data.data.invoices
+    const invoices: Invoice[] = result.data.invoices
       .filter((invoice) => (isSettled ? invoice.settled : !invoice.settled))
       .map((invoice: Invoice) => {
         const boostagram = utils.getBoostagramFromInvoiceCustomRecords(

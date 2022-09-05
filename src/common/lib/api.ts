@@ -1,7 +1,6 @@
 import {
   ConnectPeerArgs,
   ConnectPeerResponse,
-  GetInvoicesResponse,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
 } from "~/extension/background-script/connectors/connector.interface";
@@ -16,6 +15,7 @@ import type {
   MessageLnurlAuth,
   MessageSettingsSet,
   LnurlAuthResponse,
+  Invoice,
 } from "~/types";
 
 import {
@@ -113,7 +113,7 @@ export const unlock = (password: string) =>
 export const getBlocklist = (host: string) =>
   utils.call<BlocklistRes>("getBlocklist", { host });
 export const getInvoices = (options?: MessageInvoices["args"]) =>
-  utils.call<GetInvoicesResponse["data"]>("getInvoices", options);
+  utils.call<{ invoices: Invoice[] }>("getInvoices", options);
 export const lnurlAuth = (
   options: MessageLnurlAuth["args"]
 ): Promise<LnurlAuthResponse> =>
