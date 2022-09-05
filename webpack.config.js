@@ -55,8 +55,10 @@ var options = {
   entry: {
     manifest: "./src/manifest.json",
     background: "./src/extension/background-script/index.ts",
-    contentScript: "./src/extension/content-script/index.js",
+    contentScriptOnEnd: "./src/extension/content-script/onend.js",
+    contentScriptOnStart: "./src/extension/content-script/onstart.ts",
     inpageScript: "./src/extension/inpage-script/index.js",
+    inpageScriptWebLN: "./src/extension/inpage-script/webln.js",
     popup: "./src/app/router/Popup/index.tsx",
     prompt: "./src/app/router/Prompt/index.tsx",
     options: "./src/app/router/Options/index.tsx",

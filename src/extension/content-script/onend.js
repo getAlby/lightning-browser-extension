@@ -29,7 +29,7 @@ async function init() {
     return;
   }
 
-  injectScript(); // injects the webln object
+  injectScript(browser.runtime.getURL("js/inpageScript.bundle.js")); // registers the DOM event listeners and checks webln again (which is also loaded onstart
 
   // extract LN data from websites
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
