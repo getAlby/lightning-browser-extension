@@ -22,7 +22,7 @@ const parseRecipient = (content: string): BatteryMetaTagRecipient => {
 
 const battery = (): void => {
   const monetizationTag = document.querySelector<HTMLMetaElement>(
-    'head > meta[name="lightning"]'
+    'head > meta[name="lightning" i]'
   );
   if (!monetizationTag) {
     return;
