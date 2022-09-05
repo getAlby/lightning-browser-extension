@@ -174,6 +174,7 @@ function Home() {
     const invoices: Transaction[] = result.invoices.map((invoice) => ({
       ...invoice,
       title: invoice.memo,
+      description: invoice.memo,
       date: dayjs(invoice.settleDate).fromNow(),
     }));
 
