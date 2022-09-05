@@ -19,7 +19,7 @@ function LNURLChannel() {
   const navigate = useNavigate();
   const navState = useNavigationState();
   const details = navState.args?.lnurlDetails as LNURLChannelServiceResponse;
-  const origin = navState?.origin;
+  const origin = navState.origin;
   const { uri } = details;
   const [pubkey, host] = uri.split("@");
 

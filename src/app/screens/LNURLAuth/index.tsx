@@ -14,7 +14,7 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-import type { LNURLAuthServiceResponse, OriginData } from "~/types";
+import type { LNURLAuthServiceResponse } from "~/types";
 
 function LNURLAuth() {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ function LNURLAuth() {
   const navState = useNavigationState();
 
   const details = navState.args?.lnurlDetails as LNURLAuthServiceResponse;
-  const origin = navState.origin as OriginData; // this action will always have an `origin` set, just the type is optional to support usage via PopUp
+  const origin = navState.origin;
 
   const { t } = useTranslation("components", {
     keyPrefix: "confirmOrCancel",

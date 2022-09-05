@@ -73,7 +73,7 @@ export interface AuthResponseObject {
 }
 export interface AuthNotificationData {
   authResponse: AuthResponseObject;
-  origin?: OriginData; // only set if troggered via Prompt
+  origin?: OriginData; // only set if triggered via Prompt
   lnurlDetails: LNURLAuthServiceResponse;
 }
 
@@ -288,7 +288,7 @@ export interface MessageConnectPeer extends MessageDefault {
 
 export interface MessageLnurlAuth {
   args: {
-    origin?: OriginData; // only set if troggered via Prompt
+    origin?: OriginData; // only set if triggered via Prompt
     lnurlDetails: {
       tag: "login";
       k1: string;
