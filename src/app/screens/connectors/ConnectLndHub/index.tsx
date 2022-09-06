@@ -2,6 +2,7 @@ import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import QrcodeScanner from "@components/QrcodeScanner";
 import TextField from "@components/form/TextField";
+import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -76,7 +77,7 @@ export default function ConnectLndHub() {
       } else {
         console.error(validation);
         toast.error(
-          `${t("errors.connection_failed")} \n\n(${validation.error})`
+          <ConnectionErrorToast message={validation.error as string} />
         );
       }
     } catch (e) {

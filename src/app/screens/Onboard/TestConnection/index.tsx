@@ -29,7 +29,7 @@ export default function TestConnection() {
 
   async function loadAccountInfo() {
     setLoading(true);
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setErrorMessage(t("connection_taking_long"));
     }, 45000);
     try {
@@ -47,6 +47,7 @@ export default function TestConnection() {
       setErrorMessage(message);
     } finally {
       setLoading(false);
+      clearTimeout(timer);
     }
   }
 

@@ -1,6 +1,7 @@
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
+import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -63,7 +64,7 @@ export default function ConnectLnbits() {
       } else {
         console.error(validation);
         toast.error(
-          `Connection failed. Do you have the correct URL and Admin Key? \n\n(${validation.error})`
+          <ConnectionErrorToast message={validation.error as string} />
         );
       }
     } catch (e) {

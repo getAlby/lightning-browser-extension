@@ -456,6 +456,12 @@
       "download_here": "Download the Alby companion here!",
       "using_tor": "click here to continue if you use the Tor Browser",
       "or": "Or:"
+    },
+    "toasts": {
+      "connection_error": {
+        "connection_failed": "Connection failed. Are your credentials correct?",
+        "help_link": "For help visit our connection guides"
+      }
     }
   }
 }

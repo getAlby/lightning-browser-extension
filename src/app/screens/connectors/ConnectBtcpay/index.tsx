@@ -1,6 +1,7 @@
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
+import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import axios from "axios";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -94,16 +95,17 @@ export default function ConnectBtcpay() {
           navigate("/test-connection");
         }
       } else {
-        toast.error(`
-          ${t("errors.connection_failed")} \n\n(${validation.error})`);
+        toast.error(
+          <ConnectionErrorToast message={validation.error as string} />
+        );
       }
     } catch (e) {
       console.error(e);
-      let message = t("errors.connection_failed");
+      let message = "";
       if (e instanceof Error) {
-        message += `\n\n${e.message}`;
+        message += `${e.message}`;
       }
-      toast.error(message);
+      toast.error(<ConnectionErrorToast message={message} />);
     }
     setLoading(false);
   }

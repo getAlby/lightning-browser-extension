@@ -1,6 +1,7 @@
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
+import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -74,17 +75,17 @@ export default function ConnectRaspiBlitz() {
           navigate("/test-connection");
         }
       } else {
-        toast.error(`
-          Connection failed. Are your RaspiBlitz credentials correct? \n\n(${validation.error})`);
+        toast.error(
+          <ConnectionErrorToast message={validation.error as string} />
+        );
       }
     } catch (e) {
       console.error(e);
-      let message =
-        "Connection failed. Are your RaspiBlitz credentials correct?";
+      let message = "";
       if (e instanceof Error) {
-        message += `\n\n${e.message}`;
+        message += `${e.message}`;
       }
-      toast.error(message);
+      toast.error(<ConnectionErrorToast message={message} />);
     }
     setLoading(false);
   }

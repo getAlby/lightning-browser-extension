@@ -76,7 +76,7 @@ function WelcomeRouter() {
   return (
     <SettingsProvider>
       <Router>
-        <ToastContainer autoClose={10000} />
+        <ToastContainer autoClose={10000} hideProgressBar={true} />
         <App />
       </Router>
     </SettingsProvider>

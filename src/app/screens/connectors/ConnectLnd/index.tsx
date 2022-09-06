@@ -2,6 +2,7 @@ import { SendIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
+import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -70,16 +71,17 @@ export default function ConnectLnd() {
           navigate("/test-connection");
         }
       } else {
-        toast.error(`
-          ${t("errors.connection_failed")} \n\n(${validation.error})`);
+        toast.error(
+          <ConnectionErrorToast message={validation.error as string} />
+        );
       }
     } catch (e) {
       console.error(e);
-      let message = t("errors.connection_failed");
+      let message = "";
       if (e instanceof Error) {
-        message += `\n\n${e.message}`;
+        message += `${e.message}`;
       }
-      toast.error(message);
+      toast.error(<ConnectionErrorToast message={message} />);
     }
     setLoading(false);
   }
@@ -139,7 +141,7 @@ export default function ConnectLnd() {
           id="url"
           label={t("url_label")}
           placeholder={t("url_placeholder")}
-          pattern="https://.+"
+          pattern="https?://.+"
           title={t("url_placeholder")}
           onChange={handleChange}
           required
