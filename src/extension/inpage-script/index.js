@@ -14,7 +14,7 @@ if (document) {
     (ev) => {
       // Use composedPath() for detecting links inside a Shadow DOM
       // https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath
-      const target = ev.composedPath()[0] || ev.target;
+      const target = ev.composedPath()[0];
 
       if (!target || !target.closest) {
         return;
