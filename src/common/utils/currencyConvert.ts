@@ -16,34 +16,6 @@ const getCurrencySettings = async () => {
 
 const numSatsInBtc = 100_000_000;
 
-// export const getFiatBtcRate = async (currency: CURRENCIES): Promise<number> => {
-//   const { exchange } = await getCurrencySettings();
-
-//   let response;
-
-//   if (exchange === "yadio") {
-//     response = await axios.get(
-//       `https://api.yadio.io/exrates/${currency.toLowerCase()}`
-//     );
-//     const data = await response?.data;
-//     return data.BTC;
-//   }
-
-//   if (exchange === "coindesk") {
-//     response = await axios.get(
-//       `https://api.coindesk.com/v1/bpi/currentprice/${currency.toLowerCase()}.json`
-//     );
-//     const data = await response?.data;
-//     return data.bpi[currency].rate_float;
-//   }
-
-//   response = await axios.get(
-//     `https://getalby.com/api/rates/${currency.toLowerCase()}.json`
-//   );
-//   const data = await response?.data;
-//   return data[currency].rate_float;
-// };
-
 const bitcoinToFiat = async (
   amountInBtc: number | string,
   convertTo: CURRENCIES

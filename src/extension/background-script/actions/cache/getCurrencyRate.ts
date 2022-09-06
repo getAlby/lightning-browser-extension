@@ -4,6 +4,7 @@ import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import browser from "webextension-polyfill";
 import { CURRENCIES } from "~/common/constants";
 import { get as getSettings } from "~/extension/background-script/actions/settings";
+import type { MessageCurrencyRateGet } from "~/types";
 
 dayjs.extend(isSameOrBefore);
 
@@ -75,7 +76,7 @@ const getCurrencyRateFromCache = async (currency: CURRENCIES) => {
   return rate;
 };
 
-const getCurrencyRate = async (message: FixMe) => {
+const getCurrencyRate = async (message: MessageCurrencyRateGet) => {
   const { currency } = message.args;
   const rate = await getCurrencyRateFromCache(currency);
 

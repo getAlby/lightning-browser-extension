@@ -1,4 +1,3 @@
-import { CURRENCIES } from "~/common/constants";
 import {
   ConnectPeerArgs,
   ConnectPeerResponse,
@@ -13,6 +12,7 @@ import type {
   SettingsStorage,
   MessageInvoices,
   DbPayment,
+  MessageCurrencyRateGet,
   MessageLnurlAuth,
   MessageSettingsSet,
   LnurlAuthResponse,
@@ -120,8 +120,9 @@ export const lnurlAuth = (
 ): Promise<LnurlAuthResponse> =>
   utils.call<LnurlAuthResponse>("lnurlAuth", options);
 
-export const getCurrencyRate = async (options: { currency: CURRENCIES }) =>
-  utils.call<FixMe>("getCurrencyRate", options);
+export const getCurrencyRate = async (
+  options: MessageCurrencyRateGet["args"]
+) => utils.call<{ rate: number }>("getCurrencyRate", options);
 
 export default {
   getAccountInfo,
