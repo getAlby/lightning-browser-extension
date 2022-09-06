@@ -47,7 +47,7 @@ function QrcodeScanner({
         handleStartScanning(devices[0].id);
       }
     } catch (error) {
-      toast.error(t("allow_camera_access"));
+      toast.error(t("errors.allow_camera_access"));
     }
   }
 
@@ -122,10 +122,10 @@ function QrcodeScanner({
           <div className="flex justify-center text-center items-center">
             <div>
               <h4 className="text-lg font-bold mb-2 dark:text-white">
-                {t("scan_qrcode")}
+                {t("title")}
               </h4>
               <Button
-                label={t("start_scanning")}
+                label={t("actions.start_scanning")}
                 onClick={handleRequestCameraPermissions}
               />
             </div>
@@ -154,7 +154,7 @@ function QrcodeScanner({
             </select>
           </div>
           <Button
-            label={t("stop_scanning")}
+            label={t("actions.stop_scanning")}
             onClick={() => handleStopScanning()}
           />
         </div>

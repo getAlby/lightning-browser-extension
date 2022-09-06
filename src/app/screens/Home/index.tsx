@@ -278,7 +278,7 @@ function Home() {
                   setLoadingSendSats(false);
                 }
               }}
-              label={t("send_satoshis")}
+              label={t("actions.send_satoshis")}
               primary
               loading={loadingSendSats}
             />
@@ -372,7 +372,7 @@ function Home() {
             </p>
             <Button
               fullWidth
-              label={tCommon("actions.enable_now")}
+              label={t("actions.enable_now")}
               direction="column"
               onClick={() => unblock()}
             />

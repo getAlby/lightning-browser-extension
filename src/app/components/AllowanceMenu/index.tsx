@@ -100,13 +100,13 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         closeTimeoutMS={200}
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        contentLabel={t("options.label")}
+        contentLabel={t("set_budget.screen_reader")}
         overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
         className="rounded-lg bg-white w-full max-w-lg"
       >
         <div className="p-5 flex justify-between dark:bg-surface-02dp">
           <h2 className="text-2xl font-bold dark:text-white">
-            {t("set_budget")}
+            {t("set_budget.title")}
           </h2>
           <button onClick={closeModal}>
             <CrossIcon className="w-6 h-6 dark:text-white" />

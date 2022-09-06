@@ -43,6 +43,7 @@ function LNURLPay() {
   const navigate = useNavigate();
   const auth = useAccount();
   const { t } = useTranslation("translation", { keyPrefix: "send.lnurlpay" });
+  const { t: tCommon } = useTranslation("common");
 
   const [valueSat, setValueSat] = useState(
     (details?.minSendable && (+details?.minSendable / 1000).toString()) || ""
@@ -323,7 +324,7 @@ function LNURLPay() {
                       )}
                       {details.minSendable === details.maxSendable && (
                         <>
-                          <Dt>{t("amount_label")}</Dt>
+                          <Dt>{t("amount.label")}</Dt>
                           <Dd>{`${+details.minSendable / 1000} sats`}</Dd>
                         </>
                       )}
@@ -333,7 +334,7 @@ function LNURLPay() {
                     <div>
                       <DualCurrencyField
                         id="amount"
-                        label={t("amount_label")}
+                        label={t("amount.label")}
                         min={+details.minSendable / 1000}
                         max={+details.maxSendable / 1000}
                         value={valueSat}
@@ -349,8 +350,8 @@ function LNURLPay() {
                       <div className="mt-4">
                         <TextField
                           id="comment"
-                          label={t("comment_label")}
-                          placeholder={t("placeholder")}
+                          label={t("comment.label")}
+                          placeholder={tCommon("optional")}
                           onChange={(e) => {
                             setComment(e.target.value);
                           }}
@@ -361,8 +362,8 @@ function LNURLPay() {
                     <div className="mt-4">
                       <TextField
                         id="name"
-                        label={t("name_label")}
-                        placeholder={t("placeholder")}
+                        label={t("name.label")}
+                        placeholder={tCommon("optional")}
                         value={userName}
                         onChange={(e) => {
                           setUserName(e.target.value);
@@ -374,8 +375,8 @@ function LNURLPay() {
                     <div className="mt-4">
                       <TextField
                         id="email"
-                        label={t("email_label")}
-                        placeholder={t("placeholder")}
+                        label={t("email.label")}
+                        placeholder={tCommon("optional")}
                         value={userEmail}
                         onChange={(e) => {
                           setUserEmail(e.target.value);
@@ -386,7 +387,7 @@ function LNURLPay() {
                 </div>
                 <div className="pt-2 border-t border-gray-200 dark:border-white/10">
                   <ConfirmOrCancel
-                    label={t("confirm_button")}
+                    label={tCommon("actions.confirm")}
                     loading={loadingConfirm}
                     disabled={loadingConfirm || !valueSat}
                     onConfirm={confirm}

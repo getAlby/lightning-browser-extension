@@ -122,7 +122,7 @@ function Publisher() {
 
               <dd className="flex items-center font-bold text-xl dark:text-neutral-400">
                 {allowance.usedBudget} / {allowance.totalBudget}{" "}
-                {t("publisher.allowance.usedBudget")}
+                {t("publisher.allowance.used_budget")}
                 <div className="ml-3 w-24">
                   <Progressbar percentage={allowance.percentage} />
                 </div>

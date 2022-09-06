@@ -74,7 +74,7 @@ function ConfirmSignMessage(props: Props) {
               url={originRef.current.host}
             />
             <ContentMessage
-              heading={t("content.heading", { host: originRef.current.host })}
+              heading={t("content", { host: originRef.current.host })}
               content={messageRef.current}
             />
             {/*

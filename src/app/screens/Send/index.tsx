@@ -18,6 +18,7 @@ import lnurlLib from "~/common/lib/lnurl";
 
 function Send() {
   const { t } = useTranslation("translation", { keyPrefix: "send" });
+  const { t: tCommon } = useTranslation("common");
 
   const [invoice, setInvoice] = useState("");
   const navigate = useNavigate();
@@ -179,7 +180,7 @@ function Send() {
             <div className="mt-4">
               <Button
                 type="submit"
-                label={t("submit.label")}
+                label={tCommon("actions.continue")}
                 primary
                 fullWidth
                 loading={loading}

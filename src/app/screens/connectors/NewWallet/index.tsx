@@ -146,7 +146,7 @@ export default function NewWallet() {
       <div className="mt-6">
         <TextField
           id="email"
-          label={t("pre_connect.email_label")}
+          label={t("pre_connect.email.label")}
           type="email"
           required
           onChange={(e) => {
@@ -206,8 +206,8 @@ export default function NewWallet() {
         <div>
           <TextField
             id="lnAddress"
-            label={t("pre_connect.optional_lightning_address_label")}
-            suffix={t("pre_connect.optional_lightning_address_suffix")}
+            label={t("pre_connect.optional_lightning_address.label")}
+            suffix={t("pre_connect.optional_lightning_address.suffix")}
             type="text"
             onChange={(e) => {
               setLnAddress(e.target.value.trim().split("@")[0]); // in case somebody enters a full address we simple remove the domain

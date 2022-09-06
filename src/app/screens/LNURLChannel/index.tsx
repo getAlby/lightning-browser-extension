@@ -24,7 +24,7 @@ function LNURLChannel() {
   const [pubkey, host] = uri.split("@");
 
   const { t } = useTranslation("components", {
-    keyPrefix: "confirmOrCancel",
+    keyPrefix: "confirm_or_cancel",
   });
 
   const [loadingConfirm, setLoadingConfirm] = useState(false);

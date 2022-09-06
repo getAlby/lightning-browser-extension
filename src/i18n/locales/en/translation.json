@@ -9,14 +9,22 @@
         "done": "Done"
       },
       "intro": {
-        "send": "Send in One Click",
-        "send_description": "Lightning transactions happen all in your browser. No alt+tab or QR-code scanning needed.",
-        "paywall": "No more annoying paywalls",
-        "paywall_description": "Define individual budgets for websites to enable seamless payment streams. No more annoying paywalls.",
-        "privacy": "Privacy first",
-        "privacy_description": "Use lightning to authenticate and control your privacy.",
-        "foss": "Free and Open Source",
-        "foss_description": "Completely open code that can be audited by anyone. No stats or trackers. You are in control.",
+        "send": {
+          "title": "Send in One Click",
+          "description": "Lightning transactions happen all in your browser. No alt+tab or QR-code scanning needed."
+        },
+        "paywall": {
+          "title": "No more annoying paywalls",
+          "description": "Define individual budgets for websites to enable seamless payment streams. No more annoying paywalls."
+        },
+        "privacy": {
+          "title": "Privacy first",
+          "description": "Use lightning to authenticate and control your privacy."
+        },
+        "foss": {
+          "title": "Free and Open Source",
+          "description": "Completely open code that can be audited by anyone. No stats or trackers. You are in control."
+        },
         "actions": {
           "get_started": "Get Started"
         }
@@ -24,11 +32,17 @@
       "set_password": {
         "title": "Set an unlock password",
         "description": "Your Lightning account data is securely encrypted with an unlock password. Do not forget this password! You need it to unlock the Alby Extension (in this browser)",
-        "enter_password": "Please enter a password.",
-        "confirm_password": "Please confirm your password.",
-        "mismatched_password": "Passwords don't match.",
-        "choose_password_label": "Choose an unlock password:",
-        "confirm_password_label": "Let's confirm you typed it correct:"
+        "choose_password": {
+          "label": "Choose an unlock password:"
+        },
+        "confirm_password": {
+          "label": "Let's confirm you typed it correct:"
+        },
+        "errors": {
+          "enter_password": "Please enter a password.",
+          "confirm_password": "Please confirm your password.",
+          "mismatched_password": "Passwords don't match."
+        }
       },
       "test_connection": {
         "ready": "Awesome, you’re ready to go!",
@@ -57,15 +71,19 @@
           "title": "Your Alby Lightning Wallet",
           "login_account": "Create or login to your Alby account.",
           "host_wallet": "We host a Lightning wallet for you!",
-          "email_label": "Email Address",
+          "email": {
+            "label": "Email Address"
+          },
           "optional_lightning_note": {
             "part1": "Your Alby account also comes with an optional",
             "part2": "Lightning Address",
             "part3": ". This is a simple way for anyone to send you Bitcoin on the Lightning Network.",
             "part4": "learn more"
           },
-          "optional_lightning_address_label": "Choose your Lightning Address (optional)",
-          "optional_lightning_address_suffix": "@getalby.com",
+          "optional_lightning_address": {
+            "label": "Choose your Lightning Address (optional)",
+            "suffix": "@getalby.com"
+          },
           "errors": {
             "create_wallet_error": "Failed to login or create a new account. If you need help, please contact support@getalby.com"
           }
@@ -74,11 +92,17 @@
       "lnd": {
         "title": "LND",
         "description": "Connect to your LND node",
-        "page_title": "Connect to your LND node",
-        "page_description": "You need your node URL and a macaroon with read and send permissions (e.g. admin.macaroon)",
-        "url_label": "REST API host and port",
-        "url_placeholder": "https://your-node-url:8080",
-        "macaroon_label": "Macaroon (HEX format)",
+        "page": {
+          "title": "Connect to your LND node",
+          "description": "You need your node URL and a macaroon with read and send permissions (e.g. admin.macaroon)"
+        },
+        "url": {
+          "label": "REST API host and port",
+          "placeholder": "https://your-node-url:8080"
+        },
+        "macaroon": {
+          "label": "Macaroon (HEX format)"
+        },
         "or": "OR",
         "drag_and_drop": "Drag and drop your macaroon here or <0>browse</0>",
         "errors": {
@@ -88,9 +112,13 @@
       "lndhub": {
         "title": "LNDHub (Bluewallet)",
         "description": "Connect to your Bluewallet mobile wallet",
-        "page_title": "Connect to LNDHub (BlueWallet)",
-        "page_description": "In BlueWallet, choose the wallet you want to connect, open it, click on \"...\", click on Export/Backup to display the QR code and scan it with your webcam.",
-        "lndhub_uri": "LNDHub Export URI",
+        "page": {
+          "title": "Connect to LNDHub (BlueWallet)",
+          "description": "In BlueWallet, choose the wallet you want to connect, open it, click on \"...\", click on Export/Backup to display the QR code and scan it with your webcam."
+        },
+        "uri": {
+          "label": "LNDHub Export URI"
+        },
         "errors": {
           "invalid_uri": "Invalid LNDHub URI",
           "connection_failed": "Connection failed. Is your LNDHub URI correct?"
@@ -135,17 +163,24 @@
       "btcpay": {
         "title": "BTCPay Server",
         "description": "Connect to your BTCPay LND node",
-        "page_title": "Connect to your BTCPay LND node",
-        "page_instructions": "Navigate to your BTCPayServer and log in as an admin. Go to Server Settings > Services > LND Rest - See information. Then Click \"See QR Code information\" and copy the QR Code data. Paste it below:",
-        "config_label": "Config data",
-        "config_placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config",
+        "page": {
+          "title": "Connect to your BTCPay LND node",
+          "instructions": "Navigate to your BTCPayServer and log in as an admin. Go to Server Settings > Services > LND Rest - See information. Then Click \"See QR Code information\" and copy the QR Code data. Paste it below:"
+        },
+        "config": {
+          "label": "Config data",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+        },
         "errors": {
           "connection_failed": "Connection failed. Is the BTCPay connection URL correct and accessible?"
         }
       }
     },
     "home": {
-      "send_satoshis": "⚡️ Send Satoshis ⚡️",
+      "actions": {
+        "send_satoshis": "⚡️ Send Satoshis ⚡️",
+        "enable_now": "Enable Now"
+      },
       "recent_transactions": "Recent Transactions",
       "transaction_list": {
         "tabs": {
@@ -167,39 +202,31 @@
     },
     "accounts": {
       "title": "Accounts",
-      "add": {
-        "label": "Add account"
+      "actions": {
+        "add_account": "Add account"
       },
       "edit": {
         "title": "Edit Account",
-        "label": "Edit",
-        "name_label": "Edit account name"
+        "label": "Name",
+        "screen_reader": "Edit account name"
       },
       "export": {
         "title": "Export Account",
-        "label": "Export",
-        "name": "Export account details",
+        "screen_reader": "Export account details",
         "waiting": "waiting for LndHub data...",
         "your_ln_address": "Your Lightning Address:",
         "tip_mobile": "Tip: Use this wallet with your mobile device",
         "export_uri": "LNDHub Credentials URI",
         "scan_qr": "Import this wallet into Zeus or BlueWallet by scanning the QRCode."
       },
-      "name": {
-        "label": "Name"
-      },
       "remove": {
-        "label": "Remove",
         "confirm": "Are you sure you want to remove account: {{name}}? \nThis can not be undone. If you used this account to login to websites you might lose access to those."
-      },
-      "save": {
-        "label": "Save"
       }
     },
     "enable": {
       "allow": "Allow {{host}} to:",
-      "request_one": "Request approval for transactions",
-      "request_two": "Request invoices and lightning information",
+      "request1": "Request approval for transactions",
+      "request2": "Request invoices and lightning information",
       "connect": "Connect",
       "block_and_ignore": "Block and ignore {{host}}"
     },
@@ -216,13 +243,13 @@
       }
     },
     "settings": {
-      "headline": "Settings",
+      "title": "Settings",
       "website_enhancements": {
         "title": "Website enhancements",
         "subtitle": "Tipping enhancements for Twitter, YouTube, etc."
       },
       "lnurl_auth": {
-        "headline": "LNURL-Auth",
+        "title": "LNURL-Auth",
         "hint": "is a generic authentication protocol. It authenticates the user using digital signatures. The protocol does not require any other identifying information such as passwords, emails, usernames, or similar. With Alby you can use your lightning accounts to securely login to websites. <br /> To be compatible with other wallets we had to make a few changes that you can configure here. <br /> <strong>Ideally all those options are OFF.</strong> Use them only if you have old accounts.",
         "legacy_lnurl_auth_202207": {
           "title": "Legacy LNURL-Auth",
@@ -236,8 +263,8 @@
       "camera_access": {
         "title": "Camera access",
         "subtitle": "For scanning QR codes",
-        "label": "Allow camera access",
-        "active": "Permission granted"
+        "allow": "Allow camera access",
+        "granted": "Permission granted"
       },
       "language": {
         "title": "Language",
@@ -265,8 +292,8 @@
         "subtitle": "Source of Bitcoin exchange rates"
       },
       "personal_data": {
-        "headline": "Personal data",
-        "info": "Payees can request for additional data to be sent with a payment. This data is not shared with anyone without your consent, you will always be prompted before this data is sent along with a payment."
+        "title": "Personal data",
+        "description": "Payees can request for additional data to be sent with a payment. This data is not shared with anyone without your consent, you will always be prompted before this data is sent along with a payment."
       },
       "name": {
         "title": "Name",
@@ -281,11 +308,18 @@
       "change_password": {
         "title": "Change unlock password",
         "subtitle": "",
-        "enter_password": "Please enter a new unlock password.",
-        "confirm_password": "Please confirm your password.",
-        "mismatched_password": "Passwords don't match.",
-        "choose_password_label": "Enter a new unlock password:",
-        "confirm_password_label": "Confirm new password:"
+        "screen_reader": "Change unlock password",
+        "choose_password": {
+          "label": "Enter a new unlock password:"
+        },
+        "confirm_password": {
+          "label": "Confirm new password:"
+        },
+        "errors": {
+          "enter_password": "Please enter a new unlock password.",
+          "confirm_password": "Please confirm your password.",
+          "mismatched_password": "Passwords don't match."
+        }
       }
     },
     "send": {
@@ -297,20 +331,26 @@
         "label": "Invoice, Lightning Address or LNURL",
         "placeholder": "Paste invoice, lnurl or lightning address"
       },
-      "submit": {
-        "label": "Continue"
-      },
       "lnurlpay": {
-        "amount_label": "Amount",
-        "comment_label": "Comment",
-        "name_label": "Name",
-        "email_label": "Email",
-        "placeholder": "optional",
-        "confirm_button": "Confirm"
+        "amount": {
+          "label": "Amount (Satoshi)"
+        },
+        "comment": {
+          "label": "Comment"
+        },
+        "name": {
+          "label": "Name"
+        },
+        "email": {
+          "label": "Email"
+        }
       }
     },
     "receive": {
       "title": "Receive",
+      "actions": {
+        "create_invoice": "Create Invoice"
+      },
       "amount": {
         "label": "Amount",
         "placeholder": "Amount in Satoshi..."
@@ -319,42 +359,34 @@
         "label": "Description",
         "placeholder": "For e.g. who is sending this payment?"
       },
-      "submit": {
-        "label": "Create Invoice"
-      },
-      "success": {
-        "title": "Payment received!"
-      },
-      "copy": {
-        "label": "Copy"
-      },
-      "copied": {
-        "label": "Copied!"
-      },
+      "success": "Payment received!",
       "payment": {
-        "waiting": { "info": "waiting for payment..." },
-        "status": { "label": "Check payment status" }
+        "waiting": "waiting for payment...",
+        "status": "Check payment status"
       }
     },
     "publishers": {
       "used": {
         "title": "Your ⚡️ Websites",
-        "subtitle": "Websites where you have used Alby before",
-        "none-info": "No websites yet."
+        "description": "Websites where you have used Alby before",
+        "no_info": "No websites yet."
       },
       "suggestions": {
         "title": "Other ⚡️ Websites",
-        "subtitle": "Websites where you can use Alby",
+        "description": "Websites where you can use Alby",
         "list": {
-          "Trading": "Trading",
-          "Gaming": "Gaming",
-          "Entertaiment": "Entertaiment",
-          "Shopping": "Shopping",
-          "Miscellaneous": "Miscellaneous"
+          "trading": "Trading",
+          "gaming": "Gaming",
+          "entertaiment": "Entertaiment",
+          "shopping": "Shopping",
+          "miscellaneous": "Miscellaneous"
         }
       },
       "publisher": {
-        "allowance": { "title": "Allowance", "usedBudget": "sats used" }
+        "allowance": {
+          "title": "Allowance",
+          "used_budget": "sats used"
+        }
       }
     },
     "make_invoice": {
@@ -372,9 +404,7 @@
     },
     "confirm_sign_message": {
       "title": "Sign",
-      "content": {
-        "heading": "{{host}} asks you to sign:"
-      }
+      "content": "{{host}} asks you to sign:"
     },
     "confirm_keysend": {
       "title": "Approve Payment",
@@ -386,7 +416,9 @@
     "confirm_payment": {
       "title": "Approve Payment",
       "success": "Payment sent!",
-      "submit": "Pay now"
+      "actions": {
+        "pay_now": "Pay now"
+      }
     }
   },
   "common": {
@@ -400,11 +432,14 @@
     "amount": "Amount",
     "optional": "Optional",
     "feedback": "Feedback",
+    "copied": "Copied!",
     "actions": {
       "delete": "Delete",
       "edit": "Edit",
       "next": "Next",
+      "open": "Open",
       "cancel": "Cancel",
+      "confirm": "Confirm",
       "continue": "Continue",
       "connect": "Connect",
       "lock": "Lock",
@@ -412,8 +447,10 @@
       "send": "Send",
       "save": "Save",
       "receive": "Receive",
-      "enable_now": "Enable Now",
-      "close": "Close"
+      "close": "Close",
+      "export": "Export",
+      "remove": "Remove",
+      "copy": "Copy"
     },
     "errors": {
       "connection_failed": "Connection failed"
@@ -422,16 +459,24 @@
   "components": {
     "allowance_menu": {
       "confirm_delete": "Are you sure you want to delete this website?",
-      "options": { "label": "Allowance Options" },
       "hint": "This will reset the current budget",
-      "new_budget": { "label": "New budget" },
-      "set_budget": "Set a new budget"
+      "new_budget": {
+        "label": "New budget"
+      },
+      "set_budget": {
+        "title": "Set a new budget",
+        "screen_reader": "Allowance Options"
+      }
     },
     "qrcode_scanner": {
-      "scan_qrcode": "Scan QR Code",
-      "start_scanning": "Start scanning",
-      "stop_scanning": "Stop scanning",
-      "allow_camera_access": "Please allow camera access in the settings screen."
+      "title": "Scan QR Code",
+      "actions": {
+        "start_scanning": "Start scanning",
+        "stop_scanning": "Stop scanning"
+      },
+      "errors": {
+        "allow_camera_access": "Please allow camera access in the settings screen."
+      }
     },
     "transactionsTable": {
       "fee": "Fee",
@@ -439,37 +484,42 @@
       "received": "Received",
       "sent": "Sent",
       "boostagram": {
-        "sender_name": "Sender",
+        "sender": "Sender",
         "message": "Message",
-        "app_name": "App",
+        "app": "App",
         "podcast": "Podcast"
       }
     },
-    "confirmOrCancel": {
+    "confirm_or_cancel": {
       "only_trusted": "Only connect with sites you trust."
     },
-    "budgetControl": {
+    "budget_control": {
       "remember": {
         "label": "Remember and set a budget",
-        "info": "You may set a balance to not be asked for confirmation on payments until it is exhausted."
+        "description": "You may set a balance to not be asked for confirmation on payments until it is exhausted."
       },
       "budget": {
         "label": "Budget"
       }
     },
-    "companionDownloadInfo": {
-      "info": "You are trying to connect to a node behind Tor. To do this you either need to have the Alby companion app installed or have Tor running. (When you're unsure, we recommend the Alby companion app.)",
+    "companion_download_info": {
+      "description": "You are trying to connect to a node behind Tor. To do this you either need to have the Alby companion app installed or have Tor running. (When you're unsure, we recommend the Alby companion app.)",
       "download_here": "Download the Alby companion here!",
       "using_tor": "click here to continue if you use the Tor Browser",
       "or": "Or:"
     },
     "toasts": {
       "connection_error": {
-        "connection_failed": "Connection failed"
+        "what_you_can_do": "Here is what you can do:",
+        "double_check": "Double check your connection details",
+        "if_ssl_errors": "and if there are SSL errors (e.g. ERR_CERT_AUTHORITY_INVALID), click \"advanced\" and proceed to accept the certificate.",
+        "visit_guides": "Visit our guides for more help"
       },
       "login_failed": {
-        "invalid_credentials": "Invalid password. Please review your password and email address and try again.",
         "password_reset": "Forgot your password? Click here"
+      },
+      "errors": {
+        "invalid_credentials": "Invalid password. Please review your password and email address and try again."
       }
     }
   }
