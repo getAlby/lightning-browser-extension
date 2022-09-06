@@ -270,18 +270,23 @@ Alby uses [Weblate](https://weblate.org/en/) to manage translations for differen
 
 **Use underscores instead of camelCase.**
 
-```JSON
-// ✅ Correct
-"pay_now": "Pay Now"
+✅ Correct
 
-// ❌ Wrong
+```JSON
+"pay_now": "Pay Now"
+```
+
+❌ Wrong
+
+```JSON
 "payNow": "Pay Now"
 ```
 
 **To avoid confusion, we prefer indentation over underscores, i.e.**
 
+✅ Correct
+
 ```JSON
-// ✅ Correct
 {
   "blue": {
     "label": "Blue"
@@ -289,8 +294,9 @@ Alby uses [Weblate](https://weblate.org/en/) to manage translations for differen
 }
 ```
 
+❌ Wrong
+
 ```JSON
-// ❌ Wrong
 {
   "blue_label": "Blue",
 }
@@ -298,8 +304,9 @@ Alby uses [Weblate](https://weblate.org/en/) to manage translations for differen
 
 **Only indent strings when it is an input or has different attributes:**
 
+✅ Correct
+
 ```JSON
-// ✅ Correct
 {
   "edit": {
     "title": "Edit Account",
@@ -309,15 +316,19 @@ Alby uses [Weblate](https://weblate.org/en/) to manage translations for differen
 }
 ```
 
+❌ Wrong
+
 ```JSON
-// ❌ Wrong
 {
   "edit": {
     "title": "Edit Account"
   }
 }
+```
 
-// Correct way for this would be:
+Correct way for this would be:
+
+```JSON
 {
   "edit": "Edit Account"
 }
@@ -330,10 +341,8 @@ Alby uses [Weblate](https://weblate.org/en/) to manage translations for differen
 ```JSON
 {
   "enable": {
-    //...
     "request1": "Request approval for transactions",
-    "request2": "Request invoices and lightning information",
-    //...
+    "request2": "Request invoices and lightning information"
   }
 }
 ```
@@ -343,7 +352,6 @@ Alby uses [Weblate](https://weblate.org/en/) to manage translations for differen
 ```JSON
 {
   "common": {
-    //...
   }
 }
 ```
