@@ -39,14 +39,24 @@ function ConfirmPayment() {
     ((invoice.satoshis || 0) * 10).toString()
   );
   const [fiatAmount, setFiatAmount] = useState("");
+  const [fiatBudgetAmount, setFiatBudgetAmount] = useState("");
 
   useEffect(() => {
-    if (showFiat) {
-      (async () => {
-        const res = await getFiatValue(budget);
+    (async () => {
+      if (showFiat && invoice.satoshis) {
+        const res = await getFiatValue(invoice.satoshis);
         setFiatAmount(res);
-      })();
-    }
+      }
+    })();
+  }, [invoice.satoshis, showFiat]);
+
+  useEffect(() => {
+    (async () => {
+      if (showFiat && budget) {
+        const res = await getFiatValue(budget);
+        setFiatBudgetAmount(res);
+      }
+    })();
   }, [budget, showFiat]);
 
   const [rememberMe, setRememberMe] = useState(false);
@@ -120,7 +130,7 @@ function ConfirmPayment() {
               </div>
 
               <BudgetControl
-                fiatAmount={fiatAmount}
+                fiatAmount={fiatBudgetAmount}
                 remember={rememberMe}
                 onRememberChange={(event) => {
                   setRememberMe(event.target.checked);

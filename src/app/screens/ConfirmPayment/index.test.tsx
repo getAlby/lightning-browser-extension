@@ -4,6 +4,7 @@ import lightningPayReq from "bolt11";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import * as SettingsContext from "~/app/context/SettingsContext";
+import * as CurrencyConvert from "~/common/utils/currencyConvert";
 import type { OriginData } from "~/types";
 
 import ConfirmPayment from "./index";
@@ -14,11 +15,12 @@ jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
   updateSetting: jest.fn(),
 });
 
-jest.mock("~/common/utils/currencyConvert", () => {
-  return {
-    getFiatValue: jest.fn(() => "€12,345.67"),
-  };
-});
+jest
+  .spyOn(CurrencyConvert, "getFiatValue")
+  .mockImplementationOnce(() => Promise.resolve("$0.00"))
+  .mockImplementationOnce(() => Promise.resolve("$0.00"))
+  .mockImplementationOnce(() => Promise.resolve("$0.01"))
+  .mockImplementationOnce(() => Promise.resolve("$0.05"));
 
 const mockOrigin: OriginData = {
   location: "https://getalby.com/demo",
@@ -63,8 +65,10 @@ describe("ConfirmPayment", () => {
       );
     });
 
+    expect(await screen.findByText("Amount")).toBeInTheDocument();
+    expect(await screen.findByText("Description")).toBeInTheDocument();
     expect(
-      await screen.findByText("Remember and set a budget")
+      await screen.findByLabelText("Remember and set a budget")
     ).toBeInTheDocument();
   });
 
@@ -79,6 +83,10 @@ describe("ConfirmPayment", () => {
       );
     });
 
+    expect(screen.getByText("25 sats")).toBeInTheDocument();
+    expect(screen.getByText("(~$0.01)")).toBeInTheDocument();
+    expect(screen.queryByText("~$0.05")).not.toBeInTheDocument();
+
     await act(() => {
       user.click(screen.getByText("Remember and set a budget"));
     });
@@ -86,5 +94,6 @@ describe("ConfirmPayment", () => {
     const input = await screen.findByLabelText("Budget");
     const satoshis = lightningPayReq.decode(paymentRequest).satoshis || 0;
     expect(input).toHaveValue(satoshis * 10);
+    expect(screen.getByText("~$0.05")).toBeInTheDocument();
   });
 });
