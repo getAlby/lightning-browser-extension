@@ -1,4 +1,3 @@
-import { CURRENCIES } from "~/common/constants";
 import {
   ConnectPeerArgs,
   ConnectPeerResponse,
