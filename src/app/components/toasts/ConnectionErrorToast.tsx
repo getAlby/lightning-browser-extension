@@ -15,6 +15,7 @@ export default function ConnectionErrorToast({ message }: { message: string }) {
           href="https://guides.getalby.com/overall-guide/alby-browser-extension/connect-lightning-wallets-and-nodes-to-alby-extension"
           className="underline"
           target="_blank"
+          rel="noreferrer"
         >
           {t("help_link")}
         </a>
