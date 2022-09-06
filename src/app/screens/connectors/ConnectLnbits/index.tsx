@@ -1,3 +1,4 @@
+import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import { useState } from "react";
@@ -12,6 +13,7 @@ export default function ConnectLnbits() {
     url: "https://legend.lnbits.com",
   });
   const [loading, setLoading] = useState(false);
+  const [hasTorSupport, setHasTorSupport] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -21,7 +23,7 @@ export default function ConnectLnbits() {
   }
 
   function getConnectorType() {
-    if (formData.url.match(/\.onion/i)) {
+    if (formData.url.match(/\.onion/i) && !hasTorSupport) {
       return "nativelnbits";
     }
     // default to LNbits
@@ -99,14 +101,25 @@ export default function ConnectLnbits() {
           onChange={handleChange}
         />
       </div>
-      <TextField
-        id="url"
-        label="LNbits URL"
-        type="text"
-        value={formData.url}
-        required
-        onChange={handleChange}
-      />
+      <div className="mb-6">
+        <TextField
+          id="url"
+          label="LNbits URL"
+          type="text"
+          value={formData.url}
+          required
+          onChange={handleChange}
+        />
+      </div>
+      {formData.url.match(/\.onion/i) && (
+        <div className="mb-6">
+          <CompanionDownloadInfo
+            hasTorCallback={() => {
+              setHasTorSupport(true);
+            }}
+          />
+        </div>
+      )}
     </ConnectorForm>
   );
 }

@@ -17,6 +17,7 @@ export default function ConnectLndHub() {
     uri: "",
   });
   const [loading, setLoading] = useState(false);
+  const [hasTorSupport, setHasTorSupport] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -26,7 +27,7 @@ export default function ConnectLndHub() {
   }
 
   function getConnectorType() {
-    if (formData.uri.match(/\.onion/i)) {
+    if (formData.uri.match(/\.onion/i) && !hasTorSupport) {
       return "nativelndhub";
     }
     // default to LndHub
@@ -112,7 +113,11 @@ export default function ConnectLndHub() {
       </div>
       {formData.uri.match(/\.onion/i) && (
         <div className="mb-6">
-          <CompanionDownloadInfo />
+          <CompanionDownloadInfo
+            hasTorCallback={() => {
+              setHasTorSupport(true);
+            }}
+          />
         </div>
       )}
       <div>

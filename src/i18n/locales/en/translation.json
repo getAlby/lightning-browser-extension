@@ -452,8 +452,10 @@
       }
     },
     "companionDownloadInfo": {
-      "info": "You are trying to connect to a node behind Tor. Because browsers cannot directly connect to your node please make sure you have the Alby companion app installed.",
-      "download_here": "Download it here!"
+      "info": "You are trying to connect to a node behind Tor. To do this you either need to have the Alby companion app installed or have Tor running. (When you're unsure, we recommend the Alby companion app.)",
+      "download_here": "Download the Alby companion here!",
+      "using_tor": "click here to continue if you use the Tor Browser",
+      "or": "Or:"
     }
   }
 }

@@ -15,6 +15,7 @@ export default function ConnectStart9() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
+  const [hasTorSupport, setHasTorSupport] = useState(false);
 
   function handleLndconnectUrl(event: React.ChangeEvent<HTMLInputElement>) {
     try {
@@ -37,7 +38,7 @@ export default function ConnectStart9() {
   }
 
   function getConnectorType() {
-    if (formData.url.match(/\.onion/i)) {
+    if (formData.url.match(/\.onion/i) && !hasTorSupport) {
       return "nativelnd";
     }
     // default to LND
@@ -124,7 +125,11 @@ export default function ConnectStart9() {
       />
       {formData.url.match(/\.onion/i) && (
         <div className="mt-6">
-          <CompanionDownloadInfo />
+          <CompanionDownloadInfo
+            hasTorCallback={() => {
+              setHasTorSupport(true);
+            }}
+          />
         </div>
       )}
     </ConnectorForm>

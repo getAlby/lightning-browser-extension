@@ -2,6 +2,7 @@ import {
   HiddenIcon,
   VisibleIcon,
 } from "@bitcoin-design/bitcoin-icons-react/outline";
+import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import { useState } from "react";
@@ -17,6 +18,7 @@ export default function ConnectCitadel() {
     url: "http://citadel.local",
   });
   const [loading, setLoading] = useState(false);
+  const [hasTorSupport, setHasTorSupport] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -26,7 +28,7 @@ export default function ConnectCitadel() {
   }
 
   function getConnectorType() {
-    if (formData.url.match(/\.onion/i)) {
+    if (formData.url.match(/\.onion/i) && !hasTorSupport) {
       return "nativecitadel";
     }
     return "citadel";
@@ -119,15 +121,26 @@ export default function ConnectCitadel() {
           }
         />
       </div>
-      <TextField
-        label="Citadel URL"
-        id="url"
-        placeholder="citadel.local"
-        type="text"
-        value={formData.url}
-        required
-        onChange={handleChange}
-      />
+      <div className="mb-6">
+        <TextField
+          label="Citadel URL"
+          id="url"
+          placeholder="citadel.local"
+          type="text"
+          value={formData.url}
+          required
+          onChange={handleChange}
+        />
+      </div>
+      {formData.url.match(/\.onion/i) && (
+        <div className="mb-6">
+          <CompanionDownloadInfo
+            hasTorCallback={() => {
+              setHasTorSupport(true);
+            }}
+          />
+        </div>
+      )}
     </ConnectorForm>
   );
 }

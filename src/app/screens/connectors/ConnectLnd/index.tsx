@@ -22,6 +22,7 @@ export default function ConnectLnd() {
   const [isDragging, setDragging] = useState(false);
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
+  const [hasTorSupport, setHasTorSupport] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -31,7 +32,7 @@ export default function ConnectLnd() {
   }
 
   function getConnectorType() {
-    if (formData.url.match(/\.onion/i)) {
+    if (formData.url.match(/\.onion/i) && !hasTorSupport) {
       return "nativelnd";
     }
     // default to LND
@@ -146,7 +147,11 @@ export default function ConnectLnd() {
       </div>
       {formData.url.match(/\.onion/i) && (
         <div className="mb-6">
-          <CompanionDownloadInfo />
+          <CompanionDownloadInfo
+            hasTorCallback={() => {
+              setHasTorSupport(true);
+            }}
+          />
         </div>
       )}
       <div>
