@@ -107,14 +107,16 @@ export default class LndHub implements Connector {
   }
 
   async getInfo(): Promise<GetInfoResponse> {
-    const { alias } = await this.request<{ alias: string }>(
-      "GET",
-      "/getinfo",
-      undefined
-    );
+    const data = await this.request<{
+      alias: string;
+      color: string;
+      identity_pubkey: string;
+    }>("GET", "/getinfo", undefined);
     return {
       data: {
-        alias,
+        alias: data.alias,
+        color: data.color,
+        pubkey: data.identity_pubkey,
       },
     };
   }
