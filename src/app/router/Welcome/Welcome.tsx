@@ -1,5 +1,3 @@
-import DevMenu from "@components/DevMenu";
-import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
 import type { Step } from "@components/Steps";
 import Steps from "@components/Steps";
 import Intro from "@screens/Onboard/Intro";
@@ -9,6 +7,7 @@ import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { SettingsProvider } from "~/app/context/SettingsContext";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
 import i18n from "~/i18n/i18nConfig";
@@ -77,6 +76,7 @@ function WelcomeRouter() {
   return (
     <SettingsProvider>
       <Router>
+        <ToastContainer autoClose={10000} />
         <App />
       </Router>
     </SettingsProvider>
@@ -129,14 +129,6 @@ function App() {
 
   return (
     <div>
-      {process.env.NODE_ENV === "development" && (
-        <>
-          <DevMenu />
-          <div className="w-32 mr-4 mt-1 pt-3 float-right">
-            <LocaleSwitcher />
-          </div>
-        </>
-      )}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center font-serif font-medium text-2xl pt-7 pb-3 dark:text-white">
           <p>{t("welcome.title")}</p>
