@@ -21,7 +21,10 @@ import { getFiatValue } from "~/common/utils/currencyConvert";
 function ConfirmPayment() {
   const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
-  const { t } = useTranslation("components", {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "confirm_payment",
+  });
+  const { t: tComponents } = useTranslation("components", {
     keyPrefix: "confirmOrCancel",
   });
 
@@ -66,7 +69,7 @@ function ConfirmPayment() {
       );
       auth.fetchAccountInfo(); // Update balance.
       msg.reply(response);
-      setSuccessMessage("Success, payment sent!");
+      setSuccessMessage(t("success"));
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
@@ -96,7 +99,7 @@ function ConfirmPayment() {
 
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
-      <ScreenHeader title={"Approve Payment"} />
+      <ScreenHeader title={t("title")} />
       {!successMessage ? (
         <Container justifyBetween maxWidth="sm">
           <div>
@@ -133,10 +136,10 @@ function ConfirmPayment() {
               loading={loading}
               onConfirm={confirm}
               onCancel={reject}
-              label="Pay now"
+              label={t("submit")}
             />
             <p className="mb-4 text-center text-sm text-gray-400">
-              <em>{t("only_trusted")}</em>
+              <em>{tComponents("only_trusted")}</em>
             </p>
           </div>
         </Container>
