@@ -21,8 +21,7 @@ import type {
 } from "~/types";
 
 import {
-  getAccountsCache,
-  getCurrencyRateFromCache,
+  getAccountsCache, // getCurrencyRateFromCache,
   removeAccountFromCache,
   storeAccounts,
 } from "./cache";
