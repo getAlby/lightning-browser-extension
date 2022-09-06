@@ -121,8 +121,11 @@ export const lnurlAuth = (
 ): Promise<LnurlAuthResponse> =>
   utils.call<LnurlAuthResponse>("lnurlAuth", options);
 
-export const getCurrencyRate = async (currency: CURRENCIES) =>
-  await getCurrencyRateFromCache(currency);
+// export const getCurrencyRate = async (currency: CURRENCIES) =>
+//   await getCurrencyRateFromCache(currency);
+
+export const getCurrencyRate = async (options: { currency: CURRENCIES }) =>
+  utils.call<FixMe>("getCurrencyRate", options);
 
 export default {
   getAccountInfo,

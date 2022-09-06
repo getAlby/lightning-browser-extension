@@ -1,6 +1,7 @@
 import * as accounts from "./actions/accounts";
 import * as allowances from "./actions/allowances";
 import * as blocklist from "./actions/blocklist";
+import * as cache from "./actions/cache";
 import * as ln from "./actions/ln";
 import lnurl, { auth } from "./actions/lnurl";
 import * as payments from "./actions/payments";
@@ -58,6 +59,7 @@ const routes = {
   listBlocklist: blocklist.list,
   lnurl: lnurl,
   lnurlAuth: auth,
+  getCurrencyRate: cache.getCurrencyRate,
 };
 
 const router = (path: FixMe) => {

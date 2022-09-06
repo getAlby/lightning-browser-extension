@@ -48,7 +48,7 @@ const bitcoinToFiat = async (
   amountInBtc: number | string,
   convertTo: CURRENCIES
 ) => {
-  const rate = await getCurrencyRate(convertTo);
+  const { rate } = await getCurrencyRate({ currency: convertTo });
   return Number(amountInBtc) * Number(rate);
 };
 
