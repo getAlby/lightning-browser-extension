@@ -124,7 +124,7 @@
     "jest-webextension-mock": "^3.7.22",
     "lint-staged": "^13.0.3",
     "mini-css-extract-plugin": "^2.6.1",
-    "msw": "^0.46.0",
+    "msw": "^0.47.0",
     "postcss": "^8.4.16",
     "postcss-cli": "^10.0.0",
     "postcss-loader": "^7.0.1",
