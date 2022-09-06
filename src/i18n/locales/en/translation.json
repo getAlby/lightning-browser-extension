@@ -205,6 +205,7 @@
     },
     "unlock": {
       "unlock_to_continue": "Unlock to continue",
+      "unlock_password": "Your unlock password",
       "help_contact": {
         "part1": "Need help? Contact",
         "part2": "Alby Support"
