@@ -117,7 +117,7 @@ function Prompt() {
             element={
               <>
                 <Unlock />
-                <ToastContainer />
+                <ToastContainer autoClose={10000} hideProgressBar={true} />
               </>
             }
           />
@@ -130,7 +130,7 @@ function Prompt() {
 const Layout = () => {
   return (
     <>
-      <ToastContainer />
+      <ToastContainer autoClose={10000} hideProgressBar={true} />
       <div className="px-4 py-2 bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
         <AccountMenu showOptions={false} />
       </div>
