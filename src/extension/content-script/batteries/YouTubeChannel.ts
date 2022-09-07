@@ -5,7 +5,7 @@ import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/(channel|c)\/([^/]+).*/;
 
-const battery = (): void => {
+const battery = async (): Promise<void> => {
   const match = document.location.toString().match(urlMatcher);
   if (!match) {
     return;
@@ -19,30 +19,57 @@ const battery = (): void => {
       "#channel-header-container yt-img-shadow#avatar img"
     )?.src || "";
 
-  axios
-    .get<Document>(`https://www.youtube.com/${match[1]}/${match[2]}/about`, {
+  let lnurl;
+
+  const headerLink = document.querySelector<HTMLAnchorElement>(
+    "#channel-header #primary-links a[href*='getalby.com']"
+  );
+  // check either for an alby link in the header or
+  // check in the channel about page
+  if (headerLink) {
+    const url = new URL(headerLink.href);
+    const text = url.searchParams.get("q") + " ";
+    lnurl = findLightningAddressInText(text);
+  } else {
+    lnurl = await findLnurlFromYouTubeAboutPage(match[1], match[2]);
+  }
+
+  if (!lnurl) return;
+
+  setLightningData([
+    {
+      method: "lnurl",
+      address: lnurl,
+      ...getOriginData(),
+      name: name,
+      description: "", // we can not reliably find a description (the meta tag might be of a different video)
+      icon: imageUrl,
+    },
+  ]);
+};
+
+const findLnurlFromYouTubeAboutPage = (
+  path: string,
+  name: string
+): Promise<string | null> => {
+  return axios
+    .get<Document>(`https://www.youtube.com/${path}/${name}/about`, {
       responseType: "document",
     })
     .then((response) => {
-      // TODO extract from links?
       const descriptionElement: HTMLMetaElement | null =
         response.data.querySelector('meta[itemprop="description"]');
 
       if (!descriptionElement) {
-        return;
+        return null;
       }
       const lnurl = findLightningAddressInText(descriptionElement.content);
-      if (lnurl) {
-        setLightningData([
-          {
-            method: "lnurl",
-            address: lnurl,
-            ...getOriginData(),
-            name: name,
-            icon: imageUrl,
-          },
-        ]);
-      }
+
+      return lnurl;
+    })
+    .catch((e) => {
+      console.error(e);
+      return null;
     });
 };
 
@@ -51,4 +78,5 @@ const YouTubeChannel = {
   battery,
 };
 
+export { findLnurlFromYouTubeAboutPage };
 export default YouTubeChannel;
