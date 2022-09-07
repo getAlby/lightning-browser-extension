@@ -61,7 +61,7 @@
                     },
                     "optional_lightning_address_suffix": "@getalby.com",
                     "errors": {
-                        "create_wallet_error": "Falha ao criar uma nova carteira"
+                        "create_wallet_error": "Falha ao criar uma nova carteira. Se precisar de ajuda, entre em contato com support@getalby.com"
                     },
                     "optional_lightning_address_label": "Escolha um Endereço Relâmpago (opcional)"
                 },
