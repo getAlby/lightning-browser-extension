@@ -27,9 +27,7 @@ const battery = async (): Promise<void> => {
   // check either for an alby link in the header or
   // check in the channel about page
   if (headerLink) {
-    const url = new URL(headerLink.href);
-    const text = url.searchParams.get("q") + " ";
-    lnurl = findLightningAddressInText(text);
+    lnurl = findLnurlFromHeaderLink(headerLink);
   } else {
     lnurl = await findLnurlFromYouTubeAboutPage(match[1], match[2]);
   }
@@ -48,6 +46,14 @@ const battery = async (): Promise<void> => {
   ]);
 };
 
+const findLnurlFromHeaderLink = (
+  headerLink: HTMLAnchorElement
+): string | null => {
+  const url = new URL(headerLink.href);
+  const text = url.searchParams.get("q") + " ";
+  return findLightningAddressInText(text);
+};
+
 const findLnurlFromYouTubeAboutPage = (
   path: string,
   name: string
@@ -57,14 +63,23 @@ const findLnurlFromYouTubeAboutPage = (
       responseType: "document",
     })
     .then((response) => {
+      let lnurl;
+
+      const headerLink = response.data.querySelector<HTMLAnchorElement>(
+        "#channel-header #primary-links a[href*='getalby.com']"
+      );
+      if (headerLink) {
+        lnurl = findLnurlFromHeaderLink(headerLink);
+        if (lnurl) return lnurl;
+      }
+
       const descriptionElement: HTMLMetaElement | null =
         response.data.querySelector('meta[itemprop="description"]');
 
       if (!descriptionElement) {
         return null;
       }
-      const lnurl = findLightningAddressInText(descriptionElement.content);
-
+      lnurl = findLightningAddressInText(descriptionElement.content);
       return lnurl;
     })
     .catch((e) => {
