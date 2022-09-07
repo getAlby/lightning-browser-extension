@@ -29,6 +29,9 @@ export default function TestConnection() {
 
   async function loadAccountInfo() {
     setLoading(true);
+    const timer = setTimeout(() => {
+      setErrorMessage(t("connection_taking_long"));
+    }, 45000);
     try {
       const response = await api.getAccountInfo();
       const name = response.name;
@@ -44,6 +47,7 @@ export default function TestConnection() {
       setErrorMessage(message);
     } finally {
       setLoading(false);
+      clearTimeout(timer);
     }
   }
 
@@ -60,12 +64,22 @@ export default function TestConnection() {
               <h1 className="text-3xl font-bold dark:text-white">
                 {t("connection_error")}
               </h1>
-              <p className="dark:text-neutral-500">{errorMessage}</p>
+              <p className="text-gray-500 dark:text-white">
+                {t("review_connection_details")}
+              </p>
+
+              <p className="text-gray-500 dark:text-grey-500 mt-4 mb-4">
+                <i>{errorMessage}</i>
+              </p>
+
               <Button
-                label={tCommon("actions.edit")}
+                label={t("actions.delete_edit_account")}
                 onClick={handleEdit}
                 primary
               />
+              <p className="text-gray-500 dark:text-white">
+                {t("contact_support")}
+              </p>
             </div>
           )}
 

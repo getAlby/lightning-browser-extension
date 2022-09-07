@@ -100,7 +100,7 @@ function Options() {
             element={
               <>
                 <Unlock />
-                <ToastContainer />
+                <ToastContainer autoClose={10000} hideProgressBar={true} />
               </>
             }
           />
@@ -129,7 +129,11 @@ const Layout = () => {
           {t("settings", commonI18nNamespace)}
         </Navbar.Link>
       </Navbar>
-      <ToastContainer />
+      <ToastContainer
+        autoClose={15000}
+        hideProgressBar={true}
+        className="w-fit max-w-2xl"
+      />
 
       <Outlet />
     </div>

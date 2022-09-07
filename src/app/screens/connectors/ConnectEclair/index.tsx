@@ -4,6 +4,7 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/outline";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
+import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -51,17 +52,16 @@ export default function ConnectEclair() {
       } else {
         console.error(validation);
         toast.error(
-          `Connection failed. Do you have the correct URL and password? \n\n(${validation.error})`
+          <ConnectionErrorToast message={validation.error as string} />
         );
       }
     } catch (e) {
       console.error(e);
-      let message =
-        "Connection failed. Do you have the correct URL and password?";
+      let message = "";
       if (e instanceof Error) {
-        message += `\n\n${e.message}`;
+        message += `${e.message}`;
       }
-      toast.error(message);
+      toast.error(<ConnectionErrorToast message={message} />);
     }
     setLoading(false);
   }

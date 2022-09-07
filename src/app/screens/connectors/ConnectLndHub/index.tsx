@@ -2,6 +2,7 @@ import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import QrcodeScanner from "@components/QrcodeScanner";
 import TextField from "@components/form/TextField";
+import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +18,7 @@ export default function ConnectLndHub() {
     uri: "",
   });
   const [loading, setLoading] = useState(false);
+  const [hasTorSupport, setHasTorSupport] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -26,7 +28,7 @@ export default function ConnectLndHub() {
   }
 
   function getConnectorType() {
-    if (formData.uri.match(/\.onion/i)) {
+    if (formData.uri.match(/\.onion/i) && !hasTorSupport) {
       return "nativelndhub";
     }
     // default to LndHub
@@ -75,7 +77,7 @@ export default function ConnectLndHub() {
       } else {
         console.error(validation);
         toast.error(
-          `${t("errors.connection_failed")} \n\n(${validation.error})`
+          <ConnectionErrorToast message={validation.error as string} />
         );
       }
     } catch (e) {
@@ -112,7 +114,11 @@ export default function ConnectLndHub() {
       </div>
       {formData.uri.match(/\.onion/i) && (
         <div className="mb-6">
-          <CompanionDownloadInfo />
+          <CompanionDownloadInfo
+            hasTorCallback={() => {
+              setHasTorSupport(true);
+            }}
+          />
         </div>
       )}
       <div>

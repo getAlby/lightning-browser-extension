@@ -43,7 +43,7 @@ function Popup() {
             element={
               <>
                 <Unlock />
-                <ToastContainer />
+                <ToastContainer autoClose={10000} hideProgressBar={true} />
               </>
             }
           />
@@ -60,7 +60,7 @@ const Layout = () => {
 
       <main className="flex flex-col grow min-h-0">
         <Outlet />
-        <ToastContainer />
+        <ToastContainer autoClose={10000} hideProgressBar={true} />
       </main>
     </div>
   );

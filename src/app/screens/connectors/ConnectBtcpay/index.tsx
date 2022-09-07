@@ -1,6 +1,7 @@
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
+import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import axios from "axios";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -21,6 +22,7 @@ export default function ConnectBtcpay() {
   });
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
+  const [hasTorSupport, setHasTorSupport] = useState(false);
 
   function getConfigUrl(data: string) {
     const configUrl = data.trim().replace("config=", "");
@@ -55,7 +57,7 @@ export default function ConnectBtcpay() {
   }
 
   function getConnectorType() {
-    if (formData.url.match(/\.onion/i)) {
+    if (formData.url.match(/\.onion/i) && !hasTorSupport) {
       return "nativelnd";
     }
     // default to LND
@@ -93,16 +95,17 @@ export default function ConnectBtcpay() {
           navigate("/test-connection");
         }
       } else {
-        toast.error(`
-          ${t("errors.connection_failed")} \n\n(${validation.error})`);
+        toast.error(
+          <ConnectionErrorToast message={validation.error as string} />
+        );
       }
     } catch (e) {
       console.error(e);
-      let message = t("errors.connection_failed");
+      let message = "";
       if (e instanceof Error) {
-        message += `\n\n${e.message}`;
+        message += `${e.message}`;
       }
-      toast.error(message);
+      toast.error(<ConnectionErrorToast message={message} />);
     }
     setLoading(false);
   }
@@ -127,7 +130,11 @@ export default function ConnectBtcpay() {
       </div>
       {formData.url.match(/\.onion/i) && (
         <div className="mb-6">
-          <CompanionDownloadInfo />
+          <CompanionDownloadInfo
+            hasTorCallback={() => {
+              setHasTorSupport(true);
+            }}
+          />
         </div>
       )}
     </ConnectorForm>

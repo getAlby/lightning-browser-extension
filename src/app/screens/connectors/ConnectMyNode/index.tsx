@@ -1,6 +1,7 @@
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
+import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -15,6 +16,7 @@ export default function ConnectMyNode() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
+  const [hasTorSupport, setHasTorSupport] = useState(false);
 
   function handleLndconnectUrl(event: React.ChangeEvent<HTMLInputElement>) {
     try {
@@ -37,7 +39,7 @@ export default function ConnectMyNode() {
   }
 
   function getConnectorType() {
-    if (formData.url.match(/\.onion/i)) {
+    if (formData.url.match(/\.onion/i) && !hasTorSupport) {
       return "nativelnd";
     }
     // default to LND
@@ -75,8 +77,12 @@ export default function ConnectMyNode() {
           navigate("/test-connection");
         }
       } else {
-        toast.error(`
-          Connection failed. Are your credentials correct? \n\n(${validation.error})`);
+        toast.error(
+          <ConnectionErrorToast
+            message={validation.error as string}
+            link={`${formData.url}/v1/getinfo`}
+          />
+        );
       }
     } catch (e) {
       console.error(e);
@@ -117,16 +123,22 @@ export default function ConnectMyNode() {
       onSubmit={handleSubmit}
       video="https://cdn.getalby-assets.com/connector-guides/in_extension_guide_mynode.mp4"
     >
-      <TextField
-        id="lndconnect"
-        label="lndconnect REST URL"
-        placeholder="lndconnect://yournode:8080?..."
-        onChange={handleLndconnectUrl}
-        required
-      />
+      <div className="mb-6">
+        <TextField
+          id="lndconnect"
+          label="lndconnect REST URL"
+          placeholder="lndconnect://yournode:8080?..."
+          onChange={handleLndconnectUrl}
+          required
+        />
+      </div>
       {formData.url.match(/\.onion/i) && (
         <div className="mt-6">
-          <CompanionDownloadInfo />
+          <CompanionDownloadInfo
+            hasTorCallback={() => {
+              setHasTorSupport(true);
+            }}
+          />
         </div>
       )}
     </ConnectorForm>

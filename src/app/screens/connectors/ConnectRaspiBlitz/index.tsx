@@ -1,6 +1,7 @@
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
+import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -15,6 +16,7 @@ export default function ConnectRaspiBlitz() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
+  const [hasTorSupport, setHasTorSupport] = useState(false);
 
   function handleUrl(event: React.ChangeEvent<HTMLInputElement>) {
     let url = event.target.value.trim();
@@ -35,7 +37,7 @@ export default function ConnectRaspiBlitz() {
   }
 
   function getConnectorType() {
-    if (formData.url.match(/\.onion/i)) {
+    if (formData.url.match(/\.onion/i) && !hasTorSupport) {
       return "nativelnd";
     }
     // default to LND
@@ -73,17 +75,20 @@ export default function ConnectRaspiBlitz() {
           navigate("/test-connection");
         }
       } else {
-        toast.error(`
-          Connection failed. Are your RaspiBlitz credentials correct? \n\n(${validation.error})`);
+        toast.error(
+          <ConnectionErrorToast
+            message={validation.error as string}
+            link={`${formData.url}/v1/getinfo`}
+          />
+        );
       }
     } catch (e) {
       console.error(e);
-      let message =
-        "Connection failed. Are your RaspiBlitz credentials correct?";
+      let message = "";
       if (e instanceof Error) {
-        message += `\n\n${e.message}`;
+        message += `${e.message}`;
       }
-      toast.error(message);
+      toast.error(<ConnectionErrorToast message={message} />);
     }
     setLoading(false);
   }
@@ -129,7 +134,13 @@ export default function ConnectRaspiBlitz() {
           required
         />
       </div>
-      {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
+      {formData.url.match(/\.onion/i) && (
+        <CompanionDownloadInfo
+          hasTorCallback={() => {
+            setHasTorSupport(true);
+          }}
+        />
+      )}
       <div className="mt-6">
         <p className="mb-6 text-gray-500 mt-6 dark:text-neutral-400">
           Select <b>CONNECT</b>.<br />

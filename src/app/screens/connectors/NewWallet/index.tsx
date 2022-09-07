@@ -4,6 +4,7 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/outline";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
+import LoginFailedToast from "@components/toasts/LoginFailedToast";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -60,12 +61,19 @@ export default function NewWallet() {
           });
         } else {
           console.error(data);
-          toast.error(
-            `${t("pre_connect.errors.create_wallet_error")} ${JSON.stringify(
-              data
-            )}`
-          );
           setLoading(false);
+          if (data.login_failed) {
+            toast.error(
+              <LoginFailedToast passwordResetUrl={data.password_reset_url} />,
+              { autoClose: false }
+            );
+          } else {
+            toast.error(
+              `${t("pre_connect.errors.create_wallet_error")} ${JSON.stringify(
+                data
+              )}`
+            );
+          }
         }
       })
       .catch((e) => {
