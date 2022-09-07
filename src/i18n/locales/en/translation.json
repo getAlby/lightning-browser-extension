@@ -301,7 +301,7 @@
         "label": "Continue"
       },
       "lnurlpay": {
-        "amount_label": "Amount (Satoshi)",
+        "amount_label": "Amount",
         "comment_label": "Comment",
         "name_label": "Name",
         "email_label": "Email",

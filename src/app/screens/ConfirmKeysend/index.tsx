@@ -46,21 +46,31 @@ function ConfirmKeysend(props: Props) {
   const originRef = useRef(props.origin || getOriginData());
   const [customRecords] = useState(props.customRecords || {});
   const [amount] = useState(props.valueSat || "");
-  const [fiatAmount, setFiatAmount] = useState("");
   const [destination] = useState(
     props.destination || searchParams.get("destination")
   );
   const [budget, setBudget] = useState(
     ((parseInt(amount) || 0) * 10).toString()
   );
+  const [fiatAmount, setFiatAmount] = useState("");
+  const [fiatBudgetAmount, setFiatBudgetAmount] = useState("");
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      if (showFiat && amount) {
+        const res = await getFiatValue(amount);
+        setFiatAmount(res);
+      }
+    })();
+  }, [amount, showFiat]);
 
   useEffect(() => {
     if (showFiat) {
       (async () => {
         const res = await getFiatValue(budget);
-        setFiatAmount(res);
+        setFiatBudgetAmount(res);
       })();
     }
   }, [budget, showFiat]);
@@ -140,7 +150,7 @@ function ConfirmKeysend(props: Props) {
               </div>
 
               <BudgetControl
-                fiatAmount={fiatAmount}
+                fiatAmount={fiatBudgetAmount}
                 remember={rememberMe}
                 onRememberChange={(event) => {
                   setRememberMe(event.target.checked);
