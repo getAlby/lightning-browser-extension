@@ -1,9 +1,10 @@
 import getOriginData from "../originData";
+import { findLnurlFromYouTubeAboutPage } from "./YouTubeChannel";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
 
-const battery = (): void => {
+const battery = async (): Promise<void> => {
   let text = "";
   document
     .querySelectorAll(
@@ -12,25 +13,33 @@ const battery = (): void => {
     .forEach((e) => {
       text += ` ${e.textContent}`;
     });
-  const channelLink = document.querySelector(
+  const channelLink = document.querySelector<HTMLAnchorElement>(
     "#columns #primary #primary-inner #meta-contents .ytd-channel-name a"
   );
   if (!text || !channelLink) {
     return;
   }
   let match;
-  let recipient;
+  let lnurl;
   // check for an lnurl
   if ((match = text.match(/(lnurlp:)(\S+)/i))) {
-    recipient = match[2];
+    lnurl = match[2];
   }
   // if there is no lnurl we check for a zap emoji with a lightning address
   // we check for the @-sign to try to limit the possibility to match some invalid text (e.g. random emoji usage)
   else if ((match = findLightningAddressInText(text))) {
-    recipient = match;
+    lnurl = match;
   } else {
-    return;
+    // load the about page to check for a lightning address
+    const match = channelLink.href.match(
+      /^https:\/\/www\.youtube.com\/(channel|c)\/([^/]+).*/
+    );
+    if (match) {
+      lnurl = await findLnurlFromYouTubeAboutPage(match[1], match[2]);
+    }
   }
+
+  if (!lnurl) return;
 
   const name = channelLink.textContent || "";
   const imageUrl =
@@ -40,9 +49,10 @@ const battery = (): void => {
   setLightningData([
     {
       method: "lnurl",
-      address: recipient,
+      address: lnurl,
       ...getOriginData(),
       name,
+      description: "", // we can not reliably find a description (the meta tag might be of a different video)
       icon: imageUrl,
     },
   ]);
