@@ -83,9 +83,11 @@ export default function PasswordForm({
           type={passwordView ? "text" : "password"}
           required
           onChange={handleChange}
+          tabIndex={0}
           endAdornment={
             <button
               type="button"
+              tabIndex={-1}
               className="flex justify-center items-center w-10 h-8"
               onClick={() => {
                 setPasswordView(!passwordView);
@@ -111,10 +113,12 @@ export default function PasswordForm({
           required
           onChange={handleChange}
           onBlur={validate}
+          tabIndex={1}
           endAdornment={
             <button
               type="button"
               className="flex justify-center items-center w-10 h-8"
+              tabIndex={-1}
               onClick={() =>
                 setPasswordConfirmationView(!passwordConfirmationView)
               }

@@ -63,7 +63,7 @@ function Unlock() {
       <form onSubmit={handleSubmit}>
         <div className="mb-5">
           <Input
-            placeholder={tCommon("password")}
+            placeholder={t("unlock_password")}
             type={passwordView ? "text" : "password"}
             autoFocus
             value={password}

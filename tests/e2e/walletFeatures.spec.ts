@@ -15,7 +15,7 @@ const unlockExtension = async ({ page, extensionId }) => {
   const $optionsdocument = await getDocument(page);
   const passwordField = await getByPlaceholderText(
     $optionsdocument,
-    "Password"
+    "Your unlock password"
   );
   await passwordField.type("unlock-password");
 
@@ -71,7 +71,7 @@ test.describe("Wallet features", () => {
     const $optionsdocument = await getDocument(page);
     const passwordField = await getByPlaceholderText(
       $optionsdocument,
-      "Password"
+      "Your unlock password"
     );
     await passwordField.type("unlock-password");
 

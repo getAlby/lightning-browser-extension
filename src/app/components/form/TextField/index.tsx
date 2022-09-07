@@ -28,6 +28,7 @@ const TextField = ({
   suffix,
   title,
   type = "text",
+  tabIndex,
   value,
 }: React.InputHTMLAttributes<HTMLInputElement> & Props) => (
   <>
@@ -57,6 +58,7 @@ const TextField = ({
         title={title}
         type={type}
         value={value}
+        tabIndex={tabIndex}
       />
 
       {hint && (
