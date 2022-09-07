@@ -86,7 +86,10 @@ export default function ConnectLnd() {
         message += `${e.message}`;
       }
       toast.error(
-        <ConnectionErrorToast message={message} link={formData.url} />
+        <ConnectionErrorToast
+          message={message}
+          link={`${formData.url}/v1/getinfo`}
+        />
       );
     }
     setLoading(false);

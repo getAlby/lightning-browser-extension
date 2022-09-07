@@ -78,7 +78,7 @@ export default function ConnectRaspiBlitz() {
         toast.error(
           <ConnectionErrorToast
             message={validation.error as string}
-            link={formData.url}
+            link={`${formData.url}/v1/getinfo`}
           />
         );
       }
