@@ -459,8 +459,7 @@
     },
     "toasts": {
       "connection_error": {
-        "connection_failed": "Connection failed. Are your credentials correct?",
-        "help_link": "For help visit our connection guides"
+        "connection_failed": "Connection failed"
       },
       "login_failed": {
         "invalid_credentials": "Invalid password. Please review your password and email address and try again.",
