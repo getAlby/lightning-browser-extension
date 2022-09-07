@@ -1,7 +1,7 @@
 import getOriginData from "../originData";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 
-const urlMatcher = /^https:\/\/github.com\/([^/]+)(\/([^/]+))?$/;
+const urlMatcher = /^https:\/\/github.com\/([^/]+)(\/)?(\/([^/]+))?(\/)?$/;
 
 const battery = (): void => {
   const urlParts = document.location.pathname.split("/");
