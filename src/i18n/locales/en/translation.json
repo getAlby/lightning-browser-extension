@@ -67,7 +67,7 @@
           "optional_lightning_address_label": "Choose your Lightning Address (optional)",
           "optional_lightning_address_suffix": "@getalby.com",
           "errors": {
-            "create_wallet_error": "Failed to create a new wallet"
+            "create_wallet_error": "Failed to login or create a new account. If you need help, please contact support@getalby.com"
           }
         }
       },
@@ -461,6 +461,10 @@
       "connection_error": {
         "connection_failed": "Connection failed. Are your credentials correct?",
         "help_link": "For help visit our connection guides"
+      },
+      "login_failed": {
+        "invalid_credentials": "Invalid password. Please review your password and email address and try again.",
+        "password_reset": "Forgot your password? Click here"
       }
     }
   }
