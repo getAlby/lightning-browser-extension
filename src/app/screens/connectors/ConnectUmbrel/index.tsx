@@ -78,7 +78,10 @@ export default function ConnectUmbrel() {
         }
       } else {
         toast.error(
-          <ConnectionErrorToast message={validation.error as string} />
+          <ConnectionErrorToast
+            message={validation.error as string}
+            link={formData.url}
+          />
         );
       }
     } catch (e) {

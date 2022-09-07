@@ -76,7 +76,11 @@ function WelcomeRouter() {
   return (
     <SettingsProvider>
       <Router>
-        <ToastContainer autoClose={10000} hideProgressBar={true} />
+        <ToastContainer
+          autoClose={15000}
+          hideProgressBar={true}
+          className="w-fit max-w-2xl"
+        />
         <App />
       </Router>
     </SettingsProvider>

@@ -129,7 +129,11 @@ const Layout = () => {
           {t("settings", commonI18nNamespace)}
         </Navbar.Link>
       </Navbar>
-      <ToastContainer autoClose={10000} hideProgressBar={true} />
+      <ToastContainer
+        autoClose={15000}
+        hideProgressBar={true}
+        className="w-fit max-w-2xl"
+      />
 
       <Outlet />
     </div>

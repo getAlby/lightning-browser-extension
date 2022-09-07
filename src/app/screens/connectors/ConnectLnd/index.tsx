@@ -24,6 +24,7 @@ export default function ConnectLnd() {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [hasTorSupport, setHasTorSupport] = useState(false);
+  const [connectionError, setConnectionError] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -72,8 +73,13 @@ export default function ConnectLnd() {
         }
       } else {
         toast.error(
-          <ConnectionErrorToast message={validation.error as string} />
+          <ConnectionErrorToast
+            message={validation.error as string}
+            link={formData.url}
+          />,
+          { autoClose: false }
         );
+        setConnectionError(true);
       }
     } catch (e) {
       console.error(e);
@@ -81,7 +87,9 @@ export default function ConnectLnd() {
       if (e instanceof Error) {
         message += `${e.message}`;
       }
-      toast.error(<ConnectionErrorToast message={message} />);
+      toast.error(
+        <ConnectionErrorToast message={message} link={formData.url} />
+      );
     }
     setLoading(false);
   }
@@ -147,6 +155,22 @@ export default function ConnectLnd() {
           required
         />
       </div>
+      {connectionError && (
+        <div className="mb-6">
+          If you're sure you've setup your node correctly, try{" "}
+          <a
+            href={`${formData.url}/v1/getinfo`}
+            target="_blank"
+            rel="noreferrer"
+            className="underline"
+          >
+            clicking this link
+          </a>{" "}
+          and making sure it loads correctly. If there are SSL errors (e.g.
+          ERR_CERT_AUTHORITY_INVALID), click "advanced" and proceed to accept
+          the certificate. Contact support@getalby.com for help.
+        </div>
+      )}
       {formData.url.match(/\.onion/i) && (
         <div className="mb-6">
           <CompanionDownloadInfo
