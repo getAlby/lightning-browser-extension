@@ -214,7 +214,8 @@
             "unlock_error": {
                 "link": "Redefinir e adicionar uma nova conta",
                 "help": "Os dados da sua conta são criptografados com sua senha de desbloqueio. Se você realmente esqueceu sua senha de desbloqueio, será necessário redefinir e adicionar sua conta novamente."
-            }
+            },
+            "unlock_password": "Sua senha de desbloqueio"
         },
         "settings": {
             "headline": "Configurações",
@@ -478,8 +479,19 @@
             }
         },
         "companionDownloadInfo": {
-            "info": "Você está tentando se conectar em um servidor que usa Tor. Como os navegadores não podem se conectar diretamente em servidores que usam Tor, verifique se o aplicativo companion da Alby está instalado.",
-            "download_here": "Faça o download aqui!"
+            "info": "Você está tentando se conectar em um servidor que usa Tor. Para funcionar, você precisa ter o aplicativo complementar Alby instalado ou ter o Tor em execução. (Se tiver de dúvidas, recomendamos o aplicativo complementar Alby.)",
+            "download_here": "Faça o download do app complementar da Alby aqui!",
+            "using_tor": "clique aqui para continuar se você usa o navegador Tor",
+            "or": "Ou:"
+        },
+        "toasts": {
+            "connection_error": {
+                "connection_failed": "Falha na conexão"
+            },
+            "login_failed": {
+                "invalid_credentials": "Senha inválida. Verifique se sua senha e endereço de e-mail estão corretos e tente novamente.",
+                "password_reset": "Esqueceu sua senha? Clique aqui"
+            }
         }
     }
 }
