@@ -76,6 +76,10 @@ const getCurrencyRateFromCache = async (currency: CURRENCIES) => {
       // switch rate to be SATS not BTC
       return rate;
     }
+
+    const rate = await getFiatBtcRate(currency);
+    await storeCurrencyRate(rate);
+    return rate;
   }
 
   const rate = await getFiatBtcRate(currency);
