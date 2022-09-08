@@ -275,8 +275,8 @@ function LNURLPay() {
     return (
       <Container maxWidth="sm">
         <PublisherCard
-          title={getRecipient()}
-          description={navState.origin?.description}
+          title={navState.origin?.name as string}
+          description={getRecipient()}
           image={navState.origin?.icon}
         />
 
@@ -306,8 +306,8 @@ function LNURLPay() {
             <div className="grow overflow-y-auto no-scrollbar">
               <Container maxWidth="sm">
                 <PublisherCard
-                  title={getRecipient()}
-                  description={navState.origin?.description}
+                  title={navState.origin?.name as string}
+                  description={getRecipient()}
                   image={navState.origin?.icon}
                 />
 
