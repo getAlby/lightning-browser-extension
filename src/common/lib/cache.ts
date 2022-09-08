@@ -1,11 +1,5 @@
-import dayjs from "dayjs";
-import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import browser from "webextension-polyfill";
-// import { CURRENCIES } from "~/common/constants";
-// import { getFiatBtcRate } from "~/common/utils/currencyConvert";
 import type { AccountInfo } from "~/types";
-
-dayjs.extend(isSameOrBefore);
 
 export const getAccountsCache = async () => {
   let accountsCache: { [id: string]: AccountInfo } = {};

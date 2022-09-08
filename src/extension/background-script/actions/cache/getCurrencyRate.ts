@@ -58,17 +58,17 @@ const getCurrencyRateFromCache = async (currency: CURRENCIES) => {
     const currentTime = dayjs();
     const rateTimestamp = dayjs(currencyRateCache?.timestamp);
     const rateTimestampPlusOneMinute = dayjs(rateTimestamp).add(10, "minute");
-    const isRateCurrent = currentTime.isSameOrBefore(
+    const isRateNewEnough = currentTime.isSameOrBefore(
       rateTimestampPlusOneMinute
     );
 
-    if (isRateCurrent) {
+    if (isRateNewEnough) {
       return currencyRateCache.rate;
-    } else {
-      const rate = await getFiatBtcRate(currency);
-      await storeCurrencyRate(rate);
-      return rate;
     }
+
+    const rate = await getFiatBtcRate(currency);
+    await storeCurrencyRate(rate);
+    return rate;
   }
 
   const rate = await getFiatBtcRate(currency);
