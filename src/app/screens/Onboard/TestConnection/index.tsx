@@ -41,13 +41,13 @@ export default function TestConnection() {
         typeof resBalance === "number" ? resBalance : parseInt(resBalance);
 
       setAccountInfo({ alias, balance, name });
+      setErrorMessage("");
     } catch (e) {
       const message = e instanceof Error ? `(${e.message})` : "";
       console.error(message);
       setErrorMessage(message);
     } finally {
       setLoading(false);
-      setErrorMessage("");
       clearTimeout(timer);
     }
   }, [t]);
