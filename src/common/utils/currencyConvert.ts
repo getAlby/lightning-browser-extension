@@ -1,7 +1,6 @@
 /**
  * Highly inspired by: https://github.com/AryanJ-NYC/bitcoin-conversion
  */
-// import axios from "axios";
 import { CURRENCIES } from "~/common/constants";
 import { getSettings, getCurrencyRate } from "~/common/lib/api";
 
