@@ -20,7 +20,7 @@ import type {
 } from "~/types";
 
 import {
-  getAccountsCache, // getCurrencyRateFromCache,
+  getAccountsCache,
   removeAccountFromCache,
   storeAccounts,
 } from "./cache";
