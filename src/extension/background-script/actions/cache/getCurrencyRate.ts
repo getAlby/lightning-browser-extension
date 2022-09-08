@@ -55,11 +55,8 @@ const getCurrencyRateFromCache = async (currency: CURRENCIES) => {
   if (result?.currencyRate) {
     currencyRateCache = JSON.parse(result.currencyRate);
 
-    const currentTime = dayjs();
-    const rateTimestamp = dayjs(currencyRateCache?.timestamp);
-    const rateTimestampPlusOneMinute = dayjs(rateTimestamp).add(10, "minute");
-    const isRateNewEnough = currentTime.isSameOrBefore(
-      rateTimestampPlusOneMinute
+    const isRateNewEnough = dayjs().isSameOrBefore(
+      dayjs(currencyRateCache?.timestamp).add(10, "minute")
     );
 
     if (isRateNewEnough) {
