@@ -86,6 +86,6 @@ describe("LNURLPay", () => {
 
     expect(await screen.getByText("blocktime 748949")).toBeInTheDocument();
     expect(await screen.getByText("16sat/vB & empty")).toBeInTheDocument();
-    expect(await screen.getByLabelText("Amount (Satoshi)")).toHaveValue(2);
+    expect(await screen.getByLabelText("Amount")).toHaveValue(2);
   });
 });
