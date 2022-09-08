@@ -47,14 +47,13 @@ export default function TestConnection() {
       setErrorMessage(message);
     } finally {
       setLoading(false);
+      setErrorMessage("");
       clearTimeout(timer);
     }
   }, [t]);
 
   useEffect(() => {
-    (async () => {
-      await loadAccountInfo();
-    })();
+    loadAccountInfo();
   }, [loadAccountInfo]);
 
   return (
