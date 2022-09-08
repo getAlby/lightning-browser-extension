@@ -1,7 +1,7 @@
 import Button from "@components/Button";
 import Card from "@components/Card";
 import Loading from "@components/Loading";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import api from "~/common/lib/api";
@@ -27,7 +27,7 @@ export default function TestConnection() {
     navigate(-1);
   }
 
-  const loadAccountInfo = useCallback(async () => {
+  async function loadAccountInfo() {
     setLoading(true);
     const timer = setTimeout(() => {
       setErrorMessage(t("connection_taking_long"));
@@ -41,7 +41,6 @@ export default function TestConnection() {
         typeof resBalance === "number" ? resBalance : parseInt(resBalance);
 
       setAccountInfo({ alias, balance, name });
-      setErrorMessage("");
     } catch (e) {
       const message = e instanceof Error ? `(${e.message})` : "";
       console.error(message);
@@ -50,11 +49,12 @@ export default function TestConnection() {
       setLoading(false);
       clearTimeout(timer);
     }
-  }, [t]);
+  }
 
   useEffect(() => {
     loadAccountInfo();
-  }, [loadAccountInfo]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="relative mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white dark:bg-surface-02dp px-10 py-12">
