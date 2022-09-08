@@ -57,7 +57,7 @@ const getCurrencyRateFromCache = async (currency: CURRENCIES) => {
 
     const currentTime = dayjs();
     const rateTimestamp = dayjs(currencyRateCache?.timestamp);
-    const rateTimestampPlusOneMinute = dayjs(rateTimestamp).add(1, "minute");
+    const rateTimestampPlusOneMinute = dayjs(rateTimestamp).add(10, "minute");
     const isRateCurrent = currentTime.isSameOrBefore(
       rateTimestampPlusOneMinute
     );
