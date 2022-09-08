@@ -309,7 +309,7 @@
                 "placeholder": "opcional",
                 "confirm_button": "Confirmar",
                 "comment_label": "Comentário",
-                "amount_label": "Quantia (Satoshi)"
+                "amount_label": "Quantia"
             }
         },
         "receive": {
