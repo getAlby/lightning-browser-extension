@@ -3,6 +3,7 @@ import PasswordForm from "@components/PasswordForm";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
 
 const initialFormData = {
@@ -24,7 +25,10 @@ export default function SetPassword() {
       await utils.call("setPassword", { password: formData.password });
       navigate("/choose-connector");
     } catch (e) {
-      if (e instanceof Error) console.error(e.message);
+      if (e instanceof Error) {
+        console.error(e.message);
+        toast.error(`Error: ${e.message}`);
+      }
     }
   }
 

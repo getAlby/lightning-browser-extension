@@ -3,6 +3,7 @@ import PublishersTable from "@components/PublishersTable";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
 import { Allowance, Publisher } from "~/types";
 
@@ -70,6 +71,7 @@ function Publishers() {
       setPublishers(allowances);
     } catch (e) {
       console.error(e);
+      if (e instanceof Error) toast.error(`Error: ${e.message}`);
     }
   }
 

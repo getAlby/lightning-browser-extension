@@ -8,6 +8,7 @@ import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useState, useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import utils from "~/common/lib/utils";
@@ -50,6 +51,7 @@ function AccountMenu({ showOptions = true }: Props) {
       await fetchAccountInfo({ accountId });
     } catch (e) {
       console.error(e);
+      if (e instanceof Error) toast.error(`Error: ${e.message}`);
     } finally {
       setLoading(false);
     }

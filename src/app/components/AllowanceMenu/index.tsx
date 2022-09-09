@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 import Modal from "react-modal";
+import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
@@ -86,6 +87,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                   onDelete && onDelete();
                 } catch (e) {
                   console.error(e);
+                  if (e instanceof Error) toast.error(`Error: ${e.message}`);
                 }
               }
             }}
