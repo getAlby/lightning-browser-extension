@@ -6,11 +6,11 @@ export default function LoginFailedToast({
   passwordResetUrl: string;
 }) {
   const { t } = useTranslation("components", {
-    keyPrefix: "toasts.login_failed",
+    keyPrefix: "toasts",
   });
   return (
     <>
-      <p className="mb-2">{t("invalid_credentials")}</p>
+      <p className="mb-2">{t("errors.invalid_credentials")}</p>
       <p>
         <a
           href={passwordResetUrl}
@@ -18,7 +18,7 @@ export default function LoginFailedToast({
           target="_blank"
           rel="noreferrer"
         >
-          {t("password_reset")}
+          {t("login_failed.password_reset")}
         </a>
       </p>
     </>

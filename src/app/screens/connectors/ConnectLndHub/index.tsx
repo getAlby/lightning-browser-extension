@@ -93,8 +93,8 @@ export default function ConnectLndHub() {
 
   return (
     <ConnectorForm
-      title={t("page_title")}
-      description={t("page_description")}
+      title={t("page.title")}
+      description={t("page.description")}
       submitLoading={loading}
       submitDisabled={formData.uri === ""}
       onSubmit={handleSubmit}
@@ -102,7 +102,7 @@ export default function ConnectLndHub() {
       <div className="mb-6">
         <TextField
           id="uri"
-          label={t("lndhub_uri")}
+          label={t("uri.label")}
           type="text"
           required
           placeholder="lndhub://..."

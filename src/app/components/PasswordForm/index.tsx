@@ -79,7 +79,7 @@ export default function PasswordForm({
         <TextField
           autoFocus
           id="password"
-          label={t("choose_password_label")}
+          label={t("choose_password.label")}
           type={passwordView ? "text" : "password"}
           required
           onChange={handleChange}
@@ -102,13 +102,15 @@ export default function PasswordForm({
           }
         />
         {errors.passwordErrorMessage && (
-          <p className="mt-1 text-red-500">{t(errors.passwordErrorMessage)}</p>
+          <p className="mt-1 text-red-500">
+            {t("errors." + errors.passwordErrorMessage)}
+          </p>
         )}
       </div>
       <div className="w-full">
         <TextField
           id="passwordConfirmation"
-          label={t("confirm_password_label")}
+          label={t("confirm_password.label")}
           type={passwordConfirmationView ? "text" : "password"}
           required
           onChange={handleChange}
@@ -133,7 +135,7 @@ export default function PasswordForm({
         />
         {errors.passwordConfirmationErrorMessage && (
           <p className="mt-1 text-red-500">
-            {t(errors.passwordConfirmationErrorMessage)}
+            {t("errors." + errors.passwordConfirmationErrorMessage)}
           </p>
         )}
       </div>

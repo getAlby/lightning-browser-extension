@@ -120,9 +120,7 @@ export default function TransactionsTable({ transactions }: Props) {
                       {tx.boostagram && (
                         <ul>
                           <li>
-                            {tComponents(
-                              "transactionsTable.boostagram.sender_name"
-                            )}
+                            {tComponents("transactionsTable.boostagram.sender")}
                             : {tx.boostagram.sender_name}
                           </li>
                           <li>
@@ -132,10 +130,8 @@ export default function TransactionsTable({ transactions }: Props) {
                             : {tx.boostagram.message}
                           </li>
                           <li>
-                            {tComponents(
-                              "transactionsTable.boostagram.app_name"
-                            )}
-                            : {tx.boostagram.app_name}
+                            {tComponents("transactionsTable.boostagram.app")}:{" "}
+                            {tx.boostagram.app_name}
                           </li>
                           <li>
                             {tComponents(

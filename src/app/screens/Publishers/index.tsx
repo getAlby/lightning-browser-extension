@@ -84,7 +84,7 @@ function Publishers() {
       </h2>
 
       <p className="mb-6 text-gray-500 dark:text-neutral-500">
-        {t("used.subtitle")}
+        {t("used.description")}
       </p>
 
       {publishers.length > 0 ? (
@@ -93,7 +93,7 @@ function Publishers() {
           navigateToPublisher={navigateToPublisher}
         />
       ) : (
-        <p className="dark:text-white"> {t("used.none-info")}</p>
+        <p className="dark:text-white"> {t("used.no_info")}</p>
       )}
 
       <h2 className="mt-12 mb-2 text-2xl font-bold dark:text-white">
@@ -101,7 +101,7 @@ function Publishers() {
       </h2>
 
       <p className="mb-6 text-gray-500 dark:text-neutral-500">
-        {t("suggestions.subtitle")}
+        {t("suggestions.description")}
       </p>
 
       <div className="mb-12">

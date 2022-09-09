@@ -1,6 +1,6 @@
 [
   {
-    "title": "Trading",
+    "title": "trading",
     "items": [
       {
         "title": "LNMarkets",
@@ -23,7 +23,7 @@
     ]
   },
   {
-    "title": "Gaming",
+    "title": "gaming",
     "items": [
       {
         "title": "Lightning Poker",
@@ -46,7 +46,7 @@
     ]
   },
   {
-    "title": "Entertaiment",
+    "title": "entertaiment",
     "items": [
       {
         "title": "Podverse",
@@ -75,7 +75,7 @@
     ]
   },
   {
-    "title": "Shopping",
+    "title": "shopping",
     "items": [
       {
         "title": "Bitrefill",
@@ -92,7 +92,7 @@
     ]
   },
   {
-    "title": "Miscellaneous",
+    "title": "miscellaneous",
     "items": [
       {
         "title": "WebLN Experiments",

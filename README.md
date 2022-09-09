@@ -264,6 +264,130 @@ Alby enforces [Conventional Commits Specification](https://www.conventionalcommi
 
 Alby uses [Weblate](https://weblate.org/en/) to manage translations for different locales. If you'd like to contribute, you can [add translations here](https://hosted.weblate.org/projects/getalby-lightning-browser-extension/getalby-lightning-browser-extension/).
 
+### Rules for developers adding new i18n translation strings:
+
+[Not to be confused with language translations]
+
+#### We categorize strings into:
+
+1. **Translations**\
+   Here we again divide strings as per screens (Welcome, Home...)
+1. **Common**\
+   All the common words and actions (Confirm, Delete, Edit...)
+1. **Components**\
+   The i18n strings which exist within the components (AllowanceMenu, QRCodeScanner, PublisherCard...)
+
+#### Use underscores instead of camelCase
+
+✅ Correct
+
+```json
+"pay_now": "Pay Now"
+```
+
+❌ Wrong
+
+```json
+"payNow": "Pay Now"
+```
+
+#### To avoid confusion, we prefer indentation over underscores, i.e.
+
+✅ Correct
+
+```json
+{
+  "blue": {
+    "label": "Blue"
+  }
+}
+```
+
+❌ Wrong
+
+```json
+{
+  "blue_label": "Blue"
+}
+```
+
+#### Only indent strings when it is an input or has different attributes:
+
+✅ Correct
+
+```json
+{
+  "edit": {
+    "title": "Edit Account",
+    "label": "Name",
+    "screen_reader": "Edit account name"
+  }
+}
+```
+
+❌ Wrong
+
+```json
+{
+  "edit": {
+    "title": "Edit Account"
+  }
+}
+```
+
+Correct way for this would be:
+
+```json
+{
+  "edit": "Edit Account"
+}
+```
+
+#### Use title for heading tags and label for label tags
+
+##### When the content is copy-text and you wish to divide it in parts, you can use numbers:
+
+```json
+{
+  "enable": {
+    "request1": "Request approval for transactions",
+    "request2": "Request invoices and lightning information"
+  }
+}
+```
+
+##### For button text, you can use common translations:
+
+```json
+{
+  "common": {}
+}
+```
+
+#### You can add a new string if you don't find the suitable text in common. In that case, indent them within "actions":
+
+```json
+{
+  "actions": {
+    "add_account": "Add account"
+  }
+}
+```
+
+_Usually, we prefer single words in `common`, phrases like "Get Started", "Enable Now" can be indented in the above way._
+
+#### Similarly, the error messages go within "errors":
+
+```json
+{
+  "errors": {
+    "enter_password": "Please enter a new unlock password.",
+    "confirm_password": "Please confirm your password.",
+    "mismatched_password": "Passwords don't match."
+  }
+}
+```
+
 ## ❔ FAQs
 
 #### Why not use Joule?

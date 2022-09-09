@@ -56,7 +56,7 @@ function Settings() {
   return (
     <Container>
       <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
-        {t("headline")}
+        {t("title")}
       </h2>
       <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting
@@ -80,7 +80,7 @@ function Settings() {
         >
           {!cameraPermissionsGranted ? (
             <Button
-              label={t("camera_access.label")}
+              label={t("camera_access.allow")}
               onClick={async () => {
                 try {
                   await Html5Qrcode.getCameras();
@@ -92,7 +92,7 @@ function Settings() {
             />
           ) : (
             <p className="text-green-500 font-medium">
-              {t("camera_access.active")}
+              {t("camera_access.granted")}
             </p>
           )}
         </Setting>
@@ -230,11 +230,11 @@ function Settings() {
       </div>
 
       <h2 className="mt-12 text-2xl font-bold dark:text-white">
-        {t("personal_data.headline")}
+        {t("personal_data.title")}
       </h2>
 
       <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
-        {t("personal_data.info")}
+        {t("personal_data.description")}
       </p>
 
       <div className="mb-12 shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
@@ -276,7 +276,7 @@ function Settings() {
           closeTimeoutMS={200}
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
-          contentLabel="Edit account name"
+          contentLabel={t("change_password.content_label")}
           overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
           className="rounded-lg bg-white w-full max-w-lg"
         >
@@ -319,7 +319,7 @@ function Settings() {
       </div>
 
       <h2 className="mt-12 text-2xl font-bold dark:text-white">
-        {t("lnurl_auth.headline")}
+        {t("lnurl_auth.title")}
       </h2>
 
       <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
@@ -329,7 +329,7 @@ function Settings() {
           rel="noreferrer"
           className="underline"
         >
-          {t("lnurl_auth.headline")}
+          {t("lnurl_auth.title")}
         </a>{" "}
         <Trans t={t}>lnurl_auth.hint</Trans>
       </p>

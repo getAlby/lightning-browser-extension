@@ -25,7 +25,7 @@ function LNURLAuth() {
   const origin = navState.origin;
 
   const { t } = useTranslation("components", {
-    keyPrefix: "confirmOrCancel",
+    keyPrefix: "confirm_or_cancel",
   });
 
   const [successMessage, setSuccessMessage] = useState("");

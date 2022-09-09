@@ -112,8 +112,8 @@ export default function ConnectBtcpay() {
 
   return (
     <ConnectorForm
-      title={t("page_title")}
-      description={t("page_instructions")}
+      title={t("page.title")}
+      description={t("page.instructions")}
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
@@ -121,9 +121,9 @@ export default function ConnectBtcpay() {
       <div className="mb-6">
         <TextField
           id="btcpay-config"
-          label={t("config_label")}
-          placeholder={t("config_placeholder")}
-          title={t("config_title")}
+          label={t("config.label")}
+          placeholder={t("config.placeholder")}
+          title={t("config.title")}
           onChange={handleChange}
           required
         />
