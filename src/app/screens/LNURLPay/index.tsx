@@ -10,6 +10,7 @@ import React, { Fragment, useState, useEffect, MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import ScreenHeader from "~/app/components/ScreenHeader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
@@ -301,6 +302,7 @@ function LNURLPay() {
   return (
     <>
       <div className="flex flex-col grow overflow-hidden">
+        <ScreenHeader title={tCommon("actions.send")} />
         {!successAction ? (
           <>
             <div className="grow overflow-y-auto no-scrollbar">
