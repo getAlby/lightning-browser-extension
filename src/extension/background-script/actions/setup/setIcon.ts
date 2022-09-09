@@ -46,14 +46,15 @@ const setIcon = async (icon: string, tabId: number): Promise<void> => {
 
   const theme = state.getState().settings.theme == "dark" ? "_dark" : "";
 
-  return browser.browserAction.setIcon({
+  return browser.action.setIcon({
     path: {
-      16: `assets/icons/${icon}${theme}_16x16.png`,
-      32: `assets/icons/${icon}${theme}_32x32.png`,
-      48: `assets/icons/${icon}${theme}_48x48.png`,
-      128: `assets/icons/${icon}${theme}_128x128.png`,
+      // it's looking relative from the "js" folder
+      16: `../assets/icons/${icon}${theme}_16x16.png`,
+      32: `../assets/icons/${icon}${theme}_32x32.png`,
+      48: `../assets/icons/${icon}${theme}_48x48.png`,
+      128: `../assets/icons/${icon}${theme}_128x128.png`,
     },
-    tabId: tabId,
+    tabId,
   });
 };
 
