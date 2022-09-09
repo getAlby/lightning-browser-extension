@@ -333,7 +333,7 @@
       },
       "lnurlpay": {
         "amount": {
-          "label": "Amount (Satoshi)"
+          "label": "Amount"
         },
         "comment": {
           "label": "Comment"
