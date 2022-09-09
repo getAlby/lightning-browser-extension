@@ -264,11 +264,19 @@ Alby enforces [Conventional Commits Specification](https://www.conventionalcommi
 
 Alby uses [Weblate](https://weblate.org/en/) to manage translations for different locales. If you'd like to contribute, you can [add translations here](https://hosted.weblate.org/projects/getalby-lightning-browser-extension/getalby-lightning-browser-extension/).
 
-#### Rules for developers adding new i18n translation strings:
+### Rules for developers adding new i18n translation strings:
 
 [Not to be confused with language translations]
 
-**Use underscores instead of camelCase.**
+#### We categorize strings into:
+
+1. **Translations:** Here we again divide strings as per screens (Welcome, Home...)
+
+2. **Common:** All the common words and actions (Confirm, Delete, Edit...)
+
+3. **Components:** The i18n strings which exist within the components (AllowanceMenu, QRCodeScanner, PublisherCard...)
+
+#### Use underscores instead of camelCase
 
 ✅ Correct
 
@@ -282,7 +290,7 @@ Alby uses [Weblate](https://weblate.org/en/) to manage translations for differen
 "payNow": "Pay Now"
 ```
 
-**To avoid confusion, we prefer indentation over underscores, i.e.**
+#### To avoid confusion, we prefer indentation over underscores, i.e.
 
 ✅ Correct
 
@@ -302,7 +310,7 @@ Alby uses [Weblate](https://weblate.org/en/) to manage translations for differen
 }
 ```
 
-**Only indent strings when it is an input or has different attributes:**
+#### Only indent strings when it is an input or has different attributes:
 
 ✅ Correct
 
@@ -334,9 +342,9 @@ Correct way for this would be:
 }
 ```
 
-**Use title for heading tags and label for label tags.**
+#### Use title for heading tags and label for label tags
 
-**When the content is copy and you wish to divide it in parts, you can use numbers:**
+#### When the content is copy-text and you wish to divide it in parts, you can use numbers:
 
 ```JSON
 {
@@ -347,7 +355,7 @@ Correct way for this would be:
 }
 ```
 
-**For button text, you can use common translations:**
+#### For button text, you can use common translations:
 
 ```JSON
 {
@@ -356,7 +364,7 @@ Correct way for this would be:
 }
 ```
 
-**You can make a new string if you don't find the suitable text in common. In that case, indent them within "actions":**
+#### You can add a new string if you don't find the suitable text in common. In that case, indent them within "actions":
 
 ```JSON
 {
@@ -368,7 +376,7 @@ Correct way for this would be:
 
 _Usually, we prefer single words in `common`, phrases like "Get Started", "Enable Now" can be indented in the above way._
 
-**Similarly, the error messages go within "errors":**
+#### Similarly, the error messages go within "errors":
 
 ```JSON
 {
