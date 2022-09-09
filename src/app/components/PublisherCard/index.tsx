@@ -23,6 +23,10 @@ export default function PublisherCard({
   isSmall = true,
   children,
 }: Props) {
+  if (!title) {
+    title = description as string;
+    description = undefined;
+  }
   return (
     <div
       className={classNames(
