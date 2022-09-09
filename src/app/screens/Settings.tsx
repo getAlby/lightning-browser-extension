@@ -99,12 +99,19 @@ function Settings() {
         <Setting
           title={t("language.title")}
           subtitle={
-            <>
-              <Trans t={t}>language.subtitle</Trans>{" "}
-              <a href="https://hosted.weblate.org/projects/getalby-lightning-browser-extension/getalby-lightning-browser-extension/">
-                <Trans t={t}>language.link</Trans>
-              </a>
-            </>
+            <Trans
+              i18nKey={"language.subtitle"}
+              t={t}
+              components={[
+                // eslint-disable-next-line react/jsx-key
+                <a
+                  className="underline"
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://hosted.weblate.org/projects/getalby-lightning-browser-extension/getalby-lightning-browser-extension/"
+                ></a>,
+              ]}
+            />
           }
         >
           <div className="w-32">

@@ -241,8 +241,7 @@
       },
       "language": {
         "title": "Language",
-        "subtitle": "Translations are not 100% finished yet.",
-        "link": "Help us translate Alby into your language!"
+        "subtitle": "Translations are not 100% finished yet. <0>Help us translate Alby into your language!</0>"
       },
       "theme": {
         "title": "Theme",
