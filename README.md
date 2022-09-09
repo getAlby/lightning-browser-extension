@@ -270,23 +270,24 @@ Alby uses [Weblate](https://weblate.org/en/) to manage translations for differen
 
 #### We categorize strings into:
 
-1. **Translations:** Here we again divide strings as per screens (Welcome, Home...)
-
-2. **Common:** All the common words and actions (Confirm, Delete, Edit...)
-
-3. **Components:** The i18n strings which exist within the components (AllowanceMenu, QRCodeScanner, PublisherCard...)
+1. **Translations**\
+   Here we again divide strings as per screens (Welcome, Home...)
+1. **Common**\
+   All the common words and actions (Confirm, Delete, Edit...)
+1. **Components**\
+   The i18n strings which exist within the components (AllowanceMenu, QRCodeScanner, PublisherCard...)
 
 #### Use underscores instead of camelCase
 
 ✅ Correct
 
-```JSON
+```json
 "pay_now": "Pay Now"
 ```
 
 ❌ Wrong
 
-```JSON
+```json
 "payNow": "Pay Now"
 ```
 
@@ -294,7 +295,7 @@ Alby uses [Weblate](https://weblate.org/en/) to manage translations for differen
 
 ✅ Correct
 
-```JSON
+```json
 {
   "blue": {
     "label": "Blue"
@@ -304,9 +305,9 @@ Alby uses [Weblate](https://weblate.org/en/) to manage translations for differen
 
 ❌ Wrong
 
-```JSON
+```json
 {
-  "blue_label": "Blue",
+  "blue_label": "Blue"
 }
 ```
 
@@ -314,7 +315,7 @@ Alby uses [Weblate](https://weblate.org/en/) to manage translations for differen
 
 ✅ Correct
 
-```JSON
+```json
 {
   "edit": {
     "title": "Edit Account",
@@ -326,7 +327,7 @@ Alby uses [Weblate](https://weblate.org/en/) to manage translations for differen
 
 ❌ Wrong
 
-```JSON
+```json
 {
   "edit": {
     "title": "Edit Account"
@@ -336,7 +337,7 @@ Alby uses [Weblate](https://weblate.org/en/) to manage translations for differen
 
 Correct way for this would be:
 
-```JSON
+```json
 {
   "edit": "Edit Account"
 }
@@ -344,9 +345,9 @@ Correct way for this would be:
 
 #### Use title for heading tags and label for label tags
 
-#### When the content is copy-text and you wish to divide it in parts, you can use numbers:
+##### When the content is copy-text and you wish to divide it in parts, you can use numbers:
 
-```JSON
+```json
 {
   "enable": {
     "request1": "Request approval for transactions",
@@ -355,18 +356,17 @@ Correct way for this would be:
 }
 ```
 
-#### For button text, you can use common translations:
+##### For button text, you can use common translations:
 
-```JSON
+```json
 {
-  "common": {
-  }
+  "common": {}
 }
 ```
 
 #### You can add a new string if you don't find the suitable text in common. In that case, indent them within "actions":
 
-```JSON
+```json
 {
   "actions": {
     "add_account": "Add account"
@@ -378,7 +378,7 @@ _Usually, we prefer single words in `common`, phrases like "Get Started", "Enabl
 
 #### Similarly, the error messages go within "errors":
 
-```JSON
+```json
 {
   "errors": {
     "enter_password": "Please enter a new unlock password.",
