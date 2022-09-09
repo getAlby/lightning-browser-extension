@@ -32,7 +32,6 @@ export default function LocaleSwitcher() {
   return (
     <Select name="locale" value={dropdownLang} onChange={languageHandler}>
       <option value="en">English</option>
-      <option value="hi">हिन्दी</option>
     </Select>
   );
 }

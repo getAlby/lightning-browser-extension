@@ -96,7 +96,24 @@ function Settings() {
             </p>
           )}
         </Setting>
-        <Setting title={t("language.title")} subtitle={t("language.subtitle")}>
+        <Setting
+          title={t("language.title")}
+          subtitle={
+            <Trans
+              i18nKey={"language.subtitle"}
+              t={t}
+              components={[
+                // eslint-disable-next-line react/jsx-key
+                <a
+                  className="underline"
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://hosted.weblate.org/projects/getalby-lightning-browser-extension/getalby-lightning-browser-extension/"
+                ></a>,
+              ]}
+            />
+          }
+        >
           <div className="w-32">
             <LocaleSwitcher />
           </div>
