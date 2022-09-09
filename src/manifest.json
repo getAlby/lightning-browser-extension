@@ -15,7 +15,10 @@
   "COMMENT_web_accessible_resources": "https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/#web-accessible-resources",
   "web_accessible_resources": [
     {
-      "resources": ["js/inpageScript.bundle.js"],
+      "resources": [
+        "js/inpageScript.bundle.js",
+        "js/inpageScriptWebLN.bundle.js"
+      ],
       "matches": ["https://*/*"]
     }
   ],
