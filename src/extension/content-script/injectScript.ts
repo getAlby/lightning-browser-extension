@@ -10,7 +10,6 @@ export default function injectScript(url: string) {
     scriptEl.setAttribute("async", "false");
     scriptEl.setAttribute("type", "text/javascript");
     scriptEl.setAttribute("src", url);
-    container.appendChild(scriptEl);
     container.insertBefore(scriptEl, container.children[0]);
     scriptEl.onload = () => {
       container.removeChild(scriptEl);
