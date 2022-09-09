@@ -3,6 +3,7 @@ import api from "~/common/lib/api";
 import GeyserProject from "./GeyserProject";
 import GitHub from "./GitHub";
 import Medium from "./Medium";
+import Mixcloud from "./Mixcloud";
 import Monetization from "./Monetization";
 import Peertube from "./Peertube";
 import Reddit from "./Reddit";
@@ -22,6 +23,7 @@ const enhancements = [
   Peertube,
   VimeoVideo,
   Medium,
+  Mixcloud,
   GitHub,
   SoundCloud,
   StackOverflow,
