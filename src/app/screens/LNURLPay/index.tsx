@@ -226,6 +226,22 @@ function LNURLPay() {
     return details.domain;
   }
 
+  function getImage() {
+    if (!details?.metadata) return;
+
+    try {
+      const metadata = JSON.parse(details.metadata);
+      const image = metadata.find(
+        ([type]: [string]) =>
+          type === "image/png;base64" || type === "image/jpeg;base64"
+      );
+
+      if (image) return `data:${image[0]},${image[1]}`;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   function formattedMetadata(
     metadataJSON: string
   ): [string, string | React.ReactNode][] {
@@ -278,7 +294,7 @@ function LNURLPay() {
         <PublisherCard
           title={navState.origin?.name}
           description={getRecipient()}
-          image={navState.origin?.icon}
+          image={navState.origin?.icon || getImage()}
         />
 
         <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
@@ -310,7 +326,7 @@ function LNURLPay() {
                 <PublisherCard
                   title={navState.origin?.name}
                   description={getRecipient()}
-                  image={navState.origin?.icon}
+                  image={navState.origin?.icon || getImage()}
                 />
 
                 <div className="my-4">
