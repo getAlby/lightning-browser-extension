@@ -1,7 +1,7 @@
 {
     "translation": {
         "welcome": {
-            "title": "O poder do bitcoin no seu navegador",
+            "title": "O poder do⚡ bitcoin ⚡no seu navegador",
             "nav": {
                 "welcome": "Bem-vindo",
                 "password": "Senha",
@@ -196,7 +196,7 @@
             },
             "default_view": {
                 "recent_transactions": "Transações Recentes",
-                "no_transactions": "Sem transações realizadas na Alby, ainda.",
+                "no_transactions": "Você ainda não realizou transações com a Alby.",
                 "is_blocked_hint": "A Alby está desativada em {{host}}"
             }
         },
