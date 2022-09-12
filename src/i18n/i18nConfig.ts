@@ -2,11 +2,13 @@ import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 import en from "~/i18n/locales/en/translation.json";
-import hi from "~/i18n/locales/hi/translation.json";
+import es from "~/i18n/locales/es/translation.json";
+import pt_BR from "~/i18n/locales/pt_BR/translation.json";
 
 export const resources = {
   en,
-  hi,
+  es,
+  pt_BR,
 };
 
 i18n
