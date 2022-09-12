@@ -209,6 +209,8 @@ export default function NewWallet() {
             label={t("pre_connect.optional_lightning_address_label")}
             suffix={t("pre_connect.optional_lightning_address_suffix")}
             type="text"
+            pattern="[a-zA-Z0-9-]{3,}"
+            title={t("pre_connect.optional_lightning_address_title")}
             onChange={(e) => {
               setLnAddress(e.target.value.trim().split("@")[0]); // in case somebody enters a full address we simple remove the domain
             }}
