@@ -135,7 +135,13 @@
         "subtitle": "Earn sats for accomplishing tasks",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/sats4likes.svg",
         "url": "https://www.sats4likes.com/"
-      }
+      },
+  	  {
+        "title": "SATurn",
+        "subtitle": "Anlyze your receveid boosts and boostagrams",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/saturn.svg",
+        "url": "https://saturn.fly.dev/"
+        }
     ]
   }
 ]
