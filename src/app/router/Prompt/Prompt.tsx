@@ -65,6 +65,11 @@ function Prompt() {
               path="webln/enable"
               element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
+            <Route path="nostr/getPublicKey" />
+            <Route path="nostr/signEvent" />
+            <Route path="nostr/nip04.encrypt" />
+            <Route path="nostr/nip04.decrypt" />
+
             <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />

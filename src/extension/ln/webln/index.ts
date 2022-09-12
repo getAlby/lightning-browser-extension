@@ -102,7 +102,7 @@ export default class WebLNProvider {
         {
           application: "LBE",
           prompt: true,
-          action: `${action}`,
+          action: `webln/${action}`,
           args,
         },
         "*" // TODO use origin
@@ -114,7 +114,8 @@ export default class WebLNProvider {
         if (
           !messageEvent.data ||
           !messageEvent.data.response ||
-          messageEvent.data.application !== "LBE"
+          messageEvent.data.application !== "LBE" ||
+          messageEvent.data.application.substring(0, 5) === "nostr"
         ) {
           return;
         }

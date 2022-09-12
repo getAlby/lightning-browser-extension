@@ -4,6 +4,7 @@ import * as blocklist from "./actions/blocklist";
 import * as cache from "./actions/cache";
 import * as ln from "./actions/ln";
 import lnurl, { auth } from "./actions/lnurl";
+import * as nostr from "./actions/nostr";
 import * as payments from "./actions/payments";
 import * as settings from "./actions/settings";
 import * as setup from "./actions/setup";
@@ -19,6 +20,13 @@ const routes = {
     signMessageOrPrompt: webln.signMessageOrPrompt,
     lnurl: webln.lnurl,
     makeInvoice: webln.makeInvoiceOrPrompt,
+  },
+  nostr: {
+    getPublicKey: nostr.getPublicKey,
+    signEvent: nostr.signEvent,
+    getRelays: nostr.getRelays,
+    "nip04.encrypt": nostr.nip04Encrypt,
+    "nip04.decrypt": nostr.nip04Decrypt,
   },
   addAllowance: allowances.add,
   getAllowance: allowances.get,

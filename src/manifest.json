@@ -101,7 +101,10 @@
       "all_frames": true,
       "matches": ["*://*/*"],
       "run_at": "document_end",
-      "js": ["js/contentScriptOnEnd.bundle.js"]
+      "js": [
+        "js/contentScriptOnEnd.bundle.js",
+        "js/contentScriptOnEndNostr.bundle.js"
+      ]
     },
     {
       "all_frames": true,
