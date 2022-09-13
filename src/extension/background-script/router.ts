@@ -23,7 +23,7 @@ const routes = {
   },
   nostr: {
     getPublicKey: nostr.getPublicKey,
-    signEvent: nostr.signEvent,
+    signEvent: nostr.signEventOrPrompt,
     getRelays: nostr.getRelays,
     "nip04.encrypt": nostr.nip04Encrypt,
     "nip04.decrypt": nostr.nip04Decrypt,
