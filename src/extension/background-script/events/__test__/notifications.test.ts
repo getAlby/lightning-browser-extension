@@ -10,14 +10,9 @@ import {
 
 jest.mock("~/extension/background-script/actions/cache/getCurrencyRate", () => {
   return {
-    // getCurrencyRateFromCache: jest.fn(() => Promise.resolve(29991.836)),
-    getCurrencyRateFromCache: jest.fn(() => 29991.836),
+    getCurrencyRateFromCache: jest.fn(() => Promise.resolve(888.836)),
   };
 });
-
-// jest
-//   .spyOn(getCurrencyRate, "getCurrencyRateFromCache")
-//   .mockReturnValue(Promise.resolve(29991.836));
 
 const mockState = {
   settings: { exchange: "coindesk", currency: "USD" },
@@ -109,26 +104,27 @@ describe("Payment notifications", () => {
     },
   };
 
-  test.only("success via lnaddress from popup", async () => {
+  test("success via lnaddress from popup", async () => {
     const notifySpy = jest.spyOn(utils, "notify");
-    paymentSuccessNotification("ln.sendPayment.success", data);
+    await paymentSuccessNotification("ln.sendPayment.success", data);
 
-    // expect(notifySpy).toHaveBeenCalledWith({
-    //   title: "✅ Successfully paid 1 sat to »escapedcat@getalby.com«",
-    //   message: "Fee: 0 sats",
-    // });
-
-    expect(notifySpy).toHaveBeenCalled();
+    expect(notifySpy).toHaveBeenCalledWith({
+      title: "✅ Successfully paid 1 sat ($0.00) to »escapedcat@getalby.com«",
+      message: "Fee: 0 sats",
+    });
   });
 
   test("success without origin skips receiver", async () => {
     const notifySpy = jest.spyOn(utils, "notify");
     const dataWitouthOrigin = { ...data };
     delete dataWitouthOrigin.origin;
-    paymentSuccessNotification("ln.sendPayment.success", dataWitouthOrigin);
+    await paymentSuccessNotification(
+      "ln.sendPayment.success",
+      dataWitouthOrigin
+    );
 
     expect(notifySpy).toHaveBeenCalledWith({
-      title: "✅ Successfully paid 1 sat",
+      title: "✅ Successfully paid 1 sat ($0.00)",
       message: "Fee: 0 sats",
     });
   });
