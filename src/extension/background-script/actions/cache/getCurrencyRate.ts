@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import browser from "webextension-polyfill";
 import { CURRENCIES } from "~/common/constants";
-import { get as getSettings } from "~/extension/background-script/actions/settings";
+import state from "~/extension/background-script/state";
 import type { MessageCurrencyRateGet } from "~/types";
 
 dayjs.extend(isSameOrBefore);
@@ -20,8 +20,8 @@ const storeCurrencyRate = async (rate: number) => {
 };
 
 const getFiatBtcRate = async (currency: CURRENCIES): Promise<number> => {
-  const result = await getSettings();
-  const { exchange } = result.data;
+  const { settings } = state.getState();
+  const { exchange } = settings;
 
   let response;
 
