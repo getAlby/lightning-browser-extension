@@ -3,7 +3,13 @@ import { getDocument, queries } from "pptr-testing-library";
 
 import { loadExtension } from "./helpers/loadExtension";
 
-const { getByText, getByLabelText, findByText, getByPlaceholderText } = queries;
+const {
+  getByText,
+  getByLabelText,
+  findByText,
+  getByPlaceholderText,
+  findAllByText,
+} = queries;
 
 const unlockExtension = async ({ page, extensionId }) => {
   await page.waitForTimeout(1000);
@@ -89,30 +95,31 @@ test.describe("Wallet features", () => {
     await browser.close();
   });
 
-  // test("auth via LNURL", async () => {
-  //   const { page, browser, extensionId } = await loadExtension();
-  //   const $optionsdocument = await unlockExtension({
-  //     page,
-  //     extensionId,
-  //   });
+  test("auth via LNURL", async () => {
+    const { page, browser, extensionId } = await loadExtension();
+    const $optionsdocument = await unlockExtension({
+      page,
+      extensionId,
+    });
 
-  //   // go to send
-  //   await (await findByText($optionsdocument, "Send")).click();
-  //   const invoiceInput = await findByText(
-  //     $optionsdocument,
-  //     "Invoice, Lightning Address or LNURL"
-  //   );
-  //   await invoiceInput.type(
-  //     "lightning:LNURL1DP68GURN8GHJ7MRWW4EXCTNXD9SHG6NPVCHXXMMD9AKXUATJDSKKCMM8D9HR7ARPVU7KCMM8D9HZV6E384NXVVEKXSEXYWRYX3SN2EPCX5EKYV35VVEK2VNPXESKZVN9XVCX2VNYX5CXYCFHXUCRJV3JX5UNJV3J8Q6N2WTYVS6NGVE48Q6X2VP3YCHUNC"
-  //   );
-  //   await (await getByText($optionsdocument, "Continue")).click();
+    // go to send
+    await (await findByText($optionsdocument, "Send")).click();
+    const invoiceInput = await findByText(
+      $optionsdocument,
+      "Invoice, Lightning Address or LNURL"
+    );
+    await invoiceInput.type(
+      "lightning:lnurl1dp68gurn8ghj7efjv46x2um59enk2azpd338jtnrdakj7mrww4excttvdankjm3lw3skw0tvdankjm3xdvcn6vpe8yenwc3s8p3rsdtrxcmnxvnrx4nrvd3hxgenzvenv4jryde5x5unxvf58q6ngepsxgekyetr8yuxyvnx8ymxgefev5urqdnzvgeq5kwl8d"
+    );
+    await (await getByText($optionsdocument, "Continue")).click();
 
-  //   await findByText(
-  //     $optionsdocument,
-  //     "Do you want to login to lnurl.fiatjaf.com?"
-  //   );
-  //   await findByText($optionsdocument, "Login");
+    await findAllByText($optionsdocument, "e2etest.getalby.com");
+    await findByText(
+      $optionsdocument,
+      "Do you want to login to e2etest.getalby.com?"
+    );
+    await findByText($optionsdocument, "Login");
 
-  //   await browser.close();
-  // });
+    await browser.close();
+  });
 });
