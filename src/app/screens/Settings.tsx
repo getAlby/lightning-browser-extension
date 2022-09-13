@@ -114,7 +114,7 @@ function Settings() {
             />
           }
         >
-          <div className="w-32">
+          <div className="w-64">
             <LocaleSwitcher />
           </div>
         </Setting>

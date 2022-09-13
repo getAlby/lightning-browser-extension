@@ -32,6 +32,8 @@ export default function LocaleSwitcher() {
   return (
     <Select name="locale" value={dropdownLang} onChange={languageHandler}>
       <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="pt_BR">Português (Brasil)</option>
     </Select>
   );
 }
