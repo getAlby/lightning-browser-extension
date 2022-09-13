@@ -47,6 +47,21 @@ function handleProfilePage() {
 
   if (!address) return;
 
+  if (!document.querySelector<HTMLLinkElement>(".alby-send-sats")) {
+    const sendSatsButton = document.createElement("a");
+    sendSatsButton.href = `lightning:${address}`;
+    sendSatsButton.innerText = "⚡ Send Satoshis ⚡";
+    sendSatsButton.setAttribute("class", "alby-send-sats");
+    sendSatsButton.setAttribute(
+      "style",
+      "display: block; width: 100%; color: white; background-color: orange; border: none; border-radius: 0.375rem; padding: 0.375rem 0; margin-bottom: 0.5rem; text-decoration: none; text-align: center"
+    );
+    const followButton = document.querySelector(
+      ".js-profile-editable-replace .user-following-container"
+    );
+    followButton?.parentElement?.insertBefore(sendSatsButton, followButton);
+  }
+
   setLightningData([
     {
       method: "lnurl",
