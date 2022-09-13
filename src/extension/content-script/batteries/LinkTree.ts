@@ -11,7 +11,7 @@ function battery(): void {
     'head > meta[name="description"]'
   );
 
-  let text = description?.content;
+  let text = description?.content + " ";
 
   if (linkElement) {
     const url = new URL(linkElement.href);
