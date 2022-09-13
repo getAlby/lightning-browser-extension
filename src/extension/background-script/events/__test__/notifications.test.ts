@@ -1,7 +1,11 @@
+import { CURRENCIES } from "~/common/constants";
 import utils from "~/common/lib/utils";
-// import * as getCurrencyRate from "~/extension/background-script/actions/cache/getCurrencyRate";
 import state from "~/extension/background-script/state";
-import type { PaymentNotificationData, AuthNotificationData } from "~/types";
+import type {
+  PaymentNotificationData,
+  AuthNotificationData,
+  SettingsStorage,
+} from "~/types";
 
 import {
   paymentSuccessNotification,
@@ -14,11 +18,23 @@ jest.mock("~/extension/background-script/actions/cache/getCurrencyRate", () => {
   };
 });
 
-const mockState = {
-  settings: { exchange: "coindesk", currency: "USD" },
+const settings: SettingsStorage = {
+  exchange: "coindesk",
+  currency: CURRENCIES["USD"],
+  showFiat: true,
+  websiteEnhancements: true,
+  legacyLnurlAuth: false,
+  isUsingLegacyLnurlAuthKey: false,
+  userName: "",
+  userEmail: "",
+  locale: "",
+  theme: "",
+  debug: false,
 };
 
-state.getState = jest.fn().mockReturnValue(mockState);
+const mockState = {
+  settings,
+};
 
 describe("Payment notifications", () => {
   afterEach(() => {
@@ -105,6 +121,7 @@ describe("Payment notifications", () => {
   };
 
   test("success via lnaddress from popup", async () => {
+    state.getState = jest.fn().mockReturnValue(mockState);
     const notifySpy = jest.spyOn(utils, "notify");
     await paymentSuccessNotification("ln.sendPayment.success", data);
 
@@ -114,7 +131,24 @@ describe("Payment notifications", () => {
     });
   });
 
+  test("success via lnaddress from popup without fiat-conversion turned on", async () => {
+    const mockStateNoFiat = {
+      settings: { ...settings, showFiat: false },
+    };
+
+    state.getState = jest.fn().mockReturnValue(mockStateNoFiat);
+
+    const notifySpy = jest.spyOn(utils, "notify");
+    await paymentSuccessNotification("ln.sendPayment.success", data);
+
+    expect(notifySpy).toHaveBeenCalledWith({
+      title: "✅ Successfully paid 1 sat to »escapedcat@getalby.com«",
+      message: "Fee: 0 sats",
+    });
+  });
+
   test("success without origin skips receiver", async () => {
+    state.getState = jest.fn().mockReturnValue(mockState);
     const notifySpy = jest.spyOn(utils, "notify");
     const dataWitouthOrigin = { ...data };
     delete dataWitouthOrigin.origin;

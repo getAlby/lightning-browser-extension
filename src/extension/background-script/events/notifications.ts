@@ -3,8 +3,6 @@ import { getCurrencyRateFromCache } from "~/extension/background-script/actions/
 import state from "~/extension/background-script/state";
 import type { PaymentNotificationData, AuthNotificationData } from "~/types";
 
-// check if fiat is activated
-
 const paymentSuccessNotification = async (
   message: "ln.sendPayment.success",
   data: PaymentNotificationData
@@ -15,6 +13,7 @@ const paymentSuccessNotification = async (
 
   const recipient = data?.origin?.name;
   const paymentResponseData = data.response;
+  let paymentAmountFiatLocale;
 
   if ("error" in paymentResponseData) {
     return;
@@ -25,20 +24,24 @@ const paymentSuccessNotification = async (
   const paymentAmount = total_amt - total_fees;
 
   const { settings } = state.getState();
-  const { currency } = settings;
+  const { showFiat, currency } = settings;
 
-  const rate = await getCurrencyRateFromCache(currency);
-  const paymentAmountBtc = Number(paymentAmount) / 100_000_000;
-  const paymentAmountFiat = Number(paymentAmountBtc) * Number(rate);
+  if (showFiat) {
+    const rate = await getCurrencyRateFromCache(currency);
+    const paymentAmountBtc = Number(paymentAmount) / 100_000_000;
+    const paymentAmountFiat = Number(paymentAmountBtc) * Number(rate);
 
-  const paymentAmountFiatLocale = paymentAmountFiat.toLocaleString("en", {
-    style: "currency",
-    currency,
-  });
+    paymentAmountFiatLocale = paymentAmountFiat.toLocaleString("en", {
+      style: "currency",
+      currency,
+    });
+  }
 
-  let notificationTitle = `✅ Successfully paid ${formatAmount(
-    paymentAmount
-  )} (${paymentAmountFiatLocale})`;
+  let notificationTitle = `✅ Successfully paid ${formatAmount(paymentAmount)}`;
+
+  if (showFiat) {
+    notificationTitle = `${notificationTitle} (${paymentAmountFiatLocale})`;
+  }
 
   if (recipient) {
     notificationTitle = `${notificationTitle} to »${recipient}«`;
