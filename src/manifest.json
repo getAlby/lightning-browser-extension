@@ -11,7 +11,10 @@
   },
   "description": "The Bitcoin Lightning wallet for direct payments across the globe, Bitcoin Lightning applications and passwordless logins.",
   "homepage_url": "https://getAlby.com/",
-  "web_accessible_resources": ["js/inpageScript.bundle.js"],
+  "web_accessible_resources": [
+    "js/inpageScript.bundle.js",
+    "js/inpageScriptWebLN.bundle.js"
+  ],
   "permissions": [
     "notifications",
     "activeTab",
