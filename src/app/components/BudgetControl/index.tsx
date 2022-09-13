@@ -59,6 +59,7 @@ function BudgetControl({
           <DualCurrencyField
             fiatValue={fiatAmount}
             id="budget"
+            min={0}
             label={t("budget.label")}
             placeholder={tCommon("sats")}
             value={budget}
