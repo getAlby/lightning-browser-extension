@@ -8,8 +8,15 @@ import type { MessageCurrencyRateGet } from "~/types";
 
 dayjs.extend(isSameOrBefore);
 
-const storeCurrencyRate = async (rate: number) => {
-  const currencyRate = {
+interface CurrencyRate {
+  currency?: CURRENCIES;
+  rate?: number;
+  timestamp?: number;
+}
+
+const storeCurrencyRate = async ({ rate, currency }: CurrencyRate) => {
+  const currencyRate: CurrencyRate = {
+    currency,
     rate,
     timestamp: Date.now(),
   };
@@ -49,27 +56,29 @@ const getFiatBtcRate = async (currency: CURRENCIES): Promise<number> => {
 };
 
 const getCurrencyRateFromCache = async (currency: CURRENCIES) => {
-  let currencyRateCache: { rate?: number; timestamp?: number } = {};
+  let currencyRateCache: CurrencyRate = {};
   const result = await browser.storage.local.get(["currencyRate"]);
 
-  if (result?.currencyRate) {
+  if (result.currencyRate) {
     currencyRateCache = JSON.parse(result.currencyRate);
 
-    const isRateNewEnough = dayjs().isSameOrBefore(
-      dayjs(currencyRateCache?.timestamp).add(10, "minute")
-    );
+    if (currencyRateCache.currency === currency) {
+      const isRateNewEnough = dayjs().isSameOrBefore(
+        dayjs(currencyRateCache?.timestamp).add(10, "minute")
+      );
 
-    if (isRateNewEnough) {
-      return currencyRateCache.rate;
+      if (isRateNewEnough) {
+        return currencyRateCache.rate;
+      }
+
+      const rate = await getFiatBtcRate(currency);
+      await storeCurrencyRate({ rate, currency });
+      return rate;
     }
-
-    const rate = await getFiatBtcRate(currency);
-    await storeCurrencyRate(rate);
-    return rate;
   }
 
   const rate = await getFiatBtcRate(currency);
-  await storeCurrencyRate(rate);
+  await storeCurrencyRate({ currency, rate });
   return rate;
 };
 

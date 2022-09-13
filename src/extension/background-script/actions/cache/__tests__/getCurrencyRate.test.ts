@@ -1,13 +1,14 @@
 import { CURRENCIES } from "~/common/constants";
+import state from "~/extension/background-script/state";
 import type { MessageCurrencyRateGet } from "~/types";
 
 import getCurrencyRate from "../getCurrencyRate";
 
-jest.mock("~/extension/background-script/actions/settings", () => {
-  return {
-    get: jest.fn(() => ({ data: { exchange: "coindesk" } })),
-  };
-});
+const mockState = {
+  settings: { exchange: "coindesk" },
+};
+
+state.getState = jest.fn().mockReturnValue(mockState);
 
 jest.useFakeTimers().setSystemTime(new Date(1577836800000)); // Wed Jan 01 2020 08:00:00
 
@@ -37,13 +38,15 @@ describe("currencyRate", () => {
   test("storing rate if it is outdated", async () => {
     (chrome.storage.local.get as jest.Mock).mockResolvedValue({
       currencyRate: JSON.stringify({
-        timestamp: 1400000000000, // Wed May 14 2014 00:53:20 -> earlier than 2020 above
+        currency: CURRENCIES["USD"],
         rate: 666666,
+        timestamp: 1400000000000, // Wed May 14 2014 00:53:20 -> earlier than 2020 above
       }),
     });
     const result = await getCurrencyRate(message);
     expect(chrome.storage.local.set).toHaveBeenCalledWith({
-      currencyRate: '{"rate":29991.836,"timestamp":1577836800000}',
+      currencyRate:
+        '{"currency":"USD","rate":29991.836,"timestamp":1577836800000}',
     });
     expect(result.data.rate).toBe(29991.836);
   });
@@ -51,12 +54,28 @@ describe("currencyRate", () => {
   test("returning rate if still valid", async () => {
     (chrome.storage.local.get as jest.Mock).mockResolvedValue({
       currencyRate: JSON.stringify({
-        timestamp: 1577836810000, // Wed Jan 01 2020 08:00:10 -> still within a minute
+        currency: CURRENCIES["USD"],
         rate: 88888888,
+        timestamp: 1577836810000, // Wed Jan 01 2020 08:00:10 -> still within a minute
       }),
     });
     const result = await getCurrencyRate(message);
     expect(chrome.storage.local.set).not.toHaveBeenCalled();
     expect(result.data.rate).toBe(88888888);
+  });
+
+  test("storing rate if cached currency is outdated", async () => {
+    (chrome.storage.local.get as jest.Mock).mockResolvedValue({
+      currencyRate: JSON.stringify({
+        currency: CURRENCIES["EUR"],
+        rate: 88888888,
+        timestamp: 1577836810000, // Wed Jan 01 2020 08:00:10 -> still within a minute
+      }),
+    });
+    await getCurrencyRate(message);
+    expect(chrome.storage.local.set).toHaveBeenCalledWith({
+      currencyRate:
+        '{"currency":"USD","rate":29991.836,"timestamp":1577836800000}',
+    });
   });
 });
