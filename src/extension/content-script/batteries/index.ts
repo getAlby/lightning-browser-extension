@@ -2,6 +2,7 @@ import api from "~/common/lib/api";
 
 import GeyserProject from "./GeyserProject";
 import GitHub from "./GitHub";
+import LinkTree from "./LinkTree";
 import Medium from "./Medium";
 import Mixcloud from "./Mixcloud";
 import Monetization from "./Monetization";
@@ -23,6 +24,7 @@ const enhancements = [
   YouTubeChannel,
   Peertube,
   VimeoVideo,
+  LinkTree,
   Medium,
   Mixcloud,
   GitHub,
