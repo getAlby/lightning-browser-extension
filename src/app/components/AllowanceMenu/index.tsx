@@ -126,6 +126,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               <DualCurrencyField
                 id="budget"
                 label={t("new_budget.label")}
+                min={0}
                 autoFocus
                 placeholder={tCommon("sats")}
                 value={budget}

@@ -213,6 +213,7 @@ function Receive() {
                 <div className="mb-4">
                   <DualCurrencyField
                     id="amount"
+                    min={0}
                     label={t("amount.label")}
                     placeholder={t("amount.placeholder")}
                     fiatValue={fiatAmount}
