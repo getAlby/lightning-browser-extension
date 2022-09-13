@@ -82,6 +82,7 @@ function Home() {
       setIsBlocked(false);
     } catch (e) {
       console.error(e);
+      if (e instanceof Error) toast.error(`Error: ${e.message}`);
     }
   }
 
