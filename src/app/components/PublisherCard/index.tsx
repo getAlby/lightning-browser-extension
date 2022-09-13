@@ -32,25 +32,29 @@ export default function PublisherCard({
       className={classNames(
         isSmall ? "p-2" : "flex-col justify-center p-4",
         isCard && "drop-shadow rounded-lg mt-4",
+        !image && "py-8",
         "flex items-center bg-white dark:bg-surface-02dp"
       )}
     >
-      <img
-        className={`m-2 shrink-0 bg-white border-solid border-2 border-white object-cover rounded-lg shadow-2xl ${
-          isSmall ? "w-14 h-14 mr-4" : "w-20 h-20"
-        }`}
-        src={image || DEFAULT_IMAGE}
-        alt={`${title} logo`}
-        onError={(e) => {
-          const target = e.target as HTMLImageElement;
-          target.onerror = null;
-          target.src = DEFAULT_IMAGE;
-        }}
-      />
+      {image && (
+        <img
+          className={`m-2 shrink-0 bg-white border-solid border-2 border-white object-cover rounded-lg shadow-2xl ${
+            isSmall ? "w-14 h-14 mr-4" : "w-20 h-20"
+          }`}
+          src={image || DEFAULT_IMAGE}
+          alt={`${title} logo`}
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.onerror = null;
+            target.src = DEFAULT_IMAGE;
+          }}
+        />
+      )}
       <div
         className={
           "flex flex-col overflow-hidden w-full " +
-          (isSmall ? "" : "text-center")
+          (isSmall ? "" : "text-center ") +
+          (isSmall && !image && "ml-4")
         }
       >
         <h2
