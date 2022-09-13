@@ -1,6 +1,5 @@
 import type { Step } from "@components/Steps";
 import Steps from "@components/Steps";
-import Intro from "@screens/Onboard/Intro";
 import SetPassword from "@screens/Onboard/SetPassword";
 import TestConnection from "@screens/Onboard/TestConnection";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
@@ -26,11 +25,6 @@ function getRoutes(
   return [
     {
       path: "/",
-      element: <Intro />,
-      name: i18n.t("translation:welcome.nav.welcome"),
-    },
-    {
-      path: "/set-password",
       element: <SetPassword />,
       name: i18n.t("translation:welcome.nav.password"),
     },
@@ -128,7 +122,19 @@ function App() {
     <div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center font-serif font-medium text-2xl pt-7 pb-3 dark:text-white">
-          <p>{t("welcome.title")}</p>
+          <p>
+            {t("welcome.title")}
+            <img
+              src="assets/icons/alby_icon_yellow.svg"
+              alt="Alby"
+              className="dark:hidden inline align-middle w-6 ml-2"
+            />
+            <img
+              src="assets/icons/alby_icon_yellow_dark.svg"
+              alt="Alby"
+              className="hidden dark:inline align-middle w-6 ml-2"
+            />
+          </p>
         </div>
 
         <Steps steps={steps} />

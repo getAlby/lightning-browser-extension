@@ -1,34 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "The power of⚡ bitcoin ⚡in your browser",
-      "nav": {
-        "welcome": "Welcome",
-        "password": "Your Password",
-        "connect": "Your Lightning account",
-        "done": "Done"
-      },
-      "intro": {
-        "send": {
-          "title": "Send in One Click",
-          "description": "Lightning transactions happen all in your browser. No alt+tab or QR-code scanning needed."
-        },
-        "paywall": {
-          "title": "No more annoying paywalls",
-          "description": "Define individual budgets for websites to enable seamless payment streams. No more annoying paywalls."
-        },
-        "privacy": {
-          "title": "Privacy first",
-          "description": "Use lightning to authenticate and control your privacy."
-        },
-        "foss": {
-          "title": "Free and Open Source",
-          "description": "Completely open code that can be audited by anyone. No stats or trackers. You are in control."
-        },
-        "actions": {
-          "get_started": "Get Started"
-        }
-      },
+      "title": "Welcome to Alby",
       "set_password": {
         "title": "Set an unlock password",
         "description": "Your Lightning account data is securely encrypted with an unlock password. Do not forget this password! You need it to unlock the Alby Extension (in this browser)",
