@@ -7,10 +7,18 @@ function battery(): void {
   const linkElement = document.querySelector<HTMLAnchorElement>(
     "a[href*='getalby.com']"
   );
+  const description = document.querySelector<HTMLMetaElement>(
+    'head > meta[name="description"]'
+  );
 
-  if (!linkElement) return;
+  let text = description?.content;
 
-  const address = findLightningAddressInText(linkElement.href ?? "");
+  if (linkElement) {
+    const url = new URL(linkElement.href);
+    text += url.searchParams.get("url") + " ";
+  }
+
+  const address = findLightningAddressInText(text ?? "");
   if (!address) return;
 
   setLightningData([
