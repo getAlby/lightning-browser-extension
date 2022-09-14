@@ -5,32 +5,49 @@ import { findLightningAddressInText, setLightningData } from "./helpers";
 const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
 
 const createAlbyButton = (lnurl: string) => {
-  if (!document.querySelector<HTMLLinkElement>(".alby-send-sats")) {
-    const sendSatsButton = document.createElement("a");
-    sendSatsButton.href = `lightning:${lnurl}`;
-    sendSatsButton.innerText = "⚡ Send Satoshis ⚡";
-    sendSatsButton.setAttribute("class", "alby-send-sats");
-    sendSatsButton.setAttribute(
-      "style",
-      `
-        color: white;
-        background-color: orange;
-        padding: 10px;
-        border-radius: 2px;
-        text-decoration: none;
-        margin: 0 5px;
-        font-size: 1.4rem;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-        line-height: 36px;
-        cursor: pointer;
-      `
-    );
+  console.log("createAlbyButton: YOUTUBE CHANNEL event");
 
-    // can't insert before to their shadowy element
-    const metaContents = document.querySelector("#meta-contents");
-    metaContents?.prepend(sendSatsButton);
-  }
+  const anchorEl = document.createElement("a");
+  anchorEl.setAttribute("href", "lightning:monvol@getalby.com");
+  anchorEl.innerHTML = `Use Alby to tip: ${lnurl}`;
+
+  const closeEl = document.createElement("a");
+  closeEl.innerHTML = "X";
+  closeEl.addEventListener(
+    "click",
+    (event) => event?.target?.parentNode.remove(),
+    false
+  );
+  closeEl.setAttribute(
+    "style",
+    `
+    position: absolute;
+    top: -5%;
+    right: -5%;
+    border: 2px solid blue;
+    background: aqua;
+    padding: 2px;
+    `
+  );
+
+  const injectElement = document.createElement("div");
+  injectElement.appendChild(anchorEl);
+  injectElement.appendChild(closeEl);
+  injectElement.className = "alby--youtube--battery";
+  injectElement.setAttribute(
+    "style",
+    `
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
+    border: 5px solid pink;
+    z-index: 9999;
+    background: deeppink;
+    padding: 10px;
+    `
+  );
+
+  document.body.appendChild(injectElement);
 };
 
 const battery = async (): Promise<void> => {
