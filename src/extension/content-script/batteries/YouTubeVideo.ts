@@ -8,15 +8,6 @@ import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
 
-// var element = document.querySelector('#movie_player');
-// element.onplay = function(e) {
-//   startStreamingPayment();
-// }
-
-// element.onpause = function(e) {
-//   stopStreamingPayment();
-// }
-
 const albySendPayment = async ({
   lnurl,
   amount,
@@ -160,7 +151,7 @@ const battery = async (): Promise<void> => {
     return;
   }
   let match;
-  let lnurl;
+  let lnurl: string;
   // check for an lnurl
   if ((match = text.match(/(lnurlp:)(\S+)/i))) {
     lnurl = match[2];
@@ -182,6 +173,26 @@ const battery = async (): Promise<void> => {
   if (!lnurl) return;
 
   createAlbyButton(lnurl);
+
+  const element = document.querySelector(
+    "#movie_player .html5-video-container video.html5-main-video"
+  );
+  console.log({ element });
+
+  element.onplay = async function (e) {
+    console.log("onplay");
+
+    await startPaymentStream({
+      lnurl,
+      amount: 1000,
+      comment: "player trggerd",
+    });
+  };
+
+  element.onpause = function (e) {
+    console.log("onpause");
+    stopPaymentStream();
+  };
 
   const name = channelLink.textContent || "";
   const imageUrl =
