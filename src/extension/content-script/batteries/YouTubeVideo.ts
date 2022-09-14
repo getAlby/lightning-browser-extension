@@ -8,6 +8,15 @@ import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
 
+// var element = document.querySelector('#movie_player');
+// element.onplay = function(e) {
+//   startStreamingPayment();
+// }
+
+// element.onpause = function(e) {
+//   stopStreamingPayment();
+// }
+
 const albySendPayment = async ({
   lnurl,
   amount,
@@ -21,10 +30,12 @@ const albySendPayment = async ({
   const lnurlDetails = await lnurlLib.getDetails(lnurl); // throws if invalid.
 
   const params = {
-    amount, // user specified sum in MilliSatoshi
+    amount: amount * 1000, // user specified sum in MilliSatoshi
     comment, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/12.md
     // payerdata, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/18.md
   };
+
+  console.log({ params });
 
   // with lnurl do handshake
   // check error/try/catch
@@ -33,14 +44,16 @@ const albySendPayment = async ({
     // https://github.com/fiatjaf/lnurl-rfc/blob/luds/01.md#http-status-codes-and-content-type
     validateStatus: () => true,
   });
+  console.log({ response });
 
   try {
     await webln.enable();
+    console.log("enable");
     const result = await webln.sendPayment(response.data.pr);
     console.log({ result });
     // confetti or something similar
   } catch (error) {
-    console.info("cancelled");
+    console.info("cancelled", error);
   }
 };
 
@@ -101,8 +114,8 @@ const createAlbyButton = (lnurl: string) => {
     "style",
     `
     position: absolute;
-    top: -10%;
-    right: -10%;
+    top: -30%;
+    right: -30%;
     border: 2px solid blue;
     background: aqua;
     padding: 5px;
