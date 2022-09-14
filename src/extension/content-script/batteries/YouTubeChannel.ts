@@ -5,6 +5,33 @@ import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/(channel|c)\/([^/]+).*/;
 
+const createAlbyButton = (lnurl: string) => {
+  if (!document.querySelector<HTMLLinkElement>(".alby-send-sats")) {
+    const sendSatsButton = document.createElement("a");
+    sendSatsButton.href = `lightning:${lnurl}`;
+    sendSatsButton.innerText = "⚡ Send Satoshis ⚡";
+    sendSatsButton.setAttribute("class", "alby-send-sats");
+    sendSatsButton.setAttribute(
+      "style",
+      `
+        color: white;
+        background-color: orange;
+        padding: 0px 10px;
+        border-radius: 2px;
+        text-decoration: none;
+        margin: 0 5px;
+        font-size: 1.4rem;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        line-height: 36px;
+        cursor: pointer;
+      `
+    );
+    const followButton = document.querySelector("#subscribe-button");
+    followButton?.parentElement?.insertBefore(sendSatsButton, followButton);
+  }
+};
+
 const battery = async (): Promise<void> => {
   const match = document.location.toString().match(urlMatcher);
   if (!match) {
@@ -33,6 +60,8 @@ const battery = async (): Promise<void> => {
   }
 
   if (!lnurl) return;
+
+  createAlbyButton(lnurl);
 
   setLightningData([
     {
