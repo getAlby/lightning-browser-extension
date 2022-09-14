@@ -4,6 +4,35 @@ import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
 
+const createAlbyButton = (lnurl: string) => {
+  if (!document.querySelector<HTMLLinkElement>(".alby-send-sats")) {
+    const sendSatsButton = document.createElement("a");
+    sendSatsButton.href = `lightning:${lnurl}`;
+    sendSatsButton.innerText = "⚡ Send Satoshis ⚡";
+    sendSatsButton.setAttribute("class", "alby-send-sats");
+    sendSatsButton.setAttribute(
+      "style",
+      `
+        color: white;
+        background-color: orange;
+        padding: 10px;
+        border-radius: 2px;
+        text-decoration: none;
+        margin: 0 5px;
+        font-size: 1.4rem;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        line-height: 36px;
+        cursor: pointer;
+      `
+    );
+
+    // can't insert before to their shadowy element
+    const metaContents = document.querySelector("#meta-contents");
+    metaContents?.prepend(sendSatsButton);
+  }
+};
+
 const battery = async (): Promise<void> => {
   let text = "";
   document
@@ -40,6 +69,8 @@ const battery = async (): Promise<void> => {
   }
 
   if (!lnurl) return;
+
+  createAlbyButton(lnurl);
 
   const name = channelLink.textContent || "";
   const imageUrl =

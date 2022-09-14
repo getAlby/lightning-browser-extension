@@ -27,8 +27,11 @@ const createAlbyButton = (lnurl: string) => {
         cursor: pointer;
       `
     );
-    const followButton = document.querySelector("#subscribe-button");
-    followButton?.parentElement?.insertBefore(sendSatsButton, followButton);
+    const subscribeButton = document.querySelector("#subscribe-button");
+    subscribeButton?.parentElement?.insertBefore(
+      sendSatsButton,
+      subscribeButton
+    );
   }
 };
 
