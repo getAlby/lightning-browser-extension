@@ -1,3 +1,7 @@
+import axios from "axios";
+import lnurlLib from "~/common/lib/lnurl";
+import WebLNProvider from "~/extension/ln/webln";
+
 import getOriginData from "../originData";
 import { findLnurlFromYouTubeAboutPage } from "./YouTubeChannel";
 import { findLightningAddressInText, setLightningData } from "./helpers";
@@ -5,11 +9,48 @@ import { findLightningAddressInText, setLightningData } from "./helpers";
 const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
 
 const createAlbyButton = (lnurl: string) => {
+  const webln = new WebLNProvider();
   console.log("createAlbyButton: YOUTUBE CHANNEL event");
 
-  const anchorEl = document.createElement("a");
-  anchorEl.setAttribute("href", "lightning:monvol@getalby.com");
-  anchorEl.innerHTML = `Use Alby to tip: ${lnurl}`;
+  // create loop for 10/10/1000/10000/etc
+  const tipValue100El = document.createElement("a");
+  tipValue100El.innerHTML = "100";
+  tipValue100El.addEventListener(
+    "click",
+    async (event) => {
+      console.log("100", lnurl);
+      const lnurlDetails = await lnurlLib.getDetails(lnurl); // throws if invalid.
+      console.log({ lnurlDetails });
+
+      const params = {
+        amount: 12345, // user specified sum in MilliSatoshi
+        comment: "🎠", // https://github.com/fiatjaf/lnurl-rfc/blob/luds/12.md
+        // payerdata, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/18.md
+      };
+
+      console.log({ params });
+
+      // with lnurl do handshake
+      // check error/try/catch
+      const response = await axios.get(lnurlDetails.callback, {
+        params,
+        // https://github.com/fiatjaf/lnurl-rfc/blob/luds/01.md#http-status-codes-and-content-type
+        validateStatus: () => true,
+      });
+
+      console.log({ response });
+
+      try {
+        await webln.enable();
+        const result = await webln.sendPayment(response.data.pr);
+        console.log({ result });
+        // confetti or something similar
+      } catch (error) {
+        console.info("cancelled");
+      }
+    },
+    false
+  );
 
   const closeEl = document.createElement("a");
   closeEl.innerHTML = "X";
@@ -22,16 +63,17 @@ const createAlbyButton = (lnurl: string) => {
     "style",
     `
     position: absolute;
-    top: -5%;
-    right: -5%;
+    top: -10%;
+    right: -10%;
     border: 2px solid blue;
     background: aqua;
-    padding: 2px;
+    padding: 5px;
+    cursor: pointer;
     `
   );
 
   const injectElement = document.createElement("div");
-  injectElement.appendChild(anchorEl);
+  injectElement.appendChild(tipValue100El);
   injectElement.appendChild(closeEl);
   injectElement.className = "alby--youtube--battery";
   injectElement.setAttribute(
