@@ -44,6 +44,30 @@ const albySendPayment = async ({
   }
 };
 
+let streamInterval: FixMe;
+
+const startPaymentStream = async ({
+  lnurl,
+  amount,
+  comment,
+}: {
+  lnurl: string;
+  amount: number;
+  comment?: string;
+}) => {
+  console.log("startPaymentStream");
+
+  streamInterval = setInterval(async () => {
+    await albySendPayment({ lnurl, amount, comment });
+  }, 5000);
+};
+
+const stopPaymentStream = () => {
+  console.log("stopPaymentStream");
+
+  clearInterval(streamInterval);
+};
+
 const createAlbyButton = (lnurl: string) => {
   // create loop for 10/10/1000/10000/etc
   const tipValue100El = document.createElement("a");
@@ -51,7 +75,17 @@ const createAlbyButton = (lnurl: string) => {
   tipValue100El.addEventListener(
     "click",
     async () => {
-      await albySendPayment({ lnurl, amount: 12345, comment: "🎠" });
+      await startPaymentStream({ lnurl, amount: 666, comment: "🎠" });
+    },
+    false
+  );
+
+  const stopPaymentEl = document.createElement("a");
+  stopPaymentEl.innerHTML = "STOP";
+  stopPaymentEl.addEventListener(
+    "click",
+    async () => {
+      stopPaymentStream();
     },
     false
   );
@@ -78,6 +112,7 @@ const createAlbyButton = (lnurl: string) => {
 
   const injectElement = document.createElement("div");
   injectElement.appendChild(tipValue100El);
+  injectElement.appendChild(stopPaymentEl);
   injectElement.appendChild(closeEl);
   injectElement.className = "alby--youtube--battery";
   injectElement.setAttribute(
