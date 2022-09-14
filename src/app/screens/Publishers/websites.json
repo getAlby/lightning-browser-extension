@@ -77,6 +77,12 @@
         "subtitle": "Articles about the Lightning Network",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/yalls.svg",
         "url": "https://yalls.org/"
+      },
+      {
+        "title": "Nakaphoto",
+        "subtitle": "Buy and sell images, videos and music for sats",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/nakaphoto.svg",
+        "url": "https://nakaphoto.vercel.app/"
       }
     ]
   },
