@@ -62,14 +62,13 @@ function LNURLWithdraw() {
 
       if (response.data.status.toUpperCase() === "OK") {
         setSuccessMessage("Withdraw request sent successfully.");
+        // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the response. This closes the window which means the user will NOT see the above successAction.
+        // We assume this is OK when it is called through webln.
+        if (navState.isPrompt) {
+          msg.reply(response.data);
+        }
       } else {
         setErrorMessage(`Error: ${response.data.reason}`);
-      }
-
-      // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the response. This closes the window which means the user will NOT see the above successAction.
-      // We assume this is OK when it is called through webln.
-      if (navState.isPrompt) {
-        msg.reply(response.data);
       }
     } catch (e) {
       console.error(e);
