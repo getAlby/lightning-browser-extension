@@ -154,7 +154,7 @@ function MakeInvoice({
           />
 
           <p className="mb-4 text-center text-sm text-gray-400">
-            <em>{tComponents("confirmOrCancel.only_trusted")}</em>
+            <em>{tComponents("confirm_or_cancel.only_trusted")}</em>
           </p>
         </div>
       </Container>
