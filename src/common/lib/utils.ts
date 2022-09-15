@@ -1,6 +1,7 @@
 import PubSub from "pubsub-js";
 import browser, { Runtime } from "webextension-polyfill";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
+import state from "~/extension/background-script/state";
 import type {
   Invoice,
   Message,
@@ -34,6 +35,9 @@ const utils = {
       });
   },
   notify: (options: { title: string; message: string }) => {
+    const settings = state.getState().settings;
+    if (!settings.browserNotifications) return;
+
     const notification: browser.Notifications.CreateNotificationOptions = {
       type: "basic",
       iconUrl: "assets/icons/alby_icon_yellow_48x48.png",
