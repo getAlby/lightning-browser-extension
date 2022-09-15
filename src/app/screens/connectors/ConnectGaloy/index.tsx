@@ -305,7 +305,10 @@ export default function ConnectGaloy(props: Props) {
     >
       {!acceptJwtDirectly && (
         <div>
-          <label htmlFor="adminkey" className="block font-medium text-gray-700">
+          <label
+            htmlFor="adminkey"
+            className="block font-medium text-gray-700 dark:text-white"
+          >
             Enter your phone number
           </label>
           <div className="mt-1">
