@@ -7,7 +7,6 @@ import { useState } from "react";
 import type { MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
@@ -29,6 +28,7 @@ function LNURLAuth() {
   });
 
   const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function confirm() {
     try {
@@ -50,19 +50,18 @@ function LNURLAuth() {
 
       if (response.success) {
         setSuccessMessage("Authenticated successfully.");
+        // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the response. This closes the window which means the user will NOT see the above successAction.
+        // We assume this is OK when it is called through webln.
+        if (navState.isPrompt) {
+          msg.reply(response);
+        }
       } else {
-        throw new Error("Auth status is not ok");
-      }
-
-      // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the response. This closes the window which means the user will NOT see the above successAction.
-      // We assume this is OK when it is called through webln.
-      if (navState.isPrompt) {
-        msg.reply(response);
+        setErrorMessage("Error: Auth status is not ok");
       }
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        toast.error(`Error: ${e.message}`);
+        setErrorMessage(`Error: ${e.message}`);
       }
     }
   }
@@ -105,6 +104,10 @@ function LNURLAuth() {
                 }?`}
                 content={details.domain}
               />
+
+              {errorMessage && (
+                <p className="my-2 mx-5 text-red-500">{errorMessage}</p>
+              )}
             </div>
 
             <div>
