@@ -245,6 +245,10 @@
     },
     "settings": {
       "title": "Settings",
+      "browser_notifications": {
+        "title": "Browser notifications",
+        "subtitle": "Payment and authentication related notifications."
+      },
       "website_enhancements": {
         "title": "Website enhancements",
         "subtitle": "Tipping enhancements for Twitter, YouTube, etc."
