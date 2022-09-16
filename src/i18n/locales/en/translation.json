@@ -208,7 +208,7 @@
       },
       "edit": {
         "title": "Edit Account",
-        "label": "Name",
+        "name": { "label": "Name" },
         "screen_reader": "Edit account name"
       },
       "export": {
@@ -525,6 +525,16 @@
       },
       "errors": {
         "invalid_credentials": "Invalid password. Please review your password and email address and try again."
+      }
+    },
+    "account_menu": {
+      "screen_reader": "Toggle Dropdown",
+      "title": "Switch account",
+      "options": {
+        "account": {
+          "add": "Add a new account",
+          "manage": "Manage accounts"
+        }
       }
     }
   }

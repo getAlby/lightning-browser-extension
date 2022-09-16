@@ -207,7 +207,7 @@
       },
       "edit": {
         "title": "Editar Conta",
-        "label": "Nome",
+        "name": { "label": "Nome" },
         "screen_reader": "Editar nome da conta"
       },
       "export": {
