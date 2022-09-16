@@ -1,7 +1,7 @@
 import getOriginData from "../originData";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 
-const urlMatcher = /^https:\/\/linktr.ee\/(\w+)$/;
+const urlMatcher = /^https:\/\/linktr.ee\/([\S]+)$/;
 
 function battery(): void {
   const linkElement = document.querySelector<HTMLAnchorElement>(
@@ -14,8 +14,7 @@ function battery(): void {
   let text = description?.content + " ";
 
   if (linkElement) {
-    const url = new URL(linkElement.href);
-    text += url.searchParams.get("url") + " ";
+    text += linkElement.href + " ";
   }
 
   const address = findLightningAddressInText(text ?? "");
