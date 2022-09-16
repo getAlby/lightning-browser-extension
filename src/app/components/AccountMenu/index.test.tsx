@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { act } from "react-dom/test-utils";
 import { BrowserRouter } from "react-router-dom";
@@ -59,12 +59,12 @@ describe("AccountMenu", () => {
       await user.click(screen.getByText("Toggle Dropdown"));
     });
 
-    await waitFor(() => screen.getByText("Switch account"));
+    await screen.findByText("Switch account");
 
     expect(screen.getByText("LND account")).toBeInTheDocument();
     expect(screen.getByText("Galoy account")).toBeInTheDocument();
     expect(screen.getByText("Add a new account")).toBeInTheDocument();
-    expect(screen.getByText("Accounts")).toBeInTheDocument();
+    expect(screen.getByText("Manage accounts")).toBeInTheDocument();
   });
 
   test("highlights current account", async () => {
@@ -79,7 +79,7 @@ describe("AccountMenu", () => {
     await act(async () => {
       await user.click(screen.getByText("Toggle Dropdown"));
     });
-    await waitFor(() => screen.getByText("Switch account"));
+    await screen.findByText("Switch account");
 
     // As we have set the active account as "LND account above"
     expect(
@@ -99,7 +99,7 @@ describe("AccountMenu", () => {
     await act(async () => {
       await user.click(screen.getByText("Toggle Dropdown"));
     });
-    await waitFor(() => screen.getByText("Switch account"));
+    await screen.findByText("Switch account");
 
     expect(screen.getByText("LND account")).toBeInTheDocument();
     expect(screen.getByText("Galoy account")).toBeInTheDocument();

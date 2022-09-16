@@ -6,6 +6,7 @@ import {
 import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -20,6 +21,8 @@ export type Props = {
 };
 
 function AccountMenu({ showOptions = true }: Props) {
+  const { t } = useTranslation("components", { keyPrefix: "account_menu" });
+
   const {
     setAccountId,
     fetchAccountInfo,
@@ -102,10 +105,12 @@ function AccountMenu({ showOptions = true }: Props) {
       <Menu as="div">
         <Menu.Button className="h-full px-2 rounded-r-md hover:bg-gray-200 dark:hover:bg-white/10 transition-colors duration-200">
           <CaretDownIcon className="h-4 w-4 dark:text-white" />
-          <span className="sr-only">Toggle Dropdown</span>
+          <span className="sr-only">{t("screen_reader")}</span>
         </Menu.Button>
+
         <Menu.List position="left">
-          <Menu.Subheader>Switch account</Menu.Subheader>
+          <Menu.Subheader>{t("title")}</Menu.Subheader>
+
           {Object.keys(accounts).map((accountId) => {
             const account = accounts[accountId];
             return (
@@ -132,6 +137,7 @@ function AccountMenu({ showOptions = true }: Props) {
               </Menu.ItemButton>
             );
           })}
+
           {showOptions && (
             <>
               <Menu.Divider />
@@ -141,7 +147,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 }}
               >
                 <PlusIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-                Add a new account
+                {t("options.account.add")}
               </Menu.ItemButton>
               <Menu.ItemButton
                 onClick={() => {
@@ -149,7 +155,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 }}
               >
                 <AddressBookIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-                Accounts
+                {t("options.account.manage")}
               </Menu.ItemButton>
             </>
           )}

@@ -114,6 +114,7 @@ function AccountsScreen() {
       <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
         {t("title")}
       </h2>
+
       <div className="shadow border-b border-gray-200 dark:border-neutral-500 sm:rounded-lg bg-white dark:bg-surface-02dp">
         <div className="p-6">
           <Button
@@ -123,6 +124,7 @@ function AccountsScreen() {
             onClick={() => navigate(`/accounts/new`)}
           />
         </div>
+
         <table className="min-w-full">
           <tbody className="divide-y divide-gray-200">
             {Object.keys(accounts).map((accountId) => {
@@ -234,7 +236,7 @@ function AccountsScreen() {
                 <TextField
                   autoFocus
                   id="accountName"
-                  label={t("name.label")}
+                  label={t("edit.name.label")}
                   onChange={(e) => setNewAccountName(e.target.value)}
                   value={newAccountName}
                 />
