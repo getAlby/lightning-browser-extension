@@ -70,6 +70,8 @@ function Prompt() {
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
             <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route
+              // @TODO: https://github.com/getAlby/lightning-browser-extension/issues/1457
+              // Refactor: use navState for all route actions (instead of props/searchParams) #1457
               path="makeInvoice"
               element={
                 <MakeInvoice
@@ -87,6 +89,8 @@ function Prompt() {
             />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route
+              // @TODO: https://github.com/getAlby/lightning-browser-extension/issues/1457
+              // Refactor: use navState for all route actions (instead of props/searchParams) #1457
               path="confirmKeysend"
               element={
                 <ConfirmKeysend
@@ -103,6 +107,8 @@ function Prompt() {
               }
             />
             <Route
+              // @TODO: https://github.com/getAlby/lightning-browser-extension/issues/1457
+              // Refactor: use navState for all route actions (instead of props/searchParams) #1457
               path="confirmSignMessage"
               element={
                 <ConfirmSignMessage

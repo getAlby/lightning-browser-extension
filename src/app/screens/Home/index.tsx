@@ -258,6 +258,8 @@ function Home() {
                       });
                     }
                   } else if (lnData[0].method === "keysend") {
+                    // @TODO: https://github.com/getAlby/lightning-browser-extension/issues/1457
+                    // Refactor: use navState for all route actions (instead of props/searchParams) #1457
                     const params = new URLSearchParams({
                       destination: lnData[0].address,
                       origin: encodeURIComponent(JSON.stringify(originData)),
