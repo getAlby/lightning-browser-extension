@@ -438,6 +438,7 @@
     "optional": "Optional",
     "feedback": "Feedback",
     "copied": "Copied!",
+    "description": "Descriptions",
     "actions": {
       "back": "Back",
       "delete": "Delete",
