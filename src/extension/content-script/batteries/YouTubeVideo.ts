@@ -4,6 +4,7 @@ import WebLNProvider from "~/extension/ln/webln";
 import getOriginData from "../originData";
 import { findLnurlFromYouTubeAboutPage } from "./YouTubeChannel";
 import { findLightningAddressInText, setLightningData } from "./helpers";
+import { e } from "~/extension/inpage-components/dist/alby-inpage-components/index-4ea8e2ce";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
 
@@ -49,7 +50,7 @@ const albySendPayment = async ({
 
 let streamInterval: FixMe;
 
-const startPaymentStream = ({
+const startPaymentStream = async ({
   lnurl,
   amount,
   comment,
@@ -60,13 +61,26 @@ const startPaymentStream = ({
 }) => {
   console.log("▶️", "startPaymentStream()");
 
+  // Make sure there is only one event loop
+  if(streamInterval) {
+    clearInterval(streamInterval);
+  }
+    
+  overlay.innerHTML = `⚡ <b>${amount}</b> sats / min`;
+
+  // Trigger the first payment
+  await albySendPayment({ lnurl, amount, comment });
+
+  // Then setup the loop
   streamInterval = setInterval(async () => {
     await albySendPayment({ lnurl, amount, comment });
-  }, 5000);
+  }, 60 * 1000);
 };
 
 const stopPaymentStream = () => {
   console.log("⏹️", "stopPaymentStream()");
+
+  overlay.innerHTML = "🐝 Stream sats with Alby";
 
   clearInterval(streamInterval);
 };
@@ -74,6 +88,7 @@ const stopPaymentStream = () => {
 const createBoostButton = (lnurl: string) => {
   // create loop for 10/10/1000/10000/etc
   const boostButton = document.createElement("a");
+  boostButton.title = "Boost 21 sats!"
   boostButton.innerHTML = `<svg style="position: relative; top: 8px" width="50" height="50" viewBox="0 0 280 396" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M214.126 310.982C254.924 310.982 273.494 220.884 273.494 186.722C273.494 160.095 255.072 143.957 230.853 143.957C206.785 143.957 187.246 154.279 187.003 167.062C187.003 200.794 181.05 310.982 214.126 310.982Z" fill="white" stroke="black" stroke-width="12.0732"/>
   <path d="M65.7032 310.982C24.9049 310.982 6.33533 220.884 6.33533 186.722C6.33533 160.095 24.7575 143.957 48.9762 143.957C73.0439 143.957 92.5831 154.279 92.8258 167.062C92.8264 200.794 98.7792 310.982 65.7032 310.982Z" fill="white" stroke="black" stroke-width="12.0732"/>
@@ -106,7 +121,7 @@ const createBoostButton = (lnurl: string) => {
         <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s" from="0 50 50" to="360 50 50" repeatCount="indefinite"></animateTransform>
     </path>
   </svg>`
-      await albySendPayment({ lnurl, amount: 1, comment: "🚀"});
+      await albySendPayment({ lnurl, amount: 1, comment: "🐝 Boost"});
       
       // Unset loading
       boostButton.innerHTML = buttonContent;
@@ -120,6 +135,22 @@ const createBoostButton = (lnurl: string) => {
   var style = document.createElement<HTMLStyleElement>("style");
   style.setAttribute("type", "text/css");
   style.innerHTML = `
+  .alby-video-overlay
+  {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 99999999;
+    background: #F8C455;
+    padding: 1em;
+    color: #000;
+    border-radius: 0.25em;
+    box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);
+    cursor: pointer;
+    transition: opacity 0.25s ease-in-out;
+    opacity: 0;
+  }
+
   .alby-boost-button {
     display: inline-block;
     text-align: center;
@@ -185,6 +216,8 @@ const battery = async (): Promise<void> => {
 
   if (!lnurl) return;
 
+  lnurl="reneaaron@getalby.com";
+
   createBoostButton(lnurl);
 
   const videoElement = document.querySelector<HTMLVideoElement>(
@@ -192,19 +225,7 @@ const battery = async (): Promise<void> => {
   );
 
   if(videoElement) {
-    videoElement.onplay = async function (e) {
-      console.log("video.onplay");
-      await startPaymentStream({
-        lnurl,
-        amount: 1,
-        comment: "player trggerd",
-      });
-    };
-  
-    videoElement.onpause = function (e) {
-      console.log("⏸️ video.onpause");
-      stopPaymentStream();
-    };
+    setupVideo(videoElement, lnurl);
   }
 
   const name = channelLink.textContent || "";
@@ -230,3 +251,73 @@ const YouTubeVideo = {
 };
 
 export default YouTubeVideo;
+
+let overlay : HTMLDivElement;
+let amount : number;
+function setupVideo(videoElement: HTMLVideoElement, lnurl: string) {
+
+  overlay = document.createElement("div");
+  overlay.innerHTML = "🐝 Stream sats with Alby";
+  overlay.classList.add("alby-video-overlay");
+  overlay.onclick = async function(e) {
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    var sats = prompt("How many sats per minute?", "21");
+    if(sats) {
+      var satsValue = parseInt(sats);
+      if(satsValue) {
+        amount = satsValue;
+        await startPaymentStream({ lnurl, amount: satsValue, comment: "🐝 Streaming sats" })
+        return;
+      }
+    }
+    
+    stopPaymentStream();
+  }
+
+  overlay.addEventListener('dblclick', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  });
+
+  // Show and hide the overlay
+  setTimeout(function() {
+    overlay.style.opacity = "100";
+
+    setTimeout(function() {
+      overlay.style.opacity = "0";
+    }, 10000);  
+
+  }, 1000);
+
+  var container = document.querySelector(".html5-video-container");
+  if(container) {
+    container.appendChild(overlay);
+    container.addEventListener('mouseenter', () => {
+      overlay.style.opacity = "100";
+    });
+    container.addEventListener('mouseleave', () => {
+      overlay.style.opacity = "0";
+    });
+  }
+  
+
+  videoElement.onplay = async function (e) {
+    console.log("▶️ video.onplay()");
+    if(amount) {
+      await startPaymentStream({
+        lnurl,
+        amount: amount,
+        comment: "🐝 Streaming sats",
+      });
+    }    
+  };
+
+  videoElement.onpause = function (e) {
+    console.log("⏸️ video.onpause()");
+    stopPaymentStream();
+  };
+}
+
