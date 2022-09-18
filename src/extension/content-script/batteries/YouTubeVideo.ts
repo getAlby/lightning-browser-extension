@@ -4,7 +4,6 @@ import WebLNProvider from "~/extension/ln/webln";
 import getOriginData from "../originData";
 import { findLnurlFromYouTubeAboutPage } from "./YouTubeChannel";
 import { findLightningAddressInText, setLightningData } from "./helpers";
-import { e } from "~/extension/inpage-components/dist/alby-inpage-components/index-4ea8e2ce";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
 
@@ -16,7 +15,7 @@ const albySendPayment = async ({
   lnurl: string;
   amount: number;
   comment?: string;
-}) => {
+}): Promise<boolean> => {
   const webln = new WebLNProvider();
   const lnurlDetails = await lnurlLib.getDetails(lnurl); // throws if invalid.
 
@@ -25,8 +24,6 @@ const albySendPayment = async ({
     comment, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/12.md
     // payerdata, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/18.md
   };
-
-  console.log({ params });
 
   // with lnurl do handshake
   // check error/try/catch
@@ -45,7 +42,10 @@ const albySendPayment = async ({
     // confetti or something similar
   } catch (error) {
     console.info("cancelled", error);
+    return false;
   }
+
+  return true;
 };
 
 let streamInterval: FixMe;
@@ -65,23 +65,45 @@ const startPaymentStream = async ({
   if(streamInterval) {
     clearInterval(streamInterval);
   }
-    
+
   overlay.innerHTML = `⚡ <b>${amount}</b> sats / min`;
 
   // Trigger the first payment
-  await albySendPayment({ lnurl, amount, comment });
+  var success = await albySendPayment({ lnurl, amount, comment });
+  if(!success) {
+    overlay.innerHTML = "🐝 Stream sats with Alby";
+    amount = 0;
+    return;
+  }
 
-  // Then setup the loop
+      // Then setup the loop
   streamInterval = setInterval(async () => {
-    await albySendPayment({ lnurl, amount, comment });
-  }, 60 * 1000);
+    var result = await albySendPayment({ lnurl, amount, comment });
+    if(!result)
+    {
+      stopPaymentStream();
+    }
+  }, 10 * 1000);
+
+
 };
 
 const stopPaymentStream = () => {
   console.log("⏹️", "stopPaymentStream()");
 
   overlay.innerHTML = "🐝 Stream sats with Alby";
+  amount = 0;
 
+  clearInterval(streamInterval);
+};
+
+const pausePaymentStream = () => {
+  console.log("⏸️", "pausePaymentStream()");
+
+  if(amount) {
+    overlay.innerHTML = "⏸️ Paused";
+  }
+  
   clearInterval(streamInterval);
 };
 
@@ -121,7 +143,7 @@ const createBoostButton = (lnurl: string) => {
         <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s" from="0 50 50" to="360 50 50" repeatCount="indefinite"></animateTransform>
     </path>
   </svg>`
-      await albySendPayment({ lnurl, amount: 1, comment: "🐝 Boost"});
+      await albySendPayment({ lnurl, amount: 21, comment: "🐝 Boost"});
       
       // Unset loading
       boostButton.innerHTML = buttonContent;
@@ -215,8 +237,6 @@ const battery = async (): Promise<void> => {
   }
 
   if (!lnurl) return;
-
-  lnurl="reneaaron@getalby.com";
 
   createBoostButton(lnurl);
 
@@ -317,7 +337,7 @@ function setupVideo(videoElement: HTMLVideoElement, lnurl: string) {
 
   videoElement.onpause = function (e) {
     console.log("⏸️ video.onpause()");
-    stopPaymentStream();
+    pausePaymentStream();
   };
 }
 
