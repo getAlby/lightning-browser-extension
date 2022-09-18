@@ -439,6 +439,7 @@
     "feedback": "Feedback",
     "copied": "Copied!",
     "actions": {
+      "back": "Back",
       "delete": "Delete",
       "edit": "Edit",
       "next": "Next",

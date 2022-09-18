@@ -1,4 +1,5 @@
 import { FormEventHandler } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import Button from "../Button";
@@ -24,6 +25,7 @@ function ConnectorForm({
   children,
   video,
 }: Props) {
+  const { t: tCommon } = useTranslation("common");
   const navigate = useNavigate();
 
   return (
@@ -76,7 +78,7 @@ function ConnectorForm({
       </div>
       <div className="my-8 flex space-x-4 justify-center">
         <Button
-          label="Back"
+          label={tCommon("actions.back")}
           onClick={(e) => {
             navigate(-1);
           }}
