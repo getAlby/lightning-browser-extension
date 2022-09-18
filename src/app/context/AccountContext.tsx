@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
-import { getSatValue, getFiatValue } from "~/common/utils/currencyConvert";
+import { getSatValue } from "~/common/utils/currencyConvert";
 import type { AccountInfo } from "~/types";
 
 interface AccountContextType {
@@ -35,7 +35,11 @@ interface AccountContextType {
 const AccountContext = createContext({} as AccountContextType);
 
 export function AccountProvider({ children }: { children: React.ReactNode }) {
-  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getCachedFiatValue,
+  } = useSettings();
 
   const [account, setAccount] = useState<AccountContextType["account"]>(null);
   const [loading, setLoading] = useState(true);
@@ -64,7 +68,9 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   const setAccountId = (id: string) => setAccount({ id });
 
   const updateFiatValue = async (balance: string | number) => {
-    const fiats = await getFiatValue(balance);
+    const fiats = await getCachedFiatValue(balance);
+    console.log({ fiats });
+
     setFiatBalance(fiats);
   };
 

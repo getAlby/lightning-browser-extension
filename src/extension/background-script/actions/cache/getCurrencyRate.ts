@@ -2,7 +2,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import browser from "webextension-polyfill";
-import { CURRENCIES } from "~/common/constants";
+import type { CURRENCIES } from "~/common/constants";
 import state from "~/extension/background-script/state";
 import type { MessageCurrencyRateGet } from "~/types";
 
@@ -73,6 +73,7 @@ const getCurrencyRateFromCache = async (currency: CURRENCIES) => {
 
       const rate = await getFiatBtcRate(currency);
       await storeCurrencyRate({ rate, currency });
+      // switch rate to be SATS not BTC
       return rate;
     }
   }
