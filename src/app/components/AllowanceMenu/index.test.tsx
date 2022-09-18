@@ -22,7 +22,6 @@ jest.mock("~/common/lib/api", () => {
       currency: "USD",
       exchange: "coindesk",
     })),
-    getCurrencyRate: jest.fn(() => ({ rate: 29991.836 })),
   };
 });
 

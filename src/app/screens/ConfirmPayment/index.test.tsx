@@ -42,6 +42,10 @@ jest.mock("~/app/hooks/useNavigationState", () => {
 });
 
 describe("ConfirmPayment", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   test("renders with fiat", async () => {
     jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
       settings: { ...mockSettings },

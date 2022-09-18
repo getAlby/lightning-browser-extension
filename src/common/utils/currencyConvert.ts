@@ -13,7 +13,7 @@ const satoshisToBitcoin = (amountInSatoshis: number | string) => {
   return Number(amountInSatoshis) / numSatsInBtc;
 };
 
-export const satoshisToFiat = async ({
+const satoshisToFiat = async ({
   amountInSats,
   rate,
 }: {
