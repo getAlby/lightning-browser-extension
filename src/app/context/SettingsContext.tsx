@@ -11,7 +11,7 @@ interface SettingsContextType {
   settings: SettingsStorage;
   updateSetting: (setting: Setting) => void;
   isLoading: boolean;
-  getCachedFiatValue: FixMe;
+  getFiatValue: (amount: number | string) => Promise<string>;
 }
 
 type Setting = Partial<SettingsStorage>;
@@ -57,18 +57,13 @@ export const SettingsProvider = ({
   // update rate
   useEffect(() => {
     api.getCurrencyRate({ currency: settings.currency }).then((response) => {
-      console.log({ response });
-
       setCurrencyRate(response.rate);
     });
   }, [settings.currency]);
 
-  const getCachedFiatValue = async (amount) => {
-    console.log("getCachedFiatValue", amount);
-
+  const getFiatValue = async (amount: number | string) => {
     const fiatValue = await satoshisToFiat({
       amountInSats: amount,
-      convertTo: settings.currency,
       rate: currencyRate,
     });
 
@@ -89,7 +84,7 @@ export const SettingsProvider = ({
   }, [settings.theme]);
 
   const value = {
-    getCachedFiatValue,
+    getFiatValue,
     settings,
     updateSetting,
     isLoading,

@@ -18,7 +18,6 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import lnurl from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-import { getFiatValue } from "~/common/utils/currencyConvert";
 import type {
   LNURLPaymentInfoError,
   LNURLPaymentInfo,
@@ -38,7 +37,11 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
 function LNURLPay() {
   const navState = useNavigationState();
   const details = navState.args?.lnurlDetails as LNURLPayServiceResponse;
-  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFiatValue,
+  } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
   const navigate = useNavigate();
@@ -66,7 +69,7 @@ function LNURLPay() {
         setFiatValue(res);
       })();
     }
-  }, [valueSat, showFiat]);
+  }, [valueSat, showFiat, getFiatValue]);
 
   useEffect(() => {
     !!settings.userName && setUserName(settings.userName);

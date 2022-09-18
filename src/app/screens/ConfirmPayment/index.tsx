@@ -16,10 +16,13 @@ import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-import { getFiatValue } from "~/common/utils/currencyConvert";
 
 function ConfirmPayment() {
-  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFiatValue,
+  } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
   const { t } = useTranslation("translation", {
     keyPrefix: "confirm_payment",
@@ -48,7 +51,7 @@ function ConfirmPayment() {
         setFiatAmount(res);
       }
     })();
-  }, [invoice.satoshis, showFiat]);
+  }, [invoice.satoshis, showFiat, getFiatValue]);
 
   useEffect(() => {
     (async () => {
@@ -57,7 +60,7 @@ function ConfirmPayment() {
         setFiatBudgetAmount(res);
       }
     })();
-  }, [budget, showFiat]);
+  }, [budget, showFiat, getFiatValue]);
 
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);

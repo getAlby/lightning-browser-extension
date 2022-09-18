@@ -24,7 +24,6 @@ import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
 import lnurlLib from "~/common/lib/lnurl";
 import utils from "~/common/lib/utils";
-// import { getCachedFiatValue } from "~/common/utils/currencyConvert";
 import type { Allowance, Battery, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
@@ -33,7 +32,7 @@ function Home() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getCachedFiatValue,
+    getFiatValue,
   } = useSettings();
 
   const [allowance, setAllowance] = useState<Allowance | null>(null);
@@ -129,7 +128,7 @@ function Home() {
 
       for await (const payment of payments) {
         const totalAmountFiat = settings.showFiat
-          ? await getCachedFiatValue(payment.totalAmount)
+          ? await getFiatValue(payment.totalAmount)
           : "";
         payment.totalAmountFiat = totalAmountFiat;
       }
@@ -139,7 +138,7 @@ function Home() {
     } catch (e) {
       console.error(e);
     }
-  }, [allowance, settings.showFiat, getCachedFiatValue]);
+  }, [allowance, settings.showFiat, getFiatValue]);
 
   function handleLightningDataMessage(response: {
     action: string;
@@ -172,7 +171,7 @@ function Home() {
 
     for (const invoice of invoices) {
       const totalAmountFiat = settings.showFiat
-        ? await getCachedFiatValue(invoice.totalAmount)
+        ? await getFiatValue(invoice.totalAmount)
         : "";
       invoice.totalAmountFiat = totalAmountFiat;
     }

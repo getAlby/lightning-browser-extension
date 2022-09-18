@@ -1,4 +1,10 @@
-import { useState, useEffect, createContext, useContext } from "react";
+import {
+  useState,
+  useEffect,
+  createContext,
+  useContext,
+  useCallback,
+} from "react";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
@@ -38,7 +44,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getCachedFiatValue,
+    getFiatValue,
   } = useSettings();
 
   const [account, setAccount] = useState<AccountContextType["account"]>(null);
@@ -67,12 +73,13 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
 
   const setAccountId = (id: string) => setAccount({ id });
 
-  const updateFiatValue = async (balance: string | number) => {
-    const fiats = await getCachedFiatValue(balance);
-    console.log({ fiats });
-
-    setFiatBalance(fiats);
-  };
+  const updateFiatValue = useCallback(
+    async (balance: string | number) => {
+      const fiat = await getFiatValue(balance);
+      setFiatBalance(fiat);
+    },
+    [getFiatValue]
+  );
 
   const fetchAccountInfo = async (options?: { accountId?: string }) => {
     const id = options?.accountId || account?.id;
@@ -125,7 +132,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     } else {
       setFiatBalance("");
     }
-  }, [showFiat, account?.balance]);
+  }, [showFiat, account?.balance, updateFiatValue]);
 
   const value = {
     account,
