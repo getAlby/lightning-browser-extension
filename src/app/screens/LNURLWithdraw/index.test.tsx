@@ -14,6 +14,7 @@ jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
   settings: mockSettings,
   isLoading: false,
   updateSetting: jest.fn(),
+  getFiatValue: jest.fn(),
 });
 
 const mockDetailsFiatJef: LNURLWithdrawServiceResponse = {
