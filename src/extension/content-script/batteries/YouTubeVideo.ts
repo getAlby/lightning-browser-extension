@@ -169,7 +169,7 @@ const createBoostButton = (lnurl: string) => {
     border-radius: 0.25em;
     box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);
     cursor: pointer;
-    transition: opacity 0.25s ease-in-out;
+    transition: opacity 0.21s ease-out;
     opacity: 0;
   }
 
