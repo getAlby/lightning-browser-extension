@@ -31,6 +31,7 @@ export default function LocaleSwitcher() {
 
   return (
     <Select name="locale" value={dropdownLang} onChange={languageHandler}>
+      {/* // needs to be aligned with `i18nConfig.ts` */}
       <option value="en">English</option>
       <option value="es">Español</option>
       <option value="pt_BR">Português (Brasil)</option>

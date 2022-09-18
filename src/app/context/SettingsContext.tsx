@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import i18n from "i18next";
 import { useState, useEffect, createContext, useContext } from "react";
 import { toast } from "react-toastify";
@@ -5,6 +6,7 @@ import { getTheme } from "~/app/utils";
 import api from "~/common/lib/api";
 import { getFiatValue as getFiatValueFunc } from "~/common/utils/currencyConvert";
 import { DEFAULT_SETTINGS } from "~/extension/background-script/state";
+import "~/i18n/i18nConfig";
 import type { SettingsStorage } from "~/types";
 
 interface SettingsContextType {
@@ -71,6 +73,10 @@ export const SettingsProvider = ({
   // update locale on every change
   useEffect(() => {
     i18n.changeLanguage(settings.locale);
+    const daysjsLocaleFormatted = settings.locale
+      .toLocaleLowerCase()
+      .replace("_", "-");
+    dayjs.locale(daysjsLocaleFormatted);
   }, [settings.locale]);
 
   // update theme on every change
