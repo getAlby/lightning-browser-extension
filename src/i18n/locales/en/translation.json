@@ -320,11 +320,13 @@
         "confirm_password": {
           "label": "Confirm new password:"
         },
+        "submit": { "label": "Change" },
         "errors": {
           "enter_password": "Please enter a new unlock password.",
           "confirm_password": "Please confirm your password.",
           "mismatched_password": "Passwords don't match."
-        }
+        },
+        "success": "Password changed successfully"
       }
     },
     "send": {

@@ -42,7 +42,7 @@ function Settings() {
     await utils.call("changePassword", {
       password: formData.password,
     });
-    toast.success("Password changed successfully!");
+    toast.success(t("change_password.success"));
     closeModal();
   }
 
@@ -320,7 +320,7 @@ function Settings() {
 
             <div className="flex justify-end p-5 dark:bg-surface-02dp">
               <Button
-                label="Change"
+                label={t("change_password.submit.label")}
                 type="submit"
                 primary
                 disabled={
