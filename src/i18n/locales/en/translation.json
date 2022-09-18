@@ -544,6 +544,11 @@
     "publishers_table": {
       "payments": "payments",
       "used": "used"
+    },
+    "badge": {
+      "label": {
+        "ACTIVE": "ACTIVE"
+      }
     }
   }
 }
