@@ -3,7 +3,7 @@ import { useState, useEffect, createContext, useContext } from "react";
 import { toast } from "react-toastify";
 import { getTheme } from "~/app/utils";
 import api from "~/common/lib/api";
-import { satoshisToFiat } from "~/common/utils/currencyConvert";
+import { getFiatValue as getFiatValueFunc } from "~/common/utils/currencyConvert";
 import { DEFAULT_SETTINGS } from "~/extension/background-script/state";
 import type { SettingsStorage } from "~/types";
 
@@ -60,18 +60,13 @@ export const SettingsProvider = ({
       setCurrencyRate(response.rate);
     });
   }, [settings.currency]);
-  // ADD TESTTTTTTTTT!!!!
-  const getFiatValue = async (amount: number | string) => {
-    const fiatValue = await satoshisToFiat({
-      amountInSats: amount,
-      rate: currencyRate,
-    });
 
-    return fiatValue.toLocaleString("en", {
-      style: "currency",
+  const getFiatValue = async (amount: number | string) =>
+    await getFiatValueFunc({
+      amount,
+      rate: currencyRate,
       currency: settings.currency,
     });
-  };
 
   // update locale on every change
   useEffect(() => {
