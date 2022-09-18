@@ -1,4 +1,5 @@
 import { CaretRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { useTranslation } from "react-i18next";
 import { Publisher } from "~/types";
 
 import Badge from "../Badge";
@@ -16,6 +17,10 @@ export default function PublishersTable({
   publishers,
   navigateToPublisher,
 }: Props) {
+  const { t: tComponents } = useTranslation("components", {
+    keyPrefix: "publishers_table",
+  });
+
   return (
     <div className="shadow overflow-hidden rounded-lg">
       <table className="min-w-full">
@@ -54,7 +59,8 @@ export default function PublishersTable({
                       )}
                     </div>
                     <div className="text-sm text-gray-500 dark:text-neutral-400">
-                      {publisher.host} • {publisher.paymentsCount} payments{" "}
+                      {publisher.host} • {publisher.paymentsCount}{" "}
+                      {tComponents("payments")}{" "}
                       {publisher.paymentsAmount > 0 && (
                         <span>({publisher.paymentsAmount} sats)</span>
                       )}
@@ -66,7 +72,8 @@ export default function PublishersTable({
                 {publisher.totalBudget > 0 && (
                   <div className="ml-40">
                     <p className="text-lg text-gray-500 mb-0 dark:text-neutral-400">
-                      {publisher.usedBudget} / {publisher.totalBudget} sats used
+                      {publisher.usedBudget} / {publisher.totalBudget} sats{" "}
+                      {tComponents("used")}
                     </p>
                     <div className="relative mt-2 ml-auto">
                       <div className="flex items-center justify-end">

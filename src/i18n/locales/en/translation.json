@@ -538,6 +538,10 @@
           "manage": "Manage accounts"
         }
       }
+    },
+    "publishers_table": {
+      "payments": "payments",
+      "used": "used"
     }
   }
 }
