@@ -1,8 +1,10 @@
+// dayjs locales must be imported as well
 import "dayjs/locale/es";
 import "dayjs/locale/pt-br";
 import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
+// import our transaltions
 import en from "~/i18n/locales/en/translation.json";
 import es from "~/i18n/locales/es/translation.json";
 import pt_BR from "~/i18n/locales/pt_BR/translation.json";

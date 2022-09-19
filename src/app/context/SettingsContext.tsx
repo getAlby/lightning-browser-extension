@@ -56,6 +56,8 @@ export const SettingsProvider = ({
   // update locale on every change
   useEffect(() => {
     i18n.changeLanguage(settings.locale);
+
+    // need to switch i.e. `pt_BR` to `pt-br`
     const daysjsLocaleFormatted = settings.locale
       .toLocaleLowerCase()
       .replace("_", "-");
