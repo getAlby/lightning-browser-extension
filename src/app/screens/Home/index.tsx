@@ -241,6 +241,7 @@ function Home() {
                     host: lnData[0].host,
                     description: lnData[0].description,
                     icon: lnData[0].icon,
+                    notify: lnData[0].notify,
                   };
 
                   if (lnData[0].method === "lnurl") {

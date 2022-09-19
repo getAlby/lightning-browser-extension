@@ -735,6 +735,9 @@ export default function getOriginData(): OriginData {
   const metaData = getMetaData();
 
   return {
+    notify: !!document.querySelector<HTMLMetaElement>(
+      'head > meta[name="lightning"]'
+    ),
     location: window.location.toString(),
     domain: window.location.origin,
     host: window.location.host,
