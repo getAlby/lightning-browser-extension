@@ -43,7 +43,7 @@ function LNURLPay() {
 
   const navigate = useNavigate();
   const auth = useAccount();
-  const { t } = useTranslation("translation", { keyPrefix: "send.lnurlpay" });
+  const { t } = useTranslation("translation", { keyPrefix: "lnurlpay" });
   const { t: tCommon } = useTranslation("common");
 
   const [valueSat, setValueSat] = useState(
