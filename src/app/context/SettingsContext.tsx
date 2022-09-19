@@ -6,7 +6,6 @@ import { getTheme } from "~/app/utils";
 import api from "~/common/lib/api";
 import { getFiatValue as getFiatValueFunc } from "~/common/utils/currencyConvert";
 import { DEFAULT_SETTINGS } from "~/extension/background-script/state";
-import "~/i18n/i18nConfig";
 import type { SettingsStorage } from "~/types";
 
 interface SettingsContextType {
