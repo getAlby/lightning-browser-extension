@@ -5,6 +5,7 @@ type OptionalPick<T, K extends keyof T> = { [P in K]?: T[P] };
 
 const updateAllowance = async (message: MessageAllowanceUpdate) => {
   const id = message.args.id;
+  if (!id) return { error: "id is missing" };
 
   const update: OptionalPick<
     Allowance,
@@ -23,8 +24,6 @@ const updateAllowance = async (message: MessageAllowanceUpdate) => {
   if (Object.prototype.hasOwnProperty.call(message.args, "lnurlAuth")) {
     update.lnurlAuth = message.args.lnurlAuth;
   }
-
-  if (!id) return { error: "id is missing" };
 
   const updated = await db.allowances.update(id, update);
   await db.saveToStorage();
