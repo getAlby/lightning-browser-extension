@@ -337,20 +337,20 @@
       "input": {
         "label": "Factura, Dirección Lightning o LNURL",
         "placeholder": "Pegar dirección de factura, lnurl o lightning"
+      }
+    },
+    "lnurlpay": {
+      "amount": {
+        "label": "Cantidad (Satoshi)"
       },
-      "lnurlpay": {
-        "amount": {
-          "label": "Cantidad (Satoshi)"
-        },
-        "comment": {
-          "label": "Comentario"
-        },
-        "name": {
-          "label": "Nombre"
-        },
-        "email": {
-          "label": "Email"
-        }
+      "comment": {
+        "label": "Comentario"
+      },
+      "name": {
+        "label": "Nombre"
+      },
+      "email": {
+        "label": "Email"
       }
     },
     "receive": {

@@ -337,20 +337,20 @@
       "input": {
         "label": "Fatura, Endereço Relâmpago ou LNURL",
         "placeholder": "Cole uma fatura, lnurl ou um endereço relâmpago"
+      }
+    },
+    "lnurlpay": {
+      "amount": {
+        "label": "Quantia"
       },
-      "lnurlpay": {
-        "amount": {
-          "label": "Quantia"
-        },
-        "comment": {
-          "label": "Comentário"
-        },
-        "name": {
-          "label": "Nome"
-        },
-        "email": {
-          "label": "E-mail"
-        }
+      "comment": {
+        "label": "Comentário"
+      },
+      "name": {
+        "label": "Nome"
+      },
+      "email": {
+        "label": "E-mail"
       }
     },
     "receive": {
