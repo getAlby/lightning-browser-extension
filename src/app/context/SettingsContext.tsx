@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import { getTheme } from "~/app/utils";
 import api from "~/common/lib/api";
 import { DEFAULT_SETTINGS } from "~/extension/background-script/state";
-import "~/i18n/i18nConfig";
 import type { SettingsStorage } from "~/types";
 
 interface SettingsContextType {
