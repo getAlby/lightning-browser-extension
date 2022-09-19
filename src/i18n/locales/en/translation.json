@@ -225,10 +225,10 @@
       }
     },
     "enable": {
+      "title": "Connect",
       "allow": "Allow {{host}} to:",
       "request1": "Request approval for transactions",
       "request2": "Request invoices and lightning information",
-      "connect": "Connect",
       "block_and_ignore": "Block and ignore {{host}}"
     },
     "unlock": {
