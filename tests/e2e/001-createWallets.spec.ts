@@ -61,7 +61,7 @@ const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
     page.waitForNavigation(), // The promise resolves after navigation has finished
   ]);
 
-  await findByText($document, "Success!", undefined, { timeout: 15000 });
+  await findByText($document, "Success", undefined, { timeout: 15000 });
 };
 
 test.describe("Create or connect wallets", () => {
