@@ -10,12 +10,18 @@ const updateAllowance = async (message: MessageAllowanceUpdate) => {
     Allowance,
     "totalBudget" | "remainingBudget" | "enabled" | "lnurlAuth"
   > = {};
+
   if (Object.prototype.hasOwnProperty.call(message.args, "totalBudget")) {
     update.totalBudget = message.args.totalBudget;
     update.remainingBudget = message.args.totalBudget;
   }
+
   if (Object.prototype.hasOwnProperty.call(message.args, "enabled")) {
     update.enabled = message.args.enabled;
+  }
+
+  if (Object.prototype.hasOwnProperty.call(message.args, "lnurlAuth")) {
+    update.lnurlAuth = message.args.lnurlAuth;
   }
 
   if (!id) return { error: "id is missing" };

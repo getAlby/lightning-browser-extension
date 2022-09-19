@@ -23,7 +23,7 @@ const mockAllowances: DbAllowance[] = [
     id: 2,
     imageURL: "https://lnmarkets.com/apple-touch-icon.png",
     lastPaymentAt: 0,
-    lnurlAuth: true,
+    lnurlAuth: false,
     name: "LN Markets",
     remainingBudget: 200,
     totalBudget: 200,
@@ -49,6 +49,7 @@ describe("update allowance", () => {
         id: 2,
         totalBudget: 1500,
         enabled: true,
+        lnurlAuth: true,
       },
     };
 
@@ -62,5 +63,6 @@ describe("update allowance", () => {
 
     expect(allowance?.totalBudget).toEqual(1500);
     expect(allowance?.enabled).toEqual(true);
+    expect(allowance?.lnurlAuth).toEqual(true);
   });
 });
