@@ -361,6 +361,13 @@
       "submit": "Login",
       "success": "Authenticated successfully"
     },
+    "lnurlchannel": {
+      "title": "Channel Request",
+      "content_message": {
+        "heading": "Request a channel from the node"
+      },
+      "success": "Channel request sent successfully"
+    },
     "receive": {
       "title": "Receive",
       "actions": {
