@@ -7,7 +7,13 @@ import en from "~/i18n/locales/en/translation.json";
 import es from "~/i18n/locales/es/translation.json";
 import pt_BR from "~/i18n/locales/pt_BR/translation.json";
 
-// needs to be aligned with `LocaleSwitcher.tsx`
+export const supportedLocales = [
+  { locale: "en", label: "English" },
+  { locale: "es", label: "Español" },
+  { locale: "pt_BR", label: "Português (Brasil)" },
+];
+
+// needs to be aligned with `supportedLocales`
 export const resources = {
   en,
   es,
