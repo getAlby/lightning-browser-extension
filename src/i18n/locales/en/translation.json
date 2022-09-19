@@ -337,21 +337,29 @@
       "input": {
         "label": "Invoice, Lightning Address or LNURL",
         "placeholder": "Paste invoice, lnurl or lightning address"
-      },
-      "lnurlpay": {
-        "amount": {
-          "label": "Amount"
-        },
-        "comment": {
-          "label": "Comment"
-        },
-        "name": {
-          "label": "Name"
-        },
-        "email": {
-          "label": "Email"
-        }
       }
+    },
+    "lnurlpay": {
+      "amount": {
+        "label": "Amount"
+      },
+      "comment": {
+        "label": "Comment"
+      },
+      "name": {
+        "label": "Name"
+      },
+      "email": {
+        "label": "Email"
+      }
+    },
+    "lnurlauth": {
+      "title": "Authentication",
+      "content_message": {
+        "heading": "Do you want to login to"
+      },
+      "submit": "Login",
+      "success": "Authenticated successfully"
     },
     "receive": {
       "title": "Receive",
