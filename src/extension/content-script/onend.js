@@ -1,6 +1,6 @@
 import browser from "webextension-polyfill";
 
-import extractLightningData from "./batteries";
+import { extractLightningData, emitPaymentFulfilled } from "./batteries";
 import injectScript from "./injectScript";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
@@ -35,6 +35,9 @@ async function init() {
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "extractLightningData") {
       extractLightningData();
+    }
+    if (request.action === "emitPaymentFulfilled") {
+      emitPaymentFulfilled();
     }
   });
 

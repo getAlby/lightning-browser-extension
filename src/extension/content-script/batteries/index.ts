@@ -37,7 +37,15 @@ const enhancements = [
   Monetization,
 ];
 
-async function extractLightningData() {
+export const emitPaymentFulfilled = (preimage: string) => {
+  window.dispatchEvent(
+    new CustomEvent("lightning:transaction", {
+      detail: { preimage: "Alby" },
+    })
+  );
+};
+
+export const extractLightningData = async () => {
   const settings = await api.getSettings();
   if (!settings.websiteEnhancements) return;
 
@@ -48,5 +56,4 @@ async function extractLightningData() {
   if (match) {
     match.battery();
   }
-}
-export default extractLightningData;
+};

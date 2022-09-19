@@ -10,6 +10,7 @@ import React, { Fragment, useState, useEffect, MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import browser from "webextension-polyfill";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -178,6 +179,18 @@ function LNURLPay() {
       }
 
       auth.fetchAccountInfo(); // Update balance.
+
+      browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+        if (
+          tabs.length > 0 &&
+          tabs[0].url?.startsWith("http") &&
+          navState.origin?.notify
+        ) {
+          browser.tabs.sendMessage(tabs[0].id as number, {
+            action: "emitPaymentFulfilled",
+          });
+        }
+      });
 
       // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the payment response. This closes the window which means the user will NOT see the above successAction.
       // We assume this is OK when it is called through webln.
