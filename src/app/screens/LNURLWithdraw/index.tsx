@@ -6,6 +6,7 @@ import SuccessMessage from "@components/SuccessMessage";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import axios from "axios";
 import { useState, useEffect, MouseEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -16,6 +17,8 @@ import msg from "~/common/lib/msg";
 import type { LNURLWithdrawServiceResponse } from "~/types";
 
 function LNURLWithdraw() {
+  const { t } = useTranslation("translation", { keyPrefix: "lnurlwithdraw" });
+
   const navigate = useNavigate();
   const navState = useNavigationState();
   const {
@@ -64,7 +67,7 @@ function LNURLWithdraw() {
       });
 
       if (response.data.status.toUpperCase() === "OK") {
-        setSuccessMessage("Withdraw request sent successfully.");
+        setSuccessMessage(t("success"));
         // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the response. This closes the window which means the user will NOT see the above successAction.
         // We assume this is OK when it is called through webln.
         if (navState.isPrompt) {
@@ -88,7 +91,7 @@ function LNURLWithdraw() {
       return (
         <>
           <ContentMessage
-            heading={`Amount (Satoshi)`}
+            heading={t("content_message.heading")}
             content={`${minWithdrawable / 1000} sats`}
           />
 
@@ -100,7 +103,7 @@ function LNURLWithdraw() {
         <div className="my-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden">
           <DualCurrencyField
             id="amount"
-            label="Amount (Satoshi)"
+            label={t("amount.label")}
             min={minWithdrawable / 1000}
             max={maxWithdrawable / 1000}
             value={valueSat}
@@ -131,7 +134,7 @@ function LNURLWithdraw() {
 
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
-      <ScreenHeader title={"Withdraw"} />
+      <ScreenHeader title={t("title")} />
       {!successMessage ? (
         <Container justifyBetween maxWidth="sm">
           <div>

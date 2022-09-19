@@ -368,6 +368,16 @@
       },
       "success": "Channel request sent successfully"
     },
+    "lnurlwithdraw": {
+      "title": "Withdraw",
+      "content_message": {
+        "heading": "Amount"
+      },
+      "amount": {
+        "label": "Amount"
+      },
+      "success": "Withdraw request sent successfully"
+    },
     "receive": {
       "title": "Receive",
       "actions": {
