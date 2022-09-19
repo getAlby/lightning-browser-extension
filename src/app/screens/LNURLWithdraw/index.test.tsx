@@ -94,7 +94,7 @@ describe("LNURLWithdraw", () => {
     });
 
     expect(await screen.getByText("lnurl.fiatjaf.com")).toBeInTheDocument();
-    expect(await screen.getByLabelText("Amount (Satoshi)")).toHaveValue(8);
+    expect(await screen.getByLabelText("Amount")).toHaveValue(8);
   });
 
   test("doesn't render input component when minWithdrawable === maxWithdrawable", async () => {
@@ -108,7 +108,7 @@ describe("LNURLWithdraw", () => {
       );
     });
 
-    expect(await screen.findByText("Amount (Satoshi)")).toBeInTheDocument();
+    expect(await screen.findByText("Amount")).toBeInTheDocument();
     expect(await screen.findByText("8 sats")).toBeInTheDocument();
   });
 
