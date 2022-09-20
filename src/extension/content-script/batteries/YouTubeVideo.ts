@@ -172,6 +172,9 @@ const createBoostButton = (lnurl: string) => {
     transition: opacity 0.21s ease-out;
     opacity: 0;
   }
+  .alby-video-overlay:hover {
+    background: #FACE71;
+  }
 
   .alby-boost-button {
     display: inline-block;
