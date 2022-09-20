@@ -5,8 +5,8 @@ import IconButton from "@components/IconButton";
 import PublisherCard from "@components/PublisherCard";
 import SatButtons from "@components/SatButtons";
 import SuccessMessage from "@components/SuccessMessage";
-import Input from "@components/form/Input";
-import { Fragment, useState, MouseEvent } from "react";
+import TextField from "@components/form/TextField";
+import { useState, MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Container from "~/app/components/Container";
@@ -55,28 +55,6 @@ function Keysend() {
     navigate(-1);
   }
 
-  function renderAmount() {
-    return (
-      <div className="mt-1 flex flex-col">
-        <Input
-          type="number"
-          min={+0 / 1000}
-          max={+1000000 / 1000}
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-        <SatButtons onClick={setAmount} />
-      </div>
-    );
-  }
-
-  function elements() {
-    const elements = [];
-    elements.push(["Send payment to", destination]);
-    elements.push(["Amount (Satoshis)", renderAmount()]);
-    return elements;
-  }
-
   return (
     <div>
       <Header
@@ -94,15 +72,25 @@ function Keysend() {
             <>
               {destination && <PublisherCard title={destination} />}
 
-              <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg my-6 overflow-hidden">
-                {elements().map(([t, d], i) => (
-                  <Fragment key={`element-${i}`}>
-                    <dt className="text-sm font-semibold text-gray-500">{t}</dt>
-                    <dd className="text-sm mb-4 dark:text-white break-all">
-                      {d}
-                    </dd>
-                  </Fragment>
-                ))}
+              <dl className="text-sm shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg my-6 overflow-hidden">
+                <dt className="font-medium text-gray-800 dark:text-white">
+                  Send payment to
+                </dt>
+                <dd className="mb-4 dark:text-white break-all">
+                  {destination}
+                </dd>
+                <div className="font-semibold text-gray-500 mb-4">
+                  <TextField
+                    id="amount"
+                    label={"Amount (Satoshis)"}
+                    type="number"
+                    min={+0 / 1000}
+                    max={+1000000 / 1000}
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                  />
+                  <SatButtons onClick={setAmount} />
+                </div>
               </dl>
               <div className="text-center">
                 <div className="mb-5">
