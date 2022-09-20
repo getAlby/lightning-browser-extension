@@ -7,29 +7,20 @@ import SatButtons from "@components/SatButtons";
 import SuccessMessage from "@components/SuccessMessage";
 import Input from "@components/form/Input";
 import { Fragment, useState, MouseEvent } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Container from "~/app/components/Container";
 import { useAccount } from "~/app/context/AccountContext";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
 import utils from "~/common/lib/utils";
 
-type Props = {
-  destination?: string;
-  customRecords?: Record<string, string>;
-  valueSat?: string;
-};
-
-function Keysend(props: Props) {
-  const [searchParams] = useSearchParams();
+function Keysend() {
+  const navState = useNavigationState();
   const navigate = useNavigate();
   const auth = useAccount();
-  const [amount, setAmount] = useState(props.valueSat || "");
-  const [customRecords] = useState(
-    props.customRecords || JSON.parse(searchParams.get("customRecords") || "{}")
-  );
-  const [destination] = useState(
-    props.destination || searchParams.get("destination")
-  );
+  const [amount, setAmount] = useState(navState.args?.amount as string);
+  const customRecords = navState.args?.customRecords;
+  const destination = navState.args?.destination;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 

@@ -82,7 +82,13 @@ function Send() {
           });
         }
       } else if (isPubKey(invoice)) {
-        navigate(`/keysend?destination=${invoice}`);
+        navigate("/keysend", {
+          state: {
+            args: {
+              destination: invoice,
+            },
+          },
+        });
       } else {
         lightningPayReq.decode(invoice); // throws if invalid.
         navigate("/confirmPayment", {
