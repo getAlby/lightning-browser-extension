@@ -13,7 +13,7 @@ import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
-import type { NavigationState, RequestInvoiceArgs, OriginData } from "~/types";
+import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
 const params = new URLSearchParams(window.location.search);
@@ -69,24 +69,7 @@ function Prompt() {
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
             <Route path="lnurlChannel" element={<LNURLChannel />} />
-            <Route
-              // @TODO: https://github.com/getAlby/lightning-browser-extension/issues/1457
-              // Refactor: use navState for all route actions (instead of props/searchParams) #1457
-              path="makeInvoice"
-              element={
-                <MakeInvoice
-                  amountEditable={
-                    navigationState.args?.amountEditable as boolean
-                  }
-                  memoEditable={navigationState.args?.memoEditable as boolean}
-                  invoiceAttributes={
-                    navigationState.args
-                      ?.invoiceAttributes as RequestInvoiceArgs
-                  }
-                  origin={navigationState.origin as OriginData} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
-                />
-              }
-            />
+            <Route path="makeInvoice" element={<MakeInvoice />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route
               // @TODO: https://github.com/getAlby/lightning-browser-extension/issues/1457

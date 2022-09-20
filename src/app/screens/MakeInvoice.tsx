@@ -6,23 +6,11 @@ import TextField from "@components/form/TextField";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import type { RequestInvoiceArgs } from "~/types";
-
-type Origin = {
-  name: string;
-  host: string;
-  icon: string;
-};
-
-type Props = {
-  amountEditable: boolean;
-  memoEditable: boolean;
-  invoiceAttributes: RequestInvoiceArgs;
-  origin: Origin;
-};
 
 const Dt = ({ children }: { children: React.ReactNode }) => (
   <dt className="font-medium text-gray-800 dark:text-white">{children}</dt>
@@ -32,12 +20,12 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
   <dd className="mb-4 text-gray-600 dark:text-neutral-500">{children}</dd>
 );
 
-function MakeInvoice({
-  amountEditable,
-  memoEditable,
-  invoiceAttributes,
-  origin,
-}: Props) {
+function MakeInvoice() {
+  const navState = useNavigationState();
+  const invoiceAttributes = navState.args
+    ?.invoiceAttributes as RequestInvoiceArgs;
+  const amountEditable = navState.args?.amountEditable;
+  const memoEditable = navState.args?.memoEditable;
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState(invoiceAttributes.amount || "");
   const [memo, setMemo] = useState(invoiceAttributes.memo || "");
@@ -96,9 +84,9 @@ function MakeInvoice({
       <Container justifyBetween maxWidth="sm">
         <div>
           <PublisherCard
-            title={origin.name}
-            image={origin.icon}
-            url={origin.host}
+            title={navState.origin?.name}
+            image={navState.origin?.icon}
+            url={navState.origin?.host}
           />
 
           <div className="pt-4">
