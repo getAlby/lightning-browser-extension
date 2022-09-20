@@ -21,8 +21,6 @@ import Connector, {
   SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
-  VerifyMessageArgs,
-  VerifyMessageResponse,
 } from "./connector.interface";
 
 interface Config {
@@ -291,28 +289,6 @@ export default class LndHub implements Connector {
     return Promise.resolve({
       data: {
         signature: signedMessageDERHex,
-      },
-    });
-  }
-
-  verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse> {
-    // create a signing key from the lndhub URL and the login/password combination
-    let keyHex = sha256(
-      `lndhub://${this.config.login}:${this.config.password}`
-    ).toString(Hex);
-    const { settings } = state.getState();
-    if (settings.legacyLnurlAuth) {
-      keyHex = sha256(
-        `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
-      ).toString(Hex);
-    }
-    if (!keyHex) {
-      return Promise.reject(new Error("Could not create key"));
-    }
-    const signer = new HashKeySigner(keyHex);
-    return Promise.resolve({
-      data: {
-        valid: signer.verify(args.message, args.signature),
       },
     });
   }

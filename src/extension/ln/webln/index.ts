@@ -87,8 +87,7 @@ export default class WebLNProvider {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling verifyMessage");
     }
-
-    return this.execute("verifyMessage", { signature, message });
+    throw new Error("Alby does not support `verifyMessage`");
   }
 
   // NOTE: new call `action`s must be specified also in the content script

@@ -13,8 +13,6 @@ import Connector, {
   MakeInvoiceResponse,
   SignMessageArgs,
   SignMessageResponse,
-  VerifyMessageArgs,
-  VerifyMessageResponse,
   KeysendArgs,
 } from "./connector.interface";
 
@@ -285,10 +283,6 @@ class Galoy implements Connector {
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
-    return Promise.reject(new Error("Not yet supported with Galoy."));
-  }
-
-  verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse> {
     return Promise.reject(new Error("Not yet supported with Galoy."));
   }
 

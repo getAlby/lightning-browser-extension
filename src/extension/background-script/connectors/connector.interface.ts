@@ -96,17 +96,6 @@ export interface SignMessageResponse {
   };
 }
 
-export interface VerifyMessageArgs {
-  message: string;
-  signature: string;
-}
-
-export interface VerifyMessageResponse {
-  data: {
-    valid: boolean;
-  };
-}
-
 export interface ConnectPeerResponse {
   data: boolean;
 }
@@ -127,7 +116,6 @@ export default interface Connector {
   keysend(args: KeysendArgs): Promise<SendPaymentResponse>;
   checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse>;
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse>;
-  verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse>;
   connectPeer(
     args: ConnectPeerArgs
   ): Promise<ConnectPeerResponse | Error> | Error;
