@@ -57,6 +57,7 @@ var options = {
     background: "./src/extension/background-script/index.ts",
     contentScriptOnEnd: "./src/extension/content-script/onend.js",
     contentScriptOnStart: "./src/extension/content-script/onstart.ts",
+    inpageComponents: "./src/extension/inpage-components/dist/build/static/js/bundle.min.js",
     inpageScript: "./src/extension/inpage-script/index.js",
     inpageScriptWebLN: "./src/extension/inpage-script/webln.js",
     popup: "./src/app/router/Popup/index.tsx",

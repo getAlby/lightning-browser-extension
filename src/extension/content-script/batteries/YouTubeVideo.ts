@@ -108,8 +108,16 @@ const pausePaymentStream = () => {
 };
 
 const createBoostButton = (lnurl: string) => {
+  
+  // Create react element and assign props
+  const boostButton = document.createElement('boost-button') as any;
+  boostButton.setAttribute('lnurl', 'sdafasdf');
+
+  document.body.appendChild(boostButton);
+
+  return;
   // create loop for 10/10/1000/10000/etc
-  const boostButton = document.createElement("a");
+  // const boostButton = document.createElement("a");
   boostButton.title = "Boost 21 sats!"
   boostButton.innerHTML = `<svg style="position: relative; top: 8px" width="50" height="50" viewBox="0 0 280 396" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M214.126 310.982C254.924 310.982 273.494 220.884 273.494 186.722C273.494 160.095 255.072 143.957 230.853 143.957C206.785 143.957 187.246 154.279 187.003 167.062C187.003 200.794 181.05 310.982 214.126 310.982Z" fill="white" stroke="black" stroke-width="12.0732"/>
