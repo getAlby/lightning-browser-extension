@@ -1,7 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "O poder do⚡ bitcoin ⚡no seu navegador weblate",
+      "title": "O poder do⚡ bitcoin ⚡no seu navegador",
       "nav": {
         "welcome": "Bem-vindo",
         "password": "Senha",
@@ -61,12 +61,12 @@
     "choose_connector": {
       "title": {
         "welcome": "Você já possui uma carteira bitcoin na rede relâmpago?",
-        "options": "Adicionar uma nova conta"
+        "options": "Adicionar nova conta"
       },
       "description": "Você precisa primeiro conectar-se a uma conta ou servidor para poder interagir com seus sites favoritos que aceitam pagamentos em bitcoin!",
       "alby": {
         "title": "Carteira Alby",
-        "description": "Registrar ou acessar conta Alby",
+        "description": "Registre ou acesse sua conta Alby",
         "pre_connect": {
           "title": "Sua Carteira Bitcoin na Alby",
           "login_account": "Registrar ou acessar conta Alby.",
@@ -82,7 +82,8 @@
           },
           "optional_lightning_address": {
             "label": "Escolha um Endereço Relâmpago (opcional)",
-            "suffix": "@getalby.com"
+            "suffix": "@getalby.com",
+            "title": "números e letras, pelo menos 3 caracteres"
           },
           "errors": {
             "create_wallet_error": "Falha ao criar uma nova carteira"
@@ -93,7 +94,7 @@
         "title": "LND",
         "description": "Conectar servidor LND",
         "page": {
-          "title": "Conectar servidor LND",
+          "title": "Conecte no servidor LND",
           "description": "Você precisa da URL do servidor e um macaroon com permissão de envio e leitura (ex. admin.macaroon)"
         },
         "url": {
@@ -113,7 +114,7 @@
         "title": "LNDHub (Bluewallet)",
         "description": "Conectar carteira Bluewallet",
         "page": {
-          "title": "Conectar na LNDHub (BlueWallet)",
+          "title": "Conecte na LNDHub (BlueWallet)",
           "description": "Na BlueWallet, abra a carteira que você deseja conectar, clique em \"...\", clique em Exportar/Backup para mostrar o código QR. Leia o código QR com sua webcam."
         },
         "uri": {
@@ -207,7 +208,9 @@
       },
       "edit": {
         "title": "Editar Conta",
-        "name": { "label": "Nome" },
+        "name": {
+          "label": "Nome"
+        },
         "screen_reader": "Editar nome da conta"
       },
       "export": {
@@ -239,7 +242,7 @@
       },
       "unlock_error": {
         "help": "Os dados da sua conta são criptografados com sua senha de desbloqueio. Se você realmente esqueceu sua senha de desbloqueio, será necessário redefinir e adicionar sua conta novamente.",
-        "link": "Redefinir e adicionar uma nova conta"
+        "link": "Redefinir e adicionar nova conta"
       }
     },
     "settings": {
@@ -250,7 +253,7 @@
       },
       "lnurl_auth": {
         "title": "LNURL-Auth",
-        "hint": "é um protocolo de autenticação. Ele autentica o usuário usando assinaturas digitais. O protocolo não requer nenhuma outra informação de identificação, como senhas, e-mails, nomes de usuário... Com a Alby, você pode usar suas contas bitcoin para acessar sites com segurança. <br /> Para ser compatível com outras carteiras tivemos que fazer algumas alterações que você pode configurar aqui. <br /> <strong>Por padrão essas opções estão DESLIGADAS.</strong> Use-as apenas se você tiver contas antigas.",
+        "hint": "é um protocolo de autenticação. Ele autentica o usuário usando assinaturas digitais. O protocolo não requer nenhuma outra informação de identificação, como senhas, e-mails, nomes de usuário... Com a Alby você pode usar suas contas bitcoin para acessar sites com segurança. <br /> Para ser compatível com outras carteiras, tivemos que fazer algumas alterações que você pode configurar aqui. <br /> <strong>Por padrão essas opções estão DESLIGADAS.</strong> Use-as apenas se você tiver contas antigas.",
         "legacy_lnurl_auth_202207": {
           "title": "LNURL-Auth antigo",
           "subtitle": "A geração de chave para a LNURL-auth mudou em (julho de 2022). A Alby não era compatível com outras implementações. Isso foi corrigido, mas agora uma nova chave está sendo usada como padrão. Se você usou a LNURL-auth para acessar sites antes de julho de 2022, ainda poderá acessá-los habilitando o método antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
@@ -268,7 +271,7 @@
       },
       "language": {
         "title": "Idioma",
-        "subtitle": "As traduções ainda não estão 100% concluídas. <0>Nos ajude a traduzir a Alby para o seu idioma !</0>"
+        "subtitle": "As traduções ainda não estão 100% concluídas. <0>Nos ajude a traduzir a Alby para o seu idioma!</0>"
       },
       "theme": {
         "title": "Tema",
@@ -281,11 +284,11 @@
       },
       "show_fiat": {
         "title": "Sats para Fiat",
-        "subtitle": "Mostrar os valores também em moeda fiat usando o serviço provedor de cotações selecionado"
+        "subtitle": "Mostrar os valores também na moeda fiat selecionada abaixo"
       },
       "currency": {
         "title": "Moeda",
-        "subtitle": "Mostrar valores na Alby também nesta moeda"
+        "subtitle": "Escolha a moeda adicional para mostrar os valores na Alby"
       },
       "exchange": {
         "title": "Serviço provedor de cotações",
@@ -293,7 +296,7 @@
       },
       "personal_data": {
         "title": "Dados pessoais",
-        "description": "Alguns serviços podem solicitar o envio de dados adicionais junto com o pagamento. Esses dados não são compartilhados com ninguém sem o seu consentimento, você sempre será informado sobre os dados a serem enviados."
+        "description": "Alguns serviços podem solicitar dados adicionais no pagamento. Esses dados não são compartilhados sem o seu consentimento e você sempre será informado com antecedência sobre os dados a serem enviados."
       },
       "name": {
         "title": "Nome",
@@ -320,6 +323,10 @@
           "mismatched_password": "As senhas não correspondem.",
           "confirm_password": "Confirme a senha."
         }
+      },
+      "browser_notifications": {
+        "subtitle": "Notificações relacionadas a pagamentos e autenticação.",
+        "title": "Notificações do navegador"
       }
     },
     "send": {
@@ -367,12 +374,12 @@
     },
     "publishers": {
       "used": {
-        "title": "Sua lista de ⚡️ sites",
+        "title": "Sua lista de sites ⚡️",
         "description": "Sites onde você já usou a Alby",
         "no_info": "Nenhum site ainda."
       },
       "suggestions": {
-        "title": "Outros ⚡️ sites",
+        "title": "Outros sites ⚡️",
         "description": "Sugestões de sites onde você pode usar a Alby",
         "list": {
           "trading": "Negociação",
@@ -513,13 +520,22 @@
         "what_you_can_do": "Aqui está o que você pode fazer:",
         "double_check": "Verifique novamente os detalhes da sua conexão",
         "if_ssl_errors": "e se houver erros de SSL (por exemplo, ERR_CERT_AUTHORITY_INVALID), clique em \"avançado\" e prossiga para aceitar o certificado.",
-        "visit_guides": "Visite nossos guias para obter mais ajuda"
+        "visit_guides": "Acesse nossos tutoriais para obter mais ajuda"
       },
       "login_failed": {
         "password_reset": "Esqueceu sua senha? Clique aqui"
       },
       "errors": {
         "invalid_credentials": "Senha inválida. Verifique se sua senha e endereço de e-mail estão corretos e tente novamente."
+      }
+    },
+    "account_menu": {
+      "title": "Selecionar conta",
+      "options": {
+        "account": {
+          "add": "Adicionar nova conta",
+          "manage": "Gerenciar contas"
+        }
       }
     }
   }

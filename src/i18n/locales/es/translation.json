@@ -1,11 +1,11 @@
 {
   "translation": {
     "welcome": {
-      "title": "El poder de lightning en tu navegador",
+      "title": "El poder de ⚡ bitcoin ⚡ en tu navegador",
       "nav": {
         "welcome": "Bienvenido",
         "password": "Su Contraseña",
-        "connect": "Conéctese a Lightning",
+        "connect": "Su cuenta de Lightning",
         "done": "Hecho"
       },
       "intro": {
@@ -31,7 +31,7 @@
       },
       "set_password": {
         "title": "Proteja su billetera",
-        "description": "Su billetera está encriptada de forma segura con una contraseña y debe desbloquearse antes de usarla.",
+        "description": "Los datos de su cuenta Lightning se cifran de forma segura con una contraseña de desbloqueo. No olvides esta contraseña! Lo necesita para desbloquear el teléfono por extensión (en este navegador)",
         "choose_password": {
           "label": "Elige una contraseña:"
         },
@@ -82,7 +82,8 @@
           },
           "optional_lightning_address": {
             "label": "Elige tu dirección de correo electrónico (opcional)",
-            "suffix": "@getalby.com"
+            "suffix": "@getalby.com",
+            "title": "números y letras, al menos 3 caracteres"
           },
           "errors": {
             "create_wallet_error": "Error al crear una nueva billetera"
@@ -141,7 +142,7 @@
         "description": "Conéctese a su Umbrel"
       },
       "mynode": {
-        "title": "myNode",
+        "title": "MiNodo",
         "description": "Conéctese a myNode"
       },
       "start9": {
@@ -207,7 +208,9 @@
       },
       "edit": {
         "title": "Editar Cuenta",
-        "name": { "label": "Nombre" },
+        "name": {
+          "label": "Nombre"
+        },
         "screen_reader": "Editar nombre de cuenta"
       },
       "export": {
@@ -239,7 +242,8 @@
       "unlock_error": {
         "help": "Los datos de su cuenta están encriptados con su contraseña de desbloqueo. Si realmente olvidó su contraseña de desbloqueo, debe restablecer y agregar su cuenta Lightning nuevamente.",
         "link": "Restablecer ahora y agregar una nueva cuenta"
-      }
+      },
+      "unlock_password": "Tu contraseña de desbloqueo"
     },
     "settings": {
       "title": "Configuración",
@@ -319,6 +323,10 @@
           "confirm_password": "Por favor, confirme su contraseña.",
           "mismatched_password": "Las contraseñas no coinciden."
         }
+      },
+      "browser_notifications": {
+        "title": "Notificaciones del navegador",
+        "subtitle": "Notificaciones relacionadas con pagos y autenticación."
       }
     },
     "send": {
@@ -426,7 +434,7 @@
     "error": "Error",
     "settings": "Ajustes",
     "websites": "Sitios web",
-    "sats": "sats",
+    "sats": "satoshis",
     "loading": "cargando",
     "amount": "Cantidad",
     "optional": "Opcional",
@@ -448,7 +456,8 @@
       "close": "Cerrar",
       "export": "Exportar",
       "remove": "Remover",
-      "copy": "Copiar"
+      "copy": "Copiar",
+      "open": "Abrir"
     },
     "errors": {
       "connection_failed": "Error de conexión"
@@ -501,8 +510,34 @@
       }
     },
     "companion_download_info": {
-      "description": "Está intentando conectarse a un nodo detrás de Tor. Debido a que los navegadores no pueden conectarse directamente a su nodo, asegúrese de tener instalada la aplicación complementaria de Alby.",
-      "download_here": "¡Descarguelo aqui!"
+      "description": "Estás intentando conectarte a un nodo detrás de Tor. Para hacer esto, necesitas tener instalada la aplicación Alby companion o tener Tor en ejecución. (Cuando no esté seguro, le recomendamos la aplicación complementaria Alby.)",
+      "download_here": "¡Descarguelo aqui!",
+      "using_tor": "haz clic aquí para continuar si utilizas el navegador Tor",
+      "or": "O:"
+    },
+    "toasts": {
+      "connection_error": {
+        "what_you_can_do": "Esto es lo que puedes hacer:",
+        "visit_guides": "Visita nuestras guías para obtener más ayuda",
+        "double_check": "Verifique los detalles de su conexión",
+        "if_ssl_errors": "y si hay errores SSL (por ejemplo, ERR_CERT_AUTHORITY_INVALID), haga clic en \"avanzado\" y proceda a aceptar el certificado."
+      },
+      "errors": {
+        "invalid_credentials": "Contraseña no válida. Por favor, revise su contraseña y dirección de correo electrónico e inténtelo de nuevo."
+      },
+      "login_failed": {
+        "password_reset": "Olvidó su contraseña? Haga clic aquí"
+      }
+    },
+    "account_menu": {
+      "title": "Cambiar de cuenta",
+      "options": {
+        "account": {
+          "add": "Agregar una nueva cuenta",
+          "manage": "Administrar cuentas"
+        }
+      },
+      "screen_reader": "Alternar menú desplegable"
     }
   }
 }
