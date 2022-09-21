@@ -4,29 +4,24 @@ import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-import getOriginData from "~/extension/content-script/originData";
-import type { OriginData } from "~/types";
 
-type Props = {
-  origin: OriginData;
-  message: string;
-};
-
-function ConfirmSignMessage(props: Props) {
+function ConfirmSignMessage() {
+  const navState = useNavigationState();
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
     keyPrefix: "confirm_sign_message",
   });
 
-  const messageRef = useRef(props.message);
-  const originRef = useRef(props.origin || getOriginData());
+  const message = navState.args?.message as string;
+  const origin = navState.origin;
   //const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -38,11 +33,7 @@ function ConfirmSignMessage(props: Props) {
 
     try {
       setLoading(true);
-      const response = await utils.call(
-        "signMessage",
-        { message: messageRef.current },
-        { origin: originRef.current }
-      );
+      const response = await utils.call("signMessage", { message }, { origin });
       msg.reply(response);
       setSuccessMessage(tCommon("success"));
     } catch (e) {
@@ -69,13 +60,13 @@ function ConfirmSignMessage(props: Props) {
         <Container justifyBetween maxWidth="sm">
           <div>
             <PublisherCard
-              title={originRef.current.name}
-              image={originRef.current.icon}
-              url={originRef.current.host}
+              title={origin?.name}
+              image={origin?.icon}
+              url={origin?.host}
             />
             <ContentMessage
-              heading={t("content", { host: originRef.current.host })}
-              content={messageRef.current}
+              heading={t("content", { host: origin?.host })}
+              content={message}
             />
             {/*
               <div className="mb-8">
@@ -108,9 +99,9 @@ function ConfirmSignMessage(props: Props) {
       ) : (
         <Container maxWidth="sm">
           <PublisherCard
-            title={originRef.current.name}
-            image={originRef.current.icon}
-            url={originRef.current.host}
+            title={origin?.name}
+            image={origin?.icon}
+            url={origin?.host}
           />
           <SuccessMessage
             message={successMessage}
