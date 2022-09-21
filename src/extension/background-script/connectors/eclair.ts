@@ -134,6 +134,7 @@ class Eclair implements Connector {
 
     return {
       data: {
+        message: args.message,
         signature: signature as string,
       },
     };

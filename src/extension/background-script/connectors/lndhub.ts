@@ -290,6 +290,7 @@ export default class LndHub implements Connector {
     }
     return Promise.resolve({
       data: {
+        message: args.message,
         signature: signedMessageDERHex,
       },
     });
