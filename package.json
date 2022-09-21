@@ -31,7 +31,7 @@
     "test:unit": "jest",
     "test:e2e": "del-cli ./puppeteer-user-data-dir && npx playwright test",
     "test": "yarn test:unit && yarn test:e2e",
-    "test:coverage": "jest --coverage --collectCoverageFrom='src/**/*.(js|ts|jsx|tsx)'",
+    "test:coverage": "jest --coverage --collectCoverageFrom='src/**/*.(ts|tsx)' --collectCoverageFrom='!src/**/*.stories.tsx'",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "prepare": "husky install"
