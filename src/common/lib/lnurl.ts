@@ -2,7 +2,7 @@ import axios from "axios";
 import lightningPayReq from "bolt11";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
-import { LNURLDetails, LNURLPaymentInfo } from "~/types";
+import { LNURLDetails, LNURLPaymentInfo, LNURLPaymentInfoError, LNURLPayServiceResponse } from "~/types";
 
 import { bech32Decode } from "../utils/helpers";
 
@@ -119,6 +119,41 @@ const lnurl = {
         return true;
     }
   },
+
+  async getInvoice(lnurl: string, amount: number, comment?: string) {
+    let response;
+
+    try {
+      var details = await this.getDetails(lnurl) as LNURLPayServiceResponse;
+      response = await axios.get<LNURLPaymentInfo | LNURLPaymentInfoError>(
+        details.callback,
+        {
+          params: {
+            amount: amount*1000,
+            comment: comment
+          },
+          // https://github.com/fiatjaf/lnurl-rfc/blob/luds/01.md#http-status-codes-and-content-type
+          validateStatus: () => true,
+        }
+      );
+
+      const isSuccessResponse = function (
+        obj: LNURLPaymentInfo | LNURLPaymentInfoError
+      ): obj is LNURLPaymentInfo {
+        return Object.prototype.hasOwnProperty.call(obj, "pr");
+      };
+
+      if (!isSuccessResponse(response.data)) {
+        throw new Error(response.data.reason);
+      }
+
+      return response.data;
+
+    } catch (e) {
+      const message = e instanceof Error ? `ERROR fetching invoice (${e.message})` : "";
+      throw new Error(message);
+    }
+  }
 };
 
 export default lnurl;

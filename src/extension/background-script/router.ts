@@ -8,6 +8,7 @@ import * as payments from "./actions/payments";
 import * as settings from "./actions/settings";
 import * as setup from "./actions/setup";
 import * as webln from "./actions/webln";
+import * as alby from "./actions/alby";
 
 const routes = {
   // webln calls can be made from the webln object injected in the websites. See inject-script
@@ -19,6 +20,9 @@ const routes = {
     signMessageOrPrompt: webln.signMessageOrPrompt,
     lnurl: webln.lnurl,
     makeInvoice: webln.makeInvoiceOrPrompt,
+  },
+  alby: {
+    lnurl: alby.lnurl
   },
   addAllowance: allowances.add,
   getAllowance: allowances.get,
@@ -65,6 +69,7 @@ const router = (path: FixMe) => {
   if (!path) {
     throw new Error("No action path provided to router");
   }
+
   const routeParts = path.split("/");
   const route = routeParts.reduce((route: FixMe, path: FixMe) => {
     return route[path];

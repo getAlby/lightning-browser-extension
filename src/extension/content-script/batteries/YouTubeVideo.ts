@@ -109,11 +109,15 @@ const pausePaymentStream = () => {
 
 const createBoostButton = (lnurl: string) => {
   
-  // Create react element and assign props
-  const boostButton = document.createElement('boost-button') as any;
-  boostButton.setAttribute('lnurl', 'sdafasdf');
-
-  document.body.appendChild(boostButton);
+  let boostButton = document.querySelector('boost-button');
+  if(!boostButton) {
+    boostButton = document.createElement('boost-button');
+    boostButton.setAttribute('lnurl', lnurl);
+    document.body.appendChild(boostButton);
+  }
+  else {
+    boostButton.setAttribute('lnurl', lnurl);
+  }
 
   return;
   // create loop for 10/10/1000/10000/etc

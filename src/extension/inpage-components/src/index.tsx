@@ -2,6 +2,13 @@ import './index.css';
 import BoostButton from './BoostButton';
 import reportWebVitals from './reportWebVitals';
 import ReactDOM from 'react-dom/client';
+import AlbyProvider from '../../content-script/providers/alby';
+
+declare global {
+  interface Window {
+    alby: AlbyProvider;
+  }
+}
 
 class BoostButtonHTMLElement extends HTMLElement {
   connectedCallback() {

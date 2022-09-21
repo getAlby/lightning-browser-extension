@@ -14,6 +14,7 @@
   "web_accessible_resources": [
     "js/inpageScript.bundle.js",
     "js/inpageScriptWebLN.bundle.js",
+    "js/inpageScriptAlby.bundle.js",
     "js/inpageComponents.bundle.js"
   ],
   "permissions": [
@@ -109,6 +110,18 @@
       "matches": ["*://*/*"],
       "run_at": "document_start",
       "js": ["js/contentScriptOnStart.bundle.js"]
+    },
+    {
+      "all_frames": false,
+      "matches": ["*://*/*"],
+      "run_at": "document_start",
+      "js": ["js/contentScriptOnStartTopFrame.bundle.js"]
+    },
+    {
+      "all_frames": true,
+      "matches": ["*://*/*"],
+      "run_at": "document_end",
+      "js": ["js/contentScriptOnEndAlby.bundle.js"]
     }
   ]
 }

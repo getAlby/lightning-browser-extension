@@ -1,10 +1,14 @@
 import React from 'react';
 import './BoostButton.css';
+import Particles from "react-particles";
+import type { Engine } from "tsparticles-engine";
+import { loadConfettiPreset } from "tsparticles-preset-confetti";
+
 
 export default class BoostButton extends React.Component<BoostButtonProps, BoostButtonState> {
 
-  buttonEl: React.RefObject<HTMLButtonElement>;
-  spanEl: React.RefObject<HTMLSpanElement>;
+  buttonEl: React.RefObject<HTMLDivElement>;
+  spanEl: React.RefObject<HTMLDivElement>;
 
   state: BoostButtonState = {
     text: "21"
@@ -17,19 +21,19 @@ export default class BoostButton extends React.Component<BoostButtonProps, Boost
     this.spanEl = React.createRef();
   }
 
-  mouseEnter(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  mouseEnter(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     if (!this.spanEl.current || !this.buttonEl.current) return;
 
     calculateAngle(e, this.spanEl.current, this.buttonEl.current);
   }
 
-  mouseMove(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  mouseMove(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     if (!this.spanEl.current || !this.buttonEl.current) return;
 
     calculateAngle(e, this.spanEl.current, this.buttonEl.current);
   }
 
-  mouseLeave(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  mouseLeave(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
 
     if (!this.spanEl.current || !this.buttonEl.current) return;
 
@@ -43,30 +47,24 @@ export default class BoostButton extends React.Component<BoostButtonProps, Boost
 
   }
 
-  click(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  async click(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    var invoice = await window.alby.lnurl(this.props.lnurl, { amount: 1 });
+    console.log(invoice);
+
     this.setState({ text: (parseInt(this.state.text) + 1).toString() });
   }
 
   render() {
-    return <button className="purple" onClick={(e) => this.click(e)} ref={this.buttonEl} onMouseEnter={(e) => this.mouseEnter(e)} onMouseMove={(e) => this.mouseMove(e)} onMouseLeave={(e) => this.mouseLeave(e)}>
-      <span ref={this.spanEl}>
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-         width="122" height="140">
-          <defs>
-  <pattern id="avatar" patternUnits="userSpaceOnUse" width="100" height="100">
-    <image href="https://secure.gravatar.com/avatar/07e22939e7672b38c56615068c4c715f?size=200&default=mm&rating=g" x="0" y="0" width="100" height="100" />
-  </pattern>
-</defs>
-          <path fill="url(#avatar)" d="M56.29165124598851 2.4999999999999996Q60.6217782649107 0 64.9519052838329 2.5L116.9134295108992 32.5Q121.2435565298214 35 121.2435565298214 40L121.2435565298214 100Q121.2435565298214 105 116.9134295108992 107.5L64.9519052838329 137.5Q60.6217782649107 140 56.29165124598851 137.5L4.330127018922193 107.5Q0 105 0 100L0 40Q0 35 4.330127018922194 32.5Z"></path></svg>
-        <span>🚀 {this.state.text}</span>
-      </span>
-    </button>
-      ;
+    return <div className="BoostButton" onClick={(e) => this.click(e)} ref={this.buttonEl} onMouseEnter={(e) => this.mouseEnter(e)} onMouseMove={(e) => this.mouseMove(e)} onMouseLeave={(e) => this.mouseLeave(e)}>   
+            <div ref={this.spanEl}>
+              <span>🐝</span>
+            </div>
+           </div>;
   }
 }
 
 
-let calculateAngle = function (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, item: HTMLElement, parent: HTMLElement) {
+let calculateAngle = function (e: React.MouseEvent<HTMLDivElement, MouseEvent>, item: HTMLElement, parent: HTMLElement) {
   let dropShadowColor = `rgba(0, 0, 0, 0.3)`
   const attribute = parent.getAttribute('data-filter-color');
   if (attribute) {
@@ -105,11 +103,26 @@ let calculateAngle = function (e: React.MouseEvent<HTMLButtonElement, MouseEvent
   // Add a filter shadow - this is more performant to animate than a regular box shadow.
   item.style.filter = `drop-shadow(${-calcShadowX}px ${calcShadowY}px 15px ${dropShadowColor})`;
 }
-
 class BoostButtonProps {
   lnurl!: string;
 }
 
 class BoostButtonState {
   text: string = "Boost";
+}
+
+export class ParticlesContainer extends React.PureComponent<{}> {
+  // this customizes the component tsParticles installation
+  async customInit(engine: Engine): Promise<void> {
+    // this adds the preset to tsParticles, you can safely use the
+    await loadConfettiPreset(engine);
+  }
+
+  render() {
+    const options = {
+      preset: "confetti",
+    };
+
+    return <Particles options={options} init={this.customInit} />;
+  }
 }

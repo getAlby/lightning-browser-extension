@@ -1,3 +1,48 @@
+.BoostButton {
+    position: fixed;
+    bottom: 31px;
+    right: 31px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+
+    box-shadow: none;
+    background: transparent;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.BoostButton div {
+    width: 100px;
+    height: 100px;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 2em;
+
+    background: linear-gradient(180deg, #ff7147, #e0417f);
+    font-size: 2rem;
+    color: white;
+
+    line-height: 3rem;
+    will-change: transform, filter;
+    transition: all 0.15s ease-out;
+    border-radius: 100px;
+    overflow: hidden;
+    display: block;
+    margin: 0px auto;
+    display: block;
+    transform: rotateX(0deg) rotateY(0deg) scale(1);
+    filter: drop-shadow(0 15px 15px rgba(0,0,0,0.3));
+    font-weight: 500;
+    perspective-origin: 0 0;
+    letter-spacing: 0;
+
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+}
+
 button {
     position: fixed;
     bottom: 31px;
