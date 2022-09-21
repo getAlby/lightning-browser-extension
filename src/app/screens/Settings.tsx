@@ -201,7 +201,7 @@ function Settings() {
                     name="currency"
                     value={settings.currency}
                     onChange={async (event) => {
-                      fetchAccountInfo({ isLatestRate: true });
+                      fetchAccountInfo();
                       await saveSetting({
                         currency: event.target.value,
                       });

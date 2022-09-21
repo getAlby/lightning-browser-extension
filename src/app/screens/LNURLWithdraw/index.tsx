@@ -13,13 +13,16 @@ import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import { getFiatValue } from "~/common/utils/currencyConvert";
 import type { LNURLWithdrawServiceResponse } from "~/types";
 
 function LNURLWithdraw() {
   const navigate = useNavigate();
   const navState = useNavigationState();
-  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFiatValue,
+  } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
   const origin = navState.origin;
@@ -41,7 +44,7 @@ function LNURLWithdraw() {
         setFiatValue(res);
       })();
     }
-  }, [valueSat, showFiat]);
+  }, [valueSat, showFiat, getFiatValue]);
 
   async function confirm() {
     try {

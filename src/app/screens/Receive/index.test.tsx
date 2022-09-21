@@ -11,6 +11,7 @@ jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
   settings: mockSettings,
   isLoading: false,
   updateSetting: jest.fn(),
+  getFiatValue: jest.fn(),
 });
 
 jest.mock("~/common/lib/api", () => {
@@ -30,11 +31,13 @@ describe("Receive", () => {
 
   test("call createInvoice if form is filled and submitted", async () => {
     const user = userEvent.setup();
-    render(
-      <MemoryRouter>
-        <Receive />
-      </MemoryRouter>
-    );
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <Receive />
+        </MemoryRouter>
+      );
+    });
 
     const makeInvoiceSpy = jest.spyOn(api, "makeInvoice");
 

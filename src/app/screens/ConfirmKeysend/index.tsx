@@ -13,7 +13,6 @@ import { useSettings } from "~/app/context/SettingsContext";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-import { getFiatValue } from "~/common/utils/currencyConvert";
 import getOriginData from "~/extension/content-script/originData";
 import type { OriginData } from "~/types";
 
@@ -30,7 +29,11 @@ function ConfirmKeysend(props: Props) {
     keyPrefix: "confirm_keysend",
   });
 
-  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFiatValue,
+  } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
   const [searchParams] = useSearchParams();
@@ -64,7 +67,7 @@ function ConfirmKeysend(props: Props) {
         setFiatAmount(res);
       }
     })();
-  }, [amount, showFiat]);
+  }, [amount, showFiat, getFiatValue]);
 
   useEffect(() => {
     if (showFiat) {
@@ -73,7 +76,7 @@ function ConfirmKeysend(props: Props) {
         setFiatBudgetAmount(res);
       })();
     }
-  }, [budget, showFiat]);
+  }, [budget, showFiat, getFiatValue]);
 
   async function confirm() {
     if (rememberMe && budget) {

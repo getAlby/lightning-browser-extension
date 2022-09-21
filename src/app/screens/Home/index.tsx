@@ -24,13 +24,16 @@ import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
 import lnurlLib from "~/common/lib/lnurl";
 import utils from "~/common/lib/utils";
-import { getFiatValue } from "~/common/utils/currencyConvert";
 import type { Allowance, Battery, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
 
 function Home() {
-  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFiatValue,
+  } = useSettings();
 
   const [allowance, setAllowance] = useState<Allowance | null>(null);
   const [isBlocked, setIsBlocked] = useState<boolean>(false);
@@ -135,7 +138,7 @@ function Home() {
     } catch (e) {
       console.error(e);
     }
-  }, [allowance, settings.showFiat]);
+  }, [allowance, settings.showFiat, getFiatValue]);
 
   function handleLightningDataMessage(response: {
     action: string;

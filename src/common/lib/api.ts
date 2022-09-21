@@ -12,6 +12,7 @@ import type {
   SettingsStorage,
   MessageInvoices,
   DbPayment,
+  MessageCurrencyRateGet,
   MessageLnurlAuth,
   MessageSettingsSet,
   LnurlAuthResponse,
@@ -119,6 +120,10 @@ export const lnurlAuth = (
 ): Promise<LnurlAuthResponse> =>
   utils.call<LnurlAuthResponse>("lnurlAuth", options);
 
+export const getCurrencyRate = async (
+  options: MessageCurrencyRateGet["args"]
+) => utils.call<{ rate: number }>("getCurrencyRate", options);
+
 export default {
   getAccountInfo,
   getAccounts,
@@ -140,4 +145,5 @@ export default {
   getBlocklist,
   getInvoices,
   lnurlAuth,
+  getCurrencyRate,
 };
