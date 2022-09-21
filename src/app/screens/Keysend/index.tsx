@@ -7,6 +7,7 @@ import SatButtons from "@components/SatButtons";
 import SuccessMessage from "@components/SuccessMessage";
 import TextField from "@components/form/TextField";
 import { useState, MouseEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Container from "~/app/components/Container";
@@ -24,6 +25,9 @@ function Keysend() {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
+  const { t } = useTranslation("translation", { keyPrefix: "keysend" });
+  const { t: tCommon } = useTranslation("common");
+
   async function confirm() {
     try {
       setLoading(true);
@@ -37,7 +41,11 @@ function Keysend() {
         }
       );
 
-      setSuccessMessage(`Payment sent! Preimage: ${payment.preimage}`);
+      setSuccessMessage(
+        t("success", {
+          preimage: payment.preimage,
+        })
+      );
 
       auth.fetchAccountInfo(); // Update balance.
     } catch (e) {
@@ -58,7 +66,7 @@ function Keysend() {
   return (
     <div>
       <Header
-        title="Send"
+        title={t("title")}
         headerLeft={
           <IconButton
             onClick={() => navigate("/send")}
@@ -74,7 +82,7 @@ function Keysend() {
 
               <dl className="text-sm shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg my-6 overflow-hidden">
                 <dt className="font-medium text-gray-800 dark:text-white">
-                  Send payment to
+                  {t("receiver.label")}
                 </dt>
                 <dd className="mb-4 dark:text-white break-all">
                   {destination}
@@ -82,7 +90,7 @@ function Keysend() {
                 <div className="font-semibold text-gray-500 mb-4">
                   <TextField
                     id="amount"
-                    label={"Amount (Satoshis)"}
+                    label={t("amount.label")}
                     type="number"
                     min={+0 / 1000}
                     max={+1000000 / 1000}
@@ -96,7 +104,7 @@ function Keysend() {
                 <div className="mb-5">
                   <Button
                     onClick={confirm}
-                    label="Confirm"
+                    label={tCommon("actions.confirm")}
                     fullWidth
                     primary
                     loading={loading}
@@ -109,7 +117,7 @@ function Keysend() {
                   href="#"
                   onClick={reject}
                 >
-                  Cancel
+                  {tCommon("actions.cancel")}
                 </a>
               </div>
             </>

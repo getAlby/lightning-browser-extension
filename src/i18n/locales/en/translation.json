@@ -418,6 +418,16 @@
         "description": "Send payment to: {{destination}}"
       }
     },
+    "keysend": {
+      "title": "Send",
+      "success": "Payment sent! Preimage: {{preimage}}",
+      "receiver": {
+        "label": "Send payment to"
+      },
+      "amount": {
+        "label": "Amount (Satoshi)"
+      }
+    },
     "confirm_payment": {
       "title": "Approve Payment",
       "success": "Payment sent!",

@@ -46,6 +46,6 @@ describe("Keysend", () => {
     });
 
     expect(await screen.findByText("Send payment to")).toBeInTheDocument();
-    expect(await screen.getByLabelText("Amount (Satoshis)")).toHaveValue(21);
+    expect(await screen.getByLabelText("Amount (Satoshi)")).toHaveValue(21);
   });
 });
