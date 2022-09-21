@@ -18,7 +18,7 @@ function Keysend() {
   const navState = useNavigationState();
   const navigate = useNavigate();
   const auth = useAccount();
-  const [amount, setAmount] = useState(navState.args?.amount as string);
+  const [amount, setAmount] = useState(navState.args?.amount || "");
   const customRecords = navState.args?.customRecords;
   const destination = navState.args?.destination;
   const [loading, setLoading] = useState(false);
