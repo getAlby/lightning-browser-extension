@@ -17,26 +17,12 @@ const albySendPayment = async ({
   comment?: string;
 }): Promise<boolean> => {
   const webln = new WebLNProvider();
-  const lnurlDetails = await lnurlLib.getDetails(lnurl); // throws if invalid.
-
-  const params = {
-    amount: amount * 1000, // user specified sum in MilliSatoshi
-    comment, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/12.md
-    // payerdata, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/18.md
-  };
-
-  // with lnurl do handshake
-  // check error/try/catch
-  const response = await axios.get(lnurlDetails.callback, {
-    params,
-    // https://github.com/fiatjaf/lnurl-rfc/blob/luds/01.md#http-status-codes-and-content-type
-    validateStatus: () => true,
-  });
-  console.log({ response });
-
+  const alby = new AlbyProvider();
+  
   try {
     await webln.enable();
     console.log("enable");
+    var response = await alby.lnurl("reneaaron@getalby.com", 100, "🚀") as any;
     const result = await webln.sendPayment(response.data.pr);
     console.log({ result });
     // confetti or something similar

@@ -1,4 +1,4 @@
-import AlbyProvider from "./../content-script/providers/alby";
+import AlbyProvider from "./providers/alby";
 
 declare global {
   interface Window {

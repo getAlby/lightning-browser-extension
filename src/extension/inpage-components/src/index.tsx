@@ -2,11 +2,13 @@ import './index.css';
 import BoostButton from './BoostButton';
 import reportWebVitals from './reportWebVitals';
 import ReactDOM from 'react-dom/client';
-import AlbyProvider from '../../content-script/providers/alby';
+import AlbyProvider from '../../inpage-script/providers/alby';
+import WebLNProvider from '../../ln/webln/index';
 
 declare global {
   interface Window {
     alby: AlbyProvider;
+    webln: WebLNProvider;
   }
 }
 
@@ -23,7 +25,7 @@ class BoostButtonHTMLElement extends HTMLElement {
   }
 }
 
-customElements.define('boost-button', BoostButtonHTMLElement);
+customElements.define('boost-buttonb', BoostButtonHTMLElement);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
