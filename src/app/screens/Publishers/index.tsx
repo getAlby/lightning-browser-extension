@@ -22,6 +22,28 @@ function Publishers() {
   }
 
   async function fetchData() {
+    const allowanceBatch = (allowance: Allowance) => {
+      if (allowance.remainingBudget > 0 && allowance.enabled)
+        return {
+          badge: {
+            label: "ACTIVE", //i18n
+            color: "green-bitcoin",
+            textColor: "white",
+          },
+        };
+
+      if (!allowance.enabled)
+        return {
+          badge: {
+            label: "DISABLED", //i18n
+            color: "red-bitcoin",
+            textColor: "white",
+          },
+        };
+
+      return {};
+    };
+
     try {
       const allowanceResponse = await utils.call<{
         allowances: Allowance[];
@@ -30,7 +52,7 @@ function Publishers() {
       const allowances: Publisher[] = allowanceResponse.allowances.reduce<
         Publisher[]
       >((acc, allowance) => {
-        if (!allowance?.id || !allowance.enabled) return acc;
+        if (!allowance?.id) return acc;
 
         const {
           id,
@@ -56,13 +78,7 @@ function Publishers() {
           percentage,
           totalBudget,
           usedBudget,
-          ...(allowance.remainingBudget > 0 && {
-            badge: {
-              label: "ACTIVE",
-              color: "green-bitcoin",
-              textColor: "white",
-            },
-          }),
+          ...allowanceBatch(allowance),
         });
 
         return acc;

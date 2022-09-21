@@ -15,7 +15,7 @@ import Menu from "../Menu";
 import DualCurrencyField from "../form/DualCurrencyField/index";
 
 export type Props = {
-  allowance: Pick<Allowance, "id" | "totalBudget">;
+  allowance: Pick<Allowance, "id" | "totalBudget" | "enabled">;
   onEdit?: () => void;
   onDelete?: () => void;
 };
@@ -72,10 +72,12 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         <Menu.Button className="flex items-center text-gray-500 hover:text-black transition-color duration-200 dark:hover:text-white">
           <GearIcon className="h-6 w-6" />
         </Menu.Button>
+
         <Menu.List position="right">
           <Menu.ItemButton onClick={openModal}>
             {tCommon("actions.edit")}
           </Menu.ItemButton>
+
           <Menu.ItemButton
             danger
             onClick={async () => {
@@ -93,6 +95,25 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             }}
           >
             {tCommon("actions.delete")}
+          </Menu.ItemButton>
+
+          <Menu.ItemButton
+            onClick={async () => {
+              try {
+                await utils.call("updateAllowance", {
+                  id: allowance.id,
+                  enabled: !allowance.enabled,
+                });
+
+                onEdit && onEdit();
+              } catch (e) {
+                console.error(e);
+                if (e instanceof Error) toast.error(`Error: ${e.message}`);
+              }
+            }}
+          >
+            {/* // i18n */}
+            {allowance.enabled ? "Disable" : "Enable"}
           </Menu.ItemButton>
         </Menu.List>
       </Menu>

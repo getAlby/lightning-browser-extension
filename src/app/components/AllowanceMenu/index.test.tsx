@@ -30,6 +30,7 @@ const props: Props = {
   allowance: {
     id: 1,
     totalBudget: 2000,
+    enabled: true,
   },
   onEdit: mock,
 };
@@ -81,5 +82,13 @@ describe("AllowanceMenu", () => {
     });
 
     await waitFor(() => expect(mock).toHaveBeenCalled());
+  });
+
+  test.skip("enable/disable", async () => {
+    render(
+      <MemoryRouter>
+        <AllowanceMenu {...props} />
+      </MemoryRouter>
+    );
   });
 });

@@ -1,4 +1,5 @@
 import AllowanceMenu from "@components/AllowanceMenu";
+import Badge from "@components/Badge";
 import Container from "@components/Container";
 import Progressbar from "@components/Progressbar";
 import PublisherCard from "@components/PublisherCard";
@@ -119,7 +120,15 @@ function Publisher() {
           <div className="flex justify-between items-center pt-8 pb-4">
             <dl>
               <dt className="text-sm font-medium text-gray-500">
-                {t("publisher.allowance.title")}
+                {t("publisher.allowance.title")}{" "}
+                {!allowance.enabled && (
+                  <Badge
+                    label="DISABLED" //i18n
+                    color="red-bitcoin"
+                    textColor="white"
+                    small
+                  />
+                )}
               </dt>
 
               <dd className="flex items-center font-bold text-xl dark:text-neutral-400">

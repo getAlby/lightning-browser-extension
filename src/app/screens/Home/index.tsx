@@ -4,6 +4,7 @@ import {
   ReceiveIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import AllowanceMenu from "@components/AllowanceMenu";
+import Badge from "@components/Badge";
 import Button from "@components/Button";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
@@ -58,9 +59,7 @@ function Home() {
       const url = new URL(currentTab.url as string);
       setCurrentUrl(url);
       const result = await api.getAllowance(url.host);
-      if (result.enabled) {
-        setAllowance(result);
-      }
+      setAllowance(result);
       const blocklistResult = await api.getBlocklist(url.host);
       if (blocklistResult.blocked) {
         setIsBlocked(blocklistResult.blocked);
@@ -299,8 +298,17 @@ function Home() {
           <div className="flex justify-between items-center py-3">
             <dl className="mb-0">
               <dt className="text-xs text-gray-500 dark:text-neutral-400">
-                {t("allowance_view.allowance")}
+                {t("allowance_view.allowance")}{" "}
+                {!allowance.enabled && (
+                  <Badge
+                    label="DISABLED" //i18n
+                    color="red-bitcoin"
+                    textColor="white"
+                    small
+                  />
+                )}
               </dt>
+
               <dd className="flex items-center mb-0 text-sm font-medium dark:text-neutral-400">
                 {+allowance.totalBudget > 0
                   ? `${allowance.usedBudget} / ${allowance.totalBudget} `
@@ -311,6 +319,7 @@ function Home() {
                 </div>
               </dd>
             </dl>
+
             <div className="flex items-center">
               <AllowanceMenu
                 allowance={allowance}
