@@ -106,17 +106,7 @@ function Prompt() {
                 />
               }
             />
-            <Route
-              // @TODO: https://github.com/getAlby/lightning-browser-extension/issues/1457
-              // Refactor: use navState for all route actions (instead of props/searchParams) #1457
-              path="confirmSignMessage"
-              element={
-                <ConfirmSignMessage
-                  message={navigationState.args?.message as string}
-                  origin={navigationState.origin as OriginData} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
-                />
-              }
-            />
+            <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
           </Route>
           <Route
             path="unlock"
