@@ -12,6 +12,7 @@ import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
+import type { OriginData } from "~/types";
 
 function ConfirmSignMessage() {
   const navState = useNavigationState();
@@ -21,7 +22,7 @@ function ConfirmSignMessage() {
   });
 
   const message = navState.args?.message as string;
-  const origin = navState.origin;
+  const origin = navState.origin as OriginData;
   //const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -60,12 +61,12 @@ function ConfirmSignMessage() {
         <Container justifyBetween maxWidth="sm">
           <div>
             <PublisherCard
-              title={origin?.name}
-              image={origin?.icon}
-              url={origin?.host}
+              title={origin.name}
+              image={origin.icon}
+              url={origin.host}
             />
             <ContentMessage
-              heading={t("content", { host: origin?.host })}
+              heading={t("content", { host: origin.host })}
               content={message}
             />
             {/*
@@ -99,9 +100,9 @@ function ConfirmSignMessage() {
       ) : (
         <Container maxWidth="sm">
           <PublisherCard
-            title={origin?.name}
-            image={origin?.icon}
-            url={origin?.host}
+            title={origin.name}
+            image={origin.icon}
+            url={origin.host}
           />
           <SuccessMessage
             message={successMessage}
