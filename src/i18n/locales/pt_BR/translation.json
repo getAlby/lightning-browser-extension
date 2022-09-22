@@ -11,7 +11,7 @@
       "intro": {
         "send": {
           "title": "Clicou pagou",
-          "description": "Realize pagamentos de forma simples e direta enquanto você navega na web."
+          "description": "Realize pagamentos enquanto você navega na web"
         },
         "paywall": {
           "title": "Chega de paywalls irritantes",
@@ -31,7 +31,7 @@
       },
       "set_password": {
         "title": "Definir uma senha de desbloqueio",
-        "description": "Os dados da sua carteira são criptografados com uma senha de desbloqueio. Não esqueça esta senha! Você precisa dela para usar a extensão Alby (neste navegador)",
+        "description": "Os dados armazenados na extensão Alby são criptografados com uma senha de desbloqueio. Não esqueça esta senha! Você precisa dela para usar a extensão Alby (neste navegador)",
         "choose_password": {
           "label": "Escolha uma senha de desbloqueio:"
         },
@@ -66,16 +66,16 @@
       "description": "Você precisa primeiro conectar-se a uma conta ou servidor para poder interagir com seus sites favoritos que aceitam pagamentos em bitcoin!",
       "alby": {
         "title": "Carteira Alby",
-        "description": "Registre ou acesse sua conta Alby",
+        "description": "Crie uma nova conta ou faça login na sua conta Alby",
         "pre_connect": {
           "title": "Sua Carteira Bitcoin na Alby",
-          "login_account": "Registrar ou acessar conta Alby.",
-          "host_wallet": "Nós cuidamos da sua carteira Bitcoin!",
+          "login_account": "Criar nova conta ou logar na sua conta Alby.",
+          "host_wallet": "A custódia dos seus bitcoins é por nossa conta!",
           "email": {
             "label": "Endereço de E-mail"
           },
           "optional_lightning_note": {
-            "part1": "Ao registrar uma conta Alby, você pode escolher um",
+            "part1": "Ao criar uma conta Alby, você pode escolher um",
             "part2": "Endereço Relâmpago",
             "part3": ". É o jeito mais simples para você receber Bitcoins na Rede Relâmpago.",
             "part4": "saiba mais"
@@ -86,7 +86,7 @@
             "title": "números e letras, pelo menos 3 caracteres"
           },
           "errors": {
-            "create_wallet_error": "Falha ao criar uma nova carteira"
+            "create_wallet_error": "Falha ao logar ou criar uma nova conta. Se precisar de ajuda, entre em contato com support@getalby.com"
           }
         }
       },
@@ -154,12 +154,12 @@
         "description": "Conectar no RaspiBlitz"
       },
       "bitcoin_beach": {
-        "description": "Registre uma conta ou conecte sua Bitcoin Beach (Galoy)",
+        "description": "Crie uma conta ou conecte sua Bitcoin Beach (Galoy)",
         "title": "Carteira Bitcoin Beach"
       },
       "bitcoin_jungle": {
         "title": "Carteira Bitcoin Jungle",
-        "description": "Registre uma conta ou conecte sua Bitcoin Jungle (Galoy)"
+        "description": "Crie uma conta ou conecte sua Bitcoin Jungle (Galoy)"
       },
       "btcpay": {
         "title": "Servidor BTCPay",
@@ -223,7 +223,7 @@
         "scan_qr": "Leia o Código QR para importar esta carteira na Zeus ou BlueWallet."
       },
       "remove": {
-        "confirm": "Tem certeza de que deseja remover a conta: {{name}}? \nEsta ação não pode ser desfeita. Se você usou essa conta para autenticar em sites, poderá perder o acesso a eles."
+        "confirm": "Tem certeza de que deseja remover a conta: {{name}}? \nEsta ação não pode ser desfeita. Se você usou essa conta para logar em sites, poderá perder o acesso a eles."
       }
     },
     "enable": {
@@ -248,15 +248,15 @@
     "settings": {
       "title": "Configurações",
       "website_enhancements": {
-        "title": "Gorjetas em redes sociais",
-        "subtitle": "Reconhece automaticamente Endereços Relâmpago em perfis do Twitter, Youtube, etc, facilitando o envio de gorjetas."
+        "title": "Pagamentos em redes sociais",
+        "subtitle": "Reconhece automaticamente Endereços Relâmpago em perfis do Twitter, Youtube, etc, facilitando o envio de pagamentos."
       },
       "lnurl_auth": {
         "title": "LNURL-Auth",
-        "hint": "é um protocolo de autenticação. Ele autentica o usuário usando assinaturas digitais. O protocolo não requer nenhuma outra informação de identificação, como senhas, e-mails, nomes de usuário... Com a Alby você pode usar suas contas bitcoin para acessar sites com segurança. <br /> Para ser compatível com outras carteiras, tivemos que fazer algumas alterações que você pode configurar aqui. <br /> <strong>Por padrão essas opções estão DESLIGADAS.</strong> Use-as apenas se você tiver contas antigas.",
+        "hint": "é um protocolo de autenticação. Ele autentica o usuário usando assinaturas digitais. O protocolo não requer nenhuma outra informação de identificação, como senhas, e-mails, nomes de usuário... Com a Alby você pode usar suas contas bitcoin para logar em sites com segurança. <br /> Para ser compatível com outras carteiras, tivemos que fazer algumas alterações que você pode configurar aqui. <br /> <strong>Por padrão essas opções estão DESLIGADAS.</strong> Use-as apenas se você tiver contas antigas.",
         "legacy_lnurl_auth_202207": {
           "title": "LNURL-Auth antigo",
-          "subtitle": "A geração de chave para a LNURL-auth mudou em (julho de 2022). A Alby não era compatível com outras implementações. Isso foi corrigido, mas agora uma nova chave está sendo usada como padrão. Se você usou a LNURL-auth para acessar sites antes de julho de 2022, ainda poderá acessá-los habilitando o método antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
+          "subtitle": "A geração de chave para a LNURL-auth mudou em (julho de 2022). A Alby não era compatível com outras implementações. Isso foi corrigido, mas agora uma nova chave está sendo usada como padrão. Se você usou a LNURL-auth para logar em sites antes de julho de 2022, ainda poderá fazer login habilitando o método antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
         },
         "legacy_lnurl_auth": {
           "title": "Método antigo de autenticação para LNDhub e LNBits",
@@ -364,7 +364,7 @@
       },
       "description": {
         "label": "Descrição",
-        "placeholder": "Por ex, quem está enviando este pagamento?"
+        "placeholder": "Ex. Quem está enviando este pagamento?"
       },
       "success": "Pagamento recebido!",
       "payment": {
@@ -498,7 +498,7 @@
       }
     },
     "confirm_or_cancel": {
-      "only_trusted": "Conecte-se apenas em sites que você confia."
+      "only_trusted": "Conecte-se apenas nos sites em que você confia."
     },
     "budget_control": {
       "remember": {
