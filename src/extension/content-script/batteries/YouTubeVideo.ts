@@ -40,7 +40,7 @@ async function getLNURL() {
   let text = "";
   document
     .querySelectorAll(
-      ":not([hidden]) #columns #primary #primary-inner #meta-contents #description .content"
+      "ytd-watch-flexy:not([hidden]) #columns #primary #primary-inner #meta-contents #description .content"
     )
     .forEach((e) => {
       text += ` ${e.textContent}`;
@@ -77,7 +77,6 @@ async function getLNURL() {
 async function youtubeDOMChanged(_: MutationRecord[]) {
   
   const result = await getLNURL();
-  console.log(result);
   updateBoostButton(result?.lnurl);
 
   if (!result?.lnurl) {
