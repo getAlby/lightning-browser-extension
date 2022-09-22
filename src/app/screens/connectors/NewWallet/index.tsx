@@ -130,7 +130,6 @@ export default function NewWallet() {
   return (
     <ConnectorForm
       title={t("pre_connect.title")}
-      submitLabel={tCommon("actions.continue")}
       submitLoading={loading}
       onSubmit={signup}
       submitDisabled={loading || password === "" || email === ""}
