@@ -11,7 +11,7 @@ import { SettingsProvider } from "~/app/context/SettingsContext";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
 import i18n from "~/i18n/i18nConfig";
 
-let connectorRoutes = getConnectorRoutes();
+const connectorRoutes = getConnectorRoutes();
 
 function getRoutes(
   connectorRoutes: {
@@ -52,7 +52,7 @@ function getRoutes(
   ];
 }
 
-let routes = getRoutes(connectorRoutes);
+const routes = getRoutes(connectorRoutes);
 
 const initialSteps: Step[] = routes.map((route) => ({
   id: route.name,
@@ -82,19 +82,6 @@ function App() {
 
   const [languageChanged, setLanguageChanged] = useState(false);
   i18n.on("languageChanged", () => {
-    connectorRoutes = getConnectorRoutes();
-    routes = getRoutes(connectorRoutes);
-
-    // Update name to new language only, don't update status
-    const tempSteps: Step[] = [];
-    routes.forEach((_, i) => {
-      tempSteps.push({
-        id: routes[i].name,
-        status: steps[i].status,
-      });
-    });
-    setSteps(tempSteps);
-
     // Trigger rerender to update displayed language
     setLanguageChanged(!languageChanged);
   });
@@ -108,15 +95,15 @@ function App() {
     });
     const updatedSteps = initialSteps.map((step, index) => {
       let status: Step["status"] = "upcoming";
-      if (index < activeStepIndex) {
-        status = "complete";
-      } else if (index === activeStepIndex) {
+      if (index === activeStepIndex) {
         status = "current";
+      } else if (index < activeStepIndex) {
+        status = "complete";
       }
       return { ...step, status };
     });
     setSteps(updatedSteps);
-  }, [location]);
+  }, [location, languageChanged]);
 
   return (
     <div>
