@@ -12,8 +12,6 @@ import Connector, {
   MakeInvoiceResponse,
   SignMessageArgs,
   SignMessageResponse,
-  VerifyMessageArgs,
-  VerifyMessageResponse,
   KeysendArgs,
 } from "./connector.interface";
 
@@ -136,19 +134,6 @@ class Eclair implements Connector {
       data: {
         message: args.message,
         signature: signature as string,
-      },
-    };
-  }
-
-  async verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse> {
-    const { valid } = await this.request("/verifymessage", {
-      msg: Base64.stringify(UTF8.parse(args.message)),
-      sig: args.signature,
-    });
-
-    return {
-      data: {
-        valid,
       },
     };
   }
