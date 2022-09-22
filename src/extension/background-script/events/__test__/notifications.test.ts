@@ -19,17 +19,18 @@ jest.mock("~/extension/background-script/actions/cache/getCurrencyRate", () => {
 });
 
 const settings: SettingsStorage = {
-  exchange: "coindesk",
+  browserNotifications: true,
   currency: CURRENCIES["USD"],
-  showFiat: true,
-  websiteEnhancements: true,
-  legacyLnurlAuth: false,
-  isUsingLegacyLnurlAuthKey: false,
-  userName: "",
-  userEmail: "",
-  locale: "",
-  theme: "",
   debug: false,
+  exchange: "coindesk",
+  isUsingLegacyLnurlAuthKey: false,
+  legacyLnurlAuth: false,
+  locale: "",
+  showFiat: true,
+  theme: "",
+  userEmail: "",
+  userName: "",
+  websiteEnhancements: true,
 };
 
 const mockState = {
