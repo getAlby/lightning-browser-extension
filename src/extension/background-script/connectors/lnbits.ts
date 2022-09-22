@@ -10,7 +10,9 @@ import Connector, {
   SendPaymentResponse,
   CheckPaymentArgs,
   CheckPaymentResponse,
+  ConnectorInvoice,
   GetInfoResponse,
+  GetInvoicesResponse,
   GetBalanceResponse,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -65,12 +67,48 @@ class LnBits implements Connector {
   }
 
   // not yet implemented
-  getInvoices() {
-    console.error(
-      `Not yet supported with the currently used account: ${this.constructor.name}`
-    );
-    return new Error(
-      `${this.constructor.name}: "getInvoices" is not yet supported. Contact us if you need it.`
+  async getInvoices(): Promise<GetInvoicesResponse> {
+    return this.request(
+      "GET",
+      "/api/v1/payments",
+      this.config.adminkey,
+      undefined
+    ).then(
+      (
+        data: {
+          checking_id: string;
+          pending: boolean;
+          amount: string;
+          fee: number;
+          memo: string;
+          time: number;
+          bolt11: string;
+          preimage: string;
+          payment_hash: string;
+          wallet_id: string;
+          webhook: string;
+          webhook_status: string;
+        }[]
+      ) => {
+        const invoices: ConnectorInvoice[] = data.map(
+          (invoice, index): ConnectorInvoice => {
+            return {
+              id: `${invoice.checking_id}-${index}`,
+              memo: invoice.memo,
+              preimage: invoice.preimage,
+              settled: !invoice.pending,
+              settleDate: invoice.time * 1000,
+              totalAmount: `${parseInt(invoice.amount) / 1000}`,
+              type: "received",
+            };
+          }
+        );
+        return {
+          data: {
+            invoices,
+          },
+        };
+      }
     );
   }
 
