@@ -1,5 +1,6 @@
 import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-import Button from "@components/Button";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import ContentMessage from "@components/ContentMessage";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import PublisherCard from "@components/PublisherCard";
@@ -21,7 +22,7 @@ function Keysend() {
   const auth = useAccount();
   const [amount, setAmount] = useState(navState.args?.amount || "");
   const customRecords = navState.args?.customRecords;
-  const destination = navState.args?.destination;
+  const destination = navState.args?.destination as string;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -64,7 +65,7 @@ function Keysend() {
   }
 
   return (
-    <div>
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <Header
         title={t("title")}
         headerLeft={
@@ -74,58 +75,45 @@ function Keysend() {
           />
         }
       />
-      <div className="py-4">
-        <Container maxWidth="sm">
-          {!successMessage ? (
-            <>
+      {!successMessage ? (
+        <>
+          <Container justifyBetween maxWidth="sm">
+            <div>
               {destination && <PublisherCard title={destination} />}
-
-              <dl className="text-sm shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg my-6 overflow-hidden">
-                <dt className="font-medium text-gray-800 dark:text-white">
-                  {t("receiver.label")}
-                </dt>
-                <dd className="mb-4 dark:text-white break-all">
-                  {destination}
-                </dd>
-                <div className="font-semibold text-gray-500 mb-4">
-                  <TextField
-                    id="amount"
-                    label={t("amount.label")}
-                    type="number"
-                    min={+0 / 1000}
-                    max={+1000000 / 1000}
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                  />
-                  <SatButtons onClick={setAmount} />
-                </div>
-              </dl>
-              <div className="text-center">
-                <div className="mb-5">
-                  <Button
-                    onClick={confirm}
-                    label={tCommon("actions.confirm")}
-                    fullWidth
-                    primary
-                    loading={loading}
-                    disabled={loading || !amount}
-                  />
-                </div>
-
-                <a
-                  className="underline text-sm text-gray-500"
-                  href="#"
-                  onClick={reject}
-                >
-                  {tCommon("actions.cancel")}
-                </a>
+              <ContentMessage
+                heading={t("receiver.label")}
+                content={destination}
+              />
+              <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden">
+                <TextField
+                  id="amount"
+                  label={t("amount.label")}
+                  type="number"
+                  min={+0 / 1000}
+                  max={+1000000 / 1000}
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                />
+                <SatButtons onClick={setAmount} />
               </div>
-            </>
-          ) : (
+            </div>
+            <ConfirmOrCancel
+              label={tCommon("actions.confirm")}
+              onConfirm={confirm}
+              onCancel={reject}
+              loading={loading}
+              disabled={loading || !amount}
+            />
+          </Container>
+        </>
+      ) : (
+        <Container maxWidth="sm">
+          {destination && <PublisherCard title={destination} />}
+          <div className="my-4">
             <SuccessMessage message={successMessage} onClose={reject} />
-          )}
+          </div>
         </Container>
-      </div>
+      )}
     </div>
   );
 }
