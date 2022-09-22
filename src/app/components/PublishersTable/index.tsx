@@ -20,6 +20,7 @@ export default function PublishersTable({
   const { t: tComponents } = useTranslation("components", {
     keyPrefix: "publishers_table",
   });
+  const { t: tCommon } = useTranslation("common");
 
   return (
     <div className="shadow overflow-hidden rounded-lg">
@@ -62,7 +63,9 @@ export default function PublishersTable({
                       {publisher.host} • {publisher.paymentsCount}{" "}
                       {tComponents("payments")}{" "}
                       {publisher.paymentsAmount > 0 && (
-                        <span>({publisher.paymentsAmount} sats)</span>
+                        <span>
+                          ({publisher.paymentsAmount} {tCommon("sats")})
+                        </span>
                       )}
                     </div>
                   </div>
@@ -72,8 +75,8 @@ export default function PublishersTable({
                 {publisher.totalBudget > 0 && (
                   <div className="ml-40">
                     <p className="text-lg text-gray-500 mb-0 dark:text-neutral-400">
-                      {publisher.usedBudget} / {publisher.totalBudget} sats{" "}
-                      {tComponents("used")}
+                      {publisher.usedBudget} / {publisher.totalBudget}{" "}
+                      {tCommon("sats")} {tComponents("used")}
                     </p>
                     <div className="relative mt-2 ml-auto">
                       <div className="flex items-center justify-end">
