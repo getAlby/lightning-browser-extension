@@ -1,7 +1,7 @@
 import getOriginData from "../originData";
-import { findLnurlFromYouTubeAboutPage } from "./YouTubeChannel";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 import updateBoostButton from "./inpage-components/boost-button";
+import axios from "axios";
 
 declare global {
   interface Window {
@@ -9,13 +9,13 @@ declare global {
   }
 }
 
-const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
-
+const urlMatcher = /^https:\/\/www\.youtube.com\/.*/;
+const channelUrlMatcher = /^https:\/\/www\.youtube.com\/(channel|c)\/([^/]+).*/;
 const battery = async (): Promise<void> => {
 
   if (!window.LBE_MUTATION_OBSERVER) {
     window.LBE_MUTATION_OBSERVER = new MutationObserver(
-      debounce(function (_: MutationRecord[]) { youtubeDOMChanged(_); }, 500, false)
+      debounce(youtubeDOMChanged, 500, false)
     );
   }
 
@@ -26,7 +26,7 @@ const battery = async (): Promise<void> => {
   
   // On slow connections the observer is added after the DOM is fully loaded.
   // Therefore the callback twitterDOMChanged needs to also be called manually.
-  youtubeDOMChanged([]);
+  youtubeDOMChanged();
 };
 
 const YouTubeVideo = {
@@ -36,7 +36,13 @@ const YouTubeVideo = {
 
 export default YouTubeVideo;
 
-async function getLNURL() {
+async function getVideoInfo() {
+  if (!document.location.toString().match(/^https:\/\/www\.youtube.com\/watch.*/)) {
+    return;
+  }
+
+  console.log("getvideoinfo()");
+
   let text = "";
   document
     .querySelectorAll(
@@ -71,30 +77,39 @@ async function getLNURL() {
     }
   }
 
-  return { lnurl: lnurl, name: channelLink.textContent };
+  const imageUrl =
+  document.querySelector<HTMLImageElement>(
+    "#columns #primary #primary-inner #meta-contents img"
+  )?.src || "";
+
+  return { lnurl, name: channelLink.textContent, imageUrl };
 }
 
-async function youtubeDOMChanged(_: MutationRecord[]) {
+async function youtubeDOMChanged() {
   
-  const result = await getLNURL();
-  updateBoostButton(result?.lnurl);
 
-  if (!result?.lnurl) {
+  let info = await getChannelInfo();
+  if(!info) {
+    info = await getVideoInfo();
+  }
+
+  console.log("ℹ️", info);
+  
+  updateBoostButton(info?.lnurl);
+
+  if (!info?.lnurl) {
     return;
   }
 
-  const imageUrl =
-    document.querySelector<HTMLImageElement>(
-      "#columns #primary #primary-inner #meta-contents img"
-    )?.src || "";
+
   setLightningData([
     {
       method: "lnurl",
-      address: result.lnurl,
+      address: info.lnurl,
       ...getOriginData(),
-      name: result?.name ?? "",
+      name: info?.name ?? "",
       description: "", // we can not reliably find a description (the meta tag might be of a different video)
-      icon: imageUrl,
+      icon: info.imageUrl,
     },
   ]);
 }
@@ -112,6 +127,85 @@ function debounce(func, wait, immediate) {
   };
 }
 
+async function getChannelInfo() {
+  const match = document.location.toString().match(channelUrlMatcher);
+  if (!match) {
+    return;
+  }
+  
+  console.log("getChannelInfo()");
+  const name =
+    document.querySelector(
+      "#inner-header-container yt-formatted-string.ytd-channel-name"
+    )?.textContent || "";
+  const imageUrl =
+    document.querySelector<HTMLImageElement>(
+      "#channel-header-container yt-img-shadow#avatar img"
+    )?.src || "";
+
+  let lnurl;
+
+  const headerLink = document.querySelector<HTMLAnchorElement>(
+    "#channel-header #primary-links a[href*='getalby.com']"
+  );
+  // check either for an alby link in the header or
+  // check in the channel about page
+  if (headerLink) {
+    lnurl = findLnurlFromHeaderLink(headerLink);
+  } else {
+    lnurl = await findLnurlFromYouTubeAboutPage(match[1], match[2]);
+  }
+
+  if (!lnurl) return;
+
+  return {
+    lnurl,
+    name,
+    imageUrl
+  }
+}
+
+const findLnurlFromHeaderLink = (
+  headerLink: HTMLAnchorElement
+): string | null => {
+  const url = new URL(headerLink.href);
+  const text = url.searchParams.get("q") + " ";
+  return findLightningAddressInText(text);
+};
+
+const findLnurlFromYouTubeAboutPage = (
+  path: string,
+  name: string
+): Promise<string | null> => {
+  return axios
+    .get<Document>(`https://www.youtube.com/${path}/${name}/about`, {
+      responseType: "document",
+    })
+    .then((response) => {
+      let lnurl;
+
+      const headerLink = response.data.querySelector<HTMLAnchorElement>(
+        "#channel-header #primary-links a[href*='getalby.com']"
+      );
+      if (headerLink) {
+        lnurl = findLnurlFromHeaderLink(headerLink);
+        if (lnurl) return lnurl;
+      }
+
+      const descriptionElement: HTMLMetaElement | null =
+        response.data.querySelector('meta[itemprop="description"]');
+
+      if (!descriptionElement) {
+        return null;
+      }
+      lnurl = findLightningAddressInText(descriptionElement.content);
+      return lnurl;
+    })
+    .catch((e) => {
+      console.error(e);
+      return null;
+    });
+};
 
 /* 
 let streamInterval: FixMe;

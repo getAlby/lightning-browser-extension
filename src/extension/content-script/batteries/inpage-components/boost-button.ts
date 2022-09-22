@@ -1,4 +1,5 @@
 export default function updateBoostButton(lnurl?: string) {
+    console.log("⚡", lnurl)
     if(!lnurl) {
         document.querySelector('boost-button')?.remove()
         return;
