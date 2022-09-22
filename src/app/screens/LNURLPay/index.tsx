@@ -281,7 +281,7 @@ function LNURLPay() {
                 onClick={() => {
                   if (successAction.url) utils.openUrl(successAction.url);
                 }}
-                label="Open"
+                label={tCommon("open")}
                 primary
               />
             </div>
@@ -311,7 +311,7 @@ function LNURLPay() {
 
         <div className="text-center">
           <button className="underline text-sm text-gray-500" onClick={close}>
-            Close
+            {tCommon("close")}
           </button>
         </div>
       </Container>
@@ -346,7 +346,9 @@ function LNURLPay() {
                       {details.minSendable === details.maxSendable && (
                         <>
                           <Dt>{t("amount.label")}</Dt>
-                          <Dd>{`${+details.minSendable / 1000} sats`}</Dd>
+                          <Dd>{`${+details.minSendable / 1000} ${tCommon(
+                            "sats"
+                          )}`}</Dd>
                         </>
                       )}
                     </>
