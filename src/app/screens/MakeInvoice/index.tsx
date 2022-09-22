@@ -10,7 +10,7 @@ import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import type { RequestInvoiceArgs } from "~/types";
+import type { OriginData, RequestInvoiceArgs } from "~/types";
 
 const Dt = ({ children }: { children: React.ReactNode }) => (
   <dt className="font-medium text-gray-800 dark:text-white">{children}</dt>
@@ -22,6 +22,7 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
 
 function MakeInvoice() {
   const navState = useNavigationState();
+  const origin = navState.origin as OriginData;
   const invoiceAttributes = navState.args
     ?.invoiceAttributes as RequestInvoiceArgs;
   const amountEditable = navState.args?.amountEditable;
@@ -84,9 +85,9 @@ function MakeInvoice() {
       <Container justifyBetween maxWidth="sm">
         <div>
           <PublisherCard
-            title={navState.origin?.name}
-            image={navState.origin?.icon}
-            url={navState.origin?.host}
+            title={origin.name}
+            image={origin.icon}
+            url={origin.host}
           />
 
           <div className="pt-4">
