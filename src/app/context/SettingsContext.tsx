@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import i18n from "i18next";
 import { useState, useEffect, createContext, useContext } from "react";
 import { toast } from "react-toastify";
@@ -71,6 +72,12 @@ export const SettingsProvider = ({
   // update locale on every change
   useEffect(() => {
     i18n.changeLanguage(settings.locale);
+
+    // need to switch i.e. `pt_BR` to `pt-br`
+    const daysjsLocaleFormatted = settings.locale
+      .toLocaleLowerCase()
+      .replace("_", "-");
+    dayjs.locale(daysjsLocaleFormatted);
   }, [settings.locale]);
 
   // update theme on every change

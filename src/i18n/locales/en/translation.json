@@ -225,10 +225,10 @@
       }
     },
     "enable": {
+      "title": "Connect",
       "allow": "Allow {{host}} to:",
       "request1": "Request approval for transactions",
       "request2": "Request invoices and lightning information",
-      "connect": "Connect",
       "block_and_ignore": "Block and ignore {{host}}"
     },
     "unlock": {
@@ -320,11 +320,13 @@
         "confirm_password": {
           "label": "Confirm new password:"
         },
+        "submit": { "label": "Change" },
         "errors": {
           "enter_password": "Please enter a new unlock password.",
           "confirm_password": "Please confirm your password.",
           "mismatched_password": "Passwords don't match."
-        }
+        },
+        "success": "Password changed successfully"
       }
     },
     "send": {
@@ -335,21 +337,49 @@
       "input": {
         "label": "Invoice, Lightning Address or LNURL",
         "placeholder": "Paste invoice, lnurl or lightning address"
-      },
-      "lnurlpay": {
-        "amount": {
-          "label": "Amount"
-        },
-        "comment": {
-          "label": "Comment"
-        },
-        "name": {
-          "label": "Name"
-        },
-        "email": {
-          "label": "Email"
-        }
       }
+    },
+    "lnurlpay": {
+      "amount": {
+        "label": "Amount"
+      },
+      "comment": {
+        "label": "Comment"
+      },
+      "name": {
+        "label": "Name"
+      },
+      "email": {
+        "label": "Email"
+      }
+    },
+    "lnurlauth": {
+      "title": "Authentication",
+      "content_message": {
+        "heading": "Do you want to login to"
+      },
+      "submit": "Login",
+      "success": "Authenticated successfully",
+      "errors": {
+        "status": "Error: Auth status is not ok"
+      }
+    },
+    "lnurlchannel": {
+      "title": "Channel Request",
+      "content_message": {
+        "heading": "Request a channel from the node"
+      },
+      "success": "Channel request sent successfully"
+    },
+    "lnurlwithdraw": {
+      "title": "Withdraw",
+      "content_message": {
+        "heading": "Amount"
+      },
+      "amount": {
+        "label": "Amount"
+      },
+      "success": "Withdraw request sent successfully"
     },
     "receive": {
       "title": "Receive",
@@ -438,7 +468,9 @@
     "optional": "Optional",
     "feedback": "Feedback",
     "copied": "Copied!",
+    "description": "Description",
     "actions": {
+      "back": "Back",
       "delete": "Delete",
       "edit": "Edit",
       "next": "Next",
@@ -535,6 +567,15 @@
           "add": "Add a new account",
           "manage": "Manage accounts"
         }
+      }
+    },
+    "publishers_table": {
+      "payments": "payments",
+      "used": "used"
+    },
+    "badge": {
+      "label": {
+        "active": "ACTIVE"
       }
     }
   }
