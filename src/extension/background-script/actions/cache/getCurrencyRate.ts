@@ -67,13 +67,12 @@ export const getCurrencyRateFromCache = async (currency: CURRENCIES) => {
         dayjs(currencyRateCache?.timestamp).add(10, "minute")
       );
 
-      if (isRateNewEnough) {
+      if (isRateNewEnough && currencyRateCache.rate) {
         return currencyRateCache.rate;
       }
 
       const rate = await getFiatBtcRate(currency);
       await storeCurrencyRate({ rate, currency });
-      // switch rate to be SATS not BTC?
       return rate;
     }
   }
