@@ -56,7 +56,7 @@ function LNURLAuth() {
           msg.reply(response);
         }
       } else {
-        setErrorMessage("Error: Auth status is not ok");
+        setErrorMessage(t("errors.status"));
       }
     } catch (e) {
       console.error(e);

@@ -359,7 +359,10 @@
         "heading": "Do you want to login to"
       },
       "submit": "Login",
-      "success": "Authenticated successfully"
+      "success": "Authenticated successfully",
+      "errors": {
+        "status": "Error: Auth status is not ok"
+      }
     },
     "lnurlchannel": {
       "title": "Channel Request",
