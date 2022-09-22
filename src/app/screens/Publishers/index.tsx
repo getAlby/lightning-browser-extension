@@ -58,7 +58,7 @@ function Publishers() {
           usedBudget,
           ...(allowance.remainingBudget > 0 && {
             badge: {
-              label: "ACTIVE",
+              label: "active",
               color: "green-bitcoin",
               textColor: "white",
             },
