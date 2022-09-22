@@ -92,6 +92,7 @@ export interface SignMessageArgs {
 
 export interface SignMessageResponse {
   data: {
+    message: string;
     signature: string;
   };
 }

@@ -106,6 +106,7 @@ class CitadelConnector implements Connector {
     await this.ensureLogin();
     return {
       data: {
+        message: args.message,
         signature: await this.citadel.middleware.lightning.signMessage(
           args.message
         ),

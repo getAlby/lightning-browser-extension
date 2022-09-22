@@ -160,6 +160,7 @@ class LnBits implements Connector {
     }
     return Promise.resolve({
       data: {
+        message: args.message,
         signature: signedMessageDERHex,
       },
     });
