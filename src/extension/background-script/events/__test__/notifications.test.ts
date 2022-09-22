@@ -132,7 +132,7 @@ describe("Payment notifications", () => {
     });
   });
 
-  test("success via lnaddress from popup without fiat-conversion turned on", async () => {
+  test("success via lnaddress from popup without fiat-conversion turned off", async () => {
     const mockStateNoFiat = {
       settings: { ...settings, showFiat: false },
     };
@@ -144,6 +144,22 @@ describe("Payment notifications", () => {
 
     expect(notifySpy).toHaveBeenCalledWith({
       title: "✅ Successfully paid 1 sat to »escapedcat@getalby.com«",
+      message: "Fee: 0 sats",
+    });
+  });
+
+  test("success via lnaddress from popup without fiat-conversion turned on", async () => {
+    const mockStateNoFiat = {
+      settings: { ...settings },
+    };
+
+    state.getState = jest.fn().mockReturnValue(mockStateNoFiat);
+
+    const notifySpy = jest.spyOn(utils, "notify");
+    await paymentSuccessNotification("ln.sendPayment.success", data);
+
+    expect(notifySpy).toHaveBeenCalledWith({
+      title: "✅ Successfully paid 1 sat ($0.00) to »escapedcat@getalby.com«",
       message: "Fee: 0 sats",
     });
   });
