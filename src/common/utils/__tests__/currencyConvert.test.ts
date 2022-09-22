@@ -6,7 +6,7 @@ describe("Currency coversion utils", () => {
   test("getFiatValue", async () => {
     const result = await getFiatValue({
       amount: 123456789,
-      rate: 29991.836,
+      rate: 0.00029991836,
       currency: CURRENCIES["USD"],
     });
 
