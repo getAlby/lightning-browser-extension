@@ -17,7 +17,7 @@ export default function Features({ features }: Props) {
             <div className="flex items-center justify-center h-12 w-12 rounded-md bg-orange-bitcoin text-white">
               <feature.icon className="h-6 w-6" aria-hidden="true" />
             </div>
-            <p className="mt-5 text-lg leading-6 font-medium text-gray-900 dark:text-white">
+            <p className="mt-5 text-lg font-medium text-gray-900 dark:text-white">
               {feature.name}
             </p>
           </dt>

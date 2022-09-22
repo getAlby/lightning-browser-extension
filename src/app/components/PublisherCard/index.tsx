@@ -32,7 +32,7 @@ export default function PublisherCard({
       className={classNames(
         isSmall ? "p-2" : "flex-col justify-center p-4",
         isCard && "drop-shadow rounded-lg mt-4",
-        !image && "py-8",
+        !image && "h-24",
         "flex items-center bg-white dark:bg-surface-02dp"
       )}
     >
@@ -59,7 +59,7 @@ export default function PublisherCard({
       >
         <h2
           className={
-            "text-xl leading-5 font-semibold dark:text-white overflow-hidden text-ellipsis " +
+            "text-xl font-semibold dark:text-white overflow-hidden text-ellipsis " +
             (isSmall ? "my-1" : "my-2")
           }
         >
