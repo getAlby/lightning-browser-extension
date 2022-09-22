@@ -44,7 +44,7 @@ const battery = async (): Promise<void> => {
   const name = channelLink.textContent || "";
   const imageUrl =
     document.querySelector<HTMLImageElement>(
-      "#columns #primary #primary-inner #meta-contents img"
+      "#columns #primary #primary-inner #owner #avatar img"
     )?.src || "";
   setLightningData([
     {
