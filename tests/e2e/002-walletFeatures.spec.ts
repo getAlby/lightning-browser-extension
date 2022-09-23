@@ -60,7 +60,7 @@ test.describe("Wallet features", () => {
     await browser.close();
   });
 
-  test("send to a LN-adddress", async () => {
+  test("send to a LN-address", async () => {
     const { page, browser, extensionId } = await loadExtension();
     await new Promise((r) => setTimeout(r, 1000));
 
@@ -90,7 +90,7 @@ test.describe("Wallet features", () => {
 
     page.waitForSelector("label");
     await findByText($optionsdocument, "bumi@getalby.com");
-    await findByText($optionsdocument, "Sats for bumi");
+    await findByText($optionsdocument, "Sats for Bumi");
 
     await browser.close();
   });
