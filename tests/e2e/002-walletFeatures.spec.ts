@@ -90,7 +90,7 @@ test.describe("Wallet features", () => {
 
     page.waitForSelector("label");
     await findByText($optionsdocument, "bumi@getalby.com");
-    await findByText($optionsdocument, "Sats for bumi");
+    await findByText($optionsdocument, "Sats for Bumi");
 
     await browser.close();
   });
