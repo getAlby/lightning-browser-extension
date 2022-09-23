@@ -66,7 +66,27 @@ class LnBits implements Connector {
     return new Error("Not yet supported with the currently used account.");
   }
 
-  // not yet implemented
+  /*
+  LNBits Swagger Docs: https://legend.lnbits.org/devs/swagger.html#/default/api_payments_api_v1_payments_get
+  Sample Response:
+    [
+      {
+        "checking_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "pending": false,
+        "amount": 2000,
+        "fee": 0,
+        "memo": "LNbits",
+        "time": 1000000000,
+        "bolt11": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "preimage": "0000000000000000000000000000000000000000000000000000000000000000",
+        "payment_hash": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "extra": {},
+        "wallet_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "webhook": null,
+        "webhook_status": null
+      }
+    ]
+  */
   async getInvoices(): Promise<GetInvoicesResponse> {
     return this.request(
       "GET",
