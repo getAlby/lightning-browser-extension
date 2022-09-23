@@ -71,24 +71,7 @@ function Prompt() {
             <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route path="makeInvoice" element={<MakeInvoice />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
-            <Route
-              // @TODO: https://github.com/getAlby/lightning-browser-extension/issues/1457
-              // Refactor: use navState for all route actions (instead of props/searchParams) #1457
-              path="confirmKeysend"
-              element={
-                <ConfirmKeysend
-                  destination={navigationState.args?.destination as string}
-                  valueSat={navigationState.args?.amount as string}
-                  customRecords={
-                    navigationState.args?.customRecords as Record<
-                      string,
-                      string
-                    >
-                  }
-                  origin={navigationState.origin as OriginData} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
-                />
-              }
-            />
+            <Route path="confirmKeysend" element={<ConfirmKeysend />} />
             <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
           </Route>
           <Route
