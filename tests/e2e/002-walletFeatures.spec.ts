@@ -60,7 +60,7 @@ test.describe("Wallet features", () => {
     await browser.close();
   });
 
-  test("send to a LN-adddress", async () => {
+  test("send to a LN-address", async () => {
     const { page, browser, extensionId } = await loadExtension();
     await new Promise((r) => setTimeout(r, 1000));
 
