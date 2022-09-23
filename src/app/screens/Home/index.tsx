@@ -261,22 +261,20 @@ function Home() {
                       });
                     }
                   } else if (lnData[0].method === "keysend") {
-                    // @TODO: https://github.com/getAlby/lightning-browser-extension/issues/1457
-                    // Refactor: use navState for all route actions (instead of props/searchParams) #1457
-                    const params = new URLSearchParams({
-                      destination: lnData[0].address,
-                      origin: encodeURIComponent(JSON.stringify(originData)),
+                    navigate("/keysend", {
+                      state: {
+                        origin: originData,
+                        args: {
+                          destination: lnData[0].address,
+                          customRecords:
+                            lnData[0].customKey && lnData[0].customValue
+                              ? {
+                                  [lnData[0].customKey]: lnData[0].customValue,
+                                }
+                              : {},
+                        },
+                      },
                     });
-                    if (lnData[0].customKey && lnData[0].customValue) {
-                      const customRecords = {
-                        [lnData[0].customKey]: lnData[0].customValue,
-                      };
-                      params.set(
-                        "customRecords",
-                        JSON.stringify(customRecords)
-                      );
-                    }
-                    navigate(`/keysend?${params.toString()}`);
                   }
                 } catch (e) {
                   if (e instanceof Error) toast.error(e.message);
