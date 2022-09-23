@@ -231,7 +231,8 @@
       "request1": "Solicitar aprobación de transacciones",
       "request2": "Solicitar facturas e información sobre rayos",
       "connect": "Conectar",
-      "block_and_ignore": "Bloquear e ignorar {{host}}"
+      "block_and_ignore": "Bloquear e ignorar {{host}}",
+      "title": "Conectar"
     },
     "unlock": {
       "unlock_to_continue": "Desbloquear para continuar",
@@ -322,6 +323,10 @@
           "enter_password": "Por favor, introduzca una contraseña.",
           "confirm_password": "Por favor, confirme su contraseña.",
           "mismatched_password": "Las contraseñas no coinciden."
+        },
+        "success": "La contraseña se cambió correctamente",
+        "submit": {
+          "label": "Cambiar"
         }
       },
       "browser_notifications": {
@@ -426,6 +431,34 @@
       "actions": {
         "pay_now": "Pagar Ahora"
       }
+    },
+    "lnurlauth": {
+      "title": "Autenticación",
+      "content_message": {
+        "heading": "Quieres iniciar sesión en"
+      },
+      "submit": "Sesión",
+      "success": "Autenticado correctamente",
+      "errors": {
+        "status": "Error: El estado de autenticación no es correcto"
+      }
+    },
+    "lnurlchannel": {
+      "content_message": {
+        "heading": "Solicitar un canal desde el nodo"
+      },
+      "success": "Solicitud de canal enviada correctamente",
+      "title": "Solicitud de Canal"
+    },
+    "lnurlwithdraw": {
+      "title": "Retirar",
+      "content_message": {
+        "heading": "Cantidad"
+      },
+      "amount": {
+        "label": "Cantidad"
+      },
+      "success": "Solicitud de retiro enviada correctamente"
     }
   },
   "common": {
@@ -457,11 +490,13 @@
       "export": "Exportar",
       "remove": "Remover",
       "copy": "Copiar",
-      "open": "Abrir"
+      "open": "Abrir",
+      "back": "Volver"
     },
     "errors": {
       "connection_failed": "Error de conexión"
-    }
+    },
+    "description": "Descripción"
   },
   "components": {
     "allowance_menu": {
@@ -538,6 +573,15 @@
         }
       },
       "screen_reader": "Alternar menú desplegable"
+    },
+    "publishers_table": {
+      "used": "usado",
+      "payments": "pagos"
+    },
+    "badge": {
+      "label": {
+        "active": "ACTIVO"
+      }
     }
   }
 }

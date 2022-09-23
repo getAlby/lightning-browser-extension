@@ -231,7 +231,8 @@
       "request1": "Solicitar aprovação para transações",
       "request2": "Solicitar faturas e informações do servidor",
       "connect": "Conectar",
-      "block_and_ignore": "Bloquear e ignorar {{host}}"
+      "block_and_ignore": "Bloquear e ignorar {{host}}",
+      "title": "Conectar"
     },
     "unlock": {
       "unlock_to_continue": "Desbloqueie para continuar",
@@ -322,7 +323,11 @@
           "enter_password": "Insira uma nova senha de desbloqueio.",
           "mismatched_password": "As senhas não correspondem.",
           "confirm_password": "Confirme a senha."
-        }
+        },
+        "submit": {
+          "label": "Alterar"
+        },
+        "success": "Senha alterada com sucesso"
       },
       "browser_notifications": {
         "subtitle": "Notificações relacionadas a pagamentos e autenticação.",
@@ -426,6 +431,34 @@
       "actions": {
         "pay_now": "Pague agora"
       }
+    },
+    "lnurlauth": {
+      "content_message": {
+        "heading": "Você deseja logar em"
+      },
+      "success": "Autenticado com sucesso",
+      "errors": {
+        "status": "Erro: O status de autenticação não está correto"
+      },
+      "submit": "Logar",
+      "title": "Autenticação"
+    },
+    "lnurlwithdraw": {
+      "title": "Resgatar",
+      "content_message": {
+        "heading": "Quantia"
+      },
+      "amount": {
+        "label": "Quantia"
+      },
+      "success": "Solicitação de resgate de fundos enviada com sucesso"
+    },
+    "lnurlchannel": {
+      "success": "Solicitação de canal de pagamento enviada com sucesso",
+      "title": "Solicitar Canal de Pagamento",
+      "content_message": {
+        "heading": "Solicitar canal de pagamento do servidor"
+      }
     }
   },
   "common": {
@@ -457,11 +490,13 @@
       "close": "Fechar",
       "export": "Exportar",
       "remove": "Remover",
-      "copy": "Copiar"
+      "copy": "Copiar",
+      "back": "Voltar"
     },
     "errors": {
       "connection_failed": "Falha na conexão"
-    }
+    },
+    "description": "Descrição"
   },
   "components": {
     "allowance_menu": {
@@ -536,6 +571,15 @@
           "add": "Adicionar nova conta",
           "manage": "Gerenciar contas"
         }
+      }
+    },
+    "publishers_table": {
+      "payments": "pagamentos",
+      "used": "usados"
+    },
+    "badge": {
+      "label": {
+        "active": "LIMITE ATIVADO"
       }
     }
   }
