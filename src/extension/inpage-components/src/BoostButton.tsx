@@ -5,40 +5,56 @@ import {ReactComponent as LoadingIndicator} from './loading.svg';
 import {ReactComponent as AlbyLogo} from './logo.svg';
 export default class BoostButton extends React.Component<BoostButtonProps, BoostButtonState> {
 
-  buttonEl: React.RefObject<HTMLDivElement>;
-  spanEl: React.RefObject<HTMLDivElement>;
-
   state: BoostButtonState = {
     loading: false,
     amount: 0,
     pressed: false,
     paid: false,
   }
+
   timeout: NodeJS.Timeout;
+  pressedInterval: NodeJS.Timeout;
   
-  async click(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    this.playSound();
-
-    this.setState({ amount: this.state.amount + 21 });   
-    if(this.timeout) {
-      clearTimeout(this.timeout);
-    }
-    this.timeout = setTimeout(async () => {
-      await this.pay();
-    }, 2000);
-  }
-
-  playSound() {
-    const clickEffect = new Audio("https://cdn.pixabay.com/audio/2022/03/10/audio_18fa31cc65.mp3");
-    clickEffect.play();
-  }
-
   async mouseDown() {
+    if(this.state.paid) {
+      return;
+    }
+
+    clearTimeout(this.timeout);
     this.setState({ pressed: true });
+
+    let pressedCount = 0;
+    this.pressedInterval = setInterval(() => {
+      pressedCount++;
+      this.setState({ amount: this.state.amount + pressedCount});
+    }, 50);
   }
 
   async mouseUp() {
+    if(this.state.paid) {
+      return;
+    }
+
+    this.setState({ pressed: false, amount: this.state.amount + 21 });
+
+    clearInterval(this.pressedInterval);
+    clearTimeout(this.timeout);
+    
+    this.timeout = setTimeout(async () => {
+      await this.pay();
+    }, 2000);
+    
+  }
+
+  async mouseLeave() {
     this.setState({ pressed: false });
+    clearInterval(this.pressedInterval);
+    
+    if(this.state.pressed) {
+      this.timeout = setTimeout(async () => {
+        await this.pay();
+      }, 2000);
+    }    
   }
 
   async pay() {
@@ -56,22 +72,27 @@ export default class BoostButton extends React.Component<BoostButtonProps, Boost
       setTimeout(() => { this.setState({ paid: false })}, 5000);
     }
     catch(e) {
+      this.setState({ paid: true });
       console.error(e);
     }
 
     this.setState({ loading: false, amount: 0 });
   }
-
+  
   render() {
-    return <div className={styles.BoostButton} 
-              style={{
-                transform: this.state.pressed ? 'scale(0.9)' : "none",
-                backgroundImage: this.state.paid ? `url('https://secure.gravatar.com/avatar/07e22939e7672b38c56615068c4c715f?size=200&default=mm&rating=g')` : ''
-              }}
-              onMouseDown={() => this.mouseDown()} 
-              onMouseUp={() => this.mouseUp()} 
-              onClick={(e) => this.click(e)}>
+    const localStyles = {
+      transform: this.state.pressed ? 'scale(0.9)' : "none",
+    } as any;
 
+    if(this.state.paid && this.props.image) {
+      localStyles.backgroundImage = `url('${this.props.image}')`;
+    }
+
+    return <div className={styles.BoostButton} 
+              style={localStyles}
+              onMouseDown={() => this.mouseDown()} 
+              onMouseUp={() => this.mouseUp()}
+              onMouseLeave={() => this.mouseLeave()}>
               {!this.state.paid && this.state.loading && <div>
                 <LoadingIndicator/>
               </div>}
@@ -82,16 +103,17 @@ export default class BoostButton extends React.Component<BoostButtonProps, Boost
                   }
                   {this.state.amount > 0 && 
                     <div>
-                      <span className={styles.amount}>
+                      <div className={styles.amount}>
                         <CountUp preserveValue={true} duration={0.2} end={this.state.amount} />
-                      </span>                    
-                      <div style={{'textAlign' : 'center'}}>sats</div>
+                      </div>                    
+                      <div className={styles.sats}>sats</div>
                     </div>
                   }
                 </div>
               }
               {this.state.paid && <div>
-                <span style={{color: '#FFF', fontWeight: 'bold'}}>Thanks!</span>
+                {!this.props.image && <AlbyLogo/>}
+                <span className={styles.thanks}>Thanks! 🙌</span>
               </div>} 
            </div>;
   }
@@ -99,6 +121,7 @@ export default class BoostButton extends React.Component<BoostButtonProps, Boost
 
 class BoostButtonProps {
   lnurl!: string;
+  image?: string;
 }
 
 class BoostButtonState {

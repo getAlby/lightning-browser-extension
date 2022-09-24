@@ -1,12 +1,13 @@
 .BoostButton {
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
     position: fixed;
     bottom: 31px;
     right: 31px;
     height: 100px;
     width: 100px;
     border-radius: 50px;
-    background: linear-gradient(180deg, #FFCB21, #FE9036);
+    background-image: linear-gradient(180deg, #FFCB21, #FE9036);
     box-shadow: 0 15px 15px rgba(0,0,0,0.3);
 
     cursor: pointer;
@@ -16,23 +17,8 @@
     transform: scale(1);
     transform-origin: center center 0px;
     transition: transform 0.1s ease-out;
-    background-size: cover !important;
-}
-
-.BoostButton:hover{
-    background: linear-gradient(180deg, #ffda62, #ffa963);
-}
-
-.BoostButton.green {
-    background: linear-gradient(180deg, #36d67b, #109c3a);
-}
-
-.BoostButton > div {
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+    background-size: cover;
+    text-align: center;
 }
 
 @keyframes appear {
@@ -45,10 +31,42 @@
     }
 }
 
+.BoostButton:hover {
+    background-image: linear-gradient(180deg, #ffda62, #ffa963);
+}
+
+.BoostButton > div {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
 .amount {
     font-size: 24px;
     font-weight: bold;
-    width: 100px;
-    display: block;
-    text-align: center;
+}
+
+.thanks{
+    font-weight: bold;
+    background: white;
+    padding: 1em;
+    position: absolute;
+    right: 120px;
+    border-radius: 1em;
+    box-shadow: 0 15px 15px rgba(0,0,0,0.3);
+}
+
+.thanks:after {
+	content: '';
+	position: absolute;
+	right: -8px;
+	top: 50%;
+	width: 0;
+	height: 0;
+    transform: translateY(-50%);
+	border: 0.563em solid transparent;
+	border-left-color: #FFF;
+	border-right: 0;
 }

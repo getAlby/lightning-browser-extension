@@ -21,7 +21,10 @@ class BoostButtonHTMLElement extends HTMLElement {
     if(!lnurl) {
       throw new Error("LNURL missing.")
     }
-    root.render(<BoostButton lnurl={lnurl}/>);
+
+    const image = this.getAttribute('image') ?? "";
+
+    root.render(<BoostButton lnurl={lnurl} image={image} />);
   }
 }
 
