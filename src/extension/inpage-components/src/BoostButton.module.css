@@ -1,0 +1,54 @@
+.BoostButton {
+    font-family: Arial, Helvetica, sans-serif;
+    position: fixed;
+    bottom: 31px;
+    right: 31px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+    background: linear-gradient(180deg, #FFCB21, #FE9036);
+    box-shadow: 0 15px 15px rgba(0,0,0,0.3);
+
+    cursor: pointer;
+    animation: appear 0.2s ease-out;
+    user-select: none;
+    
+    transform: scale(1);
+    transform-origin: center center 0px;
+    transition: transform 0.1s ease-out;
+    background-size: cover !important;
+}
+
+.BoostButton:hover{
+    background: linear-gradient(180deg, #ffda62, #ffa963);
+}
+
+.BoostButton.green {
+    background: linear-gradient(180deg, #36d67b, #109c3a);
+}
+
+.BoostButton > div {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+@keyframes appear {
+    0% {
+        transform: scale( 0 );
+    }
+
+    100% {
+        transform: scale( 1 );
+    }
+}
+
+.amount {
+    font-size: 24px;
+    font-weight: bold;
+    width: 100px;
+    display: block;
+    text-align: center;
+}
