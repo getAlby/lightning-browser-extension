@@ -64,11 +64,10 @@ export default class BoostButton extends React.Component<BoostButtonProps, Boost
     try {
       var result = await window.alby.lnurl(this.props.lnurl, this.state.amount, "🚀") as any;
       await window.webln.enable();
-      var paymentResult = await window.webln.sendPayment(result.pr);
-      if(paymentResult.preimage !== result.preimage) {
-        throw new Error("Preimage does not match.")
-      }
-
+      await window.webln.sendPayment(result.pr);
+      
+      // TODO: Add preimage validation
+      
       this.setState({ step: 'thankyou' });
     }
     catch(e) {
