@@ -86,8 +86,6 @@ async function getVideoInfo() {
 }
 
 async function youtubeDOMChanged() {
-  
-
   let info = await getChannelInfo();
   if(!info) {
     info = await getVideoInfo();
@@ -95,7 +93,7 @@ async function youtubeDOMChanged() {
 
   console.log("ℹ️", info);
   
-  updateBoostButton(info?.lnurl);
+  updateBoostButton(info);
 
   if (!info?.lnurl) {
     return;

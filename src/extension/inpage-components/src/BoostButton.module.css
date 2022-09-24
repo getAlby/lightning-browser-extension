@@ -41,14 +41,15 @@
     justify-content: center;
     align-items: center;
     height: 100%;
+    margin: 0px 5px;
 }
 
-.amount {
+.BoostButton .amount {
     font-size: 24px;
     font-weight: bold;
 }
 
-.thanks{
+.BoostButton .thanks{
     font-weight: bold;
     background: white;
     padding: 1em;
@@ -56,9 +57,10 @@
     right: 120px;
     border-radius: 1em;
     box-shadow: 0 15px 15px rgba(0,0,0,0.3);
+    min-width: 100px;
 }
 
-.thanks:after {
+.BoostButton .thanks:after {
 	content: '';
 	position: absolute;
 	right: -8px;

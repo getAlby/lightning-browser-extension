@@ -9,14 +9,15 @@ export default class BoostButton extends React.Component<BoostButtonProps, Boost
     loading: false,
     amount: 0,
     pressed: false,
-    paid: false,
+    step: 'start',
+    errorMessage: '',
   }
 
   timeout: NodeJS.Timeout;
   pressedInterval: NodeJS.Timeout;
   
   async mouseDown() {
-    if(this.state.paid) {
+    if(this.state.step != 'start') {
       return;
     }
 
@@ -31,7 +32,7 @@ export default class BoostButton extends React.Component<BoostButtonProps, Boost
   }
 
   async mouseUp() {
-    if(this.state.paid) {
+    if(this.state.step != 'start') {
       return;
     }
 
@@ -68,15 +69,18 @@ export default class BoostButton extends React.Component<BoostButtonProps, Boost
         throw new Error("Preimage does not match.")
       }
 
-      this.setState({ paid: true });
-      setTimeout(() => { this.setState({ paid: false })}, 5000);
+      this.setState({ step: 'thankyou' });
     }
     catch(e) {
-      this.setState({ paid: true });
       console.error(e);
+      this.setState({ step: 'error', errorMessage: "Payment failed" });
     }
 
-    this.setState({ loading: false, amount: 0 });
+    setTimeout(() => { this.reset() }, 5000);
+  }
+
+  reset() {
+    this.setState({ step: 'start', amount: 0, loading: false })
   }
   
   render() {
@@ -84,8 +88,12 @@ export default class BoostButton extends React.Component<BoostButtonProps, Boost
       transform: this.state.pressed ? 'scale(0.9)' : "none",
     } as any;
 
-    if(this.state.paid && this.props.image) {
+    if(this.state.step == 'thankyou' && this.props.image) {
       localStyles.backgroundImage = `url('${this.props.image}')`;
+    }
+
+    if(this.state.step == 'error') {
+      localStyles.backgroundImage = `linear-gradient(180deg, #ff6b6b, #f34646)`;
     }
 
     return <div className={styles.BoostButton} 
@@ -93,10 +101,14 @@ export default class BoostButton extends React.Component<BoostButtonProps, Boost
               onMouseDown={() => this.mouseDown()} 
               onMouseUp={() => this.mouseUp()}
               onMouseLeave={() => this.mouseLeave()}>
-              {!this.state.paid && this.state.loading && <div>
+              {this.state.step == 'start' && this.state.loading && <div>
                 <LoadingIndicator/>
               </div>}
-              {!this.state.paid && !this.state.loading && 
+              {this.state.step == 'error' && <div>
+                😥<br/>{this.state.errorMessage}
+              </div>
+              }
+              {this.state.step !='pay' && !this.state.loading && 
                 <div>
                   {this.state.amount === 0 && 
                     <AlbyLogo/>
@@ -111,10 +123,10 @@ export default class BoostButton extends React.Component<BoostButtonProps, Boost
                   }
                 </div>
               }
-              {this.state.paid && <div>
+              {this.state.step == 'thankyou' && <div>
                 {!this.props.image && <AlbyLogo/>}
-                <span className={styles.thanks}>Thanks! 🙌</span>
-              </div>} 
+                  <span className={styles.thanks}>Thanks! 🙌</span>
+              </div>}               
            </div>;
   }
 }
@@ -127,6 +139,7 @@ class BoostButtonProps {
 class BoostButtonState {
   loading: boolean = false;
   amount: number = 0;
-  pressed: boolean = false;
-  paid: boolean = false;
+  pressed: boolean = false;  
+  step: string = "";
+  errorMessage: string = "";
 }
