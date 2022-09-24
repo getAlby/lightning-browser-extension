@@ -285,11 +285,11 @@
             },
             "show_fiat": {
                 "title": "Sats para Fiat",
-                "subtitle": "Mostrar os valores também na moeda fiat selecionada abaixo"
+                "subtitle": "Mostrar na Alby os valores em Sats e em uma moeda adicional de sua escolha"
             },
             "currency": {
                 "title": "Moeda",
-                "subtitle": "Escolha a moeda adicional para mostrar os valores na Alby"
+                "subtitle": "Escolha uma moeda adicional para mostrar os valores na Alby"
             },
             "exchange": {
                 "title": "Serviço provedor de cotações",
@@ -330,7 +330,7 @@
                 "success": "Senha alterada com sucesso"
             },
             "browser_notifications": {
-                "subtitle": "Notificações relacionadas a pagamentos e autenticação.",
+                "subtitle": "Mostrar notificações do navegador relacionadas a pagamentos e autenticação.",
                 "title": "Notificações do navegador"
             }
         },
