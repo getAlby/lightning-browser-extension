@@ -19,6 +19,7 @@
     transition: transform 0.1s ease-out;
     background-size: cover;
     text-align: center;
+    z-index: 999999;
 }
 
 @keyframes appear {
