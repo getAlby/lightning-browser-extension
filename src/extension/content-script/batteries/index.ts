@@ -13,15 +13,13 @@ import StackOverflow from "./StackOverflow";
 import Twitter from "./Twitter";
 import Vida from "./Vida";
 import VimeoVideo from "./VimeoVideo";
-import YouTubeChannel from "./YouTubeChannel";
-import YouTubeVideo from "./YouTubeVideo";
+import YouTube from "./YouTube";
 
 // Order is important as the first one for which the URL matches will be used
 const enhancements = [
   Twitter,
   Reddit,
-  YouTubeVideo,
-  YouTubeChannel,
+  YouTube,
   Peertube,
   VimeoVideo,
   LinkTree,

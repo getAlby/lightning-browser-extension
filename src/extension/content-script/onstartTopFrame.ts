@@ -9,7 +9,6 @@ async function onstart() {
     return;
   }
 
-  injectScript(browser.runtime.getURL("js/inpageScriptWebLN.bundle.js")); // injects the window.webln object
-  injectScript(browser.runtime.getURL("js/inpageScriptAlby.bundle.js")); // injects the window.alby object
+  injectScript(browser.runtime.getURL("js/inpageComponents.bundle.js")); // injects the components
 }
 onstart();

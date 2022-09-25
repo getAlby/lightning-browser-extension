@@ -583,3 +583,9 @@ export interface Invoice {
     value_msat_total: number;
   };
 }
+
+export interface MessageAlbyLnurl extends MessageDefault {
+  args: { lnurl: string, amount: number, comment?: string };
+  public: boolean;
+  action: "alby/lnurl";
+}
