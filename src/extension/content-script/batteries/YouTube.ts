@@ -1,4 +1,5 @@
 import axios from "axios";
+import _ from "lodash";
 
 import getOriginData from "../originData";
 import { findLightningAddressInText, setLightningData } from "./helpers";
@@ -15,7 +16,7 @@ const channelUrlMatcher = /^https:\/\/www\.youtube.com\/(channel|c)\/([^/]+).*/;
 const battery = async (): Promise<void> => {
   if (!window.LBE_MUTATION_OBSERVER) {
     window.LBE_MUTATION_OBSERVER = new MutationObserver(
-      debounce(youtubeDOMChanged, 500)
+      _.debounce(youtubeDOMChanged, 500)
     );
   }
 
@@ -59,20 +60,6 @@ async function youtubeDOMChanged() {
     },
   ]);
 }
-
-export const debounce = <F extends (...args: Parameters<F>) => ReturnType<F>>(
-  func: F,
-  waitFor: number
-) => {
-  let timeout: NodeJS.Timeout;
-
-  const debounced = (...args: Parameters<F>) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), waitFor);
-  };
-
-  return debounced;
-};
 
 async function getVideoInfo(): Promise<PublisherInfo | null> {
   if (
