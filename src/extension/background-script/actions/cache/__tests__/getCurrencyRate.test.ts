@@ -32,7 +32,7 @@ describe("currencyRate", () => {
   test("storing rate for the first time", async () => {
     (chrome.storage.local.get as jest.Mock).mockResolvedValue({});
     const result = await getCurrencyRate(message);
-    expect(result.data.rate).toBe(29991.836);
+    expect(result.data.rate).toBe(0.00029991836);
   });
 
   test("storing rate if it is outdated", async () => {
@@ -46,9 +46,9 @@ describe("currencyRate", () => {
     const result = await getCurrencyRate(message);
     expect(chrome.storage.local.set).toHaveBeenCalledWith({
       currencyRate:
-        '{"currency":"USD","rate":29991.836,"timestamp":1577836800000}',
+        '{"currency":"USD","rate":0.00029991836,"timestamp":1577836800000}',
     });
-    expect(result.data.rate).toBe(29991.836);
+    expect(result.data.rate).toBe(0.00029991836);
   });
 
   test("returning rate if still valid", async () => {
@@ -75,7 +75,7 @@ describe("currencyRate", () => {
     await getCurrencyRate(message);
     expect(chrome.storage.local.set).toHaveBeenCalledWith({
       currencyRate:
-        '{"currency":"USD","rate":29991.836,"timestamp":1577836800000}',
+        '{"currency":"USD","rate":0.00029991836,"timestamp":1577836800000}',
     });
   });
 });

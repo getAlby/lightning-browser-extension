@@ -14,6 +14,8 @@ interface CurrencyRate {
   timestamp?: number;
 }
 
+export const numSatsInBtc = 100_000_000;
+
 const storeCurrencyRate = async ({ rate, currency }: CurrencyRate) => {
   const currencyRate: CurrencyRate = {
     currency,
@@ -37,7 +39,7 @@ const getFiatBtcRate = async (currency: CURRENCIES): Promise<number> => {
       `https://api.yadio.io/exrates/${currency.toLowerCase()}`
     );
     const data = await response?.data;
-    return data.BTC;
+    return data.BTC / numSatsInBtc;
   }
 
   if (exchange === "coindesk") {
@@ -45,17 +47,18 @@ const getFiatBtcRate = async (currency: CURRENCIES): Promise<number> => {
       `https://api.coindesk.com/v1/bpi/currentprice/${currency.toLowerCase()}.json`
     );
     const data = await response?.data;
-    return data.bpi[currency].rate_float;
+    return data.bpi[currency].rate_float / numSatsInBtc;
   }
 
   response = await axios.get(
     `https://getalby.com/api/rates/${currency.toLowerCase()}.json`
   );
   const data = await response?.data;
-  return data[currency].rate_float;
+
+  return data[currency].rate_float / numSatsInBtc;
 };
 
-const getCurrencyRateFromCache = async (currency: CURRENCIES) => {
+export const getCurrencyRateFromCache = async (currency: CURRENCIES) => {
   let currencyRateCache: CurrencyRate = {};
   const result = await browser.storage.local.get(["currencyRate"]);
 
@@ -67,13 +70,12 @@ const getCurrencyRateFromCache = async (currency: CURRENCIES) => {
         dayjs(currencyRateCache?.timestamp).add(10, "minute")
       );
 
-      if (isRateNewEnough) {
+      if (isRateNewEnough && currencyRateCache.rate) {
         return currencyRateCache.rate;
       }
 
       const rate = await getFiatBtcRate(currency);
       await storeCurrencyRate({ rate, currency });
-      // switch rate to be SATS not BTC
       return rate;
     }
   }
