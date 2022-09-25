@@ -212,7 +212,7 @@ const findLnurlFromYouTubeAboutPage = (
     });
 };
 
-class PublisherInfo {
+export class PublisherInfo {
   lnurl?: string;
   image?: string;
   name?: string;
