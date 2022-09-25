@@ -13,15 +13,18 @@ export default class BoostButton extends React.Component<BoostButtonProps, Boost
     errorMessage: '',
   }
 
-  timeout: NodeJS.Timeout;
-  pressedInterval: NodeJS.Timeout;
+  timeout: NodeJS.Timer | null = null;
+  pressedInterval: NodeJS.Timer | null = null;
   
   async mouseDown() {
     if(this.state.step != 'start') {
       return;
     }
 
-    clearTimeout(this.timeout);
+    if(this.timeout) {
+      clearTimeout(this.timeout);
+    }
+    
     this.setState({ pressed: true });
 
     let pressedCount = 0;
@@ -38,8 +41,8 @@ export default class BoostButton extends React.Component<BoostButtonProps, Boost
 
     this.setState({ pressed: false, amount: this.state.amount + 21 });
 
-    clearInterval(this.pressedInterval);
-    clearTimeout(this.timeout);
+    this.pressedInterval && clearInterval(this.pressedInterval);
+    this.timeout && clearTimeout(this.timeout);
     
     this.timeout = setTimeout(async () => {
       await this.pay();
@@ -49,7 +52,8 @@ export default class BoostButton extends React.Component<BoostButtonProps, Boost
 
   async mouseLeave() {
     this.setState({ pressed: false });
-    clearInterval(this.pressedInterval);
+    
+    this.pressedInterval && clearInterval(this.pressedInterval);
     
     if(this.state.pressed) {
       this.timeout = setTimeout(async () => {
@@ -67,7 +71,7 @@ export default class BoostButton extends React.Component<BoostButtonProps, Boost
       await window.webln.sendPayment(result.pr);
       
       // TODO: Add preimage validation
-      
+
       this.setState({ step: 'thankyou' });
     }
     catch(e) {
@@ -104,7 +108,7 @@ export default class BoostButton extends React.Component<BoostButtonProps, Boost
                 <LoadingIndicator/>
               </div>}
               {this.state.step == 'error' && <div>
-                😥<br/>{this.state.errorMessage}
+                ❌<br/>{this.state.errorMessage}
               </div>
               }
               {this.state.step !='pay' && !this.state.loading && 

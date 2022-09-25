@@ -2,6 +2,7 @@ import getOriginData from "../originData";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 import updateBoostButton from "./inpage-components/boost-button";
 import axios from "axios";
+import LNURLAuth from "~/app/screens/LNURLAuth";
 
 declare global {
   interface Window {
@@ -15,7 +16,7 @@ const battery = async (): Promise<void> => {
 
   if (!window.LBE_MUTATION_OBSERVER) {
     window.LBE_MUTATION_OBSERVER = new MutationObserver(
-      debounce(youtubeDOMChanged, 500, false)
+      debounce(youtubeDOMChanged, 500)
     );
   }
 
@@ -36,12 +37,10 @@ const YouTubeVideo = {
 
 export default YouTubeVideo;
 
-async function getVideoInfo() {
+async function getVideoInfo() : Promise<PublisherInfo | null> {
   if (!document.location.toString().match(/^https:\/\/www\.youtube.com\/watch.*/)) {
-    return;
+    return null;
   }
-
-  console.log("getvideoinfo()");
 
   let text = "";
   document
@@ -55,7 +54,7 @@ async function getVideoInfo() {
     "#columns #primary #primary-inner #meta-contents .ytd-channel-name a"
   );
   if (!text || !channelLink) {
-    return;
+    return null;
   }
   let match;
   let lnurl: string = "";
@@ -73,16 +72,19 @@ async function getVideoInfo() {
       /^https:\/\/www\.youtube.com\/(channel|c)\/([^/]+).*/
     );
     if (match) {
-      lnurl = await findLnurlFromYouTubeAboutPage(match[1], match[2]);
+      const lnurlResult = await findLnurlFromYouTubeAboutPage(match[1], match[2]);
+      if(lnurlResult) {
+        lnurl = lnurlResult;
+      }
     }
   }
 
-  const imageUrl =
+  const image =
   document.querySelector<HTMLImageElement>(
     "#columns #primary #primary-inner #meta-contents img"
   )?.src || "";
 
-  return { lnurl, name: channelLink.textContent, imageUrl };
+  return { lnurl, name: channelLink.textContent ?? undefined, image };
 }
 
 async function youtubeDOMChanged() {
@@ -90,15 +92,12 @@ async function youtubeDOMChanged() {
   if(!info) {
     info = await getVideoInfo();
   }
-
-  console.log("ℹ️", info);
   
   updateBoostButton(info);
 
   if (!info?.lnurl) {
     return;
   }
-
 
   setLightningData([
     {
@@ -107,36 +106,42 @@ async function youtubeDOMChanged() {
       ...getOriginData(),
       name: info?.name ?? "",
       description: "", // we can not reliably find a description (the meta tag might be of a different video)
-      icon: info.imageUrl,
+      icon: info.image ?? "",
     },
   ]);
 }
 
-function debounce(func, wait, immediate) {
-  var timeout;
-  return function () {
-    var context = this, args = arguments;
-    clearTimeout(timeout);
-    timeout = setTimeout(function () {
-      timeout = null;
-      if (!immediate) func.apply(context, args);
-    }, wait);
-    if (immediate && !timeout) func.apply(context, args);
-  };
+export const debounce = <F extends (...args: Parameters<F>) => ReturnType<F>>(
+  func: F,
+  waitFor: number,
+) => {
+  let timeout: NodeJS.Timeout
+
+  const debounced = (...args: Parameters<F>) => {
+    clearTimeout(timeout)
+    timeout = setTimeout(() => func(...args), waitFor)
+  }
+
+  return debounced
 }
 
-async function getChannelInfo() {
+class PublisherInfo {
+  lnurl?: string;
+  image?: string;
+  name?: string;
+}
+
+async function getChannelInfo() : Promise<PublisherInfo | null> {
   const match = document.location.toString().match(channelUrlMatcher);
   if (!match) {
-    return;
+    return null;
   }
   
-  console.log("getChannelInfo()");
   const name =
     document.querySelector(
       "#inner-header-container yt-formatted-string.ytd-channel-name"
     )?.textContent || "";
-  const imageUrl =
+  const image =
     document.querySelector<HTMLImageElement>(
       "#channel-header-container yt-img-shadow#avatar img"
     )?.src || "";
@@ -154,12 +159,12 @@ async function getChannelInfo() {
     lnurl = await findLnurlFromYouTubeAboutPage(match[1], match[2]);
   }
 
-  if (!lnurl) return;
+  if (!lnurl) return null;
 
   return {
     lnurl,
     name,
-    imageUrl
+    image
   }
 }
 
