@@ -182,7 +182,7 @@ export default function NewWallet() {
       </div>
       <div className="mt-6">
         <p className="mb-2 text-gray-700 dark:text-neutral-400">
-          {t("pre_connect.optional_lightning_note.part1")}
+          {t("pre_connect.optional_lightning_note.part1")}{" "}
           <a
             className="underline"
             href="https://lightningaddress.com/"
