@@ -177,7 +177,7 @@ function LNURLPay() {
             break;
         }
       } else {
-        setSuccessAction({ tag: "message", message: "Success, payment sent!" });
+        setSuccessAction({ tag: "message", message: t("success") });
       }
 
       auth.fetchAccountInfo(); // Update balance.
@@ -253,9 +253,12 @@ function LNURLPay() {
       return metadata
         .map(([type, content]: [string, string]) => {
           if (type === "text/plain") {
-            return ["Description", content];
+            return [`${tCommon("description")}`, content];
           } else if (type === "text/long-desc") {
-            return ["Full Description", <p key={type}>{content}</p>];
+            return [
+              `${tCommon("description_full")}`,
+              <p key={type}>{content}</p>,
+            ];
           }
           return undefined;
         })
@@ -271,9 +274,9 @@ function LNURLPay() {
     let descriptionList: [string, string | React.ReactNode][] = [];
     if (successAction.tag === "url") {
       descriptionList = [
-        ["Description", successAction.description],
+        [`${tCommon("description")}`, successAction.description],
         [
-          "Url",
+          "URL",
           <>
             {successAction.url}
             <div className="mt-4">
@@ -281,7 +284,7 @@ function LNURLPay() {
                 onClick={() => {
                   if (successAction.url) utils.openUrl(successAction.url);
                 }}
-                label={tCommon("open")}
+                label={tCommon("actions.open")}
                 primary
               />
             </div>
@@ -289,7 +292,7 @@ function LNURLPay() {
         ],
       ];
     } else if (successAction.tag === "message") {
-      descriptionList = [["Message", successAction.message]];
+      descriptionList = [[`${tCommon("message")}`, successAction.message]];
     }
 
     return (
@@ -311,7 +314,7 @@ function LNURLPay() {
 
         <div className="text-center">
           <button className="underline text-sm text-gray-500" onClick={close}>
-            {tCommon("close")}
+            {tCommon("actions.close")}
           </button>
         </div>
       </Container>

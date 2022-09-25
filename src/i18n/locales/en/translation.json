@@ -351,7 +351,8 @@
       },
       "email": {
         "label": "Email"
-      }
+      },
+      "success": "Success, payment sent!"
     },
     "lnurlauth": {
       "title": "Authentication",
@@ -479,6 +480,8 @@
     "feedback": "Feedback",
     "copied": "Copied!",
     "description": "Description",
+    "description_full": "Full Description",
+    "message": "Message",
     "actions": {
       "back": "Back",
       "delete": "Delete",
