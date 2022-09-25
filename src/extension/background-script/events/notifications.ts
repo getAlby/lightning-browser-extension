@@ -37,17 +37,21 @@ const paymentSuccessNotification = async (
     });
   }
 
-  let notificationTitle = `✅ Successfully paid ${formatAmount(paymentAmount)}`;
-
-  if (showFiat) {
-    notificationTitle = `${notificationTitle} (${paymentAmountFiatLocale})`;
-  }
+  let notificationTitle = "✅ Successfully paid";
 
   if (recipient) {
     notificationTitle = `${notificationTitle} to »${recipient}«`;
   }
 
-  const notificationMessage = `Fee: ${formatAmount(total_fees)}`;
+  let notificationMessage = `Amount: ${formatAmount(paymentAmount)}`;
+
+  if (showFiat) {
+    notificationMessage = `${notificationMessage} (${paymentAmountFiatLocale})`;
+  }
+
+  notificationMessage = `${notificationMessage}\nFee: ${formatAmount(
+    total_fees
+  )}`;
 
   return utils.notify({
     title: notificationTitle,

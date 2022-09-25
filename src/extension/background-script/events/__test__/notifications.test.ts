@@ -127,8 +127,8 @@ describe("Payment notifications", () => {
     await paymentSuccessNotification("ln.sendPayment.success", data);
 
     expect(notifySpy).toHaveBeenCalledWith({
-      title: "✅ Successfully paid 1 sat ($0.00) to »escapedcat@getalby.com«",
-      message: "Fee: 0 sats",
+      message: "Amount: 1 sat ($0.00)\nFee: 0 sats",
+      title: "✅ Successfully paid to »escapedcat@getalby.com«",
     });
   });
 
@@ -143,8 +143,8 @@ describe("Payment notifications", () => {
     await paymentSuccessNotification("ln.sendPayment.success", data);
 
     expect(notifySpy).toHaveBeenCalledWith({
-      title: "✅ Successfully paid 1 sat to »escapedcat@getalby.com«",
-      message: "Fee: 0 sats",
+      message: "Amount: 1 sat\nFee: 0 sats",
+      title: "✅ Successfully paid to »escapedcat@getalby.com«",
     });
   });
 
@@ -159,8 +159,8 @@ describe("Payment notifications", () => {
     await paymentSuccessNotification("ln.sendPayment.success", data);
 
     expect(notifySpy).toHaveBeenCalledWith({
-      title: "✅ Successfully paid 1 sat ($0.00) to »escapedcat@getalby.com«",
-      message: "Fee: 0 sats",
+      message: "Amount: 1 sat ($0.00)\nFee: 0 sats",
+      title: "✅ Successfully paid to »escapedcat@getalby.com«",
     });
   });
 
@@ -175,8 +175,8 @@ describe("Payment notifications", () => {
     );
 
     expect(notifySpy).toHaveBeenCalledWith({
-      title: "✅ Successfully paid 1 sat ($0.00)",
-      message: "Fee: 0 sats",
+      message: "Amount: 1 sat ($0.00)\nFee: 0 sats",
+      title: "✅ Successfully paid",
     });
   });
 });
