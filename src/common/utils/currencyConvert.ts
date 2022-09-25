@@ -8,13 +8,13 @@ const satsToFiat = async (amount: number | string, rate: number) => {
 };
 
 const satoshisToFiat = async ({
-  amount,
+  amountInSats,
   rate,
 }: {
-  amount: number | string;
+  amountInSats: number | string;
   rate: number;
 }) => {
-  const fiat = await satsToFiat(amount, rate);
+  const fiat = await satsToFiat(amountInSats, rate);
   return fiat;
 };
 
@@ -28,7 +28,7 @@ export const getFiatValue = async ({
   currency: CURRENCIES;
 }) => {
   const fiatValue = await satoshisToFiat({
-    amount,
+    amountInSats: amount,
     rate,
   });
 
