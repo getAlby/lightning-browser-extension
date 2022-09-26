@@ -57,7 +57,7 @@ export const SettingsProvider = ({
 
   // update rate
   useEffect(() => {
-    api.getCurrencyRate({ currency: settings.currency }).then((response) => {
+    api.getCurrencyRate().then((response) => {
       setCurrencyRate(response.rate);
     });
   }, [settings.currency]);

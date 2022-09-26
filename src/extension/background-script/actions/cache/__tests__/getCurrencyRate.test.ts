@@ -5,7 +5,7 @@ import type { MessageCurrencyRateGet } from "~/types";
 import getCurrencyRate from "../getCurrencyRate";
 
 const mockState = {
-  settings: { exchange: "coindesk" },
+  settings: { exchange: "coindesk", currency: CURRENCIES["USD"] },
 };
 
 state.getState = jest.fn().mockReturnValue(mockState);
@@ -18,9 +18,6 @@ const message: MessageCurrencyRateGet = {
   action: "getCurrencyRate",
   origin: {
     internal: true,
-  },
-  args: {
-    currency: CURRENCIES["USD"],
   },
 };
 
