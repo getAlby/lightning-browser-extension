@@ -85,15 +85,19 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     const id = options?.accountId || account?.id;
     if (!id) return;
 
-    const accountInfo = await api.swr.getAccountInfo(id, setAccount);
-    const sats = await getSatValue(accountInfo.balance);
-    setSatBalance(sats);
+    const callback = async (account: AccountInfo) => {
+      setAccount(account);
+      const sats = await getSatValue(account.balance);
+      setSatBalance(sats);
 
-    if (!isLoadingSettings && settings.showFiat) {
-      updateFiatValue(accountInfo.balance);
-    }
+      if (!isLoadingSettings && settings.showFiat) {
+        updateFiatValue(account.balance);
+      }
+    };
 
-    return { ...accountInfo, fiatBalance, satsBalance: sats };
+    const accountInfo = await api.swr.getAccountInfo(id, callback);
+
+    return { ...accountInfo, fiatBalance, satsBalance };
   };
 
   // Invoked only on on mount.
