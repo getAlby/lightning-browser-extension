@@ -241,6 +241,9 @@
       "unlock_error": {
         "help": "Your account data is encrypted with your unlock password. If you really forgot your unlock password you have to reset and add your Lightning account again.",
         "link": "Reset now and add a new account"
+      },
+      "errors": {
+        "invalid_password": "Invalid password"
       }
     },
     "settings": {
