@@ -571,7 +571,7 @@
         "password_reset": "Esqueceu sua senha? Clique aqui"
       },
       "errors": {
-        "invalid_credentials": "Senha inválida. Verifique se sua senha e endereço de e-mail estão corretos e tente novamente."
+        "invalid_credentials": "Senha incorreta. Verifique se sua senha e endereço de e-mail estão corretos e tente novamente."
       }
     },
     "account_menu": {
