@@ -312,7 +312,7 @@ export interface MessageSettingsSet extends MessageDefault {
 }
 
 export interface MessageCurrencyRateGet extends MessageDefault {
-  args: { currency: CURRENCIES };
+  args?: { currency?: CURRENCIES };
   action: "getCurrencyRate";
 }
 

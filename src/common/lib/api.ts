@@ -121,7 +121,7 @@ export const lnurlAuth = (
   utils.call<LnurlAuthResponse>("lnurlAuth", options);
 
 export const getCurrencyRate = async (
-  options: MessageCurrencyRateGet["args"]
+  options?: MessageCurrencyRateGet["args"]
 ) => utils.call<{ rate: number }>("getCurrencyRate", options);
 
 export default {

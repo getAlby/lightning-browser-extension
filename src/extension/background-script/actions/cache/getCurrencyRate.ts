@@ -86,7 +86,13 @@ export const getCurrencyRateFromCache = async (currency: CURRENCIES) => {
 };
 
 const getCurrencyRate = async (message: MessageCurrencyRateGet) => {
-  const { currency } = message.args;
+  let currency;
+  if (message?.args?.currency) {
+    currency = message.args.currency;
+  } else {
+    const settings = state.getState().settings;
+    currency = settings.currency;
+  }
   const rate = await getCurrencyRateFromCache(currency);
 
   return {
