@@ -101,7 +101,14 @@ export default function ConnectRaspiBlitz() {
     <ConnectorForm
       title={
         <h1 className="mb-6 text-2xl font-bold dark:text-white">
-          {t("page.title")}
+          <Trans
+            i18nKey={"page.title"}
+            t={t}
+            components={[
+              // eslint-disable-next-line react/jsx-key
+              <a className="underline" href="https://raspiblitz.org/"></a>,
+            ]}
+          />
         </h1>
       }
       description={

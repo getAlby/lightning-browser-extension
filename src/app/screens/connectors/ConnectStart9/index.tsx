@@ -103,7 +103,14 @@ export default function ConnectStart9() {
     <ConnectorForm
       title={
         <h1 className="mb-6 text-2xl font-bold dark:text-white">
-          {t("page.title")}
+          <Trans
+            i18nKey={"page.title"}
+            t={t}
+            components={[
+              // eslint-disable-next-line react/jsx-key
+              <a className="underline" href="https://start9.com/latest/"></a>,
+            ]}
+          />
         </h1>
       }
       description={

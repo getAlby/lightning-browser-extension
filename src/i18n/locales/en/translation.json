@@ -201,7 +201,7 @@
         "title": "Start9",
         "description": "Connect to your Embassy",
         "page": {
-          "title": "Connect to your Embassy node",
+          "title": "Connect to your <0>Embassy</0> node",
           "instructions": "<0>Note:</0> Currently we only support LND but we will be adding c-lightning support in the future!<1/>On your Embassy dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
@@ -213,7 +213,7 @@
         "title": "RaspiBlitz",
         "description": "Connect to your RaspiBlitz",
         "page": {
-          "title": "Connect to your RaspiBlitz node",
+          "title": "Connect to your <0>RaspiBlitz</0> node",
           "instructions1": "You need your node onion address, port, and a macaroon with read and send permissions (e.g. admin.macaroon).<1/><1/><0>SSH</0> into your <0>RaspiBlitz</0>.<1/>Run the command <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Copy and paste the <0>.onion</0> address in the input below.<1/>Add your <0>port</0> after the onion address, the default port is <0>:8080</0>.",
           "instructions2": "Select <0>CONNECT</0>.<1/>Select <0>EXPORT</0>.<1/>Select <0>HEX</0>.<1/>Copy the <0>adminMacaroon</0>.<1/>Paste the macaroon in the input below."
         },
