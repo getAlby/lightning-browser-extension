@@ -1,596 +1,596 @@
 {
-  "translation": {
-    "welcome": {
-      "title": "O poder do⚡ bitcoin ⚡no seu navegador",
-      "nav": {
-        "welcome": "Bem-vindo",
-        "password": "Senha",
-        "connect": "Sua conta",
-        "done": "Feito"
-      },
-      "intro": {
+    "translation": {
+        "welcome": {
+            "title": "O poder do⚡ bitcoin ⚡no seu navegador",
+            "nav": {
+                "welcome": "Bem-vindo",
+                "password": "Senha",
+                "connect": "Sua conta",
+                "done": "Feito"
+            },
+            "intro": {
+                "send": {
+                    "title": "Clicou pagou",
+                    "description": "Realize pagamentos enquanto você navega na web"
+                },
+                "paywall": {
+                    "title": "Chega de paywalls irritantes",
+                    "description": "Habilite pagamentos automáticos e estabeleça limites de gastos personalizados para cada site."
+                },
+                "privacy": {
+                    "title": "Privacidade",
+                    "description": "Use a rede relâmpago do bitcoin para autenticar em sites e tenha controle sobre sua privacidade."
+                },
+                "foss": {
+                    "title": "Gratuito e de código aberto",
+                    "description": "Código completamente aberto e que pode ser auditado por qualquer pessoa. Sem estatísticas ou rastreadores. Você está no controle."
+                },
+                "actions": {
+                    "get_started": "Começar"
+                }
+            },
+            "set_password": {
+                "title": "Definir uma senha de desbloqueio",
+                "description": "Os dados armazenados na extensão Alby são criptografados com uma senha de desbloqueio. Não esqueça esta senha! Você precisa dela para usar a extensão Alby (neste navegador)",
+                "choose_password": {
+                    "label": "Escolha uma senha de desbloqueio:"
+                },
+                "confirm_password": {
+                    "label": "Confirme se você digitou corretamente:"
+                },
+                "errors": {
+                    "enter_password": "Insira uma senha.",
+                    "confirm_password": "Confirme sua senha.",
+                    "mismatched_password": "As senhas não correspondem."
+                }
+            },
+            "test_connection": {
+                "ready": "Perfeito, tudo configurado!",
+                "tutorial": "Agora que você já conectou o servidor, gostaria de ler o tutorial?",
+                "try_tutorial": "Experimente agora",
+                "initializing": "Iniciando sua conta. Aguarde, pode demorar um pouco...",
+                "connection_error": "Erro de conexão",
+                "review_connection_details": "Revise os detalhes da conexão.",
+                "connection_taking_long": "A tentativa de conexão está demorando mais do que o esperado... Os dados estão corretos? O servidor está acessível?",
+                "contact_support": "Se precisar de ajuda, entre em contato com support@getalby.com",
+                "actions": {
+                    "delete_edit_account": "Remover conta inválida e editar novamente"
+                }
+            }
+        },
+        "choose_connector": {
+            "title": {
+                "welcome": "Você já possui uma carteira bitcoin na rede relâmpago?",
+                "options": "Adicionar nova conta"
+            },
+            "description": "Você precisa primeiro conectar-se a uma conta ou servidor para poder interagir com seus sites favoritos que aceitam pagamentos em bitcoin!",
+            "alby": {
+                "title": "Carteira Alby",
+                "description": "Crie uma nova conta ou faça login na sua conta Alby",
+                "pre_connect": {
+                    "title": "Sua Carteira Bitcoin na Alby",
+                    "login_account": "Criar nova conta ou logar na sua conta Alby.",
+                    "host_wallet": "A custódia dos seus bitcoins é por nossa conta!",
+                    "email": {
+                        "label": "Endereço de E-mail"
+                    },
+                    "optional_lightning_note": {
+                        "part1": "Ao criar uma conta Alby, você pode escolher um",
+                        "part2": "Endereço Relâmpago",
+                        "part3": ". É o jeito mais simples para você receber Bitcoins na Rede Relâmpago.",
+                        "part4": "saiba mais"
+                    },
+                    "optional_lightning_address": {
+                        "label": "Escolha um Endereço Relâmpago (opcional)",
+                        "suffix": "@getalby.com",
+                        "title": "números e letras, pelo menos 3 caracteres"
+                    },
+                    "errors": {
+                        "create_wallet_error": "Falha ao logar ou criar uma nova conta. Se precisar de ajuda, entre em contato com support@getalby.com"
+                    }
+                }
+            },
+            "lnd": {
+                "title": "LND",
+                "description": "Conectar servidor LND",
+                "page": {
+                    "title": "Conecte no servidor LND",
+                    "description": "Você precisa da URL do servidor e um macaroon com permissão de envio e leitura (ex. admin.macaroon)"
+                },
+                "url": {
+                    "label": "REST API host e porta",
+                    "placeholder": "https://seu-servidor-url:8080"
+                },
+                "macaroon": {
+                    "label": "Macaroon (formato HEX)"
+                },
+                "or": "OU",
+                "drag_and_drop": "Arraste e solte o macaroon aqui ou clique em <0>procurar</0>",
+                "errors": {
+                    "connection_failed": "Falha na conexão. As credenciais LND estão corretas?"
+                }
+            },
+            "lndhub": {
+                "title": "LNDHub (Bluewallet)",
+                "description": "Conectar carteira Bluewallet",
+                "page": {
+                    "title": "Conecte na LNDHub (BlueWallet)",
+                    "description": "Na BlueWallet, abra a carteira que você deseja conectar, clique em \"...\", clique em Exportar/Backup para exibir o código QR. Leia o código QR com sua webcam."
+                },
+                "uri": {
+                    "label": "Exportar URI LNDHub"
+                },
+                "errors": {
+                    "invalid_uri": "URI LNDHub inválida",
+                    "connection_failed": "Falha na conexão. Tem certeza de que a URI da LNDHub está correta?"
+                }
+            },
+            "lnbits": {
+                "title": "LNbits",
+                "description": "Conectar em uma conta LNbits"
+            },
+            "eclair": {
+                "title": "Eclair",
+                "description": "Conectar em um servidor Eclair"
+            },
+            "citadel": {
+                "title": "Citadel",
+                "description": "Conectar no Citadel"
+            },
+            "umbrel": {
+                "title": "Umbrel",
+                "description": "Conectar no Umbrel"
+            },
+            "mynode": {
+                "title": "myNode",
+                "description": "Conectar no myNode"
+            },
+            "start9": {
+                "title": "Start9",
+                "description": "Conectar no Embassy"
+            },
+            "raspiblitz": {
+                "title": "RaspiBlitz",
+                "description": "Conectar no RaspiBlitz"
+            },
+            "bitcoin_beach": {
+                "description": "Crie uma conta ou conecte sua Bitcoin Beach (Galoy)",
+                "title": "Carteira Bitcoin Beach"
+            },
+            "bitcoin_jungle": {
+                "title": "Carteira Bitcoin Jungle",
+                "description": "Crie uma conta ou conecte sua Bitcoin Jungle (Galoy)"
+            },
+            "btcpay": {
+                "title": "Servidor BTCPay",
+                "description": "Conecte no servidor LND BTCPay",
+                "page": {
+                    "title": "Conecte no servidor LND BTCPay",
+                    "instructions": "Navegue até a BTCPayServer e acesse como administrador. Vá até Configurações>Serviços>LND Rest - Ver informação. Depois Clique \"Ver Código QR\" e copie os dados do Código QR. Cole os dados abaixo:"
+                },
+                "config": {
+                    "label": "Dados config",
+                    "placeholder": "config=https://seu-btc-pay.org/lnd-config/212121/lnd.config"
+                },
+                "errors": {
+                    "connection_failed": "Falha na conexão. A URL de conexão do servidor BTCPay está correta e acessível?"
+                }
+            }
+        },
+        "home": {
+            "actions": {
+                "send_satoshis": "⚡️ Enviar Satoshis ⚡️",
+                "enable_now": "Ativar"
+            },
+            "recent_transactions": "Transações Recentes",
+            "transaction_list": {
+                "tabs": {
+                    "incoming": "Recebidas",
+                    "outgoing": "Enviadas"
+                }
+            },
+            "allowance_view": {
+                "recent_transactions": "Transações Recentes",
+                "allowance": "Limite de gastos",
+                "sats_used": "sats usados",
+                "no_transactions": "Sem transações em <0>{{name}}</0>."
+            },
+            "default_view": {
+                "recent_transactions": "Transações Recentes",
+                "no_transactions": "Você ainda não realizou transações com a Alby.",
+                "is_blocked_hint": "A Alby está desativada em {{host}}"
+            }
+        },
+        "accounts": {
+            "title": "Contas",
+            "actions": {
+                "add_account": "Adicionar conta"
+            },
+            "edit": {
+                "title": "Editar Conta",
+                "name": {
+                    "label": "Nome"
+                },
+                "screen_reader": "Editar nome da conta"
+            },
+            "export": {
+                "title": "Exportar Conta",
+                "screen_reader": "Exportar detalhes da conta",
+                "waiting": "aguardando dados LndHub...",
+                "your_ln_address": "Seu Endereço Relâmpago:",
+                "tip_mobile": "Dica: Use esta carteira no seu dispositivo móvel",
+                "export_uri": "Credenciais URI LNDHub",
+                "scan_qr": "Leia o Código QR para importar esta carteira na Zeus ou BlueWallet."
+            },
+            "remove": {
+                "confirm": "Tem certeza de que deseja remover a conta: {{name}}? \nEsta ação não pode ser desfeita. Se você usou essa conta para logar em sites, poderá perder o acesso a eles."
+            }
+        },
+        "enable": {
+            "allow": "Permitir {{host}}:",
+            "request1": "Solicitar aprovação para transações",
+            "request2": "Solicitar faturas e informações do servidor",
+            "connect": "Conectar",
+            "block_and_ignore": "Bloquear e ignorar {{host}}",
+            "title": "Conectar"
+        },
+        "unlock": {
+            "unlock_to_continue": "Desbloqueie para continuar",
+            "unlock_password": "Sua senha de desbloqueio",
+            "help_contact": {
+                "part1": "Precisa de ajuda? Contato",
+                "part2": "Suporte Alby"
+            },
+            "unlock_error": {
+                "help": "Os dados da sua conta são criptografados com sua senha de desbloqueio. Se você realmente esqueceu sua senha de desbloqueio, será necessário redefinir e adicionar sua conta novamente.",
+                "link": "Redefinir e adicionar nova conta"
+            }
+        },
+        "settings": {
+            "title": "Configurações",
+            "website_enhancements": {
+                "title": "Pagamentos em redes sociais",
+                "subtitle": "Reconhece automaticamente Endereços Relâmpago em perfis do Twitter, Youtube, etc, facilitando o envio de pagamentos."
+            },
+            "lnurl_auth": {
+                "title": "LNURL-Auth",
+                "hint": "é um protocolo de autenticação. Ele autentica o usuário usando assinaturas digitais. O protocolo não requer nenhuma outra informação de identificação, como senhas, e-mails, nomes de usuário... Com a Alby você pode usar suas contas bitcoin para logar em sites com segurança. <br /> Para ser compatível com outras carteiras, tivemos que fazer algumas alterações que você pode configurar aqui. <br /> <strong>Por padrão essas opções estão DESLIGADAS.</strong> Use-as apenas se você tiver contas antigas.",
+                "legacy_lnurl_auth_202207": {
+                    "title": "LNURL-Auth antigo",
+                    "subtitle": "A geração de chave para a LNURL-auth mudou em (julho de 2022). A Alby não era compatível com outras implementações. Isso foi corrigido, mas agora uma nova chave está sendo usada como padrão. Se você usou a LNURL-auth para logar em sites antes de julho de 2022, ainda poderá fazer login habilitando o método antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
+                },
+                "legacy_lnurl_auth": {
+                    "title": "Método antigo de autenticação para LNDhub e LNBits",
+                    "subtitle": "A assinatura de mensagens e o login com as contas LNDhub (por exemplo, BlueWallet) e LNbits foram alteradas em (março de 2022). Se você fez login com essas contas, ainda poderá ativar o método de assinatura antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
+                }
+            },
+            "camera_access": {
+                "title": "Acesso à câmera",
+                "subtitle": "Acesso para ler códigos QR",
+                "allow": "Permitir acesso à câmera",
+                "granted": "Permissão concedida"
+            },
+            "language": {
+                "title": "Idioma",
+                "subtitle": "As traduções ainda não estão 100% concluídas. <0>Nos ajude a traduzir a Alby para o seu idioma!</0>"
+            },
+            "theme": {
+                "title": "Tema",
+                "subtitle": "Use a Alby no modo escuro ou claro",
+                "options": {
+                    "dark": "Escuro",
+                    "light": "Claro",
+                    "system": "Sistema"
+                }
+            },
+            "show_fiat": {
+                "title": "Sats para Fiat",
+                "subtitle": "Exibe na Alby os valores em Sats e em uma moeda adicional de sua escolha"
+            },
+            "currency": {
+                "title": "Moeda",
+                "subtitle": "Escolha uma moeda adicional para exibir os valores na Alby"
+            },
+            "exchange": {
+                "title": "Serviço provedor de cotações",
+                "subtitle": "Escolha o serviço que fornecerá as cotações do Bitcoin exibidas na Alby"
+            },
+            "personal_data": {
+                "title": "Dados pessoais",
+                "description": "Alguns serviços podem solicitar dados adicionais no pagamento. Esses dados não são compartilhados sem o seu consentimento e você sempre será informado com antecedência sobre os dados a serem enviados."
+            },
+            "name": {
+                "title": "Nome",
+                "subtitle": "",
+                "placeholder": "Insira seu nome"
+            },
+            "email": {
+                "title": "E-mail",
+                "subtitle": "",
+                "placeholder": "Insira seu endereço de e-mail"
+            },
+            "change_password": {
+                "title": "Alterar senha de desbloqueio",
+                "subtitle": "",
+                "screen_reader": "Alterar senha de desbloqueio",
+                "choose_password": {
+                    "label": "Insira uma nova senha de desbloqueio:"
+                },
+                "confirm_password": {
+                    "label": "Confirme a nova senha:"
+                },
+                "errors": {
+                    "enter_password": "Insira uma nova senha de desbloqueio.",
+                    "mismatched_password": "As senhas não correspondem.",
+                    "confirm_password": "Confirme a senha."
+                },
+                "submit": {
+                    "label": "Alterar"
+                },
+                "success": "Senha alterada com sucesso"
+            },
+            "browser_notifications": {
+                "subtitle": "Exibe notificações relacionadas a pagamentos e autenticação no navegador.",
+                "title": "Notificações do navegador"
+            }
+        },
         "send": {
-          "title": "Clicou pagou",
-          "description": "Realize pagamentos enquanto você navega na web"
+            "title": "Enviar",
+            "qrcode": {
+                "title": "Aguardando leitura"
+            },
+            "input": {
+                "label": "Fatura, Endereço Relâmpago ou LNURL",
+                "placeholder": "Cole uma fatura, lnurl ou um endereço relâmpago"
+            }
         },
-        "paywall": {
-          "title": "Chega de paywalls irritantes",
-          "description": "Habilite pagamentos automáticos e estabeleça limites de gastos personalizados para cada site."
+        "lnurlpay": {
+            "amount": {
+                "label": "Quantia"
+            },
+            "comment": {
+                "label": "Comentário"
+            },
+            "name": {
+                "label": "Nome"
+            },
+            "email": {
+                "label": "E-mail"
+            }
         },
-        "privacy": {
-          "title": "Privacidade",
-          "description": "Use a rede relâmpago do bitcoin para autenticar em sites e tenha controle sobre sua privacidade."
+        "receive": {
+            "title": "Receber",
+            "actions": {
+                "create_invoice": "Solicitar Fatura"
+            },
+            "amount": {
+                "label": "Quantia",
+                "placeholder": "Quantia em Satoshi..."
+            },
+            "description": {
+                "label": "Descrição",
+                "placeholder": "Ex. Quem está enviando este pagamento?"
+            },
+            "success": "Pagamento recebido!",
+            "payment": {
+                "waiting": "aguardando pagamento...",
+                "status": "Verificar status do pagamento"
+            }
         },
-        "foss": {
-          "title": "Gratuito e de código aberto",
-          "description": "Código completamente aberto e que pode ser auditado por qualquer pessoa. Sem estatísticas ou rastreadores. Você está no controle."
+        "publishers": {
+            "used": {
+                "title": "Sua lista de sites ⚡️",
+                "description": "Sites onde você já usou a Alby",
+                "no_info": "Nenhum site ainda."
+            },
+            "suggestions": {
+                "title": "Outros sites ⚡️",
+                "description": "Sugestões de sites onde você pode usar a Alby",
+                "list": {
+                    "trading": "Negociação",
+                    "entertaiment": "Entretenimento",
+                    "miscellaneous": "Outros",
+                    "shopping": "Compras",
+                    "gaming": "Games"
+                }
+            },
+            "publisher": {
+                "allowance": {
+                    "title": "Limite de gastos",
+                    "used_budget": "sats usados"
+                }
+            }
         },
+        "make_invoice": {
+            "title": "Solicitar Fatura",
+            "amount": {
+                "label": "Quantia"
+            },
+            "memo": {
+                "label": "Memo"
+            },
+            "errors": {
+                "amount_too_small": "O valor é menor que o mínimo",
+                "amount_too_big": "O valor excede o máximo"
+            }
+        },
+        "confirm_sign_message": {
+            "title": "Assinar",
+            "content": "{{host}} solicita que você assine:"
+        },
+        "confirm_keysend": {
+            "title": "Aprovar Pagamento",
+            "success": "Pagamento enviado! Pré-imagem: {{preimage}}",
+            "payment_summary": {
+                "description": "Enviar pagamento para: {{destination}}"
+            }
+        },
+        "confirm_payment": {
+            "title": "Aprovar pagamento",
+            "success": "Pagamento enviado!",
+            "actions": {
+                "pay_now": "Pague agora"
+            }
+        },
+        "lnurlauth": {
+            "content_message": {
+                "heading": "Você deseja logar em"
+            },
+            "success": "Autenticado com sucesso",
+            "errors": {
+                "status": "Erro: O status de autenticação não está correto"
+            },
+            "submit": "Logar",
+            "title": "Autenticação"
+        },
+        "lnurlwithdraw": {
+            "title": "Resgatar",
+            "content_message": {
+                "heading": "Quantia"
+            },
+            "amount": {
+                "label": "Quantia"
+            },
+            "success": "Solicitação de resgate de fundos enviada com sucesso"
+        },
+        "lnurlchannel": {
+            "success": "Solicitação de canal de pagamento enviada com sucesso",
+            "title": "Solicitar Canal de Pagamento",
+            "content_message": {
+                "heading": "Solicitar canal de pagamento do servidor"
+            }
+        },
+        "keysend": {
+            "title": "Enviar",
+            "success": "Pagamento enviado! Pré-imagem: {{preimage}}",
+            "receiver": {
+                "label": "Enviar pagamento para"
+            },
+            "amount": {
+                "label": "Quantia (Satoshi)"
+            }
+        }
+    },
+    "common": {
+        "password": "Senha",
+        "success": "Sucesso!",
+        "error": "Erro",
+        "settings": "Configurações",
+        "websites": "Sites",
+        "sats": "sats",
+        "loading": "carregando",
+        "amount": "Quantia",
+        "optional": "Opcional",
+        "feedback": "Feedback",
+        "copied": "Copiado!",
         "actions": {
-          "get_started": "Começar"
-        }
-      },
-      "set_password": {
-        "title": "Definir uma senha de desbloqueio",
-        "description": "Os dados armazenados na extensão Alby são criptografados com uma senha de desbloqueio. Não esqueça esta senha! Você precisa dela para usar a extensão Alby (neste navegador)",
-        "choose_password": {
-          "label": "Escolha uma senha de desbloqueio:"
-        },
-        "confirm_password": {
-          "label": "Confirme se você digitou corretamente:"
-        },
-        "errors": {
-          "enter_password": "Insira uma senha.",
-          "confirm_password": "Confirme sua senha.",
-          "mismatched_password": "As senhas não correspondem."
-        }
-      },
-      "test_connection": {
-        "ready": "Perfeito, tudo configurado!",
-        "tutorial": "Agora que você já conectou o servidor, gostaria de ler o tutorial?",
-        "try_tutorial": "Experimente agora",
-        "initializing": "Iniciando sua conta. Aguarde, pode demorar um pouco...",
-        "connection_error": "Erro de conexão",
-        "review_connection_details": "Revise os detalhes da conexão.",
-        "connection_taking_long": "A tentativa de conexão está demorando mais do que o esperado... Os dados estão corretos? O servidor está acessível?",
-        "contact_support": "Se precisar de ajuda, entre em contato com support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Remover conta inválida e editar novamente"
-        }
-      }
-    },
-    "choose_connector": {
-      "title": {
-        "welcome": "Você já possui uma carteira bitcoin na rede relâmpago?",
-        "options": "Adicionar nova conta"
-      },
-      "description": "Você precisa primeiro conectar-se a uma conta ou servidor para poder interagir com seus sites favoritos que aceitam pagamentos em bitcoin!",
-      "alby": {
-        "title": "Carteira Alby",
-        "description": "Crie uma nova conta ou faça login na sua conta Alby",
-        "pre_connect": {
-          "title": "Sua Carteira Bitcoin na Alby",
-          "login_account": "Criar nova conta ou logar na sua conta Alby.",
-          "host_wallet": "A custódia dos seus bitcoins é por nossa conta!",
-          "email": {
-            "label": "Endereço de E-mail"
-          },
-          "optional_lightning_note": {
-            "part1": "Ao criar uma conta Alby, você pode escolher um",
-            "part2": "Endereço Relâmpago",
-            "part3": ". É o jeito mais simples para você receber Bitcoins na Rede Relâmpago.",
-            "part4": "saiba mais"
-          },
-          "optional_lightning_address": {
-            "label": "Escolha um Endereço Relâmpago (opcional)",
-            "suffix": "@getalby.com",
-            "title": "números e letras, pelo menos 3 caracteres"
-          },
-          "errors": {
-            "create_wallet_error": "Falha ao logar ou criar uma nova conta. Se precisar de ajuda, entre em contato com support@getalby.com"
-          }
-        }
-      },
-      "lnd": {
-        "title": "LND",
-        "description": "Conectar servidor LND",
-        "page": {
-          "title": "Conecte no servidor LND",
-          "description": "Você precisa da URL do servidor e um macaroon com permissão de envio e leitura (ex. admin.macaroon)"
-        },
-        "url": {
-          "label": "REST API host e porta",
-          "placeholder": "https://seu-servidor-url:8080"
-        },
-        "macaroon": {
-          "label": "Macaroon (formato HEX)"
-        },
-        "or": "OU",
-        "drag_and_drop": "Arraste e solte o macaroon aqui ou clique em <0>procurar</0>",
-        "errors": {
-          "connection_failed": "Falha na conexão. As credenciais LND estão corretas?"
-        }
-      },
-      "lndhub": {
-        "title": "LNDHub (Bluewallet)",
-        "description": "Conectar carteira Bluewallet",
-        "page": {
-          "title": "Conecte na LNDHub (BlueWallet)",
-          "description": "Na BlueWallet, abra a carteira que você deseja conectar, clique em \"...\", clique em Exportar/Backup para mostrar o código QR. Leia o código QR com sua webcam."
-        },
-        "uri": {
-          "label": "Exportar URI LNDHub"
+            "delete": "Remover",
+            "edit": "Editar",
+            "next": "Próximo",
+            "open": "Abrir",
+            "cancel": "Cancelar",
+            "confirm": "Confirmar",
+            "continue": "Continuar",
+            "connect": "Conectar",
+            "lock": "Bloquear",
+            "unlock": "Desbloquear",
+            "send": "Enviar",
+            "save": "Salvar",
+            "receive": "Receber",
+            "close": "Fechar",
+            "export": "Exportar",
+            "remove": "Remover",
+            "copy": "Copiar",
+            "back": "Voltar"
         },
         "errors": {
-          "invalid_uri": "URI LNDHub inválida",
-          "connection_failed": "Falha na conexão. Tem certeza de que a URI da LNDHub está correta?"
+            "connection_failed": "Falha na conexão"
+        },
+        "description": "Descrição"
+    },
+    "components": {
+        "allowance_menu": {
+            "confirm_delete": "Tem certeza de que deseja remover este site?",
+            "hint": "O limite atual será redefinido",
+            "new_budget": {
+                "label": "Novo limite"
+            },
+            "set_budget": {
+                "title": "Definir um novo limite",
+                "screen_reader": "Opções limite de gastos"
+            }
+        },
+        "qrcode_scanner": {
+            "title": "Ler Código QR",
+            "actions": {
+                "start_scanning": "Iniciar leitura",
+                "stop_scanning": "Parar leitura"
+            },
+            "errors": {
+                "allow_camera_access": "Permita o acesso à câmera na tela configurações."
+            }
+        },
+        "transactionsTable": {
+            "fee": "Taxa",
+            "preimage": "Pré-imagem",
+            "received": "Recebida",
+            "sent": "Enviada",
+            "boostagram": {
+                "sender": "Enviado por",
+                "message": "Mensagem",
+                "app": "App",
+                "podcast": "Podcast"
+            }
+        },
+        "confirm_or_cancel": {
+            "only_trusted": "Conecte-se apenas nos sites em que você confia."
+        },
+        "budget_control": {
+            "remember": {
+                "label": "Lembrar e definir um limite de gastos",
+                "description": "Você pode definir um valor limite para pagamentos automáticos (sem necessidade de confirmação)."
+            },
+            "budget": {
+                "label": "Limite de gastos"
+            }
+        },
+        "companion_download_info": {
+            "description": "Você está tentando se conectar em um servidor que usa Tor. Para funcionar, você precisa ter o aplicativo complementar Alby instalado ou ter o Tor em execução. (Se tiver de dúvidas, recomendamos o aplicativo complementar Alby.)",
+            "download_here": "Faça o download do app complementar da Alby aqui!",
+            "using_tor": "clique aqui para continuar se você usa o navegador Tor",
+            "or": "Ou:"
+        },
+        "toasts": {
+            "connection_error": {
+                "what_you_can_do": "Aqui está o que você pode fazer:",
+                "double_check": "Verifique novamente os detalhes da sua conexão",
+                "if_ssl_errors": "e se houver erros de SSL (por exemplo, ERR_CERT_AUTHORITY_INVALID), clique em \"avançado\" e prossiga para aceitar o certificado.",
+                "visit_guides": "Acesse nossos tutoriais para obter mais ajuda"
+            },
+            "login_failed": {
+                "password_reset": "Esqueceu sua senha? Clique aqui"
+            },
+            "errors": {
+                "invalid_credentials": "Senha incorreta. Verifique se sua senha e endereço de e-mail estão corretos e tente novamente."
+            }
+        },
+        "account_menu": {
+            "title": "Selecionar conta",
+            "options": {
+                "account": {
+                    "add": "Adicionar nova conta",
+                    "manage": "Gerenciar contas"
+                }
+            }
+        },
+        "publishers_table": {
+            "payments": "pagamentos",
+            "used": "usados"
+        },
+        "badge": {
+            "label": {
+                "active": "LIMITE ATIVADO"
+            }
         }
-      },
-      "lnbits": {
-        "title": "LNbits",
-        "description": "Conectar em uma conta LNbits"
-      },
-      "eclair": {
-        "title": "Eclair",
-        "description": "Conectar em um servidor Eclair"
-      },
-      "citadel": {
-        "title": "Citadel",
-        "description": "Conectar no Citadel"
-      },
-      "umbrel": {
-        "title": "Umbrel",
-        "description": "Conectar no Umbrel"
-      },
-      "mynode": {
-        "title": "myNode",
-        "description": "Conectar no myNode"
-      },
-      "start9": {
-        "title": "Start9",
-        "description": "Conectar no Embassy"
-      },
-      "raspiblitz": {
-        "title": "RaspiBlitz",
-        "description": "Conectar no RaspiBlitz"
-      },
-      "bitcoin_beach": {
-        "description": "Crie uma conta ou conecte sua Bitcoin Beach (Galoy)",
-        "title": "Carteira Bitcoin Beach"
-      },
-      "bitcoin_jungle": {
-        "title": "Carteira Bitcoin Jungle",
-        "description": "Crie uma conta ou conecte sua Bitcoin Jungle (Galoy)"
-      },
-      "btcpay": {
-        "title": "Servidor BTCPay",
-        "description": "Conecte no servidor LND BTCPay",
-        "page": {
-          "title": "Conecte no servidor LND BTCPay",
-          "instructions": "Navegue até a BTCPayServer e acesse como administrador. Vá até Configurações>Serviços>LND Rest - Ver informação. Depois Clique \"Ver Código QR\" e copie os dados do Código QR. Cole os dados abaixo:"
-        },
-        "config": {
-          "label": "Dados config",
-          "placeholder": "config=https://seu-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "Falha na conexão. A URL de conexão do servidor BTCPay está correta e acessível?"
-        }
-      }
-    },
-    "home": {
-      "actions": {
-        "send_satoshis": "⚡️ Enviar Satoshis ⚡️",
-        "enable_now": "Ativar"
-      },
-      "recent_transactions": "Transações Recentes",
-      "transaction_list": {
-        "tabs": {
-          "incoming": "Recebidas",
-          "outgoing": "Enviadas"
-        }
-      },
-      "allowance_view": {
-        "recent_transactions": "Transações Recentes",
-        "allowance": "Limite de gastos",
-        "sats_used": "sats usados",
-        "no_transactions": "Sem transações em <0>{{name}}</0>."
-      },
-      "default_view": {
-        "recent_transactions": "Transações Recentes",
-        "no_transactions": "Você ainda não realizou transações com a Alby.",
-        "is_blocked_hint": "A Alby está desativada em {{host}}"
-      }
-    },
-    "accounts": {
-      "title": "Contas",
-      "actions": {
-        "add_account": "Adicionar conta"
-      },
-      "edit": {
-        "title": "Editar Conta",
-        "name": {
-          "label": "Nome"
-        },
-        "screen_reader": "Editar nome da conta"
-      },
-      "export": {
-        "title": "Exportar Conta",
-        "screen_reader": "Exportar detalhes da conta",
-        "waiting": "aguardando dados LndHub...",
-        "your_ln_address": "Seu Endereço Relâmpago:",
-        "tip_mobile": "Dica: Use esta carteira no seu dispositivo móvel",
-        "export_uri": "Credenciais URI LNDHub",
-        "scan_qr": "Leia o Código QR para importar esta carteira na Zeus ou BlueWallet."
-      },
-      "remove": {
-        "confirm": "Tem certeza de que deseja remover a conta: {{name}}? \nEsta ação não pode ser desfeita. Se você usou essa conta para logar em sites, poderá perder o acesso a eles."
-      }
-    },
-    "enable": {
-      "allow": "Permitir {{host}}:",
-      "request1": "Solicitar aprovação para transações",
-      "request2": "Solicitar faturas e informações do servidor",
-      "connect": "Conectar",
-      "block_and_ignore": "Bloquear e ignorar {{host}}",
-      "title": "Conectar"
-    },
-    "unlock": {
-      "unlock_to_continue": "Desbloqueie para continuar",
-      "unlock_password": "Sua senha de desbloqueio",
-      "help_contact": {
-        "part1": "Precisa de ajuda? Contato",
-        "part2": "Suporte Alby"
-      },
-      "unlock_error": {
-        "help": "Os dados da sua conta são criptografados com sua senha de desbloqueio. Se você realmente esqueceu sua senha de desbloqueio, será necessário redefinir e adicionar sua conta novamente.",
-        "link": "Redefinir e adicionar nova conta"
-      }
-    },
-    "settings": {
-      "title": "Configurações",
-      "website_enhancements": {
-        "title": "Pagamentos em redes sociais",
-        "subtitle": "Reconhece automaticamente Endereços Relâmpago em perfis do Twitter, Youtube, etc, facilitando o envio de pagamentos."
-      },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "é um protocolo de autenticação. Ele autentica o usuário usando assinaturas digitais. O protocolo não requer nenhuma outra informação de identificação, como senhas, e-mails, nomes de usuário... Com a Alby você pode usar suas contas bitcoin para logar em sites com segurança. <br /> Para ser compatível com outras carteiras, tivemos que fazer algumas alterações que você pode configurar aqui. <br /> <strong>Por padrão essas opções estão DESLIGADAS.</strong> Use-as apenas se você tiver contas antigas.",
-        "legacy_lnurl_auth_202207": {
-          "title": "LNURL-Auth antigo",
-          "subtitle": "A geração de chave para a LNURL-auth mudou em (julho de 2022). A Alby não era compatível com outras implementações. Isso foi corrigido, mas agora uma nova chave está sendo usada como padrão. Se você usou a LNURL-auth para logar em sites antes de julho de 2022, ainda poderá fazer login habilitando o método antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Método antigo de autenticação para LNDhub e LNBits",
-          "subtitle": "A assinatura de mensagens e o login com as contas LNDhub (por exemplo, BlueWallet) e LNbits foram alteradas em (março de 2022). Se você fez login com essas contas, ainda poderá ativar o método de assinatura antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
-        }
-      },
-      "camera_access": {
-        "title": "Acesso à câmera",
-        "subtitle": "Acesso para ler códigos QR",
-        "allow": "Permitir acesso à câmera",
-        "granted": "Permissão concedida"
-      },
-      "language": {
-        "title": "Idioma",
-        "subtitle": "As traduções ainda não estão 100% concluídas. <0>Nos ajude a traduzir a Alby para o seu idioma!</0>"
-      },
-      "theme": {
-        "title": "Tema",
-        "subtitle": "Use a Alby no modo escuro ou claro",
-        "options": {
-          "dark": "Escuro",
-          "light": "Claro",
-          "system": "Sistema"
-        }
-      },
-      "show_fiat": {
-        "title": "Sats para Fiat",
-        "subtitle": "Mostrar na Alby os valores em Sats e em uma moeda adicional de sua escolha"
-      },
-      "currency": {
-        "title": "Moeda",
-        "subtitle": "Escolha uma moeda adicional para mostrar os valores na Alby"
-      },
-      "exchange": {
-        "title": "Serviço provedor de cotações",
-        "subtitle": "Escolha o serviço que fornecerá as cotações do Bitcoin mostradas na Alby"
-      },
-      "personal_data": {
-        "title": "Dados pessoais",
-        "description": "Alguns serviços podem solicitar dados adicionais no pagamento. Esses dados não são compartilhados sem o seu consentimento e você sempre será informado com antecedência sobre os dados a serem enviados."
-      },
-      "name": {
-        "title": "Nome",
-        "subtitle": "",
-        "placeholder": "Insira seu nome"
-      },
-      "email": {
-        "title": "E-mail",
-        "subtitle": "",
-        "placeholder": "Insira seu endereço de e-mail"
-      },
-      "change_password": {
-        "title": "Alterar senha de desbloqueio",
-        "subtitle": "",
-        "screen_reader": "Alterar senha de desbloqueio",
-        "choose_password": {
-          "label": "Insira uma nova senha de desbloqueio:"
-        },
-        "confirm_password": {
-          "label": "Confirme a nova senha:"
-        },
-        "errors": {
-          "enter_password": "Insira uma nova senha de desbloqueio.",
-          "mismatched_password": "As senhas não correspondem.",
-          "confirm_password": "Confirme a senha."
-        },
-        "submit": {
-          "label": "Alterar"
-        },
-        "success": "Senha alterada com sucesso"
-      },
-      "browser_notifications": {
-        "subtitle": "Mostrar notificações do navegador relacionadas a pagamentos e autenticação.",
-        "title": "Notificações do navegador"
-      }
-    },
-    "send": {
-      "title": "Enviar",
-      "qrcode": {
-        "title": "Aguardando leitura"
-      },
-      "input": {
-        "label": "Fatura, Endereço Relâmpago ou LNURL",
-        "placeholder": "Cole uma fatura, lnurl ou um endereço relâmpago"
-      }
-    },
-    "lnurlpay": {
-      "amount": {
-        "label": "Quantia"
-      },
-      "comment": {
-        "label": "Comentário"
-      },
-      "name": {
-        "label": "Nome"
-      },
-      "email": {
-        "label": "E-mail"
-      }
-    },
-    "receive": {
-      "title": "Receber",
-      "actions": {
-        "create_invoice": "Solicitar Fatura"
-      },
-      "amount": {
-        "label": "Quantia",
-        "placeholder": "Quantia em Satoshi..."
-      },
-      "description": {
-        "label": "Descrição",
-        "placeholder": "Ex. Quem está enviando este pagamento?"
-      },
-      "success": "Pagamento recebido!",
-      "payment": {
-        "waiting": "aguardando pagamento...",
-        "status": "Verificar status do pagamento"
-      }
-    },
-    "publishers": {
-      "used": {
-        "title": "Sua lista de sites ⚡️",
-        "description": "Sites onde você já usou a Alby",
-        "no_info": "Nenhum site ainda."
-      },
-      "suggestions": {
-        "title": "Outros sites ⚡️",
-        "description": "Sugestões de sites onde você pode usar a Alby",
-        "list": {
-          "trading": "Negociação",
-          "entertaiment": "Entretenimento",
-          "miscellaneous": "Outros",
-          "shopping": "Compras",
-          "gaming": "Games"
-        }
-      },
-      "publisher": {
-        "allowance": {
-          "title": "Limite de gastos",
-          "used_budget": "sats usados"
-        }
-      }
-    },
-    "make_invoice": {
-      "title": "Solicitar Fatura",
-      "amount": {
-        "label": "Quantia"
-      },
-      "memo": {
-        "label": "Memo"
-      },
-      "errors": {
-        "amount_too_small": "O valor é menor que o mínimo",
-        "amount_too_big": "O valor excede o máximo"
-      }
-    },
-    "confirm_sign_message": {
-      "title": "Assinar",
-      "content": "{{host}} solicita que você assine:"
-    },
-    "confirm_keysend": {
-      "title": "Aprovar Pagamento",
-      "success": "Pagamento enviado! Pré-imagem: {{preimage}}",
-      "payment_summary": {
-        "description": "Enviar pagamento para: {{destination}}"
-      }
-    },
-    "confirm_payment": {
-      "title": "Aprovar pagamento",
-      "success": "Pagamento enviado!",
-      "actions": {
-        "pay_now": "Pague agora"
-      }
-    },
-    "lnurlauth": {
-      "content_message": {
-        "heading": "Você deseja logar em"
-      },
-      "success": "Autenticado com sucesso",
-      "errors": {
-        "status": "Erro: O status de autenticação não está correto"
-      },
-      "submit": "Logar",
-      "title": "Autenticação"
-    },
-    "lnurlwithdraw": {
-      "title": "Resgatar",
-      "content_message": {
-        "heading": "Quantia"
-      },
-      "amount": {
-        "label": "Quantia"
-      },
-      "success": "Solicitação de resgate de fundos enviada com sucesso"
-    },
-    "lnurlchannel": {
-      "success": "Solicitação de canal de pagamento enviada com sucesso",
-      "title": "Solicitar Canal de Pagamento",
-      "content_message": {
-        "heading": "Solicitar canal de pagamento do servidor"
-      }
-    },
-    "keysend": {
-      "title": "Enviar",
-      "success": "Pagamento enviado! Pré-imagem: {{preimage}}",
-      "receiver": {
-        "label": "Enviar pagamento para"
-      },
-      "amount": {
-        "label": "Quantia (Satoshi)"
-      }
     }
-  },
-  "common": {
-    "password": "Senha",
-    "success": "Sucesso!",
-    "error": "Erro",
-    "settings": "Configurações",
-    "websites": "Sites",
-    "sats": "sats",
-    "loading": "carregando",
-    "amount": "Quantia",
-    "optional": "Opcional",
-    "feedback": "Feedback",
-    "copied": "Copiado!",
-    "actions": {
-      "delete": "Remover",
-      "edit": "Editar",
-      "next": "Próximo",
-      "open": "Abrir",
-      "cancel": "Cancelar",
-      "confirm": "Confirmar",
-      "continue": "Continuar",
-      "connect": "Conectar",
-      "lock": "Bloquear",
-      "unlock": "Desbloquear",
-      "send": "Enviar",
-      "save": "Salvar",
-      "receive": "Receber",
-      "close": "Fechar",
-      "export": "Exportar",
-      "remove": "Remover",
-      "copy": "Copiar",
-      "back": "Voltar"
-    },
-    "errors": {
-      "connection_failed": "Falha na conexão"
-    },
-    "description": "Descrição"
-  },
-  "components": {
-    "allowance_menu": {
-      "confirm_delete": "Tem certeza de que deseja remover este site?",
-      "hint": "O limite atual será redefinido",
-      "new_budget": {
-        "label": "Novo limite"
-      },
-      "set_budget": {
-        "title": "Definir um novo limite",
-        "screen_reader": "Opções limite de gastos"
-      }
-    },
-    "qrcode_scanner": {
-      "title": "Ler Código QR",
-      "actions": {
-        "start_scanning": "Iniciar leitura",
-        "stop_scanning": "Parar leitura"
-      },
-      "errors": {
-        "allow_camera_access": "Permita o acesso à câmera na tela configurações."
-      }
-    },
-    "transactionsTable": {
-      "fee": "Taxa",
-      "preimage": "Pré-imagem",
-      "received": "Recebida",
-      "sent": "Enviada",
-      "boostagram": {
-        "sender": "Enviado por",
-        "message": "Mensagem",
-        "app": "App",
-        "podcast": "Podcast"
-      }
-    },
-    "confirm_or_cancel": {
-      "only_trusted": "Conecte-se apenas nos sites em que você confia."
-    },
-    "budget_control": {
-      "remember": {
-        "label": "Lembrar e definir um limite de gastos",
-        "description": "Você pode definir um valor limite para pagamentos automáticos (sem necessidade de confirmação)."
-      },
-      "budget": {
-        "label": "Limite de gastos"
-      }
-    },
-    "companion_download_info": {
-      "description": "Você está tentando se conectar em um servidor que usa Tor. Para funcionar, você precisa ter o aplicativo complementar Alby instalado ou ter o Tor em execução. (Se tiver de dúvidas, recomendamos o aplicativo complementar Alby.)",
-      "download_here": "Faça o download do app complementar da Alby aqui!",
-      "using_tor": "clique aqui para continuar se você usa o navegador Tor",
-      "or": "Ou:"
-    },
-    "toasts": {
-      "connection_error": {
-        "what_you_can_do": "Aqui está o que você pode fazer:",
-        "double_check": "Verifique novamente os detalhes da sua conexão",
-        "if_ssl_errors": "e se houver erros de SSL (por exemplo, ERR_CERT_AUTHORITY_INVALID), clique em \"avançado\" e prossiga para aceitar o certificado.",
-        "visit_guides": "Acesse nossos tutoriais para obter mais ajuda"
-      },
-      "login_failed": {
-        "password_reset": "Esqueceu sua senha? Clique aqui"
-      },
-      "errors": {
-        "invalid_credentials": "Senha incorreta. Verifique se sua senha e endereço de e-mail estão corretos e tente novamente."
-      }
-    },
-    "account_menu": {
-      "title": "Selecionar conta",
-      "options": {
-        "account": {
-          "add": "Adicionar nova conta",
-          "manage": "Gerenciar contas"
-        }
-      }
-    },
-    "publishers_table": {
-      "payments": "pagamentos",
-      "used": "usados"
-    },
-    "badge": {
-      "label": {
-        "active": "LIMITE ATIVADO"
-      }
-    }
-  }
 }
