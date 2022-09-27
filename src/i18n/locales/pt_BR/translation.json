@@ -244,6 +244,9 @@
       "unlock_error": {
         "help": "Os dados da sua conta são criptografados com sua senha de desbloqueio. Se você realmente esqueceu sua senha de desbloqueio, será necessário redefinir e adicionar sua conta novamente.",
         "link": "Redefinir e adicionar nova conta"
+      },
+      "errors": {
+        "invalid_password": "Senha incorreta"
       }
     },
     "settings": {
@@ -356,7 +359,8 @@
       },
       "email": {
         "label": "E-mail"
-      }
+      },
+      "success": "Sucesso, pagamento enviado!"
     },
     "receive": {
       "title": "Receber",
@@ -506,7 +510,9 @@
     "errors": {
       "connection_failed": "Falha na conexão"
     },
-    "description": "Descrição"
+    "description": "Descrição",
+    "description_full": "Descrição Completa",
+    "message": "Mensagem"
   },
   "components": {
     "allowance_menu": {
