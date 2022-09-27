@@ -187,7 +187,15 @@
       },
       "mynode": {
         "title": "myNode",
-        "description": "Connect to your myNode"
+        "description": "Connect to your myNode",
+        "page": {
+          "title": "Connect to myNode",
+          "instructions": "On your myNode homepage click on the <0>Wallet</0> button for your <0>Lightning</0> service.<1/> Now click on the <0>Pair Wallet</0> button under the <0>Status</0> tab. Enter your password when prompted.<1/> Select the dropdown menu and choose a pairing option. Depending on your setup you can either use the <0>Lightning (REST + Local IP)</0> connection or the <0>Lightning (REST + Tor)</0> connection."
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
       },
       "start9": {
         "title": "Start9",
