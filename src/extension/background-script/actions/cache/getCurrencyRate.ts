@@ -58,7 +58,7 @@ const getFiatBtcRate = async (currency: CURRENCIES): Promise<number> => {
   return data[currency].rate_float / numSatsInBtc;
 };
 
-export const getCurrencyRateFromCache = async (currency: CURRENCIES) => {
+export const getCurrencyRateWithCache = async (currency: CURRENCIES) => {
   let currencyRateCache: CurrencyRate = {};
   const result = await browser.storage.local.get(["currencyRate"]);
 
@@ -89,7 +89,7 @@ const getCurrencyRate = async (message: MessageCurrencyRateGet) => {
   const settings = state.getState().settings;
   const { currency } = settings;
 
-  const rate = await getCurrencyRateFromCache(currency);
+  const rate = await getCurrencyRateWithCache(currency);
 
   return {
     data: { rate },

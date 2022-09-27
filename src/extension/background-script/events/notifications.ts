@@ -1,6 +1,6 @@
 import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
-import { getCurrencyRateFromCache } from "~/extension/background-script/actions/cache/getCurrencyRate";
+import { getCurrencyRateWithCache } from "~/extension/background-script/actions/cache/getCurrencyRate";
 import state from "~/extension/background-script/state";
 import type { PaymentNotificationData, AuthNotificationData } from "~/types";
 
@@ -28,7 +28,7 @@ const paymentSuccessNotification = async (
   const { showFiat, currency } = settings;
 
   if (showFiat) {
-    const rate = await getCurrencyRateFromCache(currency);
+    const rate = await getCurrencyRateWithCache(currency);
 
     paymentAmountFiatLocale = await getFiatValue({
       amount: paymentAmount,
