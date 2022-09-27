@@ -145,7 +145,18 @@
       },
       "eclair": {
         "title": "Eclair",
-        "description": "Connect to your Eclair node"
+        "description": "Connect to your Eclair node",
+        "page": {
+          "title": "Connect to Eclair",
+          "instructions": "You need your Eclair URL and password."
+        },
+        "password": {
+          "label": "Eclair Password"
+        },
+        "url": {
+          "label": "Eclair URL",
+          "placeholder": "http://localhost:8080"
+        }
       },
       "citadel": {
         "title": "Citadel",
