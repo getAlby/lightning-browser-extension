@@ -127,7 +127,21 @@
       },
       "lnbits": {
         "title": "LNbits",
-        "description": "Connect to your LNbits account"
+        "description": "Connect to your LNbits account",
+        "page": {
+          "title": "Connect to LNbits",
+          "instructions": "In LNBits, choose the wallet you want to connect, open it, click on API Info and copy the Admin Key. Paste it below:"
+        },
+        "admin_key": {
+          "label": "LNBits Admin Key",
+          "placeholder": "Your 32 digit admin key"
+        },
+        "url": {
+          "label": "LNbits URL"
+        },
+        "errors": {
+          "connection_failed": "Connection failed. Do you have the correct URL and Admin Key?"
+        }
       },
       "eclair": {
         "title": "Eclair",
