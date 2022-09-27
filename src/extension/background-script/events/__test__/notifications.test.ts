@@ -14,7 +14,7 @@ import {
 
 jest.mock("~/extension/background-script/actions/cache/getCurrencyRate", () => {
   return {
-    getCurrencyRateFromCache: jest.fn(() => Promise.resolve(0.00019233)),
+    getCurrencyRateWithCache: jest.fn(() => Promise.resolve(0.00019233)),
   };
 });
 
