@@ -3,6 +3,7 @@ import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
+import { useTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
@@ -14,6 +15,9 @@ const initialFormData = {
 
 export default function ConnectUmbrel() {
   const navigate = useNavigate();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "choose_connector.umbrel",
+  });
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
   const [hasTorSupport, setHasTorSupport] = useState(false);
@@ -86,34 +90,25 @@ export default function ConnectUmbrel() {
       }
     } catch (e) {
       console.error(e);
-      let message = "Connection failed. Are your Umbrel credentials correct?";
+      let message = "";
       if (e instanceof Error) {
-        message += `\n\n${e.message}`;
+        message += `${e.message}`;
       }
-      toast.error(message);
+      toast.error(<ConnectionErrorToast message={message} />);
     }
     setLoading(false);
   }
 
   return (
     <ConnectorForm
-      title={
-        <h1 className="mb-6 text-2xl font-bold dark:text-white">
-          Connect to your{" "}
-          <a className="underline" href="https://umbrel.com/">
-            Umbrel
-          </a>{" "}
-          node
-        </h1>
-      }
+      title={t("page.title")}
       description={
-        <p>
-          In your Umbrel dashboard go to <strong>Connect Wallet</strong>.<br />
-          Select <strong>lndconnect REST</strong> and copy the{" "}
-          <strong>lndconnect URL</strong>. (Depending on your setup you can
-          either use the <em>local</em> connection or the <em>Tor</em>{" "}
-          connection.)
-        </p>
+        <Trans
+          i18nKey={"page.instructions"}
+          t={t}
+          // eslint-disable-next-line react/jsx-key
+          components={[<strong></strong>]}
+        />
       }
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
@@ -122,8 +117,8 @@ export default function ConnectUmbrel() {
     >
       <TextField
         id="lndconnect"
-        label="lndconnect REST URL"
-        placeholder="lndconnect://yournode:8080?..."
+        label={t("rest_url.label")}
+        placeholder={t("rest_url.placeholder")}
         onChange={handleLndconnectUrl}
         required
       />

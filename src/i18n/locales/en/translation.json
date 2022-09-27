@@ -175,7 +175,15 @@
       },
       "umbrel": {
         "title": "Umbrel",
-        "description": "Connect to your Umbrel"
+        "description": "Connect to your Umbrel",
+        "page": {
+          "title": "Connect to Umbrel",
+          "instructions": "In your Umbrel dashboard go to <0>Connect Wallet</0>. Select <0>lndconnect REST</0> and copy the <0>lndconnect URL</0>. (Depending on your setup you can either use the local connection or the Tor connection.)"
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
       },
       "mynode": {
         "title": "myNode",
