@@ -343,6 +343,7 @@
       }
     },
     "lnurlpay": {
+      "were_sent_to": "were sent to",
       "amount": {
         "label": "Amount"
       },
@@ -472,7 +473,7 @@
   },
   "common": {
     "password": "Password",
-    "success": "Success!",
+    "success": "Success",
     "error": "Error",
     "settings": "Settings",
     "websites": "Websites",
@@ -506,7 +507,8 @@
       "copy": "Copy"
     },
     "errors": {
-      "connection_failed": "Connection failed"
+      "connection_failed": "Connection failed",
+      "payment_failed": "Payment Failed"
     }
   },
   "components": {

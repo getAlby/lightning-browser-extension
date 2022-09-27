@@ -463,7 +463,7 @@
   },
   "common": {
     "password": "Contraseña",
-    "success": "¡Éxito!",
+    "success": "Éxito",
     "error": "Error",
     "settings": "Ajustes",
     "websites": "Sitios web",

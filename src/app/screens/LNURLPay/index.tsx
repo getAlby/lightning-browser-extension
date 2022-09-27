@@ -2,6 +2,7 @@ import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
+import ResultCard from "@components/ResultCard";
 import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
@@ -61,6 +62,8 @@ function LNURLPay() {
   const [successAction, setSuccessAction] = useState<
     LNURLPaymentSuccessAction | undefined
   >();
+  const [result, setResult] = useState("");
+  const [failureMessage, setFailureMessage] = useState("");
 
   useEffect(() => {
     if (showFiat) {
@@ -130,7 +133,10 @@ function LNURLPay() {
         }
       } catch (e) {
         const message = e instanceof Error ? `(${e.message})` : "";
-        toast.error(`Payment aborted: Could not fetch invoice. \n${message}`);
+        setFailureMessage(
+          `Payment aborted: Could not fetch invoice. ${message}`
+        );
+        setResult("fail");
         return;
       }
 
@@ -180,6 +186,7 @@ function LNURLPay() {
         setSuccessAction({ tag: "message", message: t("success") });
       }
 
+      setResult("success");
       auth.fetchAccountInfo(); // Update balance.
 
       // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the payment response. This closes the window which means the user will NOT see the above successAction.
@@ -190,7 +197,10 @@ function LNURLPay() {
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        toast.error(`Error: ${e.message}`);
+        setFailureMessage(
+          `There was an error in processing your transaction. ${e.message}`
+        );
+        setResult("fail");
       }
     } finally {
       setLoadingConfirm(false);
@@ -269,53 +279,76 @@ function LNURLPay() {
     return [];
   }
 
-  function renderSuccessAction() {
-    if (!successAction) return;
+  function header() {
+    switch (result) {
+      case "success":
+        return tCommon("success");
+      case "fail":
+        return tCommon("errors.payment_failed");
+      default:
+        return tCommon("actions.send");
+    }
+  }
+
+  function renderResultAction() {
+    if (!result) return;
+    const isSuccess = result === "success";
+    const isMessage =
+      successAction?.tag === "url" || successAction?.tag === "message";
     let descriptionList: [string, string | React.ReactNode][] = [];
-    if (successAction.tag === "url") {
-      descriptionList = [
-        [`${tCommon("description")}`, successAction.description],
-        [
-          "URL",
-          <>
-            {successAction.url}
-            <div className="mt-4">
-              <Button
-                onClick={() => {
-                  if (successAction.url) utils.openUrl(successAction.url);
-                }}
-                label={tCommon("actions.open")}
-                primary
-              />
-            </div>
-          </>,
-        ],
-      ];
-    } else if (successAction.tag === "message") {
-      descriptionList = [[`${tCommon("message")}`, successAction.message]];
+    if (successAction) {
+      if (successAction.tag === "url") {
+        descriptionList = [
+          [`${tCommon("description")}`, successAction.description],
+          [
+            "URL",
+            <>
+              {successAction.url}
+              <div className="mt-4">
+                <Button
+                  onClick={() => {
+                    if (successAction.url) utils.openUrl(successAction.url);
+                  }}
+                  label={tCommon("actions.open")}
+                  primary
+                />
+              </div>
+            </>,
+          ],
+        ];
+      } else if (successAction.tag === "message") {
+        descriptionList = [[`${tCommon("message")}`, successAction.message]];
+      }
     }
 
     return (
-      <Container maxWidth="sm">
-        <PublisherCard
-          title={navState.origin?.name}
-          description={getRecipient()}
-          image={navState.origin?.icon || getImage()}
-        />
-
-        <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-          {descriptionList.map(([dt, dd]) => (
-            <>
-              <Dt>{dt}</Dt>
-              <Dd>{dd}</Dd>
-            </>
-          ))}
-        </dl>
-
-        <div className="text-center">
-          <button className="underline text-sm text-gray-500" onClick={close}>
-            {tCommon("actions.close")}
-          </button>
+      <Container justifyBetween maxWidth="sm">
+        <div>
+          <ResultCard
+            isSuccess={isSuccess}
+            message={
+              isSuccess
+                ? `${valueSat} (SATS) ${
+                    showFiat ? "(" + fiatValue + ")" : ""
+                  } ${t("were_sent_to")} ${
+                    navState.origin?.name || getRecipient()
+                  }`
+                : failureMessage
+            }
+          />
+          {isMessage && (
+            <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+              {descriptionList.map(([dt, dd]) => (
+                <>
+                  <Dt>{dt}</Dt>
+                  <Dd>{dd}</Dd>
+                </>
+              ))}
+            </dl>
+          )}
+        </div>
+        <div className="mb-4">
+          <Button onClick={close} label={tCommon("actions.close")} fullWidth />
         </div>
       </Container>
     );
@@ -324,8 +357,8 @@ function LNURLPay() {
   return (
     <>
       <div className="flex flex-col grow overflow-hidden">
-        <ScreenHeader title={tCommon("actions.send")} />
-        {!successAction ? (
+        <ScreenHeader title={header()} />
+        {!result ? (
           <>
             <div className="grow overflow-y-auto no-scrollbar">
               <Container maxWidth="sm">
@@ -424,7 +457,7 @@ function LNURLPay() {
             </div>
           </>
         ) : (
-          renderSuccessAction()
+          renderResultAction()
         )}
       </div>
     </>
