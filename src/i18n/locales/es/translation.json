@@ -260,7 +260,7 @@
           "subtitle": "La generación de claves para la autenticación-LNURL ha cambiado (en julio de 2022). Alby no era compatible con otras implementaciones. Esto se cambió, pero ahora se utilizan diferentes claves de inicio de sesión. Si usó autenticación-LNURL para iniciar sesión antes, aún puede habilitar el método anterior. Esta opción se eliminará más adelante, asegúrese de cambiar al nuevo inicio de sesión."
         },
         "legacy_lnurl_auth": {
-          "title": "Firma heredada (Legacy) para LNDhub y LNBits",
+          "title": "Firma heredada (Legacy) para LNDhub y LNbits",
           "subtitle": "Se ha cambiado la firma de mensajes y el inicio de sesión con cuentas LNDhub (por ejemplo, BlueWallet) y LNbits (marzo de 2022). Si inició sesión con estas cuentas, aún puede habilitar el método de firma anterior. Esta opción se eliminará más adelante, asegúrese de cambiar al nuevo inicio de sesión."
         }
       },

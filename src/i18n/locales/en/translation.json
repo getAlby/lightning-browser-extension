@@ -130,10 +130,10 @@
         "description": "Connect to your LNbits account",
         "page": {
           "title": "Connect to LNbits",
-          "instructions": "In LNBits, choose the wallet you want to connect, open it, click on API Info and copy the Admin Key. Paste it below:"
+          "instructions": "In LNbits, choose the wallet you want to connect, open it, click on API Info and copy the Admin Key. Paste it below:"
         },
         "admin_key": {
-          "label": "LNBits Admin Key",
+          "label": "LNbits Admin Key",
           "placeholder": "Your 32 digit admin key"
         },
         "url": {
@@ -316,7 +316,7 @@
           "subtitle": "The key generation for LNURL-auth has changed (July 2022). Alby was not compatible with other implementations. This was changed, but now different login keys are used. If you used LNURL-auth to login before you can still enable the old method. This option will be removed later, make sure to switch to the new login."
         },
         "legacy_lnurl_auth": {
-          "title": "Legacy signing for LNDhub and LNBits",
+          "title": "Legacy signing for LNDhub and LNbits",
           "subtitle": "Message signing and login with LNDhub (e.g. BlueWallet) and LNbits accounts has been changed (March 2022). If you logged in with these accounts you can still enable the old signing method. This option will be removed later, make sure to switch to the new login."
         }
       },

@@ -40,7 +40,7 @@ export default function ConnectLnbits() {
     setLoading(true);
     const { adminkey, url } = formData;
     const account = {
-      name: "LNBits",
+      name: "LNbits",
       config: {
         adminkey,
         url,
@@ -92,7 +92,7 @@ export default function ConnectLnbits() {
     >
       <div className="mb-6">
         <TextField
-          id="lnbits-adminkey"
+          id="adminkey"
           label={t("admin_key.label")}
           placeholder={t("admin_key.placeholder")}
           type="text"
