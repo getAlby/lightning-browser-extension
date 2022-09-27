@@ -224,11 +224,40 @@
       },
       "bitcoin_beach": {
         "title": "Bitcoin Beach Wallet",
-        "description": "Create or connect to a Bitcoin Beach (Galoy) account"
+        "description": "Create or connect to a Bitcoin Beach (Galoy) account",
+        "page": {
+          "title": "Connect to <0>Bitcoin Beach Wallet</0>"
+        }
       },
       "bitcoin_jungle": {
         "title": "Bitcoin Jungle Wallet",
-        "description": "Create or connect to a Bitcoin Jungle (Galoy) account"
+        "description": "Create or connect to a Bitcoin Jungle (Galoy) account",
+        "page": {
+          "title": "Connect to <0>Bitcoin Jungle Wallet</0>"
+        }
+      },
+      "galoy": {
+        "phone_number": {
+          "label": "Enter your phone number"
+        },
+        "sms_code": {
+          "label": "Enter your SMS verification code"
+        },
+        "jwt": {
+          "label": "Enter your JWT token",
+          "info": "The {{label}} login is currently being upgraded. If you are an advanced user, you can grab your JWT token by logging in via the <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>The JWT looks like: <2>eyJhbG...</2><1/><1/>"
+        },
+        "actions": {
+          "login": "Login",
+          "request_sms_code": "Request SMS Code"
+        },
+        "errors": {
+          "failed_to_request_sms": "Failed to request a SMS code",
+          "failed_to_login_sms": "Failed to login with SMS code",
+          "setup_failed": "Setup failed",
+          "missing_jwt": "JWT missing, couldn't log in.",
+          "invalid_jwt": "invalid JWT passed"
+        }
       },
       "btcpay": {
         "title": "BTCPay Server",

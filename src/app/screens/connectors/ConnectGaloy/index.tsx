@@ -2,12 +2,14 @@ import ConnectorForm from "@components/ConnectorForm";
 import Input from "@components/form/Input";
 import axios from "axios";
 import { useState } from "react";
+import { useTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
 
 export const galoyUrls = {
   "galoy-bitcoin-beach": {
+    i18nprefix: "bitcoin_beach",
     label: "Bitcoin Beach Wallet",
     website: "https://galoy.io/bitcoin-beach-wallet/",
     url:
@@ -15,6 +17,7 @@ export const galoyUrls = {
       "https://api.mainnet.galoy.io/graphql/",
   },
   "galoy-bitcoin-jungle": {
+    i18nprefix: "bitcoin_jungle",
     label: "Bitcoin Jungle Wallet",
     website: "https://bitcoinjungle.app/",
     url:
@@ -35,9 +38,13 @@ type Props = {
 
 export default function ConnectGaloy(props: Props) {
   const { instance } = props;
-  const { url, label, website } = galoyUrls[instance];
+  const { url, label, website, i18nprefix } = galoyUrls[instance];
 
   const navigate = useNavigate();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "choose_connector",
+  });
+  const { t: tCommon } = useTranslation("common");
   const [loading, setLoading] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [smsCode, setSmsCode] = useState<string | undefined>();
@@ -97,7 +104,7 @@ export default function ConnectGaloy(props: Props) {
         if (errMessage.match(captchaRegex)) {
           setAcceptJwtDirectly(true);
         } else {
-          const alertMsg = `Failed to request a SMS code${
+          const alertMsg = `${t("galoy.errors.failed_to_request_sms")}${
             errMessage ? `: ${errMessage}` : ""
           }`;
           toast.error(alertMsg);
@@ -108,7 +115,7 @@ export default function ConnectGaloy(props: Props) {
     } catch (e: unknown) {
       console.error(e);
       if (e instanceof Error) {
-        toast.error(`Failed to request a SMS code: ${e.message}`);
+        toast.error(`${t("galoy.errors.failed_to_request_sms")}: ${e.message}`);
       }
     } finally {
       setLoading(false);
@@ -154,7 +161,7 @@ export default function ConnectGaloy(props: Props) {
       if (authData.error || authData.errors) {
         const error = authData.error || authData.errors;
         const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
-        const errorMsg = `Failed to login with SMS code${
+        const errorMsg = `${t("galoy.errors.failed_to_login_sms")}${
           errMessage ? `: ${errMessage}` : ""
         }`;
         throw new Error(errorMsg);
@@ -174,7 +181,9 @@ export default function ConnectGaloy(props: Props) {
         const error = meData.error || meData.errors;
         console.error(error);
         const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
-        const alertMsg = `Setup failed${errMessage ? `: ${errMessage}` : ""}`;
+        const alertMsg = `${t("galoy.errors.setup_failed")}${
+          errMessage ? `: ${errMessage}` : ""
+        }`;
         toast.error(alertMsg);
       } else {
         const walletId = meData.data.me.defaultAccount.defaultWalletId;
@@ -183,7 +192,7 @@ export default function ConnectGaloy(props: Props) {
     } catch (e: unknown) {
       console.error(e);
       if (e instanceof Error) {
-        toast.error(`Setup failed: ${e.message}`);
+        toast.error(`${t("galoy.errors.setup_failed")}: ${e.message}`);
       }
     } finally {
       setLoading(false);
@@ -206,7 +215,7 @@ export default function ConnectGaloy(props: Props) {
     };
     try {
       if (!jwt) {
-        const errorMsg = `JWT missing, couldn't log in.`;
+        const errorMsg = `${t("galoy.errors.missing_jwt")}`;
         throw new Error(errorMsg);
       }
       const authToken = jwt;
@@ -221,7 +230,9 @@ export default function ConnectGaloy(props: Props) {
         const error = meData.error || meData.errors;
         console.error(error);
         const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
-        const alertMsg = `Setup failed${errMessage ? `: ${errMessage}` : ""}`;
+        const alertMsg = `${t("galoy.errors.setup_failed")}${
+          errMessage ? `: ${errMessage}` : ""
+        }`;
         toast.error(alertMsg);
       } else {
         const walletId = meData.data.me.defaultAccount.defaultWalletId;
@@ -232,8 +243,10 @@ export default function ConnectGaloy(props: Props) {
       if (e instanceof Error) {
         const unauthedRegex = /status code 401/;
         toast.error(
-          `Setup failed: ${
-            e.message.match(unauthedRegex) ? `invalid JWT passed` : e.message
+          `${t("galoy.errors.setup_failed")}: ${
+            e.message.match(unauthedRegex)
+              ? `${t("galoy.errors.invalid_jwt")}`
+              : e.message
           }`
         );
       }
@@ -266,12 +279,14 @@ export default function ConnectGaloy(props: Props) {
           navigate("/test-connection");
         }
       } else {
-        toast.error(`Connection failed (${validation.error})`);
+        toast.error(
+          `${tCommon("errors.connection_failed")} (${validation.error})`
+        );
       }
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        toast.error(`Connection failed (${e.message})`);
+        toast.error(`${tCommon("errors.connection_failed")} (${e.message})`);
       }
     } finally {
       setLoading(false);
@@ -282,16 +297,20 @@ export default function ConnectGaloy(props: Props) {
     <ConnectorForm
       title={
         <h1 className="mb-6 text-2xl font-bold dark:text-white">
-          Connect to{" "}
-          <a className="underline" href={website}>
-            {label}
-          </a>
+          <Trans
+            i18nKey={`${i18nprefix}.page.title`}
+            t={t}
+            components={[
+              // eslint-disable-next-line react/jsx-key
+              <a className="underline" href={website}></a>,
+            ]}
+          />
         </h1>
       }
       submitLabel={
         smsCodeRequested || smsCode || acceptJwtDirectly || jwt
-          ? "Login"
-          : "Request SMS Code"
+          ? t("galoy.actions.login")
+          : t("galoy.actions.request_sms_code")
       }
       submitLoading={loading}
       submitDisabled={!phoneNumber}
@@ -306,13 +325,14 @@ export default function ConnectGaloy(props: Props) {
       {!acceptJwtDirectly && (
         <div>
           <label
-            htmlFor="adminkey"
+            htmlFor="phone"
             className="block font-medium text-gray-700 dark:text-white"
           >
-            Enter your phone number
+            {t("galoy.phone_number.label")}
           </label>
           <div className="mt-1">
             <Input
+              id="phone"
               name="phone"
               type="tel"
               required
@@ -324,12 +344,13 @@ export default function ConnectGaloy(props: Props) {
         </div>
       )}
       {smsCodeRequested && (
-        <div>
-          <label htmlFor="url" className="block font-medium text-gray-700">
-            Enter your SMS verification code
+        <div className="mt-6">
+          <label htmlFor="2fa" className="block font-medium text-gray-700">
+            {t("galoy.sms_code.label")}
           </label>
           <div className="mt-1">
             <Input
+              id="2fa"
               name="2fa"
               type="text"
               required
@@ -339,24 +360,34 @@ export default function ConnectGaloy(props: Props) {
         </div>
       )}
       {acceptJwtDirectly && (
-        <div>
-          <p>
-            The {label} login is currently being upgraded. If you are an
-            advanced user, you can grab your JWT token by logging in via the{" "}
-            <a href="https://wallet.mainnet.galoy.io">
-              Web Wallet (wallet.mainnet.galoy.io).
-            </a>
-          </p>
-          <br />
-          <p>
-            The JWT looks like: <b>eyJhbG...</b>
-          </p>
-          <br />
+        <div className="mt-6">
+          <Trans
+            i18nKey={"galoy.jwt.info"}
+            t={t}
+            values={{ label }}
+            components={[
+              // eslint-disable-next-line react/jsx-key
+              <a
+                href="https://wallet.mainnet.galoy.io"
+                className="underline"
+              ></a>,
+              // eslint-disable-next-line react/jsx-key
+              <br />,
+              // eslint-disable-next-line react/jsx-key
+              <b></b>,
+            ]}
+          />
           <label htmlFor="jwt" className="block font-medium text-gray-700">
-            Enter your JWT token
+            {t("galoy.jwt.label")}
           </label>
           <div className="mt-1">
-            <Input name="jwt" type="text" required onChange={handleJwtChange} />
+            <Input
+              id="jwt"
+              name="jwt"
+              type="text"
+              required
+              onChange={handleJwtChange}
+            />
           </div>
         </div>
       )}
