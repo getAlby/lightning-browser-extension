@@ -3,6 +3,7 @@ import i18n from "i18next";
 import { useState, useEffect, createContext, useContext } from "react";
 import { toast } from "react-toastify";
 import { getTheme } from "~/app/utils";
+import { CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
 import { getFiatValue as getFiatValueFunc } from "~/common/utils/currencyConvert";
 import { DEFAULT_SETTINGS } from "~/extension/background-script/state";
@@ -24,17 +25,22 @@ export const SettingsProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [settings, setSettings] =
-    useState<SettingsContextType["settings"]>(DEFAULT_SETTINGS);
+  const [settings, setSettings] = useState<
+    SettingsContextType["settings"] | undefined
+  >();
   const [isLoading, setIsLoading] = useState(true);
   const [currencyRate, setCurrencyRate] = useState(0);
 
   // call this to trigger a re-render on all occassions
   const updateSetting = async (setting: Setting) => {
-    setSettings((prevState) => ({
-      ...prevState,
-      ...setting,
-    }));
+    if (!setting) return;
+    setSettings((prevState) => {
+      if (prevState)
+        return {
+          ...prevState,
+          ...setting,
+        };
+    });
     await api.setSetting(setting); // updates browser storage as well
   };
 
@@ -60,34 +66,34 @@ export const SettingsProvider = ({
     api.getCurrencyRate().then((response) => {
       setCurrencyRate(response.rate);
     });
-  }, [settings.currency]);
+  }, [settings?.currency]);
 
   const getFiatValue = async (amount: number | string) =>
     await getFiatValueFunc({
       amount,
       rate: currencyRate,
-      currency: settings.currency,
+      currency: settings?.currency || CURRENCIES["USD"],
     });
 
   // update locale on every change
   useEffect(() => {
-    i18n.changeLanguage(settings.locale);
+    i18n.changeLanguage(settings?.locale);
 
     // need to switch i.e. `pt_BR` to `pt-br`
-    const daysjsLocaleFormatted = settings.locale
+    const daysjsLocaleFormatted = settings?.locale
       .toLocaleLowerCase()
       .replace("_", "-");
     dayjs.locale(daysjsLocaleFormatted);
-  }, [settings.locale]);
+  }, [settings?.locale]);
 
   // update theme on every change
   useEffect(() => {
     getTheme(); // Get the active theme and apply corresponding Tailwind classes to the document
-  }, [settings.theme]);
+  }, [settings?.theme]);
 
   const value = {
     getFiatValue,
-    settings,
+    settings: settings || DEFAULT_SETTINGS,
     updateSetting,
     isLoading,
   };
