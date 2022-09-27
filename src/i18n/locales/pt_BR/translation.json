@@ -115,7 +115,7 @@
         "description": "Conectar carteira Bluewallet",
         "page": {
           "title": "Conecte na LNDHub (BlueWallet)",
-          "description": "Na BlueWallet, abra a carteira que você deseja conectar, clique em \"...\", clique em Exportar/Backup para mostrar o código QR. Leia o código QR com sua webcam."
+          "description": "Na BlueWallet, abra a carteira que você deseja conectar, clique em \"...\", clique em Exportar/Backup para exibir o código QR. Leia o código QR com sua webcam."
         },
         "uri": {
           "label": "Exportar URI LNDHub"
@@ -285,15 +285,15 @@
       },
       "show_fiat": {
         "title": "Sats para Fiat",
-        "subtitle": "Mostrar na Alby os valores em Sats e em uma moeda adicional de sua escolha"
+        "subtitle": "Exibe na Alby os valores em Sats e em uma moeda adicional de sua escolha"
       },
       "currency": {
         "title": "Moeda",
-        "subtitle": "Escolha uma moeda adicional para mostrar os valores na Alby"
+        "subtitle": "Escolha uma moeda adicional para exibir os valores na Alby"
       },
       "exchange": {
         "title": "Serviço provedor de cotações",
-        "subtitle": "Escolha o serviço que fornecerá as cotações do Bitcoin mostradas na Alby"
+        "subtitle": "Escolha o serviço que fornecerá as cotações do Bitcoin exibidas na Alby"
       },
       "personal_data": {
         "title": "Dados pessoais",
@@ -330,7 +330,7 @@
         "success": "Senha alterada com sucesso"
       },
       "browser_notifications": {
-        "subtitle": "Mostrar notificações do navegador relacionadas a pagamentos e autenticação.",
+        "subtitle": "Exibe notificações relacionadas a pagamentos e autenticação no navegador.",
         "title": "Notificações do navegador"
       }
     },
