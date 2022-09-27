@@ -60,7 +60,7 @@ export const SettingsProvider = ({
     api.getCurrencyRate().then((response) => {
       setCurrencyRate(response.rate);
     });
-  }, []);
+  }, [settings.currency]);
 
   const getFiatValue = async (amount: number | string) =>
     await getFiatValueFunc({

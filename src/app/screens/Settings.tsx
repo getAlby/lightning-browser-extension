@@ -13,7 +13,6 @@ import { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
-import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { CURRENCIES } from "~/common/constants";
 import utils from "~/common/lib/utils";
@@ -26,7 +25,6 @@ const initialFormData = {
 function Settings() {
   const { t } = useTranslation("translation", { keyPrefix: "settings" });
   const { isLoading, settings, updateSetting } = useSettings();
-  const { fetchAccountInfo } = useAccount();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
@@ -201,7 +199,6 @@ function Settings() {
                     name="currency"
                     value={settings.currency}
                     onChange={async (event) => {
-                      fetchAccountInfo();
                       await saveSetting({
                         currency: event.target.value,
                       });
