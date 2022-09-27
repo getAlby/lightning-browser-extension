@@ -346,7 +346,7 @@ function Settings() {
         >
           {t("lnurl_auth.title")}
         </a>{" "}
-        <Trans t={t}>lnurl_auth.hint</Trans>
+        {t("lnurl_auth.hint")}
       </p>
 
       <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">

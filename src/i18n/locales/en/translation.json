@@ -241,6 +241,9 @@
       "unlock_error": {
         "help": "Your account data is encrypted with your unlock password. If you really forgot your unlock password you have to reset and add your Lightning account again.",
         "link": "Reset now and add a new account"
+      },
+      "errors": {
+        "invalid_password": "Invalid password"
       }
     },
     "settings": {
@@ -351,7 +354,8 @@
       },
       "email": {
         "label": "Email"
-      }
+      },
+      "success": "Success, payment sent!"
     },
     "lnurlauth": {
       "title": "Authentication",
@@ -479,6 +483,8 @@
     "feedback": "Feedback",
     "copied": "Copied!",
     "description": "Description",
+    "description_full": "Full Description",
+    "message": "Message",
     "actions": {
       "back": "Back",
       "delete": "Delete",
