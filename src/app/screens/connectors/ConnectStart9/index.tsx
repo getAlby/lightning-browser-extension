@@ -3,6 +3,7 @@ import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
+import { useTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
@@ -14,6 +15,9 @@ const initialFormData = {
 
 export default function ConnectStart9() {
   const navigate = useNavigate();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "choose_connector.start9",
+  });
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
   const [hasTorSupport, setHasTorSupport] = useState(false);
@@ -86,11 +90,11 @@ export default function ConnectStart9() {
       }
     } catch (e) {
       console.error(e);
-      let message = "Connection failed. Are your Embassy credentials correct?";
+      let message = "";
       if (e instanceof Error) {
-        message += `\n\n${e.message}`;
+        message += `${e.message}`;
       }
-      toast.error(message);
+      toast.error(<ConnectionErrorToast message={message} />);
     }
     setLoading(false);
   }
@@ -99,23 +103,20 @@ export default function ConnectStart9() {
     <ConnectorForm
       title={
         <h1 className="mb-6 text-2xl font-bold dark:text-white">
-          Connect to your{" "}
-          <a className="underline" href="https://start9.com/latest/">
-            Embassy
-          </a>{" "}
-          Node
+          {t("page.title")}
         </h1>
       }
       description={
-        <p>
-          <strong>Note</strong>: Currently we only support LND but we will be
-          adding c-lightning support in the future! <br />
-          On your Embassy dashboard click on the{" "}
-          <strong>Lightning Network Daemon</strong> service.
-          <br />
-          Select the <strong>Properties</strong> tab.
-          <br /> Now copy the <strong>LND Connect REST URL</strong>.
-        </p>
+        <Trans
+          i18nKey={"page.instructions"}
+          t={t}
+          components={[
+            // eslint-disable-next-line react/jsx-key
+            <strong></strong>,
+            // eslint-disable-next-line react/jsx-key
+            <br />,
+          ]}
+        />
       }
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
@@ -123,8 +124,8 @@ export default function ConnectStart9() {
     >
       <TextField
         id="lndconnect"
-        label="lndconnect REST URL"
-        placeholder="lndconnect://yournode:8080?..."
+        label={t("rest_url.label")}
+        placeholder={t("rest_url.placeholder")}
         onChange={handleLndconnectUrl}
         required
       />
