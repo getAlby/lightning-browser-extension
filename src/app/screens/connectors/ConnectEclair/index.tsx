@@ -6,7 +6,7 @@ import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
@@ -72,7 +72,21 @@ export default function ConnectEclair() {
 
   return (
     <ConnectorForm
-      title={t("page.title")}
+      title={
+        <h1 className="mb-6 text-2xl font-bold dark:text-white">
+          <Trans
+            i18nKey={"page.title"}
+            t={t}
+            components={[
+              // eslint-disable-next-line react/jsx-key
+              <a
+                className="underline"
+                href="https://github.com/ACINQ/eclair"
+              ></a>,
+            ]}
+          />
+        </h1>
+      }
       description={t("page.instructions")}
       submitLoading={loading}
       submitDisabled={formData.password === "" || formData.url === ""}

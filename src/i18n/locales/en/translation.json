@@ -129,7 +129,7 @@
         "title": "LNbits",
         "description": "Connect to your LNbits account",
         "page": {
-          "title": "Connect to LNbits",
+          "title": "Connect to <0>LNbits</0>",
           "instructions": "In LNbits, choose the wallet you want to connect, open it, click on API Info and copy the Admin Key. Paste it below:"
         },
         "admin_key": {
@@ -147,7 +147,7 @@
         "title": "Eclair",
         "description": "Connect to your Eclair node",
         "page": {
-          "title": "Connect to Eclair",
+          "title": "Connect to <0>Eclair</0>",
           "instructions": "You need your Eclair URL and password."
         },
         "password": {
@@ -162,7 +162,7 @@
         "title": "Citadel",
         "description": "Connect to your local Citadel",
         "page": {
-          "title": "Connect to Citadel",
+          "title": "Connect to <0>Citadel</0> node",
           "instructions": "This currently doesn't work if 2FA is enabled."
         },
         "password": {
@@ -177,7 +177,7 @@
         "title": "Umbrel",
         "description": "Connect to your Umbrel",
         "page": {
-          "title": "Connect to Umbrel",
+          "title": "Connect to <0>Umbrel</0> node",
           "instructions": "In your Umbrel dashboard go to <0>Connect Wallet</0>. Select <0>lndconnect REST</0> and copy the <0>lndconnect URL</0>. (Depending on your setup you can either use the local connection or the Tor connection.)"
         },
         "rest_url": {
@@ -189,7 +189,7 @@
         "title": "myNode",
         "description": "Connect to your myNode",
         "page": {
-          "title": "Connect to myNode",
+          "title": "Connect to <0>myNode</0>",
           "instructions": "On your myNode homepage click on the <0>Wallet</0> button for your <0>Lightning</0> service.<1/> Now click on the <0>Pair Wallet</0> button under the <0>Status</0> tab. Enter your password when prompted.<1/> Select the dropdown menu and choose a pairing option. Depending on your setup you can either use the <0>Lightning (REST + Local IP)</0> connection or the <0>Lightning (REST + Tor)</0> connection."
         },
         "rest_url": {

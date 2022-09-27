@@ -101,7 +101,18 @@ export default function ConnectMyNode() {
 
   return (
     <ConnectorForm
-      title={t("page.title")}
+      title={
+        <h1 className="mb-6 text-2xl font-bold dark:text-white">
+          <Trans
+            i18nKey={"page.title"}
+            t={t}
+            components={[
+              // eslint-disable-next-line react/jsx-key
+              <a className="underline" href="https://mynodebtc.com/"></a>,
+            ]}
+          />
+        </h1>
+      }
       description={
         <Trans
           i18nKey={"page.instructions"}
