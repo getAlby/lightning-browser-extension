@@ -263,7 +263,7 @@
           "subtitle": "A geração de chave para a LNURL-auth mudou em (julho de 2022). A Alby não era compatível com outras implementações. Isso foi corrigido, mas agora uma nova chave está sendo usada como padrão. Se você usou a LNURL-auth para logar em sites antes de julho de 2022, ainda poderá fazer login habilitando o método antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
         },
         "legacy_lnurl_auth": {
-          "title": "Método antigo de autenticação para LNDhub e LNbits",
+          "title": "Método antigo de autenticação para LNDhub e LNBits",
           "subtitle": "A assinatura de mensagens e o login com as contas LNDhub (por exemplo, BlueWallet) e LNbits foram alteradas em (março de 2022). Se você fez login com essas contas, ainda poderá ativar o método de assinatura antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
         }
       },
@@ -333,7 +333,7 @@
         "success": "Senha alterada com sucesso"
       },
       "browser_notifications": {
-        "subtitle": "Exibe notificações relacionadas a pagamentos e autenticação no navegador.",
+        "subtitle": "Exibe no navegador notificações da Alby relacionadas a pagamentos e autenticação.",
         "title": "Notificações do navegador"
       }
     },
@@ -360,7 +360,8 @@
       "email": {
         "label": "E-mail"
       },
-      "success": "Sucesso, pagamento enviado!"
+      "success": "Sucesso, pagamento enviado!",
+      "were_sent_to": "foram enviados para"
     },
     "receive": {
       "title": "Receber",
@@ -508,7 +509,8 @@
       "back": "Voltar"
     },
     "errors": {
-      "connection_failed": "Falha na conexão"
+      "connection_failed": "Falha na conexão",
+      "payment_failed": "Pagamento Falhou"
     },
     "description": "Descrição",
     "description_full": "Descrição Completa",
