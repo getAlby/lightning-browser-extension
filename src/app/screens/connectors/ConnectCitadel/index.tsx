@@ -7,16 +7,20 @@ import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
+import { useTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
 
 export default function ConnectCitadel() {
   const navigate = useNavigate();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "choose_connector.citadel",
+  });
   const [passwordView, setPasswordView] = useState(false);
   const [formData, setFormData] = useState({
     password: "",
-    url: "http://citadel.local",
+    url: "",
   });
   const [loading, setLoading] = useState(false);
   const [hasTorSupport, setHasTorSupport] = useState(false);
@@ -89,21 +93,24 @@ export default function ConnectCitadel() {
     <ConnectorForm
       title={
         <h1 className="mb-6 text-2xl font-bold dark:text-white">
-          Connect to your{" "}
-          <a className="underline" href="https://runcitadel.space/">
-            Citadel
-          </a>{" "}
-          Node
+          <Trans
+            i18nKey={"page.title"}
+            t={t}
+            components={[
+              // eslint-disable-next-line react/jsx-key
+              <a className="underline" href="https://runcitadel.space/"></a>,
+            ]}
+          />
         </h1>
       }
-      description="This currently doesn't work if 2FA is enabled."
+      description={t("page.instructions")}
       submitLoading={loading}
       submitDisabled={formData.password === "" || formData.url === ""}
       onSubmit={handleSubmit}
     >
       <div className="mb-6">
         <TextField
-          label="Password"
+          label={t("password.label")}
           id="password"
           type={passwordView ? "text" : "password"}
           required
@@ -125,9 +132,9 @@ export default function ConnectCitadel() {
       </div>
       <div className="mb-6">
         <TextField
-          label="Citadel URL"
+          label={t("url.label")}
           id="url"
-          placeholder="citadel.local"
+          placeholder={t("url.placeholder")}
           type="text"
           value={formData.url}
           required

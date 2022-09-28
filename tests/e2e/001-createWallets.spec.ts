@@ -88,7 +88,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to LNBits wallet", async () => {
+  test("successfully connects to LNbits wallet", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     // click at "Create LNbits Wallet"
