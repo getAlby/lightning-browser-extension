@@ -9,10 +9,16 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
 
-export default function ConnectLndHub() {
+export type Props = {
+  lndHubType?: "lndhub_bluewallet" | "lndhub_go";
+};
+
+export default function ConnectLndHub({
+  lndHubType = "lndhub_bluewallet",
+}: Props) {
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
-    keyPrefix: "choose_connector.lndhub",
+    keyPrefix: `choose_connector.${lndHubType}`,
   });
   const [formData, setFormData] = useState({
     uri: "",

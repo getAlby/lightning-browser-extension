@@ -21,7 +21,8 @@ import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.png";
 import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
 import lnbits from "/static/assets/icons/lnbits.png";
 import lnd from "/static/assets/icons/lnd.png";
-import lndhub from "/static/assets/icons/lndhub.png";
+import lndhubBlueWallet from "/static/assets/icons/lndhub_bluewallet.png";
+import lndhubGo from "/static/assets/icons/lndhub_go.png";
 import mynode from "/static/assets/icons/mynode.png";
 import raspiblitz from "/static/assets/icons/raspiblitz.png";
 import start9 from "/static/assets/icons/start9.png";
@@ -55,14 +56,30 @@ function getConnectorRoutes() {
       logo: lnd,
     },
     {
-      path: "lnd-hub",
+      path: "lnd-hub-bluewallet",
       element: <ConnectLndHub />,
-      title: i18n.t("choose_connector.lndhub.title", translationI18nNamespace),
-      description: i18n.t(
-        "choose_connector.lndhub.description",
+      title: i18n.t(
+        "choose_connector.lndhub_bluewallet.title",
         translationI18nNamespace
       ),
-      logo: lndhub,
+      description: i18n.t(
+        "choose_connector.lndhub_bluewallet.description",
+        translationI18nNamespace
+      ),
+      logo: lndhubBlueWallet,
+    },
+    {
+      path: "lnd-hub-go",
+      element: <ConnectLndHub lndHubType="lndhub_go" />,
+      title: i18n.t(
+        "choose_connector.lndhub_go.title",
+        translationI18nNamespace
+      ),
+      description: i18n.t(
+        "choose_connector.lndhub_go.description",
+        translationI18nNamespace
+      ),
+      logo: lndhubGo,
     },
     {
       path: "lnbits",
