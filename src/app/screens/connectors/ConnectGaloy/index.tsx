@@ -1,5 +1,6 @@
 import ConnectorForm from "@components/ConnectorForm";
 import Input from "@components/form/Input";
+import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import axios from "axios";
 import { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
@@ -9,7 +10,7 @@ import utils from "~/common/lib/utils";
 
 export const galoyUrls = {
   "galoy-bitcoin-beach": {
-    i18nprefix: "bitcoin_beach",
+    i18nPrefix: "bitcoin_beach",
     label: "Bitcoin Beach Wallet",
     website: "https://galoy.io/bitcoin-beach-wallet/",
     url:
@@ -17,7 +18,7 @@ export const galoyUrls = {
       "https://api.mainnet.galoy.io/graphql/",
   },
   "galoy-bitcoin-jungle": {
-    i18nprefix: "bitcoin_jungle",
+    i18nPrefix: "bitcoin_jungle",
     label: "Bitcoin Jungle Wallet",
     website: "https://bitcoinjungle.app/",
     url:
@@ -38,13 +39,12 @@ type Props = {
 
 export default function ConnectGaloy(props: Props) {
   const { instance } = props;
-  const { url, label, website, i18nprefix } = galoyUrls[instance];
+  const { url, label, website, i18nPrefix } = galoyUrls[instance];
 
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector",
   });
-  const { t: tCommon } = useTranslation("common");
   const [loading, setLoading] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [smsCode, setSmsCode] = useState<string | undefined>();
@@ -280,13 +280,13 @@ export default function ConnectGaloy(props: Props) {
         }
       } else {
         toast.error(
-          `${tCommon("errors.connection_failed")} (${validation.error})`
+          <ConnectionErrorToast message={validation.error as string} />
         );
       }
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        toast.error(`${tCommon("errors.connection_failed")} (${e.message})`);
+        toast.error(<ConnectionErrorToast message={e.message} />);
       }
     } finally {
       setLoading(false);
@@ -298,7 +298,7 @@ export default function ConnectGaloy(props: Props) {
       title={
         <h1 className="mb-6 text-2xl font-bold dark:text-white">
           <Trans
-            i18nKey={`${i18nprefix}.page.title`}
+            i18nKey={`${i18nPrefix}.page.title`}
             t={t}
             components={[
               // eslint-disable-next-line react/jsx-key
