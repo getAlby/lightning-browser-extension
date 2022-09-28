@@ -523,7 +523,7 @@
       "new_budget": {
         "label": "Novo limite"
       },
-      "set_budget": {
+      "edit_allowance": {
         "title": "Definir um novo limite",
         "screen_reader": "Opções limite de gastos"
       }

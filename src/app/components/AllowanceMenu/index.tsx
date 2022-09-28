@@ -1,5 +1,6 @@
 import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import Checkbox from "@components/form/Checkbox";
 import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
 import { useTranslation } from "react-i18next";
@@ -14,7 +15,7 @@ import Menu from "../Menu";
 import DualCurrencyField from "../form/DualCurrencyField/index";
 
 export type Props = {
-  allowance: Pick<Allowance, "id" | "totalBudget">;
+  allowance: Pick<Allowance, "id" | "totalBudget" | "lnurlAuth">;
   onEdit?: () => void;
   onDelete?: () => void;
 };
@@ -29,6 +30,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [budget, setBudget] = useState("0");
+  const [login, setLogin] = useState(false);
   const [fiatAmount, setFiatAmount] = useState("");
   const { t } = useTranslation("components", { keyPrefix: "allowance_menu" });
   const { t: tCommon } = useTranslation("common");
@@ -44,6 +46,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
 
   function openModal() {
     setBudget(allowance.totalBudget.toString());
+    setLogin(allowance.lnurlAuth);
     /**
      * @HACK
      * @headless-ui/menu restores focus after closing a menu, to the button that opened it.
@@ -63,6 +66,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
     await utils.call("updateAllowance", {
       id: allowance.id,
       totalBudget: parseInt(budget),
+      lnurlAuth: login,
     });
 
     onEdit && onEdit();
@@ -105,13 +109,13 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         closeTimeoutMS={200}
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        contentLabel={t("set_budget.screen_reader")}
+        contentLabel={t("edit_allowance.screen_reader")}
         overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
         className="rounded-lg bg-white w-full max-w-lg"
       >
         <div className="p-5 flex justify-between dark:bg-surface-02dp">
           <h2 className="text-2xl font-bold dark:text-white">
-            {t("set_budget.title")}
+            {t("edit_allowance.title")}
           </h2>
           <button onClick={closeModal}>
             <CrossIcon className="w-6 h-6 dark:text-white" />
@@ -137,6 +141,20 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                 fiatValue={fiatAmount}
                 onChange={(e) => setBudget(e.target.value)}
               />
+            </div>
+            <div className="flex items-center mt-6">
+              <Checkbox
+                id="enable_login"
+                name="enable_login"
+                checked={login}
+                onChange={(e) => setLogin(!login)}
+              />
+              <label
+                htmlFor="enable_login"
+                className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+              >
+                {t("enable_login.label")}
+              </label>
             </div>
           </div>
 

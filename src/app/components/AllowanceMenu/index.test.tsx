@@ -31,6 +31,7 @@ const props: Props = {
   allowance: {
     id: 1,
     totalBudget: 2000,
+    lnurlAuth: false,
   },
   onEdit: mock,
 };
@@ -64,7 +65,7 @@ describe("AllowanceMenu", () => {
       user.click(editButton);
     });
 
-    await screen.findByText("Set a new budget");
+    await screen.findByText("Edit Allowance");
 
     await act(async () => {
       await user.clear(screen.getByLabelText("New budget"));
@@ -72,6 +73,49 @@ describe("AllowanceMenu", () => {
     });
 
     expect(screen.getByLabelText("New budget")).toHaveValue(250);
+
+    const saveButton = await screen.findByRole("button", {
+      name: "Save",
+    });
+
+    await act(async () => {
+      await user.click(saveButton);
+    });
+
+    await waitFor(() => expect(mock).toHaveBeenCalled());
+  });
+
+  test("enable website login", async () => {
+    const user = userEvent.setup();
+
+    render(
+      <MemoryRouter>
+        <AllowanceMenu {...props} />
+      </MemoryRouter>
+    );
+
+    const settingsButton = await screen.getByRole("button");
+    await act(() => {
+      user.click(settingsButton); // click settings-button
+    });
+
+    expect(await screen.findByRole("menu")).toBeInTheDocument(); // allowence-menu opens
+
+    const editButton = await screen.findByRole("menuitem", {
+      name: "Edit",
+    });
+
+    await act(() => {
+      user.click(editButton);
+    });
+
+    await screen.findByText("Edit Allowance");
+
+    await act(async () => {
+      await user.click(screen.getByLabelText("Enable website login"));
+    });
+
+    expect(screen.getByLabelText("Enable website login")).toBeChecked();
 
     const saveButton = await screen.findByRole("button", {
       name: "Save",

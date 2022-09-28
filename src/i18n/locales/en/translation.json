@@ -570,8 +570,11 @@
       "new_budget": {
         "label": "New budget"
       },
-      "set_budget": {
-        "title": "Set a new budget",
+      "enable_login": {
+        "label": "Enable website login"
+      },
+      "edit_allowance": {
+        "title": "Edit Allowance",
         "screen_reader": "Allowance Options"
       }
     },
