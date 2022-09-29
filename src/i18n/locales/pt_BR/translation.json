@@ -127,23 +127,75 @@
       },
       "lnbits": {
         "title": "LNbits",
-        "description": "Conectar em uma conta LNbits"
+        "description": "Conectar em uma conta LNbits",
+        "page": {
+          "title": "Conecte na <0>LNbits</0>",
+          "instructions": "Na LNbits, escolha a carteira que você deseja conectar, abra ela, clica em API Info a e copie a Chave Admin e cole abaixo:"
+        },
+        "admin_key": {
+          "label": "Chave Admin LNbits",
+          "placeholder": "Sua chave admin de 32 dígitos"
+        },
+        "url": {
+          "label": "URL LNbits"
+        },
+        "errors": {
+          "connection_failed": "Falha na conexão. A URL e a chave Admin estão corretas?"
+        }
       },
       "eclair": {
         "title": "Eclair",
-        "description": "Conectar em um servidor Eclair"
+        "description": "Conectar em um servidor Eclair",
+        "page": {
+          "title": "Conecte no servidor <0>Eclair</0>",
+          "instructions": "Você precisa da URL e senha da Eclair."
+        },
+        "url": {
+          "label": "URL Eclair",
+          "placeholder": "http://localhost:8080"
+        },
+        "password": {
+          "label": "Senha Eclair"
+        }
       },
       "citadel": {
         "title": "Citadel",
-        "description": "Conectar no Citadel"
+        "description": "Conectar no Citadel",
+        "page": {
+          "title": "Conecte no servidor <0>Citadel</0>",
+          "instructions": "Não funciona se o 2FA estiver ativado."
+        },
+        "password": {
+          "label": "Senha Citadel"
+        },
+        "url": {
+          "label": "URL Citadel",
+          "placeholder": "http://citadel.local"
+        }
       },
       "umbrel": {
         "title": "Umbrel",
-        "description": "Conectar no Umbrel"
+        "description": "Conectar no Umbrel",
+        "page": {
+          "title": "Conecte no servidor <0>Umbrel</0>",
+          "instructions": "Na Umbrel vá até <0>Connect Wallet</0>. Selecione <0>lndconnect REST</0> e copie a <0>lndconnect URL</0>. (Dependendo da sua configuração você pode usar a conexão local ou a conexão Tor.)"
+        },
+        "rest_url": {
+          "label": "URL REST lndconnect",
+          "placeholder": "lndconnect://seuservidor:8080?..."
+        }
       },
       "mynode": {
         "title": "myNode",
-        "description": "Conectar no myNode"
+        "description": "Conectar no myNode",
+        "page": {
+          "title": "Conecte na <0>myNode</0>",
+          "instructions": "Na myNode clique em <0>Wallet</0> botão para seu serviço <0>Lightning</0>.<1/> Agora clique em <0>Pair Wallet</0> botão abaixo da tab <0>Status</0>. Insira sua senha quando solicitada.<1/> Selecione o menu suspenso e escolha uma opção de emparelhamento. Dependendo da sua configuração você pode escolher <0>Conexão Lightning (REST + Local IP)</0> ou conexão <0>Lightning (REST + Tor)</0>."
+        },
+        "rest_url": {
+          "label": "URL REST lndconnect",
+          "placeholder": "lndconnect://seuservidor:8080?..."
+        }
       },
       "start9": {
         "title": "Start9",
@@ -263,7 +315,7 @@
           "subtitle": "A geração de chave para a LNURL-auth mudou em (julho de 2022). A Alby não era compatível com outras implementações. Isso foi corrigido, mas agora uma nova chave está sendo usada como padrão. Se você usou a LNURL-auth para logar em sites antes de julho de 2022, ainda poderá fazer login habilitando o método antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
         },
         "legacy_lnurl_auth": {
-          "title": "Método antigo de autenticação para LNDhub e LNBits",
+          "title": "Método antigo de autenticação para LNDhub e LNbits",
           "subtitle": "A assinatura de mensagens e o login com as contas LNDhub (por exemplo, BlueWallet) e LNbits foram alteradas em (março de 2022). Se você fez login com essas contas, ainda poderá ativar o método de assinatura antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
         }
       },
