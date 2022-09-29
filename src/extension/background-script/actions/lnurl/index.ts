@@ -16,6 +16,9 @@ async function lnurl(message: MessageWebLnLnurl) {
   let lnurlDetails;
   try {
     lnurlDetails = await lnurlLib.getDetails(message.args.lnurlEncoded);
+    if (!("tag" in lnurlDetails)) {
+      return { error: lnurlDetails.reason };
+    }
   } catch (e) {
     return { error: e instanceof Error ? e.message : "Failed to parse LNURL" };
   }

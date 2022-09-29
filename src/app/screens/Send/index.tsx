@@ -41,6 +41,10 @@ function Send() {
 
       if (lnurl) {
         const lnurlDetails = await lnurlLib.getDetails(lnurl);
+        if (!("tag" in lnurlDetails)) {
+          toast.error(lnurlDetails.reason);
+          return;
+        }
 
         if (lnurlDetails.tag === "channelRequest") {
           navigate("/lnurlChannel", {

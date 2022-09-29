@@ -2,7 +2,7 @@ import axios from "axios";
 import lightningPayReq from "bolt11";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
-import { LNURLDetails, LNURLPaymentInfo } from "~/types";
+import { LNURLDetails, LNURLError, LNURLPaymentInfo } from "~/types";
 
 import { bech32Decode } from "../utils/helpers";
 
@@ -61,10 +61,10 @@ const lnurl = {
 
     return null;
   },
-  async getDetails(lnurlString: string) {
+  async getDetails(lnurlString: string): Promise<LNURLError | LNURLDetails> {
     const url = normalizeLnurl(lnurlString);
     let lnurlDetails = {} as LNURLDetails;
-    lnurlDetails.tag = url.searchParams.get("tag") as LNURLDetails["tag"];
+    lnurlDetails.tag = url.searchParams.get("tag") as LNURLDetails["tag"]; // is this still relevant?
     if (lnurlDetails.tag === "login") {
       lnurlDetails.k1 = url.searchParams.get("k1") || "";
       lnurlDetails.action = url.searchParams.get("action") || undefined;

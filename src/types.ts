@@ -370,6 +370,11 @@ export interface LNURLChannelServiceResponse {
   url: string;
 }
 
+export interface LNURLError {
+  status: "ERROR";
+  reason: string;
+}
+
 export type LNURLDetails =
   | LNURLChannelServiceResponse
   | LNURLPayServiceResponse
@@ -386,11 +391,6 @@ export interface LNURLPaymentSuccessAction {
 export interface LNURLPaymentInfo {
   pr: string;
   successAction?: LNURLPaymentSuccessAction;
-}
-
-export interface LNURLPaymentInfoError {
-  status: string;
-  reason: string;
 }
 
 export interface RequestInvoiceArgs {
