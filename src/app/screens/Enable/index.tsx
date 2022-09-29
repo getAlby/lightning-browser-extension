@@ -4,6 +4,7 @@ import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
@@ -16,7 +17,7 @@ type Props = {
 
 function Enable(props: Props) {
   const hasFetchedData = useRef(false);
-  const [, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [remember] = useState(true);
   const [, setEnabled] = useState(false);
   const [budget] = useState(null);
@@ -26,13 +27,21 @@ function Enable(props: Props) {
   const { t: tCommon } = useTranslation("common");
 
   const enable = useCallback(() => {
-    setEnabled(true);
-    msg.reply({
-      enabled: true,
-      remember,
-      budget,
-    });
-  }, [budget, remember]);
+    try {
+      setLoading(true);
+      msg.reply({
+        enabled: true,
+        remember,
+        budget,
+      });
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) toast.error(`${tCommon("error")}: ${e.message}`);
+    } finally {
+      setEnabled(true);
+      setLoading(false);
+    }
+  }, [budget, remember, tCommon]);
 
   function reject(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
@@ -62,7 +71,6 @@ function Enable(props: Props) {
         if (allowance && allowance.enabled) {
           enable();
         }
-        setLoading(false);
       } catch (e) {
         if (e instanceof Error) console.error(e.message);
       }
@@ -102,6 +110,8 @@ function Enable(props: Props) {
         </div>
         <div className="mb-4 text-center flex flex-col">
           <ConfirmOrCancel
+            disabled={loading}
+            loading={loading}
             label={tCommon("actions.connect")}
             onConfirm={enable}
             onCancel={reject}
