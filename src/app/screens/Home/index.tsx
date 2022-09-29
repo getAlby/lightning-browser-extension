@@ -248,7 +248,7 @@ function Home() {
 
                   if (lnData[0].method === "lnurl") {
                     const lnurl = lnData[0].address;
-                    const lnurlDetails = await lnurlLib.getDetails(lnurl); // throws if invalid.
+                    const lnurlDetails = await lnurlLib.getDetails(lnurl);
                     if (!("tag" in lnurlDetails)) {
                       toast.error(lnurlDetails.reason);
                       return;

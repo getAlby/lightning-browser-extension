@@ -64,7 +64,7 @@ const lnurl = {
   async getDetails(lnurlString: string): Promise<LNURLError | LNURLDetails> {
     const url = normalizeLnurl(lnurlString);
     let lnurlDetails = {} as LNURLDetails;
-    lnurlDetails.tag = url.searchParams.get("tag") as LNURLDetails["tag"]; // is this still relevant?
+    lnurlDetails.tag = url.searchParams.get("tag") as LNURLDetails["tag"];
     if (lnurlDetails.tag === "login") {
       lnurlDetails.k1 = url.searchParams.get("k1") || "";
       lnurlDetails.action = url.searchParams.get("action") || undefined;
