@@ -29,9 +29,11 @@ function LNURLAuth() {
 
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function confirm() {
     try {
+      setLoading(true);
       const response = await api.lnurlAuth({
         origin,
         lnurlDetails: details,
@@ -63,6 +65,8 @@ function LNURLAuth() {
       if (e instanceof Error) {
         setErrorMessage(`Error: ${e.message}`);
       }
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -115,6 +119,8 @@ function LNURLAuth() {
                 label={t("submit")}
                 onConfirm={confirm}
                 onCancel={reject}
+                disabled={loading}
+                loading={loading}
               />
 
               <p className="mb-4 text-center text-sm text-gray-400">

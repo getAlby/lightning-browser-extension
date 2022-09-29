@@ -18,9 +18,6 @@ type Props = {
 function Enable(props: Props) {
   const hasFetchedData = useRef(false);
   const [loading, setLoading] = useState(false);
-  const [remember] = useState(true);
-  const [, setEnabled] = useState(false);
-  const [budget] = useState(null);
   const { t } = useTranslation("translation", {
     keyPrefix: "enable",
   });
@@ -31,17 +28,15 @@ function Enable(props: Props) {
       setLoading(true);
       msg.reply({
         enabled: true,
-        remember,
-        budget,
+        remember: true,
       });
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`${tCommon("error")}: ${e.message}`);
     } finally {
-      setEnabled(true);
       setLoading(false);
     }
-  }, [budget, remember, tCommon]);
+  }, [tCommon]);
 
   function reject(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
