@@ -20,7 +20,7 @@ import lnurl from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import type {
-  LNURLPaymentInfoError,
+  LNURLError,
   LNURLPaymentInfo,
   LNURLPaymentSuccessAction,
   LNURLPayServiceResponse,
@@ -111,7 +111,7 @@ function LNURLPay() {
       let response;
 
       try {
-        response = await axios.get<LNURLPaymentInfo | LNURLPaymentInfoError>(
+        response = await axios.get<LNURLPaymentInfo | LNURLError>(
           details.callback,
           {
             params,
@@ -121,13 +121,14 @@ function LNURLPay() {
         );
 
         const isSuccessResponse = function (
-          obj: LNURLPaymentInfo | LNURLPaymentInfoError
+          obj: LNURLPaymentInfo | LNURLError
         ): obj is LNURLPaymentInfo {
           return Object.prototype.hasOwnProperty.call(obj, "pr");
         };
 
         if (!isSuccessResponse(response.data)) {
-          throw new Error(response.data.reason);
+          toast.warn(response.data.reason);
+          return;
         }
       } catch (e) {
         const message = e instanceof Error ? `(${e.message})` : "";
