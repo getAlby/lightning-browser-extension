@@ -111,18 +111,18 @@
         }
       },
       "lndhub_bluewallet": {
-        "title": "LNDHub (Bluewallet)",
+        "title": "Bluewallet",
         "description": "Connect to your Bluewallet mobile wallet",
         "page": {
-          "title": "Connect to LNDHub (BlueWallet)",
+          "title": "Connect to BlueWallet",
           "description": "In BlueWallet, choose the wallet you want to connect, open it, click on \"...\", click on Export/Backup to display the QR code and scan it with your webcam."
         },
         "uri": {
-          "label": "LNDHub Export URI"
+          "label": "BlueWallet Export URI"
         },
         "errors": {
-          "invalid_uri": "Invalid LNDHub URI",
-          "connection_failed": "Connection failed. Is your LNDHub URI correct?"
+          "invalid_uri": "Invalid BlueWallet URI",
+          "connection_failed": "Connection failed. Is your BlueWallet URI correct?"
         }
       },
       "lndhub_go": {

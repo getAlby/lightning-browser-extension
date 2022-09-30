@@ -54,7 +54,7 @@ export default function ConnectLndHub({
     const password = match[2];
     const url = match[3].replace(/\/$/, "");
     const account = {
-      name: "LNDHub",
+      name: lndHubType === "lndhub_bluewallet" ? "Bluewallet" : "LNDHub",
       config: {
         login,
         password,

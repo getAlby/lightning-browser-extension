@@ -56,17 +56,14 @@ function getConnectorRoutes() {
       logo: lnd,
     },
     {
-      path: "lnd-hub-bluewallet",
-      element: <ConnectLndHub />,
-      title: i18n.t(
-        "choose_connector.lndhub_bluewallet.title",
-        translationI18nNamespace
-      ),
+      path: "lnbits",
+      element: <ConnectLnbits />,
+      title: i18n.t("choose_connector.lnbits.title", translationI18nNamespace),
       description: i18n.t(
-        "choose_connector.lndhub_bluewallet.description",
+        "choose_connector.lnbits.description",
         translationI18nNamespace
       ),
-      logo: lndhubBlueWallet,
+      logo: lnbits,
     },
     {
       path: "lnd-hub-go",
@@ -82,14 +79,17 @@ function getConnectorRoutes() {
       logo: lndhubGo,
     },
     {
-      path: "lnbits",
-      element: <ConnectLnbits />,
-      title: i18n.t("choose_connector.lnbits.title", translationI18nNamespace),
-      description: i18n.t(
-        "choose_connector.lnbits.description",
+      path: "lnd-hub-bluewallet",
+      element: <ConnectLndHub />,
+      title: i18n.t(
+        "choose_connector.lndhub_bluewallet.title",
         translationI18nNamespace
       ),
-      logo: lnbits,
+      description: i18n.t(
+        "choose_connector.lndhub_bluewallet.description",
+        translationI18nNamespace
+      ),
+      logo: lndhubBlueWallet,
     },
     {
       path: "eclair",
