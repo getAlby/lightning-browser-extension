@@ -15,6 +15,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import lnurlLib from "~/common/lib/lnurl";
+import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 
 function Send() {
   const { t } = useTranslation("translation", { keyPrefix: "send" });
@@ -41,7 +42,7 @@ function Send() {
 
       if (lnurl) {
         const lnurlDetails = await lnurlLib.getDetails(lnurl);
-        if (!("tag" in lnurlDetails)) {
+        if (isLNURLDetailsError(lnurlDetails)) {
           toast.error(lnurlDetails.reason);
           return;
         }

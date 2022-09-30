@@ -24,6 +24,7 @@ import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
 import lnurlLib from "~/common/lib/lnurl";
 import utils from "~/common/lib/utils";
+import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 import type { Allowance, Battery, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
@@ -249,7 +250,7 @@ function Home() {
                   if (lnData[0].method === "lnurl") {
                     const lnurl = lnData[0].address;
                     const lnurlDetails = await lnurlLib.getDetails(lnurl);
-                    if (!("tag" in lnurlDetails)) {
+                    if (isLNURLDetailsError(lnurlDetails)) {
                       toast.error(lnurlDetails.reason);
                       return;
                     }
