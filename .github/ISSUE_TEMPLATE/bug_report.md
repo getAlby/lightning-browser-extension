@@ -10,17 +10,17 @@ assignees: ""
 
 _A clear and concise description of what the bug is_
 
-### Screenshots (If Any)
+### Screenshots of the changes [optional]
 
-_Add screenshots to help explain your problem_
+_Add screenshots to help explain your problem. You can also add a video here._
 
 ### To Reproduce
 
 Steps to reproduce the behavior:
 
-1. Visit to '...'
-1. Click on '....'
-1. Scroll down to '....'
+1. Visit '...'
+1. Click on '...'
+1. Scroll to '...'
 1. See error
 
 ### Expected behavior
@@ -33,13 +33,13 @@ _A clear and concise description of what you expected to happen_
 - Alby installed through [e.g. installed through the browser stores, installed manually]
 - Wallet connected with Alby [e.g. LND, BlueWallet LNDhub]
 
-### Device information [optional]:
+### Device information [optional]
 
 - OS: [e.g. Windows]
 - Browser [e.g. chrome, safari, firefox]
 - Browser Version [e.g. 22]
 
-### Additional context
+### Additional context [optional]
 
 _Add any other additional context about the problem here_
 
