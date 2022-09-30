@@ -571,7 +571,8 @@
         "label": "New budget"
       },
       "enable_login": {
-        "label": "Enable website login"
+        "title": "Enable website login",
+        "subtitle": "Automatically login without confirmation when the website requests."
       },
       "edit_allowance": {
         "title": "Edit Allowance",

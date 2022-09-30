@@ -1,6 +1,7 @@
 import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
-import Checkbox from "@components/form/Checkbox";
+import Setting from "@components/Setting";
+import Toggle from "@components/form/Toggle";
 import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
 import { useTranslation } from "react-i18next";
@@ -30,7 +31,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [budget, setBudget] = useState("0");
-  const [login, setLogin] = useState(false);
+  const [lnurlAuth, setLnurlAuth] = useState(false);
   const [fiatAmount, setFiatAmount] = useState("");
   const { t } = useTranslation("components", { keyPrefix: "allowance_menu" });
   const { t: tCommon } = useTranslation("common");
@@ -46,7 +47,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
 
   function openModal() {
     setBudget(allowance.totalBudget.toString());
-    setLogin(allowance.lnurlAuth);
+    setLnurlAuth(allowance.lnurlAuth);
     /**
      * @HACK
      * @headless-ui/menu restores focus after closing a menu, to the button that opened it.
@@ -66,7 +67,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
     await utils.call("updateAllowance", {
       id: allowance.id,
       totalBudget: parseInt(budget),
-      lnurlAuth: login,
+      lnurlAuth,
     });
 
     onEdit && onEdit();
@@ -129,7 +130,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
           }}
         >
           <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
-            <div className="w-60">
+            <div className="pb-4 border-b border-gray-200 dark:border-neutral-500">
               <DualCurrencyField
                 id="budget"
                 label={t("new_budget.label")}
@@ -142,20 +143,15 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                 onChange={(e) => setBudget(e.target.value)}
               />
             </div>
-            <div className="flex items-center mt-6">
-              <Checkbox
-                id="enable_login"
-                name="enable_login"
-                checked={login}
-                onChange={(e) => setLogin(!login)}
+            <Setting
+              title={t("enable_login.title")}
+              subtitle={t("enable_login.subtitle")}
+            >
+              <Toggle
+                checked={lnurlAuth}
+                onChange={() => setLnurlAuth(!lnurlAuth)}
               />
-              <label
-                htmlFor="enable_login"
-                className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
-              >
-                {t("enable_login.label")}
-              </label>
-            </div>
+            </Setting>
           </div>
 
           <div className="flex justify-end p-5 dark:bg-surface-02dp">
@@ -163,7 +159,10 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               type="submit"
               label={tCommon("actions.save")}
               primary
-              disabled={budget === ""}
+              disabled={
+                parseInt(budget) === allowance.totalBudget &&
+                lnurlAuth === allowance.lnurlAuth
+              }
             />
           </div>
         </form>

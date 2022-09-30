@@ -111,11 +111,11 @@ describe("AllowanceMenu", () => {
 
     await screen.findByText("Edit Allowance");
 
-    await act(async () => {
-      await user.click(screen.getByLabelText("Enable website login"));
-    });
+    const toggleButton = await screen.findByRole("switch");
 
-    expect(screen.getByLabelText("Enable website login")).toBeChecked();
+    await act(async () => {
+      await user.click(toggleButton);
+    });
 
     const saveButton = await screen.findByRole("button", {
       name: "Save",
