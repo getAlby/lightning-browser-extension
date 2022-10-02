@@ -1,9 +1,14 @@
-import { Message } from "~/types";
+import * as secp256k1 from "@noble/secp256k1";
+import state from "~/extension/background-script/state";
 
-const getPublicKey = async (message: Message) => {
-  return {
-    data: "4a8c13dd19bff29de83e26ab0b73441d18e39cc3838e323eecc12502c4698beb",
-  };
+const getPublicKey = async () => {
+  const privateKey = state.getState().settings.nostrPrivateKey;
+  const buffer = Buffer.from(privateKey, "hex");
+  const publicKey = Buffer.from(
+    secp256k1.schnorr.getPublicKey(buffer)
+  ).toString("hex");
+
+  return publicKey;
 };
 
 export default getPublicKey;

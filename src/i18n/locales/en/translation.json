@@ -443,6 +443,17 @@
           "mismatched_password": "Passwords don't match."
         },
         "success": "Password changed successfully"
+      },
+      "nostr": {
+        "title": "Nostr",
+        "hint": "is the simplest open protocol that is able to create a censorship-resistant global social network once and for all.",
+        "private_key": {
+          "title": "Private key",
+          "subtitle": "If you don't have a key already you can generate one based on the current account you use.",
+          "generate": "Generate",
+          "warning": "You are about to override your current private key. Are you sure?",
+          "success": "Private key saved successfully."
+        }
       }
     },
     "send": {
@@ -583,6 +594,12 @@
       "actions": {
         "pay_now": "Pay now"
       }
+    },
+    "nostr": {
+      "title": "Nostr",
+      "allow": "Allow {{host}} to:",
+      "read_public_key": "Read your public key",
+      "block_and_ignore": "Block and ignore {{host}}"
     }
   },
   "common": {

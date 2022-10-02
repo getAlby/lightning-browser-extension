@@ -29,11 +29,29 @@ function Settings() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
 
+  const [nostrPrivateKey, setNostrPrivateKey] = useState(
+    settings.nostrPrivateKey
+  );
+
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
 
   function closeModal() {
     setModalIsOpen(false);
+  }
+
+  function saveNostrPrivateKey(nostrPrivateKey: string) {
+    if (
+      settings.nostrPrivateKey &&
+      nostrPrivateKey !== settings.nostrPrivateKey &&
+      !confirm(t("nostr.private_key.warning"))
+    ) {
+      return;
+    }
+    saveSetting({
+      nostrPrivateKey: nostrPrivateKey,
+    });
+    toast.success(t("nostr.private_key.success"));
   }
 
   async function updateAccountPassword(password: string) {
@@ -333,7 +351,6 @@ function Settings() {
       <h2 className="mt-12 text-2xl font-bold dark:text-white">
         {t("lnurl_auth.title")}
       </h2>
-
       <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
         <a
           href="https://lightninglogin.live/learn"
@@ -345,7 +362,6 @@ function Settings() {
         </a>{" "}
         {t("lnurl_auth.hint")}
       </p>
-
       <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting
           title={t("lnurl_auth.legacy_lnurl_auth_202207.title")}
@@ -377,6 +393,60 @@ function Settings() {
                 });
               }}
             />
+          )}
+        </Setting>
+      </div>
+
+      <h2 className="mt-12 text-2xl font-bold dark:text-white">
+        {t("nostr.title")}
+      </h2>
+      <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
+        <a
+          href="https://github.com/nostr-protocol/nostr"
+          target="_blank"
+          rel="noreferrer"
+          className="underline"
+        >
+          {t("nostr.title")}
+        </a>{" "}
+        {t("nostr.hint")}
+      </p>
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+        <Setting
+          title={t("nostr.private_key.title")}
+          subtitle={t("nostr.private_key.subtitle")}
+        >
+          {!isLoading && (
+            <>
+              <div className="w-96 flex justify-end">
+                <div className="w-96 flex-auto">
+                  <Input
+                    type="text"
+                    value={nostrPrivateKey}
+                    onBlur={(event) => {
+                      saveNostrPrivateKey(nostrPrivateKey);
+                    }}
+                    onChange={(event) => {
+                      setNostrPrivateKey(event.target.value);
+                    }}
+                  />
+                </div>
+                {!nostrPrivateKey && (
+                  <div className="flex-none ml-2 flex-end">
+                    <Button
+                      label={t("nostr.private_key.generate")}
+                      onClick={async () => {
+                        const result = await utils.call(
+                          "nostr/generatePrivateKey"
+                        );
+                        setNostrPrivateKey(result.privateKey as string);
+                        saveNostrPrivateKey(result.privateKey as string);
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+            </>
           )}
         </Setting>
       </div>

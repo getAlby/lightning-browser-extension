@@ -1,4 +1,5 @@
 import browser from "webextension-polyfill";
+import api from "~/common/lib/api";
 
 import injectScript from "./injectScript";
 import shouldInject from "./shouldInject";
@@ -13,7 +14,10 @@ async function onstart() {
   injectScript(browser.runtime.getURL("js/inpageScriptWebLN.bundle.js"));
 
   // window.nostr
-  injectScript(browser.runtime.getURL("js/inpageScriptNostr.bundle.js"));
+  const nostrEnabled = (await api.getSettings()).nostrPrivateKey;
+  if (nostrEnabled) {
+    injectScript(browser.runtime.getURL("js/inpageScriptNostr.bundle.js"));
+  }
 }
 
 onstart();

@@ -14,11 +14,11 @@ export default class NostrProvider {
   }
 
   async getPublicKey(): Promise<string> {
-    return await this.execute("getPublicKey");
+    return await this.execute("getPublicKeyOrPrompt");
   }
 
   async signEvent(event: nostrEvent): Promise<nostrEvent> {
-    return this.execute("signEvent", { event });
+    return this.execute("signEventOrPrompt", { event });
   }
 
   async getRelays(): Promise<string[]> {

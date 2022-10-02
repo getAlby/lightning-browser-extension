@@ -48,6 +48,7 @@ export const DEFAULT_SETTINGS: SettingsStorage = {
   currency: CURRENCIES.USD,
   exchange: "alby",
   debug: false,
+  nostrPrivateKey: "",
 };
 
 // these keys get synced from the state to the browser storage

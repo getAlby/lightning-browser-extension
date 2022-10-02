@@ -1,28 +1,11 @@
-import * as nip04 from "nostr-tools/nip04";
 import { Message } from "~/types";
 
 const encrypt = async (message: Message) => {
-  const result = nip04.encrypt(
-    "", // TODO: add private key
-    message.args.peer,
-    message.args.plaintext
-  );
-
-  return {
-    data: result,
-  };
+  throw new Error("nostr.nip04.encrypt() is not yet available.");
 };
 
 const decrypt = async (message: Message) => {
-  const result = nip04.decrypt(
-    "", // TODO: add private key
-    message.args.peer,
-    message.args.ciphertext
-  );
-
-  return {
-    data: result,
-  };
+  throw new Error("nostr.nip04.decrypt() is not yet available.");
 };
 
 export { encrypt, decrypt };
