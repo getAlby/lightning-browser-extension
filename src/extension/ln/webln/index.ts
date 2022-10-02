@@ -115,7 +115,7 @@ export default class WebLNProvider {
           !messageEvent.data ||
           !messageEvent.data.response ||
           messageEvent.data.application !== "LBE" ||
-          messageEvent.data.application.substring(0, 5) === "nostr"
+          !messageEvent.data.action.startsWith("webln")
         ) {
           return;
         }
