@@ -42,7 +42,7 @@ function Settings() {
     await utils.call("changePassword", {
       password: formData.password,
     });
-    toast.success("Password changed successfully!");
+    toast.success(t("change_password.success"));
     closeModal();
   }
 
@@ -59,6 +59,21 @@ function Settings() {
         {t("title")}
       </h2>
       <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
+        <Setting
+          title={t("browser_notifications.title")}
+          subtitle={t("browser_notifications.subtitle")}
+        >
+          {!isLoading && (
+            <Toggle
+              checked={settings.browserNotifications}
+              onChange={() => {
+                saveSetting({
+                  browserNotifications: !settings.browserNotifications,
+                });
+              }}
+            />
+          )}
+        </Setting>
         <Setting
           title={t("website_enhancements.title")}
           subtitle={t("website_enhancements.subtitle")}
@@ -114,7 +129,7 @@ function Settings() {
             />
           }
         >
-          <div className="w-32">
+          <div className="w-64">
             <LocaleSwitcher />
           </div>
         </Setting>
@@ -186,7 +201,7 @@ function Settings() {
                     name="currency"
                     value={settings.currency}
                     onChange={async (event) => {
-                      fetchAccountInfo({ isLatestRate: true });
+                      fetchAccountInfo();
                       await saveSetting({
                         currency: event.target.value,
                       });
@@ -305,7 +320,7 @@ function Settings() {
 
             <div className="flex justify-end p-5 dark:bg-surface-02dp">
               <Button
-                label="Change"
+                label={t("change_password.submit.label")}
                 type="submit"
                 primary
                 disabled={
@@ -331,7 +346,7 @@ function Settings() {
         >
           {t("lnurl_auth.title")}
         </a>{" "}
-        <Trans t={t}>lnurl_auth.hint</Trans>
+        {t("lnurl_auth.hint")}
       </p>
 
       <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">

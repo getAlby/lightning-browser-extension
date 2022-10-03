@@ -311,6 +311,10 @@ export interface MessageSettingsSet extends MessageDefault {
   action: "setSetting";
 }
 
+export interface MessageCurrencyRateGet extends MessageDefault {
+  action: "getCurrencyRate";
+}
+
 export interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node
@@ -508,6 +512,7 @@ export interface Allowance extends Omit<DbAllowance, "id"> {
 }
 
 export interface SettingsStorage {
+  browserNotifications: boolean;
   websiteEnhancements: boolean;
   legacyLnurlAuth: boolean;
   isUsingLegacyLnurlAuthKey: boolean;

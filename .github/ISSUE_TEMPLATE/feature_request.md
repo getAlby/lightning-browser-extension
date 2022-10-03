@@ -6,19 +6,19 @@ labels: "✨ feature"
 assignees: ""
 ---
 
-### Is your feature request related to a problem? Please describe
+### Feature description
 
-_A clear and concise description of what the problem is_
+_Is your feature request related to a problem? A clear and concise description of what the problem is_
 
-### Describe the solution you'd like
+### Describe the solution
 
 _A clear and concise description of what you want to happen_
 
-### Describe alternatives you've considered
+### Describe alternatives
 
 _A clear and concise description of any alternative solutions or features you've considered_
 
-### Additional context
+### Additional context [optional]
 
 _Add any other additional context or screenshots about the feature request here_
 

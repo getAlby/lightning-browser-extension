@@ -1,17 +1,14 @@
-import { getFiatValue, getSatValue } from "../currencyConvert";
+import { CURRENCIES } from "~/common/constants";
 
-jest.mock("~/common/lib/api", () => {
-  return {
-    getSettings: jest.fn(() => ({
-      currency: "USD",
-      exchange: "coindesk",
-    })),
-  };
-});
+import { getFiatValue, getSatValue } from "../currencyConvert";
 
 describe("Currency coversion utils", () => {
   test("getFiatValue", async () => {
-    const result = await getFiatValue(123456789);
+    const result = await getFiatValue({
+      amount: 123456789,
+      rate: 0.00029991836,
+      currency: CURRENCIES["USD"],
+    });
 
     expect(result).toBe("$37,026.96");
   });

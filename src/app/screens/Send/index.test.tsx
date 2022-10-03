@@ -10,6 +10,7 @@ jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
   settings: mockSettings,
   isLoading: false,
   updateSetting: jest.fn(),
+  getFiatValue: jest.fn(),
 });
 
 describe("Send", () => {
@@ -28,15 +29,18 @@ describe("Send", () => {
     expect(
       await screen.getByLabelText("Invoice, Lightning Address or LNURL")
     ).toBeInTheDocument();
+
     await act(async () => {
       await user.type(
         screen.getByLabelText("Invoice, Lightning Address or LNURL"),
         "    sampleinvoice  "
       );
     });
+
     expect(
       screen.getByLabelText("Invoice, Lightning Address or LNURL")
     ).toHaveValue("sampleinvoice");
+
     await act(async () => {
       await user.clear(
         screen.getByLabelText("Invoice, Lightning Address or LNURL")
@@ -46,6 +50,7 @@ describe("Send", () => {
         "lightning:test@getalby.com"
       );
     });
+
     expect(
       screen.getByLabelText("Invoice, Lightning Address or LNURL")
     ).toHaveValue("test@getalby.com");

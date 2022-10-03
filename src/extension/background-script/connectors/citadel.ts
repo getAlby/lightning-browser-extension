@@ -9,8 +9,6 @@ import Connector, {
   MakeInvoiceResponse,
   SignMessageArgs,
   SignMessageResponse,
-  VerifyMessageArgs,
-  VerifyMessageResponse,
   CheckPaymentArgs,
   CheckPaymentResponse,
   KeysendArgs,
@@ -106,21 +104,11 @@ class CitadelConnector implements Connector {
     await this.ensureLogin();
     return {
       data: {
+        message: args.message,
         signature: await this.citadel.middleware.lightning.signMessage(
           args.message
         ),
       },
-    };
-  }
-
-  async verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse> {
-    await this.ensureLogin();
-    const res = await this.citadel.middleware.lightning.validateMessage(
-      args.message,
-      args.signature
-    );
-    return {
-      data: res,
     };
   }
 

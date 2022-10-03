@@ -13,7 +13,7 @@ import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
-import type { NavigationState, RequestInvoiceArgs, OriginData } from "~/types";
+import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
 const params = new URLSearchParams(window.location.search);
@@ -69,48 +69,10 @@ function Prompt() {
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
             <Route path="lnurlChannel" element={<LNURLChannel />} />
-            <Route
-              path="makeInvoice"
-              element={
-                <MakeInvoice
-                  amountEditable={
-                    navigationState.args?.amountEditable as boolean
-                  }
-                  memoEditable={navigationState.args?.memoEditable as boolean}
-                  invoiceAttributes={
-                    navigationState.args
-                      ?.invoiceAttributes as RequestInvoiceArgs
-                  }
-                  origin={navigationState.origin as OriginData} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
-                />
-              }
-            />
+            <Route path="makeInvoice" element={<MakeInvoice />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
-            <Route
-              path="confirmKeysend"
-              element={
-                <ConfirmKeysend
-                  destination={navigationState.args?.destination as string}
-                  valueSat={navigationState.args?.amount as string}
-                  customRecords={
-                    navigationState.args?.customRecords as Record<
-                      string,
-                      string
-                    >
-                  }
-                  origin={navigationState.origin as OriginData} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
-                />
-              }
-            />
-            <Route
-              path="confirmSignMessage"
-              element={
-                <ConfirmSignMessage
-                  message={navigationState.args?.message as string}
-                  origin={navigationState.origin as OriginData} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
-                />
-              }
-            />
+            <Route path="confirmKeysend" element={<ConfirmKeysend />} />
+            <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
           </Route>
           <Route
             path="unlock"

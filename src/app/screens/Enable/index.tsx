@@ -77,7 +77,7 @@ function Enable(props: Props) {
 
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
-      <ScreenHeader title={"Connect"} />
+      <ScreenHeader title={t("title")} />
       <Container justifyBetween maxWidth="sm">
         <div>
           <PublisherCard

@@ -21,7 +21,6 @@ import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
-import { getFiatValue } from "~/common/utils/currencyConvert";
 import { poll } from "~/common/utils/helpers";
 
 function Receive() {
@@ -29,7 +28,11 @@ function Receive() {
   const { t: tCommon } = useTranslation("common");
 
   const auth = useAccount();
-  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFiatValue,
+  } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
   const navigate = useNavigate();
@@ -43,7 +46,7 @@ function Receive() {
     paymentRequest: string;
     rHash: string;
   }>();
-  const [copyLabel, setCopyLabel] = useState("Copy");
+  const [copyLabel, setCopyLabel] = useState(tCommon("actions.copy") as string);
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
@@ -65,7 +68,7 @@ function Receive() {
         setFiatAmount(res);
       })();
     }
-  }, [formData, showFiat]);
+  }, [formData, showFiat, getFiatValue]);
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -213,6 +216,7 @@ function Receive() {
                 <div className="mb-4">
                   <DualCurrencyField
                     id="amount"
+                    min={0}
                     label={t("amount.label")}
                     placeholder={t("amount.placeholder")}
                     fiatValue={fiatAmount}

@@ -61,7 +61,7 @@ const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
     page.waitForNavigation(), // The promise resolves after navigation has finished
   ]);
 
-  await findByText($document, "Success!", undefined, { timeout: 15000 });
+  await findByText($document, "Success", undefined, { timeout: 15000 });
 };
 
 test.describe("Create or connect wallets", () => {
@@ -88,7 +88,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to LNBits wallet", async () => {
+  test("successfully connects to LNbits wallet", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     // click at "Create LNbits Wallet"

@@ -21,8 +21,6 @@ import Connector, {
   SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
-  VerifyMessageArgs,
-  VerifyMessageResponse,
 } from "./connector.interface";
 
 interface Config {
@@ -189,19 +187,6 @@ class Lnd implements Connector {
         data: {
           message: args.message,
           signature: data.signature,
-        },
-      };
-    });
-  }
-
-  verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse> {
-    return this.request<{ valid: boolean }>("POST", "/v1/verifymessage", {
-      msg: Base64.stringify(UTF8.parse(args.message)),
-      signature: args.signature,
-    }).then((data) => {
-      return {
-        data: {
-          valid: data.valid,
         },
       };
     });

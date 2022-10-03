@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 import Modal from "react-modal";
+import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import utils from "~/common/lib/utils";
-import { getFiatValue } from "~/common/utils/currencyConvert";
 import type { Allowance } from "~/types";
 
 import Button from "../Button";
@@ -20,7 +20,11 @@ export type Props = {
 };
 
 function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
-  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFiatValue,
+  } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -36,7 +40,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         setFiatAmount(res);
       })();
     }
-  }, [budget, showFiat]);
+  }, [budget, showFiat, getFiatValue]);
 
   function openModal() {
     setBudget(allowance.totalBudget.toString());
@@ -86,6 +90,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                   onDelete && onDelete();
                 } catch (e) {
                   console.error(e);
+                  if (e instanceof Error) toast.error(`Error: ${e.message}`);
                 }
               }
             }}
@@ -124,6 +129,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               <DualCurrencyField
                 id="budget"
                 label={t("new_budget.label")}
+                min={0}
                 autoFocus
                 placeholder={tCommon("sats")}
                 value={budget}

@@ -8,9 +8,9 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import utils from "~/common/lib/utils";
-import { getFiatValue } from "~/common/utils/currencyConvert";
 import type { Allowance, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
@@ -19,7 +19,11 @@ function Publisher() {
   const { t } = useTranslation("translation", {
     keyPrefix: "publishers",
   });
-  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFiatValue,
+  } = useSettings();
 
   const hasFetchedData = useRef(false);
   const [allowance, setAllowance] = useState<Allowance | undefined>();
@@ -89,8 +93,9 @@ function Publisher() {
       }
     } catch (e) {
       console.error(e);
+      if (e instanceof Error) toast.error(`Error: ${e.message}`);
     }
-  }, [id, settings.showFiat]);
+  }, [id, settings.showFiat, getFiatValue]);
 
   useEffect(() => {
     // Run once.

@@ -3,6 +3,7 @@ import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
+import { useTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
@@ -14,6 +15,9 @@ const initialFormData = Object.freeze({
 
 export default function ConnectRaspiBlitz() {
   const navigate = useNavigate();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "choose_connector.raspiblitz",
+  });
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
   const [hasTorSupport, setHasTorSupport] = useState(false);
@@ -97,28 +101,27 @@ export default function ConnectRaspiBlitz() {
     <ConnectorForm
       title={
         <h1 className="mb-6 text-2xl font-bold dark:text-white">
-          Connect to your{" "}
-          <a className="underline" href="https://raspiblitz.org/">
-            RaspiBlitz
-          </a>{" "}
-          node
+          <Trans
+            i18nKey={"page.title"}
+            t={t}
+            components={[
+              // eslint-disable-next-line react/jsx-key
+              <a className="underline" href="https://raspiblitz.org/"></a>,
+            ]}
+          />
         </h1>
       }
       description={
-        <p>
-          You need your node onion address, port, and a macaroon with read and
-          send permissions (e.g. admin.macaroon).
-          <br />
-          <br />
-          <strong>SSH</strong> into your <strong>RaspiBlitz</strong>.<br />
-          Run the command{" "}
-          <strong>sudo cat /mnt/hdd/tor/lndrest/hostname</strong>.
-          <br />
-          Copy and paste the <strong>.onion</strong> address in the input below.
-          <br />
-          Add your <strong>port</strong> after the onion address, the default
-          port is <strong>:8080</strong>.
-        </p>
+        <Trans
+          i18nKey={"page.instructions1"}
+          t={t}
+          components={[
+            // eslint-disable-next-line react/jsx-key
+            <strong></strong>,
+            // eslint-disable-next-line react/jsx-key
+            <br />,
+          ]}
+        />
       }
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
@@ -128,8 +131,8 @@ export default function ConnectRaspiBlitz() {
       <div className="mt-6">
         <TextField
           id="url"
-          label="REST API host"
-          placeholder="your-node-onion-address:port"
+          label={t("rest_api_host.label")}
+          placeholder={t("rest_api_host.placeholder")}
           onChange={handleUrl}
           required
         />
@@ -143,11 +146,16 @@ export default function ConnectRaspiBlitz() {
       )}
       <div className="mt-6">
         <p className="mb-6 text-gray-500 mt-6 dark:text-neutral-400">
-          Select <b>CONNECT</b>.<br />
-          Select <b>EXPORT</b>.<br />
-          Select <b>HEX</b>.<br />
-          Copy the <b>adminMacaroon</b>.<br />
-          Paste the macaroon in the input below.
+          <Trans
+            i18nKey={"page.instructions2"}
+            t={t}
+            components={[
+              // eslint-disable-next-line react/jsx-key
+              <b></b>,
+              // eslint-disable-next-line react/jsx-key
+              <br />,
+            ]}
+          />
         </p>
         <div>
           <TextField

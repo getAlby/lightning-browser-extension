@@ -1,7 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "The power of lightning in your browser",
+      "title": "The power of⚡ bitcoin ⚡in your browser",
       "nav": {
         "welcome": "Welcome",
         "password": "Your Password",
@@ -46,7 +46,7 @@
       },
       "test_connection": {
         "ready": "Awesome, you’re ready to go!",
-        "tutorial": "Now you’ve connected your node would you like to go through a tutorial?",
+        "tutorial": "Now you’ve connected your wallet would you like to go through a tutorial?",
         "try_tutorial": "Give it a try now",
         "initializing": "Initializing your account. Please wait, this can take a minute...",
         "connection_error": "Connection Error",
@@ -82,7 +82,8 @@
           },
           "optional_lightning_address": {
             "label": "Choose your Lightning Address (optional)",
-            "suffix": "@getalby.com"
+            "suffix": "@getalby.com",
+            "title": "numbers and letters, at least 3 characters"
           },
           "errors": {
             "create_wallet_error": "Failed to login or create a new account. If you need help, please contact support@getalby.com"
@@ -126,39 +127,137 @@
       },
       "lnbits": {
         "title": "LNbits",
-        "description": "Connect to your LNbits account"
+        "description": "Connect to your LNbits account",
+        "page": {
+          "title": "Connect to <0>LNbits</0>",
+          "instructions": "In LNbits, choose the wallet you want to connect, open it, click on API Info and copy the Admin Key. Paste it below:"
+        },
+        "admin_key": {
+          "label": "LNbits Admin Key",
+          "placeholder": "Your 32 digit admin key"
+        },
+        "url": {
+          "label": "LNbits URL"
+        },
+        "errors": {
+          "connection_failed": "Connection failed. Do you have the correct URL and Admin Key?"
+        }
       },
       "eclair": {
         "title": "Eclair",
-        "description": "Connect to your Eclair node"
+        "description": "Connect to your Eclair node",
+        "page": {
+          "title": "Connect to <0>Eclair</0>",
+          "instructions": "You need your Eclair URL and password."
+        },
+        "password": {
+          "label": "Eclair Password"
+        },
+        "url": {
+          "label": "Eclair URL",
+          "placeholder": "http://localhost:8080"
+        }
       },
       "citadel": {
         "title": "Citadel",
-        "description": "Connect to your local Citadel"
+        "description": "Connect to your local Citadel",
+        "page": {
+          "title": "Connect to <0>Citadel</0> node",
+          "instructions": "This currently doesn't work if 2FA is enabled."
+        },
+        "password": {
+          "label": "Citadel Password"
+        },
+        "url": {
+          "label": "Citadel URL",
+          "placeholder": "http://citadel.local"
+        }
       },
       "umbrel": {
         "title": "Umbrel",
-        "description": "Connect to your Umbrel"
+        "description": "Connect to your Umbrel",
+        "page": {
+          "title": "Connect to <0>Umbrel</0> node",
+          "instructions": "In your Umbrel dashboard go to <0>Connect Wallet</0>. Select <0>lndconnect REST</0> and copy the <0>lndconnect URL</0>. (Depending on your setup you can either use the local connection or the Tor connection.)"
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
       },
       "mynode": {
         "title": "myNode",
-        "description": "Connect to your myNode"
+        "description": "Connect to your myNode",
+        "page": {
+          "title": "Connect to <0>myNode</0>",
+          "instructions": "On your myNode homepage click on the <0>Wallet</0> button for your <0>Lightning</0> service.<1/> Now click on the <0>Pair Wallet</0> button under the <0>Status</0> tab. Enter your password when prompted.<1/> Select the dropdown menu and choose a pairing option. Depending on your setup you can either use the <0>Lightning (REST + Local IP)</0> connection or the <0>Lightning (REST + Tor)</0> connection."
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
       },
       "start9": {
         "title": "Start9",
-        "description": "Connect to your Embassy"
+        "description": "Connect to your Embassy",
+        "page": {
+          "title": "Connect to your <0>Embassy</0> node",
+          "instructions": "<0>Note:</0> Currently we only support LND but we will be adding c-lightning support in the future!<1/>On your Embassy dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
       },
       "raspiblitz": {
         "title": "RaspiBlitz",
-        "description": "Connect to your RaspiBlitz"
+        "description": "Connect to your RaspiBlitz",
+        "page": {
+          "title": "Connect to your <0>RaspiBlitz</0> node",
+          "instructions1": "You need your node onion address, port, and a macaroon with read and send permissions (e.g. admin.macaroon).<1/><1/><0>SSH</0> into your <0>RaspiBlitz</0>.<1/>Run the command <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Copy and paste the <0>.onion</0> address in the input below.<1/>Add your <0>port</0> after the onion address, the default port is <0>:8080</0>.",
+          "instructions2": "Select <0>CONNECT</0>.<1/>Select <0>EXPORT</0>.<1/>Select <0>HEX</0>.<1/>Copy the <0>adminMacaroon</0>.<1/>Paste the macaroon in the input below."
+        },
+        "rest_api_host": {
+          "label": "REST API host",
+          "placeholder": "your-node-onion-address:port"
+        }
       },
       "bitcoin_beach": {
         "title": "Bitcoin Beach Wallet",
-        "description": "Create or connect to a Bitcoin Beach (Galoy) account"
+        "description": "Create or connect to a Bitcoin Beach (Galoy) account",
+        "page": {
+          "title": "Connect to <0>Bitcoin Beach Wallet</0>"
+        }
       },
       "bitcoin_jungle": {
         "title": "Bitcoin Jungle Wallet",
-        "description": "Create or connect to a Bitcoin Jungle (Galoy) account"
+        "description": "Create or connect to a Bitcoin Jungle (Galoy) account",
+        "page": {
+          "title": "Connect to <0>Bitcoin Jungle Wallet</0>"
+        }
+      },
+      "galoy": {
+        "phone_number": {
+          "label": "Enter your phone number"
+        },
+        "sms_code": {
+          "label": "Enter your SMS verification code"
+        },
+        "jwt": {
+          "label": "Enter your JWT token",
+          "info": "The {{label}} login is currently being upgraded. If you are an advanced user, you can grab your JWT token by logging in via the <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>The JWT looks like: <2>eyJhbG...</2><1/><1/>"
+        },
+        "actions": {
+          "login": "Login",
+          "request_sms_code": "Request SMS Code"
+        },
+        "errors": {
+          "failed_to_request_sms": "Failed to request a SMS code",
+          "failed_to_login_sms": "Failed to login with SMS code",
+          "setup_failed": "Setup failed",
+          "missing_jwt": "JWT missing, couldn't log in.",
+          "invalid_jwt": "invalid JWT passed"
+        }
       },
       "btcpay": {
         "title": "BTCPay Server",
@@ -207,7 +306,7 @@
       },
       "edit": {
         "title": "Edit Account",
-        "label": "Name",
+        "name": { "label": "Name" },
         "screen_reader": "Edit account name"
       },
       "export": {
@@ -224,10 +323,10 @@
       }
     },
     "enable": {
+      "title": "Connect",
       "allow": "Allow {{host}} to:",
       "request1": "Request approval for transactions",
       "request2": "Request invoices and lightning information",
-      "connect": "Connect",
       "block_and_ignore": "Block and ignore {{host}}"
     },
     "unlock": {
@@ -240,10 +339,17 @@
       "unlock_error": {
         "help": "Your account data is encrypted with your unlock password. If you really forgot your unlock password you have to reset and add your Lightning account again.",
         "link": "Reset now and add a new account"
+      },
+      "errors": {
+        "invalid_password": "Invalid password"
       }
     },
     "settings": {
       "title": "Settings",
+      "browser_notifications": {
+        "title": "Browser notifications",
+        "subtitle": "Payment and authentication related notifications."
+      },
       "website_enhancements": {
         "title": "Website enhancements",
         "subtitle": "Tipping enhancements for Twitter, YouTube, etc."
@@ -256,7 +362,7 @@
           "subtitle": "The key generation for LNURL-auth has changed (July 2022). Alby was not compatible with other implementations. This was changed, but now different login keys are used. If you used LNURL-auth to login before you can still enable the old method. This option will be removed later, make sure to switch to the new login."
         },
         "legacy_lnurl_auth": {
-          "title": "Legacy signing for LNDhub and LNBits",
+          "title": "Legacy signing for LNDhub and LNbits",
           "subtitle": "Message signing and login with LNDhub (e.g. BlueWallet) and LNbits accounts has been changed (March 2022). If you logged in with these accounts you can still enable the old signing method. This option will be removed later, make sure to switch to the new login."
         }
       },
@@ -315,11 +421,13 @@
         "confirm_password": {
           "label": "Confirm new password:"
         },
+        "submit": { "label": "Change" },
         "errors": {
           "enter_password": "Please enter a new unlock password.",
           "confirm_password": "Please confirm your password.",
           "mismatched_password": "Passwords don't match."
-        }
+        },
+        "success": "Password changed successfully"
       }
     },
     "send": {
@@ -330,21 +438,51 @@
       "input": {
         "label": "Invoice, Lightning Address or LNURL",
         "placeholder": "Paste invoice, lnurl or lightning address"
-      },
-      "lnurlpay": {
-        "amount": {
-          "label": "Amount"
-        },
-        "comment": {
-          "label": "Comment"
-        },
-        "name": {
-          "label": "Name"
-        },
-        "email": {
-          "label": "Email"
-        }
       }
+    },
+    "lnurlpay": {
+      "were_sent_to": "were sent to",
+      "amount": {
+        "label": "Amount"
+      },
+      "comment": {
+        "label": "Comment"
+      },
+      "name": {
+        "label": "Name"
+      },
+      "email": {
+        "label": "Email"
+      },
+      "success": "Success, payment sent!"
+    },
+    "lnurlauth": {
+      "title": "Authentication",
+      "content_message": {
+        "heading": "Do you want to login to"
+      },
+      "submit": "Login",
+      "success": "Authenticated successfully",
+      "errors": {
+        "status": "Error: Auth status is not ok"
+      }
+    },
+    "lnurlchannel": {
+      "title": "Channel Request",
+      "content_message": {
+        "heading": "Request a channel from the node"
+      },
+      "success": "Channel request sent successfully"
+    },
+    "lnurlwithdraw": {
+      "title": "Withdraw",
+      "content_message": {
+        "heading": "Amount"
+      },
+      "amount": {
+        "label": "Amount"
+      },
+      "success": "Withdraw request sent successfully"
     },
     "receive": {
       "title": "Receive",
@@ -414,6 +552,16 @@
         "description": "Send payment to: {{destination}}"
       }
     },
+    "keysend": {
+      "title": "Send",
+      "success": "Payment sent! Preimage: {{preimage}}",
+      "receiver": {
+        "label": "Send payment to"
+      },
+      "amount": {
+        "label": "Amount (Satoshi)"
+      }
+    },
     "confirm_payment": {
       "title": "Approve Payment",
       "success": "Payment sent!",
@@ -424,7 +572,7 @@
   },
   "common": {
     "password": "Password",
-    "success": "Success!",
+    "success": "Success",
     "error": "Error",
     "settings": "Settings",
     "websites": "Websites",
@@ -434,7 +582,11 @@
     "optional": "Optional",
     "feedback": "Feedback",
     "copied": "Copied!",
+    "description": "Description",
+    "description_full": "Full Description",
+    "message": "Message",
     "actions": {
+      "back": "Back",
       "delete": "Delete",
       "edit": "Edit",
       "next": "Next",
@@ -454,7 +606,8 @@
       "copy": "Copy"
     },
     "errors": {
-      "connection_failed": "Connection failed"
+      "connection_failed": "Connection failed",
+      "payment_failed": "Payment Failed"
     }
   },
   "components": {
@@ -521,6 +674,25 @@
       },
       "errors": {
         "invalid_credentials": "Invalid password. Please review your password and email address and try again."
+      }
+    },
+    "account_menu": {
+      "screen_reader": "Toggle Dropdown",
+      "title": "Switch account",
+      "options": {
+        "account": {
+          "add": "Add a new account",
+          "manage": "Manage accounts"
+        }
+      }
+    },
+    "publishers_table": {
+      "payments": "payments",
+      "used": "used"
+    },
+    "badge": {
+      "label": {
+        "active": "ACTIVE"
       }
     }
   }

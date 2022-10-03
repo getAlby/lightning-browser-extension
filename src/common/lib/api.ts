@@ -119,6 +119,9 @@ export const lnurlAuth = (
 ): Promise<LnurlAuthResponse> =>
   utils.call<LnurlAuthResponse>("lnurlAuth", options);
 
+export const getCurrencyRate = async () =>
+  utils.call<{ rate: number }>("getCurrencyRate");
+
 export default {
   getAccountInfo,
   getAccounts,
@@ -140,4 +143,5 @@ export default {
   getBlocklist,
   getInvoices,
   lnurlAuth,
+  getCurrencyRate,
 };

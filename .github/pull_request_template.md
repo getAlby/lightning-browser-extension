@@ -2,20 +2,22 @@
 
 _A clear and concise description of what you want to happen_
 
-### Link this PR to an issue
+### Link this PR to an issue [optional]
 
-_#ISSUE-NUMBER_
+Fixes _#ISSUE-NUMBER_
 
-### Type of change (Remove other not matching type)
+### Type of change
+
+(Remove other not matching type)
 
 - `fix`: Bug fix (non-breaking change which fixes an issue)
 - `feat`: New feature (non-breaking change which adds functionality)
 - `feat!`: Breaking change (fix or feature that would cause existing functionality to not work as expected)
 - `docs`: Documentation update
 
-### Screenshots of the changes (If any)
+### Screenshots of the changes [optional]
 
-_Add screenshots to help explain your problem_
+_Add screenshots to make your changes easier to understand. You can also add a video here._
 
 ### How has this been tested?
 

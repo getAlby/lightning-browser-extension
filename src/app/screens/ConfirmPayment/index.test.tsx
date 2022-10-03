@@ -4,23 +4,9 @@ import lightningPayReq from "bolt11";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import * as SettingsContext from "~/app/context/SettingsContext";
-import * as CurrencyConvert from "~/common/utils/currencyConvert";
 import type { OriginData } from "~/types";
 
 import ConfirmPayment from "./index";
-
-jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
-  settings: mockSettings,
-  isLoading: false,
-  updateSetting: jest.fn(),
-});
-
-jest
-  .spyOn(CurrencyConvert, "getFiatValue")
-  .mockImplementationOnce(() => Promise.resolve("$0.00"))
-  .mockImplementationOnce(() => Promise.resolve("$0.00"))
-  .mockImplementationOnce(() => Promise.resolve("$0.01"))
-  .mockImplementationOnce(() => Promise.resolve("$0.05"));
 
 const mockOrigin: OriginData = {
   location: "https://getalby.com/demo",
@@ -56,7 +42,18 @@ jest.mock("~/app/hooks/useNavigationState", () => {
 });
 
 describe("ConfirmPayment", () => {
-  test("render", async () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test("renders with fiat", async () => {
+    jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
+      settings: { ...mockSettings },
+      isLoading: false,
+      updateSetting: jest.fn(),
+      getFiatValue: jest.fn(() => Promise.resolve("$0.01")),
+    });
+
     await act(async () => {
       render(
         <MemoryRouter>
@@ -67,12 +64,20 @@ describe("ConfirmPayment", () => {
 
     expect(await screen.findByText("Amount")).toBeInTheDocument();
     expect(await screen.findByText("Description")).toBeInTheDocument();
+    expect(screen.getByText("(~$0.01)")).toBeInTheDocument();
     expect(
       await screen.findByLabelText("Remember and set a budget")
     ).toBeInTheDocument();
   });
 
   test("toggles set budget, displays input with a default budget", async () => {
+    jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
+      settings: { ...mockSettings, showFiat: false },
+      isLoading: false,
+      updateSetting: jest.fn(),
+      getFiatValue: jest.fn(() => Promise.resolve("$0.01")),
+    });
+
     const user = userEvent.setup();
 
     await act(async () => {
@@ -84,8 +89,6 @@ describe("ConfirmPayment", () => {
     });
 
     expect(screen.getByText("25 sats")).toBeInTheDocument();
-    expect(screen.getByText("(~$0.01)")).toBeInTheDocument();
-    expect(screen.queryByText("~$0.05")).not.toBeInTheDocument();
 
     await act(() => {
       user.click(screen.getByText("Remember and set a budget"));
@@ -94,6 +97,5 @@ describe("ConfirmPayment", () => {
     const input = await screen.findByLabelText("Budget");
     const satoshis = lightningPayReq.decode(paymentRequest).satoshis || 0;
     expect(input).toHaveValue(satoshis * 10);
-    expect(screen.getByText("~$0.05")).toBeInTheDocument();
   });
 });

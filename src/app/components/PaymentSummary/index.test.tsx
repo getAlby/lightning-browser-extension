@@ -1,5 +1,8 @@
 import PaymentSummary, { Props } from "@components/PaymentSummary";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import { I18nextProvider } from "react-i18next";
+import { BrowserRouter } from "react-router-dom";
+import i18n from "~/../tests/unit/helpers/i18n";
 
 const defaultProps = {
   amount: "1234",
@@ -8,32 +11,38 @@ const defaultProps = {
 
 describe("PaymentSummary", () => {
   const renderComponent = (props?: Partial<Props>) =>
-    render(<PaymentSummary {...defaultProps} {...props} />);
+    render(
+      <BrowserRouter>
+        <I18nextProvider i18n={i18n}>
+          <PaymentSummary {...defaultProps} {...props} />
+        </I18nextProvider>
+      </BrowserRouter>
+    );
 
   test("renders correctly with default props", () => {
-    const { getByText, queryByText, queryByTestId } = renderComponent();
+    renderComponent();
 
-    expect(getByText("1234 sats")).toBeDefined();
-    expect(queryByText("Description")).toBeNull();
-    expect(queryByTestId("fiat_amount")).toBeNull();
+    expect(screen.getByText("1234 sats")).toBeDefined();
+    expect(screen.queryByText("Description")).toBeNull();
+    expect(screen.queryByTestId("fiat_amount")).toBeNull();
   });
 
   test("renders with description", () => {
-    const { getByText } = renderComponent({
+    renderComponent({
       description: "The lovely description",
     });
 
-    expect(getByText("1234 sats")).toBeDefined();
-    expect(getByText("Description")).toBeDefined();
-    expect(getByText("The lovely description")).toBeDefined();
+    expect(screen.getByText("1234 sats")).toBeDefined();
+    expect(screen.getByText("Description")).toBeDefined();
+    expect(screen.getByText("The lovely description")).toBeDefined();
   });
 
   test("renders with fiat amount", () => {
-    const { getByText, getByTestId } = renderComponent({
+    renderComponent({
       fiatAmount: "$0,02",
     });
 
-    expect(getByTestId("fiat_amount")).toBeDefined();
-    expect(getByText(/(~\$0,02)/)).toBeInTheDocument();
+    expect(screen.getByTestId("fiat_amount")).toBeDefined();
+    expect(screen.getByText(/(~\$0,02)/)).toBeInTheDocument();
   });
 });

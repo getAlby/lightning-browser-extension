@@ -2,6 +2,7 @@ import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
+import ResultCard from "@components/ResultCard";
 import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
@@ -10,6 +11,7 @@ import React, { Fragment, useState, useEffect, MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import ScreenHeader from "~/app/components/ScreenHeader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
@@ -17,7 +19,6 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import lnurl from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-import { getFiatValue } from "~/common/utils/currencyConvert";
 import type {
   LNURLPaymentInfoError,
   LNURLPaymentInfo,
@@ -37,12 +38,16 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
 function LNURLPay() {
   const navState = useNavigationState();
   const details = navState.args?.lnurlDetails as LNURLPayServiceResponse;
-  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFiatValue,
+  } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
   const navigate = useNavigate();
   const auth = useAccount();
-  const { t } = useTranslation("translation", { keyPrefix: "send.lnurlpay" });
+  const { t } = useTranslation("translation", { keyPrefix: "lnurlpay" });
   const { t: tCommon } = useTranslation("common");
 
   const [valueSat, setValueSat] = useState(
@@ -57,6 +62,8 @@ function LNURLPay() {
   const [successAction, setSuccessAction] = useState<
     LNURLPaymentSuccessAction | undefined
   >();
+  const [result, setResult] = useState("");
+  const [failureMessage, setFailureMessage] = useState("");
 
   useEffect(() => {
     if (showFiat) {
@@ -65,7 +72,7 @@ function LNURLPay() {
         setFiatValue(res);
       })();
     }
-  }, [valueSat, showFiat]);
+  }, [valueSat, showFiat, getFiatValue]);
 
   useEffect(() => {
     !!settings.userName && setUserName(settings.userName);
@@ -126,7 +133,10 @@ function LNURLPay() {
         }
       } catch (e) {
         const message = e instanceof Error ? `(${e.message})` : "";
-        toast.error(`Payment aborted: Could not fetch invoice. \n${message}`);
+        setFailureMessage(
+          `Payment aborted: Could not fetch invoice. ${message}`
+        );
+        setResult("fail");
         return;
       }
 
@@ -173,9 +183,10 @@ function LNURLPay() {
             break;
         }
       } else {
-        setSuccessAction({ tag: "message", message: "Success, payment sent!" });
+        setSuccessAction({ tag: "message", message: t("success") });
       }
 
+      setResult("success");
       auth.fetchAccountInfo(); // Update balance.
 
       // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the payment response. This closes the window which means the user will NOT see the above successAction.
@@ -186,7 +197,10 @@ function LNURLPay() {
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        toast.error(`Error: ${e.message}`);
+        setFailureMessage(
+          `There was an error in processing your transaction. ${e.message}`
+        );
+        setResult("fail");
       }
     } finally {
       setLoadingConfirm(false);
@@ -225,6 +239,22 @@ function LNURLPay() {
     return details.domain;
   }
 
+  function getImage() {
+    if (!details?.metadata) return;
+
+    try {
+      const metadata = JSON.parse(details.metadata);
+      const image = metadata.find(
+        ([type]: [string]) =>
+          type === "image/png;base64" || type === "image/jpeg;base64"
+      );
+
+      if (image) return `data:${image[0]},${image[1]}`;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   function formattedMetadata(
     metadataJSON: string
   ): [string, string | React.ReactNode][] {
@@ -233,9 +263,12 @@ function LNURLPay() {
       return metadata
         .map(([type, content]: [string, string]) => {
           if (type === "text/plain") {
-            return ["Description", content];
+            return [`${tCommon("description")}`, content];
           } else if (type === "text/long-desc") {
-            return ["Full Description", <p key={type}>{content}</p>];
+            return [
+              `${tCommon("description_full")}`,
+              <p key={type}>{content}</p>,
+            ];
           }
           return undefined;
         })
@@ -246,53 +279,76 @@ function LNURLPay() {
     return [];
   }
 
-  function renderSuccessAction() {
-    if (!successAction) return;
+  function header() {
+    switch (result) {
+      case "success":
+        return tCommon("success");
+      case "fail":
+        return tCommon("errors.payment_failed");
+      default:
+        return tCommon("actions.send");
+    }
+  }
+
+  function renderResultAction() {
+    if (!result) return;
+    const isSuccess = result === "success";
+    const isMessage =
+      successAction?.tag === "url" || successAction?.tag === "message";
     let descriptionList: [string, string | React.ReactNode][] = [];
-    if (successAction.tag === "url") {
-      descriptionList = [
-        ["Description", successAction.description],
-        [
-          "Url",
-          <>
-            {successAction.url}
-            <div className="mt-4">
-              <Button
-                onClick={() => {
-                  if (successAction.url) utils.openUrl(successAction.url);
-                }}
-                label="Open"
-                primary
-              />
-            </div>
-          </>,
-        ],
-      ];
-    } else if (successAction.tag === "message") {
-      descriptionList = [["Message", successAction.message]];
+    if (successAction) {
+      if (successAction.tag === "url") {
+        descriptionList = [
+          [`${tCommon("description")}`, successAction.description],
+          [
+            "URL",
+            <>
+              {successAction.url}
+              <div className="mt-4">
+                <Button
+                  onClick={() => {
+                    if (successAction.url) utils.openUrl(successAction.url);
+                  }}
+                  label={tCommon("actions.open")}
+                  primary
+                />
+              </div>
+            </>,
+          ],
+        ];
+      } else if (successAction.tag === "message") {
+        descriptionList = [[`${tCommon("message")}`, successAction.message]];
+      }
     }
 
     return (
-      <Container maxWidth="sm">
-        <PublisherCard
-          title={getRecipient()}
-          description={navState.origin?.description}
-          image={navState.origin?.icon}
-        />
-
-        <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-          {descriptionList.map(([dt, dd]) => (
-            <>
-              <Dt>{dt}</Dt>
-              <Dd>{dd}</Dd>
-            </>
-          ))}
-        </dl>
-
-        <div className="text-center">
-          <button className="underline text-sm text-gray-500" onClick={close}>
-            Close
-          </button>
+      <Container justifyBetween maxWidth="sm">
+        <div>
+          <ResultCard
+            isSuccess={isSuccess}
+            message={
+              isSuccess
+                ? `${valueSat} (SATS) ${
+                    showFiat ? "(" + fiatValue + ")" : ""
+                  } ${t("were_sent_to")} ${
+                    navState.origin?.name || getRecipient()
+                  }`
+                : failureMessage
+            }
+          />
+          {isMessage && (
+            <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+              {descriptionList.map(([dt, dd]) => (
+                <>
+                  <Dt>{dt}</Dt>
+                  <Dd>{dd}</Dd>
+                </>
+              ))}
+            </dl>
+          )}
+        </div>
+        <div className="mb-4">
+          <Button onClick={close} label={tCommon("actions.close")} fullWidth />
         </div>
       </Container>
     );
@@ -301,14 +357,15 @@ function LNURLPay() {
   return (
     <>
       <div className="flex flex-col grow overflow-hidden">
-        {!successAction ? (
+        <ScreenHeader title={header()} />
+        {!result ? (
           <>
             <div className="grow overflow-y-auto no-scrollbar">
               <Container maxWidth="sm">
                 <PublisherCard
-                  title={getRecipient()}
-                  description={navState.origin?.description}
-                  image={navState.origin?.icon}
+                  title={navState.origin?.name}
+                  description={getRecipient()}
+                  image={navState.origin?.icon || getImage()}
                 />
 
                 <div className="my-4">
@@ -325,7 +382,9 @@ function LNURLPay() {
                       {details.minSendable === details.maxSendable && (
                         <>
                           <Dt>{t("amount.label")}</Dt>
-                          <Dd>{`${+details.minSendable / 1000} sats`}</Dd>
+                          <Dd>{`${+details.minSendable / 1000} ${tCommon(
+                            "sats"
+                          )}`}</Dd>
                         </>
                       )}
                     </>
@@ -398,7 +457,7 @@ function LNURLPay() {
             </div>
           </>
         ) : (
-          renderSuccessAction()
+          renderResultAction()
         )}
       </div>
     </>

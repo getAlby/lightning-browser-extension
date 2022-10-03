@@ -4,16 +4,18 @@ import { findLightningAddressInText, setLightningData } from "./helpers";
 const urlMatcher =
   /^https:\/\/soundcloud.com\/([^/]+)(\/([^/]+))?(\/([^/]+))?(\/([^/]+))?$/;
 
+const pages = ["popular-tracks", "tracks", "albums", "sets", "reposts"];
 function battery(): void {
   const urlParts = document.location
     .toString()
     .replace("https://soundcloud.com", "")
     .split("/");
   const username = urlParts[1];
+  const page = urlParts[2];
 
-  if (username && !urlParts[2]) {
+  if (username && (!page || pages.includes(page))) {
     handleProfilePage();
-  } else if (urlParts[2] === "sets" || urlParts[3] === "sets") {
+  } else if (username && page) {
     handleTrackPage();
   }
 }

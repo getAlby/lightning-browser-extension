@@ -1,11 +1,11 @@
 {
   "translation": {
     "welcome": {
-      "title": "El poder de lightning en tu navegador",
+      "title": "El poder de ⚡ bitcoin ⚡ en tu navegador",
       "nav": {
         "welcome": "Bienvenido",
         "password": "Su Contraseña",
-        "connect": "Conéctese a Lightning",
+        "connect": "Su cuenta de Lightning",
         "done": "Hecho"
       },
       "intro": {
@@ -31,7 +31,7 @@
       },
       "set_password": {
         "title": "Proteja su billetera",
-        "description": "Su billetera está encriptada de forma segura con una contraseña y debe desbloquearse antes de usarla.",
+        "description": "Los datos de su cuenta Lightning se cifran de forma segura con una contraseña de desbloqueo. No olvides esta contraseña! Lo necesita para desbloquear el teléfono por extensión (en este navegador)",
         "choose_password": {
           "label": "Elige una contraseña:"
         },
@@ -82,7 +82,8 @@
           },
           "optional_lightning_address": {
             "label": "Elige tu dirección de correo electrónico (opcional)",
-            "suffix": "@getalby.com"
+            "suffix": "@getalby.com",
+            "title": "números y letras, al menos 3 caracteres"
           },
           "errors": {
             "create_wallet_error": "Error al crear una nueva billetera"
@@ -141,7 +142,7 @@
         "description": "Conéctese a su Umbrel"
       },
       "mynode": {
-        "title": "myNode",
+        "title": "MiNodo",
         "description": "Conéctese a myNode"
       },
       "start9": {
@@ -207,7 +208,9 @@
       },
       "edit": {
         "title": "Editar Cuenta",
-        "label": "Nombre",
+        "name": {
+          "label": "Nombre"
+        },
         "screen_reader": "Editar nombre de cuenta"
       },
       "export": {
@@ -228,7 +231,8 @@
       "request1": "Solicitar aprobación de transacciones",
       "request2": "Solicitar facturas e información sobre rayos",
       "connect": "Conectar",
-      "block_and_ignore": "Bloquear e ignorar {{host}}"
+      "block_and_ignore": "Bloquear e ignorar {{host}}",
+      "title": "Conectar"
     },
     "unlock": {
       "unlock_to_continue": "Desbloquear para continuar",
@@ -239,7 +243,8 @@
       "unlock_error": {
         "help": "Los datos de su cuenta están encriptados con su contraseña de desbloqueo. Si realmente olvidó su contraseña de desbloqueo, debe restablecer y agregar su cuenta Lightning nuevamente.",
         "link": "Restablecer ahora y agregar una nueva cuenta"
-      }
+      },
+      "unlock_password": "Tu contraseña de desbloqueo"
     },
     "settings": {
       "title": "Configuración",
@@ -255,7 +260,7 @@
           "subtitle": "La generación de claves para la autenticación-LNURL ha cambiado (en julio de 2022). Alby no era compatible con otras implementaciones. Esto se cambió, pero ahora se utilizan diferentes claves de inicio de sesión. Si usó autenticación-LNURL para iniciar sesión antes, aún puede habilitar el método anterior. Esta opción se eliminará más adelante, asegúrese de cambiar al nuevo inicio de sesión."
         },
         "legacy_lnurl_auth": {
-          "title": "Firma heredada (Legacy) para LNDhub y LNBits",
+          "title": "Firma heredada (Legacy) para LNDhub y LNbits",
           "subtitle": "Se ha cambiado la firma de mensajes y el inicio de sesión con cuentas LNDhub (por ejemplo, BlueWallet) y LNbits (marzo de 2022). Si inició sesión con estas cuentas, aún puede habilitar el método de firma anterior. Esta opción se eliminará más adelante, asegúrese de cambiar al nuevo inicio de sesión."
         }
       },
@@ -318,7 +323,15 @@
           "enter_password": "Por favor, introduzca una contraseña.",
           "confirm_password": "Por favor, confirme su contraseña.",
           "mismatched_password": "Las contraseñas no coinciden."
+        },
+        "success": "La contraseña se cambió correctamente",
+        "submit": {
+          "label": "Cambiar"
         }
+      },
+      "browser_notifications": {
+        "title": "Notificaciones del navegador",
+        "subtitle": "Notificaciones relacionadas con pagos y autenticación."
       }
     },
     "send": {
@@ -329,20 +342,20 @@
       "input": {
         "label": "Factura, Dirección Lightning o LNURL",
         "placeholder": "Pegar dirección de factura, lnurl o lightning"
+      }
+    },
+    "lnurlpay": {
+      "amount": {
+        "label": "Cantidad (Satoshi)"
       },
-      "lnurlpay": {
-        "amount": {
-          "label": "Cantidad (Satoshi)"
-        },
-        "comment": {
-          "label": "Comentario"
-        },
-        "name": {
-          "label": "Nombre"
-        },
-        "email": {
-          "label": "Email"
-        }
+      "comment": {
+        "label": "Comentario"
+      },
+      "name": {
+        "label": "Nombre"
+      },
+      "email": {
+        "label": "Email"
       }
     },
     "receive": {
@@ -419,11 +432,39 @@
       "actions": {
         "pay_now": "Pagar Ahora"
       }
+    },
+    "lnurlauth": {
+      "title": "Autenticación",
+      "content_message": {
+        "heading": "Quieres iniciar sesión en"
+      },
+      "submit": "Sesión",
+      "success": "Autenticado correctamente",
+      "errors": {
+        "status": "Error: El estado de autenticación no es correcto"
+      }
+    },
+    "lnurlchannel": {
+      "content_message": {
+        "heading": "Solicitar un canal desde el nodo"
+      },
+      "success": "Solicitud de canal enviada correctamente",
+      "title": "Solicitud de Canal"
+    },
+    "lnurlwithdraw": {
+      "title": "Retirar",
+      "content_message": {
+        "heading": "Cantidad"
+      },
+      "amount": {
+        "label": "Cantidad"
+      },
+      "success": "Solicitud de retiro enviada correctamente"
     }
   },
   "common": {
     "password": "Contraseña",
-    "success": "¡Éxito!",
+    "success": "Éxito",
     "error": "Error",
     "settings": "Ajustes",
     "websites": "Sitios web",
@@ -449,11 +490,14 @@
       "close": "Cerrar",
       "export": "Exportar",
       "remove": "Remover",
-      "copy": "Copiar"
+      "copy": "Copiar",
+      "open": "Abrir",
+      "back": "Volver"
     },
     "errors": {
       "connection_failed": "Error de conexión"
-    }
+    },
+    "description": "Descripción"
   },
   "components": {
     "allowance_menu": {
@@ -502,8 +546,43 @@
       }
     },
     "companion_download_info": {
-      "description": "Está intentando conectarse a un nodo detrás de Tor. Debido a que los navegadores no pueden conectarse directamente a su nodo, asegúrese de tener instalada la aplicación complementaria de Alby.",
-      "download_here": "¡Descarguelo aqui!"
+      "description": "Estás intentando conectarte a un nodo detrás de Tor. Para hacer esto, necesitas tener instalada la aplicación Alby companion o tener Tor en ejecución. (Cuando no esté seguro, le recomendamos la aplicación complementaria Alby.)",
+      "download_here": "¡Descarguelo aqui!",
+      "using_tor": "haz clic aquí para continuar si utilizas el navegador Tor",
+      "or": "O:"
+    },
+    "toasts": {
+      "connection_error": {
+        "what_you_can_do": "Esto es lo que puedes hacer:",
+        "visit_guides": "Visita nuestras guías para obtener más ayuda",
+        "double_check": "Verifique los detalles de su conexión",
+        "if_ssl_errors": "y si hay errores SSL (por ejemplo, ERR_CERT_AUTHORITY_INVALID), haga clic en \"avanzado\" y proceda a aceptar el certificado."
+      },
+      "errors": {
+        "invalid_credentials": "Contraseña no válida. Por favor, revise su contraseña y dirección de correo electrónico e inténtelo de nuevo."
+      },
+      "login_failed": {
+        "password_reset": "Olvidó su contraseña? Haga clic aquí"
+      }
+    },
+    "account_menu": {
+      "title": "Cambiar de cuenta",
+      "options": {
+        "account": {
+          "add": "Agregar una nueva cuenta",
+          "manage": "Administrar cuentas"
+        }
+      },
+      "screen_reader": "Alternar menú desplegable"
+    },
+    "publishers_table": {
+      "used": "usado",
+      "payments": "pagos"
+    },
+    "badge": {
+      "label": {
+        "active": "ACTIVO"
+      }
     }
   }
 }

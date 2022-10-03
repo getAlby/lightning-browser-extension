@@ -6,12 +6,16 @@ import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
+import { useTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
 
 export default function ConnectEclair() {
   const navigate = useNavigate();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "choose_connector.eclair",
+  });
   const [formData, setFormData] = useState({
     password: "",
     url: "",
@@ -70,12 +74,20 @@ export default function ConnectEclair() {
     <ConnectorForm
       title={
         <h1 className="mb-6 text-2xl font-bold dark:text-white">
-          Connect to{" "}
-          <a className="underline" href="https://github.com/ACINQ/eclair">
-            Eclair
-          </a>
+          <Trans
+            i18nKey={"page.title"}
+            t={t}
+            components={[
+              // eslint-disable-next-line react/jsx-key
+              <a
+                className="underline"
+                href="https://github.com/ACINQ/eclair"
+              ></a>,
+            ]}
+          />
         </h1>
       }
+      description={t("page.instructions")}
       submitLoading={loading}
       submitDisabled={formData.password === "" || formData.url === ""}
       onSubmit={handleSubmit}
@@ -83,7 +95,7 @@ export default function ConnectEclair() {
       <div className="mb-6">
         <TextField
           id="password"
-          label="Eclair Password"
+          label={t("password.label")}
           type={passwordView ? "text" : "password"}
           required
           onChange={handleChange}
@@ -104,9 +116,9 @@ export default function ConnectEclair() {
       </div>
       <TextField
         id="url"
-        label="Eclair URL"
+        label={t("url.label")}
         type="text"
-        placeholder="http://localhost:8080"
+        placeholder={t("url.placeholder")}
         value={formData.url}
         required
         onChange={handleChange}
