@@ -144,7 +144,7 @@
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.11.1",
     "webpack-sources": "^3.2.3",
-    "wext-manifest-loader": "^3.0.0",
+    "wext-manifest-loader": "^2.3.0",
     "wext-manifest-webpack-plugin": "^1.2.1"
   }
 }
