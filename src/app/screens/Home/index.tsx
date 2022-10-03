@@ -207,12 +207,12 @@ function Home() {
 
   function renderPublisherCard() {
     let title, image;
-    if (allowance) {
-      title = allowance.name;
-      image = allowance.imageURL;
-    } else if (lnData.length > 0) {
+    if (lnData.length > 0) {
       title = lnData[0].name;
       image = lnData[0].icon;
+    } else if (allowance) {
+      title = allowance.name;
+      image = allowance.imageURL;
     } else {
       return;
     }
