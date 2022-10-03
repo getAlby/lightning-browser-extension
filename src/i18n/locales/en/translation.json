@@ -446,7 +446,7 @@
       },
       "nostr": {
         "title": "Nostr",
-        "hint": "is the simplest open protocol that is able to create a censorship-resistant global social network once and for all.",
+        "hint": "is a simple and open protocol that aims to create censorship-resistant social networks.",
         "private_key": {
           "title": "Private key",
           "subtitle": "If you don't have a key already you can generate one based on the current account you use.",
