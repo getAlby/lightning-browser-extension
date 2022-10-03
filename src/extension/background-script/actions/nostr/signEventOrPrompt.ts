@@ -1,8 +1,9 @@
-import * as nostrTools from "nostr-tools";
 import utils from "~/common/lib/utils";
+import { Event } from "~/extension/ln/nostr/types";
 import { Message } from "~/types";
 
 import state from "../../state";
+import { signEvent, validateEvent } from "./helpers";
 
 const signEventOrPrompt = async (message: Message) => {
   if (!("host" in message.origin)) {
@@ -10,18 +11,13 @@ const signEventOrPrompt = async (message: Message) => {
     return;
   }
 
-  // TODO: FIX TYPES
-  if (!nostrTools.validateEvent(message.args.event as nostrTools.Event)) {
+  if (!validateEvent(message.args.event as Event)) {
     console.error("Invalid event");
     return {
       error: "Invalid event.",
     };
   }
 
-  return signWithPrompt(message);
-};
-
-async function signWithPrompt(message: Message) {
   // Can we create a more generic version of such a prompt?
   // Set the message as the user needs to see the event details
   message.args.message = JSON.stringify(message.args.event);
@@ -32,8 +28,8 @@ async function signWithPrompt(message: Message) {
       action: "confirmSignMessage",
     });
 
-    const event = await nostrTools.signEvent(
-      message.args.event as nostrTools.Event,
+    const event = await signEvent(
+      message.args.event as Event,
       state.getState().settings.nostrPrivateKey
     );
 
@@ -45,6 +41,6 @@ async function signWithPrompt(message: Message) {
       return { error: e.message };
     }
   }
-}
+};
 
 export default signEventOrPrompt;

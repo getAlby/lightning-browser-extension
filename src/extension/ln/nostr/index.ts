@@ -1,4 +1,4 @@
-import { Event as nostrEvent } from "nostr-tools";
+import { Event } from "./types";
 
 export default class NostrProvider {
   enabled: boolean;
@@ -17,7 +17,7 @@ export default class NostrProvider {
     return await this.execute("getPublicKeyOrPrompt");
   }
 
-  async signEvent(event: nostrEvent): Promise<nostrEvent> {
+  async signEvent(event: Event): Promise<Event> {
     return this.execute("signEventOrPrompt", { event });
   }
 

@@ -39,6 +39,7 @@
   "dependencies": {
     "@bitcoin-design/bitcoin-icons-react": "^0.1.9",
     "@headlessui/react": "^1.7.1",
+    "@noble/secp256k1": "^1.7.0",
     "@runcitadel/sdk": "^0.3.8",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/line-clamp": "^0.4.2",
@@ -55,7 +56,6 @@
     "i18next": "^21.9.2",
     "i18next-browser-languagedetector": "^6.1.5",
     "lodash": "^4.17.21",
-    "nostr-tools": "^0.24.1",
     "pubsub-js": "^1.9.4",
     "react": "^18.2.0",
     "react-confetti": "^6.1.0",
@@ -93,6 +93,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@trivago/prettier-plugin-sort-imports": "^3.3.0",
     "@types/chrome": "^0.0.197",
+    "@types/create-hash": "^1.2.2",
     "@types/crypto-js": "^4.1.1",
     "@types/elliptic": "^6.4.14",
     "@types/pubsub-js": "^1.8.3",

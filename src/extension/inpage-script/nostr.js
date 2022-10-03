@@ -1,4 +1,4 @@
-import NostrProvider from "../ln/webln/nostr";
+import NostrProvider from "../ln/nostr";
 
 if (document) {
   window.nostr = new NostrProvider();
