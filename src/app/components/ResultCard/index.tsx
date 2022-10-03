@@ -11,7 +11,7 @@ export default function ResultCard({ message, isSuccess }: Props) {
         alt={isSuccess ? "success" : "failure"}
         className="mb-8"
       />
-      <p className="text-center">{message}</p>
+      <p className="text-center dark:text-white">{message}</p>
     </div>
   );
 }
