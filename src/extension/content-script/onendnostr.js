@@ -3,6 +3,14 @@ import browser from "webextension-polyfill";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
 
+// Nostr calls that can be executed from the Nostr Provider.
+// Update when new calls are added
+const nostrCalls = [
+  "nostr/getPublicKey",
+  "nostr/signEvent",
+  "nostr/getRelays",  
+];
+
 async function init() {
   const inject = await shouldInject();
   if (!inject) {
@@ -23,6 +31,15 @@ async function init() {
     }
 
     if (ev.data && !ev.data.response) {
+
+      // limit the calls that can be made from window.nostr
+      // only listed calls can be executed
+      // if not enabled only enable can be called.
+      if (!nostrCalls.includes(ev.data.action)) {
+        console.error("Function not available.");
+        return;
+      }
+
       const messageWithOrigin = {
         action: `${ev.data.action}`,
         args: ev.data.args,
