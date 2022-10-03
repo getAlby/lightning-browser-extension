@@ -5,11 +5,8 @@ import shouldInject from "./shouldInject";
 
 // Nostr calls that can be executed from the Nostr Provider.
 // Update when new calls are added
-const nostrCalls = [
-  "nostr/getPublicKey",
-  "nostr/signEvent",
-  "nostr/getRelays",  
-];
+const nostrCalls = ["nostr/getPublicKey", "nostr/signEvent", "nostr/getRelays"];
+let callActive = false;
 
 async function init() {
   const inject = await shouldInject();
@@ -31,6 +28,11 @@ async function init() {
     }
 
     if (ev.data && !ev.data.response) {
+      // if a call is active we ignore the request
+      if (callActive) {
+        console.error("nostr call already executing");
+        return;
+      }
 
       // limit the calls that can be made from window.nostr
       // only listed calls can be executed
@@ -50,6 +52,7 @@ async function init() {
       };
 
       const replyFunction = (response) => {
+        callActive = false; // reset call is active
         window.postMessage(
           {
             application: "LBE",
@@ -61,6 +64,7 @@ async function init() {
         );
       };
 
+      callActive = true;
       return browser.runtime
         .sendMessage(messageWithOrigin)
         .then(replyFunction)
