@@ -456,7 +456,6 @@
       }
     },
     "lnurlpay": {
-      "were_sent_to": "were sent to",
       "amount": {
         "label": "Amount"
       },
@@ -579,7 +578,7 @@
     },
     "confirm_payment": {
       "title": "Approve Payment",
-      "success": "Payment sent!",
+      "success": "Payment of {{amount}} successful!",
       "actions": {
         "pay_now": "Pay now"
       }
@@ -599,6 +598,7 @@
     "copied": "Copied!",
     "description": "Description",
     "description_full": "Full Description",
+    "were_sent_to": "were sent to",
     "message": "Message",
     "actions": {
       "back": "Back",

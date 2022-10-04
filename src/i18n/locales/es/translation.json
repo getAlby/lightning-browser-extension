@@ -428,7 +428,7 @@
     },
     "confirm_payment": {
       "title": "Aprobar Pago",
-      "success": "¡Pago enviado!",
+      "success": "¡Pago de {{amount}} exitoso!!",
       "actions": {
         "pay_now": "Pagar Ahora"
       }

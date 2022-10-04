@@ -486,8 +486,7 @@
       "email": {
         "label": "E-mail"
       },
-      "success": "Sucesso, pagamento enviado!",
-      "were_sent_to": "foram enviados para"
+      "success": "Sucesso, pagamento enviado!"
     },
     "receive": {
       "title": "Receber",
@@ -558,7 +557,7 @@
     },
     "confirm_payment": {
       "title": "Aprovar pagamento",
-      "success": "Pagamento enviado!",
+      "success": "Pagamento de {{amount}} bem-sucedido!",
       "actions": {
         "pay_now": "Pague agora"
       }
@@ -614,6 +613,7 @@
     "optional": "Opcional",
     "feedback": "Feedback",
     "copied": "Copiado!",
+    "were_sent_to": "foram enviados para",
     "actions": {
       "delete": "Remover",
       "edit": "Editar",
