@@ -62,8 +62,6 @@ function LNURLPay() {
   const [successAction, setSuccessAction] = useState<
     LNURLPaymentSuccessAction | undefined
   >();
-  const [result, setResult] = useState("");
-  const [failureMessage, setFailureMessage] = useState("");
 
   useEffect(() => {
     if (showFiat) {
@@ -133,10 +131,7 @@ function LNURLPay() {
         }
       } catch (e) {
         const message = e instanceof Error ? `(${e.message})` : "";
-        setFailureMessage(
-          `Payment aborted: Could not fetch invoice. ${message}`
-        );
-        setResult("fail");
+        toast.error(`Payment aborted: Could not fetch invoice. \n${message}`);
         return;
       }
 
@@ -186,7 +181,6 @@ function LNURLPay() {
         setSuccessAction({ tag: "message", message: t("success") });
       }
 
-      setResult("success");
       auth.fetchAccountInfo(); // Update balance.
 
       // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the payment response. This closes the window which means the user will NOT see the above successAction.
@@ -197,10 +191,7 @@ function LNURLPay() {
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        setFailureMessage(
-          `There was an error in processing your transaction. ${e.message}`
-        );
-        setResult("fail");
+        toast.error(`Error: ${e.message}`);
       }
     } finally {
       setLoadingConfirm(false);
@@ -279,62 +270,42 @@ function LNURLPay() {
     return [];
   }
 
-  function header() {
-    switch (result) {
-      case "success":
-        return tCommon("success");
-      case "fail":
-        return tCommon("errors.payment_failed");
-      default:
-        return tCommon("actions.send");
-    }
-  }
-
-  function renderResultAction() {
-    if (!result) return;
-    const isSuccess = result === "success";
+  function renderSuccessAction() {
+    if (!successAction) return;
     const isMessage =
       successAction?.tag === "url" || successAction?.tag === "message";
     let descriptionList: [string, string | React.ReactNode][] = [];
-    if (successAction) {
-      if (successAction.tag === "url") {
-        descriptionList = [
-          [`${tCommon("description")}`, successAction.description],
-          [
-            "URL",
-            <>
-              {successAction.url}
-              <div className="mt-4">
-                <Button
-                  onClick={() => {
-                    if (successAction.url) utils.openUrl(successAction.url);
-                  }}
-                  label={tCommon("actions.open")}
-                  primary
-                />
-              </div>
-            </>,
-          ],
-        ];
-      } else if (successAction.tag === "message") {
-        descriptionList = [[`${tCommon("message")}`, successAction.message]];
-      }
+    if (successAction.tag === "url") {
+      descriptionList = [
+        [`${tCommon("description")}`, successAction.description],
+        [
+          "URL",
+          <>
+            {successAction.url}
+            <div className="mt-4">
+              <Button
+                onClick={() => {
+                  if (successAction.url) utils.openUrl(successAction.url);
+                }}
+                label={tCommon("actions.open")}
+                primary
+              />
+            </div>
+          </>,
+        ],
+      ];
+    } else if (successAction.tag === "message") {
+      descriptionList = [[`${tCommon("message")}`, successAction.message]];
     }
 
     return (
       <Container justifyBetween maxWidth="sm">
         <div>
           <ResultCard
-            isSuccess={isSuccess}
-            message={
-              isSuccess
-                ? `${valueSat} (SATS) ${
-                    showFiat ? "(" + fiatValue + ")" : ""
-                  } ${t("were_sent_to")} ${
-                    navState.origin?.name || getRecipient()
-                  }`
-                : failureMessage
-            }
+            isSuccess
+            message={`${valueSat} (SATS) ${
+              showFiat ? "(" + fiatValue + ")" : ""
+            } ${t("were_sent_to")} ${navState.origin?.name || getRecipient()}`}
           />
           {isMessage && (
             <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
@@ -357,8 +328,10 @@ function LNURLPay() {
   return (
     <>
       <div className="flex flex-col grow overflow-hidden">
-        <ScreenHeader title={header()} />
-        {!result ? (
+        <ScreenHeader
+          title={!successAction ? tCommon("actions.send") : tCommon("success")}
+        />
+        {!successAction ? (
           <>
             <div className="grow overflow-y-auto no-scrollbar">
               <Container maxWidth="sm">
@@ -457,7 +430,7 @@ function LNURLPay() {
             </div>
           </>
         ) : (
-          renderResultAction()
+          renderSuccessAction()
         )}
       </div>
     </>
