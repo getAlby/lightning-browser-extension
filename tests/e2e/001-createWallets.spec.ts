@@ -113,7 +113,7 @@ test.describe("Create or connect wallets", () => {
     await findByText($document, "Connect to BlueWallet");
 
     const lndHubUrl =
-      "lndhub://c269ebb962f1a94f9c29:f6f16f35e935edc05ee7@https://lndhub.io";
+      "lndhub://c269ebb962f1a94f9c29:f6f16f35e935edc05ee7@https://lndhub.herokuapp.com";
     const lndUrlField = await getByLabelText(
       $document,
       "BlueWallet Export URI"
