@@ -46,7 +46,7 @@
       },
       "test_connection": {
         "ready": "Perfeito, tudo configurado!",
-        "tutorial": "Agora que você já conectou o servidor, gostaria de ler o tutorial?",
+        "tutorial": "Agora que você já conectou a carteira, gostaria de ler o tutorial?",
         "try_tutorial": "Experimente agora",
         "initializing": "Iniciando sua conta. Aguarde, pode demorar um pouco...",
         "connection_error": "Erro de conexão",
@@ -181,7 +181,7 @@
           "instructions": "Na Umbrel vá até <0>Connect Wallet</0>. Selecione <0>lndconnect REST</0> e copie a <0>lndconnect URL</0>. (Dependendo da sua configuração você pode usar a conexão local ou a conexão Tor.)"
         },
         "rest_url": {
-          "label": "URL REST lndconnect",
+          "label": "lndconnect REST URL",
           "placeholder": "lndconnect://seuservidor:8080?..."
         }
       },
@@ -190,10 +190,10 @@
         "description": "Conectar no myNode",
         "page": {
           "title": "Conecte na <0>myNode</0>",
-          "instructions": "Na myNode clique em <0>Wallet</0> botão para seu serviço <0>Lightning</0>.<1/> Agora clique em <0>Pair Wallet</0> botão abaixo da tab <0>Status</0>. Insira sua senha quando solicitada.<1/> Selecione o menu suspenso e escolha uma opção de emparelhamento. Dependendo da sua configuração você pode escolher <0>Conexão Lightning (REST + Local IP)</0> ou conexão <0>Lightning (REST + Tor)</0>."
+          "instructions": "No myNode clique em <0>Wallet</0> botão para seu serviço <0>Lightning</0>.<1/> Agora clique em <0>Pair Wallet</0> botão abaixo da tab <0>Status</0>. Insira sua senha quando solicitada.<1/> Selecione o menu suspenso e escolha uma opção de emparelhamento. Dependendo da sua configuração você pode escolher <0>Conexão Lightning (REST + Local IP)</0> ou conexão <0>Lightning (REST + Tor)</0>."
         },
         "rest_url": {
-          "label": "URL REST lndconnect",
+          "label": "lndconnect REST URL",
           "placeholder": "lndconnect://seuservidor:8080?..."
         }
       },
@@ -205,7 +205,7 @@
           "instructions": "<0>Note:</0> Atualmente somente a LND é suportada mas nós adicionaremos suporte para a c-lightning no futuro!<1/>No seu Embassy clique em service <0>Lightning Network Daemon</0>.<1/>Selecione a tab <0>Properties</0>.<1/>Agora copie o <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
-          "label": "REST URL lndconnect",
+          "label": "lndconnect REST URL",
           "placeholder": "lndconnect://seuservidor:8080?..."
         }
       },
@@ -214,7 +214,8 @@
         "description": "Conectar no RaspiBlitz",
         "page": {
           "title": "Conecte seu servidor <0>RaspiBlitz</0>",
-          "instructions2": "Selecione <0>CONNECT</0>.<1/>Selecione <0>EXPORT</0>.<1/>Selecione <0>HEX</0>.<1/>Copie o <0>adminMacaroon</0>.<1/>Cole o macaroon no campo abaixo."
+          "instructions2": "Selecione <0>CONNECT</0>.<1/>Selecione <0>EXPORT</0>.<1/>Selecione <0>HEX</0>.<1/>Copie o <0>adminMacaroon</0>.<1/>Cole o macaroon no campo abaixo.",
+          "instructions1": "Você precisa do endereço onion, porta, e um macaroon com permissão de leitura e envio (e.g. admin.macaroon).<1/><1/><0>SSH</0> no seu <0>RaspiBlitz</0>.<1/>Execute o comando <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Copie e cole o endereço <0>.onion</0> no campo abaixo.<1/>Adicione a <0>porta</0> após o endereço onion, a porta padrão é <0>:8080</0>."
         },
         "rest_api_host": {
           "label": "REST API host",
@@ -324,7 +325,7 @@
     "enable": {
       "allow": "Permitir {{host}}:",
       "request1": "Solicitar aprovação para transações",
-      "request2": "Solicitar faturas e informações do servidor",
+      "request2": "Gerar faturas e solicitar informações do servidor",
       "connect": "Conectar",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "title": "Conectar"
@@ -461,7 +462,7 @@
     "receive": {
       "title": "Receber",
       "actions": {
-        "create_invoice": "Solicitar Fatura"
+        "create_invoice": "Gerar Fatura"
       },
       "amount": {
         "label": "Quantia",
@@ -502,7 +503,7 @@
       }
     },
     "make_invoice": {
-      "title": "Solicitar Fatura",
+      "title": "Gerar Fatura",
       "amount": {
         "label": "Quantia"
       },
