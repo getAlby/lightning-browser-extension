@@ -127,7 +127,7 @@
       },
       "lndhub_go": {
         "title": "LNDHub",
-        "description": "Connect to your LNDHub mobile wallet",
+        "description": "Connect to your LNDHub account",
         "page": {
           "title": "Connect to LNDHub",
           "description": "Input your LNDHub credential URI here or scan the QR code with your webcam."
