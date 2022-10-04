@@ -106,18 +106,18 @@ test.describe("Create or connect wallets", () => {
   test("successfully connects to BlueWallet", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
-    // click at "LNDHub (BlueWallet)"
-    const createNewWalletButton = await getByText(
-      $document,
-      "LNDHub (Bluewallet)"
-    );
+    // click at "BlueWallet"
+    const createNewWalletButton = await getByText($document, "Bluewallet");
     createNewWalletButton.click();
 
-    await findByText($document, "Connect to LNDHub (BlueWallet)");
+    await findByText($document, "Connect to BlueWallet");
 
     const lndHubUrl =
       "lndhub://c269ebb962f1a94f9c29:f6f16f35e935edc05ee7@https://lndhub.io";
-    const lndUrlField = await getByLabelText($document, "LNDHub Export URI");
+    const lndUrlField = await getByLabelText(
+      $document,
+      "BlueWallet Export URI"
+    );
     await lndUrlField.type(lndHubUrl);
 
     await commonCreateWalletSuccessCheck({ page, $document });
