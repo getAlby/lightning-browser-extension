@@ -506,7 +506,7 @@
       "new_budget": {
         "label": "Nuevo presupuesto"
       },
-      "set_budget": {
+      "edit_allowance": {
         "title": "Establecer un nuevo presupuesto",
         "screen_reader": "Opciones de asignación"
       }

@@ -632,8 +632,12 @@
       "new_budget": {
         "label": "New budget"
       },
-      "set_budget": {
-        "title": "Set a new budget",
+      "enable_login": {
+        "title": "Enable website login",
+        "subtitle": "Automatically login without confirmation when the website requests."
+      },
+      "edit_allowance": {
+        "title": "Edit Allowance",
         "screen_reader": "Allowance Options"
       }
     },
