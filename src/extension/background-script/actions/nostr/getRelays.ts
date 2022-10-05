@@ -1,6 +1,4 @@
-import { Message } from "~/types";
-
-const getRelays = async (message: Message) => {
+const getRelays = async () => {
   return {
     data: [
       "wss://expensive-relay.fiatjaf.com",
