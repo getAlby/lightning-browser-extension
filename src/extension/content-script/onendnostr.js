@@ -5,7 +5,11 @@ import shouldInject from "./shouldInject";
 
 // Nostr calls that can be executed from the Nostr Provider.
 // Update when new calls are added
-const nostrCalls = ["nostr/getPublicKey", "nostr/signEvent", "nostr/getRelays"];
+const nostrCalls = [
+  "nostr/getPublicKeyOrPrompt",
+  "nostr/signEventOrPrompt",
+  "nostr/getRelays",
+];
 let callActive = false;
 
 async function init() {
