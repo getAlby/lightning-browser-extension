@@ -47,7 +47,9 @@ async function init() {
       }
 
       const messageWithOrigin = {
-        action: `${ev.data.action}`,
+        // every call call is scoped in `public`
+        // this prevents websites from accessing internal actions
+        action: `public/${ev.data.action}`,
         args: ev.data.args,
         application: "LBE",
         public: true, // indicate that this is a public call from the content script

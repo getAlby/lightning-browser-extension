@@ -66,13 +66,16 @@ async function init() {
       }
 
       const messageWithOrigin = {
-        action: `${ev.data.action}`, // every webln call must be scoped under `webln/` we do this to indicate that those actions are callable from the websites
+        // every call call is scoped in `public`
+        // this prevents websites from accessing internal actions
+        action: `public/${ev.data.action}`,
         args: ev.data.args,
         application: "LBE",
         public: true, // indicate that this is a public call from the content script
         prompt: true,
         origin: getOriginData(),
       };
+
       const replyFunction = (response) => {
         callActive = false; // reset call is active
         // if it is the enable call we store if webln is enabled for this content script

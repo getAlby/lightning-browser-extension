@@ -18,7 +18,7 @@ const prompt = async (message: Message) => {
   try {
     const response = await utils.openPrompt({
       ...message,
-      action: "nostr/confirmGetPublicKey",
+      action: "public/nostr/confirmGetPublicKey",
     });
 
     const publicKey = await getPublicKey();
