@@ -88,7 +88,7 @@ export default function TransactionsTable({ transactions }: Props) {
                       {(!!tx.description ||
                         [tx.type && "sent", "sending"].includes(tx.type) ||
                         (tx.type === "received" && tx.boostagram)) && (
-                        <Disclosure.Button className="block h-0 mt-2 text-gray-500 hover:text-black dark:hover:text-white transition-color duration-200">
+                        <Disclosure.Button className="block text-gray-500 hover:text-black dark:hover:text-white transition-color duration-200">
                           <CaretDownIcon
                             className={`${open ? "rotate-180" : ""} w-5 h-5`}
                           />
