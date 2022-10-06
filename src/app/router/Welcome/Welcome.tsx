@@ -1,11 +1,9 @@
-import type { Step } from "@components/Steps";
-import Steps from "@components/Steps";
 import SetPassword from "@screens/Onboard/SetPassword";
 import TestConnection from "@screens/Onboard/TestConnection";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
+import { HashRouter as Router, useRoutes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { SettingsProvider } from "~/app/context/SettingsContext";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
@@ -54,11 +52,6 @@ function getRoutes(
 
 const routes = getRoutes(connectorRoutes);
 
-const initialSteps: Step[] = routes.map((route) => ({
-  id: route.name,
-  status: "upcoming",
-}));
-
 function WelcomeRouter() {
   return (
     <SettingsProvider>
@@ -75,9 +68,7 @@ function WelcomeRouter() {
 }
 
 function App() {
-  const [steps, setSteps] = useState(initialSteps);
   const { t } = useTranslation();
-  const location = useLocation();
   const routesElement = useRoutes(routes);
 
   const [languageChanged, setLanguageChanged] = useState(false);
@@ -85,25 +76,6 @@ function App() {
     // Trigger rerender to update displayed language
     setLanguageChanged(!languageChanged);
   });
-
-  // Update step progress based on active location.
-  useEffect(() => {
-    const { pathname } = location;
-    let activeStepIndex = 0;
-    routes.forEach((route, index) => {
-      if (pathname.includes(route.path)) activeStepIndex = index;
-    });
-    const updatedSteps = initialSteps.map((step, index) => {
-      let status: Step["status"] = "upcoming";
-      if (index === activeStepIndex) {
-        status = "current";
-      } else if (index < activeStepIndex) {
-        status = "complete";
-      }
-      return { ...step, status };
-    });
-    setSteps(updatedSteps);
-  }, [location, languageChanged]);
 
   return (
     <div>
@@ -123,8 +95,6 @@ function App() {
             />
           </p>
         </div>
-
-        <Steps steps={steps} />
       </div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {routesElement}

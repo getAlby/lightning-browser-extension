@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "O poder do⚡ bitcoin ⚡no seu navegador",
-      "nav": {
-        "welcome": "Bem-vindo",
-        "password": "Senha",
-        "connect": "Sua conta",
-        "done": "Feito"
-      },
       "intro": {
         "send": {
           "title": "Clicou pagou",

@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "El poder de ⚡ bitcoin ⚡ en tu navegador",
-      "nav": {
-        "welcome": "Bienvenido",
-        "password": "Su Contraseña",
-        "connect": "Su cuenta de Lightning",
-        "done": "Hecho"
-      },
       "intro": {
         "send": {
           "title": "Enviar en un Click",
