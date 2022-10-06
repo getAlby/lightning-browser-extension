@@ -40,8 +40,6 @@
       },
       "test_connection": {
         "ready": "¡Impresionante, estás listo para comenzar!",
-        "tutorial": "Ahora que ha conectado su billetera, ¿le gustaría realizar un tutorial?",
-        "try_tutorial": "Pruébalo ahora",
         "initializing": "Inicializando su cuenta. Por favor, espere, esto puede tardar un minuto...",
         "connection_error": "Error de Conexión",
         "review_connection_details": "Revise los detalles de su conexión.",

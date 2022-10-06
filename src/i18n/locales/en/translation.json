@@ -40,8 +40,6 @@
       },
       "test_connection": {
         "ready": "Awesome, you’re ready to go!",
-        "tutorial": "Now you’ve connected your wallet would you like to go through a tutorial?",
-        "try_tutorial": "Give it a try now",
         "initializing": "Initializing your account. Please wait, this can take a minute...",
         "connection_error": "Connection Error",
         "review_connection_details": "Please review your connection details.",

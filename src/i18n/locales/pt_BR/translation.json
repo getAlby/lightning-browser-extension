@@ -40,8 +40,6 @@
       },
       "test_connection": {
         "ready": "Perfeito, tudo configurado!",
-        "tutorial": "Agora que você já conectou a carteira, gostaria de ler o tutorial?",
-        "try_tutorial": "Experimente agora",
         "initializing": "Iniciando sua conta. Aguarde, pode demorar um pouco...",
         "connection_error": "Erro de conexão",
         "review_connection_details": "Revise os detalhes da conexão.",
