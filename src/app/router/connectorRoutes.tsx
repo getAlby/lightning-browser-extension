@@ -13,6 +13,7 @@ import NewWallet from "@screens/connectors/NewWallet";
 import i18n from "~/i18n/i18nConfig";
 import { translationI18nNamespace } from "~/i18n/namespaces";
 
+import ConnectCommando from "../screens/connectors/ConnectCommando";
 import alby from "/static/assets/icons/alby.png";
 import btcpay from "/static/assets/icons/btcpay.svg";
 import citadel from "/static/assets/icons/citadel.png";
@@ -186,6 +187,19 @@ function getConnectorRoutes() {
       title: i18n.t("choose_connector.btcpay.title", translationI18nNamespace),
       description: i18n.t(
         "choose_connector.btcpay.description",
+        translationI18nNamespace
+      ),
+      logo: btcpay,
+    },
+    {
+      path: "commando",
+      element: <ConnectCommando />,
+      title: i18n.t(
+        "choose_connector.commando.title",
+        translationI18nNamespace
+      ),
+      description: i18n.t(
+        "choose_connector.commando.description",
         translationI18nNamespace
       ),
       logo: btcpay,
