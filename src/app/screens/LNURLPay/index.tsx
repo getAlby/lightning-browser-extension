@@ -304,7 +304,7 @@ function LNURLPay() {
         <div>
           <ResultCard
             isSuccess
-            message={`${valueSat} (SATS) ${
+            message={`${valueSat} SATS ${
               showFiat ? "(" + fiatValue + ")" : ""
             } ${t("were_sent_to")} ${navState.origin?.name || getRecipient()}`}
           />
