@@ -31,7 +31,7 @@ const settings: SettingsStorage = {
   userEmail: "",
   userName: "",
   websiteEnhancements: true,
-  nostrPrivateKey: "",
+  nostrEnabled: false,
 };
 
 const mockState = {

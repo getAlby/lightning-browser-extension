@@ -9,7 +9,7 @@ import Select from "@components/form/Select";
 import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
 import type { FormEvent } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
@@ -29,9 +29,17 @@ function Settings() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
 
-  const [nostrPrivateKey, setNostrPrivateKey] = useState(
-    settings.nostrPrivateKey
-  );
+  // TODO: Load setting from encrypted storage
+  const [nostrPrivateKey, setNostrPrivateKey] = useState("");
+
+  const getPrivateKeyFromStorage = async () => {
+    const priv = (await utils.call("nostr/getPrivateKey")) as string;
+    setNostrPrivateKey(priv ?? "");
+  };
+
+  useEffect(() => {
+    getPrivateKeyFromStorage().catch(console.error);
+  }, []);
 
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
@@ -40,16 +48,24 @@ function Settings() {
     setModalIsOpen(false);
   }
 
-  function saveNostrPrivateKey(nostrPrivateKey: string) {
+  async function saveNostrPrivateKey(nostrPrivateKey: string) {
+    const result = await utils.call("nostr/getPrivateKey");
+    const currentPrivateKey = result?.privateKey;
+
     if (
-      settings.nostrPrivateKey &&
-      nostrPrivateKey !== settings.nostrPrivateKey &&
+      currentPrivateKey &&
+      nostrPrivateKey !== currentPrivateKey &&
       !confirm(t("nostr.private_key.warning"))
     ) {
       return;
     }
+
+    await utils.call("nostr/setPrivateKey", {
+      privateKey: nostrPrivateKey,
+    });
+
     saveSetting({
-      nostrPrivateKey: nostrPrivateKey,
+      nostrEnabled: !!nostrPrivateKey,
     });
     toast.success(t("nostr.private_key.success"));
   }

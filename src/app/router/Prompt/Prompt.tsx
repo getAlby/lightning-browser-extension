@@ -70,12 +70,6 @@ function Prompt() {
               path="public/nostr/confirmGetPublicKey"
               element={<NostrConfirmGetPublicKey />}
             />
-            <Route path="nostr/signEvent" />
-
-            <Route path="nostr/generatePrivateKey" />
-            {/* <Route path="nostr/getPublicKey" />
-            <Route path="nostr/nip04.encrypt" />
-            <Route path="nostr/nip04.decrypt" /> */}
 
             <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="lnurlPay" element={<LNURLPay />} />

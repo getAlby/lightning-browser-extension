@@ -1,3 +1,4 @@
+import { decryptData } from "~/common/lib/crypto";
 import utils from "~/common/lib/utils";
 import { Event } from "~/extension/ln/nostr/types";
 import { Message } from "~/types";
@@ -28,9 +29,18 @@ const signEventOrPrompt = async (message: Message) => {
       action: "confirmSignMessage",
     });
 
+    const pw = state.getState().password;
+    const pk = state.getState().nostrPrivateKey;
+
+    if (!pw || !pk) {
+      return;
+    }
+
+    const decryptedPrivateKey = decryptData(pk, pw);
+
     const event = await signEvent(
       message.args.event as Event,
-      state.getState().settings.nostrPrivateKey
+      decryptedPrivateKey
     );
 
     response.data = event;

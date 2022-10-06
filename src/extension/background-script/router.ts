@@ -50,6 +50,12 @@ const routes = {
   lnurl: lnurl,
   lnurlAuth: auth,
   getCurrencyRate: cache.getCurrencyRate,
+  nostr: {
+    generatePrivateKey: nostr.generatePrivateKey,
+    getPrivateKey: nostr.getPrivateKey,
+    setPrivateKey: nostr.setPrivateKey,
+  },
+
   // Public calls are accessible from inpage scripts
   public: {
     webln: {
@@ -68,9 +74,6 @@ const routes = {
       "nip04.encrypt": nostr.nip04Encrypt,
       "nip04.decrypt": nostr.nip04Decrypt,
     },
-  },
-  nostr: {
-    generatePrivateKey: nostr.generatePrivateKey,
   },
 };
 

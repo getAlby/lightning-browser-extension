@@ -524,7 +524,7 @@ export interface SettingsStorage {
   currency: CURRENCIES;
   exchange: SupportedExchanges;
   debug: boolean;
-  nostrPrivateKey: string;
+  nostrEnabled: boolean;
 }
 
 export interface Badge {

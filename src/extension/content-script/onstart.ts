@@ -14,7 +14,7 @@ async function onstart() {
   injectScript(browser.runtime.getURL("js/inpageScriptWebLN.bundle.js"));
 
   // window.nostr
-  const nostrEnabled = (await api.getSettings()).nostrPrivateKey;
+  const nostrEnabled = (await api.getSettings()).nostrEnabled;
   if (nostrEnabled) {
     injectScript(browser.runtime.getURL("js/inpageScriptNostr.bundle.js"));
   }

@@ -17,6 +17,7 @@ interface State {
   migrations: Migration[] | null;
   connector: Connector | null;
   currentAccountId: string | null;
+  nostrPrivateKey: string | null;
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
   init: () => Promise<void>;
@@ -48,7 +49,7 @@ export const DEFAULT_SETTINGS: SettingsStorage = {
   currency: CURRENCIES.USD,
   exchange: "alby",
   debug: false,
-  nostrPrivateKey: "",
+  nostrEnabled: false,
 };
 
 // these keys get synced from the state to the browser storage
@@ -72,6 +73,7 @@ const state = createState<State>((set, get) => ({
   accounts: {},
   currentAccountId: null,
   password: null,
+  nostrPrivateKey: null,
   getAccount: () => {
     const currentAccountId = get().currentAccountId as string;
     let account = null;
