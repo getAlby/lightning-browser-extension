@@ -32,6 +32,12 @@ module.exports = {
       ],
       include: path.resolve(__dirname, "../"),
     });
+    config.module.rules.push({
+      test: /\.m?js/,
+      resolve: {
+        fullySpecified: false,
+      },
+    });
     config.resolve.plugins = [new TsconfigPathsPlugin()];
     return config;
   },
