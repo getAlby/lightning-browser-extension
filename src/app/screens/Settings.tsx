@@ -13,10 +13,10 @@ import { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
+import { permissions } from "webextension-polyfill";
 import { useSettings } from "~/app/context/SettingsContext";
 import { CURRENCIES } from "~/common/constants";
 import utils from "~/common/lib/utils";
-import { permissions } from "webextension-polyfill";
 
 const initialFormData = {
   password: "",
@@ -96,19 +96,24 @@ function Settings() {
             <Toggle
               checked={settings.clipboard}
               onChange={async () => {
-
                 let result;
-                if(settings.clipboard) {
-                  result = !(await permissions.remove({ permissions: ["clipboardRead"] }));
-                }
-                else {
+                if (settings.clipboard) {
+                  result = !(await permissions.remove({
+                    permissions: ["clipboardRead"],
+                  }));
+                } else {
                   result = await permissions.request({
-                    permissions: ['clipboardRead'],
-                  });                  
+                    permissions: ["clipboardRead"],
+                  });
+
+                  if (result) {
+                    const cb = await navigator.clipboard.readText();
+                    alert("You have something on your clipboard:\n\n" + cb);
+                  }
                 }
 
                 saveSetting({
-                  clipboard: result
+                  clipboard: result,
                 });
               }}
             />
