@@ -1,5 +1,7 @@
 import { render, screen, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
+import * as SettingsContext from "~/app/context/SettingsContext";
 import type { OriginData } from "~/types";
 
 import Keysend from "./index";
@@ -36,7 +38,14 @@ jest.mock("~/app/hooks/useNavigationState", () => {
 });
 
 describe("Keysend", () => {
-  test("render", async () => {
+  test("renders with fiat", async () => {
+    jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
+      settings: { ...mockSettings },
+      isLoading: false,
+      updateSetting: jest.fn(),
+      getFiatValue: jest.fn(() => Promise.resolve("$0.01")),
+    });
+
     await act(async () => {
       render(
         <MemoryRouter>
