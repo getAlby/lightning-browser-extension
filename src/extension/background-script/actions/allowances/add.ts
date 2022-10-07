@@ -16,6 +16,8 @@ const add = async (message: MessageAllowanceAdd) => {
   if (allowance) {
     if (!allowance.id) return { error: "id is missing" };
 
+    // persist budget-event?
+
     await db.allowances.update(allowance.id, {
       enabled: true,
       imageURL: imageURL,
@@ -36,6 +38,9 @@ const add = async (message: MessageAllowanceAdd) => {
       tag: "",
       totalBudget: totalBudget,
     };
+
+    // persist budget-event?
+
     await db.allowances.add(dbAllowance);
   }
   await db.saveToStorage();

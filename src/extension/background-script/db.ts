@@ -5,6 +5,7 @@ import type {
   DbPayment,
   DbBlocklist,
   DbPermission,
+  DbAlbyEvent
 } from "~/types";
 
 class DB extends Dexie {
@@ -12,6 +13,7 @@ class DB extends Dexie {
   payments: Dexie.Table<DbPayment, number>;
   blocklist: Dexie.Table<DbBlocklist, number>;
   permissions: Dexie.Table<DbPermission, number>;
+  albyEvents: Dexie.Table<DbAlbyEvent, number>;
 
   constructor() {
     super("LBE");
@@ -27,11 +29,15 @@ class DB extends Dexie {
     this.version(3).stores({
       permissions: "++id,allowanceId,host,method,enabled,blocked,createdAt",
     });
+    this.version(4).stores({
+      albyEvents: "++id,event,details,createdAt",
+    });
     this.on("ready", this.loadFromStorage.bind(this));
     this.allowances = this.table("allowances");
     this.payments = this.table("payments");
     this.blocklist = this.table("blocklist");
     this.permissions = this.table("permissions");
+    this.albyEvents = this.table("albyEvents");
   }
 
   async saveToStorage() {
@@ -39,12 +45,14 @@ class DB extends Dexie {
     const paymentsArray = await this.payments.toArray();
     const blocklistArray = await this.blocklist.toArray();
     const permissionsArray = await this.permissions.toArray();
+    const albyEventsArray = await this.albyEvents.toArray();
 
     await browser.storage.local.set({
       allowances: allowanceArray,
       payments: paymentsArray,
       blocklist: blocklistArray,
       permissions: permissionsArray,
+      albyEvents: albyEventsArray,
     });
     return true;
   }
@@ -59,7 +67,7 @@ class DB extends Dexie {
     console.info("Loading DB data from storage");
 
     return browser.storage.local
-      .get(["allowances", "payments", "blocklist", "permissions"])
+      .get(["allowances", "payments", "blocklist", "permissions", "albyEvents"])
       .then((result) => {
         const allowancePromise = this.allowances.count().then((count) => {
           // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
@@ -117,6 +125,18 @@ class DB extends Dexie {
               .bulkAdd(result.permissions)
               .catch(Dexie.BulkError, function (e) {
                 console.error("Failed to add permissions; ignoring", e);
+                
+        const albyEventsPromise = this.albyEvents.count().then((count) => {
+          // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
+          if (count > 0) {
+            console.info(`Found ${count} albyEvents already in the DB`);
+            return;
+          } else if (result.albyEvents && result.albyEvents.length > 0) {
+            // adding the data from the browser storage
+            return this.albyEvents
+              .bulkAdd(result.albyEvents)
+              .catch(Dexie.BulkError, function (e) {
+                console.error("Failed to add albyEvents; ignoring", e);
               });
           }
         });
@@ -127,6 +147,7 @@ class DB extends Dexie {
           paymentsPromise,
           blocklistPromise,
           permissionsPromise,
+          albyEventsPromise,
         ]);
       })
       .catch((e) => {

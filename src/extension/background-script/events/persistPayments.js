@@ -8,6 +8,8 @@ const persistSuccessfullPayment = async (message, data) => {
   const route = paymentResponse.data.route;
   const { total_amt, total_fees } = route;
 
+  // persist payment-event?
+
   await db.payments.add({
     host,
     location,

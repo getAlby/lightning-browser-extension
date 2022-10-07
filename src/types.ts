@@ -613,6 +613,27 @@ export interface Allowance extends Omit<DbAllowance, "id"> {
   usedBudget: number;
 }
 
+export enum AlbyEventType {
+  "PERMISSION" = "PERMISSION",
+  "AUTH" = "AUTH",
+  "TRANSACTION" = "TRANSACTION",
+  "TRANSACTIONGROUP" = "TRANSACTIONGROUP",
+  "SIGNMESSAGE" = "SIGNMESSAGE",
+  "BUDGET" = "BUDGET",
+  "CHANNEL" = "CHANNEL",
+}
+
+export interface DbAlbyEvent {
+  id?: number;
+  event: AlbyEventType;
+  createdAt: string;
+  details?: string; // can be all kinds of JSON encoded details, we should have types for this afetr decoding
+}
+
+export interface AlbyEvent extends Omit<DbAlbyEvent, "id"> {
+  id: number;
+}
+
 export interface SettingsStorage {
   browserNotifications: boolean;
   websiteEnhancements: boolean;

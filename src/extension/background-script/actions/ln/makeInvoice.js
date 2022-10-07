@@ -18,6 +18,8 @@ const makeInvoice = async (message, sender) => {
         amount,
         memo,
       });
+      // persist invoice-event?
+
       return response;
     } catch (e) {
       return { error: e.message };

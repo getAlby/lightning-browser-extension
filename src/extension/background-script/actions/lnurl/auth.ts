@@ -5,6 +5,7 @@ import sha256 from "crypto-js/sha256";
 import PubSub from "pubsub-js";
 import utils from "~/common/lib/utils";
 import HashKeySigner from "~/common/utils/signer";
+import db from "~/extension/background-script/db";
 import state from "~/extension/background-script/state";
 import {
   MessageLnurlAuth,
@@ -12,6 +13,8 @@ import {
   LnurlAuthResponse,
   OriginData,
   AuthResponseObject,
+  DbAlbyEvent,
+  AlbyEventType,
 } from "~/types";
 
 const LNURLAUTH_CANONICAL_PHRASE =
@@ -94,6 +97,14 @@ export async function authFunction({
         authResponse?.data?.reason || "Auth: Something went wrong"
       );
     } else {
+      const dbAlbyEvent: DbAlbyEvent = {
+        createdAt: Date.now().toString(),
+        event: AlbyEventType.AUTH,
+        details: JSON.stringify(lnurlDetails),
+      };
+
+      await db.albyEvents.add(dbAlbyEvent);
+
       PubSub.publish(`lnurl.auth.success`, {
         authResponse,
         lnurlDetails,
