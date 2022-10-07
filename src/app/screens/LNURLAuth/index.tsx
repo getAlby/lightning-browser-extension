@@ -1,8 +1,9 @@
+import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
-import SuccessMessage from "@components/SuccessMessage";
+import ResultCard from "@components/ResultCard";
 import { useState } from "react";
 import type { MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
@@ -20,6 +21,7 @@ function LNURLAuth() {
   const { t: tComponents } = useTranslation("components", {
     keyPrefix: "confirm_or_cancel",
   });
+  const { t: tCommon } = useTranslation("common");
 
   const navigate = useNavigate();
   const navState = useNavigationState();
@@ -51,7 +53,9 @@ function LNURLAuth() {
       }
 
       if (response.success) {
-        setSuccessMessage(t("success"));
+        setSuccessMessage(
+          t("success", { name: origin ? origin.name : details.domain })
+        );
         // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the response. This closes the window which means the user will NOT see the above successAction.
         // We assume this is OK when it is called through webln.
         if (navState.isPrompt) {
@@ -130,18 +134,14 @@ function LNURLAuth() {
           </Container>
         </>
       ) : (
-        <Container maxWidth="sm">
-          {origin ? (
-            <PublisherCard
-              title={origin.name}
-              image={origin.icon}
-              url={details.domain}
-            />
-          ) : (
-            <PublisherCard title={details.domain} />
-          )}
+        <Container justifyBetween maxWidth="sm">
+          <ResultCard isSuccess message={successMessage} />
           <div className="my-4">
-            <SuccessMessage message={successMessage} onClose={close} />
+            <Button
+              onClick={close}
+              label={tCommon("actions.close")}
+              fullWidth
+            />
           </div>
         </Container>
       )}
