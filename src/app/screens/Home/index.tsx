@@ -2,6 +2,7 @@ import {
   CaretLeftIcon,
   SendIcon,
   ReceiveIcon,
+  CopyIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import AllowanceMenu from "@components/AllowanceMenu";
 import Button from "@components/Button";
@@ -353,6 +354,17 @@ function Home() {
   function renderDefaultView() {
     return (
       <div className="p-4">
+        <div className="flex mb-4">
+          <Button
+            fullWidth
+            icon={<CopyIcon className="w-6 h-6" />}
+            label={tCommon("Use data from clipboard")}
+            direction="row"
+            onClick={() => {
+              navigate("/clipboard");
+            }}
+          />
+        </div>
         <div className="flex mb-6 space-x-4">
           <Button
             fullWidth
