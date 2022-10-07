@@ -486,7 +486,7 @@
       "content_message": {
         "heading": "Request a channel from the node"
       },
-      "success": "Channel request sent successfully"
+      "success": "Channel request sent successfully to {{name}}"
     },
     "lnurlwithdraw": {
       "title": "Withdraw",
@@ -599,6 +599,7 @@
     "description": "Description",
     "description_full": "Full Description",
     "were_sent_to": "were sent to",
+    "response": "Response",
     "message": "Message",
     "actions": {
       "back": "Back",
