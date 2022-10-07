@@ -66,10 +66,10 @@
       "description": "Você precisa primeiro conectar-se a uma conta ou servidor para poder interagir com seus sites favoritos que aceitam pagamentos em bitcoin!",
       "alby": {
         "title": "Carteira Alby",
-        "description": "Crie uma nova conta ou faça login na sua conta Alby",
+        "description": "Criar uma nova conta ou logar na sua conta atual da Alby",
         "pre_connect": {
           "title": "Sua Carteira Bitcoin na Alby",
-          "login_account": "Criar nova conta ou logar na sua conta Alby.",
+          "login_account": "Crie uma conta ou faça login na sua conta atual da Alby.",
           "host_wallet": "A custódia dos seus bitcoins é por nossa conta!",
           "email": {
             "label": "Endereço de E-mail"
@@ -92,7 +92,7 @@
       },
       "lnd": {
         "title": "LND",
-        "description": "Conectar servidor LND",
+        "description": "Conectar em um servidor LND",
         "page": {
           "title": "Conecte no servidor LND",
           "description": "Você precisa da URL do servidor e um macaroon com permissão de envio e leitura (ex. admin.macaroon)"
@@ -223,7 +223,7 @@
         }
       },
       "bitcoin_beach": {
-        "description": "Crie uma conta ou conecte sua Bitcoin Beach (Galoy)",
+        "description": "Criar uma conta ou conectar sua Bitcoin Beach (Galoy)",
         "title": "Carteira Bitcoin Beach",
         "page": {
           "title": "Conecte na <0>Carteira Bitcoin Beach</0>"
@@ -231,14 +231,14 @@
       },
       "bitcoin_jungle": {
         "title": "Carteira Bitcoin Jungle",
-        "description": "Crie uma conta ou conecte sua Bitcoin Jungle (Galoy)",
+        "description": "Criar uma conta ou conectar sua Bitcoin Jungle (Galoy)",
         "page": {
           "title": "Conecte na <0>Carteira Bitcoin Jungle</0>"
         }
       },
       "btcpay": {
         "title": "Servidor BTCPay",
-        "description": "Conecte no servidor LND BTCPay",
+        "description": "Conectar em um servidor LND BTCPay",
         "page": {
           "title": "Conecte no servidor LND BTCPay",
           "instructions": "Navegue até a BTCPayServer e acesse como administrador. Vá até Configurações>Serviços>LND Rest - Ver informação. Depois Clique \"Ver Código QR\" e copie os dados do Código QR. Cole os dados abaixo:"
@@ -270,6 +270,36 @@
           "failed_to_login_sms": "Falha ao logar usando o código SMS",
           "setup_failed": "Falha na configuração",
           "missing_jwt": "JWT ausente, não foi possível fazer login."
+        }
+      },
+      "lndhub_bluewallet": {
+        "title": "Bluewallet",
+        "page": {
+          "title": "Conectar na BlueWallet",
+          "description": "Na BlueWallet, escolha a carteira que você deseja conectar, abra ela, clique em \"...\", clique em Exportar/Backup para exibir o código QR e leia o código com sua webcam."
+        },
+        "uri": {
+          "label": "Exportar URI BlueWallet"
+        },
+        "errors": {
+          "invalid_uri": "URI BlueWallet inválida",
+          "connection_failed": "Falha na conexão. A URI BlueWallet está correta?"
+        },
+        "description": "Conectar na sua carteira de celular Bluewallet"
+      },
+      "lndhub_go": {
+        "title": "LNDHub",
+        "page": {
+          "title": "Conectar na LNDHub",
+          "description": "Insira sua credencial URI LNDHub aqui ou leia o código QR com sua webcam."
+        },
+        "description": "Conectar na sua conta LNDHub",
+        "uri": {
+          "label": "Exportar URI LNDHub"
+        },
+        "errors": {
+          "invalid_uri": "URI LNDHub inválida",
+          "connection_failed": "Falha na conexão. A URI LNDHub está correta?"
         }
       }
     },
@@ -388,7 +418,7 @@
       },
       "currency": {
         "title": "Moeda",
-        "subtitle": "Escolha uma moeda adicional para exibir os valores na Alby"
+        "subtitle": "Escolha a moeda adicional para exibir os valores na Alby"
       },
       "exchange": {
         "title": "Serviço provedor de cotações",
@@ -622,6 +652,10 @@
       "edit_allowance": {
         "title": "Definir um novo limite",
         "screen_reader": "Opções limite de gastos"
+      },
+      "enable_login": {
+        "title": "Login automático",
+        "subtitle": "O login é realizado de forma automática, sem necessidade de confirmação."
       }
     },
     "qrcode_scanner": {
