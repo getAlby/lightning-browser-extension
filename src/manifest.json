@@ -24,7 +24,9 @@
     "nativeMessaging",
     "*://*/*"
   ],
-
+  "optional_permissions": [
+    "clipboardRead"
+  ],
   "content_security_policy": "script-src 'self'; object-src 'self'",
 
   "__chrome|firefox__author": "Alby",
