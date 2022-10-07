@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import { CURRENCIES } from "~/common/constants";
 import utils from "~/common/lib/utils";
+import { permissions } from "webextension-polyfill";
 
 const initialFormData = {
   password: "",
@@ -82,6 +83,32 @@ function Settings() {
               onChange={() => {
                 saveSetting({
                   websiteEnhancements: !settings.websiteEnhancements,
+                });
+              }}
+            />
+          )}
+        </Setting>
+        <Setting
+          title={t("clipboard.title")}
+          subtitle={t("clipboard.subtitle")}
+        >
+          {!isLoading && (
+            <Toggle
+              checked={settings.clipboard}
+              onChange={async () => {
+
+                let result;
+                if(settings.clipboard) {
+                  result = !(await permissions.remove({ permissions: ["clipboardRead"] }));
+                }
+                else {
+                  result = await permissions.request({
+                    permissions: ['clipboardRead'],
+                  });                  
+                }
+
+                saveSetting({
+                  clipboard: result
                 });
               }}
             />
