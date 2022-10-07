@@ -1,9 +1,10 @@
 import BudgetControl from "@components/BudgetControl";
+import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
-import SuccessMessage from "@components/SuccessMessage";
+import ResultCard from "@components/ResultCard";
 import lightningPayReq from "bolt11";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -30,6 +31,7 @@ function ConfirmPayment() {
   const { t: tComponents } = useTranslation("components", {
     keyPrefix: "confirm_or_cancel",
   });
+  const { t: tCommon } = useTranslation("common");
 
   const navState = useNavigationState();
   const paymentRequest = navState.args?.paymentRequest as string;
@@ -82,7 +84,13 @@ function ConfirmPayment() {
       );
       auth.fetchAccountInfo(); // Update balance.
       msg.reply(response);
-      setSuccessMessage(t("success"));
+      setSuccessMessage(
+        t("success", {
+          amount: `${invoice.satoshis} SATS${
+            showFiat ? ` (${fiatAmount})` : ``
+          }`,
+        })
+      );
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
@@ -112,7 +120,7 @@ function ConfirmPayment() {
 
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
-      <ScreenHeader title={t("title")} />
+      <ScreenHeader title={!successMessage ? t("title") : tCommon("success")} />
       {!successMessage ? (
         <Container justifyBetween maxWidth="sm">
           <div>
@@ -157,18 +165,22 @@ function ConfirmPayment() {
           </div>
         </Container>
       ) : (
-        <Container maxWidth="sm">
-          {navState.origin && (
-            <PublisherCard
-              title={navState.origin.name}
-              image={navState.origin.icon}
-              url={navState.origin.host}
-            />
-          )}
+        <Container justifyBetween maxWidth="sm">
+          <ResultCard
+            isSuccess
+            message={
+              !navState.origin
+                ? successMessage
+                : `${invoice.satoshis} SATS ${
+                    showFiat ? `(${fiatAmount})` : ``
+                  } ${tCommon("were_sent_to")} ${navState.origin.name}`
+            }
+          />
           <div className="my-4">
-            <SuccessMessage
-              message={successMessage}
-              onClose={() => window.close()}
+            <Button
+              onClick={() => window.close()}
+              label={tCommon("actions.close")}
+              fullWidth
             />
           </div>
         </Container>
