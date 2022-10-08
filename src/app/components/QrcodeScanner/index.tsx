@@ -15,14 +15,12 @@ type Props = {
   fps?: number;
   qrbox?: number;
   qrCodeSuccessCallback?: (decodedText: string) => void;
-  qrCodeErrorCallback?: (errorMessage: string) => void;
 };
 
 function QrcodeScanner({
   fps = 10,
   qrbox = 250,
   qrCodeSuccessCallback,
-  qrCodeErrorCallback,
 }: Props) {
   const [isScanning, setScanning] = useState(false);
   const [cameras, setCameras] = useState<CameraDevice[]>([]);
@@ -82,9 +80,7 @@ function QrcodeScanner({
               handleStopScanning();
               qrCodeSuccessCallback && qrCodeSuccessCallback(decodedText);
             },
-            (errorMessage: string) => {
-              qrCodeErrorCallback && qrCodeErrorCallback(errorMessage);
-            }
+            undefined
           )
           .catch(() => {
             // Start failed.

@@ -140,7 +140,6 @@ export default function ConnectLndHub({
               });
             }
           }}
-          qrCodeErrorCallback={console.error}
         />
       </div>
     </ConnectorForm>

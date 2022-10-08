@@ -146,7 +146,6 @@ function Send() {
                 setQrIsOpen(false);
               }
             }}
-            qrCodeErrorCallback={console.error}
           />
         </Container>
       </div>
