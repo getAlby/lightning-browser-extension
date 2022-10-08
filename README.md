@@ -81,7 +81,7 @@ Add Alby to your browser
 
 Ensure you have
 
-- [Node.js](https://nodejs.org) 14 or later installed
+- [Node.js](https://nodejs.org) v14 [`14.20.1`] installed (We only support v14 currently)
 - [Yarn](https://yarnpkg.com) v1 or v2 installed
 
 Suppported but not required
