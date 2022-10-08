@@ -12,7 +12,6 @@ import utils from "~/common/lib/utils";
 import { OriginData } from "~/types";
 
 function NostrConfirmGetPublicKey() {
-  const [, setEnabled] = useState(false);
   const { t } = useTranslation("translation", {
     keyPrefix: "nostr",
   });
@@ -21,7 +20,6 @@ function NostrConfirmGetPublicKey() {
   const origin = navState.origin as OriginData;
 
   function enable() {
-    setEnabled(true);
     msg.reply({
       confirm: true,
     });
