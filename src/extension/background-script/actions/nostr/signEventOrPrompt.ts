@@ -19,7 +19,6 @@ const signEventOrPrompt = async (message: Message) => {
     };
   }
 
-  // Can we create a more generic version of such a prompt?
   // Set the message as the user needs to see the event details
   message.args.message = JSON.stringify(message.args.event);
 
@@ -33,7 +32,7 @@ const signEventOrPrompt = async (message: Message) => {
     const pk = state.getState().nostrPrivateKey;
 
     if (!pw || !pk) {
-      return;
+      throw new Error("nostr: Private key not available.")
     }
 
     const decryptedPrivateKey = decryptData(pk, pw);
