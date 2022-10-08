@@ -247,7 +247,7 @@ When creating a PR please take this points as a reminder:
 
 ##### [VS Code](https://code.visualstudio.com/)
 
-For better support we reccomend these extensions:
+For better support we recommend these extensions:
 
 - [vscode-eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
@@ -258,7 +258,7 @@ For better support we reccomend these extensions:
 
 Alby enforces [Conventional Commits Specification](https://www.conventionalcommits.org/en/)
 
-> A specification for adding human and machine readable meaning to commit messages
+> A specification for adding human and machine-readable meaning to commit messages
 
 ### Translations
 
@@ -394,7 +394,7 @@ _Usually, we prefer single words in `common`, phrases like "Get Started", "Enabl
 
 Joule is a full interface to manage a LND node. It only supports one LND account.
 Our goal is NOT to write a full UI for a Lightning Network node with all the channel management features, but instead to only focus on what is necessary for the web (for payment and authentication flows). We believe there are already way better management UIs.
-Also we focus on supporting multipe different node backends (non-custodial and custodial).
+Also we focus on supporting multiple different node backends (non-custodial and custodial).
 
 #### What is WebLN?
 
