@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { classNames } from "~/app/utils";
 
 export type Props = {
@@ -60,6 +60,15 @@ export default function DualCurrencyField({
       max={max}
     />
   );
+
+  // run effect on input mount to ignoreScroll event
+  useEffect(() => {
+    if (inputEl.current == null) return;
+    const ignoreScroll = (evt: globalThis.WheelEvent) => {
+      evt.preventDefault();
+    };
+    inputEl.current.addEventListener("wheel", ignoreScroll);
+  }, [inputEl]);
 
   return (
     <div className="relative block m-0">
