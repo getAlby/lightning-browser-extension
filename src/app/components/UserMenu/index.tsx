@@ -94,7 +94,7 @@ export default function UserMenu() {
           }}
         >
           <QuestionIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-          {tCommon("Help")}
+          {tCommon("help")}
         </Menu.ItemButton>
         <Menu.Divider />
         <Menu.ItemButton onClick={lock}>

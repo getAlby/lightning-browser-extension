@@ -600,6 +600,7 @@
     "description_full": "Full Description",
     "were_sent_to": "were sent to",
     "message": "Message",
+    "help": "Help",
     "actions": {
       "back": "Back",
       "delete": "Delete",
