@@ -221,6 +221,7 @@ function Receive() {
                     placeholder={t("amount.placeholder")}
                     fiatValue={fiatAmount}
                     onChange={handleChange}
+                    autoFocus
                   />
                 </div>
 

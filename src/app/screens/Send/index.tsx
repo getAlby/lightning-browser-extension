@@ -187,6 +187,7 @@ function Send() {
                   <QrCodeIcon className="h-6 w-6 text-blue-500" />
                 </button>
               }
+              autoFocus
             />
             <div className="mt-4">
               <Button
