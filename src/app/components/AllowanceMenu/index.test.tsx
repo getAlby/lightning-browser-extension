@@ -67,12 +67,10 @@ describe("AllowanceMenu", () => {
     await screen.findByText("Edit Allowance");
 
     // update fiat value when modal is open
-    await waitFor(() =>
-      expect(mockGetFiatValue).toHaveBeenCalledWith(
-        defaultProps.allowance.totalBudget.toString()
-      )
+    expect(mockGetFiatValue).toHaveBeenCalledWith(
+      defaultProps.allowance.totalBudget.toString()
     );
-    await waitFor(() => expect(mockGetFiatValue).toHaveBeenCalledTimes(1));
+    expect(mockGetFiatValue).toHaveBeenCalledTimes(1);
 
     await act(async () => {
       await user.clear(screen.getByLabelText("New budget"));
