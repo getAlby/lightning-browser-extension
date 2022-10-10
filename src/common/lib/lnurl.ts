@@ -71,25 +71,25 @@ const lnurl = {
 
   async getDetails(lnurlString: string): Promise<LNURLError | LNURLDetails> {
     const url = normalizeLnurl(lnurlString);
-    const searchParamstag = url.searchParams.get("tag") as LNURLDetails["tag"];
+    const searchParamsTag = url.searchParams.get("tag");
 
-    if (searchParamstag === "login") {
-      const searchParamsK1 = url.searchParams.get(
-        "k1"
-      ) as LNURLAuthServiceResponse["tag"];
-      const searchParamsAction = url.searchParams.get(
-        "action"
-      ) as LNURLAuthServiceResponse["tag"];
+    if (searchParamsTag && searchParamsTag === "login") {
+      const searchParamsK1 = url.searchParams.get("k1");
+      const searchParamsAction = url.searchParams.get("action");
 
-      const lnurlAuthDetails: LNURLAuthServiceResponse = {
-        action: searchParamsAction,
-        domain: url.hostname,
-        k1: searchParamsK1,
-        tag: searchParamstag,
-        url: url.toString(),
-      };
+      if (searchParamsK1) {
+        const lnurlAuthDetails: LNURLAuthServiceResponse = {
+          ...(searchParamsAction && { action: searchParamsAction }),
+          domain: url.hostname,
+          k1: searchParamsK1,
+          tag: searchParamsTag,
+          url: url.toString(),
+        };
 
-      return lnurlAuthDetails;
+        return lnurlAuthDetails;
+      }
+
+      throw new Error("LNURL AUTH Login is missing search params: k1");
     } else {
       try {
         const { data }: { data: LNURLDetails | LNURLError } = await axios.get(
