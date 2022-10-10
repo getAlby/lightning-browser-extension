@@ -61,13 +61,12 @@ export default function DualCurrencyField({
     />
   );
 
-  // run effect on input mount to ignoreScroll event
+  // run effect on input mount to ignore wheel/scroll event
   useEffect(() => {
-    if (inputEl.current == null) return;
     const ignoreScroll = (evt: globalThis.WheelEvent) => {
       evt.preventDefault();
     };
-    inputEl.current.addEventListener("wheel", ignoreScroll);
+    inputEl.current && inputEl.current.addEventListener("wheel", ignoreScroll);
   }, [inputEl]);
 
   return (
