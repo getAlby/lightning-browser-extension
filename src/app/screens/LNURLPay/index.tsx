@@ -64,11 +64,13 @@ function LNURLPay() {
   >();
 
   useEffect(() => {
-    if (showFiat) {
-      (async () => {
+    if (valueSat !== "" && showFiat) {
+      const getFiat = async () => {
         const res = await getFiatValue(valueSat);
         setFiatValue(res);
-      })();
+      };
+
+      getFiat();
     }
   }, [valueSat, showFiat, getFiatValue]);
 
