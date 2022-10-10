@@ -7,33 +7,26 @@ import * as SettingsContext from "~/app/context/SettingsContext";
 import type { Props } from "./index";
 import AllowanceMenu from "./index";
 
+const mockGetFiatValue = jest.fn(() => Promise.resolve("$1,22"));
+
 jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
   settings: mockSettings,
   isLoading: false,
   updateSetting: jest.fn(),
-  getFiatValue: jest.fn(),
+  getFiatValue: mockGetFiatValue,
 });
 
 jest.mock("~/common/lib/utils");
 
-jest.mock("~/common/lib/api", () => {
-  return {
-    getSettings: jest.fn(() => ({
-      currency: "USD",
-      exchange: "coindesk",
-    })),
-  };
-});
+const mockOnEdit = jest.fn();
 
-const mock = jest.fn();
-
-const props: Props = {
+const defaultProps: Props = {
   allowance: {
     id: 1,
     totalBudget: 2000,
     lnurlAuth: false,
   },
-  onEdit: mock,
+  onEdit: mockOnEdit,
 };
 
 describe("AllowanceMenu", () => {
@@ -41,21 +34,27 @@ describe("AllowanceMenu", () => {
     jest.clearAllMocks();
   });
 
-  test("set new budget", async () => {
-    const user = userEvent.setup();
-
+  const renderComponent = (props?: Partial<Props>) =>
     render(
       <MemoryRouter>
-        <AllowanceMenu {...props} />
+        <AllowanceMenu {...defaultProps} {...props} />
       </MemoryRouter>
     );
 
+  test("set new budget", async () => {
+    const user = userEvent.setup();
+
+    renderComponent();
+
+    expect(mockGetFiatValue).not.toHaveBeenCalled();
+
     const settingsButton = await screen.getByRole("button");
+
     await act(() => {
       user.click(settingsButton); // click settings-button
     });
 
-    expect(await screen.findByRole("menu")).toBeInTheDocument(); // allowence-menu opens
+    expect(await screen.findByRole("menu")).toBeInTheDocument(); // allowance-menu opens
 
     const editButton = await screen.findByRole("menuitem", {
       name: "Edit",
@@ -67,12 +66,24 @@ describe("AllowanceMenu", () => {
 
     await screen.findByText("Edit Allowance");
 
+    // update fiat value
+    await act(async () => {
+      expect(mockGetFiatValue).toHaveBeenCalledWith(
+        defaultProps.allowance.totalBudget.toString()
+      );
+      expect(mockGetFiatValue).toHaveBeenCalledTimes(1);
+    });
+
     await act(async () => {
       await user.clear(screen.getByLabelText("New budget"));
       await user.type(screen.getByLabelText("New budget"), "250");
     });
 
     expect(screen.getByLabelText("New budget")).toHaveValue(250);
+
+    // update fiat value
+    expect(mockGetFiatValue).toHaveBeenCalledWith("250");
+    expect(mockGetFiatValue).toHaveBeenCalledTimes(4); // plus 3 times for each input value 2, 5, 0
 
     const saveButton = await screen.findByRole("button", {
       name: "Save",
@@ -82,24 +93,20 @@ describe("AllowanceMenu", () => {
       await user.click(saveButton);
     });
 
-    await waitFor(() => expect(mock).toHaveBeenCalled());
+    expect(mockOnEdit).toHaveBeenCalledTimes(1);
   });
 
   test("enable website login", async () => {
     const user = userEvent.setup();
 
-    render(
-      <MemoryRouter>
-        <AllowanceMenu {...props} />
-      </MemoryRouter>
-    );
+    renderComponent();
 
     const settingsButton = await screen.getByRole("button");
     await act(() => {
       user.click(settingsButton); // click settings-button
     });
 
-    expect(await screen.findByRole("menu")).toBeInTheDocument(); // allowence-menu opens
+    expect(await screen.findByRole("menu")).toBeInTheDocument(); // allowance-menu opens
 
     const editButton = await screen.findByRole("menuitem", {
       name: "Edit",
@@ -125,6 +132,6 @@ describe("AllowanceMenu", () => {
       await user.click(saveButton);
     });
 
-    await waitFor(() => expect(mock).toHaveBeenCalled());
+    await waitFor(() => expect(mockOnEdit).toHaveBeenCalled());
   });
 });
