@@ -9,7 +9,7 @@ export type Props = {
   disabled?: boolean;
   loading?: boolean;
   label?: string;
-  onConfirm: MouseEventHandler;
+  onConfirm?: MouseEventHandler;
   onCancel: MouseEventHandler;
 };
 
@@ -29,8 +29,10 @@ export default function ConfirmOrCancel({
           onClick={onCancel}
           label={tCommon("actions.cancel")}
           halfWidth
+          disabled={loading}
         />
         <Button
+          type="submit"
           onClick={onConfirm}
           label={label}
           primary
