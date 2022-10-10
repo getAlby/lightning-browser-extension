@@ -66,7 +66,11 @@ export default function DualCurrencyField({
     const ignoreScroll = (evt: globalThis.WheelEvent) => {
       evt.preventDefault();
     };
-    inputEl.current && inputEl.current.addEventListener("wheel", ignoreScroll);
+    const elem = inputEl.current;
+    elem && elem.addEventListener("wheel", ignoreScroll);
+    return () => {
+      elem && elem.removeEventListener("wheel", ignoreScroll);
+    };
   }, [inputEl]);
 
   return (
