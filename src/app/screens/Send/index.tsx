@@ -173,6 +173,7 @@ function Send() {
               placeholder={t("input.placeholder")}
               value={invoice}
               disabled={loading}
+              autoFocus
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 setInvoice(
                   event.target.value.trim().replace(/^lightning:/i, "")
@@ -187,7 +188,6 @@ function Send() {
                   <QrCodeIcon className="h-6 w-6 text-blue-500" />
                 </button>
               }
-              autoFocus
             />
             <div className="mt-4">
               <Button
