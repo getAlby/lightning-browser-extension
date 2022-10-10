@@ -34,6 +34,7 @@
   "host_permissions": ["*://*/*"],
 
   "COMMENT_content_security_policy": [
+    "TODO: trigger actions",
     "https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/#content-security-policy",
     "https://developer.chrome.com/docs/extensions/mv3/mv3-migration-checklist/#security_checklist"
   ],
