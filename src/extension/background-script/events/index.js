@@ -7,6 +7,7 @@ import {
   lnurlAuthSuccessNotification,
   lnurlAuthFailedNotification,
 } from "./notifications";
+import { persistAlbyEvent } from "./persistAlbyEvent";
 import { persistSuccessfullPayment } from "./persistPayments";
 
 const subscribe = () => {
@@ -19,6 +20,7 @@ const subscribe = () => {
   PubSub.subscribe("ln.keysend.success", updateAllowance);
 
   PubSub.subscribe("lnurl.auth.success", lnurlAuthSuccessNotification);
+  PubSub.subscribe("lnurl.auth.success", persistAlbyEvent);
   PubSub.subscribe("lnurl.auth.failed", lnurlAuthFailedNotification);
 
   console.info(`Event subscriptions registered`);
