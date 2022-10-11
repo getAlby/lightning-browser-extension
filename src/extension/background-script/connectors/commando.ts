@@ -24,11 +24,24 @@ interface Config {
   privateKey: string;
 }
 
-export type CommandoResponse = {
+type CommandoGetInfoResponse = {
   alias: string;
   id: string;
   color: string;
 };
+type CommandoChannel = {
+  peer_id: string;
+  channel_sat: number;
+  amount_msat: number;
+  funding_txid: string;
+  funding_output: number;
+  connected: boolean;
+  state: string;
+};
+type CommandoListFundsResponse = {
+  channels: CommandoChannel[];
+};
+
 export default class Commando implements Connector {
   config: Config;
   ln: LnMessage;
@@ -72,7 +85,7 @@ export default class Commando implements Connector {
       method: "getinfo",
       params: [],
       rune: this.config.rune,
-    })) as CommandoResponse;
+    })) as CommandoGetInfoResponse;
     return {
       data: {
         alias: response.alias,
@@ -83,9 +96,18 @@ export default class Commando implements Connector {
   }
 
   async getBalance(): Promise<GetBalanceResponse> {
+    const response = (await this.ln.commando({
+      method: "listfunds",
+      params: [],
+      rune: this.config.rune,
+    })) as CommandoListFundsResponse;
+    let lnBalance = 0;
+    for (let i = 0; i < response.channels.length; i++) {
+      lnBalance = lnBalance + response.channels[i].channel_sat;
+    }
     return {
       data: {
-        balance: 0,
+        balance: lnBalance,
       },
     };
   }
