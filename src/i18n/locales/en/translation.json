@@ -371,7 +371,7 @@
       },
       "lnurl_auth": {
         "title": "LNURL-Auth",
-        "hint": "is a generic authentication protocol. It authenticates the user using digital signatures. The protocol does not require any other identifying information such as passwords, emails, usernames, or similar. With Alby you can use your lightning accounts to securely login to websites. <br /> To be compatible with other wallets we had to make a few changes that you can configure here. <br /> <strong>Ideally all those options are OFF.</strong> Use them only if you have old accounts.",
+        "hint": "is a generic authentication protocol. It authenticates the user using digital signatures. The protocol does not require any other identifying information such as passwords, emails, usernames, or similar. With Alby you can use your lightning accounts to securely login to websites. To be compatible with other wallets we had to make a few changes that you can configure here. <0>Ideally all those options are OFF.</0> Use them only if you have old accounts.",
         "legacy_lnurl_auth_202207": {
           "title": "Legacy LNURL-Auth",
           "subtitle": "The key generation for LNURL-auth has changed (July 2022). Alby was not compatible with other implementations. This was changed, but now different login keys are used. If you used LNURL-auth to login before you can still enable the old method. This option will be removed later, make sure to switch to the new login."
