@@ -42,7 +42,7 @@ function handleProfilePage() {
   if (!shortBioElement) return;
 
   const address =
-    parseElement(".Layout-sidebar .h-card [data-bio-text]") ||
+    parseElement(".Layout-sidebar .h-card") ||
     parseElement(".Layout-main article");
 
   if (!address) return;

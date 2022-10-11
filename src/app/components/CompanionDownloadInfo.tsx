@@ -9,7 +9,7 @@ type Props = {
 function CompanionDownloadInfo({ hasTorCallback }: Props) {
   const [hasTorSupport, setHasTorSupport] = useState(false);
   const { t } = useTranslation("components", {
-    keyPrefix: "companionDownloadInfo",
+    keyPrefix: "companion_download_info",
   });
 
   function getOS() {
@@ -24,7 +24,7 @@ function CompanionDownloadInfo({ hasTorCallback }: Props) {
     <>
       {!hasTorSupport && (
         <div className="dark:text-white">
-          <p className="mb-2">{t("info")} </p>
+          <p className="mb-2">{t("description")} </p>
           <p className="mb-2">
             <a
               href={`https://getalby.com/install/companion/${getOS()}`}

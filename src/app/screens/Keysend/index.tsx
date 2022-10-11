@@ -1,37 +1,33 @@
 import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-import Button from "@components/Button";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import ContentMessage from "@components/ContentMessage";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import PublisherCard from "@components/PublisherCard";
 import SatButtons from "@components/SatButtons";
 import SuccessMessage from "@components/SuccessMessage";
-import Input from "@components/form/Input";
-import { Fragment, useState, MouseEvent } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import TextField from "@components/form/TextField";
+import { useState, MouseEvent } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Container from "~/app/components/Container";
 import { useAccount } from "~/app/context/AccountContext";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
 import utils from "~/common/lib/utils";
 
-type Props = {
-  destination?: string;
-  customRecords?: Record<string, string>;
-  valueSat?: string;
-};
-
-function Keysend(props: Props) {
-  const [searchParams] = useSearchParams();
+function Keysend() {
+  const navState = useNavigationState();
   const navigate = useNavigate();
   const auth = useAccount();
-  const [amount, setAmount] = useState(props.valueSat || "");
-  const [customRecords] = useState(
-    props.customRecords || JSON.parse(searchParams.get("customRecords") || "{}")
-  );
-  const [destination] = useState(
-    props.destination || searchParams.get("destination")
-  );
+  const [amount, setAmount] = useState(navState.args?.amount || "");
+  const customRecords = navState.args?.customRecords;
+  const destination = navState.args?.destination as string;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+
+  const { t } = useTranslation("translation", { keyPrefix: "keysend" });
+  const { t: tCommon } = useTranslation("common");
 
   async function confirm() {
     try {
@@ -46,7 +42,11 @@ function Keysend(props: Props) {
         }
       );
 
-      setSuccessMessage(`Payment sent! Preimage: ${payment.preimage}`);
+      setSuccessMessage(
+        t("success", {
+          preimage: payment.preimage,
+        })
+      );
 
       auth.fetchAccountInfo(); // Update balance.
     } catch (e) {
@@ -64,32 +64,10 @@ function Keysend(props: Props) {
     navigate(-1);
   }
 
-  function renderAmount() {
-    return (
-      <div className="mt-1 flex flex-col">
-        <Input
-          type="number"
-          min={+0 / 1000}
-          max={+1000000 / 1000}
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-        <SatButtons onClick={setAmount} />
-      </div>
-    );
-  }
-
-  function elements() {
-    const elements = [];
-    elements.push(["Send payment to", destination]);
-    elements.push(["Amount (Satoshis)", renderAmount()]);
-    return elements;
-  }
-
   return (
-    <div>
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <Header
-        title="Send"
+        title={t("title")}
         headerLeft={
           <IconButton
             onClick={() => navigate("/send")}
@@ -97,48 +75,45 @@ function Keysend(props: Props) {
           />
         }
       />
-      <div className="py-4">
-        <Container maxWidth="sm">
-          {!successMessage ? (
-            <>
+      {!successMessage ? (
+        <>
+          <Container justifyBetween maxWidth="sm">
+            <div>
               {destination && <PublisherCard title={destination} />}
-
-              <dl className="shadow bg-white dark:bg-surface-02dp pt-4 px-4 rounded-lg my-6 overflow-hidden">
-                {elements().map(([t, d], i) => (
-                  <Fragment key={`element-${i}`}>
-                    <dt className="text-sm font-semibold text-gray-500">{t}</dt>
-                    <dd className="text-sm mb-4 dark:text-white break-all">
-                      {d}
-                    </dd>
-                  </Fragment>
-                ))}
-              </dl>
-              <div className="text-center">
-                <div className="mb-5">
-                  <Button
-                    onClick={confirm}
-                    label="Confirm"
-                    fullWidth
-                    primary
-                    loading={loading}
-                    disabled={loading || !amount}
-                  />
-                </div>
-
-                <a
-                  className="underline text-sm text-gray-500"
-                  href="#"
-                  onClick={reject}
-                >
-                  Cancel
-                </a>
+              <ContentMessage
+                heading={t("receiver.label")}
+                content={destination}
+              />
+              <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden">
+                <TextField
+                  id="amount"
+                  label={t("amount.label")}
+                  type="number"
+                  min={+0 / 1000}
+                  max={+1000000 / 1000}
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                />
+                <SatButtons onClick={setAmount} />
               </div>
-            </>
-          ) : (
+            </div>
+            <ConfirmOrCancel
+              label={tCommon("actions.confirm")}
+              onConfirm={confirm}
+              onCancel={reject}
+              loading={loading}
+              disabled={loading || !amount}
+            />
+          </Container>
+        </>
+      ) : (
+        <Container maxWidth="sm">
+          {destination && <PublisherCard title={destination} />}
+          <div className="my-4">
             <SuccessMessage message={successMessage} onClose={reject} />
-          )}
+          </div>
         </Container>
-      </div>
+      )}
     </div>
   );
 }

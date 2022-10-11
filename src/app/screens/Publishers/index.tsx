@@ -3,6 +3,7 @@ import PublishersTable from "@components/PublishersTable";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
 import { Allowance, Publisher } from "~/types";
 
@@ -57,7 +58,7 @@ function Publishers() {
           usedBudget,
           ...(allowance.remainingBudget > 0 && {
             badge: {
-              label: "ACTIVE",
+              label: "active",
               color: "green-bitcoin",
               textColor: "white",
             },
@@ -70,6 +71,7 @@ function Publishers() {
       setPublishers(allowances);
     } catch (e) {
       console.error(e);
+      if (e instanceof Error) toast.error(`Error: ${e.message}`);
     }
   }
 
@@ -84,7 +86,7 @@ function Publishers() {
       </h2>
 
       <p className="mb-6 text-gray-500 dark:text-neutral-500">
-        {t("used.subtitle")}
+        {t("used.description")}
       </p>
 
       {publishers.length > 0 ? (
@@ -93,7 +95,7 @@ function Publishers() {
           navigateToPublisher={navigateToPublisher}
         />
       ) : (
-        <p className="dark:text-white"> {t("used.none-info")}</p>
+        <p className="dark:text-white"> {t("used.no_info")}</p>
       )}
 
       <h2 className="mt-12 mb-2 text-2xl font-bold dark:text-white">
@@ -101,7 +103,7 @@ function Publishers() {
       </h2>
 
       <p className="mb-6 text-gray-500 dark:text-neutral-500">
-        {t("suggestions.subtitle")}
+        {t("suggestions.description")}
       </p>
 
       <div className="mb-12">

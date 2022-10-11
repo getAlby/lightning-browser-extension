@@ -20,7 +20,7 @@ function BudgetControl({
   fiatAmount,
 }: Props) {
   const { t } = useTranslation("components", {
-    keyPrefix: "budgetControl",
+    keyPrefix: "budget_control",
   });
 
   const { t: tCommon } = useTranslation("common");
@@ -51,12 +51,15 @@ function BudgetControl({
         leaveFrom="scale-100 opacity-100"
         leaveTo="scale-95 opacity-0"
       >
-        <p className="my-3 text-gray-500 text-sm">{t("remember.info")}</p>
+        <p className="my-3 text-gray-500 text-sm">
+          {t("remember.description")}
+        </p>
 
         <div>
           <DualCurrencyField
             fiatValue={fiatAmount}
             id="budget"
+            min={0}
             label={t("budget.label")}
             placeholder={tCommon("sats")}
             value={budget}

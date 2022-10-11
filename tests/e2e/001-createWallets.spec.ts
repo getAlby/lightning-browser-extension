@@ -61,7 +61,7 @@ const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
     page.waitForNavigation(), // The promise resolves after navigation has finished
   ]);
 
-  await findByText($document, "Success!", undefined, { timeout: 15000 });
+  await findByText($document, "Success", undefined, { timeout: 15000 });
 };
 
 test.describe("Create or connect wallets", () => {
@@ -88,7 +88,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to LNBits wallet", async () => {
+  test("successfully connects to LNbits wallet", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
     // click at "Create LNbits Wallet"
@@ -106,18 +106,18 @@ test.describe("Create or connect wallets", () => {
   test("successfully connects to BlueWallet", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
-    // click at "LNDHub (BlueWallet)"
-    const createNewWalletButton = await getByText(
-      $document,
-      "LNDHub (Bluewallet)"
-    );
+    // click at "BlueWallet"
+    const createNewWalletButton = await getByText($document, "Bluewallet");
     createNewWalletButton.click();
 
-    await findByText($document, "Connect to LNDHub (BlueWallet)");
+    await findByText($document, "Connect to BlueWallet");
 
     const lndHubUrl =
-      "lndhub://c269ebb962f1a94f9c29:f6f16f35e935edc05ee7@https://lndhub.io";
-    const lndUrlField = await getByLabelText($document, "LNDHub Export URI");
+      "lndhub://c269ebb962f1a94f9c29:f6f16f35e935edc05ee7@https://lndhub.herokuapp.com";
+    const lndUrlField = await getByLabelText(
+      $document,
+      "BlueWallet Export URI"
+    );
     await lndUrlField.type(lndHubUrl);
 
     await commonCreateWalletSuccessCheck({ page, $document });

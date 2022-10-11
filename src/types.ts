@@ -311,6 +311,10 @@ export interface MessageSettingsSet extends MessageDefault {
   action: "setSetting";
 }
 
+export interface MessageCurrencyRateGet extends MessageDefault {
+  action: "getCurrencyRate";
+}
+
 export interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node
@@ -366,6 +370,11 @@ export interface LNURLChannelServiceResponse {
   url: string;
 }
 
+export interface LNURLError {
+  status: "ERROR";
+  reason: string;
+}
+
 export type LNURLDetails =
   | LNURLChannelServiceResponse
   | LNURLPayServiceResponse
@@ -382,11 +391,6 @@ export interface LNURLPaymentSuccessAction {
 export interface LNURLPaymentInfo {
   pr: string;
   successAction?: LNURLPaymentSuccessAction;
-}
-
-export interface LNURLPaymentInfoError {
-  status: string;
-  reason: string;
 }
 
 export interface RequestInvoiceArgs {
@@ -508,6 +512,7 @@ export interface Allowance extends Omit<DbAllowance, "id"> {
 }
 
 export interface SettingsStorage {
+  browserNotifications: boolean;
   websiteEnhancements: boolean;
   legacyLnurlAuth: boolean;
   isUsingLegacyLnurlAuthKey: boolean;

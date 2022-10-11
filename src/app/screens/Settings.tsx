@@ -13,7 +13,6 @@ import { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
-import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { CURRENCIES } from "~/common/constants";
 import utils from "~/common/lib/utils";
@@ -26,7 +25,6 @@ const initialFormData = {
 function Settings() {
   const { t } = useTranslation("translation", { keyPrefix: "settings" });
   const { isLoading, settings, updateSetting } = useSettings();
-  const { fetchAccountInfo } = useAccount();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
@@ -42,7 +40,7 @@ function Settings() {
     await utils.call("changePassword", {
       password: formData.password,
     });
-    toast.success("Password changed successfully!");
+    toast.success(t("change_password.success"));
     closeModal();
   }
 
@@ -56,9 +54,24 @@ function Settings() {
   return (
     <Container>
       <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
-        {t("headline")}
+        {t("title")}
       </h2>
       <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
+        <Setting
+          title={t("browser_notifications.title")}
+          subtitle={t("browser_notifications.subtitle")}
+        >
+          {!isLoading && (
+            <Toggle
+              checked={settings.browserNotifications}
+              onChange={() => {
+                saveSetting({
+                  browserNotifications: !settings.browserNotifications,
+                });
+              }}
+            />
+          )}
+        </Setting>
         <Setting
           title={t("website_enhancements.title")}
           subtitle={t("website_enhancements.subtitle")}
@@ -80,7 +93,7 @@ function Settings() {
         >
           {!cameraPermissionsGranted ? (
             <Button
-              label={t("camera_access.label")}
+              label={t("camera_access.allow")}
               onClick={async () => {
                 try {
                   await Html5Qrcode.getCameras();
@@ -92,12 +105,29 @@ function Settings() {
             />
           ) : (
             <p className="text-green-500 font-medium">
-              {t("camera_access.active")}
+              {t("camera_access.granted")}
             </p>
           )}
         </Setting>
-        <Setting title={t("language.title")} subtitle={t("language.subtitle")}>
-          <div className="w-32">
+        <Setting
+          title={t("language.title")}
+          subtitle={
+            <Trans
+              i18nKey={"language.subtitle"}
+              t={t}
+              components={[
+                // eslint-disable-next-line react/jsx-key
+                <a
+                  className="underline"
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://hosted.weblate.org/projects/getalby-lightning-browser-extension/getalby-lightning-browser-extension/"
+                ></a>,
+              ]}
+            />
+          }
+        >
+          <div className="w-64">
             <LocaleSwitcher />
           </div>
         </Setting>
@@ -169,7 +199,6 @@ function Settings() {
                     name="currency"
                     value={settings.currency}
                     onChange={async (event) => {
-                      fetchAccountInfo({ isLatestRate: true });
                       await saveSetting({
                         currency: event.target.value,
                       });
@@ -213,11 +242,11 @@ function Settings() {
       </div>
 
       <h2 className="mt-12 text-2xl font-bold dark:text-white">
-        {t("personal_data.headline")}
+        {t("personal_data.title")}
       </h2>
 
       <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
-        {t("personal_data.info")}
+        {t("personal_data.description")}
       </p>
 
       <div className="mb-12 shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
@@ -259,7 +288,7 @@ function Settings() {
           closeTimeoutMS={200}
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
-          contentLabel="Edit account name"
+          contentLabel={t("change_password.content_label")}
           overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
           className="rounded-lg bg-white w-full max-w-lg"
         >
@@ -288,7 +317,7 @@ function Settings() {
 
             <div className="flex justify-end p-5 dark:bg-surface-02dp">
               <Button
-                label="Change"
+                label={t("change_password.submit.label")}
                 type="submit"
                 primary
                 disabled={
@@ -302,7 +331,7 @@ function Settings() {
       </div>
 
       <h2 className="mt-12 text-2xl font-bold dark:text-white">
-        {t("lnurl_auth.headline")}
+        {t("lnurl_auth.title")}
       </h2>
 
       <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
@@ -312,9 +341,9 @@ function Settings() {
           rel="noreferrer"
           className="underline"
         >
-          {t("lnurl_auth.headline")}
+          {t("lnurl_auth.title")}
         </a>{" "}
-        <Trans t={t}>lnurl_auth.hint</Trans>
+        {t("lnurl_auth.hint")}
       </p>
 
       <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">

@@ -15,9 +15,11 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import lnurlLib from "~/common/lib/lnurl";
+import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 
 function Send() {
   const { t } = useTranslation("translation", { keyPrefix: "send" });
+  const { t: tCommon } = useTranslation("common");
 
   const [invoice, setInvoice] = useState("");
   const navigate = useNavigate();
@@ -40,6 +42,10 @@ function Send() {
 
       if (lnurl) {
         const lnurlDetails = await lnurlLib.getDetails(lnurl);
+        if (isLNURLDetailsError(lnurlDetails)) {
+          toast.error(lnurlDetails.reason);
+          return;
+        }
 
         if (lnurlDetails.tag === "channelRequest") {
           navigate("/lnurlChannel", {
@@ -81,7 +87,13 @@ function Send() {
           });
         }
       } else if (isPubKey(invoice)) {
-        navigate(`/keysend?destination=${invoice}`);
+        navigate("/keysend", {
+          state: {
+            args: {
+              destination: invoice,
+            },
+          },
+        });
       } else {
         lightningPayReq.decode(invoice); // throws if invalid.
         navigate("/confirmPayment", {
@@ -161,6 +173,7 @@ function Send() {
               placeholder={t("input.placeholder")}
               value={invoice}
               disabled={loading}
+              autoFocus
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 setInvoice(
                   event.target.value.trim().replace(/^lightning:/i, "")
@@ -179,7 +192,7 @@ function Send() {
             <div className="mt-4">
               <Button
                 type="submit"
-                label={t("submit.label")}
+                label={tCommon("actions.continue")}
                 primary
                 fullWidth
                 loading={loading}

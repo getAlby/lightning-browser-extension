@@ -3,7 +3,13 @@ import { getDocument, queries } from "pptr-testing-library";
 
 import { loadExtension } from "./helpers/loadExtension";
 
-const { getByText, getByLabelText, findByText, getByPlaceholderText } = queries;
+const {
+  getByText,
+  getByLabelText,
+  findByText,
+  getByPlaceholderText,
+  findAllByText,
+} = queries;
 
 const unlockExtension = async ({ page, extensionId }) => {
   await page.waitForTimeout(1000);
@@ -28,7 +34,10 @@ const unlockExtension = async ({ page, extensionId }) => {
 test.describe("Wallet features", () => {
   test("opens publishers screen", async () => {
     const { page, browser, extensionId } = await loadExtension();
-    const $optionsdocument = await unlockExtension({ page, extensionId });
+    const $optionsdocument = await unlockExtension({
+      page,
+      extensionId,
+    });
 
     await findByText($optionsdocument, "Your ⚡️ Websites");
     await findByText($optionsdocument, "Other ⚡️ Websites");
@@ -38,7 +47,10 @@ test.describe("Wallet features", () => {
 
   test("create invoice", async () => {
     const { page, browser, extensionId } = await loadExtension();
-    const $optionsdocument = await unlockExtension({ page, extensionId });
+    const $optionsdocument = await unlockExtension({
+      page,
+      extensionId,
+    });
 
     // create invoice
     await (await findByText($optionsdocument, "Receive")).click();
@@ -60,27 +72,15 @@ test.describe("Wallet features", () => {
     await browser.close();
   });
 
-  test("send to a LN-adddress", async () => {
+  test("send to a LN-address", async () => {
     const { page, browser, extensionId } = await loadExtension();
-    await new Promise((r) => setTimeout(r, 1000));
-
-    const optionsPage = `chrome-extension://${extensionId}/options.html`;
-    await page.goto(optionsPage);
-    await new Promise((r) => setTimeout(r, 1000));
-
-    const $optionsdocument = await getDocument(page);
-    const passwordField = await getByPlaceholderText(
-      $optionsdocument,
-      "Your unlock password"
-    );
-    await passwordField.type("unlock-password");
-
-    const unlockButton = await findByText($optionsdocument, "Unlock");
-    unlockButton.click();
-    await new Promise((r) => setTimeout(r, 1000));
+    const $optionsdocument = await unlockExtension({
+      page,
+      extensionId,
+    });
 
     // go to send
-    await (await getByText($optionsdocument, "Send")).click();
+    await (await findByText($optionsdocument, "Send")).click();
     const invoiceInput = await findByText(
       $optionsdocument,
       "Invoice, Lightning Address or LNURL"
@@ -90,7 +90,35 @@ test.describe("Wallet features", () => {
 
     page.waitForSelector("label");
     await findByText($optionsdocument, "bumi@getalby.com");
-    await findByText($optionsdocument, "Sats for bumi");
+    await findByText($optionsdocument, "Sats for Bumi");
+
+    await browser.close();
+  });
+
+  test("auth via LNURL", async () => {
+    const { page, browser, extensionId } = await loadExtension();
+    const $optionsdocument = await unlockExtension({
+      page,
+      extensionId,
+    });
+
+    // go to send
+    await (await findByText($optionsdocument, "Send")).click();
+    const invoiceInput = await findByText(
+      $optionsdocument,
+      "Invoice, Lightning Address or LNURL"
+    );
+    await invoiceInput.type(
+      "lightning:lnurl1dp68gurn8ghj7efjv46x2um59enk2azpd338jtnrdakj7mrww4excttvdankjm3lw3skw0tvdankjm3xdvcn6vpe8yenwc3s8p3rsdtrxcmnxvnrx4nrvd3hxgenzvenv4jryde5x5unxvf58q6ngepsxgekyetr8yuxyvnx8ymxgefev5urqdnzvgeq5kwl8d"
+    );
+    await (await getByText($optionsdocument, "Continue")).click();
+
+    await findAllByText($optionsdocument, "e2etest.getalby.com");
+    await findByText(
+      $optionsdocument,
+      "Do you want to login to e2etest.getalby.com?"
+    );
+    await findByText($optionsdocument, "Login");
 
     await browser.close();
   });

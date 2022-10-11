@@ -24,13 +24,17 @@ import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
 import lnurlLib from "~/common/lib/lnurl";
 import utils from "~/common/lib/utils";
-import { getFiatValue } from "~/common/utils/currencyConvert";
+import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 import type { Allowance, Battery, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
 
 function Home() {
-  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFiatValue,
+  } = useSettings();
 
   const [allowance, setAllowance] = useState<Allowance | null>(null);
   const [isBlocked, setIsBlocked] = useState<boolean>(false);
@@ -82,6 +86,7 @@ function Home() {
       setIsBlocked(false);
     } catch (e) {
       console.error(e);
+      if (e instanceof Error) toast.error(`Error: ${e.message}`);
     }
   }
 
@@ -134,7 +139,7 @@ function Home() {
     } catch (e) {
       console.error(e);
     }
-  }, [allowance, settings.showFiat]);
+  }, [allowance, settings.showFiat, getFiatValue]);
 
   function handleLightningDataMessage(response: {
     action: string;
@@ -203,12 +208,12 @@ function Home() {
 
   function renderPublisherCard() {
     let title, image;
-    if (allowance) {
-      title = allowance.name;
-      image = allowance.imageURL;
-    } else if (lnData.length > 0) {
+    if (lnData.length > 0) {
       title = lnData[0].name;
       image = lnData[0].icon;
+    } else if (allowance) {
+      title = allowance.name;
+      image = allowance.imageURL;
     } else {
       return;
     }
@@ -244,7 +249,11 @@ function Home() {
 
                   if (lnData[0].method === "lnurl") {
                     const lnurl = lnData[0].address;
-                    const lnurlDetails = await lnurlLib.getDetails(lnurl); // throws if invalid.
+                    const lnurlDetails = await lnurlLib.getDetails(lnurl);
+                    if (isLNURLDetailsError(lnurlDetails)) {
+                      toast.error(lnurlDetails.reason);
+                      return;
+                    }
 
                     if (lnurlDetails.tag === "payRequest") {
                       navigate("/lnurlPay", {
@@ -257,20 +266,20 @@ function Home() {
                       });
                     }
                   } else if (lnData[0].method === "keysend") {
-                    const params = new URLSearchParams({
-                      destination: lnData[0].address,
-                      origin: encodeURIComponent(JSON.stringify(originData)),
+                    navigate("/keysend", {
+                      state: {
+                        origin: originData,
+                        args: {
+                          destination: lnData[0].address,
+                          customRecords:
+                            lnData[0].customKey && lnData[0].customValue
+                              ? {
+                                  [lnData[0].customKey]: lnData[0].customValue,
+                                }
+                              : {},
+                        },
+                      },
                     });
-                    if (lnData[0].customKey && lnData[0].customValue) {
-                      const customRecords = {
-                        [lnData[0].customKey]: lnData[0].customValue,
-                      };
-                      params.set(
-                        "customRecords",
-                        JSON.stringify(customRecords)
-                      );
-                    }
-                    navigate(`/keysend?${params.toString()}`);
                   }
                 } catch (e) {
                   if (e instanceof Error) toast.error(e.message);
@@ -278,7 +287,7 @@ function Home() {
                   setLoadingSendSats(false);
                 }
               }}
-              label={t("send_satoshis")}
+              label={t("actions.send_satoshis")}
               primary
               loading={loadingSendSats}
             />
@@ -372,7 +381,7 @@ function Home() {
             </p>
             <Button
               fullWidth
-              label={tCommon("actions.enable_now")}
+              label={t("actions.enable_now")}
               direction="column"
               onClick={() => unblock()}
             />

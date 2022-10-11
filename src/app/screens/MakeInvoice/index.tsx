@@ -6,23 +6,11 @@ import TextField from "@components/form/TextField";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import type { RequestInvoiceArgs } from "~/types";
-
-type Origin = {
-  name: string;
-  host: string;
-  icon: string;
-};
-
-type Props = {
-  amountEditable: boolean;
-  memoEditable: boolean;
-  invoiceAttributes: RequestInvoiceArgs;
-  origin: Origin;
-};
+import type { OriginData, RequestInvoiceArgs } from "~/types";
 
 const Dt = ({ children }: { children: React.ReactNode }) => (
   <dt className="font-medium text-gray-800 dark:text-white">{children}</dt>
@@ -32,12 +20,13 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
   <dd className="mb-4 text-gray-600 dark:text-neutral-500">{children}</dd>
 );
 
-function MakeInvoice({
-  amountEditable,
-  memoEditable,
-  invoiceAttributes,
-  origin,
-}: Props) {
+function MakeInvoice() {
+  const navState = useNavigationState();
+  const origin = navState.origin as OriginData;
+  const invoiceAttributes = navState.args
+    ?.invoiceAttributes as RequestInvoiceArgs;
+  const amountEditable = navState.args?.amountEditable;
+  const memoEditable = navState.args?.memoEditable;
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState(invoiceAttributes.amount || "");
   const [memo, setMemo] = useState(invoiceAttributes.memo || "");
@@ -154,7 +143,7 @@ function MakeInvoice({
           />
 
           <p className="mb-4 text-center text-sm text-gray-400">
-            <em>{tComponents("confirmOrCancel.only_trusted")}</em>
+            <em>{tComponents("confirm_or_cancel.only_trusted")}</em>
           </p>
         </div>
       </Container>

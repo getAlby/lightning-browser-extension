@@ -1,17 +1,26 @@
 {
-    "translation": {
-        "welcome": {
-            "nav": {
-                "welcome": "Willkommen",
-                "password": "Dein Passwort",
-                "done": "Fertig",
-                "connect": "Mit Lightning verbinden"
-            },
-            "heading": "Die Power von Lightning in Deinem Browser",
-            "intro": {
-                "send": "Senden mit einem Klick",
-                "send_description": "Alle Lightning Transaktionen direkt in Deinem Browser ausführen. Keine umständlichen Testenkombinationen oder QR-Code scannen mehr nötig."
-            }
+  "translation": {
+    "welcome": {
+      "title": "Die Power von Lightning in Deinem Browser",
+      "nav": {
+        "welcome": "Willkommen",
+        "password": "Dein Passwort",
+        "connect": "Mit Lightning verbinden",
+        "done": "Fertig"
+      },
+      "intro": {
+        "send": {
+          "title": "Senden mit einem Klick",
+          "description": "Alle Lightning Transaktionen direkt in Deinem Browser ausführen. Keine umständlichen Testenkombinationen oder QR-Code scannen mehr nötig."
+        },
+        "paywall": {
+          "title": "Keine lästigen Paywalls mehr",
+          "description": "Definieren Sie individuelle Budgets für Websites, um nahtlose Zahlungsströme zu ermöglichen. Keine lästigen Paywalls mehr."
+        },
+        "privacy": {
+          "title": "Datenschutz an erster Stelle"
         }
+      }
     }
+  }
 }

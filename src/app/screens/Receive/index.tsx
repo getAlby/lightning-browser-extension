@@ -21,14 +21,18 @@ import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
-import { getFiatValue } from "~/common/utils/currencyConvert";
 import { poll } from "~/common/utils/helpers";
 
 function Receive() {
   const { t } = useTranslation("translation", { keyPrefix: "receive" });
+  const { t: tCommon } = useTranslation("common");
 
   const auth = useAccount();
-  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFiatValue,
+  } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
   const navigate = useNavigate();
@@ -42,7 +46,7 @@ function Receive() {
     paymentRequest: string;
     rHash: string;
   }>();
-  const [copyLabel, setCopyLabel] = useState("Copy");
+  const [copyLabel, setCopyLabel] = useState(tCommon("actions.copy") as string);
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
@@ -64,7 +68,7 @@ function Receive() {
         setFiatAmount(res);
       })();
     }
-  }, [formData, showFiat]);
+  }, [formData, showFiat, getFiatValue]);
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -127,7 +131,7 @@ function Receive() {
                 <div className="inline-block bg-green-bitcoin p-1 rounded-full mb-2">
                   <CheckIcon className="w-7 h-7 text-white" />
                 </div>
-                <p className="text-lg font-bold">{t("success.title")}</p>
+                <p className="text-lg font-bold">{t("success")}</p>
               </div>
             </div>
           )}
@@ -139,9 +143,9 @@ function Receive() {
                 onClick={async () => {
                   try {
                     navigator.clipboard.writeText(invoice.paymentRequest);
-                    setCopyLabel(t("copied.label"));
+                    setCopyLabel(tCommon("copied"));
                     setTimeout(() => {
-                      setCopyLabel(t("copy.label"));
+                      setCopyLabel(tCommon("actions.copy"));
                     }, 1000);
                   } catch (e) {
                     if (e instanceof Error) {
@@ -158,14 +162,14 @@ function Receive() {
               {pollingForPayment && (
                 <div className="flex items-center space-x-2 dark:text-white">
                   <Loading />
-                  <span>{t("payment.waiting.info")}</span>
+                  <span>{t("payment.waiting")}</span>
                 </div>
               )}
 
               {!pollingForPayment && (
                 <Button
                   onClick={() => checkPayment(invoice.rHash)}
-                  label={t("payment.status.label")}
+                  label={t("payment.status")}
                 />
               )}
             </div>
@@ -212,10 +216,12 @@ function Receive() {
                 <div className="mb-4">
                   <DualCurrencyField
                     id="amount"
+                    min={0}
                     label={t("amount.label")}
                     placeholder={t("amount.placeholder")}
                     fiatValue={fiatAmount}
                     onChange={handleChange}
+                    autoFocus
                   />
                 </div>
 
@@ -232,7 +238,7 @@ function Receive() {
                   <div className="mb-4">
                     <Button
                       type="submit"
-                      label={t("submit.label")}
+                      label={t("actions.create_invoice")}
                       fullWidth
                       primary
                       loading={loading}

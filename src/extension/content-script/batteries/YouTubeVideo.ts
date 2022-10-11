@@ -45,7 +45,11 @@ const battery = async (): Promise<void> => {
   const imageUrl =
     document.querySelector<HTMLImageElement>(
       "#columns #primary #primary-inner #meta-contents img"
-    )?.src || "";
+    )?.src ||
+    document.querySelector<HTMLImageElement>(
+      "#columns #primary #primary-inner #owner #avatar img" // support maybe new UI being rolled out 2022/09
+    )?.src ||
+    "";
   setLightningData([
     {
       method: "lnurl",

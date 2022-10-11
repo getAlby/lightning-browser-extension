@@ -9,10 +9,16 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
 
-export default function ConnectLndHub() {
+export type Props = {
+  lndHubType?: "lndhub_bluewallet" | "lndhub_go";
+};
+
+export default function ConnectLndHub({
+  lndHubType = "lndhub_bluewallet",
+}: Props) {
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
-    keyPrefix: "choose_connector.lndhub",
+    keyPrefix: `choose_connector.${lndHubType}`,
   });
   const [formData, setFormData] = useState({
     uri: "",
@@ -48,7 +54,7 @@ export default function ConnectLndHub() {
     const password = match[2];
     const url = match[3].replace(/\/$/, "");
     const account = {
-      name: "LNDHub",
+      name: lndHubType === "lndhub_bluewallet" ? "Bluewallet" : "LNDHub",
       config: {
         login,
         password,
@@ -93,8 +99,8 @@ export default function ConnectLndHub() {
 
   return (
     <ConnectorForm
-      title={t("page_title")}
-      description={t("page_description")}
+      title={t("page.title")}
+      description={t("page.description")}
       submitLoading={loading}
       submitDisabled={formData.uri === ""}
       onSubmit={handleSubmit}
@@ -102,7 +108,7 @@ export default function ConnectLndHub() {
       <div className="mb-6">
         <TextField
           id="uri"
-          label={t("lndhub_uri")}
+          label={t("uri.label")}
           type="text"
           required
           placeholder="lndhub://..."

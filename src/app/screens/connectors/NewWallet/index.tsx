@@ -130,7 +130,6 @@ export default function NewWallet() {
   return (
     <ConnectorForm
       title={t("pre_connect.title")}
-      submitLabel={tCommon("actions.continue")}
       submitLoading={loading}
       onSubmit={signup}
       submitDisabled={loading || password === "" || email === ""}
@@ -146,7 +145,7 @@ export default function NewWallet() {
       <div className="mt-6">
         <TextField
           id="email"
-          label={t("pre_connect.email_label")}
+          label={t("pre_connect.email.label")}
           type="email"
           required
           onChange={(e) => {
@@ -183,7 +182,7 @@ export default function NewWallet() {
       </div>
       <div className="mt-6">
         <p className="mb-2 text-gray-700 dark:text-neutral-400">
-          Your Alby account also comes with an optional{" "}
+          {t("pre_connect.optional_lightning_note.part1")}{" "}
           <a
             className="underline"
             href="https://lightningaddress.com/"
@@ -206,9 +205,11 @@ export default function NewWallet() {
         <div>
           <TextField
             id="lnAddress"
-            label={t("pre_connect.optional_lightning_address_label")}
-            suffix={t("pre_connect.optional_lightning_address_suffix")}
+            label={t("pre_connect.optional_lightning_address.label")}
+            suffix={t("pre_connect.optional_lightning_address.suffix")}
             type="text"
+            pattern="[a-zA-Z0-9-]{3,}"
+            title={t("pre_connect.optional_lightning_address.title")}
             onChange={(e) => {
               setLnAddress(e.target.value.trim().split("@")[0]); // in case somebody enters a full address we simple remove the domain
             }}

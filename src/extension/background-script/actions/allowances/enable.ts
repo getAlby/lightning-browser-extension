@@ -37,7 +37,11 @@ const enable = async (
           if (!allowance.id) {
             return { data: { error: "id is missing" } };
           }
-          await db.allowances.update(allowance.id, { enabled: true });
+          await db.allowances.update(allowance.id, {
+            enabled: true,
+            name: message.origin.name,
+            imageURL: message.origin.icon,
+          });
         } else {
           await db.allowances.add({
             host: host,

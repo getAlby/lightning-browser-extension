@@ -2,6 +2,7 @@ import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
+import ResultCard from "@components/ResultCard";
 import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
@@ -10,6 +11,7 @@ import React, { Fragment, useState, useEffect, MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import ScreenHeader from "~/app/components/ScreenHeader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
@@ -17,9 +19,8 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import lnurl from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-import { getFiatValue } from "~/common/utils/currencyConvert";
 import type {
-  LNURLPaymentInfoError,
+  LNURLError,
   LNURLPaymentInfo,
   LNURLPaymentSuccessAction,
   LNURLPayServiceResponse,
@@ -37,12 +38,17 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
 function LNURLPay() {
   const navState = useNavigationState();
   const details = navState.args?.lnurlDetails as LNURLPayServiceResponse;
-  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFiatValue,
+  } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
   const navigate = useNavigate();
   const auth = useAccount();
-  const { t } = useTranslation("translation", { keyPrefix: "send.lnurlpay" });
+  const { t } = useTranslation("translation", { keyPrefix: "lnurlpay" });
+  const { t: tCommon } = useTranslation("common");
 
   const [valueSat, setValueSat] = useState(
     (details?.minSendable && (+details?.minSendable / 1000).toString()) || ""
@@ -64,7 +70,7 @@ function LNURLPay() {
         setFiatValue(res);
       })();
     }
-  }, [valueSat, showFiat]);
+  }, [valueSat, showFiat, getFiatValue]);
 
   useEffect(() => {
     !!settings.userName && setUserName(settings.userName);
@@ -105,7 +111,7 @@ function LNURLPay() {
       let response;
 
       try {
-        response = await axios.get<LNURLPaymentInfo | LNURLPaymentInfoError>(
+        response = await axios.get<LNURLPaymentInfo | LNURLError>(
           details.callback,
           {
             params,
@@ -115,13 +121,14 @@ function LNURLPay() {
         );
 
         const isSuccessResponse = function (
-          obj: LNURLPaymentInfo | LNURLPaymentInfoError
+          obj: LNURLPaymentInfo | LNURLError
         ): obj is LNURLPaymentInfo {
           return Object.prototype.hasOwnProperty.call(obj, "pr");
         };
 
         if (!isSuccessResponse(response.data)) {
-          throw new Error(response.data.reason);
+          toast.warn(response.data.reason);
+          return;
         }
       } catch (e) {
         const message = e instanceof Error ? `(${e.message})` : "";
@@ -172,7 +179,7 @@ function LNURLPay() {
             break;
         }
       } else {
-        setSuccessAction({ tag: "message", message: "Success, payment sent!" });
+        setSuccessAction({ tag: "message", message: t("success") });
       }
 
       auth.fetchAccountInfo(); // Update balance.
@@ -224,6 +231,22 @@ function LNURLPay() {
     return details.domain;
   }
 
+  function getImage() {
+    if (!details?.metadata) return;
+
+    try {
+      const metadata = JSON.parse(details.metadata);
+      const image = metadata.find(
+        ([type]: [string]) =>
+          type === "image/png;base64" || type === "image/jpeg;base64"
+      );
+
+      if (image) return `data:${image[0]},${image[1]}`;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   function formattedMetadata(
     metadataJSON: string
   ): [string, string | React.ReactNode][] {
@@ -232,9 +255,12 @@ function LNURLPay() {
       return metadata
         .map(([type, content]: [string, string]) => {
           if (type === "text/plain") {
-            return ["Description", content];
+            return [`${tCommon("description")}`, content];
           } else if (type === "text/long-desc") {
-            return ["Full Description", <p key={type}>{content}</p>];
+            return [
+              `${tCommon("description_full")}`,
+              <p key={type}>{content}</p>,
+            ];
           }
           return undefined;
         })
@@ -247,12 +273,14 @@ function LNURLPay() {
 
   function renderSuccessAction() {
     if (!successAction) return;
+    const isMessage =
+      successAction?.tag === "url" || successAction?.tag === "message";
     let descriptionList: [string, string | React.ReactNode][] = [];
     if (successAction.tag === "url") {
       descriptionList = [
-        ["Description", successAction.description],
+        [`${tCommon("description")}`, successAction.description],
         [
-          "Url",
+          "URL",
           <>
             {successAction.url}
             <div className="mt-4">
@@ -260,7 +288,7 @@ function LNURLPay() {
                 onClick={() => {
                   if (successAction.url) utils.openUrl(successAction.url);
                 }}
-                label="Open"
+                label={tCommon("actions.open")}
                 primary
               />
             </div>
@@ -268,30 +296,33 @@ function LNURLPay() {
         ],
       ];
     } else if (successAction.tag === "message") {
-      descriptionList = [["Message", successAction.message]];
+      descriptionList = [[`${tCommon("message")}`, successAction.message]];
     }
 
     return (
-      <Container maxWidth="sm">
-        <PublisherCard
-          title={getRecipient()}
-          description={navState.origin?.description}
-          image={navState.origin?.icon}
-        />
-
-        <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-          {descriptionList.map(([dt, dd]) => (
-            <>
-              <Dt>{dt}</Dt>
-              <Dd>{dd}</Dd>
-            </>
-          ))}
-        </dl>
-
-        <div className="text-center">
-          <button className="underline text-sm text-gray-500" onClick={close}>
-            Close
-          </button>
+      <Container justifyBetween maxWidth="sm">
+        <div>
+          <ResultCard
+            isSuccess
+            message={`${valueSat} SATS ${
+              showFiat ? "(" + fiatValue + ")" : ""
+            } ${tCommon("were_sent_to")} ${
+              navState.origin?.name || getRecipient()
+            }`}
+          />
+          {isMessage && (
+            <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+              {descriptionList.map(([dt, dd]) => (
+                <>
+                  <Dt>{dt}</Dt>
+                  <Dd>{dd}</Dd>
+                </>
+              ))}
+            </dl>
+          )}
+        </div>
+        <div className="mb-4">
+          <Button onClick={close} label={tCommon("actions.close")} fullWidth />
         </div>
       </Container>
     );
@@ -300,14 +331,17 @@ function LNURLPay() {
   return (
     <>
       <div className="flex flex-col grow overflow-hidden">
+        <ScreenHeader
+          title={!successAction ? tCommon("actions.send") : tCommon("success")}
+        />
         {!successAction ? (
           <>
             <div className="grow overflow-y-auto no-scrollbar">
               <Container maxWidth="sm">
                 <PublisherCard
-                  title={getRecipient()}
-                  description={navState.origin?.description}
-                  image={navState.origin?.icon}
+                  title={navState.origin?.name}
+                  description={getRecipient()}
+                  image={navState.origin?.icon || getImage()}
                 />
 
                 <div className="my-4">
@@ -323,8 +357,10 @@ function LNURLPay() {
                       )}
                       {details.minSendable === details.maxSendable && (
                         <>
-                          <Dt>{t("amount_label")}</Dt>
-                          <Dd>{`${+details.minSendable / 1000} sats`}</Dd>
+                          <Dt>{t("amount.label")}</Dt>
+                          <Dd>{`${+details.minSendable / 1000} ${tCommon(
+                            "sats"
+                          )}`}</Dd>
                         </>
                       )}
                     </>
@@ -333,7 +369,7 @@ function LNURLPay() {
                     <div>
                       <DualCurrencyField
                         id="amount"
-                        label={t("amount_label")}
+                        label={t("amount.label")}
                         min={+details.minSendable / 1000}
                         max={+details.maxSendable / 1000}
                         value={valueSat}
@@ -349,8 +385,8 @@ function LNURLPay() {
                       <div className="mt-4">
                         <TextField
                           id="comment"
-                          label={t("comment_label")}
-                          placeholder={t("placeholder")}
+                          label={t("comment.label")}
+                          placeholder={tCommon("optional")}
                           onChange={(e) => {
                             setComment(e.target.value);
                           }}
@@ -361,8 +397,8 @@ function LNURLPay() {
                     <div className="mt-4">
                       <TextField
                         id="name"
-                        label={t("name_label")}
-                        placeholder={t("placeholder")}
+                        label={t("name.label")}
+                        placeholder={tCommon("optional")}
                         value={userName}
                         onChange={(e) => {
                           setUserName(e.target.value);
@@ -374,8 +410,8 @@ function LNURLPay() {
                     <div className="mt-4">
                       <TextField
                         id="email"
-                        label={t("email_label")}
-                        placeholder={t("placeholder")}
+                        label={t("email.label")}
+                        placeholder={tCommon("optional")}
                         value={userEmail}
                         onChange={(e) => {
                           setUserEmail(e.target.value);
@@ -386,7 +422,7 @@ function LNURLPay() {
                 </div>
                 <div className="pt-2 border-t border-gray-200 dark:border-white/10">
                   <ConfirmOrCancel
-                    label={t("confirm_button")}
+                    label={tCommon("actions.confirm")}
                     loading={loadingConfirm}
                     disabled={loadingConfirm || !valueSat}
                     onConfirm={confirm}

@@ -10,18 +10,19 @@ export default function ConnectionErrorToast({
   const { t } = useTranslation("components", {
     keyPrefix: "toasts.connection_error",
   });
+  const { t: tCommon } = useTranslation("common");
   return (
     <>
       <p className="mb-2">
-        {t("connection_failed")}
+        {tCommon("errors.connection_failed")}
         <br />(<span className="italic text-sm">{message}</span>)
       </p>
-      <p className="my-2 text-sm">Here is what you can do:</p>
+      <p className="my-2 text-sm">{t("what_you_can_do")}</p>
       <ul className="list-disc text-sm list-inside">
-        <li>Double check your connection details</li>
+        <li>{t("double_check")}</li>
         {link && (
           <li>
-            Open{" "}
+            {tCommon("open")}{" "}
             <a
               href={link}
               className="underline"
@@ -30,8 +31,7 @@ export default function ConnectionErrorToast({
             >
               {link.substring(0, 21)}...
             </a>{" "}
-            and if there are SSL errors (e.g. ERR_CERT_AUTHORITY_INVALID), click
-            &quot;advanced&quot; and proceed to accept the certificate.
+            {t("if_ssl_errors")}
           </li>
         )}
         <li>
@@ -41,7 +41,7 @@ export default function ConnectionErrorToast({
             target="_blank"
             rel="noreferrer"
           >
-            Visit our guides for more help
+            {t("visit_guides")}
           </a>
         </li>
       </ul>

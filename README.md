@@ -81,7 +81,7 @@ Add Alby to your browser
 
 Ensure you have
 
-- [Node.js](https://nodejs.org) 14 or later installed
+- [Node.js](https://nodejs.org) v14 [`14.20.1`] installed (We only support v14 currently)
 - [Yarn](https://yarnpkg.com) v1 or v2 installed
 
 Suppported but not required
@@ -247,7 +247,7 @@ When creating a PR please take this points as a reminder:
 
 ##### [VS Code](https://code.visualstudio.com/)
 
-For better support we reccomend these extensions:
+For better support we recommend these extensions:
 
 - [vscode-eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
@@ -258,11 +258,135 @@ For better support we reccomend these extensions:
 
 Alby enforces [Conventional Commits Specification](https://www.conventionalcommits.org/en/)
 
-> A specification for adding human and machine readable meaning to commit messages
+> A specification for adding human and machine-readable meaning to commit messages
 
 ### Translations
 
 Alby uses [Weblate](https://weblate.org/en/) to manage translations for different locales. If you'd like to contribute, you can [add translations here](https://hosted.weblate.org/projects/getalby-lightning-browser-extension/getalby-lightning-browser-extension/).
+
+### Rules for developers adding new i18n translation strings:
+
+[Not to be confused with language translations]
+
+#### We categorize strings into:
+
+1. **Translations**\
+   Here we again divide strings as per screens (Welcome, Home...)
+1. **Common**\
+   All the common words and actions (Confirm, Delete, Edit...)
+1. **Components**\
+   The i18n strings which exist within the components (AllowanceMenu, QRCodeScanner, PublisherCard...)
+
+#### Use underscores instead of camelCase
+
+✅ Correct
+
+```json
+"pay_now": "Pay Now"
+```
+
+❌ Wrong
+
+```json
+"payNow": "Pay Now"
+```
+
+#### To avoid confusion, we prefer indentation over underscores, i.e.
+
+✅ Correct
+
+```json
+{
+  "blue": {
+    "label": "Blue"
+  }
+}
+```
+
+❌ Wrong
+
+```json
+{
+  "blue_label": "Blue"
+}
+```
+
+#### Only indent strings when it is an input or has different attributes:
+
+✅ Correct
+
+```json
+{
+  "edit": {
+    "title": "Edit Account",
+    "label": "Name",
+    "screen_reader": "Edit account name"
+  }
+}
+```
+
+❌ Wrong
+
+```json
+{
+  "edit": {
+    "title": "Edit Account"
+  }
+}
+```
+
+Correct way for this would be:
+
+```json
+{
+  "edit": "Edit Account"
+}
+```
+
+#### Use title for heading tags and label for label tags
+
+##### When the content is copy-text and you wish to divide it in parts, you can use numbers:
+
+```json
+{
+  "enable": {
+    "request1": "Request approval for transactions",
+    "request2": "Request invoices and lightning information"
+  }
+}
+```
+
+##### For button text, you can use common translations:
+
+```json
+{
+  "common": {}
+}
+```
+
+#### You can add a new string if you don't find the suitable text in common. In that case, indent them within "actions":
+
+```json
+{
+  "actions": {
+    "add_account": "Add account"
+  }
+}
+```
+
+_Usually, we prefer single words in `common`, phrases like "Get Started", "Enable Now" can be indented in the above way._
+
+#### Similarly, the error messages go within "errors":
+
+```json
+{
+  "errors": {
+    "enter_password": "Please enter a new unlock password.",
+    "confirm_password": "Please confirm your password.",
+    "mismatched_password": "Passwords don't match."
+  }
+}
+```
 
 ## ❔ FAQs
 
@@ -270,7 +394,7 @@ Alby uses [Weblate](https://weblate.org/en/) to manage translations for differen
 
 Joule is a full interface to manage a LND node. It only supports one LND account.
 Our goal is NOT to write a full UI for a Lightning Network node with all the channel management features, but instead to only focus on what is necessary for the web (for payment and authentication flows). We believe there are already way better management UIs.
-Also we focus on supporting multipe different node backends (non-custodial and custodial).
+Also we focus on supporting multiple different node backends (non-custodial and custodial).
 
 #### What is WebLN?
 

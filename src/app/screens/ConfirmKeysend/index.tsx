@@ -4,51 +4,40 @@ import Container from "@components/Container";
 import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-import { useState, MouseEvent, useRef, useEffect } from "react";
+import { useState, MouseEvent, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useSettings } from "~/app/context/SettingsContext";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-import { getFiatValue } from "~/common/utils/currencyConvert";
-import getOriginData from "~/extension/content-script/originData";
 import type { OriginData } from "~/types";
 
-type Props = {
-  origin?: OriginData;
-  destination?: string;
-  customRecords?: Record<string, string>;
-  valueSat?: string;
-};
+function ConfirmKeysend() {
+  const navState = useNavigationState();
+  const destination = navState.args?.destination as string;
+  const amount = navState.args?.amount as string;
+  const customRecords = navState.args?.customRecords as Record<string, string>;
+  const origin = navState.origin as OriginData;
 
-function ConfirmKeysend(props: Props) {
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
     keyPrefix: "confirm_keysend",
   });
 
-  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFiatValue,
+  } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const [rememberMe, setRememberMe] = useState(false);
-  const [origin] = useState(
-    props.origin ||
-      (searchParams.get("origin") &&
-        JSON.parse(searchParams.get("origin") as string)) ||
-      getOriginData()
-  );
-  const originRef = useRef(props.origin || getOriginData());
-  const [customRecords] = useState(props.customRecords || {});
-  const [amount] = useState(props.valueSat || "");
-  const [destination] = useState(
-    props.destination || searchParams.get("destination")
-  );
   const [budget, setBudget] = useState(
     ((parseInt(amount) || 0) * 10).toString()
   );
@@ -64,7 +53,7 @@ function ConfirmKeysend(props: Props) {
         setFiatAmount(res);
       }
     })();
-  }, [amount, showFiat]);
+  }, [amount, showFiat, getFiatValue]);
 
   useEffect(() => {
     if (showFiat) {
@@ -73,7 +62,7 @@ function ConfirmKeysend(props: Props) {
         setFiatBudgetAmount(res);
       })();
     }
-  }, [budget, showFiat]);
+  }, [budget, showFiat, getFiatValue]);
 
   async function confirm() {
     if (rememberMe && budget) {
@@ -110,7 +99,7 @@ function ConfirmKeysend(props: Props) {
 
   function reject(e: MouseEvent) {
     e.preventDefault();
-    if (props.origin) {
+    if (origin) {
       msg.error(USER_REJECTED_ERROR);
     } else {
       navigate(-1);
@@ -121,9 +110,9 @@ function ConfirmKeysend(props: Props) {
     if (!budget) return;
     return msg.request("addAllowance", {
       totalBudget: parseInt(budget),
-      host: originRef.current.host,
-      name: originRef.current.name,
-      imageURL: originRef.current.icon,
+      host: origin.host,
+      name: origin.name,
+      imageURL: origin.icon,
     });
   }
 

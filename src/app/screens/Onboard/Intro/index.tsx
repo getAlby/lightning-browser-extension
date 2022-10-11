@@ -15,33 +15,33 @@ import Features from "./features";
 function getFeatures() {
   return [
     {
-      name: i18n.t("welcome.intro.send", translationI18nNamespace),
+      name: i18n.t("welcome.intro.send.title", translationI18nNamespace),
       description: i18n.t(
-        "welcome.intro.send_description",
+        "welcome.intro.send.description",
         translationI18nNamespace
       ),
       icon: LightningIcon,
     },
     {
-      name: i18n.t("welcome.intro.paywall", translationI18nNamespace),
+      name: i18n.t("welcome.intro.paywall.title", translationI18nNamespace),
       description: i18n.t(
-        "welcome.intro.paywall_description",
+        "welcome.intro.paywall.description",
         translationI18nNamespace
       ),
       icon: KeyIcon,
     },
     {
-      name: i18n.t("welcome.intro.privacy", translationI18nNamespace),
+      name: i18n.t("welcome.intro.privacy.title", translationI18nNamespace),
       description: i18n.t(
-        "welcome.intro.privacy_description",
+        "welcome.intro.privacy.description",
         translationI18nNamespace
       ),
       icon: ShieldIcon,
     },
     {
-      name: i18n.t("welcome.intro.foss", translationI18nNamespace),
+      name: i18n.t("welcome.intro.foss.title", translationI18nNamespace),
       description: i18n.t(
-        "welcome.intro.foss_description",
+        "welcome.intro.foss.description",
         translationI18nNamespace
       ),
       icon: CodeIcon,

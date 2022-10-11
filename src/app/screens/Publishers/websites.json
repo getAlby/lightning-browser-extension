@@ -1,6 +1,6 @@
 [
   {
-    "title": "Trading",
+    "title": "trading",
     "items": [
       {
         "title": "LNMarkets",
@@ -19,11 +19,17 @@
         "subtitle": "Trade investment products in Bitcoin",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/loft-trade_thumbnail.svg",
         "url": "https://loft.trade/"
+      },
+      {
+        "title": "Lightning Swap",
+        "subtitle": "Top up your BTC Lightning balance with any coin",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lightning_swap.svg",
+        "url": "https://topup.vercel.app/"
       }
     ]
   },
   {
-    "title": "Gaming",
+    "title": "gaming",
     "items": [
       {
         "title": "Lightning Poker",
@@ -46,7 +52,7 @@
     ]
   },
   {
-    "title": "Entertaiment",
+    "title": "entertaiment",
     "items": [
       {
         "title": "Podverse",
@@ -75,7 +81,7 @@
     ]
   },
   {
-    "title": "Shopping",
+    "title": "shopping",
     "items": [
       {
         "title": "Bitrefill",
@@ -88,11 +94,17 @@
         "subtitle": "Collection of stores and websites accepting bitcoin",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lightning-network-stores_thumbnail.svg",
         "url": "https://lightningnetworkstores.com/"
+      },
+      {
+        "title": "BTC Map",
+        "subtitle": "Easily find places to spend sats anywhere on the planet",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/btcmap-logo.svg",
+        "url": "https://btcmap.org/"
       }
     ]
   },
   {
-    "title": "Miscellaneous",
+    "title": "miscellaneous",
     "items": [
       {
         "title": "WebLN Experiments",
@@ -129,6 +141,23 @@
         "subtitle": "Earn sats for accomplishing tasks",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/sats4likes.svg",
         "url": "https://www.sats4likes.com/"
+      }
+    ]
+  },
+  {
+    "title": "showcases",
+    "items": [
+      {
+        "title": "Nakaphoto",
+        "subtitle": "Buy and sell images for sats",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/nakaphoto.svg",
+        "url": "https://nakaphoto.vercel.app/"
+      },
+      {
+        "title": "Mixtape",
+        "subtitle": "Upload and listen to songs for sats",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/mixtape.svg",
+        "url": "https://alby-mixtape.vercel.app/"
       }
     ]
   }

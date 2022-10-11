@@ -139,8 +139,8 @@ export default function ConnectLnd() {
 
   return (
     <ConnectorForm
-      title={t("page_title")}
-      description={t("page_description")}
+      title={t("page.title")}
+      description={t("page.description")}
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
@@ -148,10 +148,10 @@ export default function ConnectLnd() {
       <div className="mb-6">
         <TextField
           id="url"
-          label={t("url_label")}
-          placeholder={t("url_placeholder")}
+          label={t("url.label")}
+          placeholder={t("url.placeholder")}
           pattern="https?://.+"
-          title={t("url_placeholder")}
+          title={t("url.placeholder")}
           onChange={handleChange}
           required
         />
@@ -169,13 +169,13 @@ export default function ConnectLnd() {
         <div>
           <TextField
             id="macaroon"
-            label={t("macaroon_label")}
+            label={t("macaroon.label")}
             value={formData.macaroon}
             onChange={handleChange}
             required
           />
         </div>
-        <p className="text-center my-4 dark:text-white">OR</p>
+        <p className="text-center my-4 dark:text-white">{t("or")}</p>
         <div
           className={`cursor-pointer flex flex-col items-center dark:bg-surface-02dp p-4 py-3 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
             isDragging ? "border-blue-500 bg-blue-50" : ""

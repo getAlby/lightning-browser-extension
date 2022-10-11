@@ -42,6 +42,7 @@ function AccountsScreen() {
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts",
   });
+  const { t: tCommon } = useTranslation("common");
 
   function closeEditModal() {
     setEditModalIsOpen(false);
@@ -113,15 +114,17 @@ function AccountsScreen() {
       <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
         {t("title")}
       </h2>
+
       <div className="shadow border-b border-gray-200 dark:border-neutral-500 sm:rounded-lg bg-white dark:bg-surface-02dp">
         <div className="p-6">
           <Button
             icon={<PlusIcon className="w-5 h-5 mr-2" />}
-            label={t("add.label")}
+            label={t("actions.add_account")}
             primary
             onClick={() => navigate(`/accounts/new`)}
           />
         </div>
+
         <table className="min-w-full">
           <tbody className="divide-y divide-gray-200">
             {Object.keys(accounts).map((accountId) => {
@@ -165,7 +168,7 @@ function AccountsScreen() {
                             }, 50);
                           }}
                         >
-                          {t("edit.label")}
+                          {tCommon("actions.edit")}
                         </Menu.ItemButton>
 
                         {account.connector === "lndhub" && (
@@ -177,7 +180,7 @@ function AccountsScreen() {
                               })
                             }
                           >
-                            {t("export.label")}
+                            {tCommon("actions.export")}
                           </Menu.ItemButton>
                         )}
 
@@ -190,7 +193,7 @@ function AccountsScreen() {
                             })
                           }
                         >
-                          {t("remove.label")}
+                          {tCommon("actions.remove")}
                         </Menu.ItemButton>
                       </Menu.List>
                     </Menu>
@@ -206,7 +209,7 @@ function AccountsScreen() {
           closeTimeoutMS={200}
           isOpen={editModalIsOpen}
           onRequestClose={closeEditModal}
-          contentLabel={t("edit.name_label")}
+          contentLabel={t("edit.screen_reader")}
           overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
           className="rounded-lg bg-white w-full max-w-lg"
         >
@@ -233,7 +236,7 @@ function AccountsScreen() {
                 <TextField
                   autoFocus
                   id="accountName"
-                  label={t("name.label")}
+                  label={t("edit.name.label")}
                   onChange={(e) => setNewAccountName(e.target.value)}
                   value={newAccountName}
                 />
@@ -242,7 +245,7 @@ function AccountsScreen() {
 
             <div className="flex justify-end p-5 dark:bg-surface-02dp">
               <Button
-                label={t("save.label")}
+                label={tCommon("actions.save")}
                 type="submit"
                 primary
                 disabled={newAccountName === ""}
@@ -256,7 +259,7 @@ function AccountsScreen() {
           closeTimeoutMS={200}
           isOpen={exportModalIsOpen}
           onRequestClose={closeExportModal}
-          contentLabel={t("export.name")}
+          contentLabel={t("export.screen_reader")}
           overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
           className="rounded-lg bg-white w-full max-w-lg"
         >

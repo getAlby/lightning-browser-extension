@@ -2,7 +2,7 @@ import type { FallbackLng } from "i18next";
 import { useState, useEffect } from "react";
 import type { ChangeEvent } from "react";
 import { useSettings } from "~/app/context/SettingsContext";
-import i18n from "~/i18n/i18nConfig";
+import i18n, { supportedLocales } from "~/i18n/i18nConfig";
 
 import Select from "../form/Select";
 
@@ -31,8 +31,11 @@ export default function LocaleSwitcher() {
 
   return (
     <Select name="locale" value={dropdownLang} onChange={languageHandler}>
-      <option value="en">English</option>
-      <option value="hi">हिन्दी</option>
+      {supportedLocales.map((locale) => (
+        <option key={locale.locale} value={locale.locale}>
+          {locale.label}
+        </option>
+      ))}
     </Select>
   );
 }
