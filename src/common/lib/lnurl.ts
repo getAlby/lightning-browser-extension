@@ -1,3 +1,4 @@
+import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import lightningPayReq from "bolt11";
 import Hex from "crypto-js/enc-hex";
@@ -70,7 +71,9 @@ const lnurl = {
       lnurlDetails.action = url.searchParams.get("action") || undefined;
     } else {
       try {
-        const res = await axios.get(url.toString());
+        const res = await axios.get(url.toString(), {
+          adapter: fetchAdapter,
+        });
         lnurlDetails = res.data;
       } catch (e) {
         throw new Error(
