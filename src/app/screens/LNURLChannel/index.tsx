@@ -46,6 +46,11 @@ function LNURLChannel() {
       const infoResponse = await api.getInfo();
       const nodeId = infoResponse.node.pubkey;
 
+      if (!nodeId) {
+        toast.error(`No nodeId available`);
+        throw new Error(`No nodeId available`);
+      }
+
       const callbackResponse = await axios.get(details.callback, {
         params: {
           k1: details.k1,
