@@ -32,6 +32,9 @@ function AccountMenu({ showOptions = true }: Props) {
   const navigate = useNavigate();
   const { accounts, getAccounts } = useAccounts();
   const [loading, setLoading] = useState(false);
+  const fiatBalValue = Number(
+    balancesDecorated.fiatBalance.replace(/[^0-9.]+/g, "")
+  );
 
   // update title
   const title =
@@ -93,7 +96,11 @@ function AccountMenu({ showOptions = true }: Props) {
             </span>
             {!!balancesDecorated.fiatBalance && (
               <span className="text-xs text-gray-600 dark:text-neutral-400">
-                ~{balancesDecorated.fiatBalance}
+                ~
+                {balancesDecorated.satsBalance !== "0 sats" &&
+                fiatBalValue === Number("0.00")
+                  ? "..."
+                  : balancesDecorated.fiatBalance}
               </span>
             )}
           </p>
