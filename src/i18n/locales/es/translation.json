@@ -46,7 +46,7 @@
       },
       "test_connection": {
         "ready": "¡Impresionante, estás listo para comenzar!",
-        "tutorial": "Ahora que ha conectado su nodo, ¿le gustaría ir a través de un tutorial?",
+        "tutorial": "Ahora que ha conectado su billetera, ¿le gustaría realizar un tutorial?",
         "try_tutorial": "Pruébalo ahora",
         "initializing": "Inicializando su cuenta. Por favor, espere, esto puede tardar un minuto...",
         "connection_error": "Error de Conexión",
@@ -127,7 +127,21 @@
       },
       "lnbits": {
         "title": "Cuenta LNbits",
-        "description": "Conéctese a su cuenta de LNbits"
+        "description": "Conéctese a su cuenta de LNbits",
+        "page": {
+          "instructions": "En LNbits, elija la billetera que desea conectar, ábrala, haga clic en Información de API y copie la clave de administrador. Pégalo a continuación:",
+          "title": "Conéctese a <0>LNbits</0>"
+        },
+        "admin_key": {
+          "label": "Clave de Administrador de LNbits",
+          "placeholder": "Su clave de administrador de 32 dígitos"
+        },
+        "url": {
+          "label": "URL de LNbits"
+        },
+        "errors": {
+          "connection_failed": "La conexión falló. ¿Tiene la URL y la clave de administrador correctas?"
+        }
       },
       "eclair": {
         "title": "Cuenta de Eclair",
@@ -174,6 +188,36 @@
         },
         "errors": {
           "connection_failed": "La conexión falló. ¿Es la URL de conexión de BTCPay correcta y accesible?"
+        }
+      },
+      "lndhub_bluewallet": {
+        "title": "Bluewallet",
+        "description": "Conéctese a su billetera móvil Bluewallet",
+        "page": {
+          "title": "Conéctese a BlueWallet",
+          "description": "En BlueWallet, elija la billetera que desea conectar, ábrala, haga clic en \"...\", haga clic en Exportar / Copia de seguridad para mostrar el código QR y escanearlo con su cámara web."
+        },
+        "uri": {
+          "label": "URI de exportación de BlueWallet"
+        },
+        "errors": {
+          "invalid_uri": "URI de BlueWallet no válido",
+          "connection_failed": "La conexión falló. ¿Su URI de BlueWallet es correcta?"
+        }
+      },
+      "lndhub_go": {
+        "title": "LNDHub",
+        "description": "Conéctese a su cuenta de LNDHub",
+        "page": {
+          "title": "Conéctese a LNDHub",
+          "description": "Ingrese su URI de credencial de LNDHub aquí o escanee el código QR con su cámara web."
+        },
+        "uri": {
+          "label": "URI de exportación de LNDHub"
+        },
+        "errors": {
+          "invalid_uri": "LN Dhubri No válido",
+          "connection_failed": "La conexión falló. ¿Es correcto el URI de LNDHub?"
         }
       }
     },

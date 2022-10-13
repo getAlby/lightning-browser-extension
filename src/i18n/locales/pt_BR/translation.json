@@ -640,7 +640,8 @@
     },
     "description": "Descrição",
     "description_full": "Descrição Completa",
-    "message": "Mensagem"
+    "message": "Mensagem",
+    "help": "Ajuda"
   },
   "components": {
     "allowance_menu": {
