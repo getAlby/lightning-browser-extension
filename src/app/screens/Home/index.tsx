@@ -1,17 +1,11 @@
-import {
-  CaretLeftIcon,
-  SendIcon,
-  ReceiveIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
+import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import AllowanceMenu from "@components/AllowanceMenu";
 import Button from "@components/Button";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
-import Loading from "@components/Loading";
 import Progressbar from "@components/Progressbar";
 import PublisherCard from "@components/PublisherCard";
 import TransactionsTable from "@components/TransactionsTable";
-import { Tab } from "@headlessui/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useState, useEffect, useCallback } from "react";
@@ -20,12 +14,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import browser from "webextension-polyfill";
 import { useSettings } from "~/app/context/SettingsContext";
-import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
 import lnurlLib from "~/common/lib/lnurl";
-import utils from "~/common/lib/utils";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 import type { Allowance, Battery, Transaction } from "~/types";
+
+import DefaultView from "./DefaultView";
 
 dayjs.extend(relativeTime);
 
@@ -37,20 +31,14 @@ function Home() {
   } = useSettings();
 
   const [allowance, setAllowance] = useState<Allowance | null>(null);
-  const [isBlocked, setIsBlocked] = useState<boolean>(false);
   const [currentUrl, setCurrentUrl] = useState<URL | null>(null);
   const [payments, setPayments] = useState<Transaction[]>([]);
-  const [incomingTransactions, setIncomingTransactions] = useState<
-    Transaction[] | null
-  >(null);
   const [loadingAllowance, setLoadingAllowance] = useState(true);
   const [loadingPayments, setLoadingPayments] = useState(true);
   const [loadingSendSats, setLoadingSendSats] = useState(false);
-  const [loadingInvoices, setLoadingInvoices] = useState(false);
   const [lnData, setLnData] = useState<Battery[]>([]);
   const navigate = useNavigate();
   const { t } = useTranslation("translation", { keyPrefix: "home" });
-  const { t: tCommon } = useTranslation("common");
 
   async function loadAllowance() {
     try {
@@ -65,28 +53,10 @@ function Home() {
       if (result.enabled) {
         setAllowance(result);
       }
-      const blocklistResult = await api.getBlocklist(url.host);
-      if (blocklistResult.blocked) {
-        setIsBlocked(blocklistResult.blocked);
-      }
     } catch (e) {
       console.error(e);
     } finally {
       setLoadingAllowance(false);
-    }
-  }
-
-  async function unblock() {
-    try {
-      if (currentUrl?.host) {
-        await utils.call("deleteBlocklist", {
-          host: currentUrl.host,
-        });
-      }
-      setIsBlocked(false);
-    } catch (e) {
-      console.error(e);
-      if (e instanceof Error) toast.error(`Error: ${e.message}`);
     }
   }
 
@@ -135,37 +105,6 @@ function Home() {
     }
   }
 
-  async function onTabChangeHandler(index: number) {
-    if (index === 1) {
-      await loadInvoices();
-    }
-  }
-
-  async function loadInvoices() {
-    // incoives have already been loaded
-    if (incomingTransactions) return incomingTransactions;
-
-    setLoadingInvoices(true);
-    const result = await api.getInvoices({ isSettled: true });
-
-    const invoices: Transaction[] = result.invoices.map((invoice) => ({
-      ...invoice,
-      title: invoice.memo,
-      description: invoice.memo,
-      date: dayjs(invoice.settleDate).fromNow(),
-    }));
-
-    for (const invoice of invoices) {
-      const totalAmountFiat = settings.showFiat
-        ? await getFiatValue(invoice.totalAmount)
-        : "";
-      invoice.totalAmountFiat = totalAmountFiat;
-    }
-
-    setIncomingTransactions(invoices);
-    setLoadingInvoices(false);
-  }
-
   // Effects on Mount
   useEffect(() => {
     loadAllowance();
@@ -193,10 +132,7 @@ function Home() {
 
   function renderPublisherCard() {
     let title, image;
-    if (lnData.length > 0) {
-      title = lnData[0].name;
-      image = lnData[0].icon;
-    } else if (allowance) {
+    if (allowance) {
       title = allowance.name;
       image = allowance.imageURL;
     } else {
@@ -335,110 +271,6 @@ function Home() {
     );
   }
 
-  function renderDefaultView() {
-    return (
-      <div className="p-4">
-        <div className="flex mb-6 space-x-4">
-          <Button
-            fullWidth
-            icon={<SendIcon className="w-6 h-6" />}
-            label={tCommon("actions.send")}
-            direction="column"
-            onClick={() => {
-              navigate("/send");
-            }}
-          />
-          <Button
-            fullWidth
-            icon={<ReceiveIcon className="w-6 h-6" />}
-            label={tCommon("actions.receive")}
-            direction="column"
-            onClick={() => {
-              navigate("/receive");
-            }}
-          />
-        </div>
-
-        {isBlocked && (
-          <div className="mb-2 items-center py-3 dark:text-white">
-            <p className="py-1">
-              {t("default_view.is_blocked_hint", { host: currentUrl?.host })}
-            </p>
-            <Button
-              fullWidth
-              label={t("actions.enable_now")}
-              direction="column"
-              onClick={() => unblock()}
-            />
-          </div>
-        )}
-
-        {loadingPayments ? (
-          <div className="flex justify-center">
-            <Loading />
-          </div>
-        ) : (
-          <div>
-            <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
-              {t("default_view.recent_transactions")}
-            </h2>
-
-            <Tab.Group onChange={onTabChangeHandler}>
-              <Tab.List className="mb-2">
-                {[
-                  t("transaction_list.tabs.outgoing"),
-                  t("transaction_list.tabs.incoming"),
-                ].map((category) => (
-                  <Tab
-                    key={category}
-                    className={({ selected }) =>
-                      classNames(
-                        "w-1/2 rounded-lg py-2.5 font-bold transition duration-150",
-                        "focus:outline-none",
-                        "hover:bg-gray-50 dark:hover:bg-surface-16dp",
-                        selected
-                          ? "text-orange-bitcoin"
-                          : "text-gray-700  dark:text-neutral-200"
-                      )
-                    }
-                  >
-                    {category}
-                  </Tab>
-                ))}
-              </Tab.List>
-
-              <Tab.Panels>
-                <Tab.Panel>
-                  {payments.length > 0 ? (
-                    <TransactionsTable transactions={payments} />
-                  ) : (
-                    <p className="text-gray-500 dark:text-neutral-400">
-                      {t("default_view.no_transactions")}
-                    </p>
-                  )}
-                </Tab.Panel>
-                <Tab.Panel>
-                  {loadingInvoices ? (
-                    <div className="flex justify-center">
-                      <Loading />
-                    </div>
-                  ) : incomingTransactions &&
-                    incomingTransactions.length > 0 ? (
-                    <TransactionsTable transactions={incomingTransactions} />
-                  ) : (
-                    <p className="text-gray-500 dark:text-neutral-400">
-                      {t("default_view.no_transactions")}
-                    </p>
-                  )}
-                </Tab.Panel>
-              </Tab.Panels>
-            </Tab.Group>
-          </div>
-        )}
-      </div>
-    );
-  }
-
   if (loadingAllowance) {
     return null;
   }
@@ -457,7 +289,10 @@ function Home() {
         />
       )}
       {renderPublisherCard()}
-      {allowance ? renderAllowanceView() : renderDefaultView()}
+      {allowance && renderAllowanceView()}
+      {!allowance && !loadingPayments && (
+        <DefaultView currentUrl={currentUrl} lnDataFromCurrentTab={lnData} />
+      )}
     </div>
   );
 }
