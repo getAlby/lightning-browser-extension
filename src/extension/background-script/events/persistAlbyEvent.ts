@@ -1,24 +1,24 @@
 import db from "~/extension/background-script/db";
-import { DbAlbyEvent, AlbyEventType, AuthNotificationData } from "~/types";
+import {
+  DbAlbyEvent,
+  LNURLAuthServiceResponse,
+  AlbyEventType,
+  AlbyEventBudgetUpdateDetails,
+} from "~/types";
 
 export const persistAlbyEvent = async (
-  message: "lnurl.auth.success",
-  data: AuthNotificationData
-) => {
-  let event;
-
-  if (message === "lnurl.auth.success") {
-    event = AlbyEventType.AUTH;
+  _message: "albyEvent.auth" | "albyEvent.budget.update",
+  data: {
+    details: LNURLAuthServiceResponse | AlbyEventBudgetUpdateDetails;
+    event: AlbyEventType;
   }
-
-  if (!event) return;
-
-  const { lnurlDetails } = data;
+) => {
+  const { details, event } = data;
 
   const dbAlbyEvent: DbAlbyEvent = {
     createdAt: Date.now().toString(),
     event,
-    details: JSON.stringify(lnurlDetails),
+    details: JSON.stringify(details),
   };
 
   await db.albyEvents.add(dbAlbyEvent);

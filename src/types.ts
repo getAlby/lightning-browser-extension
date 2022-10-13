@@ -634,6 +634,11 @@ export interface AlbyEvent extends Omit<DbAlbyEvent, "id"> {
   id: number;
 }
 
+export interface AlbyEventBudgetUpdateDetails {
+  type: "update";
+  allowanceId: Allowance["id"];
+}
+
 export interface SettingsStorage {
   browserNotifications: boolean;
   websiteEnhancements: boolean;

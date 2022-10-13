@@ -6,13 +6,14 @@ import PubSub from "pubsub-js";
 import utils from "~/common/lib/utils";
 import HashKeySigner from "~/common/utils/signer";
 import state from "~/extension/background-script/state";
-import {
+import type {
   MessageLnurlAuth,
   LNURLDetails,
   LnurlAuthResponse,
   OriginData,
   AuthResponseObject,
 } from "~/types";
+import { AlbyEventType } from "~/types";
 
 const LNURLAUTH_CANONICAL_PHRASE =
   "DO NOT EVER SIGN THIS TEXT WITH YOUR PRIVATE KEYS! IT IS ONLY USED FOR DERIVATION OF LNURL-AUTH HASHING-KEY, DISCLOSING ITS SIGNATURE WILL COMPROMISE YOUR LNURL-AUTH IDENTITY AND MAY LEAD TO LOSS OF FUNDS!";
@@ -94,6 +95,11 @@ export async function authFunction({
         authResponse?.data?.reason || "Auth: Something went wrong"
       );
     } else {
+      PubSub.publish(`albyEvent.auth`, {
+        event: AlbyEventType.AUTH,
+        details: lnurlDetails,
+      });
+
       // TODO: should use `AuthNotificationData`-type to align with usage in `notifications.ts`
       PubSub.publish(`lnurl.auth.success`, {
         authResponse,
