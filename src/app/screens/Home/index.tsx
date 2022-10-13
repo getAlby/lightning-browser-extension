@@ -106,25 +106,10 @@ function Home() {
         id: `${payment.id}`,
         type: "sent",
         date: dayjs(payment.createdAt).fromNow(),
-        title: (
-          <p className="truncate">
-            <a
-              target="_blank"
-              href={
-                allowance
-                  ? `options.html#/publishers/${allowance.id}`
-                  : `options.html#/publishers`
-              }
-              rel="noreferrer"
-            >
-              {/* 
-                TODO: https://github.com/getAlby/lightning-browser-extension/issues/1356
-                Refactor: use virtual attribute on payment for title
-              */}
-              {payment.name || payment.description}
-            </a>
-          </p>
-        ),
+        title: payment.name || payment.description,
+        publisherLink: allowance
+          ? `options.html#/publishers/${payment.id}`
+          : "options.html#/publishers",
       }));
 
       for await (const payment of payments) {

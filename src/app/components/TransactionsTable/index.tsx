@@ -52,7 +52,19 @@ export default function TransactionsTable({ transactions }: Props) {
                         className="
                       text-sm font-medium text-gray-900 truncate dark:text-white"
                       >
-                        {tx.title || "\u00A0"}
+                        <p className="truncate">
+                          {tx.publisherLink ? (
+                            <a
+                              target="_blank"
+                              href={tx.publisherLink}
+                              rel="noreferrer"
+                            >
+                              {tx.title || "\u00A0"}
+                            </a>
+                          ) : (
+                            tx.title || "\u00A0"
+                          )}
+                        </p>
                       </div>
                       <p className="text-xs text-gray-600 capitalize dark:text-neutral-400">
                         {tComponents(`transactionsTable.${tx.type}`)} -{" "}
