@@ -496,7 +496,7 @@
       "amount": {
         "label": "Amount"
       },
-      "success": "Withdraw request sent successfully"
+      "success": "Withdraw request of {{amount}} sent successfully to {{sender}}"
     },
     "receive": {
       "title": "Receive",
