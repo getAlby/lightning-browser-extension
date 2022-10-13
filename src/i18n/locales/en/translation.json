@@ -476,7 +476,7 @@
         "heading": "Do you want to login to"
       },
       "submit": "Login",
-      "success": "Authenticated successfully",
+      "success": "Login successful on {{name}}",
       "errors": {
         "status": "Error: Auth status is not ok"
       }
