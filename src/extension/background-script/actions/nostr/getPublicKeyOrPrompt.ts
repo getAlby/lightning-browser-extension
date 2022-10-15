@@ -1,5 +1,5 @@
 import utils from "~/common/lib/utils";
-import { Message, MessagePublicKeyOrPromptGet } from "~/types";
+import { MessagePublicKeyOrPromptGet } from "~/types";
 
 import getPublicKey from "./getPublicKey";
 

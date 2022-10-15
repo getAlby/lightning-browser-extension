@@ -1,5 +1,6 @@
 import * as secp256k1 from "@noble/secp256k1";
-import createHash from "create-hash";
+import Hex from "crypto-js/enc-hex";
+import sha256 from "crypto-js/sha256";
 import { Event } from "~/extension/ln/nostr/types";
 
 export function validateEvent(event: Event) {
@@ -37,8 +38,5 @@ export function serializeEvent(evt: Event) {
 }
 
 export function getEventHash(event: Event): string {
-  const eventHash = createHash("sha256")
-    .update(Buffer.from(serializeEvent(event)))
-    .digest();
-  return Buffer.from(eventHash).toString("hex");
+  return sha256(serializeEvent(event)).toString(Hex);
 }
