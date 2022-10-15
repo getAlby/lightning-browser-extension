@@ -1,18 +1,18 @@
 import { decryptData } from "~/common/lib/crypto";
 import utils from "~/common/lib/utils";
 import { Event } from "~/extension/ln/nostr/types";
-import { Message } from "~/types";
+import { MessageSignEvent } from "~/types";
 
 import state from "../../state";
 import { signEvent, validateEvent } from "./helpers";
 
-const signEventOrPrompt = async (message: Message) => {
+const signEventOrPrompt = async (message: MessageSignEvent) => {
   if (!("host" in message.origin)) {
     console.error("error", message.origin);
     return;
   }
 
-  if (!validateEvent(message.args.event as Event)) {
+  if (!validateEvent(message.args.event)) {
     console.error("Invalid event");
     return {
       error: "Invalid event.",
@@ -32,7 +32,7 @@ const signEventOrPrompt = async (message: Message) => {
     const pk = state.getState().nostrPrivateKey;
 
     if (!pw || !pk) {
-      throw new Error("nostr: Private key not available.")
+      throw new Error("nostr: Private key not available.");
     }
 
     const decryptedPrivateKey = decryptData(pk, pw);

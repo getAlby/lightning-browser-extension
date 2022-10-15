@@ -1,9 +1,9 @@
 import utils from "~/common/lib/utils";
-import { MessagePublicKeyOrPromptGet } from "~/types";
+import { MessagePublicKeyGet } from "~/types";
 
 import getPublicKey from "./getPublicKey";
 
-const getPublicKeyOrPrompt = async (message: MessagePublicKeyOrPromptGet) => {
+const getPublicKeyOrPrompt = async (message: MessagePublicKeyGet) => {
   if (!("host" in message.origin)) {
     console.error("error", message.origin);
     return;
@@ -14,7 +14,7 @@ const getPublicKeyOrPrompt = async (message: MessagePublicKeyOrPromptGet) => {
   return result;
 };
 
-const prompt = async (message: MessagePublicKeyOrPromptGet) => {
+const prompt = async (message: MessagePublicKeyGet) => {
   try {
     const response = await utils.openPrompt({
       args: {},

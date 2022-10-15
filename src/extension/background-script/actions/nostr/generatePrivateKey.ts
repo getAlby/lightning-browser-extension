@@ -1,9 +1,8 @@
 import * as secp256k1 from "@noble/secp256k1";
-import { Message } from "~/types";
 
 import state from "../../state";
 
-const generatePrivateKey = async (message: Message) => {
+const generatePrivateKey = async () => {
   const connector = await state.getState().getConnector();
   try {
     const response = await connector.signMessage({
