@@ -1,5 +1,8 @@
 blank_issues_enabled: true
 contact_links:
-  - name: Have any issues to discuss regarding Alby?
-    url: https://bitcoindesign.slack.com/archives/C02591ADXM2
-    about: Join us on Slack and meet members, contributors and the owners!
+  - name: 📝 Official Documentation 
+    url: https://guides.getalby.com/
+    about: Check our documentation for answers to common questions.
+  - name: 💬 Community Chat
+    url: https://web.telegram.org/z/#-1518893230
+    about: Ask general questions, discuss ideas and get support.

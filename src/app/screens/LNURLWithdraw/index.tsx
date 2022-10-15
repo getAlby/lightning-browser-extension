@@ -1,8 +1,9 @@
+import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
-import SuccessMessage from "@components/SuccessMessage";
+import ResultCard from "@components/ResultCard";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import axios from "axios";
 import { useState, useEffect, MouseEvent } from "react";
@@ -18,6 +19,7 @@ import type { LNURLWithdrawServiceResponse } from "~/types";
 
 function LNURLWithdraw() {
   const { t } = useTranslation("translation", { keyPrefix: "lnurlwithdraw" });
+  const { t: tCommon } = useTranslation("common");
 
   const navigate = useNavigate();
   const navState = useNavigationState();
@@ -67,7 +69,12 @@ function LNURLWithdraw() {
       });
 
       if (response.data.status.toUpperCase() === "OK") {
-        setSuccessMessage(t("success"));
+        setSuccessMessage(
+          t("success", {
+            amount: `${valueSat} SATS ${showFiat ? `(${fiatValue})` : ``}`,
+            sender: origin ? origin.name : details.domain,
+          })
+        );
         // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the response. This closes the window which means the user will NOT see the above successAction.
         // We assume this is OK when it is called through webln.
         if (navState.isPrompt) {
@@ -158,19 +165,14 @@ function LNURLWithdraw() {
           />
         </Container>
       ) : (
-        <Container maxWidth="sm">
-          {origin ? (
-            <PublisherCard
-              title={origin.name}
-              image={origin.icon}
-              url={details.domain}
-            />
-          ) : (
-            <PublisherCard title={details.domain} />
-          )}
-
+        <Container justifyBetween maxWidth="sm">
+          <ResultCard isSuccess message={successMessage} />
           <div className="my-4">
-            <SuccessMessage message={successMessage} onClose={close} />
+            <Button
+              onClick={close}
+              label={tCommon("actions.close")}
+              fullWidth
+            />
           </div>
         </Container>
       )}
