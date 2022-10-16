@@ -25,7 +25,7 @@
     "*://*/*"
   ],
 
-  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';",
 
   "__chrome|firefox__author": "Alby",
   "__opera__developer": {

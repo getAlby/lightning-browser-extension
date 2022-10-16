@@ -15,6 +15,7 @@ const weblnCalls = [
   "keysendOrPrompt",
   "makeInvoice",
   "signMessageOrPrompt",
+  "lnc",
 ];
 // calls that can be executed when webln is not enabled for the current content page
 const disabledCalls = ["enable"];

@@ -3,6 +3,7 @@ import ConnectCitadel from "@screens/connectors/ConnectCitadel";
 import ConnectEclair from "@screens/connectors/ConnectEclair";
 import ConnectGaloy, { galoyUrls } from "@screens/connectors/ConnectGaloy";
 import ConnectLnbits from "@screens/connectors/ConnectLnbits";
+import ConnectLnc from "@screens/connectors/ConnectLnc";
 import ConnectLnd from "@screens/connectors/ConnectLnd";
 import ConnectLndHub from "@screens/connectors/ConnectLndHub";
 import ConnectMyNode from "@screens/connectors/ConnectMyNode";
@@ -53,6 +54,13 @@ function getConnectorRoutes() {
         "choose_connector.lnd.description",
         translationI18nNamespace
       ),
+      logo: lnd,
+    },
+    {
+      path: "lnc",
+      element: <ConnectLnc />,
+      title: "Connect with LNC",
+      description: "Use LNC to connect to your LND",
       logo: lnd,
     },
     {

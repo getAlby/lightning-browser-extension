@@ -2,6 +2,7 @@ import Citadel from "./citadel";
 import Eclair from "./eclair";
 import Galoy from "./galoy";
 import LnBits from "./lnbits";
+import Lnc from "./lnc";
 import Lnd from "./lnd";
 import LndHub from "./lndhub";
 import NativeCitadel from "./nativecitadel";
@@ -23,6 +24,7 @@ const connectors = {
   lndhub: LndHub,
   nativelndhub: NativeLndHub,
   lnbits: LnBits,
+  lnc: Lnc,
   nativelnbits: NativeLnBits,
   galoy: Galoy,
   eclair: Eclair,

@@ -19,6 +19,7 @@ const routes = {
     signMessageOrPrompt: webln.signMessageOrPrompt,
     lnurl: webln.lnurl,
     makeInvoice: webln.makeInvoiceOrPrompt,
+    lnc: ln.lnc,
   },
   addAllowance: allowances.add,
   getAllowance: allowances.get,

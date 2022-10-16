@@ -117,6 +117,7 @@ export default interface Connector {
   keysend(args: KeysendArgs): Promise<SendPaymentResponse>;
   checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse>;
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse>;
+  request?(method: string, args: FixMe): Promise<FixMe>;
   connectPeer(
     args: ConnectPeerArgs
   ): Promise<ConnectPeerResponse | Error> | Error;
