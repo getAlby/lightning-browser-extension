@@ -451,8 +451,8 @@
         "title": "Waiting to scan"
       },
       "input": {
-        "label": "Invoice, Lightning Address or LNURL",
-        "placeholder": "Paste invoice, lnurl or lightning address"
+        "label": "Recipient",
+        "hint": "Invoice, Lightning Address or LNURL"
       }
     },
     "lnurlpay": {
