@@ -170,7 +170,7 @@ function Send() {
             <TextField
               id="invoice"
               label={t("input.label")}
-              placeholder={t("input.placeholder")}
+              hint={t("input.hint")}
               value={invoice}
               disabled={loading}
               autoFocus
