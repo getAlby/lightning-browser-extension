@@ -1,4 +1,5 @@
 import LnMessage from "lnmessage";
+import { v4 as uuidv4 } from "uuid";
 
 import Connector, {
   CheckPaymentArgs,
@@ -29,6 +30,11 @@ type CommandoGetInfoResponse = {
   id: string;
   color: string;
 };
+type CommandoMakeInvoiceResponse = {
+  bolt11: string;
+  payment_hash: string;
+  payment_secret: string;
+};
 type CommandoChannel = {
   peer_id: string;
   channel_sat: number;
@@ -50,7 +56,7 @@ export default class Commando implements Connector {
     this.config = config;
     this.ln = new LnMessage({
       remoteNodePublicKey: this.config.pubkey,
-      wsProxy: this.config.wsProxy || "wss://proxy.lnlink.org",
+      wsProxy: this.config.wsProxy || "wss://lnwsproxy.regtest.getalby.com",
       ip: this.config.host,
       port: this.config.port || 9735,
       privateKey:
@@ -129,6 +135,17 @@ export default class Commando implements Connector {
   }
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
-    throw new Error("Not yet supported with the currently used account.");
+    const label = uuidv4();
+    const response = (await this.ln.commando({
+      method: "invoice",
+      params: [(args.amount as number) * 1000, label, args.memo],
+      rune: this.config.rune,
+    })) as CommandoMakeInvoiceResponse;
+    return {
+      data: {
+        paymentRequest: response.bolt11,
+        rHash: response.payment_hash,
+      },
+    };
   }
 }
