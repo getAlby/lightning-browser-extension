@@ -302,7 +302,9 @@ class Lnd implements Connector {
           type: "received",
         };
       })
-      .reverse();
+      .sort((a, b) => {
+        return b.settleDate - a.settleDate;
+      });
 
     return {
       data: {
