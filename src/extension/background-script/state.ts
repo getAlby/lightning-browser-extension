@@ -10,6 +10,7 @@ import type { Account, Accounts, SettingsStorage } from "~/types";
 
 import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
+import Nostr from "./nostr";
 
 interface State {
   account: Account | null;
@@ -18,8 +19,10 @@ interface State {
   connector: Connector | null;
   currentAccountId: string | null;
   nostrPrivateKey: string | null;
+  nostr: Nostr | null;
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
+  getNostr: () => Nostr;
   init: () => Promise<void>;
   isUnlocked: () => boolean;
   lock: () => Promise<void>;
@@ -75,6 +78,7 @@ const state = createState<State>((set, get) => ({
   accounts: {},
   currentAccountId: null,
   password: null,
+  nostr: null,
   nostrPrivateKey: null,
   getAccount: () => {
     const currentAccountId = get().currentAccountId as string;
@@ -100,6 +104,20 @@ const state = createState<State>((set, get) => ({
     set({ connector: connector });
 
     return connector;
+  },
+  getNostr: () => {
+    if (get().nostr) {
+      return get().nostr as Nostr;
+    }
+
+    const encryptedKey = get().nostrPrivateKey as string;
+    const password = get().password as string;
+    const key = decryptData(encryptedKey, password);
+
+    const nostr = new Nostr(key);
+    set({ nostr: nostr });
+
+    return nostr;
   },
   lock: async () => {
     const connector = get().connector;
