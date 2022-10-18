@@ -623,13 +623,13 @@ export interface Allowance extends Omit<DbAllowance, "id"> {
 
 export enum AlbyEventType {
   "AUTH" = "AUTH",
-  "BUDGET" = "BUDGET",
-  "CHANNEL" = "CHANNEL",
+  "BUDGET" = "BUDGET", //unused
+  "CHANNEL" = "CHANNEL", //unused
   "INVOICE" = "INVOICE",
-  "PERMISSION" = "PERMISSION",
-  "SIGNMESSAGE" = "SIGNMESSAGE",
+  "PERMISSION" = "PERMISSION", //unused
+  "SIGNMESSAGE" = "SIGNMESSAGE", //unused
   "TRANSACTION" = "TRANSACTION",
-  "TRANSACTIONGROUP" = "TRANSACTIONGROUP",
+  "TRANSACTIONGROUP" = "TRANSACTIONGROUP", //unused
 }
 
 export interface DbAlbyEvent {
