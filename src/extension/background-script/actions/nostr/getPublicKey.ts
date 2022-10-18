@@ -11,12 +11,12 @@ const getPublicKey = async () => {
     encryptedPrivateKey,
     state.getState().password as string
   );
-  const buffer = Buffer.from(decryptedPrivateKey, "hex");
-  const publicKey = Buffer.from(
-    secp256k1.schnorr.getPublicKey(buffer)
-  ).toString("hex");
+  const publicKey = secp256k1.schnorr.getPublicKey(
+    secp256k1.utils.hexToBytes(decryptedPrivateKey)
+  );
+  const publicKeyHex = secp256k1.utils.bytesToHex(publicKey);
 
-  return publicKey;
+  return publicKeyHex;
 };
 
 export default getPublicKey;
