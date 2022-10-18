@@ -1,11 +1,12 @@
 import PubSub from "pubsub-js";
 import utils from "~/common/lib/utils";
+import type { MessageMakeInvoice, AlbyEventInvoiceDetails } from "~/types";
 import { AlbyEventType } from "~/types";
 
 import state from "../../state";
 
-const makeInvoice = async (message, sender) => {
-  PubSub.publish(`ln.makeInvoice.start`, message);
+const makeInvoice = async (message: MessageMakeInvoice) => {
+  PubSub.publish("ln.makeInvoice.start", message);
 
   let amount;
   const memo = message.args.memo || message.args.defaultMemo || "Alby invoice";
@@ -20,18 +21,22 @@ const makeInvoice = async (message, sender) => {
         memo,
       });
 
-      const eventDetails = {
-        invoice: response,
+      const eventDetails: AlbyEventInvoiceDetails = {
+        paymentRequest: response.data.paymentRequest,
+        rHash: response.data.rHash,
       };
 
-      PubSub.publish(`albyEvent.invoice`, {
+      PubSub.publish("albyEvent.invoice", {
         event: AlbyEventType.INVOICE,
         details: eventDetails,
       });
 
       return response;
     } catch (e) {
-      return { error: e.message };
+      if (e instanceof Error) {
+        return { error: e.message };
+      }
+      return { error: e };
     }
   } else {
     // If amount is not defined yet, let the user generate an invoice with an amount field.

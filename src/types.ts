@@ -367,6 +367,14 @@ export interface MessageSettingsSet extends MessageDefault {
 export interface MessageCurrencyRateGet extends MessageDefault {
   action: "getCurrencyRate";
 }
+export interface MessageMakeInvoice extends MessageDefault {
+  args: {
+    amount: string;
+    memo: string;
+    defaultMemo?: string;
+  };
+  action: "makeInvoice";
+}
 
 export interface MessagePublicKeyGet extends MessageDefault {
   action: "getPublicKeyOrPrompt";
@@ -638,6 +646,11 @@ export interface AlbyEvent extends Omit<DbAlbyEvent, "id"> {
 export interface AlbyEventBudgetUpdateDetails {
   type: "update";
   allowanceId: Allowance["id"];
+}
+
+export interface AlbyEventInvoiceDetails {
+  paymentRequest: string;
+  rHash: string;
 }
 
 export interface SettingsStorage {
