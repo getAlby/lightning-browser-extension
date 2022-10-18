@@ -5006,6 +5006,13 @@ ajv@^8.11.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
+alby-tools@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/alby-tools/-/alby-tools-1.0.0.tgz#c128aed9dca88571dc291d2fb6979584654b7de0"
+  integrity sha512-gcsqTXkzSYC/yWWeI27eHZVItIrYqZ/MQtPLLEpDhjAl/dV+FcgnisyySlBZ4sjNGf3jdVOkrwe4HQdGFW4HJg==
+  dependencies:
+    cross-fetch "^3.1.5"
+
 ansi-align@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/ansi-align/-/ansi-align-3.0.0.tgz"
@@ -7053,7 +7060,7 @@ cross-env@^7.0.3:
   dependencies:
     cross-spawn "^7.0.1"
 
-cross-fetch@3.1.5:
+cross-fetch@3.1.5, cross-fetch@^3.1.5:
   version "3.1.5"
   resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.5.tgz#e1389f44d9e7ba767907f7af8454787952ab534f"
   integrity sha512-lvb1SBsI0Z7GDwmuid+mU3kWVBwTVUbe7S0H52yaaAdQOXq2YktTCZdlAcNKFzE6QtRz0snpw9bNiPeOIkkQvw==

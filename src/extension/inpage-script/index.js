@@ -1,3 +1,4 @@
+import * as alby from "alby-tools";
 import { ABORT_PROMPT_ERROR, USER_REJECTED_ERROR } from "~/common/constants";
 
 import WebLNProvider from "../ln/webln";
@@ -7,6 +8,9 @@ if (document) {
   // this is just to make double sure we load it
   if (!window.webln) {
     window.webln = new WebLNProvider();
+  }
+  if (!window.alby) {
+    window.alby = alby;
   }
 
   const readyEvent = new Event("webln:ready");
