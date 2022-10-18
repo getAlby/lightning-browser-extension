@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
+  ConnectorInvoice,
   ConnectPeerArgs,
   ConnectPeerResponse,
   GetBalanceResponse,
@@ -49,7 +50,19 @@ type CommandoChannel = {
 type CommandoListFundsResponse = {
   channels: CommandoChannel[];
 };
-
+type CommandoListInvoicesResponse = {
+  invoices: CommandoInvoice[];
+};
+type CommandoInvoice = {
+  label: string;
+  status: string;
+  description: string;
+  amount_received_msat: number;
+  bolt11: string;
+  payment_preimage: string;
+  paid_at: number;
+  payment_hash: string;
+};
 export default class Commando implements Connector {
   config: Config;
   ln: LnMessage;
@@ -61,11 +74,11 @@ export default class Commando implements Connector {
       wsProxy: this.config.wsProxy || "wss://lnwsproxy.regtest.getalby.com",
       ip: this.config.host,
       port: this.config.port || 9735,
-      //logger: {
-      //  info: console.log,
-      //  warn: console.warn,
-      //  error: console.error
-      //},
+      // logger: {
+      //   info: console.log,
+      //   warn: console.warn,
+      //   error: console.error
+      // },
       privateKey:
         this.config.privateKey ||
         "d6a2eba36168cc31e97396a781a4dd46dd3648c001d3f4fde221d256e41715ea",
@@ -101,7 +114,30 @@ export default class Commando implements Connector {
   }
 
   async getInvoices(): Promise<GetInvoicesResponse> {
-    throw new Error("Not yet supported with the currently used account.");
+    return this.ln
+      .commando({
+        method: "listinvoices",
+        params: [],
+        rune: this.config.rune,
+      })
+      .then((resp) => {
+        const parsed = resp as CommandoListInvoicesResponse;
+        return {
+          data: {
+            invoices: parsed.invoices.map(
+              (invoice, index): ConnectorInvoice => ({
+                id: invoice.label,
+                memo: invoice.description,
+                settled: invoice.status == "paid",
+                preimage: invoice.payment_preimage,
+                settleDate: invoice.paid_at,
+                type: "received",
+                totalAmount: (invoice.amount_received_msat / 1000).toString(),
+              })
+            ),
+          },
+        };
+      });
   }
 
   async getInfo(): Promise<GetInfoResponse> {
