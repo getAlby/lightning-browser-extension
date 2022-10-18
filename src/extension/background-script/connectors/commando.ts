@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
+  ConnectPeerArgs,
+  ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
@@ -59,6 +61,11 @@ export default class Commando implements Connector {
       wsProxy: this.config.wsProxy || "wss://lnwsproxy.regtest.getalby.com",
       ip: this.config.host,
       port: this.config.port || 9735,
+      //logger: {
+      //  info: console.log,
+      //  warn: console.warn,
+      //  error: console.error
+      //},
       privateKey:
         this.config.privateKey ||
         "d6a2eba36168cc31e97396a781a4dd46dd3648c001d3f4fde221d256e41715ea",
@@ -74,12 +81,23 @@ export default class Commando implements Connector {
     return Promise.resolve();
   }
 
-  // not yet implemented
-  connectPeer() {
-    console.error(
-      `${this.constructor.name} does not implement the getInvoices call`
-    );
-    return new Error("Not yet supported with the currently used account.");
+  async connectPeer(
+    args: ConnectPeerArgs
+  ): Promise<ConnectPeerResponse | Error> {
+    return this.ln
+      .commando({
+        method: "connect",
+        params: [args.pubkey, args.host],
+        rune: this.config.rune,
+      })
+      .then((resp) => {
+        return {
+          data: true,
+        };
+      })
+      .catch((err) => {
+        return new Error(err);
+      });
   }
 
   async getInvoices(): Promise<GetInvoicesResponse> {

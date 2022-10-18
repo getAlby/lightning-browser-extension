@@ -11121,10 +11121,10 @@ listr2@^4.0.5:
     through "^2.3.8"
     wrap-ansi "^7.0.0"
 
-lnmessage@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.npmjs.org/lnmessage/-/lnmessage-0.0.3.tgz"
-  integrity sha512-+qZNiAe482zymkG1W/aaohi+ykUx30rF1LJ6/xgkz3vD0ZambcL2H1uBofOVb9P7gXBAIFVXUGfIPZZtvb+RoQ==
+lnmessage@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.npmjs.org/lnmessage/-/lnmessage-0.0.7.tgz"
+  integrity sha512-Pp8UJULwKJkHgQeMYypMroJgW+DTkJwYTiwBxVzveqrdugu3NjAeFoShHHXFeJ84LiYKRQvVQA2swIhcMSH8lg==
   dependencies:
     buffer "^6.0.3"
     crypto-js "^4.1.1"
