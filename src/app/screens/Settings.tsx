@@ -370,59 +370,6 @@ function Settings() {
       </div>
 
       <h2 className="mt-12 text-2xl font-bold dark:text-white">
-        {t("lnurl_auth.title")}
-      </h2>
-      <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
-        <a
-          href="https://lightninglogin.live/learn"
-          target="_blank"
-          rel="noreferrer"
-          className="underline"
-        >
-          {t("lnurl_auth.title")}
-        </a>{" "}
-        <Trans
-          i18nKey={"lnurl_auth.hint"}
-          t={t}
-          // eslint-disable-next-line react/jsx-key
-          components={[<strong></strong>]}
-        />
-      </p>
-      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
-        <Setting
-          title={t("lnurl_auth.legacy_lnurl_auth_202207.title")}
-          subtitle={t("lnurl_auth.legacy_lnurl_auth_202207.subtitle")}
-        >
-          {!isLoading && (
-            <Toggle
-              checked={settings.isUsingLegacyLnurlAuthKey}
-              onChange={() => {
-                saveSetting({
-                  isUsingLegacyLnurlAuthKey:
-                    !settings.isUsingLegacyLnurlAuthKey,
-                });
-              }}
-            />
-          )}
-        </Setting>
-
-        <Setting
-          title={t("lnurl_auth.legacy_lnurl_auth.title")}
-          subtitle={t("lnurl_auth.legacy_lnurl_auth.subtitle")}
-        >
-          {!isLoading && (
-            <Toggle
-              checked={settings.legacyLnurlAuth}
-              onChange={() => {
-                saveSetting({
-                  legacyLnurlAuth: !settings.legacyLnurlAuth,
-                });
-              }}
-            />
-          )}
-        </Setting>
-      </div>
-      <h2 className="mt-12 text-2xl font-bold dark:text-white">
         {t("nostr.title")}
       </h2>
       <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
@@ -485,6 +432,60 @@ function Settings() {
               </div>
             )}
           </div>
+        </Setting>
+      </div>
+
+      <h2 className="mt-12 text-2xl font-bold dark:text-white">
+        {t("lnurl_auth.title")}
+      </h2>
+      <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
+        <a
+          href="https://lightninglogin.live/learn"
+          target="_blank"
+          rel="noreferrer"
+          className="underline"
+        >
+          {t("lnurl_auth.title")}
+        </a>{" "}
+        <Trans
+          i18nKey={"lnurl_auth.hint"}
+          t={t}
+          // eslint-disable-next-line react/jsx-key
+          components={[<strong></strong>]}
+        />
+      </p>
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+        <Setting
+          title={t("lnurl_auth.legacy_lnurl_auth_202207.title")}
+          subtitle={t("lnurl_auth.legacy_lnurl_auth_202207.subtitle")}
+        >
+          {!isLoading && (
+            <Toggle
+              checked={settings.isUsingLegacyLnurlAuthKey}
+              onChange={() => {
+                saveSetting({
+                  isUsingLegacyLnurlAuthKey:
+                    !settings.isUsingLegacyLnurlAuthKey,
+                });
+              }}
+            />
+          )}
+        </Setting>
+
+        <Setting
+          title={t("lnurl_auth.legacy_lnurl_auth.title")}
+          subtitle={t("lnurl_auth.legacy_lnurl_auth.subtitle")}
+        >
+          {!isLoading && (
+            <Toggle
+              checked={settings.legacyLnurlAuth}
+              onChange={() => {
+                saveSetting({
+                  legacyLnurlAuth: !settings.legacyLnurlAuth,
+                });
+              }}
+            />
+          )}
         </Setting>
       </div>
     </Container>
