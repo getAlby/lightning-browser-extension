@@ -1,17 +1,7 @@
 import { Event } from "./types";
 
 export default class NostrProvider {
-  enabled: boolean;
-  isEnabled: boolean;
-  executing: boolean;
-
   nip04 = new Nip04(this);
-
-  constructor() {
-    this.enabled = true;
-    this.isEnabled = true; // seems some webln implementations use webln.isEnabled and some use webln.enabled
-    this.executing = false;
-  }
 
   async getPublicKey(): Promise<string> {
     return await this.execute("getPublicKeyOrPrompt");

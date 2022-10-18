@@ -20,9 +20,8 @@ export function validateEvent(event: Event) {
 }
 
 export async function signEvent(event: Event, key: string) {
-  return Buffer.from(
-    await secp256k1.schnorr.sign(getEventHash(event), key)
-  ).toString("hex");
+  const signedEvent = await secp256k1.schnorr.sign(getEventHash(event), key);
+  return secp256k1.utils.bytesToHex(signedEvent);
 }
 
 export function serializeEvent(evt: Event) {
