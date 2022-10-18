@@ -35,11 +35,7 @@ function NostrConfirmGetPublicKey() {
       domain: origin.domain,
       host: origin.host,
     });
-    msg.error(
-      `User added site to blocklist domain, host
-        ${origin.domain},
-        ${origin.host}`
-    );
+    msg.error(USER_REJECTED_ERROR);
   }
 
   return (
