@@ -1,5 +1,6 @@
 import PubSub from "pubsub-js";
 import utils from "~/common/lib/utils";
+import { AlbyEventType } from "~/types";
 
 import state from "../../state";
 
@@ -18,7 +19,15 @@ const makeInvoice = async (message, sender) => {
         amount,
         memo,
       });
-      // persist invoice-event?
+
+      const eventDetails = {
+        invoice: response,
+      };
+
+      PubSub.publish(`albyEvent.invoice`, {
+        event: AlbyEventType.INVOICE,
+        details: eventDetails,
+      });
 
       return response;
     } catch (e) {

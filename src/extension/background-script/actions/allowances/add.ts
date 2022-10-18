@@ -1,5 +1,9 @@
-import type { MessageAllowanceAdd, DbAllowance } from "~/types";
-import { AlbyEventType, AlbyEventBudgetUpdateDetails } from "~/types";
+import type {
+  MessageAllowanceAdd,
+  DbAllowance,
+  AlbyEventBudgetUpdateDetails,
+} from "~/types";
+import { AlbyEventType } from "~/types";
 
 import db from "../../db";
 

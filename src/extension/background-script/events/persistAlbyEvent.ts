@@ -7,10 +7,10 @@ import {
 } from "~/types";
 
 export const persistAlbyEvent = async (
-  _message: "albyEvent.auth" | "albyEvent.budget.update",
+  _message: "albyEvent.auth" | "albyEvent.budget.update" | "albyEvent.invoice",
   data: {
-    details: LNURLAuthServiceResponse | AlbyEventBudgetUpdateDetails;
     event: AlbyEventType;
+    details: LNURLAuthServiceResponse | AlbyEventBudgetUpdateDetails;
   }
 ) => {
   const { details, event } = data;
