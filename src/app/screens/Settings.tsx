@@ -57,11 +57,9 @@ function Settings() {
     const result = await utils.call("nostr/getPrivateKey");
     const currentPrivateKey = result as unknown as string;
 
-    if (
-      currentPrivateKey &&
-      nostrPrivateKey !== currentPrivateKey &&
-      !confirm(t("nostr.private_key.warning"))
-    ) {
+    if (nostrPrivateKey === currentPrivateKey) return;
+
+    if (currentPrivateKey && !confirm(t("nostr.private_key.warning"))) {
       return;
     }
 
