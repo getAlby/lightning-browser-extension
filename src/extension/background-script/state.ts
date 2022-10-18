@@ -34,6 +34,7 @@ interface BrowserStorage {
   accounts: Accounts;
   currentAccountId: string | null;
   migrations: Migration[] | null;
+  nostrPrivateKey: string | null;
 }
 
 export const DEFAULT_SETTINGS: SettingsStorage = {
@@ -59,6 +60,7 @@ const browserStorageDefaults: BrowserStorage = {
   accounts: {},
   currentAccountId: null,
   migrations: [],
+  nostrPrivateKey: null,
 };
 
 const browserStorageKeys = Object.keys(browserStorageDefaults) as Array<
