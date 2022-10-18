@@ -1,4 +1,8 @@
-import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import {
+  CrossIcon,
+  HiddenIcon,
+  VisibleIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
@@ -6,6 +10,7 @@ import PasswordForm from "@components/PasswordForm";
 import Setting from "@components/Setting";
 import Input from "@components/form/Input";
 import Select from "@components/form/Select";
+import TextField from "@components/form/TextField";
 import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
 import type { FormEvent } from "react";
@@ -29,8 +34,8 @@ function Settings() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
 
-  // TODO: Load setting from encrypted storage
   const [nostrPrivateKey, setNostrPrivateKey] = useState("");
+  const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
 
   const getPrivateKeyFromStorage = async () => {
     const priv = (await utils.call("nostr/getPrivateKey")) as string;
@@ -50,7 +55,7 @@ function Settings() {
 
   async function saveNostrPrivateKey(nostrPrivateKey: string) {
     const result = await utils.call("nostr/getPrivateKey");
-    const currentPrivateKey = result?.privateKey;
+    const currentPrivateKey = result as unknown as string;
 
     if (
       currentPrivateKey &&
@@ -417,7 +422,6 @@ function Settings() {
           )}
         </Setting>
       </div>
-
       <h2 className="mt-12 text-2xl font-bold dark:text-white">
         {t("nostr.title")}
       </h2>
@@ -437,38 +441,50 @@ function Settings() {
           title={t("nostr.private_key.title")}
           subtitle={t("nostr.private_key.subtitle")}
         >
-          {!isLoading && (
-            <>
-              <div className="w-96 flex justify-end">
-                <div className="w-96 flex-auto">
-                  <Input
-                    type="text"
-                    value={nostrPrivateKey}
-                    onBlur={(event) => {
-                      saveNostrPrivateKey(nostrPrivateKey);
+          <div className="w-96 flex justify-end">
+            <div className="w-96 flex-auto -m-1">
+              <TextField
+                id="nostrPrivateKey"
+                label={""}
+                type={nostrPrivateKeyVisible ? "text" : "password"}
+                value={nostrPrivateKey}
+                onBlur={() => {
+                  saveNostrPrivateKey(nostrPrivateKey);
+                }}
+                onChange={(event) => {
+                  setNostrPrivateKey(event.target.value);
+                }}
+                endAdornment={
+                  <button
+                    type="button"
+                    tabIndex={-1}
+                    className="flex justify-center items-center w-10 h-8"
+                    onClick={() => {
+                      setNostrPrivateKeyVisible(!nostrPrivateKeyVisible);
                     }}
-                    onChange={(event) => {
-                      setNostrPrivateKey(event.target.value);
-                    }}
-                  />
-                </div>
-                {!nostrPrivateKey && (
-                  <div className="flex-none ml-2 flex-end">
-                    <Button
-                      label={t("nostr.private_key.generate")}
-                      onClick={async () => {
-                        const result = await utils.call(
-                          "nostr/generatePrivateKey"
-                        );
-                        setNostrPrivateKey(result.privateKey as string);
-                        saveNostrPrivateKey(result.privateKey as string);
-                      }}
-                    />
-                  </div>
-                )}
+                  >
+                    {nostrPrivateKeyVisible ? (
+                      <HiddenIcon className="h-6 w-6" />
+                    ) : (
+                      <VisibleIcon className="h-6 w-6" />
+                    )}
+                  </button>
+                }
+              />
+            </div>
+            {!nostrPrivateKey && (
+              <div className="flex-none ml-2 flex-end">
+                <Button
+                  label={t("nostr.private_key.generate")}
+                  onClick={async () => {
+                    const result = await utils.call("nostr/generatePrivateKey");
+                    setNostrPrivateKey(result.privateKey as string);
+                    saveNostrPrivateKey(result.privateKey as string);
+                  }}
+                />
               </div>
-            </>
-          )}
+            )}
+          </div>
         </Setting>
       </div>
     </Container>
