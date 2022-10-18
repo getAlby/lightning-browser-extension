@@ -59,6 +59,15 @@ type CommandoPayInvoiceResponse = {
   amount_msat: string;
   amount_sent_msat: string;
 };
+type CommandoListPayResponse = {
+  pays: CommandoPay[];
+};
+type CommandoPay = {
+  payment_hash: string;
+  preimage: string;
+  status: string;
+};
+
 type CommandoInvoice = {
   label: string;
   status: string;
@@ -215,7 +224,27 @@ export default class Commando implements Connector {
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    throw new Error("Not yet supported with the currently used account.");
+    return this.ln
+      .commando({
+        method: "listpays",
+        params: ["-k", "payment_hash=" + args.paymentHash],
+        rune: this.config.rune,
+      })
+      .then((resp) => {
+        const parsed = resp as CommandoListPayResponse;
+        if (parsed.pays.length != 1) {
+          return {
+            data: {
+              paid: false,
+            },
+          };
+        }
+        return {
+          data: {
+            paid: parsed.pays[0].status == "complete",
+          },
+        };
+      });
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
