@@ -16,6 +16,7 @@ const subscribe = () => {
 
   PubSub.subscribe("ln.sendPayment.success", persistSuccessfullPayment);
   PubSub.subscribe("ln.sendPayment.success", updateAllowance);
+
   PubSub.subscribe("ln.keysend.success", persistSuccessfullPayment);
   PubSub.subscribe("ln.keysend.success", updateAllowance);
 

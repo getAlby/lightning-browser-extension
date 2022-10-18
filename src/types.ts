@@ -1,7 +1,7 @@
 import { PaymentRequestObject } from "bolt11";
 import { CURRENCIES } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
-import {
+import type {
   ConnectorInvoice,
   SendPaymentResponse,
   WebLNNode,
@@ -520,7 +520,7 @@ export type Transaction = {
 };
 
 export interface DbPayment {
-  allowanceId: string;
+  allowanceId?: string;
   createdAt: string;
   description: string;
   destination: string;
