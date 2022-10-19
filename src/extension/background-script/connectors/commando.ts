@@ -1,3 +1,5 @@
+import Hex from "crypto-js/enc-hex";
+import UTF8 from "crypto-js/enc-utf8";
 import LnMessage from "lnmessage";
 import { v4 as uuidv4 } from "uuid";
 
@@ -33,6 +35,9 @@ type CommandoGetInfoResponse = {
   id: string;
   color: string;
 };
+type CommandoSignMessageResponse = {
+  zbase: string;
+};
 type CommandoMakeInvoiceResponse = {
   bolt11: string;
   payment_hash: string;
@@ -59,13 +64,8 @@ type CommandoPayInvoiceResponse = {
   amount_msat: string;
   amount_sent_msat: string;
 };
-type CommandoListPayResponse = {
-  pays: CommandoPay[];
-};
-type CommandoPay = {
-  payment_hash: string;
-  preimage: string;
-  status: string;
+type CommandoListInvoiceResponse = {
+  invoices: CommandoInvoice[];
 };
 
 type CommandoInvoice = {
@@ -220,19 +220,58 @@ export default class Commando implements Connector {
   }
 
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
-    throw new Error("Not yet supported with the currently used account.");
+    //hex encode the record values
+    const records_hex: Record<string, string> = {};
+    for (const key in args.customRecords) {
+      records_hex[key] = UTF8.parse(args.customRecords[key]).toString(Hex);
+    }
+    return this.ln
+      .commando({
+        method: "keysend",
+        params: {
+          destination: args.pubkey,
+          msatoshi: args.amount * 1000,
+          extratlvs: args.customRecords,
+        },
+        rune: this.config.rune,
+      })
+      .then((resp) => {
+        const parsed = resp as CommandoPayInvoiceResponse;
+        const parsedTotalAmtStr = parsed.amount_msat.replace("msat", "");
+        const parsedSentAmtPaidStr = parsed.amount_sent_msat.replace(
+          "msat",
+          ""
+        );
+        const parsedTotalAmt = (parsedTotalAmtStr as unknown as number) / 1000;
+        const parsedTotalFee =
+          ((parsedSentAmtPaidStr as unknown as number) -
+            (parsedTotalAmtStr as unknown as number)) /
+          1000;
+        return {
+          data: {
+            paymentHash: parsed.payment_hash,
+            preimage: parsed.payment_preimage,
+            route: {
+              total_amt: parsedTotalAmt,
+              total_fees: parsedTotalFee,
+            },
+          },
+        };
+      });
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
     return this.ln
       .commando({
-        method: "listpays",
-        params: ["-k", "payment_hash=" + args.paymentHash],
+        method: "listinvoices",
+        params: {
+          payment_hash: args.paymentHash,
+        },
         rune: this.config.rune,
       })
       .then((resp) => {
-        const parsed = resp as CommandoListPayResponse;
-        if (parsed.pays.length != 1) {
+        const parsed = resp as CommandoListInvoiceResponse;
+        if (parsed.invoices.length != 1) {
           return {
             data: {
               paid: false,
@@ -241,14 +280,30 @@ export default class Commando implements Connector {
         }
         return {
           data: {
-            paid: parsed.pays[0].status == "complete",
+            paid: parsed.invoices[0].status == "paid",
           },
         };
       });
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
-    throw new Error("Not yet supported with the currently used account.");
+    return this.ln
+      .commando({
+        method: "signmessage",
+        params: {
+          message: args.message,
+        },
+        rune: this.config.rune,
+      })
+      .then((resp) => {
+        const parsed = resp as CommandoSignMessageResponse;
+        return {
+          data: {
+            message: args.message,
+            signature: parsed.zbase,
+          },
+        };
+      });
   }
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
