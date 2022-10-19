@@ -110,11 +110,7 @@ const state = createState<State>((set, get) => ({
       return get().nostr as Nostr;
     }
 
-    const encryptedKey = get().nostrPrivateKey as string;
-    const password = get().password as string;
-    const key = decryptData(encryptedKey, password);
-
-    const nostr = new Nostr(key);
+    const nostr = new Nostr();
     set({ nostr: nostr });
 
     return nostr;

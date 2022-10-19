@@ -1,20 +1,22 @@
 import * as secp256k1 from "@noble/secp256k1";
-import { encryptData } from "~/common/lib/crypto";
+import { decryptData, encryptData } from "~/common/lib/crypto";
 import { Event } from "~/extension/ln/nostr/types";
 
 import { signEvent } from "../actions/nostr/helpers";
 import state from "../state";
 
 class Nostr {
-  decryptedPrivateKey: string;
+  private getDecryptedPrivateKey() {
+    const password = state.getState().password as string;
+    const encryptedKey = state.getState().nostrPrivateKey as string;
+    const key = decryptData(encryptedKey, password);
 
-  constructor(decryptedPrivateKey: string) {
-    this.decryptedPrivateKey = decryptedPrivateKey;
+    return key;
   }
 
   getPublicKey() {
     const publicKey = secp256k1.schnorr.getPublicKey(
-      secp256k1.utils.hexToBytes(this.decryptedPrivateKey)
+      secp256k1.utils.hexToBytes(this.getDecryptedPrivateKey())
     );
     const publicKeyHex = secp256k1.utils.bytesToHex(publicKey);
     return publicKeyHex;
@@ -28,8 +30,8 @@ class Nostr {
   }
 
   async signEvent(event: Event): Promise<string> {
-    const signedEvent = await signEvent(event, this.decryptedPrivateKey);
-    return signedEvent;
+    const signature = await signEvent(event, this.getDecryptedPrivateKey());
+    return signature;
   }
 }
 
