@@ -78,6 +78,7 @@ export interface AuthNotificationData {
   authResponse: AuthResponseObject;
   origin?: OriginData; // only set if triggered via Prompt
   lnurlDetails: LNURLAuthServiceResponse;
+  event: AlbyEventType.AUTH;
 }
 
 export interface OriginDataInternal {

@@ -11,7 +11,7 @@ import type {
   LNURLDetails,
   LnurlAuthResponse,
   OriginData,
-  AuthResponseObject,
+  AuthResponseObject, // AuthNotificationData,
 } from "~/types";
 import { AlbyEventType } from "~/types";
 
@@ -95,17 +95,23 @@ export async function authFunction({
         authResponse?.data?.reason || "Auth: Something went wrong"
       );
     } else {
-      PubSub.publish(`albyEvent.auth`, {
-        event: AlbyEventType.AUTH,
-        details: lnurlDetails,
-      });
-
       // TODO: should use `AuthNotificationData`-type to align with usage in `notifications.ts`
-      PubSub.publish(`lnurl.auth.success`, {
-        authResponse,
-        lnurlDetails,
-        origin,
-      });
+      // const eventData: AuthNotificationData = {
+      //   authResponse, <- THIS DOES NOT MATCH
+      //   lnurlDetails,
+      //   origin,
+      //   event: AlbyEventType.AUTH,
+      // };
+
+      PubSub.publish(
+        `lnurl.auth.success`,
+        /* should be: `eventData` */ {
+          authResponse,
+          lnurlDetails,
+          origin,
+          event: AlbyEventType.AUTH,
+        }
+      );
 
       const response: LnurlAuthResponse = {
         success: true,

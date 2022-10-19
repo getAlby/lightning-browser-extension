@@ -1,8 +1,7 @@
 import db from "~/extension/background-script/db";
 import type {
-  DbAlbyEvent, //
-  // LNURLAuthServiceResponse,
-  // AlbyEventBudgetUpdateDetails,
+  DbAlbyEvent,
+  AuthNotificationData, // AlbyEventBudgetUpdateDetails,
   PaymentNotificationData,
 } from "~/types";
 import { AlbyEventType } from "~/types";
@@ -13,7 +12,7 @@ export const persistAlbyEvent = async (
     | "albyEvent.budget.update"
     | "albyEvent.invoice"
     | "albyEvent.transaction",
-  data: PaymentNotificationData
+  data: PaymentNotificationData | AuthNotificationData
 ) => {
   const { event } = data;
   let eventDetails;
@@ -27,6 +26,12 @@ export const persistAlbyEvent = async (
       paymentRequestDetails,
       origin,
     };
+  }
+
+  if (event === AlbyEventType.AUTH) {
+    const { authResponse, lnurlDetails, origin } = data;
+
+    eventDetails = { authResponse, lnurlDetails, origin };
   }
 
   const dbAlbyEvent: DbAlbyEvent = {
