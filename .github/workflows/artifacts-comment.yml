@@ -65,7 +65,7 @@ jobs:
               body += `\n\nWant to sponsor the next build? send some sats to ⚡️builds@getalby.com (don't forget to provide your name)`;
             }
 
-            body += `\n\nDon't forget: **keep stacking sats!**\n`;
+            body += `\n\nDon't forget: **keep earning sats!**\n`;
 
             const {data: comments} = await github.rest.issues.listComments({repo, owner, issue_number});
             const existing_comment = comments.find((c) => c.user.login === 'github-actions[bot]' && c.body.match(/current build files/) );
