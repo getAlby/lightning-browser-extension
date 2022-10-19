@@ -383,7 +383,7 @@
       },
       "lnurl_auth": {
         "title": "LNURL-Auth",
-        "hint": "é um protocolo de autenticação. Ele autentica o usuário usando assinaturas digitais. O protocolo não requer nenhuma outra informação de identificação, como senhas, e-mails, nomes de usuário... Com a Alby você pode usar suas contas bitcoin para logar em sites com segurança. <br /> Para ser compatível com outras carteiras, tivemos que fazer algumas alterações que você pode configurar aqui. <br /> <strong>Por padrão essas opções estão DESLIGADAS.</strong> Use-as apenas se você tiver contas antigas.",
+        "hint": "é um protocolo de autenticação. Ele autentica o usuário usando assinaturas digitais. O protocolo não requer nenhuma outra informação de identificação, como senhas, e-mails, nomes de usuário... Com a Alby você pode usar suas contas bitcoin para logar em sites com segurança. Para ser compatível com outras carteiras, tivemos que fazer algumas alterações que você pode configurar aqui. Por padrão essas opções estão DESLIGADAS. Use-as apenas se você tiver contas antigas.",
         "legacy_lnurl_auth_202207": {
           "title": "LNURL-Auth antigo",
           "subtitle": "A geração de chave para a LNURL-auth mudou em (julho de 2022). A Alby não era compatível com outras implementações. Isso foi corrigido, mas agora uma nova chave está sendo usada como padrão. Se você usou a LNURL-auth para logar em sites antes de julho de 2022, ainda poderá fazer login habilitando o método antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
@@ -469,8 +469,9 @@
         "title": "Aguardando leitura"
       },
       "input": {
-        "label": "Fatura, Endereço Relâmpago ou LNURL",
-        "placeholder": "Cole uma fatura, lnurl ou um endereço relâmpago"
+        "label": "Destinatário",
+        "placeholder": "Cole uma fatura, lnurl ou um endereço relâmpago",
+        "hint": "Fatura, Endereço Relâmpago ou LNURL"
       }
     },
     "lnurlpay": {
@@ -566,7 +567,7 @@
       "content_message": {
         "heading": "Você deseja logar em"
       },
-      "success": "Autenticado com sucesso",
+      "success": "Login realizado com sucesso em {{name}}",
       "errors": {
         "status": "Erro: O status de autenticação não está correto"
       },
@@ -581,7 +582,7 @@
       "amount": {
         "label": "Quantia"
       },
-      "success": "Solicitação de resgate de fundos enviada com sucesso"
+      "success": "{{amount}} solicitados com sucesso de {{sender}}"
     },
     "lnurlchannel": {
       "success": "Solicitação de canal de pagamento enviada com sucesso",
