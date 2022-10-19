@@ -25,6 +25,7 @@ const subscribe = () => {
   PubSub.subscribe("lnurl.auth.failed", lnurlAuthFailedNotification);
 
   PubSub.subscribe("ln.makeInvoice.success", persistAlbyEvent);
+  PubSub.subscribe("budget.success", persistAlbyEvent);
 
   console.info(`Event subscriptions registered`);
 };

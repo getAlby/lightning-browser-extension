@@ -1,19 +1,24 @@
 import db from "~/extension/background-script/db";
 import type {
-  DbAlbyEvent,
-  AuthNotificationData, // AlbyEventBudgetUpdateDetails,
-  PaymentNotificationData,
+  AlbyEventBudgetUpdateDetails,
   AlbyEventInvoiceDetails,
+  AuthNotificationData,
+  DbAlbyEvent,
+  PaymentNotificationData,
 } from "~/types";
 import { AlbyEventType } from "~/types";
 
 export const persistAlbyEvent = async (
   _message:
-    | "lnurl.auth.success"
-    // | "albyEvent.budget.update"
+    | "budget.success"
     | "ln.makeInvoice.success"
-    | "ln.sendPayment.success",
-  data: PaymentNotificationData | AuthNotificationData | AlbyEventInvoiceDetails
+    | "ln.sendPayment.success"
+    | "lnurl.auth.success",
+  data:
+    | AlbyEventBudgetUpdateDetails
+    | AlbyEventInvoiceDetails
+    | AuthNotificationData
+    | PaymentNotificationData
 ) => {
   const { event } = data;
   let eventDetails;
@@ -39,6 +44,12 @@ export const persistAlbyEvent = async (
     const { paymentRequest, rHash } = data;
 
     eventDetails = { paymentRequest, rHash };
+  }
+
+  if (event === AlbyEventType.BUDGET) {
+    const { type, allowanceId } = data;
+
+    eventDetails = { type, allowanceId };
   }
 
   const dbAlbyEvent: DbAlbyEvent = {

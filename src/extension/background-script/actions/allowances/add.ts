@@ -21,15 +21,13 @@ const add = async (message: MessageAllowanceAdd) => {
   if (allowance) {
     if (!allowance.id) return { error: "id is missing" };
 
-    const eventDetails: AlbyEventBudgetUpdateDetails = {
+    const eventData: AlbyEventBudgetUpdateDetails = {
       type: "update",
       allowanceId: allowance.id,
+      event: AlbyEventType.BUDGET,
     };
 
-    PubSub.publish(`albyEvent.budget.update`, {
-      event: AlbyEventType.BUDGET,
-      details: eventDetails,
-    });
+    PubSub.publish("budget.success", eventData);
 
     db.allowances.update(allowance.id, {
       enabled: true,
