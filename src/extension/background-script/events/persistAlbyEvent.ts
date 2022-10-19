@@ -3,16 +3,17 @@ import type {
   DbAlbyEvent,
   AuthNotificationData, // AlbyEventBudgetUpdateDetails,
   PaymentNotificationData,
+  AlbyEventInvoiceDetails,
 } from "~/types";
 import { AlbyEventType } from "~/types";
 
 export const persistAlbyEvent = async (
   _message:
-    | "albyEvent.auth"
-    | "albyEvent.budget.update"
-    | "albyEvent.invoice"
-    | "albyEvent.transaction",
-  data: PaymentNotificationData | AuthNotificationData
+    | "lnurl.auth.success"
+    // | "albyEvent.budget.update"
+    | "ln.makeInvoice.success"
+    | "ln.sendPayment.success",
+  data: PaymentNotificationData | AuthNotificationData | AlbyEventInvoiceDetails
 ) => {
   const { event } = data;
   let eventDetails;
@@ -32,6 +33,12 @@ export const persistAlbyEvent = async (
     const { authResponse, lnurlDetails, origin } = data;
 
     eventDetails = { authResponse, lnurlDetails, origin };
+  }
+
+  if (event === AlbyEventType.INVOICE) {
+    const { paymentRequest, rHash } = data;
+
+    eventDetails = { paymentRequest, rHash };
   }
 
   const dbAlbyEvent: DbAlbyEvent = {

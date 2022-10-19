@@ -21,15 +21,13 @@ const makeInvoice = async (message: MessageMakeInvoice) => {
         memo,
       });
 
-      const eventDetails: AlbyEventInvoiceDetails = {
+      const eventData: AlbyEventInvoiceDetails = {
         paymentRequest: response.data.paymentRequest,
         rHash: response.data.rHash,
+        event: AlbyEventType.INVOICE,
       };
 
-      PubSub.publish("albyEvent.invoice", {
-        event: AlbyEventType.INVOICE,
-        details: eventDetails,
-      });
+      PubSub.publish("makeInvoice.success", eventData);
 
       return response;
     } catch (e) {

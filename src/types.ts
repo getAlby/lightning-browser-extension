@@ -653,6 +653,7 @@ export interface AlbyEventBudgetUpdateDetails {
 export interface AlbyEventInvoiceDetails {
   paymentRequest: string;
   rHash: string;
+  event: AlbyEventType.INVOICE;
 }
 
 export interface SettingsStorage {
