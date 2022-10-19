@@ -105,8 +105,8 @@ export default class Commando implements Connector {
     await this.ln.connect();
   }
 
-  unload() {
-    return Promise.resolve();
+  async unload() {
+    await this.ln.disconnect();
   }
 
   async connectPeer(
