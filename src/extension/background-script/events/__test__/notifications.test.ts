@@ -5,6 +5,7 @@ import type {
   AuthNotificationData,
   SettingsStorage,
 } from "~/types";
+import { AlbyEventType } from "~/types";
 
 import * as helpers from "../helpers";
 import * as notifications from "../notifications";
@@ -43,6 +44,7 @@ describe("Payment notifications", () => {
   });
 
   const data: PaymentNotificationData = {
+    event: AlbyEventType.TRANSACTION,
     response: {
       data: {
         preimage:

@@ -67,6 +67,7 @@ export interface PaymentNotificationData {
     destination?: string | undefined;
     description?: string | undefined;
   };
+  event: AlbyEventType.TRANSACTION;
 }
 
 export interface AuthResponseObject {

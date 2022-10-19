@@ -1,6 +1,14 @@
 import browser, { Runtime } from "webextension-polyfill";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
-import type { Invoice, OriginData, OriginDataInternal } from "~/types";
+import type {
+  Invoice,
+  Message,
+  MessageSendPayment,
+  OriginData,
+  OriginDataInternal,
+  PaymentNotificationData,
+  AlbyEventType,
+} from "~/types";
 
 const utils = {
   base64ToHex: (str: string) => {
@@ -35,6 +43,23 @@ const utils = {
   },
   stringToUint8Array: (str: string) => {
     return Uint8Array.from(str, (x) => x.charCodeAt(0));
+  },
+  publishPaymentNotification: (
+    message: MessageSendPayment | Message, // 'keysend' & 'sendPaymentOrPrompt' still need the Message type
+    data: Omit<PaymentNotificationData, "origin">
+  ) => {
+    let status = "success"; // default. let's hope for success
+    if ("error" in data.response) {
+      status = "failed";
+    }
+    const paymentData: PaymentNotificationData = {
+      response: data.response,
+      details: data.details,
+      paymentRequestDetails: data.paymentRequestDetails,
+      origin: message.origin as OriginData, // should be refatciored when removing default 'Message"-type above
+      event: AlbyEventType.TRANSACTION,
+    };
+    PubSub.publish(`ln.sendPayment.${status}`, paymentData);
   },
   openPage: (page: string) => {
     browser.tabs.create({ url: browser.runtime.getURL(page) });
