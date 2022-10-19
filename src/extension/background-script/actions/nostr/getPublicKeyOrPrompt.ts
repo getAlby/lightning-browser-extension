@@ -1,7 +1,7 @@
 import utils from "~/common/lib/utils";
 import { MessagePublicKeyGet } from "~/types";
 
-import getPublicKey from "./getPublicKey";
+import state from "../../state";
 
 const getPublicKeyOrPrompt = async (message: MessagePublicKeyGet) => {
   if (!("host" in message.origin)) {
@@ -22,7 +22,7 @@ const prompt = async (message: MessagePublicKeyGet) => {
       action: "public/nostr/confirmGetPublicKey",
     });
 
-    const publicKey = await getPublicKey();
+    const publicKey = state.getState().getNostr().getPublicKey();
 
     response.data = publicKey;
 

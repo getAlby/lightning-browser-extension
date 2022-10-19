@@ -17,10 +17,8 @@ const generatePrivateKey = async () => {
     if (!keymaterial.length) {
       throw Error("No key material available.");
     }
-    const uint8 = Uint8Array.from(
-      keymaterial.split("").map((x) => x.charCodeAt(0))
-    );
-    const privateKey = secp256k1.utils.hashToPrivateKey(uint8);
+
+    const privateKey = secp256k1.utils.hashToPrivateKey(keymaterial);
     return {
       data: {
         privateKey: secp256k1.utils.bytesToHex(privateKey),

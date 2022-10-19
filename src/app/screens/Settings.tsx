@@ -368,72 +368,6 @@ function Settings() {
       </div>
 
       <h2 className="mt-12 text-2xl font-bold dark:text-white">
-        {t("nostr.title")}
-      </h2>
-      <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
-        <a
-          href="https://github.com/nostr-protocol/nostr"
-          target="_blank"
-          rel="noreferrer"
-          className="underline"
-        >
-          {t("nostr.title")}
-        </a>{" "}
-        {t("nostr.hint")}
-      </p>
-      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
-        <Setting
-          title={t("nostr.private_key.title")}
-          subtitle={t("nostr.private_key.subtitle")}
-        >
-          <div className="w-96 flex justify-end">
-            <div className="w-96 flex-auto -m-1">
-              <TextField
-                id="nostrPrivateKey"
-                label={""}
-                type={nostrPrivateKeyVisible ? "text" : "password"}
-                value={nostrPrivateKey}
-                onBlur={() => {
-                  saveNostrPrivateKey(nostrPrivateKey);
-                }}
-                onChange={(event) => {
-                  setNostrPrivateKey(event.target.value);
-                }}
-                endAdornment={
-                  <button
-                    type="button"
-                    tabIndex={-1}
-                    className="flex justify-center items-center w-10 h-8"
-                    onClick={() => {
-                      setNostrPrivateKeyVisible(!nostrPrivateKeyVisible);
-                    }}
-                  >
-                    {nostrPrivateKeyVisible ? (
-                      <HiddenIcon className="h-6 w-6" />
-                    ) : (
-                      <VisibleIcon className="h-6 w-6" />
-                    )}
-                  </button>
-                }
-              />
-            </div>
-            {!nostrPrivateKey && (
-              <div className="flex-none ml-2 flex-end">
-                <Button
-                  label={t("nostr.private_key.generate")}
-                  onClick={async () => {
-                    const result = await utils.call("nostr/generatePrivateKey");
-                    setNostrPrivateKey(result.privateKey as string);
-                    saveNostrPrivateKey(result.privateKey as string);
-                  }}
-                />
-              </div>
-            )}
-          </div>
-        </Setting>
-      </div>
-
-      <h2 className="mt-12 text-2xl font-bold dark:text-white">
         {t("lnurl_auth.title")}
       </h2>
       <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
@@ -484,6 +418,76 @@ function Settings() {
               }}
             />
           )}
+        </Setting>
+      </div>
+      <div className="relative flex py-5 mt-5 items-center">
+        <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+        <span className="flex-shrink mx-4 text-gray-500 dark:text-gray-400 fw-bold">
+          🧪 Alby Lab
+        </span>
+        <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+      </div>
+      <h2 className="text-2xl font-bold dark:text-white">{t("nostr.title")}</h2>
+      <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
+        <a
+          href="https://github.com/nostr-protocol/nostr"
+          target="_blank"
+          rel="noreferrer"
+          className="underline"
+        >
+          {t("nostr.title")}
+        </a>{" "}
+        {t("nostr.hint")}
+      </p>
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+        <Setting
+          title={t("nostr.private_key.title")}
+          subtitle={t("nostr.private_key.subtitle")}
+        >
+          <div className="w-96 flex justify-end">
+            <div className="w-96 flex-auto -mt-1">
+              <TextField
+                id="nostrPrivateKey"
+                label={""}
+                type={nostrPrivateKeyVisible ? "text" : "password"}
+                value={nostrPrivateKey}
+                onBlur={() => {
+                  saveNostrPrivateKey(nostrPrivateKey);
+                }}
+                onChange={(event) => {
+                  setNostrPrivateKey(event.target.value);
+                }}
+                endAdornment={
+                  <button
+                    type="button"
+                    tabIndex={-1}
+                    className="flex justify-center items-center w-10 h-8"
+                    onClick={() => {
+                      setNostrPrivateKeyVisible(!nostrPrivateKeyVisible);
+                    }}
+                  >
+                    {nostrPrivateKeyVisible ? (
+                      <HiddenIcon className="h-6 w-6" />
+                    ) : (
+                      <VisibleIcon className="h-6 w-6" />
+                    )}
+                  </button>
+                }
+              />
+            </div>
+            {!nostrPrivateKey && (
+              <div className="flex-none ml-2 flex-end">
+                <Button
+                  label={t("nostr.private_key.generate")}
+                  onClick={async () => {
+                    const result = await utils.call("nostr/generatePrivateKey");
+                    setNostrPrivateKey(result.privateKey as string);
+                    saveNostrPrivateKey(result.privateKey as string);
+                  }}
+                />
+              </div>
+            )}
+          </div>
         </Setting>
       </div>
     </Container>
