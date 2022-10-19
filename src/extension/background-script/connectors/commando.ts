@@ -115,7 +115,10 @@ export default class Commando implements Connector {
     return this.ln
       .commando({
         method: "connect",
-        params: [args.pubkey, args.host],
+        params: {
+          id: args.pubkey,
+          host: args.host,
+        },
         rune: this.config.rune,
       })
       .then((resp) => {
@@ -132,7 +135,7 @@ export default class Commando implements Connector {
     return this.ln
       .commando({
         method: "listinvoices",
-        params: [],
+        params: {},
         rune: this.config.rune,
       })
       .then((resp) => {
@@ -158,7 +161,7 @@ export default class Commando implements Connector {
   async getInfo(): Promise<GetInfoResponse> {
     const response = (await this.ln.commando({
       method: "getinfo",
-      params: [],
+      params: {},
       rune: this.config.rune,
     })) as CommandoGetInfoResponse;
     return {
@@ -173,7 +176,7 @@ export default class Commando implements Connector {
   async getBalance(): Promise<GetBalanceResponse> {
     const response = (await this.ln.commando({
       method: "listfunds",
-      params: [],
+      params: {},
       rune: this.config.rune,
     })) as CommandoListFundsResponse;
     let lnBalance = 0;
@@ -191,7 +194,9 @@ export default class Commando implements Connector {
     return this.ln
       .commando({
         method: "pay",
-        params: [args.paymentRequest],
+        params: {
+          bolt11: args.paymentRequest,
+        },
         rune: this.config.rune,
       })
       .then((resp) => {
@@ -310,7 +315,11 @@ export default class Commando implements Connector {
     const label = uuidv4();
     const response = (await this.ln.commando({
       method: "invoice",
-      params: [(args.amount as number) * 1000, label, args.memo],
+      params: {
+        amount_msat: (args.amount as number) * 1000,
+        label: label,
+        description: args.memo,
+      },
       rune: this.config.rune,
     })) as CommandoMakeInvoiceResponse;
     return {
