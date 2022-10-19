@@ -8,9 +8,7 @@ if (document) {
   // this is just to make double sure we load it
   if (!window.webln) {
     window.webln = new WebLNProvider();
-  }
-  if (!window.alby) {
-    window.alby = alby;
+    window.alby = alby; // nomally also loaded onstart
   }
 
   const readyEvent = new Event("webln:ready");
