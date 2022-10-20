@@ -1,8 +1,9 @@
 import dayjs from "dayjs";
 import i18n from "i18next";
-import { useState, useEffect, createContext, useContext } from "react";
+import { useState, useEffect, createContext, useContext, useRef } from "react";
 import { toast } from "react-toastify";
 import { getTheme } from "~/app/utils";
+import { CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
 import { getFiatValue as getFiatValueFunc } from "~/common/utils/currencyConvert";
 import { DEFAULT_SETTINGS } from "~/extension/background-script/state";
@@ -27,7 +28,11 @@ export const SettingsProvider = ({
   const [settings, setSettings] =
     useState<SettingsContextType["settings"]>(DEFAULT_SETTINGS);
   const [isLoading, setIsLoading] = useState(true);
-  const [currencyRate, setCurrencyRate] = useState(0);
+
+  // store latest currency and currency rate in ref to prevent a re-render
+  const currencyRate = useRef<null | { rate: number; currency: CURRENCIES }>(
+    null
+  );
 
   // call this to trigger a re-render on all occassions
   const updateSetting = async (setting: Setting) => {
@@ -55,19 +60,31 @@ export const SettingsProvider = ({
       });
   }, []);
 
-  // update rate
-  useEffect(() => {
-    api.getCurrencyRate().then((response) => {
-      setCurrencyRate(response.rate);
-    });
-  }, [settings.currency]);
+  const getCurrencyRate = async (): Promise<number> => {
+    // ensure to get the correct rate for current currency in state
+    if (settings.currency !== currencyRate.current?.currency) {
+      const response = await api.getCurrencyRate(); // gets rate from browser.storage or API
 
-  const getFiatValue = (amount: number | string) =>
-    getFiatValueFunc({
+      // update local ref
+      currencyRate.current = {
+        rate: response.rate,
+        currency: settings.currency,
+      };
+    }
+
+    return currencyRate.current.rate;
+  };
+
+  const getFiatValue = async (amount: number | string) => {
+    const rate = await getCurrencyRate();
+    const value = await getFiatValueFunc({
       amount,
-      rate: currencyRate,
+      rate,
       currency: settings.currency,
     });
+
+    return value;
+  };
 
   // update locale on every change
   useEffect(() => {
