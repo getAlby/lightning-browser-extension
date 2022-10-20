@@ -18,7 +18,13 @@ const generatePrivateKey = async () => {
       throw Error("No key material available.");
     }
 
-    const privateKey = secp256k1.utils.hashToPrivateKey(keymaterial);
+    const hex = keymaterial
+      .split("")
+      .map((c) => c.charCodeAt(0).toString(16).padStart(2, "0"))
+      .join("");
+
+    const privateKey = secp256k1.utils.hashToPrivateKey(hex);
+
     return {
       data: {
         privateKey: secp256k1.utils.bytesToHex(privateKey),
