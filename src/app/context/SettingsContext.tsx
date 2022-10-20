@@ -12,7 +12,7 @@ interface SettingsContextType {
   settings: SettingsStorage;
   updateSetting: (setting: Setting) => void;
   isLoading: boolean;
-  getFiatValue: (amount: number | string) => Promise<string>;
+  getFiatValue: (amount: number | string) => string;
 }
 
 type Setting = Partial<SettingsStorage>;
@@ -62,8 +62,8 @@ export const SettingsProvider = ({
     });
   }, [settings.currency]);
 
-  const getFiatValue = async (amount: number | string) =>
-    await getFiatValueFunc({
+  const getFiatValue = (amount: number | string) =>
+    getFiatValueFunc({
       amount,
       rate: currencyRate,
       currency: settings.currency,

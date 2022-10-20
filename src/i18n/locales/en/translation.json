@@ -443,6 +443,17 @@
           "mismatched_password": "Passwords don't match."
         },
         "success": "Password changed successfully"
+      },
+      "nostr": {
+        "title": "Nostr",
+        "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
+        "private_key": {
+          "title": "Private key",
+          "subtitle": "Generating a key will create a new key based on the current account you use. Please make sure you backup this private key.",
+          "generate": "Generate",
+          "warning": "This will delete your old private key. Are you sure?",
+          "success": "Private key encrypted & saved successfully."
+        }
       }
     },
     "send": {
@@ -451,8 +462,8 @@
         "title": "Waiting to scan"
       },
       "input": {
-        "label": "Invoice, Lightning Address or LNURL",
-        "placeholder": "Paste invoice, lnurl or lightning address"
+        "label": "Recipient",
+        "hint": "Invoice, Lightning Address or LNURL"
       }
     },
     "lnurlpay": {
@@ -582,6 +593,12 @@
       "actions": {
         "pay_now": "Pay now"
       }
+    },
+    "nostr": {
+      "title": "Nostr",
+      "allow": "Allow {{host}} to:",
+      "read_public_key": "Read your public key",
+      "block_and_ignore": "Block and ignore {{host}}"
     }
   },
   "common": {

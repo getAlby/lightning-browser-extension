@@ -4,23 +4,13 @@ import * as blocklist from "./actions/blocklist";
 import * as cache from "./actions/cache";
 import * as ln from "./actions/ln";
 import lnurl, { auth } from "./actions/lnurl";
+import * as nostr from "./actions/nostr";
 import * as payments from "./actions/payments";
 import * as settings from "./actions/settings";
 import * as setup from "./actions/setup";
 import * as webln from "./actions/webln";
 
 const routes = {
-  // webln calls can be made from the webln object injected in the websites. See inject-script
-  webln: {
-    enable: allowances.enable,
-    getInfo: ln.getInfo,
-    sendPaymentOrPrompt: webln.sendPaymentOrPrompt,
-    keysendOrPrompt: webln.keysendOrPrompt,
-    signMessageOrPrompt: webln.signMessageOrPrompt,
-    lnurl: webln.lnurl,
-    makeInvoice: webln.makeInvoiceOrPrompt,
-    lnc: ln.lnc,
-  },
   addAllowance: allowances.add,
   getAllowance: allowances.get,
   getAllowanceById: allowances.getById,
@@ -60,6 +50,30 @@ const routes = {
   lnurl: lnurl,
   lnurlAuth: auth,
   getCurrencyRate: cache.getCurrencyRate,
+  nostr: {
+    generatePrivateKey: nostr.generatePrivateKey,
+    getPrivateKey: nostr.getPrivateKey,
+    setPrivateKey: nostr.setPrivateKey,
+  },
+
+  // Public calls are accessible from inpage scripts
+  public: {
+    webln: {
+      enable: allowances.enable,
+      getInfo: ln.getInfo,
+      sendPaymentOrPrompt: webln.sendPaymentOrPrompt,
+      keysendOrPrompt: webln.keysendOrPrompt,
+      signMessageOrPrompt: webln.signMessageOrPrompt,
+      lnurl: webln.lnurl,
+      makeInvoice: webln.makeInvoiceOrPrompt,
+      lnc: ln.lnc,
+    },
+    nostr: {
+      getPublicKeyOrPrompt: nostr.getPublicKeyOrPrompt,
+      signEventOrPrompt: nostr.signEventOrPrompt,
+      getRelays: nostr.getRelays,
+    },
+  },
 };
 
 const router = (path: FixMe) => {

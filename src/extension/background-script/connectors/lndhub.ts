@@ -84,18 +84,22 @@ export default class LndHub implements Connector {
       }[]
     >("GET", "/getuserinvoices", undefined);
 
-    const invoices: ConnectorInvoice[] = data.map(
-      (invoice, index): ConnectorInvoice => ({
-        custom_records: invoice.custom_records,
-        id: `${invoice.payment_request}-${index}`,
-        memo: invoice.description,
-        preimage: "", // lndhub doesn't support preimage (yet)
-        settled: invoice.ispaid,
-        settleDate: invoice.timestamp * 1000,
-        totalAmount: `${invoice.amt}`,
-        type: "received",
-      })
-    );
+    const invoices: ConnectorInvoice[] = data
+      .map(
+        (invoice, index): ConnectorInvoice => ({
+          custom_records: invoice.custom_records,
+          id: `${invoice.payment_request}-${index}`,
+          memo: invoice.description,
+          preimage: "", // lndhub doesn't support preimage (yet)
+          settled: invoice.ispaid,
+          settleDate: invoice.timestamp * 1000,
+          totalAmount: `${invoice.amt}`,
+          type: "received",
+        })
+      )
+      .sort((a, b) => {
+        return b.settleDate - a.settleDate;
+      });
 
     return {
       data: {

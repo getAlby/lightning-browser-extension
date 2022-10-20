@@ -7,7 +7,7 @@ import * as SettingsContext from "~/app/context/SettingsContext";
 import type { Props } from "./index";
 import AllowanceMenu from "./index";
 
-const mockGetFiatValue = jest.fn(() => Promise.resolve("$1,22"));
+const mockGetFiatValue = jest.fn(() => "$1,22");
 
 jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
   settings: mockSettings,
