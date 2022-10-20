@@ -4,7 +4,7 @@ import { getFiatValue, getSatValue } from "../currencyConvert";
 
 describe("Currency coversion utils", () => {
   test("getFiatValue", async () => {
-    const result = await getFiatValue({
+    const result = getFiatValue({
       amount: 123456789,
       rate: 0.00029991836,
       currency: CURRENCIES["USD"],

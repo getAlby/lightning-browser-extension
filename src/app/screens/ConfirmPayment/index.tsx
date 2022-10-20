@@ -49,7 +49,7 @@ function ConfirmPayment() {
   useEffect(() => {
     (async () => {
       if (showFiat && invoice.satoshis) {
-        const res = await getFiatValue(invoice.satoshis);
+        const res = getFiatValue(invoice.satoshis);
         setFiatAmount(res);
       }
     })();
@@ -58,7 +58,7 @@ function ConfirmPayment() {
   useEffect(() => {
     (async () => {
       if (showFiat && budget) {
-        const res = await getFiatValue(budget);
+        const res = getFiatValue(budget);
         setFiatBudgetAmount(res);
       }
     })();

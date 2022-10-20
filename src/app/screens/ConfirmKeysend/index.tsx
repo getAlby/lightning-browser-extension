@@ -49,7 +49,7 @@ function ConfirmKeysend() {
   useEffect(() => {
     (async () => {
       if (showFiat && amount) {
-        const res = await getFiatValue(amount);
+        const res = getFiatValue(amount);
         setFiatAmount(res);
       }
     })();
@@ -58,7 +58,7 @@ function ConfirmKeysend() {
   useEffect(() => {
     if (showFiat) {
       (async () => {
-        const res = await getFiatValue(budget);
+        const res = getFiatValue(budget);
         setFiatBudgetAmount(res);
       })();
     }

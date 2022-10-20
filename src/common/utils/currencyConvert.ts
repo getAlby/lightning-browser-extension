@@ -14,7 +14,7 @@ const satoshisToFiat = ({
   return fiat;
 };
 
-export const getFiatValue = async ({
+export const getFiatValue = ({
   amount,
   rate,
   currency,

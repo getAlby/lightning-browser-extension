@@ -6,7 +6,7 @@ import type { LNURLDetails, OriginData } from "~/types";
 
 import LNURLPay from "./index";
 
-const mockGetFiatValue = jest.fn(() => Promise.resolve("$1,22"));
+const mockGetFiatValue = jest.fn(() => "$1,22");
 
 jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
   settings: mockSettings,

@@ -39,7 +39,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   useEffect(() => {
     if (budget !== "" && showFiat) {
       const getFiat = async () => {
-        const res = await getFiatValue(budget);
+        const res = getFiatValue(budget);
         setFiatAmount(res);
       };
 

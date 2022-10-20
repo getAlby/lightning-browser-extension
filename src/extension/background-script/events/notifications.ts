@@ -30,7 +30,7 @@ const paymentSuccessNotification = async (
   if (showFiat) {
     const rate = await getCurrencyRateWithCache(currency);
 
-    paymentAmountFiatLocale = await getFiatValue({
+    paymentAmountFiatLocale = getFiatValue({
       amount: paymentAmount,
       rate,
       currency,

@@ -45,7 +45,7 @@ function LNURLWithdraw() {
   useEffect(() => {
     if (valueSat !== "" && showFiat) {
       (async () => {
-        const res = await getFiatValue(valueSat);
+        const res = getFiatValue(valueSat);
         setFiatValue(res);
       })();
     }
