@@ -103,6 +103,7 @@ export default class WebLNProvider {
           application: "LBE",
           prompt: true,
           action: `webln/${action}`,
+          scope: "webln",
           args,
         },
         "*" // TODO use origin
@@ -115,7 +116,7 @@ export default class WebLNProvider {
           !messageEvent.data ||
           !messageEvent.data.response ||
           messageEvent.data.application !== "LBE" ||
-          !messageEvent.data.action.startsWith("webln")
+          messageEvent.data.scope !== "webln"
         ) {
           return;
         }

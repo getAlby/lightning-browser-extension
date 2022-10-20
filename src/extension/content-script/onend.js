@@ -45,7 +45,7 @@ async function init() {
     if (
       ev.source !== window ||
       ev.data.application !== "LBE" ||
-      !ev.data.action.startsWith("webln")
+      ev.data.scope !== "webln"
     ) {
       return;
     }
@@ -87,7 +87,8 @@ async function init() {
             application: "LBE",
             response: true,
             data: response,
-            action: ev.data.action,
+            //action: ev.data.action,
+            scope: "webln",
           },
           "*" // TODO use origin
         );

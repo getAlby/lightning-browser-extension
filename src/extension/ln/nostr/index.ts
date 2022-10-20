@@ -25,6 +25,7 @@ export default class NostrProvider {
           application: "LBE",
           prompt: true,
           action: `nostr/${action}`,
+          scope: "nostr",
           args,
         },
         "*" // TODO use origin
@@ -37,7 +38,7 @@ export default class NostrProvider {
           !messageEvent.data ||
           !messageEvent.data.response ||
           messageEvent.data.application !== "LBE" ||
-          !messageEvent.data.action.startsWith("nostr")
+          messageEvent.data.scope !== "nostr"
         ) {
           return;
         }
