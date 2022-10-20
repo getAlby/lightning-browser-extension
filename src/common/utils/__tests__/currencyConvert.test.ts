@@ -3,7 +3,7 @@ import { CURRENCIES } from "~/common/constants";
 import { getFiatValue, getSatValue } from "../currencyConvert";
 
 describe("Currency coversion utils", () => {
-  test("getFiatValue", async () => {
+  test("getFiatValue", () => {
     const result = getFiatValue({
       amount: 123456789,
       rate: 0.00029991836,

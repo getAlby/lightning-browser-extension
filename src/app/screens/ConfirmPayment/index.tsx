@@ -47,21 +47,17 @@ function ConfirmPayment() {
   const [fiatBudgetAmount, setFiatBudgetAmount] = useState("");
 
   useEffect(() => {
-    (async () => {
-      if (showFiat && invoice.satoshis) {
-        const res = getFiatValue(invoice.satoshis);
-        setFiatAmount(res);
-      }
-    })();
+    if (showFiat && invoice.satoshis) {
+      const res = getFiatValue(invoice.satoshis);
+      setFiatAmount(res);
+    }
   }, [invoice.satoshis, showFiat, getFiatValue]);
 
   useEffect(() => {
-    (async () => {
-      if (showFiat && budget) {
-        const res = getFiatValue(budget);
-        setFiatBudgetAmount(res);
-      }
-    })();
+    if (showFiat && budget) {
+      const res = getFiatValue(budget);
+      setFiatBudgetAmount(res);
+    }
   }, [budget, showFiat, getFiatValue]);
 
   const [rememberMe, setRememberMe] = useState(false);

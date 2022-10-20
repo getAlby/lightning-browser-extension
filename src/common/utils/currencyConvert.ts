@@ -3,17 +3,6 @@
  */
 import type { CURRENCIES } from "../constants";
 
-const satoshisToFiat = ({
-  amountInSats,
-  rate,
-}: {
-  amountInSats: number | string;
-  rate: number;
-}) => {
-  const fiat = Number(amountInSats) * rate;
-  return fiat;
-};
-
 export const getFiatValue = ({
   amount,
   rate,
@@ -23,10 +12,7 @@ export const getFiatValue = ({
   rate: number;
   currency: CURRENCIES;
 }) => {
-  const fiatValue = satoshisToFiat({
-    amountInSats: amount,
-    rate,
-  });
+  const fiatValue = Number(amount) * rate;
 
   return fiatValue.toLocaleString("en", {
     style: "currency",
