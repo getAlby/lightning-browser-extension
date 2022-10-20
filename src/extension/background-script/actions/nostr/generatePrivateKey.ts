@@ -1,4 +1,6 @@
 import * as secp256k1 from "@noble/secp256k1";
+import Hex from "crypto-js/enc-hex";
+import sha512 from "crypto-js/sha512";
 
 import state from "../../state";
 
@@ -18,12 +20,9 @@ const generatePrivateKey = async () => {
       throw Error("No key material available.");
     }
 
-    const hex = keymaterial
-      .split("")
-      .map((c) => c.charCodeAt(0).toString(16).padStart(2, "0"))
-      .join("");
-
-    const privateKey = secp256k1.utils.hashToPrivateKey(hex);
+    // Use SHA-512 to provide enough key material for secp256k1 (> 40 bytes)
+    const hash = sha512(keymaterial).toString(Hex);
+    const privateKey = secp256k1.utils.hashToPrivateKey(hash);
 
     return {
       data: {
