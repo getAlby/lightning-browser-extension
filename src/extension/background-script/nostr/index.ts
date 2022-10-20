@@ -6,7 +6,7 @@ import { signEvent } from "../actions/nostr/helpers";
 import state from "../state";
 
 class Nostr {
-  private getDecryptedPrivateKey() {
+  getPrivateKey() {
     const password = state.getState().password as string;
     const encryptedKey = state.getState().nostrPrivateKey as string;
     const key = decryptData(encryptedKey, password);
@@ -16,7 +16,7 @@ class Nostr {
 
   getPublicKey() {
     const publicKey = secp256k1.schnorr.getPublicKey(
-      secp256k1.utils.hexToBytes(this.getDecryptedPrivateKey())
+      secp256k1.utils.hexToBytes(this.getPrivateKey())
     );
     const publicKeyHex = secp256k1.utils.bytesToHex(publicKey);
     return publicKeyHex;
@@ -30,7 +30,7 @@ class Nostr {
   }
 
   async signEvent(event: Event): Promise<string> {
-    const signature = await signEvent(event, this.getDecryptedPrivateKey());
+    const signature = await signEvent(event, this.getPrivateKey());
     return signature;
   }
 }
