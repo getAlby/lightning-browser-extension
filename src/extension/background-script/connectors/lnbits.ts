@@ -137,8 +137,7 @@ class LnBits implements Connector {
       this.config.adminkey,
       undefined
     ).then((data) => {
-      // TODO better amount handling
-      const balanceInSats = data.balance / 1000;
+      const balanceInSats = Math.floor(data.balance / 1000);
       return {
         data: {
           balance: balanceInSats,
