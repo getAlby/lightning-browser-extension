@@ -13,10 +13,15 @@ export default async function (message: Message) {
     });
   }
 
-  const response = await connector.request(
-    message.args.method,
-    message.args.params
-  );
+  let response;
+  if (connector.requestLNC) {
+    response = await connector.requestLNC(
+      message.args.method as string,
+      message.args.params
+    );
+  } else {
+    response = { error: "Only available with LNC" };
+  }
 
   return response;
 }
