@@ -59,4 +59,5 @@ export const persistAlbyEvent = async (
   };
 
   await db.albyEvents.add(dbAlbyEvent);
+  await db.saveToStorage();
 };

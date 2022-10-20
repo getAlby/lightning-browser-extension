@@ -3,7 +3,7 @@ import type {
   DbAllowance,
   AlbyEventBudgetUpdateDetails,
 } from "~/types";
-import { AlbyEventType } from "~/types";
+import { AlbyEventType, AlbyEventBudgetType } from "~/types";
 
 import db from "../../db";
 
@@ -22,7 +22,7 @@ const add = async (message: MessageAllowanceAdd) => {
     if (!allowance.id) return { error: "id is missing" };
 
     const eventData: AlbyEventBudgetUpdateDetails = {
-      type: "update",
+      type: AlbyEventBudgetType.UPDATE,
       allowanceId: allowance.id,
       event: AlbyEventType.BUDGET,
     };

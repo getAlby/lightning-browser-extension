@@ -56,7 +56,7 @@ const utils = {
       response: data.response,
       details: data.details,
       paymentRequestDetails: data.paymentRequestDetails,
-      origin: message.origin as OriginData, // should be refatciored when removing default 'Message"-type above
+      origin: message.origin as OriginData, // should be refactored when removing default 'Message"-type above
       event: AlbyEventType.TRANSACTION,
     };
     PubSub.publish(`ln.sendPayment.${status}`, paymentData);
