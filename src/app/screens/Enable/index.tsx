@@ -49,11 +49,7 @@ function Enable(props: Props) {
       domain: props.origin.domain,
       host: props.origin.host,
     });
-    msg.error(
-      `User added site to blocklist domain, host
-        ${props.origin.domain},
-        ${props.origin.host}`
-    );
+    msg.error(USER_REJECTED_ERROR);
   }
 
   useEffect(() => {

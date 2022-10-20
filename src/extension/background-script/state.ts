@@ -10,6 +10,7 @@ import type { Account, Accounts, SettingsStorage } from "~/types";
 
 import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
+import Nostr from "./nostr";
 
 interface State {
   account: Account | null;
@@ -17,8 +18,11 @@ interface State {
   migrations: Migration[] | null;
   connector: Connector | null;
   currentAccountId: string | null;
+  nostrPrivateKey: string | null;
+  nostr: Nostr | null;
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
+  getNostr: () => Nostr;
   init: () => Promise<void>;
   isUnlocked: () => boolean;
   lock: () => Promise<void>;
@@ -33,6 +37,7 @@ interface BrowserStorage {
   accounts: Accounts;
   currentAccountId: string | null;
   migrations: Migration[] | null;
+  nostrPrivateKey: string | null;
 }
 
 export const DEFAULT_SETTINGS: SettingsStorage = {
@@ -48,6 +53,7 @@ export const DEFAULT_SETTINGS: SettingsStorage = {
   currency: CURRENCIES.USD,
   exchange: "alby",
   debug: false,
+  nostrEnabled: false,
 };
 
 // these keys get synced from the state to the browser storage
@@ -57,6 +63,7 @@ const browserStorageDefaults: BrowserStorage = {
   accounts: {},
   currentAccountId: null,
   migrations: [],
+  nostrPrivateKey: null,
 };
 
 const browserStorageKeys = Object.keys(browserStorageDefaults) as Array<
@@ -71,6 +78,8 @@ const state = createState<State>((set, get) => ({
   accounts: {},
   currentAccountId: null,
   password: null,
+  nostr: null,
+  nostrPrivateKey: null,
   getAccount: () => {
     const currentAccountId = get().currentAccountId as string;
     let account = null;
@@ -95,6 +104,16 @@ const state = createState<State>((set, get) => ({
     set({ connector: connector });
 
     return connector;
+  },
+  getNostr: () => {
+    if (get().nostr) {
+      return get().nostr as Nostr;
+    }
+
+    const nostr = new Nostr();
+    set({ nostr: nostr });
+
+    return nostr;
   },
   lock: async () => {
     const connector = get().connector;

@@ -13,6 +13,7 @@ import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
+import NostrConfirmGetPublicKey from "~/app/screens/Nostr/ConfirmGetPublicKey";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
@@ -62,9 +63,14 @@ function Prompt() {
               }
             />
             <Route
-              path="webln/enable"
+              path="public/webln/enable"
               element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
+            <Route
+              path="public/nostr/confirmGetPublicKey"
+              element={<NostrConfirmGetPublicKey />}
+            />
+
             <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
