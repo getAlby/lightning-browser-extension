@@ -3,18 +3,14 @@
  */
 import type { CURRENCIES } from "../constants";
 
-const satsToFiat = async (amount: number | string, rate: number) => {
-  return Number(amount) * rate;
-};
-
-const satoshisToFiat = async ({
+const satoshisToFiat = ({
   amountInSats,
   rate,
 }: {
   amountInSats: number | string;
   rate: number;
 }) => {
-  const fiat = await satsToFiat(amountInSats, rate);
+  const fiat = Number(amountInSats) * rate;
   return fiat;
 };
 
@@ -27,7 +23,7 @@ export const getFiatValue = async ({
   rate: number;
   currency: CURRENCIES;
 }) => {
-  const fiatValue = await satoshisToFiat({
+  const fiatValue = satoshisToFiat({
     amountInSats: amount,
     rate,
   });
