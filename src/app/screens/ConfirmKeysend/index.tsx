@@ -47,17 +47,19 @@ function ConfirmKeysend() {
   const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
-    if (showFiat && amount) {
-      const res = getFiatValue(amount);
-      setFiatAmount(res);
-    }
+    (async () => {
+      if (showFiat && amount) {
+        const res = await getFiatValue(amount);
+        setFiatAmount(res);
+      }
+    })();
   }, [amount, showFiat, getFiatValue]);
 
   useEffect(() => {
-    if (showFiat) {
-      const res = getFiatValue(budget);
+    (async () => {
+      const res = await getFiatValue(budget);
       setFiatBudgetAmount(res);
-    }
+    })();
   }, [budget, showFiat, getFiatValue]);
 
   async function confirm() {

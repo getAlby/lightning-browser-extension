@@ -13,7 +13,7 @@ interface SettingsContextType {
   settings: SettingsStorage;
   updateSetting: (setting: Setting) => void;
   isLoading: boolean;
-  getFiatValue: (amount: number | string) => string;
+  getFiatValue: (amount: number | string) => Promise<string>;
 }
 
 type Setting = Partial<SettingsStorage>;

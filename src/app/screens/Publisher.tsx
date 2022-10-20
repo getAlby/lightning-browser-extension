@@ -83,9 +83,9 @@ function Publisher() {
             ),
           };
         });
-        for (const payment of payments) {
+        for await (const payment of payments) {
           const totalAmountFiat = settings.showFiat
-            ? getFiatValue(payment.totalAmount)
+            ? await getFiatValue(payment.totalAmount)
             : "";
           payment.totalAmountFiat = totalAmountFiat;
         }
