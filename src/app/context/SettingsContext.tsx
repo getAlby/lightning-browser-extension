@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { getTheme } from "~/app/utils";
 import { CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
-import { getFiatValue as getFiatValueFunc } from "~/common/utils/currencyConvert";
+import { getFiatValue as getFiatValueUtil } from "~/common/utils/currencyConvert";
 import { DEFAULT_SETTINGS } from "~/extension/background-script/state";
 import type { SettingsStorage } from "~/types";
 
@@ -76,14 +76,24 @@ export const SettingsProvider = ({
   };
 
   const getFiatValue = async (amount: number | string) => {
-    const rate = await getCurrencyRate();
-    const value = await getFiatValueFunc({
-      amount,
-      rate,
-      currency: settings.currency,
-    });
+    try {
+      const rate = await getCurrencyRate();
+      const value = getFiatValueUtil({
+        amount,
+        rate,
+        currency: settings.currency,
+      });
 
-    return value;
+      return value;
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error)
+        toast.error(
+          `SettingsProvider: getFiatValue with currency ${settings.currency} failed. (${e.message})`
+        );
+
+      return "Error";
+    }
   };
 
   // update locale on every change
