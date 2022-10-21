@@ -9,9 +9,11 @@ class Nostr {
   getPrivateKey() {
     const password = state.getState().password as string;
     const encryptedKey = state.getState().nostrPrivateKey as string;
-    const key = decryptData(encryptedKey, password);
+    if (encryptedKey) {
+      return decryptData(encryptedKey, password);
+    }
 
-    return key;
+    return null;
   }
 
   getPublicKey() {
