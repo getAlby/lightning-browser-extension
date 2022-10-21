@@ -92,7 +92,7 @@ export const SettingsProvider = ({
           `SettingsProvider: getFiatValue with currency ${settings.currency} failed. (${e.message})`
         );
 
-      return "Error";
+      return "Fiat Error";
     }
   };
 
