@@ -52,7 +52,7 @@
     "dayjs": "^1.11.5",
     "dexie": "^3.2.2",
     "elliptic": "^6.5.4",
-    "html5-qrcode": "^2.2.1",
+    "html5-qrcode": "^2.2.3",
     "i18next": "^21.10.0",
     "i18next-browser-languagedetector": "^6.1.8",
     "lodash": "^4.17.21",
