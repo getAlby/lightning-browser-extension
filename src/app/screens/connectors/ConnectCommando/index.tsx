@@ -16,6 +16,8 @@ export default function ConnectCommando() {
     host: "",
     pubkey: "",
     rune: "",
+    port: 9735,
+    proxy: "wss://lnwsproxy.regtest.getalby.com",
   });
   const [loading, setLoading] = useState(false);
 
@@ -36,12 +38,16 @@ export default function ConnectCommando() {
     const host = formData.host;
     const pubkey = formData.pubkey;
     const rune = formData.rune;
+    const port = formData.port;
+    const wsProxy = formData.proxy;
     const account = {
       name: "commando",
       config: {
         host,
         pubkey,
         rune,
+        port,
+        wsProxy,
       },
       connector: getConnectorType(),
     };
@@ -123,6 +129,29 @@ export default function ConnectCommando() {
           placeholder="rune"
           title="rune"
           value={formData.rune}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="mb-6">
+        <TextField
+          id="port"
+          label={t("port.label")}
+          type="number"
+          required
+          title="port"
+          value={formData.port}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="mb-6">
+        <TextField
+          id="proxy"
+          label={t("proxy.label")}
+          type="string"
+          placeholder="proxy"
+          required
+          title="proxy"
+          value={formData.proxy}
           onChange={handleChange}
         />
       </div>
