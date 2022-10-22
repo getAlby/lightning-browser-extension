@@ -461,6 +461,17 @@
       "browser_notifications": {
         "subtitle": "Exibe no navegador notificações da Alby relacionadas a pagamentos e autenticação.",
         "title": "Notificações do navegador"
+      },
+      "nostr": {
+        "title": "Nostr",
+        "private_key": {
+          "subtitle": "Ao gerar uma chave uma nova chave será criada com base na conta atual que você usa. Certifique-se de fazer backup desta chave privada.",
+          "warning": "Isso excluirá sua chave privada antiga. Tem certeza de que deseja prosseguir?",
+          "title": "Chave privada",
+          "generate": "Gerar",
+          "success": "A chave privada foi encriptada e salva com sucesso."
+        },
+        "hint": "é um protocolo simples e aberto que visa criar redes sociais resistentes à censura. Os perfis na rede Nostr são chaves criptográficas. Para publicar algo, você assina com sua chave e a informação é enviada para servidores. Na Alby você pode gerenciar seu perfil e usar em diferentes serviços que suportam esse recurso."
       }
     },
     "send": {
@@ -558,7 +569,7 @@
     },
     "confirm_payment": {
       "title": "Aprovar pagamento",
-      "success": "Pagamento de {{amount}} bem-sucedido!",
+      "success": "Pagamento de {{amount}} realizado com sucesso!",
       "actions": {
         "pay_now": "Pague agora"
       }
@@ -582,7 +593,7 @@
       "amount": {
         "label": "Quantia"
       },
-      "success": "{{amount}} solicitados com sucesso de {{sender}}"
+      "success": "{{amount}} recebidos com sucesso de {{sender}}"
     },
     "lnurlchannel": {
       "success": "Solicitação de canal de pagamento enviada com sucesso",
@@ -600,6 +611,12 @@
       "amount": {
         "label": "Quantia (Satoshi)"
       }
+    },
+    "nostr": {
+      "allow": "Permitir {{host}}:",
+      "block_and_ignore": "Bloquear e ignorar {{host}}",
+      "read_public_key": "Ler sua chave pública",
+      "title": "Nostr"
     }
   },
   "common": {
