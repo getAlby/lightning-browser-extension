@@ -89,7 +89,7 @@ export default function ConnectCommando() {
   return (
     <ConnectorForm
       title={t("page.title")}
-      description={t("page.description")}
+      description={t("page.instructions")}
       submitLoading={loading}
       submitDisabled={
         formData.host === "" && formData.pubkey === "" && formData.rune === ""
@@ -102,7 +102,7 @@ export default function ConnectCommando() {
           label={t("host.label")}
           type="text"
           required
-          placeholder="host"
+          placeholder="0.0.0.0"
           title="host"
           value={formData.host}
           onChange={handleChange}
@@ -114,7 +114,7 @@ export default function ConnectCommando() {
           label={t("pubkey.label")}
           type="text"
           required
-          placeholder="pubkey"
+          placeholder="02...."
           title="pubkey"
           value={formData.pubkey}
           onChange={handleChange}
@@ -126,7 +126,7 @@ export default function ConnectCommando() {
           label={t("rune.label")}
           type="text"
           required
-          placeholder="rune"
+          placeholder=""
           title="rune"
           value={formData.rune}
           onChange={handleChange}
