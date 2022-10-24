@@ -89,14 +89,12 @@ export default class Commando implements Connector {
       wsProxy: this.config.wsProxy || "wss://lnwsproxy.regtest.getalby.com",
       ip: this.config.host,
       port: this.config.port || 9735,
+      privateKey: this.config.privateKey,
       // logger: {
       //   info: console.log,
       //   warn: console.warn,
       //   error: console.error
       // },
-      privateKey:
-        this.config.privateKey ||
-        "d6a2eba36168cc31e97396a781a4dd46dd3648c001d3f4fde221d256e41715ea",
     });
   }
 

@@ -1,6 +1,11 @@
+import {
+  HiddenIcon,
+  VisibleIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
+import * as secp256k1 from "@noble/secp256k1";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -17,9 +22,12 @@ export default function ConnectCommando() {
     pubkey: "",
     rune: "",
     port: 9735,
-    proxy: "wss://lnwsproxy.regtest.getalby.com",
+    privateKey: generateCommandoPrivateKey(),
+    proxy: "wss://lnproxy.getalby.com",
   });
   const [loading, setLoading] = useState(false);
+  const [commandoPrivateKeyVisible, setCommandoPrivateKeyVisible] =
+    useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -32,6 +40,11 @@ export default function ConnectCommando() {
     return "commando";
   }
 
+  function generateCommandoPrivateKey(): string {
+    const privKey = secp256k1.utils.randomPrivateKey();
+    return secp256k1.utils.bytesToHex(privKey);
+  }
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
@@ -40,6 +53,7 @@ export default function ConnectCommando() {
     const rune = formData.rune;
     const port = formData.port;
     const wsProxy = formData.proxy;
+    const privateKey = formData.privateKey;
     const account = {
       name: "commando",
       config: {
@@ -48,6 +62,7 @@ export default function ConnectCommando() {
         rune,
         port,
         wsProxy,
+        privateKey,
       },
       connector: getConnectorType(),
     };
@@ -147,12 +162,36 @@ export default function ConnectCommando() {
         <TextField
           id="proxy"
           label={t("proxy.label")}
-          type="string"
+          type="text"
           placeholder="proxy"
           required
           title="proxy"
           value={formData.proxy}
           onChange={handleChange}
+        />
+      </div>
+      <div className="mb-6">
+        <TextField
+          id="commandoPrivateKey"
+          label={"privKey.label"}
+          type={commandoPrivateKeyVisible ? "text" : "password"}
+          value={formData.privateKey}
+          endAdornment={
+            <button
+              type="button"
+              tabIndex={-1}
+              className="flex justify-center items-center w-10 h-8"
+              onClick={() => {
+                setCommandoPrivateKeyVisible(!commandoPrivateKeyVisible);
+              }}
+            >
+              {commandoPrivateKeyVisible ? (
+                <HiddenIcon className="h-6 w-6" />
+              ) : (
+                <VisibleIcon className="h-6 w-6" />
+              )}
+            </button>
+          }
         />
       </div>
     </ConnectorForm>
