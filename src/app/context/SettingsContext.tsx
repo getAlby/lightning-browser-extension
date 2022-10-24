@@ -87,12 +87,8 @@ export const SettingsProvider = ({
       return value;
     } catch (e) {
       console.error(e);
-      if (e instanceof Error)
-        toast.error(
-          `SettingsProvider: getFiatValue with currency ${settings.currency} failed. (${e.message})`
-        );
 
-      return "Fiat Error";
+      return "??"; // show the user that something went wrong
     }
   };
 
