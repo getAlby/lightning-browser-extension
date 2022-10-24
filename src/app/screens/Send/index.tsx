@@ -170,9 +170,10 @@ function Send() {
             <TextField
               id="invoice"
               label={t("input.label")}
-              placeholder={t("input.placeholder")}
+              hint={t("input.hint")}
               value={invoice}
               disabled={loading}
+              autoFocus
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 setInvoice(
                   event.target.value.trim().replace(/^lightning:/i, "")

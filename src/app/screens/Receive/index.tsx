@@ -63,10 +63,8 @@ function Receive() {
 
   useEffect(() => {
     if (formData.amount !== "" && showFiat) {
-      (async () => {
-        const res = await getFiatValue(formData.amount);
-        setFiatAmount(res);
-      })();
+      const res = getFiatValue(formData.amount);
+      setFiatAmount(res);
     }
   }, [formData, showFiat, getFiatValue]);
 
@@ -221,6 +219,7 @@ function Receive() {
                     placeholder={t("amount.placeholder")}
                     fiatValue={fiatAmount}
                     onChange={handleChange}
+                    autoFocus
                   />
                 </div>
 

@@ -1,15 +1,15 @@
-import { MouseEventHandler } from "react";
+import { useRef, useEffect } from "react";
+import type { MouseEventHandler } from "react";
 import { useTranslation } from "react-i18next";
+import Button from "~/app/components/Button";
 import i18n from "~/i18n/i18nConfig";
 import { commonI18nNamespace } from "~/i18n/namespaces";
-
-import Button from "../Button";
 
 export type Props = {
   disabled?: boolean;
   loading?: boolean;
   label?: string;
-  onConfirm: MouseEventHandler;
+  onConfirm?: MouseEventHandler;
   onCancel: MouseEventHandler;
 };
 
@@ -21,6 +21,11 @@ export default function ConfirmOrCancel({
   onCancel,
 }: Props) {
   const { t: tCommon } = useTranslation("common");
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    buttonRef?.current?.focus();
+  }, []);
 
   return (
     <div className="pt-2 pb-4">
@@ -29,8 +34,11 @@ export default function ConfirmOrCancel({
           onClick={onCancel}
           label={tCommon("actions.cancel")}
           halfWidth
+          disabled={loading}
         />
         <Button
+          type="submit"
+          ref={buttonRef}
           onClick={onConfirm}
           label={label}
           primary

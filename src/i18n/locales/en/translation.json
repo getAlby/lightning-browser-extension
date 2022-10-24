@@ -401,7 +401,7 @@
       },
       "lnurl_auth": {
         "title": "LNURL-Auth",
-        "hint": "is a generic authentication protocol. It authenticates the user using digital signatures. The protocol does not require any other identifying information such as passwords, emails, usernames, or similar. With Alby you can use your lightning accounts to securely login to websites. <br /> To be compatible with other wallets we had to make a few changes that you can configure here. <br /> <strong>Ideally all those options are OFF.</strong> Use them only if you have old accounts.",
+        "hint": "is a generic authentication protocol. It authenticates the user using digital signatures. The protocol does not require any other identifying information such as passwords, emails, usernames, or similar. With Alby you can use your lightning accounts to securely login to websites. To be compatible with other wallets we had to make a few changes that you can configure here. <0>Ideally all those options are OFF.</0> Use them only if you have old accounts.",
         "legacy_lnurl_auth_202207": {
           "title": "Legacy LNURL-Auth",
           "subtitle": "The key generation for LNURL-auth has changed (July 2022). Alby was not compatible with other implementations. This was changed, but now different login keys are used. If you used LNURL-auth to login before you can still enable the old method. This option will be removed later, make sure to switch to the new login."
@@ -473,6 +473,17 @@
           "mismatched_password": "Passwords don't match."
         },
         "success": "Password changed successfully"
+      },
+      "nostr": {
+        "title": "Nostr",
+        "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
+        "private_key": {
+          "title": "Private key",
+          "subtitle": "Generating a key will create a new key based on the current account you use. Please make sure you backup this private key.",
+          "generate": "Generate",
+          "warning": "This will delete your old private key. Are you sure?",
+          "success": "Private key encrypted & saved successfully."
+        }
       }
     },
     "send": {
@@ -481,12 +492,11 @@
         "title": "Waiting to scan"
       },
       "input": {
-        "label": "Invoice, Lightning Address or LNURL",
-        "placeholder": "Paste invoice, lnurl or lightning address"
+        "label": "Recipient",
+        "hint": "Invoice, Lightning Address or LNURL"
       }
     },
     "lnurlpay": {
-      "were_sent_to": "were sent to",
       "amount": {
         "label": "Amount"
       },
@@ -507,7 +517,7 @@
         "heading": "Do you want to login to"
       },
       "submit": "Login",
-      "success": "Authenticated successfully",
+      "success": "Login successful on {{name}}",
       "errors": {
         "status": "Error: Auth status is not ok"
       }
@@ -527,7 +537,7 @@
       "amount": {
         "label": "Amount"
       },
-      "success": "Withdraw request sent successfully"
+      "success": "Withdraw request of {{amount}} sent successfully to {{sender}}"
     },
     "receive": {
       "title": "Receive",
@@ -609,10 +619,16 @@
     },
     "confirm_payment": {
       "title": "Approve Payment",
-      "success": "Payment sent!",
+      "success": "Payment of {{amount}} successful!",
       "actions": {
         "pay_now": "Pay now"
       }
+    },
+    "nostr": {
+      "title": "Nostr",
+      "allow": "Allow {{host}} to:",
+      "read_public_key": "Read your public key",
+      "block_and_ignore": "Block and ignore {{host}}"
     }
   },
   "common": {
@@ -629,7 +645,9 @@
     "copied": "Copied!",
     "description": "Description",
     "description_full": "Full Description",
+    "were_sent_to": "were sent to",
     "message": "Message",
+    "help": "Help",
     "actions": {
       "back": "Back",
       "delete": "Delete",

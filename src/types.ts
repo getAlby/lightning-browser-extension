@@ -7,6 +7,8 @@ import {
   WebLNNode,
 } from "~/extension/background-script/connectors/connector.interface";
 
+import { Event } from "./extension/ln/nostr/types";
+
 export type ConnectorType = keyof typeof connectors;
 
 export interface Account {
@@ -315,6 +317,25 @@ export interface MessageCurrencyRateGet extends MessageDefault {
   action: "getCurrencyRate";
 }
 
+export interface MessagePublicKeyGet extends MessageDefault {
+  action: "getPublicKeyOrPrompt";
+}
+
+export interface MessagePrivateKeySet extends MessageDefault {
+  args: {
+    privateKey: string;
+  };
+  action: "setPrivateKey";
+}
+
+export interface MessageSignEvent extends MessageDefault {
+  args: {
+    event: Event;
+    message: string;
+  };
+  action: "signEvent";
+}
+
 export interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node
@@ -524,6 +545,7 @@ export interface SettingsStorage {
   currency: CURRENCIES;
   exchange: SupportedExchanges;
   debug: boolean;
+  nostrEnabled: boolean;
 }
 
 export interface Badge {

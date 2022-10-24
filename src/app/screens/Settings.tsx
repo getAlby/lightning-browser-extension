@@ -1,4 +1,8 @@
-import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import {
+  CrossIcon,
+  HiddenIcon,
+  VisibleIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
@@ -6,10 +10,11 @@ import PasswordForm from "@components/PasswordForm";
 import Setting from "@components/Setting";
 import Input from "@components/form/Input";
 import Select from "@components/form/Select";
+import TextField from "@components/form/TextField";
 import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
 import type { FormEvent } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
@@ -29,11 +34,43 @@ function Settings() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
 
+  const [nostrPrivateKey, setNostrPrivateKey] = useState("");
+  const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
+
+  const getPrivateKeyFromStorage = async () => {
+    const priv = (await utils.call("nostr/getPrivateKey")) as string;
+    setNostrPrivateKey(priv ?? "");
+  };
+
+  useEffect(() => {
+    getPrivateKeyFromStorage().catch(console.error);
+  }, []);
+
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
 
   function closeModal() {
     setModalIsOpen(false);
+  }
+
+  async function saveNostrPrivateKey(nostrPrivateKey: string) {
+    const result = await utils.call("nostr/getPrivateKey");
+    const currentPrivateKey = result as unknown as string;
+
+    if (nostrPrivateKey === currentPrivateKey) return;
+
+    if (currentPrivateKey && !confirm(t("nostr.private_key.warning"))) {
+      return;
+    }
+
+    await utils.call("nostr/setPrivateKey", {
+      privateKey: nostrPrivateKey,
+    });
+
+    saveSetting({
+      nostrEnabled: !!nostrPrivateKey,
+    });
+    toast.success(t("nostr.private_key.success"));
   }
 
   async function updateAccountPassword(password: string) {
@@ -333,7 +370,6 @@ function Settings() {
       <h2 className="mt-12 text-2xl font-bold dark:text-white">
         {t("lnurl_auth.title")}
       </h2>
-
       <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
         <a
           href="https://lightninglogin.live/learn"
@@ -343,9 +379,13 @@ function Settings() {
         >
           {t("lnurl_auth.title")}
         </a>{" "}
-        {t("lnurl_auth.hint")}
+        <Trans
+          i18nKey={"lnurl_auth.hint"}
+          t={t}
+          // eslint-disable-next-line react/jsx-key
+          components={[<strong></strong>]}
+        />
       </p>
-
       <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting
           title={t("lnurl_auth.legacy_lnurl_auth_202207.title")}
@@ -378,6 +418,76 @@ function Settings() {
               }}
             />
           )}
+        </Setting>
+      </div>
+      <div className="relative flex py-5 mt-5 items-center">
+        <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+        <span className="flex-shrink mx-4 text-gray-500 dark:text-gray-400 fw-bold">
+          🧪 Alby Lab
+        </span>
+        <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+      </div>
+      <h2 className="text-2xl font-bold dark:text-white">{t("nostr.title")}</h2>
+      <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
+        <a
+          href="https://github.com/nostr-protocol/nostr"
+          target="_blank"
+          rel="noreferrer"
+          className="underline"
+        >
+          {t("nostr.title")}
+        </a>{" "}
+        {t("nostr.hint")}
+      </p>
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+        <Setting
+          title={t("nostr.private_key.title")}
+          subtitle={t("nostr.private_key.subtitle")}
+        >
+          <div className="w-96 flex justify-end">
+            <div className="w-96 flex-auto -mt-1">
+              <TextField
+                id="nostrPrivateKey"
+                label={""}
+                type={nostrPrivateKeyVisible ? "text" : "password"}
+                value={nostrPrivateKey}
+                onBlur={() => {
+                  saveNostrPrivateKey(nostrPrivateKey);
+                }}
+                onChange={(event) => {
+                  setNostrPrivateKey(event.target.value);
+                }}
+                endAdornment={
+                  <button
+                    type="button"
+                    tabIndex={-1}
+                    className="flex justify-center items-center w-10 h-8"
+                    onClick={() => {
+                      setNostrPrivateKeyVisible(!nostrPrivateKeyVisible);
+                    }}
+                  >
+                    {nostrPrivateKeyVisible ? (
+                      <HiddenIcon className="h-6 w-6" />
+                    ) : (
+                      <VisibleIcon className="h-6 w-6" />
+                    )}
+                  </button>
+                }
+              />
+            </div>
+            {!nostrPrivateKey && (
+              <div className="flex-none ml-2 flex-end">
+                <Button
+                  label={t("nostr.private_key.generate")}
+                  onClick={async () => {
+                    const result = await utils.call("nostr/generatePrivateKey");
+                    setNostrPrivateKey(result.privateKey as string);
+                    saveNostrPrivateKey(result.privateKey as string);
+                  }}
+                />
+              </div>
+            )}
+          </div>
         </Setting>
       </div>
     </Container>

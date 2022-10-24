@@ -30,7 +30,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   const showFiat = !isLoadingSettings && settings.showFiat;
 
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [budget, setBudget] = useState("0");
+  const [budget, setBudget] = useState("");
   const [lnurlAuth, setLnurlAuth] = useState(false);
   const [fiatAmount, setFiatAmount] = useState("");
   const { t } = useTranslation("components", { keyPrefix: "allowance_menu" });
@@ -38,10 +38,8 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
 
   useEffect(() => {
     if (budget !== "" && showFiat) {
-      (async () => {
-        const res = await getFiatValue(budget);
-        setFiatAmount(res);
-      })();
+      const res = getFiatValue(budget);
+      setFiatAmount(res);
     }
   }, [budget, showFiat, getFiatValue]);
 

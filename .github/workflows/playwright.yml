@@ -13,22 +13,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-node@v3
         env:
           PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
         with:
-          node-version: "14.x"
-          args: install
+          node-version: "14"
 
-      - name: Install dependencies
-        uses: borales/actions-yarn@v3.0.0
-        with:
-          cmd: install # will run `yarn install` command
+      - run: yarn install --frozen-lockfile
 
-      - name: Build
-        uses: borales/actions-yarn@v3.0.0
-        with:
-          cmd: build:chrome # will run `yarn build` command
+      - run: yarn build:chrome
 
       - name: Test Code
         uses: mujo-code/puppeteer-headful@v2

@@ -114,14 +114,14 @@ describe("LNURLWithdraw", () => {
   });
 
   test("show error-reason on error-status", async () => {
-    (useNavigationState as jest.Mock).mockReturnValueOnce({
+    (useNavigationState as jest.Mock).mockReturnValue({
       origin: mockOrigin,
       args: {
         lnurlDetails: mockDetailsLnBits,
       },
     });
 
-    (makeInvoice as jest.Mock).mockReturnValueOnce({
+    (makeInvoice as jest.Mock).mockReturnValue({
       invoice: {
         paymentRequest:
           "lnbc100n1p3s975dpp508vpywcj857rxc78mrwpurhulzxe7slkdqdxsjzyrs3wv9jvsaksdqdwehh2cmgv4e8xcqzpgxqyz5vqsp5vpdqeutqqrwn4eq62a6agmnp3t7rru0asfgy23kcsr6k0tftfxfs9qyyssqf8zxtm0hm5veepjk4kz2ejegkg9449k4e9g5jz25mne096x6k4ajav0afdyx4uw883nv5jdy95w4ltfrfs4hes83j7zh50ygl8w3xxcqf0nhz8",

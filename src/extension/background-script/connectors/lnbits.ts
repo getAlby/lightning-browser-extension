@@ -96,7 +96,7 @@ class LnBits implements Connector {
         data: {
           checking_id: string;
           pending: boolean;
-          amount: string;
+          amount: number;
           fee: number;
           memo: string;
           time: number;
@@ -108,19 +108,20 @@ class LnBits implements Connector {
           webhook_status: string;
         }[]
       ) => {
-        const invoices: ConnectorInvoice[] = data.map(
-          (invoice, index): ConnectorInvoice => {
+        const invoices: ConnectorInvoice[] = data
+          .filter((invoice) => invoice.amount > 0)
+          .map((invoice, index): ConnectorInvoice => {
             return {
               id: `${invoice.checking_id}-${index}`,
               memo: invoice.memo,
               preimage: invoice.preimage,
               settled: !invoice.pending,
               settleDate: invoice.time * 1000,
-              totalAmount: `${parseInt(invoice.amount) / 1000}`,
+              totalAmount: `${invoice.amount / 1000}`,
               type: "received",
             };
-          }
-        );
+          });
+
         return {
           data: {
             invoices,
@@ -137,8 +138,7 @@ class LnBits implements Connector {
       this.config.adminkey,
       undefined
     ).then((data) => {
-      // TODO better amount handling
-      const balanceInSats = data.balance / 1000;
+      const balanceInSats = Math.floor(data.balance / 1000);
       return {
         data: {
           balance: balanceInSats,

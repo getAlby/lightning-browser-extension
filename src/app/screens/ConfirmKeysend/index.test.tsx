@@ -13,10 +13,10 @@ jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
   updateSetting: jest.fn(),
   getFiatValue: jest
     .fn()
-    .mockImplementationOnce(() => Promise.resolve("$0.00"))
-    .mockImplementationOnce(() => Promise.resolve("$0.00"))
-    .mockImplementationOnce(() => Promise.resolve("$0.01"))
-    .mockImplementationOnce(() => Promise.resolve("$0.05")),
+    .mockImplementationOnce(() => "$0.00")
+    .mockImplementationOnce(() => "$0.00")
+    .mockImplementationOnce(() => "$0.01")
+    .mockImplementationOnce(() => "$0.05"),
 });
 
 const mockOrigin: OriginData = {
