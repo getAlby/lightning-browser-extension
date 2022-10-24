@@ -7,8 +7,8 @@ import type {
   OriginData,
   OriginDataInternal,
   PaymentNotificationData,
-  AlbyEventType,
 } from "~/types";
+import { AlbyEventType } from "~/types";
 
 const utils = {
   base64ToHex: (str: string) => {
