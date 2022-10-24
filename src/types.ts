@@ -57,6 +57,7 @@ export interface OriginData {
   icon: string;
   metaData: MetaData;
   external: boolean;
+  notify?: boolean;
 }
 
 export interface PaymentNotificationData {
