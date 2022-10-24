@@ -137,9 +137,13 @@ function Keysend() {
             message={
               !destination
                 ? successMessage
-                : `${amount} SATS ${
-                    showFiat ? `(${fiatAmount})` : ``
-                  } ${tCommon("were_sent_to")} ${destination}`
+                : tCommon("success_message", {
+                    amount: `${amount} ${tCommon("sats", {
+                      count: parseInt(amount),
+                    })}`,
+                    fiatAmount: showFiat ? ` (${fiatAmount})` : ``,
+                    destination,
+                  })
             }
           />
           <div className="my-4">

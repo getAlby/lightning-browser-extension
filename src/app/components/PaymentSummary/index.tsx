@@ -19,7 +19,7 @@ const PaymentSummary: FC<Props> = ({
     <dl className="mb-0">
       <dt className="font-medium dark:text-white">{tCommon("amount")}</dt>
       <dd className="text-gray-500 dark:text-neutral-400">
-        {amount} sats
+        {amount} {tCommon("sats", { count: amount as number })}
         {!!fiatAmount && (
           <span className="text-gray-400" data-testid="fiat_amount">
             {" "}

@@ -99,7 +99,9 @@ function LNURLWithdraw() {
         <>
           <ContentMessage
             heading={t("content_message.heading")}
-            content={`${minWithdrawable / 1000} sats`}
+            content={`${minWithdrawable / 1000} ${tCommon("sats", {
+              count: minWithdrawable / 1000,
+            })}`}
           />
 
           {errorMessage && <p className="mt-1 text-red-500">{errorMessage}</p>}

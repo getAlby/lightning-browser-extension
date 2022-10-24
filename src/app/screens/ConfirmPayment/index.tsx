@@ -86,9 +86,9 @@ function ConfirmPayment() {
       msg.reply(response);
       setSuccessMessage(
         t("success", {
-          amount: `${invoice.satoshis} SATS${
-            showFiat ? ` (${fiatAmount})` : ``
-          }`,
+          amount: `${invoice.satoshis} ${tCommon("sats", {
+            count: invoice.satoshis as number,
+          })}${showFiat ? ` (${fiatAmount})` : ``}`,
         })
       );
     } catch (e) {
@@ -172,9 +172,13 @@ function ConfirmPayment() {
             message={
               !navState.origin
                 ? successMessage
-                : `${invoice.satoshis} SATS ${
-                    showFiat ? `(${fiatAmount})` : ``
-                  } ${tCommon("were_sent_to")} ${navState.origin.name}`
+                : tCommon("success_message", {
+                    amount: `${invoice.satoshis} ${tCommon("sats", {
+                      count: invoice.satoshis as number,
+                    })}`,
+                    fiatAmount: showFiat ? ` (${fiatAmount})` : ``,
+                    destination: navState.origin.name,
+                  })
             }
           />
           <div className="my-4">

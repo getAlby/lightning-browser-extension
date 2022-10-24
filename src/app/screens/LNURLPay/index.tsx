@@ -304,11 +304,13 @@ function LNURLPay() {
         <div>
           <ResultCard
             isSuccess
-            message={`${valueSat} SATS ${
-              showFiat ? "(" + fiatValue + ")" : ""
-            } ${tCommon("were_sent_to")} ${
-              navState.origin?.name || getRecipient()
-            }`}
+            message={tCommon("success_message", {
+              amount: `${valueSat} ${tCommon("sats", {
+                count: parseInt(valueSat),
+              })}`,
+              fiatAmount: showFiat ? ` (${fiatValue})` : ``,
+              destination: navState.origin?.name || getRecipient(),
+            })}
           />
           {isMessage && (
             <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
@@ -365,7 +367,8 @@ function LNURLPay() {
                             <>
                               <Dt>{t("amount.label")}</Dt>
                               <Dd>{`${+details.minSendable / 1000} ${tCommon(
-                                "sats"
+                                "sats",
+                                { count: details.minSendable / 1000 }
                               )}`}</Dd>
                             </>
                           )}

@@ -20,4 +20,5 @@ export const getFiatValue = ({
   });
 };
 
-export const getSatValue = (balance: number) => `${balance} sats`;
+export const getSatValue = (balance: number) =>
+  `${balance} sat${balance != 1 ? "s" : ""}`;

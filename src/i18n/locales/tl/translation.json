@@ -594,7 +594,8 @@
     "error": "",
     "settings": "",
     "websites": "",
-    "sats": "",
+    "sats_one": "sat",
+    "sats_other": "sats",
     "loading": "",
     "amount": "",
     "optional": "",
@@ -602,7 +603,6 @@
     "copied": "",
     "description": "",
     "description_full": "",
-    "were_sent_to": "",
     "message": "",
     "help": "",
     "actions": {
