@@ -94,7 +94,6 @@ const AllowanceView: FC<Props> = (props) => {
       <div className="mx-4">
         <PublisherCard
           title={props.allowance.name}
-          description={""}
           image={props.allowance.imageURL}
           isCard={true}
           isSmall={false}
