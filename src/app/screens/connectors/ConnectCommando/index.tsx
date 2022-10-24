@@ -173,7 +173,7 @@ export default function ConnectCommando() {
       <div className="mb-6">
         <TextField
           id="commandoPrivateKey"
-          label={"privKey.label"}
+          label={t("privKey.label")}
           type={commandoPrivateKeyVisible ? "text" : "password"}
           value={formData.privateKey}
           endAdornment={

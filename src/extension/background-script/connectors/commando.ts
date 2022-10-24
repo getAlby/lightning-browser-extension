@@ -228,13 +228,17 @@ export default class Commando implements Connector {
     for (const key in args.customRecords) {
       records_hex[key] = UTF8.parse(args.customRecords[key]).toString(Hex);
     }
+    const boostagram: { [key: string]: string } = {};
+    for (const key in args.customRecords) {
+      boostagram[key] = UTF8.parse(args.customRecords[key]).toString(Hex);
+    }
     return this.ln
       .commando({
         method: "keysend",
         params: {
           destination: args.pubkey,
           msatoshi: args.amount * 1000,
-          extratlvs: args.customRecords,
+          extratlvs: boostagram,
         },
         rune: this.config.rune,
       })
