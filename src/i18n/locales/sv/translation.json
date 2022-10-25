@@ -260,7 +260,7 @@
                 },
                 "jwt": {
                     "label": "Fyll i din JWT-token",
-                    "info": ""
+                    "info": "Inloggning till {{label}} uppdateras. Om du är avancerad användare kan du hämta din JWT token genom att logga in via <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/> JWT ser ut som följer: <2>eyJhbG...</2><1/><1/>"
                 },
                 "actions": {
                     "login": "Logga in",
@@ -279,7 +279,7 @@
                 "description": "Anslut din BTCPay LND-nod",
                 "page": {
                     "title": "Anslut din BTCPay LND-nod",
-                    "instructions": ""
+                    "instructions": "Navigera till din BTCPayServer och logga in som administratör. Gå till Server Settings > Services > LND Rest - See information. Klicka på \"See QR Code information\" och kopiera QR-koddatan. Klistra in nedan:"
                 },
                 "config": {
                     "label": "Konfigurationsdata",
@@ -354,7 +354,7 @@
                 "part2": "Alby Support"
             },
             "unlock_error": {
-                "help": "",
+                "help": "Ditt konto är krypterat med ditt upplåsningslösenord. Om du har glömt ditt upplåsningslösenord behöver du nollställa och lägga till ditt Lightning-konto på nytt.",
                 "link": "Nollställ och skapa ett nytt konto"
             },
             "errors": {
@@ -607,133 +607,133 @@
     },
     "common": {
         "password": "Lösenord",
-        "success": "",
-        "error": "",
-        "settings": "",
-        "websites": "",
-        "sats": "",
-        "loading": "",
-        "amount": "",
-        "optional": "",
-        "feedback": "",
-        "copied": "",
-        "description": "",
-        "description_full": "",
-        "were_sent_to": "",
-        "message": "",
-        "help": "",
+        "success": "Genomfört",
+        "error": "Misslyckades",
+        "settings": "Inställningar",
+        "websites": "Webbplatser",
+        "sats": "sats",
+        "loading": "laddar",
+        "amount": "Belopp",
+        "optional": "Valfritt",
+        "feedback": "Återkoppling",
+        "copied": "Kopierad!",
+        "description": "Beskrivning",
+        "description_full": "Fullständig beskrivning",
+        "were_sent_to": "skickades till",
+        "message": "Meddelande",
+        "help": "Hjälp",
         "actions": {
-            "back": "",
-            "delete": "",
-            "edit": "",
-            "next": "",
-            "open": "",
-            "cancel": "",
-            "confirm": "",
-            "continue": "",
-            "connect": "",
-            "lock": "",
-            "unlock": "",
-            "send": "",
-            "save": "",
-            "receive": "",
-            "close": "",
-            "export": "",
-            "remove": "",
-            "copy": ""
+            "back": "Tillbaka",
+            "delete": "Radera",
+            "edit": "Redigera",
+            "next": "Nästa",
+            "open": "Öppna",
+            "cancel": "Avbryt",
+            "confirm": "Bekräfta",
+            "continue": "Fortsätt",
+            "connect": "Anslut",
+            "lock": "Lås",
+            "unlock": "Lås upp",
+            "send": "Skicka",
+            "save": "Spara",
+            "receive": "Tag emot",
+            "close": "Stäng",
+            "export": "Exportera",
+            "remove": "Tag bort",
+            "copy": "Kopiera"
         },
         "errors": {
-            "connection_failed": "",
-            "payment_failed": ""
+            "connection_failed": "Anslutning misslyckades",
+            "payment_failed": "Betalning misslyckades"
         }
     },
     "components": {
         "allowance_menu": {
-            "confirm_delete": "",
-            "hint": "",
+            "confirm_delete": "Är du säker på att du vill radera webbplatsen?",
+            "hint": "Detta nollställer nuvarande budget",
             "new_budget": {
-                "label": ""
+                "label": "Ny budget"
             },
             "enable_login": {
-                "title": "",
-                "subtitle": ""
+                "title": "Aktivera webbplatsinloggning",
+                "subtitle": "Logga in automatiskt utan bekräftelse när webbplatsen begär det."
             },
             "edit_allowance": {
-                "title": "",
-                "screen_reader": ""
+                "title": "Redigera Beloppsgräns",
+                "screen_reader": "Alternativ för Beloppsgräns"
             }
         },
         "qrcode_scanner": {
-            "title": "",
+            "title": "Skanna QR-kod",
             "actions": {
-                "start_scanning": "",
-                "stop_scanning": ""
+                "start_scanning": "Påbörja skanning",
+                "stop_scanning": "Avsluta skanning"
             },
             "errors": {
-                "allow_camera_access": ""
+                "allow_camera_access": "Tillåt kameraåtkomst under inställningar."
             }
         },
         "transactionsTable": {
-            "fee": "",
-            "preimage": "",
-            "received": "",
-            "sent": "",
+            "fee": "Avgift",
+            "preimage": "Förhandsvy",
+            "received": "Mottaget",
+            "sent": "Skickat",
             "boostagram": {
-                "sender": "",
-                "message": "",
-                "app": "",
-                "podcast": ""
+                "sender": "Avsändare",
+                "message": "Meddelande",
+                "app": "App",
+                "podcast": "Podcast"
             }
         },
         "confirm_or_cancel": {
-            "only_trusted": ""
+            "only_trusted": "Anslut endast till tillförlitliga webbplatser."
         },
         "budget_control": {
             "remember": {
-                "label": "",
-                "description": ""
+                "label": "Kom ihåg att ange en budget",
+                "description": "Du kan ange en beloppsgräns utan att behöva bekräfta betalningar förrän gränsen är uppnådd."
             },
             "budget": {
-                "label": ""
+                "label": "Budget"
             }
         },
         "companion_download_info": {
-            "description": "",
-            "download_here": "",
-            "using_tor": "",
-            "or": ""
+            "description": "Du försöker ansluta till en nod bakom Tor. Du behöver antingen ha Albys kompanjons-app installerad eller ha Tor i bakgrunden. (Om du är osäker rekommenderar vi Albys kompanjons-app.)",
+            "download_here": "Ladda ner Albys kompanjons-app här!",
+            "using_tor": "klicka här för att fortsätta använda Tor-webbläsaren",
+            "or": "Eller:"
         },
         "toasts": {
             "connection_error": {
-                "what_you_can_do": "",
-                "double_check": "",
-                "if_ssl_errors": "",
-                "visit_guides": ""
+                "what_you_can_do": "Du kan göra detta:",
+                "double_check": "Kontrollera dina anslutningsinställningar",
+                "if_ssl_errors": "och om det förekommer SSL-fel (t.ex. ERR_CERT_AUTHORITY_INVALID), klicka på \"advanced\" och fortsätt genom att godkänna certifikatet.",
+                "visit_guides": "Besök vår guide för ytterligare hjälp"
             },
             "login_failed": {
-                "password_reset": ""
+                "password_reset": "Glömt ditt lösenord? Klicka här"
             },
             "errors": {
-                "invalid_credentials": ""
+                "invalid_credentials": "Ogitligt lösenord. Kontrollera ditt lösenord, e-postadress och försök igen."
             }
         },
         "account_menu": {
-            "screen_reader": "",
-            "title": "",
+            "screen_reader": "Öppna droppmeny",
+            "title": "Växla konto",
             "options": {
                 "account": {
-                    "add": "",
-                    "manage": ""
+                    "add": "Lägg till nytt konto",
+                    "manage": "Hantera konton"
                 }
             }
         },
         "publishers_table": {
-            "payments": "",
-            "used": ""
+            "payments": "betalningar",
+            "used": "utnyttjat"
         },
         "badge": {
             "label": {
-                "active": ""
+                "active": "AKTIV"
             }
         }
     }
