@@ -12,12 +12,14 @@ import { FC, useState, useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
-import type { Allowance, Transaction } from "~/types";
+import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
+import type { Allowance, Transaction, Battery } from "~/types";
 
 dayjs.extend(relativeTime);
 
 type Props = {
   allowance: Allowance;
+  lnDataFromCurrentTab?: Battery[];
   onGoBack: () => void;
   onEditComplete: () => void;
   onDeleteComplete: () => void;
@@ -91,14 +93,18 @@ const AllowanceView: FC<Props> = (props) => {
           />
         }
       />
-      <div className="mx-4">
-        <PublisherCard
-          title={props.allowance.name}
-          image={props.allowance.imageURL}
-          isCard={true}
-          isSmall={false}
-        />
-      </div>
+      {props.lnDataFromCurrentTab?.length ? (
+        <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
+      ) : (
+        <div className="mx-4">
+          <PublisherCard
+            title={props.allowance.name}
+            image={props.allowance.imageURL}
+            isCard={true}
+            isSmall={false}
+          />
+        </div>
+      )}
       <div className="px-4 pb-5">
         <div className="flex justify-between items-center py-3">
           <dl className="mb-0">

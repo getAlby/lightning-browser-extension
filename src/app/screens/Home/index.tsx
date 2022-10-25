@@ -88,6 +88,7 @@ const Home: FC = () => {
     return (
       <AllowanceView
         allowance={allowance}
+        lnDataFromCurrentTab={lnData}
         onGoBack={() => setAllowance(null)}
         onEditComplete={loadAllowance}
         onDeleteComplete={() => setAllowance(null)}
