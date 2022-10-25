@@ -14,12 +14,11 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
+import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
 import type { Battery, Transaction } from "~/types";
-
-import { PublisherLnData } from "./PublisherLnData";
 
 dayjs.extend(relativeTime);
 
