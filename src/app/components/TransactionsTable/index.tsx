@@ -57,7 +57,7 @@ export default function TransactionsTable({ transactions }: Props) {
                             <a
                               target="_blank"
                               href={tx.publisherLink}
-                              rel="noreferrer"
+                              rel="noopener noreferrer"
                             >
                               {tx.title}
                             </a>
