@@ -57,6 +57,7 @@ function BudgetControl({
 
         <div>
           <DualCurrencyField
+            autoFocus
             fiatValue={fiatAmount}
             id="budget"
             min={0}

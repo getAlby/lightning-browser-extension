@@ -374,6 +374,7 @@ function LNURLPay() {
                       {details && details.minSendable !== details.maxSendable && (
                         <div>
                           <DualCurrencyField
+                            autoFocus
                             id="amount"
                             label={t("amount.label")}
                             min={+details.minSendable / 1000}
