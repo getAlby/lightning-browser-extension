@@ -86,7 +86,7 @@ const DefaultView: FC<Props> = (props) => {
       try {
         const payments = await loadPayments();
         // attach fiatAmount if enabled
-        for await (const payment of payments) {
+        for (const payment of payments) {
           const totalAmountFiat = showFiat
             ? await getFiatValue(payment.totalAmount)
             : "";
