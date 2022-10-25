@@ -63,8 +63,10 @@ function Receive() {
 
   useEffect(() => {
     if (formData.amount !== "" && showFiat) {
-      const res = getFiatValue(formData.amount);
-      setFiatAmount(res);
+      (async () => {
+        const res = await getFiatValue(formData.amount);
+        setFiatAmount(res);
+      })();
     }
   }, [formData, showFiat, getFiatValue]);
 

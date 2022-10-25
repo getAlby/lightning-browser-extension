@@ -127,9 +127,9 @@ function Home() {
         ),
       }));
 
-      for (const payment of payments) {
+      for await (const payment of payments) {
         const totalAmountFiat = settings.showFiat
-          ? getFiatValue(payment.totalAmount)
+          ? await getFiatValue(payment.totalAmount)
           : "";
         payment.totalAmountFiat = totalAmountFiat;
       }
@@ -172,7 +172,7 @@ function Home() {
 
     for (const invoice of invoices) {
       const totalAmountFiat = settings.showFiat
-        ? getFiatValue(invoice.totalAmount)
+        ? await getFiatValue(invoice.totalAmount)
         : "";
       invoice.totalAmountFiat = totalAmountFiat;
     }
