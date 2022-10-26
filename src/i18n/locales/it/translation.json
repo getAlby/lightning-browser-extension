@@ -145,25 +145,25 @@
         "description": "Connettiti al tuo account LNbits",
         "page": {
           "title": "Connetti a <0>LNbits</0>",
-          "instructions": ""
+          "instructions": "In LNbits, scegli il portafoglio che vuoi connettere, aprilo, clicca su API Info e copia la Admin Key. Incollala qui di seguito:"
         },
         "admin_key": {
           "label": "",
-          "placeholder": ""
+          "placeholder": "La tua admin key a 32 cifre"
         },
         "url": {
           "label": ""
         },
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "Connessione non riuscita. L'Admin Key e l'URL sono corretti?"
         }
       },
       "eclair": {
         "title": "",
-        "description": "",
+        "description": "Collega il tuo nodo Eclar",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "Connettiti a <0>Eclair</0>",
+          "instructions": "Hai bisogno della tua password e URL Eclair."
         },
         "password": {
           "label": ""
@@ -175,10 +175,10 @@
       },
       "citadel": {
         "title": "",
-        "description": "",
+        "description": "Collegati al tuo Citadel locale",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "Collega un nodo <0>Citadel</0>",
+          "instructions": "Attualmente non funziona se è abilitata la 2FA."
         },
         "password": {
           "label": ""
@@ -190,10 +190,10 @@
       },
       "umbrel": {
         "title": "",
-        "description": "",
+        "description": "Collegati con Umbrel",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "Collega un nodo <0>Umbrel</0>",
+          "instructions": "Nella dashboard di Umbrel vai su <0>Connect Wallet</0>. Seleziona <0>lndconnect REST</0> e copia il <0>lndconnect URL</0>. (In base al tuo setup puoi usare una connessione locale o una connessione via TOR)"
         },
         "rest_url": {
           "label": "",
@@ -202,10 +202,10 @@
       },
       "mynode": {
         "title": "",
-        "description": "",
+        "description": "Collegati a myNode",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "Collegati a <0>myNode</0>",
+          "instructions": "Nella homepage di myNode clicca sul bottone <0>Wallet</0> per il servizio <0>Lightning</0>.<1/> Dopo clicca sul bottone <0>Pair Wallet</0> sotto la tab <0>Status</0>. Inserisci la tua password quando richiesta.<1/> Seleziona il menu a tendina e scegli l'opzione per effettuare il pairing. In base al tuo setup puoi utilizzare la connessione <0>Lightning (REST + Local IP)</0> o quella <0>Lightning (REST + Tor)</0>."
         },
         "rest_url": {
           "label": "",
@@ -214,10 +214,10 @@
       },
       "start9": {
         "title": "",
-        "description": "",
+        "description": "Collegati a Embassy",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "Collega il tuo nodo Embassy",
+          "instructions": "<0>Nota:</0> Al momento supportiamo soltanto LND, aggiungeremo il supporto per c-lightning in futuro!<1/>Nella dashboard di Embassy clicca sul servizio <0>Lightning Network Daemon</0>.<1/>Seleziona la tab <0>Proprieta'</0>.<1/>Adesso copia l'<0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "",
@@ -226,15 +226,15 @@
       },
       "raspiblitz": {
         "title": "",
-        "description": "",
+        "description": "Collegati a RaspiBlitz",
         "page": {
-          "title": "",
-          "instructions1": "",
-          "instructions2": ""
+          "title": "Collega il tuo nodo <0>RaspiBlitz</0>",
+          "instructions1": "Hai bisogno dell'indirizzo onion, la porta e il macaroon con permessi di lettura e scrittura (e.g admin.macaroon) del tuo nodo..<1/><1/>Entra attraverso <0>SSH</0> nel tuo <0>RaspiBlitz</0>.<1/>Lancia il comando <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Copia e incolla l'indirizzo <0>.onion</0> di seguito.<1/>Aggiungi la tua <0>porta</0> subito dopo l'indirizzo onion, la porta di default e' <0>:8080</0>.",
+          "instructions2": "Seleziona <0>CONNECT</0>.<1/>Seleziona <0>EXPORT</0>.<1/>Seleziona <0>HEX</0>.<1/>Copia l'<0>adminMacaroon</0>.<1/>Incolla il macaroon di seguito."
         },
         "rest_api_host": {
           "label": "",
-          "placeholder": ""
+          "placeholder": "indirizzo-onion-del-tuo-nodo:porta"
         }
       },
       "bitcoin_beach": {
