@@ -32,12 +32,9 @@ function LNURLChannel() {
 
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-  const [response, setResponse] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
 
   async function confirm() {
     try {
-      setErrorMessage("");
       setLoadingConfirm(true);
       await api.connectPeer({
         host,
@@ -47,8 +44,12 @@ function LNURLChannel() {
       const nodeId = infoResponse.node.pubkey;
 
       if (!nodeId) {
-        toast.error(`No nodeId available`);
-        throw new Error(`No nodeId available`);
+        toast.error(
+          `No nodeId available. Your account might not support channel requests`
+        );
+        throw new Error(
+          `No nodeId available. Your account might not support channel requests`
+        );
       }
 
       const callbackResponse = await axios.get(details.callback, {
@@ -66,7 +67,6 @@ function LNURLChannel() {
       setSuccessMessage(
         t("success", { name: origin ? origin.name : details.domain })
       );
-      setResponse(`${details.k1} ${nodeId}`);
 
       // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the response. This closes the window which means the user will NOT see the above successAction.
       // We assume this is OK when it is called through webln.
@@ -75,9 +75,6 @@ function LNURLChannel() {
       }
     } catch (e) {
       console.error(e);
-      if (e instanceof Error) {
-        setErrorMessage(e.message);
-      }
     } finally {
       setLoadingConfirm(false);
     }
@@ -118,10 +115,6 @@ function LNURLChannel() {
               heading={`${t("content_message.heading")}:`}
               content={uri}
             />
-
-            {errorMessage && (
-              <p className="my-2 mx-5 text-red-500">{errorMessage}</p>
-            )}
           </div>
 
           <div>
@@ -139,13 +132,7 @@ function LNURLChannel() {
         </Container>
       ) : (
         <Container justifyBetween maxWidth="sm">
-          <div>
-            <ResultCard isSuccess message={successMessage} />
-            <ContentMessage
-              heading={`${tCommon("response")}`}
-              content={response}
-            />
-          </div>
+          <ResultCard isSuccess message={successMessage} />
           <div className="my-4">
             <Button
               onClick={close}
