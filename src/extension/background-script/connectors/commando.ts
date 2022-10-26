@@ -199,16 +199,14 @@ export default class Commando implements Connector {
       })
       .then((resp) => {
         const parsed = resp as CommandoPayInvoiceResponse;
-        const parsedTotalAmtStr = parsed.amount_msat.replace("msat", "");
-        const parsedSentAmtPaidStr = parsed.amount_sent_msat.replace(
-          "msat",
-          ""
+        const parsedTotalAmtStr = Number(
+          parsed.amount_msat.replace("msat", "")
         );
-        const parsedTotalAmt = (parsedTotalAmtStr as unknown as number) / 1000;
-        const parsedTotalFee =
-          ((parsedSentAmtPaidStr as unknown as number) -
-            (parsedTotalAmtStr as unknown as number)) /
-          1000;
+        const parsedSentAmtPaidStr = Number(
+          parsed.amount_sent_msat.replace("msat", "")
+        );
+        const parsedTotalAmt = parsedTotalAmtStr / 1000;
+        const parsedTotalFee = parsedSentAmtPaidStr - parsedTotalAmtStr / 1000;
         return {
           data: {
             paymentHash: parsed.payment_hash,
@@ -244,16 +242,14 @@ export default class Commando implements Connector {
       })
       .then((resp) => {
         const parsed = resp as CommandoPayInvoiceResponse;
-        const parsedTotalAmtStr = parsed.amount_msat.replace("msat", "");
-        const parsedSentAmtPaidStr = parsed.amount_sent_msat.replace(
-          "msat",
-          ""
+        const parsedTotalAmtStr = Number(
+          parsed.amount_msat.replace("msat", "")
         );
-        const parsedTotalAmt = (parsedTotalAmtStr as unknown as number) / 1000;
-        const parsedTotalFee =
-          ((parsedSentAmtPaidStr as unknown as number) -
-            (parsedTotalAmtStr as unknown as number)) /
-          1000;
+        const parsedSentAmtPaidStr = Number(
+          parsed.amount_sent_msat.replace("msat", "")
+        );
+        const parsedTotalAmt = parsedTotalAmtStr / 1000;
+        const parsedTotalFee = parsedSentAmtPaidStr - parsedTotalAmtStr / 1000;
         return {
           data: {
             paymentHash: parsed.payment_hash,
