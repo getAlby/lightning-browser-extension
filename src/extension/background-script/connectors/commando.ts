@@ -86,7 +86,7 @@ export default class Commando implements Connector {
     this.config = config;
     this.ln = new LnMessage({
       remoteNodePublicKey: this.config.pubkey,
-      wsProxy: this.config.wsProxy || "wss://lnwsproxy.regtest.getalby.com",
+      wsProxy: this.config.wsProxy,
       ip: this.config.host,
       port: this.config.port || 9735,
       privateKey: this.config.privateKey,
@@ -177,10 +177,10 @@ export default class Commando implements Connector {
       params: {},
       rune: this.config.rune,
     })) as CommandoListFundsResponse;
-    let lnBalance = 0;
-    for (let i = 0; i < response.channels.length; i++) {
-      lnBalance = lnBalance + response.channels[i].channel_sat;
-    }
+    const lnBalance = response.channels.reduce(
+      (balance, channel) => balance + channel.channel_sat,
+      0
+    );
     return {
       data: {
         balance: lnBalance,
@@ -278,16 +278,9 @@ export default class Commando implements Connector {
       })
       .then((resp) => {
         const parsed = resp as CommandoListInvoiceResponse;
-        if (parsed.invoices.length != 1) {
-          return {
-            data: {
-              paid: false,
-            },
-          };
-        }
         return {
           data: {
-            paid: parsed.invoices[0].status == "paid",
+            paid: parsed.invoices[0]?.status == "paid",
           },
         };
       });
