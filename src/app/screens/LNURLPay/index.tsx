@@ -51,7 +51,9 @@ function LNURLPay() {
   const { t: tCommon } = useTranslation("common");
 
   const [valueSat, setValueSat] = useState(
-    (details?.minSendable && (+details?.minSendable / 1000).toString()) || ""
+    (details?.minSendable &&
+      Math.floor(+details?.minSendable / 1000).toString()) ||
+      ""
   );
 
   const [fiatValue, setFiatValue] = useState("");
@@ -366,10 +368,11 @@ function LNURLPay() {
                           {details.minSendable === details.maxSendable && (
                             <>
                               <Dt>{t("amount.label")}</Dt>
-                              <Dd>{`${+details.minSendable / 1000} ${tCommon(
-                                "sats",
-                                { count: details.minSendable / 1000 }
-                              )}`}</Dd>
+                              <Dd>{`${Math.floor(
+                                +details.minSendable / 1000
+                              )} ${tCommon("sats", {
+                                count: Math.floor(+details.minSendable / 1000),
+                              })}`}</Dd>
                             </>
                           )}
                         </>
@@ -380,8 +383,8 @@ function LNURLPay() {
                             autoFocus
                             id="amount"
                             label={t("amount.label")}
-                            min={+details.minSendable / 1000}
-                            max={+details.maxSendable / 1000}
+                            min={Math.floor(+details.minSendable / 1000)}
+                            max={Math.floor(+details.maxSendable / 1000)}
                             value={valueSat}
                             onChange={(e) => setValueSat(e.target.value)}
                             fiatValue={fiatValue}
