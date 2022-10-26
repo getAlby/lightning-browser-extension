@@ -2,6 +2,7 @@ import utils from "~/common/lib/utils";
 import { getFiatValue } from "~/common/utils/currencyConvert";
 import { getCurrencyRateWithCache } from "~/extension/background-script/actions/cache/getCurrencyRate";
 import state from "~/extension/background-script/state";
+import i18n from "~/i18n/i18nConfig";
 import type { PaymentNotificationData, AuthNotificationData } from "~/types";
 
 const paymentSuccessNotification = async (
@@ -9,7 +10,7 @@ const paymentSuccessNotification = async (
   data: PaymentNotificationData
 ) => {
   function formatAmount(amount: number) {
-    return `${amount} sat${amount != 1 ? "s" : ""}`;
+    return `${amount}  ${i18n.t("sats", { count: amount, ns: "common" })}`;
   }
 
   const recipient = data?.origin?.name;
