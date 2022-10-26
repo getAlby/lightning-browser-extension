@@ -596,7 +596,7 @@
       "success": "{{amount}} recebidos com sucesso de {{sender}}"
     },
     "lnurlchannel": {
-      "success": "Solicitação de canal de pagamento enviada com sucesso",
+      "success": "Solicitação de canal de pagamento enviada com sucesso para {{name}}",
       "title": "Solicitar Canal de Pagamento",
       "content_message": {
         "heading": "Solicitar canal de pagamento do servidor"
@@ -659,7 +659,8 @@
     "description": "Descrição",
     "description_full": "Descrição Completa",
     "message": "Mensagem",
-    "help": "Ajuda"
+    "help": "Ajuda",
+    "response": "Resposta"
   },
   "components": {
     "allowance_menu": {
