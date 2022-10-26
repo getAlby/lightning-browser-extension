@@ -10,7 +10,7 @@ const paymentSuccessNotification = async (
   data: PaymentNotificationData
 ) => {
   function formatAmount(amount: number) {
-    return `${amount}  ${i18n.t("sats", { count: amount, ns: "common" })}`;
+    return `${amount} ${i18n.t("sats", { count: amount, ns: "common" })}`;
   }
 
   const recipient = data?.origin?.name;
