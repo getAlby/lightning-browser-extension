@@ -211,40 +211,42 @@ function Receive() {
           }}
           className="h-full"
         >
-          <Container justifyBetween maxWidth="sm">
-            <div className="py-4">
-              <div className="mb-4">
-                <DualCurrencyField
-                  id="amount"
-                  min={0}
-                  label={t("amount.label")}
-                  placeholder={t("amount.placeholder")}
-                  fiatValue={fiatAmount}
-                  onChange={handleChange}
-                  autoFocus
-                />
-              </div>
+          <fieldset disabled={loading}>
+            <Container justifyBetween maxWidth="sm">
+              <div className="py-4">
+                <div className="mb-4">
+                  <DualCurrencyField
+                    id="amount"
+                    min={0}
+                    label={t("amount.label")}
+                    placeholder={t("amount.placeholder")}
+                    fiatValue={fiatAmount}
+                    onChange={handleChange}
+                    autoFocus
+                  />
+                </div>
 
+                <div className="mb-4">
+                  <TextField
+                    id="description"
+                    label={t("description.label")}
+                    placeholder={t("description.placeholder")}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
               <div className="mb-4">
-                <TextField
-                  id="description"
-                  label={t("description.label")}
-                  placeholder={t("description.placeholder")}
-                  onChange={handleChange}
+                <Button
+                  type="submit"
+                  label={t("actions.create_invoice")}
+                  fullWidth
+                  primary
+                  loading={loading}
+                  disabled={loading}
                 />
               </div>
-            </div>
-            <div className="mb-4">
-              <Button
-                type="submit"
-                label={t("actions.create_invoice")}
-                fullWidth
-                primary
-                loading={loading}
-                disabled={loading}
-              />
-            </div>
-          </Container>
+            </Container>
+          </fieldset>
         </form>
       )}
     </div>
