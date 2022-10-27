@@ -76,7 +76,7 @@ jest.mock("~/app/hooks/useNavigationState", () => {
 });
 
 // calculated satValue from passed props
-const satValue = +mockDetails.minSendable / 1000;
+const satValue = Math.floor(+mockDetails.minSendable / 1000);
 
 describe("LNURLPay", () => {
   afterEach(() => {

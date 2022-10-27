@@ -35,7 +35,7 @@ function LNURLWithdraw() {
   const { minWithdrawable, maxWithdrawable } = details;
 
   const [valueSat, setValueSat] = useState(
-    (maxWithdrawable && (+maxWithdrawable / 1000).toString()) || ""
+    (maxWithdrawable && Math.floor(+maxWithdrawable / 1000).toString()) || ""
   );
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -99,7 +99,9 @@ function LNURLWithdraw() {
         <>
           <ContentMessage
             heading={t("content_message.heading")}
-            content={`${minWithdrawable / 1000} sats`}
+            content={`${Math.floor(minWithdrawable / 1000)} ${tCommon("sats", {
+              count: Math.floor(minWithdrawable / 1000),
+            })}`}
           />
 
           {errorMessage && <p className="mt-1 text-red-500">{errorMessage}</p>}
@@ -112,8 +114,8 @@ function LNURLWithdraw() {
             autoFocus
             id="amount"
             label={t("amount.label")}
-            min={minWithdrawable / 1000}
-            max={maxWithdrawable / 1000}
+            min={Math.floor(minWithdrawable / 1000)}
+            max={Math.floor(maxWithdrawable / 1000)}
             value={valueSat}
             onChange={(e) => setValueSat(e.target.value)}
             fiatValue={fiatValue}
