@@ -126,7 +126,7 @@
         }
       },
       "lndhub_go": {
-        "title": "",
+        "title": "LNDHub",
         "description": "Connettiti al tuo account LNDHub",
         "page": {
           "title": "Connettiti a LNDHub",
@@ -141,91 +141,91 @@
         }
       },
       "lnbits": {
-        "title": "",
+        "title": "LNbits",
         "description": "Connettiti al tuo account LNbits",
         "page": {
           "title": "Connetti a <0>LNbits</0>",
           "instructions": "In LNbits, scegli il portafoglio che vuoi connettere, aprilo, clicca su API Info e copia la Admin Key. Incollala qui di seguito:"
         },
         "admin_key": {
-          "label": "",
+          "label": "LNbits Admin Key",
           "placeholder": "La tua admin key a 32 cifre"
         },
         "url": {
-          "label": ""
+          "label": "LNbits URL"
         },
         "errors": {
           "connection_failed": "Connessione non riuscita. L'Admin Key e l'URL sono corretti?"
         }
       },
       "eclair": {
-        "title": "",
+        "title": "Eclair",
         "description": "Collega il tuo nodo Eclar",
         "page": {
           "title": "Connettiti a <0>Eclair</0>",
           "instructions": "Hai bisogno della tua password e URL Eclair."
         },
         "password": {
-          "label": ""
+          "label": "Password Eclair"
         },
         "url": {
-          "label": "",
-          "placeholder": ""
+          "label": "URL Eclair",
+          "placeholder": "http://localhost:8080"
         }
       },
       "citadel": {
-        "title": "",
+        "title": "Citadel",
         "description": "Collegati al tuo Citadel locale",
         "page": {
           "title": "Collega un nodo <0>Citadel</0>",
           "instructions": "Attualmente non funziona se è abilitata la 2FA."
         },
         "password": {
-          "label": ""
+          "label": "Password Citadel"
         },
         "url": {
-          "label": "",
-          "placeholder": ""
+          "label": "URL Citadel",
+          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
-        "title": "",
+        "title": "Umbrel",
         "description": "Collegati con Umbrel",
         "page": {
           "title": "Collega un nodo <0>Umbrel</0>",
           "instructions": "Nella dashboard di Umbrel vai su <0>Connect Wallet</0>. Seleziona <0>lndconnect REST</0> e copia il <0>lndconnect URL</0>. (In base al tuo setup puoi usare una connessione locale o una connessione via TOR)"
         },
         "rest_url": {
-          "label": "",
-          "placeholder": ""
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://tuonodo:8080?..."
         }
       },
       "mynode": {
-        "title": "",
+        "title": "myNode",
         "description": "Collegati a myNode",
         "page": {
           "title": "Collegati a <0>myNode</0>",
           "instructions": "Nella homepage di myNode clicca sul bottone <0>Wallet</0> per il servizio <0>Lightning</0>.<1/> Dopo clicca sul bottone <0>Pair Wallet</0> sotto la tab <0>Status</0>. Inserisci la tua password quando richiesta.<1/> Seleziona il menu a tendina e scegli l'opzione per effettuare il pairing. In base al tuo setup puoi utilizzare la connessione <0>Lightning (REST + Local IP)</0> o quella <0>Lightning (REST + Tor)</0>."
         },
         "rest_url": {
-          "label": "",
-          "placeholder": ""
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://tuonodo:8080?..."
         }
       },
       "start9": {
-        "title": "",
+        "title": "Start9",
         "description": "Collegati a Embassy",
         "page": {
           "title": "Collega il tuo nodo Embassy",
           "instructions": "<0>Nota:</0> Al momento supportiamo soltanto LND, aggiungeremo il supporto per c-lightning in futuro!<1/>Nella dashboard di Embassy clicca sul servizio <0>Lightning Network Daemon</0>.<1/>Seleziona la tab <0>Proprieta'</0>.<1/>Adesso copia l'<0>LND Connect REST URL.</0>"
         },
         "rest_url": {
-          "label": "",
-          "placeholder": ""
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://tuonodo:8080?..."
         }
       },
       "raspiblitz": {
-        "title": "",
+        "title": "RaspiBlitz",
         "description": "Collegati a RaspiBlitz",
         "page": {
           "title": "Collega il tuo nodo <0>RaspiBlitz</0>",
@@ -233,468 +233,469 @@
           "instructions2": "Seleziona <0>CONNECT</0>.<1/>Seleziona <0>EXPORT</0>.<1/>Seleziona <0>HEX</0>.<1/>Copia l'<0>adminMacaroon</0>.<1/>Incolla il macaroon di seguito."
         },
         "rest_api_host": {
-          "label": "",
+          "label": "host REST API",
           "placeholder": "indirizzo-onion-del-tuo-nodo:porta"
         }
       },
       "bitcoin_beach": {
-        "title": "",
-        "description": "",
+        "title": "Bitcoin Beach Wallet",
+        "description": "Crea o connetti il tuo account Bitcoin Beach (Galoy)",
         "page": {
-          "title": ""
+          "title": "Connetti il tuo <0>Bitcoin Beach Wallet</0>"
         }
       },
       "bitcoin_jungle": {
-        "title": "",
-        "description": "",
+        "title": "Bitcoin Jungle Wallet",
+        "description": "Crea o connetti un account Bitcoin Jungle (Galoy)",
         "page": {
-          "title": ""
+          "title": "Connetti a <0>Bitcoin Jungle Wallet</0>"
         }
       },
       "galoy": {
         "phone_number": {
-          "label": ""
+          "label": "Inserisci il tuo numero di telefono"
         },
         "sms_code": {
-          "label": ""
+          "label": "Inserisci il codice di verifica SMS"
         },
         "jwt": {
-          "label": "",
-          "info": ""
+          "label": "Inserisci il tuo token JWT",
+          "info": "Il login {{label}} è attualmente in fase di aggiornamento. Se sei un utente avanzato puoi recuperare il tuo token JWT effettuando il login via il <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>Il token JWT assomiglia a: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "",
-          "request_sms_code": ""
+          "login": "Login",
+          "request_sms_code": "Richiedi codice SMS"
         },
         "errors": {
-          "failed_to_request_sms": "",
-          "failed_to_login_sms": "",
-          "setup_failed": "",
-          "missing_jwt": "",
-          "invalid_jwt": ""
+          "failed_to_request_sms": "Problema durante la richiesta del codice SMS",
+          "failed_to_login_sms": "Impossibile accedere con il codice SMS",
+          "setup_failed": "Setup non riuscito",
+          "missing_jwt": "JWT mancante, impossibile effettuare il login.",
+          "invalid_jwt": "passato JWT non valido"
         }
       },
       "btcpay": {
-        "title": "",
-        "description": "",
+        "title": "BTCPay Server",
+        "description": "Connetti il tuo nodo LND BTCPay",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "Connettiti al tuo nodo LND BTCPay",
+          "instructions": "Vai al tuo BTCPayServer e accedi come amministratore. Vai su Impostazioni server > Servizi > LND Rest - See information. Quindi fai clic su \"Visualizza informazioni sul codice QR\" e copia i dati del codice QR. Incollali qui sotto:"
         },
         "config": {
-          "label": "",
-          "placeholder": ""
+          "label": "Dati di configurazione",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
         },
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "Connessione fallita. L'URL di connessione a BTCPay è corretto e accessibile?"
         }
       }
     },
     "home": {
       "actions": {
-        "send_satoshis": "",
-        "enable_now": ""
+        "send_satoshis": "⚡️ Invia Satoshis ⚡️",
+        "enable_now": "Attiva ora"
       },
-      "recent_transactions": "",
+      "recent_transactions": "Transazioni recenti",
       "transaction_list": {
         "tabs": {
-          "outgoing": "",
-          "incoming": ""
+          "outgoing": "Uscite",
+          "incoming": "Entrate"
         }
       },
       "allowance_view": {
-        "recent_transactions": "",
-        "allowance": "",
-        "sats_used": "",
-        "no_transactions": ""
+        "recent_transactions": "Transazioni recenti",
+        "allowance": "Margine",
+        "sats_used": "sats utilizzati",
+        "no_transactions": "Non ci sono ancora transazioni su <0>{{name}}</0>."
       },
       "default_view": {
-        "recent_transactions": "",
-        "no_transactions": "",
-        "is_blocked_hint": ""
+        "recent_transactions": "Transazioni recenti",
+        "no_transactions": "Ancora nessuna transazione effettuata con Alby.",
+        "is_blocked_hint": "Alby è attualmente disabilitato su {{host}}"
       }
     },
     "accounts": {
-      "title": "",
+      "title": "Accounts",
       "actions": {
-        "add_account": ""
+        "add_account": "Aggiungi account"
       },
       "edit": {
-        "title": "",
+        "title": "Modifica account",
         "name": {
-          "label": ""
+          "label": "Nome"
         },
-        "screen_reader": ""
+        "screen_reader": "Modifica nome dell'account"
       },
       "export": {
-        "title": "",
-        "screen_reader": "",
-        "waiting": "",
-        "your_ln_address": "",
-        "tip_mobile": "",
-        "export_uri": "",
-        "scan_qr": ""
+        "title": "Esporta Account",
+        "screen_reader": "Esporta i dettagli dell'account",
+        "waiting": "in attesa dei dati di LndHub...",
+        "your_ln_address": "Il tuo indirizzo Lightning:",
+        "tip_mobile": "Suggerimento: Utilizza questo portafoglio con il tuo dispositivo mobile",
+        "export_uri": "URI delle credenziali di LNDHub",
+        "scan_qr": "Importa questo portafoglio in Zeus o BlueWallet scansionando il QRCode."
       },
       "remove": {
-        "confirm": ""
+        "confirm": "Sei sicuro di voler rimuovere l'account: {{nome}}? \nQuesta operazione non può essere annullata. Se hai usato questo account per accedere a siti web, potresti perdere l'accesso a questi ultimi."
       }
     },
     "enable": {
-      "title": "",
-      "allow": "",
-      "request1": "",
-      "request2": "",
-      "block_and_ignore": ""
+      "title": "Connettiti",
+      "allow": "Consenti a {{host}} di:",
+      "request1": "Richiedi l'approvazione per le transazioni",
+      "request2": "Richiedi fatture e informazioni lightning",
+      "block_and_ignore": "Blocca e ignora {{host}}"
     },
     "unlock": {
-      "unlock_to_continue": "",
-      "unlock_password": "",
+      "unlock_to_continue": "Sblocca per continuare",
+      "unlock_password": "La tua password di sblocco",
       "help_contact": {
-        "part1": "",
-        "part2": ""
+        "part1": "Hai bisogno di aiuto? Contatta",
+        "part2": "Supporto Alby"
       },
       "unlock_error": {
-        "help": "",
-        "link": ""
+        "help": "I dati del tuo account sono criptati con la password di sblocco. Se haidimenticato la password di sblocco, devi reimpostare e aggiungere nuovamente il tuo account Lightning.",
+        "link": "Reimposta ora e aggiungi un nuovo account"
       },
       "errors": {
-        "invalid_password": ""
+        "invalid_password": "Password non valida"
       }
     },
     "settings": {
-      "title": "",
+      "title": "Impostazioni",
       "browser_notifications": {
-        "title": "",
-        "subtitle": ""
+        "title": "Notifiche del browser",
+        "subtitle": "Notifiche relative ai pagamenti e all'autenticazione."
       },
       "website_enhancements": {
-        "title": "",
-        "subtitle": ""
+        "title": "Miglioramenti del sito web",
+        "subtitle": "Miglioramenti per le mance su Twitter, YouTube, ecc."
       },
       "lnurl_auth": {
-        "title": "",
-        "hint": "",
+        "title": "LNURL-Auth",
+        "hint": "è un protocollo di autenticazione generico. Autentica l'utente utilizzando le firme digitali. Il protocollo non richiede altre informazioni di identificazione come password, e-mail, nomi utente o simili. Con Alby è possibile utilizzare i propri account lightning per accedere in modo sicuro ai siti web. Per essere compatibili con altri portafogli abbiamo dovuto apportare alcune modifiche che si possono configurare qui. <0>Idealmente tutte queste opzioni dovrebbero essere spente (OFF).</0> Usatele solo se avete vecchi account.",
         "legacy_lnurl_auth_202207": {
-          "title": "",
-          "subtitle": ""
+          "title": "Legacy LNURL-Auth",
+          "subtitle": "La generazione di chiavi per LNURL-auth è cambiata (Luglio 2022). Alby non era compatibile con altre implementazioni. Abbiamo apportate delle modifiche, ma ora vengono utilizzate chiavi di accesso diverse. Se prima si utilizzava LNURL-auth per il login, si può ancora attivare il vecchio metodo. Questa opzione sarà rimossa in futuro; assicurarati di passare al nuovo login."
         },
         "legacy_lnurl_auth": {
-          "title": "",
-          "subtitle": ""
+          "title": "Firma tradizione per LNDhub e LNbits",
+          "subtitle": "La firma dei messaggi e il login con gli account LNDhub (ad esempio BlueWallet) e LNbits sono stati modificati (Marzo 2022). Se avete effettuato l'accesso con questi account, potete ancora attivare il vecchio metodo di firma. Questa opzione sarà rimossa in futuro; assicurati di passare al nuovo metodo di login."
         }
       },
       "camera_access": {
-        "title": "",
-        "subtitle": "",
-        "allow": "",
-        "granted": ""
+        "title": "Accesso alla telecamera",
+        "subtitle": "Per la scansione di codici QR",
+        "allow": "Consenti l'accesso alla fotocamera",
+        "granted": "Autorizzazione concessa"
       },
       "language": {
-        "title": "",
-        "subtitle": ""
+        "title": "Lingua",
+        "subtitle": "Le traduzioni non sono ancora state completate al 100%. <0>Aiutaci a tradurre Alby nella tua lingua!</0>"
       },
       "theme": {
-        "title": "",
-        "subtitle": "",
+        "title": "Tema",
+        "subtitle": "Usa Alby in modalità scura o chiara",
         "options": {
-          "dark": "",
-          "light": "",
-          "system": ""
+          "dark": "Scuro",
+          "light": "Chiaro",
+          "system": "Sistema"
         }
       },
       "show_fiat": {
-        "title": "",
-        "subtitle": ""
+        "title": "Da Sats a Fiat",
+        "subtitle": "Convertire sempre nella valuta selezionata rispetto all'exchange selezionato"
       },
       "currency": {
-        "title": "",
-        "subtitle": ""
+        "title": "Valuta",
+        "subtitle": "Mostra gli importi anche in questa valuta"
       },
       "exchange": {
-        "title": "",
-        "subtitle": ""
+        "title": "Origine dell'Exchange",
+        "subtitle": "Fonte dei tassi di cambio Bitcoin"
       },
       "personal_data": {
-        "title": "",
-        "description": ""
+        "title": "Dati personali",
+        "description": "I beneficiari possono richiedere l'invio di dati aggiuntivi insieme al pagamento. Questi dati non vengono condivisi con nessuno senza il tuo consenso che ti verrà sempre richiesto prima che questi dati vengano inviati insieme ad un pagamento."
       },
       "name": {
-        "title": "",
+        "title": "Nome",
         "subtitle": "",
-        "placeholder": ""
+        "placeholder": "Inserisci il tuo nome"
       },
       "email": {
-        "title": "",
+        "title": "Email",
         "subtitle": "",
-        "placeholder": ""
+        "placeholder": "Inserisci il tuo indirizzo email"
       },
       "change_password": {
-        "title": "",
+        "title": "Cambia password di sblocco",
         "subtitle": "",
-        "screen_reader": "",
+        "screen_reader": "Cambia password di sblocco",
         "choose_password": {
-          "label": ""
+          "label": "Inserire una nuova password di sblocco:"
         },
         "confirm_password": {
-          "label": ""
+          "label": "Conferma nuova password:"
         },
         "submit": {
-          "label": ""
+          "label": "Modifica"
         },
         "errors": {
-          "enter_password": "",
-          "confirm_password": "",
-          "mismatched_password": ""
+          "enter_password": "Inserisci una nuova password di sblocco.",
+          "confirm_password": "Confermare la password.",
+          "mismatched_password": "Le password non corrispondono."
         },
-        "success": ""
+        "success": "La password è stata modificata con successo"
       },
       "nostr": {
-        "title": "",
-        "hint": "",
+        "title": "Nostr",
+        "hint": "è un protocollo semplice e aperto che mira a creare reti sociali resistenti alla censura. Nostr funziona con chiavi crittografiche. Per pubblicare qualcosa si firma con la propria chiave e la si invia a più relè. È possibile utilizzare Alby per gestire la propria chiave Nostr. Molte applicazioni Nostr vi permetteranno poi di utilizzare semplicemente la chiave dall'estensione Alby.",
         "private_key": {
-          "title": "",
-          "subtitle": "",
-          "generate": "",
-          "warning": "",
-          "success": ""
+          "title": "Chiave privata",
+          "subtitle": "La generazione di una chiave creerà una nuova chiave basata sull'account correntemente utilizzato. Assicurati di fare un backup della chiave privata.",
+          "generate": "Genera",
+          "warning": "In questo modo si cancellerà la vecchia chiave privata. Sei sicuro?",
+          "success": "Chiave privata criptata e salvata con successo."
         }
       }
     },
     "send": {
-      "title": "",
+      "title": "Invia",
       "qrcode": {
-        "title": ""
+        "title": "In attesa di scansione"
       },
       "input": {
-        "label": "",
-        "hint": ""
+        "label": "Destinatario",
+        "hint": "Fattura, indirizzo Lightning o LNURL"
       }
     },
     "lnurlpay": {
       "amount": {
-        "label": ""
+        "label": "Importo"
       },
       "comment": {
-        "label": ""
+        "label": "Commento"
       },
       "name": {
-        "label": ""
+        "label": "Nome"
       },
       "email": {
-        "label": ""
+        "label": "Email"
       },
-      "success": ""
+      "success": "Successo, pagamento inviato!"
     },
     "lnurlauth": {
-      "title": "",
+      "title": "Autenticazione",
       "content_message": {
-        "heading": ""
+        "heading": "Vuoi accedere a"
       },
-      "submit": "",
-      "success": "",
+      "submit": "Accedi",
+      "success": "Accesso riuscito su {{nome}}",
       "errors": {
-        "status": ""
+        "status": "Errore: lo stato di autenticazione non è ok"
       }
     },
     "lnurlchannel": {
-      "title": "",
+      "title": "Richiesta canale",
       "content_message": {
-        "heading": ""
+        "heading": "Richiedi un canale dal nodo"
       },
-      "success": ""
+      "success": "Richiesta di canale inviata correttamente a {{name}}"
     },
     "lnurlwithdraw": {
-      "title": "",
+      "title": "Ritiro",
       "content_message": {
-        "heading": ""
+        "heading": "Importo"
       },
       "amount": {
-        "label": ""
+        "label": "Importo"
       },
-      "success": ""
+      "success": "Richiesta di prelievo di {{amount}} inviata con successo a {{sender}}"
     },
     "receive": {
-      "title": "",
+      "title": "Ricevi",
       "actions": {
-        "create_invoice": ""
+        "create_invoice": "Crea fattura"
       },
       "amount": {
-        "label": "",
-        "placeholder": ""
+        "label": "Importo",
+        "placeholder": "Importo in Satoshi..."
       },
       "description": {
-        "label": "",
-        "placeholder": ""
+        "label": "Descrizione",
+        "placeholder": "Ad esempio, chi sta inviando questo pagamento?"
       },
-      "success": "",
+      "success": "Pagamento ricevuto!",
       "payment": {
-        "waiting": "",
-        "status": ""
+        "waiting": "in attesa del pagamento...",
+        "status": "Controlla lo stato del pagamento"
       }
     },
     "publishers": {
       "used": {
-        "title": "",
-        "description": "",
-        "no_info": ""
+        "title": "I tuoi ⚡️ siti web",
+        "description": "Siti web in cui hai già utilizzato Alby in precedenza",
+        "no_info": "Ancora nessun sito web."
       },
       "suggestions": {
-        "title": "",
-        "description": "",
+        "title": "Altri ⚡️ siti web",
+        "description": "Siti web in cui è possibile utilizzare Alby",
         "list": {
-          "trading": "",
-          "gaming": "",
-          "entertaiment": "",
-          "shopping": "",
-          "miscellaneous": "",
-          "showcases": ""
+          "trading": "Trading",
+          "gaming": "Gaming",
+          "entertaiment": "Intrattenimento",
+          "shopping": "Acquisti",
+          "miscellaneous": "Varie",
+          "showcases": "Vetrine"
         }
       },
       "publisher": {
         "allowance": {
           "title": "",
-          "used_budget": ""
+          "used_budget": "sats utilizzati"
         }
       }
     },
     "make_invoice": {
-      "title": "",
+      "title": "Crea fattura",
       "amount": {
-        "label": ""
+        "label": "Importo (Satoshi)"
       },
       "memo": {
-        "label": ""
+        "label": "Memo"
       },
       "errors": {
-        "amount_too_small": "",
-        "amount_too_big": ""
+        "amount_too_small": "L'importo è inferiore al minimo",
+        "amount_too_big": "L'importo supera il massimo"
       }
     },
     "confirm_sign_message": {
-      "title": "",
-      "content": ""
+      "title": "Firma",
+      "content": "{{host}} ti chiede di firmare:"
     },
     "confirm_keysend": {
-      "title": "",
-      "success": "",
+      "title": "Approva il pagamento",
+      "success": "Pagamento inviato! Preimmagine: {{preimmagine}}",
       "payment_summary": {
-        "description": ""
+        "description": "Invia il pagamento a: {{destination}}"
       }
     },
     "keysend": {
-      "title": "",
-      "success": "",
+      "title": "Invia",
+      "success": "Pagamento inviato! Preimmagine: {{preimage}}",
       "receiver": {
-        "label": ""
+        "label": "Invia pagamento a"
       },
       "amount": {
-        "label": ""
+        "label": "Importo (Satoshi)"
       }
     },
     "confirm_payment": {
-      "title": "",
-      "success": "",
+      "title": "Approva il pagamento",
+      "success": "Pagamento di {{amount}} andato a buon fine!",
       "actions": {
-        "pay_now": ""
+        "pay_now": "Paga ora"
       }
     },
     "nostr": {
-      "title": "",
-      "allow": "",
-      "read_public_key": "",
-      "block_and_ignore": ""
+      "title": "Nostr",
+      "allow": "Consenti a {{host}} di:",
+      "read_public_key": "Leggere la propria chiave pubblica",
+      "block_and_ignore": "Blocca e ignora {{host}}"
     }
   },
   "common": {
-    "password": "",
-    "success": "",
-    "error": "",
-    "settings": "",
-    "websites": "",
-    "sats": "",
-    "loading": "",
-    "amount": "",
-    "optional": "",
-    "feedback": "",
-    "copied": "",
-    "description": "",
-    "description_full": "",
-    "were_sent_to": "",
-    "message": "",
-    "help": "",
+    "password": "Password",
+    "success": "Successo",
+    "error": "Errore",
+    "settings": "Impostazioni",
+    "websites": "Siti web",
+    "sats": "sats",
+    "loading": "caricamento",
+    "amount": "Importo",
+    "optional": "Facoltativo",
+    "feedback": "Valutazione",
+    "copied": "Copiato!",
+    "description": "Descrizione",
+    "description_full": "Descrizione completa",
+    "were_sent_to": "sono stati inviati a",
+    "message": "Messaggio",
+    "help": "Aiuto",
     "actions": {
-      "back": "",
-      "delete": "",
-      "edit": "",
-      "next": "",
-      "open": "",
-      "cancel": "",
-      "confirm": "",
-      "continue": "",
-      "connect": "",
-      "lock": "",
-      "unlock": "",
-      "send": "",
-      "save": "",
-      "receive": "",
-      "close": "",
-      "export": "",
-      "remove": "",
-      "copy": ""
+      "back": "Indietro",
+      "delete": "Elimina",
+      "edit": "Modifica",
+      "next": "Avanti",
+      "open": "Aprire",
+      "cancel": "Annulla",
+      "confirm": "Conferma",
+      "continue": "Continua",
+      "connect": "Connettiti",
+      "lock": "Blocca",
+      "unlock": "Sblocca",
+      "send": "Invia",
+      "save": "Salva",
+      "receive": "Ricevi",
+      "close": "Chiudi",
+      "export": "Esporta",
+      "remove": "Rimuovi",
+      "copy": "Copia"
     },
     "errors": {
-      "connection_failed": "",
-      "payment_failed": ""
-    }
+      "connection_failed": "Connessione fallita",
+      "payment_failed": "Pagamento fallito"
+    },
+    "response": "Risposta"
   },
   "components": {
     "allowance_menu": {
-      "confirm_delete": "",
-      "hint": "",
+      "confirm_delete": "Sei sicuro di voler eliminare questo sito web?",
+      "hint": "Questo azzererà il budget corrente",
       "new_budget": {
-        "label": ""
+        "label": "Nuovo budget"
       },
       "enable_login": {
-        "title": "",
-        "subtitle": ""
+        "title": "Abilita l'accesso al sito web",
+        "subtitle": "Accedi automaticamente senza conferma quando il sito web lo richiede."
       },
       "edit_allowance": {
-        "title": "",
-        "screen_reader": ""
+        "title": "Modifica tolleranza",
+        "screen_reader": "Opzioni di tolleranza"
       }
     },
     "qrcode_scanner": {
-      "title": "",
+      "title": "Scansiona il codice QR",
       "actions": {
-        "start_scanning": "",
-        "stop_scanning": ""
+        "start_scanning": "Avvia la scansione",
+        "stop_scanning": "Interrompi la scansione"
       },
       "errors": {
-        "allow_camera_access": ""
+        "allow_camera_access": "Si prega di consentire l'accesso alla fotocamera nella schermata delle impostazioni."
       }
     },
     "transactionsTable": {
-      "fee": "",
-      "preimage": "",
-      "received": "",
-      "sent": "",
+      "fee": "Tassa",
+      "preimage": "Preimmagine",
+      "received": "Ricevuto",
+      "sent": "Inviato",
       "boostagram": {
-        "sender": "",
-        "message": "",
-        "app": "",
-        "podcast": ""
+        "sender": "Mittente",
+        "message": "Messaggio",
+        "app": "App",
+        "podcast": "Podcast"
       }
     },
     "confirm_or_cancel": {
-      "only_trusted": ""
+      "only_trusted": "Connettiti solo con siti attendibili."
     },
     "budget_control": {
       "remember": {
-        "label": "",
-        "description": ""
+        "label": "Imposta e ricorda un budget",
+        "description": "È possibile impostare un saldo per il quale, fino ad esaurimento, possono non essere richieste conferme di pagamento."
       },
       "budget": {
-        "label": ""
+        "label": "Budget"
       }
     },
     "companion_download_info": {
