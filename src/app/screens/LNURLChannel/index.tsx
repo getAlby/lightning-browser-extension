@@ -1,8 +1,9 @@
+import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
-import SuccessMessage from "@components/SuccessMessage";
+import ResultCard from "@components/ResultCard";
 import axios from "axios";
 import { useState, MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
@@ -20,6 +21,7 @@ function LNURLChannel() {
   const { t: tComponents } = useTranslation("components", {
     keyPrefix: "confirm_or_cancel",
   });
+  const { t: tCommon } = useTranslation("common");
 
   const navigate = useNavigate();
   const navState = useNavigationState();
@@ -30,11 +32,9 @@ function LNURLChannel() {
 
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
 
   async function confirm() {
     try {
-      setErrorMessage("");
       setLoadingConfirm(true);
       await api.connectPeer({
         host,
@@ -42,6 +42,15 @@ function LNURLChannel() {
       });
       const infoResponse = await api.getInfo();
       const nodeId = infoResponse.node.pubkey;
+
+      if (!nodeId) {
+        toast.error(
+          `No nodeId available. Your account might not support channel requests`
+        );
+        throw new Error(
+          `No nodeId available. Your account might not support channel requests`
+        );
+      }
 
       const callbackResponse = await axios.get(details.callback, {
         params: {
@@ -55,7 +64,9 @@ function LNURLChannel() {
         throw new Error(`Failed to call callback: ${callbackResponse.message}`);
       }
 
-      setSuccessMessage(`${t("success")}. ${details.k1} ${nodeId}`);
+      setSuccessMessage(
+        t("success", { name: origin ? origin.name : details.domain })
+      );
 
       // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the response. This closes the window which means the user will NOT see the above successAction.
       // We assume this is OK when it is called through webln.
@@ -64,9 +75,6 @@ function LNURLChannel() {
       }
     } catch (e) {
       console.error(e);
-      if (e instanceof Error) {
-        setErrorMessage(e.message);
-      }
     } finally {
       setLoadingConfirm(false);
     }
@@ -107,10 +115,6 @@ function LNURLChannel() {
               heading={`${t("content_message.heading")}:`}
               content={uri}
             />
-
-            {errorMessage && (
-              <p className="my-2 mx-5 text-red-500">{errorMessage}</p>
-            )}
           </div>
 
           <div>
@@ -127,19 +131,14 @@ function LNURLChannel() {
           </div>
         </Container>
       ) : (
-        <Container maxWidth="sm">
-          {origin ? (
-            <PublisherCard
-              title={origin.name}
-              image={origin.icon}
-              url={details.domain}
-            />
-          ) : (
-            <PublisherCard title={details.domain} />
-          )}
-
+        <Container justifyBetween maxWidth="sm">
+          <ResultCard isSuccess message={successMessage} />
           <div className="my-4">
-            <SuccessMessage message={successMessage} onClose={close} />
+            <Button
+              onClick={close}
+              label={tCommon("actions.close")}
+              fullWidth
+            />
           </div>
         </Container>
       )}
