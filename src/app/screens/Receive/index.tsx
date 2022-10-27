@@ -122,7 +122,7 @@ function Receive() {
   function renderInvoice() {
     if (!invoice) return null;
     return (
-      <div>
+      <div className="py-4">
         <div className="relative p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center overflow-hidden">
           <QRCode value={invoice.paymentRequest.toUpperCase()} level="M" />
           {paid && (
@@ -191,7 +191,7 @@ function Receive() {
   }
 
   return (
-    <div>
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <Header
         title={t("title")}
         headerLeft={
@@ -201,56 +201,52 @@ function Receive() {
           />
         }
       />
-      <div className="py-4">
-        <Container maxWidth="sm">
-          <div className={`${paid ? "bg-green-bitcoin" : ""}`}>
-            {invoice ? (
-              renderInvoice()
-            ) : (
-              <form
-                onSubmit={(e: FormEvent) => {
-                  e.preventDefault();
-                  createInvoice();
-                }}
-              >
-                <div className="mb-4">
-                  <DualCurrencyField
-                    id="amount"
-                    min={0}
-                    label={t("amount.label")}
-                    placeholder={t("amount.placeholder")}
-                    fiatValue={fiatAmount}
-                    onChange={handleChange}
-                    autoFocus
-                  />
-                </div>
+      {invoice ? (
+        <Container maxWidth="sm">{renderInvoice()}</Container>
+      ) : (
+        <form
+          onSubmit={(e: FormEvent) => {
+            e.preventDefault();
+            createInvoice();
+          }}
+          className="h-full"
+        >
+          <Container justifyBetween maxWidth="sm">
+            <div className="py-4">
+              <div className="mb-4">
+                <DualCurrencyField
+                  id="amount"
+                  min={0}
+                  label={t("amount.label")}
+                  placeholder={t("amount.placeholder")}
+                  fiatValue={fiatAmount}
+                  onChange={handleChange}
+                  autoFocus
+                />
+              </div>
 
-                <div className="mb-4">
-                  <TextField
-                    id="description"
-                    label={t("description.label")}
-                    placeholder={t("description.placeholder")}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="text-center mb-4">
-                  <div className="mb-4">
-                    <Button
-                      type="submit"
-                      label={t("actions.create_invoice")}
-                      fullWidth
-                      primary
-                      loading={loading}
-                      disabled={loading}
-                    />
-                  </div>
-                </div>
-              </form>
-            )}
-          </div>
-        </Container>
-      </div>
+              <div className="mb-4">
+                <TextField
+                  id="description"
+                  label={t("description.label")}
+                  placeholder={t("description.placeholder")}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="mb-4">
+              <Button
+                type="submit"
+                label={t("actions.create_invoice")}
+                fullWidth
+                primary
+                loading={loading}
+                disabled={loading}
+              />
+            </div>
+          </Container>
+        </form>
+      )}
     </div>
   );
 }
