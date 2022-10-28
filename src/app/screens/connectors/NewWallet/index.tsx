@@ -5,6 +5,9 @@ import {
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import LoginFailedToast from "@components/toasts/LoginFailedToast";
+import Base64 from "crypto-js/enc-base64";
+import Hex from "crypto-js/enc-hex";
+import hmacSHA256 from "crypto-js/hmac-sha256";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +16,7 @@ import utils from "~/common/lib/utils";
 
 const walletCreateUrl =
   process.env.WALLET_CREATE_URL || "https://app.regtest.getalby.com/api/users";
+const NEW_WALLET_KEY_AS_HEX = process.env.NEW_WALLET_KEY;
 
 interface LNDHubCreateResponse {
   login: string;
@@ -41,15 +45,26 @@ export default function NewWallet() {
     headers.append("Accept", "application/json");
     headers.append("Access-Control-Allow-Origin", "*");
     headers.append("Content-Type", "application/json");
+    headers.append("X-User-Agent", "alby-extension");
+
+    const timestamp = Date.now();
+    const body = JSON.stringify({
+      email,
+      password,
+      lightning_addresses_attributes: [{ address: lnAddress }], // address must be provided as array, in theory we support multiple addresses per account
+    });
+    headers.append("X-TS", timestamp.toString());
+    if (NEW_WALLET_KEY_AS_HEX) {
+      const mac = hmacSHA256(body, Hex.parse(NEW_WALLET_KEY_AS_HEX)).toString(
+        Base64
+      );
+      headers.append("X-VERIFY", mac);
+    }
 
     return fetch(walletCreateUrl, {
       method: "POST",
       headers,
-      body: JSON.stringify({
-        email,
-        password,
-        lightning_addresses_attributes: [{ address: lnAddress }], // address must be provided as array, in theory we support multiple addresses per account
-      }),
+      body,
     })
       .then((res) => res.json())
       .then((data) => {
