@@ -19,12 +19,6 @@
         "subtitle": "Trade investment products in Bitcoin",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/loft-trade_thumbnail.svg",
         "url": "https://loft.trade/"
-      },
-      {
-        "title": "Lightning Swap",
-        "subtitle": "Top up your BTC Lightning balance with any coin",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lightning_swap.svg",
-        "url": "https://topup.vercel.app/"
       }
     ]
   },
