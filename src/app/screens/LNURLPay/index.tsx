@@ -7,7 +7,7 @@ import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
 import axios from "axios";
-import React, { Fragment, useState, useEffect, MouseEvent } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -201,7 +201,7 @@ function LNURLPay() {
     }
   }
 
-  function reject(e: MouseEvent) {
+  function reject(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (navState.isPrompt) {
       msg.error(USER_REJECTED_ERROR);
@@ -210,7 +210,7 @@ function LNURLPay() {
     }
   }
 
-  function close(e: MouseEvent) {
+  function close(e: React.MouseEvent<HTMLButtonElement>) {
     // will never be reached via prompt
     e.preventDefault();
     navigate(-1);

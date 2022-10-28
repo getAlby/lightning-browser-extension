@@ -6,7 +6,7 @@ import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import axios from "axios";
-import { useState, useEffect, MouseEvent } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ScreenHeader from "~/app/components/ScreenHeader";
@@ -127,7 +127,7 @@ function LNURLWithdraw() {
     }
   }
 
-  function reject(e: MouseEvent) {
+  function reject(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (navState.isPrompt) {
       msg.error(USER_REJECTED_ERROR);
@@ -136,7 +136,7 @@ function LNURLWithdraw() {
     }
   }
 
-  function close(e: MouseEvent) {
+  function close(e: React.MouseEvent<HTMLButtonElement>) {
     // will never be reached via prompt
     e.preventDefault();
     navigate(-1);

@@ -4,7 +4,7 @@ import Container from "@components/Container";
 import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-import { useState, MouseEvent, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -95,7 +95,7 @@ function ConfirmKeysend() {
     }
   }
 
-  function reject(e: MouseEvent) {
+  function reject(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (origin) {
       msg.error(USER_REJECTED_ERROR);
@@ -104,7 +104,7 @@ function ConfirmKeysend() {
     }
   }
 
-  function close(e: MouseEvent) {
+  function close(e: React.MouseEvent<HTMLButtonElement>) {
     if (navState.isPrompt) {
       window.close();
     } else {
