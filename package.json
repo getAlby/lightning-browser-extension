@@ -49,7 +49,7 @@
     "browser-polyfill": "^3.20.2",
     "crypto-browserify": "^3.12.0",
     "crypto-js": "^4.1.1",
-    "dayjs": "^1.11.5",
+    "dayjs": "^1.11.6",
     "dexie": "^3.2.2",
     "elliptic": "^6.5.4",
     "html5-qrcode": "^2.2.3",
