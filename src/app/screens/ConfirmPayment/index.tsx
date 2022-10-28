@@ -108,6 +108,15 @@ function ConfirmPayment() {
     }
   }
 
+  function close(e: React.MouseEvent<HTMLButtonElement>) {
+    if (navState.isPrompt) {
+      window.close();
+    } else {
+      e.preventDefault();
+      navigate(-1);
+    }
+  }
+
   function saveBudget() {
     if (!budget || !navState.origin) return;
     return msg.request("addAllowance", {
@@ -183,7 +192,7 @@ function ConfirmPayment() {
           />
           <div className="my-4">
             <Button
-              onClick={() => window.close()}
+              onClick={close}
               label={tCommon("actions.close")}
               fullWidth
             />

@@ -4,7 +4,7 @@ import Container from "@components/Container";
 import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-import { useState, MouseEvent, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -95,11 +95,20 @@ function ConfirmKeysend() {
     }
   }
 
-  function reject(e: MouseEvent) {
+  function reject(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (origin) {
       msg.error(USER_REJECTED_ERROR);
     } else {
+      navigate(-1);
+    }
+  }
+
+  function close(e: React.MouseEvent<HTMLButtonElement>) {
+    if (navState.isPrompt) {
+      window.close();
+    } else {
+      e.preventDefault();
       navigate(-1);
     }
   }
@@ -162,10 +171,7 @@ function ConfirmKeysend() {
             url={origin.host}
           />
           <div className="my-4">
-            <SuccessMessage
-              message={successMessage}
-              onClose={() => window.close()}
-            />
+            <SuccessMessage message={successMessage} onClose={close} />
           </div>
         </Container>
       )}

@@ -5,7 +5,7 @@ import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
 import axios from "axios";
-import { useState, MouseEvent } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -80,7 +80,7 @@ function LNURLChannel() {
     }
   }
 
-  function reject(e: MouseEvent<HTMLAnchorElement>) {
+  function reject(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (navState.isPrompt) {
       msg.error(USER_REJECTED_ERROR);
@@ -89,7 +89,7 @@ function LNURLChannel() {
     }
   }
 
-  function close(e: MouseEvent) {
+  function close(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (!navState.isPrompt) {
       navigate(-1); // success will only be shown in popup, see comment above
