@@ -104,6 +104,15 @@ function ConfirmKeysend() {
     }
   }
 
+  function close(e: MouseEvent) {
+    if (navState.isPrompt) {
+      window.close();
+    } else {
+      e.preventDefault();
+      navigate(-1);
+    }
+  }
+
   function saveBudget() {
     if (!budget) return;
     return msg.request("addAllowance", {
@@ -162,10 +171,7 @@ function ConfirmKeysend() {
             url={origin.host}
           />
           <div className="my-4">
-            <SuccessMessage
-              message={successMessage}
-              onClose={() => window.close()}
-            />
+            <SuccessMessage message={successMessage} onClose={close} />
           </div>
         </Container>
       )}
