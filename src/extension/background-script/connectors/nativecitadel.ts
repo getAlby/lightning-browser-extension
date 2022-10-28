@@ -3,11 +3,6 @@ import Citadel from "./citadel";
 
 const NativeConnector = Native(Citadel);
 
-interface Config {
-  url: string;
-  password: string;
-}
-
 type PostMessage = {
   id: string;
   method: string;
@@ -18,18 +13,6 @@ type PostMessage = {
 };
 
 export default class NativeCitadel extends NativeConnector {
-  constructor(config: Config) {
-    super(config);
-    this.requestFunc = (
-      jwt: string,
-      method: string,
-      path: string,
-      args?: Record<string, unknown>
-    ) => {
-      return this.request(jwt, method, path, args);
-    };
-  }
-
   _nativeRequest(postMessage: PostMessage) {
     return new Promise<{
       id: string;
@@ -58,19 +41,20 @@ export default class NativeCitadel extends NativeConnector {
   }
 
   async request<Type>(
-    jwt: string,
     method: string,
     path: string,
     args?: Record<string, unknown>
   ): Promise<Type> {
     let body;
     let headers: Record<string, string> = {};
+    path = this.config.url + (this.config.url.endsWith("/") ? "" : "/") + path;
+
     if (method !== "GET") {
       headers = {
         "Content-type": "application/json",
       };
     }
-    if (jwt)
+    if (this.jwt)
       headers = {
         ...headers,
         Authorization: `JWT ${this.jwt}`,

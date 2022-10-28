@@ -48,7 +48,7 @@ class CitadelConnector implements Connector {
 
   async getInfo(): Promise<GetInfoResponse> {
     await this.ensureLogin();
-    return this._request("GET", "api/v1/lnd/info").then((data) => {
+    return this.request("GET", "api/v1/lnd/info").then((data) => {
       return {
         data: {
           alias: data.alias,
@@ -79,7 +79,7 @@ class CitadelConnector implements Connector {
 
   async getBalance(): Promise<GetBalanceResponse> {
     await this.ensureLogin();
-    return this._request("GET", "api/v1/lnd/wallet/lightning").then((data) => {
+    return this.request("GET", "api/v1/lnd/wallet/lightning").then((data) => {
       const balance = parseInt(data.localBalance?.sat as string);
       return {
         data: {
@@ -93,7 +93,7 @@ class CitadelConnector implements Connector {
   }
   async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
     await this.ensureLogin();
-    return this._request("POST", "api/v1/lnd/lightning/payInvoice", {
+    return this.request("POST", "api/v1/lnd/lightning/payInvoice", {
       paymentRequest: args.paymentRequest,
     }).then((data) => {
       return {
@@ -113,7 +113,7 @@ class CitadelConnector implements Connector {
 
   async signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
     await this.ensureLogin();
-    return this._request("POST", "api/v1/lnd/util/sign-message", {
+    return this.request("POST", "api/v1/lnd/util/sign-message", {
       message: args.message,
     }).then((data) => {
       return {
@@ -126,7 +126,7 @@ class CitadelConnector implements Connector {
   }
 
   protected async refresh(): Promise<string> {
-    const data = await this._request("POST", "manager-api/v1/account/refresh");
+    const data = await this.request("POST", "manager-api/v1/account/refresh");
     if (typeof data !== "object" || data === null || !data.jwt) {
       throw new Error("Failed to login.");
     }
@@ -134,7 +134,7 @@ class CitadelConnector implements Connector {
   }
 
   protected async login(password: string, totpToken: string): Promise<string> {
-    const data = await this._request("POST", "manager-api/v1/account/login", {
+    const data = await this.request("POST", "manager-api/v1/account/login", {
       password,
       totpToken,
     });
@@ -146,15 +146,15 @@ class CitadelConnector implements Connector {
 
   protected async ensureLogin() {
     try {
-      await this.refresh();
+      this.jwt = await this.refresh();
     } catch {
-      await this.login(this.config.password, "");
+      this.jwt = await this.login(this.config.password, "");
     }
   }
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
     await this.ensureLogin();
-    return this._request("POST", "api/v1/lnd/util/lightning/addInvoice", {
+    return this.request("POST", "api/v1/lnd/util/lightning/addInvoice", {
       memo: args.memo,
       amt: args.amount.toString(),
     }).then((data) => {
@@ -169,7 +169,7 @@ class CitadelConnector implements Connector {
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
     await this.ensureLogin();
-    return this._request(
+    return this.request(
       "GET",
       `invoice-info?paymentHash=${args.paymentHash}`
     ).then((data) => {
@@ -181,12 +181,8 @@ class CitadelConnector implements Connector {
     });
   }
 
-  async _request(method: string, path: string, args?: Record<string, unknown>) {
+  async request(method: string, path: string, args?: Record<string, unknown>) {
     path = this.config.url + (this.config.url.endsWith("/") ? "" : "/") + path;
-
-    if (this._requestFunc) {
-      return await this._requestFunc<ResponseType>(this.jwt, method, path);
-    }
 
     const headers = new Headers();
     headers.append("Accept", "application/json");
