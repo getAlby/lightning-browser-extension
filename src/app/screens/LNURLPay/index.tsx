@@ -7,7 +7,7 @@ import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
 import axios from "axios";
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -392,6 +392,8 @@ function LNURLPay() {
                           <SatButtons
                             onClick={setValueSat}
                             disabled={loadingConfirm}
+                            min={+details.minSendable / 1000}
+                            max={+details.maxSendable / 1000}
                           />
                         </div>
                       )}
@@ -441,7 +443,12 @@ function LNURLPay() {
                         isFocused={false}
                         label={tCommon("actions.confirm")}
                         loading={loadingConfirm}
-                        disabled={loadingConfirm || !valueSat}
+                        disabled={
+                          loadingConfirm ||
+                          !valueSat ||
+                          +valueSat < +details.minSendable / 1000 ||
+                          +valueSat > +details.maxSendable / 1000
+                        }
                         onCancel={reject}
                       />
                     </div>
