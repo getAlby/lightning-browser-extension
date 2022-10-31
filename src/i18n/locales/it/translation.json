@@ -112,7 +112,7 @@
       },
       "lndhub_bluewallet": {
         "title": "Bluewallet",
-        "description": "Connettiti al tuo portafoglio mobile Bluewallet",
+        "description": "Connettiti al portafoglio mobile Bluewallet",
         "page": {
           "title": "Connettiti a BlueWallet",
           "description": "Nell'app BlueWallet, scegli il portafoglio che vuoi connettere, aprilo, clicca su \"...\", clicca su Export/Backup per mostrare il codice QR e scansionalo con la tua webcam."
@@ -552,7 +552,7 @@
       },
       "publisher": {
         "allowance": {
-          "title": "",
+          "title": "Margine",
           "used_budget": "sats utilizzati"
         }
       }
@@ -646,7 +646,10 @@
       "connection_failed": "Connessione fallita",
       "payment_failed": "Pagamento fallito"
     },
-    "response": "Risposta"
+    "response": "Risposta",
+    "sats_one": "sat",
+    "sats_other": "sats",
+    "success_message": "{{amount}}{{fiatAmount}} inviati a {{destination}}"
   },
   "components": {
     "allowance_menu": {
@@ -699,42 +702,42 @@
       }
     },
     "companion_download_info": {
-      "description": "",
-      "download_here": "",
-      "using_tor": "",
-      "or": ""
+      "description": "Stai cercando di connetterti a un nodo dietro Tor. Per fare ciò è necessario avere installato l'app companion Alby o avere Tor in esecuzione. (Se non sei sicuro, ti consigliamo l'app complementare Alby.)",
+      "download_here": "Scarica il companion Alby qui!",
+      "using_tor": "clicca qui per continuare se stai utilizzando il Browser Tor",
+      "or": "Oppure:"
     },
     "toasts": {
       "connection_error": {
-        "what_you_can_do": "",
-        "double_check": "",
-        "if_ssl_errors": "",
-        "visit_guides": ""
+        "what_you_can_do": "Ecco cosa puoi fare:",
+        "double_check": "Ricontrolla i dettagli della tua connessione",
+        "if_ssl_errors": "e se ci sono errori SSL (ad esempio ERR_CERT_AUTHORITY_INVALID), clicca su \"avanzato\" e procedi all'accettazione del certificato.",
+        "visit_guides": "Visita le nostre guide per ulteriore assistenza"
       },
       "login_failed": {
-        "password_reset": ""
+        "password_reset": "Hai dimenticato la password? Clicca qui"
       },
       "errors": {
-        "invalid_credentials": ""
+        "invalid_credentials": "Password non valida. Controlla la password e l'indirizzo e-mail e riprova."
       }
     },
     "account_menu": {
-      "screen_reader": "",
-      "title": "",
+      "screen_reader": "Attiva/disattiva menu a tendina",
+      "title": "Cambia account",
       "options": {
         "account": {
-          "add": "",
-          "manage": ""
+          "add": "Aggiungi un nuovo account",
+          "manage": "Gestisci gli account"
         }
       }
     },
     "publishers_table": {
-      "payments": "",
-      "used": ""
+      "payments": "pagamenti",
+      "used": "usati"
     },
     "badge": {
       "label": {
-        "active": ""
+        "active": "ATTIVO"
       }
     }
   }
