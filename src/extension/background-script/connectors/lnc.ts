@@ -217,7 +217,7 @@ class Lnc implements Connector {
       });
   }
 
-  request(method: FixMe, args: FixMe) {
+  requestLNC(method: FixMe, args: FixMe) {
     const func = method.split(".").reduce((obj: FixMe, prop: FixMe) => {
       return obj[prop];
     }, this.lnc);
