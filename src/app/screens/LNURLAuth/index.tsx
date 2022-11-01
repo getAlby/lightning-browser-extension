@@ -4,8 +4,7 @@ import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
-import { useState } from "react";
-import type { MouseEvent } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ScreenHeader from "~/app/components/ScreenHeader";
@@ -74,7 +73,7 @@ function LNURLAuth() {
     }
   }
 
-  function reject(e: MouseEvent) {
+  function reject(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (navState.isPrompt) {
       msg.error(USER_REJECTED_ERROR);
@@ -83,7 +82,7 @@ function LNURLAuth() {
     }
   }
 
-  function close(e: MouseEvent) {
+  function close(e: React.MouseEvent<HTMLButtonElement>) {
     // will never be reached via prompt
     e.preventDefault();
     navigate(-1);

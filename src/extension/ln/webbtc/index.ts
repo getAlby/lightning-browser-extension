@@ -6,20 +6,14 @@ type RequestInvoiceArgs = {
   defaultMemo?: string;
 };
 
-type KeysendArgs = {
-  destination: string;
-  customRecords?: Record<string, string>;
-  amount: string | number;
-};
-
-export default class WebLNProvider {
+export default class WebBTCProvider {
   enabled: boolean;
   isEnabled: boolean;
   executing: boolean;
 
   constructor() {
     this.enabled = false;
-    this.isEnabled = false; // seems some webln implementations use webln.isEnabled and some use webln.enabled
+    this.isEnabled = false;
     this.executing = false;
   }
 
@@ -40,39 +34,19 @@ export default class WebLNProvider {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling getInfo");
     }
-    return this.execute("getInfo");
-  }
-
-  lnurl(lnurlEncoded: string) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling lnurl");
-    }
-    return this.execute("lnurl", { lnurlEncoded });
-  }
-
-  sendPayment(paymentRequest: string) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling sendPayment");
-    }
-    return this.execute("sendPaymentOrPrompt", { paymentRequest });
-  }
-
-  keysend(args: KeysendArgs) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling keysend");
-    }
-    return this.execute("keysendOrPrompt", args);
-  }
-
-  makeInvoice(args: string | number | RequestInvoiceArgs) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling makeInvoice");
-    }
-    if (typeof args !== "object") {
-      args = { amount: args };
-    }
-
-    return this.execute("makeInvoice", args);
+    return {
+      version: "stable",
+      supports: ["lightning"],
+      methods: [
+        "enable",
+        "getInfo",
+        "signMessage",
+        "verifyMessage",
+        "makeInvoice",
+        "sendPayment",
+        "keysend",
+      ],
+    };
   }
 
   signMessage(message: string) {
@@ -90,15 +64,38 @@ export default class WebLNProvider {
     throw new Error("Alby does not support `verifyMessage`");
   }
 
-  request(method: string, params: FixMe) {
+  makeInvoice(args: string | number | RequestInvoiceArgs) {
     if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling verifyMessage");
+      throw new Error("Provider must be enabled before calling makeInvoice");
+    }
+    if (typeof args !== "object") {
+      args = { amount: args };
     }
 
-    return this.execute("request", {
-      method,
-      params,
-    });
+    return this.execute("makeInvoice", args);
+  }
+
+  sendPayment(paymentRequest: string) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling sendPayment");
+    }
+    return this.execute("sendPaymentOrPrompt", { paymentRequest });
+  }
+
+  sendTransaction(address: string, amount: string) {
+    if (!this.enabled) {
+      throw new Error(
+        "Provider must be enabled before calling sendTransaction"
+      );
+    }
+    throw new Error("Alby does not support `sendTransaction`");
+  }
+
+  getAddress(index: number, num: number, change: boolean) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling getAddress");
+    }
+    throw new Error("Alby does not support `getAddress`");
   }
 
   // NOTE: new call `action`s must be specified also in the content script
@@ -114,7 +111,7 @@ export default class WebLNProvider {
           application: "LBE",
           prompt: true,
           action: `webln/${action}`,
-          scope: "webln",
+          scope: "webbtc",
           args,
         },
         "*" // TODO use origin
@@ -126,8 +123,7 @@ export default class WebLNProvider {
         if (
           !messageEvent.data ||
           !messageEvent.data.response ||
-          messageEvent.data.application !== "LBE" ||
-          messageEvent.data.scope !== "webln"
+          messageEvent.data.application !== "LBE"
         ) {
           return;
         }

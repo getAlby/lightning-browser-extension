@@ -11,6 +11,7 @@ export type Props = {
   label?: string;
   onConfirm?: MouseEventHandler;
   onCancel: MouseEventHandler;
+  isFocused?: boolean;
 };
 
 export default function ConfirmOrCancel({
@@ -19,13 +20,14 @@ export default function ConfirmOrCancel({
   label = i18n.t("actions.confirm", commonI18nNamespace) as string,
   onConfirm,
   onCancel,
+  isFocused = true,
 }: Props) {
   const { t: tCommon } = useTranslation("common");
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    buttonRef?.current?.focus();
-  }, []);
+    isFocused && buttonRef?.current?.focus();
+  }, [isFocused]);
 
   return (
     <div className="pt-2 pb-4">

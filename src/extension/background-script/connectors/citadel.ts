@@ -91,7 +91,7 @@ class CitadelConnector implements Connector {
         preimage: res.paymentPreimage,
         paymentHash: res.paymentHash,
         route: {
-          total_amt: Math.round(
+          total_amt: Math.floor(
             parseInt(res.paymentRoute?.totalAmtMsat as string) / 1000
           ),
           total_fees: parseInt(res.paymentRoute?.totalFeesMsat as string),

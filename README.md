@@ -398,7 +398,7 @@ Also we focus on supporting multiple different node backends (non-custodial and 
 
 #### What is WebLN?
 
-WebLN is a library and set of specifications for lightning apps and client providers to facilitate communication between apps and users' lightning nodes in a secure way. It provides a programmatic, permissioned interface for letting applications ask users to send payments, generate invoices to receive payments, and much more. [This documentation](https://webln.dev/#/) covers how to use WebLN in your Lightning-driven applications.
+WebLN is a library and set of specifications for lightning apps and client providers to facilitate communication between apps and users' lightning nodes in a secure way. It provides a programmatic, permissioned interface for letting applications ask users to send payments, generate invoices to receive payments, and much more. [This documentation](https://webln.guide/) covers how to use WebLN in your Lightning-driven applications.
 
 #### Is there a bounty program and can I contribute?
 

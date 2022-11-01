@@ -154,7 +154,7 @@ function Send() {
   }
 
   return (
-    <div>
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <Header
         title={t("title")}
         headerLeft={
@@ -164,9 +164,9 @@ function Send() {
           />
         }
       />
-      <div className="py-4">
-        <Container maxWidth="sm">
-          <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="h-full">
+        <Container justifyBetween maxWidth="sm">
+          <div className="pt-4">
             <TextField
               id="invoice"
               label={t("input.label")}
@@ -181,6 +181,7 @@ function Send() {
               }
               endAdornment={
                 <button
+                  aria-label="Scan QR"
                   type="button"
                   className="flex justify-center items-center w-10 h-8"
                   onClick={() => setQrIsOpen(true)}
@@ -189,19 +190,19 @@ function Send() {
                 </button>
               }
             />
-            <div className="mt-4">
-              <Button
-                type="submit"
-                label={tCommon("actions.continue")}
-                primary
-                fullWidth
-                loading={loading}
-                disabled={invoice === "" || loading}
-              />
-            </div>
-          </form>
+          </div>
+          <div className="my-4">
+            <Button
+              type="submit"
+              label={tCommon("actions.continue")}
+              primary
+              fullWidth
+              loading={loading}
+              disabled={invoice === "" || loading}
+            />
+          </div>
         </Container>
-      </div>
+      </form>
     </div>
   );
 }

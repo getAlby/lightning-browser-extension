@@ -117,7 +117,7 @@ class LnBits implements Connector {
               preimage: invoice.preimage,
               settled: !invoice.pending,
               settleDate: invoice.time * 1000,
-              totalAmount: `${invoice.amount / 1000}`,
+              totalAmount: `${Math.floor(invoice.amount / 1000)}`,
               type: "received",
             };
           });

@@ -15,6 +15,7 @@ const weblnCalls = [
   "webln/keysendOrPrompt",
   "webln/makeInvoice",
   "webln/signMessageOrPrompt",
+  "webln/request",
 ];
 // calls that can be executed when webln is not enabled for the current content page
 const disabledCalls = ["webln/enable"];
@@ -37,7 +38,7 @@ async function init() {
     }
   });
 
-  // message listener to listen to inpage webln calls
+  // message listener to listen to inpage webln/webbtc calls
   // those calls get passed on to the background script
   // (the inpage script can not do that directly, but only the inpage script can make webln available to the page)
   window.addEventListener("message", (ev) => {

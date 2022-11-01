@@ -39,53 +39,18 @@ function Publisher() {
         });
         setAllowance(response);
 
-        const payments: Transaction[] = response.payments.map((payment) => {
-          const {
-            createdAt,
-            description,
-            host,
-            id,
-            location,
-            name,
-            preimage,
-            totalAmount,
-            totalFees,
-          } = payment;
-          return {
-            createdAt,
-            description,
-            id: `${id}`,
-            location,
-            name,
-            preimage,
-            host,
-            totalAmount:
-              typeof totalAmount === "string"
-                ? parseInt(totalAmount)
-                : totalAmount,
-            totalFees,
-            amount: "",
-            currency: "",
-            totalAmountFiat: "",
-            value: "",
-            type: "sent",
-            date: dayjs(payment.createdAt).fromNow(),
-            title: (
-              <p className="truncate">
-                <a target="_blank" href={payment.location} rel="noreferrer">
-                  {/* 
-                    TODO: https://github.com/getAlby/lightning-browser-extension/issues/1356
-                    Refactor: use virtual attribute on payment for title
-                  */}
-                  {payment.name || payment.description}
-                </a>
-              </p>
-            ),
-          };
-        });
+        const payments: Transaction[] = response.payments.map((payment) => ({
+          ...payment,
+          id: `${payment.id}`,
+          type: "sent",
+          date: dayjs(payment.createdAt).fromNow(),
+          title: payment.name || payment.description,
+          publisherLink: payment.location,
+        }));
+
         for (const payment of payments) {
           const totalAmountFiat = settings.showFiat
-            ? getFiatValue(payment.totalAmount)
+            ? await getFiatValue(payment.totalAmount)
             : "";
           payment.totalAmountFiat = totalAmountFiat;
         }

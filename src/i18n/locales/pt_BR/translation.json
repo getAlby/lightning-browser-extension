@@ -596,7 +596,7 @@
       "success": "{{amount}} recebidos com sucesso de {{sender}}"
     },
     "lnurlchannel": {
-      "success": "Solicitação de canal de pagamento enviada com sucesso",
+      "success": "Solicitação de canal de pagamento enviada com sucesso para {{name}}",
       "title": "Solicitar Canal de Pagamento",
       "content_message": {
         "heading": "Solicitar canal de pagamento do servidor"
@@ -625,13 +625,13 @@
     "error": "Erro",
     "settings": "Configurações",
     "websites": "Sites",
-    "sats": "sats",
+    "sats_one": "sat",
+    "sats_other": "sats",
     "loading": "carregando",
     "amount": "Quantia",
     "optional": "Opcional",
     "feedback": "Feedback",
     "copied": "Copiado!",
-    "were_sent_to": "foram enviados para",
     "actions": {
       "delete": "Remover",
       "edit": "Editar",
@@ -659,7 +659,8 @@
     "description": "Descrição",
     "description_full": "Descrição Completa",
     "message": "Mensagem",
-    "help": "Ajuda"
+    "help": "Ajuda",
+    "response": "Resposta"
   },
   "components": {
     "allowance_menu": {
