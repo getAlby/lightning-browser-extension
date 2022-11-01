@@ -51,7 +51,7 @@ const AllowanceView: FC<Props> = (props) => {
           type: "sent",
           date: dayjs(payment.createdAt).fromNow(),
           title: payment.name || payment.description,
-          publisherLink: `options.html#/publishers/${payment.id}`,
+          publisherLink: `options.html#/publishers/${props.allowance.id}`,
         })
       );
 
@@ -74,13 +74,7 @@ const AllowanceView: FC<Props> = (props) => {
     };
 
     !payments && !isLoadingSettings && getPayments();
-  }, [
-    props.allowance.payments,
-    isLoadingSettings,
-    payments,
-    getFiatValue,
-    showFiat,
-  ]);
+  }, [props.allowance, isLoadingSettings, payments, getFiatValue, showFiat]);
 
   return (
     <div className="overflow-y-auto no-scrollbar h-full">
