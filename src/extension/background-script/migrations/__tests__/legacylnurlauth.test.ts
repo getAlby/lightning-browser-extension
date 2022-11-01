@@ -24,6 +24,7 @@ describe("With lnurlAuth enabled allowance", () => {
       totalBudget: 500,
       createdAt: "123456",
       tag: "",
+      permissions: [],
     },
   ];
 
@@ -49,6 +50,7 @@ describe("Without lnurlAuth enabled allowance", () => {
       totalBudget: 500,
       createdAt: "123456",
       tag: "",
+      permissions: [],
     },
   ];
 
@@ -74,6 +76,7 @@ describe("Migrations already executed", () => {
       totalBudget: 500,
       createdAt: "123456",
       tag: "",
+      permissions: [],
     },
   ];
 

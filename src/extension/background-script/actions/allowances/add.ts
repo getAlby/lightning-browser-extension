@@ -35,6 +35,7 @@ const add = async (message: MessageAllowanceAdd) => {
       remainingBudget: totalBudget,
       tag: "",
       totalBudget: totalBudget,
+      permissions: [],
     };
     await db.allowances.add(dbAllowance);
   }

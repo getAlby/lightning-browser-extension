@@ -49,6 +49,7 @@ const mockAllowances: DbAllowance[] = [
     totalBudget: 5000,
     createdAt: "123456",
     tag: "",
+    permissions: [],
   },
   {
     enabled: true,
@@ -62,6 +63,7 @@ const mockAllowances: DbAllowance[] = [
     totalBudget: 200,
     createdAt: "123456",
     tag: "",
+    permissions: [],
   },
 ];
 
