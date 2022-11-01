@@ -241,6 +241,14 @@ class Lnd implements Connector {
     });
   };
 
+  async requestMethod(method: string, params: FixMe): Promise<FixMe> {
+    return this.request<FixMe>("GET", `/v1/${method}`, undefined, {}).then(
+      (response) => {
+        return { data: response };
+      }
+    );
+  }
+
   async getInvoices(): Promise<GetInvoicesResponse> {
     const data = await this.request<{
       invoices: {
