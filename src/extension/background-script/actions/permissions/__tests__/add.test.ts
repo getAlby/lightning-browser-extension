@@ -36,10 +36,6 @@ afterEach(() => {
 });
 
 describe("add permission", () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   test("adds permission method to allowance and saves permissions", async () => {
     const message: MessagePermissionAdd = {
       application: "LBE",
