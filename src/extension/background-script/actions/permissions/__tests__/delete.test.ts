@@ -59,10 +59,6 @@ afterEach(() => {
 });
 
 describe("delete permission", () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   test("removes permission method from allowance and deletes permission", async () => {
     const message: MessagePermissionDelete = {
       application: "LBE",
