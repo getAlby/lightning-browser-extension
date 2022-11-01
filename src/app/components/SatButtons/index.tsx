@@ -10,51 +10,37 @@ type Props = {
 };
 
 function roundThousands(number: number) {
-  return number < 1000 ? number : Math.floor(number / 1000) * 1000;
+  return number < 1000 ? Math.round(number) : Math.floor(number / 1000) * 1000;
 }
 
 function stringifyThousands(number: number) {
-  return number < 1000 ? `${number}` : `${Math.floor(number / 1000)}K`;
+  return number < 1000
+    ? `${Math.round(number)}`
+    : `${Math.floor(number / 1000)}K`;
 }
 
 function amountsArray(min: number, max: number) {
   const distance = Math.min(max - min, 10000);
   const safeMin = max < 100 ? min : Math.max(min, 100);
-  return [safeMin, min + distance / 10, min + distance / 2, min + distance];
+  return [safeMin, min + distance / 10, min + distance / 2, min + distance].map(
+    (amount) => roundThousands(amount)
+  );
 }
 
 function SatButtons({ onClick, disabled, min = 100, max = 10000 }: Props) {
-  const amounts = amountsArray(min, max);
+  const amounts = [...new Set(amountsArray(min, max))]; //we use Set to dedup the array, useful of the min-max range is tight
   return (
     <div className="flex gap-2 mt-2">
-      <Button
-        icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label={`${stringifyThousands(amounts[0])} ⚡`}
-        onClick={() => onClick(`${roundThousands(amounts[0])}`)}
-        fullWidth
-        disabled={disabled}
-      />
-      <Button
-        icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label={`${stringifyThousands(amounts[1])} ⚡`}
-        onClick={() => onClick(`${roundThousands(amounts[1])}`)}
-        fullWidth
-        disabled={disabled}
-      />
-      <Button
-        icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label={`${stringifyThousands(amounts[2])} ⚡`}
-        onClick={() => onClick(`${roundThousands(amounts[2])}`)}
-        fullWidth
-        disabled={disabled}
-      />
-      <Button
-        icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label={`${stringifyThousands(amounts[3])} ⚡`}
-        onClick={() => onClick(`${roundThousands(amounts[3])}`)}
-        fullWidth
-        disabled={disabled}
-      />
+      {amounts.map((amount, index) => (
+        <Button
+          key={index}
+          icon={<SatoshiV2Icon className="w-4 h-4" />}
+          label={`${stringifyThousands(amount)} ⚡`}
+          onClick={() => onClick(`${amount}`)}
+          fullWidth
+          disabled={disabled}
+        />
+      ))}
     </div>
   );
 }
