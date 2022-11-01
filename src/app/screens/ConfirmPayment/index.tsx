@@ -47,17 +47,21 @@ function ConfirmPayment() {
   const [fiatBudgetAmount, setFiatBudgetAmount] = useState("");
 
   useEffect(() => {
-    if (showFiat && invoice.satoshis) {
-      const res = getFiatValue(invoice.satoshis);
-      setFiatAmount(res);
-    }
+    (async () => {
+      if (showFiat && invoice.satoshis) {
+        const res = await getFiatValue(invoice.satoshis);
+        setFiatAmount(res);
+      }
+    })();
   }, [invoice.satoshis, showFiat, getFiatValue]);
 
   useEffect(() => {
-    if (showFiat && budget) {
-      const res = getFiatValue(budget);
-      setFiatBudgetAmount(res);
-    }
+    (async () => {
+      if (showFiat && budget) {
+        const res = await getFiatValue(budget);
+        setFiatBudgetAmount(res);
+      }
+    })();
   }, [budget, showFiat, getFiatValue]);
 
   const [rememberMe, setRememberMe] = useState(false);
@@ -82,9 +86,9 @@ function ConfirmPayment() {
       msg.reply(response);
       setSuccessMessage(
         t("success", {
-          amount: `${invoice.satoshis} SATS${
-            showFiat ? ` (${fiatAmount})` : ``
-          }`,
+          amount: `${invoice.satoshis} ${tCommon("sats", {
+            count: invoice.satoshis as number,
+          })}${showFiat ? ` (${fiatAmount})` : ``}`,
         })
       );
     } catch (e) {
@@ -100,6 +104,15 @@ function ConfirmPayment() {
     if (navState.isPrompt) {
       msg.error(USER_REJECTED_ERROR);
     } else {
+      navigate(-1);
+    }
+  }
+
+  function close(e: React.MouseEvent<HTMLButtonElement>) {
+    if (navState.isPrompt) {
+      window.close();
+    } else {
+      e.preventDefault();
       navigate(-1);
     }
   }
@@ -168,14 +181,18 @@ function ConfirmPayment() {
             message={
               !navState.origin
                 ? successMessage
-                : `${invoice.satoshis} SATS ${
-                    showFiat ? `(${fiatAmount})` : ``
-                  } ${tCommon("were_sent_to")} ${navState.origin.name}`
+                : tCommon("success_message", {
+                    amount: `${invoice.satoshis} ${tCommon("sats", {
+                      count: invoice.satoshis as number,
+                    })}`,
+                    fiatAmount: showFiat ? ` (${fiatAmount})` : ``,
+                    destination: navState.origin.name,
+                  })
             }
           />
           <div className="my-4">
             <Button
-              onClick={() => window.close()}
+              onClick={close}
               label={tCommon("actions.close")}
               fullWidth
             />

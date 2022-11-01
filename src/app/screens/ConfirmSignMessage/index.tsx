@@ -6,6 +6,7 @@ import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
@@ -20,6 +21,7 @@ function ConfirmSignMessage() {
   const { t } = useTranslation("translation", {
     keyPrefix: "confirm_sign_message",
   });
+  const navigate = useNavigate();
 
   const message = navState.args?.message as string;
   const origin = navState.origin as OriginData;
@@ -52,6 +54,15 @@ function ConfirmSignMessage() {
   function reject(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
     msg.error(USER_REJECTED_ERROR);
+  }
+
+  function close(e: React.MouseEvent<HTMLButtonElement>) {
+    if (navState.isPrompt) {
+      window.close();
+    } else {
+      e.preventDefault();
+      navigate(-1);
+    }
   }
 
   return (
@@ -104,10 +115,7 @@ function ConfirmSignMessage() {
             image={origin.icon}
             url={origin.host}
           />
-          <SuccessMessage
-            message={successMessage}
-            onClose={() => window.close()}
-          />
+          <SuccessMessage message={successMessage} onClose={close} />
         </Container>
       )}
     </div>

@@ -38,8 +38,12 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
 
   useEffect(() => {
     if (budget !== "" && showFiat) {
-      const res = getFiatValue(budget);
-      setFiatAmount(res);
+      const getFiat = async () => {
+        const res = await getFiatValue(budget);
+        setFiatAmount(res);
+      };
+
+      getFiat();
     }
   }, [budget, showFiat, getFiatValue]);
 
@@ -134,7 +138,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                 label={t("new_budget.label")}
                 min={0}
                 autoFocus
-                placeholder={tCommon("sats")}
+                placeholder={tCommon("sats", { count: 0 })}
                 value={budget}
                 hint={t("hint")}
                 fiatValue={fiatAmount}
