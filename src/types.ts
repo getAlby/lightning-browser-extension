@@ -180,6 +180,32 @@ export interface MessageAccountAll extends MessageDefault {
   action: "getAccounts";
 }
 
+export interface MessagePermissionAdd extends MessageDefault {
+  args: {
+    host: string;
+    method: string;
+    enabled: boolean;
+    blocked: boolean;
+  };
+  action: "addPermission";
+}
+
+export interface MessagePermissionDelete extends MessageDefault {
+  args: {
+    host: string;
+    method: string;
+  };
+  action: "deletePermission";
+}
+
+export interface MessagePermissionGet extends MessageDefault {
+  args: {
+    host: string;
+    method: string;
+  };
+  action: "getPermission";
+}
+
 export interface MessageBlocklistAdd extends MessageDefault {
   args: {
     host: string;

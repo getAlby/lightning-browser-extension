@@ -6,6 +6,7 @@ import * as ln from "./actions/ln";
 import lnurl, { auth } from "./actions/lnurl";
 import * as nostr from "./actions/nostr";
 import * as payments from "./actions/payments";
+import * as permissions from "./actions/permissions";
 import * as settings from "./actions/settings";
 import * as setup from "./actions/setup";
 import * as webln from "./actions/webln";
@@ -55,6 +56,9 @@ const routes = {
     getPrivateKey: nostr.getPrivateKey,
     setPrivateKey: nostr.setPrivateKey,
   },
+  addPermission: permissions.add,
+  deletePermission: permissions.deletePermission,
+  getPermission: permissions.get,
 
   // Public calls are accessible from inpage scripts
   public: {
