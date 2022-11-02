@@ -326,7 +326,7 @@ export default class Commando implements Connector {
   }
 
   async requestMethod(method: string, params: FixMe): Promise<FixMe> {
-    const response = this.ln.commando({
+    const response = await this.ln.commando({
       method,
       params,
       rune: this.config.rune,
