@@ -28,7 +28,8 @@ function amountsArray(min: number, max: number) {
 }
 
 function SatButtons({ onClick, disabled, min = 100, max = 10000 }: Props) {
-  const amounts = [...new Set(amountsArray(min, max))]; //we use Set to dedup the array, useful of the min-max range is tight
+  // we use Set to dedup the array, useful if the min-max range is tight
+  const amounts = [...new Set(amountsArray(min, max))];
   return (
     <div className="flex gap-2 mt-2">
       {amounts.map((amount, index) => (
