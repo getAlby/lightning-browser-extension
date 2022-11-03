@@ -61,8 +61,8 @@ type CommandoListInvoicesResponse = {
 type CommandoPayInvoiceResponse = {
   payment_preimage: string;
   payment_hash: string;
-  amount_msat: string;
-  amount_sent_msat: string;
+  msatoshi: number;
+  msatoshi_sent: number;
 };
 type CommandoListInvoiceResponse = {
   invoices: CommandoInvoice[];
@@ -199,23 +199,13 @@ export default class Commando implements Connector {
       })
       .then((resp) => {
         const parsed = resp as CommandoPayInvoiceResponse;
-        const parsedTotalAmtStr = parsed.amount_msat.replace("msat", "");
-        const parsedSentAmtPaidStr = parsed.amount_sent_msat.replace(
-          "msat",
-          ""
-        );
-        const parsedTotalAmt = (parsedTotalAmtStr as unknown as number) / 1000;
-        const parsedTotalFee =
-          ((parsedSentAmtPaidStr as unknown as number) -
-            (parsedTotalAmtStr as unknown as number)) /
-          1000;
         return {
           data: {
             paymentHash: parsed.payment_hash,
             preimage: parsed.payment_preimage,
             route: {
-              total_amt: parsedTotalAmt,
-              total_fees: parsedTotalFee,
+              total_amt: parsed.msatoshi / 1000,
+              total_fees: (parsed.msatoshi_sent - parsed.msatoshi) / 1000,
             },
           },
         };
@@ -244,23 +234,13 @@ export default class Commando implements Connector {
       })
       .then((resp) => {
         const parsed = resp as CommandoPayInvoiceResponse;
-        const parsedTotalAmtStr = parsed.amount_msat.replace("msat", "");
-        const parsedSentAmtPaidStr = parsed.amount_sent_msat.replace(
-          "msat",
-          ""
-        );
-        const parsedTotalAmt = (parsedTotalAmtStr as unknown as number) / 1000;
-        const parsedTotalFee =
-          ((parsedSentAmtPaidStr as unknown as number) -
-            (parsedTotalAmtStr as unknown as number)) /
-          1000;
         return {
           data: {
             paymentHash: parsed.payment_hash,
             preimage: parsed.payment_preimage,
             route: {
-              total_amt: parsedTotalAmt,
-              total_fees: parsedTotalFee,
+              total_amt: parsed.msatoshi / 1000,
+              total_fees: (parsed.msatoshi_sent - parsed.msatoshi) / 1000,
             },
           },
         };
