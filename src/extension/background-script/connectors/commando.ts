@@ -260,7 +260,7 @@ export default class Commando implements Connector {
         const parsed = resp as CommandoListInvoiceResponse;
         return {
           data: {
-            paid: parsed.invoices[0]?.status == "paid",
+            paid: parsed.invoices[0]?.status === "paid",
           },
         };
       });
