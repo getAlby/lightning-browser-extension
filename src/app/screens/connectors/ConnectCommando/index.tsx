@@ -18,6 +18,7 @@ export default function ConnectCommando() {
   const { t } = useTranslation("translation", {
     keyPrefix: `choose_connector.commando`,
   });
+  const { t: tCommon } = useTranslation("common");
   const [formData, setFormData] = useState({
     host: "",
     pubkey: "",
@@ -157,7 +158,7 @@ export default function ConnectCommando() {
         onClick={() => {
           setShowAdvanced(!showAdvanced);
         }}
-        label="Advanced"
+        label={tCommon("advanced")}
       />
       {showAdvanced && (
         <div className="mt-6">

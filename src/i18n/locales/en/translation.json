@@ -636,6 +636,7 @@
   },
   "common": {
     "password": "Password",
+    "advanced": "Advanced",
     "success": "Success",
     "error": "Error",
     "settings": "Settings",
