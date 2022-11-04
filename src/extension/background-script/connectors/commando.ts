@@ -204,8 +204,10 @@ export default class Commando implements Connector {
             paymentHash: parsed.payment_hash,
             preimage: parsed.payment_preimage,
             route: {
-              total_amt: parsed.msatoshi / 1000,
-              total_fees: (parsed.msatoshi_sent - parsed.msatoshi) / 1000,
+              total_amt: Math.floor(parsed.msatoshi / 1000),
+              total_fees: Math.floor(
+                (parsed.msatoshi_sent - parsed.msatoshi) / 1000
+              ),
             },
           },
         };
@@ -239,8 +241,10 @@ export default class Commando implements Connector {
             paymentHash: parsed.payment_hash,
             preimage: parsed.payment_preimage,
             route: {
-              total_amt: parsed.msatoshi / 1000,
-              total_fees: (parsed.msatoshi_sent - parsed.msatoshi) / 1000,
+              total_amt: Math.floor(parsed.msatoshi / 1000),
+              total_fees: Math.floor(
+                (parsed.msatoshi_sent - parsed.msatoshi) / 1000
+              ),
             },
           },
         };
