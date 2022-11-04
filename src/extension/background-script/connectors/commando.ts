@@ -5,13 +5,11 @@ import { v4 as uuidv4 } from "uuid";
 
 import Connector, {
   CheckPaymentArgs,
-  CheckPaymentResponse,
-  ConnectorInvoice,
+  CheckPaymentResponse, //  ConnectorInvoice,
   ConnectPeerArgs,
   ConnectPeerResponse,
   GetBalanceResponse,
-  GetInfoResponse,
-  GetInvoicesResponse,
+  GetInfoResponse, //  GetInvoicesResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -55,9 +53,9 @@ type CommandoChannel = {
 type CommandoListFundsResponse = {
   channels: CommandoChannel[];
 };
-type CommandoListInvoicesResponse = {
-  invoices: CommandoInvoice[];
-};
+// type CommandoListInvoicesResponse = {
+//   invoices: CommandoInvoice[];
+// };
 type CommandoPayInvoiceResponse = {
   payment_preimage: string;
   payment_hash: string;
@@ -129,31 +127,38 @@ export default class Commando implements Connector {
       });
   }
 
-  async getInvoices(): Promise<GetInvoicesResponse> {
-    return this.ln
-      .commando({
-        method: "listinvoices",
-        params: {},
-        rune: this.config.rune,
-      })
-      .then((resp) => {
-        const parsed = resp as CommandoListInvoicesResponse;
-        return {
-          data: {
-            invoices: parsed.invoices.map(
-              (invoice, index): ConnectorInvoice => ({
-                id: invoice.label,
-                memo: invoice.description,
-                settled: invoice.status == "paid",
-                preimage: invoice.payment_preimage,
-                settleDate: invoice.paid_at,
-                type: "received",
-                totalAmount: (invoice.amount_received_msat / 1000).toString(),
-              })
-            ),
-          },
-        };
-      });
+  getInvoices() {
+    console.error(
+      `Not yet supported with the currently used account: ${this.constructor.name}`
+    );
+    return new Error(
+      `${this.constructor.name}: "getInvoices" is not yet supported. Contact us if you need it.`
+    );
+    // async getInvoices(): Promise<GetInvoicesResponse> {
+    //    return this.ln
+    //      .commando({
+    //        method: "listinvoices",
+    //        params: {},
+    //        rune: this.config.rune,
+    //      })
+    //      .then((resp) => {
+    //        const parsed = resp as CommandoListInvoicesResponse;
+    //        return {
+    //          data: {
+    //            invoices: parsed.invoices.map(
+    //              (invoice, index): ConnectorInvoice => ({
+    //                id: invoice.label,
+    //                memo: invoice.description,
+    //                settled: invoice.status == "paid",
+    //                preimage: invoice.payment_preimage,
+    //                settleDate: invoice.paid_at,
+    //                type: "received",
+    //                totalAmount: (invoice.amount_received_msat / 1000).toString(),
+    //              })
+    //            ),
+    //          },
+    //        };
+    //      });
   }
 
   async getInfo(): Promise<GetInfoResponse> {
