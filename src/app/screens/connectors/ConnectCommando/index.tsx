@@ -2,6 +2,7 @@ import {
   HiddenIcon,
   VisibleIcon,
 } from "@bitcoin-design/bitcoin-icons-react/outline";
+import Button from "@components/Button";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
@@ -26,6 +27,7 @@ export default function ConnectCommando() {
     proxy: "wss://lnproxy.getalby.com",
   });
   const [loading, setLoading] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
   const [commandoPrivateKeyVisible, setCommandoPrivateKeyVisible] =
     useState(false);
 
@@ -151,42 +153,52 @@ export default function ConnectCommando() {
           onChange={handleChange}
         />
       </div>
-      <div className="mb-6">
-        <TextField
-          id="proxy"
-          label={t("proxy.label")}
-          type="text"
-          placeholder="proxy"
-          required
-          title="proxy"
-          value={formData.proxy}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="mb-6">
-        <TextField
-          id="commandoPrivateKey"
-          label={t("privKey.label")}
-          type={commandoPrivateKeyVisible ? "text" : "password"}
-          value={formData.privateKey}
-          endAdornment={
-            <button
-              type="button"
-              tabIndex={-1}
-              className="flex justify-center items-center w-10 h-8"
-              onClick={() => {
-                setCommandoPrivateKeyVisible(!commandoPrivateKeyVisible);
-              }}
-            >
-              {commandoPrivateKeyVisible ? (
-                <HiddenIcon className="h-6 w-6" />
-              ) : (
-                <VisibleIcon className="h-6 w-6" />
-              )}
-            </button>
-          }
-        />
-      </div>
+      <Button
+        onClick={() => {
+          setShowAdvanced(!showAdvanced);
+        }}
+        label="Advanced"
+      />
+      {showAdvanced && (
+        <div className="mt-6">
+          <div className="mb-6">
+            <TextField
+              id="proxy"
+              label={t("proxy.label")}
+              type="text"
+              placeholder="proxy"
+              required
+              title="proxy"
+              value={formData.proxy}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-6">
+            <TextField
+              id="commandoPrivateKey"
+              label={t("privKey.label")}
+              type={commandoPrivateKeyVisible ? "text" : "password"}
+              value={formData.privateKey}
+              endAdornment={
+                <button
+                  type="button"
+                  tabIndex={-1}
+                  className="flex justify-center items-center w-10 h-8"
+                  onClick={() => {
+                    setCommandoPrivateKeyVisible(!commandoPrivateKeyVisible);
+                  }}
+                >
+                  {commandoPrivateKeyVisible ? (
+                    <HiddenIcon className="h-6 w-6" />
+                  ) : (
+                    <VisibleIcon className="h-6 w-6" />
+                  )}
+                </button>
+              }
+            />
+          </div>
+        </div>
+      )}
     </ConnectorForm>
   );
 }
