@@ -68,14 +68,7 @@ export default function ConnectCommando() {
     };
 
     try {
-      let validation;
-      // TODO: for native connectors we currently skip the validation because it is too slow (booting up Tor etc.)
-      if (account.connector === "nativelndhub") {
-        validation = { valid: true, error: "" };
-      } else {
-        validation = await utils.call("validateAccount", account);
-      }
-
+      const validation = await utils.call("validateAccount", account);
       if (validation.valid) {
         const addResult = await utils.call("addAccount", account);
         if (addResult.accountId) {
