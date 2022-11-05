@@ -118,7 +118,9 @@ export default function TestConnection() {
                     alias={`${accountInfo.name} - ${accountInfo.alias}`}
                     satoshis={
                       typeof accountInfo.balance === "number"
-                        ? `${accountInfo.balance} sats`
+                        ? `${accountInfo.balance} ${tCommon("sats", {
+                            count: accountInfo.balance,
+                          })}`
                         : ""
                     }
                   />

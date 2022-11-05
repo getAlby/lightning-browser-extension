@@ -82,7 +82,7 @@ class Eclair implements Connector {
       .reduce((acc: number, b: number) => acc + b, 0);
     return {
       data: {
-        balance: total / 1000,
+        balance: Math.floor(total / 1000),
       },
     };
   }
@@ -103,7 +103,7 @@ class Eclair implements Connector {
         preimage: paymentPreimage,
         paymentHash,
         route: {
-          total_amt: Math.round(recipientAmount / 1000),
+          total_amt: Math.floor(recipientAmount / 1000),
           total_fees: status.feesPaid,
         },
       },

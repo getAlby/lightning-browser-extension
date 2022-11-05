@@ -7,7 +7,7 @@ import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
 import axios from "axios";
-import React, { Fragment, useState, useEffect, MouseEvent } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -51,7 +51,9 @@ function LNURLPay() {
   const { t: tCommon } = useTranslation("common");
 
   const [valueSat, setValueSat] = useState(
-    (details?.minSendable && (+details?.minSendable / 1000).toString()) || ""
+    (details?.minSendable &&
+      Math.floor(+details?.minSendable / 1000).toString()) ||
+      ""
   );
 
   const [fiatValue, setFiatValue] = useState("");
@@ -64,10 +66,12 @@ function LNURLPay() {
   >();
 
   useEffect(() => {
-    if (valueSat !== "" && showFiat) {
-      const res = getFiatValue(valueSat);
+    const getFiat = async () => {
+      const res = await getFiatValue(valueSat);
       setFiatValue(res);
-    }
+    };
+
+    getFiat();
   }, [valueSat, showFiat, getFiatValue]);
 
   useEffect(() => {
@@ -197,7 +201,7 @@ function LNURLPay() {
     }
   }
 
-  function reject(e: MouseEvent) {
+  function reject(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (navState.isPrompt) {
       msg.error(USER_REJECTED_ERROR);
@@ -206,7 +210,7 @@ function LNURLPay() {
     }
   }
 
-  function close(e: MouseEvent) {
+  function close(e: React.MouseEvent<HTMLButtonElement>) {
     // will never be reached via prompt
     e.preventDefault();
     navigate(-1);
@@ -302,11 +306,13 @@ function LNURLPay() {
         <div>
           <ResultCard
             isSuccess
-            message={`${valueSat} SATS ${
-              showFiat ? "(" + fiatValue + ")" : ""
-            } ${tCommon("were_sent_to")} ${
-              navState.origin?.name || getRecipient()
-            }`}
+            message={tCommon("success_message", {
+              amount: `${valueSat} ${tCommon("sats", {
+                count: parseInt(valueSat),
+              })}`,
+              fiatAmount: showFiat ? ` (${fiatValue})` : ``,
+              destination: navState.origin?.name || getRecipient(),
+            })}
           />
           {isMessage && (
             <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
@@ -362,9 +368,11 @@ function LNURLPay() {
                           {details.minSendable === details.maxSendable && (
                             <>
                               <Dt>{t("amount.label")}</Dt>
-                              <Dd>{`${+details.minSendable / 1000} ${tCommon(
-                                "sats"
-                              )}`}</Dd>
+                              <Dd>{`${Math.floor(
+                                +details.minSendable / 1000
+                              )} ${tCommon("sats", {
+                                count: Math.floor(+details.minSendable / 1000),
+                              })}`}</Dd>
                             </>
                           )}
                         </>
@@ -372,10 +380,11 @@ function LNURLPay() {
                       {details && details.minSendable !== details.maxSendable && (
                         <div>
                           <DualCurrencyField
+                            autoFocus
                             id="amount"
                             label={t("amount.label")}
-                            min={+details.minSendable / 1000}
-                            max={+details.maxSendable / 1000}
+                            min={Math.floor(+details.minSendable / 1000)}
+                            max={Math.floor(+details.maxSendable / 1000)}
                             value={valueSat}
                             onChange={(e) => setValueSat(e.target.value)}
                             fiatValue={fiatValue}
@@ -429,6 +438,7 @@ function LNURLPay() {
                     </div>
                     <div className="pt-2 border-t border-gray-200 dark:border-white/10">
                       <ConfirmOrCancel
+                        isFocused={false}
                         label={tCommon("actions.confirm")}
                         loading={loadingConfirm}
                         disabled={loadingConfirm || !valueSat}

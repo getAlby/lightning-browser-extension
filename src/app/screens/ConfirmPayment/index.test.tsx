@@ -55,7 +55,7 @@ describe("ConfirmPayment", () => {
       settings: { ...mockSettings },
       isLoading: false,
       updateSetting: jest.fn(),
-      getFiatValue: jest.fn(() => "$0.01"),
+      getFiatValue: jest.fn(() => Promise.resolve("$0.01")),
     });
 
     await act(async () => {
@@ -86,7 +86,7 @@ describe("ConfirmPayment", () => {
       settings: { ...mockSettings, showFiat: false },
       isLoading: false,
       updateSetting: jest.fn(),
-      getFiatValue: jest.fn(() => "$0.01"),
+      getFiatValue: jest.fn(() => Promise.resolve("$0.01")),
     });
 
     const user = userEvent.setup();
@@ -121,7 +121,7 @@ describe("ConfirmPayment", () => {
       settings: { ...mockSettings },
       isLoading: false,
       updateSetting: jest.fn(),
-      getFiatValue: jest.fn(() => "$0.01"),
+      getFiatValue: jest.fn(() => Promise.resolve("$0.01")),
     });
 
     await act(async () => {

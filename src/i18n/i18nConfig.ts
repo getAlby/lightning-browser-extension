@@ -8,11 +8,13 @@ import { initReactI18next } from "react-i18next";
 import en from "~/i18n/locales/en/translation.json";
 import es from "~/i18n/locales/es/translation.json";
 import pt_BR from "~/i18n/locales/pt_BR/translation.json";
+import sv from "~/i18n/locales/sv/translation.json";
 
 export const supportedLocales = [
   { locale: "en", label: "English" },
   { locale: "es", label: "Español" },
   { locale: "pt_BR", label: "Português (Brasil)" },
+  { locale: "sv", label: "Svenska" },
 ];
 
 // needs to be aligned with `supportedLocales`
@@ -20,6 +22,7 @@ export const resources = {
   en,
   es,
   pt_BR,
+  sv,
 };
 
 i18n

@@ -74,8 +74,8 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   const setAccountId = (id: string) => setAccount({ id });
 
   const updateFiatValue = useCallback(
-    (balance: string | number) => {
-      const fiat = getFiatValue(balance);
+    async (balance: string | number) => {
+      const fiat = await getFiatValue(balance);
       setFiatBalance(fiat);
     },
     [getFiatValue]

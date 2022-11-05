@@ -14,6 +14,7 @@ export type Props = {
 };
 
 export default function TransactionsTable({ transactions }: Props) {
+  const { t: tCommon } = useTranslation("common");
   const { t: tComponents } = useTranslation("components");
 
   function renderIcon(type: string) {
@@ -52,7 +53,19 @@ export default function TransactionsTable({ transactions }: Props) {
                         className="
                       text-sm font-medium text-gray-900 truncate dark:text-white"
                       >
-                        {tx.title || "\u00A0"}
+                        <p className="truncate">
+                          {tx.publisherLink && tx.title ? (
+                            <a
+                              target="_blank"
+                              href={tx.publisherLink}
+                              rel="noopener noreferrer"
+                            >
+                              {tx.title}
+                            </a>
+                          ) : (
+                            tx.title || "\u00A0"
+                          )}
+                        </p>
                       </div>
                       <p className="text-xs text-gray-600 capitalize dark:text-neutral-400">
                         {tComponents(`transactionsTable.${tx.type}`)} -{" "}
@@ -77,7 +90,8 @@ export default function TransactionsTable({ transactions }: Props) {
                           {[tx.type && "sent", "sending"].includes(tx.type)
                             ? "-"
                             : "+"}
-                          {tx.totalAmount} sats
+                          {tx.totalAmount}{" "}
+                          {tCommon("sats", { count: tx.totalAmount as number })}
                         </p>
                         {!!tx.totalAmountFiat && (
                           <p className="text-xs text-gray-600 dark:text-neutral-400">
@@ -103,7 +117,7 @@ export default function TransactionsTable({ transactions }: Props) {
                       {tx.totalFees && (
                         <p>
                           {tComponents("transactionsTable.fee")}: {tx.totalFees}{" "}
-                          sats
+                          {tCommon("sats", { count: tx.totalFees })}
                         </p>
                       )}
                       {tx.preimage && (

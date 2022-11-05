@@ -63,8 +63,10 @@ function Receive() {
 
   useEffect(() => {
     if (formData.amount !== "" && showFiat) {
-      const res = getFiatValue(formData.amount);
-      setFiatAmount(res);
+      (async () => {
+        const res = await getFiatValue(formData.amount);
+        setFiatAmount(res);
+      })();
     }
   }, [formData, showFiat, getFiatValue]);
 
@@ -120,7 +122,7 @@ function Receive() {
   function renderInvoice() {
     if (!invoice) return null;
     return (
-      <div>
+      <div className="py-4">
         <div className="relative p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center overflow-hidden">
           <QRCode value={invoice.paymentRequest.toUpperCase()} level="M" />
           {paid && (
@@ -189,7 +191,7 @@ function Receive() {
   }
 
   return (
-    <div>
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <Header
         title={t("title")}
         headerLeft={
@@ -199,18 +201,19 @@ function Receive() {
           />
         }
       />
-      <div className="py-4">
-        <Container maxWidth="sm">
-          <div className={`${paid ? "bg-green-bitcoin" : ""}`}>
-            {invoice ? (
-              renderInvoice()
-            ) : (
-              <form
-                onSubmit={(e: FormEvent) => {
-                  e.preventDefault();
-                  createInvoice();
-                }}
-              >
+      {invoice ? (
+        <Container maxWidth="sm">{renderInvoice()}</Container>
+      ) : (
+        <form
+          onSubmit={(e: FormEvent) => {
+            e.preventDefault();
+            createInvoice();
+          }}
+          className="h-full"
+        >
+          <fieldset disabled={loading}>
+            <Container justifyBetween maxWidth="sm">
+              <div className="py-4">
                 <div className="mb-4">
                   <DualCurrencyField
                     id="amount"
@@ -231,24 +234,21 @@ function Receive() {
                     onChange={handleChange}
                   />
                 </div>
-
-                <div className="text-center mb-4">
-                  <div className="mb-4">
-                    <Button
-                      type="submit"
-                      label={t("actions.create_invoice")}
-                      fullWidth
-                      primary
-                      loading={loading}
-                      disabled={loading}
-                    />
-                  </div>
-                </div>
-              </form>
-            )}
-          </div>
-        </Container>
-      </div>
+              </div>
+              <div className="mb-4">
+                <Button
+                  type="submit"
+                  label={t("actions.create_invoice")}
+                  fullWidth
+                  primary
+                  loading={loading}
+                  disabled={loading}
+                />
+              </div>
+            </Container>
+          </fieldset>
+        </form>
+      )}
     </div>
   );
 }

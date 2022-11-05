@@ -497,7 +497,7 @@
       "content_message": {
         "heading": "Request a channel from the node"
       },
-      "success": "Channel request sent successfully"
+      "success": "Channel request sent successfully to {{name}}"
     },
     "lnurlwithdraw": {
       "title": "Withdraw",
@@ -607,7 +607,8 @@
     "error": "Error",
     "settings": "Settings",
     "websites": "Websites",
-    "sats": "sats",
+    "sats_one": "sat",
+    "sats_other": "sats",
     "loading": "loading",
     "amount": "Amount",
     "optional": "Optional",
@@ -615,7 +616,8 @@
     "copied": "Copied!",
     "description": "Description",
     "description_full": "Full Description",
-    "were_sent_to": "were sent to",
+    "success_message": "{{amount}}{{fiatAmount}} sent to {{destination}}",
+    "response": "Response",
     "message": "Message",
     "help": "Help",
     "actions": {
