@@ -17,9 +17,6 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
     };
   }
 
-  // Set the message as the user needs to see the event details
-  message.args.message = JSON.stringify(message.args.event);
-
   try {
     const response = await utils.openPrompt<{
       confirm: boolean;
@@ -31,9 +28,10 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
       throw new Error("User rejected");
     }
 
-    const event = message.args.event;
-
-    const signedEvent = await state.getState().getNostr().signEvent(event);
+    const signedEvent = await state
+      .getState()
+      .getNostr()
+      .signEvent(message.args.event);
 
     return { data: signedEvent };
   } catch (e) {
