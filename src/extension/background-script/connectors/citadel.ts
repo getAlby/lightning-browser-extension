@@ -182,14 +182,15 @@ class CitadelConnector implements Connector {
   }
 
   async request(method: string, path: string, args?: Record<string, unknown>) {
-    path = this.config.url + (this.config.url.endsWith("/") ? "" : "/") + path;
+    const url =
+      this.config.url + (this.config.url.endsWith("/") ? "" : "/") + path;
 
     const headers = new Headers();
     headers.append("Accept", "application/json");
     headers.append("Content-Type", "application/json");
     if (this.jwt) headers.append("Authorization", `JWT ${this.jwt}`);
 
-    const res = await fetch(path, {
+    const res = await fetch(url, {
       headers,
       method,
       ...(method !== "GET" ? { body: JSON.stringify(args) } : {}),
