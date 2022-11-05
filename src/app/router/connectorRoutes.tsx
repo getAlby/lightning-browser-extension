@@ -2,6 +2,7 @@ import ConnectBtcpay from "@screens/connectors/ConnectBtcpay";
 import ConnectCitadel from "@screens/connectors/ConnectCitadel";
 import ConnectEclair from "@screens/connectors/ConnectEclair";
 import ConnectGaloy, { galoyUrls } from "@screens/connectors/ConnectGaloy";
+import ConnectKollider from "@screens/connectors/ConnectKollider";
 import ConnectLnbits from "@screens/connectors/ConnectLnbits";
 import ConnectLnd from "@screens/connectors/ConnectLnd";
 import ConnectLndHub from "@screens/connectors/ConnectLndHub";
@@ -74,6 +75,19 @@ function getConnectorRoutes() {
       ),
       description: i18n.t(
         "choose_connector.lndhub_go.description",
+        translationI18nNamespace
+      ),
+      logo: lndhubGo,
+    },
+    {
+      path: "kollider",
+      element: <ConnectKollider />,
+      title: i18n.t(
+        "choose_connector.kollider.title",
+        translationI18nNamespace
+      ),
+      description: i18n.t(
+        "choose_connector.kollider.description",
         translationI18nNamespace
       ),
       logo: lndhubGo,

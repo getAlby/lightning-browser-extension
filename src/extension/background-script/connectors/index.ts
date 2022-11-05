@@ -1,6 +1,7 @@
 import Citadel from "./citadel";
 import Eclair from "./eclair";
 import Galoy from "./galoy";
+import Kollider from "./kollider";
 import LnBits from "./lnbits";
 import Lnd from "./lnd";
 import LndHub from "./lndhub";
@@ -28,6 +29,7 @@ const connectors = {
   eclair: Eclair,
   citadel: Citadel,
   nativecitadel: NativeCitadel,
+  kollider: Kollider,
 };
 
 export default connectors;
