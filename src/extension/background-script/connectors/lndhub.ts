@@ -14,6 +14,7 @@ import Connector, {
   GetInfoResponse,
   GetInvoicesResponse,
   ConnectorInvoice,
+  ConnectPeerResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -56,11 +57,11 @@ export default class LndHub implements Connector {
   }
 
   // not yet implemented
-  connectPeer() {
+  async connectPeer(): Promise<ConnectPeerResponse> {
     console.error(
       `${this.constructor.name} does not implement the getInvoices call`
     );
-    return new Error("Not yet supported with the currently used account.");
+    throw new Error("Not yet supported with the currently used account.");
   }
 
   async getInvoices(): Promise<GetInvoicesResponse> {
