@@ -660,7 +660,8 @@
     "description_full": "Descrição Completa",
     "message": "Mensagem",
     "help": "Ajuda",
-    "response": "Resposta"
+    "response": "Resposta",
+    "success_message": "{{amount}}{{fiatAmount}} enviados para {{destination}}"
   },
   "components": {
     "allowance_menu": {
