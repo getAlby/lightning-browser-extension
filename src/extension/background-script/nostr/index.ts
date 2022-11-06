@@ -31,9 +31,10 @@ class Nostr {
     await state.getState().saveToStorage();
   }
 
-  async signEvent(event: Event): Promise<string> {
+  async signEvent(event: Event): Promise<Event> {
     const signature = await signEvent(event, this.getPrivateKey());
-    return signature;
+    event.sig = signature;
+    return event;
   }
 }
 
