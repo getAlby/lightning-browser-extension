@@ -147,7 +147,7 @@ export default class Commando implements Connector {
                   memo: invoice.description,
                   settled: invoice.status === "paid",
                   preimage: invoice.payment_preimage,
-                  settleDate: invoice.paid_at,
+                  settleDate: invoice.paid_at * 1000,
                   type: "received",
                   totalAmount: (invoice.msatoshi / 1000).toString(),
                 })
