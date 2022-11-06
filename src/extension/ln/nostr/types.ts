@@ -5,6 +5,7 @@ export type Event = {
   content: string;
   tags: string[];
   created_at: number;
+  sig?: string;
 };
 
 export enum EventKind {
