@@ -36,7 +36,7 @@ afterEach(() => {
 });
 
 describe("add permission", () => {
-  test("adds permission method to allowance and saves permissions", async () => {
+  test("saves permissions", async () => {
     const message: MessagePermissionAdd = {
       application: "LBE",
       prompt: true,
