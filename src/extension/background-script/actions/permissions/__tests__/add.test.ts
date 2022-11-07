@@ -54,15 +54,7 @@ describe("add permission", () => {
 
     await addPermission(message);
 
-    const dbAllowances = await db.allowances.toArray();
     const dbPermissions = await db.permissions.toArray();
-
-    expect(dbAllowances).toEqual([
-      {
-        ...mockAllowances[0],
-        permissions: ["the-request-method-1", "the-request-method-2"],
-      },
-    ]);
 
     expect(dbPermissions).toStrictEqual([
       {

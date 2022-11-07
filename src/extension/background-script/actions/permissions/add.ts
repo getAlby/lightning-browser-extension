@@ -14,16 +14,6 @@ const addPermission = async (message: MessagePermissionAdd) => {
     return { error: "No Allowance set for this host" };
   }
 
-  // check if permissions exist or add fallback, needed for migrations
-  const formerPermissions = matchingAllowance.permissions || [];
-  const newPermissions = [...formerPermissions, method];
-  const uniquePermissions = [...new Set(newPermissions)]; // remove dublicates
-
-  // add new request method to allowance permissions
-  await db.allowances.update(matchingAllowance.id, {
-    permissions: uniquePermissions,
-  });
-
   const added = await db.permissions.add({
     createdAt: Date.now().toString(),
     allowanceId: matchingAllowance.id,
