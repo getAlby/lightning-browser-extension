@@ -22,7 +22,7 @@ const mockAllowances: DbAllowance[] = [
     totalBudget: 500,
     createdAt: "1667291216372",
     tag: "",
-    permissions: ["the-request-method-1"],
+    permissions: ["connect"],
   },
 ];
 
@@ -46,7 +46,7 @@ describe("add permission", () => {
       },
       args: {
         host: stackerNews.host,
-        method: "the-request-method-2",
+        method: "listinvoices",
         enabled: true,
         blocked: false,
       },
@@ -62,7 +62,7 @@ describe("add permission", () => {
         allowanceId: 3,
         createdAt: "1487076708000",
         host: "stacker.news",
-        method: "the-request-method-2",
+        method: "listinvoices",
         blocked: false,
         enabled: true,
       },
