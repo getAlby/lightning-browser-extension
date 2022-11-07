@@ -58,7 +58,6 @@ const routes = {
   },
   addPermission: permissions.add,
   deletePermission: permissions.deletePermission,
-  getPermission: permissions.get,
 
   // Public calls are accessible from inpage scripts
   public: {
