@@ -28,6 +28,7 @@ module.exports = {
     ],
     "^.+\\.(t|j)sx?$": ["@swc/jest", swcConfig],
   },
+  transformIgnorePatterns: ["node_modules/(?!(dexie))/"],
   moduleNameMapper: {
     // needs to align with "tsconfig.json"-paths
     // swc does not provide "pathsToModuleNameMapper" as ts-jest does
