@@ -2366,15 +2366,6 @@
   resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.0.2.tgz#1c17eadb2fa77f80a796ad5ea9bf108e6993ef06"
   integrity sha512-GRSOFhJzjGN+d4sKHTMSvNeUPoZiDHWmRnXfzaxrqe7dE/Nzlc8BiMSJdLDESZlndM7jIUrZ/F4yWqVYlI0rwQ==
 
-"@runcitadel/sdk@^0.3.8":
-  version "0.3.8"
-  resolved "https://registry.yarnpkg.com/@runcitadel/sdk/-/sdk-0.3.8.tgz#106987b805ffb3c46fbbefb6d60fa8c8adb53f99"
-  integrity sha512-JicJMdtu1FEMNGIoPrJseMYfsftCjAPu9y4FykmxGN5aA8YcNhGVbMwaDQ4oyA/Ju6DFwD9Jy+WHxwQkkjdA8Q==
-  optionalDependencies:
-    "@types/react" "^17.0.43"
-    react "^18.0.0"
-    undici "^5.0.0"
-
 "@sinclair/typebox@^0.24.1":
   version "0.24.20"
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.24.20.tgz#11a657875de6008622d53f56e063a6347c51a6dd"
