@@ -148,7 +148,7 @@ function AccountsScreen() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <Menu as="div" className="relative">
-                      <Menu.Button className="ml-auto flex items-center text-gray-700 hover:text-black transition-color duration-200 dark:hover:text-white">
+                      <Menu.Button className="ml-auto flex items-center transition-color duration-200 rounded border-2 border-gray-500 hover:border-black dark:hover:border-white text-gray-500 hover:text-black dark:hover:text-white">
                         <EllipsisIcon className="h-6 w-6 rotate-90" />
                       </Menu.Button>
 
