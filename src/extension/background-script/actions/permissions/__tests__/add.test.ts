@@ -22,7 +22,6 @@ const mockAllowances: DbAllowance[] = [
     totalBudget: 500,
     createdAt: "1667291216372",
     tag: "",
-    permissions: ["connect"],
   },
 ];
 

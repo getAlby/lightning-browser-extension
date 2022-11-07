@@ -18,7 +18,6 @@ const mockAllowances: DbAllowance[] = [
     totalBudget: 500,
     createdAt: "123456",
     tag: "",
-    permissions: [],
   },
 ];
 
@@ -64,7 +63,6 @@ describe("add allowance", () => {
       tag: "",
       totalBudget: 200,
       id: 4,
-      permissions: [],
     });
   });
 });

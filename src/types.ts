@@ -210,14 +210,6 @@ export interface MessagePermissionDelete extends MessageDefault {
   action: "deletePermission";
 }
 
-export interface MessagePermissionGet extends MessageDefault {
-  args: {
-    host: string;
-    method: string;
-  };
-  action: "getPermission";
-}
-
 export interface MessageBlocklistAdd extends MessageDefault {
   args: {
     host: string;
@@ -571,7 +563,6 @@ export interface DbAllowance {
   remainingBudget: number;
   tag: string;
   totalBudget: number;
-  permissions: DbPermission["method"][];
 }
 export interface Allowance extends Omit<DbAllowance, "id"> {
   id: number;

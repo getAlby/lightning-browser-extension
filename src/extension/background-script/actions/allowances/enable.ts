@@ -54,7 +54,6 @@ const enable = async (
             createdAt: Date.now().toString(),
             lnurlAuth: false,
             tag: "",
-            permissions: [],
           });
         }
         await db.saveToStorage();
