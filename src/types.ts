@@ -467,6 +467,16 @@ export interface DbPayment {
   totalFees: number;
 }
 
+export interface DbPermission {
+  id?: number;
+  createdAt: string;
+  allowanceId: number;
+  host: string;
+  method: string;
+  enabled: boolean;
+  blocked: boolean;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface Payment extends Omit<DbPayment, "id"> {
   id: number;
@@ -523,6 +533,7 @@ export interface DbAllowance {
   remainingBudget: number;
   tag: string;
   totalBudget: number;
+  permissions: DbPermission["method"][];
 }
 export interface Allowance extends Omit<DbAllowance, "id"> {
   id: number;

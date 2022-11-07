@@ -16,6 +16,7 @@ const mockAllowances: DbAllowance[] = [
     totalBudget: 500,
     createdAt: "123456",
     tag: "",
+    permissions: [],
   },
   {
     enabled: false,
@@ -29,6 +30,7 @@ const mockAllowances: DbAllowance[] = [
     totalBudget: 200,
     createdAt: "123456",
     tag: "",
+    permissions: [],
   },
 ];
 
@@ -74,6 +76,7 @@ describe("delete allowance", () => {
         totalBudget: 500,
         createdAt: "123456",
         tag: "",
+        permissions: [],
       },
     ]);
   });
