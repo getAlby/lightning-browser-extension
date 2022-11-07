@@ -120,4 +120,8 @@ export default interface Connector {
   connectPeer(
     args: ConnectPeerArgs
   ): Promise<ConnectPeerResponse | Error> | Error;
+  requestMethod?(
+    method: string,
+    args: Record<string, unknown>
+  ): Promise<Response>;
 }

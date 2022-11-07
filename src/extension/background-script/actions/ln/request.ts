@@ -1,0 +1,76 @@
+import utils from "~/common/lib/utils";
+import { MessageGenericRequest } from "~/types";
+
+import db from "../../db";
+import state from "../../state";
+
+const request = async (
+  message: MessageGenericRequest
+): Promise<Response | { error: string }> => {
+  const connector = await state.getState().getConnector();
+
+  const { origin, args } = message;
+
+  try {
+    if (!connector.requestMethod) {
+      throw new Error(
+        `${message.args.method} is not supported by your account`
+      );
+    }
+
+    const allowance = await db.allowances
+      .where("host")
+      .equalsIgnoreCase(origin.host)
+      .first();
+
+    if (!allowance?.id) {
+      return { error: "Host not enabled" };
+    }
+
+    const permission = await db.permissions
+      .where("host")
+      .equalsIgnoreCase(origin.host)
+      .and((p) => p.method === args.method)
+      .first();
+
+    if (permission && permission.enabled) {
+      const response = await connector.requestMethod(args.method, args.params);
+      return response;
+    } else {
+      const promptResponse = await utils.openPrompt<{
+        enabled: boolean;
+        blocked: boolean;
+      }>({
+        args: {
+          requestPermission: {
+            method: args.method,
+          },
+        },
+        origin,
+        action: "public/webln/confirmRequestPermission",
+      });
+
+      const response = await connector.requestMethod(args.method, args.params);
+
+      const permissionIsAdded = await db.permissions.add({
+        createdAt: Date.now().toString(),
+        allowanceId: allowance.id,
+        host: origin.host,
+        method: args.method,
+        enabled: promptResponse.data.enabled,
+        blocked: promptResponse.data.blocked,
+      });
+
+      !!permissionIsAdded && (await db.saveToStorage());
+
+      return response;
+    }
+  } catch (e) {
+    console.error(e);
+    return {
+      error: e instanceof Error ? e.message : "Something went wrong",
+    };
+  }
+};
+
+export default request;

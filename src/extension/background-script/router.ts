@@ -69,6 +69,7 @@ const routes = {
       signMessageOrPrompt: webln.signMessageOrPrompt,
       lnurl: webln.lnurl,
       makeInvoice: webln.makeInvoiceOrPrompt,
+      request: ln.request,
     },
     nostr: {
       getPublicKeyOrPrompt: nostr.getPublicKeyOrPrompt,

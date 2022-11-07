@@ -136,10 +136,22 @@ export type NavigationState = {
     customRecords?: Record<string, string>;
     message?: string;
     event?: Event;
+    requestPermission: {
+      method: string;
+    };
   };
   isPrompt?: true; // only passed via Prompt.tsx
   action: string;
 };
+
+export interface MessageGenericRequest extends MessageDefault {
+  action: "request";
+  origin: OriginData;
+  args: {
+    method: string;
+    params: Record<string, unknown>;
+  };
+}
 
 export interface MessagePaymentAll extends MessageDefault {
   action: "getPayments";
