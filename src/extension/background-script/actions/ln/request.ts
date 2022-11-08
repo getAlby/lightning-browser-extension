@@ -24,7 +24,7 @@ const request = async (
       .first();
 
     if (!allowance?.id) {
-      return { error: "Host not enabled" };
+      return { error: "Could not find an allowance for this host" };
     }
 
     const permission = await db.permissions
@@ -71,7 +71,10 @@ const request = async (
   } catch (e) {
     console.error(e);
     return {
-      error: e instanceof Error ? e.message : "Something went wrong",
+      error:
+        e instanceof Error
+          ? e.message
+          : `Something went wrong with request ${args?.method}`,
     };
   }
 };
