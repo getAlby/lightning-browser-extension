@@ -40,19 +40,22 @@ export const SettingsProvider = ({
 
   // Invoked only on on mount.
   useEffect(() => {
-    api
-      .getSettings()
-      .then((response) => {
-        setSettings(response);
-      })
-      .catch((e) => {
-        toast.error(
-          `SettingsProvider: An unexpected error occurred (${e.message})`
-        );
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    setTimeout(() => {
+      console.log("SETTIMGS CONTEXT EFFECT");
+      api
+        .getSettings()
+        .then((response) => {
+          setSettings(response);
+        })
+        .catch((e) => {
+          // toast.error(
+          //   `SettingsProvider: An unexpected error occurred (${e.message})`
+          // );
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }, 500);
   }, []);
 
   // update rate

@@ -4,7 +4,7 @@ import i18n from "~/i18n/i18nConfig";
 import { translationI18nNamespace } from "~/i18n/namespaces";
 import type { MessageAccountUnlock } from "~/types";
 
-const unlock = (message: MessageAccountUnlock) => {
+const unlock = async (message: MessageAccountUnlock) => {
   const passwordArg = message.args.password;
   const password =
     typeof passwordArg === "number" ? `${passwordArg}` : passwordArg;
@@ -31,7 +31,8 @@ const unlock = (message: MessageAccountUnlock) => {
   }
 
   // if everything is fine we keep the password in memory
-  state.setState({ password });
+  // state.setState({ password });
+  await chrome.storage.session.set({ password });
 
   return Promise.resolve({ data: { unlocked: true, currentAccountId } });
 };
