@@ -123,5 +123,5 @@ export default interface Connector {
   requestMethod?(
     method: string,
     args: Record<string, unknown>
-  ): Promise<Response>;
+  ): Promise<{ data: unknown }>;
 }

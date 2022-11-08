@@ -6,7 +6,7 @@ import state from "../../state";
 
 const request = async (
   message: MessageGenericRequest
-): Promise<Response | { error: string }> => {
+): Promise<{ data: unknown } | { error: string }> => {
   const connector = await state.getState().getConnector();
 
   const { origin, args } = message;
