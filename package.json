@@ -32,8 +32,6 @@
     "test:e2e": "del-cli ./puppeteer-user-data-dir && npx playwright test",
     "test": "yarn test:unit && yarn test:e2e",
     "test:coverage": "jest --coverage --collectCoverageFrom='src/**/*.(ts|tsx)' --collectCoverageFrom='!src/**/*.stories.tsx'",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -76,14 +74,6 @@
     "@commitlint/config-conventional": "^17.1.0",
     "@jest/types": "^29.2.1",
     "@playwright/test": "^1.27.1",
-    "@storybook/addon-actions": "^6.5.12",
-    "@storybook/addon-essentials": "^6.5.12",
-    "@storybook/addon-links": "^6.5.12",
-    "@storybook/addon-postcss": "^2.0.0",
-    "@storybook/builder-webpack5": "^6.5.12",
-    "@storybook/cli": "^6.5.12",
-    "@storybook/manager-webpack5": "^6.5.12",
-    "@storybook/react": "^6.5.12",
     "@swc/core": "1.2.205",
     "@swc/jest": "^0.2.23",
     "@testing-library/jest-dom": "^5.16.5",

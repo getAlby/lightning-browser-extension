@@ -130,8 +130,7 @@ If this is not reachable please let us know.
 
 #### Storybook.js
 
-We have a working [Storybook](https://storybook.js.org)-setup and some components have stories.
-You can find the deployed Storybook here: https://lbe-stories.netlify.app
+We have a [Storybook](https://storybook.js.org)-setup and some components have stories. But we haven't actively maintained the storybook and we're looking for support to work on the storybook setup.
 
 ### :white_check_mark: Tests
 
