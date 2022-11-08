@@ -54,7 +54,7 @@
     "elliptic": "^6.5.4",
     "html5-qrcode": "^2.2.3",
     "i18next": "^21.10.0",
-    "i18next-browser-languagedetector": "^6.1.8",
+    "i18next-browser-languagedetector": "^7.0.1",
     "lodash": "^4.17.21",
     "pubsub-js": "^1.9.4",
     "react": "^18.2.0",
