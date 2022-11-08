@@ -92,7 +92,7 @@ export default class WebLNProvider {
 
   request(method: string, params: Record<string, unknown>) {
     if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling verifyMessage");
+      throw new Error("Provider must be enabled before calling request");
     }
 
     return this.execute("request", {
