@@ -2,7 +2,8 @@ import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
-import { FC } from "react";
+import Checkbox from "@components/form/Checkbox";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
@@ -12,6 +13,8 @@ import utils from "~/common/lib/utils";
 import type { OriginData } from "~/types";
 
 const ConfirmRequestPermission: FC = () => {
+  const [alwaysAllow, setAlwaysAllow] = useState(false);
+
   const { t } = useTranslation("translation", {
     keyPrefix: "confirm_request_permission",
   });
@@ -23,7 +26,7 @@ const ConfirmRequestPermission: FC = () => {
 
   const enable = () => {
     msg.reply({
-      enabled: true,
+      enabled: alwaysAllow,
       blocked: false,
     });
   };
@@ -62,6 +65,20 @@ const ConfirmRequestPermission: FC = () => {
               <p className="dark:text-white">
                 {t("enable_method", { method: requestMethod })}
               </p>
+            </div>
+            <div className="flex items-center">
+              <Checkbox
+                id="always_allow"
+                name="always_allow"
+                checked={alwaysAllow}
+                onChange={() => setAlwaysAllow((prev) => !prev)}
+              />
+              <label
+                htmlFor="always_allow"
+                className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+              >
+                {t("always_allow", { method: requestMethod })}
+              </label>
             </div>
           </div>
         </div>

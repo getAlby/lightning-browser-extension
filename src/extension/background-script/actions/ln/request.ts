@@ -52,16 +52,19 @@ const request = async (
 
       const response = await connector.requestMethod(args.method, args.params);
 
-      const permissionIsAdded = await db.permissions.add({
-        createdAt: Date.now().toString(),
-        allowanceId: allowance.id,
-        host: origin.host,
-        method: args.method,
-        enabled: promptResponse.data.enabled,
-        blocked: promptResponse.data.blocked,
-      });
+      // add permission to db only if user decided to always allow this request
+      if (promptResponse.data.enabled) {
+        const permissionIsAdded = await db.permissions.add({
+          createdAt: Date.now().toString(),
+          allowanceId: allowance.id,
+          host: origin.host,
+          method: args.method,
+          enabled: promptResponse.data.enabled,
+          blocked: promptResponse.data.blocked,
+        });
 
-      !!permissionIsAdded && (await db.saveToStorage());
+        !!permissionIsAdded && (await db.saveToStorage());
+      }
 
       return response;
     }
