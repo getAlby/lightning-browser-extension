@@ -9,7 +9,6 @@ import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import utils from "~/common/lib/utils";
 import type { OriginData } from "~/types";
 
 const ConfirmRequestPermission: FC = () => {
@@ -18,8 +17,8 @@ const ConfirmRequestPermission: FC = () => {
   const { t } = useTranslation("translation", {
     keyPrefix: "confirm_request_permission",
   });
-
   const { t: tCommon } = useTranslation("common");
+
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
   const requestMethod = navState.args?.requestPermission?.method;
@@ -33,16 +32,6 @@ const ConfirmRequestPermission: FC = () => {
 
   const reject = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    msg.error(USER_REJECTED_ERROR);
-  };
-
-  const block = async (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    await utils.call("addBlocklist", {
-      domain: origin.domain,
-      host: origin.host,
-    });
-    // todo, add blocked to permission
     msg.error(USER_REJECTED_ERROR);
   };
 
@@ -88,13 +77,6 @@ const ConfirmRequestPermission: FC = () => {
             onConfirm={enable}
             onCancel={reject}
           />
-          <a
-            className="underline text-sm text-gray-400 mx-4 overflow-hidden text-ellipsis whitespace-nowrap"
-            href="#"
-            onClick={block}
-          >
-            {t("block_host", { host: origin.host })}
-          </a>
         </div>
       </Container>
     </div>
