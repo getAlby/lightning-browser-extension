@@ -130,7 +130,8 @@ If this is not reachable please let us know.
 
 #### Storybook.js
 
-We have a [Storybook](https://storybook.js.org)-setup and some components have stories. But we haven't actively maintained the storybook and we're looking for support to work on the storybook setup.
+We used to maintain a [Storybook](https://storybook.js.org)-setup but nobody as using it. Currently we do not see a use for it.  
+But happy to talk about if you think it's useful.
 
 ### :white_check_mark: Tests
 
