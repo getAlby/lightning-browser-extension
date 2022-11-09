@@ -597,8 +597,8 @@
     "confirm_request_permission": {
       "title": "Approve Request",
       "allow": "Allow {{host}} to:",
-      "enable_method": "Send request {{method}}",
-      "always_allow": "Always allow to request {{method}}"
+      "enable_method": "Call request {{method}}",
+      "always_allow": "Always allow to call this request"
     },
     "nostr": {
       "title": "Nostr",
