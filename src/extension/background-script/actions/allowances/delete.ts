@@ -8,6 +8,9 @@ const deleteAllowance = async (message: MessageAllowanceDelete) => {
 
   await db.allowances.delete(id);
 
+  // delete related permission
+  await db.permissions.where({ allowanceId: id }).delete();
+
   await db.saveToStorage();
 
   return { data: true };
