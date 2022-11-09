@@ -1452,7 +1452,7 @@
     "@types/tough-cookie" "*"
     parse5 "^7.0.0"
 
-"@types/json-schema@*", "@types/json-schema@^7.0.5", "@types/json-schema@^7.0.6":
+"@types/json-schema@*", "@types/json-schema@^7.0.6":
   version "7.0.7"
   resolved "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.7.tgz"
   integrity sha512-cxWFQVseBm6O9Gbw1IWb8r6OS4OhSt3hPZLkFApLjM8TEXROBuQGLAH2i2gZpcXdLBIrpXuTDhH7Vbm1iXmNGA==
@@ -6431,6 +6431,11 @@ loader-utils@^2.0.0:
     emojis-list "^3.0.0"
     json5 "^2.1.2"
 
+loader-utils@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-3.2.0.tgz#bcecc51a7898bee7473d4bc6b845b23af8304d4f"
+  integrity sha512-HVl9ZqccQihZ7JM85dco1MvO9G+ONvxoGa9rkhzFsneGLKSUg1gJf9bWzhRhcvm2qChhWpebQhP44qxjKIUCaQ==
+
 locate-path@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/locate-path/-/locate-path-2.0.0.tgz"
@@ -8509,15 +8514,6 @@ scheduler@^0.23.0:
   dependencies:
     loose-envify "^1.1.0"
 
-schema-utils@^2.7.1:
-  version "2.7.1"
-  resolved "https://registry.npmjs.org/schema-utils/-/schema-utils-2.7.1.tgz"
-  integrity sha512-SHiNtMOUGWBQJwzISiVYKu82GiV4QYGePp3odlY1tuKO7gPtphAT5R/py0fA6xtbgLL/RvtJZnU9b8s0F1q0Xg==
-  dependencies:
-    "@types/json-schema" "^7.0.5"
-    ajv "^6.12.4"
-    ajv-keywords "^3.5.2"
-
 schema-utils@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/schema-utils/-/schema-utils-3.0.0.tgz"
@@ -9837,13 +9833,13 @@ websocket-extensions@>=0.1.1:
   resolved "https://registry.npmjs.org/websocket-extensions/-/websocket-extensions-0.1.4.tgz"
   integrity sha512-OqedPIGOfsDlo31UNwYbCFMSaO9m9G/0faIHj5/dZFDMFqPTcx6UwqyOy3COEaEOg/9VsGIpdqn62W5KhoKSpg==
 
-wext-manifest-loader@^2.3.0:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/wext-manifest-loader/-/wext-manifest-loader-2.4.1.tgz#30f7487f2bd987d41799b57543c6379c6ac6912d"
-  integrity sha512-8Mn2VN+R5PEvHGZR5AjQNxPgtNZq3OWrNOA12xOSndSVLE4MwhouO7fnob4VJT8YsXSkYTviBOJ0b0yQmnwyww==
+wext-manifest-loader@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/wext-manifest-loader/-/wext-manifest-loader-3.0.0.tgz#4c11ef0f7dfe126674a042f05a728a2cf2f27231"
+  integrity sha512-tl9obmAvLemZsNFnhtWiRUuIIMNXP5YuDIEBfV/98CJHhVZAiC/773M7v36N7p+KR6UUvJewbhvDKufIBa2l7Q==
   dependencies:
-    loader-utils "^2.0.0"
-    schema-utils "^2.7.1"
+    loader-utils "^3.2.0"
+    schema-utils "^4.0.0"
 
 wext-manifest-webpack-plugin@^1.2.1:
   version "1.2.1"
