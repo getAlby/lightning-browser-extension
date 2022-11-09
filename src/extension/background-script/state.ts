@@ -1,5 +1,5 @@
-import merge from "lodash/merge";
-import pick from "lodash/pick";
+import merge from "lodash.merge";
+import pick from "lodash.pick";
 import browser from "webextension-polyfill";
 import createState from "zustand";
 import { CURRENCIES } from "~/common/constants";
