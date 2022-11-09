@@ -44,35 +44,35 @@ const mockPermissions = [
   },
   {
     id: 2,
-    allowanceId: 1,
+    allowanceId: 2,
     createdAt: "1667291216372",
-    host: "pro.kollider.xyz",
+    host: "lnmarkets.com",
     method: "getinfo",
     blocked: false,
     enabled: true,
   },
   {
-    id: 2,
-    allowanceId: 99,
+    id: 3,
+    allowanceId: 2,
     createdAt: "1667291216372",
-    host: "some-other-host",
+    host: "lnmarkets.com",
     method: "some-method",
     blocked: false,
     enabled: true,
   },
 ];
 
+beforeEach(async () => {
+  await db.allowances.bulkAdd(mockAllowances);
+  await db.permissions.bulkAdd(mockPermissions);
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
 describe("delete allowance", () => {
-  beforeEach(async () => {
-    await db.allowances.bulkAdd(mockAllowances);
-    await db.permissions.bulkAdd(mockPermissions);
-  });
-
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  test("delete allowance", async () => {
+  test("deletes allowance and the corresponding permissions", async () => {
     const message: MessageAllowanceDelete = {
       application: "LBE",
       prompt: true,
@@ -111,6 +111,6 @@ describe("delete allowance", () => {
     ]);
 
     const dbPermissions = await db.permissions.toArray();
-    expect(dbPermissions).toStrictEqual([mockPermissions[2]]);
+    expect(dbPermissions).toEqual([mockPermissions[0]]);
   });
 });
