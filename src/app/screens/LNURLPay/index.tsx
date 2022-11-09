@@ -104,10 +104,14 @@ function LNURLPay() {
     try {
       setLoadingConfirm(true);
       // Get the invoice
-      const params = {
+      const params: {
+        amount: number;
+        comment?: string;
+        payerdata?: string;
+      } = {
         amount: parseInt(valueSat) * 1000, // user specified sum in MilliSatoshi
-        comment, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/12.md
-        payerdata, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/18.md
+        comment: comment && comment, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/12.md
+        payerdata: payerdata && JSON.stringify(payerdata), // https://github.com/fiatjaf/lnurl-rfc/blob/luds/18.md
       };
 
       let response;
