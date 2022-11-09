@@ -23,10 +23,11 @@ module.exports = {
   transform: {
     "^.+\\.(t|j)sx?$": ["@swc/jest", swcConfig],
   },
+  transformIgnorePatterns: ["node_modules/(?!(lnmessage))/"],
   moduleNameMapper: {
+    "^dexie$": require.resolve("dexie"),
     // needs to align with "tsconfig.json"-paths
     // swc does not provide "pathsToModuleNameMapper" as ts-jest does
-    '^dexie$': require.resolve('dexie'),
     "^~/(.*)$": "<rootDir>/src/$1",
     "^@components/(.*)$": "<rootDir>/src/app/components/$1",
     "^@screens/(.*)$": "<rootDir>/src/app/screens/$1",
