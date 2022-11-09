@@ -33,6 +33,7 @@ const request = async (
       .and((p) => p.method === args.method)
       .first();
 
+    // request method is allowed to be called
     if (permission && permission.enabled) {
       const response = await connector.requestMethod(args.method, args.params);
       return response;
