@@ -140,13 +140,49 @@ test.describe("Create or connect wallets", () => {
     );
     await lndUrlField.type(restApiUrl);
 
-    const macroon =
+    const macaroon =
       "0201036c6e6402f801030a10b3bf6906c1937139ac0684ac4417139d1201301a160a0761646472657373120472656164120577726974651a130a04696e666f120472656164120577726974651a170a08696e766f69636573120472656164120577726974651a210a086d616361726f6f6e120867656e6572617465120472656164120577726974651a160a076d657373616765120472656164120577726974651a170a086f6666636861696e120472656164120577726974651a160a076f6e636861696e120472656164120577726974651a140a057065657273120472656164120577726974651a180a067369676e6572120867656e657261746512047265616400000620a3f810170ad9340a63074b6dded31ed83a7140fd26c7758856111583b7725b2b";
-    const macroonField = await getByLabelText(
+    const macaroonField = await getByLabelText(
       $document,
       "Macaroon (HEX format)"
     );
-    await macroonField.type(macroon);
+    await macaroonField.type(macaroon);
+
+    await commonCreateWalletSuccessCheck({ page, $document });
+
+    await browser.close();
+  });
+
+  test("successfully connects to Core Lightning", async () => {
+    const { browser, page, $document } = await commonCreateWalletUserCreate();
+
+    const createNewWalletButton = await getByText($document, "Core Lightning");
+    createNewWalletButton.click();
+
+    // wait for the field label instead of headline (headline text already exists on the page before)
+    await findByText($document, "Host");
+
+    const host = "143.244.206.7";
+    const pubkey = "032e2444c5bb14c5eb2bf8ebdfd102c162609956aa995b7c7d373ca378deedb5c7";
+    const rune = "vrrgKshH1sPZ7wjQnCWjdEtB2PCcM48Gs05FuVPln8g9MTE=";
+
+    const lndUrlField = await getByLabelText(
+      $document,
+      "Host"
+    );
+    await lndUrlField.type(host);
+
+    const pubkeyField = await getByLabelText(
+      $document,
+      "Public key"
+    );
+    await pubkeyField.type(pubkey);
+
+    const runeField = await getByLabelText(
+      $document,
+      "Rune"
+    );
+    await runeField.type(rune)
 
     await commonCreateWalletSuccessCheck({ page, $document });
 

@@ -1,4 +1,5 @@
 import Citadel from "./citadel";
+import Commando from "./commando";
 import Eclair from "./eclair";
 import Galoy from "./galoy";
 import LnBits from "./lnbits";
@@ -30,6 +31,7 @@ const connectors = {
   eclair: Eclair,
   citadel: Citadel,
   nativecitadel: NativeCitadel,
+  commando: Commando,
 };
 
 export default connectors;

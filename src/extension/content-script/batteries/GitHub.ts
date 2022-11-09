@@ -11,7 +11,10 @@ const battery = (): void => {
   if (username && repo) {
     handleRepositoryPage(username);
   } else if (username) {
-    handleProfilePage();
+    const lightningData = handleProfilePage() || handleOrganizationPage();
+    if (lightningData) {
+      setLightningData([lightningData]);
+    }
   }
 };
 
@@ -39,30 +42,55 @@ function handleProfilePage() {
   );
 
   // This is not a GitHub profile
-  if (!shortBioElement) return;
+  if (!shortBioElement) return null;
 
   const address =
     parseElement(".Layout-sidebar .h-card") ||
     parseElement(".Layout-main article");
 
-  if (!address) return;
+  if (!address) return null;
 
-  setLightningData([
-    {
-      method: "lnurl",
-      address: address,
-      ...getOriginData(),
-      description: shortBioElement?.innerText ?? "",
-      name:
-        document.querySelector<HTMLHeadingElement>(
-          '.Layout-sidebar .h-card [itemprop="name"]'
-        )?.innerText ?? "",
-      icon:
-        document.querySelector<HTMLImageElement>(
-          `.Layout-sidebar .h-card img.avatar-user`
-        )?.src ?? "",
-    },
-  ]);
+  return {
+    method: "lnurl",
+    address: address,
+    ...getOriginData(),
+    description: shortBioElement?.innerText ?? "",
+    name:
+      document.querySelector<HTMLHeadingElement>(
+        '.Layout-sidebar .h-card [itemprop="name"]'
+      )?.innerText ?? "",
+    icon:
+      document.querySelector<HTMLImageElement>(
+        `.Layout-sidebar .h-card img.avatar-user`
+      )?.src ?? "",
+  };
+}
+
+function handleOrganizationPage() {
+  const orgName = document.querySelector<HTMLHeadingElement>(
+    ".pagehead.orghead h1"
+  );
+  const shortBioElement = document.querySelector<HTMLElement>(
+    ".pagehead.orghead h1+div"
+  );
+
+  if (!orgName) return null;
+
+  const address =
+    parseElement(".pagehead.orghead h1+div") || parseElement("article");
+
+  if (!address) return null;
+
+  return {
+    method: "lnurl",
+    address: address,
+    ...getOriginData(),
+    description: shortBioElement?.innerText ?? "",
+    name: orgName.innerText,
+    icon:
+      document.querySelector<HTMLImageElement>(`.pagehead.orghead img.avatar`)
+        ?.src ?? "",
+  };
 }
 
 function handleRepositoryPage(username: string) {
