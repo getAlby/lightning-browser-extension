@@ -14,6 +14,7 @@ import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import NostrConfirmGetPublicKey from "~/app/screens/Nostr/ConfirmGetPublicKey";
+import NostrConfirmSignMessage from "~/app/screens/Nostr/ConfirmSignMessage";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
@@ -69,6 +70,10 @@ function Prompt() {
             <Route
               path="public/nostr/confirmGetPublicKey"
               element={<NostrConfirmGetPublicKey />}
+            />
+            <Route
+              path="public/nostr/confirmSignMessage"
+              element={<NostrConfirmSignMessage />}
             />
 
             <Route path="lnurlAuth" element={<LNURLAuth />} />

@@ -21,17 +21,12 @@ const swcConfig = {
 module.exports = {
   verbose: true,
   transform: {
-    "^.+\\.mjs?$": [
-      // "dexie" needs this
-      "@swc/jest",
-      swcConfig,
-    ],
     "^.+\\.(t|j)sx?$": ["@swc/jest", swcConfig],
   },
-  transformIgnorePatterns: ["node_modules/(?!(@runcitadel))/"],
   moduleNameMapper: {
     // needs to align with "tsconfig.json"-paths
     // swc does not provide "pathsToModuleNameMapper" as ts-jest does
+    '^dexie$': require.resolve('dexie'),
     "^~/(.*)$": "<rootDir>/src/$1",
     "^@components/(.*)$": "<rootDir>/src/app/components/$1",
     "^@screens/(.*)$": "<rootDir>/src/app/screens/$1",

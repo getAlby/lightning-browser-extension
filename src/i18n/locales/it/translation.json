@@ -336,7 +336,7 @@
         "scan_qr": "Importa questo portafoglio in Zeus o BlueWallet scansionando il QRCode."
       },
       "remove": {
-        "confirm": "Sei sicuro di voler rimuovere l'account: {{nome}}? \nQuesta operazione non può essere annullata. Se hai usato questo account per accedere a siti web, potresti perdere l'accesso a questi ultimi."
+        "confirm": "Sei sicuro di voler rimuovere l'account: {{name}}? \nQuesta operazione non può essere annullata. Se hai usato questo account per accedere a siti web, potresti perdere l'accesso a questi ultimi."
       }
     },
     "enable": {
@@ -491,7 +491,7 @@
         "heading": "Vuoi accedere a"
       },
       "submit": "Accedi",
-      "success": "Accesso riuscito su {{nome}}",
+      "success": "Accesso riuscito su {{name}}",
       "errors": {
         "status": "Errore: lo stato di autenticazione non è ok"
       }
@@ -576,7 +576,7 @@
     },
     "confirm_keysend": {
       "title": "Approva il pagamento",
-      "success": "Pagamento inviato! Preimmagine: {{preimmagine}}",
+      "success": "Pagamento inviato! Preimmagine: {{preimage}}",
       "payment_summary": {
         "description": "Invia il pagamento a: {{destination}}"
       }
