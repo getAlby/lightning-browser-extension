@@ -6367,10 +6367,9 @@ listr2@^4.0.5:
     through "^2.3.8"
     wrap-ansi "^7.0.0"
 
-lnmessage@^0.0.11:
+lnmessage@bumi/lnmessage#dist:
   version "0.0.11"
-  resolved "https://registry.yarnpkg.com/lnmessage/-/lnmessage-0.0.11.tgz#7e653fd52a8a6bde5f182a3193c137aa2832e701"
-  integrity sha512-LH90nvz8grM6sqy4/MDMVyNhvDDuDqdUgvil878IB4r3TqowEHnSw+dyN+7gReL1hudX5TfEGUYjbWiVQIcx/Q==
+  resolved "https://codeload.github.com/bumi/lnmessage/tar.gz/1a74b8f48fc35d2d66f22e5e2b6411da2845e74e"
   dependencies:
     buffer "^6.0.3"
     crypto-js "^4.1.1"
