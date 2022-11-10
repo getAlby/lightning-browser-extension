@@ -86,7 +86,6 @@ Ensure you have
 
 Supported but not required
 
-- [nodenv](https://github.com/nodenv/nodenv)
 - [nvm](https://github.com/nvm-sh/nvm#intro)
 
 Then run the following
