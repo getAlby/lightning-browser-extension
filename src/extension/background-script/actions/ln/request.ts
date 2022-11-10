@@ -4,6 +4,8 @@ import { MessageGenericRequest } from "~/types";
 import db from "../../db";
 import state from "../../state";
 
+const WEBLN_PREFIX = "webln.";
+
 const request = async (
   message: MessageGenericRequest
 ): Promise<{ data: unknown } | { error: string }> => {
@@ -27,10 +29,13 @@ const request = async (
       return { error: "Could not find an allowance for this host" };
     }
 
+    // prefix method with webln
+    const weblnMethod = `${WEBLN_PREFIX}${args.method}`;
+
     const permission = await db.permissions
       .where("host")
       .equalsIgnoreCase(origin.host)
-      .and((p) => p.method === args.method)
+      .and((p) => p.method === weblnMethod)
       .first();
 
     // request method is allowed to be called
@@ -59,7 +64,7 @@ const request = async (
           createdAt: Date.now().toString(),
           allowanceId: allowance.id,
           host: origin.host,
-          method: args.method,
+          method: weblnMethod, // ensure to store the prefixed method string
           enabled: promptResponse.data.enabled,
           blocked: promptResponse.data.blocked,
         });
