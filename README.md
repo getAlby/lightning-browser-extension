@@ -129,7 +129,7 @@ If this is not reachable please let us know.
 
 #### Storybook.js
 
-We used to maintain a [Storybook](https://storybook.js.org)-setup but nobody as using it. Currently we do not see a use for it.
+We used to maintain a [Storybook](https://storybook.js.org)-setup but nobody as using it. Currently we do not see a use for it.\
 But happy to talk about if you think it's useful.
 
 ### :white_check_mark: Tests
