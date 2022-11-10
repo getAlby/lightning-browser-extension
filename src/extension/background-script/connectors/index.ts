@@ -1,4 +1,5 @@
 import Citadel from "./citadel";
+import Commando from "./commando";
 import Eclair from "./eclair";
 import Galoy from "./galoy";
 import Kollider from "./kollider";
@@ -29,6 +30,7 @@ const connectors = {
   eclair: Eclair,
   citadel: Citadel,
   nativecitadel: NativeCitadel,
+  commando: Commando,
   kollider: Kollider,
 };
 

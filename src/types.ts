@@ -135,6 +135,7 @@ export type NavigationState = {
     amount?: string;
     customRecords?: Record<string, string>;
     message?: string;
+    event?: Event;
   };
   isPrompt?: true; // only passed via Prompt.tsx
   action: string;
@@ -331,7 +332,6 @@ export interface MessagePrivateKeySet extends MessageDefault {
 export interface MessageSignEvent extends MessageDefault {
   args: {
     event: Event;
-    message: string;
   };
   action: "signEvent";
 }
