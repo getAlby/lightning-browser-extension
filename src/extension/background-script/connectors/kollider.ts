@@ -105,7 +105,7 @@ export default class Kollider implements Connector {
           id: `${invoice.r_hash}-${index}`,
           memo: "",
           preimage: "", // lndhub doesn't support preimage (yet)
-          settled: invoice.settled,
+          settled: true, //invoice.settled, // seems there is a bug in the Kollider API and invoices are not marked as settled and have no settled_date
           settleDate: invoice.settled_date * 1000,
           totalAmount: `${invoice.value}`,
           type: "received",
@@ -190,7 +190,7 @@ export default class Kollider implements Connector {
       return Promise.reject(new Error("Invalid message"));
     }
     const message = sha256(args.message).toString(Hex);
-    let keyHex = sha256(
+    const keyHex = sha256(
       `kollider://${this.config.username}:${this.config.password}`
     ).toString(Hex);
     if (!keyHex) {
@@ -226,7 +226,8 @@ export default class Kollider implements Connector {
     }>("GET", "/addinvoice", {
       amount: amount,
       currency: "BTC",
-      account_id: this.currentAccountId,
+      target_account_currency: this.currency,
+      //account_id: this.currentAccountId,
       meta: args.memo,
     });
     return {
