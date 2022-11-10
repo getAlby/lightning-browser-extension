@@ -86,7 +86,7 @@ function Prompt() {
             <Route path="confirmKeysend" element={<ConfirmKeysend />} />
             <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
             <Route
-              path="public/webln/confirmRequestPermission"
+              path="public/confirmRequestPermission"
               element={<ConfirmRequestPermission />}
             />
           </Route>

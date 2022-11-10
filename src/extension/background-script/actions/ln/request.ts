@@ -48,7 +48,7 @@ const request = async (
           },
         },
         origin,
-        action: "public/webln/confirmRequestPermission",
+        action: "public/confirmRequestPermission",
       });
 
       const response = await connector.requestMethod(args.method, args.params);
