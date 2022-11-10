@@ -1,11 +1,14 @@
 import LNC from "@lightninglabs/lnc-web";
+import { CredentialStore } from "@lightninglabs/lnc-web";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
 import WordArray from "crypto-js/lib-typedarrays";
 import SHA256 from "crypto-js/sha256";
+import { encryptData } from "~/common/lib/crypto";
 import utils from "~/common/lib/utils";
 
+import state from "../state";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
@@ -26,6 +29,74 @@ import Connector, {
 
 interface Config {
   pairingPhrase: string;
+  localKey?: string;
+  remoteKey?: string;
+  serverHost?: string;
+}
+
+const DEFAULT_SERVER_HOST = "mailbox.terminal.lightning.today:443";
+
+class LncCredentialStore implements CredentialStore {
+  config: Config;
+
+  constructor(config: Config) {
+    this.config = config;
+  }
+
+  get password() {
+    return "";
+  }
+
+  set localKey(value: string) {
+    this.config.localKey = value;
+    this._save();
+  }
+
+  get localKey() {
+    return this.config.localKey || "";
+  }
+
+  set remoteKey(value: string) {
+    this.config.remoteKey = value;
+    this._save();
+  }
+
+  get remoteKey() {
+    return this.config.remoteKey || "";
+  }
+
+  get pairingPhrase() {
+    return this.config.pairingPhrase;
+  }
+
+  set serverHost(value: string) {
+    this.config.serverHost = value;
+    this._save();
+  }
+
+  get serverHost() {
+    return this.config.serverHost || DEFAULT_SERVER_HOST;
+  }
+
+  get isPaired() {
+    return true;
+  }
+
+  async clear() {
+    this.config.localKey = "";
+    this.config.remoteKey = "";
+    this._save();
+  }
+
+  private async _save() {
+    const accounts = state.getState().accounts;
+    const password = state.getState().password as string;
+    const currentAccountId = state.getState().currentAccountId as string;
+    accounts[currentAccountId].config = encryptData(this.config, password);
+    state.setState({ accounts });
+    await state.getState().saveToStorage();
+    return true;
+  }
 }
 
 class Lnc implements Connector {
@@ -35,7 +106,7 @@ class Lnc implements Connector {
   constructor(config: Config) {
     this.config = config;
     this.lnc = new LNC({
-      pairingPhrase: this.config.pairingPhrase,
+      credentialStore: new LncCredentialStore(config),
     });
   }
 
@@ -59,6 +130,9 @@ class Lnc implements Connector {
   }
 
   getInfo(): Promise<GetInfoResponse> {
+    if (!this.lnc.isConnected) {
+      return Promise.reject(new Error("Account is still loading"));
+    }
     return this.lnc.lnd.lightning.GetInfo().then((data: FixMe) => {
       return {
         data: {
@@ -71,6 +145,9 @@ class Lnc implements Connector {
   }
 
   getBalance(): Promise<GetBalanceResponse> {
+    if (!this.lnc.isConnected) {
+      return Promise.reject(new Error("Account is still loading"));
+    }
     return this.lnc.lnd.lightning.ChannelBalance().then((data: FixMe) => {
       return {
         data: {
@@ -81,6 +158,9 @@ class Lnc implements Connector {
   }
 
   async getInvoices(): Promise<GetInvoicesResponse> {
+    if (!this.lnc.isConnected) {
+      throw new Error("Account is still loading");
+    }
     const data = await this.lnc.lnd.lightning.ListInvoices({ reversed: true });
 
     const invoices: ConnectorInvoice[] = data.invoices
@@ -114,6 +194,9 @@ class Lnc implements Connector {
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
+    if (!this.lnc.isConnected) {
+      throw new Error("Account is still loading");
+    }
     return this.lnc.lnd.lightning
       .LookupInvoice({ r_hash_str: args.paymentHash })
       .then((data: FixMe) => {
@@ -126,6 +209,9 @@ class Lnc implements Connector {
   }
 
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
+    if (!this.lnc.isConnected) {
+      return Promise.reject(new Error("Account is still loading"));
+    }
     return this.lnc.lnd.lightning
       .SendPaymentSync({
         payment_request: args.paymentRequest,
@@ -147,6 +233,9 @@ class Lnc implements Connector {
       });
   }
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
+    if (!this.lnc.isConnected) {
+      throw new Error("Account is still loading");
+    }
     //See: https://gist.github.com/dellagustin/c3793308b75b6b0faf134e64db7dc915
     const dest_pubkey_hex = args.pubkey;
     const dest_pubkey_base64 = Hex.parse(dest_pubkey_hex).toString(Base64);
@@ -190,6 +279,9 @@ class Lnc implements Connector {
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
+    if (!this.lnc.isConnected) {
+      return Promise.reject(new Error("Account is still loading"));
+    }
     // use v2 to use the key locator (key_loc)
     // return this.request("POST", "/v2/signer/signmessage", {
     return this.lnc.lnd.lightning
@@ -205,6 +297,9 @@ class Lnc implements Connector {
   }
 
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
+    if (!this.lnc.isConnected) {
+      return Promise.reject(new Error("Account is still loading"));
+    }
     return this.lnc.lnd.lightning
       .AddInvoice({ memo: args.memo, value: args.amount })
       .then((data: FixMe) => {
