@@ -122,26 +122,27 @@ const routeCalls = (
 async function init() {
   console.info("Loading background script");
 
-  //await browser.storage.sync.set({ settings: { debug: true }, allowances: [] });
-  await state.getState().init();
-  console.info("State loaded");
-
-  await db.open();
-  console.info("DB opened");
-
-  events.subscribe();
-  console.info("Events subscribed");
-
-  browser.runtime.onMessage.addListener(debugLogger);
-
   // this is the only handler that may and must return a Promise which resolve with the response to the content script
   browser.runtime.onMessage.addListener(routeCalls); // all go through here
+
+  browser.runtime.onMessage.addListener(debugLogger);
 
   // Update the extension icon
   browser.tabs.onUpdated.addListener(updateIcon);
 
   // Notify the content script that the tab has been updated.
   browser.tabs.onUpdated.addListener(extractLightningData);
+
+  //await browser.storage.sync.set({ settings: { debug: true }, allowances: [] });
+  await state.getState().init();
+  console.info("State loaded");
+  await state.getState().connector;
+
+  await db.open();
+  console.info("DB opened");
+
+  events.subscribe();
+  console.info("Events subscribed");
 
   // if (state.getState().settings.debug) {
   //   console.info("Debug mode enabled, use window.debugAlby");
