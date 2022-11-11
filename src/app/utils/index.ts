@@ -1,5 +1,4 @@
-// import api from "~/common/lib/api";
-import browser from "webextension-polyfill";
+import api from "~/common/lib/api";
 
 export function classNames(...classes: (string | boolean)[]) {
   return classes.filter(Boolean).join(" ");
@@ -9,10 +8,9 @@ export function classNames(...classes: (string | boolean)[]) {
  * Get the active theme and apply corresponding Tailwind classes to the document.
  */
 export function getTheme() {
-  // api.getSettings()
-  browser.storage.sync.get("settings").then(({ settings }) => {
+  api.getSettings().then((response) => {
     // check if settings theme selection is system (this is the default)
-    if (settings.theme === "system") {
+    if (response.theme === "system") {
       // checks if the users prefers dark mode and if true then adds dark class to HTML element
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
         document.documentElement.classList.add("dark");
@@ -23,9 +21,9 @@ export function getTheme() {
       }
     }
     // last two conditionals for if user selects light or dark mode
-    else if (settings.theme === "dark") {
+    else if (response.theme === "dark") {
       document.documentElement.classList.add("dark");
-    } else if (settings.theme === "light") {
+    } else if (response.theme === "light") {
       document.documentElement.classList.remove("dark");
     }
   });

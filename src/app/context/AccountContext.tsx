@@ -105,35 +105,32 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
 
   // Invoked only on on mount.
   useEffect(() => {
-    setTimeout(() => {
-      console.log("ACCOUNT CONTEXT EFFECT");
-      api
-        .getStatus()
-        .then((response) => {
-          const onWelcomePage =
-            window.location.pathname.indexOf("welcome.html") >= 0;
-          if (!response.configured && !onWelcomePage) {
-            utils.openPage("welcome.html");
-            window.close();
-          } else if (response.unlocked) {
-            if (response.configured && onWelcomePage) {
-              utils.redirectPage("options.html");
-            }
-            setAccountId(response.currentAccountId);
-            fetchAccountInfo({ accountId: response.currentAccountId });
-          } else {
-            setAccount(null);
+    api
+      .getStatus()
+      .then((response) => {
+        const onWelcomePage =
+          window.location.pathname.indexOf("welcome.html") >= 0;
+        if (!response.configured && !onWelcomePage) {
+          utils.openPage("welcome.html");
+          window.close();
+        } else if (response.unlocked) {
+          if (response.configured && onWelcomePage) {
+            utils.redirectPage("options.html");
           }
-        })
-        .catch((e) => {
-          toast.error(
-            `AccountContext: An unexpected error occurred (${e.message})`
-          );
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }, 1000);
+          setAccountId(response.currentAccountId);
+          fetchAccountInfo({ accountId: response.currentAccountId });
+        } else {
+          setAccount(null);
+        }
+      })
+      .catch((e) => {
+        toast.error(
+          `AccountContext: An unexpected error occurred (${e.message})`
+        );
+      })
+      .finally(() => {
+        setLoading(false);
+      });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

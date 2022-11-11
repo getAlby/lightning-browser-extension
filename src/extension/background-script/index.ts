@@ -93,13 +93,11 @@ const routeCalls = (
   },
   sender: Runtime.MessageSender
 ) => {
-  console.log("---> routeCalls", message);
-
   // if the application does not match or if it is not a prompt we ignore the call
   if (message.application !== "LBE" || !message.prompt) {
     return;
   }
-  const debug = true; //state.getState().settings.debug;
+  const debug = state.getState().settings.debug;
 
   if (message.type) {
     console.error("Invalid message, using type: ", message);
@@ -136,7 +134,6 @@ async function init() {
   //await browser.storage.sync.set({ settings: { debug: true }, allowances: [] });
   await state.getState().init();
   console.info("State loaded");
-  await state.getState().connector;
 
   await db.open();
   console.info("DB opened");
@@ -144,15 +141,16 @@ async function init() {
   events.subscribe();
   console.info("Events subscribed");
 
-  // if (state.getState().settings.debug) {
-  //   console.info("Debug mode enabled, use window.debugAlby");
-  //   window.debugAlby = {
-  //     state,
-  //     db,
-  //     connectors,
-  //     router,
-  //   };
-  // }
+  if (state.getState().settings.debug) {
+    console.info("Debug mode enabled, use window.debugAlby");
+    window.debugAlby = {
+      state,
+      db,
+      connectors,
+      router,
+    };
+  }
+
   console.info("Loading completed");
 }
 
