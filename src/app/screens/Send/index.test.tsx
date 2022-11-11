@@ -26,33 +26,25 @@ describe("Send", () => {
       </MemoryRouter>
     );
 
-    expect(
-      await screen.getByLabelText("Invoice, Lightning Address or LNURL")
-    ).toBeInTheDocument();
+    expect(await screen.getByLabelText("Recipient")).toBeInTheDocument();
 
     await act(async () => {
       await user.type(
-        screen.getByLabelText("Invoice, Lightning Address or LNURL"),
+        screen.getByLabelText("Recipient"),
         "    sampleinvoice  "
       );
     });
 
-    expect(
-      screen.getByLabelText("Invoice, Lightning Address or LNURL")
-    ).toHaveValue("sampleinvoice");
+    expect(screen.getByLabelText("Recipient")).toHaveValue("sampleinvoice");
 
     await act(async () => {
-      await user.clear(
-        screen.getByLabelText("Invoice, Lightning Address or LNURL")
-      );
+      await user.clear(screen.getByLabelText("Recipient"));
       await user.type(
-        screen.getByLabelText("Invoice, Lightning Address or LNURL"),
+        screen.getByLabelText("Recipient"),
         "lightning:test@getalby.com"
       );
     });
 
-    expect(
-      screen.getByLabelText("Invoice, Lightning Address or LNURL")
-    ).toHaveValue("test@getalby.com");
+    expect(screen.getByLabelText("Recipient")).toHaveValue("test@getalby.com");
   });
 });

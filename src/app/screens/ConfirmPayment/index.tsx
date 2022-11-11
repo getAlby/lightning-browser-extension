@@ -86,9 +86,9 @@ function ConfirmPayment() {
       msg.reply(response);
       setSuccessMessage(
         t("success", {
-          amount: `${invoice.satoshis} SATS${
-            showFiat ? ` (${fiatAmount})` : ``
-          }`,
+          amount: `${invoice.satoshis} ${tCommon("sats", {
+            count: invoice.satoshis as number,
+          })}${showFiat ? ` (${fiatAmount})` : ``}`,
         })
       );
     } catch (e) {
@@ -104,6 +104,15 @@ function ConfirmPayment() {
     if (navState.isPrompt) {
       msg.error(USER_REJECTED_ERROR);
     } else {
+      navigate(-1);
+    }
+  }
+
+  function close(e: React.MouseEvent<HTMLButtonElement>) {
+    if (navState.isPrompt) {
+      window.close();
+    } else {
+      e.preventDefault();
       navigate(-1);
     }
   }
@@ -139,16 +148,17 @@ function ConfirmPayment() {
                   description={invoice.tagsObject.description}
                 />
               </div>
-
-              <BudgetControl
-                fiatAmount={fiatBudgetAmount}
-                remember={rememberMe}
-                onRememberChange={(event) => {
-                  setRememberMe(event.target.checked);
-                }}
-                budget={budget}
-                onBudgetChange={(event) => setBudget(event.target.value)}
-              />
+              {navState.origin && (
+                <BudgetControl
+                  fiatAmount={fiatBudgetAmount}
+                  remember={rememberMe}
+                  onRememberChange={(event) => {
+                    setRememberMe(event.target.checked);
+                  }}
+                  budget={budget}
+                  onBudgetChange={(event) => setBudget(event.target.value)}
+                />
+              )}
             </div>
           </div>
           <div>
@@ -171,14 +181,18 @@ function ConfirmPayment() {
             message={
               !navState.origin
                 ? successMessage
-                : `${invoice.satoshis} SATS ${
-                    showFiat ? `(${fiatAmount})` : ``
-                  } ${tCommon("were_sent_to")} ${navState.origin.name}`
+                : tCommon("success_message", {
+                    amount: `${invoice.satoshis} ${tCommon("sats", {
+                      count: invoice.satoshis as number,
+                    })}`,
+                    fiatAmount: showFiat ? ` (${fiatAmount})` : ``,
+                    destination: navState.origin.name,
+                  })
             }
           />
           <div className="my-4">
             <Button
-              onClick={() => window.close()}
+              onClick={close}
               label={tCommon("actions.close")}
               fullWidth
             />

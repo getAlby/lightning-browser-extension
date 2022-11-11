@@ -7,7 +7,7 @@ import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
 import axios from "axios";
-import React, { Fragment, useState, useEffect, MouseEvent } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -51,7 +51,9 @@ function LNURLPay() {
   const { t: tCommon } = useTranslation("common");
 
   const [valueSat, setValueSat] = useState(
-    (details?.minSendable && (+details?.minSendable / 1000).toString()) || ""
+    (details?.minSendable &&
+      Math.floor(+details?.minSendable / 1000).toString()) ||
+      ""
   );
 
   const [fiatValue, setFiatValue] = useState("");
@@ -64,12 +66,12 @@ function LNURLPay() {
   >();
 
   useEffect(() => {
-    if (showFiat) {
-      (async () => {
-        const res = await getFiatValue(valueSat);
-        setFiatValue(res);
-      })();
-    }
+    const getFiat = async () => {
+      const res = await getFiatValue(valueSat);
+      setFiatValue(res);
+    };
+
+    getFiat();
   }, [valueSat, showFiat, getFiatValue]);
 
   useEffect(() => {
@@ -102,10 +104,14 @@ function LNURLPay() {
     try {
       setLoadingConfirm(true);
       // Get the invoice
-      const params = {
+      const params: {
+        amount: number;
+        comment?: string;
+        payerdata?: string;
+      } = {
         amount: parseInt(valueSat) * 1000, // user specified sum in MilliSatoshi
-        comment, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/12.md
-        payerdata, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/18.md
+        comment: comment && comment, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/12.md
+        payerdata: payerdata && JSON.stringify(payerdata), // https://github.com/fiatjaf/lnurl-rfc/blob/luds/18.md
       };
 
       let response;
@@ -199,7 +205,7 @@ function LNURLPay() {
     }
   }
 
-  function reject(e: MouseEvent) {
+  function reject(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (navState.isPrompt) {
       msg.error(USER_REJECTED_ERROR);
@@ -208,7 +214,7 @@ function LNURLPay() {
     }
   }
 
-  function close(e: MouseEvent) {
+  function close(e: React.MouseEvent<HTMLButtonElement>) {
     // will never be reached via prompt
     e.preventDefault();
     navigate(-1);
@@ -304,11 +310,13 @@ function LNURLPay() {
         <div>
           <ResultCard
             isSuccess
-            message={`${valueSat} SATS ${
-              showFiat ? "(" + fiatValue + ")" : ""
-            } ${tCommon("were_sent_to")} ${
-              navState.origin?.name || getRecipient()
-            }`}
+            message={tCommon("success_message", {
+              amount: `${valueSat} ${tCommon("sats", {
+                count: parseInt(valueSat),
+              })}`,
+              fiatAmount: showFiat ? ` (${fiatValue})` : ``,
+              destination: navState.origin?.name || getRecipient(),
+            })}
           />
           {isMessage && (
             <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
@@ -328,6 +336,11 @@ function LNURLPay() {
     );
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    confirm();
+  }
+
   return (
     <>
       <div className="flex flex-col grow overflow-hidden">
@@ -343,92 +356,101 @@ function LNURLPay() {
                   description={getRecipient()}
                   image={navState.origin?.icon || getImage()}
                 />
-
-                <div className="my-4">
-                  <dl>
-                    <>
-                      {formattedMetadata(details.metadata).map(
-                        ([dt, dd], i) => (
-                          <Fragment key={`element-${i}`}>
-                            <Dt>{dt}</Dt>
-                            <Dd>{dd}</Dd>
-                          </Fragment>
-                        )
-                      )}
-                      {details.minSendable === details.maxSendable && (
+                <form onSubmit={handleSubmit}>
+                  <fieldset disabled={loadingConfirm}>
+                    <div className="my-4">
+                      <dl>
                         <>
-                          <Dt>{t("amount.label")}</Dt>
-                          <Dd>{`${+details.minSendable / 1000} ${tCommon(
-                            "sats"
-                          )}`}</Dd>
+                          {formattedMetadata(details.metadata).map(
+                            ([dt, dd], i) => (
+                              <Fragment key={`element-${i}`}>
+                                <Dt>{dt}</Dt>
+                                <Dd>{dd}</Dd>
+                              </Fragment>
+                            )
+                          )}
+                          {details.minSendable === details.maxSendable && (
+                            <>
+                              <Dt>{t("amount.label")}</Dt>
+                              <Dd>{`${Math.floor(
+                                +details.minSendable / 1000
+                              )} ${tCommon("sats", {
+                                count: Math.floor(+details.minSendable / 1000),
+                              })}`}</Dd>
+                            </>
+                          )}
                         </>
+                      </dl>
+                      {details && details.minSendable !== details.maxSendable && (
+                        <div>
+                          <DualCurrencyField
+                            autoFocus
+                            id="amount"
+                            label={t("amount.label")}
+                            min={Math.floor(+details.minSendable / 1000)}
+                            max={Math.floor(+details.maxSendable / 1000)}
+                            value={valueSat}
+                            onChange={(e) => setValueSat(e.target.value)}
+                            fiatValue={fiatValue}
+                          />
+                          <SatButtons
+                            onClick={setValueSat}
+                            disabled={loadingConfirm}
+                          />
+                        </div>
                       )}
-                    </>
-                  </dl>
-                  {details && details.minSendable !== details.maxSendable && (
-                    <div>
-                      <DualCurrencyField
-                        id="amount"
-                        label={t("amount.label")}
-                        min={+details.minSendable / 1000}
-                        max={+details.maxSendable / 1000}
-                        value={valueSat}
-                        onChange={(e) => setValueSat(e.target.value)}
-                        fiatValue={fiatValue}
-                      />
-                      <SatButtons onClick={setValueSat} />
+                      {details &&
+                        typeof details?.commentAllowed === "number" &&
+                        details?.commentAllowed > 0 && (
+                          <div className="mt-4">
+                            <TextField
+                              id="comment"
+                              label={t("comment.label")}
+                              placeholder={tCommon("optional")}
+                              onChange={(e) => {
+                                setComment(e.target.value);
+                              }}
+                            />
+                          </div>
+                        )}
+                      {details && details?.payerData?.name && (
+                        <div className="mt-4">
+                          <TextField
+                            id="name"
+                            label={t("name.label")}
+                            placeholder={tCommon("optional")}
+                            value={userName}
+                            onChange={(e) => {
+                              setUserName(e.target.value);
+                            }}
+                          />
+                        </div>
+                      )}
+                      {details && details?.payerData?.email && (
+                        <div className="mt-4">
+                          <TextField
+                            id="email"
+                            label={t("email.label")}
+                            placeholder={tCommon("optional")}
+                            value={userEmail}
+                            onChange={(e) => {
+                              setUserEmail(e.target.value);
+                            }}
+                          />
+                        </div>
+                      )}
                     </div>
-                  )}
-                  {details &&
-                    typeof details?.commentAllowed === "number" &&
-                    details?.commentAllowed > 0 && (
-                      <div className="mt-4">
-                        <TextField
-                          id="comment"
-                          label={t("comment.label")}
-                          placeholder={tCommon("optional")}
-                          onChange={(e) => {
-                            setComment(e.target.value);
-                          }}
-                        />
-                      </div>
-                    )}
-                  {details && details?.payerData?.name && (
-                    <div className="mt-4">
-                      <TextField
-                        id="name"
-                        label={t("name.label")}
-                        placeholder={tCommon("optional")}
-                        value={userName}
-                        onChange={(e) => {
-                          setUserName(e.target.value);
-                        }}
-                      />
-                    </div>
-                  )}
-                  {details && details?.payerData?.email && (
-                    <div className="mt-4">
-                      <TextField
-                        id="email"
-                        label={t("email.label")}
-                        placeholder={tCommon("optional")}
-                        value={userEmail}
-                        onChange={(e) => {
-                          setUserEmail(e.target.value);
-                        }}
+                    <div className="pt-2 border-t border-gray-200 dark:border-white/10">
+                      <ConfirmOrCancel
+                        isFocused={false}
+                        label={tCommon("actions.confirm")}
+                        loading={loadingConfirm}
+                        disabled={loadingConfirm || !valueSat}
+                        onCancel={reject}
                       />
                     </div>
-                  )}
-                </div>
-                <div className="pt-2 border-t border-gray-200 dark:border-white/10">
-                  <ConfirmOrCancel
-                    label={tCommon("actions.confirm")}
-                    loading={loadingConfirm}
-                    disabled={loadingConfirm || !valueSat}
-                    onConfirm={confirm}
-                    onCancel={reject}
-                  />
-                </div>
+                  </fieldset>
+                </form>
               </Container>
             </div>
           </>

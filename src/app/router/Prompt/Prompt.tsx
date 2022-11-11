@@ -1,6 +1,7 @@
 import AccountMenu from "@components/AccountMenu";
 import ConfirmKeysend from "@screens/ConfirmKeysend";
 import ConfirmPayment from "@screens/ConfirmPayment";
+import ConfirmRequestPermission from "@screens/ConfirmRequestPermission";
 import ConfirmSignMessage from "@screens/ConfirmSignMessage";
 import Enable from "@screens/Enable";
 import LNURLAuth from "@screens/LNURLAuth";
@@ -13,6 +14,8 @@ import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
+import NostrConfirmGetPublicKey from "~/app/screens/Nostr/ConfirmGetPublicKey";
+import NostrConfirmSignMessage from "~/app/screens/Nostr/ConfirmSignMessage";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
@@ -62,9 +65,18 @@ function Prompt() {
               }
             />
             <Route
-              path="webln/enable"
+              path="public/webln/enable"
               element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
+            <Route
+              path="public/nostr/confirmGetPublicKey"
+              element={<NostrConfirmGetPublicKey />}
+            />
+            <Route
+              path="public/nostr/confirmSignMessage"
+              element={<NostrConfirmSignMessage />}
+            />
+
             <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
@@ -73,6 +85,10 @@ function Prompt() {
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="confirmKeysend" element={<ConfirmKeysend />} />
             <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
+            <Route
+              path="public/confirmRequestPermission"
+              element={<ConfirmRequestPermission />}
+            />
           </Route>
           <Route
             path="unlock"

@@ -81,12 +81,11 @@ Add Alby to your browser
 
 Ensure you have
 
-- [Node.js](https://nodejs.org) v14 [`14.20.1`] installed (We only support v14 currently)
+- [Node.js](https://nodejs.org) v16 or newer installed (we run tests with v18)
 - [Yarn](https://yarnpkg.com) v1 or v2 installed
 
-Suppported but not required
+Supported but not required
 
-- [nodenv](https://github.com/nodenv/nodenv)
 - [nvm](https://github.com/nvm-sh/nvm#intro)
 
 Then run the following
@@ -130,8 +129,8 @@ If this is not reachable please let us know.
 
 #### Storybook.js
 
-We have a working [Storybook](https://storybook.js.org)-setup and some components have stories.
-You can find the deployed Storybook here: https://lbe-stories.netlify.app
+We used to maintain a [Storybook](https://storybook.js.org)-setup but nobody as using it. Currently we do not see a use for it.\
+But happy to talk about if you think it's useful.
 
 ### :white_check_mark: Tests
 
@@ -398,7 +397,7 @@ Also we focus on supporting multiple different node backends (non-custodial and 
 
 #### What is WebLN?
 
-WebLN is a library and set of specifications for lightning apps and client providers to facilitate communication between apps and users' lightning nodes in a secure way. It provides a programmatic, permissioned interface for letting applications ask users to send payments, generate invoices to receive payments, and much more. [This documentation](https://webln.dev/#/) covers how to use WebLN in your Lightning-driven applications.
+WebLN is a library and set of specifications for lightning apps and client providers to facilitate communication between apps and users' lightning nodes in a secure way. It provides a programmatic, permissioned interface for letting applications ask users to send payments, generate invoices to receive payments, and much more. [This documentation](https://webln.guide/) covers how to use WebLN in your Lightning-driven applications.
 
 #### Is there a bounty program and can I contribute?
 

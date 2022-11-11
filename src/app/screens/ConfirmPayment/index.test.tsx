@@ -30,14 +30,11 @@ const mockOrigin: OriginData = {
 const paymentRequest =
   "lnbc250n1p3qzycupp58uc2wa29470f98wrxmy4xwuqt8cywjygf5t2cp0s376y7nwdyq3sdqhf35kw6r5de5kueeqg3jk6mccqzpgxqyz5vqsp5wfdmwtv5rmru00ajsnn3f8lzpxa4snug2tmqvc8zj8semr4kjjts9qyyssq83h74pte8nrkqs8sr2hscv5zcdmhwunwnd6xr3mskeayh96pu7ksswa6p7trknlpp6t3js4k6uytxutv5ecgcwaxz7fj4zfy5khjcjcpf66muy";
 
+let parameters = {};
+
 jest.mock("~/app/hooks/useNavigationState", () => {
   return {
-    useNavigationState: jest.fn(() => ({
-      origin: mockOrigin,
-      args: {
-        paymentRequest,
-      },
-    })),
+    useNavigationState: jest.fn(() => parameters),
   };
 });
 
@@ -46,7 +43,14 @@ describe("ConfirmPayment", () => {
     jest.clearAllMocks();
   });
 
-  test("renders with fiat", async () => {
+  test("prompt: renders with fiat", async () => {
+    parameters = {
+      origin: mockOrigin,
+      args: {
+        paymentRequest,
+      },
+    };
+
     jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
       settings: { ...mockSettings },
       isLoading: false,
@@ -70,7 +74,14 @@ describe("ConfirmPayment", () => {
     ).toBeInTheDocument();
   });
 
-  test("toggles set budget, displays input with a default budget", async () => {
+  test("prompt: toggles set budget, displays input with a default budget", async () => {
+    parameters = {
+      origin: mockOrigin,
+      args: {
+        paymentRequest,
+      },
+    };
+
     jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
       settings: { ...mockSettings, showFiat: false },
       isLoading: false,
@@ -97,5 +108,35 @@ describe("ConfirmPayment", () => {
     const input = await screen.findByLabelText("Budget");
     const satoshis = lightningPayReq.decode(paymentRequest).satoshis || 0;
     expect(input).toHaveValue(satoshis * 10);
+  });
+
+  test("send: renders with fiat", async () => {
+    parameters = {
+      args: {
+        paymentRequest,
+      },
+    };
+
+    jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
+      settings: { ...mockSettings },
+      isLoading: false,
+      updateSetting: jest.fn(),
+      getFiatValue: jest.fn(() => Promise.resolve("$0.01")),
+    });
+
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <ConfirmPayment />
+        </MemoryRouter>
+      );
+    });
+
+    expect(await screen.findByText("Amount")).toBeInTheDocument();
+    expect(await screen.findByText("Description")).toBeInTheDocument();
+    expect(screen.getByText("(~$0.01)")).toBeInTheDocument();
+    expect(
+      await screen.queryByText("Remember and set a budget")
+    ).not.toBeInTheDocument();
   });
 });

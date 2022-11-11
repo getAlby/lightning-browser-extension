@@ -1,11 +1,12 @@
+import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
-import SuccessMessage from "@components/SuccessMessage";
+import ResultCard from "@components/ResultCard";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import axios from "axios";
-import { useState, useEffect, MouseEvent } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ScreenHeader from "~/app/components/ScreenHeader";
@@ -18,6 +19,7 @@ import type { LNURLWithdrawServiceResponse } from "~/types";
 
 function LNURLWithdraw() {
   const { t } = useTranslation("translation", { keyPrefix: "lnurlwithdraw" });
+  const { t: tCommon } = useTranslation("common");
 
   const navigate = useNavigate();
   const navState = useNavigationState();
@@ -33,7 +35,7 @@ function LNURLWithdraw() {
   const { minWithdrawable, maxWithdrawable } = details;
 
   const [valueSat, setValueSat] = useState(
-    (maxWithdrawable && (+maxWithdrawable / 1000).toString()) || ""
+    (maxWithdrawable && Math.floor(+maxWithdrawable / 1000).toString()) || ""
   );
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -67,7 +69,12 @@ function LNURLWithdraw() {
       });
 
       if (response.data.status.toUpperCase() === "OK") {
-        setSuccessMessage(t("success"));
+        setSuccessMessage(
+          t("success", {
+            amount: `${valueSat} SATS ${showFiat ? `(${fiatValue})` : ``}`,
+            sender: origin ? origin.name : details.domain,
+          })
+        );
         // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the response. This closes the window which means the user will NOT see the above successAction.
         // We assume this is OK when it is called through webln.
         if (navState.isPrompt) {
@@ -92,7 +99,9 @@ function LNURLWithdraw() {
         <>
           <ContentMessage
             heading={t("content_message.heading")}
-            content={`${minWithdrawable / 1000} sats`}
+            content={`${Math.floor(minWithdrawable / 1000)} ${tCommon("sats", {
+              count: Math.floor(minWithdrawable / 1000),
+            })}`}
           />
 
           {errorMessage && <p className="mt-1 text-red-500">{errorMessage}</p>}
@@ -102,10 +111,11 @@ function LNURLWithdraw() {
       return (
         <div className="my-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden">
           <DualCurrencyField
+            autoFocus
             id="amount"
             label={t("amount.label")}
-            min={minWithdrawable / 1000}
-            max={maxWithdrawable / 1000}
+            min={Math.floor(minWithdrawable / 1000)}
+            max={Math.floor(maxWithdrawable / 1000)}
             value={valueSat}
             onChange={(e) => setValueSat(e.target.value)}
             fiatValue={fiatValue}
@@ -117,7 +127,7 @@ function LNURLWithdraw() {
     }
   }
 
-  function reject(e: MouseEvent) {
+  function reject(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (navState.isPrompt) {
       msg.error(USER_REJECTED_ERROR);
@@ -126,7 +136,7 @@ function LNURLWithdraw() {
     }
   }
 
-  function close(e: MouseEvent) {
+  function close(e: React.MouseEvent<HTMLButtonElement>) {
     // will never be reached via prompt
     e.preventDefault();
     navigate(-1);
@@ -158,19 +168,14 @@ function LNURLWithdraw() {
           />
         </Container>
       ) : (
-        <Container maxWidth="sm">
-          {origin ? (
-            <PublisherCard
-              title={origin.name}
-              image={origin.icon}
-              url={details.domain}
-            />
-          ) : (
-            <PublisherCard title={details.domain} />
-          )}
-
+        <Container justifyBetween maxWidth="sm">
+          <ResultCard isSuccess message={successMessage} />
           <div className="my-4">
-            <SuccessMessage message={successMessage} onClose={close} />
+            <Button
+              onClick={close}
+              label={tCommon("actions.close")}
+              fullWidth
+            />
           </div>
         </Container>
       )}

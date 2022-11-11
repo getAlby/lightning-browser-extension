@@ -2,7 +2,9 @@ import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios, { AxiosRequestConfig, Method } from "axios";
 import type { AxiosResponse } from "axios";
 import lightningPayReq from "bolt11";
+import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
+import hmacSHA256 from "crypto-js/hmac-sha256";
 import sha256 from "crypto-js/sha256";
 import utils from "~/common/lib/utils";
 import HashKeySigner from "~/common/utils/signer";
@@ -15,6 +17,7 @@ import Connector, {
   GetInfoResponse,
   GetInvoicesResponse,
   ConnectorInvoice,
+  ConnectPeerResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -30,10 +33,14 @@ interface Config {
   url: string;
 }
 
+const HMAC_VERIFY_HEADER_KEY =
+  process.env.HMAC_VERIFY_HEADER_KEY || "alby-extension"; // default is mainly that TS is happy
+
 const defaultHeaders = {
   Accept: "application/json",
   "Access-Control-Allow-Origin": "*",
   "Content-Type": "application/json",
+  "X-User-Agent": "alby-extension",
 };
 
 export default class LndHub implements Connector {
@@ -57,11 +64,11 @@ export default class LndHub implements Connector {
   }
 
   // not yet implemented
-  connectPeer() {
+  async connectPeer(): Promise<ConnectPeerResponse> {
     console.error(
       `${this.constructor.name} does not implement the getInvoices call`
     );
-    return new Error("Not yet supported with the currently used account.");
+    throw new Error("Not yet supported with the currently used account.");
   }
 
   async getInvoices(): Promise<GetInvoicesResponse> {
@@ -85,18 +92,22 @@ export default class LndHub implements Connector {
       }[]
     >("GET", "/getuserinvoices", undefined);
 
-    const invoices: ConnectorInvoice[] = data.map(
-      (invoice, index): ConnectorInvoice => ({
-        custom_records: invoice.custom_records,
-        id: `${invoice.payment_request}-${index}`,
-        memo: invoice.description,
-        preimage: "", // lndhub doesn't support preimage (yet)
-        settled: invoice.ispaid,
-        settleDate: invoice.timestamp * 1000,
-        totalAmount: `${invoice.amt}`,
-        type: "received",
-      })
-    );
+    const invoices: ConnectorInvoice[] = data
+      .map(
+        (invoice, index): ConnectorInvoice => ({
+          custom_records: invoice.custom_records,
+          id: `${invoice.payment_request}-${index}`,
+          memo: invoice.description,
+          preimage: "", // lndhub doesn't support preimage (yet)
+          settled: invoice.ispaid,
+          settleDate: invoice.timestamp * 1000,
+          totalAmount: `${invoice.amt}`,
+          type: "received",
+        })
+      )
+      .sort((a, b) => {
+        return b.settleDate - a.settleDate;
+      });
 
     return {
       data: {
@@ -315,14 +326,19 @@ export default class LndHub implements Connector {
   }
 
   async authorize() {
+    const url = `${this.config.url}/auth?type=auth`;
     const { data: authData } = await axios.post(
-      `${this.config.url}/auth?type=auth`,
+      url,
       {
         login: this.config.login,
         password: this.config.password,
       },
       {
-        headers: defaultHeaders,
+        headers: {
+          ...defaultHeaders,
+          "X-TS": Math.floor(Date.now() / 1000),
+          "X-VERIFY": this.generateHmacVerification(url),
+        },
         adapter: fetchAdapter,
       }
     );
@@ -343,6 +359,11 @@ export default class LndHub implements Connector {
     }
   }
 
+  generateHmacVerification(uri: string) {
+    const mac = hmacSHA256(uri, HMAC_VERIFY_HEADER_KEY).toString(Base64);
+    return encodeURIComponent(mac);
+  }
+
   async request<Type>(
     method: Method,
     path: string,
@@ -352,13 +373,16 @@ export default class LndHub implements Connector {
       await this.authorize();
     }
 
+    const url = `${this.config.url}${path}`;
     const reqConfig: AxiosRequestConfig = {
       method,
-      url: `${this.config.url}${path}`,
+      url: url,
       responseType: "json",
       headers: {
         ...defaultHeaders,
         Authorization: `Bearer ${this.access_token}`,
+        "X-TS": Math.floor(Date.now() / 1000),
+        "X-VERIFY": this.generateHmacVerification(url),
       },
       adapter: fetchAdapter,
     };

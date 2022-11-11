@@ -6,7 +6,9 @@ import Connector, {
   SendPaymentResponse,
   CheckPaymentArgs,
   CheckPaymentResponse,
+  ConnectPeerResponse,
   GetInfoResponse,
+  GetInvoicesResponse,
   GetBalanceResponse,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -48,19 +50,19 @@ class Eclair implements Connector {
   }
 
   // not yet implemented
-  connectPeer() {
+  async connectPeer(): Promise<ConnectPeerResponse> {
     console.error(
       `${this.constructor.name} does not implement the getInvoices call`
     );
-    return new Error("Not yet supported with the currently used account.");
+    throw new Error("Not yet supported with the currently used account.");
   }
 
   // not yet implemented
-  getInvoices() {
+  async getInvoices(): Promise<GetInvoicesResponse> {
     console.error(
       `Not yet supported with the currently used account: ${this.constructor.name}`
     );
-    return new Error(
+    throw new Error(
       `${this.constructor.name}: "getInvoices" is not yet supported. Contact us if you need it.`
     );
   }
@@ -82,7 +84,7 @@ class Eclair implements Connector {
       .reduce((acc: number, b: number) => acc + b, 0);
     return {
       data: {
-        balance: total / 1000,
+        balance: Math.floor(total / 1000),
       },
     };
   }
@@ -103,7 +105,7 @@ class Eclair implements Connector {
         preimage: paymentPreimage,
         paymentHash,
         route: {
-          total_amt: Math.round(recipientAmount / 1000),
+          total_amt: Math.floor(recipientAmount / 1000),
           total_fees: status.feesPaid,
         },
       },

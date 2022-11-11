@@ -37,7 +37,7 @@ function AccountMenu({ showOptions = true }: Props) {
   const title =
     !!authAccount?.name &&
     typeof authAccount?.name === "string" &&
-    `${authAccount?.name} - ${authAccount?.alias}`.substring(0, 21);
+    `${authAccount?.name} - ${authAccount?.alias}`;
 
   useEffect(() => {
     getAccounts();
@@ -72,17 +72,20 @@ function AccountMenu({ showOptions = true }: Props) {
   }
 
   return (
-    <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-surface-12dp">
+    <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-surface-12dp max-w-full">
       <p className="flex items-center">
         <WalletIcon className="-ml-1 w-8 h-8 opacity-50 dark:text-white" />
       </p>
 
       <div
-        className={`flex-auto mx-2 py-1 ${
+        className={`flex-auto mx-2 py-1 overflow-hidden ${
           !title && !balancesDecorated ? "w-28" : ""
         }`}
       >
-        <p className="text-xs text-gray-700 dark:text-neutral-400">
+        <p
+          title={title || ""}
+          className="text-xs text-gray-700 dark:text-neutral-400 text-ellipsis overflow-hidden whitespace-nowrap"
+        >
           {title || <Skeleton />}
         </p>
 

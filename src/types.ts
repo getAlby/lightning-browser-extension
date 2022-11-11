@@ -7,6 +7,8 @@ import {
   WebLNNode,
 } from "~/extension/background-script/connectors/connector.interface";
 
+import { Event } from "./extension/ln/nostr/types";
+
 export type ConnectorType = keyof typeof connectors;
 
 export interface Account {
@@ -133,10 +135,23 @@ export type NavigationState = {
     amount?: string;
     customRecords?: Record<string, string>;
     message?: string;
+    event?: Event;
+    requestPermission: {
+      method: string;
+    };
   };
   isPrompt?: true; // only passed via Prompt.tsx
   action: string;
 };
+
+export interface MessageGenericRequest extends MessageDefault {
+  action: "request";
+  origin: OriginData;
+  args: {
+    method: string;
+    params: Record<string, unknown>;
+  };
+}
 
 export interface MessagePaymentAll extends MessageDefault {
   action: "getPayments";
@@ -175,6 +190,24 @@ export interface MessageAccountInfo extends MessageDefault {
 
 export interface MessageAccountAll extends MessageDefault {
   action: "getAccounts";
+}
+
+export interface MessagePermissionAdd extends MessageDefault {
+  args: {
+    host: string;
+    method: string;
+    enabled: boolean;
+    blocked: boolean;
+  };
+  action: "addPermission";
+}
+
+export interface MessagePermissionDelete extends MessageDefault {
+  args: {
+    host: string;
+    method: string;
+  };
+  action: "deletePermission";
 }
 
 export interface MessageBlocklistAdd extends MessageDefault {
@@ -315,6 +348,24 @@ export interface MessageCurrencyRateGet extends MessageDefault {
   action: "getCurrencyRate";
 }
 
+export interface MessagePublicKeyGet extends MessageDefault {
+  action: "getPublicKeyOrPrompt";
+}
+
+export interface MessagePrivateKeySet extends MessageDefault {
+  args: {
+    privateKey: string;
+  };
+  action: "setPrivateKey";
+}
+
+export interface MessageSignEvent extends MessageDefault {
+  args: {
+    event: Event;
+  };
+  action: "signEvent";
+}
+
 export interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node
@@ -427,6 +478,7 @@ export type Transaction = {
   totalFees?: Allowance["payments"][number]["totalFees"];
   type?: "sent" | "sending" | "received";
   value?: string;
+  publisherLink?: string; // either the invoice URL if on PublisherSingleView, or the internal link to Publisher
 };
 
 export interface DbPayment {
@@ -443,6 +495,16 @@ export interface DbPayment {
   preimage: string;
   totalAmount: number | string;
   totalFees: number;
+}
+
+export interface DbPermission {
+  id?: number;
+  createdAt: string;
+  allowanceId: number;
+  host: string;
+  method: string;
+  enabled: boolean;
+  blocked: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -524,6 +586,7 @@ export interface SettingsStorage {
   currency: CURRENCIES;
   exchange: SupportedExchanges;
   debug: boolean;
+  nostrEnabled: boolean;
 }
 
 export interface Badge {

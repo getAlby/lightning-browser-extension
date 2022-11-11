@@ -1,15 +1,7 @@
-import PubSub from "pubsub-js";
 import browser, { Runtime } from "webextension-polyfill";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
 import state from "~/extension/background-script/state";
-import type {
-  Invoice,
-  Message,
-  MessageSendPayment,
-  OriginData,
-  OriginDataInternal,
-  PaymentNotificationData,
-} from "~/types";
+import type { Invoice, OriginData, OriginDataInternal } from "~/types";
 
 const utils = {
   call: <T = Record<string, unknown>>(
@@ -78,21 +70,6 @@ const utils = {
   },
   stringToUint8Array: (str: string) => {
     return Uint8Array.from(str, (x) => x.charCodeAt(0));
-  },
-  publishPaymentNotification: (
-    message: MessageSendPayment | Message, // 'keysend' & 'sendPaymentOrPrompt' still need the Message type
-    data: Omit<PaymentNotificationData, "origin">
-  ) => {
-    let status = "success"; // default. let's hope for success
-    if ("error" in data.response) {
-      status = "failed";
-    }
-    PubSub.publish(`ln.sendPayment.${status}`, {
-      response: data.response,
-      details: data.details,
-      paymentRequestDetails: data.paymentRequestDetails,
-      origin: message.origin,
-    });
   },
   openPage: (page: string) => {
     browser.tabs.create({ url: browser.runtime.getURL(page) });

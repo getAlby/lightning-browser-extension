@@ -94,6 +94,10 @@ function MakeInvoice() {
             <div>
               {amountEditable ? (
                 <div className="mb-4">
+                  {/* 
+                    TODO: https://github.com/getAlby/lightning-browser-extension/issues/1666
+                    [Feature] MakeInvoice - switch currency TextField to DualCurrency field to support Fiat #1666 
+                   */}
                   <TextField
                     id="amount"
                     label={t("amount.label")}

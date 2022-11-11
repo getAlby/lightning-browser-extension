@@ -1,10 +1,10 @@
-import Citadel from "@runcitadel/sdk";
-
 import Connector, {
+  ConnectPeerResponse,
   SendPaymentArgs,
   SendPaymentResponse,
   GetInfoResponse,
   GetBalanceResponse,
+  GetInvoicesResponse,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
   SignMessageArgs,
@@ -19,13 +19,25 @@ interface Config {
   password: string;
 }
 
+type RequestFunction = <ResponseType = unknown>(
+  jwt: string,
+  method: string,
+  path: string,
+  args?: Record<string, unknown>
+) => Promise<ResponseType>;
+
 class CitadelConnector implements Connector {
   config: Config;
-  citadel: Citadel;
+  jwt: string;
 
   constructor(config: Config) {
     this.config = config;
-    this.citadel = new Citadel(config.url);
+    this.jwt = "";
+  }
+
+  protected _requestFunc?: RequestFunction;
+  set requestFunc(requestFunc: RequestFunction) {
+    this._requestFunc = requestFunc;
   }
 
   init() {
@@ -38,111 +50,160 @@ class CitadelConnector implements Connector {
 
   async getInfo(): Promise<GetInfoResponse> {
     await this.ensureLogin();
-    const info = await this.citadel.middleware.lightning.info.generalInfo();
-    return {
-      data: {
-        alias: info.alias,
-        pubkey: info.identityPubkey,
-        color: info.color,
-      },
-    };
+    return this.request("GET", "api/v1/lnd/info").then((data) => {
+      return {
+        data: {
+          alias: data.alias,
+          pubkey: data.identityPubkey,
+          color: data.color,
+        },
+      };
+    });
   }
 
   // not yet implemented
-  getInvoices() {
+  async getInvoices(): Promise<GetInvoicesResponse> {
     console.error(
       `Not yet supported with the currently used account: ${this.constructor.name}`
     );
-    return new Error(
+    throw new Error(
       `${this.constructor.name}: "getInvoices" is not yet supported. Contact us if you need it.`
     );
   }
 
   // not yet implemented
-  connectPeer() {
+  async connectPeer(): Promise<ConnectPeerResponse> {
     console.error(
       `${this.constructor.name} does not implement the getInvoices call`
     );
-    return new Error("Not yet supported with the currently used account.");
+    throw new Error("Not yet supported with the currently used account.");
   }
 
   async getBalance(): Promise<GetBalanceResponse> {
     await this.ensureLogin();
-    const balance = parseInt(
-      (await this.citadel.middleware.lightning.wallet.lightningBalance())
-        .localBalance?.sat as string
-    );
-    return {
-      data: {
-        balance,
-      },
-    };
+    return this.request("GET", "api/v1/lnd/wallet/lightning").then((data) => {
+      const balance = parseInt(data.localBalance?.sat as string);
+      return {
+        data: {
+          balance,
+        },
+      };
+    });
   }
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
     throw new Error("not supported");
   }
   async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
     await this.ensureLogin();
-    const res = await this.citadel.middleware.lightning.lightning.payInvoice(
-      args.paymentRequest
-    );
-    return {
-      data: {
-        preimage: res.paymentPreimage,
-        paymentHash: res.paymentHash,
-        route: {
-          total_amt: Math.round(
-            parseInt(res.paymentRoute?.totalAmtMsat as string) / 1000
-          ),
-          total_fees: parseInt(res.paymentRoute?.totalFeesMsat as string),
+    return this.request("POST", "api/v1/lnd/lightning/payInvoice", {
+      paymentRequest: args.paymentRequest,
+    }).then((data) => {
+      return {
+        data: {
+          preimage: data.paymentPreimage,
+          paymentHash: data.paymentHash,
+          route: {
+            total_amt: Math.floor(
+              parseInt(data.paymentRoute?.totalAmtMsat as string) / 1000
+            ),
+            total_fees: parseInt(data.paymentRoute?.totalFeesMsat as string),
+          },
         },
-      },
-    };
+      };
+    });
   }
 
   async signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
     await this.ensureLogin();
-    return {
-      data: {
-        message: args.message,
-        signature: await this.citadel.middleware.lightning.signMessage(
-          args.message
-        ),
-      },
-    };
+    return this.request("POST", "api/v1/lnd/util/sign-message", {
+      message: args.message,
+    }).then((data) => {
+      return {
+        data: {
+          message: args.message,
+          signature: data.signature,
+        },
+      };
+    });
+  }
+
+  protected async refresh(): Promise<string> {
+    const data = await this.request("POST", "manager-api/v1/account/refresh");
+    if (typeof data !== "object" || data === null || !data.jwt) {
+      throw new Error("Failed to login.");
+    }
+    return data.jwt;
+  }
+
+  protected async login(password: string, totpToken: string): Promise<string> {
+    const data = await this.request("POST", "manager-api/v1/account/login", {
+      password,
+      totpToken,
+    });
+    if (typeof data !== "object" || data === null || !data.jwt) {
+      throw new Error("Failed to login.");
+    }
+    return data.jwt;
   }
 
   protected async ensureLogin() {
     try {
-      await this.citadel.refresh();
+      this.jwt = await this.refresh();
     } catch {
-      await this.citadel.login(this.config.password, "");
+      this.jwt = await this.login(this.config.password, "");
     }
   }
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
     await this.ensureLogin();
-    const res = await this.citadel.middleware.lightning.lightning.addInvoice(
-      args.amount.toString(),
-      args.memo
-    );
-    return {
-      data: {
-        paymentRequest: res.paymentRequest,
-        rHash: res.rHashStr,
-      },
-    };
+    return this.request("POST", "api/v1/lnd/util/lightning/addInvoice", {
+      memo: args.memo,
+      amt: args.amount.toString(),
+    }).then((data) => {
+      return {
+        data: {
+          paymentRequest: data.paymentRequest,
+          rHash: data.rHashStr,
+        },
+      };
+    });
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
     await this.ensureLogin();
-    return {
-      data: {
-        paid: await this.citadel.middleware.lightning.lightning.isPaid(
-          args.paymentHash
-        ),
-      },
-    };
+    return this.request(
+      "GET",
+      `invoice-info?paymentHash=${args.paymentHash}`
+    ).then((data) => {
+      return {
+        data: {
+          paid: data.isPaid || data.state === 1,
+        },
+      };
+    });
+  }
+
+  async request(method: string, path: string, args?: Record<string, unknown>) {
+    const url =
+      this.config.url + (this.config.url.endsWith("/") ? "" : "/") + path;
+
+    const headers = new Headers();
+    headers.append("Accept", "application/json");
+    headers.append("Content-Type", "application/json");
+    if (this.jwt) headers.append("Authorization", `JWT ${this.jwt}`);
+
+    const res = await fetch(url, {
+      headers,
+      method,
+      ...(method !== "GET" ? { body: JSON.stringify(args) } : {}),
+    });
+
+    if (!res.ok) {
+      const errBody = await res.json();
+      console.error("errBody", errBody);
+      throw new Error(errBody.detail);
+    }
+    return await res.json();
   }
 }
 

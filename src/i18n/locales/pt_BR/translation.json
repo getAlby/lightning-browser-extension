@@ -383,7 +383,7 @@
       },
       "lnurl_auth": {
         "title": "LNURL-Auth",
-        "hint": "é um protocolo de autenticação. Ele autentica o usuário usando assinaturas digitais. O protocolo não requer nenhuma outra informação de identificação, como senhas, e-mails, nomes de usuário... Com a Alby você pode usar suas contas bitcoin para logar em sites com segurança. <br /> Para ser compatível com outras carteiras, tivemos que fazer algumas alterações que você pode configurar aqui. <br /> <strong>Por padrão essas opções estão DESLIGADAS.</strong> Use-as apenas se você tiver contas antigas.",
+        "hint": "é um protocolo de autenticação. Ele autentica o usuário usando assinaturas digitais. O protocolo não requer nenhuma outra informação de identificação, como senhas, e-mails, nomes de usuário... Com a Alby você pode usar suas contas bitcoin para logar em sites com segurança. Para ser compatível com outras carteiras, tivemos que fazer algumas alterações que você pode configurar aqui. Por padrão essas opções estão DESLIGADAS. Use-as apenas se você tiver contas antigas.",
         "legacy_lnurl_auth_202207": {
           "title": "LNURL-Auth antigo",
           "subtitle": "A geração de chave para a LNURL-auth mudou em (julho de 2022). A Alby não era compatível com outras implementações. Isso foi corrigido, mas agora uma nova chave está sendo usada como padrão. Se você usou a LNURL-auth para logar em sites antes de julho de 2022, ainda poderá fazer login habilitando o método antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
@@ -461,6 +461,17 @@
       "browser_notifications": {
         "subtitle": "Exibe no navegador notificações da Alby relacionadas a pagamentos e autenticação.",
         "title": "Notificações do navegador"
+      },
+      "nostr": {
+        "title": "Nostr",
+        "private_key": {
+          "subtitle": "Ao gerar uma chave uma nova chave será criada com base na conta atual que você usa. Certifique-se de fazer backup desta chave privada.",
+          "warning": "Isso excluirá sua chave privada antiga. Tem certeza de que deseja prosseguir?",
+          "title": "Chave privada",
+          "generate": "Gerar",
+          "success": "A chave privada foi encriptada e salva com sucesso."
+        },
+        "hint": "é um protocolo simples e aberto que visa criar redes sociais resistentes à censura. Os perfis na rede Nostr são chaves criptográficas. Para publicar algo, você assina com sua chave e a informação é enviada para servidores. Na Alby você pode gerenciar seu perfil e usar em diferentes serviços que suportam esse recurso."
       }
     },
     "send": {
@@ -469,8 +480,9 @@
         "title": "Aguardando leitura"
       },
       "input": {
-        "label": "Fatura, Endereço Relâmpago ou LNURL",
-        "placeholder": "Cole uma fatura, lnurl ou um endereço relâmpago"
+        "label": "Destinatário",
+        "placeholder": "Cole uma fatura, lnurl ou um endereço relâmpago",
+        "hint": "Fatura, Endereço Relâmpago ou LNURL"
       }
     },
     "lnurlpay": {
@@ -557,7 +569,7 @@
     },
     "confirm_payment": {
       "title": "Aprovar pagamento",
-      "success": "Pagamento de {{amount}} bem-sucedido!",
+      "success": "Pagamento de {{amount}} realizado com sucesso!",
       "actions": {
         "pay_now": "Pague agora"
       }
@@ -566,7 +578,7 @@
       "content_message": {
         "heading": "Você deseja logar em"
       },
-      "success": "Autenticado com sucesso",
+      "success": "Login realizado com sucesso em {{name}}",
       "errors": {
         "status": "Erro: O status de autenticação não está correto"
       },
@@ -581,10 +593,10 @@
       "amount": {
         "label": "Quantia"
       },
-      "success": "Solicitação de resgate de fundos enviada com sucesso"
+      "success": "{{amount}} recebidos com sucesso de {{sender}}"
     },
     "lnurlchannel": {
-      "success": "Solicitação de canal de pagamento enviada com sucesso",
+      "success": "Solicitação de canal de pagamento enviada com sucesso para {{name}}",
       "title": "Solicitar Canal de Pagamento",
       "content_message": {
         "heading": "Solicitar canal de pagamento do servidor"
@@ -599,6 +611,12 @@
       "amount": {
         "label": "Quantia (Satoshi)"
       }
+    },
+    "nostr": {
+      "allow": "Permitir {{host}}:",
+      "block_and_ignore": "Bloquear e ignorar {{host}}",
+      "read_public_key": "Ler sua chave pública",
+      "title": "Nostr"
     }
   },
   "common": {
@@ -607,13 +625,13 @@
     "error": "Erro",
     "settings": "Configurações",
     "websites": "Sites",
-    "sats": "sats",
+    "sats_one": "sat",
+    "sats_other": "sats",
     "loading": "carregando",
     "amount": "Quantia",
     "optional": "Opcional",
     "feedback": "Feedback",
     "copied": "Copiado!",
-    "were_sent_to": "foram enviados para",
     "actions": {
       "delete": "Remover",
       "edit": "Editar",
@@ -640,7 +658,10 @@
     },
     "description": "Descrição",
     "description_full": "Descrição Completa",
-    "message": "Mensagem"
+    "message": "Mensagem",
+    "help": "Ajuda",
+    "response": "Resposta",
+    "success_message": "{{amount}}{{fiatAmount}} enviados para {{destination}}"
   },
   "components": {
     "allowance_menu": {

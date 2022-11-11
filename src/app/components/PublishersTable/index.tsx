@@ -64,7 +64,9 @@ export default function PublishersTable({
                       {tComponents("payments")}{" "}
                       {publisher.paymentsAmount > 0 && (
                         <span>
-                          ({publisher.paymentsAmount} {tCommon("sats")})
+                          ({publisher.paymentsAmount}{" "}
+                          {tCommon("sats", { count: publisher.paymentsAmount })}
+                          )
                         </span>
                       )}
                     </div>
@@ -76,7 +78,8 @@ export default function PublishersTable({
                   <div className="ml-40">
                     <p className="text-lg text-gray-500 mb-0 dark:text-neutral-400">
                       {publisher.usedBudget} / {publisher.totalBudget}{" "}
-                      {tCommon("sats")} {tComponents("used")}
+                      {tCommon("sats", { count: publisher.usedBudget })}{" "}
+                      {tComponents("used")}
                     </p>
                     <div className="relative mt-2 ml-auto">
                       <div className="flex items-center justify-end">
