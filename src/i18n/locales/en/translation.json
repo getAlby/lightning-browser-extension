@@ -627,6 +627,12 @@
         "pay_now": "Pay now"
       }
     },
+    "confirm_request_permission": {
+      "title": "Approve Request",
+      "allow": "Allow {{host}} to:",
+      "enable_method": "Call request {{method}}",
+      "always_allow": "Always allow to call this request"
+    },
     "nostr": {
       "title": "Nostr",
       "allow": "Allow {{host}} to:",

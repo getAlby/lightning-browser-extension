@@ -1,6 +1,7 @@
 import AccountMenu from "@components/AccountMenu";
 import ConfirmKeysend from "@screens/ConfirmKeysend";
 import ConfirmPayment from "@screens/ConfirmPayment";
+import ConfirmRequestPermission from "@screens/ConfirmRequestPermission";
 import ConfirmSignMessage from "@screens/ConfirmSignMessage";
 import Enable from "@screens/Enable";
 import LNURLAuth from "@screens/LNURLAuth";
@@ -84,6 +85,10 @@ function Prompt() {
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="confirmKeysend" element={<ConfirmKeysend />} />
             <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
+            <Route
+              path="public/confirmRequestPermission"
+              element={<ConfirmRequestPermission />}
+            />
           </Route>
           <Route
             path="unlock"
