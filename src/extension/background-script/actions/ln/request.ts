@@ -4,7 +4,7 @@ import { MessageGenericRequest } from "~/types";
 import db from "../../db";
 import state from "../../state";
 
-const WEBLN_PREFIX = "webln.";
+const WEBLN_PREFIX = "webln/";
 
 const request = async (
   message: MessageGenericRequest
