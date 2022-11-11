@@ -107,9 +107,7 @@ export default class Commando implements Connector {
     await this.ln.disconnect();
   }
 
-  async connectPeer(
-    args: ConnectPeerArgs
-  ): Promise<ConnectPeerResponse | Error> {
+  async connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse> {
     return this.ln
       .commando({
         method: "connect",
@@ -123,9 +121,6 @@ export default class Commando implements Connector {
         return {
           data: true,
         };
-      })
-      .catch((err) => {
-        return new Error(err);
       });
   }
 
