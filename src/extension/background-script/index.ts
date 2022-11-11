@@ -93,11 +93,13 @@ const routeCalls = (
   },
   sender: Runtime.MessageSender
 ) => {
+  console.log("---> routeCalls", message);
+
   // if the application does not match or if it is not a prompt we ignore the call
   if (message.application !== "LBE" || !message.prompt) {
     return;
   }
-  const debug = state.getState().settings.debug;
+  const debug = true; //state.getState().settings.debug;
 
   if (message.type) {
     console.error("Invalid message, using type: ", message);
@@ -133,7 +135,7 @@ async function init() {
   browser.runtime.onMessage.addListener(debugLogger);
 
   // this is the only handler that may and must return a Promise which resolve with the response to the content script
-  browser.runtime.onMessage.addListener(routeCalls);
+  browser.runtime.onMessage.addListener(routeCalls); // all go through here
 
   // Update the extension icon
   browser.tabs.onUpdated.addListener(updateIcon);
@@ -141,15 +143,15 @@ async function init() {
   // Notify the content script that the tab has been updated.
   browser.tabs.onUpdated.addListener(extractLightningData);
 
-  if (state.getState().settings.debug) {
-    console.info("Debug mode enabled, use window.debugAlby");
-    window.debugAlby = {
-      state,
-      db,
-      connectors,
-      router,
-    };
-  }
+  // if (state.getState().settings.debug) {
+  //   console.info("Debug mode enabled, use window.debugAlby");
+  //   window.debugAlby = {
+  //     state,
+  //     db,
+  //     connectors,
+  //     router,
+  //   };
+  // }
   console.info("Loading completed");
 }
 

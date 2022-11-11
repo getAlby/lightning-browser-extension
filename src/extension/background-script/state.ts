@@ -20,9 +20,9 @@ interface State {
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
   init: () => Promise<void>;
-  isUnlocked: () => boolean;
+  isUnlocked: () => Promise<boolean>;
   lock: () => Promise<void>;
-  password: string | null;
+  // password: string | null;
   saveToStorage: () => Promise<void>;
   settings: SettingsStorage;
   reset: () => Promise<void>;
@@ -70,7 +70,7 @@ const state = createState<State>((set, get) => ({
   migrations: [],
   accounts: {},
   currentAccountId: null,
-  password: null,
+  // password: null,
   getAccount: () => {
     const currentAccountId = get().currentAccountId as string;
     let account = null;
@@ -80,14 +80,25 @@ const state = createState<State>((set, get) => ({
     return account;
   },
   getConnector: async () => {
+    // console.log("MV3: si es un connectore");
+
     if (get().connector) {
       return get().connector as Connector;
     }
     const currentAccountId = get().currentAccountId as string;
     const account = get().accounts[currentAccountId];
 
-    const password = get().password as string;
-    const config = decryptData(account.config as string, password);
+    // const password = get().password as string;
+
+    const storageSessionPassword = await chrome.storage.session.get("password");
+    // console.log(
+    //   "MV3: si es un connectore - storageSessionPassword",
+    //   storageSessionPassword.password
+    // );
+    const config = decryptData(
+      account.config as string,
+      storageSessionPassword.password
+    );
 
     const connector = new connectors[account.connector](config);
     await connector.init();
@@ -97,14 +108,17 @@ const state = createState<State>((set, get) => ({
     return connector;
   },
   lock: async () => {
+    await chrome.storage.session.set({ password: null });
     const connector = get().connector;
     if (connector) {
       await connector.unload();
     }
-    set({ password: null, connector: null, account: null });
+    set({ connector: null, account: null });
   },
-  isUnlocked: () => {
-    return get().password !== null;
+  isUnlocked: async () => {
+    // return get().password !== null;
+    const storageSessionPassword = await chrome.storage.session.get("password");
+    return storageSessionPassword.password !== null;
   },
   init: () => {
     return browser.storage.sync.get(browserStorageKeys).then((result) => {

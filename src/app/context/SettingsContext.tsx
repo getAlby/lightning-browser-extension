@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import i18n from "i18next";
 import { useState, useEffect, createContext, useContext } from "react";
 import { toast } from "react-toastify";
+import browser from "webextension-polyfill";
 import { getTheme } from "~/app/utils";
 import api from "~/common/lib/api";
 import { getFiatValue as getFiatValueFunc } from "~/common/utils/currencyConvert";
@@ -40,27 +41,34 @@ export const SettingsProvider = ({
 
   // Invoked only on on mount.
   useEffect(() => {
-    setTimeout(() => {
-      console.log("SETTIMGS CONTEXT EFFECT");
-      api
-        .getSettings()
-        .then((response) => {
-          setSettings(response);
-        })
-        .catch((e) => {
-          // toast.error(
-          //   `SettingsProvider: An unexpected error occurred (${e.message})`
-          // );
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    }, 500);
+    // setTimeout(() => {
+    // console.log("SETTIMGS CONTEXT EFFECT 123");
+    // api
+    //   .getSettings()
+    browser.storage.sync
+      .get("settings")
+      .then(({ settings }) => {
+        // console.log("SETTINGS RESPONSE: ", settings);
+
+        setSettings(settings);
+      })
+      .catch((e) => {
+        toast.error(
+          `SettingsProvider: An unexpected error occurred (${e.message})`
+        );
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+    // }, 1000);
   }, []);
 
   // update rate
   useEffect(() => {
+    console.log("effect - getCurrencyRate");
+
     api.getCurrencyRate().then((response) => {
+      console.log("effect - getCurrencyRate - response", response);
       setCurrencyRate(response.rate);
     });
   }, [settings.currency]);

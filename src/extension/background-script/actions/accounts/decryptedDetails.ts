@@ -4,7 +4,9 @@ import type { MessageAccountDecryptedDetails } from "~/types";
 
 const decryptedDetails = async (message: MessageAccountDecryptedDetails) => {
   const accounts = state.getState().accounts;
-  const password = state.getState().password as string;
+  // const password = state.getState().password as string;
+  const storageSessionPassword = await chrome.storage.session.get("password");
+  const password = storageSessionPassword.password;
   const accountId = message.args.id;
 
   if (accountId in accounts) {

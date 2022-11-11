@@ -96,10 +96,14 @@ export const getCurrencyRateWithCache = async (currency: CURRENCIES) => {
 };
 
 const getCurrencyRate = async (message: MessageCurrencyRateGet) => {
+  console.log("BG ACTION - getCurrencyRate");
+
   const settings = state.getState().settings;
+  // const { settings } = await browser.storage.sync.get("settings");
   const { currency } = settings;
 
   const rate = await getCurrencyRateWithCache(currency);
+  // const rate = 1;
 
   return {
     data: { rate },

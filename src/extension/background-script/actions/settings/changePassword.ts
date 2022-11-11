@@ -5,7 +5,9 @@ import state from "../../state";
 
 const changePassword = async (message: Message) => {
   const accounts = state.getState().accounts;
-  const password = state.getState().password as string;
+  // const password = state.getState().password as string;
+  const storageSessionPassword = await chrome.storage.session.get("password");
+  const password = storageSessionPassword.password;
   const newPassword = message.args.password as string;
   const tmpAccounts = { ...accounts };
 
@@ -16,7 +18,9 @@ const changePassword = async (message: Message) => {
     );
     tmpAccounts[accountId].config = encryptData(accountConfig, newPassword);
   }
-  state.setState({ accounts: tmpAccounts, password: newPassword });
+  await chrome.storage.session.set({ password: newPassword });
+  //  state.setState({ accounts: tmpAccounts, password: newPassword });
+  state.setState({ accounts: tmpAccounts });
   // make sure we immediately persist the updated accounts
   await state.getState().saveToStorage();
 

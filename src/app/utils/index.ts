@@ -1,4 +1,5 @@
-import api from "~/common/lib/api";
+// import api from "~/common/lib/api";
+import browser from "webextension-polyfill";
 
 export function classNames(...classes: (string | boolean)[]) {
   return classes.filter(Boolean).join(" ");
@@ -8,7 +9,8 @@ export function classNames(...classes: (string | boolean)[]) {
  * Get the active theme and apply corresponding Tailwind classes to the document.
  */
 export function getTheme() {
-  api.getSettings().then((settings) => {
+  // api.getSettings()
+  browser.storage.sync.get("settings").then(({ settings }) => {
     // check if settings theme selection is system (this is the default)
     if (settings.theme === "system") {
       // checks if the users prefers dark mode and if true then adds dark class to HTML element

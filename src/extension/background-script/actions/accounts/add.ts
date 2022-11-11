@@ -11,7 +11,9 @@ const add = async (message: MessageAccountAdd) => {
   // TODO: add validations
   // TODO: make sure a password is set
 
-  const password = state.getState().password;
+  // const password = state.getState().password;
+  const storageSessionPassword = await chrome.storage.session.get("password");
+  const password = storageSessionPassword.password;
   const currentAccountId = state.getState().currentAccountId;
 
   if (!password) return { error: "Password is missing" };
