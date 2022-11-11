@@ -75,10 +75,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
 
   const updateFiatValue = useCallback(
     async (balance: string | number) => {
-      console.log("updateFiatValue - balance", balance);
       const fiat = await getFiatValue(balance);
-      console.log("updateFiatValue - fiat", fiat);
-
       setFiatBalance(fiat);
     },
     [getFiatValue]

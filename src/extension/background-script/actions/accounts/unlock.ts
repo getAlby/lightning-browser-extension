@@ -31,7 +31,6 @@ const unlock = async (message: MessageAccountUnlock) => {
   }
 
   // if everything is fine we keep the password in memory
-  // state.setState({ password });
   await chrome.storage.session.set({ password });
 
   return Promise.resolve({ data: { unlocked: true, currentAccountId } });

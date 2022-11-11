@@ -1,10 +1,9 @@
 import type { MessageAccountLock } from "~/types";
 
-// import state from "../../state";
+import state from "../../state";
 
 const lock = async (message: MessageAccountLock) => {
-  // await state.getState().lock();
-  await chrome.storage.session.set({ password: null });
+  await state.getState().lock();
   return {
     data: { unlocked: false },
   };

@@ -8,9 +8,9 @@ export function classNames(...classes: (string | boolean)[]) {
  * Get the active theme and apply corresponding Tailwind classes to the document.
  */
 export function getTheme() {
-  api.getSettings().then((response) => {
+  api.getSettings().then((settings) => {
     // check if settings theme selection is system (this is the default)
-    if (response.theme === "system") {
+    if (settings.theme === "system") {
       // checks if the users prefers dark mode and if true then adds dark class to HTML element
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
         document.documentElement.classList.add("dark");
@@ -21,9 +21,9 @@ export function getTheme() {
       }
     }
     // last two conditionals for if user selects light or dark mode
-    else if (response.theme === "dark") {
+    else if (settings.theme === "dark") {
       document.documentElement.classList.add("dark");
-    } else if (response.theme === "light") {
+    } else if (settings.theme === "light") {
       document.documentElement.classList.remove("dark");
     }
   });

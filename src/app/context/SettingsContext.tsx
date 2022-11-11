@@ -42,8 +42,8 @@ export const SettingsProvider = ({
   useEffect(() => {
     api
       .getSettings()
-      .then((response) => {
-        setSettings(response);
+      .then((settings) => {
+        setSettings(settings);
       })
       .catch((e) => {
         toast.error(
@@ -57,8 +57,8 @@ export const SettingsProvider = ({
 
   // update rate
   useEffect(() => {
-    api.getCurrencyRate().then((response) => {
-      setCurrencyRate(response.rate);
+    api.getCurrencyRate().then(({ rate }) => {
+      setCurrencyRate(rate);
     });
   }, [settings.currency]);
 
