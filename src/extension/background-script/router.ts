@@ -51,15 +51,15 @@ const routes = {
   lnurl: lnurl,
   lnurlAuth: auth,
   getCurrencyRate: cache.getCurrencyRate,
+  addPermission: permissions.add,
+  deletePermission: permissions.deletePermission,
   nostr: {
     generatePrivateKey: nostr.generatePrivateKey,
     getPrivateKey: nostr.getPrivateKey,
     setPrivateKey: nostr.setPrivateKey,
   },
-  addPermission: permissions.add,
-  deletePermission: permissions.deletePermission,
 
-  // Public calls are accessible from inpage scripts
+  // Public calls that are accessible from the inpage script (through the content script)
   public: {
     webln: {
       enable: allowances.enable,
