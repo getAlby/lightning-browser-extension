@@ -132,7 +132,16 @@ const DefaultView: FC<Props> = (props) => {
 
   const loadInvoices = async () => {
     setIsLoadingInvoices(true);
-    const result = await api.getInvoices({ isSettled: true });
+    let result;
+    try {
+      result = await api.getInvoices({ isSettled: true });
+    } catch (e) {
+      if (e instanceof Error) {
+        toast.error(e.message);
+      }
+      setIsLoadingInvoices(false);
+      return;
+    }
 
     const invoices: Transaction[] = result.invoices.map((invoice) => ({
       ...invoice,

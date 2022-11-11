@@ -50,9 +50,9 @@ function NostrConfirmGetPublicKey() {
             isSmall={false}
           />
 
-          <div className="dark:text-white pt-6">
-            <p className="mb-4">{t("allow", { host: origin.host })}</p>
-            <div className="mb-4 flex items-center">
+          <div className="dark:text-white pt-6 mb-4">
+            <p className="mb-2">{t("allow", { host: origin.host })}</p>
+            <div className="mb-2 flex items-center">
               <CheckIcon className="w-5 h-5 mr-2" />
               <p className="dark:text-white">{t("read_public_key")}</p>
             </div>
