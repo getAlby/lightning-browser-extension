@@ -13,11 +13,17 @@ const request = async (
 
   const { origin, args } = message;
 
+  const method = args.method.toLowerCase();
+
   try {
-    if (!connector.requestMethod) {
-      throw new Error(
-        `${message.args.method} is not supported by your account`
-      );
+    // Check if the current connector support the call
+    // connectors maybe do not support `requestMethod` at all
+    // connectors also specify a whitelist of supported methods that can be called
+    //
+    // important: this must throw to exit and return an error
+    const supportedMethods = connector.supportedMethods || []; // allow the connector to control which methods can be called
+    if (!connector.requestMethod || !supportedMethods.includes(method)) {
+      throw new Error(`${method} is not supported by your account`);
     }
 
     const allowance = await db.allowances
@@ -29,8 +35,8 @@ const request = async (
       return { error: "Could not find an allowance for this host" };
     }
 
-    // prefix method with webln
-    const weblnMethod = `${WEBLN_PREFIX}${args.method}`;
+    // prefix method with webln to prevent potential naming conflicts (e.g. with nostr calls that also use the permissions)
+    const weblnMethod = `${WEBLN_PREFIX}${method}`;
 
     const permission = await db.permissions
       .where("host")
@@ -39,8 +45,8 @@ const request = async (
       .first();
 
     // request method is allowed to be called
-    if (permission && permission.enabled) {
-      const response = await connector.requestMethod(args.method, args.params);
+    if (permission && permission.enabled && supportedMethods.includes(method)) {
+      const response = await connector.requestMethod(method, args.params);
       return response;
     } else {
       const promptResponse = await utils.openPrompt<{
@@ -49,14 +55,14 @@ const request = async (
       }>({
         args: {
           requestPermission: {
-            method: args.method,
+            method: method,
           },
         },
         origin,
         action: "public/confirmRequestPermission",
       });
 
-      const response = await connector.requestMethod(args.method, args.params);
+      const response = await connector.requestMethod(method, args.params);
 
       // add permission to db only if user decided to always allow this request
       if (promptResponse.data.enabled) {

@@ -118,6 +118,7 @@ export default interface Connector {
   checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse>;
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse>;
   connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse>;
+  supportedMethods?: string[];
   requestMethod?(
     method: string,
     args: Record<string, unknown>
