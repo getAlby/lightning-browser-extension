@@ -66,7 +66,10 @@ const ConfirmRequestPermission: FC = () => {
                 htmlFor="always_allow"
                 className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
               >
-                {t("always_allow", { method: requestMethod })}
+                {t("always_allow", {
+                  method: requestMethod,
+                  host: origin.host,
+                })}
               </label>
             </div>
           </div>
