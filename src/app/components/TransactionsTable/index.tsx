@@ -68,7 +68,6 @@ export default function TransactionsTable({ transactions }: Props) {
                         </p>
                       </div>
                       <p className="text-xs text-gray-600 capitalize dark:text-neutral-400">
-                        {tComponents(`transactionsTable.${tx.type}`)} -{" "}
                         {tx.date}
                       </p>
                     </div>
@@ -114,18 +113,6 @@ export default function TransactionsTable({ transactions }: Props) {
                   <Disclosure.Panel>
                     <div className="mt-1 ml-9 text-xs text-gray-600 dark:text-neutral-400">
                       {tx.description && <p>{tx.description}</p>}
-                      {tx.totalFees && (
-                        <p>
-                          {tComponents("transactionsTable.fee")}: {tx.totalFees}{" "}
-                          {tCommon("sats", { count: tx.totalFees })}
-                        </p>
-                      )}
-                      {tx.preimage && (
-                        <p className="truncate">
-                          {tComponents("transactionsTable.preimage")}:{" "}
-                          {tx.preimage}
-                        </p>
-                      )}
                       {tx.location && (
                         <a href={tx.location} target="_blank" rel="noreferrer">
                           {tx.location}
@@ -154,6 +141,18 @@ export default function TransactionsTable({ transactions }: Props) {
                             : {tx.boostagram.podcast}
                           </li>
                         </ul>
+                      )}
+                      {tx.totalFees != undefined && (
+                        <p>
+                          {tComponents("transactionsTable.fee")}: {tx.totalFees}{" "}
+                          {tCommon("sats", { count: tx.totalFees })}
+                        </p>
+                      )}
+                      {tx.preimage && (
+                        <p className="truncate">
+                          {tComponents("transactionsTable.preimage")}:{" "}
+                          {tx.preimage}
+                        </p>
                       )}
                     </div>
                   </Disclosure.Panel>
