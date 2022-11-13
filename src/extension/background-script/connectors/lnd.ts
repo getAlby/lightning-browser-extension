@@ -28,6 +28,14 @@ interface Config {
   url: string;
 }
 
+const methods: Record<string, Record<string, string>> = {
+  getinfo: {
+    path: "/v1/getinfo",
+    method: "GET",
+    description: "Get the node information",
+  },
+};
+
 class Lnd implements Connector {
   config: Config;
 
@@ -41,6 +49,30 @@ class Lnd implements Connector {
 
   unload() {
     return Promise.resolve();
+  }
+
+  get supportedMethods() {
+    return Object.keys(methods);
+  }
+
+  methodDescription(method: string): string {
+    return methods[method].description;
+  }
+
+  async requestMethod(
+    method: string,
+    args: Record<string, unknown>
+  ): Promise<{ data: unknown }> {
+    const methodDetails = methods[method];
+    if (!methodDetails) {
+      throw new Error(`${method} is not supported`);
+    }
+    const { httpMethod, path } = methodDetails;
+    const response = await this.request(httpMethod, path, undefined, {});
+
+    return {
+      data: response,
+    };
   }
 
   getInfo(): Promise<GetInfoResponse> {
@@ -313,7 +345,7 @@ class Lnd implements Connector {
     };
   }
 
-  async request<Type>(
+  protected async request<Type>(
     method: string,
     path: string,
     args?: Record<string, unknown>,

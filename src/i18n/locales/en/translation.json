@@ -629,8 +629,7 @@
     },
     "confirm_request_permission": {
       "title": "Approve Request",
-      "allow": "Allow {{host}} to:",
-      "enable_method": "Call {{method}}",
+      "allow": "Allow {{host}} to execute:",
       "always_allow": "Always allow {{method}} on {{host}}"
     },
     "nostr": {

@@ -78,6 +78,30 @@ type CommandoInvoice = {
   paid_at: number;
   payment_hash: string;
 };
+
+const methods: Record<string, string> = {
+  decode: "",
+  decodepay: "",
+  feerates: "",
+  fetchinvoices: "",
+  getinfo: "",
+  getroute: "",
+  listchannels: "",
+  listforwards: "",
+  listfunds: "",
+  listinvoices: "",
+  listnodes: "",
+  listoffers: "",
+  listpays: "",
+  listpeers: "",
+  listsendpays: "",
+  listtransactions: "",
+  newaddr: "",
+  offer: "",
+  setchannelfee: "",
+  signmessage: "",
+};
+
 export default class Commando implements Connector {
   config: Config;
   ln: LnMessage;
@@ -105,6 +129,32 @@ export default class Commando implements Connector {
 
   async unload() {
     await this.ln.disconnect();
+  }
+
+  get supportedMethods() {
+    return Object.keys(methods);
+  }
+
+  methodDescription(method: string) {
+    return methods[method];
+  }
+
+  async requestMethod(
+    method: string,
+    params: Record<string, unknown>
+  ): Promise<{ data: unknown }> {
+    if (!this.supportedMethods.includes(method)) {
+      throw new Error(`${method} is not supported`);
+    }
+    const response = await this.ln.commando({
+      method,
+      params,
+      rune: this.config.rune,
+    });
+
+    return {
+      data: response,
+    };
   }
 
   async connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse> {

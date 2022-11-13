@@ -35,6 +35,12 @@ const request = async (
       return { error: "Could not find an allowance for this host" };
     }
 
+    // for TS: the methodDescription is optional on the connector, so we first have to check for it.
+    // but every connector with requestMethod should implement the methodDescription
+    const description = connector.methodDescription
+      ? connector.methodDescription(method)
+      : "";
+
     // prefix method with webln to prevent potential naming conflicts (e.g. with nostr calls that also use the permissions)
     const weblnMethod = `${WEBLN_PREFIX}${method}`;
 
@@ -55,7 +61,8 @@ const request = async (
       }>({
         args: {
           requestPermission: {
-            method: method,
+            method,
+            description,
           },
         },
         origin,

@@ -119,6 +119,7 @@ export default interface Connector {
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse>;
   connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse>;
   supportedMethods?: string[];
+  methodDescription?(method: string): string;
   requestMethod?(
     method: string,
     args: Record<string, unknown>
