@@ -1008,6 +1008,11 @@
   resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.0.3.tgz#953b88c20ea00d0eddaffdc1b115c08474aa295d"
   integrity sha512-ceuyTSs7PZ/tQqi19YZNBc5X7kj1f8p+4DIyrcIYFY9h+hd1OKm4RqtiWldR9eGEvIiJfsqwM4BsuCtRIuEw6Q==
 
+"@runcitadel/sdk-next@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@runcitadel/sdk-next/-/sdk-next-0.1.2.tgz#faab4cad63ee4e1afb299e190c0112ec5526fb32"
+  integrity sha512-Hw5+F2L33yMq5uf9km678FsXiTagT2FMBBJEzFWVjrkrDMGI1h65x8vmIZQMV4rvcz2nDsDx35ZZDJzvcXyvkA==
+
 "@sinclair/typebox@^0.24.1":
   version "0.24.20"
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.24.20.tgz#11a657875de6008622d53f56e063a6347c51a6dd"
