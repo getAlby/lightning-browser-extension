@@ -17,6 +17,7 @@ import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
+import { getSatValue } from "~/common/utils/currencyConvert";
 
 function ConfirmPayment() {
   const {
@@ -24,7 +25,9 @@ function ConfirmPayment() {
     settings,
     getFiatValue,
   } = useSettings();
+
   const showFiat = !isLoadingSettings && settings.showFiat;
+
   const { t } = useTranslation("translation", {
     keyPrefix: "confirm_payment",
   });
@@ -45,6 +48,11 @@ function ConfirmPayment() {
   );
   const [fiatAmount, setFiatAmount] = useState("");
   const [fiatBudgetAmount, setFiatBudgetAmount] = useState("");
+
+  const formattedInvoiceSats = getSatValue({
+    amount: invoice.satoshis || 0,
+    locale: settings.locale,
+  });
 
   useEffect(() => {
     (async () => {
@@ -84,11 +92,12 @@ function ConfirmPayment() {
       );
       auth.fetchAccountInfo(); // Update balance.
       msg.reply(response);
+
       setSuccessMessage(
         t("success", {
-          amount: `${invoice.satoshis} ${tCommon("sats", {
-            count: invoice.satoshis as number,
-          })}${showFiat ? ` (${fiatAmount})` : ``}`,
+          amount: `${formattedInvoiceSats} ${
+            showFiat ? ` (${fiatAmount})` : ``
+          }`,
         })
       );
     } catch (e) {
@@ -143,7 +152,7 @@ function ConfirmPayment() {
             <div className="my-4">
               <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
                 <PaymentSummary
-                  amount={invoice.satoshis}
+                  amount={invoice.satoshis || "0"} // how come that sathoshis can be undefined, bolt11?
                   fiatAmount={fiatAmount}
                   description={invoice.tagsObject.description}
                 />
@@ -182,9 +191,7 @@ function ConfirmPayment() {
               !navState.origin
                 ? successMessage
                 : tCommon("success_message", {
-                    amount: `${invoice.satoshis} ${tCommon("sats", {
-                      count: invoice.satoshis as number,
-                    })}`,
+                    amount: formattedInvoiceSats,
                     fiatAmount: showFiat ? ` (${fiatAmount})` : ``,
                     destination: navState.origin.name,
                   })
