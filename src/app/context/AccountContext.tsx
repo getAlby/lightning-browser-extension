@@ -81,14 +81,22 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     [getFiatValue]
   );
 
+  const updateSatValue = (amount: number) => {
+    const sats = getSatValue({
+      amount,
+      locale: settings.locale,
+    });
+    setSatBalance(sats);
+  };
+
   const fetchAccountInfo = async (options?: { accountId?: string }) => {
     const id = options?.accountId || account?.id;
     if (!id) return;
 
-    const callback = async (account: AccountInfo) => {
+    const callback = (account: AccountInfo) => {
       setAccount(account);
-      const sats = await getSatValue(account.balance);
-      setSatBalance(sats);
+
+      updateSatValue(account.balance);
 
       if (!isLoadingSettings && settings.showFiat) {
         updateFiatValue(account.balance);
@@ -137,6 +145,12 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
       setFiatBalance("");
     }
   }, [showFiat, account?.balance, updateFiatValue]);
+
+  // Listen to language change
+  useEffect(() => {
+    !!account?.balance && updateSatValue(account?.balance);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [settings.locale]);
 
   const value = {
     account,

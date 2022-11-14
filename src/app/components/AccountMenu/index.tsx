@@ -95,7 +95,7 @@ function AccountMenu({ showOptions = true }: Props) {
               {balancesDecorated.satsBalance}
             </span>
             {!!balancesDecorated.fiatBalance && (
-              <span className="text-xs text-gray-600 dark:text-neutral-400">
+              <span className="text-xs text-gray-600 dark:text-neutral-400 ml-2">
                 ~{balancesDecorated.fiatBalance}
               </span>
             )}
