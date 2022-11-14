@@ -4,8 +4,10 @@ import Loading from "@components/Loading";
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
+import { getSatValue } from "~/common/utils/currencyConvert";
 
 export default function TestConnection() {
   const [accountInfo, setAccountInfo] = useState<{
@@ -15,6 +17,9 @@ export default function TestConnection() {
   }>();
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const { settings } = useSettings();
+
   const { t } = useTranslation("translation", {
     keyPrefix: "welcome.test_connection",
   });
@@ -100,9 +105,10 @@ export default function TestConnection() {
                   alias={`${accountInfo.name} - ${accountInfo.alias}`}
                   satoshis={
                     typeof accountInfo.balance === "number"
-                      ? `${accountInfo.balance} ${tCommon("sats", {
-                          count: accountInfo.balance,
-                        })}`
+                      ? getSatValue({
+                          amount: accountInfo.balance,
+                          locale: settings.locale,
+                        })
                       : ""
                   }
                 />
