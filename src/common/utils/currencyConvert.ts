@@ -19,5 +19,23 @@ export const getFiatValue = (params: {
   }).format(fiatValue);
 };
 
-export const getSatValue = (balance: number) =>
-  `${balance} ${i18n.t("sats", { count: balance, ns: "common" })}`;
+export const getFormattedNumber = (params: {
+  amount: number | string;
+  locale: string;
+}) => {
+  return new Intl.NumberFormat(params.locale || "en").format(
+    Number(params.amount)
+  );
+};
+
+export const getSatValue = (params: {
+  amount: number | string;
+  locale: string;
+}) => {
+  const formattedNumber = getFormattedNumber(params);
+
+  return `${formattedNumber} ${i18n.t("sats", {
+    count: Number(params.amount),
+    ns: "common",
+  })}`;
+};

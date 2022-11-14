@@ -1,6 +1,10 @@
 import { CURRENCIES } from "~/common/constants";
 
-import { getFiatValue, getSatValue } from "../currencyConvert";
+import {
+  getFiatValue,
+  getFormattedNumber,
+  getSatValue,
+} from "../currencyConvert";
 
 describe("Currency coversion utils", () => {
   describe("getFiatValue", () => {
@@ -71,9 +75,31 @@ describe("Currency coversion utils", () => {
     });
   });
 
-  test("getSatValue", async () => {
-    const result = getSatValue(123456789);
+  describe("getFormattedNumber", () => {
+    test("formats correctly for english", async () => {
+      const result = getFormattedNumber({ amount: 9999999, locale: "en" });
 
-    expect(result).toBe("123456789 sats");
+      expect(result).toBe("9,999,999");
+    });
+
+    test("formats correctly for spanish", async () => {
+      const result = getFormattedNumber({ amount: 9999999, locale: "es" });
+
+      expect(result).toBe("9.999.999");
+    });
+  });
+
+  describe("getSatValue", () => {
+    test("formats correctly for english", async () => {
+      const result = getSatValue({ amount: 123456789, locale: "en" });
+
+      expect(result).toBe("123,456,789 sats");
+    });
+
+    test("formats correctly for spanish", async () => {
+      const result = getSatValue({ amount: 123456789, locale: "es" });
+
+      expect(result).toBe("123.456.789 sats");
+    });
   });
 });
