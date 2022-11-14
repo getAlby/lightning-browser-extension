@@ -3,10 +3,19 @@ import userEvent from "@testing-library/user-event";
 import { act } from "react-dom/test-utils";
 import { I18nextProvider } from "react-i18next";
 import { BrowserRouter } from "react-router-dom";
+import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import i18n from "~/../tests/unit/helpers/i18n";
+import * as SettingsContext from "~/app/context/SettingsContext";
 
 import TransactionsTable from ".";
 import type { Props } from ".";
+
+jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
+  settings: mockSettings,
+  isLoading: false,
+  updateSetting: jest.fn(),
+  getFiatValue: jest.fn(),
+});
 
 const transactions: Props = {
   transactions: [
@@ -104,7 +113,7 @@ describe("TransactionsTable", () => {
 
     expect(screen.getByText("Alby")).toBeInTheDocument();
     expect(screen.getByText(/5 days ago/)).toBeInTheDocument();
-    expect(screen.getByText(/-1234000 sats/)).toBeInTheDocument();
+    expect(screen.getByText(/-1,234,000 sats/)).toBeInTheDocument();
     expect(screen.getByText(/~\$241.02/)).toBeInTheDocument();
 
     const disclosureButton = screen.getByRole("button");
@@ -128,7 +137,7 @@ describe("TransactionsTable", () => {
 
     expect(screen.getByText("lambo lambo")).toBeInTheDocument();
     expect(screen.getByText(/4 days ago/)).toBeInTheDocument();
-    expect(screen.getByText(/\+66666 sats/)).toBeInTheDocument();
+    expect(screen.getByText(/\+66,666 sats/)).toBeInTheDocument();
     expect(screen.getByText(/~\$13.02/)).toBeInTheDocument();
 
     const disclosureButtons = screen.queryByRole("button");
@@ -148,7 +157,7 @@ describe("TransactionsTable", () => {
 
     expect(screen.getByText("dumplings")).toBeInTheDocument();
     expect(screen.getByText(/5 days ago/)).toBeInTheDocument();
-    expect(screen.getByText(/\+88888 sats/)).toBeInTheDocument();
+    expect(screen.getByText(/\+88,888 sats/)).toBeInTheDocument();
     expect(screen.getByText(/~\$17.36/)).toBeInTheDocument();
 
     const disclosureButtons = screen.getAllByRole("button");

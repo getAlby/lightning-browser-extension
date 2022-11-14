@@ -2,6 +2,8 @@ import { CaretDownIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Disclosure } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
 import Button from "~/app/components/Button";
+import { useSettings } from "~/app/context/SettingsContext";
+import { getSatValue } from "~/common/utils/currencyConvert";
 import { Transaction } from "~/types";
 
 import Badge from "../Badge";
@@ -11,7 +13,7 @@ export type Props = {
 };
 
 export default function TransactionsTable({ transactions }: Props) {
-  const { t: tCommon } = useTranslation("common");
+  const { settings } = useSettings();
   const { t: tComponents } = useTranslation("components");
 
   return (
@@ -64,8 +66,10 @@ export default function TransactionsTable({ transactions }: Props) {
                           {[tx.type && "sent", "sending"].includes(tx.type)
                             ? "-"
                             : "+"}
-                          {tx.totalAmount}{" "}
-                          {tCommon("sats", { count: tx.totalAmount as number })}
+                          {getSatValue({
+                            amount: tx.totalAmount,
+                            locale: settings.locale,
+                          })}
                         </p>
                         {!!tx.totalAmountFiat && (
                           <p className="text-xs text-gray-600 dark:text-neutral-400">
@@ -127,8 +131,10 @@ export default function TransactionsTable({ transactions }: Props) {
                                 {tComponents("transactionsTable.fee")}
                               </span>
                               <br />
-                              {tx.totalFees}{" "}
-                              {tCommon("sats", { count: tx.totalFees })}
+                              {getSatValue({
+                                amount: tx.totalFees,
+                                locale: settings.locale,
+                              })}
                             </p>
                           )}
                           {tx.location && (
