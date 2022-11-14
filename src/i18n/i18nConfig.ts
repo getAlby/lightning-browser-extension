@@ -14,7 +14,7 @@ import sv from "~/i18n/locales/sv/translation.json";
 export const supportedLocales = [
   { locale: "en", label: "English" },
   { locale: "es", label: "Español" },
-  { locale: "pt_BR", label: "Português (Brasil)" },
+  { locale: "pt-BR", label: "Português (Brasil)" },
   { locale: "sv", label: "Svenska" },
   { locale: "it", label: "Italiano" },
 ];
