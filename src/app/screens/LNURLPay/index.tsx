@@ -19,6 +19,7 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import lnurl from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
+import { getSatValue } from "~/common/utils/currencyConvert";
 import type {
   LNURLError,
   LNURLPaymentInfo,
@@ -311,9 +312,10 @@ function LNURLPay() {
           <ResultCard
             isSuccess
             message={tCommon("success_message", {
-              amount: `${valueSat} ${tCommon("sats", {
-                count: parseInt(valueSat),
-              })}`,
+              amount: getSatValue({
+                amount: valueSat,
+                locale: settings.locale,
+              }),
               fiatAmount: showFiat ? ` (${fiatValue})` : ``,
               destination: navState.origin?.name || getRecipient(),
             })}
@@ -372,11 +374,14 @@ function LNURLPay() {
                           {details.minSendable === details.maxSendable && (
                             <>
                               <Dt>{t("amount.label")}</Dt>
-                              <Dd>{`${Math.floor(
-                                +details.minSendable / 1000
-                              )} ${tCommon("sats", {
-                                count: Math.floor(+details.minSendable / 1000),
-                              })}`}</Dd>
+                              <Dd>
+                                {getSatValue({
+                                  amount: Math.floor(
+                                    +details.minSendable / 1000
+                                  ),
+                                  locale: settings.locale,
+                                })}
+                              </Dd>
                             </>
                           )}
                         </>
