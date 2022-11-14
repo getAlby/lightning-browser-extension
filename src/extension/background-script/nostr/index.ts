@@ -7,8 +7,8 @@ import state from "../state";
 
 class Nostr {
   async getPrivateKey() {
-    const storageSessionPassword = await chrome.storage.session.get("password");
-    const password = storageSessionPassword.password;
+    const password = await state.getState().password();
+    if (!password) throw new Error("Pasword is missing");
     const encryptedKey = state.getState().nostrPrivateKey as string;
     if (encryptedKey) {
       return decryptData(encryptedKey, password);
@@ -26,8 +26,8 @@ class Nostr {
   }
 
   async setPrivateKey(privateKey: string) {
-    const storageSessionPassword = await chrome.storage.session.get("password");
-    const password = storageSessionPassword.password;
+    const password = await state.getState().password();
+    if (!password) throw new Error("Pasword is missing");
 
     state.setState({ nostrPrivateKey: encryptData(privateKey, password) });
     await state.getState().saveToStorage();

@@ -1,8 +1,7 @@
 import state from "../../state";
 
 const status = async (message, sender) => {
-  const storageSessionPassword = await chrome.storage.session.get("password");
-  const unlocked = storageSessionPassword.password !== null;
+  const unlocked = await state.getState().isUnlocked();
   const account = state.getState().getAccount();
   const currentAccountId = state.getState().currentAccountId;
   const configured = account != null;

@@ -20,6 +20,7 @@ interface State {
   currentAccountId: string | null;
   nostrPrivateKey: string | null;
   nostr: Nostr | null;
+  password: (password?: string | null) => Promise<string | null>;
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
   getNostr: () => Nostr;
@@ -76,9 +77,16 @@ const state = createState<State>((set, get) => ({
   migrations: [],
   accounts: {},
   currentAccountId: null,
-  password: null,
   nostr: null,
   nostrPrivateKey: null,
+  password: async (password) => {
+    if (password) {
+      await chrome.storage.session.set({ password });
+    }
+    const storageSessionPassword = await chrome.storage.session.get("password");
+
+    return storageSessionPassword.password;
+  },
   getAccount: () => {
     const currentAccountId = get().currentAccountId as string;
     let account = null;
@@ -93,13 +101,10 @@ const state = createState<State>((set, get) => ({
     }
     const currentAccountId = get().currentAccountId as string;
     const account = get().accounts[currentAccountId];
+    const password = await get().password();
 
-    const storageSessionPassword = await chrome.storage.session.get("password");
-
-    const config = decryptData(
-      account.config as string,
-      storageSessionPassword.password
-    );
+    if (!password) throw new Error("Password is not set");
+    const config = decryptData(account.config as string, password);
 
     const connector = new connectors[account.connector](config);
     await connector.init();
@@ -120,15 +125,15 @@ const state = createState<State>((set, get) => ({
   },
   lock: async () => {
     await chrome.storage.session.set({ password: null });
-    const connector = get().connector;
+    const connector = await get().connector;
     if (connector) {
       await connector.unload();
     }
     set({ connector: null, account: null });
   },
   isUnlocked: async () => {
-    const storageSessionPassword = await chrome.storage.session.get("password");
-    return storageSessionPassword.password !== null;
+    const password = await await get().password(null);
+    return password !== null;
   },
   init: () => {
     return browser.storage.sync.get(browserStorageKeys).then((result) => {
