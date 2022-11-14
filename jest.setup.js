@@ -13,6 +13,20 @@ if (!chrome.runtime.id) chrome.runtime.id = "history-delete";
 beforeAll(() => {
   // Enable the mocking in tests.
   server.listen();
+  const get = jest.fn();
+  const set = jest.fn();
+  global.chrome = {
+    storage: {
+      local: {
+        set,
+        get,
+      },
+      session: {
+        set,
+        get,
+      },
+    },
+  };
 });
 
 afterEach(() => {
@@ -23,4 +37,5 @@ afterEach(() => {
 afterAll(() => {
   // Clean up once the tests are done.
   server.close();
+  jest.restoreAllMocks();
 });

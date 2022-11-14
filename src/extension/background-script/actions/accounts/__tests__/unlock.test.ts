@@ -6,7 +6,6 @@ import unlock from "../unlock";
 jest.mock("~/extension/background-script/state");
 
 const mockState = {
-  password: "123456",
   currentAccountId: "1e1e8ea6-493e-480b-9855-303d37506e97",
   getAccount: () => ({
     config:
@@ -23,6 +22,10 @@ describe("edit account", () => {
   });
 
   test("edit existing account", async () => {
+    (chrome.storage.session.get as jest.Mock).mockResolvedValue({
+      password: 123456,
+    });
+
     const message: MessageAccountUnlock = {
       application: "LBE",
       args: { password: 1 },
@@ -34,7 +37,7 @@ describe("edit account", () => {
     state.getState = jest.fn().mockReturnValue(mockState);
     state.setState = () => jest.fn;
 
-    const spy = jest.spyOn(state, "setState");
+    const spy = jest.spyOn(chrome.storage.session, "set");
 
     expect(await unlock(message)).toStrictEqual({
       data: {
