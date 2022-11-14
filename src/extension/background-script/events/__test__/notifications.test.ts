@@ -25,7 +25,7 @@ const settings: SettingsStorage = {
   exchange: "coindesk",
   isUsingLegacyLnurlAuthKey: false,
   legacyLnurlAuth: false,
-  locale: "",
+  locale: "en",
   showFiat: true,
   theme: "",
   userEmail: "",
