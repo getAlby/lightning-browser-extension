@@ -13,6 +13,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
+import { getSatValue } from "~/common/utils/currencyConvert";
 import type { Allowance, Transaction, Battery } from "~/types";
 
 dayjs.extend(relativeTime);
@@ -107,7 +108,13 @@ const AllowanceView: FC<Props> = (props) => {
             </dt>
             <dd className="flex items-center mb-0 text-sm font-medium dark:text-neutral-400">
               {+props.allowance.totalBudget > 0
-                ? `${props.allowance.usedBudget} / ${props.allowance.totalBudget} `
+                ? `${getSatValue({
+                    amount: props.allowance.usedBudget,
+                    locale: settings.locale,
+                  })} / ${getSatValue({
+                    amount: props.allowance.totalBudget,
+                    locale: settings.locale,
+                  })} `
                 : "0 / 0 "}
               {t("allowance_view.sats_used")}
               <div className="ml-3 w-24">
