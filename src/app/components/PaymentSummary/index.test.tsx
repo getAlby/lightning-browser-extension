@@ -2,7 +2,16 @@ import PaymentSummary, { Props } from "@components/PaymentSummary";
 import { render, screen } from "@testing-library/react";
 import { I18nextProvider } from "react-i18next";
 import { BrowserRouter } from "react-router-dom";
+import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import i18n from "~/../tests/unit/helpers/i18n";
+import * as SettingsContext from "~/app/context/SettingsContext";
+
+jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
+  settings: mockSettings,
+  isLoading: false,
+  updateSetting: jest.fn(),
+  getFiatValue: jest.fn(),
+});
 
 const defaultProps = {
   amount: "1234",
@@ -22,7 +31,7 @@ describe("PaymentSummary", () => {
   test("renders correctly with default props", () => {
     renderComponent();
 
-    expect(screen.getByText("1234 sats")).toBeDefined();
+    expect(screen.getByText("1,234 sats")).toBeDefined();
     expect(screen.queryByText("Description")).toBeNull();
     expect(screen.queryByTestId("fiat_amount")).toBeNull();
   });
@@ -32,7 +41,7 @@ describe("PaymentSummary", () => {
       description: "The lovely description",
     });
 
-    expect(screen.getByText("1234 sats")).toBeDefined();
+    expect(screen.getByText("1,234 sats")).toBeDefined();
     expect(screen.getByText("Description")).toBeDefined();
     expect(screen.getByText("The lovely description")).toBeDefined();
   });
