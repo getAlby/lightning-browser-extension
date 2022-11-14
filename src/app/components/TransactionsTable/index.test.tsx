@@ -103,7 +103,7 @@ describe("TransactionsTable", () => {
     );
 
     expect(screen.getByText("Alby")).toBeInTheDocument();
-    expect(screen.getByText(/Sent - 5 days ago/)).toBeInTheDocument();
+    expect(screen.getByText(/5 days ago/)).toBeInTheDocument();
     expect(screen.getByText(/-1234000 sats/)).toBeInTheDocument();
     expect(screen.getByText(/~\$241.02/)).toBeInTheDocument();
 
@@ -128,7 +128,7 @@ describe("TransactionsTable", () => {
     );
 
     expect(screen.getByText("lambo lambo")).toBeInTheDocument();
-    expect(screen.getByText(/Received - 4 days ago/)).toBeInTheDocument();
+    expect(screen.getByText(/4 days ago/)).toBeInTheDocument();
     expect(screen.getByText(/\+66666 sats/)).toBeInTheDocument();
     expect(screen.getByText(/~\$13.02/)).toBeInTheDocument();
 
@@ -148,7 +148,7 @@ describe("TransactionsTable", () => {
     );
 
     expect(screen.getByText("dumplings")).toBeInTheDocument();
-    expect(screen.getByText(/Received - 5 days ago/)).toBeInTheDocument();
+    expect(screen.getByText(/5 days ago/)).toBeInTheDocument();
     expect(screen.getByText(/\+88888 sats/)).toBeInTheDocument();
     expect(screen.getByText(/~\$17.36/)).toBeInTheDocument();
 
