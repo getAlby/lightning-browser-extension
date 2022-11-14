@@ -5,21 +5,18 @@ import i18n from "~/i18n/i18nConfig";
 
 import type { CURRENCIES } from "../constants";
 
-export const getFiatValue = ({
-  amount,
-  rate,
-  currency,
-}: {
+export const getFiatValue = (params: {
   amount: number | string;
   rate: number;
   currency: CURRENCIES;
+  locale: string;
 }) => {
-  const fiatValue = Number(amount) * rate;
+  const fiatValue = Number(params.amount) * params.rate;
 
-  return fiatValue.toLocaleString("en", {
+  return new Intl.NumberFormat(params.locale, {
     style: "currency",
-    currency,
-  });
+    currency: params.currency || "en",
+  }).format(fiatValue);
 };
 
 export const getSatValue = (balance: number) =>

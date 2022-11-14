@@ -82,6 +82,7 @@ export const SettingsProvider = ({
         amount,
         rate,
         currency: settings.currency,
+        locale: settings.locale,
       });
 
       return value;

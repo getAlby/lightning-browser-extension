@@ -26,7 +26,7 @@ const paymentSuccessNotification = async (
   const paymentAmount = total_amt - total_fees;
 
   const { settings } = state.getState();
-  const { showFiat, currency } = settings;
+  const { showFiat, currency, locale } = settings;
 
   if (showFiat) {
     const rate = await getCurrencyRateWithCache(currency);
@@ -35,6 +35,7 @@ const paymentSuccessNotification = async (
       amount: paymentAmount,
       rate,
       currency,
+      locale,
     });
   }
 
