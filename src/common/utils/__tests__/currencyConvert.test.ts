@@ -3,7 +3,7 @@ import { CURRENCIES } from "~/common/constants";
 import {
   getFormattedFiat,
   getFormattedNumber,
-  getSatValue,
+  getFormattedSats,
 } from "../currencyConvert";
 
 describe("Currency coversion utils", () => {
@@ -106,21 +106,21 @@ describe("Currency coversion utils", () => {
     });
   });
 
-  describe("getSatValue", () => {
+  describe("getFormattedSats", () => {
     test("formats correctly for english", async () => {
-      const result = getSatValue({ amount: 123456789, locale: "en" });
+      const result = getFormattedSats({ amount: 123456789, locale: "en" });
 
       expect(result).toBe("123,456,789 sats");
     });
 
     test("formats correctly for spanish", async () => {
-      const result = getSatValue({ amount: 123456789, locale: "es" });
+      const result = getFormattedSats({ amount: 123456789, locale: "es" });
 
       expect(result).toBe("123.456.789 sats");
     });
 
     test("falls back to english", async () => {
-      const result = getSatValue({ amount: 123456789, locale: "" });
+      const result = getFormattedSats({ amount: 123456789, locale: "" });
 
       expect(result).toBe("123,456,789 sats");
     });
