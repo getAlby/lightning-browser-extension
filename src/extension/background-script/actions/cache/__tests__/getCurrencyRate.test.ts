@@ -4,6 +4,9 @@ import type { MessageCurrencyRateGet } from "~/types";
 
 import getCurrencyRate from "../getCurrencyRate";
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+jest.mock("@vespaiach/axios-fetch-adapter", () => {});
+
 const mockState = {
   settings: { exchange: "coindesk", currency: CURRENCIES["USD"] },
 };
