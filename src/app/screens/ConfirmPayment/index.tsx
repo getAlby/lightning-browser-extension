@@ -23,7 +23,7 @@ function ConfirmPayment() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
   } = useSettings();
 
   const showFiat = !isLoadingSettings && settings.showFiat;
@@ -57,20 +57,20 @@ function ConfirmPayment() {
   useEffect(() => {
     (async () => {
       if (showFiat && invoice.satoshis) {
-        const res = await getFiatValue(invoice.satoshis);
+        const res = await getFormattedFiat(invoice.satoshis);
         setFiatAmount(res);
       }
     })();
-  }, [invoice.satoshis, showFiat, getFiatValue]);
+  }, [invoice.satoshis, showFiat, getFormattedFiat]);
 
   useEffect(() => {
     (async () => {
       if (showFiat && budget) {
-        const res = await getFiatValue(budget);
+        const res = await getFormattedFiat(budget);
         setFiatBudgetAmount(res);
       }
     })();
-  }, [budget, showFiat, getFiatValue]);
+  }, [budget, showFiat, getFormattedFiat]);
 
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);

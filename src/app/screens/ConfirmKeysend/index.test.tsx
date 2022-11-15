@@ -11,7 +11,7 @@ jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
   settings: mockSettings,
   isLoading: false,
   updateSetting: jest.fn(),
-  getFiatValue: jest
+  getFormattedFiat: jest
     .fn()
     .mockImplementationOnce(() => Promise.resolve("$0.00"))
     .mockImplementationOnce(() => Promise.resolve("$0.00"))

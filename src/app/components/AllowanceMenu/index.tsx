@@ -25,7 +25,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
@@ -39,13 +39,13 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   useEffect(() => {
     if (budget !== "" && showFiat) {
       const getFiat = async () => {
-        const res = await getFiatValue(budget);
+        const res = await getFormattedFiat(budget);
         setFiatAmount(res);
       };
 
       getFiat();
     }
-  }, [budget, showFiat, getFiatValue]);
+  }, [budget, showFiat, getFormattedFiat]);
 
   function openModal() {
     setBudget(allowance.totalBudget.toString());

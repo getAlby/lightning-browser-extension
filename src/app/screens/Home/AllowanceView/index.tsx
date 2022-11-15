@@ -30,7 +30,7 @@ const AllowanceView: FC<Props> = (props) => {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
   } = useSettings();
 
   const [payments, setPayments] = useState<Transaction[] | null>(null);
@@ -60,7 +60,7 @@ const AllowanceView: FC<Props> = (props) => {
         // attach fiatAmount if enabled
         for (const payment of payments) {
           const totalAmountFiat = showFiat
-            ? await getFiatValue(payment.totalAmount)
+            ? await getFormattedFiat(payment.totalAmount)
             : "";
           payment.totalAmountFiat = totalAmountFiat;
         }
@@ -75,7 +75,13 @@ const AllowanceView: FC<Props> = (props) => {
     };
 
     !payments && !isLoadingSettings && getPayments();
-  }, [props.allowance, isLoadingSettings, payments, getFiatValue, showFiat]);
+  }, [
+    props.allowance,
+    isLoadingSettings,
+    payments,
+    getFormattedFiat,
+    showFiat,
+  ]);
 
   return (
     <div className="overflow-y-auto no-scrollbar h-full">

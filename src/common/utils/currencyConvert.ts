@@ -5,7 +5,7 @@ import i18n from "~/i18n/i18nConfig";
 
 import type { CURRENCIES } from "../constants";
 
-export const getFiatValue = (params: {
+export const getFormattedFiat = (params: {
   amount: number | string;
   rate: number;
   currency: CURRENCIES;

@@ -11,7 +11,7 @@ jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
   settings: mockSettings,
   isLoading: false,
   updateSetting: jest.fn(),
-  getFiatValue: jest.fn(),
+  getFormattedFiat: jest.fn(),
 });
 
 jest.mock("~/common/lib/api", () => {

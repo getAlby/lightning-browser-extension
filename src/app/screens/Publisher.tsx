@@ -23,7 +23,7 @@ function Publisher() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
   } = useSettings();
 
   const hasFetchedData = useRef(false);
@@ -51,7 +51,7 @@ function Publisher() {
 
         for (const payment of payments) {
           const totalAmountFiat = settings.showFiat
-            ? await getFiatValue(payment.totalAmount)
+            ? await getFormattedFiat(payment.totalAmount)
             : "";
           payment.totalAmountFiat = totalAmountFiat;
         }
@@ -61,7 +61,7 @@ function Publisher() {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
     }
-  }, [id, settings.showFiat, getFiatValue]);
+  }, [id, settings.showFiat, getFormattedFiat]);
 
   useEffect(() => {
     // Run once.

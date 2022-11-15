@@ -27,7 +27,7 @@ function LNURLWithdraw() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
@@ -46,11 +46,11 @@ function LNURLWithdraw() {
   useEffect(() => {
     if (valueSat !== "" && showFiat) {
       (async () => {
-        const res = await getFiatValue(valueSat);
+        const res = await getFormattedFiat(valueSat);
         setFiatValue(res);
       })();
     }
-  }, [valueSat, showFiat, getFiatValue]);
+  }, [valueSat, showFiat, getFormattedFiat]);
 
   async function confirm() {
     try {
