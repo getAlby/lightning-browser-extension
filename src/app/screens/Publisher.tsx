@@ -11,6 +11,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import utils from "~/common/lib/utils";
+import { getFormattedNumber } from "~/common/utils/currencyConvert";
 import type { Allowance, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
@@ -91,7 +92,15 @@ function Publisher() {
               </dt>
 
               <dd className="flex items-center font-bold text-xl dark:text-neutral-400">
-                {allowance.usedBudget} / {allowance.totalBudget}{" "}
+                {getFormattedNumber({
+                  amount: allowance.usedBudget,
+                  locale: settings.locale,
+                })}{" "}
+                /{" "}
+                {getFormattedNumber({
+                  amount: allowance.totalBudget,
+                  locale: settings.locale,
+                })}{" "}
                 {t("publisher.allowance.used_budget")}
                 <div className="ml-3 w-24">
                   <Progressbar percentage={allowance.percentage} />
