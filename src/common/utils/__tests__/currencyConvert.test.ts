@@ -73,6 +73,17 @@ describe("Currency coversion utils", () => {
 
       expect(result).toBe("37.026,96\xa0US$");
     });
+
+    test("falls back to english", () => {
+      const result = getFiatValue({
+        amount: 123456789,
+        rate: 0.00029991836,
+        currency: CURRENCIES["USD"],
+        locale: "",
+      });
+
+      expect(result).toBe("$37,026.96");
+    });
   });
 
   describe("getFormattedNumber", () => {
@@ -87,6 +98,12 @@ describe("Currency coversion utils", () => {
 
       expect(result).toBe("9.999.999");
     });
+
+    test("falls back to english", async () => {
+      const result = getFormattedNumber({ amount: 9999999, locale: "" });
+
+      expect(result).toBe("9,999,999");
+    });
   });
 
   describe("getSatValue", () => {
@@ -100,6 +117,12 @@ describe("Currency coversion utils", () => {
       const result = getSatValue({ amount: 123456789, locale: "es" });
 
       expect(result).toBe("123.456.789 sats");
+    });
+
+    test("falls back to english", async () => {
+      const result = getSatValue({ amount: 123456789, locale: "" });
+
+      expect(result).toBe("123,456,789 sats");
     });
   });
 });
