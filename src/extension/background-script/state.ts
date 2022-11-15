@@ -81,9 +81,13 @@ const state = createState<State>((set, get) => ({
   nostrPrivateKey: null,
   password: async (password) => {
     if (password) {
-      await chrome.storage.session.set({ password });
+      // @ts-ignore: https://github.com/mozilla/webextension-polyfill/issues/329
+      await browser.storage.session.set({ password });
     }
-    const storageSessionPassword = await chrome.storage.session.get("password");
+    // @ts-ignore: https://github.com/mozilla/webextension-polyfill/issues/329
+    const storageSessionPassword = await browser.storage.session.get(
+      "password"
+    );
 
     return storageSessionPassword.password;
   },
@@ -124,7 +128,8 @@ const state = createState<State>((set, get) => ({
     return nostr;
   },
   lock: async () => {
-    await chrome.storage.session.set({ password: null });
+    // @ts-ignore: https://github.com/mozilla/webextension-polyfill/issues/329
+    await browser.storage.session.set({ password: null });
     const connector = await get().connector;
     if (connector) {
       await connector.unload();
