@@ -28,7 +28,7 @@ export const getFormattedNumber = (params: {
   );
 };
 
-export const getSatValue = (params: {
+export const getFormattedSats = (params: {
   amount: number | string;
   locale: string;
 }) => {

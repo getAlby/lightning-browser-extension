@@ -3,7 +3,7 @@ import { Disclosure } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
 import Button from "~/app/components/Button";
 import { useSettings } from "~/app/context/SettingsContext";
-import { getSatValue } from "~/common/utils/currencyConvert";
+import { getFormattedSats } from "~/common/utils/currencyConvert";
 import { Transaction } from "~/types";
 
 import Badge from "../Badge";
@@ -66,7 +66,7 @@ export default function TransactionsTable({ transactions }: Props) {
                           {[tx.type && "sent", "sending"].includes(tx.type)
                             ? "-"
                             : "+"}
-                          {getSatValue({
+                          {getFormattedSats({
                             amount: tx.totalAmount,
                             locale: settings.locale,
                           })}
@@ -131,7 +131,7 @@ export default function TransactionsTable({ transactions }: Props) {
                                 {tComponents("transactionsTable.fee")}
                               </span>
                               <br />
-                              {getSatValue({
+                              {getFormattedSats({
                                 amount: tx.totalFees,
                                 locale: settings.locale,
                               })}

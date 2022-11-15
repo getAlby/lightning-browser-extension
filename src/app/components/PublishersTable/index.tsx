@@ -2,7 +2,7 @@ import { CaretRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useTranslation } from "react-i18next";
 import { useSettings } from "~/app/context/SettingsContext";
 import {
-  getSatValue,
+  getFormattedSats,
   getFormattedNumber,
 } from "~/common/utils/currencyConvert";
 import { Publisher } from "~/types";
@@ -70,7 +70,7 @@ export default function PublishersTable({
                       {tComponents("payments")}{" "}
                       {publisher.paymentsAmount > 0 && (
                         <span>
-                          {getSatValue({
+                          {getFormattedSats({
                             amount: publisher.paymentsAmount,
                             locale: settings.locale,
                           })}

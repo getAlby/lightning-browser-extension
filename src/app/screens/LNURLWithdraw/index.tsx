@@ -15,7 +15,7 @@ import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import { getSatValue } from "~/common/utils/currencyConvert";
+import { getFormattedSats } from "~/common/utils/currencyConvert";
 import type { LNURLWithdrawServiceResponse } from "~/types";
 
 function LNURLWithdraw() {
@@ -72,7 +72,7 @@ function LNURLWithdraw() {
       if (response.data.status.toUpperCase() === "OK") {
         setSuccessMessage(
           t("success", {
-            amount: `${getSatValue({
+            amount: `${getFormattedSats({
               amount: valueSat,
               locale: settings.locale,
             })} ${showFiat ? `(${fiatValue})` : ``}`,
@@ -103,7 +103,7 @@ function LNURLWithdraw() {
         <>
           <ContentMessage
             heading={t("content_message.heading")}
-            content={getSatValue({
+            content={getFormattedSats({
               amount: Math.floor(minWithdrawable / 1000),
               locale: settings.locale,
             })}

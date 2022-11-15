@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
-import { getSatValue } from "~/common/utils/currencyConvert";
+import { getFormattedSats } from "~/common/utils/currencyConvert";
 
 export default function TestConnection() {
   const [accountInfo, setAccountInfo] = useState<{
@@ -105,7 +105,7 @@ export default function TestConnection() {
                   alias={`${accountInfo.name} - ${accountInfo.alias}`}
                   satoshis={
                     typeof accountInfo.balance === "number"
-                      ? getSatValue({
+                      ? getFormattedSats({
                           amount: accountInfo.balance,
                           locale: settings.locale,
                         })

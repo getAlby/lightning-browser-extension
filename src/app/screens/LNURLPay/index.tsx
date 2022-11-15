@@ -19,7 +19,7 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import lnurl from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-import { getSatValue } from "~/common/utils/currencyConvert";
+import { getFormattedSats } from "~/common/utils/currencyConvert";
 import type {
   LNURLError,
   LNURLPaymentInfo,
@@ -312,7 +312,7 @@ function LNURLPay() {
           <ResultCard
             isSuccess
             message={tCommon("success_message", {
-              amount: getSatValue({
+              amount: getFormattedSats({
                 amount: valueSat,
                 locale: settings.locale,
               }),
@@ -375,7 +375,7 @@ function LNURLPay() {
                             <>
                               <Dt>{t("amount.label")}</Dt>
                               <Dd>
-                                {getSatValue({
+                                {getFormattedSats({
                                   amount: Math.floor(
                                     +details.minSendable / 1000
                                   ),

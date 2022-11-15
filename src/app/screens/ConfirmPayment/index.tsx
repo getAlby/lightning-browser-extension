@@ -17,7 +17,7 @@ import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-import { getSatValue } from "~/common/utils/currencyConvert";
+import { getFormattedSats } from "~/common/utils/currencyConvert";
 
 function ConfirmPayment() {
   const {
@@ -49,7 +49,7 @@ function ConfirmPayment() {
   const [fiatAmount, setFiatAmount] = useState("");
   const [fiatBudgetAmount, setFiatBudgetAmount] = useState("");
 
-  const formattedInvoiceSats = getSatValue({
+  const formattedInvoiceSats = getFormattedSats({
     amount: invoice.satoshis || 0,
     locale: settings.locale,
   });
