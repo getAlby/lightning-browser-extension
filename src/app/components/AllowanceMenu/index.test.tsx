@@ -13,7 +13,7 @@ jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
   settings: mockSettings,
   isLoading: false,
   updateSetting: jest.fn(),
-  getFiatValue: mockGetFiatValue,
+  getFormattedFiat: mockGetFiatValue,
 });
 
 jest.mock("~/common/lib/utils");

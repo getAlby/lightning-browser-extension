@@ -43,7 +43,7 @@ describe("Keysend", () => {
       settings: { ...mockSettings },
       isLoading: false,
       updateSetting: jest.fn(),
-      getFiatValue: jest.fn(() => Promise.resolve("$0.01")),
+      getFormattedFiat: jest.fn(() => Promise.resolve("$0.01")),
     });
 
     await act(async () => {

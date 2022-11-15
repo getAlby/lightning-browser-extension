@@ -42,7 +42,7 @@ function LNURLPay() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
@@ -68,12 +68,12 @@ function LNURLPay() {
 
   useEffect(() => {
     const getFiat = async () => {
-      const res = await getFiatValue(valueSat);
+      const res = await getFormattedFiat(valueSat);
       setFiatValue(res);
     };
 
     getFiat();
-  }, [valueSat, showFiat, getFiatValue]);
+  }, [valueSat, showFiat, getFormattedFiat]);
 
   useEffect(() => {
     !!settings.userName && setUserName(settings.userName);

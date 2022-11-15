@@ -44,7 +44,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
   } = useSettings();
 
   const [account, setAccount] = useState<AccountContextType["account"]>(null);
@@ -75,10 +75,10 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
 
   const updateFiatValue = useCallback(
     async (balance: string | number) => {
-      const fiat = await getFiatValue(balance);
+      const fiat = await getFormattedFiat(balance);
       setFiatBalance(fiat);
     },
-    [getFiatValue]
+    [getFormattedFiat]
   );
 
   const updateSatValue = (amount: number) => {

@@ -1,15 +1,15 @@
 import { CURRENCIES } from "~/common/constants";
 
 import {
-  getFiatValue,
+  getFormattedFiat,
   getFormattedNumber,
   getSatValue,
 } from "../currencyConvert";
 
 describe("Currency coversion utils", () => {
-  describe("getFiatValue", () => {
+  describe("getFormattedFiat", () => {
     test("formats correctly for USD in english language", () => {
-      const result = getFiatValue({
+      const result = getFormattedFiat({
         amount: 123456789,
         rate: 0.00029991836,
         currency: CURRENCIES["USD"],
@@ -20,7 +20,7 @@ describe("Currency coversion utils", () => {
     });
 
     test("formats correctly for USD in italian language", () => {
-      const result = getFiatValue({
+      const result = getFormattedFiat({
         amount: 123456789,
         rate: 0.00029991836,
         currency: CURRENCIES["USD"],
@@ -31,7 +31,7 @@ describe("Currency coversion utils", () => {
     });
 
     test("formats correctly for EUR in swedish language", () => {
-      const result = getFiatValue({
+      const result = getFormattedFiat({
         amount: 123456789,
         rate: 0.00029991836,
         currency: CURRENCIES["EUR"],
@@ -42,7 +42,7 @@ describe("Currency coversion utils", () => {
     });
 
     test("formats correctly for EUR in brazilian portugese language", () => {
-      const result = getFiatValue({
+      const result = getFormattedFiat({
         amount: 123456789,
         rate: 0.00029991836,
         currency: CURRENCIES["EUR"],
@@ -53,7 +53,7 @@ describe("Currency coversion utils", () => {
     });
 
     test("formats correctly for EUR in spanish language", () => {
-      const result = getFiatValue({
+      const result = getFormattedFiat({
         amount: 123456789,
         rate: 0.00029991836,
         currency: CURRENCIES["EUR"],
@@ -64,7 +64,7 @@ describe("Currency coversion utils", () => {
     });
 
     test("formats correctly for USD in spanish language", () => {
-      const result = getFiatValue({
+      const result = getFormattedFiat({
         amount: 123456789,
         rate: 0.00029991836,
         currency: CURRENCIES["USD"],
@@ -75,7 +75,7 @@ describe("Currency coversion utils", () => {
     });
 
     test("falls back to english", () => {
-      const result = getFiatValue({
+      const result = getFormattedFiat({
         amount: 123456789,
         rate: 0.00029991836,
         currency: CURRENCIES["USD"],
