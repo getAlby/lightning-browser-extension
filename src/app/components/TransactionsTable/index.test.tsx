@@ -113,9 +113,7 @@ describe("TransactionsTable", () => {
       user.click(disclosureButton);
     });
 
-    expect(
-      await screen.findByText("https://openai.com/dall-e-2/")
-    ).toBeInTheDocument();
+    expect(await screen.findByText("0 sats")).toBeInTheDocument();
   });
 
   test("renders invoice without boostagram", async () => {

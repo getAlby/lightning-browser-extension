@@ -152,7 +152,6 @@ export default function TransactionsTable({ transactions }: Props) {
                           //   {/* {tx.preimage} */}
                           // </p>
                         )}
-
                         {tx.location && (
                           <a
                             className="flex-none"
