@@ -12,6 +12,9 @@ import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
 import Nostr from "./nostr";
 
+export const isManifestV3 =
+  browser.runtime.getManifest().manifest_version === 3;
+
 interface State {
   account: Account | null;
   accounts: Accounts;
@@ -20,6 +23,7 @@ interface State {
   currentAccountId: string | null;
   nostrPrivateKey: string | null;
   nostr: Nostr | null;
+  mv2Password: string | null;
   password: (password?: string | null) => Promise<string | null>;
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
@@ -79,17 +83,25 @@ const state = createState<State>((set, get) => ({
   currentAccountId: null,
   nostr: null,
   nostrPrivateKey: null,
+  mv2Password: null,
   password: async (password) => {
-    if (password) {
+    if (isManifestV3) {
+      if (password) {
+        // @ts-ignore: https://github.com/mozilla/webextension-polyfill/issues/329
+        await browser.storage.session.set({ password });
+      }
       // @ts-ignore: https://github.com/mozilla/webextension-polyfill/issues/329
-      await browser.storage.session.set({ password });
-    }
-    // @ts-ignore: https://github.com/mozilla/webextension-polyfill/issues/329
-    const storageSessionPassword = await browser.storage.session.get(
-      "password"
-    );
+      const storageSessionPassword = await browser.storage.session.get(
+        "password"
+      );
 
-    return storageSessionPassword.password;
+      return storageSessionPassword.password;
+    } else {
+      if (password) {
+        set({ mv2Password: password });
+      }
+      return get().mv2Password;
+    }
   },
   getAccount: () => {
     const currentAccountId = get().currentAccountId as string;
@@ -128,8 +140,12 @@ const state = createState<State>((set, get) => ({
     return nostr;
   },
   lock: async () => {
-    // @ts-ignore: https://github.com/mozilla/webextension-polyfill/issues/329
-    await browser.storage.session.set({ password: null });
+    if (isManifestV3) {
+      // @ts-ignore: https://github.com/mozilla/webextension-polyfill/issues/329
+      await browser.storage.session.set({ password: null });
+    } else {
+      set({ mv2Password: null });
+    }
     const connector = await get().connector;
     if (connector) {
       await connector.unload();
@@ -137,7 +153,7 @@ const state = createState<State>((set, get) => ({
     set({ connector: null, account: null });
   },
   isUnlocked: async () => {
-    const password = await await get().password(null);
+    const password = await await get().password();
     return password !== null;
   },
   init: () => {
