@@ -1,10 +1,7 @@
-import {
-  PlusIcon,
-  MinusIcon,
-  CaretDownIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
+import { CaretDownIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Disclosure } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
+import Button from "~/app/components/Button";
 import { Transaction } from "~/types";
 
 import Badge from "../Badge";
@@ -17,24 +14,24 @@ export default function TransactionsTable({ transactions }: Props) {
   const { t: tCommon } = useTranslation("common");
   const { t: tComponents } = useTranslation("components");
 
-  function renderIcon(type: string) {
-    function getIcon() {
-      const iconClasses = "h-3 w-3";
-      switch (type) {
-        case "received":
-          return <PlusIcon className={iconClasses} />;
-        case "sent":
-        case "sending":
-          return <MinusIcon className={iconClasses} />;
-      }
-    }
-
-    return (
-      <div className="flex justify-center items-center w-6 h-6 border-2 border-gray-200 rounded-full dark:text-white">
-        {getIcon()}
-      </div>
-    );
-  }
+  // function renderIcon(type: string) {
+  //   function getIcon() {
+  //     const iconClasses = "h-3 w-3";
+  //     switch (type) {
+  //       case "received":
+  //         return <PlusIcon className={iconClasses} />;
+  //       case "sent":
+  //       case "sending":
+  //         return <MinusIcon className={iconClasses} />;
+  //     }
+  //   }
+  //
+  //   return (
+  //     <div className="flex justify-center items-center w-6 h-6 border-2 border-gray-200 rounded-full dark:text-white">
+  //       {getIcon()}
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="shadow overflow-hidden rounded-lg">
@@ -45,9 +42,9 @@ export default function TransactionsTable({ transactions }: Props) {
               {({ open }) => (
                 <>
                   <div className="flex">
-                    <div className="flex items-center shrink-0 mr-3">
+                    {/* <div className="flex items-center shrink-0 mr-3">
                       {tx.type && renderIcon(tx.type)}
-                    </div>
+                    </div> */}
                     <div className="overflow-hidden mr-3">
                       <div
                         className="
@@ -67,7 +64,7 @@ export default function TransactionsTable({ transactions }: Props) {
                           )}
                         </p>
                       </div>
-                      <p className="text-xs text-gray-600 capitalize dark:text-neutral-400">
+                      <p className="text-xs text-gray-600 dark:text-neutral-400">
                         {tx.date}
                       </p>
                     </div>
@@ -109,15 +106,9 @@ export default function TransactionsTable({ transactions }: Props) {
                       )}
                     </div>
                   </div>
-
                   <Disclosure.Panel>
-                    <div className="mt-1 ml-9 text-xs text-gray-600 dark:text-neutral-400">
+                    <div className="mt-4 text-xs text-gray-600 dark:text-neutral-400">
                       {tx.description && <p>{tx.description}</p>}
-                      {tx.location && (
-                        <a href={tx.location} target="_blank" rel="noreferrer">
-                          {tx.location}
-                        </a>
-                      )}
                       {tx.boostagram && (
                         <ul>
                           <li>
@@ -142,18 +133,41 @@ export default function TransactionsTable({ transactions }: Props) {
                           </li>
                         </ul>
                       )}
-                      {tx.totalFees != undefined && (
-                        <p>
-                          {tComponents("transactionsTable.fee")}: {tx.totalFees}{" "}
-                          {tCommon("sats", { count: tx.totalFees })}
-                        </p>
-                      )}
-                      {tx.preimage && (
-                        <p className="truncate">
-                          {tComponents("transactionsTable.preimage")}:{" "}
-                          {tx.preimage}
-                        </p>
-                      )}
+                      <div className="flex mt-4 my-2 items-center justify-between">
+                        {tx.totalFees != undefined && (
+                          <p className="my-2 flex-none">
+                            <span className="font-bold">
+                              {tComponents("transactionsTable.fee")}
+                            </span>
+                            <br />
+                            {tx.totalFees}{" "}
+                            {tCommon("sats", { count: tx.totalFees })}
+                          </p>
+                        )}
+                        {tx.preimage && (
+                          <a className="flex-none">📄 Copy preimage</a>
+                          // <p className="truncate flex-1">
+
+                          //   {/* <span className="font-bold">{tComponents("transactionsTable.preimage")}</span>{" "} */}
+                          //   {/* {tx.preimage} */}
+                          // </p>
+                        )}
+
+                        {tx.location && (
+                          <a
+                            className="flex-none"
+                            href={tx.location}
+                            target="_blank"
+                            rel="noreferrer noopener"
+                          >
+                            <Button
+                              direction="row"
+                              primary
+                              label={tComponents("Open website")}
+                            />
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </Disclosure.Panel>
                 </>
