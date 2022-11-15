@@ -13,9 +13,9 @@ export const getFiatValue = (params: {
 }) => {
   const fiatValue = Number(params.amount) * params.rate;
 
-  return new Intl.NumberFormat(params.locale, {
+  return new Intl.NumberFormat(params.locale || "en", {
     style: "currency",
-    currency: params.currency || "en",
+    currency: params.currency,
   }).format(fiatValue);
 };
 
