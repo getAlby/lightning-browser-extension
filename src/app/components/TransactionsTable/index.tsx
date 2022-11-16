@@ -14,25 +14,6 @@ export default function TransactionsTable({ transactions }: Props) {
   const { t: tCommon } = useTranslation("common");
   const { t: tComponents } = useTranslation("components");
 
-  // function renderIcon(type: string) {
-  //   function getIcon() {
-  //     const iconClasses = "h-3 w-3";
-  //     switch (type) {
-  //       case "received":
-  //         return <PlusIcon className={iconClasses} />;
-  //       case "sent":
-  //       case "sending":
-  //         return <MinusIcon className={iconClasses} />;
-  //     }
-  //   }
-  //
-  //   return (
-  //     <div className="flex justify-center items-center w-6 h-6 border-2 border-gray-200 rounded-full dark:text-white">
-  //       {getIcon()}
-  //     </div>
-  //   );
-  // }
-
   return (
     <div className="shadow overflow-hidden rounded-lg">
       <div className="bg-white divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
@@ -42,9 +23,6 @@ export default function TransactionsTable({ transactions }: Props) {
               {({ open }) => (
                 <>
                   <div className="flex">
-                    {/* <div className="flex items-center shrink-0 mr-3">
-                      {tx.type && renderIcon(tx.type)}
-                    </div> */}
                     <div className="overflow-hidden mr-3">
                       <div
                         className="
@@ -60,7 +38,7 @@ export default function TransactionsTable({ transactions }: Props) {
                               {tx.title}
                             </a>
                           ) : (
-                            tx.title || "\u00A0"
+                            tx.title || tx.boostagram?.message || "\u00A0"
                           )}
                         </p>
                       </div>
@@ -107,67 +85,67 @@ export default function TransactionsTable({ transactions }: Props) {
                     </div>
                   </div>
                   <Disclosure.Panel>
-                    <div className="mt-4 text-xs text-gray-600 dark:text-neutral-400">
-                      {tx.description && <p>{tx.description}</p>}
-                      {tx.boostagram && (
-                        <ul>
-                          <li>
-                            {tComponents("transactionsTable.boostagram.sender")}
-                            : {tx.boostagram.sender_name}
-                          </li>
-                          <li>
-                            {tComponents(
-                              "transactionsTable.boostagram.message"
-                            )}
-                            : {tx.boostagram.message}
-                          </li>
-                          <li>
-                            {tComponents("transactionsTable.boostagram.app")}:{" "}
-                            {tx.boostagram.app_name}
-                          </li>
-                          <li>
-                            {tComponents(
-                              "transactionsTable.boostagram.podcast"
-                            )}
-                            : {tx.boostagram.podcast}
-                          </li>
-                        </ul>
+                    <div className="text-xs text-gray-600 dark:text-neutral-400">
+                      {(tx.description || tx.boostagram) && (
+                        <div className="my-2">
+                          {tx.description && <p>{tx.description}</p>}
+                          {tx.boostagram && (
+                            <ul>
+                              <li>
+                                {tComponents(
+                                  "transactionsTable.boostagram.sender"
+                                )}
+                                : {tx.boostagram.sender_name}
+                              </li>
+                              <li>
+                                {tComponents(
+                                  "transactionsTable.boostagram.message"
+                                )}
+                                : {tx.boostagram.message}
+                              </li>
+                              <li>
+                                {tComponents(
+                                  "transactionsTable.boostagram.app"
+                                )}
+                                : {tx.boostagram.app_name}
+                              </li>
+                              <li>
+                                {tComponents(
+                                  "transactionsTable.boostagram.podcast"
+                                )}
+                                : {tx.boostagram.podcast}
+                              </li>
+                            </ul>
+                          )}
+                        </div>
                       )}
-                      <div className="flex mt-4 my-2 items-center justify-between">
-                        {tx.totalFees != undefined && (
-                          <p className="my-2 flex-none">
-                            <span className="font-bold">
-                              {tComponents("transactionsTable.fee")}
-                            </span>
-                            <br />
-                            {tx.totalFees}{" "}
-                            {tCommon("sats", { count: tx.totalFees })}
-                          </p>
-                        )}
-                        {tx.preimage && (
-                          <a className="flex-none">📄 Copy preimage</a>
-                          // <p className="truncate flex-1">
-
-                          //   {/* <span className="font-bold">{tComponents("transactionsTable.preimage")}</span>{" "} */}
-                          //   {/* {tx.preimage} */}
-                          // </p>
-                        )}
-
-                        {tx.location && (
-                          <a
-                            className="flex-none"
-                            href={tx.location}
-                            target="_blank"
-                            rel="noreferrer noopener"
-                          >
-                            <Button
-                              direction="row"
-                              primary
-                              label={tComponents("Open website")}
-                            />
-                          </a>
-                        )}
-                      </div>
+                      {(tx.totalFees != undefined || tx.location) && (
+                        <div className="my-2 flex items-center justify-between">
+                          {tx.totalFees != undefined && (
+                            <p className="flex-none">
+                              <span className="font-bold">
+                                {tComponents("transactionsTable.fee")}
+                              </span>
+                              <br />
+                              {tx.totalFees}{" "}
+                              {tCommon("sats", { count: tx.totalFees })}
+                            </p>
+                          )}
+                          {tx.location && (
+                            <a
+                              className="flex-none"
+                              href={tx.location}
+                              target="_blank"
+                              rel="noreferrer noopener"
+                            >
+                              <Button
+                                primary
+                                label={tComponents("Open website")}
+                              />
+                            </a>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </Disclosure.Panel>
                 </>
