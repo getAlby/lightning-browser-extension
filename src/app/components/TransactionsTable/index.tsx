@@ -121,7 +121,7 @@ export default function TransactionsTable({ transactions }: Props) {
                       )}
                       {(tx.totalFees !== undefined || tx.location) && (
                         <div className="my-2 flex items-center justify-between">
-                          {tx.totalFees != undefined && (
+                          {tx.totalFees !== undefined && (
                             <p className="flex-none">
                               <span className="font-bold">
                                 {tComponents("transactionsTable.fee")}
