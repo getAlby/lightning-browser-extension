@@ -3,19 +3,12 @@ import userEvent from "@testing-library/user-event";
 import { act } from "react-dom/test-utils";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
-import * as SettingsContext from "~/app/context/SettingsContext";
+import { SettingsProvider } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { makeInvoice } from "~/common/lib/api";
 import type { LNURLWithdrawServiceResponse, OriginData } from "~/types";
 
 import LNURLWithdraw from "./index";
-
-jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
-  settings: mockSettings,
-  isLoading: false,
-  updateSetting: jest.fn(),
-  getFormattedFiat: jest.fn(),
-});
 
 const mockDetailsFiatJef: LNURLWithdrawServiceResponse = {
   tag: "withdrawRequest",
@@ -72,13 +65,15 @@ jest.mock("~/app/hooks/useNavigationState", () => ({
   })),
 }));
 
-jest.mock("~/common/lib/api", () => ({
-  getSettings: jest.fn(() => ({
-    currency: "USD",
-    exchange: "coindesk",
-  })),
-  makeInvoice: jest.fn(() => ({})),
-}));
+jest.mock("~/common/lib/api", () => {
+  const original = jest.requireActual("~/common/lib/api");
+  return {
+    ...original,
+    getSettings: jest.fn(() => Promise.resolve(mockSettings)),
+    getCurrencyRate: jest.fn(() => Promise.resolve({ rate: 11 })),
+    makeInvoice: jest.fn(),
+  };
+});
 
 describe("LNURLWithdraw", () => {
   afterEach(() => {
@@ -89,7 +84,9 @@ describe("LNURLWithdraw", () => {
     await act(async () => {
       render(
         <MemoryRouter>
-          <LNURLWithdraw />
+          <SettingsProvider>
+            <LNURLWithdraw />
+          </SettingsProvider>
         </MemoryRouter>
       );
     });
@@ -104,7 +101,9 @@ describe("LNURLWithdraw", () => {
     await act(async () => {
       render(
         <MemoryRouter>
-          <LNURLWithdraw />
+          <SettingsProvider>
+            <LNURLWithdraw />
+          </SettingsProvider>
         </MemoryRouter>
       );
     });
@@ -133,7 +132,9 @@ describe("LNURLWithdraw", () => {
 
     render(
       <MemoryRouter>
-        <LNURLWithdraw />
+        <SettingsProvider>
+          <LNURLWithdraw />
+        </SettingsProvider>
       </MemoryRouter>
     );
 
