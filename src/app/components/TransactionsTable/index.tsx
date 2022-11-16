@@ -1,10 +1,7 @@
-import {
-  PlusIcon,
-  MinusIcon,
-  CaretDownIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
+import { CaretDownIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Disclosure } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
+import Button from "~/app/components/Button";
 import { Transaction } from "~/types";
 
 import Badge from "../Badge";
@@ -17,25 +14,6 @@ export default function TransactionsTable({ transactions }: Props) {
   const { t: tCommon } = useTranslation("common");
   const { t: tComponents } = useTranslation("components");
 
-  function renderIcon(type: string) {
-    function getIcon() {
-      const iconClasses = "h-3 w-3";
-      switch (type) {
-        case "received":
-          return <PlusIcon className={iconClasses} />;
-        case "sent":
-        case "sending":
-          return <MinusIcon className={iconClasses} />;
-      }
-    }
-
-    return (
-      <div className="flex justify-center items-center w-6 h-6 border-2 border-gray-200 rounded-full dark:text-white">
-        {getIcon()}
-      </div>
-    );
-  }
-
   return (
     <div className="shadow overflow-hidden rounded-lg">
       <div className="bg-white divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
@@ -45,9 +23,6 @@ export default function TransactionsTable({ transactions }: Props) {
               {({ open }) => (
                 <>
                   <div className="flex">
-                    <div className="flex items-center shrink-0 mr-3">
-                      {tx.type && renderIcon(tx.type)}
-                    </div>
                     <div className="overflow-hidden mr-3">
                       <div
                         className="
@@ -63,12 +38,11 @@ export default function TransactionsTable({ transactions }: Props) {
                               {tx.title}
                             </a>
                           ) : (
-                            tx.title || "\u00A0"
+                            tx.title || tx.boostagram?.message || "\u00A0"
                           )}
                         </p>
                       </div>
-                      <p className="text-xs text-gray-600 capitalize dark:text-neutral-400">
-                        {tComponents(`transactionsTable.${tx.type}`)} -{" "}
+                      <p className="text-xs text-gray-600 dark:text-neutral-400">
                         {tx.date}
                       </p>
                     </div>
@@ -110,50 +84,67 @@ export default function TransactionsTable({ transactions }: Props) {
                       )}
                     </div>
                   </div>
-
                   <Disclosure.Panel>
-                    <div className="mt-1 ml-9 text-xs text-gray-600 dark:text-neutral-400">
-                      {tx.description && <p>{tx.description}</p>}
-                      {tx.totalFees && (
-                        <p>
-                          {tComponents("transactionsTable.fee")}: {tx.totalFees}{" "}
-                          {tCommon("sats", { count: tx.totalFees })}
-                        </p>
+                    <div className="text-xs text-gray-600 dark:text-neutral-400">
+                      {(tx.description || tx.boostagram) && (
+                        <div className="my-2">
+                          {tx.description && <p>{tx.description}</p>}
+                          {tx.boostagram && (
+                            <ul>
+                              <li>
+                                {tComponents(
+                                  "transactionsTable.boostagram.sender"
+                                )}
+                                : {tx.boostagram.sender_name}
+                              </li>
+                              <li>
+                                {tComponents(
+                                  "transactionsTable.boostagram.message"
+                                )}
+                                : {tx.boostagram.message}
+                              </li>
+                              <li>
+                                {tComponents(
+                                  "transactionsTable.boostagram.app"
+                                )}
+                                : {tx.boostagram.app_name}
+                              </li>
+                              <li>
+                                {tComponents(
+                                  "transactionsTable.boostagram.podcast"
+                                )}
+                                : {tx.boostagram.podcast}
+                              </li>
+                            </ul>
+                          )}
+                        </div>
                       )}
-                      {tx.preimage && (
-                        <p className="truncate">
-                          {tComponents("transactionsTable.preimage")}:{" "}
-                          {tx.preimage}
-                        </p>
-                      )}
-                      {tx.location && (
-                        <a href={tx.location} target="_blank" rel="noreferrer">
-                          {tx.location}
-                        </a>
-                      )}
-                      {tx.boostagram && (
-                        <ul>
-                          <li>
-                            {tComponents("transactionsTable.boostagram.sender")}
-                            : {tx.boostagram.sender_name}
-                          </li>
-                          <li>
-                            {tComponents(
-                              "transactionsTable.boostagram.message"
-                            )}
-                            : {tx.boostagram.message}
-                          </li>
-                          <li>
-                            {tComponents("transactionsTable.boostagram.app")}:{" "}
-                            {tx.boostagram.app_name}
-                          </li>
-                          <li>
-                            {tComponents(
-                              "transactionsTable.boostagram.podcast"
-                            )}
-                            : {tx.boostagram.podcast}
-                          </li>
-                        </ul>
+                      {(tx.totalFees !== undefined || tx.location) && (
+                        <div className="my-2 flow-root">
+                          {tx.totalFees !== undefined && (
+                            <p className="float-left">
+                              <span className="font-bold">
+                                {tComponents("transactionsTable.fee")}
+                              </span>
+                              <br />
+                              {tx.totalFees}{" "}
+                              {tCommon("sats", { count: tx.totalFees })}
+                            </p>
+                          )}
+                          {tx.location && (
+                            <a
+                              className="float-right"
+                              href={tx.location}
+                              target="_blank"
+                              rel="noreferrer noopener"
+                            >
+                              <Button
+                                primary
+                                label={tComponents("Open website")}
+                              />
+                            </a>
+                          )}
+                        </div>
                       )}
                     </div>
                   </Disclosure.Panel>
