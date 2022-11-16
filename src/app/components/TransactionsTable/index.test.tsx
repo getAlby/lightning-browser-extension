@@ -113,6 +113,7 @@ describe("TransactionsTable", () => {
       user.click(disclosureButton);
     });
 
+    expect(await screen.findByText("0 sats")).toBeInTheDocument();
     expect(await screen.findByText(/Open website/)).toBeInTheDocument();
   });
 

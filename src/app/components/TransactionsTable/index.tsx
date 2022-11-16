@@ -119,7 +119,7 @@ export default function TransactionsTable({ transactions }: Props) {
                           )}
                         </div>
                       )}
-                      {(tx.totalFees != undefined || tx.location) && (
+                      {(tx.totalFees !== undefined || tx.location) && (
                         <div className="my-2 flex items-center justify-between">
                           {tx.totalFees != undefined && (
                             <p className="flex-none">
