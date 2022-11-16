@@ -1,10 +1,6 @@
 import { CaretRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useTranslation } from "react-i18next";
 import { useSettings } from "~/app/context/SettingsContext";
-import {
-  getFormattedSats,
-  getFormattedNumber,
-} from "~/common/utils/currencyConvert";
 import { Publisher } from "~/types";
 
 import Badge from "../Badge";
@@ -22,7 +18,7 @@ export default function PublishersTable({
   publishers,
   navigateToPublisher,
 }: Props) {
-  const { settings } = useSettings();
+  const { getFormattedSats, getFormattedNumber } = useSettings();
   const { t: tComponents } = useTranslation("components", {
     keyPrefix: "publishers_table",
   });
@@ -70,10 +66,7 @@ export default function PublishersTable({
                       {tComponents("payments")}{" "}
                       {publisher.paymentsAmount > 0 && (
                         <span>
-                          {getFormattedSats({
-                            amount: publisher.paymentsAmount,
-                            locale: settings.locale,
-                          })}
+                          {getFormattedSats(publisher.paymentsAmount)}
                         </span>
                       )}
                     </div>
@@ -84,15 +77,8 @@ export default function PublishersTable({
                 {publisher.totalBudget > 0 && (
                   <div className="ml-40">
                     <p className="text-lg text-gray-500 mb-0 dark:text-neutral-400">
-                      {getFormattedNumber({
-                        amount: publisher.usedBudget,
-                        locale: settings.locale,
-                      })}{" "}
-                      /{" "}
-                      {getFormattedNumber({
-                        amount: publisher.totalBudget,
-                        locale: settings.locale,
-                      })}{" "}
+                      {getFormattedNumber(publisher.usedBudget)} /{" "}
+                      {getFormattedNumber(publisher.totalBudget)}{" "}
                       {tCommon("sats", { count: publisher.usedBudget })}{" "}
                       {tComponents("used")}
                     </p>

@@ -5,7 +5,11 @@ import { toast } from "react-toastify";
 import { getTheme } from "~/app/utils";
 import { CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
-import { getFormattedFiat as getFormattedFiatUtil } from "~/common/utils/currencyConvert";
+import {
+  getFormattedFiat as getFormattedFiatUtil,
+  getFormattedSats as getFormattedSatsUtil,
+  getFormattedNumber as getFormattedNumberUtil,
+} from "~/common/utils/currencyConvert";
 import { DEFAULT_SETTINGS } from "~/extension/background-script/state";
 import type { SettingsStorage } from "~/types";
 
@@ -14,6 +18,8 @@ interface SettingsContextType {
   updateSetting: (setting: Setting) => void;
   isLoading: boolean;
   getFormattedFiat: (amount: number | string) => Promise<string>;
+  getFormattedSats: (amount: number | string) => string;
+  getFormattedNumber: (amount: number | string) => string;
 }
 
 type Setting = Partial<SettingsStorage>;
@@ -93,6 +99,14 @@ export const SettingsProvider = ({
     }
   };
 
+  const getFormattedSats = (amount: number | string) => {
+    return getFormattedSatsUtil({ amount, locale: settings.locale });
+  };
+
+  const getFormattedNumber = (amount: number | string) => {
+    return getFormattedNumberUtil({ amount, locale: settings.locale });
+  };
+
   // update locale on every change
   useEffect(() => {
     i18n.changeLanguage(settings.locale);
@@ -111,6 +125,8 @@ export const SettingsProvider = ({
 
   const value = {
     getFormattedFiat,
+    getFormattedSats,
+    getFormattedNumber,
     settings,
     updateSetting,
     isLoading,
