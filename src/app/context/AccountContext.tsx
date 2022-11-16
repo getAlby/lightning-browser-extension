@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
-import { getFormattedSats } from "~/common/utils/currencyConvert";
 import type { AccountInfo } from "~/types";
 
 interface AccountContextType {
@@ -45,6 +44,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     isLoading: isLoadingSettings,
     settings,
     getFormattedFiat,
+    getFormattedSats,
   } = useSettings();
 
   const [account, setAccount] = useState<AccountContextType["account"]>(null);
@@ -82,10 +82,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   );
 
   const updateSatValue = (amount: number) => {
-    const sats = getFormattedSats({
-      amount,
-      locale: settings.locale,
-    });
+    const sats = getFormattedSats(amount);
     setSatBalance(sats);
   };
 

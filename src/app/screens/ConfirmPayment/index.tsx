@@ -17,13 +17,13 @@ import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-import { getFormattedSats } from "~/common/utils/currencyConvert";
 
 function ConfirmPayment() {
   const {
     isLoading: isLoadingSettings,
     settings,
     getFormattedFiat,
+    getFormattedSats,
   } = useSettings();
 
   const showFiat = !isLoadingSettings && settings.showFiat;
@@ -49,10 +49,7 @@ function ConfirmPayment() {
   const [fiatAmount, setFiatAmount] = useState("");
   const [fiatBudgetAmount, setFiatBudgetAmount] = useState("");
 
-  const formattedInvoiceSats = getFormattedSats({
-    amount: invoice.satoshis || 0,
-    locale: settings.locale,
-  });
+  const formattedInvoiceSats = getFormattedSats(invoice.satoshis || 0);
 
   useEffect(() => {
     (async () => {

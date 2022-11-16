@@ -15,7 +15,6 @@ import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import { getFormattedSats } from "~/common/utils/currencyConvert";
 import type { LNURLWithdrawServiceResponse } from "~/types";
 
 function LNURLWithdraw() {
@@ -28,6 +27,7 @@ function LNURLWithdraw() {
     isLoading: isLoadingSettings,
     settings,
     getFormattedFiat,
+    getFormattedSats,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
@@ -72,10 +72,9 @@ function LNURLWithdraw() {
       if (response.data.status.toUpperCase() === "OK") {
         setSuccessMessage(
           t("success", {
-            amount: `${getFormattedSats({
-              amount: valueSat,
-              locale: settings.locale,
-            })} ${showFiat ? `(${fiatValue})` : ``}`,
+            amount: `${getFormattedSats(valueSat)} ${
+              showFiat ? `(${fiatValue})` : ``
+            }`,
             sender: origin ? origin.name : details.domain,
           })
         );
@@ -103,10 +102,7 @@ function LNURLWithdraw() {
         <>
           <ContentMessage
             heading={t("content_message.heading")}
-            content={getFormattedSats({
-              amount: Math.floor(minWithdrawable / 1000),
-              locale: settings.locale,
-            })}
+            content={getFormattedSats(Math.floor(minWithdrawable / 1000))}
           />
 
           {errorMessage && <p className="mt-1 text-red-500">{errorMessage}</p>}

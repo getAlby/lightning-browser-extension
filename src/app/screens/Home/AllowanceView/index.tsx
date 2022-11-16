@@ -13,7 +13,6 @@ import { Trans, useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
-import { getFormattedNumber } from "~/common/utils/currencyConvert";
 import type { Allowance, Transaction, Battery } from "~/types";
 
 dayjs.extend(relativeTime);
@@ -31,6 +30,7 @@ const AllowanceView: FC<Props> = (props) => {
     isLoading: isLoadingSettings,
     settings,
     getFormattedFiat,
+    getFormattedNumber,
   } = useSettings();
 
   const [payments, setPayments] = useState<Transaction[] | null>(null);
@@ -114,13 +114,9 @@ const AllowanceView: FC<Props> = (props) => {
             </dt>
             <dd className="flex items-center mb-0 text-sm font-medium dark:text-neutral-400">
               {+props.allowance.totalBudget > 0
-                ? `${getFormattedNumber({
-                    amount: props.allowance.usedBudget,
-                    locale: settings.locale,
-                  })} / ${getFormattedNumber({
-                    amount: props.allowance.totalBudget,
-                    locale: settings.locale,
-                  })} `
+                ? `${getFormattedNumber(
+                    props.allowance.usedBudget
+                  )} / ${getFormattedNumber(props.allowance.totalBudget)} `
                 : "0 / 0 "}
               {t("allowance_view.sats_used")}
               <div className="ml-3 w-24">

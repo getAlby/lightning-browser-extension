@@ -19,7 +19,6 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import lnurl from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-import { getFormattedSats } from "~/common/utils/currencyConvert";
 import type {
   LNURLError,
   LNURLPaymentInfo,
@@ -43,6 +42,7 @@ function LNURLPay() {
     isLoading: isLoadingSettings,
     settings,
     getFormattedFiat,
+    getFormattedSats,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
@@ -312,10 +312,7 @@ function LNURLPay() {
           <ResultCard
             isSuccess
             message={tCommon("success_message", {
-              amount: getFormattedSats({
-                amount: valueSat,
-                locale: settings.locale,
-              }),
+              amount: getFormattedSats(valueSat),
               fiatAmount: showFiat ? ` (${fiatValue})` : ``,
               destination: navState.origin?.name || getRecipient(),
             })}
@@ -375,12 +372,9 @@ function LNURLPay() {
                             <>
                               <Dt>{t("amount.label")}</Dt>
                               <Dd>
-                                {getFormattedSats({
-                                  amount: Math.floor(
-                                    +details.minSendable / 1000
-                                  ),
-                                  locale: settings.locale,
-                                })}
+                                {getFormattedSats(
+                                  Math.floor(+details.minSendable / 1000)
+                                )}
                               </Dd>
                             </>
                           )}

@@ -9,10 +9,9 @@ import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
-import { getFormattedSats } from "~/common/utils/currencyConvert";
 
 export default function TestConnection() {
-  const { settings } = useSettings();
+  const { getFormattedSats } = useSettings();
   const auth = useAccount();
   const { getAccounts } = useAccounts();
 
@@ -122,10 +121,7 @@ export default function TestConnection() {
                     alias={`${accountInfo.name} - ${accountInfo.alias}`}
                     satoshis={
                       typeof accountInfo.balance === "number"
-                        ? getFormattedSats({
-                            amount: accountInfo.balance,
-                            locale: settings.locale,
-                          })
+                        ? getFormattedSats(accountInfo.balance)
                         : ""
                     }
                   />

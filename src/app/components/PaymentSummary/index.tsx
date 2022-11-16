@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useSettings } from "~/app/context/SettingsContext";
-import { getFormattedSats } from "~/common/utils/currencyConvert";
 
 export type Props = {
   amount: string | number;
@@ -17,13 +16,13 @@ const PaymentSummary: FC<Props> = ({
   fiatAmount,
 }) => {
   const { t: tCommon } = useTranslation("common");
-  const { settings } = useSettings();
+  const { getFormattedSats } = useSettings();
 
   return (
     <dl className="mb-0">
       <dt className="font-medium dark:text-white">{tCommon("amount")}</dt>
       <dd className="text-gray-500 dark:text-neutral-400">
-        {getFormattedSats({ amount, locale: settings.locale })}
+        {getFormattedSats(amount)}
         {!!fiatAmount && (
           <span className="text-gray-400" data-testid="fiat_amount">
             {" "}
