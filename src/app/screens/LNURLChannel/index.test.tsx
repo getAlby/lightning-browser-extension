@@ -1,16 +1,18 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
-import * as SettingsContext from "~/app/context/SettingsContext";
+import { SettingsProvider } from "~/app/context/SettingsContext";
 import type { LNURLDetails, OriginData } from "~/types";
 
 import LNURLChannel from "./index";
 
-jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
-  settings: mockSettings,
-  isLoading: false,
-  updateSetting: jest.fn(),
-  getFormattedFiat: jest.fn(),
+jest.mock("~/common/lib/api", () => {
+  const original = jest.requireActual("~/common/lib/api");
+  return {
+    ...original,
+    getSettings: jest.fn(() => Promise.resolve(mockSettings)),
+    getCurrencyRate: jest.fn(() => Promise.resolve({ rate: 11 })),
+  };
 });
 
 const mockDetails: LNURLDetails = {
@@ -61,16 +63,18 @@ describe("LNURLChannel", () => {
   test("renders via Send (popup)", async () => {
     render(
       <MemoryRouter>
-        <LNURLChannel />
+        <SettingsProvider>
+          <LNURLChannel />
+        </SettingsProvider>
       </MemoryRouter>
     );
 
-    expect(await screen.getByText("Channel Request")).toBeInTheDocument();
+    expect(await screen.findByText("Channel Request")).toBeInTheDocument();
     expect(
-      await screen.getByText("Request a channel from the node:")
+      await screen.findByText("Request a channel from the node:")
     ).toBeInTheDocument();
     expect(
-      await screen.getByText(
+      await screen.findByText(
         "0331f80652fb840239df8dc99205792bba2e559a05469915804c08420230e23c7c@74.108.13.152:9735"
       )
     ).toBeInTheDocument();
