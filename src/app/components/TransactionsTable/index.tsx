@@ -120,9 +120,9 @@ export default function TransactionsTable({ transactions }: Props) {
                         </div>
                       )}
                       {(tx.totalFees !== undefined || tx.location) && (
-                        <div className="my-2 flex items-center justify-between">
+                        <div className="my-2 flow-root">
                           {tx.totalFees !== undefined && (
-                            <p className="flex-none">
+                            <p className="float-left">
                               <span className="font-bold">
                                 {tComponents("transactionsTable.fee")}
                               </span>
@@ -133,7 +133,7 @@ export default function TransactionsTable({ transactions }: Props) {
                           )}
                           {tx.location && (
                             <a
-                              className="flex-none"
+                              className="float-right"
                               href={tx.location}
                               target="_blank"
                               rel="noreferrer noopener"
