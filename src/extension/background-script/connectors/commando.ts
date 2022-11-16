@@ -81,6 +81,7 @@ type CommandoInvoice = {
 
 const methods: Record<string, string> = {
   decode: "",
+  disconnect: "",
   connect: "",
   decodepay: "",
   feerates: "",
