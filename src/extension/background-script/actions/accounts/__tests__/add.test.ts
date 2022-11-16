@@ -17,6 +17,7 @@ jest.mock("~/common/lib/crypto", () => {
 
 const defaultMockState = {
   saveToStorage: jest.fn,
+  password: () => "123456",
   accounts: {},
 };
 
@@ -38,9 +39,6 @@ describe("add account to account-list", () => {
   });
 
   test("add first account to empty list", async () => {
-    (chrome.storage.session.get as jest.Mock).mockResolvedValue({
-      password: 123456,
-    });
     const mockState = defaultMockState;
 
     state.getState = jest.fn().mockReturnValue(mockState);

@@ -7,6 +7,9 @@ import type { CURRENCIES } from "~/common/constants";
 import state from "~/extension/background-script/state";
 import type { MessageCurrencyRateGet } from "~/types";
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+jest.mock("@vespaiach/axios-fetch-adapter", () => {});
+
 dayjs.extend(isSameOrBefore);
 
 interface CurrencyRate {

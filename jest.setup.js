@@ -13,19 +13,11 @@ if (!chrome.runtime.id) chrome.runtime.id = "history-delete";
 beforeAll(() => {
   // Enable the mocking in tests.
   server.listen();
-  const get = jest.fn();
-  const set = jest.fn();
-  global.chrome = {
-    storage: {
-      local: {
-        set,
-        get,
-      },
-      session: {
-        set,
-        get,
-      },
-    },
+
+  //https://github.com/mozilla/webextension-polyfill/issues/329
+  global.chrome.storage.session = {
+    set: jest.fn(),
+    get: jest.fn(),
   };
 });
 
