@@ -1,67 +1,67 @@
 {
   "translation": {
     "welcome": {
-      "title": "",
+      "title": "⚡Bitcoinin⚡ voima selaimessasi",
       "nav": {
-        "welcome": "",
-        "password": "",
-        "connect": "",
-        "done": ""
+        "welcome": "Tervetuloa",
+        "password": "Salasanasi",
+        "connect": "Lightning-tilisi",
+        "done": "Tehty"
       },
       "intro": {
         "send": {
-          "title": "",
-          "description": ""
+          "title": "Lähetä yhdellä napsautuksella",
+          "description": "Lightning-transaktiot tapahtuvat selaimessasi. Alt+tab tai QR-koodin skannausta ei tarvita."
         },
         "paywall": {
-          "title": "",
-          "description": ""
+          "title": "Ei enää ärsyttäviä maksumuureja",
+          "description": "Määrittele verkkosivustoille omat budjetit, jotta maksuvirrat ovat saumattomia. Ei enää ärsyttäviä maksumuureja."
         },
         "privacy": {
-          "title": "",
-          "description": ""
+          "title": "Yksityisyys ensin",
+          "description": "Käytä Lightningia todentamiseen ja yksityisyyden hallintaan."
         },
         "foss": {
-          "title": "",
-          "description": ""
+          "title": "Ilmainen ja avoin lähdekoodi",
+          "description": "Täysin avoin koodi, jonka kuka tahansa voi tarkastaa. Ei tilastoja tai jäljittimiä. Sinä hallitset."
         },
         "actions": {
-          "get_started": ""
+          "get_started": "Aloita"
         }
       },
       "set_password": {
-        "title": "",
-        "description": "",
+        "title": "Aseta lukituksen avaussalasana",
+        "description": "Lightning-tilisi tiedot on salattu turvallisesti salasanan avulla. Älä unohda tätä salasanaa! Tarvitset sitä avataksesi Alby-laajennuksen lukituksen (tässä selaimessa)",
         "choose_password": {
-          "label": ""
+          "label": "Valitse lukituksen avaamissalasana:"
         },
         "confirm_password": {
-          "label": ""
+          "label": "Vahvistetaan, että kirjoitit sen oikein:"
         },
         "errors": {
-          "enter_password": "",
-          "confirm_password": "",
-          "mismatched_password": ""
+          "enter_password": "Syötä salasana.",
+          "confirm_password": "Vahvista salasanasi.",
+          "mismatched_password": "Salasanat eivät täsmää."
         }
       },
       "test_connection": {
-        "ready": "",
-        "tutorial": "",
-        "try_tutorial": "",
-        "initializing": "",
-        "connection_error": "",
-        "review_connection_details": "",
-        "connection_taking_long": "",
-        "contact_support": "",
+        "ready": "Mahtavaa, olet valmis menemään!",
+        "tutorial": "Nyt kun olet yhdistänyt lompakkosi, haluaisitko käydä läpi opastuksen?",
+        "try_tutorial": "Kokeile sitä nyt",
+        "initializing": "Tilin alustaminen. Odota, tämä voi kestää hetken...",
+        "connection_error": "Yhteysvirhe",
+        "review_connection_details": "Ole hyvä ja tarkista yhteystietosi.",
+        "connection_taking_long": "Yhteyden muodostaminen kestää odotettua kauemmin... Ovatko tietosi oikein? Onko solmusi tavoitettavissa?",
+        "contact_support": "Jos tarvitset apua, ota yhteyttä osoitteeseen support@getalby.com",
         "actions": {
-          "delete_edit_account": ""
+          "delete_edit_account": "Poista virheellinen tili ja muokkaa uudelleen"
         }
       }
     },
     "choose_connector": {
       "title": {
-        "welcome": "",
-        "options": ""
+        "welcome": "Onko sinulla Lightning-lompakko?",
+        "options": "Lisää uusi Lightning-tili"
       },
       "description": "",
       "alby": {
