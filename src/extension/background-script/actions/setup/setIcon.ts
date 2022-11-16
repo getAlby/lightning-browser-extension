@@ -1,4 +1,5 @@
 import browser, { Runtime } from "webextension-polyfill";
+import { isManifestV3 } from "~/common/utils/mv3";
 import { MessageSetIcon } from "~/types";
 
 import state from "../../state";
@@ -45,8 +46,7 @@ const setIcon = async (icon: string, tabId: number): Promise<void> => {
   tabIcons.set(tabId, icon);
 
   const theme = state.getState().settings.theme == "dark" ? "_dark" : "";
-
-  return browser.action.setIcon({
+  const iconsParams = {
     path: {
       // it's looking relative from the "js" folder
       16: `../assets/icons/${icon}${theme}_16x16.png`,
@@ -55,7 +55,11 @@ const setIcon = async (icon: string, tabId: number): Promise<void> => {
       128: `../assets/icons/${icon}${theme}_128x128.png`,
     },
     tabId,
-  });
+  };
+
+  return isManifestV3
+    ? browser.action.setIcon(iconsParams)
+    : browser.browserAction.setIcon(iconsParams);
 };
 
 export { setIcon, setIconMessageHandler, ExtensionIcon };

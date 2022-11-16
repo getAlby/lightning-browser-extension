@@ -4,6 +4,7 @@ import browser from "webextension-polyfill";
 import createState from "zustand";
 import { CURRENCIES } from "~/common/constants";
 import { decryptData } from "~/common/lib/crypto";
+import { isManifestV3 } from "~/common/utils/mv3";
 import { Migration } from "~/extension/background-script/migrations";
 import i18n from "~/i18n/i18nConfig";
 import type { Account, Accounts, SettingsStorage } from "~/types";
@@ -11,9 +12,6 @@ import type { Account, Accounts, SettingsStorage } from "~/types";
 import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
 import Nostr from "./nostr";
-
-export const isManifestV3 =
-  browser.runtime.getManifest().manifest_version === 3;
 
 interface State {
   account: Account | null;
