@@ -81,9 +81,11 @@ type CommandoInvoice = {
 
 const methods: Record<string, string> = {
   decode: "",
+  connect: "",
   decodepay: "",
   feerates: "",
   fetchinvoices: "",
+  fundchannel: "",
   getinfo: "",
   getroute: "",
   listchannels: "",
@@ -96,6 +98,7 @@ const methods: Record<string, string> = {
   listpeers: "",
   listsendpays: "",
   listtransactions: "",
+  multifundchannel: "",
   newaddr: "",
   offer: "",
   setchannelfee: "",
