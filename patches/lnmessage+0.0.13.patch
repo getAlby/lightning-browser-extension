@@ -1,0 +1,35 @@
+diff --git a/node_modules/lnmessage/dist/crypto.js b/node_modules/lnmessage/dist/crypto.js
+index 9c21f8c..d5af1ae 100644
+--- a/node_modules/lnmessage/dist/crypto.js
++++ b/node_modules/lnmessage/dist/crypto.js
+@@ -10,7 +10,7 @@ export function hmacHash(key, input) {
+     return Buffer.from(CryptoJS.enc.Hex.stringify(words), 'hex');
+ }
+ export async function sha256(input) {
+-    const res = await window.crypto.subtle.digest('SHA-256', input);
++    const res = await crypto.subtle.digest('SHA-256', input);
+     return Buffer.from(res);
+ }
+ export function hkdf(ikm, len, salt = Buffer.alloc(0), info = Buffer.alloc(0)) {
+@@ -80,7 +80,7 @@ export function createRandomPrivateKey() {
+     let privKey;
+     do {
+         const bytes = Buffer.allocUnsafe(32);
+-        privKey = window.crypto.getRandomValues(bytes);
++        privKey = crypto.getRandomValues(bytes);
+     } while (!validPrivateKey(privKey));
+     return privKey.toString('hex');
+ }
+diff --git a/node_modules/lnmessage/dist/index.js b/node_modules/lnmessage/dist/index.js
+index 55e8475..ac1a7b7 100644
+--- a/node_modules/lnmessage/dist/index.js
++++ b/node_modules/lnmessage/dist/index.js
+@@ -342,7 +342,7 @@ class LnMessage {
+         if (!reqId) {
+             // create random id to match request with response
+             const idBytes = Buffer.allocUnsafe(8);
+-            const id = window.crypto.getRandomValues(idBytes);
++            const id = crypto.getRandomValues(idBytes);
+             reqId = id.toString('hex');
+         }
+         // write the type
