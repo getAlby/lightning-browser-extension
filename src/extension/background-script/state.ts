@@ -116,7 +116,6 @@ const state = createState<State>((set, get) => ({
     const currentAccountId = get().currentAccountId as string;
     const account = get().accounts[currentAccountId];
     const password = await get().password();
-
     if (!password) throw new Error("Password is not set");
     const config = decryptData(account.config as string, password);
 
@@ -152,7 +151,7 @@ const state = createState<State>((set, get) => ({
   },
   isUnlocked: async () => {
     const password = await await get().password();
-    return password !== null;
+    return !!password;
   },
   init: () => {
     return browser.storage.sync.get(browserStorageKeys).then((result) => {
