@@ -163,26 +163,18 @@ test.describe("Create or connect wallets", () => {
     await findByText($document, "Host");
 
     const host = "143.244.206.7";
-    const pubkey = "032e2444c5bb14c5eb2bf8ebdfd102c162609956aa995b7c7d373ca378deedb5c7";
+    const pubkey =
+      "032e2444c5bb14c5eb2bf8ebdfd102c162609956aa995b7c7d373ca378deedb5c7";
     const rune = "vrrgKshH1sPZ7wjQnCWjdEtB2PCcM48Gs05FuVPln8g9MTE=";
 
-    const lndUrlField = await getByLabelText(
-      $document,
-      "Host"
-    );
+    const lndUrlField = await getByLabelText($document, "Host");
     await lndUrlField.type(host);
 
-    const pubkeyField = await getByLabelText(
-      $document,
-      "Public key"
-    );
+    const pubkeyField = await getByLabelText($document, "Public key");
     await pubkeyField.type(pubkey);
 
-    const runeField = await getByLabelText(
-      $document,
-      "Rune"
-    );
-    await runeField.type(rune)
+    const runeField = await getByLabelText($document, "Rune");
+    await runeField.type(rune);
 
     await commonCreateWalletSuccessCheck({ page, $document });
 

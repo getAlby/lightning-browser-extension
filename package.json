@@ -28,7 +28,7 @@
     "lint:js:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
     "tsc:compile": "tsc --noEmit",
     "format": "prettier --check '**/*.(md|json)' 'src/**/*.(js|ts|jsx|tsx)'",
-    "format:fix": "prettier --loglevel silent --write '**/*.(md|json)' 'src/**/*.(js|ts|jsx|tsx)'",
+    "format:fix": "prettier --loglevel silent --write '**/*.(md|json)' '(src|tests)/**/*.(js|ts|jsx|tsx)'",
     "test:unit": "jest",
     "test:e2e": "del-cli ./puppeteer-user-data-dir && npx playwright test",
     "test": "yarn test:unit && yarn test:e2e",
