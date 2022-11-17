@@ -135,10 +135,23 @@ export type NavigationState = {
     amount?: string;
     customRecords?: Record<string, string>;
     message?: string;
+    event?: Event;
+    requestPermission: {
+      method: string;
+    };
   };
   isPrompt?: true; // only passed via Prompt.tsx
   action: string;
 };
+
+export interface MessageGenericRequest extends MessageDefault {
+  action: "request";
+  origin: OriginData;
+  args: {
+    method: string;
+    params: Record<string, unknown>;
+  };
+}
 
 export interface MessagePaymentAll extends MessageDefault {
   action: "getPayments";
@@ -177,6 +190,24 @@ export interface MessageAccountInfo extends MessageDefault {
 
 export interface MessageAccountAll extends MessageDefault {
   action: "getAccounts";
+}
+
+export interface MessagePermissionAdd extends MessageDefault {
+  args: {
+    host: string;
+    method: string;
+    enabled: boolean;
+    blocked: boolean;
+  };
+  action: "addPermission";
+}
+
+export interface MessagePermissionDelete extends MessageDefault {
+  args: {
+    host: string;
+    method: string;
+  };
+  action: "deletePermission";
 }
 
 export interface MessageBlocklistAdd extends MessageDefault {
@@ -331,7 +362,6 @@ export interface MessagePrivateKeySet extends MessageDefault {
 export interface MessageSignEvent extends MessageDefault {
   args: {
     event: Event;
-    message: string;
   };
   action: "signEvent";
 }
@@ -465,6 +495,16 @@ export interface DbPayment {
   preimage: string;
   totalAmount: number | string;
   totalFees: number;
+}
+
+export interface DbPermission {
+  id?: number;
+  createdAt: string;
+  allowanceId: number;
+  host: string;
+  method: string;
+  enabled: boolean;
+  blocked: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface

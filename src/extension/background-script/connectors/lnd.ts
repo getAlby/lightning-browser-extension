@@ -63,7 +63,7 @@ class Lnd implements Connector {
     return this.getChannelsBalance();
   }
 
-  connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse | Error> {
+  connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse> {
     const { pubkey, host } = args;
 
     return this.request<Record<string, never>>("POST", "/v1/peers", {
@@ -85,7 +85,7 @@ class Lnd implements Connector {
             data: true,
           };
         } else {
-          return new Error(e.message);
+          throw new Error(e.message);
         }
       });
   }

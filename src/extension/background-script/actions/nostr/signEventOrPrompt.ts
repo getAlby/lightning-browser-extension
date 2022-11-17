@@ -17,22 +17,23 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
     };
   }
 
-  // Set the message as the user needs to see the event details
-  message.args.message = JSON.stringify(message.args.event);
-
   try {
-    const response = await utils.openPrompt({
+    const response = await utils.openPrompt<{
+      confirm: boolean;
+    }>({
       ...message,
-      action: "confirmSignMessage",
+      action: "public/nostr/confirmSignMessage",
     });
+    if (!response.data.confirm) {
+      throw new Error("User rejected");
+    }
 
-    const signature = await state
+    const signedEvent = await state
       .getState()
       .getNostr()
       .signEvent(message.args.event);
-    response.data = signature;
 
-    return response;
+    return { data: signedEvent };
   } catch (e) {
     console.error("signEvent cancelled", e);
     if (e instanceof Error) {

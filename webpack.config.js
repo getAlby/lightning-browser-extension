@@ -24,6 +24,11 @@ if (!process.env.BITCOIN_JUNGLE_GALOY_URL) {
   process.env.BITCOIN_JUNGLE_GALOY_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
 
+// default value is set in the code where it is used
+if (!process.env.HMAC_VERIFY_HEADER_KEY) {
+  process.env.HMAC_VERIFY_HEADER_KEY = ""; // env variables are passed as string. empty strings are still falsy
+}
+
 const viewsPath = path.join(__dirname, "static", "views");
 const nodeEnv = process.env.NODE_ENV || "development";
 const destPath = path.join(__dirname, "dist", nodeEnv);
@@ -149,6 +154,7 @@ var options = {
       "NODE_ENV",
       "TARGET_BROWSER",
       "WALLET_CREATE_URL",
+      "HMAC_VERIFY_HEADER_KEY",
     ]),
     // delete previous build files
     new CleanWebpackPlugin({

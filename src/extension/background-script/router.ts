@@ -6,6 +6,7 @@ import * as ln from "./actions/ln";
 import lnurl, { auth } from "./actions/lnurl";
 import * as nostr from "./actions/nostr";
 import * as payments from "./actions/payments";
+import * as permissions from "./actions/permissions";
 import * as settings from "./actions/settings";
 import * as setup from "./actions/setup";
 import * as webln from "./actions/webln";
@@ -50,13 +51,15 @@ const routes = {
   lnurl: lnurl,
   lnurlAuth: auth,
   getCurrencyRate: cache.getCurrencyRate,
+  addPermission: permissions.add,
+  deletePermission: permissions.deletePermission,
   nostr: {
     generatePrivateKey: nostr.generatePrivateKey,
     getPrivateKey: nostr.getPrivateKey,
     setPrivateKey: nostr.setPrivateKey,
   },
 
-  // Public calls are accessible from inpage scripts
+  // Public calls that are accessible from the inpage script (through the content script)
   public: {
     webln: {
       enable: allowances.enable,
@@ -66,6 +69,7 @@ const routes = {
       signMessageOrPrompt: webln.signMessageOrPrompt,
       lnurl: webln.lnurl,
       makeInvoice: webln.makeInvoiceOrPrompt,
+      request: ln.request,
     },
     nostr: {
       getPublicKeyOrPrompt: nostr.getPublicKeyOrPrompt,
