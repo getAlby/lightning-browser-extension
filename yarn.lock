@@ -4627,15 +4627,15 @@ file-entry-cache@^6.0.1:
   dependencies:
     flat-cache "^3.0.4"
 
-filemanager-webpack-plugin@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/filemanager-webpack-plugin/-/filemanager-webpack-plugin-7.0.0.tgz#e3825e80ee32a040c59468eb8a3583d3ee97565c"
-  integrity sha512-Td7jPFke+H9IiJmM9p1u2SPG0LTD0EFQwQU3yXKfQzN2nzHkweoKnJBjrQ713V00Pjg/fOBy5dx8G2SgIAO9GA==
+filemanager-webpack-plugin@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/filemanager-webpack-plugin/-/filemanager-webpack-plugin-8.0.0.tgz#d9a6683122504a9a47ac1fb8551f241dbb8d017d"
+  integrity sha512-TYwu62wgq2O2c3K80Sfj8vEys/tP5wdgYoySHgUwWoc2hPbQY3Mq3ahcAW634JvHCTcSV7IAfRxMI3wTXRt2Vw==
   dependencies:
     "@types/archiver" "^5.3.1"
     archiver "^5.3.1"
     del "^6.1.1"
-    fast-glob "^3.2.11"
+    fast-glob "^3.2.12"
     fs-extra "^10.1.0"
     is-glob "^4.0.3"
     normalize-path "^3.0.0"
