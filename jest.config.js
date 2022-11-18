@@ -11,12 +11,6 @@ const swcConfig = {
       },
     },
     target: "es2016",
-    experimental: {
-      plugins: [["jest_workaround", {}]],
-    },
-  },
-  module: {
-    type: "commonjs",
   },
   env: {
     targets: "",

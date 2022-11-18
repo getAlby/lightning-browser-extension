@@ -3,7 +3,6 @@ import userEvent from "@testing-library/user-event";
 import lightningPayReq from "bolt11";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
-import * as SettingsContext from "~/app/context/SettingsContext";
 import type { OriginData } from "~/types";
 
 import ConfirmPayment from "./index";
@@ -38,14 +37,19 @@ jest.mock("~/app/hooks/useNavigationState", () => {
   };
 });
 
-jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
-  settings: { ...mockSettings },
-  isLoading: false,
-  updateSetting: jest.fn(),
-  getFormattedFiat: jest.fn(() => Promise.resolve("$0.01")),
-  getFormattedNumber: jest.fn(),
-  getFormattedSats: jest.fn(() => "25 sats"),
-});
+let mockGetFiatValue = jest.fn();
+let mockSettingsTmp = { ...mockSettings };
+
+jest.mock("~/app/context/SettingsContext", () => ({
+  useSettings: () => ({
+    settings: mockSettingsTmp,
+    isLoading: false,
+    updateSetting: jest.fn(),
+    getFormattedFiat: mockGetFiatValue,
+    getFormattedNumber: jest.fn(),
+    getFormattedSats: jest.fn(() => "25 sats"),
+  }),
+}));
 
 describe("ConfirmPayment", () => {
   afterEach(() => {
@@ -59,6 +63,9 @@ describe("ConfirmPayment", () => {
         paymentRequest,
       },
     };
+
+    mockSettingsTmp = { ...mockSettings };
+    mockGetFiatValue = jest.fn(() => Promise.resolve("$0.01"));
 
     await act(async () => {
       render(
@@ -84,14 +91,8 @@ describe("ConfirmPayment", () => {
       },
     };
 
-    jest.spyOn(SettingsContext, "useSettings").mockReturnValueOnce({
-      settings: { ...mockSettings, showFiat: false },
-      isLoading: false,
-      updateSetting: jest.fn(),
-      getFormattedFiat: jest.fn(() => Promise.resolve("$0.01")),
-      getFormattedNumber: jest.fn(() => "25 sats"),
-      getFormattedSats: jest.fn(),
-    });
+    mockSettingsTmp = { ...mockSettings, showFiat: false };
+    mockGetFiatValue = jest.fn(() => Promise.resolve("$0.01"));
 
     const user = userEvent.setup();
 
@@ -121,6 +122,8 @@ describe("ConfirmPayment", () => {
         paymentRequest,
       },
     };
+    mockSettingsTmp = { ...mockSettings };
+    mockGetFiatValue = jest.fn(() => Promise.resolve("$0.01"));
 
     await act(async () => {
       render(

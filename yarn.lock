@@ -6248,11 +6248,6 @@ jest@^29.3.1:
     import-local "^3.0.2"
     jest-cli "^29.3.1"
 
-jest_workaround@^0.1.5:
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/jest_workaround/-/jest_workaround-0.1.13.tgz#60841fb1fe663925c6b917f238c35cadcf05ab85"
-  integrity sha512-5L/femhV72Z+J22psp1HigXDjPAC0pIO13GNvQMer7Pl3pDaQYNiFIheMmyvlGnOg/TXKWOD8VrGxmfoDF0+bw==
-
 js-levenshtein@^1.1.6:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/js-levenshtein/-/js-levenshtein-1.1.6.tgz#c6cee58eb3550372df8deb85fad5ce66ce01d59d"
