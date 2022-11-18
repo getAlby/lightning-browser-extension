@@ -54,7 +54,7 @@
     "html5-qrcode": "^2.2.3",
     "i18next": "^21.10.0",
     "i18next-browser-languagedetector": "^7.0.1",
-    "lnmessage": "^0.0.13",
+    "lnmessage": "^0.0.14",
     "lodash.merge": "^4.6.2",
     "lodash.pick": "^4.4.0",
     "pubsub-js": "^1.9.4",
