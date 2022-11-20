@@ -5,7 +5,11 @@ import { toast } from "react-toastify";
 import { getTheme } from "~/app/utils";
 import { CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
-import { getFiatValue as getFiatValueUtil } from "~/common/utils/currencyConvert";
+import {
+  getFormattedFiat as getFormattedFiatUtil,
+  getFormattedSats as getFormattedSatsUtil,
+  getFormattedNumber as getFormattedNumberUtil,
+} from "~/common/utils/currencyConvert";
 import { DEFAULT_SETTINGS } from "~/extension/background-script/state";
 import type { SettingsStorage } from "~/types";
 
@@ -13,7 +17,9 @@ interface SettingsContextType {
   settings: SettingsStorage;
   updateSetting: (setting: Setting) => void;
   isLoading: boolean;
-  getFiatValue: (amount: number | string) => Promise<string>;
+  getFormattedFiat: (amount: number | string) => Promise<string>;
+  getFormattedSats: (amount: number | string) => string;
+  getFormattedNumber: (amount: number | string) => string;
 }
 
 type Setting = Partial<SettingsStorage>;
@@ -75,13 +81,14 @@ export const SettingsProvider = ({
     return currencyRate.current.rate;
   };
 
-  const getFiatValue = async (amount: number | string) => {
+  const getFormattedFiat = async (amount: number | string) => {
     try {
       const rate = await getCurrencyRate();
-      const value = getFiatValueUtil({
+      const value = getFormattedFiatUtil({
         amount,
         rate,
         currency: settings.currency,
+        locale: settings.locale,
       });
 
       return value;
@@ -90,6 +97,14 @@ export const SettingsProvider = ({
 
       return "??"; // show the user that something went wrong
     }
+  };
+
+  const getFormattedSats = (amount: number | string) => {
+    return getFormattedSatsUtil({ amount, locale: settings.locale });
+  };
+
+  const getFormattedNumber = (amount: number | string) => {
+    return getFormattedNumberUtil({ amount, locale: settings.locale });
   };
 
   // update locale on every change
@@ -109,7 +124,9 @@ export const SettingsProvider = ({
   }, [settings.theme]);
 
   const value = {
-    getFiatValue,
+    getFormattedFiat,
+    getFormattedSats,
+    getFormattedNumber,
     settings,
     updateSetting,
     isLoading,

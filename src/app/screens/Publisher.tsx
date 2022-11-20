@@ -22,7 +22,8 @@ function Publisher() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
+    getFormattedNumber,
   } = useSettings();
 
   const hasFetchedData = useRef(false);
@@ -50,7 +51,7 @@ function Publisher() {
 
         for (const payment of payments) {
           const totalAmountFiat = settings.showFiat
-            ? await getFiatValue(payment.totalAmount)
+            ? await getFormattedFiat(payment.totalAmount)
             : "";
           payment.totalAmountFiat = totalAmountFiat;
         }
@@ -60,7 +61,7 @@ function Publisher() {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
     }
-  }, [id, settings.showFiat, getFiatValue]);
+  }, [id, settings.showFiat, getFormattedFiat]);
 
   useEffect(() => {
     // Run once.
@@ -91,7 +92,8 @@ function Publisher() {
               </dt>
 
               <dd className="flex items-center font-bold text-xl dark:text-neutral-400">
-                {allowance.usedBudget} / {allowance.totalBudget}{" "}
+                {getFormattedNumber(allowance.usedBudget)} /{" "}
+                {getFormattedNumber(allowance.totalBudget)}{" "}
                 {t("publisher.allowance.used_budget")}
                 <div className="ml-3 w-24">
                   <Progressbar percentage={allowance.percentage} />

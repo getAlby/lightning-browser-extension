@@ -31,7 +31,7 @@ function ConfirmKeysend() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
@@ -49,18 +49,18 @@ function ConfirmKeysend() {
   useEffect(() => {
     (async () => {
       if (showFiat && amount) {
-        const res = await getFiatValue(amount);
+        const res = await getFormattedFiat(amount);
         setFiatAmount(res);
       }
     })();
-  }, [amount, showFiat, getFiatValue]);
+  }, [amount, showFiat, getFormattedFiat]);
 
   useEffect(() => {
     (async () => {
-      const res = await getFiatValue(budget);
+      const res = await getFormattedFiat(budget);
       setFiatBudgetAmount(res);
     })();
-  }, [budget, showFiat, getFiatValue]);
+  }, [budget, showFiat, getFormattedFiat]);
 
   async function confirm() {
     if (rememberMe && budget) {

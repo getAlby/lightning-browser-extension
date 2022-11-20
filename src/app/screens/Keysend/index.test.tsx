@@ -1,7 +1,7 @@
 import { render, screen, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
-import * as SettingsContext from "~/app/context/SettingsContext";
+import { SettingsProvider } from "~/app/context/SettingsContext";
 import type { OriginData } from "~/types";
 
 import Keysend from "./index";
@@ -37,20 +37,24 @@ jest.mock("~/app/hooks/useNavigationState", () => {
   };
 });
 
+jest.mock("~/common/lib/api", () => {
+  const original = jest.requireActual("~/common/lib/api");
+  return {
+    ...original,
+    getSettings: jest.fn(() => Promise.resolve(mockSettings)),
+    getCurrencyRate: jest.fn(() => Promise.resolve({ rate: 11 })),
+  };
+});
+
 describe("Keysend", () => {
   test("renders with fiat", async () => {
-    jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
-      settings: { ...mockSettings },
-      isLoading: false,
-      updateSetting: jest.fn(),
-      getFiatValue: jest.fn(() => Promise.resolve("$0.01")),
-    });
-
     await act(async () => {
       render(
-        <MemoryRouter>
-          <Keysend />
-        </MemoryRouter>
+        <SettingsProvider>
+          <MemoryRouter>
+            <Keysend />
+          </MemoryRouter>
+        </SettingsProvider>
       );
     });
 

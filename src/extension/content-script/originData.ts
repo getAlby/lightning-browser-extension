@@ -628,18 +628,6 @@ const metaDataRules: Record<string, RuleSet> = {
         (element) => element.getAttribute("href"),
       ],
     ],
-    scorer: (element) => {
-      const sizes = element.getAttribute("sizes");
-      if (sizes) {
-        const sizeMatches = sizes.match(/\d+/g);
-        if (sizeMatches) {
-          const parsed = parseInt(sizeMatches[0]);
-          if (!isNaN(parsed)) {
-            return parsed;
-          }
-        }
-      }
-    },
     processor: (iconUrl, context) =>
       context.options.forceImageHttps === true
         ? makeUrlSecure(makeUrlAbsolute(context.url, iconUrl))

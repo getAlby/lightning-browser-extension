@@ -31,7 +31,7 @@ function Receive() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
@@ -64,11 +64,11 @@ function Receive() {
   useEffect(() => {
     if (formData.amount !== "" && showFiat) {
       (async () => {
-        const res = await getFiatValue(formData.amount);
+        const res = await getFormattedFiat(formData.amount);
         setFiatAmount(res);
       })();
     }
-  }, [formData, showFiat, getFiatValue]);
+  }, [formData, showFiat, getFormattedFiat]);
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
