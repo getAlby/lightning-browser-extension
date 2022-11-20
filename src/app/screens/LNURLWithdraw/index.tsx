@@ -26,7 +26,8 @@ function LNURLWithdraw() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
+    getFormattedSats,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
@@ -45,11 +46,11 @@ function LNURLWithdraw() {
   useEffect(() => {
     if (valueSat !== "" && showFiat) {
       (async () => {
-        const res = await getFiatValue(valueSat);
+        const res = await getFormattedFiat(valueSat);
         setFiatValue(res);
       })();
     }
-  }, [valueSat, showFiat, getFiatValue]);
+  }, [valueSat, showFiat, getFormattedFiat]);
 
   async function confirm() {
     try {
@@ -71,7 +72,9 @@ function LNURLWithdraw() {
       if (response.data.status.toUpperCase() === "OK") {
         setSuccessMessage(
           t("success", {
-            amount: `${valueSat} SATS ${showFiat ? `(${fiatValue})` : ``}`,
+            amount: `${getFormattedSats(valueSat)} ${
+              showFiat ? `(${fiatValue})` : ``
+            }`,
             sender: origin ? origin.name : details.domain,
           })
         );
@@ -99,9 +102,7 @@ function LNURLWithdraw() {
         <>
           <ContentMessage
             heading={t("content_message.heading")}
-            content={`${Math.floor(minWithdrawable / 1000)} ${tCommon("sats", {
-              count: Math.floor(minWithdrawable / 1000),
-            })}`}
+            content={getFormattedSats(Math.floor(minWithdrawable / 1000))}
           />
 
           {errorMessage && <p className="mt-1 text-red-500">{errorMessage}</p>}

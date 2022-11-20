@@ -22,7 +22,7 @@ function Keysend() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
   const navState = useNavigationState();
@@ -41,11 +41,11 @@ function Keysend() {
   useEffect(() => {
     (async () => {
       if (showFiat && amount) {
-        const res = await getFiatValue(amount);
+        const res = await getFormattedFiat(amount);
         setFiatAmount(res);
       }
     })();
-  }, [amount, showFiat, getFiatValue]);
+  }, [amount, showFiat, getFormattedFiat]);
 
   async function confirm() {
     try {

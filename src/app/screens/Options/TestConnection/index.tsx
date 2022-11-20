@@ -6,12 +6,15 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
+import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
 
 export default function TestConnection() {
+  const { getFormattedSats } = useSettings();
   const auth = useAccount();
   const { getAccounts } = useAccounts();
+
   const [accountInfo, setAccountInfo] = useState<{
     alias: string;
     name: string;
@@ -118,9 +121,7 @@ export default function TestConnection() {
                     alias={`${accountInfo.name} - ${accountInfo.alias}`}
                     satoshis={
                       typeof accountInfo.balance === "number"
-                        ? `${accountInfo.balance} ${tCommon("sats", {
-                            count: accountInfo.balance,
-                          })}`
+                        ? getFormattedSats(accountInfo.balance)
                         : ""
                     }
                   />

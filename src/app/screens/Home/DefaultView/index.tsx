@@ -56,7 +56,7 @@ const DefaultView: FC<Props> = (props) => {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
   } = useSettings();
 
   const showFiat = !isLoadingSettings && settings.showFiat;
@@ -88,7 +88,7 @@ const DefaultView: FC<Props> = (props) => {
         // attach fiatAmount if enabled
         for (const payment of payments) {
           const totalAmountFiat = showFiat
-            ? await getFiatValue(payment.totalAmount)
+            ? await getFormattedFiat(payment.totalAmount)
             : "";
           payment.totalAmountFiat = totalAmountFiat;
         }
@@ -102,7 +102,7 @@ const DefaultView: FC<Props> = (props) => {
     };
 
     !payments && !isLoadingSettings && getPayments();
-  }, [isLoadingSettings, payments, getFiatValue, showFiat]);
+  }, [isLoadingSettings, payments, getFormattedFiat, showFiat]);
 
   const unblock = async () => {
     try {
@@ -152,7 +152,7 @@ const DefaultView: FC<Props> = (props) => {
 
     for (const invoice of invoices) {
       const totalAmountFiat = settings.showFiat
-        ? await getFiatValue(invoice.totalAmount)
+        ? await getFormattedFiat(invoice.totalAmount)
         : "";
       invoice.totalAmountFiat = totalAmountFiat;
     }
