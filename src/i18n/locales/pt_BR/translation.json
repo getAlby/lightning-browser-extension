@@ -498,13 +498,13 @@
       "nostr": {
         "title": "Nostr",
         "private_key": {
-          "subtitle": "Ao gerar uma chave uma nova chave será criada com base na conta atual que você usa. Certifique-se de fazer backup desta chave privada.",
+          "subtitle": "Ao gerar uma chave, ela será criada a partir da conta atual que você usa. Certifique-se de fazer backup desta chave privada.",
           "warning": "Isso excluirá sua chave privada antiga. Tem certeza de que deseja prosseguir?",
           "title": "Chave privada",
           "generate": "Gerar",
           "success": "A chave privada foi encriptada e salva com sucesso."
         },
-        "hint": "é um protocolo simples e aberto que visa criar redes sociais resistentes à censura. Os perfis na rede Nostr são chaves criptográficas. Para publicar algo, você assina com sua chave e a informação é enviada para servidores. Na Alby você pode gerenciar seu perfil e usar em diferentes serviços que suportam esse recurso."
+        "hint": "é um protocolo simples e aberto que visa criar redes sociais resistentes à censura. Os perfis na rede Nostr são chaves criptográficas. Para publicar algo, você assina com sua chave e a informação é enviada para servidores. Na Alby você pode usar e gerenciar seu perfil em diferentes aplicações que suportam esse recurso."
       }
     },
     "send": {
