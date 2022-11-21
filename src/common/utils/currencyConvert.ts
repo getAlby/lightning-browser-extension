@@ -3,7 +3,18 @@
  */
 import i18n from "~/i18n/i18nConfig";
 
-import type { CURRENCIES } from "../constants";
+import type { CURRENCIES, ACCOUNT_CURRENCIES } from "../constants";
+
+export const getFormattedCurrency = (params: {
+  amount: number | string;
+  currency: CURRENCIES | ACCOUNT_CURRENCIES;
+  locale: string;
+}) => {
+  return new Intl.NumberFormat(params.locale || "en", {
+    style: "currency",
+    currency: params.currency,
+  }).format(Number(params.amount));
+};
 
 export const getFormattedFiat = (params: {
   amount: number | string;
@@ -13,10 +24,7 @@ export const getFormattedFiat = (params: {
 }) => {
   const fiatValue = Number(params.amount) * params.rate;
 
-  return new Intl.NumberFormat(params.locale || "en", {
-    style: "currency",
-    currency: params.currency,
-  }).format(fiatValue);
+  return getFormattedCurrency({ ...params, amount: fiatValue });
 };
 
 export const getFormattedNumber = (params: {
