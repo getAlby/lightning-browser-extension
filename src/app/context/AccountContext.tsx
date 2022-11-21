@@ -54,7 +54,9 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   const [accountBalance, setAccountBalance] = useState("");
   const [fiatBalance, setFiatBalance] = useState("");
 
-  const showFiat = !isLoadingSettings && settings.showFiat && !loading;
+  const isSatsAccount = account?.currency === "BTC"; // show fiatValue only if the base currency is not already fiat
+  const showFiat =
+    !isLoadingSettings && settings.showFiat && !loading && isSatsAccount;
 
   const unlock = (password: string, callback: VoidFunction) => {
     return api.unlock(password).then((response) => {
@@ -95,14 +97,9 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     const id = options?.accountId || account?.id;
     if (!id) return;
 
-    const callback = (account: AccountInfo) => {
-      setAccount(account);
-
-      updateAccountBalance(account.balance, account.currency);
-
-      if (!isLoadingSettings && settings.showFiat) {
-        updateFiatValue(account.balance);
-      }
+    const callback = (accountRes: AccountInfo) => {
+      setAccount(accountRes);
+      updateAccountBalance(accountRes.balance, accountRes.currency);
     };
 
     const accountInfo = await api.swr.getAccountInfo(id, callback);
