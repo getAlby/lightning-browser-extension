@@ -271,7 +271,7 @@
           "failed_to_login_sms": "Kirjautuminen SMS-koodilla epäonnistui",
           "setup_failed": "Määritys epäonnistui",
           "missing_jwt": "JWT puuttuu, sisäänkirjautuminen ei onnistunut.",
-          "invalid_jwt": ""
+          "invalid_jwt": "virheellinen JWT välitetty"
         }
       },
       "btcpay": {
@@ -337,7 +337,7 @@
       },
       "allowance_view": {
         "recent_transactions": "Viimeaikaiset tapahtumat",
-        "allowance": "",
+        "allowance": "Korvaus",
         "sats_used": "sats käytetty",
         "no_transactions": "Ei vielä tapahtumia <0>{{name}}</0>:lla."
       },
@@ -436,7 +436,7 @@
         }
       },
       "show_fiat": {
-        "title": "",
+        "title": "Satista Fiatiin",
         "subtitle": "Muunna aina valituksi valuutaksi valitusta valuutasta"
       },
       "currency": {
@@ -444,7 +444,7 @@
         "subtitle": "Näytä summat lisäksi tässä valuutassa"
       },
       "exchange": {
-        "title": "",
+        "title": "Valuuttalähde",
         "subtitle": "Bitcoin-valuuttakurssien lähde"
       },
       "personal_data": {
@@ -499,7 +499,7 @@
         "title": "Odotetaan skannausta"
       },
       "input": {
-        "label": "",
+        "label": "Vastaanottaja",
         "hint": "Lasku, Lightningin osoite tai LNURL"
       }
     },
@@ -580,12 +580,12 @@
           "entertaiment": "Viihde",
           "shopping": "Ostokset",
           "miscellaneous": "Sekalaista",
-          "showcases": ""
+          "showcases": "Näyttelyt"
         }
       },
       "publisher": {
         "allowance": {
-          "title": "",
+          "title": "Korvaus",
           "used_budget": "satia käytetty"
         }
       }
@@ -596,186 +596,186 @@
         "label": "Summa (Satoshi)"
       },
       "memo": {
-        "label": ""
+        "label": "Muistio"
       },
       "errors": {
-        "amount_too_small": "",
-        "amount_too_big": ""
+        "amount_too_small": "Määrä on alle vähimmäismäärän",
+        "amount_too_big": "Määrä ylittää enimmäismäärän"
       }
     },
     "confirm_sign_message": {
-      "title": "",
-      "content": ""
+      "title": "Allekirjoita",
+      "content": "{{host}} pyytää sinua allekirjoittamaan:"
     },
     "confirm_keysend": {
-      "title": "",
-      "success": "",
+      "title": "Hyväksy maksu",
+      "success": "Maksu lähetetty! esikuva: {{preimage}}",
       "payment_summary": {
-        "description": ""
+        "description": "Lähetä maksu {{destination}}:een"
       }
     },
     "keysend": {
-      "title": "",
-      "success": "",
+      "title": "Lähetä",
+      "success": "Maksu lähetetty! esikuva: {{preimage}}",
       "receiver": {
-        "label": ""
+        "label": "Lähetä maksu tähän"
       },
       "amount": {
-        "label": ""
+        "label": "Määrä (Satoshi)"
       }
     },
     "confirm_payment": {
-      "title": "",
-      "success": "",
+      "title": "Hyväksy maksu",
+      "success": "{{amount}}:n maksu onnistui!",
       "actions": {
-        "pay_now": ""
+        "pay_now": "Maksa nyt"
       }
     },
     "confirm_request_permission": {
-      "title": "",
-      "allow": "",
-      "enable_method": "",
-      "always_allow": ""
+      "title": "Hyväksy pyyntö",
+      "allow": "Salli {{host}}:",
+      "enable_method": "{{metodi}}:n kutsu",
+      "always_allow": "Salli aina {{metodi}} {{host}}:lla"
     },
     "nostr": {
-      "title": "",
-      "allow": "",
-      "read_public_key": "",
-      "block_and_ignore": ""
+      "title": "Nostr",
+      "allow": "Salli {{host}}:",
+      "read_public_key": "Lue julkinen avaimesi",
+      "block_and_ignore": "Estä ja jätä huomiotta {{host}}"
     }
   },
   "common": {
-    "password": "",
-    "advanced": "",
-    "success": "",
-    "error": "",
-    "settings": "",
-    "websites": "",
-    "sats_one": "",
-    "sats_other": "",
-    "loading": "",
-    "amount": "",
-    "optional": "",
-    "feedback": "",
-    "copied": "",
-    "description": "",
-    "description_full": "",
-    "success_message": "",
-    "response": "",
-    "message": "",
-    "help": "",
+    "password": "Salasana",
+    "advanced": "Edistynyt",
+    "success": "Menestys",
+    "error": "Virhe",
+    "settings": "Asetukset",
+    "websites": "Verkkosivustot",
+    "sats_one": "sat",
+    "sats_other": "satia",
+    "loading": "ladataan",
+    "amount": "Summa",
+    "optional": "Valinnainen",
+    "feedback": "Palaute",
+    "copied": "Kopioitu!",
+    "description": "Kuvaus",
+    "description_full": "Täydellinen kuvaus",
+    "success_message": "{{amount}}{{{fiatAmount}} lähetetty {{destination}}:een",
+    "response": "Vastaus",
+    "message": "Viesti",
+    "help": "Apu",
     "actions": {
-      "back": "",
-      "delete": "",
-      "edit": "",
-      "next": "",
-      "open": "",
-      "cancel": "",
-      "confirm": "",
-      "continue": "",
-      "connect": "",
-      "lock": "",
-      "unlock": "",
-      "send": "",
-      "save": "",
-      "receive": "",
-      "close": "",
-      "export": "",
-      "remove": "",
-      "copy": ""
+      "back": "Takaisin",
+      "delete": "Poista",
+      "edit": "Muokkaa",
+      "next": "Seuraava",
+      "open": "Avaa",
+      "cancel": "Peru",
+      "confirm": "Vahvista",
+      "continue": "Jatka",
+      "connect": "Yhdistä",
+      "lock": "Lukitse",
+      "unlock": "Avaa lukitus",
+      "send": "Lähetä",
+      "save": "Tallenna",
+      "receive": "Vastaanota",
+      "close": "Sulje",
+      "export": "Vie",
+      "remove": "Poista",
+      "copy": "Kopioi"
     },
     "errors": {
-      "connection_failed": "",
-      "payment_failed": ""
+      "connection_failed": "Yhteyden muodostaminen epäonnistui",
+      "payment_failed": "Maksu ei onnistunut"
     }
   },
   "components": {
     "allowance_menu": {
-      "confirm_delete": "",
-      "hint": "",
+      "confirm_delete": "Haluatko varmasti poistaa tämän verkkosivuston?",
+      "hint": "Tämä nollaa voimassa olevan budgetin",
       "new_budget": {
-        "label": ""
+        "label": "Uusi budjetti"
       },
       "enable_login": {
-        "title": "",
-        "subtitle": ""
+        "title": "Ota verkkosivustoon kirjautuminen käyttöön",
+        "subtitle": "Automaattinen kirjautuminen ilman vahvistusta, kun verkkosivusto pyytää."
       },
       "edit_allowance": {
-        "title": "",
-        "screen_reader": ""
+        "title": "Muokkaa korvausta",
+        "screen_reader": "Korvausvaihtoehdot"
       }
     },
     "qrcode_scanner": {
-      "title": "",
+      "title": "Skannaa QR-koodi",
       "actions": {
-        "start_scanning": "",
-        "stop_scanning": ""
+        "start_scanning": "Aloita skannaus",
+        "stop_scanning": "Lopeta skannaus"
       },
       "errors": {
-        "allow_camera_access": ""
+        "allow_camera_access": "Salli kameran käyttöoikeus asetusruudussa."
       }
     },
     "transactionsTable": {
-      "fee": "",
-      "preimage": "",
-      "received": "",
-      "sent": "",
+      "fee": "Kustannus",
+      "preimage": "Esikuva",
+      "received": "Vastaanotettu",
+      "sent": "Lähetetty",
       "boostagram": {
-        "sender": "",
-        "message": "",
-        "app": "",
-        "podcast": ""
+        "sender": "Lähettäjä",
+        "message": "Viesti",
+        "app": "Sovellus",
+        "podcast": "Podcast"
       }
     },
     "confirm_or_cancel": {
-      "only_trusted": ""
+      "only_trusted": "Muodosta yhteys vain sellaisiin sivustoihin, joihin luotat."
     },
     "budget_control": {
       "remember": {
-        "label": "",
-        "description": ""
+        "label": "Muista ja aseta budjetti",
+        "description": "Voit asettaa saldon niin, että maksujen vahvistusta ei pyydetä ennen kuin se on käytetty kokonaan."
       },
       "budget": {
-        "label": ""
+        "label": "Budjetti"
       }
     },
     "companion_download_info": {
-      "description": "",
-      "download_here": "",
-      "using_tor": "",
-      "or": ""
+      "description": "Yrität muodostaa yhteyden Torin takana olevaan solmuun. Tätä varten sinulla on oltava joko asennettuna Alby companion -sovellus tai Tor käynnissä. (Kun olet epävarma, suosittelemme Alby companion -sovellusta.)",
+      "download_here": "Lataa Alby companion täältä!",
+      "using_tor": "klikkaa tästä jatkaaksesi, jos käytät Tor-selainta",
+      "or": "Tai:"
     },
     "toasts": {
       "connection_error": {
-        "what_you_can_do": "",
-        "double_check": "",
-        "if_ssl_errors": "",
-        "visit_guides": ""
+        "what_you_can_do": "Voit tehdä näin:",
+        "double_check": "Tarkista yhteystiedot kahdesti",
+        "if_ssl_errors": "ja jos on SSL-virheitä (esim. ERR_CERT_AUTHORITY_INVALID), valitse \"edistynyt\" ja jatka varmenteen hyväksymistä.",
+        "visit_guides": "Lue oppaita saadaksesi lisää apua"
       },
       "login_failed": {
-        "password_reset": ""
+        "password_reset": "Unohditko salasanasi? Klikkaa tästä"
       },
       "errors": {
-        "invalid_credentials": ""
+        "invalid_credentials": "Virheellinen salasana. Tarkista salasanasi ja sähköpostiosoitteesi ja yritä uudelleen."
       }
     },
     "account_menu": {
-      "screen_reader": "",
-      "title": "",
+      "screen_reader": "Vaihda pudotusvalikko",
+      "title": "Vaihda tili",
       "options": {
         "account": {
-          "add": "",
-          "manage": ""
+          "add": "Lisää uusi tili",
+          "manage": "Hallitse tilejä"
         }
       }
     },
     "publishers_table": {
-      "payments": "",
-      "used": ""
+      "payments": "maksut",
+      "used": "käytetty"
     },
     "badge": {
       "label": {
-        "active": ""
+        "active": "TOIMIVA"
       }
     }
   }

@@ -301,6 +301,39 @@
           "invalid_uri": "URI LNDHub inválida",
           "connection_failed": "Falha na conexão. A URI LNDHub está correta?"
         }
+      },
+      "commando": {
+        "description": "Conectar em um servidor Core Lightning",
+        "page": {
+          "title": "Conecte no servidor Core Lightning",
+          "instructions": "Certifique-se de conectar em um servidor Core Lightning que esteja na versão 0.12.0 ou mais recente, o plugin commando instalado e rodando e o servidor acessível na Rede Relâmpago. Crie um rune executando o comando 'lightning-cli commando-rune'."
+        },
+        "title": "Core Lightning",
+        "pubkey": {
+          "label": "Chave pública"
+        },
+        "rune": {
+          "label": "Rune"
+        },
+        "port": {
+          "label": "Porta"
+        },
+        "privKey": {
+          "label": "Chave privada local (Gerada automaticamente)"
+        },
+        "config": {
+          "label": "Dados config",
+          "placeholder": "config=https://seu-btc-pay.org/lnd-config/212121/lnd.config"
+        },
+        "proxy": {
+          "label": "Websocket proxy"
+        },
+        "host": {
+          "label": "Host"
+        },
+        "errors": {
+          "connection_failed": "Falha na conexão. O servidor Core Lightning está online e usando o plugin comando?"
+        }
       }
     },
     "home": {
@@ -465,13 +498,13 @@
       "nostr": {
         "title": "Nostr",
         "private_key": {
-          "subtitle": "Ao gerar uma chave uma nova chave será criada com base na conta atual que você usa. Certifique-se de fazer backup desta chave privada.",
+          "subtitle": "Ao gerar uma chave, ela será criada a partir da conta atual que você usa. Certifique-se de fazer backup desta chave privada.",
           "warning": "Isso excluirá sua chave privada antiga. Tem certeza de que deseja prosseguir?",
           "title": "Chave privada",
           "generate": "Gerar",
           "success": "A chave privada foi encriptada e salva com sucesso."
         },
-        "hint": "é um protocolo simples e aberto que visa criar redes sociais resistentes à censura. Os perfis na rede Nostr são chaves criptográficas. Para publicar algo, você assina com sua chave e a informação é enviada para servidores. Na Alby você pode gerenciar seu perfil e usar em diferentes serviços que suportam esse recurso."
+        "hint": "é um protocolo simples e aberto que visa criar redes sociais resistentes à censura. Os perfis na rede Nostr são chaves criptográficas. Para publicar algo, você assina com sua chave e a informação é enviada para servidores. Na Alby você pode usar e gerenciar seu perfil em diferentes aplicações que suportam esse recurso."
       }
     },
     "send": {
@@ -617,6 +650,12 @@
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "read_public_key": "Ler sua chave pública",
       "title": "Nostr"
+    },
+    "confirm_request_permission": {
+      "title": "Aprovar Solicitação",
+      "allow": "Permitir {{host}}:",
+      "enable_method": "Chamar {{method}}",
+      "always_allow": "Sempre permitir {{method}} em {{host}}"
     }
   },
   "common": {
@@ -661,7 +700,8 @@
     "message": "Mensagem",
     "help": "Ajuda",
     "response": "Resposta",
-    "success_message": "{{amount}}{{fiatAmount}} enviados para {{destination}}"
+    "success_message": "{{amount}}{{fiatAmount}} enviados para {{destination}}",
+    "advanced": "Avançado"
   },
   "components": {
     "allowance_menu": {
