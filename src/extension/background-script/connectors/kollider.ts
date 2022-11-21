@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig, Method } from "axios";
 import type { AxiosResponse } from "axios";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
+import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import HashKeySigner from "~/common/utils/signer";
 
 import Connector, {
@@ -24,13 +25,13 @@ import Connector, {
 interface Config {
   username: string;
   password: string;
-  currency: string;
+  currency: ACCOUNT_CURRENCIES;
 }
 
 interface KolliderAccount {
   account_id: string;
   balance: string;
-  currency: string;
+  currency: ACCOUNT_CURRENCIES;
   account_type: string;
 }
 
@@ -47,8 +48,8 @@ export default class Kollider implements Connector {
   refresh_token?: string;
   refresh_token_created?: number;
   noRetry?: boolean;
-  accounts: Record<string, KolliderAccount> | undefined;
-  currency: string;
+  accounts: Record<KolliderAccount["account_id"], KolliderAccount> | undefined;
+  currency: ACCOUNT_CURRENCIES;
   currentAccountId: string | null;
 
   constructor(config: Config) {
@@ -93,8 +94,8 @@ export default class Kollider implements Connector {
         incoming: boolean;
         owner: number;
         fees: FixMe;
-        currency: string;
-        target_account_currency: string;
+        currency: ACCOUNT_CURRENCIES;
+        target_account_currency: ACCOUNT_CURRENCIES;
       }[]
     >("GET", "/getuserinvoices", undefined);
 
@@ -129,15 +130,17 @@ export default class Kollider implements Connector {
   async getBalance(): Promise<GetBalanceResponse> {
     await this.loadAccounts();
     const account = await this.findAccount(this.currency);
+
     if (!account) {
       throw new Error("Account not found");
     }
 
     const balance = parseFloat(account.balance);
+
     return {
       data: {
         balance,
-        //currency: account.currency,
+        currency: account.currency,
       },
     };
   }
@@ -148,7 +151,7 @@ export default class Kollider implements Connector {
       success: boolean;
       payment_hash: string;
       uid: string;
-      currency: string;
+      currency: ACCOUNT_CURRENCIES;
       payment_request: string;
       amount: string;
       fees: string;
@@ -218,8 +221,8 @@ export default class Kollider implements Connector {
       meta: string;
       amount: string;
       rate: string;
-      currency: string;
-      target_account_currency: string;
+      currency: ACCOUNT_CURRENCIES;
+      target_account_currency: ACCOUNT_CURRENCIES;
       account_id: string;
       error: string | undefined;
       fees: string;
