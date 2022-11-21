@@ -1,11 +1,33 @@
 import ConnectorForm from "@components/ConnectorForm";
+import Select from "@components/form/Select";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import utils from "~/common/lib/utils";
+
+type Currency = {
+  value: ACCOUNT_CURRENCIES;
+  label: string;
+};
+
+const supportedCurrencies: Currency[] = [
+  {
+    value: "BTC",
+    label: "BTC (sats)",
+  },
+  {
+    value: "EUR",
+    label: "synthetic EUR",
+  },
+  {
+    value: "USD",
+    label: "synthetic USD",
+  },
+];
 
 export default function ConnectKollidier() {
   const navigate = useNavigate();
@@ -15,18 +37,20 @@ export default function ConnectKollidier() {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    currency: "EUR",
+    currency: "BTC",
   });
   const [loading, setLoading] = useState(false);
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value.trim(),
     });
   }
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLInputElement>) {
     event.preventDefault();
     setLoading(true);
     const account = {
@@ -96,14 +120,20 @@ export default function ConnectKollidier() {
         />
       </div>
       <div className="mb-6">
-        <TextField
-          id="currency"
-          label={t("currency.label")}
-          type="currency"
-          required
+        <p className="font-medium text-gray-800 dark:text-white">
+          {t("currency.label")}
+        </p>
+        <Select
+          name="currency"
           value={formData.currency}
           onChange={handleChange}
-        />
+        >
+          {supportedCurrencies.map((currency) => (
+            <option key={currency.value} value={currency.value}>
+              {currency.label}
+            </option>
+          ))}
+        </Select>
       </div>
     </ConnectorForm>
   );
