@@ -1,7 +1,7 @@
 import state from "../../state";
 
 const getPrivateKey = async () => {
-  const privateKey = state.getState().getNostr().getPrivateKey();
+  const privateKey = await state.getState().getNostr().getPrivateKey();
   return {
     data: privateKey,
   };
