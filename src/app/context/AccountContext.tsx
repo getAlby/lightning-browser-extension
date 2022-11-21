@@ -14,10 +14,11 @@ import type { AccountInfo } from "~/types";
 
 interface AccountContextType {
   account: {
-    id: string;
-    name?: string;
-    alias?: string;
-    balance?: number;
+    id: AccountInfo["id"];
+    name?: AccountInfo["name"];
+    alias?: AccountInfo["alias"];
+    balance?: AccountInfo["balance"];
+    currency?: AccountInfo["currency"];
   } | null;
   balancesDecorated: {
     fiatBalance: string;
