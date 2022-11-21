@@ -21,6 +21,7 @@ import core_ln from "/static/assets/icons/core_ln.svg";
 import eclair from "/static/assets/icons/eclair.jpg";
 import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.png";
 import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
+import kolliderLogo from "/static/assets/icons/kollider.svg";
 import lnbits from "/static/assets/icons/lnbits.png";
 import lnd from "/static/assets/icons/lnd.png";
 import lndhubBlueWallet from "/static/assets/icons/lndhub_bluewallet.png";
@@ -30,10 +31,25 @@ import raspiblitz from "/static/assets/icons/raspiblitz.png";
 import start9 from "/static/assets/icons/start9.png";
 import umbrel from "/static/assets/icons/umbrel.png";
 
+const isDevelopment = process.env.NODE_ENV === "development";
+
 const galoyPaths: { [key: string]: keyof typeof galoyUrls } = {
   bitcoinBeach: "galoy-bitcoin-beach",
   bitcoinJungle: "galoy-bitcoin-jungle",
 };
+
+const kollider = [
+  {
+    path: "kollider",
+    element: <ConnectKollider />,
+    title: i18n.t("choose_connector.kollider.title", translationI18nNamespace),
+    description: i18n.t(
+      "choose_connector.kollider.description",
+      translationI18nNamespace
+    ),
+    logo: kolliderLogo,
+  },
+];
 
 function getConnectorRoutes() {
   return [
@@ -72,19 +88,7 @@ function getConnectorRoutes() {
       description: i18n.t("translation:choose_connector.lndhub_go.description"),
       logo: lndhubGo,
     },
-    {
-      path: "kollider",
-      element: <ConnectKollider />,
-      title: i18n.t(
-        "choose_connector.kollider.title",
-        translationI18nNamespace
-      ),
-      description: i18n.t(
-        "choose_connector.kollider.description",
-        translationI18nNamespace
-      ),
-      logo: lndhubGo,
-    },
+    ...(isDevelopment ? kollider : []),
     {
       path: "lnd-hub-bluewallet",
       element: <ConnectLndHub />,
