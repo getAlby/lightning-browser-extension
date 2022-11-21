@@ -22,7 +22,7 @@ interface AccountContextType {
   } | null;
   balancesDecorated: {
     fiatBalance: string;
-    satsBalance: string;
+    accountBalance: string;
   };
   loading: boolean;
   unlock: (user: string, callback: VoidFunction) => Promise<void>;
@@ -46,12 +46,12 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     isLoading: isLoadingSettings,
     settings,
     getFormattedFiat,
-    getFormattedSats,
+    getFormattedInCurrency,
   } = useSettings();
 
   const [account, setAccount] = useState<AccountContextType["account"]>(null);
   const [loading, setLoading] = useState(true);
-  const [satsBalance, setSatBalance] = useState("");
+  const [accountBalance, setAccountBalance] = useState("");
   const [fiatBalance, setFiatBalance] = useState("");
 
   const showFiat = !isLoadingSettings && settings.showFiat && !loading;
@@ -83,9 +83,12 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     [getFormattedFiat]
   );
 
-  const updateSatValue = (amount: number) => {
-    const sats = getFormattedSats(amount);
-    setSatBalance(sats);
+  const updateAccountBalance = (
+    amount: number,
+    currency?: AccountInfo["currency"]
+  ) => {
+    const balance = getFormattedInCurrency(amount, currency);
+    setAccountBalance(balance);
   };
 
   const fetchAccountInfo = async (options?: { accountId?: string }) => {
@@ -95,7 +98,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     const callback = (account: AccountInfo) => {
       setAccount(account);
 
-      updateSatValue(account.balance);
+      updateAccountBalance(account.balance, account.currency);
 
       if (!isLoadingSettings && settings.showFiat) {
         updateFiatValue(account.balance);
@@ -104,7 +107,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
 
     const accountInfo = await api.swr.getAccountInfo(id, callback);
 
-    return { ...accountInfo, fiatBalance, satsBalance };
+    return { ...accountInfo, fiatBalance, accountBalance };
   };
 
   // Invoked only on on mount.
@@ -147,14 +150,15 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
 
   // Listen to language change
   useEffect(() => {
-    !!account?.balance && updateSatValue(account?.balance);
+    !!account?.balance &&
+      updateAccountBalance(account.balance, account.currency);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settings.locale]);
 
   const value = {
     account,
     balancesDecorated: {
-      satsBalance,
+      accountBalance,
       fiatBalance,
     },
     fetchAccountInfo,
