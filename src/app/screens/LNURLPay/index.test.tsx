@@ -12,7 +12,9 @@ jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
   settings: mockSettings,
   isLoading: false,
   updateSetting: jest.fn(),
-  getFiatValue: mockGetFiatValue,
+  getFormattedFiat: mockGetFiatValue,
+  getFormattedNumber: jest.fn(),
+  getFormattedSats: jest.fn(),
 });
 
 const mockDetails: LNURLDetails = {

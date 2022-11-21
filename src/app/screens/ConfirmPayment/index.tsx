@@ -22,9 +22,12 @@ function ConfirmPayment() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
+    getFormattedSats,
   } = useSettings();
+
   const showFiat = !isLoadingSettings && settings.showFiat;
+
   const { t } = useTranslation("translation", {
     keyPrefix: "confirm_payment",
   });
@@ -46,23 +49,25 @@ function ConfirmPayment() {
   const [fiatAmount, setFiatAmount] = useState("");
   const [fiatBudgetAmount, setFiatBudgetAmount] = useState("");
 
+  const formattedInvoiceSats = getFormattedSats(invoice.satoshis || 0);
+
   useEffect(() => {
     (async () => {
       if (showFiat && invoice.satoshis) {
-        const res = await getFiatValue(invoice.satoshis);
+        const res = await getFormattedFiat(invoice.satoshis);
         setFiatAmount(res);
       }
     })();
-  }, [invoice.satoshis, showFiat, getFiatValue]);
+  }, [invoice.satoshis, showFiat, getFormattedFiat]);
 
   useEffect(() => {
     (async () => {
       if (showFiat && budget) {
-        const res = await getFiatValue(budget);
+        const res = await getFormattedFiat(budget);
         setFiatBudgetAmount(res);
       }
     })();
-  }, [budget, showFiat, getFiatValue]);
+  }, [budget, showFiat, getFormattedFiat]);
 
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -84,11 +89,12 @@ function ConfirmPayment() {
       );
       auth.fetchAccountInfo(); // Update balance.
       msg.reply(response);
+
       setSuccessMessage(
         t("success", {
-          amount: `${invoice.satoshis} ${tCommon("sats", {
-            count: invoice.satoshis as number,
-          })}${showFiat ? ` (${fiatAmount})` : ``}`,
+          amount: `${formattedInvoiceSats} ${
+            showFiat ? ` (${fiatAmount})` : ``
+          }`,
         })
       );
     } catch (e) {
@@ -143,7 +149,7 @@ function ConfirmPayment() {
             <div className="my-4">
               <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
                 <PaymentSummary
-                  amount={invoice.satoshis}
+                  amount={invoice.satoshis || "0"} // how come that sathoshis can be undefined, bolt11?
                   fiatAmount={fiatAmount}
                   description={invoice.tagsObject.description}
                 />
@@ -182,9 +188,7 @@ function ConfirmPayment() {
               !navState.origin
                 ? successMessage
                 : tCommon("success_message", {
-                    amount: `${invoice.satoshis} ${tCommon("sats", {
-                      count: invoice.satoshis as number,
-                    })}`,
+                    amount: formattedInvoiceSats,
                     fiatAmount: showFiat ? ` (${fiatAmount})` : ``,
                     destination: navState.origin.name,
                   })

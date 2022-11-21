@@ -1,8 +1,9 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
+import { useSettings } from "~/app/context/SettingsContext";
 
 export type Props = {
-  amount: string | React.ReactNode;
+  amount: string | number;
   amountAlt?: string;
   description?: string | React.ReactNode;
   fiatAmount: string;
@@ -15,11 +16,13 @@ const PaymentSummary: FC<Props> = ({
   fiatAmount,
 }) => {
   const { t: tCommon } = useTranslation("common");
+  const { getFormattedSats } = useSettings();
+
   return (
     <dl className="mb-0">
       <dt className="font-medium dark:text-white">{tCommon("amount")}</dt>
       <dd className="text-gray-500 dark:text-neutral-400">
-        {amount} {tCommon("sats", { count: amount as number })}
+        {getFormattedSats(amount)}
         {!!fiatAmount && (
           <span className="text-gray-400" data-testid="fiat_amount">
             {" "}

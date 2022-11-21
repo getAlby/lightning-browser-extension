@@ -90,6 +90,17 @@ export default class WebLNProvider {
     throw new Error("Alby does not support `verifyMessage`");
   }
 
+  request(method: string, params: Record<string, unknown>) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling request");
+    }
+
+    return this.execute("request", {
+      method,
+      params,
+    });
+  }
+
   // NOTE: new call `action`s must be specified also in the content script
   execute(
     action: string,

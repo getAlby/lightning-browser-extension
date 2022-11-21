@@ -41,7 +41,8 @@ function LNURLPay() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
+    getFormattedSats,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
@@ -67,12 +68,12 @@ function LNURLPay() {
 
   useEffect(() => {
     const getFiat = async () => {
-      const res = await getFiatValue(valueSat);
+      const res = await getFormattedFiat(valueSat);
       setFiatValue(res);
     };
 
     getFiat();
-  }, [valueSat, showFiat, getFiatValue]);
+  }, [valueSat, showFiat, getFormattedFiat]);
 
   useEffect(() => {
     !!settings.userName && setUserName(settings.userName);
@@ -311,9 +312,7 @@ function LNURLPay() {
           <ResultCard
             isSuccess
             message={tCommon("success_message", {
-              amount: `${valueSat} ${tCommon("sats", {
-                count: parseInt(valueSat),
-              })}`,
+              amount: getFormattedSats(valueSat),
               fiatAmount: showFiat ? ` (${fiatValue})` : ``,
               destination: navState.origin?.name || getRecipient(),
             })}
@@ -372,11 +371,11 @@ function LNURLPay() {
                           {details.minSendable === details.maxSendable && (
                             <>
                               <Dt>{t("amount.label")}</Dt>
-                              <Dd>{`${Math.floor(
-                                +details.minSendable / 1000
-                              )} ${tCommon("sats", {
-                                count: Math.floor(+details.minSendable / 1000),
-                              })}`}</Dd>
+                              <Dd>
+                                {getFormattedSats(
+                                  Math.floor(+details.minSendable / 1000)
+                                )}
+                              </Dd>
                             </>
                           )}
                         </>

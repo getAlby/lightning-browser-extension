@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
-import { getSatValue } from "~/common/utils/currencyConvert";
 import type { AccountInfo } from "~/types";
 
 interface AccountContextType {
@@ -44,7 +43,8 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
+    getFormattedSats,
   } = useSettings();
 
   const [account, setAccount] = useState<AccountContextType["account"]>(null);
@@ -75,20 +75,25 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
 
   const updateFiatValue = useCallback(
     async (balance: string | number) => {
-      const fiat = await getFiatValue(balance);
+      const fiat = await getFormattedFiat(balance);
       setFiatBalance(fiat);
     },
-    [getFiatValue]
+    [getFormattedFiat]
   );
+
+  const updateSatValue = (amount: number) => {
+    const sats = getFormattedSats(amount);
+    setSatBalance(sats);
+  };
 
   const fetchAccountInfo = async (options?: { accountId?: string }) => {
     const id = options?.accountId || account?.id;
     if (!id) return;
 
-    const callback = async (account: AccountInfo) => {
+    const callback = (account: AccountInfo) => {
       setAccount(account);
-      const sats = await getSatValue(account.balance);
-      setSatBalance(sats);
+
+      updateSatValue(account.balance);
 
       if (!isLoadingSettings && settings.showFiat) {
         updateFiatValue(account.balance);
@@ -137,6 +142,12 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
       setFiatBalance("");
     }
   }, [showFiat, account?.balance, updateFiatValue]);
+
+  // Listen to language change
+  useEffect(() => {
+    !!account?.balance && updateSatValue(account?.balance);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [settings.locale]);
 
   const value = {
     account,

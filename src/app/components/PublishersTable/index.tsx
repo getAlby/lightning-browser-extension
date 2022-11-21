@@ -1,5 +1,6 @@
 import { CaretRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useTranslation } from "react-i18next";
+import { useSettings } from "~/app/context/SettingsContext";
 import { Publisher } from "~/types";
 
 import Badge from "../Badge";
@@ -17,6 +18,7 @@ export default function PublishersTable({
   publishers,
   navigateToPublisher,
 }: Props) {
+  const { getFormattedSats, getFormattedNumber } = useSettings();
   const { t: tComponents } = useTranslation("components", {
     keyPrefix: "publishers_table",
   });
@@ -64,9 +66,7 @@ export default function PublishersTable({
                       {tComponents("payments")}{" "}
                       {publisher.paymentsAmount > 0 && (
                         <span>
-                          ({publisher.paymentsAmount}{" "}
-                          {tCommon("sats", { count: publisher.paymentsAmount })}
-                          )
+                          {getFormattedSats(publisher.paymentsAmount)}
                         </span>
                       )}
                     </div>
@@ -77,7 +77,8 @@ export default function PublishersTable({
                 {publisher.totalBudget > 0 && (
                   <div className="ml-40">
                     <p className="text-lg text-gray-500 mb-0 dark:text-neutral-400">
-                      {publisher.usedBudget} / {publisher.totalBudget}{" "}
+                      {getFormattedNumber(publisher.usedBudget)} /{" "}
+                      {getFormattedNumber(publisher.totalBudget)}{" "}
                       {tCommon("sats", { count: publisher.usedBudget })}{" "}
                       {tComponents("used")}
                     </p>

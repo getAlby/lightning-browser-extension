@@ -29,7 +29,8 @@ const AllowanceView: FC<Props> = (props) => {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
+    getFormattedNumber,
   } = useSettings();
 
   const [payments, setPayments] = useState<Transaction[] | null>(null);
@@ -59,7 +60,7 @@ const AllowanceView: FC<Props> = (props) => {
         // attach fiatAmount if enabled
         for (const payment of payments) {
           const totalAmountFiat = showFiat
-            ? await getFiatValue(payment.totalAmount)
+            ? await getFormattedFiat(payment.totalAmount)
             : "";
           payment.totalAmountFiat = totalAmountFiat;
         }
@@ -74,7 +75,13 @@ const AllowanceView: FC<Props> = (props) => {
     };
 
     !payments && !isLoadingSettings && getPayments();
-  }, [props.allowance, isLoadingSettings, payments, getFiatValue, showFiat]);
+  }, [
+    props.allowance,
+    isLoadingSettings,
+    payments,
+    getFormattedFiat,
+    showFiat,
+  ]);
 
   return (
     <div className="overflow-y-auto no-scrollbar h-full">
@@ -107,7 +114,9 @@ const AllowanceView: FC<Props> = (props) => {
             </dt>
             <dd className="flex items-center mb-0 text-sm font-medium dark:text-neutral-400">
               {+props.allowance.totalBudget > 0
-                ? `${props.allowance.usedBudget} / ${props.allowance.totalBudget} `
+                ? `${getFormattedNumber(
+                    props.allowance.usedBudget
+                  )} / ${getFormattedNumber(props.allowance.totalBudget)} `
                 : "0 / 0 "}
               {t("allowance_view.sats_used")}
               <div className="ml-3 w-24">
