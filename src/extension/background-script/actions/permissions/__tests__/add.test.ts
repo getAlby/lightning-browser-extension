@@ -45,7 +45,7 @@ describe("add permission", () => {
       },
       args: {
         host: stackerNews.host,
-        method: "listinvoices",
+        method: "signMessage",
         enabled: true,
         blocked: false,
       },
@@ -61,7 +61,7 @@ describe("add permission", () => {
         allowanceId: 3,
         createdAt: "1487076708000",
         host: "stacker.news",
-        method: "listinvoices",
+        method: "signMessage",
         blocked: false,
         enabled: true,
       },
