@@ -194,10 +194,10 @@ export interface MessageAccountAll extends MessageDefault {
 
 export interface MessagePermissionAdd extends MessageDefault {
   args: {
-    host: string;
-    method: string;
-    enabled: boolean;
-    blocked: boolean;
+    host: DbPermission["host"];
+    method: DbPermission["method"];
+    enabled: DbPermission["enabled"];
+    blocked: DbPermission["blocked"];
   };
   action: "addPermission";
 }
@@ -497,19 +497,18 @@ export interface DbPayment {
   totalFees: number;
 }
 
+export interface Payment extends Omit<DbPayment, "id"> {
+  id: number;
+}
+
 export interface DbPermission {
   id?: number;
   createdAt: string;
   allowanceId: number;
   host: string;
-  method: string;
+  method: "signMessage";
   enabled: boolean;
   blocked: boolean;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface Payment extends Omit<DbPayment, "id"> {
-  id: number;
 }
 
 export interface PaymentResponse

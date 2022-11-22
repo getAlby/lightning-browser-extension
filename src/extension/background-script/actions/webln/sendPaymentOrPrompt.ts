@@ -6,6 +6,8 @@ import db from "../../db";
 import sendPayment from "../ln/sendPayment";
 
 const sendPaymentOrPrompt = async (message: Message) => {
+  console.log("sendPaymentOrPrompt");
+
   if (!("host" in message.origin)) return;
 
   const paymentRequest = message.args.paymentRequest;
@@ -38,6 +40,8 @@ async function checkAllowance(host: string, amount: number) {
 }
 
 async function sendPaymentWithAllowance(message: Message) {
+  console.log("sendPaymentWithAllowance");
+
   try {
     const response = await sendPayment(message);
     return response;
