@@ -50,8 +50,10 @@
   ],
   "__chrome__host_permissions": ["*://*/*"],
 
-  "__firefox|opera__content_security_policy": "script-src 'self'; object-src 'self'",
-  "__chrome__content_security_policy.extension_pages": "script-src 'self'; object-src 'self'",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "__chrome__content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
 
   "__chrome|firefox__author": "Alby",
   "__opera__developer": {
