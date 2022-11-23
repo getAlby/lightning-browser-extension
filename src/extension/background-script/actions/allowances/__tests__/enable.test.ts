@@ -59,7 +59,7 @@ describe("enable allowance", () => {
     const message: MessageAllowanceEnable = {
       application: "LBE",
       prompt: true,
-      action: "enableAllowance",
+      action: "public/webln/enable",
       origin: {
         location: "test",
         domain: "",
@@ -95,7 +95,7 @@ describe("enable allowance", () => {
     const message: MessageAllowanceEnable = {
       application: "LBE",
       prompt: true,
-      action: "enableAllowance",
+      action: "public/webln/enable",
       origin: {
         location: "test",
         domain: "",

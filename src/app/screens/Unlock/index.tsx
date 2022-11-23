@@ -43,7 +43,16 @@ function Unlock() {
   function unlock() {
     auth
       .unlock(password, () => {
-        navigate(from, { replace: true });
+        console.log("FROM", from);
+
+        if (from !== "/") {
+          console.log("FROM JA");
+          navigate(from, { replace: true });
+        } else {
+          //  unlock was triggered on it's own there's no from (i.e. nostr action)
+          console.log("FROM NEIn");
+          window.close();
+        }
       })
       .catch((e) => {
         setError(e.message);

@@ -278,7 +278,7 @@ export interface MessageAllowanceEnable extends MessageDefault {
   args: {
     host: Allowance["host"];
   };
-  action: "enableAllowance";
+  action: "public/webln/enable";
 }
 
 export interface MessageAllowanceDelete extends MessageDefault {
