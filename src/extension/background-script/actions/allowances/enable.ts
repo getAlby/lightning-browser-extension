@@ -8,28 +8,40 @@ import { setIcon, ExtensionIcon } from "../setup/setIcon";
 
 const enable = async (
   message: MessageAllowanceEnable,
-  sender: Runtime.MessageSender
+  sender?: Runtime.MessageSender
 ) => {
+  console.log("INSIDE enbale <---- message: ", message);
   const isUnlocked = state.getState().isUnlocked();
   const host = message.origin.host || message.args.host;
   const allowance = await db.allowances
     .where("host")
     .equalsIgnoreCase(host)
     .first();
+  console.log("enable -> isUnlocked: ", isUnlocked);
+  console.log("enable -> allowance: ", allowance);
 
   if (isUnlocked && allowance && allowance.enabled) {
+    console.log("enable -> no prompt needed");
+
     return {
       data: { enabled: true },
     };
   } else {
+    console.log("enable -> prompt needed");
+
     try {
+      console.log("enable -> prompt needed - try");
       const response = await utils.openPrompt<{
         enabled: boolean;
         remember: boolean;
       }>(message);
-      if (response.data.enabled && sender.tab) {
+
+      if (response.data.enabled && sender?.tab) {
         await setIcon(ExtensionIcon.Active, sender.tab.id as number); // highlight the icon when enabled
       }
+
+      console.log("enable -> prompt needed - response: ", response);
+
       // if the response should be saved/remembered we update the allowance for the domain
       // as this returns a promise we must wait until it resolves
       if (response.data.enabled && response.data.remember) {
