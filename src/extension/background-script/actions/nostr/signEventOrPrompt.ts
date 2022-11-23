@@ -23,18 +23,15 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
     };
   }
 
-  console.log("message.args.event", message.args.event);
-
   const enableMessage: MessageAllowanceEnable = {
-    origin: message.origin, // TODO: make sure we pass the image as well
+    origin: message.origin,
     args: {
       host: message.origin.host,
     },
     action: "public/webln/enable",
   };
 
-  const foo = await enable(enableMessage);
-  console.log("after enbale <----", foo);
+  await enable(enableMessage);
 
   const dbPermissions = await db.permissions
     .where("host")
@@ -60,26 +57,6 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
         throw new Error("User rejected");
       }
 
-      // if (!allowanceId) {
-      //   console.log("mno matching allowance");
-
-      //   const dbAllowance: DbAllowance = {
-      //     createdAt: Date.now().toString(),
-      //     enabled: true,
-      //     host: message.origin.host,
-      //     imageURL: "", // need to get the image
-      //     lastPaymentAt: 0,
-      //     lnurlAuth: false,
-      //     name: "",
-      //     remainingBudget: 0,
-      //     tag: "",
-      //     totalBudget: 0,
-      //   };
-      //   allowanceId = await db.allowances.add(dbAllowance);
-      // }
-
-      console.log("matching allowance!");
-
       if (response.data.rememberPermission) {
         const matchingAllowance = await db.allowances
           .where("host")
@@ -89,8 +66,6 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
 
         if (!allowanceId) return; // type-guard only
 
-        console.log("rememberme?");
-
         const permission: DbPermission = {
           createdAt: Date.now().toString(),
           allowanceId,
@@ -99,19 +74,15 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
           enabled: true,
           blocked: false,
         };
-        console.log("rememberme!", permission);
 
         await db.permissions.add(permission);
       }
     }
 
-    console.log("SO HAZ permissions - message: ", message);
     const signedEvent = await state
       .getState()
       .getNostr()
       .signEvent(message.args.event);
-
-    console.log("SO HAZ permissions - signedEvent: ", signedEvent);
 
     return { data: signedEvent };
   } catch (e) {

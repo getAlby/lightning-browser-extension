@@ -30,7 +30,6 @@ function ConfirmSignMessage() {
   const [rememberPermission, setRememberPermission] = useState(false);
 
   // TODO: refactor: the success message and loading will not be displayed because after the reply the prompt is closed.
-  // escapedcat: is this ok because we only show these in the popup usually?
   async function confirm() {
     try {
       setLoading(true);
