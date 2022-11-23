@@ -9,6 +9,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAccount } from "~/app/context/AccountContext";
+import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 
 function Unlock() {
@@ -43,12 +44,7 @@ function Unlock() {
   function unlock() {
     auth
       .unlock(password, () => {
-        if (from !== "/") {
-          navigate(from, { replace: true });
-        } else {
-          //  unlock was triggered on it's own there's no from (i.e. nostr action)
-          window.close();
-        }
+        navigate(from, { replace: true });
       })
       .catch((e) => {
         setError(e.message);
