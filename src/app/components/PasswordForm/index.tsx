@@ -3,11 +3,12 @@ import {
   VisibleIcon,
 } from "@bitcoin-design/bitcoin-icons-react/outline";
 import TextField from "@components/form/TextField";
+import type { KeyPrefix } from "i18next";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export type Props = {
-  i18nKeyPrefix: string;
+  i18nKeyPrefix: KeyPrefix<"translation">;
   children?: React.ReactNode;
   formData: {
     password: string;
@@ -33,7 +34,9 @@ export default function PasswordForm({
   const [passwordView, setPasswordView] = useState(false);
   const [passwordConfirmationView, setPasswordConfirmationView] =
     useState(false);
-  const { t } = useTranslation("translation", { keyPrefix: i18nKeyPrefix });
+  const { t } = useTranslation("translation", {
+    keyPrefix: i18nKeyPrefix as "settings.change_password",
+  });
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     if (
@@ -103,7 +106,7 @@ export default function PasswordForm({
         />
         {errors.passwordErrorMessage && (
           <p className="mt-1 text-red-500">
-            {t("errors." + errors.passwordErrorMessage)}
+            {t(`errors.${errors.passwordErrorMessage as "enter_password"}`)}
           </p>
         )}
       </div>
@@ -135,7 +138,11 @@ export default function PasswordForm({
         />
         {errors.passwordConfirmationErrorMessage && (
           <p className="mt-1 text-red-500">
-            {t("errors." + errors.passwordConfirmationErrorMessage)}
+            {t(
+              `errors.${
+                errors.passwordConfirmationErrorMessage as "confirm_password"
+              }`
+            )}
           </p>
         )}
       </div>

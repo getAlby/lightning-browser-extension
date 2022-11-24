@@ -123,7 +123,6 @@ export default function ConnectBtcpay() {
           id="btcpay-config"
           label={t("config.label")}
           placeholder={t("config.placeholder")}
-          title={t("config.title")}
           onChange={handleChange}
           required
         />

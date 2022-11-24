@@ -119,7 +119,7 @@ function Publishers() {
         {websites.map(({ title, items }) => (
           <div className="mb-6" key={title}>
             <h4 className="mb-4 text-xl font-bold dark:text-white">
-              {t(`suggestions.list.${title}`)}
+              {t(`suggestions.list.${title as "trading"}`)}
             </h4>
 
             <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

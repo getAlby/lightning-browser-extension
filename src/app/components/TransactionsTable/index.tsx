@@ -139,7 +139,9 @@ export default function TransactionsTable({ transactions }: Props) {
                             >
                               <Button
                                 primary
-                                label={tComponents("Open website")}
+                                label={tComponents(
+                                  "transactionsTable.open_location"
+                                )}
                               />
                             </a>
                           )}

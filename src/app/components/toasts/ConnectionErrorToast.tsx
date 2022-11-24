@@ -22,7 +22,7 @@ export default function ConnectionErrorToast({
         <li>{t("double_check")}</li>
         {link && (
           <li>
-            {tCommon("open")}{" "}
+            {tCommon("actions.open")}{" "}
             <a
               href={link}
               className="underline"

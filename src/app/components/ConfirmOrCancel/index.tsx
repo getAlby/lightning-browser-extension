@@ -3,7 +3,6 @@ import type { MouseEventHandler } from "react";
 import { useTranslation } from "react-i18next";
 import Button from "~/app/components/Button";
 import i18n from "~/i18n/i18nConfig";
-import { commonI18nNamespace } from "~/i18n/namespaces";
 
 export type Props = {
   disabled?: boolean;
@@ -17,12 +16,12 @@ export type Props = {
 export default function ConfirmOrCancel({
   disabled = false,
   loading = false,
-  label = i18n.t("actions.confirm", commonI18nNamespace) as string,
+  label = i18n.t("common:actions.confirm"),
   onConfirm,
   onCancel,
   isFocused = true,
 }: Props) {
-  const { t: tCommon } = useTranslation("common");
+  const { t } = useTranslation();
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -34,7 +33,7 @@ export default function ConfirmOrCancel({
       <div className="flex flex-row justify-between">
         <Button
           onClick={onCancel}
-          label={tCommon("actions.cancel")}
+          label={t("actions.cancel", { ns: "common" })}
           halfWidth
           disabled={loading}
         />
