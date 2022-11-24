@@ -21,7 +21,7 @@ export default function ConfirmOrCancel({
   onCancel,
   isFocused = true,
 }: Props) {
-  const { t } = useTranslation();
+  const { t: tCommon } = useTranslation("common");
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function ConfirmOrCancel({
       <div className="flex flex-row justify-between">
         <Button
           onClick={onCancel}
-          label={t("actions.cancel", { ns: "common" })}
+          label={tCommon("actions.cancel")}
           halfWidth
           disabled={loading}
         />

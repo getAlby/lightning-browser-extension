@@ -13,7 +13,7 @@ export default function Badge({
   textColor,
   small,
 }: Props) {
-  const { t } = useTranslation();
+  const { t: tComponents } = useTranslation("components");
 
   return (
     <span
@@ -21,7 +21,7 @@ export default function Badge({
         !small ? "p-1.5 text-xs" : "p-1 text-xxxs"
       }`}
     >
-      {t(`badge.label.${label as "active"}`, { ns: "components" })}
+      {tComponents(`badge.label.${label as "active"}`)}
     </span>
   );
 }

@@ -11,7 +11,7 @@ import it from "~/i18n/locales/it/translation.json";
 import pt_BR from "~/i18n/locales/pt_BR/translation.json";
 import sv from "~/i18n/locales/sv/translation.json";
 
-export const defaultNS = typeof en.translation;
+export const defaultNS = "translation";
 // needs to be aligned with `supportedLocales`
 export const resources = {
   en: {

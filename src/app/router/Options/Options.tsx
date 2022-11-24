@@ -106,15 +106,15 @@ function Options() {
 }
 
 const Layout = () => {
-  const { t } = useTranslation();
+  const { t: tCommon } = useTranslation("common");
 
   return (
     <div>
       <Navbar>
-        <Navbar.Link href="/publishers">{t("common:websites")}</Navbar.Link>
-        <Navbar.Link href="/send">{t("common:actions.send")}</Navbar.Link>
-        <Navbar.Link href="/receive">{t("common:actions.receive")}</Navbar.Link>
-        <Navbar.Link href="/settings">{t("common:settings")}</Navbar.Link>
+        <Navbar.Link href="/publishers">{tCommon("websites")}</Navbar.Link>
+        <Navbar.Link href="/send">{tCommon("actions.send")}</Navbar.Link>
+        <Navbar.Link href="/receive">{tCommon("actions.receive")}</Navbar.Link>
+        <Navbar.Link href="/settings">{tCommon("settings")}</Navbar.Link>
       </Navbar>
       <ToastContainer
         autoClose={15000}
