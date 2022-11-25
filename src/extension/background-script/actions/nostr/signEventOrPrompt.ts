@@ -18,17 +18,15 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
     };
   }
 
-  const dbPermissions = await db.permissions
+  const findPermission = await db.permissions
     .where("host")
     .equalsIgnoreCase(message.origin.host)
+    .and(
+      (permission) => permission.enabled && permission.method === "signMessage"
+    )
     .toArray();
 
-  const hasPermission = dbPermissions
-    .filter((permission) => permission.enabled)
-    .map(({ method }) => method)
-    .includes("signMessage");
-
-  console.log({ hasPermission });
+  const hasPermission = findPermission.length > 0;
 
   try {
     if (!hasPermission) {
