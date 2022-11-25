@@ -68,10 +68,10 @@ class Nip04 {
   }
 
   async encrypt(peer: string, plaintext: string): Promise<string> {
-    throw new Error("Nip04 is not yet implemented.");
+    return this.provider.execute("encryptOrPrompt", { peer, plaintext });
   }
 
   async decrypt(peer: string, ciphertext: string): Promise<string> {
-    throw new Error("Nip04 is not yet implemented.");
+    return this.provider.execute("decryptOrPrompt", { peer, ciphertext });
   }
 }

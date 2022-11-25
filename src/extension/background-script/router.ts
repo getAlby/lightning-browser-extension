@@ -75,6 +75,8 @@ const routes = {
       getPublicKeyOrPrompt: nostr.getPublicKeyOrPrompt,
       signEventOrPrompt: nostr.signEventOrPrompt,
       getRelays: nostr.getRelays,
+      encryptOrPrompt: nostr.encryptOrPrompt,
+      decryptOrPrompt: nostr.decryptOrPrompt,
     },
   },
 };
