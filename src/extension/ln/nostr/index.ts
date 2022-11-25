@@ -4,12 +4,10 @@ export default class NostrProvider {
   nip04 = new Nip04(this);
 
   private async enable() {
-    return this.execute<{
+    return await this.execute<{
       enabled: boolean;
       remember: boolean;
-    }>("enable").then((result) => {
-      return result;
-    });
+    }>("enable");
   }
 
   async getPublicKey(): Promise<string> {
@@ -18,7 +16,6 @@ export default class NostrProvider {
 
   async signEvent(event: Event): Promise<Event | boolean> {
     await this.enable();
-
     return this.execute("signEventOrPrompt", { event });
   }
 
