@@ -210,6 +210,7 @@ var options = {
       analyzerMode: 'static',
       reportFilename: '../bundle-report.html',
       statsFilename: '../bundle-stats.json',
+      openAnalyzer: nodeEnv !== "development",
     }),
   ],
 };
