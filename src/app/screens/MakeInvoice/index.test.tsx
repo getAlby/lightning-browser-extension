@@ -1,7 +1,6 @@
 import { render, screen, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { AccountsProvider } from "~/app/context/AccountsContext";
-import { SettingsProvider } from "~/app/context/SettingsContext";
+import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import type { OriginData } from "~/types";
 
 import MakeInvoice from "./index";
@@ -41,21 +40,29 @@ jest.mock("~/app/hooks/useNavigationState", () => {
   };
 });
 
+jest.mock("~/app/context/SettingsContext", () => ({
+  useSettings: () => ({
+    settings: mockSettings,
+    isLoading: false,
+    updateSetting: jest.fn(),
+    getFormattedFiat: jest.fn(() => Promise.resolve("$0.01")),
+    getFormattedNumber: jest.fn(),
+    getFormattedSats: jest.fn(),
+  }),
+}));
+
 describe("MakeInvoice", () => {
   test("render", async () => {
     await act(async () => {
       render(
-        <SettingsProvider>
-          <AccountsProvider>
-            <MemoryRouter>
-              <MakeInvoice />
-            </MemoryRouter>
-          </AccountsProvider>
-        </SettingsProvider>
+        <MemoryRouter>
+          <MakeInvoice />
+        </MemoryRouter>
       );
     });
 
     expect(await screen.findByLabelText("Amount (Satoshi)")).toHaveValue(21);
     expect(await screen.findByLabelText("Memo")).toHaveValue("Test memo");
+    expect(screen.getByText(/~\$0.01/)).toBeInTheDocument();
   });
 });
