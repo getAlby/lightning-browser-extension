@@ -14,7 +14,7 @@ export default class NostrProvider {
     return await this.execute("getPublicKeyOrPrompt");
   }
 
-  async signEvent(event: Event): Promise<Event | boolean> {
+  async signEvent(event: Event): Promise<Event> {
     await this.enable();
     return this.execute("signEventOrPrompt", { event });
   }
