@@ -8,7 +8,7 @@ import { setIcon, ExtensionIcon } from "../setup/setIcon";
 
 const enable = async (
   message: MessageAllowanceEnable,
-  sender?: Runtime.MessageSender
+  sender: Runtime.MessageSender
 ) => {
   const isUnlocked = state.getState().isUnlocked();
   const host = message.origin.host || message.args.host;
@@ -28,7 +28,7 @@ const enable = async (
         remember: boolean;
       }>(message);
 
-      if (response.data.enabled && sender?.tab) {
+      if (response.data.enabled && sender.tab) {
         await setIcon(ExtensionIcon.Active, sender.tab.id as number); // highlight the icon when enabled
       }
 
