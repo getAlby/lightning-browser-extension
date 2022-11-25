@@ -1,5 +1,7 @@
 import { render, screen, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { AccountsProvider } from "~/app/context/AccountsContext";
+import { SettingsProvider } from "~/app/context/SettingsContext";
 import type { OriginData } from "~/types";
 
 import MakeInvoice from "./index";
@@ -43,9 +45,13 @@ describe("MakeInvoice", () => {
   test("render", async () => {
     await act(async () => {
       render(
-        <MemoryRouter>
-          <MakeInvoice />
-        </MemoryRouter>
+        <SettingsProvider>
+          <AccountsProvider>
+            <MemoryRouter>
+              <MakeInvoice />
+            </MemoryRouter>
+          </AccountsProvider>
+        </SettingsProvider>
       );
     });
 
