@@ -2,23 +2,12 @@ import { Event } from "./types";
 
 export default class NostrProvider {
   nip04 = new Nip04(this);
-  enabled: boolean;
 
-  constructor() {
-    this.enabled = false;
-  }
-
-  private enable() {
-    // if (this.enabled) {
-    //   return Promise.resolve({ enabled: true });
-    // }
+  private async enable() {
     return this.execute<{
       enabled: boolean;
       remember: boolean;
     }>("enable").then((result) => {
-      if (typeof result.enabled === "boolean") {
-        this.enabled = result.enabled;
-      }
       return result;
     });
   }
@@ -28,24 +17,9 @@ export default class NostrProvider {
   }
 
   async signEvent(event: Event): Promise<Event | boolean> {
-    // if (!this.enabled) {
-    //   throw new Error("Provider must be enabled before calling signEvent");
-    // }
-    console.log("signEvent 1");
+    await this.enable();
 
-    // this.enable();
-    console.log("signEvent 2");
-
-    return this.execute<{
-      enabled: boolean;
-      remember: boolean;
-    }>("enable").then((result) => {
-      if (result.enabled) {
-        return this.execute("signEventOrPrompt", { event });
-      } else {
-        return false;
-      }
-    });
+    return this.execute("signEventOrPrompt", { event });
   }
 
   async getRelays(): Promise<string[]> {
