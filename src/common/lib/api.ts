@@ -16,6 +16,7 @@ import type {
   MessageSettingsSet,
   LnurlAuthResponse,
   Invoice,
+  MessagePermissionAdd,
 } from "~/types";
 
 import {
@@ -122,6 +123,19 @@ export const lnurlAuth = (
 export const getCurrencyRate = async () =>
   utils.call<{ rate: number }>("getCurrencyRate");
 
+export const addPermission = async ({
+  host,
+  method,
+  enabled,
+  blocked,
+}: MessagePermissionAdd["args"]) =>
+  utils.call<MessagePermissionAdd["args"]>("addPermission", {
+    host,
+    method,
+    enabled,
+    blocked,
+  });
+
 export default {
   getAccountInfo,
   getAccounts,
@@ -144,4 +158,5 @@ export default {
   getInvoices,
   lnurlAuth,
   getCurrencyRate,
+  addPermission,
 };
