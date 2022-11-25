@@ -43,7 +43,7 @@ if (document) {
         paymentRequest = href.replace("lightning:", "");
         link = lightningLink;
       } else if (bitcoinLinkWithLighting) {
-        href = bitcoinLinkWithLighting.getAttribute("href");
+        href = bitcoinLinkWithLighting.getAttribute("href").toLowerCase();
         link = bitcoinLinkWithLighting;
         const url = new URL(href);
         const query = new URLSearchParams(url.search);
