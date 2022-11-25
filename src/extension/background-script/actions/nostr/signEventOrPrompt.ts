@@ -1,6 +1,6 @@
 import utils from "~/common/lib/utils";
 import db from "~/extension/background-script/db";
-import { DbPermission, MessageSignEvent } from "~/types";
+import { MessageSignEvent } from "~/types";
 
 import state from "../../state";
 import { validateEvent } from "./helpers";
@@ -40,27 +40,6 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
 
       if (!response.data.confirm) {
         throw new Error("User rejected");
-      }
-
-      if (response.data.rememberPermission) {
-        const matchingAllowance = await db.allowances
-          .where("host")
-          .equalsIgnoreCase(message.origin.host)
-          .first();
-        const allowanceId = matchingAllowance?.id;
-
-        if (!allowanceId) return; // type-guard only
-
-        const permission: DbPermission = {
-          createdAt: Date.now().toString(),
-          allowanceId,
-          host: message.origin.host,
-          method: "signMessage",
-          enabled: true,
-          blocked: false,
-        };
-
-        await db.permissions.add(permission);
       }
     }
 

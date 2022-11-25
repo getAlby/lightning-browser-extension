@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
+import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import { Event } from "~/extension/ln/nostr/types";
 import type { OriginData } from "~/types";
@@ -33,6 +34,16 @@ function ConfirmSignMessage() {
   async function confirm() {
     try {
       setLoading(true);
+
+      if (rememberPermission) {
+        await api.addPermission({
+          host: origin.host,
+          method: "signMessage",
+          enabled: true,
+          blocked: false,
+        });
+      }
+
       msg.reply({
         confirm: true,
         rememberPermission,
