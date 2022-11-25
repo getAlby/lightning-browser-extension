@@ -2,13 +2,50 @@ import { Event } from "./types";
 
 export default class NostrProvider {
   nip04 = new Nip04(this);
+  enabled: boolean;
+
+  constructor() {
+    this.enabled = false;
+  }
+
+  private enable() {
+    // if (this.enabled) {
+    //   return Promise.resolve({ enabled: true });
+    // }
+    return this.execute<{
+      enabled: boolean;
+      remember: boolean;
+    }>("enable").then((result) => {
+      if (typeof result.enabled === "boolean") {
+        this.enabled = result.enabled;
+      }
+      return result;
+    });
+  }
 
   async getPublicKey(): Promise<string> {
     return await this.execute("getPublicKeyOrPrompt");
   }
 
-  async signEvent(event: Event): Promise<Event> {
-    return this.execute("signEventOrPrompt", { event });
+  async signEvent(event: Event): Promise<Event | boolean> {
+    // if (!this.enabled) {
+    //   throw new Error("Provider must be enabled before calling signEvent");
+    // }
+    console.log("signEvent 1");
+
+    // this.enable();
+    console.log("signEvent 2");
+
+    return this.execute<{
+      enabled: boolean;
+      remember: boolean;
+    }>("enable").then((result) => {
+      if (result.enabled) {
+        return this.execute("signEventOrPrompt", { event });
+      } else {
+        return false;
+      }
+    });
   }
 
   async getRelays(): Promise<string[]> {

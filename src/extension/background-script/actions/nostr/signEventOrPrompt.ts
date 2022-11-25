@@ -1,11 +1,6 @@
 import utils from "~/common/lib/utils";
-import enable from "~/extension/background-script/actions/allowances/enable";
 import db from "~/extension/background-script/db";
-import {
-  MessageAllowanceEnable,
-  DbPermission,
-  MessageSignEvent,
-} from "~/types";
+import { DbPermission, MessageSignEvent } from "~/types";
 
 import state from "../../state";
 import { validateEvent } from "./helpers";
@@ -23,16 +18,6 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
     };
   }
 
-  const enableMessage: MessageAllowanceEnable = {
-    origin: message.origin,
-    args: {
-      host: message.origin.host,
-    },
-    action: "public/webln/enable",
-  };
-
-  await enable(enableMessage);
-
   const dbPermissions = await db.permissions
     .where("host")
     .equalsIgnoreCase(message.origin.host)
@@ -42,6 +27,8 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
     .filter((permission) => permission.enabled)
     .map(({ method }) => method)
     .includes("signMessage");
+
+  console.log({ hasPermission });
 
   try {
     if (!hasPermission) {
