@@ -72,6 +72,7 @@ const routes = {
       request: ln.request,
     },
     nostr: {
+      enable: allowances.enable,
       getPublicKeyOrPrompt: nostr.getPublicKeyOrPrompt,
       signEventOrPrompt: nostr.signEventOrPrompt,
       getRelays: nostr.getRelays,
