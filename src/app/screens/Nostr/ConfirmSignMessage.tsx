@@ -46,7 +46,6 @@ function ConfirmSignMessage() {
 
       msg.reply({
         confirm: true,
-        rememberPermission,
       });
       setSuccessMessage(tCommon("success"));
     } catch (e) {

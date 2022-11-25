@@ -18,21 +18,18 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
     };
   }
 
-  const findPermission = await db.permissions
+  const hasPermission = await db.permissions
     .where("host")
     .equalsIgnoreCase(message.origin.host)
     .and(
       (permission) => permission.enabled && permission.method === "signMessage"
     )
-    .toArray();
-
-  const hasPermission = findPermission.length > 0;
+    .first();
 
   try {
     if (!hasPermission) {
       const response = await utils.openPrompt<{
         confirm: boolean;
-        rememberPermission: boolean;
       }>({
         ...message,
         action: "public/nostr/confirmSignMessage",
