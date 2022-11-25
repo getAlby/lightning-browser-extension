@@ -53,13 +53,16 @@ export default function PublishersTable({
                       <p className="text-lg inline mr-2 dark:text-white">
                         {publisher.name}
                       </p>
-                      {publisher.badge && (
-                        <Badge
-                          label={publisher.badge.label}
-                          color={publisher.badge.color}
-                          textColor={publisher.badge.textColor}
-                        />
-                      )}
+                      {publisher.badges?.map((b) => {
+                        return (
+                          <Badge
+                            key={b.label}
+                            label={b.label}
+                            color={b.color}
+                            textColor={b.textColor}
+                          />
+                        );
+                      })}
                     </div>
                     <div className="text-sm text-gray-500 dark:text-neutral-400">
                       {publisher.host} • {publisher.paymentsCount}{" "}
