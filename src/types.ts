@@ -610,11 +610,7 @@ export interface Publisher
   > {
   id: number;
   title?: string;
-  badge?: {
-    label: string;
-    color: string;
-    textColor: string;
-  };
+  badges?: Badge[];
 }
 
 export type SupportedExchanges = "alby" | "coindesk" | "yadio";

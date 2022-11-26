@@ -771,7 +771,8 @@
     },
     "badge": {
       "label": {
-        "active": "ACTIVE"
+        "active": "ACTIVE",
+        "auth": "LOGIN"
       }
     }
   }

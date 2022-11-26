@@ -34,6 +34,7 @@ jest.mock("~/common/lib/utils", () => {
           percentage: "0",
           paymentsCount: 1,
           paymentsAmount: 3000,
+          lnurlAuth: true,
         },
       ],
     })),
@@ -57,6 +58,7 @@ describe("Publishers", () => {
     expect(await screen.findByText("Your ⚡️ Websites")).toBeInTheDocument();
     expect(await screen.findByText("DALL·E 2")).toBeInTheDocument();
     expect(await screen.findByText("ACTIVE")).toBeInTheDocument();
+    expect(await screen.findByText("LOGIN")).toBeInTheDocument();
     expect(
       await screen.findByText("100 / 98,756 sats used")
     ).toBeInTheDocument();
