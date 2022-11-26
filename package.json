@@ -76,7 +76,7 @@
     "@commitlint/config-conventional": "^17.2.0",
     "@jest/types": "^29.3.1",
     "@playwright/test": "^1.28.0",
-    "@swc/core": "^1.3.19",
+    "@swc/core": "^1.3.20",
     "@swc/jest": "^0.2.23",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
