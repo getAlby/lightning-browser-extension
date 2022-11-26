@@ -788,7 +788,8 @@
     },
     "badge": {
       "label": {
-        "active": "LIMITE DE GASTOS"
+        "active": "LIMITE DE GASTOS",
+        "auth": "LOGIN RELÂMPAGO"
       }
     }
   }
