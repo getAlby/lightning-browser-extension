@@ -4,8 +4,713 @@
       "nav": {
         "welcome": "欢迎",
         "password": "你的密码",
-        "done": "已完成"
+        "done": "已完成",
+        "connect": "你的闪电账户"
+      },
+      "intro": {
+        "paywall": {
+          "title": "不再有恼人的付费墙",
+          "description": "为网站定义个人预算，实现无缝支付流。不再有恼人的付费墙。"
+        },
+        "privacy": {
+          "description": "用闪电认证并控制你的隐私。",
+          "title": "隐私第一"
+        },
+        "actions": {
+          "get_started": "开始"
+        },
+        "foss": {
+          "title": "自由开放源码软件",
+          "description": "完全开放的代码，任何人都可以进行审计。没有数据统计或跟踪器。一切由你掌控。"
+        },
+        "send": {
+          "title": "一键发送",
+          "description": "闪电交易全部发生在你的浏览器中。不需要alt+tab或扫描二维码。"
+        }
+      },
+      "title": "浏览器中的⚡ 比特币⚡ 的力量",
+      "set_password": {
+        "title": "设置解锁密码",
+        "description": "你的闪电账户数据是用解锁密码安全加密的。不要忘记这个密码! 你需要它来解锁Alby Extension（在这个浏览器中）",
+        "choose_password": {
+          "label": "选择一个解锁密码："
+        },
+        "confirm_password": {
+          "label": "让我们确认你输入的内容是否正确："
+        },
+        "errors": {
+          "enter_password": "请输入密码。",
+          "confirm_password": "请确认你的密码。",
+          "mismatched_password": "密码不匹配。"
+        }
+      },
+      "test_connection": {
+        "ready": "真棒，你已准备就绪!",
+        "try_tutorial": "现在就试试看",
+        "initializing": "正在初始化你的账户。请耐心等待，可能需要几分钟。。。",
+        "connection_error": "连接错误",
+        "tutorial": "现在你已经连接了你的钱包，你想通过教程吗？",
+        "review_connection_details": "请检查你的连接详情。",
+        "connection_taking_long": "尝试连接花费的时间不预期的要长。。。你的详情正确吗？你的节点是否可达？",
+        "contact_support": "如果你需要帮助，请联系support@getalby.com",
+        "actions": {
+          "delete_edit_account": "删除无效账户并重新编辑"
+        }
       }
+    },
+    "choose_connector": {
+      "alby": {
+        "pre_connect": {
+          "optional_lightning_note": {
+            "part1": "你的Alby账户还附带一个可选的",
+            "part2": "闪电地址",
+            "part3": "。这是任何人都可以轻松地在闪电网络上向你发送比特币的一个方法。",
+            "part4": "了解更多"
+          },
+          "optional_lightning_address": {
+            "title": "数字和字母，至少3个字符",
+            "suffix": "@getalby.com",
+            "label": "选择你的闪电地址（可选）"
+          },
+          "errors": {
+            "create_wallet_error": "登录或创建新账户失败。如果你需要帮助，请联系 support@getalby.com"
+          },
+          "title": "你的Alby闪电钱包",
+          "host_wallet": "我们为你托管的闪电钱包！",
+          "login_account": "创建或登录你的Alby账户。",
+          "email": {
+            "label": "电子邮箱"
+          }
+        },
+        "title": "Alby钱包",
+        "description": "创建或登录你的Alby账户"
+      },
+      "lnd": {
+        "errors": {
+          "connection_failed": "连接失败。你的LND凭据是否正确？"
+        },
+        "page": {
+          "description": "你需要你的节点URL和一个具有读取和发送权限的macaroon（例如：admin.macaroon）",
+          "title": "连接你的LND节点"
+        },
+        "url": {
+          "label": "REST API主机和端口",
+          "placeholder": "https://your-node-url:8080"
+        },
+        "macaroon": {
+          "label": "Macaroon(HEX格式)"
+        },
+        "drag_and_drop": "将你的macaroon拖放到此处或<0>浏览</0>",
+        "title": "LND",
+        "description": "连接你的LND节点",
+        "or": "或"
+      },
+      "bitcoin_jungle": {
+        "description": "创建或连接比特币丛林（Galoy）账户",
+        "page": {
+          "title": "连接<0>比特币丛林钱包</0>"
+        },
+        "title": "比特币丛林钱包"
+      },
+      "eclair": {
+        "url": {
+          "label": "Eclair URL",
+          "placeholder": "http://localhost:8080"
+        },
+        "description": "连接你的Eclair节点",
+        "page": {
+          "title": "连接 <0>Eclair</0>",
+          "instructions": "你需要你的 Eclair URL 和密码。"
+        },
+        "password": {
+          "label": "Eclair密码"
+        },
+        "title": "Eclair"
+      },
+      "citadel": {
+        "page": {
+          "title": "连接<0>Citadel</0>节点",
+          "instructions": "目前，如果启用了2FA，这就用不了了。"
+        },
+        "password": {
+          "label": "Citadel密码"
+        },
+        "url": {
+          "label": "Citadel URL",
+          "placeholder": "http://citadel.local"
+        },
+        "title": "Citadel",
+        "description": "连接你局域网上的Citadel"
+      },
+      "galoy": {
+        "jwt": {
+          "label": "输入你的JWT令牌",
+          "info": "目前{{label}}登录正在升级中。如果你是高级用户，你可以通过<0>网络钱包（wallet.mainnet.galoy.io）</0><1/><1/>登录来获取你的JWT令牌，JWT看起来像：<2>eyJhbG...</2><1/><1/>"
+        },
+        "actions": {
+          "login": "登录",
+          "request_sms_code": "索取短信验证码"
+        },
+        "errors": {
+          "setup_failed": "设置失败",
+          "failed_to_request_sms": "索取短信验证码失败",
+          "failed_to_login_sms": "使用短信验证码登录失败",
+          "missing_jwt": "JWT丢失，无法登录。",
+          "invalid_jwt": "传递了无效的JWT"
+        },
+        "sms_code": {
+          "label": "输入你的短信验证码"
+        },
+        "phone_number": {
+          "label": "输入你的电话号码"
+        }
+      },
+      "btcpay": {
+        "description": "连接你的BTCPay LND节点",
+        "page": {
+          "instructions": "导航到你的BTCPayServer并以管理员身份登录。转到服务器设置 > 服务 > LND Rest - 查看信息。然后点击 \"查看二维码信息 \"并复制二维码数据。把它粘贴在下面：",
+          "title": "连接你的BTCPay LND节点"
+        },
+        "title": "BTCPay Server",
+        "errors": {
+          "connection_failed": "连接失败。BTCPay连接URL是否正确且可访问？"
+        },
+        "config": {
+          "label": "配置数据",
+          "placeholder": "config=http://your-btc-pay.org/lnd-config/212121/lnd.config"
+        }
+      },
+      "bitcoin_beach": {
+        "description": "创建或连接比特币海滩（Galoy）帐户",
+        "page": {
+          "title": "连接<0>比特币海滩钱包</0>"
+        },
+        "title": "比特币海滩钱包"
+      },
+      "commando": {
+        "config": {
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config",
+          "label": "配置数据"
+        },
+        "errors": {
+          "connection_failed": "连接失败。你的Core Lightning节点是否在线并使用了commando插件？"
+        },
+        "title": "Core Lightning",
+        "description": "连接你的Core Lightning节点",
+        "page": {
+          "title": "连接你的Core Lightning节点"
+        },
+        "host": {
+          "label": "主机"
+        },
+        "pubkey": {
+          "label": "公钥"
+        },
+        "rune": {
+          "label": "符文"
+        },
+        "proxy": {
+          "label": "Websocket代理"
+        }
+      },
+      "start9": {
+        "page": {
+          "instructions": "<0>注意：</0>目前我们只支持LND，但是我们将在未来增加对c-lightning的支持！<1/>在你的Embassy仪表板上点击<0>Lightning Network Daemon</0>服务。<1/>选择<0>属性</0>标签。<1/>然后复制<0>LND连接REST URL。</0>",
+          "title": "连接你的<0>Embassy</0>节点"
+        },
+        "rest_url": {
+          "placeholder": "lndconnect://yournode:8080?...",
+          "label": "lndconnect REST URL"
+        },
+        "title": "Start9",
+        "description": "连接你的Embassy"
+      },
+      "raspiblitz": {
+        "page": {
+          "instructions2": "选择<0>CONNECT</0>.<1/>选择<0>EXPORT</0>.<1/>选择<0>HEX</0>.<1/>复制<0>adminMacaroon</0>.<1/>将Macaroon粘贴到下面的输入中。",
+          "instructions1": "你需要你的节点洋葱地址，端口，和一个具有读取和发送权限的macaroon（例如admin.macaroon）。<1/><1/><0>SSH</0>进入你的<0>RaspiBlitz</0>.<1/>运行命令<0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>。<1/>复制并粘贴<0>.onion</0>地址到下面的输入中。<1/>在onion地址后面添加你的<0>端口</0>，默认端口是<0>:8080</0>。",
+          "title": "连接你的<0>RaspiBlitz</0>节点"
+        },
+        "rest_api_host": {
+          "label": "REST API主机",
+          "placeholder": "your-node-onion-address:port"
+        },
+        "title": "RaspiBlitz",
+        "description": "连接你的RaspiBlitz"
+      },
+      "lndhub_bluewallet": {
+        "title": "Bluewallet",
+        "description": "连接到你的Bluewallet手机钱包",
+        "page": {
+          "title": "连接BlueWallet",
+          "description": "在BlueWallet中，选择你要连接的钱包，打开它，点击\"...\"，点击导出/备份，显示二维码，用摄像头扫描。"
+        },
+        "uri": {
+          "label": "BlueWallet导出URI"
+        },
+        "errors": {
+          "invalid_uri": "BlueWallet URI无效",
+          "connection_failed": "连接失败。你的BlueWallet URI是否正确？"
+        }
+      },
+      "lndhub_go": {
+        "title": "LNDHub",
+        "description": "连接你的LNDHub账户",
+        "page": {
+          "title": "连接LNDHub",
+          "description": "在此输入你的LNDHub凭据URI或用你的摄像头扫描二维码。"
+        },
+        "errors": {
+          "invalid_uri": "无效的LNDHub URI",
+          "connection_failed": "连接失败。你的LNDHub URI是否正确？"
+        },
+        "uri": {
+          "label": "LNDHub导出URI"
+        }
+      },
+      "lnbits": {
+        "url": {
+          "label": "LNbits URL"
+        },
+        "errors": {
+          "connection_failed": "连接失败。你的URL和管理密钥正确吗？"
+        },
+        "title": "LNbits",
+        "description": "连接你的LNbits账户",
+        "page": {
+          "title": "连接<0>LNbits</0>",
+          "instructions": "在LNbits中，选择你想连接的钱包，打开它，点击API信息并复制管理密钥。把它粘贴在下面："
+        },
+        "admin_key": {
+          "label": "LNbits管理密钥",
+          "placeholder": "你的32位数的管理密钥"
+        }
+      },
+      "umbrel": {
+        "page": {
+          "title": "连接<0>Umbrel</0>节点",
+          "instructions": "在你的Umbrel仪表板上，进入<0>连接钱包</0>。选择<0>lndconnect REST</0>并复制<0>lndconnect URL</0>。(根据你的设置，你可以使用本地连接或Tor连接。）"
+        },
+        "title": "Umbrel",
+        "description": "连接你的Umbrel",
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
+      },
+      "title": {
+        "welcome": "你有没有闪电钱包？",
+        "options": "添加新的闪电账户"
+      },
+      "description": "你首先需要连接一个闪电钱包，这样你就可以与你最喜欢的接受比特币闪电支付的网站进行互动了!",
+      "mynode": {
+        "description": "连接你的myNode",
+        "title": "myNode",
+        "page": {
+          "title": "连接<0>myNode</0>"
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
+      }
+    },
+    "home": {
+      "recent_transactions": "近期交易",
+      "allowance_view": {
+        "recent_transactions": "近期交易",
+        "no_transactions": "<0>{{name}}</0>还没有交易。"
+      },
+      "default_view": {
+        "no_transactions": "尚未用Alby进行任何交易。",
+        "is_blocked_hint": "Alby 目前在 {{host}} 上被禁用",
+        "recent_transactions": "近期交易"
+      },
+      "actions": {
+        "send_satoshis": "⚡️ 发送聪 ⚡️",
+        "enable_now": "立即启用"
+      },
+      "transaction_list": {
+        "tabs": {
+          "outgoing": "外发",
+          "incoming": "传入"
+        }
+      }
+    },
+    "accounts": {
+      "edit": {
+        "title": "编辑账户",
+        "name": {
+          "label": "名称"
+        },
+        "screen_reader": "编辑账户名称"
+      },
+      "export": {
+        "waiting": "正在等待 LndHub 数据...",
+        "title": "导出账户",
+        "your_ln_address": "你的闪电地址：",
+        "tip_mobile": "提示：用你的移动设备使用这个钱包",
+        "export_uri": "LNDHub凭证URI",
+        "scan_qr": "通过扫描二维码将这个钱包导入Zeus或BlueWallet。",
+        "screen_reader": "导出帐户详情"
+      },
+      "title": "账户",
+      "remove": {
+        "confirm": "是否确定要删除帐户：{{name}}？\n这是无法撤消的。如果你使用此账户登录网站，则可能无法访问这些网站。"
+      },
+      "actions": {
+        "add_account": "添加账户"
+      }
+    },
+    "unlock": {
+      "help_contact": {
+        "part2": "Alby支持",
+        "part1": "需要帮助? 联络"
+      },
+      "unlock_to_continue": "解锁以继续",
+      "errors": {
+        "invalid_password": "密码无效"
+      },
+      "unlock_error": {
+        "help": "你的账户数据是用你的解锁密码加密的。如果你真的忘记了你的解锁密码，你必须重置并再次添加你的闪电账户。",
+        "link": "立即重置并添加新账户"
+      },
+      "unlock_password": "你的解锁密码"
+    },
+    "publishers": {
+      "suggestions": {
+        "list": {
+          "trading": "交易",
+          "gaming": "游戏",
+          "showcases": "展示",
+          "entertaiment": "娱乐",
+          "shopping": "购物",
+          "miscellaneous": "杂项"
+        },
+        "title": "其他⚡️网站",
+        "description": "你可以使用Alby的网站"
+      },
+      "used": {
+        "title": "你的⚡️网站",
+        "description": "你曾经使用过Alby的网站",
+        "no_info": "还没有网站。"
+      }
+    },
+    "settings": {
+      "nostr": {
+        "private_key": {
+          "title": "私钥",
+          "generate": "生成",
+          "warning": "这将删除你的旧私钥。是否确定？",
+          "success": "私钥已加密并成功保存。"
+        },
+        "title": "Nostr"
+      },
+      "lnurl_auth": {
+        "title": "LNURL-认证",
+        "legacy_lnurl_auth": {
+          "title": "LNDhub 和 LNbits 的旧签名方式"
+        },
+        "hint": "是一个通用的认证协议。它使用数字签名对用户进行认证。该协议不需要任何其他识别信息，如密码、电子邮件、用户名或类似信息。通过Alby，你可以使用你的闪电账户安全地登录网站。为了与其他钱包兼容，我们不得不做一些改变，你可以在这里进行配置。 <0>理想情况下，所有这些选项都是关闭的。</0>仅当你有旧帐户时才使用它们。",
+        "legacy_lnurl_auth_202207": {
+          "subtitle": "LNURL-认证的密钥生成已经改变（2022年7月）。Alby与其他实现不兼容。这被改变了，但现在使用不同的登录密钥。如果你之前使用LNURL-认证登录，你仍然可以启用旧方法。这个选项以后会被删除，请务必切换到新的登录方式。",
+          "title": "旧版 LNURL-Auth"
+        }
+      },
+      "browser_notifications": {
+        "title": "浏览器通知",
+        "subtitle": "支付和认证相关的通知。"
+      },
+      "language": {
+        "subtitle": "翻译工作尚未100%完成。 <0>帮助我们将Alby翻译成你的语言！</0>",
+        "title": "语言"
+      },
+      "name": {
+        "title": "名字",
+        "placeholder": "输入你的名字"
+      },
+      "change_password": {
+        "screen_reader": "更改解锁密码",
+        "errors": {
+          "confirm_password": "请确认你的密码。",
+          "mismatched_password": "密码不匹配。",
+          "enter_password": "请输入新的解锁密码。"
+        },
+        "choose_password": {
+          "label": "输入新的解锁密码："
+        },
+        "success": "密码更改成功",
+        "title": "更改解锁密码",
+        "confirm_password": {
+          "label": "确认新密码："
+        }
+      },
+      "title": "设置",
+      "theme": {
+        "options": {
+          "system": "系统"
+        },
+        "title": "主题"
+      },
+      "website_enhancements": {
+        "subtitle": "为Twitter、YouTube等提供小费功能。",
+        "title": "网站改进"
+      },
+      "camera_access": {
+        "subtitle": "用于扫描二维码"
+      },
+      "show_fiat": {
+        "subtitle": "始终从所选交易所转换为所选货币"
+      },
+      "exchange": {
+        "title": "交易所来源",
+        "subtitle": "比特币汇率来源"
+      },
+      "personal_data": {
+        "title": "个人数据"
+      },
+      "email": {
+        "title": "电子邮箱",
+        "placeholder": "输入你的电子邮件地址"
+      },
+      "currency": {
+        "title": "货币"
+      }
+    },
+    "keysend": {
+      "receiver": {
+        "label": "将付款发送至"
+      },
+      "success": "付款已发送! Preimage: {{preimage}}",
+      "amount": {
+        "label": "金额(聪)"
+      },
+      "title": "发送"
+    },
+    "enable": {
+      "block_and_ignore": "阻止并忽略 {{host}}",
+      "title": "连接",
+      "allow": "允许{{host}}进行：",
+      "request2": "索取发票和闪电信息"
+    },
+    "send": {
+      "input": {
+        "hint": "发票、闪电地址或LNURL"
+      },
+      "title": "发送",
+      "qrcode": {
+        "title": "等待扫描"
+      }
+    },
+    "lnurlauth": {
+      "submit": "登录",
+      "content_message": {
+        "heading": "你是否想登录"
+      },
+      "title": "认证",
+      "success": "登录成功 {{name}}"
+    },
+    "lnurlwithdraw": {
+      "content_message": {
+        "heading": "金额"
+      },
+      "amount": {
+        "label": "金额"
+      }
+    },
+    "receive": {
+      "actions": {
+        "create_invoice": "创建发票"
+      },
+      "amount": {
+        "placeholder": "聪金额...",
+        "label": "金额"
+      },
+      "description": {
+        "label": "描述",
+        "placeholder": "例如，谁在发送这笔付款？"
+      },
+      "success": "收到付款!",
+      "payment": {
+        "waiting": "等待付款...",
+        "status": "检查付款状态"
+      },
+      "title": "接收"
+    },
+    "make_invoice": {
+      "memo": {
+        "label": "备忘录"
+      },
+      "errors": {
+        "amount_too_small": "金额低于最低限度",
+        "amount_too_big": "金额超过最高限额"
+      },
+      "title": "创建发票",
+      "amount": {
+        "label": "金额(聪)"
+      }
+    },
+    "confirm_sign_message": {
+      "content": "{{host}} 要求你签名：",
+      "title": "签名"
+    },
+    "confirm_request_permission": {
+      "allow": "允许{{host}}进行：",
+      "always_allow": "始终允许在{{host}}上使用{{method}}"
+    },
+    "nostr": {
+      "title": "Nostr",
+      "allow": "允许{{host}}进行：",
+      "read_public_key": "读取你的公钥",
+      "block_and_ignore": "阻止并忽略 {{host}}"
+    },
+    "lnurlpay": {
+      "amount": {
+        "label": "金额"
+      },
+      "comment": {
+        "label": ""
+      },
+      "email": {
+        "label": "电子邮箱"
+      },
+      "success": "成功，付款已发送！"
+    },
+    "confirm_payment": {
+      "actions": {
+        "pay_now": "立即付款"
+      },
+      "title": "批准付款",
+      "success": "支付{{amount}}成功!"
+    },
+    "confirm_keysend": {
+      "title": "批准付款",
+      "success": "付款已发送! Preimage: {{preimage}}",
+      "payment_summary": {
+        "description": "付款至： {{destination}}"
+      }
+    }
+  },
+  "common": {
+    "actions": {
+      "lock": "锁定",
+      "receive": "接收",
+      "close": "关闭",
+      "back": "返回",
+      "next": "下一个",
+      "cancel": "取消",
+      "delete": "删除",
+      "edit": "编辑",
+      "export": "导出",
+      "remove": "移除",
+      "continue": "继续",
+      "connect": "连接",
+      "unlock": "解锁",
+      "send": "发送",
+      "save": "保存",
+      "open": "打开",
+      "confirm": "确认",
+      "copy": "复制"
+    },
+    "errors": {
+      "connection_failed": "连接失败",
+      "payment_failed": "付款失败"
+    },
+    "feedback": "反馈",
+    "success": "成功",
+    "description_full": "完整描述",
+    "password": "密码",
+    "settings": "设置",
+    "websites": "网站",
+    "amount": "金额",
+    "optional": "可选",
+    "description": "描述",
+    "message": "消息",
+    "sats_one": "聪",
+    "sats_other": "聪",
+    "success_message": "{{amount}}{{fiatAmount}}已发送至{{destination}}",
+    "response": "答复",
+    "help": "帮助",
+    "copied": "已复制！",
+    "error": "错误"
+  },
+  "components": {
+    "toasts": {
+      "login_failed": {
+        "password_reset": "忘记密码？点击这里"
+      },
+      "errors": {
+        "invalid_credentials": "密码无效。请检查你的密码和电子邮件地址，然后重试。"
+      },
+      "connection_error": {
+        "visit_guides": "访问我们的指南以获取更多帮助",
+        "what_you_can_do": "以下是你可以执行的操作：",
+        "double_check": "仔细检查你的连接详情",
+        "if_ssl_errors": "如果有SSL错误（如ERR_CERT_AUTHORITY_INVALID），点击 \"高级 \"并继续接受证书。"
+      }
+    },
+    "account_menu": {
+      "title": "切换帐户",
+      "options": {
+        "account": {
+          "add": "添加新账户",
+          "manage": "管理账户"
+        }
+      }
+    },
+    "allowance_menu": {
+      "hint": "这将重置当前的预算",
+      "confirm_delete": "你确定要删除这个网站吗？",
+      "new_budget": {
+        "label": "新预算"
+      },
+      "enable_login": {
+        "title": "启用网站登录",
+        "subtitle": "当网站要求时，无需确认就能自动登录。"
+      }
+    },
+    "transactionsTable": {
+      "boostagram": {
+        "podcast": "播客",
+        "message": "留言",
+        "app": "应用程序"
+      },
+      "received": "已收到",
+      "sent": "已发送",
+      "fee": "费用"
+    },
+    "confirm_or_cancel": {
+      "only_trusted": "仅连接你信任的网站。"
+    },
+    "budget_control": {
+      "remember": {
+        "label": "保存并设定预算",
+        "description": "你可以设置一个余额，在它用完之前不要求确认付款。"
+      },
+      "budget": {
+        "label": "预算"
+      }
+    },
+    "qrcode_scanner": {
+      "title": "扫描二维码",
+      "actions": {
+        "stop_scanning": "停止扫描",
+        "start_scanning": "开始扫描"
+      }
+    },
+    "badge": {
+      "label": {
+        "active": "活跃"
+      }
+    },
+    "companion_download_info": {
+      "or": "或：",
+      "using_tor": "如果你使用Tor浏览器，请点击这里继续",
+      "download_here": "在这里下载Alby伴侣！"
+    },
+    "publishers_table": {
+      "used": "已使用",
+      "payments": "付款"
     }
   }
 }
