@@ -135,6 +135,12 @@
         "subtitle": "Earn sats for accomplishing tasks",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/sats4likes.svg",
         "url": "https://www.sats4likes.com/"
+      },
+      {
+        "title": "LNCal.com",
+        "subtitle": "Get booked and paid in Bitcoin",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lncal_thumbnail.svg",
+        "url": "https://lncal.com/"
       }
     ]
   }
