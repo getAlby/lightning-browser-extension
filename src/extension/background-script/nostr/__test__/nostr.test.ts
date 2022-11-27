@@ -19,9 +19,12 @@ describe("nostr", () => {
     const message = "Secret message that is sent from Alice to Bob";
     const encrypted = nostr.encrypt(bob.publicKey, message);
 
+    console.log("🔒", encrypted);
+
     nostr.getPrivateKey = jest.fn().mockReturnValue(bob.privateKey);
 
     const decrypted = nostr.decrypt(alice.publicKey, encrypted);
+    console.log("🔒", decrypted);
 
     expect(decrypted).toMatch(message);
   });

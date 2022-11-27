@@ -5,7 +5,10 @@ import { signEvent } from "../actions/nostr/helpers";
 import state from "../state";
 import aes from 'browserify-cipher';
 import {Buffer} from 'buffer'
-
+import { AES } from 'crypto-js';
+import Hex from "crypto-js/enc-hex";
+import Utf8 from "crypto-js/enc-utf8";
+import Base64 from "crypto-js/enc-base64";
 class Nostr {
   getPrivateKey() {
     const password = state.getState().password as string;
@@ -59,16 +62,15 @@ class Nostr {
     let [cip, iv] = ciphertext.split('?iv=')
     let key = secp256k1.getSharedSecret(this.getPrivateKey(), '02' + pubkey);
     const normalizedKey = Buffer.from(key.slice(1, 33));
-    
-    var decipher = aes.createDecipheriv(
-      'aes-256-cbc',
-      Buffer.from(normalizedKey, 'hex'),
-      Buffer.from(iv, 'base64')
-    )
-    let decryptedMessage = decipher.update(cip, 'base64', 'utf8')
-    decryptedMessage += decipher.final('utf8')
+        
+    const hexNormalizedKey = secp256k1.utils.bytesToHex(normalizedKey);
+    var hexKey = Hex.parse(hexNormalizedKey);
+
+    const decrypted = AES.decrypt(cip, hexKey, {
+      iv: Base64.parse(iv)
+    });
   
-    return decryptedMessage;
+    return Utf8.stringify(decrypted);
   }
 }
 
