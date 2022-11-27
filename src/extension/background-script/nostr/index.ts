@@ -9,6 +9,7 @@ import { AES } from 'crypto-js';
 import Hex from "crypto-js/enc-hex";
 import Utf8 from "crypto-js/enc-utf8";
 import Base64 from "crypto-js/enc-base64";
+import * as CryptoJS from 'crypto-js';
 class Nostr {
   getPrivateKey() {
     const password = state.getState().password as string;
@@ -42,30 +43,23 @@ class Nostr {
   }
 
   encrypt(pubkey: string, text: string) {
-    const key = secp256k1.getSharedSecret(this.getPrivateKey(), '02' + pubkey);
-    //const normalizedKey = secp256k1.utils.bytesToHex(key).substring(2, 64);
+    let key = secp256k1.getSharedSecret(this.getPrivateKey(), '02' + pubkey);
     const normalizedKey = Buffer.from(key.slice(1, 33));
-    
-    let iv = Uint8Array.from(secp256k1.utils.randomBytes(16));
-    var cipher = aes.createCipheriv(
-      'aes-256-cbc',
-      Buffer.from(normalizedKey, 'hex'),
-      iv
-    );
-    let encryptedMessage = cipher.update(text, 'utf8', 'base64');
-    encryptedMessage += cipher.final('base64');
+    const hexNormalizedKey = secp256k1.utils.bytesToHex(normalizedKey);
+    var hexKey = Hex.parse(hexNormalizedKey);
 
-    return `${encryptedMessage}?iv=${Buffer.from(iv.buffer).toString('base64')}`;
+    const encrypted = AES.encrypt(text, hexKey, { iv: CryptoJS.lib.WordArray.random(16) });
+    
+    return `${(encrypted.toString())}?iv=${(encrypted.iv.toString(CryptoJS.enc.Base64))}`;
   }
   
   decrypt(pubkey: string, ciphertext: string) {
     let [cip, iv] = ciphertext.split('?iv=')
     let key = secp256k1.getSharedSecret(this.getPrivateKey(), '02' + pubkey);
     const normalizedKey = Buffer.from(key.slice(1, 33));
-        
     const hexNormalizedKey = secp256k1.utils.bytesToHex(normalizedKey);
     var hexKey = Hex.parse(hexNormalizedKey);
-
+    
     const decrypted = AES.decrypt(cip, hexKey, {
       iv: Base64.parse(iv)
     });
