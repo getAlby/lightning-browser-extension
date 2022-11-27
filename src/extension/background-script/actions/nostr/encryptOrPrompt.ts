@@ -14,13 +14,15 @@ const encryptOrPrompt = async (message: MessageEncryptGet) => {
 
 const prompt = async (message: MessageEncryptGet) => {
   try {
-
     // TODO: Add prompt & permissions
 
     const response = {
-      data: state.getState().getNostr().encrypt(message.args.peer, message.args.plaintext),
+      data: state
+        .getState()
+        .getNostr()
+        .encrypt(message.args.peer, message.args.plaintext),
     };
-    
+
     return response;
   } catch (e) {
     console.error("encrypt cancelled", e);

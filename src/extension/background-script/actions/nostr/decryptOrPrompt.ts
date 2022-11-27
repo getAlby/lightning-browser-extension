@@ -14,13 +14,15 @@ const decryptOrPrompt = async (message: MessageDecryptGet) => {
 
 const prompt = async (message: MessageDecryptGet) => {
   try {
-
     // TODO: Add prompt & permissions
-    
+
     const response = {
-      data: state.getState().getNostr().decrypt(message.args.peer, message.args.ciphertext)
-    }
-    
+      data: state
+        .getState()
+        .getNostr()
+        .decrypt(message.args.peer, message.args.ciphertext),
+    };
+
     return response;
   } catch (e) {
     console.error("decrypt cancelled", e);
