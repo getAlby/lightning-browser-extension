@@ -3,7 +3,7 @@ import axios from "axios";
 import getOriginData from "../originData";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 
-const urlMatcher = /^https:\/\/www\.youtube.com\/(channel|c)\/([^/]+).*/;
+const urlMatcher = /^https:\/\/www\.youtube.com\/(((channel|c)\/)|@)([^/]+).*/;
 
 const battery = async (): Promise<void> => {
   const match = document.location.toString().match(urlMatcher);
@@ -29,7 +29,7 @@ const battery = async (): Promise<void> => {
   if (headerLink) {
     lnurl = findLnurlFromHeaderLink(headerLink);
   } else {
-    lnurl = await findLnurlFromYouTubeAboutPage(match[1], match[2]);
+    lnurl = await findLnurlFromYouTubeAboutPage(match[4]);
   }
 
   if (!lnurl) return;
@@ -55,11 +55,10 @@ const findLnurlFromHeaderLink = (
 };
 
 const findLnurlFromYouTubeAboutPage = (
-  path: string,
   name: string
 ): Promise<string | null> => {
   return axios
-    .get<Document>(`https://www.youtube.com/${path}/${name}/about`, {
+    .get<Document>(`https://www.youtube.com/@${name}/about`, {
       responseType: "document",
     })
     .then((response) => {
