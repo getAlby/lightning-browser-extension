@@ -26,9 +26,14 @@ export default function TestConnection() {
     const timer = setTimeout(() => {
       setErrorMessage(t("connection_taking_long"));
     }, 45000);
+
     try {
-      await api.getAccountInfo();
-      utils.redirectPage("options.html");
+      const response = await api.getAccountInfo();
+      if (response.name && response.info.alias) {
+        utils.redirectPage("options.html");
+      } else {
+        setErrorMessage(t("connection_error"));
+      }
     } catch (e) {
       const message = e instanceof Error ? `(${e.message})` : "";
       console.error(message);
