@@ -90,21 +90,43 @@ function Publishers() {
 
   return (
     <Container>
-      <h2 className="mt-12 mb-2 text-2xl font-bold dark:text-white">
-        {t("used.title")}
-      </h2>
-
-      <p className="mb-6 text-gray-500 dark:text-neutral-500">
-        {t("used.description")}
-      </p>
-
       {publishers.length > 0 ? (
-        <PublishersTable
-          publishers={publishers}
-          navigateToPublisher={navigateToPublisher}
-        />
+        <>
+          <h2 className="mt-12 mb-2 text-2xl font-bold dark:text-white">
+            {t("used.title")}
+          </h2>
+
+          <p className="mb-6 text-gray-500 dark:text-neutral-500">
+            {t("used.description")}
+          </p>
+          <PublishersTable
+            publishers={publishers}
+            navigateToPublisher={navigateToPublisher}
+          />
+        </>
       ) : (
-        <p className="dark:text-white"> {t("used.no_info")}</p>
+        <div className="mt-12 bg-white dark:bg-surface-02dp shadow-md px-6 py-8 rounded-lg hover:bg-gray-50 w-full">
+          <h2 className="mb-2 text-2xl font-bold dark:text-white">Welcome!</h2>
+
+          <p className="dark:text-white">
+            Your bitcoin lightning payments on the web.
+          </p>
+
+          <p className="mb-2 dark:text-white">
+            To start using the Alby Extension you might want to get some sats
+            into your wallet.
+          </p>
+
+          <a
+            className="underline text-base dark:text-white"
+            href="https://guides.getalby.com/overall-guide/alby-lightning-wallet/how-to-top-up-your-wallet-balance"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Learn how to top up your wallet
+          </a>
+          {/* <p className="dark:text-white"> {t("used.no_info")}</p> */}
+        </div>
       )}
 
       <h2 className="mt-12 mb-2 text-2xl font-bold dark:text-white">
