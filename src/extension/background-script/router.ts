@@ -51,7 +51,6 @@ const routes = {
   lnurl: lnurl,
   lnurlAuth: auth,
   getCurrencyRate: cache.getCurrencyRate,
-  addPermission: permissions.add,
   deletePermission: permissions.deletePermission,
   nostr: {
     generatePrivateKey: nostr.generatePrivateKey,
