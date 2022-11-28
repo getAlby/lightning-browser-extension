@@ -2,24 +2,27 @@ import { render, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
-import * as SettingsContext from "~/app/context/SettingsContext";
 import type { OriginData } from "~/types";
 
 import ConfirmKeysend from "./index";
 
-jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
-  settings: mockSettings,
-  isLoading: false,
-  updateSetting: jest.fn(),
-  getFormattedNumber: jest.fn(),
-  getFormattedSats: jest.fn(() => "21 sats"),
-  getFormattedFiat: jest
-    .fn()
-    .mockImplementationOnce(() => Promise.resolve("$0.00"))
-    .mockImplementationOnce(() => Promise.resolve("$0.00"))
-    .mockImplementationOnce(() => Promise.resolve("$0.01"))
-    .mockImplementationOnce(() => Promise.resolve("$0.05")),
-});
+const mockGetFiatValue = jest
+  .fn()
+  .mockImplementationOnce(() => Promise.resolve("$0.00"))
+  .mockImplementationOnce(() => Promise.resolve("$0.00"))
+  .mockImplementationOnce(() => Promise.resolve("$0.01"))
+  .mockImplementationOnce(() => Promise.resolve("$0.05"));
+
+jest.mock("~/app/context/SettingsContext", () => ({
+  useSettings: () => ({
+    settings: mockSettings,
+    isLoading: false,
+    updateSetting: jest.fn(),
+    getFormattedNumber: jest.fn(),
+    getFormattedSats: jest.fn(() => "21 sats"),
+    getFormattedFiat: mockGetFiatValue,
+  }),
+}));
 
 const mockOrigin: OriginData = {
   location: "https://getalby.com/demo",
