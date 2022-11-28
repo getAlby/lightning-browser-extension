@@ -1,5 +1,6 @@
 import db from "~/extension/background-script/db";
 import type { MessagePermissionDelete } from "~/types";
+import { PermissionMethod } from "~/types";
 
 import deletePermission from "../delete";
 
@@ -15,7 +16,7 @@ const mockPermissions = [
     allowanceId: 3,
     createdAt: "1667291216372",
     host: stackerNews.host,
-    method: "the-request-method-1",
+    method: PermissionMethod["WEBLN_LISTCHANNELS"],
     blocked: false,
     enabled: true,
   },
@@ -24,7 +25,7 @@ const mockPermissions = [
     allowanceId: 3,
     createdAt: "1667291216372",
     host: stackerNews.host,
-    method: "the-request-method-2",
+    method: PermissionMethod["WEBLN_GETINFO"],
     blocked: false,
     enabled: true,
   },
@@ -50,7 +51,7 @@ describe("delete permission", () => {
       },
       args: {
         host: stackerNews.host,
-        method: "the-request-method-2",
+        method: PermissionMethod["WEBLN_GETINFO"],
       },
     };
 

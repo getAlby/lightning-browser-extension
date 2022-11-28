@@ -1,6 +1,7 @@
 import utils from "~/common/lib/utils";
 import db from "~/extension/background-script/db";
 import { MessageSignEvent } from "~/types";
+import { PermissionMethod } from "~/types";
 
 import state from "../../state";
 import { validateEvent } from "./helpers";
@@ -22,7 +23,9 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
     .where("host")
     .equalsIgnoreCase(message.origin.host)
     .and(
-      (permission) => permission.enabled && permission.method === "signMessage"
+      (permission) =>
+        permission.enabled &&
+        permission.method === PermissionMethod["NOSTR_SIGNMESSAGE"]
     )
     .first();
 

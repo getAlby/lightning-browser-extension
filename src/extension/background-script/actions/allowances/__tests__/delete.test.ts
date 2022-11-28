@@ -1,5 +1,6 @@
 import db from "~/extension/background-script/db";
 import type { DbAllowance, MessageAllowanceDelete } from "~/types";
+import { PermissionMethod } from "~/types";
 
 import deleteAllowance from "../delete";
 
@@ -38,7 +39,7 @@ const mockPermissions = [
     allowanceId: 1,
     createdAt: "1667291216372",
     host: "pro.kollider.xyz",
-    method: "listChannels",
+    method: PermissionMethod["WEBLN_LISTCHANNELS"],
     blocked: false,
     enabled: true,
   },
@@ -47,7 +48,7 @@ const mockPermissions = [
     allowanceId: 2,
     createdAt: "1667291216372",
     host: "lnmarkets.com",
-    method: "getinfo",
+    method: PermissionMethod["WEBLN_GETINFO"],
     blocked: false,
     enabled: true,
   },
@@ -56,7 +57,7 @@ const mockPermissions = [
     allowanceId: 2,
     createdAt: "1667291216372",
     host: "lnmarkets.com",
-    method: "some-method",
+    method: PermissionMethod["WEBLN_SIGNMESSAGE"],
     blocked: false,
     enabled: true,
   },
