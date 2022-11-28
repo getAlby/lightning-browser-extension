@@ -56,7 +56,7 @@ Add Alby to your browser
 
 ## Architecture Idea
 
-![architecture](./doc/ln-browser-architecture.png)
+![architecture](/doc/ln-browser-architecture.png)
 
 ## Project Structure
 
