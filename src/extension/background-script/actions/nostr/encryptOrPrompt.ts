@@ -25,7 +25,7 @@ const prompt = async (message: MessageEncryptGet) => {
 
     return response;
   } catch (e) {
-    console.error("encrypt cancelled", e);
+    console.error("encrypt failed", e);
     if (e instanceof Error) {
       return { error: e.message };
     }
