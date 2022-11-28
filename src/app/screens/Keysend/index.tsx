@@ -23,6 +23,7 @@ function Keysend() {
     isLoading: isLoadingSettings,
     settings,
     getFormattedFiat,
+    getFormattedSats,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
   const navState = useNavigationState();
@@ -52,7 +53,7 @@ function Keysend() {
       setLoading(true);
       const payment = await utils.call(
         "keysend",
-        { destination, amountSat, customRecords },
+        { destination, amount: amountSat, customRecords },
         {
           origin: {
             name: destination,
@@ -138,9 +139,7 @@ function Keysend() {
               !destination
                 ? successMessage
                 : tCommon("success_message", {
-                    amount: `${amountSat} ${tCommon("sats", {
-                      count: parseInt(amountSat),
-                    })}`,
+                    amount: getFormattedSats(amountSat),
                     fiatAmount: showFiat ? ` (${fiatAmount})` : ``,
                     destination,
                   })
