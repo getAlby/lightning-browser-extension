@@ -37,7 +37,7 @@ function MakeInvoice() {
   const amountEditable = navState.args?.amountEditable;
   const memoEditable = navState.args?.memoEditable;
   const [loading, setLoading] = useState(false);
-  const [valueSat, setValueSat] = useState(invoiceAttributes.amount || "");
+  const [valueSat, setValueSat] = useState(invoiceAttributes.amount || "0");
   const [fiatValue, setFiatValue] = useState("");
   const [memo, setMemo] = useState(invoiceAttributes.memo || "");
   const [error, setError] = useState("");
@@ -118,7 +118,6 @@ function MakeInvoice() {
                     label={t("amount.label")}
                     min={invoiceAttributes.minimumAmount}
                     max={invoiceAttributes.maximumAmount}
-                    value={valueSat}
                     onChange={(e) => handleValueChange(e.target.value)}
                     fiatValue={fiatValue}
                   />
