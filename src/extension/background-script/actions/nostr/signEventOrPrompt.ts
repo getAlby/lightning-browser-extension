@@ -19,6 +19,15 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
     };
   }
 
+  const allowance = await db.allowances
+    .where("host")
+    .equalsIgnoreCase(message.origin.host)
+    .first();
+
+  if (!allowance?.id) {
+    return { error: "Could not find an allowance for this host" };
+  }
+
   const hasPermission = await db.permissions
     .where("host")
     .equalsIgnoreCase(message.origin.host)
@@ -31,15 +40,26 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
 
   try {
     if (!hasPermission) {
-      const response = await utils.openPrompt<{
+      const promptResponse = await utils.openPrompt<{
         confirm: boolean;
+        rememberPermission: boolean;
       }>({
         ...message,
         action: "public/nostr/confirmSignMessage",
       });
 
-      if (!response.data.confirm) {
-        throw new Error("User rejected");
+      // add permission to db only if user decided to always allow this request
+      if (promptResponse.data.rememberPermission) {
+        const permissionIsAdded = await db.permissions.add({
+          createdAt: Date.now().toString(),
+          allowanceId: allowance.id,
+          host: message.origin.host,
+          method: PermissionMethod["NOSTR_SIGNMESSAGE"],
+          enabled: true,
+          blocked: true,
+        });
+
+        !!permissionIsAdded && (await db.saveToStorage());
       }
     }
 
