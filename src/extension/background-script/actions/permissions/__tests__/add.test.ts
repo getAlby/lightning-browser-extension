@@ -1,5 +1,6 @@
 import db from "~/extension/background-script/db";
 import type { DbAllowance, MessagePermissionAdd } from "~/types";
+import { PermissionMethod } from "~/types";
 
 import addPermission from "../add";
 
@@ -45,7 +46,7 @@ describe("add permission", () => {
       },
       args: {
         host: stackerNews.host,
-        method: "signMessage",
+        method: PermissionMethod["WEBLN_SIGNMESSAGE"],
         enabled: true,
         blocked: false,
       },
@@ -61,7 +62,7 @@ describe("add permission", () => {
         allowanceId: 3,
         createdAt: "1487076708000",
         host: "stacker.news",
-        method: "signMessage",
+        method: PermissionMethod["WEBLN_SIGNMESSAGE"],
         blocked: false,
         enabled: true,
       },

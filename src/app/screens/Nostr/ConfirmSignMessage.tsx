@@ -15,6 +15,7 @@ import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import { Event } from "~/extension/ln/nostr/types";
 import type { OriginData } from "~/types";
+import { PermissionMethod } from "~/types";
 
 function ConfirmSignMessage() {
   const navState = useNavigationState();
@@ -38,7 +39,7 @@ function ConfirmSignMessage() {
       if (rememberPermission) {
         await api.addPermission({
           host: origin.host,
-          method: "signMessage",
+          method: PermissionMethod["NOSTR_SIGNMESSAGE"],
           enabled: true,
           blocked: false,
         });
