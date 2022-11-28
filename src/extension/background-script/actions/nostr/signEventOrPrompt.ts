@@ -19,24 +19,20 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
     };
   }
 
-  const allowance = await db.allowances
-    .where("host")
-    .equalsIgnoreCase(message.origin.host)
-    .first();
+  const allowance = await db.allowances.get({
+    host: message.origin.host,
+  });
 
   if (!allowance?.id) {
     return { error: "Could not find an allowance for this host" };
   }
 
-  const hasPermission = await db.permissions
-    .where("host")
-    .equalsIgnoreCase(message.origin.host)
-    .and(
-      (permission) =>
-        permission.enabled &&
-        permission.method === PermissionMethod["NOSTR_SIGNMESSAGE"]
-    )
-    .first();
+  const findPermission = await db.permissions.get({
+    host: message.origin.host,
+    method: PermissionMethod["NOSTR_SIGNMESSAGE"],
+  });
+
+  const hasPermission = !!findPermission?.enabled;
 
   try {
     if (!hasPermission) {
