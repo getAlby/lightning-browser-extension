@@ -711,7 +711,7 @@
         "label": "Novo limite"
       },
       "edit_allowance": {
-        "title": "Definir um novo limite",
+        "title": "Definir um novo limite de gastos",
         "screen_reader": "Opções limite de gastos"
       },
       "enable_login": {
@@ -788,7 +788,8 @@
     },
     "badge": {
       "label": {
-        "active": "LIMITE ATIVADO"
+        "active": "LIMITE DE GASTOS",
+        "auth": "LOGIN RELÂMPAGO"
       }
     }
   }
