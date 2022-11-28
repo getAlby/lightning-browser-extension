@@ -21,7 +21,7 @@ function ConfirmSignMessage() {
   const navState = useNavigationState();
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
-    keyPrefix: "confirm_sign_message",
+    keyPrefix: "nostr",
   });
   const navigate = useNavigate();
 
@@ -99,8 +99,7 @@ function ConfirmSignMessage() {
                 htmlFor="remember_permission"
                 className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
               >
-                {/* {t("remember.label")} */}
-                Remember this decission
+                {t("confirm_sign_message.remember.label")}
               </label>
             </div>
           </div>
