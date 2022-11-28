@@ -1,3 +1,5 @@
+# How to run Alby in the local development environment
+
 ## 🚀 Quick Start
 
 Ensure you have
@@ -70,7 +72,7 @@ Click Continue to create an account
 
 For most people who are new to the btc lightning network, starting a test version of the lightning network environment locally is very helpful for developing wallets, so that they can transfer money with confidence.
 
-Link to wiki because there are more pictures in the article
+【Link to wiki because there are more pictures in the article】
 
 
 ## Project Structure
@@ -139,6 +141,12 @@ Alby supports native connectors to native applications on the host computer. For
 This allows Alby also to connect to nodes behind Tor (through this native "proxy" application).
 
 Currently, there is one native companion app available to connect to Tor nodes: [https://github.com/getAlby/alby-companion-rs](https://github.com/getAlby/alby-companion-rs)
+
+#### Storybook.js
+
+We used to maintain a [Storybook](https://storybook.js.org)-setup but nobody as using it. Currently we do not see a use for it.\
+But happy to talk about if you think it's useful.
+
 
 
 

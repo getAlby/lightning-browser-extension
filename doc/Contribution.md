@@ -1,4 +1,4 @@
-## ⭐ Contributing
+# ⭐ Contribution guide for new developers
 
 We welcome and appreciate new contributions.
 
