@@ -25,7 +25,7 @@ const prompt = async (message: MessageDecryptGet) => {
 
     return response;
   } catch (e) {
-    console.error("decrypt cancelled", e);
+    console.error("decrypt failed", e);
     if (e instanceof Error) {
       return { error: e.message };
     }
