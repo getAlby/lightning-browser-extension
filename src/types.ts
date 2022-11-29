@@ -192,24 +192,6 @@ export interface MessageAccountAll extends MessageDefault {
   action: "getAccounts";
 }
 
-export interface MessagePermissionAdd extends MessageDefault {
-  args: {
-    host: DbPermission["host"];
-    method: DbPermission["method"];
-    enabled: DbPermission["enabled"];
-    blocked: DbPermission["blocked"];
-  };
-  action: "addPermission";
-}
-
-export interface MessagePermissionDelete extends MessageDefault {
-  args: {
-    host: string;
-    method: string;
-  };
-  action: "deletePermission";
-}
-
 export interface MessageBlocklistAdd extends MessageDefault {
   args: {
     host: string;
