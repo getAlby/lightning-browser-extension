@@ -483,11 +483,8 @@ export interface Payment extends Omit<DbPayment, "id"> {
   id: number;
 }
 
-export enum PermissionMethod {
+export enum PermissionMethodNostr {
   NOSTR_SIGNMESSAGE = "nostr/signMessage",
-  WEBLN_LISTCHANNELS = "webln/listchannels",
-  WEBLN_GETINFO = "webln/getinfo",
-  WEBLN_SIGNMESSAGE = "webln/signmessage",
 }
 
 export interface DbPermission {
@@ -495,7 +492,7 @@ export interface DbPermission {
   createdAt: string;
   allowanceId: number;
   host: string;
-  method: PermissionMethod;
+  method: string | PermissionMethodNostr;
   enabled: boolean;
   blocked: boolean;
 }

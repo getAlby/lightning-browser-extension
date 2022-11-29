@@ -1,7 +1,7 @@
 import utils from "~/common/lib/utils";
 import db from "~/extension/background-script/db";
 import { MessageSignEvent } from "~/types";
-import { PermissionMethod } from "~/types";
+import { PermissionMethodNostr } from "~/types";
 
 import state from "../../state";
 import { validateEvent } from "./helpers";
@@ -29,7 +29,7 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
 
   const findPermission = await db.permissions.get({
     host: message.origin.host,
-    method: PermissionMethod["NOSTR_SIGNMESSAGE"],
+    method: PermissionMethodNostr["NOSTR_SIGNMESSAGE"],
   });
 
   const hasPermission = !!findPermission?.enabled;
@@ -50,7 +50,7 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
           createdAt: Date.now().toString(),
           allowanceId: allowance.id,
           host: message.origin.host,
-          method: PermissionMethod["NOSTR_SIGNMESSAGE"],
+          method: PermissionMethodNostr["NOSTR_SIGNMESSAGE"],
           enabled: true,
           blocked: false,
         });

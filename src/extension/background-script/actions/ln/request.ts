@@ -1,5 +1,5 @@
 import utils from "~/common/lib/utils";
-import { MessageGenericRequest, PermissionMethod } from "~/types";
+import { MessageGenericRequest } from "~/types";
 
 import db from "../../db";
 import state from "../../state";
@@ -36,7 +36,7 @@ const request = async (
     }
 
     // prefix method with webln to prevent potential naming conflicts (e.g. with nostr calls that also use the permissions)
-    const weblnMethod = `${WEBLN_PREFIX}${method}` as PermissionMethod;
+    const weblnMethod = `${WEBLN_PREFIX}${method}`;
 
     const permission = await db.permissions
       .where("host")
