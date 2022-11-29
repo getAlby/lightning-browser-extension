@@ -1,16 +1,16 @@
 {
   "translation": {
     "welcome": {
-      "title": "",
+      "title": "La potenco de⚡ Bitmono ⚡en via TTT-legilo",
       "nav": {
-        "welcome": "",
-        "password": "",
-        "connect": "",
-        "done": ""
+        "welcome": "Bonvenon",
+        "password": "Via pasvorto",
+        "connect": "Via konto ĉe Lightning",
+        "done": "Farite"
       },
       "intro": {
         "send": {
-          "title": "",
+          "title": "Sendi per unu alklako",
           "description": ""
         },
         "paywall": {
@@ -18,15 +18,15 @@
           "description": ""
         },
         "privacy": {
-          "title": "",
+          "title": "Privateco unue",
           "description": ""
         },
         "foss": {
-          "title": "",
+          "title": "Libera kaj malfermitkoda",
           "description": ""
         },
         "actions": {
-          "get_started": ""
+          "get_started": "Komenci"
         }
       },
       "set_password": {
@@ -39,17 +39,17 @@
           "label": ""
         },
         "errors": {
-          "enter_password": "",
-          "confirm_password": "",
-          "mismatched_password": ""
+          "enter_password": "Bonvolu tajpi pasvorton.",
+          "confirm_password": "Bonvolu konfirmi vian pasvorton.",
+          "mismatched_password": "Pasvortoj ne kongruas."
         }
       },
       "test_connection": {
-        "ready": "",
+        "ready": "Bonege, ĉio pretas!",
         "tutorial": "",
-        "try_tutorial": "",
+        "try_tutorial": "Ekprovi nun",
         "initializing": "",
-        "connection_error": "",
+        "connection_error": "Konekta eraro",
         "review_connection_details": "",
         "connection_taking_long": "",
         "contact_support": "",
@@ -65,24 +65,24 @@
       },
       "description": "",
       "alby": {
-        "title": "",
-        "description": "",
+        "title": "Alby-monujo",
+        "description": "Krei aŭ saluti en vian konton ĉe Alby",
         "pre_connect": {
-          "title": "",
-          "login_account": "",
+          "title": "Via Lightning-monujo ĉe Alby",
+          "login_account": "Krei aŭ saluti en vian konton ĉe Alby.",
           "host_wallet": "",
           "email": {
-            "label": ""
+            "label": "Retpoŝta adreso"
           },
           "optional_lightning_note": {
             "part1": "",
-            "part2": "",
+            "part2": "Lightning-adreso",
             "part3": "",
-            "part4": ""
+            "part4": "lerni plu"
           },
           "optional_lightning_address": {
             "label": "",
-            "suffix": "",
+            "suffix": "@getalby.com",
             "title": ""
           },
           "errors": {
@@ -91,30 +91,30 @@
         }
       },
       "lnd": {
-        "title": "",
-        "description": "",
+        "title": "LND",
+        "description": "Konekti al via LND-nodo",
         "page": {
-          "title": "",
+          "title": "Konekti al via LND-nodo",
           "description": ""
         },
         "url": {
           "label": "",
-          "placeholder": ""
+          "placeholder": "https://via-noda-adreso:8080"
         },
         "macaroon": {
           "label": ""
         },
-        "or": "",
+        "or": "AŬ",
         "drag_and_drop": "",
         "errors": {
           "connection_failed": ""
         }
       },
       "lndhub_bluewallet": {
-        "title": "",
+        "title": "Bluewallet",
         "description": "",
         "page": {
-          "title": "",
+          "title": "Konekti al BlueWallet",
           "description": ""
         },
         "uri": {
@@ -126,10 +126,10 @@
         }
       },
       "lndhub_go": {
-        "title": "",
+        "title": "LNDHub",
         "description": "",
         "page": {
-          "title": "",
+          "title": "Konekti al LNDHub",
           "description": ""
         },
         "uri": {
@@ -141,10 +141,10 @@
         }
       },
       "lnbits": {
-        "title": "",
+        "title": "LNbits",
         "description": "",
         "page": {
-          "title": "",
+          "title": "Konekti al <0>LNbits</0>",
           "instructions": ""
         },
         "admin_key": {
@@ -159,37 +159,37 @@
         }
       },
       "eclair": {
-        "title": "",
+        "title": "Eclair",
         "description": "",
         "page": {
-          "title": "",
+          "title": "Konekti al <0>Eclair</0>",
           "instructions": ""
         },
         "password": {
-          "label": ""
+          "label": "Eclair-pasvorto"
         },
         "url": {
           "label": "",
-          "placeholder": ""
+          "placeholder": "http://localhost:8080"
         }
       },
       "citadel": {
-        "title": "",
+        "title": "Citadel",
         "description": "",
         "page": {
           "title": "",
           "instructions": ""
         },
         "password": {
-          "label": ""
+          "label": "Citadel-pasvorto"
         },
         "url": {
           "label": "",
-          "placeholder": ""
+          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
-        "title": "",
+        "title": "Umbrel",
         "description": "",
         "page": {
           "title": "",
@@ -197,14 +197,14 @@
         },
         "rest_url": {
           "label": "",
-          "placeholder": ""
+          "placeholder": "lndconnect://vianodo:8080?..."
         }
       },
       "mynode": {
-        "title": "",
-        "description": "",
+        "title": "myNode",
+        "description": "Konekti al via myNode",
         "page": {
-          "title": "",
+          "title": "Konekti al <0>myNode</0>",
           "instructions": ""
         },
         "rest_url": {
@@ -213,7 +213,7 @@
         }
       },
       "start9": {
-        "title": "",
+        "title": "Start9",
         "description": "",
         "page": {
           "title": "",
@@ -221,14 +221,14 @@
         },
         "rest_url": {
           "label": "",
-          "placeholder": ""
+          "placeholder": "lndconnect://vianodo:8080?..."
         }
       },
       "raspiblitz": {
-        "title": "",
-        "description": "",
+        "title": "RaspiBlitz",
+        "description": "Konekti al via RaspiBlitz",
         "page": {
-          "title": "",
+          "title": "Konekti al via <0>RaspiBlitz</0>-nodo",
           "instructions1": "",
           "instructions2": ""
         },
@@ -263,7 +263,7 @@
           "info": ""
         },
         "actions": {
-          "login": "",
+          "login": "Saluti",
           "request_sms_code": ""
         },
         "errors": {
@@ -275,7 +275,7 @@
         }
       },
       "btcpay": {
-        "title": "",
+        "title": "BTCPay-servilo",
         "description": "",
         "page": {
           "title": "",
@@ -297,19 +297,19 @@
           "instructions": ""
         },
         "host": {
-          "label": ""
+          "label": "Gastiganto"
         },
         "pubkey": {
-          "label": ""
+          "label": "Publika ŝlosilo"
         },
         "rune": {
-          "label": ""
+          "label": "Runo"
         },
         "port": {
-          "label": ""
+          "label": "Pordo"
         },
         "proxy": {
-          "label": ""
+          "label": "Retkonektinga perilo"
         },
         "privKey": {
           "label": ""
@@ -325,20 +325,20 @@
     },
     "home": {
       "actions": {
-        "send_satoshis": "",
+        "send_satoshis": "⚡️ Sendi Bitmonon ⚡️",
         "enable_now": ""
       },
       "recent_transactions": "",
       "transaction_list": {
         "tabs": {
-          "outgoing": "",
-          "incoming": ""
+          "outgoing": "Elspezo",
+          "incoming": "Enspezo"
         }
       },
       "allowance_view": {
         "recent_transactions": "",
         "allowance": "",
-        "sats_used": "",
+        "sats_used": "satoŝioj uzitaj",
         "no_transactions": ""
       },
       "default_view": {
@@ -348,14 +348,14 @@
       }
     },
     "accounts": {
-      "title": "",
+      "title": "Kontoj",
       "actions": {
         "add_account": ""
       },
       "edit": {
         "title": "",
         "name": {
-          "label": ""
+          "label": "Nomo"
         },
         "screen_reader": ""
       },
@@ -373,7 +373,7 @@
       }
     },
     "enable": {
-      "title": "",
+      "title": "Konekti",
       "allow": "",
       "request1": "",
       "request2": "",
@@ -395,7 +395,7 @@
       }
     },
     "settings": {
-      "title": "",
+      "title": "Agordoj",
       "browser_notifications": {
         "title": "",
         "subtitle": ""
@@ -423,16 +423,16 @@
         "granted": ""
       },
       "language": {
-        "title": "",
+        "title": "Lingvo",
         "subtitle": ""
       },
       "theme": {
-        "title": "",
+        "title": "Etoso",
         "subtitle": "",
         "options": {
-          "dark": "",
-          "light": "",
-          "system": ""
+          "dark": "Malhela",
+          "light": "Hela",
+          "system": "Sistema"
         }
       },
       "show_fiat": {
@@ -440,7 +440,7 @@
         "subtitle": ""
       },
       "currency": {
-        "title": "",
+        "title": "Valuto",
         "subtitle": ""
       },
       "exchange": {
@@ -452,12 +452,12 @@
         "description": ""
       },
       "name": {
-        "title": "",
+        "title": "Nomo",
         "subtitle": "",
         "placeholder": ""
       },
       "email": {
-        "title": "",
+        "title": "Retpoŝto",
         "subtitle": "",
         "placeholder": ""
       },
@@ -472,7 +472,7 @@
           "label": ""
         },
         "submit": {
-          "label": ""
+          "label": "Ŝanĝi"
         },
         "errors": {
           "enter_password": "",
@@ -482,55 +482,55 @@
         "success": ""
       },
       "nostr": {
-        "title": "",
+        "title": "Nostr",
         "hint": "",
         "private_key": {
-          "title": "",
+          "title": "Privata ŝlosilo",
           "subtitle": "",
-          "generate": "",
+          "generate": "Generi",
           "warning": "",
           "success": ""
         }
       }
     },
     "send": {
-      "title": "",
+      "title": "Sendi",
       "qrcode": {
         "title": ""
       },
       "input": {
-        "label": "",
+        "label": "Ricevanto",
         "hint": ""
       }
     },
     "lnurlpay": {
       "amount": {
-        "label": ""
+        "label": "Kvanto"
       },
       "comment": {
-        "label": ""
+        "label": "Komento"
       },
       "name": {
-        "label": ""
+        "label": "Nomo"
       },
       "email": {
-        "label": ""
+        "label": "Retpoŝto"
       },
       "success": ""
     },
     "lnurlauth": {
-      "title": "",
+      "title": "Aŭtentigo",
       "content_message": {
         "heading": ""
       },
-      "submit": "",
+      "submit": "Saluti",
       "success": "",
       "errors": {
         "status": ""
       }
     },
     "lnurlchannel": {
-      "title": "",
+      "title": "Kanala peto",
       "content_message": {
         "heading": ""
       },
@@ -539,27 +539,27 @@
     "lnurlwithdraw": {
       "title": "",
       "content_message": {
-        "heading": ""
+        "heading": "Kvanto"
       },
       "amount": {
-        "label": ""
+        "label": "Kvanto"
       },
       "success": ""
     },
     "receive": {
-      "title": "",
+      "title": "Ricevi",
       "actions": {
-        "create_invoice": ""
+        "create_invoice": "Krei fakturon"
       },
       "amount": {
-        "label": "",
+        "label": "Kvanto",
         "placeholder": ""
       },
       "description": {
-        "label": "",
+        "label": "Priskribo",
         "placeholder": ""
       },
-      "success": "",
+      "success": "Pago riceviĝis!",
       "payment": {
         "waiting": "",
         "status": ""
@@ -567,33 +567,33 @@
     },
     "publishers": {
       "used": {
-        "title": "",
+        "title": "Viaj ⚡️ retejoj",
         "description": "",
         "no_info": ""
       },
       "suggestions": {
-        "title": "",
+        "title": "Aliaj ⚡️ retejoj",
         "description": "",
         "list": {
-          "trading": "",
-          "gaming": "",
-          "entertaiment": "",
-          "shopping": "",
-          "miscellaneous": "",
+          "trading": "Komercado",
+          "gaming": "Ludado",
+          "entertaiment": "Distro",
+          "shopping": "Butikumo",
+          "miscellaneous": "Alia",
           "showcases": ""
         }
       },
       "publisher": {
         "allowance": {
           "title": "",
-          "used_budget": ""
+          "used_budget": "satoŝioj uzitaj"
         }
       }
     },
     "make_invoice": {
       "title": "",
       "amount": {
-        "label": ""
+        "label": "Kvanto (satoŝioj)"
       },
       "memo": {
         "label": ""
@@ -604,7 +604,7 @@
       }
     },
     "confirm_sign_message": {
-      "title": "",
+      "title": "Subskribi",
       "content": ""
     },
     "confirm_keysend": {
@@ -615,74 +615,74 @@
       }
     },
     "keysend": {
-      "title": "",
+      "title": "Sendi",
       "success": "",
       "receiver": {
-        "label": ""
+        "label": "Sendi pagon al"
       },
       "amount": {
-        "label": ""
+        "label": "Kvanto (satoŝioj)"
       }
     },
     "confirm_payment": {
-      "title": "",
+      "title": "Aprobi pagon",
       "success": "",
       "actions": {
-        "pay_now": ""
+        "pay_now": "Ekpagi"
       }
     },
     "confirm_request_permission": {
-      "title": "",
+      "title": "Aprobi peton",
       "allow": "",
       "enable_method": "",
       "always_allow": ""
     },
     "nostr": {
-      "title": "",
+      "title": "Nostr",
       "allow": "",
       "read_public_key": "",
       "block_and_ignore": ""
     }
   },
   "common": {
-    "password": "",
-    "advanced": "",
-    "success": "",
-    "error": "",
-    "settings": "",
-    "websites": "",
-    "sats_one": "",
-    "sats_other": "",
-    "loading": "",
-    "amount": "",
-    "optional": "",
+    "password": "Pasvorto",
+    "advanced": "Altnivelaj",
+    "success": "Sukceso",
+    "error": "Eraro",
+    "settings": "Agordoj",
+    "websites": "Retejoj",
+    "sats_one": "satoŝio",
+    "sats_other": "satoŝioj",
+    "loading": "ŝargante",
+    "amount": "Kvanto",
+    "optional": "Nedeviga",
     "feedback": "",
-    "copied": "",
-    "description": "",
-    "description_full": "",
-    "success_message": "",
-    "response": "",
-    "message": "",
-    "help": "",
+    "copied": "Kopiita!",
+    "description": "Priskribo",
+    "description_full": "Plena priskribo",
+    "success_message": "{{amount}}{{fiatAmount}} sendiĝis al {{destination}}",
+    "response": "Respondo",
+    "message": "Mesaĝo",
+    "help": "Helpo",
     "actions": {
-      "back": "",
-      "delete": "",
-      "edit": "",
-      "next": "",
-      "open": "",
-      "cancel": "",
-      "confirm": "",
-      "continue": "",
-      "connect": "",
-      "lock": "",
-      "unlock": "",
-      "send": "",
-      "save": "",
-      "receive": "",
-      "close": "",
-      "export": "",
-      "remove": "",
-      "copy": ""
+      "back": "Reen",
+      "delete": "Forviŝi",
+      "edit": "Redakti",
+      "next": "Sekven",
+      "open": "Malfermi",
+      "cancel": "Nuligi",
+      "confirm": "Konfirmi",
+      "continue": "Daŭrigi",
+      "connect": "Konekti",
+      "lock": "Ŝlosi",
+      "unlock": "Malŝlosi",
+      "send": "Sendi",
+      "save": "Konservi",
+      "receive": "Ricevi",
+      "close": "Fermi",
+      "export": "Elporti",
+      "remove": "Forigi",
+      "copy": "Kopii"
     },
     "errors": {
       "connection_failed": "",
@@ -716,14 +716,14 @@
       }
     },
     "transactionsTable": {
-      "fee": "",
+      "fee": "Kotizo",
       "preimage": "",
-      "received": "",
-      "sent": "",
+      "received": "Ricevita",
+      "sent": "Sendita",
       "boostagram": {
-        "sender": "",
-        "message": "",
-        "app": "",
+        "sender": "Sendinto",
+        "message": "Mesaĝo",
+        "app": "Programo",
         "podcast": ""
       }
     },
@@ -736,14 +736,14 @@
         "description": ""
       },
       "budget": {
-        "label": ""
+        "label": "Buĝeto"
       }
     },
     "companion_download_info": {
       "description": "",
       "download_here": "",
       "using_tor": "",
-      "or": ""
+      "or": "Aŭ:"
     },
     "toasts": {
       "connection_error": {
@@ -765,18 +765,18 @@
       "options": {
         "account": {
           "add": "",
-          "manage": ""
+          "manage": "Administri kontojn"
         }
       }
     },
     "publishers_table": {
-      "payments": "",
-      "used": ""
+      "payments": "pagoj",
+      "used": "uzita"
     },
     "badge": {
       "label": {
-        "active": "",
-        "auth": ""
+        "active": "AKTIVA",
+        "auth": "SALUTI"
       }
     }
   }
