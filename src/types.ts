@@ -123,6 +123,10 @@ export interface MessageDefault {
   prompt?: boolean;
 }
 
+export interface MessageDefaultPublic extends MessageDefault {
+  origin: OriginData;
+}
+
 export type NavigationState = {
   origin?: OriginData; // only defoned if coming via "Prompt", can be empty if a LNURL-action is being used via "Send" within the "PopUp"
   args?: {
@@ -485,6 +489,7 @@ export interface Payment extends Omit<DbPayment, "id"> {
 
 export enum PermissionMethodNostr {
   NOSTR_SIGNMESSAGE = "nostr/signMessage",
+  NOSTR_GETPUBLICKEY = "nostr/getPublicKey",
 }
 
 export interface DbPermission {
