@@ -56,6 +56,10 @@ We set up our own internal testnet, which can be used for your development.
 If this is not reachable please let us know.
 
 - [Test-setup](https://github.com/getAlby/lightning-browser-extension/wiki/Test-setup) for different connectors (i.e. LND)
+- [Thunderhub](https://thunderhub.regtest.getalby.com/) for testing nodes (PW: `getalby`)
+  Currently only lists LND nodes
+- [LNDhub.go API Swagger](https://lndhub.regtest.getalby.com/swagger/index.html)
+
 
 After installing the wallet in the browser and setting the username and password, the page will jump to the page for selecting the lightning network wallet.
 
@@ -72,7 +76,7 @@ Click Continue to create an account
 
 For most people who are new to the btc lightning network, starting a test version of the lightning network environment locally is very helpful for developing wallets, so that they can transfer money with confidence.
 
-【Link to wiki because there are more pictures in the article】
+[Start the lightning network test environment locally and link to the Alby](https://github.com/getAlby/lightning-browser-extension/wiki/Start-the-lightning-network-test-environment-locally-and-link-to-the-Alby)
 
 
 ## Project Structure

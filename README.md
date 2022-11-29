@@ -1,4 +1,11 @@
-# Alby - Lightning Browser Extension
+<p align="center" style="    background-color: rgb(248,195,58)">
+  <img width="300px" src="/doc/Alby-logo-figure-full.png">
+</p>
+
+<h1 align="center">Alby - Lightning Browser Extension</h1>
+
+
+
 
 ### A browser extension to bring the Bitcoin Lightning Network to the browser
 
@@ -9,6 +16,7 @@ The goal is to write a minimal web extension to allow browsers to interact with 
 The extension implements the WebLN standard as the interface that allows websites to connect to Lightning Network nodes (to request payments, invoices, signatures, login, etc.) and enable seamless UX of web payments and authentications.
 
 The extension can connect to different node implementations and supports custodial and non-custodial setups.
+
 
 ## Some Features
 
@@ -25,6 +33,9 @@ The extension can connect to different node implementations and supports custodi
 - [ ] [Lsat](https://lsat.tech/) support
 
 ### STATUS: 🚀
+
+## About Alby
+Alby is open-source and currently in alpha stage. Our goal is to create the best online experience to consume and reward content and services online
 
 ## Join the conversation
 
@@ -79,11 +90,45 @@ Add Alby to your browser
 
 ## 🚀 Quick Start
 
+We set up our own internal testnet, which can be used for your development.
+If this is not reachable please let us know.
+
+- [Test-setup](https://github.com/getAlby/lightning-browser-extension/wiki/Test-setup) for different connectors (i.e. LND)
+- [Thunderhub](https://thunderhub.regtest.getalby.com/) for testing nodes (PW: `getalby`)
+  Currently only lists LND nodes
+- [LNDhub.go API Swagger](https://lndhub.regtest.getalby.com/swagger/index.html)
+
 [How to run Alby in the local development environment.](./doc/Setup.md)
+
+
+# ⭐  Contributing
+
+We welcome and appreciate new contributions.
+### Find a task
+
+We use the [Development Project Board](https://github.com/orgs/getAlby/projects/10/views/2) to plan to-dos. Best choose something from the to-do column. (If there is nothing for you, feel free to pick something from the backlog)
+
+#### Developer
+
+- Check out the issues that have specifically been [marked as being friendly to new contributors](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3Adesign+label%3A%22good+first+issue%22)
+- You can also review open PRs
+
+#### Designer
+
+- Have a look at our [Open source Design guide](https://github.com/getAlby/lightning-browser-extension/wiki/Open-source-Design)
+- Check out the issues that have specifically been [marked with "design"](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3A%22design%22)
+- We also have a [Figma Design Guide Project](https://www.figma.com/file/xwGXHxW4FWpV03Tt37atZv/Extension-1.10.0) which you can have a look at
+
+#### Anyone
+
+- Have a look at this Readme. Can it be improved? Do you see typos? You can open a PR or reach out to us in [our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2).
+- You can help with [translations](#translations)
+
 
 [Contribution guide for new developers.](./doc/Contribution.md)
 
 [Contributor Covenant Code of Conduct.](./doc/CODE_OF_CONDUCT.md)
+
 
 
 ## ❔ FAQs
