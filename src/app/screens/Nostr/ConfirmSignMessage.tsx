@@ -35,7 +35,7 @@ function ConfirmSignMessage() {
       setLoading(true);
       msg.reply({
         confirm: true,
-        rememberPermission,
+        enable: rememberPermission,
       });
       setSuccessMessage(tCommon("success"));
     } catch (e) {

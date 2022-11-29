@@ -38,14 +38,14 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
     if (!hasPermission) {
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
-        rememberPermission: boolean;
+        enable: boolean;
       }>({
         ...message,
         action: "public/nostr/confirmSignMessage",
       });
 
       // add permission to db only if user decided to always allow this request
-      if (promptResponse.data.rememberPermission) {
+      if (promptResponse.data.enable) {
         const permissionIsAdded = await db.permissions.add({
           createdAt: Date.now().toString(),
           allowanceId: allowance.id,
