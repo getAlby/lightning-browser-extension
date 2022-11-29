@@ -29,7 +29,7 @@ function Keysend() {
   const navState = useNavigationState();
   const navigate = useNavigate();
   const auth = useAccount();
-  const [amountSat, setAmountSat] = useState(navState.args?.amount || "0");
+  const [amountSat, setAmountSat] = useState(navState.args?.amount || "");
   const customRecords = navState.args?.customRecords;
   const destination = navState.args?.destination as string;
   const [loading, setLoading] = useState(false);
@@ -116,6 +116,7 @@ function Keysend() {
                   min={+0 / 1000}
                   max={+1000000 / 1000}
                   onChange={(e) => setAmountSat(e.target.value)}
+                  value={amountSat}
                   fiatValue={fiatAmount}
                 />
                 <SatButtons onClick={setAmountSat} />
