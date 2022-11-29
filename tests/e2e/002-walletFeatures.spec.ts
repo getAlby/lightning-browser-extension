@@ -65,7 +65,8 @@ test.describe("Wallet features", () => {
     await descriptionField.type("It is a lucky number");
 
     await (await getByText($optionsdocument, "Create Invoice")).click();
-    page.waitForSelector("button");
+    // wait for (one of the svg elements of) the QR code
+    await page.waitForSelector(".ring-black svg");
     // copy invoice
     await (await findByText($optionsdocument, "Copy")).click();
 
@@ -88,7 +89,8 @@ test.describe("Wallet features", () => {
     await invoiceInput.type("bumi@getalby.com");
     await (await getByText($optionsdocument, "Continue")).click();
 
-    page.waitForSelector("label");
+    // wait for the description label
+    await page.waitForSelector("dt");
     await findByText($optionsdocument, "bumi@getalby.com");
     await findByText($optionsdocument, "Sats for Bumi");
 
