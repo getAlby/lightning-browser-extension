@@ -52,7 +52,7 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
           host: message.origin.host,
           method: PermissionMethod["NOSTR_SIGNMESSAGE"],
           enabled: true,
-          blocked: true,
+          blocked: false,
         });
 
         !!permissionIsAdded && (await db.saveToStorage());
