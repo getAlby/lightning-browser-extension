@@ -1,5 +1,5 @@
-<p align="center" style="    background-color: rgb(248,195,58)">
-  <img width="300px" src="/doc/Alby-logo-figure-full.png">
+<p align="center">
+  <img width="300px" src="/doc/Alby-logo-figure-full.svg">
 </p>
 
 <h1 align="center">Alby - Lightning Browser Extension</h1>
