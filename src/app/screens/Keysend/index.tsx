@@ -41,7 +41,7 @@ function Keysend() {
 
   useEffect(() => {
     (async () => {
-      if (showFiat && amountSat) {
+      if (amountSat !== "" && showFiat) {
         const res = await getFormattedFiat(amountSat);
         setFiatAmount(res);
       }
