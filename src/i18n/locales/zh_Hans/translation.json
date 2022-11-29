@@ -7,27 +7,6 @@
         "done": "已完成",
         "connect": "你的闪电账户"
       },
-      "intro": {
-        "paywall": {
-          "title": "不再有恼人的付费墙",
-          "description": "为网站定义个人预算，实现无缝支付流。不再有恼人的付费墙。"
-        },
-        "privacy": {
-          "description": "用闪电认证并控制你的隐私。",
-          "title": "隐私第一"
-        },
-        "actions": {
-          "get_started": "开始"
-        },
-        "foss": {
-          "title": "自由开放源码软件",
-          "description": "完全开放的代码，任何人都可以进行审计。没有数据统计或跟踪器。一切由你掌控。"
-        },
-        "send": {
-          "title": "一键发送",
-          "description": "闪电交易全部发生在你的浏览器中。不需要alt+tab或扫描二维码。"
-        }
-      },
       "title": "浏览器中的⚡ 比特币⚡ 的力量",
       "set_password": {
         "title": "设置解锁密码",
