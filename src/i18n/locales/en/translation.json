@@ -541,8 +541,12 @@
     "publishers": {
       "used": {
         "title": "Your ⚡️ Websites",
-        "description": "Websites where you have used Alby before",
-        "no_info": "No websites yet."
+        "description": "Websites where you have used Alby before"
+      },
+      "unused": {
+        "title": "Welcome!",
+        "description": "To start using Alby you first need to top up your account with bitcoin.",
+        "how_to": "Learn how to top up your wallet"
       },
       "suggestions": {
         "title": "Suggested ⚡️ Websites",

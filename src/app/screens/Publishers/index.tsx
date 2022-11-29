@@ -106,26 +106,23 @@ function Publishers() {
         </>
       ) : (
         <div className="mt-12 bg-white dark:bg-surface-02dp shadow-md px-6 py-8 rounded-lg hover:bg-gray-50 w-full">
-          <h2 className="mb-2 text-2xl font-bold dark:text-white">Welcome!</h2>
-
-          <p className="dark:text-white">
-            Your bitcoin lightning payments on the web.
-          </p>
+          <h2 className="mb-2 text-2xl font-bold dark:text-white">
+            {t("unused.title")}
+          </h2>
 
           <p className="mb-2 dark:text-white">
-            To start using the Alby Extension you might want to get some sats
-            into your wallet.
-          </p>
+            {t("unused.description")}
 
-          <a
-            className="underline text-base dark:text-white"
-            href="https://guides.getalby.com/overall-guide/alby-lightning-wallet/how-to-top-up-your-wallet-balance"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Learn how to top up your wallet
-          </a>
-          {/* <p className="dark:text-white"> {t("used.no_info")}</p> */}
+            <br />
+            <a
+              className="underline text-base dark:text-white"
+              href="https://getalby.com/topup"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {t("unused.how_to")}
+            </a>
+          </p>
         </div>
       )}
 
