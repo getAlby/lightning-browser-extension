@@ -1,6 +1,7 @@
 import utils from "~/common/lib/utils";
 import db from "~/extension/background-script/db";
-import { MessagePublicKeyGet, PermissionMethod } from "~/types";
+import type { MessagePublicKeyGet } from "~/types";
+import { PermissionMethodNostr } from "~/types";
 
 import state from "../../state";
 
@@ -20,7 +21,7 @@ const getPublicKeyOrPrompt = async (message: MessagePublicKeyGet) => {
 
   const findPermission = await db.permissions.get({
     host: message.origin.host,
-    method: PermissionMethod["NOSTR_GETPUBLICKEY"],
+    method: PermissionMethodNostr["NOSTR_GETPUBLICKEY"],
   });
 
   const hasPermission = !!findPermission?.enabled;
@@ -44,7 +45,7 @@ const getPublicKeyOrPrompt = async (message: MessagePublicKeyGet) => {
           createdAt: Date.now().toString(),
           allowanceId: allowance.id,
           host: message.origin.host,
-          method: PermissionMethod["NOSTR_GETPUBLICKEY"],
+          method: PermissionMethodNostr["NOSTR_GETPUBLICKEY"],
           enabled: true,
           blocked: false,
         });
