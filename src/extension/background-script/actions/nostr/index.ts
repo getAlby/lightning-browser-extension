@@ -1,3 +1,5 @@
+import decryptOrPrompt from "./decryptOrPrompt";
+import encryptOrPrompt from "./encryptOrPrompt";
 import generatePrivateKey from "./generatePrivateKey";
 import getPrivateKey from "./getPrivateKey";
 import getPublicKeyOrPrompt from "./getPublicKeyOrPrompt";
@@ -12,4 +14,6 @@ export {
   getPublicKeyOrPrompt,
   getRelays,
   signEventOrPrompt,
+  encryptOrPrompt,
+  decryptOrPrompt,
 };
