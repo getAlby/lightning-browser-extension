@@ -642,6 +642,10 @@
         "remember": {
           "label": "Remember and don't ask again"
         }
+      },
+      "permissions": {
+        "decrypt": "Decrypt data",
+        "encrypt": "Encrypt data"
       }
     }
   },
