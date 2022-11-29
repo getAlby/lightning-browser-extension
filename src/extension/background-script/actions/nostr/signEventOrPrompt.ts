@@ -37,7 +37,6 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
   try {
     if (!hasPermission) {
       const promptResponse = await utils.openPrompt<{
-        confirm: boolean;
         enabled: boolean;
         blocked: boolean;
       }>({
