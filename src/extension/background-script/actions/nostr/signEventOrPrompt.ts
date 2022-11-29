@@ -1,7 +1,6 @@
 import utils from "~/common/lib/utils";
 import db from "~/extension/background-script/db";
-import { MessageSignEvent } from "~/types";
-import { PermissionMethod } from "~/types";
+import { MessageSignEvent, PermissionMethod } from "~/types";
 
 import state from "../../state";
 import { validateEvent } from "./helpers";
@@ -35,7 +34,13 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
   const hasPermission = !!findPermission?.enabled;
 
   try {
-    if (!hasPermission) {
+    if (hasPermission) {
+      const signedEvent = await state
+        .getState()
+        .getNostr()
+        .signEvent(message.args.event);
+      return { data: signedEvent };
+    } else {
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
         rememberPermission: boolean;
@@ -52,21 +57,24 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
           host: message.origin.host,
           method: PermissionMethod["NOSTR_SIGNMESSAGE"],
           enabled: true,
-          blocked: true,
+          blocked: false,
         });
 
         !!permissionIsAdded && (await db.saveToStorage());
       }
+      if (promptResponse.data.confirm) {
+        // Normally `openPrompt` would throw already, but to make sure we got a confirm from the user we check this here
+        const signedEvent = await state
+          .getState()
+          .getNostr()
+          .signEvent(message.args.event);
+        return { data: signedEvent };
+      } else {
+        return { error: "User rejected" };
+      }
     }
-
-    const signedEvent = await state
-      .getState()
-      .getNostr()
-      .signEvent(message.args.event);
-
-    return { data: signedEvent };
   } catch (e) {
-    console.error("signEvent cancelled", e);
+    console.error("signEvent failed", e);
     if (e instanceof Error) {
       return { error: e.message };
     }

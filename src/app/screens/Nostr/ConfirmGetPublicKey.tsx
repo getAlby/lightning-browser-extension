@@ -2,6 +2,8 @@ import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
+import Checkbox from "@components/form/Checkbox";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
@@ -17,11 +19,16 @@ function NostrConfirmGetPublicKey() {
   const { t: tCommon } = useTranslation("common");
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
+  const [loading, setLoading] = useState(false);
+  const [rememberPermission, setRememberPermission] = useState(false);
 
-  function enable() {
+  function confirm() {
+    setLoading(true);
     msg.reply({
       confirm: true,
+      rememberPermission,
     });
+    setLoading(false);
   }
 
   function reject(event: React.MouseEvent<HTMLAnchorElement>) {
@@ -49,7 +56,6 @@ function NostrConfirmGetPublicKey() {
             url={origin.host}
             isSmall={false}
           />
-
           <div className="dark:text-white pt-6 mb-4">
             <p className="mb-2">{t("allow", { host: origin.host })}</p>
             <div className="mb-2 flex items-center">
@@ -57,11 +63,30 @@ function NostrConfirmGetPublicKey() {
               <p className="dark:text-white">{t("read_public_key")}</p>
             </div>
           </div>
+
+          <div className="flex items-center">
+            <Checkbox
+              id="remember_permission"
+              name="remember_permission"
+              checked={rememberPermission}
+              onChange={(event) => {
+                setRememberPermission(event.target.checked);
+              }}
+            />
+            <label
+              htmlFor="remember_permission"
+              className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+            >
+              {t("confirm_sign_message.remember.label")}
+            </label>
+          </div>
         </div>
         <div className="mb-4 text-center flex flex-col">
           <ConfirmOrCancel
-            label={tCommon("actions.connect")}
-            onConfirm={enable}
+            disabled={loading}
+            loading={loading}
+            label={tCommon("actions.confirm")}
+            onConfirm={confirm}
             onCancel={reject}
           />
           <a
