@@ -105,7 +105,7 @@ function Publishers() {
           />
         </>
       ) : (
-        <div className="mt-12 bg-white dark:bg-surface-02dp shadow-md px-6 py-8 rounded-lg hover:bg-gray-50 w-full">
+        <div className="mt-12 bg-white dark:bg-surface-02dp shadow-md px-6 py-8 rounded-lg w-full">
           <h2 className="mb-2 text-2xl font-bold dark:text-white">
             {t("unused.title")}
           </h2>
@@ -115,7 +115,7 @@ function Publishers() {
 
             <br />
             <a
-              className="underline text-base dark:text-white"
+              className="underline"
               href="https://getalby.com/topup"
               target="_blank"
               rel="noreferrer"
