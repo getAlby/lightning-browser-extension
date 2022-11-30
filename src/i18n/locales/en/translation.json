@@ -635,6 +635,7 @@
     },
     "nostr": {
       "title": "Nostr",
+      "content": "{{host}} asks you to sign:",
       "allow": "Allow {{host}} to:",
       "read_public_key": "Read your public key",
       "block_and_ignore": "Block and ignore {{host}}",
