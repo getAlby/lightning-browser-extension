@@ -104,6 +104,7 @@ const methods: Record<string, string> = {
   offer: "",
   setchannelfee: "",
   signmessage: "",
+  "bkpr-listbalances": "",
 };
 
 export default class Commando implements Connector {
