@@ -72,7 +72,7 @@ function ConfirmSignMessage() {
               url={origin.host}
             />
             <ContentMessage
-              heading={t("content", { host: origin.host })}
+              heading={t("permissions.allow_sign", { host: origin.host })}
               content={event.content}
             />
             <div className="flex items-center">

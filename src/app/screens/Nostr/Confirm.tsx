@@ -12,13 +12,15 @@ import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import { OriginData } from "~/types";
 
-function NostrConfirmGetPublicKey() {
+function NostrConfirm() {
   const { t } = useTranslation("translation", {
     keyPrefix: "nostr",
   });
   const { t: tCommon } = useTranslation("common");
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
+  const description = navState.args?.description;
+  const details = navState.args?.details;
   const [loading, setLoading] = useState(false);
   const [rememberPermission, setRememberPermission] = useState(false);
 
@@ -56,33 +58,37 @@ function NostrConfirmGetPublicKey() {
             url={origin.host}
             isSmall={false}
           />
-
           <div className="dark:text-white pt-6 mb-4">
             <p className="mb-2">{t("allow", { host: origin.host })}</p>
-            <div className="mb-2 flex items-center">
-              <CheckIcon className="w-5 h-5 mr-2" />
-              <p className="dark:text-white">{t("read_public_key")}</p>
-            </div>
+            <p className="dark:text-white">
+              <CheckIcon className="w-5 h-5 mr-2 inline" />
+              {description}
+              {details && (
+                <>
+                  <br />
+                  <i className="ml-7">{details}</i>
+                </>
+              )}
+            </p>
+          </div>
+
+          <div className="flex items-center">
+            <Checkbox
+              id="remember_permission"
+              name="remember_permission"
+              checked={rememberPermission}
+              onChange={(event) => {
+                setRememberPermission(event.target.checked);
+              }}
+            />
+            <label
+              htmlFor="remember_permission"
+              className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+            >
+              {t("confirm_sign_message.remember.label")}
+            </label>
           </div>
         </div>
-
-        <div className="flex items-center">
-          <Checkbox
-            id="remember_permission"
-            name="remember_permission"
-            checked={rememberPermission}
-            onChange={(event) => {
-              setRememberPermission(event.target.checked);
-            }}
-          />
-          <label
-            htmlFor="remember_permission"
-            className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
-          >
-            {t("confirm_sign_message.remember.label")}
-          </label>
-        </div>
-
         <div className="mb-4 text-center flex flex-col">
           <ConfirmOrCancel
             disabled={loading}
@@ -104,4 +110,4 @@ function NostrConfirmGetPublicKey() {
   );
 }
 
-export default NostrConfirmGetPublicKey;
+export default NostrConfirm;
