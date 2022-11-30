@@ -25,7 +25,6 @@ Then run the following
   - Opera\
     `yarn run dev:opera`
 
-
 ### 💻 Load extension into browser
 
 - **Chrome**
@@ -50,7 +49,7 @@ Then run the following
 
 To connect to a remote development LND node you can use a [test account](https://github.com/bumi/lightning-browser-extension/wiki/Test-setup)
 
-###  Testnet/testing-accounts for development use Alby testnet
+### Testnet/testing-accounts for development use Alby testnet
 
 We set up our own internal testnet, which can be used for your development.
 If this is not reachable please let us know.
@@ -60,10 +59,9 @@ If this is not reachable please let us know.
   Currently only lists LND nodes
 - [LNDhub.go API Swagger](https://lndhub.regtest.getalby.com/swagger/index.html)
 
-
 After installing the wallet in the browser and setting the username and password, the page will jump to the page for selecting the lightning network wallet.
 
-Select the LND Testnet accounts account LND-1 in the document   [Test-setup](https://github.com/getAlby/lightning-browser-extension/wiki/Test-setup).
+Select the LND Testnet accounts account LND-1 in the document [Test-setup](https://github.com/getAlby/lightning-browser-extension/wiki/Test-setup).
 
 Copy the content of Address to the REST API host and port pasted into the wallet
 
@@ -71,13 +69,11 @@ Copy the contents of Admin Macaroon and paste it into the Macaroon (HEX format) 
 
 Click Continue to create an account
 
-
-###  Testnet/testing-accounts for development use localhost testnet
+### Testnet/testing-accounts for development use localhost testnet
 
 For most people who are new to the btc lightning network, starting a test version of the lightning network environment locally is very helpful for developing wallets, so that they can transfer money with confidence.
 
 [Start the lightning network test environment locally and link to the Alby](https://github.com/getAlby/lightning-browser-extension/wiki/Start-the-lightning-network-test-environment-locally-and-link-to-the-Alby)
-
 
 ## Project Structure
 
@@ -125,8 +121,6 @@ yarn test:unit
 yarn test
 ```
 
-
-
 ### ⌨️ Production package files
 
 - `yarn run package` builds the extension for all the browsers to `dist/production` directory respectively.
@@ -150,7 +144,3 @@ Currently, there is one native companion app available to connect to Tor nodes: 
 
 We used to maintain a [Storybook](https://storybook.js.org)-setup but nobody as using it. Currently we do not see a use for it.\
 But happy to talk about if you think it's useful.
-
-
-
-

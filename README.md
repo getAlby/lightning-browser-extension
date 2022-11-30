@@ -4,9 +4,6 @@
 
 <h1 align="center">Alby - Lightning Browser Extension</h1>
 
-
-
-
 ### A browser extension to bring the Bitcoin Lightning Network to the browser
 
 The extension provides deep Lightning Network integration for websites (for payments and authentication flows).
@@ -16,7 +13,6 @@ The goal is to write a minimal web extension to allow browsers to interact with 
 The extension implements the WebLN standard as the interface that allows websites to connect to Lightning Network nodes (to request payments, invoices, signatures, login, etc.) and enable seamless UX of web payments and authentications.
 
 The extension can connect to different node implementations and supports custodial and non-custodial setups.
-
 
 ## Some Features
 
@@ -35,6 +31,7 @@ The extension can connect to different node implementations and supports custodi
 ### STATUS: 🚀
 
 ## About Alby
+
 Alby is open-source and currently in alpha stage. Our goal is to create the best online experience to consume and reward content and services online
 
 ## Join the conversation
@@ -100,10 +97,10 @@ If this is not reachable please let us know.
 
 [How to run Alby in the local development environment.](./doc/Setup.md)
 
-
-# ⭐  Contributing
+# ⭐ Contributing
 
 We welcome and appreciate new contributions.
+
 ### Find a task
 
 We use the [Development Project Board](https://github.com/orgs/getAlby/projects/10/views/2) to plan to-dos. Best choose something from the to-do column. (If there is nothing for you, feel free to pick something from the backlog)
@@ -124,12 +121,9 @@ We use the [Development Project Board](https://github.com/orgs/getAlby/projects/
 - Have a look at this Readme. Can it be improved? Do you see typos? You can open a PR or reach out to us in [our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2).
 - You can help with [translations](#translations)
 
-
 [Contribution guide for new developers.](./doc/Contribution.md)
 
 [Contributor Covenant Code of Conduct.](./doc/CODE_OF_CONDUCT.md)
-
-
 
 ## ❔ FAQs
 
