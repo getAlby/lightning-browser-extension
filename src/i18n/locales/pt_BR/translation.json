@@ -649,7 +649,12 @@
       "allow": "Permitir {{host}}:",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "read_public_key": "Ler sua chave pública",
-      "title": "Nostr"
+      "title": "Nostr",
+      "confirm_sign_message": {
+        "remember": {
+          "label": "Lembrar e não perguntar novamente"
+        }
+      }
     },
     "confirm_request_permission": {
       "title": "Aprovar Solicitação",
