@@ -15,6 +15,7 @@ function Unlock() {
   const [password, setPassword] = useState("");
   const [passwordView, setPasswordView] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation() as {
     state: { from?: { pathname?: string } };
@@ -41,12 +42,15 @@ function Unlock() {
   }
 
   function unlock() {
+    setLoading(true);
     auth
       .unlock(password, () => {
         navigate(from, { replace: true });
+        setLoading(false);
       })
       .catch((e) => {
         setError(e.message);
+        setLoading(false);
       });
   }
 
@@ -105,7 +109,8 @@ function Unlock() {
           label={tCommon("actions.unlock")}
           fullWidth
           primary
-          disabled={password === ""}
+          loading={loading}
+          disabled={loading || password === ""}
         />
 
         <div className="flex justify-center space-x-1 mt-5">
