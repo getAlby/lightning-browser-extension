@@ -20,7 +20,13 @@ export type Props = {
   }) => void;
 };
 
-const initialErrors = {
+type errorMessage =
+  | ""
+  | "enter_password"
+  | "confirm_password"
+  | "mismatched_password";
+
+const initialErrors: Record<string, errorMessage> = {
   passwordErrorMessage: "",
   passwordConfirmationErrorMessage: "",
 };
@@ -35,7 +41,7 @@ export default function PasswordForm({
   const [passwordConfirmationView, setPasswordConfirmationView] =
     useState(false);
   const { t } = useTranslation("translation", {
-    keyPrefix: i18nKeyPrefix as "settings.change_password",
+    keyPrefix: i18nKeyPrefix,
   });
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -61,8 +67,8 @@ export default function PasswordForm({
   }
 
   function validate() {
-    let passwordErrorMessage = "";
-    let passwordConfirmationErrorMessage = "";
+    let passwordErrorMessage: errorMessage = "";
+    let passwordConfirmationErrorMessage: errorMessage = "";
 
     if (!formData.password) passwordErrorMessage = "enter_password";
     if (!formData.passwordConfirmation) {
@@ -106,7 +112,7 @@ export default function PasswordForm({
         />
         {errors.passwordErrorMessage && (
           <p className="mt-1 text-red-500">
-            {t(`errors.${errors.passwordErrorMessage as "enter_password"}`)}
+            {t(`errors.${errors.passwordErrorMessage}`)}
           </p>
         )}
       </div>
@@ -138,11 +144,7 @@ export default function PasswordForm({
         />
         {errors.passwordConfirmationErrorMessage && (
           <p className="mt-1 text-red-500">
-            {t(
-              `errors.${
-                errors.passwordConfirmationErrorMessage as "confirm_password"
-              }`
-            )}
+            {t(`errors.${errors.passwordConfirmationErrorMessage}`)}
           </p>
         )}
       </div>

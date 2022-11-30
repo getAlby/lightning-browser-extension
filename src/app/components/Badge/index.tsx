@@ -1,19 +1,16 @@
 import { useTranslation } from "react-i18next";
 
 type Props = {
-  label: string;
+  label: "active"; // | "inactive" | "..."
   color: string;
   textColor: string;
   small?: boolean;
 };
 
-export default function Badge({
-  label = "active",
-  color,
-  textColor,
-  small,
-}: Props) {
-  const { t: tComponents } = useTranslation("components");
+export default function Badge({ label, color, textColor, small }: Props) {
+  const { t: tComponents } = useTranslation("components", {
+    keyPrefix: "badge",
+  });
 
   return (
     <span
@@ -21,7 +18,7 @@ export default function Badge({
         !small ? "p-1.5 text-xs" : "p-1 text-xxxs"
       }`}
     >
-      {tComponents(`badge.label.${label as "active"}`)}
+      {tComponents(`label.${label}`)}
     </span>
   );
 }
