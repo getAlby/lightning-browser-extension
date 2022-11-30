@@ -1,6 +1,6 @@
 import type { DbPayment } from "~/types";
 
-export const DbPaymentsMockData: DbPayment[] = [
+export const paymentsFixture: DbPayment[] = [
   {
     allowanceId: "3",
     createdAt: "123456",

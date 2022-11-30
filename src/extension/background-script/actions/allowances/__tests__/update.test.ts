@@ -1,10 +1,10 @@
 import db from "~/extension/background-script/db";
-import { DbAllowanceMockData } from "~/fixtures/allowances";
+import { allowanceFixture } from "~/fixtures/allowances";
 import type { DbAllowance, MessageAllowanceUpdate } from "~/types";
 
 import updateAllowance from "../update";
 
-const mockAllowances: DbAllowance[] = DbAllowanceMockData;
+const mockAllowances: DbAllowance[] = allowanceFixture;
 
 db.allowances.bulkAdd(mockAllowances);
 

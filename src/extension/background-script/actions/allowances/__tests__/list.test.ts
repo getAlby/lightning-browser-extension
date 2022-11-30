@@ -1,6 +1,6 @@
 import db from "~/extension/background-script/db";
-import { DbAllowanceMockData } from "~/fixtures/allowances";
-import { DbPaymentsMockData } from "~/fixtures/payment";
+import { allowanceFixture } from "~/fixtures/allowances";
+import { paymentsFixture } from "~/fixtures/payment";
 import type {
   Allowance,
   DbAllowance,
@@ -10,9 +10,9 @@ import type {
 
 import listAllowances from "../list";
 
-const mockPayments: DbPayment[] = DbPaymentsMockData;
+const mockPayments: DbPayment[] = paymentsFixture;
 
-const mockAllowances: DbAllowance[] = DbAllowanceMockData;
+const mockAllowances: DbAllowance[] = allowanceFixture;
 
 const resultAllowances: Allowance[] = [
   {

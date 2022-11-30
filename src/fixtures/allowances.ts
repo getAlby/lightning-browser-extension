@@ -1,6 +1,6 @@
 import type { DbAllowance } from "~/types";
 
-export const DbAllowanceMockData: DbAllowance[] = [
+export const allowanceFixture: DbAllowance[] = [
   {
     enabled: true,
     host: "pro.kollider.xyz",
@@ -24,11 +24,17 @@ export const DbAllowanceMockData: DbAllowance[] = [
     name: "LN Markets",
     remainingBudget: 200,
     totalBudget: 200,
-    createdAt: "123457",
+    createdAt: "123456",
     tag: "",
   },
 ];
-export const mockAllowancesForAdd: DbAllowance[] = DbAllowanceMockData.slice(
-  0,
-  1
-);
+
+export function getallowanceFixtureWithfilter(host: string): DbAllowance[] {
+  const list: DbAllowance[] = [];
+  allowanceFixture.forEach((item: DbAllowance) => {
+    if (item.host !== host) {
+      list.push(item);
+    }
+  });
+  return list;
+}

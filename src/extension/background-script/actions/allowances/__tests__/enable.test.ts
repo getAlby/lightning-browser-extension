@@ -2,7 +2,7 @@ import { Runtime } from "webextension-polyfill";
 import utils from "~/common/lib/utils";
 import db from "~/extension/background-script/db";
 import state from "~/extension/background-script/state";
-import { DbAllowanceMockData } from "~/fixtures/allowances";
+import { allowanceFixture } from "~/fixtures/allowances";
 import type { DbAllowance, MessageAllowanceEnable } from "~/types";
 
 import enableAllowance from "../enable";
@@ -22,7 +22,7 @@ utils.openPrompt = jest
   .fn()
   .mockReturnValue({ data: { enabled: true, remember: true } });
 
-const mockAllowances: DbAllowance[] = DbAllowanceMockData;
+const mockAllowances: DbAllowance[] = allowanceFixture;
 
 describe("enable allowance", () => {
   afterEach(() => {

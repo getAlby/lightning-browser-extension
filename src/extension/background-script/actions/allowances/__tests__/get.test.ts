@@ -1,13 +1,13 @@
 import db from "~/extension/background-script/db";
-import { DbAllowanceMockData } from "~/fixtures/allowances";
-import { DbPaymentsMockData } from "~/fixtures/payment";
+import { allowanceFixture } from "~/fixtures/allowances";
+import { paymentsFixture } from "~/fixtures/payment";
 import type { DbAllowance, DbPayment, MessageAllowanceGet } from "~/types";
 
 import getAllowance from "../get";
 
-const mockPayments: DbPayment[] = DbPaymentsMockData;
+const mockPayments: DbPayment[] = paymentsFixture;
 
-const mockAllowances: DbAllowance[] = DbAllowanceMockData;
+const mockAllowances: DbAllowance[] = allowanceFixture;
 
 describe("get allowance", () => {
   afterEach(() => {
