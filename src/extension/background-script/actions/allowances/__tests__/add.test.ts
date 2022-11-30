@@ -1,25 +1,12 @@
 import db from "~/extension/background-script/db";
+import { mockAllowancesForAdd } from "~/fixtures/allowances";
 import type { DbAllowance, MessageAllowanceAdd } from "~/types";
 
 import addAllowance from "../add";
 
 Date.now = jest.fn(() => 1487076708000);
 
-const mockAllowances: DbAllowance[] = [
-  {
-    enabled: true,
-    host: "pro.kollider.xyz",
-    id: 3,
-    imageURL: "https://pro.kollider.xyz/favicon.ico",
-    lastPaymentAt: 0,
-    lnurlAuth: true,
-    name: "pro kollider",
-    remainingBudget: 500,
-    totalBudget: 500,
-    createdAt: "123456",
-    tag: "",
-  },
-];
+const mockAllowances: DbAllowance[] = mockAllowancesForAdd;
 
 describe("add allowance", () => {
   afterEach(() => {
@@ -62,7 +49,7 @@ describe("add allowance", () => {
       remainingBudget: 200,
       tag: "",
       totalBudget: 200,
-      id: 4,
+      id: 2,
     });
   });
 });
