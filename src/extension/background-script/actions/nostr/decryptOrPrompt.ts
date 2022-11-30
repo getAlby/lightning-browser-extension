@@ -1,8 +1,9 @@
 import utils from "~/common/lib/utils";
-import db from "~/extension/background-script/db";
 import state from "~/extension/background-script/state";
 import i18n from "~/i18n/i18nConfig";
 import { MessageDecryptGet, PermissionMethodNostr } from "~/types";
+
+import { hasPermissionFor, addPermissionFor } from "./helpers";
 
 const decryptOrPrompt = async (message: MessageDecryptGet) => {
   if (!("host" in message.origin)) {
@@ -10,22 +11,12 @@ const decryptOrPrompt = async (message: MessageDecryptGet) => {
     return;
   }
 
-  const allowance = await db.allowances.get({
-    host: message.origin.host,
-  });
-
-  if (!allowance?.id) {
-    return { error: "Could not find an allowance for this host" };
-  }
-
-  const findPermission = await db.permissions.get({
-    host: message.origin.host,
-    method: PermissionMethodNostr["NOSTR_NIP04DECRYPT"],
-  });
-
-  const hasPermission = !!findPermission?.enabled;
-
   try {
+    const hasPermission = await hasPermissionFor(
+      PermissionMethodNostr["NOSTR_NIP04DECRYPT"],
+      message.origin.host
+    );
+
     if (hasPermission) {
       const response = state
         .getState()
@@ -47,16 +38,10 @@ const decryptOrPrompt = async (message: MessageDecryptGet) => {
 
       // add permission to db only if user decided to always allow this request
       if (promptResponse.data.rememberPermission) {
-        const permissionIsAdded = await db.permissions.add({
-          createdAt: Date.now().toString(),
-          allowanceId: allowance.id,
-          host: message.origin.host,
-          method: PermissionMethodNostr["NOSTR_NIP04DECRYPT"],
-          enabled: true,
-          blocked: false,
-        });
-
-        !!permissionIsAdded && (await db.saveToStorage());
+        await addPermissionFor(
+          PermissionMethodNostr["NOSTR_NIP04DECRYPT"],
+          message.origin.host
+        );
       }
       if (promptResponse.data.confirm) {
         const response = state

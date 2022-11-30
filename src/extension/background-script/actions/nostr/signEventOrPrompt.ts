@@ -1,9 +1,9 @@
 import utils from "~/common/lib/utils";
-import db from "~/extension/background-script/db";
 import { MessageSignEvent } from "~/types";
 import { PermissionMethodNostr } from "~/types";
 
 import state from "../../state";
+import { hasPermissionFor, addPermissionFor } from "./helpers";
 import { validateEvent } from "./helpers";
 
 const signEventOrPrompt = async (message: MessageSignEvent) => {
@@ -19,22 +19,11 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
     };
   }
 
-  const allowance = await db.allowances.get({
-    host: message.origin.host,
-  });
-
-  if (!allowance?.id) {
-    return { error: "Could not find an allowance for this host" };
-  }
-
-  const findPermission = await db.permissions.get({
-    host: message.origin.host,
-    method: PermissionMethodNostr["NOSTR_SIGNMESSAGE"],
-  });
-
-  const hasPermission = !!findPermission?.enabled;
-
   try {
+    const hasPermission = await hasPermissionFor(
+      PermissionMethodNostr["NOSTR_SIGNMESSAGE"],
+      message.origin.host
+    );
     if (!hasPermission) {
       const promptResponse = await utils.openPrompt<{
         enabled: boolean;
@@ -46,16 +35,10 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
 
       // add permission to db only if user decided to always allow this request
       if (promptResponse.data.enabled) {
-        const permissionIsAdded = await db.permissions.add({
-          createdAt: Date.now().toString(),
-          allowanceId: allowance.id,
-          host: message.origin.host,
-          method: PermissionMethodNostr["NOSTR_SIGNMESSAGE"],
-          enabled: promptResponse.data.enabled,
-          blocked: promptResponse.data.blocked,
-        });
-
-        !!permissionIsAdded && (await db.saveToStorage());
+        await addPermissionFor(
+          PermissionMethodNostr["NOSTR_SIGNMESSAGE"],
+          message.origin.host
+        );
       }
     }
 

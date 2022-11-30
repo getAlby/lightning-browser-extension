@@ -1,9 +1,9 @@
 import utils from "~/common/lib/utils";
-import db from "~/extension/background-script/db";
 import type { MessagePublicKeyGet } from "~/types";
 import { PermissionMethodNostr } from "~/types";
 
 import state from "../../state";
+import { hasPermissionFor, addPermissionFor } from "./helpers";
 
 const getPublicKeyOrPrompt = async (message: MessagePublicKeyGet) => {
   if (!("host" in message.origin)) {
@@ -11,22 +11,12 @@ const getPublicKeyOrPrompt = async (message: MessagePublicKeyGet) => {
     return;
   }
 
-  const allowance = await db.allowances.get({
-    host: message.origin.host,
-  });
-
-  if (!allowance?.id) {
-    return { error: "Could not find an allowance for this host" };
-  }
-
-  const findPermission = await db.permissions.get({
-    host: message.origin.host,
-    method: PermissionMethodNostr["NOSTR_GETPUBLICKEY"],
-  });
-
-  const hasPermission = !!findPermission?.enabled;
-
   try {
+    const hasPermission = await hasPermissionFor(
+      PermissionMethodNostr["NOSTR_GETPUBLICKEY"],
+      message.origin.host
+    );
+
     if (hasPermission) {
       const publicKey = state.getState().getNostr().getPublicKey();
       return { data: publicKey };
@@ -41,16 +31,10 @@ const getPublicKeyOrPrompt = async (message: MessagePublicKeyGet) => {
       });
       // add permission to db only if user decided to always allow this request
       if (promptResponse.data.rememberPermission) {
-        const permissionIsAdded = await db.permissions.add({
-          createdAt: Date.now().toString(),
-          allowanceId: allowance.id,
-          host: message.origin.host,
-          method: PermissionMethodNostr["NOSTR_GETPUBLICKEY"],
-          enabled: true,
-          blocked: false,
-        });
-
-        !!permissionIsAdded && (await db.saveToStorage());
+        await addPermissionFor(
+          PermissionMethodNostr["NOSTR_GETPUBLICKEY"],
+          message.origin.host
+        );
       }
 
       if (promptResponse.data.confirm) {
