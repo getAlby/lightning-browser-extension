@@ -4,7 +4,7 @@ import i18n from "~/i18n/i18nConfig";
 import { translationI18nNamespace } from "~/i18n/namespaces";
 import type { MessageAccountUnlock } from "~/types";
 
-const unlock = (message: MessageAccountUnlock) => {
+const unlock = async (message: MessageAccountUnlock) => {
   const passwordArg = message.args.password;
   const password =
     typeof passwordArg === "number" ? `${passwordArg}` : passwordArg;
@@ -32,8 +32,11 @@ const unlock = (message: MessageAccountUnlock) => {
 
   // if everything is fine we keep the password in memory
   state.setState({ password });
+  // load the connector to make sure it is initialized for the future calls
+  // with this we prevent potentially multiple action calls trying to initialize the connector in parallel
+  await state.getState().getConnector();
 
-  return Promise.resolve({ data: { unlocked: true, currentAccountId } });
+  return { data: { unlocked: true, currentAccountId } };
 };
 
 export default unlock;

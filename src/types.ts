@@ -193,24 +193,6 @@ export interface MessageAccountAll extends MessageDefault {
   action: "getAccounts";
 }
 
-export interface MessagePermissionAdd extends MessageDefault {
-  args: {
-    host: string;
-    method: string;
-    enabled: boolean;
-    blocked: boolean;
-  };
-  action: "addPermission";
-}
-
-export interface MessagePermissionDelete extends MessageDefault {
-  args: {
-    host: string;
-    method: string;
-  };
-  action: "deletePermission";
-}
-
 export interface MessageBlocklistAdd extends MessageDefault {
   args: {
     host: string;
@@ -279,7 +261,7 @@ export interface MessageAllowanceEnable extends MessageDefault {
   args: {
     host: Allowance["host"];
   };
-  action: "enableAllowance";
+  action: "public/webln/enable" | "public/nostr/enable";
 }
 
 export interface MessageAllowanceDelete extends MessageDefault {
@@ -498,19 +480,22 @@ export interface DbPayment {
   totalFees: number;
 }
 
+export interface Payment extends Omit<DbPayment, "id"> {
+  id: number;
+}
+
+export enum PermissionMethodNostr {
+  NOSTR_SIGNMESSAGE = "nostr/signMessage",
+}
+
 export interface DbPermission {
   id?: number;
   createdAt: string;
   allowanceId: number;
   host: string;
-  method: string;
+  method: string | PermissionMethodNostr;
   enabled: boolean;
   blocked: boolean;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface Payment extends Omit<DbPayment, "id"> {
-  id: number;
 }
 
 export interface PaymentResponse
@@ -611,11 +596,7 @@ export interface Publisher
   > {
   id: number;
   title?: string;
-  badge?: {
-    label: string;
-    color: string;
-    textColor: string;
-  };
+  badges?: Badge[];
 }
 
 export type SupportedExchanges = "alby" | "coindesk" | "yadio";

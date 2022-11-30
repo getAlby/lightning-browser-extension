@@ -9,7 +9,7 @@ type Props = {
 
 function SatButtons({ onClick, disabled }: Props) {
   return (
-    <div className="flex gap-2 mt-2">
+    <div className="flex gap-2">
       <Button
         icon={<SatoshiV2Icon className="w-4 h-4" />}
         label="100 ⚡"

@@ -2,10 +2,12 @@ import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import SatButtons from "@components/SatButtons";
+import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
@@ -22,13 +24,21 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
 
 function MakeInvoice() {
   const navState = useNavigationState();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFormattedFiat,
+  } = useSettings();
+  const showFiat = !isLoadingSettings && settings.showFiat;
+
   const origin = navState.origin as OriginData;
   const invoiceAttributes = navState.args
     ?.invoiceAttributes as RequestInvoiceArgs;
   const amountEditable = navState.args?.amountEditable;
   const memoEditable = navState.args?.memoEditable;
   const [loading, setLoading] = useState(false);
-  const [value, setValue] = useState(invoiceAttributes.amount || "");
+  const [valueSat, setValueSat] = useState(invoiceAttributes.amount || "");
+  const [fiatValue, setFiatValue] = useState("");
   const [memo, setMemo] = useState(invoiceAttributes.memo || "");
   const [error, setError] = useState("");
   const { t: tComponents } = useTranslation("components");
@@ -36,6 +46,15 @@ function MakeInvoice() {
   const { t } = useTranslation("translation", {
     keyPrefix: "make_invoice",
   });
+
+  useEffect(() => {
+    if (valueSat !== "" && showFiat) {
+      (async () => {
+        const res = await getFormattedFiat(valueSat);
+        setFiatValue(res);
+      })();
+    }
+  }, [valueSat, showFiat, getFormattedFiat]);
 
   function handleValueChange(amount: string) {
     setError("");
@@ -50,7 +69,7 @@ function MakeInvoice() {
     ) {
       setError(t("errors.amount_too_big"));
     }
-    setValue(amount);
+    setValueSat(amount);
   }
 
   function handleMemoChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -58,11 +77,11 @@ function MakeInvoice() {
   }
 
   async function confirm() {
-    if (!value) return;
+    if (!valueSat) return;
     try {
       setLoading(true);
       const response = await api.makeInvoice({
-        amount: value,
+        amount: valueSat,
         memo: memo,
       });
       msg.reply(response);
@@ -94,18 +113,14 @@ function MakeInvoice() {
             <div>
               {amountEditable ? (
                 <div className="mb-4">
-                  {/* 
-                    TODO: https://github.com/getAlby/lightning-browser-extension/issues/1666
-                    [Feature] MakeInvoice - switch currency TextField to DualCurrency field to support Fiat #1666 
-                   */}
-                  <TextField
+                  <DualCurrencyField
                     id="amount"
                     label={t("amount.label")}
-                    type="number"
                     min={invoiceAttributes.minimumAmount}
                     max={invoiceAttributes.maximumAmount}
-                    value={value}
+                    value={valueSat}
                     onChange={(e) => handleValueChange(e.target.value)}
+                    fiatValue={fiatValue}
                   />
                   <SatButtons onClick={handleValueChange} />
                 </div>
@@ -140,7 +155,7 @@ function MakeInvoice() {
 
         <div>
           <ConfirmOrCancel
-            disabled={!value || loading || Boolean(error)}
+            disabled={!valueSat || loading || Boolean(error)}
             loading={loading}
             onConfirm={confirm}
             onCancel={reject}

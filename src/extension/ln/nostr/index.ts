@@ -3,11 +3,19 @@ import { Event } from "./types";
 export default class NostrProvider {
   nip04 = new Nip04(this);
 
+  private async enable() {
+    return await this.execute<{
+      enabled: boolean;
+      remember: boolean;
+    }>("enable");
+  }
+
   async getPublicKey(): Promise<string> {
     return await this.execute("getPublicKeyOrPrompt");
   }
 
   async signEvent(event: Event): Promise<Event> {
+    await this.enable();
     return this.execute("signEventOrPrompt", { event });
   }
 
