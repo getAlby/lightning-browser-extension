@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 
 type Props = {
-  label: "active"; // | "inactive" | "..."
+  label: "active" | "auth";
   color: string;
   textColor: string;
   small?: boolean;

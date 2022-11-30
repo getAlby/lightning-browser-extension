@@ -436,7 +436,7 @@ export interface RequestInvoiceArgs {
 }
 
 export interface IBadge {
-  label: "active";
+  label: "active" | "auth";
   color: string;
   textColor: string;
 }
@@ -575,7 +575,7 @@ export interface SettingsStorage {
 }
 
 export interface Badge {
-  label: "active"; // | "inactive" | "...";
+  label: "active" | "auth";
   color: string;
   textColor: string;
 }

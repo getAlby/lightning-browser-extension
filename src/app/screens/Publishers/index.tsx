@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import utils from "~/common/lib/utils";
-import { Allowance, Publisher } from "~/types";
+import { Allowance, Badge, Publisher } from "~/types";
 
 import websites from "./websites.json";
 
@@ -45,7 +45,7 @@ function Publishers() {
           usedBudget,
         } = allowance;
 
-        const badges = [];
+        const badges: Badge[] = [];
         if (allowance.remainingBudget > 0) {
           badges.push({
             label: "active",
