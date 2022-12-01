@@ -22,6 +22,8 @@ import Connector, {
   SignMessageResponse,
 } from "./connector.interface";
 
+const API_URL = "https://lndhubx.kollider.xyz/api";
+
 interface Config {
   username: string;
   password: string;
@@ -79,23 +81,23 @@ export default class Kollider implements Connector {
   async getInvoices(): Promise<GetInvoicesResponse> {
     const data = await this.request<
       {
-        r_hash: string;
-        payment_request: string;
-        payment_hash: string;
-        created_at: number;
-        value: number;
-        value_msat: number;
-        expiry: number;
-        settled: boolean;
-        add_index: number;
-        settled_date: number;
         account_id: string;
-        uid: number;
+        add_index: number;
+        created_at: number;
+        currency: ACCOUNT_CURRENCIES;
+        expiry: number;
+        fees: null; // FIXME! Why is this null?
         incoming: boolean;
         owner: number;
-        fees: FixMe;
-        currency: ACCOUNT_CURRENCIES;
+        payment_hash: string;
+        payment_request: string;
+        reference: string;
+        settled: boolean; // Bug: Currently always false
+        settled_date: number; // Bug: Currently always 0
         target_account_currency: ACCOUNT_CURRENCIES;
+        uid: number;
+        value: number;
+        value_msat: number;
       }[]
     >("GET", "/getuserinvoices", undefined);
 
@@ -103,11 +105,11 @@ export default class Kollider implements Connector {
       .filter((i) => i.incoming)
       .map(
         (invoice, index): ConnectorInvoice => ({
-          id: `${invoice.r_hash}-${index}`,
-          memo: "",
+          id: `${invoice.payment_hash}-${index}`,
+          memo: invoice.reference,
           preimage: "", // lndhub doesn't support preimage (yet)
-          settled: true, //invoice.settled, // seems there is a bug in the Kollider API and invoices are not marked as settled and have no settled_date
-          settleDate: invoice.settled_date * 1000,
+          settled: true, //seems there is a bug in the Kollider API and invoices are not marked as settled and have no settled_date
+          settleDate: invoice.created_at, // BUG: here it should be settled_date, which is currently always 0! Also: created_at is set to Monday, 28. November 2022, propably because kollider ported all accounts on that day
           totalAmount: `${invoice.value}`,
           type: "received",
         })
@@ -243,7 +245,7 @@ export default class Kollider implements Connector {
 
   async authorize() {
     const { data: authData } = await axios.post(
-      `https://lndhubx.kollider.xyz/api/auth`,
+      `${API_URL}/auth`,
       {
         username: this.config.username,
         password: this.config.password,
@@ -258,7 +260,7 @@ export default class Kollider implements Connector {
       const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
 
       console.error(errMessage);
-      throw new Error("API error: " + errMessage);
+      throw new Error("Kollider API error: " + errMessage);
     } else {
       this.refresh_token = authData.refresh;
       this.access_token = authData.token;
@@ -314,7 +316,7 @@ export default class Kollider implements Connector {
 
     const reqConfig: AxiosRequestConfig = {
       method,
-      url: `https://lndhubx.kollider.xyz/api${path}`,
+      url: `${API_URL}/${path}`,
       responseType: "json",
       headers: {
         ...defaultHeaders,
