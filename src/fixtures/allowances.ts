@@ -28,13 +28,3 @@ export const allowanceFixture: DbAllowance[] = [
     tag: "",
   },
 ];
-
-export function getallowanceFixtureWithfilter(host: string): DbAllowance[] {
-  const list: DbAllowance[] = [];
-  allowanceFixture.forEach((item: DbAllowance) => {
-    if (item.host !== host) {
-      list.push(item);
-    }
-  });
-  return list;
-}

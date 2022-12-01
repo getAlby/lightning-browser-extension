@@ -1,13 +1,12 @@
 import db from "~/extension/background-script/db";
-import { getallowanceFixtureWithfilter } from "~/fixtures/allowances";
+import { allowanceFixture } from "~/fixtures/allowances";
 import type { DbAllowance, MessageAllowanceAdd } from "~/types";
 
 import addAllowance from "../add";
 
 Date.now = jest.fn(() => 1487076708000);
 
-const mockAllowances: DbAllowance[] =
-  getallowanceFixtureWithfilter("lnmarkets.com");
+const mockAllowances: DbAllowance[] = [{ ...allowanceFixture[0] }];
 
 describe("add allowance", () => {
   afterEach(() => {
