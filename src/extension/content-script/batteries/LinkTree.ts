@@ -7,11 +7,11 @@ function battery(): void {
   const linkElement = document.querySelector<HTMLAnchorElement>(
     "a[href*='getalby.com']"
   );
-  const description = document.querySelector<HTMLMetaElement>(
-    'head > meta[name="description"]'
-  );
+  const description = [...document.querySelectorAll("h2")].filter(
+    (el) => el.id != "ot-pc-title"
+  )[0];
 
-  let text = description?.content + " ";
+  let text = description?.innerText + " ";
 
   if (linkElement) {
     text += linkElement.href + " ";
@@ -25,13 +25,8 @@ function battery(): void {
       method: "lnurl",
       address,
       ...getOriginData(),
-      description:
-        document.querySelector<HTMLMetaElement>(
-          'head > meta[name="description"]'
-        )?.content ?? "",
-      name:
-        document.querySelector<HTMLHeadingElement>("h1")?.innerText.slice(1) ??
-        "",
+      description: description?.innerText ?? "",
+      name: document.querySelector<HTMLHeadingElement>("h1")?.innerText ?? "",
       icon:
         document.querySelector<HTMLImageElement>('[data-testid="ProfileImage"]')
           ?.src ?? "",
