@@ -2,25 +2,25 @@
 
 We welcome and appreciate new contributions.
 
-### Find a task
+### Testnet/testing-accounts for development use Alby testnet
 
-We use the [Development Project Board](https://github.com/orgs/getAlby/projects/10/views/2) to plan to-dos. Best choose something from the to-do column. (If there is nothing for you, feel free to pick something from the backlog)
+We set up our own internal testnet, which can be used for your development.
+If this is not reachable please let us know.
 
-#### Developer
+- [Test-setup](https://github.com/getAlby/lightning-browser-extension/wiki/Test-setup) for different connectors (i.e. LND)
+- [Thunderhub](https://thunderhub.regtest.getalby.com/) for testing nodes (PW: `getalby`)
+  Currently only lists LND nodes
+- [LNDhub.go API Swagger](https://lndhub.regtest.getalby.com/swagger/index.html)
 
-- Check out the issues that have specifically been [marked as being friendly to new contributors](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3Adesign+label%3A%22good+first+issue%22)
-- You can also review open PRs
+After installing the wallet in the browser and setting the username and password, the page will jump to the page for selecting the lightning network wallet.
 
-#### Designer
+Select the LND Testnet accounts account LND-1 in the document [Test-setup](https://github.com/getAlby/lightning-browser-extension/wiki/Test-setup).
 
-- Have a look at our [Open source Design guide](https://github.com/getAlby/lightning-browser-extension/wiki/Open-source-Design)
-- Check out the issues that have specifically been [marked with "design"](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3A%22design%22)
-- We also have a [Figma Design Guide Project](https://www.figma.com/file/xwGXHxW4FWpV03Tt37atZv/Extension-1.10.0) which you can have a look at
+Copy the content of Address to the REST API host and port pasted into the wallet
 
-#### Anyone
+Copy the contents of Admin Macaroon and paste it into the Macaroon (HEX format) in the wallet
 
-- Have a look at this Readme. Can it be improved? Do you see typos? You can open a PR or reach out to us in [our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2).
-- You can help with [translations](#translations)
+Click Continue to create an account
 
 ### Creating a PR
 

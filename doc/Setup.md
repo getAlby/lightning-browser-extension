@@ -2,29 +2,6 @@
 
 ## 🚀 Quick Start
 
-Ensure you have
-
-- [Node.js](https://nodejs.org) v16 or newer installed (we run tests with v18)
-- [Yarn](https://yarnpkg.com) v1 or v2 installed
-
-Supported but not required
-
-- [nvm](https://github.com/nvm-sh/nvm#intro)
-
-Then run the following
-
-### 🛠 Development
-
-- Install dependencies\
-  `yarn install`
-- To watch file changes in development
-  - Chrome\
-    `yarn run dev:chrome`
-  - Firefox\
-    `yarn run dev:firefox`
-  - Opera\
-    `yarn run dev:opera`
-
 ### 💻 Load extension into browser
 
 - **Chrome**
@@ -48,26 +25,6 @@ Then run the following
   - Check the `Developer Mode` and load as unpacked from extension’s extracted directory.
 
 To connect to a remote development LND node you can use a [test account](https://github.com/bumi/lightning-browser-extension/wiki/Test-setup)
-
-### Testnet/testing-accounts for development use Alby testnet
-
-We set up our own internal testnet, which can be used for your development.
-If this is not reachable please let us know.
-
-- [Test-setup](https://github.com/getAlby/lightning-browser-extension/wiki/Test-setup) for different connectors (i.e. LND)
-- [Thunderhub](https://thunderhub.regtest.getalby.com/) for testing nodes (PW: `getalby`)
-  Currently only lists LND nodes
-- [LNDhub.go API Swagger](https://lndhub.regtest.getalby.com/swagger/index.html)
-
-After installing the wallet in the browser and setting the username and password, the page will jump to the page for selecting the lightning network wallet.
-
-Select the LND Testnet accounts account LND-1 in the document [Test-setup](https://github.com/getAlby/lightning-browser-extension/wiki/Test-setup).
-
-Copy the content of Address to the REST API host and port pasted into the wallet
-
-Copy the contents of Admin Macaroon and paste it into the Macaroon (HEX format) in the wallet
-
-Click Continue to create an account
 
 ### Testnet/testing-accounts for development use localhost testnet
 
@@ -133,14 +90,15 @@ docker run --rm --volume="$(pwd):/app" --workdir="/app" -t -i node:lts "yarn ins
 
 Note: By default the `manifest.json` is set with version `0.0.0`. The webpack loader will update the version in the build with that of the `package.json` version. In order to release a new version, update version in `package.json` and run script.
 
-## Native Companions
-
-Alby supports native connectors to native applications on the host computer. For this the extension passes each call to a native application (using [native messaging](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging)).
-This allows Alby also to connect to nodes behind Tor (through this native "proxy" application).
-
-Currently, there is one native companion app available to connect to Tor nodes: [https://github.com/getAlby/alby-companion-rs](https://github.com/getAlby/alby-companion-rs)
-
 #### Storybook.js
 
 We used to maintain a [Storybook](https://storybook.js.org)-setup but nobody as using it. Currently we do not see a use for it.\
 But happy to talk about if you think it's useful.
+
+## Contributing
+
+We love collaborating with folks inside and outside of GitHub and welcome contributions!
+
+[Contribution guide for new developers.](CONTRIBUTION.md)
+
+[Contributor Covenant Code of Conduct.](CODE_OF_CONDUCT.md)

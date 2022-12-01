@@ -87,15 +87,37 @@ Add Alby to your browser
 
 ## 🚀 Quick Start
 
-We set up our own internal testnet, which can be used for your development.
-If this is not reachable please let us know.
+Ensure you have
 
-- [Test-setup](https://github.com/getAlby/lightning-browser-extension/wiki/Test-setup) for different connectors (i.e. LND)
-- [Thunderhub](https://thunderhub.regtest.getalby.com/) for testing nodes (PW: `getalby`)
-  Currently only lists LND nodes
-- [LNDhub.go API Swagger](https://lndhub.regtest.getalby.com/swagger/index.html)
+- [Node.js](https://nodejs.org) v16 or newer installed (we run tests with v18)
+- [Yarn](https://yarnpkg.com) v1 or v2 installed
 
-[How to run Alby in the local development environment.](./doc/Setup.md)
+Supported but not required
+
+- [nvm](https://github.com/nvm-sh/nvm#intro)
+
+Then run the following
+
+### 🛠 Development
+
+- Install dependencies\
+  `yarn install`
+- To watch file changes in development
+  - Chrome\
+    `yarn run dev:chrome`
+  - Firefox\
+    `yarn run dev:firefox`
+  - Opera\
+    `yarn run dev:opera`
+
+[Refer to SETUP.md for info regarding how to setup Alby](./doc/SETUP.md)
+
+## Native Companions
+
+Alby supports native connectors to native applications on the host computer. For this the extension passes each call to a native application (using [native messaging](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging)).
+This allows Alby also to connect to nodes behind Tor (through this native "proxy" application).
+
+Currently, there is one native companion app available to connect to Tor nodes: [https://github.com/getAlby/alby-companion-rs](https://github.com/getAlby/alby-companion-rs)
 
 # ⭐ Contributing
 
@@ -120,10 +142,6 @@ We use the [Development Project Board](https://github.com/orgs/getAlby/projects/
 
 - Have a look at this Readme. Can it be improved? Do you see typos? You can open a PR or reach out to us in [our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2).
 - You can help with [translations](#translations)
-
-[Contribution guide for new developers.](./doc/Contribution.md)
-
-[Contributor Covenant Code of Conduct.](./doc/CODE_OF_CONDUCT.md)
 
 ## ❔ FAQs
 
