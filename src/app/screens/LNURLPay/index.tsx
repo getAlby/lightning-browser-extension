@@ -32,7 +32,9 @@ const Dt = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Dd = ({ children }: { children: React.ReactNode }) => (
-  <dd className="mb-4 text-gray-600 dark:text-neutral-500">{children}</dd>
+  <dd className="mb-4 text-gray-600 dark:text-neutral-500 break-all">
+    {children}
+  </dd>
 );
 
 function LNURLPay() {
@@ -358,7 +360,7 @@ function LNURLPay() {
                 <form onSubmit={handleSubmit}>
                   <fieldset disabled={loadingConfirm}>
                     <div className="my-4">
-                      <dl>
+                      <dl className="overflow-hidden">
                         <>
                           {formattedMetadata(details.metadata).map(
                             ([dt, dd], i) => (

@@ -3,11 +3,12 @@ import {
   VisibleIcon,
 } from "@bitcoin-design/bitcoin-icons-react/outline";
 import TextField from "@components/form/TextField";
+import type { KeyPrefix } from "i18next";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export type Props = {
-  i18nKeyPrefix: string;
+  i18nKeyPrefix: KeyPrefix<"translation">;
   children?: React.ReactNode;
   formData: {
     password: string;
@@ -19,7 +20,13 @@ export type Props = {
   }) => void;
 };
 
-const initialErrors = {
+type errorMessage =
+  | ""
+  | "enter_password"
+  | "confirm_password"
+  | "mismatched_password";
+
+const initialErrors: Record<string, errorMessage> = {
   passwordErrorMessage: "",
   passwordConfirmationErrorMessage: "",
 };
@@ -33,7 +40,9 @@ export default function PasswordForm({
   const [passwordView, setPasswordView] = useState(false);
   const [passwordConfirmationView, setPasswordConfirmationView] =
     useState(false);
-  const { t } = useTranslation("translation", { keyPrefix: i18nKeyPrefix });
+  const { t } = useTranslation("translation", {
+    keyPrefix: i18nKeyPrefix,
+  });
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     if (
@@ -58,8 +67,8 @@ export default function PasswordForm({
   }
 
   function validate() {
-    let passwordErrorMessage = "";
-    let passwordConfirmationErrorMessage = "";
+    let passwordErrorMessage: errorMessage = "";
+    let passwordConfirmationErrorMessage: errorMessage = "";
 
     if (!formData.password) passwordErrorMessage = "enter_password";
     if (!formData.passwordConfirmation) {
@@ -103,7 +112,7 @@ export default function PasswordForm({
         />
         {errors.passwordErrorMessage && (
           <p className="mt-1 text-red-500">
-            {t("errors." + errors.passwordErrorMessage)}
+            {t(`errors.${errors.passwordErrorMessage}`)}
           </p>
         )}
       </div>
@@ -135,7 +144,7 @@ export default function PasswordForm({
         />
         {errors.passwordConfirmationErrorMessage && (
           <p className="mt-1 text-red-500">
-            {t("errors." + errors.passwordConfirmationErrorMessage)}
+            {t(`errors.${errors.passwordConfirmationErrorMessage}`)}
           </p>
         )}
       </div>

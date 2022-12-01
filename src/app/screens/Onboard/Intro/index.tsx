@@ -8,42 +8,29 @@ import Button from "@components/Button";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import i18n from "~/i18n/i18nConfig";
-import { translationI18nNamespace } from "~/i18n/namespaces";
 
 import Features from "./features";
 
 function getFeatures() {
   return [
     {
-      name: i18n.t("welcome.intro.send.title", translationI18nNamespace),
-      description: i18n.t(
-        "welcome.intro.send.description",
-        translationI18nNamespace
-      ),
+      name: i18n.t("translation:welcome.intro.send.title"),
+      description: i18n.t("translation:welcome.intro.send.description"),
       icon: LightningIcon,
     },
     {
-      name: i18n.t("welcome.intro.paywall.title", translationI18nNamespace),
-      description: i18n.t(
-        "welcome.intro.paywall.description",
-        translationI18nNamespace
-      ),
+      name: i18n.t("translation:welcome.intro.paywall.title"),
+      description: i18n.t("translation:welcome.intro.paywall.description"),
       icon: KeyIcon,
     },
     {
-      name: i18n.t("welcome.intro.privacy.title", translationI18nNamespace),
-      description: i18n.t(
-        "welcome.intro.privacy.description",
-        translationI18nNamespace
-      ),
+      name: i18n.t("translation:welcome.intro.privacy.title"),
+      description: i18n.t("translation:welcome.intro.privacy.description"),
       icon: ShieldIcon,
     },
     {
-      name: i18n.t("welcome.intro.foss.title", translationI18nNamespace),
-      description: i18n.t(
-        "welcome.intro.foss.description",
-        translationI18nNamespace
-      ),
+      name: i18n.t("translation:welcome.intro.foss.title"),
+      description: i18n.t("translation:welcome.intro.foss.description"),
       icon: CodeIcon,
     },
   ];

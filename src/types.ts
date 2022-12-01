@@ -436,16 +436,10 @@ export interface RequestInvoiceArgs {
   memo?: string;
 }
 
-export interface IBadge {
-  label: string;
-  color: string;
-  textColor: string;
-}
-
 export type Transaction = {
   amount?: string;
   boostagram?: Invoice["boostagram"];
-  badges?: IBadge[];
+  badges?: Badge[];
   createdAt?: string;
   currency?: string;
   date: string;
@@ -576,7 +570,7 @@ export interface SettingsStorage {
 }
 
 export interface Badge {
-  label: string;
+  label: "active" | "auth";
   color: string;
   textColor: string;
 }
