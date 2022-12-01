@@ -5,6 +5,14 @@ import i18n from "~/i18n/i18nConfig";
 
 import type { CURRENCIES, ACCOUNT_CURRENCIES } from "../constants";
 
+export const numSatsInBtc = 100_000_000;
+
+export const getSatsToBTC = (sats: string | number) =>
+  Number(sats) / numSatsInBtc;
+
+export const getBTCToSats = (btc: string | number) =>
+  Number(btc) * numSatsInBtc;
+
 export const getFormattedCurrency = (params: {
   amount: number | string;
   currency: CURRENCIES | ACCOUNT_CURRENCIES;
