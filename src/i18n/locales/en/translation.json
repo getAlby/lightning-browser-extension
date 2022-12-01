@@ -2,6 +2,12 @@
   "translation": {
     "welcome": {
       "title": "Welcome to Alby",
+      "nav": {
+        "welcome": "Welcome",
+        "password": "Your Password",
+        "connect": "Your Lightning account",
+        "done": "Done"
+      },
       "set_password": {
         "title": "Set an unlock password",
         "description": "Your Lightning account data is securely encrypted with an unlock password. Do not forget this password! You need it to unlock the Alby Extension (in this browser)",
