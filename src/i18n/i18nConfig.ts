@@ -11,6 +11,36 @@ import it from "~/i18n/locales/it/translation.json";
 import pt_BR from "~/i18n/locales/pt_BR/translation.json";
 import sv from "~/i18n/locales/sv/translation.json";
 
+export const defaultNS = "translation";
+// needs to be aligned with `supportedLocales`
+export const resources = {
+  en: {
+    translation: en.translation,
+    common: en.common,
+    components: en.components,
+  },
+  es: {
+    translation: es.translation,
+    common: es.common,
+    components: es.components,
+  },
+  pt_BR: {
+    translation: pt_BR.translation,
+    common: pt_BR.common,
+    components: pt_BR.components,
+  },
+  sv: {
+    translation: sv.translation,
+    common: sv.common,
+    components: sv.components,
+  },
+  it: {
+    translation: it.translation,
+    common: it.common,
+    components: it.components,
+  },
+} as const;
+
 export const supportedLocales = [
   { locale: "en", label: "English" },
   { locale: "es", label: "Español" },
@@ -18,15 +48,6 @@ export const supportedLocales = [
   { locale: "sv", label: "Svenska" },
   { locale: "it", label: "Italiano" },
 ];
-
-// needs to be aligned with `supportedLocales`
-export const resources = {
-  en,
-  es,
-  pt_BR,
-  sv,
-  it,
-};
 
 i18n
   // pass the i18n instance to react-i18next.
@@ -39,6 +60,8 @@ i18n
   .init({
     //debug: true,
     fallbackLng: "en",
+    ns: ["translation", "common", "components"],
+    defaultNS,
     resources,
   });
 

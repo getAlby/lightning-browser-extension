@@ -1,7 +1,6 @@
 import { decryptData } from "~/common/lib/crypto";
 import state from "~/extension/background-script/state";
 import i18n from "~/i18n/i18nConfig";
-import { translationI18nNamespace } from "~/i18n/namespaces";
 import type { MessageAccountUnlock } from "~/types";
 
 const unlock = (message: MessageAccountUnlock) => {
@@ -26,7 +25,7 @@ const unlock = (message: MessageAccountUnlock) => {
   } catch (e) {
     console.error("Invalid password");
     return Promise.resolve({
-      error: i18n.t("unlock.errors.invalid_password", translationI18nNamespace),
+      error: i18n.t("translation:unlock.errors.invalid_password"),
     });
   }
 

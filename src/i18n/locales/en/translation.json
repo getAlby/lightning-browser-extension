@@ -635,6 +635,7 @@
     },
     "nostr": {
       "title": "Nostr",
+      "content": "{{host}} asks you to sign:",
       "allow": "Allow {{host}} to:",
       "read_public_key": "Read your public key",
       "block_and_ignore": "Block and ignore {{host}}",
@@ -726,7 +727,8 @@
         "message": "Message",
         "app": "App",
         "podcast": "Podcast"
-      }
+      },
+      "open_location": "Open website"
     },
     "confirm_or_cancel": {
       "only_trusted": "Only connect with sites you trust."

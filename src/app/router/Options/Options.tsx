@@ -22,10 +22,6 @@ import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
 import i18n from "~/i18n/i18nConfig";
-import {
-  translationI18nNamespace,
-  commonI18nNamespace,
-} from "~/i18n/namespaces";
 
 function Options() {
   const connectorRoutes = getConnectorRoutes();
@@ -70,8 +66,7 @@ function Options() {
                   element={
                     <ChooseConnector
                       title={i18n.t(
-                        "choose_connector.title.options",
-                        translationI18nNamespace
+                        "translation:choose_connector.title.options"
                       )}
                     />
                   }
@@ -111,23 +106,15 @@ function Options() {
 }
 
 const Layout = () => {
-  const { t } = useTranslation();
+  const { t: tCommon } = useTranslation("common");
 
   return (
     <div>
       <Navbar>
-        <Navbar.Link href="/publishers">
-          {t("websites", commonI18nNamespace)}
-        </Navbar.Link>
-        <Navbar.Link href="/send">
-          {t("actions.send", commonI18nNamespace)}
-        </Navbar.Link>
-        <Navbar.Link href="/receive">
-          {t("actions.receive", commonI18nNamespace)}
-        </Navbar.Link>
-        <Navbar.Link href="/settings">
-          {t("settings", commonI18nNamespace)}
-        </Navbar.Link>
+        <Navbar.Link href="/publishers">{tCommon("websites")}</Navbar.Link>
+        <Navbar.Link href="/send">{tCommon("actions.send")}</Navbar.Link>
+        <Navbar.Link href="/receive">{tCommon("actions.receive")}</Navbar.Link>
+        <Navbar.Link href="/settings">{tCommon("settings")}</Navbar.Link>
       </Navbar>
       <ToastContainer
         autoClose={15000}

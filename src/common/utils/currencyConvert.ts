@@ -34,8 +34,7 @@ export const getFormattedSats = (params: {
 }) => {
   const formattedNumber = getFormattedNumber(params);
 
-  return `${formattedNumber} ${i18n.t("sats", {
+  return `${formattedNumber} ${i18n.t("common:sats", {
     count: Number(params.amount),
-    ns: "common",
   })}`;
 };
