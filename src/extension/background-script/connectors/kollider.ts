@@ -3,6 +3,7 @@ import type { AxiosResponse } from "axios";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
+import { getBTCToSats } from "~/common/utils/currencyConvert";
 import HashKeySigner from "~/common/utils/signer";
 
 import Connector, {
@@ -111,7 +112,7 @@ export default class Kollider implements Connector {
           id: `${invoice.payment_hash}-${index}`,
           memo: invoice.reference,
           preimage: "", // lndhub doesn't support preimage (yet)
-          settled: true, //seems there is a bug in the Kollider API and invoices are not marked as settled and have no settled_date
+          settled: true, // seems there is a bug in the Kollider API and invoices are not marked as settled and have no settled_date
           settleDate: invoice.created_at, // BUG: here it should be settled_date, which is currently always 0! Also: created_at is set to Monday, 28. November 2022, propably because kollider ported all accounts on that day
           totalAmount: `${invoice.value}`,
           type: "received",
@@ -152,29 +153,49 @@ export default class Kollider implements Connector {
 
   async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
     const data = await this.request<{
-      error?: string;
-      success: boolean;
+      req_id: string;
       payment_hash: string;
-      uid: string;
-      currency: ACCOUNT_CURRENCIES;
+      uid: number;
+      success: boolean;
+      currency: KolliderCurrencies; // => current account's currency
       payment_request: string;
-      amount: string;
-      fees: string;
-      rate: string;
+      amount: null | {
+        value: string;
+        currency: KolliderCurrencies; // => Should be BTC, cause Alby sends only sats
+      };
+      fees: null | {
+        value: string;
+        currency: KolliderCurrencies; // BTC,
+      };
+      rate: null | {
+        value: string;
+        quote: KolliderCurrencies; // => Should be BTC, cause Alby sends only sats
+        base: KolliderCurrencies; // => current account´s currency
+      };
+      error: string | null;
+      payment_preimage: null | string;
+      destination: null;
+      description: null;
     }>("POST", "/payinvoice", {
       payment_request: args.paymentRequest,
       currency: this.config.currency,
     });
+
     if (data.error) {
       throw new Error(data.error);
     }
+
+    const amountInSats = getBTCToSats(data.amount?.value || 0).toString();
+    const feesInSats = getBTCToSats(data.fees?.value || 0).toString();
+
     const payment_route = {
-      total_amt: parseFloat(data.amount),
-      total_fees: parseFloat(data.fees),
+      total_amt: parseFloat(amountInSats),
+      total_fees: parseFloat(feesInSats),
     };
+
     return {
       data: {
-        preimage: "", // data.payment_preimage as string,
+        preimage: data.payment_preimage || "",
         paymentHash: data.payment_hash,
         route: payment_route,
       },
