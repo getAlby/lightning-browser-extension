@@ -372,7 +372,7 @@
     },
     "enable": {
       "title": "Connect",
-      "allow": "Allow {{host}} to:",
+      "allow": "Allow this website to:",
       "request1": "Request approval for transactions",
       "request2": "Request invoices and lightning information",
       "block_and_ignore": "Block and ignore {{host}}"
@@ -629,17 +629,17 @@
     },
     "confirm_request_permission": {
       "title": "Approve Request",
-      "allow": "Allow {{host}} to execute:",
-      "always_allow": "Always allow {{method}} on {{host}}"
+      "allow": "Allow this website to execute:",
+      "always_allow": "Remember my choice and don't ask again"
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Allow {{host}} to:",
+      "allow": "Allow this website to:",
       "read_public_key": "Read your public key",
       "block_and_ignore": "Block and ignore {{host}}",
       "confirm_sign_message": {
         "remember": {
-          "label": "Remember and don't ask again"
+          "label": "Remember my choice and don't ask again"
         }
       }
     }

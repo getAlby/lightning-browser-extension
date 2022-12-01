@@ -22,7 +22,6 @@ const ConfirmRequestPermission: FC = () => {
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
   const requestMethod = navState.args?.requestPermission?.method;
-  const methodDescripiton = navState.args?.requestPermission?.description;
 
   const enable = () => {
     msg.reply({
@@ -47,18 +46,15 @@ const ConfirmRequestPermission: FC = () => {
             url={origin.host}
             isSmall={false}
           />
-
           <div className="dark:text-white pt-6">
-            <p className="mb-4">{t("allow", { host: origin.host })}</p>
-            <div className="mb-4 flex items-center">
+            <p className="mb-2">{t("allow")}</p>
+            <div className="mb-8 flex items-center">
               <p className="dark:text-white">
                 <CheckIcon className="w-5 h-5 mr-2 inline" />
                 {requestMethod}
-                <br />
-                <i className="ml-7">{methodDescripiton}</i>
               </p>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center mb-2">
               <Checkbox
                 id="always_allow"
                 name="always_allow"
@@ -67,12 +63,9 @@ const ConfirmRequestPermission: FC = () => {
               />
               <label
                 htmlFor="always_allow"
-                className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+                className="cursor-pointer pl-2 block text-sm text-gray-900 font-medium dark:text-white"
               >
-                {t("always_allow", {
-                  method: requestMethod,
-                  host: origin.host,
-                })}
+                {t("always_allow")}
               </label>
             </div>
           </div>
