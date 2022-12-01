@@ -291,7 +291,7 @@
           "label": "Select your currency account"
         },
         "errors": {
-          "connection_failed": "Connection failed. Is the BTCPay connection URL correct and accessible?"
+          "connection_failed": "Connection failed. Are you sure the account data is correct?"
         }
       },
       "btcpay": {
