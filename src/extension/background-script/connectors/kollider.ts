@@ -77,7 +77,7 @@ export default class Kollider implements Connector {
   // not yet implemented
   async connectPeer(): Promise<ConnectPeerResponse> {
     console.error(
-      `${this.constructor.name} does not implement the getInvoices call`
+      `${this.constructor.name} does not implement the connectPeer call`
     );
     throw new Error("Not yet supported with the currently used account.");
   }
@@ -112,7 +112,7 @@ export default class Kollider implements Connector {
           id: `${invoice.payment_hash}-${index}`,
           memo: invoice.reference,
           preimage: "", // lndhub doesn't support preimage (yet)
-          settled: true, // seems there is a bug in the Kollider API and invoices are not marked as settled and have no settled_date
+          settled: true, // Bug: Incoming invoices are not marked as settled and have no settled_date! Now, invoices which are NOT SETTLED are rendered too
           settleDate: invoice.created_at, // BUG: here it should be settled_date, which is currently always 0! Also: created_at is set to Monday, 28. November 2022, propably because kollider ported all accounts on that day
           totalAmount: `${invoice.value}`,
           type: "received",
@@ -277,7 +277,7 @@ export default class Kollider implements Connector {
     return {
       data: {
         paymentRequest: data.payment_request,
-        rHash: "", // TODO
+        rHash: "", // TODO! This calls checkPayment later which is not working yet
       },
     };
   }
