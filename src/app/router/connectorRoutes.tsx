@@ -42,11 +42,8 @@ const kollider = [
   {
     path: "kollider",
     element: <ConnectKollider />,
-    title: i18n.t("choose_connector.kollider.title", translationI18nNamespace),
-    description: i18n.t(
-      "choose_connector.kollider.description",
-      translationI18nNamespace
-    ),
+    title: i18n.t("translation:choose_connector.kollider.title"),
+    description: i18n.t("translation:choose_connector.kollider.description"),
     logo: kolliderLogo,
   },
 ];
