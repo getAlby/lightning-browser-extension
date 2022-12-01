@@ -289,6 +289,9 @@
         },
         "currency": {
           "label": "Select your currency account"
+        },
+        "errors": {
+          "connection_failed": "Connection failed. Is the BTCPay connection URL correct and accessible?"
         }
       },
       "btcpay": {
