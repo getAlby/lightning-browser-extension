@@ -3,7 +3,7 @@ import type { AxiosResponse } from "axios";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
-import { getBTCToSats } from "~/common/utils/currencyConvert";
+import { getBTCToSats, getSatsToBTC } from "~/common/utils/currencyConvert";
 import HashKeySigner from "~/common/utils/signer";
 
 import Connector, {
@@ -240,29 +240,40 @@ export default class Kollider implements Connector {
   }
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
-    const amount = parseFloat(args.amount.toString()) / 100000000;
+    const amountInBTC = getSatsToBTC(args.amount);
+
     const data = await this.request<{
-      payment_request: string;
+      req_id: string;
       uid: number;
-      meta: string;
-      amount: string;
-      rate: string;
-      currency: KolliderCurrencies;
-      target_account_currency: KolliderCurrencies;
+      payment_request: string;
+      meta: string; // => memo
+      metadata: null;
+      amount: null | {
+        value: string;
+        currency: string;
+      };
+      rate: null;
+      currency: KolliderCurrencies; // BTC
+      target_account_currency: KolliderCurrencies; // => this account's currency
       account_id: string;
-      error: string | undefined;
-      fees: string;
+      error: string;
+      fees: null;
     }>("GET", "/addinvoice", {
-      amount: amount,
-      currency: "BTC",
+      amount: amountInBTC,
+      currency: "BTC", // Has to be BTC, Alby sends sats only
       target_account_currency: this.currency,
-      //account_id: this.currentAccountId,
+      account_id: this.currentAccountId,
       meta: args.memo,
     });
+
+    if (data.error) {
+      throw new Error(data.error);
+    }
+
     return {
       data: {
         paymentRequest: data.payment_request,
-        rHash: "", //TODO
+        rHash: "", // TODO
       },
     };
   }
