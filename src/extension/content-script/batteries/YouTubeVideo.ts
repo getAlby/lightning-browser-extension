@@ -32,10 +32,10 @@ const battery = async (): Promise<void> => {
   } else {
     // load the about page to check for a lightning address
     const match = channelLink.href.match(
-      /^https:\/\/www\.youtube.com\/(channel|c)\/([^/]+).*/
+      /^https:\/\/www\.youtube.com\/(((channel|c)\/([^/]+))|(@[^/]+)).*/
     );
     if (match) {
-      lnurl = await findLnurlFromYouTubeAboutPage(match[1], match[2]);
+      lnurl = await findLnurlFromYouTubeAboutPage(match[1]);
     }
   }
 
