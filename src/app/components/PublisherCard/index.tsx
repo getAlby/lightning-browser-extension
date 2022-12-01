@@ -59,7 +59,7 @@ export default function PublisherCard({
       >
         <h2
           className={
-            "text-xl font-semibold dark:text-white overflow-hidden text-ellipsis " +
+            "text-xl font-semibold dark:text-white overflow-hidden text-ellipsis whitespace-nowrap " +
             (isSmall ? "my-1" : "my-2")
           }
         >
