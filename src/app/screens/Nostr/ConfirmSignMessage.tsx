@@ -1,9 +1,9 @@
-//import Checkbox from "../../components/Form/Checkbox";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
+import Checkbox from "@components/form/Checkbox";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +19,7 @@ function ConfirmSignMessage() {
   const navState = useNavigationState();
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
-    keyPrefix: "confirm_sign_message",
+    keyPrefix: "nostr",
   });
   const navigate = useNavigate();
 
@@ -27,13 +27,15 @@ function ConfirmSignMessage() {
   const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [rememberPermission, setRememberPermission] = useState(false);
 
   // TODO: refactor: the success message and loading will not be displayed because after the reply the prompt is closed.
   async function confirm() {
     try {
       setLoading(true);
       msg.reply({
-        confirm: true,
+        blocked: false,
+        enabled: rememberPermission,
       });
       setSuccessMessage(tCommon("success"));
     } catch (e) {
@@ -73,6 +75,22 @@ function ConfirmSignMessage() {
               heading={t("content", { host: origin.host })}
               content={event.content}
             />
+            <div className="flex items-center">
+              <Checkbox
+                id="remember_permission"
+                name="remember_permission"
+                checked={rememberPermission}
+                onChange={(event) => {
+                  setRememberPermission(event.target.checked);
+                }}
+              />
+              <label
+                htmlFor="remember_permission"
+                className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+              >
+                {t("confirm_sign_message.remember.label")}
+              </label>
+            </div>
           </div>
           <ConfirmOrCancel
             disabled={loading}

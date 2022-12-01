@@ -14,7 +14,7 @@ export default function Badge({ label, color, textColor, small }: Props) {
 
   return (
     <span
-      className={`inline-block leading-none rounded font-medium bg-${color} text-${textColor} ${
+      className={`inline-block leading-none rounded font-medium mr-2 bg-${color} text-${textColor} ${
         !small ? "p-1.5 text-xs" : "p-1 text-xxxs"
       }`}
     >

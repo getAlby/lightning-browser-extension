@@ -649,7 +649,12 @@
       "allow": "Permitir {{host}}:",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "read_public_key": "Ler sua chave pública",
-      "title": "Nostr"
+      "title": "Nostr",
+      "confirm_sign_message": {
+        "remember": {
+          "label": "Lembrar e não perguntar novamente"
+        }
+      }
     },
     "confirm_request_permission": {
       "title": "Aprovar Solicitação",
@@ -711,7 +716,7 @@
         "label": "Novo limite"
       },
       "edit_allowance": {
-        "title": "Definir um novo limite",
+        "title": "Definir um novo limite de gastos",
         "screen_reader": "Opções limite de gastos"
       },
       "enable_login": {
@@ -788,7 +793,8 @@
     },
     "badge": {
       "label": {
-        "active": "LIMITE ATIVADO"
+        "active": "LIMITE DE GASTOS",
+        "auth": "LOGIN RELÂMPAGO"
       }
     }
   }

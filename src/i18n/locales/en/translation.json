@@ -637,7 +637,12 @@
       "title": "Nostr",
       "allow": "Allow {{host}} to:",
       "read_public_key": "Read your public key",
-      "block_and_ignore": "Block and ignore {{host}}"
+      "block_and_ignore": "Block and ignore {{host}}",
+      "confirm_sign_message": {
+        "remember": {
+          "label": "Remember and don't ask again"
+        }
+      }
     }
   },
   "common": {
@@ -771,7 +776,8 @@
     },
     "badge": {
       "label": {
-        "active": "ACTIVE"
+        "active": "ACTIVE",
+        "auth": "LOGIN"
       }
     }
   }

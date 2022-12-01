@@ -9,6 +9,7 @@ const nostrCalls = [
   "nostr/getPublicKeyOrPrompt",
   "nostr/signEventOrPrompt",
   "nostr/getRelays",
+  "nostr/enable",
 ];
 let callActive = false;
 

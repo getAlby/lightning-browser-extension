@@ -45,6 +45,21 @@ function Publishers() {
           usedBudget,
         } = allowance;
 
+        const badges = [];
+        if (allowance.remainingBudget > 0) {
+          badges.push({
+            label: "active",
+            color: "green-bitcoin",
+            textColor: "white",
+          });
+        }
+        if (allowance.lnurlAuth) {
+          badges.push({
+            label: "auth",
+            color: "green-bitcoin",
+            textColor: "white",
+          });
+        }
         acc.push({
           id,
           host,
@@ -56,13 +71,7 @@ function Publishers() {
           percentage,
           totalBudget,
           usedBudget,
-          ...(allowance.remainingBudget > 0 && {
-            badge: {
-              label: "active",
-              color: "green-bitcoin",
-              textColor: "white",
-            },
-          }),
+          badges,
         });
 
         return acc;

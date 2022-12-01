@@ -148,3 +148,6 @@ dist/
 *.ntvs*
 *.njsproj
 *.sln
+
+# swc
+.swc/*
