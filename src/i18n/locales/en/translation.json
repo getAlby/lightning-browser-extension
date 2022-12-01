@@ -601,7 +601,7 @@
     },
     "confirm_sign_message": {
       "title": "Sign",
-      "content": "{{host}} asks you to sign:"
+      "content": "This website asks you to sign:"
     },
     "confirm_keysend": {
       "title": "Approve Payment",
@@ -635,7 +635,7 @@
     "nostr": {
       "title": "Nostr",
       "allow": "Allow this website to:",
-      "content": "{{host}} asks you to sign:",
+      "content": "This website asks you to sign:",
       "read_public_key": "Read your public key",
       "block_and_ignore": "Block and ignore {{host}}",
       "confirm_sign_message": {
