@@ -24,16 +24,19 @@ import Connector, {
 
 const API_URL = "https://lndhubx.kollider.xyz/api";
 
+// Currently the same as ACCOUNT_CURRENCIES, this is for the future when more connectors support Fiat Accounts
+type KolliderCurrencies = Extract<ACCOUNT_CURRENCIES, "BTC" | "EUR" | "USD">;
+
 interface Config {
   username: string;
   password: string;
-  currency: ACCOUNT_CURRENCIES;
+  currency: KolliderCurrencies;
 }
 
 interface KolliderAccount {
   account_id: string;
   balance: string;
-  currency: ACCOUNT_CURRENCIES;
+  currency: KolliderCurrencies;
   account_type: string;
 }
 
@@ -51,7 +54,7 @@ export default class Kollider implements Connector {
   refresh_token_created?: number;
   noRetry?: boolean;
   accounts: Record<KolliderAccount["account_id"], KolliderAccount> | undefined;
-  currency: ACCOUNT_CURRENCIES;
+  currency: KolliderCurrencies;
   currentAccountId: string | null;
 
   constructor(config: Config) {
@@ -84,7 +87,7 @@ export default class Kollider implements Connector {
         account_id: string;
         add_index: number;
         created_at: number;
-        currency: ACCOUNT_CURRENCIES;
+        currency: KolliderCurrencies;
         expiry: number;
         fees: null; // FIXME! Why is this null?
         incoming: boolean;
@@ -94,7 +97,7 @@ export default class Kollider implements Connector {
         reference: string;
         settled: boolean; // Bug: Currently always false
         settled_date: number; // Bug: Currently always 0
-        target_account_currency: ACCOUNT_CURRENCIES;
+        target_account_currency: KolliderCurrencies;
         uid: number;
         value: number;
         value_msat: number;
@@ -223,8 +226,8 @@ export default class Kollider implements Connector {
       meta: string;
       amount: string;
       rate: string;
-      currency: ACCOUNT_CURRENCIES;
-      target_account_currency: ACCOUNT_CURRENCIES;
+      currency: KolliderCurrencies;
+      target_account_currency: KolliderCurrencies;
       account_id: string;
       error: string | undefined;
       fees: string;
