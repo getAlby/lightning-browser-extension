@@ -141,11 +141,15 @@ export default class Kollider implements Connector {
       throw new Error("Account not found");
     }
 
-    const balance = parseFloat(account.balance);
+    let balance = account.balance;
+
+    if (account.currency === "BTC") {
+      balance = getBTCToSats(account.balance).toString();
+    }
 
     return {
       data: {
-        balance,
+        balance: parseFloat(balance),
         currency: account.currency,
       },
     };
