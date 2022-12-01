@@ -57,7 +57,6 @@ const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
   ]);
 
   const $optionsdocument = await getDocument(page);
-  await page.waitForTimeout(1000);
   await findByText($optionsdocument, "Welcome!");
 };
 
