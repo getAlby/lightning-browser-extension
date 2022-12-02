@@ -98,7 +98,3 @@ But happy to talk about if you think it's useful.
 ## Contributing
 
 We love collaborating with folks inside and outside of GitHub and welcome contributions!
-
-[Contribution guide for new developers.](CONTRIBUTION.md)
-
-[Contributor Covenant Code of Conduct.](CODE_OF_CONDUCT.md)

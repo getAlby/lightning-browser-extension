@@ -132,6 +132,8 @@ We use the [Development Project Board](https://github.com/orgs/getAlby/projects/
 - Check out the issues that have specifically been [marked as being friendly to new contributors](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3Adesign+label%3A%22good+first+issue%22)
 - You can also review open PRs
 
+- [Contribution guide for new developers](./doc/CONTRIBUTION.md)
+
 #### Designer
 
 - Have a look at our [Open source Design guide](https://github.com/getAlby/lightning-browser-extension/wiki/Open-source-Design)
@@ -142,6 +144,7 @@ We use the [Development Project Board](https://github.com/orgs/getAlby/projects/
 
 - Have a look at this Readme. Can it be improved? Do you see typos? You can open a PR or reach out to us in [our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2).
 - You can help with [translations](#translations)
+- [Code of Conduct](./doc/CODE_OF_CONDUCT.md)
 
 ## ❔ FAQs
 
