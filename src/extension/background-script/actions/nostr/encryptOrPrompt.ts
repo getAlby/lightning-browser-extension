@@ -32,7 +32,7 @@ const encryptOrPrompt = async (message: MessageEncryptGet) => {
         ...message,
         action: "public/nostr/confirm",
         args: {
-          description: i18n.t("nostr.permissions.encrypt"),
+          description: i18n.t("translation:nostr.permissions.encrypt"),
         },
       });
 

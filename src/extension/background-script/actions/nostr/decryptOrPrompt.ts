@@ -32,7 +32,7 @@ const decryptOrPrompt = async (message: MessageDecryptGet) => {
         ...message,
         action: "public/nostr/confirm",
         args: {
-          description: i18n.t("nostr.permissions.decrypt"),
+          description: i18n.t("translation:nostr.permissions.decrypt"),
         },
       });
 
