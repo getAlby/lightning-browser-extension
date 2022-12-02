@@ -34,19 +34,7 @@ export default class WebBTCProvider {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling getInfo");
     }
-    return {
-      version: "stable",
-      supports: ["lightning"],
-      methods: [
-        "enable",
-        "getInfo",
-        "signMessage",
-        "verifyMessage",
-        "makeInvoice",
-        "sendPayment",
-        "keysend",
-      ],
-    };
+    return this.execute("getInfo");
   }
 
   signMessage(message: string) {
