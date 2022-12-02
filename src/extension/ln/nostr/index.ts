@@ -2,8 +2,16 @@ import { Event } from "./types";
 
 export default class NostrProvider {
   nip04 = new Nip04(this);
+  enabled: boolean;
 
-  private async enable() {
+  constructor() {
+    this.enabled = false;
+  }
+
+  async enable() {
+    if (this.enabled) {
+      return { enabled: true };
+    }
     return await this.execute<{
       enabled: boolean;
       remember: boolean;
@@ -11,6 +19,7 @@ export default class NostrProvider {
   }
 
   async getPublicKey(): Promise<string> {
+    await this.enable();
     return await this.execute("getPublicKeyOrPrompt");
   }
 
@@ -20,6 +29,7 @@ export default class NostrProvider {
   }
 
   async getRelays(): Promise<string[]> {
+    await this.enable();
     return this.execute<string[]>("getRelays");
   }
 
@@ -76,10 +86,12 @@ class Nip04 {
   }
 
   async encrypt(peer: string, plaintext: string): Promise<string> {
-    throw new Error("Nip04 is not yet implemented.");
+    await this.provider.enable();
+    return this.provider.execute("encryptOrPrompt", { peer, plaintext });
   }
 
   async decrypt(peer: string, ciphertext: string): Promise<string> {
-    throw new Error("Nip04 is not yet implemented.");
+    await this.provider.enable();
+    return this.provider.execute("decryptOrPrompt", { peer, ciphertext });
   }
 }

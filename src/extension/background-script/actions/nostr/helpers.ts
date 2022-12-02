@@ -1,7 +1,49 @@
 import * as secp256k1 from "@noble/secp256k1";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
+import db from "~/extension/background-script/db";
 import { Event } from "~/extension/ln/nostr/types";
+
+export async function hasPermissionFor(method: string, host: string) {
+  if (!host) {
+    return false;
+  }
+
+  const allowance = await db.allowances.get({
+    host,
+  });
+
+  if (!allowance?.id) {
+    return false;
+  }
+
+  const findPermission = await db.permissions.get({
+    host,
+    method,
+  });
+
+  return !!findPermission?.enabled;
+}
+
+export async function addPermissionFor(method: string, host: string) {
+  const allowance = await db.allowances.get({
+    host,
+  });
+
+  if (!allowance?.id) {
+    return false;
+  }
+  const permissionIsAdded = await db.permissions.add({
+    createdAt: Date.now().toString(),
+    allowanceId: allowance.id,
+    host: host,
+    method: method,
+    enabled: true,
+    blocked: false,
+  });
+
+  return !!permissionIsAdded && (await db.saveToStorage());
+}
 
 export function validateEvent(event: Event) {
   if (event.id !== getEventHash(event)) return false;
