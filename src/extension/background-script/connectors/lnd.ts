@@ -31,9 +31,39 @@ interface Config {
 const methods: Record<string, Record<string, string>> = {
   getinfo: {
     path: "/v1/getinfo",
-    method: "GET",
+    httpMethod: "GET",
     description: "Get the node information",
   },
+  'listchannels': {
+    path: "/v1/channels",
+    httpMethod: "GET",
+    description: "Get a description of all the open channels that this node is a participant in.",
+  },
+  'listinvoices': {
+    path: '/v1/invoices',
+    httpMethod: "GET",
+    description: "Get a list of all the invoices currently stored within the database"
+  },
+  'channelbalance': {
+    path: "/v1/balance/channels",
+    httpMethod: "GET",
+    description: "Get a report on the total funds across all open channels",
+  },
+  'walletbalance': {
+    path: "/v1/balance/blockchain",
+    httpMethod: "GET",
+    description: "Get the total unspent outputs of the wallet",
+  },
+  'openchannel': {
+    path: "/v1/channels",
+    httpMethod: "POST",
+    description: "open a new channel"
+  },
+  'connect': {
+    path: "/v1/peers",
+    httpMethod: "POST",
+    description: "establish a connection to a remote peer"
+  }
 };
 
 class Lnd implements Connector {
@@ -68,7 +98,7 @@ class Lnd implements Connector {
       throw new Error(`${method} is not supported`);
     }
     const { httpMethod, path } = methodDetails;
-    const response = await this.request(httpMethod, path, undefined, {});
+    const response = await this.request(httpMethod, path, args)
 
     return {
       data: response,
