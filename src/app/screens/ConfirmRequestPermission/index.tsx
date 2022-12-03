@@ -22,6 +22,7 @@ const ConfirmRequestPermission: FC = () => {
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
   const requestMethod = navState.args?.requestPermission?.method;
+  const description = navState.args?.requestPermission?.description;
 
   const enable = () => {
     msg.reply({
@@ -50,8 +51,13 @@ const ConfirmRequestPermission: FC = () => {
             <p className="mb-2">{t("allow")}</p>
             <div className="mb-8 flex items-center">
               <p className="dark:text-white">
-                <CheckIcon className="w-5 h-5 mr-2 inline" />
-                {requestMethod}
+                <span className="font-semibold">{requestMethod}</span>:
+                {description && (
+                  <>
+                    <br />
+                    <span className="text-xs">{description}</span>
+                  </>
+                )}
               </p>
             </div>
             <div className="flex items-center mb-2">
