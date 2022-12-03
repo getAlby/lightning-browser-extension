@@ -1,4 +1,3 @@
-import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
