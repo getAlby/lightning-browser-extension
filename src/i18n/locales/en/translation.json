@@ -642,6 +642,11 @@
         "remember": {
           "label": "Remember my choice and don't ask again"
         }
+      },
+      "permissions": {
+        "decrypt": "Decrypt data",
+        "encrypt": "Encrypt data",
+        "allow_sign": "Allow {{host}} to sign:"
       }
     }
   },
