@@ -66,25 +66,6 @@ Add Alby to your browser
 
 ![architecture](/doc/ln-browser-architecture.png)
 
-## Project Structure
-
-```bash
-./lightning-browser-extension
-├── src                     # Source Code
-│   ├── app                     # React UI App
-│   ├── extension               # Browser Extension
-│   ├── common                  # Helpers and utilities used by both the React App and the Browser Extension
-├── static                  # Static Resources
-│   ├── assets                  # Images, logos, etc
-│   └── views                   # Static HTML files
-├── doc                     # Documentation (guidelines, architecture docs, etc)
-├── dist                    # Build
-│   └── development             # Developer Builds (not to be shared)
-│   └── production              # Production Builds
-├── tests                   # E2E tests and related helpers
-└
-```
-
 ## 🚀 Quick Start
 
 Ensure you have
@@ -131,7 +112,6 @@ We use the [Development Project Board](https://github.com/orgs/getAlby/projects/
 
 - Check out the issues that have specifically been [marked as being friendly to new contributors](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3Adesign+label%3A%22good+first+issue%22)
 - You can also review open PRs
-
 - [Contribution guide for new developers](./doc/CONTRIBUTION.md)
 
 #### Designer
