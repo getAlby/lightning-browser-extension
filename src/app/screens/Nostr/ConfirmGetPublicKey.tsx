@@ -41,6 +41,7 @@ function NostrConfirmGetPublicKey() {
       domain: origin.domain,
       host: origin.host,
     });
+    alert(`Added ${origin.host} to the blocklist, please reload the website`);
     msg.error(USER_REJECTED_ERROR);
   }
 
