@@ -121,7 +121,7 @@ function Send() {
     if (invoice) {
       return invoice[1];
     } else {
-      return data;
+      return data.replace(/^lightning:/i, "");
     }
   }
 
