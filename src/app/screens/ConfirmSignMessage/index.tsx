@@ -12,7 +12,6 @@ import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import utils from "~/common/lib/utils";
 import type { OriginData } from "~/types";
 
 function ConfirmSignMessage() {
@@ -36,7 +35,11 @@ function ConfirmSignMessage() {
 
     try {
       setLoading(true);
-      const response = await utils.call("signMessage", { message }, { origin });
+      const response = await msg.request(
+        "signMessage",
+        { message },
+        { origin }
+      );
       msg.reply(response);
       setSuccessMessage(tCommon("success"));
     } catch (e) {

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 import { Allowance, Badge, Publisher } from "~/types";
 
 import websites from "./websites.json";
@@ -23,7 +23,7 @@ function Publishers() {
 
   async function fetchData() {
     try {
-      const allowanceResponse = await utils.call<{
+      const allowanceResponse = await msg.request<{
         allowances: Allowance[];
       }>("listAllowances");
 

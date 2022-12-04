@@ -1,7 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { act } from "react-dom/test-utils";
+import { I18nextProvider } from "react-i18next";
 import { BrowserRouter } from "react-router-dom";
+import i18n from "~/../tests/unit/helpers/i18n";
 import type { Accounts } from "~/types";
 
 import AccountMenu from ".";
@@ -41,7 +43,9 @@ describe("AccountMenu", () => {
   test("renders the toggle button", async () => {
     render(
       <BrowserRouter>
-        <AccountMenu {...defaultProps} />
+        <I18nextProvider i18n={i18n}>
+          <AccountMenu {...defaultProps} />
+        </I18nextProvider>
       </BrowserRouter>
     );
 
@@ -53,7 +57,9 @@ describe("AccountMenu", () => {
 
     render(
       <BrowserRouter>
-        <AccountMenu {...defaultProps} />
+        <I18nextProvider i18n={i18n}>
+          <AccountMenu {...defaultProps} />
+        </I18nextProvider>
       </BrowserRouter>
     );
 
@@ -74,7 +80,9 @@ describe("AccountMenu", () => {
 
     render(
       <BrowserRouter>
-        <AccountMenu {...defaultProps} />
+        <I18nextProvider i18n={i18n}>
+          <AccountMenu {...defaultProps} />
+        </I18nextProvider>
       </BrowserRouter>
     );
 
@@ -94,7 +102,9 @@ describe("AccountMenu", () => {
 
     render(
       <BrowserRouter>
-        <AccountMenu showOptions={false} />
+        <I18nextProvider i18n={i18n}>
+          <AccountMenu showOptions={false} />
+        </I18nextProvider>
       </BrowserRouter>
     );
 
