@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import utils from "~/common/lib/utils";
-import { Allowance, Publisher } from "~/types";
+import msg from "~/common/lib/msg";
+import { Allowance, Badge, Publisher } from "~/types";
 
 import websites from "./websites.json";
 
@@ -23,7 +23,7 @@ function Publishers() {
 
   async function fetchData() {
     try {
-      const allowanceResponse = await utils.call<{
+      const allowanceResponse = await msg.request<{
         allowances: Allowance[];
       }>("listAllowances");
 
@@ -45,7 +45,7 @@ function Publishers() {
           usedBudget,
         } = allowance;
 
-        const badges = [];
+        const badges: Badge[] = [];
         if (allowance.remainingBudget > 0) {
           badges.push({
             label: "active",
@@ -119,7 +119,7 @@ function Publishers() {
         {websites.map(({ title, items }) => (
           <div className="mb-6" key={title}>
             <h4 className="mb-4 text-xl font-bold dark:text-white">
-              {t(`suggestions.list.${title}`)}
+              {t(`suggestions.list.${title as "trading"}`)}
             </h4>
 
             <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

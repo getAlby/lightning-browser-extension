@@ -13,7 +13,6 @@ import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import utils from "~/common/lib/utils";
 import type { OriginData } from "~/types";
 
 function ConfirmKeysend() {
@@ -68,7 +67,7 @@ function ConfirmKeysend() {
     }
     try {
       setLoading(true);
-      const payment = await utils.call(
+      const payment = await msg.request(
         "keysend",
         { destination, amount, customRecords },
         {

@@ -9,13 +9,14 @@ import LNURLChannel from "@screens/LNURLChannel";
 import LNURLPay from "@screens/LNURLPay";
 import LNURLWithdraw from "@screens/LNURLWithdraw";
 import MakeInvoice from "@screens/MakeInvoice";
+import NostrConfirm from "@screens/Nostr/Confirm";
+import NostrConfirmGetPublicKey from "@screens/Nostr/ConfirmGetPublicKey";
+import NostrConfirmSignMessage from "@screens/Nostr/ConfirmSignMessage";
 import Unlock from "@screens/Unlock";
 import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
-import NostrConfirmGetPublicKey from "~/app/screens/Nostr/ConfirmGetPublicKey";
-import NostrConfirmSignMessage from "~/app/screens/Nostr/ConfirmSignMessage";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
@@ -72,6 +73,7 @@ function Prompt() {
               path="public/nostr/enable"
               element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
+            <Route path="public/nostr/confirm" element={<NostrConfirm />} />
             <Route
               path="public/nostr/confirmGetPublicKey"
               element={<NostrConfirmGetPublicKey />}

@@ -8,7 +8,7 @@ import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 
 export default function TestConnection() {
   const { getFormattedSats } = useSettings();
@@ -30,7 +30,7 @@ export default function TestConnection() {
   const { t: tCommon } = useTranslation("common");
 
   async function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
-    await utils.call("removeAccount");
+    await msg.request("removeAccount");
     navigate(-1);
   }
 

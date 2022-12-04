@@ -654,7 +654,8 @@
         "remember": {
           "label": "Lembrar e não perguntar novamente"
         }
-      }
+      },
+      "content": "{{host}} solicita que você assine:"
     },
     "confirm_request_permission": {
       "title": "Aprovar Solicitação",
@@ -744,7 +745,8 @@
         "message": "Mensagem",
         "app": "App",
         "podcast": "Podcast"
-      }
+      },
+      "open_location": "Abrir site"
     },
     "confirm_or_cancel": {
       "only_trusted": "Conecte-se apenas nos sites em que você confia."

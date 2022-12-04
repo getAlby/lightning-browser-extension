@@ -2,6 +2,7 @@ import { Runtime } from "webextension-polyfill";
 import utils from "~/common/lib/utils";
 import db from "~/extension/background-script/db";
 import state from "~/extension/background-script/state";
+import { allowanceFixture } from "~/fixtures/allowances";
 import type { DbAllowance, MessageAllowanceEnable } from "~/types";
 
 import enableAllowance from "../enable";
@@ -21,34 +22,7 @@ utils.openPrompt = jest
   .fn()
   .mockReturnValue({ data: { enabled: true, remember: true } });
 
-const mockAllowances: DbAllowance[] = [
-  {
-    enabled: true,
-    host: "pro.kollider.xyz",
-    id: 1,
-    imageURL: "https://pro.kollider.xyz/favicon.ico",
-    lastPaymentAt: 0,
-    lnurlAuth: true,
-    name: "pro kollider",
-    remainingBudget: 500,
-    totalBudget: 500,
-    createdAt: "123456",
-    tag: "",
-  },
-  {
-    enabled: false,
-    host: "lnmarkets.com",
-    id: 2,
-    imageURL: "https://lnmarkets.com/apple-touch-icon.png",
-    lastPaymentAt: 0,
-    lnurlAuth: true,
-    name: "LN Markets",
-    remainingBudget: 200,
-    totalBudget: 200,
-    createdAt: "123456",
-    tag: "",
-  },
-];
+const mockAllowances: DbAllowance[] = allowanceFixture;
 
 describe("enable allowance", () => {
   afterEach(() => {

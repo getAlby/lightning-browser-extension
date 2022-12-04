@@ -11,7 +11,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 
 export default function ConnectCommando() {
   const navigate = useNavigate();
@@ -71,11 +71,11 @@ export default function ConnectCommando() {
     };
 
     try {
-      const validation = await utils.call("validateAccount", account);
+      const validation = await msg.request("validateAccount", account);
       if (validation.valid) {
-        const addResult = await utils.call("addAccount", account);
+        const addResult = await msg.request("addAccount", account);
         if (addResult.accountId) {
-          await utils.call("selectAccount", {
+          await msg.request("selectAccount", {
             id: addResult.accountId,
           });
           navigate("/test-connection");

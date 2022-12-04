@@ -1,5 +1,4 @@
 import { CURRENCIES } from "~/common/constants";
-import utils from "~/common/lib/utils";
 import state from "~/extension/background-script/state";
 import type {
   PaymentNotificationData,
@@ -7,10 +6,10 @@ import type {
   SettingsStorage,
 } from "~/types";
 
-import {
-  paymentSuccessNotification,
-  lnurlAuthSuccessNotification,
-} from "../notifications";
+import * as helpers from "../helpers";
+import * as notifications from "../notifications";
+
+jest.mock("../helpers");
 
 jest.mock("~/extension/background-script/actions/cache/getCurrencyRate", () => {
   return {
@@ -124,8 +123,11 @@ describe("Payment notifications", () => {
 
   test("success via lnaddress from popup", async () => {
     state.getState = jest.fn().mockReturnValue(mockState);
-    const notifySpy = jest.spyOn(utils, "notify");
-    await paymentSuccessNotification("ln.sendPayment.success", data);
+    const notifySpy = jest.spyOn(helpers, "notify");
+    await notifications.paymentSuccessNotification(
+      "ln.sendPayment.success",
+      data
+    );
 
     expect(notifySpy).toHaveBeenCalledWith({
       message: "Amount: 1 sat ($0.00)\nFee: 0 sats",
@@ -140,8 +142,11 @@ describe("Payment notifications", () => {
 
     state.getState = jest.fn().mockReturnValue(mockStateNoFiat);
 
-    const notifySpy = jest.spyOn(utils, "notify");
-    await paymentSuccessNotification("ln.sendPayment.success", data);
+    const notifySpy = jest.spyOn(helpers, "notify");
+    await notifications.paymentSuccessNotification(
+      "ln.sendPayment.success",
+      data
+    );
 
     expect(notifySpy).toHaveBeenCalledWith({
       message: "Amount: 1 sat\nFee: 0 sats",
@@ -156,8 +161,11 @@ describe("Payment notifications", () => {
 
     state.getState = jest.fn().mockReturnValue(mockStateNoFiat);
 
-    const notifySpy = jest.spyOn(utils, "notify");
-    await paymentSuccessNotification("ln.sendPayment.success", data);
+    const notifySpy = jest.spyOn(helpers, "notify");
+    await notifications.paymentSuccessNotification(
+      "ln.sendPayment.success",
+      data
+    );
 
     expect(notifySpy).toHaveBeenCalledWith({
       message: "Amount: 1 sat ($0.00)\nFee: 0 sats",
@@ -167,10 +175,10 @@ describe("Payment notifications", () => {
 
   test("success without origin skips receiver", async () => {
     state.getState = jest.fn().mockReturnValue(mockState);
-    const notifySpy = jest.spyOn(utils, "notify");
+    const notifySpy = jest.spyOn(helpers, "notify");
     const dataWitouthOrigin = { ...data };
     delete dataWitouthOrigin.origin;
-    await paymentSuccessNotification(
+    await notifications.paymentSuccessNotification(
       "ln.sendPayment.success",
       dataWitouthOrigin
     );
@@ -200,8 +208,8 @@ describe("Auth notifications", () => {
   };
 
   test("success via login from popup", async () => {
-    const notifySpy = jest.spyOn(utils, "notify");
-    lnurlAuthSuccessNotification("lnurl.auth.success", data);
+    const notifySpy = jest.spyOn(helpers, "notify");
+    notifications.lnurlAuthSuccessNotification("lnurl.auth.success", data);
 
     expect(notifySpy).toHaveBeenCalledWith({
       title: "✅ Login",
@@ -210,8 +218,8 @@ describe("Auth notifications", () => {
   });
 
   test("success via login from prompt with origin", async () => {
-    const notifySpy = jest.spyOn(utils, "notify");
-    lnurlAuthSuccessNotification("lnurl.auth.success", {
+    const notifySpy = jest.spyOn(helpers, "notify");
+    notifications.lnurlAuthSuccessNotification("lnurl.auth.success", {
       ...data,
       origin: {
         location: "https://lnurl.fiatjaf.com/",

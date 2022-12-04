@@ -1,6 +1,8 @@
 import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { I18nextProvider } from "react-i18next";
 import { MemoryRouter } from "react-router-dom";
+import i18n from "~/../tests/unit/helpers/i18n";
 
 import Send from "./index";
 
@@ -13,7 +15,9 @@ describe("Send", () => {
     const user = userEvent.setup();
     render(
       <MemoryRouter>
-        <Send />
+        <I18nextProvider i18n={i18n}>
+          <Send />
+        </I18nextProvider>
       </MemoryRouter>
     );
 

@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 
 export default function TestConnection() {
   const [accountInfo, setAccountInfo] = useState<{
@@ -27,7 +27,7 @@ export default function TestConnection() {
   const navigate = useNavigate();
 
   async function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
-    await utils.call("removeAccount");
+    await msg.request("removeAccount");
     navigate(-1);
   }
 

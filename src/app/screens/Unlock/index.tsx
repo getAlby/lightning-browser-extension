@@ -9,6 +9,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAccount } from "~/app/context/AccountContext";
+import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 
 function Unlock() {
@@ -37,7 +38,7 @@ function Unlock() {
 
   async function reset(event: React.MouseEvent<HTMLElement>) {
     event.preventDefault();
-    await utils.call("reset");
+    await msg.request("reset");
     utils.openPage("welcome.html");
   }
 

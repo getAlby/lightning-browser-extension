@@ -16,7 +16,7 @@ import Container from "~/app/components/Container";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 
 function Keysend() {
   const {
@@ -51,7 +51,7 @@ function Keysend() {
   async function confirm() {
     try {
       setLoading(true);
-      const payment = await utils.call(
+      const payment = await msg.request(
         "keysend",
         { destination, amount: amountSat, customRecords },
         {

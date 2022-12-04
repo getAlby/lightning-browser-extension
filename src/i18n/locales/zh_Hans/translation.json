@@ -155,7 +155,7 @@
           "setup_failed": "设置失败",
           "failed_to_request_sms": "索取短信验证码失败",
           "failed_to_login_sms": "使用短信验证码登录失败",
-          "missing_jwt": "JWT丢失，无法登录。",
+          "missing_jwt": "JWT不存在，无法登录。",
           "invalid_jwt": "传递了无效的JWT"
         },
         "sms_code": {
@@ -208,7 +208,7 @@
           "label": "公钥"
         },
         "rune": {
-          "label": "符文"
+          "label": "Rune"
         },
         "proxy": {
           "label": "Websocket代理"
@@ -234,7 +234,7 @@
       },
       "raspiblitz": {
         "page": {
-          "instructions2": "选择<0>CONNECT</0>.<1/>选择<0>EXPORT</0>.<1/>选择<0>HEX</0>.<1/>复制<0>adminMacaroon</0>.<1/>将Macaroon粘贴到下面的输入中。",
+          "instructions2": "选择<0>CONNECT</0>。<1/>选择<0>EXPORT</0>。<1/>选择<0>HEX</0>。<1/>复制<0>adminMacaroon</0>。<1/>将Macaroon粘贴到下面的输入中。",
           "instructions1": "你需要你的节点洋葱地址，端口，和一个具有读取和发送权限的macaroon（例如admin.macaroon）。<1/><1/><0>SSH</0>进入你的<0>RaspiBlitz</0>.<1/>运行命令<0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>。<1/>复制并粘贴<0>.onion</0>地址到下面的输入中。<1/>在onion地址后面添加你的<0>端口</0>，默认端口是<0>:8080</0>。",
           "title": "连接你的<0>RaspiBlitz</0>节点"
         },
@@ -422,7 +422,7 @@
           "subtitle": "生成密钥将根据你当前使用的帐户创建一个新密钥。请确保备份此私钥。"
         },
         "title": "Nostr",
-        "hint": "是一个简单而开放的协议，旨在创建抗审查的社交网络。 Nostr 使用加密密钥。要发布内容时，你可以使用你的密钥对其进行签名并将其发送到多个中继。你可以使用 Alby 来管理你的 Nostr 密钥。许多 Nostr 应用程序将允许你简单地使用 Alby extension中的密钥。"
+        "hint": "是一个简单而开放的协议，旨在创建抗审查的社交网络。Nostr 使用加密密钥。要发布内容时，你可以使用你的密钥对其进行签名并将其发送到多个中继站。你可以使用 Alby 来管理你的 Nostr 密钥。许多 Nostr 应用程序将允许你简单地使用 Alby extension中的密钥。"
       },
       "lnurl_auth": {
         "title": "LNURL-认证",
