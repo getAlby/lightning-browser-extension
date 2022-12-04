@@ -161,7 +161,7 @@ function LNURLPay() {
       }
 
       // LN WALLET pays the invoice, no additional user confirmation is required at this point
-      const paymentResponse: PaymentResponse = await utils.call(
+      const paymentResponse: PaymentResponse = await msg.request(
         "sendPayment",
         { paymentRequest },
         {

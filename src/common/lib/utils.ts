@@ -1,43 +1,8 @@
 import browser, { Runtime } from "webextension-polyfill";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
-import state from "~/extension/background-script/state";
 import type { Invoice, OriginData, OriginDataInternal } from "~/types";
 
 const utils = {
-  call: <T = Record<string, unknown>>(
-    action: string,
-    args?: Record<string, unknown>,
-    overwrites?: Record<string, unknown>
-  ) => {
-    return browser.runtime
-      .sendMessage({
-        application: "LBE",
-        prompt: true,
-        action: action,
-        args: args,
-        origin: { internal: true },
-        ...overwrites,
-      })
-      .then((response: { data: T; error?: string }) => {
-        if (response.error) {
-          throw new Error(response.error);
-        }
-
-        return response.data;
-      });
-  },
-  notify: (options: { title: string; message: string }) => {
-    const settings = state.getState().settings;
-    if (!settings.browserNotifications) return;
-
-    const notification: browser.Notifications.CreateNotificationOptions = {
-      type: "basic",
-      iconUrl: "assets/icons/alby_icon_yellow_48x48.png",
-      ...options,
-    };
-
-    return browser.notifications.create(notification);
-  },
   base64ToHex: (str: string) => {
     const hex = [];
     for (
