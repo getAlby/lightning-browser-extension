@@ -644,7 +644,10 @@ const metaDataRules: Record<string, RuleSet> = {
   monetization: {
     rules: [
       ['meta[name="lightning"]', (element) => element.getAttribute("content")],
-      ['meta[property="lightning"]', (element) => element.getAttribute("content")],
+      [
+        'meta[property="lightning"]',
+        (element) => element.getAttribute("content"),
+      ],
     ],
     processor: (text) => text.toLowerCase(),
   },

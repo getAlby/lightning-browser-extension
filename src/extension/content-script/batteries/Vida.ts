@@ -38,7 +38,8 @@ function battery(): void {
 
   if (!address) return;
 
-  const icon = document.querySelector<HTMLImageElement>("button > div > img")?.src;
+  const icon =
+    document.querySelector<HTMLImageElement>("button > div > img")?.src;
   if (icon) {
     originData.icon = icon;
   }
