@@ -1,22 +1,10 @@
-import browser from "webextension-polyfill";
 import { getFormattedFiat } from "~/common/utils/currencyConvert";
 import { getCurrencyRateWithCache } from "~/extension/background-script/actions/cache/getCurrencyRate";
 import state from "~/extension/background-script/state";
 import i18n from "~/i18n/i18nConfig";
 import type { PaymentNotificationData, AuthNotificationData } from "~/types";
 
-const notify = (options: { title: string; message: string }) => {
-  const settings = state.getState().settings;
-  if (!settings.browserNotifications) return;
-
-  const notification: browser.Notifications.CreateNotificationOptions = {
-    type: "basic",
-    iconUrl: "assets/icons/alby_icon_yellow_48x48.png",
-    ...options,
-  };
-
-  return browser.notifications.create(notification);
-};
+import { notify } from "./helpers";
 
 const paymentSuccessNotification = async (
   message: "ln.sendPayment.success",
@@ -126,7 +114,6 @@ const lnurlAuthFailedNotification = (
 };
 
 export {
-  notify,
   paymentSuccessNotification,
   paymentFailedNotification,
   lnurlAuthSuccessNotification,

@@ -6,7 +6,10 @@ import type {
   SettingsStorage,
 } from "~/types";
 
+import * as helpers from "../helpers";
 import * as notifications from "../notifications";
+
+jest.mock("../helpers");
 
 jest.mock("~/extension/background-script/actions/cache/getCurrencyRate", () => {
   return {
@@ -120,7 +123,7 @@ describe("Payment notifications", () => {
 
   test("success via lnaddress from popup", async () => {
     state.getState = jest.fn().mockReturnValue(mockState);
-    const notifySpy = jest.spyOn(notifications, "notify");
+    const notifySpy = jest.spyOn(helpers, "notify");
     await notifications.paymentSuccessNotification(
       "ln.sendPayment.success",
       data
@@ -139,7 +142,7 @@ describe("Payment notifications", () => {
 
     state.getState = jest.fn().mockReturnValue(mockStateNoFiat);
 
-    const notifySpy = jest.spyOn(notifications, "notify");
+    const notifySpy = jest.spyOn(helpers, "notify");
     await notifications.paymentSuccessNotification(
       "ln.sendPayment.success",
       data
@@ -158,7 +161,7 @@ describe("Payment notifications", () => {
 
     state.getState = jest.fn().mockReturnValue(mockStateNoFiat);
 
-    const notifySpy = jest.spyOn(notifications, "notify");
+    const notifySpy = jest.spyOn(helpers, "notify");
     await notifications.paymentSuccessNotification(
       "ln.sendPayment.success",
       data
@@ -172,7 +175,7 @@ describe("Payment notifications", () => {
 
   test("success without origin skips receiver", async () => {
     state.getState = jest.fn().mockReturnValue(mockState);
-    const notifySpy = jest.spyOn(notifications, "notify");
+    const notifySpy = jest.spyOn(helpers, "notify");
     const dataWitouthOrigin = { ...data };
     delete dataWitouthOrigin.origin;
     await notifications.paymentSuccessNotification(
@@ -205,7 +208,7 @@ describe("Auth notifications", () => {
   };
 
   test("success via login from popup", async () => {
-    const notifySpy = jest.spyOn(notifications, "notify");
+    const notifySpy = jest.spyOn(helpers, "notify");
     notifications.lnurlAuthSuccessNotification("lnurl.auth.success", data);
 
     expect(notifySpy).toHaveBeenCalledWith({
@@ -215,7 +218,7 @@ describe("Auth notifications", () => {
   });
 
   test("success via login from prompt with origin", async () => {
-    const notifySpy = jest.spyOn(notifications, "notify");
+    const notifySpy = jest.spyOn(helpers, "notify");
     notifications.lnurlAuthSuccessNotification("lnurl.auth.success", {
       ...data,
       origin: {
