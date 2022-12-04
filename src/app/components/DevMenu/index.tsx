@@ -1,10 +1,10 @@
 import { Component } from "react";
 import { toast } from "react-toastify";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 
 class DevMenu extends Component {
   reset() {
-    utils.call("reset").then((response) => {
+    msg.request("reset").then((response) => {
       console.info(response);
       toast.success("Done, you can start over");
     });

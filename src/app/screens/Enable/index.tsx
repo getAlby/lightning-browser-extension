@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import utils from "~/common/lib/utils";
 import type { OriginData } from "~/types";
 
 type Props = {
@@ -45,7 +44,7 @@ function Enable(props: Props) {
 
   async function block(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
-    await utils.call("addBlocklist", {
+    await msg.request("addBlocklist", {
       domain: props.origin.domain,
       host: props.origin.host,
     });

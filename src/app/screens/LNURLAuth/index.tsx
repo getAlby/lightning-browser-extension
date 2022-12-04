@@ -12,7 +12,6 @@ import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import utils from "~/common/lib/utils";
 import type { LNURLAuthServiceResponse } from "~/types";
 
 function LNURLAuth() {
@@ -44,7 +43,7 @@ function LNURLAuth() {
         const allowance = await api.getAllowance(origin.host);
 
         if (allowance.lnurlAuth === false) {
-          await utils.call("updateAllowance", {
+          await msg.request("updateAllowance", {
             id: allowance.id,
             lnurlAuth: true,
           });
