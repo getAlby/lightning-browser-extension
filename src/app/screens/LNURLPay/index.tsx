@@ -382,24 +382,25 @@ function LNURLPay() {
                           )}
                         </>
                       </dl>
-                      {details && details.minSendable !== details.maxSendable && (
-                        <div>
-                          <DualCurrencyField
-                            autoFocus
-                            id="amount"
-                            label={t("amount.label")}
-                            min={Math.floor(+details.minSendable / 1000)}
-                            max={Math.floor(+details.maxSendable / 1000)}
-                            value={valueSat}
-                            onChange={(e) => setValueSat(e.target.value)}
-                            fiatValue={fiatValue}
-                          />
-                          <SatButtons
-                            onClick={setValueSat}
-                            disabled={loadingConfirm}
-                          />
-                        </div>
-                      )}
+                      {details &&
+                        details.minSendable !== details.maxSendable && (
+                          <div>
+                            <DualCurrencyField
+                              autoFocus
+                              id="amount"
+                              label={t("amount.label")}
+                              min={Math.floor(+details.minSendable / 1000)}
+                              max={Math.floor(+details.maxSendable / 1000)}
+                              value={valueSat}
+                              onChange={(e) => setValueSat(e.target.value)}
+                              fiatValue={fiatValue}
+                            />
+                            <SatButtons
+                              onClick={setValueSat}
+                              disabled={loadingConfirm}
+                            />
+                          </div>
+                        )}
                       {details &&
                         typeof details?.commentAllowed === "number" &&
                         details?.commentAllowed > 0 && (
