@@ -60,44 +60,50 @@ function ConfirmSignMessage() {
     }
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    confirm();
+  }
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
       {!successMessage ? (
         <Container justifyBetween maxWidth="sm">
-          <div>
-            <PublisherCard
-              title={origin.name}
-              image={origin.icon}
-              url={origin.host}
-            />
-            <ContentMessage
-              heading={t("permissions.allow_sign", { host: origin.host })}
-              content={event.content}
-            />
-            <div className="flex items-center">
-              <Checkbox
-                id="remember_permission"
-                name="remember_permission"
-                checked={rememberPermission}
-                onChange={(event) => {
-                  setRememberPermission(event.target.checked);
-                }}
+          <form onSubmit={handleSubmit}>
+            <div>
+              <PublisherCard
+                title={origin.name}
+                image={origin.icon}
+                url={origin.host}
               />
-              <label
-                htmlFor="remember_permission"
-                className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
-              >
-                {t("confirm_sign_message.remember.label")}
-              </label>
+              <ContentMessage
+                heading={t("permissions.allow_sign", { host: origin.host })}
+                content={event.content}
+              />
+              <div className="flex items-center">
+                <Checkbox
+                  id="remember_permission"
+                  name="remember_permission"
+                  checked={rememberPermission}
+                  onChange={(event) => {
+                    setRememberPermission(event.target.checked);
+                  }}
+                />
+                <label
+                  htmlFor="remember_permission"
+                  className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+                >
+                  {t("confirm_sign_message.remember.label")}
+                </label>
+              </div>
             </div>
-          </div>
-          <ConfirmOrCancel
-            disabled={loading}
-            loading={loading}
-            onConfirm={confirm}
-            onCancel={reject}
-          />
+            <ConfirmOrCancel
+              disabled={loading}
+              loading={loading}
+              onCancel={reject}
+            />
+          </form>
         </Container>
       ) : (
         <Container maxWidth="sm">

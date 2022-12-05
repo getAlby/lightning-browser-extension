@@ -123,45 +123,51 @@ function ConfirmKeysend() {
     });
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    confirm();
+  }
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
       {!successMessage ? (
         <Container justifyBetween maxWidth="sm">
-          <div>
-            <PublisherCard
-              title={origin.name}
-              image={origin.icon}
-              url={origin.host}
-            />
-            <div className="my-4">
-              <div className="shadow mb-4 bg-white dark:bg-surface-02dp p-4 rounded-lg">
-                <PaymentSummary
-                  amount={amount}
-                  fiatAmount={fiatAmount}
-                  description={t("payment_summary.description", {
-                    destination,
-                  })}
+          <form onSubmit={handleSubmit}>
+            <div>
+              <PublisherCard
+                title={origin.name}
+                image={origin.icon}
+                url={origin.host}
+              />
+              <div className="my-4">
+                <div className="shadow mb-4 bg-white dark:bg-surface-02dp p-4 rounded-lg">
+                  <PaymentSummary
+                    amount={amount}
+                    fiatAmount={fiatAmount}
+                    description={t("payment_summary.description", {
+                      destination,
+                    })}
+                  />
+                </div>
+
+                <BudgetControl
+                  fiatAmount={fiatBudgetAmount}
+                  remember={rememberMe}
+                  onRememberChange={(event) => {
+                    setRememberMe(event.target.checked);
+                  }}
+                  budget={budget}
+                  onBudgetChange={(event) => setBudget(event.target.value)}
                 />
               </div>
-
-              <BudgetControl
-                fiatAmount={fiatBudgetAmount}
-                remember={rememberMe}
-                onRememberChange={(event) => {
-                  setRememberMe(event.target.checked);
-                }}
-                budget={budget}
-                onBudgetChange={(event) => setBudget(event.target.value)}
-              />
             </div>
-          </div>
-          <ConfirmOrCancel
-            disabled={loading}
-            loading={loading}
-            onConfirm={confirm}
-            onCancel={reject}
-          />
+            <ConfirmOrCancel
+              disabled={loading}
+              loading={loading}
+              onCancel={reject}
+            />
+          </form>
         </Container>
       ) : (
         <Container maxWidth="sm">

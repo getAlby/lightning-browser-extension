@@ -133,52 +133,58 @@ function ConfirmPayment() {
     });
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    confirm();
+  }
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={!successMessage ? t("title") : tCommon("success")} />
       {!successMessage ? (
         <Container justifyBetween maxWidth="sm">
-          <div>
-            {navState.origin && (
-              <PublisherCard
-                title={navState.origin.name}
-                image={navState.origin.icon}
-                url={navState.origin.host}
-              />
-            )}
-            <div className="my-4">
-              <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
-                <PaymentSummary
-                  amount={invoice.satoshis || "0"} // how come that sathoshis can be undefined, bolt11?
-                  fiatAmount={fiatAmount}
-                  description={invoice.tagsObject.description}
-                />
-              </div>
+          <form onSubmit={handleSubmit}>
+            <div>
               {navState.origin && (
-                <BudgetControl
-                  fiatAmount={fiatBudgetAmount}
-                  remember={rememberMe}
-                  onRememberChange={(event) => {
-                    setRememberMe(event.target.checked);
-                  }}
-                  budget={budget}
-                  onBudgetChange={(event) => setBudget(event.target.value)}
+                <PublisherCard
+                  title={navState.origin.name}
+                  image={navState.origin.icon}
+                  url={navState.origin.host}
                 />
               )}
+              <div className="my-4">
+                <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
+                  <PaymentSummary
+                    amount={invoice.satoshis || "0"} // how come that sathoshis can be undefined, bolt11?
+                    fiatAmount={fiatAmount}
+                    description={invoice.tagsObject.description}
+                  />
+                </div>
+                {navState.origin && (
+                  <BudgetControl
+                    fiatAmount={fiatBudgetAmount}
+                    remember={rememberMe}
+                    onRememberChange={(event) => {
+                      setRememberMe(event.target.checked);
+                    }}
+                    budget={budget}
+                    onBudgetChange={(event) => setBudget(event.target.value)}
+                  />
+                )}
+              </div>
             </div>
-          </div>
-          <div>
-            <ConfirmOrCancel
-              disabled={loading}
-              loading={loading}
-              onConfirm={confirm}
-              onCancel={reject}
-              label={t("actions.pay_now")}
-            />
-            <p className="mb-4 text-center text-sm text-gray-400">
-              <em>{tComponents("only_trusted")}</em>
-            </p>
-          </div>
+            <div>
+              <ConfirmOrCancel
+                disabled={loading}
+                loading={loading}
+                onCancel={reject}
+                label={t("actions.pay_now")}
+              />
+              <p className="mb-4 text-center text-sm text-gray-400">
+                <em>{tComponents("only_trusted")}</em>
+              </p>
+            </div>
+          </form>
         </Container>
       ) : (
         <Container justifyBetween maxWidth="sm">

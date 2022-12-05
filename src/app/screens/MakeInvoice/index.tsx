@@ -97,74 +97,80 @@ function MakeInvoice() {
     msg.error(USER_REJECTED_ERROR);
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    confirm();
+  }
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
 
       <Container justifyBetween maxWidth="sm">
-        <div>
-          <PublisherCard
-            title={origin.name}
-            image={origin.icon}
-            url={origin.host}
-          />
+        <form onSubmit={handleSubmit}>
+          <div>
+            <PublisherCard
+              title={origin.name}
+              image={origin.icon}
+              url={origin.host}
+            />
 
-          <div className="pt-4">
-            <div>
-              {amountEditable ? (
-                <div className="mb-4">
-                  <DualCurrencyField
-                    id="amount"
-                    label={t("amount.label")}
-                    min={invoiceAttributes.minimumAmount}
-                    max={invoiceAttributes.maximumAmount}
-                    value={valueSat}
-                    onChange={(e) => handleValueChange(e.target.value)}
-                    fiatValue={fiatValue}
+            <div className="pt-4">
+              <div>
+                {amountEditable ? (
+                  <div className="mb-4">
+                    <DualCurrencyField
+                      id="amount"
+                      label={t("amount.label")}
+                      min={invoiceAttributes.minimumAmount}
+                      max={invoiceAttributes.maximumAmount}
+                      value={valueSat}
+                      onChange={(e) => handleValueChange(e.target.value)}
+                      fiatValue={fiatValue}
+                    />
+                    <SatButtons onClick={handleValueChange} />
+                  </div>
+                ) : (
+                  <dl className="overflow-hidden">
+                    <Dt>{t("amount.label")}</Dt>
+                    <Dd>{invoiceAttributes.amount}</Dd>
+                  </dl>
+                )}
+
+                {error && <p className="mb-1 text-red-500">{error}</p>}
+              </div>
+
+              <div className="mb-4">
+                {memoEditable ? (
+                  <TextField
+                    id="memo"
+                    label={t("memo.label")}
+                    value={memo}
+                    placeholder={tCommon("optional")}
+                    onChange={handleMemoChange}
                   />
-                  <SatButtons onClick={handleValueChange} />
-                </div>
-              ) : (
-                <dl className="overflow-hidden">
-                  <Dt>{t("amount.label")}</Dt>
-                  <Dd>{invoiceAttributes.amount}</Dd>
-                </dl>
-              )}
-
-              {error && <p className="mb-1 text-red-500">{error}</p>}
-            </div>
-
-            <div className="mb-4">
-              {memoEditable ? (
-                <TextField
-                  id="memo"
-                  label={t("memo.label")}
-                  value={memo}
-                  placeholder={tCommon("optional")}
-                  onChange={handleMemoChange}
-                />
-              ) : (
-                <dl className="dark:bg-surface-02dp overflow-hidden">
-                  <Dt>{t("memo.label")}</Dt>
-                  <Dd>{invoiceAttributes.memo}</Dd>
-                </dl>
-              )}
+                ) : (
+                  <dl className="dark:bg-surface-02dp overflow-hidden">
+                    <Dt>{t("memo.label")}</Dt>
+                    <Dd>{invoiceAttributes.memo}</Dd>
+                  </dl>
+                )}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div>
-          <ConfirmOrCancel
-            disabled={!valueSat || loading || Boolean(error)}
-            loading={loading}
-            onConfirm={confirm}
-            onCancel={reject}
-          />
+          <div>
+            <ConfirmOrCancel
+              disabled={!valueSat || loading || Boolean(error)}
+              loading={loading}
+              onCancel={reject}
+            />
 
-          <p className="mb-4 text-center text-sm text-gray-400">
-            <em>{tComponents("confirm_or_cancel.only_trusted")}</em>
-          </p>
-        </div>
+            <p className="mb-4 text-center text-sm text-gray-400">
+              <em>{tComponents("confirm_or_cancel.only_trusted")}</em>
+            </p>
+          </div>
+        </form>
       </Container>
     </div>
   );
