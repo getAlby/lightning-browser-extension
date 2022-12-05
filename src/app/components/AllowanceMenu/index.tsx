@@ -119,9 +119,13 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
       lnurlAuth,
     });
 
-    await msg.request("disablePermissions", {
-      ids: changedPermissionIds(),
-    });
+    const changedIds = changedPermissionIds();
+
+    if (changedIds.length) {
+      await msg.request("togglePermissions", {
+        ids: changedIds,
+      });
+    }
 
     setOriginalPermissions(permissions);
 

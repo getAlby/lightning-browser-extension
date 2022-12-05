@@ -299,7 +299,7 @@ export interface MessagePermissionsDisable extends MessageDefault {
   args: {
     ids: Permission["id"][];
   };
-  action: "disablePermissions";
+  action: "togglePermissions";
 }
 
 export interface MessageInvoices extends Omit<MessageDefault, "args"> {
