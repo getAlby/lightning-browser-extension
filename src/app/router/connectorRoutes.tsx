@@ -31,22 +31,10 @@ import raspiblitz from "/static/assets/icons/raspiblitz.png";
 import start9 from "/static/assets/icons/start9.png";
 import umbrel from "/static/assets/icons/umbrel.png";
 
-const isDevelopment = process.env.NODE_ENV === "development";
-
 const galoyPaths: { [key: string]: keyof typeof galoyUrls } = {
   bitcoinBeach: "galoy-bitcoin-beach",
   bitcoinJungle: "galoy-bitcoin-jungle",
 };
-
-const kollider = [
-  {
-    path: "kollider",
-    element: <ConnectKollider />,
-    title: i18n.t("translation:choose_connector.kollider.title"),
-    description: i18n.t("translation:choose_connector.kollider.description"),
-    logo: kolliderLogo,
-  },
-];
 
 function getConnectorRoutes() {
   return [
@@ -85,7 +73,13 @@ function getConnectorRoutes() {
       description: i18n.t("translation:choose_connector.lndhub_go.description"),
       logo: lndhubGo,
     },
-    ...(isDevelopment ? kollider : []),
+    {
+      path: "kollider",
+      element: <ConnectKollider />,
+      title: i18n.t("translation:choose_connector.kollider.title"),
+      description: i18n.t("translation:choose_connector.kollider.description"),
+      logo: kolliderLogo,
+    },
     {
       path: "lnd-hub-bluewallet",
       element: <ConnectLndHub />,
