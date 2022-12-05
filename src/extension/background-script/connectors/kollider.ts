@@ -269,7 +269,6 @@ export default class Kollider implements Connector {
     }>("GET", "/addinvoice", {
       amount: amountInBTC,
       currency: "BTC", // Has to be BTC, Alby sends sats only
-      target_account_currency: this.currency,
       account_id: this.currentAccountId,
       meta: args.memo,
     });
