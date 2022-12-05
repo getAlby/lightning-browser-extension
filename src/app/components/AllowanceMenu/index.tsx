@@ -48,6 +48,11 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   const hasPermissions = !isLoadingPermissions && !!permissions?.length;
   const isEmptyPermissions = !isLoadingPermissions && permissions?.length === 0;
 
+  const isEnabled =
+    parseInt(budget) !== allowance.totalBudget ||
+    lnurlAuth !== allowance.lnurlAuth ||
+    changedPermissionIds().length;
+
   useEffect(() => {
     const fetchPermissions = async () => {
       try {
@@ -219,8 +224,8 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                 {permissions.map((permission, index) => (
                   <div key={index} className="flex items-center my-2">
                     <Checkbox
-                      id={"permission" + permission.id}
-                      name={"permission" + permission.id}
+                      id={`permission-${permission.id}`}
+                      name={`permission-${permission.id}`}
                       checked={permission.enabled}
                       onChange={() => {
                         setPermissions(
@@ -233,7 +238,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                       }}
                     />
                     <label
-                      htmlFor={"permission" + permission.id}
+                      htmlFor={`permission-${permission.id}`}
                       className="ml-2 block text-sm text-gray-900 font-medium dark:text-white"
                     >
                       {permission.method}
@@ -255,11 +260,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               type="submit"
               label={tCommon("actions.save")}
               primary
-              disabled={
-                parseInt(budget) === allowance.totalBudget &&
-                lnurlAuth === allowance.lnurlAuth &&
-                !changedPermissionIds().length
-              }
+              disabled={!isEnabled}
             />
           </div>
         </form>
