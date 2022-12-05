@@ -23,7 +23,7 @@ import Connector, {
   SignMessageResponse,
 } from "./connector.interface";
 
-const API_URL = "https://lndhubx.kollider.xyz/api";
+const API_URL = "https://kollider.me/api";
 
 // Currently the same as ACCOUNT_CURRENCIES, this is for the future when more connectors support Fiat Accounts
 type KolliderCurrencies = Extract<ACCOUNT_CURRENCIES, "BTC" | "EUR" | "USD">;
