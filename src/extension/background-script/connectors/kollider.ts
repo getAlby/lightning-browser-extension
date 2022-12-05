@@ -207,11 +207,15 @@ export default class Kollider implements Connector {
   }
 
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
-    throw new Error("Not yet supported with the currently used account.");
+    throw new Error(
+      "Keysend is not supported with the currently used account."
+    );
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    throw new Error("Not yet supported with the currently used account.");
+    throw new Error(
+      "CheckPayment is not supported with the currently used account."
+    );
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
@@ -277,7 +281,7 @@ export default class Kollider implements Connector {
     return {
       data: {
         paymentRequest: data.payment_request,
-        rHash: "", // TODO! This calls checkPayment later which is not working yet
+        rHash: "", // TODO! This calls checkPayment later which is not working yet! Also: payment hash is missing in makeInvoide response
       },
     };
   }
