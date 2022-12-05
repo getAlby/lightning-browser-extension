@@ -213,9 +213,17 @@ export default class Kollider implements Connector {
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    throw new Error(
-      "CheckPayment is not supported with the currently used account."
-    );
+    const data = await this.request<{
+      paid: boolean;
+    }>("GET", `/checkpayment`, {
+      payment_hash: args.paymentHash,
+    });
+
+    return {
+      data: {
+        paid: !!data?.paid,
+      },
+    };
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
@@ -254,6 +262,7 @@ export default class Kollider implements Connector {
       req_id: string;
       uid: number;
       payment_request: string;
+      payment_hash: string;
       meta: string; // => memo
       metadata: null;
       amount: null | {
@@ -269,6 +278,7 @@ export default class Kollider implements Connector {
     }>("GET", "/addinvoice", {
       amount: amountInBTC,
       currency: "BTC", // Has to be BTC, Alby sends sats only
+      target_account_currency: this.currency,
       account_id: this.currentAccountId,
       meta: args.memo,
     });
@@ -280,7 +290,7 @@ export default class Kollider implements Connector {
     return {
       data: {
         paymentRequest: data.payment_request,
-        rHash: "", // TODO! This calls checkPayment later which is not working yet! Also: payment hash is missing in makeInvoide response
+        rHash: data.payment_hash,
       },
     };
   }
