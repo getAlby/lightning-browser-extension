@@ -17,7 +17,7 @@ import { useSettings } from "~/app/context/SettingsContext";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 import type { Battery, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
@@ -107,7 +107,7 @@ const DefaultView: FC<Props> = (props) => {
   const unblock = async () => {
     try {
       if (props.currentUrl?.host) {
-        await utils.call("deleteBlocklist", {
+        await msg.request("deleteBlocklist", {
           host: props.currentUrl.host,
         });
       }

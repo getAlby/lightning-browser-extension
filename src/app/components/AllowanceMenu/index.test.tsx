@@ -19,7 +19,7 @@ jest.mock("~/app/context/SettingsContext", () => ({
   }),
 }));
 
-jest.mock("~/common/lib/utils");
+jest.mock("~/common/lib/msg");
 
 const mockOnEdit = jest.fn();
 

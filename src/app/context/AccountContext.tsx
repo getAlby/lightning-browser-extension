@@ -8,6 +8,7 @@ import {
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
+import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import type { AccountInfo } from "~/types";
 
@@ -65,7 +66,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   };
 
   const lock = (callback: VoidFunction) => {
-    return utils.call("lock").then(() => {
+    return msg.request("lock").then(() => {
       setAccount(null);
       callback();
     });

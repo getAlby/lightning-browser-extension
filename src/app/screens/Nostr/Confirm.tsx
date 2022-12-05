@@ -9,7 +9,6 @@ import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import utils from "~/common/lib/utils";
 import { OriginData } from "~/types";
 
 function NostrConfirm() {
@@ -40,7 +39,7 @@ function NostrConfirm() {
 
   async function block(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
-    await utils.call("addBlocklist", {
+    await msg.request("addBlocklist", {
       domain: origin.domain,
       host: origin.host,
     });

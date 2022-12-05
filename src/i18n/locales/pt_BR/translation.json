@@ -655,7 +655,12 @@
           "label": "Lembrar e não perguntar novamente"
         }
       },
-      "content": "{{host}} solicita que você assine:"
+      "content": "{{host}} solicita que você assine:",
+      "permissions": {
+        "decrypt": "Descriptografar dados",
+        "encrypt": "Criptografar dados",
+        "allow_sign": "Permitir {{host}} assinar:"
+      }
     },
     "confirm_request_permission": {
       "title": "Aprovar Solicitação",

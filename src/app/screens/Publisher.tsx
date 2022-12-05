@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 import type { Allowance, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
@@ -35,7 +35,7 @@ function Publisher() {
   const fetchData = useCallback(async () => {
     try {
       if (id) {
-        const response = await utils.call<Allowance>("getAllowanceById", {
+        const response = await msg.request<Allowance>("getAllowanceById", {
           id: parseInt(id),
         });
         setAllowance(response);
