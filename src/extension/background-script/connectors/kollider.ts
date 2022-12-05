@@ -358,7 +358,7 @@ export default class Kollider implements Connector {
 
     const reqConfig: AxiosRequestConfig = {
       method,
-      url: `${API_URL}/${path}`,
+      url: `${API_URL}${path}`,
       responseType: "json",
       headers: {
         ...defaultHeaders,
