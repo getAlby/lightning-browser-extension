@@ -1,6 +1,8 @@
 import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import Loading from "@components/Loading";
 import Setting from "@components/Setting";
+import Checkbox from "@components/form/Checkbox";
 import Toggle from "@components/form/Toggle";
 import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
@@ -9,7 +11,7 @@ import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import msg from "~/common/lib/msg";
-import type { Allowance } from "~/types";
+import type { Allowance, Permission } from "~/types";
 
 import Button from "../Button";
 import Menu from "../Menu";
@@ -33,10 +35,42 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   const [budget, setBudget] = useState("");
   const [lnurlAuth, setLnurlAuth] = useState(false);
   const [fiatAmount, setFiatAmount] = useState("");
+
+  const [originalPermissions, setOriginalPermissions] = useState<
+    Permission[] | null
+  >(null);
+  const [permissions, setPermissions] = useState<Permission[] | null>(null);
+  const [isLoadingPermissions, setIsLoadingPermissions] = useState(true);
+
   const { t } = useTranslation("components", { keyPrefix: "allowance_menu" });
   const { t: tCommon } = useTranslation("common");
 
+  const hasPermissions = !isLoadingPermissions && !!permissions?.length;
+  const isEmptyPermissions = !isLoadingPermissions && permissions?.length === 0;
+
   useEffect(() => {
+    const fetchPermissions = async () => {
+      try {
+        const permissionResponse = await msg.request<{
+          permissions: Permission[];
+        }>("listPermissions", {
+          id: allowance.id,
+        });
+
+        const permissions: Permission[] = permissionResponse.permissions;
+
+        setOriginalPermissions(permissions);
+        setPermissions(permissions);
+      } catch (e) {
+        console.error(e);
+        if (e instanceof Error) toast.error(e.message);
+      } finally {
+        setIsLoadingPermissions(false);
+      }
+    };
+
+    !permissions && fetchPermissions();
+
     if (budget !== "" && showFiat) {
       const getFiat = async () => {
         const res = await getFormattedFiat(budget);
@@ -45,7 +79,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
 
       getFiat();
     }
-  }, [budget, showFiat, getFormattedFiat]);
+  }, [budget, showFiat, getFormattedFiat, allowance.id, permissions]);
 
   function openModal() {
     setBudget(allowance.totalBudget.toString());
@@ -65,12 +99,26 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
     setIsOpen(false);
   }
 
+  function changedPermissionIds(): number[] {
+    if (!permissions || !originalPermissions) return [];
+    const ids = permissions
+      .filter((prm, i) => prm.enabled !== originalPermissions[i].enabled)
+      .map((prm) => prm.id);
+    return ids;
+  }
+
   async function updateAllowance() {
     await msg.request("updateAllowance", {
       id: allowance.id,
       totalBudget: parseInt(budget),
       lnurlAuth,
     });
+
+    await msg.request("disablePermissions", {
+      ids: changedPermissionIds(),
+    });
+
+    setOriginalPermissions(permissions);
 
     onEdit && onEdit();
     closeModal();
@@ -145,15 +193,61 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                 onChange={(e) => setBudget(e.target.value)}
               />
             </div>
-            <Setting
-              title={t("enable_login.title")}
-              subtitle={t("enable_login.subtitle")}
-            >
-              <Toggle
-                checked={lnurlAuth}
-                onChange={() => setLnurlAuth(!lnurlAuth)}
-              />
-            </Setting>
+            <div className="pb-4 border-b border-gray-200 dark:border-neutral-500">
+              <Setting
+                title={t("enable_login.title")}
+                subtitle={t("enable_login.subtitle")}
+              >
+                <Toggle
+                  checked={lnurlAuth}
+                  onChange={() => setLnurlAuth(!lnurlAuth)}
+                />
+              </Setting>
+            </div>
+            <h2 className="mt-4 text-lg text-gray-900 font-bold dark:text-white">
+              {t("edit_permissions")}
+            </h2>
+
+            {isLoadingPermissions && (
+              <div className="flex justify-center">
+                <Loading />
+              </div>
+            )}
+
+            {hasPermissions && (
+              <div>
+                {permissions.map((permission, index) => (
+                  <div key={index} className="flex items-center my-2">
+                    <Checkbox
+                      id={"permission" + permission.id}
+                      name={"permission" + permission.id}
+                      checked={permission.enabled}
+                      onChange={() => {
+                        setPermissions(
+                          permissions.map((prm) =>
+                            prm.id === permission.id
+                              ? { ...prm, enabled: !prm.enabled }
+                              : prm
+                          )
+                        );
+                      }}
+                    />
+                    <label
+                      htmlFor={"permission" + permission.id}
+                      className="ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+                    >
+                      {permission.method}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {isEmptyPermissions && (
+              <p className="text-gray-500 dark:text-neutral-400">
+                {t("no_permissions")}
+              </p>
+            )}
           </div>
 
           <div className="flex justify-end p-5 dark:bg-surface-02dp">
@@ -163,7 +257,8 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               primary
               disabled={
                 parseInt(budget) === allowance.totalBudget &&
-                lnurlAuth === allowance.lnurlAuth
+                lnurlAuth === allowance.lnurlAuth &&
+                !changedPermissionIds().length
               }
             />
           </div>

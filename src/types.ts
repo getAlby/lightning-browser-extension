@@ -288,6 +288,20 @@ export interface MessageAllowanceList extends MessageDefault {
   action: "listAllowances";
 }
 
+export interface MessagePermissionsList extends MessageDefault {
+  args: {
+    id: Allowance["id"];
+  };
+  action: "listPermissions";
+}
+
+export interface MessagePermissionsDisable extends MessageDefault {
+  args: {
+    ids: Permission["id"][];
+  };
+  action: "disablePermissions";
+}
+
 export interface MessageInvoices extends Omit<MessageDefault, "args"> {
   args: { limit?: number; isSettled?: boolean };
   action: "getInvoices";
