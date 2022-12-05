@@ -96,8 +96,8 @@ export default class Kollider implements Connector {
         payment_hash: string;
         payment_request: string;
         reference: string;
-        settled: boolean; // Bug: Currently always false
-        settled_date: number; // Bug: Currently always 0
+        settled: boolean;
+        settled_date: number;
         target_account_currency: KolliderCurrencies;
         uid: number;
         value: number;
@@ -112,8 +112,8 @@ export default class Kollider implements Connector {
           id: `${invoice.payment_hash}-${index}`,
           memo: invoice.reference,
           preimage: "", // lndhub doesn't support preimage (yet)
-          settled: true, // Bug: Incoming invoices are not marked as settled and have no settled_date! Now, invoices which are NOT SETTLED are rendered too
-          settleDate: invoice.created_at, // BUG: here it should be settled_date, which is currently always 0! Also: created_at is set to Monday, 28. November 2022, propably because kollider ported all accounts on that day
+          settled: invoice.settled,
+          settleDate: invoice.settled_date,
           totalAmount: `${invoice.value}`,
           type: "received",
         })
