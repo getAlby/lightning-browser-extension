@@ -1,4 +1,8 @@
-# Alby - Lightning Browser Extension
+<p align="center">
+  <img width="300px" src="/doc/Alby-logo-figure-full.svg">
+</p>
+
+<h1 align="center">Alby - Lightning Browser Extension</h1>
 
 ### A browser extension to bring the Bitcoin Lightning Network to the browser
 
@@ -25,6 +29,10 @@ The extension can connect to different node implementations and supports custodi
 - [ ] [Lsat](https://lsat.tech/) support
 
 ### STATUS: 🚀
+
+## About Alby
+
+Alby is open-source and currently in alpha stage. Our goal is to create the best online experience to consume and reward content and services online
 
 ## Join the conversation
 
@@ -58,25 +66,6 @@ Add Alby to your browser
 
 ![architecture](/doc/ln-browser-architecture.png)
 
-## Project Structure
-
-```bash
-./lightning-browser-extension
-├── src                     # Source Code
-│   ├── app                     # React UI App
-│   ├── extension               # Browser Extension
-│   ├── common                  # Helpers and utilities used by both the React App and the Browser Extension
-├── static                  # Static Resources
-│   ├── assets                  # Images, logos, etc
-│   └── views                   # Static HTML files
-├── doc                     # Documentation (guidelines, architecture docs, etc)
-├── dist                    # Build
-│   └── development             # Developer Builds (not to be shared)
-│   └── production              # Production Builds
-├── tests                   # E2E tests and related helpers
-└
-```
-
 ## 🚀 Quick Start
 
 Ensure you have
@@ -90,21 +79,6 @@ Supported but not required
 
 Then run the following
 
-1. Install dependencies\
-   `yarn install`
-1. Start the development server for the extension
-   - `yarn run dev:chrome`
-   - `yarn run dev:firefox`
-   - `yarn run dev:opera`
-1. To build the extension
-   - `yarn run build:chrome`
-   - `yarn run build:firefox`
-   - `yarn run build:opera`
-1. Build and pack extensions all at once to the `dist/production` directory\
-   `yarn run build`
-1. Build the production packages in the `dist/production` directory\
-   `yarn run package`
-
 ### 🛠 Development
 
 - Install dependencies\
@@ -117,83 +91,7 @@ Then run the following
   - Opera\
     `yarn run dev:opera`
 
-#### Testnet/testing-accounts for development
-
-We set up our own internal testnet, which can be used for your development.
-If this is not reachable please let us know.
-
-- [Test-setup](https://github.com/getAlby/lightning-browser-extension/wiki/Test-setup) for different connectors (i.e. LND)
-- [RTL](https://rtl.regtest.getalby.com) for testing nodes (PW: `getalby`)
-  Currently only lists LND nodes
-- [LNDhub.go API Swagger](https://lndhub.regtest.getalby.com/swagger/index.html)
-
-#### Storybook.js
-
-We used to maintain a [Storybook](https://storybook.js.org)-setup but nobody as using it. Currently we do not see a use for it.\
-But happy to talk about if you think it's useful.
-
-### :white_check_mark: Tests
-
-#### E2E tests via [playwright](https://playwright.dev) ([using testing-library](https://testing-library.com/docs/pptr-testing-library/intro/))
-
-```bash
-yarn run dev:chrome
-yarn test:e2e
-```
-
-:tipping_hand_woman: For now we only do E2E tests for Chrome
-
-#### Unit tests tests via [Jest](https://jestjs.io)
-
-```bash
-yarn test:unit
-```
-
-#### Run all tests
-
-```bash
-yarn test
-```
-
-### 💻 Load extension into browser
-
-- **Chrome**
-
-  - Go to the browser address bar and type `chrome://extensions`
-  - Check the `Developer Mode` button to enable it.
-  - Click on the `Load Unpacked Extension…` button.
-  - Select the extension’s dist directory: `dist/development/chrome`
-  - To see the debug console check the `inspect views` in the extension details
-
-- **Firefox**
-
-  - Load the Add-on via `about:debugging` => `This Firefox` as temporary Add-on. (`about:debugging#/runtime/this-firefox`)
-  - Choose a .xpi file or the `manifest.json` file in the extension's dist directory: `dist/development/firefox`
-  - [debugging details](https://extensionworkshop.com/documentation/develop/debugging/#debugging_popups)
-  - To see the debug console click "inspect" on the list of temporary extensions (`about:debugging#/runtime/this-firefox`)
-
-- **Opera**
-
-  - Load the extension via `opera:extensions`
-  - Check the `Developer Mode` and load as unpacked from extension’s extracted directory.
-
-To connect to a remote development LND node you can use a [test account](https://github.com/bumi/lightning-browser-extension/wiki/Test-setup)
-
-### Debugging
-
-Most logs are written to the background script. Make sure to "inspect" the background script to see the console. Help for [Chrome](https://developer.chrome.com/docs/extensions/mv3/tut_debugging/), [Firefox](https://extensionworkshop.com/documentation/develop/debugging/)
-
-### ⌨️ Production package files
-
-- `yarn run package` builds the extension for all the browsers to `dist/production` directory respectively.
-
-You can also use a Docker container and run the yarn commands within a container:
-
-```bash
-docker run --rm --volume="$(pwd):/app" --workdir="/app" -t -i node:lts "yarn install && yarn run package"
-```
-
-Note: By default the `manifest.json` is set with version `0.0.0`. The webpack loader will update the version in the build with that of the `package.json` version. In order to release a new version, update version in `package.json` and run script.
+[Refer to SETUP.md for info regarding how to setup Alby](./doc/SETUP.md)
 
 ## Native Companions
 
@@ -202,7 +100,7 @@ This allows Alby also to connect to nodes behind Tor (through this native "proxy
 
 Currently, there is one native companion app available to connect to Tor nodes: [https://github.com/getAlby/alby-companion-rs](https://github.com/getAlby/alby-companion-rs)
 
-## ⭐ Contributing
+# ⭐ Contributing
 
 We welcome and appreciate new contributions.
 
@@ -214,6 +112,7 @@ We use the [Development Project Board](https://github.com/orgs/getAlby/projects/
 
 - Check out the issues that have specifically been [marked as being friendly to new contributors](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3Adesign+label%3A%22good+first+issue%22)
 - You can also review open PRs
+- [Contribution guide for new developers](./doc/CONTRIBUTION.md)
 
 #### Designer
 
@@ -225,167 +124,7 @@ We use the [Development Project Board](https://github.com/orgs/getAlby/projects/
 
 - Have a look at this Readme. Can it be improved? Do you see typos? You can open a PR or reach out to us in [our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2).
 - You can help with [translations](#translations)
-
-### Creating a PR
-
-When creating a PR please take this points as a reminder:
-
-- If there's not yet an issue for your PR please first [create an issue](https://github.com/bumi/lightning-browser-extension/issues/new) with a proposal what you would like to do. This allows us to give feedback and helps you no wasting time and motivation
-- Think in iterations (babysteps)\
-  You can always start a PR and if you feel like adding on more things to it, better branch off and [create a new i.e. _draft_-PR](https://github.blog/2019-02-14-introducing-draft-pull-requests/)
-- Newly added components should have a unit-test
-- If you work on a more complex PR please [join our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2) to get feedback, discuss the best way to tackle the challenge, and to ensure that there's no duplication of work. It's often faster and nicer to chat or call about questions than to do ping-pong comments in PRs
-
-### Code format & preferences
-
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io/) for code (and more) formatting
-- We prefer [Axios](https://axios-http.com/) over [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
-
-#### Code Editors
-
-##### [VS Code](https://code.visualstudio.com/)
-
-For better support we recommend these extensions:
-
-- [vscode-eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-- [prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-- [vscode-tailwindcss](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
-- [vscode-html-css](https://marketplace.visualstudio.com/items?itemName=ecmel.vscode-html-css)
-
-### Commit message format
-
-Alby enforces [Conventional Commits Specification](https://www.conventionalcommits.org/en/)
-
-> A specification for adding human and machine-readable meaning to commit messages
-
-### Translations
-
-Alby uses [Weblate](https://weblate.org/en/) to manage translations for different locales. If you'd like to contribute, you can [add translations here](https://hosted.weblate.org/projects/getalby-lightning-browser-extension/getalby-lightning-browser-extension/).
-
-### Rules for developers adding new i18n translation strings:
-
-[Not to be confused with language translations]
-
-#### We categorize strings into:
-
-1. **Translations**\
-   Here we again divide strings as per screens (Welcome, Home...)
-1. **Common**\
-   All the common words and actions (Confirm, Delete, Edit...)
-1. **Components**\
-   The i18n strings which exist within the components (AllowanceMenu, QRCodeScanner, PublisherCard...)
-
-#### Use underscores instead of camelCase
-
-✅ Correct
-
-```json
-"pay_now": "Pay Now"
-```
-
-❌ Wrong
-
-```json
-"payNow": "Pay Now"
-```
-
-#### To avoid confusion, we prefer indentation over underscores, i.e.
-
-✅ Correct
-
-```json
-{
-  "blue": {
-    "label": "Blue"
-  }
-}
-```
-
-❌ Wrong
-
-```json
-{
-  "blue_label": "Blue"
-}
-```
-
-#### Only indent strings when it is an input or has different attributes:
-
-✅ Correct
-
-```json
-{
-  "edit": {
-    "title": "Edit Account",
-    "label": "Name",
-    "screen_reader": "Edit account name"
-  }
-}
-```
-
-❌ Wrong
-
-```json
-{
-  "edit": {
-    "title": "Edit Account"
-  }
-}
-```
-
-Correct way for this would be:
-
-```json
-{
-  "edit": "Edit Account"
-}
-```
-
-#### Use title for heading tags and label for label tags
-
-##### When the content is copy-text and you wish to divide it in parts, you can use numbers:
-
-```json
-{
-  "enable": {
-    "request1": "Request approval for transactions",
-    "request2": "Request invoices and lightning information"
-  }
-}
-```
-
-##### For button text, you can use common translations:
-
-```json
-{
-  "common": {}
-}
-```
-
-#### You can add a new string if you don't find the suitable text in common. In that case, indent them within "actions":
-
-```json
-{
-  "actions": {
-    "add_account": "Add account"
-  }
-}
-```
-
-_Usually, we prefer single words in `common`, phrases like "Get Started", "Enable Now" can be indented in the above way._
-
-#### Similarly, the error messages go within "errors":
-
-```json
-{
-  "errors": {
-    "enter_password": "Please enter a new unlock password.",
-    "confirm_password": "Please confirm your password.",
-    "mismatched_password": "Passwords don't match."
-  }
-}
-```
+- [Code of Conduct](./doc/CODE_OF_CONDUCT.md)
 
 ## ❔ FAQs
 
