@@ -144,7 +144,7 @@ export default class Kollider implements Connector {
     let balance = account.balance;
 
     if (account.currency === "BTC") {
-      balance = getBTCToSats(account.balance).toString();
+      balance = Math.round(getBTCToSats(account.balance)).toString();
     }
 
     return {
