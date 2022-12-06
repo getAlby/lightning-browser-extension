@@ -1,34 +1,17 @@
 import db from "~/extension/background-script/db";
-import type { MessagePermissionDelete } from "~/types";
+import { permissionsFixture } from "~/fixtures/permissions";
+import type { DbPermission, MessagePermissionDelete } from "~/types";
 
 import deletePermission from "../delete";
 
 const mockNow = 1487076708000;
 Date.now = jest.fn(() => mockNow);
 
-const stackerNews = {
-  host: "stacker.news",
-};
-const mockPermissions = [
-  {
-    id: 1,
-    allowanceId: 3,
-    createdAt: "1667291216372",
-    host: stackerNews.host,
-    method: "the-request-method-1",
-    blocked: false,
-    enabled: true,
-  },
-  {
-    id: 2,
-    allowanceId: 3,
-    createdAt: "1667291216372",
-    host: stackerNews.host,
-    method: "the-request-method-2",
-    blocked: false,
-    enabled: true,
-  },
-];
+const mockPermissions: DbPermission[] = permissionsFixture;
+
+const resultPermissions: DbPermission[] = permissionsFixture.filter(
+  (permission) => permission.id !== 2
+);
 
 beforeEach(async () => {
   // fill the DB first
@@ -49,7 +32,7 @@ describe("delete permission", () => {
         internal: true,
       },
       args: {
-        host: stackerNews.host,
+        host: mockPermissions[1].host,
         method: "the-request-method-2",
       },
     };
@@ -58,6 +41,6 @@ describe("delete permission", () => {
 
     const dbPermissions = await db.permissions.toArray();
 
-    expect(dbPermissions).toStrictEqual([mockPermissions[0]]);
+    expect(dbPermissions).toStrictEqual(resultPermissions);
   });
 });
