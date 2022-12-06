@@ -607,7 +607,13 @@
         "remember": {
           "label": "记住，不要再问"
         }
-      }
+      },
+      "permissions": {
+        "allow_sign": "允许{{host}}签署：",
+        "decrypt": "解密数据",
+        "encrypt": "加密数据"
+      },
+      "content": "{{host}} 要求你签署："
     },
     "lnurlpay": {
       "amount": {
@@ -633,7 +639,7 @@
     },
     "confirm_keysend": {
       "title": "批准付款",
-      "success": "付款已发送! Preimage: {{preimage}}",
+      "success": "付款已发送! 原像: {{preimage}}",
       "payment_summary": {
         "description": "付款至： {{destination}}"
       }
@@ -728,11 +734,14 @@
       "boostagram": {
         "podcast": "播客",
         "message": "消息",
-        "app": "应用程序"
+        "app": "应用程序",
+        "sender": "付款方"
       },
       "received": "已收到",
       "sent": "已发送",
-      "fee": "费用"
+      "fee": "费用",
+      "preimage": "原像",
+      "open_location": "打开网站"
     },
     "confirm_or_cancel": {
       "only_trusted": "仅连接你信任的网站。"
