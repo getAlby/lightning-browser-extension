@@ -66,6 +66,11 @@ const DefaultView: FC<Props> = (props) => {
   const isEmptyInvoices =
     !isLoadingInvoices && incomingTransactions?.length === 0;
 
+  const navigate = useNavigate();
+
+  const { t } = useTranslation("translation", { keyPrefix: "home" });
+  const { t: tCommon } = useTranslation("common");
+
   // check if currentURL is blocked
   useEffect(() => {
     const checkBlockedUrl = async () => {
@@ -110,6 +115,9 @@ const DefaultView: FC<Props> = (props) => {
         await msg.request("deleteBlocklist", {
           host: props.currentUrl.host,
         });
+        toast.info(
+          t("default_view.block_removed", { host: props.currentUrl.host })
+        );
       }
       setIsBlockedUrl(false);
     } catch (e) {
@@ -124,11 +132,6 @@ const DefaultView: FC<Props> = (props) => {
       !incomingTransactions && (await loadInvoices());
     }
   };
-
-  const navigate = useNavigate();
-
-  const { t } = useTranslation("translation", { keyPrefix: "home" });
-  const { t: tCommon } = useTranslation("common");
 
   const loadInvoices = async () => {
     setIsLoadingInvoices(true);

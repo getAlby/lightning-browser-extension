@@ -41,6 +41,7 @@ function NostrConfirmGetPublicKey() {
       domain: origin.domain,
       host: origin.host,
     });
+    alert(t("block_added", { host: origin.host }));
     msg.error(USER_REJECTED_ERROR);
   }
 
