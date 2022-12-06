@@ -21,7 +21,7 @@ import core_ln from "/static/assets/icons/core_ln.svg";
 import eclair from "/static/assets/icons/eclair.jpg";
 import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.png";
 import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
-import kolliderLogo from "/static/assets/icons/kollider.svg";
+import kolliderLogo from "/static/assets/icons/kollider.png";
 import lnbits from "/static/assets/icons/lnbits.png";
 import lnd from "/static/assets/icons/lnd.png";
 import lndhubBlueWallet from "/static/assets/icons/lndhub_bluewallet.png";
