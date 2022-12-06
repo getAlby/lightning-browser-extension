@@ -10,6 +10,8 @@ import {
   LNURLPaymentInfo,
 } from "~/types";
 
+// @ts-ignore
+import fetchAdapter from "../../../node_modules/axios/lib/adapters/fetch";
 import { bech32Decode } from "../utils/helpers";
 
 const fromInternetIdentifier = (address: string) => {
@@ -87,19 +89,24 @@ const lnurl = {
       return lnurlAuthDetails;
     } else {
       try {
-        const { data }: { data: LNURLDetails | LNURLError } = await axios.get(
-          url.toString()
-        );
-        const lnurlDetails = data;
+        // const { data }: { data: LNURLDetails | LNURLError } = await axios.get(
+        //   url.toString(),
+        // );
+        // const lnurlDetails = data;
 
-        if (isLNURLDetailsError(lnurlDetails)) {
-          throw new Error(`LNURL Error: ${lnurlDetails.reason}`);
-        } else {
-          lnurlDetails.domain = url.hostname;
-          lnurlDetails.url = url.toString();
-        }
+        const response = await axios.get(url.toString(), {
+          adapter: fetchAdapter,
+        });
+        console.log("response: ", response);
 
-        return lnurlDetails;
+        // if (isLNURLDetailsError(lnurlDetails)) {
+        //   throw new Error(`LNURL Error: ${lnurlDetails.reason}`);
+        // } else {
+        //   lnurlDetails.domain = url.hostname;
+        //   lnurlDetails.url = url.toString();
+        // }
+
+        // return lnurlDetails;
       } catch (e) {
         throw new Error(
           `Connection problem or invalid lnurl / lightning address: ${
