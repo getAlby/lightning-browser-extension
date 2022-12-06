@@ -107,6 +107,7 @@ export default class Kollider implements Connector {
 
     const invoices: ConnectorInvoice[] = data
       .filter((i) => i.incoming)
+      .filter((i) => i.account_id === this.currentAccountId)
       .map(
         (invoice, index): ConnectorInvoice => ({
           id: `${invoice.payment_hash}-${index}`,
