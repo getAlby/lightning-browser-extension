@@ -17,7 +17,7 @@ function CompanionDownloadInfo({ hasTorCallback }: Props) {
     if (userAgent.indexOf("Win") !== -1) return "Windows";
     if (userAgent.indexOf("Mac") !== -1) return "MacOS";
     if (userAgent.indexOf("X11") !== -1) return "UNIX";
-    if (userAgent.indexOf("Linux") !== -1) return "Linux"
+    if (userAgent.indexOf("Linux") !== -1) return "Linux";
   }
 
   // TODO: check if the companion app is already installed
