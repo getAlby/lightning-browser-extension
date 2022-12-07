@@ -17,9 +17,9 @@ jest.mock("~/common/lib/api", () => {
   };
 });
 
-jest.mock("~/common/lib/utils", () => {
+jest.mock("~/common/lib/msg", () => {
   return {
-    call: jest.fn(() => ({
+    request: jest.fn(() => ({
       allowances: [
         {
           host: "https://openai.com/dall-e-2/",

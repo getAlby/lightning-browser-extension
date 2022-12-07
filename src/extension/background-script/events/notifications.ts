@@ -1,9 +1,10 @@
-import utils from "~/common/lib/utils";
 import { getFormattedFiat } from "~/common/utils/currencyConvert";
 import { getCurrencyRateWithCache } from "~/extension/background-script/actions/cache/getCurrencyRate";
 import state from "~/extension/background-script/state";
 import i18n from "~/i18n/i18nConfig";
 import type { PaymentNotificationData, AuthNotificationData } from "~/types";
+
+import { notify } from "./helpers";
 
 const paymentSuccessNotification = async (
   message: "ln.sendPayment.success",
@@ -55,7 +56,7 @@ const paymentSuccessNotification = async (
     total_fees
   )}`;
 
-  return utils.notify({
+  return notify({
     title: notificationTitle,
     message: notificationMessage,
   });
@@ -78,7 +79,7 @@ const paymentFailedNotification = (
     error = paymentResponseData.data.payment_error;
   }
 
-  return utils.notify({
+  return notify({
     title: `⚠️ Payment failed`,
     message: `Error: ${error}`,
   });
@@ -94,7 +95,7 @@ const lnurlAuthSuccessNotification = (
     title = `${title} to ${data.origin.name}`;
   }
 
-  return utils.notify({
+  return notify({
     title,
     message: `Successfully logged in to ${data.lnurlDetails.domain}`,
   });
@@ -106,7 +107,7 @@ const lnurlAuthFailedNotification = (
     error: string;
   }
 ) => {
-  return utils.notify({
+  return notify({
     title: `⚠️ Login failed`,
     message: `${data.error}`,
   });

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 
 const initialFormData = {
   password: "",
@@ -22,7 +22,7 @@ export default function SetPassword() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
-      await utils.call("setPassword", { password: formData.password });
+      await msg.request("setPassword", { password: formData.password });
       navigate("/choose-connector");
     } catch (e) {
       if (e instanceof Error) {

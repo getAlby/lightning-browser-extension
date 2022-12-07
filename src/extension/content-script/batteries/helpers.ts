@@ -1,8 +1,13 @@
 import browser from "webextension-polyfill";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 import type { Battery } from "~/types";
 
-import { ExtensionIcon } from "../../background-script/actions/setup/setIcon";
+// duplicate also in setup/setIcon action
+enum ExtensionIcon {
+  Default = "alby_icon_yellow",
+  Tipping = "alby_icon_blue",
+  Active = "alby_icon_green",
+}
 
 export const findLightningAddressInText = (text: string): string | null => {
   // The second lightning emoji is succeeded by an invisible
@@ -24,5 +29,5 @@ export const setLightningData = (data: [Battery]): void => {
     action: "lightningData",
     args: data,
   });
-  utils.call("setIcon", { icon: ExtensionIcon.Tipping });
+  msg.request("setIcon", { icon: ExtensionIcon.Tipping });
 };

@@ -16,7 +16,6 @@ import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import utils from "~/common/lib/utils";
 
 function ConfirmPayment() {
   const {
@@ -80,7 +79,7 @@ function ConfirmPayment() {
 
     try {
       setLoading(true);
-      const response = await utils.call(
+      const response = await msg.request(
         "sendPayment",
         { paymentRequest: paymentRequest },
         {

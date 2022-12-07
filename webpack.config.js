@@ -84,7 +84,6 @@ var options = {
       "webextension-polyfill": "webextension-polyfill",
       Buffer: "buffer",
       process: "process/browser",
-      crypto: "crypto-browserify",
       assert: "assert",
       stream: "stream-browserify",
     },
