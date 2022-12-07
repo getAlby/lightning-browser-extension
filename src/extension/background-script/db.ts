@@ -5,7 +5,7 @@ import type {
   DbPayment,
   DbBlocklist,
   DbPermission,
-  DbAlbyEvent
+  DbAlbyEvent,
 } from "~/types";
 
 class DB extends Dexie {
@@ -125,7 +125,10 @@ class DB extends Dexie {
               .bulkAdd(result.permissions)
               .catch(Dexie.BulkError, function (e) {
                 console.error("Failed to add permissions; ignoring", e);
-                
+              });
+          }
+        });
+
         const albyEventsPromise = this.albyEvents.count().then((count) => {
           // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
           if (count > 0) {
