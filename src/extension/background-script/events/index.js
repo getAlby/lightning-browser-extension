@@ -22,12 +22,13 @@ const subscribe = () => {
   PubSub.subscribe("ln.keysend.success", updateAllowance);
 
   PubSub.subscribe("lnurl.auth.success", lnurlAuthSuccessNotification);
+  PubSub.subscribe("lnurl.auth.success", persistAlbyEvent);
   PubSub.subscribe("lnurl.auth.failed", lnurlAuthFailedNotification);
 
   PubSub.subscribe("ln.makeInvoice.success", persistAlbyEvent);
   PubSub.subscribe("budget.success", persistAlbyEvent);
 
-  console.info(`Event subscriptions registered`);
+  console.info("Event subscriptions registered");
 };
 
 export { subscribe };

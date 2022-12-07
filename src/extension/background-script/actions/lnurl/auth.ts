@@ -104,7 +104,7 @@ export async function authFunction({
       // };
 
       PubSub.publish(
-        `lnurl.auth.success`,
+        "lnurl.auth.success",
         /* should be: `eventData` */ {
           authResponse,
           lnurlDetails,
