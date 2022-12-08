@@ -18,7 +18,7 @@ const getPublicKeyOrPrompt = async (message: MessagePublicKeyGet) => {
     );
 
     if (hasPermission) {
-      const publicKey = state.getState().getNostr().getPublicKey();
+      const publicKey = await state.getState().getNostr().getPublicKey();
       return { data: publicKey };
     } else {
       const promptResponse = await utils.openPrompt<{
@@ -39,7 +39,7 @@ const getPublicKeyOrPrompt = async (message: MessagePublicKeyGet) => {
 
       if (promptResponse.data.confirm) {
         // Normally `openPrompt` would throw already, but to make sure we got a confirm from the user we check this here
-        const publicKey = state.getState().getNostr().getPublicKey();
+        const publicKey = await state.getState().getNostr().getPublicKey();
         return { data: publicKey };
       } else {
         return { error: "User rejected" };
