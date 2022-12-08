@@ -12,28 +12,28 @@ function SatButtons({ onClick, disabled }: Props) {
     <div className="flex gap-2">
       <Button
         icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label="1K ⚡"
+        label="1k ⚡"
         onClick={() => onClick("1000")}
         fullWidth
         disabled={disabled}
       />
       <Button
         icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label="5K ⚡"
+        label="5k ⚡"
         onClick={() => onClick("5000")}
         fullWidth
         disabled={disabled}
       />
       <Button
         icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label="10K ⚡"
+        label="10k ⚡"
         onClick={() => onClick("10000")}
         fullWidth
         disabled={disabled}
       />
       <Button
         icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label="25K ⚡"
+        label="25k ⚡"
         onClick={() => onClick("25000")}
         fullWidth
         disabled={disabled}
