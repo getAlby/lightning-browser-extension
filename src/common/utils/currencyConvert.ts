@@ -13,7 +13,8 @@ export const getFormattedFiat = (params: {
 }) => {
   const fiatValue = Number(params.amount) * params.rate;
 
-  return new Intl.NumberFormat(params.locale || "en", {
+  const l = (params.locale || "en").toLocaleLowerCase().replace("_", "-");
+  return new Intl.NumberFormat(l || "en", {
     style: "currency",
     currency: params.currency,
   }).format(fiatValue);
@@ -23,9 +24,8 @@ export const getFormattedNumber = (params: {
   amount: number | string;
   locale: string;
 }) => {
-  return new Intl.NumberFormat(params.locale || "en").format(
-    Number(params.amount)
-  );
+  const l = (params.locale || "en").toLocaleLowerCase().replace("_", "-");
+  return new Intl.NumberFormat(l || "en").format(Number(params.amount));
 };
 
 export const getFormattedSats = (params: {

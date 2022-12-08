@@ -24,7 +24,7 @@ export const resources = {
     common: es.common,
     components: es.components,
   },
-  pt_BR: {
+  "pt-BR": {
     translation: pt_BR.translation,
     common: pt_BR.common,
     components: pt_BR.components,
@@ -41,6 +41,7 @@ export const resources = {
   },
 } as const;
 
+// needs to be aligned with `resources`
 export const supportedLocales = [
   { locale: "en", label: "English" },
   { locale: "es", label: "Español" },
