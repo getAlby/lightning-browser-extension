@@ -10,7 +10,7 @@ import type {
 
 import listAllowances from "../list";
 
-const mockPayments: DbPayment[] = paymentsFixture;
+const mockPayments: DbPayment[] = paymentsFixture.slice(0, 2);
 
 const mockAllowances: DbAllowance[] = allowanceFixture;
 

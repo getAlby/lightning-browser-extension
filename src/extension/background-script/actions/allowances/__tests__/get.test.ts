@@ -5,7 +5,7 @@ import type { DbAllowance, DbPayment, MessageAllowanceGet } from "~/types";
 
 import getAllowance from "../get";
 
-const mockPayments: DbPayment[] = paymentsFixture;
+const mockPayments: DbPayment[] = paymentsFixture.slice(0, 2);
 
 const mockAllowances: DbAllowance[] = allowanceFixture;
 

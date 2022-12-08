@@ -1,10 +1,12 @@
 import db from "~/extension/background-script/db";
 import { allowanceFixture } from "~/fixtures/allowances";
-import type { DbAllowance, MessageAllowanceDelete } from "~/types";
+import { paymentsFixture } from "~/fixtures/payment";
+import type { DbAllowance, MessageAllowanceDelete, DbPayment } from "~/types";
 
 import deleteAllowance from "../delete";
 
 const mockAllowances: DbAllowance[] = allowanceFixture;
+const mockPayments: DbPayment[] = paymentsFixture;
 
 const mockPermissions = [
   {
@@ -39,6 +41,7 @@ const mockPermissions = [
 beforeEach(async () => {
   await db.allowances.bulkAdd(mockAllowances);
   await db.permissions.bulkAdd(mockPermissions);
+  await db.payments.bulkAdd(mockPayments);
 });
 
 afterEach(() => {
@@ -58,6 +61,9 @@ describe("delete allowance", () => {
         id: 2,
       },
     };
+    let paymentsCount;
+
+    const dbAllowance = await db.allowances.get({ id: 2 });
 
     expect(await deleteAllowance(message)).toStrictEqual({
       data: true,
@@ -67,6 +73,15 @@ describe("delete allowance", () => {
       .toCollection()
       .reverse()
       .sortBy("lastPaymentAt");
+
+    if (dbAllowance) {
+      paymentsCount = await db.payments
+        .where("host")
+        .equalsIgnoreCase(dbAllowance.host)
+        .count();
+
+      expect(paymentsCount).toEqual(0);
+    }
 
     expect(dbAllowances).toEqual([
       {
