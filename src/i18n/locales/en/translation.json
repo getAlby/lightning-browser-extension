@@ -344,7 +344,8 @@
       "default_view": {
         "recent_transactions": "Recent Transactions",
         "no_transactions": "No transactions made with Alby, yet.",
-        "is_blocked_hint": "Alby is currently disabled on {{host}}"
+        "is_blocked_hint": "Alby is currently disabled on {{host}}",
+        "block_removed": "Enabled {{host}}. Please reload the website."
       }
     },
     "accounts": {
@@ -354,7 +355,9 @@
       },
       "edit": {
         "title": "Edit Account",
-        "name": { "label": "Name" },
+        "name": {
+          "label": "Name"
+        },
         "screen_reader": "Edit account name"
       },
       "export": {
@@ -375,7 +378,8 @@
       "allow": "Allow {{host}} to:",
       "request1": "Request approval for transactions",
       "request2": "Request invoices and lightning information",
-      "block_and_ignore": "Block and ignore {{host}}"
+      "block_and_ignore": "Block and ignore {{host}}",
+      "block_added": "Added {{host}} to the blocklist, please reload the website."
     },
     "unlock": {
       "unlock_to_continue": "Unlock to continue",
@@ -469,7 +473,9 @@
         "confirm_password": {
           "label": "Confirm new password:"
         },
-        "submit": { "label": "Change" },
+        "submit": {
+          "label": "Change"
+        },
         "errors": {
           "enter_password": "Please enter a new unlock password.",
           "confirm_password": "Please confirm your password.",
@@ -639,6 +645,7 @@
       "allow": "Allow {{host}} to:",
       "read_public_key": "Read your public key",
       "block_and_ignore": "Block and ignore {{host}}",
+      "block_added": "Added {{host}} to the blocklist, please reload the website.",
       "confirm_sign_message": {
         "remember": {
           "label": "Remember and don't ask again"

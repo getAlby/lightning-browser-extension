@@ -48,6 +48,7 @@ function Enable(props: Props) {
       domain: props.origin.domain,
       host: props.origin.host,
     });
+    alert(t("block_added", { host: props.origin.host }));
     msg.error(USER_REJECTED_ERROR);
   }
 
