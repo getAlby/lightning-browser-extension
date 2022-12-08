@@ -127,7 +127,8 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
         }
       })
       .catch((e) => {
-        toast.error(
+        toast.error(`An unexpected error occurred (${e.message})`);
+        console.error(
           `AccountContext: An unexpected error occurred (${e.message})`
         );
       })

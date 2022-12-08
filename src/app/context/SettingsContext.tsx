@@ -57,7 +57,8 @@ export const SettingsProvider = ({
         setSettings(settings);
       })
       .catch((e) => {
-        toast.error(
+        toast.error(`An unexpected error occurred (${e.message})`);
+        console.error(
           `SettingsProvider: An unexpected error occurred (${e.message})`
         );
       })
