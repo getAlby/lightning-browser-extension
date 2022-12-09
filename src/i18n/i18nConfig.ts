@@ -1,6 +1,8 @@
-// dayjs locales must be imported as well
+// dayjs locales must be imported as well, list: https://github.com/iamkun/dayjs/tree/dev/src/locale
+import "dayjs/locale/it";
 import "dayjs/locale/es";
 import "dayjs/locale/pt-br";
+import "dayjs/locale/sv";
 import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
