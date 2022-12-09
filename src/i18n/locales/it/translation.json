@@ -653,7 +653,7 @@
   },
   "components": {
     "allowance_menu": {
-      "confirm_delete": "Sei sicuro di voler eliminare questo sito web?",
+      "confirm_delete": "Sei sicuro di voler eliminare questo sito web? \nSe elimini questo sito web, perderai tutta la cronologia delle transazioni che hai fatto su di esso, come il totale dei pagamenti e sats spesi.",
       "hint": "Questo azzererà il budget corrente",
       "new_budget": {
         "label": "Nuovo budget"

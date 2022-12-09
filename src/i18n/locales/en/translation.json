@@ -705,7 +705,7 @@
   },
   "components": {
     "allowance_menu": {
-      "confirm_delete": "Are you sure you want to delete this website?",
+      "confirm_delete": "Are you sure you want to delete this website? \nIf you delete this website, you will loose all history of transactions you did on it, like total of payments and sats spent.",
       "hint": "This will reset the current budget",
       "new_budget": {
         "label": "New budget"

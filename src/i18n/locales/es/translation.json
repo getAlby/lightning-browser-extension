@@ -546,7 +546,7 @@
   },
   "components": {
     "allowance_menu": {
-      "confirm_delete": "¿Está seguro de que desea eliminar este sitio web?",
+      "confirm_delete": "¿Está seguro de que desea eliminar este sitio web? \nSi elimina este sitio web, perderá todos los registros históricos de transacciones que realiza en él, como el total de pagos y el SAT gastado.",
       "hint": "Esto restablecerá el presupuesto actual",
       "new_budget": {
         "label": "Nuevo presupuesto"
