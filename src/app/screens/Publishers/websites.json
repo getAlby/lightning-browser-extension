@@ -42,6 +42,12 @@
         "subtitle": "Play Roulette with Bitcoin",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lightning-roulette_thumbnail.svg",
         "url": "https://lightning-roulette.com/"
+      },
+      {
+        "title": "LNflip",
+        "subtitle": "Play coin flip matches against other players",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lnflip_thumbnail.svg",
+        "url": "https://www.lnflip.com/"
       }
     ]
   },
@@ -125,10 +131,10 @@
         "url": "https://amboss.space/"
       },
       {
-        "title": "Sparkshot",
-        "subtitle": "Art created and funded by the community",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/sparkshot_thumbnail.svg",
-        "url": "https://sparkshot.io/"
+        "title": "Lightsats",
+        "subtitle": "Onboard people to bitcoin by sending them tips",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lightsats_thumbnail.svg",
+        "url": "https://lightsats.com/"
       },
       {
         "title": "Sats for Likes",
