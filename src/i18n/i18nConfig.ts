@@ -26,6 +26,11 @@ export const resources = {
     common: es.common,
     components: es.components,
   },
+  it: {
+    translation: it.translation,
+    common: it.common,
+    components: it.components,
+  },
   "pt-BR": {
     translation: pt_BR.translation,
     common: pt_BR.common,
@@ -36,20 +41,15 @@ export const resources = {
     common: sv.common,
     components: sv.components,
   },
-  it: {
-    translation: it.translation,
-    common: it.common,
-    components: it.components,
-  },
 } as const;
 
 // needs to be aligned with `resources`
 export const supportedLocales = [
   { locale: "en", label: "English" },
   { locale: "es", label: "Español" },
+  { locale: "it", label: "Italiano" },
   { locale: "pt-BR", label: "Português (Brasil)" },
   { locale: "sv", label: "Svenska" },
-  { locale: "it", label: "Italiano" },
 ];
 
 i18n
