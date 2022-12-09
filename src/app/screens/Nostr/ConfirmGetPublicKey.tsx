@@ -2,12 +2,13 @@ import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
+import Checkbox from "@components/form/Checkbox";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import utils from "~/common/lib/utils";
 import { OriginData } from "~/types";
 
 function NostrConfirmGetPublicKey() {
@@ -17,11 +18,16 @@ function NostrConfirmGetPublicKey() {
   const { t: tCommon } = useTranslation("common");
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
+  const [loading, setLoading] = useState(false);
+  const [rememberPermission, setRememberPermission] = useState(false);
 
-  function enable() {
+  function confirm() {
+    setLoading(true);
     msg.reply({
       confirm: true,
+      rememberPermission,
     });
+    setLoading(false);
   }
 
   function reject(event: React.MouseEvent<HTMLAnchorElement>) {
@@ -31,11 +37,17 @@ function NostrConfirmGetPublicKey() {
 
   async function block(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
-    await utils.call("addBlocklist", {
+    await msg.request("addBlocklist", {
       domain: origin.domain,
       host: origin.host,
     });
+    alert(t("block_added", { host: origin.host }));
     msg.error(USER_REJECTED_ERROR);
+  }
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    confirm();
   }
 
   return (
@@ -58,20 +70,41 @@ function NostrConfirmGetPublicKey() {
             </div>
           </div>
         </div>
-        <div className="mb-4 text-center flex flex-col">
-          <ConfirmOrCancel
-            label={tCommon("actions.connect")}
-            onConfirm={enable}
-            onCancel={reject}
-          />
-          <a
-            className="underline text-sm text-gray-400 mx-4 overflow-hidden text-ellipsis whitespace-nowrap"
-            href="#"
-            onClick={block}
-          >
-            {t("block_and_ignore", { host: origin.host })}
-          </a>
-        </div>
+
+        <form onSubmit={handleSubmit}>
+          <div className="flex items-center">
+            <Checkbox
+              id="remember_permission"
+              name="remember_permission"
+              checked={rememberPermission}
+              onChange={(event) => {
+                setRememberPermission(event.target.checked);
+              }}
+            />
+            <label
+              htmlFor="remember_permission"
+              className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+            >
+              {t("confirm_sign_message.remember.label")}
+            </label>
+          </div>
+
+          <div className="mb-4 text-center flex flex-col">
+            <ConfirmOrCancel
+              disabled={loading}
+              loading={loading}
+              label={tCommon("actions.confirm")}
+              onCancel={reject}
+            />
+            <a
+              className="underline text-sm text-gray-400 mx-4 overflow-hidden text-ellipsis whitespace-nowrap"
+              href="#"
+              onClick={block}
+            >
+              {t("block_and_ignore", { host: origin.host })}
+            </a>
+          </div>
+        </form>
       </Container>
     </div>
   );

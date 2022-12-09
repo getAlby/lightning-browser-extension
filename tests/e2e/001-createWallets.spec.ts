@@ -103,27 +103,6 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to BlueWallet", async () => {
-    const { browser, page, $document } = await commonCreateWalletUserCreate();
-
-    // click at "BlueWallet"
-    const createNewWalletButton = await getByText($document, "Bluewallet");
-    createNewWalletButton.click();
-
-    await findByText($document, "Connect to BlueWallet");
-
-    const lndHubUrl =
-      "lndhub://c269ebb962f1a94f9c29:f6f16f35e935edc05ee7@https://lndhub.herokuapp.com";
-    const lndUrlField = await getByLabelText(
-      $document,
-      "BlueWallet Export URI"
-    );
-    await lndUrlField.type(lndHubUrl);
-
-    await commonCreateWalletSuccessCheck({ page, $document });
-    await browser.close();
-  });
-
   test("successfully connects to LND", async () => {
     const { browser, page, $document } = await commonCreateWalletUserCreate();
 
@@ -163,26 +142,18 @@ test.describe("Create or connect wallets", () => {
     await findByText($document, "Host");
 
     const host = "143.244.206.7";
-    const pubkey = "032e2444c5bb14c5eb2bf8ebdfd102c162609956aa995b7c7d373ca378deedb5c7";
+    const pubkey =
+      "032e2444c5bb14c5eb2bf8ebdfd102c162609956aa995b7c7d373ca378deedb5c7";
     const rune = "vrrgKshH1sPZ7wjQnCWjdEtB2PCcM48Gs05FuVPln8g9MTE=";
 
-    const lndUrlField = await getByLabelText(
-      $document,
-      "Host"
-    );
+    const lndUrlField = await getByLabelText($document, "Host");
     await lndUrlField.type(host);
 
-    const pubkeyField = await getByLabelText(
-      $document,
-      "Public key"
-    );
+    const pubkeyField = await getByLabelText($document, "Public key");
     await pubkeyField.type(pubkey);
 
-    const runeField = await getByLabelText(
-      $document,
-      "Rune"
-    );
-    await runeField.type(rune)
+    const runeField = await getByLabelText($document, "Rune");
+    await runeField.type(rune);
 
     await commonCreateWalletSuccessCheck({ page, $document });
 

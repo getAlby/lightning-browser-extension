@@ -20,7 +20,7 @@ import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import { CURRENCIES } from "~/common/constants";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 
 const initialFormData = {
   password: "",
@@ -38,7 +38,7 @@ function Settings() {
   const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
 
   const getPrivateKeyFromStorage = async () => {
-    const priv = (await utils.call("nostr/getPrivateKey")) as string;
+    const priv = (await msg.request("nostr/getPrivateKey")) as string;
     setNostrPrivateKey(priv ?? "");
   };
 
@@ -54,7 +54,7 @@ function Settings() {
   }
 
   async function saveNostrPrivateKey(nostrPrivateKey: string) {
-    const result = await utils.call("nostr/getPrivateKey");
+    const result = await msg.request("nostr/getPrivateKey");
     const currentPrivateKey = result as unknown as string;
 
     if (nostrPrivateKey === currentPrivateKey) return;
@@ -63,7 +63,7 @@ function Settings() {
       return;
     }
 
-    await utils.call("nostr/setPrivateKey", {
+    await msg.request("nostr/setPrivateKey", {
       privateKey: nostrPrivateKey,
     });
 
@@ -74,7 +74,7 @@ function Settings() {
   }
 
   async function updateAccountPassword(password: string) {
-    await utils.call("changePassword", {
+    await msg.request("changePassword", {
       password: formData.password,
     });
     toast.success(t("change_password.success"));
@@ -325,7 +325,7 @@ function Settings() {
           closeTimeoutMS={200}
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
-          contentLabel={t("change_password.content_label")}
+          contentLabel={t("change_password.screen_reader")}
           overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
           className="rounded-lg bg-white w-full max-w-lg"
         >
@@ -480,7 +480,9 @@ function Settings() {
                 <Button
                   label={t("nostr.private_key.generate")}
                   onClick={async () => {
-                    const result = await utils.call("nostr/generatePrivateKey");
+                    const result = await msg.request(
+                      "nostr/generatePrivateKey"
+                    );
                     setNostrPrivateKey(result.privateKey as string);
                     saveNostrPrivateKey(result.privateKey as string);
                   }}

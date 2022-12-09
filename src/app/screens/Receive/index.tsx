@@ -20,7 +20,7 @@ import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 import { poll } from "~/common/utils/helpers";
 
 function Receive() {
@@ -31,7 +31,7 @@ function Receive() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
@@ -64,11 +64,11 @@ function Receive() {
   useEffect(() => {
     if (formData.amount !== "" && showFiat) {
       (async () => {
-        const res = await getFiatValue(formData.amount);
+        const res = await getFormattedFiat(formData.amount);
         setFiatAmount(res);
       })();
     }
-  }, [formData, showFiat, getFiatValue]);
+  }, [formData, showFiat, getFormattedFiat]);
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -83,7 +83,7 @@ function Receive() {
     setPollingForPayment(true);
     poll({
       fn: () =>
-        utils.call("checkPayment", { paymentHash }) as Promise<{
+        msg.request("checkPayment", { paymentHash }) as Promise<{
           paid: boolean;
         }>,
       validate: (payment) => payment.paid,

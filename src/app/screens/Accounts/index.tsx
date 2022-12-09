@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import api from "~/common/lib/api";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 import type { Account } from "~/types";
 
 type AccountAction = Omit<Account, "connector" | "config">;
@@ -59,7 +59,7 @@ function AccountsScreen() {
   }
 
   async function updateAccountName({ id, name }: AccountAction) {
-    await utils.call("editAccount", {
+    await msg.request("editAccount", {
       name,
       id,
     });
@@ -81,7 +81,7 @@ function AccountsScreen() {
       setExportModalIsOpen(true);
     }, 50);
     setLndHubData(
-      await utils.call("accountDecryptedDetails", {
+      await msg.request("accountDecryptedDetails", {
         name,
         id,
       })

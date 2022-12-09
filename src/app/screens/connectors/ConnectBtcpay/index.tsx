@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 
 const initialFormData = {
   url: "",
@@ -83,13 +83,13 @@ export default function ConnectBtcpay() {
       if (account.connector === "nativelnd") {
         validation = { valid: true, error: "" };
       } else {
-        validation = await utils.call("validateAccount", account);
+        validation = await msg.request("validateAccount", account);
       }
 
       if (validation.valid) {
-        const addResult = await utils.call("addAccount", account);
+        const addResult = await msg.request("addAccount", account);
         if (addResult.accountId) {
-          await utils.call("selectAccount", {
+          await msg.request("selectAccount", {
             id: addResult.accountId,
           });
           navigate("/test-connection");
@@ -123,7 +123,6 @@ export default function ConnectBtcpay() {
           id="btcpay-config"
           label={t("config.label")}
           placeholder={t("config.placeholder")}
-          title={t("config.title")}
           onChange={handleChange}
           required
         />

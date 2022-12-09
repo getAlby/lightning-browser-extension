@@ -1,36 +1,10 @@
 import db from "~/extension/background-script/db";
+import { allowanceFixture } from "~/fixtures/allowances";
 import type { DbAllowance, MessageAllowanceDelete } from "~/types";
 
 import deleteAllowance from "../delete";
 
-const mockAllowances: DbAllowance[] = [
-  {
-    enabled: true,
-    host: "pro.kollider.xyz",
-    id: 1,
-    imageURL: "https://pro.kollider.xyz/favicon.ico",
-    lastPaymentAt: 0,
-    lnurlAuth: true,
-    name: "pro kollider",
-    remainingBudget: 500,
-    totalBudget: 500,
-    createdAt: "123456",
-    tag: "",
-  },
-  {
-    enabled: false,
-    host: "lnmarkets.com",
-    id: 2,
-    imageURL: "https://lnmarkets.com/apple-touch-icon.png",
-    lastPaymentAt: 0,
-    lnurlAuth: true,
-    name: "LN Markets",
-    remainingBudget: 200,
-    totalBudget: 200,
-    createdAt: "123456",
-    tag: "",
-  },
-];
+const mockAllowances: DbAllowance[] = allowanceFixture;
 
 const mockPermissions = [
   {
@@ -38,7 +12,7 @@ const mockPermissions = [
     allowanceId: 1,
     createdAt: "1667291216372",
     host: "pro.kollider.xyz",
-    method: "listChannels",
+    method: "webln/listchannels",
     blocked: false,
     enabled: true,
   },
@@ -47,7 +21,7 @@ const mockPermissions = [
     allowanceId: 2,
     createdAt: "1667291216372",
     host: "lnmarkets.com",
-    method: "getinfo",
+    method: "webln/getinfo",
     blocked: false,
     enabled: true,
   },
@@ -56,7 +30,7 @@ const mockPermissions = [
     allowanceId: 2,
     createdAt: "1667291216372",
     host: "lnmarkets.com",
-    method: "some-method",
+    method: "webln/signmessage",
     blocked: false,
     enabled: true,
   },

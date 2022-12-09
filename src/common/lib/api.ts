@@ -23,7 +23,7 @@ import {
   removeAccountFromCache,
   storeAccounts,
 } from "./cache";
-import utils from "./utils";
+import msg from "./msg";
 
 export interface AccountInfoRes {
   balance: { balance: string | number };
@@ -46,7 +46,7 @@ interface BlocklistRes {
   blocked: boolean;
 }
 
-export const getAccountInfo = () => utils.call<AccountInfoRes>("accountInfo");
+export const getAccountInfo = () => msg.request<AccountInfoRes>("accountInfo");
 
 /**
  * stale-while-revalidate get account info
@@ -84,43 +84,43 @@ export const swrGetAccountInfo = async (
       .catch(reject);
   });
 };
-export const getAccounts = () => utils.call<Accounts>("getAccounts");
-export const updateAllowance = () => utils.call<Accounts>("updateAllowance");
+export const getAccounts = () => msg.request<Accounts>("getAccounts");
+export const updateAllowance = () => msg.request<Accounts>("updateAllowance");
 export const selectAccount = (id: string) =>
-  utils.call("selectAccount", { id });
+  msg.request("selectAccount", { id });
 export const getAllowance = (host: string) =>
-  utils.call<Allowance>("getAllowance", { host });
+  msg.request<Allowance>("getAllowance", { host });
 export const getPayments = (options: { limit: number }) =>
-  utils.call<{ payments: DbPayment[] }>("getPayments", options);
-export const getSettings = () => utils.call<SettingsStorage>("getSettings");
-export const getStatus = () => utils.call<StatusRes>("status");
-export const getInfo = () => utils.call<NodeInfo>("getInfo");
+  msg.request<{ payments: DbPayment[] }>("getPayments", options);
+export const getSettings = () => msg.request<SettingsStorage>("getSettings");
+export const getStatus = () => msg.request<StatusRes>("status");
+export const getInfo = () => msg.request<NodeInfo>("getInfo");
 export const makeInvoice = ({ amount, memo }: MakeInvoiceArgs) =>
-  utils.call<MakeInvoiceResponse["data"]>("makeInvoice", { amount, memo });
+  msg.request<MakeInvoiceResponse["data"]>("makeInvoice", { amount, memo });
 export const connectPeer = ({ host, pubkey }: ConnectPeerArgs) =>
-  utils.call<ConnectPeerResponse["data"]>("connectPeer", { host, pubkey });
+  msg.request<ConnectPeerResponse["data"]>("connectPeer", { host, pubkey });
 export const setSetting = (setting: MessageSettingsSet["args"]["setting"]) =>
-  utils.call<SettingsStorage>("setSetting", {
+  msg.request<SettingsStorage>("setSetting", {
     setting,
   });
 export const removeAccount = (id: string) =>
   Promise.all([
-    utils.call("removeAccount", { id }),
+    msg.request("removeAccount", { id }),
     removeAccountFromCache(id),
   ]);
 export const unlock = (password: string) =>
-  utils.call<UnlockRes>("unlock", { password });
+  msg.request<UnlockRes>("unlock", { password });
 export const getBlocklist = (host: string) =>
-  utils.call<BlocklistRes>("getBlocklist", { host });
+  msg.request<BlocklistRes>("getBlocklist", { host });
 export const getInvoices = (options?: MessageInvoices["args"]) =>
-  utils.call<{ invoices: Invoice[] }>("getInvoices", options);
+  msg.request<{ invoices: Invoice[] }>("getInvoices", options);
 export const lnurlAuth = (
   options: MessageLnurlAuth["args"]
 ): Promise<LnurlAuthResponse> =>
-  utils.call<LnurlAuthResponse>("lnurlAuth", options);
+  msg.request<LnurlAuthResponse>("lnurlAuth", options);
 
 export const getCurrencyRate = async () =>
-  utils.call<{ rate: number }>("getCurrencyRate");
+  msg.request<{ rate: number }>("getCurrencyRate");
 
 export default {
   getAccountInfo,

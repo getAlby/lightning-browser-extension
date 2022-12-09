@@ -1,7 +1,9 @@
 import utils from "~/common/lib/utils";
 import { MessageSignEvent } from "~/types";
+import { PermissionMethodNostr } from "~/types";
 
 import state from "../../state";
+import { hasPermissionFor, addPermissionFor } from "./helpers";
 import { validateEvent } from "./helpers";
 
 const signEventOrPrompt = async (message: MessageSignEvent) => {
@@ -18,14 +20,26 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
   }
 
   try {
-    const response = await utils.openPrompt<{
-      confirm: boolean;
-    }>({
-      ...message,
-      action: "public/nostr/confirmSignMessage",
-    });
-    if (!response.data.confirm) {
-      throw new Error("User rejected");
+    const hasPermission = await hasPermissionFor(
+      PermissionMethodNostr["NOSTR_SIGNMESSAGE"],
+      message.origin.host
+    );
+    if (!hasPermission) {
+      const promptResponse = await utils.openPrompt<{
+        enabled: boolean;
+        blocked: boolean;
+      }>({
+        ...message,
+        action: "public/nostr/confirmSignMessage",
+      });
+
+      // add permission to db only if user decided to always allow this request
+      if (promptResponse.data.enabled) {
+        await addPermissionFor(
+          PermissionMethodNostr["NOSTR_SIGNMESSAGE"],
+          message.origin.host
+        );
+      }
     }
 
     const signedEvent = await state

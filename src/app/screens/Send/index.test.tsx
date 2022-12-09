@@ -1,17 +1,10 @@
 import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { I18nextProvider } from "react-i18next";
 import { MemoryRouter } from "react-router-dom";
-import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
-import * as SettingsContext from "~/app/context/SettingsContext";
+import i18n from "~/../tests/unit/helpers/i18n";
 
 import Send from "./index";
-
-jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
-  settings: mockSettings,
-  isLoading: false,
-  updateSetting: jest.fn(),
-  getFiatValue: jest.fn(),
-});
 
 describe("Send", () => {
   afterEach(() => {
@@ -22,7 +15,9 @@ describe("Send", () => {
     const user = userEvent.setup();
     render(
       <MemoryRouter>
-        <Send />
+        <I18nextProvider i18n={i18n}>
+          <Send />
+        </I18nextProvider>
       </MemoryRouter>
     );
 

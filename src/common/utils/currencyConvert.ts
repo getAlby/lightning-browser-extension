@@ -5,22 +5,36 @@ import i18n from "~/i18n/i18nConfig";
 
 import type { CURRENCIES } from "../constants";
 
-export const getFiatValue = ({
-  amount,
-  rate,
-  currency,
-}: {
+export const getFormattedFiat = (params: {
   amount: number | string;
   rate: number;
   currency: CURRENCIES;
+  locale: string;
 }) => {
-  const fiatValue = Number(amount) * rate;
+  const fiatValue = Number(params.amount) * params.rate;
 
-  return fiatValue.toLocaleString("en", {
+  const l = (params.locale || "en").toLocaleLowerCase().replace("_", "-");
+  return new Intl.NumberFormat(l || "en", {
     style: "currency",
-    currency,
-  });
+    currency: params.currency,
+  }).format(fiatValue);
 };
 
-export const getSatValue = (balance: number) =>
-  `${balance} ${i18n.t("sats", { count: balance, ns: "common" })}`;
+export const getFormattedNumber = (params: {
+  amount: number | string;
+  locale: string;
+}) => {
+  const l = (params.locale || "en").toLocaleLowerCase().replace("_", "-");
+  return new Intl.NumberFormat(l || "en").format(Number(params.amount));
+};
+
+export const getFormattedSats = (params: {
+  amount: number | string;
+  locale: string;
+}) => {
+  const formattedNumber = getFormattedNumber(params);
+
+  return `${formattedNumber} ${i18n.t("common:sats", {
+    count: Number(params.amount),
+  })}`;
+};

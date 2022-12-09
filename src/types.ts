@@ -123,6 +123,10 @@ export interface MessageDefault {
   prompt?: boolean;
 }
 
+export interface MessageDefaultPublic extends MessageDefault {
+  origin: OriginData;
+}
+
 export type NavigationState = {
   origin?: OriginData; // only defoned if coming via "Prompt", can be empty if a LNURL-action is being used via "Send" within the "PopUp"
   args?: {
@@ -136,6 +140,8 @@ export type NavigationState = {
     customRecords?: Record<string, string>;
     message?: string;
     event?: Event;
+    description?: string;
+    details?: string;
     requestPermission: {
       method: string;
     };
@@ -190,24 +196,6 @@ export interface MessageAccountInfo extends MessageDefault {
 
 export interface MessageAccountAll extends MessageDefault {
   action: "getAccounts";
-}
-
-export interface MessagePermissionAdd extends MessageDefault {
-  args: {
-    host: string;
-    method: string;
-    enabled: boolean;
-    blocked: boolean;
-  };
-  action: "addPermission";
-}
-
-export interface MessagePermissionDelete extends MessageDefault {
-  args: {
-    host: string;
-    method: string;
-  };
-  action: "deletePermission";
 }
 
 export interface MessageBlocklistAdd extends MessageDefault {
@@ -278,7 +266,7 @@ export interface MessageAllowanceEnable extends MessageDefault {
   args: {
     host: Allowance["host"];
   };
-  action: "enableAllowance";
+  action: "public/webln/enable" | "public/nostr/enable";
 }
 
 export interface MessageAllowanceDelete extends MessageDefault {
@@ -364,6 +352,22 @@ export interface MessageSignEvent extends MessageDefault {
     event: Event;
   };
   action: "signEvent";
+}
+
+export interface MessageEncryptGet extends MessageDefault {
+  args: {
+    peer: string;
+    plaintext: string;
+  };
+  action: "encrypt";
+}
+
+export interface MessageDecryptGet extends MessageDefault {
+  args: {
+    peer: string;
+    ciphertext: string;
+  };
+  action: "decrypt";
 }
 
 export interface LNURLChannelServiceResponse {
@@ -453,16 +457,10 @@ export interface RequestInvoiceArgs {
   memo?: string;
 }
 
-export interface IBadge {
-  label: string;
-  color: string;
-  textColor: string;
-}
-
 export type Transaction = {
   amount?: string;
   boostagram?: Invoice["boostagram"];
-  badges?: IBadge[];
+  badges?: Badge[];
   createdAt?: string;
   currency?: string;
   date: string;
@@ -497,19 +495,25 @@ export interface DbPayment {
   totalFees: number;
 }
 
+export interface Payment extends Omit<DbPayment, "id"> {
+  id: number;
+}
+
+export enum PermissionMethodNostr {
+  NOSTR_SIGNMESSAGE = "nostr/signMessage",
+  NOSTR_GETPUBLICKEY = "nostr/getPublicKey",
+  NOSTR_NIP04DECRYPT = "nostr/nip04decrypt",
+  NOSTR_NIP04ENCRYPT = "nostr/nip04encrypt",
+}
+
 export interface DbPermission {
   id?: number;
   createdAt: string;
   allowanceId: number;
   host: string;
-  method: string;
+  method: string | PermissionMethodNostr;
   enabled: boolean;
   blocked: boolean;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface Payment extends Omit<DbPayment, "id"> {
-  id: number;
 }
 
 export interface PaymentResponse
@@ -590,7 +594,7 @@ export interface SettingsStorage {
 }
 
 export interface Badge {
-  label: string;
+  label: "active" | "auth";
   color: string;
   textColor: string;
 }
@@ -610,11 +614,7 @@ export interface Publisher
   > {
   id: number;
   title?: string;
-  badge?: {
-    label: string;
-    color: string;
-    textColor: string;
-  };
+  badges?: Badge[];
 }
 
 export type SupportedExchanges = "alby" | "coindesk" | "yadio";

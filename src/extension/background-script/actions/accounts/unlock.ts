@@ -1,10 +1,9 @@
 import { decryptData } from "~/common/lib/crypto";
 import state from "~/extension/background-script/state";
 import i18n from "~/i18n/i18nConfig";
-import { translationI18nNamespace } from "~/i18n/namespaces";
 import type { MessageAccountUnlock } from "~/types";
 
-const unlock = (message: MessageAccountUnlock) => {
+const unlock = async (message: MessageAccountUnlock) => {
   const passwordArg = message.args.password;
   const password =
     typeof passwordArg === "number" ? `${passwordArg}` : passwordArg;
@@ -26,14 +25,24 @@ const unlock = (message: MessageAccountUnlock) => {
   } catch (e) {
     console.error("Invalid password");
     return Promise.resolve({
-      error: i18n.t("unlock.errors.invalid_password", translationI18nNamespace),
+      error: i18n.t("translation:unlock.errors.invalid_password"),
     });
   }
 
   // if everything is fine we keep the password in memory
   state.setState({ password });
+  // load the connector to make sure it is initialized for the future calls
+  // with this we prevent potentially multiple action calls trying to initialize the connector in parallel
+  // we have to be careful here: if the unlock fails (e.g. because of an error in getConnector() the user
+  // might be locked out of Alby and can not unlock and get to another account
+  try {
+    await state.getState().getConnector();
+  } catch (e) {
+    // TODO: somehow notify the user that something is wrong with the connection
+    console.error(e);
+  }
 
-  return Promise.resolve({ data: { unlocked: true, currentAccountId } });
+  return { data: { unlocked: true, currentAccountId } };
 };
 
 export default unlock;
