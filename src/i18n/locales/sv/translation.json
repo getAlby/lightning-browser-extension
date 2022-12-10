@@ -649,7 +649,7 @@
   },
   "components": {
     "allowance_menu": {
-      "confirm_delete": "Är du säker på att du vill radera webbplatsen? \nOm du tar bort den här webbplatsen förlorar du all historik över transaktioner du gjorde på den, som totalt antal betalningar och sats spenderade.",
+      "confirm_delete": "Är du säker på att du vill radera webbplatsen? ",
       "hint": "Detta nollställer nuvarande budget",
       "new_budget": {
         "label": "Ny budget"

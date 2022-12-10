@@ -716,7 +716,7 @@
   },
   "components": {
     "allowance_menu": {
-      "confirm_delete": "Tem certeza de que deseja remover este site? \nSe você excluir este site, você perderá todo o histórico de transações que você fez nele, como o total de pagamentos e sats gastos.",
+      "confirm_delete": "Tem certeza de que deseja remover este site? ",
       "hint": "O limite atual será redefinido",
       "new_budget": {
         "label": "Novo limite"

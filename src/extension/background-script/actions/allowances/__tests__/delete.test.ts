@@ -64,6 +64,14 @@ describe("delete allowance", () => {
     let paymentsCount;
 
     const dbAllowance = await db.allowances.get({ id: 2 });
+    if (dbAllowance) {
+      paymentsCount = await db.payments
+        .where("host")
+        .equalsIgnoreCase(dbAllowance.host)
+        .count();
+
+      expect(paymentsCount).toEqual(1);
+    }
 
     expect(await deleteAllowance(message)).toStrictEqual({
       data: true,
