@@ -1,11 +1,11 @@
 {
   "translation": {
     "welcome": {
-      "title": "Die Power von Lightning in Ihrem Browser",
+      "title": "Die Macht von ⚡ Bitcoin ⚡ in Ihrem Browser",
       "nav": {
         "welcome": "Willkommen",
         "password": "Dein Passwort",
-        "connect": "Ihr Lightning Konto",
+        "connect": "Dein Lightning-Konto",
         "done": "Fertig"
       },
       "intro": {
@@ -19,11 +19,11 @@
         },
         "privacy": {
           "title": "Datenschutz an erster Stelle",
-          "description": "Verwende lightning, um die zu authentifizieren und dein Privatsphäre zu kontrollieren."
+          "description": "Verwende Lightning, um dich zu authentifizieren und deine Privatsphäre zu kontrollieren."
         },
         "foss": {
           "title": "Kostenlos und Open Source",
-          "description": "Vollständig offener Code, der von jedermann überprüft werden kann. Keine Statistiken oder Tracker. Sie haben die Kontrolle."
+          "description": "Vollständig offener Code, der von jedermann überprüft werden kann. Keine Statistiken oder Tracker. Du hast die Kontrolle."
         },
         "actions": {
           "get_started": "Beginne"
@@ -31,9 +31,9 @@
       },
       "set_password": {
         "title": "Passwort zum Entsperren festlegen",
-        "description": "Die Daten Ihres Lightning-Kontos sind mit einem Freischalt-Passwort sicher verschlüsselt. Vergessen Sie dieses Passwort nicht! Sie benötigen es, um die Alby-Erweiterung zu entsperren (in diesem Browser)",
+        "description": "Die Daten deines Lightning-Kontos sind mit einem Freischalt-Passwort sicher verschlüsselt. Vergesse das Passwort nicht! Du benötigst es, um die Alby-Erweiterung zu entsperren (in diesem Browser)",
         "choose_password": {
-          "label": "Wählen Sie ein Passwort zum Entsperren:"
+          "label": "Wähle ein Passwort zum Entsperren:"
         },
         "errors": {
           "mismatched_password": "Die Passwörter stimmen nicht überein.",
@@ -41,17 +41,17 @@
           "confirm_password": "Bitte bestätige dein Passwort."
         },
         "confirm_password": {
-          "label": "Wiederhole deine Passworteingabe"
+          "label": "Wiederhole deine Passworteingabe:"
         }
       },
       "test_connection": {
-        "try_tutorial": "Probieren Sie es jetzt aus",
-        "review_connection_details": "Bitte überprüfen Sie Ihre Verbindungsdaten.",
+        "try_tutorial": "Probiere es jetzt aus",
+        "review_connection_details": "Bitte überprüfe deine Verbindungsdaten.",
         "actions": {
           "delete_edit_account": "Ungültiges Konto löschen und erneut bearbeiten"
         },
         "ready": "Super, du hast es geschafft, es kann losgehen!",
-        "tutorial": "Du hast jetzt dein Wallet verbunden, möchtest du ein Tutorial starten?",
+        "tutorial": "Du hast jetzt deine Wallet verbunden, möchtest du ein Tutorial starten?",
         "initializing": "Dein Account wird initialisiert. Bitte warte, das kann ein wenig dauern.",
         "connection_error": "Verbindungsfehler",
         "connection_taking_long": "Das Verbinden dauert länger als erwartet...sind deine Angaben richtig? Ist dein Node erreichbar?",
@@ -61,7 +61,7 @@
     "choose_connector": {
       "alby": {
         "pre_connect": {
-          "host_wallet": "Wir hosten die Lightning Wallet für Sie!",
+          "host_wallet": "Wir hosten die Lightning Wallet für dich!",
           "optional_lightning_address": {
             "suffix": "@getalby.com",
             "title": "Zahlen und Buchstaben, mindestens 3 Ziffern",
@@ -70,23 +70,24 @@
           "optional_lightning_note": {
             "part2": "Lightning Adresse",
             "part3": "Das ist für jeden ein einfacher Weg, um dir Bitcoin über das Lightning Netzwerk zu schicken.",
-            "part4": "Erfahre mehr"
+            "part4": "Erfahre mehr",
+            "part1": "Dein Alby-Konto wird auch mit einem optionalen"
           },
-          "title": "Dein Alby Lightning Wallet",
+          "title": "Deine Alby Lightning Wallet",
           "login_account": "Erstelle einen Alby Account oder logge dich ein.",
           "errors": {
-            "create_wallet_error": "Der Login oder das Erstellen eines Accounts war nicht möglich. Wenn du Hilfe brauchst, kontaktiere bitte support@getalby.com"
+            "create_wallet_error": "Der Login oder das Erstellen eines Accounts waren nicht möglich. Wenn du Hilfe brauchst, kontaktiere bitte support@getalby.com"
           },
           "email": {
             "label": "E-Mail Adresse"
           }
         },
-        "title": "Alby Wallet",
+        "title": "Alby Brieftasche",
         "description": "Erstelle einen Alby Account oder logge dich ein"
       },
       "lnd": {
         "or": "OR",
-        "drag_and_drop": "Ziehe deine Makrone hierher oder legen Sie sie dort ab <0>durchsuchen</0>",
+        "drag_and_drop": "Ziehe deine Makrone hierher oder lege sie dort ab <0>durchsuchen</0>",
         "errors": {
           "connection_failed": "Verbindung fehlgeschlagen. Sind deine LND-Anmeldeinformationen korrekt?"
         },
@@ -98,10 +99,10 @@
           "label": "Makrone (HEX-Format)"
         },
         "page": {
-          "description": "Sie benötigen Ihre Knoten-URL und eine Macaroon mit Lese- und Sendeberechtigungen (z. B. admin.macaroon)",
+          "description": "Du benötigst deinen URL-Knoten und eine Macaroon mit Lese- und Sendeberechtigungen (z.B. admin.macaroon)",
           "title": "Verbinde dich zu deinem LND Node"
         },
-        "description": "Verbinde dich mit deinem LND Node",
+        "description": "Verbinde dich mit deiner LND Node",
         "title": "LND"
       },
       "lndhub_bluewallet": {
@@ -109,10 +110,10 @@
           "label": "BlueWallet-Export-URI"
         },
         "errors": {
-          "invalid_uri": "Ungültiger BlueWallet-URI",
+          "invalid_uri": "Ungültige BlueWallet-URI",
           "connection_failed": "Verbindung nicht erfolgreich. Ist deine BlueWallet URI richtig?"
         },
-        "title": "Bluewallet",
+        "title": "BlueWallet",
         "description": "Verbinde dich mit deiner mobilen Bluewallet App",
         "page": {
           "title": "Verbinde dich mit Bluewallet",
@@ -131,7 +132,7 @@
         "description": "Verbinden dich mit deinem LNDHub-Konto",
         "page": {
           "title": "Verbinden dich mit LNDHub",
-          "description": "Gebe hier deine LNDHub-Zugangsdaten-URI ein oder scannen den QR-Code mit deiner Webcam."
+          "description": "Gebe hier deine LNDHub-Zugangsdaten-URI ein oder scanne den QR-Code mit deiner Webcam."
         }
       },
       "lnbits": {
@@ -158,15 +159,15 @@
       },
       "mynode": {
         "page": {
-          "instructions": "Klicke auf deiner myNode Übersicht auf den Button <0>Wallet</0> für deinen <0>Lightning</0> service. Klicke jetzt auf den Button <0>Pair Wallet</0> unterhalb dem Tab <0>Status</0> . Gib dein Passwort ein, wenn es verlang wird. <1/> Wähle das Dropdown Menü und entscheide dich für eine pairing option. Abhängig von deinem Setup kannst du entweder für lokale Verbindung wählen <0>Lightning (REST + Local IP)</0> oder für TOR die Auswahl <0>Lightning (REST + Tor)</0>.",
+          "instructions": "Klicke auf deiner myNode Übersicht auf den Button <0>Wallet</0> für deinen <0>Lightning</0> Service. Klicke jetzt auf den Button <0>Pair Wallet</0> unterhalb dem Tab <0>Status</0> . Gib dein Passwort ein, wenn es verlang wird. <1/> Wähle das Dropdown Menü und entscheide dich für eine Pairingoption. Abhängig von deinem Setup kannst du entweder für lokale Verbindung wählen <0>Lightning (REST + Local IP)</0> oder für TOR die Auswahl <0>Lightning (REST + Tor)</0>.",
           "title": "Verbinde dich mit <0>myNode</0>"
         },
         "rest_url": {
-          "label": "lndconnect REST URL",
-          "placeholder": "lndconnect://yournode:8080?..."
+          "label": "Indconnect REST URL",
+          "placeholder": "Indconnect://IhrKnoten:8080?..."
         },
         "description": "Verbinde dich mit deiner myNode",
-        "title": "myNode"
+        "title": "meinKnoten"
       },
       "umbrel": {
         "page": {
@@ -174,7 +175,7 @@
           "title": "Verbinde dich mit deinem <0>Regenschirm</0>-Knoten"
         },
         "rest_url": {
-          "label": "lndconnect REST URL",
+          "label": "Indconnect-REST-URL",
           "placeholder": "lndconnect://deinknoten:8080?..."
         },
         "title": "Regenschirm",
@@ -184,7 +185,7 @@
       "citadel": {
         "page": {
           "instructions": "Das funktioniert aktuell nicht, wenn 2FA ausgewählt ist.",
-          "title": "Verbinden dich mit dem Knoten <0>Zitadelle"
+          "title": "Verbinde dich mit dem Knoten <0>Zitadelle"
         },
         "description": "Verbinde dich mit deiner lokalen Zitadelle",
         "title": "Zitadelle",
@@ -202,7 +203,7 @@
           "title": "Verbinde dich mit deinem <0>RaspiBlitz</0>-Knoten",
           "instructions2": "Wähle <0>VERBINDEN.<1/>Wähle <0>EXPORTIEREN.<1/>Wähle <0>HEX.<1/>Kopiere das <0>adminMacaroon.<1/>Füge die Makrone in die Eingabe unten ein."
         },
-        "title": "RaspiBlitz",
+        "title": "Raspiblitz",
         "description": "Verbinde dich mit deinem RaspiBlitz",
         "rest_api_host": {
           "label": "REST-API-Host",
@@ -210,17 +211,17 @@
         }
       },
       "eclair": {
-        "title": "Eclair",
+        "title": "Eclair Brieftasche",
         "description": "Verbinde dich mit deinem Eclair-Knoten",
         "page": {
-          "title": "Verbinden dich mit <0>Eclair",
+          "title": "Verbinde dich mit <0>Eclair",
           "instructions": "Du benötigst deine Eclair-URL und dein Passwort."
         },
         "password": {
           "label": "Eclair Passwort"
         },
         "url": {
-          "label": "Eclair URL",
+          "label": "Eclair Brieftasche URL",
           "placeholder": "http://localhost:8080"
         }
       },
@@ -231,20 +232,20 @@
         },
         "rest_url": {
           "placeholder": "lndconnect://deinknoten:8080?...",
-          "label": "lndconnect REST URL"
+          "label": "Indconnect-REST-URL"
         },
         "title": "Start9",
         "description": "Verbinde dich mit Embassy"
       },
       "bitcoin_beach": {
-        "title": "Bitcoin Beach Wallet",
+        "title": "Bitcoin Beach Brieftasche",
         "description": "Erstelle oder verbinde dich mit einem Bitcoin Beach (Galoy)-Konto",
         "page": {
           "title": "Verbinde dich mit <0>Bitcoin Beach Wallet"
         }
       },
       "bitcoin_jungle": {
-        "title": "Bitcoin Jungle Wallet",
+        "title": "Bitcoin Jungle Geldbörse",
         "description": "Erstelle oder verbinde dich mit einem Bitcoin Jungle (Galoy)-Konto",
         "page": {
           "title": "Verbinde dich mit <0>Bitcoin Jungle Wallet</0>"
@@ -258,7 +259,64 @@
           "label": "Gib deinen SMS-Bestätigungscode ein"
         },
         "jwt": {
-          "label": "Gebe deinen JWT-Token ein"
+          "label": "Gebe deinen JWT-Token ein",
+          "info": "Das {{label}}-Login wird derzeit aktualisiert. Wenn du ein fortgeschrittener Benutzer bist, kannst du dir dein JWT-Token holen, indem du über <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/> anmeldest. Das JWT sieht so aus: < 2>eyJhbG...</2><1/><1/>"
+        },
+        "actions": {
+          "login": "Anmeldung",
+          "request_sms_code": "SMS-Code anfordern"
+        },
+        "errors": {
+          "failed_to_request_sms": "SMS-Code konnte nicht angefordert werden",
+          "failed_to_login_sms": "Anmeldung mit SMS-Code fehlgeschlagen",
+          "setup_failed": "Einrichtung fehlgeschlagen",
+          "missing_jwt": "JWT fehlt, Anmeldung nicht möglich."
+        }
+      },
+      "btcpay": {
+        "title": "BTCPay-Server",
+        "page": {
+          "title": "Verbinde dich mit deinem BTCPay LND-Knoten",
+          "instructions": "Navigiere zu deinem BTCPayServer und melde dich als Administrator an. Gehen zu Servereinstellungen > Dienste > LND-Rest – Siehe Informationen. Klicke dann auf „QR-Code-Informationen anzeigen“ und kopiere die QR-Code-Daten. Füge es unten ein:"
+        },
+        "description": "Verbinde dich mit deinem BTCPay LND-Knoten",
+        "config": {
+          "label": "Konfigurationsdaten"
+        },
+        "errors": {
+          "connection_failed": "Verbindung fehlgeschlagen. Ist die BTCPay-Verbindungs-URL korrekt und zugänglich?"
+        }
+      },
+      "commando": {
+        "title": "Core Lightning",
+        "description": "Stelle eine Verbindung zu deinem Core Lightning-Knoten her",
+        "page": {
+          "title": "Stelle eine Verbindung zu deinem Core Lightning-Knoten her",
+          "instructions": "Stelle sicher, dass du Core Lightning Version 0.12.0 oder neuer hast, das Commando-Plugin ausgeführt wird und dein Knoten über das Lightning-Netzwerk zugänglich ist. Erstelle eine Rune, indem du „lightning-cli commando-rune“ ausführst."
+        },
+        "host": {
+          "label": "Host"
+        },
+        "pubkey": {
+          "label": "Öffentlicher Schlüssel"
+        },
+        "rune": {
+          "label": "Rune"
+        },
+        "port": {
+          "label": "Port"
+        },
+        "proxy": {
+          "label": "Websocket-Proxy"
+        },
+        "privKey": {
+          "label": "Lokaler privater Schlüssel (automatisch generiert)"
+        },
+        "config": {
+          "label": "Konfigurationsdaten"
+        },
+        "errors": {
+          "connection_failed": "Verbindung fehlgeschlagen. Ist dein Core Lightning-Knoten online und verwendet es das Commando-Plugin?"
         }
       }
     },
@@ -275,6 +333,71 @@
         "private_key": {
           "warning": "Das wird deinen alten Private Key löschen. Bist du sicher?"
         }
+      }
+    },
+    "home": {
+      "default_view": {
+        "is_blocked_hint": "Alby ist derzeit auf dem {{host}} deaktiviert",
+        "recent_transactions": "kürzliche Transaktionen",
+        "no_transactions": "Es wurden noch keine Transaktionen mit Alby getätigt.",
+        "block_removed": "{{Host}} aktiviert. Bitte laden Sie die Website neu."
+      },
+      "allowance_view": {
+        "sats_used": "verwendete Sats",
+        "no_transactions": "Noch keine Transaktionen auf <0>{{name}}</0>.",
+        "recent_transactions": "kürzliche Transaktionen",
+        "allowance": "Erlaubnis"
+      },
+      "actions": {
+        "send_satoshis": "⚡️ Satoshis senden ⚡️",
+        "enable_now": "Jetzt aktivieren"
+      },
+      "transaction_list": {
+        "tabs": {
+          "outgoing": "Ausgehend",
+          "incoming": "Eingehend"
+        }
+      },
+      "recent_transactions": "kürzliche Transaktionen"
+    },
+    "accounts": {
+      "title": "Konten",
+      "export": {
+        "title": "Konto exportieren",
+        "screen_reader": "Kontodaten exportieren",
+        "waiting": "Warten auf LndHub-Daten...",
+        "scan_qr": "Importiere diese Brieftasche in Zeus oder BlueWallet, indem du den QRCode scannst.",
+        "your_ln_address": "Deine Lightning Adresse:",
+        "tip_mobile": "Tipp: Verwende diese Geldbörse mit deinem Mobilgerät",
+        "export_uri": "LNDHub Anmeldeinformationen URI"
+      },
+      "edit": {
+        "name": {
+          "label": "Name"
+        },
+        "screen_reader": "Kontonamen bearbeiten",
+        "title": "Konto bearbeiten"
+      },
+      "remove": {
+        "confirm": "Bist du dir sicher, dass du das Konto entfernen möchten: {{Name}}? \nDies kann nicht rückgängig gemacht werden. Wenn du dich mit diesem Konto bei Webseiten angemeldet hast, verlierst du möglicherweise den Zugriff auf diese."
+      },
+      "actions": {
+        "add_account": "Konto hinzufügen"
+      }
+    },
+    "enable": {
+      "allow": "Erlaube du {{host}} zu:",
+      "title": "Verbinden",
+      "request1": "Genehmigung für Transaktionen anfordern",
+      "request2": "Fordern Sie Rechnungen und Lightning Informationen an",
+      "block_and_ignore": "Blockieren und Ignorieren von {{host}}"
+    },
+    "receive": {
+      "amount": {
+        "placeholder": "Betrag in Satoshi..."
+      },
+      "payment": {
+        "waiting": "Warten auf Zahlung..."
       }
     }
   },
@@ -298,7 +421,7 @@
       }
     },
     "companion_download_info": {
-      "using_tor": "Klicke hier zum Weitermachen, wenn du den TOR Browser verwendest."
+      "using_tor": "Klicke hier zum Weitermachen, wenn du den TOR Browser verwendest"
     }
   }
 }
