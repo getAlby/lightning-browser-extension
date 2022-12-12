@@ -48,16 +48,9 @@ const ConfirmRequestPermission: FC = () => {
           />
           <div className="dark:text-white pt-6">
             <p className="mb-2">{t("allow")}</p>
-            <div className="mb-8 flex items-center">
-              <p className="dark:text-white">
-                <span className="font-semibold">{requestMethod}</span>:
-                {description && (
-                  <>
-                    <br />
-                    <span className="text-xs">{description}</span>
-                  </>
-                )}
-              </p>
+            <div className="mb-8 center dark:text-white leading-3">
+              <p className="font-semibold pb-2">{requestMethod}:</p>
+              {description && <p className="text-xs">{description}</p>}
             </div>
             <div className="flex items-center mb-2">
               <Checkbox

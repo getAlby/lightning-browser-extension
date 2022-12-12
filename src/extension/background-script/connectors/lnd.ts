@@ -34,36 +34,109 @@ const methods: Record<string, Record<string, string>> = {
     httpMethod: "GET",
     description: "Get the node information",
   },
-  'listchannels': {
+  listchannels: {
     path: "/v1/channels",
     httpMethod: "GET",
-    description: "Get a description of all the open channels that this node is a participant in.",
+    description:
+      "Get a description of all the open channels that this node is a participant in.",
   },
-  'listinvoices': {
-    path: '/v1/invoices',
+  listinvoices: {
+    path: "/v1/invoices",
     httpMethod: "GET",
-    description: "Get a list of all the invoices currently stored within the database"
+    description:
+      "Get a list of all the invoices currently stored within the database",
   },
-  'channelbalance': {
+  channelbalance: {
     path: "/v1/balance/channels",
     httpMethod: "GET",
     description: "Get a report on the total funds across all open channels",
   },
-  'walletbalance': {
+  walletbalance: {
     path: "/v1/balance/blockchain",
     httpMethod: "GET",
     description: "Get the total unspent outputs of the wallet",
   },
-  'openchannel': {
+  openchannel: {
     path: "/v1/channels",
     httpMethod: "POST",
-    description: "open a new channel"
+    description: "Open a new channel",
   },
-  'connect': {
+  connectpeer: {
     path: "/v1/peers",
     httpMethod: "POST",
-    description: "establish a connection to a remote peer"
+    description: "Establish a connection to a remote peer",
+  },
+  disconnectpeer: {
+    path: "/v1/peers/{pub_key}",
+    httpMethod: "DELETE",
+    description: "Disconnect from a remote peer",
+  },
+  estimatefee: {
+    path: "/v1/transactions/fee",
+    httpMethod: "GET",
+    description: "Estimate the fee rate and total fees for a transaction",
+  },
+  getchaninfo: {
+    path: "/v1/graph/edge/{chan_id}",
+    httpMethod: "GET",
+    description:
+      "Get the authenticated network announcement for the given channel",
+  },
+  getnetworkinfo: {
+    path: "/v1/graph/info",
+    httpMethod: "GET",
+    description:
+      "Get basic stats about the known channel graph from the point of view of the node",
+  },
+  getnodeinfo: {
+    path: "/v1/graph/node/{pub_key}",
+    httpMethod: "GET",
+    description:
+      "Get the advertised, aggregated, and authenticated channel information for a node",
+  },
+  gettransactions: {
+    path: "/v1/transactions",
+    httpMethod: "GET",
+    description:
+      "Get a list describing all the known transactions relevant to the wallet",
+  },
+  listpayments: {
+    path: "/v1/payments",
+    httpMethod: "GET",
+    description: "list of all outgoing payments",
+  },
+  listpeers: {
+    path: "/v1/peers",
+    httpMethod: "GET",
+    description: "list all currently active peers",
+  },
+  lookupinvoice: {
+    path: "/v1/invoice/{r_hash_str}",
+    httpMethod: "GET",
+    description: "Look up invoice details",
+  },
+  queryroutes: {
+    path: "/v1/graph/routes/{pub_key}/{amt}",
+    httpMethod: "GET",
+    description: "Query the daemon's Channel Router for a possible route",
+  },
+  verifymessage: {
+    path: "/v1/verifymessage",
+    httpMethod: "GET",
+    description: "Verify a signature over a msg",
+  },
+  sendtoroute: {
+    path: "/v1/channels/transactions/route",
+    httpMethod: "POST",
+    description: "Make a payment via the specified route",
+  },
+  /*
+  'decodepayreq': {
+    path: "/v1/payreq/{pay_req}",
+    httpMethod: "POST",
+    description: "decode a payment request string"
   }
+  */
 };
 
 class Lnd implements Connector {
@@ -98,7 +171,7 @@ class Lnd implements Connector {
       throw new Error(`${method} is not supported`);
     }
     const { httpMethod, path } = methodDetails;
-    const response = await this.request(httpMethod, path, args)
+    const response = await this.request(httpMethod, path, args);
 
     return {
       data: response,
