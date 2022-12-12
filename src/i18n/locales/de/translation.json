@@ -18,11 +18,15 @@
           "description": "Definieren Sie individuelle Budgets für Websites, um nahtlose Zahlungsströme zu ermöglichen. Keine lästigen Paywalls mehr."
         },
         "privacy": {
-          "title": "Datenschutz an erster Stelle"
+          "title": "Datenschutz an erster Stelle",
+          "description": "Verwende lightning, um die zu authentifizieren und dein Privatsphäre zu kontrollieren."
         },
         "foss": {
           "title": "Kostenlos und Open Source",
           "description": "Vollständig offener Code, der von jedermann überprüft werden kann. Keine Statistiken oder Tracker. Sie haben die Kontrolle."
+        },
+        "actions": {
+          "get_started": "Beginne"
         }
       },
       "set_password": {
@@ -30,6 +34,14 @@
         "description": "Die Daten Ihres Lightning-Kontos sind mit einem Freischalt-Passwort sicher verschlüsselt. Vergessen Sie dieses Passwort nicht! Sie benötigen es, um die Alby-Erweiterung zu entsperren (in diesem Browser)",
         "choose_password": {
           "label": "Wählen Sie ein Passwort zum Entsperren:"
+        },
+        "errors": {
+          "mismatched_password": "Die Passwörter stimmen nicht überein.",
+          "enter_password": "Bitte gib ein Passwort ein.",
+          "confirm_password": "Bitte bestätige dein Passwort."
+        },
+        "confirm_password": {
+          "label": "Wiederhole deine Passworteingabe"
         }
       },
       "test_connection": {
@@ -37,7 +49,13 @@
         "review_connection_details": "Bitte überprüfen Sie Ihre Verbindungsdaten.",
         "actions": {
           "delete_edit_account": "Ungültiges Konto löschen und erneut bearbeiten"
-        }
+        },
+        "ready": "Super, du hast es geschafft, es kann losgehen!",
+        "tutorial": "Du hast jetzt dein Wallet verbunden, möchtest du ein Tutorial starten?",
+        "initializing": "Dein Account wird initialisiert. Bitte warte, das kann ein wenig dauern.",
+        "connection_error": "Verbindungsfehler",
+        "connection_taking_long": "Das Verbinden dauert länger als erwartet...sind deine Angaben richtig? Ist dein Node erreichbar?",
+        "contact_support": "Wenn du Hilfe brauchst, kontaktiere bitte support@getalby.com"
       }
     },
     "choose_connector": {
@@ -45,9 +63,26 @@
         "pre_connect": {
           "host_wallet": "Wir hosten die Lightning Wallet für Sie!",
           "optional_lightning_address": {
-            "suffix": "@getalby.com"
+            "suffix": "@getalby.com",
+            "title": "Zahlen und Buchstaben, mindestens 3 Ziffern",
+            "label": "Wähle deine Lightning Adresse (optional)"
+          },
+          "optional_lightning_note": {
+            "part2": "Lightning Adresse",
+            "part3": "Das ist für jeden ein einfacher Weg, um dir Bitcoin über das Lightning Netzwerk zu schicken.",
+            "part4": "Erfahre mehr"
+          },
+          "title": "Dein Alby Lightning Wallet",
+          "login_account": "Erstelle einen Alby Account oder logge dich ein.",
+          "errors": {
+            "create_wallet_error": "Der Login oder das Erstellen eines Accounts war nicht möglich. Wenn du Hilfe brauchst, kontaktiere bitte support@getalby.com"
+          },
+          "email": {
+            "label": "E-Mail Adresse"
           }
-        }
+        },
+        "title": "Alby Wallet",
+        "description": "Erstelle einen Alby Account oder logge dich ein"
       },
       "lnd": {
         "or": "OR",
@@ -63,15 +98,25 @@
           "label": "Makrone (HEX-Format)"
         },
         "page": {
-          "description": "Sie benötigen Ihre Knoten-URL und eine Macaroon mit Lese- und Sendeberechtigungen (z. B. admin.macaroon)"
-        }
+          "description": "Sie benötigen Ihre Knoten-URL und eine Macaroon mit Lese- und Sendeberechtigungen (z. B. admin.macaroon)",
+          "title": "Verbinde dich zu deinem LND Node"
+        },
+        "description": "Verbinde dich mit deinem LND Node",
+        "title": "LND"
       },
       "lndhub_bluewallet": {
         "uri": {
           "label": "BlueWallet-Export-URI"
         },
         "errors": {
-          "invalid_uri": "Ungültiger BlueWallet-URI"
+          "invalid_uri": "Ungültiger BlueWallet-URI",
+          "connection_failed": "Verbindung nicht erfolgreich. Ist deine BlueWallet URI richtig?"
+        },
+        "title": "Bluewallet",
+        "description": "Verbinde dich mit deiner mobilen Bluewallet App",
+        "page": {
+          "title": "Verbinde dich mit Bluewallet",
+          "description": "Wähle in der BlueWallet die Wallet, die du verbinden willst, öffne sie, klicke auf \"...\", klicke auf Export/Backup, um den QR Code anzuzeigen. Scanne ihn dann mit deiner Webcam."
         }
       },
       "lndhub_go": {
@@ -91,14 +136,74 @@
       },
       "lnbits": {
         "admin_key": {
-          "label": "LNbits-Admin-Schlüssel"
+          "label": "LNbits-Admin-Schlüssel",
+          "placeholder": "Dein 32-stelliger admin key"
         },
         "title": "LNbits",
         "description": "Verbinde dich mit deinem LNbits-Konto",
         "page": {
-          "title": "Verbinde dich mit <0>LNbits</0>"
+          "title": "Verbinde dich mit <0>LNbits</0>",
+          "instructions": "Wähle in LNbits die Wallet, die du verbinden willst, öffne sie, klicke auf API Info und kopiere den Admin Key. Füge ihn unten ein:"
+        }
+      },
+      "title": {
+        "welcome": "Hast du eine Lightning Wallet?",
+        "options": "Füge einen neuen Lightning Account hinzu"
+      },
+      "mynode": {
+        "page": {
+          "instructions": "Klicke auf deiner myNode Übersicht auf den Button <0>Wallet</0> für deinen <0>Lightning</0> service. Klicke jetzt auf den Button <0>Pair Wallet</0> unterhalb dem Tab <0>Status</0> . Gib dein Passwort ein, wenn es verlang wird. <1/> Wähle das Dropdown Menü und entscheide dich für eine pairing option. Abhängig von deinem Setup kannst du entweder für lokale Verbindung wählen <0>Lightning (REST + Local IP)</0> oder für TOR die Auswahl <0>Lightning (REST + Tor)</0>."
+        }
+      },
+      "umbrel": {
+        "page": {
+          "instructions": "Gehe im Umbrel Dashboard zu <0>Connect Wallet</0>. Wähle <0>lndconnect REST</0> und kopiere <0>lndconnect URL</0>. (Abhängig von deinem Setup kannst du entweder eine lokale Verbindung verwenden oder die Verbindung über TOR.)"
+        }
+      },
+      "description": "Du musst dich zuerst mit einer Lightning Wallet verbinden, damit du dich mit deinen Lieblingswebseiten verbinden kannst, die Bitcoin Lightning Zahlungen akzeptieren!",
+      "citadel": {
+        "page": {
+          "instructions": "Das funktioniert aktuell nicht, wenn 2FA ausgewählt ist."
         }
       }
+    },
+    "unlock": {
+      "unlock_error": {
+        "link": "Zurücksetzen und neuen Account erstellen"
+      },
+      "errors": {
+        "invalid_password": "ungültiges Passwort"
+      }
+    },
+    "settings": {
+      "nostr": {
+        "private_key": {
+          "warning": "Das wird deinen alten Private Key löschen. Bist du sicher?"
+        }
+      }
+    }
+  },
+  "components": {
+    "account_menu": {
+      "options": {
+        "account": {
+          "add": "Füge einen neuen Account hinzu"
+        }
+      }
+    },
+    "publishers_table": {
+      "payments": "Zahlungen"
+    },
+    "toasts": {
+      "connection_error": {
+        "double_check": "Überprüfe nochmals deine Verbindungseinstellungen"
+      },
+      "errors": {
+        "invalid_credentials": "Falsches Passwort. Überprüfe das Passwort und E-Mail Adresse und versuche es noch einmal."
+      }
+    },
+    "companion_download_info": {
+      "using_tor": "Klicke hier zum Weitermachen, wenn du den TOR Browser verwendest."
     }
   }
 }
