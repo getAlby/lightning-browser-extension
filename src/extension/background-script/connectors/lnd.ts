@@ -37,14 +37,12 @@ const methods: Record<string, Record<string, string>> = {
   listchannels: {
     path: "/v1/channels",
     httpMethod: "GET",
-    description:
-      "Get a description of all the open channels that this node is a participant in.",
+    description: "Get a description of all the open channels",
   },
   listinvoices: {
     path: "/v1/invoices",
     httpMethod: "GET",
-    description:
-      "Get a list of all the invoices currently stored within the database",
+    description: "Get a list of all invoices",
   },
   channelbalance: {
     path: "/v1/balance/channels",
@@ -67,7 +65,7 @@ const methods: Record<string, Record<string, string>> = {
     description: "Establish a connection to a remote peer",
   },
   disconnectpeer: {
-    path: "/v1/peers/{pub_key}",
+    path: "/v1/peers/{{pub_key}}",
     httpMethod: "DELETE",
     description: "Disconnect from a remote peer",
   },
@@ -77,28 +75,24 @@ const methods: Record<string, Record<string, string>> = {
     description: "Estimate the fee rate and total fees for a transaction",
   },
   getchaninfo: {
-    path: "/v1/graph/edge/{chan_id}",
+    path: "/v1/graph/edge/{{chan_id}}",
     httpMethod: "GET",
-    description:
-      "Get the authenticated network announcement for the given channel",
+    description: "Get the network announcement for the given channel",
   },
   getnetworkinfo: {
     path: "/v1/graph/info",
     httpMethod: "GET",
-    description:
-      "Get basic stats about the known channel graph from the point of view of the node",
+    description: "Get basic stats about the known channel graph",
   },
   getnodeinfo: {
-    path: "/v1/graph/node/{pub_key}",
+    path: "/v1/graph/node/{{pub_key}}",
     httpMethod: "GET",
-    description:
-      "Get the advertised, aggregated, and authenticated channel information for a node",
+    description: "Get the channel information for a node",
   },
   gettransactions: {
     path: "/v1/transactions",
     httpMethod: "GET",
-    description:
-      "Get a list describing all the known transactions relevant to the wallet",
+    description: "Get a list of all transactions relevant to the wallet",
   },
   listpayments: {
     path: "/v1/payments",
@@ -111,18 +105,18 @@ const methods: Record<string, Record<string, string>> = {
     description: "list all currently active peers",
   },
   lookupinvoice: {
-    path: "/v1/invoice/{r_hash_str}",
+    path: "/v1/invoice/{{r_hash_str}}",
     httpMethod: "GET",
     description: "Look up invoice details",
   },
   queryroutes: {
-    path: "/v1/graph/routes/{pub_key}/{amt}",
+    path: "/v1/graph/routes/{{pub_key}}/{{amt}}",
     httpMethod: "GET",
-    description: "Query the daemon's Channel Router for a possible route",
+    description: "Query for a possible route",
   },
   verifymessage: {
     path: "/v1/verifymessage",
-    httpMethod: "GET",
+    httpMethod: "POST",
     description: "Verify a signature over a msg",
   },
   sendtoroute: {
@@ -130,13 +124,26 @@ const methods: Record<string, Record<string, string>> = {
     httpMethod: "POST",
     description: "Make a payment via the specified route",
   },
-  /*
-  'decodepayreq': {
-    path: "/v1/payreq/{pay_req}",
-    httpMethod: "POST",
-    description: "decode a payment request string"
-  }
-  */
+  decodepayreq: {
+    path: "/v1/payreq/{{pay_req}}",
+    httpMethod: "GET",
+    description: "Decode a payment request string",
+  },
+};
+
+const pathTemplateParser = (
+  template: string,
+  data: Record<string, unknown>
+): string => {
+  return template.replace(/{{(.*?)}}/g, (match) => {
+    const key = match.split(/{{|}}/).filter(Boolean)[0];
+    const value = data[key];
+    if (value === undefined) {
+      throw new Error(`Missing parameter ${key}`);
+    }
+    delete data[key];
+    return String(value); // typecast to string
+  });
 };
 
 class Lnd implements Connector {
@@ -170,7 +177,12 @@ class Lnd implements Connector {
     if (!methodDetails) {
       throw new Error(`${method} is not supported`);
     }
-    const { httpMethod, path } = methodDetails;
+    const httpMethod = methodDetails.httpMethod;
+    let path = methodDetails.path;
+    // add path parameters from the args hash and remove those attributes from args
+    // e.g. pathTemplateParser('invoice/{{r_hash_str}}', {r_hash_str: 'foo'})
+    //   will return invoice/foo and delete r_hash_str from the args object;
+    path = pathTemplateParser(path, args);
     const response = await this.request(httpMethod, path, args);
 
     return {
