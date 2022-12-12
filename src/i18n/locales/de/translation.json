@@ -1,11 +1,11 @@
 {
   "translation": {
     "welcome": {
-      "title": "Die Power von Lightning in Deinem Browser",
+      "title": "Die Power von Lightning in Ihrem Browser",
       "nav": {
         "welcome": "Willkommen",
         "password": "Dein Passwort",
-        "connect": "Mit Lightning verbinden",
+        "connect": "Ihr Lightning Konto",
         "done": "Fertig"
       },
       "intro": {
@@ -19,6 +19,84 @@
         },
         "privacy": {
           "title": "Datenschutz an erster Stelle"
+        },
+        "foss": {
+          "title": "Kostenlos und Open Source",
+          "description": "Vollständig offener Code, der von jedermann überprüft werden kann. Keine Statistiken oder Tracker. Sie haben die Kontrolle."
+        }
+      },
+      "set_password": {
+        "title": "Passwort zum Entsperren festlegen",
+        "description": "Die Daten Ihres Lightning-Kontos sind mit einem Freischalt-Passwort sicher verschlüsselt. Vergessen Sie dieses Passwort nicht! Sie benötigen es, um die Alby-Erweiterung zu entsperren (in diesem Browser)",
+        "choose_password": {
+          "label": "Wählen Sie ein Passwort zum Entsperren:"
+        }
+      },
+      "test_connection": {
+        "try_tutorial": "Probieren Sie es jetzt aus",
+        "review_connection_details": "Bitte überprüfen Sie Ihre Verbindungsdaten.",
+        "actions": {
+          "delete_edit_account": "Ungültiges Konto löschen und erneut bearbeiten"
+        }
+      }
+    },
+    "choose_connector": {
+      "alby": {
+        "pre_connect": {
+          "host_wallet": "Wir hosten die Lightning Wallet für Sie!",
+          "optional_lightning_address": {
+            "suffix": "@getalby.com"
+          }
+        }
+      },
+      "lnd": {
+        "or": "OR",
+        "drag_and_drop": "Ziehe deine Makrone hierher oder legen Sie sie dort ab <0>durchsuchen</0>",
+        "errors": {
+          "connection_failed": "Verbindung fehlgeschlagen. Sind deine LND-Anmeldeinformationen korrekt?"
+        },
+        "url": {
+          "label": "REST-API-Host und -Port",
+          "placeholder": "https://Ihr-Knoten-URL:8080"
+        },
+        "macaroon": {
+          "label": "Makrone (HEX-Format)"
+        },
+        "page": {
+          "description": "Sie benötigen Ihre Knoten-URL und eine Macaroon mit Lese- und Sendeberechtigungen (z. B. admin.macaroon)"
+        }
+      },
+      "lndhub_bluewallet": {
+        "uri": {
+          "label": "BlueWallet-Export-URI"
+        },
+        "errors": {
+          "invalid_uri": "Ungültiger BlueWallet-URI"
+        }
+      },
+      "lndhub_go": {
+        "title": "LNDHub",
+        "uri": {
+          "label": "LNDHub-Export-URI"
+        },
+        "errors": {
+          "invalid_uri": "Ungültiger LNDHub-URI",
+          "connection_failed": "Verbindung fehlgeschlagen. Ist dein LNDHub-URI korrekt?"
+        },
+        "description": "Verbinden dich mit deinem LNDHub-Konto",
+        "page": {
+          "title": "Verbinden dich mit LNDHub",
+          "description": "Gebe hier deine LNDHub-Zugangsdaten-URI ein oder scannen den QR-Code mit deiner Webcam."
+        }
+      },
+      "lnbits": {
+        "admin_key": {
+          "label": "LNbits-Admin-Schlüssel"
+        },
+        "title": "LNbits",
+        "description": "Verbinde dich mit deinem LNbits-Konto",
+        "page": {
+          "title": "Verbinde dich mit <0>LNbits</0>"
         }
       }
     }
