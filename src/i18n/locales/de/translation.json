@@ -137,13 +137,19 @@
       "lnbits": {
         "admin_key": {
           "label": "LNbits-Admin-Schlüssel",
-          "placeholder": "Dein 32-stelliger admin key"
+          "placeholder": "Ihr 32-stelliger Admin-Schlüssel"
         },
         "title": "LNbits",
         "description": "Verbinde dich mit deinem LNbits-Konto",
         "page": {
           "title": "Verbinde dich mit <0>LNbits</0>",
           "instructions": "Wähle in LNbits die Wallet, die du verbinden willst, öffne sie, klicke auf API Info und kopiere den Admin Key. Füge ihn unten ein:"
+        },
+        "url": {
+          "label": "LNbits-URL"
+        },
+        "errors": {
+          "connection_failed": "Verbindung fehlgeschlagen. Hast du die richtige URL und den richtigen Admin-Schlüssel?"
         }
       },
       "title": {
@@ -152,18 +158,107 @@
       },
       "mynode": {
         "page": {
-          "instructions": "Klicke auf deiner myNode Übersicht auf den Button <0>Wallet</0> für deinen <0>Lightning</0> service. Klicke jetzt auf den Button <0>Pair Wallet</0> unterhalb dem Tab <0>Status</0> . Gib dein Passwort ein, wenn es verlang wird. <1/> Wähle das Dropdown Menü und entscheide dich für eine pairing option. Abhängig von deinem Setup kannst du entweder für lokale Verbindung wählen <0>Lightning (REST + Local IP)</0> oder für TOR die Auswahl <0>Lightning (REST + Tor)</0>."
-        }
+          "instructions": "Klicke auf deiner myNode Übersicht auf den Button <0>Wallet</0> für deinen <0>Lightning</0> service. Klicke jetzt auf den Button <0>Pair Wallet</0> unterhalb dem Tab <0>Status</0> . Gib dein Passwort ein, wenn es verlang wird. <1/> Wähle das Dropdown Menü und entscheide dich für eine pairing option. Abhängig von deinem Setup kannst du entweder für lokale Verbindung wählen <0>Lightning (REST + Local IP)</0> oder für TOR die Auswahl <0>Lightning (REST + Tor)</0>.",
+          "title": "Verbinde dich mit <0>myNode</0>"
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        },
+        "description": "Verbinde dich mit deiner myNode",
+        "title": "myNode"
       },
       "umbrel": {
         "page": {
-          "instructions": "Gehe im Umbrel Dashboard zu <0>Connect Wallet</0>. Wähle <0>lndconnect REST</0> und kopiere <0>lndconnect URL</0>. (Abhängig von deinem Setup kannst du entweder eine lokale Verbindung verwenden oder die Verbindung über TOR.)"
-        }
+          "instructions": "Gehe in deine Regenschirm Seite zu <0>verbinde Wallet</0>. Wähle <0>lndconnect REST</0> und kopiere <0>lndconnect URL</0>. (Abhängig von deinem Setup kannst du entweder eine lokale Verbindung verwenden oder die Verbindung über TOR.)",
+          "title": "Verbinde dich mit deinem <0>Regenschirm</0>-Knoten"
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://deinknoten:8080?..."
+        },
+        "title": "Regenschirm",
+        "description": "Verbinde dich mit deinem Regenschirm"
       },
       "description": "Du musst dich zuerst mit einer Lightning Wallet verbinden, damit du dich mit deinen Lieblingswebseiten verbinden kannst, die Bitcoin Lightning Zahlungen akzeptieren!",
       "citadel": {
         "page": {
-          "instructions": "Das funktioniert aktuell nicht, wenn 2FA ausgewählt ist."
+          "instructions": "Das funktioniert aktuell nicht, wenn 2FA ausgewählt ist.",
+          "title": "Verbinden dich mit dem Knoten <0>Zitadelle"
+        },
+        "description": "Verbinde dich mit deiner lokalen Zitadelle",
+        "title": "Zitadelle",
+        "password": {
+          "label": "Zitadelle Passwort"
+        },
+        "url": {
+          "label": "Zitadelle URL",
+          "placeholder": "http://zitadelle.local"
+        }
+      },
+      "raspiblitz": {
+        "page": {
+          "instructions1": "Du benötigst deine Node-Onion-Adresse, Port und eine Macaroon mit Lese- und Sendeberechtigungen (z. B. admin.macaroon).<1/><1/><0>SSH in deinem <0>RaspiBlitz.<1/>Führe den Befehl <0>sudo cat /mnt/hdd/tor/lndrest/hostname aus.<1/>Kopiere die <0>.onion-Adresse und füge deine Eingabe unten ein .<1/>Füge deinen <0>Port nach der Onion-Adresse hinzu, der Standardport ist <0>:8080.",
+          "title": "Verbinde dich mit deinem <0>RaspiBlitz</0>-Knoten",
+          "instructions2": "Wähle <0>VERBINDEN.<1/>Wähle <0>EXPORTIEREN.<1/>Wähle <0>HEX.<1/>Kopiere das <0>adminMacaroon.<1/>Füge die Makrone in die Eingabe unten ein."
+        },
+        "title": "RaspiBlitz",
+        "description": "Verbinde dich mit deinem RaspiBlitz",
+        "rest_api_host": {
+          "label": "REST-API-Host",
+          "placeholder": "Ihr-Knoten-Onion-Adresse: Port"
+        }
+      },
+      "eclair": {
+        "title": "Eclair",
+        "description": "Verbinde dich mit deinem Eclair-Knoten",
+        "page": {
+          "title": "Verbinden dich mit <0>Eclair",
+          "instructions": "Du benötigst deine Eclair-URL und dein Passwort."
+        },
+        "password": {
+          "label": "Eclair Passwort"
+        },
+        "url": {
+          "label": "Eclair URL",
+          "placeholder": "http://localhost:8080"
+        }
+      },
+      "start9": {
+        "page": {
+          "instructions": "<0>Hinweis:</0> Derzeit unterstützen wir nur LND, aber wir werden in Zukunft c-lightning-Unterstützung hinzufügen!<1/>Klicke auf deinem Embassy-Dashboard auf den Dienst <0>Lightning Network Daemon</0>. <1/>Wählen die Registerkarte <0>Eigenschaften</0>.<1/>Kopiere nun die <0>LND Connect REST URL.</0>",
+          "title": "Verbinde dich mit deinem <0>Embassy</0>-Knoten"
+        },
+        "rest_url": {
+          "placeholder": "lndconnect://deinknoten:8080?...",
+          "label": "lndconnect REST URL"
+        },
+        "title": "Start9",
+        "description": "Verbinde dich mit Embassy"
+      },
+      "bitcoin_beach": {
+        "title": "Bitcoin Beach Wallet",
+        "description": "Erstelle oder verbinde dich mit einem Bitcoin Beach (Galoy)-Konto",
+        "page": {
+          "title": "Verbinde dich mit <0>Bitcoin Beach Wallet"
+        }
+      },
+      "bitcoin_jungle": {
+        "title": "Bitcoin Jungle Wallet",
+        "description": "Erstelle oder verbinde dich mit einem Bitcoin Jungle (Galoy)-Konto",
+        "page": {
+          "title": "Verbinde dich mit <0>Bitcoin Jungle Wallet</0>"
+        }
+      },
+      "galoy": {
+        "phone_number": {
+          "label": "Trage deine Telefonnummer ein"
+        },
+        "sms_code": {
+          "label": "Gib deinen SMS-Bestätigungscode ein"
+        },
+        "jwt": {
+          "label": "Gebe deinen JWT-Token ein"
         }
       }
     },
