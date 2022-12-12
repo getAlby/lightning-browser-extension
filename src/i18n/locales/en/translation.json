@@ -718,8 +718,7 @@
         "title": "Edit Allowance",
         "screen_reader": "Allowance Options"
       },
-      "edit_permissions": "Edit Permissions",
-      "no_permissions": "No permissions."
+      "edit_permissions": "Edit Permissions"
     },
     "qrcode_scanner": {
       "title": "Scan QR Code",

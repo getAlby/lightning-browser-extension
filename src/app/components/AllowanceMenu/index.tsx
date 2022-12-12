@@ -1,6 +1,5 @@
 import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
-import Loading from "@components/Loading";
 import Setting from "@components/Setting";
 import Checkbox from "@components/form/Checkbox";
 import Toggle from "@components/form/Toggle";
@@ -46,12 +45,11 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   const { t: tCommon } = useTranslation("common");
 
   const hasPermissions = !isLoadingPermissions && !!permissions?.length;
-  const isEmptyPermissions = !isLoadingPermissions && permissions?.length === 0;
 
-  const isEnabled =
+  const enableSubmit =
     parseInt(budget) !== allowance.totalBudget ||
     lnurlAuth !== allowance.lnurlAuth ||
-    changedPermissionIds().length;
+    getChangedPermissionsIds().length;
 
   useEffect(() => {
     const fetchPermissions = async () => {
@@ -75,7 +73,9 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
     };
 
     !permissions && fetchPermissions();
+  }, [allowance.id, permissions]);
 
+  useEffect(() => {
     if (budget !== "" && showFiat) {
       const getFiat = async () => {
         const res = await getFormattedFiat(budget);
@@ -84,7 +84,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
 
       getFiat();
     }
-  }, [budget, showFiat, getFormattedFiat, allowance.id, permissions]);
+  }, [budget, showFiat, getFormattedFiat]);
 
   function openModal() {
     setBudget(allowance.totalBudget.toString());
@@ -104,7 +104,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
     setIsOpen(false);
   }
 
-  function changedPermissionIds(): number[] {
+  function getChangedPermissionsIds(): number[] {
     if (!permissions || !originalPermissions) return [];
     const ids = permissions
       .filter((prm, i) => prm.enabled !== originalPermissions[i].enabled)
@@ -113,24 +113,30 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   }
 
   async function updateAllowance() {
-    await msg.request("updateAllowance", {
-      id: allowance.id,
-      totalBudget: parseInt(budget),
-      lnurlAuth,
-    });
-
-    const changedIds = changedPermissionIds();
-
-    if (changedIds.length) {
-      await msg.request("togglePermissions", {
-        ids: changedIds,
+    try {
+      await msg.request("updateAllowance", {
+        id: allowance.id,
+        totalBudget: parseInt(budget),
+        lnurlAuth,
       });
+
+      const changedIds = getChangedPermissionsIds();
+
+      if (changedIds.length) {
+        await msg.request("deletePermissionsById", {
+          ids: changedIds,
+        });
+      }
+
+      /* DB is updated, let´s update the original permissions
+      to the updated permission in local state too */
+      setOriginalPermissions(permissions);
+
+      onEdit && onEdit();
+      closeModal();
+    } catch (e) {
+      console.error(e);
     }
-
-    setOriginalPermissions(permissions);
-
-    onEdit && onEdit();
-    closeModal();
   }
 
   return (
@@ -202,7 +208,13 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                 onChange={(e) => setBudget(e.target.value)}
               />
             </div>
-            <div className="pb-4 border-b border-gray-200 dark:border-neutral-500">
+            <div
+              className={
+                hasPermissions
+                  ? "pb-4 border-b border-gray-200 dark:border-neutral-500"
+                  : ""
+              }
+            >
               <Setting
                 title={t("enable_login.title")}
                 subtitle={t("enable_login.subtitle")}
@@ -213,49 +225,39 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                 />
               </Setting>
             </div>
-            <h2 className="mt-4 text-lg text-gray-900 font-bold dark:text-white">
-              {t("edit_permissions")}
-            </h2>
-
-            {isLoadingPermissions && (
-              <div className="flex justify-center">
-                <Loading />
-              </div>
-            )}
 
             {hasPermissions && (
-              <div>
-                {permissions.map((permission, index) => (
-                  <div key={index} className="flex items-center my-2">
-                    <Checkbox
-                      id={`permission-${permission.id}`}
-                      name={`permission-${permission.id}`}
-                      checked={permission.enabled}
-                      onChange={() => {
-                        setPermissions(
-                          permissions.map((prm) =>
-                            prm.id === permission.id
-                              ? { ...prm, enabled: !prm.enabled }
-                              : prm
-                          )
-                        );
-                      }}
-                    />
-                    <label
-                      htmlFor={`permission-${permission.id}`}
-                      className="ml-2 block text-sm text-gray-900 font-medium dark:text-white"
-                    >
-                      {permission.method}
-                    </label>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {isEmptyPermissions && (
-              <p className="text-gray-500 dark:text-neutral-400">
-                {t("no_permissions")}
-              </p>
+              <>
+                <h2 className="mt-4 text-lg text-gray-900 font-bold dark:text-white">
+                  {t("edit_permissions")}
+                </h2>
+                <div>
+                  {permissions.map((permission, index) => (
+                    <div key={index} className="flex items-center my-2">
+                      <Checkbox
+                        id={`permission-${permission.id}`}
+                        name={`permission-${permission.id}`}
+                        checked={permission.enabled}
+                        onChange={() => {
+                          setPermissions(
+                            permissions.map((prm) =>
+                              prm.id === permission.id
+                                ? { ...prm, enabled: !prm.enabled }
+                                : prm
+                            )
+                          );
+                        }}
+                      />
+                      <label
+                        htmlFor={`permission-${permission.id}`}
+                        className="ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+                      >
+                        {permission.method}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </>
             )}
           </div>
 
@@ -264,7 +266,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               type="submit"
               label={tCommon("actions.save")}
               primary
-              disabled={!isEnabled}
+              disabled={!enableSubmit}
             />
           </div>
         </form>

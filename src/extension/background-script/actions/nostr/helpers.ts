@@ -33,24 +33,6 @@ export async function addPermissionFor(method: string, host: string) {
   if (!allowance?.id) {
     return false;
   }
-
-  const findPermission = await db.permissions.get({
-    host,
-    method,
-  });
-
-  if (findPermission) {
-    if (!findPermission?.id) {
-      return false;
-    }
-
-    const permissionEnabled = await db.permissions.update(findPermission.id, {
-      enabled: true,
-    });
-
-    return !!permissionEnabled && (await db.saveToStorage());
-  }
-
   const permissionIsAdded = await db.permissions.add({
     createdAt: Date.now().toString(),
     allowanceId: allowance.id,
