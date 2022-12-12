@@ -35,46 +35,54 @@ const ConfirmRequestPermission: FC = () => {
     msg.error(USER_REJECTED_ERROR);
   };
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    enable();
+  }
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
       <Container justifyBetween maxWidth="sm">
-        <div>
-          <PublisherCard
-            title={origin.name}
-            image={origin.icon}
-            url={origin.host}
-            isSmall={false}
-          />
-          <div className="dark:text-white pt-6">
-            <p className="mb-2">{t("allow")}</p>
-            <div className="mb-8 center dark:text-white leading-3">
-              <p className="font-semibold pb-2">{requestMethod}:</p>
-              {description && <p className="text-xs">{description}</p>}
-            </div>
-            <div className="flex items-center mb-2">
-              <Checkbox
-                id="always_allow"
-                name="always_allow"
-                checked={alwaysAllow}
-                onChange={() => setAlwaysAllow((prev) => !prev)}
-              />
-              <label
-                htmlFor="always_allow"
-                className="cursor-pointer pl-2 block text-sm text-gray-900 font-medium dark:text-white"
-              >
-                {t("always_allow")}
-              </label>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <PublisherCard
+              title={origin.name}
+              image={origin.icon}
+              url={origin.host}
+              isSmall={false}
+            />
+
+            <div className="dark:text-white pt-6">
+              <p className="mb-2">{t("allow")}</p>
+              <div className="mb-8 center dark:text-white leading-3">
+                <p className="font-semibold pb-2">{requestMethod}:</p>
+                {description && <p className="text-xs">{description}</p>}
+              </div>
+
+              <div className="flex items-center mb-2">
+                <Checkbox
+                  id="always_allow"
+                  name="always_allow"
+                  checked={alwaysAllow}
+                  onChange={() => setAlwaysAllow((prev) => !prev)}
+                />
+                <label
+                  htmlFor="always_allow"
+                  className="cursor-pointer pl-2 block text-sm text-gray-900 font-medium dark:text-white"
+                >
+                  {t("always_allow")}
+                </label>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="mb-4 text-center flex flex-col">
-          <ConfirmOrCancel
-            label={tCommon("actions.confirm")}
-            onConfirm={enable}
-            onCancel={reject}
-          />
-        </div>
+          <div className="mb-4 text-center flex flex-col">
+            <ConfirmOrCancel
+              label={tCommon("actions.confirm")}
+              onCancel={reject}
+            />
+          </div>
+        </form>
       </Container>
     </div>
   );

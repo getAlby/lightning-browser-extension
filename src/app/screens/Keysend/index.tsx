@@ -89,6 +89,11 @@ function Keysend() {
     navigate(-1);
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    confirm();
+  }
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <Header
@@ -103,32 +108,33 @@ function Keysend() {
       {!successMessage ? (
         <>
           <Container justifyBetween maxWidth="sm">
-            <div>
-              {destination && <PublisherCard title={destination} />}
-              <ContentMessage
-                heading={t("receiver.label")}
-                content={destination}
-              />
-              <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden">
-                <DualCurrencyField
-                  id="amount"
-                  label={t("amount.label")}
-                  min={+0 / 1000}
-                  max={+1000000 / 1000}
-                  onChange={(e) => setAmountSat(e.target.value)}
-                  value={amountSat}
-                  fiatValue={fiatAmount}
+            <form onSubmit={handleSubmit}>
+              <div>
+                {destination && <PublisherCard title={destination} />}
+                <ContentMessage
+                  heading={t("receiver.label")}
+                  content={destination}
                 />
-                <SatButtons onClick={setAmountSat} />
+                <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden">
+                  <DualCurrencyField
+                    id="amount"
+                    label={t("amount.label")}
+                    min={+0 / 1000}
+                    max={+1000000 / 1000}
+                    onChange={(e) => setAmountSat(e.target.value)}
+                    value={amountSat}
+                    fiatValue={fiatAmount}
+                  />
+                  <SatButtons onClick={setAmountSat} />
+                </div>
               </div>
-            </div>
-            <ConfirmOrCancel
-              label={tCommon("actions.confirm")}
-              onConfirm={confirm}
-              onCancel={reject}
-              loading={loading}
-              disabled={loading || !amountSat}
-            />
+              <ConfirmOrCancel
+                label={tCommon("actions.confirm")}
+                onCancel={reject}
+                loading={loading}
+                disabled={loading || !amountSat}
+              />
+            </form>
           </Container>
         </>
       ) : (
