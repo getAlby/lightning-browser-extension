@@ -198,6 +198,38 @@ export interface MessageAccountAll extends MessageDefault {
   action: "getAccounts";
 }
 
+export interface MessagePermissionAdd extends MessageDefault {
+  args: {
+    host: Permission["host"];
+    method: Permission["method"];
+    enabled: Permission["enabled"];
+    blocked: Permission["blocked"];
+  };
+  action: "addPermission";
+}
+
+export interface MessagePermissionDelete extends MessageDefault {
+  args: {
+    host: Permission["host"];
+    method: Permission["method"];
+  };
+  action: "deletePermission";
+}
+
+export interface MessagePermissionsList extends MessageDefault {
+  args: {
+    id: Allowance["id"];
+  };
+  action: "listPermissions";
+}
+
+export interface MessagePermissionsDelete extends MessageDefault {
+  args: {
+    ids: Permission["id"][];
+  };
+  action: "deletePermissions";
+}
+
 export interface MessageBlocklistAdd extends MessageDefault {
   args: {
     host: string;
@@ -514,6 +546,10 @@ export interface DbPermission {
   method: string | PermissionMethodNostr;
   enabled: boolean;
   blocked: boolean;
+}
+
+export interface Permission extends Omit<DbPermission, "id"> {
+  id: number;
 }
 
 export interface PaymentResponse
