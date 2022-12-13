@@ -5,6 +5,7 @@ import type {
   DbPayment,
   DbBlocklist,
   DbPermission,
+  DbAuditLogEntry,
 } from "~/types";
 
 class DB extends Dexie {
@@ -12,6 +13,7 @@ class DB extends Dexie {
   payments: Dexie.Table<DbPayment, number>;
   blocklist: Dexie.Table<DbBlocklist, number>;
   permissions: Dexie.Table<DbPermission, number>;
+  auditLogEntries: Dexie.Table<DbAuditLogEntry, number>;
 
   constructor() {
     super("LBE");
@@ -27,11 +29,15 @@ class DB extends Dexie {
     this.version(3).stores({
       permissions: "++id,allowanceId,host,method,enabled,blocked,createdAt",
     });
+    this.version(4).stores({
+      auditLogEntries: "++id,event,details,createdAt",
+    });
     this.on("ready", this.loadFromStorage.bind(this));
     this.allowances = this.table("allowances");
     this.payments = this.table("payments");
     this.blocklist = this.table("blocklist");
     this.permissions = this.table("permissions");
+    this.auditLogEntries = this.table("auditLogEntries");
   }
 
   async saveToStorage() {
@@ -39,12 +45,14 @@ class DB extends Dexie {
     const paymentsArray = await this.payments.toArray();
     const blocklistArray = await this.blocklist.toArray();
     const permissionsArray = await this.permissions.toArray();
+    const auditLogEntriesArray = await this.auditLogEntries.toArray();
 
     await browser.storage.local.set({
       allowances: allowanceArray,
       payments: paymentsArray,
       blocklist: blocklistArray,
       permissions: permissionsArray,
+      auditLogEntries: auditLogEntriesArray,
     });
     return true;
   }
@@ -59,7 +67,13 @@ class DB extends Dexie {
     console.info("Loading DB data from storage");
 
     return browser.storage.local
-      .get(["allowances", "payments", "blocklist", "permissions"])
+      .get([
+        "allowances",
+        "payments",
+        "blocklist",
+        "permissions",
+        "auditLogEntries",
+      ])
       .then((result) => {
         const allowancePromise = this.allowances.count().then((count) => {
           // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
@@ -121,12 +135,33 @@ class DB extends Dexie {
           }
         });
 
+        const auditLogEntriesPromise = this.auditLogEntries
+          .count()
+          .then((count) => {
+            // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
+            if (count > 0) {
+              console.info(`Found ${count} auditLogEntries already in the DB`);
+              return;
+            } else if (
+              result.auditLogEntries &&
+              result.auditLogEntries.length > 0
+            ) {
+              // adding the data from the browser storage
+              return this.auditLogEntries
+                .bulkAdd(result.auditLogEntries)
+                .catch(Dexie.BulkError, function (e) {
+                  console.error("Failed to add auditLogEntries; ignoring", e);
+                });
+            }
+          });
+
         // wait for all allowances and payments to be loaded
         return Promise.all([
           allowancePromise,
           paymentsPromise,
           blocklistPromise,
           permissionsPromise,
+          auditLogEntriesPromise,
         ]);
       })
       .catch((e) => {

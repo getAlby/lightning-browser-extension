@@ -1,5 +1,11 @@
 import PubSub from "pubsub-js";
-import { Message, MessageSendPayment, PaymentNotificationData } from "~/types";
+import {
+  Message,
+  MessageSendPayment,
+  OriginData,
+  PaymentNotificationData,
+} from "~/types";
+import { AuditLogEntryType } from "~/types";
 
 const pubsub = {
   publishPaymentNotification: (
@@ -10,12 +16,14 @@ const pubsub = {
     if ("error" in data.response) {
       status = "failed";
     }
-    PubSub.publish(`ln.sendPayment.${status}`, {
+    const paymentData: PaymentNotificationData = {
       response: data.response,
       details: data.details,
       paymentRequestDetails: data.paymentRequestDetails,
-      origin: message.origin,
-    });
+      origin: message.origin as OriginData, // should be refactored when removing default 'Message"-type above
+      event: AuditLogEntryType.TRANSACTION,
+    };
+    PubSub.publish(`ln.sendPayment.${status}`, paymentData);
   },
 };
 

@@ -1,4 +1,9 @@
-import type { MessageAllowanceAdd, DbAllowance } from "~/types";
+import type {
+  MessageAllowanceAdd,
+  DbAllowance,
+  AuditLogEntryBudgetUpdateDetails,
+} from "~/types";
+import { AuditLogEntryType, AuditLogEntryBudgetType } from "~/types";
 
 import db from "../../db";
 
@@ -16,7 +21,15 @@ const add = async (message: MessageAllowanceAdd) => {
   if (allowance) {
     if (!allowance.id) return { error: "id is missing" };
 
-    await db.allowances.update(allowance.id, {
+    const eventData: AuditLogEntryBudgetUpdateDetails = {
+      type: AuditLogEntryBudgetType.UPDATE,
+      allowanceId: allowance.id,
+      event: AuditLogEntryType.BUDGET,
+    };
+
+    PubSub.publish("budget.success", eventData);
+
+    db.allowances.update(allowance.id, {
       enabled: true,
       imageURL: imageURL,
       name: name,
@@ -24,6 +37,7 @@ const add = async (message: MessageAllowanceAdd) => {
       totalBudget: totalBudget,
     });
   } else {
+    // QUESTION: is it possible to reach this without having the site "enabled" before anyways (where an allowance is added already)?
     const dbAllowance: DbAllowance = {
       createdAt: Date.now().toString(),
       enabled: true,
@@ -36,6 +50,9 @@ const add = async (message: MessageAllowanceAdd) => {
       tag: "",
       totalBudget: totalBudget,
     };
+
+    // persist budget-event?
+
     await db.allowances.add(dbAllowance);
   }
   await db.saveToStorage();

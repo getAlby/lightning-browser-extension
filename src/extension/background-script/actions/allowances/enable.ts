@@ -1,7 +1,11 @@
 import { Runtime } from "webextension-polyfill";
 import utils from "~/common/lib/utils";
 import db from "~/extension/background-script/db";
-import type { MessageAllowanceEnable } from "~/types";
+import type {
+  MessageAllowanceEnable,
+  AuditLogEntryBudgetUpdateDetails,
+} from "~/types";
+import { AuditLogEntryType, AuditLogEntryBudgetType } from "~/types";
 
 import state from "../../state";
 import { setIcon, ExtensionIcon } from "../setup/setIcon";
@@ -45,7 +49,7 @@ const enable = async (
             imageURL: message.origin.icon,
           });
         } else {
-          await db.allowances.add({
+          const allowanceId = await db.allowances.add({
             host: host,
             name: message.origin.name,
             imageURL: message.origin.icon,
@@ -57,6 +61,13 @@ const enable = async (
             lnurlAuth: false,
             tag: "",
           });
+
+          const eventData: AuditLogEntryBudgetUpdateDetails = {
+            type: AuditLogEntryBudgetType.CREATE,
+            allowanceId,
+            event: AuditLogEntryType.BUDGET,
+          };
+          PubSub.publish("budget.success", eventData);
         }
         await db.saveToStorage();
       }

@@ -1,7 +1,7 @@
 import { PaymentRequestObject } from "bolt11";
 import { CURRENCIES } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
-import {
+import type {
   ConnectorInvoice,
   SendPaymentResponse,
   WebLNNode,
@@ -67,6 +67,7 @@ export interface PaymentNotificationData {
     destination?: string | undefined;
     description?: string | undefined;
   };
+  event: AuditLogEntryType.TRANSACTION;
 }
 
 export interface AuthResponseObject {
@@ -77,6 +78,7 @@ export interface AuthNotificationData {
   authResponse: AuthResponseObject;
   origin?: OriginData; // only set if triggered via Prompt
   lnurlDetails: LNURLAuthServiceResponse;
+  event: AuditLogEntryType.AUTH;
 }
 
 export interface OriginDataInternal {
@@ -367,6 +369,14 @@ export interface MessageSettingsSet extends MessageDefault {
 export interface MessageCurrencyRateGet extends MessageDefault {
   action: "getCurrencyRate";
 }
+export interface MessageMakeInvoice extends MessageDefault {
+  args: {
+    amount: string;
+    memo: string;
+    defaultMemo?: string;
+  };
+  action: "makeInvoice";
+}
 
 export interface MessagePublicKeyGet extends MessageDefault {
   action: "getPublicKeyOrPrompt";
@@ -512,7 +522,7 @@ export type Transaction = {
 };
 
 export interface DbPayment {
-  allowanceId: string;
+  allowanceId?: string;
   createdAt: string;
   description: string;
   destination: string;
@@ -611,6 +621,45 @@ export interface Allowance extends Omit<DbAllowance, "id"> {
   paymentsCount: number;
   percentage: string;
   usedBudget: number;
+}
+
+export enum AuditLogEntryType {
+  "AUTH" = "AUTH",
+  "BUDGET" = "BUDGET",
+  "CHANNEL" = "CHANNEL", //unused
+  "INVOICE" = "INVOICE",
+  "PERMISSION" = "PERMISSION", //unused
+  "SIGNMESSAGE" = "SIGNMESSAGE", //unused
+  "TRANSACTION" = "TRANSACTION",
+  "TRANSACTIONGROUP" = "TRANSACTIONGROUP", //unused
+}
+
+export interface DbAuditLogEntry {
+  id?: number;
+  event: AuditLogEntryType;
+  createdAt: string;
+  details?: string; // can be all kinds of JSON encoded details, we should have types for this afetr decoding
+}
+
+export interface AuditLogEntry extends Omit<DbAuditLogEntry, "id"> {
+  id: number;
+}
+
+export enum AuditLogEntryBudgetType {
+  "CREATE" = "CREATE",
+  "UPDATE" = "UPDATE",
+}
+
+export interface AuditLogEntryBudgetUpdateDetails {
+  type: AuditLogEntryBudgetType;
+  allowanceId: Allowance["id"];
+  event: AuditLogEntryType.BUDGET;
+}
+
+export interface AuditLogEntryInvoiceDetails {
+  paymentRequest: string;
+  rHash: string;
+  event: AuditLogEntryType.INVOICE;
 }
 
 export interface SettingsStorage {

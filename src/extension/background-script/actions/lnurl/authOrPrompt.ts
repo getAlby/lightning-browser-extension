@@ -16,7 +16,7 @@ async function authOrPrompt(
 ) {
   if (!("host" in message.origin)) return;
 
-  PubSub.publish(`lnurl.auth.start`, { message, lnurlDetails });
+  PubSub.publish("lnurl.auth.start", { message, lnurlDetails });
 
   // get the publisher to check if lnurlAuth for auto-login is enabled
   const allowance = await db.allowances
