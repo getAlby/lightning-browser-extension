@@ -20,6 +20,7 @@ export const resources = {
     translation: en.translation,
     common: en.common,
     components: en.components,
+    permissions: en.permissions,
   },
   es: {
     translation: es.translation,
@@ -63,7 +64,7 @@ i18n
   .init({
     //debug: true,
     fallbackLng: "en",
-    ns: ["translation", "common", "components"],
+    ns: ["translation", "common", "components", "permissions"],
     defaultNS,
     resources,
   });

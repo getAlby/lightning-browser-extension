@@ -17,6 +17,7 @@ const ConfirmRequestPermission: FC = () => {
     keyPrefix: "confirm_request_permission",
   });
   const { t: tCommon } = useTranslation("common");
+  const { t: tPermissions } = useTranslation("permissions");
 
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
@@ -52,12 +53,11 @@ const ConfirmRequestPermission: FC = () => {
               url={origin.host}
               isSmall={false}
             />
-
-            <div className="dark:text-white pt-6">
-              <p className="mb-2">{t("allow")}</p>
-              <div className="mb-8 center dark:text-white leading-3">
-                <p className="font-semibold pb-2">{requestMethod}:</p>
-                {description && <p className="text-xs">{description}</p>}
+            <div className="dark:text-white pt-4">
+              <p className="mb-4">{t("allow")}</p>
+              <div className="mb-4 center dark:text-white">
+                <p className="font-semibold">{requestMethod}</p>
+                {description && <p className="text-sm text-gray-700">{tPermissions(description)}</p>}
               </div>
 
               <div className="flex items-center mb-2">
