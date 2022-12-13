@@ -1,7 +1,7 @@
 import PubSub from "pubsub-js";
 import pubsub from "~/common/lib/pubsub";
 import { Message } from "~/types";
-import { AlbyEventType } from "~/types";
+import { AuditLogEntryType } from "~/types";
 
 import state from "../../state";
 
@@ -36,7 +36,7 @@ export default async function keysend(message: Message) {
     details: {
       destination: destination,
     },
-    event: AlbyEventType.TRANSACTION,
+    event: AuditLogEntryType.TRANSACTION,
   });
   return response;
 }

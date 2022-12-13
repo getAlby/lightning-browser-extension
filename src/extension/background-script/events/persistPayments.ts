@@ -1,5 +1,6 @@
 import type { PaymentNotificationData } from "~/types";
-import { AlbyEventType, DbPayment } from "~/types";
+import { DbAuditLogEntry, DbPayment } from "~/types";
+import { AuditLogEntryType } from "~/types";
 
 import db from "../db";
 
@@ -34,14 +35,18 @@ const persistSuccessfullPayment = async (
     totalFees: total_fees,
   };
 
-  await db.payments.add(payment);
+  const paymentId = await db.payments.add(payment);
+
+  const dbAuditLogEntry: DbAuditLogEntry = {
+    createdAt: Date.now().toString(),
+    event: AuditLogEntryType.TRANSACTION,
+    details: JSON.stringify({ paymentId }),
+  };
+
+  await db.auditLogEntries.add(dbAuditLogEntry);
+
   await db.saveToStorage();
   console.info(`Persisted payment ${paymentResponse.data.paymentHash}`);
-
-  PubSub.publish("albyEvent.transaction", {
-    event: AlbyEventType.TRANSACTION,
-    details: payment,
-  });
 
   return true;
 };

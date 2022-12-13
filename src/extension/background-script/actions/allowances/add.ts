@@ -1,9 +1,9 @@
 import type {
   MessageAllowanceAdd,
   DbAllowance,
-  AlbyEventBudgetUpdateDetails,
+  AuditLogEntryBudgetUpdateDetails,
 } from "~/types";
-import { AlbyEventType, AlbyEventBudgetType } from "~/types";
+import { AuditLogEntryType, AuditLogEntryBudgetType } from "~/types";
 
 import db from "../../db";
 
@@ -21,10 +21,10 @@ const add = async (message: MessageAllowanceAdd) => {
   if (allowance) {
     if (!allowance.id) return { error: "id is missing" };
 
-    const eventData: AlbyEventBudgetUpdateDetails = {
-      type: AlbyEventBudgetType.UPDATE,
+    const eventData: AuditLogEntryBudgetUpdateDetails = {
+      type: AuditLogEntryBudgetType.UPDATE,
       allowanceId: allowance.id,
-      event: AlbyEventType.BUDGET,
+      event: AuditLogEntryType.BUDGET,
     };
 
     PubSub.publish("budget.success", eventData);

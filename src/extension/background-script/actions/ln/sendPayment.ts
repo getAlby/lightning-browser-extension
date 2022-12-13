@@ -3,7 +3,7 @@ import PubSub from "pubsub-js";
 import pubsub from "~/common/lib/pubsub";
 import state from "~/extension/background-script/state";
 import { MessageSendPayment, Message } from "~/types";
-import { AlbyEventType } from "~/types";
+import { AuditLogEntryType } from "~/types";
 
 export default async function sendPayment(
   message: MessageSendPayment | Message // 'keysend' & 'sendPaymentOrPrompt' still need the Message type
@@ -49,7 +49,7 @@ export default async function sendPayment(
       description: paymentRequestDetails.tagsObject.description,
       destination: paymentRequestDetails.payeeNodeKey,
     },
-    event: AlbyEventType.TRANSACTION,
+    event: AuditLogEntryType.TRANSACTION,
   });
 
   return response;

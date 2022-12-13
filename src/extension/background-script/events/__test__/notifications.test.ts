@@ -5,7 +5,7 @@ import type {
   AuthNotificationData,
   SettingsStorage,
 } from "~/types";
-import { AlbyEventType } from "~/types";
+import { AuditLogEntryType } from "~/types";
 
 import * as helpers from "../helpers";
 import * as notifications from "../notifications";
@@ -44,7 +44,7 @@ describe("Payment notifications", () => {
   });
 
   const data: PaymentNotificationData = {
-    event: AlbyEventType.TRANSACTION,
+    event: AuditLogEntryType.TRANSACTION,
     response: {
       data: {
         preimage:
@@ -198,7 +198,7 @@ describe("Auth notifications", () => {
   });
 
   const data: AuthNotificationData = {
-    event: AlbyEventType.AUTH,
+    event: AuditLogEntryType.AUTH,
     authResponse: {
       status: "OK",
     },

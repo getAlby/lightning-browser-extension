@@ -1,7 +1,7 @@
 import PubSub from "pubsub-js";
 import utils from "~/common/lib/utils";
-import type { MessageMakeInvoice, AlbyEventInvoiceDetails } from "~/types";
-import { AlbyEventType } from "~/types";
+import type { MessageMakeInvoice, AuditLogEntryInvoiceDetails } from "~/types";
+import { AuditLogEntryType } from "~/types";
 
 import state from "../../state";
 
@@ -21,10 +21,10 @@ const makeInvoice = async (message: MessageMakeInvoice) => {
         memo,
       });
 
-      const eventData: AlbyEventInvoiceDetails = {
+      const eventData: AuditLogEntryInvoiceDetails = {
         paymentRequest: response.data.paymentRequest,
         rHash: response.data.rHash,
-        event: AlbyEventType.INVOICE,
+        event: AuditLogEntryType.INVOICE,
       };
 
       PubSub.publish("makeInvoice.success", eventData);

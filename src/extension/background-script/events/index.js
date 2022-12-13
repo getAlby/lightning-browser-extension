@@ -7,7 +7,7 @@ import {
   lnurlAuthSuccessNotification,
   lnurlAuthFailedNotification,
 } from "./notifications";
-import { persistAlbyEvent } from "./persistAlbyEvent";
+import { persistAuditLogEntry } from "./persistAuditLogEntry";
 import { persistSuccessfullPayment } from "./persistPayments";
 
 const subscribe = () => {
@@ -15,18 +15,18 @@ const subscribe = () => {
   PubSub.subscribe("ln.sendPayment.failed", paymentFailedNotification);
 
   PubSub.subscribe("ln.sendPayment.success", persistSuccessfullPayment);
-  PubSub.subscribe("ln.sendPayment.success", persistAlbyEvent);
+  PubSub.subscribe("ln.sendPayment.success", persistAuditLogEntry);
   PubSub.subscribe("ln.sendPayment.success", updateAllowance);
 
   PubSub.subscribe("ln.keysend.success", persistSuccessfullPayment);
   PubSub.subscribe("ln.keysend.success", updateAllowance);
 
   PubSub.subscribe("lnurl.auth.success", lnurlAuthSuccessNotification);
-  PubSub.subscribe("lnurl.auth.success", persistAlbyEvent);
+  PubSub.subscribe("lnurl.auth.success", persistAuditLogEntry);
   PubSub.subscribe("lnurl.auth.failed", lnurlAuthFailedNotification);
 
-  PubSub.subscribe("ln.makeInvoice.success", persistAlbyEvent);
-  PubSub.subscribe("budget.success", persistAlbyEvent);
+  PubSub.subscribe("ln.makeInvoice.success", persistAuditLogEntry);
+  PubSub.subscribe("budget.success", persistAuditLogEntry);
 
   console.info("Event subscriptions registered");
 };

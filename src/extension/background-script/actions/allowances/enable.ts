@@ -3,9 +3,9 @@ import utils from "~/common/lib/utils";
 import db from "~/extension/background-script/db";
 import type {
   MessageAllowanceEnable,
-  AlbyEventBudgetUpdateDetails,
+  AuditLogEntryBudgetUpdateDetails,
 } from "~/types";
-import { AlbyEventType, AlbyEventBudgetType } from "~/types";
+import { AuditLogEntryType, AuditLogEntryBudgetType } from "~/types";
 
 import state from "../../state";
 import { setIcon, ExtensionIcon } from "../setup/setIcon";
@@ -62,10 +62,10 @@ const enable = async (
             tag: "",
           });
 
-          const eventData: AlbyEventBudgetUpdateDetails = {
-            type: AlbyEventBudgetType.CREATE,
+          const eventData: AuditLogEntryBudgetUpdateDetails = {
+            type: AuditLogEntryBudgetType.CREATE,
             allowanceId,
-            event: AlbyEventType.BUDGET,
+            event: AuditLogEntryType.BUDGET,
           };
           PubSub.publish("budget.success", eventData);
         }

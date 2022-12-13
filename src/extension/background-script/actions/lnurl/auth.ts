@@ -14,7 +14,7 @@ import type {
   AuthResponseObject,
   AuthNotificationData,
 } from "~/types";
-import { AlbyEventType } from "~/types";
+import { AuditLogEntryType } from "~/types";
 
 const LNURLAUTH_CANONICAL_PHRASE =
   "DO NOT EVER SIGN THIS TEXT WITH YOUR PRIVATE KEYS! IT IS ONLY USED FOR DERIVATION OF LNURL-AUTH HASHING-KEY, DISCLOSING ITS SIGNATURE WILL COMPROMISE YOUR LNURL-AUTH IDENTITY AND MAY LEAD TO LOSS OF FUNDS!";
@@ -100,7 +100,7 @@ export async function authFunction({
         authResponse: authResponse.data,
         lnurlDetails,
         origin,
-        event: AlbyEventType.AUTH,
+        event: AuditLogEntryType.AUTH,
       };
 
       PubSub.publish("lnurl.auth.success", eventData);

@@ -5,7 +5,7 @@ import {
   OriginData,
   PaymentNotificationData,
 } from "~/types";
-import { AlbyEventType } from "~/types";
+import { AuditLogEntryType } from "~/types";
 
 const pubsub = {
   publishPaymentNotification: (
@@ -21,7 +21,7 @@ const pubsub = {
       details: data.details,
       paymentRequestDetails: data.paymentRequestDetails,
       origin: message.origin as OriginData, // should be refactored when removing default 'Message"-type above
-      event: AlbyEventType.TRANSACTION,
+      event: AuditLogEntryType.TRANSACTION,
     };
     PubSub.publish(`ln.sendPayment.${status}`, paymentData);
   },

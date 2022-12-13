@@ -67,7 +67,7 @@ export interface PaymentNotificationData {
     destination?: string | undefined;
     description?: string | undefined;
   };
-  event: AlbyEventType.TRANSACTION;
+  event: AuditLogEntryType.TRANSACTION;
 }
 
 export interface AuthResponseObject {
@@ -78,7 +78,7 @@ export interface AuthNotificationData {
   authResponse: AuthResponseObject;
   origin?: OriginData; // only set if triggered via Prompt
   lnurlDetails: LNURLAuthServiceResponse;
-  event: AlbyEventType.AUTH;
+  event: AuditLogEntryType.AUTH;
 }
 
 export interface OriginDataInternal {
@@ -623,7 +623,7 @@ export interface Allowance extends Omit<DbAllowance, "id"> {
   usedBudget: number;
 }
 
-export enum AlbyEventType {
+export enum AuditLogEntryType {
   "AUTH" = "AUTH",
   "BUDGET" = "BUDGET",
   "CHANNEL" = "CHANNEL", //unused
@@ -634,32 +634,32 @@ export enum AlbyEventType {
   "TRANSACTIONGROUP" = "TRANSACTIONGROUP", //unused
 }
 
-export interface DbAlbyEvent {
+export interface DbAuditLogEntry {
   id?: number;
-  event: AlbyEventType;
+  event: AuditLogEntryType;
   createdAt: string;
   details?: string; // can be all kinds of JSON encoded details, we should have types for this afetr decoding
 }
 
-export interface AlbyEvent extends Omit<DbAlbyEvent, "id"> {
+export interface AuditLogEntry extends Omit<DbAuditLogEntry, "id"> {
   id: number;
 }
 
-export enum AlbyEventBudgetType {
+export enum AuditLogEntryBudgetType {
   "CREATE" = "CREATE",
   "UPDATE" = "UPDATE",
 }
 
-export interface AlbyEventBudgetUpdateDetails {
-  type: AlbyEventBudgetType;
+export interface AuditLogEntryBudgetUpdateDetails {
+  type: AuditLogEntryBudgetType;
   allowanceId: Allowance["id"];
-  event: AlbyEventType.BUDGET;
+  event: AuditLogEntryType.BUDGET;
 }
 
-export interface AlbyEventInvoiceDetails {
+export interface AuditLogEntryInvoiceDetails {
   paymentRequest: string;
   rHash: string;
-  event: AlbyEventType.INVOICE;
+  event: AuditLogEntryType.INVOICE;
 }
 
 export interface SettingsStorage {
