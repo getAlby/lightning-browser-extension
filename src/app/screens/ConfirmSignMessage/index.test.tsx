@@ -45,7 +45,7 @@ describe("ConfirmSignMessage", () => {
     });
 
     expect(
-      await screen.findByText("getalby.com asks you to sign:")
+      await screen.findByText("This website asks you to sign:")
     ).toBeInTheDocument();
     expect(await screen.findByText("Test message")).toBeInTheDocument();
   });
