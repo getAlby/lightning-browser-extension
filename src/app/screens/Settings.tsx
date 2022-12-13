@@ -12,7 +12,7 @@ import Input from "@components/form/Input";
 import Select from "@components/form/Select";
 import TextField from "@components/form/TextField";
 import Toggle from "@components/form/Toggle";
-import { Html5Qrcode } from "html5-qrcode";
+import QrScanner from "qr-scanner";
 import type { FormEvent } from "react";
 import { useState, useEffect } from "react";
 import { useTranslation, Trans } from "react-i18next";
@@ -133,8 +133,18 @@ function Settings() {
               label={t("camera_access.allow")}
               onClick={async () => {
                 try {
-                  await Html5Qrcode.getCameras();
-                  setCameraPermissionsGranted(true);
+                  const devices = await QrScanner.listCameras();
+                  const video =
+                    document.querySelector<HTMLVideoElement>("#reader");
+                  if (video && devices && devices.length) {
+                    const qrScanner = new QrScanner(video, () => null, {
+                      returnDetailedScanResult: true,
+                      preferredCamera: devices[0].id,
+                    });
+                    await qrScanner.start();
+                    qrScanner.stop();
+                    setCameraPermissionsGranted(true);
+                  }
                 } catch (e) {
                   if (e instanceof Error) toast.error(e.message);
                 }
@@ -146,6 +156,8 @@ function Settings() {
             </p>
           )}
         </Setting>
+        {/* This is just to enable camera permissions*/}
+        <video className="hidden" id="reader" />
         <Setting
           title={t("language.title")}
           subtitle={
