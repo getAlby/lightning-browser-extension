@@ -57,7 +57,13 @@ const ConfirmRequestPermission: FC = () => {
               <p className="mb-4">{t("allow")}</p>
               <div className="mb-6 center dark:text-white">
                 <p className="font-semibold">{requestMethod}</p>
-                {description && <p className="text-sm text-gray-700">{tPermissions(description)}</p>}
+                {description && (
+                  <p className="text-sm text-gray-700">
+                    {tPermissions(
+                      description as unknown as TemplateStringsArray
+                    )}
+                  </p>
+                )}
               </div>
 
               <div className="flex items-center mb-2">
