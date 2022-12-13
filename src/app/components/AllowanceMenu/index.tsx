@@ -1,7 +1,6 @@
 import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Setting from "@components/Setting";
-import Checkbox from "@components/form/Checkbox";
 import Toggle from "@components/form/Toggle";
 import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
@@ -178,6 +177,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         contentLabel={t("edit_allowance.screen_reader")}
         overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
         className="rounded-lg bg-white w-full max-w-lg"
+        style={{ content: { maxHeight: "90vh" } }}
       >
         <div className="p-5 flex justify-between dark:bg-surface-02dp">
           <h2 className="text-2xl font-bold dark:text-white">
@@ -194,7 +194,10 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             updateAllowance();
           }}
         >
-          <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
+          <div
+            style={{ maxHeight: "calc(90vh - 154px)", overflowY: "auto" }}
+            className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500"
+          >
             <div className="pb-4 border-b border-gray-200 dark:border-neutral-500">
               <DualCurrencyField
                 id="budget"
@@ -227,37 +230,34 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             </div>
 
             {hasPermissions && (
-              <>
-                <h2 className="mt-4 text-lg text-gray-900 font-bold dark:text-white">
+              <div>
+                <h2 className="pt-4 text-lg text-gray-900 font-bold dark:text-white">
                   {t("edit_permissions")}
                 </h2>
                 <div>
-                  {permissions.map((permission, index) => (
-                    <div key={index} className="flex items-center my-2">
-                      <Checkbox
-                        id={`permission-${permission.id}`}
-                        name={`permission-${permission.id}`}
-                        checked={permission.enabled}
-                        onChange={() => {
-                          setPermissions(
-                            permissions.map((prm) =>
-                              prm.id === permission.id
-                                ? { ...prm, enabled: !prm.enabled }
-                                : prm
-                            )
-                          );
-                        }}
-                      />
-                      <label
-                        htmlFor={`permission-${permission.id}`}
-                        className="ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+                  {permissions.map((permission) => (
+                    <>
+                      <Setting
+                        title={permission.method}
+                        subtitle={"random subtitle"}
                       >
-                        {permission.method}
-                      </label>
-                    </div>
+                        <Toggle
+                          checked={permission.enabled}
+                          onChange={() => {
+                            setPermissions(
+                              permissions.map((prm) =>
+                                prm.id === permission.id
+                                  ? { ...prm, enabled: !prm.enabled }
+                                  : prm
+                              )
+                            );
+                          }}
+                        />
+                      </Setting>
+                    </>
                   ))}
                 </div>
-              </>
+              </div>
             )}
           </div>
 
