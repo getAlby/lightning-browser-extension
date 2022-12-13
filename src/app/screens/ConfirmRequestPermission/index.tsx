@@ -55,7 +55,7 @@ const ConfirmRequestPermission: FC = () => {
             />
             <div className="dark:text-white pt-4">
               <p className="mb-4">{t("allow")}</p>
-              <div className="mb-4 center dark:text-white">
+              <div className="mb-6 center dark:text-white">
                 <p className="font-semibold">{requestMethod}</p>
                 {description && <p className="text-sm text-gray-700">{tPermissions(description)}</p>}
               </div>
