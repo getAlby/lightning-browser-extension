@@ -1,5 +1,5 @@
 import { QrCodeIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { Html5Qrcode, Html5QrcodeScannerState } from "html5-qrcode";
+import QrScanner from "qr-scanner";
 import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -11,11 +11,16 @@ interface CameraDevice {
   label: string;
 }
 
+interface ScanResult {
+  data: string;
+  cornerPoints: QrScanner.Point[];
+}
+
 type Props = {
   fps?: number;
   qrbox?: number;
   qrCodeSuccessCallback?: (decodedText: string) => void;
-  qrCodeErrorCallback?: (errorMessage: string) => void;
+  qrCodeErrorCallback?: (errorMessage: Error | string) => void;
 };
 
 function QrcodeScanner({
@@ -27,7 +32,7 @@ function QrcodeScanner({
   const [isScanning, setScanning] = useState(false);
   const [cameras, setCameras] = useState<CameraDevice[]>([]);
   const [selectedCamera, setSelectedCamera] = useState("");
-  const html5QrCodeRef = useRef<Html5Qrcode>();
+  const qrScannerRef = useRef<QrScanner>();
   const { t } = useTranslation("components", {
     keyPrefix: "qrcode_scanner",
   });
@@ -40,10 +45,18 @@ function QrcodeScanner({
 
   async function handleRequestCameraPermissions() {
     try {
-      const devices = await Html5Qrcode.getCameras(); // Request camera permissions.
-      if (devices && devices.length) {
+      const devices = await QrScanner.listCameras();
+      const video = document.querySelector<HTMLVideoElement>("#reader");
+      if (video && devices && devices.length) {
         setCameras(devices);
-        html5QrCodeRef.current = new Html5Qrcode("reader", false);
+        const onDecode = (result: ScanResult) => {
+          handleStopScanning();
+          qrCodeSuccessCallback && qrCodeSuccessCallback(result.data);
+        };
+        qrScannerRef.current = new QrScanner(video, onDecode, {
+          returnDetailedScanResult: true,
+          onDecodeError: qrCodeErrorCallback,
+        });
         handleStartScanning(devices[0].id);
       }
     } catch (error) {
@@ -55,40 +68,11 @@ function QrcodeScanner({
     setScanning(true);
     setSelectedCamera(id);
     try {
-      if (html5QrCodeRef.current) {
+      if (qrScannerRef.current) {
+        qrScannerRef.current.setCamera(id);
         // Stop if there's already a scanner active.
-        try {
-          const scannerState = html5QrCodeRef.current.getState();
-          if (
-            [
-              Html5QrcodeScannerState.PAUSED,
-              Html5QrcodeScannerState.SCANNING,
-            ].includes(scannerState)
-          ) {
-            await html5QrCodeRef.current.stop();
-          }
-        } catch (e) {
-          console.error(e);
-        }
-
-        html5QrCodeRef.current
-          .start(
-            id,
-            {
-              fps,
-              qrbox,
-            },
-            (decodedText: string) => {
-              handleStopScanning();
-              qrCodeSuccessCallback && qrCodeSuccessCallback(decodedText);
-            },
-            (errorMessage: string) => {
-              qrCodeErrorCallback && qrCodeErrorCallback(errorMessage);
-            }
-          )
-          .catch(() => {
-            // Start failed.
-          });
+        qrScannerRef.current.stop();
+        qrScannerRef.current.start();
       }
     } catch (e) {
       console.error(e);
@@ -97,17 +81,8 @@ function QrcodeScanner({
 
   async function handleStopScanning(isMounted = true) {
     try {
-      if (html5QrCodeRef.current) {
-        const scannerState = html5QrCodeRef.current.getState();
-        if (
-          [
-            Html5QrcodeScannerState.PAUSED,
-            Html5QrcodeScannerState.SCANNING,
-          ].includes(scannerState)
-        ) {
-          await html5QrCodeRef.current.stop();
-        }
-        html5QrCodeRef.current.clear();
+      if (qrScannerRef.current) {
+        qrScannerRef.current.stop();
         if (isMounted) setScanning(false);
       }
     } catch (e) {
@@ -134,7 +109,10 @@ function QrcodeScanner({
         </>
       )}
 
-      <div className="bg-black w-full" id="reader" />
+      <video
+        className={`bg-black w-full ${!isScanning ? "hidden" : ""}`}
+        id="reader"
+      />
 
       {isScanning && (
         <div className="mt-6 text-center">
