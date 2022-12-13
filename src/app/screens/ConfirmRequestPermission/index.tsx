@@ -35,52 +35,58 @@ const ConfirmRequestPermission: FC = () => {
     msg.error(USER_REJECTED_ERROR);
   };
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    enable();
+  }
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
       <Container justifyBetween maxWidth="sm">
-        <div>
-          <PublisherCard
-            title={origin.name}
-            image={origin.icon}
-            url={origin.host}
-            isSmall={false}
-          />
+        <form onSubmit={handleSubmit}>
+          <div>
+            <PublisherCard
+              title={origin.name}
+              image={origin.icon}
+              url={origin.host}
+              isSmall={false}
+            />
 
-          <div className="dark:text-white pt-6">
-            <p className="mb-4">{t("allow", { host: origin.host })}</p>
-            <div className="mb-4 flex items-center">
-              <CheckIcon className="w-5 h-5 mr-2" />
-              <p className="dark:text-white">
-                {t("enable_method", { method: requestMethod })}
-              </p>
-            </div>
-            <div className="flex items-center">
-              <Checkbox
-                id="always_allow"
-                name="always_allow"
-                checked={alwaysAllow}
-                onChange={() => setAlwaysAllow((prev) => !prev)}
-              />
-              <label
-                htmlFor="always_allow"
-                className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
-              >
-                {t("always_allow", {
-                  method: requestMethod,
-                  host: origin.host,
-                })}
-              </label>
+            <div className="dark:text-white pt-6">
+              <p className="mb-4">{t("allow", { host: origin.host })}</p>
+              <div className="mb-4 flex items-center">
+                <CheckIcon className="w-5 h-5 mr-2" />
+                <p className="dark:text-white">
+                  {t("enable_method", { method: requestMethod })}
+                </p>
+              </div>
+              <div className="flex items-center">
+                <Checkbox
+                  id="always_allow"
+                  name="always_allow"
+                  checked={alwaysAllow}
+                  onChange={() => setAlwaysAllow((prev) => !prev)}
+                />
+                <label
+                  htmlFor="always_allow"
+                  className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+                >
+                  {t("always_allow", {
+                    method: requestMethod,
+                    host: origin.host,
+                  })}
+                </label>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="mb-4 text-center flex flex-col">
-          <ConfirmOrCancel
-            label={tCommon("actions.confirm")}
-            onConfirm={enable}
-            onCancel={reject}
-          />
-        </div>
+          <div className="mb-4 text-center flex flex-col">
+            <ConfirmOrCancel
+              label={tCommon("actions.confirm")}
+              onCancel={reject}
+            />
+          </div>
+        </form>
       </Container>
     </div>
   );

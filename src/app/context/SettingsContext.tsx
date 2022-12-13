@@ -114,7 +114,7 @@ export const SettingsProvider = ({
 
     // need to switch i.e. `pt_BR` to `pt-br`
     const daysjsLocaleFormatted = settings.locale
-      .toLocaleLowerCase()
+      .toLowerCase()
       .replace("_", "-");
     dayjs.locale(daysjsLocaleFormatted);
   }, [settings.locale]);

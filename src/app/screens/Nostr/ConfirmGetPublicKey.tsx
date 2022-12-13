@@ -45,6 +45,11 @@ function NostrConfirmGetPublicKey() {
     msg.error(USER_REJECTED_ERROR);
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    confirm();
+  }
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
@@ -66,39 +71,40 @@ function NostrConfirmGetPublicKey() {
           </div>
         </div>
 
-        <div className="flex items-center">
-          <Checkbox
-            id="remember_permission"
-            name="remember_permission"
-            checked={rememberPermission}
-            onChange={(event) => {
-              setRememberPermission(event.target.checked);
-            }}
-          />
-          <label
-            htmlFor="remember_permission"
-            className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
-          >
-            {t("confirm_sign_message.remember.label")}
-          </label>
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="flex items-center">
+            <Checkbox
+              id="remember_permission"
+              name="remember_permission"
+              checked={rememberPermission}
+              onChange={(event) => {
+                setRememberPermission(event.target.checked);
+              }}
+            />
+            <label
+              htmlFor="remember_permission"
+              className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+            >
+              {t("confirm_sign_message.remember.label")}
+            </label>
+          </div>
 
-        <div className="mb-4 text-center flex flex-col">
-          <ConfirmOrCancel
-            disabled={loading}
-            loading={loading}
-            label={tCommon("actions.confirm")}
-            onConfirm={confirm}
-            onCancel={reject}
-          />
-          <a
-            className="underline text-sm text-gray-400 mx-4 overflow-hidden text-ellipsis whitespace-nowrap"
-            href="#"
-            onClick={block}
-          >
-            {t("block_and_ignore", { host: origin.host })}
-          </a>
-        </div>
+          <div className="mb-4 text-center flex flex-col">
+            <ConfirmOrCancel
+              disabled={loading}
+              loading={loading}
+              label={tCommon("actions.confirm")}
+              onCancel={reject}
+            />
+            <a
+              className="underline text-sm text-gray-400 mx-4 overflow-hidden text-ellipsis whitespace-nowrap"
+              href="#"
+              onClick={block}
+            >
+              {t("block_and_ignore", { host: origin.host })}
+            </a>
+          </div>
+        </form>
       </Container>
     </div>
   );

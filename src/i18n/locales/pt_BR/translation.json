@@ -357,7 +357,8 @@
       "default_view": {
         "recent_transactions": "Transações Recentes",
         "no_transactions": "Você ainda não realizou transações com a Alby.",
-        "is_blocked_hint": "A Alby está desativada em {{host}}"
+        "is_blocked_hint": "A Alby está desativada em {{host}}",
+        "block_removed": "{{host}} ativado. Por favor, recarregue o site."
       }
     },
     "accounts": {
@@ -391,7 +392,8 @@
       "request2": "Gerar faturas e solicitar informações do servidor",
       "connect": "Conectar",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
-      "title": "Conectar"
+      "title": "Conectar",
+      "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site."
     },
     "unlock": {
       "unlock_to_continue": "Desbloqueie para continuar",
@@ -559,7 +561,7 @@
         "no_info": "Nenhum site ainda."
       },
       "suggestions": {
-        "title": "Outros sites ⚡️",
+        "title": "Sites⚡️recomendados",
         "description": "Sugestões de sites onde você pode usar a Alby",
         "list": {
           "trading": "Negociação",
@@ -660,7 +662,8 @@
         "decrypt": "Descriptografar dados",
         "encrypt": "Criptografar dados",
         "allow_sign": "Permitir {{host}} assinar:"
-      }
+      },
+      "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site."
     },
     "confirm_request_permission": {
       "title": "Aprovar Solicitação",
@@ -726,7 +729,7 @@
         "screen_reader": "Opções limite de gastos"
       },
       "enable_login": {
-        "title": "Login automático",
+        "title": "Login Relâmpago",
         "subtitle": "O login é realizado de forma automática, sem necessidade de confirmação."
       }
     },
