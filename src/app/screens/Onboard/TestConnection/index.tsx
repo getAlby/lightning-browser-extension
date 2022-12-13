@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
+import utils from "~/common/lib/utils";
 
 export default function TestConnection() {
   const [errorMessage, setErrorMessage] = useState("");
