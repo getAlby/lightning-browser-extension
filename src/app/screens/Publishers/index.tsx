@@ -112,15 +112,23 @@ function Publishers() {
 
           <p className="mb-2 dark:text-white">
             {t("unused.description")}
-
             <br />
+            <a
+              className="underline"
+              href="https://getalby.com/guide-topup"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {t("unused.how_to")}
+            </a>{" "}
+            or{" "}
             <a
               className="underline"
               href="https://getalby.com/topup"
               target="_blank"
               rel="noreferrer"
             >
-              {t("unused.how_to")}
+              {t("unused.alby_topup")}
             </a>
           </p>
         </div>

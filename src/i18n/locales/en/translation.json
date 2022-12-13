@@ -552,7 +552,8 @@
       "unused": {
         "title": "Welcome!",
         "description": "To start using Alby you first need to top up your account with bitcoin.",
-        "how_to": "Learn how to top up your wallet"
+        "how_to": "Learn how to top up your wallet",
+        "alby_topup": "Top up your Alby account directly"
       },
       "suggestions": {
         "title": "Suggested ⚡️ Websites",
