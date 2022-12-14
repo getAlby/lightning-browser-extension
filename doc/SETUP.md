@@ -26,6 +26,16 @@
 
 To connect to a remote development LND node you can use a [test account](https://github.com/bumi/lightning-browser-extension/wiki/Test-setup)
 
+### Multiple Extensions
+
+It is not recommended to have multiple versions of the extension (development + official) running in the same browser. You will have instances of the extension with the same icon which is confusing, and also leads to a poor webln experience as both extensions will launch a popup. There may also be unexpected bugs due to conflict with the two extensions running at the same time.
+
+Some ways you can work around this are:
+
+- Use a separate Chrome / firefox profile for development of the extension (this profile would not have the official extension installed)
+- Use a dedicated browser for development of the extension (this browser would not have the official extension installed)
+- Disable the official extension during development, and disable the development extension when you want to use Alby as normal.
+
 ### Testnet/testing-accounts for development use localhost testnet
 
 For most people who are new to the btc lightning network, starting a test version of the lightning network environment locally is very helpful for developing wallets, so that they can transfer money with confidence.

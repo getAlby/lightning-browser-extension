@@ -205,8 +205,8 @@ var options = {
       patterns: [{ from: "static/assets", to: "assets" }],
     }),
     new BundleAnalyzerPlugin({
-      generateStatsFile: true,
-      analyzerMode: 'static',
+      generateStatsFile: (nodeEnv !== "development" ? true : false),
+      analyzerMode: (nodeEnv !== "development" ? 'static' : 'disabled'),
       reportFilename: '../bundle-report.html',
       statsFilename: '../bundle-stats.json',
       openAnalyzer: nodeEnv !== "development",
