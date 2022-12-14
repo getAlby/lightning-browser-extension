@@ -144,6 +144,7 @@ export type NavigationState = {
     details?: string;
     requestPermission: {
       method: string;
+      description: string;
     };
   };
   isPrompt?: true; // only passed via Prompt.tsx

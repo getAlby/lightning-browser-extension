@@ -39,6 +39,10 @@ class Galoy implements Connector {
     return Promise.resolve();
   }
 
+  get supportedMethods() {
+    return ["getInfo", "makeInvoice", "sendPayment", "signMessage"];
+  }
+
   getInfo(): Promise<GetInfoResponse> {
     const query = {
       query: `
