@@ -32,102 +32,82 @@ const methods: Record<string, Record<string, string>> = {
   getinfo: {
     path: "/v1/getinfo",
     httpMethod: "GET",
-    description: "Get the node information",
   },
   listchannels: {
     path: "/v1/channels",
     httpMethod: "GET",
-    description: "Get a description of all the open channels",
   },
   listinvoices: {
     path: "/v1/invoices",
     httpMethod: "GET",
-    description: "Get a list of all invoices",
   },
   channelbalance: {
     path: "/v1/balance/channels",
     httpMethod: "GET",
-    description: "Get a report on the total funds across all open channels",
   },
   walletbalance: {
     path: "/v1/balance/blockchain",
     httpMethod: "GET",
-    description: "Get the total unspent outputs of the wallet",
   },
   openchannel: {
     path: "/v1/channels",
     httpMethod: "POST",
-    description: "Open a new channel",
   },
   connectpeer: {
     path: "/v1/peers",
     httpMethod: "POST",
-    description: "Establish a connection to a remote peer",
   },
   disconnectpeer: {
     path: "/v1/peers/{{pub_key}}",
     httpMethod: "DELETE",
-    description: "Disconnect from a remote peer",
   },
   estimatefee: {
     path: "/v1/transactions/fee",
     httpMethod: "GET",
-    description: "Estimate the fee rate and total fees for a transaction",
   },
   getchaninfo: {
     path: "/v1/graph/edge/{{chan_id}}",
     httpMethod: "GET",
-    description: "Get the network announcement for the given channel",
   },
   getnetworkinfo: {
     path: "/v1/graph/info",
     httpMethod: "GET",
-    description: "Get basic stats about the known channel graph",
   },
   getnodeinfo: {
     path: "/v1/graph/node/{{pub_key}}",
     httpMethod: "GET",
-    description: "Get the channel information for a node",
   },
   gettransactions: {
     path: "/v1/transactions",
     httpMethod: "GET",
-    description: "Get a list of all transactions relevant to the wallet",
   },
   listpayments: {
     path: "/v1/payments",
     httpMethod: "GET",
-    description: "list of all outgoing payments",
   },
   listpeers: {
     path: "/v1/peers",
     httpMethod: "GET",
-    description: "list all currently active peers",
   },
   lookupinvoice: {
     path: "/v1/invoice/{{r_hash_str}}",
     httpMethod: "GET",
-    description: "Look up invoice details",
   },
   queryroutes: {
     path: "/v1/graph/routes/{{pub_key}}/{{amt}}",
     httpMethod: "GET",
-    description: "Query for a possible route",
   },
   verifymessage: {
     path: "/v1/verifymessage",
     httpMethod: "POST",
-    description: "Verify a signature over a msg",
   },
   sendtoroute: {
     path: "/v1/channels/transactions/route",
     httpMethod: "POST",
-    description: "Make a payment via the specified route",
   },
   decodepayreq: {
     path: "/v1/payreq/{{pay_req}}",
     httpMethod: "GET",
-    description: "Decode a payment request string",
   },
 };
 
@@ -165,8 +145,8 @@ class Lnd implements Connector {
     return Object.keys(methods);
   }
 
-  methodDescription(method: string): string {
-    return methods[method].description;
+  methodDescription(method: string) {
+    return `lnd.${method}`;
   }
 
   async requestMethod(
