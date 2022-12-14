@@ -1,9 +1,9 @@
-import Button from "@components/Button";
 import PublisherCard from "@components/PublisherCard";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Button from "~/app/components/Button";
 import lnurlLib from "~/common/lib/lnurl";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 import type { Battery } from "~/types";
@@ -81,12 +81,12 @@ export const PublisherLnData: FC<Props> = ({ lnData }) => {
         isCard={false}
         isSmall={false}
       >
-        <Button
-          onClick={sendSatoshis}
-          label={t("actions.send_satoshis")}
-          primary
-          loading={loadingSendSats}
-        />
+        <div className="flex gap-2">
+          <Button label=<>🍬<br/> 5k</> onClick={() => onClick("5000")} fullWidth className="w-10" />
+          <Button label=<>☕<br/> 1k</> onClick={() => onClick("5000")} fullWidth />
+          <Button label=<>🍕<br/> 5k</> onClick={() => onClick("5000")} fullWidth />
+          <Button label=<>🌯 50k</> onClick={() => onClick("5000")} fullWidth />
+        </div>
       </PublisherCard>
     </div>
   );
