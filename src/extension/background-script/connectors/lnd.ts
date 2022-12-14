@@ -145,10 +145,6 @@ class Lnd implements Connector {
     return Object.keys(methods);
   }
 
-  methodDescription(method: string) {
-    return `lnd.${method}`;
-  }
-
   async requestMethod(
     method: string,
     args: Record<string, unknown>

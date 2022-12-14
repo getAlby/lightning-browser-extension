@@ -107,8 +107,7 @@ const supportedMethods: string[] = [
   "sendpay",
   "setchannel",
   "signmessage",
-]
-
+];
 
 export default class Commando implements Connector {
   config: Config;
@@ -141,10 +140,6 @@ export default class Commando implements Connector {
 
   get supportedMethods() {
     return supportedMethods;
-  }
-
-  methodDescription(method: string) {
-    return `commando.${method}`;
   }
 
   async requestMethod(
