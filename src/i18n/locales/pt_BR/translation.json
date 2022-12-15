@@ -111,12 +111,8 @@
         }
       },
       "lndhub": {
-        "description": "Conectar carteira Bluewallet",
         "page": {
           "description": "Na BlueWallet, abra a carteira que você deseja conectar, clique em \"...\", clique em Exportar/Backup para exibir o código QR. Leia o código QR com sua webcam."
-        },
-        "errors": {
-          "invalid_uri": "URI LNDHub inválida"
         }
       },
       "lnbits": {
