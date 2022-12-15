@@ -89,7 +89,7 @@ export async function authFunction({
     );
 
     // if the service returned with a HTTP 200 we still check if the response data is OK
-    if (authResponse?.data.status.toUpperCase() !== "OK") {
+    if (authResponse?.data.status?.toUpperCase() !== "OK") {
       throw new Error(
         authResponse?.data?.reason || "Auth: Something went wrong"
       );
