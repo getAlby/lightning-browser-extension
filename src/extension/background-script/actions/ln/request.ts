@@ -13,9 +13,14 @@ const request = async (
 
   const { origin, args } = message;
 
-  const methodInLowerCase = args.method.toLowerCase();
-
   try {
+    // // check first if method exists, otherwise toLowerCase() will fail with a TypeError
+    if (!args.method || typeof args.method !== "string") {
+      throw new Error("Request method is missing or not correct");
+    }
+
+    const methodInLowerCase = args.method.toLowerCase();
+
     // Check if the current connector support the call
     // connectors maybe do not support `requestMethod` at all
     // connectors also specify a whitelist of supported methods that can be called

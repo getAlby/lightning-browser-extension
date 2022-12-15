@@ -145,6 +145,23 @@ describe("ln request", () => {
         error: "Some API error",
       });
     });
+
+    test("if the message args are not correct", async () => {
+      const messageWithoutMethod = {
+        ...message,
+        args: {
+          ...message.args,
+          method: undefined,
+        },
+      } as unknown as MessageGenericRequest;
+
+      const result = await request(messageWithoutMethod);
+
+      expect(console.error).toHaveBeenCalledTimes(1);
+      expect(result).toStrictEqual({
+        error: "Request method is missing or not correct",
+      });
+    });
   });
 
   describe("directly calls requestMethod of Connector with method and params", () => {
