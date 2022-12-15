@@ -160,6 +160,9 @@ describe("ln request", () => {
         message.args.method.toLowerCase(),
         message.args.params
       );
+
+      expect(utils.openPrompt).not.toHaveBeenCalled();
+
       expect(result).toStrictEqual(requestResponse);
     });
   });
