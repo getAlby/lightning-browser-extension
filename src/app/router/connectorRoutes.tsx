@@ -9,11 +9,9 @@ import ConnectMyNode from "@screens/connectors/ConnectMyNode";
 import ConnectRaspiBlitz from "@screens/connectors/ConnectRaspiBlitz";
 import ConnectStart9 from "@screens/connectors/ConnectStart9";
 import ConnectUmbrel from "@screens/connectors/ConnectUmbrel";
-import NewWallet from "@screens/connectors/NewWallet";
 import i18n from "~/i18n/i18nConfig";
 
 import ConnectCommando from "../screens/connectors/ConnectCommando";
-import alby from "/static/assets/icons/alby.png";
 import btcpay from "/static/assets/icons/btcpay.svg";
 import citadel from "/static/assets/icons/citadel.png";
 import core_ln from "/static/assets/icons/core_ln.svg";
@@ -36,13 +34,6 @@ const galoyPaths: { [key: string]: keyof typeof galoyUrls } = {
 
 function getConnectorRoutes() {
   return [
-    {
-      path: "create-wallet",
-      element: <NewWallet />,
-      title: i18n.t("translation:choose_connector.alby.title"),
-      description: i18n.t("translation:choose_connector.alby.description"),
-      logo: alby,
-    },
     {
       path: "lnd",
       element: <ConnectLnd />,
