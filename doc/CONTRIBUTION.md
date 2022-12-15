@@ -30,7 +30,7 @@ When creating a PR please take this points as a reminder:
 - Think in iterations (babysteps)\
   You can always start a PR and if you feel like adding on more things to it, better branch off and [create a new i.e. _draft_-PR](https://github.blog/2019-02-14-introducing-draft-pull-requests/)
 - Newly added components should have a unit-test
-- If you work on a more complex PR please [join our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2) to get feedback, discuss the best way to tackle the challenge, and to ensure that there's no duplication of work. It's often faster and nicer to chat or call about questions than to do ping-pong comments in PRs
+- If you work on a more complex PR please [join our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2) (Invite link at https://bitcoin.design/) to get feedback, discuss the best way to tackle the challenge, and to ensure that there's no duplication of work. It's often faster and nicer to chat or call about questions than to do ping-pong comments in PRs
 
 ### Code format & preferences
 
@@ -48,6 +48,10 @@ For better support we recommend these extensions:
 - [prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [vscode-tailwindcss](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
 - [vscode-html-css](https://marketplace.visualstudio.com/items?itemName=ecmel.vscode-html-css)
+
+### Branch names
+
+Please prefix your branch names with `feature/`, `fix/`, `chore/`, `refactor/`, `docs/` based on the intent of the branch or issue being addressed (see commit message format below).
 
 ### Commit message format
 
