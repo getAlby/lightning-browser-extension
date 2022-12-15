@@ -9,7 +9,7 @@ import alby from "/static/assets/icons/alby.png";
 
 type Props = {
   title: string;
-  description?: string;
+  description: string;
 };
 
 export default function ChooseConnectorPath({ title, description }: Props) {

@@ -13,7 +13,7 @@ export default function ChooseConnector({ title, description }: Props) {
     connectorRoutes = getConnectorRoutes();
   });
   return (
-    <div className="relative my-14 lg:grid  lg:gap-8 text-center">
+    <div className="relative my-14 lg:grid lg:gap-8 text-center">
       <div className="relative">
         <div className="mb-6">
           <h1 className="text-3xl font-bold dark:text-white">{title}</h1>
