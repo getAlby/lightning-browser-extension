@@ -5,7 +5,7 @@
       "nav": {
         "welcome": "Welcome",
         "password": "Your Password",
-        "connect": "Create or Connect Wallet",
+        "connect": "Your Lightning account",
         "done": "Done"
       },
       "intro": {
