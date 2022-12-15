@@ -9,7 +9,9 @@ const { getByText, getByLabelText, findByLabelText, findByText } = queries;
 const user = USER.SINGLE();
 
 const commonCreateWalletUserCreate = async (
-  connectToLightningWallet = true
+  options: { connectToLightningWallet: boolean } = {
+    connectToLightningWallet: true,
+  }
 ) => {
   const { page, browser } = await loadExtension();
 
@@ -50,7 +52,7 @@ const commonCreateWalletUserCreate = async (
 
   await findByText($document, "Create or Connect Wallet");
 
-  if (connectToLightningWallet) {
+  if (options.connectToLightningWallet) {
     const chooseConnectorButton = await findByText(
       $document,
       "Connect to Lightning Wallet"
@@ -84,7 +86,7 @@ const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
 test.describe("Create or connect wallets", () => {
   test("successfully creates an Alby wallet", async () => {
     const { user, browser, page, $document } =
-      await commonCreateWalletUserCreate(false);
+      await commonCreateWalletUserCreate({ connectToLightningWallet: false });
 
     // click at "Create Alby Wallet"
     const createNewWalletButton = await getByText($document, "Create new");
