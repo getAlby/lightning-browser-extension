@@ -228,7 +228,7 @@ describe("ln request", () => {
       // prepare DB with a permission
       await db.permissions.bulkAdd([permissionInDB]);
 
-      const messageWithOtherPermission = {
+      const messageWithGetInfo = {
         ...message,
         args: {
           ...message.args,
@@ -241,19 +241,29 @@ describe("ln request", () => {
         await db.permissions.get({ method: "webln/getinfo" })
       ).toBeUndefined();
 
-      const result = await request(messageWithOtherPermission);
+      const result = await request(messageWithGetInfo);
 
       expect(utils.openPrompt).toHaveBeenCalledTimes(1);
 
       expect(connector.requestMethod).toHaveBeenCalledWith(
-        messageWithOtherPermission.args.method.toLowerCase(),
-        messageWithOtherPermission.args.params
+        messageWithGetInfo.args.method.toLowerCase(),
+        messageWithGetInfo.args.params
       );
 
       expect(await db.permissions.toArray()).toHaveLength(2);
-      expect(
-        await db.permissions.get({ method: "webln/getinfo" })
-      ).toBeDefined();
+
+      const addedPermission = await db.permissions.get({
+        method: "webln/getinfo",
+      });
+      expect(addedPermission).toEqual(
+        expect.objectContaining({
+          method: "webln/getinfo",
+          enabled: true,
+          allowanceId: allowanceInDB.id,
+          host: allowanceInDB.host,
+          blocked: false,
+        })
+      );
 
       expect(result).toStrictEqual(requestResponse);
     });
