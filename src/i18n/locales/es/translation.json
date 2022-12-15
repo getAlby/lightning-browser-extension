@@ -111,18 +111,12 @@
         }
       },
       "lndhub": {
-        "title": "LNDHub (billetera Bluewallet)",
         "description": "Conéctese a su billetera móvil Blue Wallet",
         "page": {
-          "title": "Conéctese a LNDHub (BlueWallet)",
           "description": "En la billetera BlueWallet, elija la billetera que desea conectar, ábrala, haga clic en\"...\", haga clic en Exportar / Copia de seguridad para mostrar el código QR y escanearlo con su cámara web."
         },
-        "uri": {
-          "label": "Exportar URI de LNDHub"
-        },
         "errors": {
-          "invalid_uri": "URI de LNDHub no válido",
-          "connection_failed": "La conexión falló. ¿Es correcto el URI de LNDHub?"
+          "invalid_uri": "URI de LNDHub no válido"
         }
       },
       "lnbits": {
@@ -274,7 +268,6 @@
       "allow": "Permitir que {{host}}:",
       "request1": "Solicitar aprobación de transacciones",
       "request2": "Solicitar facturas e información sobre rayos",
-      "connect": "Conectar",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "title": "Conectar"
     },
@@ -384,8 +377,7 @@
         "title": "Esperando para escanear"
       },
       "input": {
-        "label": "Factura, Dirección Lightning o LNURL",
-        "placeholder": "Pegar dirección de factura, lnurl o lightning"
+        "label": "Factura, Dirección Lightning o LNURL"
       }
     },
     "lnurlpay": {

@@ -111,18 +111,12 @@
         }
       },
       "lndhub": {
-        "title": "LNDHub (Bluewallet)",
         "description": "Conectar carteira Bluewallet",
         "page": {
-          "title": "Conecte na LNDHub (BlueWallet)",
           "description": "Na BlueWallet, abra a carteira que você deseja conectar, clique em \"...\", clique em Exportar/Backup para exibir o código QR. Leia o código QR com sua webcam."
         },
-        "uri": {
-          "label": "Exportar URI LNDHub"
-        },
         "errors": {
-          "invalid_uri": "URI LNDHub inválida",
-          "connection_failed": "Falha na conexão. Tem certeza de que a URI da LNDHub está correta?"
+          "invalid_uri": "URI LNDHub inválida"
         }
       },
       "lnbits": {
@@ -390,7 +384,6 @@
       "allow": "Permitir {{host}}:",
       "request1": "Solicitar aprovação para transações",
       "request2": "Gerar faturas e solicitar informações do servidor",
-      "connect": "Conectar",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "title": "Conectar",
       "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site."
@@ -516,7 +509,6 @@
       },
       "input": {
         "label": "Destinatário",
-        "placeholder": "Cole uma fatura, lnurl ou um endereço relâmpago",
         "hint": "Fatura, Endereço Relâmpago ou LNURL"
       }
     },
@@ -668,7 +660,6 @@
     "confirm_request_permission": {
       "title": "Aprovar Solicitação",
       "allow": "Permitir {{host}}:",
-      "enable_method": "Chamar {{method}}",
       "always_allow": "Sempre permitir {{method}} em {{host}}"
     }
   },
