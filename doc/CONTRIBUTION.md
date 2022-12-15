@@ -51,7 +51,7 @@ For better support we recommend these extensions:
 
 ### Branch names
 
-Please prefix your branch names with `feature/`, `fix/`, `chore/`, `refactor/`, `docs/` based on the intent of the branch or issue being addressed (see commit message format below).
+Please prefix your branch names with `feat/`, `fix/`, `chore/`, `refactor/`, `docs/` based on the intent of the branch or issue being addressed (see commit message format below).
 
 ### Commit message format
 
