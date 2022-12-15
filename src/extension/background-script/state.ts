@@ -12,7 +12,7 @@ import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
 import Nostr from "./nostr";
 
-export interface State {
+interface State {
   account: Account | null;
   accounts: Accounts;
   migrations: Migration[] | null;

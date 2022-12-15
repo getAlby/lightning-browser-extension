@@ -1,18 +1,28 @@
 import utils from "~/common/lib/utils";
 import type Connector from "~/extension/background-script/connectors/connector.interface";
 import db from "~/extension/background-script/db";
-import state, { State } from "~/extension/background-script/state";
 import type { MessageGenericRequest, OriginData } from "~/types";
 
 import request from "../request";
 
-jest.mock("~/extension/background-script/state");
+// suppress console logs when running tests
+console.error = jest.fn();
+
 jest.mock("~/common/lib/utils", () => ({
   openPrompt: jest.fn(() => Promise.resolve({ data: {} })),
 }));
 
-// suppress console logs when running tests
-console.error = jest.fn();
+// overwrite "connector" in tests later
+let connector: Connector;
+const ConnectorClass = jest.fn().mockImplementation(() => {
+  return connector;
+});
+
+jest.mock("~/extension/background-script/state", () => ({
+  getState: () => ({
+    getConnector: jest.fn(() => Promise.resolve(new ConnectorClass())),
+  }),
+}));
 
 const allowanceInDB = {
   enabled: true,
@@ -58,22 +68,10 @@ const fullConnector = {
   ],
 } as unknown as Connector;
 
-// overwrite "connector" in test
-let connector: Connector;
-const ConnectorClass = jest.fn().mockImplementation(() => {
-  return connector;
-});
-
-// prepare state
-state.getState = () =>
-  ({
-    getConnector: jest.fn(() => Promise.resolve(new ConnectorClass())),
-  } as unknown as State);
-
 // prepare DB with allowance
 db.allowances.bulkAdd([allowanceInDB]);
 
-// reset after every test
+// resets after every test
 afterEach(async () => {
   jest.clearAllMocks();
   // ensure a clear permission table in DB
