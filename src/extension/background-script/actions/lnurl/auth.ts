@@ -7,11 +7,11 @@ import utils from "~/common/lib/utils";
 import HashKeySigner from "~/common/utils/signer";
 import state from "~/extension/background-script/state";
 import {
-  MessageLnurlAuth,
-  LNURLDetails,
-  LnurlAuthResponse,
-  OriginData,
   AuthResponseObject,
+  LnurlAuthResponse,
+  LNURLDetails,
+  MessageLnurlAuth,
+  OriginData,
 } from "~/types";
 
 const LNURLAUTH_CANONICAL_PHRASE =
@@ -44,6 +44,7 @@ export async function authFunction({
       key_index: 0,
     },
   });
+
   const lnSignature = signResponse.data.signature;
 
   // make sure we got a signature
@@ -64,6 +65,7 @@ export async function authFunction({
   } else {
     linkingKeyPriv = hmacSHA256(url.host, Hex.parse(hashingKey)).toString(Hex);
   }
+
   // make sure we got a hashingKey and a linkingkey (just to be sure for whatever reason)
   if (!hashingKey || !linkingKeyPriv) {
     throw new Error("Invalid hashingKey/linkingKey");
