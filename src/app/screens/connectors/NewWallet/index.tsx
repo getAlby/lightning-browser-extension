@@ -33,7 +33,7 @@ export default function NewWallet() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
-    keyPrefix: "choose_connector.alby",
+    keyPrefix: "alby",
   });
   const { t: tCommon } = useTranslation("common");
 

@@ -5,7 +5,7 @@
       "nav": {
         "welcome": "Welcome",
         "password": "Your Password",
-        "connect": "Your Lightning account",
+        "connect": "Create or Connect Wallet",
         "done": "Done"
       },
       "intro": {
@@ -44,6 +44,9 @@
           "mismatched_password": "Passwords don't match."
         }
       },
+      "choose_path": {
+        "description": "Start by creating a new Alby Wallet, logging in to an existing one or connecting lightning wallet. You will be able to connect and manage more wallets later as well!"
+      },
       "test_connection": {
         "ready": "Awesome, you’re ready to go!",
         "tutorial": "Now you’ve connected your wallet would you like to go through a tutorial?",
@@ -58,38 +61,52 @@
         }
       }
     },
-    "choose_connector": {
-      "title": {
-        "welcome": "Do you have a lightning wallet?",
-        "options": "Add a new lightning account"
-      },
-      "description": "You need to first connect to a lightning wallet so that you can interact with your favorite websites that accept bitcoin lightning payments!",
+    "choose_path": {
+      "title": "Create or Connect Wallet",
+      "description": "Create a new Alby Wallet, log in to an existing one or connect to an external wallet or node",
       "alby": {
         "title": "Alby Wallet",
-        "description": "Create or login to your Alby account",
-        "pre_connect": {
-          "title": "Your Alby Lightning Wallet",
-          "login_account": "Create or login to your Alby account.",
-          "host_wallet": "We host a Lightning wallet for you!",
-          "email": {
-            "label": "Email Address"
-          },
-          "optional_lightning_note": {
-            "part1": "Your Alby account also comes with an optional",
-            "part2": "Lightning Address",
-            "part3": ". This is a simple way for anyone to send you Bitcoin on the Lightning Network.",
-            "part4": "learn more"
-          },
-          "optional_lightning_address": {
-            "label": "Choose your Lightning Address (optional)",
-            "suffix": "@getalby.com",
-            "title": "numbers and letters, at least 3 characters"
-          },
-          "errors": {
-            "create_wallet_error": "Failed to login or create a new account. If you need help, please contact support@getalby.com"
-          }
-        }
+        "description": "Create or log in to your Alby Wallet",
+        "create_new": "Create new"
       },
+      "other": {
+        "title": "Other Wallets",
+        "description": "Connect to your external lightning wallet or node",
+        "and_more": "and more...",
+        "connect": "Connect to Lightning Wallet"
+      }
+    },
+    "alby": {
+      "create_wallet": {
+        "title": "Alby Wallet",
+        "description": "Create or login to your Alby account"
+      },
+      "pre_connect": {
+        "title": "Your Alby Lightning Wallet",
+        "login_account": "Create or login to your Alby account.",
+        "host_wallet": "We host a Lightning wallet for you!",
+        "email": {
+          "label": "Email Address"
+        },
+        "optional_lightning_note": {
+          "part1": "Your Alby account also comes with an optional",
+          "part2": "Lightning Address",
+          "part3": ". This is a simple way for anyone to send you Bitcoin on the Lightning Network.",
+          "part4": "learn more"
+        },
+        "optional_lightning_address": {
+          "label": "Choose your Lightning Address (optional)",
+          "suffix": "@getalby.com",
+          "title": "numbers and letters, at least 3 characters"
+        },
+        "errors": {
+          "create_wallet_error": "Failed to login or create a new account. If you need help, please contact support@getalby.com"
+        }
+      }
+    },
+    "choose_connector": {
+      "title": "Connect Lightning Wallet",
+      "description": "Connect to your external lightning wallet or node",
       "lnd": {
         "title": "LND",
         "description": "Connect to your LND node",
@@ -696,7 +713,8 @@
       "close": "Close",
       "export": "Export",
       "remove": "Remove",
-      "copy": "Copy"
+      "copy": "Copy",
+      "log_in": "Log in"
     },
     "errors": {
       "connection_failed": "Connection failed",
