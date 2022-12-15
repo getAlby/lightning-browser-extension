@@ -109,7 +109,6 @@
       "description": "Connect to your external lightning wallet or node",
       "lnd": {
         "title": "LND",
-        "description": "Connect to your LND node",
         "page": {
           "title": "Connect to your LND node",
           "description": "You need your node URL and a macaroon with read and send permissions (e.g. admin.macaroon)"
@@ -129,7 +128,6 @@
       },
       "lndhub_bluewallet": {
         "title": "Bluewallet",
-        "description": "Connect to your Bluewallet mobile wallet",
         "page": {
           "title": "Connect to BlueWallet",
           "description": "In BlueWallet, choose the wallet you want to connect, open it, click on \"...\", click on Export/Backup to display the QR code and scan it with your webcam."
@@ -144,7 +142,6 @@
       },
       "lndhub_go": {
         "title": "LNDHub",
-        "description": "Connect to your LNDHub account",
         "page": {
           "title": "Connect to LNDHub",
           "description": "Input your LNDHub credential URI here or scan the QR code with your webcam."
@@ -159,7 +156,6 @@
       },
       "lnbits": {
         "title": "LNbits",
-        "description": "Connect to your LNbits account",
         "page": {
           "title": "Connect to <0>LNbits</0>",
           "instructions": "In LNbits, choose the wallet you want to connect, open it, click on API Info and copy the Admin Key. Paste it below:"
@@ -177,7 +173,6 @@
       },
       "eclair": {
         "title": "Eclair",
-        "description": "Connect to your Eclair node",
         "page": {
           "title": "Connect to <0>Eclair</0>",
           "instructions": "You need your Eclair URL and password."
@@ -192,7 +187,6 @@
       },
       "citadel": {
         "title": "Citadel",
-        "description": "Connect to your local Citadel",
         "page": {
           "title": "Connect to <0>Citadel</0> node",
           "instructions": "This currently doesn't work if 2FA is enabled."
@@ -207,7 +201,6 @@
       },
       "umbrel": {
         "title": "Umbrel",
-        "description": "Connect to your Umbrel",
         "page": {
           "title": "Connect to <0>Umbrel</0> node",
           "instructions": "In your Umbrel dashboard go to <0>Connect Wallet</0>. Select <0>lndconnect REST</0> and copy the <0>lndconnect URL</0>. (Depending on your setup you can either use the local connection or the Tor connection.)"
@@ -219,7 +212,6 @@
       },
       "mynode": {
         "title": "myNode",
-        "description": "Connect to your myNode",
         "page": {
           "title": "Connect to <0>myNode</0>",
           "instructions": "On your myNode homepage click on the <0>Wallet</0> button for your <0>Lightning</0> service.<1/> Now click on the <0>Pair Wallet</0> button under the <0>Status</0> tab. Enter your password when prompted.<1/> Select the dropdown menu and choose a pairing option. Depending on your setup you can either use the <0>Lightning (REST + Local IP)</0> connection or the <0>Lightning (REST + Tor)</0> connection."
@@ -231,7 +223,6 @@
       },
       "start9": {
         "title": "Start9",
-        "description": "Connect to your Embassy",
         "page": {
           "title": "Connect to your <0>Embassy</0> node",
           "instructions": "<0>Note:</0> Currently we only support LND but we will be adding c-lightning support in the future!<1/>On your Embassy dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
@@ -243,7 +234,6 @@
       },
       "raspiblitz": {
         "title": "RaspiBlitz",
-        "description": "Connect to your RaspiBlitz",
         "page": {
           "title": "Connect to your <0>RaspiBlitz</0> node",
           "instructions1": "You need your node onion address, port, and a macaroon with read and send permissions (e.g. admin.macaroon).<1/><1/><0>SSH</0> into your <0>RaspiBlitz</0>.<1/>Run the command <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Copy and paste the <0>.onion</0> address in the input below.<1/>Add your <0>port</0> after the onion address, the default port is <0>:8080</0>.",
@@ -256,14 +246,12 @@
       },
       "bitcoin_beach": {
         "title": "Bitcoin Beach Wallet",
-        "description": "Create or connect to a Bitcoin Beach (Galoy) account",
         "page": {
           "title": "Connect to <0>Bitcoin Beach Wallet</0>"
         }
       },
       "bitcoin_jungle": {
         "title": "Bitcoin Jungle Wallet",
-        "description": "Create or connect to a Bitcoin Jungle (Galoy) account",
         "page": {
           "title": "Connect to <0>Bitcoin Jungle Wallet</0>"
         }
@@ -293,7 +281,6 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "description": "Connect to your BTCPay LND node",
         "page": {
           "title": "Connect to your BTCPay LND node",
           "instructions": "Navigate to your BTCPayServer and log in as an admin. Go to Server Settings > Services > LND Rest - See information. Then Click \"See QR Code information\" and copy the QR Code data. Paste it below:"
@@ -308,7 +295,6 @@
       },
       "commando": {
         "title": "Core Lightning",
-        "description": "Connect to your Core Lightning node",
         "page": {
           "title": "Connect to your Core Lightning node",
           "instructions": "Make sure you have Core Lightning version 0.12.0 or newer, the commando plugin is running and your node is accessible over the Lightning Network. Create a rune by running 'lightning-cli commando-rune'."

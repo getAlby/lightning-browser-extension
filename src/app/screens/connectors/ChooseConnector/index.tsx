@@ -24,14 +24,8 @@ export default function ChooseConnector({ title, description }: Props) {
           )}
         </div>
         <div className="grid grid-cols-5 gap-5">
-          {connectorRoutes.map(({ path, title, description, logo }) => (
-            <LinkButton
-              key={path}
-              to={path}
-              title={title}
-              description={description}
-              logo={logo}
-            />
+          {connectorRoutes.map(({ path, title, logo }) => (
+            <LinkButton key={path} to={path} title={title} logo={logo} />
           ))}
         </div>
       </div>
