@@ -37,6 +37,10 @@ class Eclair implements Connector {
     return Promise.resolve();
   }
 
+  get supportedMethods() {
+    return ["getInfo", "keysend", "makeInvoice", "sendPayment", "signMessage"];
+  }
+
   getInfo(): Promise<GetInfoResponse> {
     return this.request("/getinfo", undefined).then((data) => {
       return {

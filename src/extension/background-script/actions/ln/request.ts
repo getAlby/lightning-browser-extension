@@ -55,7 +55,8 @@ const request = async (
       }>({
         args: {
           requestPermission: {
-            method: method,
+            method,
+            description: `${connector.constructor.name.toLowerCase()}.${method}`,
           },
         },
         origin,

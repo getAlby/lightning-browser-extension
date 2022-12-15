@@ -87,7 +87,7 @@ function Enable(props: Props) {
           />
 
           <div className="dark:text-white pt-6 mb-4">
-            <p className="mb-2">{t("allow", { host: props.origin.host })}</p>
+            <p className="mb-2">{t("allow")}</p>
 
             <div className="mb-2 flex items-center">
               <CheckIcon className="w-5 h-5 mr-2" />

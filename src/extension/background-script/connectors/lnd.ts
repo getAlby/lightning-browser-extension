@@ -28,6 +28,104 @@ interface Config {
   url: string;
 }
 
+const methods: Record<string, Record<string, string>> = {
+  getinfo: {
+    path: "/v1/getinfo",
+    httpMethod: "GET",
+  },
+  listchannels: {
+    path: "/v1/channels",
+    httpMethod: "GET",
+  },
+  listinvoices: {
+    path: "/v1/invoices",
+    httpMethod: "GET",
+  },
+  channelbalance: {
+    path: "/v1/balance/channels",
+    httpMethod: "GET",
+  },
+  walletbalance: {
+    path: "/v1/balance/blockchain",
+    httpMethod: "GET",
+  },
+  openchannel: {
+    path: "/v1/channels",
+    httpMethod: "POST",
+  },
+  connectpeer: {
+    path: "/v1/peers",
+    httpMethod: "POST",
+  },
+  disconnectpeer: {
+    path: "/v1/peers/{{pub_key}}",
+    httpMethod: "DELETE",
+  },
+  estimatefee: {
+    path: "/v1/transactions/fee",
+    httpMethod: "GET",
+  },
+  getchaninfo: {
+    path: "/v1/graph/edge/{{chan_id}}",
+    httpMethod: "GET",
+  },
+  getnetworkinfo: {
+    path: "/v1/graph/info",
+    httpMethod: "GET",
+  },
+  getnodeinfo: {
+    path: "/v1/graph/node/{{pub_key}}",
+    httpMethod: "GET",
+  },
+  gettransactions: {
+    path: "/v1/transactions",
+    httpMethod: "GET",
+  },
+  listpayments: {
+    path: "/v1/payments",
+    httpMethod: "GET",
+  },
+  listpeers: {
+    path: "/v1/peers",
+    httpMethod: "GET",
+  },
+  lookupinvoice: {
+    path: "/v1/invoice/{{r_hash_str}}",
+    httpMethod: "GET",
+  },
+  queryroutes: {
+    path: "/v1/graph/routes/{{pub_key}}/{{amt}}",
+    httpMethod: "GET",
+  },
+  verifymessage: {
+    path: "/v1/verifymessage",
+    httpMethod: "POST",
+  },
+  sendtoroute: {
+    path: "/v1/channels/transactions/route",
+    httpMethod: "POST",
+  },
+  decodepayreq: {
+    path: "/v1/payreq/{{pay_req}}",
+    httpMethod: "GET",
+  },
+};
+
+const pathTemplateParser = (
+  template: string,
+  data: Record<string, unknown>
+): string => {
+  return template.replace(/{{(.*?)}}/g, (match) => {
+    const key = match.split(/{{|}}/).filter(Boolean)[0];
+    const value = data[key];
+    if (value === undefined) {
+      throw new Error(`Missing parameter ${key}`);
+    }
+    delete data[key];
+    return String(value); // typecast to string
+  });
+};
+
 class Lnd implements Connector {
   config: Config;
 
@@ -41,6 +139,31 @@ class Lnd implements Connector {
 
   unload() {
     return Promise.resolve();
+  }
+
+  get supportedMethods() {
+    return Object.keys(methods);
+  }
+
+  async requestMethod(
+    method: string,
+    args: Record<string, unknown>
+  ): Promise<{ data: unknown }> {
+    const methodDetails = methods[method];
+    if (!methodDetails) {
+      throw new Error(`${method} is not supported`);
+    }
+    const httpMethod = methodDetails.httpMethod;
+    let path = methodDetails.path;
+    // add path parameters from the args hash and remove those attributes from args
+    // e.g. pathTemplateParser('invoice/{{r_hash_str}}', {r_hash_str: 'foo'})
+    //   will return invoice/foo and delete r_hash_str from the args object;
+    path = pathTemplateParser(path, args);
+    const response = await this.request(httpMethod, path, args);
+
+    return {
+      data: response,
+    };
   }
 
   getInfo(): Promise<GetInfoResponse> {
@@ -313,7 +436,7 @@ class Lnd implements Connector {
     };
   }
 
-  async request<Type>(
+  protected async request<Type>(
     method: string,
     path: string,
     args?: Record<string, unknown>,
