@@ -80,6 +80,17 @@ const utils = {
             tabId = window.tabs[0].id;
           }
 
+          // make sure that the prompt is always focussed
+          // this interval focusses the prompt every 2 secons to make sure it is not hidden and
+          // that it draws the user's attention to the popup
+          const focusInterval = setInterval(() => {
+            if (!window.id) {
+              return;
+            } // mainly for TS I guess
+            browser.windows.update(window.id, {
+              focused: true,
+            });
+          }, 2100);
           const onMessageListener = (
             responseMessage: {
               response?: unknown;
@@ -94,6 +105,7 @@ const utils = {
               sender.tab &&
               sender.tab.id === tabId
             ) {
+              clearInterval(focusInterval);
               browser.tabs.onRemoved.removeListener(onRemovedListener);
               if (sender.tab.windowId) {
                 return browser.windows.remove(sender.tab.windowId).then(() => {
@@ -110,6 +122,7 @@ const utils = {
           };
 
           const onRemovedListener = (tid: number) => {
+            clearInterval(focusInterval);
             if (tabId === tid) {
               browser.runtime.onMessage.removeListener(onMessageListener);
               reject(new Error(ABORT_PROMPT_ERROR));
