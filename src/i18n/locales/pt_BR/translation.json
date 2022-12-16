@@ -110,11 +110,6 @@
           "connection_failed": "Falha na conexão. As credenciais LND estão corretas?"
         }
       },
-      "lndhub": {
-        "page": {
-          "description": "Na BlueWallet, abra a carteira que você deseja conectar, clique em \"...\", clique em Exportar/Backup para exibir o código QR. Leia o código QR com sua webcam."
-        }
-      },
       "lnbits": {
         "title": "LNbits",
         "description": "Conectar em uma conta LNbits",
