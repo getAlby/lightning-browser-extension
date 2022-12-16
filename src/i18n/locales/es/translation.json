@@ -110,11 +110,6 @@
           "connection_failed": "La conexión falló. ¿Son correctas sus credenciales de LND?"
         }
       },
-      "lndhub": {
-        "page": {
-          "description": "En la billetera BlueWallet, elija la billetera que desea conectar, ábrala, haga clic en\"...\", haga clic en Exportar / Copia de seguridad para mostrar el código QR y escanearlo con su cámara web."
-        }
-      },
       "lnbits": {
         "title": "Cuenta LNbits",
         "description": "Conéctese a su cuenta de LNbits",
