@@ -45,7 +45,7 @@ const utils = {
   openUrl: (url: string) => {
     browser.tabs.create({ url });
   },
-  openPrompt: <Type>(message: {
+  openPrompt: async <Type>(message: {
     args: Record<string, unknown>;
     origin: OriginData | OriginDataInternal;
     action: string;
@@ -66,13 +66,41 @@ const utils = {
       "prompt.html"
     )}?${urlParams.toString()}`;
 
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
+      async function getPosition(w, h) {
+        let left = 0;
+        let top = 0;
+        try {
+          const lastFocused = await browser.windows.getLastFocused();
+          // Position window in top right corner of lastFocused window.
+          top = lastFocused.top;
+          left = lastFocused.left + (lastFocused.width - w);
+          // Centered
+          // top = lastFocused.top + (lastFocused.height - h) / 2;
+          // left = lastFocused.left + (lastFocused.width - w) / 2;
+        } catch (_) {
+          // The following properties are more than likely 0, due to being
+          // opened from the background chrome process for the extension that
+          // has no physical dimensions
+          const { screenX, screenY, outerWidth } = window;
+          top = Math.max(screenY, 0);
+          left = Math.max(screenX + (outerWidth - w), 0);
+        }
+        return {
+          top,
+          left,
+        };
+      }
+
+      const { top, left } = await getPosition(400, 600);
       browser.windows
         .create({
           url: url,
           type: "popup",
           width: 400,
           height: 600,
+          top: top,
+          left: left,
         })
         .then((window) => {
           let tabId: number | undefined;
@@ -90,7 +118,7 @@ const utils = {
             browser.windows.update(window.id, {
               focused: true,
             });
-          }, 2100);
+          }, 1);
           const onMessageListener = (
             responseMessage: {
               response?: unknown;
