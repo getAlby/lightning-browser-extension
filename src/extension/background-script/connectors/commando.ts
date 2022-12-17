@@ -78,6 +78,37 @@ type CommandoInvoice = {
   paid_at: number;
   payment_hash: string;
 };
+
+const supportedMethods: string[] = [
+  "bkpr-listbalances",
+  "checkmessage",
+  "connect",
+  "decode",
+  "decodepay",
+  "disconnect",
+  "feerates",
+  "fundchannel",
+  "getinfo",
+  "getroute",
+  "invoice",
+  "keysend",
+  "listforwards",
+  "listfunds",
+  "listinvoices",
+  "listnodes",
+  "listoffers",
+  "listpays",
+  "listpeers",
+  "listsendpays",
+  "listtransactions",
+  "multifundchannel",
+  "offer",
+  "pay",
+  "sendpay",
+  "setchannel",
+  "signmessage",
+];
+
 export default class Commando implements Connector {
   config: Config;
   ln: LnMessage;
@@ -105,6 +136,28 @@ export default class Commando implements Connector {
 
   async unload() {
     await this.ln.disconnect();
+  }
+
+  get supportedMethods() {
+    return supportedMethods;
+  }
+
+  async requestMethod(
+    method: string,
+    params: Record<string, unknown>
+  ): Promise<{ data: unknown }> {
+    if (!this.supportedMethods.includes(method)) {
+      throw new Error(`${method} is not supported`);
+    }
+    const response = await this.ln.commando({
+      method,
+      params,
+      rune: this.config.rune,
+    });
+
+    return {
+      data: response,
+    };
   }
 
   async connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse> {
