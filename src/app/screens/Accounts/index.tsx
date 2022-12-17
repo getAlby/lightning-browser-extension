@@ -4,6 +4,7 @@ import {
   WalletIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import AccountLoginInfo from "@components/AccountLoginInfo";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import Loading from "@components/Loading";
@@ -145,6 +146,9 @@ function AccountsScreen() {
                         </p>
                       </div>
                     </div>
+                  </td>
+                  <td className="whitespace-nowrap">
+                    <AccountLoginInfo></AccountLoginInfo>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <Menu as="div" className="relative">

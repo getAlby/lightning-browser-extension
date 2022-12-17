@@ -2,8 +2,18 @@ import add from "./add";
 import deleteAllowance from "./delete";
 import enable from "./enable";
 import get from "./get";
+import getByAccountId from "./getByAccountId";
 import getById from "./getById";
 import list from "./list";
 import updateAllowance from "./update";
 
-export { add, enable, get, getById, list, deleteAllowance, updateAllowance };
+export {
+  add,
+  enable,
+  get,
+  getById,
+  list,
+  deleteAllowance,
+  updateAllowance,
+  getByAccountId,
+};

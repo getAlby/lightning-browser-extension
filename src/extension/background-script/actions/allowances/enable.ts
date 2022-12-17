@@ -12,11 +12,12 @@ const enable = async (
 ) => {
   const isUnlocked = state.getState().isUnlocked();
   const host = message.origin.host || message.args.host;
+  const currentAccountId = await state.getState().currentAccountId;
+
   const allowance = await db.allowances
     .where("host")
     .equalsIgnoreCase(host)
     .first();
-
   if (isUnlocked && allowance && allowance.enabled) {
     return {
       data: { enabled: true },
@@ -56,6 +57,7 @@ const enable = async (
             createdAt: Date.now().toString(),
             lnurlAuth: false,
             tag: "",
+            accountId: currentAccountId,
           });
         }
         await db.saveToStorage();

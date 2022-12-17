@@ -329,6 +329,11 @@ export interface MessageAllowanceGetById extends MessageDefault {
   action: "getAllowanceById";
 }
 
+export interface MessageAllowanceCountByAccount extends MessageDefault {
+  args: { accountId: Allowance["accountId"] };
+  action: "getAllowanceCountByAccountId";
+}
+
 export interface MessageWebLnLnurl extends MessageDefault {
   args: { lnurlEncoded: string };
   public: boolean;
@@ -604,6 +609,7 @@ export interface DbAllowance {
   remainingBudget: number;
   tag: string;
   totalBudget: number;
+  accountId?: string | null;
 }
 export interface Allowance extends Omit<DbAllowance, "id"> {
   id: number;

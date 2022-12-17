@@ -1,12 +1,14 @@
 import type { MessageAllowanceAdd, DbAllowance } from "~/types";
 
 import db from "../../db";
+import state from "../../state";
 
 const add = async (message: MessageAllowanceAdd) => {
   const host = message.args.host;
   const name = message.args.name;
   const imageURL = message.args.imageURL;
   const totalBudget = message.args.totalBudget;
+  const currentAccountId = await state.getState().currentAccountId;
 
   const allowance = await db.allowances
     .where("host")
@@ -35,6 +37,7 @@ const add = async (message: MessageAllowanceAdd) => {
       remainingBudget: totalBudget,
       tag: "",
       totalBudget: totalBudget,
+      accountId: currentAccountId,
     };
     await db.allowances.add(dbAllowance);
   }
