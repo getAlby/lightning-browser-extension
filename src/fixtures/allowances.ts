@@ -27,4 +27,18 @@ export const allowanceFixture: DbAllowance[] = [
     createdAt: "123456",
     tag: "",
   },
+  {
+    enabled: false,
+    host: "makers.bolt.fun",
+    id: 3,
+    imageURL: "https://makers.bolt.fun/favicon.ico",
+    lastPaymentAt: 0,
+    lnurlAuth: true,
+    name: "bolt.fun",
+    remainingBudget: 200,
+    totalBudget: 200,
+    createdAt: "123456",
+    tag: "",
+    accountId: "xxxx-xxxx-xxxx-xxx1",
+  },
 ];

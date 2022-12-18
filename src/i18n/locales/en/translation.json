@@ -718,6 +718,9 @@
         "screen_reader": "Allowance Options"
       }
     },
+    "account_logininfo": {
+      "title": "Websites where you have logged before"
+    },
     "qrcode_scanner": {
       "title": "Scan QR Code",
       "actions": {

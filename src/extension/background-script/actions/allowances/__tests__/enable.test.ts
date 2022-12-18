@@ -3,18 +3,17 @@ import utils from "~/common/lib/utils";
 import db from "~/extension/background-script/db";
 import state from "~/extension/background-script/state";
 import { allowanceFixture } from "~/fixtures/allowances";
+import { backgroundState } from "~/fixtures/state";
 import type { DbAllowance, MessageAllowanceEnable } from "~/types";
 
 import enableAllowance from "../enable";
 
 jest.mock("~/extension/background-script/state");
 
-const defaultMockState = {
-  password: "123456",
+const defaultMockState = Object.assign(backgroundState, {
   saveToStorage: jest.fn,
-  accounts: {},
   isUnlocked: jest.fn(() => true),
-};
+});
 
 const mockState = defaultMockState;
 state.getState = jest.fn().mockReturnValue(mockState);

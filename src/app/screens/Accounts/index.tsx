@@ -148,7 +148,7 @@ function AccountsScreen() {
                     </div>
                   </td>
                   <td className="whitespace-nowrap">
-                    <AccountLoginInfo></AccountLoginInfo>
+                    <AccountLoginInfo accountId={accountId}></AccountLoginInfo>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <Menu as="div" className="relative">

@@ -2,10 +2,17 @@ import db from "~/extension/background-script/db";
 import type { MessageAllowanceList, Allowance } from "~/types";
 
 const list = async (message: MessageAllowanceList) => {
-  const dbAllowances = await db.allowances
-    .toCollection()
-    .reverse()
-    .sortBy("lastPaymentAt");
+  const { accountId } = message.args || {};
+  let allowanceQuery;
+  if (accountId) {
+    allowanceQuery = db.allowances
+      .where("accountId")
+      .equalsIgnoreCase(accountId);
+  } else {
+    allowanceQuery = await db.allowances.toCollection();
+  }
+
+  const dbAllowances = await allowanceQuery.reverse().sortBy("lastPaymentAt");
 
   const allowances: Allowance[] = [];
 

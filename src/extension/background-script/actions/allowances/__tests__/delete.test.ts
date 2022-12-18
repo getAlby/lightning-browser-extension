@@ -63,26 +63,21 @@ describe("delete allowance", () => {
       data: true,
     });
 
-    const dbAllowances = await db.allowances
-      .toCollection()
-      .reverse()
-      .sortBy("lastPaymentAt");
+    const dbAllowance = await db.allowances.toCollection().reverse().last();
 
-    expect(dbAllowances).toEqual([
-      {
-        enabled: true,
-        host: "pro.kollider.xyz",
-        id: 1,
-        imageURL: "https://pro.kollider.xyz/favicon.ico",
-        lastPaymentAt: 0,
-        lnurlAuth: true,
-        name: "pro kollider",
-        remainingBudget: 500,
-        totalBudget: 500,
-        createdAt: "123456",
-        tag: "",
-      },
-    ]);
+    expect(dbAllowance).toEqual({
+      enabled: true,
+      host: "pro.kollider.xyz",
+      id: 1,
+      imageURL: "https://pro.kollider.xyz/favicon.ico",
+      lastPaymentAt: 0,
+      lnurlAuth: true,
+      name: "pro kollider",
+      remainingBudget: 500,
+      totalBudget: 500,
+      createdAt: "123456",
+      tag: "",
+    });
 
     const dbPermissions = await db.permissions.toArray();
     expect(dbPermissions).toEqual([mockPermissions[0]]);

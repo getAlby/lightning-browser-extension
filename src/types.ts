@@ -287,6 +287,9 @@ export interface MessageAllowanceAdd extends MessageDefault {
 
 export interface MessageAllowanceList extends MessageDefault {
   action: "listAllowances";
+  args?: {
+    accountId?: Allowance["accountId"];
+  };
 }
 
 export interface MessageInvoices extends Omit<MessageDefault, "args"> {
@@ -327,11 +330,6 @@ export interface MessageAllowanceGet extends MessageDefault {
 export interface MessageAllowanceGetById extends MessageDefault {
   args: { id: Allowance["id"] };
   action: "getAllowanceById";
-}
-
-export interface MessageAllowanceCountByAccount extends MessageDefault {
-  args: { accountId: Allowance["accountId"] };
-  action: "getAllowanceCountByAccountId";
 }
 
 export interface MessageWebLnLnurl extends MessageDefault {
