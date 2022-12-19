@@ -405,6 +405,32 @@
         "description": "你曾经使用过Alby的网站",
         "no_info": "还没有网站。"
       },
+      "tips": {
+        "title": "",
+        "description": "",
+        "top_up_wallet": {
+          "title": "",
+          "description": "",
+          "label1": "",
+          "label2": ""
+        },
+        "pin": {
+          "title": "",
+          "description1": "",
+          "description2": "",
+          "description3": ""
+        },
+        "demo": {
+          "title": "",
+          "description": "",
+          "label1": ""
+        },
+        "address": {
+          "title": "",
+          "description": "",
+          "label1": ""
+        }
+      },
       "publisher": {
         "allowance": {
           "used_budget": "已使用的聪",

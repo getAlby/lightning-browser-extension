@@ -628,6 +628,7 @@ export interface SettingsStorage {
   exchange: SupportedExchanges;
   debug: boolean;
   nostrEnabled: boolean;
+  tips: string[];
 }
 
 export interface Badge {

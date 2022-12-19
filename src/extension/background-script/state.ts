@@ -54,6 +54,7 @@ export const DEFAULT_SETTINGS: SettingsStorage = {
   exchange: "alby",
   debug: false,
   nostrEnabled: false,
+  tips: ["top_up_wallet", "pin", "demo"],
 };
 
 // these keys get synced from the state to the browser storage
