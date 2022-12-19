@@ -81,16 +81,6 @@ Then run the following
 
 ### 🛠 Development
 
-- Install dependencies\
-  `yarn install`
-- To watch file changes in development
-  - Chrome\
-    `yarn run dev:chrome`
-  - Firefox\
-    `yarn run dev:firefox`
-  - Opera\
-    `yarn run dev:opera`
-
 [Refer to SETUP.md for info regarding how to setup Alby](./doc/SETUP.md)
 
 ## Native Companions
