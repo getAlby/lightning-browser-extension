@@ -116,7 +116,7 @@ test.describe("Wallet features", () => {
     await findAllByText($optionsdocument, "e2etest.getalby.com");
     await findByText(
       $optionsdocument,
-      "Do you want to login to e2etest.getalby.com?"
+      "Do you want to log in to e2etest.getalby.com?"
     );
     await findByText($optionsdocument, "Login");
 
