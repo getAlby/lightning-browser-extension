@@ -28,7 +28,7 @@ export default function CloseableCard({
     <div className="bg-white dark:bg-surface-02dp shadow-md p-4 h-44 rounded-lg w-full relative">
       <button
         onClick={handleClose}
-        className="flex items-center absolute top-0 right-0 p-2"
+        className="flex items-center absolute top-0 right-0 p-2 dark:text-white"
       >
         <CrossIcon className="h-5 w-5" />
       </button>
