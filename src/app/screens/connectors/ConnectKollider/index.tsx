@@ -54,7 +54,7 @@ export default function ConnectKollidier() {
     event.preventDefault();
     setLoading(true);
     const account = {
-      name: `Kollider ${formData.currency.toUpperCase()}`,
+      name: `Kollider (${formData.currency.toUpperCase()})`,
       config: {
         username: formData.username,
         password: formData.password,

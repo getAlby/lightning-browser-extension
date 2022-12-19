@@ -131,7 +131,7 @@ export default class Kollider implements Connector {
   }
 
   async getInfo(): Promise<GetInfoResponse> {
-    return { data: { alias: `Kollider ${this.currency}` } };
+    return { data: { alias: `Kollider (${this.currency})` } };
   }
 
   async getBalance(): Promise<GetBalanceResponse> {
