@@ -67,24 +67,37 @@ const utils = {
     )}?${urlParams.toString()}`;
 
     return new Promise(async (resolve, reject) => {
-      async function getPosition(w, h) {
+      async function getPosition(
+        width: number,
+        height: number
+      ): Promise<{ top: number; left: number }> {
         let left = 0;
         let top = 0;
         try {
           const lastFocused = await browser.windows.getLastFocused();
           // Position window in top right corner of lastFocused window.
-          top = lastFocused.top;
-          left = lastFocused.left + (lastFocused.width - w);
-          // Centered
-          // top = lastFocused.top + (lastFocused.height - h) / 2;
-          // left = lastFocused.left + (lastFocused.width - w) / 2;
+          if (
+            lastFocused &&
+            lastFocused.top != undefined &&
+            lastFocused.left != undefined &&
+            lastFocused.width != undefined &&
+            lastFocused.height != undefined
+          ) {
+            // Top right
+            top = lastFocused.top ?? 0;
+            left = lastFocused.left + (lastFocused.width - width);
+
+            // Centered
+            top = lastFocused.top + (lastFocused.height - height) / 2;
+            left = lastFocused.left + (lastFocused.width - width) / 2;
+          }
         } catch (_) {
           // The following properties are more than likely 0, due to being
           // opened from the background chrome process for the extension that
           // has no physical dimensions
           const { screenX, screenY, outerWidth } = window;
           top = Math.max(screenY, 0);
-          left = Math.max(screenX + (outerWidth - w), 0);
+          left = Math.max(screenX + (outerWidth - width), 0);
         }
         return {
           top,
@@ -114,11 +127,11 @@ const utils = {
           const focusInterval = setInterval(() => {
             if (!window.id) {
               return;
-            } // mainly for TS I guess
+            }
             browser.windows.update(window.id, {
-              focused: true,
+              drawAttention: true,
             });
-          }, 1);
+          }, 2100);
           const onMessageListener = (
             responseMessage: {
               response?: unknown;
