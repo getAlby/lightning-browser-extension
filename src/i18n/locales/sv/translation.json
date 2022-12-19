@@ -611,7 +611,6 @@
     "error": "Misslyckades",
     "settings": "Inställningar",
     "websites": "Webbplatser",
-    "sats": "sats",
     "loading": "laddar",
     "amount": "Belopp",
     "optional": "Valfritt",
@@ -619,7 +618,6 @@
     "copied": "Kopierad!",
     "description": "Beskrivning",
     "description_full": "Fullständig beskrivning",
-    "were_sent_to": "skickades till",
     "message": "Meddelande",
     "help": "Hjälp",
     "actions": {

@@ -611,7 +611,6 @@
     "error": "Errore",
     "settings": "Impostazioni",
     "websites": "Siti web",
-    "sats": "sats",
     "loading": "caricamento",
     "amount": "Importo",
     "optional": "Facoltativo",
@@ -619,7 +618,6 @@
     "copied": "Copiato!",
     "description": "Descrizione",
     "description_full": "Descrizione completa",
-    "were_sent_to": "sono stati inviati a",
     "message": "Messaggio",
     "help": "Aiuto",
     "actions": {

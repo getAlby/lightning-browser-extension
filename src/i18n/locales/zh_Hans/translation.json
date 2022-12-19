@@ -595,8 +595,7 @@
     "confirm_request_permission": {
       "allow": "允许{{host}}进行：",
       "always_allow": "始终允许在{{host}}上使用{{method}}",
-      "title": "批准请求",
-      "enable_method": "调用{{method}}"
+      "title": "批准请求"
     },
     "nostr": {
       "title": "Nostr",
