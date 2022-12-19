@@ -12,7 +12,8 @@ import Input from "@components/form/Input";
 import Select from "@components/form/Select";
 import TextField from "@components/form/TextField";
 import Toggle from "@components/form/Toggle";
-import QrScanner from "qr-scanner";
+import QrScanner from "qr-scanner/qr-scanner.legacy.min.js";
+// import { createWorker } from "qr-scanner/qr-scanner.worker.min.js";
 import type { FormEvent } from "react";
 import { useState, useEffect } from "react";
 import { useTranslation, Trans } from "react-i18next";
@@ -21,6 +22,8 @@ import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import { CURRENCIES } from "~/common/constants";
 import msg from "~/common/lib/msg";
+
+// createWorker();
 
 const initialFormData = {
   password: "",
@@ -43,6 +46,21 @@ function Settings() {
   };
 
   useEffect(() => {
+    const videoElem = document.getElementById("qr-code-scanner");
+    const qrScanner = new QrScanner(
+      videoElem,
+      (result) => console.log("decoded qr code:", result),
+      {
+        highlightScanRegion: true,
+        highlightCodeOutline: true,
+      }
+    );
+
+    document
+      .getElementById("trigger-button")
+      .addEventListener("click", function () {
+        qrScanner.start();
+      });
     getPrivateKeyFromStorage().catch(console.error);
   }, []);
 
@@ -124,6 +142,10 @@ function Settings() {
             />
           )}
         </Setting>
+
+        <video id="qr-code-scanner"></video>
+        <button id="trigger-button">Scan QR code</button>
+
         <Setting
           title={t("camera_access.title")}
           subtitle={t("camera_access.subtitle")}
@@ -131,24 +153,31 @@ function Settings() {
           {!cameraPermissionsGranted ? (
             <Button
               label={t("camera_access.allow")}
-              onClick={async () => {
-                try {
-                  const devices = await QrScanner.listCameras();
-                  const video =
-                    document.querySelector<HTMLVideoElement>("#reader");
-                  if (video && devices && devices.length) {
-                    const qrScanner = new QrScanner(video, () => null, {
-                      returnDetailedScanResult: true,
-                      preferredCamera: devices[0].id,
-                    });
-                    await qrScanner.start();
-                    qrScanner.stop();
-                    setCameraPermissionsGranted(true);
-                  }
-                } catch (e) {
-                  if (e instanceof Error) toast.error(e.message);
+              onClick={
+                () => {
+                  return null;
                 }
-              }}
+                // async () => {
+                // try {
+                //   const devices = await QrScanner.listCameras();
+                //   const video =
+                //     document.querySelector<HTMLVideoElement>("#reader");
+                //   if (video && devices && devices.length) {
+                //     const qrScanner = new QrScanner(video, () => null, {
+                //       highlightScanRegion: true,
+                //       highlightCodeOutline: true,
+                //       returnDetailedScanResult: true,
+                //       preferredCamera: devices[0].id,
+                //     });
+                //     await qrScanner.start();
+                //     qrScanner.stop();
+                //     setCameraPermissionsGranted(true);
+                //   }
+                // } catch (e) {
+                //   if (e instanceof Error) toast.error(e.message);
+                // }
+                // }
+              }
             />
           ) : (
             <p className="text-green-500 font-medium">
