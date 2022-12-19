@@ -21,11 +21,11 @@ const supportedCurrencies: Currency[] = [
   },
   {
     value: "EUR",
-    label: "synthetic EUR",
+    label: "EUR",
   },
   {
     value: "USD",
-    label: "synthetic USD",
+    label: "USD",
   },
 ];
 
