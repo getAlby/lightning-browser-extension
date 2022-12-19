@@ -315,7 +315,8 @@
           "label": "Lokaler privater Schlüssel (automatisch generiert)"
         },
         "config": {
-          "label": "Konfigurationsdaten"
+          "label": "Konfigurationsdaten",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
         },
         "errors": {
           "connection_failed": "Verbindung fehlgeschlagen. Ist dein Core Lightning-Knoten online und verwendet es das Commando-Plugin?"
@@ -333,7 +334,7 @@
       "unlock_to_continue": "Freigeben zum Fortfahren",
       "help_contact": {
         "part1": "Brauchst du Hilfe? Kontaktiere uns",
-        "part2": "Alby Support"
+        "part2": "Alby-Unterstützung"
       },
       "unlock_password": "Ihr Freischalt-Passwort"
     },
@@ -341,7 +342,9 @@
       "nostr": {
         "private_key": {
           "warning": "Das wird deinen alten Private Key löschen. Bist du sicher?"
-        }
+        },
+        "hint": "Es ist ein einfaches und offenes Protokoll, das darauf abzielt, zensurresistente soziale Netzwerke zu schaffen. Nostr arbeitet mit kryptographischen Schlüsseln. Um etwas zu veröffentlichen, signiere es mit deinem Schlüssel und senden es an mehrere Relays. Du kannst Alby verwenden, um deinen Nostr-Schlüssel zu verwalten. Viele Nostr-Anwendungen erlauben dann, einfach den Schlüssel aus der Alby-Erweiterung zu verwenden.",
+        "title": "Nostr"
       },
       "lnurl_auth": {
         "legacy_lnurl_auth": {
@@ -350,7 +353,7 @@
         },
         "legacy_lnurl_auth_202207": {
           "subtitle": "Die Schlüsselerzeugung für LNURL-auth hat sich geändert (Juli 2022). Alby war nicht kompatibel mit anderen Implementierungen. Dies wurde geändert, aber jetzt werden andere Anmeldeschlüssel verwendet. Wenn du dich bisher mit LNURL-auth angemeldet hast, kannst du noch die alte Methode aktivieren. Diese Option wird später entfernt werden, stelle sicher, dass du auf die neue Anmeldung umsteigst.",
-          "title": "Legacy LNURL-Auth"
+          "title": "Vererbte LNURL-Authentifizierung"
         },
         "title": "LNURL-Authentifizierung",
         "hint": "ist ein allgemeines Authentifizierungsprotokoll. Es authentifiziert den Benutzer anhand digitaler Signaturen. Das Protokoll erfordert keine anderen identifizierenden Informationen wie Passwörter, E-Mails, Benutzernamen oder ähnliches. Mit Alby kannst du deine Lightning-Konten verwenden, um sich sicher auf Websites anzumelden. <br /> Um mit anderen Wallets kompatibel zu sein, mussten wir ein paar Änderungen vornehmen, die du hier konfigurieren kannst. <br /> <strong>Idealerweise sind alle diese Optionen ausgeschaltet.</strong> Verwende sie nur, wenn du alte Konten hast."
@@ -363,7 +366,69 @@
         "title": "Erweiterungen der Website",
         "subtitle": "Verbesserungen für Twitter, YouTube, etc."
       },
-      "title": "Einstellungen"
+      "title": "Einstellungen",
+      "change_password": {
+        "choose_password": {
+          "label": "Gib ein neues Entsperrkennwort ein:"
+        },
+        "submit": {
+          "label": "Änder du"
+        },
+        "errors": {
+          "enter_password": "Bitte gebe ein neues Freischalt-Passwort ein.",
+          "confirm_password": "Bitte bestätigen dein Passwort.",
+          "mismatched_password": "Die Passwörter stimmen nicht überein."
+        },
+        "success": "Passwort erfolgreich geändert",
+        "title": "Freischalt-Passwort ändern",
+        "screen_reader": "Freischalt-Passwort ändern",
+        "confirm_password": {
+          "label": "Bestätige das neue Passwort:"
+        }
+      },
+      "theme": {
+        "options": {
+          "dark": "Dunkelheit",
+          "light": "Licht",
+          "system": "System"
+        },
+        "title": "Thema",
+        "subtitle": "Alby im dunklen oder hellen Modus verwenden"
+      },
+      "exchange": {
+        "title": "Austausch Quelle",
+        "subtitle": "Quelle der Bitcoin-Wechselkurse"
+      },
+      "language": {
+        "title": "Sprache",
+        "subtitle": "Die Übersetzungen sind noch nicht zu 100% fertig. <0>Hilf uns, Alby in deine Sprache zu übersetzen!</0>"
+      },
+      "currency": {
+        "title": "Währung",
+        "subtitle": "Zeigen Sie die Beträge zusätzlich in dieser Währung an"
+      },
+      "camera_access": {
+        "title": "Kamerazugriff",
+        "subtitle": "Zum Scannen von QR-Codes",
+        "allow": "Kamerazugriff zulassen",
+        "granted": "Erlaubnis erteilt"
+      },
+      "show_fiat": {
+        "title": "Sats an Fiat",
+        "subtitle": "Immer in die gewählte Währung vom gewählten Wechselkurs umrechnen"
+      },
+      "personal_data": {
+        "title": "Persönliche Daten",
+        "description": "Zahlungsempfänger können beantragen, dass zusätzliche Daten mit einer Zahlung übermittelt werden. Diese Daten werden ohne deiner Zustimmung an niemanden weitergegeben. Du wirst immer aufgefordert, bevor diese Daten zusammen mit einer Zahlung gesendet werden."
+      },
+      "name": {
+        "title": "Name",
+        "placeholder": "Geben Sie Ihren Namen ein"
+      },
+      "email": {
+        "title": "E-Mail",
+        "placeholder": "Geben Sie Ihre E-Mail Adresse ein"
+      }
     },
     "home": {
       "default_view": {
@@ -416,7 +481,7 @@
       }
     },
     "enable": {
-      "allow": "Erlaube du {{host}} zu:",
+      "allow": "Erlauben Sie {{host}} zu:",
       "title": "Verbinden",
       "request1": "Genehmigung für Transaktionen anfordern",
       "request2": "Fordern Sie Rechnungen und Lightning Informationen an",
