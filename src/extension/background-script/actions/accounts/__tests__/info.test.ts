@@ -40,7 +40,7 @@ describe("account info", () => {
       currentAccountId: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
       name: "Alby",
       info: { alias: "getalby.com" },
-      balance: { balance: 0 },
+      balance: { balance: 0, currency: "BTC" },
     };
 
     expect(await infoAccount(message)).toStrictEqual({

@@ -6,17 +6,17 @@ import {
   MakeInvoiceResponse,
 } from "~/extension/background-script/connectors/connector.interface";
 import type {
-  Accounts,
   AccountInfo,
-  NodeInfo,
+  Accounts,
   Allowance,
-  SettingsStorage,
-  MessageInvoices,
   DbPayment,
+  Invoice,
+  LnurlAuthResponse,
+  MessageInvoices,
   MessageLnurlAuth,
   MessageSettingsSet,
-  LnurlAuthResponse,
-  Invoice,
+  NodeInfo,
+  SettingsStorage,
 } from "~/types";
 
 import {
@@ -27,7 +27,7 @@ import {
 import msg from "./msg";
 
 export interface AccountInfoRes {
-  balance: { balance: string | number; currency?: ACCOUNT_CURRENCIES };
+  balance: { balance: string | number; currency: ACCOUNT_CURRENCIES };
   currentAccountId: string;
   info: { alias: string; pubkey?: string };
   name: string;
