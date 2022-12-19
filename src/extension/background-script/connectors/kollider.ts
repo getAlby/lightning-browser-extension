@@ -1,5 +1,5 @@
-import axios, { AxiosRequestConfig, Method } from "axios";
 import type { AxiosResponse } from "axios";
+import axios, { AxiosRequestConfig, Method } from "axios";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
@@ -9,11 +9,11 @@ import HashKeySigner from "~/common/utils/signer";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  GetBalanceResponse,
+  ConnectorInvoice,
   ConnectPeerResponse,
+  GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
-  ConnectorInvoice,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
