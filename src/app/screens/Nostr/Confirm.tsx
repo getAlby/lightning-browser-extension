@@ -55,8 +55,8 @@ function NostrConfirm() {
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
-      <Container justifyBetween maxWidth="sm">
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="h-full">
+        <Container justifyBetween maxWidth="sm">
           <div>
             <PublisherCard
               title={origin.name}
@@ -110,8 +110,8 @@ function NostrConfirm() {
               {t("block_and_ignore", { host: origin.host })}
             </a>
           </div>
-        </form>
-      </Container>
+        </Container>
+      </form>
     </div>
   );
 }

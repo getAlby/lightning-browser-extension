@@ -105,9 +105,8 @@ function MakeInvoice() {
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
-
-      <Container justifyBetween maxWidth="sm">
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="h-full">
+        <Container justifyBetween maxWidth="sm">
           <div>
             <PublisherCard
               title={origin.name}
@@ -170,8 +169,8 @@ function MakeInvoice() {
               <em>{tComponents("confirm_or_cancel.only_trusted")}</em>
             </p>
           </div>
-        </form>
-      </Container>
+        </Container>
+      </form>
     </div>
   );
 }
