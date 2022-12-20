@@ -15,3 +15,5 @@ declare module "*.jpg" {
   const content: string;
   export default content;
 }
+
+declare module "~/../node_modules/axios/lib/adapters/fetch";
