@@ -14,8 +14,8 @@ import TextField from "@components/form/TextField";
 import Toggle from "@components/form/Toggle";
 import QrScanner from "qr-scanner";
 import type { FormEvent } from "react";
-import { useState, useEffect } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { useEffect, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -42,8 +42,18 @@ function Settings() {
     setNostrPrivateKey(priv ?? "");
   };
 
+  const checkCameraPermissions = async () => {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const cameraDevices = devices
+      .filter((device) => device.kind === "videoinput")
+      .filter((videoDevice) => videoDevice.label !== "");
+    cameraDevices.filter((device) => device.kind === "videoinput");
+    setCameraPermissionsGranted(cameraDevices.length > 0);
+  };
+
   useEffect(() => {
     getPrivateKeyFromStorage().catch(console.error);
+    checkCameraPermissions().catch(console.error);
   }, []);
 
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
@@ -71,6 +81,24 @@ function Settings() {
       nostrEnabled: !!nostrPrivateKey,
     });
     toast.success(t("nostr.private_key.success"));
+  }
+
+  async function allowCameraPermissions() {
+    try {
+      const devices = await QrScanner.listCameras();
+      const video = document.querySelector<HTMLVideoElement>("#qr-code-reader");
+      if (video && devices && devices.length > 0) {
+        const qrScanner = new QrScanner(video, () => null, {
+          returnDetailedScanResult: true,
+          preferredCamera: devices[0].id,
+        });
+        await qrScanner.start();
+        qrScanner.stop();
+        setCameraPermissionsGranted(true);
+      }
+    } catch (e) {
+      if (e instanceof Error) toast.error(e.message);
+    }
   }
 
   async function updateAccountPassword(password: string) {
@@ -131,24 +159,7 @@ function Settings() {
           {!cameraPermissionsGranted ? (
             <Button
               label={t("camera_access.allow")}
-              onClick={async () => {
-                try {
-                  const devices = await QrScanner.listCameras();
-                  const video =
-                    document.querySelector<HTMLVideoElement>("#reader");
-                  if (video && devices && devices.length) {
-                    const qrScanner = new QrScanner(video, () => null, {
-                      returnDetailedScanResult: true,
-                      preferredCamera: devices[0].id,
-                    });
-                    await qrScanner.start();
-                    qrScanner.stop();
-                    setCameraPermissionsGranted(true);
-                  }
-                } catch (e) {
-                  if (e instanceof Error) toast.error(e.message);
-                }
-              }}
+              onClick={allowCameraPermissions}
             />
           ) : (
             <p className="text-green-500 font-medium">
@@ -156,8 +167,8 @@ function Settings() {
             </p>
           )}
         </Setting>
-        {/* This is just to enable camera permissions*/}
-        <video className="hidden" id="reader" />
+        {/* This is just to enable camera permissions */}
+        <video className="hidden" id="qr-code-reader" />
         <Setting
           title={t("language.title")}
           subtitle={

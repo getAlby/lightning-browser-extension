@@ -1,6 +1,6 @@
 import { QrCodeIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import QrScanner from "qr-scanner";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 
@@ -45,19 +45,26 @@ function QrcodeScanner({
 
   async function handleRequestCameraPermissions() {
     try {
-      const devices = await QrScanner.listCameras();
-      const video = document.querySelector<HTMLVideoElement>("#reader");
-      if (video && devices && devices.length) {
-        setCameras(devices);
-        const onDecode = (result: ScanResult) => {
-          handleStopScanning();
-          qrCodeSuccessCallback && qrCodeSuccessCallback(result.data);
-        };
-        qrScannerRef.current = new QrScanner(video, onDecode, {
-          returnDetailedScanResult: true,
-          onDecodeError: qrCodeErrorCallback,
-        });
-        handleStartScanning(devices[0].id);
+      if (qrScannerRef.current) {
+        handleStartScanning(selectedCamera);
+      } else {
+        const devices = await QrScanner.listCameras();
+        const video =
+          document.querySelector<HTMLVideoElement>("#qr-code-reader");
+        if (video && devices && devices.length > 0) {
+          setCameras(devices);
+          const onDecode = (result: ScanResult) => {
+            handleStopScanning();
+            qrCodeSuccessCallback && qrCodeSuccessCallback(result.data);
+          };
+          qrScannerRef.current = new QrScanner(video, onDecode, {
+            returnDetailedScanResult: true,
+            highlightScanRegion: true,
+            highlightCodeOutline: true,
+            onDecodeError: qrCodeErrorCallback,
+          });
+          handleStartScanning(devices[0].id);
+        }
       }
     } catch (error) {
       toast.error(t("errors.allow_camera_access"));
@@ -69,10 +76,8 @@ function QrcodeScanner({
     setSelectedCamera(id);
     try {
       if (qrScannerRef.current) {
-        qrScannerRef.current.setCamera(id);
-        // Stop if there's already a scanner active.
-        qrScannerRef.current.stop();
-        qrScannerRef.current.start();
+        await qrScannerRef.current.setCamera(id);
+        await qrScannerRef.current.start();
       }
     } catch (e) {
       console.error(e);
@@ -109,10 +114,9 @@ function QrcodeScanner({
         </>
       )}
 
-      <video
-        className={`bg-black w-full ${!isScanning ? "hidden" : ""}`}
-        id="reader"
-      />
+      <div className={`bg-black w-full ${!isScanning ? "hidden" : ""}`}>
+        <video id="qr-code-reader" />
+      </div>
 
       {isScanning && (
         <div className="mt-6 text-center">
