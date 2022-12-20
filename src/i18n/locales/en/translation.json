@@ -110,7 +110,7 @@
           "title": "numbers and letters, at least 3 characters"
         },
         "errors": {
-          "create_wallet_error": "Failed to login or create a new account. If you need help, please contact support@getalby.com"
+          "create_wallet_error": "Failed to log in or create a new account. If you need help, please contact support@getalby.com"
         }
       }
     },
@@ -536,7 +536,7 @@
     "lnurlauth": {
       "title": "Authentication",
       "content_message": {
-        "heading": "Do you want to login to"
+        "heading": "Do you want to log in to"
       },
       "submit": "Login",
       "success": "Login successful on {{name}}",
@@ -726,7 +726,7 @@
       },
       "enable_login": {
         "title": "Enable website login",
-        "subtitle": "Automatically login without confirmation when the website requests."
+        "subtitle": "Automatically log in without confirmation when the website requests."
       },
       "edit_allowance": {
         "title": "Edit Allowance",
