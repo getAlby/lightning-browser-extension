@@ -67,15 +67,18 @@ const utils = {
       "prompt.html"
     )}?${urlParams.toString()}`;
 
-    const { top, left } = await getWindowPosition(400, 600);
+    const windowWidth = 400;
+    const windowHeight = 600;
+
+    const { top, left } = await getWindowPosition(windowWidth, windowHeight);
 
     return new Promise((resolve, reject) => {
       browser.windows
         .create({
           url: url,
           type: "popup",
-          width: 400,
-          height: 600,
+          width: windowWidth,
+          height: windowHeight,
           top: top,
           left: left,
         })
