@@ -4,7 +4,7 @@ import PublisherCard from "@components/PublisherCard";
 import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useSettings } from "~/app/context/SettingsContext";
