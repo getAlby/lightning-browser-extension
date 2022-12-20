@@ -118,6 +118,11 @@ function Receive() {
     }
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    createInvoice();
+  }
+
   function renderInvoice() {
     if (!invoice) return null;
     return (
@@ -203,14 +208,8 @@ function Receive() {
       {invoice ? (
         <Container maxWidth="sm">{renderInvoice()}</Container>
       ) : (
-        <form
-          onSubmit={(e: FormEvent) => {
-            e.preventDefault();
-            createInvoice();
-          }}
-          className="h-full"
-        >
-          <fieldset disabled={loading}>
+        <form onSubmit={handleSubmit} className="h-full">
+          <fieldset className="h-full" disabled={loading}>
             <Container justifyBetween maxWidth="sm">
               <div className="py-4">
                 <div className="mb-4">
