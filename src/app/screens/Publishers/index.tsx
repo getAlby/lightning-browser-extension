@@ -175,7 +175,9 @@ function Publishers() {
                 title={t("tips.demo.title")}
                 description={t("tips.demo.description")}
                 buttons={[
-                  <Button key={1} label={t("tips.demo.label1")} primary />,
+                  <a key={1} href="https://getalby.com/demo">
+                    <Button label={t("tips.demo.label1")} primary />
+                  </a>,
                 ]}
               />
             )}
