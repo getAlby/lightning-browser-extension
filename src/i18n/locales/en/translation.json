@@ -91,12 +91,16 @@
             "mismatched_password": "Passwords don't match."
           }
         },
-        "title": "Your Alby Lightning Wallet",
-        "create_account": "Create your Alby account.",
-        "login_account": "Log in to your Alby account.",
-        "host_wallet": "We host a Lightning wallet for you!",
+        "title": "Your Alby Wallet",
+        "create_account": "Create your Lightning Wallet hosted by Alby.\nYou can always regain access to Alby Wallet using these credentials.",
+        "login_account": "Log in to your Alby account",
         "email": {
-          "label": "Email Address"
+          "create": {
+            "label": "Email Address"
+          },
+          "login": {
+            "label": "Email Address or Lightning Address"
+          }
         },
         "optional_lightning_note": {
           "part1": "Your Alby account also comes with an optional",

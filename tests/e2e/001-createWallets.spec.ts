@@ -95,11 +95,11 @@ test.describe("Create or connect wallets", () => {
     const { user, browser, page, $document } =
       await commonCreateWalletUserCreate({ connectToLightningWallet: false });
 
-    // click at "Create Alby Wallet"
+    // click on the button to create a new wallet
     const createNewWalletButton = await getByText($document, "Create new");
     createNewWalletButton.click();
 
-    await findByText($document, "Your Alby Lightning Wallet");
+    await findByText($document, "Your Alby Wallet");
 
     // type user email
     const emailField = await getByLabelText($document, "Email Address");
@@ -134,10 +134,13 @@ test.describe("Create or connect wallets", () => {
     const loginButton = await getByText($document, "Log in");
     loginButton.click();
 
-    await findByText($document, "Your Alby Lightning Wallet");
+    await findByText($document, "Your Alby Wallet");
 
     // type user email
-    const emailField = await getByLabelText($document, "Email Address");
+    const emailField = await getByLabelText(
+      $document,
+      "Email Address or Lightning Address"
+    );
     await emailField.type(user.email);
 
     // type user password and confirm password

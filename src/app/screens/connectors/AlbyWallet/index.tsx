@@ -146,6 +146,7 @@ export default function AlbyWallet({ variant }: Props) {
   return (
     <ConnectorForm
       title={t("pre_connect.title")}
+      description={t(`pre_connect.${variant}_account`)}
       submitLoading={loading}
       onSubmit={signup}
       submitDisabled={
@@ -156,28 +157,13 @@ export default function AlbyWallet({ variant }: Props) {
           formData.password !== formData.passwordConfirmation)
       }
     >
-      <div className="mt-6 dark:text-white">
-        <strong>
-          {t(
-            variant === "create"
-              ? "pre_connect.create_account"
-              : "pre_connect.login_account"
-          )}
-          {variant === "create" && (
-            <>
-              <br />
-              {t("pre_connect.host_wallet")}
-            </>
-          )}
-        </strong>
-      </div>
-
       <div className="mt-6">
         <TextField
           id="email"
-          label={t("pre_connect.email.label")}
+          label={t(`pre_connect.email.${variant}.label`)}
           type="email"
           required
+          autoFocus
           onChange={(e) => {
             setFormData({ ...formData, email: e.target.value.trim() });
           }}
@@ -190,6 +176,7 @@ export default function AlbyWallet({ variant }: Props) {
           setFormData={setFormData}
           minLength={6}
           confirm={variant === "create"}
+          autoFocus={false}
         />
       </div>
       {variant === "create" && (

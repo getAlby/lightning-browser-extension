@@ -19,6 +19,7 @@ export type Props<T extends PasswordFormData = PasswordFormData> = {
   setFormData: (formData: T) => void;
   minLength?: number;
   confirm?: boolean;
+  autoFocus?: boolean;
 };
 
 type errorMessage =
@@ -40,6 +41,7 @@ export default function PasswordForm<
   i18nKeyPrefix,
   minLength,
   confirm = true,
+  autoFocus = true,
 }: Props<T>) {
   const [errors, setErrors] = useState(initialErrors);
   const [passwordView, setPasswordView] = useState(false);
@@ -91,7 +93,7 @@ export default function PasswordForm<
     <>
       <div className="w-full mb-6">
         <TextField
-          autoFocus
+          autoFocus={autoFocus}
           id="password"
           label={t("choose_password.label")}
           type={passwordView ? "text" : "password"}
