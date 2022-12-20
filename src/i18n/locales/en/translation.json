@@ -93,7 +93,7 @@
         },
         "title": "Your Alby Wallet",
         "create_account": "Create your Lightning Wallet hosted by Alby.\nYou can always regain access to Alby Wallet using these credentials.",
-        "login_account": "Log in to your Alby account",
+        "login_account": "Log in to your Alby wallet",
         "email": {
           "create": {
             "label": "Email Address"
