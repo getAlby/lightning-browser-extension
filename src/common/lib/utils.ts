@@ -85,9 +85,7 @@ const utils = {
             tabId = window.tabs[0].id;
           }
 
-          // make sure that the prompt is always focussed
-          // this interval focusses the prompt every 2 secons to make sure it is not hidden and
-          // that it draws the user's attention to the popup
+          // this interval hightlights the popup in the taskbar
           const focusInterval = setInterval(() => {
             if (!window.id) {
               return;
