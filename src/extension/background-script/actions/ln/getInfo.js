@@ -6,6 +6,9 @@ const getInfo = async (message, sender) => {
 
   return {
     data: {
+      version: "Alby",
+      supports: ["lightning"],
+      methods: connector.supportedMethods,
       node: {
         alias: info.data.alias,
         pubkey: info.data.pubkey,

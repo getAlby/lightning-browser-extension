@@ -634,7 +634,6 @@
     "confirm_request_permission": {
       "title": "",
       "allow": "",
-      "enable_method": "",
       "always_allow": ""
     },
     "nostr": {

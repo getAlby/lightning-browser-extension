@@ -634,7 +634,6 @@
     "confirm_request_permission": {
       "title": "Aprobi peton",
       "allow": "",
-      "enable_method": "",
       "always_allow": ""
     },
     "nostr": {
