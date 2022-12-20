@@ -113,7 +113,7 @@ We use the [Development Project Board](https://github.com/orgs/getAlby/projects/
 #### Anyone
 
 - Have a look at this Readme. Can it be improved? Do you see typos? You can open a PR or reach out to us in [our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2).
-- You can help with [translations](#translations)
+- You can help with [translations](./doc/CONTRIBUTION.md#translations)
 - [Code of Conduct](./doc/CODE_OF_CONDUCT.md)
 
 ## ❔ FAQs
