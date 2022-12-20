@@ -1,5 +1,6 @@
 import browser, { Runtime } from "webextension-polyfill";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
+import { getPosition as getWindowPosition } from "~/common/utils/window";
 import type { Invoice, OriginData, OriginDataInternal } from "~/types";
 
 const utils = {
@@ -66,46 +67,9 @@ const utils = {
       "prompt.html"
     )}?${urlParams.toString()}`;
 
-    return new Promise(async (resolve, reject) => {
-      async function getPosition(
-        width: number,
-        height: number
-      ): Promise<{ top: number; left: number }> {
-        let left = 0;
-        let top = 0;
-        try {
-          const lastFocused = await browser.windows.getLastFocused();
-          // Position window in top right corner of lastFocused window.
-          if (
-            lastFocused &&
-            lastFocused.top != undefined &&
-            lastFocused.left != undefined &&
-            lastFocused.width != undefined &&
-            lastFocused.height != undefined
-          ) {
-            // Top right
-            top = lastFocused.top ?? 0;
-            left = lastFocused.left + (lastFocused.width - width);
+    const { top, left } = await getWindowPosition(400, 600);
 
-            // Centered
-            top = lastFocused.top + (lastFocused.height - height) / 2;
-            left = lastFocused.left + (lastFocused.width - width) / 2;
-          }
-        } catch (_) {
-          // The following properties are more than likely 0, due to being
-          // opened from the background chrome process for the extension that
-          // has no physical dimensions
-          const { screenX, screenY, outerWidth } = window;
-          top = Math.max(screenY, 0);
-          left = Math.max(screenX + (outerWidth - width), 0);
-        }
-        return {
-          top,
-          left,
-        };
-      }
-
-      const { top, left } = await getPosition(400, 600);
+    return new Promise((resolve, reject) => {
       browser.windows
         .create({
           url: url,
