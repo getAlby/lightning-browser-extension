@@ -44,11 +44,10 @@ export default function ChooseConnectorPath({ title, description }: Props) {
             }
             actions={
               <>
-                <Link to="create-wallet" className="flex flex-1">
+                <Link to="create" className="flex flex-1">
                   <Button label={t("alby.create_new")} primary flex />
                 </Link>
-                {/*TODO: update link once create and login screens are split */}
-                <Link to="create-wallet" className="flex flex-1">
+                <Link to="login" className="flex flex-1">
                   <Button label={tCommon("actions.log_in")} outline flex />
                 </Link>
               </>

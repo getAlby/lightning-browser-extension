@@ -77,13 +77,23 @@
       }
     },
     "alby": {
-      "create_wallet": {
-        "title": "Alby Wallet",
-        "description": "Create or login to your Alby account"
-      },
       "pre_connect": {
+        "set_password": {
+          "choose_password": {
+            "label": "Password"
+          },
+          "confirm_password": {
+            "label": "Confirm Password"
+          },
+          "errors": {
+            "enter_password": "Please enter a password.",
+            "confirm_password": "Please confirm your password.",
+            "mismatched_password": "Passwords don't match."
+          }
+        },
         "title": "Your Alby Lightning Wallet",
-        "login_account": "Create or login to your Alby account.",
+        "create_account": "Create your Alby account.",
+        "login_account": "Log in to your Alby account.",
         "host_wallet": "We host a Lightning wallet for you!",
         "email": {
           "label": "Email Address"
@@ -662,6 +672,7 @@
   },
   "common": {
     "password": "Password",
+    "confirm_password": "Confirm Password",
     "advanced": "Advanced",
     "success": "Success",
     "error": "Error",
