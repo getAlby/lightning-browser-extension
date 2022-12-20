@@ -844,7 +844,8 @@
       "queryroutes": "Query for a possible route.",
       "verifymessage": "Verify a signature over a msg.",
       "sendtoroute": "Make a payment via the specified route.",
-      "decodepayreq": "Decode a payment request string."
+      "decodepayreq": "Decode a payment request string.",
+      "routermc": "Read the internal mission control state."
     }
   }
 }

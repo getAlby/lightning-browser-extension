@@ -109,6 +109,10 @@ const methods: Record<string, Record<string, string>> = {
     path: "/v1/payreq/{{pay_req}}",
     httpMethod: "GET",
   },
+  routermc: {
+    path: "/v2/router/mc",
+    httpMethod: "GET",
+  },
 };
 
 const pathTemplateParser = (
