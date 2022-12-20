@@ -109,6 +109,12 @@ test.describe("Create or connect wallets", () => {
     const walletPasswordField = await getByLabelText($document, "Password");
     await walletPasswordField.type(user.password);
 
+    const walletConfirmPasswordField = await getByLabelText(
+      $document,
+      "Confirm Password"
+    );
+    await walletConfirmPasswordField.type(user.password);
+
     await commonCreateWalletSuccessCheck({ page, $document });
 
     await browser.close();
@@ -124,9 +130,9 @@ test.describe("Create or connect wallets", () => {
         },
       });
 
-    // click at "Create Alby Wallet"
-    const createNewWalletButton = await getByText($document, "Create new");
-    createNewWalletButton.click();
+    // click "Log in" button
+    const loginButton = await getByText($document, "Log in");
+    loginButton.click();
 
     await findByText($document, "Your Alby Lightning Wallet");
 
