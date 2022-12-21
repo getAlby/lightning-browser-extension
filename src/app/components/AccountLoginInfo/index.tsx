@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 import { Allowance } from "~/types";
 
-interface LoginSiteProps {
+export interface LoginSiteProps {
   accountId: string;
 }
 const DEFAULT_IMAGE =
@@ -44,7 +44,7 @@ function LoginSite(props: LoginSiteProps) {
   return (
     <Popover className="relative">
       <Popover.Button className="group inline-flex items-center text-base   hover:text-opacity-100 focus:outline-none ">
-        <div className="mt-1 flex -space-x-4 overflow-hidden">
+        <div className="mt-1 flex -space-x-4 overflow-hidden ">
           {Allowances.slice(0, 6).map((allowance) => (
             <img
               key={allowance.id}

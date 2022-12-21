@@ -15,15 +15,14 @@ const defaultMockState = Object.assign(backgroundState, {
   isUnlocked: jest.fn(() => true),
 });
 
-const mockState = defaultMockState;
-state.getState = jest.fn().mockReturnValue(mockState);
+state.getState = jest.fn().mockReturnValue(defaultMockState);
 
 describe("add allowance", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  test("add allowance without accountId", async () => {
+  test("add allowance", async () => {
     const message: MessageAllowanceAdd = {
       application: "LBE",
       prompt: true,
