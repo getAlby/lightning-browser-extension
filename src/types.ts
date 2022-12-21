@@ -1,5 +1,5 @@
 import { PaymentRequestObject } from "bolt11";
-import { CURRENCIES } from "~/common/constants";
+import { CURRENCIES, TIPS } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
 import {
   ConnectorInvoice,
@@ -628,7 +628,7 @@ export interface SettingsStorage {
   exchange: SupportedExchanges;
   debug: boolean;
   nostrEnabled: boolean;
-  tips: string[];
+  tips: TIPS[];
 }
 
 export interface Badge {

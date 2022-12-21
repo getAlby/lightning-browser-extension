@@ -1,4 +1,4 @@
-import { CURRENCIES } from "~/common/constants";
+import { CURRENCIES, TIPS } from "~/common/constants";
 import state from "~/extension/background-script/state";
 import type {
   AuthNotificationData,
@@ -31,7 +31,7 @@ const settings: SettingsStorage = {
   userName: "",
   websiteEnhancements: true,
   nostrEnabled: false,
-  tips: ["top_up_wallet", "pin", "demo"],
+  tips: [TIPS.TOP_UP_WALLET, TIPS.PIN, TIPS.DEMO],
 };
 
 const mockState = {

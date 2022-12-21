@@ -543,32 +543,6 @@
         "description": "Sites onde você já usou a Alby",
         "no_info": "Nenhum site ainda."
       },
-      "tips": {
-        "title": "",
-        "description": "",
-        "top_up_wallet": {
-          "title": "",
-          "description": "",
-          "label1": "",
-          "label2": ""
-        },
-        "pin": {
-          "title": "",
-          "description1": "",
-          "description2": "",
-          "description3": ""
-        },
-        "demo": {
-          "title": "",
-          "description": "",
-          "label1": ""
-        },
-        "address": {
-          "title": "",
-          "description": "",
-          "label1": ""
-        }
-      },
       "suggestions": {
         "title": "Sites⚡️recomendados",
         "description": "Sugestões de sites onde você pode usar a Alby",

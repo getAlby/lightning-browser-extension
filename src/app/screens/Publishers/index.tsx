@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
+import { TIPS } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import { Allowance, Badge, Publisher } from "~/types";
 
@@ -24,8 +25,8 @@ function Publishers() {
 
   const hasTips = tips.length > 0;
 
-  function hasTip(id: string) {
-    return tips.indexOf(id) > -1;
+  function hasTip(id: TIPS) {
+    return tips.includes(id);
   }
   const navigate = useNavigate();
 
@@ -130,11 +131,11 @@ function Publishers() {
             {t("tips.description")}
           </p>
           <div className="grid gap-4 sm:grid-cols-1 lg:grid-cols-2">
-            {hasTip("top_up_wallet") && (
+            {hasTip(TIPS.TOP_UP_WALLET) && (
               <CloseableCard
                 handleClose={() =>
                   updateSetting({
-                    tips: tips.filter((tip) => tip !== "top_up_wallet"),
+                    tips: tips.filter((tip) => tip !== TIPS.TOP_UP_WALLET),
                   })
                 }
                 title={t("tips.top_up_wallet.title")}
@@ -154,10 +155,12 @@ function Publishers() {
                 ]}
               />
             )}
-            {hasTip("pin") && (
+            {hasTip(TIPS.PIN) && (
               <CloseableCard
                 handleClose={() =>
-                  updateSetting({ tips: tips.filter((tip) => tip !== "pin") })
+                  updateSetting({
+                    tips: tips.filter((tip) => tip !== TIPS.PIN),
+                  })
                 }
                 title={t("tips.pin.title")}
                 description={[
@@ -167,10 +170,12 @@ function Publishers() {
                 ]}
               />
             )}
-            {hasTip("demo") && (
+            {hasTip(TIPS.DEMO) && (
               <CloseableCard
                 handleClose={() =>
-                  updateSetting({ tips: tips.filter((tip) => tip !== "demo") })
+                  updateSetting({
+                    tips: tips.filter((tip) => tip !== TIPS.DEMO),
+                  })
                 }
                 title={t("tips.demo.title")}
                 description={t("tips.demo.description")}
@@ -181,11 +186,11 @@ function Publishers() {
                 ]}
               />
             )}
-            {hasTip("address") && (
+            {hasTip(TIPS.ADDRESS) && (
               <CloseableCard
                 handleClose={() =>
                   updateSetting({
-                    tips: tips.filter((tip) => tip !== "address"),
+                    tips: tips.filter((tip) => tip !== TIPS.ADDRESS),
                   })
                 }
                 title={t("tips.address.title")}

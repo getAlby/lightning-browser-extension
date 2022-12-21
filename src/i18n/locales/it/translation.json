@@ -538,32 +538,6 @@
         "description": "Siti web in cui hai già utilizzato Alby in precedenza",
         "no_info": "Ancora nessun sito web."
       },
-      "tips": {
-        "title": "",
-        "description": "",
-        "top_up_wallet": {
-          "title": "",
-          "description": "",
-          "label1": "",
-          "label2": ""
-        },
-        "pin": {
-          "title": "",
-          "description1": "",
-          "description2": "",
-          "description3": ""
-        },
-        "demo": {
-          "title": "",
-          "description": "",
-          "label1": ""
-        },
-        "address": {
-          "title": "",
-          "description": "",
-          "label1": ""
-        }
-      },
       "suggestions": {
         "title": "Altri ⚡️ siti web",
         "description": "Siti web in cui è possibile utilizzare Alby",
