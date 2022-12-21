@@ -16,11 +16,12 @@ import Settings from "@screens/Settings";
 import Unlock from "@screens/Unlock";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { useTranslation } from "react-i18next";
-import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
+import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
+import Discover from "~/app/screens/Discover";
 import i18n from "~/i18n/i18nConfig";
 
 function Options() {
@@ -39,6 +40,9 @@ function Options() {
             }
           >
             <Route index element={<Navigate to="/publishers" replace />} />
+            <Route path="discover">
+              <Route index element={<Discover />} />
+            </Route>
             <Route path="publishers">
               <Route path=":id" element={<Publisher />} />
               <Route index element={<Publishers />} />
@@ -111,7 +115,8 @@ const Layout = () => {
   return (
     <div>
       <Navbar>
-        <Navbar.Link href="/publishers">{tCommon("websites")}</Navbar.Link>
+        <Navbar.Link href="/discover">{tCommon("discover")}</Navbar.Link>
+        <Navbar.Link href="/publishers">{tCommon("visited")}</Navbar.Link>
         <Navbar.Link href="/send">{tCommon("actions.send")}</Navbar.Link>
         <Navbar.Link href="/receive">{tCommon("actions.receive")}</Navbar.Link>
         <Navbar.Link href="/settings">{tCommon("settings")}</Navbar.Link>

@@ -567,24 +567,23 @@
         "status": "Check payment status"
       }
     },
+    "discover": {
+      "title": "Explore the Lightning ⚡️ Ecosystem",
+      "description": "Websites and webapps where you can use Alby",
+      "list": {
+        "trading": "Trading",
+        "gaming": "Gaming",
+        "entertaiment": "Entertaiment",
+        "shopping": "Shopping",
+        "miscellaneous": "Miscellaneous",
+        "showcases": "Showcases"
+      }
+    },
     "publishers": {
-      "used": {
-        "title": "Your ⚡️ Websites",
-        "description": "Websites where you have used Alby before",
-        "no_info": "No websites yet."
-      },
-      "suggestions": {
-        "title": "Other ⚡️ Websites",
-        "description": "Websites where you can use Alby",
-        "list": {
-          "trading": "Trading",
-          "gaming": "Gaming",
-          "entertaiment": "Entertaiment",
-          "shopping": "Shopping",
-          "miscellaneous": "Miscellaneous",
-          "showcases": "Showcases"
-        }
-      },
+      "title": "Your ⚡️ Websites",
+      "description": "Websites where you have used Alby before",
+      "no_info": "It looks like you haven't used Alby in any websites yet.",
+      "discover": "Discover Websites",
       "publisher": {
         "allowance": {
           "title": "Allowance",
@@ -663,7 +662,8 @@
     "success": "Success",
     "error": "Error",
     "settings": "Settings",
-    "websites": "Websites",
+    "discover": "Discover",
+    "visited": "Visited",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "loading",
