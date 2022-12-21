@@ -22,7 +22,7 @@ utils.openPrompt = jest
   .fn()
   .mockReturnValue({ data: { enabled: true, remember: true } });
 
-const mockAllowances: DbAllowance[] = allowanceFixture;
+const mockAllowances: DbAllowance[] = [{ ...allowanceFixture[0] }];
 
 describe("enable allowance", () => {
   afterEach(() => {
