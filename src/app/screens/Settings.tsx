@@ -157,7 +157,7 @@ function Settings() {
                 <a
                   className="underline"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noreferrer noopener"
                   href="https://hosted.weblate.org/projects/getalby-lightning-browser-extension/getalby-lightning-browser-extension/"
                 ></a>,
               ]}
@@ -379,7 +379,7 @@ function Settings() {
         <a
           href="https://github.com/nostr-protocol/nostr"
           target="_blank"
-          rel="noreferrer"
+          rel="noreferrer noopener"
           className="underline"
         >
           {t("nostr.title")}
@@ -398,7 +398,7 @@ function Settings() {
                 <a
                   className="underline"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noreferrer noopener"
                   href="https://guides.getalby.com/overall-guide/alby-browser-extension/features/nostr"
                 ></a>,
               ]}
@@ -468,7 +468,7 @@ function Settings() {
         <a
           href="https://lightninglogin.live/learn"
           target="_blank"
-          rel="noreferrer"
+          rel="noreferrer noopener"
           className="underline"
         >
           {t("lnurl_auth.title")}
