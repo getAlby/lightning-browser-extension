@@ -139,7 +139,6 @@ function Send() {
         />
         <Container maxWidth="sm">
           <QrcodeScanner
-            qrbox={200}
             qrCodeSuccessCallback={(decodedText) => {
               if (invoice !== decodedText) {
                 setInvoice(extractInvoiceFrom(decodedText));

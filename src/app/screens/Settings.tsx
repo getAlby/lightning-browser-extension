@@ -44,10 +44,9 @@ function Settings() {
 
   const checkCameraPermissions = async () => {
     const devices = await navigator.mediaDevices.enumerateDevices();
-    const cameraDevices = devices
-      .filter((device) => device.kind === "videoinput")
-      .filter((videoDevice) => videoDevice.label !== "");
-    cameraDevices.filter((device) => device.kind === "videoinput");
+    const cameraDevices = devices.filter(
+      (device) => device.kind === "videoinput" && device.label !== ""
+    );
     setCameraPermissionsGranted(cameraDevices.length > 0);
   };
 

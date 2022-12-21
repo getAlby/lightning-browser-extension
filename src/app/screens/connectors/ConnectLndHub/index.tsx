@@ -130,8 +130,6 @@ export default function ConnectLndHub({
       <div>
         <p className="text-center my-4 dark:text-white">OR</p>
         <QrcodeScanner
-          fps={10}
-          qrbox={250}
           qrCodeSuccessCallback={(decodedText: string) => {
             if (formData.uri !== decodedText) {
               setFormData({

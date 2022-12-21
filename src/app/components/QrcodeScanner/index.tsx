@@ -17,18 +17,11 @@ interface ScanResult {
 }
 
 type Props = {
-  fps?: number;
-  qrbox?: number;
   qrCodeSuccessCallback?: (decodedText: string) => void;
   qrCodeErrorCallback?: (errorMessage: Error | string) => void;
 };
 
-function QrcodeScanner({
-  fps = 10,
-  qrbox = 250,
-  qrCodeSuccessCallback,
-  qrCodeErrorCallback,
-}: Props) {
+function QrcodeScanner({ qrCodeSuccessCallback, qrCodeErrorCallback }: Props) {
   const [isScanning, setScanning] = useState(false);
   const [cameras, setCameras] = useState<CameraDevice[]>([]);
   const [selectedCamera, setSelectedCamera] = useState("");
@@ -114,7 +107,11 @@ function QrcodeScanner({
         </>
       )}
 
-      <div className={`bg-black w-full ${!isScanning ? "hidden" : ""}`}>
+      <div
+        className={`bg-black w-full aspect-video ${
+          !isScanning ? "hidden" : ""
+        }`}
+      >
         <video id="qr-code-reader" />
       </div>
 
