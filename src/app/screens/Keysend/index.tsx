@@ -107,8 +107,8 @@ function Keysend() {
       />
       {!successMessage ? (
         <>
-          <Container justifyBetween maxWidth="sm">
-            <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="h-full">
+            <Container justifyBetween maxWidth="sm">
               <div>
                 {destination && <PublisherCard title={destination} />}
                 <ContentMessage
@@ -134,8 +134,8 @@ function Keysend() {
                 loading={loading}
                 disabled={loading || !amountSat}
               />
-            </form>
-          </Container>
+            </Container>
+          </form>
         </>
       ) : (
         <Container justifyBetween maxWidth="sm">
