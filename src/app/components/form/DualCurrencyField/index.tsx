@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { classNames } from "~/app/utils";
 
 export type Props = {
@@ -61,6 +61,18 @@ export default function DualCurrencyField({
     />
   );
 
+  // run effect on input mount to ignore wheel/scroll event
+  useEffect(() => {
+    const ignoreScroll = (evt: globalThis.WheelEvent) => {
+      evt.preventDefault();
+    };
+    const elem = inputEl.current;
+    elem && elem.addEventListener("wheel", ignoreScroll);
+    return () => {
+      elem && elem.removeEventListener("wheel", ignoreScroll);
+    };
+  }, [inputEl]);
+
   return (
     <div className="relative block m-0">
       <label
@@ -72,8 +84,8 @@ export default function DualCurrencyField({
 
       <div
         className={classNames(
-          `flex items-stretch overflow-hidden field mt-1 ${!hint && "mb-6"} ${
-            !!fiatValue && "pb-6"
+          `flex items-stretch overflow-hidden field mt-1 ${!hint && "mb-2"} ${
+            fiatValue && "pb-6"
           } relative`,
           "focus-within:ring-orange-bitcoin focus-within:border-orange-bitcoin focus-within:dark:border-orange-bitcoin focus-within:ring-1",
           outerStyles

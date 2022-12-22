@@ -1,12 +1,17 @@
 import Dexie from "dexie";
-import "fake-indexeddb/auto";
 import browser from "webextension-polyfill";
-import type { DbAllowance, DbPayment, DbBlocklist } from "~/types";
+import type {
+  DbAllowance,
+  DbPayment,
+  DbBlocklist,
+  DbPermission,
+} from "~/types";
 
 class DB extends Dexie {
   allowances: Dexie.Table<DbAllowance, number>;
   payments: Dexie.Table<DbPayment, number>;
   blocklist: Dexie.Table<DbBlocklist, number>;
+  permissions: Dexie.Table<DbPermission, number>;
 
   constructor() {
     super("LBE");
@@ -19,20 +24,27 @@ class DB extends Dexie {
     this.version(2).stores({
       blocklist: "++id,host,name,imageURL,isBlocked,createdAt",
     });
+    this.version(3).stores({
+      permissions: "++id,allowanceId,host,method,enabled,blocked,createdAt",
+    });
     this.on("ready", this.loadFromStorage.bind(this));
     this.allowances = this.table("allowances");
     this.payments = this.table("payments");
     this.blocklist = this.table("blocklist");
+    this.permissions = this.table("permissions");
   }
 
   async saveToStorage() {
     const allowanceArray = await this.allowances.toArray();
     const paymentsArray = await this.payments.toArray();
     const blocklistArray = await this.blocklist.toArray();
+    const permissionsArray = await this.permissions.toArray();
+
     await browser.storage.local.set({
       allowances: allowanceArray,
       payments: paymentsArray,
       blocklist: blocklistArray,
+      permissions: permissionsArray,
     });
     return true;
   }
@@ -43,9 +55,11 @@ class DB extends Dexie {
   // In that case we don't do anything as this would cause conflicts and errors.
   // (this could use some DRY-up)
   async loadFromStorage() {
+    console.info(`Current DB version: ${this.verno}`);
     console.info("Loading DB data from storage");
+
     return browser.storage.local
-      .get(["allowances", "payments", "blocklist"])
+      .get(["allowances", "payments", "blocklist", "permissions"])
       .then((result) => {
         const allowancePromise = this.allowances.count().then((count) => {
           // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
@@ -92,11 +106,27 @@ class DB extends Dexie {
           }
         });
 
+        const permissionsPromise = this.permissions.count().then((count) => {
+          // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
+          if (count > 0) {
+            console.info(`Found ${count} permissions already in the DB`);
+            return;
+          } else if (result.permissions && result.permissions.length > 0) {
+            // adding the data from the browser storage
+            return this.permissions
+              .bulkAdd(result.permissions)
+              .catch(Dexie.BulkError, function (e) {
+                console.error("Failed to add permissions; ignoring", e);
+              });
+          }
+        });
+
         // wait for all allowances and payments to be loaded
         return Promise.all([
           allowancePromise,
           paymentsPromise,
           blocklistPromise,
+          permissionsPromise,
         ]);
       })
       .catch((e) => {

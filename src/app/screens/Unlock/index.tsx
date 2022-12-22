@@ -9,12 +9,14 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAccount } from "~/app/context/AccountContext";
+import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 
 function Unlock() {
   const [password, setPassword] = useState("");
   const [passwordView, setPasswordView] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation() as {
     state: { from?: { pathname?: string } };
@@ -36,17 +38,20 @@ function Unlock() {
 
   async function reset(event: React.MouseEvent<HTMLElement>) {
     event.preventDefault();
-    await utils.call("reset");
+    await msg.request("reset");
     utils.openPage("welcome.html");
   }
 
   function unlock() {
+    setLoading(true);
     auth
       .unlock(password, () => {
         navigate(from, { replace: true });
+        setLoading(false);
       })
       .catch((e) => {
         setError(e.message);
+        setLoading(false);
       });
   }
 
@@ -105,7 +110,8 @@ function Unlock() {
           label={tCommon("actions.unlock")}
           fullWidth
           primary
-          disabled={password === ""}
+          loading={loading}
+          disabled={loading || password === ""}
         />
 
         <div className="flex justify-center space-x-1 mt-5">

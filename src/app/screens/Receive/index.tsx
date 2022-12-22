@@ -20,8 +20,7 @@ import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
-import utils from "~/common/lib/utils";
-import { getFiatValue } from "~/common/utils/currencyConvert";
+import msg from "~/common/lib/msg";
 import { poll } from "~/common/utils/helpers";
 
 function Receive() {
@@ -29,7 +28,11 @@ function Receive() {
   const { t: tCommon } = useTranslation("common");
 
   const auth = useAccount();
-  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFormattedFiat,
+  } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
   const navigate = useNavigate();
@@ -43,7 +46,7 @@ function Receive() {
     paymentRequest: string;
     rHash: string;
   }>();
-  const [copyLabel, setCopyLabel] = useState("Copy");
+  const [copyLabel, setCopyLabel] = useState(tCommon("actions.copy") as string);
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
@@ -61,11 +64,11 @@ function Receive() {
   useEffect(() => {
     if (formData.amount !== "" && showFiat) {
       (async () => {
-        const res = await getFiatValue(formData.amount);
+        const res = await getFormattedFiat(formData.amount);
         setFiatAmount(res);
       })();
     }
-  }, [formData, showFiat]);
+  }, [formData, showFiat, getFormattedFiat]);
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -80,7 +83,7 @@ function Receive() {
     setPollingForPayment(true);
     poll({
       fn: () =>
-        utils.call("checkPayment", { paymentHash }) as Promise<{
+        msg.request("checkPayment", { paymentHash }) as Promise<{
           paid: boolean;
         }>,
       validate: (payment) => payment.paid,
@@ -119,7 +122,7 @@ function Receive() {
   function renderInvoice() {
     if (!invoice) return null;
     return (
-      <div>
+      <div className="py-4">
         <div className="relative p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center overflow-hidden">
           <QRCode value={invoice.paymentRequest.toUpperCase()} level="M" />
           {paid && (
@@ -188,7 +191,7 @@ function Receive() {
   }
 
   return (
-    <div>
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <Header
         title={t("title")}
         headerLeft={
@@ -198,18 +201,19 @@ function Receive() {
           />
         }
       />
-      <div className="py-4">
-        <Container maxWidth="sm">
-          <div className={`${paid ? "bg-green-bitcoin" : ""}`}>
-            {invoice ? (
-              renderInvoice()
-            ) : (
-              <form
-                onSubmit={(e: FormEvent) => {
-                  e.preventDefault();
-                  createInvoice();
-                }}
-              >
+      {invoice ? (
+        <Container maxWidth="sm">{renderInvoice()}</Container>
+      ) : (
+        <form
+          onSubmit={(e: FormEvent) => {
+            e.preventDefault();
+            createInvoice();
+          }}
+          className="h-full"
+        >
+          <fieldset disabled={loading}>
+            <Container justifyBetween maxWidth="sm">
+              <div className="py-4">
                 <div className="mb-4">
                   <DualCurrencyField
                     id="amount"
@@ -218,6 +222,7 @@ function Receive() {
                     placeholder={t("amount.placeholder")}
                     fiatValue={fiatAmount}
                     onChange={handleChange}
+                    autoFocus
                   />
                 </div>
 
@@ -229,24 +234,21 @@ function Receive() {
                     onChange={handleChange}
                   />
                 </div>
-
-                <div className="text-center mb-4">
-                  <div className="mb-4">
-                    <Button
-                      type="submit"
-                      label={t("actions.create_invoice")}
-                      fullWidth
-                      primary
-                      loading={loading}
-                      disabled={loading}
-                    />
-                  </div>
-                </div>
-              </form>
-            )}
-          </div>
-        </Container>
-      </div>
+              </div>
+              <div className="mb-4">
+                <Button
+                  type="submit"
+                  label={t("actions.create_invoice")}
+                  fullWidth
+                  primary
+                  loading={loading}
+                  disabled={loading}
+                />
+              </div>
+            </Container>
+          </fieldset>
+        </form>
+      )}
     </div>
   );
 }

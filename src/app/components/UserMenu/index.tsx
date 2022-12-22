@@ -6,6 +6,7 @@ import {
   TransactionsIcon,
   ReceiveIcon,
   QuestionIcon,
+  RocketIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -78,13 +79,22 @@ export default function UserMenu() {
           <GearIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
           {tCommon("settings")}
         </Menu.ItemButton>
+        <Menu.Divider />
         <Menu.ItemButton
           onClick={() => {
             utils.openUrl("https://feedback.getalby.com");
           }}
         >
-          <QuestionIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          <RocketIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
           {tCommon("feedback")}
+        </Menu.ItemButton>
+        <Menu.ItemButton
+          onClick={() => {
+            utils.openUrl("https://guides.getalby.com");
+          }}
+        >
+          <QuestionIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          {tCommon("help")}
         </Menu.ItemButton>
         <Menu.Divider />
         <Menu.ItemButton onClick={lock}>

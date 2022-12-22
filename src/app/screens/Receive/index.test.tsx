@@ -2,23 +2,17 @@ import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
-import * as SettingsContext from "~/app/context/SettingsContext";
+import { SettingsProvider } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 
 import Receive from "./index";
 
-jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
-  settings: mockSettings,
-  isLoading: false,
-  updateSetting: jest.fn(),
-});
-
 jest.mock("~/common/lib/api", () => {
+  const original = jest.requireActual("~/common/lib/api");
   return {
-    getSettings: jest.fn(() => ({
-      currency: "USD",
-      exchange: "coindesk",
-    })),
+    ...original,
+    getSettings: jest.fn(() => Promise.resolve(mockSettings)),
+    getCurrencyRate: jest.fn(() => Promise.resolve({ rate: 11 })),
     makeInvoice: jest.fn(),
   };
 });
@@ -30,11 +24,15 @@ describe("Receive", () => {
 
   test("call createInvoice if form is filled and submitted", async () => {
     const user = userEvent.setup();
-    render(
-      <MemoryRouter>
-        <Receive />
-      </MemoryRouter>
-    );
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <SettingsProvider>
+            <Receive />
+          </SettingsProvider>
+        </MemoryRouter>
+      );
+    });
 
     const makeInvoiceSpy = jest.spyOn(api, "makeInvoice");
 

@@ -4,10 +4,10 @@ import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import utils from "~/common/lib/utils";
 import type { OriginData } from "~/types";
 
 type Props = {
@@ -16,23 +16,26 @@ type Props = {
 
 function Enable(props: Props) {
   const hasFetchedData = useRef(false);
-  const [, setLoading] = useState(true);
-  const [remember] = useState(true);
-  const [, setEnabled] = useState(false);
-  const [budget] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { t } = useTranslation("translation", {
     keyPrefix: "enable",
   });
   const { t: tCommon } = useTranslation("common");
 
   const enable = useCallback(() => {
-    setEnabled(true);
-    msg.reply({
-      enabled: true,
-      remember,
-      budget,
-    });
-  }, [budget, remember]);
+    try {
+      setLoading(true);
+      msg.reply({
+        enabled: true,
+        remember: true,
+      });
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) toast.error(`${tCommon("error")}: ${e.message}`);
+    } finally {
+      setLoading(false);
+    }
+  }, [tCommon]);
 
   function reject(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
@@ -41,15 +44,12 @@ function Enable(props: Props) {
 
   async function block(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
-    await utils.call("addBlocklist", {
+    await msg.request("addBlocklist", {
       domain: props.origin.domain,
       host: props.origin.host,
     });
-    msg.error(
-      `User added site to blocklist domain, host
-        ${props.origin.domain},
-        ${props.origin.host}`
-    );
+    alert(t("block_added", { host: props.origin.host }));
+    msg.error(USER_REJECTED_ERROR);
   }
 
   useEffect(() => {
@@ -62,7 +62,6 @@ function Enable(props: Props) {
         if (allowance && allowance.enabled) {
           enable();
         }
-        setLoading(false);
       } catch (e) {
         if (e instanceof Error) console.error(e.message);
       }
@@ -77,7 +76,7 @@ function Enable(props: Props) {
 
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
-      <ScreenHeader title={"Connect"} />
+      <ScreenHeader title={t("title")} />
       <Container justifyBetween maxWidth="sm">
         <div>
           <PublisherCard
@@ -87,14 +86,14 @@ function Enable(props: Props) {
             isSmall={false}
           />
 
-          <div className="dark:text-white pt-6">
-            <p className="mb-4">{t("allow", { host: props.origin.host })}</p>
+          <div className="dark:text-white pt-6 mb-4">
+            <p className="mb-2">{t("allow")}</p>
 
-            <div className="mb-4 flex items-center">
+            <div className="mb-2 flex items-center">
               <CheckIcon className="w-5 h-5 mr-2" />
               <p className="dark:text-white">{t("request1")}</p>
             </div>
-            <div className="mb-4 flex items-center">
+            <div className="mb-2 flex items-center">
               <CheckIcon className="w-5 h-5 mr-2" />
               <p className="dark:text-white">{t("request2")}</p>
             </div>
@@ -102,6 +101,8 @@ function Enable(props: Props) {
         </div>
         <div className="mb-4 text-center flex flex-col">
           <ConfirmOrCancel
+            disabled={loading}
+            loading={loading}
             label={tCommon("actions.connect")}
             onConfirm={enable}
             onCancel={reject}

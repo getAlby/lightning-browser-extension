@@ -11,7 +11,6 @@ import { ToastContainer } from "react-toastify";
 import { SettingsProvider } from "~/app/context/SettingsContext";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
 import i18n from "~/i18n/i18nConfig";
-import { translationI18nNamespace } from "~/i18n/namespaces";
 
 let connectorRoutes = getConnectorRoutes();
 
@@ -28,29 +27,23 @@ function getRoutes(
     {
       path: "/",
       element: <Intro />,
-      name: i18n.t("welcome.nav.welcome", translationI18nNamespace),
+      name: i18n.t("translation:welcome.nav.welcome"),
     },
     {
       path: "/set-password",
       element: <SetPassword />,
-      name: i18n.t("welcome.nav.password", translationI18nNamespace),
+      name: i18n.t("translation:welcome.nav.password"),
     },
     {
       path: "/choose-connector",
-      name: i18n.t("welcome.nav.connect", translationI18nNamespace),
+      name: i18n.t("translation:welcome.nav.connect"),
       children: [
         {
           index: true,
           element: (
             <ChooseConnector
-              title={i18n.t(
-                "choose_connector.title.welcome",
-                translationI18nNamespace
-              )}
-              description={i18n.t(
-                "choose_connector.description",
-                translationI18nNamespace
-              )}
+              title={i18n.t("translation:choose_connector.title.welcome")}
+              description={i18n.t("translation:choose_connector.description")}
             />
           ),
         },
@@ -60,7 +53,7 @@ function getRoutes(
     {
       path: "/test-connection",
       element: <TestConnection />,
-      name: i18n.t("welcome.nav.done", translationI18nNamespace),
+      name: i18n.t("translation:welcome.nav.done"),
     },
   ];
 }

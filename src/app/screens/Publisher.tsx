@@ -10,8 +10,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
-import utils from "~/common/lib/utils";
-import { getFiatValue } from "~/common/utils/currencyConvert";
+import msg from "~/common/lib/msg";
 import type { Allowance, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
@@ -20,7 +19,12 @@ function Publisher() {
   const { t } = useTranslation("translation", {
     keyPrefix: "publishers",
   });
-  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFormattedFiat,
+    getFormattedNumber,
+  } = useSettings();
 
   const hasFetchedData = useRef(false);
   const [allowance, setAllowance] = useState<Allowance | undefined>();
@@ -31,58 +35,23 @@ function Publisher() {
   const fetchData = useCallback(async () => {
     try {
       if (id) {
-        const response = await utils.call<Allowance>("getAllowanceById", {
+        const response = await msg.request<Allowance>("getAllowanceById", {
           id: parseInt(id),
         });
         setAllowance(response);
 
-        const payments: Transaction[] = response.payments.map((payment) => {
-          const {
-            createdAt,
-            description,
-            host,
-            id,
-            location,
-            name,
-            preimage,
-            totalAmount,
-            totalFees,
-          } = payment;
-          return {
-            createdAt,
-            description,
-            id: `${id}`,
-            location,
-            name,
-            preimage,
-            host,
-            totalAmount:
-              typeof totalAmount === "string"
-                ? parseInt(totalAmount)
-                : totalAmount,
-            totalFees,
-            amount: "",
-            currency: "",
-            totalAmountFiat: "",
-            value: "",
-            type: "sent",
-            date: dayjs(payment.createdAt).fromNow(),
-            title: (
-              <p className="truncate">
-                <a target="_blank" href={payment.location} rel="noreferrer">
-                  {/* 
-                    TODO: https://github.com/getAlby/lightning-browser-extension/issues/1356
-                    Refactor: use virtual attribute on payment for title
-                  */}
-                  {payment.name || payment.description}
-                </a>
-              </p>
-            ),
-          };
-        });
-        for await (const payment of payments) {
+        const payments: Transaction[] = response.payments.map((payment) => ({
+          ...payment,
+          id: `${payment.id}`,
+          type: "sent",
+          date: dayjs(payment.createdAt).fromNow(),
+          title: payment.name || payment.description,
+          publisherLink: payment.location,
+        }));
+
+        for (const payment of payments) {
           const totalAmountFiat = settings.showFiat
-            ? await getFiatValue(payment.totalAmount)
+            ? await getFormattedFiat(payment.totalAmount)
             : "";
           payment.totalAmountFiat = totalAmountFiat;
         }
@@ -92,7 +61,7 @@ function Publisher() {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
     }
-  }, [id, settings.showFiat]);
+  }, [id, settings.showFiat, getFormattedFiat]);
 
   useEffect(() => {
     // Run once.
@@ -123,7 +92,8 @@ function Publisher() {
               </dt>
 
               <dd className="flex items-center font-bold text-xl dark:text-neutral-400">
-                {allowance.usedBudget} / {allowance.totalBudget}{" "}
+                {getFormattedNumber(allowance.usedBudget)} /{" "}
+                {getFormattedNumber(allowance.totalBudget)}{" "}
                 {t("publisher.allowance.used_budget")}
                 <div className="ml-3 w-24">
                   <Progressbar percentage={allowance.percentage} />

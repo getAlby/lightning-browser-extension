@@ -1,47 +1,9 @@
-import PubSub from "pubsub-js";
 import browser, { Runtime } from "webextension-polyfill";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
-import type {
-  Invoice,
-  Message,
-  MessageSendPayment,
-  OriginData,
-  OriginDataInternal,
-  PaymentNotificationData,
-} from "~/types";
+import { getPosition as getWindowPosition } from "~/common/utils/window";
+import type { Invoice, OriginData, OriginDataInternal } from "~/types";
 
 const utils = {
-  call: <T = Record<string, unknown>>(
-    action: string,
-    args?: Record<string, unknown>,
-    overwrites?: Record<string, unknown>
-  ) => {
-    return browser.runtime
-      .sendMessage({
-        application: "LBE",
-        prompt: true,
-        action: action,
-        args: args,
-        origin: { internal: true },
-        ...overwrites,
-      })
-      .then((response: { data: T; error?: string }) => {
-        if (response.error) {
-          throw new Error(response.error);
-        }
-
-        return response.data;
-      });
-  },
-  notify: (options: { title: string; message: string }) => {
-    const notification: browser.Notifications.CreateNotificationOptions = {
-      type: "basic",
-      iconUrl: "assets/icons/alby_icon_yellow_48x48.png",
-      ...options,
-    };
-
-    return browser.notifications.create(notification);
-  },
   base64ToHex: (str: string) => {
     const hex = [];
     for (
@@ -75,21 +37,6 @@ const utils = {
   stringToUint8Array: (str: string) => {
     return Uint8Array.from(str, (x) => x.charCodeAt(0));
   },
-  publishPaymentNotification: (
-    message: MessageSendPayment | Message, // 'keysend' & 'sendPaymentOrPrompt' still need the Message type
-    data: Omit<PaymentNotificationData, "origin">
-  ) => {
-    let status = "success"; // default. let's hope for success
-    if ("error" in data.response) {
-      status = "failed";
-    }
-    PubSub.publish(`ln.sendPayment.${status}`, {
-      response: data.response,
-      details: data.details,
-      paymentRequestDetails: data.paymentRequestDetails,
-      origin: message.origin,
-    });
-  },
   openPage: (page: string) => {
     browser.tabs.create({ url: browser.runtime.getURL(page) });
   },
@@ -99,7 +46,7 @@ const utils = {
   openUrl: (url: string) => {
     browser.tabs.create({ url });
   },
-  openPrompt: <Type>(message: {
+  openPrompt: async <Type>(message: {
     args: Record<string, unknown>;
     origin: OriginData | OriginDataInternal;
     action: string;
@@ -120,13 +67,20 @@ const utils = {
       "prompt.html"
     )}?${urlParams.toString()}`;
 
+    const windowWidth = 400;
+    const windowHeight = 600;
+
+    const { top, left } = await getWindowPosition(windowWidth, windowHeight);
+
     return new Promise((resolve, reject) => {
       browser.windows
         .create({
           url: url,
           type: "popup",
-          width: 400,
-          height: 600,
+          width: windowWidth,
+          height: windowHeight,
+          top: top,
+          left: left,
         })
         .then((window) => {
           let tabId: number | undefined;
@@ -134,6 +88,15 @@ const utils = {
             tabId = window.tabs[0].id;
           }
 
+          // this interval hightlights the popup in the taskbar
+          const focusInterval = setInterval(() => {
+            if (!window.id) {
+              return;
+            }
+            browser.windows.update(window.id, {
+              drawAttention: true,
+            });
+          }, 2100);
           const onMessageListener = (
             responseMessage: {
               response?: unknown;
@@ -148,6 +111,7 @@ const utils = {
               sender.tab &&
               sender.tab.id === tabId
             ) {
+              clearInterval(focusInterval);
               browser.tabs.onRemoved.removeListener(onRemovedListener);
               if (sender.tab.windowId) {
                 return browser.windows.remove(sender.tab.windowId).then(() => {
@@ -164,6 +128,7 @@ const utils = {
           };
 
           const onRemovedListener = (tid: number) => {
+            clearInterval(focusInterval);
             if (tabId === tid) {
               browser.runtime.onMessage.removeListener(onMessageListener);
               reject(new Error(ABORT_PROMPT_ERROR));

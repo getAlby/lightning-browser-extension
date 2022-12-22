@@ -18,8 +18,8 @@ describe("ConfirmPayment", () => {
       </MemoryRouter>
     );
 
-    expect(await screen.getByText("100")).toBeInTheDocument();
-    expect(await screen.getByText("200")).toBeInTheDocument();
-    expect(await screen.getByText("300")).toBeInTheDocument();
+    expect(screen.getByText("100")).toBeInTheDocument();
+    expect(screen.getByText("200")).toBeInTheDocument();
+    expect(screen.getByText("300")).toBeInTheDocument();
   });
 });

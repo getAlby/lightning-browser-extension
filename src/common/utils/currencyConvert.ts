@@ -1,114 +1,40 @@
 /**
  * Highly inspired by: https://github.com/AryanJ-NYC/bitcoin-conversion
  */
-import axios from "axios";
-import debounce from "lodash/debounce";
-import { CURRENCIES } from "~/common/constants";
-import { getSettings } from "~/common/lib/api";
+import i18n from "~/i18n/i18nConfig";
 
-const getCurrencySettings = async () => {
-  const { currency, exchange } = await getSettings();
+import type { CURRENCIES } from "../constants";
 
-  return {
-    currency,
-    exchange,
-  };
-};
-
-const numSatsInBtc = 100_000_000;
-
-const getFiatBtcRate = async (currency: CURRENCIES): Promise<string> => {
-  const { exchange } = await getCurrencySettings();
-
-  let response;
-
-  if (exchange === "yadio") {
-    response = await axios.get(
-      `https://api.yadio.io/exrates/${currency.toLowerCase()}`
-    );
-    const data = await response?.data;
-
-    return data.BTC;
-  }
-
-  if (exchange === "coindesk") {
-    response = await axios.get(
-      `https://api.coindesk.com/v1/bpi/currentprice/${currency.toLowerCase()}.json`
-    );
-    const data = await response?.data;
-
-    return data.bpi[currency].rate_float;
-  }
-
-  response = await axios.get(
-    `https://getalby.com/api/rates/${currency.toLowerCase()}.json`
-  );
-  const data = await response?.data;
-
-  return data[currency].rate_float;
-};
-
-// @TODO: https://github.com/getAlby/lightning-browser-extension/issues/1021
-// Replace decounce by saving rate to app-cache and only get it every minute for the whole app
-//
-// https://github.com/lodash/lodash/issues/4400#issuecomment-834800398
-const debouncedGetFiatBtcRate = debounce(
-  async function (callback) {
-    return await callback();
-  },
-  60000,
-  {
-    leading: true,
-    trailing: false,
-  }
-);
-
-const bitcoinToFiat = async (
-  amountInBtc: number | string,
-  convertTo: CURRENCIES,
-  isLatestRate?: boolean
-) => {
-  const rate = isLatestRate
-    ? await getFiatBtcRate(convertTo)
-    : await debouncedGetFiatBtcRate(() => getFiatBtcRate(convertTo));
-
-  return Number(amountInBtc) * Number(rate);
-};
-
-const satoshisToBitcoin = (amountInSatoshis: number | string) => {
-  return Number(amountInSatoshis) / numSatsInBtc;
-};
-
-const satoshisToFiat = async ({
-  amountInSats,
-  convertTo,
-  isLatestRate,
-}: {
-  amountInSats: number | string;
-  convertTo: CURRENCIES;
-  isLatestRate?: boolean;
+export const getFormattedFiat = (params: {
+  amount: number | string;
+  rate: number;
+  currency: CURRENCIES;
+  locale: string;
 }) => {
-  const btc = satoshisToBitcoin(amountInSats);
-  const fiat = await bitcoinToFiat(btc, convertTo, isLatestRate);
-  return fiat;
-};
+  const fiatValue = Number(params.amount) * params.rate;
 
-export const getFiatValue = async (
-  amount: number | string,
-  isLatestRate?: boolean
-) => {
-  const { currency } = await getCurrencySettings();
-  const fiatValue = await satoshisToFiat({
-    amountInSats: amount,
-    convertTo: currency,
-    isLatestRate,
-  });
-  const localeFiatValue = fiatValue.toLocaleString("en", {
+  const l = (params.locale || "en").toLowerCase().replace("_", "-");
+  return new Intl.NumberFormat(l || "en", {
     style: "currency",
-    currency: currency,
-  });
-
-  return localeFiatValue;
+    currency: params.currency,
+  }).format(fiatValue);
 };
 
-export const getSatValue = (balance: number) => `${balance} sats`;
+export const getFormattedNumber = (params: {
+  amount: number | string;
+  locale: string;
+}) => {
+  const l = (params.locale || "en").toLowerCase().replace("_", "-");
+  return new Intl.NumberFormat(l || "en").format(Number(params.amount));
+};
+
+export const getFormattedSats = (params: {
+  amount: number | string;
+  locale: string;
+}) => {
+  const formattedNumber = getFormattedNumber(params);
+
+  return `${formattedNumber} ${i18n.t("common:sats", {
+    count: Number(params.amount),
+  })}`;
+};

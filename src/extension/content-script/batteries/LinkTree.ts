@@ -1,21 +1,20 @@
 import getOriginData from "../originData";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 
-const urlMatcher = /^https:\/\/linktr.ee\/(\w+)$/;
+const urlMatcher = /^https:\/\/linktr.ee\/([\S]+)$/;
 
 function battery(): void {
   const linkElement = document.querySelector<HTMLAnchorElement>(
     "a[href*='getalby.com']"
   );
-  const description = document.querySelector<HTMLMetaElement>(
-    'head > meta[name="description"]'
-  );
+  const description = [...document.querySelectorAll("h2")].filter(
+    (el) => el.id != "ot-pc-title"
+  )[0];
 
-  let text = description?.content + " ";
+  let text = description?.innerText + " ";
 
   if (linkElement) {
-    const url = new URL(linkElement.href);
-    text += url.searchParams.get("url") + " ";
+    text += linkElement.href + " ";
   }
 
   const address = findLightningAddressInText(text ?? "");
@@ -26,13 +25,8 @@ function battery(): void {
       method: "lnurl",
       address,
       ...getOriginData(),
-      description:
-        document.querySelector<HTMLMetaElement>(
-          'head > meta[name="description"]'
-        )?.content ?? "",
-      name:
-        document.querySelector<HTMLHeadingElement>("h1")?.innerText.slice(1) ??
-        "",
+      description: description?.innerText ?? "",
+      name: document.querySelector<HTMLHeadingElement>("h1")?.innerText ?? "",
       icon:
         document.querySelector<HTMLImageElement>('[data-testid="ProfileImage"]')
           ?.src ?? "",

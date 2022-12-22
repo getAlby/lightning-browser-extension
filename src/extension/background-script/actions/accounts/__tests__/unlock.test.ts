@@ -15,6 +15,7 @@ const mockState = {
     id: "1e1e8ea6-493e-480b-9855-303d37506e97",
     name: "Alby",
   }),
+  getConnector: jest.fn(),
 };
 
 describe("edit account", () => {

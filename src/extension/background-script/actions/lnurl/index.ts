@@ -1,4 +1,5 @@
 import lnurlLib from "~/common/lib/lnurl";
+import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 import type { MessageWebLnLnurl } from "~/types";
 
 import auth from "./auth";
@@ -16,6 +17,9 @@ async function lnurl(message: MessageWebLnLnurl) {
   let lnurlDetails;
   try {
     lnurlDetails = await lnurlLib.getDetails(message.args.lnurlEncoded);
+    if (isLNURLDetailsError(lnurlDetails)) {
+      return { error: lnurlDetails.reason };
+    }
   } catch (e) {
     return { error: e instanceof Error ? e.message : "Failed to parse LNURL" };
   }

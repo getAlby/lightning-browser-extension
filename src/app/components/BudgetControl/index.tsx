@@ -57,11 +57,12 @@ function BudgetControl({
 
         <div>
           <DualCurrencyField
+            autoFocus
             fiatValue={fiatAmount}
             id="budget"
             min={0}
             label={t("budget.label")}
-            placeholder={tCommon("sats")}
+            placeholder={tCommon("sats", { count: 0 })}
             value={budget}
             onChange={onBudgetChange}
           />

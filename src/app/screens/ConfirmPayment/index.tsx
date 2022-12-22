@@ -1,9 +1,10 @@
 import BudgetControl from "@components/BudgetControl";
+import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
-import SuccessMessage from "@components/SuccessMessage";
+import ResultCard from "@components/ResultCard";
 import lightningPayReq from "bolt11";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,18 +16,24 @@ import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import utils from "~/common/lib/utils";
-import { getFiatValue } from "~/common/utils/currencyConvert";
 
 function ConfirmPayment() {
-  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFormattedFiat,
+    getFormattedSats,
+  } = useSettings();
+
   const showFiat = !isLoadingSettings && settings.showFiat;
+
   const { t } = useTranslation("translation", {
     keyPrefix: "confirm_payment",
   });
   const { t: tComponents } = useTranslation("components", {
     keyPrefix: "confirm_or_cancel",
   });
+  const { t: tCommon } = useTranslation("common");
 
   const navState = useNavigationState();
   const paymentRequest = navState.args?.paymentRequest as string;
@@ -41,23 +48,25 @@ function ConfirmPayment() {
   const [fiatAmount, setFiatAmount] = useState("");
   const [fiatBudgetAmount, setFiatBudgetAmount] = useState("");
 
+  const formattedInvoiceSats = getFormattedSats(invoice.satoshis || 0);
+
   useEffect(() => {
     (async () => {
       if (showFiat && invoice.satoshis) {
-        const res = await getFiatValue(invoice.satoshis);
+        const res = await getFormattedFiat(invoice.satoshis);
         setFiatAmount(res);
       }
     })();
-  }, [invoice.satoshis, showFiat]);
+  }, [invoice.satoshis, showFiat, getFormattedFiat]);
 
   useEffect(() => {
     (async () => {
       if (showFiat && budget) {
-        const res = await getFiatValue(budget);
+        const res = await getFormattedFiat(budget);
         setFiatBudgetAmount(res);
       }
     })();
-  }, [budget, showFiat]);
+  }, [budget, showFiat, getFormattedFiat]);
 
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -70,7 +79,7 @@ function ConfirmPayment() {
 
     try {
       setLoading(true);
-      const response = await utils.call(
+      const response = await msg.request(
         "sendPayment",
         { paymentRequest: paymentRequest },
         {
@@ -79,7 +88,14 @@ function ConfirmPayment() {
       );
       auth.fetchAccountInfo(); // Update balance.
       msg.reply(response);
-      setSuccessMessage(t("success"));
+
+      setSuccessMessage(
+        t("success", {
+          amount: `${formattedInvoiceSats} ${
+            showFiat ? ` (${fiatAmount})` : ``
+          }`,
+        })
+      );
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
@@ -97,6 +113,15 @@ function ConfirmPayment() {
     }
   }
 
+  function close(e: React.MouseEvent<HTMLButtonElement>) {
+    if (navState.isPrompt) {
+      window.close();
+    } else {
+      e.preventDefault();
+      navigate(-1);
+    }
+  }
+
   function saveBudget() {
     if (!budget || !navState.origin) return;
     return msg.request("addAllowance", {
@@ -107,65 +132,78 @@ function ConfirmPayment() {
     });
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    confirm();
+  }
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
-      <ScreenHeader title={t("title")} />
+      <ScreenHeader title={!successMessage ? t("title") : tCommon("success")} />
       {!successMessage ? (
         <Container justifyBetween maxWidth="sm">
-          <div>
-            {navState.origin && (
-              <PublisherCard
-                title={navState.origin.name}
-                image={navState.origin.icon}
-                url={navState.origin.host}
-              />
-            )}
-            <div className="my-4">
-              <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
-                <PaymentSummary
-                  amount={invoice.satoshis}
-                  fiatAmount={fiatAmount}
-                  description={invoice.tagsObject.description}
+          <form onSubmit={handleSubmit}>
+            <div>
+              {navState.origin && (
+                <PublisherCard
+                  title={navState.origin.name}
+                  image={navState.origin.icon}
+                  url={navState.origin.host}
                 />
+              )}
+              <div className="my-4">
+                <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
+                  <PaymentSummary
+                    amount={invoice.satoshis || "0"} // how come that sathoshis can be undefined, bolt11?
+                    fiatAmount={fiatAmount}
+                    description={invoice.tagsObject.description}
+                  />
+                </div>
+                {navState.origin && (
+                  <BudgetControl
+                    fiatAmount={fiatBudgetAmount}
+                    remember={rememberMe}
+                    onRememberChange={(event) => {
+                      setRememberMe(event.target.checked);
+                    }}
+                    budget={budget}
+                    onBudgetChange={(event) => setBudget(event.target.value)}
+                  />
+                )}
               </div>
-
-              <BudgetControl
-                fiatAmount={fiatBudgetAmount}
-                remember={rememberMe}
-                onRememberChange={(event) => {
-                  setRememberMe(event.target.checked);
-                }}
-                budget={budget}
-                onBudgetChange={(event) => setBudget(event.target.value)}
-              />
             </div>
-          </div>
-          <div>
-            <ConfirmOrCancel
-              disabled={loading}
-              loading={loading}
-              onConfirm={confirm}
-              onCancel={reject}
-              label={t("actions.pay_now")}
-            />
-            <p className="mb-4 text-center text-sm text-gray-400">
-              <em>{tComponents("only_trusted")}</em>
-            </p>
-          </div>
+            <div>
+              <ConfirmOrCancel
+                disabled={loading}
+                loading={loading}
+                onCancel={reject}
+                label={t("actions.pay_now")}
+              />
+              <p className="mb-4 text-center text-sm text-gray-400">
+                <em>{tComponents("only_trusted")}</em>
+              </p>
+            </div>
+          </form>
         </Container>
       ) : (
-        <Container maxWidth="sm">
-          {navState.origin && (
-            <PublisherCard
-              title={navState.origin.name}
-              image={navState.origin.icon}
-              url={navState.origin.host}
-            />
-          )}
+        <Container justifyBetween maxWidth="sm">
+          <ResultCard
+            isSuccess
+            message={
+              !navState.origin
+                ? successMessage
+                : tCommon("success_message", {
+                    amount: formattedInvoiceSats,
+                    fiatAmount: showFiat ? ` (${fiatAmount})` : ``,
+                    destination: navState.origin.name,
+                  })
+            }
+          />
           <div className="my-4">
-            <SuccessMessage
-              message={successMessage}
-              onClose={() => window.close()}
+            <Button
+              onClick={close}
+              label={tCommon("actions.close")}
+              fullWidth
             />
           </div>
         </Container>

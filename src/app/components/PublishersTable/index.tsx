@@ -1,4 +1,6 @@
 import { CaretRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { useTranslation } from "react-i18next";
+import { useSettings } from "~/app/context/SettingsContext";
 import { Publisher } from "~/types";
 
 import Badge from "../Badge";
@@ -16,6 +18,12 @@ export default function PublishersTable({
   publishers,
   navigateToPublisher,
 }: Props) {
+  const { getFormattedSats, getFormattedNumber } = useSettings();
+  const { t: tComponents } = useTranslation("components", {
+    keyPrefix: "publishers_table",
+  });
+  const { t: tCommon } = useTranslation("common");
+
   return (
     <div className="shadow overflow-hidden rounded-lg">
       <table className="min-w-full">
@@ -45,18 +53,24 @@ export default function PublishersTable({
                       <p className="text-lg inline mr-2 dark:text-white">
                         {publisher.name}
                       </p>
-                      {publisher.badge && (
-                        <Badge
-                          label={publisher.badge.label}
-                          color={publisher.badge.color}
-                          textColor={publisher.badge.textColor}
-                        />
-                      )}
+                      {publisher.badges?.map((b) => {
+                        return (
+                          <Badge
+                            key={b.label}
+                            label={b.label}
+                            color={b.color}
+                            textColor={b.textColor}
+                          />
+                        );
+                      })}
                     </div>
                     <div className="text-sm text-gray-500 dark:text-neutral-400">
-                      {publisher.host} • {publisher.paymentsCount} payments{" "}
+                      {publisher.host} • {publisher.paymentsCount}{" "}
+                      {tComponents("payments")}{" "}
                       {publisher.paymentsAmount > 0 && (
-                        <span>({publisher.paymentsAmount} sats)</span>
+                        <span>
+                          {getFormattedSats(publisher.paymentsAmount)}
+                        </span>
                       )}
                     </div>
                   </div>
@@ -66,7 +80,10 @@ export default function PublishersTable({
                 {publisher.totalBudget > 0 && (
                   <div className="ml-40">
                     <p className="text-lg text-gray-500 mb-0 dark:text-neutral-400">
-                      {publisher.usedBudget} / {publisher.totalBudget} sats used
+                      {getFormattedNumber(publisher.usedBudget)} /{" "}
+                      {getFormattedNumber(publisher.totalBudget)}{" "}
+                      {tCommon("sats", { count: publisher.usedBudget })}{" "}
+                      {tComponents("used")}
                     </p>
                     <div className="relative mt-2 ml-auto">
                       <div className="flex items-center justify-end">

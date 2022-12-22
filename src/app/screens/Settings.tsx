@@ -1,4 +1,8 @@
-import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import {
+  CrossIcon,
+  HiddenIcon,
+  VisibleIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
@@ -6,17 +10,17 @@ import PasswordForm from "@components/PasswordForm";
 import Setting from "@components/Setting";
 import Input from "@components/form/Input";
 import Select from "@components/form/Select";
+import TextField from "@components/form/TextField";
 import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
 import type { FormEvent } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
-import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { CURRENCIES } from "~/common/constants";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 
 const initialFormData = {
   password: "",
@@ -26,10 +30,21 @@ const initialFormData = {
 function Settings() {
   const { t } = useTranslation("translation", { keyPrefix: "settings" });
   const { isLoading, settings, updateSetting } = useSettings();
-  const { fetchAccountInfo } = useAccount();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
+
+  const [nostrPrivateKey, setNostrPrivateKey] = useState("");
+  const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
+
+  const getPrivateKeyFromStorage = async () => {
+    const priv = (await msg.request("nostr/getPrivateKey")) as string;
+    setNostrPrivateKey(priv ?? "");
+  };
+
+  useEffect(() => {
+    getPrivateKeyFromStorage().catch(console.error);
+  }, []);
 
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
@@ -38,11 +53,31 @@ function Settings() {
     setModalIsOpen(false);
   }
 
+  async function saveNostrPrivateKey(nostrPrivateKey: string) {
+    const result = await msg.request("nostr/getPrivateKey");
+    const currentPrivateKey = result as unknown as string;
+
+    if (nostrPrivateKey === currentPrivateKey) return;
+
+    if (currentPrivateKey && !confirm(t("nostr.private_key.warning"))) {
+      return;
+    }
+
+    await msg.request("nostr/setPrivateKey", {
+      privateKey: nostrPrivateKey,
+    });
+
+    saveSetting({
+      nostrEnabled: !!nostrPrivateKey,
+    });
+    toast.success(t("nostr.private_key.success"));
+  }
+
   async function updateAccountPassword(password: string) {
-    await utils.call("changePassword", {
+    await msg.request("changePassword", {
       password: formData.password,
     });
-    toast.success("Password changed successfully!");
+    toast.success(t("change_password.success"));
     closeModal();
   }
 
@@ -59,6 +94,21 @@ function Settings() {
         {t("title")}
       </h2>
       <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
+        <Setting
+          title={t("browser_notifications.title")}
+          subtitle={t("browser_notifications.subtitle")}
+        >
+          {!isLoading && (
+            <Toggle
+              checked={settings.browserNotifications}
+              onChange={() => {
+                saveSetting({
+                  browserNotifications: !settings.browserNotifications,
+                });
+              }}
+            />
+          )}
+        </Setting>
         <Setting
           title={t("website_enhancements.title")}
           subtitle={t("website_enhancements.subtitle")}
@@ -107,7 +157,7 @@ function Settings() {
                 <a
                   className="underline"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noreferrer noopener"
                   href="https://hosted.weblate.org/projects/getalby-lightning-browser-extension/getalby-lightning-browser-extension/"
                 ></a>,
               ]}
@@ -186,7 +236,6 @@ function Settings() {
                     name="currency"
                     value={settings.currency}
                     onChange={async (event) => {
-                      fetchAccountInfo({ isLatestRate: true });
                       await saveSetting({
                         currency: event.target.value,
                       });
@@ -276,7 +325,7 @@ function Settings() {
           closeTimeoutMS={200}
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
-          contentLabel={t("change_password.content_label")}
+          contentLabel={t("change_password.screen_reader")}
           overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
           className="rounded-lg bg-white w-full max-w-lg"
         >
@@ -305,7 +354,7 @@ function Settings() {
 
             <div className="flex justify-end p-5 dark:bg-surface-02dp">
               <Button
-                label="Change"
+                label={t("change_password.submit.label")}
                 type="submit"
                 primary
                 disabled={
@@ -318,22 +367,119 @@ function Settings() {
         </Modal>
       </div>
 
+      <div className="relative flex py-5 mt-5 items-center">
+        <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+        <span className="flex-shrink mx-4 text-gray-500 dark:text-gray-400 fw-bold">
+          🧪 Alby Lab
+        </span>
+        <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+      </div>
+      <h2 className="text-2xl font-bold dark:text-white">{t("nostr.title")}</h2>
+      <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
+        <a
+          href="https://github.com/nostr-protocol/nostr"
+          target="_blank"
+          rel="noreferrer noopener"
+          className="underline"
+        >
+          {t("nostr.title")}
+        </a>{" "}
+        {t("nostr.hint")}
+      </p>
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+        <Setting
+          title={t("nostr.private_key.title")}
+          subtitle={
+            <Trans
+              i18nKey={"nostr.private_key.subtitle"}
+              t={t}
+              components={[
+                // eslint-disable-next-line react/jsx-key
+                <a
+                  className="underline"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  href="https://guides.getalby.com/overall-guide/alby-browser-extension/features/nostr"
+                ></a>,
+              ]}
+            />
+          }
+        >
+          <div className="w-96 flex justify-end">
+            <div className="w-96 flex-auto -mt-1 ml-6">
+              <TextField
+                id="nostrPrivateKey"
+                label={""}
+                type={nostrPrivateKeyVisible ? "text" : "password"}
+                value={nostrPrivateKey}
+                onBlur={() => {
+                  saveNostrPrivateKey(nostrPrivateKey);
+                }}
+                onChange={(event) => {
+                  setNostrPrivateKey(event.target.value);
+                }}
+                endAdornment={
+                  <button
+                    type="button"
+                    tabIndex={-1}
+                    className="flex justify-center items-center w-10 h-8"
+                    onClick={() => {
+                      setNostrPrivateKeyVisible(!nostrPrivateKeyVisible);
+                    }}
+                  >
+                    {nostrPrivateKeyVisible ? (
+                      <HiddenIcon className="h-6 w-6" />
+                    ) : (
+                      <VisibleIcon className="h-6 w-6" />
+                    )}
+                  </button>
+                }
+              />
+            </div>
+            {!nostrPrivateKey && (
+              <div className="flex-none ml-2 flex-end">
+                <Button
+                  label={t("nostr.private_key.generate")}
+                  onClick={async () => {
+                    const result = await msg.request(
+                      "nostr/generatePrivateKey"
+                    );
+                    setNostrPrivateKey(result.privateKey as string);
+                    saveNostrPrivateKey(result.privateKey as string);
+                  }}
+                />
+              </div>
+            )}
+          </div>
+        </Setting>
+      </div>
+
+      <div className="relative flex py-5 mt-5 items-center">
+        <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+        <span className="flex-shrink mx-4 text-gray-500 dark:text-gray-400 fw-bold">
+          👴 Legacy Settings
+        </span>
+        <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+      </div>
       <h2 className="mt-12 text-2xl font-bold dark:text-white">
         {t("lnurl_auth.title")}
       </h2>
-
       <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
         <a
           href="https://lightninglogin.live/learn"
           target="_blank"
-          rel="noreferrer"
+          rel="noreferrer noopener"
           className="underline"
         >
           {t("lnurl_auth.title")}
         </a>{" "}
-        <Trans t={t}>lnurl_auth.hint</Trans>
+        <Trans
+          i18nKey={"lnurl_auth.hint"}
+          t={t}
+          // eslint-disable-next-line react/jsx-key
+          components={[<strong></strong>]}
+        />
       </p>
-
       <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting
           title={t("lnurl_auth.legacy_lnurl_auth_202207.title")}

@@ -17,7 +17,10 @@ function battery(): void {
 
   const content = descriptionElement.content.split(/:(.*)/s);
   const userName = content[0];
-  const description = content[1].slice(1);
+  const description =
+    document.querySelector<HTMLMetaElement>(
+      `h4 + a[href*='user/${userName.split("/")[1]}'] + div`
+    )?.textContent ?? content[1].slice(1);
 
   let match;
   let recipient;

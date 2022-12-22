@@ -1,8 +1,15 @@
+import dayjs from "dayjs";
 import i18n from "i18next";
-import { useState, useEffect, createContext, useContext } from "react";
+import { useState, useEffect, createContext, useContext, useRef } from "react";
 import { toast } from "react-toastify";
 import { getTheme } from "~/app/utils";
+import { CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
+import {
+  getFormattedFiat as getFormattedFiatUtil,
+  getFormattedSats as getFormattedSatsUtil,
+  getFormattedNumber as getFormattedNumberUtil,
+} from "~/common/utils/currencyConvert";
 import { DEFAULT_SETTINGS } from "~/extension/background-script/state";
 import type { SettingsStorage } from "~/types";
 
@@ -10,6 +17,9 @@ interface SettingsContextType {
   settings: SettingsStorage;
   updateSetting: (setting: Setting) => void;
   isLoading: boolean;
+  getFormattedFiat: (amount: number | string) => Promise<string>;
+  getFormattedSats: (amount: number | string) => string;
+  getFormattedNumber: (amount: number | string) => string;
 }
 
 type Setting = Partial<SettingsStorage>;
@@ -24,6 +34,11 @@ export const SettingsProvider = ({
   const [settings, setSettings] =
     useState<SettingsContextType["settings"]>(DEFAULT_SETTINGS);
   const [isLoading, setIsLoading] = useState(true);
+
+  // store latest currency and currency rate in ref to prevent a re-render
+  const currencyRate = useRef<null | { rate: number; currency: CURRENCIES }>(
+    null
+  );
 
   // call this to trigger a re-render on all occassions
   const updateSetting = async (setting: Setting) => {
@@ -51,9 +66,56 @@ export const SettingsProvider = ({
       });
   }, []);
 
+  const getCurrencyRate = async (): Promise<number> => {
+    // ensure to get the correct rate for current currency in state
+    if (settings.currency !== currencyRate.current?.currency) {
+      const response = await api.getCurrencyRate(); // gets rate from browser.storage or API
+
+      // update local ref
+      currencyRate.current = {
+        rate: response.rate,
+        currency: settings.currency,
+      };
+    }
+
+    return currencyRate.current.rate;
+  };
+
+  const getFormattedFiat = async (amount: number | string) => {
+    try {
+      const rate = await getCurrencyRate();
+      const value = getFormattedFiatUtil({
+        amount,
+        rate,
+        currency: settings.currency,
+        locale: settings.locale,
+      });
+
+      return value;
+    } catch (e) {
+      console.error(e);
+
+      return "??"; // show the user that something went wrong
+    }
+  };
+
+  const getFormattedSats = (amount: number | string) => {
+    return getFormattedSatsUtil({ amount, locale: settings.locale });
+  };
+
+  const getFormattedNumber = (amount: number | string) => {
+    return getFormattedNumberUtil({ amount, locale: settings.locale });
+  };
+
   // update locale on every change
   useEffect(() => {
     i18n.changeLanguage(settings.locale);
+
+    // need to switch i.e. `pt_BR` to `pt-br`
+    const daysjsLocaleFormatted = settings.locale
+      .toLowerCase()
+      .replace("_", "-");
+    dayjs.locale(daysjsLocaleFormatted);
   }, [settings.locale]);
 
   // update theme on every change
@@ -62,6 +124,9 @@ export const SettingsProvider = ({
   }, [settings.theme]);
 
   const value = {
+    getFormattedFiat,
+    getFormattedSats,
+    getFormattedNumber,
     settings,
     updateSetting,
     isLoading,

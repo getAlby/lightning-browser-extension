@@ -27,9 +27,11 @@ const enable = async (
         enabled: boolean;
         remember: boolean;
       }>(message);
+
       if (response.data.enabled && sender.tab) {
         await setIcon(ExtensionIcon.Active, sender.tab.id as number); // highlight the icon when enabled
       }
+
       // if the response should be saved/remembered we update the allowance for the domain
       // as this returns a promise we must wait until it resolves
       if (response.data.enabled && response.data.remember) {
@@ -37,7 +39,11 @@ const enable = async (
           if (!allowance.id) {
             return { data: { error: "id is missing" } };
           }
-          await db.allowances.update(allowance.id, { enabled: true });
+          await db.allowances.update(allowance.id, {
+            enabled: true,
+            name: message.origin.name,
+            imageURL: message.origin.icon,
+          });
         } else {
           await db.allowances.add({
             host: host,

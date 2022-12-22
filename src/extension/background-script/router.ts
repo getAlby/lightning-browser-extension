@@ -1,31 +1,27 @@
 import * as accounts from "./actions/accounts";
 import * as allowances from "./actions/allowances";
 import * as blocklist from "./actions/blocklist";
+import * as cache from "./actions/cache";
 import * as ln from "./actions/ln";
 import lnurl, { auth } from "./actions/lnurl";
+import * as nostr from "./actions/nostr";
 import * as payments from "./actions/payments";
+import * as permissions from "./actions/permissions";
 import * as settings from "./actions/settings";
 import * as setup from "./actions/setup";
 import * as webln from "./actions/webln";
 
 const routes = {
-  // webln calls can be made from the webln object injected in the websites. See inject-script
-  webln: {
-    enable: allowances.enable,
-    getInfo: ln.getInfo,
-    sendPaymentOrPrompt: webln.sendPaymentOrPrompt,
-    keysendOrPrompt: webln.keysendOrPrompt,
-    signMessageOrPrompt: webln.signMessageOrPrompt,
-    lnurl: webln.lnurl,
-    makeInvoice: webln.makeInvoiceOrPrompt,
-    verifyMessage: ln.verifyMessage,
-  },
   addAllowance: allowances.add,
   getAllowance: allowances.get,
   getAllowanceById: allowances.getById,
   listAllowances: allowances.list,
   deleteAllowance: allowances.deleteAllowance,
   updateAllowance: allowances.updateAllowance,
+  addPermission: permissions.add,
+  deletePermission: permissions.deletePermission,
+  deletePermissionsById: permissions.deleteByIds,
+  listPermissions: permissions.listByAllowance,
   lock: accounts.lock,
   unlock: accounts.unlock,
   getInfo: ln.getInfo,
@@ -58,6 +54,34 @@ const routes = {
   listBlocklist: blocklist.list,
   lnurl: lnurl,
   lnurlAuth: auth,
+  getCurrencyRate: cache.getCurrencyRate,
+  nostr: {
+    generatePrivateKey: nostr.generatePrivateKey,
+    getPrivateKey: nostr.getPrivateKey,
+    setPrivateKey: nostr.setPrivateKey,
+  },
+
+  // Public calls that are accessible from the inpage script (through the content script)
+  public: {
+    webln: {
+      enable: allowances.enable,
+      getInfo: ln.getInfo,
+      sendPaymentOrPrompt: webln.sendPaymentOrPrompt,
+      keysendOrPrompt: webln.keysendOrPrompt,
+      signMessageOrPrompt: webln.signMessageOrPrompt,
+      lnurl: webln.lnurl,
+      makeInvoice: webln.makeInvoiceOrPrompt,
+      request: ln.request,
+    },
+    nostr: {
+      enable: allowances.enable,
+      getPublicKeyOrPrompt: nostr.getPublicKeyOrPrompt,
+      signEventOrPrompt: nostr.signEventOrPrompt,
+      getRelays: nostr.getRelays,
+      encryptOrPrompt: nostr.encryptOrPrompt,
+      decryptOrPrompt: nostr.decryptOrPrompt,
+    },
+  },
 };
 
 const router = (path: FixMe) => {

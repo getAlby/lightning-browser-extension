@@ -511,6 +511,10 @@ const metaDataRules: Record<string, RuleSet> = {
         (element) => element.getAttribute("content"),
       ],
       [
+        'meta[name="alby:image"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
         'meta[property="og:image:secure_url"][content]',
         (element) => element.getAttribute("content"),
       ],
@@ -603,6 +607,10 @@ const metaDataRules: Record<string, RuleSet> = {
         (element) => element.getAttribute("content"),
       ],
       [
+        'meta[name="alby:image"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
         'link[rel="apple-touch-icon"][href]',
         (element) => element.getAttribute("href"),
       ],
@@ -610,7 +618,6 @@ const metaDataRules: Record<string, RuleSet> = {
         'link[rel="apple-touch-icon-precomposed"][href]',
         (element) => element.getAttribute("href"),
       ],
-      ['link[rel="icon" i][href]', (element) => element.getAttribute("href")],
       [
         'link[rel="fluid-icon"][href]',
         (element) => element.getAttribute("href"),
@@ -627,19 +634,8 @@ const metaDataRules: Record<string, RuleSet> = {
         'link[rel="mask-icon"][href]',
         (element) => element.getAttribute("href"),
       ],
+      ['link[rel="icon" i][href]', (element) => element.getAttribute("href")],
     ],
-    scorer: (element) => {
-      const sizes = element.getAttribute("sizes");
-      if (sizes) {
-        const sizeMatches = sizes.match(/\d+/g);
-        if (sizeMatches) {
-          const parsed = parseInt(sizeMatches[0]);
-          if (!isNaN(parsed)) {
-            return parsed;
-          }
-        }
-      }
-    },
     processor: (iconUrl, context) =>
       context.options.forceImageHttps === true
         ? makeUrlSecure(makeUrlAbsolute(context.url, iconUrl))
@@ -648,6 +644,10 @@ const metaDataRules: Record<string, RuleSet> = {
   monetization: {
     rules: [
       ['meta[name="lightning"]', (element) => element.getAttribute("content")],
+      [
+        'meta[property="lightning"]',
+        (element) => element.getAttribute("content"),
+      ],
     ],
     processor: (text) => text.toLowerCase(),
   },

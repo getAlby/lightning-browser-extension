@@ -7,6 +7,7 @@ import { useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 
 const initialFormData = {
@@ -59,13 +60,13 @@ export default function ConnectLnd() {
       if (account.connector === "nativelnd") {
         validation = { valid: true, error: "" };
       } else {
-        validation = await utils.call("validateAccount", account);
+        validation = await msg.request("validateAccount", account);
       }
 
       if (validation.valid) {
-        const addResult = await utils.call("addAccount", account);
+        const addResult = await msg.request("addAccount", account);
         if (addResult.accountId) {
-          await utils.call("selectAccount", {
+          await msg.request("selectAccount", {
             id: addResult.accountId,
           });
           navigate("/test-connection");
@@ -175,7 +176,7 @@ export default function ConnectLnd() {
             required
           />
         </div>
-        <p className="text-center my-4 dark:text-white">OR</p>
+        <p className="text-center my-4 dark:text-white">{t("or")}</p>
         <div
           className={`cursor-pointer flex flex-col items-center dark:bg-surface-02dp p-4 py-3 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
             isDragging ? "border-blue-500 bg-blue-50" : ""

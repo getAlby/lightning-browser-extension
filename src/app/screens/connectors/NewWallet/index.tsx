@@ -5,14 +5,18 @@ import {
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import LoginFailedToast from "@components/toasts/LoginFailedToast";
+import Base64 from "crypto-js/enc-base64";
+import hmacSHA256 from "crypto-js/hmac-sha256";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 
 const walletCreateUrl =
   process.env.WALLET_CREATE_URL || "https://app.regtest.getalby.com/api/users";
+const HMAC_VERIFY_HEADER_KEY =
+  process.env.HMAC_VERIFY_HEADER_KEY || "alby-extension"; // default is mainly that TS is happy
 
 interface LNDHubCreateResponse {
   login: string;
@@ -41,15 +45,22 @@ export default function NewWallet() {
     headers.append("Accept", "application/json");
     headers.append("Access-Control-Allow-Origin", "*");
     headers.append("Content-Type", "application/json");
+    headers.append("X-User-Agent", "alby-extension");
+
+    const timestamp = Math.floor(Date.now() / 1000);
+    const body = JSON.stringify({
+      email,
+      password,
+      lightning_addresses_attributes: [{ address: lnAddress }], // address must be provided as array, in theory we support multiple addresses per account
+    });
+    headers.append("X-TS", timestamp.toString());
+    const mac = hmacSHA256(body, HMAC_VERIFY_HEADER_KEY).toString(Base64);
+    headers.append("X-VERIFY", encodeURIComponent(mac));
 
     return fetch(walletCreateUrl, {
       method: "POST",
       headers,
-      body: JSON.stringify({
-        email,
-        password,
-        lightning_addresses_attributes: [{ address: lnAddress }], // address must be provided as array, in theory we support multiple addresses per account
-      }),
+      body,
     })
       .then((res) => res.json())
       .then((data) => {
@@ -102,11 +113,11 @@ export default function NewWallet() {
     };
 
     try {
-      const validation = await utils.call("validateAccount", account);
+      const validation = await msg.request("validateAccount", account);
       if (validation.valid) {
-        const addResult = await utils.call("addAccount", account);
+        const addResult = await msg.request("addAccount", account);
         if (addResult.accountId) {
-          await utils.call("selectAccount", {
+          await msg.request("selectAccount", {
             id: addResult.accountId,
           });
           navigate("/test-connection");
@@ -130,7 +141,6 @@ export default function NewWallet() {
   return (
     <ConnectorForm
       title={t("pre_connect.title")}
-      submitLabel={tCommon("actions.continue")}
       submitLoading={loading}
       onSubmit={signup}
       submitDisabled={loading || password === "" || email === ""}
@@ -183,12 +193,12 @@ export default function NewWallet() {
       </div>
       <div className="mt-6">
         <p className="mb-2 text-gray-700 dark:text-neutral-400">
-          Your Alby account also comes with an optional{" "}
+          {t("pre_connect.optional_lightning_note.part1")}{" "}
           <a
             className="underline"
             href="https://lightningaddress.com/"
             target="_blank"
-            rel="noreferrer"
+            rel="noreferrer noopener"
           >
             {t("pre_connect.optional_lightning_note.part2")}
           </a>
@@ -197,7 +207,7 @@ export default function NewWallet() {
             className="underline"
             href="https://lightningaddress.com/"
             target="_blank"
-            rel="noreferrer"
+            rel="noreferrer noopener"
           >
             {t("pre_connect.optional_lightning_note.part4")}
           </a>

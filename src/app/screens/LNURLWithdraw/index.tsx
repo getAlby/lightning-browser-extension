@@ -1,11 +1,13 @@
+import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
-import SuccessMessage from "@components/SuccessMessage";
+import ResultCard from "@components/ResultCard";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import axios from "axios";
-import { useState, useEffect, MouseEvent } from "react";
+import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -13,13 +15,20 @@ import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import { getFiatValue } from "~/common/utils/currencyConvert";
 import type { LNURLWithdrawServiceResponse } from "~/types";
 
 function LNURLWithdraw() {
+  const { t } = useTranslation("translation", { keyPrefix: "lnurlwithdraw" });
+  const { t: tCommon } = useTranslation("common");
+
   const navigate = useNavigate();
   const navState = useNavigationState();
-  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFormattedFiat,
+    getFormattedSats,
+  } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
   const origin = navState.origin;
@@ -27,7 +36,7 @@ function LNURLWithdraw() {
   const { minWithdrawable, maxWithdrawable } = details;
 
   const [valueSat, setValueSat] = useState(
-    (maxWithdrawable && (+maxWithdrawable / 1000).toString()) || ""
+    (maxWithdrawable && Math.floor(+maxWithdrawable / 1000).toString()) || ""
   );
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -37,11 +46,11 @@ function LNURLWithdraw() {
   useEffect(() => {
     if (valueSat !== "" && showFiat) {
       (async () => {
-        const res = await getFiatValue(valueSat);
+        const res = await getFormattedFiat(valueSat);
         setFiatValue(res);
       })();
     }
-  }, [valueSat, showFiat]);
+  }, [valueSat, showFiat, getFormattedFiat]);
 
   async function confirm() {
     try {
@@ -61,15 +70,21 @@ function LNURLWithdraw() {
       });
 
       if (response.data.status.toUpperCase() === "OK") {
-        setSuccessMessage("Withdraw request sent successfully.");
+        setSuccessMessage(
+          t("success", {
+            amount: `${getFormattedSats(valueSat)} ${
+              showFiat ? `(${fiatValue})` : ``
+            }`,
+            sender: origin ? origin.name : details.domain,
+          })
+        );
+        // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the response. This closes the window which means the user will NOT see the above successAction.
+        // We assume this is OK when it is called through webln.
+        if (navState.isPrompt) {
+          msg.reply(response.data);
+        }
       } else {
         setErrorMessage(`Error: ${response.data.reason}`);
-      }
-
-      // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the response. This closes the window which means the user will NOT see the above successAction.
-      // We assume this is OK when it is called through webln.
-      if (navState.isPrompt) {
-        msg.reply(response.data);
       }
     } catch (e) {
       console.error(e);
@@ -86,8 +101,8 @@ function LNURLWithdraw() {
       return (
         <>
           <ContentMessage
-            heading={`Amount (Satoshi)`}
-            content={`${minWithdrawable / 1000} sats`}
+            heading={t("content_message.heading")}
+            content={getFormattedSats(Math.floor(minWithdrawable / 1000))}
           />
 
           {errorMessage && <p className="mt-1 text-red-500">{errorMessage}</p>}
@@ -97,10 +112,11 @@ function LNURLWithdraw() {
       return (
         <div className="my-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden">
           <DualCurrencyField
+            autoFocus
             id="amount"
-            label="Amount (Satoshi)"
-            min={minWithdrawable / 1000}
-            max={maxWithdrawable / 1000}
+            label={t("amount.label")}
+            min={Math.floor(minWithdrawable / 1000)}
+            max={Math.floor(maxWithdrawable / 1000)}
             value={valueSat}
             onChange={(e) => setValueSat(e.target.value)}
             fiatValue={fiatValue}
@@ -112,7 +128,7 @@ function LNURLWithdraw() {
     }
   }
 
-  function reject(e: MouseEvent) {
+  function reject(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (navState.isPrompt) {
       msg.error(USER_REJECTED_ERROR);
@@ -121,7 +137,7 @@ function LNURLWithdraw() {
     }
   }
 
-  function close(e: MouseEvent) {
+  function close(e: React.MouseEvent<HTMLButtonElement>) {
     // will never be reached via prompt
     e.preventDefault();
     navigate(-1);
@@ -129,7 +145,7 @@ function LNURLWithdraw() {
 
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
-      <ScreenHeader title={"Withdraw"} />
+      <ScreenHeader title={t("title")} />
       {!successMessage ? (
         <Container justifyBetween maxWidth="sm">
           <div>
@@ -153,19 +169,14 @@ function LNURLWithdraw() {
           />
         </Container>
       ) : (
-        <Container maxWidth="sm">
-          {origin ? (
-            <PublisherCard
-              title={origin.name}
-              image={origin.icon}
-              url={details.domain}
-            />
-          ) : (
-            <PublisherCard title={details.domain} />
-          )}
-
+        <Container justifyBetween maxWidth="sm">
+          <ResultCard isSuccess message={successMessage} />
           <div className="my-4">
-            <SuccessMessage message={successMessage} onClose={close} />
+            <Button
+              onClick={close}
+              label={tCommon("actions.close")}
+              fullWidth
+            />
           </div>
         </Container>
       )}

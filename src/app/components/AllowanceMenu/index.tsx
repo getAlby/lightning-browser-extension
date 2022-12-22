@@ -1,13 +1,14 @@
 import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import Setting from "@components/Setting";
+import Toggle from "@components/form/Toggle";
 import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
-import utils from "~/common/lib/utils";
-import { getFiatValue } from "~/common/utils/currencyConvert";
+import msg from "~/common/lib/msg";
 import type { Allowance } from "~/types";
 
 import Button from "../Button";
@@ -15,32 +16,40 @@ import Menu from "../Menu";
 import DualCurrencyField from "../form/DualCurrencyField/index";
 
 export type Props = {
-  allowance: Pick<Allowance, "id" | "totalBudget">;
+  allowance: Pick<Allowance, "id" | "totalBudget" | "lnurlAuth">;
   onEdit?: () => void;
   onDelete?: () => void;
 };
 
 function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
-  const { isLoading: isLoadingSettings, settings } = useSettings();
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFormattedFiat,
+  } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [budget, setBudget] = useState("0");
+  const [budget, setBudget] = useState("");
+  const [lnurlAuth, setLnurlAuth] = useState(false);
   const [fiatAmount, setFiatAmount] = useState("");
   const { t } = useTranslation("components", { keyPrefix: "allowance_menu" });
   const { t: tCommon } = useTranslation("common");
 
   useEffect(() => {
     if (budget !== "" && showFiat) {
-      (async () => {
-        const res = await getFiatValue(budget);
+      const getFiat = async () => {
+        const res = await getFormattedFiat(budget);
         setFiatAmount(res);
-      })();
+      };
+
+      getFiat();
     }
-  }, [budget, showFiat]);
+  }, [budget, showFiat, getFormattedFiat]);
 
   function openModal() {
     setBudget(allowance.totalBudget.toString());
+    setLnurlAuth(allowance.lnurlAuth);
     /**
      * @HACK
      * @headless-ui/menu restores focus after closing a menu, to the button that opened it.
@@ -57,9 +66,10 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   }
 
   async function updateAllowance() {
-    await utils.call("updateAllowance", {
+    await msg.request("updateAllowance", {
       id: allowance.id,
       totalBudget: parseInt(budget),
+      lnurlAuth,
     });
 
     onEdit && onEdit();
@@ -81,7 +91,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             onClick={async () => {
               if (window.confirm(t("confirm_delete"))) {
                 try {
-                  await utils.call("deleteAllowance", {
+                  await msg.request("deleteAllowance", {
                     id: allowance.id,
                   });
                   onDelete && onDelete();
@@ -102,13 +112,13 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         closeTimeoutMS={200}
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        contentLabel={t("set_budget.screen_reader")}
+        contentLabel={t("edit_allowance.screen_reader")}
         overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
         className="rounded-lg bg-white w-full max-w-lg"
       >
         <div className="p-5 flex justify-between dark:bg-surface-02dp">
           <h2 className="text-2xl font-bold dark:text-white">
-            {t("set_budget.title")}
+            {t("edit_allowance.title")}
           </h2>
           <button onClick={closeModal}>
             <CrossIcon className="w-6 h-6 dark:text-white" />
@@ -122,19 +132,28 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
           }}
         >
           <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
-            <div className="w-60">
+            <div className="pb-4 border-b border-gray-200 dark:border-neutral-500">
               <DualCurrencyField
                 id="budget"
                 label={t("new_budget.label")}
                 min={0}
                 autoFocus
-                placeholder={tCommon("sats")}
+                placeholder={tCommon("sats", { count: 0 })}
                 value={budget}
                 hint={t("hint")}
                 fiatValue={fiatAmount}
                 onChange={(e) => setBudget(e.target.value)}
               />
             </div>
+            <Setting
+              title={t("enable_login.title")}
+              subtitle={t("enable_login.subtitle")}
+            >
+              <Toggle
+                checked={lnurlAuth}
+                onChange={() => setLnurlAuth(!lnurlAuth)}
+              />
+            </Setting>
           </div>
 
           <div className="flex justify-end p-5 dark:bg-surface-02dp">
@@ -142,7 +161,10 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
               type="submit"
               label={tCommon("actions.save")}
               primary
-              disabled={budget === ""}
+              disabled={
+                parseInt(budget) === allowance.totalBudget &&
+                lnurlAuth === allowance.lnurlAuth
+              }
             />
           </div>
         </form>

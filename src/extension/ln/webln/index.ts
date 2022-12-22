@@ -87,8 +87,18 @@ export default class WebLNProvider {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling verifyMessage");
     }
+    throw new Error("Alby does not support `verifyMessage`");
+  }
 
-    return this.execute("verifyMessage", { signature, message });
+  request(method: string, params: Record<string, unknown>) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling request");
+    }
+
+    return this.execute("request", {
+      method,
+      params,
+    });
   }
 
   // NOTE: new call `action`s must be specified also in the content script
@@ -103,7 +113,8 @@ export default class WebLNProvider {
         {
           application: "LBE",
           prompt: true,
-          action: `${action}`,
+          action: `webln/${action}`,
+          scope: "webln",
           args,
         },
         "*" // TODO use origin
@@ -115,7 +126,8 @@ export default class WebLNProvider {
         if (
           !messageEvent.data ||
           !messageEvent.data.response ||
-          messageEvent.data.application !== "LBE"
+          messageEvent.data.application !== "LBE" ||
+          messageEvent.data.scope !== "webln"
         ) {
           return;
         }

@@ -1,16 +1,22 @@
-import utils from "~/common/lib/utils";
+import { getFormattedFiat } from "~/common/utils/currencyConvert";
+import { getCurrencyRateWithCache } from "~/extension/background-script/actions/cache/getCurrencyRate";
+import state from "~/extension/background-script/state";
+import i18n from "~/i18n/i18nConfig";
 import type { PaymentNotificationData, AuthNotificationData } from "~/types";
 
-const paymentSuccessNotification = (
+import { notify } from "./helpers";
+
+const paymentSuccessNotification = async (
   message: "ln.sendPayment.success",
   data: PaymentNotificationData
 ) => {
   function formatAmount(amount: number) {
-    return `${amount} sat${amount != 1 ? "s" : ""}`;
+    return `${amount} ${i18n.t("common:sats", { count: amount })}`;
   }
 
   const recipient = data?.origin?.name;
   const paymentResponseData = data.response;
+  let paymentAmountFiatLocale;
 
   if ("error" in paymentResponseData) {
     return;
@@ -20,15 +26,37 @@ const paymentSuccessNotification = (
   const { total_amt, total_fees } = route;
   const paymentAmount = total_amt - total_fees;
 
-  let notificationTitle = `✅ Successfully paid ${formatAmount(paymentAmount)}`;
+  const { settings } = state.getState();
+  const { showFiat, currency, locale } = settings;
+
+  if (showFiat) {
+    const rate = await getCurrencyRateWithCache(currency);
+
+    paymentAmountFiatLocale = getFormattedFiat({
+      amount: paymentAmount,
+      rate,
+      currency,
+      locale,
+    });
+  }
+
+  let notificationTitle = "✅ Successfully paid";
 
   if (recipient) {
     notificationTitle = `${notificationTitle} to »${recipient}«`;
   }
 
-  const notificationMessage = `Fee: ${formatAmount(total_fees)}`;
+  let notificationMessage = `Amount: ${formatAmount(paymentAmount)}`;
 
-  return utils.notify({
+  if (showFiat) {
+    notificationMessage = `${notificationMessage} (${paymentAmountFiatLocale})`;
+  }
+
+  notificationMessage = `${notificationMessage}\nFee: ${formatAmount(
+    total_fees
+  )}`;
+
+  return notify({
     title: notificationTitle,
     message: notificationMessage,
   });
@@ -51,7 +79,7 @@ const paymentFailedNotification = (
     error = paymentResponseData.data.payment_error;
   }
 
-  return utils.notify({
+  return notify({
     title: `⚠️ Payment failed`,
     message: `Error: ${error}`,
   });
@@ -67,7 +95,7 @@ const lnurlAuthSuccessNotification = (
     title = `${title} to ${data.origin.name}`;
   }
 
-  return utils.notify({
+  return notify({
     title,
     message: `Successfully logged in to ${data.lnurlDetails.domain}`,
   });
@@ -79,7 +107,7 @@ const lnurlAuthFailedNotification = (
     error: string;
   }
 ) => {
-  return utils.notify({
+  return notify({
     title: `⚠️ Login failed`,
     message: `${data.error}`,
   });

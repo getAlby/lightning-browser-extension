@@ -3,18 +3,12 @@ import userEvent from "@testing-library/user-event";
 import { act } from "react-dom/test-utils";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
-import * as SettingsContext from "~/app/context/SettingsContext";
+import { SettingsProvider } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { makeInvoice } from "~/common/lib/api";
 import type { LNURLWithdrawServiceResponse, OriginData } from "~/types";
 
 import LNURLWithdraw from "./index";
-
-jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
-  settings: mockSettings,
-  isLoading: false,
-  updateSetting: jest.fn(),
-});
 
 const mockDetailsFiatJef: LNURLWithdrawServiceResponse = {
   tag: "withdrawRequest",
@@ -71,13 +65,15 @@ jest.mock("~/app/hooks/useNavigationState", () => ({
   })),
 }));
 
-jest.mock("~/common/lib/api", () => ({
-  getSettings: jest.fn(() => ({
-    currency: "USD",
-    exchange: "coindesk",
-  })),
-  makeInvoice: jest.fn(() => ({})),
-}));
+jest.mock("~/common/lib/api", () => {
+  const original = jest.requireActual("~/common/lib/api");
+  return {
+    ...original,
+    getSettings: jest.fn(() => Promise.resolve(mockSettings)),
+    getCurrencyRate: jest.fn(() => Promise.resolve({ rate: 11 })),
+    makeInvoice: jest.fn(),
+  };
+});
 
 describe("LNURLWithdraw", () => {
   afterEach(() => {
@@ -88,13 +84,15 @@ describe("LNURLWithdraw", () => {
     await act(async () => {
       render(
         <MemoryRouter>
-          <LNURLWithdraw />
+          <SettingsProvider>
+            <LNURLWithdraw />
+          </SettingsProvider>
         </MemoryRouter>
       );
     });
 
     expect(await screen.getByText("lnurl.fiatjaf.com")).toBeInTheDocument();
-    expect(await screen.getByLabelText("Amount (Satoshi)")).toHaveValue(8);
+    expect(await screen.getByLabelText("Amount")).toHaveValue(8);
   });
 
   test("doesn't render input component when minWithdrawable === maxWithdrawable", async () => {
@@ -103,24 +101,26 @@ describe("LNURLWithdraw", () => {
     await act(async () => {
       render(
         <MemoryRouter>
-          <LNURLWithdraw />
+          <SettingsProvider>
+            <LNURLWithdraw />
+          </SettingsProvider>
         </MemoryRouter>
       );
     });
 
-    expect(await screen.findByText("Amount (Satoshi)")).toBeInTheDocument();
+    expect(await screen.findByText("Amount")).toBeInTheDocument();
     expect(await screen.findByText("8 sats")).toBeInTheDocument();
   });
 
   test("show error-reason on error-status", async () => {
-    (useNavigationState as jest.Mock).mockReturnValueOnce({
+    (useNavigationState as jest.Mock).mockReturnValue({
       origin: mockOrigin,
       args: {
         lnurlDetails: mockDetailsLnBits,
       },
     });
 
-    (makeInvoice as jest.Mock).mockReturnValueOnce({
+    (makeInvoice as jest.Mock).mockReturnValue({
       invoice: {
         paymentRequest:
           "lnbc100n1p3s975dpp508vpywcj857rxc78mrwpurhulzxe7slkdqdxsjzyrs3wv9jvsaksdqdwehh2cmgv4e8xcqzpgxqyz5vqsp5vpdqeutqqrwn4eq62a6agmnp3t7rru0asfgy23kcsr6k0tftfxfs9qyyssqf8zxtm0hm5veepjk4kz2ejegkg9449k4e9g5jz25mne096x6k4ajav0afdyx4uw883nv5jdy95w4ltfrfs4hes83j7zh50ygl8w3xxcqf0nhz8",
@@ -132,7 +132,9 @@ describe("LNURLWithdraw", () => {
 
     render(
       <MemoryRouter>
-        <LNURLWithdraw />
+        <SettingsProvider>
+          <LNURLWithdraw />
+        </SettingsProvider>
       </MemoryRouter>
     );
 

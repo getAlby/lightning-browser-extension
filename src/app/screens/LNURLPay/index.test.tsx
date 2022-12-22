@@ -1,16 +1,22 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
-import * as SettingsContext from "~/app/context/SettingsContext";
 import type { LNURLDetails, OriginData } from "~/types";
 
 import LNURLPay from "./index";
 
-jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
-  settings: mockSettings,
-  isLoading: false,
-  updateSetting: jest.fn(),
-});
+const mockGetFiatValue = jest.fn(() => Promise.resolve("$1,22"));
+
+jest.mock("~/app/context/SettingsContext", () => ({
+  useSettings: () => ({
+    settings: mockSettings,
+    isLoading: false,
+    updateSetting: jest.fn(),
+    getFormattedFiat: mockGetFiatValue,
+    getFormattedNumber: jest.fn(),
+    getFormattedSats: jest.fn(),
+  }),
+}));
 
 const mockDetails: LNURLDetails = {
   callback: "https://lnurlcallback.example.com",
@@ -72,6 +78,9 @@ jest.mock("~/app/hooks/useNavigationState", () => {
   };
 });
 
+// calculated satValue from passed props
+const satValue = Math.floor(+mockDetails.minSendable / 1000);
+
 describe("LNURLPay", () => {
   afterEach(() => {
     jest.clearAllMocks();
@@ -84,8 +93,14 @@ describe("LNURLPay", () => {
       </MemoryRouter>
     );
 
+    // get fiat on mount
+    await waitFor(() =>
+      expect(mockGetFiatValue).toHaveBeenCalledWith(satValue.toString())
+    );
+    await waitFor(() => expect(mockGetFiatValue).toHaveBeenCalledTimes(1));
+
     expect(await screen.getByText("blocktime 748949")).toBeInTheDocument();
     expect(await screen.getByText("16sat/vB & empty")).toBeInTheDocument();
-    expect(await screen.getByLabelText("Amount")).toHaveValue(2);
+    expect(await screen.getByLabelText("Amount")).toHaveValue(satValue);
   });
 });
