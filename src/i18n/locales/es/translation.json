@@ -69,7 +69,7 @@
         "description": "Crea o inicia sesión en tu cuenta de Alby",
         "pre_connect": {
           "title": "Su Billetera Alby Lightning",
-          "login_account": "Cree o inicie sesión en su cuenta de Alby.",
+          "login_account": "Crea o inicia sesión en tu cuenta de Alby.",
           "host_wallet": "¡Alojamos una billetera Lightning para ti!",
           "email": {
             "label": "Dirección de correo electrónico"
@@ -86,7 +86,7 @@
             "title": "números y letras, al menos 3 caracteres"
           },
           "errors": {
-            "create_wallet_error": "Error al crear una nueva billetera"
+            "create_wallet_error": "Hubo un fallo al iniciar o crear tu sesión . Si necesitas ayuda por favor escribe a support@getalby.com"
           }
         }
       },
@@ -130,15 +130,40 @@
       },
       "eclair": {
         "title": "Cuenta de Eclair",
-        "description": "Conéctese a su nodo Eclair"
+        "description": "Conéctese a su nodo Eclair",
+        "password": {
+          "label": "Contraseña de Eclair"
+        },
+        "page": {
+          "instructions": "Necesitas la URL y la contreaseña de Eclair.",
+          "title": "Conectar a Eclair"
+        },
+        "url": {
+          "label": "URL de Eclair",
+          "placeholder": "http://localhost:8080"
+        }
       },
       "citadel": {
         "title": "Cuenta de Citadel",
-        "description": "Conéctese a su Citadel local"
+        "description": "Conéctese a su Citadel local",
+        "password": {
+          "label": "Contraseña de Citadel"
+        },
+        "url": {
+          "label": "URL de Citadel",
+          "placeholder": "http://citadel.local"
+        },
+        "page": {
+          "title": "Conectar a nodo Citadel",
+          "instructions": "Esto actualmente no funciona si el A2F está activado."
+        }
       },
       "umbrel": {
         "title": "Cuenta de Umbrel",
-        "description": "Conéctese a su Umbrel"
+        "description": "Conéctese a su Umbrel",
+        "page": {
+          "title": "Conectar a Umbrel"
+        }
       },
       "mynode": {
         "title": "MiNodo",
