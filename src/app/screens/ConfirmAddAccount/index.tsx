@@ -11,7 +11,6 @@ import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import type { OriginData } from "~/types";
 
 function ConfirmAddAccount() {
   const navState = useNavigationState();
@@ -21,15 +20,24 @@ function ConfirmAddAccount() {
   });
   const navigate = useNavigate();
 
-  const message = navState.args?.message as string;
-  const origin = navState.origin as OriginData;
+  const { name, connector, config } = navState.args as unknown as {
+    name: string;
+    connector: string;
+    config: unknown;
+  };
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const origin = navState.origin!;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
   async function confirm() {
     try {
       setLoading(true);
-      const response = await msg.request("addAccount", { message }, { origin });
+      const response = await msg.request(
+        "addAccount",
+        { name, connector, config },
+        { origin }
+      );
       msg.reply(response);
       setSuccessMessage(tCommon("success"));
     } catch (e) {
@@ -67,7 +75,7 @@ function ConfirmAddAccount() {
             />
             <ContentMessage
               heading={t("content", { host: origin.host })}
-              content={message}
+              content={connector}
             />
           </div>
           <ConfirmOrCancel
