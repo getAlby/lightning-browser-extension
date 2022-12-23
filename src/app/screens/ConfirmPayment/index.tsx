@@ -3,8 +3,8 @@ import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PaymentSummary from "@components/PaymentSummary";
-import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
+import WebsiteCard from "@components/WebsiteCard";
 import lightningPayReq from "bolt11";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -145,7 +145,7 @@ function ConfirmPayment() {
           <form onSubmit={handleSubmit}>
             <div>
               {navState.origin && (
-                <PublisherCard
+                <WebsiteCard
                   title={navState.origin.name}
                   image={navState.origin.icon}
                   url={navState.origin.host}

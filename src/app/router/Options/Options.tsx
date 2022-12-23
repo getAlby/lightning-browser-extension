@@ -8,12 +8,12 @@ import LNURLChannel from "@screens/LNURLChannel";
 import LNURLPay from "@screens/LNURLPay";
 import LNURLWithdraw from "@screens/LNURLWithdraw";
 import TestConnection from "@screens/Options/TestConnection";
-import Publisher from "@screens/Publisher";
-import Publishers from "@screens/Publishers";
 import Receive from "@screens/Receive";
 import Send from "@screens/Send";
 import Settings from "@screens/Settings";
 import Unlock from "@screens/Unlock";
+import Website from "@screens/Website";
+import Websites from "@screens/Websites";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { useTranslation } from "react-i18next";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
@@ -39,13 +39,13 @@ function Options() {
               </RequireAuth>
             }
           >
-            <Route index element={<Navigate to="/publishers" replace />} />
+            <Route index element={<Navigate to="/websites" replace />} />
             <Route path="discover">
               <Route index element={<Discover />} />
             </Route>
-            <Route path="publishers">
-              <Route path=":id" element={<Publisher />} />
-              <Route index element={<Publishers />} />
+            <Route path="websites">
+              <Route path=":id" element={<Website />} />
+              <Route index element={<Websites />} />
             </Route>
             <Route path="send" element={<Send />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
@@ -116,7 +116,7 @@ const Layout = () => {
     <div>
       <Navbar>
         <Navbar.Link href="/discover">{tCommon("discover")}</Navbar.Link>
-        <Navbar.Link href="/publishers">{tCommon("websites")}</Navbar.Link>
+        <Navbar.Link href="/websites">{tCommon("websites")}</Navbar.Link>
         <Navbar.Link href="/send">{tCommon("actions.send")}</Navbar.Link>
         <Navbar.Link href="/receive">{tCommon("actions.receive")}</Navbar.Link>
         <Navbar.Link href="/settings">{tCommon("settings")}</Navbar.Link>

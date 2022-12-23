@@ -1,8 +1,8 @@
 import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
-import PublisherCard from "@components/PublisherCard";
-import { useState, useEffect, useCallback, useRef } from "react";
+import WebsiteCard from "@components/WebsiteCard";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
@@ -79,7 +79,7 @@ function Enable(props: Props) {
       <ScreenHeader title={t("title")} />
       <Container justifyBetween maxWidth="sm">
         <div>
-          <PublisherCard
+          <WebsiteCard
             title={props.origin.name}
             image={props.origin.icon}
             url={props.origin.host}

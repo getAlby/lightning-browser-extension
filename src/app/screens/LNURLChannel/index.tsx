@@ -2,8 +2,8 @@ import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
-import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
+import WebsiteCard from "@components/WebsiteCard";
 import axios from "axios";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -103,13 +103,13 @@ function LNURLChannel() {
         <Container justifyBetween maxWidth="sm">
           <div>
             {origin ? (
-              <PublisherCard
+              <WebsiteCard
                 title={origin.name}
                 image={origin.icon}
                 url={details.domain}
               />
             ) : (
-              <PublisherCard title={details.domain} />
+              <WebsiteCard title={details.domain} />
             )}
             <ContentMessage
               heading={`${t("content_message.heading")}:`}

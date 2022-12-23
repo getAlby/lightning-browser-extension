@@ -4,9 +4,9 @@ import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import ContentMessage from "@components/ContentMessage";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
-import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
 import SatButtons from "@components/SatButtons";
+import WebsiteCard from "@components/WebsiteCard";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -110,7 +110,7 @@ function Keysend() {
           <Container justifyBetween maxWidth="sm">
             <form onSubmit={handleSubmit}>
               <div>
-                {destination && <PublisherCard title={destination} />}
+                {destination && <WebsiteCard title={destination} />}
                 <ContentMessage
                   heading={t("receiver.label")}
                   content={destination}

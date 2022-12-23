@@ -1,23 +1,23 @@
 import Container from "@components/Container";
-import PublishersTable from "@components/PublishersTable";
+import WebsitesTable from "@components/WebsitesTable";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "~/app/components/Button";
 import msg from "~/common/lib/msg";
-import { Allowance, Badge, Publisher } from "~/types";
+import { Allowance, Badge, Website } from "~/types";
 
-function Publishers() {
+function Websites() {
   const { t } = useTranslation("translation", {
-    keyPrefix: "publishers",
+    keyPrefix: "websites",
   });
 
-  const [publishers, setPublishers] = useState<Publisher[]>([]);
+  const [websites, setWebsites] = useState<Website[]>([]);
   const navigate = useNavigate();
 
-  function navigateToPublisher(id: number) {
-    navigate(`/publishers/${id}`);
+  function navigateToWebsite(id: number) {
+    navigate(`/websites/${id}`);
   }
 
   async function fetchData() {
@@ -26,8 +26,8 @@ function Publishers() {
         allowances: Allowance[];
       }>("listAllowances");
 
-      const allowances: Publisher[] = allowanceResponse.allowances.reduce<
-        Publisher[]
+      const allowances: Website[] = allowanceResponse.allowances.reduce<
+        Website[]
       >((acc, allowance) => {
         if (!allowance?.id || !allowance.enabled) return acc;
 
@@ -76,7 +76,7 @@ function Publishers() {
         return acc;
       }, []);
 
-      setPublishers(allowances);
+      setWebsites(allowances);
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
@@ -97,10 +97,10 @@ function Publishers() {
         {t("description")}
       </p>
 
-      {publishers.length > 0 ? (
-        <PublishersTable
-          publishers={publishers}
-          navigateToPublisher={navigateToPublisher}
+      {websites.length > 0 ? (
+        <WebsitesTable
+          websites={websites}
+          navigateToWebsite={navigateToWebsite}
         />
       ) : (
         <>
@@ -114,4 +114,4 @@ function Publishers() {
   );
 }
 
-export default Publishers;
+export default Websites;

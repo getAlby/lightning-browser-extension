@@ -3,9 +3,9 @@ import utils from "~/common/lib/utils";
 import db from "~/extension/background-script/db";
 import state from "~/extension/background-script/state";
 import type {
-  MessageWebLnLnurl,
-  LNURLDetails,
   LnurlAuthResponse,
+  LNURLDetails,
+  MessageWebLnLnurl,
 } from "~/types";
 
 import { authFunction } from "./auth";
@@ -18,7 +18,7 @@ async function authOrPrompt(
 
   PubSub.publish(`lnurl.auth.start`, { message, lnurlDetails });
 
-  // get the publisher to check if lnurlAuth for auto-login is enabled
+  // get the website to check if lnurlAuth for auto-login is enabled
   const allowance = await db.allowances
     .where("host")
     .equalsIgnoreCase(message.origin.host)
@@ -28,7 +28,7 @@ async function authOrPrompt(
   // If it is locked we must show a prompt to unlock
   const isUnlocked = state.getState().isUnlocked();
 
-  // check if there is a publisher and lnurlAuth is enabled,
+  // check if there is a website and lnurlAuth is enabled,
   // otherwise we we prompt the user
   if (isUnlocked && allowance && allowance.enabled && allowance.lnurlAuth) {
     return await authFunction({ lnurlDetails, origin: message.origin });

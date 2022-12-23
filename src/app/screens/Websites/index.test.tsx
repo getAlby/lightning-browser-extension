@@ -7,7 +7,7 @@ import { SettingsProvider } from "~/app/context/SettingsContext";
 import msg from "~/common/lib/msg";
 
 import { AccountsProvider } from "../../context/AccountsContext";
-import Publishers from "./index";
+import Websites from "./index";
 
 jest.mock("~/common/lib/api", () => {
   const original = jest.requireActual("~/common/lib/api");
@@ -20,7 +20,7 @@ jest.mock("~/common/lib/api", () => {
 
 jest.mock("~/common/lib/msg");
 
-describe("Publishers", () => {
+describe("Websites", () => {
   test("renders active allowance", async () => {
     (msg.request as jest.Mock).mockImplementation(() => ({
       allowances: [
@@ -47,7 +47,7 @@ describe("Publishers", () => {
         <AccountsProvider>
           <I18nextProvider i18n={i18n}>
             <MemoryRouter>
-              <Publishers />
+              <Websites />
             </MemoryRouter>
           </I18nextProvider>
         </AccountsProvider>
@@ -64,7 +64,7 @@ describe("Publishers", () => {
     expect(await screen.findByText("3,000 sats")).toBeInTheDocument();
   });
 
-  test("no publishers shows discover button", async () => {
+  test("no websites shows discover button", async () => {
     (msg.request as jest.Mock).mockImplementation(() => ({
       allowances: [],
     }));
@@ -73,7 +73,7 @@ describe("Publishers", () => {
         <AccountsProvider>
           <I18nextProvider i18n={i18n}>
             <MemoryRouter>
-              <Publishers />
+              <Websites />
             </MemoryRouter>
           </I18nextProvider>
         </AccountsProvider>

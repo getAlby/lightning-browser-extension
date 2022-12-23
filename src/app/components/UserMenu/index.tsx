@@ -58,7 +58,7 @@ export default function UserMenu() {
         </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
-            openOptions("publishers");
+            openOptions("websites");
           }}
         >
           <TransactionsIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />

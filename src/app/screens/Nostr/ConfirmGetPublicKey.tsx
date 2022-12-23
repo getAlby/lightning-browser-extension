@@ -1,7 +1,7 @@
 import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
-import PublisherCard from "@components/PublisherCard";
+import WebsiteCard from "@components/WebsiteCard";
 import Checkbox from "@components/form/Checkbox";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -55,7 +55,7 @@ function NostrConfirmGetPublicKey() {
       <ScreenHeader title={t("title")} />
       <Container justifyBetween maxWidth="sm">
         <div>
-          <PublisherCard
+          <WebsiteCard
             title={origin.name}
             image={origin.icon}
             url={origin.host}

@@ -1,10 +1,10 @@
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
-import PublisherCard from "@components/PublisherCard";
 import SatButtons from "@components/SatButtons";
+import WebsiteCard from "@components/WebsiteCard";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -109,7 +109,7 @@ function MakeInvoice() {
       <Container justifyBetween maxWidth="sm">
         <form onSubmit={handleSubmit}>
           <div>
-            <PublisherCard
+            <WebsiteCard
               title={origin.name}
               image={origin.icon}
               url={origin.host}

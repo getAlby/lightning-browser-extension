@@ -14,7 +14,7 @@ export type Props = {
   children?: React.ReactNode;
 };
 
-export default function PublisherCard({
+export default function WebsiteCard({
   title,
   image,
   description,

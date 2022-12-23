@@ -1,8 +1,8 @@
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
-import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
+import WebsiteCard from "@components/WebsiteCard";
 import Checkbox from "@components/form/Checkbox";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -72,7 +72,7 @@ function ConfirmSignMessage() {
         <Container justifyBetween maxWidth="sm">
           <form onSubmit={handleSubmit}>
             <div>
-              <PublisherCard
+              <WebsiteCard
                 title={origin.name}
                 image={origin.icon}
                 url={origin.host}
@@ -107,7 +107,7 @@ function ConfirmSignMessage() {
         </Container>
       ) : (
         <Container maxWidth="sm">
-          <PublisherCard
+          <WebsiteCard
             title={origin.name}
             image={origin.icon}
             url={origin.host}

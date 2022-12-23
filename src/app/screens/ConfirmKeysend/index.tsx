@@ -2,9 +2,9 @@ import BudgetControl from "@components/BudgetControl";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PaymentSummary from "@components/PaymentSummary";
-import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-import React, { useState, useEffect } from "react";
+import WebsiteCard from "@components/WebsiteCard";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -134,7 +134,7 @@ function ConfirmKeysend() {
         <Container justifyBetween maxWidth="sm">
           <form onSubmit={handleSubmit}>
             <div>
-              <PublisherCard
+              <WebsiteCard
                 title={origin.name}
                 image={origin.icon}
                 url={origin.host}
@@ -170,7 +170,7 @@ function ConfirmKeysend() {
         </Container>
       ) : (
         <Container maxWidth="sm">
-          <PublisherCard
+          <WebsiteCard
             title={origin.name}
             image={origin.icon}
             url={origin.host}

@@ -1,5 +1,5 @@
 import Button from "@components/Button";
-import PublisherCard from "@components/PublisherCard";
+import WebsiteCard from "@components/WebsiteCard";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ type Props = {
   lnData: Battery;
 };
 
-export const PublisherLnData: FC<Props> = ({ lnData }) => {
+export const Donate: FC<Props> = ({ lnData }) => {
   const [loadingSendSats, setLoadingSendSats] = useState(false);
 
   const navigate = useNavigate();
@@ -74,7 +74,7 @@ export const PublisherLnData: FC<Props> = ({ lnData }) => {
 
   return (
     <div className="border-b border-gray-200 dark:border-neutral-500">
-      <PublisherCard
+      <WebsiteCard
         title={lnData.name}
         description={lnData.description}
         image={lnData.icon}
@@ -87,7 +87,7 @@ export const PublisherLnData: FC<Props> = ({ lnData }) => {
           primary
           loading={loadingSendSats}
         />
-      </PublisherCard>
+      </WebsiteCard>
     </div>
   );
 };

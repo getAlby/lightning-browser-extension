@@ -30,10 +30,10 @@ export default function TransactionsTable({ transactions }: Props) {
                       text-sm font-medium text-gray-900 truncate dark:text-white"
                       >
                         <p className="truncate">
-                          {tx.publisherLink && tx.title ? (
+                          {tx.websiteLink && tx.title ? (
                             <a
                               target="_blank"
-                              href={tx.publisherLink}
+                              href={tx.websiteLink}
                               rel="noopener noreferrer"
                             >
                               {tx.title}

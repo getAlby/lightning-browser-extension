@@ -4,16 +4,16 @@ import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
 import Progressbar from "@components/Progressbar";
-import PublisherCard from "@components/PublisherCard";
 import TransactionsTable from "@components/TransactionsTable";
+import WebsiteCard from "@components/WebsiteCard";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { FC, useState, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
-import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
-import type { Allowance, Transaction, Battery } from "~/types";
+import { Donate } from "~/app/screens/Home/Donate";
+import type { Allowance, Battery, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
 
@@ -52,7 +52,7 @@ const AllowanceView: FC<Props> = (props) => {
           type: "sent",
           date: dayjs(payment.createdAt).fromNow(),
           title: payment.name || payment.description,
-          publisherLink: `options.html#/publishers/${props.allowance.id}`,
+          websiteLink: `options.html#/websites/${props.allowance.id}`,
         })
       );
 
@@ -95,10 +95,10 @@ const AllowanceView: FC<Props> = (props) => {
         }
       />
       {props.lnDataFromCurrentTab?.length ? (
-        <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
+        <Donate lnData={props.lnDataFromCurrentTab[0]} />
       ) : (
         <div className="mx-4">
-          <PublisherCard
+          <WebsiteCard
             title={props.allowance.name}
             image={props.allowance.imageURL}
             isCard={true}

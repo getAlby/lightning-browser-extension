@@ -1,6 +1,6 @@
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
-import PublisherCard from "@components/PublisherCard";
+import WebsiteCard from "@components/WebsiteCard";
 import Checkbox from "@components/form/Checkbox";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -47,7 +47,7 @@ const ConfirmRequestPermission: FC = () => {
       <Container justifyBetween maxWidth="sm">
         <form onSubmit={handleSubmit}>
           <div>
-            <PublisherCard
+            <WebsiteCard
               title={origin.name}
               image={origin.icon}
               url={origin.host}

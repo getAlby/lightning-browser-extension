@@ -1,6 +1,6 @@
 import {
-  SendIcon,
   ReceiveIcon,
+  SendIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import Loading from "@components/Loading";
@@ -8,13 +8,12 @@ import TransactionsTable from "@components/TransactionsTable";
 import { Tab } from "@headlessui/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { FC } from "react";
-import { useState, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
-import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
+import { Donate } from "~/app/screens/Home/Donate";
 import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -31,7 +30,7 @@ const loadPayments = async () => {
     type: "sent",
     date: dayjs(payment.createdAt).fromNow(),
     title: payment.name || payment.description,
-    publisherLink: "options.html#/publishers",
+    websiteLink: "options.html#/websites",
   }));
 
   return payments;
@@ -167,7 +166,7 @@ const DefaultView: FC<Props> = (props) => {
   return (
     <div className="overflow-y-auto no-scrollbar h-full">
       {!!props.lnDataFromCurrentTab?.length && (
-        <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
+        <Donate lnData={props.lnDataFromCurrentTab[0]} />
       )}
 
       <div className="p-4">

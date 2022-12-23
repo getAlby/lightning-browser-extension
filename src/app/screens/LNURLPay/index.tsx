@@ -1,13 +1,13 @@
 import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
-import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
 import SatButtons from "@components/SatButtons";
+import WebsiteCard from "@components/WebsiteCard";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
 import axios from "axios";
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -352,7 +352,7 @@ function LNURLPay() {
           <>
             <div className="grow overflow-y-auto no-scrollbar">
               <Container maxWidth="sm">
-                <PublisherCard
+                <WebsiteCard
                   title={navState.origin?.name}
                   description={getRecipient()}
                   image={navState.origin?.icon || getImage()}

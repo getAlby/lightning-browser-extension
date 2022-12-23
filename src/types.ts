@@ -509,7 +509,7 @@ export type Transaction = {
   totalFees?: Allowance["payments"][number]["totalFees"];
   type?: "sent" | "sending" | "received";
   value?: string;
-  publisherLink?: string; // either the invoice URL if on PublisherSingleView, or the internal link to Publisher
+  websiteLink?: string; // either the invoice URL if on WebsiteSingleView, or the internal link to Website
 };
 
 export interface DbPayment {
@@ -636,7 +636,7 @@ export interface Badge {
   textColor: string;
 }
 
-export interface Publisher
+export interface Website
   extends Pick<
     Allowance,
     | "host"

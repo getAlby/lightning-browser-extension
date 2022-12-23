@@ -1,11 +1,11 @@
 import AllowanceMenu from "@components/AllowanceMenu";
 import Container from "@components/Container";
 import Progressbar from "@components/Progressbar";
-import PublisherCard from "@components/PublisherCard";
 import TransactionsTable from "@components/TransactionsTable";
+import WebsiteCard from "@components/WebsiteCard";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -15,9 +15,9 @@ import type { Allowance, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
 
-function Publisher() {
+function Website() {
   const { t } = useTranslation("translation", {
-    keyPrefix: "publishers",
+    keyPrefix: "websites",
   });
   const {
     isLoading: isLoadingSettings,
@@ -46,7 +46,7 @@ function Publisher() {
           type: "sent",
           date: dayjs(payment.createdAt).fromNow(),
           title: payment.name || payment.description,
-          publisherLink: payment.location,
+          websiteLink: payment.location,
         }));
 
         for (const payment of payments) {
@@ -74,7 +74,7 @@ function Publisher() {
   return (
     <div>
       <div className="border-b border-gray-200 dark:border-neutral-500">
-        <PublisherCard
+        <WebsiteCard
           title={allowance?.host || ""}
           image={allowance?.imageURL || ""}
           url={allowance?.host}
@@ -88,13 +88,13 @@ function Publisher() {
           <div className="flex justify-between items-center pt-8 pb-4">
             <dl>
               <dt className="text-sm font-medium text-gray-500">
-                {t("publisher.allowance.title")}
+                {t("website.allowance.title")}
               </dt>
 
               <dd className="flex items-center font-bold text-xl dark:text-neutral-400">
                 {getFormattedNumber(allowance.usedBudget)} /{" "}
                 {getFormattedNumber(allowance.totalBudget)}{" "}
-                {t("publisher.allowance.used_budget")}
+                {t("website.allowance.used_budget")}
                 <div className="ml-3 w-24">
                   <Progressbar percentage={allowance.percentage} />
                 </div>
@@ -105,7 +105,7 @@ function Publisher() {
               allowance={allowance}
               onEdit={fetchData}
               onDelete={() => {
-                navigate("/publishers", { replace: true });
+                navigate("/websites", { replace: true });
               }}
             />
           </div>
@@ -121,4 +121,4 @@ function Publisher() {
   );
 }
 
-export default Publisher;
+export default Website;

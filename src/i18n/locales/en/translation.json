@@ -579,12 +579,12 @@
         "showcases": "Showcases"
       }
     },
-    "publishers": {
+    "websites": {
       "title": "Your ⚡️ Websites",
       "description": "Websites where you have used Alby before",
       "no_info": "It looks like you haven't used Alby in any websites yet.",
       "discover": "Discover Websites",
-      "publisher": {
+      "website": {
         "allowance": {
           "title": "Allowance",
           "used_budget": "sats used"
@@ -783,7 +783,7 @@
         }
       }
     },
-    "publishers_table": {
+    "websites_table": {
       "payments": "payments",
       "used": "used"
     },
