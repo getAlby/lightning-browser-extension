@@ -69,8 +69,8 @@ function ConfirmSignMessage() {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
       {!successMessage ? (
-        <Container justifyBetween maxWidth="sm">
-          <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="h-full">
+          <Container justifyBetween maxWidth="sm">
             <div>
               <PublisherCard
                 title={origin.name}
@@ -103,8 +103,8 @@ function ConfirmSignMessage() {
               loading={loading}
               onCancel={reject}
             />
-          </form>
-        </Container>
+          </Container>
+        </form>
       ) : (
         <Container maxWidth="sm">
           <PublisherCard

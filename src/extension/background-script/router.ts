@@ -6,6 +6,7 @@ import * as ln from "./actions/ln";
 import lnurl, { auth } from "./actions/lnurl";
 import * as nostr from "./actions/nostr";
 import * as payments from "./actions/payments";
+import * as permissions from "./actions/permissions";
 import * as settings from "./actions/settings";
 import * as setup from "./actions/setup";
 import * as webln from "./actions/webln";
@@ -17,6 +18,10 @@ const routes = {
   listAllowances: allowances.list,
   deleteAllowance: allowances.deleteAllowance,
   updateAllowance: allowances.updateAllowance,
+  addPermission: permissions.add,
+  deletePermission: permissions.deletePermission,
+  deletePermissionsById: permissions.deleteByIds,
+  listPermissions: permissions.listByAllowance,
   lock: accounts.lock,
   unlock: accounts.unlock,
   getInfo: ln.getInfo,

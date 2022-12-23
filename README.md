@@ -58,7 +58,7 @@ Add Alby to your browser
 ### Try out the most recent version of Alby (Nightly Releases)
 
 - [Firefox Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/firefox.xpi.zip) - best to install it as a temporary add-on as discussed in the "Load extension into browser" section
-- [Chrome Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/chrome.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right) and drag & drop the file in the browser
+- [Chrome Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/chrome.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right), and drag & drop the file in the browser
 
 (Note: You might need to reconfigure your wallet after installing new versions)
 
@@ -81,21 +81,11 @@ Then run the following
 
 ### 🛠 Development
 
-- Install dependencies\
-  `yarn install`
-- To watch file changes in development
-  - Chrome\
-    `yarn run dev:chrome`
-  - Firefox\
-    `yarn run dev:firefox`
-  - Opera\
-    `yarn run dev:opera`
-
 [Refer to SETUP.md for info regarding how to setup Alby](./doc/SETUP.md)
 
 ## Native Companions
 
-Alby supports native connectors to native applications on the host computer. For this the extension passes each call to a native application (using [native messaging](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging)).
+Alby supports native connectors to native applications on the host computer. For this, the extension passes each call to a native application (using [native messaging](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging)).
 This allows Alby also to connect to nodes behind Tor (through this native "proxy" application).
 
 Currently, there is one native companion app available to connect to Tor nodes: [https://github.com/getAlby/alby-companion-rs](https://github.com/getAlby/alby-companion-rs)
@@ -123,7 +113,7 @@ We use the [Development Project Board](https://github.com/orgs/getAlby/projects/
 #### Anyone
 
 - Have a look at this Readme. Can it be improved? Do you see typos? You can open a PR or reach out to us in [our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2).
-- You can help with [translations](#translations)
+- You can help with [translations](./doc/CONTRIBUTION.md#translations)
 - [Code of Conduct](./doc/CODE_OF_CONDUCT.md)
 
 ## ❔ FAQs
@@ -132,7 +122,7 @@ We use the [Development Project Board](https://github.com/orgs/getAlby/projects/
 
 Joule is a full interface to manage a LND node. It only supports one LND account.
 Our goal is NOT to write a full UI for a Lightning Network node with all the channel management features, but instead to only focus on what is necessary for the web (for payment and authentication flows). We believe there are already way better management UIs.
-Also we focus on supporting multiple different node backends (non-custodial and custodial).
+Also, we focus on supporting multiple different node backends (non-custodial and custodial).
 
 #### What is WebLN?
 
