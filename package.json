@@ -1,6 +1,6 @@
 {
   "name": "lightning-browser-extension",
-  "version": "1.21.0",
+  "version": "1.21.1",
   "description": "Lightning browser extension",
   "private": true,
   "repository": "https://github.com/bumi/lightning-browser-extension.git",
@@ -36,11 +36,11 @@
   },
   "dependencies": {
     "@bitcoin-design/bitcoin-icons-react": "^0.1.9",
-    "@headlessui/react": "^1.7.4",
+    "@headlessui/react": "^1.7.7",
     "@noble/secp256k1": "^1.7.0",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/line-clamp": "^0.4.2",
-    "axios": "^1.2.0",
+    "axios": "^1.2.1",
     "bech32": "^2.0.0",
     "bolt11": "^1.4.0",
     "crypto-js": "^4.1.1",

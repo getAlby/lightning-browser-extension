@@ -29,6 +29,10 @@ const sendPaymentOrPrompt = async (message: Message) => {
 };
 
 async function checkAllowance(host: string, amount: number) {
+  // if it is a 0 amount invoice we return false and prompt
+  if (amount <= 0) {
+    return false;
+  }
   const allowance = await db.allowances
     .where("host")
     .equalsIgnoreCase(host)
