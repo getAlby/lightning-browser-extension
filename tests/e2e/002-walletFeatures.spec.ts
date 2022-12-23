@@ -32,7 +32,7 @@ const unlockExtension = async ({ page, extensionId }) => {
 };
 
 test.describe("Wallet features", () => {
-  test("opens visited screen by default", async () => {
+  test("opens your websites screen by default", async () => {
     const { page, browser, extensionId } = await loadExtension();
     const $optionsdocument = await unlockExtension({
       page,

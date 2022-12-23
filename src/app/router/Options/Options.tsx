@@ -116,7 +116,7 @@ const Layout = () => {
     <div>
       <Navbar>
         <Navbar.Link href="/discover">{tCommon("discover")}</Navbar.Link>
-        <Navbar.Link href="/publishers">{tCommon("visited")}</Navbar.Link>
+        <Navbar.Link href="/publishers">{tCommon("websites")}</Navbar.Link>
         <Navbar.Link href="/send">{tCommon("actions.send")}</Navbar.Link>
         <Navbar.Link href="/receive">{tCommon("actions.receive")}</Navbar.Link>
         <Navbar.Link href="/settings">{tCommon("settings")}</Navbar.Link>
