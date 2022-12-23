@@ -14,7 +14,8 @@
   "web_accessible_resources": [
     "js/inpageScript.bundle.js",
     "js/inpageScriptWebLN.bundle.js",
-    "js/inpageScriptNostr.bundle.js"
+    "js/inpageScriptNostr.bundle.js",
+    "js/inpageScriptAlby.bundle.js"
   ],
   "permissions": [
     "notifications",

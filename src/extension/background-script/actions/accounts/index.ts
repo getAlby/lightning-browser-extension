@@ -1,3 +1,5 @@
+import promptAdd from "~/extension/background-script/actions/accounts/promptAdd";
+
 import add from "./add";
 import all from "./all";
 import decryptedDetails from "./decryptedDetails";
@@ -8,4 +10,15 @@ import remove from "./remove";
 import select from "./select";
 import unlock from "./unlock";
 
-export { all, unlock, lock, add, edit, select, info, remove, decryptedDetails };
+export {
+  all,
+  unlock,
+  lock,
+  add,
+  edit,
+  select,
+  info,
+  remove,
+  decryptedDetails,
+  promptAdd,
+};

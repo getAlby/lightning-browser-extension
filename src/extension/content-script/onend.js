@@ -8,6 +8,7 @@ import shouldInject from "./shouldInject";
 // WebLN calls that can be executed from the WebLNProvider.
 // Update when new calls are added
 const weblnCalls = [
+  "alby/addAccount",
   "webln/enable",
   "webln/getInfo",
   "webln/lnurl",
@@ -18,7 +19,7 @@ const weblnCalls = [
   "webln/request",
 ];
 // calls that can be executed when webln is not enabled for the current content page
-const disabledCalls = ["webln/enable"];
+const disabledCalls = ["alby/addAccount", "webln/enable"];
 
 let isEnabled = false; // store if webln is enabled for this content page
 let isRejected = false; // store if the webln enable call failed. if so we do not prompt again
@@ -47,7 +48,7 @@ async function init() {
     if (
       ev.source !== window ||
       ev.data.application !== "LBE" ||
-      ev.data.scope !== "webln"
+      (ev.data.scope !== "webln" && ev.data.scope !== "alby")
     ) {
       return;
     }

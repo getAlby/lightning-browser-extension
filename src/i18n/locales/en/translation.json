@@ -638,6 +638,10 @@
       "allow": "Allow this website to execute:",
       "always_allow": "Remember my choice and don't ask again"
     },
+    "confirm_add_account": {
+      "title": "Add account",
+      "content": "This website wants to add a wallet of the following type to Alby:"
+    },
     "nostr": {
       "title": "Nostr",
       "allow": "Allow this website to:",
