@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import websites from "./websites.json";
 
-function Publishers() {
+function Discover() {
   const { t } = useTranslation("translation", {
     keyPrefix: "discover",
   });
@@ -57,4 +57,4 @@ function Publishers() {
   );
 }
 
-export default Publishers;
+export default Discover;
