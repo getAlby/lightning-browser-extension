@@ -69,7 +69,7 @@
         "description": "Criar uma nova conta ou logar na sua conta atual da Alby",
         "pre_connect": {
           "title": "Sua Carteira Bitcoin na Alby",
-          "login_account": "Crie uma conta ou faça login na sua conta atual da Alby.",
+          "login_account": "Crie uma conta ou realize o login na sua conta atual da Alby.",
           "host_wallet": "A custódia dos seus bitcoins é por nossa conta!",
           "email": {
             "label": "Endereço de E-mail"
@@ -372,7 +372,7 @@
       }
     },
     "enable": {
-      "allow": "Permitir {{host}}:",
+      "allow": "Permitir este site:",
       "request1": "Solicitar aprovação para transações",
       "request2": "Gerar faturas e solicitar informações do servidor",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
@@ -484,7 +484,7 @@
       "nostr": {
         "title": "Nostr",
         "private_key": {
-          "subtitle": "Ao gerar uma chave, ela será criada a partir da conta atual que você usa. Certifique-se de fazer backup desta chave privada.",
+          "subtitle": "Ao gerar uma chave, ela será criada a partir da conta atual que você usa. Certifique-se de fazer backup desta chave privada. <0>Saiba mais »</0>",
           "warning": "Isso excluirá sua chave privada antiga. Tem certeza de que deseja prosseguir?",
           "title": "Chave privada",
           "generate": "Gerar",
@@ -576,7 +576,7 @@
     },
     "confirm_sign_message": {
       "title": "Assinar",
-      "content": "{{host}} solicita que você assine:"
+      "content": "Este site solicita que você assine:"
     },
     "confirm_keysend": {
       "title": "Aprovar Pagamento",
@@ -631,16 +631,16 @@
       }
     },
     "nostr": {
-      "allow": "Permitir {{host}}:",
+      "allow": "Permitir este site:",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "read_public_key": "Ler sua chave pública",
       "title": "Nostr",
       "confirm_sign_message": {
         "remember": {
-          "label": "Lembrar e não perguntar novamente"
+          "label": "Lembrar minha escolha e não perguntar novamente"
         }
       },
-      "content": "{{host}} solicita que você assine:",
+      "content": "Este site solicita que você assine:",
       "permissions": {
         "decrypt": "Descriptografar dados",
         "encrypt": "Criptografar dados",
@@ -650,8 +650,8 @@
     },
     "confirm_request_permission": {
       "title": "Aprovar Solicitação",
-      "allow": "Permitir {{host}}:",
-      "always_allow": "Sempre permitir {{method}} em {{host}}"
+      "allow": "Permitir este site executar:",
+      "always_allow": "Lembrar minha escolha e não perguntar novamente"
     }
   },
   "common": {
