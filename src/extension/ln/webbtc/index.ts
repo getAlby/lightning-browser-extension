@@ -110,7 +110,7 @@ export default class WebBTCProvider {
           application: "LBE",
           prompt: true,
           action: `webln/${action}`,
-          scope: "webbtc",
+          scope: "webln",
           args,
         },
         "*" // TODO use origin

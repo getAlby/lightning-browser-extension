@@ -1,0 +1,851 @@
+{
+  "translation": {
+    "welcome": {
+      "title": "De Power van ⚡ Bitcoin ⚡ in jouw Browser",
+      "nav": {
+        "welcome": "Welkom",
+        "password": "Jouw Wachtwoord",
+        "connect": "Jouw Lightning account",
+        "done": "Klaar"
+      },
+      "intro": {
+        "send": {
+          "title": "Verstuur in één klik",
+          "description": "Lightning transacties gebeuren in je browser. Geen alt+tab of QR-code scan nodig."
+        },
+        "paywall": {
+          "title": "Geen vervelende paywalls meer",
+          "description": "Definieer individuele budgetten voor websites om naadloze betalingsstromen mogelijk te maken. Geen vervelende paywalls meer."
+        },
+        "privacy": {
+          "title": "Privacy voorop",
+          "description": "Gebruik Lightning om te verifiëren en controle te houden over je privacy."
+        },
+        "foss": {
+          "title": "Gratis en Open Source",
+          "description": "Volledig transparante open code. Geen statistieken of trackers. Jij hebt de controle."
+        },
+        "actions": {
+          "get_started": "Begin Nu"
+        }
+      },
+      "set_password": {
+        "title": "Stel een ontgrendelingswachtwoord in",
+        "description": "Lightning-accountgegevens zijn veilig versleuteld met een ontgrendelingswachtwoord. Vergeet dit wachtwoord niet! Je hebt het nodig om de Alby-extensie te ontgrendelen (in deze browser)",
+        "choose_password": {
+          "label": "Kies een ontgrendelingswachtwoord:"
+        },
+        "confirm_password": {
+          "label": "Bevestig of dit correct is ingevuld:"
+        },
+        "errors": {
+          "enter_password": "Voer een wachtwoord in.",
+          "confirm_password": "Bevestig wachtwoord.",
+          "mismatched_password": "De wachtwoorden komen niet overeen."
+        }
+      },
+      "test_connection": {
+        "ready": "Geweldig, klaar om te starten!",
+        "tutorial": "Nu je Lightning wallet is geconnect, wil je een tutorial doorlopen?",
+        "try_tutorial": "Probeer nu",
+        "initializing": "Uw account wordt geïnitialiseerd. Even geduld, dit kan even duren...",
+        "connection_error": "Connectie Error",
+        "review_connection_details": "Controleer uw verbindingsgegevens.",
+        "connection_taking_long": "Verbinden duurt langer dan verwacht... Kloppen uw gegevens? Is uw node bereikbaar?",
+        "contact_support": "Hulp nodig? neem contact op met support@getalby.com",
+        "actions": {
+          "delete_edit_account": "Verwijderd invalide account en probeer opnieuw"
+        }
+      }
+    },
+    "choose_connector": {
+      "title": {
+        "welcome": "Heb je een Lightning wallet?",
+        "options": "Voeg een nieuwe Lightning account toe"
+      },
+      "description": "Maak eerst verbinding met een Lightning wallet zodat je kan synchen met websites die bitcoin Lightning betalingen accepteren!",
+      "alby": {
+        "title": "Alby Wallet",
+        "description": "Maak een Alby account aan of log direct in",
+        "pre_connect": {
+          "title": "Jouw Alby Lightning Wallet",
+          "login_account": "Maak een Alby account aan of log direct in.",
+          "host_wallet": "Wij hosten een Lightning wallet voor jouw!",
+          "email": {
+            "label": "Emailadres"
+          },
+          "optional_lightning_note": {
+            "part1": "Jouw Alby-account komt ook met een optionele",
+            "part2": "Lightning Address",
+            "part3": ". Dit is een eenvoudige manier voor anderen om jou bitcoin via het Lightning Netwerk te versturen.",
+            "part4": "leer meer"
+          },
+          "optional_lightning_address": {
+            "label": "Kies je Lightning Address (optioneel)",
+            "suffix": "@getalby.com",
+            "title": "nummers en letters, minimaal 3 karakters"
+          },
+          "errors": {
+            "create_wallet_error": "Kan niet inloggen of een nieuw account aanmaken. Hulp nodig? Neem contact op met support@getalby.com"
+          }
+        }
+      },
+      "lnd": {
+        "title": "LND",
+        "description": "Verbind met je LND node",
+        "page": {
+          "title": "Verbind met je LND node",
+          "description": "Je hebt je node-URL nodig en een macaroon met lees- en verzendrechten (bijv. admin.macaroon)"
+        },
+        "url": {
+          "label": "REST API host and port",
+          "placeholder": "https://your-node-url:8080"
+        },
+        "macaroon": {
+          "label": "Macaroon (HEX formaat)"
+        },
+        "or": "OF",
+        "drag_and_drop": "Sleep en drop je macaroon here of <0>browse</0>",
+        "errors": {
+          "connection_failed": "Connectie gefaald. Zijn je LND credentials correct?"
+        }
+      },
+      "lndhub_bluewallet": {
+        "title": "Bluewallet",
+        "description": "Verbind met je Bluewallet",
+        "page": {
+          "title": "Verbind met BlueWallet",
+          "description": "Kies in BlueWallet de Lightning wallet waarmee je wilt verbinden, open deze, klik op \"...\", klik op Exporteren/Back-up om de QR-code weer te geven en scan deze."
+        },
+        "uri": {
+          "label": "BlueWallet Export URI"
+        },
+        "errors": {
+          "invalid_uri": "BlueWallet URI invalide",
+          "connection_failed": "Connectie gefaald. Is je BlueWallet URI correct?"
+        }
+      },
+      "lndhub_go": {
+        "title": "LNDHub",
+        "description": "Verbind met je LNDHub account",
+        "page": {
+          "title": "Verbind met LNDHub",
+          "description": "Voer hier je LNDHub credential URI in of scan de QR code met je webcam."
+        },
+        "uri": {
+          "label": "LNDHub Export URI"
+        },
+        "errors": {
+          "invalid_uri": "Invalide LNDHub URI",
+          "connection_failed": "Connectie gefaald. Is je BlueWallet URI correct?"
+        }
+      },
+      "lnbits": {
+        "title": "LNbits",
+        "description": "Verbind met je LNDHub account",
+        "page": {
+          "title": "Verbinden met <0>LNbits</0>",
+          "instructions": "Kies in LNbits de portemonnee die u wilt verbinden, open deze, klik op API-info en kopieer de admin-sleutel. Plak het hieronder:"
+        },
+        "admin_key": {
+          "label": "LNbits Admin Key",
+          "placeholder": "Uw 32-cijferige administratiesleutel"
+        },
+        "url": {
+          "label": "LNbits-URL"
+        },
+        "errors": {
+          "connection_failed": "Verbinding mislukt. Heb je de juiste URL en Admin Key?"
+        }
+      },
+      "eclair": {
+        "title": "Eclair",
+        "description": "Verbinding met je Eclair node",
+        "page": {
+          "title": "Verbinden met <0>Eclair</0>",
+          "instructions": "U hebt uw Eclair-URL en wachtwoord nodig."
+        },
+        "password": {
+          "label": "Eclair-wachtwoord"
+        },
+        "url": {
+          "label": "Eclair-URL",
+          "placeholder": "http://localhost:8080"
+        }
+      },
+      "citadel": {
+        "title": "Citadel",
+        "description": "Maak verbinding met je lokale Citadel",
+        "page": {
+          "title": "Verbinding maken met <0>Citadel</0> node",
+          "instructions": "Dit werkt momenteel niet als 2FA is ingeschakeld."
+        },
+        "password": {
+          "label": "Citadel-wachtwoord"
+        },
+        "url": {
+          "label": "Citadel-URL",
+          "placeholder": "http://citadel.local"
+        }
+      },
+      "umbrel": {
+        "title": "Umbrel",
+        "description": "Maak verbinding met uw Umbrel",
+        "page": {
+          "title": "Verbinding maken met <0>Umbrel</0> node",
+          "instructions": "Ga in uw Umbrel dashboard naar <0>Connect Wallet</0>. Selecteer <0>lndconnect REST</0> en kopieer de URL <0>lndconnect</0>. (Afhankelijk van uw installatie kunt u de lokale verbinding of de Tor-verbinding gebruiken.)"
+        },
+        "rest_url": {
+          "label": "Indconnect-REST-URL",
+          "placeholder": "Indconnect://yournode:8080?..."
+        }
+      },
+      "mynode": {
+        "title": "myNode",
+        "description": "Maak verbinding met uw myNode",
+        "page": {
+          "title": "Verbinding maken met <0>myNode</0>",
+          "instructions": "Op uw myNode homepage klikt u op de <0>Wallet</0> knop voor uw <0>Lightning</0> dienst.<1/> Klik nu op de <0>Pair Wallet</0> knop onder de <0>Status</0> tab. Voer uw wachtwoord in wanneer daarom wordt gevraagd.<1/> Selecteer het dropdown menu en kies een koppelingsoptie. Afhankelijk van uw instelling kunt u de <0>Lightning (REST + Lokaal IP)</0> verbinding of de <0>Lightning (REST + Tor)</0> verbinding gebruiken."
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
+      },
+      "start9": {
+        "title": "Start9",
+        "description": "Verbind met uw Embassy",
+        "page": {
+          "title": "Maak verbinding met uw <0>Embassy</0> node",
+          "instructions": "<0>Note:</0> Momenteel ondersteunen we alleen LND, maar we zullen in de toekomst c-lightning ondersteuning toevoegen! <1/>Op uw Embassy dashboard klikt u op de <0>Lightning Network Daemon</0> service.<1/>Selecteer de <0>Properties</0> tab.<1/>Kopieer nu de <0>LND Connect REST URL.</0>"
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
+      },
+      "raspiblitz": {
+        "title": "RaspiBlitz",
+        "description": "Verbind met uw RaspiBlitz",
+        "page": {
+          "title": "Verbind met uw RaspiBlitz node",
+          "instructions1": "Je hebt je node onion adres, poort en een macaroon met lees- en verzendrechten nodig (bijv. admin.macaroon).<1/><1/><0>SSH</0> in uw <0>RaspiBlitz</0>.<1/>Run het commando <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Kopieer en plak het <0>.onion</0> adres in de onderstaande invoer.<1/>Voeg uw <0>port</0> toe na het onion adres, de standaard poort is <0>:8080</0>.",
+          "instructions2": "Selecteer <0>CONNECT</0>.<1/>Selecteer <0>EXPORT</0>.<1/>Selecteer <0>HEX</0>.<1/>Kopieer de <0>adminMacaroon</0>.<1/>Plak de macaroon in de onderstaande invoer."
+        },
+        "rest_api_host": {
+          "label": "",
+          "placeholder": ""
+        }
+      },
+      "bitcoin_beach": {
+        "title": "",
+        "description": "",
+        "page": {
+          "title": ""
+        }
+      },
+      "bitcoin_jungle": {
+        "title": "",
+        "description": "",
+        "page": {
+          "title": ""
+        }
+      },
+      "galoy": {
+        "phone_number": {
+          "label": ""
+        },
+        "sms_code": {
+          "label": ""
+        },
+        "jwt": {
+          "label": "",
+          "info": ""
+        },
+        "actions": {
+          "login": "",
+          "request_sms_code": ""
+        },
+        "errors": {
+          "failed_to_request_sms": "",
+          "failed_to_login_sms": "",
+          "setup_failed": "",
+          "missing_jwt": "",
+          "invalid_jwt": ""
+        }
+      },
+      "btcpay": {
+        "title": "",
+        "description": "",
+        "page": {
+          "title": "",
+          "instructions": ""
+        },
+        "config": {
+          "label": "",
+          "placeholder": ""
+        },
+        "errors": {
+          "connection_failed": ""
+        }
+      },
+      "commando": {
+        "title": "",
+        "description": "",
+        "page": {
+          "title": "",
+          "instructions": ""
+        },
+        "host": {
+          "label": ""
+        },
+        "pubkey": {
+          "label": ""
+        },
+        "rune": {
+          "label": ""
+        },
+        "port": {
+          "label": ""
+        },
+        "proxy": {
+          "label": ""
+        },
+        "privKey": {
+          "label": ""
+        },
+        "config": {
+          "label": "",
+          "placeholder": ""
+        },
+        "errors": {
+          "connection_failed": ""
+        }
+      }
+    },
+    "home": {
+      "actions": {
+        "send_satoshis": "",
+        "enable_now": ""
+      },
+      "recent_transactions": "",
+      "transaction_list": {
+        "tabs": {
+          "outgoing": "",
+          "incoming": ""
+        }
+      },
+      "allowance_view": {
+        "recent_transactions": "",
+        "allowance": "",
+        "sats_used": "",
+        "no_transactions": ""
+      },
+      "default_view": {
+        "recent_transactions": "",
+        "no_transactions": "",
+        "is_blocked_hint": "",
+        "block_removed": ""
+      }
+    },
+    "accounts": {
+      "title": "",
+      "actions": {
+        "add_account": ""
+      },
+      "edit": {
+        "title": "",
+        "name": {
+          "label": ""
+        },
+        "screen_reader": ""
+      },
+      "export": {
+        "title": "",
+        "screen_reader": "",
+        "waiting": "",
+        "your_ln_address": "",
+        "tip_mobile": "",
+        "export_uri": "",
+        "scan_qr": ""
+      },
+      "remove": {
+        "confirm": ""
+      }
+    },
+    "enable": {
+      "title": "",
+      "allow": "",
+      "request1": "",
+      "request2": "",
+      "block_and_ignore": "",
+      "block_added": ""
+    },
+    "unlock": {
+      "unlock_to_continue": "",
+      "unlock_password": "",
+      "help_contact": {
+        "part1": "",
+        "part2": ""
+      },
+      "unlock_error": {
+        "help": "",
+        "link": ""
+      },
+      "errors": {
+        "invalid_password": ""
+      }
+    },
+    "settings": {
+      "title": "",
+      "browser_notifications": {
+        "title": "",
+        "subtitle": ""
+      },
+      "website_enhancements": {
+        "title": "",
+        "subtitle": ""
+      },
+      "lnurl_auth": {
+        "title": "",
+        "hint": "",
+        "legacy_lnurl_auth_202207": {
+          "title": "",
+          "subtitle": ""
+        },
+        "legacy_lnurl_auth": {
+          "title": "",
+          "subtitle": ""
+        }
+      },
+      "camera_access": {
+        "title": "",
+        "subtitle": "",
+        "allow": "",
+        "granted": ""
+      },
+      "language": {
+        "title": "",
+        "subtitle": ""
+      },
+      "theme": {
+        "title": "",
+        "subtitle": "",
+        "options": {
+          "dark": "",
+          "light": "",
+          "system": ""
+        }
+      },
+      "show_fiat": {
+        "title": "",
+        "subtitle": ""
+      },
+      "currency": {
+        "title": "",
+        "subtitle": ""
+      },
+      "exchange": {
+        "title": "",
+        "subtitle": ""
+      },
+      "personal_data": {
+        "title": "",
+        "description": ""
+      },
+      "name": {
+        "title": "",
+        "subtitle": "",
+        "placeholder": ""
+      },
+      "email": {
+        "title": "",
+        "subtitle": "",
+        "placeholder": ""
+      },
+      "change_password": {
+        "title": "",
+        "subtitle": "",
+        "screen_reader": "",
+        "choose_password": {
+          "label": ""
+        },
+        "confirm_password": {
+          "label": ""
+        },
+        "submit": {
+          "label": ""
+        },
+        "errors": {
+          "enter_password": "",
+          "confirm_password": "",
+          "mismatched_password": ""
+        },
+        "success": ""
+      },
+      "nostr": {
+        "title": "",
+        "hint": "",
+        "private_key": {
+          "title": "",
+          "subtitle": "",
+          "generate": "",
+          "warning": "",
+          "success": ""
+        }
+      }
+    },
+    "send": {
+      "title": "",
+      "qrcode": {
+        "title": ""
+      },
+      "input": {
+        "label": "",
+        "hint": ""
+      }
+    },
+    "lnurlpay": {
+      "amount": {
+        "label": ""
+      },
+      "comment": {
+        "label": ""
+      },
+      "name": {
+        "label": ""
+      },
+      "email": {
+        "label": ""
+      },
+      "success": ""
+    },
+    "lnurlauth": {
+      "title": "",
+      "content_message": {
+        "heading": ""
+      },
+      "submit": "",
+      "success": "",
+      "errors": {
+        "status": ""
+      }
+    },
+    "lnurlchannel": {
+      "title": "",
+      "content_message": {
+        "heading": ""
+      },
+      "success": ""
+    },
+    "lnurlwithdraw": {
+      "title": "",
+      "content_message": {
+        "heading": ""
+      },
+      "amount": {
+        "label": ""
+      },
+      "success": ""
+    },
+    "receive": {
+      "title": "",
+      "actions": {
+        "create_invoice": ""
+      },
+      "amount": {
+        "label": "",
+        "placeholder": ""
+      },
+      "description": {
+        "label": "",
+        "placeholder": ""
+      },
+      "success": "",
+      "payment": {
+        "waiting": "",
+        "status": ""
+      }
+    },
+    "publishers": {
+      "used": {
+        "title": "",
+        "description": "",
+        "no_info": ""
+      },
+      "suggestions": {
+        "title": "",
+        "description": "",
+        "list": {
+          "trading": "",
+          "gaming": "",
+          "entertaiment": "",
+          "shopping": "",
+          "miscellaneous": "",
+          "showcases": ""
+        }
+      },
+      "publisher": {
+        "allowance": {
+          "title": "",
+          "used_budget": ""
+        }
+      }
+    },
+    "make_invoice": {
+      "title": "",
+      "amount": {
+        "label": ""
+      },
+      "memo": {
+        "label": ""
+      },
+      "errors": {
+        "amount_too_small": "",
+        "amount_too_big": ""
+      }
+    },
+    "confirm_sign_message": {
+      "title": "",
+      "content": ""
+    },
+    "confirm_keysend": {
+      "title": "",
+      "success": "",
+      "payment_summary": {
+        "description": ""
+      }
+    },
+    "keysend": {
+      "title": "",
+      "success": "",
+      "receiver": {
+        "label": ""
+      },
+      "amount": {
+        "label": ""
+      }
+    },
+    "confirm_payment": {
+      "title": "",
+      "success": "",
+      "actions": {
+        "pay_now": ""
+      }
+    },
+    "confirm_request_permission": {
+      "title": "",
+      "allow": "",
+      "always_allow": ""
+    },
+    "nostr": {
+      "title": "",
+      "allow": "",
+      "content": "",
+      "read_public_key": "",
+      "block_and_ignore": "",
+      "block_added": "",
+      "confirm_sign_message": {
+        "remember": {
+          "label": ""
+        }
+      },
+      "permissions": {
+        "decrypt": "",
+        "encrypt": "",
+        "allow_sign": ""
+      }
+    }
+  },
+  "common": {
+    "password": "",
+    "advanced": "",
+    "success": "",
+    "error": "",
+    "settings": "",
+    "websites": "",
+    "sats_one": "",
+    "sats_other": "",
+    "loading": "",
+    "amount": "",
+    "optional": "",
+    "feedback": "",
+    "copied": "",
+    "description": "",
+    "description_full": "",
+    "success_message": "",
+    "response": "",
+    "message": "",
+    "help": "",
+    "actions": {
+      "back": "",
+      "delete": "",
+      "edit": "",
+      "next": "",
+      "open": "",
+      "cancel": "",
+      "confirm": "",
+      "continue": "",
+      "connect": "",
+      "lock": "",
+      "unlock": "",
+      "send": "",
+      "save": "",
+      "receive": "",
+      "close": "",
+      "export": "",
+      "remove": "",
+      "copy": ""
+    },
+    "errors": {
+      "connection_failed": "",
+      "payment_failed": ""
+    }
+  },
+  "components": {
+    "allowance_menu": {
+      "confirm_delete": "",
+      "hint": "",
+      "new_budget": {
+        "label": ""
+      },
+      "enable_login": {
+        "title": "",
+        "subtitle": ""
+      },
+      "edit_allowance": {
+        "title": "",
+        "screen_reader": ""
+      }
+    },
+    "qrcode_scanner": {
+      "title": "",
+      "actions": {
+        "start_scanning": "",
+        "stop_scanning": ""
+      },
+      "errors": {
+        "allow_camera_access": ""
+      }
+    },
+    "transactionsTable": {
+      "fee": "",
+      "preimage": "",
+      "received": "",
+      "sent": "",
+      "boostagram": {
+        "sender": "",
+        "message": "",
+        "app": "",
+        "podcast": ""
+      },
+      "open_location": ""
+    },
+    "confirm_or_cancel": {
+      "only_trusted": ""
+    },
+    "budget_control": {
+      "remember": {
+        "label": "",
+        "description": ""
+      },
+      "budget": {
+        "label": ""
+      }
+    },
+    "companion_download_info": {
+      "description": "",
+      "download_here": "",
+      "using_tor": "",
+      "or": ""
+    },
+    "toasts": {
+      "connection_error": {
+        "what_you_can_do": "",
+        "double_check": "",
+        "if_ssl_errors": "",
+        "visit_guides": ""
+      },
+      "login_failed": {
+        "password_reset": ""
+      },
+      "errors": {
+        "invalid_credentials": ""
+      }
+    },
+    "account_menu": {
+      "screen_reader": "",
+      "title": "",
+      "options": {
+        "account": {
+          "add": "",
+          "manage": ""
+        }
+      }
+    },
+    "publishers_table": {
+      "payments": "",
+      "used": ""
+    },
+    "badge": {
+      "label": {
+        "active": "",
+        "auth": ""
+      }
+    }
+  },
+  "permissions": {
+    "commando": {
+      "bkpr-listbalances": "",
+      "checkmessage": "",
+      "connect": "",
+      "decode": "",
+      "decodepay": "",
+      "disconnect": "",
+      "feerates": "",
+      "fundchannel": "",
+      "getinfo": "",
+      "getroute": "",
+      "invoice": "",
+      "keysend": "",
+      "listforwards": "",
+      "listfunds": "",
+      "listinvoices": "",
+      "listnodes": "",
+      "listoffers": "",
+      "listpays": "",
+      "listpeers": "",
+      "listsendpays": "",
+      "listtransactions": "",
+      "multifundchannel": "",
+      "offer": "",
+      "pay": "",
+      "sendpay": "",
+      "setchannel": "",
+      "signmessage": ""
+    },
+    "lnd": {
+      "getinfo": "",
+      "listchannels": "",
+      "listinvoices": "",
+      "channelbalance": "",
+      "walletbalance": "",
+      "openchannel": "",
+      "connectpeer": "",
+      "disconnectpeer": "",
+      "estimatefee": "",
+      "getchaninfo": "",
+      "getnetworkinfo": "",
+      "getnodeinfo": "",
+      "gettransactions": "",
+      "listpayments": "",
+      "listpeers": "",
+      "lookupinvoice": "",
+      "queryroutes": "",
+      "verifymessage": "",
+      "sendtoroute": "",
+      "decodepayreq": "",
+      "routermc": ""
+    }
+  }
+}

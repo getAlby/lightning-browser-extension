@@ -124,7 +124,12 @@ function Publishers() {
 
             <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {items.map(({ title, subtitle, logo, url }) => (
-                <a key={url} href={url} target="_blank" rel="noreferrer">
+                <a
+                  key={url}
+                  href={url}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
                   <div className="bg-white dark:bg-surface-02dp shadow-md flex p-4 h-32 rounded-lg hover:bg-gray-50 cursor-pointer w-full">
                     <div className="flex space-x-3">
                       <img
