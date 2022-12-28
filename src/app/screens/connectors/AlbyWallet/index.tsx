@@ -187,7 +187,7 @@ export default function AlbyWallet({ variant }: Props) {
               className="underline"
               href="https://lightningaddress.com/"
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
             >
               {t("pre_connect.optional_lightning_note.part2")}
             </a>
@@ -196,7 +196,7 @@ export default function AlbyWallet({ variant }: Props) {
               className="underline"
               href="https://lightningaddress.com/"
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
             >
               {t("pre_connect.optional_lightning_note.part4")}
             </a>
