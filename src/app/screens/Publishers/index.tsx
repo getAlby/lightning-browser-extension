@@ -1,13 +1,11 @@
-import Button from "@components/Button";
-import CloseableCard from "@components/CloseableCard";
 import Container from "@components/Container";
 import PublishersTable from "@components/PublishersTable";
+import Tips from "@components/Tips";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
-import { TIPS } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import { Allowance, Badge, Publisher } from "~/types";
 
@@ -18,16 +16,13 @@ function Publishers() {
     keyPrefix: "publishers",
   });
 
-  const { settings, updateSetting } = useSettings();
+  const { settings } = useSettings();
 
   const [publishers, setPublishers] = useState<Publisher[]>([]);
   const tips = settings.tips || [];
 
   const hasTips = tips.length > 0;
 
-  function hasTip(id: TIPS) {
-    return tips.includes(id);
-  }
   const navigate = useNavigate();
 
   function navigateToPublisher(id: number) {
@@ -131,77 +126,7 @@ function Publishers() {
             {t("tips.description")}
           </p>
           <div className="grid gap-4 sm:grid-cols-1 lg:grid-cols-2">
-            {hasTip(TIPS.TOP_UP_WALLET) && (
-              <CloseableCard
-                handleClose={() =>
-                  updateSetting({
-                    tips: tips.filter((tip) => tip !== TIPS.TOP_UP_WALLET),
-                  })
-                }
-                title={t("tips.top_up_wallet.title")}
-                description={t("tips.top_up_wallet.description")}
-                buttons={[
-                  <Button
-                    key={1}
-                    label={t("tips.top_up_wallet.label1")}
-                    primary
-                    onClick={() => {
-                      navigate("/receive");
-                    }}
-                  />,
-                  <a key={2} href="https://getalby.com/topup">
-                    <Button label={t("tips.top_up_wallet.label2")} />
-                  </a>,
-                ]}
-              />
-            )}
-            {hasTip(TIPS.PIN) && (
-              <CloseableCard
-                handleClose={() =>
-                  updateSetting({
-                    tips: tips.filter((tip) => tip !== TIPS.PIN),
-                  })
-                }
-                title={t("tips.pin.title")}
-                description={[
-                  t("tips.pin.description1"),
-                  t("tips.pin.description2"),
-                  t("tips.pin.description3"),
-                ]}
-              />
-            )}
-            {hasTip(TIPS.DEMO) && (
-              <CloseableCard
-                handleClose={() =>
-                  updateSetting({
-                    tips: tips.filter((tip) => tip !== TIPS.DEMO),
-                  })
-                }
-                title={t("tips.demo.title")}
-                description={t("tips.demo.description")}
-                buttons={[
-                  <a key={1} href="https://getalby.com/demo">
-                    <Button label={t("tips.demo.label1")} primary />
-                  </a>,
-                ]}
-              />
-            )}
-            {hasTip(TIPS.ADDRESS) && (
-              <CloseableCard
-                handleClose={() =>
-                  updateSetting({
-                    tips: tips.filter((tip) => tip !== TIPS.ADDRESS),
-                  })
-                }
-                title={t("tips.address.title")}
-                description={t("tips.address.description")}
-                buttons={[
-                  <a key={1} href="https://getalby.com/demo">
-                    <Button label={t("tips.address.label1")} primary />
-                  </a>,
-                ]}
-              />
-            )}
+            <Tips />
           </div>
         </>
       )}
