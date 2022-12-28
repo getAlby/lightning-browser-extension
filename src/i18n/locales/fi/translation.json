@@ -634,7 +634,6 @@
     "confirm_request_permission": {
       "title": "Hyväksy pyyntö",
       "allow": "Salli {{host}}:",
-      "enable_method": "{{metodi}}:n kutsu",
       "always_allow": "Salli aina {{metodi}} {{host}}:lla"
     },
     "nostr": {

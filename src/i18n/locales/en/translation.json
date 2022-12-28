@@ -83,7 +83,7 @@
       },
       "pre_connect": {
         "title": "Your Alby Lightning Wallet",
-        "login_account": "Create or login to your Alby account.",
+        "login_account": "Create or log in to your Alby account.",
         "host_wallet": "We host a Lightning wallet for you!",
         "email": {
           "label": "Email Address"
@@ -100,7 +100,7 @@
           "title": "numbers and letters, at least 3 characters"
         },
         "errors": {
-          "create_wallet_error": "Failed to login or create a new account. If you need help, please contact support@getalby.com"
+          "create_wallet_error": "Failed to log in or create a new account. If you need help, please contact support@getalby.com"
         }
       }
     },
@@ -491,7 +491,7 @@
         "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
         "private_key": {
           "title": "Private key",
-          "subtitle": "Generating a key will create a new key based on the current account you use. Please make sure you backup this private key.",
+          "subtitle": "Generating a key will create a new key based on the current account you use. It can be re-generated, but please make sure you backup this private key. <0>Learn more »</0>",
           "generate": "Generate",
           "warning": "This will delete your old private key. Are you sure?",
           "success": "Private key encrypted & saved successfully."
@@ -526,7 +526,7 @@
     "lnurlauth": {
       "title": "Authentication",
       "content_message": {
-        "heading": "Do you want to login to"
+        "heading": "Do you want to log in to"
       },
       "submit": "Login",
       "success": "Login successful on {{name}}",
@@ -715,7 +715,7 @@
       },
       "enable_login": {
         "title": "Enable website login",
-        "subtitle": "Automatically login without confirmation when the website requests."
+        "subtitle": "Automatically log in without confirmation when the website requests."
       },
       "edit_allowance": {
         "title": "Edit Allowance",
@@ -848,7 +848,8 @@
       "queryroutes": "Query for a possible route.",
       "verifymessage": "Verify a signature over a msg.",
       "sendtoroute": "Make a payment via the specified route.",
-      "decodepayreq": "Decode a payment request string."
+      "decodepayreq": "Decode a payment request string.",
+      "routermc": "Read the internal mission control state."
     }
   }
 }

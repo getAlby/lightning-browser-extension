@@ -69,7 +69,7 @@
         "description": "Crea o inicia sesión en tu cuenta de Alby",
         "pre_connect": {
           "title": "Su Billetera Alby Lightning",
-          "login_account": "Cree o inicie sesión en su cuenta de Alby.",
+          "login_account": "Crea o inicia sesión en tu cuenta de Alby.",
           "host_wallet": "¡Alojamos una billetera Lightning para ti!",
           "email": {
             "label": "Dirección de correo electrónico"
@@ -86,7 +86,7 @@
             "title": "números y letras, al menos 3 caracteres"
           },
           "errors": {
-            "create_wallet_error": "Error al crear una nueva billetera"
+            "create_wallet_error": "Hubo un fallo al iniciar o crear tu sesión . Si necesitas ayuda por favor escribe a support@getalby.com"
           }
         }
       },
@@ -110,21 +110,6 @@
           "connection_failed": "La conexión falló. ¿Son correctas sus credenciales de LND?"
         }
       },
-      "lndhub": {
-        "title": "LNDHub (billetera Bluewallet)",
-        "description": "Conéctese a su billetera móvil Blue Wallet",
-        "page": {
-          "title": "Conéctese a LNDHub (BlueWallet)",
-          "description": "En la billetera BlueWallet, elija la billetera que desea conectar, ábrala, haga clic en\"...\", haga clic en Exportar / Copia de seguridad para mostrar el código QR y escanearlo con su cámara web."
-        },
-        "uri": {
-          "label": "Exportar URI de LNDHub"
-        },
-        "errors": {
-          "invalid_uri": "URI de LNDHub no válido",
-          "connection_failed": "La conexión falló. ¿Es correcto el URI de LNDHub?"
-        }
-      },
       "lnbits": {
         "title": "Cuenta LNbits",
         "description": "Conéctese a su cuenta de LNbits",
@@ -145,15 +130,40 @@
       },
       "eclair": {
         "title": "Cuenta de Eclair",
-        "description": "Conéctese a su nodo Eclair"
+        "description": "Conéctese a su nodo Eclair",
+        "password": {
+          "label": "Contraseña de Eclair"
+        },
+        "page": {
+          "instructions": "Necesitas la URL y la contreaseña de Eclair.",
+          "title": "Conectar a Eclair"
+        },
+        "url": {
+          "label": "URL de Eclair",
+          "placeholder": "http://localhost:8080"
+        }
       },
       "citadel": {
         "title": "Cuenta de Citadel",
-        "description": "Conéctese a su Citadel local"
+        "description": "Conéctese a su Citadel local",
+        "password": {
+          "label": "Contraseña de Citadel"
+        },
+        "url": {
+          "label": "URL de Citadel",
+          "placeholder": "http://citadel.local"
+        },
+        "page": {
+          "title": "Conectar a nodo Citadel",
+          "instructions": "Esto actualmente no funciona si el A2F está activado."
+        }
       },
       "umbrel": {
         "title": "Cuenta de Umbrel",
-        "description": "Conéctese a su Umbrel"
+        "description": "Conéctese a su Umbrel",
+        "page": {
+          "title": "Conectar a Umbrel"
+        }
       },
       "mynode": {
         "title": "MiNodo",
@@ -274,7 +284,6 @@
       "allow": "Permitir que {{host}}:",
       "request1": "Solicitar aprobación de transacciones",
       "request2": "Solicitar facturas e información sobre rayos",
-      "connect": "Conectar",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "title": "Conectar"
     },
@@ -384,8 +393,7 @@
         "title": "Esperando para escanear"
       },
       "input": {
-        "label": "Factura, Dirección Lightning o LNURL",
-        "placeholder": "Pegar dirección de factura, lnurl o lightning"
+        "label": "Factura, Dirección Lightning o LNURL"
       }
     },
     "lnurlpay": {
