@@ -23,6 +23,7 @@ export default function Tips() {
   if (hasTip(TIPS.TOP_UP_WALLET)) {
     tipElements.push(
       <CloseableCard
+        key={TIPS.TOP_UP_WALLET}
         handleClose={() => filterTip(TIPS.TOP_UP_WALLET)}
         title={t("tips.top_up_wallet.title")}
         description={t("tips.top_up_wallet.description")}
@@ -45,6 +46,7 @@ export default function Tips() {
   if (hasTip(TIPS.PIN)) {
     tipElements.push(
       <CloseableCard
+        key={TIPS.PIN}
         handleClose={() => filterTip(TIPS.PIN)}
         title={t("tips.pin.title")}
         description={[
@@ -59,6 +61,7 @@ export default function Tips() {
   if (hasTip(TIPS.DEMO)) {
     tipElements.push(
       <CloseableCard
+        key={TIPS.DEMO}
         handleClose={() => filterTip(TIPS.DEMO)}
         title={t("tips.demo.title")}
         description={t("tips.demo.description")}
@@ -74,6 +77,7 @@ export default function Tips() {
   if (hasTip(TIPS.ADDRESS)) {
     tipElements.push(
       <CloseableCard
+        key={TIPS.ADDRESS}
         handleClose={() => filterTip(TIPS.ADDRESS)}
         title={t("tips.address.title")}
         description={t("tips.address.description")}
