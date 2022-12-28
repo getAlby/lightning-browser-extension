@@ -33,7 +33,7 @@ describe("Alby Wallet", () => {
       </MemoryRouter>
     );
 
-    expect(await screen.queryByText("Lightning Address")).toBeInTheDocument();
+    expect(await screen.queryByText("lightning address")).toBeInTheDocument();
   });
 
   test("lightning address does not show in login variant", async () => {
@@ -44,7 +44,7 @@ describe("Alby Wallet", () => {
     );
 
     expect(
-      await screen.queryByText("Lightning Address", undefined)
+      await screen.queryByText("lightning address", undefined)
     ).not.toBeInTheDocument();
   });
 });
