@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useSettings } from "~/app/context/SettingsContext";
+import { useTips } from "~/app/hooks/useTips";
 import msg from "~/common/lib/msg";
 import { Allowance, Badge, Publisher } from "~/types";
 
@@ -16,10 +16,8 @@ function Publishers() {
     keyPrefix: "publishers",
   });
 
-  const { settings } = useSettings();
-
   const [publishers, setPublishers] = useState<Publisher[]>([]);
-  const tips = settings.tips || [];
+  const { tips } = useTips();
 
   const hasTips = tips.length > 0;
 

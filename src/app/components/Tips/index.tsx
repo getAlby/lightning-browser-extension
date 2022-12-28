@@ -2,29 +2,17 @@ import Button from "@components/Button";
 import CloseableCard from "@components/CloseableCard";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useAccount } from "~/app/context/AccountContext";
-import { useSettings } from "~/app/context/SettingsContext";
+import { useTips } from "~/app/hooks/useTips";
 import { TIPS } from "~/common/constants";
-
-export const isAlbyAccount = (alias = "") => {
-  return alias === "🐝 getalby.com";
-};
-
-export const isChrome = (): boolean => {
-  return !!window.chrome;
-};
 
 export default function Tips() {
   const { t } = useTranslation("translation", {
     keyPrefix: "publishers",
   });
 
-  const { settings, updateSetting } = useSettings();
-  const { account } = useAccount();
-
   const navigate = useNavigate();
 
-  const tips = settings.tips || [];
+  const { tips, filterTip } = useTips();
 
   function hasTip(id: TIPS) {
     return tips.includes(id);
@@ -32,14 +20,10 @@ export default function Tips() {
 
   const tipElements = [] as JSX.Element[];
 
-  if (hasTip(TIPS.TOP_UP_WALLET) && isAlbyAccount(account?.alias)) {
+  if (hasTip(TIPS.TOP_UP_WALLET)) {
     tipElements.push(
       <CloseableCard
-        handleClose={() =>
-          updateSetting({
-            tips: tips.filter((tip) => tip !== TIPS.TOP_UP_WALLET),
-          })
-        }
+        handleClose={() => filterTip(TIPS.TOP_UP_WALLET)}
         title={t("tips.top_up_wallet.title")}
         description={t("tips.top_up_wallet.description")}
         buttons={[
@@ -58,14 +42,10 @@ export default function Tips() {
       />
     );
   }
-  if (hasTip(TIPS.PIN) && isChrome()) {
+  if (hasTip(TIPS.PIN)) {
     tipElements.push(
       <CloseableCard
-        handleClose={() =>
-          updateSetting({
-            tips: tips.filter((tip) => tip !== TIPS.PIN),
-          })
-        }
+        handleClose={() => filterTip(TIPS.PIN)}
         title={t("tips.pin.title")}
         description={[
           t("tips.pin.description1"),
@@ -79,11 +59,7 @@ export default function Tips() {
   if (hasTip(TIPS.DEMO)) {
     tipElements.push(
       <CloseableCard
-        handleClose={() =>
-          updateSetting({
-            tips: tips.filter((tip) => tip !== TIPS.DEMO),
-          })
-        }
+        handleClose={() => filterTip(TIPS.DEMO)}
         title={t("tips.demo.title")}
         description={t("tips.demo.description")}
         buttons={[
@@ -98,11 +74,7 @@ export default function Tips() {
   if (hasTip(TIPS.ADDRESS)) {
     tipElements.push(
       <CloseableCard
-        handleClose={() =>
-          updateSetting({
-            tips: tips.filter((tip) => tip !== TIPS.ADDRESS),
-          })
-        }
+        handleClose={() => filterTip(TIPS.ADDRESS)}
         title={t("tips.address.title")}
         description={t("tips.address.description")}
         buttons={[
