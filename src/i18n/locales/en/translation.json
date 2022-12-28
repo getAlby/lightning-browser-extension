@@ -5,7 +5,7 @@
       "nav": {
         "welcome": "Welcome",
         "password": "Your Password",
-        "connect": "Your Lightning account",
+        "connect": "Your Lightning Account",
         "done": "Done"
       },
       "intro": {
@@ -31,7 +31,7 @@
       },
       "set_password": {
         "title": "Set an unlock password",
-        "description": "Your Lightning account data is securely encrypted with an unlock password. Do not forget this password! You need it to unlock the Alby Extension (in this browser)",
+        "description": "Your lightning account data is securely encrypted with an unlock password. Do not forget this password! You need it to unlock the Alby Extension (in this browser)",
         "choose_password": {
           "label": "Choose an unlock password:"
         },
@@ -92,7 +92,7 @@
           }
         },
         "title": "Your Alby Wallet",
-        "create_account": "Create your Lightning Wallet hosted by Alby.\nYou can always regain access to Alby Wallet using these credentials.",
+        "create_account": "Create your lightning wallet hosted by Alby.\nYou can always regain access to Alby Wallet using these credentials.",
         "login_account": "Log in to your Alby wallet",
         "email": {
           "create": {
@@ -104,8 +104,8 @@
         },
         "optional_lightning_note": {
           "part1": "Your Alby account also comes with an optional",
-          "part2": "Lightning Address",
-          "part3": ". This is a simple way for anyone to send you Bitcoin on the Lightning Network.",
+          "part2": "lightning address",
+          "part3": ". This is a simple way for anyone to send you bitcoin on the lightning network.",
           "part4": "learn more"
         },
         "optional_lightning_address": {
@@ -228,7 +228,7 @@
         "title": "myNode",
         "page": {
           "title": "Connect to <0>myNode</0>",
-          "instructions": "On your myNode homepage click on the <0>Wallet</0> button for your <0>Lightning</0> service.<1/> Now click on the <0>Pair Wallet</0> button under the <0>Status</0> tab. Enter your password when prompted.<1/> Select the dropdown menu and choose a pairing option. Depending on your setup you can either use the <0>Lightning (REST + Local IP)</0> connection or the <0>Lightning (REST + Tor)</0> connection."
+          "instructions": "On your myNode homepage click on the <0>Wallet</0> button for your <0>lightning</0> service.<1/> Now click on the <0>Pair Wallet</0> button under the <0>Status</0> tab. Enter your password when prompted.<1/> Select the dropdown menu and choose a pairing option. Depending on your setup you can either use the <0>lightning (REST + Local IP)</0> connection or the <0>lightning (REST + Tor)</0> connection."
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -239,7 +239,7 @@
         "title": "Start9",
         "page": {
           "title": "Connect to your <0>Embassy</0> node",
-          "instructions": "<0>Note:</0> Currently we only support LND but we will be adding c-lightning support in the future!<1/>On your Embassy dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
+          "instructions": "<0>Note:</0> Currently we only support LND but we will be adding c-lightning support in the future!<1/>On your Embassy dashboard click on the <0>lightning network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -311,7 +311,7 @@
         "title": "Core Lightning",
         "page": {
           "title": "Connect to your Core Lightning node",
-          "instructions": "Make sure you have Core Lightning version 0.12.0 or newer, the commando plugin is running and your node is accessible over the Lightning Network. Create a rune by running 'lightning-cli commando-rune'."
+          "instructions": "Make sure you have Core Lightning version 0.12.0 or newer, the commando plugin is running and your node is accessible over the lightning network. Create a rune by running 'lightning-cli commando-rune'."
         },
         "host": {
           "label": "Host"
@@ -406,7 +406,7 @@
         "part2": "Alby Support"
       },
       "unlock_error": {
-        "help": "Your account data is encrypted with your unlock password. If you really forgot your unlock password you have to reset and add your Lightning account again.",
+        "help": "Your account data is encrypted with your unlock password. If you really forgot your unlock password you have to reset and add your lightning account again.",
         "link": "Reset now and add a new account"
       },
       "errors": {
@@ -464,7 +464,7 @@
       },
       "exchange": {
         "title": "Exchange Source",
-        "subtitle": "Source of Bitcoin exchange rates"
+        "subtitle": "Source of bitcoin exchange rates"
       },
       "personal_data": {
         "title": "Personal data",
