@@ -1,9 +1,9 @@
 import { bech32 } from "bech32";
 
-export function bech32Decode(str: string) {
+export function bech32Decode(str: string, encoding: BufferEncoding = "utf-8") {
   const { words: dataPart } = bech32.decode(str, 2000);
   const requestByteArray = bech32.fromWords(dataPart);
-  return Buffer.from(requestByteArray).toString();
+  return Buffer.from(requestByteArray).toString(encoding);
 }
 
 export async function poll<T>({
