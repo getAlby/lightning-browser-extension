@@ -7954,10 +7954,10 @@ react-modal@^3.16.1:
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
 
-react-qr-code@^2.0.8:
-  version "2.0.8"
-  resolved "https://registry.yarnpkg.com/react-qr-code/-/react-qr-code-2.0.8.tgz#d34a766fb5b664a40dbdc7020f7ac801bacb2851"
-  integrity sha512-zYO9EAPQU8IIeD6c6uAle7NlKOiVKs8ji9hpbWPTGxO+FLqBN2on+XCXQvnhm91nrRd306RvNXUkUNcXXSfhWA==
+react-qr-code@^2.0.11:
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/react-qr-code/-/react-qr-code-2.0.11.tgz#444c759a2100424972e17135fbe0e32eaffa19e8"
+  integrity sha512-P7mvVM5vk9NjGdHMt4Z0KWeeJYwRAtonHTghZT2r+AASinLUUKQ9wfsGH2lPKsT++gps7hXmaiMGRvwTDEL9OA==
   dependencies:
     prop-types "^15.8.1"
     qr.js "0.0.0"
