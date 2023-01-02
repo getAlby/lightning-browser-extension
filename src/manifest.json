@@ -26,7 +26,7 @@
     "*://*/*"
   ],
 
-  "content_security_policy": "script-src 'self' blob:; object-src 'self'",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
 
   "__chrome|firefox__author": "Alby",
   "__opera__developer": {
@@ -38,6 +38,7 @@
       "id": "extension@getalby.com"
     }
   },
+  "__firefox__content_security_policy": "script-src 'self' blob:; object-src 'self'",
 
   "__chrome__minimum_chrome_version": "49",
   "__opera__minimum_opera_version": "36",
