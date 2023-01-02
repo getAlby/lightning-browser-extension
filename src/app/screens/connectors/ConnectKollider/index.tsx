@@ -3,7 +3,7 @@ import Select from "@components/form/Select";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
@@ -94,7 +94,21 @@ export default function ConnectKollidier() {
   return (
     <ConnectorForm
       title={t("page.title")}
-      description={t("page.description")}
+      description={
+        <Trans
+          i18nKey={"page.description"}
+          t={t}
+          components={[
+            // eslint-disable-next-line react/jsx-key
+            <a
+              className="underline"
+              href="https://kollider.xyz/wallet"
+              target="_blank"
+              rel="noopener noreferrer"
+            ></a>,
+          ]}
+        />
+      }
       submitLoading={loading}
       submitDisabled={formData.username === "" || formData.password === ""}
       onSubmit={handleSubmit}

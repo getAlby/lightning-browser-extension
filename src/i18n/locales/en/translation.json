@@ -279,7 +279,7 @@
         "description": "Login to your Kollider account",
         "page": {
           "title": "Connect to your Kollider account",
-          "description": "A nice description here"
+          "description": "Don't have an account already? <0>Sign up</0> now!"
         },
         "username": {
           "label": "Enter your Kollider username"
