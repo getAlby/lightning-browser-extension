@@ -66,8 +66,8 @@
       "description": "To start using Alby to make online payments, connect your lightning wallet to the extension.",
       "alby": {
         "title": "Alby",
-        "description": "If you don't already have a wallet, this is probably the easiest way to get started.",
-        "create_new": "Create new"
+        "description": "Sign up or use your existing Alby account to get started with lightning payments in no time.",
+        "create_new": "Sign up"
       },
       "other": {
         "title": "Other wallets",
