@@ -62,18 +62,18 @@
       }
     },
     "choose_path": {
-      "title": "Create or Connect Wallet",
-      "description": "Create a new Alby Wallet, log in to an existing one or connect to an external wallet or node",
+      "title": "Connect your wallet",
+      "description": "To start using Alby to make online payments, connect your lightning wallet to the extension.",
       "alby": {
-        "title": "Alby Wallet",
-        "description": "Create or log in to your Alby Wallet",
+        "title": "Alby Account",
+        "description": "If you don't already have a lightning wallet, this is probably the easiest option to get started.",
         "create_new": "Create new"
       },
       "other": {
-        "title": "Other Wallets",
-        "description": "Connect to your external lightning wallet or node",
-        "and_more": "and more...",
-        "connect": "Connect to Lightning Wallet"
+        "title": "Other wallets",
+        "description": "Connect to your existing lightning wallet or node and choose from various connectors.",
+        "and_more": "& more...",
+        "connect": "Connect"
       }
     },
     "alby": {
@@ -91,9 +91,9 @@
             "mismatched_password": "Passwords don't match."
           }
         },
-        "title": "Your Alby Wallet",
-        "create_account": "Create your lightning wallet hosted by Alby.\nYou can always regain access to Alby Wallet using these credentials.",
-        "login_account": "Log in to your Alby wallet",
+        "title": "Your Alby account",
+        "create_account": "Create a new Alby account to to send and receive bitcoin payments.",
+        "login_account": "Sign in to connect your existing Alby account.",
         "email": {
           "create": {
             "label": "Email Address"
