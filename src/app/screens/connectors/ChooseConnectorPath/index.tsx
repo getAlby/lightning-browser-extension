@@ -28,7 +28,7 @@ export default function ChooseConnectorPath({ title, description }: Props) {
           <h1 className="text-3xl font-bold dark:text-white">{title}</h1>
           {description && (
             <div className="flex justify-center">
-              <p className="text-gray-500 mt-6 dark:text-neutral-400 w-[700px]">
+              <p className="text-gray-500 mt-6 dark:text-neutral-400 w-[500px]">
                 {description}
               </p>
             </div>
@@ -57,7 +57,7 @@ export default function ChooseConnectorPath({ title, description }: Props) {
             title={t("other.title")}
             description={t("other.description")}
             content={
-              <div className="flex flex-wrap gap-6 w-80 mx-auto items-center">
+              <div className="flex flex-wrap gap-6 w-80 mx-auto my-5 items-center">
                 {connectorRoutes.slice(0, 7).map(({ path, title, logo }) => (
                   <img
                     key={path}
