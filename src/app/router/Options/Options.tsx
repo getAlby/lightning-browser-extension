@@ -119,7 +119,6 @@ const Layout = () => {
         <Navbar.Link href="/publishers">{tCommon("websites")}</Navbar.Link>
         <Navbar.Link href="/send">{tCommon("actions.send")}</Navbar.Link>
         <Navbar.Link href="/receive">{tCommon("actions.receive")}</Navbar.Link>
-        <Navbar.Link href="/settings">{tCommon("settings")}</Navbar.Link>
       </Navbar>
       <ToastContainer
         autoClose={15000}
