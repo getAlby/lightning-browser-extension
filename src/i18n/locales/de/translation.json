@@ -74,16 +74,16 @@
             "part1": "Dein Alby-Konto wird auch mit einem optionalen"
           },
           "title": "Deine Alby Lightning Wallet",
-          "login_account": "Erstelle einen Alby Account oder logge dich ein.",
+          "login_account": "Erstelle ein Alby-Konto oder logge dich ein.",
           "errors": {
-            "create_wallet_error": "Der Login oder das Erstellen eines Accounts waren nicht möglich. Wenn du Hilfe brauchst, kontaktiere bitte support@getalby.com"
+            "create_wallet_error": "Der Login oder das Erstellen eines Kontos waren nicht möglich. Wenn du Hilfe brauchst, kontaktiere bitte support@getalby.com"
           },
           "email": {
             "label": "E-Mail Adresse"
           }
         },
         "title": "Alby Brieftasche",
-        "description": "Erstelle einen Alby Account oder logge dich ein"
+        "description": "Erstelle dein Alby-Konto oder melde dich an"
       },
       "lnd": {
         "or": "OR",
@@ -341,7 +341,11 @@
     "settings": {
       "nostr": {
         "private_key": {
-          "warning": "Das wird deinen alten Private Key löschen. Bist du sicher?"
+          "warning": "Das wird deinen alten Private Key löschen. Bist du sicher?",
+          "success": "Privaten Schlüssel erfolgreich verschlüsselt und gespeichert.",
+          "title": "Privater Schlüssel",
+          "generate": "Generiere",
+          "subtitle": "Füge deinen privaten Schlüssel ein oder erzeuge einen neuen Schlüssel. Beim Generieren eines Schlüssels wird ein neuer Schlüssel auf der Grundlage des aktuellen Kontos, das du verwendest, erstellt. Er kann erneut generiert werden, aber bitte stelle sicher, dass du diesen privaten Schlüssel sicherst. <0>Mehr erfahren\"</0>"
         },
         "hint": "Es ist ein einfaches und offenes Protokoll, das darauf abzielt, zensurresistente soziale Netzwerke zu schaffen. Nostr arbeitet mit kryptographischen Schlüsseln. Um etwas zu veröffentlichen, signiere es mit deinem Schlüssel und senden es an mehrere Relays. Du kannst Alby verwenden, um deinen Nostr-Schlüssel zu verwalten. Viele Nostr-Anwendungen erlauben dann, einfach den Schlüssel aus der Alby-Erweiterung zu verwenden.",
         "title": "Nostr"
@@ -490,11 +494,150 @@
     },
     "receive": {
       "amount": {
-        "placeholder": "Betrag in Satoshi..."
+        "placeholder": "Betrag in Satoshi...",
+        "label": "Betrag"
       },
       "payment": {
-        "waiting": "Warten auf Zahlung..."
+        "waiting": "Warten auf Zahlung...",
+        "status": "Zahlungsstatus prüfen"
+      },
+      "title": "Empfangen",
+      "actions": {
+        "create_invoice": "Rechnung erstellen"
+      },
+      "description": {
+        "label": "Beschreibung",
+        "placeholder": "Zum Beispiel: Wer schickt diese Zahlung?"
+      },
+      "success": "Zahlung erhalten!"
+    },
+    "publishers": {
+      "publisher": {
+        "allowance": {
+          "title": "Erlaubnis",
+          "used_budget": "sats verwendet"
+        }
+      },
+      "suggestions": {
+        "title": "Andere ⚡️ Websites",
+        "list": {
+          "showcases": "Schaukästen",
+          "trading": "Handel",
+          "gaming": "Spielen",
+          "entertaiment": "Unterhaltung",
+          "miscellaneous": "Sonstiges",
+          "shopping": "Einkaufen"
+        },
+        "description": "Websites, auf denen du Alby verwenden kannst"
+      },
+      "used": {
+        "title": "Ihre ⚡️ Websites",
+        "description": "Websites, auf denen du Alby bereits verwendet hast",
+        "no_info": "Noch keine Websites."
       }
+    },
+    "send": {
+      "input": {
+        "label": "Rechnung, Lightning-Adresse oder LNURL",
+        "hint": "Rechnung, Lightning-Adresse oder LNURL"
+      },
+      "title": "Senden",
+      "qrcode": {
+        "title": "Warten auf den Scan"
+      }
+    },
+    "make_invoice": {
+      "errors": {
+        "amount_too_big": "Der Betrag übersteigt den Höchstbetrag",
+        "amount_too_small": "Der Betrag liegt unter dem Mindestbetrag"
+      },
+      "title": "Rechnung erstellen",
+      "amount": {
+        "label": "Betrag (Satoshi)"
+      },
+      "memo": {
+        "label": "Memo"
+      }
+    },
+    "lnurlwithdraw": {
+      "content_message": {
+        "heading": "Betrag"
+      },
+      "amount": {
+        "label": "Betrag"
+      },
+      "success": "Abhebungsantrag erfolgreich gesendet",
+      "title": "Zurückziehen"
+    },
+    "nostr": {
+      "title": "Nostr",
+      "allow": "Erlaube dieser Website:",
+      "content": "Auf dieser Website wirst du aufgefordert zu signieren:"
+    },
+    "confirm_request_permission": {
+      "title": "Antrag genehmigen",
+      "allow": "Erlaube die Ausführung dieser Website:"
+    },
+    "lnurlauth": {
+      "submit": "Anmeldung",
+      "content_message": {
+        "heading": "Möchten Sie sich anmelden bei"
+      },
+      "errors": {
+        "status": "Fehler: Auth-Status ist nicht in Ordnung"
+      },
+      "success": "Erfolgreich authentifiziert",
+      "title": "Authentifizierung"
+    },
+    "keysend": {
+      "amount": {
+        "label": "Betrag (Satoshi)"
+      },
+      "success": "Zahlung gesendet! Preimage: {{Preimage}}",
+      "title": "Senden",
+      "receiver": {
+        "label": "Sende die Zahlung an"
+      }
+    },
+    "confirm_sign_message": {
+      "title": "Unterschrift",
+      "content": "Auf dieser Website werden Sie aufgefordert, zu signieren:"
+    },
+    "confirm_keysend": {
+      "title": "Zahlung genehmigen",
+      "success": "Zahlung gesendet! Preimage: {{Preimage}}",
+      "payment_summary": {
+        "description": "Senden Sie die Zahlung an: {{Bestimmungsort}}"
+      }
+    },
+    "confirm_payment": {
+      "title": "Zahlung genehmigen",
+      "actions": {
+        "pay_now": "Jetzt bezahlen"
+      },
+      "success": "Zahlung von {{Betrag}} erfolgreich gesendet!"
+    },
+    "lnurlpay": {
+      "amount": {
+        "label": "Betrag"
+      },
+      "comment": {
+        "label": "Kommentar"
+      },
+      "name": {
+        "label": "Name"
+      },
+      "email": {
+        "label": "E-Mail"
+      },
+      "success": "Erfolgreich, Zahlung gesendet!"
+    },
+    "lnurlchannel": {
+      "title": "Kanal-Anfrage",
+      "content_message": {
+        "heading": "Einen Kanal vom Knoten anfordern"
+      },
+      "success": "Kanalanfrage erfolgreich gesendet"
     }
   },
   "components": {
