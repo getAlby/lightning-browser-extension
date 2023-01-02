@@ -95,11 +95,16 @@ function Send() {
           },
         });
       } else {
-        lightningPayReq.decode(invoice); // throws if invalid.
+        let bolt11, match;
+        // look for bolt11 encoding if it's a BIP21 invoice
+        if ((match = invoice.trim().match(/bitcoin:\S*lightning=([^&]*)/i))) {
+          bolt11 = match[1];
+        }
+        lightningPayReq.decode(bolt11 ?? invoice); // throws if invalid.
         navigate("/confirmPayment", {
           state: {
             args: {
-              paymentRequest: invoice,
+              paymentRequest: bolt11 ?? invoice,
             },
           },
         });
