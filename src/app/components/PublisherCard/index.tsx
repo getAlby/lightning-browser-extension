@@ -72,7 +72,7 @@ export default function PublisherCard({
             title={url}
             target="_blank"
             className="text-gray-500 dark:text-gray-400 overflow-hidden mb-2 text-ellipsis whitespace-nowrap"
-            rel="noreferrer"
+            rel="noreferrer noopener"
           >
             {url}
           </a>
