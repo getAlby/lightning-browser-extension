@@ -179,6 +179,18 @@ export default function AlbyWallet({ variant }: Props) {
           autoFocus={false}
         />
       </div>
+      {variant === "login" && (
+        <div>
+          <a
+            className="underline"
+            target="_blank"
+            rel="noreferrer noopener"
+            href="https://getalby.com/password_resets/new"
+          >
+            Forgot password?
+          </a>
+        </div>
+      )}
       {variant === "create" && (
         <div className="mt-6">
           <p className="mb-2 text-gray-700 dark:text-neutral-400">
