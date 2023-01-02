@@ -62,11 +62,11 @@
       }
     },
     "choose_path": {
-      "title": "Connect your wallet",
+      "title": "Connect",
       "description": "To start using Alby to make online payments, connect your lightning wallet to the extension.",
       "alby": {
-        "title": "Alby Account",
-        "description": "If you don't already have a lightning wallet, this is probably the easiest option to get started.",
+        "title": "Alby",
+        "description": "If you don't already have a wallet, this is probably the easiest way to get started.",
         "create_new": "Create new"
       },
       "other": {
@@ -93,7 +93,7 @@
         },
         "title": "Your Alby account",
         "create_account": "Create a new Alby account to to send and receive bitcoin payments.",
-        "login_account": "Sign in to connect your existing Alby account.",
+        "login_account": "Log in to connect your existing Alby account.",
         "email": {
           "create": {
             "label": "Email Address"
