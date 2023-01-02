@@ -572,7 +572,15 @@
     "nostr": {
       "title": "Nostr",
       "allow": "Erlaube dieser Website:",
-      "content": "Auf dieser Website wirst du aufgefordert zu signieren:"
+      "content": "Auf dieser Website wirst du aufgefordert zu signieren:",
+      "read_public_key": "Lese deinen öffentlichen Schlüssel",
+      "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
+      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade deine Website neu.",
+      "permissions": {
+        "decrypt": "Daten entschlüsseln",
+        "encrypt": "Daten verschlüsseln",
+        "allow_sign": "Erlaube {{host}} zu unterschreiben:"
+      }
     },
     "confirm_request_permission": {
       "title": "Antrag genehmigen",
@@ -662,5 +670,22 @@
     "companion_download_info": {
       "using_tor": "Klicke hier zum Weitermachen, wenn du den TOR Browser verwendest"
     }
+  },
+  "common": {
+    "optional": "Optional",
+    "feedback": "Rückmeldung",
+    "error": "Fehler",
+    "websites": "Websites",
+    "loading": "Laden",
+    "sats_one": "sat",
+    "success": "Erfolgreich!",
+    "password": "Passwort",
+    "advanced": "Fortgeschrittene",
+    "description_full": "Vollständige Beschreibung",
+    "amount": "Betrag",
+    "copied": "Kopiert!",
+    "description": "Beschreibung",
+    "settings": "Einstellungen",
+    "sats_other": "sats"
   }
 }
