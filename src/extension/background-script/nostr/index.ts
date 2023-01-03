@@ -1,7 +1,7 @@
 import * as secp256k1 from "@noble/secp256k1";
 import { Buffer } from "buffer";
-import { AES } from "crypto-js";
 import * as CryptoJS from "crypto-js";
+import { AES } from "crypto-js";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import Utf8 from "crypto-js/enc-utf8";
@@ -16,7 +16,12 @@ class Nostr {
     const password = state.getState().password as string;
     const encryptedKey = state.getState().nostrPrivateKey as string;
     if (encryptedKey) {
-      return decryptData(encryptedKey, password);
+      try {
+        return decryptData(encryptedKey, password);
+      } catch (e) {
+        console.error("Could not decrypt the Nostr key");
+        console.error(e);
+      }
     }
 
     return null;
