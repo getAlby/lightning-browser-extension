@@ -61,28 +61,19 @@
     "choose_connector": {
       "alby": {
         "pre_connect": {
-          "host_wallet": "Wir hosten die Lightning Wallet für dich!",
           "optional_lightning_address": {
             "suffix": "@getalby.com",
-            "title": "Zahlen und Buchstaben, mindestens 3 Ziffern",
             "label": "Wähle deine Lightning Adresse (optional)"
           },
           "optional_lightning_note": {
-            "part2": "Lightning Adresse",
             "part3": "Das ist für jeden ein einfacher Weg, um dir Bitcoin über das Lightning Netzwerk zu schicken.",
-            "part4": "Erfahre mehr",
             "part1": "Dein Alby-Konto wird auch mit einem optionalen"
           },
-          "title": "Deine Alby Lightning Wallet",
           "login_account": "Erstelle ein Alby-Konto oder logge dich ein.",
-          "errors": {
-            "create_wallet_error": "Der Login oder das Erstellen eines Kontos waren nicht möglich. Wenn du Hilfe brauchst, kontaktiere bitte support@getalby.com"
-          },
           "email": {
             "label": "E-Mail Adresse"
           }
         },
-        "title": "Alby Brieftasche",
         "description": "Erstelle dein Alby-Konto oder melde dich an"
       },
       "lnd": {
@@ -102,7 +93,6 @@
           "description": "Du benötigst deinen URL-Knoten und eine Macaroon mit Lese- und Sendeberechtigungen (z.B. admin.macaroon)",
           "title": "Verbinde dich zu deinem LND Node"
         },
-        "description": "Verbinde dich mit deiner LND Node",
         "title": "LND"
       },
       "lndhub_bluewallet": {
@@ -114,7 +104,6 @@
           "connection_failed": "Verbindung nicht erfolgreich. Ist deine BlueWallet URI richtig?"
         },
         "title": "BlueWallet",
-        "description": "Verbinde dich mit deiner mobilen Bluewallet App",
         "page": {
           "title": "Verbinde dich mit Bluewallet",
           "description": "Wähle in der BlueWallet die Wallet, die du verbinden willst, öffne sie, klicke auf \"...\", klicke auf Export/Backup, um den QR Code anzuzeigen. Scanne ihn dann mit deiner Webcam."
@@ -129,7 +118,6 @@
           "invalid_uri": "Ungültiger LNDHub-URI",
           "connection_failed": "Verbindung fehlgeschlagen. Ist dein LNDHub-URI korrekt?"
         },
-        "description": "Verbinden dich mit deinem LNDHub-Konto",
         "page": {
           "title": "Verbinden dich mit LNDHub",
           "description": "Gebe hier deine LNDHub-Zugangsdaten-URI ein oder scanne den QR-Code mit deiner Webcam."
@@ -141,7 +129,6 @@
           "placeholder": "Ihr 32-stelliger Admin-Schlüssel"
         },
         "title": "LNbits",
-        "description": "Verbinde dich mit deinem LNbits-Konto",
         "page": {
           "title": "Verbinde dich mit <0>LNbits</0>",
           "instructions": "Wähle in LNbits die Wallet, die du verbinden willst, öffne sie, klicke auf API Info und kopiere den Admin Key. Füge ihn unten ein:"
@@ -154,7 +141,6 @@
         }
       },
       "title": {
-        "welcome": "Hast du eine Lightning Wallet?",
         "options": "Füge einen neuen Lightning Account hinzu"
       },
       "mynode": {
@@ -166,7 +152,6 @@
           "label": "Indconnect REST URL",
           "placeholder": "Indconnect://IhrKnoten:8080?..."
         },
-        "description": "Verbinde dich mit deiner myNode",
         "title": "meinKnoten"
       },
       "umbrel": {
@@ -178,8 +163,7 @@
           "label": "Indconnect-REST-URL",
           "placeholder": "lndconnect://deinknoten:8080?..."
         },
-        "title": "Regenschirm",
-        "description": "Verbinde dich mit deinem Regenschirm"
+        "title": "Regenschirm"
       },
       "description": "Du musst dich zuerst mit einer Lightning Wallet verbinden, damit du dich mit deinen Lieblingswebseiten verbinden kannst, die Bitcoin Lightning Zahlungen akzeptieren!",
       "citadel": {
@@ -187,7 +171,6 @@
           "instructions": "Das funktioniert aktuell nicht, wenn 2FA ausgewählt ist.",
           "title": "Verbinde dich mit dem Knoten <0>Zitadelle"
         },
-        "description": "Verbinde dich mit deiner lokalen Zitadelle",
         "title": "Zitadelle",
         "password": {
           "label": "Zitadelle Passwort"
@@ -204,7 +187,6 @@
           "instructions2": "Wähle <0>VERBINDEN.<1/>Wähle <0>EXPORTIEREN.<1/>Wähle <0>HEX.<1/>Kopiere das <0>adminMacaroon.<1/>Füge die Makrone in die Eingabe unten ein."
         },
         "title": "Raspiblitz",
-        "description": "Verbinde dich mit deinem RaspiBlitz",
         "rest_api_host": {
           "label": "REST-API-Host",
           "placeholder": "Ihr-Knoten-Onion-Adresse: Port"
@@ -212,7 +194,6 @@
       },
       "eclair": {
         "title": "Eclair Brieftasche",
-        "description": "Verbinde dich mit deinem Eclair-Knoten",
         "page": {
           "title": "Verbinde dich mit <0>Eclair",
           "instructions": "Du benötigst deine Eclair-URL und dein Passwort."
@@ -234,19 +215,16 @@
           "placeholder": "lndconnect://deinknoten:8080?...",
           "label": "Indconnect-REST-URL"
         },
-        "title": "Start9",
-        "description": "Verbinde dich mit Embassy"
+        "title": "Start9"
       },
       "bitcoin_beach": {
         "title": "Bitcoin Beach Brieftasche",
-        "description": "Erstelle oder verbinde dich mit einem Bitcoin Beach (Galoy)-Konto",
         "page": {
           "title": "Verbinde dich mit <0>Bitcoin Beach Wallet"
         }
       },
       "bitcoin_jungle": {
         "title": "Bitcoin Jungle Geldbörse",
-        "description": "Erstelle oder verbinde dich mit einem Bitcoin Jungle (Galoy)-Konto",
         "page": {
           "title": "Verbinde dich mit <0>Bitcoin Jungle Wallet</0>"
         }
@@ -280,7 +258,6 @@
           "title": "Verbinde dich mit deinem BTCPay LND-Knoten",
           "instructions": "Navigiere zu deinem BTCPayServer und melde dich als Administrator an. Gehen zu Servereinstellungen > Dienste > LND-Rest – Siehe Informationen. Klicke dann auf „QR-Code-Informationen anzeigen“ und kopiere die QR-Code-Daten. Füge es unten ein:"
         },
-        "description": "Verbinde dich mit deinem BTCPay LND-Knoten",
         "config": {
           "label": "Konfigurationsdaten",
           "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
@@ -291,7 +268,6 @@
       },
       "commando": {
         "title": "Core Lightning",
-        "description": "Stelle eine Verbindung zu deinem Core Lightning-Knoten her",
         "page": {
           "title": "Stelle eine Verbindung zu deinem Core Lightning-Knoten her",
           "instructions": "Stelle sicher, dass du Core Lightning Version 0.12.0 oder neuer hast, das Commando-Plugin ausgeführt wird und dein Knoten über das Lightning-Netzwerk zugänglich ist. Erstelle eine Rune, indem du „lightning-cli commando-rune“ ausführst."
@@ -572,7 +548,15 @@
     "nostr": {
       "title": "Nostr",
       "allow": "Erlaube dieser Website:",
-      "content": "Auf dieser Website wirst du aufgefordert zu signieren:"
+      "content": "Auf dieser Website wirst du aufgefordert zu signieren:",
+      "read_public_key": "Lese deinen öffentlichen Schlüssel",
+      "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
+      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade deine Website neu.",
+      "permissions": {
+        "decrypt": "Daten entschlüsseln",
+        "encrypt": "Daten verschlüsseln",
+        "allow_sign": "Erlaube {{host}} zu unterschreiben:"
+      }
     },
     "confirm_request_permission": {
       "title": "Antrag genehmigen",
@@ -662,5 +646,22 @@
     "companion_download_info": {
       "using_tor": "Klicke hier zum Weitermachen, wenn du den TOR Browser verwendest"
     }
+  },
+  "common": {
+    "optional": "Optional",
+    "feedback": "Rückmeldung",
+    "error": "Fehler",
+    "websites": "Websites",
+    "loading": "Laden",
+    "sats_one": "sat",
+    "success": "Erfolgreich!",
+    "password": "Passwort",
+    "advanced": "Fortgeschrittene",
+    "description_full": "Vollständige Beschreibung",
+    "amount": "Betrag",
+    "copied": "Kopiert!",
+    "description": "Beschreibung",
+    "settings": "Einstellungen",
+    "sats_other": "sats"
   }
 }
