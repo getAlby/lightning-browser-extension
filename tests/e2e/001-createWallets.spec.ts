@@ -5,7 +5,13 @@ import { Browser, ElementHandle, Page } from "puppeteer";
 
 import { loadExtension } from "./helpers/loadExtension";
 
-const { getByText, getByLabelText, findByLabelText, findByText } = queries;
+const {
+  getByText,
+  getByLabelText,
+  findByLabelText,
+  findByText,
+  findAllByText,
+} = queries;
 
 type User = { email: string; password: string };
 const defaultUser = USER.SINGLE() as User;
@@ -63,15 +69,15 @@ const commonCreateWalletUserCreate = async (
   );
 
   if (options.connectToLightningWallet) {
-    const chooseConnectorButton = await findByText($document, "Connect");
-    chooseConnectorButton.click();
+    const connectTexts = await findAllByText($document, "Connect");
+    connectTexts[1].click(); // we have headline and button using "connect", button is second
 
     await Promise.all([
       page.waitForResponse(() => true),
       page.waitForNavigation(), // The promise resolves after navigation has finished
     ]);
 
-    await findByText($document, "Connect");
+    await findByText($document, "Connect Lightning Wallet");
   }
 
   return { user: options.user || defaultUser, browser, page, $document };
