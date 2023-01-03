@@ -60,13 +60,6 @@
     },
     "choose_connector": {
       "description": "Du behöver koppla en lightning-plånbok så att du kan interagera med dina favoritwebbplatser som accepterar bitcoin lightning-betalningar!",
-      "alby": {
-        "pre_connect": {
-          "optional_lightning_note": {
-            "part2": "Lightning-address"
-          }
-        }
-      },
       "lnd": {
         "title": "LND",
         "page": {
@@ -498,20 +491,14 @@
     },
     "publishers": {
       "used": {
-        "title": "Dina ⚡️-webbplatser",
-        "description": "Webbplatser där du använt Alby tidigare",
-        "no_info": "Inga webbplatser ännu."
+        "description": "Webbplatser där du använt Alby tidigare"
       },
       "suggestions": {
         "title": "Andra ⚡️-webbplatser",
-        "description": "Webbplatser där du kan använda Alby",
         "list": {
           "trading": "Handel",
-          "gaming": "Spel",
           "entertaiment": "Underhållning",
-          "shopping": "Shopping",
-          "miscellaneous": "Övrigt",
-          "showcases": "Exempel"
+          "miscellaneous": "Övrigt"
         }
       },
       "publisher": {

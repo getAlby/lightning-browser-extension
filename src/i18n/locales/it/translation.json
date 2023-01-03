@@ -60,13 +60,6 @@
     },
     "choose_connector": {
       "description": "Per poter interagire con i vostri siti web preferiti che accettano pagamenti in bitcoin lightning, dovete prima collegarvi a un portafoglio lightning!",
-      "alby": {
-        "pre_connect": {
-          "optional_lightning_note": {
-            "part2": "Indirizzo Lightning"
-          }
-        }
-      },
       "lnd": {
         "title": "LND",
         "page": {
@@ -498,20 +491,14 @@
     },
     "publishers": {
       "used": {
-        "title": "I tuoi ⚡️ siti web",
-        "description": "Siti web in cui hai già utilizzato Alby in precedenza",
-        "no_info": "Ancora nessun sito web."
+        "description": "Siti web in cui hai già utilizzato Alby in precedenza"
       },
       "suggestions": {
         "title": "Altri ⚡️ siti web",
-        "description": "Siti web in cui è possibile utilizzare Alby",
         "list": {
           "trading": "Trading",
-          "gaming": "Gaming",
           "entertaiment": "Intrattenimento",
-          "shopping": "Acquisti",
-          "miscellaneous": "Varie",
-          "showcases": "Vetrine"
+          "miscellaneous": "Varie"
         }
       },
       "publisher": {

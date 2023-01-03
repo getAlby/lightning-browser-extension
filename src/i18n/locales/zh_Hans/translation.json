@@ -59,13 +59,6 @@
       }
     },
     "choose_connector": {
-      "alby": {
-        "pre_connect": {
-          "errors": {
-            "create_wallet_error": "登录或创建新账户失败。如果你需要帮助，请联系 support@getalby.com"
-          }
-        }
-      },
       "lnd": {
         "errors": {
           "connection_failed": "连接失败。你的LND凭据是否正确？"
@@ -353,20 +346,14 @@
     "publishers": {
       "suggestions": {
         "list": {
-          "trading": "交易",
           "gaming": "游戏",
-          "showcases": "展示",
           "entertaiment": "娱乐",
-          "shopping": "购物",
           "miscellaneous": "杂项"
         },
-        "title": "其他⚡️网站",
         "description": "你可以使用Alby的网站"
       },
       "used": {
-        "title": "你的⚡️网站",
-        "description": "你曾经使用过Alby的网站",
-        "no_info": "还没有网站。"
+        "description": "你曾经使用过Alby的网站"
       },
       "publisher": {
         "allowance": {

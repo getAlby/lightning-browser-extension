@@ -59,13 +59,6 @@
       }
     },
     "choose_connector": {
-      "alby": {
-        "pre_connect": {
-          "optional_lightning_note": {
-            "part1": "Dein Alby-Konto wird auch mit einem optionalen"
-          }
-        }
-      },
       "lnd": {
         "or": "OR",
         "drag_and_drop": "Ziehe deine Makrone hierher oder lege sie dort ab <0>durchsuchen</0>",
@@ -482,21 +475,15 @@
         }
       },
       "suggestions": {
-        "title": "Andere ⚡️ Websites",
         "list": {
           "showcases": "Schaukästen",
-          "trading": "Handel",
           "gaming": "Spielen",
-          "entertaiment": "Unterhaltung",
-          "miscellaneous": "Sonstiges",
-          "shopping": "Einkaufen"
+          "miscellaneous": "Sonstiges"
         },
         "description": "Websites, auf denen du Alby verwenden kannst"
       },
       "used": {
-        "title": "Ihre ⚡️ Websites",
-        "description": "Websites, auf denen du Alby bereits verwendet hast",
-        "no_info": "Noch keine Websites."
+        "description": "Websites, auf denen du Alby bereits verwendet hast"
       }
     },
     "send": {

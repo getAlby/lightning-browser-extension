@@ -60,13 +60,6 @@
     },
     "choose_connector": {
       "description": "",
-      "alby": {
-        "pre_connect": {
-          "optional_lightning_note": {
-            "part2": ""
-          }
-        }
-      },
       "lnd": {
         "title": "",
         "page": {
@@ -486,20 +479,14 @@
     },
     "publishers": {
       "used": {
-        "title": "",
-        "description": "",
-        "no_info": ""
+        "description": ""
       },
       "suggestions": {
         "title": "",
-        "description": "",
         "list": {
           "trading": "",
-          "gaming": "",
           "entertaiment": "",
-          "shopping": "",
-          "miscellaneous": "",
-          "showcases": ""
+          "miscellaneous": ""
         }
       },
       "publisher": {

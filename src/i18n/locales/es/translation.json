@@ -60,13 +60,6 @@
     },
     "choose_connector": {
       "description": "¡Primero debe conectarse a una billetera lightning para poder interactuar con sus sitios web favoritos que aceptan pagos con Bitcoin lightning!",
-      "alby": {
-        "pre_connect": {
-          "optional_lightning_note": {
-            "part2": "Dirección de Lightning"
-          }
-        }
-      },
       "lnd": {
         "title": "LND",
         "page": {
@@ -395,20 +388,14 @@
     },
     "publishers": {
       "used": {
-        "title": "Tus ⚡️ Sitios Web",
-        "description": "Sitios web donde ha usado Alby anteriormente",
-        "no_info": "Aún no hay sitios web."
+        "description": "Sitios web donde ha usado Alby anteriormente"
       },
       "suggestions": {
         "title": "Otros ⚡️ Sitios web",
-        "description": "Sitios web donde puedes usar Alby",
         "list": {
           "trading": "Comercio",
-          "gaming": "Juego de azar",
           "entertaiment": "Entretenimiento",
-          "shopping": "Compras",
-          "miscellaneous": "Misceláneas",
-          "showcases": "Showcases"
+          "miscellaneous": "Misceláneas"
         }
       },
       "publisher": {

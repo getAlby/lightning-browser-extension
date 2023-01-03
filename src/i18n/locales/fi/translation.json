@@ -60,13 +60,6 @@
     },
     "choose_connector": {
       "description": "Sinun täytyy ensin muodostaa yhteys Lightning-lompakkoon, jotta voit olla vuorovaikutuksessa suosikkisivustojesi kanssa, jotka hyväksyvät Bitcoin Lightning -maksut!",
-      "alby": {
-        "pre_connect": {
-          "optional_lightning_note": {
-            "part2": "Lightning-osoite"
-          }
-        }
-      },
       "lnd": {
         "title": "LND",
         "page": {
@@ -530,20 +523,14 @@
     },
     "publishers": {
       "used": {
-        "title": "⚡️ Verkkosivustosi",
-        "description": "Verkkosivustot, joilla olet käyttänyt Albya aiemmin",
-        "no_info": "Ei vielä verkkosivustoja."
+        "description": "Verkkosivustot, joilla olet käyttänyt Albya aiemmin"
       },
       "suggestions": {
         "title": "Muut ⚡️ verkkosivustot",
-        "description": "Verkkosivustot, joilla voit käyttää Albya",
         "list": {
           "trading": "Kaupankäynti",
-          "gaming": "Pelaaminen",
           "entertaiment": "Viihde",
-          "shopping": "Ostokset",
-          "miscellaneous": "Sekalaista",
-          "showcases": "Näyttelyt"
+          "miscellaneous": "Sekalaista"
         }
       },
       "publisher": {

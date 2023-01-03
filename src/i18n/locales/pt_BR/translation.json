@@ -60,13 +60,6 @@
     },
     "choose_connector": {
       "description": "Você precisa primeiro conectar-se a uma conta ou servidor para poder interagir com seus sites favoritos que aceitam pagamentos em bitcoin!",
-      "alby": {
-        "pre_connect": {
-          "optional_lightning_note": {
-            "part2": "Endereço Relâmpago"
-          }
-        }
-      },
       "lnd": {
         "title": "LND",
         "page": {
@@ -502,18 +495,13 @@
     },
     "publishers": {
       "used": {
-        "title": "Sua lista de sites ⚡️",
-        "description": "Sites onde você já usou a Alby",
-        "no_info": "Nenhum site ainda."
+        "description": "Sites onde você já usou a Alby"
       },
       "suggestions": {
         "title": "Sites⚡️recomendados",
-        "description": "Sugestões de sites onde você pode usar a Alby",
         "list": {
           "trading": "Negociação",
-          "entertaiment": "Entretenimento",
           "miscellaneous": "Outros",
-          "shopping": "Compras",
           "gaming": "Games"
         }
       },

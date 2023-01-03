@@ -60,13 +60,6 @@
     },
     "choose_connector": {
       "description": "Maak eerst verbinding met een Lightning wallet zodat je kan synchen met websites die bitcoin Lightning betalingen accepteren!",
-      "alby": {
-        "pre_connect": {
-          "optional_lightning_note": {
-            "part2": "Lightning Address"
-          }
-        }
-      },
       "lnd": {
         "title": "LND",
         "page": {
@@ -532,20 +525,14 @@
     },
     "publishers": {
       "used": {
-        "title": "",
-        "description": "",
-        "no_info": ""
+        "description": ""
       },
       "suggestions": {
         "title": "",
-        "description": "",
         "list": {
           "trading": "",
-          "gaming": "",
           "entertaiment": "",
-          "shopping": "",
-          "miscellaneous": "",
-          "showcases": ""
+          "miscellaneous": ""
         }
       },
       "publisher": {
