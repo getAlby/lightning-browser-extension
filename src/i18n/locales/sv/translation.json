@@ -60,30 +60,22 @@
     },
     "choose_connector": {
       "title": {
-        "welcome": "Har du en lightning-plånbok?",
         "options": "Lägg till nytt lightning-konto"
       },
       "description": "Du behöver koppla en lightning-plånbok så att du kan interagera med dina favoritwebbplatser som accepterar bitcoin lightning-betalningar!",
       "alby": {
-        "title": "Alby-plånbok",
         "description": "Skapa nytt eller logga in med befintligt Alby-konto",
         "pre_connect": {
-          "title": "Din Alby lightning-plånbok",
           "login_account": "Skapa nytt eller logga in med befintligt Alby-konto.",
-          "host_wallet": "Vi huserar en Lightning-plånbok för dig hos oss!",
           "email": {
             "label": "E-postadress"
           },
           "optional_lightning_note": {
-            "part1": "Ditt Alby-konto innehåller även en valfri",
             "part2": "Lightning-address",
-            "part3": ". Detta gör det enkelt för vem som helst att skicka Bitcoin till dig över lightning-nätverket.",
             "part4": "lär dig mer"
           },
           "optional_lightning_address": {
-            "label": "Välj din Lightning-adress (valfritt)",
-            "suffix": "@getalby.com",
-            "title": "siffror och bokstäver, minst 3 tecken"
+            "suffix": "@getalby.com"
           },
           "errors": {
             "create_wallet_error": "Misslyckades att logga in eller skapa ett nytt konto. Om du behöver hjälp, kontakta support@getalby.com"
@@ -92,7 +84,6 @@
       },
       "lnd": {
         "title": "LND",
-        "description": "Anslut din LND-nod",
         "page": {
           "title": "Anslut din LND-nod",
           "description": "Du behöver URLen till din nod samt en macaroon med tillåtelse att läsa och skicka (t.ex. admin.macaroon)"
@@ -112,7 +103,6 @@
       },
       "lndhub_bluewallet": {
         "title": "Bluewallet",
-        "description": "Skapa koppling till din mobila Bluewallet",
         "page": {
           "title": "Anslut Bluewallet",
           "description": "I Bluwallet, välj den plånbok du vill koppla till, öppna den och klicka på \"...\", därefter Export/Backup för att visa QR-koden och scanna den med webb-kameran."
@@ -127,7 +117,6 @@
       },
       "lndhub_go": {
         "title": "LNDHub",
-        "description": "Anslut ditt LNDHub-konto",
         "page": {
           "title": "Koppla till LNDHub",
           "description": "Fyll i dina LNDHub-uppgifter eller skanna QR-koden med din webbkamera."
@@ -142,7 +131,6 @@
       },
       "lnbits": {
         "title": "LNbits",
-        "description": "Anslut ditt LNBits-konto",
         "page": {
           "title": "Anslut <0>LNbits</0>",
           "instructions": "I LNBits, välj den plånbok du vill ansluta, öppna den och klicka på API info och kopiera Admin-nyckeln. Klistra in nedan:"
@@ -160,7 +148,6 @@
       },
       "eclair": {
         "title": "Eclair",
-        "description": "Anslut din Eclair-nod",
         "page": {
           "title": "Anslut <0>Eclair</0>",
           "instructions": "Du behöver din Eclair URL och lösenord."
@@ -175,7 +162,6 @@
       },
       "citadel": {
         "title": "Citadel",
-        "description": "Anslut lokal Citadel",
         "page": {
           "title": "Anslut <0>Citadel</0>-nod",
           "instructions": "Detta fungerar för tillfället inte om 2FA är aktiverat."
@@ -190,7 +176,6 @@
       },
       "umbrel": {
         "title": "Umbrel",
-        "description": "Anslut Umbrel",
         "page": {
           "title": "Anslut <0>Umbrel</0>-nod",
           "instructions": "I Umbrels översikt, gå till <0>Connect Wallet</0>. Välj <0>lndconnect REST</0> och kopiera <0>lndconnect URL</0>. (Avhängigt dina inställningar kan du antingen använda den lokala Tor-anslutningen.)"
@@ -202,7 +187,6 @@
       },
       "mynode": {
         "title": "myNode",
-        "description": "Anslut myNode",
         "page": {
           "title": "Anslut <0>myNode</0>",
           "instructions": "På din myNode-hemsida, klicka på knappen <0>Wallet</0> som motsvarar din <0>Lightning</0>-tjänst. <1/> Klicka på knappen <0>Pair Wallet</0> under fliken <0>Status</0>. Fyll i ditt lösenord när du blir tillfrågad.<1/> I droppmenym välj kopplingsalternativ. Beroende på dina inställningar kan du antingen välja <0>Lightning (REST + Local IP)</0> eller <0>Lightning (REST + Tor)</0>."
@@ -214,7 +198,6 @@
       },
       "start9": {
         "title": "Start9",
-        "description": "Anslut din Embassy",
         "page": {
           "title": "Anslut din <0>Embassy</0>-nod",
           "instructions": "<0>Notis:</0> Vi stödjer endast LND men kommer lägga till stöd för c-lightning i framtiden!<1/>På din Embassy-översikt klicka på <0>Lightning Network Daemon</0> tjänst.<1/>Välj fliken <0>Properties</0>.<1/>Kopiera <0>LND Connect REST URL.</0>"
@@ -226,7 +209,6 @@
       },
       "raspiblitz": {
         "title": "RaspiBlitz",
-        "description": "Anslut din RaspiBlitz",
         "page": {
           "title": "Anslut din <0>RaspiBlitz</0>-nod",
           "instructions1": "Du behöver din nods onion-adress, port och en macaroon med tillåtelse att läsa och skicka (t.ex. admin.macaroon).<1/><1/><0>SSH</0> in på din <0>RaspiBlitz</0>.<1/>Kör kommando <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Kopiera och klistra in din <0>.onion</0> adress i fältet nedan.<1/>Lägg till din <0>port</0> efter onion-adressen. Förvald port är <0>:8080</0>.",
@@ -239,14 +221,12 @@
       },
       "bitcoin_beach": {
         "title": "Bitcoin Beach plånbok",
-        "description": "Skapa eller anslut ett Bitcoin Beach (Galoy)-konto",
         "page": {
           "title": "Anslut <0>Bitcoin Beach Wallet</0>"
         }
       },
       "bitcoin_jungle": {
         "title": "Bitcoin Jungle Wallet",
-        "description": "Skapa eller anslut till ett Bitcoin Jungle (Galoy)-konto",
         "page": {
           "title": "Anslut en <0>Bitcoin Jungle Wallet</0>"
         }
@@ -276,7 +256,6 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "description": "Anslut din BTCPay LND-nod",
         "page": {
           "title": "Anslut din BTCPay LND-nod",
           "instructions": "Navigera till din BTCPayServer och logga in som administratör. Gå till Server Settings > Services > LND Rest - See information. Klicka på \"See QR Code information\" och kopiera QR-koddatan. Klistra in nedan:"

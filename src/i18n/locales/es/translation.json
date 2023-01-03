@@ -60,30 +60,22 @@
     },
     "choose_connector": {
       "title": {
-        "welcome": "¿Tienes una billetera Lightning?",
         "options": "Agregar una nueva cuenta relámpago"
       },
       "description": "¡Primero debe conectarse a una billetera lightning para poder interactuar con sus sitios web favoritos que aceptan pagos con Bitcoin lightning!",
       "alby": {
-        "title": "Billetera de Alby",
         "description": "Crea o inicia sesión en tu cuenta de Alby",
         "pre_connect": {
-          "title": "Su Billetera Alby Lightning",
           "login_account": "Crea o inicia sesión en tu cuenta de Alby.",
-          "host_wallet": "¡Alojamos una billetera Lightning para ti!",
           "email": {
             "label": "Dirección de correo electrónico"
           },
           "optional_lightning_note": {
-            "part1": "Su cuenta Alby también viene con una suscripción opcional",
             "part2": "Dirección de Lightning",
-            "part3": ". Esta es una forma sencilla para que cualquier persona le envíe Bitcoin en Lightning Network.",
             "part4": "aprenda más"
           },
           "optional_lightning_address": {
-            "label": "Elige tu dirección de correo electrónico (opcional)",
-            "suffix": "@getalby.com",
-            "title": "números y letras, al menos 3 caracteres"
+            "suffix": "@getalby.com"
           },
           "errors": {
             "create_wallet_error": "Hubo un fallo al iniciar o crear tu sesión . Si necesitas ayuda por favor escribe a support@getalby.com"
@@ -92,7 +84,6 @@
       },
       "lnd": {
         "title": "LND",
-        "description": "Conéctese a su nodo LND",
         "page": {
           "title": "Conéctese a su nodo LND",
           "description": "Necesita la URL de su nodo y una frase macarrón con permisos de lectura y envío (por ejemplo, admin.macaroon)"
@@ -112,7 +103,6 @@
       },
       "lnbits": {
         "title": "Cuenta LNbits",
-        "description": "Conéctese a su cuenta de LNbits",
         "page": {
           "instructions": "En LNbits, elija la billetera que desea conectar, ábrala, haga clic en Información de API y copie la clave de administrador. Pégalo a continuación:",
           "title": "Conéctese a <0>LNbits</0>"
@@ -130,7 +120,6 @@
       },
       "eclair": {
         "title": "Cuenta de Eclair",
-        "description": "Conéctese a su nodo Eclair",
         "password": {
           "label": "Contraseña de Eclair"
         },
@@ -145,7 +134,6 @@
       },
       "citadel": {
         "title": "Cuenta de Citadel",
-        "description": "Conéctese a su Citadel local",
         "password": {
           "label": "Contraseña de Citadel"
         },
@@ -160,34 +148,27 @@
       },
       "umbrel": {
         "title": "Cuenta de Umbrel",
-        "description": "Conéctese a su Umbrel",
         "page": {
           "title": "Conectar a Umbrel"
         }
       },
       "mynode": {
-        "title": "MiNodo",
-        "description": "Conéctese a myNode"
+        "title": "MiNodo"
       },
       "start9": {
-        "title": "Cuenta Start9",
-        "description": "Conéctese a su cuenta Embassy"
+        "title": "Cuenta Start9"
       },
       "raspiblitz": {
-        "title": "Cuenta RaspiBlitz",
-        "description": "Conéctese a su RaspiBlitz"
+        "title": "Cuenta RaspiBlitz"
       },
       "bitcoin_beach": {
-        "title": "Billetera de Bitcoin Beach",
-        "description": "Cree o conéctese a una cuenta de Bitcoin Beach (Galoy)"
+        "title": "Billetera de Bitcoin Beach"
       },
       "bitcoin_jungle": {
-        "title": "Billetera de Bitcoin Jungle",
-        "description": "Cree o conéctese a una cuenta de Bitcoin Jungle (Galoy)"
+        "title": "Billetera de Bitcoin Jungle"
       },
       "btcpay": {
         "title": "Servidor BTCPay",
-        "description": "Conéctese a su nodo BTCPay LND",
         "page": {
           "title": "Conéctese a su nodo BTCPay LND",
           "instructions": "Navegue a su servidor BTCPay e inicie sesión como administrador. Vaya a Configuración del servidor > Servicios > LND Rest-Ver información. Luego haga clic en\" Ver información del código QR \" y copie los datos del Código QR. Pegar a continuación:"
@@ -202,7 +183,6 @@
       },
       "lndhub_bluewallet": {
         "title": "Bluewallet",
-        "description": "Conéctese a su billetera móvil Bluewallet",
         "page": {
           "title": "Conéctese a BlueWallet",
           "description": "En BlueWallet, elija la billetera que desea conectar, ábrala, haga clic en \"...\", haga clic en Exportar / Copia de seguridad para mostrar el código QR y escanearlo con su cámara web."
@@ -217,7 +197,6 @@
       },
       "lndhub_go": {
         "title": "LNDHub",
-        "description": "Conéctese a su cuenta de LNDHub",
         "page": {
           "title": "Conéctese a LNDHub",
           "description": "Ingrese su URI de credencial de LNDHub aquí o escanee el código QR con su cámara web."
