@@ -14,8 +14,8 @@ import TextField from "@components/form/TextField";
 import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
 import type { FormEvent } from "react";
-import { useState, useEffect } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { useEffect, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -389,7 +389,7 @@ function Settings() {
         </a>{" "}
         {t("nostr.hint")}
       </p>
-      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp mb-12">
         <Setting
           title={t("nostr.private_key.title")}
           subtitle={
@@ -464,7 +464,7 @@ function Settings() {
         </span>
         <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
       </div>
-      <h2 className="mt-12 text-2xl font-bold dark:text-white">
+      <h2 className="text-2xl font-bold dark:text-white">
         {t("lnurl_auth.title")}
       </h2>
       <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
