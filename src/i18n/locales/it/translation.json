@@ -489,11 +489,6 @@
       }
     },
     "publishers": {
-      "suggestions": {
-        "list": {
-          "entertaiment": "Intrattenimento"
-        }
-      },
       "publisher": {
         "allowance": {
           "title": "Margine",

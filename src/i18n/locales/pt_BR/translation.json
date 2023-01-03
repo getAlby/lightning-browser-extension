@@ -494,11 +494,6 @@
       }
     },
     "publishers": {
-      "suggestions": {
-        "list": {
-          "miscellaneous": "Outros"
-        }
-      },
       "publisher": {
         "allowance": {
           "title": "Limite de gastos",

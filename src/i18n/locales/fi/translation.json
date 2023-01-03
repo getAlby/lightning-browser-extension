@@ -521,11 +521,6 @@
       }
     },
     "publishers": {
-      "suggestions": {
-        "list": {
-          "entertaiment": "Viihde"
-        }
-      },
       "publisher": {
         "allowance": {
           "title": "Korvaus",

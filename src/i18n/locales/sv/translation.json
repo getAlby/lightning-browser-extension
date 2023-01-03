@@ -489,11 +489,6 @@
       }
     },
     "publishers": {
-      "suggestions": {
-        "list": {
-          "entertaiment": "Underhållning"
-        }
-      },
       "publisher": {
         "allowance": {
           "title": "Beloppsgräns",

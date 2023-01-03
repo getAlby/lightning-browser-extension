@@ -386,11 +386,6 @@
       }
     },
     "publishers": {
-      "suggestions": {
-        "list": {
-          "entertaiment": "Entretenimiento"
-        }
-      },
       "publisher": {
         "allowance": {
           "title": "Tolerancia",

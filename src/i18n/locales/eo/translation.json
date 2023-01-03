@@ -521,11 +521,6 @@
       }
     },
     "publishers": {
-      "suggestions": {
-        "list": {
-          "entertaiment": "Distro"
-        }
-      },
       "publisher": {
         "allowance": {
           "title": "",

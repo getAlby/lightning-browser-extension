@@ -522,11 +522,6 @@
       }
     },
     "publishers": {
-      "suggestions": {
-        "list": {
-          "entertaiment": ""
-        }
-      },
       "publisher": {
         "allowance": {
           "title": "",
