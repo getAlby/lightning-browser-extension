@@ -28,7 +28,8 @@ jest.mock("~/app/hooks/useNavigationState", () => {
     useNavigationState: jest.fn(() => ({
       origin: mockOrigin,
       args: {
-        connector: "The connector type",
+        connector: "nativecitadel",
+        name: "Your Citadel wallet",
       },
     })),
   };
@@ -46,9 +47,9 @@ describe("ConfirmAddAccount", () => {
 
     expect(
       await screen.findByText(
-        "This website wants to add a wallet of the following type to Alby:"
+        'getalby.com wants to add a wallet (with the "Citadel (over Tor)" connector) to Alby:'
       )
     ).toBeInTheDocument();
-    expect(await screen.findByText("The connector type")).toBeInTheDocument();
+    expect(await screen.findByText("Your Citadel wallet")).toBeInTheDocument();
   });
 });

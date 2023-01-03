@@ -640,7 +640,18 @@
     },
     "confirm_add_account": {
       "title": "Add account",
-      "content": "This website wants to add a wallet of the following type to Alby:"
+      "content": "{{host}} wants to add a wallet (with the \"{{connector}}\" connector) to Alby:",
+      "lnd": "LND",
+      "nativelnd": "LND (over Tor)",
+      "lndhub": "LndHub",
+      "nativelndhub": "LndHub (over Tor)",
+      "lnbits": "LnBits",
+      "nativelnbits": "LnBits (over Tor)",
+      "galoy": "Galoy",
+      "eclair": "Eclair",
+      "citadel": "Citadel",
+      "nativecitadel": "Citadel (over Tor)",
+      "commando": "Commando"
     },
     "nostr": {
       "title": "Nostr",

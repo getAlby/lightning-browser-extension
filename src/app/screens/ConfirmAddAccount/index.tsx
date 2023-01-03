@@ -74,8 +74,11 @@ function ConfirmAddAccount() {
               url={origin.host}
             />
             <ContentMessage
-              heading={t("content", { host: origin.host })}
-              content={connector}
+              heading={t("content", {
+                host: origin.host,
+                connector: t(connector as "lndhub" /* Type hack */),
+              })}
+              content={name}
             />
           </div>
           <ConfirmOrCancel
