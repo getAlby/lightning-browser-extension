@@ -62,12 +62,8 @@
       "description": "",
       "alby": {
         "pre_connect": {
-          "login_account": "",
           "optional_lightning_note": {
             "part2": ""
-          },
-          "optional_lightning_address": {
-            "suffix": ""
           }
         }
       },

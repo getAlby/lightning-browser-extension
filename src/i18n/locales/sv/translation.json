@@ -62,12 +62,8 @@
       "description": "Du behöver koppla en lightning-plånbok så att du kan interagera med dina favoritwebbplatser som accepterar bitcoin lightning-betalningar!",
       "alby": {
         "pre_connect": {
-          "login_account": "Skapa nytt eller logga in med befintligt Alby-konto.",
           "optional_lightning_note": {
             "part2": "Lightning-address"
-          },
-          "optional_lightning_address": {
-            "suffix": "@getalby.com"
           }
         }
       },

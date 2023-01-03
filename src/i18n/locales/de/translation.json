@@ -61,14 +61,8 @@
     "choose_connector": {
       "alby": {
         "pre_connect": {
-          "optional_lightning_address": {
-            "label": "Wähle deine Lightning Adresse (optional)"
-          },
           "optional_lightning_note": {
             "part1": "Dein Alby-Konto wird auch mit einem optionalen"
-          },
-          "email": {
-            "label": "E-Mail Adresse"
           }
         }
       },

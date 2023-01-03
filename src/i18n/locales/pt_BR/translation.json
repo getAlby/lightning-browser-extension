@@ -62,12 +62,8 @@
       "description": "Você precisa primeiro conectar-se a uma conta ou servidor para poder interagir com seus sites favoritos que aceitam pagamentos em bitcoin!",
       "alby": {
         "pre_connect": {
-          "login_account": "Crie uma conta ou realize o login na sua conta atual da Alby.",
           "optional_lightning_note": {
             "part2": "Endereço Relâmpago"
-          },
-          "optional_lightning_address": {
-            "suffix": "@getalby.com"
           }
         }
       },

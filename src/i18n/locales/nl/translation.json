@@ -62,12 +62,8 @@
       "description": "Maak eerst verbinding met een Lightning wallet zodat je kan synchen met websites die bitcoin Lightning betalingen accepteren!",
       "alby": {
         "pre_connect": {
-          "login_account": "Maak een Alby account aan of log direct in.",
           "optional_lightning_note": {
             "part2": "Lightning Address"
-          },
-          "optional_lightning_address": {
-            "suffix": "@getalby.com"
           }
         }
       },

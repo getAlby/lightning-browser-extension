@@ -61,14 +61,8 @@
     "choose_connector": {
       "alby": {
         "pre_connect": {
-          "optional_lightning_note": {
-            "part4": "了解更多"
-          },
           "errors": {
             "create_wallet_error": "登录或创建新账户失败。如果你需要帮助，请联系 support@getalby.com"
-          },
-          "email": {
-            "label": "电子邮箱"
           }
         }
       },

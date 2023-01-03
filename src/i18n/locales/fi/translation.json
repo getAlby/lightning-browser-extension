@@ -62,12 +62,8 @@
       "description": "Sinun täytyy ensin muodostaa yhteys Lightning-lompakkoon, jotta voit olla vuorovaikutuksessa suosikkisivustojesi kanssa, jotka hyväksyvät Bitcoin Lightning -maksut!",
       "alby": {
         "pre_connect": {
-          "login_account": "Luo tai kirjaudu sisään Alby-tilillesi.",
           "optional_lightning_note": {
             "part2": "Lightning-osoite"
-          },
-          "optional_lightning_address": {
-            "suffix": "@getalby.com"
           }
         }
       },

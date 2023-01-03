@@ -62,12 +62,8 @@
       "description": "¡Primero debe conectarse a una billetera lightning para poder interactuar con sus sitios web favoritos que aceptan pagos con Bitcoin lightning!",
       "alby": {
         "pre_connect": {
-          "login_account": "Crea o inicia sesión en tu cuenta de Alby.",
           "optional_lightning_note": {
             "part2": "Dirección de Lightning"
-          },
-          "optional_lightning_address": {
-            "suffix": "@getalby.com"
           }
         }
       },
