@@ -57,13 +57,13 @@ const commonCreateWalletUserCreate = async (
     page.waitForNavigation(), // The promise resolves after navigation has finished
   ]);
 
-  await findByText($document, "Create or Connect Wallet");
+  await findByText(
+    $document,
+    "Start by creating a new Alby Wallet, logging in to an existing one or connecting lightning wallet. You will be able to connect and manage more wallets later as well!"
+  );
 
   if (options.connectToLightningWallet) {
-    const chooseConnectorButton = await findByText(
-      $document,
-      "Connect to Lightning Wallet"
-    );
+    const chooseConnectorButton = await findByText($document, "Connect");
     chooseConnectorButton.click();
 
     await Promise.all([
@@ -71,7 +71,7 @@ const commonCreateWalletUserCreate = async (
       page.waitForNavigation(), // The promise resolves after navigation has finished
     ]);
 
-    await findByText($document, "Connect Lightning Wallet");
+    await findByText($document, "Connect");
   }
 
   return { user: options.user || defaultUser, browser, page, $document };
@@ -96,10 +96,10 @@ test.describe("Create or connect wallets", () => {
       await commonCreateWalletUserCreate({ connectToLightningWallet: false });
 
     // click on the button to create a new wallet
-    const createNewWalletButton = await getByText($document, "Create new");
+    const createNewWalletButton = await getByText($document, "Sign up");
     createNewWalletButton.click();
 
-    await findByText($document, "Your Alby Wallet");
+    await findByText($document, "Your Alby account");
 
     // type user email
     const emailField = await getByLabelText($document, "Email Address");
@@ -134,7 +134,7 @@ test.describe("Create or connect wallets", () => {
     const loginButton = await getByText($document, "Log in");
     loginButton.click();
 
-    await findByText($document, "Your Alby Wallet");
+    await findByText($document, "Your Alby account");
 
     // type user email
     const emailField = await getByLabelText(
