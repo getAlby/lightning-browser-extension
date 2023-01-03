@@ -40,7 +40,9 @@ function Settings() {
 
   const getPrivateKeyFromStorage = async () => {
     const priv = (await msg.request("nostr/getPrivateKey")) as string;
-    setNostrPrivateKey(priv ?? "");
+    if (priv) {
+      setNostrPrivateKey(nostrlib.hexToNip19(priv, "nsec"));
+    }
   };
 
   useEffect(() => {
@@ -65,7 +67,7 @@ function Settings() {
     }
 
     await msg.request("nostr/setPrivateKey", {
-      privateKey: nostrlib.normalizeHex(nostrPrivateKey),
+      privateKey: nostrlib.normalizeToHex(nostrPrivateKey),
     });
 
     saveSetting({

@@ -1,7 +1,7 @@
-import { bech32Decode } from "../utils/helpers";
+import { bech32Decode, bech32Encode } from "../utils/helpers";
 
 const nostr = {
-  normalizeHex(str: string) {
+  normalizeToHex(str: string) {
     const NIP19Prefixes = ["npub", "nsec", "note"];
     const prefix = str.substring(0, 4);
     if (NIP19Prefixes.includes(prefix)) {
@@ -13,6 +13,9 @@ const nostr = {
       }
     }
     return str;
+  },
+  hexToNip19(hex: string, prefix = "nsec") {
+    return bech32Encode(prefix, hex);
   },
 };
 
