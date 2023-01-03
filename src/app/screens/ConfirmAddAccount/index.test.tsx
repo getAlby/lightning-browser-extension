@@ -28,7 +28,7 @@ jest.mock("~/app/hooks/useNavigationState", () => {
     useNavigationState: jest.fn(() => ({
       origin: mockOrigin,
       args: {
-        message: "Test message",
+        connector: "The connector type",
       },
     })),
   };
@@ -49,6 +49,6 @@ describe("ConfirmAddAccount", () => {
         "This website wants to add a wallet of the following type to Alby:"
       )
     ).toBeInTheDocument();
-    expect(await screen.findByText("Test message")).toBeInTheDocument();
+    expect(await screen.findByText("The connector type")).toBeInTheDocument();
   });
 });
