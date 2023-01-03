@@ -81,16 +81,6 @@ Then run the following
 
 ### 🛠 Development
 
-- Install dependencies\
-  `yarn install`
-- To watch file changes in development
-  - Chrome\
-    `yarn run dev:chrome`
-  - Firefox\
-    `yarn run dev:firefox`
-  - Opera\
-    `yarn run dev:opera`
-
 [Refer to SETUP.md for info regarding how to setup Alby](./doc/SETUP.md)
 
 ## Native Companions
@@ -123,7 +113,7 @@ We use the [Development Project Board](https://github.com/orgs/getAlby/projects/
 #### Anyone
 
 - Have a look at this Readme. Can it be improved? Do you see typos? You can open a PR or reach out to us in [our community chat](https://bitcoindesign.slack.com/archives/C02591ADXM2).
-- You can help with [translations](#translations)
+- You can help with [translations](./doc/CONTRIBUTION.md#translations)
 - [Code of Conduct](./doc/CODE_OF_CONDUCT.md)
 
 ## ❔ FAQs

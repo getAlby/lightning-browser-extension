@@ -141,8 +141,8 @@ function ConfirmPayment() {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={!successMessage ? t("title") : tCommon("success")} />
       {!successMessage ? (
-        <Container justifyBetween maxWidth="sm">
-          <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="h-full">
+          <Container justifyBetween maxWidth="sm">
             <div>
               {navState.origin && (
                 <PublisherCard
@@ -183,8 +183,8 @@ function ConfirmPayment() {
                 <em>{tComponents("only_trusted")}</em>
               </p>
             </div>
-          </form>
-        </Container>
+          </Container>
+        </form>
       ) : (
         <Container justifyBetween maxWidth="sm">
           <ResultCard

@@ -1,12 +1,13 @@
 import {
   GearIcon,
+  GlobeIcon,
   LockIcon,
   MenuIcon,
+  QuestionIcon,
+  ReceiveIcon,
+  RocketIcon,
   SendIcon,
   TransactionsIcon,
-  ReceiveIcon,
-  QuestionIcon,
-  RocketIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -47,6 +48,14 @@ export default function UserMenu() {
         <MenuIcon className="h-6 w-6" />
       </Menu.Button>
       <Menu.List position="right">
+        <Menu.ItemButton
+          onClick={() => {
+            openOptions("discover");
+          }}
+        >
+          <GlobeIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          {tCommon("discover")}
+        </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
             openOptions("publishers");
