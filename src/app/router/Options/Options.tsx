@@ -14,13 +14,15 @@ import Receive from "@screens/Receive";
 import Send from "@screens/Send";
 import Settings from "@screens/Settings";
 import Unlock from "@screens/Unlock";
-import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { useTranslation } from "react-i18next";
-import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
+import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
+import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
+import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
+import NewWallet from "~/app/screens/connectors/NewWallet";
 import i18n from "~/i18n/i18nConfig";
 
 function Options() {
@@ -56,7 +58,7 @@ function Options() {
               <Route
                 path="new"
                 element={
-                  <Container>
+                  <Container maxWidth="xl">
                     <Outlet />
                   </Container>
                 }
@@ -64,20 +66,35 @@ function Options() {
                 <Route
                   index
                   element={
-                    <ChooseConnector
-                      title={i18n.t(
-                        "translation:choose_connector.title.options"
+                    <ChooseConnectorPath
+                      title={i18n.t("translation:choose_path.title")}
+                      description={i18n.t(
+                        "translation:choose_path.description"
                       )}
                     />
                   }
                 />
-                {connectorRoutes.map((connectorRoute) => (
+                <Route path="create-wallet" element={<NewWallet />} />
+                <Route path="choose-connector">
                   <Route
-                    key={connectorRoute.path}
-                    path={connectorRoute.path}
-                    element={connectorRoute.element}
+                    index
+                    element={
+                      <ChooseConnector
+                        title={i18n.t("translation:choose_connector.title")}
+                        description={i18n.t(
+                          "translation:choose_connector.description"
+                        )}
+                      />
+                    }
                   />
-                ))}
+                  {connectorRoutes.map((connectorRoute) => (
+                    <Route
+                      key={connectorRoute.path}
+                      path={connectorRoute.path}
+                      element={connectorRoute.element}
+                    />
+                  ))}
+                </Route>
               </Route>
               <Route index element={<Accounts />} />
             </Route>

@@ -1,14 +1,25 @@
 import { test } from "@playwright/test";
 import { USER } from "complete-randomer";
 import { getDocument, queries } from "pptr-testing-library";
+import { Browser, ElementHandle, Page } from "puppeteer";
 
 import { loadExtension } from "./helpers/loadExtension";
 
 const { getByText, getByLabelText, findByLabelText, findByText } = queries;
 
-const user = USER.SINGLE();
+type User = { email: string; password: string };
+const defaultUser = USER.SINGLE() as User;
 
-const commonCreateWalletUserCreate = async () => {
+const commonCreateWalletUserCreate = async (
+  options: { connectToLightningWallet: boolean; user?: User } = {
+    connectToLightningWallet: true,
+  }
+): Promise<{
+  user: User;
+  page: Page;
+  browser: Browser;
+  $document: ElementHandle<Element>;
+}> => {
   const { page, browser } = await loadExtension();
 
   // get document from welcome page
@@ -46,9 +57,24 @@ const commonCreateWalletUserCreate = async () => {
     page.waitForNavigation(), // The promise resolves after navigation has finished
   ]);
 
-  await findByText($document, "Do you have a lightning wallet?");
+  await findByText($document, "Create or Connect Wallet");
 
-  return { user, browser, page, $document };
+  if (options.connectToLightningWallet) {
+    const chooseConnectorButton = await findByText(
+      $document,
+      "Connect to Lightning Wallet"
+    );
+    chooseConnectorButton.click();
+
+    await Promise.all([
+      page.waitForResponse(() => true),
+      page.waitForNavigation(), // The promise resolves after navigation has finished
+    ]);
+
+    await findByText($document, "Connect Lightning Wallet");
+  }
+
+  return { user: options.user || defaultUser, browser, page, $document };
 };
 
 const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
@@ -67,10 +93,39 @@ const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
 test.describe("Create or connect wallets", () => {
   test("successfully creates an Alby wallet", async () => {
     const { user, browser, page, $document } =
-      await commonCreateWalletUserCreate();
+      await commonCreateWalletUserCreate({ connectToLightningWallet: false });
 
     // click at "Create Alby Wallet"
-    const createNewWalletButton = await getByText($document, "Alby Wallet");
+    const createNewWalletButton = await getByText($document, "Create new");
+    createNewWalletButton.click();
+
+    await findByText($document, "Your Alby Lightning Wallet");
+
+    // type user email
+    const emailField = await getByLabelText($document, "Email Address");
+    await emailField.type(user.email);
+
+    // type user password and confirm password
+    const walletPasswordField = await getByLabelText($document, "Password");
+    await walletPasswordField.type(user.password);
+
+    await commonCreateWalletSuccessCheck({ page, $document });
+
+    await browser.close();
+  });
+
+  test("successfully connects to an existing Alby testnet wallet", async () => {
+    const { user, browser, page, $document } =
+      await commonCreateWalletUserCreate({
+        connectToLightningWallet: false,
+        user: {
+          email: "albytest001@example.com",
+          password: "12345678",
+        },
+      });
+
+    // click at "Create Alby Wallet"
+    const createNewWalletButton = await getByText($document, "Create new");
     createNewWalletButton.click();
 
     await findByText($document, "Your Alby Lightning Wallet");
