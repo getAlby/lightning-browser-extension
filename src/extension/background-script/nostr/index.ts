@@ -19,7 +19,8 @@ class Nostr {
       try {
         return decryptData(encryptedKey, password);
       } catch (e) {
-        if (e instanceof Error) console.error("Couldn't get key");
+        console.error("Could not decrypt the Nostr key");
+        console.error(e);
       }
     }
 
