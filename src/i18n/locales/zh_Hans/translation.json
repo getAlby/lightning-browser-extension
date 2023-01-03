@@ -62,21 +62,15 @@
       "alby": {
         "pre_connect": {
           "optional_lightning_note": {
-            "part2": "闪电地址",
             "part4": "了解更多"
-          },
-          "optional_lightning_address": {
-            "suffix": "@getalby.com"
           },
           "errors": {
             "create_wallet_error": "登录或创建新账户失败。如果你需要帮助，请联系 support@getalby.com"
           },
-          "host_wallet": "我们为你托管的闪电钱包！",
           "email": {
             "label": "电子邮箱"
           }
-        },
-        "description": "创建或登录你的Alby账户"
+        }
       },
       "lnd": {
         "errors": {
@@ -284,9 +278,6 @@
           "label": "lndconnect REST URL",
           "placeholder": "lndconnect://yournode:8080?..."
         }
-      },
-      "title": {
-        "options": "添加新的闪电账户"
       },
       "description": "你首先需要连接一个闪电钱包，这样你就可以与你最喜欢的接受比特币闪电支付的网站进行互动了!",
       "mynode": {

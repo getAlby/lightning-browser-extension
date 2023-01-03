@@ -62,19 +62,15 @@
       "alby": {
         "pre_connect": {
           "optional_lightning_address": {
-            "suffix": "@getalby.com",
             "label": "Wähle deine Lightning Adresse (optional)"
           },
           "optional_lightning_note": {
-            "part3": "Das ist für jeden ein einfacher Weg, um dir Bitcoin über das Lightning Netzwerk zu schicken.",
             "part1": "Dein Alby-Konto wird auch mit einem optionalen"
           },
-          "login_account": "Erstelle ein Alby-Konto oder logge dich ein.",
           "email": {
             "label": "E-Mail Adresse"
           }
-        },
-        "description": "Erstelle dein Alby-Konto oder melde dich an"
+        }
       },
       "lnd": {
         "or": "OR",
@@ -139,9 +135,6 @@
         "errors": {
           "connection_failed": "Verbindung fehlgeschlagen. Hast du die richtige URL und den richtigen Admin-Schlüssel?"
         }
-      },
-      "title": {
-        "options": "Füge einen neuen Lightning Account hinzu"
       },
       "mynode": {
         "page": {

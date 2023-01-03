@@ -59,26 +59,15 @@
       }
     },
     "choose_connector": {
-      "title": {
-        "options": "Lägg till nytt lightning-konto"
-      },
       "description": "Du behöver koppla en lightning-plånbok så att du kan interagera med dina favoritwebbplatser som accepterar bitcoin lightning-betalningar!",
       "alby": {
-        "description": "Skapa nytt eller logga in med befintligt Alby-konto",
         "pre_connect": {
           "login_account": "Skapa nytt eller logga in med befintligt Alby-konto.",
-          "email": {
-            "label": "E-postadress"
-          },
           "optional_lightning_note": {
-            "part2": "Lightning-address",
-            "part4": "lär dig mer"
+            "part2": "Lightning-address"
           },
           "optional_lightning_address": {
             "suffix": "@getalby.com"
-          },
-          "errors": {
-            "create_wallet_error": "Misslyckades att logga in eller skapa ett nytt konto. Om du behöver hjälp, kontakta support@getalby.com"
           }
         }
       },

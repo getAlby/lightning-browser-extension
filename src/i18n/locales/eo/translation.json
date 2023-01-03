@@ -59,26 +59,15 @@
       }
     },
     "choose_connector": {
-      "title": {
-        "options": ""
-      },
       "description": "",
       "alby": {
-        "description": "Krei aŭ saluti en vian konton ĉe Alby",
         "pre_connect": {
           "login_account": "Krei aŭ saluti en vian konton ĉe Alby.",
-          "email": {
-            "label": "Retpoŝta adreso"
-          },
           "optional_lightning_note": {
-            "part2": "Lightning-adreso",
-            "part4": "lerni plu"
+            "part2": "Lightning-adreso"
           },
           "optional_lightning_address": {
             "suffix": "@getalby.com"
-          },
-          "errors": {
-            "create_wallet_error": ""
           }
         }
       },

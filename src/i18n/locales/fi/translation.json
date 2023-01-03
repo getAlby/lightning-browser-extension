@@ -59,26 +59,15 @@
       }
     },
     "choose_connector": {
-      "title": {
-        "options": "Lisää uusi Lightning-tili"
-      },
       "description": "Sinun täytyy ensin muodostaa yhteys Lightning-lompakkoon, jotta voit olla vuorovaikutuksessa suosikkisivustojesi kanssa, jotka hyväksyvät Bitcoin Lightning -maksut!",
       "alby": {
-        "description": "Luo tai kirjaudu sisään Alby-tilillesi",
         "pre_connect": {
           "login_account": "Luo tai kirjaudu sisään Alby-tilillesi.",
-          "email": {
-            "label": "Sähköpostiosoite"
-          },
           "optional_lightning_note": {
-            "part2": "Lightning-osoite",
-            "part4": "opi lisää"
+            "part2": "Lightning-osoite"
           },
           "optional_lightning_address": {
             "suffix": "@getalby.com"
-          },
-          "errors": {
-            "create_wallet_error": "Kirjautuminen tai uuden tilin luominen epäonnistui. Jos tarvitset apua, ota yhteyttä support@getalby.com"
           }
         }
       },

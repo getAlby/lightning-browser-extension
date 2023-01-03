@@ -59,26 +59,15 @@
       }
     },
     "choose_connector": {
-      "title": {
-        "options": ""
-      },
       "description": "",
       "alby": {
-        "description": "",
         "pre_connect": {
           "login_account": "",
-          "email": {
-            "label": ""
-          },
           "optional_lightning_note": {
-            "part2": "",
-            "part4": ""
+            "part2": ""
           },
           "optional_lightning_address": {
             "suffix": ""
-          },
-          "errors": {
-            "create_wallet_error": ""
           }
         }
       },
