@@ -23,7 +23,7 @@ export default function SetPassword() {
     event.preventDefault();
     try {
       await msg.request("setPassword", { password: formData.password });
-      navigate("/choose-connector");
+      navigate("/choose-path");
     } catch (e) {
       if (e instanceof Error) {
         console.error(e.message);

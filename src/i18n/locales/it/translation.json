@@ -60,30 +60,22 @@
     },
     "choose_connector": {
       "title": {
-        "welcome": "Hai un portafoglio lightning?",
         "options": "Aggiungi un nuovo account lightning"
       },
       "description": "Per poter interagire con i vostri siti web preferiti che accettano pagamenti in bitcoin lightning, dovete prima collegarvi a un portafoglio lightning!",
       "alby": {
-        "title": "Portafoglio Alby",
         "description": "Crea o accedi al tuo account Alby",
         "pre_connect": {
-          "title": "Il tuo portafoglio Alby Lightning",
           "login_account": "Crea o accedi al tuo account Alby.",
-          "host_wallet": "Ospitiamo un portafoglio Lightning per te!",
           "email": {
             "label": "Indirizzo email"
           },
           "optional_lightning_note": {
-            "part1": "Il tuo account Alby include anche un optional",
             "part2": "Indirizzo Lightning",
-            "part3": ". Si tratta di un semplice modo per chiunque di inviarti Bitcoin sulla rete Lightning.",
             "part4": "Scopri di più"
           },
           "optional_lightning_address": {
-            "label": "Scegli il tuo indirizzo Lightning (opzionale)",
-            "suffix": "@getalby.com",
-            "title": "numeri e lettere, almeno 3 caratteri"
+            "suffix": "@getalby.com"
           },
           "errors": {
             "create_wallet_error": "Non è stato possibile effettuare il login o creare un nuovo account. Se hai bisogno di aiuto, contatta support@getalby.com"
@@ -92,7 +84,6 @@
       },
       "lnd": {
         "title": "LND",
-        "description": "Connettiti al tuo nodo LND",
         "page": {
           "title": "Connettiti al tuo nodo LND",
           "description": "Sono necessari l'URL del nodo e un macaroon con permessi di lettura e invio (ad esempio, admin.macaroon)"
@@ -112,7 +103,6 @@
       },
       "lndhub_bluewallet": {
         "title": "Bluewallet",
-        "description": "Connettiti al portafoglio mobile Bluewallet",
         "page": {
           "title": "Connettiti a BlueWallet",
           "description": "Nell'app BlueWallet, scegli il portafoglio che vuoi connettere, aprilo, clicca su \"...\", clicca su Export/Backup per mostrare il codice QR e scansionalo con la tua webcam."
@@ -127,7 +117,6 @@
       },
       "lndhub_go": {
         "title": "LNDHub",
-        "description": "Connettiti al tuo account LNDHub",
         "page": {
           "title": "Connettiti a LNDHub",
           "description": "Inserisci qui l'URI delle credenziali LNDHub o scansiona il codice QR con la tua webcam."
@@ -142,7 +131,6 @@
       },
       "lnbits": {
         "title": "LNbits",
-        "description": "Connettiti al tuo account LNbits",
         "page": {
           "title": "Connetti a <0>LNbits</0>",
           "instructions": "In LNbits, scegli il portafoglio che vuoi connettere, aprilo, clicca su API Info e copia la Admin Key. Incollala qui di seguito:"
@@ -160,7 +148,6 @@
       },
       "eclair": {
         "title": "Eclair",
-        "description": "Collega il tuo nodo Eclar",
         "page": {
           "title": "Connettiti a <0>Eclair</0>",
           "instructions": "Hai bisogno della tua password e URL Eclair."
@@ -175,7 +162,6 @@
       },
       "citadel": {
         "title": "Citadel",
-        "description": "Collegati al tuo Citadel locale",
         "page": {
           "title": "Collega un nodo <0>Citadel</0>",
           "instructions": "Attualmente non funziona se è abilitata la 2FA."
@@ -190,7 +176,6 @@
       },
       "umbrel": {
         "title": "Umbrel",
-        "description": "Collegati con Umbrel",
         "page": {
           "title": "Collega un nodo <0>Umbrel</0>",
           "instructions": "Nella dashboard di Umbrel vai su <0>Connect Wallet</0>. Seleziona <0>lndconnect REST</0> e copia il <0>lndconnect URL</0>. (In base al tuo setup puoi usare una connessione locale o una connessione via TOR)"
@@ -202,7 +187,6 @@
       },
       "mynode": {
         "title": "myNode",
-        "description": "Collegati a myNode",
         "page": {
           "title": "Collegati a <0>myNode</0>",
           "instructions": "Nella homepage di myNode clicca sul bottone <0>Wallet</0> per il servizio <0>Lightning</0>.<1/> Dopo clicca sul bottone <0>Pair Wallet</0> sotto la tab <0>Status</0>. Inserisci la tua password quando richiesta.<1/> Seleziona il menu a tendina e scegli l'opzione per effettuare il pairing. In base al tuo setup puoi utilizzare la connessione <0>Lightning (REST + Local IP)</0> o quella <0>Lightning (REST + Tor)</0>."
@@ -214,7 +198,6 @@
       },
       "start9": {
         "title": "Start9",
-        "description": "Collegati a Embassy",
         "page": {
           "title": "Collega il tuo nodo Embassy",
           "instructions": "<0>Nota:</0> Al momento supportiamo soltanto LND, aggiungeremo il supporto per c-lightning in futuro!<1/>Nella dashboard di Embassy clicca sul servizio <0>Lightning Network Daemon</0>.<1/>Seleziona la tab <0>Proprieta'</0>.<1/>Adesso copia l'<0>LND Connect REST URL.</0>"
@@ -226,7 +209,6 @@
       },
       "raspiblitz": {
         "title": "RaspiBlitz",
-        "description": "Collegati a RaspiBlitz",
         "page": {
           "title": "Collega il tuo nodo <0>RaspiBlitz</0>",
           "instructions1": "Hai bisogno dell'indirizzo onion, la porta e il macaroon con permessi di lettura e scrittura (e.g admin.macaroon) del tuo nodo..<1/><1/>Entra attraverso <0>SSH</0> nel tuo <0>RaspiBlitz</0>.<1/>Lancia il comando <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Copia e incolla l'indirizzo <0>.onion</0> di seguito.<1/>Aggiungi la tua <0>porta</0> subito dopo l'indirizzo onion, la porta di default e' <0>:8080</0>.",
@@ -239,14 +221,12 @@
       },
       "bitcoin_beach": {
         "title": "Bitcoin Beach Wallet",
-        "description": "Crea o connetti il tuo account Bitcoin Beach (Galoy)",
         "page": {
           "title": "Connetti il tuo <0>Bitcoin Beach Wallet</0>"
         }
       },
       "bitcoin_jungle": {
         "title": "Bitcoin Jungle Wallet",
-        "description": "Crea o connetti un account Bitcoin Jungle (Galoy)",
         "page": {
           "title": "Connetti a <0>Bitcoin Jungle Wallet</0>"
         }
@@ -276,7 +256,6 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "description": "Connetti il tuo nodo LND BTCPay",
         "page": {
           "title": "Connettiti al tuo nodo LND BTCPay",
           "instructions": "Vai al tuo BTCPayServer e accedi come amministratore. Vai su Impostazioni server > Servizi > LND Rest - See information. Quindi fai clic su \"Visualizza informazioni sul codice QR\" e copia i dati del codice QR. Incollali qui sotto:"
