@@ -346,14 +346,9 @@
     "publishers": {
       "suggestions": {
         "list": {
-          "gaming": "游戏",
-          "entertaiment": "娱乐",
-          "miscellaneous": "杂项"
+          "entertaiment": "娱乐"
         },
         "description": "你可以使用Alby的网站"
-      },
-      "used": {
-        "description": "你曾经使用过Alby的网站"
       },
       "publisher": {
         "allowance": {

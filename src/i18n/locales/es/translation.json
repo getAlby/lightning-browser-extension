@@ -387,15 +387,10 @@
       }
     },
     "publishers": {
-      "used": {
-        "description": "Sitios web donde ha usado Alby anteriormente"
-      },
       "suggestions": {
         "title": "Otros ⚡️ Sitios web",
         "list": {
-          "trading": "Comercio",
-          "entertaiment": "Entretenimiento",
-          "miscellaneous": "Misceláneas"
+          "entertaiment": "Entretenimiento"
         }
       },
       "publisher": {

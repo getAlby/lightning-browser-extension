@@ -494,15 +494,10 @@
       }
     },
     "publishers": {
-      "used": {
-        "description": "Sites onde você já usou a Alby"
-      },
       "suggestions": {
         "title": "Sites⚡️recomendados",
         "list": {
-          "trading": "Negociação",
-          "miscellaneous": "Outros",
-          "gaming": "Games"
+          "miscellaneous": "Outros"
         }
       },
       "publisher": {

@@ -522,15 +522,10 @@
       }
     },
     "publishers": {
-      "used": {
-        "description": ""
-      },
       "suggestions": {
         "title": "Aliaj ⚡️ retejoj",
         "list": {
-          "trading": "Komercado",
-          "entertaiment": "Distro",
-          "miscellaneous": "Alia"
+          "entertaiment": "Distro"
         }
       },
       "publisher": {

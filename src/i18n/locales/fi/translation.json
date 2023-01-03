@@ -522,15 +522,10 @@
       }
     },
     "publishers": {
-      "used": {
-        "description": "Verkkosivustot, joilla olet käyttänyt Albya aiemmin"
-      },
       "suggestions": {
         "title": "Muut ⚡️ verkkosivustot",
         "list": {
-          "trading": "Kaupankäynti",
-          "entertaiment": "Viihde",
-          "miscellaneous": "Sekalaista"
+          "entertaiment": "Viihde"
         }
       },
       "publisher": {

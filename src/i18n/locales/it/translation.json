@@ -490,15 +490,10 @@
       }
     },
     "publishers": {
-      "used": {
-        "description": "Siti web in cui hai già utilizzato Alby in precedenza"
-      },
       "suggestions": {
         "title": "Altri ⚡️ siti web",
         "list": {
-          "trading": "Trading",
-          "entertaiment": "Intrattenimento",
-          "miscellaneous": "Varie"
+          "entertaiment": "Intrattenimento"
         }
       },
       "publisher": {

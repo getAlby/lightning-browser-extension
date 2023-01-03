@@ -476,14 +476,9 @@
       },
       "suggestions": {
         "list": {
-          "showcases": "Schaukästen",
-          "gaming": "Spielen",
-          "miscellaneous": "Sonstiges"
+          "gaming": "Spielen"
         },
         "description": "Websites, auf denen du Alby verwenden kannst"
-      },
-      "used": {
-        "description": "Websites, auf denen du Alby bereits verwendet hast"
       }
     },
     "send": {

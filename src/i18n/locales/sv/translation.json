@@ -490,15 +490,10 @@
       }
     },
     "publishers": {
-      "used": {
-        "description": "Webbplatser där du använt Alby tidigare"
-      },
       "suggestions": {
         "title": "Andra ⚡️-webbplatser",
         "list": {
-          "trading": "Handel",
-          "entertaiment": "Underhållning",
-          "miscellaneous": "Övrigt"
+          "entertaiment": "Underhållning"
         }
       },
       "publisher": {

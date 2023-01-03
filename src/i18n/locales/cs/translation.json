@@ -522,15 +522,10 @@
       }
     },
     "publishers": {
-      "used": {
-        "description": ""
-      },
       "suggestions": {
         "title": "",
         "list": {
-          "trading": "",
-          "entertaiment": "",
-          "miscellaneous": ""
+          "entertaiment": ""
         }
       },
       "publisher": {
