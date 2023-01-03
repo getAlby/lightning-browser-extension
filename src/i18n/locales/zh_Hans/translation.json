@@ -345,9 +345,6 @@
     },
     "publishers": {
       "suggestions": {
-        "list": {
-          "entertaiment": "娱乐"
-        },
         "description": "你可以使用Alby的网站"
       },
       "publisher": {
