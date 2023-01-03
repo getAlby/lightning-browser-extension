@@ -59,29 +59,7 @@
       }
     },
     "choose_connector": {
-      "title": {
-        "options": "Aggiungi un nuovo account lightning"
-      },
       "description": "Per poter interagire con i vostri siti web preferiti che accettano pagamenti in bitcoin lightning, dovete prima collegarvi a un portafoglio lightning!",
-      "alby": {
-        "description": "Crea o accedi al tuo account Alby",
-        "pre_connect": {
-          "login_account": "Crea o accedi al tuo account Alby.",
-          "email": {
-            "label": "Indirizzo email"
-          },
-          "optional_lightning_note": {
-            "part2": "Indirizzo Lightning",
-            "part4": "Scopri di più"
-          },
-          "optional_lightning_address": {
-            "suffix": "@getalby.com"
-          },
-          "errors": {
-            "create_wallet_error": "Non è stato possibile effettuare il login o creare un nuovo account. Se hai bisogno di aiuto, contatta support@getalby.com"
-          }
-        }
-      },
       "lnd": {
         "title": "LND",
         "page": {
@@ -512,21 +490,10 @@
       }
     },
     "publishers": {
-      "used": {
-        "title": "I tuoi ⚡️ siti web",
-        "description": "Siti web in cui hai già utilizzato Alby in precedenza",
-        "no_info": "Ancora nessun sito web."
-      },
       "suggestions": {
         "title": "Altri ⚡️ siti web",
-        "description": "Siti web in cui è possibile utilizzare Alby",
         "list": {
-          "trading": "Trading",
-          "gaming": "Gaming",
-          "entertaiment": "Intrattenimento",
-          "shopping": "Acquisti",
-          "miscellaneous": "Varie",
-          "showcases": "Vetrine"
+          "entertaiment": "Intrattenimento"
         }
       },
       "publisher": {

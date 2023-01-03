@@ -59,29 +59,7 @@
       }
     },
     "choose_connector": {
-      "title": {
-        "options": "Agregar una nueva cuenta relámpago"
-      },
       "description": "¡Primero debe conectarse a una billetera lightning para poder interactuar con sus sitios web favoritos que aceptan pagos con Bitcoin lightning!",
-      "alby": {
-        "description": "Crea o inicia sesión en tu cuenta de Alby",
-        "pre_connect": {
-          "login_account": "Crea o inicia sesión en tu cuenta de Alby.",
-          "email": {
-            "label": "Dirección de correo electrónico"
-          },
-          "optional_lightning_note": {
-            "part2": "Dirección de Lightning",
-            "part4": "aprenda más"
-          },
-          "optional_lightning_address": {
-            "suffix": "@getalby.com"
-          },
-          "errors": {
-            "create_wallet_error": "Hubo un fallo al iniciar o crear tu sesión . Si necesitas ayuda por favor escribe a support@getalby.com"
-          }
-        }
-      },
       "lnd": {
         "title": "LND",
         "page": {
@@ -409,21 +387,10 @@
       }
     },
     "publishers": {
-      "used": {
-        "title": "Tus ⚡️ Sitios Web",
-        "description": "Sitios web donde ha usado Alby anteriormente",
-        "no_info": "Aún no hay sitios web."
-      },
       "suggestions": {
         "title": "Otros ⚡️ Sitios web",
-        "description": "Sitios web donde puedes usar Alby",
         "list": {
-          "trading": "Comercio",
-          "gaming": "Juego de azar",
-          "entertaiment": "Entretenimiento",
-          "shopping": "Compras",
-          "miscellaneous": "Misceláneas",
-          "showcases": "Showcases"
+          "entertaiment": "Entretenimiento"
         }
       },
       "publisher": {

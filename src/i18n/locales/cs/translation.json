@@ -59,29 +59,7 @@
       }
     },
     "choose_connector": {
-      "title": {
-        "options": ""
-      },
       "description": "",
-      "alby": {
-        "description": "",
-        "pre_connect": {
-          "login_account": "",
-          "email": {
-            "label": ""
-          },
-          "optional_lightning_note": {
-            "part2": "",
-            "part4": ""
-          },
-          "optional_lightning_address": {
-            "suffix": ""
-          },
-          "errors": {
-            "create_wallet_error": ""
-          }
-        }
-      },
       "lnd": {
         "title": "",
         "page": {
@@ -544,21 +522,10 @@
       }
     },
     "publishers": {
-      "used": {
-        "title": "",
-        "description": "",
-        "no_info": ""
-      },
       "suggestions": {
         "title": "",
-        "description": "",
         "list": {
-          "trading": "",
-          "gaming": "",
-          "entertaiment": "",
-          "shopping": "",
-          "miscellaneous": "",
-          "showcases": ""
+          "entertaiment": ""
         }
       },
       "publisher": {

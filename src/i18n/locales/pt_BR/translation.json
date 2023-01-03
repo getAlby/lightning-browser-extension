@@ -59,29 +59,7 @@
       }
     },
     "choose_connector": {
-      "title": {
-        "options": "Adicionar nova conta"
-      },
       "description": "Você precisa primeiro conectar-se a uma conta ou servidor para poder interagir com seus sites favoritos que aceitam pagamentos em bitcoin!",
-      "alby": {
-        "description": "Criar uma nova conta ou logar na sua conta atual da Alby",
-        "pre_connect": {
-          "login_account": "Crie uma conta ou realize o login na sua conta atual da Alby.",
-          "email": {
-            "label": "Endereço de E-mail"
-          },
-          "optional_lightning_note": {
-            "part2": "Endereço Relâmpago",
-            "part4": "saiba mais"
-          },
-          "optional_lightning_address": {
-            "suffix": "@getalby.com"
-          },
-          "errors": {
-            "create_wallet_error": "Falha ao logar ou criar uma nova conta. Se precisar de ajuda, entre em contato com support@getalby.com"
-          }
-        }
-      },
       "lnd": {
         "title": "LND",
         "page": {
@@ -516,20 +494,10 @@
       }
     },
     "publishers": {
-      "used": {
-        "title": "Sua lista de sites ⚡️",
-        "description": "Sites onde você já usou a Alby",
-        "no_info": "Nenhum site ainda."
-      },
       "suggestions": {
         "title": "Sites⚡️recomendados",
-        "description": "Sugestões de sites onde você pode usar a Alby",
         "list": {
-          "trading": "Negociação",
-          "entertaiment": "Entretenimento",
-          "miscellaneous": "Outros",
-          "shopping": "Compras",
-          "gaming": "Games"
+          "miscellaneous": "Outros"
         }
       },
       "publisher": {

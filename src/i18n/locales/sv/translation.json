@@ -59,29 +59,7 @@
       }
     },
     "choose_connector": {
-      "title": {
-        "options": "Lägg till nytt lightning-konto"
-      },
       "description": "Du behöver koppla en lightning-plånbok så att du kan interagera med dina favoritwebbplatser som accepterar bitcoin lightning-betalningar!",
-      "alby": {
-        "description": "Skapa nytt eller logga in med befintligt Alby-konto",
-        "pre_connect": {
-          "login_account": "Skapa nytt eller logga in med befintligt Alby-konto.",
-          "email": {
-            "label": "E-postadress"
-          },
-          "optional_lightning_note": {
-            "part2": "Lightning-address",
-            "part4": "lär dig mer"
-          },
-          "optional_lightning_address": {
-            "suffix": "@getalby.com"
-          },
-          "errors": {
-            "create_wallet_error": "Misslyckades att logga in eller skapa ett nytt konto. Om du behöver hjälp, kontakta support@getalby.com"
-          }
-        }
-      },
       "lnd": {
         "title": "LND",
         "page": {
@@ -512,21 +490,10 @@
       }
     },
     "publishers": {
-      "used": {
-        "title": "Dina ⚡️-webbplatser",
-        "description": "Webbplatser där du använt Alby tidigare",
-        "no_info": "Inga webbplatser ännu."
-      },
       "suggestions": {
         "title": "Andra ⚡️-webbplatser",
-        "description": "Webbplatser där du kan använda Alby",
         "list": {
-          "trading": "Handel",
-          "gaming": "Spel",
-          "entertaiment": "Underhållning",
-          "shopping": "Shopping",
-          "miscellaneous": "Övrigt",
-          "showcases": "Exempel"
+          "entertaiment": "Underhållning"
         }
       },
       "publisher": {

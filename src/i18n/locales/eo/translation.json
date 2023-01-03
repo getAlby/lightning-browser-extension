@@ -59,29 +59,7 @@
       }
     },
     "choose_connector": {
-      "title": {
-        "options": ""
-      },
       "description": "",
-      "alby": {
-        "description": "Krei aŭ saluti en vian konton ĉe Alby",
-        "pre_connect": {
-          "login_account": "Krei aŭ saluti en vian konton ĉe Alby.",
-          "email": {
-            "label": "Retpoŝta adreso"
-          },
-          "optional_lightning_note": {
-            "part2": "Lightning-adreso",
-            "part4": "lerni plu"
-          },
-          "optional_lightning_address": {
-            "suffix": "@getalby.com"
-          },
-          "errors": {
-            "create_wallet_error": ""
-          }
-        }
-      },
       "lnd": {
         "title": "LND",
         "page": {
@@ -544,21 +522,10 @@
       }
     },
     "publishers": {
-      "used": {
-        "title": "Viaj ⚡️ retejoj",
-        "description": "",
-        "no_info": ""
-      },
       "suggestions": {
         "title": "Aliaj ⚡️ retejoj",
-        "description": "",
         "list": {
-          "trading": "Komercado",
-          "gaming": "Ludado",
-          "entertaiment": "Distro",
-          "shopping": "Butikumo",
-          "miscellaneous": "Alia",
-          "showcases": ""
+          "entertaiment": "Distro"
         }
       },
       "publisher": {
