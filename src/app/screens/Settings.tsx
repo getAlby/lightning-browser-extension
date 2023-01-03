@@ -21,6 +21,7 @@ import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import { CURRENCIES } from "~/common/constants";
 import msg from "~/common/lib/msg";
+import nostrlib from "~/common/lib/nostr";
 
 const initialFormData = {
   password: "",
@@ -39,7 +40,9 @@ function Settings() {
 
   const getPrivateKeyFromStorage = async () => {
     const priv = (await msg.request("nostr/getPrivateKey")) as string;
-    setNostrPrivateKey(priv ?? "");
+    if (priv) {
+      setNostrPrivateKey(nostrlib.hexToNip19(priv, "nsec"));
+    }
   };
 
   useEffect(() => {
@@ -64,7 +67,7 @@ function Settings() {
     }
 
     await msg.request("nostr/setPrivateKey", {
-      privateKey: nostrPrivateKey,
+      privateKey: nostrlib.normalizeToHex(nostrPrivateKey),
     });
 
     saveSetting({

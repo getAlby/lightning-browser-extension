@@ -1,9 +1,16 @@
+import * as secp256k1 from "@noble/secp256k1";
 import { bech32 } from "bech32";
 
-export function bech32Decode(str: string) {
+export function bech32Decode(str: string, encoding: BufferEncoding = "utf-8") {
   const { words: dataPart } = bech32.decode(str, 2000);
   const requestByteArray = bech32.fromWords(dataPart);
-  return Buffer.from(requestByteArray).toString();
+  return Buffer.from(requestByteArray).toString(encoding);
+}
+
+export function bech32Encode(prefix: string, hex: string) {
+  const data = secp256k1.utils.hexToBytes(hex);
+  const words = bech32.toWords(data);
+  return bech32.encode(prefix, words, 1000);
 }
 
 export async function poll<T>({
