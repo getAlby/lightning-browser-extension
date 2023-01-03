@@ -1,7 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "title": "The power of⚡ bitcoin ⚡in your browser",
       "nav": {
         "welcome": "Welcome",
         "password": "Your Password",
@@ -43,9 +42,6 @@
           "confirm_password": "Please confirm your password.",
           "mismatched_password": "Passwords don't match."
         }
-      },
-      "choose_path": {
-        "description": "Start by creating a new Alby Wallet, logging in to an existing one or connecting lightning wallet. You will be able to connect and manage more wallets later as well!"
       },
       "test_connection": {
         "ready": "Awesome, you’re ready to go!",

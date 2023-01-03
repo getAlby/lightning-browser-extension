@@ -4,7 +4,6 @@ import Intro from "@screens/Onboard/Intro";
 import SetPassword from "@screens/Onboard/SetPassword";
 import TestConnection from "@screens/Onboard/TestConnection";
 import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { HashRouter as Router, useLocation, useRoutes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Container from "~/app/components/Container";
@@ -45,9 +44,7 @@ function getRoutes(
           element: (
             <ChooseConnectorPath
               title={i18n.t("translation:choose_path.title")}
-              description={i18n.t(
-                "translation:welcome.choose_path.description"
-              )}
+              description={i18n.t("translation:choose_path.description")}
             />
           ),
         },
@@ -110,7 +107,6 @@ function WelcomeRouter() {
 
 function App() {
   const [steps, setSteps] = useState(initialSteps);
-  const { t } = useTranslation();
   const location = useLocation();
   const routesElement = useRoutes(routes);
 
@@ -155,10 +151,6 @@ function App() {
   return (
     <div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center font-serif font-medium text-2xl pt-7 pb-3 dark:text-white">
-          <p>{t("welcome.title")}</p>
-        </div>
-
         <Steps steps={steps} />
       </div>
       <Container maxWidth="xl">{routesElement}</Container>
