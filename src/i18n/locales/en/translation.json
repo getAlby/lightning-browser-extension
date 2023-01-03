@@ -5,7 +5,7 @@
       "nav": {
         "welcome": "Welcome",
         "password": "Your Password",
-        "connect": "Your Lightning account",
+        "connect": "Your Lightning Account",
         "done": "Done"
       },
       "intro": {
@@ -31,7 +31,7 @@
       },
       "set_password": {
         "title": "Set an unlock password",
-        "description": "Your Lightning account data is securely encrypted with an unlock password. Do not forget this password! You need it to unlock the Alby Extension (in this browser)",
+        "description": "Your lightning account data is securely encrypted with an unlock password. Do not forget this password! You need it to unlock the Alby Extension (in this browser)",
         "choose_password": {
           "label": "Choose an unlock password:"
         },
@@ -62,36 +62,51 @@
       }
     },
     "choose_path": {
-      "title": "Create or Connect Wallet",
-      "description": "Create a new Alby Wallet, log in to an existing one or connect to an external wallet or node",
+      "title": "Connect",
+      "description": "To start using Alby to make online payments, connect your lightning wallet to the extension.",
       "alby": {
-        "title": "Alby Wallet",
-        "description": "Create or log in to your Alby Wallet",
-        "create_new": "Create new"
+        "title": "Alby",
+        "description": "Sign up or use your existing Alby account to get started with lightning payments in no time.",
+        "create_new": "Sign up"
       },
       "other": {
-        "title": "Other Wallets",
-        "description": "Connect to your external lightning wallet or node",
-        "and_more": "and more...",
-        "connect": "Connect to Lightning Wallet"
+        "title": "Other wallets",
+        "description": "Connect to your existing lightning wallet or node and choose from various connectors.",
+        "and_more": "& more...",
+        "connect": "Connect"
       }
     },
     "alby": {
-      "create_wallet": {
-        "title": "Alby Wallet",
-        "description": "Create or login to your Alby account"
-      },
       "pre_connect": {
-        "title": "Your Alby Lightning Wallet",
-        "login_account": "Create or log in to your Alby account.",
+        "set_password": {
+          "choose_password": {
+            "label": "Password"
+          },
+          "confirm_password": {
+            "label": "Confirm Password"
+          },
+          "errors": {
+            "enter_password": "Please enter a password.",
+            "confirm_password": "Please confirm your password.",
+            "mismatched_password": "Passwords don't match."
+          }
+        },
+        "title": "Your Alby account",
+        "create_account": "Create a new Alby account to to send and receive bitcoin payments.",
+        "login_account": "Log in to connect your existing Alby account.",
         "host_wallet": "We host a Lightning wallet for you!",
         "email": {
-          "label": "Email Address"
+          "create": {
+            "label": "Email Address"
+          },
+          "login": {
+            "label": "Email Address or Lightning Address"
+          }
         },
         "optional_lightning_note": {
           "part1": "Your Alby account also comes with an optional",
-          "part2": "Lightning Address",
-          "part3": ". This is a simple way for anyone to send you Bitcoin on the Lightning Network.",
+          "part2": "lightning address",
+          "part3": ". This is a simple way for anyone to send you bitcoin on the lightning network.",
           "part4": "learn more"
         },
         "optional_lightning_address": {
@@ -214,7 +229,7 @@
         "title": "myNode",
         "page": {
           "title": "Connect to <0>myNode</0>",
-          "instructions": "On your myNode homepage click on the <0>Wallet</0> button for your <0>Lightning</0> service.<1/> Now click on the <0>Pair Wallet</0> button under the <0>Status</0> tab. Enter your password when prompted.<1/> Select the dropdown menu and choose a pairing option. Depending on your setup you can either use the <0>Lightning (REST + Local IP)</0> connection or the <0>Lightning (REST + Tor)</0> connection."
+          "instructions": "On your myNode homepage click on the <0>Wallet</0> button for your <0>lightning</0> service.<1/> Now click on the <0>Pair Wallet</0> button under the <0>Status</0> tab. Enter your password when prompted.<1/> Select the dropdown menu and choose a pairing option. Depending on your setup you can either use the <0>lightning (REST + Local IP)</0> connection or the <0>lightning (REST + Tor)</0> connection."
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -225,7 +240,7 @@
         "title": "Start9",
         "page": {
           "title": "Connect to your <0>Embassy</0> node",
-          "instructions": "<0>Note:</0> Currently we only support LND but we will be adding c-lightning support in the future!<1/>On your Embassy dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
+          "instructions": "<0>Note:</0> Currently we only support LND but we will be adding c-lightning support in the future!<1/>On your Embassy dashboard click on the <0>lightning network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -297,7 +312,7 @@
         "title": "Core Lightning",
         "page": {
           "title": "Connect to your Core Lightning node",
-          "instructions": "Make sure you have Core Lightning version 0.12.0 or newer, the commando plugin is running and your node is accessible over the Lightning Network. Create a rune by running 'lightning-cli commando-rune'."
+          "instructions": "Make sure you have Core Lightning version 0.12.0 or newer, the commando plugin is running and your node is accessible over the lightning network. Create a rune by running 'lightning-cli commando-rune'."
         },
         "host": {
           "label": "Host"
@@ -392,7 +407,7 @@
         "part2": "Alby Support"
       },
       "unlock_error": {
-        "help": "Your account data is encrypted with your unlock password. If you really forgot your unlock password you have to reset and add your Lightning account again.",
+        "help": "Your account data is encrypted with your unlock password. If you really forgot your unlock password you have to reset and add your lightning account again.",
         "link": "Reset now and add a new account"
       },
       "errors": {
@@ -450,7 +465,7 @@
       },
       "exchange": {
         "title": "Exchange Source",
-        "subtitle": "Source of Bitcoin exchange rates"
+        "subtitle": "Source of bitcoin exchange rates"
       },
       "personal_data": {
         "title": "Personal data",
@@ -662,6 +677,7 @@
   },
   "common": {
     "password": "Password",
+    "confirm_password": "Confirm Password",
     "advanced": "Advanced",
     "success": "Success",
     "error": "Error",

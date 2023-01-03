@@ -10,9 +10,9 @@ import { ToastContainer } from "react-toastify";
 import Container from "~/app/components/Container";
 import { SettingsProvider } from "~/app/context/SettingsContext";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
+import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
-import NewWallet from "~/app/screens/connectors/NewWallet";
 import i18n from "~/i18n/i18nConfig";
 
 let connectorRoutes = getConnectorRoutes();
@@ -52,8 +52,12 @@ function getRoutes(
           ),
         },
         {
-          path: "create-wallet",
-          element: <NewWallet />,
+          path: "create",
+          element: <AlbyWallet variant="create" />,
+        },
+        {
+          path: "login",
+          element: <AlbyWallet variant="login" />,
         },
         {
           path: "choose-connector",

@@ -5,7 +5,13 @@ import { Browser, ElementHandle, Page } from "puppeteer";
 
 import { loadExtension } from "./helpers/loadExtension";
 
-const { getByText, getByLabelText, findByLabelText, findByText } = queries;
+const {
+  getByText,
+  getByLabelText,
+  findByLabelText,
+  findByText,
+  findAllByText,
+} = queries;
 
 type User = { email: string; password: string };
 const defaultUser = USER.SINGLE() as User;
@@ -57,14 +63,14 @@ const commonCreateWalletUserCreate = async (
     page.waitForNavigation(), // The promise resolves after navigation has finished
   ]);
 
-  await findByText($document, "Create or Connect Wallet");
+  await findByText(
+    $document,
+    "Start by creating a new Alby Wallet, logging in to an existing one or connecting lightning wallet. You will be able to connect and manage more wallets later as well!"
+  );
 
   if (options.connectToLightningWallet) {
-    const chooseConnectorButton = await findByText(
-      $document,
-      "Connect to Lightning Wallet"
-    );
-    chooseConnectorButton.click();
+    const connectTexts = await findAllByText($document, "Connect");
+    connectTexts[1].click(); // we have headline and button using "connect", button is second
 
     await Promise.all([
       page.waitForResponse(() => true),
@@ -95,11 +101,11 @@ test.describe("Create or connect wallets", () => {
     const { user, browser, page, $document } =
       await commonCreateWalletUserCreate({ connectToLightningWallet: false });
 
-    // click at "Create Alby Wallet"
-    const createNewWalletButton = await getByText($document, "Create new");
+    // click on the button to create a new wallet
+    const createNewWalletButton = await getByText($document, "Sign up");
     createNewWalletButton.click();
 
-    await findByText($document, "Your Alby Lightning Wallet");
+    await findByText($document, "Your Alby account");
 
     // type user email
     const emailField = await getByLabelText($document, "Email Address");
@@ -108,6 +114,12 @@ test.describe("Create or connect wallets", () => {
     // type user password and confirm password
     const walletPasswordField = await getByLabelText($document, "Password");
     await walletPasswordField.type(user.password);
+
+    const walletConfirmPasswordField = await getByLabelText(
+      $document,
+      "Confirm Password"
+    );
+    await walletConfirmPasswordField.type(user.password);
 
     await commonCreateWalletSuccessCheck({ page, $document });
 
@@ -124,14 +136,17 @@ test.describe("Create or connect wallets", () => {
         },
       });
 
-    // click at "Create Alby Wallet"
-    const createNewWalletButton = await getByText($document, "Create new");
-    createNewWalletButton.click();
+    // click "Log in" button
+    const loginButton = await getByText($document, "Log in");
+    loginButton.click();
 
-    await findByText($document, "Your Alby Lightning Wallet");
+    await findByText($document, "Your Alby account");
 
     // type user email
-    const emailField = await getByLabelText($document, "Email Address");
+    const emailField = await getByLabelText(
+      $document,
+      "Email Address or Lightning Address"
+    );
     await emailField.type(user.email);
 
     // type user password and confirm password
