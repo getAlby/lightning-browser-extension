@@ -20,6 +20,7 @@ import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
+import Discover from "~/app/screens/Discover";
 import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
@@ -41,6 +42,9 @@ function Options() {
             }
           >
             <Route index element={<Navigate to="/publishers" replace />} />
+            <Route path="discover">
+              <Route index element={<Discover />} />
+            </Route>
             <Route path="publishers">
               <Route path=":id" element={<Publisher />} />
               <Route index element={<Publishers />} />
@@ -132,10 +136,10 @@ const Layout = () => {
   return (
     <div>
       <Navbar>
+        <Navbar.Link href="/discover">{tCommon("discover")}</Navbar.Link>
         <Navbar.Link href="/publishers">{tCommon("websites")}</Navbar.Link>
         <Navbar.Link href="/send">{tCommon("actions.send")}</Navbar.Link>
         <Navbar.Link href="/receive">{tCommon("actions.receive")}</Navbar.Link>
-        <Navbar.Link href="/settings">{tCommon("settings")}</Navbar.Link>
       </Navbar>
       <ToastContainer
         autoClose={15000}
