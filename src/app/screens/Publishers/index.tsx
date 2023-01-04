@@ -98,7 +98,8 @@ function Publishers() {
       </h2>
 
       <p className="mb-6 text-gray-500 dark:text-neutral-500">
-        {publishers.length > 0 ? t("description") : t("tips.description")}
+        {publishers.length > 0 && t("description")}
+        {publishers.length === 0 && tips.length > 0 && t("tips.description")}
       </p>
 
       {tips.length > 0 && (
