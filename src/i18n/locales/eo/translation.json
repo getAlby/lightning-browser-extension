@@ -1,7 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "title": "La potenco de⚡ Bitmono ⚡en via TTT-legilo",
       "nav": {
         "welcome": "Bonvenon",
         "password": "Via pasvorto",
@@ -59,40 +58,9 @@
       }
     },
     "choose_connector": {
-      "title": {
-        "welcome": "",
-        "options": ""
-      },
       "description": "",
-      "alby": {
-        "title": "Alby-monujo",
-        "description": "Krei aŭ saluti en vian konton ĉe Alby",
-        "pre_connect": {
-          "title": "Via Lightning-monujo ĉe Alby",
-          "login_account": "Krei aŭ saluti en vian konton ĉe Alby.",
-          "host_wallet": "",
-          "email": {
-            "label": "Retpoŝta adreso"
-          },
-          "optional_lightning_note": {
-            "part1": "",
-            "part2": "Lightning-adreso",
-            "part3": "",
-            "part4": "lerni plu"
-          },
-          "optional_lightning_address": {
-            "label": "",
-            "suffix": "@getalby.com",
-            "title": ""
-          },
-          "errors": {
-            "create_wallet_error": ""
-          }
-        }
-      },
       "lnd": {
         "title": "LND",
-        "description": "Konekti al via LND-nodo",
         "page": {
           "title": "Konekti al via LND-nodo",
           "description": ""
@@ -112,7 +80,6 @@
       },
       "lndhub_bluewallet": {
         "title": "Bluewallet",
-        "description": "",
         "page": {
           "title": "Konekti al BlueWallet",
           "description": ""
@@ -127,7 +94,6 @@
       },
       "lndhub_go": {
         "title": "LNDHub",
-        "description": "",
         "page": {
           "title": "Konekti al LNDHub",
           "description": ""
@@ -142,7 +108,6 @@
       },
       "lnbits": {
         "title": "LNbits",
-        "description": "",
         "page": {
           "title": "Konekti al <0>LNbits</0>",
           "instructions": ""
@@ -160,7 +125,6 @@
       },
       "eclair": {
         "title": "Eclair",
-        "description": "",
         "page": {
           "title": "Konekti al <0>Eclair</0>",
           "instructions": ""
@@ -175,7 +139,6 @@
       },
       "citadel": {
         "title": "Citadel",
-        "description": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -190,7 +153,6 @@
       },
       "umbrel": {
         "title": "Umbrel",
-        "description": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -202,7 +164,6 @@
       },
       "mynode": {
         "title": "myNode",
-        "description": "Konekti al via myNode",
         "page": {
           "title": "Konekti al <0>myNode</0>",
           "instructions": ""
@@ -214,7 +175,6 @@
       },
       "start9": {
         "title": "Start9",
-        "description": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -226,7 +186,6 @@
       },
       "raspiblitz": {
         "title": "RaspiBlitz",
-        "description": "Konekti al via RaspiBlitz",
         "page": {
           "title": "Konekti al via <0>RaspiBlitz</0>-nodo",
           "instructions1": "",
@@ -239,14 +198,12 @@
       },
       "bitcoin_beach": {
         "title": "",
-        "description": "",
         "page": {
           "title": ""
         }
       },
       "bitcoin_jungle": {
         "title": "",
-        "description": "",
         "page": {
           "title": ""
         }
@@ -276,7 +233,6 @@
       },
       "btcpay": {
         "title": "BTCPay-servilo",
-        "description": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -291,7 +247,6 @@
       },
       "commando": {
         "title": "",
-        "description": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -566,23 +521,6 @@
       }
     },
     "publishers": {
-      "used": {
-        "title": "Viaj ⚡️ retejoj",
-        "description": "",
-        "no_info": ""
-      },
-      "suggestions": {
-        "title": "Aliaj ⚡️ retejoj",
-        "description": "",
-        "list": {
-          "trading": "Komercado",
-          "gaming": "Ludado",
-          "entertaiment": "Distro",
-          "shopping": "Butikumo",
-          "miscellaneous": "Alia",
-          "showcases": ""
-        }
-      },
       "publisher": {
         "allowance": {
           "title": "",
