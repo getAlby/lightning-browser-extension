@@ -1,9 +1,11 @@
+import { Battery } from "~/types";
+
 import getOriginData from "../originData";
-import { findLightningAddressInText, setLightningData } from "./helpers";
+import { findLightningAddressInText } from "./helpers";
 
 const urlMatcher = /^https:\/\/www.reddit\.com\/user\/(\w+).*/;
 
-function battery(): void {
+function battery(): Battery | void {
   const descriptionElement = document.querySelector<HTMLMetaElement>(
     'head > meta[name="description"]'
   );
@@ -35,16 +37,14 @@ function battery(): void {
     return;
   }
 
-  setLightningData([
-    {
-      method: "lnurl",
-      address: recipient,
-      ...getOriginData(),
-      description,
-      icon: imageUrl,
-      name: userName,
-    },
-  ]);
+  return {
+    method: "lnurl",
+    address: recipient,
+    ...getOriginData(),
+    description,
+    icon: imageUrl,
+    name: userName,
+  };
 }
 
 const reddit = {
