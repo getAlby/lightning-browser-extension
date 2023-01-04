@@ -38,7 +38,7 @@ export default function PublishersTable({
                 <div className="flex items-center">
                   <div className="shrink-0">
                     <img
-                      className="h-12 w-12 object-cover rounded-full shadow-lg"
+                      className="h-12 w-12 object-cover rounded-lg shadow-lg"
                       src={publisher.imageURL || DEFAULT_IMAGE}
                       alt={publisher.host}
                       onError={(e) => {
