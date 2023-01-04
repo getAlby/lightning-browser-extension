@@ -1,7 +1,8 @@
 import axios from "axios";
+import { Battery } from "~/types";
 
 import getOriginData from "../originData";
-import { findLightningAddressInText, setLightningData } from "./helpers";
+import { findLightningAddressInText } from "./helpers";
 
 interface PeertubeRes {
   channel: {
@@ -19,7 +20,7 @@ interface PeertubeRes {
 // add more peertube URLs to this regex
 const urlMatcher = /^https?:\/\/(bitcointv\.com|www\.bitcast\.online)\/w\/.*/i;
 
-const battery = (): void => {
+const battery = (): Battery | void => {
   const hostMatch = document.location.toString().match(urlMatcher);
   if (!hostMatch) {
     return;
@@ -66,16 +67,14 @@ const battery = (): void => {
       }
       const metaData = getOriginData();
 
-      setLightningData([
-        {
-          ...metaData,
-          method: "lnurl",
-          address: recipient,
-          name: channelName,
-          icon: icon,
-          description: channelDescription,
-        },
-      ]);
+      return {
+        ...metaData,
+        method: "lnurl",
+        address: recipient,
+        name: channelName,
+        icon: icon,
+        description: channelDescription,
+      };
     })
     .catch((e) => {
       console.error("Alby could not load video data", e);
