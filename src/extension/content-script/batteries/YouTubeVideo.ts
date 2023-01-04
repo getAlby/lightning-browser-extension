@@ -1,10 +1,12 @@
+import { Battery } from "~/types";
+
 import getOriginData from "../originData";
 import { findLnurlFromYouTubeAboutPage } from "./YouTubeChannel";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
 
-const battery = async (): Promise<void> => {
+const battery = async (): Promise<Battery | void> => {
   let text = "";
   document
     .querySelectorAll(
