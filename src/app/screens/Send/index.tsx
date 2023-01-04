@@ -9,6 +9,7 @@ import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import QrcodeScanner from "@components/QrcodeScanner";
 import TextField from "@components/form/TextField";
+import lightningPayReq from "bolt11";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -94,6 +95,7 @@ function Send() {
           },
         });
       } else {
+        lightningPayReq.decode(invoice); // throws if invalid.
         navigate("/confirmPayment", {
           state: {
             args: {
