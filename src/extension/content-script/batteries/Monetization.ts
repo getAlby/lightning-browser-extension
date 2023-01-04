@@ -1,7 +1,6 @@
-import { BatteryMetaTagRecipient } from "~/types";
+import { Battery, BatteryMetaTagRecipient } from "~/types";
 
 import getOriginData from "../originData";
-import { setLightningData } from "./helpers";
 
 const urlMatcher = /^https?:\/\/.*/i;
 
@@ -20,7 +19,7 @@ const parseRecipient = (content: string): BatteryMetaTagRecipient => {
   return recipient;
 };
 
-const battery = (): void => {
+const battery = (): Battery | void => {
   const monetizationTag = document.querySelector<HTMLMetaElement>(
     'head > meta[name="lightning" i]'
   );
@@ -43,12 +42,10 @@ const battery = (): void => {
 
   const metaData = getOriginData();
 
-  setLightningData([
-    {
-      ...recipient,
-      ...metaData,
-    },
-  ]);
+  return {
+    ...recipient,
+    ...metaData,
+  };
 };
 
 const Monetization = {
