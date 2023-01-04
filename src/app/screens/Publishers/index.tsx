@@ -18,8 +18,6 @@ function Publishers() {
   const [publishers, setPublishers] = useState<Publisher[]>([]);
   const { tips } = useTips();
 
-  const hasTips = tips.length > 0;
-
   const navigate = useNavigate();
 
   function navigateToPublisher(id: number) {
@@ -96,13 +94,18 @@ function Publishers() {
   return (
     <Container>
       <h2 className="mt-12 mb-2 text-2xl font-bold dark:text-white">
-        {t("title")}
+        {publishers.length > 0 ? t("title") : t("tips.title")}
       </h2>
 
       <p className="mb-6 text-gray-500 dark:text-neutral-500">
-        {t("description")}
+        {publishers.length > 0 ? t("description") : t("tips.description")}
       </p>
 
+      {tips.length > 0 && (
+        <div className="mb-6 grid gap-4 sm:grid-cols-1 lg:grid-cols-2">
+          <Tips />
+        </div>
+      )}
       {publishers.length > 0 ? (
         <PublishersTable
           publishers={publishers}
@@ -110,11 +113,7 @@ function Publishers() {
         />
       ) : (
         <>
-          {hasTips && (
-            <div className="grid gap-4 sm:grid-cols-1 lg:grid-cols-2">
-              <Tips />
-            </div>
-          )}
+          <p className="dark:text-white mb-4"> {t("no_info")}</p>
           <Link to="/discover">
             <Button primary label={t("discover")} />
           </Link>
