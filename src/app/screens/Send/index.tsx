@@ -9,7 +9,6 @@ import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import QrcodeScanner from "@components/QrcodeScanner";
 import TextField from "@components/form/TextField";
-import lightningPayReq from "bolt11";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -95,16 +94,10 @@ function Send() {
           },
         });
       } else {
-        let bolt11, match;
-        // look for bolt11 encoding if it's a BIP21 invoice
-        if ((match = invoice.trim().match(/bitcoin:\S*lightning=([^&]*)/i))) {
-          bolt11 = match[1];
-        }
-        lightningPayReq.decode(bolt11 ?? invoice); // throws if invalid.
         navigate("/confirmPayment", {
           state: {
             args: {
-              paymentRequest: bolt11 ?? invoice,
+              paymentRequest: invoice,
             },
           },
         });
@@ -180,9 +173,7 @@ function Send() {
               disabled={loading}
               autoFocus
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setInvoice(
-                  event.target.value.trim().replace(/^lightning:/i, "")
-                )
+                setInvoice(extractInvoiceFrom(event.target.value.trim()))
               }
               endAdornment={
                 <button
