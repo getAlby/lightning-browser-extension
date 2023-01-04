@@ -628,7 +628,7 @@ export interface SettingsStorage {
   exchange: SupportedExchanges;
   debug: boolean;
   nostrEnabled: boolean;
-  tips: TIPS[];
+  closedTips: TIPS[];
 }
 
 export interface Badge {

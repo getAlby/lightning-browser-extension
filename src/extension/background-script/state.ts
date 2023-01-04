@@ -2,7 +2,7 @@ import merge from "lodash.merge";
 import pick from "lodash.pick";
 import browser from "webextension-polyfill";
 import createState from "zustand";
-import { CURRENCIES, TIPS } from "~/common/constants";
+import { CURRENCIES } from "~/common/constants";
 import { decryptData } from "~/common/lib/crypto";
 import { Migration } from "~/extension/background-script/migrations";
 import i18n from "~/i18n/i18nConfig";
@@ -54,7 +54,7 @@ export const DEFAULT_SETTINGS: SettingsStorage = {
   exchange: "alby",
   debug: false,
   nostrEnabled: false,
-  tips: [TIPS.TOP_UP_WALLET, TIPS.PIN, TIPS.DEMO],
+  closedTips: [],
 };
 
 // these keys get synced from the state to the browser storage
