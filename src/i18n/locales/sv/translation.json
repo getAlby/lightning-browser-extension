@@ -489,12 +489,6 @@
       }
     },
     "publishers": {
-      "suggestions": {
-        "title": "Andra ⚡️-webbplatser",
-        "list": {
-          "entertaiment": "Underhållning"
-        }
-      },
       "publisher": {
         "allowance": {
           "title": "Beloppsgräns",

@@ -521,12 +521,6 @@
       }
     },
     "publishers": {
-      "suggestions": {
-        "title": "Aliaj ⚡️ retejoj",
-        "list": {
-          "entertaiment": "Distro"
-        }
-      },
       "publisher": {
         "allowance": {
           "title": "",

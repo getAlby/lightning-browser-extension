@@ -1,7 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "title": "O poder do⚡ bitcoin ⚡no seu navegador",
       "nav": {
         "welcome": "Bem-vindo",
         "password": "Senha",
@@ -494,12 +493,6 @@
       }
     },
     "publishers": {
-      "suggestions": {
-        "title": "Sites⚡️recomendados",
-        "list": {
-          "miscellaneous": "Outros"
-        }
-      },
       "publisher": {
         "allowance": {
           "title": "Limite de gastos",

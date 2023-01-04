@@ -28,7 +28,6 @@
           "description": "闪电交易全部发生在你的浏览器中。不需要alt+tab或扫描二维码。"
         }
       },
-      "title": "浏览器中的⚡ 比特币⚡ 的力量",
       "set_password": {
         "title": "设置解锁密码",
         "description": "你的闪电账户数据是用解锁密码安全加密的。不要忘记这个密码! 你需要它来解锁Alby Extension（在这个浏览器中）",
@@ -344,12 +343,6 @@
       "unlock_password": "你的解锁密码"
     },
     "publishers": {
-      "suggestions": {
-        "list": {
-          "entertaiment": "娱乐"
-        },
-        "description": "你可以使用Alby的网站"
-      },
       "publisher": {
         "allowance": {
           "used_budget": "已使用的聪",

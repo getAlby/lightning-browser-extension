@@ -1,7 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "title": "",
       "nav": {
         "welcome": "",
         "password": "",
@@ -522,12 +521,6 @@
       }
     },
     "publishers": {
-      "suggestions": {
-        "title": "",
-        "list": {
-          "entertaiment": ""
-        }
-      },
       "publisher": {
         "allowance": {
           "title": "",

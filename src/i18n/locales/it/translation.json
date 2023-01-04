@@ -489,12 +489,6 @@
       }
     },
     "publishers": {
-      "suggestions": {
-        "title": "Altri ⚡️ siti web",
-        "list": {
-          "entertaiment": "Intrattenimento"
-        }
-      },
       "publisher": {
         "allowance": {
           "title": "Margine",

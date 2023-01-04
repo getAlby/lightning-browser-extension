@@ -521,12 +521,6 @@
       }
     },
     "publishers": {
-      "suggestions": {
-        "title": "Muut ⚡️ verkkosivustot",
-        "list": {
-          "entertaiment": "Viihde"
-        }
-      },
       "publisher": {
         "allowance": {
           "title": "Korvaus",

@@ -472,12 +472,6 @@
           "title": "Erlaubnis",
           "used_budget": "sats verwendet"
         }
-      },
-      "suggestions": {
-        "list": {
-          "gaming": "Spielen"
-        },
-        "description": "Websites, auf denen du Alby verwenden kannst"
       }
     },
     "send": {
