@@ -6,16 +6,19 @@ import BoostButton from "./button";
 
 function injectBoostButton() {
   const body = document.querySelector("body");
+  const shadowWrapper = document.createElement("div");
   const app = document.createElement("div");
 
+  shadowWrapper.id = "alby-shadow";
   app.id = "alby-root";
 
   if (body && !window.frameElement) {
-    body.prepend(app);
+    body.prepend(shadowWrapper);
+    const shadow = shadowWrapper.attachShadow({ mode: "open" });
+    shadow.appendChild(app);
   }
 
-  const container = document.getElementById("alby-root") as HTMLElement;
-  const root = createRoot(container);
+  const root = createRoot(app);
 
   root.render(<BoostButton />);
 }
