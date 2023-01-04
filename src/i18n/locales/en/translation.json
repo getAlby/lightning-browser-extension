@@ -87,6 +87,7 @@
             "mismatched_password": "Passwords don't match."
           }
         },
+        "forgot_password": "Forgot password?",
         "title": "Your Alby account",
         "create_account": "Create a new Alby account to to send and receive bitcoin payments.",
         "login_account": "Log in to connect your existing Alby account.",
