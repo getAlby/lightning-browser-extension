@@ -1,9 +1,11 @@
+import { Battery } from "~/types";
+
 import getOriginData from "../originData";
-import { findLightningAddressInText, setLightningData } from "./helpers";
+import { findLightningAddressInText } from "./helpers";
 
 const urlMatcher = /^https:\/\/github.com\/([^/]+)(\/)?(\/([^/]+))?(\/)?$/;
 
-const battery = (): void => {
+const battery = (): Battery | void => {
   const urlParts = document.location.pathname.split("/");
   const username = urlParts[1];
   const repo = urlParts[2];
@@ -12,9 +14,7 @@ const battery = (): void => {
     handleRepositoryPage(username);
   } else if (username) {
     const lightningData = handleProfilePage() || handleOrganizationPage();
-    if (lightningData) {
-      setLightningData([lightningData]);
-    }
+    if (lightningData) return lightningData;
   }
 };
 
@@ -97,18 +97,15 @@ function handleRepositoryPage(username: string) {
   const address = parseElement("article");
 
   if (address) {
-    setLightningData([
-      {
-        method: "lnurl",
-        address: address,
-        ...getOriginData(),
-        description:
-          document.querySelector<HTMLHeadingElement>("article")?.innerText ??
-          "",
-        name: username,
-        icon: "",
-      },
-    ]);
+    return {
+      method: "lnurl",
+      address: address,
+      ...getOriginData(),
+      description:
+        document.querySelector<HTMLHeadingElement>("article")?.innerText ?? "",
+      name: username,
+      icon: "",
+    };
   }
 }
 
