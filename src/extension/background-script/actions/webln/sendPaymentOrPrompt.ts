@@ -34,7 +34,7 @@ async function checkAllowance(host: string, amount: number) {
     .equalsIgnoreCase(host)
     .first();
 
-  return allowance && allowance.remainingBudget >= amount;
+  return allowance && allowance.remainingBudget > amount; // check that the budget is higher than the amount. amount can be 0
 }
 
 async function sendPaymentWithAllowance(message: Message) {

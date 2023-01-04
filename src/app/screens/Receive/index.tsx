@@ -10,8 +10,7 @@ import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
-import { useState, useEffect, useRef } from "react";
-import type { FormEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
@@ -119,6 +118,11 @@ function Receive() {
     }
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    createInvoice();
+  }
+
   function renderInvoice() {
     if (!invoice) return null;
     return (
@@ -204,14 +208,8 @@ function Receive() {
       {invoice ? (
         <Container maxWidth="sm">{renderInvoice()}</Container>
       ) : (
-        <form
-          onSubmit={(e: FormEvent) => {
-            e.preventDefault();
-            createInvoice();
-          }}
-          className="h-full"
-        >
-          <fieldset disabled={loading}>
+        <form onSubmit={handleSubmit} className="h-full">
+          <fieldset className="h-full" disabled={loading}>
             <Container justifyBetween maxWidth="sm">
               <div className="py-4">
                 <div className="mb-4">

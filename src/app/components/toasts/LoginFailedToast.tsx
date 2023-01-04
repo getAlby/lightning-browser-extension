@@ -16,7 +16,7 @@ export default function LoginFailedToast({
           href={passwordResetUrl}
           className="underline"
           target="_blank"
-          rel="noreferrer"
+          rel="noreferrer noopener"
         >
           {t("login_failed.password_reset")}
         </a>

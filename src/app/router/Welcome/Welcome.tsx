@@ -5,8 +5,11 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { HashRouter as Router, useRoutes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import Container from "~/app/components/Container";
 import { SettingsProvider } from "~/app/context/SettingsContext";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
+import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
+import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
 import i18n from "~/i18n/i18nConfig";
 
 const connectorRoutes = getConnectorRoutes();
@@ -16,7 +19,6 @@ function getRoutes(
     path: string;
     element: JSX.Element;
     title: string;
-    description: string;
     logo: string;
   }[]
 ) {
@@ -27,19 +29,43 @@ function getRoutes(
       name: i18n.t("translation:welcome.nav.password"),
     },
     {
-      path: "/choose-connector",
+      path: "/choose-path",
       name: i18n.t("translation:welcome.nav.connect"),
       children: [
         {
           index: true,
           element: (
-            <ChooseConnector
-              title={i18n.t("translation:choose_connector.title.welcome")}
-              description={i18n.t("translation:choose_connector.description")}
+            <ChooseConnectorPath
+              title={i18n.t("translation:choose_path.title")}
+              description={i18n.t("translation:choose_path.description")}
             />
           ),
         },
-        ...connectorRoutes,
+        {
+          path: "create",
+          element: <AlbyWallet variant="create" />,
+        },
+        {
+          path: "login",
+          element: <AlbyWallet variant="login" />,
+        },
+        {
+          path: "choose-connector",
+          children: [
+            {
+              index: true,
+              element: (
+                <ChooseConnector
+                  title={i18n.t("translation:choose_connector.title")}
+                  description={i18n.t(
+                    "translation:choose_connector.description"
+                  )}
+                />
+              ),
+            },
+            ...connectorRoutes,
+          ],
+        },
       ],
     },
     {
@@ -96,9 +122,7 @@ function App() {
           </p>
         </div>
       </div>
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {routesElement}
-      </div>
+      <Container maxWidth="xl">{routesElement}</Container>
     </div>
   );
 }

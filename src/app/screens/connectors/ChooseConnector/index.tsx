@@ -13,7 +13,7 @@ export default function ChooseConnector({ title, description }: Props) {
     connectorRoutes = getConnectorRoutes();
   });
   return (
-    <div className="relative my-14 lg:grid  lg:gap-8 text-center">
+    <div className="relative my-14 lg:grid lg:gap-8 text-center">
       <div className="relative">
         <div className="mb-6">
           <h1 className="text-3xl font-bold dark:text-white">{title}</h1>
@@ -24,14 +24,8 @@ export default function ChooseConnector({ title, description }: Props) {
           )}
         </div>
         <div className="grid grid-cols-5 gap-5">
-          {connectorRoutes.map(({ path, title, description, logo }) => (
-            <LinkButton
-              key={path}
-              to={path}
-              title={title}
-              description={description}
-              logo={logo}
-            />
+          {connectorRoutes.map(({ path, title, logo }) => (
+            <LinkButton key={path} to={path} title={title} logo={logo} />
           ))}
         </div>
       </div>

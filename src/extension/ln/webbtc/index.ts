@@ -86,6 +86,17 @@ export default class WebBTCProvider {
     throw new Error("Alby does not support `getAddress`");
   }
 
+  request(method: string, params: Record<string, unknown>) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling request");
+    }
+
+    return this.execute("request", {
+      method,
+      params,
+    });
+  }
+
   // NOTE: new call `action`s must be specified also in the content script
   execute(
     action: string,
@@ -99,7 +110,7 @@ export default class WebBTCProvider {
           application: "LBE",
           prompt: true,
           action: `webln/${action}`,
-          scope: "webbtc",
+          scope: "webln",
           args,
         },
         "*" // TODO use origin
