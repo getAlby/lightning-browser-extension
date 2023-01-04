@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import getOriginData from "../originData";
-import { findLightningAddressInText, setLightningData } from "./helpers";
+import { findLightningAddressInText } from "./helpers";
 
 const urlMatcher = /^https:\/\/www.mixcloud.com\/([^/]+)(\/)?([^/]+)?(\/)?$/;
 
@@ -33,16 +33,14 @@ async function handleShowPage(username: string) {
     return;
   }
 
-  setLightningData([
-    {
-      method: "lnurl",
-      address: address,
-      ...getOriginData(),
-      description: descriptionElement.content ?? "",
-      name: document.title.split(" | Mixcloud")[0] ?? "",
-      icon: imageUrl ?? "",
-    },
-  ]);
+  return {
+    method: "lnurl",
+    address: address,
+    ...getOriginData(),
+    description: descriptionElement.content ?? "",
+    name: document.title.split(" | Mixcloud")[0] ?? "",
+    icon: imageUrl ?? "",
+  };
 }
 
 async function handleProfilePage(username: string) {
@@ -54,16 +52,14 @@ async function handleProfilePage(username: string) {
 
   if (!address) return;
 
-  setLightningData([
-    {
-      method: "lnurl",
-      address: address,
-      ...getOriginData(),
-      description: userInfo.biog,
-      name: userInfo.name ?? "",
-      icon: userInfo.pictures.medium ?? "",
-    },
-  ]);
+  return {
+    method: "lnurl",
+    address: address,
+    ...getOriginData(),
+    description: userInfo.biog,
+    name: userInfo.name ?? "",
+    icon: userInfo.pictures.medium ?? "",
+  };
 }
 
 const mixcloud = {
