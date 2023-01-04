@@ -111,12 +111,9 @@ function AccountsScreen() {
 
   return (
     <Container>
-      <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
-        {t("title")}
-      </h2>
-
-      <div className="shadow border-b border-gray-200 dark:border-neutral-500 sm:rounded-lg bg-white dark:bg-surface-02dp">
-        <div className="p-6">
+      <div className="mt-12 mb-6 flex items-center justify-between">
+        <h2 className="text-2xl font-bold dark:text-white">{t("title")}</h2>
+        <div>
           <Button
             icon={<PlusIcon className="w-5 h-5 mr-2" />}
             label={t("actions.add_account")}
@@ -124,7 +121,8 @@ function AccountsScreen() {
             onClick={() => navigate(`/accounts/new`)}
           />
         </div>
-
+      </div>
+      <div className="shadow border-b border-gray-200 dark:border-neutral-500 sm:rounded-lg bg-white dark:bg-surface-02dp">
         <table className="min-w-full">
           <tbody className="divide-y divide-gray-200">
             {Object.keys(accounts).map((accountId) => {
