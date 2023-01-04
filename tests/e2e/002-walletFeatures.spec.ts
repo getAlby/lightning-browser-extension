@@ -39,8 +39,7 @@ test.describe("Wallet features", () => {
       extensionId,
     });
 
-    await findByText($optionsdocument, "Welcome!");
-    await findByText($optionsdocument, "Suggested ⚡️ Websites");
+    await findByText($optionsdocument, "Your ⚡️ Websites");
 
     await browser.close();
   });
