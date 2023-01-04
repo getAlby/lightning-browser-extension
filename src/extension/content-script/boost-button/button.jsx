@@ -50,11 +50,12 @@ function BoostButton() {
         padding: 10,
         border: "none",
         fontFamily: "monospace",
-        fontSize: "1rem",
+        fontSize: "15px",
         boxShadow: "0 0 10px #0000004a",
         color: "white",
         backgroundColor: "orange",
         borderRadius: "0.25rem",
+        cursor: "pointer",
       }}
     >
       {sent ? `Sent ${sats}. Send more?` : `Boost Sats to ${lnurl}`}
