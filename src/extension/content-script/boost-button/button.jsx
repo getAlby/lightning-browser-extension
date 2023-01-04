@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "~/app/styles/index.css";
+import WebLNProvider from "~/extension/ln/webln";
 
-import WebLNProvider from "../../ln/webln";
 import extractLightningData from "../batteries/index";
 
 function BoostButton() {
@@ -11,13 +11,20 @@ function BoostButton() {
   const [lnurl, setLnurl] = useState(false);
 
   useEffect(() => {
+    let count = 0;
+
     const extract = async () => {
+      count++;
       const lnData = await extractLightningData();
       if (lnData) {
         setLnurl(lnData.address);
+        clearInterval(intervalId);
+      } else if (count >= 5) {
+        clearInterval(intervalId);
       }
     };
 
+    const intervalId = setInterval(extract, 3000);
     extract();
   }, []);
 
