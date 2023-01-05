@@ -7,7 +7,7 @@ import { TIPS } from "~/common/constants";
 
 export default function Tips() {
   const { t } = useTranslation("translation", {
-    keyPrefix: "publishers",
+    keyPrefix: "discover.tips",
   });
 
   const navigate = useNavigate();
@@ -25,19 +25,19 @@ export default function Tips() {
       <CloseableCard
         key={TIPS.TOP_UP_WALLET}
         handleClose={() => filterTip(TIPS.TOP_UP_WALLET)}
-        title={t("tips.top_up_wallet.title")}
-        description={t("tips.top_up_wallet.description")}
+        title={t("top_up_wallet.title")}
+        description={t("top_up_wallet.description")}
         buttons={[
           <Button
             key={1}
-            label={t("tips.top_up_wallet.label1")}
+            label={t("top_up_wallet.label1")}
             primary
             onClick={() => {
               navigate("/receive");
             }}
           />,
           <a key={2} href="https://getalby.com/topup">
-            <Button label={t("tips.top_up_wallet.label2")} />
+            <Button label={t("top_up_wallet.label2")} />
           </a>,
         ]}
       />
@@ -48,11 +48,11 @@ export default function Tips() {
       <CloseableCard
         key={TIPS.PIN}
         handleClose={() => filterTip(TIPS.PIN)}
-        title={t("tips.pin.title")}
+        title={t("pin.title")}
         description={[
-          t("tips.pin.description1"),
-          t("tips.pin.description2"),
-          t("tips.pin.description3"),
+          t("pin.description1"),
+          t("pin.description2"),
+          t("pin.description3"),
         ]}
       />
     );
@@ -63,8 +63,8 @@ export default function Tips() {
       <CloseableCard
         key={TIPS.DEMO}
         handleClose={() => filterTip(TIPS.DEMO)}
-        title={t("tips.demo.title")}
-        description={t("tips.demo.description")}
+        title={t("demo.title")}
+        description={t("demo.description")}
         buttons={[
           <a
             key={1}
@@ -72,7 +72,7 @@ export default function Tips() {
             target="_blank"
             rel="noreferrer"
           >
-            <Button label={t("tips.demo.label1")} primary />
+            <Button label={t("demo.label1")} primary />
           </a>,
         ]}
       />
@@ -84,11 +84,11 @@ export default function Tips() {
       <CloseableCard
         key={TIPS.ADDRESS}
         handleClose={() => filterTip(TIPS.ADDRESS)}
-        title={t("tips.address.title")}
-        description={t("tips.address.description")}
+        title={t("address.title")}
+        description={t("address.description")}
         buttons={[
           <a key={1} href="https://getalby.com/demo">
-            <Button label={t("tips.address.label1")} primary />
+            <Button label={t("address.label1")} primary />
           </a>,
         ]}
       />

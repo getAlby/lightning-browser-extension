@@ -1,12 +1,10 @@
 import Container from "@components/Container";
 import PublishersTable from "@components/PublishersTable";
-import Tips from "@components/Tips";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "~/app/components/Button";
-import { useTips } from "~/app/hooks/useTips";
 import msg from "~/common/lib/msg";
 import { Allowance, Badge, Publisher } from "~/types";
 
@@ -16,8 +14,6 @@ function Publishers() {
   });
 
   const [publishers, setPublishers] = useState<Publisher[]>([]);
-  const { tips } = useTips();
-
   const navigate = useNavigate();
 
   function navigateToPublisher(id: number) {
@@ -94,19 +90,13 @@ function Publishers() {
   return (
     <Container>
       <h2 className="mt-12 mb-2 text-2xl font-bold dark:text-white">
-        {publishers.length > 0 ? t("title") : t("tips.title")}
+        {t("title")}
       </h2>
 
       <p className="mb-6 text-gray-500 dark:text-neutral-500">
-        {publishers.length > 0 && tips.length === 0 && t("description")}
-        {tips.length > 0 && t("tips.description")}
+        {t("description")}
       </p>
 
-      {tips.length > 0 && (
-        <div className="mb-6 grid gap-4 sm:grid-cols-1 lg:grid-cols-2">
-          <Tips />
-        </div>
-      )}
       {publishers.length > 0 ? (
         <PublishersTable
           publishers={publishers}

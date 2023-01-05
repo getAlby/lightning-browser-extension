@@ -591,18 +591,6 @@
         "shopping": "Shopping",
         "miscellaneous": "Miscellaneous",
         "showcases": "Showcases"
-      }
-    },
-    "publishers": {
-      "title": "Your ⚡️ Websites",
-      "description": "Websites where you have used Alby before",
-      "no_info": "It looks like you haven't used Alby in any websites yet.",
-      "discover": "Discover Websites",
-      "publisher": {
-        "allowance": {
-          "title": "Allowance",
-          "used_budget": "sats used"
-        }
       },
       "tips": {
         "title": "Your Alby wallet is ready",
@@ -628,6 +616,18 @@
           "title": "⚡️ Get a lightning address",
           "description": "Create your own lightning address and to receive lightning payments with ease of sending an e-mail",
           "label1": "Get it now!"
+        }
+      }
+    },
+    "publishers": {
+      "title": "Your ⚡️ Websites",
+      "description": "Websites where you have used Alby before",
+      "no_info": "It looks like you haven't used Alby in any websites yet.",
+      "discover": "Discover Websites",
+      "publisher": {
+        "allowance": {
+          "title": "Allowance",
+          "used_budget": "sats used"
         }
       }
     },
