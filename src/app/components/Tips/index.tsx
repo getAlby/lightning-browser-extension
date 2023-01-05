@@ -66,7 +66,12 @@ export default function Tips() {
         title={t("tips.demo.title")}
         description={t("tips.demo.description")}
         buttons={[
-          <a key={1} href="https://getalby.com/demo" target="_new">
+          <a
+            key={1}
+            href="https://getalby.com/demo"
+            target="_blank"
+            rel="noreferrer"
+          >
             <Button label={t("tips.demo.label1")} primary />
           </a>,
         ]}
