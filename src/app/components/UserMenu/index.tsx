@@ -47,7 +47,7 @@ export default function UserMenu() {
       <Menu.Button className="flex items-center text-gray-700 dark:text-white hover:text-black dark:hover:text-white transition-colors duration-200">
         <MenuIcon className="h-6 w-6" />
       </Menu.Button>
-      <Menu.List position="right">
+      <Menu.List position="left">
         <Menu.ItemButton
           onClick={() => {
             openOptions("discover");

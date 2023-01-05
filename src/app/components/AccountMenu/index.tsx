@@ -1,11 +1,11 @@
 import {
   AddressBookIcon,
   CaretDownIcon,
+  CheckIcon,
   PlusIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
@@ -75,7 +75,11 @@ function AccountMenu({ showOptions = true }: Props) {
   return (
     <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-surface-12dp max-w-full">
       <p className="flex items-center">
-        <WalletIcon className="-ml-1 w-8 h-8 opacity-50 dark:text-white" />
+        {/* TODO: Replace with placeholder / image from connector*/}
+        <img
+          className="rounded-full w-8 h-8"
+          src="https://secure.gravatar.com/avatar/07e22939e7672b38c56615068c4c715f?size=200&default=mm&rating=g"
+        />
       </p>
 
       <div
