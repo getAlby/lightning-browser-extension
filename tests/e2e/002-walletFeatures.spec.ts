@@ -39,7 +39,7 @@ test.describe("Wallet features", () => {
       extensionId,
     });
 
-    await findByText($optionsdocument, "Your ⚡️ Websites");
+    await findByText($optionsdocument, "Your Alby wallet is ready");
 
     await browser.close();
   });

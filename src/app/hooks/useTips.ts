@@ -1,16 +1,9 @@
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import { getBrowserType, isAlbyAccount } from "~/app/utils";
 import { TIPS } from "~/common/constants";
 
 const DEFAULT_TIPS = [TIPS.TOP_UP_WALLET, TIPS.DEMO, TIPS.PIN];
-
-export const isAlbyAccount = (alias = "") => {
-  return alias === "🐝 getalby.com";
-};
-
-export const isChrome = (): boolean => {
-  return !!window.chrome;
-};
 
 export const filterTips = (closedTips: TIPS[], alias = "") => {
   return DEFAULT_TIPS.filter((tip: TIPS) => {
@@ -18,7 +11,7 @@ export const filterTips = (closedTips: TIPS[], alias = "") => {
 
     if (tip === TIPS.TOP_UP_WALLET && !isAlbyAccount(alias)) return false;
 
-    if (tip === TIPS.PIN && !isChrome()) return false;
+    if (tip === TIPS.PIN && getBrowserType() !== "chrome") return false;
     return true;
   });
 };

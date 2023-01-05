@@ -683,3 +683,5 @@ export interface Invoice {
     value_msat_total: number;
   };
 }
+
+export type BrowserType = "chrome" | "firefox";

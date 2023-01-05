@@ -30,15 +30,23 @@ jest.mock("~/app/context/AccountContext", () => ({
   }),
 }));
 
+jest.mock("~/app/utils", () => {
+  const original = jest.requireActual("~/app/utils");
+  return {
+    ...original,
+    getBrowserType: () => "chrome",
+  };
+});
+
 describe("useTips", () => {
-  test("should have 2 tips", async () => {
+  test("should have 2 tips in chrome", async () => {
     tmpAccount = { id: "1", name: "LND account", alias: "" };
     const { tips } = useTips();
     expect(tips.length).toBe(2);
     const hasTopUpWallet = tips.some((tip) => tip === TIPS.TOP_UP_WALLET);
     expect(hasTopUpWallet).toBe(false);
   });
-  test("should have 3 tips with top up wallet", async () => {
+  test("should have 3 tips with top up wallet in chrome when having alby account", async () => {
     tmpAccount = { id: "2", name: "Alby", alias: "🐝 getalby.com" };
     const { tips } = useTips();
     expect(tips.length).toBe(3);
