@@ -1,3 +1,4 @@
+import Container from "~/app/components/Container";
 import { classNames } from "~/app/utils/index";
 
 // TODO: if no image set use image based on i.e. domain
@@ -30,63 +31,83 @@ export default function PublisherCard({
   return (
     <div
       className={classNames(
-        isSmall ? "p-2" : "flex-col justify-center p-4",
+        isSmall ? "p-2" : "flex-col  p-4",
         isCard && "drop-shadow rounded-lg mt-4",
         !image && "h-24",
-        "flex items-center bg-white dark:bg-surface-02dp"
+        "flex items-start bg-white dark:bg-surface-02dp"
       )}
     >
-      {image && (
-        <img
-          className={`m-2 shrink-0 bg-white border-solid border-2 border-white object-cover rounded-lg shadow-2xl ${
-            isSmall ? "w-14 h-14 mr-4" : "w-20 h-20"
-          }`}
-          src={image || DEFAULT_IMAGE}
-          alt={`${title} logo`}
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.onerror = null;
-            target.src = DEFAULT_IMAGE;
-          }}
-        />
-      )}
-      <div
-        className={
-          "flex flex-col overflow-hidden w-full " +
-          (isSmall ? "" : "text-center ") +
-          (isSmall && !image && "ml-4")
-        }
-      >
-        <h2
-          title={title}
-          className={
-            "text-xl font-semibold dark:text-white overflow-hidden text-ellipsis whitespace-nowrap " +
-            (isSmall ? "my-1" : "my-2")
-          }
-        >
-          {title}
-        </h2>
-        {url && (
-          <a
-            href={`https://${url}`}
-            title={url}
-            target="_blank"
-            className="text-gray-500 dark:text-gray-400 overflow-hidden mb-2 text-ellipsis whitespace-nowrap"
-            rel="noreferrer noopener"
+      <Container justifyBetween>
+        <div className="flex flex-row items-center">
+          {image && (
+            <img
+              className={`m-3 shrink-0 bg-white border-solid object-cover rounded-lg shadow-lg ${
+                isSmall ? "w-14 h-14 mr-4" : "w-20 h-20"
+              }`}
+              src={image || DEFAULT_IMAGE}
+              alt={`${title} logo`}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.onerror = null;
+                target.src = DEFAULT_IMAGE;
+              }}
+            />
+          )}
+          <div
+            className={
+              "flex flex-col overflow-hidden w-full ml-2" +
+              (isSmall ? "" : " ") +
+              (isSmall && !image && "ml-4")
+            }
           >
-            {url}
-          </a>
-        )}
-        {!url && description && (
-          <p
-            title={description}
-            className="text-gray-500 dark:text-gray-400 mb-2 line-clamp-2"
-          >
-            {description}
-          </p>
-        )}
-      </div>
-      {children && <div className="mt-2 text-center">{children}</div>}
+            <h2
+              title={title}
+              className={
+                "text-xl font-semibold dark:text-white overflow-hidden text-ellipsis whitespace-nowrap"
+              }
+            >
+              {title}
+            </h2>
+            {url && (
+              <a
+                href={`https://${url}`}
+                title={url}
+                target="_blank"
+                className="text-blue-500 mb-2 dark:text-gray-400 overflow-hidden mb-2 text-ellipsis whitespace-nowrap text-sm"
+                rel="noreferrer noopener"
+              >
+                {url}
+              </a>
+            )}
+            {!url && description && (
+              <p
+                title={description}
+                className="text-gray-500 dark:text-gray-400 mb-2 line-clamp-2"
+              >
+                {description}
+              </p>
+            )}
+
+            <div>
+              <span className="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
+                5 pemissions
+              </span>
+            </div>
+          </div>
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+            </svg>
+          </div>
+        </div>
+        {children && <div className="mt-2 text-center">{children}</div>}
+      </Container>
     </div>
   );
 }
