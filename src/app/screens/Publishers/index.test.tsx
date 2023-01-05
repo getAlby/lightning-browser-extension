@@ -80,9 +80,7 @@ describe("Publishers", () => {
       </SettingsProvider>
     );
 
-    expect(
-      await screen.findByText("Your Alby wallet is ready")
-    ).toBeInTheDocument();
+    expect(await screen.findByText("Your ⚡ Websites")).toBeInTheDocument();
     expect(
       await screen.findByText(
         "It looks like you haven't used Alby in any websites yet."
