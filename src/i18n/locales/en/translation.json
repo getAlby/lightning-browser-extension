@@ -89,7 +89,7 @@
         },
         "forgot_password": "Forgot password?",
         "title": "Your Alby account",
-        "create_account": "Create a new Alby account to to send and receive bitcoin payments.",
+        "create_account": "Create a new Alby account to send and receive bitcoin payments.",
         "login_account": "Log in to connect your existing Alby account.",
         "host_wallet": "We host a Lightning wallet for you!",
         "email": {
