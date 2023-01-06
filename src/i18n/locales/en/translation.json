@@ -291,6 +291,26 @@
           "invalid_jwt": "invalid JWT passed"
         }
       },
+      "kollider": {
+        "title": "Kollider",
+        "description": "Login to your Kollider account",
+        "page": {
+          "title": "Connect to your Kollider account",
+          "description": "Don't have an account already? <0>Sign up</0> now!"
+        },
+        "username": {
+          "label": "Enter your Kollider username"
+        },
+        "password": {
+          "label": "Enter your Kollider password"
+        },
+        "currency": {
+          "label": "Select your currency account"
+        },
+        "errors": {
+          "connection_failed": "Connection failed. Are you sure the account data is correct?"
+        }
+      },
       "btcpay": {
         "title": "BTCPay Server",
         "page": {

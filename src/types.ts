@@ -1,5 +1,5 @@
 import { PaymentRequestObject } from "bolt11";
-import { CURRENCIES } from "~/common/constants";
+import { CURRENCIES, ACCOUNT_CURRENCIES } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
 import {
   ConnectorInvoice,
@@ -28,10 +28,9 @@ export interface NodeInfo {
 export interface AccountInfo {
   alias: string;
   balance: number;
-  fiatBalance?: string;
   id: string;
   name: string;
-  satsBalance?: string;
+  currency: ACCOUNT_CURRENCIES;
 }
 
 export interface MetaData {
