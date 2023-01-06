@@ -46,7 +46,7 @@ const Button = forwardRef(
           primary
             ? "bg-orange-bitcoin text-white border border-transparent"
             : outline
-            ? "bg-white text-orange-bitcoin border border-orange-bitcoin"
+            ? "bg-white text-orange-bitcoin border border-orange-bitcoin dark:bg-surface-02dp"
             : `bg-white text-gray-700 dark:bg-surface-02dp dark:text-neutral-200 dark:border-neutral-800`,
           primary && !disabled && "hover:bg-orange-bitcoin-700",
           !primary &&
