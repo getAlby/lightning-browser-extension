@@ -283,7 +283,7 @@
       "allowance_view": {
         "recent_transactions": "近期交易",
         "no_transactions": "<0>{{name}}</0>还没有交易。",
-        "sats_used": "已使用的聪",
+        "sats_used": "已使用的sats",
         "allowance": "限额"
       },
       "default_view": {
@@ -617,8 +617,8 @@
     "optional": "可选",
     "description": "描述",
     "message": "消息",
-    "sats_one": "聪",
-    "sats_other": "聪",
+    "sats_one": "sat",
+    "sats_other": "sats",
     "success_message": "{{amount}}{{fiatAmount}}已发送至{{destination}}",
     "response": "答复",
     "help": "帮助",
