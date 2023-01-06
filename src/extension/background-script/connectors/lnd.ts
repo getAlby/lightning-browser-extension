@@ -113,6 +113,10 @@ const methods: Record<string, Record<string, string>> = {
     path: "/v2/router/mc",
     httpMethod: "GET",
   },
+  addinvoice: {
+    path: "/v1/invoices",
+    httpMethod: "POST",
+  },
 };
 
 const pathTemplateParser = (
