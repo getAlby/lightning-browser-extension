@@ -603,7 +603,7 @@
         },
         "pin": {
           "title": "📌 Pin your Alby extension",
-          "description1": "To access Alby easily, click on extension icon in the top right corner of your browser",
+          "description1": "To access Alby easily, click on extension icon {icon} in the top right corner of your browser",
           "description2": "In the list of extensions, find Alby and click pin icon to pin it to the toolbar",
           "description3": "Thats it! To access Alby just click Alby icon"
         },

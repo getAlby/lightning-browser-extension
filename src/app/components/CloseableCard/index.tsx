@@ -16,7 +16,7 @@ export default function CloseableCard({
   const uiDescription = Array.isArray(description) ? (
     <ol className="list-decimal mx-4 h-12 font-serif text-sm font-normal text-gray-500 dark:text-neutral-500 mb-2">
       {description.map((text, index) => (
-        <li key={index}>{text}</li>
+        <li key={index} dangerouslySetInnerHTML={{ __html: text }} />
       ))}
     </ol>
   ) : (

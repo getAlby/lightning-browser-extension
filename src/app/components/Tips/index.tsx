@@ -50,7 +50,10 @@ export default function Tips() {
         handleClose={() => filterTip(TIPS.PIN)}
         title={t("pin.title")}
         description={[
-          t("pin.description1"),
+          t("pin.description1").replace(
+            "{icon}",
+            `<img src="assets/icons/puzzle.svg" class="w-5 inline align-bottom" />`
+          ),
           t("pin.description2"),
           t("pin.description3"),
         ]}
