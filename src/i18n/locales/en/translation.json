@@ -87,8 +87,9 @@
             "mismatched_password": "Passwords don't match."
           }
         },
+        "forgot_password": "Forgot password?",
         "title": "Your Alby account",
-        "create_account": "Create a new Alby account to to send and receive bitcoin payments.",
+        "create_account": "Create a new Alby account to send and receive bitcoin payments.",
         "login_account": "Log in to connect your existing Alby account.",
         "host_wallet": "We host a Lightning wallet for you!",
         "email": {
@@ -288,6 +289,26 @@
           "setup_failed": "Setup failed",
           "missing_jwt": "JWT missing, couldn't log in.",
           "invalid_jwt": "invalid JWT passed"
+        }
+      },
+      "kollider": {
+        "title": "Kollider",
+        "description": "Login to your Kollider account",
+        "page": {
+          "title": "Connect to your Kollider account",
+          "description": "Don't have an account already? <0>Sign up</0> now!"
+        },
+        "username": {
+          "label": "Enter your Kollider username"
+        },
+        "password": {
+          "label": "Enter your Kollider password"
+        },
+        "currency": {
+          "label": "Select your currency account"
+        },
+        "errors": {
+          "connection_failed": "Connection failed. Are you sure the account data is correct?"
         }
       },
       "btcpay": {
@@ -880,14 +901,15 @@
       "getnetworkinfo": "Get basic stats about the known channel graph.",
       "getnodeinfo": "Get the channel information for a node.",
       "gettransactions": "Get a list of all transactions relevant to the wallet.",
-      "listpayments": "list of all outgoing payments.",
-      "listpeers": "list all currently active peers.",
+      "listpayments": "Get a list of all outgoing payments.",
+      "listpeers": "Get a list all currently active peers.",
       "lookupinvoice": "Look up invoice details.",
       "queryroutes": "Query for a possible route.",
       "verifymessage": "Verify a signature over a msg.",
       "sendtoroute": "Make a payment via the specified route.",
       "decodepayreq": "Decode a payment request string.",
-      "routermc": "Read the internal mission control state."
+      "routermc": "Read the internal mission control state.",
+      "addinvoice": "Create new invoices."
     }
   }
 }
