@@ -33,6 +33,31 @@ interface Config {
   serverHost?: string;
 }
 
+const methods: Record<string, string> = {
+  getinfo: "lnd.lightning.GetInfo",
+  listchannels: "lnd.lightning.ListChannels",
+  listinvoices: "lnd.lightning.ListInvoices",
+  channelbalance: "lnd.lightning.ChannelBalance",
+  walletbalance: "lnd.lightning.WalletBalance",
+  openchannel: "lnd.lightning.OpenChannelSync",
+  connectpeer: "lnd.lightning.ConnectPeer",
+  disconnectpeer: "lnd.lightning.DisconnectPeer",
+  estimatefee: "lnd.lightning.EstimateFee",
+  getchaninfo: "lnd.lightning.GetChanInfo",
+  getnetworkinfo: "lnd.lightning.GetNetworkInfo",
+  getnodeinfo: "lnd.lightning.GetNodeInfo",
+  gettransactions: "lnd.lightning.GetTransactions",
+  listpayments: "lnd.lightning.ListPayments",
+  listpeers: "lnd.lightning.ListPeers",
+  lookupinvoice: "lnd.lightning.LookupInvoice",
+  queryroutes: "lnd.lightning.QueryRoutes",
+  verifymessage: "lnd.lightning.VerifyMessage",
+  sendtoroute: "lnd.lightning.SendToRouteSync",
+  decodepayreq: "lnd.lightning.DecodePayReq",
+  routermc: "lnd.router.QueryMissionControl",
+  addinvoice: "lnd.lightning.AddInvoice",
+};
+
 const DEFAULT_SERVER_HOST = "mailbox.terminal.lightning.today:443";
 
 class LncCredentialStore implements CredentialStore {
@@ -125,6 +150,27 @@ class Lnc implements Connector {
         delete this.lnc;
         resolve();
       }, 1000);
+    });
+  }
+
+  get supportedMethods() {
+    return Object.keys(methods);
+  }
+
+  async requestMethod(
+    method: string,
+    args: Record<string, unknown>
+  ): Promise<{ data: unknown }> {
+    const lncCall = methods[method];
+    if (!lncCall) {
+      throw new Error(`${method} is not supported`);
+    }
+
+    const func = lncCall.split(".").reduce((obj: FixMe, prop: FixMe) => {
+      return obj[prop];
+    }, this.lnc);
+    return func(args).then((data: FixMe) => {
+      return { data };
     });
   }
 
@@ -313,17 +359,6 @@ class Lnc implements Connector {
         };
       });
   }
-
-  /*
-  requestLNC(method: FixMe, args: FixMe) {
-    const func = method.split(".").reduce((obj: FixMe, prop: FixMe) => {
-      return obj[prop];
-    }, this.lnc);
-    return func(args).then((data: FixMe) => {
-      return { data };
-    });
-  }
-  */
 }
 
 export default Lnc;
