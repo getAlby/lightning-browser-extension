@@ -44,11 +44,11 @@ const Button = forwardRef(
           halfWidth && "w-1/2 first:mr-2 last:ml-2",
           fullWidth || halfWidth ? "px-0 py-2" : "px-7 py-2",
           primary
-            ? "bg-orange-bitcoin text-white border border-transparent"
+            ? "bg-gradient-to-bl from-amber-300 to-amber-500 text-white"
             : outline
             ? "bg-white text-orange-bitcoin border border-orange-bitcoin dark:bg-surface-02dp"
             : `bg-white text-gray-700 dark:bg-surface-02dp dark:text-neutral-200 dark:border-neutral-800`,
-          primary && !disabled && "hover:bg-orange-bitcoin-700",
+          primary && !disabled && "hover:bg-gradient-to-br",
           !primary &&
             !disabled &&
             "hover:bg-gray-50 dark:hover:bg-surface-16dp",

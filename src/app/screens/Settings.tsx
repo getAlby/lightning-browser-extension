@@ -14,8 +14,8 @@ import TextField from "@components/form/TextField";
 import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
 import type { FormEvent } from "react";
-import { useState, useEffect } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { useEffect, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -202,7 +202,6 @@ function Settings() {
                   setModalIsOpen(true);
                 }}
                 label={t("change_password.title")}
-                primary
                 fullWidth
                 loading={isLoading}
                 disabled={isLoading}
