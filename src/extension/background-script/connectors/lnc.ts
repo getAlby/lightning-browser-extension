@@ -5,6 +5,7 @@ import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
 import WordArray from "crypto-js/lib-typedarrays";
 import SHA256 from "crypto-js/sha256";
+import snakeCase from "lodash.snakecase";
 import { encryptData } from "~/common/lib/crypto";
 import utils from "~/common/lib/utils";
 
@@ -34,31 +35,51 @@ interface Config {
 }
 
 const methods: Record<string, string> = {
-  getinfo: "lnd.lightning.GetInfo",
-  listchannels: "lnd.lightning.ListChannels",
-  listinvoices: "lnd.lightning.ListInvoices",
+  addinvoice: "lnd.lightning.AddInvoice",
   channelbalance: "lnd.lightning.ChannelBalance",
-  walletbalance: "lnd.lightning.WalletBalance",
-  openchannel: "lnd.lightning.OpenChannelSync",
   connectpeer: "lnd.lightning.ConnectPeer",
+  decodepayreq: "lnd.lightning.DecodePayReq",
   disconnectpeer: "lnd.lightning.DisconnectPeer",
   estimatefee: "lnd.lightning.EstimateFee",
   getchaninfo: "lnd.lightning.GetChanInfo",
+  getinfo: "lnd.lightning.GetInfo",
   getnetworkinfo: "lnd.lightning.GetNetworkInfo",
   getnodeinfo: "lnd.lightning.GetNodeInfo",
   gettransactions: "lnd.lightning.GetTransactions",
+  listchannels: "lnd.lightning.ListChannels",
+  listinvoices: "lnd.lightning.ListInvoices",
   listpayments: "lnd.lightning.ListPayments",
   listpeers: "lnd.lightning.ListPeers",
   lookupinvoice: "lnd.lightning.LookupInvoice",
+  openchannel: "lnd.lightning.OpenChannelSync",
   queryroutes: "lnd.lightning.QueryRoutes",
-  verifymessage: "lnd.lightning.VerifyMessage",
-  sendtoroute: "lnd.lightning.SendToRouteSync",
-  decodepayreq: "lnd.lightning.DecodePayReq",
   routermc: "lnd.router.QueryMissionControl",
-  addinvoice: "lnd.lightning.AddInvoice",
+  sendtoroute: "lnd.lightning.SendToRouteSync",
+  verifymessage: "lnd.lightning.VerifyMessage",
+  walletbalance: "lnd.lightning.WalletBalance",
 };
 
 const DEFAULT_SERVER_HOST = "mailbox.terminal.lightning.today:443";
+
+const snakeCaseObjectDeep = (value: FixMe): FixMe => {
+  if (Array.isArray(value)) {
+    return value.map(snakeCaseObjectDeep);
+  }
+
+  if (value && typeof value === "object" && value.constructor === Object) {
+    const obj = {} as FixMe;
+    const keys = Object.keys(value);
+    const len = keys.length;
+
+    for (let i = 0; i < len; i += 1) {
+      obj[snakeCase(keys[i])] = snakeCaseObjectDeep(value[keys[i]]);
+    }
+
+    return obj;
+  }
+
+  return value;
+};
 
 class LncCredentialStore implements CredentialStore {
   config: Config;
@@ -170,7 +191,7 @@ class Lnc implements Connector {
       return obj[prop];
     }, this.lnc);
     return func(args).then((data: FixMe) => {
-      return { data };
+      return { data: snakeCaseObjectDeep(data) };
     });
   }
 
