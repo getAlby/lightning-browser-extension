@@ -20,7 +20,10 @@ const info = async (message: MessageAccountInfo) => {
     currentAccountId: currentAccountId,
     name: currentAccount.name,
     info: info.data,
-    balance: balance.data,
+    balance: {
+      balance: balance.data.balance,
+      currency: balance.data.currency || "BTC", // set default currency for every account
+    },
   };
 
   return {

@@ -180,16 +180,16 @@ export default function AlbyWallet({ variant }: Props) {
         />
       </div>
       {variant === "login" && (
-        <div>
+        <p className="mb-2 text-gray-700 dark:text-neutral-400">
           <a
             className="underline"
             target="_blank"
             rel="noreferrer noopener"
             href="https://getalby.com/password_resets/new"
           >
-            Forgot password?
+            {t("pre_connect.forgot_password")}
           </a>
-        </div>
+        </p>
       )}
       {variant === "create" && (
         <div className="mt-6">
