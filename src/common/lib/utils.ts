@@ -1,43 +1,9 @@
 import browser, { Runtime } from "webextension-polyfill";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
-import state from "~/extension/background-script/state";
+import { getPosition as getWindowPosition } from "~/common/utils/window";
 import type { Invoice, OriginData, OriginDataInternal } from "~/types";
 
 const utils = {
-  call: <T = Record<string, unknown>>(
-    action: string,
-    args?: Record<string, unknown>,
-    overwrites?: Record<string, unknown>
-  ) => {
-    return browser.runtime
-      .sendMessage({
-        application: "LBE",
-        prompt: true,
-        action: action,
-        args: args,
-        origin: { internal: true },
-        ...overwrites,
-      })
-      .then((response: { data: T; error?: string }) => {
-        if (response.error) {
-          throw new Error(response.error);
-        }
-
-        return response.data;
-      });
-  },
-  notify: (options: { title: string; message: string }) => {
-    const settings = state.getState().settings;
-    if (!settings.browserNotifications) return;
-
-    const notification: browser.Notifications.CreateNotificationOptions = {
-      type: "basic",
-      iconUrl: "assets/icons/alby_icon_yellow_48x48.png",
-      ...options,
-    };
-
-    return browser.notifications.create(notification);
-  },
   base64ToHex: (str: string) => {
     const hex = [];
     for (
@@ -80,7 +46,7 @@ const utils = {
   openUrl: (url: string) => {
     browser.tabs.create({ url });
   },
-  openPrompt: <Type>(message: {
+  openPrompt: async <Type>(message: {
     args: Record<string, unknown>;
     origin: OriginData | OriginDataInternal;
     action: string;
@@ -101,13 +67,20 @@ const utils = {
       "prompt.html"
     )}?${urlParams.toString()}`;
 
+    const windowWidth = 400;
+    const windowHeight = 600;
+
+    const { top, left } = await getWindowPosition(windowWidth, windowHeight);
+
     return new Promise((resolve, reject) => {
       browser.windows
         .create({
           url: url,
           type: "popup",
-          width: 400,
-          height: 600,
+          width: windowWidth,
+          height: windowHeight,
+          top: top,
+          left: left,
         })
         .then((window) => {
           let tabId: number | undefined;
@@ -115,6 +88,15 @@ const utils = {
             tabId = window.tabs[0].id;
           }
 
+          // this interval hightlights the popup in the taskbar
+          const focusInterval = setInterval(() => {
+            if (!window.id) {
+              return;
+            }
+            browser.windows.update(window.id, {
+              drawAttention: true,
+            });
+          }, 2100);
           const onMessageListener = (
             responseMessage: {
               response?: unknown;
@@ -129,6 +111,7 @@ const utils = {
               sender.tab &&
               sender.tab.id === tabId
             ) {
+              clearInterval(focusInterval);
               browser.tabs.onRemoved.removeListener(onRemovedListener);
               if (sender.tab.windowId) {
                 return browser.windows.remove(sender.tab.windowId).then(() => {
@@ -145,6 +128,7 @@ const utils = {
           };
 
           const onRemovedListener = (tid: number) => {
+            clearInterval(focusInterval);
             if (tabId === tid) {
               browser.runtime.onMessage.removeListener(onMessageListener);
               reject(new Error(ABORT_PROMPT_ERROR));

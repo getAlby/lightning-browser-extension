@@ -13,10 +13,11 @@ function CompanionDownloadInfo({ hasTorCallback }: Props) {
   });
 
   function getOS() {
-    if (navigator.appVersion.indexOf("Win") != -1) return "Windows";
-    if (navigator.appVersion.indexOf("Mac") != -1) return "MacOS";
-    if (navigator.appVersion.indexOf("X11") != -1) return "UNIX";
-    if (navigator.appVersion.indexOf("Linux") != -1) return "Linux";
+    const userAgent = navigator.userAgent;
+    if (userAgent.indexOf("Win") !== -1) return "Windows";
+    if (userAgent.indexOf("Mac") !== -1) return "MacOS";
+    if (userAgent.indexOf("X11") !== -1) return "UNIX";
+    if (userAgent.indexOf("Linux") !== -1) return "Linux";
   }
 
   // TODO: check if the companion app is already installed
@@ -29,7 +30,7 @@ function CompanionDownloadInfo({ hasTorCallback }: Props) {
             <a
               href={`https://getalby.com/install/companion/${getOS()}`}
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
               className="font-bold"
             >
               {t("download_here")}

@@ -1,0 +1,719 @@
+{
+  "translation": {
+    "welcome": {
+      "nav": {
+        "welcome": "Tervetuloa",
+        "password": "Salasanasi",
+        "connect": "Lightning-tilisi",
+        "done": "Tehty"
+      },
+      "intro": {
+        "send": {
+          "title": "Lähetä yhdellä napsautuksella",
+          "description": "Lightning-transaktiot tapahtuvat selaimessasi. Alt+tab tai QR-koodin skannausta ei tarvita."
+        },
+        "paywall": {
+          "title": "Ei enää ärsyttäviä maksumuureja",
+          "description": "Määrittele verkkosivustoille omat budjetit, jotta maksuvirrat ovat saumattomia. Ei enää ärsyttäviä maksumuureja."
+        },
+        "privacy": {
+          "title": "Yksityisyys ensin",
+          "description": "Käytä Lightningia todentamiseen ja yksityisyyden hallintaan."
+        },
+        "foss": {
+          "title": "Ilmainen ja avoin lähdekoodi",
+          "description": "Täysin avoin koodi, jonka kuka tahansa voi tarkastaa. Ei tilastoja tai jäljittimiä. Sinä hallitset."
+        },
+        "actions": {
+          "get_started": "Aloita"
+        }
+      },
+      "set_password": {
+        "title": "Aseta lukituksen avaussalasana",
+        "description": "Lightning-tilisi tiedot on salattu turvallisesti salasanan avulla. Älä unohda tätä salasanaa! Tarvitset sitä avataksesi Alby-laajennuksen lukituksen (tässä selaimessa)",
+        "choose_password": {
+          "label": "Valitse lukituksen avaamissalasana:"
+        },
+        "confirm_password": {
+          "label": "Vahvistetaan, että kirjoitit sen oikein:"
+        },
+        "errors": {
+          "enter_password": "Syötä salasana.",
+          "confirm_password": "Vahvista salasanasi.",
+          "mismatched_password": "Salasanat eivät täsmää."
+        }
+      },
+      "test_connection": {
+        "ready": "Mahtavaa, olet valmis menemään!",
+        "tutorial": "Nyt kun olet yhdistänyt lompakkosi, haluaisitko käydä läpi opastuksen?",
+        "try_tutorial": "Kokeile sitä nyt",
+        "initializing": "Tilin alustaminen. Odota, tämä voi kestää hetken...",
+        "connection_error": "Yhteysvirhe",
+        "review_connection_details": "Ole hyvä ja tarkista yhteystietosi.",
+        "connection_taking_long": "Yhteyden muodostaminen kestää odotettua kauemmin... Ovatko tietosi oikein? Onko solmusi tavoitettavissa?",
+        "contact_support": "Jos tarvitset apua, ota yhteyttä osoitteeseen support@getalby.com",
+        "actions": {
+          "delete_edit_account": "Poista virheellinen tili ja muokkaa uudelleen"
+        }
+      }
+    },
+    "choose_connector": {
+      "description": "Sinun täytyy ensin muodostaa yhteys Lightning-lompakkoon, jotta voit olla vuorovaikutuksessa suosikkisivustojesi kanssa, jotka hyväksyvät Bitcoin Lightning -maksut!",
+      "lnd": {
+        "title": "LND",
+        "page": {
+          "title": "Yhdistä LND-solmuusi",
+          "description": "Tarvitset solmusi URL-osoitteen ja macaroonin, jolla on luku- ja lähetysoikeudet (esim. admin.macaroon)"
+        },
+        "url": {
+          "label": "REST API:n kone ja portti",
+          "placeholder": "https://sinun-solmusi-url:8080"
+        },
+        "macaroon": {
+          "label": "Macaroon (HEX-muoto)"
+        },
+        "or": "Tai",
+        "drag_and_drop": "Vedä ja pudota makaroonisi tänne tai <0>selaa</0>",
+        "errors": {
+          "connection_failed": "Yhteys epäonnistui. Ovatko LND-tunnuksesi oikein?"
+        }
+      },
+      "lndhub_bluewallet": {
+        "title": "Sinilompakko",
+        "page": {
+          "title": "Yhdistä sinilompakkoosi",
+          "description": "Valitse sinilompakossa lompakko, jonka haluat yhdistää, avaa se, napsauta \"...\", napsauta Vie/Varmuuskopioi näyttääksesi QR-koodin ja skannaa se webbikamerallasi."
+        },
+        "uri": {
+          "label": "Sinilompakon vienti-URI"
+        },
+        "errors": {
+          "invalid_uri": "Virheellinen sinilompakon URI",
+          "connection_failed": "Yhteys epäonnistui. Onko sinilompakon URI oikein?"
+        }
+      },
+      "lndhub_go": {
+        "title": "LNDHub",
+        "page": {
+          "title": "Yhdistä LNDHubiin",
+          "description": "Syötä LNDHub-tunnuksesi URI tästä tai skannaa QR-koodi webbikamerallasi."
+        },
+        "uri": {
+          "label": "LNDHubin vienti-URI"
+        },
+        "errors": {
+          "invalid_uri": "Virheellinen LNDHubin URI",
+          "connection_failed": "Yhteys epäonnistui. Onko LNDHubin URI oikein?"
+        }
+      },
+      "lnbits": {
+        "title": "LNbits",
+        "page": {
+          "title": "Yhdistä <0>LNbits</0>:een",
+          "instructions": "Valitse LNbitsissä lompakko, johon haluat yhdistää, avaa se, napsauta API-tiedot ja kopioi järjestelmänvalvojan avain. Liitä se alle:"
+        },
+        "admin_key": {
+          "label": "LNbitsin järjestelmänvalvojan avain",
+          "placeholder": "32-numeroinen järjestelmänvalvojan avaimesi"
+        },
+        "url": {
+          "label": "LNbitsin URL-osoite"
+        },
+        "errors": {
+          "connection_failed": "Yhteys epäonnistui. Onko sinulla oikea URL-osoite ja järjestelmänvalvojan avain?"
+        }
+      },
+      "eclair": {
+        "title": "Eclair",
+        "page": {
+          "title": "Yhdistä <0>Eclairiin</0>",
+          "instructions": "Tarvitset Eclairin URL-osoitteen ja salasanan."
+        },
+        "password": {
+          "label": "Eclair-salasana"
+        },
+        "url": {
+          "label": "Eclairin URL-osoite",
+          "placeholder": "http://localhost:8080"
+        }
+      },
+      "citadel": {
+        "title": "Citadel",
+        "page": {
+          "title": "Yhdistä <0>Citadel</0> solmuun",
+          "instructions": "Tämä ei tällä hetkellä toimi, jos 2FA on käytössä."
+        },
+        "password": {
+          "label": "Citadel-salasana"
+        },
+        "url": {
+          "label": "Citadelin URL-osoite",
+          "placeholder": "http://citadel.local"
+        }
+      },
+      "umbrel": {
+        "title": "Umbrel",
+        "page": {
+          "title": "Yhdistä <0>Umbrel</0>-solmuun",
+          "instructions": "Siirry Umbrelin kojelaudassa kohtaan <0>Yhdistä lompakkoon</0>. Valitse <0>lndconnect REST</0> ja kopioi <0>lndconnect URL-osoite</0>. (Asetuksistasi riippuen voit käyttää joko paikallista yhteyttä tai Tor-yhteyttä)"
+        },
+        "rest_url": {
+          "label": "lndconnect -REST URL-osoite",
+          "placeholder": "lndconnect://solmusi:8080?..."
+        }
+      },
+      "mynode": {
+        "title": "myNode",
+        "page": {
+          "title": "Yhteys <0>myNode</0>:een",
+          "instructions": "Napsauta myNode-etusivullasi <0>Lompakko</0>-painiketta <0>Lightning</0>-palvelun kohdalla.<1/> Napsauta nyt <0>Muodosta parilompakko</0>-painiketta <0>Tila</0>-välilehden alla. Syötä salasanasi, kun sitä pyydetään.<1/> Valitse pudotusvalikosta pariliitäntävaihtoehto. Asetuksestasi riippuen voit käyttää joko <0>Lightning (REST + paikallinen IP-osoite)</0> -yhteyttä tai <0>Lightning (REST + Tor)</0> -yhteyttä."
+        },
+        "rest_url": {
+          "label": "lndconnect -REST URL-osoite",
+          "placeholder": "lndconnect://solmusi:8080?..."
+        }
+      },
+      "start9": {
+        "title": "Start9",
+        "page": {
+          "title": "Yhdistä <0>Embassy</0>-solmuun",
+          "instructions": "<0>Huomautus:</0> Tällä hetkellä tuemme vain LND:tä, mutta lisäämme c-lightning-tuen tulevaisuudessa!<1/>Klikkaa Embassy-kojelaudallasi <0>Lightning Network Daemon</0> -palvelua.<1/>Valitse <0>Ominaisuudet</0>-välilehti.<1/>Kopioi nyt <0>LND Yhdistä -REST URL-osoite.</0>"
+        },
+        "rest_url": {
+          "label": "lndconnect -REST URL-osoite",
+          "placeholder": "lndconnect://solmusi:8080?..."
+        }
+      },
+      "raspiblitz": {
+        "title": "RaspiBlitz",
+        "page": {
+          "title": "Yhdistä <0>RaspiBlitz</0>solmuusi",
+          "instructions1": "Tarvitset solmusi sipuliosoitteen, portin ja makaroonin, jolla on luku- ja lähetysoikeudet (esim. admin.makaroon). <1/><1/><0>SSH</0> sisään <0>RaspiBlitz</0>. <1/>Aja komento <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Kopioi ja liitä <0>.onion</0> osoite alla olevaan syötteeseen.<1/>Lisää <0>portti</0> sipilin osoitteen perään, oletusportti on <0>:8080</0>.",
+          "instructions2": "Valitse <0>Yhdistä</0>. <1/>Valitse <0>Vie</0>. <1/>Valitse <0>HEX</0>. <1/>Kopioi <0>adminMacaroon</0>. <1/>Liitä macaroon alla olevaan syötteeseen."
+        },
+        "rest_api_host": {
+          "label": "REST API -kone",
+          "placeholder": "solmusi-sipuli-osoite:portti"
+        }
+      },
+      "bitcoin_beach": {
+        "title": "Bitcoin Beach -lompakko",
+        "page": {
+          "title": "Yhdistä <0>Bitcoin Beach -lompakkoon</0>"
+        }
+      },
+      "bitcoin_jungle": {
+        "title": "Bitcoin Jungle - lompakko",
+        "page": {
+          "title": "Yhdistä <0>Bitcoin Jungle -lompakkoon</0>"
+        }
+      },
+      "galoy": {
+        "phone_number": {
+          "label": "Syötä puhelinnumerosi"
+        },
+        "sms_code": {
+          "label": "Syötä tekstiviestivahvistuskoodisi"
+        },
+        "jwt": {
+          "label": "Syötä JWT-tunnuksesi",
+          "info": "Kirjautumistunnusta {{label}} päivitetään parhaillaan. Jos olet kokenut käyttäjä, voit napata JWT-tunnuksesi kirjautumalla sisään <0>Verkkolompakon (wallet.mainnet.galoy.io) kautta</0><1/><1/>JWT näyttää tältä: < 2>eyJhbG...</2><1/><1/>"
+        },
+        "actions": {
+          "login": "Kirjaudu sisään",
+          "request_sms_code": "Pyydä tekstiviestikoodi"
+        },
+        "errors": {
+          "failed_to_request_sms": "Tekstiviestikoodin pyytäminen epäonnistui",
+          "failed_to_login_sms": "Kirjautuminen SMS-koodilla epäonnistui",
+          "setup_failed": "Määritys epäonnistui",
+          "missing_jwt": "JWT puuttuu, sisäänkirjautuminen ei onnistunut.",
+          "invalid_jwt": "virheellinen JWT välitetty"
+        }
+      },
+      "btcpay": {
+        "title": "BTCPay-palvelin",
+        "page": {
+          "title": "Yhdistä BTCPay LND -solmuusi",
+          "instructions": "Siirry BTCPayServerillesi ja kirjaudu sisään järjestelmänvalvojana. Siirry kohtaan Palvelinasetukset > Palvelut > LND Rest - Katso tiedot. Napsauta sitten \"Katso QR-koodin tiedot\" ja kopioi QR-koodin tiedot. Liitä se alle:"
+        },
+        "config": {
+          "label": "Konfigurointitiedot",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+        },
+        "errors": {
+          "connection_failed": "Yhteys epäonnistui. Onko BTCPay-yhteyden URL-osoite oikea ja saatavilla?"
+        }
+      },
+      "commando": {
+        "title": "Core Lightning",
+        "page": {
+          "title": "Yhdistä Core Lightning -solmuusi",
+          "instructions": "Varmista, että sinulla on Core Lightning -versio 0.12.0 tai uudempi, että Commando-laajennus on käynnissä ja että solmuasi on käytettävissä Lightning-verkon kautta. Luo riimu suorittamalla \"lightning-cli commando-rune\"."
+        },
+        "host": {
+          "label": "Kone"
+        },
+        "pubkey": {
+          "label": "Julkinen avain"
+        },
+        "rune": {
+          "label": "Rune"
+        },
+        "port": {
+          "label": "Portti"
+        },
+        "proxy": {
+          "label": "Websocket-välityspalvelin"
+        },
+        "privKey": {
+          "label": "Paikallinen yksityinen avain (automaattisesti luotu)"
+        },
+        "config": {
+          "label": "Asetustiedot",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+        },
+        "errors": {
+          "connection_failed": "Yhteys epäonnistui. Onko Core Lightning -solmu verkossa ja käyttääkö Commando-laajennusta?"
+        }
+      }
+    },
+    "home": {
+      "actions": {
+        "send_satoshis": "⚡️ Lähetä Satoshis ⚡️",
+        "enable_now": "Ota nyt käyttöön"
+      },
+      "recent_transactions": "Viimeaikaiset tapahtumat",
+      "transaction_list": {
+        "tabs": {
+          "outgoing": "Lähtevä",
+          "incoming": "Saapuva"
+        }
+      },
+      "allowance_view": {
+        "recent_transactions": "Viimeaikaiset tapahtumat",
+        "allowance": "Korvaus",
+        "sats_used": "sats käytetty",
+        "no_transactions": "Ei vielä tapahtumia <0>{{name}}</0>:lla."
+      },
+      "default_view": {
+        "recent_transactions": "Viimeaikaiset tapahtumat",
+        "no_transactions": "Albyn kanssa, ei vielä tehty tapahtumia.",
+        "is_blocked_hint": "Alby on tällä hetkellä poissa käytöstä {{host}}:lla"
+      }
+    },
+    "accounts": {
+      "title": "Tilit",
+      "actions": {
+        "add_account": "Lisää tili"
+      },
+      "edit": {
+        "title": "Muokkaa tiliä",
+        "name": {
+          "label": "Nimi"
+        },
+        "screen_reader": "Muokkaa tilin nimeä"
+      },
+      "export": {
+        "title": "Vie tili",
+        "screen_reader": "Vie tilin yksityiskohdat",
+        "waiting": "Odotetaan LndHub-tietoja...",
+        "your_ln_address": "Lightning-osoitteesi:",
+        "tip_mobile": "Vinkki: Käytä tätä lompakkoa mobiililaitteesi kanssa",
+        "export_uri": "LNDHub-tunnistetietojen URI",
+        "scan_qr": "Tuo tämä lompakko Zeusiin tai sinilompakkoon skannaamalla QRCode."
+      },
+      "remove": {
+        "confirm": "Haluatko varmasti poistaa tilin: {{name}}?\nTätä ei voi peruuttaa. Jos käytit tätä tiliä verkkosivustoille kirjautumiseen, saatat menettää pääsyn niihin."
+      }
+    },
+    "enable": {
+      "title": "Yhdistä",
+      "allow": "Salli {{host}} tähän:",
+      "request1": "Pyydä hyväksyntää tapahtumille",
+      "request2": "Pyydä laskuja ja Lightning-tietoja",
+      "block_and_ignore": "Estä ja jätä huomioimatta {{host}}"
+    },
+    "unlock": {
+      "unlock_to_continue": "Avaa lukitus jatkaaksesi",
+      "unlock_password": "Avaussalasanasi",
+      "help_contact": {
+        "part1": "Tarvitsetko apua? Ottaa yhteyttä",
+        "part2": "Albyn tuki"
+      },
+      "unlock_error": {
+        "help": "Tilisi tiedot on salattu lukituksen avaussalasanallasi. Jos todella unohdit avaussalasanasi, sinun on nollattava ja lisättävä Lightning-tilisi uudelleen.",
+        "link": "Nollaa nyt ja lisää uusi tili"
+      },
+      "errors": {
+        "invalid_password": "Väärä salasana"
+      }
+    },
+    "settings": {
+      "title": "Asetukset",
+      "browser_notifications": {
+        "title": "Selaimen ilmoitukset",
+        "subtitle": "Maksuihin ja todentamiseen liittyvät ilmoitukset."
+      },
+      "website_enhancements": {
+        "title": "Verkkosivuston parannukset",
+        "subtitle": "Vinkkien parannuksia Twitterissä, YouTubessa jne."
+      },
+      "lnurl_auth": {
+        "title": "LNURL-Auth",
+        "hint": "on yleinen todennusprotokolla. Se tunnistaa käyttäjän digitaalisten allekirjoitusten avulla. Protokolla ei vaadi muita tunnistetietoja, kuten salasanoja, sähköposteja, käyttäjätunnuksia tai vastaavia. Albyn avulla voit käyttää Lightning-tilejäsi kirjautuaksesi turvallisesti verkkosivustoille. Ollaksemme yhteensopiva muiden lompakoiden kanssa, meidän piti tehdä muutamia muutoksia, jotka voit määrittää täällä. <0>Ihannetapauksessa kaikki nämä vaihtoehdot ovat Pois päältä.</0> Käytä niitä vain, jos sinulla on vanhoja tilejä.",
+        "legacy_lnurl_auth_202207": {
+          "title": "Vanha LNURL-Auth",
+          "subtitle": "Avainten luonti LNURL-Authia varten on muuttunut (heinäkuu 2022). Alby ei ollut yhteensopiva muiden toteutusten kanssa. Tätä muutettiin, mutta nyt käytetään erilaisia kirjautumisavaimia. Jos käytit kirjautumiseen LNURL-Authia, ennen kuin voit silti ottaa vanhan menetelmän käyttöön. Tämä vaihtoehto poistetaan myöhemmin, muista vaihtaa uuteen kirjautumistunnukseen."
+        },
+        "legacy_lnurl_auth": {
+          "title": "Vanha allekirjoitus LNDhubille ja LNbitsille",
+          "subtitle": "Viestien allekirjoitus ja sisäänkirjautuminen LNDhub- (esim. BlueWallet (sinilompakko)- ja LNbits-tilillä on muutettu (maaliskuu 2022). Jos kirjauduit sisään näillä tileillä, voit silti ottaa vanhan allekirjoitustavan käyttöön. Tämä vaihtoehto poistetaan myöhemmin, muista vaihtaa uuteen kirjautumistunnukseen."
+        }
+      },
+      "camera_access": {
+        "title": "Kameran käyttöoikeus",
+        "subtitle": "QR-koodien skannaamiseen",
+        "allow": "Salli kameran käyttö",
+        "granted": "Lupa myönnetty"
+      },
+      "language": {
+        "title": "Kieli",
+        "subtitle": "Käännökset eivät ole vielä 100 % valmiit. <0>Auta meitä kääntämään Alby kielellesi!</0>"
+      },
+      "theme": {
+        "title": "Teema",
+        "subtitle": "Käytä Albya tumma- tai vaalea-tilassa",
+        "options": {
+          "dark": "Tumma",
+          "light": "Vaalea",
+          "system": "Järjestelmä"
+        }
+      },
+      "show_fiat": {
+        "title": "Satista Fiatiin",
+        "subtitle": "Muunna aina valituksi valuutaksi valitusta valuutasta"
+      },
+      "currency": {
+        "title": "Valuutta",
+        "subtitle": "Näytä summat lisäksi tässä valuutassa"
+      },
+      "exchange": {
+        "title": "Valuuttalähde",
+        "subtitle": "Bitcoin-valuuttakurssien lähde"
+      },
+      "personal_data": {
+        "title": "Henkilökohtaiset tiedot",
+        "description": "Maksunsaajat voivat pyytää lisätietojen lähettämistä maksun yhteydessä. Näitä tietoja ei jaeta kenenkään kanssa ilman suostumustasi, saat aina kehotteen ennen tietojen lähettämistä maksun yhteydessä."
+      },
+      "name": {
+        "title": "Nimi",
+        "subtitle": "",
+        "placeholder": "Syötä nimesi"
+      },
+      "email": {
+        "title": "Sähköposti",
+        "subtitle": "",
+        "placeholder": "Syötä sähköpostiosoitteesi"
+      },
+      "change_password": {
+        "title": "Vaihda lukituksen avaussalasana",
+        "subtitle": "",
+        "screen_reader": "Vaihda lukituksen avaussalasana",
+        "choose_password": {
+          "label": "Syötä uusi lukituksen avaussalasana:"
+        },
+        "confirm_password": {
+          "label": "Vahvista uusi salasana:"
+        },
+        "submit": {
+          "label": "Vaihda"
+        },
+        "errors": {
+          "enter_password": "Syötä uusi lukituksen avaussalasana.",
+          "confirm_password": "Vahvista salasanasi.",
+          "mismatched_password": "Salasanat eivät täsmää."
+        },
+        "success": "Salasana vaihdettu onnistuneesti"
+      },
+      "nostr": {
+        "title": "Nostr",
+        "hint": "on yksinkertainen ja avoin protokolla, jonka tarkoituksena on luoda sensuurin kestäviä sosiaalisia verkostoja. Nostr toimii kryptografisten avainten kanssa. Jos haluat julkaista jotain, allekirjoita se avaimellasi ja lähetä se useille välittäjille. Voit käyttää Albyä Nostr-avaimen hallintaan. Monet Nostr-sovellukset sallivat sitten yksinkertaisesti käyttää avainta Alby-laajennuksesta.",
+        "private_key": {
+          "title": "Yksityinen avain",
+          "subtitle": "Avaimen luominen luo uuden avaimen nykyisen käyttämäsi tilin perusteella. Varmista, että varmuuskopioit tämän yksityisen avaimen.",
+          "generate": "Luo",
+          "warning": "Tämä poistaa vanhan yksityisen avaimesi. Oletko varma?",
+          "success": "Yksityinen avain salattu ja tallennettu onnistuneesti."
+        }
+      }
+    },
+    "send": {
+      "title": "Lähetä",
+      "qrcode": {
+        "title": "Odotetaan skannausta"
+      },
+      "input": {
+        "label": "Vastaanottaja",
+        "hint": "Lasku, Lightningin osoite tai LNURL"
+      }
+    },
+    "lnurlpay": {
+      "amount": {
+        "label": "Määrä"
+      },
+      "comment": {
+        "label": "Kommentti"
+      },
+      "name": {
+        "label": "Nimi"
+      },
+      "email": {
+        "label": "Sähköposti"
+      },
+      "success": "Onnistui, maksu lähetetty!"
+    },
+    "lnurlauth": {
+      "title": "Todennus",
+      "content_message": {
+        "heading": "Haluatko kirjautua sisään"
+      },
+      "submit": "Sisään kirjautuminen",
+      "success": "Sisään kirjautuminen onnistui {{name}}",
+      "errors": {
+        "status": "Virhe: Todennustila ei ole kunnossa"
+      }
+    },
+    "lnurlchannel": {
+      "title": "Kanavapyyntö",
+      "content_message": {
+        "heading": "Pyydä kanava solmulta"
+      },
+      "success": "Kanavapyyntö lähetetty onnistuneesti {{name}}:lle"
+    },
+    "lnurlwithdraw": {
+      "title": "Peruuta",
+      "content_message": {
+        "heading": "Määrä"
+      },
+      "amount": {
+        "label": "Määrä"
+      },
+      "success": "{{amount}}:n peruutuspyyntö lähetetty onnistuneesti {{sender}}:lle"
+    },
+    "receive": {
+      "title": "Vastaanota",
+      "actions": {
+        "create_invoice": "Luo lasku"
+      },
+      "amount": {
+        "label": "Määrä",
+        "placeholder": "Määrä Satoshissa..."
+      },
+      "description": {
+        "label": "Kuvaus",
+        "placeholder": "Esim. kuka lähettää tämän maksun?"
+      },
+      "success": "Maksu vastaanotettu!",
+      "payment": {
+        "waiting": "odotetaan maksua...",
+        "status": "Tarkista maksun tila"
+      }
+    },
+    "publishers": {
+      "publisher": {
+        "allowance": {
+          "title": "Korvaus",
+          "used_budget": "satia käytetty"
+        }
+      }
+    },
+    "make_invoice": {
+      "title": "Luo lasku",
+      "amount": {
+        "label": "Summa (Satoshi)"
+      },
+      "memo": {
+        "label": "Muistio"
+      },
+      "errors": {
+        "amount_too_small": "Määrä on alle vähimmäismäärän",
+        "amount_too_big": "Määrä ylittää enimmäismäärän"
+      }
+    },
+    "confirm_sign_message": {
+      "title": "Allekirjoita",
+      "content": "{{host}} pyytää sinua allekirjoittamaan:"
+    },
+    "confirm_keysend": {
+      "title": "Hyväksy maksu",
+      "success": "Maksu lähetetty! esikuva: {{preimage}}",
+      "payment_summary": {
+        "description": "Lähetä maksu {{destination}}:een"
+      }
+    },
+    "keysend": {
+      "title": "Lähetä",
+      "success": "Maksu lähetetty! esikuva: {{preimage}}",
+      "receiver": {
+        "label": "Lähetä maksu tähän"
+      },
+      "amount": {
+        "label": "Määrä (Satoshi)"
+      }
+    },
+    "confirm_payment": {
+      "title": "Hyväksy maksu",
+      "success": "{{amount}}:n maksu onnistui!",
+      "actions": {
+        "pay_now": "Maksa nyt"
+      }
+    },
+    "confirm_request_permission": {
+      "title": "Hyväksy pyyntö",
+      "allow": "Salli {{host}}:",
+      "always_allow": "Salli aina {{metodi}} {{host}}:lla"
+    },
+    "nostr": {
+      "title": "Nostr",
+      "allow": "Salli {{host}}:",
+      "read_public_key": "Lue julkinen avaimesi",
+      "block_and_ignore": "Estä ja jätä huomiotta {{host}}"
+    }
+  },
+  "common": {
+    "password": "Salasana",
+    "advanced": "Edistynyt",
+    "success": "Menestys",
+    "error": "Virhe",
+    "settings": "Asetukset",
+    "websites": "Verkkosivustot",
+    "sats_one": "sat",
+    "sats_other": "satia",
+    "loading": "ladataan",
+    "amount": "Summa",
+    "optional": "Valinnainen",
+    "feedback": "Palaute",
+    "copied": "Kopioitu!",
+    "description": "Kuvaus",
+    "description_full": "Täydellinen kuvaus",
+    "success_message": "{{amount}}{{{fiatAmount}} lähetetty {{destination}}:een",
+    "response": "Vastaus",
+    "message": "Viesti",
+    "help": "Apu",
+    "actions": {
+      "back": "Takaisin",
+      "delete": "Poista",
+      "edit": "Muokkaa",
+      "next": "Seuraava",
+      "open": "Avaa",
+      "cancel": "Peru",
+      "confirm": "Vahvista",
+      "continue": "Jatka",
+      "connect": "Yhdistä",
+      "lock": "Lukitse",
+      "unlock": "Avaa lukitus",
+      "send": "Lähetä",
+      "save": "Tallenna",
+      "receive": "Vastaanota",
+      "close": "Sulje",
+      "export": "Vie",
+      "remove": "Poista",
+      "copy": "Kopioi"
+    },
+    "errors": {
+      "connection_failed": "Yhteyden muodostaminen epäonnistui",
+      "payment_failed": "Maksu ei onnistunut"
+    }
+  },
+  "components": {
+    "allowance_menu": {
+      "confirm_delete": "Haluatko varmasti poistaa tämän verkkosivuston?",
+      "hint": "Tämä nollaa voimassa olevan budgetin",
+      "new_budget": {
+        "label": "Uusi budjetti"
+      },
+      "enable_login": {
+        "title": "Ota verkkosivustoon kirjautuminen käyttöön",
+        "subtitle": "Automaattinen kirjautuminen ilman vahvistusta, kun verkkosivusto pyytää."
+      },
+      "edit_allowance": {
+        "title": "Muokkaa korvausta",
+        "screen_reader": "Korvausvaihtoehdot"
+      }
+    },
+    "qrcode_scanner": {
+      "title": "Skannaa QR-koodi",
+      "actions": {
+        "start_scanning": "Aloita skannaus",
+        "stop_scanning": "Lopeta skannaus"
+      },
+      "errors": {
+        "allow_camera_access": "Salli kameran käyttöoikeus asetusruudussa."
+      }
+    },
+    "transactionsTable": {
+      "fee": "Kustannus",
+      "preimage": "Esikuva",
+      "received": "Vastaanotettu",
+      "sent": "Lähetetty",
+      "boostagram": {
+        "sender": "Lähettäjä",
+        "message": "Viesti",
+        "app": "Sovellus",
+        "podcast": "Podcast"
+      }
+    },
+    "confirm_or_cancel": {
+      "only_trusted": "Muodosta yhteys vain sellaisiin sivustoihin, joihin luotat."
+    },
+    "budget_control": {
+      "remember": {
+        "label": "Muista ja aseta budjetti",
+        "description": "Voit asettaa saldon niin, että maksujen vahvistusta ei pyydetä ennen kuin se on käytetty kokonaan."
+      },
+      "budget": {
+        "label": "Budjetti"
+      }
+    },
+    "companion_download_info": {
+      "description": "Yrität muodostaa yhteyden Torin takana olevaan solmuun. Tätä varten sinulla on oltava joko asennettuna Alby companion -sovellus tai Tor käynnissä. (Kun olet epävarma, suosittelemme Alby companion -sovellusta.)",
+      "download_here": "Lataa Alby companion täältä!",
+      "using_tor": "klikkaa tästä jatkaaksesi, jos käytät Tor-selainta",
+      "or": "Tai:"
+    },
+    "toasts": {
+      "connection_error": {
+        "what_you_can_do": "Voit tehdä näin:",
+        "double_check": "Tarkista yhteystiedot kahdesti",
+        "if_ssl_errors": "ja jos on SSL-virheitä (esim. ERR_CERT_AUTHORITY_INVALID), valitse \"edistynyt\" ja jatka varmenteen hyväksymistä.",
+        "visit_guides": "Lue oppaita saadaksesi lisää apua"
+      },
+      "login_failed": {
+        "password_reset": "Unohditko salasanasi? Klikkaa tästä"
+      },
+      "errors": {
+        "invalid_credentials": "Virheellinen salasana. Tarkista salasanasi ja sähköpostiosoitteesi ja yritä uudelleen."
+      }
+    },
+    "account_menu": {
+      "screen_reader": "Vaihda pudotusvalikko",
+      "title": "Vaihda tili",
+      "options": {
+        "account": {
+          "add": "Lisää uusi tili",
+          "manage": "Hallitse tilejä"
+        }
+      }
+    },
+    "publishers_table": {
+      "payments": "maksut",
+      "used": "käytetty"
+    },
+    "badge": {
+      "label": {
+        "active": "TOIMIVA"
+      }
+    }
+  }
+}

@@ -20,7 +20,8 @@ import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import { CURRENCIES } from "~/common/constants";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
+import nostrlib from "~/common/lib/nostr";
 
 const initialFormData = {
   password: "",
@@ -38,8 +39,10 @@ function Settings() {
   const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
 
   const getPrivateKeyFromStorage = async () => {
-    const priv = (await utils.call("nostr/getPrivateKey")) as string;
-    setNostrPrivateKey(priv ?? "");
+    const priv = (await msg.request("nostr/getPrivateKey")) as string;
+    if (priv) {
+      setNostrPrivateKey(nostrlib.hexToNip19(priv, "nsec"));
+    }
   };
 
   useEffect(() => {
@@ -54,7 +57,7 @@ function Settings() {
   }
 
   async function saveNostrPrivateKey(nostrPrivateKey: string) {
-    const result = await utils.call("nostr/getPrivateKey");
+    const result = await msg.request("nostr/getPrivateKey");
     const currentPrivateKey = result as unknown as string;
 
     if (nostrPrivateKey === currentPrivateKey) return;
@@ -63,8 +66,8 @@ function Settings() {
       return;
     }
 
-    await utils.call("nostr/setPrivateKey", {
-      privateKey: nostrPrivateKey,
+    await msg.request("nostr/setPrivateKey", {
+      privateKey: nostrlib.normalizeToHex(nostrPrivateKey),
     });
 
     saveSetting({
@@ -74,7 +77,7 @@ function Settings() {
   }
 
   async function updateAccountPassword(password: string) {
-    await utils.call("changePassword", {
+    await msg.request("changePassword", {
       password: formData.password,
     });
     toast.success(t("change_password.success"));
@@ -157,7 +160,7 @@ function Settings() {
                 <a
                   className="underline"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noreferrer noopener"
                   href="https://hosted.weblate.org/projects/getalby-lightning-browser-extension/getalby-lightning-browser-extension/"
                 ></a>,
               ]}
@@ -325,7 +328,7 @@ function Settings() {
           closeTimeoutMS={200}
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
-          contentLabel={t("change_password.content_label")}
+          contentLabel={t("change_password.screen_reader")}
           overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
           className="rounded-lg bg-white w-full max-w-lg"
         >
@@ -367,6 +370,100 @@ function Settings() {
         </Modal>
       </div>
 
+      <div className="relative flex py-5 mt-5 items-center">
+        <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+        <span className="flex-shrink mx-4 text-gray-500 dark:text-gray-400 fw-bold">
+          🧪 Alby Lab
+        </span>
+        <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+      </div>
+      <h2 className="text-2xl font-bold dark:text-white">{t("nostr.title")}</h2>
+      <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
+        <a
+          href="https://github.com/nostr-protocol/nostr"
+          target="_blank"
+          rel="noreferrer noopener"
+          className="underline"
+        >
+          {t("nostr.title")}
+        </a>{" "}
+        {t("nostr.hint")}
+      </p>
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+        <Setting
+          title={t("nostr.private_key.title")}
+          subtitle={
+            <Trans
+              i18nKey={"nostr.private_key.subtitle"}
+              t={t}
+              components={[
+                // eslint-disable-next-line react/jsx-key
+                <a
+                  className="underline"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  href="https://guides.getalby.com/overall-guide/alby-browser-extension/features/nostr"
+                ></a>,
+              ]}
+            />
+          }
+        >
+          <div className="w-96 flex justify-end">
+            <div className="w-96 flex-auto -mt-1 ml-6">
+              <TextField
+                id="nostrPrivateKey"
+                label={""}
+                type={nostrPrivateKeyVisible ? "text" : "password"}
+                value={nostrPrivateKey}
+                onBlur={() => {
+                  saveNostrPrivateKey(nostrPrivateKey);
+                }}
+                onChange={(event) => {
+                  setNostrPrivateKey(event.target.value);
+                }}
+                endAdornment={
+                  <button
+                    type="button"
+                    tabIndex={-1}
+                    className="flex justify-center items-center w-10 h-8"
+                    onClick={() => {
+                      setNostrPrivateKeyVisible(!nostrPrivateKeyVisible);
+                    }}
+                  >
+                    {nostrPrivateKeyVisible ? (
+                      <HiddenIcon className="h-6 w-6" />
+                    ) : (
+                      <VisibleIcon className="h-6 w-6" />
+                    )}
+                  </button>
+                }
+              />
+            </div>
+            {!nostrPrivateKey && (
+              <div className="flex-none ml-2 flex-end">
+                <Button
+                  label={t("nostr.private_key.generate")}
+                  onClick={async () => {
+                    const result = await msg.request(
+                      "nostr/generatePrivateKey"
+                    );
+                    setNostrPrivateKey(result.privateKey as string);
+                    saveNostrPrivateKey(result.privateKey as string);
+                  }}
+                />
+              </div>
+            )}
+          </div>
+        </Setting>
+      </div>
+
+      <div className="relative flex py-5 mt-5 items-center">
+        <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+        <span className="flex-shrink mx-4 text-gray-500 dark:text-gray-400 fw-bold">
+          👴 Legacy Settings
+        </span>
+        <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+      </div>
       <h2 className="mt-12 text-2xl font-bold dark:text-white">
         {t("lnurl_auth.title")}
       </h2>
@@ -374,7 +471,7 @@ function Settings() {
         <a
           href="https://lightninglogin.live/learn"
           target="_blank"
-          rel="noreferrer"
+          rel="noreferrer noopener"
           className="underline"
         >
           {t("lnurl_auth.title")}
@@ -418,76 +515,6 @@ function Settings() {
               }}
             />
           )}
-        </Setting>
-      </div>
-      <div className="relative flex py-5 mt-5 items-center">
-        <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
-        <span className="flex-shrink mx-4 text-gray-500 dark:text-gray-400 fw-bold">
-          🧪 Alby Lab
-        </span>
-        <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
-      </div>
-      <h2 className="text-2xl font-bold dark:text-white">{t("nostr.title")}</h2>
-      <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
-        <a
-          href="https://github.com/nostr-protocol/nostr"
-          target="_blank"
-          rel="noreferrer"
-          className="underline"
-        >
-          {t("nostr.title")}
-        </a>{" "}
-        {t("nostr.hint")}
-      </p>
-      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
-        <Setting
-          title={t("nostr.private_key.title")}
-          subtitle={t("nostr.private_key.subtitle")}
-        >
-          <div className="w-96 flex justify-end">
-            <div className="w-96 flex-auto -mt-1">
-              <TextField
-                id="nostrPrivateKey"
-                label={""}
-                type={nostrPrivateKeyVisible ? "text" : "password"}
-                value={nostrPrivateKey}
-                onBlur={() => {
-                  saveNostrPrivateKey(nostrPrivateKey);
-                }}
-                onChange={(event) => {
-                  setNostrPrivateKey(event.target.value);
-                }}
-                endAdornment={
-                  <button
-                    type="button"
-                    tabIndex={-1}
-                    className="flex justify-center items-center w-10 h-8"
-                    onClick={() => {
-                      setNostrPrivateKeyVisible(!nostrPrivateKeyVisible);
-                    }}
-                  >
-                    {nostrPrivateKeyVisible ? (
-                      <HiddenIcon className="h-6 w-6" />
-                    ) : (
-                      <VisibleIcon className="h-6 w-6" />
-                    )}
-                  </button>
-                }
-              />
-            </div>
-            {!nostrPrivateKey && (
-              <div className="flex-none ml-2 flex-end">
-                <Button
-                  label={t("nostr.private_key.generate")}
-                  onClick={async () => {
-                    const result = await utils.call("nostr/generatePrivateKey");
-                    setNostrPrivateKey(result.privateKey as string);
-                    saveNostrPrivateKey(result.privateKey as string);
-                  }}
-                />
-              </div>
-            )}
-          </div>
         </Setting>
       </div>
     </Container>

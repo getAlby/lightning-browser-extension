@@ -1,19 +1,22 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
-import * as SettingsContext from "~/app/context/SettingsContext";
 import type { LNURLDetails, OriginData } from "~/types";
 
 import LNURLPay from "./index";
 
 const mockGetFiatValue = jest.fn(() => Promise.resolve("$1,22"));
 
-jest.spyOn(SettingsContext, "useSettings").mockReturnValue({
-  settings: mockSettings,
-  isLoading: false,
-  updateSetting: jest.fn(),
-  getFiatValue: mockGetFiatValue,
-});
+jest.mock("~/app/context/SettingsContext", () => ({
+  useSettings: () => ({
+    settings: mockSettings,
+    isLoading: false,
+    updateSetting: jest.fn(),
+    getFormattedFiat: mockGetFiatValue,
+    getFormattedNumber: jest.fn(),
+    getFormattedSats: jest.fn(),
+  }),
+}));
 
 const mockDetails: LNURLDetails = {
   callback: "https://lnurlcallback.example.com",

@@ -17,7 +17,6 @@ import Connector, {
   GetInfoResponse,
   GetBalanceResponse,
   GetInvoicesResponse,
-  ConnectPeerArgs,
   ConnectPeerResponse,
   ConnectorInvoice,
   MakeInvoiceArgs,
@@ -188,9 +187,12 @@ class Lnc implements Connector {
     };
   }
 
-  connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse | Error> {
-    //const { pubkey, host } = args;
-    throw new Error("Not implemented yet");
+  // not yet implemented
+  async connectPeer(): Promise<ConnectPeerResponse> {
+    console.error(
+      `${this.constructor.name} does not implement the getInvoices call`
+    );
+    throw new Error("Not yet supported with the currently used account.");
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
@@ -312,6 +314,7 @@ class Lnc implements Connector {
       });
   }
 
+  /*
   requestLNC(method: FixMe, args: FixMe) {
     const func = method.split(".").reduce((obj: FixMe, prop: FixMe) => {
       return obj[prop];
@@ -320,6 +323,7 @@ class Lnc implements Connector {
       return { data };
     });
   }
+  */
 }
 
 export default Lnc;

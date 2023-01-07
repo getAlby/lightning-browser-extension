@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
+import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 
 import Menu from "../Menu";
@@ -48,7 +49,7 @@ function AccountMenu({ showOptions = true }: Props) {
     setLoading(true);
     try {
       setAccountId(accountId);
-      await utils.call("selectAccount", {
+      await msg.request("selectAccount", {
         id: accountId,
       });
       await fetchAccountInfo({ accountId });
@@ -89,13 +90,13 @@ function AccountMenu({ showOptions = true }: Props) {
           {title || <Skeleton />}
         </p>
 
-        {balancesDecorated.satsBalance ? (
+        {balancesDecorated.accountBalance ? (
           <p className="flex justify-between">
             <span className="text-xs dark:text-white">
-              {balancesDecorated.satsBalance}
+              {balancesDecorated.accountBalance}
             </span>
             {!!balancesDecorated.fiatBalance && (
-              <span className="text-xs text-gray-600 dark:text-neutral-400">
+              <span className="text-xs text-gray-600 dark:text-neutral-400 ml-2">
                 ~{balancesDecorated.fiatBalance}
               </span>
             )}

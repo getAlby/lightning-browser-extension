@@ -2,6 +2,7 @@ import Citadel from "./citadel";
 import Commando from "./commando";
 import Eclair from "./eclair";
 import Galoy from "./galoy";
+import Kollider from "./kollider";
 import LnBits from "./lnbits";
 import Lnc from "./lnc";
 import Lnd from "./lnd";
@@ -32,6 +33,7 @@ const connectors = {
   citadel: Citadel,
   nativecitadel: NativeCitadel,
   commando: Commando,
+  kollider: Kollider,
 };
 
 export default connectors;

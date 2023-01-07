@@ -9,8 +9,16 @@ const nostrCalls = [
   "nostr/getPublicKeyOrPrompt",
   "nostr/signEventOrPrompt",
   "nostr/getRelays",
+  "nostr/enable",
+  "nostr/encryptOrPrompt",
+  "nostr/decryptOrPrompt",
 ];
-let callActive = false;
+// calls that can be executed when webln is not enabled for the current content page
+const disabledCalls = ["nostr/enable"];
+
+let isEnabled = false; // store if nostr is enabled for this content page
+let isRejected = false; // store if the nostr enable call failed. if so we do not prompt again
+let callActive = false; // store if a nostr call is currently active. Used to prevent multiple calls in parallel
 
 async function init() {
   const inject = await shouldInject();
@@ -32,6 +40,13 @@ async function init() {
     }
 
     if (ev.data && !ev.data.response) {
+      // if an enable call railed we ignore the request to prevent spamming the user with prompts
+      if (isRejected) {
+        console.error(
+          "Enable had failed. Rejecting further WebLN calls until the next reload"
+        );
+        return;
+      }
       // if a call is active we ignore the request
       if (callActive) {
         console.error("nostr call already executing");
@@ -41,7 +56,8 @@ async function init() {
       // limit the calls that can be made from window.nostr
       // only listed calls can be executed
       // if not enabled only enable can be called.
-      if (!nostrCalls.includes(ev.data.action)) {
+      const availableCalls = isEnabled ? nostrCalls : disabledCalls;
+      if (!availableCalls.includes(ev.data.action)) {
         console.error("Function not available.");
         return;
       }
@@ -59,6 +75,16 @@ async function init() {
 
       const replyFunction = (response) => {
         callActive = false; // reset call is active
+
+        if (ev.data.action === "nostr/enable") {
+          isEnabled = response.data?.enabled;
+          if (response.error) {
+            console.error(response.error);
+            console.info("Enable was rejected ignoring further nostr calls");
+            isRejected = true;
+          }
+        }
+
         window.postMessage(
           {
             application: "LBE",

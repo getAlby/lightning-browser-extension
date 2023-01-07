@@ -1,7 +1,3 @@
-import {
-  HiddenIcon,
-  VisibleIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import LoginFailedToast from "@components/toasts/LoginFailedToast";
@@ -11,7 +7,8 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import utils from "~/common/lib/utils";
+import PasswordForm from "~/app/components/PasswordForm";
+import msg from "~/common/lib/msg";
 
 const walletCreateUrl =
   process.env.WALLET_CREATE_URL || "https://app.regtest.getalby.com/api/users";
@@ -25,17 +22,25 @@ interface LNDHubCreateResponse {
   lnAddress: string;
 }
 
-export default function NewWallet() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordView, setPasswordView] = useState(false);
-  const [lnAddress, setLnAddress] = useState("");
+export type Props = {
+  variant: "login" | "create";
+};
+
+const initialFormData = {
+  password: "",
+  passwordConfirmation: "",
+  email: "",
+  lnAddress: "",
+};
+
+export default function AlbyWallet({ variant }: Props) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
-    keyPrefix: "choose_connector.alby",
+    keyPrefix: "alby",
   });
   const { t: tCommon } = useTranslation("common");
+  const [formData, setFormData] = useState(initialFormData);
 
   function signup(event: React.FormEvent<HTMLFormElement>) {
     setLoading(true);
@@ -49,9 +54,9 @@ export default function NewWallet() {
 
     const timestamp = Math.floor(Date.now() / 1000);
     const body = JSON.stringify({
-      email,
-      password,
-      lightning_addresses_attributes: [{ address: lnAddress }], // address must be provided as array, in theory we support multiple addresses per account
+      email: formData.email,
+      password: formData.password,
+      lightning_addresses_attributes: [{ address: formData.lnAddress }], // address must be provided as array, in theory we support multiple addresses per account
     });
     headers.append("X-TS", timestamp.toString());
     const mac = hmacSHA256(body, HMAC_VERIFY_HEADER_KEY).toString(Base64);
@@ -113,11 +118,11 @@ export default function NewWallet() {
     };
 
     try {
-      const validation = await utils.call("validateAccount", account);
+      const validation = await msg.request("validateAccount", account);
       if (validation.valid) {
-        const addResult = await utils.call("addAccount", account);
+        const addResult = await msg.request("addAccount", account);
         if (addResult.accountId) {
-          await utils.call("selectAccount", {
+          await msg.request("selectAccount", {
             id: addResult.accountId,
           });
           navigate("/test-connection");
@@ -141,92 +146,90 @@ export default function NewWallet() {
   return (
     <ConnectorForm
       title={t("pre_connect.title")}
+      description={t(`pre_connect.${variant}_account`)}
       submitLoading={loading}
       onSubmit={signup}
-      submitDisabled={loading || password === "" || email === ""}
+      submitDisabled={
+        loading ||
+        formData.password === "" ||
+        formData.email === "" ||
+        (variant === "create" &&
+          formData.password !== formData.passwordConfirmation)
+      }
     >
-      <div className="mt-6 dark:text-white">
-        <strong>
-          {t("pre_connect.login_account")}
-          <br />
-          {t("pre_connect.host_wallet")}
-        </strong>
-      </div>
-
       <div className="mt-6">
         <TextField
           id="email"
-          label={t("pre_connect.email.label")}
+          label={t(`pre_connect.email.${variant}.label`)}
           type="email"
           required
+          autoFocus
           onChange={(e) => {
-            setEmail(e.target.value.trim());
+            setFormData({ ...formData, email: e.target.value.trim() });
           }}
         />
       </div>
       <div className="mt-6">
-        <TextField
-          id="password"
-          label={tCommon("password")}
-          type={passwordView ? "text" : "password"}
+        <PasswordForm
+          i18nKeyPrefix="alby.pre_connect.set_password"
+          formData={formData}
+          setFormData={setFormData}
           minLength={6}
-          pattern=".{6,}"
-          title="at least 6 characters"
-          required
-          onChange={(e) => {
-            setPassword(e.target.value.trim());
-          }}
-          endAdornment={
-            <button
-              type="button"
-              className="mr-1 flex justify-center items-center w-10 h-8"
-              onClick={() => setPasswordView(!passwordView)}
-            >
-              {passwordView ? (
-                <HiddenIcon className="h-6 w-6" />
-              ) : (
-                <VisibleIcon className="h-6 w-6" />
-              )}
-            </button>
-          }
+          confirm={variant === "create"}
+          autoFocus={false}
         />
       </div>
-      <div className="mt-6">
+      {variant === "login" && (
         <p className="mb-2 text-gray-700 dark:text-neutral-400">
-          {t("pre_connect.optional_lightning_note.part1")}{" "}
           <a
             className="underline"
-            href="https://lightningaddress.com/"
             target="_blank"
-            rel="noreferrer"
+            rel="noreferrer noopener"
+            href="https://getalby.com/password_resets/new"
           >
-            {t("pre_connect.optional_lightning_note.part2")}
+            {t("pre_connect.forgot_password")}
           </a>
-          {t("pre_connect.optional_lightning_note.part3")} (
-          <a
-            className="underline"
-            href="https://lightningaddress.com/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            {t("pre_connect.optional_lightning_note.part4")}
-          </a>
-          )
         </p>
-        <div>
-          <TextField
-            id="lnAddress"
-            label={t("pre_connect.optional_lightning_address.label")}
-            suffix={t("pre_connect.optional_lightning_address.suffix")}
-            type="text"
-            pattern="[a-zA-Z0-9-]{3,}"
-            title={t("pre_connect.optional_lightning_address.title")}
-            onChange={(e) => {
-              setLnAddress(e.target.value.trim().split("@")[0]); // in case somebody enters a full address we simple remove the domain
-            }}
-          />
+      )}
+      {variant === "create" && (
+        <div className="mt-6">
+          <p className="mb-2 text-gray-700 dark:text-neutral-400">
+            {t("pre_connect.optional_lightning_note.part1")}{" "}
+            <a
+              className="underline"
+              href="https://lightningaddress.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              {t("pre_connect.optional_lightning_note.part2")}
+            </a>
+            {t("pre_connect.optional_lightning_note.part3")} (
+            <a
+              className="underline"
+              href="https://lightningaddress.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              {t("pre_connect.optional_lightning_note.part4")}
+            </a>
+            )
+          </p>
+          <div>
+            <TextField
+              id="lnAddress"
+              label={t("pre_connect.optional_lightning_address.label")}
+              suffix={t("pre_connect.optional_lightning_address.suffix")}
+              type="text"
+              pattern="[a-zA-Z0-9-]{3,}"
+              title={t("pre_connect.optional_lightning_address.title")}
+              onChange={(e) => {
+                const lnAddress = e.target.value.trim().split("@")[0]; // in case somebody enters a full address we simple remove the domain
+                setFormData({ ...formData, lnAddress });
+              }}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </ConnectorForm>
   );
 }

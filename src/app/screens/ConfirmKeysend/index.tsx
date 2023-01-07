@@ -4,7 +4,7 @@ import Container from "@components/Container";
 import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -13,7 +13,6 @@ import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import utils from "~/common/lib/utils";
 import type { OriginData } from "~/types";
 
 function ConfirmKeysend() {
@@ -31,7 +30,7 @@ function ConfirmKeysend() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
@@ -49,18 +48,18 @@ function ConfirmKeysend() {
   useEffect(() => {
     (async () => {
       if (showFiat && amount) {
-        const res = await getFiatValue(amount);
+        const res = await getFormattedFiat(amount);
         setFiatAmount(res);
       }
     })();
-  }, [amount, showFiat, getFiatValue]);
+  }, [amount, showFiat, getFormattedFiat]);
 
   useEffect(() => {
     (async () => {
-      const res = await getFiatValue(budget);
+      const res = await getFormattedFiat(budget);
       setFiatBudgetAmount(res);
     })();
-  }, [budget, showFiat, getFiatValue]);
+  }, [budget, showFiat, getFormattedFiat]);
 
   async function confirm() {
     if (rememberMe && budget) {
@@ -68,7 +67,7 @@ function ConfirmKeysend() {
     }
     try {
       setLoading(true);
-      const payment = await utils.call(
+      const payment = await msg.request(
         "keysend",
         { destination, amount, customRecords },
         {
@@ -123,46 +122,52 @@ function ConfirmKeysend() {
     });
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    confirm();
+  }
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
       {!successMessage ? (
-        <Container justifyBetween maxWidth="sm">
-          <div>
-            <PublisherCard
-              title={origin.name}
-              image={origin.icon}
-              url={origin.host}
-            />
-            <div className="my-4">
-              <div className="shadow mb-4 bg-white dark:bg-surface-02dp p-4 rounded-lg">
-                <PaymentSummary
-                  amount={amount}
-                  fiatAmount={fiatAmount}
-                  description={t("payment_summary.description", {
-                    destination,
-                  })}
+        <form onSubmit={handleSubmit} className="h-full">
+          <Container justifyBetween maxWidth="sm">
+            <div>
+              <PublisherCard
+                title={origin.name}
+                image={origin.icon}
+                url={origin.host}
+              />
+              <div className="my-4">
+                <div className="shadow mb-4 bg-white dark:bg-surface-02dp p-4 rounded-lg">
+                  <PaymentSummary
+                    amount={amount}
+                    fiatAmount={fiatAmount}
+                    description={t("payment_summary.description", {
+                      destination,
+                    })}
+                  />
+                </div>
+
+                <BudgetControl
+                  fiatAmount={fiatBudgetAmount}
+                  remember={rememberMe}
+                  onRememberChange={(event) => {
+                    setRememberMe(event.target.checked);
+                  }}
+                  budget={budget}
+                  onBudgetChange={(event) => setBudget(event.target.value)}
                 />
               </div>
-
-              <BudgetControl
-                fiatAmount={fiatBudgetAmount}
-                remember={rememberMe}
-                onRememberChange={(event) => {
-                  setRememberMe(event.target.checked);
-                }}
-                budget={budget}
-                onBudgetChange={(event) => setBudget(event.target.value)}
-              />
             </div>
-          </div>
-          <ConfirmOrCancel
-            disabled={loading}
-            loading={loading}
-            onConfirm={confirm}
-            onCancel={reject}
-          />
-        </Container>
+            <ConfirmOrCancel
+              disabled={loading}
+              loading={loading}
+              onCancel={reject}
+            />
+          </Container>
+        </form>
       ) : (
         <Container maxWidth="sm">
           <PublisherCard

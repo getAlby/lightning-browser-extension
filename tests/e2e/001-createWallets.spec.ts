@@ -1,14 +1,31 @@
 import { test } from "@playwright/test";
 import { USER } from "complete-randomer";
 import { getDocument, queries } from "pptr-testing-library";
+import { Browser, ElementHandle, Page } from "puppeteer";
 
 import { loadExtension } from "./helpers/loadExtension";
 
-const { getByText, getByLabelText, findByLabelText, findByText } = queries;
+const {
+  getByText,
+  getByLabelText,
+  findByLabelText,
+  findByText,
+  findAllByText,
+} = queries;
 
-const user = USER.SINGLE();
+type User = { email: string; password: string };
+const defaultUser = USER.SINGLE() as User;
 
-const commonCreateWalletUserCreate = async () => {
+const commonCreateWalletUserCreate = async (
+  options: { connectToLightningWallet: boolean; user?: User } = {
+    connectToLightningWallet: true,
+  }
+): Promise<{
+  user: User;
+  page: Page;
+  browser: Browser;
+  $document: ElementHandle<Element>;
+}> => {
   const { page, browser } = await loadExtension();
 
   // get document from welcome page
@@ -46,9 +63,24 @@ const commonCreateWalletUserCreate = async () => {
     page.waitForNavigation(), // The promise resolves after navigation has finished
   ]);
 
-  await findByText($document, "Do you have a lightning wallet?");
+  await findByText(
+    $document,
+    "To start using Alby to make online payments, connect your lightning wallet to the extension."
+  );
 
-  return { user, browser, page, $document };
+  if (options.connectToLightningWallet) {
+    const connectTexts = await findAllByText($document, "Connect");
+    connectTexts[1].click(); // we have headline and button using "connect", button is second
+
+    await Promise.all([
+      page.waitForResponse(() => true),
+      page.waitForNavigation(), // The promise resolves after navigation has finished
+    ]);
+
+    await findByText($document, "Connect Lightning Wallet");
+  }
+
+  return { user: options.user || defaultUser, browser, page, $document };
 };
 
 const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
@@ -67,16 +99,54 @@ const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
 test.describe("Create or connect wallets", () => {
   test("successfully creates an Alby wallet", async () => {
     const { user, browser, page, $document } =
-      await commonCreateWalletUserCreate();
+      await commonCreateWalletUserCreate({ connectToLightningWallet: false });
 
-    // click at "Create Alby Wallet"
-    const createNewWalletButton = await getByText($document, "Alby Wallet");
+    // click on the button to create a new wallet
+    const createNewWalletButton = await getByText($document, "Sign up");
     createNewWalletButton.click();
 
-    await findByText($document, "Your Alby Lightning Wallet");
+    await findByText($document, "Your Alby account");
 
     // type user email
     const emailField = await getByLabelText($document, "Email Address");
+    await emailField.type(user.email);
+
+    // type user password and confirm password
+    const walletPasswordField = await getByLabelText($document, "Password");
+    await walletPasswordField.type(user.password);
+
+    const walletConfirmPasswordField = await getByLabelText(
+      $document,
+      "Confirm Password"
+    );
+    await walletConfirmPasswordField.type(user.password);
+
+    await commonCreateWalletSuccessCheck({ page, $document });
+
+    await browser.close();
+  });
+
+  test("successfully connects to an existing Alby testnet wallet", async () => {
+    const { user, browser, page, $document } =
+      await commonCreateWalletUserCreate({
+        connectToLightningWallet: false,
+        user: {
+          email: "albytest001@example.com",
+          password: "12345678",
+        },
+      });
+
+    // click "Log in" button
+    const loginButton = await getByText($document, "Log in");
+    loginButton.click();
+
+    await findByText($document, "Your Alby account");
+
+    // type user email
+    const emailField = await getByLabelText(
+      $document,
+      "Email Address or Lightning Address"
+    );
     await emailField.type(user.email);
 
     // type user password and confirm password
@@ -98,27 +168,6 @@ test.describe("Create or connect wallets", () => {
     const lnBitsAdminKey = "d8de4f373561446aa298cae2b9424325";
     const adminKeyField = await findByLabelText($document, "LNbits Admin Key");
     await adminKeyField.type(lnBitsAdminKey);
-
-    await commonCreateWalletSuccessCheck({ page, $document });
-    await browser.close();
-  });
-
-  test("successfully connects to BlueWallet", async () => {
-    const { browser, page, $document } = await commonCreateWalletUserCreate();
-
-    // click at "BlueWallet"
-    const createNewWalletButton = await getByText($document, "Bluewallet");
-    createNewWalletButton.click();
-
-    await findByText($document, "Connect to BlueWallet");
-
-    const lndHubUrl =
-      "lndhub://c269ebb962f1a94f9c29:f6f16f35e935edc05ee7@https://lndhub.herokuapp.com";
-    const lndUrlField = await getByLabelText(
-      $document,
-      "BlueWallet Export URI"
-    );
-    await lndUrlField.type(lndHubUrl);
 
     await commonCreateWalletSuccessCheck({ page, $document });
     await browser.close();
@@ -163,26 +212,18 @@ test.describe("Create or connect wallets", () => {
     await findByText($document, "Host");
 
     const host = "143.244.206.7";
-    const pubkey = "032e2444c5bb14c5eb2bf8ebdfd102c162609956aa995b7c7d373ca378deedb5c7";
+    const pubkey =
+      "032e2444c5bb14c5eb2bf8ebdfd102c162609956aa995b7c7d373ca378deedb5c7";
     const rune = "vrrgKshH1sPZ7wjQnCWjdEtB2PCcM48Gs05FuVPln8g9MTE=";
 
-    const lndUrlField = await getByLabelText(
-      $document,
-      "Host"
-    );
+    const lndUrlField = await getByLabelText($document, "Host");
     await lndUrlField.type(host);
 
-    const pubkeyField = await getByLabelText(
-      $document,
-      "Public key"
-    );
+    const pubkeyField = await getByLabelText($document, "Public key");
     await pubkeyField.type(pubkey);
 
-    const runeField = await getByLabelText(
-      $document,
-      "Rune"
-    );
-    await runeField.type(rune)
+    const runeField = await getByLabelText($document, "Rune");
+    await runeField.type(rune);
 
     await commonCreateWalletSuccessCheck({ page, $document });
 

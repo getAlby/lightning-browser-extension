@@ -8,20 +8,21 @@ import {
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
+import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-import { getSatValue } from "~/common/utils/currencyConvert";
 import type { AccountInfo } from "~/types";
 
 interface AccountContextType {
   account: {
-    id: string;
-    name?: string;
-    alias?: string;
-    balance?: number;
+    id: AccountInfo["id"];
+    name?: AccountInfo["name"];
+    alias?: AccountInfo["alias"];
+    balance?: AccountInfo["balance"];
+    currency?: AccountInfo["currency"];
   } | null;
   balancesDecorated: {
     fiatBalance: string;
-    satsBalance: string;
+    accountBalance: string;
   };
   loading: boolean;
   unlock: (user: string, callback: VoidFunction) => Promise<void>;
@@ -44,15 +45,18 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
+    getFormattedInCurrency,
   } = useSettings();
 
   const [account, setAccount] = useState<AccountContextType["account"]>(null);
   const [loading, setLoading] = useState(true);
-  const [satsBalance, setSatBalance] = useState("");
+  const [accountBalance, setAccountBalance] = useState("");
   const [fiatBalance, setFiatBalance] = useState("");
 
-  const showFiat = !isLoadingSettings && settings.showFiat && !loading;
+  const isSatsAccount = account?.currency === "BTC"; // show fiatValue only if the base currency is not already fiat
+  const showFiat =
+    !isLoadingSettings && settings.showFiat && !loading && isSatsAccount;
 
   const unlock = (password: string, callback: VoidFunction) => {
     return api.unlock(password).then((response) => {
@@ -65,7 +69,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   };
 
   const lock = (callback: VoidFunction) => {
-    return utils.call("lock").then(() => {
+    return msg.request("lock").then(() => {
       setAccount(null);
       callback();
     });
@@ -75,29 +79,32 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
 
   const updateFiatValue = useCallback(
     async (balance: string | number) => {
-      const fiat = await getFiatValue(balance);
+      const fiat = await getFormattedFiat(balance);
       setFiatBalance(fiat);
     },
-    [getFiatValue]
+    [getFormattedFiat]
   );
+
+  const updateAccountBalance = (
+    amount: number,
+    currency?: AccountInfo["currency"]
+  ) => {
+    const balance = getFormattedInCurrency(amount, currency);
+    setAccountBalance(balance);
+  };
 
   const fetchAccountInfo = async (options?: { accountId?: string }) => {
     const id = options?.accountId || account?.id;
     if (!id) return;
 
-    const callback = async (account: AccountInfo) => {
-      setAccount(account);
-      const sats = await getSatValue(account.balance);
-      setSatBalance(sats);
-
-      if (!isLoadingSettings && settings.showFiat) {
-        updateFiatValue(account.balance);
-      }
+    const callback = (accountRes: AccountInfo) => {
+      setAccount(accountRes);
+      updateAccountBalance(accountRes.balance, accountRes.currency);
     };
 
     const accountInfo = await api.swr.getAccountInfo(id, callback);
 
-    return { ...accountInfo, fiatBalance, satsBalance };
+    return { ...accountInfo, fiatBalance, accountBalance };
   };
 
   // Invoked only on on mount.
@@ -138,10 +145,17 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     }
   }, [showFiat, account?.balance, updateFiatValue]);
 
+  // Listen to language change
+  useEffect(() => {
+    !!account?.balance &&
+      updateAccountBalance(account.balance, account.currency);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [settings.locale]);
+
   const value = {
     account,
     balancesDecorated: {
-      satsBalance,
+      accountBalance,
       fiatBalance,
     },
     fetchAccountInfo,

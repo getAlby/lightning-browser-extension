@@ -1,3 +1,5 @@
+import { ACCOUNT_CURRENCIES } from "~/common/constants";
+
 export interface WebLNNode {
   alias: string;
   pubkey?: string;
@@ -43,6 +45,7 @@ export type GetInfoResponse = {
 export type GetBalanceResponse = {
   data: {
     balance: number;
+    currency?: ACCOUNT_CURRENCIES;
   };
 };
 
@@ -111,14 +114,16 @@ export default interface Connector {
   unload(): Promise<void>;
   getInfo(): Promise<GetInfoResponse>;
   getBalance(): Promise<GetBalanceResponse>;
-  getInvoices(): Promise<GetInvoicesResponse> | Error;
+  getInvoices(): Promise<GetInvoicesResponse>;
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse>;
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse>;
   keysend(args: KeysendArgs): Promise<SendPaymentResponse>;
   checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse>;
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse>;
-  requestLNC?(method: string, args: FixMe): Promise<FixMe>;
-  connectPeer(
-    args: ConnectPeerArgs
-  ): Promise<ConnectPeerResponse | Error> | Error;
+  connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse>;
+  supportedMethods?: string[];
+  requestMethod?(
+    method: string,
+    args: Record<string, unknown>
+  ): Promise<{ data: unknown }>;
 }

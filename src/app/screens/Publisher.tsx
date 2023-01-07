@@ -5,12 +5,12 @@ import PublisherCard from "@components/PublisherCard";
 import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 import type { Allowance, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
@@ -22,7 +22,8 @@ function Publisher() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
+    getFormattedNumber,
   } = useSettings();
 
   const hasFetchedData = useRef(false);
@@ -34,7 +35,7 @@ function Publisher() {
   const fetchData = useCallback(async () => {
     try {
       if (id) {
-        const response = await utils.call<Allowance>("getAllowanceById", {
+        const response = await msg.request<Allowance>("getAllowanceById", {
           id: parseInt(id),
         });
         setAllowance(response);
@@ -50,7 +51,7 @@ function Publisher() {
 
         for (const payment of payments) {
           const totalAmountFiat = settings.showFiat
-            ? await getFiatValue(payment.totalAmount)
+            ? await getFormattedFiat(payment.totalAmount)
             : "";
           payment.totalAmountFiat = totalAmountFiat;
         }
@@ -60,7 +61,7 @@ function Publisher() {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
     }
-  }, [id, settings.showFiat, getFiatValue]);
+  }, [id, settings.showFiat, getFormattedFiat]);
 
   useEffect(() => {
     // Run once.
@@ -74,7 +75,7 @@ function Publisher() {
     <div>
       <div className="border-b border-gray-200 dark:border-neutral-500">
         <PublisherCard
-          title={allowance?.host || ""}
+          title={allowance?.name || ""}
           image={allowance?.imageURL || ""}
           url={allowance?.host}
           isCard={false}
@@ -91,7 +92,8 @@ function Publisher() {
               </dt>
 
               <dd className="flex items-center font-bold text-xl dark:text-neutral-400">
-                {allowance.usedBudget} / {allowance.totalBudget}{" "}
+                {getFormattedNumber(allowance.usedBudget)} /{" "}
+                {getFormattedNumber(allowance.totalBudget)}{" "}
                 {t("publisher.allowance.used_budget")}
                 <div className="ml-3 w-24">
                   <Progressbar percentage={allowance.percentage} />

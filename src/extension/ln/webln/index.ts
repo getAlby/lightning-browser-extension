@@ -90,16 +90,15 @@ export default class WebLNProvider {
     throw new Error("Alby does not support `verifyMessage`");
   }
 
-  lnc(method: string, params: FixMe) {
+  request(method: string, params: Record<string, unknown>) {
     if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling verifyMessage");
+      throw new Error("Provider must be enabled before calling request");
     }
 
-    const args = {
+    return this.execute("request", {
       method,
       params,
-    };
-    return this.execute("lnc", args);
+    });
   }
 
   // NOTE: new call `action`s must be specified also in the content script

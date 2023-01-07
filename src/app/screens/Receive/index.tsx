@@ -10,8 +10,7 @@ import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
-import { useState, useEffect, useRef } from "react";
-import type { FormEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
@@ -20,7 +19,7 @@ import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 import { poll } from "~/common/utils/helpers";
 
 function Receive() {
@@ -31,7 +30,7 @@ function Receive() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
@@ -64,11 +63,11 @@ function Receive() {
   useEffect(() => {
     if (formData.amount !== "" && showFiat) {
       (async () => {
-        const res = await getFiatValue(formData.amount);
+        const res = await getFormattedFiat(formData.amount);
         setFiatAmount(res);
       })();
     }
-  }, [formData, showFiat, getFiatValue]);
+  }, [formData, showFiat, getFormattedFiat]);
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -83,7 +82,7 @@ function Receive() {
     setPollingForPayment(true);
     poll({
       fn: () =>
-        utils.call("checkPayment", { paymentHash }) as Promise<{
+        msg.request("checkPayment", { paymentHash }) as Promise<{
           paid: boolean;
         }>,
       validate: (payment) => payment.paid,
@@ -117,6 +116,11 @@ function Receive() {
     } finally {
       setLoading(false);
     }
+  }
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    createInvoice();
   }
 
   function renderInvoice() {
@@ -204,14 +208,8 @@ function Receive() {
       {invoice ? (
         <Container maxWidth="sm">{renderInvoice()}</Container>
       ) : (
-        <form
-          onSubmit={(e: FormEvent) => {
-            e.preventDefault();
-            createInvoice();
-          }}
-          className="h-full"
-        >
-          <fieldset disabled={loading}>
+        <form onSubmit={handleSubmit} className="h-full">
+          <fieldset className="h-full" disabled={loading}>
             <Container justifyBetween maxWidth="sm">
               <div className="py-4">
                 <div className="mb-4">

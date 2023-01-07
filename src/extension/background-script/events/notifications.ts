@@ -1,18 +1,17 @@
-import utils from "~/common/lib/utils";
-import { getFiatValue } from "~/common/utils/currencyConvert";
+import {
+  getFormattedFiat,
+  getFormattedSats,
+} from "~/common/utils/currencyConvert";
 import { getCurrencyRateWithCache } from "~/extension/background-script/actions/cache/getCurrencyRate";
 import state from "~/extension/background-script/state";
-import i18n from "~/i18n/i18nConfig";
-import type { PaymentNotificationData, AuthNotificationData } from "~/types";
+import type { AuthNotificationData, PaymentNotificationData } from "~/types";
+
+import { notify } from "./helpers";
 
 const paymentSuccessNotification = async (
   message: "ln.sendPayment.success",
   data: PaymentNotificationData
 ) => {
-  function formatAmount(amount: number) {
-    return `${amount} ${i18n.t("sats", { count: amount, ns: "common" })}`;
-  }
-
   const recipient = data?.origin?.name;
   const paymentResponseData = data.response;
   let paymentAmountFiatLocale;
@@ -26,15 +25,16 @@ const paymentSuccessNotification = async (
   const paymentAmount = total_amt - total_fees;
 
   const { settings } = state.getState();
-  const { showFiat, currency } = settings;
+  const { showFiat, currency, locale } = settings;
 
   if (showFiat) {
     const rate = await getCurrencyRateWithCache(currency);
 
-    paymentAmountFiatLocale = getFiatValue({
+    paymentAmountFiatLocale = getFormattedFiat({
       amount: paymentAmount,
       rate,
       currency,
+      locale,
     });
   }
 
@@ -44,17 +44,21 @@ const paymentSuccessNotification = async (
     notificationTitle = `${notificationTitle} to »${recipient}«`;
   }
 
-  let notificationMessage = `Amount: ${formatAmount(paymentAmount)}`;
+  let notificationMessage = `Amount: ${getFormattedSats({
+    amount: paymentAmount,
+    locale,
+  })}`;
 
   if (showFiat) {
     notificationMessage = `${notificationMessage} (${paymentAmountFiatLocale})`;
   }
 
-  notificationMessage = `${notificationMessage}\nFee: ${formatAmount(
-    total_fees
-  )}`;
+  notificationMessage = `${notificationMessage}\nFee: ${getFormattedSats({
+    amount: total_fees,
+    locale,
+  })}`;
 
-  return utils.notify({
+  return notify({
     title: notificationTitle,
     message: notificationMessage,
   });
@@ -77,7 +81,7 @@ const paymentFailedNotification = (
     error = paymentResponseData.data.payment_error;
   }
 
-  return utils.notify({
+  return notify({
     title: `⚠️ Payment failed`,
     message: `Error: ${error}`,
   });
@@ -93,7 +97,7 @@ const lnurlAuthSuccessNotification = (
     title = `${title} to ${data.origin.name}`;
   }
 
-  return utils.notify({
+  return notify({
     title,
     message: `Successfully logged in to ${data.lnurlDetails.domain}`,
   });
@@ -105,7 +109,7 @@ const lnurlAuthFailedNotification = (
     error: string;
   }
 ) => {
-  return utils.notify({
+  return notify({
     title: `⚠️ Login failed`,
     message: `${data.error}`,
   });

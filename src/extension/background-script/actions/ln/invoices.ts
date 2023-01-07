@@ -6,11 +6,8 @@ const invoices = async (message: MessageInvoices) => {
   const isSettled = message.args.isSettled;
 
   const connector = await state.getState().getConnector();
-  const result = await connector.getInvoices();
-
-  if (result instanceof Error) {
-    return { error: result.message };
-  } else {
+  try {
+    const result = await connector.getInvoices();
     const invoices: Invoice[] = result.data.invoices
       .filter((invoice) => (isSettled ? invoice.settled : !invoice.settled))
       .map((invoice: Invoice) => {
@@ -25,6 +22,11 @@ const invoices = async (message: MessageInvoices) => {
         invoices,
       },
     };
+  } catch (e) {
+    console.error(e);
+    if (e instanceof Error) {
+      return { error: e.message };
+    }
   }
 };
 

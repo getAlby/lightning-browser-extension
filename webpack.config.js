@@ -9,6 +9,7 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 // default value is set in the code where it is used
 if (!process.env.WALLET_CREATE_URL) {
@@ -83,7 +84,6 @@ var options = {
       "webextension-polyfill": "webextension-polyfill",
       Buffer: "buffer",
       process: "process/browser",
-      crypto: "crypto-browserify",
       assert: "assert",
       stream: "stream-browserify",
     },
@@ -133,12 +133,6 @@ var options = {
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: "asset/resource",
-      },
-      {
-        test: /\.m?js/,
-        resolve: {
-          fullySpecified: false
-        }
       },
     ],
   },
@@ -209,6 +203,13 @@ var options = {
     // copy static assets
     new CopyWebpackPlugin({
       patterns: [{ from: "static/assets", to: "assets" }],
+    }),
+    new BundleAnalyzerPlugin({
+      generateStatsFile: (nodeEnv !== "development" ? true : false),
+      analyzerMode: (nodeEnv !== "development" ? 'static' : 'disabled'),
+      reportFilename: '../bundle-report.html',
+      statsFilename: '../bundle-stats.json',
+      openAnalyzer: nodeEnv !== "development",
     }),
   ],
 };

@@ -1,5 +1,6 @@
 import { CaretRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useTranslation } from "react-i18next";
+import { useSettings } from "~/app/context/SettingsContext";
 import { Publisher } from "~/types";
 
 import Badge from "../Badge";
@@ -17,6 +18,7 @@ export default function PublishersTable({
   publishers,
   navigateToPublisher,
 }: Props) {
+  const { getFormattedSats, getFormattedNumber } = useSettings();
   const { t: tComponents } = useTranslation("components", {
     keyPrefix: "publishers_table",
   });
@@ -36,7 +38,7 @@ export default function PublishersTable({
                 <div className="flex items-center">
                   <div className="shrink-0">
                     <img
-                      className="h-12 w-12 object-cover rounded-full shadow-lg"
+                      className="h-12 w-12 object-cover rounded-lg shadow-lg"
                       src={publisher.imageURL || DEFAULT_IMAGE}
                       alt={publisher.host}
                       onError={(e) => {
@@ -51,22 +53,23 @@ export default function PublishersTable({
                       <p className="text-lg inline mr-2 dark:text-white">
                         {publisher.name}
                       </p>
-                      {publisher.badge && (
-                        <Badge
-                          label={publisher.badge.label}
-                          color={publisher.badge.color}
-                          textColor={publisher.badge.textColor}
-                        />
-                      )}
+                      {publisher.badges?.map((b) => {
+                        return (
+                          <Badge
+                            key={b.label}
+                            label={b.label}
+                            color={b.color}
+                            textColor={b.textColor}
+                          />
+                        );
+                      })}
                     </div>
                     <div className="text-sm text-gray-500 dark:text-neutral-400">
                       {publisher.host} • {publisher.paymentsCount}{" "}
                       {tComponents("payments")}{" "}
                       {publisher.paymentsAmount > 0 && (
                         <span>
-                          ({publisher.paymentsAmount}{" "}
-                          {tCommon("sats", { count: publisher.paymentsAmount })}
-                          )
+                          {getFormattedSats(publisher.paymentsAmount)}
                         </span>
                       )}
                     </div>
@@ -77,7 +80,8 @@ export default function PublishersTable({
                 {publisher.totalBudget > 0 && (
                   <div className="ml-40">
                     <p className="text-lg text-gray-500 mb-0 dark:text-neutral-400">
-                      {publisher.usedBudget} / {publisher.totalBudget}{" "}
+                      {getFormattedNumber(publisher.usedBudget)} /{" "}
+                      {getFormattedNumber(publisher.totalBudget)}{" "}
                       {tCommon("sats", { count: publisher.usedBudget })}{" "}
                       {tComponents("used")}
                     </p>

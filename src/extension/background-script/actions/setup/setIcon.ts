@@ -6,6 +6,7 @@ import state from "../../state";
 // Store all tabs with their respective icon
 const tabIcons = new Map<number, string>();
 
+// duplicate also in batteries/helper
 enum ExtensionIcon {
   Default = "alby_icon_yellow",
   Tipping = "alby_icon_blue",

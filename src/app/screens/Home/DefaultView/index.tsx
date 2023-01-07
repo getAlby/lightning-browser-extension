@@ -17,7 +17,7 @@ import { useSettings } from "~/app/context/SettingsContext";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 import type { Battery, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
@@ -56,7 +56,7 @@ const DefaultView: FC<Props> = (props) => {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
   } = useSettings();
 
   const showFiat = !isLoadingSettings && settings.showFiat;
@@ -65,6 +65,11 @@ const DefaultView: FC<Props> = (props) => {
   const hasInvoices = !isLoadingInvoices && !!incomingTransactions?.length;
   const isEmptyInvoices =
     !isLoadingInvoices && incomingTransactions?.length === 0;
+
+  const navigate = useNavigate();
+
+  const { t } = useTranslation("translation", { keyPrefix: "home" });
+  const { t: tCommon } = useTranslation("common");
 
   // check if currentURL is blocked
   useEffect(() => {
@@ -88,7 +93,7 @@ const DefaultView: FC<Props> = (props) => {
         // attach fiatAmount if enabled
         for (const payment of payments) {
           const totalAmountFiat = showFiat
-            ? await getFiatValue(payment.totalAmount)
+            ? await getFormattedFiat(payment.totalAmount)
             : "";
           payment.totalAmountFiat = totalAmountFiat;
         }
@@ -102,14 +107,17 @@ const DefaultView: FC<Props> = (props) => {
     };
 
     !payments && !isLoadingSettings && getPayments();
-  }, [isLoadingSettings, payments, getFiatValue, showFiat]);
+  }, [isLoadingSettings, payments, getFormattedFiat, showFiat]);
 
   const unblock = async () => {
     try {
       if (props.currentUrl?.host) {
-        await utils.call("deleteBlocklist", {
+        await msg.request("deleteBlocklist", {
           host: props.currentUrl.host,
         });
+        toast.info(
+          t("default_view.block_removed", { host: props.currentUrl.host })
+        );
       }
       setIsBlockedUrl(false);
     } catch (e) {
@@ -125,14 +133,18 @@ const DefaultView: FC<Props> = (props) => {
     }
   };
 
-  const navigate = useNavigate();
-
-  const { t } = useTranslation("translation", { keyPrefix: "home" });
-  const { t: tCommon } = useTranslation("common");
-
   const loadInvoices = async () => {
     setIsLoadingInvoices(true);
-    const result = await api.getInvoices({ isSettled: true });
+    let result;
+    try {
+      result = await api.getInvoices({ isSettled: true });
+    } catch (e) {
+      if (e instanceof Error) {
+        toast.error(e.message);
+      }
+      setIsLoadingInvoices(false);
+      return;
+    }
 
     const invoices: Transaction[] = result.invoices.map((invoice) => ({
       ...invoice,
@@ -143,7 +155,7 @@ const DefaultView: FC<Props> = (props) => {
 
     for (const invoice of invoices) {
       const totalAmountFiat = settings.showFiat
-        ? await getFiatValue(invoice.totalAmount)
+        ? await getFormattedFiat(invoice.totalAmount)
         : "";
       invoice.totalAmountFiat = totalAmountFiat;
     }

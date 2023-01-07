@@ -1,21 +1,26 @@
 import Button from "@components/Button";
 import Card from "@components/Card";
 import Loading from "@components/Loading";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
+import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
+import type { AccountInfo } from "~/types";
 
 export default function TestConnection() {
+  const { getFormattedInCurrency } = useSettings();
   const auth = useAccount();
   const { getAccounts } = useAccounts();
+
   const [accountInfo, setAccountInfo] = useState<{
-    alias: string;
-    name: string;
-    balance: number;
+    alias: AccountInfo["alias"];
+    name: AccountInfo["name"];
+    balance: AccountInfo["balance"];
+    currency: AccountInfo["currency"];
   }>();
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -27,7 +32,7 @@ export default function TestConnection() {
   const { t: tCommon } = useTranslation("common");
 
   async function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
-    await utils.call("removeAccount");
+    await msg.request("removeAccount");
     navigate(-1);
   }
 
@@ -47,6 +52,7 @@ export default function TestConnection() {
         setAccountInfo({
           alias: accountInfo.alias,
           balance: accountInfo.balance,
+          currency: accountInfo.currency,
           name: accountInfo.name,
         });
       }
@@ -118,9 +124,10 @@ export default function TestConnection() {
                     alias={`${accountInfo.name} - ${accountInfo.alias}`}
                     satoshis={
                       typeof accountInfo.balance === "number"
-                        ? `${accountInfo.balance} ${tCommon("sats", {
-                            count: accountInfo.balance,
-                          })}`
+                        ? getFormattedInCurrency(
+                            accountInfo.balance,
+                            accountInfo.currency
+                          )
                         : ""
                     }
                   />

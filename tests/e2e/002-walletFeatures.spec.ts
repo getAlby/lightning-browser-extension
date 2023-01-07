@@ -32,7 +32,7 @@ const unlockExtension = async ({ page, extensionId }) => {
 };
 
 test.describe("Wallet features", () => {
-  test("opens publishers screen", async () => {
+  test("opens your websites screen by default", async () => {
     const { page, browser, extensionId } = await loadExtension();
     const $optionsdocument = await unlockExtension({
       page,
@@ -40,7 +40,20 @@ test.describe("Wallet features", () => {
     });
 
     await findByText($optionsdocument, "Your ⚡️ Websites");
-    await findByText($optionsdocument, "Other ⚡️ Websites");
+
+    await browser.close();
+  });
+
+  test("open discover screen", async () => {
+    const { page, browser, extensionId } = await loadExtension();
+    const $optionsdocument = await unlockExtension({
+      page,
+      extensionId,
+    });
+
+    // open discover screen
+    await (await findByText($optionsdocument, "Discover")).click();
+    await findByText($optionsdocument, "Explore the Lightning ⚡️ Ecosystem");
 
     await browser.close();
   });
@@ -116,7 +129,7 @@ test.describe("Wallet features", () => {
     await findAllByText($optionsdocument, "e2etest.getalby.com");
     await findByText(
       $optionsdocument,
-      "Do you want to login to e2etest.getalby.com?"
+      "Do you want to log in to e2etest.getalby.com?"
     );
     await findByText($optionsdocument, "Login");
 

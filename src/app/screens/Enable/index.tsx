@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import utils from "~/common/lib/utils";
 import type { OriginData } from "~/types";
 
 type Props = {
@@ -45,10 +44,11 @@ function Enable(props: Props) {
 
   async function block(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
-    await utils.call("addBlocklist", {
+    await msg.request("addBlocklist", {
       domain: props.origin.domain,
       host: props.origin.host,
     });
+    alert(t("block_added", { host: props.origin.host }));
     msg.error(USER_REJECTED_ERROR);
   }
 
@@ -86,14 +86,14 @@ function Enable(props: Props) {
             isSmall={false}
           />
 
-          <div className="dark:text-white pt-6">
-            <p className="mb-4">{t("allow", { host: props.origin.host })}</p>
+          <div className="dark:text-white pt-6 mb-4">
+            <p className="mb-2">{t("allow")}</p>
 
-            <div className="mb-4 flex items-center">
+            <div className="mb-2 flex items-center">
               <CheckIcon className="w-5 h-5 mr-2" />
               <p className="dark:text-white">{t("request1")}</p>
             </div>
-            <div className="mb-4 flex items-center">
+            <div className="mb-2 flex items-center">
               <CheckIcon className="w-5 h-5 mr-2" />
               <p className="dark:text-white">{t("request2")}</p>
             </div>

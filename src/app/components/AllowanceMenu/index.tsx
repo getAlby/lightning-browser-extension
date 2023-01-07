@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 import type { Allowance } from "~/types";
 
 import Button from "../Button";
@@ -25,7 +25,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
@@ -39,13 +39,13 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   useEffect(() => {
     if (budget !== "" && showFiat) {
       const getFiat = async () => {
-        const res = await getFiatValue(budget);
+        const res = await getFormattedFiat(budget);
         setFiatAmount(res);
       };
 
       getFiat();
     }
-  }, [budget, showFiat, getFiatValue]);
+  }, [budget, showFiat, getFormattedFiat]);
 
   function openModal() {
     setBudget(allowance.totalBudget.toString());
@@ -66,7 +66,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   }
 
   async function updateAllowance() {
-    await utils.call("updateAllowance", {
+    await msg.request("updateAllowance", {
       id: allowance.id,
       totalBudget: parseInt(budget),
       lnurlAuth,
@@ -91,7 +91,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             onClick={async () => {
               if (window.confirm(t("confirm_delete"))) {
                 try {
-                  await utils.call("deleteAllowance", {
+                  await msg.request("deleteAllowance", {
                     id: allowance.id,
                   });
                   onDelete && onDelete();

@@ -32,7 +32,9 @@ const Dt = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Dd = ({ children }: { children: React.ReactNode }) => (
-  <dd className="mb-4 text-gray-600 dark:text-neutral-500">{children}</dd>
+  <dd className="mb-4 text-gray-600 dark:text-neutral-500 break-all">
+    {children}
+  </dd>
 );
 
 function LNURLPay() {
@@ -41,7 +43,8 @@ function LNURLPay() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
+    getFormattedSats,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
@@ -67,12 +70,12 @@ function LNURLPay() {
 
   useEffect(() => {
     const getFiat = async () => {
-      const res = await getFiatValue(valueSat);
+      const res = await getFormattedFiat(valueSat);
       setFiatValue(res);
     };
 
     getFiat();
-  }, [valueSat, showFiat, getFiatValue]);
+  }, [valueSat, showFiat, getFormattedFiat]);
 
   useEffect(() => {
     !!settings.userName && setUserName(settings.userName);
@@ -158,7 +161,7 @@ function LNURLPay() {
       }
 
       // LN WALLET pays the invoice, no additional user confirmation is required at this point
-      const paymentResponse: PaymentResponse = await utils.call(
+      const paymentResponse: PaymentResponse = await msg.request(
         "sendPayment",
         { paymentRequest },
         {
@@ -311,9 +314,7 @@ function LNURLPay() {
           <ResultCard
             isSuccess
             message={tCommon("success_message", {
-              amount: `${valueSat} ${tCommon("sats", {
-                count: parseInt(valueSat),
-              })}`,
+              amount: getFormattedSats(valueSat),
               fiatAmount: showFiat ? ` (${fiatValue})` : ``,
               destination: navState.origin?.name || getRecipient(),
             })}
@@ -359,7 +360,7 @@ function LNURLPay() {
                 <form onSubmit={handleSubmit}>
                   <fieldset disabled={loadingConfirm}>
                     <div className="my-4">
-                      <dl>
+                      <dl className="overflow-hidden">
                         <>
                           {formattedMetadata(details.metadata).map(
                             ([dt, dd], i) => (
@@ -372,33 +373,34 @@ function LNURLPay() {
                           {details.minSendable === details.maxSendable && (
                             <>
                               <Dt>{t("amount.label")}</Dt>
-                              <Dd>{`${Math.floor(
-                                +details.minSendable / 1000
-                              )} ${tCommon("sats", {
-                                count: Math.floor(+details.minSendable / 1000),
-                              })}`}</Dd>
+                              <Dd>
+                                {getFormattedSats(
+                                  Math.floor(+details.minSendable / 1000)
+                                )}
+                              </Dd>
                             </>
                           )}
                         </>
                       </dl>
-                      {details && details.minSendable !== details.maxSendable && (
-                        <div>
-                          <DualCurrencyField
-                            autoFocus
-                            id="amount"
-                            label={t("amount.label")}
-                            min={Math.floor(+details.minSendable / 1000)}
-                            max={Math.floor(+details.maxSendable / 1000)}
-                            value={valueSat}
-                            onChange={(e) => setValueSat(e.target.value)}
-                            fiatValue={fiatValue}
-                          />
-                          <SatButtons
-                            onClick={setValueSat}
-                            disabled={loadingConfirm}
-                          />
-                        </div>
-                      )}
+                      {details &&
+                        details.minSendable !== details.maxSendable && (
+                          <div>
+                            <DualCurrencyField
+                              autoFocus
+                              id="amount"
+                              label={t("amount.label")}
+                              min={Math.floor(+details.minSendable / 1000)}
+                              max={Math.floor(+details.maxSendable / 1000)}
+                              value={valueSat}
+                              onChange={(e) => setValueSat(e.target.value)}
+                              fiatValue={fiatValue}
+                            />
+                            <SatButtons
+                              onClick={setValueSat}
+                              disabled={loadingConfirm}
+                            />
+                          </div>
+                        )}
                       {details &&
                         typeof details?.commentAllowed === "number" &&
                         details?.commentAllowed > 0 && (

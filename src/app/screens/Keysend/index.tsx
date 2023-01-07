@@ -7,7 +7,7 @@ import IconButton from "@components/IconButton";
 import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
 import SatButtons from "@components/SatButtons";
-import TextField from "@components/form/TextField";
+import DualCurrencyField from "@components/form/DualCurrencyField";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -16,19 +16,20 @@ import Container from "~/app/components/Container";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
-import utils from "~/common/lib/utils";
+import msg from "~/common/lib/msg";
 
 function Keysend() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFiatValue,
+    getFormattedFiat,
+    getFormattedSats,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
   const navState = useNavigationState();
   const navigate = useNavigate();
   const auth = useAccount();
-  const [amount, setAmount] = useState(navState.args?.amount || "");
+  const [amountSat, setAmountSat] = useState(navState.args?.amount || "");
   const customRecords = navState.args?.customRecords;
   const destination = navState.args?.destination as string;
   const [loading, setLoading] = useState(false);
@@ -40,19 +41,19 @@ function Keysend() {
 
   useEffect(() => {
     (async () => {
-      if (showFiat && amount) {
-        const res = await getFiatValue(amount);
+      if (amountSat !== "" && showFiat) {
+        const res = await getFormattedFiat(amountSat);
         setFiatAmount(res);
       }
     })();
-  }, [amount, showFiat, getFiatValue]);
+  }, [amountSat, showFiat, getFormattedFiat]);
 
   async function confirm() {
     try {
       setLoading(true);
-      const payment = await utils.call(
+      const payment = await msg.request(
         "keysend",
-        { destination, amount, customRecords },
+        { destination, amount: amountSat, customRecords },
         {
           origin: {
             name: destination,
@@ -88,6 +89,11 @@ function Keysend() {
     navigate(-1);
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    confirm();
+  }
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <Header
@@ -101,34 +107,35 @@ function Keysend() {
       />
       {!successMessage ? (
         <>
-          <Container justifyBetween maxWidth="sm">
-            <div>
-              {destination && <PublisherCard title={destination} />}
-              <ContentMessage
-                heading={t("receiver.label")}
-                content={destination}
-              />
-              <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden">
-                <TextField
-                  id="amount"
-                  label={t("amount.label")}
-                  type="number"
-                  min={+0 / 1000}
-                  max={+1000000 / 1000}
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
+          <form onSubmit={handleSubmit} className="h-full">
+            <Container justifyBetween maxWidth="sm">
+              <div>
+                {destination && <PublisherCard title={destination} />}
+                <ContentMessage
+                  heading={t("receiver.label")}
+                  content={destination}
                 />
-                <SatButtons onClick={setAmount} />
+                <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden">
+                  <DualCurrencyField
+                    id="amount"
+                    label={t("amount.label")}
+                    min={+0 / 1000}
+                    max={+1000000 / 1000}
+                    onChange={(e) => setAmountSat(e.target.value)}
+                    value={amountSat}
+                    fiatValue={fiatAmount}
+                  />
+                  <SatButtons onClick={setAmountSat} />
+                </div>
               </div>
-            </div>
-            <ConfirmOrCancel
-              label={tCommon("actions.confirm")}
-              onConfirm={confirm}
-              onCancel={reject}
-              loading={loading}
-              disabled={loading || !amount}
-            />
-          </Container>
+              <ConfirmOrCancel
+                label={tCommon("actions.confirm")}
+                onCancel={reject}
+                loading={loading}
+                disabled={loading || !amountSat}
+              />
+            </Container>
+          </form>
         </>
       ) : (
         <Container justifyBetween maxWidth="sm">
@@ -138,9 +145,7 @@ function Keysend() {
               !destination
                 ? successMessage
                 : tCommon("success_message", {
-                    amount: `${amount} ${tCommon("sats", {
-                      count: parseInt(amount),
-                    })}`,
+                    amount: getFormattedSats(amountSat),
                     fiatAmount: showFiat ? ` (${fiatAmount})` : ``,
                     destination,
                   })

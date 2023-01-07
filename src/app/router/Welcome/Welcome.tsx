@@ -3,15 +3,16 @@ import Steps from "@components/Steps";
 import Intro from "@screens/Onboard/Intro";
 import SetPassword from "@screens/Onboard/SetPassword";
 import TestConnection from "@screens/Onboard/TestConnection";
-import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
+import { HashRouter as Router, useLocation, useRoutes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import Container from "~/app/components/Container";
 import { SettingsProvider } from "~/app/context/SettingsContext";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
+import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
+import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
+import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
 import i18n from "~/i18n/i18nConfig";
-import { translationI18nNamespace } from "~/i18n/namespaces";
 
 let connectorRoutes = getConnectorRoutes();
 
@@ -20,7 +21,6 @@ function getRoutes(
     path: string;
     element: JSX.Element;
     title: string;
-    description: string;
     logo: string;
   }[]
 ) {
@@ -28,39 +28,57 @@ function getRoutes(
     {
       path: "/",
       element: <Intro />,
-      name: i18n.t("welcome.nav.welcome", translationI18nNamespace),
+      name: i18n.t("translation:welcome.nav.welcome"),
     },
     {
       path: "/set-password",
       element: <SetPassword />,
-      name: i18n.t("welcome.nav.password", translationI18nNamespace),
+      name: i18n.t("translation:welcome.nav.password"),
     },
     {
-      path: "/choose-connector",
-      name: i18n.t("welcome.nav.connect", translationI18nNamespace),
+      path: "/choose-path",
+      name: i18n.t("translation:welcome.nav.connect"),
       children: [
         {
           index: true,
           element: (
-            <ChooseConnector
-              title={i18n.t(
-                "choose_connector.title.welcome",
-                translationI18nNamespace
-              )}
-              description={i18n.t(
-                "choose_connector.description",
-                translationI18nNamespace
-              )}
+            <ChooseConnectorPath
+              title={i18n.t("translation:choose_path.title")}
+              description={i18n.t("translation:choose_path.description")}
             />
           ),
         },
-        ...connectorRoutes,
+        {
+          path: "create",
+          element: <AlbyWallet variant="create" />,
+        },
+        {
+          path: "login",
+          element: <AlbyWallet variant="login" />,
+        },
+        {
+          path: "choose-connector",
+          children: [
+            {
+              index: true,
+              element: (
+                <ChooseConnector
+                  title={i18n.t("translation:choose_connector.title")}
+                  description={i18n.t(
+                    "translation:choose_connector.description"
+                  )}
+                />
+              ),
+            },
+            ...connectorRoutes,
+          ],
+        },
       ],
     },
     {
       path: "/test-connection",
       element: <TestConnection />,
-      name: i18n.t("welcome.nav.done", translationI18nNamespace),
+      name: i18n.t("translation:welcome.nav.done"),
     },
   ];
 }
@@ -89,7 +107,6 @@ function WelcomeRouter() {
 
 function App() {
   const [steps, setSteps] = useState(initialSteps);
-  const { t } = useTranslation();
   const location = useLocation();
   const routesElement = useRoutes(routes);
 
@@ -134,15 +151,9 @@ function App() {
   return (
     <div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center font-serif font-medium text-2xl pt-7 pb-3 dark:text-white">
-          <p>{t("welcome.title")}</p>
-        </div>
-
         <Steps steps={steps} />
       </div>
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {routesElement}
-      </div>
+      <Container maxWidth="xl">{routesElement}</Container>
     </div>
   );
 }

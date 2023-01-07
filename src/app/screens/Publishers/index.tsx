@@ -1,13 +1,12 @@
 import Container from "@components/Container";
 import PublishersTable from "@components/PublishersTable";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import utils from "~/common/lib/utils";
-import { Allowance, Publisher } from "~/types";
-
-import websites from "./websites.json";
+import Button from "~/app/components/Button";
+import msg from "~/common/lib/msg";
+import { Allowance, Badge, Publisher } from "~/types";
 
 function Publishers() {
   const { t } = useTranslation("translation", {
@@ -23,7 +22,7 @@ function Publishers() {
 
   async function fetchData() {
     try {
-      const allowanceResponse = await utils.call<{
+      const allowanceResponse = await msg.request<{
         allowances: Allowance[];
       }>("listAllowances");
 
@@ -45,6 +44,21 @@ function Publishers() {
           usedBudget,
         } = allowance;
 
+        const badges: Badge[] = [];
+        if (allowance.remainingBudget > 0) {
+          badges.push({
+            label: "active",
+            color: "green-bitcoin",
+            textColor: "white",
+          });
+        }
+        if (allowance.lnurlAuth) {
+          badges.push({
+            label: "auth",
+            color: "green-bitcoin",
+            textColor: "white",
+          });
+        }
         acc.push({
           id,
           host,
@@ -56,13 +70,7 @@ function Publishers() {
           percentage,
           totalBudget,
           usedBudget,
-          ...(allowance.remainingBudget > 0 && {
-            badge: {
-              label: "active",
-              color: "green-bitcoin",
-              textColor: "white",
-            },
-          }),
+          badges,
         });
 
         return acc;
@@ -82,11 +90,11 @@ function Publishers() {
   return (
     <Container>
       <h2 className="mt-12 mb-2 text-2xl font-bold dark:text-white">
-        {t("used.title")}
+        {t("title")}
       </h2>
 
       <p className="mb-6 text-gray-500 dark:text-neutral-500">
-        {t("used.description")}
+        {t("description")}
       </p>
 
       {publishers.length > 0 ? (
@@ -95,52 +103,13 @@ function Publishers() {
           navigateToPublisher={navigateToPublisher}
         />
       ) : (
-        <p className="dark:text-white"> {t("used.no_info")}</p>
+        <>
+          <p className="dark:text-white mb-4"> {t("no_info")}</p>
+          <Link to="/discover">
+            <Button primary label={t("discover")} />
+          </Link>
+        </>
       )}
-
-      <h2 className="mt-12 mb-2 text-2xl font-bold dark:text-white">
-        {t("suggestions.title")}
-      </h2>
-
-      <p className="mb-6 text-gray-500 dark:text-neutral-500">
-        {t("suggestions.description")}
-      </p>
-
-      <div className="mb-12">
-        {websites.map(({ title, items }) => (
-          <div className="mb-6" key={title}>
-            <h4 className="mb-4 text-xl font-bold dark:text-white">
-              {t(`suggestions.list.${title}`)}
-            </h4>
-
-            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              {items.map(({ title, subtitle, logo, url }) => (
-                <a key={url} href={url} target="_blank" rel="noreferrer">
-                  <div className="bg-white dark:bg-surface-02dp shadow-md flex p-4 h-32 rounded-lg hover:bg-gray-50 cursor-pointer w-full">
-                    <div className="flex space-x-3">
-                      <img
-                        src={logo}
-                        alt="image"
-                        className="h-14 w-14 rounded-xl shadow-md object-cover"
-                      />
-
-                      <div>
-                        <h2 className="font-medium font-serif text-base dark:text-white">
-                          {title}
-                        </h2>
-
-                        <p className="font-serif text-sm font-normal text-gray-500 dark:text-neutral-500 line-clamp-3">
-                          {subtitle}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
     </Container>
   );
 }

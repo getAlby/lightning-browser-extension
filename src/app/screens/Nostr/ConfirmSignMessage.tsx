@@ -1,9 +1,9 @@
-//import Checkbox from "../../components/Form/Checkbox";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
+import Checkbox from "@components/form/Checkbox";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +19,7 @@ function ConfirmSignMessage() {
   const navState = useNavigationState();
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
-    keyPrefix: "confirm_sign_message",
+    keyPrefix: "nostr",
   });
   const navigate = useNavigate();
 
@@ -27,13 +27,15 @@ function ConfirmSignMessage() {
   const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [rememberPermission, setRememberPermission] = useState(false);
 
   // TODO: refactor: the success message and loading will not be displayed because after the reply the prompt is closed.
   async function confirm() {
     try {
       setLoading(true);
       msg.reply({
-        confirm: true,
+        blocked: false,
+        enabled: rememberPermission,
       });
       setSuccessMessage(tCommon("success"));
     } catch (e) {
@@ -58,29 +60,51 @@ function ConfirmSignMessage() {
     }
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    confirm();
+  }
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
       {!successMessage ? (
-        <Container justifyBetween maxWidth="sm">
-          <div>
-            <PublisherCard
-              title={origin.name}
-              image={origin.icon}
-              url={origin.host}
+        <form onSubmit={handleSubmit} className="h-full">
+          <Container justifyBetween maxWidth="sm">
+            <div>
+              <PublisherCard
+                title={origin.name}
+                image={origin.icon}
+                url={origin.host}
+              />
+              <ContentMessage
+                heading={t("permissions.allow_sign", { host: origin.host })}
+                content={event.content}
+              />
+              <div className="flex items-center">
+                <Checkbox
+                  id="remember_permission"
+                  name="remember_permission"
+                  checked={rememberPermission}
+                  onChange={(event) => {
+                    setRememberPermission(event.target.checked);
+                  }}
+                />
+                <label
+                  htmlFor="remember_permission"
+                  className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+                >
+                  {t("confirm_sign_message.remember.label")}
+                </label>
+              </div>
+            </div>
+            <ConfirmOrCancel
+              disabled={loading}
+              loading={loading}
+              onCancel={reject}
             />
-            <ContentMessage
-              heading={t("content", { host: origin.host })}
-              content={event.content}
-            />
-          </div>
-          <ConfirmOrCancel
-            disabled={loading}
-            loading={loading}
-            onConfirm={confirm}
-            onCancel={reject}
-          />
-        </Container>
+          </Container>
+        </form>
       ) : (
         <Container maxWidth="sm">
           <PublisherCard

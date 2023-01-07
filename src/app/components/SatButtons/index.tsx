@@ -9,32 +9,32 @@ type Props = {
 
 function SatButtons({ onClick, disabled }: Props) {
   return (
-    <div className="flex gap-2 mt-2">
+    <div className="flex gap-2">
       <Button
         icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label="100 ⚡"
-        onClick={() => onClick("100")}
-        fullWidth
-        disabled={disabled}
-      />
-      <Button
-        icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label="1K ⚡"
+        label="1k ⚡"
         onClick={() => onClick("1000")}
         fullWidth
         disabled={disabled}
       />
       <Button
         icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label="5K ⚡"
+        label="5k ⚡"
         onClick={() => onClick("5000")}
         fullWidth
         disabled={disabled}
       />
       <Button
         icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label="10K ⚡"
+        label="10k ⚡"
         onClick={() => onClick("10000")}
+        fullWidth
+        disabled={disabled}
+      />
+      <Button
+        icon={<SatoshiV2Icon className="w-4 h-4" />}
+        label="25k ⚡"
+        onClick={() => onClick("25000")}
         fullWidth
         disabled={disabled}
       />

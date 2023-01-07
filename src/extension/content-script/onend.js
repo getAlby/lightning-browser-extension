@@ -15,13 +15,14 @@ const weblnCalls = [
   "webln/keysendOrPrompt",
   "webln/makeInvoice",
   "webln/signMessageOrPrompt",
-  "webln/lnc",
+  "webln/request",
 ];
 // calls that can be executed when webln is not enabled for the current content page
 const disabledCalls = ["webln/enable"];
 
 let isEnabled = false; // store if webln is enabled for this content page
-let callActive = false; // store if a webln is currently active. Used to prevent multiple calls in parallel
+let isRejected = false; // store if the webln enable call failed. if so we do not prompt again
+let callActive = false; // store if a webln call is currently active. Used to prevent multiple calls in parallel
 
 async function init() {
   const inject = await shouldInject();
@@ -52,6 +53,13 @@ async function init() {
     }
 
     if (ev.data && !ev.data.response) {
+      // if an enable call railed we ignore the request to prevent spamming the user with prompts
+      if (isRejected) {
+        console.error(
+          "Enable had failed. Rejecting further WebLN calls until the next reload"
+        );
+        return;
+      }
       // if a call is active we ignore the request
       if (callActive) {
         console.error("WebLN call already executing");
@@ -82,6 +90,11 @@ async function init() {
         // if it is the enable call we store if webln is enabled for this content script
         if (ev.data.action === "webln/enable") {
           isEnabled = response.data?.enabled;
+          if (response.error) {
+            console.error(response.error);
+            console.info("Enable was rejected ignoring further webln calls");
+            isRejected = true;
+          }
         }
         window.postMessage(
           {

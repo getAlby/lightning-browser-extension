@@ -3,9 +3,14 @@ import i18n from "i18next";
 import { useState, useEffect, createContext, useContext, useRef } from "react";
 import { toast } from "react-toastify";
 import { getTheme } from "~/app/utils";
-import { CURRENCIES } from "~/common/constants";
+import { CURRENCIES, ACCOUNT_CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
-import { getFiatValue as getFiatValueUtil } from "~/common/utils/currencyConvert";
+import {
+  getFormattedFiat as getFormattedFiatUtil,
+  getFormattedSats as getFormattedSatsUtil,
+  getFormattedNumber as getFormattedNumberUtil,
+  getFormattedCurrency as getFormattedCurrencyUtil,
+} from "~/common/utils/currencyConvert";
 import { DEFAULT_SETTINGS } from "~/extension/background-script/state";
 import type { SettingsStorage } from "~/types";
 
@@ -13,7 +18,13 @@ interface SettingsContextType {
   settings: SettingsStorage;
   updateSetting: (setting: Setting) => void;
   isLoading: boolean;
-  getFiatValue: (amount: number | string) => Promise<string>;
+  getFormattedFiat: (amount: number | string) => Promise<string>;
+  getFormattedSats: (amount: number | string) => string;
+  getFormattedNumber: (amount: number | string) => string;
+  getFormattedInCurrency: (
+    amount: number | string,
+    currency?: ACCOUNT_CURRENCIES
+  ) => string;
 }
 
 type Setting = Partial<SettingsStorage>;
@@ -75,13 +86,14 @@ export const SettingsProvider = ({
     return currencyRate.current.rate;
   };
 
-  const getFiatValue = async (amount: number | string) => {
+  const getFormattedFiat = async (amount: number | string) => {
     try {
       const rate = await getCurrencyRate();
-      const value = getFiatValueUtil({
+      const value = getFormattedFiatUtil({
         amount,
         rate,
         currency: settings.currency,
+        locale: settings.locale,
       });
 
       return value;
@@ -92,13 +104,36 @@ export const SettingsProvider = ({
     }
   };
 
+  const getFormattedSats = (amount: number | string) => {
+    return getFormattedSatsUtil({ amount, locale: settings.locale });
+  };
+
+  const getFormattedNumber = (amount: number | string) => {
+    return getFormattedNumberUtil({ amount, locale: settings.locale });
+  };
+
+  const getFormattedInCurrency = (
+    amount: number | string,
+    currency = "BTC" as ACCOUNT_CURRENCIES
+  ) => {
+    if (currency === "BTC") {
+      return getFormattedSats(amount);
+    }
+
+    return getFormattedCurrencyUtil({
+      amount,
+      locale: settings.locale,
+      currency,
+    });
+  };
+
   // update locale on every change
   useEffect(() => {
     i18n.changeLanguage(settings.locale);
 
     // need to switch i.e. `pt_BR` to `pt-br`
     const daysjsLocaleFormatted = settings.locale
-      .toLocaleLowerCase()
+      .toLowerCase()
       .replace("_", "-");
     dayjs.locale(daysjsLocaleFormatted);
   }, [settings.locale]);
@@ -109,7 +144,10 @@ export const SettingsProvider = ({
   }, [settings.theme]);
 
   const value = {
-    getFiatValue,
+    getFormattedFiat,
+    getFormattedSats,
+    getFormattedNumber,
+    getFormattedInCurrency,
     settings,
     updateSetting,
     isLoading,
