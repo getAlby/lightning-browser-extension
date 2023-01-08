@@ -351,10 +351,8 @@ class Lnc implements Connector {
     if (!this.lnc.isConnected) {
       return Promise.reject(new Error("Account is still loading"));
     }
-    // use v2 to use the key locator (key_loc)
-    // return this.request("POST", "/v2/signer/signmessage", {
     return this.lnc.lnd.lightning
-      .SignMessage({ msg: args.message })
+      .SignMessage({ msg: Base64.stringify(UTF8.parse(args.message)) })
       .then((data: FixMe) => {
         return {
           data: {
