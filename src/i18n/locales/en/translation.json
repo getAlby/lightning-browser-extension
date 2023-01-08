@@ -884,6 +884,30 @@
       "decodepayreq": "Decode a payment request string.",
       "routermc": "Read the internal mission control state.",
       "addinvoice": "Create new invoices."
+    },
+    "lnc": {
+      "getinfo": "Get the node information.",
+      "listchannels": "Get a description of all the open channels.",
+      "listinvoices": "Get a list of all invoices.",
+      "channelbalance": "Get a report on the total funds across all open channels.",
+      "walletbalance": "Get the total unspent outputs of the wallet.",
+      "openchannel": "Open a new channel.",
+      "connectpeer": "Establish a connection to a remote peer.",
+      "disconnectpeer": "Disconnect from a remote peer.",
+      "estimatefee": "Estimate the fee rate and total fees for a transaction.",
+      "getchaninfo": "Get the network announcement for the given channel.",
+      "getnetworkinfo": "Get basic stats about the known channel graph.",
+      "getnodeinfo": "Get the channel information for a node.",
+      "gettransactions": "Get a list of all transactions relevant to the wallet.",
+      "listpayments": "Get a list of all outgoing payments.",
+      "listpeers": "Get a list all currently active peers.",
+      "lookupinvoice": "Look up invoice details.",
+      "queryroutes": "Query for a possible route.",
+      "verifymessage": "Verify a signature over a msg.",
+      "sendtoroute": "Make a payment via the specified route.",
+      "decodepayreq": "Decode a payment request string.",
+      "routermc": "Read the internal mission control state.",
+      "addinvoice": "Create new invoices."
     }
   }
 }
