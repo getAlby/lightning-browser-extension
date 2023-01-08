@@ -138,6 +138,17 @@
           "connection_failed": "Connection failed. Are your LND credentials correct?"
         }
       },
+      "lnc": {
+        "title": "LND",
+        "page": {
+          "title": "Connect to your LND node",
+          "description": "Create a new session in terminal (litd) to obtain a new pairing phrase and enter it here"
+        },
+        "pairing_phrase": {
+          "label": "Your pairing phrase ",
+          "placeholder": "secret stack sats phrase"
+        }
+      },
       "lndhub_bluewallet": {
         "title": "Bluewallet",
         "page": {

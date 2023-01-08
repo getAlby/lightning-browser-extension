@@ -2,6 +2,7 @@ import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
@@ -12,6 +13,9 @@ const initialFormData = Object.freeze({
 
 export default function ConnectLnd() {
   const navigate = useNavigate();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "choose_connector.lnc",
+  });
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
 
@@ -64,8 +68,8 @@ export default function ConnectLnd() {
 
   return (
     <ConnectorForm
-      title="Connect to your LND node"
-      description="You need your Lightning Node Connect pairing phrase"
+      title={t("page.title")}
+      description={t("page.description")}
       submitLoading={loading}
       submitDisabled={formData.pairingPhrase === ""}
       onSubmit={handleSubmit}
@@ -74,9 +78,8 @@ export default function ConnectLnd() {
         <TextField
           id="pairingPhrase"
           type="password"
-          label="Pairing Phrase"
-          placeholder="secret stack sats"
-          title="Your Lightning Ndoe Connect Pairing Phrase"
+          label={t("pairing_phrase.label")}
+          placeholder={t("pairing_phrase.placeholder")}
           onChange={handleChange}
           required
         />
