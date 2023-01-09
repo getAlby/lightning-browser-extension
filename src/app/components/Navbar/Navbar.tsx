@@ -11,7 +11,9 @@ export default function Navbar({ children }: Props) {
       <div className="max-w-screen-lg flex justify-between items-center mx-auto w-full lg:px-4">
         <div className="flex">
           <UserMenu />
-          {children && <nav className="flex ml-8 space-x-8">{children}</nav>}
+          {children && (
+            <nav className="ml-8 space-x-8 hidden md:flex">{children}</nav>
+          )}
         </div>
         <AccountMenu />
       </div>
