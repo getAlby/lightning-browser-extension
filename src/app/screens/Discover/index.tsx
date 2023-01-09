@@ -25,7 +25,7 @@ function Discover() {
               {t(`list.${title as "trading"}`)}
             </h4>
 
-            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {items.map(({ title, subtitle, logo, url }) => (
                 <a key={url} href={url} target="_blank" rel="noreferrer">
                   <div className="bg-white dark:bg-surface-02dp shadow flex p-4 h-24 rounded-lg hover:bg-gray-50 cursor-pointer w-full">
