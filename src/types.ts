@@ -1,6 +1,5 @@
 import { PaymentRequestObject } from "bolt11";
-import { CURRENCIES, TIPS } from "~/common/constants";
-import { CURRENCIES, ACCOUNT_CURRENCIES, TIPS } from "~/common/constants";
+import { ACCOUNT_CURRENCIES, CURRENCIES, TIPS } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
 import {
   ConnectorInvoice,
