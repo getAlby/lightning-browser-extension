@@ -75,11 +75,7 @@ function AccountMenu({ showOptions = true }: Props) {
   return (
     <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-surface-12dp max-w-full">
       <p className="flex items-center">
-        {/* TODO: Replace with placeholder / image from connector*/}
-        <img
-          className="rounded-full w-8 h-8"
-          src="https://secure.gravatar.com/avatar/07e22939e7672b38c56615068c4c715f?size=200&default=mm&rating=g"
-        />
+        <WalletIcon className="-ml-1 w-8 h-8 opacity-50 dark:text-white" />
       </p>
 
       <div
