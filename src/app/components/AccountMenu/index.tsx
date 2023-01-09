@@ -1,11 +1,11 @@
 import {
   AddressBookIcon,
   CaretDownIcon,
+  CheckIcon,
   PlusIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
@@ -133,7 +133,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 {accountId === authAccount?.id && (
                   <span
                     data-testid="selected"
-                    className="ml-auto w-3.5 h-3.5 rounded-full bg-orange-bitcoin flex justify-center items-center"
+                    className="ml-auto w-3.5 h-3.5 rounded-full bg-primary flex justify-center items-center"
                   >
                     <CheckIcon className="w-3 h-3 text-white" />
                   </span>

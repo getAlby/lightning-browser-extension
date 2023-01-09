@@ -131,7 +131,7 @@ function AccountsScreen() {
                 <tr key={accountId}>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <div className="w-12 h-12 flex justify-center items-center rounded-full bg-orange-bitcoin-50">
+                      <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary-50">
                         <WalletIcon className="w-8 h-8 text-black" />
                       </div>
                       <div className="ml-4">

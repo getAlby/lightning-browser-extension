@@ -46,7 +46,7 @@ const Button = forwardRef(
           primary
             ? "bg-gradient-to-bl from-amber-300 to-amber-500 text-white"
             : outline
-            ? "bg-white text-orange-bitcoin border border-orange-bitcoin dark:bg-surface-02dp"
+            ? "bg-white text-primary border border-primary dark:bg-surface-02dp"
             : `bg-white text-gray-700 dark:bg-surface-02dp dark:text-neutral-200 dark:border-neutral-800`,
           primary && !disabled && "hover:bg-gradient-to-br",
           !primary &&
@@ -54,7 +54,7 @@ const Button = forwardRef(
             "hover:bg-gray-50 dark:hover:bg-surface-16dp",
           disabled ? "cursor-default opacity-60" : "cursor-pointer",
           flex && "flex-1",
-          "inline-flex justify-center items-center font-medium rounded-md shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-bitcoin transition duration-150"
+          "inline-flex justify-center items-center font-medium rounded-md shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary transition duration-150"
         )}
         onClick={onClick}
         disabled={disabled}

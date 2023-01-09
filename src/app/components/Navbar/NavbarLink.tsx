@@ -14,7 +14,7 @@ function NavbarLink({ children, end = false, href }: Props) {
       className={({ isActive }) =>
         "block px-1 font-semibold transition-colors duration-200" +
         (isActive
-          ? " text-orange-bitcoin hover:text-orange-bitcoin dark:text-orange-bitcoin"
+          ? " text-primary hover:text-primary dark:text-primary"
           : " text-gray-500 dark:text-neutral-400 hover:text-gray-700")
       }
     >
