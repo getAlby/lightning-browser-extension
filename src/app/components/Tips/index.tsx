@@ -1,6 +1,6 @@
 import Button from "@components/Button";
 import CloseableCard from "@components/CloseableCard";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useTips } from "~/app/hooks/useTips";
 import { TIPS } from "~/common/constants";
@@ -50,10 +50,15 @@ export default function Tips() {
         handleClose={() => filterTip(TIPS.PIN)}
         title={t("pin.title")}
         description={[
-          t("pin.description1").replace(
-            "{icon}",
-            `<img src="assets/icons/puzzle.svg" class="w-5 inline align-bottom" />`
-          ),
+          // eslint-disable-next-line react/jsx-key
+          <Trans i18nKey={"pin.description1"} t={t}>
+            To access Alby easily, click on extension icon
+            <img
+              src="assets/icons/puzzle.svg"
+              className="w-5 inline align-bottom"
+            />
+            in the top right corner of your browser
+          </Trans>,
           t("pin.description2"),
           t("pin.description3"),
         ]}
