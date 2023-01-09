@@ -30,7 +30,7 @@ function CompanionDownloadInfo({ hasTorCallback }: Props) {
             <a
               href={`https://getalby.com/install/companion/${getOS()}`}
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
               className="font-bold"
             >
               {t("download_here")}

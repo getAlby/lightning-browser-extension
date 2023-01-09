@@ -2,7 +2,21 @@
 
 ## 🚀 Quick Start
 
+- Install dependencies\
+  `$ yarn install`
+
 ### 💻 Load extension into browser
+
+- Start development build, which will automatically watch for file changes:
+
+  - Chrome\
+    `$ yarn run dev:chrome`
+  - Firefox\
+    `$ yarn run dev:firefox`
+  - Opera\
+     `$ yarn run dev:opera`
+
+  **NOTE:** by default, the extension built this way will talk to the testnet API (which runs under [app.regtest.getalby.com](https://app.regtest.getalby.com/user)). In case you want to do manual tests against the mainnet API, add the following `WALLET_CREATE_URL` environment variable to your command: `$ WALLET_CREATE_URL="https://getalby.com/api/users" yarn run dev:your-browser-of-choice`
 
 - **Chrome**
 
@@ -25,6 +39,16 @@
   - Check the `Developer Mode` and load as unpacked from extension’s extracted directory.
 
 To connect to a remote development LND node you can use a [test account](https://github.com/bumi/lightning-browser-extension/wiki/Test-setup)
+
+### Multiple Extensions
+
+It is not recommended to have multiple versions of the extension (development + official) running in the same browser. You will have instances of the extension with the same icon which is confusing, and also leads to a poor webln experience as both extensions will launch a popup. There may also be unexpected bugs due to conflict with the two extensions running at the same time.
+
+Some ways you can work around this are:
+
+- Use a separate Chrome / firefox profile for development of the extension (this profile would not have the official extension installed)
+- Use a dedicated browser for development of the extension (this browser would not have the official extension installed)
+- Disable the official extension during development, and disable the development extension when you want to use Alby as normal.
 
 ### Testnet/testing-accounts for development use localhost testnet
 

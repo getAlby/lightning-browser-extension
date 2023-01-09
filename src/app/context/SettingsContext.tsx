@@ -3,12 +3,13 @@ import i18n from "i18next";
 import { useState, useEffect, createContext, useContext, useRef } from "react";
 import { toast } from "react-toastify";
 import { getTheme } from "~/app/utils";
-import { CURRENCIES } from "~/common/constants";
+import { CURRENCIES, ACCOUNT_CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
 import {
   getFormattedFiat as getFormattedFiatUtil,
   getFormattedSats as getFormattedSatsUtil,
   getFormattedNumber as getFormattedNumberUtil,
+  getFormattedCurrency as getFormattedCurrencyUtil,
 } from "~/common/utils/currencyConvert";
 import { DEFAULT_SETTINGS } from "~/extension/background-script/state";
 import type { SettingsStorage } from "~/types";
@@ -20,6 +21,10 @@ interface SettingsContextType {
   getFormattedFiat: (amount: number | string) => Promise<string>;
   getFormattedSats: (amount: number | string) => string;
   getFormattedNumber: (amount: number | string) => string;
+  getFormattedInCurrency: (
+    amount: number | string,
+    currency?: ACCOUNT_CURRENCIES
+  ) => string;
 }
 
 type Setting = Partial<SettingsStorage>;
@@ -108,6 +113,21 @@ export const SettingsProvider = ({
     return getFormattedNumberUtil({ amount, locale: settings.locale });
   };
 
+  const getFormattedInCurrency = (
+    amount: number | string,
+    currency = "BTC" as ACCOUNT_CURRENCIES
+  ) => {
+    if (currency === "BTC") {
+      return getFormattedSats(amount);
+    }
+
+    return getFormattedCurrencyUtil({
+      amount,
+      locale: settings.locale,
+      currency,
+    });
+  };
+
   // update locale on every change
   useEffect(() => {
     i18n.changeLanguage(settings.locale);
@@ -128,6 +148,7 @@ export const SettingsProvider = ({
     getFormattedFiat,
     getFormattedSats,
     getFormattedNumber,
+    getFormattedInCurrency,
     settings,
     updateSetting,
     isLoading,

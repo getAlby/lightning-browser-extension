@@ -28,7 +28,6 @@
           "description": "闪电交易全部发生在你的浏览器中。不需要alt+tab或扫描二维码。"
         }
       },
-      "title": "浏览器中的⚡ 比特币⚡ 的力量",
       "set_password": {
         "title": "设置解锁密码",
         "description": "你的闪电账户数据是用解锁密码安全加密的。不要忘记这个密码! 你需要它来解锁Alby Extension（在这个浏览器中）",
@@ -59,32 +58,6 @@
       }
     },
     "choose_connector": {
-      "alby": {
-        "pre_connect": {
-          "optional_lightning_note": {
-            "part1": "你的Alby账户还附带一个可选的",
-            "part2": "闪电地址",
-            "part3": "。这是任何人都可以轻松地在闪电网络上向你发送比特币的一个方法。",
-            "part4": "了解更多"
-          },
-          "optional_lightning_address": {
-            "title": "数字和字母，至少3个字符",
-            "suffix": "@getalby.com",
-            "label": "选择你的闪电地址（可选）"
-          },
-          "errors": {
-            "create_wallet_error": "登录或创建新账户失败。如果你需要帮助，请联系 support@getalby.com"
-          },
-          "title": "你的Alby闪电钱包",
-          "host_wallet": "我们为你托管的闪电钱包！",
-          "login_account": "创建或登录你的Alby账户。",
-          "email": {
-            "label": "电子邮箱"
-          }
-        },
-        "title": "Alby钱包",
-        "description": "创建或登录你的Alby账户"
-      },
       "lnd": {
         "errors": {
           "connection_failed": "连接失败。你的LND凭据是否正确？"
@@ -102,11 +75,9 @@
         },
         "drag_and_drop": "将你的macaroon拖放到此处或<0>浏览</0>",
         "title": "LND",
-        "description": "连接你的LND节点",
         "or": "或"
       },
       "bitcoin_jungle": {
-        "description": "创建或连接比特币丛林（Galoy）账户",
         "page": {
           "title": "连接<0>比特币丛林钱包</0>"
         },
@@ -117,7 +88,6 @@
           "label": "Eclair URL",
           "placeholder": "http://localhost:8080"
         },
-        "description": "连接你的Eclair节点",
         "page": {
           "title": "连接 <0>Eclair</0>",
           "instructions": "你需要你的 Eclair URL 和密码。"
@@ -139,8 +109,7 @@
           "label": "Citadel URL",
           "placeholder": "http://citadel.local"
         },
-        "title": "Citadel",
-        "description": "连接你局域网上的Citadel"
+        "title": "Citadel"
       },
       "galoy": {
         "jwt": {
@@ -166,7 +135,6 @@
         }
       },
       "btcpay": {
-        "description": "连接你的BTCPay LND节点",
         "page": {
           "instructions": "导航到你的BTCPayServer并以管理员身份登录。转到服务器设置 > 服务 > LND Rest - 查看信息。然后点击 \"查看二维码信息 \"并复制二维码数据。把它粘贴在下面：",
           "title": "连接你的BTCPay LND节点"
@@ -181,7 +149,6 @@
         }
       },
       "bitcoin_beach": {
-        "description": "创建或连接比特币海滩（Galoy）帐户",
         "page": {
           "title": "连接<0>比特币海滩钱包</0>"
         },
@@ -196,7 +163,6 @@
           "connection_failed": "连接失败。你的Core Lightning节点是否在线并使用了commando插件？"
         },
         "title": "Core Lightning",
-        "description": "连接你的Core Lightning节点",
         "page": {
           "title": "连接你的Core Lightning节点",
           "instructions": "确保你用的是Core Lightning 0.12.0或更新的版本，commando插件正在运行，并且你的节点可以通过闪电网络访问。通过运行'lightning-cli commando-rune'来创建符文。"
@@ -229,8 +195,7 @@
           "placeholder": "lndconnect://yournode:8080?...",
           "label": "lndconnect REST URL"
         },
-        "title": "Start9",
-        "description": "连接你的Embassy"
+        "title": "Start9"
       },
       "raspiblitz": {
         "page": {
@@ -242,12 +207,10 @@
           "label": "REST API主机",
           "placeholder": "your-node-onion-address:port"
         },
-        "title": "RaspiBlitz",
-        "description": "连接你的RaspiBlitz"
+        "title": "RaspiBlitz"
       },
       "lndhub_bluewallet": {
         "title": "Bluewallet",
-        "description": "连接到你的Bluewallet手机钱包",
         "page": {
           "title": "连接BlueWallet",
           "description": "在BlueWallet中，选择你要连接的钱包，打开它，点击\"...\"，点击导出/备份，显示二维码，用摄像头扫描。"
@@ -262,7 +225,6 @@
       },
       "lndhub_go": {
         "title": "LNDHub",
-        "description": "连接你的LNDHub账户",
         "page": {
           "title": "连接LNDHub",
           "description": "在此输入你的LNDHub凭据URI或用你的摄像头扫描二维码。"
@@ -283,7 +245,6 @@
           "connection_failed": "连接失败。你的URL和管理密钥正确吗？"
         },
         "title": "LNbits",
-        "description": "连接你的LNbits账户",
         "page": {
           "title": "连接<0>LNbits</0>",
           "instructions": "在LNbits中，选择你想连接的钱包，打开它，点击API信息并复制管理密钥。把它粘贴在下面："
@@ -299,19 +260,13 @@
           "instructions": "在你的Umbrel仪表板上，进入<0>连接钱包</0>。选择<0>lndconnect REST</0>并复制<0>lndconnect URL</0>。(根据你的设置，你可以使用本地连接或Tor连接。）"
         },
         "title": "Umbrel",
-        "description": "连接你的Umbrel",
         "rest_url": {
           "label": "lndconnect REST URL",
           "placeholder": "lndconnect://yournode:8080?..."
         }
       },
-      "title": {
-        "welcome": "你有没有闪电钱包？",
-        "options": "添加新的闪电账户"
-      },
       "description": "你首先需要连接一个闪电钱包，这样你就可以与你最喜欢的接受比特币闪电支付的网站进行互动了!",
       "mynode": {
-        "description": "连接你的myNode",
         "title": "myNode",
         "page": {
           "title": "连接<0>myNode</0>",
@@ -328,7 +283,7 @@
       "allowance_view": {
         "recent_transactions": "近期交易",
         "no_transactions": "<0>{{name}}</0>还没有交易。",
-        "sats_used": "已使用的聪",
+        "sats_used": "已使用的sats",
         "allowance": "限额"
       },
       "default_view": {
@@ -388,23 +343,6 @@
       "unlock_password": "你的解锁密码"
     },
     "publishers": {
-      "suggestions": {
-        "list": {
-          "trading": "交易",
-          "gaming": "游戏",
-          "showcases": "展示",
-          "entertaiment": "娱乐",
-          "shopping": "购物",
-          "miscellaneous": "杂项"
-        },
-        "title": "其他⚡️网站",
-        "description": "你可以使用Alby的网站"
-      },
-      "used": {
-        "title": "你的⚡️网站",
-        "description": "你曾经使用过Alby的网站",
-        "no_info": "还没有网站。"
-      },
       "publisher": {
         "allowance": {
           "used_budget": "已使用的聪",
@@ -595,8 +533,7 @@
     "confirm_request_permission": {
       "allow": "允许{{host}}进行：",
       "always_allow": "始终允许在{{host}}上使用{{method}}",
-      "title": "批准请求",
-      "enable_method": "调用{{method}}"
+      "title": "批准请求"
     },
     "nostr": {
       "title": "Nostr",
@@ -680,8 +617,8 @@
     "optional": "可选",
     "description": "描述",
     "message": "消息",
-    "sats_one": "聪",
-    "sats_other": "聪",
+    "sats_one": "sat",
+    "sats_other": "sats",
     "success_message": "{{amount}}{{fiatAmount}}已发送至{{destination}}",
     "response": "答复",
     "help": "帮助",

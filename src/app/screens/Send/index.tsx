@@ -175,9 +175,7 @@ function Send() {
               disabled={loading}
               autoFocus
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setInvoice(
-                  event.target.value.trim().replace(/^lightning:/i, "")
-                )
+                setInvoice(extractInvoiceFrom(event.target.value.trim()))
               }
               endAdornment={
                 <button

@@ -63,6 +63,10 @@ export default class LndHub implements Connector {
     return Promise.resolve();
   }
 
+  get supportedMethods() {
+    return ["getInfo", "keysend", "makeInvoice", "sendPayment", "signMessage"];
+  }
+
   // not yet implemented
   async connectPeer(): Promise<ConnectPeerResponse> {
     console.error(

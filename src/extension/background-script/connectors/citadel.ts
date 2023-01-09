@@ -48,6 +48,10 @@ class CitadelConnector implements Connector {
     return Promise.resolve();
   }
 
+  get supportedMethods() {
+    return ["makeInvoice", "sendPayment", "signMessage", "getInfo"];
+  }
+
   async getInfo(): Promise<GetInfoResponse> {
     await this.ensureLogin();
     return this.request("GET", "api/v1/lnd/info").then((data) => {

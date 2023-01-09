@@ -39,4 +39,22 @@ export const handlers = [
       );
     }
   ),
+
+  rest.get("https://lnurl.fiatjaf.com/lnurl-login", (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        status: "OK",
+      })
+    );
+  }),
+
+  rest.get("https://lnurl.fiatjaf.com/lnurl-login-fail", (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        status: null,
+      })
+    );
+  }),
 ];

@@ -34,12 +34,12 @@ function ConnectorForm({
       <div className="relative lg:flex mt-14 bg-white dark:bg-surface-02dp px-10 py-12">
         <div className="lg:w-1/2">
           {typeof title === "string" ? (
-            <h1 className="mb-6 text-2xl font-bold dark:text-white">{title}</h1>
+            <h1 className="mb-2 text-2xl font-bold dark:text-white">{title}</h1>
           ) : (
             title
           )}
           {description && (
-            <div className="mb-6 text-gray-500 dark:text-neutral-400">
+            <div className="text-gray-500 dark:text-neutral-400 whitespace-pre-line">
               {typeof description === "string" ? (
                 <p>{description}</p>
               ) : (

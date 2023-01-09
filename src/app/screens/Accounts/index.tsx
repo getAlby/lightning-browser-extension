@@ -111,12 +111,9 @@ function AccountsScreen() {
 
   return (
     <Container>
-      <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
-        {t("title")}
-      </h2>
-
-      <div className="shadow border-b border-gray-200 dark:border-neutral-500 sm:rounded-lg bg-white dark:bg-surface-02dp">
-        <div className="p-6">
+      <div className="mt-12 mb-6 flex items-center justify-between">
+        <h2 className="text-2xl font-bold dark:text-white">{t("title")}</h2>
+        <div>
           <Button
             icon={<PlusIcon className="w-5 h-5 mr-2" />}
             label={t("actions.add_account")}
@@ -124,7 +121,8 @@ function AccountsScreen() {
             onClick={() => navigate(`/accounts/new`)}
           />
         </div>
-
+      </div>
+      <div className="shadow border-b border-gray-200 dark:border-neutral-500 sm:rounded-lg bg-white dark:bg-surface-02dp">
         <table className="min-w-full">
           <tbody className="divide-y divide-gray-200">
             {Object.keys(accounts).map((accountId) => {
@@ -148,7 +146,7 @@ function AccountsScreen() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <Menu as="div" className="relative">
-                      <Menu.Button className="ml-auto flex items-center transition-color duration-200 rounded border-2 border-gray-500 hover:border-black dark:hover:border-white text-gray-500 hover:text-black dark:hover:text-white">
+                      <Menu.Button className="ml-auto flex items-center transition-color duration-200 rounded border-2 border-gray-200 dark:border-gray-500 hover:border-black dark:hover:border-white text-gray-500 hover:text-black dark:hover:text-white">
                         <EllipsisIcon className="h-6 w-6 rotate-90" />
                       </Menu.Button>
 

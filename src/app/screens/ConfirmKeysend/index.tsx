@@ -4,7 +4,7 @@ import Container from "@components/Container";
 import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -131,8 +131,8 @@ function ConfirmKeysend() {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
       {!successMessage ? (
-        <Container justifyBetween maxWidth="sm">
-          <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="h-full">
+          <Container justifyBetween maxWidth="sm">
             <div>
               <PublisherCard
                 title={origin.name}
@@ -166,8 +166,8 @@ function ConfirmKeysend() {
               loading={loading}
               onCancel={reject}
             />
-          </form>
-        </Container>
+          </Container>
+        </form>
       ) : (
         <Container maxWidth="sm">
           <PublisherCard

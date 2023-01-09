@@ -3,7 +3,27 @@
  */
 import i18n from "~/i18n/i18nConfig";
 
-import type { CURRENCIES } from "../constants";
+import type { CURRENCIES, ACCOUNT_CURRENCIES } from "../constants";
+
+export const numSatsInBtc = 100_000_000;
+
+export const getSatsToBTC = (sats: string | number) =>
+  Number(sats) / numSatsInBtc;
+
+export const getBTCToSats = (btc: string | number) =>
+  Number(btc) * numSatsInBtc;
+
+export const getFormattedCurrency = (params: {
+  amount: number | string;
+  currency: CURRENCIES | ACCOUNT_CURRENCIES;
+  locale: string;
+}) => {
+  const l = (params.locale || "en").toLowerCase().replace("_", "-");
+  return new Intl.NumberFormat(l || "en", {
+    style: "currency",
+    currency: params.currency,
+  }).format(Number(params.amount));
+};
 
 export const getFormattedFiat = (params: {
   amount: number | string;
@@ -12,12 +32,7 @@ export const getFormattedFiat = (params: {
   locale: string;
 }) => {
   const fiatValue = Number(params.amount) * params.rate;
-
-  const l = (params.locale || "en").toLowerCase().replace("_", "-");
-  return new Intl.NumberFormat(l || "en", {
-    style: "currency",
-    currency: params.currency,
-  }).format(fiatValue);
+  return getFormattedCurrency({ ...params, amount: fiatValue });
 };
 
 export const getFormattedNumber = (params: {

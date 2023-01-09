@@ -1,7 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "title": "",
       "nav": {
         "welcome": "",
         "password": "",
@@ -59,40 +58,9 @@
       }
     },
     "choose_connector": {
-      "title": {
-        "welcome": "",
-        "options": ""
-      },
       "description": "",
-      "alby": {
-        "title": "",
-        "description": "",
-        "pre_connect": {
-          "title": "",
-          "login_account": "",
-          "host_wallet": "",
-          "email": {
-            "label": ""
-          },
-          "optional_lightning_note": {
-            "part1": "",
-            "part2": "",
-            "part3": "",
-            "part4": ""
-          },
-          "optional_lightning_address": {
-            "label": "",
-            "suffix": "",
-            "title": ""
-          },
-          "errors": {
-            "create_wallet_error": ""
-          }
-        }
-      },
       "lnd": {
         "title": "",
-        "description": "",
         "page": {
           "title": "",
           "description": ""
@@ -112,7 +80,6 @@
       },
       "lndhub_bluewallet": {
         "title": "",
-        "description": "",
         "page": {
           "title": "",
           "description": ""
@@ -127,7 +94,6 @@
       },
       "lndhub_go": {
         "title": "",
-        "description": "",
         "page": {
           "title": "",
           "description": ""
@@ -142,7 +108,6 @@
       },
       "lnbits": {
         "title": "",
-        "description": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -160,7 +125,6 @@
       },
       "eclair": {
         "title": "",
-        "description": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -175,7 +139,6 @@
       },
       "citadel": {
         "title": "",
-        "description": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -190,7 +153,6 @@
       },
       "umbrel": {
         "title": "",
-        "description": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -202,7 +164,6 @@
       },
       "mynode": {
         "title": "",
-        "description": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -214,7 +175,6 @@
       },
       "start9": {
         "title": "",
-        "description": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -226,7 +186,6 @@
       },
       "raspiblitz": {
         "title": "",
-        "description": "",
         "page": {
           "title": "",
           "instructions1": "",
@@ -239,14 +198,12 @@
       },
       "bitcoin_beach": {
         "title": "",
-        "description": "",
         "page": {
           "title": ""
         }
       },
       "bitcoin_jungle": {
         "title": "",
-        "description": "",
         "page": {
           "title": ""
         }
@@ -276,7 +233,6 @@
       },
       "btcpay": {
         "title": "",
-        "description": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -291,7 +247,6 @@
       },
       "commando": {
         "title": "",
-        "description": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -566,23 +521,6 @@
       }
     },
     "publishers": {
-      "used": {
-        "title": "",
-        "description": "",
-        "no_info": ""
-      },
-      "suggestions": {
-        "title": "",
-        "description": "",
-        "list": {
-          "trading": "",
-          "gaming": "",
-          "entertaiment": "",
-          "shopping": "",
-          "miscellaneous": "",
-          "showcases": ""
-        }
-      },
       "publisher": {
         "allowance": {
           "title": "",
@@ -634,7 +572,6 @@
     "confirm_request_permission": {
       "title": "",
       "allow": "",
-      "enable_method": "",
       "always_allow": ""
     },
     "nostr": {

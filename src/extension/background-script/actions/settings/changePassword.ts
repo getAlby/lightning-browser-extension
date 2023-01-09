@@ -9,6 +9,7 @@ const changePassword = async (message: Message) => {
   if (!password) return { error: "Password is missing" };
   const newPassword = message.args.password as string;
   const tmpAccounts = { ...accounts };
+  const nostPrivateKey = await state.getState().getNostr().getPrivateKey();
 
   for (const accountId in tmpAccounts) {
     const accountConfig = decryptData(
@@ -17,8 +18,11 @@ const changePassword = async (message: Message) => {
     );
     tmpAccounts[accountId].config = encryptData(accountConfig, newPassword);
   }
+
   await state.getState().password(newPassword);
   state.setState({ accounts: tmpAccounts });
+  await state.getState().getNostr().setPrivateKey(nostPrivateKey);
+
   // make sure we immediately persist the updated accounts
   await state.getState().saveToStorage();
 

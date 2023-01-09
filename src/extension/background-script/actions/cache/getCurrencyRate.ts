@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import browser from "webextension-polyfill";
 import type { CURRENCIES } from "~/common/constants";
+import { numSatsInBtc } from "~/common/utils/currencyConvert";
 import state from "~/extension/background-script/state";
 import type { MessageCurrencyRateGet } from "~/types";
 
@@ -14,8 +15,6 @@ interface CurrencyRate {
   rate?: number;
   timestamp?: number;
 }
-
-export const numSatsInBtc = 100_000_000;
 
 const storeCurrencyRate = async ({ rate, currency }: CurrencyRate) => {
   const currencyRate: CurrencyRate = {
