@@ -642,18 +642,16 @@
       "title": "Nostr",
       "allow": "Allow this website to:",
       "content": "This website asks you to sign:",
-      "read_public_key": "Read your public key",
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
-      "confirm_sign_message": {
-        "remember": {
-          "label": "Remember my choice and don't ask again"
-        }
-      },
       "permissions": {
         "decrypt": "Decrypt data",
         "encrypt": "Encrypt data",
-        "allow_sign": "Allow {{host}} to sign:"
+        "allow_sign": "Allow {{host}} to sign:",
+        "read_public_key": "Read your public key",
+        "remember": {
+          "label": "Remember my choice and don't ask again"
+        }
       }
     }
   },
