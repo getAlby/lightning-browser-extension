@@ -35,13 +35,15 @@ const request = async (
       return { error: "Could not find an allowance for this host" };
     }
 
+    const connectorName = connector.constructor.name.toLowerCase();
     // prefix method with webln to prevent potential naming conflicts (e.g. with nostr calls that also use the permissions)
-    const weblnMethod = `${WEBLN_PREFIX}${method}`;
+    const legacyWeblnMethod = `${WEBLN_PREFIX}${method}`;
+    const weblnMethod = `${WEBLN_PREFIX}${connectorName}/${method}`;
 
     const permission = await db.permissions
       .where("host")
       .equalsIgnoreCase(origin.host)
-      .and((p) => p.method === weblnMethod)
+      .and((p) => p.method === legacyWeblnMethod || p.method === weblnMethod)
       .first();
 
     // request method is allowed to be called
@@ -56,7 +58,7 @@ const request = async (
         args: {
           requestPermission: {
             method,
-            description: `${connector.constructor.name.toLowerCase()}.${method}`,
+            description: `${connectorName}.${method}`,
           },
         },
         origin,
