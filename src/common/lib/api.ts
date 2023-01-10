@@ -1,3 +1,4 @@
+import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import {
   ConnectPeerArgs,
   ConnectPeerResponse,
@@ -5,17 +6,17 @@ import {
   MakeInvoiceResponse,
 } from "~/extension/background-script/connectors/connector.interface";
 import type {
-  Accounts,
   AccountInfo,
-  NodeInfo,
+  Accounts,
   Allowance,
-  SettingsStorage,
-  MessageInvoices,
   DbPayment,
+  Invoice,
+  LnurlAuthResponse,
+  MessageInvoices,
   MessageLnurlAuth,
   MessageSettingsSet,
-  LnurlAuthResponse,
-  Invoice,
+  NodeInfo,
+  SettingsStorage,
 } from "~/types";
 
 import {
@@ -26,7 +27,7 @@ import {
 import msg from "./msg";
 
 export interface AccountInfoRes {
-  balance: { balance: string | number };
+  balance: { balance: string | number; currency: ACCOUNT_CURRENCIES };
   currentAccountId: string;
   info: { alias: string; pubkey?: string };
   name: string;
@@ -69,11 +70,17 @@ export const swrGetAccountInfo = async (
     getAccountInfo()
       .then((response) => {
         const { alias } = response.info;
-        const { balance: resBalance } = response.balance;
+        const { balance: resBalance, currency } = response.balance;
         const name = response.name;
         const balance =
           typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
-        const account = { id, name, alias, balance };
+        const account = {
+          id,
+          name,
+          alias,
+          balance,
+          currency: currency || "BTC", // set default currency for every account
+        };
         storeAccounts({
           ...accountsCache,
           [id]: account,

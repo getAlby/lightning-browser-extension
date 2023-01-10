@@ -1,11 +1,10 @@
 {
   "translation": {
     "welcome": {
-      "title": "Die Macht von ⚡ bitcoin ⚡ in deinem Browser",
       "nav": {
         "welcome": "Willkommen",
         "password": "Dein Passwort",
-        "connect": "Dein Lightning-Konto",
+        "connect": "Ihr Lightning Konto",
         "done": "Fertig"
       },
       "intro": {
@@ -59,32 +58,6 @@
       }
     },
     "choose_connector": {
-      "alby": {
-        "pre_connect": {
-          "host_wallet": "Wir hosten die Lightning Wallet für dich!",
-          "optional_lightning_address": {
-            "suffix": "@getalby.com",
-            "title": "Zahlen und Buchstaben, mindestens 3 Ziffern",
-            "label": "Wähle deine Lightning Adresse (optional)"
-          },
-          "optional_lightning_note": {
-            "part2": "Lightning Adresse",
-            "part3": "Das ist für jeden ein einfacher Weg, um dir Bitcoin über das Lightning Netzwerk zu schicken.",
-            "part4": "Erfahre mehr",
-            "part1": "Dein Alby-Konto wird auch mit einem optionalen"
-          },
-          "title": "Deine Alby Lightning Wallet",
-          "login_account": "Erstelle einen Alby Account oder logge dich ein.",
-          "errors": {
-            "create_wallet_error": "Der Login oder das Erstellen eines Accounts waren nicht möglich. Wenn du Hilfe brauchst, kontaktiere bitte support@getalby.com"
-          },
-          "email": {
-            "label": "E-Mail Adresse"
-          }
-        },
-        "title": "Alby Brieftasche",
-        "description": "Erstelle einen Alby Account oder logge dich ein"
-      },
       "lnd": {
         "or": "OR",
         "drag_and_drop": "Ziehe deine Makrone hierher oder lege sie dort ab <0>durchsuchen</0>",
@@ -102,7 +75,6 @@
           "description": "Du benötigst deinen URL-Knoten und eine Macaroon mit Lese- und Sendeberechtigungen (z.B. admin.macaroon)",
           "title": "Verbinde dich zu deinem LND Node"
         },
-        "description": "Verbinde dich mit deiner LND Node",
         "title": "LND"
       },
       "lndhub_bluewallet": {
@@ -114,7 +86,6 @@
           "connection_failed": "Verbindung nicht erfolgreich. Ist deine BlueWallet URI richtig?"
         },
         "title": "BlueWallet",
-        "description": "Verbinde dich mit deiner mobilen Bluewallet App",
         "page": {
           "title": "Verbinde dich mit Bluewallet",
           "description": "Wähle in der BlueWallet die Wallet, die du verbinden willst, öffne sie, klicke auf \"...\", klicke auf Export/Backup, um den QR Code anzuzeigen. Scanne ihn dann mit deiner Webcam."
@@ -129,7 +100,6 @@
           "invalid_uri": "Ungültiger LNDHub-URI",
           "connection_failed": "Verbindung fehlgeschlagen. Ist dein LNDHub-URI korrekt?"
         },
-        "description": "Verbinden dich mit deinem LNDHub-Konto",
         "page": {
           "title": "Verbinden dich mit LNDHub",
           "description": "Gebe hier deine LNDHub-Zugangsdaten-URI ein oder scanne den QR-Code mit deiner Webcam."
@@ -141,7 +111,6 @@
           "placeholder": "Ihr 32-stelliger Admin-Schlüssel"
         },
         "title": "LNbits",
-        "description": "Verbinde dich mit deinem LNbits-Konto",
         "page": {
           "title": "Verbinde dich mit <0>LNbits</0>",
           "instructions": "Wähle in LNbits die Wallet, die du verbinden willst, öffne sie, klicke auf API Info und kopiere den Admin Key. Füge ihn unten ein:"
@@ -153,10 +122,6 @@
           "connection_failed": "Verbindung fehlgeschlagen. Hast du die richtige URL und den richtigen Admin-Schlüssel?"
         }
       },
-      "title": {
-        "welcome": "Hast du eine Lightning Wallet?",
-        "options": "Füge einen neuen Lightning Account hinzu"
-      },
       "mynode": {
         "page": {
           "instructions": "Klicke auf deiner myNode Übersicht auf den Button <0>Wallet</0> für deinen <0>Lightning</0> Service. Klicke jetzt auf den Button <0>Pair Wallet</0> unterhalb dem Tab <0>Status</0> . Gib dein Passwort ein, wenn es verlang wird. <1/> Wähle das Dropdown Menü und entscheide dich für eine Pairingoption. Abhängig von deinem Setup kannst du entweder für lokale Verbindung wählen <0>Lightning (REST + Local IP)</0> oder für TOR die Auswahl <0>Lightning (REST + Tor)</0>.",
@@ -166,7 +131,6 @@
           "label": "Indconnect REST URL",
           "placeholder": "Indconnect://IhrKnoten:8080?..."
         },
-        "description": "Verbinde dich mit deiner myNode",
         "title": "meinKnoten"
       },
       "umbrel": {
@@ -178,8 +142,7 @@
           "label": "Indconnect-REST-URL",
           "placeholder": "lndconnect://deinknoten:8080?..."
         },
-        "title": "Regenschirm",
-        "description": "Verbinde dich mit deinem Regenschirm"
+        "title": "Regenschirm"
       },
       "description": "Du musst dich zuerst mit einer Lightning Wallet verbinden, damit du dich mit deinen Lieblingswebseiten verbinden kannst, die Bitcoin Lightning Zahlungen akzeptieren!",
       "citadel": {
@@ -187,7 +150,6 @@
           "instructions": "Das funktioniert aktuell nicht, wenn 2FA ausgewählt ist.",
           "title": "Verbinde dich mit dem Knoten <0>Zitadelle"
         },
-        "description": "Verbinde dich mit deiner lokalen Zitadelle",
         "title": "Zitadelle",
         "password": {
           "label": "Zitadelle Passwort"
@@ -204,7 +166,6 @@
           "instructions2": "Wähle <0>VERBINDEN.<1/>Wähle <0>EXPORTIEREN.<1/>Wähle <0>HEX.<1/>Kopiere das <0>adminMacaroon.<1/>Füge die Makrone in die Eingabe unten ein."
         },
         "title": "Raspiblitz",
-        "description": "Verbinde dich mit deinem RaspiBlitz",
         "rest_api_host": {
           "label": "REST-API-Host",
           "placeholder": "Ihr-Knoten-Onion-Adresse: Port"
@@ -212,7 +173,6 @@
       },
       "eclair": {
         "title": "Eclair Brieftasche",
-        "description": "Verbinde dich mit deinem Eclair-Knoten",
         "page": {
           "title": "Verbinde dich mit <0>Eclair",
           "instructions": "Du benötigst deine Eclair-URL und dein Passwort."
@@ -234,19 +194,16 @@
           "placeholder": "lndconnect://deinknoten:8080?...",
           "label": "Indconnect-REST-URL"
         },
-        "title": "Start9",
-        "description": "Verbinde dich mit Embassy"
+        "title": "Start9"
       },
       "bitcoin_beach": {
         "title": "Bitcoin Beach Brieftasche",
-        "description": "Erstelle oder verbinde dich mit einem Bitcoin Beach (Galoy)-Konto",
         "page": {
           "title": "Verbinde dich mit <0>Bitcoin Beach Wallet"
         }
       },
       "bitcoin_jungle": {
         "title": "Bitcoin Jungle Geldbörse",
-        "description": "Erstelle oder verbinde dich mit einem Bitcoin Jungle (Galoy)-Konto",
         "page": {
           "title": "Verbinde dich mit <0>Bitcoin Jungle Wallet</0>"
         }
@@ -270,7 +227,8 @@
           "failed_to_request_sms": "SMS-Code konnte nicht angefordert werden",
           "failed_to_login_sms": "Anmeldung mit SMS-Code fehlgeschlagen",
           "setup_failed": "Einrichtung fehlgeschlagen",
-          "missing_jwt": "JWT fehlt, Anmeldung nicht möglich."
+          "missing_jwt": "JWT fehlt, Anmeldung nicht möglich.",
+          "invalid_jwt": "ungültige JWT übermittelt"
         }
       },
       "btcpay": {
@@ -279,9 +237,9 @@
           "title": "Verbinde dich mit deinem BTCPay LND-Knoten",
           "instructions": "Navigiere zu deinem BTCPayServer und melde dich als Administrator an. Gehen zu Servereinstellungen > Dienste > LND-Rest – Siehe Informationen. Klicke dann auf „QR-Code-Informationen anzeigen“ und kopiere die QR-Code-Daten. Füge es unten ein:"
         },
-        "description": "Verbinde dich mit deinem BTCPay LND-Knoten",
         "config": {
-          "label": "Konfigurationsdaten"
+          "label": "Konfigurationsdaten",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
         },
         "errors": {
           "connection_failed": "Verbindung fehlgeschlagen. Ist die BTCPay-Verbindungs-URL korrekt und zugänglich?"
@@ -289,7 +247,6 @@
       },
       "commando": {
         "title": "Core Lightning",
-        "description": "Stelle eine Verbindung zu deinem Core Lightning-Knoten her",
         "page": {
           "title": "Stelle eine Verbindung zu deinem Core Lightning-Knoten her",
           "instructions": "Stelle sicher, dass du Core Lightning Version 0.12.0 oder neuer hast, das Commando-Plugin ausgeführt wird und dein Knoten über das Lightning-Netzwerk zugänglich ist. Erstelle eine Rune, indem du „lightning-cli commando-rune“ ausführst."
@@ -313,26 +270,128 @@
           "label": "Lokaler privater Schlüssel (automatisch generiert)"
         },
         "config": {
-          "label": "Konfigurationsdaten"
+          "label": "Konfigurationsdaten",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
         },
         "errors": {
           "connection_failed": "Verbindung fehlgeschlagen. Ist dein Core Lightning-Knoten online und verwendet es das Commando-Plugin?"
         }
-      }
+      },
+      "kollider": {
+        "title": "Kollider",
+        "description": "Anmeldung bei deinem Kollider-Konto"
+      },
+      "title": "Verbinde Lightning Wallet"
     },
     "unlock": {
       "unlock_error": {
-        "link": "Zurücksetzen und neuen Account erstellen"
+        "link": "Zurücksetzen und neuen Account erstellen",
+        "help": "Deine Kontodaten werden mit dem Freischalt-Passwort verschlüsselt. Wenn du dein Freischalt-Passwort wirklich vergessen hast, muss das Lightning-Konto zurückgesetzt und erneut hinzugefügt werden."
       },
       "errors": {
         "invalid_password": "ungültiges Passwort"
-      }
+      },
+      "unlock_to_continue": "Freigeben zum Fortfahren",
+      "help_contact": {
+        "part1": "Brauchst du Hilfe? Kontaktiere uns",
+        "part2": "Alby-Unterstützung"
+      },
+      "unlock_password": "Ihr Freischalt-Passwort"
     },
     "settings": {
       "nostr": {
         "private_key": {
-          "warning": "Das wird deinen alten Private Key löschen. Bist du sicher?"
+          "warning": "Das wird deinen alten Private Key löschen. Bist du sicher?",
+          "success": "Privaten Schlüssel erfolgreich verschlüsselt und gespeichert.",
+          "title": "Privater Schlüssel",
+          "generate": "Generiere",
+          "subtitle": "Füge deinen privaten Schlüssel ein oder erzeuge einen neuen Schlüssel. Beim Generieren eines Schlüssels wird ein neuer Schlüssel auf der Grundlage des aktuellen Kontos, das du verwendest, erstellt. Er kann erneut generiert werden, aber bitte stelle sicher, dass du diesen privaten Schlüssel sicherst. <0>Mehr erfahren\"</0>"
+        },
+        "hint": "Es ist ein einfaches und offenes Protokoll, das darauf abzielt, zensurresistente soziale Netzwerke zu schaffen. Nostr arbeitet mit kryptographischen Schlüsseln. Um etwas zu veröffentlichen, signiere es mit deinem Schlüssel und senden es an mehrere Relays. Du kannst Alby verwenden, um deinen Nostr-Schlüssel zu verwalten. Viele Nostr-Anwendungen erlauben dann, einfach den Schlüssel aus der Alby-Erweiterung zu verwenden.",
+        "title": "Nostr"
+      },
+      "lnurl_auth": {
+        "legacy_lnurl_auth": {
+          "title": "Legacy-Signatur für LNDhub und LNBits",
+          "subtitle": "Das Signieren von Nachrichten und die Anmeldung mit LNDhub- (z.B. BlueWallet) und LNbits-Konten wurde geändert (März 2022). Wenn du dich mit diesen Konten angemeldet hast, kannst du noch die alte Signiermethode aktivieren. Diese Option wird später entfernt werden, stelle also sicher, dass du auf das neue Login umsteigst."
+        },
+        "legacy_lnurl_auth_202207": {
+          "subtitle": "Die Schlüsselerzeugung für LNURL-auth hat sich geändert (Juli 2022). Alby war nicht kompatibel mit anderen Implementierungen. Dies wurde geändert, aber jetzt werden andere Anmeldeschlüssel verwendet. Wenn du dich bisher mit LNURL-auth angemeldet hast, kannst du noch die alte Methode aktivieren. Diese Option wird später entfernt werden, stelle sicher, dass du auf die neue Anmeldung umsteigst.",
+          "title": "Vererbte LNURL-Authentifizierung"
+        },
+        "title": "LNURL-Authentifizierung",
+        "hint": "ist ein allgemeines Authentifizierungsprotokoll. Es authentifiziert den Benutzer anhand digitaler Signaturen. Das Protokoll erfordert keine anderen identifizierenden Informationen wie Passwörter, E-Mails, Benutzernamen oder ähnliches. Mit Alby kannst du deine Lightning-Konten verwenden, um sich sicher auf Websites anzumelden. <br /> Um mit anderen Wallets kompatibel zu sein, mussten wir ein paar Änderungen vornehmen, die du hier konfigurieren kannst. <br /> <strong>Idealerweise sind alle diese Optionen ausgeschaltet.</strong> Verwende sie nur, wenn du alte Konten hast."
+      },
+      "browser_notifications": {
+        "subtitle": "Zahlungs- und authentifizierungsbezogene Benachrichtigungen.",
+        "title": "Browser-Benachrichtigungen"
+      },
+      "website_enhancements": {
+        "title": "Erweiterungen der Website",
+        "subtitle": "Verbesserungen für Twitter, YouTube, etc."
+      },
+      "title": "Einstellungen",
+      "change_password": {
+        "choose_password": {
+          "label": "Gib ein neues Entsperrkennwort ein:"
+        },
+        "submit": {
+          "label": "Änder du"
+        },
+        "errors": {
+          "enter_password": "Bitte gebe ein neues Freischalt-Passwort ein.",
+          "confirm_password": "Bitte bestätigen dein Passwort.",
+          "mismatched_password": "Die Passwörter stimmen nicht überein."
+        },
+        "success": "Passwort erfolgreich geändert",
+        "title": "Freischalt-Passwort ändern",
+        "screen_reader": "Freischalt-Passwort ändern",
+        "confirm_password": {
+          "label": "Bestätige das neue Passwort:"
         }
+      },
+      "theme": {
+        "options": {
+          "dark": "Dunkelheit",
+          "light": "Licht",
+          "system": "System"
+        },
+        "title": "Thema",
+        "subtitle": "Alby im dunklen oder hellen Modus verwenden"
+      },
+      "exchange": {
+        "title": "Austausch Quelle",
+        "subtitle": "Quelle der Bitcoin-Wechselkurse"
+      },
+      "language": {
+        "title": "Sprache",
+        "subtitle": "Die Übersetzungen sind noch nicht zu 100% fertig. <0>Hilf uns, Alby in deine Sprache zu übersetzen!</0>"
+      },
+      "currency": {
+        "title": "Währung",
+        "subtitle": "Zeigen Sie die Beträge zusätzlich in dieser Währung an"
+      },
+      "camera_access": {
+        "title": "Kamerazugriff",
+        "subtitle": "Zum Scannen von QR-Codes",
+        "allow": "Kamerazugriff zulassen",
+        "granted": "Erlaubnis erteilt"
+      },
+      "show_fiat": {
+        "title": "Sats an Fiat",
+        "subtitle": "Immer in die gewählte Währung vom gewählten Wechselkurs umrechnen"
+      },
+      "personal_data": {
+        "title": "Persönliche Daten",
+        "description": "Zahlungsempfänger können beantragen, dass zusätzliche Daten mit einer Zahlung übermittelt werden. Diese Daten werden ohne deiner Zustimmung an niemanden weitergegeben. Du wirst immer aufgefordert, bevor diese Daten zusammen mit einer Zahlung gesendet werden."
+      },
+      "name": {
+        "title": "Name",
+        "placeholder": "Geben Sie Ihren Namen ein"
+      },
+      "email": {
+        "title": "E-Mail",
+        "placeholder": "Geben Sie Ihre E-Mail Adresse ein"
       }
     },
     "home": {
@@ -386,19 +445,209 @@
       }
     },
     "enable": {
-      "allow": "Erlaube du {{host}} zu:",
+      "allow": "Erlauben Sie {{host}} zu:",
       "title": "Verbinden",
       "request1": "Genehmigung für Transaktionen anfordern",
       "request2": "Fordern Sie Rechnungen und Lightning Informationen an",
-      "block_and_ignore": "Blockieren und Ignorieren von {{host}}"
+      "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
+      "block_added": "Hinzugefügt {{host}} zur Blocklist, bitte Website neu laden."
     },
     "receive": {
       "amount": {
-        "placeholder": "Betrag in Satoshi..."
+        "placeholder": "Betrag in Satoshi...",
+        "label": "Betrag"
       },
       "payment": {
-        "waiting": "Warten auf Zahlung..."
+        "waiting": "Warten auf Zahlung...",
+        "status": "Zahlungsstatus prüfen"
+      },
+      "title": "Empfangen",
+      "actions": {
+        "create_invoice": "Rechnung erstellen"
+      },
+      "description": {
+        "label": "Beschreibung",
+        "placeholder": "Zum Beispiel: Wer schickt diese Zahlung?"
+      },
+      "success": "Zahlung erhalten!"
+    },
+    "publishers": {
+      "publisher": {
+        "allowance": {
+          "title": "Erlaubnis",
+          "used_budget": "sats verwendet"
+        }
       }
+    },
+    "send": {
+      "input": {
+        "label": "Rechnung, Lightning-Adresse oder LNURL",
+        "hint": "Rechnung, Lightning-Adresse oder LNURL"
+      },
+      "title": "Senden",
+      "qrcode": {
+        "title": "Warten auf den Scan"
+      }
+    },
+    "make_invoice": {
+      "errors": {
+        "amount_too_big": "Der Betrag übersteigt den Höchstbetrag",
+        "amount_too_small": "Der Betrag liegt unter dem Mindestbetrag"
+      },
+      "title": "Rechnung erstellen",
+      "amount": {
+        "label": "Betrag (Satoshi)"
+      },
+      "memo": {
+        "label": "Memo"
+      }
+    },
+    "lnurlwithdraw": {
+      "content_message": {
+        "heading": "Betrag"
+      },
+      "amount": {
+        "label": "Betrag"
+      },
+      "success": "Abhebungsantrag erfolgreich gesendet",
+      "title": "Zurückziehen"
+    },
+    "nostr": {
+      "title": "Nostr",
+      "allow": "Erlaube dieser Website:",
+      "content": "Auf dieser Website wirst du aufgefordert zu signieren:",
+      "read_public_key": "Lese deinen öffentlichen Schlüssel",
+      "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
+      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade deine Website neu.",
+      "permissions": {
+        "decrypt": "Daten entschlüsseln",
+        "encrypt": "Daten verschlüsseln",
+        "allow_sign": "Erlaube {{host}} zu unterschreiben:"
+      }
+    },
+    "confirm_request_permission": {
+      "title": "Antrag genehmigen",
+      "allow": "Erlaube die Ausführung dieser Website:"
+    },
+    "lnurlauth": {
+      "submit": "Anmeldung",
+      "content_message": {
+        "heading": "Möchten Sie sich anmelden bei"
+      },
+      "errors": {
+        "status": "Fehler: Auth-Status ist nicht in Ordnung"
+      },
+      "success": "Erfolgreich authentifiziert",
+      "title": "Authentifizierung"
+    },
+    "keysend": {
+      "amount": {
+        "label": "Betrag (Satoshi)"
+      },
+      "success": "Zahlung gesendet! Preimage: {{Preimage}}",
+      "title": "Senden",
+      "receiver": {
+        "label": "Sende die Zahlung an"
+      }
+    },
+    "confirm_sign_message": {
+      "title": "Unterschrift",
+      "content": "Auf dieser Website werden Sie aufgefordert, zu signieren:"
+    },
+    "confirm_keysend": {
+      "title": "Zahlung genehmigen",
+      "success": "Zahlung gesendet! Preimage: {{Preimage}}",
+      "payment_summary": {
+        "description": "Senden Sie die Zahlung an: {{Bestimmungsort}}"
+      }
+    },
+    "confirm_payment": {
+      "title": "Zahlung genehmigen",
+      "actions": {
+        "pay_now": "Jetzt bezahlen"
+      },
+      "success": "Zahlung von {{Betrag}} erfolgreich gesendet!"
+    },
+    "lnurlpay": {
+      "amount": {
+        "label": "Betrag"
+      },
+      "comment": {
+        "label": "Kommentar"
+      },
+      "name": {
+        "label": "Name"
+      },
+      "email": {
+        "label": "E-Mail"
+      },
+      "success": "Erfolgreich, Zahlung gesendet!"
+    },
+    "lnurlchannel": {
+      "title": "Kanal-Anfrage",
+      "content_message": {
+        "heading": "Einen Kanal vom Knoten anfordern"
+      },
+      "success": "Kanalanfrage erfolgreich gesendet"
+    },
+    "alby": {
+      "pre_connect": {
+        "email": {
+          "login": {
+            "label": "Email Adresse oder Lightning Adresse"
+          },
+          "create": {
+            "label": "Email Adresse"
+          }
+        },
+        "login_account": "Melden dich an, um dein bestehendes Alby-Konto zu verbinden.",
+        "host_wallet": "Wir hosten die Lightning Wallet für dich!",
+        "optional_lightning_note": {
+          "part3": ". Dies ist eine einfache Möglichkeit für jeden, dir Bitcoin über das Lightning-Netzwerk zu senden.",
+          "part1": "Ihr Alby-Konto enthält außerdem ein optionales",
+          "part2": "Lightning Adresse",
+          "part4": "mehr erfahren"
+        },
+        "create_account": "Erstelle ein neues Alby-Konto, um Bitcoin-Zahlungen zu senden und zu empfangen.",
+        "optional_lightning_address": {
+          "suffix": "@getalby.com",
+          "label": "Wähle deine Lightning-Adresse (optional)",
+          "title": "Zahlen und Buchstaben, mindestens 3 Stellen"
+        },
+        "errors": {
+          "create_wallet_error": "Du konntest dich nicht anmelden oder ein neues Konto erstellen. Wenn du Hilfe benötigst, wende dich bitte an den support@getalby.com"
+        },
+        "forgot_password": "Passwort vergessen?",
+        "title": "Dein Alby Konto",
+        "set_password": {
+          "choose_password": {
+            "label": "Password"
+          },
+          "confirm_password": {
+            "label": "Passwort bestätigen"
+          },
+          "errors": {
+            "enter_password": "Bitte gebe dein Passwort ein.",
+            "confirm_password": "Bestätige dein Passwort",
+            "mismatched_password": "Die Passwörter stimmen nicht überein."
+          }
+        }
+      }
+    },
+    "choose_path": {
+      "other": {
+        "and_more": "& mehr...",
+        "title": "Andere Wallets",
+        "description": "Verbinde dich mit deiner bestehenden Lightning Wallet oder Node und wählen aus verschiedenen Anschlüssen.",
+        "connect": "Verbinden"
+      },
+      "alby": {
+        "title": "Alby",
+        "description": "Melden dich an oder nutze dein bestehendes Alby-Konto, um im Handumdrehen eine Lightning Zahlung zu beginnen.",
+        "create_new": "Anmelden"
+      },
+      "title": "Verbinden",
+      "description": "Um Alby für Online-Zahlungen zu nutzen, verbinde deine Lightning Wallet mit der Erweiterung."
     }
   },
   "components": {
@@ -423,5 +672,22 @@
     "companion_download_info": {
       "using_tor": "Klicke hier zum Weitermachen, wenn du den TOR Browser verwendest"
     }
+  },
+  "common": {
+    "optional": "Optional",
+    "feedback": "Rückmeldung",
+    "error": "Fehler",
+    "websites": "Websites",
+    "loading": "Laden",
+    "sats_one": "sat",
+    "success": "Erfolgreich!",
+    "password": "Passwort",
+    "advanced": "Fortgeschrittene",
+    "description_full": "Vollständige Beschreibung",
+    "amount": "Betrag",
+    "copied": "Kopiert!",
+    "description": "Beschreibung",
+    "settings": "Einstellungen",
+    "sats_other": "sats"
   }
 }

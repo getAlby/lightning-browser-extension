@@ -1,7 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "title": "O poder do⚡ bitcoin ⚡no seu navegador",
       "nav": {
         "welcome": "Bem-vindo",
         "password": "Senha",
@@ -59,40 +58,9 @@
       }
     },
     "choose_connector": {
-      "title": {
-        "welcome": "Você já possui uma carteira bitcoin na rede relâmpago?",
-        "options": "Adicionar nova conta"
-      },
       "description": "Você precisa primeiro conectar-se a uma conta ou servidor para poder interagir com seus sites favoritos que aceitam pagamentos em bitcoin!",
-      "alby": {
-        "title": "Carteira Alby",
-        "description": "Criar uma nova conta ou logar na sua conta atual da Alby",
-        "pre_connect": {
-          "title": "Sua Carteira Bitcoin na Alby",
-          "login_account": "Crie uma conta ou faça login na sua conta atual da Alby.",
-          "host_wallet": "A custódia dos seus bitcoins é por nossa conta!",
-          "email": {
-            "label": "Endereço de E-mail"
-          },
-          "optional_lightning_note": {
-            "part1": "Ao criar uma conta Alby, você pode escolher um",
-            "part2": "Endereço Relâmpago",
-            "part3": ". É o jeito mais simples para você receber Bitcoins na Rede Relâmpago.",
-            "part4": "saiba mais"
-          },
-          "optional_lightning_address": {
-            "label": "Escolha um Endereço Relâmpago (opcional)",
-            "suffix": "@getalby.com",
-            "title": "números e letras, pelo menos 3 caracteres"
-          },
-          "errors": {
-            "create_wallet_error": "Falha ao logar ou criar uma nova conta. Se precisar de ajuda, entre em contato com support@getalby.com"
-          }
-        }
-      },
       "lnd": {
         "title": "LND",
-        "description": "Conectar em um servidor LND",
         "page": {
           "title": "Conecte no servidor LND",
           "description": "Você precisa da URL do servidor e um macaroon com permissão de envio e leitura (ex. admin.macaroon)"
@@ -112,7 +80,6 @@
       },
       "lnbits": {
         "title": "LNbits",
-        "description": "Conectar em uma conta LNbits",
         "page": {
           "title": "Conecte na <0>LNbits</0>",
           "instructions": "Na LNbits, escolha a carteira que você deseja conectar, abra ela, clica em API Info a e copie a Chave Admin e cole abaixo:"
@@ -130,7 +97,6 @@
       },
       "eclair": {
         "title": "Eclair",
-        "description": "Conectar em um servidor Eclair",
         "page": {
           "title": "Conecte no servidor <0>Eclair</0>",
           "instructions": "Você precisa da URL e senha da Eclair."
@@ -145,7 +111,6 @@
       },
       "citadel": {
         "title": "Citadel",
-        "description": "Conectar no Citadel",
         "page": {
           "title": "Conecte no servidor <0>Citadel</0>",
           "instructions": "Não funciona se o 2FA estiver ativado."
@@ -160,7 +125,6 @@
       },
       "umbrel": {
         "title": "Umbrel",
-        "description": "Conectar no Umbrel",
         "page": {
           "title": "Conecte no servidor <0>Umbrel</0>",
           "instructions": "Na Umbrel vá até <0>Connect Wallet</0>. Selecione <0>lndconnect REST</0> e copie a <0>lndconnect URL</0>. (Dependendo da sua configuração você pode usar a conexão local ou a conexão Tor.)"
@@ -172,7 +136,6 @@
       },
       "mynode": {
         "title": "myNode",
-        "description": "Conectar no myNode",
         "page": {
           "title": "Conecte na <0>myNode</0>",
           "instructions": "No myNode clique em <0>Wallet</0> botão para seu serviço <0>Lightning</0>.<1/> Agora clique em <0>Pair Wallet</0> botão abaixo da tab <0>Status</0>. Insira sua senha quando solicitada.<1/> Selecione o menu suspenso e escolha uma opção de emparelhamento. Dependendo da sua configuração você pode escolher <0>Conexão Lightning (REST + Local IP)</0> ou conexão <0>Lightning (REST + Tor)</0>."
@@ -184,7 +147,6 @@
       },
       "start9": {
         "title": "Start9",
-        "description": "Conectar no Embassy",
         "page": {
           "title": "Conecte no seu servidor <0>Embassy</0>",
           "instructions": "<0>Note:</0> Atualmente somente a LND é suportada mas nós adicionaremos suporte para a c-lightning no futuro!<1/>No seu Embassy clique em service <0>Lightning Network Daemon</0>.<1/>Selecione a tab <0>Properties</0>.<1/>Agora copie o <0>LND Connect REST URL.</0>"
@@ -196,7 +158,6 @@
       },
       "raspiblitz": {
         "title": "RaspiBlitz",
-        "description": "Conectar no RaspiBlitz",
         "page": {
           "title": "Conecte seu servidor <0>RaspiBlitz</0>",
           "instructions2": "Selecione <0>CONNECT</0>.<1/>Selecione <0>EXPORT</0>.<1/>Selecione <0>HEX</0>.<1/>Copie o <0>adminMacaroon</0>.<1/>Cole o macaroon no campo abaixo.",
@@ -208,7 +169,6 @@
         }
       },
       "bitcoin_beach": {
-        "description": "Criar uma conta ou conectar sua Bitcoin Beach (Galoy)",
         "title": "Carteira Bitcoin Beach",
         "page": {
           "title": "Conecte na <0>Carteira Bitcoin Beach</0>"
@@ -216,14 +176,12 @@
       },
       "bitcoin_jungle": {
         "title": "Carteira Bitcoin Jungle",
-        "description": "Criar uma conta ou conectar sua Bitcoin Jungle (Galoy)",
         "page": {
           "title": "Conecte na <0>Carteira Bitcoin Jungle</0>"
         }
       },
       "btcpay": {
         "title": "Servidor BTCPay",
-        "description": "Conectar em um servidor LND BTCPay",
         "page": {
           "title": "Conecte no servidor LND BTCPay",
           "instructions": "Navegue até a BTCPayServer e acesse como administrador. Vá até Configurações>Serviços>LND Rest - Ver informação. Depois Clique \"Ver Código QR\" e copie os dados do Código QR. Cole os dados abaixo:"
@@ -269,8 +227,7 @@
         "errors": {
           "invalid_uri": "URI BlueWallet inválida",
           "connection_failed": "Falha na conexão. A URI BlueWallet está correta?"
-        },
-        "description": "Conectar na sua carteira de celular Bluewallet"
+        }
       },
       "lndhub_go": {
         "title": "LNDHub",
@@ -278,7 +235,6 @@
           "title": "Conectar na LNDHub",
           "description": "Insira sua credencial URI LNDHub aqui ou leia o código QR com sua webcam."
         },
-        "description": "Conectar na sua conta LNDHub",
         "uri": {
           "label": "Exportar URI LNDHub"
         },
@@ -288,7 +244,6 @@
         }
       },
       "commando": {
-        "description": "Conectar em um servidor Core Lightning",
         "page": {
           "title": "Conecte no servidor Core Lightning",
           "instructions": "Certifique-se de conectar em um servidor Core Lightning que esteja na versão 0.12.0 ou mais recente, o plugin commando instalado e rodando e o servidor acessível na Rede Relâmpago. Crie um rune executando o comando 'lightning-cli commando-rune'."
@@ -372,7 +327,7 @@
       }
     },
     "enable": {
-      "allow": "Permitir {{host}}:",
+      "allow": "Permitir este site:",
       "request1": "Solicitar aprovação para transações",
       "request2": "Gerar faturas e solicitar informações do servidor",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
@@ -484,7 +439,7 @@
       "nostr": {
         "title": "Nostr",
         "private_key": {
-          "subtitle": "Ao gerar uma chave, ela será criada a partir da conta atual que você usa. Certifique-se de fazer backup desta chave privada.",
+          "subtitle": "Ao gerar uma chave, ela será criada a partir da conta atual que você usa. Certifique-se de fazer backup desta chave privada. <0>Saiba mais »</0>",
           "warning": "Isso excluirá sua chave privada antiga. Tem certeza de que deseja prosseguir?",
           "title": "Chave privada",
           "generate": "Gerar",
@@ -538,22 +493,6 @@
       }
     },
     "publishers": {
-      "used": {
-        "title": "Sua lista de sites ⚡️",
-        "description": "Sites onde você já usou a Alby",
-        "no_info": "Nenhum site ainda."
-      },
-      "suggestions": {
-        "title": "Sites⚡️recomendados",
-        "description": "Sugestões de sites onde você pode usar a Alby",
-        "list": {
-          "trading": "Negociação",
-          "entertaiment": "Entretenimento",
-          "miscellaneous": "Outros",
-          "shopping": "Compras",
-          "gaming": "Games"
-        }
-      },
       "publisher": {
         "allowance": {
           "title": "Limite de gastos",
@@ -576,7 +515,7 @@
     },
     "confirm_sign_message": {
       "title": "Assinar",
-      "content": "{{host}} solicita que você assine:"
+      "content": "Este site solicita que você assine:"
     },
     "confirm_keysend": {
       "title": "Aprovar Pagamento",
@@ -631,16 +570,16 @@
       }
     },
     "nostr": {
-      "allow": "Permitir {{host}}:",
+      "allow": "Permitir este site:",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "read_public_key": "Ler sua chave pública",
       "title": "Nostr",
       "confirm_sign_message": {
         "remember": {
-          "label": "Lembrar e não perguntar novamente"
+          "label": "Lembrar minha escolha e não perguntar novamente"
         }
       },
-      "content": "{{host}} solicita que você assine:",
+      "content": "Este site solicita que você assine:",
       "permissions": {
         "decrypt": "Descriptografar dados",
         "encrypt": "Criptografar dados",
@@ -650,8 +589,8 @@
     },
     "confirm_request_permission": {
       "title": "Aprovar Solicitação",
-      "allow": "Permitir {{host}}:",
-      "always_allow": "Sempre permitir {{method}} em {{host}}"
+      "allow": "Permitir este site executar:",
+      "always_allow": "Lembrar minha escolha e não perguntar novamente"
     }
   },
   "common": {
@@ -659,7 +598,7 @@
     "success": "Sucesso",
     "error": "Erro",
     "settings": "Configurações",
-    "websites": "Sites",
+    "websites": "Atividade",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "carregando",
@@ -697,7 +636,8 @@
     "help": "Ajuda",
     "response": "Resposta",
     "success_message": "{{amount}}{{fiatAmount}} enviados para {{destination}}",
-    "advanced": "Avançado"
+    "advanced": "Avançado",
+    "discover": "Explorar"
   },
   "components": {
     "allowance_menu": {

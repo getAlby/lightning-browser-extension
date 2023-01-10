@@ -13,17 +13,25 @@ const request = async (
 
   const { origin, args } = message;
 
-  const method = args.method.toLowerCase();
-
   try {
+    // // check first if method exists, otherwise toLowerCase() will fail with a TypeError
+    if (!args.method || typeof args.method !== "string") {
+      throw new Error("Request method is missing or not correct");
+    }
+
+    const methodInLowerCase = args.method.toLowerCase();
+
     // Check if the current connector support the call
     // connectors maybe do not support `requestMethod` at all
     // connectors also specify a whitelist of supported methods that can be called
     //
     // important: this must throw to exit and return an error
     const supportedMethods = connector.supportedMethods || []; // allow the connector to control which methods can be called
-    if (!connector.requestMethod || !supportedMethods.includes(method)) {
-      throw new Error(`${method} is not supported by your account`);
+    if (
+      !connector.requestMethod ||
+      !supportedMethods.includes(methodInLowerCase)
+    ) {
+      throw new Error(`${methodInLowerCase} is not supported by your account`);
     }
 
     const allowance = await db.allowances
@@ -32,13 +40,13 @@ const request = async (
       .first();
 
     if (!allowance?.id) {
-      return { error: "Could not find an allowance for this host" };
+      throw new Error("Could not find an allowance for this host");
     }
 
     const connectorName = connector.constructor.name.toLowerCase();
     // prefix method with webln to prevent potential naming conflicts (e.g. with nostr calls that also use the permissions)
-    const legacyWeblnMethod = `${WEBLN_PREFIX}${method}`;
-    const weblnMethod = `${WEBLN_PREFIX}${connectorName}/${method}`;
+    const legacyWeblnMethod = `${WEBLN_PREFIX}${methodInLowerCase}`;
+    const weblnMethod = `${WEBLN_PREFIX}${connectorName}/${methodInLowerCase}`;
 
     const permission = await db.permissions
       .where("host")
@@ -47,8 +55,15 @@ const request = async (
       .first();
 
     // request method is allowed to be called
-    if (permission && permission.enabled && supportedMethods.includes(method)) {
-      const response = await connector.requestMethod(method, args.params);
+    if (
+      permission &&
+      permission.enabled &&
+      supportedMethods.includes(methodInLowerCase)
+    ) {
+      const response = await connector.requestMethod(
+        methodInLowerCase,
+        args.params
+      );
       return response;
     } else {
       const promptResponse = await utils.openPrompt<{
@@ -57,15 +72,18 @@ const request = async (
       }>({
         args: {
           requestPermission: {
-            method,
-            description: `${connectorName}.${method}`,
+            method: methodInLowerCase,
+            description: `${connectorName}.${methodInLowerCase}`,
           },
         },
         origin,
         action: "public/confirmRequestPermission",
       });
 
-      const response = await connector.requestMethod(method, args.params);
+      const response = await connector.requestMethod(
+        methodInLowerCase,
+        args.params
+      );
 
       // add permission to db only if user decided to always allow this request
       if (promptResponse.data.enabled) {

@@ -27,7 +27,7 @@ export default function ConnectionErrorToast({
               href={link}
               className="underline"
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
             >
               {link.substring(0, 21)}...
             </a>{" "}
@@ -39,7 +39,7 @@ export default function ConnectionErrorToast({
             href="https://guides.getalby.com/overall-guide/alby-browser-extension/connect-lightning-wallets-and-nodes-to-alby-extension"
             className="underline"
             target="_blank"
-            rel="noreferrer"
+            rel="noreferrer noopener"
           >
             {t("visit_guides")}
           </a>

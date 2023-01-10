@@ -11,11 +11,16 @@ const getRelays = async (message: MessageDefaultPublic) => {
   }
 
   return {
-    data: [
-      "wss://expensive-relay.fiatjaf.com",
-      "wss://relay.damus.io",
-      "wss://nostr-pub.wellorder.net",
-    ],
+    data: {
+      "wss://relay.damus.io": { read: true, write: true },
+      "wss://nostr1.tunnelsats.com": { read: true, write: true },
+      "wss://nostr-pub.wellorder.net": { read: true, write: true },
+      "wss://relay.nostr.info": { read: true, write: true },
+      "wss://nostr-relay.wlvs.space": { read: true, write: true },
+      "wss://nostr.bitcoiner.social": { read: true, write: true },
+      "wss://nostr-01.bolt.observer": { read: true, write: true },
+      "wss://relayer.fiatjaf.com": { read: true, write: true },
+    },
   };
 };
 

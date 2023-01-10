@@ -3,6 +3,7 @@ import "dayjs/locale/es";
 import "dayjs/locale/it";
 import "dayjs/locale/pt-br";
 import "dayjs/locale/sv";
+import "dayjs/locale/zh-cn";
 import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
@@ -12,6 +13,7 @@ import es from "~/i18n/locales/es/translation.json";
 import it from "~/i18n/locales/it/translation.json";
 import pt_BR from "~/i18n/locales/pt_BR/translation.json";
 import sv from "~/i18n/locales/sv/translation.json";
+import zh_Hans from "~/i18n/locales/zh_Hans/translation.json";
 
 export const defaultNS = "translation";
 // needs to be aligned with `supportedLocales`
@@ -42,6 +44,11 @@ export const resources = {
     common: sv.common,
     components: sv.components,
   },
+  "zh-CN": {
+    translation: zh_Hans.translation,
+    common: zh_Hans.common,
+    components: zh_Hans.components,
+  },
 } as const;
 
 // needs to be aligned with `resources`
@@ -51,6 +58,7 @@ export const supportedLocales = [
   { locale: "it", label: "Italiano" },
   { locale: "pt-BR", label: "Português (Brasil)" },
   { locale: "sv", label: "Svenska" },
+  { locale: "zh-CN", label: "中文（简化字）" },
 ];
 
 i18n

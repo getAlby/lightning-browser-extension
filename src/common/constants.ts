@@ -6,6 +6,10 @@
 export const ABORT_PROMPT_ERROR = "Prompt was closed";
 export const USER_REJECTED_ERROR = "User rejected";
 
+// Currently only relevant for connector Kollider
+// all other connectors fall back to BTC
+export type ACCOUNT_CURRENCIES = "EUR" | "USD" | "BTC";
+
 // Supported currencies by Alby API, Coindesk and yadio
 // FYI: yadio is i.e. not supporting "ISK", maybe more?
 // https://github.com/AryanJ-NYC/bitcoin-conversion/blob/master/src/index.ts#L143
@@ -33,16 +37,13 @@ export enum CURRENCIES {
   BSD = "BSD",
   BTN = "BTN",
   BWP = "BWP",
-  BYN = "BYN",
   BZD = "BZD",
   CAD = "CAD",
   CDF = "CDF",
   CHF = "CHF",
-  CLP = "CLP",
   CNY = "CNY",
   COP = "COP",
   CRC = "CRC",
-  CUC = "CUC",
   CUP = "CUP",
   CVE = "CVE",
   CZK = "CZK",
@@ -55,7 +56,6 @@ export enum CURRENCIES {
   ETB = "ETB",
   EUR = "EUR",
   FJD = "FJD",
-  FKP = "FKP",
   GBP = "GBP",
   GEL = "GEL",
   GHS = "GHS",
@@ -100,13 +100,11 @@ export enum CURRENCIES {
   MMK = "MMK",
   MNT = "MNT",
   MOP = "MOP",
-  MRU = "MRU",
   MUR = "MUR",
   MVR = "MVR",
   MWK = "MWK",
   MXN = "MXN",
   MYR = "MYR",
-  MZN = "MZN",
   NAD = "NAD",
   NGN = "NGN",
   NIO = "NIO",
@@ -136,13 +134,10 @@ export enum CURRENCIES {
   SLL = "SLL",
   SOS = "SOS",
   SRD = "SRD",
-  SSP = "SSP",
-  STN = "STN",
   SVC = "SVC",
   SYP = "SYP",
   SZL = "SZL",
   THB = "THB",
-  TJS = "TJS",
   TMT = "TMT",
   TND = "TND",
   TOP = "TOP",
@@ -155,7 +150,6 @@ export enum CURRENCIES {
   USD = "USD",
   UYU = "UYU",
   UZS = "UZS",
-  VES = "VES",
   VND = "VND",
   VUV = "VUV",
   WST = "WST",
@@ -163,7 +157,6 @@ export enum CURRENCIES {
   XCD = "XCD",
   XOF = "XOF",
   XPF = "XPF",
-  YER = "YER",
   ZAR = "ZAR",
   ZMW = "ZMW",
   ZWL = "ZWL",

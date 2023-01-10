@@ -1,5 +1,6 @@
 import browser, { Runtime } from "webextension-polyfill";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
+import { getPosition as getWindowPosition } from "~/common/utils/window";
 import type { Invoice, OriginData, OriginDataInternal } from "~/types";
 
 const utils = {
@@ -45,7 +46,7 @@ const utils = {
   openUrl: (url: string) => {
     browser.tabs.create({ url });
   },
-  openPrompt: <Type>(message: {
+  openPrompt: async <Type>(message: {
     args: Record<string, unknown>;
     origin: OriginData | OriginDataInternal;
     action: string;
@@ -66,19 +67,42 @@ const utils = {
       "prompt.html"
     )}?${urlParams.toString()}`;
 
+    const windowWidth = 400;
+    const windowHeight = 600;
+
+    const { top, left } = await getWindowPosition(windowWidth, windowHeight);
+
     return new Promise((resolve, reject) => {
       browser.windows
         .create({
           url: url,
           type: "popup",
-          width: 400,
-          height: 600,
+          width: windowWidth,
+          height: windowHeight,
+          top: top,
+          left: left,
         })
         .then((window) => {
           let tabId: number | undefined;
           if (window.tabs) {
             tabId = window.tabs[0].id;
           }
+
+          // Kiwi Browser opens the prompt in the same window (there are only tabs on mobile browsers)
+          // Find the currently active tab to validate messages
+          if (window.tabs && window.tabs?.length > 1) {
+            tabId = window.tabs?.find((x) => x.active)?.id;
+          }
+
+          // this interval hightlights the popup in the taskbar
+          const focusInterval = setInterval(() => {
+            if (!window.id) {
+              return;
+            }
+            browser.windows.update(window.id, {
+              drawAttention: true,
+            });
+          }, 2100);
 
           const onMessageListener = (
             responseMessage: {
@@ -94,9 +118,10 @@ const utils = {
               sender.tab &&
               sender.tab.id === tabId
             ) {
+              clearInterval(focusInterval);
               browser.tabs.onRemoved.removeListener(onRemovedListener);
-              if (sender.tab.windowId) {
-                return browser.windows.remove(sender.tab.windowId).then(() => {
+              if (sender.tab.id) {
+                return browser.tabs.remove(sender.tab.id).then(() => {
                   // in the future actual "remove" (closing prompt) will be moved to component for i.e. budget flow
                   // https://github.com/getAlby/lightning-browser-extension/issues/1197
                   if (responseMessage.error) {
@@ -110,6 +135,7 @@ const utils = {
           };
 
           const onRemovedListener = (tid: number) => {
+            clearInterval(focusInterval);
             if (tabId === tid) {
               browser.runtime.onMessage.removeListener(onMessageListener);
               reject(new Error(ABORT_PROMPT_ERROR));
