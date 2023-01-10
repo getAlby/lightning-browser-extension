@@ -1,5 +1,6 @@
 import Button from "@components/Button";
 import CloseableCard from "@components/CloseableCard";
+import { Fragment } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useTips } from "~/app/hooks/useTips";
@@ -52,12 +53,12 @@ export default function Tips() {
         description={[
           // eslint-disable-next-line react/jsx-key
           <Trans i18nKey={"pin.description1"} t={t}>
-            To access Alby easily, click on extension icon
+            <Fragment />
             <img
               src="assets/icons/puzzle.svg"
               className="w-5 inline align-bottom"
             />
-            in the top right corner of your browser
+            <Fragment />
           </Trans>,
           t("pin.description2"),
           t("pin.description3"),
