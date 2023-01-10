@@ -2,8 +2,8 @@ import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Setting from "@components/Setting";
 import Toggle from "@components/form/Toggle";
-import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
@@ -42,6 +42,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
 
   const { t } = useTranslation("components", { keyPrefix: "allowance_menu" });
   const { t: tCommon } = useTranslation("common");
+  const { t: tPermissions } = useTranslation("permissions");
 
   const hasPermissions = !isLoadingPermissions && !!permissions?.length;
 
@@ -239,7 +240,17 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                     <>
                       <Setting
                         title={permission.method}
-                        subtitle={"random subtitle"}
+                        subtitle={tPermissions(
+                          permission.method
+                            .toLowerCase()
+                            .split("/")
+                            .slice(-2)
+                            .join(".") as unknown as TemplateStringsArray
+                        )}
+                        /* split the method at "/", take the last two items in
+                        the array and join them with "." to get the i18n string
+                        webln/lnd/getinfo -> lnd.getinfo
+                        nostr/nip04decrypt --> nostr.nip04decrypt */
                       >
                         <Toggle
                           checked={permission.enabled}
