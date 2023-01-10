@@ -22,13 +22,13 @@ export const useTips = () => {
 
   const tips = filterTips(settings.closedTips, account?.alias);
 
-  const filterTip = (tip: TIPS) => {
+  const closeTip = (tip: TIPS) => {
     updateSetting({
       closedTips: [...settings.closedTips, tip],
     });
   };
   return {
     tips,
-    filterTip,
+    closeTip,
   };
 };
