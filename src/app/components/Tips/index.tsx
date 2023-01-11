@@ -37,7 +37,12 @@ export default function Tips() {
               navigate("/receive");
             }}
           />,
-          <a key={2} href="https://getalby.com/topup">
+          <a
+            key={2}
+            href="https://getalby.com/topup"
+            target="_blank"
+            rel="noreferrer"
+          >
             <Button label={t("top_up_wallet.label2")} />
           </a>,
         ]}
@@ -56,7 +61,7 @@ export default function Tips() {
             <Fragment />
             <img
               src="assets/icons/puzzle.svg"
-              className="w-5 inline align-bottom"
+              className="w-5 inline align-bottom dark:invert"
             />
             <Fragment />
           </Trans>,
