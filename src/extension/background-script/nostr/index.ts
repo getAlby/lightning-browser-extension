@@ -14,13 +14,17 @@ import state from "../state";
 class Nostr {
   getPrivateKey() {
     const password = state.getState().password as string;
-    const encryptedKey = state.getState().nostrPrivateKey as string;
-    if (encryptedKey) {
-      try {
-        return decryptData(encryptedKey, password);
-      } catch (e) {
-        console.error("Could not decrypt the Nostr key");
-        console.error(e);
+    const currentAccountId = state.getState().currentAccountId;
+    if (currentAccountId) {
+      const accounts = state.getState().accounts;
+      const encryptedKey = accounts[currentAccountId].nostrPrivateKey as string;
+      if (encryptedKey) {
+        try {
+          return decryptData(encryptedKey, password);
+        } catch (e) {
+          console.error("Could not decrypt the Nostr key");
+          console.error(e);
+        }
       }
     }
 
@@ -38,8 +42,15 @@ class Nostr {
   async setPrivateKey(privateKey: string) {
     const password = state.getState().password as string;
 
-    state.setState({ nostrPrivateKey: encryptData(privateKey, password) });
-    await state.getState().saveToStorage();
+    const currentAccountId = state.getState().currentAccountId;
+    if (currentAccountId) {
+      const accounts = state.getState().accounts;
+      const account = accounts[currentAccountId];
+      account.nostrPrivateKey = encryptData(privateKey, password);
+      accounts[currentAccountId] = account;
+      state.setState({ accounts });
+      await state.getState().saveToStorage();
+    }
   }
 
   async signEvent(event: Event): Promise<Event> {
