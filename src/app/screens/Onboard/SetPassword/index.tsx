@@ -34,10 +34,10 @@ export default function SetPassword() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-surface-02dp py-12 px-10">
+      <div className="relative mt-10 lg:flex space-x-8 bg-white dark:bg-surface-02dp rounded-lg shadow py-12 px-10">
         <div className="lg:w-1/2">
           <h1 className="text-2xl font-bold dark:text-white">{t("title")}</h1>
-          <p className="text-gray-500 my-6 dark:text-gray-400">
+          <p className="text-gray-500 mt-2 mb-6 dark:text-gray-400">
             {t("description")}
           </p>
           <div className="w-4/5 mb-6">
