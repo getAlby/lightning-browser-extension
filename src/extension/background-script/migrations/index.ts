@@ -46,6 +46,20 @@ const migrations = {
       // state is saved with the setMigrated call
     }
   },
+  migrateisUsingGlobalNostrKey: async () => {
+    const { nostrPrivateKey, accounts } = state.getState();
+
+    if (nostrPrivateKey) {
+      Object.values(accounts).map((account) => {
+        account.nostrPrivateKey = nostrPrivateKey;
+      });
+
+      state.setState({
+        accounts,
+        nostrPrivateKey: null,
+      });
+    }
+  },
 };
 
 const migrate = async () => {
@@ -57,6 +71,11 @@ const migrate = async () => {
     );
     await migrations["migrateisUsingLegacyLnurlAuthKeySetting"]();
     await setMigrated("migrateisUsingLegacyLnurlAuthKeySetting");
+  }
+  if (shouldMigrate("migrateisUsingGlobalNostrKey")) {
+    console.info("Running migration for: migrateisUsingGlobalNostrKey");
+    await migrations["migrateisUsingGlobalNostrKey"]();
+    await setMigrated("migrateisUsingGlobalNostrKey");
   }
 };
 
