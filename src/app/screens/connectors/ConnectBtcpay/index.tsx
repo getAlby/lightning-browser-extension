@@ -75,6 +75,7 @@ export default function ConnectBtcpay() {
         url,
       },
       connector: getConnectorType(),
+      nostrPrivateKey: null,
     };
 
     try {

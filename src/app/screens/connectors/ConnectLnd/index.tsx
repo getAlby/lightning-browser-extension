@@ -52,6 +52,7 @@ export default function ConnectLnd() {
         url,
       },
       connector: getConnectorType(),
+      nostrPrivateKey: null,
     };
 
     try {

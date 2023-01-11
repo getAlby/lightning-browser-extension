@@ -115,6 +115,7 @@ export default function AlbyWallet({ variant }: Props) {
         lnAddress,
       },
       connector: "lndhub",
+      nostrPrivateKey: null,
     };
 
     try {

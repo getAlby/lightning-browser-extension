@@ -61,6 +61,7 @@ export default function ConnectKollidier() {
         currency: formData.currency,
       },
       connector: "kollider",
+      nostrPrivateKey: null,
     };
 
     try {

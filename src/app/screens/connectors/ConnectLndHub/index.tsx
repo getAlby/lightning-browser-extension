@@ -61,6 +61,7 @@ export default function ConnectLndHub({
         url,
       },
       connector: getConnectorType(),
+      nostrPrivateKey: null,
     };
 
     try {

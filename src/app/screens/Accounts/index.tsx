@@ -21,7 +21,7 @@ import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import type { Account } from "~/types";
 
-type AccountAction = Omit<Account, "connector" | "config">;
+type AccountAction = Omit<Account, "connector" | "config" | "nostrPrivateKey">;
 
 function AccountsScreen() {
   const auth = useAccount();

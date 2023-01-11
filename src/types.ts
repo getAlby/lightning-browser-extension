@@ -1,5 +1,5 @@
 import { PaymentRequestObject } from "bolt11";
-import { CURRENCIES, ACCOUNT_CURRENCIES } from "~/common/constants";
+import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
 import {
   ConnectorInvoice,
@@ -16,6 +16,7 @@ export interface Account {
   connector: ConnectorType;
   config: string;
   name: string;
+  nostrPrivateKey: string | null;
 }
 
 export interface Accounts {
