@@ -167,6 +167,11 @@ export interface MessagePaymentAll extends MessageDefault {
   };
 }
 
+export interface MessageAccountGetById extends MessageDefault {
+  args: { id: Account["id"] };
+  action: "getAccountById";
+}
+
 export interface MessageAccountRemove extends MessageDefault {
   args?: { id: Account["id"] };
   action: "removeAccount";

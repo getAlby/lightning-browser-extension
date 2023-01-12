@@ -6,6 +6,7 @@ import {
   MakeInvoiceResponse,
 } from "~/extension/background-script/connectors/connector.interface";
 import type {
+  Account,
   AccountInfo,
   Accounts,
   Allowance,
@@ -33,6 +34,10 @@ export interface AccountInfoRes {
   name: string;
 }
 
+export interface AccountByIdRes extends Account {
+  balance: { balance: string | number; currency: ACCOUNT_CURRENCIES };
+  info: { alias: string; pubkey?: string };
+}
 interface StatusRes {
   configured: boolean;
   unlocked: boolean;
@@ -92,6 +97,8 @@ export const swrGetAccountInfo = async (
   });
 };
 export const getAccounts = () => msg.request<Accounts>("getAccounts");
+export const getAccountById = () =>
+  msg.request<AccountByIdRes>("getAccountById");
 export const updateAllowance = () => msg.request<Accounts>("updateAllowance");
 export const selectAccount = (id: string) =>
   msg.request("selectAccount", { id });

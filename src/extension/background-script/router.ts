@@ -38,6 +38,7 @@ const routes = {
   addAccount: accounts.add,
   editAccount: accounts.edit,
   getAccounts: accounts.all,
+  getAccountById: accounts.getById,
   removeAccount: accounts.remove,
   selectAccount: accounts.select,
   setPassword: setup.setPassword,
