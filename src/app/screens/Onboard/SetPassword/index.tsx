@@ -32,11 +32,20 @@ export default function SetPassword() {
     }
   }
 
+  const unlockScreenshot = (
+    <img
+      src="assets/images/unlock_screenshot.png"
+      alt="Unlock screen"
+      className="w-64"
+    />
+  );
+
   return (
     <form onSubmit={handleSubmit}>
-      <div className="relative mt-14 lg:flex lg:space-x-8 bg-white dark:bg-surface-02dp py-12 px-10">
+      <div className="relative mt-14 lg:flex lg:space-x-8 bg-white dark:bg-surface-02dp pt-12 pb-4 lg:py-12 px-10">
         <div className="lg:w-1/2">
           <h1 className="text-2xl font-bold dark:text-white">{t("title")}</h1>
+          <div className="lg:hidden mt-4">{unlockScreenshot}</div>
           <p className="text-gray-500 my-6 dark:text-gray-400">
             {t("description")}
           </p>
@@ -48,13 +57,9 @@ export default function SetPassword() {
             />
           </div>
         </div>
-        <div className="mt-16 lg:mt-0 lg:w-1/2">
+        <div className="hidden mt-16 lg:mt-0 lg:w-1/2">
           <div className="lg:flex h-full justify-center items-center">
-            <img
-              src="assets/images/unlock_screenshot.png"
-              alt="Unlock screen"
-              className="w-64"
-            />
+            {unlockScreenshot}
           </div>
         </div>
       </div>
