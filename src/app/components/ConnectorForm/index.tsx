@@ -31,7 +31,7 @@ function ConnectorForm({
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="relative lg:flex mt-14 bg-white dark:bg-surface-02dp px-10 py-12">
+      <div className="relative flex flex-col-reverse lg:flex-row mt-14 bg-white dark:bg-surface-02dp px-10 py-4 lg:py-12">
         <div className="lg:w-1/2">
           {typeof title === "string" ? (
             <h1 className="mb-2 text-2xl font-bold dark:text-white">{title}</h1>
@@ -47,10 +47,10 @@ function ConnectorForm({
               )}
             </div>
           )}
-          <div className="w-4/5">{children}</div>
+          <div className="lg:w-4/5">{children}</div>
         </div>
-        <div className="mt-16 lg:mt-0 lg:w-1/2">
-          <div className="lg:flex h-full justify-center items-center">
+        <div className="mt-4 lg:mt-0 lg:w-1/2">
+          <div className="flex h-full justify-center items-center">
             {video ? (
               <div
                 className="flex-1 relative h-0"
@@ -62,27 +62,30 @@ function ConnectorForm({
               </div>
             ) : (
               <>
-                <img
-                  src="assets/icons/alby_logo.svg"
-                  alt="Alby"
-                  className="block dark:hidden w-64"
-                />
-                <img
-                  src="assets/icons/alby_logo_dark.svg"
-                  alt="Alby"
-                  className="hidden dark:block w-64"
-                />
+                <div className="w-16 md:w-32 mb-8 lg:w-64 lg:mb-0">
+                  <img
+                    src="assets/icons/alby_logo.svg"
+                    alt="Alby"
+                    className="block dark:hidden w-full"
+                  />
+                  <img
+                    src="assets/icons/alby_logo_dark.svg"
+                    alt="Alby"
+                    className="hidden dark:block w-full"
+                  />
+                </div>
               </>
             )}
           </div>
         </div>
       </div>
-      <div className="my-8 flex space-x-4 justify-center">
+      <div className="mb-4 mt-8 md:my-8 flex flex-col-reverse justify-center gap-4 md:flex-row">
         <Button
           label={tCommon("actions.back")}
           onClick={(e) => {
             navigate(-1);
           }}
+          className="max-sm:w-full"
         />
         <Button
           type="submit"
@@ -90,6 +93,7 @@ function ConnectorForm({
           loading={submitLoading}
           disabled={submitDisabled}
           primary
+          className="max-sm:w-full"
         />
       </div>
     </form>
