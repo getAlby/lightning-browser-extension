@@ -1,8 +1,4 @@
-import {
-  CrossIcon,
-  HiddenIcon,
-  VisibleIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
+import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
@@ -10,18 +6,17 @@ import PasswordForm from "@components/PasswordForm";
 import Setting from "@components/Setting";
 import Input from "@components/form/Input";
 import Select from "@components/form/Select";
-import TextField from "@components/form/TextField";
 import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
 import type { FormEvent } from "react";
-import { useState, useEffect } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import Modal from "react-modal";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import { CURRENCIES } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import nostrlib from "~/common/lib/nostr";
 
 const initialFormData = {
   password: "",
@@ -31,49 +26,16 @@ const initialFormData = {
 function Settings() {
   const { t } = useTranslation("translation", { keyPrefix: "settings" });
   const { isLoading, settings, updateSetting } = useSettings();
+  const navigate = useNavigate();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
-
-  const [nostrPrivateKey, setNostrPrivateKey] = useState("");
-  const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
-
-  const getPrivateKeyFromStorage = async () => {
-    const priv = (await msg.request("nostr/getPrivateKey")) as string;
-    if (priv) {
-      setNostrPrivateKey(nostrlib.hexToNip19(priv, "nsec"));
-    }
-  };
-
-  useEffect(() => {
-    getPrivateKeyFromStorage().catch(console.error);
-  }, []);
 
   const [cameraPermissionsGranted, setCameraPermissionsGranted] =
     useState(false);
 
   function closeModal() {
     setModalIsOpen(false);
-  }
-
-  async function saveNostrPrivateKey(nostrPrivateKey: string) {
-    const result = await msg.request("nostr/getPrivateKey");
-    const currentPrivateKey = result as unknown as string;
-
-    if (nostrPrivateKey === currentPrivateKey) return;
-
-    if (currentPrivateKey && !confirm(t("nostr.private_key.warning"))) {
-      return;
-    }
-
-    await msg.request("nostr/setPrivateKey", {
-      privateKey: nostrlib.normalizeToHex(nostrPrivateKey),
-    });
-
-    saveSetting({
-      nostrEnabled: !!nostrPrivateKey,
-    });
-    toast.success(t("nostr.private_key.success"));
   }
 
   async function updateAccountPassword(password: string) {
@@ -393,66 +355,16 @@ function Settings() {
         <Setting
           title={t("nostr.private_key.title")}
           subtitle={
-            <Trans
-              i18nKey={"nostr.private_key.subtitle"}
-              t={t}
-              components={[
-                // eslint-disable-next-line react/jsx-key
-                <a
-                  className="underline"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  href="https://guides.getalby.com/overall-guide/alby-browser-extension/features/nostr"
-                ></a>,
-              ]}
-            />
+            "This section is moved to accounts page as keys are account specific now."
           }
         >
-          <div className="w-96 flex justify-end">
-            <div className="w-96 flex-auto -mt-1 ml-6">
-              <TextField
-                id="nostrPrivateKey"
-                label={""}
-                type={nostrPrivateKeyVisible ? "text" : "password"}
-                value={nostrPrivateKey}
-                onBlur={() => {
-                  saveNostrPrivateKey(nostrPrivateKey);
-                }}
-                onChange={(event) => {
-                  setNostrPrivateKey(event.target.value);
-                }}
-                endAdornment={
-                  <button
-                    type="button"
-                    tabIndex={-1}
-                    className="flex justify-center items-center w-10 h-8"
-                    onClick={() => {
-                      setNostrPrivateKeyVisible(!nostrPrivateKeyVisible);
-                    }}
-                  >
-                    {nostrPrivateKeyVisible ? (
-                      <HiddenIcon className="h-6 w-6" />
-                    ) : (
-                      <VisibleIcon className="h-6 w-6" />
-                    )}
-                  </button>
-                }
-              />
-            </div>
-            {!nostrPrivateKey && (
-              <div className="flex-none ml-2 flex-end">
-                <Button
-                  label={t("nostr.private_key.generate")}
-                  onClick={async () => {
-                    const result = await msg.request(
-                      "nostr/generatePrivateKey"
-                    );
-                    setNostrPrivateKey(result.privateKey as string);
-                    saveNostrPrivateKey(result.privateKey as string);
-                  }}
-                />
-              </div>
-            )}
+          <div className="w-64">
+            <Button
+              label={"Go To Accounts"}
+              primary
+              fullWidth
+              onClick={() => navigate(`/accounts`)}
+            />
           </div>
         </Setting>
       </div>
