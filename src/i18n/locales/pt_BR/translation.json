@@ -598,7 +598,7 @@
     "success": "Sucesso",
     "error": "Erro",
     "settings": "Configurações",
-    "websites": "Sites",
+    "websites": "Atividade",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "carregando",
@@ -636,7 +636,8 @@
     "help": "Ajuda",
     "response": "Resposta",
     "success_message": "{{amount}}{{fiatAmount}} enviados para {{destination}}",
-    "advanced": "Avançado"
+    "advanced": "Avançado",
+    "discover": "Explorar"
   },
   "components": {
     "allowance_menu": {
