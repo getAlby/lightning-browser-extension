@@ -89,7 +89,7 @@ const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
   ]);
 
   const $optionsdocument = await getDocument(page);
-  await findByText($optionsdocument, "Your ⚡️ Websites");
+  await findByText($optionsdocument, "Explore the Lightning ⚡️ Ecosystem");
 };
 
 test.describe("Create or connect wallets", () => {
