@@ -1,6 +1,6 @@
 import Button from "@components/Button";
 import Loading from "@components/Loading";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import api from "~/common/lib/api";
@@ -31,7 +31,7 @@ export default function TestConnection() {
     try {
       const response = await api.getAccountInfo();
       if (response.name && response.info.alias) {
-        utils.redirectPage("options.html");
+        utils.redirectPage("options.html#/discover");
       } else {
         setErrorMessage(t("connection_error"));
       }

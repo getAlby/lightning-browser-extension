@@ -88,6 +88,12 @@ const utils = {
             tabId = window.tabs[0].id;
           }
 
+          // Kiwi Browser opens the prompt in the same window (there are only tabs on mobile browsers)
+          // Find the currently active tab to validate messages
+          if (window.tabs && window.tabs?.length > 1) {
+            tabId = window.tabs?.find((x) => x.active)?.id;
+          }
+
           // this interval hightlights the popup in the taskbar
           const focusInterval = setInterval(() => {
             if (!window.id) {
@@ -97,6 +103,7 @@ const utils = {
               drawAttention: true,
             });
           }, 2100);
+
           const onMessageListener = (
             responseMessage: {
               response?: unknown;
@@ -113,8 +120,8 @@ const utils = {
             ) {
               clearInterval(focusInterval);
               browser.tabs.onRemoved.removeListener(onRemovedListener);
-              if (sender.tab.windowId) {
-                return browser.windows.remove(sender.tab.windowId).then(() => {
+              if (sender.tab.id) {
+                return browser.tabs.remove(sender.tab.id).then(() => {
                   // in the future actual "remove" (closing prompt) will be moved to component for i.e. budget flow
                   // https://github.com/getAlby/lightning-browser-extension/issues/1197
                   if (responseMessage.error) {
