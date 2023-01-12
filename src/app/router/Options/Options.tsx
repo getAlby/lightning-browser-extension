@@ -1,5 +1,6 @@
 import Container from "@components/Container";
 import Navbar from "@components/Navbar";
+import Account from "@screens/Account";
 import Accounts from "@screens/Accounts";
 import ConfirmPayment from "@screens/ConfirmPayment";
 import Keysend from "@screens/Keysend";
@@ -59,6 +60,7 @@ function Options() {
             <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="settings" element={<Settings />} />
             <Route path="accounts">
+              <Route path=":id" element={<Account />} />
               <Route
                 path="new"
                 element={
