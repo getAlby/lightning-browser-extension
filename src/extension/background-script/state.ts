@@ -22,7 +22,6 @@ interface State {
   nostr: Nostr | null;
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
-  getConnectorById: (id: string) => Promise<Connector | null>;
   getNostr: () => Nostr;
   init: () => Promise<void>;
   isUnlocked: () => boolean;
@@ -106,26 +105,17 @@ const state = createState<State>((set, get) => ({
 
     return connector;
   },
-  getConnectorById: async (id) => {
-    const account = get().accounts[id];
-    if (!account) return null;
-
-    const password = get().password as string;
-    const config = decryptData(account.config as string, password);
-
-    const connector = new connectors[account.connector](config);
-    await connector.init();
-
-    set({ connector: connector });
-
-    return connector;
-  },
   getNostr: () => {
     if (get().nostr) {
       return get().nostr as Nostr;
     }
+    const currentAccountId = get().currentAccountId as string;
+    const account = get().accounts[currentAccountId];
 
-    const nostr = new Nostr();
+    const password = get().password as string;
+    const privateKey = decryptData(account.nostrPrivateKey as string, password);
+
+    const nostr = new Nostr(privateKey);
     set({ nostr: nostr });
 
     return nostr;
@@ -135,7 +125,7 @@ const state = createState<State>((set, get) => ({
     if (connector) {
       await connector.unload();
     }
-    set({ password: null, connector: null, account: null });
+    set({ password: null, connector: null, account: null, nostr: null });
   },
   isUnlocked: () => {
     return get().password !== null;

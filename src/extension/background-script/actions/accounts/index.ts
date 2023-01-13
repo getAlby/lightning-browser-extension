@@ -2,7 +2,7 @@ import add from "./add";
 import all from "./all";
 import decryptedDetails from "./decryptedDetails";
 import edit from "./edit";
-import getById from "./getById";
+import get from "./get";
 import info from "./info";
 import lock from "./lock";
 import remove from "./remove";
@@ -18,6 +18,6 @@ export {
   select,
   info,
   remove,
-  getById,
+  get,
   decryptedDetails,
 };

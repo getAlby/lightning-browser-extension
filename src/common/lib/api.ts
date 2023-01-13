@@ -34,9 +34,9 @@ export interface AccountInfoRes {
   name: string;
 }
 
-export interface AccountByIdRes extends Account {
-  balance: { balance: string | number; currency: ACCOUNT_CURRENCIES };
-  info: { alias: string; pubkey?: string };
+export interface GetAccountRes
+  extends Pick<Account, "id" | "connector" | "name"> {
+  nostrEnabled: boolean;
 }
 interface StatusRes {
   configured: boolean;
@@ -97,8 +97,7 @@ export const swrGetAccountInfo = async (
   });
 };
 export const getAccounts = () => msg.request<Accounts>("getAccounts");
-export const getAccountById = () =>
-  msg.request<AccountByIdRes>("getAccountById");
+export const getAccount = () => msg.request<GetAccountRes>("getAccount");
 export const updateAllowance = () => msg.request<Accounts>("updateAllowance");
 export const selectAccount = (id: string) =>
   msg.request("selectAccount", { id });
@@ -137,6 +136,7 @@ export const getCurrencyRate = async () =>
   msg.request<{ rate: number }>("getCurrencyRate");
 
 export default {
+  getAccount,
   getAccountInfo,
   getAccounts,
   getInfo,

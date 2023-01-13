@@ -167,9 +167,9 @@ export interface MessagePaymentAll extends MessageDefault {
   };
 }
 
-export interface MessageAccountGetById extends MessageDefault {
-  args: { id: Account["id"] };
-  action: "getAccountById";
+export interface MessageAccountGet extends MessageDefault {
+  args?: { id?: Account["id"] };
+  action: "getAccount";
 }
 
 export interface MessageAccountRemove extends MessageDefault {
@@ -378,8 +378,16 @@ export interface MessagePublicKeyGet extends MessageDefault {
   action: "getPublicKeyOrPrompt";
 }
 
+export interface MessagePrivateKeyGet extends MessageDefault {
+  args?: {
+    id?: Account["id"];
+  };
+  action: "getPrivateKey";
+}
+
 export interface MessagePrivateKeySet extends MessageDefault {
   args: {
+    id?: Account["id"];
     privateKey: string;
   };
   action: "setPrivateKey";
