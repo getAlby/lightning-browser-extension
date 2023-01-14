@@ -47,7 +47,9 @@ export default function SetPassword() {
           <h1 className="text-2xl font-bold dark:text-white max-sm:text-center">
             {t("title")}
           </h1>
-          <div className="lg:hidden mt-4">{unlockScreenshot}</div>
+          <div className="lg:hidden mt-4 w-full flex justify-center">
+            {unlockScreenshot}
+          </div>
           <p className="text-gray-500 my-6 dark:text-gray-400">
             {t("description")}
           </p>
@@ -59,10 +61,8 @@ export default function SetPassword() {
             />
           </div>
         </div>
-        <div className="hidden mt-16 lg:mt-0 lg:w-1/2">
-          <div className="lg:flex h-full justify-center items-center">
-            {unlockScreenshot}
-          </div>
+        <div className="hidden lg:flex w-1/2 justify-center items-center self-center">
+          {unlockScreenshot}
         </div>
       </div>
       <div className="my-8 flex justify-center">
