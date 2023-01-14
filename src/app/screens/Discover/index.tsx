@@ -20,20 +20,20 @@ function Discover() {
 
       <div className="mb-12">
         {websites.map(({ title, items }) => (
-          <div className="mb-6" key={title}>
-            <h4 className="mb-4 text-xl font-bold dark:text-white">
+          <div className="mb-10" key={title}>
+            <h4 className="mb-2 text-xl font-bold dark:text-white">
               {t(`list.${title as "trading"}`)}
             </h4>
 
-            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {items.map(({ title, subtitle, logo, url }) => (
                 <a key={url} href={url} target="_blank" rel="noreferrer">
-                  <div className="bg-white dark:bg-surface-02dp shadow-md flex p-4 h-32 rounded-lg hover:bg-gray-50 cursor-pointer w-full">
+                  <div className="bg-white dark:bg-surface-02dp shadow flex p-4 h-24 rounded-lg hover:bg-gray-50 cursor-pointer w-full">
                     <div className="flex space-x-3">
                       <img
                         src={logo}
                         alt="image"
-                        className="h-14 w-14 rounded-xl shadow-md object-cover"
+                        className="h-14 w-14 rounded-lg object-cover"
                       />
 
                       <div>
