@@ -107,26 +107,26 @@
     "title": "nostr",
     "items": [
       {
-        "title": "astral.ninja",
+        "title": "Astral",
         "subtitle": "A Twitter-like client with chat and one-click payments.",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/_thumbnail.svg",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/astral_thumbnail.png",
         "url": "https://astral.ninja/"
       },
       {
-        "title": "snort.social",
+        "title": "Snort",
         "subtitle": "Fast nostr web client.",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/snort_thumbnail.svg",
-        "url": "https://www.snort.social"
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/snort_thumbnail.png",
+        "url": "https://snort.social"
       },
       {
-        "title": "hamstr.to",
+        "title": "Hamstr",
         "subtitle": "Twitter-style nostr web client.",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/hamstr-to_thumbnail.svg",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/hamstr_thumbnail.svg",
         "url": "https://hamstr.to/"
       },
       {
-        "title": "yosup.app",
-        "subtitle": "Twitter-style nostr web client.",
+        "title": "Yo, Sup?",
+        "subtitle": "The blue bird experience for Nostr.",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/yosup_thumbnail.svg",
         "url": "https://yosup.app/"
       }

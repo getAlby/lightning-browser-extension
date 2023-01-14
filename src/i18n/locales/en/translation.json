@@ -611,7 +611,8 @@
         "entertaiment": "Entertaiment",
         "shopping": "Shopping",
         "miscellaneous": "Miscellaneous",
-        "showcases": "Showcases"
+        "showcases": "Showcases",
+        "nostr": "Nostr"
       }
     },
     "publishers": {
