@@ -78,7 +78,7 @@ function AccountMenu({ showOptions = true }: Props) {
   // - expand to take up full possible width on mobile
   // - constrain width on desktop screens to fit with the navbar
   // - add a minimum width to match the dropdown menu
-  const accountMenuWidthClassname = `min-w-[theme(space.56)] max-w-[calc(100%-theme(space.2)-24px)] md:max-w-[280px] lg:max-w-[400px] xl:max-w-[500px]`;
+  const accountMenuWidthClassname = `min-w-[theme(space.56)] max-w-[calc(100%-theme(space.2)-32px)] md:max-w-[280px] lg:max-w-[400px] xl:max-w-[500px]`;
   return (
     <div
       className={classNames(
