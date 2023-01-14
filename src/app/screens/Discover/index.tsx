@@ -37,7 +37,7 @@ function Discover() {
         {websites.map(({ title, items }) => (
           <div className="mb-10" key={title}>
             <h4 className="mb-2 text-xl font-bold dark:text-white">
-              {t(`list.${title as "trading"}`)}
+              {t(`discover.list.${title as "trading"}`)}
             </h4>
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
