@@ -27,6 +27,10 @@ module.exports = {
   content: ["./static/views/**/*.html", "./src/app/**/*.{js,ts,jsx,tsx}"],
   plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],
   theme: {
+    screens: {
+      'xs': '300px',
+      ...defaultTheme.screens,
+    },
     extend: {
       animation: {
         "spin-fast": "spin 0.7s linear infinite",

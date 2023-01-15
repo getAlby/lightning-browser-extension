@@ -73,7 +73,7 @@ function AccountMenu({ showOptions = true }: Props) {
   }
 
   return (
-    <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-surface-12dp max-w-full">
+    <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-surface-12dp  xs:max-w-xs md:max-w-full">
       <p className="flex items-center">
         <WalletIcon className="-ml-1 w-8 h-8 opacity-50 dark:text-white" />
       </p>
