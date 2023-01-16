@@ -37,10 +37,7 @@ function AccountScreen() {
   const auth = useAccount();
   const { accounts, getAccounts } = useAccounts();
   const { t } = useTranslation("translation", {
-    keyPrefix: "accounts",
-  });
-  const { t: tSettings } = useTranslation("translation", {
-    keyPrefix: "settings",
+    keyPrefix: "accounts.account_view",
   });
   const { isLoading: isLoadingSettings } = useSettings();
 
@@ -98,7 +95,7 @@ function AccountScreen() {
 
     if (nostrPrivateKey === currentPrivateKey) return;
 
-    if (currentPrivateKey && !confirm(tSettings("nostr.private_key.warning"))) {
+    if (currentPrivateKey && !confirm(t("nostr.private_key.warning"))) {
       return;
     }
 
@@ -107,7 +104,7 @@ function AccountScreen() {
       privateKey: nostrlib.normalizeToHex(nostrPrivateKey),
     });
 
-    toast.success(tSettings("nostr.private_key.success"));
+    toast.success(t("nostr.private_key.success"));
   }
 
   async function updateAccountName({ id, name }: AccountAction) {
@@ -196,21 +193,22 @@ function AccountScreen() {
           <div className="flex justify-between items-center pt-8 pb-4">
             <dl>
               <dt className="text-sm font-medium text-gray-500">
-                {"Account Information"}
+                {t("title")}
               </dt>
             </dl>
 
             {account.connector === "lndhub" && (
-              <div className="flex items-center text-gray-500 hover:text-black transition-color duration-200 dark:hover:text-white">
-                <ExportIcon
-                  className="h-6 w-6 rotate-90 cursor-pointer"
-                  onClick={() =>
-                    exportAccount({
-                      id: account.id,
-                      name: account.name,
-                    })
-                  }
-                />
+              <div
+                className="text-sm font-medium flex items-center text-gray-500 hover:text-black transition-color duration-200 dark:hover:text-white cursor-pointer"
+                onClick={() =>
+                  exportAccount({
+                    id: account.id,
+                    name: account.name,
+                  })
+                }
+              >
+                <p>{t("actions.export")}</p>
+                <ExportIcon className="h-6 w-6" />
               </div>
             )}
 
@@ -279,10 +277,10 @@ function AccountScreen() {
 
           <div>
             <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
-              <Setting title={"Account Name"} subtitle={""}>
+              <Setting title={t("name.title")} subtitle={""}>
                 <div className="w-64">
                   <Input
-                    placeholder={"Account Name"}
+                    placeholder={t("name.placeholder")}
                     type="text"
                     value={accountName}
                     onBlur={() => {
@@ -301,15 +299,8 @@ function AccountScreen() {
                 </div>
               </Setting>
             </div>
-            <div className="relative flex py-5 mt-5 items-center">
-              <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
-              <span className="flex-shrink mx-4 text-gray-500 dark:text-gray-400 fw-bold">
-                🧪 Alby Lab
-              </span>
-              <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
-            </div>
-            <h2 className="text-2xl font-bold dark:text-white">
-              {tSettings("nostr.title")}
+            <h2 className="text-2xl mt-12 font-bold dark:text-white">
+              {t("nostr.title")}
             </h2>
             <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
               <a
@@ -318,17 +309,17 @@ function AccountScreen() {
                 rel="noreferrer noopener"
                 className="underline"
               >
-                {tSettings("nostr.title")}
+                {t("nostr.title")}
               </a>{" "}
-              {tSettings("nostr.hint")}
+              {t("nostr.hint")}
             </p>
             <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
               <Setting
-                title={tSettings("nostr.private_key.title")}
+                title={t("nostr.private_key.title")}
                 subtitle={
                   <Trans
                     i18nKey={"nostr.private_key.subtitle"}
-                    t={tSettings}
+                    t={t}
                     components={[
                       // eslint-disable-next-line react/jsx-key
                       <a
@@ -375,7 +366,7 @@ function AccountScreen() {
                   {!nostrPrivateKey && (
                     <div className="flex-none ml-2 flex-end">
                       <Button
-                        label={tSettings("nostr.private_key.generate")}
+                        label={t("nostr.private_key.generate")}
                         onClick={async () => {
                           const result = await msg.request(
                             "nostr/generatePrivateKey"
@@ -390,7 +381,7 @@ function AccountScreen() {
               </Setting>
             </div>
 
-            <div className="relative flex py-5 mt-5 items-center">
+            <div className="relative flex py-5 mt-12 items-center">
               <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
               <span className="flex-shrink mx-4 text-gray-500 dark:text-gray-400 fw-bold">
                 ⛔️ Danger Zone
@@ -399,10 +390,8 @@ function AccountScreen() {
             </div>
             <div className="shadow bg-white sm:rounded-md sm:overflow-hidden mb-5 px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
               <Setting
-                title={"Remove This Account"}
-                subtitle={
-                  "All the linked allowances will be deleted. Please be certain."
-                }
+                title={t("remove.title")}
+                subtitle={t("remove.subtitle")}
               >
                 <div className="w-64">
                   <Button
@@ -412,10 +401,8 @@ function AccountScreen() {
                         name: account.name,
                       });
                     }}
-                    label={"Remove Account"}
+                    label={t("actions.remove_account")}
                     fullWidth
-                    // loading={isLoading}
-                    // disabled={isLoading}
                   />
                 </div>
               </Setting>

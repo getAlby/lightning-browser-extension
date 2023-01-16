@@ -251,7 +251,7 @@ function Settings() {
         {t("personal_data.description")}
       </p>
 
-      <div className="mb-12 shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting title={t("name.title")} subtitle={t("name.subtitle")}>
           {!isLoading && (
             <div className="w-64">
@@ -332,14 +332,9 @@ function Settings() {
         </Modal>
       </div>
 
-      <div className="relative flex py-5 mt-5 items-center">
-        <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
-        <span className="flex-shrink mx-4 text-gray-500 dark:text-gray-400 fw-bold">
-          🧪 Alby Lab
-        </span>
-        <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
-      </div>
-      <h2 className="text-2xl font-bold dark:text-white">{t("nostr.title")}</h2>
+      <h2 className="text-2xl mt-12 font-bold dark:text-white">
+        {t("nostr.title")}
+      </h2>
       <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
         <a
           href="https://github.com/nostr-protocol/nostr"
@@ -354,13 +349,11 @@ function Settings() {
       <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting
           title={t("nostr.private_key.title")}
-          subtitle={
-            "This section is moved to accounts page as keys are account specific now."
-          }
+          subtitle={t("nostr.private_key.subtitle")}
         >
           <div className="w-64">
             <Button
-              label={"Go To Accounts"}
+              label={t("nostr.private_key.go_to")}
               primary
               fullWidth
               onClick={() => navigate(`/accounts`)}
