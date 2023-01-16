@@ -540,7 +540,6 @@
     "nostr": {
       "title": "Nostr",
       "allow": "Consenti a {{host}} di:",
-      "read_public_key": "Leggere la propria chiave pubblica",
       "block_and_ignore": "Blocca e ignora {{host}}"
     },
     "alby": {

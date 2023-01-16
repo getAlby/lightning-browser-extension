@@ -538,16 +538,9 @@
     "nostr": {
       "title": "Nostr",
       "allow": "允许{{host}}进行：",
-      "read_public_key": "读取你的公钥",
       "block_and_ignore": "阻止并忽略 {{host}}",
-      "confirm_sign_message": {
-        "remember": {
-          "label": "记住，不要再问"
-        }
-      },
       "permissions": {
         "allow_sign": "允许{{host}}签署：",
-        "decrypt": "解密数据",
         "encrypt": "加密数据"
       },
       "content": "{{host}} 要求你签署："

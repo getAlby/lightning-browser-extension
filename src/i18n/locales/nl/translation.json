@@ -580,17 +580,10 @@
       "title": "",
       "allow": "",
       "content": "",
-      "read_public_key": "",
       "block_and_ignore": "",
       "block_added": "",
-      "confirm_sign_message": {
-        "remember": {
-          "label": ""
-        }
-      },
       "permissions": {
         "decrypt": "",
-        "encrypt": "",
         "allow_sign": ""
       }
     }

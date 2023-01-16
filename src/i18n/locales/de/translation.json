@@ -516,13 +516,10 @@
       "title": "Nostr",
       "allow": "Erlaube dieser Website:",
       "content": "Auf dieser Website wirst du aufgefordert zu signieren:",
-      "read_public_key": "Lese deinen öffentlichen Schlüssel",
       "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
       "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade deine Website neu.",
       "permissions": {
-        "decrypt": "Daten entschlüsseln",
-        "encrypt": "Daten verschlüsseln",
-        "allow_sign": "Erlaube {{host}} zu unterschreiben:"
+        "encrypt": "Daten verschlüsseln"
       }
     },
     "confirm_request_permission": {

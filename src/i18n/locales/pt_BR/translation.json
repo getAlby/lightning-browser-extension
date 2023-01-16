@@ -577,18 +577,10 @@
     "nostr": {
       "allow": "Permitir este site:",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
-      "read_public_key": "Ler sua chave pública",
       "title": "Nostr",
-      "confirm_sign_message": {
-        "remember": {
-          "label": "Lembrar minha escolha e não perguntar novamente"
-        }
-      },
       "content": "Este site solicita que você assine:",
       "permissions": {
-        "decrypt": "Descriptografar dados",
-        "encrypt": "Criptografar dados",
-        "allow_sign": "Permitir {{host}} assinar:"
+        "encrypt": "Criptografar dados"
       },
       "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site."
     },
