@@ -78,7 +78,7 @@ function ConfirmSignMessage() {
                 url={origin.host}
               />
               <ContentMessage
-                heading={t("permissions.allow_sign", { host: origin.host })}
+                heading={t("allow_sign", { host: origin.host })}
                 content={event.content}
               />
               <div className="flex items-center">
@@ -94,7 +94,7 @@ function ConfirmSignMessage() {
                   htmlFor="remember_permission"
                   className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
                 >
-                  {t("permissions.remember.label")}
+                  {tCommon("actions.remember")}
                 </label>
               </div>
             </div>

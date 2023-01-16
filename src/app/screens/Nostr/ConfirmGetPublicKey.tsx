@@ -16,6 +16,7 @@ function NostrConfirmGetPublicKey() {
     keyPrefix: "nostr",
   });
   const { t: tCommon } = useTranslation("common");
+  const { t: tPermissions } = useTranslation("permissions");
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
@@ -67,7 +68,7 @@ function NostrConfirmGetPublicKey() {
             <div className="mb-2 flex items-center">
               <CheckIcon className="w-5 h-5 mr-2" />
               <p className="dark:text-white">
-                {t("permissions.read_public_key")}
+                {tPermissions("nostr.getpublickey")}
               </p>
             </div>
           </div>
@@ -87,7 +88,7 @@ function NostrConfirmGetPublicKey() {
               htmlFor="remember_permission"
               className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
             >
-              {t("permissions.remember.label")}
+              {tCommon("actions.remember")}
             </label>
           </div>
 

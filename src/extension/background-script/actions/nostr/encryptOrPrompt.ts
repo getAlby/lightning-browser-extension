@@ -3,7 +3,7 @@ import state from "~/extension/background-script/state";
 import i18n from "~/i18n/i18nConfig";
 import { MessageEncryptGet, PermissionMethodNostr } from "~/types";
 
-import { hasPermissionFor, addPermissionFor } from "./helpers";
+import { addPermissionFor, hasPermissionFor } from "./helpers";
 
 const encryptOrPrompt = async (message: MessageEncryptGet) => {
   if (!("host" in message.origin)) {
@@ -32,7 +32,7 @@ const encryptOrPrompt = async (message: MessageEncryptGet) => {
         ...message,
         action: "public/nostr/confirm",
         args: {
-          description: i18n.t("translation:nostr.permissions.encrypt"),
+          description: i18n.t("permissions:nostr.nip04encrypt"),
         },
       });
 
