@@ -826,8 +826,8 @@
   "permissions": {
     "nostr": {
       "getpublickey": "Read your public key.",
-      "nip04encrypt": "Encrypt Data.",
-      "nip04decrypt": "Decrypt Data.",
+      "nip04encrypt": "Encrypt data.",
+      "nip04decrypt": "Decrypt data.",
       "signmessage": "Sign message with your key."
     },
     "commando": {
