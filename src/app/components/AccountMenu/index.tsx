@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
+import { classNames } from "~/app/utils";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 
@@ -72,8 +73,19 @@ function AccountMenu({ showOptions = true }: Props) {
     }
   }
 
+  // account menu width:
+  // - ensure space for menu icon (24px) and left padding (pl-2)
+  // - expand to take up full possible width on mobile
+  // - constrain width on desktop screens to fit with the navbar
+  const accountNameWidthClassname = "calc(100%-theme(space.2)-24px)";
+  const accountMenuWidthClassname = `max-w-[${accountNameWidthClassname}] md:max-w-[300px] lg:max-w-[400px] xl:max-w-[500px]`;
   return (
-    <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-surface-12dp max-w-full">
+    <div
+      className={classNames(
+        "relative pl-2 flex bg-gray-100 rounded-md dark:bg-surface-12dp",
+        accountMenuWidthClassname
+      )}
+    >
       <p className="flex items-center">
         <WalletIcon className="-ml-1 w-8 h-8 opacity-50 dark:text-white" />
       </p>
