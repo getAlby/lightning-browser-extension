@@ -4,8 +4,7 @@ import type { MessagePermissionsList, Permission } from "~/types";
 const listByAllowance = async (message: MessagePermissionsList) => {
   const { id } = message.args;
   const dbPermissions = await db.permissions
-    .toCollection()
-    .filter((permission) => permission.allowanceId === id)
+    .where({ allowanceId: id })
     .toArray();
 
   const permissions: Permission[] = [];
