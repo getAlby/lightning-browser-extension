@@ -135,7 +135,7 @@ function AccountsScreen() {
                         <WalletIcon className="w-8 h-8 text-black" />
                       </div>
                       <div className="ml-4">
-                        <h3 className="font-bold text-gray-900 dark:text-white">
+                        <h3 className="font-bold text-gray-900 dark:text-white break-all whitespace-normal max-w-xs md:max-w-lg xl:max-w-2xl">
                           {account.name}
                         </h3>
                         <p className="text-gray-700 dark:text-neutral-400">
