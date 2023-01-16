@@ -45,13 +45,12 @@ const request = async (
 
     const connectorName = connector.constructor.name.toLowerCase();
     // prefix method with webln to prevent potential naming conflicts (e.g. with nostr calls that also use the permissions)
-    const legacyWeblnMethod = `${WEBLN_PREFIX}${methodInLowerCase}`;
     const weblnMethod = `${WEBLN_PREFIX}${connectorName}/${methodInLowerCase}`;
 
     const permission = await db.permissions
       .where("host")
       .equalsIgnoreCase(origin.host)
-      .and((p) => p.method === legacyWeblnMethod || p.method === weblnMethod)
+      .and((p) => p.method === weblnMethod)
       .first();
 
     // request method is allowed to be called
@@ -66,6 +65,7 @@ const request = async (
       );
       return response;
     } else {
+      // throws an error if the user rejects
       const promptResponse = await utils.openPrompt<{
         enabled: boolean;
         blocked: boolean;
