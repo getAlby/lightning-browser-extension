@@ -579,9 +579,6 @@
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "title": "Nostr",
       "content": "Este site solicita que você assine:",
-      "permissions": {
-        "encrypt": "Criptografar dados"
-      },
       "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site."
     },
     "confirm_request_permission": {

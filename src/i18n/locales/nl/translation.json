@@ -583,7 +583,6 @@
       "block_and_ignore": "",
       "block_added": "",
       "permissions": {
-        "decrypt": "",
         "allow_sign": ""
       }
     }
