@@ -77,8 +77,8 @@ function AccountMenu({ showOptions = true }: Props) {
   // - ensure space for menu icon (24px) and left padding (pl-2)
   // - expand to take up full possible width on mobile
   // - constrain width on desktop screens to fit with the navbar
-  const accountNameWidthClassname = "calc(100%-theme(space.2)-24px)";
-  const accountMenuWidthClassname = `max-w-[${accountNameWidthClassname}] md:max-w-[280px] lg:max-w-[400px] xl:max-w-[500px]`;
+  const accountMenuWidthClassnameMobile = "calc(100%-theme(space.2)-24px)";
+  const accountMenuWidthClassname = `max-w-[${accountMenuWidthClassnameMobile}] md:max-w-[280px] lg:max-w-[400px] xl:max-w-[500px]`;
   return (
     <div
       className={classNames(
