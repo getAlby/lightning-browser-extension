@@ -91,7 +91,7 @@ function NostrConfirm() {
                 htmlFor="remember_permission"
                 className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
               >
-                {t("confirm_sign_message.remember.label")}
+                {tCommon("actions.remember")}
               </label>
             </div>
           </div>

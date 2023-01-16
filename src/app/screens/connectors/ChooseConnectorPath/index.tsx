@@ -22,7 +22,7 @@ export default function ChooseConnectorPath({ title, description }: Props) {
   });
   const { t: tCommon } = useTranslation("common");
   return (
-    <div className="relative my-14 lg:grid lg:gap-8 text-center">
+    <div className="relative mt-14 lg:grid lg:gap-8 text-center">
       <div className="relative">
         <div>
           <h1 className="text-3xl font-bold dark:text-white">{title}</h1>
@@ -35,7 +35,7 @@ export default function ChooseConnectorPath({ title, description }: Props) {
           )}
         </div>
 
-        <div className="grid grid-cols-2 gap-18 my-12">
+        <div className="grid lg:grid-cols-2 gap-4 lg:gap-8 xl:gap-18 mt-8 mb-4 lg:my-12">
           <ConnectorPath
             title={t("alby.title")}
             description={t("alby.description")}
@@ -57,7 +57,7 @@ export default function ChooseConnectorPath({ title, description }: Props) {
             title={t("other.title")}
             description={t("other.description")}
             content={
-              <div className="flex flex-wrap gap-6 w-80 mx-auto my-5 items-center">
+              <div className="flex flex-wrap gap-6 w-72 lg:w-80 mx-auto my-5 items-center">
                 {connectorRoutes.slice(0, 7).map(({ path, title, logo }) => (
                   <img
                     key={path}
