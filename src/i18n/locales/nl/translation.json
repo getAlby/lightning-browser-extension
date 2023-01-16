@@ -581,10 +581,7 @@
       "allow": "",
       "content": "",
       "block_and_ignore": "",
-      "block_added": "",
-      "permissions": {
-        "allow_sign": ""
-      }
+      "block_added": ""
     }
   },
   "common": {

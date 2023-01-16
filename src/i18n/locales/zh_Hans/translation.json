@@ -539,9 +539,6 @@
       "title": "Nostr",
       "allow": "允许{{host}}进行：",
       "block_and_ignore": "阻止并忽略 {{host}}",
-      "permissions": {
-        "encrypt": "加密数据"
-      },
       "content": "{{host}} 要求你签署："
     },
     "lnurlpay": {
