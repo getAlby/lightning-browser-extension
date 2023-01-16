@@ -14,6 +14,15 @@ const bob = {
 
 describe("nostr", () => {
   test("encrypt & decrypt", async () => {
-    console.info("add tests for", alice, bob, Nostr);
+    const aliceNostr = new Nostr(alice.privateKey);
+
+    const message = "Secret message that is sent from Alice to Bob";
+    const encrypted = aliceNostr.encrypt(bob.publicKey, message);
+
+    const bobNostr = new Nostr(bob.privateKey);
+
+    const decrypted = bobNostr.decrypt(alice.publicKey, encrypted);
+
+    expect(decrypted).toMatch(message);
   });
 });

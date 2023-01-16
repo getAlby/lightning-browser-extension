@@ -13,20 +13,8 @@ const defaultProps = {
 };
 
 const mockAccounts: Accounts = {
-  "1": {
-    id: "1",
-    connector: "lnd",
-    config: "",
-    name: "LND account",
-    nostrPrivateKey: "",
-  },
-  "2": {
-    id: "2",
-    connector: "galoy",
-    config: "",
-    name: "Galoy account",
-    nostrPrivateKey: "",
-  },
+  "1": { id: "1", connector: "lnd", config: "", name: "LND account" },
+  "2": { id: "2", connector: "galoy", config: "", name: "Galoy account" },
 };
 
 jest.mock("~/app/context/AccountsContext", () => ({
