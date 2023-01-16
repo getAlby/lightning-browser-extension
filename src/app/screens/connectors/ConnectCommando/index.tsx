@@ -68,7 +68,6 @@ export default function ConnectCommando() {
         privateKey,
       },
       connector: getConnectorType(),
-      nostrPrivateKey: null,
     };
 
     try {

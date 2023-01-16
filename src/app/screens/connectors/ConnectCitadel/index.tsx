@@ -55,7 +55,6 @@ export default function ConnectCitadel() {
         password,
       },
       connector: getConnectorType(),
-      nostrPrivateKey: null,
     };
 
     try {

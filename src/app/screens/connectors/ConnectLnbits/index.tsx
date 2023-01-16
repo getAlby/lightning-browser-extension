@@ -46,7 +46,6 @@ export default function ConnectLnbits() {
         url,
       },
       connector: getConnectorType(),
-      nostrPrivateKey: null,
     };
 
     try {

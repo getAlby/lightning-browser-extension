@@ -62,7 +62,6 @@ export default function ConnectMyNode() {
         url,
       },
       connector: getConnectorType(),
-      nostrPrivateKey: null,
     };
 
     try {

@@ -41,7 +41,6 @@ export default function ConnectEclair() {
         url,
       },
       connector: "eclair",
-      nostrPrivateKey: null,
     };
 
     try {

@@ -59,7 +59,6 @@ export default function ConnectRaspiBlitz() {
         url,
       },
       connector: getConnectorType(),
-      nostrPrivateKey: null,
     };
 
     try {

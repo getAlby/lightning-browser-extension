@@ -62,7 +62,6 @@ export default function ConnectStart9() {
         url,
       },
       connector: getConnectorType(),
-      nostrPrivateKey: null,
     };
 
     try {

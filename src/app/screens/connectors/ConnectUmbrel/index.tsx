@@ -62,7 +62,6 @@ export default function ConnectUmbrel() {
         url,
       },
       connector: getConnectorType(),
-      nostrPrivateKey: null,
     };
 
     try {

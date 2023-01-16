@@ -266,7 +266,6 @@ export default function ConnectGaloy(props: Props) {
         walletId: config.walletId,
       },
       connector: "galoy",
-      nostrPrivateKey: null,
     };
 
     try {

@@ -16,7 +16,7 @@ export interface Account {
   connector: ConnectorType;
   config: string;
   name: string;
-  nostrPrivateKey: string | null;
+  nostrPrivateKey?: string | null;
 }
 
 export interface Accounts {
