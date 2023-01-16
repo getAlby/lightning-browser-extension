@@ -50,8 +50,9 @@ export async function addPermissionFor(method: string, host: string) {
 export function validateEvent(event: Event): boolean {
   if (typeof event.content !== "string") return false;
   if (typeof event.created_at !== "number") return false;
-  if (typeof event.pubkey !== "string") return false;
-  if (!event.pubkey.match(/^[a-f0-9]{64}$/)) return false;
+  // ignore these checks because if the pubkey is not set we add it to the event. same for the ID.
+  // if (typeof event.pubkey !== "string") return false;
+  // if (!event.pubkey.match(/^[a-f0-9]{64}$/)) return false;
 
   if (!Array.isArray(event.tags)) return false;
   for (let i = 0; i < event.tags.length; i++) {
