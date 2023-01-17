@@ -7,6 +7,9 @@ import "@testing-library/jest-dom";
 // https://github.com/mswjs/examples/tree/master/examples/rest-react
 import { server } from "./tests/unit/helpers/server";
 
+// mocking Identicon component canvas
+import 'jest-canvas-mock';
+
 // fix "This script should only be loaded in a browser extension." e.g. https://github.com/mozilla/webextension-polyfill/issues/218
 if (!chrome.runtime.id) chrome.runtime.id = "history-delete";
 
