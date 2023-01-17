@@ -12,7 +12,14 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
     return;
   }
 
-  if (!validateEvent(message.args.event)) {
+  const nostr = state.getState().getNostr();
+
+  // check event and add an ID and pubkey if not present
+  const event = message.args.event;
+  if (!event.pubkey) event.pubkey = nostr.getPublicKey();
+  if (!event.id) event.id = nostr.getEventHash(event);
+
+  if (!validateEvent(event)) {
     console.error("Invalid event");
     return {
       error: "Invalid event.",
@@ -42,10 +49,7 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
       }
     }
 
-    const signedEvent = await state
-      .getState()
-      .getNostr()
-      .signEvent(message.args.event);
+    const signedEvent = await nostr.signEvent(event);
 
     return { data: signedEvent };
   } catch (e) {

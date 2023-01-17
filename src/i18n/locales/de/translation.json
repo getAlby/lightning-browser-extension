@@ -4,7 +4,7 @@
       "nav": {
         "welcome": "Willkommen",
         "password": "Dein Passwort",
-        "connect": "Dein Lightning-Konto",
+        "connect": "Ihr Lightning Konto",
         "done": "Fertig"
       },
       "intro": {
@@ -276,7 +276,12 @@
         "errors": {
           "connection_failed": "Verbindung fehlgeschlagen. Ist dein Core Lightning-Knoten online und verwendet es das Commando-Plugin?"
         }
-      }
+      },
+      "kollider": {
+        "title": "Kollider",
+        "description": "Anmeldung bei deinem Kollider-Konto"
+      },
+      "title": "Verbinde Lightning Wallet"
     },
     "unlock": {
       "unlock_error": {
@@ -511,14 +516,8 @@
       "title": "Nostr",
       "allow": "Erlaube dieser Website:",
       "content": "Auf dieser Website wirst du aufgefordert zu signieren:",
-      "read_public_key": "Lese deinen öffentlichen Schlüssel",
       "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
-      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade deine Website neu.",
-      "permissions": {
-        "decrypt": "Daten entschlüsseln",
-        "encrypt": "Daten verschlüsseln",
-        "allow_sign": "Erlaube {{host}} zu unterschreiben:"
-      }
+      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade deine Website neu."
     },
     "confirm_request_permission": {
       "title": "Antrag genehmigen",
@@ -584,6 +583,65 @@
         "heading": "Einen Kanal vom Knoten anfordern"
       },
       "success": "Kanalanfrage erfolgreich gesendet"
+    },
+    "alby": {
+      "pre_connect": {
+        "email": {
+          "login": {
+            "label": "Email Adresse oder Lightning Adresse"
+          },
+          "create": {
+            "label": "Email Adresse"
+          }
+        },
+        "login_account": "Melden dich an, um dein bestehendes Alby-Konto zu verbinden.",
+        "host_wallet": "Wir hosten die Lightning Wallet für dich!",
+        "optional_lightning_note": {
+          "part3": ". Dies ist eine einfache Möglichkeit für jeden, dir Bitcoin über das Lightning-Netzwerk zu senden.",
+          "part1": "Ihr Alby-Konto enthält außerdem ein optionales",
+          "part2": "Lightning Adresse",
+          "part4": "mehr erfahren"
+        },
+        "create_account": "Erstelle ein neues Alby-Konto, um Bitcoin-Zahlungen zu senden und zu empfangen.",
+        "optional_lightning_address": {
+          "suffix": "@getalby.com",
+          "label": "Wähle deine Lightning-Adresse (optional)",
+          "title": "Zahlen und Buchstaben, mindestens 3 Stellen"
+        },
+        "errors": {
+          "create_wallet_error": "Du konntest dich nicht anmelden oder ein neues Konto erstellen. Wenn du Hilfe benötigst, wende dich bitte an den support@getalby.com"
+        },
+        "forgot_password": "Passwort vergessen?",
+        "title": "Dein Alby Konto",
+        "set_password": {
+          "choose_password": {
+            "label": "Password"
+          },
+          "confirm_password": {
+            "label": "Passwort bestätigen"
+          },
+          "errors": {
+            "enter_password": "Bitte gebe dein Passwort ein.",
+            "confirm_password": "Bestätige dein Passwort",
+            "mismatched_password": "Die Passwörter stimmen nicht überein."
+          }
+        }
+      }
+    },
+    "choose_path": {
+      "other": {
+        "and_more": "& mehr...",
+        "title": "Andere Wallets",
+        "description": "Verbinde dich mit deiner bestehenden Lightning Wallet oder Node und wählen aus verschiedenen Anschlüssen.",
+        "connect": "Verbinden"
+      },
+      "alby": {
+        "title": "Alby",
+        "description": "Melden dich an oder nutze dein bestehendes Alby-Konto, um im Handumdrehen eine Lightning Zahlung zu beginnen.",
+        "create_new": "Anmelden"
+      },
+      "title": "Verbinden",
+      "description": "Um Alby für Online-Zahlungen zu nutzen, verbinde deine Lightning Wallet mit der Erweiterung."
     }
   },
   "components": {

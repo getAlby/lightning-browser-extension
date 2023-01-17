@@ -540,7 +540,6 @@
     "nostr": {
       "title": "Nostr",
       "allow": "Tillåt {{host}} att:",
-      "read_public_key": "Visa din publika nyckel",
       "block_and_ignore": "Blockera och ignorera {{host}}"
     }
   },
