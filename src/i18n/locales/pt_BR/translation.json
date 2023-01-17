@@ -579,7 +579,8 @@
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "title": "Nostr",
       "content": "Este site solicita que você assine:",
-      "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site."
+      "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site.",
+      "allow_sign": "Permitir {{host}} assinar:"
     },
     "confirm_request_permission": {
       "title": "Aprovar Solicitação",
@@ -588,12 +589,13 @@
     },
     "discover": {
       "title": "Explore o ecossistema ⚡️",
-      "description": "Sites onde você já usou a Alby",
+      "description": "Sites onde você pode usar a Alby",
       "list": {
         "trading": "Negociação",
         "gaming": "Jogos",
         "entertaiment": "Entretenimento",
-        "shopping": "Compras"
+        "shopping": "Compras",
+        "miscellaneous": "Outros"
       }
     },
     "choose_path": {
@@ -603,9 +605,9 @@
         "title": "Alby"
       },
       "other": {
-        "title": "Outras carteiras",
+        "title": "Outras Carteiras",
         "and_more": "& mais...",
-        "description": "Conecte-se em sua carteira bitcoin ou escolha um dos vários servidores de carteira suportados.",
+        "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira suportados.",
         "connect": "Conectar"
       },
       "description": "Você pode usar Alby, criando uma conta conosco ou conectando-se à sua própria carteira bitcoin.",
@@ -688,7 +690,8 @@
       "remove": "Remover",
       "copy": "Copiar",
       "back": "Voltar",
-      "log_in": "Logar"
+      "log_in": "Logar",
+      "remember": "Lembrar minha escolha e não perguntar novamente"
     },
     "errors": {
       "connection_failed": "Falha na conexão",
@@ -718,7 +721,8 @@
       "enable_login": {
         "title": "Login Relâmpago",
         "subtitle": "O login é realizado de forma automática, sem necessidade de confirmação."
-      }
+      },
+      "edit_permissions": "Editar Permissões"
     },
     "qrcode_scanner": {
       "title": "Ler Código QR",
@@ -793,6 +797,14 @@
         "active": "LIMITE DE GASTOS",
         "auth": "LOGIN RELÂMPAGO"
       }
+    }
+  },
+  "permissions": {
+    "nostr": {
+      "getpublickey": "Ler sua chave pública.",
+      "signmessage": "Assinar mensagem com sua chave.",
+      "nip04decrypt": "Descriptografar dados.",
+      "nip04encrypt": "Criptografar dados."
     }
   }
 }
