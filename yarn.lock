@@ -943,14 +943,6 @@
   resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-core/-/lnc-core-0.2.1-alpha.tgz#b381ea29fb7bc20a7dd10334bb913bb50f6dac36"
   integrity sha512-H297V3seL+PE786HcuAQiSass/3y0NSYCy3b4hNTZL4Io80Oy4WY49s08CpRuV8cNfjAzWjYSXkhorALjaRdwA==
 
-"@lightninglabs/lnc-web@^0.2.1-alpha":
-  version "0.2.1-alpha"
-  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-web/-/lnc-web-0.2.1-alpha.tgz#731d0938d34767cbd0fddf0b97d05cdd52ee9023"
-  integrity sha512-bKBUcGdhJUjAQ4G80RX5ygMDROPhg1VMkTIZXJDsOKfpdZ30YCng5bzdcaYigm4CmieONKnH/8JSF7hiF40/SQ==
-  dependencies:
-    "@lightninglabs/lnc-core" "0.2.1-alpha"
-    crypto-js "4.1.1"
-
 "@mswjs/cookies@^0.2.2":
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/@mswjs/cookies/-/cookies-0.2.2.tgz#b4e207bf6989e5d5427539c2443380a33ebb922b"
@@ -6289,6 +6281,13 @@ listr2@^5.0.5:
     rxjs "^7.5.7"
     through "^2.3.8"
     wrap-ansi "^7.0.0"
+
+"lnc-web@git+https://github.com/bumi/lnc-web.git#remove-window-dependency":
+  version "0.2.1-alpha"
+  resolved "git+https://github.com/bumi/lnc-web.git#0b312e8c131d6093a498bf5f4e4642196984ca1f"
+  dependencies:
+    "@lightninglabs/lnc-core" "0.2.1-alpha"
+    crypto-js "4.1.1"
 
 lnmessage@^0.0.14:
   version "0.0.14"
