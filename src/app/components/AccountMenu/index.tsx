@@ -4,9 +4,9 @@ import {
   CheckIcon,
   PlusIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import Identicon from "react-identicons";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -75,7 +75,11 @@ function AccountMenu({ showOptions = true }: Props) {
   return (
     <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-surface-12dp max-w-full">
       <p className="flex items-center">
-        <WalletIcon className="-ml-1 w-8 h-8 opacity-50 dark:text-white" />
+        <Identicon
+          string={authAccount?.id}
+          className="ml-1 dark:text-white"
+          size="24"
+        />
       </p>
 
       <div
@@ -126,7 +130,11 @@ function AccountMenu({ showOptions = true }: Props) {
                 disabled={loading}
                 title={account.name}
               >
-                <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 shrink-0 opacity-75 text-gray-700 dark:text-neutral-300" />
+                <Identicon
+                  string={accountId}
+                  className="w-6 h-6 -ml-0.5 mr-2 shrink-0 text-gray-700 dark:text-neutral-300"
+                  size="24"
+                />
                 <span className="overflow-hidden text-ellipsis whitespace-nowrap">
                   {account.name}&nbsp;
                 </span>
