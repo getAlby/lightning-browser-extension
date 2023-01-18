@@ -8,7 +8,7 @@ import Utf8 from "crypto-js/enc-utf8";
 import { decryptData, encryptData } from "~/common/lib/crypto";
 import { Event } from "~/extension/ln/nostr/types";
 
-import { signEvent } from "../actions/nostr/helpers";
+import { signEvent, getEventHash } from "../actions/nostr/helpers";
 import state from "../state";
 
 class Nostr {
@@ -75,6 +75,10 @@ class Nostr {
     });
 
     return Utf8.stringify(decrypted);
+  }
+
+  getEventHash(event: Event) {
+    return getEventHash(event);
   }
 }
 

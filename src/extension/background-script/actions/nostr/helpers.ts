@@ -45,13 +45,18 @@ export async function addPermissionFor(method: string, host: string) {
   return !!permissionIsAdded && (await db.saveToStorage());
 }
 
-export function validateEvent(event: Event) {
-  if (event.id !== getEventHash(event)) return false;
+// from: https://github.com/nbd-wtf/nostr-tools/blob/160987472fd4922dd80c75648ca8939dd2d96cc0/event.ts#L61
+// to avoid the additional dependency
+export function validateEvent(event: Event): boolean {
   if (typeof event.content !== "string") return false;
   if (typeof event.created_at !== "number") return false;
+  // ignore these checks because if the pubkey is not set we add it to the event. same for the ID.
+  // if (typeof event.pubkey !== "string") return false;
+  // if (!event.pubkey.match(/^[a-f0-9]{64}$/)) return false;
 
   if (!Array.isArray(event.tags)) return false;
-  for (const tag of event.tags) {
+  for (let i = 0; i < event.tags.length; i++) {
+    const tag = event.tags[i];
     if (!Array.isArray(tag)) return false;
     for (let j = 0; j < tag.length; j++) {
       if (typeof tag[j] === "object") return false;
@@ -61,12 +66,12 @@ export function validateEvent(event: Event) {
   return true;
 }
 
-export async function signEvent(event: Event, key: string) {
-  const signedEvent = await secp256k1.schnorr.sign(getEventHash(event), key);
-  return secp256k1.utils.bytesToHex(signedEvent);
-}
+// from: https://github.com/nbd-wtf/nostr-tools/blob/160987472fd4922dd80c75648ca8939dd2d96cc0/event.ts#L42
+// to avoid the additional dependency
+export function serializeEvent(evt: Event): string {
+  if (!validateEvent(evt))
+    throw new Error("can't serialize event with wrong or missing properties");
 
-export function serializeEvent(evt: Event) {
   return JSON.stringify([
     0,
     evt.pubkey,
@@ -75,6 +80,11 @@ export function serializeEvent(evt: Event) {
     evt.tags,
     evt.content,
   ]);
+}
+
+export async function signEvent(event: Event, key: string) {
+  const signedEvent = await secp256k1.schnorr.sign(getEventHash(event), key);
+  return secp256k1.utils.bytesToHex(signedEvent);
 }
 
 export function getEventHash(event: Event): string {

@@ -1,8 +1,8 @@
 import { CURRENCIES } from "~/common/constants";
 import state from "~/extension/background-script/state";
 import type {
-  PaymentNotificationData,
   AuthNotificationData,
+  PaymentNotificationData,
   SettingsStorage,
 } from "~/types";
 
@@ -31,6 +31,7 @@ const settings: SettingsStorage = {
   userName: "",
   websiteEnhancements: true,
   nostrEnabled: false,
+  closedTips: [],
 };
 
 const mockState = {

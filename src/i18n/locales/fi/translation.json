@@ -577,7 +577,6 @@
     "nostr": {
       "title": "Nostr",
       "allow": "Salli {{host}}:",
-      "read_public_key": "Lue julkinen avaimesi",
       "block_and_ignore": "Estä ja jätä huomiotta {{host}}"
     }
   },
