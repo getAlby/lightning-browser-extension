@@ -1,6 +1,6 @@
 import {
-  SendIcon,
   ReceiveIcon,
+  SendIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import Loading from "@components/Loading";
@@ -8,8 +8,7 @@ import TransactionsTable from "@components/TransactionsTable";
 import { Tab } from "@headlessui/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { FC } from "react";
-import { useState, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -181,6 +180,7 @@ const DefaultView: FC<Props> = (props) => {
               navigate("/send");
             }}
           />
+
           <Button
             fullWidth
             icon={<ReceiveIcon className="w-6 h-6" />}

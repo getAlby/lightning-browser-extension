@@ -612,10 +612,36 @@
         "shopping": "Shopping",
         "miscellaneous": "Miscellaneous",
         "showcases": "Showcases"
+      },
+      "tips": {
+        "title": "Your Alby wallet is ready",
+        "description": "A few tips to get you started buzzin'🐝",
+        "top_up_wallet": {
+          "title": "⚡️ Top up your wallet",
+          "description": "Create a lightning invoice, send some bitcoin to yourself and start using Alby in the lightning ecosystem",
+          "label1": "Receive Bitcoin",
+          "label2": "Buy Bitcoin"
+        },
+        "pin": {
+          "title": "📌 Pin your Alby extension",
+          "description1": "<0>To access Alby easily, click on extension icon</0> <1/> <2>in the top right corner of your browser</2>",
+          "description2": "In the list of extensions, find Alby and click pin icon to pin it to the toolbar",
+          "description3": "Thats it! To access Alby just click Alby icon"
+        },
+        "demo": {
+          "title": "🕹️ Try out Alby Demo",
+          "description": "Discover all things you can do with Alby on our demo website",
+          "label1": "Give it a try"
+        },
+        "address": {
+          "title": "⚡️ Get a lightning address",
+          "description": "Create your own lightning address and to receive lightning payments with ease of sending an e-mail",
+          "label1": "Get it now!"
+        }
       }
     },
     "publishers": {
-      "title": "Your ⚡️ Websites",
+      "title": "Your ⚡ Websites",
       "description": "Websites where you have used Alby before",
       "no_info": "It looks like you haven't used Alby in any websites yet.",
       "discover": "Discover Websites",
