@@ -54,7 +54,7 @@ describe("Publishers", () => {
       </SettingsProvider>
     );
 
-    expect(await screen.findByText("Your ⚡️ Websites")).toBeInTheDocument();
+    expect(await screen.findByText("Your ⚡ Websites")).toBeInTheDocument();
     expect(await screen.findByText("DALL·E 2")).toBeInTheDocument();
     expect(await screen.findByText("ACTIVE")).toBeInTheDocument();
     expect(await screen.findByText("LOGIN")).toBeInTheDocument();
@@ -80,7 +80,7 @@ describe("Publishers", () => {
       </SettingsProvider>
     );
 
-    expect(await screen.findByText("Your ⚡️ Websites")).toBeInTheDocument();
+    expect(await screen.findByText("Your ⚡ Websites")).toBeInTheDocument();
     expect(
       await screen.findByText(
         "It looks like you haven't used Alby in any websites yet."
