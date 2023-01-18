@@ -4,7 +4,7 @@ import {
   CheckIcon,
   PlusIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import Avvvatars from "avvvatars-react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
@@ -75,7 +75,7 @@ function AccountMenu({ showOptions = true }: Props) {
   return (
     <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-surface-12dp max-w-full">
       <p className="flex items-center">
-        <WalletIcon className="-ml-1 w-8 h-8 opacity-50 dark:text-white" />
+        <Avvvatars value={authAccount?.name || ""} />
       </p>
 
       <div
@@ -126,8 +126,8 @@ function AccountMenu({ showOptions = true }: Props) {
                 disabled={loading}
                 title={account.name}
               >
-                <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 shrink-0 opacity-75 text-gray-700 dark:text-neutral-300" />
-                <span className="overflow-hidden text-ellipsis whitespace-nowrap">
+                <Avvvatars value={account.name} />
+                <span className="overflow-hidden text-ellipsis whitespace-nowrap ml-2">
                   {account.name}&nbsp;
                 </span>
                 {accountId === authAccount?.id && (
