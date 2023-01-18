@@ -4,7 +4,7 @@
       "nav": {
         "welcome": "Benvenuto",
         "password": "La tua Password",
-        "connect": "Il tuo account Lightning",
+        "connect": "Il tuo Account Lightning",
         "done": "Fatto"
       },
       "intro": {
@@ -30,7 +30,7 @@
       },
       "set_password": {
         "title": "Imposta una password di sblocco",
-        "description": "I dati del tuo account Lightning sono crittografati in modo sicuro con una password di sblocco. Non dimenticare questa password! Ti serve per sbloccare l'estensione Alby (in questo browser)",
+        "description": "I dati del tuo account lightning sono crittografati in modo sicuro con una password di sblocco. Non dimenticare questa password! Ti serve per sbloccare l'estensione Alby (in questo browser)",
         "choose_password": {
           "label": "Scegli una password di sblocco:"
         },
@@ -540,8 +540,58 @@
     "nostr": {
       "title": "Nostr",
       "allow": "Consenti a {{host}} di:",
-      "read_public_key": "Leggere la propria chiave pubblica",
       "block_and_ignore": "Blocca e ignora {{host}}"
+    },
+    "alby": {
+      "pre_connect": {
+        "create_account": "Crea un nuovo account Alby per inviare e ricevere pagamenti bitcoin.",
+        "login_account": "Accedi per connettere il tuo account Alby esistente.",
+        "optional_lightning_note": {
+          "part4": "Scopri di più",
+          "part3": ". Si tratta di un semplice modo per fare in modo che chiunque possa inviarti bitcoin sulla rete lightning.",
+          "part1": "Il tuo account Alby include anche un optional",
+          "part2": "Indirizzo Lightning"
+        },
+        "forgot_password": "Hai dimenticato la password?",
+        "title": "Il tuo account Alby",
+        "host_wallet": "Ospitiamo un portafoglio Lightning per te!",
+        "email": {
+          "create": {
+            "label": "Indirizzo email"
+          },
+          "login": {
+            "label": "Indirizzo email o indirizzo Lightning"
+          }
+        },
+        "set_password": {
+          "choose_password": {
+            "label": "Password"
+          },
+          "confirm_password": {
+            "label": "Conferma password"
+          },
+          "errors": {
+            "enter_password": "Inserisci una password.",
+            "confirm_password": "Si prega di confermare la password.",
+            "mismatched_password": "Le password non corrispondono."
+          }
+        }
+      }
+    },
+    "choose_path": {
+      "title": "Connettiti",
+      "description": "Per iniziare a utilizzare Alby per effettuare pagamenti online, collega il tuo portafoglio lightning all'estensione.",
+      "alby": {
+        "title": "Alby",
+        "description": "Registrati o utilizza il tuo account Alby per iniziare a pagare attraverso lightning in pochissimo tempo.",
+        "create_new": "Iscriviti"
+      },
+      "other": {
+        "title": "Altri portafogli",
+        "description": "Collegati al tuo portafoglio o nodo Lightning e scegli tra vari connettori.",
+        "and_more": "& altro...",
+        "connect": "Connettiti"
+      }
     }
   },
   "common": {

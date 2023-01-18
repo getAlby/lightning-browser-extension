@@ -26,6 +26,12 @@ const setMigrated = (name: Migration): Promise<void> => {
 };
 
 const migrations = {
+  migratedeleteLegacyWeblnPermissions: async () => {
+    await db.permissions
+      .where("method")
+      .startsWithIgnoreCase("webln/")
+      .delete();
+  },
   migrateisUsingLegacyLnurlAuthKeySetting: async () => {
     const { settings } = state.getState();
     const allowances = await db.allowances
@@ -57,6 +63,11 @@ const migrate = async () => {
     );
     await migrations["migrateisUsingLegacyLnurlAuthKeySetting"]();
     await setMigrated("migrateisUsingLegacyLnurlAuthKeySetting");
+  }
+  if (shouldMigrate("migratedeleteLegacyWeblnPermissions")) {
+    console.info("Running migration for: migratedeleteLegacyWeblnPermissions");
+    await migrations["migratedeleteLegacyWeblnPermissions"]();
+    await setMigrated("migratedeleteLegacyWeblnPermissions");
   }
 };
 

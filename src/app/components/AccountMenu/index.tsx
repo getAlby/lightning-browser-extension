@@ -1,11 +1,11 @@
 import {
   AddressBookIcon,
   CaretDownIcon,
+  CheckIcon,
   PlusIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";

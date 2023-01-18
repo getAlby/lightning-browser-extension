@@ -161,3 +161,10 @@ export enum CURRENCIES {
   ZMW = "ZMW",
   ZWL = "ZWL",
 }
+
+export enum TIPS {
+  TOP_UP_WALLET = "top_up_wallet",
+  PIN = "pin",
+  DEMO = "demo",
+  ADDRESS = "address",
+}

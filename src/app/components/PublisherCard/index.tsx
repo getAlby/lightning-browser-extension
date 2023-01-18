@@ -60,7 +60,7 @@ export default function PublisherCard({
         <h2
           title={title}
           className={
-            "text-xl font-semibold dark:text-white overflow-hidden text-ellipsis whitespace-nowrap " +
+            "text-xl font-semibold dark:text-white overflow-hidden text-ellipsis whitespace-nowrap leading-1" +
             (isSmall ? "my-1" : "my-2")
           }
         >
@@ -71,7 +71,7 @@ export default function PublisherCard({
             href={`https://${url}`}
             title={url}
             target="_blank"
-            className="text-gray-500 dark:text-gray-400 overflow-hidden mb-2 text-ellipsis whitespace-nowrap"
+            className="text-gray-500 dark:text-gray-400 overflow-hidden mb-2 text-ellipsis whitespace-nowrap leading-1"
             rel="noreferrer noopener"
           >
             {url}

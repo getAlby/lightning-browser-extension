@@ -1,14 +1,14 @@
 import dayjs from "dayjs";
 import i18n from "i18next";
-import { useState, useEffect, createContext, useContext, useRef } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { getTheme } from "~/app/utils";
 import { CURRENCIES, ACCOUNT_CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
 import {
   getFormattedFiat as getFormattedFiatUtil,
-  getFormattedSats as getFormattedSatsUtil,
   getFormattedNumber as getFormattedNumberUtil,
+  getFormattedSats as getFormattedSatsUtil,
   getFormattedCurrency as getFormattedCurrencyUtil,
 } from "~/common/utils/currencyConvert";
 import { DEFAULT_SETTINGS } from "~/extension/background-script/state";
