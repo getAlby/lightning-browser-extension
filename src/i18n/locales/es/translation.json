@@ -9,23 +9,16 @@
       },
       "intro": {
         "send": {
-          "title": "Enviar en un Click",
           "description": "Las transacciones de lightning ocurren en su navegador. No se necesita alt+tab ni escaneo de códigos QR."
         },
         "paywall": {
-          "title": "No más molestos muros de pago",
           "description": "Defina presupuestos individuales para sitios web para permitir flujos de pago sin interrupciones. No más molestos muros de pago."
         },
         "privacy": {
-          "title": "Privacidad primero",
           "description": "Utilice lightning para autenticarse y controlar su privacidad."
         },
         "foss": {
-          "title": "Gratis y de Código Abierto",
           "description": "Código completamente abierto que puede ser auditado por cualquier persona. Sin estadísticas ni rastreadores. Tú tienes el control."
-        },
-        "actions": {
-          "get_started": "Comience"
         }
       },
       "set_password": {
@@ -45,7 +38,6 @@
       },
       "test_connection": {
         "ready": "¡Impresionante, estás listo para comenzar!",
-        "tutorial": "Ahora que ha conectado su billetera, ¿le gustaría realizar un tutorial?",
         "try_tutorial": "Pruébalo ahora",
         "initializing": "Inicializando su cuenta. Por favor, espere, esto puede tardar un minuto...",
         "connection_error": "Error de Conexión",

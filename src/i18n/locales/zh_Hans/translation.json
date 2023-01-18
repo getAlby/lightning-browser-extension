@@ -9,23 +9,16 @@
       },
       "intro": {
         "paywall": {
-          "title": "不再有恼人的付费墙",
           "description": "为网站定义个人预算，实现无缝支付流。不再有恼人的付费墙。"
         },
         "privacy": {
-          "description": "用闪电认证并控制你的隐私。",
           "title": "隐私第一"
         },
-        "actions": {
-          "get_started": "开始"
-        },
         "foss": {
-          "title": "自由开放源码软件",
-          "description": "完全开放的代码，任何人都可以进行审计。没有数据统计或跟踪器。一切由你掌控。"
+          "title": "自由开放源码软件"
         },
         "send": {
-          "title": "一键发送",
-          "description": "闪电交易全部发生在你的浏览器中。不需要alt+tab或扫描二维码。"
+          "title": "一键发送"
         }
       },
       "set_password": {
@@ -45,10 +38,8 @@
       },
       "test_connection": {
         "ready": "真棒，你已准备就绪!",
-        "try_tutorial": "现在就试试看",
         "initializing": "正在初始化你的账户。请耐心等待，可能需要几分钟。。。",
         "connection_error": "连接错误",
-        "tutorial": "现在你已经连接了你的钱包，你想通过教程吗？",
         "review_connection_details": "请检查你的连接详情。",
         "connection_taking_long": "尝试连接花费的时间不预期的要长。。。你的详情正确吗？你的节点是否可达？",
         "contact_support": "如果你需要帮助，请联系support@getalby.com",

@@ -24,7 +24,6 @@
       },
       "test_connection": {
         "ready": "Mahtavaa, olet valmis menemään!",
-        "tutorial": "Nyt kun olet yhdistänyt lompakkosi, haluaisitko käydä läpi opastuksen?",
         "try_tutorial": "Kokeile sitä nyt",
         "initializing": "Tilin alustaminen. Odota, tämä voi kestää hetken...",
         "connection_error": "Yhteysvirhe",
