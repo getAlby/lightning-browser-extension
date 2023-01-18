@@ -139,7 +139,7 @@
         }
       },
       "lnc": {
-        "title": "LND",
+        "title": "LND with LNC",
         "page": {
           "title": "Connect to your LND node",
           "description": "Create a new session in terminal (litd) to obtain a new pairing phrase and enter it here"

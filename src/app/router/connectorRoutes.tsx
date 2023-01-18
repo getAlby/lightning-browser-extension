@@ -46,8 +46,7 @@ function getConnectorRoutes() {
     {
       path: "lnc",
       element: <ConnectLnc />,
-      title: "Connect with LNC",
-      description: "Use LNC to connect to your LND",
+      title: i18n.t("translation:choose_connector.lnc.title"),
       logo: lnd,
     },
     {
