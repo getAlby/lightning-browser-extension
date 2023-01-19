@@ -7,20 +7,6 @@
         "done": "已完成",
         "connect": "你的闪电账户"
       },
-      "intro": {
-        "paywall": {
-          "description": "为网站定义个人预算，实现无缝支付流。不再有恼人的付费墙。"
-        },
-        "privacy": {
-          "title": "隐私第一"
-        },
-        "foss": {
-          "title": "自由开放源码软件"
-        },
-        "send": {
-          "title": "一键发送"
-        }
-      },
       "set_password": {
         "title": "设置解锁密码",
         "description": "你的闪电账户数据是用解锁密码安全加密的。不要忘记这个密码! 你需要它来解锁Alby Extension（在这个浏览器中）",

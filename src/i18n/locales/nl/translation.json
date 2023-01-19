@@ -7,20 +7,6 @@
         "connect": "Jouw Lightning account",
         "done": "Klaar"
       },
-      "intro": {
-        "send": {
-          "description": "Lightning transacties gebeuren in je browser. Geen alt+tab of QR-code scan nodig."
-        },
-        "paywall": {
-          "description": "Definieer individuele budgetten voor websites om naadloze betalingsstromen mogelijk te maken. Geen vervelende paywalls meer."
-        },
-        "privacy": {
-          "description": "Gebruik Lightning om te verifiëren en controle te houden over je privacy."
-        },
-        "foss": {
-          "description": "Volledig transparante open code. Geen statistieken of trackers. Jij hebt de controle."
-        }
-      },
       "set_password": {
         "title": "Stel een ontgrendelingswachtwoord in",
         "description": "Lightning-accountgegevens zijn veilig versleuteld met een ontgrendelingswachtwoord. Vergeet dit wachtwoord niet! Je hebt het nodig om de Alby-extensie te ontgrendelen (in deze browser)",
@@ -38,7 +24,6 @@
       },
       "test_connection": {
         "ready": "Geweldig, klaar om te starten!",
-        "try_tutorial": "Probeer nu",
         "initializing": "Uw account wordt geïnitialiseerd. Even geduld, dit kan even duren...",
         "connection_error": "Connectie Error",
         "review_connection_details": "Controleer uw verbindingsgegevens.",

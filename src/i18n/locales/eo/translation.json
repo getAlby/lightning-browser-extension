@@ -7,20 +7,6 @@
         "connect": "Via konto ĉe Lightning",
         "done": "Farite"
       },
-      "intro": {
-        "send": {
-          "description": ""
-        },
-        "paywall": {
-          "description": ""
-        },
-        "privacy": {
-          "description": ""
-        },
-        "foss": {
-          "description": ""
-        }
-      },
       "set_password": {
         "title": "",
         "description": "",
@@ -38,7 +24,6 @@
       },
       "test_connection": {
         "ready": "Bonege, ĉio pretas!",
-        "try_tutorial": "Ekprovi nun",
         "initializing": "",
         "connection_error": "Konekta eraro",
         "review_connection_details": "",

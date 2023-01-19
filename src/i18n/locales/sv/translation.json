@@ -24,7 +24,6 @@
       },
       "test_connection": {
         "ready": "Fantastiskt, du är redo att börja!",
-        "try_tutorial": "Prova genast",
         "initializing": "Initialiserar ditt konto. Vänta, det kan ta någon minut...",
         "connection_error": "Anslutningsfel",
         "review_connection_details": "Se över dina anslutningsinställningar.",
