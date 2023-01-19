@@ -124,7 +124,7 @@ function AccountMenu({ showOptions = true }: Props) {
           <span className="sr-only">{t("screen_reader")}</span>
         </Menu.Button>
 
-        <Menu.List position="left">
+        <Menu.List position="left" fullWidth>
           <Menu.Subheader>{t("title")}</Menu.Subheader>
 
           {Object.keys(accounts).map((accountId) => {
