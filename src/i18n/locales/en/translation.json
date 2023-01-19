@@ -1,36 +1,16 @@
 {
   "translation": {
     "welcome": {
+      "title": "Welcome to Alby",
       "nav": {
         "welcome": "Welcome",
         "password": "Your Password",
         "connect": "Your Lightning Account",
         "done": "Done"
       },
-      "intro": {
-        "send": {
-          "title": "Send in One Click",
-          "description": "Lightning transactions happen all in your browser. No alt+tab or QR-code scanning needed."
-        },
-        "paywall": {
-          "title": "No more annoying paywalls",
-          "description": "Define individual budgets for websites to enable seamless payment streams. No more annoying paywalls."
-        },
-        "privacy": {
-          "title": "Privacy first",
-          "description": "Use lightning to authenticate and control your privacy."
-        },
-        "foss": {
-          "title": "Free and Open Source",
-          "description": "Completely open code that can be audited by anyone. No stats or trackers. You are in control."
-        },
-        "actions": {
-          "get_started": "Get Started"
-        }
-      },
       "set_password": {
         "title": "Set an unlock password",
-        "description": "Your lightning account data is securely encrypted with an unlock password. Do not forget this password! You need it to unlock the Alby Extension (in this browser)",
+        "description": "This password is used to protect your wallet and provide access to the browser extension. It cannot be reset and is separate from your Alby account password.",
         "choose_password": {
           "label": "Choose an unlock password:"
         },
@@ -45,8 +25,6 @@
       },
       "test_connection": {
         "ready": "Awesome, you’re ready to go!",
-        "tutorial": "Now you’ve connected your wallet would you like to go through a tutorial?",
-        "try_tutorial": "Give it a try now",
         "initializing": "Initializing your account. Please wait, this can take a minute...",
         "connection_error": "Connection Error",
         "review_connection_details": "Please review your connection details.",
