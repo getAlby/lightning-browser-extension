@@ -7,11 +7,6 @@
         "connect": "Via konto ĉe Lightning",
         "done": "Farite"
       },
-      "intro": {
-        "foss": {
-          "description": ""
-        }
-      },
       "set_password": {
         "title": "",
         "description": "",

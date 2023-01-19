@@ -7,11 +7,6 @@
         "done": "已完成",
         "connect": "你的闪电账户"
       },
-      "intro": {
-        "send": {
-          "title": "一键发送"
-        }
-      },
       "set_password": {
         "title": "设置解锁密码",
         "description": "你的闪电账户数据是用解锁密码安全加密的。不要忘记这个密码! 你需要它来解锁Alby Extension（在这个浏览器中）",

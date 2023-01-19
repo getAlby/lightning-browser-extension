@@ -7,11 +7,6 @@
         "connect": "Jouw Lightning account",
         "done": "Klaar"
       },
-      "intro": {
-        "foss": {
-          "description": "Volledig transparante open code. Geen statistieken of trackers. Jij hebt de controle."
-        }
-      },
       "set_password": {
         "title": "Stel een ontgrendelingswachtwoord in",
         "description": "Lightning-accountgegevens zijn veilig versleuteld met een ontgrendelingswachtwoord. Vergeet dit wachtwoord niet! Je hebt het nodig om de Alby-extensie te ontgrendelen (in deze browser)",

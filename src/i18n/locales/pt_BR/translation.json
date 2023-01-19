@@ -7,11 +7,6 @@
         "connect": "Sua Conta",
         "done": "Feito"
       },
-      "intro": {
-        "foss": {
-          "description": "Código completamente aberto e que pode ser auditado por qualquer pessoa. Sem estatísticas ou rastreadores. Você está no controle."
-        }
-      },
       "set_password": {
         "title": "Definir uma senha de desbloqueio",
         "description": "Os dados armazenados na extensão Alby são criptografados com uma senha de desbloqueio. Não esqueça esta senha! Você precisa dela para usar a extensão Alby (neste navegador)",

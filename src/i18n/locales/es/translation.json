@@ -7,11 +7,6 @@
         "connect": "Su cuenta de Lightning",
         "done": "Hecho"
       },
-      "intro": {
-        "foss": {
-          "description": "Código completamente abierto que puede ser auditado por cualquier persona. Sin estadísticas ni rastreadores. Tú tienes el control."
-        }
-      },
       "set_password": {
         "title": "Proteja su billetera",
         "description": "Los datos de su cuenta Lightning se cifran de forma segura con una contraseña de desbloqueo. No olvides esta contraseña! Lo necesita para desbloquear el teléfono por extensión (en este navegador)",
