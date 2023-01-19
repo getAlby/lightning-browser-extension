@@ -7,7 +7,7 @@ import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
 import axios from "axios";
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -128,6 +128,11 @@ function LNURLPay() {
             validateStatus: () => true,
           }
         );
+
+        if (response.status === 500) {
+          toast.error("Payment aborted: Could not connect to server");
+          return;
+        }
 
         const isSuccessResponse = function (
           obj: LNURLPaymentInfo | LNURLError
