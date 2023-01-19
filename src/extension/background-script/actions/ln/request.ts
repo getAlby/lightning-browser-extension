@@ -43,8 +43,9 @@ const request = async (
       throw new Error("Could not find an allowance for this host");
     }
 
+    const connectorName = connector.constructor.name.toLowerCase();
     // prefix method with webln to prevent potential naming conflicts (e.g. with nostr calls that also use the permissions)
-    const weblnMethod = `${WEBLN_PREFIX}${methodInLowerCase}`;
+    const weblnMethod = `${WEBLN_PREFIX}${connectorName}/${methodInLowerCase}`;
 
     const permission = await db.permissions
       .where("host")
@@ -64,6 +65,7 @@ const request = async (
       );
       return response;
     } else {
+      // throws an error if the user rejects
       const promptResponse = await utils.openPrompt<{
         enabled: boolean;
         blocked: boolean;
@@ -71,7 +73,7 @@ const request = async (
         args: {
           requestPermission: {
             method: methodInLowerCase,
-            description: `${connector.constructor.name.toLowerCase()}.${methodInLowerCase}`,
+            description: `${connectorName}.${methodInLowerCase}`,
           },
         },
         origin,

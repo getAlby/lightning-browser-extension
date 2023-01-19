@@ -1,20 +1,18 @@
-import type { Step } from "@components/Steps";
-import Steps from "@components/Steps";
-import Intro from "@screens/Onboard/Intro";
 import SetPassword from "@screens/Onboard/SetPassword";
 import TestConnection from "@screens/Onboard/TestConnection";
-import { useEffect, useState } from "react";
-import { HashRouter as Router, useLocation, useRoutes } from "react-router-dom";
+import ChooseConnector from "@screens/connectors/ChooseConnector";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { HashRouter as Router, useRoutes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Container from "~/app/components/Container";
 import { SettingsProvider } from "~/app/context/SettingsContext";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
 import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
-import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
 import i18n from "~/i18n/i18nConfig";
 
-let connectorRoutes = getConnectorRoutes();
+const connectorRoutes = getConnectorRoutes();
 
 function getRoutes(
   connectorRoutes: {
@@ -27,11 +25,6 @@ function getRoutes(
   return [
     {
       path: "/",
-      element: <Intro />,
-      name: i18n.t("translation:welcome.nav.welcome"),
-    },
-    {
-      path: "/set-password",
       element: <SetPassword />,
       name: i18n.t("translation:welcome.nav.password"),
     },
@@ -83,12 +76,7 @@ function getRoutes(
   ];
 }
 
-let routes = getRoutes(connectorRoutes);
-
-const initialSteps: Step[] = routes.map((route) => ({
-  id: route.name,
-  status: "upcoming",
-}));
+const routes = getRoutes(connectorRoutes);
 
 function WelcomeRouter() {
   return (
@@ -106,52 +94,33 @@ function WelcomeRouter() {
 }
 
 function App() {
-  const [steps, setSteps] = useState(initialSteps);
-  const location = useLocation();
+  const { t } = useTranslation();
   const routesElement = useRoutes(routes);
 
   const [languageChanged, setLanguageChanged] = useState(false);
   i18n.on("languageChanged", () => {
-    connectorRoutes = getConnectorRoutes();
-    routes = getRoutes(connectorRoutes);
-
-    // Update name to new language only, don't update status
-    const tempSteps: Step[] = [];
-    routes.forEach((_, i) => {
-      tempSteps.push({
-        id: routes[i].name,
-        status: steps[i].status,
-      });
-    });
-    setSteps(tempSteps);
-
     // Trigger rerender to update displayed language
     setLanguageChanged(!languageChanged);
   });
 
-  // Update step progress based on active location.
-  useEffect(() => {
-    const { pathname } = location;
-    let activeStepIndex = 0;
-    routes.forEach((route, index) => {
-      if (pathname.includes(route.path)) activeStepIndex = index;
-    });
-    const updatedSteps = initialSteps.map((step, index) => {
-      let status: Step["status"] = "upcoming";
-      if (index < activeStepIndex) {
-        status = "complete";
-      } else if (index === activeStepIndex) {
-        status = "current";
-      }
-      return { ...step, status };
-    });
-    setSteps(updatedSteps);
-  }, [location]);
-
   return (
     <div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Steps steps={steps} />
+        <div className="text-center font-serif font-medium text-2xl my-10 dark:text-white">
+          <p>
+            {t("welcome.title")}
+            <img
+              src="assets/icons/alby_icon_yellow.svg"
+              alt="Alby"
+              className="dark:hidden inline align-middle w-6 ml-2"
+            />
+            <img
+              src="assets/icons/alby_icon_yellow_dark.svg"
+              alt="Alby"
+              className="hidden dark:inline align-middle w-6 ml-2"
+            />
+          </p>
+        </div>
       </div>
       <Container maxWidth="xl">{routesElement}</Container>
     </div>
