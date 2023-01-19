@@ -7,27 +7,6 @@
         "connect": "Via konto ĉe Lightning",
         "done": "Farite"
       },
-      "intro": {
-        "send": {
-          "title": "Sendi per unu alklako",
-          "description": ""
-        },
-        "paywall": {
-          "title": "",
-          "description": ""
-        },
-        "privacy": {
-          "title": "Privateco unue",
-          "description": ""
-        },
-        "foss": {
-          "title": "Libera kaj malfermitkoda",
-          "description": ""
-        },
-        "actions": {
-          "get_started": "Komenci"
-        }
-      },
       "set_password": {
         "title": "",
         "description": "",
@@ -45,8 +24,6 @@
       },
       "test_connection": {
         "ready": "Bonege, ĉio pretas!",
-        "tutorial": "",
-        "try_tutorial": "Ekprovi nun",
         "initializing": "",
         "connection_error": "Konekta eraro",
         "review_connection_details": "",
@@ -577,7 +554,6 @@
     "nostr": {
       "title": "Nostr",
       "allow": "",
-      "read_public_key": "",
       "block_and_ignore": ""
     }
   },

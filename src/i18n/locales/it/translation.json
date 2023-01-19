@@ -7,27 +7,6 @@
         "connect": "Il tuo Account Lightning",
         "done": "Fatto"
       },
-      "intro": {
-        "send": {
-          "title": "Invia in un Click",
-          "description": "Le transazioni Lightning avvengono direttamente nel tuo browser. Niente più alt+tab o scansioni di QR necessari."
-        },
-        "paywall": {
-          "title": "Niente più fastidiosi paywall",
-          "description": "Definisci budget individuali per creare flussi di pagamento ai siti web. Basta noiosi paywalls."
-        },
-        "privacy": {
-          "title": "La privacy prima di tutto",
-          "description": "Usa Lightning per autenticarti e mantenere la tua privacy."
-        },
-        "foss": {
-          "title": "Gratuito e Open Source",
-          "description": "Codice completamente aperto che può essere controllato da chiunque. Nessuna statistica o tracker. Sei tu ad avere il controllo."
-        },
-        "actions": {
-          "get_started": "Inizia subito"
-        }
-      },
       "set_password": {
         "title": "Imposta una password di sblocco",
         "description": "I dati del tuo account lightning sono crittografati in modo sicuro con una password di sblocco. Non dimenticare questa password! Ti serve per sbloccare l'estensione Alby (in questo browser)",
@@ -45,8 +24,6 @@
       },
       "test_connection": {
         "ready": "Fantastico, sei pronto per partire!",
-        "tutorial": "Ora che hai collegato il tuo portafoglio ti piacerebbe seguire un tutorial?",
-        "try_tutorial": "Provalo ora",
         "initializing": "Stiamo inizializzando il tuo account. Per favore attendi, questa operazione potrebbe impiegare alcuni minuti…",
         "connection_error": "Errore di connessione",
         "review_connection_details": "Controlla i dettagli della tua connessione.",
@@ -540,7 +517,6 @@
     "nostr": {
       "title": "Nostr",
       "allow": "Consenti a {{host}} di:",
-      "read_public_key": "Leggere la propria chiave pubblica",
       "block_and_ignore": "Blocca e ignora {{host}}"
     },
     "alby": {
