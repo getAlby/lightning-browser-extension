@@ -74,9 +74,9 @@ function AccountMenu({ showOptions = true }: Props) {
 
   return (
     <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-surface-12dp max-w-full">
-      <p className="flex items-center">
-        <Avvvatars value={authAccount?.name || ""} />
-      </p>
+      <div className="flex items-center">
+        <Avvvatars value={authAccount?.name || ""} style={"shape"} />
+      </div>
 
       <div
         className={`flex-auto mx-2 py-1 overflow-hidden ${
@@ -126,14 +126,16 @@ function AccountMenu({ showOptions = true }: Props) {
                 disabled={loading}
                 title={account.name}
               >
-                <Avvvatars value={account.name} />
+                <div className="shrink-0">
+                  <Avvvatars value={account.name} style={"shape"} />
+                </div>
                 <span className="overflow-hidden text-ellipsis whitespace-nowrap ml-2">
                   {account.name}&nbsp;
                 </span>
                 {accountId === authAccount?.id && (
                   <span
                     data-testid="selected"
-                    className="ml-auto w-3.5 h-3.5 rounded-full bg-orange-bitcoin flex justify-center items-center"
+                    className="ml-auto w-3.5 h-3.5 rounded-full bg-orange-bitcoin flex justify-center items-center shrink-0"
                   >
                     <CheckIcon className="w-3 h-3 text-white" />
                   </span>
