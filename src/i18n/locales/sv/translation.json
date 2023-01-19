@@ -24,7 +24,6 @@
       },
       "test_connection": {
         "ready": "Fantastiskt, du är redo att börja!",
-        "tutorial": "Nu när du anslutit din plånbok, vill du gå igenom en guide?",
         "try_tutorial": "Prova genast",
         "initializing": "Initialiserar ditt konto. Vänta, det kan ta någon minut...",
         "connection_error": "Anslutningsfel",

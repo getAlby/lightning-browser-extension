@@ -9,23 +9,16 @@
       },
       "intro": {
         "send": {
-          "title": "Clicou pagou",
           "description": "Realize pagamentos enquanto você navega na web"
         },
         "paywall": {
-          "title": "Chega de paywalls irritantes",
           "description": "Habilite pagamentos automáticos e estabeleça limites de gastos personalizados para cada site."
         },
         "privacy": {
-          "title": "Privacidade",
           "description": "Use a rede relâmpago do bitcoin para autenticar em sites e tenha controle sobre sua privacidade."
         },
         "foss": {
-          "title": "Gratuito e de código aberto",
           "description": "Código completamente aberto e que pode ser auditado por qualquer pessoa. Sem estatísticas ou rastreadores. Você está no controle."
-        },
-        "actions": {
-          "get_started": "Começar"
         }
       },
       "set_password": {
@@ -45,7 +38,6 @@
       },
       "test_connection": {
         "ready": "Perfeito, tudo configurado!",
-        "tutorial": "Agora que você já conectou a carteira, gostaria de ler o tutorial?",
         "try_tutorial": "Experimente agora",
         "initializing": "Iniciando sua conta. Aguarde, pode demorar um pouco...",
         "connection_error": "Erro de conexão",
@@ -500,7 +492,7 @@
           "used_budget": "sats usados"
         }
       },
-      "title": "Sua lista de sites ⚡️",
+      "title": "Sua lista de Sites ⚡️",
       "description": "Sites onde você já usou a Alby",
       "no_info": "Nenhum site ainda.",
       "discover": "Descubra Sites"
@@ -579,7 +571,8 @@
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "title": "Nostr",
       "content": "Este site solicita que você assine:",
-      "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site."
+      "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site.",
+      "allow_sign": "Permitir {{host}} assinar:"
     },
     "confirm_request_permission": {
       "title": "Aprovar Solicitação",
@@ -588,12 +581,13 @@
     },
     "discover": {
       "title": "Explore o ecossistema ⚡️",
-      "description": "Sites onde você já usou a Alby",
+      "description": "Sites onde você pode usar a Alby",
       "list": {
         "trading": "Negociação",
         "gaming": "Jogos",
         "entertaiment": "Entretenimento",
-        "shopping": "Compras"
+        "shopping": "Compras",
+        "miscellaneous": "Outros"
       }
     },
     "choose_path": {
@@ -603,9 +597,9 @@
         "title": "Alby"
       },
       "other": {
-        "title": "Outras carteiras",
+        "title": "Outras Carteiras",
         "and_more": "& mais...",
-        "description": "Conecte-se em sua carteira bitcoin ou escolha um dos vários servidores de carteira suportados.",
+        "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira suportados.",
         "connect": "Conectar"
       },
       "description": "Você pode usar Alby, criando uma conta conosco ou conectando-se à sua própria carteira bitcoin.",
@@ -688,7 +682,8 @@
       "remove": "Remover",
       "copy": "Copiar",
       "back": "Voltar",
-      "log_in": "Logar"
+      "log_in": "Logar",
+      "remember": "Lembrar minha escolha e não perguntar novamente"
     },
     "errors": {
       "connection_failed": "Falha na conexão",
@@ -718,7 +713,8 @@
       "enable_login": {
         "title": "Login Relâmpago",
         "subtitle": "O login é realizado de forma automática, sem necessidade de confirmação."
-      }
+      },
+      "edit_permissions": "Editar Permissões"
     },
     "qrcode_scanner": {
       "title": "Ler Código QR",
@@ -793,6 +789,14 @@
         "active": "LIMITE DE GASTOS",
         "auth": "LOGIN RELÂMPAGO"
       }
+    }
+  },
+  "permissions": {
+    "nostr": {
+      "getpublickey": "Ler sua chave pública.",
+      "signmessage": "Assinar mensagem com sua chave.",
+      "nip04decrypt": "Descriptografar dados.",
+      "nip04encrypt": "Criptografar dados."
     }
   }
 }

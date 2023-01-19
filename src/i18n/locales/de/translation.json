@@ -23,13 +23,11 @@
         }
       },
       "test_connection": {
-        "try_tutorial": "Probiere es jetzt aus",
         "review_connection_details": "Bitte überprüfe deine Verbindungsdaten.",
         "actions": {
           "delete_edit_account": "Ungültiges Konto löschen und erneut bearbeiten"
         },
         "ready": "Super, du hast es geschafft, es kann losgehen!",
-        "tutorial": "Du hast jetzt deine Wallet verbunden, möchtest du ein Tutorial starten?",
         "initializing": "Dein Account wird initialisiert. Bitte warte, das kann ein wenig dauern.",
         "connection_error": "Verbindungsfehler",
         "connection_taking_long": "Das Verbinden dauert länger als erwartet...sind deine Angaben richtig? Ist dein Node erreichbar?",
