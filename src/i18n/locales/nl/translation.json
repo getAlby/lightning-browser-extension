@@ -8,9 +8,6 @@
         "done": "Klaar"
       },
       "intro": {
-        "paywall": {
-          "description": "Definieer individuele budgetten voor websites om naadloze betalingsstromen mogelijk te maken. Geen vervelende paywalls meer."
-        },
         "foss": {
           "description": "Volledig transparante open code. Geen statistieken of trackers. Jij hebt de controle."
         }

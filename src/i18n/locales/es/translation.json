@@ -8,9 +8,6 @@
         "done": "Hecho"
       },
       "intro": {
-        "paywall": {
-          "description": "Defina presupuestos individuales para sitios web para permitir flujos de pago sin interrupciones. No más molestos muros de pago."
-        },
         "foss": {
           "description": "Código completamente abierto que puede ser auditado por cualquier persona. Sin estadísticas ni rastreadores. Tú tienes el control."
         }

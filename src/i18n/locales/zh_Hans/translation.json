@@ -8,9 +8,6 @@
         "connect": "你的闪电账户"
       },
       "intro": {
-        "privacy": {
-          "title": "隐私第一"
-        },
         "send": {
           "title": "一键发送"
         }
