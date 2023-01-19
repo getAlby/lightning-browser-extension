@@ -8,14 +8,8 @@
         "done": "Klaar"
       },
       "intro": {
-        "send": {
-          "description": "Lightning transacties gebeuren in je browser. Geen alt+tab of QR-code scan nodig."
-        },
         "paywall": {
           "description": "Definieer individuele budgetten voor websites om naadloze betalingsstromen mogelijk te maken. Geen vervelende paywalls meer."
-        },
-        "privacy": {
-          "description": "Gebruik Lightning om te verifiëren en controle te houden over je privacy."
         },
         "foss": {
           "description": "Volledig transparante open code. Geen statistieken of trackers. Jij hebt de controle."
@@ -38,7 +32,6 @@
       },
       "test_connection": {
         "ready": "Geweldig, klaar om te starten!",
-        "try_tutorial": "Probeer nu",
         "initializing": "Uw account wordt geïnitialiseerd. Even geduld, dit kan even duren...",
         "connection_error": "Connectie Error",
         "review_connection_details": "Controleer uw verbindingsgegevens.",

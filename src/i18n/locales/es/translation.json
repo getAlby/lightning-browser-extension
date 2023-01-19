@@ -8,14 +8,8 @@
         "done": "Hecho"
       },
       "intro": {
-        "send": {
-          "description": "Las transacciones de lightning ocurren en su navegador. No se necesita alt+tab ni escaneo de códigos QR."
-        },
         "paywall": {
           "description": "Defina presupuestos individuales para sitios web para permitir flujos de pago sin interrupciones. No más molestos muros de pago."
-        },
-        "privacy": {
-          "description": "Utilice lightning para autenticarse y controlar su privacidad."
         },
         "foss": {
           "description": "Código completamente abierto que puede ser auditado por cualquier persona. Sin estadísticas ni rastreadores. Tú tienes el control."
@@ -38,7 +32,6 @@
       },
       "test_connection": {
         "ready": "¡Impresionante, estás listo para comenzar!",
-        "try_tutorial": "Pruébalo ahora",
         "initializing": "Inicializando su cuenta. Por favor, espere, esto puede tardar un minuto...",
         "connection_error": "Error de Conexión",
         "review_connection_details": "Revise los detalles de su conexión.",

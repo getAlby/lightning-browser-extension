@@ -24,7 +24,6 @@
       },
       "test_connection": {
         "ready": "",
-        "try_tutorial": "",
         "initializing": "",
         "connection_error": "",
         "review_connection_details": "",

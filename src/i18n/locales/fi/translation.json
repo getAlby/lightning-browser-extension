@@ -24,7 +24,6 @@
       },
       "test_connection": {
         "ready": "Mahtavaa, olet valmis menemään!",
-        "try_tutorial": "Kokeile sitä nyt",
         "initializing": "Tilin alustaminen. Odota, tämä voi kestää hetken...",
         "connection_error": "Yhteysvirhe",
         "review_connection_details": "Ole hyvä ja tarkista yhteystietosi.",
