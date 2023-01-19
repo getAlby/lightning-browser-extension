@@ -577,7 +577,6 @@
     "nostr": {
       "title": "",
       "allow": "",
-      "read_public_key": "",
       "block_and_ignore": ""
     }
   },

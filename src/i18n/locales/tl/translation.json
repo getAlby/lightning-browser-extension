@@ -7,27 +7,6 @@
         "connect": "",
         "done": ""
       },
-      "intro": {
-        "send": {
-          "title": "",
-          "description": ""
-        },
-        "paywall": {
-          "title": "",
-          "description": ""
-        },
-        "privacy": {
-          "title": "",
-          "description": ""
-        },
-        "foss": {
-          "title": "",
-          "description": ""
-        },
-        "actions": {
-          "get_started": ""
-        }
-      },
       "set_password": {
         "title": "",
         "description": "",

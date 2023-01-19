@@ -1,5 +1,5 @@
 import { PaymentRequestObject } from "bolt11";
-import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
+import { ACCOUNT_CURRENCIES, CURRENCIES, TIPS } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
 import {
   ConnectorInvoice,
@@ -641,6 +641,7 @@ export interface SettingsStorage {
   exchange: SupportedExchanges;
   debug: boolean;
   nostrEnabled: boolean;
+  closedTips: TIPS[];
 }
 
 export interface Badge {
@@ -695,3 +696,5 @@ export interface Invoice {
     value_msat_total: number;
   };
 }
+
+export type BrowserType = "chrome" | "firefox";

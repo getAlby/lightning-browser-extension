@@ -7,27 +7,6 @@
         "connect": "Ihr Lightning Konto",
         "done": "Fertig"
       },
-      "intro": {
-        "send": {
-          "title": "Senden mit einem Klick",
-          "description": "Alle Lightning Transaktionen direkt in Deinem Browser ausführen. Keine umständlichen Testenkombinationen oder QR-Code scannen mehr nötig."
-        },
-        "paywall": {
-          "title": "Keine lästigen Paywalls mehr",
-          "description": "Definieren Sie individuelle Budgets für Websites, um nahtlose Zahlungsströme zu ermöglichen. Keine lästigen Paywalls mehr."
-        },
-        "privacy": {
-          "title": "Datenschutz an erster Stelle",
-          "description": "Verwende Lightning, um dich zu authentifizieren und deine Privatsphäre zu kontrollieren."
-        },
-        "foss": {
-          "title": "Kostenlos und Open Source",
-          "description": "Vollständig offener Code, der von jedermann überprüft werden kann. Keine Statistiken oder Tracker. Du hast die Kontrolle."
-        },
-        "actions": {
-          "get_started": "Beginne"
-        }
-      },
       "set_password": {
         "title": "Passwort zum Entsperren festlegen",
         "description": "Die Daten deines Lightning-Kontos sind mit einem Freischalt-Passwort sicher verschlüsselt. Vergesse das Passwort nicht! Du benötigst es, um die Alby-Erweiterung zu entsperren (in diesem Browser)",
@@ -516,14 +495,8 @@
       "title": "Nostr",
       "allow": "Erlaube dieser Website:",
       "content": "Auf dieser Website wirst du aufgefordert zu signieren:",
-      "read_public_key": "Lese deinen öffentlichen Schlüssel",
       "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
-      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade deine Website neu.",
-      "permissions": {
-        "decrypt": "Daten entschlüsseln",
-        "encrypt": "Daten verschlüsseln",
-        "allow_sign": "Erlaube {{host}} zu unterschreiben:"
-      }
+      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade deine Website neu."
     },
     "confirm_request_permission": {
       "title": "Antrag genehmigen",

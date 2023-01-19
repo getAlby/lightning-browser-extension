@@ -7,7 +7,7 @@ import Hex from "crypto-js/enc-hex";
 import Utf8 from "crypto-js/enc-utf8";
 import { Event } from "~/extension/ln/nostr/types";
 
-import { signEvent } from "../actions/nostr/helpers";
+import { getEventHash, signEvent } from "../actions/nostr/helpers";
 
 class Nostr {
   privateKey: string;
@@ -57,6 +57,10 @@ class Nostr {
     });
 
     return Utf8.stringify(decrypted);
+  }
+
+  getEventHash(event: Event) {
+    return getEventHash(event);
   }
 }
 
