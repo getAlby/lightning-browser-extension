@@ -60,7 +60,7 @@
     "react-i18next": "^12.1.4",
     "react-loading-skeleton": "^3.1.0",
     "react-modal": "^3.16.1",
-    "react-qr-code": "^2.0.8",
+    "react-qr-code": "^2.0.11",
     "react-router-dom": "^6.6.1",
     "react-toastify": "^9.1.1",
     "stream": "^0.0.2",
