@@ -9,7 +9,7 @@
       },
       "set_password": {
         "title": "Definir uma senha de desbloqueio",
-        "description": "Os dados armazenados na extensão Alby são criptografados com uma senha de desbloqueio. Não esqueça esta senha! Você precisa dela para usar a extensão Alby (neste navegador)",
+        "description": "Os dados armazenados na extensão Alby são criptografados com uma senha de desbloqueio. Não esqueça esta senha! Você precisa dela para usar a extensão Alby (neste navegador).",
         "choose_password": {
           "label": "Escolha uma senha de desbloqueio:"
         },
@@ -32,10 +32,11 @@
         "actions": {
           "delete_edit_account": "Remover conta inválida e editar novamente"
         }
-      }
+      },
+      "title": "Bem-vindo a Alby"
     },
     "choose_connector": {
-      "description": "Conecte-se a uma carteira ou servidor disponíveis abaixo",
+      "description": "Escolha uma carteira ou servidor disponível abaixo",
       "lnd": {
         "title": "LND",
         "page": {
@@ -573,18 +574,44 @@
         "entertaiment": "Entretenimento",
         "shopping": "Compras",
         "miscellaneous": "Outros"
+      },
+      "tips": {
+        "top_up_wallet": {
+          "description": "Crie uma fatura relâmpago, envie alguns bitcoins para você mesmo e comece a usar a Alby",
+          "label2": "Comprar Bitcoin",
+          "label1": "Receber Bitcoin",
+          "title": "⚡️ Adicione fundos na sua carteira"
+        },
+        "pin": {
+          "title": "📌 Fixar extensão Alby",
+          "description1": "<0>Para acessar a Alby facilmente, clique no ícone da extensão</0> <1/> <2>no canto superior direito do seu navegador</2>",
+          "description2": "Na lista de extensões, localize a Alby e clique no ícone de fixação para fixá-lo na barra de ferramentas do navegador",
+          "description3": "É isso! Para acessar Alby basta clicar no ícone Alby"
+        },
+        "address": {
+          "label1": "Eu quero!",
+          "title": "⚡️ Endereço relâmpago",
+          "description": "Crie seu próprio endereço relâmpago e receba pagamentos relâmpago com a mesma facilidade de enviar um e-mail"
+        },
+        "demo": {
+          "title": "🕹️ Teste a Alby",
+          "description": "Descubra tudo o que você pode fazer com a Alby em nosso site de demonstração",
+          "label1": "Experimente"
+        },
+        "title": "Sua carteira Alby está pronta",
+        "description": "Algumas dicas para você iniciar na Alby 🐝"
       }
     },
     "choose_path": {
       "alby": {
         "description": "Crie uma conta ou realize o login na sua conta atual da Alby.",
-        "create_new": "Criar nova conta",
+        "create_new": "Criar conta",
         "title": "Alby"
       },
       "other": {
         "title": "Outras Carteiras",
         "and_more": "& mais...",
-        "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira suportados.",
+        "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira disponíveis.",
         "connect": "Conectar"
       },
       "description": "Você pode usar Alby, criando uma conta conosco ou conectando-se à sua própria carteira bitcoin.",
@@ -606,7 +633,7 @@
             "label": "Senha"
           }
         },
-        "login_account": "Acessar sua conta atual da Alby.",
+        "login_account": "Acesse sua conta Alby.",
         "host_wallet": "A custódia dos seus bitcoins é por nossa conta!",
         "create_account": "Crie uma nova conta Alby para enviar e receber pagamentos em bitcoin.",
         "email": {
