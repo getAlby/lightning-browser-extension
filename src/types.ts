@@ -385,6 +385,13 @@ export interface MessagePrivateKeyGet extends MessageDefault {
   action: "getPrivateKey";
 }
 
+export interface MessagePrivateKeyGenerate extends MessageDefault {
+  args?: {
+    type?: "random";
+  };
+  action: "generatePrivateKey";
+}
+
 export interface MessagePrivateKeySet extends MessageDefault {
   args: {
     id?: Account["id"];

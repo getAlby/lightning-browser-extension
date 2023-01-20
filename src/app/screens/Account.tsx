@@ -25,6 +25,7 @@ import { useSettings } from "~/app/context/SettingsContext";
 import api, { GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import nostrlib from "~/common/lib/nostr";
+import Nostr from "~/extension/background-script/nostr";
 import type { Account } from "~/types";
 
 type AccountAction = Omit<Account, "connector" | "config" | "nostrPrivateKey">;
@@ -39,6 +40,7 @@ function AccountScreen() {
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view",
   });
+  const { t: tCommon } = useTranslation("common");
   const { isLoading: isLoadingSettings } = useSettings();
 
   const hasFetchedData = useRef(false);
@@ -54,10 +56,21 @@ function AccountScreen() {
     lnAddress: "",
   });
   const [accountName, setAccountName] = useState("");
+
+  const [currentPrivateKey, setCurrentPrivateKey] = useState("");
   const [nostrPrivateKey, setNostrPrivateKey] = useState("");
+  const [nostrPublicKey, setNostrPublicKey] = useState("");
   const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
+  const [privateKeyCopyLabel, setPrivateKeyCopyLabel] = useState(
+    tCommon("actions.copy") as string
+  );
+  const [publicKeyCopyLabel, setPublicKeyCopyLabel] = useState(
+    tCommon("actions.copy") as string
+  );
+
   const [exportLoading, setExportLoading] = useState(false);
   const [exportModalIsOpen, setExportModalIsOpen] = useState(false);
+  const [nostrKeyModalIsOpen, setNostrKeyModalIsOpen] = useState(false);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -74,7 +87,9 @@ function AccountScreen() {
           id,
         })) as string;
         if (priv) {
+          setCurrentPrivateKey(priv);
           setNostrPrivateKey(nostrlib.hexToNip19(priv, "nsec"));
+          setNostrPublicKey(generatePublicKey(priv));
         }
       }
     } catch (e) {
@@ -87,12 +102,39 @@ function AccountScreen() {
     setExportModalIsOpen(false);
   }
 
-  async function saveNostrPrivateKey(nostrPrivateKey: string) {
-    const result = await msg.request("nostr/getPrivateKey", {
-      id: account?.id,
-    });
-    const currentPrivateKey = result as unknown as string;
+  function closeNostrKeyModal() {
+    setNostrKeyModalIsOpen(false);
+  }
 
+  function generatePublicKey(priv: string) {
+    const nostr = new Nostr(priv);
+    return nostr.getPublicKey();
+  }
+
+  async function generateNostrPrivateKey(random?: boolean) {
+    const selectedAccount = await auth.fetchAccountInfo();
+
+    if (!random && selectedAccount?.id !== id) {
+      alert(
+        `Please match the account in the dropdown with this account to derive keys.`
+      );
+      closeNostrKeyModal();
+      return;
+    }
+    // check with current selected account
+    const result = await msg.request(
+      "nostr/generatePrivateKey",
+      random
+        ? {
+            type: "random",
+          }
+        : undefined
+    );
+    saveNostrPrivateKey(result.privateKey as string);
+    closeNostrKeyModal();
+  }
+
+  async function saveNostrPrivateKey(nostrPrivateKey: string) {
     if (nostrPrivateKey === currentPrivateKey) return;
 
     if (currentPrivateKey && !confirm(t("nostr.private_key.warning"))) {
@@ -104,7 +146,16 @@ function AccountScreen() {
       privateKey: nostrlib.normalizeToHex(nostrPrivateKey),
     });
 
-    toast.success(t("nostr.private_key.success"));
+    if (nostrPrivateKey) {
+      toast.success(t("nostr.private_key.success"));
+    } else {
+      toast.success(t("nostr.private_key.successfully_removed"));
+    }
+    setCurrentPrivateKey(nostrPrivateKey);
+    setNostrPrivateKey(nostrPrivateKey);
+    setNostrPublicKey(
+      nostrPrivateKey ? generatePublicKey(nostrPrivateKey) : ""
+    );
   }
 
   async function updateAccountName({ id, name }: AccountAction) {
@@ -119,15 +170,7 @@ function AccountScreen() {
 
   async function exportAccount({ id, name }: AccountAction) {
     setExportLoading(true);
-    /**
-     * @HACK
-     * @headless-ui/menu restores focus after closing a menu, to the button that opened it.
-     * By slightly delaying opening the modal, react-modal's focus management won't be overruled.
-     * {@link https://github.com/tailwindlabs/headlessui/issues/259}
-     */
-    setTimeout(() => {
-      setExportModalIsOpen(true);
-    }, 50);
+    setExportModalIsOpen(true);
     setLndHubData(
       await msg.request("accountDecryptedDetails", {
         name,
@@ -313,72 +356,131 @@ function AccountScreen() {
               </a>{" "}
               {t("nostr.hint")}
             </p>
-            <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
-              <Setting
-                title={t("nostr.private_key.title")}
-                subtitle={
-                  <Trans
-                    i18nKey={"nostr.private_key.subtitle"}
-                    t={t}
-                    components={[
-                      // eslint-disable-next-line react/jsx-key
-                      <a
-                        className="underline"
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        href="https://guides.getalby.com/overall-guide/alby-browser-extension/features/nostr"
-                      ></a>,
-                    ]}
-                  />
-                }
-              >
-                <div className="w-96 flex justify-end">
-                  <div className="w-96 flex-auto -mt-1 ml-6">
-                    <TextField
-                      id="nostrPrivateKey"
-                      label={""}
-                      type={nostrPrivateKeyVisible ? "text" : "password"}
-                      value={nostrPrivateKey}
-                      onBlur={() => {
-                        saveNostrPrivateKey(nostrPrivateKey);
-                      }}
-                      onChange={(event) => {
-                        setNostrPrivateKey(event.target.value);
-                      }}
-                      endAdornment={
-                        <button
-                          type="button"
-                          tabIndex={-1}
-                          className="flex justify-center items-center w-10 h-8"
-                          onClick={() => {
-                            setNostrPrivateKeyVisible(!nostrPrivateKeyVisible);
-                          }}
-                        >
-                          {nostrPrivateKeyVisible ? (
-                            <HiddenIcon className="h-6 w-6" />
-                          ) : (
-                            <VisibleIcon className="h-6 w-6" />
-                          )}
-                        </button>
-                      }
+            <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 dark:bg-surface-02dp">
+              <div className="py-4 flex justify-between items-center">
+                <div>
+                  <span className="text-gray-900 dark:text-white font-medium">
+                    {t("nostr.private_key.title")}
+                  </span>
+                  <p className="text-gray-500 mr-1 dark:text-neutral-500 text-sm">
+                    <Trans
+                      i18nKey={"nostr.private_key.subtitle"}
+                      t={t}
+                      components={[
+                        // eslint-disable-next-line react/jsx-key
+                        <a
+                          className="underline"
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          href="https://guides.getalby.com/overall-guide/alby-browser-extension/features/nostr"
+                        ></a>,
+                      ]}
                     />
-                  </div>
-                  {!nostrPrivateKey && (
-                    <div className="flex-none ml-2 flex-end">
-                      <Button
-                        label={t("nostr.private_key.generate")}
-                        onClick={async () => {
-                          const result = await msg.request(
-                            "nostr/generatePrivateKey"
-                          );
-                          setNostrPrivateKey(result.privateKey as string);
-                          saveNostrPrivateKey(result.privateKey as string);
-                        }}
-                      />
-                    </div>
-                  )}
+                  </p>
                 </div>
-              </Setting>
+                <div className="w-1/5 flex-none ml-6">
+                  <Button
+                    label={t("nostr.actions.generate")}
+                    onClick={() => setNostrKeyModalIsOpen(true)}
+                    fullWidth
+                  />
+                </div>
+              </div>
+              <div className="mb-4 flex justify-between items-end">
+                <div className="w-7/12">
+                  <TextField
+                    id="nostrPrivateKey"
+                    label={t("nostr.private_key.label")}
+                    type={nostrPrivateKeyVisible ? "text" : "password"}
+                    value={nostrPrivateKey}
+                    onChange={(event) => {
+                      setNostrPrivateKey(event.target.value);
+                    }}
+                    endAdornment={
+                      <button
+                        type="button"
+                        tabIndex={-1}
+                        className="flex justify-center items-center w-10 h-8"
+                        onClick={() => {
+                          setNostrPrivateKeyVisible(!nostrPrivateKeyVisible);
+                        }}
+                      >
+                        {nostrPrivateKeyVisible ? (
+                          <HiddenIcon className="h-6 w-6" />
+                        ) : (
+                          <VisibleIcon className="h-6 w-6" />
+                        )}
+                      </button>
+                    }
+                  />
+                </div>
+                <div className="w-1/5 flex-none mx-4">
+                  <Button
+                    label={privateKeyCopyLabel}
+                    onClick={async () => {
+                      try {
+                        navigator.clipboard.writeText(nostrPrivateKey);
+                        setPrivateKeyCopyLabel(tCommon("copied"));
+                        setTimeout(() => {
+                          setPrivateKeyCopyLabel(tCommon("actions.copy"));
+                        }, 1000);
+                      } catch (e) {
+                        if (e instanceof Error) {
+                          toast.error(e.message);
+                        }
+                      }
+                    }}
+                    fullWidth
+                  />
+                </div>
+                <div className="w-1/5 flex-none">
+                  <Button
+                    label={tCommon("actions.save")}
+                    onClick={() => {
+                      saveNostrPrivateKey(nostrPrivateKey);
+                    }}
+                    disabled={
+                      nostrPrivateKey === currentPrivateKey ||
+                      nostrPrivateKey ===
+                        nostrlib.hexToNip19(currentPrivateKey, "nsec")
+                    }
+                    primary
+                    fullWidth
+                  />
+                </div>
+              </div>
+
+              <div className="mb-4 flex justify-between items-end">
+                <div className="w-7/12">
+                  <TextField
+                    id="nostrPublicKey"
+                    label={t("nostr.public_key.label")}
+                    type="text"
+                    value={nostrPublicKey}
+                    disabled
+                  />
+                </div>
+                <div className="w-1/5 flex-none mx-4">
+                  <Button
+                    label={publicKeyCopyLabel}
+                    onClick={async () => {
+                      try {
+                        navigator.clipboard.writeText(nostrPublicKey);
+                        setPublicKeyCopyLabel(tCommon("copied"));
+                        setTimeout(() => {
+                          setPublicKeyCopyLabel(tCommon("actions.copy"));
+                        }, 1000);
+                      } catch (e) {
+                        if (e instanceof Error) {
+                          toast.error(e.message);
+                        }
+                      }
+                    }}
+                    fullWidth
+                  />
+                </div>
+                <div className="w-1/5 flex-none d-none"></div>
+              </div>
             </div>
 
             <div className="relative flex py-5 mt-12 items-center">
@@ -407,6 +509,47 @@ function AccountScreen() {
                 </div>
               </Setting>
             </div>
+
+            <Modal
+              ariaHideApp={false}
+              closeTimeoutMS={200}
+              isOpen={nostrKeyModalIsOpen}
+              onRequestClose={closeNostrKeyModal}
+              contentLabel={t("nostr.generate_keys.screen_reader")}
+              overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
+              className="rounded-lg bg-white w-full max-w-lg"
+            >
+              <div className="p-5 flex justify-between dark:bg-surface-02dp">
+                <h2 className="text-2xl font-bold dark:text-white">
+                  {t("nostr.generate_keys.title")}
+                </h2>
+                <button onClick={closeNostrKeyModal}>
+                  <CrossIcon className="w-6 h-6 dark:text-white" />
+                </button>
+              </div>
+              <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
+                <div className="flex justify-center space-x-3 items-center dark:text-white">
+                  {t("nostr.generate_keys.hint")}
+                </div>
+              </div>
+              <div className="p-4">
+                <div className="flex flex-row justify-between">
+                  <Button
+                    type="submit"
+                    onClick={() => generateNostrPrivateKey(true)}
+                    label={t("nostr.generate_keys.actions.random_keys")}
+                    halfWidth
+                  />
+                  <Button
+                    type="submit"
+                    onClick={() => generateNostrPrivateKey()}
+                    label={t("nostr.generate_keys.actions.derived_keys")}
+                    primary
+                    halfWidth
+                  />
+                </div>
+              </div>
+            </Modal>
           </div>
         </Container>
       )}
