@@ -40,6 +40,7 @@ const allowanceInDB = {
 
 const permissionInDB = {
   id: 1,
+  accountId: "123456",
   allowanceId: allowanceInDB.id,
   createdAt: "1487076708000",
   host: allowanceInDB.host,
