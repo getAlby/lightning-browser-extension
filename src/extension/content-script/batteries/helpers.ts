@@ -12,7 +12,7 @@ enum ExtensionIcon {
 /**
  * Inspects the DOM for an element matching the required selector
  * If no element is found it registers an observer and resolves if/when one is.
- * @param selector
+ * @param selector DOM selector to search for
  */
 export const elementReady = async (selector: string): Promise<Element> => {
   return new Promise((resolve) => {
