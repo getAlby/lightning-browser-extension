@@ -88,7 +88,6 @@ describe("delete allowance", () => {
     ]);
 
     const dbPermissions = await db.permissions.toArray();
-    console.info(dbPermissions);
     expect(dbPermissions).toEqual([mockPermissions[0]]);
   });
 });
