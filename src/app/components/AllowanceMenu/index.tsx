@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
+import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import msg from "~/common/lib/msg";
 import type { Allowance, Permission } from "~/types";
@@ -28,7 +29,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
     getFormattedFiat,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
-
+  const { account } = useAccount();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [budget, setBudget] = useState("");
   const [lnurlAuth, setLnurlAuth] = useState(false);
@@ -122,9 +123,10 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
 
       const changedIds = getChangedPermissionsIds();
 
-      if (changedIds.length) {
+      if (changedIds.length && account) {
         await msg.request("deletePermissionsById", {
           ids: changedIds,
+          accountId: account.id,
         });
       }
 

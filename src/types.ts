@@ -220,6 +220,7 @@ export interface MessagePermissionDelete extends MessageDefault {
 export interface MessagePermissionsList extends MessageDefault {
   args: {
     id: Allowance["id"];
+    accountId: Account["id"];
   };
   action: "listPermissions";
 }

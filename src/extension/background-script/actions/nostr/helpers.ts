@@ -19,15 +19,11 @@ export async function hasPermissionFor(method: string, host: string) {
     return false;
   }
 
-  let findPermission = await db.permissions.get({
+  const findPermission = await db.permissions.get({
     host,
     method,
+    accountId,
   });
-
-  if (findPermission?.accountId) {
-    findPermission =
-      findPermission.accountId === accountId ? findPermission : undefined;
-  }
 
   return !!findPermission?.enabled;
 }

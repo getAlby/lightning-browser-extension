@@ -55,11 +55,7 @@ const request = async (
     const permission = await db.permissions
       .where("host")
       .equalsIgnoreCase(origin.host)
-      .and(
-        (p) =>
-          (!p.accountId || p.accountId === accountId) &&
-          p.method === weblnMethod
-      )
+      .and((p) => p.accountId === accountId && p.method === weblnMethod)
       .first();
 
     // request method is allowed to be called

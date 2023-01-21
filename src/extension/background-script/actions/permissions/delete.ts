@@ -8,9 +8,7 @@ const deletePermission = async (message: MessagePermissionDelete) => {
   const deleteCount = await db.permissions
     .where("host")
     .equalsIgnoreCase(host)
-    .and(
-      (p) => (!p.accountId || p.accountId === accountId) && p.method === method
-    )
+    .and((p) => p.accountId === accountId && p.method === method)
     .delete();
 
   await db.saveToStorage();
