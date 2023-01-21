@@ -9,7 +9,7 @@
       },
       "set_password": {
         "title": "Definir uma senha de desbloqueio",
-        "description": "Os dados armazenados na extensão Alby são criptografados com uma senha de desbloqueio. Não esqueça esta senha! Você precisa dela para usar a extensão Alby (neste navegador).",
+        "description": "Essa senha é usada para proteger sua carteira e fornecer acesso à extensão do navegador. Não esqueça essa senha pois não é possível recuperá-la. Obs. Essa senha é diferente da senha da conta da Alby.",
         "choose_password": {
           "label": "Escolha uma senha de desbloqueio:"
         },
@@ -586,12 +586,12 @@
           "title": "📌 Fixar extensão Alby",
           "description1": "<0>Para acessar a Alby facilmente, clique no ícone da extensão</0> <1/> <2>no canto superior direito do seu navegador</2>",
           "description2": "Na lista de extensões, localize a Alby e clique no ícone de fixação para fixá-lo na barra de ferramentas do navegador",
-          "description3": "É isso! Para acessar Alby basta clicar no ícone Alby"
+          "description3": "É isso! Agora é só clicar no ícone da Alby"
         },
         "address": {
           "label1": "Eu quero!",
           "title": "⚡️ Endereço relâmpago",
-          "description": "Crie seu próprio endereço relâmpago e receba pagamentos relâmpago com a mesma facilidade de enviar um e-mail"
+          "description": "Crie seu próprio endereço relâmpago e receba pagamentos bitcoin com a mesma facilidade de enviar um e-mail"
         },
         "demo": {
           "title": "🕹️ Teste a Alby",
@@ -605,7 +605,7 @@
     "choose_path": {
       "alby": {
         "description": "Crie uma conta ou realize o login na sua conta atual da Alby.",
-        "create_new": "Criar conta",
+        "create_new": "Criar nova conta",
         "title": "Alby"
       },
       "other": {
@@ -614,7 +614,7 @@
         "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira disponíveis.",
         "connect": "Conectar"
       },
-      "description": "Você pode usar Alby, criando uma conta conosco ou conectando-se à sua própria carteira bitcoin.",
+      "description": "Você pode usar Alby criando uma conta conosco ou conectando-se nas carteiras bitcoin disponíveis.",
       "title": "Como você deseja usar a Alby?"
     },
     "alby": {
@@ -749,7 +749,7 @@
         "app": "App",
         "podcast": "Podcast"
       },
-      "open_location": "Abrir site"
+      "open_location": "Abrir link"
     },
     "confirm_or_cancel": {
       "only_trusted": "Conecte-se apenas nos sites em que você confia."
