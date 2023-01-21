@@ -2,8 +2,8 @@ import Dexie from "dexie";
 import browser from "webextension-polyfill";
 import type {
   DbAllowance,
-  DbPayment,
   DbBlocklist,
+  DbPayment,
   DbPermission,
 } from "~/types";
 
@@ -25,7 +25,8 @@ class DB extends Dexie {
       blocklist: "++id,host,name,imageURL,isBlocked,createdAt",
     });
     this.version(3).stores({
-      permissions: "++id,allowanceId,host,method,enabled,blocked,createdAt",
+      permissions:
+        "++id,accountId,allowanceId,host,method,enabled,blocked,createdAt",
     });
     this.on("ready", this.loadFromStorage.bind(this));
     this.allowances = this.table("allowances");
