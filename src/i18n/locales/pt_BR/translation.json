@@ -522,7 +522,7 @@
       "errors": {
         "status": "Erro: O status de autenticação não está correto"
       },
-      "submit": "Logar",
+      "submit": "Fazer login",
       "title": "Autenticação"
     },
     "lnurlwithdraw": {
@@ -604,12 +604,12 @@
     },
     "choose_path": {
       "alby": {
-        "description": "Crie uma conta ou realize o login na sua conta atual da Alby.",
+        "description": "Crie uma conta ou faça o login na sua conta atual da Alby.",
         "create_new": "Criar nova conta",
-        "title": "Alby"
+        "title": "Conta Alby"
       },
       "other": {
-        "title": "Outras Carteiras",
+        "title": "Outras Contas",
         "and_more": "& mais...",
         "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira disponíveis.",
         "connect": "Conectar"
@@ -647,7 +647,7 @@
         "forgot_password": "Esqueceu sua senha?",
         "optional_lightning_note": {
           "part4": "saiba mais",
-          "part3": ". É o jeito mais simples para você receber Bitcoins na Rede Relâmpago.",
+          "part3": ". É o jeito mais simples para você receber bitcoin na rede relâmpago.",
           "part2": "endereço relâmpago",
           "part1": "Ao criar uma conta Alby, você pode escolher um"
         },
@@ -694,7 +694,7 @@
       "remove": "Remover",
       "copy": "Copiar",
       "back": "Voltar",
-      "log_in": "Logar",
+      "log_in": "Fazer login",
       "remember": "Lembrar minha escolha e não perguntar novamente"
     },
     "errors": {
