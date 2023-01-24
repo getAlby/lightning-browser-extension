@@ -59,6 +59,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
           permissions: Permission[];
         }>("listPermissions", {
           id: allowance.id,
+          accountId: account?.id,
         });
 
         const permissions: Permission[] = permissionResponse.permissions;
@@ -74,7 +75,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
     };
 
     !permissions && fetchPermissions();
-  }, [allowance.id, permissions]);
+  }, [account?.id, allowance.id, permissions]);
 
   useEffect(() => {
     if (budget !== "" && showFiat) {
@@ -123,10 +124,10 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
 
       const changedIds = getChangedPermissionsIds();
 
-      if (changedIds.length && account) {
+      if (changedIds.length) {
         await msg.request("deletePermissionsById", {
           ids: changedIds,
-          accountId: account.id,
+          accountId: account?.id,
         });
       }
 
