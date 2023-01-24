@@ -133,7 +133,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 {accountId === authAccount?.id && (
                   <span
                     data-testid="selected"
-                    className="ml-auto w-3.5 h-3.5 rounded-full bg-orange-bitcoin flex justify-center items-center"
+                    className="ml-auto flex-shrink-0 w-3.5 h-3.5 rounded-full bg-orange-bitcoin flex justify-center items-center"
                   >
                     <CheckIcon className="w-3 h-3 text-white" />
                   </span>
