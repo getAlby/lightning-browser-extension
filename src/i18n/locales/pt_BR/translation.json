@@ -604,7 +604,7 @@
     },
     "choose_path": {
       "alby": {
-        "description": "Crie uma conta ou faça o login na sua conta atual da Alby.",
+        "description": "Crie uma nova conta Alby ou faça o login na sua conta existente.",
         "create_new": "Criar nova conta",
         "title": "Conta Alby"
       },
