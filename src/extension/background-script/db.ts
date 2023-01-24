@@ -1,9 +1,10 @@
 import Dexie from "dexie";
+import { IDBKeyRange, indexedDB } from "fake-indexeddb";
 import browser from "webextension-polyfill";
 import type {
   DbAllowance,
-  DbPayment,
   DbBlocklist,
+  DbPayment,
   DbPermission,
 } from "~/types";
 
@@ -14,7 +15,7 @@ class DB extends Dexie {
   permissions: Dexie.Table<DbPermission, number>;
 
   constructor() {
-    super("LBE");
+    super("LBE", { indexedDB: indexedDB, IDBKeyRange: IDBKeyRange });
     this.version(1).stores({
       allowances:
         "++id,&host,name,imageURL,tag,enabled,totalBudget,remainingBudget,lastPaymentAt,lnurlAuth,createdAt",
