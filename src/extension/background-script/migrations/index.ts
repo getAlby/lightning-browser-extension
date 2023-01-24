@@ -32,6 +32,16 @@ const migrations = {
       .startsWithIgnoreCase("webln/")
       .delete();
   },
+  migratePermissionsWithoutAccountId: async () => {
+    const { accounts } = state.getState();
+    const accountId = Object.keys(accounts)[0];
+    const permissions = await db.permissions.toArray();
+
+    permissions.forEach(async (permission) => {
+      permission.id &&
+        (await db.permissions.update(permission.id, { accountId }));
+    });
+  },
   migrateisUsingLegacyLnurlAuthKeySetting: async () => {
     const { settings } = state.getState();
     const allowances = await db.allowances
@@ -68,6 +78,11 @@ const migrate = async () => {
     console.info("Running migration for: migratedeleteLegacyWeblnPermissions");
     await migrations["migratedeleteLegacyWeblnPermissions"]();
     await setMigrated("migratedeleteLegacyWeblnPermissions");
+  }
+  if (shouldMigrate("migratePermissionsWithoutAccountId")) {
+    console.info("Running migration for: migratePermissionsWithoutAccountId");
+    await migrations["migratePermissionsWithoutAccountId"]();
+    await setMigrated("migratePermissionsWithoutAccountId");
   }
 };
 
