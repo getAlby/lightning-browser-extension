@@ -63,7 +63,7 @@ export default function TestConnection() {
   }, []);
 
   return (
-    <div className="relative mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white dark:bg-surface-02dp px-10 py-12">
+    <div className="relative mt-14 lg:grid lg:grid-cols-2 gap-8 bg-white dark:bg-surface-02dp p-10 shadow rounded-lg">
       <div className="relative">
         <div>
           {errorMessage && (
@@ -100,7 +100,7 @@ export default function TestConnection() {
               </div>
               <p className="mt-6 dark:text-white">{t("ready")}</p>
 
-              <div className="mt-6 shadow-lg p-4 rounded-xl">
+              <div className="mt-6">
                 <Card
                   color="bg-gray-100"
                   alias={`${accountInfo.name} - ${accountInfo.alias}`}

@@ -61,7 +61,7 @@ function ConnectorForm({
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="relative lg:flex lg:gap-4 mt-14 bg-white dark:bg-surface-02dp px-10 py-4 lg:py-12 shadow rounded-lg">
+      <div className="relative lg:flex lg:gap-4 mt-14 bg-white dark:bg-surface-02dp p-10 shadow rounded-lg">
         <div className="lg:w-1/2">
           {typeof title === "string" ? (
             <h1 className="mb-1 text-2xl font-bold dark:text-white">{title}</h1>
