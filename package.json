@@ -50,7 +50,7 @@
     "html5-qrcode": "^2.3.4",
     "i18next": "^22.4.9",
     "i18next-browser-languagedetector": "^7.0.1",
-    "lnmessage": "^0.0.14",
+    "lnmessage": "^0.0.15",
     "lodash.merge": "^4.6.2",
     "lodash.pick": "^4.4.0",
     "pubsub-js": "^1.9.4",
