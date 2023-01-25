@@ -36,9 +36,7 @@ class SubstackLightningRecipient {
    * Returns a re-sized version of the Recipients Image URL for the Substack CDN
    */
   getResizedImageURL(): string {
-    const match = this.imageURL.match(
-      /fetch\/(f_auto,q_auto:good,fl_progressive:steep)\//i
-    );
+    const match = this.imageURL.match(/fetch\/(.*)\//i);
     if (!match) return this.imageURL;
 
     const originalOptions = match[1].split(",");
