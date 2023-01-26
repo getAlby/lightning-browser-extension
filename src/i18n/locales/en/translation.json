@@ -90,7 +90,9 @@
           "title": "numbers and letters, at least 3 characters"
         },
         "errors": {
-          "create_wallet_error": "Failed to log in or create a new account. If you need help, please contact support@getalby.com"
+          "create_wallet_error": "Failed to log in or create a new account. If you need help, please contact support@getalby.com",
+          "create_wallet_error1": "Failed to log in or create a new account.",
+          "create_wallet_error2": "If you need help, please contact support@getalby.com"
         }
       }
     },

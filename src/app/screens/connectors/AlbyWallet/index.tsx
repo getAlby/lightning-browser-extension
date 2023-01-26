@@ -85,9 +85,22 @@ export default function AlbyWallet({ variant }: Props) {
             );
           } else {
             toast.error(
-              `${t("pre_connect.errors.create_wallet_error")} ${JSON.stringify(
-                data
-              )}`
+              <p>
+                {t("pre_connect.errors.create_wallet_error1")}
+                <br />
+                {t("pre_connect.errors.create_wallet_error2")}
+                <br />
+                {Object.keys(data).map((rule, index) => {
+                  return (
+                    <p key={"rule-" + index}>
+                      {rule.charAt(0).toUpperCase() + rule.slice(1)}
+                      {" - "}
+                      {data[rule].join(", ")}
+                      <br />
+                    </p>
+                  );
+                })}
+              </p>
             );
           }
         }
