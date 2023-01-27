@@ -253,6 +253,10 @@ export interface MessageBlocklistGet extends MessageDefault {
   action: "getBlocklist";
 }
 
+export interface MessageBlocklistList extends MessageDefault {
+  action: "listBlocklist";
+}
+
 export interface MessageSetIcon extends MessageDefault {
   action: "setIcon";
   args: {
