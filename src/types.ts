@@ -334,6 +334,37 @@ export interface MessageWebLnLnurl extends MessageDefault {
   action: "webln/lnurl";
 }
 
+export interface MessageGetInfo extends MessageDefault {
+  action: "getInfo";
+}
+
+export interface MessageMakeInvoice extends MessageDefault {
+  args: { memo?: string; defaultMemo?: string; amount?: string };
+  action: "makeInvoice";
+}
+
+export interface MessageReset extends MessageDefault {
+  action: "reset";
+}
+
+export interface MessageStatus extends MessageDefault {
+  action: "status";
+}
+
+export interface MessageSetPassword extends MessageDefault {
+  args: { password: string };
+  action: "setPassword";
+}
+
+export interface MessageAccountValidate extends MessageDefault {
+  args: {
+    connector: ConnectorType;
+    config: Record<string, string>;
+    name: string;
+  };
+  action: "validateAccount";
+}
+
 export interface MessageConnectPeer extends MessageDefault {
   args: { pubkey: string; host: string };
   action: "connectPeer";
