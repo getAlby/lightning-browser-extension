@@ -1,3 +1,4 @@
+import useSWR from "swr";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import {
   ConnectPeerArgs,
@@ -33,7 +34,7 @@ export interface AccountInfoRes {
   name: string;
 }
 
-interface StatusRes {
+export interface StatusRes {
   configured: boolean;
   unlocked: boolean;
   currentAccountId: string;
@@ -47,7 +48,8 @@ interface BlocklistRes {
   blocked: boolean;
 }
 
-export const getAccountInfo = () => msg.request<AccountInfoRes>("accountInfo");
+export const getAccountInfo = (): Promise<AccountInfoRes> =>
+  msg.request<AccountInfoRes>("accountInfo");
 
 /**
  * stale-while-revalidate get account info
@@ -91,6 +93,33 @@ export const swrGetAccountInfo = async (
       .catch(reject);
   });
 };
+
+export const useSwrGetAccountInfoTest = async (
+  id: string | null
+): Promise<AccountInfo | null> => {
+  const key = id ? "accountInfo/" + id : null;
+  const { data, error } = await useSWR(key, getAccountInfo);
+
+  if (!data) return null;
+
+  if (error) throw error;
+
+  const alias = data.info.alias;
+  const { balance: resBalance, currency } = data.balance;
+  const name = data.name;
+  const balance =
+    typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
+
+  return {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    id: id!,
+    name,
+    alias,
+    balance,
+    currency: currency || "BTC", // set default currency for every account
+  };
+};
+
 export const getAccounts = () => msg.request<Accounts>("getAccounts");
 export const updateAllowance = () => msg.request<Accounts>("updateAllowance");
 export const selectAccount = (id: string) =>
@@ -144,6 +173,7 @@ export default {
   setSetting,
   swr: {
     getAccountInfo: swrGetAccountInfo,
+    useSwrGetAccountInfoTest: useSwrGetAccountInfoTest,
   },
   removeAccount,
   unlock,

@@ -7,19 +7,18 @@ import {
 } from "react";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
-import api from "~/common/lib/api";
+import api, { StatusRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import type { AccountInfo } from "~/types";
 
+interface AccountInfoData extends AccountInfo {
+  fiatBalance: string;
+  accountBalance: string;
+}
+
 interface AccountContextType {
-  account: {
-    id: AccountInfo["id"];
-    name?: AccountInfo["name"];
-    alias?: AccountInfo["alias"];
-    balance?: AccountInfo["balance"];
-    currency?: AccountInfo["currency"];
-  } | null;
+  account: Partial<AccountInfo> | null;
   balancesDecorated: {
     fiatBalance: string;
     accountBalance: string;
@@ -36,7 +35,7 @@ interface AccountContextType {
    */
   fetchAccountInfo: (options?: {
     accountId?: string;
-  }) => Promise<AccountInfo | undefined>;
+  }) => Promise<AccountInfoData | undefined>;
 }
 
 const AccountContext = createContext({} as AccountContextType);
@@ -53,6 +52,8 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [accountBalance, setAccountBalance] = useState("");
   const [fiatBalance, setFiatBalance] = useState("");
+  const [status, setStatus] = useState<StatusRes>();
+  const [shouldFetchAccountInfo, setShouldFetchAccountInfo] = useState(false);
 
   const isSatsAccount = account?.currency === "BTC"; // show fiatValue only if the base currency is not already fiat
   const showFiat =
@@ -93,39 +94,67 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     setAccountBalance(balance);
   };
 
-  const fetchAccountInfo = async (options?: { accountId?: string }) => {
-    const id = options?.accountId || account?.id;
-    if (!id) return;
+  // const fetchAccountInfo = async (options?: { accountId?: string }) => {
+  //   const id = options?.accountId || account?.id;
+  //   if (!id) return;
+  //
+  //   const callback = (accountRes: AccountInfo) => {
+  //     setAccount(accountRes);
+  //     updateAccountBalance(accountRes.balance, accountRes.currency);
+  //   };
+  //
+  //   const accountInfo = await api.swr.getAccountInfo(id, callback);
+  //
+  //   return { ...accountInfo, fiatBalance, accountBalance };
+  // };
 
-    const callback = (accountRes: AccountInfo) => {
-      setAccount(accountRes);
-      updateAccountBalance(accountRes.balance, accountRes.currency);
-    };
+  const fetchAccountInfo = async (options?: {
+    accountId?: string | null;
+  }): Promise<AccountInfoData> => {
+    const id = options?.accountId || null;
 
-    const accountInfo = await api.swr.getAccountInfo(id, callback);
+    const accountInfo = await api.swr.useSwrGetAccountInfoTest(id);
 
-    return { ...accountInfo, fiatBalance, accountBalance };
+    if (accountInfo) {
+      // eslint-disable-next-line
+      setAccount(accountInfo as any);
+      updateAccountBalance(accountInfo.balance, accountInfo.currency);
+    }
+
+    return { ...accountInfo, fiatBalance, accountBalance } as AccountInfoData;
   };
+
+  const maybeGetAccountId = () => {
+    return !account?.name && shouldFetchAccountInfo
+      ? status?.currentAccountId || null
+      : null;
+  };
+
+  const handleGetStatus = (status: StatusRes) => {
+    setStatus(status);
+    const onWelcomePage = window.location.pathname.indexOf("welcome.html") >= 0;
+    if (!status.configured && !onWelcomePage) {
+      utils.openPage("welcome.html");
+      window.close();
+    } else if (status.unlocked) {
+      if (status.configured && onWelcomePage) {
+        utils.redirectPage("options.html");
+      }
+      setAccountId(status.currentAccountId);
+      setShouldFetchAccountInfo(true);
+    } else {
+      setAccount(null);
+    }
+  };
+
+  fetchAccountInfo({ accountId: maybeGetAccountId() });
 
   // Invoked only on on mount.
   useEffect(() => {
     api
       .getStatus()
-      .then((response) => {
-        const onWelcomePage =
-          window.location.pathname.indexOf("welcome.html") >= 0;
-        if (!response.configured && !onWelcomePage) {
-          utils.openPage("welcome.html");
-          window.close();
-        } else if (response.unlocked) {
-          if (response.configured && onWelcomePage) {
-            utils.redirectPage("options.html");
-          }
-          setAccountId(response.currentAccountId);
-          fetchAccountInfo({ accountId: response.currentAccountId });
-        } else {
-          setAccount(null);
-        }
+      .then((status: StatusRes) => {
+        handleGetStatus(status);
       })
       .catch((e) => {
         toast.error(`An unexpected error occurred (${e.message})`);

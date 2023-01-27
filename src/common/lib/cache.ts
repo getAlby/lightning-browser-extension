@@ -1,6 +1,7 @@
 import browser from "webextension-polyfill";
 import type { AccountInfo } from "~/types";
 
+// @Todo: deprecated
 export const getAccountsCache = async () => {
   let accountsCache: { [id: string]: AccountInfo } = {};
   const result = await browser.storage.local.get(["accounts"]);
@@ -10,12 +11,14 @@ export const getAccountsCache = async () => {
   return accountsCache;
 };
 
+// @Todo: deprecated
 export const storeAccounts = (accounts: { [id: string]: AccountInfo }) => {
   browser.storage.local.set({
     accounts: JSON.stringify(accounts),
   });
 };
 
+// @Todo: deprecated
 export const removeAccountFromCache = async (id: string) => {
   const accountsCache = await getAccountsCache();
   if (accountsCache[id]) {
