@@ -64,7 +64,7 @@ function AccountsScreen() {
       id,
     });
 
-    auth.updateAccountInfo(); // Update active account name
+    auth.refetchAccountInfo(); // Update active account name
     getAccounts(); // update all accounts
     closeEditModal();
   }

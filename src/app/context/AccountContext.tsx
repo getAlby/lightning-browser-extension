@@ -28,7 +28,7 @@ interface AccountContextType {
   /**
    * revalidation (mark the data as expired and trigger a refetch) for the resource
    */
-  updateAccountInfo: () => Promise<void>;
+  refetchAccountInfo: () => Promise<void>;
 }
 
 const AccountContext = createContext({} as AccountContextType);
@@ -79,8 +79,8 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     setAccount({ id });
   };
 
-  const updateAccountInfo = async () => {
-    const accountInfo = await api.swr.mutateAccountInfo(account?.id || null);
+  const refetchAccountInfo = async () => {
+    const accountInfo = await api.refetchAccountInfo(account?.id || null);
     if (accountInfo) {
       // eslint-disable-next-line
       setAccount(accountInfo as any);
@@ -98,9 +98,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
 
   // hook: will be called each round, pass "id = null" to skip
   const fetchAccountInfo = async () => {
-    const accountInfo = await api.swr.useAccountInfoCached(
-      getIdIfShouldFetch()
-    );
+    const accountInfo = await api.useAccountInfoCached(getIdIfShouldFetch());
     if (!accountInfo) return;
 
     setAccount(accountInfo);
@@ -165,7 +163,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
       accountBalance,
       fiatBalance,
     },
-    updateAccountInfo,
+    refetchAccountInfo,
     loading,
     lock,
     setAccountId,

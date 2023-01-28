@@ -67,7 +67,7 @@ export const useAccountInfoCached = async (
 };
 
 // revalidation (mark the data as expired and trigger a refetch) for the resource
-export const mutateAccountInfo = async (
+export const refetchAccountInfo = async (
   id: string | null
 ): Promise<AccountInfo | null> => {
   const data = await mutate<AccountInfoRes>(
@@ -119,12 +119,7 @@ export const setSetting = (setting: MessageSettingsSet["args"]["setting"]) =>
     setting,
   });
 export const removeAccount = (id: string) =>
-  // @Todo: maybe remove Promise.all
-  Promise.all([
-    msg.request("removeAccount", { id }),
-    // @Todo: how to remove account from swr cache?
-    // @Todo swr dows say "mutate(key)" will mark the data as expired and trigger a refetch for the resource
-  ]);
+  msg.request("removeAccount", { id });
 export const unlock = (password: string) =>
   msg.request<UnlockRes>("unlock", { password });
 export const getBlocklist = (host: string) =>
@@ -152,10 +147,8 @@ export default {
   makeInvoice,
   connectPeer,
   setSetting,
-  swr: {
-    useAccountInfoCached: useAccountInfoCached,
-    mutateAccountInfo: mutateAccountInfo,
-  },
+  useAccountInfoCached,
+  refetchAccountInfo,
   removeAccount,
   unlock,
   getBlocklist,
