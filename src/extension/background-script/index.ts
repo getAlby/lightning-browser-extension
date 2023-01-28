@@ -158,7 +158,7 @@ browser.runtime.onInstalled.addListener(handleInstalled);
 
 console.info("Welcome to Alby");
 init().then(() => {
-  if (isFirstInstalled) {
+  if (isFirstInstalled && !state.getState().getAccount()) {
     utils.openUrl("welcome.html");
   }
   if (isRecentlyUpdated) {

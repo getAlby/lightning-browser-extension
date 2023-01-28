@@ -600,7 +600,8 @@
         "entertaiment": "Entertaiment",
         "shopping": "Shopping",
         "miscellaneous": "Miscellaneous",
-        "showcases": "Showcases"
+        "showcases": "Showcases",
+        "nostr": "Nostr"
       },
       "tips": {
         "title": "Your Alby wallet is ready",
