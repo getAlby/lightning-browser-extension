@@ -47,7 +47,6 @@ function AccountMenu({ showOptions = true }: Props) {
   async function selectAccount(accountId: string) {
     setLoading(true);
     try {
-      // @Todo: should we move api.selectAccount to setAccountId
       await msg.request("selectAccount", {
         id: accountId,
       });

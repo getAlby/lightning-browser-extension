@@ -53,7 +53,6 @@ function AccountsScreen() {
   }
 
   async function selectAccount(accountId: string) {
-    // @Todo: should we move api.selectAccount to setAccountId
     await api.selectAccount(accountId);
     auth.setAccountId(accountId);
   }

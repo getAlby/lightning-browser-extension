@@ -1,4 +1,3 @@
-import useSWR, { mutate } from "swr";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import {
   ConnectPeerArgs,
@@ -7,7 +6,6 @@ import {
   MakeInvoiceResponse,
 } from "~/extension/background-script/connectors/connector.interface";
 import type {
-  AccountInfo,
   Accounts,
   Allowance,
   DbPayment,
@@ -45,59 +43,6 @@ interface BlocklistRes {
 
 export const getAccountInfo = (): Promise<AccountInfoRes> =>
   msg.request<AccountInfoRes>("accountInfo");
-
-export const getAccountInfoKey = (
-  id: string | null | undefined
-): string | null => (id ? `accountInfo/${id}` : null);
-
-// useSWR hook is expected to be called in every render, hence we expect parameter id null to skip fetching
-export const useAccountInfoCached = async (
-  id: string | null
-): Promise<AccountInfo | null> => {
-  const { data, error } = await useSWR<AccountInfoRes>(
-    getAccountInfoKey(id),
-    getAccountInfo
-  );
-
-  if (!data) return null;
-  // @Todo: how to handle this error in the calling function ?
-  if (error) throw error;
-
-  return buildAccountInfo(id, data);
-};
-
-// revalidation (mark the data as expired and trigger a refetch) for the resource
-export const refetchAccountInfo = async (
-  id: string | null
-): Promise<AccountInfo | null> => {
-  const data = await mutate<AccountInfoRes>(
-    getAccountInfoKey(id),
-    getAccountInfo
-  );
-  if (!data) return null;
-
-  return buildAccountInfo(id, data);
-};
-
-const buildAccountInfo = (
-  id: string | null,
-  data: AccountInfoRes
-): AccountInfo => {
-  const alias = data.info.alias;
-  const { balance: resBalance, currency } = data.balance;
-  const name = data.name;
-  const balance =
-    typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
-
-  return {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    id: id!,
-    name,
-    alias,
-    balance,
-    currency: currency || "BTC", // set default currency for every account
-  };
-};
 
 export const getAccounts = () => msg.request<Accounts>("getAccounts");
 export const updateAllowance = () => msg.request<Accounts>("updateAllowance");
@@ -147,8 +92,6 @@ export default {
   makeInvoice,
   connectPeer,
   setSetting,
-  useAccountInfoCached,
-  refetchAccountInfo,
   removeAccount,
   unlock,
   getBlocklist,

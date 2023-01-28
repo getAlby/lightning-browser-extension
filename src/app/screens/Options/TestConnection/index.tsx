@@ -4,10 +4,15 @@ import Loading from "@components/Loading";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useAccount } from "~/app/context/AccountContext";
+import useSWR from "swr";
+import {
+  buildAccountInfo,
+  getAccountInfoKey,
+  useAccount,
+} from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
-import api from "~/common/lib/api";
+import api, { AccountInfoRes, getAccountInfo } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import { AccountInfo } from "~/types";
 
@@ -20,6 +25,10 @@ export default function TestConnection() {
   const [currentAccountId, setCurrentAccountId] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const { data: accountInfoRes } = useSWR<AccountInfoRes>(
+    getAccountInfoKey(currentAccountId),
+    getAccountInfo
+  );
 
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
@@ -39,7 +48,7 @@ export default function TestConnection() {
       setErrorMessage(t("connection_taking_long"));
     }, 45000);
     try {
-      handleLoadAccountInfoSuccess();
+      handleSelectAccount();
     } catch (e) {
       if (e instanceof Error) {
         setErrorMessage(e.message);
@@ -53,9 +62,9 @@ export default function TestConnection() {
   /**
    * update AccountContext, but handle currentAccountId separately,
    * to keep TestConnection account,
-   * even though the account menu is changed
+   * even though the account menu might be changed
    */
-  const handleLoadAccountInfoSuccess = async () => {
+  const handleSelectAccount = async () => {
     const { currentAccountId } = await api.getStatus();
     await msg.request("selectAccount", {
       id: currentAccountId,
@@ -65,21 +74,17 @@ export default function TestConnection() {
     getAccounts();
   };
 
-  const fetchAccountInfo = async () => {
-    const id = currentAccountId || null;
-    const currenAccountInfo = await api.useAccountInfoCached(id);
-    if (currenAccountInfo) setAccountInfo(currenAccountInfo);
-  };
-
-  fetchAccountInfo();
-
   useEffect(() => {
     loadAccountInfo();
-    return () => {
-      // @Todo: do we need to clear/reset swr cache for currentAccountId ?
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (currentAccountId && accountInfoRes) {
+      setAccountInfo(buildAccountInfo(currentAccountId, accountInfoRes));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accountInfoRes]);
 
   return (
     <div>

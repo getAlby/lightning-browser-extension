@@ -6,8 +6,15 @@ import {
   useCallback,
 } from "react";
 import { toast } from "react-toastify";
+import useSWR from "swr";
 import { useSettings } from "~/app/context/SettingsContext";
-import api, { StatusRes, UnlockRes } from "~/common/lib/api";
+import { ACCOUNT_DEFAULT_CURRENCY } from "~/common/constants";
+import api, {
+  AccountInfoRes,
+  getAccountInfo,
+  StatusRes,
+  UnlockRes,
+} from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import type { AccountInfo } from "~/types";
@@ -33,6 +40,30 @@ interface AccountContextType {
 
 const AccountContext = createContext({} as AccountContextType);
 
+export const getAccountInfoKey = (
+  id: string | null | undefined
+): string | null => (id ? `accountInfo/${id}` : null);
+
+export const buildAccountInfo = (
+  id: string,
+  data: AccountInfoRes
+): AccountInfo => {
+  const alias = data.info.alias;
+  const { balance: resBalance, currency = ACCOUNT_DEFAULT_CURRENCY } =
+    data.balance;
+  const name = data.name;
+  const balance =
+    typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
+
+  return {
+    id,
+    name,
+    alias,
+    balance,
+    currency,
+  };
+};
+
 export function AccountProvider({ children }: { children: React.ReactNode }) {
   const {
     isLoading: isLoadingSettings,
@@ -41,11 +72,16 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     getFormattedInCurrency,
   } = useSettings();
 
-  const [account, setAccount] = useState<AccountContextType["account"]>(null);
+  const [account, setAccount] = useState<Partial<AccountInfo> | null>(null);
   const [loading, setLoading] = useState(true);
   const [accountBalance, setAccountBalance] = useState("");
   const [fiatBalance, setFiatBalance] = useState("");
   const [, setStatus] = useState<StatusRes>();
+
+  const { data: accountInfoRes, mutate } = useSWR<AccountInfoRes>(
+    getAccountInfoKey(account?.id),
+    getAccountInfo
+  );
 
   const isSatsAccount = account?.currency === "BTC"; // show fiatValue only if the base currency is not already fiat
   const showFiat =
@@ -80,12 +116,9 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   };
 
   const refetchAccountInfo = async () => {
-    const accountInfo = await api.refetchAccountInfo(account?.id || null);
-    if (accountInfo) {
-      // eslint-disable-next-line
-      setAccount(accountInfo as any);
-      updateAccountBalance(accountInfo.balance, accountInfo.currency);
-    }
+    if (typeof mutate !== "function") return;
+    const data = await mutate();
+    setAccountData(account?.id, data);
   };
 
   const updateAccountBalance = (
@@ -94,23 +127,6 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   ) => {
     const balance = getFormattedInCurrency(amount, currency);
     setAccountBalance(balance);
-  };
-
-  // hook: will be called each round, pass "id = null" to skip
-  const fetchAccountInfo = async () => {
-    const accountInfo = await api.useAccountInfoCached(getIdIfShouldFetch());
-    if (!accountInfo) return;
-
-    setAccount(accountInfo);
-    updateAccountBalance(accountInfo.balance, accountInfo.currency);
-  };
-
-  /**
-   * implicitly determines if data should be fetched
-   * if new account was selected, only "id" prop is available, and name is missing
-   */
-  const getIdIfShouldFetch = () => {
-    return !account?.name ? account?.id || null : null;
   };
 
   const handleGetStatus = (status: StatusRes) => {
@@ -129,7 +145,21 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  fetchAccountInfo();
+  const setAccountData = (
+    id: string | undefined,
+    accountInfoRes: AccountInfoRes | undefined
+  ) => {
+    if (id && accountInfoRes) {
+      const accountInfo = buildAccountInfo(id, accountInfoRes);
+      setAccount(accountInfo);
+      updateAccountBalance(accountInfo.balance, accountInfo.currency);
+    }
+  };
+
+  useEffect(() => {
+    setAccountData(account?.id, accountInfoRes);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accountInfoRes]);
 
   // Invoked only on on mount.
   useEffect(() => {

@@ -1,6 +1,6 @@
 import Button from "@components/Button";
 import Loading from "@components/Loading";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import api from "~/common/lib/api";
@@ -17,7 +17,7 @@ export default function TestConnection() {
 
   const navigate = useNavigate();
 
-  async function handleEdit(_: React.MouseEvent<HTMLButtonElement>) {
+  async function handleEdit() {
     await msg.request("removeAccount");
     navigate(-1);
   }
