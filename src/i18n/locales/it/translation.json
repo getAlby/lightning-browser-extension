@@ -24,8 +24,6 @@
       },
       "test_connection": {
         "ready": "Fantastico, sei pronto per partire!",
-        "tutorial": "Ora che hai collegato il tuo portafoglio ti piacerebbe seguire un tutorial?",
-        "try_tutorial": "Provalo ora",
         "initializing": "Stiamo inizializzando il tuo account. Per favore attendi, questa operazione potrebbe impiegare alcuni minuti…",
         "connection_error": "Errore di connessione",
         "review_connection_details": "Controlla i dettagli della tua connessione.",
