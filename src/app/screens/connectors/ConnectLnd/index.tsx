@@ -20,6 +20,7 @@ export default function ConnectLnd() {
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.lnd",
   });
+
   const [formData, setFormData] = useState(initialFormData);
   const [isDragging, setDragging] = useState(false);
   const hiddenFileInput = useRef<HTMLInputElement>(null);

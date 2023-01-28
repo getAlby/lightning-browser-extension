@@ -9,14 +9,13 @@ import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import type { AccountInfo } from "~/types";
 
 export default function TestConnection() {
   const { getFormattedInCurrency } = useSettings();
   const auth = useAccount();
   const { getAccounts } = useAccounts();
 
-  const [accountInfo, setAccountInfo] = useState<Partial<AccountInfo>>();
+  // const [accountInfo, setAccountInfo] = useState<Partial<AccountInfo>>();
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -26,7 +25,7 @@ export default function TestConnection() {
   });
   const { t: tCommon } = useTranslation("common");
 
-  async function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
+  async function handleEdit() {
     await msg.request("removeAccount");
     navigate(-1);
   }
@@ -45,14 +44,14 @@ export default function TestConnection() {
       });
       auth.setAccountId(currentAccountId);
 
-      if (auth.account) {
-        setAccountInfo({
-          alias: auth.account.alias,
-          balance: auth.account.balance,
-          currency: auth.account.currency,
-          name: auth.account.name,
-        });
-      }
+      // if (auth.account) {
+      //   setAccountInfo({
+      //     alias: auth.account.alias,
+      //     balance: auth.account.balance,
+      //     currency: auth.account.currency,
+      //     name: auth.account.name,
+      //   });
+      // }
       getAccounts();
     } catch (e) {
       console.error(e);
@@ -69,6 +68,8 @@ export default function TestConnection() {
     loadAccountInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const accountInfo = auth.account;
 
   return (
     <div>
