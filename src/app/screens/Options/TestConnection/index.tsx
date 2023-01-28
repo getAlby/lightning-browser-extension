@@ -9,13 +9,15 @@ import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
+import { AccountInfo } from "~/types";
 
 export default function TestConnection() {
   const { getFormattedInCurrency } = useSettings();
-  const auth = useAccount();
   const { getAccounts } = useAccounts();
+  const { setAccountId } = useAccount();
 
-  // const [accountInfo, setAccountInfo] = useState<Partial<AccountInfo>>();
+  const [accountInfo, setAccountInfo] = useState<Partial<AccountInfo>>();
+  const [currentAccountId, setCurrentAccountId] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -37,24 +39,8 @@ export default function TestConnection() {
       setErrorMessage(t("connection_taking_long"));
     }, 45000);
     try {
-      const { currentAccountId } = await api.getStatus();
-      // @Todo: should we move api.selectAccount to setAccountId
-      await msg.request("selectAccount", {
-        id: currentAccountId,
-      });
-      auth.setAccountId(currentAccountId);
-
-      // if (auth.account) {
-      //   setAccountInfo({
-      //     alias: auth.account.alias,
-      //     balance: auth.account.balance,
-      //     currency: auth.account.currency,
-      //     name: auth.account.name,
-      //   });
-      // }
-      getAccounts();
+      handleLoadAccountInfoSuccess();
     } catch (e) {
-      console.error(e);
       if (e instanceof Error) {
         setErrorMessage(e.message);
       }
@@ -64,12 +50,36 @@ export default function TestConnection() {
     }
   }
 
+  /**
+   * update AccountContext, but handle currentAccountId separately,
+   * to keep TestConnection account,
+   * even though the account menu is changed
+   */
+  const handleLoadAccountInfoSuccess = async () => {
+    const { currentAccountId } = await api.getStatus();
+    await msg.request("selectAccount", {
+      id: currentAccountId,
+    });
+    setAccountId(currentAccountId);
+    setCurrentAccountId(currentAccountId);
+    getAccounts();
+  };
+
+  const fetchAccountInfo = async () => {
+    const id = currentAccountId || null;
+    const currenAccountInfo = await api.swr.useSwrGetAccountInfoTest(id);
+    if (currenAccountInfo) setAccountInfo(currenAccountInfo);
+  };
+
+  fetchAccountInfo();
+
   useEffect(() => {
     loadAccountInfo();
+    return () => {
+      // @Todo: do we need to clear/reset swr cache for currentAccountId ?
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const accountInfo = auth.account;
 
   return (
     <div>
