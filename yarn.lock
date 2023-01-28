@@ -938,6 +938,11 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.3.tgz#0300943770e04231041a51bd39f0439b5c7ab4f0"
   integrity sha512-nkalE/f1RvRGChwBnEIoBfSEYOXnCRdleKuv6+lePbMDrMZXeDQnqak5XDOeBgrPPyPfAdcCu/B5z+v3VhplGg==
 
+"@lightninglabs/lnc-core@0.2.1-alpha":
+  version "0.2.1-alpha"
+  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-core/-/lnc-core-0.2.1-alpha.tgz#b381ea29fb7bc20a7dd10334bb913bb50f6dac36"
+  integrity sha512-H297V3seL+PE786HcuAQiSass/3y0NSYCy3b4hNTZL4Io80Oy4WY49s08CpRuV8cNfjAzWjYSXkhorALjaRdwA==
+
 "@mswjs/cookies@^0.2.2":
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/@mswjs/cookies/-/cookies-0.2.2.tgz#b4e207bf6989e5d5427539c2443380a33ebb922b"
@@ -1496,6 +1501,13 @@
   version "4.4.7"
   resolved "https://registry.yarnpkg.com/@types/lodash.pick/-/lodash.pick-4.4.7.tgz#4a700075758692ce6ee48bee08e6fd4004d5da53"
   integrity sha512-HgdyKz7/1+oeoVzbpu1XiX/Bti9AUksHtOILH38T07aKvqoirzcdOsrO2+Yg3L51Hv/8m1MetvHZEUGeABiTiQ==
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash.snakecase@^4.1.1":
+  version "4.1.7"
+  resolved "https://registry.yarnpkg.com/@types/lodash.snakecase/-/lodash.snakecase-4.1.7.tgz#2a1ca7cbc08b63e7c3708f6291222e69b0d3216d"
+  integrity sha512-nv9M+JJokFyfZ9QmaWVXZu2DfT40K0GictZaA8SwXczp3oCzMkjp7PtvUBQyvdoG9SnlCpoRXZDIVwQRzJbd9A==
   dependencies:
     "@types/lodash" "*"
 
@@ -3239,7 +3251,7 @@ cross-spawn@^7.0.1, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-crypto-js@^4.1.1:
+crypto-js@4.1.1, crypto-js@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
   integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==
@@ -6261,6 +6273,13 @@ listr2@^5.0.5:
     rxjs "^7.5.7"
     through "^2.3.8"
     wrap-ansi "^7.0.0"
+
+"lnc-web@git+https://github.com/bumi/lnc-web.git#remove-window-dependency":
+  version "0.2.1-alpha"
+  resolved "git+https://github.com/bumi/lnc-web.git#0b312e8c131d6093a498bf5f4e4642196984ca1f"
+  dependencies:
+    "@lightninglabs/lnc-core" "0.2.1-alpha"
+    crypto-js "4.1.1"
 
 lnmessage@^0.0.17:
   version "0.0.17"
