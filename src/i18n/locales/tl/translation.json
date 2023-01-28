@@ -7,27 +7,6 @@
         "connect": "",
         "done": ""
       },
-      "intro": {
-        "send": {
-          "title": "",
-          "description": ""
-        },
-        "paywall": {
-          "title": "",
-          "description": ""
-        },
-        "privacy": {
-          "title": "",
-          "description": ""
-        },
-        "foss": {
-          "title": "",
-          "description": ""
-        },
-        "actions": {
-          "get_started": ""
-        }
-      },
       "set_password": {
         "title": "",
         "description": "",
@@ -45,8 +24,6 @@
       },
       "test_connection": {
         "ready": "",
-        "tutorial": "",
-        "try_tutorial": "",
         "initializing": "",
         "connection_error": "",
         "review_connection_details": "",

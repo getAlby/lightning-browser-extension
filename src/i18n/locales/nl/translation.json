@@ -7,27 +7,6 @@
         "connect": "Jouw Lightning account",
         "done": "Klaar"
       },
-      "intro": {
-        "send": {
-          "title": "Verstuur in één klik",
-          "description": "Lightning transacties gebeuren in je browser. Geen alt+tab of QR-code scan nodig."
-        },
-        "paywall": {
-          "title": "Geen vervelende paywalls meer",
-          "description": "Definieer individuele budgetten voor websites om naadloze betalingsstromen mogelijk te maken. Geen vervelende paywalls meer."
-        },
-        "privacy": {
-          "title": "Privacy voorop",
-          "description": "Gebruik Lightning om te verifiëren en controle te houden over je privacy."
-        },
-        "foss": {
-          "title": "Gratis en Open Source",
-          "description": "Volledig transparante open code. Geen statistieken of trackers. Jij hebt de controle."
-        },
-        "actions": {
-          "get_started": "Begin Nu"
-        }
-      },
       "set_password": {
         "title": "Stel een ontgrendelingswachtwoord in",
         "description": "Lightning-accountgegevens zijn veilig versleuteld met een ontgrendelingswachtwoord. Vergeet dit wachtwoord niet! Je hebt het nodig om de Alby-extensie te ontgrendelen (in deze browser)",
@@ -45,8 +24,6 @@
       },
       "test_connection": {
         "ready": "Geweldig, klaar om te starten!",
-        "tutorial": "Nu je Lightning wallet is geconnect, wil je een tutorial doorlopen?",
-        "try_tutorial": "Probeer nu",
         "initializing": "Uw account wordt geïnitialiseerd. Even geduld, dit kan even duren...",
         "connection_error": "Connectie Error",
         "review_connection_details": "Controleer uw verbindingsgegevens.",

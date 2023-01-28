@@ -7,27 +7,6 @@
         "connect": "Ditt Lightning-konto",
         "done": "Klar"
       },
-      "intro": {
-        "send": {
-          "title": "Skicka med ett klick",
-          "description": "Lightning-överföringar sker direkt i din webbläsare. Inget behov av att alt-tabba eller skanna QR-koder."
-        },
-        "paywall": {
-          "title": "Inga fler irriterande betalväggar",
-          "description": "Ange beloppsgränser för specifika webbplatser för att förenkla betalning. Inga fler irriterande betalväggar."
-        },
-        "privacy": {
-          "title": "Integritet främst",
-          "description": "Använd lightning för autentisering och behåll din integritet."
-        },
-        "foss": {
-          "title": "Fri och öppen källkod",
-          "description": "Helt öppen källkod som kan granskas och verifieras av vem som helst. Ingen statistik eller spår. Du har full kontroll."
-        },
-        "actions": {
-          "get_started": "Kom igång"
-        }
-      },
       "set_password": {
         "title": "Ange ett lösenord för upplåsning",
         "description": "Ditt Lightning-konto är krypterat med ett lösenord för upplåsning. Glöm inte detta lösenord! Du behöver lösenordet för att kunna låsa upp Alby-tillägget (i denna webbläsare)",
@@ -45,8 +24,6 @@
       },
       "test_connection": {
         "ready": "Fantastiskt, du är redo att börja!",
-        "tutorial": "Nu när du anslutit din plånbok, vill du gå igenom en guide?",
-        "try_tutorial": "Prova genast",
         "initializing": "Initialiserar ditt konto. Vänta, det kan ta någon minut...",
         "connection_error": "Anslutningsfel",
         "review_connection_details": "Se över dina anslutningsinställningar.",
