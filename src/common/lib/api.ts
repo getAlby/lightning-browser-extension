@@ -20,11 +20,6 @@ import type {
   SettingsStorage,
 } from "~/types";
 
-import {
-  getAccountsCache,
-  removeAccountFromCache,
-  storeAccounts,
-} from "./cache";
 import msg from "./msg";
 
 export interface AccountInfoRes {
@@ -55,81 +50,39 @@ export const getAccountInfoKey = (
   id: string | null | undefined
 ): string | null => (id ? `accountInfo/${id}` : null);
 
-/**
- * stale-while-revalidate get account info
- * @param id - account id
- * @param callback - will be called first with cached (stale) data first, then with fresh data.
- */
-export const swrGetAccountInfo = async (
-  id: string,
-  callback?: (account: AccountInfo) => void
-): Promise<AccountInfo> => {
-  const accountsCache = await getAccountsCache();
-
-  return new Promise((resolve, reject) => {
-    if (accountsCache[id]) {
-      if (callback) callback(accountsCache[id]);
-      resolve(accountsCache[id]);
-    }
-
-    // Update account info with most recent data, save to cache.
-    getAccountInfo()
-      .then((response) => {
-        const { alias } = response.info;
-        const { balance: resBalance, currency } = response.balance;
-        const name = response.name;
-        const balance =
-          typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
-        const account = {
-          id,
-          name,
-          alias,
-          balance,
-          currency: currency || "BTC", // set default currency for every account
-        };
-        storeAccounts({
-          ...accountsCache,
-          [id]: account,
-        });
-        if (callback) callback(account);
-        return resolve(account);
-      })
-      .catch(reject);
-  });
-};
-
-export const useSwrGetAccountInfoTest = async (
+// useSWR hook is expected to be called in every render, hence we expect parameter id null to skip fetching
+export const useAccountInfoCached = async (
   id: string | null
 ): Promise<AccountInfo | null> => {
-  const { data, error } = await useSWR(getAccountInfoKey(id), getAccountInfo);
+  const { data, error } = await useSWR<AccountInfoRes>(
+    getAccountInfoKey(id),
+    getAccountInfo
+  );
 
   if (!data) return null;
-
+  // @Todo: how to handle this error in the calling function ?
   if (error) throw error;
 
-  const alias = data.info.alias;
-  const { balance: resBalance, currency } = data.balance;
-  const name = data.name;
-  const balance =
-    typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
-
-  return {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    id: id!,
-    name,
-    alias,
-    balance,
-    currency: currency || "BTC", // set default currency for every account
-  };
+  return buildAccountInfo(id, data);
 };
 
+// revalidation (mark the data as expired and trigger a refetch) for the resource
 export const mutateAccountInfo = async (
   id: string | null
 ): Promise<AccountInfo | null> => {
-  const data = await mutate(getAccountInfoKey(id), getAccountInfo);
-
+  const data = await mutate<AccountInfoRes>(
+    getAccountInfoKey(id),
+    getAccountInfo
+  );
   if (!data) return null;
 
+  return buildAccountInfo(id, data);
+};
+
+const buildAccountInfo = (
+  id: string | null,
+  data: AccountInfoRes
+): AccountInfo => {
   const alias = data.info.alias;
   const { balance: resBalance, currency } = data.balance;
   const name = data.name;
@@ -166,9 +119,11 @@ export const setSetting = (setting: MessageSettingsSet["args"]["setting"]) =>
     setting,
   });
 export const removeAccount = (id: string) =>
+  // @Todo: maybe remove Promise.all
   Promise.all([
     msg.request("removeAccount", { id }),
-    removeAccountFromCache(id),
+    // @Todo: how to remove account from swr cache?
+    // @Todo swr dows say "mutate(key)" will mark the data as expired and trigger a refetch for the resource
   ]);
 export const unlock = (password: string) =>
   msg.request<UnlockRes>("unlock", { password });
@@ -198,8 +153,7 @@ export default {
   connectPeer,
   setSetting,
   swr: {
-    getAccountInfo: swrGetAccountInfo,
-    useSwrGetAccountInfoTest: useSwrGetAccountInfoTest,
+    useAccountInfoCached: useAccountInfoCached,
     mutateAccountInfo: mutateAccountInfo,
   },
   removeAccount,

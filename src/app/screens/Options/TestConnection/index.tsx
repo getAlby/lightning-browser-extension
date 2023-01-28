@@ -67,7 +67,7 @@ export default function TestConnection() {
 
   const fetchAccountInfo = async () => {
     const id = currentAccountId || null;
-    const currenAccountInfo = await api.swr.useSwrGetAccountInfoTest(id);
+    const currenAccountInfo = await api.swr.useAccountInfoCached(id);
     if (currenAccountInfo) setAccountInfo(currenAccountInfo);
   };
 

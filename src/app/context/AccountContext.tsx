@@ -98,7 +98,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
 
   // hook: will be called each round, pass "id = null" to skip
   const fetchAccountInfo = async () => {
-    const accountInfo = await api.swr.useSwrGetAccountInfoTest(
+    const accountInfo = await api.swr.useAccountInfoCached(
       getIdIfShouldFetch()
     );
     if (!accountInfo) return;
