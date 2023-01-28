@@ -109,7 +109,7 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-react": "^7.32.1",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "fake-indexeddb": "^3.1.8",
+    "fake-indexeddb": "^4.0.1",
     "filemanager-webpack-plugin": "^8.0.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.3",
