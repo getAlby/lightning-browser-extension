@@ -53,9 +53,9 @@ function AccountsScreen() {
   }
 
   async function selectAccount(accountId: string) {
-    auth.setAccountId(accountId);
+    // @Todo: should we move api.selectAccount to setAccountId
     await api.selectAccount(accountId);
-    auth.fetchAccountInfo({ accountId });
+    auth.setAccountId(accountId);
   }
 
   async function updateAccountName({ id, name }: AccountAction) {
@@ -64,7 +64,7 @@ function AccountsScreen() {
       id,
     });
 
-    auth.fetchAccountInfo(); // Update active account name
+    auth.updateAccountInfo(); // Update active account name
     getAccounts(); // update all accounts
     closeEditModal();
   }

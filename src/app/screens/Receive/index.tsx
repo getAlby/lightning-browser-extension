@@ -92,7 +92,7 @@ function Receive() {
     })
       .then(() => {
         setPaid(true);
-        auth.fetchAccountInfo(); // Update balance.
+        auth.updateAccountInfo(); // Update balance.
       })
       .catch((err) => console.error(err))
       .finally(() => {

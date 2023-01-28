@@ -67,7 +67,7 @@ function Keysend() {
         })
       );
 
-      auth.fetchAccountInfo(); // Update balance.
+      auth.updateAccountInfo(); // Update balance.
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {

@@ -86,7 +86,7 @@ function ConfirmPayment() {
           origin: navState.origin,
         }
       );
-      auth.fetchAccountInfo(); // Update balance.
+      auth.updateAccountInfo(); // Update balance.
       msg.reply(response);
 
       setSuccessMessage(

@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import {
   ConnectPeerArgs,
@@ -40,7 +40,7 @@ export interface StatusRes {
   currentAccountId: string;
 }
 
-interface UnlockRes {
+export interface UnlockRes {
   currentAccountId: string;
 }
 
@@ -50,6 +50,10 @@ interface BlocklistRes {
 
 export const getAccountInfo = (): Promise<AccountInfoRes> =>
   msg.request<AccountInfoRes>("accountInfo");
+
+export const getAccountInfoKey = (
+  id: string | null | undefined
+): string | null => (id ? `accountInfo/${id}` : null);
 
 /**
  * stale-while-revalidate get account info
@@ -97,12 +101,34 @@ export const swrGetAccountInfo = async (
 export const useSwrGetAccountInfoTest = async (
   id: string | null
 ): Promise<AccountInfo | null> => {
-  const key = id ? "accountInfo/" + id : null;
-  const { data, error } = await useSWR(key, getAccountInfo);
+  const { data, error } = await useSWR(getAccountInfoKey(id), getAccountInfo);
 
   if (!data) return null;
 
   if (error) throw error;
+
+  const alias = data.info.alias;
+  const { balance: resBalance, currency } = data.balance;
+  const name = data.name;
+  const balance =
+    typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
+
+  return {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    id: id!,
+    name,
+    alias,
+    balance,
+    currency: currency || "BTC", // set default currency for every account
+  };
+};
+
+export const mutateAccountInfo = async (
+  id: string | null
+): Promise<AccountInfo | null> => {
+  const data = await mutate(getAccountInfoKey(id), getAccountInfo);
+
+  if (!data) return null;
 
   const alias = data.info.alias;
   const { balance: resBalance, currency } = data.balance;
@@ -174,6 +200,7 @@ export default {
   swr: {
     getAccountInfo: swrGetAccountInfo,
     useSwrGetAccountInfoTest: useSwrGetAccountInfoTest,
+    mutateAccountInfo: mutateAccountInfo,
   },
   removeAccount,
   unlock,

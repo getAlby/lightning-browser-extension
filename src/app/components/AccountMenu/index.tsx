@@ -26,7 +26,6 @@ function AccountMenu({ showOptions = true }: Props) {
 
   const {
     setAccountId,
-    fetchAccountInfo,
     account: authAccount,
     balancesDecorated,
   } = useAccount();
@@ -48,11 +47,12 @@ function AccountMenu({ showOptions = true }: Props) {
   async function selectAccount(accountId: string) {
     setLoading(true);
     try {
-      setAccountId(accountId);
+      // @Todo: should we move api.selectAccount to setAccountId
       await msg.request("selectAccount", {
         id: accountId,
       });
-      await fetchAccountInfo({ accountId });
+
+      setAccountId(accountId);
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);

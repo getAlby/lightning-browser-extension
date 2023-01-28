@@ -7,15 +7,10 @@ import {
 } from "react";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
-import api, { StatusRes } from "~/common/lib/api";
+import api, { StatusRes, UnlockRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import type { AccountInfo } from "~/types";
-
-interface AccountInfoData extends AccountInfo {
-  fiatBalance: string;
-  accountBalance: string;
-}
 
 interface AccountContextType {
   account: Partial<AccountInfo> | null;
@@ -31,11 +26,9 @@ interface AccountContextType {
    */
   setAccountId: (id: string) => void;
   /**
-   * Fetch the additional account info: alias/balance and update account
+   * revalidation (mark the data as expired and trigger a refetch) for the resource
    */
-  fetchAccountInfo: (options?: {
-    accountId?: string;
-  }) => Promise<AccountInfoData | undefined>;
+  updateAccountInfo: () => Promise<void>;
 }
 
 const AccountContext = createContext({} as AccountContextType);
@@ -52,17 +45,23 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [accountBalance, setAccountBalance] = useState("");
   const [fiatBalance, setFiatBalance] = useState("");
-  const [status, setStatus] = useState<StatusRes>();
-  const [shouldFetchAccountInfo, setShouldFetchAccountInfo] = useState(false);
+  const [, setStatus] = useState<StatusRes>();
 
   const isSatsAccount = account?.currency === "BTC"; // show fiatValue only if the base currency is not already fiat
   const showFiat =
     !isLoadingSettings && settings.showFiat && !loading && isSatsAccount;
 
+  const updateFiatValue = useCallback(
+    async (balance: string | number) => {
+      const fiat = await getFormattedFiat(balance);
+      setFiatBalance(fiat);
+    },
+    [getFormattedFiat]
+  );
+
   const unlock = (password: string, callback: VoidFunction) => {
-    return api.unlock(password).then((response) => {
-      setAccountId(response.currentAccountId);
-      fetchAccountInfo({ accountId: response.currentAccountId });
+    return api.unlock(password).then(({ currentAccountId }: UnlockRes) => {
+      setAccountId(currentAccountId);
 
       // callback - e.g. navigate to the requested route after unlocking
       callback();
@@ -76,15 +75,18 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
-  const setAccountId = (id: string) => setAccount({ id });
+  const setAccountId = async (id: string) => {
+    setAccount({ id });
+  };
 
-  const updateFiatValue = useCallback(
-    async (balance: string | number) => {
-      const fiat = await getFormattedFiat(balance);
-      setFiatBalance(fiat);
-    },
-    [getFormattedFiat]
-  );
+  const updateAccountInfo = async () => {
+    const accountInfo = await api.swr.mutateAccountInfo(account?.id || null);
+    if (accountInfo) {
+      // eslint-disable-next-line
+      setAccount(accountInfo as any);
+      updateAccountBalance(accountInfo.balance, accountInfo.currency);
+    }
+  };
 
   const updateAccountBalance = (
     amount: number,
@@ -94,40 +96,23 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     setAccountBalance(balance);
   };
 
-  // const fetchAccountInfo = async (options?: { accountId?: string }) => {
-  //   const id = options?.accountId || account?.id;
-  //   if (!id) return;
-  //
-  //   const callback = (accountRes: AccountInfo) => {
-  //     setAccount(accountRes);
-  //     updateAccountBalance(accountRes.balance, accountRes.currency);
-  //   };
-  //
-  //   const accountInfo = await api.swr.getAccountInfo(id, callback);
-  //
-  //   return { ...accountInfo, fiatBalance, accountBalance };
-  // };
+  // hook: will be called each round, pass "id = null" to skip
+  const fetchAccountInfo = async () => {
+    const accountInfo = await api.swr.useSwrGetAccountInfoTest(
+      getIdIfShouldFetch()
+    );
+    if (!accountInfo) return;
 
-  const fetchAccountInfo = async (options?: {
-    accountId?: string | null;
-  }): Promise<AccountInfoData> => {
-    const id = options?.accountId || null;
-
-    const accountInfo = await api.swr.useSwrGetAccountInfoTest(id);
-
-    if (accountInfo) {
-      // eslint-disable-next-line
-      setAccount(accountInfo as any);
-      updateAccountBalance(accountInfo.balance, accountInfo.currency);
-    }
-
-    return { ...accountInfo, fiatBalance, accountBalance } as AccountInfoData;
+    setAccount(accountInfo);
+    updateAccountBalance(accountInfo.balance, accountInfo.currency);
   };
 
-  const maybeGetAccountId = () => {
-    return !account?.name && shouldFetchAccountInfo
-      ? status?.currentAccountId || null
-      : null;
+  /**
+   * implicitly determines if data should be fetched
+   * if new account was selected, only "id" prop is available, and name is missing
+   */
+  const getIdIfShouldFetch = () => {
+    return !account?.name ? account?.id || null : null;
   };
 
   const handleGetStatus = (status: StatusRes) => {
@@ -141,27 +126,20 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
         utils.redirectPage("options.html");
       }
       setAccountId(status.currentAccountId);
-      setShouldFetchAccountInfo(true);
     } else {
       setAccount(null);
     }
   };
 
-  fetchAccountInfo({ accountId: maybeGetAccountId() });
+  fetchAccountInfo();
 
   // Invoked only on on mount.
   useEffect(() => {
     api
       .getStatus()
-      .then((status: StatusRes) => {
-        handleGetStatus(status);
-      })
-      .catch((e) => {
-        toast.error(`An unexpected error occurred (${e.message})`);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+      .then((status: StatusRes) => handleGetStatus(status))
+      .catch((e) => toast.error(`An unexpected error occurred (${e.message})`))
+      .finally(() => setLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -187,7 +165,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
       accountBalance,
       fiatBalance,
     },
-    fetchAccountInfo,
+    updateAccountInfo,
     loading,
     lock,
     setAccountId,

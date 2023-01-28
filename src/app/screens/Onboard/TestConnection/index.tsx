@@ -17,7 +17,7 @@ export default function TestConnection() {
 
   const navigate = useNavigate();
 
-  async function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
+  async function handleEdit(_: React.MouseEvent<HTMLButtonElement>) {
     await msg.request("removeAccount");
     navigate(-1);
   }

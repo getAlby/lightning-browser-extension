@@ -191,7 +191,7 @@ function LNURLPay() {
         setSuccessAction({ tag: "message", message: t("success") });
       }
 
-      auth.fetchAccountInfo(); // Update balance.
+      auth.updateAccountInfo(); // Update balance.
 
       // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the payment response. This closes the window which means the user will NOT see the above successAction.
       // We assume this is OK when it is called through webln.

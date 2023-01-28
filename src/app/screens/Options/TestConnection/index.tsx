@@ -16,12 +16,7 @@ export default function TestConnection() {
   const auth = useAccount();
   const { getAccounts } = useAccounts();
 
-  const [accountInfo, setAccountInfo] = useState<{
-    alias: AccountInfo["alias"];
-    name: AccountInfo["name"];
-    balance: AccountInfo["balance"];
-    currency: AccountInfo["currency"];
-  }>();
+  const [accountInfo, setAccountInfo] = useState<Partial<AccountInfo>>();
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -44,16 +39,18 @@ export default function TestConnection() {
     }, 45000);
     try {
       const { currentAccountId } = await api.getStatus();
-      auth.setAccountId(currentAccountId);
-      const accountInfo = await auth.fetchAccountInfo({
-        accountId: currentAccountId,
+      // @Todo: should we move api.selectAccount to setAccountId
+      await msg.request("selectAccount", {
+        id: currentAccountId,
       });
-      if (accountInfo) {
+      auth.setAccountId(currentAccountId);
+
+      if (auth.account) {
         setAccountInfo({
-          alias: accountInfo.alias,
-          balance: accountInfo.balance,
-          currency: accountInfo.currency,
-          name: accountInfo.name,
+          alias: auth.account.alias,
+          balance: auth.account.balance,
+          currency: auth.account.currency,
+          name: auth.account.name,
         });
       }
       getAccounts();
