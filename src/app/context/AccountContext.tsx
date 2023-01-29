@@ -6,15 +6,10 @@ import {
   useCallback,
 } from "react";
 import { toast } from "react-toastify";
-import useSWR from "swr";
 import { useSettings } from "~/app/context/SettingsContext";
+import { useSelectedAccount } from "~/app/hooks/useSelectedAccount";
 import { ACCOUNT_DEFAULT_CURRENCY } from "~/common/constants";
-import api, {
-  AccountInfoRes,
-  getAccountInfo,
-  StatusRes,
-  UnlockRes,
-} from "~/common/lib/api";
+import api, { AccountInfoRes, StatusRes, UnlockRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import type { AccountInfo } from "~/types";
@@ -78,10 +73,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   const [fiatBalance, setFiatBalance] = useState("");
   const [, setStatus] = useState<StatusRes>();
 
-  const { data: accountInfoRes, mutate } = useSWR<AccountInfoRes>(
-    getAccountInfoKey(account?.id),
-    getAccountInfo
-  );
+  const { accountInfo, mutateAccountInfo } = useSelectedAccount(account?.id);
 
   const isSatsAccount = account?.currency === "BTC"; // show fiatValue only if the base currency is not already fiat
   const showFiat =
@@ -116,17 +108,16 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   };
 
   const refetchAccountInfo = async () => {
-    if (typeof mutate !== "function") return;
-    const data = await mutate();
-    setAccountData(account?.id, data);
+    const data = await mutateAccountInfo();
+    setAccountAndBalance(data);
   };
 
   const updateAccountBalance = (
-    amount: number,
+    amount?: number,
     currency?: AccountInfo["currency"]
   ) => {
-    const balance = getFormattedInCurrency(amount, currency);
-    setAccountBalance(balance);
+    amount = amount || 0;
+    setAccountBalance(getFormattedInCurrency(amount, currency));
   };
 
   const handleGetStatus = (status: StatusRes) => {
@@ -145,21 +136,17 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const setAccountData = (
-    id: string | undefined,
-    accountInfoRes: AccountInfoRes | undefined
-  ) => {
-    if (id && accountInfoRes) {
-      const accountInfo = buildAccountInfo(id, accountInfoRes);
+  const setAccountAndBalance = (accountInfo: AccountInfo | null) => {
+    if (accountInfo?.name) {
       setAccount(accountInfo);
-      updateAccountBalance(accountInfo.balance, accountInfo.currency);
+      updateAccountBalance(accountInfo?.balance, accountInfo?.currency);
     }
   };
 
   useEffect(() => {
-    setAccountData(account?.id, accountInfoRes);
+    setAccountAndBalance(accountInfo);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accountInfoRes]);
+  }, [accountInfo]);
 
   // Invoked only on on mount.
   useEffect(() => {
