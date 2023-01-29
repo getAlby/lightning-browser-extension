@@ -73,7 +73,7 @@ function AccountMenu({ showOptions = true }: Props) {
   }
 
   return (
-    <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-surface-12dp max-w-full">
+    <div className="relative pl-2 w-72 flex bg-gray-100 rounded-md dark:bg-surface-12dp">
       <div className="flex items-center">
         <Avvvatars value={authAccount?.name || ""} style={"shape"} />
       </div>
@@ -112,7 +112,7 @@ function AccountMenu({ showOptions = true }: Props) {
           <span className="sr-only">{t("screen_reader")}</span>
         </Menu.Button>
 
-        <Menu.List position="left">
+        <Menu.List position="left" fullWidth>
           <Menu.Subheader>{t("title")}</Menu.Subheader>
 
           {Object.keys(accounts).map((accountId) => {
@@ -135,7 +135,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 {accountId === authAccount?.id && (
                   <span
                     data-testid="selected"
-                    className="ml-auto w-3.5 h-3.5 rounded-full bg-orange-bitcoin flex justify-center items-center shrink-0"
+                    className="ml-auto flex-shrink-0 w-3.5 h-3.5 rounded-full bg-orange-bitcoin flex justify-center items-center"
                   >
                     <CheckIcon className="w-3 h-3 text-white" />
                   </span>
