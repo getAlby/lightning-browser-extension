@@ -1,7 +1,6 @@
 import {
   EllipsisIcon,
   PlusIcon,
-  WalletIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
@@ -9,6 +8,7 @@ import Container from "@components/Container";
 import Loading from "@components/Loading";
 import Menu from "@components/Menu";
 import TextField from "@components/form/TextField";
+import Avvvatars from "avvvatars-react";
 import type { FormEvent } from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -131,8 +131,12 @@ function AccountsScreen() {
                 <tr key={accountId}>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <div className="w-12 h-12 flex justify-center items-center rounded-full bg-orange-bitcoin-50">
-                        <WalletIcon className="w-8 h-8 text-black" />
+                      <div className="w-12 h-12 flex justify-center items-center">
+                        <Avvvatars
+                          value={account.name}
+                          style={"shape"}
+                          size={48}
+                        />
                       </div>
                       <div className="ml-4">
                         <h3 className="font-bold text-gray-900 dark:text-white break-all whitespace-normal max-w-xs md:max-w-lg xl:max-w-2xl">

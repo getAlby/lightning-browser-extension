@@ -4,6 +4,7 @@ import ConnectEclair from "@screens/connectors/ConnectEclair";
 import ConnectGaloy, { galoyUrls } from "@screens/connectors/ConnectGaloy";
 import ConnectKollider from "@screens/connectors/ConnectKollider";
 import ConnectLnbits from "@screens/connectors/ConnectLnbits";
+import ConnectLnc from "@screens/connectors/ConnectLnc";
 import ConnectLnd from "@screens/connectors/ConnectLnd";
 import ConnectLndHub from "@screens/connectors/ConnectLndHub";
 import ConnectMyNode from "@screens/connectors/ConnectMyNode";
@@ -40,6 +41,12 @@ function getConnectorRoutes() {
       path: "lnd",
       element: <ConnectLnd />,
       title: i18n.t("translation:choose_connector.lnd.title"),
+      logo: lnd,
+    },
+    {
+      path: "lnc",
+      element: <ConnectLnc />,
+      title: i18n.t("translation:choose_connector.lnc.title"),
       logo: lnd,
     },
     {
