@@ -104,6 +104,35 @@
     ]
   },
   {
+    "title": "nostr",
+    "items": [
+      {
+        "title": "Astral",
+        "subtitle": "A Twitter-like client with chat and one-click payments.",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/astral_thumbnail.png",
+        "url": "https://astral.ninja/"
+      },
+      {
+        "title": "Snort",
+        "subtitle": "Fast nostr web client.",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/snort_thumbnail.png",
+        "url": "https://snort.social"
+      },
+      {
+        "title": "emon.chat",
+        "subtitle": "Instant messaging client with built in lightning payments.",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/emon_thumbnail.svg",
+        "url": "https://emon.chat/"
+      },
+      {
+        "title": "Yo, Sup?",
+        "subtitle": "The blue bird experience for Nostr.",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/yosup_thumbnail.svg",
+        "url": "https://yosup.app/"
+      }
+    ]
+  },
+  {
     "title": "miscellaneous",
     "items": [
       {
@@ -153,6 +182,12 @@
         "subtitle": "Get booked and paid in Bitcoin",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lncal_thumbnail.svg",
         "url": "https://lncal.com/"
+      },
+      {
+        "title": "channel.ninja",
+        "subtitle": "Get recommended channel partners for your lightning node",
+        "logo": "https://fra1.digitaloceanspaces.com/alby-storage/alby-extension-website-screen/channelninja.png",
+        "url": "https://channel.ninja/"
       }
     ]
   }

@@ -3,7 +3,7 @@ import utils from "~/common/lib/utils";
 
 import { ExtensionIcon, setIcon } from "./actions/setup/setIcon";
 import connectors from "./connectors";
-import db from "./db";
+import { isIndexedDbAvailable, db } from "./db";
 import * as events from "./events";
 import migrate from "./migrations";
 import { router } from "./router";
@@ -123,7 +123,14 @@ async function init() {
   await state.getState().init();
   console.info("State loaded");
 
-  await db.open();
+  const dbAvailable = await isIndexedDbAvailable();
+  if (dbAvailable) {
+    console.info("Using indexedDB");
+    await db.open();
+  } else {
+    console.info("Using in memory DB");
+    await db.openWithInMemoryDB();
+  }
   console.info("DB opened");
 
   events.subscribe();
@@ -158,7 +165,7 @@ browser.runtime.onInstalled.addListener(handleInstalled);
 
 console.info("Welcome to Alby");
 init().then(() => {
-  if (isFirstInstalled) {
+  if (isFirstInstalled && !state.getState().getAccount()) {
     utils.openUrl("welcome.html");
   }
   if (isRecentlyUpdated) {
