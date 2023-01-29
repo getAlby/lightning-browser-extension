@@ -182,6 +182,12 @@
         "subtitle": "Get booked and paid in Bitcoin",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lncal_thumbnail.svg",
         "url": "https://lncal.com/"
+      },
+      {
+        "title": "channel.ninja",
+        "subtitle": "Get recommended channel partners for your lightning node",
+        "logo": "https://fra1.digitaloceanspaces.com/alby-storage/alby-extension-website-screen/channelninja.png",
+        "url": "https://channel.ninja/"
       }
     ]
   }
