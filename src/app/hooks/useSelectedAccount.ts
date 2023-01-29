@@ -35,9 +35,8 @@ export function useSelectedAccount(id: string | undefined) {
     getAccountInfo
   );
 
-  const mutateAccountInfo = async () => {
-    const data = await mutate();
-    return buildAccountInfo(id, data);
+  const mutateAccountInfo = () => {
+    mutate();
   };
 
   // memoize, to keep useSWR memoized behaviour after creating a new object here

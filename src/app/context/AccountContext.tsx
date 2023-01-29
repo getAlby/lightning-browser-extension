@@ -29,7 +29,7 @@ interface AccountContextType {
   /**
    * revalidation (mark the data as expired and trigger a refetch) for the resource
    */
-  refetchAccountInfo: () => Promise<void>;
+  refetchAccountInfo: () => void;
 }
 
 const AccountContext = createContext({} as AccountContextType);
@@ -82,9 +82,8 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     setAccount({ id });
   };
 
-  const refetchAccountInfo = async () => {
-    const data = await mutateAccountInfo();
-    setAccountAndBalance(data);
+  const refetchAccountInfo = () => {
+    mutateAccountInfo();
   };
 
   const updateAccountBalance = (
