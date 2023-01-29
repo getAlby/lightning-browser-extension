@@ -130,7 +130,7 @@ function LNURLPay() {
         );
 
         if (response.status >= 500) {
-          toast.error("Payment aborted: Could not connect to server");
+          toast.error("Payment aborted: Recipient server error");
           return;
         }
 
