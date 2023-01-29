@@ -235,11 +235,7 @@ function AccountScreen() {
       {account && (
         <Container>
           <div className="flex justify-between items-center pt-8 pb-4">
-            <dl>
-              <dt className="text-sm font-medium text-gray-500">
-                {t("title")}
-              </dt>
-            </dl>
+            <h2 className="text-2xl font-bold dark:text-white">{t("title")}</h2>
 
             {account.connector === "lndhub" && (
               <div
