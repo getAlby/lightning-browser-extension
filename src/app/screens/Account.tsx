@@ -108,7 +108,8 @@ function AccountScreen() {
 
   function generatePublicKey(priv: string) {
     const nostr = new Nostr(priv);
-    return nostr.getPublicKey();
+    const pubkeyHex = nostr.getPublicKey();
+    return nostrlib.hexToNip19(pubkeyHex, "npub");
   }
 
   async function generateNostrPrivateKey(random?: boolean) {
