@@ -4,31 +4,22 @@ import Loading from "@components/Loading";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import useSWR from "swr";
-import {
-  buildAccountInfo,
-  getAccountInfoKey,
-  useAccount,
-} from "~/app/context/AccountContext";
+import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
-import api, { AccountInfoRes, getAccountInfo } from "~/common/lib/api";
+import { useSelectedAccount } from "~/app/hooks/useSelectedAccount";
+import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import { AccountInfo } from "~/types";
 
 export default function TestConnection() {
   const { getFormattedInCurrency } = useSettings();
   const { getAccounts } = useAccounts();
   const { setAccountId } = useAccount();
 
-  const [accountInfo, setAccountInfo] = useState<Partial<AccountInfo>>();
   const [currentAccountId, setCurrentAccountId] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const { data: accountInfoRes } = useSWR<AccountInfoRes>(
-    getAccountInfoKey(currentAccountId),
-    getAccountInfo
-  );
+  const { accountInfo } = useSelectedAccount(currentAccountId);
 
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
@@ -78,13 +69,6 @@ export default function TestConnection() {
     loadAccountInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    if (currentAccountId && accountInfoRes) {
-      setAccountInfo(buildAccountInfo(currentAccountId, accountInfoRes));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accountInfoRes]);
 
   return (
     <div>

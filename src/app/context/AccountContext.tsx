@@ -8,8 +8,7 @@ import {
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useSelectedAccount } from "~/app/hooks/useSelectedAccount";
-import { ACCOUNT_DEFAULT_CURRENCY } from "~/common/constants";
-import api, { AccountInfoRes, StatusRes, UnlockRes } from "~/common/lib/api";
+import api, { StatusRes, UnlockRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import type { AccountInfo } from "~/types";
@@ -34,30 +33,6 @@ interface AccountContextType {
 }
 
 const AccountContext = createContext({} as AccountContextType);
-
-export const getAccountInfoKey = (
-  id: string | null | undefined
-): string | null => (id ? `accountInfo/${id}` : null);
-
-export const buildAccountInfo = (
-  id: string,
-  data: AccountInfoRes
-): AccountInfo => {
-  const alias = data.info.alias;
-  const { balance: resBalance, currency = ACCOUNT_DEFAULT_CURRENCY } =
-    data.balance;
-  const name = data.name;
-  const balance =
-    typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
-
-  return {
-    id,
-    name,
-    alias,
-    balance,
-    currency,
-  };
-};
 
 export function AccountProvider({ children }: { children: React.ReactNode }) {
   const {
