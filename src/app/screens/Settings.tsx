@@ -14,8 +14,8 @@ import TextField from "@components/form/TextField";
 import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
 import type { FormEvent } from "react";
-import { useState, useEffect } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { useEffect, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -77,11 +77,17 @@ function Settings() {
   }
 
   async function updateAccountPassword(password: string) {
-    await msg.request("changePassword", {
-      password: formData.password,
-    });
-    toast.success(t("change_password.success"));
-    closeModal();
+    try {
+      await msg.request("changePassword", {
+        password: formData.password,
+      });
+
+      toast.success(t("change_password.success"));
+      closeModal();
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) toast.error(`An unexpected error occurred`);
+    }
   }
 
   async function saveSetting(
