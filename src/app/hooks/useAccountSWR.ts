@@ -29,15 +29,11 @@ const buildAccountInfo = (
   };
 };
 
-export function useSelectedAccount(id: string | undefined) {
-  const { data, mutate } = useSWR<AccountInfoRes>(
+export function useAccountSWR(id: string | undefined) {
+  const { data, mutate: mutateAccountInfo } = useSWR<AccountInfoRes>(
     getAccountInfoKey(id),
     getAccountInfo
   );
-
-  const mutateAccountInfo = () => {
-    mutate();
-  };
 
   // memoize, to keep useSWR memoized behaviour (prevent rerender) after creating a new object here
   const accountInfo = useMemo(() => buildAccountInfo(id, data), [id, data]);

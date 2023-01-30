@@ -7,7 +7,7 @@ import {
 } from "react";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
-import { useSelectedAccount } from "~/app/hooks/useSelectedAccount";
+import { useAccountSWR } from "~/app/hooks/useAccountSWR";
 import api, { StatusRes, UnlockRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -48,7 +48,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   const [fiatBalance, setFiatBalance] = useState("");
   const [, setStatus] = useState<StatusRes>();
 
-  const { accountInfo, mutateAccountInfo } = useSelectedAccount(account?.id);
+  const { accountInfo, mutateAccountInfo } = useAccountSWR(account?.id);
 
   const isSatsAccount = account?.currency === "BTC"; // show fiatValue only if the base currency is not already fiat
   const showFiat =

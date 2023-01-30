@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
-import { useSelectedAccount } from "~/app/hooks/useSelectedAccount";
+import { useAccountSWR } from "~/app/hooks/useAccountSWR";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 
@@ -19,7 +19,7 @@ export default function TestConnection() {
   const [currentAccountId, setCurrentAccountId] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const { accountInfo } = useSelectedAccount(currentAccountId);
+  const { accountInfo } = useAccountSWR(currentAccountId);
 
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
