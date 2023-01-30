@@ -1,10 +1,10 @@
-import Avvvatars from "avvvatars-react";
 import {
   CaretRightIcon,
   PlusIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import Container from "@components/Container";
+import Avvvatars from "avvvatars-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useAccounts } from "~/app/context/AccountsContext";
