@@ -122,7 +122,12 @@ function AccountMenu({ showOptions = true }: Props) {
                 onClick={() => {
                   selectAccount(accountId);
                 }}
-                disabled={loading}
+                disabled={loading || accountId === authAccount?.id}
+                disabledClassName={
+                  accountId === authAccount?.id
+                    ? "cursor-default"
+                    : "cursor-not-allowed"
+                }
                 title={account.name}
               >
                 <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 shrink-0 opacity-75 text-gray-700 dark:text-neutral-300" />

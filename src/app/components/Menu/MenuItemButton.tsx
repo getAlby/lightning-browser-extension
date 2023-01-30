@@ -5,6 +5,7 @@ type Props = {
   children: React.ReactNode;
   danger?: boolean;
   disabled?: boolean;
+  disabledClassName?: string;
   onClick: () => void;
   title?: string;
 };
@@ -13,6 +14,7 @@ function MenuItemButton({
   children,
   danger = false,
   disabled = false,
+  disabledClassName = "cursor-not-allowed",
   onClick,
   title = "",
 }: Props) {
@@ -23,7 +25,7 @@ function MenuItemButton({
           className={classNames(
             active ? "bg-gray-100 dark:bg-white/10" : "",
             danger ? "text-red-700" : "text-gray-700",
-            disabled ? "cursor-not-allowed" : "cursor-pointer",
+            disabled ? disabledClassName : "cursor-pointer",
             "flex items-center block w-full text-left px-4 py-2 text-sm dark:text-white"
           )}
           disabled={disabled}

@@ -39,7 +39,7 @@ export function useSelectedAccount(id: string | undefined) {
     mutate();
   };
 
-  // memoize, to keep useSWR memoized behaviour after creating a new object here
+  // memoize, to keep useSWR memoized behaviour (prevent rerender) after creating a new object here
   const accountInfo = useMemo(() => buildAccountInfo(id, data), [id, data]);
 
   return {
