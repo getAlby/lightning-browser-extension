@@ -1,9 +1,10 @@
 import Container from "@components/Container";
 import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import { useSettings } from "~/app/context/SettingsContext";
 import msg from "~/common/lib/msg";
 import { Payment, Transaction } from "~/types";
 
@@ -12,9 +13,10 @@ function Transactions() {
     keyPrefix: "transactions",
   });
 
+  const { settings, getFormattedFiat } = useSettings();
   const [payments, setPayments] = useState<Transaction[]>([]);
 
-  async function fetchData() {
+  const fetchData = useCallback(async () => {
     try {
       const paymentsResponse = await msg.request<{
         payments: Payment[];
@@ -31,16 +33,23 @@ function Transactions() {
         })
       );
 
+      for (const transaction of transactions) {
+        const totalAmountFiat = settings.showFiat
+          ? await getFormattedFiat(transaction.totalAmount)
+          : "";
+        transaction.totalAmountFiat = totalAmountFiat;
+      }
+
       setPayments(transactions);
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
     }
-  }
+  }, [settings, getFormattedFiat]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <Container>
