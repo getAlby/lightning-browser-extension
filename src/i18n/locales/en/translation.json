@@ -404,9 +404,9 @@
             "label": "Public Key"
           },
           "generate_keys": {
-            "title": "Generate new Nostr Keys",
+            "title": "Generate new Nostr keys",
             "screen_reader": "Generate new nostr keys for your account",
-            "hint": "You can generate random set of Nostr keys or cryptographically derive keys from this Alby account. You will be able to derive the same set of keys from this account on every device.",
+            "hint": "You can generate a random set of Nostr keys or derive keys from this account details (using a signed canonical phrase).",
             "actions": {
               "random_keys": "Generate random keys",
               "derived_keys": "Derive keys from account"

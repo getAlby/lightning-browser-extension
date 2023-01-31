@@ -111,7 +111,7 @@ function AccountScreen() {
 
     if (!random && selectedAccount?.id !== id) {
       alert(
-        `Please match the account in the dropdown with this account to derive keys.`
+        `Please match the account in the account dropdown at the top with this account to derive keys.`
       );
       closeNostrKeyModal();
       return;
@@ -535,13 +535,13 @@ function AccountScreen() {
                   type="submit"
                   onClick={() => generateNostrPrivateKey(true)}
                   label={t("nostr.generate_keys.actions.random_keys")}
+                  primary
                   halfWidth
                 />
                 <Button
                   type="submit"
                   onClick={() => generateNostrPrivateKey()}
                   label={t("nostr.generate_keys.actions.derived_keys")}
-                  primary
                   halfWidth
                 />
               </div>
