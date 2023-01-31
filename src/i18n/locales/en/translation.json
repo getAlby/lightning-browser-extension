@@ -698,8 +698,8 @@
     },
     "transactions": {
       "title": "All transactions",
-      "description": "This page contains all transactions",
-      "list_empty": "No transactions available yet"
+      "description": "This page lists all transactions to websites, independent of the selected account.",
+      "list_empty": "No transactions available yet."
     }
   },
   "common": {
