@@ -12,7 +12,7 @@ import state from "./state";
 let isFirstInstalled = false;
 let isRecentlyUpdated = false;
 
-const debug = process.env.NODE_ENV || false;
+const debug = process.env.NODE_ENV === 'development';
 
 // when debugging is enabled in development mode a window.debugAlby object is defined that can be used within the console. This is the type interface for that
 declare global {
