@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { act } from "react-dom/test-utils";
 import { I18nextProvider } from "react-i18next";
@@ -69,7 +69,9 @@ describe("AccountMenu", () => {
 
     await screen.findByText("Switch account");
 
-    expect(screen.getByText("LND account")).toBeInTheDocument();
+    expect(
+      within(screen.getByRole("menu")).getByText("LND account")
+    ).toBeInTheDocument();
     expect(screen.getByText("Galoy account")).toBeInTheDocument();
     expect(screen.getByText("Add a new account")).toBeInTheDocument();
     expect(screen.getByText("Manage accounts")).toBeInTheDocument();
@@ -93,7 +95,9 @@ describe("AccountMenu", () => {
 
     // As we have set the active account as "LND account above"
     expect(
-      screen.getByTitle("LND account").querySelector('[data-testid="selected"]')
+      within(screen.getByRole("menu"))
+        .getByTitle("LND account")
+        .querySelector('[data-testid="selected"]')
     ).toBeInTheDocument();
   });
 
@@ -113,7 +117,9 @@ describe("AccountMenu", () => {
     });
     await screen.findByText("Switch account");
 
-    expect(screen.getByText("LND account")).toBeInTheDocument();
+    expect(
+      within(screen.getByRole("menu")).getByText("LND account")
+    ).toBeInTheDocument();
     expect(screen.getByText("Galoy account")).toBeInTheDocument();
     expect(screen.queryByText("Add a new account")).not.toBeInTheDocument();
     expect(screen.queryByText("Accounts")).not.toBeInTheDocument();
