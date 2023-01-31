@@ -22,7 +22,8 @@ function Publisher() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFormattedFiat,
+    getCurrencyRate,
+    getFormattedFiatFromRate,
     getFormattedNumber,
   } = useSettings();
 
@@ -49,11 +50,11 @@ function Publisher() {
           publisherLink: payment.location,
         }));
 
+        const rate = await getCurrencyRate();
         for (const payment of payments) {
-          const totalAmountFiat = settings.showFiat
-            ? await getFormattedFiat(payment.totalAmount)
+          payment.totalAmountFiat = settings.showFiat
+            ? getFormattedFiatFromRate(payment.totalAmount, rate)
             : "";
-          payment.totalAmountFiat = totalAmountFiat;
         }
         setPayments(payments);
       }
@@ -61,7 +62,7 @@ function Publisher() {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
     }
-  }, [id, settings.showFiat, getFormattedFiat]);
+  }, [id, settings.showFiat, getCurrencyRate, getFormattedFiatFromRate]);
 
   useEffect(() => {
     // Run once.

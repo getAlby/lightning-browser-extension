@@ -19,6 +19,8 @@ interface SettingsContextType {
   updateSetting: (setting: Setting) => void;
   isLoading: boolean;
   getFormattedFiat: (amount: number | string) => Promise<string>;
+  getCurrencyRate: () => Promise<number>;
+  getFormattedFiatFromRate: (amount: number | string, rate: number) => string;
   getFormattedSats: (amount: number | string) => string;
   getFormattedNumber: (amount: number | string) => string;
   getFormattedInCurrency: (
@@ -89,19 +91,21 @@ export const SettingsProvider = ({
   const getFormattedFiat = async (amount: number | string) => {
     try {
       const rate = await getCurrencyRate();
-      const value = getFormattedFiatUtil({
-        amount,
-        rate,
-        currency: settings.currency,
-        locale: settings.locale,
-      });
-
-      return value;
+      return getFormattedFiatFromRate(amount, rate);
     } catch (e) {
       console.error(e);
 
       return "??"; // show the user that something went wrong
     }
+  };
+
+  const getFormattedFiatFromRate = (amount: number | string, rate: number) => {
+    return getFormattedFiatUtil({
+      amount,
+      rate,
+      currency: settings.currency,
+      locale: settings.locale,
+    });
   };
 
   const getFormattedSats = (amount: number | string) => {
@@ -145,6 +149,8 @@ export const SettingsProvider = ({
 
   const value = {
     getFormattedFiat,
+    getFormattedFiatFromRate,
+    getCurrencyRate,
     getFormattedSats,
     getFormattedNumber,
     getFormattedInCurrency,
