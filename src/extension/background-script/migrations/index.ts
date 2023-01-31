@@ -62,7 +62,6 @@ const migrations = {
 
       state.setState({
         accounts,
-        nostrPrivateKey: null,
       });
     }
   },
