@@ -695,6 +695,11 @@
       "allow_sign": "Allow {{host}} to sign:",
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website."
+    },
+    "transactions": {
+      "title": "All transactions",
+      "description": "This page contains all transactions",
+      "list_empty": "No transactions available yet"
     }
   },
   "common": {
@@ -734,6 +739,7 @@
       "send": "Send",
       "save": "Save",
       "receive": "Receive",
+      "transactions": "Transactions",
       "close": "Close",
       "export": "Export",
       "remove": "Remove",
