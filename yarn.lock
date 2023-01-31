@@ -6288,10 +6288,10 @@ listr2@^5.0.5:
     "@lightninglabs/lnc-core" "0.2.1-alpha"
     crypto-js "4.1.1"
 
-lnmessage@^0.0.17:
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/lnmessage/-/lnmessage-0.0.17.tgz#e209a7ce7f6e88350a2886e62f0fb29b09da06b8"
-  integrity sha512-DZMXkw1yz+1mCldmnCksQ1Jcd4ALDfdY1gGEu4MoxGswLCeAv98OSfAP8cSLoGh3cSuZKR4lnwg9vwbTsm7SUQ==
+lnmessage@^0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/lnmessage/-/lnmessage-0.0.18.tgz#bb578a324bae85894bcea12011fe6f27a3021289"
+  integrity sha512-6uwPNajtVdgcE9wJ5DhWmlfrksXks68MnbsJrKRR+d000DG1asFmERPWDeofFSVmkYfDuCJFHA63h6miQV+P0Q==
   dependencies:
     buffer "^6.0.3"
     crypto-js "^4.1.1"
