@@ -9,6 +9,7 @@ import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
+import utils from "~/common/lib/utils";
 import type { AccountInfo } from "~/types";
 
 export default function TestConnection() {
@@ -121,7 +122,10 @@ export default function TestConnection() {
                 <div className="mt-6">
                   <Card
                     color="bg-gray-100"
-                    alias={`${accountInfo.name} - ${accountInfo.alias}`}
+                    alias={utils.getAccountNameWithAlias(
+                      accountInfo.name,
+                      accountInfo.alias
+                    )}
                     satoshis={
                       typeof accountInfo.balance === "number"
                         ? getFormattedInCurrency(

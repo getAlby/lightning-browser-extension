@@ -172,6 +172,15 @@ const utils = {
       return;
     }
   },
+  getAccountNameWithAlias(
+    accountName: string,
+    alias: string | undefined
+  ): string {
+    if (alias && accountName.indexOf(alias) < 0) {
+      return `${accountName} - ${alias}`;
+    }
+    return accountName;
+  },
 };
 
 export default utils;

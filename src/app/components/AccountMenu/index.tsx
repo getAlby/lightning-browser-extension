@@ -37,8 +37,7 @@ function AccountMenu({ showOptions = true }: Props) {
   // update title
   const title =
     !!authAccount?.name &&
-    typeof authAccount?.name === "string" &&
-    `${authAccount?.name} - ${authAccount?.alias}`;
+    utils.getAccountNameWithAlias(authAccount.name, authAccount.alias);
 
   useEffect(() => {
     getAccounts();

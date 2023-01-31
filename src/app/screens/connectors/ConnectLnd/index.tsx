@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
+import { ConnectorType, ValidateAccountResponse } from "~/types";
 
 const initialFormData = {
   url: "",
@@ -33,7 +34,7 @@ export default function ConnectLnd() {
     });
   }
 
-  function getConnectorType() {
+  function getConnectorType(): ConnectorType {
     if (formData.url.match(/\.onion/i) && !hasTorSupport) {
       return "nativelnd";
     }
@@ -60,10 +61,18 @@ export default function ConnectLnd() {
       if (account.connector === "nativelnd") {
         validation = { valid: true, error: "" };
       } else {
-        validation = await msg.request("validateAccount", account);
+        validation = await msg.request<ValidateAccountResponse>(
+          "validateAccount",
+          account
+        );
       }
 
       if (validation.valid) {
+        account.name = utils.getAccountNameWithAlias(
+          account.name,
+          validation.info?.data.alias
+        );
+
         const addResult = await msg.request("addAccount", account);
         if (addResult.accountId) {
           await msg.request("selectAccount", {

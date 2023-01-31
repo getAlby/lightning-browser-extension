@@ -3,6 +3,7 @@ import { ACCOUNT_CURRENCIES, CURRENCIES, TIPS } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
 import {
   ConnectorInvoice,
+  GetInfoResponse,
   SendPaymentResponse,
   WebLNNode,
 } from "~/extension/background-script/connectors/connector.interface";
@@ -684,3 +685,10 @@ export interface Invoice {
 }
 
 export type BrowserType = "chrome" | "firefox";
+
+export type ValidateAccountResponse =
+  | {
+      valid: true;
+      info: GetInfoResponse;
+    }
+  | { valid: false; error: string };
