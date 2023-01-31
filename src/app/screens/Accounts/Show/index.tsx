@@ -86,8 +86,6 @@ function AccountScreen() {
         })) as string;
         if (priv) {
           setCurrentPrivateKey(priv);
-          setNostrPrivateKey(nostrlib.hexToNip19(priv, "nsec"));
-          setNostrPublicKey(generatePublicKey(priv));
         }
       }
     } catch (e) {
@@ -151,10 +149,6 @@ function AccountScreen() {
       toast.success(t("nostr.private_key.successfully_removed"));
     }
     setCurrentPrivateKey(nostrPrivateKey);
-    setNostrPrivateKey(nostrPrivateKey);
-    setNostrPublicKey(
-      nostrPrivateKey ? generatePublicKey(nostrPrivateKey) : ""
-    );
   }
 
   async function updateAccountName({ id, name }: AccountAction) {
@@ -213,6 +207,15 @@ function AccountScreen() {
       hasFetchedData.current = true;
     }
   }, [fetchData, isLoadingSettings]);
+
+  useEffect(() => {
+    setNostrPublicKey(
+      currentPrivateKey ? generatePublicKey(currentPrivateKey) : ""
+    );
+    setNostrPrivateKey(
+      currentPrivateKey ? nostrlib.hexToNip19(currentPrivateKey, "nsec") : ""
+    );
+  }, [currentPrivateKey]);
 
   return !account ? (
     <div className="flex justify-center mt-5">
