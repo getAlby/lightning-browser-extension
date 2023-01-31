@@ -1,4 +1,7 @@
-import { ExportIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import {
+  CaretLeftIcon,
+  ExportIcon,
+} from "@bitcoin-design/bitcoin-icons-react/filled";
 import {
   CrossIcon,
   HiddenIcon,
@@ -6,9 +9,10 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import Container from "@components/Container";
+import Header from "@components/Header";
+import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
 import Setting from "@components/Setting";
-import Input from "@components/form/Input";
 import TextField from "@components/form/TextField";
 import Avvvatars from "avvvatars-react";
 import dayjs from "dayjs";
@@ -216,6 +220,15 @@ function AccountScreen() {
     </div>
   ) : (
     <div>
+      <Header
+        title={t("title1")}
+        headerLeft={
+          <IconButton
+            onClick={() => navigate(-1)}
+            icon={<CaretLeftIcon className="w-4 h-4" />}
+          />
+        }
+      />
       <div className="border-b border-gray-200 dark:border-neutral-500">
         <div className="flex-col justify-center p-4 flex items-center bg-white dark:bg-surface-02dp">
           <Avvvatars value={account.name} style={"shape"} size={80} shadow />
@@ -228,9 +241,26 @@ function AccountScreen() {
             </h2>
             <p
               title={account.connector}
-              className="text-gray-500 dark:text-gray-400 mb-2 line-clamp-2"
+              className="text-gray-500 dark:text-gray-400 mb-2 flex justify-center items-center"
             >
               {account.connector}
+              {account.connector === "lndhub" && (
+                <>
+                  <div className="mx-2 font-black text-sm">&middot;</div>
+                  <div
+                    className="text-sm font-medium flex items-center text-gray-500 hover:text-black transition-color duration-200 dark:hover:text-white cursor-pointer"
+                    onClick={() =>
+                      exportAccount({
+                        id: account.id,
+                        name: account.name,
+                      })
+                    }
+                  >
+                    <p>{t("actions.export")}</p>
+                    <ExportIcon className="h-6 w-6" />
+                  </div>
+                </>
+              )}
             </p>
           </div>
         </div>
@@ -238,22 +268,7 @@ function AccountScreen() {
 
       <Container>
         <div className="flex justify-between items-center pt-8 pb-4">
-          <h2 className="text-2xl font-bold dark:text-white">{t("title")}</h2>
-
-          {account.connector === "lndhub" && (
-            <div
-              className="text-sm font-medium flex items-center text-gray-500 hover:text-black transition-color duration-200 dark:hover:text-white cursor-pointer"
-              onClick={() =>
-                exportAccount({
-                  id: account.id,
-                  name: account.name,
-                })
-              }
-            >
-              <p>{t("actions.export")}</p>
-              <ExportIcon className="h-6 w-6" />
-            </div>
-          )}
+          <h2 className="text-2xl font-bold dark:text-white">{t("title2")}</h2>
 
           <Modal
             ariaHideApp={false}
@@ -320,13 +335,23 @@ function AccountScreen() {
 
         <div>
           <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
-            <Setting title={t("name.title")} subtitle={""}>
-              <div className="w-64">
-                <Input
-                  placeholder={t("name.placeholder")}
+            <div className="my-4 flex justify-between items-end">
+              <div className="w-7/12">
+                <TextField
+                  id="name"
+                  label={t("name.title")}
                   type="text"
                   value={accountName}
-                  onBlur={() => {
+                  onChange={(event) => {
+                    setAccountName(event.target.value);
+                  }}
+                />
+              </div>
+              <div className="w-1/5 flex-none mx-4 d-none"></div>
+              <div className="w-1/5 flex-none">
+                <Button
+                  label={tCommon("actions.save")}
+                  onClick={() => {
                     updateAccountName({
                       id: account.id,
                       name: accountName,
@@ -335,12 +360,12 @@ function AccountScreen() {
                     updatedAccount.name = accountName;
                     setAccount(updatedAccount);
                   }}
-                  onChange={(event) => {
-                    setAccountName(event.target.value);
-                  }}
+                  disabled={account.name === accountName}
+                  primary
+                  fullWidth
                 />
               </div>
-            </Setting>
+            </div>
           </div>
           <h2 className="text-2xl mt-12 font-bold dark:text-white">
             {t("nostr.title")}

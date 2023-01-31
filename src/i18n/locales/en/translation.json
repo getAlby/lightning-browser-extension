@@ -375,7 +375,8 @@
     "accounts": {
       "title": "Accounts",
       "account_view": {
-        "title": "Account Information",
+        "title1": "Account Information",
+        "title2": "Edit Account",
         "name": {
           "title": "Name",
           "placeholder": "Account Name"
