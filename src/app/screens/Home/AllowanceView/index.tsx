@@ -29,8 +29,9 @@ const AllowanceView: FC<Props> = (props) => {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFormattedFiat,
     getFormattedNumber,
+    getCurrencyRate,
+    getFormattedFiatFromRate,
   } = useSettings();
 
   const [payments, setPayments] = useState<Transaction[] | null>(null);
@@ -57,12 +58,12 @@ const AllowanceView: FC<Props> = (props) => {
       );
 
       try {
+        const rate = await getCurrencyRate();
         // attach fiatAmount if enabled
         for (const payment of payments) {
-          const totalAmountFiat = showFiat
-            ? await getFormattedFiat(payment.totalAmount)
+          payment.totalAmountFiat = showFiat
+            ? getFormattedFiatFromRate(payment.totalAmount, rate)
             : "";
-          payment.totalAmountFiat = totalAmountFiat;
         }
 
         setPayments(payments);
@@ -79,7 +80,8 @@ const AllowanceView: FC<Props> = (props) => {
     props.allowance,
     isLoadingSettings,
     payments,
-    getFormattedFiat,
+    getCurrencyRate,
+    getFormattedFiatFromRate,
     showFiat,
   ]);
 
