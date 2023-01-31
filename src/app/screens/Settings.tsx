@@ -86,7 +86,8 @@ function Settings() {
       closeModal();
     } catch (e) {
       console.error(e);
-      if (e instanceof Error) toast.error(`An unexpected error occurred`);
+      if (e instanceof Error)
+        toast.error(`An unexpected error occurred: ${e.message}`);
     }
   }
 
