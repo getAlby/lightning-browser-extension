@@ -55,7 +55,8 @@ const DefaultView: FC<Props> = (props) => {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFormattedFiat,
+    getCurrencyRate,
+    getFormattedFiatFromRate,
   } = useSettings();
 
   const showFiat = !isLoadingSettings && settings.showFiat;
@@ -90,11 +91,11 @@ const DefaultView: FC<Props> = (props) => {
       try {
         const payments = await loadPayments();
         // attach fiatAmount if enabled
+        const rate = await getCurrencyRate();
         for (const payment of payments) {
-          const totalAmountFiat = showFiat
-            ? await getFormattedFiat(payment.totalAmount)
+          payment.totalAmountFiat = showFiat
+            ? getFormattedFiatFromRate(payment.totalAmount, rate)
             : "";
-          payment.totalAmountFiat = totalAmountFiat;
         }
         setPayments(payments);
       } catch (e) {
@@ -106,7 +107,13 @@ const DefaultView: FC<Props> = (props) => {
     };
 
     !payments && !isLoadingSettings && getPayments();
-  }, [isLoadingSettings, payments, getFormattedFiat, showFiat]);
+  }, [
+    isLoadingSettings,
+    payments,
+    getCurrencyRate,
+    getFormattedFiatFromRate,
+    showFiat,
+  ]);
 
   const unblock = async () => {
     try {
@@ -152,11 +159,11 @@ const DefaultView: FC<Props> = (props) => {
       date: dayjs(invoice.settleDate).fromNow(),
     }));
 
+    const rate = await getCurrencyRate();
     for (const invoice of invoices) {
-      const totalAmountFiat = settings.showFiat
-        ? await getFormattedFiat(invoice.totalAmount)
+      invoice.totalAmountFiat = settings.showFiat
+        ? getFormattedFiatFromRate(invoice.totalAmount, rate)
         : "";
-      invoice.totalAmountFiat = totalAmountFiat;
     }
 
     setIncomingTransactions(invoices);
