@@ -7,10 +7,11 @@ import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
+import { ConnectorType } from "~/types";
 
 export default function ConnectCitadel() {
   const navigate = useNavigate();
@@ -32,7 +33,10 @@ export default function ConnectCitadel() {
     });
   }
 
-  function getConnectorType() {
+  function getConnectorType(): Extract<
+    ConnectorType,
+    "nativecitadel" | "citadel"
+  > {
     if (formData.url.match(/\.onion/i) && !hasTorSupport) {
       return "nativecitadel";
     }
@@ -66,8 +70,12 @@ export default function ConnectCitadel() {
         validation = await msg.request("validateAccount", account);
       }
       if (validation.valid) {
-        const addResult = await msg.request("addAccount", account);
-        if (addResult.accountId) {
+        const addResult = await msg.request("addAccount", {
+          connector: account.connector,
+          name: account.name,
+          config: account.config as unknown as string,
+        });
+        if (addResult) {
           await msg.request("selectAccount", {
             id: addResult.accountId,
           });

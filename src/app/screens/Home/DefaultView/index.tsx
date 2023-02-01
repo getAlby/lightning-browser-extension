@@ -145,12 +145,13 @@ const DefaultView: FC<Props> = (props) => {
       return;
     }
 
-    const invoices: Transaction[] = result.invoices.map((invoice) => ({
-      ...invoice,
-      title: invoice.memo,
-      description: invoice.memo,
-      date: dayjs(invoice.settleDate).fromNow(),
-    }));
+    const invoices: Transaction[] =
+      result?.invoices.map((invoice) => ({
+        ...invoice,
+        title: invoice.memo,
+        description: invoice.memo,
+        date: dayjs(invoice.settleDate).fromNow(),
+      })) ?? [];
 
     for (const invoice of invoices) {
       const totalAmountFiat = settings.showFiat

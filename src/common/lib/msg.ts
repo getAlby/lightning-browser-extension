@@ -1,11 +1,16 @@
 import browser from "webextension-polyfill";
+import {
+  ExtendedRouteArgs,
+  ExtendedRouteKey,
+  ExtendedRouteResponse,
+} from "~/extension/background-script/router";
 
 const msg = {
-  request: <T = Record<string, unknown>>(
-    action: string,
-    args?: Record<string, unknown>,
+  request: <K extends ExtendedRouteKey, T = ExtendedRouteResponse[K]>(
+    action: K,
+    args: ExtendedRouteArgs[K] = {},
     overwrites?: Record<string, unknown>
-  ) => {
+  ): Promise<T> => {
     return browser.runtime
       .sendMessage({
         application: "LBE",

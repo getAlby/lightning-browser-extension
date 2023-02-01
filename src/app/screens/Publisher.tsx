@@ -35,27 +35,29 @@ function Publisher() {
   const fetchData = useCallback(async () => {
     try {
       if (id) {
-        const response = await msg.request<Allowance>("getAllowanceById", {
+        const response = await msg.request("getAllowanceById", {
           id: parseInt(id),
         });
-        setAllowance(response);
+        if (response.enabled) {
+          setAllowance(response);
 
-        const payments: Transaction[] = response.payments.map((payment) => ({
-          ...payment,
-          id: `${payment.id}`,
-          type: "sent",
-          date: dayjs(payment.createdAt).fromNow(),
-          title: payment.name || payment.description,
-          publisherLink: payment.location,
-        }));
+          const payments: Transaction[] = response.payments.map((payment) => ({
+            ...payment,
+            id: `${payment.id}`,
+            type: "sent",
+            date: dayjs(payment.createdAt).fromNow(),
+            title: payment.name || payment.description,
+            publisherLink: payment.location,
+          }));
 
-        for (const payment of payments) {
-          const totalAmountFiat = settings.showFiat
-            ? await getFormattedFiat(payment.totalAmount)
-            : "";
-          payment.totalAmountFiat = totalAmountFiat;
+          for (const payment of payments) {
+            const totalAmountFiat = settings.showFiat
+              ? await getFormattedFiat(payment.totalAmount)
+              : "";
+            payment.totalAmountFiat = totalAmountFiat;
+          }
+          setPayments(payments);
         }
-        setPayments(payments);
       }
     } catch (e) {
       console.error(e);

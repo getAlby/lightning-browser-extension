@@ -2,7 +2,7 @@ import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
@@ -47,7 +47,9 @@ function Enable(props: Props) {
     await msg.request("addBlocklist", {
       domain: props.origin.domain,
       host: props.origin.host,
-    });
+      // FIXME: typings
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
     alert(t("block_added", { host: props.origin.host }));
     msg.error(USER_REJECTED_ERROR);
   }
@@ -58,7 +60,9 @@ function Enable(props: Props) {
         const allowance = await msg.request("getAllowance", {
           domain: props.origin.domain,
           host: props.origin.host,
-        });
+          // FIXME: typings
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } as any);
         if (allowance && allowance.enabled) {
           enable();
         }

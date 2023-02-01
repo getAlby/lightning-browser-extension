@@ -1,9 +1,9 @@
 import {
-  useState,
-  useEffect,
   createContext,
-  useContext,
   useCallback,
+  useContext,
+  useEffect,
+  useState,
 } from "react";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -60,8 +60,10 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
 
   const unlock = (password: string, callback: VoidFunction) => {
     return api.unlock(password).then((response) => {
-      setAccountId(response.currentAccountId);
-      fetchAccountInfo({ accountId: response.currentAccountId });
+      if (response?.currentAccountId) {
+        setAccountId(response.currentAccountId);
+        fetchAccountInfo({ accountId: response.currentAccountId });
+      }
 
       // callback - e.g. navigate to the requested route after unlocking
       callback();
@@ -121,8 +123,10 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
           if (response.configured && onWelcomePage) {
             utils.redirectPage("options.html");
           }
-          setAccountId(response.currentAccountId);
-          fetchAccountInfo({ accountId: response.currentAccountId });
+          if (response.currentAccountId) {
+            setAccountId(response.currentAccountId);
+            fetchAccountInfo({ accountId: response.currentAccountId });
+          }
         } else {
           setAccount(null);
         }

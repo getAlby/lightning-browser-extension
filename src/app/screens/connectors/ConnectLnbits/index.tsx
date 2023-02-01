@@ -3,10 +3,11 @@ import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
+import { ConnectorType } from "~/types";
 
 export default function ConnectLnbits() {
   const navigate = useNavigate();
@@ -27,7 +28,10 @@ export default function ConnectLnbits() {
     });
   }
 
-  function getConnectorType() {
+  function getConnectorType(): Extract<
+    ConnectorType,
+    "nativelnbits" | "lnbits"
+  > {
     if (formData.url.match(/\.onion/i) && !hasTorSupport) {
       return "nativelnbits";
     }
@@ -59,7 +63,7 @@ export default function ConnectLnbits() {
 
       if (validation.valid) {
         const addResult = await msg.request("addAccount", account);
-        if (addResult.accountId) {
+        if (addResult?.accountId) {
           await msg.request("selectAccount", {
             id: addResult.accountId,
           });

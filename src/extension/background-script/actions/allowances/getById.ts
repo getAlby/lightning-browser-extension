@@ -1,4 +1,4 @@
-import { MessageAllowanceGetById, Allowance, Payment } from "../../../../types";
+import { Allowance, MessageAllowanceGetById, Payment } from "../../../../types";
 import db from "../../db";
 
 const getById = async (message: MessageAllowanceGetById) => {
@@ -55,7 +55,7 @@ const getById = async (message: MessageAllowanceGetById) => {
       data: allowance,
     };
   } else {
-    return { data: { enabled: false } };
+    return { data: { enabled: false as const } };
   }
 };
 

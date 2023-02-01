@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
+import { ConnectorType } from "~/types";
 
 export type Props = {
   lndHubType?: "lndhub_bluewallet" | "lndhub_go";
@@ -33,7 +34,10 @@ export default function ConnectLndHub({
     });
   }
 
-  function getConnectorType() {
+  function getConnectorType(): Extract<
+    ConnectorType,
+    "nativelndhub" | "lndhub"
+  > {
     if (formData.uri.match(/\.onion/i) && !hasTorSupport) {
       return "nativelndhub";
     }
@@ -74,7 +78,7 @@ export default function ConnectLndHub({
 
       if (validation.valid) {
         const addResult = await msg.request("addAccount", account);
-        if (addResult.accountId) {
+        if (addResult?.accountId) {
           await msg.request("selectAccount", {
             id: addResult.accountId,
           });

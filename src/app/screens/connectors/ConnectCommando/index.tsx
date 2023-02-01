@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-import { ValidateAccountResponse } from "~/types";
+import { ConnectorType } from "~/types";
 
 export default function ConnectCommando() {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ export default function ConnectCommando() {
     });
   }
 
-  function getConnectorType() {
+  function getConnectorType(): Extract<ConnectorType, "commando"> {
     return "commando";
   }
 
@@ -73,10 +73,7 @@ export default function ConnectCommando() {
     };
 
     try {
-      const validation = await msg.request<ValidateAccountResponse>(
-        "validateAccount",
-        account
-      );
+      const validation = await msg.request("validateAccount", account);
       if (validation.valid) {
         account.name = utils.getAccountNameWithAlias(
           account.name,
@@ -84,7 +81,7 @@ export default function ConnectCommando() {
         );
 
         const addResult = await msg.request("addAccount", account);
-        if (addResult.accountId) {
+        if (addResult?.accountId) {
           await msg.request("selectAccount", {
             id: addResult.accountId,
           });

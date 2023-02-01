@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import msg from "~/common/lib/msg";
+import { KolliderCurrencies } from "~/extension/background-script/connectors/kollider";
 
 type Currency = {
   value: ACCOUNT_CURRENCIES;
@@ -37,7 +38,7 @@ export default function ConnectKollidier() {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    currency: "BTC",
+    currency: "BTC" as KolliderCurrencies,
   });
   const [loading, setLoading] = useState(false);
 
@@ -60,7 +61,7 @@ export default function ConnectKollidier() {
         password: formData.password,
         currency: formData.currency,
       },
-      connector: "kollider",
+      connector: "kollider" as const,
     };
 
     try {
@@ -68,7 +69,7 @@ export default function ConnectKollidier() {
 
       if (validation.valid) {
         const addResult = await msg.request("addAccount", account);
-        if (addResult.accountId) {
+        if (addResult?.accountId) {
           await msg.request("selectAccount", {
             id: addResult.accountId,
           });

@@ -45,17 +45,19 @@ export default function TestConnection() {
     }, 45000);
     try {
       const { currentAccountId } = await api.getStatus();
-      auth.setAccountId(currentAccountId);
-      const accountInfo = await auth.fetchAccountInfo({
-        accountId: currentAccountId,
-      });
-      if (accountInfo) {
-        setAccountInfo({
-          alias: accountInfo.alias,
-          balance: accountInfo.balance,
-          currency: accountInfo.currency,
-          name: accountInfo.name,
+      if (currentAccountId) {
+        auth.setAccountId(currentAccountId);
+        const accountInfo = await auth.fetchAccountInfo({
+          accountId: currentAccountId,
         });
+        if (accountInfo) {
+          setAccountInfo({
+            alias: accountInfo.alias,
+            balance: accountInfo.balance,
+            currency: accountInfo.currency,
+            name: accountInfo.name,
+          });
+        }
       }
       getAccounts();
     } catch (e) {

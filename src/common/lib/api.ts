@@ -1,22 +1,14 @@
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import {
   ConnectPeerArgs,
-  ConnectPeerResponse,
   MakeInvoiceArgs,
-  MakeInvoiceResponse,
 } from "~/extension/background-script/connectors/connector.interface";
 import type {
   AccountInfo,
-  Accounts,
-  Allowance,
-  DbPayment,
-  Invoice,
   LnurlAuthResponse,
   MessageInvoices,
   MessageLnurlAuth,
   MessageSettingsSet,
-  NodeInfo,
-  SettingsStorage,
 } from "~/types";
 
 import {
@@ -33,21 +25,21 @@ export interface AccountInfoRes {
   name: string;
 }
 
-interface StatusRes {
-  configured: boolean;
-  unlocked: boolean;
-  currentAccountId: string;
-}
+// interface StatusRes {
+//   configured: boolean;
+//   unlocked: boolean;
+//   currentAccountId: string;
+// }
 
-interface UnlockRes {
-  currentAccountId: string;
-}
+// interface UnlockRes {
+//   currentAccountId: string;
+// }
 
-interface BlocklistRes {
-  blocked: boolean;
-}
+// interface BlocklistRes {
+//   blocked: boolean;
+// }
 
-export const getAccountInfo = () => msg.request<AccountInfoRes>("accountInfo");
+export const getAccountInfo = () => msg.request("accountInfo");
 
 /**
  * stale-while-revalidate get account info
@@ -69,6 +61,9 @@ export const swrGetAccountInfo = async (
     // Update account info with most recent data, save to cache.
     getAccountInfo()
       .then((response) => {
+        if (!response) {
+          throw new Error("No response available");
+        }
         const { alias } = response.info;
         const { balance: resBalance, currency } = response.balance;
         const name = response.name;
@@ -91,23 +86,23 @@ export const swrGetAccountInfo = async (
       .catch(reject);
   });
 };
-export const getAccounts = () => msg.request<Accounts>("getAccounts");
-export const updateAllowance = () => msg.request<Accounts>("updateAllowance");
+export const getAccounts = () => msg.request("getAccounts");
+export const updateAllowance = () => msg.request("updateAllowance");
 export const selectAccount = (id: string) =>
   msg.request("selectAccount", { id });
 export const getAllowance = (host: string) =>
-  msg.request<Allowance>("getAllowance", { host });
+  msg.request("getAllowance", { host });
 export const getPayments = (options: { limit: number }) =>
-  msg.request<{ payments: DbPayment[] }>("getPayments", options);
-export const getSettings = () => msg.request<SettingsStorage>("getSettings");
-export const getStatus = () => msg.request<StatusRes>("status");
-export const getInfo = () => msg.request<NodeInfo>("getInfo");
+  msg.request("getPayments", options);
+export const getSettings = () => msg.request("getSettings");
+export const getStatus = () => msg.request("status");
+export const getInfo = () => msg.request("getInfo");
 export const makeInvoice = ({ amount, memo }: MakeInvoiceArgs) =>
-  msg.request<MakeInvoiceResponse["data"]>("makeInvoice", { amount, memo });
+  msg.request("makeInvoice", { amount, memo });
 export const connectPeer = ({ host, pubkey }: ConnectPeerArgs) =>
-  msg.request<ConnectPeerResponse["data"]>("connectPeer", { host, pubkey });
+  msg.request("connectPeer", { host, pubkey });
 export const setSetting = (setting: MessageSettingsSet["args"]["setting"]) =>
-  msg.request<SettingsStorage>("setSetting", {
+  msg.request("setSetting", {
     setting,
   });
 export const removeAccount = (id: string) =>
@@ -115,19 +110,16 @@ export const removeAccount = (id: string) =>
     msg.request("removeAccount", { id }),
     removeAccountFromCache(id),
   ]);
-export const unlock = (password: string) =>
-  msg.request<UnlockRes>("unlock", { password });
+export const unlock = (password: string) => msg.request("unlock", { password });
 export const getBlocklist = (host: string) =>
-  msg.request<BlocklistRes>("getBlocklist", { host });
+  msg.request("getBlocklist", { host });
 export const getInvoices = (options?: MessageInvoices["args"]) =>
-  msg.request<{ invoices: Invoice[] }>("getInvoices", options);
+  msg.request("getInvoices", options);
 export const lnurlAuth = (
   options: MessageLnurlAuth["args"]
-): Promise<LnurlAuthResponse> =>
-  msg.request<LnurlAuthResponse>("lnurlAuth", options);
+): Promise<LnurlAuthResponse> => msg.request("lnurlAuth", options);
 
-export const getCurrencyRate = async () =>
-  msg.request<{ rate: number }>("getCurrencyRate");
+export const getCurrencyRate = async () => msg.request("getCurrencyRate");
 
 export default {
   getAccountInfo,

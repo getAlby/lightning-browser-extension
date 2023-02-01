@@ -14,12 +14,12 @@ const add = async (message: MessageAccountAdd) => {
   const password = state.getState().password;
   const currentAccountId = state.getState().currentAccountId;
 
-  if (!password) return { error: "Password is missing" };
+  if (!password) return { error: "Password is missing", data: null };
 
   const accountId = uuidv4();
-  newAccount.config = encryptData(newAccount.config, password);
   tmpAccounts[accountId] = {
     ...newAccount,
+    config: encryptData(newAccount.config, password),
     id: accountId,
   };
 

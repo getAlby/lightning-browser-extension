@@ -8,11 +8,11 @@ import Utf8 from "crypto-js/enc-utf8";
 import { decryptData, encryptData } from "~/common/lib/crypto";
 import { Event } from "~/extension/ln/nostr/types";
 
-import { signEvent, getEventHash } from "../actions/nostr/helpers";
+import { getEventHash, signEvent } from "../actions/nostr/helpers";
 import state from "../state";
 
 class Nostr {
-  getPrivateKey() {
+  getPrivateKey(): string | null {
     const password = state.getState().password as string;
     const encryptedKey = state.getState().nostrPrivateKey as string;
     if (encryptedKey) {
@@ -28,8 +28,12 @@ class Nostr {
   }
 
   getPublicKey() {
+    const privateKey = this.getPrivateKey();
+    if (!privateKey) {
+      return null;
+    }
     const publicKey = secp256k1.schnorr.getPublicKey(
-      secp256k1.utils.hexToBytes(this.getPrivateKey())
+      secp256k1.utils.hexToBytes(privateKey)
     );
     const publicKeyHex = secp256k1.utils.bytesToHex(publicKey);
     return publicKeyHex;
@@ -43,13 +47,21 @@ class Nostr {
   }
 
   async signEvent(event: Event): Promise<Event> {
-    const signature = await signEvent(event, this.getPrivateKey());
+    const privateKey = this.getPrivateKey();
+    if (!privateKey) {
+      throw new Error("No private key set");
+    }
+    const signature = await signEvent(event, privateKey);
     event.sig = signature;
     return event;
   }
 
   encrypt(pubkey: string, text: string) {
-    const key = secp256k1.getSharedSecret(this.getPrivateKey(), "02" + pubkey);
+    const privateKey = this.getPrivateKey();
+    if (!privateKey) {
+      throw new Error("No private key set");
+    }
+    const key = secp256k1.getSharedSecret(privateKey, "02" + pubkey);
     const normalizedKey = Buffer.from(key.slice(1, 33));
     const hexNormalizedKey = secp256k1.utils.bytesToHex(normalizedKey);
     const hexKey = Hex.parse(hexNormalizedKey);
@@ -64,8 +76,12 @@ class Nostr {
   }
 
   decrypt(pubkey: string, ciphertext: string) {
+    const privateKey = this.getPrivateKey();
+    if (!privateKey) {
+      throw new Error("No private key set");
+    }
     const [cip, iv] = ciphertext.split("?iv=");
-    const key = secp256k1.getSharedSecret(this.getPrivateKey(), "02" + pubkey);
+    const key = secp256k1.getSharedSecret(privateKey, "02" + pubkey);
     const normalizedKey = Buffer.from(key.slice(1, 33));
     const hexNormalizedKey = secp256k1.utils.bytesToHex(normalizedKey);
     const hexKey = Hex.parse(hexNormalizedKey);

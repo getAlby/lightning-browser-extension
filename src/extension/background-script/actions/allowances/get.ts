@@ -1,5 +1,5 @@
 import db from "~/extension/background-script/db";
-import type { MessageAllowanceGet, Allowance, Payment } from "~/types";
+import type { Allowance, MessageAllowanceGet, Payment } from "~/types";
 
 const get = async (message: MessageAllowanceGet) => {
   const host = message.args.host;
@@ -59,7 +59,7 @@ const get = async (message: MessageAllowanceGet) => {
       data: allowance,
     };
   } else {
-    return { data: { enabled: false } };
+    return { data: { enabled: false as const } };
   }
 };
 

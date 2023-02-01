@@ -54,9 +54,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   useEffect(() => {
     const fetchPermissions = async () => {
       try {
-        const permissionResponse = await msg.request<{
-          permissions: Permission[];
-        }>("listPermissions", {
+        const permissionResponse = await msg.request("listPermissions", {
           id: allowance.id,
         });
 

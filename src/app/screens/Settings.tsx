@@ -14,8 +14,8 @@ import TextField from "@components/form/TextField";
 import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
 import type { FormEvent } from "react";
-import { useState, useEffect } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { useEffect, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -39,7 +39,7 @@ function Settings() {
   const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
 
   const getPrivateKeyFromStorage = async () => {
-    const priv = (await msg.request("nostr/getPrivateKey")) as string;
+    const priv = await msg.request("nostr/getPrivateKey", {});
     if (priv) {
       setNostrPrivateKey(nostrlib.hexToNip19(priv, "nsec"));
     }
@@ -57,8 +57,7 @@ function Settings() {
   }
 
   async function saveNostrPrivateKey(nostrPrivateKey: string) {
-    const result = await msg.request("nostr/getPrivateKey");
-    const currentPrivateKey = result as unknown as string;
+    const currentPrivateKey = await msg.request("nostr/getPrivateKey", {});
 
     if (nostrPrivateKey === currentPrivateKey) return;
 
@@ -445,10 +444,13 @@ function Settings() {
                   label={t("nostr.private_key.generate")}
                   onClick={async () => {
                     const result = await msg.request(
-                      "nostr/generatePrivateKey"
+                      "nostr/generatePrivateKey",
+                      {}
                     );
-                    setNostrPrivateKey(result.privateKey as string);
-                    saveNostrPrivateKey(result.privateKey as string);
+                    if (result) {
+                      setNostrPrivateKey(result.privateKey);
+                      saveNostrPrivateKey(result.privateKey);
+                    }
                   }}
                 />
               </div>

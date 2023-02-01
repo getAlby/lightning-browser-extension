@@ -41,7 +41,9 @@ function NostrConfirmGetPublicKey() {
     await msg.request("addBlocklist", {
       domain: origin.domain,
       host: origin.host,
-    });
+      // FIXME: typings
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
     alert(t("block_added", { host: origin.host }));
     msg.error(USER_REJECTED_ERROR);
   }

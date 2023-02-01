@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
+import { ConnectorType } from "~/types";
 
 const initialFormData = {
   url: "",
@@ -56,7 +57,7 @@ export default function ConnectBtcpay() {
     }
   }
 
-  function getConnectorType() {
+  function getConnectorType(): Extract<ConnectorType, "nativelnd" | "lnd"> {
     if (formData.url.match(/\.onion/i) && !hasTorSupport) {
       return "nativelnd";
     }
@@ -88,7 +89,7 @@ export default function ConnectBtcpay() {
 
       if (validation.valid) {
         const addResult = await msg.request("addAccount", account);
-        if (addResult.accountId) {
+        if (addResult?.accountId) {
           await msg.request("selectAccount", {
             id: addResult.accountId,
           });

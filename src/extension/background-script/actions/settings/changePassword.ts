@@ -18,7 +18,9 @@ const changePassword = async (message: Message) => {
     tmpAccounts[accountId].config = encryptData(accountConfig, newPassword);
   }
   state.setState({ accounts: tmpAccounts, password: newPassword });
-  await state.getState().getNostr().setPrivateKey(nostPrivateKey);
+  if (nostPrivateKey) {
+    await state.getState().getNostr().setPrivateKey(nostPrivateKey);
+  }
   // make sure we immediately persist the updated accounts
   await state.getState().saveToStorage();
 

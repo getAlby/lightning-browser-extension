@@ -4,7 +4,7 @@ import msg from "~/common/lib/msg";
 
 class DevMenu extends Component {
   reset() {
-    msg.request("reset").then((response) => {
+    msg.request("reset", {}).then((response) => {
       console.info(response);
       toast.success("Done, you can start over");
     });

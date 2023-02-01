@@ -79,11 +79,13 @@ function ConfirmKeysend() {
       );
 
       msg.reply(payment); // resolves the prompt promise and closes the prompt window
-      setSuccessMessage(
-        t("success", {
-          preimage: payment.preimage,
-        })
-      );
+      if (payment) {
+        setSuccessMessage(
+          t("success", {
+            preimage: payment.preimage,
+          })
+        );
+      }
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {

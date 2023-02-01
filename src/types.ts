@@ -173,7 +173,8 @@ export interface MessageAccountRemove extends MessageDefault {
 }
 
 export interface MessageAccountAdd extends MessageDefault {
-  args: Omit<Account, "id">;
+  // FIXME: Account.config should not be a string?
+  args: Omit<Account, "id" | "config"> & { config: unknown };
   action: "addAccount";
 }
 export interface MessageAccountEdit extends MessageDefault {

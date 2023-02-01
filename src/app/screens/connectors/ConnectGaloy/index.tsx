@@ -3,7 +3,7 @@ import Input from "@components/form/Input";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import axios from "axios";
 import { useState } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
@@ -265,14 +265,14 @@ export default function ConnectGaloy(props: Props) {
         accessToken: config.authToken,
         walletId: config.walletId,
       },
-      connector: "galoy",
+      connector: "galoy" as const,
     };
 
     try {
       const validation = await msg.request("validateAccount", account);
       if (validation.valid) {
         const addResult = await msg.request("addAccount", account);
-        if (addResult.accountId) {
+        if (addResult?.accountId) {
           await msg.request("selectAccount", {
             id: addResult.accountId,
           });

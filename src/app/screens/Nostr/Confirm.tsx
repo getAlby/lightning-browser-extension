@@ -42,7 +42,9 @@ function NostrConfirm() {
     await msg.request("addBlocklist", {
       domain: origin.domain,
       host: origin.host,
-    });
+      // FIXME: typings
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
     alert(`Added ${origin.host} to the blocklist, please reload the website`);
     msg.error(USER_REJECTED_ERROR);
   }

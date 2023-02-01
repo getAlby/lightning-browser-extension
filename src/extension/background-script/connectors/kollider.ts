@@ -26,7 +26,10 @@ import Connector, {
 const API_URL = "https://kollider.me/api";
 
 // Currently the same as ACCOUNT_CURRENCIES, this is for the future when more connectors support Fiat Accounts
-type KolliderCurrencies = Extract<ACCOUNT_CURRENCIES, "BTC" | "EUR" | "USD">;
+export type KolliderCurrencies = Extract<
+  ACCOUNT_CURRENCIES,
+  "BTC" | "EUR" | "USD"
+>;
 
 interface Config {
   username: string;

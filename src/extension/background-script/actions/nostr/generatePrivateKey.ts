@@ -4,7 +4,7 @@ import sha512 from "crypto-js/sha512";
 
 import state from "../../state";
 
-const generatePrivateKey = async () => {
+const generatePrivateKey = async (_: { args: Record<string, never> }) => {
   const connector = await state.getState().getConnector();
   try {
     const response = await connector.signMessage({
@@ -31,6 +31,7 @@ const generatePrivateKey = async () => {
     };
   } catch (e) {
     console.error(e);
+    throw e;
   }
 };
 

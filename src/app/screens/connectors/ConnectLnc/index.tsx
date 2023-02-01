@@ -35,7 +35,7 @@ export default function ConnectLnd() {
       config: {
         pairingPhrase,
       },
-      connector: "lnc",
+      connector: "lnc" as const,
     };
 
     try {
@@ -43,7 +43,7 @@ export default function ConnectLnd() {
 
       if (validation.valid) {
         const addResult = await msg.request("addAccount", account);
-        if (addResult.accountId) {
+        if (addResult?.accountId) {
           await msg.request("selectAccount", {
             id: addResult.accountId,
           });

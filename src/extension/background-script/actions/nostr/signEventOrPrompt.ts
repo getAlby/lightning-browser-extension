@@ -1,10 +1,8 @@
 import utils from "~/common/lib/utils";
-import { MessageSignEvent } from "~/types";
-import { PermissionMethodNostr } from "~/types";
+import { MessageSignEvent, PermissionMethodNostr } from "~/types";
 
 import state from "../../state";
-import { hasPermissionFor, addPermissionFor } from "./helpers";
-import { validateEvent } from "./helpers";
+import { addPermissionFor, hasPermissionFor, validateEvent } from "./helpers";
 
 const signEventOrPrompt = async (message: MessageSignEvent) => {
   if (!("host" in message.origin)) {
@@ -16,7 +14,7 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
 
   // check event and add an ID and pubkey if not present
   const event = message.args.event;
-  if (!event.pubkey) event.pubkey = nostr.getPublicKey();
+  if (!event.pubkey) event.pubkey = nostr.getPublicKey() ?? undefined;
   if (!event.id) event.id = nostr.getEventHash(event);
 
   if (!validateEvent(event)) {

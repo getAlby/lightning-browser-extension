@@ -42,7 +42,7 @@ function LNURLAuth() {
       if (navState.isPrompt && origin?.host) {
         const allowance = await api.getAllowance(origin.host);
 
-        if (allowance.lnurlAuth === false) {
+        if (allowance.enabled && allowance.lnurlAuth === false) {
           await msg.request("updateAllowance", {
             id: allowance.id,
             lnurlAuth: true,

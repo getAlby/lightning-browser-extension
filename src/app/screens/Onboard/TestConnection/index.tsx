@@ -30,7 +30,7 @@ export default function TestConnection() {
 
     try {
       const response = await api.getAccountInfo();
-      if (response.name && response.info.alias) {
+      if (response && response.name && response.info.alias) {
         utils.redirectPage("options.html#/discover");
       } else {
         setErrorMessage(t("connection_error"));

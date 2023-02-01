@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "~/app/components/Button";
 import msg from "~/common/lib/msg";
-import { Allowance, Badge, Publisher } from "~/types";
+import { Badge, Publisher } from "~/types";
 
 function Publishers() {
   const { t } = useTranslation("translation", {
@@ -22,9 +22,7 @@ function Publishers() {
 
   async function fetchData() {
     try {
-      const allowanceResponse = await msg.request<{
-        allowances: Allowance[];
-      }>("listAllowances");
+      const allowanceResponse = await msg.request("listAllowances");
 
       const allowances: Publisher[] = allowanceResponse.allowances.reduce<
         Publisher[]

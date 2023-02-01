@@ -114,14 +114,14 @@ export default function AlbyWallet({ variant }: Props) {
         url,
         lnAddress,
       },
-      connector: "lndhub",
+      connector: "lndhub" as const,
     };
 
     try {
       const validation = await msg.request("validateAccount", account);
       if (validation.valid) {
         const addResult = await msg.request("addAccount", account);
-        if (addResult.accountId) {
+        if (addResult?.accountId) {
           await msg.request("selectAccount", {
             id: addResult.accountId,
           });

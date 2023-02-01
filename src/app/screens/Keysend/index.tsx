@@ -61,13 +61,15 @@ function Keysend() {
         }
       );
 
-      setSuccessMessage(
-        t("success", {
-          preimage: payment.preimage,
-        })
-      );
+      if (payment) {
+        setSuccessMessage(
+          t("success", {
+            preimage: payment.preimage,
+          })
+        );
 
-      auth.fetchAccountInfo(); // Update balance.
+        auth.fetchAccountInfo(); // Update balance.
+      }
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
