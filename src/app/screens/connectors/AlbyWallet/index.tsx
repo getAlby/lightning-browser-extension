@@ -92,8 +92,8 @@ export default function AlbyWallet({ variant }: Props) {
                 <br />
                 {Object.keys(data).map((rule, index) => {
                   return (
-                    <p key={"rule-" + index}>
-                      {rule.charAt(0).toUpperCase() + rule.slice(1)}
+                    <p key={`rule-${index}`}>
+                      <span className="capitalize">{rule}</span>
                       {" - "}
                       {data[rule].join(", ")}
                       <br />
