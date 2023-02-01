@@ -34,10 +34,9 @@ function Transactions() {
       );
 
       for (const transaction of transactions) {
-        const totalAmountFiat = settings.showFiat
+        transaction.totalAmountFiat = settings.showFiat
           ? await getFormattedFiat(transaction.totalAmount)
           : "";
-        transaction.totalAmountFiat = totalAmountFiat;
       }
 
       setPayments(transactions);
