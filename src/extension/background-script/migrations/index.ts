@@ -57,7 +57,7 @@ const migrations = {
 
     if (nostrPrivateKey) {
       Object.values(accounts).map((account) => {
-        account.nostrPrivateKey = nostrPrivateKey;
+        if (!account.nostrPrivateKey) account.nostrPrivateKey = nostrPrivateKey;
       });
 
       state.setState({

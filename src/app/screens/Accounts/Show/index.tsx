@@ -572,10 +572,20 @@ function AccountScreen() {
                 <CrossIcon className="w-6 h-6 dark:text-white" />
               </button>
             </div>
-            <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
-              <div className="flex justify-center space-x-3 items-center dark:text-white">
-                {t("nostr.generate_keys.hint")}
-              </div>
+            <div className="p-5 border-t border-b dark:text-white border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
+              <Trans
+                i18nKey={"nostr.generate_keys.hint"}
+                t={t}
+                components={[
+                  // eslint-disable-next-line react/jsx-key
+                  <a
+                    className="underline"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    href="https://guides.getalby.com/overall-guide/alby-browser-extension/features/nostr"
+                  ></a>,
+                ]}
+              />
             </div>
             <div className="p-4 dark:bg-surface-02dp">
               <div className="flex flex-row justify-between">
