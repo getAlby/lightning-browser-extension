@@ -30,9 +30,9 @@ function AccountsScreen() {
           />
         </div>
       </div>
-      <div className="shadow border-b border-gray-200 dark:border-neutral-500 sm:rounded-lg bg-white dark:bg-surface-02dp">
+      <div className="shadow overflow-hidden rounded-lg">
         <table className="min-w-full">
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="bg-white divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
             {Object.keys(accounts).map((accountId) => {
               const account = accounts[accountId];
               return (

@@ -104,7 +104,7 @@ function AccountScreen() {
   }
 
   function generatePublicKey(priv: string) {
-    const nostr = new Nostr(nostrlib.normalizeToHex(priv));
+    const nostr = new Nostr(priv);
     const pubkeyHex = nostr.getPublicKey();
     return nostrlib.hexToNip19(pubkeyHex, "npub");
   }
@@ -133,23 +133,32 @@ function AccountScreen() {
   }
 
   async function saveNostrPrivateKey(nostrPrivateKey: string) {
+    nostrPrivateKey = nostrlib.normalizeToHex(nostrPrivateKey);
+
     if (nostrPrivateKey === currentPrivateKey) return;
 
     if (currentPrivateKey && !confirm(t("nostr.private_key.warning"))) {
       return;
     }
 
-    await msg.request("nostr/setPrivateKey", {
-      id: account?.id,
-      privateKey: nostrlib.normalizeToHex(nostrPrivateKey),
-    });
+    try {
+      nostrPrivateKey && generatePublicKey(nostrPrivateKey);
+      nostrPrivateKey && nostrlib.hexToNip19(nostrPrivateKey, "nsec");
 
-    if (nostrPrivateKey) {
-      toast.success(t("nostr.private_key.success"));
-    } else {
-      toast.success(t("nostr.private_key.successfully_removed"));
+      await msg.request("nostr/setPrivateKey", {
+        id: account?.id,
+        privateKey: nostrPrivateKey,
+      });
+
+      if (nostrPrivateKey) {
+        toast.success(t("nostr.private_key.success"));
+      } else {
+        toast.success(t("nostr.private_key.successfully_removed"));
+      }
+      setCurrentPrivateKey(nostrPrivateKey);
+    } catch (e) {
+      if (e instanceof Error) toast.error(e.message);
     }
-    setCurrentPrivateKey(nostrPrivateKey);
   }
 
   async function updateAccountName({ id, name }: AccountAction) {
@@ -214,12 +223,7 @@ function AccountScreen() {
       currentPrivateKey ? generatePublicKey(currentPrivateKey) : ""
     );
     setNostrPrivateKey(
-      currentPrivateKey
-        ? nostrlib.hexToNip19(
-            nostrlib.normalizeToHex(currentPrivateKey),
-            "nsec"
-          )
-        : ""
+      currentPrivateKey ? nostrlib.hexToNip19(currentPrivateKey, "nsec") : ""
     );
   }, [currentPrivateKey]);
 
@@ -565,7 +569,7 @@ function AccountScreen() {
                 {t("nostr.generate_keys.hint")}
               </div>
             </div>
-            <div className="p-4">
+            <div className="p-4 dark:bg-surface-02dp">
               <div className="flex flex-row justify-between">
                 <Button
                   type="submit"
