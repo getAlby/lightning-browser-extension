@@ -253,23 +253,15 @@
         "add_account": "Aggiungi account"
       },
       "edit": {
-        "title": "Modifica account",
         "name": {
           "label": "Nome"
-        },
-        "screen_reader": "Modifica nome dell'account"
+        }
       },
       "export": {
         "title": "Esporta Account",
-        "screen_reader": "Esporta i dettagli dell'account",
         "waiting": "in attesa dei dati di LndHub...",
-        "your_ln_address": "Il tuo indirizzo Lightning:",
         "tip_mobile": "Suggerimento: Utilizza questo portafoglio con il tuo dispositivo mobile",
-        "export_uri": "URI delle credenziali di LNDHub",
         "scan_qr": "Importa questo portafoglio in Zeus o BlueWallet scansionando il QRCode."
-      },
-      "remove": {
-        "confirm": "Sei sicuro di voler rimuovere l'account: {{name}}? \nQuesta operazione non può essere annullata. Se hai usato questo account per accedere a siti web, potresti perdere l'accesso a questi ultimi."
       }
     },
     "enable": {
@@ -387,9 +379,7 @@
         "private_key": {
           "title": "Chiave privata",
           "subtitle": "La generazione di una chiave creerà una nuova chiave basata sull'account correntemente utilizzato. Assicurati di fare un backup della chiave privata.",
-          "generate": "Genera",
-          "warning": "In questo modo si cancellerà la vecchia chiave privata. Sei sicuro?",
-          "success": "Chiave privata criptata e salvata con successo."
+          "warning": "In questo modo si cancellerà la vecchia chiave privata. Sei sicuro?"
         }
       }
     },

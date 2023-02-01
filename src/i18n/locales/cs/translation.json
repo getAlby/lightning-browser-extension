@@ -285,23 +285,15 @@
         "add_account": ""
       },
       "edit": {
-        "title": "",
         "name": {
           "label": ""
-        },
-        "screen_reader": ""
+        }
       },
       "export": {
         "title": "",
-        "screen_reader": "",
         "waiting": "",
-        "your_ln_address": "",
         "tip_mobile": "",
-        "export_uri": "",
         "scan_qr": ""
-      },
-      "remove": {
-        "confirm": ""
       }
     },
     "enable": {
@@ -419,9 +411,7 @@
         "private_key": {
           "title": "",
           "subtitle": "",
-          "generate": "",
-          "warning": "",
-          "success": ""
+          "warning": ""
         }
       }
     },

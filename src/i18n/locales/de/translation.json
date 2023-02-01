@@ -306,10 +306,8 @@
     "settings": {
       "nostr": {
         "private_key": {
-          "warning": "Das wird deinen alten Private Key löschen. Bist du sicher?",
           "success": "Privaten Schlüssel erfolgreich verschlüsselt und gespeichert.",
           "title": "Privater Schlüssel",
-          "generate": "Generiere",
           "subtitle": "Füge deinen privaten Schlüssel ein oder erzeuge einen neuen Schlüssel. Beim Generieren eines Schlüssels wird ein neuer Schlüssel auf der Grundlage des aktuellen Kontos, das du verwendest, erstellt. Er kann erneut generiert werden, aber bitte stelle sicher, dass du diesen privaten Schlüssel sicherst. <0>Mehr erfahren\"</0>"
         },
         "hint": "Es ist ein einfaches und offenes Protokoll, das darauf abzielt, zensurresistente soziale Netzwerke zu schaffen. Nostr arbeitet mit kryptographischen Schlüsseln. Um etwas zu veröffentlichen, signiere es mit deinem Schlüssel und senden es an mehrere Relays. Du kannst Alby verwenden, um deinen Nostr-Schlüssel zu verwalten. Viele Nostr-Anwendungen erlauben dann, einfach den Schlüssel aus der Alby-Erweiterung zu verwenden.",
@@ -427,23 +425,15 @@
     "accounts": {
       "title": "Konten",
       "export": {
-        "title": "Konto exportieren",
         "screen_reader": "Kontodaten exportieren",
-        "waiting": "Warten auf LndHub Daten...",
         "scan_qr": "Importiere diese Brieftasche in Zeus oder BlueWallet, indem du den QRCode scannst.",
-        "your_ln_address": "Deine Lightning Adresse:",
-        "tip_mobile": "Tipp: Verwende diese Geldbörse mit deinem Mobilgerät",
-        "export_uri": "LNDHub Anmeldeinformationen URI"
+        "tip_mobile": "Tipp: Verwende diese Geldbörse mit deinem Mobilgerät"
       },
       "edit": {
         "name": {
           "label": "Name"
         },
-        "screen_reader": "Kontonamen bearbeiten",
         "title": "Konto bearbeiten"
-      },
-      "remove": {
-        "confirm": "Bist du dir sicher, dass du das Konto entfernen möchtest: {{Name}}? \nDies kann nicht rückgängig gemacht werden. Wenn du dich mit diesem Konto bei Websites angemeldet haben, verlierst du möglicherweise den Zugriff auf diese."
       },
       "actions": {
         "add_account": "Konto hinzufügen"
