@@ -8,7 +8,6 @@ const changePassword = async (message: Message) => {
   const password = state.getState().password as string;
   const newPassword = message.args.password as string;
   const tmpAccounts = { ...accounts };
-  const nostPrivateKey = await state.getState().getNostr().getPrivateKey();
 
   for (const accountId in tmpAccounts) {
     const accountConfig = decryptData(
@@ -16,9 +15,16 @@ const changePassword = async (message: Message) => {
       password
     );
     tmpAccounts[accountId].config = encryptData(accountConfig, newPassword);
+    const accountNostrKey = decryptData(
+      accounts[accountId].nostrPrivateKey as string,
+      password
+    );
+    tmpAccounts[accountId].nostrPrivateKey = encryptData(
+      accountNostrKey,
+      newPassword
+    );
   }
   state.setState({ accounts: tmpAccounts, password: newPassword });
-  await state.getState().getNostr().setPrivateKey(nostPrivateKey);
   // make sure we immediately persist the updated accounts
   await state.getState().saveToStorage();
 
