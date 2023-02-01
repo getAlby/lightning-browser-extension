@@ -18,6 +18,7 @@ import TextField from "@components/form/TextField";
 import Avvvatars from "avvvatars-react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import type { FormEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import Modal from "react-modal";
@@ -348,7 +349,19 @@ function AccountScreen() {
 
         <div>
           <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
-            <div className="my-4 flex justify-between items-end">
+            <form
+              onSubmit={(e: FormEvent) => {
+                e.preventDefault();
+                updateAccountName({
+                  id: account.id,
+                  name: accountName,
+                });
+                const updatedAccount = account;
+                updatedAccount.name = accountName;
+                setAccount(updatedAccount);
+              }}
+              className="my-4 flex justify-between items-end"
+            >
               <div className="w-7/12">
                 <TextField
                   id="name"
@@ -363,22 +376,14 @@ function AccountScreen() {
               <div className="w-1/5 flex-none mx-4 d-none"></div>
               <div className="w-1/5 flex-none">
                 <Button
+                  type="submit"
                   label={tCommon("actions.save")}
-                  onClick={() => {
-                    updateAccountName({
-                      id: account.id,
-                      name: accountName,
-                    });
-                    const updatedAccount = account;
-                    updatedAccount.name = accountName;
-                    setAccount(updatedAccount);
-                  }}
                   disabled={account.name === accountName}
                   primary
                   fullWidth
                 />
               </div>
-            </div>
+            </form>
           </div>
           <h2 className="text-2xl mt-12 font-bold dark:text-white">
             {t("nostr.title")}
@@ -424,7 +429,13 @@ function AccountScreen() {
                 />
               </div>
             </div>
-            <div className="mb-4 flex justify-between items-end">
+            <form
+              onSubmit={(e: FormEvent) => {
+                e.preventDefault();
+                saveNostrPrivateKey(nostrPrivateKey);
+              }}
+              className="mb-4 flex justify-between items-end"
+            >
               <div className="w-7/12">
                 <TextField
                   id="nostrPrivateKey"
@@ -474,20 +485,17 @@ function AccountScreen() {
               </div>
               <div className="w-1/5 flex-none">
                 <Button
+                  type="submit"
                   label={tCommon("actions.save")}
-                  onClick={() => {
-                    saveNostrPrivateKey(nostrPrivateKey);
-                  }}
                   disabled={
-                    nostrPrivateKey === currentPrivateKey ||
-                    nostrPrivateKey ===
-                      nostrlib.hexToNip19(currentPrivateKey, "nsec")
+                    nostrlib.normalizeToHex(nostrPrivateKey) ===
+                    currentPrivateKey
                   }
                   primary
                   fullWidth
                 />
               </div>
-            </div>
+            </form>
 
             <div className="mb-4 flex justify-between items-end">
               <div className="w-7/12">
