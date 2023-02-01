@@ -143,11 +143,17 @@ function AccountScreen() {
     }
 
     try {
+      if (!account) {
+        // type guard
+        throw new Error("No account available");
+      }
+
+      // Validate the private key before saving
       nostrPrivateKey && generatePublicKey(nostrPrivateKey);
       nostrPrivateKey && nostrlib.hexToNip19(nostrPrivateKey, "nsec");
 
       await msg.request("nostr/setPrivateKey", {
-        id: account?.id,
+        id: account.id,
         privateKey: nostrPrivateKey,
       });
 
