@@ -288,16 +288,9 @@
       "actions": {
         "add_account": "Adicionar conta"
       },
-      "edit": {
-        "name": {
-          "label": "Nome"
-        }
-      },
       "export": {
         "title": "Exportar Conta",
-        "waiting": "aguardando dados LndHub...",
-        "tip_mobile": "Dica: Use esta carteira no seu dispositivo móvel",
-        "scan_qr": "Leia o Código QR para importar esta carteira na Zeus ou BlueWallet."
+        "tip_mobile": "Dica: Use esta carteira no seu dispositivo móvel"
       }
     },
     "enable": {
@@ -414,8 +407,7 @@
         "title": "Nostr",
         "private_key": {
           "subtitle": "Cole ou gere uma nova chave privada. Ao gerar uma chave, ela será criada a partir da conta atual que você usa. Certifique-se de fazer backup desta chave privada. <0>Saiba mais »</0>",
-          "title": "Chave privada",
-          "success": "A chave privada foi encriptada e salva com sucesso."
+          "title": "Chave privada"
         },
         "hint": "é um protocolo simples e aberto que visa criar redes sociais resistentes à censura. Os perfis na rede Nostr são chaves criptográficas. Para publicar algo, você assina com sua chave e a informação é enviada para servidores. Na Alby você pode usar e gerenciar seu perfil em diferentes aplicações que suportam esse recurso."
       }

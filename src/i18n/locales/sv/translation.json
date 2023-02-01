@@ -252,16 +252,9 @@
       "actions": {
         "add_account": "Lägg till konto"
       },
-      "edit": {
-        "name": {
-          "label": "Namn"
-        }
-      },
       "export": {
         "title": "Exportera Konto",
-        "waiting": "väntar på LndHub- data...",
-        "tip_mobile": "Tips: Använd denna plånbok på din mobila enhet",
-        "scan_qr": "Importera denna plånbok till Zeus eller BlueWallet genom att skanna QR-kod."
+        "tip_mobile": "Tips: Använd denna plånbok på din mobila enhet"
       }
     },
     "enable": {
@@ -378,8 +371,7 @@
         "hint": "är ett enkelt och öppet protokoll som syftar till att skapa sociala nätverk som är motståndskraftiga mot censur. Nostr använder kryptografiska nycklar. För att publicera något signerar du med dina nycklar som skickas till multipla reläer. Du kan använda Alby för att hantera din Nostr-nyckel. Flertalet Nostr-applikationer tillåter dig att använda nyckeln med hjälp av Alby-tillägget.",
         "private_key": {
           "title": "Privat nyckel",
-          "subtitle": "Generering av nyckel skapar en ny nyckel baserat på det konto du använder för tillfället. Se till att säkerhetskopiera den privata nyckeln.",
-          "warning": "Detta raderar din gamla privata nyckel. Är du säker?"
+          "subtitle": "Generering av nyckel skapar en ny nyckel baserat på det konto du använder för tillfället. Se till att säkerhetskopiera den privata nyckeln."
         }
       }
     },

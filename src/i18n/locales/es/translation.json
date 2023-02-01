@@ -193,16 +193,9 @@
       "actions": {
         "add_account": "Añadir Cuenta"
       },
-      "edit": {
-        "name": {
-          "label": "Nombre"
-        }
-      },
       "export": {
         "title": "Cuenta de exportación",
-        "waiting": "esperando los datos de LndHub...",
-        "tip_mobile": "Consejo: Use esta billetera con su dispositivo móvil",
-        "scan_qr": "Importe esta billetera a Zeus o BlueWallet escaneando el código QR."
+        "tip_mobile": "Consejo: Use esta billetera con su dispositivo móvil"
       }
     },
     "enable": {

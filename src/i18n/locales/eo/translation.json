@@ -284,16 +284,9 @@
       "actions": {
         "add_account": ""
       },
-      "edit": {
-        "name": {
-          "label": "Nomo"
-        }
-      },
       "export": {
         "title": "",
-        "waiting": "",
-        "tip_mobile": "",
-        "scan_qr": ""
+        "tip_mobile": ""
       }
     },
     "enable": {
@@ -410,8 +403,7 @@
         "hint": "",
         "private_key": {
           "title": "Privata ŝlosilo",
-          "subtitle": "",
-          "warning": ""
+          "subtitle": ""
         }
       }
     },

@@ -252,16 +252,9 @@
       "actions": {
         "add_account": "Aggiungi account"
       },
-      "edit": {
-        "name": {
-          "label": "Nome"
-        }
-      },
       "export": {
         "title": "Esporta Account",
-        "waiting": "in attesa dei dati di LndHub...",
-        "tip_mobile": "Suggerimento: Utilizza questo portafoglio con il tuo dispositivo mobile",
-        "scan_qr": "Importa questo portafoglio in Zeus o BlueWallet scansionando il QRCode."
+        "tip_mobile": "Suggerimento: Utilizza questo portafoglio con il tuo dispositivo mobile"
       }
     },
     "enable": {
@@ -378,8 +371,7 @@
         "hint": "è un protocollo semplice e aperto che mira a creare reti sociali resistenti alla censura. Nostr funziona con chiavi crittografiche. Per pubblicare qualcosa si firma con la propria chiave e la si invia a più relè. È possibile utilizzare Alby per gestire la propria chiave Nostr. Molte applicazioni Nostr vi permetteranno poi di utilizzare semplicemente la chiave dall'estensione Alby.",
         "private_key": {
           "title": "Chiave privata",
-          "subtitle": "La generazione di una chiave creerà una nuova chiave basata sull'account correntemente utilizzato. Assicurati di fare un backup della chiave privata.",
-          "warning": "In questo modo si cancellerà la vecchia chiave privata. Sei sicuro?"
+          "subtitle": "La generazione di una chiave creerà una nuova chiave basata sull'account correntemente utilizzato. Assicurati di fare un backup della chiave privata."
         }
       }
     },

@@ -281,16 +281,9 @@
       }
     },
     "accounts": {
-      "edit": {
-        "name": {
-          "label": "名称"
-        }
-      },
       "export": {
         "waiting": "正在等待 LndHub 数据...",
-        "your_ln_address": "你的闪电地址：",
-        "export_uri": "LNDHub凭证URI",
-        "screen_reader": "导出帐户详情"
+        "export_uri": "LNDHub凭证URI"
       },
       "title": "账户",
       "actions": {
@@ -324,7 +317,6 @@
       "nostr": {
         "private_key": {
           "title": "私钥",
-          "warning": "这将删除你的旧私钥。是否确定？",
           "subtitle": "生成密钥将根据你当前使用的帐户创建一个新密钥。请确保备份此私钥。"
         },
         "title": "Nostr",

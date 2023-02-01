@@ -306,7 +306,6 @@
     "settings": {
       "nostr": {
         "private_key": {
-          "success": "Privaten Schlüssel erfolgreich verschlüsselt und gespeichert.",
           "title": "Privater Schlüssel",
           "subtitle": "Füge deinen privaten Schlüssel ein oder erzeuge einen neuen Schlüssel. Beim Generieren eines Schlüssels wird ein neuer Schlüssel auf der Grundlage des aktuellen Kontos, das du verwendest, erstellt. Er kann erneut generiert werden, aber bitte stelle sicher, dass du diesen privaten Schlüssel sicherst. <0>Mehr erfahren\"</0>"
         },
@@ -425,15 +424,12 @@
     "accounts": {
       "title": "Konten",
       "export": {
-        "screen_reader": "Kontodaten exportieren",
-        "scan_qr": "Importiere diese Brieftasche in Zeus oder BlueWallet, indem du den QRCode scannst.",
-        "tip_mobile": "Tipp: Verwende diese Geldbörse mit deinem Mobilgerät"
+        "scan_qr": "Importiere diese Brieftasche in Zeus oder BlueWallet, indem du den QRCode scannst."
       },
       "edit": {
         "name": {
           "label": "Name"
-        },
-        "title": "Konto bearbeiten"
+        }
       },
       "actions": {
         "add_account": "Konto hinzufügen"

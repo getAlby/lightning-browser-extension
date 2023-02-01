@@ -285,16 +285,9 @@
       "actions": {
         "add_account": ""
       },
-      "edit": {
-        "name": {
-          "label": ""
-        }
-      },
       "export": {
         "title": "",
-        "waiting": "",
-        "tip_mobile": "",
-        "scan_qr": ""
+        "tip_mobile": ""
       }
     },
     "enable": {
@@ -412,8 +405,7 @@
         "hint": "",
         "private_key": {
           "title": "",
-          "subtitle": "",
-          "warning": ""
+          "subtitle": ""
         }
       }
     },

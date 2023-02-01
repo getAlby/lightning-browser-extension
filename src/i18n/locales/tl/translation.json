@@ -252,16 +252,9 @@
       "actions": {
         "add_account": ""
       },
-      "edit": {
-        "name": {
-          "label": ""
-        }
-      },
       "export": {
         "title": "",
-        "waiting": "",
-        "tip_mobile": "",
-        "scan_qr": ""
+        "tip_mobile": ""
       }
     },
     "enable": {
