@@ -3,6 +3,7 @@ import {
   ExportIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import {
+  CopyIcon,
   CrossIcon,
   HiddenIcon,
   VisibleIcon,
@@ -444,6 +445,7 @@ function AccountScreen() {
               </div>
               <div className="w-1/5 flex-none mx-4">
                 <Button
+                  icon={<CopyIcon className="w-6 h-6 mr-2" />}
                   label={privateKeyCopyLabel}
                   onClick={async () => {
                     try {
@@ -490,6 +492,7 @@ function AccountScreen() {
               </div>
               <div className="w-1/5 flex-none mx-4">
                 <Button
+                  icon={<CopyIcon className="w-6 h-6 mr-2" />}
                   label={publicKeyCopyLabel}
                   onClick={async () => {
                     try {
