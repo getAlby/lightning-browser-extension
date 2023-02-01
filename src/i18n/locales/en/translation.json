@@ -116,6 +116,17 @@
           "connection_failed": "Connection failed. Are your LND credentials correct?"
         }
       },
+      "lnc": {
+        "title": "LND with LNC",
+        "page": {
+          "title": "Connect to your LND node",
+          "description": "Create a new session in terminal (litd) to obtain a new pairing phrase and enter it here"
+        },
+        "pairing_phrase": {
+          "label": "Your pairing phrase ",
+          "placeholder": "secret stack sats phrase"
+        }
+      },
       "lndhub_bluewallet": {
         "title": "Bluewallet",
         "page": {
@@ -363,27 +374,61 @@
     },
     "accounts": {
       "title": "Accounts",
+      "account_view": {
+        "title1": "Account Information",
+        "title2": "Edit Account",
+        "name": {
+          "title": "Name",
+          "placeholder": "Account Name"
+        },
+        "export": {
+          "title": "Export Account",
+          "screen_reader": "Export account details",
+          "waiting": "waiting for LndHub data...",
+          "your_ln_address": "Your Lightning Address:",
+          "tip_mobile": "Tip: Use this wallet with your mobile device",
+          "export_uri": "LNDHub Credentials URI",
+          "scan_qr": "Import this wallet into Zeus or BlueWallet by scanning the QRCode."
+        },
+        "nostr": {
+          "title": "Nostr",
+          "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
+          "private_key": {
+            "title": "Manage your keys",
+            "subtitle": "Paste your private key or generate a new one. Make sure you backup your private key before you generate a new one. <0>Learn more »</0>",
+            "warning": "This will delete your old private key. Are you sure?",
+            "success": "Private key encrypted & saved successfully.",
+            "successfully_removed": "Private key removed successfully.",
+            "label": "Private Key"
+          },
+          "public_key": {
+            "label": "Public Key"
+          },
+          "generate_keys": {
+            "title": "Generate new Nostr keys",
+            "screen_reader": "Generate new nostr keys for your account",
+            "hint": "You can generate a random set of Nostr keys or derive keys from this account details (using a signed canonical phrase). <0>Learn more »</0>",
+            "actions": {
+              "random_keys": "Generate random keys",
+              "derived_keys": "Derive keys from account"
+            }
+          },
+          "actions": {
+            "generate": "Generate new keys"
+          }
+        },
+        "remove": {
+          "title": "Remove This Account",
+          "subtitle": "All the linked allowances will be deleted. Please be certain.",
+          "confirm": "Are you sure you want to remove account: {{name}}? \nThis can not be undone. If you used this account to login to websites you might lose access to those."
+        },
+        "actions": {
+          "remove_account": "Remove account",
+          "export": "Export"
+        }
+      },
       "actions": {
         "add_account": "Add account"
-      },
-      "edit": {
-        "title": "Edit Account",
-        "name": {
-          "label": "Name"
-        },
-        "screen_reader": "Edit account name"
-      },
-      "export": {
-        "title": "Export Account",
-        "screen_reader": "Export account details",
-        "waiting": "waiting for LndHub data...",
-        "your_ln_address": "Your Lightning Address:",
-        "tip_mobile": "Tip: Use this wallet with your mobile device",
-        "export_uri": "LNDHub Credentials URI",
-        "scan_qr": "Import this wallet into Zeus or BlueWallet by scanning the QRCode."
-      },
-      "remove": {
-        "confirm": "Are you sure you want to remove account: {{name}}? \nThis can not be undone. If you used this account to login to websites you might lose access to those."
       }
     },
     "enable": {
@@ -501,10 +546,8 @@
         "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
         "private_key": {
           "title": "Private key",
-          "subtitle": "Paste your private key or generate a new one. Generating a key will create a new key based on the current account you use. It can be re-generated, but please make sure you backup this private key. <0>Learn more »</0>",
-          "generate": "Generate",
-          "warning": "This will delete your old private key. Are you sure?",
-          "success": "Private key encrypted & saved successfully."
+          "subtitle": "This section is moved to accounts page as keys are account specific now.",
+          "go_to": "Go To Accounts"
         }
       }
     },
@@ -589,7 +632,8 @@
         "entertaiment": "Entertaiment",
         "shopping": "Shopping",
         "miscellaneous": "Miscellaneous",
-        "showcases": "Showcases"
+        "showcases": "Showcases",
+        "nostr": "Nostr"
       },
       "tips": {
         "title": "Your Alby wallet is ready",
@@ -692,6 +736,7 @@
     "success": "Success",
     "error": "Error",
     "settings": "Settings",
+    "accounts": "Accounts",
     "discover": "Discover",
     "websites": "Websites",
     "sats_one": "sat",
@@ -864,6 +909,30 @@
       "signmessage": "Create a signature from this node."
     },
     "lnd": {
+      "getinfo": "Get the node information.",
+      "listchannels": "Get a description of all the open channels.",
+      "listinvoices": "Get a list of all invoices.",
+      "channelbalance": "Get a report on the total funds across all open channels.",
+      "walletbalance": "Get the total unspent outputs of the wallet.",
+      "openchannel": "Open a new channel.",
+      "connectpeer": "Establish a connection to a remote peer.",
+      "disconnectpeer": "Disconnect from a remote peer.",
+      "estimatefee": "Estimate the fee rate and total fees for a transaction.",
+      "getchaninfo": "Get the network announcement for the given channel.",
+      "getnetworkinfo": "Get basic stats about the known channel graph.",
+      "getnodeinfo": "Get the channel information for a node.",
+      "gettransactions": "Get a list of all transactions relevant to the wallet.",
+      "listpayments": "Get a list of all outgoing payments.",
+      "listpeers": "Get a list all currently active peers.",
+      "lookupinvoice": "Look up invoice details.",
+      "queryroutes": "Query for a possible route.",
+      "verifymessage": "Verify a signature over a msg.",
+      "sendtoroute": "Make a payment via the specified route.",
+      "decodepayreq": "Decode a payment request string.",
+      "routermc": "Read the internal mission control state.",
+      "addinvoice": "Create new invoices."
+    },
+    "lnc": {
       "getinfo": "Get the node information.",
       "listchannels": "Get a description of all the open channels.",
       "listinvoices": "Get a list of all invoices.",

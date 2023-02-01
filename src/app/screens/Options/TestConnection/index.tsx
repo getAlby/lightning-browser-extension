@@ -75,7 +75,7 @@ export default function TestConnection() {
 
   return (
     <div>
-      <div className="relative mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white dark:bg-surface-02dp px-10 py-12">
+      <div className="relative mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white dark:bg-surface-02dp p-12 shadow rounded-lg">
         <div className="relative">
           <div>
             {errorMessage && (
@@ -118,7 +118,7 @@ export default function TestConnection() {
                 <p className="mt-6 dark:text-gray-400"></p>
                 <p className="mt-6 dark:text-neutral-400">{t("ready")}</p>
 
-                <div className="mt-6 shadow-lg p-4 rounded-xl">
+                <div className="mt-6">
                   <Card
                     color="bg-gray-100"
                     alias={`${accountInfo.name} - ${accountInfo.alias}`}
@@ -144,11 +144,6 @@ export default function TestConnection() {
             )}
           </div>
         </div>
-
-        <div
-          className="mt-10 -mx-4 relative lg:mt-0 lg:flex lg:items-center"
-          aria-hidden="true"
-        ></div>
       </div>
     </div>
   );

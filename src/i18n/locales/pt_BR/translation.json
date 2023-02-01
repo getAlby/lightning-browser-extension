@@ -9,7 +9,7 @@
       },
       "set_password": {
         "title": "Definir uma senha de desbloqueio",
-        "description": "Os dados armazenados na extensão Alby são criptografados com uma senha de desbloqueio. Não esqueça esta senha! Você precisa dela para usar a extensão Alby (neste navegador)",
+        "description": "Essa senha é usada para proteger sua carteira e fornecer acesso à extensão do navegador. Não esqueça essa senha pois não é possível recuperá-la. Obs. Essa senha é diferente da senha da conta da Alby.",
         "choose_password": {
           "label": "Escolha uma senha de desbloqueio:"
         },
@@ -32,10 +32,11 @@
         "actions": {
           "delete_edit_account": "Remover conta inválida e editar novamente"
         }
-      }
+      },
+      "title": "Bem-vindo a Alby"
     },
     "choose_connector": {
-      "description": "Conecte-se a uma carteira ou servidor disponíveis abaixo",
+      "description": "Escolha uma carteira ou servidor disponível abaixo",
       "lnd": {
         "title": "LND",
         "page": {
@@ -252,7 +253,10 @@
           "connection_failed": "Falha na conexão. O servidor Core Lightning está online e usando o plugin comando?"
         }
       },
-      "title": "Conectar Carteira Bitcoin"
+      "title": "Conectar Carteira Bitcoin",
+      "kollider": {
+        "title": "Kollider"
+      }
     },
     "home": {
       "actions": {
@@ -521,7 +525,7 @@
       "errors": {
         "status": "Erro: O status de autenticação não está correto"
       },
-      "submit": "Logar",
+      "submit": "Fazer login",
       "title": "Autenticação"
     },
     "lnurlwithdraw": {
@@ -572,22 +576,49 @@
         "gaming": "Jogos",
         "entertaiment": "Entretenimento",
         "shopping": "Compras",
-        "miscellaneous": "Outros"
+        "miscellaneous": "Outros",
+        "nostr": "Nostr"
+      },
+      "tips": {
+        "top_up_wallet": {
+          "description": "Crie uma fatura relâmpago, envie alguns bitcoins para você mesmo e comece a usar a Alby",
+          "label2": "Comprar Bitcoin",
+          "label1": "Receber Bitcoin",
+          "title": "⚡️ Adicione fundos na sua carteira"
+        },
+        "pin": {
+          "title": "📌 Fixar extensão Alby",
+          "description1": "<0>Para acessar a Alby facilmente, clique no ícone da extensão</0> <1/> <2>no canto superior direito do seu navegador</2>",
+          "description2": "Na lista de extensões, localize a Alby e clique no ícone de fixação para fixá-lo na barra de ferramentas do navegador",
+          "description3": "É isso! Agora é só clicar no ícone da Alby"
+        },
+        "address": {
+          "label1": "Eu quero!",
+          "title": "⚡️ Endereço relâmpago",
+          "description": "Crie seu próprio endereço relâmpago e receba pagamentos bitcoin com a mesma facilidade de enviar um e-mail"
+        },
+        "demo": {
+          "title": "🕹️ Teste a Alby",
+          "description": "Descubra tudo o que você pode fazer com a Alby em nosso site de demonstração",
+          "label1": "Experimente"
+        },
+        "title": "Sua carteira Alby está pronta",
+        "description": "Algumas dicas para você iniciar na Alby 🐝"
       }
     },
     "choose_path": {
       "alby": {
-        "description": "Crie uma conta ou realize o login na sua conta atual da Alby.",
+        "description": "Crie uma nova conta Alby ou faça o login na sua conta existente.",
         "create_new": "Criar nova conta",
-        "title": "Alby"
+        "title": "Conta Alby"
       },
       "other": {
-        "title": "Outras Carteiras",
+        "title": "Outras Contas",
         "and_more": "& mais...",
-        "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira suportados.",
+        "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira disponíveis.",
         "connect": "Conectar"
       },
-      "description": "Você pode usar Alby, criando uma conta conosco ou conectando-se à sua própria carteira bitcoin.",
+      "description": "Você pode usar Alby criando uma conta conosco ou conectando-se nas carteiras bitcoin disponíveis.",
       "title": "Como você deseja usar a Alby?"
     },
     "alby": {
@@ -606,7 +637,7 @@
             "label": "Senha"
           }
         },
-        "login_account": "Acessar sua conta atual da Alby.",
+        "login_account": "Acesse sua conta Alby.",
         "host_wallet": "A custódia dos seus bitcoins é por nossa conta!",
         "create_account": "Crie uma nova conta Alby para enviar e receber pagamentos em bitcoin.",
         "email": {
@@ -620,7 +651,7 @@
         "forgot_password": "Esqueceu sua senha?",
         "optional_lightning_note": {
           "part4": "saiba mais",
-          "part3": ". É o jeito mais simples para você receber Bitcoins na Rede Relâmpago.",
+          "part3": ". É o jeito mais simples para você receber bitcoin na rede relâmpago.",
           "part2": "endereço relâmpago",
           "part1": "Ao criar uma conta Alby, você pode escolher um"
         },
@@ -667,7 +698,7 @@
       "remove": "Remover",
       "copy": "Copiar",
       "back": "Voltar",
-      "log_in": "Logar",
+      "log_in": "Fazer login",
       "remember": "Lembrar minha escolha e não perguntar novamente"
     },
     "errors": {
@@ -722,7 +753,7 @@
         "app": "App",
         "podcast": "Podcast"
       },
-      "open_location": "Abrir site"
+      "open_location": "Abrir link"
     },
     "confirm_or_cancel": {
       "only_trusted": "Conecte-se apenas nos sites em que você confia."

@@ -16,6 +16,7 @@ export interface Account {
   connector: ConnectorType;
   config: string;
   name: string;
+  nostrPrivateKey?: string | null;
 }
 
 export interface Accounts {
@@ -164,6 +165,11 @@ export interface MessagePaymentAll extends MessageDefault {
   args?: {
     limit?: number;
   };
+}
+
+export interface MessageAccountGet extends MessageDefault {
+  args?: { id?: Account["id"] };
+  action: "getAccount";
 }
 
 export interface MessageAccountRemove extends MessageDefault {
@@ -375,8 +381,23 @@ export interface MessagePublicKeyGet extends MessageDefault {
   action: "getPublicKeyOrPrompt";
 }
 
+export interface MessagePrivateKeyGet extends MessageDefault {
+  args?: {
+    id?: Account["id"];
+  };
+  action: "getPrivateKey";
+}
+
+export interface MessagePrivateKeyGenerate extends MessageDefault {
+  args?: {
+    type?: "random";
+  };
+  action: "generatePrivateKey";
+}
+
 export interface MessagePrivateKeySet extends MessageDefault {
   args: {
+    id?: Account["id"];
     privateKey: string;
   };
   action: "setPrivateKey";
