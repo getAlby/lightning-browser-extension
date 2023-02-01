@@ -253,7 +253,10 @@
           "connection_failed": "Falha na conexão. O servidor Core Lightning está online e usando o plugin comando?"
         }
       },
-      "title": "Conectar Carteira Bitcoin"
+      "title": "Conectar Carteira Bitcoin",
+      "kollider": {
+        "title": "Kollider"
+      }
     },
     "home": {
       "actions": {
@@ -573,7 +576,8 @@
         "gaming": "Jogos",
         "entertaiment": "Entretenimento",
         "shopping": "Compras",
-        "miscellaneous": "Outros"
+        "miscellaneous": "Outros",
+        "nostr": "Nostr"
       },
       "tips": {
         "top_up_wallet": {
