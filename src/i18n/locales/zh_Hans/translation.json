@@ -32,7 +32,8 @@
         "actions": {
           "delete_edit_account": "删除无效账户并重新编辑"
         }
-      }
+      },
+      "title": "欢迎使用Alby"
     },
     "choose_connector": {
       "lnd": {
@@ -545,6 +546,17 @@
       "success": "付款已发送! 原像: {{preimage}}",
       "payment_summary": {
         "description": "付款至： {{destination}}"
+      }
+    },
+    "choose_path": {
+      "title": "连接",
+      "description": "要使用Alby进行在线支付，请将Alby连接到你的闪电网络钱包。",
+      "other": {
+        "title": "其他钱包"
+      },
+      "alby": {
+        "description": "注册或使用您现有的Alby账户，立即开始闪电支付。",
+        "create_new": "注册"
       }
     }
   },
