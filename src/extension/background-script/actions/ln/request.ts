@@ -45,6 +45,7 @@ const request = async (
     }
 
     if (!accountId) {
+      // type guard
       throw new Error("Could not find a selected account");
     }
 
