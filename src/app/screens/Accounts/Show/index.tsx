@@ -104,7 +104,7 @@ function AccountScreen() {
   }
 
   function generatePublicKey(priv: string) {
-    const nostr = new Nostr(priv);
+    const nostr = new Nostr(nostrlib.normalizeToHex(priv));
     const pubkeyHex = nostr.getPublicKey();
     return nostrlib.hexToNip19(pubkeyHex, "npub");
   }
@@ -214,7 +214,12 @@ function AccountScreen() {
       currentPrivateKey ? generatePublicKey(currentPrivateKey) : ""
     );
     setNostrPrivateKey(
-      currentPrivateKey ? nostrlib.hexToNip19(currentPrivateKey, "nsec") : ""
+      currentPrivateKey
+        ? nostrlib.hexToNip19(
+            nostrlib.normalizeToHex(currentPrivateKey),
+            "nsec"
+          )
+        : ""
     );
   }, [currentPrivateKey]);
 
@@ -243,7 +248,7 @@ function AccountScreen() {
             >
               {account.name}
             </h2>
-            <p
+            <div
               title={account.connector}
               className="text-gray-500 dark:text-gray-400 mb-2 flex justify-center items-center"
             >
@@ -265,7 +270,7 @@ function AccountScreen() {
                   </div>
                 </>
               )}
-            </p>
+            </div>
           </div>
         </div>
       </div>
