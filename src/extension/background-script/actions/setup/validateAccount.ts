@@ -1,20 +1,24 @@
+import { UnionToIntersection } from "~/common/utils/typeHelpers";
 import { ConnectorType, ValidateAccountResponse } from "~/types";
 
 import connectors from "../../connectors";
 
-const validateAccount = async (
-  message: {
-    args: {
-      connector: ConnectorType;
-      // FIXME: add typing
-      config: unknown;
-    };
-  },
-  sender: unknown
-): Promise<{ data: ValidateAccountResponse }> => {
+type ValidateAccountArgs = {
+  [P in ConnectorType]: {
+    connector: P;
+    config: ConstructorParameters<(typeof connectors)[P]>[0];
+  };
+}[ConnectorType];
+
+const validateAccount = async (message: {
+  args: ValidateAccountArgs;
+}): Promise<{ data: ValidateAccountResponse }> => {
   const account = message.args;
-  // FIXME: this would not be needed if each connector took a config parameter
-  const connector = new connectors[account.connector](account.config as never);
+
+  const connector = new connectors[account.connector](
+    // Typescript cannot resolve the correct config based on the connector type
+    account.config as UnionToIntersection<typeof account.config>
+  );
   await connector.init();
 
   try {
