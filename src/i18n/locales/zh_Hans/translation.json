@@ -281,9 +281,6 @@
       }
     },
     "accounts": {
-      "export": {
-        "export_uri": "LNDHub凭证URI"
-      },
       "title": "账户",
       "actions": {
         "add_account": "添加账户"

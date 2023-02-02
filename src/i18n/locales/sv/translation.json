@@ -251,9 +251,6 @@
       "title": "Konton",
       "actions": {
         "add_account": "Lägg till konto"
-      },
-      "export": {
-        "tip_mobile": "Tips: Använd denna plånbok på din mobila enhet"
       }
     },
     "enable": {
