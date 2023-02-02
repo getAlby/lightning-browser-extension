@@ -148,20 +148,23 @@ function AccountDetail() {
         throw new Error("No account available");
       }
 
-      // Validate the private key before saving
-      nostrPrivateKey && generatePublicKey(nostrPrivateKey);
-      nostrPrivateKey && nostrlib.hexToNip19(nostrPrivateKey, "nsec");
-
-      await msg.request("nostr/setPrivateKey", {
-        id: account.id,
-        privateKey: nostrPrivateKey,
-      });
-
       if (nostrPrivateKey) {
+        // Validate the private key before saving
+        nostrPrivateKey && generatePublicKey(nostrPrivateKey);
+        nostrPrivateKey && nostrlib.hexToNip19(nostrPrivateKey, "nsec");
+
+        await msg.request("nostr/setPrivateKey", {
+          id: account.id,
+          privateKey: nostrPrivateKey,
+        });
         toast.success(t("nostr.private_key.success"));
       } else {
+        await msg.request("nostr/removePrivateKey", {
+          id: account.id,
+        });
         toast.success(t("nostr.private_key.successfully_removed"));
       }
+
       setCurrentPrivateKey(nostrPrivateKey);
     } catch (e) {
       if (e instanceof Error) toast.error(e.message);

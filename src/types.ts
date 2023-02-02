@@ -400,6 +400,13 @@ export interface MessagePrivateKeySet extends MessageDefault {
   action: "setPrivateKey";
 }
 
+export interface MessagePrivateKeyRemove extends MessageDefault {
+  args: {
+    id?: Account["id"];
+  };
+  action: "removePrivateKey";
+}
+
 export interface MessageSignEvent extends MessageDefault {
   args: {
     event: Event;
