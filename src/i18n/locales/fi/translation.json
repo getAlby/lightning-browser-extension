@@ -285,7 +285,6 @@
         "add_account": "Lisää tili"
       },
       "export": {
-        "title": "Vie tili",
         "tip_mobile": "Vinkki: Käytä tätä lompakkoa mobiililaitteesi kanssa"
       }
     },
