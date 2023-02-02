@@ -1,10 +1,10 @@
 import Container from "@components/Container";
 import TransactionsTable from "@components/TransactionsTable";
-import dayjs from "dayjs";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
+import { convertPaymentToTransaction } from "~/app/utils/payments";
 import msg from "~/common/lib/msg";
 import { Payment, Transaction } from "~/types";
 
@@ -23,14 +23,7 @@ function Transactions() {
       }>("getPayments");
 
       const transactions: Transaction[] = paymentsResponse.payments.map(
-        (payment) => ({
-          ...payment,
-          id: `${payment.id}`,
-          type: "sent",
-          date: dayjs(payment.createdAt).fromNow(),
-          title: payment.name || payment.description,
-          publisherLink: payment.location,
-        })
+        (p: Payment) => convertPaymentToTransaction(p)
       );
 
       for (const transaction of transactions) {

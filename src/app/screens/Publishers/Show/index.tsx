@@ -10,8 +10,10 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
+import { convertPaymentToTransaction } from "~/app/utils/payments";
 import msg from "~/common/lib/msg";
 import type { Allowance, Transaction } from "~/types";
+import { Payment } from "~/types";
 
 dayjs.extend(relativeTime);
 
@@ -40,20 +42,14 @@ function Publisher() {
         });
         setAllowance(response);
 
-        const payments: Transaction[] = response.payments.map((payment) => ({
-          ...payment,
-          id: `${payment.id}`,
-          type: "sent",
-          date: dayjs(payment.createdAt).fromNow(),
-          title: payment.name || payment.description,
-          publisherLink: payment.location,
-        }));
+        const payments: Transaction[] = response.payments.map((p: Payment) =>
+          convertPaymentToTransaction(p)
+        );
 
         for (const payment of payments) {
-          const totalAmountFiat = settings.showFiat
+          payment.totalAmountFiat = settings.showFiat
             ? await getFormattedFiat(payment.totalAmount)
             : "";
-          payment.totalAmountFiat = totalAmountFiat;
         }
         setPayments(payments);
       }
