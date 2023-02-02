@@ -193,24 +193,9 @@
       "actions": {
         "add_account": "Añadir Cuenta"
       },
-      "edit": {
-        "title": "Editar Cuenta",
-        "name": {
-          "label": "Nombre"
-        },
-        "screen_reader": "Editar nombre de cuenta"
-      },
       "export": {
         "title": "Cuenta de exportación",
-        "screen_reader": "Exportar detalles de la cuenta",
-        "waiting": "esperando los datos de LndHub...",
-        "your_ln_address": "Su Dirección de Lightning:",
-        "tip_mobile": "Consejo: Use esta billetera con su dispositivo móvil",
-        "export_uri": "Credenciales de la URI LNDHub",
-        "scan_qr": "Importe esta billetera a Zeus o BlueWallet escaneando el código QR."
-      },
-      "remove": {
-        "confirm": "¿Está seguro de que desea eliminar la cuenta: {{name}}? \nEsto no se puede deshacer. Si usó esta cuenta para iniciar sesión en sitios web, es posible que pierda el acceso a ellos."
+        "tip_mobile": "Consejo: Use esta billetera con su dispositivo móvil"
       }
     },
     "enable": {

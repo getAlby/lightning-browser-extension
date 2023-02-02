@@ -32,7 +32,8 @@
         "actions": {
           "delete_edit_account": "删除无效账户并重新编辑"
         }
-      }
+      },
+      "title": "欢迎使用Alby"
     },
     "choose_connector": {
       "lnd": {
@@ -280,26 +281,11 @@
       }
     },
     "accounts": {
-      "edit": {
-        "title": "编辑账户",
-        "name": {
-          "label": "名称"
-        },
-        "screen_reader": "编辑账户名称"
-      },
       "export": {
         "waiting": "正在等待 LndHub 数据...",
-        "title": "导出账户",
-        "your_ln_address": "你的闪电地址：",
-        "tip_mobile": "提示：用你的移动设备使用这个钱包",
-        "export_uri": "LNDHub凭证URI",
-        "scan_qr": "通过扫描二维码将这个钱包导入Zeus或BlueWallet。",
-        "screen_reader": "导出帐户详情"
+        "export_uri": "LNDHub凭证URI"
       },
       "title": "账户",
-      "remove": {
-        "confirm": "是否确定要删除帐户：{{name}}？\n这是无法撤消的。如果你使用此账户登录网站，则可能无法访问这些网站。"
-      },
       "actions": {
         "add_account": "添加账户"
       }
@@ -331,9 +317,6 @@
       "nostr": {
         "private_key": {
           "title": "私钥",
-          "generate": "生成",
-          "warning": "这将删除你的旧私钥。是否确定？",
-          "success": "私钥已加密并成功保存。",
           "subtitle": "生成密钥将根据你当前使用的帐户创建一个新密钥。请确保备份此私钥。"
         },
         "title": "Nostr",
@@ -545,6 +528,17 @@
       "success": "付款已发送! 原像: {{preimage}}",
       "payment_summary": {
         "description": "付款至： {{destination}}"
+      }
+    },
+    "choose_path": {
+      "title": "连接",
+      "description": "要使用Alby进行在线支付，请将Alby连接到你的闪电网络钱包。",
+      "other": {
+        "title": "其他钱包"
+      },
+      "alby": {
+        "description": "注册或使用您现有的Alby账户，立即开始闪电支付。",
+        "create_new": "注册"
       }
     }
   },

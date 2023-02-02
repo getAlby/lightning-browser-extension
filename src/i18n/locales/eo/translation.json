@@ -284,24 +284,9 @@
       "actions": {
         "add_account": ""
       },
-      "edit": {
-        "title": "",
-        "name": {
-          "label": "Nomo"
-        },
-        "screen_reader": ""
-      },
       "export": {
         "title": "",
-        "screen_reader": "",
-        "waiting": "",
-        "your_ln_address": "",
-        "tip_mobile": "",
-        "export_uri": "",
-        "scan_qr": ""
-      },
-      "remove": {
-        "confirm": ""
+        "tip_mobile": ""
       }
     },
     "enable": {
@@ -418,10 +403,7 @@
         "hint": "",
         "private_key": {
           "title": "Privata ŝlosilo",
-          "subtitle": "",
-          "generate": "Generi",
-          "warning": "",
-          "success": ""
+          "subtitle": ""
         }
       }
     },

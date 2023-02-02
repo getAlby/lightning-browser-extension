@@ -284,24 +284,9 @@
       "actions": {
         "add_account": "Lisää tili"
       },
-      "edit": {
-        "title": "Muokkaa tiliä",
-        "name": {
-          "label": "Nimi"
-        },
-        "screen_reader": "Muokkaa tilin nimeä"
-      },
       "export": {
         "title": "Vie tili",
-        "screen_reader": "Vie tilin yksityiskohdat",
-        "waiting": "Odotetaan LndHub-tietoja...",
-        "your_ln_address": "Lightning-osoitteesi:",
-        "tip_mobile": "Vinkki: Käytä tätä lompakkoa mobiililaitteesi kanssa",
-        "export_uri": "LNDHub-tunnistetietojen URI",
-        "scan_qr": "Tuo tämä lompakko Zeusiin tai sinilompakkoon skannaamalla QRCode."
-      },
-      "remove": {
-        "confirm": "Haluatko varmasti poistaa tilin: {{name}}?\nTätä ei voi peruuttaa. Jos käytit tätä tiliä verkkosivustoille kirjautumiseen, saatat menettää pääsyn niihin."
+        "tip_mobile": "Vinkki: Käytä tätä lompakkoa mobiililaitteesi kanssa"
       }
     },
     "enable": {
@@ -418,10 +403,7 @@
         "hint": "on yksinkertainen ja avoin protokolla, jonka tarkoituksena on luoda sensuurin kestäviä sosiaalisia verkostoja. Nostr toimii kryptografisten avainten kanssa. Jos haluat julkaista jotain, allekirjoita se avaimellasi ja lähetä se useille välittäjille. Voit käyttää Albyä Nostr-avaimen hallintaan. Monet Nostr-sovellukset sallivat sitten yksinkertaisesti käyttää avainta Alby-laajennuksesta.",
         "private_key": {
           "title": "Yksityinen avain",
-          "subtitle": "Avaimen luominen luo uuden avaimen nykyisen käyttämäsi tilin perusteella. Varmista, että varmuuskopioit tämän yksityisen avaimen.",
-          "generate": "Luo",
-          "warning": "Tämä poistaa vanhan yksityisen avaimesi. Oletko varma?",
-          "success": "Yksityinen avain salattu ja tallennettu onnistuneesti."
+          "subtitle": "Avaimen luominen luo uuden avaimen nykyisen käyttämäsi tilin perusteella. Varmista, että varmuuskopioit tämän yksityisen avaimen."
         }
       }
     },
