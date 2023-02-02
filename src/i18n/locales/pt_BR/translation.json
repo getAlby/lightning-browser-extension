@@ -287,9 +287,6 @@
       "title": "Contas",
       "actions": {
         "add_account": "Adicionar conta"
-      },
-      "export": {
-        "tip_mobile": "Dica: Use esta carteira no seu dispositivo móvel"
       }
     },
     "enable": {
