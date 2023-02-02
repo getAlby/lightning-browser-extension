@@ -47,9 +47,7 @@ function Enable(props: Props) {
     await msg.request("addBlocklist", {
       domain: props.origin.domain,
       host: props.origin.host,
-      // FIXME: typings
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } as any);
+    } as FixMe);
     alert(t("block_added", { host: props.origin.host }));
     msg.error(USER_REJECTED_ERROR);
   }
@@ -60,9 +58,7 @@ function Enable(props: Props) {
         const allowance = await msg.request("getAllowance", {
           domain: props.origin.domain,
           host: props.origin.host,
-          // FIXME: typings
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } as any);
+        } as FixMe);
         if (allowance && allowance.enabled) {
           enable();
         }
