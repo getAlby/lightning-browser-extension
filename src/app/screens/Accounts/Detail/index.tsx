@@ -150,8 +150,8 @@ function AccountDetail() {
 
       if (nostrPrivateKey) {
         // Validate the private key before saving
-        nostrPrivateKey && generatePublicKey(nostrPrivateKey);
-        nostrPrivateKey && nostrlib.hexToNip19(nostrPrivateKey, "nsec");
+        generatePublicKey(nostrPrivateKey);
+        nostrlib.hexToNip19(nostrPrivateKey, "nsec");
 
         await msg.request("nostr/setPrivateKey", {
           id: account.id,
