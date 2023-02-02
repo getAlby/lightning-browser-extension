@@ -423,9 +423,6 @@
     },
     "accounts": {
       "title": "Konten",
-      "export": {
-        "scan_qr": "Importiere diese Brieftasche in Zeus oder BlueWallet, indem du den QRCode scannst."
-      },
       "edit": {
         "name": {
           "label": "Name"

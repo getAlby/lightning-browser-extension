@@ -282,7 +282,6 @@
     },
     "accounts": {
       "export": {
-        "waiting": "正在等待 LndHub 数据...",
         "export_uri": "LNDHub凭证URI"
       },
       "title": "账户",
