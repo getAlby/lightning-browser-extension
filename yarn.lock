@@ -3609,10 +3609,10 @@ devtools-protocol@0.0.1068969:
   resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.1068969.tgz#8b9a4bc48aed1453bed08d62b07481f9abf4d6d8"
   integrity sha512-ATFTrPbY1dKYhPPvpjtwWKSK2mIwGmRwX54UASn9THEuIZCe2n9k3vVuMmt6jWeL+e5QaaguEv/pMyR+JQB7VQ==
 
-dexie@^3.2.2:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/dexie/-/dexie-3.2.2.tgz#fa6f2a3c0d6ed0766f8d97a03720056f88fe0e01"
-  integrity sha512-q5dC3HPmir2DERlX+toCBbHQXW5MsyrFqPFcovkH9N2S/UW/H3H5AWAB6iEOExeraAu+j+zRDG+zg/D7YhH0qg==
+dexie@^3.2.3:
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/dexie/-/dexie-3.2.3.tgz#f35c91ca797599df8e771b998e9ae9669c877f8c"
+  integrity sha512-iHayBd4UYryDCVUNa3PMsJMEnd8yjyh5p7a+RFeC8i8n476BC9wMhVvqiImq5zJZJf5Tuer+s4SSj+AA3x+ZbQ==
 
 didyoumean@^1.2.2:
   version "1.2.2"
@@ -6288,10 +6288,10 @@ listr2@^5.0.5:
     "@lightninglabs/lnc-core" "0.2.1-alpha"
     crypto-js "4.1.1"
 
-lnmessage@^0.0.17:
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/lnmessage/-/lnmessage-0.0.17.tgz#e209a7ce7f6e88350a2886e62f0fb29b09da06b8"
-  integrity sha512-DZMXkw1yz+1mCldmnCksQ1Jcd4ALDfdY1gGEu4MoxGswLCeAv98OSfAP8cSLoGh3cSuZKR4lnwg9vwbTsm7SUQ==
+lnmessage@^0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/lnmessage/-/lnmessage-0.0.18.tgz#bb578a324bae85894bcea12011fe6f27a3021289"
+  integrity sha512-6uwPNajtVdgcE9wJ5DhWmlfrksXks68MnbsJrKRR+d000DG1asFmERPWDeofFSVmkYfDuCJFHA63h6miQV+P0Q==
   dependencies:
     buffer "^6.0.3"
     crypto-js "^4.1.1"

@@ -14,6 +14,7 @@ const select = async (message: MessageAccountSelect) => {
 
     state.setState({
       account,
+      nostr: null, // reset memoized nostr instance
       connector: null, // reset memoized connector
       currentAccountId: accountId,
     });
