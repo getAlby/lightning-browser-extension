@@ -12,7 +12,9 @@ import * as setup from "./actions/setup";
 import * as webln from "./actions/webln";
 
 // TODO: find a way to get keys recursively
-type NostrKey = `nostr/${keyof (typeof routes)["nostr"]}`;
+type NostrRoutes = (typeof routes)["nostr"];
+type NostrKey = `nostr/${keyof NostrRoutes}`;
+type NostrKeyNoPrefix = keyof NostrRoutes;
 
 export type RouteKey = Exclude<keyof typeof routes, "nostr" | "public">;
 export type ExtendedRouteKey = RouteKey | NostrKey;
@@ -21,11 +23,9 @@ export type RouteArgs = {
   [P in RouteKey]: Parameters<(typeof routes)[P]>[0]["args"];
 };
 
-type NostrKeyNoPrefix = keyof (typeof routes)["nostr"];
-
 type NostrRouteArgs = {
   [P in NostrKeyNoPrefix as `nostr/${P}`]: Parameters<
-    (typeof routes)["nostr"][P]
+    NostrRoutes[P]
   >[0]["args"];
 };
 
@@ -36,16 +36,14 @@ type RouteResponseReturnDataType<T> = T extends { data: infer U }
   : undefined;
 
 export type RouteResponse = {
-  //[P in RouteKey]: Awaited<ReturnType<(typeof routes)[P]>>["data"];
   [P in RouteKey]: RouteResponseReturnDataType<
     Awaited<ReturnType<(typeof routes)[P]>>
   >;
 };
 
 type NostrRouteResponse = {
-  //[P in NostrKeyNoPrefix as `nostr/${P}`]: Awaited<ReturnType<(typeof routes["nostr"])[P]>>["data"];
   [P in NostrKeyNoPrefix as `nostr/${P}`]: RouteResponseReturnDataType<
-    Awaited<ReturnType<(typeof routes)["nostr"][P]>>
+    Awaited<ReturnType<NostrRoutes[P]>>
   >;
 };
 
