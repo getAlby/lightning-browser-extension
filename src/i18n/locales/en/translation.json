@@ -87,7 +87,7 @@
         "optional_lightning_address": {
           "label": "Choose your Lightning Address (optional)",
           "suffix": "@getalby.com",
-          "title": "numbers and letters, at least 3 characters"
+          "title": "numbers and letters, at least 4 characters"
         },
         "errors": {
           "create_wallet_error": "Failed to log in or create a new account. If you need help, please contact support@getalby.com"
