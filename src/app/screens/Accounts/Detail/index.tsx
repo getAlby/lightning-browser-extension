@@ -37,7 +37,7 @@ import type { Account } from "~/types";
 type AccountAction = Omit<Account, "connector" | "config" | "nostrPrivateKey">;
 dayjs.extend(relativeTime);
 
-function AccountScreen() {
+function AccountDetail() {
   const auth = useAccount();
   const { accounts, getAccounts } = useAccounts();
   const { t } = useTranslation("translation", {
@@ -617,4 +617,4 @@ function AccountScreen() {
   );
 }
 
-export default AccountScreen;
+export default AccountDetail;
