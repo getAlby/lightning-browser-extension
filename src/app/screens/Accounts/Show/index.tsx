@@ -449,7 +449,7 @@ function AccountScreen() {
                   type={nostrPrivateKeyVisible ? "text" : "password"}
                   value={nostrPrivateKey}
                   onChange={(event) => {
-                    setNostrPrivateKey(event.target.value);
+                    setNostrPrivateKey(event.target.value.trim());
                   }}
                   endAdornment={
                     <button
