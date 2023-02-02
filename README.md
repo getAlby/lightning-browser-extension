@@ -100,7 +100,7 @@ We use the [Development Project Board](https://github.com/orgs/getAlby/projects/
 
 #### Developer
 
-- Check out the issues that have specifically been [marked as being friendly to new contributors](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3Adesign+label%3A%22good+first+issue%22)
+- Check out the issues that have specifically been [marked as being friendly to new contributors](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
 - You can also review open PRs
 - [Contribution guide for new developers](./doc/CONTRIBUTION.md)
 
