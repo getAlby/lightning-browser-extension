@@ -25,7 +25,7 @@ interface State {
   password: (password?: string | null) => Promise<string | null>;
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
-  getNostr: () => Nostr;
+  getNostr: () => Promise<Nostr>;
   init: () => Promise<void>;
   isUnlocked: () => Promise<boolean>;
   lock: () => Promise<void>;
@@ -56,6 +56,7 @@ export const DEFAULT_SETTINGS: SettingsStorage = {
   exchange: "alby",
   debug: false,
   nostrEnabled: false,
+  closedTips: [],
 };
 
 // these keys get synced from the state to the browser storage
@@ -126,12 +127,18 @@ const state = createState<State>((set, get) => ({
 
     return connector;
   },
-  getNostr: () => {
+  getNostr: async () => {
     if (get().nostr) {
       return get().nostr as Nostr;
     }
+    const currentAccountId = get().currentAccountId as string;
+    const account = get().accounts[currentAccountId];
 
-    const nostr = new Nostr();
+    const password = await get().password();
+    if (!password) throw new Error("Password is not set");
+    const privateKey = decryptData(account.nostrPrivateKey as string, password);
+
+    const nostr = new Nostr(privateKey);
     set({ nostr: nostr });
 
     return nostr;
@@ -147,7 +154,7 @@ const state = createState<State>((set, get) => ({
     if (connector) {
       await connector.unload();
     }
-    set({ connector: null, account: null });
+    set({ connector: null, account: null, nostr: null });
   },
   isUnlocked: async () => {
     const password = await await get().password();

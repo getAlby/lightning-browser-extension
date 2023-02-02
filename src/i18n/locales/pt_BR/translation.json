@@ -4,33 +4,12 @@
       "nav": {
         "welcome": "Bem-vindo",
         "password": "Senha",
-        "connect": "Sua conta",
+        "connect": "Sua Conta",
         "done": "Feito"
-      },
-      "intro": {
-        "send": {
-          "title": "Clicou pagou",
-          "description": "Realize pagamentos enquanto você navega na web"
-        },
-        "paywall": {
-          "title": "Chega de paywalls irritantes",
-          "description": "Habilite pagamentos automáticos e estabeleça limites de gastos personalizados para cada site."
-        },
-        "privacy": {
-          "title": "Privacidade",
-          "description": "Use a rede relâmpago do bitcoin para autenticar em sites e tenha controle sobre sua privacidade."
-        },
-        "foss": {
-          "title": "Gratuito e de código aberto",
-          "description": "Código completamente aberto e que pode ser auditado por qualquer pessoa. Sem estatísticas ou rastreadores. Você está no controle."
-        },
-        "actions": {
-          "get_started": "Começar"
-        }
       },
       "set_password": {
         "title": "Definir uma senha de desbloqueio",
-        "description": "Os dados armazenados na extensão Alby são criptografados com uma senha de desbloqueio. Não esqueça esta senha! Você precisa dela para usar a extensão Alby (neste navegador)",
+        "description": "Essa senha é usada para proteger sua carteira e fornecer acesso à extensão do navegador. Não esqueça essa senha pois não é possível recuperá-la. Obs. Essa senha é diferente da senha da conta da Alby.",
         "choose_password": {
           "label": "Escolha uma senha de desbloqueio:"
         },
@@ -45,8 +24,6 @@
       },
       "test_connection": {
         "ready": "Perfeito, tudo configurado!",
-        "tutorial": "Agora que você já conectou a carteira, gostaria de ler o tutorial?",
-        "try_tutorial": "Experimente agora",
         "initializing": "Iniciando sua conta. Aguarde, pode demorar um pouco...",
         "connection_error": "Erro de conexão",
         "review_connection_details": "Revise os detalhes da conexão.",
@@ -55,10 +32,11 @@
         "actions": {
           "delete_edit_account": "Remover conta inválida e editar novamente"
         }
-      }
+      },
+      "title": "Bem-vindo a Alby"
     },
     "choose_connector": {
-      "description": "Você precisa primeiro conectar-se a uma conta ou servidor para poder interagir com seus sites favoritos que aceitam pagamentos em bitcoin!",
+      "description": "Escolha uma carteira ou servidor disponível abaixo",
       "lnd": {
         "title": "LND",
         "page": {
@@ -138,7 +116,7 @@
         "title": "myNode",
         "page": {
           "title": "Conecte na <0>myNode</0>",
-          "instructions": "No myNode clique em <0>Wallet</0> botão para seu serviço <0>Lightning</0>.<1/> Agora clique em <0>Pair Wallet</0> botão abaixo da tab <0>Status</0>. Insira sua senha quando solicitada.<1/> Selecione o menu suspenso e escolha uma opção de emparelhamento. Dependendo da sua configuração você pode escolher <0>Conexão Lightning (REST + Local IP)</0> ou conexão <0>Lightning (REST + Tor)</0>."
+          "instructions": "No myNode clique em <0>Wallet</0> botão para seu serviço <0>lightning</0>.<1/> Agora clique em <0>Pair Wallet</0> botão abaixo da tab <0>Status</0>. Insira sua senha quando solicitada.<1/> Selecione o menu suspenso e escolha uma opção de emparelhamento. Dependendo da sua configuração você pode escolher <0>Conexão lightning (REST + Local IP)</0> ou conexão <0>lightning (REST + Tor)</0>."
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -149,7 +127,7 @@
         "title": "Start9",
         "page": {
           "title": "Conecte no seu servidor <0>Embassy</0>",
-          "instructions": "<0>Note:</0> Atualmente somente a LND é suportada mas nós adicionaremos suporte para a c-lightning no futuro!<1/>No seu Embassy clique em service <0>Lightning Network Daemon</0>.<1/>Selecione a tab <0>Properties</0>.<1/>Agora copie o <0>LND Connect REST URL.</0>"
+          "instructions": "<0>Note:</0> Atualmente somente a LND é suportada mas nós adicionaremos suporte para a c-lightning no futuro!<1/>No seu Embassy clique em service <0>lightning network Daemon</0>.<1/>Selecione a tab <0>Properties</0>.<1/>Agora copie o <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -246,7 +224,7 @@
       "commando": {
         "page": {
           "title": "Conecte no servidor Core Lightning",
-          "instructions": "Certifique-se de conectar em um servidor Core Lightning que esteja na versão 0.12.0 ou mais recente, o plugin commando instalado e rodando e o servidor acessível na Rede Relâmpago. Crie um rune executando o comando 'lightning-cli commando-rune'."
+          "instructions": "Certifique-se de conectar em um servidor Core Lightning que esteja na versão 0.12.0 ou mais recente, o plugin commando instalado e rodando e o servidor acessível na rede relâmpago. Crie um rune executando o comando 'lightning-cli commando-rune'."
         },
         "title": "Core Lightning",
         "pubkey": {
@@ -274,6 +252,10 @@
         "errors": {
           "connection_failed": "Falha na conexão. O servidor Core Lightning está online e usando o plugin comando?"
         }
+      },
+      "title": "Conectar Carteira Bitcoin",
+      "kollider": {
+        "title": "Kollider"
       }
     },
     "home": {
@@ -306,24 +288,8 @@
       "actions": {
         "add_account": "Adicionar conta"
       },
-      "edit": {
-        "title": "Editar Conta",
-        "name": {
-          "label": "Nome"
-        },
-        "screen_reader": "Editar nome da conta"
-      },
       "export": {
-        "title": "Exportar Conta",
-        "screen_reader": "Exportar detalhes da conta",
-        "waiting": "aguardando dados LndHub...",
-        "your_ln_address": "Seu Endereço Relâmpago:",
-        "tip_mobile": "Dica: Use esta carteira no seu dispositivo móvel",
-        "export_uri": "Credenciais URI LNDHub",
-        "scan_qr": "Leia o Código QR para importar esta carteira na Zeus ou BlueWallet."
-      },
-      "remove": {
-        "confirm": "Tem certeza de que deseja remover a conta: {{name}}? \nEsta ação não pode ser desfeita. Se você usou essa conta para logar em sites, poderá perder o acesso a eles."
+        "tip_mobile": "Dica: Use esta carteira no seu dispositivo móvel"
       }
     },
     "enable": {
@@ -396,7 +362,7 @@
       },
       "exchange": {
         "title": "Serviço provedor de cotações",
-        "subtitle": "Escolha o serviço que fornecerá as cotações do Bitcoin exibidas na Alby"
+        "subtitle": "Escolha o serviço que fornecerá as cotações do bitcoin exibidas na Alby"
       },
       "personal_data": {
         "title": "Dados pessoais",
@@ -439,11 +405,8 @@
       "nostr": {
         "title": "Nostr",
         "private_key": {
-          "subtitle": "Ao gerar uma chave, ela será criada a partir da conta atual que você usa. Certifique-se de fazer backup desta chave privada. <0>Saiba mais »</0>",
-          "warning": "Isso excluirá sua chave privada antiga. Tem certeza de que deseja prosseguir?",
-          "title": "Chave privada",
-          "generate": "Gerar",
-          "success": "A chave privada foi encriptada e salva com sucesso."
+          "subtitle": "Cole ou gere uma nova chave privada. Ao gerar uma chave, ela será criada a partir da conta atual que você usa. Certifique-se de fazer backup desta chave privada. <0>Saiba mais »</0>",
+          "title": "Chave privada"
         },
         "hint": "é um protocolo simples e aberto que visa criar redes sociais resistentes à censura. Os perfis na rede Nostr são chaves criptográficas. Para publicar algo, você assina com sua chave e a informação é enviada para servidores. Na Alby você pode usar e gerenciar seu perfil em diferentes aplicações que suportam esse recurso."
       }
@@ -498,7 +461,11 @@
           "title": "Limite de gastos",
           "used_budget": "sats usados"
         }
-      }
+      },
+      "title": "Sua lista de Sites ⚡️",
+      "description": "Sites onde você já usou a Alby",
+      "no_info": "Nenhum site ainda.",
+      "discover": "Descubra Sites"
     },
     "make_invoice": {
       "title": "Gerar Fatura",
@@ -539,7 +506,7 @@
       "errors": {
         "status": "Erro: O status de autenticação não está correto"
       },
-      "submit": "Logar",
+      "submit": "Fazer login",
       "title": "Autenticação"
     },
     "lnurlwithdraw": {
@@ -572,25 +539,112 @@
     "nostr": {
       "allow": "Permitir este site:",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
-      "read_public_key": "Ler sua chave pública",
       "title": "Nostr",
-      "confirm_sign_message": {
-        "remember": {
-          "label": "Lembrar minha escolha e não perguntar novamente"
-        }
-      },
       "content": "Este site solicita que você assine:",
-      "permissions": {
-        "decrypt": "Descriptografar dados",
-        "encrypt": "Criptografar dados",
-        "allow_sign": "Permitir {{host}} assinar:"
-      },
-      "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site."
+      "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site.",
+      "allow_sign": "Permitir {{host}} assinar:"
     },
     "confirm_request_permission": {
       "title": "Aprovar Solicitação",
       "allow": "Permitir este site executar:",
       "always_allow": "Lembrar minha escolha e não perguntar novamente"
+    },
+    "discover": {
+      "title": "Explore o ecossistema ⚡️",
+      "description": "Sites onde você pode usar a Alby",
+      "list": {
+        "trading": "Negociação",
+        "gaming": "Jogos",
+        "entertaiment": "Entretenimento",
+        "shopping": "Compras",
+        "miscellaneous": "Outros",
+        "nostr": "Nostr"
+      },
+      "tips": {
+        "top_up_wallet": {
+          "description": "Crie uma fatura relâmpago, envie alguns bitcoins para você mesmo e comece a usar a Alby",
+          "label2": "Comprar Bitcoin",
+          "label1": "Receber Bitcoin",
+          "title": "⚡️ Adicione fundos na sua carteira"
+        },
+        "pin": {
+          "title": "📌 Fixar extensão Alby",
+          "description1": "<0>Para acessar a Alby facilmente, clique no ícone da extensão</0> <1/> <2>no canto superior direito do seu navegador</2>",
+          "description2": "Na lista de extensões, localize a Alby e clique no ícone de fixação para fixá-lo na barra de ferramentas do navegador",
+          "description3": "É isso! Agora é só clicar no ícone da Alby"
+        },
+        "address": {
+          "label1": "Eu quero!",
+          "title": "⚡️ Endereço relâmpago",
+          "description": "Crie seu próprio endereço relâmpago e receba pagamentos bitcoin com a mesma facilidade de enviar um e-mail"
+        },
+        "demo": {
+          "title": "🕹️ Teste a Alby",
+          "description": "Descubra tudo o que você pode fazer com a Alby em nosso site de demonstração",
+          "label1": "Experimente"
+        },
+        "title": "Sua carteira Alby está pronta",
+        "description": "Algumas dicas para você iniciar na Alby 🐝"
+      }
+    },
+    "choose_path": {
+      "alby": {
+        "description": "Crie uma nova conta Alby ou faça o login na sua conta existente.",
+        "create_new": "Criar nova conta",
+        "title": "Conta Alby"
+      },
+      "other": {
+        "title": "Outras Contas",
+        "and_more": "& mais...",
+        "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira disponíveis.",
+        "connect": "Conectar"
+      },
+      "description": "Você pode usar Alby criando uma conta conosco ou conectando-se nas carteiras bitcoin disponíveis.",
+      "title": "Como você deseja usar a Alby?"
+    },
+    "alby": {
+      "pre_connect": {
+        "title": "Sua conta Alby",
+        "set_password": {
+          "errors": {
+            "enter_password": "Insira uma senha.",
+            "confirm_password": "Confirme sua senha.",
+            "mismatched_password": "As senhas não correspondem."
+          },
+          "confirm_password": {
+            "label": "Confirmar Senha"
+          },
+          "choose_password": {
+            "label": "Senha"
+          }
+        },
+        "login_account": "Acesse sua conta Alby.",
+        "host_wallet": "A custódia dos seus bitcoins é por nossa conta!",
+        "create_account": "Crie uma nova conta Alby para enviar e receber pagamentos em bitcoin.",
+        "email": {
+          "create": {
+            "label": "Endereço de E-mail"
+          },
+          "login": {
+            "label": "Endereço de E-mail ou Endereço Relâmpago"
+          }
+        },
+        "forgot_password": "Esqueceu sua senha?",
+        "optional_lightning_note": {
+          "part4": "saiba mais",
+          "part3": ". É o jeito mais simples para você receber bitcoin na rede relâmpago.",
+          "part2": "endereço relâmpago",
+          "part1": "Ao criar uma conta Alby, você pode escolher um"
+        },
+        "optional_lightning_address": {
+          "title": "números e letras, pelo menos 3 caracteres",
+          "suffix": "@getalby.com",
+          "label": "Escolha um Endereço Relâmpago (opcional)"
+        },
+        "errors": {
+          "create_wallet_error": "Falha ao logar ou criar uma nova conta. Se precisar de ajuda, entre em contato com support@getalby.com"
+        }
+      }
     }
   },
   "common": {
@@ -624,7 +678,9 @@
       "export": "Exportar",
       "remove": "Remover",
       "copy": "Copiar",
-      "back": "Voltar"
+      "back": "Voltar",
+      "log_in": "Fazer login",
+      "remember": "Lembrar minha escolha e não perguntar novamente"
     },
     "errors": {
       "connection_failed": "Falha na conexão",
@@ -637,7 +693,8 @@
     "response": "Resposta",
     "success_message": "{{amount}}{{fiatAmount}} enviados para {{destination}}",
     "advanced": "Avançado",
-    "discover": "Explorar"
+    "discover": "Explorar",
+    "confirm_password": "Confirmar Senha"
   },
   "components": {
     "allowance_menu": {
@@ -653,7 +710,8 @@
       "enable_login": {
         "title": "Login Relâmpago",
         "subtitle": "O login é realizado de forma automática, sem necessidade de confirmação."
-      }
+      },
+      "edit_permissions": "Editar Permissões"
     },
     "qrcode_scanner": {
       "title": "Ler Código QR",
@@ -676,7 +734,7 @@
         "app": "App",
         "podcast": "Podcast"
       },
-      "open_location": "Abrir site"
+      "open_location": "Abrir link"
     },
     "confirm_or_cancel": {
       "only_trusted": "Conecte-se apenas nos sites em que você confia."
@@ -728,6 +786,14 @@
         "active": "LIMITE DE GASTOS",
         "auth": "LOGIN RELÂMPAGO"
       }
+    }
+  },
+  "permissions": {
+    "nostr": {
+      "getpublickey": "Ler sua chave pública.",
+      "signmessage": "Assinar mensagem com sua chave.",
+      "nip04decrypt": "Descriptografar dados.",
+      "nip04encrypt": "Criptografar dados."
     }
   }
 }

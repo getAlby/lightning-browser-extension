@@ -26,6 +26,12 @@ const setMigrated = (name: Migration): Promise<void> => {
 };
 
 const migrations = {
+  migratedeleteLegacyWeblnPermissions: async () => {
+    await db.permissions
+      .where("method")
+      .startsWithIgnoreCase("webln/")
+      .delete();
+  },
   migrateisUsingLegacyLnurlAuthKeySetting: async () => {
     const { settings } = state.getState();
     const allowances = await db.allowances
@@ -46,6 +52,19 @@ const migrations = {
       // state is saved with the setMigrated call
     }
   },
+  migrateisUsingGlobalNostrKey: async () => {
+    const { nostrPrivateKey, accounts } = state.getState();
+
+    if (nostrPrivateKey) {
+      Object.values(accounts).map((account) => {
+        if (!account.nostrPrivateKey) account.nostrPrivateKey = nostrPrivateKey;
+      });
+
+      state.setState({
+        accounts,
+      });
+    }
+  },
 };
 
 const migrate = async () => {
@@ -57,6 +76,16 @@ const migrate = async () => {
     );
     await migrations["migrateisUsingLegacyLnurlAuthKeySetting"]();
     await setMigrated("migrateisUsingLegacyLnurlAuthKeySetting");
+  }
+  if (shouldMigrate("migrateisUsingGlobalNostrKey")) {
+    console.info("Running migration for: migrateisUsingGlobalNostrKey");
+    await migrations["migrateisUsingGlobalNostrKey"]();
+    await setMigrated("migrateisUsingGlobalNostrKey");
+  }
+  if (shouldMigrate("migratedeleteLegacyWeblnPermissions")) {
+    console.info("Running migration for: migratedeleteLegacyWeblnPermissions");
+    await migrations["migratedeleteLegacyWeblnPermissions"]();
+    await setMigrated("migratedeleteLegacyWeblnPermissions");
   }
 };
 

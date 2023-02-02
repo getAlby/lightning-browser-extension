@@ -7,27 +7,6 @@
         "connect": "Su cuenta de Lightning",
         "done": "Hecho"
       },
-      "intro": {
-        "send": {
-          "title": "Enviar en un Click",
-          "description": "Las transacciones de lightning ocurren en su navegador. No se necesita alt+tab ni escaneo de códigos QR."
-        },
-        "paywall": {
-          "title": "No más molestos muros de pago",
-          "description": "Defina presupuestos individuales para sitios web para permitir flujos de pago sin interrupciones. No más molestos muros de pago."
-        },
-        "privacy": {
-          "title": "Privacidad primero",
-          "description": "Utilice lightning para autenticarse y controlar su privacidad."
-        },
-        "foss": {
-          "title": "Gratis y de Código Abierto",
-          "description": "Código completamente abierto que puede ser auditado por cualquier persona. Sin estadísticas ni rastreadores. Tú tienes el control."
-        },
-        "actions": {
-          "get_started": "Comience"
-        }
-      },
       "set_password": {
         "title": "Proteja su billetera",
         "description": "Los datos de su cuenta Lightning se cifran de forma segura con una contraseña de desbloqueo. No olvides esta contraseña! Lo necesita para desbloquear el teléfono por extensión (en este navegador)",
@@ -45,8 +24,6 @@
       },
       "test_connection": {
         "ready": "¡Impresionante, estás listo para comenzar!",
-        "tutorial": "Ahora que ha conectado su billetera, ¿le gustaría realizar un tutorial?",
-        "try_tutorial": "Pruébalo ahora",
         "initializing": "Inicializando su cuenta. Por favor, espere, esto puede tardar un minuto...",
         "connection_error": "Error de Conexión",
         "review_connection_details": "Revise los detalles de su conexión.",
@@ -216,24 +193,8 @@
       "actions": {
         "add_account": "Añadir Cuenta"
       },
-      "edit": {
-        "title": "Editar Cuenta",
-        "name": {
-          "label": "Nombre"
-        },
-        "screen_reader": "Editar nombre de cuenta"
-      },
       "export": {
-        "title": "Cuenta de exportación",
-        "screen_reader": "Exportar detalles de la cuenta",
-        "waiting": "esperando los datos de LndHub...",
-        "your_ln_address": "Su Dirección de Lightning:",
-        "tip_mobile": "Consejo: Use esta billetera con su dispositivo móvil",
-        "export_uri": "Credenciales de la URI LNDHub",
-        "scan_qr": "Importe esta billetera a Zeus o BlueWallet escaneando el código QR."
-      },
-      "remove": {
-        "confirm": "¿Está seguro de que desea eliminar la cuenta: {{name}}? \nEsto no se puede deshacer. Si usó esta cuenta para iniciar sesión en sitios web, es posible que pierda el acceso a ellos."
+        "tip_mobile": "Consejo: Use esta billetera con su dispositivo móvil"
       }
     },
     "enable": {

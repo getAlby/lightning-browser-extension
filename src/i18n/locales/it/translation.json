@@ -4,33 +4,12 @@
       "nav": {
         "welcome": "Benvenuto",
         "password": "La tua Password",
-        "connect": "Il tuo account Lightning",
+        "connect": "Il tuo Account Lightning",
         "done": "Fatto"
-      },
-      "intro": {
-        "send": {
-          "title": "Invia in un Click",
-          "description": "Le transazioni Lightning avvengono direttamente nel tuo browser. Niente più alt+tab o scansioni di QR necessari."
-        },
-        "paywall": {
-          "title": "Niente più fastidiosi paywall",
-          "description": "Definisci budget individuali per creare flussi di pagamento ai siti web. Basta noiosi paywalls."
-        },
-        "privacy": {
-          "title": "La privacy prima di tutto",
-          "description": "Usa Lightning per autenticarti e mantenere la tua privacy."
-        },
-        "foss": {
-          "title": "Gratuito e Open Source",
-          "description": "Codice completamente aperto che può essere controllato da chiunque. Nessuna statistica o tracker. Sei tu ad avere il controllo."
-        },
-        "actions": {
-          "get_started": "Inizia subito"
-        }
       },
       "set_password": {
         "title": "Imposta una password di sblocco",
-        "description": "I dati del tuo account Lightning sono crittografati in modo sicuro con una password di sblocco. Non dimenticare questa password! Ti serve per sbloccare l'estensione Alby (in questo browser)",
+        "description": "I dati del tuo account lightning sono crittografati in modo sicuro con una password di sblocco. Non dimenticare questa password! Ti serve per sbloccare l'estensione Alby (in questo browser)",
         "choose_password": {
           "label": "Scegli una password di sblocco:"
         },
@@ -45,8 +24,6 @@
       },
       "test_connection": {
         "ready": "Fantastico, sei pronto per partire!",
-        "tutorial": "Ora che hai collegato il tuo portafoglio ti piacerebbe seguire un tutorial?",
-        "try_tutorial": "Provalo ora",
         "initializing": "Stiamo inizializzando il tuo account. Per favore attendi, questa operazione potrebbe impiegare alcuni minuti…",
         "connection_error": "Errore di connessione",
         "review_connection_details": "Controlla i dettagli della tua connessione.",
@@ -275,24 +252,8 @@
       "actions": {
         "add_account": "Aggiungi account"
       },
-      "edit": {
-        "title": "Modifica account",
-        "name": {
-          "label": "Nome"
-        },
-        "screen_reader": "Modifica nome dell'account"
-      },
       "export": {
-        "title": "Esporta Account",
-        "screen_reader": "Esporta i dettagli dell'account",
-        "waiting": "in attesa dei dati di LndHub...",
-        "your_ln_address": "Il tuo indirizzo Lightning:",
-        "tip_mobile": "Suggerimento: Utilizza questo portafoglio con il tuo dispositivo mobile",
-        "export_uri": "URI delle credenziali di LNDHub",
-        "scan_qr": "Importa questo portafoglio in Zeus o BlueWallet scansionando il QRCode."
-      },
-      "remove": {
-        "confirm": "Sei sicuro di voler rimuovere l'account: {{name}}? \nQuesta operazione non può essere annullata. Se hai usato questo account per accedere a siti web, potresti perdere l'accesso a questi ultimi."
+        "tip_mobile": "Suggerimento: Utilizza questo portafoglio con il tuo dispositivo mobile"
       }
     },
     "enable": {
@@ -409,10 +370,7 @@
         "hint": "è un protocollo semplice e aperto che mira a creare reti sociali resistenti alla censura. Nostr funziona con chiavi crittografiche. Per pubblicare qualcosa si firma con la propria chiave e la si invia a più relè. È possibile utilizzare Alby per gestire la propria chiave Nostr. Molte applicazioni Nostr vi permetteranno poi di utilizzare semplicemente la chiave dall'estensione Alby.",
         "private_key": {
           "title": "Chiave privata",
-          "subtitle": "La generazione di una chiave creerà una nuova chiave basata sull'account correntemente utilizzato. Assicurati di fare un backup della chiave privata.",
-          "generate": "Genera",
-          "warning": "In questo modo si cancellerà la vecchia chiave privata. Sei sicuro?",
-          "success": "Chiave privata criptata e salvata con successo."
+          "subtitle": "La generazione di una chiave creerà una nuova chiave basata sull'account correntemente utilizzato. Assicurati di fare un backup della chiave privata."
         }
       }
     },
@@ -540,8 +498,58 @@
     "nostr": {
       "title": "Nostr",
       "allow": "Consenti a {{host}} di:",
-      "read_public_key": "Leggere la propria chiave pubblica",
       "block_and_ignore": "Blocca e ignora {{host}}"
+    },
+    "alby": {
+      "pre_connect": {
+        "create_account": "Crea un nuovo account Alby per inviare e ricevere pagamenti bitcoin.",
+        "login_account": "Accedi per connettere il tuo account Alby esistente.",
+        "optional_lightning_note": {
+          "part4": "Scopri di più",
+          "part3": ". Si tratta di un semplice modo per fare in modo che chiunque possa inviarti bitcoin sulla rete lightning.",
+          "part1": "Il tuo account Alby include anche un optional",
+          "part2": "Indirizzo Lightning"
+        },
+        "forgot_password": "Hai dimenticato la password?",
+        "title": "Il tuo account Alby",
+        "host_wallet": "Ospitiamo un portafoglio Lightning per te!",
+        "email": {
+          "create": {
+            "label": "Indirizzo email"
+          },
+          "login": {
+            "label": "Indirizzo email o indirizzo Lightning"
+          }
+        },
+        "set_password": {
+          "choose_password": {
+            "label": "Password"
+          },
+          "confirm_password": {
+            "label": "Conferma password"
+          },
+          "errors": {
+            "enter_password": "Inserisci una password.",
+            "confirm_password": "Si prega di confermare la password.",
+            "mismatched_password": "Le password non corrispondono."
+          }
+        }
+      }
+    },
+    "choose_path": {
+      "title": "Connettiti",
+      "description": "Per iniziare a utilizzare Alby per effettuare pagamenti online, collega il tuo portafoglio lightning all'estensione.",
+      "alby": {
+        "title": "Alby",
+        "description": "Registrati o utilizza il tuo account Alby per iniziare a pagare attraverso lightning in pochissimo tempo.",
+        "create_new": "Iscriviti"
+      },
+      "other": {
+        "title": "Altri portafogli",
+        "description": "Collegati al tuo portafoglio o nodo Lightning e scegli tra vari connettori.",
+        "and_more": "& altro...",
+        "connect": "Connettiti"
+      }
     }
   },
   "common": {

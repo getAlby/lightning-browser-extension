@@ -7,27 +7,6 @@
         "connect": "",
         "done": ""
       },
-      "intro": {
-        "send": {
-          "title": "",
-          "description": ""
-        },
-        "paywall": {
-          "title": "",
-          "description": ""
-        },
-        "privacy": {
-          "title": "",
-          "description": ""
-        },
-        "foss": {
-          "title": "",
-          "description": ""
-        },
-        "actions": {
-          "get_started": ""
-        }
-      },
       "set_password": {
         "title": "",
         "description": "",
@@ -45,8 +24,6 @@
       },
       "test_connection": {
         "ready": "",
-        "tutorial": "",
-        "try_tutorial": "",
         "initializing": "",
         "connection_error": "",
         "review_connection_details": "",
@@ -275,24 +252,8 @@
       "actions": {
         "add_account": ""
       },
-      "edit": {
-        "title": "",
-        "name": {
-          "label": ""
-        },
-        "screen_reader": ""
-      },
       "export": {
-        "title": "",
-        "screen_reader": "",
-        "waiting": "",
-        "your_ln_address": "",
-        "tip_mobile": "",
-        "export_uri": "",
-        "scan_qr": ""
-      },
-      "remove": {
-        "confirm": ""
+        "tip_mobile": ""
       }
     },
     "enable": {

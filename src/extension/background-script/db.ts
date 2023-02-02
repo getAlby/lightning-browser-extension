@@ -1,13 +1,29 @@
 import Dexie from "dexie";
+import { IDBKeyRange, indexedDB } from "fake-indexeddb";
 import browser from "webextension-polyfill";
 import type {
   DbAllowance,
-  DbPayment,
   DbBlocklist,
+  DbPayment,
   DbPermission,
 } from "~/types";
 
-class DB extends Dexie {
+export function isIndexedDbAvailable() {
+  if ("indexedDB" in globalThis) {
+    return new Promise<boolean>((resolve) => {
+      const req = globalThis.indexedDB.open("LBE-AVAILABILITY-CHECK", 1);
+      req.onsuccess = () => {
+        resolve(true);
+      };
+      req.onerror = () => {
+        resolve(false);
+      };
+    });
+  }
+  return Promise.resolve(false);
+}
+
+export class DB extends Dexie {
   allowances: Dexie.Table<DbAllowance, number>;
   payments: Dexie.Table<DbPayment, number>;
   blocklist: Dexie.Table<DbBlocklist, number>;
@@ -32,6 +48,19 @@ class DB extends Dexie {
     this.payments = this.table("payments");
     this.blocklist = this.table("blocklist");
     this.permissions = this.table("permissions");
+  }
+
+  async openWithInMemoryDB() {
+    console.info("Opening DB using fake indexedDB");
+    // @ts-expect-error _options is inherited from Dexie
+    this._options.indexedDB = indexedDB;
+    // @ts-expect-error _options is inherited from Dexie
+    this._options.IDBKeyRange = IDBKeyRange;
+    // @ts-expect-error _options is inherited from Dexie
+    this._deps.indexedDB = indexedDB;
+    // @ts-expect-error _options is inherited from Dexie
+    this._deps.IDBKeyRange = IDBKeyRange;
+    return this.open();
   }
 
   async saveToStorage() {
@@ -135,6 +164,6 @@ class DB extends Dexie {
   }
 }
 
-const db = new DB();
+export const db = new DB();
 
 export default db;

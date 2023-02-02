@@ -1,11 +1,11 @@
 import {
   AddressBookIcon,
   CaretDownIcon,
+  CheckIcon,
   PlusIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
-import { useState, useEffect } from "react";
+import Avvvatars from "avvvatars-react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
@@ -73,10 +73,10 @@ function AccountMenu({ showOptions = true }: Props) {
   }
 
   return (
-    <div className="relative pl-2 flex bg-gray-100 rounded-md dark:bg-surface-12dp max-w-full">
-      <p className="flex items-center">
-        <WalletIcon className="-ml-1 w-8 h-8 opacity-50 dark:text-white" />
-      </p>
+    <div className="relative pl-2 w-72 flex bg-gray-100 rounded-md dark:bg-surface-12dp">
+      <div className="flex items-center">
+        <Avvvatars value={authAccount?.name || ""} style={"shape"} />
+      </div>
 
       <div
         className={`flex-auto mx-2 py-1 overflow-hidden ${
@@ -112,7 +112,7 @@ function AccountMenu({ showOptions = true }: Props) {
           <span className="sr-only">{t("screen_reader")}</span>
         </Menu.Button>
 
-        <Menu.List position="left">
+        <Menu.List position="left" fullWidth>
           <Menu.Subheader>{t("title")}</Menu.Subheader>
 
           {Object.keys(accounts).map((accountId) => {
@@ -126,14 +126,16 @@ function AccountMenu({ showOptions = true }: Props) {
                 disabled={loading}
                 title={account.name}
               >
-                <WalletIcon className="w-6 h-6 -ml-0.5 mr-2 shrink-0 opacity-75 text-gray-700 dark:text-neutral-300" />
-                <span className="overflow-hidden text-ellipsis whitespace-nowrap">
+                <div className="shrink-0">
+                  <Avvvatars value={account.name} style={"shape"} />
+                </div>
+                <span className="overflow-hidden text-ellipsis whitespace-nowrap ml-2">
                   {account.name}&nbsp;
                 </span>
                 {accountId === authAccount?.id && (
                   <span
                     data-testid="selected"
-                    className="ml-auto w-3.5 h-3.5 rounded-full bg-orange-bitcoin flex justify-center items-center"
+                    className="ml-auto flex-shrink-0 w-3.5 h-3.5 rounded-full bg-orange-bitcoin flex justify-center items-center"
                   >
                     <CheckIcon className="w-3 h-3 text-white" />
                   </span>

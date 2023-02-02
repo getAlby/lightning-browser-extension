@@ -7,27 +7,6 @@
         "connect": "Via konto ĉe Lightning",
         "done": "Farite"
       },
-      "intro": {
-        "send": {
-          "title": "Sendi per unu alklako",
-          "description": ""
-        },
-        "paywall": {
-          "title": "",
-          "description": ""
-        },
-        "privacy": {
-          "title": "Privateco unue",
-          "description": ""
-        },
-        "foss": {
-          "title": "Libera kaj malfermitkoda",
-          "description": ""
-        },
-        "actions": {
-          "get_started": "Komenci"
-        }
-      },
       "set_password": {
         "title": "",
         "description": "",
@@ -45,8 +24,6 @@
       },
       "test_connection": {
         "ready": "Bonege, ĉio pretas!",
-        "tutorial": "",
-        "try_tutorial": "Ekprovi nun",
         "initializing": "",
         "connection_error": "Konekta eraro",
         "review_connection_details": "",
@@ -307,24 +284,8 @@
       "actions": {
         "add_account": ""
       },
-      "edit": {
-        "title": "",
-        "name": {
-          "label": "Nomo"
-        },
-        "screen_reader": ""
-      },
       "export": {
-        "title": "",
-        "screen_reader": "",
-        "waiting": "",
-        "your_ln_address": "",
-        "tip_mobile": "",
-        "export_uri": "",
-        "scan_qr": ""
-      },
-      "remove": {
-        "confirm": ""
+        "tip_mobile": ""
       }
     },
     "enable": {
@@ -441,10 +402,7 @@
         "hint": "",
         "private_key": {
           "title": "Privata ŝlosilo",
-          "subtitle": "",
-          "generate": "Generi",
-          "warning": "",
-          "success": ""
+          "subtitle": ""
         }
       }
     },
@@ -577,7 +535,6 @@
     "nostr": {
       "title": "Nostr",
       "allow": "",
-      "read_public_key": "",
       "block_and_ignore": ""
     }
   },

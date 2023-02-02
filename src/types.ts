@@ -1,5 +1,5 @@
 import { PaymentRequestObject } from "bolt11";
-import { CURRENCIES, ACCOUNT_CURRENCIES } from "~/common/constants";
+import { ACCOUNT_CURRENCIES, CURRENCIES, TIPS } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
 import {
   ConnectorInvoice,
@@ -16,6 +16,7 @@ export interface Account {
   connector: ConnectorType;
   config: string;
   name: string;
+  nostrPrivateKey?: string | null;
 }
 
 export interface Accounts {
@@ -164,6 +165,11 @@ export interface MessagePaymentAll extends MessageDefault {
   args?: {
     limit?: number;
   };
+}
+
+export interface MessageAccountGet extends MessageDefault {
+  args?: { id?: Account["id"] };
+  action: "getAccount";
 }
 
 export interface MessageAccountRemove extends MessageDefault {
@@ -372,8 +378,23 @@ export interface MessagePublicKeyGet extends MessageDefault {
   action: "getPublicKeyOrPrompt";
 }
 
+export interface MessagePrivateKeyGet extends MessageDefault {
+  args?: {
+    id?: Account["id"];
+  };
+  action: "getPrivateKey";
+}
+
+export interface MessagePrivateKeyGenerate extends MessageDefault {
+  args?: {
+    type?: "random";
+  };
+  action: "generatePrivateKey";
+}
+
 export interface MessagePrivateKeySet extends MessageDefault {
   args: {
+    id?: Account["id"];
     privateKey: string;
   };
   action: "setPrivateKey";
@@ -627,6 +648,7 @@ export interface SettingsStorage {
   exchange: SupportedExchanges;
   debug: boolean;
   nostrEnabled: boolean;
+  closedTips: TIPS[];
 }
 
 export interface Badge {
@@ -681,3 +703,5 @@ export interface Invoice {
     value_msat_total: number;
   };
 }
+
+export type BrowserType = "chrome" | "firefox";
