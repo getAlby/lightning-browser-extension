@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
-import { convertPaymentToTransaction } from "~/app/utils/payments";
+import { convertPaymentsToTransactions } from "~/app/utils/payments";
 import msg from "~/common/lib/msg";
 import { Payment, Transaction } from "~/types";
 
@@ -18,13 +18,11 @@ function Transactions() {
 
   const fetchData = useCallback(async () => {
     try {
-      const paymentsResponse = await msg.request<{
-        payments: Payment[];
-      }>("getPayments");
-
-      const transactions: Transaction[] = paymentsResponse.payments.map(
-        (p: Payment) => convertPaymentToTransaction(p)
+      const { payments } = await msg.request<{ payments: Payment[] }>(
+        "getPayments"
       );
+      const transactions: Transaction[] =
+        convertPaymentsToTransactions(payments);
 
       for (const transaction of transactions) {
         transaction.totalAmountFiat = settings.showFiat

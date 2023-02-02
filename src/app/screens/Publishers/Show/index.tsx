@@ -10,10 +10,9 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
-import { convertPaymentToTransaction } from "~/app/utils/payments";
+import { convertPaymentsToTransactions } from "~/app/utils/payments";
 import msg from "~/common/lib/msg";
 import type { Allowance, Transaction } from "~/types";
-import { Payment } from "~/types";
 
 dayjs.extend(relativeTime);
 
@@ -42,8 +41,8 @@ function Publisher() {
         });
         setAllowance(response);
 
-        const payments: Transaction[] = response.payments.map((p: Payment) =>
-          convertPaymentToTransaction(p)
+        const payments: Transaction[] = convertPaymentsToTransactions(
+          response.payments
         );
 
         for (const payment of payments) {

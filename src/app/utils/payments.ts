@@ -9,3 +9,8 @@ export const convertPaymentToTransaction = (payment: Payment): Transaction => ({
   title: payment.name || payment.description,
   publisherLink: payment.location,
 });
+
+export const convertPaymentsToTransactions = (
+  payments: Payment[]
+): Transaction[] =>
+  payments.map((p: Payment) => convertPaymentToTransaction(p));
