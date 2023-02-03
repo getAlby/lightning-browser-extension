@@ -8,10 +8,11 @@ import TransactionsTable from "@components/TransactionsTable";
 import { Tab } from "@headlessui/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { FC, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import { classNames } from "~/app/utils/index";
@@ -66,6 +67,7 @@ const DefaultView: FC<Props> = (props) => {
     !isLoadingInvoices && incomingTransactions?.length === 0;
 
   const navigate = useNavigate();
+  const { account } = useAccount();
 
   const { t } = useTranslation("translation", { keyPrefix: "home" });
   const { t: tCommon } = useTranslation("common");
@@ -132,7 +134,7 @@ const DefaultView: FC<Props> = (props) => {
     }
   };
 
-  const loadInvoices = async () => {
+  const loadInvoices = useCallback(async () => {
     setIsLoadingInvoices(true);
     let result;
     try {
@@ -161,7 +163,14 @@ const DefaultView: FC<Props> = (props) => {
 
     setIncomingTransactions(invoices);
     setIsLoadingInvoices(false);
-  };
+  }, [getFormattedFiat, settings]);
+
+  useEffect(() => {
+    const load = async () => {
+      await loadInvoices();
+    };
+    load();
+  }, [account?.id, loadInvoices]);
 
   return (
     <div className="overflow-y-auto no-scrollbar h-full">
