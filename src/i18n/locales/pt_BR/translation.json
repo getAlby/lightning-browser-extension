@@ -634,7 +634,7 @@
           "part1": "Ao criar uma conta Alby, você pode escolher um"
         },
         "optional_lightning_address": {
-          "title": "números e letras, pelo menos 3 caracteres",
+          "title": "números e letras, pelo menos 4 caracteres",
           "suffix": "@getalby.com",
           "label": "Escolha um Endereço Relâmpago (opcional)"
         },

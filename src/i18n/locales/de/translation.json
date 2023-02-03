@@ -649,7 +649,7 @@
         "optional_lightning_address": {
           "suffix": "@getalby.com",
           "label": "Wähle deine Lightning-Adresse (optional)",
-          "title": "Zahlen und Buchstaben, mindestens 3 Stellen"
+          "title": "Zahlen und Buchstaben, mindestens 4 Stellen"
         },
         "errors": {
           "create_wallet_error": "Du konntest dich nicht anmelden oder ein neues Konto erstellen. Wenn du Hilfe benötigst, wende dich bitte an den support@getalby.com"
