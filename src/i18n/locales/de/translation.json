@@ -446,7 +446,7 @@
         "nostr": {
           "title": "Nostr",
           "private_key": {
-            "title": "Verwalte deinen Schlüssel",
+            "title": "Verwalten von deinen Schlüssel",
             "subtitle": "Füge deinen privaten Schlüssel ein oder erzeuge einen neuen. Stelle sicher, dass du deinen privaten Schlüssel sicherst, bevor du einen neuen Schlüssel generierst. <0>Mehr erfahren\"</0>",
             "warning": "Dadurch wird dein alter privater Schlüssel gelöscht. Bist du dir sicher?",
             "success": "Privater Schlüssel erfolgreich verschlüsselt und gespeichert.",
@@ -457,16 +457,16 @@
             "label": "Öffentlicher Schlüssel"
           },
           "generate_keys": {
-            "title": "Neuen Nostr-Schlüssel generieren",
-            "screen_reader": "Generiere einen neuen Nostr Schlüssel für dein Konto",
+            "title": "Erzeugen eines neuen Nostr Schlüssels",
+            "screen_reader": "Erzeuge einen neuen nNostr Schlüssel für dein Konto",
             "hint": "Du kannst einen zufälligen Satz von Nostr Schlüsseln generieren oder Schlüssel aus diesen Kontodaten ableiten (unter Verwendung einer signierten kanonischen Phrase). <0>Mehr erfahren\"</0>",
             "actions": {
-              "random_keys": "Zufallsschlüssel generieren",
-              "derived_keys": "Schlüssel vom Konto ableiten"
+              "random_keys": "Generieren eines Zufallsschlüssels",
+              "derived_keys": "Ableitung eines Schlüssels aus dem Konto"
             }
           },
           "actions": {
-            "generate": "Neue Schlüssel generieren"
+            "generate": "Erzeugen eines neuen Schlüssels"
           },
           "hint": "ist ein einfaches und offenes Protokoll, das darauf abzielt, zensurresistente soziale Netzwerke zu schaffen. Nostr arbeitet mit kryptographischen Schlüsseln. Um etwas zu veröffentlichen, signiere es mit deinem Schlüssel und senden es an mehrere Relays. Du kannst Alby verwenden, um seinen Nostr-Schlüssel zu verwalten. Viele Nostr-Anwendungen erlauben dir dann, einfach den Schlüssel aus der Alby-Erweiterung zu verwenden."
         },
