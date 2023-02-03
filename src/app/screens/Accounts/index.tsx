@@ -4,9 +4,9 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import Container from "@components/Container";
-import Avvvatars from "avvvatars-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import Avatar from "~/app/components/Avatar";
 import { useAccounts } from "~/app/context/AccountsContext";
 
 function AccountsScreen() {
@@ -44,11 +44,7 @@ function AccountsScreen() {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="w-12 h-12 flex justify-center items-center">
-                        <Avvvatars
-                          value={account.name}
-                          style={"shape"}
-                          size={48}
-                        />
+                        <Avatar name={account.name} size={48} />
                       </div>
                       <div className="ml-4">
                         <h3 className="font-bold text-gray-900 dark:text-white break-all whitespace-normal max-w-xs md:max-w-lg xl:max-w-2xl">
