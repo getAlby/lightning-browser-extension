@@ -938,10 +938,18 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.3.tgz#0300943770e04231041a51bd39f0439b5c7ab4f0"
   integrity sha512-nkalE/f1RvRGChwBnEIoBfSEYOXnCRdleKuv6+lePbMDrMZXeDQnqak5XDOeBgrPPyPfAdcCu/B5z+v3VhplGg==
 
-"@lightninglabs/lnc-core@0.2.1-alpha":
-  version "0.2.1-alpha"
-  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-core/-/lnc-core-0.2.1-alpha.tgz#b381ea29fb7bc20a7dd10334bb913bb50f6dac36"
-  integrity sha512-H297V3seL+PE786HcuAQiSass/3y0NSYCy3b4hNTZL4Io80Oy4WY49s08CpRuV8cNfjAzWjYSXkhorALjaRdwA==
+"@lightninglabs/lnc-core@0.2.2-alpha":
+  version "0.2.2-alpha"
+  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-core/-/lnc-core-0.2.2-alpha.tgz#37e1dcf3419844f70e5df7901ec55cb62a9b0b1e"
+  integrity sha512-S46tZ6cH7jPgrotbZS9Pceyb2Nf+gaC9gmorm1DC7OpWxaf2gilelNk+0wVf9B8pqIwnBfr1z3h/sTophvLkUQ==
+
+"@lightninglabs/lnc-web@^0.2.2-alpha":
+  version "0.2.2-alpha"
+  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-web/-/lnc-web-0.2.2-alpha.tgz#c8b9ee39760a2e5bb2a1e1367e88662aa0fca2a8"
+  integrity sha512-S79ziWZ2pICiK4KMmWxB0JTJqqSpmbfPAXenVXEDbtElDXpYrSabcW8WY3sund9BetF2un0AgcgArqITYqqrqw==
+  dependencies:
+    "@lightninglabs/lnc-core" "0.2.2-alpha"
+    crypto-js "4.1.1"
 
 "@mswjs/cookies@^0.2.2":
   version "0.2.2"
@@ -6268,13 +6276,6 @@ listr2@^5.0.5:
     rxjs "^7.5.7"
     through "^2.3.8"
     wrap-ansi "^7.0.0"
-
-"lnc-web@git+https://github.com/bumi/lnc-web.git#remove-window-dependency":
-  version "0.2.1-alpha"
-  resolved "git+https://github.com/bumi/lnc-web.git#0b312e8c131d6093a498bf5f4e4642196984ca1f"
-  dependencies:
-    "@lightninglabs/lnc-core" "0.2.1-alpha"
-    crypto-js "4.1.1"
 
 lnmessage@^0.0.18:
   version "0.0.18"
