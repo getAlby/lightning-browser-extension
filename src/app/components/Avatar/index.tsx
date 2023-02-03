@@ -1,4 +1,4 @@
-import { default as BoringAvatar } from "boring-avatars";
+import { WalletIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 
 type Props = {
   name: string;
@@ -6,7 +6,7 @@ type Props = {
 };
 
 const Avatar = (props: Props) => {
-  return <BoringAvatar name={props.name} size={props.size} variant="beam" />;
+  return <WalletIcon className="-ml-1 w-8 h-8 opacity-50 dark:text-white" />;
 };
 
 export default Avatar;
