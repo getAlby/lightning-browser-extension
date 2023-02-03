@@ -9,9 +9,9 @@
       },
       "set_password": {
         "title": "Passwort zum Entsperren festlegen",
-        "description": "Dieses Passwort wird verwendet, um deine Brieftasche zu schützen und Zugriff auf die Browsererweiterung zu gewähren. Es kann nicht zurückgesetzt werden und ist von deinem Alby-Kontopasswort getrennt.",
+        "description": "Die Daten deines Lightning Kontos sind mit einem Freischalt Passwort sicher verschlüsselt. Vergesse dieses Passwort nicht! Du benötigst es, um die Alby Erweiterung zu entsperren (in diesem Browser).",
         "choose_password": {
-          "label": "Wähle ein Entsperrpasswort:"
+          "label": "Wähle ein Password zum Entsperren:"
         },
         "errors": {
           "mismatched_password": "Die Passwörter stimmen nicht überein.",
@@ -275,7 +275,18 @@
           "label": "Gebe dein Kollider Benutzernamen ein"
         }
       },
-      "title": "Verbinde Lightning Wallet"
+      "title": "Verbinde Lightning Wallet",
+      "lnc": {
+        "title": "LND mit LNC",
+        "page": {
+          "title": "Verbinde dich mit deinem LND Knoten",
+          "description": "Erstelle eine neue Sitzung im Terminal (litd), um eine neue Paarungsphrase zu erhalten, und gebe sie hier ein"
+        },
+        "pairing_phrase": {
+          "label": "Dein Paarungssatz ",
+          "placeholder": "geheimer stapel sats phrase"
+        }
+      }
     },
     "unlock": {
       "unlock_error": {
@@ -295,11 +306,9 @@
     "settings": {
       "nostr": {
         "private_key": {
-          "warning": "Das wird deinen alten Private Key löschen. Bist du sicher?",
-          "success": "Privaten Schlüssel erfolgreich verschlüsselt und gespeichert.",
           "title": "Privater Schlüssel",
-          "generate": "Generiere",
-          "subtitle": "Füge deinen privaten Schlüssel ein oder erzeuge einen neuen Schlüssel. Beim Generieren eines Schlüssels wird ein neuer Schlüssel auf der Grundlage des aktuellen Kontos, das du verwendest, erstellt. Er kann erneut generiert werden, aber bitte stelle sicher, dass du diesen privaten Schlüssel sicherst. <0>Mehr erfahren\"</0>"
+          "subtitle": "Dieser Abschnitt wurde auf die Kontenseite verschoben, da die Schlüssel jetzt kontenspezifisch sind.",
+          "go_to": "Gehe zu deinem Konto"
         },
         "hint": "Es ist ein einfaches und offenes Protokoll, das darauf abzielt, zensurresistente soziale Netzwerke zu schaffen. Nostr arbeitet mit kryptographischen Schlüsseln. Um etwas zu veröffentlichen, signiere es mit deinem Schlüssel und senden es an mehrere Relays. Du kannst Alby verwenden, um deinen Nostr-Schlüssel zu verwalten. Viele Nostr-Anwendungen erlauben dann, einfach den Schlüssel aus der Alby-Erweiterung zu verwenden.",
         "title": "Nostr"
@@ -415,27 +424,61 @@
     },
     "accounts": {
       "title": "Konten",
-      "export": {
-        "title": "Konto exportieren",
-        "screen_reader": "Kontodaten exportieren",
-        "waiting": "Warten auf LndHub Daten...",
-        "scan_qr": "Importiere diese Brieftasche in Zeus oder BlueWallet, indem du den QRCode scannst.",
-        "your_ln_address": "Deine Lightning Adresse:",
-        "tip_mobile": "Tipp: Verwende diese Geldbörse mit deinem Mobilgerät",
-        "export_uri": "LNDHub Anmeldeinformationen URI"
-      },
-      "edit": {
-        "name": {
-          "label": "Name"
-        },
-        "screen_reader": "Kontonamen bearbeiten",
-        "title": "Konto bearbeiten"
-      },
-      "remove": {
-        "confirm": "Bist du dir sicher, dass du das Konto entfernen möchtest: {{Name}}? \nDies kann nicht rückgängig gemacht werden. Wenn du dich mit diesem Konto bei Websites angemeldet haben, verlierst du möglicherweise den Zugriff auf diese."
-      },
       "actions": {
         "add_account": "Konto hinzufügen"
+      },
+      "account_view": {
+        "title2": "Konto bearbeiten",
+        "title1": "Konto Informationen",
+        "name": {
+          "title": "Name",
+          "placeholder": "Konto Name"
+        },
+        "export": {
+          "title": "Konto exportieren",
+          "screen_reader": "Kontodaten exportieren",
+          "waiting": "Warten auf LndHub Daten...",
+          "your_ln_address": "Deine Lightning Adresse:",
+          "tip_mobile": "Tipp: Verwende diese Geldbörse mit deinem mobilen Gerät",
+          "export_uri": "LNDHub Anmeldeinformationen URI",
+          "scan_qr": "Importiere diese Wallet in Zeus oder BlueWallet, indem du den QRCode scannst."
+        },
+        "nostr": {
+          "title": "Nostr",
+          "private_key": {
+            "title": "Verwalte deinen Schlüssel",
+            "subtitle": "Füge deinen privaten Schlüssel ein oder erzeuge einen neuen. Stelle sicher, dass du deinen privaten Schlüssel sicherst, bevor du einen neuen Schlüssel generierst. <0>Mehr erfahren\"</0>",
+            "warning": "Dadurch wird dein alter privater Schlüssel gelöscht. Bist du dir sicher?",
+            "success": "Privater Schlüssel erfolgreich verschlüsselt und gespeichert.",
+            "successfully_removed": "Privater Schlüssel erfolgreich entfernt.",
+            "label": "Privater Schlüssel"
+          },
+          "public_key": {
+            "label": "Öffentlicher Schlüssel"
+          },
+          "generate_keys": {
+            "title": "Neuen Nostr-Schlüssel generieren",
+            "screen_reader": "Generiere einen neuen Nostr Schlüssel für dein Konto",
+            "hint": "Du kannst einen zufälligen Satz von Nostr Schlüsseln generieren oder Schlüssel aus diesen Kontodaten ableiten (unter Verwendung einer signierten kanonischen Phrase). <0>Mehr erfahren\"</0>",
+            "actions": {
+              "random_keys": "Zufallsschlüssel generieren",
+              "derived_keys": "Schlüssel vom Konto ableiten"
+            }
+          },
+          "actions": {
+            "generate": "Neue Schlüssel generieren"
+          },
+          "hint": "ist ein einfaches und offenes Protokoll, das darauf abzielt, zensurresistente soziale Netzwerke zu schaffen. Nostr arbeitet mit kryptographischen Schlüsseln. Um etwas zu veröffentlichen, signiere es mit deinem Schlüssel und senden es an mehrere Relays. Du kannst Alby verwenden, um seinen Nostr-Schlüssel zu verwalten. Viele Nostr-Anwendungen erlauben dir dann, einfach den Schlüssel aus der Alby-Erweiterung zu verwenden."
+        },
+        "remove": {
+          "title": "Dieses Konto entfernen",
+          "subtitle": "Alle verknüpften Zertifikate werden gelöscht. Bitte sei dir sicher.",
+          "confirm": "Bis du dir sicher, dass du das Konto entfernen möchtest: {{Name}}?\nDies kann nicht rückgängig gemacht werden. Wenn du dich mit diesem Konto bei Websites angemeldet haben, verlierst du möglicherweise den Zugriff auf diese."
+        },
+        "actions": {
+          "remove_account": "Konto entfernen",
+          "export": "Exportieren"
+        }
       }
     },
     "enable": {
@@ -652,7 +695,8 @@
         "entertaiment": "Unterhaltung",
         "shopping": "Einkaufen",
         "miscellaneous": "Sonstiges",
-        "showcases": "Schaukästen"
+        "showcases": "Schaukästen",
+        "nostr": "Nostr"
       },
       "tips": {
         "title": "Deine Alby-Wallet ist bereit",
@@ -822,7 +866,8 @@
     },
     "message": "Nachricht",
     "response": "Antwort",
-    "success_message": "{{amount}}{{fiatAmount}} gesendet an {{destination}}"
+    "success_message": "{{amount}}{{fiatAmount}} gesendet an {{destination}}",
+    "accounts": "Konten"
   },
   "permissions": {
     "commando": {
@@ -883,6 +928,30 @@
       "nip04decrypt": "Daten entschlüsseln.",
       "nip04encrypt": "Daten verschlüsseln.",
       "signmessage": "Unterschreibe deine Nachricht mit deinem Schlüssel."
+    },
+    "lnc": {
+      "connectpeer": "Stelle eine Verbindung zu einer Gegenstelle her.",
+      "disconnectpeer": "Trenne die Verbindung zu einer entfernten Gegenstelle.",
+      "estimatefee": "Schätze den Gebührensatz und die Gesamtgebühren für eine Transaktion.",
+      "getnodeinfo": "Abrufen der Kanalinformationen für einen Knoten.",
+      "getchaninfo": "Ermittelt die Netzansage für den angegebenen Kanal.",
+      "listpayments": "Erhalte eine Liste aller ausgehenden Zahlungen.",
+      "queryroutes": "Abfrage nach einer möglichen Route.",
+      "verifymessage": "Überprüfung einer Signatur über eine Nachricht.",
+      "listpeers": "Ermittelt eine Liste aller derzeit aktiven Peers.",
+      "sendtoroute": "Nehme eine Zahlung über die angegebene Route vor.",
+      "decodepayreq": "Dekodierung einer Zahlungsanforderungszeichenfolge.",
+      "addinvoice": "Erstelle eine neue Rechnungen.",
+      "routermc": "Lese den internen Status der Missionskontrolle.",
+      "gettransactions": "Abrufen einer Liste aller für die Wallet relevanten Transaktionen.",
+      "getnetworkinfo": "Abrufen grundlegender Statistiken über die bekannte Kanalkurve.",
+      "lookupinvoice": "Rechnungsdetails nachschlagen.",
+      "getinfo": "Abrufen der Knoteninformationen.",
+      "listchannels": "Erhalte eine Beschreibung aller offenen Kanäle.",
+      "listinvoices": "Erhalte eine Liste aller Rechnungen.",
+      "channelbalance": "Erhalte einen Bericht über den Gesamtbetrag der Mittel für alle offenen Kanäle.",
+      "walletbalance": "Ermittel die gesamten nicht verbrauchten Ausgaben deiner Wallet.",
+      "openchannel": "Öffne einen neuen Kanal."
     }
   }
 }
