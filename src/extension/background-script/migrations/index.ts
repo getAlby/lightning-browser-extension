@@ -36,7 +36,22 @@ const migrations = {
       state.setState({
         accounts,
       });
+      // will be persisted by setMigrated
     }
+  },
+
+  ensureAccountId: async () => {
+    const { accounts } = state.getState();
+    Object.keys(accounts).forEach((accountId) => {
+      if (!accounts[accountId].id) {
+        console.info(`updating ${accountId}`);
+        accounts[accountId].id = accountId;
+      }
+    });
+    state.setState({
+      accounts,
+    });
+    // will be persisted by setMigrated
   },
 };
 
@@ -47,6 +62,11 @@ const migrate = async () => {
     console.info("Running migration for: migrateisUsingGlobalNostrKey");
     await migrations["migrateisUsingGlobalNostrKey"]();
     await setMigrated("migrateisUsingGlobalNostrKey");
+  }
+  if (shouldMigrate("ensureAccountId")) {
+    console.info("Running migration for: ensureAccountId");
+    await migrations["ensureAccountId"]();
+    await setMigrated("ensureAccountId");
   }
 };
 
