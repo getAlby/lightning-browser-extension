@@ -27,7 +27,7 @@ const mockState = {
 state.getState = jest.fn().mockReturnValue(mockState);
 
 describe("Ensure account ID", () => {
-  test("add account ID where missinge", async () => {
+  test("add account ID where missing", async () => {
     let accounts = state.getState().accounts;
     expect(accounts["8b7f1dc6-ab87-4c6c-bca5-19fa8632731e"].id).toEqual(
       undefined
