@@ -435,11 +435,11 @@
       "lock": "Cerrar",
       "unlock": "Desbloquear",
       "send": "Enviar",
-      "save": "Ahorrar",
+      "save": "Guardar",
       "receive": "Recibir",
       "close": "Cerrar",
       "export": "Exportar",
-      "remove": "Remover",
+      "remove": "Quitar",
       "copy": "Copiar",
       "open": "Abrir",
       "back": "Volver"
