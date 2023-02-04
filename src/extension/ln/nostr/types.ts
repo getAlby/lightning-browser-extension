@@ -16,3 +16,10 @@ export enum EventKind {
   DM = 4,
   Deleted = 5,
 }
+
+export type Nip26DelegateConditions = {
+  kind?: number;
+  until?: number;
+  since?: number;
+  content?: string;
+};

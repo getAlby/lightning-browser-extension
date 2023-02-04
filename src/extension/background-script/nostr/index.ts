@@ -5,7 +5,8 @@ import { AES } from "crypto-js";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import Utf8 from "crypto-js/enc-utf8";
-import { Event } from "~/extension/ln/nostr/types";
+import sha256 from "crypto-js/sha256";
+import { Event, Nip26DelegateConditions } from "~/extension/ln/nostr/types";
 
 import { getEventHash, signEvent } from "../actions/nostr/helpers";
 
@@ -57,6 +58,32 @@ class Nostr {
     });
 
     return Utf8.stringify(decrypted);
+  }
+
+  async delegate(delegateePubkey: string, conditions: Nip26DelegateConditions) {
+    const cond = [];
+
+    if (conditions.kind) cond.push(`kind=${conditions.kind}`);
+    if (conditions.until) cond.push(`created_at>${conditions.until}`);
+    if (conditions.since) cond.push(`created_at<${conditions.since}`);
+    if (conditions.content)
+      cond.push(`content=${encodeURIComponent(conditions.content)}`);
+
+    const encodedConditions = cond.join("&");
+
+    // refuse to sign if there are no conditions
+    if (encodedConditions === "") {
+      throw new Error("No conditions specified");
+    }
+
+    const sighash = sha256(
+      Utf8.parse(`nostr:delegation:${delegateePubkey}:${encodedConditions}`)
+    ).toString(Hex);
+
+    const signSync = await secp256k1.schnorr.sign(sighash, this.privateKey);
+    const sig = secp256k1.utils.bytesToHex(signSync);
+
+    return { cond: encodedConditions, sig };
   }
 
   getEventHash(event: Event) {

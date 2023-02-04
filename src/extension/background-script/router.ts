@@ -81,6 +81,7 @@ const routes = {
       getRelays: nostr.getRelays,
       encryptOrPrompt: nostr.encryptOrPrompt,
       decryptOrPrompt: nostr.decryptOrPrompt,
+      delegateOrPrompt: nostr.delegateOrPrompt,
     },
   },
 };

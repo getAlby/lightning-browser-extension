@@ -1,7 +1,8 @@
-import { Event } from "./types";
+import { Event, Nip26DelegateConditions } from "./types";
 
 export default class NostrProvider {
   nip04 = new Nip04(this);
+  nip26 = new Nip26(this);
   enabled: boolean;
 
   constructor() {
@@ -93,5 +94,24 @@ class Nip04 {
   async decrypt(peer: string, ciphertext: string): Promise<string> {
     await this.provider.enable();
     return this.provider.execute("decryptOrPrompt", { peer, ciphertext });
+  }
+}
+
+class Nip26 {
+  provider: NostrProvider;
+
+  constructor(provider: NostrProvider) {
+    this.provider = provider;
+  }
+
+  async delegate(
+    delegateePubkey: string,
+    conditions: Nip26DelegateConditions
+  ): Promise<string> {
+    await this.provider.enable();
+    return this.provider.execute("delegateOrPrompt", {
+      delegateePubkey,
+      conditions,
+    });
   }
 }

@@ -7,7 +7,7 @@ import {
   WebLNNode,
 } from "~/extension/background-script/connectors/connector.interface";
 
-import { Event } from "./extension/ln/nostr/types";
+import { Event, Nip26DelegateConditions } from "./extension/ln/nostr/types";
 
 export type ConnectorType = keyof typeof connectors;
 
@@ -140,6 +140,7 @@ export type NavigationState = {
     customRecords?: Record<string, string>;
     message?: string;
     event?: Event;
+    conditions?: Nip26DelegateConditions;
     description?: string;
     details?: string;
     requestPermission: {
@@ -423,6 +424,14 @@ export interface MessageDecryptGet extends MessageDefault {
   action: "decrypt";
 }
 
+export interface MessageDelegateGet extends MessageDefault {
+  args: {
+    delegateePubkey: string;
+    conditions: Nip26DelegateConditions;
+  };
+  action: "delegate";
+}
+
 export interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node
@@ -557,6 +566,7 @@ export enum PermissionMethodNostr {
   NOSTR_GETPUBLICKEY = "nostr/getPublicKey",
   NOSTR_NIP04DECRYPT = "nostr/nip04decrypt",
   NOSTR_NIP04ENCRYPT = "nostr/nip04encrypt",
+  NOSTR_NIP26DELEGATE = "nostr/nip26delegate",
 }
 
 export interface DbPermission {

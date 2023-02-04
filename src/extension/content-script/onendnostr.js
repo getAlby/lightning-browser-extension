@@ -12,6 +12,7 @@ const nostrCalls = [
   "nostr/enable",
   "nostr/encryptOrPrompt",
   "nostr/decryptOrPrompt",
+  "nostr/delegateOrPrompt",
 ];
 // calls that can be executed when webln is not enabled for the current content page
 const disabledCalls = ["nostr/enable"];
