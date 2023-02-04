@@ -67,7 +67,7 @@ const DefaultView: FC<Props> = (props) => {
     !isLoadingInvoices && incomingTransactions?.length === 0;
 
   const navigate = useNavigate();
-  const { account } = useAccount();
+  const { account, balancesDecorated } = useAccount();
 
   const { t } = useTranslation("translation", { keyPrefix: "home" });
   const { t: tCommon } = useTranslation("common");
@@ -127,13 +127,6 @@ const DefaultView: FC<Props> = (props) => {
     }
   };
 
-  // load incomingTransactions on tab "Incoming" if not done yet
-  const onTabChangeHandler = async (index: number) => {
-    if (index === 1) {
-      !incomingTransactions && (await loadInvoices());
-    }
-  };
-
   const loadInvoices = useCallback(async () => {
     setIsLoadingInvoices(true);
     let result;
@@ -170,7 +163,7 @@ const DefaultView: FC<Props> = (props) => {
       await loadInvoices();
     };
     load();
-  }, [account?.id, loadInvoices]);
+  }, [account?.id, balancesDecorated?.accountBalance, loadInvoices]);
 
   return (
     <div className="overflow-y-auto no-scrollbar h-full">
@@ -229,7 +222,7 @@ const DefaultView: FC<Props> = (props) => {
               {t("default_view.recent_transactions")}
             </h2>
 
-            <Tab.Group onChange={onTabChangeHandler}>
+            <Tab.Group>
               <Tab.List className="mb-2">
                 {[
                   t("transaction_list.tabs.outgoing"),
