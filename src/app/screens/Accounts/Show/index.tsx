@@ -80,6 +80,11 @@ function AccountScreen() {
         const response = await msg.request<GetAccountRes>("getAccount", {
           id,
         });
+        // for backwards compatibility
+        // TODO: remove. if you ask when, then it's probably now.
+        if (!response.id) {
+          response.id = id;
+        }
         setAccount(response);
         setAccountName(response.name);
 
