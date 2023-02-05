@@ -284,7 +284,7 @@
       }
     },
     "accounts": {
-      "title": "Contas",
+      "title": "Minhas Contas",
       "actions": {
         "add_account": "Adicionar conta"
       },
@@ -640,7 +640,7 @@
     "choose_path": {
       "alby": {
         "description": "Crie uma nova conta Alby ou faça o login na sua conta existente.",
-        "create_new": "Criar nova conta",
+        "create_new": "Criar conta Alby",
         "title": "Conta Alby"
       },
       "other": {
@@ -650,7 +650,7 @@
         "connect": "Conectar"
       },
       "description": "Você pode usar Alby criando uma conta conosco ou conectando-se nas carteiras bitcoin disponíveis.",
-      "title": "Como você deseja usar a Alby?"
+      "title": "Escolha o tipo de conta"
     },
     "alby": {
       "pre_connect": {
@@ -745,7 +745,7 @@
     "advanced": "Avançado",
     "discover": "Explorar",
     "confirm_password": "Confirmar Senha",
-    "accounts": "Contas"
+    "accounts": "Minhas Contas"
   },
   "components": {
     "allowance_menu": {
