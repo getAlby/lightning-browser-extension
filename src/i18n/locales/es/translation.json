@@ -197,7 +197,7 @@
     "enable": {
       "allow": "Permitir que {{host}}:",
       "request1": "Solicitar aprobación de transacciones",
-      "request2": "Solicitar facturas e información sobre rayos",
+      "request2": "Solicitar facturas e información sobre Lightning",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "title": "Conectar"
     },
@@ -269,12 +269,12 @@
       "name": {
         "title": "Nombre",
         "subtitle": "",
-        "placeholder": "Entre su nombre"
+        "placeholder": "Introduzca su nombre"
       },
       "email": {
         "title": "Correo electrónico",
         "subtitle": "",
-        "placeholder": "Entre la dirección de su correo electrónico"
+        "placeholder": "Introduzca su dirección de correo electrónico"
       },
       "change_password": {
         "title": "Cambiar la Contraseña",
