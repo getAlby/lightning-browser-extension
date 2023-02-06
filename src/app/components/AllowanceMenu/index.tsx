@@ -62,7 +62,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
           accountId: account?.id,
         });
 
-        const permissions: Permission[] = permissionResponse.permissions;
+        const permissions: Permission[] = permissionResponse?.permissions;
 
         setOriginalPermissions(permissions);
         setPermissions(permissions);

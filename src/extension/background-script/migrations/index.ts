@@ -26,42 +26,6 @@ const setMigrated = (name: Migration): Promise<void> => {
 };
 
 const migrations = {
-  migratedeleteLegacyWeblnPermissions: async () => {
-    await db.permissions
-      .where("method")
-      .startsWithIgnoreCase("webln/")
-      .delete();
-  },
-  migratePermissionsWithoutAccountId: async () => {
-    const { accounts } = state.getState();
-    const accountId = Object.keys(accounts)[0];
-    const permissions = await db.permissions.toArray();
-
-    permissions.forEach(async (permission) => {
-      permission.id &&
-        (await db.permissions.update(permission.id, { accountId }));
-    });
-  },
-  migrateisUsingLegacyLnurlAuthKeySetting: async () => {
-    const { settings } = state.getState();
-    const allowances = await db.allowances
-      .filter((allowance) => {
-        return !!allowance.lnurlAuth;
-      })
-      .toArray();
-
-    // if there is an allowance that uses lnurlAuth we enable the legacy signing
-    if (allowances.length > 0) {
-      const newSettings = {
-        ...settings,
-        isUsingLegacyLnurlAuthKey: true,
-      };
-      state.setState({
-        settings: newSettings,
-      });
-      // state is saved with the setMigrated call
-    }
-  },
   migrateisUsingGlobalNostrKey: async () => {
     const { nostrPrivateKey, accounts } = state.getState();
 
@@ -73,29 +37,48 @@ const migrations = {
       state.setState({
         accounts,
       });
+      // will be persisted by setMigrated
     }
+  },
+
+  ensureAccountId: async () => {
+    const { accounts } = state.getState();
+    Object.keys(accounts).forEach((accountId) => {
+      if (!accounts[accountId].id) {
+        console.info(`updating ${accountId}`);
+        accounts[accountId].id = accountId;
+      }
+    });
+    state.setState({
+      accounts,
+    });
+    // will be persisted by setMigrated
+  },
+
+  migratePermissionsWithoutAccountId: async () => {
+    const { accounts } = state.getState();
+    const accountId = Object.keys(accounts)[0];
+    const permissions = await db.permissions.toArray();
+
+    permissions.forEach(async (permission) => {
+      permission.id &&
+        (await db.permissions.update(permission.id, { accountId }));
+    });
   },
 };
 
 const migrate = async () => {
   // going forward we can iterate through the the migrations object above and DRY this up:
   // Object.keys(migrations).forEach((name: string) => {
-  if (shouldMigrate("migrateisUsingLegacyLnurlAuthKeySetting")) {
-    console.info(
-      "Running migration for: migrateisUsingLegacyLnurlAuthKeySetting"
-    );
-    await migrations["migrateisUsingLegacyLnurlAuthKeySetting"]();
-    await setMigrated("migrateisUsingLegacyLnurlAuthKeySetting");
-  }
   if (shouldMigrate("migrateisUsingGlobalNostrKey")) {
     console.info("Running migration for: migrateisUsingGlobalNostrKey");
     await migrations["migrateisUsingGlobalNostrKey"]();
     await setMigrated("migrateisUsingGlobalNostrKey");
   }
-  if (shouldMigrate("migratedeleteLegacyWeblnPermissions")) {
-    console.info("Running migration for: migratedeleteLegacyWeblnPermissions");
-    await migrations["migratedeleteLegacyWeblnPermissions"]();
-    await setMigrated("migratedeleteLegacyWeblnPermissions");
+  if (shouldMigrate("ensureAccountId")) {
+    console.info("Running migration for: ensureAccountId");
+    await migrations["ensureAccountId"]();
+    await setMigrated("ensureAccountId");
   }
   if (shouldMigrate("migratePermissionsWithoutAccountId")) {
     console.info("Running migration for: migratePermissionsWithoutAccountId");
