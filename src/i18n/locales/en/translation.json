@@ -394,45 +394,16 @@
           "title": "Nostr",
           "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
           "private_key": {
-            "title": "Manage your key",
-            "subtitle": "Paste your private key or generate a new one. Make sure you backup your private key before you generate a new one. <0>Learn more »</0>",
-            "warning": "This will delete your old private key. Are you sure?",
-            "success": "Private key encrypted & saved successfully.",
-            "successfully_removed": "Private key removed successfully.",
-            "label": "Private Key"
-          },
-          "public_key": {
-            "label": "Public Key"
-          },
-          "generate_keys": {
-            "title": "Generate a new Nostr key",
-            "screen_reader": "Generate a new Nostr key for your account",
-            "hint": "You can generate a random key or a derive key from this account details (using a signed canonical phrase). <0>Learn more »</0>",
-            "actions": {
-              "random_keys": "Generate a random key",
-              "derived_keys": "Derive a key from account"
-            }
-          },
-          "actions": {
-            "generate": "Generate a new key"
+            "title": "Manage your Nostr key",
+            "subtitle": "Paste your private key or generate a new one. Make sure you backup your private key before you generate a new one. <0>Learn more »</0>"
           }
         },
         "liquid": {
           "title": "Liquid",
           "hint": "",
           "private_key": {
-            "title": "Manage your Liquid keys",
-            "subtitle": "Paste your private key or generate a new one. Make sure you backup your private key before you generate a new one.",
-            "warning": "This will delete your old private key. Are you sure?",
-            "success": "Private key encrypted & saved successfully.",
-            "successfully_removed": "Private key removed successfully.",
-            "label": "Private Key"
-          },
-          "public_key": {
-            "label": "Public Key"
-          },
-          "actions": {
-            "generate": "Generate new keys"
+            "title": "Manage your Liquid key",
+            "subtitle": "Paste your private key or generate a new one. Make sure you backup your private key before you generate a new one."
           }
         },
         "remove": {
@@ -887,6 +858,26 @@
       "label": {
         "active": "ACTIVE",
         "auth": "LOGIN"
+      }
+    },
+    "key_manager": {
+      "public_key": {
+        "label": "Public Key"
+      },
+      "private_key": {
+        "label": "Private Key",
+        "warning": "This will delete your old private key. Are you sure?",
+        "success": "Private key encrypted & saved successfully.",
+        "successfully_removed": "Private key removed successfully."
+      },
+      "generate_keys": {
+        "label": "Generate a new key",
+        "screen_reader": "Generate a new key for your account",
+        "hint": "You can generate a random key or a derive key from this account details (using a signed canonical phrase).<0/><1>Learn more »</1>",
+        "actions": {
+          "random_keys": "Generate a random key",
+          "derive_keys": "Derive a key from account"
+        }
       }
     }
   },

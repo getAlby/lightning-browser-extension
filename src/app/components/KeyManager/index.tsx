@@ -34,8 +34,8 @@ function KeyManager({
   accountPrivateKey,
 }: Props) {
   const auth = useAccount();
-  const { t } = useTranslation("translation", {
-    keyPrefix: "accounts.account_view",
+  const { t } = useTranslation("components", {
+    keyPrefix: "key_manager",
   });
   const { t: tCommon } = useTranslation("common");
   const [currentPrivateKey, setCurrentPrivateKey] = useState(accountPrivateKey);
@@ -97,7 +97,7 @@ function KeyManager({
 
     if (privateKey === currentPrivateKey) return;
 
-    if (currentPrivateKey && !confirm(t("nostr.private_key.warning"))) {
+    if (currentPrivateKey && !confirm(t("private_key.warning"))) {
       return;
     }
 
@@ -117,9 +117,9 @@ function KeyManager({
       });
 
       if (privateKey) {
-        toast.success(t("nostr.private_key.success"));
+        toast.success(t("private_key.success"));
       } else {
-        toast.success(t("nostr.private_key.successfully_removed"));
+        toast.success(t("private_key.successfully_removed"));
       }
       setCurrentPrivateKey(privateKey);
     } catch (e) {
@@ -156,7 +156,7 @@ function KeyManager({
           </div>
           <div className="w-1/5 flex-none ml-6">
             <Button
-              label={t("nostr.actions.generate")}
+              label={t("generate_keys.label")}
               onClick={() =>
                 type === "nostr" ? setModalIsOpen(true) : generatePrivateKey()
               }
@@ -174,7 +174,7 @@ function KeyManager({
           <div className="w-7/12">
             <TextField
               id={`${type}PrivateKey`}
-              label={t("nostr.private_key.label")}
+              label={t("private_key.label")}
               type={privateKeyVisible ? "text" : "password"}
               value={privateKey}
               onChange={(event) => {
@@ -235,7 +235,7 @@ function KeyManager({
           <div className="w-7/12">
             <TextField
               id={`${type}PublicKey`}
-              label={t("nostr.public_key.label")}
+              label={t("public_key.label")}
               type="text"
               value={publicKey}
               disabled
@@ -270,13 +270,13 @@ function KeyManager({
         closeTimeoutMS={200}
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        contentLabel={t("nostr.generate_keys.screen_reader")}
+        contentLabel={t("generate_keys.screen_reader")}
         overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
         className="rounded-lg bg-white w-full max-w-lg"
       >
         <div className="p-5 flex justify-between dark:bg-surface-02dp">
           <h2 className="text-2xl font-bold dark:text-white">
-            {t("nostr.generate_keys.title")}
+            {t("generate_keys.label")}
           </h2>
           <button onClick={closeModal}>
             <CrossIcon className="w-6 h-6 dark:text-white" />
@@ -284,9 +284,11 @@ function KeyManager({
         </div>
         <div className="p-5 border-t border-b dark:text-white border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
           <Trans
-            i18nKey={"nostr.generate_keys.hint"}
+            i18nKey={"generate_keys.hint"}
             t={t}
             components={[
+              // eslint-disable-next-line react/jsx-key
+              <br />,
               // eslint-disable-next-line react/jsx-key
               <a
                 className="underline"
@@ -302,14 +304,14 @@ function KeyManager({
             <Button
               type="submit"
               onClick={() => generatePrivateKey(true)}
-              label={t("nostr.generate_keys.actions.random_keys")}
+              label={t("generate_keys.actions.random_keys")}
               primary
               halfWidth
             />
             <Button
               type="submit"
               onClick={() => generatePrivateKey()}
-              label={t("nostr.generate_keys.actions.derived_keys")}
+              label={t("generate_keys.actions.derive_keys")}
               halfWidth
             />
           </div>
