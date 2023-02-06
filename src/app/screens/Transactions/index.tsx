@@ -14,23 +14,25 @@ function Transactions() {
   });
 
   const { settings, getFormattedFiat } = useSettings();
-  const [payments, setPayments] = useState<Transaction[]>([]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   const fetchData = useCallback(async () => {
     try {
+      // @Todo: add SWR caching? Check where to reset/mutate the cache?
       const { payments } = await msg.request<{ payments: Payment[] }>(
         "getPayments"
       );
-      const transactions: Transaction[] =
-        convertPaymentsToTransactions(payments);
+      const _transactions: Transaction[] = await convertPaymentsToTransactions(
+        payments
+      );
 
-      for (const transaction of transactions) {
+      for (const transaction of _transactions) {
         transaction.totalAmountFiat = settings.showFiat
           ? await getFormattedFiat(transaction.totalAmount)
           : "";
       }
 
-      setPayments(transactions);
+      setTransactions(_transactions);
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
@@ -52,7 +54,9 @@ function Transactions() {
       </p>
 
       <div>
-        {payments?.length > 0 && <TransactionsTable transactions={payments} />}
+        {transactions?.length > 0 && (
+          <TransactionsTable transactions={transactions} />
+        )}
       </div>
     </Container>
   );

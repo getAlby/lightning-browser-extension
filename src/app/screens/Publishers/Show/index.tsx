@@ -29,7 +29,7 @@ function Publisher() {
 
   const hasFetchedData = useRef(false);
   const [allowance, setAllowance] = useState<Allowance | undefined>();
-  const [payments, setPayments] = useState<Transaction[] | undefined>();
+  const [transactions, setTransactions] = useState<Transaction[] | undefined>();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -41,16 +41,16 @@ function Publisher() {
         });
         setAllowance(response);
 
-        const payments: Transaction[] = convertPaymentsToTransactions(
+        const _transactions: Transaction[] = convertPaymentsToTransactions(
           response.payments
         );
 
-        for (const payment of payments) {
+        for (const payment of _transactions) {
           payment.totalAmountFiat = settings.showFiat
             ? await getFormattedFiat(payment.totalAmount)
             : "";
         }
-        setPayments(payments);
+        setTransactions(_transactions);
       }
     } catch (e) {
       console.error(e);
@@ -106,8 +106,8 @@ function Publisher() {
           </div>
 
           <div>
-            {payments && payments?.length > 0 && (
-              <TransactionsTable transactions={payments} />
+            {transactions && transactions?.length > 0 && (
+              <TransactionsTable transactions={transactions} />
             )}
           </div>
         </Container>
