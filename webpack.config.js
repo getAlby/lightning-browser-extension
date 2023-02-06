@@ -9,7 +9,8 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 // default value is set in the code where it is used
 if (!process.env.WALLET_CREATE_URL) {
@@ -63,10 +64,12 @@ var options = {
     background: "./src/extension/background-script/index.ts",
     contentScriptOnEnd: "./src/extension/content-script/onend.js",
     contentScriptOnEndNostr: "./src/extension/content-script/onendnostr.js",
+    contentScriptOnEndLiquid: "./src/extension/content-script/onendliquid.js",
     contentScriptOnStart: "./src/extension/content-script/onstart.ts",
     inpageScript: "./src/extension/inpage-script/index.js",
     inpageScriptWebLN: "./src/extension/inpage-script/webln.js",
     inpageScriptNostr: "./src/extension/inpage-script/nostr.js",
+    inpageScriptLiquid: "./src/extension/inpage-script/liquid.js",
     popup: "./src/app/router/Popup/index.tsx",
     prompt: "./src/app/router/Prompt/index.tsx",
     options: "./src/app/router/Options/index.tsx",
@@ -205,10 +208,10 @@ var options = {
       patterns: [{ from: "static/assets", to: "assets" }],
     }),
     new BundleAnalyzerPlugin({
-      generateStatsFile: (nodeEnv !== "development" ? true : false),
-      analyzerMode: (nodeEnv !== "development" ? 'static' : 'disabled'),
-      reportFilename: '../bundle-report.html',
-      statsFilename: '../bundle-stats.json',
+      generateStatsFile: nodeEnv !== "development" ? true : false,
+      analyzerMode: nodeEnv !== "development" ? "static" : "disabled",
+      reportFilename: "../bundle-report.html",
+      statsFilename: "../bundle-stats.json",
       openAnalyzer: nodeEnv !== "development",
     }),
   ],

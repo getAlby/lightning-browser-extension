@@ -10,6 +10,7 @@ import type { Account, Accounts, SettingsStorage } from "~/types";
 
 import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
+import Liquid from "./liquid";
 import Nostr from "./nostr";
 
 interface State {
@@ -19,9 +20,11 @@ interface State {
   connector: Connector | null;
   currentAccountId: string | null;
   nostrPrivateKey: string | null;
+  liquid: Liquid | null;
   nostr: Nostr | null;
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
+  getLiquid: () => Liquid;
   getNostr: () => Nostr;
   init: () => Promise<void>;
   isUnlocked: () => boolean;
@@ -79,6 +82,7 @@ const state = createState<State>((set, get) => ({
   accounts: {},
   currentAccountId: null,
   password: null,
+  liquid: null,
   nostr: null,
   nostrPrivateKey: null,
   getAccount: () => {
@@ -106,6 +110,24 @@ const state = createState<State>((set, get) => ({
 
     return connector;
   },
+  getLiquid: () => {
+    if (get().liquid) {
+      return get().liquid as Liquid;
+    }
+    const currentAccountId = get().currentAccountId as string;
+    const account = get().accounts[currentAccountId];
+
+    const password = get().password as string;
+    const privateKey = decryptData(
+      account.liquidPrivateKey as string,
+      password
+    );
+
+    const liquid = new Liquid(privateKey);
+    set({ liquid: liquid });
+
+    return liquid;
+  },
   getNostr: () => {
     if (get().nostr) {
       return get().nostr as Nostr;
@@ -126,7 +148,13 @@ const state = createState<State>((set, get) => ({
     if (connector) {
       await connector.unload();
     }
-    set({ password: null, connector: null, account: null, nostr: null });
+    set({
+      password: null,
+      connector: null,
+      account: null,
+      nostr: null,
+      liquid: null,
+    });
   },
   isUnlocked: () => {
     return get().password !== null;

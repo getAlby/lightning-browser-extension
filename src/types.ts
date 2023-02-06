@@ -17,6 +17,7 @@ export interface Account {
   config: string;
   name: string;
   nostrPrivateKey?: string | null;
+  liquidPrivateKey?: string | null;
 }
 
 export interface Accounts {
@@ -140,6 +141,7 @@ export type NavigationState = {
     customRecords?: Record<string, string>;
     message?: string;
     event?: Event;
+    sigHash?: string;
     description?: string;
     details?: string;
     requestPermission: {
@@ -304,7 +306,10 @@ export interface MessageAllowanceEnable extends MessageDefault {
   args: {
     host: Allowance["host"];
   };
-  action: "public/webln/enable" | "public/nostr/enable";
+  action:
+    | "public/webln/enable"
+    | "public/nostr/enable"
+    | "public/liquid/enable";
 }
 
 export interface MessageAllowanceDelete extends MessageDefault {
@@ -405,6 +410,13 @@ export interface MessageSignEvent extends MessageDefault {
     event: Event;
   };
   action: "signEvent";
+}
+
+export interface MessageSignSchnorr extends MessageDefault {
+  args: {
+    sigHash: string;
+  };
+  action: "signSchnorr";
 }
 
 export interface MessageEncryptGet extends MessageDefault {
@@ -557,6 +569,11 @@ export enum PermissionMethodNostr {
   NOSTR_GETPUBLICKEY = "nostr/getPublicKey",
   NOSTR_NIP04DECRYPT = "nostr/nip04decrypt",
   NOSTR_NIP04ENCRYPT = "nostr/nip04encrypt",
+}
+
+export enum PermissionMethodLiquid {
+  LIQUID_SIGNSCHNORR = "liquid/signSchnorr",
+  LIQUID_GETPUBLICKEY = "liquid/getPublicKey",
 }
 
 export interface DbPermission {

@@ -417,6 +417,24 @@
             "generate": "Generate a new key"
           }
         },
+        "liquid": {
+          "title": "Liquid",
+          "hint": "",
+          "private_key": {
+            "title": "Manage your Liquid keys",
+            "subtitle": "Paste your private key or generate a new one. Make sure you backup your private key before you generate a new one.",
+            "warning": "This will delete your old private key. Are you sure?",
+            "success": "Private key encrypted & saved successfully.",
+            "successfully_removed": "Private key removed successfully.",
+            "label": "Private Key"
+          },
+          "public_key": {
+            "label": "Public Key"
+          },
+          "actions": {
+            "generate": "Generate new keys"
+          }
+        },
         "remove": {
           "title": "Remove This Account",
           "subtitle": "All the linked allowances will be deleted. Please be certain.",

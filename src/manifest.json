@@ -14,7 +14,8 @@
   "web_accessible_resources": [
     "js/inpageScript.bundle.js",
     "js/inpageScriptWebLN.bundle.js",
-    "js/inpageScriptNostr.bundle.js"
+    "js/inpageScriptNostr.bundle.js",
+    "js/inpageScriptLiquid.bundle.js"
   ],
   "permissions": [
     "notifications",
@@ -104,7 +105,8 @@
       "run_at": "document_end",
       "js": [
         "js/contentScriptOnEnd.bundle.js",
-        "js/contentScriptOnEndNostr.bundle.js"
+        "js/contentScriptOnEndNostr.bundle.js",
+        "js/contentScriptOnEndLiquid.bundle.js"
       ]
     },
     {

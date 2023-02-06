@@ -2,16 +2,12 @@ import {
   CaretLeftIcon,
   ExportIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import {
-  CopyIcon,
-  CrossIcon,
-  HiddenIcon,
-  VisibleIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
+import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
+import KeyManager from "@components/KeyManager";
 import Loading from "@components/Loading";
 import Setting from "@components/Setting";
 import TextField from "@components/form/TextField";
@@ -30,8 +26,6 @@ import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import api, { GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import nostrlib from "~/common/lib/nostr";
-import Nostr from "~/extension/background-script/nostr";
 import type { Account } from "~/types";
 
 type AccountAction = Omit<Account, "connector" | "config" | "nostrPrivateKey">;
@@ -47,6 +41,7 @@ function AccountScreen() {
   const { isLoading: isLoadingSettings } = useSettings();
 
   const hasFetchedData = useRef(false);
+  const [loading, setLoading] = useState(true);
   const [account, setAccount] = useState<GetAccountRes | null>(null);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -59,24 +54,16 @@ function AccountScreen() {
   });
   const [accountName, setAccountName] = useState("");
 
-  const [currentPrivateKey, setCurrentPrivateKey] = useState("");
   const [nostrPrivateKey, setNostrPrivateKey] = useState("");
-  const [nostrPublicKey, setNostrPublicKey] = useState("");
-  const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
-  const [privateKeyCopyLabel, setPrivateKeyCopyLabel] = useState(
-    tCommon("actions.copy") as string
-  );
-  const [publicKeyCopyLabel, setPublicKeyCopyLabel] = useState(
-    tCommon("actions.copy") as string
-  );
+  const [liquidPrivateKey, setLiquidPrivateKey] = useState("");
 
   const [exportLoading, setExportLoading] = useState(false);
   const [exportModalIsOpen, setExportModalIsOpen] = useState(false);
-  const [nostrKeyModalIsOpen, setNostrKeyModalIsOpen] = useState(false);
 
   const fetchData = useCallback(async () => {
     try {
       if (id) {
+        setLoading(true);
         const response = await msg.request<GetAccountRes>("getAccount", {
           id,
         });
@@ -88,12 +75,20 @@ function AccountScreen() {
         setAccount(response);
         setAccountName(response.name);
 
-        const priv = (await msg.request("nostr/getPrivateKey", {
+        const privNostr = (await msg.request("nostr/getPrivateKey", {
           id,
         })) as string;
-        if (priv) {
-          setCurrentPrivateKey(priv);
+        if (privNostr) {
+          setNostrPrivateKey(privNostr);
         }
+
+        const privLiquid = (await msg.request("liquid/getPrivateKey", {
+          id,
+        })) as string;
+        if (privLiquid) {
+          setLiquidPrivateKey(privLiquid);
+        }
+        setLoading(false);
       }
     } catch (e) {
       console.error(e);
@@ -103,74 +98,6 @@ function AccountScreen() {
 
   function closeExportModal() {
     setExportModalIsOpen(false);
-  }
-
-  function closeNostrKeyModal() {
-    setNostrKeyModalIsOpen(false);
-  }
-
-  function generatePublicKey(priv: string) {
-    const nostr = new Nostr(priv);
-    const pubkeyHex = nostr.getPublicKey();
-    return nostrlib.hexToNip19(pubkeyHex, "npub");
-  }
-
-  async function generateNostrPrivateKey(random?: boolean) {
-    const selectedAccount = await auth.fetchAccountInfo();
-
-    if (!random && selectedAccount?.id !== id) {
-      alert(
-        `Please match the account in the account dropdown at the top with this account to derive keys.`
-      );
-      closeNostrKeyModal();
-      return;
-    }
-    // check with current selected account
-    const result = await msg.request(
-      "nostr/generatePrivateKey",
-      random
-        ? {
-            type: "random",
-          }
-        : undefined
-    );
-    saveNostrPrivateKey(result.privateKey as string);
-    closeNostrKeyModal();
-  }
-
-  async function saveNostrPrivateKey(nostrPrivateKey: string) {
-    nostrPrivateKey = nostrlib.normalizeToHex(nostrPrivateKey);
-
-    if (nostrPrivateKey === currentPrivateKey) return;
-
-    if (currentPrivateKey && !confirm(t("nostr.private_key.warning"))) {
-      return;
-    }
-
-    try {
-      if (!account) {
-        // type guard
-        throw new Error("No account available");
-      }
-
-      // Validate the private key before saving
-      nostrPrivateKey && generatePublicKey(nostrPrivateKey);
-      nostrPrivateKey && nostrlib.hexToNip19(nostrPrivateKey, "nsec");
-
-      await msg.request("nostr/setPrivateKey", {
-        id: account.id,
-        privateKey: nostrPrivateKey,
-      });
-
-      if (nostrPrivateKey) {
-        toast.success(t("nostr.private_key.success"));
-      } else {
-        toast.success(t("nostr.private_key.successfully_removed"));
-      }
-      setCurrentPrivateKey(nostrPrivateKey);
-    } catch (e) {
-      if (e instanceof Error) toast.error(e.message);
-    }
   }
 
   async function updateAccountName({ id, name }: AccountAction) {
@@ -230,16 +157,7 @@ function AccountScreen() {
     }
   }, [fetchData, isLoadingSettings]);
 
-  useEffect(() => {
-    setNostrPublicKey(
-      currentPrivateKey ? generatePublicKey(currentPrivateKey) : ""
-    );
-    setNostrPrivateKey(
-      currentPrivateKey ? nostrlib.hexToNip19(currentPrivateKey, "nsec") : ""
-    );
-  }, [currentPrivateKey]);
-
-  return !account ? (
+  return !account || loading ? (
     <div className="flex justify-center mt-5">
       <Loading />
     </div>
@@ -396,6 +314,7 @@ function AccountScreen() {
               </div>
             </form>
           </div>
+
           <h2 className="text-2xl mt-12 font-bold dark:text-white">
             {t("nostr.title")}
           </h2>
@@ -410,137 +329,41 @@ function AccountScreen() {
             </a>{" "}
             {t("nostr.hint")}
           </p>
-          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 dark:bg-surface-02dp">
-            <div className="py-4 flex justify-between items-center">
-              <div>
-                <span className="text-gray-900 dark:text-white font-medium">
-                  {t("nostr.private_key.title")}
-                </span>
-                <p className="text-gray-500 mr-1 dark:text-neutral-500 text-sm">
-                  <Trans
-                    i18nKey={"nostr.private_key.subtitle"}
-                    t={t}
-                    components={[
-                      // eslint-disable-next-line react/jsx-key
-                      <a
-                        className="underline"
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        href="https://guides.getalby.com/overall-guide/alby-browser-extension/features/nostr"
-                      ></a>,
-                    ]}
-                  />
-                </p>
-              </div>
-              <div className="w-1/5 flex-none ml-6">
-                <Button
-                  label={t("nostr.actions.generate")}
-                  onClick={() => setNostrKeyModalIsOpen(true)}
-                  fullWidth
-                />
-              </div>
-            </div>
-            <form
-              onSubmit={(e: FormEvent) => {
-                e.preventDefault();
-                saveNostrPrivateKey(nostrPrivateKey);
-              }}
-              className="mb-4 flex justify-between items-end"
-            >
-              <div className="w-7/12">
-                <TextField
-                  id="nostrPrivateKey"
-                  label={t("nostr.private_key.label")}
-                  type={nostrPrivateKeyVisible ? "text" : "password"}
-                  value={nostrPrivateKey}
-                  onChange={(event) => {
-                    setNostrPrivateKey(event.target.value);
-                  }}
-                  endAdornment={
-                    <button
-                      type="button"
-                      tabIndex={-1}
-                      className="flex justify-center items-center w-10 h-8"
-                      onClick={() => {
-                        setNostrPrivateKeyVisible(!nostrPrivateKeyVisible);
-                      }}
-                    >
-                      {nostrPrivateKeyVisible ? (
-                        <HiddenIcon className="h-6 w-6" />
-                      ) : (
-                        <VisibleIcon className="h-6 w-6" />
-                      )}
-                    </button>
-                  }
-                />
-              </div>
-              <div className="w-1/5 flex-none mx-4">
-                <Button
-                  icon={<CopyIcon className="w-6 h-6 mr-2" />}
-                  label={privateKeyCopyLabel}
-                  onClick={async () => {
-                    try {
-                      navigator.clipboard.writeText(nostrPrivateKey);
-                      setPrivateKeyCopyLabel(tCommon("copied"));
-                      setTimeout(() => {
-                        setPrivateKeyCopyLabel(tCommon("actions.copy"));
-                      }, 1000);
-                    } catch (e) {
-                      if (e instanceof Error) {
-                        toast.error(e.message);
-                      }
-                    }
-                  }}
-                  fullWidth
-                />
-              </div>
-              <div className="w-1/5 flex-none">
-                <Button
-                  type="submit"
-                  label={tCommon("actions.save")}
-                  disabled={
-                    nostrlib.normalizeToHex(nostrPrivateKey) ===
-                    currentPrivateKey
-                  }
-                  primary
-                  fullWidth
-                />
-              </div>
-            </form>
+          <KeyManager
+            type="nostr"
+            title={t("nostr.private_key.title")}
+            subtitle={
+              <Trans
+                i18nKey={"nostr.private_key.subtitle"}
+                t={t}
+                components={[
+                  // eslint-disable-next-line react/jsx-key
+                  <a
+                    className="underline"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    href="https://guides.getalby.com/overall-guide/alby-browser-extension/features/nostr"
+                  ></a>,
+                ]}
+              />
+            }
+            account={account}
+            accountPrivateKey={nostrPrivateKey}
+          />
 
-            <div className="mb-4 flex justify-between items-end">
-              <div className="w-7/12">
-                <TextField
-                  id="nostrPublicKey"
-                  label={t("nostr.public_key.label")}
-                  type="text"
-                  value={nostrPublicKey}
-                  disabled
-                />
-              </div>
-              <div className="w-1/5 flex-none mx-4">
-                <Button
-                  icon={<CopyIcon className="w-6 h-6 mr-2" />}
-                  label={publicKeyCopyLabel}
-                  onClick={async () => {
-                    try {
-                      navigator.clipboard.writeText(nostrPublicKey);
-                      setPublicKeyCopyLabel(tCommon("copied"));
-                      setTimeout(() => {
-                        setPublicKeyCopyLabel(tCommon("actions.copy"));
-                      }, 1000);
-                    } catch (e) {
-                      if (e instanceof Error) {
-                        toast.error(e.message);
-                      }
-                    }
-                  }}
-                  fullWidth
-                />
-              </div>
-              <div className="w-1/5 flex-none d-none"></div>
-            </div>
-          </div>
+          <h2 className="text-2xl mt-12 font-bold dark:text-white">
+            {t("liquid.title")}
+          </h2>
+          <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
+            {t("liquid.hint")}
+          </p>
+          <KeyManager
+            type="liquid"
+            title={t("liquid.private_key.title")}
+            subtitle={t("liquid.private_key.subtitle")}
+            account={account}
+            accountPrivateKey={liquidPrivateKey}
+          />
 
           <div className="relative flex py-5 mt-12 items-center">
             <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
@@ -565,57 +388,6 @@ function AccountScreen() {
               </div>
             </Setting>
           </div>
-
-          <Modal
-            ariaHideApp={false}
-            closeTimeoutMS={200}
-            isOpen={nostrKeyModalIsOpen}
-            onRequestClose={closeNostrKeyModal}
-            contentLabel={t("nostr.generate_keys.screen_reader")}
-            overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
-            className="rounded-lg bg-white w-full max-w-lg"
-          >
-            <div className="p-5 flex justify-between dark:bg-surface-02dp">
-              <h2 className="text-2xl font-bold dark:text-white">
-                {t("nostr.generate_keys.title")}
-              </h2>
-              <button onClick={closeNostrKeyModal}>
-                <CrossIcon className="w-6 h-6 dark:text-white" />
-              </button>
-            </div>
-            <div className="p-5 border-t border-b dark:text-white border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
-              <Trans
-                i18nKey={"nostr.generate_keys.hint"}
-                t={t}
-                components={[
-                  // eslint-disable-next-line react/jsx-key
-                  <a
-                    className="underline"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    href="https://guides.getalby.com/overall-guide/alby-browser-extension/features/nostr"
-                  ></a>,
-                ]}
-              />
-            </div>
-            <div className="p-4 dark:bg-surface-02dp">
-              <div className="flex flex-row justify-between">
-                <Button
-                  type="submit"
-                  onClick={() => generateNostrPrivateKey(true)}
-                  label={t("nostr.generate_keys.actions.random_keys")}
-                  primary
-                  halfWidth
-                />
-                <Button
-                  type="submit"
-                  onClick={() => generateNostrPrivateKey()}
-                  label={t("nostr.generate_keys.actions.derived_keys")}
-                  halfWidth
-                />
-              </div>
-            </div>
-          </Modal>
         </div>
       </Container>
     </div>
