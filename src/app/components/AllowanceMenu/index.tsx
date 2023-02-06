@@ -3,7 +3,7 @@ import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Setting from "@components/Setting";
 import Toggle from "@components/form/Toggle";
 import type { FormEvent } from "react";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
@@ -74,8 +74,8 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
       }
     };
 
-    !permissions && fetchPermissions();
-  }, [account?.id, allowance.id, permissions]);
+    fetchPermissions();
+  }, [account?.id, allowance.id]);
 
   useEffect(() => {
     if (budget !== "" && showFiat) {
@@ -239,8 +239,8 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                   {t("edit_permissions")}
                 </h2>
                 <div>
-                  {permissions.map((permission) => (
-                    <>
+                  {permissions.map((permission, i) => (
+                    <Fragment key={`element-${i}`}>
                       <Setting
                         title={permission.method}
                         subtitle={tPermissions(
@@ -268,7 +268,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                           }}
                         />
                       </Setting>
-                    </>
+                    </Fragment>
                   ))}
                 </div>
               </div>
