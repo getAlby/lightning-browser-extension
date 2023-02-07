@@ -251,25 +251,6 @@
       "title": "Accounts",
       "actions": {
         "add_account": "Aggiungi account"
-      },
-      "edit": {
-        "title": "Modifica account",
-        "name": {
-          "label": "Nome"
-        },
-        "screen_reader": "Modifica nome dell'account"
-      },
-      "export": {
-        "title": "Esporta Account",
-        "screen_reader": "Esporta i dettagli dell'account",
-        "waiting": "in attesa dei dati di LndHub...",
-        "your_ln_address": "Il tuo indirizzo Lightning:",
-        "tip_mobile": "Suggerimento: Utilizza questo portafoglio con il tuo dispositivo mobile",
-        "export_uri": "URI delle credenziali di LNDHub",
-        "scan_qr": "Importa questo portafoglio in Zeus o BlueWallet scansionando il QRCode."
-      },
-      "remove": {
-        "confirm": "Sei sicuro di voler rimuovere l'account: {{name}}? \nQuesta operazione non può essere annullata. Se hai usato questo account per accedere a siti web, potresti perdere l'accesso a questi ultimi."
       }
     },
     "enable": {
@@ -386,10 +367,7 @@
         "hint": "è un protocollo semplice e aperto che mira a creare reti sociali resistenti alla censura. Nostr funziona con chiavi crittografiche. Per pubblicare qualcosa si firma con la propria chiave e la si invia a più relè. È possibile utilizzare Alby per gestire la propria chiave Nostr. Molte applicazioni Nostr vi permetteranno poi di utilizzare semplicemente la chiave dall'estensione Alby.",
         "private_key": {
           "title": "Chiave privata",
-          "subtitle": "La generazione di una chiave creerà una nuova chiave basata sull'account correntemente utilizzato. Assicurati di fare un backup della chiave privata.",
-          "generate": "Genera",
-          "warning": "In questo modo si cancellerà la vecchia chiave privata. Sei sicuro?",
-          "success": "Chiave privata criptata e salvata con successo."
+          "subtitle": "La generazione di una chiave creerà una nuova chiave basata sull'account correntemente utilizzato. Assicurati di fare un backup della chiave privata."
         }
       }
     },

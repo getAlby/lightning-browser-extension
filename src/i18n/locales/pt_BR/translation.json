@@ -253,7 +253,10 @@
           "connection_failed": "Falha na conexão. O servidor Core Lightning está online e usando o plugin comando?"
         }
       },
-      "title": "Conectar Carteira Bitcoin"
+      "title": "Conectar Carteira Bitcoin",
+      "kollider": {
+        "title": "Kollider"
+      }
     },
     "home": {
       "actions": {
@@ -281,28 +284,61 @@
       }
     },
     "accounts": {
-      "title": "Contas",
+      "title": "Minhas Contas",
       "actions": {
         "add_account": "Adicionar conta"
       },
-      "edit": {
-        "title": "Editar Conta",
-        "name": {
-          "label": "Nome"
+      "account_view": {
+        "export": {
+          "title": "Exportar Conta",
+          "your_ln_address": "Seu Endereço Relâmpago:",
+          "screen_reader": "Exportar detalhes da conta",
+          "waiting": "aguardando dados LndHub...",
+          "tip_mobile": "Dica: Use esta carteira no seu dispositivo móvel",
+          "export_uri": "Credenciais URI LNDHub",
+          "scan_qr": "Leia o Código QR para importar esta carteira na Zeus ou BlueWallet."
         },
-        "screen_reader": "Editar nome da conta"
-      },
-      "export": {
-        "title": "Exportar Conta",
-        "screen_reader": "Exportar detalhes da conta",
-        "waiting": "aguardando dados LndHub...",
-        "your_ln_address": "Seu Endereço Relâmpago:",
-        "tip_mobile": "Dica: Use esta carteira no seu dispositivo móvel",
-        "export_uri": "Credenciais URI LNDHub",
-        "scan_qr": "Leia o Código QR para importar esta carteira na Zeus ou BlueWallet."
-      },
-      "remove": {
-        "confirm": "Tem certeza de que deseja remover a conta: {{name}}? \nEsta ação não pode ser desfeita. Se você usou essa conta para logar em sites, poderá perder o acesso a eles."
+        "nostr": {
+          "title": "Nostr",
+          "private_key": {
+            "title": "Gerenciar sua chave",
+            "successfully_removed": "Chave privada removida com sucesso.",
+            "label": "Chave Privada",
+            "warning": "Esta ação excluirá sua chave privada antiga. Tem certeza de que deseja continuar?",
+            "subtitle": "Cole sua chave privada ou gere uma nova. Certifique-se de fazer backup de sua chave privada antes de gerar uma nova. <0>Saiba mais »</0>",
+            "success": "Chave privada encriptada e salva com sucesso."
+          },
+          "public_key": {
+            "label": "Chave Pública"
+          },
+          "hint": "é um protocolo simples e aberto que visa criar redes sociais resistentes à censura. Os perfis na rede Nostr são chaves criptográficas. Para publicar algo, você assina com sua chave e a informação é enviada para servidores. Na Alby você pode usar e gerenciar seu perfil em diferentes aplicações que suportam esse recurso.",
+          "generate_keys": {
+            "title": "Gerar uma nova chave Nostr",
+            "screen_reader": "Gere uma nova chave Nostr para sua conta",
+            "actions": {
+              "random_keys": "Gerar uma chave aleatória",
+              "derived_keys": "Derivar uma chave da conta"
+            },
+            "hint": "Você pode gerar uma chave aleatória ou uma chave derivada desta conta. <0>Saiba mais »</0>"
+          },
+          "actions": {
+            "generate": "Gerar uma nova chave"
+          }
+        },
+        "remove": {
+          "confirm": "Tem certeza de que deseja remover a conta: {{name}}? \nEsta ação não pode ser desfeita. Se você usou essa conta para logar em sites, poderá perder o acesso a eles.",
+          "title": "Remover esta conta"
+        },
+        "actions": {
+          "remove_account": "Remover conta",
+          "export": "Exportar"
+        },
+        "name": {
+          "title": "Nome",
+          "placeholder": "Nome da Conta"
+        },
+        "title2": "Editar Conta",
+        "title1": "Informação da Conta"
       }
     },
     "enable": {
@@ -418,11 +454,9 @@
       "nostr": {
         "title": "Nostr",
         "private_key": {
-          "subtitle": "Cole ou gere uma nova chave privada. Ao gerar uma chave, ela será criada a partir da conta atual que você usa. Certifique-se de fazer backup desta chave privada. <0>Saiba mais »</0>",
-          "warning": "Isso excluirá sua chave privada antiga. Tem certeza de que deseja prosseguir?",
+          "subtitle": "Esta seção foi movida para a área de contas, pois as chaves agora são específicas de cada conta.",
           "title": "Chave privada",
-          "generate": "Gerar",
-          "success": "A chave privada foi encriptada e salva com sucesso."
+          "go_to": "Ir para Contas"
         },
         "hint": "é um protocolo simples e aberto que visa criar redes sociais resistentes à censura. Os perfis na rede Nostr são chaves criptográficas. Para publicar algo, você assina com sua chave e a informação é enviada para servidores. Na Alby você pode usar e gerenciar seu perfil em diferentes aplicações que suportam esse recurso."
       }
@@ -573,7 +607,8 @@
         "gaming": "Jogos",
         "entertaiment": "Entretenimento",
         "shopping": "Compras",
-        "miscellaneous": "Outros"
+        "miscellaneous": "Outros",
+        "nostr": "Nostr"
       },
       "tips": {
         "top_up_wallet": {
@@ -605,7 +640,7 @@
     "choose_path": {
       "alby": {
         "description": "Crie uma nova conta Alby ou faça o login na sua conta existente.",
-        "create_new": "Criar nova conta",
+        "create_new": "Criar conta Alby",
         "title": "Conta Alby"
       },
       "other": {
@@ -615,7 +650,7 @@
         "connect": "Conectar"
       },
       "description": "Você pode usar Alby criando uma conta conosco ou conectando-se nas carteiras bitcoin disponíveis.",
-      "title": "Como você deseja usar a Alby?"
+      "title": "Escolha o tipo de conta"
     },
     "alby": {
       "pre_connect": {
@@ -652,7 +687,7 @@
           "part1": "Ao criar uma conta Alby, você pode escolher um"
         },
         "optional_lightning_address": {
-          "title": "números e letras, pelo menos 3 caracteres",
+          "title": "números e letras, pelo menos 4 caracteres",
           "suffix": "@getalby.com",
           "label": "Escolha um Endereço Relâmpago (opcional)"
         },
@@ -667,7 +702,7 @@
     "success": "Sucesso",
     "error": "Erro",
     "settings": "Configurações",
-    "websites": "Atividade",
+    "websites": "Sites",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "carregando",
@@ -709,7 +744,8 @@
     "success_message": "{{amount}}{{fiatAmount}} enviados para {{destination}}",
     "advanced": "Avançado",
     "discover": "Explorar",
-    "confirm_password": "Confirmar Senha"
+    "confirm_password": "Confirmar Senha",
+    "accounts": "Minhas Contas"
   },
   "components": {
     "allowance_menu": {
