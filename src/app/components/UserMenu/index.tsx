@@ -36,10 +36,6 @@ export default function UserMenu() {
   async function lock() {
     try {
       auth.lock(() => {
-        const allTabs = chrome.extension.getViews({ type: "tab" });
-        for (const tab of allTabs) {
-          tab.close();
-        }
         window.close();
       });
     } catch (e) {
