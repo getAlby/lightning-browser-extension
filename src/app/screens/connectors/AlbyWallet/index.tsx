@@ -108,7 +108,7 @@ export default function AlbyWallet({ variant }: Props) {
       .catch((e) => {
         console.error(e);
         toast.error(
-          `${t("pre_connect.errors.create_wallet_error")} ${e.message}`
+          `${t("pre_connect.errors.create_wallet_error")} - ${e.message}`
         );
         setLoading(false);
       });
