@@ -692,7 +692,9 @@
           "label": "Escolha um Endereço Relâmpago (opcional)"
         },
         "errors": {
-          "create_wallet_error": "Falha ao logar ou criar uma nova conta. Se precisar de ajuda, entre em contato com support@getalby.com"
+          "create_wallet_error": "Falha ao logar ou criar uma nova conta. Se precisar de ajuda, entre em contato com support@getalby.com",
+          "create_wallet_error2": "Se precisar de ajuda, entre em contato com support@getalby.com",
+          "create_wallet_error1": "Falha ao fazer login ou criar uma nova conta."
         }
       }
     }
