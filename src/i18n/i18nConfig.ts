@@ -38,6 +38,7 @@ export const resources = {
     translation: pt_BR.translation,
     common: pt_BR.common,
     components: pt_BR.components,
+    permissions: pt_BR.permissions,
   },
   sv: {
     translation: sv.translation,
