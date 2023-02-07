@@ -156,7 +156,7 @@ const DefaultView: FC<Props> = (props) => {
 
     setIncomingTransactions(invoices);
     setIsLoadingInvoices(false);
-  }, [getFormattedFiat, settings]);
+  }, [getFormattedFiat, settings.showFiat]);
 
   useEffect(() => {
     const load = async () => {
