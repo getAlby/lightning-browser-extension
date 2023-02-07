@@ -122,6 +122,10 @@ const state = createState<State>((set, get) => ({
     return nostr;
   },
   lock: async () => {
+    const allTabs = browser.extension.getViews({ type: "tab" });
+    for (const tab of allTabs) {
+      tab.close();
+    }
     const connector = get().connector;
     if (connector) {
       await connector.unload();
