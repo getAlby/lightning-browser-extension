@@ -192,15 +192,12 @@
       "title": "Cuentas",
       "actions": {
         "add_account": "Añadir Cuenta"
-      },
-      "export": {
-        "tip_mobile": "Consejo: Use esta billetera con su dispositivo móvil"
       }
     },
     "enable": {
       "allow": "Permitir que {{host}}:",
       "request1": "Solicitar aprobación de transacciones",
-      "request2": "Solicitar facturas e información sobre rayos",
+      "request2": "Solicitar facturas e información sobre Lightning",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "title": "Conectar"
     },
@@ -272,12 +269,12 @@
       "name": {
         "title": "Nombre",
         "subtitle": "",
-        "placeholder": "Entre su nombre"
+        "placeholder": "Introduzca su nombre"
       },
       "email": {
         "title": "Correo electrónico",
         "subtitle": "",
-        "placeholder": "Entre la dirección de su correo electrónico"
+        "placeholder": "Introduzca su dirección de correo electrónico"
       },
       "change_password": {
         "title": "Cambiar la Contraseña",
@@ -438,11 +435,11 @@
       "lock": "Cerrar",
       "unlock": "Desbloquear",
       "send": "Enviar",
-      "save": "Ahorrar",
+      "save": "Guardar",
       "receive": "Recibir",
       "close": "Cerrar",
       "export": "Exportar",
-      "remove": "Remover",
+      "remove": "Quitar",
       "copy": "Copiar",
       "open": "Abrir",
       "back": "Volver"

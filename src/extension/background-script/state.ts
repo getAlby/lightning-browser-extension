@@ -150,7 +150,11 @@ const state = createState<State>((set, get) => ({
     } else {
       set({ mv2Password: null });
     }
-    const connector = await get().connector;
+    const allTabs = browser.extension.getViews({ type: "tab" });
+    for (const tab of allTabs) {
+      tab.close();
+    }
+    const connector = get().connector;
     if (connector) {
       await connector.unload();
     }

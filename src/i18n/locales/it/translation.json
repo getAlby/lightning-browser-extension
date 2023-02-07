@@ -251,9 +251,6 @@
       "title": "Accounts",
       "actions": {
         "add_account": "Aggiungi account"
-      },
-      "export": {
-        "tip_mobile": "Suggerimento: Utilizza questo portafoglio con il tuo dispositivo mobile"
       }
     },
     "enable": {

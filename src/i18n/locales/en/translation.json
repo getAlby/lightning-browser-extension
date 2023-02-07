@@ -87,10 +87,12 @@
         "optional_lightning_address": {
           "label": "Choose your Lightning Address (optional)",
           "suffix": "@getalby.com",
-          "title": "numbers and letters, at least 3 characters"
+          "title": "numbers and letters, at least 4 characters"
         },
         "errors": {
-          "create_wallet_error": "Failed to log in or create a new account. If you need help, please contact support@getalby.com"
+          "create_wallet_error": "Failed to log in or create a new account. If you need help, please contact support@getalby.com",
+          "create_wallet_error1": "Failed to log in or create a new account.",
+          "create_wallet_error2": "If you need help, please contact support@getalby.com"
         }
       }
     },
@@ -394,7 +396,7 @@
           "title": "Nostr",
           "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
           "private_key": {
-            "title": "Manage your keys",
+            "title": "Manage your key",
             "subtitle": "Paste your private key or generate a new one. Make sure you backup your private key before you generate a new one. <0>Learn more »</0>",
             "warning": "This will delete your old private key. Are you sure?",
             "success": "Private key encrypted & saved successfully.",
@@ -405,16 +407,16 @@
             "label": "Public Key"
           },
           "generate_keys": {
-            "title": "Generate new Nostr keys",
-            "screen_reader": "Generate new nostr keys for your account",
-            "hint": "You can generate a random set of Nostr keys or derive keys from this account details (using a signed canonical phrase). <0>Learn more »</0>",
+            "title": "Generate a new Nostr key",
+            "screen_reader": "Generate a new Nostr key for your account",
+            "hint": "You can generate a random key or a derive key from this account details (using a signed canonical phrase). <0>Learn more »</0>",
             "actions": {
-              "random_keys": "Generate random keys",
-              "derived_keys": "Derive keys from account"
+              "random_keys": "Generate a random key",
+              "derived_keys": "Derive a key from account"
             }
           },
           "actions": {
-            "generate": "Generate new keys"
+            "generate": "Generate a new key"
           }
         },
         "remove": {

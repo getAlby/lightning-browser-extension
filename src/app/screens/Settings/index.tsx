@@ -39,11 +39,18 @@ function Settings() {
   }
 
   async function updateAccountPassword(password: string) {
-    await msg.request("changePassword", {
-      password: formData.password,
-    });
-    toast.success(t("change_password.success"));
-    closeModal();
+    try {
+      await msg.request("changePassword", {
+        password: formData.password,
+      });
+
+      toast.success(t("change_password.success"));
+      closeModal();
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error)
+        toast.error(`An unexpected error occurred: ${e.message}`);
+    }
   }
 
   async function saveSetting(

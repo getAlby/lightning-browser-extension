@@ -15,7 +15,6 @@ import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
 import Setting from "@components/Setting";
 import TextField from "@components/form/TextField";
-import Avvvatars from "avvvatars-react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import type { FormEvent } from "react";
@@ -25,6 +24,7 @@ import Modal from "react-modal";
 import QRCode from "react-qr-code";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import Avatar from "~/app/components/Avatar";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -80,6 +80,11 @@ function AccountScreen() {
         const response = await msg.request<GetAccountRes>("getAccount", {
           id,
         });
+        // for backwards compatibility
+        // TODO: remove. if you ask when, then it's probably now.
+        if (!response.id) {
+          response.id = id;
+        }
         setAccount(response);
         setAccountName(response.name);
 
@@ -251,7 +256,7 @@ function AccountScreen() {
       />
       <div className="border-b border-gray-200 dark:border-neutral-500">
         <div className="flex-col justify-center p-4 flex items-center bg-white dark:bg-surface-02dp">
-          <Avvvatars value={account.name} style={"shape"} size={80} shadow />
+          <Avatar name={account.name} size={80} />
           <div className="flex flex-col overflow-hidden w-full text-center">
             <h2
               title={account.name}

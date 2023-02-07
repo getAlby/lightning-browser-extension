@@ -283,9 +283,6 @@
       "title": "Tilit",
       "actions": {
         "add_account": "Lisää tili"
-      },
-      "export": {
-        "tip_mobile": "Vinkki: Käytä tätä lompakkoa mobiililaitteesi kanssa"
       }
     },
     "enable": {
