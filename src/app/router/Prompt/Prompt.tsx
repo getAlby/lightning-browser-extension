@@ -12,8 +12,9 @@ import MakeInvoice from "@screens/MakeInvoice";
 import NostrConfirm from "@screens/Nostr/Confirm";
 import NostrConfirmGetPublicKey from "@screens/Nostr/ConfirmGetPublicKey";
 import NostrConfirmSignMessage from "@screens/Nostr/ConfirmSignMessage";
+import NostrConfirmSignSchnorr from "@screens/Nostr/ConfirmSignSchnorr";
 import Unlock from "@screens/Unlock";
-import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
+import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
@@ -81,6 +82,10 @@ function Prompt() {
             <Route
               path="public/nostr/confirmSignMessage"
               element={<NostrConfirmSignMessage />}
+            />
+            <Route
+              path="public/nostr/confirmSignSchnorr"
+              element={<NostrConfirmSignSchnorr />}
             />
 
             <Route path="lnurlAuth" element={<LNURLAuth />} />
