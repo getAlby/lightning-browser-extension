@@ -627,13 +627,5 @@
         "active": "AKTIV"
       }
     }
-  },
-  "permissions": {
-    "nostr": {
-      "getpublickey": "Läs din publika nyckel.",
-      "nip04encrypt": "Kryptera data.",
-      "nip04decrypt": "Dekryptera data.",
-      "signmessage": "Signera meddelandet med din nyckel."
-    }
   }
 }

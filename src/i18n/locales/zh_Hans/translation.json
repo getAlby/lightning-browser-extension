@@ -674,13 +674,5 @@
       "used": "已使用",
       "payments": "付款"
     }
-  },
-  "permissions": {
-    "nostr": {
-      "getpublickey": "阅读您的公钥。",
-      "nip04encrypt": "加密数据。",
-      "nip04decrypt": "解密数据。",
-      "signmessage": "使用您的密钥签署消息。"
-    }
   }
 }

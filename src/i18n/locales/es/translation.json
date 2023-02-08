@@ -534,13 +534,5 @@
         "active": "ACTIVO"
       }
     }
-  },
-  "permissions": {
-    "nostr": {
-      "getpublickey": "Lea su clave pública.",
-      "nip04encrypt": "Cifrar datos.",
-      "nip04decrypt": "Descifrar datos.",
-      "signmessage": "Firme el mensaje con su clave."
-    }
   }
 }
