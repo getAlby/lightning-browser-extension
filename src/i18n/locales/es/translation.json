@@ -534,5 +534,6 @@
         "active": "ACTIVO"
       }
     }
-  }
+  },
+  "permissions": {}
 }

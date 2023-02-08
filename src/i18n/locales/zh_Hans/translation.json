@@ -674,5 +674,6 @@
       "used": "已使用",
       "payments": "付款"
     }
-  }
+  },
+  "permissions": {}
 }
