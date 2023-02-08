@@ -47,7 +47,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   const hasPermissions = !isLoadingPermissions && !!permissions?.length;
 
   const enableSubmit =
-    parseInt(budget) !== allowance.totalBudget ||
+    parseInt(budget || "0") !== allowance.totalBudget ||
     lnurlAuth !== allowance.lnurlAuth ||
     getChangedPermissionsIds().length;
 
@@ -60,7 +60,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
           id: allowance.id,
         });
 
-        const permissions: Permission[] = permissionResponse.permissions;
+        const permissions: Permission[] = permissionResponse?.permissions;
 
         setOriginalPermissions(permissions);
         setPermissions(permissions);
@@ -116,7 +116,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
     try {
       await msg.request("updateAllowance", {
         id: allowance.id,
-        totalBudget: parseInt(budget),
+        totalBudget: parseInt(budget || "0"),
         lnurlAuth,
       });
 

@@ -57,7 +57,7 @@ Add Alby to your browser
 
 ### Try out the most recent version of Alby (Nightly Releases)
 
-- [Firefox Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/firefox.xpi.zip) - best to install it as a temporary add-on as discussed in the "Load extension into browser" section
+- [Firefox Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/firefox.xpi.zip) - best to install it as a temporary add-on as discussed in the "[Load extension into browser](/doc/SETUP.md#-load-extension-into-browser)" section
 - [Chrome Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/chrome.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right), and drag & drop the file in the browser
 
 (Note: You might need to reconfigure your wallet after installing new versions)
@@ -100,7 +100,7 @@ We use the [Development Project Board](https://github.com/orgs/getAlby/projects/
 
 #### Developer
 
-- Check out the issues that have specifically been [marked as being friendly to new contributors](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3Adesign+label%3A%22good+first+issue%22)
+- Check out the issues that have specifically been [marked as being friendly to new contributors](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
 - You can also review open PRs
 - [Contribution guide for new developers](./doc/CONTRIBUTION.md)
 

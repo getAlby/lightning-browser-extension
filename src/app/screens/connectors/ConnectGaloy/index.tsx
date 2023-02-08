@@ -3,7 +3,7 @@ import Input from "@components/form/Input";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import axios from "axios";
 import { useState } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";

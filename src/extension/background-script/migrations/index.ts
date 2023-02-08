@@ -1,4 +1,3 @@
-import db from "../db";
 import state from "../state";
 
 export type Migration = keyof typeof migrations;
@@ -26,48 +25,48 @@ const setMigrated = (name: Migration): Promise<void> => {
 };
 
 const migrations = {
-  migratedeleteLegacyWeblnPermissions: async () => {
-    await db.permissions
-      .where("method")
-      .startsWithIgnoreCase("webln/")
-      .delete();
-  },
-  migrateisUsingLegacyLnurlAuthKeySetting: async () => {
-    const { settings } = state.getState();
-    const allowances = await db.allowances
-      .filter((allowance) => {
-        return !!allowance.lnurlAuth;
-      })
-      .toArray();
+  migrateisUsingGlobalNostrKey: async () => {
+    const { nostrPrivateKey, accounts } = state.getState();
 
-    // if there is an allowance that uses lnurlAuth we enable the legacy signing
-    if (allowances.length > 0) {
-      const newSettings = {
-        ...settings,
-        isUsingLegacyLnurlAuthKey: true,
-      };
-      state.setState({
-        settings: newSettings,
+    if (nostrPrivateKey) {
+      Object.values(accounts).map((account) => {
+        if (!account.nostrPrivateKey) account.nostrPrivateKey = nostrPrivateKey;
       });
-      // state is saved with the setMigrated call
+
+      state.setState({
+        accounts,
+      });
+      // will be persisted by setMigrated
     }
+  },
+
+  ensureAccountId: async () => {
+    const { accounts } = state.getState();
+    Object.keys(accounts).forEach((accountId) => {
+      if (!accounts[accountId].id) {
+        console.info(`updating ${accountId}`);
+        accounts[accountId].id = accountId;
+      }
+    });
+    state.setState({
+      accounts,
+    });
+    // will be persisted by setMigrated
   },
 };
 
 const migrate = async () => {
   // going forward we can iterate through the the migrations object above and DRY this up:
   // Object.keys(migrations).forEach((name: string) => {
-  if (shouldMigrate("migrateisUsingLegacyLnurlAuthKeySetting")) {
-    console.info(
-      "Running migration for: migrateisUsingLegacyLnurlAuthKeySetting"
-    );
-    await migrations["migrateisUsingLegacyLnurlAuthKeySetting"]();
-    await setMigrated("migrateisUsingLegacyLnurlAuthKeySetting");
+  if (shouldMigrate("migrateisUsingGlobalNostrKey")) {
+    console.info("Running migration for: migrateisUsingGlobalNostrKey");
+    await migrations["migrateisUsingGlobalNostrKey"]();
+    await setMigrated("migrateisUsingGlobalNostrKey");
   }
-  if (shouldMigrate("migratedeleteLegacyWeblnPermissions")) {
-    console.info("Running migration for: migratedeleteLegacyWeblnPermissions");
-    await migrations["migratedeleteLegacyWeblnPermissions"]();
-    await setMigrated("migratedeleteLegacyWeblnPermissions");
+  if (shouldMigrate("ensureAccountId")) {
+    console.info("Running migration for: ensureAccountId");
+    await migrations["ensureAccountId"]();
+    await setMigrated("ensureAccountId");
   }
 };
 

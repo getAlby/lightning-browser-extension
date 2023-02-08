@@ -110,18 +110,27 @@ const state = createState<State>((set, get) => ({
     if (get().nostr) {
       return get().nostr as Nostr;
     }
+    const currentAccountId = get().currentAccountId as string;
+    const account = get().accounts[currentAccountId];
 
-    const nostr = new Nostr();
+    const password = get().password as string;
+    const privateKey = decryptData(account.nostrPrivateKey as string, password);
+
+    const nostr = new Nostr(privateKey);
     set({ nostr: nostr });
 
     return nostr;
   },
   lock: async () => {
+    const allTabs = browser.extension.getViews({ type: "tab" });
+    for (const tab of allTabs) {
+      tab.close();
+    }
     const connector = get().connector;
     if (connector) {
       await connector.unload();
     }
-    set({ password: null, connector: null, account: null });
+    set({ password: null, connector: null, account: null, nostr: null });
   },
   isUnlocked: () => {
     return get().password !== null;
