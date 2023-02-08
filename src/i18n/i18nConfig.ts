@@ -28,11 +28,13 @@ export const resources = {
     translation: es.translation,
     common: es.common,
     components: es.components,
+    permissions: es.permissions,
   },
   it: {
     translation: it.translation,
     common: it.common,
     components: it.components,
+    permissions: it.permissions,
   },
   "pt-BR": {
     translation: pt_BR.translation,
@@ -44,11 +46,13 @@ export const resources = {
     translation: sv.translation,
     common: sv.common,
     components: sv.components,
+    permissions: sv.permissions,
   },
   "zh-CN": {
     translation: zh_Hans.translation,
     common: zh_Hans.common,
     components: zh_Hans.components,
+    permissions: zh_Hans.permissions,
   },
 } as const;
 

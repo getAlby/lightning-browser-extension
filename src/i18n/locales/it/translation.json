@@ -682,5 +682,13 @@
         "active": "ATTIVO"
       }
     }
+  },
+  "permissions": {
+    "nostr": {
+      "getpublickey": "Leggi la tua chiave pubblica.",
+      "nip04encrypt": "Crittografare i dati.",
+      "nip04decrypt": "Decrittografare i dati.",
+      "signmessage": "Firma il messaggio con la tua chiave."
+    }
   }
 }
