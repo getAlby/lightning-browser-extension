@@ -100,6 +100,13 @@ function Receive() {
       });
   }
 
+  function receiveAnotherPayment() {
+    setPaid(false);
+    setPollingForPayment(false);
+    setInvoice(undefined);
+    navigate("/receive");
+  }
+
   async function createInvoice() {
     try {
       setLoading(true);
@@ -140,6 +147,17 @@ function Receive() {
             </div>
           )}
         </div>
+        {paid && (
+          <div className="my-4">
+            <Button
+              type="submit"
+              label={tCommon("actions.receive_again")}
+              primary
+              fullWidth
+              onClick={receiveAnotherPayment}
+            />
+          </div>
+        )}
         {!paid && (
           <>
             <div className="mt-8 mb-4 flex justify-center">
