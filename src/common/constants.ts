@@ -2,7 +2,7 @@
 // Could be split up into i.e.
 // constants/messages
 // constants/[...etc]
-import i18n from "i18next";
+import i18n from "~/i18n/i18nConfig";
 import type { SettingsStorage } from "~/types";
 
 export const ABORT_PROMPT_ERROR = "Prompt was closed";
