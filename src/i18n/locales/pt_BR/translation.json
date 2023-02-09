@@ -757,14 +757,14 @@
         "label": "Novo limite"
       },
       "edit_allowance": {
-        "title": "Definir um novo limite de gastos",
+        "title": "Editar Opções",
         "screen_reader": "Opções limite de gastos"
       },
       "enable_login": {
         "title": "Login Relâmpago",
         "subtitle": "O login é realizado de forma automática, sem necessidade de confirmação."
       },
-      "edit_permissions": "Editar Permissões"
+      "edit_permissions": "Permissões"
     },
     "qrcode_scanner": {
       "title": "Ler Código QR",
