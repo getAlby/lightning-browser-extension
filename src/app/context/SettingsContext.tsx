@@ -3,15 +3,18 @@ import i18n from "i18next";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { getTheme } from "~/app/utils";
-import { CURRENCIES, ACCOUNT_CURRENCIES } from "~/common/constants";
+import {
+  ACCOUNT_CURRENCIES,
+  CURRENCIES,
+  DEFAULT_SETTINGS,
+} from "~/common/constants";
 import api from "~/common/lib/api";
 import {
+  getFormattedCurrency as getFormattedCurrencyUtil,
   getFormattedFiat as getFormattedFiatUtil,
   getFormattedNumber as getFormattedNumberUtil,
   getFormattedSats as getFormattedSatsUtil,
-  getFormattedCurrency as getFormattedCurrencyUtil,
 } from "~/common/utils/currencyConvert";
-import { DEFAULT_SETTINGS } from "~/extension/background-script/state";
 import type { SettingsStorage } from "~/types";
 
 interface SettingsContextType {
