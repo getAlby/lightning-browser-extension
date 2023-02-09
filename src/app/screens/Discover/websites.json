@@ -125,6 +125,12 @@
         "url": "https://hamstr.to/home"
       },
       {
+        "title": "Iris",
+        "subtitle": "Social networking app with tipping",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/iris-to.png",
+        "url": "https://iris.to"
+      },
+      {
         "title": "Snort",
         "subtitle": "Fast nostr web client.",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/snort_thumbnail.png",
@@ -135,12 +141,6 @@
         "subtitle": "The blue bird experience for Nostr.",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/yosup_thumbnail.svg",
         "url": "https://yosup.app/"
-      },
-      {
-        "title": "Iris",
-        "subtitle": "Social networking app with tipping",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/iris-to.png",
-        "url": "https://iris.to"
       }
     ]
   },
