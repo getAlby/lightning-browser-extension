@@ -131,6 +131,12 @@
         "url": "https://snort.social"
       },
       {
+        "title": "Iris",
+        "subtitle": "Social networking app",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/iris-to.png",
+        "url": "https://iris.to"
+      },
+      {
         "title": "Yo, Sup?",
         "subtitle": "The blue bird experience for Nostr.",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/yosup_thumbnail.svg",
