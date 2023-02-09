@@ -113,6 +113,12 @@
         "url": "https://astral.ninja/"
       },
       {
+        "title": "Blogstack",
+        "subtitle": "A Medium-like blog sharing website",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/blockstack-logo.png",
+        "url": "https://blogstack.io/"
+      },
+      {
         "title": "emon.chat",
         "subtitle": "Instant messaging client with built in lightning payments",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/emon_thumbnail.svg",
@@ -129,6 +135,12 @@
         "subtitle": "Social networking app with tipping",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/iris-to.png",
         "url": "https://iris.to"
+      },
+      {
+        "title": "Notebin",
+        "subtitle": "An online note sharing web client",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/notebin-logo.png",
+        "url": "https://notebin.org/"
       },
       {
         "title": "Snort",
