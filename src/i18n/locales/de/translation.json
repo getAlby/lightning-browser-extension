@@ -652,7 +652,9 @@
           "title": "Zahlen und Buchstaben, mindestens 4 Stellen"
         },
         "errors": {
-          "create_wallet_error": "Du konntest dich nicht anmelden oder ein neues Konto erstellen. Wenn du Hilfe benötigst, wende dich bitte an den support@getalby.com"
+          "create_wallet_error": "Du konntest dich nicht anmelden oder ein neues Konto erstellen. Wenn du Hilfe benötigst, wende dich bitte an den support@getalby.com",
+          "create_wallet_error1": "Du konntest dich nicht anmelden oder ein neues Konto erstellen.",
+          "create_wallet_error2": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com"
         },
         "forgot_password": "Passwort vergessen?",
         "title": "Dein Alby Konto",
