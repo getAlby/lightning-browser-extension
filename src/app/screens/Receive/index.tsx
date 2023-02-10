@@ -44,7 +44,7 @@ function Receive() {
   const [invoice, setInvoice] = useState<{
     paymentRequest: string;
     rHash: string;
-  }>();
+  } | null>();
   const [copyLabel, setCopyLabel] = useState(tCommon("actions.copy") as string);
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
@@ -101,9 +101,14 @@ function Receive() {
   }
 
   function receiveAnotherPayment() {
+    setFormData({
+      amount: "0",
+      description: "",
+      expiration: "",
+    });
     setPaid(false);
     setPollingForPayment(false);
-    setInvoice(undefined);
+    setInvoice(null);
     navigate("/receive");
   }
 
