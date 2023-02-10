@@ -231,13 +231,24 @@ function AccountScreen() {
   }, [fetchData, isLoadingSettings]);
 
   useEffect(() => {
-    setNostrPublicKey(
-      currentPrivateKey ? generatePublicKey(currentPrivateKey) : ""
-    );
-    setNostrPrivateKey(
-      currentPrivateKey ? nostrlib.hexToNip19(currentPrivateKey, "nsec") : ""
-    );
-  }, [currentPrivateKey]);
+    try {
+      setNostrPublicKey(
+        currentPrivateKey ? generatePublicKey(currentPrivateKey) : ""
+      );
+      setNostrPrivateKey(
+        currentPrivateKey ? nostrlib.hexToNip19(currentPrivateKey, "nsec") : ""
+      );
+    } catch (e) {
+      if (e instanceof Error)
+        toast.error(
+          <p>
+            {t("nostr.errors.failed_to_load")}
+            <br />
+            {e.message}
+          </p>
+        );
+    }
+  }, [currentPrivateKey, t]);
 
   return !account ? (
     <div className="flex justify-center mt-5">

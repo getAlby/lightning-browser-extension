@@ -417,6 +417,9 @@
           },
           "actions": {
             "generate": "Generate a new key"
+          },
+          "errors": {
+            "failed_to_load": "Failed to load the Nostr key. Is it a valid Nostr key?"
           }
         },
         "remove": {
