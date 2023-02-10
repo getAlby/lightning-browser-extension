@@ -239,9 +239,16 @@ function AccountScreen() {
         currentPrivateKey ? nostrlib.hexToNip19(currentPrivateKey, "nsec") : ""
       );
     } catch (e) {
-      if (e instanceof Error) toast.error(e.message);
+      if (e instanceof Error)
+        toast.error(
+          <p>
+            {t("nostr.errors.failed_to_load")}
+            <br />
+            {e.message}
+          </p>
+        );
     }
-  }, [currentPrivateKey]);
+  }, [currentPrivateKey, t]);
 
   return !account ? (
     <div className="flex justify-center mt-5">
