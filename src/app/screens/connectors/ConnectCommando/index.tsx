@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { APPEND_ALIAS_TO_ACCOUNT_ON_CONNECT } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import { ConnectorType } from "~/types";
@@ -75,10 +76,12 @@ export default function ConnectCommando() {
     try {
       const validation = await msg.request("validateAccount", account);
       if (validation.valid) {
-        account.name = utils.getAccountNameWithAlias(
-          account.name,
-          validation.info?.data.alias
-        );
+        if (APPEND_ALIAS_TO_ACCOUNT_ON_CONNECT) {
+          account.name = utils.getAccountNameWithAlias(
+            account.name,
+            validation.info?.data.alias
+          );
+        }
 
         const addResult = await msg.request("addAccount", account);
         if (addResult?.accountId) {
