@@ -231,12 +231,16 @@ function AccountScreen() {
   }, [fetchData, isLoadingSettings]);
 
   useEffect(() => {
-    setNostrPublicKey(
-      currentPrivateKey ? generatePublicKey(currentPrivateKey) : ""
-    );
-    setNostrPrivateKey(
-      currentPrivateKey ? nostrlib.hexToNip19(currentPrivateKey, "nsec") : ""
-    );
+    try {
+      setNostrPublicKey(
+        currentPrivateKey ? generatePublicKey(currentPrivateKey) : ""
+      );
+      setNostrPrivateKey(
+        currentPrivateKey ? nostrlib.hexToNip19(currentPrivateKey, "nsec") : ""
+      );
+    } catch (e) {
+      if (e instanceof Error) toast.error(e.message);
+    }
   }, [currentPrivateKey]);
 
   return !account ? (
