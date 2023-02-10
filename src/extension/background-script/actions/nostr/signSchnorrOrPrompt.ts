@@ -14,6 +14,10 @@ const signSchnorrOrPrompt = async (message: MessageSignSchnorr) => {
   const sigHash = message.args.sigHash;
 
   try {
+    if (!sigHash || typeof sigHash !== "string") {
+      throw new Error("sigHash is missing or not correct");
+    }
+
     const hasPermission = await hasPermissionFor(
       PermissionMethodNostr["NOSTR_SIGNSCHNORR"],
       message.origin.host
