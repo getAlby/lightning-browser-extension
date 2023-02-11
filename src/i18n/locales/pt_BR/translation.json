@@ -639,7 +639,7 @@
     },
     "choose_path": {
       "alby": {
-        "description": "Crie uma nova conta Alby ou faça o login na sua conta existente.",
+        "description": "Crie uma nova conta Alby ou faça o login na sua conta atual.",
         "create_new": "Criar conta Alby",
         "title": "Conta Alby"
       },
@@ -649,7 +649,7 @@
         "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira disponíveis.",
         "connect": "Conectar"
       },
-      "description": "Você pode usar Alby criando uma conta conosco ou conectando-se nas carteiras bitcoin disponíveis.",
+      "description": "Você pode usar a Alby criando uma conta conosco ou conectando-se nas carteiras bitcoin disponíveis.",
       "title": "Escolha o tipo de conta"
     },
     "alby": {
@@ -757,7 +757,7 @@
         "label": "Novo limite"
       },
       "edit_allowance": {
-        "title": "Editar Opções",
+        "title": "Editar Preferências",
         "screen_reader": "Opções limite de gastos"
       },
       "enable_login": {
