@@ -117,7 +117,7 @@ function Unlock() {
         <div className="flex justify-center space-x-1 mt-5">
           <span className="text-gray-500">{t("help_contact.part1")} </span>
           <a
-            className="text-orange-bitcoin font-semibold"
+            className="text-primary font-semibold"
             href="mailto:support@getalby.com"
           >
             {t("help_contact.part2")}
