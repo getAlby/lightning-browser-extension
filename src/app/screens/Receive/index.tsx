@@ -14,7 +14,6 @@ import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -34,7 +33,6 @@ function Receive() {
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     amount: "0",
     description: "",
@@ -44,7 +42,7 @@ function Receive() {
   const [invoice, setInvoice] = useState<{
     paymentRequest: string;
     rHash: string;
-  }>();
+  } | null>();
   const [copyLabel, setCopyLabel] = useState(tCommon("actions.copy") as string);
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
@@ -121,6 +119,17 @@ function Receive() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     createInvoice();
+  }
+
+  function handleBack() {
+    setFormData({
+      amount: "0",
+      description: "",
+      expiration: "",
+    });
+    setInvoice(null);
+    setPaid(false);
+    setPollingForPayment(false);
   }
 
   function renderInvoice() {
@@ -200,7 +209,7 @@ function Receive() {
         title={t("title")}
         headerLeft={
           <IconButton
-            onClick={() => navigate("/")}
+            onClick={handleBack}
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
