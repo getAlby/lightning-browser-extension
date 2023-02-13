@@ -134,6 +134,10 @@ function Receive() {
   }
 
   function handleBack() {
+    if (invoice == null) {
+      navigate(-1);
+    }
+
     setFormData({
       amount: "0",
       description: "",
