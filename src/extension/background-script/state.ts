@@ -132,10 +132,18 @@ const state = createState<State>((set, get) => ({
     } else {
       set({ mv2Password: null });
     }
-    const allTabs = browser.extension.getViews({ type: "tab" });
-    for (const tab of allTabs) {
-      tab.close();
-    }
+
+    const allTabs = await browser.tabs.query({ title: "Alby" });
+
+    // https://stackoverflow.com/a/54317362/1667461
+    const allTabIds = Array.from(allTabs, (tab) => tab.id).filter(
+      (i): i is number => {
+        return typeof i === "number";
+      }
+    );
+
+    browser.tabs.remove(allTabIds);
+
     const connector = get().connector;
     if (connector) {
       await connector.unload();
