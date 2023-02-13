@@ -417,6 +417,9 @@
           },
           "actions": {
             "generate": "Generate a new key"
+          },
+          "errors": {
+            "failed_to_load": "Failed to load the Nostr key. Is it a valid Nostr key?"
           }
         },
         "remove": {
@@ -769,6 +772,7 @@
       "send": "Send",
       "save": "Save",
       "receive": "Receive",
+      "receive_again": "Receive another payment",
       "close": "Close",
       "export": "Export",
       "remove": "Remove",

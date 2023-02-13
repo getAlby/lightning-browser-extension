@@ -4,7 +4,7 @@
       "nav": {
         "welcome": "Bem-vindo",
         "password": "Senha",
-        "connect": "Sua Conta",
+        "connect": "Sua conta",
         "done": "Feito"
       },
       "set_password": {
@@ -263,7 +263,7 @@
         "send_satoshis": "⚡️ Enviar Satoshis ⚡️",
         "enable_now": "Ativar"
       },
-      "recent_transactions": "Transações Recentes",
+      "recent_transactions": "Transações recentes",
       "transaction_list": {
         "tabs": {
           "incoming": "Recebidas",
@@ -271,26 +271,26 @@
         }
       },
       "allowance_view": {
-        "recent_transactions": "Transações Recentes",
+        "recent_transactions": "Transações recentes",
         "allowance": "Limite de gastos",
         "sats_used": "sats usados",
         "no_transactions": "Sem transações em <0>{{name}}</0>."
       },
       "default_view": {
-        "recent_transactions": "Transações Recentes",
+        "recent_transactions": "Transações recentes",
         "no_transactions": "Você ainda não realizou transações com a Alby.",
         "is_blocked_hint": "A Alby está desativada em {{host}}",
         "block_removed": "{{host}} ativado. Por favor, recarregue o site."
       }
     },
     "accounts": {
-      "title": "Minhas Contas",
+      "title": "Minhas contas",
       "actions": {
         "add_account": "Adicionar conta"
       },
       "account_view": {
         "export": {
-          "title": "Exportar Conta",
+          "title": "Exportar conta",
           "your_ln_address": "Seu Endereço Relâmpago:",
           "screen_reader": "Exportar detalhes da conta",
           "waiting": "aguardando dados LndHub...",
@@ -303,13 +303,13 @@
           "private_key": {
             "title": "Gerenciar sua chave",
             "successfully_removed": "Chave privada removida com sucesso.",
-            "label": "Chave Privada",
+            "label": "Chave privada",
             "warning": "Esta ação excluirá sua chave privada antiga. Tem certeza de que deseja continuar?",
             "subtitle": "Cole sua chave privada ou gere uma nova. Certifique-se de fazer backup de sua chave privada antes de gerar uma nova. <0>Saiba mais »</0>",
             "success": "Chave privada encriptada e salva com sucesso."
           },
           "public_key": {
-            "label": "Chave Pública"
+            "label": "Chave pública"
           },
           "hint": "é um protocolo simples e aberto que visa criar redes sociais resistentes à censura. Os perfis na rede Nostr são chaves criptográficas. Para publicar algo, você assina com sua chave e a informação é enviada para servidores. Na Alby você pode usar e gerenciar seu perfil em diferentes aplicações que suportam esse recurso.",
           "generate_keys": {
@@ -335,10 +335,10 @@
         },
         "name": {
           "title": "Nome",
-          "placeholder": "Nome da Conta"
+          "placeholder": "Nome da conta"
         },
-        "title2": "Editar Conta",
-        "title1": "Informação da Conta"
+        "title2": "Editar conta",
+        "title1": "Dados da conta"
       }
     },
     "enable": {
@@ -456,7 +456,7 @@
         "private_key": {
           "subtitle": "Esta seção foi movida para a área de contas, pois as chaves agora são específicas de cada conta.",
           "title": "Chave privada",
-          "go_to": "Ir para Contas"
+          "go_to": "Ir para contas"
         },
         "hint": "é um protocolo simples e aberto que visa criar redes sociais resistentes à censura. Os perfis na rede Nostr são chaves criptográficas. Para publicar algo, você assina com sua chave e a informação é enviada para servidores. Na Alby você pode usar e gerenciar seu perfil em diferentes aplicações que suportam esse recurso."
       }
@@ -489,7 +489,7 @@
     "receive": {
       "title": "Receber",
       "actions": {
-        "create_invoice": "Gerar Fatura"
+        "create_invoice": "Gerar fatura"
       },
       "amount": {
         "label": "Quantia",
@@ -512,13 +512,13 @@
           "used_budget": "sats usados"
         }
       },
-      "title": "Sua lista de Sites ⚡️",
+      "title": "Sua lista de sites ⚡️",
       "description": "Sites onde você já usou a Alby",
       "no_info": "Nenhum site ainda.",
-      "discover": "Descubra Sites"
+      "discover": "Descubra sites"
     },
     "make_invoice": {
-      "title": "Gerar Fatura",
+      "title": "Gerar fatura",
       "amount": {
         "label": "Quantia"
       },
@@ -535,7 +535,7 @@
       "content": "Este site solicita que você assine:"
     },
     "confirm_keysend": {
-      "title": "Aprovar Pagamento",
+      "title": "Aprovar pagamento",
       "success": "Pagamento enviado! Pré-imagem: {{preimage}}",
       "payment_summary": {
         "description": "Enviar pagamento para: {{destination}}"
@@ -571,7 +571,7 @@
     },
     "lnurlchannel": {
       "success": "Solicitação de canal de pagamento enviada com sucesso para {{name}}",
-      "title": "Solicitar Canal de Pagamento",
+      "title": "Solicitar canal de pagamento",
       "content_message": {
         "heading": "Solicitar canal de pagamento do servidor"
       }
@@ -595,7 +595,7 @@
       "allow_sign": "Permitir {{host}} assinar:"
     },
     "confirm_request_permission": {
-      "title": "Aprovar Solicitação",
+      "title": "Aprovar solicitação",
       "allow": "Permitir este site executar:",
       "always_allow": "Lembrar minha escolha e não perguntar novamente"
     },
@@ -639,17 +639,17 @@
     },
     "choose_path": {
       "alby": {
-        "description": "Crie uma nova conta Alby ou faça o login na sua conta existente.",
+        "description": "Crie uma conta Alby ou faça o login caso já possua uma conta conosco.",
         "create_new": "Criar conta Alby",
         "title": "Conta Alby"
       },
       "other": {
-        "title": "Outras Contas",
+        "title": "Outras contas",
         "and_more": "& mais...",
         "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira disponíveis.",
         "connect": "Conectar"
       },
-      "description": "Você pode usar Alby criando uma conta conosco ou conectando-se nas carteiras bitcoin disponíveis.",
+      "description": "Você pode usar a Alby criando uma conta conosco ou conectando-se nas carteiras bitcoin disponíveis.",
       "title": "Escolha o tipo de conta"
     },
     "alby": {
@@ -692,7 +692,9 @@
           "label": "Escolha um Endereço Relâmpago (opcional)"
         },
         "errors": {
-          "create_wallet_error": "Falha ao logar ou criar uma nova conta. Se precisar de ajuda, entre em contato com support@getalby.com"
+          "create_wallet_error": "Falha ao logar ou criar uma nova conta. Se precisar de ajuda, entre em contato com support@getalby.com",
+          "create_wallet_error2": "Se precisar de ajuda, entre em contato com support@getalby.com",
+          "create_wallet_error1": "Falha ao fazer login ou criar uma nova conta."
         }
       }
     }
@@ -734,18 +736,18 @@
     },
     "errors": {
       "connection_failed": "Falha na conexão",
-      "payment_failed": "Pagamento Falhou"
+      "payment_failed": "Pagamento falhou"
     },
     "description": "Descrição",
-    "description_full": "Descrição Completa",
+    "description_full": "Descrição completa",
     "message": "Mensagem",
     "help": "Ajuda",
     "response": "Resposta",
     "success_message": "{{amount}}{{fiatAmount}} enviados para {{destination}}",
     "advanced": "Avançado",
     "discover": "Explorar",
-    "confirm_password": "Confirmar Senha",
-    "accounts": "Minhas Contas"
+    "confirm_password": "Confirmar senha",
+    "accounts": "Minhas contas"
   },
   "components": {
     "allowance_menu": {
@@ -755,17 +757,17 @@
         "label": "Novo limite"
       },
       "edit_allowance": {
-        "title": "Definir um novo limite de gastos",
+        "title": "Editar preferências",
         "screen_reader": "Opções limite de gastos"
       },
       "enable_login": {
         "title": "Login Relâmpago",
         "subtitle": "O login é realizado de forma automática, sem necessidade de confirmação."
       },
-      "edit_permissions": "Editar Permissões"
+      "edit_permissions": "Permissões"
     },
     "qrcode_scanner": {
-      "title": "Ler Código QR",
+      "title": "Ler código QR",
       "actions": {
         "start_scanning": "Iniciar leitura",
         "stop_scanning": "Parar leitura"

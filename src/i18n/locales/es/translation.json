@@ -32,7 +32,8 @@
         "actions": {
           "delete_edit_account": "Eliminar una cuenta no válida y volver a editarla"
         }
-      }
+      },
+      "title": "Bienvenido a Alby"
     },
     "choose_connector": {
       "description": "¡Primero debe conectarse a una billetera lightning para poder interactuar con sus sitios web favoritos que aceptan pagos con Bitcoin lightning!",
@@ -409,6 +410,9 @@
         "label": "Cantidad"
       },
       "success": "Solicitud de retiro enviada correctamente"
+    },
+    "choose_path": {
+      "title": "Conectar"
     }
   },
   "common": {
@@ -534,5 +538,6 @@
         "active": "ACTIVO"
       }
     }
-  }
+  },
+  "permissions": {}
 }
