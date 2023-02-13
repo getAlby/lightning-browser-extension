@@ -772,6 +772,7 @@
       "send": "Send",
       "save": "Save",
       "receive": "Receive",
+      "receive_again": "Receive another payment",
       "close": "Close",
       "export": "Export",
       "remove": "Remove",
