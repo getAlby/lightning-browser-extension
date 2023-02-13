@@ -112,6 +112,21 @@ function Receive() {
     navigate("/receive");
   }
 
+  function handleBack() {
+    if (invoice == null) {
+      navigate(-1);
+    }
+
+    setFormData({
+      amount: "0",
+      description: "",
+      expiration: "",
+    });
+    setPaid(false);
+    setPollingForPayment(false);
+    setInvoice(null);
+  }
+
   async function createInvoice() {
     try {
       setLoading(true);
@@ -223,7 +238,7 @@ function Receive() {
         title={t("title")}
         headerLeft={
           <IconButton
-            onClick={() => navigate("/")}
+            onClick={handleBack}
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
