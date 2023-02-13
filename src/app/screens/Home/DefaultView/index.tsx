@@ -223,7 +223,7 @@ const DefaultView: FC<Props> = (props) => {
             </h2>
 
             <Tab.Group>
-              <Tab.List className="mb-2">
+              <Tab.List className="mb-2 rounded-md bg-white dark:bg-surface-02dp shadow overflow-hidden">
                 {[
                   t("transaction_list.tabs.outgoing"),
                   t("transaction_list.tabs.incoming"),
@@ -232,12 +232,12 @@ const DefaultView: FC<Props> = (props) => {
                     key={category}
                     className={({ selected }) =>
                       classNames(
-                        "w-1/2 rounded-lg py-2.5 font-bold transition duration-150",
+                        "w-1/2 py-2.5 border-b-2 transition duration-150",
                         "focus:outline-none",
                         "hover:bg-gray-50 dark:hover:bg-surface-16dp",
                         selected
-                          ? "text-orange-bitcoin"
-                          : "text-gray-700  dark:text-neutral-200"
+                          ? "font-semibold text-orange-bitcoin border-b-orange-bitcoin"
+                          : "font-medium text-gray-700 dark:text-neutral-200 border-b-transparent"
                       )
                     }
                   >
