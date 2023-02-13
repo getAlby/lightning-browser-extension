@@ -1,316 +1,316 @@
 {
   "translation": {
     "welcome": {
-      "title": "",
+      "title": "Bine ai venit la Alby",
       "nav": {
-        "welcome": "",
-        "password": "",
-        "connect": "",
-        "done": ""
+        "welcome": "Bine ai venit",
+        "password": "Parola ta",
+        "connect": "Contul tau de Lightning",
+        "done": "Gata"
       },
       "set_password": {
-        "title": "",
-        "description": "",
+        "title": "Seteaza o parola pentru deblocare",
+        "description": "Aceasta parola este folosita pentru a proteja portofelul tau si pentru a permite accesul la extensia de browser. Aceasta parola nu poate fi resetata si este separata de parola contului Alby.",
         "choose_password": {
-          "label": ""
+          "label": "Alege o parola pentru deblocare:"
         },
         "confirm_password": {
-          "label": ""
+          "label": "Sa confirmam ca ai introdus parola corect:"
         },
         "errors": {
-          "enter_password": "",
-          "confirm_password": "",
-          "mismatched_password": ""
+          "enter_password": "Te rog sa introduci o parola.",
+          "confirm_password": "Te rog sa confirmi parola.",
+          "mismatched_password": "Parolele nu se potrivesc."
         }
       },
       "test_connection": {
-        "ready": "",
-        "initializing": "",
-        "connection_error": "",
-        "review_connection_details": "",
-        "connection_taking_long": "",
-        "contact_support": "",
+        "ready": "Excelent, esti gata!",
+        "initializing": "Contul tau se initializeaza. Te rugam sa astepti, poate dura cateva minute...",
+        "connection_error": "Eroare de conexiune",
+        "review_connection_details": "Te rog sa verifici datele de conectare.",
+        "connection_taking_long": "Incercarea de conectare dureaza mai mult decat ar trebui... Datele de conectare sunt corecte? Nodul tau este accesibil?",
+        "contact_support": "Daca ai nevoie de ajutor te rugam sa contactezi support@getalby.com",
         "actions": {
-          "delete_edit_account": ""
+          "delete_edit_account": "Sterge contul invalid si editeaza din nou"
         }
       }
     },
     "choose_path": {
-      "title": "",
-      "description": "",
+      "title": "Conecteaza-te",
+      "description": "Pentru a incepe sa efectuezi plati online utilizand Alby, conecteaza portofelul Lightning la extensie.",
       "alby": {
-        "title": "",
-        "description": "",
-        "create_new": ""
+        "title": "Alby",
+        "description": "Inregistreaza-te sau foloseste un cont Alby deja existent pentru a incepe sa faci plati prin Lightning imediat.",
+        "create_new": "Inregistreaza-te"
       },
       "other": {
-        "title": "",
-        "description": "",
-        "and_more": "",
-        "connect": ""
+        "title": "Alte portofele",
+        "description": "Conecteaza-te la portofelul tau Lightning deja existent sau la un nod si alege dintre diversi conectori.",
+        "and_more": "& mai multe...",
+        "connect": "Conecteaza-te"
       }
     },
     "alby": {
       "pre_connect": {
         "set_password": {
           "choose_password": {
-            "label": ""
+            "label": "Parola"
           },
           "confirm_password": {
-            "label": ""
+            "label": "Confirma parola"
           },
           "errors": {
-            "enter_password": "",
-            "confirm_password": "",
-            "mismatched_password": ""
+            "enter_password": "Te rog sa introduci o parola.",
+            "confirm_password": "Te rog sa confirmi parola.",
+            "mismatched_password": "Parolele nu se potrivesc."
           }
         },
-        "forgot_password": "",
-        "title": "",
-        "create_account": "",
-        "login_account": "",
-        "host_wallet": "",
+        "forgot_password": "Ai uitat parola?",
+        "title": "Contul tau Alby",
+        "create_account": "Creeaza un nou cont Alby pentru a trimite si primi plati in bitcoin.",
+        "login_account": "Logheaza-te pentru a conecta contul tau Alby existent.",
+        "host_wallet": "Noi gazduim un portofel Lightning pentru tine!",
         "email": {
           "create": {
-            "label": ""
+            "label": "Adresa de e-mail"
           },
           "login": {
-            "label": ""
+            "label": "Adresa de e-mail sau adresa Lightning"
           }
         },
         "optional_lightning_note": {
-          "part1": "",
-          "part2": "",
-          "part3": "",
-          "part4": ""
+          "part1": "Contul tau Alby vine si cu o optiune",
+          "part2": "adresa Lightning",
+          "part3": ". Aceasta este o metoda simpla pentru ca oricine sa iti poata trimite bitcoin prin reteaua Lightning.",
+          "part4": "Invata mai mult"
         },
         "optional_lightning_address": {
-          "label": "",
-          "suffix": "",
-          "title": ""
+          "label": "Alege adresa ta Lightning (optional)",
+          "suffix": "@getalby.com",
+          "title": "cifre si litere, minimum 4 caractere"
         },
         "errors": {
-          "create_wallet_error": "",
-          "create_wallet_error1": "",
-          "create_wallet_error2": ""
+          "create_wallet_error": "Logare sau creare de cont esuata. Daca ai nevoie de ajutor te rugam sa contactezi support@getalby.com",
+          "create_wallet_error1": "Logare sau creare de cont esuata.",
+          "create_wallet_error2": "Daca ai nevoie de ajutor te rugam sa contactezi support@getalby.com"
         }
       }
     },
     "choose_connector": {
-      "title": "",
-      "description": "",
+      "title": "Conecteaza portofel Lightning",
+      "description": "Conecteaza-te la portofelul tau Lightning extern sau la un nod",
       "lnd": {
-        "title": "",
+        "title": "LND",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "Conecteaza-te la nodul tau LND",
+          "description": "Ai nevoie de adresa URL a nodului tau si de un macaroon cu permisiuni de citire si trimitere (ex. admin.macaroon)"
         },
         "url": {
-          "label": "",
-          "placeholder": ""
+          "label": "REST API host si port",
+          "placeholder": "https://adresa-url-a-nodului:8080"
         },
         "macaroon": {
-          "label": ""
+          "label": "Macaroon (format HEX)"
         },
-        "or": "",
-        "drag_and_drop": "",
+        "or": "SAU",
+        "drag_and_drop": "Trage si plaseaza macaroon aici sau <0>browse</0>",
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "Conexiune esuata. Credentialele tale LND sunt corecte?"
         }
       },
       "lnc": {
-        "title": "",
+        "title": "LND cu LNC",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "Conecteaza-te la nodul tau LND",
+          "description": "Creeaza o sesiune noua in terminal (litd) pentru a obtine o noua fraza de imperechere si introdu-o aici"
         },
         "pairing_phrase": {
-          "label": "",
-          "placeholder": ""
+          "label": "Fraza ta de imperechere. ",
+          "placeholder": "fraza ta secreta pentru acumulare de sats"
         }
       },
       "lndhub_bluewallet": {
-        "title": "",
+        "title": "BlueWallet",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "Conecteaza-te la BlueWallet",
+          "description": "In BlueWallet, alegere portofelul pe care vrei sa il conectezi, deschide-l, apasa pe \"...\", apoi pe Export/Backup pentru a afisa codul QR si scaneaza-l cu camera ta."
         },
         "uri": {
-          "label": ""
+          "label": "BlueWallet Export URI"
         },
         "errors": {
-          "invalid_uri": "",
-          "connection_failed": ""
+          "invalid_uri": "BlueWallet URI invalid",
+          "connection_failed": "Conexiune esuata. BlueWallet URI este corect?"
         }
       },
       "lndhub_go": {
-        "title": "",
+        "title": "LNDHub",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "Conectare la LNDHub",
+          "description": "Introdu aici credentialele URI pentru LNDHub sau scaneaza codul QR cu camera ta."
         },
         "uri": {
-          "label": ""
+          "label": "LNDHub Export URI"
         },
         "errors": {
-          "invalid_uri": "",
-          "connection_failed": ""
+          "invalid_uri": "LNDHub URI invalid",
+          "connection_failed": "Conexiune esuata. LNDHub URI este corect?"
         }
       },
       "lnbits": {
-        "title": "",
+        "title": "LNbits",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "Conectare la <0>LNbits</0>",
+          "instructions": "In LNbits, alege portofelul pe care vrei sa il conectezi, deschide-l, apasa pe API Info si copiaza Admin Key. Introdu-l mai jos:"
         },
         "admin_key": {
-          "label": "",
-          "placeholder": ""
+          "label": "LNbits Admin Key",
+          "placeholder": "Admin key a ta formata din 32 de cifre"
         },
         "url": {
-          "label": ""
+          "label": "URL LNbits"
         },
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "Conexiune esuata. Ai introdus corect URL si Admin Key?"
         }
       },
       "eclair": {
-        "title": "",
+        "title": "Eclair",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "Conectare la <0>Eclair</0>",
+          "instructions": "Ai nevoie de adresa URL pentru Eclair si de parola."
         },
         "password": {
-          "label": ""
+          "label": "Parola Eclair"
         },
         "url": {
-          "label": "",
-          "placeholder": ""
+          "label": "URL Eclair",
+          "placeholder": "http://localhost:8080"
         }
       },
       "citadel": {
-        "title": "",
+        "title": "Citadel",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "Conectare la <0>Citadel</0>",
+          "instructions": "Momentan nu functioneaza daca autentificarea in 2-factori (2FA) este activata."
         },
         "password": {
-          "label": ""
+          "label": "Parola Citadel"
         },
         "url": {
-          "label": "",
-          "placeholder": ""
+          "label": "URL Citadel",
+          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
-        "title": "",
+        "title": "Umbrel",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "Conectare la nodul <0>Umbrel</0>",
+          "instructions": "In dashboard-ul Umbrel mergi la <0>Connect Wallet</0>. Selecteaza <0>lndconnect REST</0> si copiaza <0>lndconnect URL</0>. (In functie de setari, poti folosi conexiune locala sau conexiune Tor)"
         },
         "rest_url": {
-          "label": "",
-          "placeholder": ""
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://nodultau:8080?..."
         }
       },
       "mynode": {
-        "title": "",
+        "title": "myNode",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "Conectare la <0>myNode</0>",
+          "instructions": "Pe pagina ta myNode apasa pe butonul <0>Wallet</0> pentru serviciul tau <0>lightning</0>.<1/>Acum apasa pe butonul <0>Pair Wallet</0> din tabul <0>Status</0>. Introdu parola ta.<1/> Selecteaza meniul dropdown si alege optiunea de imperechere (pairing). In functie de setarile tale poti sa utilizezi fie conexiunea <0>lightning (REST + Local IP)</0> sau conexiunea <0>lightning (REST + Tor)</0>."
         },
         "rest_url": {
-          "label": "",
-          "placeholder": ""
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://nodultau:8080?..."
         }
       },
       "start9": {
-        "title": "",
+        "title": "Start9",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "Conectare la nodul tau <0>Embassy</0>",
+          "instructions": "<0>Nota:</0> Momentan exista suport doar pentru LND dar vom adauga suport pentru c-lightning in viitor!<1/>Pe tabloul de bord din Embassy apasa pe serviciul <0>lightning network Daemon</0>.<1/>Selecteaza tabul <0>Properties</0>.<1/>Acum copiaza <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
-          "label": "",
-          "placeholder": ""
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://nodultau:8080?..."
         }
       },
       "raspiblitz": {
-        "title": "",
+        "title": "RaspiBlitz",
         "page": {
-          "title": "",
-          "instructions1": "",
-          "instructions2": ""
+          "title": "Conectare la nodul tau <0>RaspiBlitz</0>",
+          "instructions1": "Ai nevoie de adresa onion a nodului tau, portul, si un macaroon cu permisiuni de citire si trimitere (ex. admin.macaroon).<1/><1/><0>SSH</0> in al tau <0>RaspiBlitz</0>.<1/>Ruleaza comanda <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Copiaza si insereaza adresa <0>.onion</0> in campul de mai jos.<1/>Si <0>portul tau</0> dupa adresa onion, portul implicit este <0>:8080</0>.",
+          "instructions2": "Selecteaza <0>CONNECT</0>.<1/>Selecteaza <0>EXPORT</0>.<1/>Selecteaza <0>HEX</0>.<1/>Copiaza <0>adminMacaroon</0>.<1/>Insereaza macaroon in campul de mai jos."
         },
         "rest_api_host": {
-          "label": "",
-          "placeholder": ""
+          "label": "REST API host",
+          "placeholder": "adresa-onion-a-nodului-tau:portul"
         }
       },
       "bitcoin_beach": {
-        "title": "",
+        "title": "Bitcoin Beach Wallet",
         "page": {
-          "title": ""
+          "title": "Conectare la <0>Bitcoin Beach Wallet</0>"
         }
       },
       "bitcoin_jungle": {
-        "title": "",
+        "title": "Bitcoin Jungle Wallet",
         "page": {
-          "title": ""
+          "title": "Conectare la <0>Bitcoin Jungle Wallet</0>"
         }
       },
       "galoy": {
         "phone_number": {
-          "label": ""
+          "label": "Introdu numarul tau de telefon"
         },
         "sms_code": {
-          "label": ""
+          "label": "Introdu codul de verificare primit prin SMS"
         },
         "jwt": {
-          "label": "",
-          "info": ""
+          "label": "Introdu tokenul tau JWT",
+          "info": "Momentan {{eticheta}} de login este in curs de actualizare. Daca esti un utilizator avansat, poti sa iei tokenul tau JWT prin logare via <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>Tokenul JWT este de tipul: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "",
-          "request_sms_code": ""
+          "login": "Login",
+          "request_sms_code": "Solicita cod prin SMS"
         },
         "errors": {
-          "failed_to_request_sms": "",
-          "failed_to_login_sms": "",
-          "setup_failed": "",
-          "missing_jwt": "",
-          "invalid_jwt": ""
+          "failed_to_request_sms": "Solicitare pentru cod SMS esuata",
+          "failed_to_login_sms": "Logare prin cod SMS esuata",
+          "setup_failed": "Setare esuata",
+          "missing_jwt": "Lipseste JWT, nu s-a putut efectua logarea.",
+          "invalid_jwt": "JWT invalid a trecut"
         }
       },
       "kollider": {
-        "title": "",
-        "description": "",
+        "title": "Kollider",
+        "description": "Logare la contul tau Kollider",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "Conectare la contul tau Kollider",
+          "description": "Nu ai inca un cont? <0>Inregistreaza-te</0> acum!"
         },
         "username": {
-          "label": ""
+          "label": "Introdu numele de utilizator Kollider"
         },
         "password": {
-          "label": ""
+          "label": "Introdu parola ta Kollider"
         },
         "currency": {
-          "label": ""
+          "label": "Selecteaza contul de moneda"
         },
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "Conexiune esuata. Esti sigur ca datele contului sunt corecte?"
         }
       },
       "btcpay": {
-        "title": "",
+        "title": "Serverul BTCPay",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "Conectare la nodul LND BTCPay",
+          "instructions": "Navigheaza la serverul tau BTCPay si logheaza-te ca administrator. Acceseaza Server Settings > Services > LND Rest - See information. Apoi apasa pe \"See QR Code information\" si copiaza datele codului QR. Insereaza-le mai jos:"
         },
         "config": {
-          "label": "",
-          "placeholder": ""
+          "label": "Date de configurare",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
         },
         "errors": {
           "connection_failed": ""
