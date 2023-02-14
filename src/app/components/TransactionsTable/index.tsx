@@ -119,6 +119,17 @@ export default function TransactionsTable({ transactions }: Props) {
                           )}
                         </div>
                       )}
+                      {tx.preimage && (
+                        <div className="my-2 flow-root">
+                          <p className="float-left break-all">
+                            <span className="font-bold">
+                              {tComponents("transactionsTable.preimage")}
+                            </span>
+                            <br />
+                            {tx.preimage}
+                          </p>
+                        </div>
+                      )}
                       {(tx.totalFees !== undefined || tx.location) && (
                         <div className="my-2 flow-root">
                           {tx.totalFees !== undefined && (
