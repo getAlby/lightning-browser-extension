@@ -313,93 +313,93 @@
           "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
         },
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "Conexiune esuata. URL-ul conexiunii BTCPay este corect si accesibil?"
         }
       },
       "commando": {
-        "title": "",
+        "title": "Core Lightning",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "Conectare la nodul tau Core Lightning",
+          "instructions": "Asigura-te ca folosesti cel putin versiunea 0.12.0 a Core Lightning, ca plugin-ul commando ruleaza si ca nodul tau este accesibil in Lightning network. Creeaza o runa ruland 'lightning-cli commando-rune'."
         },
         "host": {
-          "label": ""
+          "label": "Host"
         },
         "pubkey": {
-          "label": ""
+          "label": "Cheia publica"
         },
         "rune": {
-          "label": ""
+          "label": "Runa"
         },
         "port": {
-          "label": ""
+          "label": "Port"
         },
         "proxy": {
-          "label": ""
+          "label": "Websocket proxy"
         },
         "privKey": {
-          "label": ""
+          "label": "Cheia privata locala (autogenerata)"
         },
         "config": {
-          "label": "",
-          "placeholder": ""
+          "label": "Config data",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
         },
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "Conexiune esuata. Nodul tau Core Lightning este online si utilizeaza pluginul commando?"
         }
       }
     },
     "home": {
       "actions": {
-        "send_satoshis": "",
-        "enable_now": ""
+        "send_satoshis": "⚡️ Trimite Satoshi ⚡️",
+        "enable_now": "Activeaza acum"
       },
-      "recent_transactions": "",
+      "recent_transactions": "Tranzactii recente",
       "transaction_list": {
         "tabs": {
-          "outgoing": "",
-          "incoming": ""
+          "outgoing": "Trimitere",
+          "incoming": "Primire"
         }
       },
       "allowance_view": {
-        "recent_transactions": "",
-        "allowance": "",
-        "sats_used": "",
-        "no_transactions": ""
+        "recent_transactions": "Tranzactii recente",
+        "allowance": "Permisiuni",
+        "sats_used": "sats utilizati",
+        "no_transactions": "Nicio tranzactie pentru <0>{{nume}}</0> inca."
       },
       "default_view": {
-        "recent_transactions": "",
-        "no_transactions": "",
-        "is_blocked_hint": "",
-        "block_removed": ""
+        "recent_transactions": "Tranzactii recente",
+        "no_transactions": "Nicio tranzactie efectuata cu Alby, momentan.",
+        "is_blocked_hint": "Momentan, Alby este dezactivat pentru {{host}}",
+        "block_removed": "{{host}} activat. Te rugam sa reincarci website-ul."
       }
     },
     "accounts": {
-      "title": "",
+      "title": "Conturi",
       "account_view": {
-        "title1": "",
-        "title2": "",
+        "title1": "Informatii cont",
+        "title2": "Editeaza cont",
         "name": {
-          "title": "",
-          "placeholder": ""
+          "title": "Nume",
+          "placeholder": "Nume cont"
         },
         "export": {
-          "title": "",
-          "screen_reader": "",
-          "waiting": "",
-          "your_ln_address": "",
-          "tip_mobile": "",
-          "export_uri": "",
-          "scan_qr": ""
+          "title": "Exporta cont",
+          "screen_reader": "Exporta date cont",
+          "waiting": "in asteptarea datelor LNDHub...",
+          "your_ln_address": "Adresa ta Lightning:",
+          "tip_mobile": "Sfat: Foloseste acest portofel cu dispozitivul tau mobil",
+          "export_uri": "Credentialele URI pentru LNDHub",
+          "scan_qr": "Importa acest portofel in Zeus sau BlueWallet prin scanarea codului QR."
         },
         "nostr": {
-          "title": "",
-          "hint": "",
+          "title": "Nostr",
+          "hint": "este un protocol simplu si deschis care isi propune sa creeze retele sociale rezistente la cenzura. Nostr functioneaza cu chei criptografice. Pentru a publica ceva, semneaza-l cu cheia si trimite-l la mai multe relee. Poti folosi Alby pentru a gestiona cheia Nostr. Multe aplicatii Nostr vor permite apoi utilizarea cheii pur si simplu din extensia Alby.",
           "private_key": {
-            "title": "",
-            "subtitle": "",
-            "warning": "",
-            "success": "",
+            "title": "Gestionarea cheii tale",
+            "subtitle": "Insereaza cheia ta privata sau genereaza una noua. Inainte sa generezi o noua cheie asigura-te ca ai salvat cheia privata. <0>Mai multe »</0>",
+            "warning": "Vechea ta cheie privata va fi stearsa. Sigur doresti asta?",
+            "success": "Cheia privata a fost criptata si salvata cu succes.",
             "successfully_removed": "",
             "label": ""
           },
