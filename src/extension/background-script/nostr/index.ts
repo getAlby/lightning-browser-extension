@@ -66,8 +66,7 @@ class Nostr {
     if (conditions.kind) cond.push(`kind=${conditions.kind}`);
     if (conditions.until) cond.push(`created_at>${conditions.until}`);
     if (conditions.since) cond.push(`created_at<${conditions.since}`);
-    if (conditions.content)
-      cond.push(`content=${encodeURIComponent(conditions.content)}`);
+    if (conditions.content) cond.push(`content=${sha256(conditions.content)}`);
 
     const encodedConditions = cond.join("&");
 
