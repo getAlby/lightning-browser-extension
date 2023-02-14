@@ -58,7 +58,7 @@ export default function ChooseConnectorPath({ title, description }: Props) {
             description={t("other.description")}
             content={
               <div className="flex flex-wrap gap-6 w-72 lg:w-80 mx-auto my-5 items-center">
-                {connectorRoutes.slice(0, 7).map(({ path, title, logo }) => (
+                {connectorRoutes.slice(1, 8).map(({ path, title, logo }) => (
                   <img
                     key={path}
                     title={title}
