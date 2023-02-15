@@ -513,6 +513,7 @@ export type Transaction = {
 
 export interface DbPayment {
   allowanceId: string;
+  contactId?: string;
   createdAt: string;
   description: string;
   destination: string;
@@ -611,6 +612,18 @@ export interface Allowance extends Omit<DbAllowance, "id"> {
   paymentsCount: number;
   percentage: string;
   usedBudget: number;
+}
+
+export interface DbContact {
+  accountId: string;
+  createdAt: string;
+  enabled: boolean;
+  id: number;
+  lnAddress: string;
+}
+
+export interface Contact extends Omit<DbContact, "id"> {
+  id: number;
 }
 
 export interface SettingsStorage {
