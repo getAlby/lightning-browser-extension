@@ -143,7 +143,10 @@ function AccountScreen() {
 
     if (nostrPrivateKey === currentPrivateKey) return;
 
-    if (currentPrivateKey && !confirm(t("nostr.private_key.warning"))) {
+    if (
+      currentPrivateKey &&
+      prompt(t("nostr.private_key.warning")) !== "CONFIRM"
+    ) {
       return;
     }
 
