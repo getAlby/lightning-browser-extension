@@ -37,17 +37,20 @@ describe("AllowanceMenu", () => {
     jest.clearAllMocks();
   });
 
-  const renderComponent = (props?: Partial<Props>) =>
-    render(
-      <MemoryRouter>
-        <AllowanceMenu {...defaultProps} {...props} />
-      </MemoryRouter>
-    );
+  const renderComponent = async (props?: Partial<Props>) => {
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <AllowanceMenu {...defaultProps} {...props} />
+        </MemoryRouter>
+      );
+    });
+  };
 
   test("set new budget", async () => {
     const user = userEvent.setup();
 
-    renderComponent();
+    await renderComponent();
 
     expect(mockGetFiatValue).not.toHaveBeenCalled();
 
@@ -100,7 +103,7 @@ describe("AllowanceMenu", () => {
   test("enable website login", async () => {
     const user = userEvent.setup();
 
-    renderComponent();
+    await renderComponent();
 
     const settingsButton = await screen.getByRole("button");
     await act(() => {
