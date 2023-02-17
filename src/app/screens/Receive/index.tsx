@@ -100,23 +100,7 @@ function Receive() {
       });
   }
 
-  function receiveAnotherPayment() {
-    setFormData({
-      amount: "0",
-      description: "",
-      expiration: "",
-    });
-    setPaid(false);
-    setPollingForPayment(false);
-    setInvoice(null);
-    navigate("/receive");
-  }
-
-  function handleBack() {
-    if (invoice == null) {
-      navigate(-1);
-    }
-
+  function setDefaults() {
     setFormData({
       amount: "0",
       description: "",
@@ -174,7 +158,10 @@ function Receive() {
               label={tCommon("actions.receive_again")}
               primary
               fullWidth
-              onClick={receiveAnotherPayment}
+              onClick={() => {
+                setDefaults();
+                navigate("/receive");
+              }}
             />
           </div>
         )}
@@ -238,7 +225,9 @@ function Receive() {
         title={t("title")}
         headerLeft={
           <IconButton
-            onClick={handleBack}
+            onClick={() => {
+              invoice ? setDefaults() : navigate(-1);
+            }}
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
