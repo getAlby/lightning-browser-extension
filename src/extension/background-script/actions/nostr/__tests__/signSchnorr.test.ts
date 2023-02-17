@@ -193,6 +193,34 @@ describe("signSchnorr", () => {
       expect(result).toStrictEqual(requestResponse);
     });
 
+    test("doesn't call signSchnorr if clicks cancel", async () => {
+      (utils.openPrompt as jest.Mock).mockResolvedValueOnce(() => {
+        throw new Error();
+      });
+      // prepare DB with a permission
+      await db.permissions.bulkAdd([
+        { ...permissionInDB, method: "nostr/getPublicKey" },
+      ]);
+
+      expect(await db.permissions.toArray()).toHaveLength(1);
+      expect(
+        await db.permissions.get({ method: "nostr/signSchnorr" })
+      ).toBeUndefined();
+
+      const result = await signSchnorr(message);
+
+      expect(utils.openPrompt).toHaveBeenCalledTimes(1);
+
+      expect(nostr.signSchnorr).not.toHaveBeenCalled();
+
+      expect(await db.permissions.toArray()).toHaveLength(1);
+      expect(
+        await db.permissions.get({ method: "nostr/signSchnorr" })
+      ).toBeUndefined();
+
+      expect(result).toHaveProperty("error");
+    });
+
     test("does not save the permission if enabled 'false'", async () => {
       (utils.openPrompt as jest.Mock).mockResolvedValueOnce({
         data: { enabled: false, blocked: false },
