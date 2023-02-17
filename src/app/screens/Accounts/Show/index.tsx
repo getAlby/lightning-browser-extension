@@ -145,7 +145,8 @@ function AccountScreen() {
 
     if (
       currentPrivateKey &&
-      prompt(t("nostr.private_key.warning")) !== "CONFIRM"
+      prompt(t("nostr.private_key.warning"))?.toLowerCase() !==
+        account?.name?.toLowerCase()
     ) {
       return;
     }
