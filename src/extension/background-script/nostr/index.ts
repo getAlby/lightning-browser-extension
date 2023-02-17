@@ -30,6 +30,15 @@ class Nostr {
     return event;
   }
 
+  async signSchnorr(sigHash: string): Promise<string> {
+    const signature = await secp256k1.schnorr.sign(
+      Buffer.from(secp256k1.utils.hexToBytes(sigHash)),
+      secp256k1.utils.hexToBytes(this.privateKey)
+    );
+    const signedHex = secp256k1.utils.bytesToHex(signature);
+    return signedHex;
+  }
+
   encrypt(pubkey: string, text: string) {
     const key = secp256k1.getSharedSecret(this.privateKey, "02" + pubkey);
     const normalizedKey = Buffer.from(key.slice(1, 33));
