@@ -194,7 +194,7 @@ describe("signSchnorr", () => {
     });
 
     test("doesn't call signSchnorr if clicks cancel", async () => {
-      (utils.openPrompt as jest.Mock).mockResolvedValueOnce(() => {
+      (utils.openPrompt as jest.Mock).mockImplementationOnce(() => {
         throw new Error();
       });
       // prepare DB with a permission
