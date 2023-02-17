@@ -121,32 +121,32 @@
       "lnc": {
         "title": "LND z LNC",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "Podłącz się do swojego węzła LND",
+          "description": "Stwórz nową sesję w terminalu (litd) aby uzyskać nową frazę parowania i wpisz ją tutaj"
         },
         "pairing_phrase": {
-          "label": "",
-          "placeholder": ""
+          "label": "Twoja fraza parująca ",
+          "placeholder": "tajna fraza stosu satsów"
         }
       },
       "lndhub_bluewallet": {
-        "title": "",
+        "title": "Bluewallet",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "Podłącz do BlueWallet",
+          "description": "W BlueWallet wybierz portfel do którego chcesz się podłączyć, otwócz go, kliknij na \"...\", kliknij na Eksport/Kopia zapasowa, aby wyświetlić kod QR i zeskanuj go kamerką."
         },
         "uri": {
-          "label": ""
+          "label": "Adres URI eksportu z BlueWallet"
         },
         "errors": {
-          "invalid_uri": "",
-          "connection_failed": ""
+          "invalid_uri": "Niepoprawny adres URI BlueWallet",
+          "connection_failed": "Połączenie się nie powiodło. Czy Twój adres URI BlueWallet jest poprawny?"
         }
       },
       "lndhub_go": {
-        "title": "",
+        "title": "LNDHub",
         "page": {
-          "title": "",
+          "title": "Podłącz się do LNDHub",
           "description": ""
         },
         "uri": {
