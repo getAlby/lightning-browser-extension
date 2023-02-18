@@ -4,7 +4,7 @@
       "nav": {
         "welcome": "Bienvenido",
         "password": "Su Contraseña",
-        "connect": "Su cuenta de Lightning",
+        "connect": "Su Cuenta de Lightning",
         "done": "Hecho"
       },
       "set_password": {
@@ -834,7 +834,26 @@
       "decodepayreq": "Decodificar una cadena de solicitud de pago."
     },
     "lnc": {
-      "getinfo": "Obtener la información del nodo."
+      "getinfo": "Obtener la información del nodo.",
+      "gettransactions": "Obtener una lista de todas las transacciones relevantes para la billetera.",
+      "getnodeinfo": "Obtener la información del canal para un nodo.",
+      "getnetworkinfo": "Obtener estadísticas básicas sobre el gráfico de canales conocidos.",
+      "listinvoices": "Obtener una lista de todas las facturas.",
+      "channelbalance": "Obtener un informe sobre los fondos totales en todos los canales abiertos.",
+      "walletbalance": "Obtener las salidas totales no gastadas de la billetera.",
+      "listpeers": "Obtener una lista de todos los pares actualmente activos.",
+      "lookupinvoice": "Consultar los detalles de la factura.",
+      "queryroutes": "Consultar una posible ruta.",
+      "sendtoroute": "Realizar un pago a través de la ruta especificada.",
+      "openchannel": "Abrir un nuevo canal.",
+      "connectpeer": "Establezca una conexión con un par remoto.",
+      "disconnectpeer": "Desconectarse de un par remoto.",
+      "estimatefee": "Calcular la tasa de tarifa y las tarifas totales para una transacción.",
+      "getchaninfo": "Obtener el anuncio de la red para el canal dado.",
+      "addinvoice": "Crear nuevas facturas.",
+      "listpayments": "Obtener una lista de todos los pagos salientes.",
+      "listchannels": "Obtener una descripción de todos los canales abiertos.",
+      "decodepayreq": "Decodificar una cadena de solicitud de pago."
     }
   }
 }
