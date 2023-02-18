@@ -1,93 +1,93 @@
 {
   "translation": {
     "welcome": {
-      "title": "",
+      "title": "Velkommen til Alby",
       "nav": {
-        "welcome": "",
-        "password": "",
-        "connect": "",
-        "done": ""
+        "welcome": "Velkommen",
+        "password": "Din adgangskode",
+        "connect": "Din Lightning-konto",
+        "done": "Færdig"
       },
       "set_password": {
-        "title": "",
-        "description": "",
+        "title": "Angiv en adgangskode",
+        "description": "Denne adgangskode bruges til at beskytte din wallet og giver adgang til browserudvidelsen. Den kan ikke nulstilles, og er ikke den samme som adgangskoden til din Alby-konto.",
         "choose_password": {
-          "label": ""
+          "label": "Vælg en adgangskode:"
         },
         "confirm_password": {
-          "label": ""
+          "label": "Lad os se, om du skrev det korrekt:"
         },
         "errors": {
-          "enter_password": "",
-          "confirm_password": "",
-          "mismatched_password": ""
+          "enter_password": "Skriv en adgangskode.",
+          "confirm_password": "Bekræft din adgangskode.",
+          "mismatched_password": "Adgangskoderne er forskellige."
         }
       },
       "test_connection": {
-        "ready": "",
-        "initializing": "",
-        "connection_error": "",
-        "review_connection_details": "",
-        "connection_taking_long": "",
-        "contact_support": "",
+        "ready": "Super, så er du klar!",
+        "initializing": "Forbereder din konto. Vent venligst, dette tager et øjeblik...",
+        "connection_error": "Fejl på forbindelse",
+        "review_connection_details": "Kontroller dine forbindelsesoplysninger.",
+        "connection_taking_long": "Etablering af forbindelse går lidt langsomt...Er dine oplysninger korrekte? Er der kontakt til din node?",
+        "contact_support": "Kontakt support@getalby.com hvis du behøver hjælp",
         "actions": {
-          "delete_edit_account": ""
+          "delete_edit_account": "Slet ugyldig konto og rediger igen"
         }
       }
     },
     "choose_path": {
-      "title": "",
-      "description": "",
+      "title": "Opret forbindelse",
+      "description": "Opret forbindelse til udvidelsen fra din lightning-wallet for at bruge Alby til at betale online.",
       "alby": {
-        "title": "",
-        "description": "",
-        "create_new": ""
+        "title": "Alby",
+        "description": "Opret dig, eller brug din eksisterende Alby-konto til hurtigt at starte med at betale via lightning.",
+        "create_new": "Opret en konto"
       },
       "other": {
-        "title": "",
-        "description": "",
-        "and_more": "",
-        "connect": ""
+        "title": "Andre wallets",
+        "description": "Opret forbindelse til din eksisterende wallet eller node, og vælg mellem flere forbindelser.",
+        "and_more": "med mere...",
+        "connect": "Opret forbindelse"
       }
     },
     "alby": {
       "pre_connect": {
         "set_password": {
           "choose_password": {
-            "label": ""
+            "label": "Adgangskode"
           },
           "confirm_password": {
-            "label": ""
+            "label": "Bekræft adgangskode"
           },
           "errors": {
-            "enter_password": "",
-            "confirm_password": "",
-            "mismatched_password": ""
+            "enter_password": "Indtast en adgangskode.",
+            "confirm_password": "Bekræft din adgangskode.",
+            "mismatched_password": "Adgangskoderne er forskellige."
           }
         },
-        "forgot_password": "",
-        "title": "",
-        "create_account": "",
-        "login_account": "",
-        "host_wallet": "",
+        "forgot_password": "Glemt adgangskoden?",
+        "title": "Din Alby-konto",
+        "create_account": "Opret en ny Alby-konto for at sende og modtage betaling med Bitcoin.",
+        "login_account": "Log ind for at forbinde din eksisterende Alby-konto.",
+        "host_wallet": "Vi opretter en Lightning-wallet til dig!",
         "email": {
           "create": {
-            "label": ""
+            "label": "E-mailadresse"
           },
           "login": {
-            "label": ""
+            "label": "E-mailadresse eller Lightning-adresse"
           }
         },
         "optional_lightning_note": {
-          "part1": "",
-          "part2": "",
-          "part3": "",
-          "part4": ""
+          "part1": "Med din Alby-konto kommer muligheden for at få en",
+          "part2": "Lightning-adresse",
+          "part3": ". Dette gør det let for alle at sende dig Bitcoin via lightningnettet.",
+          "part4": "læs mere"
         },
         "optional_lightning_address": {
-          "label": "",
-          "suffix": "",
-          "title": ""
+          "label": "Vælg din Lightning-adresse (valgfri)",
+          "suffix": "@getalby.com",
+          "title": "tal og bogstaver, mindst 4 tegn"
         },
         "errors": {
           "create_wallet_error": "",
