@@ -43,7 +43,7 @@ module.exports = {
         18: "4.5rem",
       },
       colors: {
-        primary: "#f7931a",
+        primary: "#fbbf24",
         "primary-700": "#e78308",
         "primary-50": "#fdf0d5",
         "red-bitcoin": "#eb5757",
