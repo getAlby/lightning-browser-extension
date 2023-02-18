@@ -98,7 +98,7 @@
         },
         "page": {
           "title": "Conectar a nodo Citadel",
-          "instructions": "Esto actualmente no funciona si el A2F está activado."
+          "instructions": "Esto actualmente no funciona si el 2FA está activado."
         }
       },
       "umbrel": {
