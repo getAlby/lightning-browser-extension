@@ -1,50 +1,50 @@
 {
   "translation": {
     "welcome": {
-      "title": "",
+      "title": "Вітаємо у Alby",
       "nav": {
-        "welcome": "",
-        "password": "",
-        "connect": "",
-        "done": ""
+        "welcome": "Вітаємо",
+        "password": "Ваш пароль",
+        "connect": "Ваш обліковий запис у Lightning",
+        "done": "Готово"
       },
       "set_password": {
-        "title": "",
-        "description": "",
+        "title": "Встановити пароль для розблокування",
+        "description": "Пароль використовується для захисту вашого гаманця і надання доступу до розширення браузера. Його не можна скинути і він є відокремленим від вашого паролю до облікового запису Alby.",
         "choose_password": {
-          "label": ""
+          "label": "Оберіть пароль для розблокування:"
         },
         "confirm_password": {
-          "label": ""
+          "label": "Давайте впевнимося, що Ви набрали його вірно:"
         },
         "errors": {
-          "enter_password": "",
-          "confirm_password": "",
-          "mismatched_password": ""
+          "enter_password": "Будь ласка, введіть Ваш пароль.",
+          "confirm_password": "Будь ласка, підтвердіть Ваш пароль.",
+          "mismatched_password": "Паролі не збігаються."
         }
       },
       "test_connection": {
-        "ready": "",
-        "initializing": "",
-        "connection_error": "",
-        "review_connection_details": "",
-        "connection_taking_long": "",
-        "contact_support": "",
+        "ready": "Чудово, все готово!",
+        "initializing": "Ініціалізація Вашого аккаунту. Будь ласка, зачекайте, це може зайняти деякий час...",
+        "connection_error": "Помилка з'єднання",
+        "review_connection_details": "Будь ласка, перегляньте деталі вашого з'єднання.",
+        "connection_taking_long": "Спроба з'єднання триває довше ніж очікувалось...Чи правильні Ваші дані? Чи доступний Ваш вузол?",
+        "contact_support": "Якщо Вам потрібна допомога, будь ласка, зв'яжіться з support@getalby.com",
         "actions": {
-          "delete_edit_account": ""
+          "delete_edit_account": "Видалити непрацездатний обліковий запис і відредагувати знову"
         }
       }
     },
     "choose_path": {
-      "title": "",
-      "description": "",
+      "title": "З'єднатися",
+      "description": "Під'єднайте Ваш lightning гаманець до розширення, щоб почати робити онлайн платежі з Alby",
       "alby": {
-        "title": "",
-        "description": "",
-        "create_new": ""
+        "title": "Alby",
+        "description": "Зареєструйтеся або скористайтеся наявним обліковим записом Alby, щоб миттєво розпочати роботу з lightning платежами.",
+        "create_new": "Зареєструватись"
       },
       "other": {
-        "title": "",
+        "title": "Інші гаманці",
         "description": "",
         "and_more": "",
         "connect": ""
