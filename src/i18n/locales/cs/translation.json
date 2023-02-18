@@ -2,77 +2,78 @@
   "translation": {
     "welcome": {
       "nav": {
-        "welcome": "",
-        "password": "",
-        "connect": "",
-        "done": ""
+        "welcome": "Vítejte",
+        "password": "Vaše heslo",
+        "connect": "Váš Lightning účet",
+        "done": "Hotovo"
       },
       "set_password": {
-        "title": "",
-        "description": "",
+        "title": "Nastavit heslo pro odemčení účtu",
+        "description": "Toto heslo je použito pro zabezpečení vaši peněženky a pokytuje přístup k doplňku prohlížeče. Již nemůže být resetováno a nijak nesouvisí s heslem k vašemu Alby účtu.",
         "choose_password": {
-          "label": ""
+          "label": "Zvolte heslo pro odemčení:"
         },
         "confirm_password": {
-          "label": ""
+          "label": "Ověřte, že heslo je zadáno správně:"
         },
         "errors": {
-          "enter_password": "",
-          "confirm_password": "",
-          "mismatched_password": ""
+          "enter_password": "Prosím, zadejte heslo.",
+          "confirm_password": "Prosím potvrďte své heslo.",
+          "mismatched_password": "Hesla se neshodují."
         }
       },
       "test_connection": {
-        "ready": "",
-        "initializing": "",
-        "connection_error": "",
-        "review_connection_details": "",
-        "connection_taking_long": "",
-        "contact_support": "",
+        "ready": "Skvěle, vše je připraveno!",
+        "initializing": "Inicializace vašeho účtu. Prosím čekejte, chvíli to zabere...",
+        "connection_error": "Chyba spojení",
+        "review_connection_details": "Prosím překontrolujte nastavení vašeho spojení.",
+        "connection_taking_long": "Připojování zabralo více, než bylo očekáváno... Zadali jste údaje o připojení správně? Je váš uzel dostupný?",
+        "contact_support": "Pokud potřebujete pomoct, prosím kontaktujte support@getalby.com",
         "actions": {
-          "delete_edit_account": ""
+          "delete_edit_account": "Smažte nevalidní účet a změny proveďte znovu"
         }
-      }
+      },
+      "title": "Vítejte v Alby"
     },
     "choose_connector": {
-      "description": "",
+      "description": "Připojte svou externí ligtning peněženku nebo uzel",
       "lnd": {
-        "title": "",
+        "title": "LND",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "Připojt se ke svému LND uzlu",
+          "description": "Potřebujete URL svého uzlu a macaroon s oprávněním pro čtení a odesílání (například admin.macaroon)"
         },
         "url": {
-          "label": "",
-          "placeholder": ""
+          "label": "REST API host a port",
+          "placeholder": "https://url-vaseho-uzlu:8080"
         },
         "macaroon": {
-          "label": ""
+          "label": "Macaroon (v hexadecimálním formátu)"
         },
-        "or": "",
-        "drag_and_drop": "",
+        "or": "NEBO",
+        "drag_and_drop": "Přetáhněte svůj macaroon zde nebo ho <0>vyhledejte</0>",
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "Připojení se nezdařilo. Jsou vaše údaje pro LND zadány správně?"
         }
       },
       "lndhub_bluewallet": {
-        "title": "",
+        "title": "Bluewallet",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "Připojit k BlueWallet",
+          "description": "V BlueWallet vyberte peněženku, kterou chcete připojit, otevřete ji, klikněte na ¨...¨, klikněte na Export/Záloha pro zobrazení QR kódu a tento kód naskenujte svou webkamerou."
         },
         "uri": {
-          "label": ""
+          "label": "BlueWallet Export URI"
         },
         "errors": {
-          "invalid_uri": "",
-          "connection_failed": ""
+          "invalid_uri": "Nevalidní BlueWallet URI",
+          "connection_failed": "Připojení se nezdařilo. Je vaše BlueWallet URI správné?"
         }
       },
       "lndhub_go": {
-        "title": "",
+        "title": "LNDHub",
         "page": {
-          "title": "",
+          "title": "Připojit k LNDHub",
           "description": ""
         },
         "uri": {
@@ -252,6 +253,17 @@
         },
         "errors": {
           "connection_failed": ""
+        }
+      },
+      "title": "Připojte Lightning peněženku",
+      "lnc": {
+        "title": "LND s LNC",
+        "page": {
+          "title": "Připojit k vašemu LND uzlu",
+          "description": "Vytvořte nové sezení v terminálu (litd) pro získání nové párovací fráze a vložte ji zde"
+        },
+        "pairing_phrase": {
+          "label": "Vaše párovací fráze "
         }
       }
     },
@@ -533,6 +545,67 @@
       "title": "",
       "allow": "",
       "block_and_ignore": ""
+    },
+    "choose_path": {
+      "title": "Připojit",
+      "other": {
+        "title": "Jiné peněženky",
+        "description": "Připojte svou existující lightning peněženku nebo svůj uzel pomocí různých konektorů.",
+        "and_more": "a více...",
+        "connect": "Připojit"
+      },
+      "alby": {
+        "create_new": "Vytvoření účtu",
+        "title": "Alby",
+        "description": "Zaregistrujte se, nebo se přihlašte ke svému existujícímu Alby účtu a začněte využívat lightning platby."
+      },
+      "description": "Pro použití Alby pro online platby, připojte svou lightning peněženku k doplňku."
+    },
+    "alby": {
+      "pre_connect": {
+        "optional_lightning_note": {
+          "part4": "dozvědět se více",
+          "part3": ". Jedná se o jednoduchý způsob jak vám kdokoliv může zaslat bitcoin přes síť lightning.",
+          "part1": "Váš Alby účet poskytuje také volitelnou",
+          "part2": "lightning adresu"
+        },
+        "optional_lightning_address": {
+          "label": "Vyberte si svou Lightning adresu (volitelné)",
+          "suffix": "@getalby.com",
+          "title": "čísla a písmena, minimálně 4 znaky"
+        },
+        "errors": {
+          "create_wallet_error1": "Přihlášení nebo vytvoření nového účtu se nezdařilo.",
+          "create_wallet_error2": "Pokud potřebujete pomoct, prosím kontaktujte support@getalby.com",
+          "create_wallet_error": "Přihlášení nebo vytvoření nového účtu se nezdařilo. Pokud potřebujete pomoc, kontaktujte support@getalby.com"
+        },
+        "forgot_password": "Zapomněli jste heslo?",
+        "title": "Váš účet Alby",
+        "create_account": "Vytvořte nový Alby účet pro zasílání a příjímání bitcoin plateb.",
+        "login_account": "Přihlašte se pro připojení k existujícímu učtu Alby.",
+        "set_password": {
+          "choose_password": {
+            "label": "Heslo"
+          },
+          "confirm_password": {
+            "label": "Potvrďte heslo"
+          },
+          "errors": {
+            "enter_password": "Prosím zadejte heslo.",
+            "confirm_password": "Prosím potvrďte své heslo.",
+            "mismatched_password": "Hesla se neshodují."
+          }
+        },
+        "host_wallet": "Provozujeme pro vás Lightning peněženku!",
+        "email": {
+          "create": {
+            "label": "Emailová adresa"
+          },
+          "login": {
+            "label": "Emailová adresa nebo adresa Lightning"
+          }
+        }
+      }
     }
   },
   "common": {

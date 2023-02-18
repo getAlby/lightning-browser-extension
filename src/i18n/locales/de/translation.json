@@ -862,7 +862,8 @@
       "connect": "Verbinden",
       "save": "Speichern",
       "copy": "Kopieren",
-      "remember": "Denke an meine Wahl und frage nicht noch einmal"
+      "remember": "Denke an meine Wahl und frage nicht noch einmal",
+      "receive_again": "Eine weitere Zahlung erhalten"
     },
     "discover": "Entdecken",
     "errors": {
