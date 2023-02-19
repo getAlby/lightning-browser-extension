@@ -2,10 +2,9 @@ import merge from "lodash.merge";
 import pick from "lodash.pick";
 import browser from "webextension-polyfill";
 import createState from "zustand";
-import { CURRENCIES } from "~/common/constants";
+import { DEFAULT_SETTINGS } from "~/common/constants";
 import { decryptData } from "~/common/lib/crypto";
 import { Migration } from "~/extension/background-script/migrations";
-import i18n from "~/i18n/i18nConfig";
 import type { Account, Accounts, SettingsStorage } from "~/types";
 
 import connectors from "./connectors";
@@ -39,23 +38,6 @@ interface BrowserStorage {
   migrations: Migration[] | null;
   nostrPrivateKey: string | null;
 }
-
-export const DEFAULT_SETTINGS: SettingsStorage = {
-  browserNotifications: true,
-  websiteEnhancements: true,
-  legacyLnurlAuth: false,
-  isUsingLegacyLnurlAuthKey: false,
-  userName: "",
-  userEmail: "",
-  locale: i18n.resolvedLanguage,
-  theme: "system",
-  showFiat: true,
-  currency: CURRENCIES.USD,
-  exchange: "alby",
-  debug: false,
-  nostrEnabled: false,
-  closedTips: [],
-};
 
 // these keys get synced from the state to the browser storage
 // the values are the default values
@@ -110,18 +92,27 @@ const state = createState<State>((set, get) => ({
     if (get().nostr) {
       return get().nostr as Nostr;
     }
+    const currentAccountId = get().currentAccountId as string;
+    const account = get().accounts[currentAccountId];
 
-    const nostr = new Nostr();
+    const password = get().password as string;
+    const privateKey = decryptData(account.nostrPrivateKey as string, password);
+
+    const nostr = new Nostr(privateKey);
     set({ nostr: nostr });
 
     return nostr;
   },
   lock: async () => {
+    const allTabs = browser.extension.getViews({ type: "tab" });
+    for (const tab of allTabs) {
+      tab.close();
+    }
     const connector = get().connector;
     if (connector) {
       await connector.unload();
     }
-    set({ password: null, connector: null, account: null });
+    set({ password: null, connector: null, account: null, nostr: null });
   },
   isUnlocked: () => {
     return get().password !== null;

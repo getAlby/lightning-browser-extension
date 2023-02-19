@@ -13,6 +13,12 @@ const signMessage = async (message: Message) => {
     };
   }
 
+  if (messageToSign.startsWith("DO NOT EVER SIGN THIS TEXT")) {
+    return {
+      error: "forbidden",
+    };
+  }
+
   const connector = await state.getState().getConnector();
   try {
     const response = await connector.signMessage({
