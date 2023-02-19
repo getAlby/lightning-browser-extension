@@ -4,7 +4,7 @@
       "nav": {
         "welcome": "Bienvenido",
         "password": "Su Contraseña",
-        "connect": "Su Cuenta de Lightning",
+        "connect": "Tu cuenta Lightning",
         "done": "Hecho"
       },
       "set_password": {
@@ -23,11 +23,11 @@
         }
       },
       "test_connection": {
-        "ready": "¡Impresionante, estás listo para comenzar!",
-        "initializing": "Inicializando su cuenta. Por favor, espere, esto puede tardar un minuto...",
+        "ready": "Genial, estás listo para comenzar!",
+        "initializing": "Accediendo a su cuenta. Por favor, espere, esto puede tardar un minuto...",
         "connection_error": "Error de Conexión",
         "review_connection_details": "Revise los detalles de su conexión.",
-        "connection_taking_long": "Intentar conectarse lleva más tiempo de lo esperado... ¿Sus datos son correctos? ¿Se puede acceder a su nodo?",
+        "connection_taking_long": "Conectarse está llevando más tiempo de lo esperado... ¿Sus datos son correctos? ¿Se puede acceder a su nodo?",
         "contact_support": "Si necesita ayuda, póngase en contacto con support@getalby.com",
         "actions": {
           "delete_edit_account": "Eliminar una cuenta no válida y volver a editarla"
@@ -36,11 +36,11 @@
       "title": "Bienvenido a Alby"
     },
     "choose_connector": {
-      "description": "¡Primero debe conectarse a una billetera lightning para poder interactuar con sus sitios web favoritos que aceptan pagos con Bitcoin lightning!",
+      "description": "Conecta tu billetera lightning externa o nodo",
       "lnd": {
         "title": "LND",
         "page": {
-          "title": "Conéctese a su nodo LND",
+          "title": "Conecta a tu nodo LND",
           "description": "Necesita la URL de su nodo y una frase macarrón con permisos de lectura y envío (por ejemplo, admin.macaroon)"
         },
         "url": {
@@ -50,10 +50,10 @@
         "macaroon": {
           "label": "Frase macarrón (formato HEX)"
         },
-        "or": "o",
+        "or": "O",
         "drag_and_drop": "Arrastra y suelta tu frase macarrón aquí o <0>navegar</0>",
         "errors": {
-          "connection_failed": "La conexión falló. ¿Son correctas sus credenciales de LND?"
+          "connection_failed": "Error de conexión. ¿Son correctas sus credenciales de LND?"
         }
       },
       "lnbits": {
@@ -104,23 +104,59 @@
       "umbrel": {
         "title": "Cuenta de Umbrel",
         "page": {
-          "title": "Conectar a Umbrel"
+          "title": "Conectar a Umbrel",
+          "instructions": "En tu cuadro de mandos Umbrel ve a <0>Conecta Billetera</0>. Selecciona <0>lndconnect REST</0> y copia el <0>URL lndconnect</0>. (Dependiendo de tu configuración puedes usar la conexión local o la conexión TOR)"
+        },
+        "rest_url": {
+          "placeholder": "lndconnect://sunodo:8080?...",
+          "label": "URL de REST de lndconnect"
         }
       },
       "mynode": {
-        "title": "MiNodo"
+        "title": "MiNodo",
+        "page": {
+          "title": "Conecta <0>miNodo</0>",
+          "instructions": "En tu página myNode pulsa el botón <0>Billetera</0> para tu servicio <0>lightning</0>.<1/> Ahora pulsa el botón <0>Emparejar Billetera</0> bajo la pestaña <0>Estado</0>. Escribe tu contraseña cuando se indique.<1/> Selecciona el menú desplegable y elige una opción de emparejamiento. Dependiendo de tu configuración puedes usar la conexión <0>lightning (REST + IP Local)</0> o la conexión <0>lightning (REST + TOR)</0>."
+        },
+        "rest_url": {
+          "label": "URL de REST de lndconnect",
+          "placeholder": "lndconnect://sunodo:8080?..."
+        }
       },
       "start9": {
-        "title": "Cuenta Start9"
+        "title": "Cuenta Start9",
+        "page": {
+          "title": "Conecta tu nodo <0>Embassy</0>",
+          "instructions": "<0>Nota:</0> ¡Actualmente solo admitimos LND pero en el futuro añadiremos c-lightning!<1/>En tu control de mandos Embassy pulsa el servicio <0>red lightning Daemon</0>.<1/>Selecciona la pestaña <0>Propiedades</0>.<1/>Ahora copia el <0>URL REST LND Conecta</0>."
+        },
+        "rest_url": {
+          "label": "URL REST conectalnd",
+          "placeholder": "lndconnect://sunodo:8080?..."
+        }
       },
       "raspiblitz": {
-        "title": "Cuenta RaspiBlitz"
+        "title": "Cuenta RaspiBlitz",
+        "page": {
+          "title": "Conecta tu nodo <0>RaspiBlitz</0>",
+          "instructions2": "Selecciona <0>CONECTAR</0>.<1/>Selecciona <0>EXPORTAR</0>.<1/>Selecciona <0>HEX</0>.<1/>Copia el <0>adminMacaroon</ 0>.<1/>Pega el macarrón en la entrada de abajo.",
+          "instructions1": "Necesita la dirección onion de su nodo, el puerto y un macarrón con permisos de lectura y envío (por ejemplo, admin.macaroon).<1/><1/><0>SSH</0> en su <0>RaspiBlitz</0> .<1/>Ejecute el comando <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Copie y pegue la dirección <0>.onion</0> en la entrada a continuación .<1/>Agregue su <0>puerto</0> después de la dirección onion, el puerto predeterminado es <0>:8080</0>."
+        },
+        "rest_api_host": {
+          "label": "Host de la API REST",
+          "placeholder": "tu-nodo-direccion onion:puerto"
+        }
       },
       "bitcoin_beach": {
-        "title": "Billetera de Bitcoin Beach"
+        "title": "Billetera de Bitcoin Beach",
+        "page": {
+          "title": "Conecta a <0>La cartera Bitcoin Beach</0>"
+        }
       },
       "bitcoin_jungle": {
-        "title": "Billetera de Bitcoin Jungle"
+        "title": "Billetera de Bitcoin Jungle",
+        "page": {
+          "title": "Conecta a <0>La cartera Bitcoin Jungle</0>"
+        }
       },
       "btcpay": {
         "title": "Servidor BTCPay",
@@ -139,21 +175,21 @@
       "lndhub_bluewallet": {
         "title": "Bluewallet",
         "page": {
-          "title": "Conéctese a BlueWallet",
-          "description": "En BlueWallet, elija la billetera que desea conectar, ábrala, haga clic en \"...\", haga clic en Exportar / Copia de seguridad para mostrar el código QR y escanearlo con su cámara web."
+          "title": "Conecta a BlueWallet",
+          "description": "En BlueWallet, elige la billetera que quieres conectar, ábrela, pulsa \"...\", pulsa Exportar/Recuperar para mostrar el código QR y escanearlo con su cámara web."
         },
         "uri": {
-          "label": "URI de exportación de BlueWallet"
+          "label": "URI de Exportación BlueWallet"
         },
         "errors": {
-          "invalid_uri": "URI de BlueWallet no válido",
-          "connection_failed": "La conexión falló. ¿Su URI de BlueWallet es correcta?"
+          "invalid_uri": "URI de BlueWallet inválido",
+          "connection_failed": "Error de conexión. ¿Es correcto el URI de BlueWallet?"
         }
       },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
-          "title": "Conéctese a LNDHub",
+          "title": "Conecta LNDHub",
           "description": "Ingrese su URI de credencial de LNDHub aquí o escanee el código QR con su cámara web."
         },
         "uri": {
@@ -178,6 +214,10 @@
         },
         "errors": {
           "connection_failed": "La conexión falló. ¿Te aseguraste de que los datos de la cuenta son correctos?"
+        },
+        "title": "Kollider",
+        "currency": {
+          "label": "Seleccione su cuenta de divisas"
         }
       },
       "commando": {
@@ -191,13 +231,34 @@
           "label": "Clave privada local (autogenerada)"
         },
         "config": {
-          "label": "Datos de Configuración"
+          "label": "Datos de Configuración",
+          "placeholder": "config=https://su-btc-pay.org/lnd-config/212121/lnd.config"
+        },
+        "host": {
+          "label": "Host"
+        },
+        "page": {
+          "title": "Conéctese a su nodo Core Lightning",
+          "instructions": "Asegúrese de tener Core Lightning versión 0.12.0 o posterior, el complemento de comando se está ejecutando y se puede acceder a su nodo a través de Lightning Network. Cree una runa ejecutando 'lightning-cli commando-rune'."
+        },
+        "title": "Core Lightning",
+        "errors": {
+          "connection_failed": "La conexión falló. ¿Está su nodo Core Lightning en línea y usando el plugin de comando?"
+        },
+        "rune": {
+          "label": "Rune"
+        },
+        "proxy": {
+          "label": "Proxy de socket web"
         }
       },
       "galoy": {
         "errors": {
           "failed_to_login_sms": "No se pudo iniciar sesión con el código de SMS",
-          "setup_failed": "Falló la configuración"
+          "setup_failed": "Falló la configuración",
+          "missing_jwt": "Falta JWT, no se pudo iniciar sesión.",
+          "invalid_jwt": "JWT inválido aprobado",
+          "failed_to_request_sms": "Hubo un error al solicitar un código SMS"
         },
         "phone_number": {
           "label": "Ingrese su número telefónico"
@@ -206,19 +267,31 @@
           "label": "Ingrese su código de verificación de SMS"
         },
         "jwt": {
-          "label": "Ingresa tu token de JWT"
+          "label": "Ingresa tu token de JWT",
+          "info": "El inicio de sesión de {{label}} se está actualizando actualmente. Si es un usuario avanzado, puede obtener su token JWT iniciando sesión a través de <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>El JWT se ve así: < 2>eyJhbG...</2><1/><1/>"
+        },
+        "actions": {
+          "login": "Ingresar",
+          "request_sms_code": "Solicitar código por Mensaje de Texto"
         }
       },
       "lnc": {
         "page": {
-          "title": "Conéctese a su nodo LND"
+          "title": "Conecta tu nodo LND",
+          "description": "Crea una nueva sesión en terminal (litd) para obtener una nueva frase y colocala aquí"
+        },
+        "title": "LND con LNC",
+        "pairing_phrase": {
+          "label": "Tu frase vinculada. ",
+          "placeholder": "frase de pila secreta de sats"
         }
-      }
+      },
+      "title": "Conecta la Billetera Lightning"
     },
     "home": {
       "actions": {
         "send_satoshis": "⚡️ Enviar Satoshis ⚡️",
-        "enable_now": "Habilitado ahora"
+        "enable_now": "Habilitar ahora"
       },
       "recent_transactions": "Transacciones Recientes",
       "transaction_list": {
@@ -236,13 +309,14 @@
       "default_view": {
         "recent_transactions": "Transacciones Recientes",
         "no_transactions": "Aún no se han hecho transacciones con Alby.",
-        "is_blocked_hint": "Alby está actualmente deshabilitado en {{host}}"
+        "is_blocked_hint": "Alby está actualmente deshabilitado en {{host}}",
+        "block_removed": "{{host}} habilitado. Vuelva a cargar el sitio web."
       }
     },
     "accounts": {
       "title": "Cuentas",
       "actions": {
-        "add_account": "Añadir Cuenta"
+        "add_account": "Agregar Cuenta"
       },
       "account_view": {
         "nostr": {
@@ -254,7 +328,8 @@
             "successfully_removed": "Clave privada eliminada con éxito.",
             "label": "Clave Privada",
             "title": "Administra tu clave",
-            "subtitle": "Pegue su clave privada o genere una nueva. Asegúrese de hacer una copia de seguridad de su clave privada antes de generar una nueva. <0>Más información »</0>"
+            "subtitle": "Pegue su clave privada o genere una nueva. Asegúrese de hacer una copia de seguridad de su clave privada antes de generar una nueva. <0>Más información »</0>",
+            "warning": "Esto eliminará su antigua clave privada. ¿Desea continuar?"
           },
           "public_key": {
             "label": "Clave Pública"
@@ -263,7 +338,8 @@
             "title": "Generar una nueva clave de Nostr",
             "screen_reader": "Genere una nueva clave Nostr para su cuenta",
             "actions": {
-              "random_keys": "Genera una clave aleatoria"
+              "random_keys": "Genera una clave aleatoria",
+              "derived_keys": "Derivar una clave de la cuenta"
             },
             "hint": "Puede generar una clave aleatoria o una clave derivada a partir de los detalles de esta cuenta (usando una frase canónica firmada). <0>Aprenda Más »</0>"
           },
@@ -275,7 +351,8 @@
         },
         "remove": {
           "title": "Eliminar Esta Cuenta",
-          "confirm": "¿Está seguro de que desea eliminar la cuenta: {{name}}?\nEsto no se puede deshacer. Si usó esta cuenta para iniciar sesión en sitios web, es posible que pierda el acceso a ellos."
+          "confirm": "¿Está seguro de que desea eliminar la cuenta: {{name}}?\nEsto no se puede deshacer. Si usó esta cuenta para iniciar sesión en sitios web, es posible que pierda el acceso a ellos.",
+          "subtitle": "Se eliminarán todos los enlaces vinculados. Por favor, asegúrese de querer hacerlo."
         },
         "title1": "Información de la Cuenta",
         "title2": "Editar Cuenta",
@@ -288,7 +365,9 @@
           "screen_reader": "Exportar los detalles de la cuenta",
           "your_ln_address": "Tu Dirección Lightning:",
           "tip_mobile": "Consejo: Use esta billetera con su dispositivo móvil",
-          "scan_qr": "Importe esta billetera a Zeus o BlueWallet escaneando el código QR."
+          "scan_qr": "Importe esta billetera a Zeus o BlueWallet escaneando el código QR.",
+          "waiting": "esperando datos de LndHub...",
+          "export_uri": "URI de credenciales de LNDHub"
         },
         "actions": {
           "remove_account": "Eliminar cuenta",
@@ -297,7 +376,7 @@
       }
     },
     "enable": {
-      "allow": "Permitir que {{host}}:",
+      "allow": "Permitir que este sitio web:",
       "request1": "Solicitar aprobación de transacciones",
       "request2": "Solicitar facturas e información sobre Lightning",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
@@ -366,7 +445,7 @@
       },
       "exchange": {
         "title": "Fuente del Intercambio",
-        "subtitle": "Fuente de los tipos de cambio de Bitcoin"
+        "subtitle": "Fuente del tipo de cambio de Bitcoin"
       },
       "personal_data": {
         "title": "Datos personales",
@@ -428,7 +507,7 @@
     },
     "lnurlpay": {
       "amount": {
-        "label": "Cantidad (Satoshi)"
+        "label": "Cantidad"
       },
       "comment": {
         "label": "Comentario"
@@ -456,7 +535,7 @@
       },
       "success": "¡Pago recibido!",
       "payment": {
-        "waiting": "A la espera del pago...",
+        "waiting": "Esperando el pago...",
         "status": "Consultar estado de pago"
       }
     },
@@ -506,9 +585,9 @@
     "lnurlauth": {
       "title": "Autenticación",
       "content_message": {
-        "heading": "Quieres iniciar sesión en"
+        "heading": "¿Quieres iniciar sesión en"
       },
-      "submit": "Sesión",
+      "submit": "Acceder",
       "success": "Inicio de sesión exitoso en {{name}}",
       "errors": {
         "status": "Error: El estado de autenticación no es correcto"
@@ -536,12 +615,14 @@
       "description": "Para comenzar a usar Alby y realizar pagos en línea, conecta tu billetera Lightning a la extensión.",
       "alby": {
         "title": "Alby",
-        "create_new": "Regístrese"
+        "create_new": "Regístrate",
+        "description": "Regístrate o usa tu cuenta existente de Alby para empezar con pagos lightning en poco tiempo."
       },
       "other": {
         "title": "Otras Billeteras",
         "and_more": "Y más...",
-        "connect": "Conectar"
+        "connect": "Conectar",
+        "description": "Conecta con tu billetera lightning existente o nodo y elige entre varios conectores."
       }
     },
     "nostr": {
@@ -586,7 +667,9 @@
         "shopping": "Compras",
         "miscellaneous": "Varios",
         "showcases": "Vitrinas",
-        "nostr": "Nostr"
+        "nostr": "Nostr",
+        "trading": "Comerciar",
+        "gaming": "Juegos"
       }
     },
     "confirm_request_permission": {
@@ -597,15 +680,18 @@
     "alby": {
       "pre_connect": {
         "errors": {
-          "create_wallet_error1": "No se pudo iniciar sesión o crear una nueva cuenta.",
+          "create_wallet_error1": "Error al iniciar sesión o crear una cuenta nueva.",
           "create_wallet_error2": "Si necesita ayuda, póngase en contacto con support@getalby.com",
-          "create_wallet_error": "No se pudo iniciar sesión o crear una nueva cuenta. Si necesita ayuda, póngase en contacto con support@getalby.com"
+          "create_wallet_error": "Error al iniciar sesión o crear una cuenta nueva. Si necesita ayuda, por favor contacte support@getalby.com"
         },
         "forgot_password": "¿Olvidó su contraseña?",
         "create_account": "Cree una nueva cuenta Alby para enviar y recibir pagos de bitcoin.",
         "login_account": "Inicie sesión para conectar su cuenta de Alby existente.",
         "optional_lightning_note": {
-          "part2": "dirección lightning"
+          "part2": "dirección lightning",
+          "part4": "aprende más",
+          "part3": ". Este es un modo simple para que cualquiera te envie Bitcoin en la red lightning.",
+          "part1": "Su cuenta de Alby también viene con una opción"
         },
         "set_password": {
           "choose_password": {
@@ -622,8 +708,18 @@
         },
         "title": "Tu cuenta Alby",
         "optional_lightning_address": {
-          "label": "Elija una Dirección Lightning (opcional)",
-          "title": "números y letras, al menos 4 caracteres"
+          "label": "Elige tu Dirección Lightning (opcional)",
+          "title": "números y letras, al menos 4 caracteres",
+          "suffix": "@getalby.com"
+        },
+        "host_wallet": "¡Nosotros alojamos una billetera Lightning por usted!",
+        "email": {
+          "create": {
+            "label": "Dirección de Correo Electrónico"
+          },
+          "login": {
+            "label": "Dirección de Correo Electrónico o Dirección Lightning"
+          }
         }
       }
     },
@@ -640,7 +736,7 @@
   },
   "common": {
     "password": "Contraseña",
-    "success": "Éxito",
+    "success": "Exitoso",
     "error": "Error",
     "settings": "Ajustes",
     "websites": "Sitios web",
@@ -659,7 +755,7 @@
       "confirm": "Confirmar",
       "continue": "Continuar",
       "connect": "Conectar",
-      "lock": "Cerrar",
+      "lock": "Bloquear",
       "unlock": "Desbloquear",
       "send": "Enviar",
       "save": "Guardar",
@@ -743,7 +839,7 @@
     },
     "companion_download_info": {
       "description": "Estás intentando conectarte a un nodo detrás de Tor. Para hacer esto, necesitas tener instalada la aplicación Alby companion o tener Tor en ejecución. (Cuando no esté seguro, le recomendamos la aplicación complementaria Alby.)",
-      "download_here": "¡Descarguelo aqui!",
+      "download_here": "¡Descargue el compañero Alby aquí!",
       "using_tor": "haz clic aquí para continuar si utilizas el navegador Tor",
       "or": "O:"
     },
@@ -803,7 +899,14 @@
       "listinvoices": "Obtener el estado de todas las facturas.",
       "listoffers": "Enumerar todas las ofertas u obtener una oferta específica.",
       "multifundchannel": "Abra múltiples canales de pago con nodos al realizar una sola transacción de financiación.",
-      "disconnect": "Cerrar una conexión existente con un par."
+      "disconnect": "Cerrar una conexión existente con un par.",
+      "decode": "Decodifica una cadena bolt11/bolt12/rune.",
+      "decodepay": "Comprobar y analizar una cadena bolt11.",
+      "listforwards": "Enumere todos los htlc que se han intentado reenviar.",
+      "setchannel": "Configurar tarifas/rango htlc anunciado para un canal.",
+      "listnodes": "Enumere los nodos sobre los que el nodo ha aprendido a través de mensajes gossip.",
+      "listsendpays": "Obtiene el estado de todos los comandos sendpay.",
+      "feerates": "Devuelve las tarifas que utilizará CLN."
     },
     "nostr": {
       "signmessage": "Firma el mensaje con tu clave.",
@@ -831,7 +934,9 @@
       "channelbalance": "Obtener un informe sobre los fondos totales en todos los canales abiertos.",
       "walletbalance": "Obtener las salidas totales no gastadas de la billetera.",
       "sendtoroute": "Realizar un pago a través de la ruta especificada.",
-      "decodepayreq": "Decodificar una cadena de solicitud de pago."
+      "decodepayreq": "Decodificar una cadena de solicitud de pago.",
+      "verifymessage": "Verificar una firma sobre un mensaje.",
+      "routermc": "Lea el estado de control de la misión interna."
     },
     "lnc": {
       "getinfo": "Obtener la información del nodo.",
@@ -853,7 +958,9 @@
       "addinvoice": "Crear nuevas facturas.",
       "listpayments": "Obtener una lista de todos los pagos salientes.",
       "listchannels": "Obtener una descripción de todos los canales abiertos.",
-      "decodepayreq": "Decodificar una cadena de solicitud de pago."
+      "decodepayreq": "Decodificar una cadena de solicitud de pago.",
+      "verifymessage": "Verificar una firma sobre un mensaje.",
+      "routermc": "Lea el estado de control de la misión interna."
     }
   }
 }
