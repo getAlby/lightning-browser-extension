@@ -90,85 +90,85 @@
           "title": "tal og bogstaver, mindst 4 tegn"
         },
         "errors": {
-          "create_wallet_error": "",
-          "create_wallet_error1": "",
-          "create_wallet_error2": ""
+          "create_wallet_error": "Kunne ikke logge ind eller oprette en ny konto. Har du brug for hjælp, så kontakt support@getalby.com",
+          "create_wallet_error1": "Kunne ikke logge ind eller oprette en ny konto.",
+          "create_wallet_error2": "Har du brug for hjælp, så kontakt support@getalby.com"
         }
       }
     },
     "choose_connector": {
-      "title": "",
-      "description": "",
+      "title": "Opret forbindelse til Lightning-wallet",
+      "description": "Opret forbindelse til din eksterne Lightning-wallet eller node",
       "lnd": {
-        "title": "",
+        "title": "LND",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "Opret forbindelse til din LND-node",
+          "description": "Du skal bruge din nodes URL og en macaroon med tilladelse til at læse og sende (fx admin.macaroon)"
         },
         "url": {
-          "label": "",
-          "placeholder": ""
+          "label": "REST API vært og port",
+          "placeholder": "https://din-nodes-url:8080"
         },
         "macaroon": {
-          "label": ""
+          "label": "Macaroon (HEX-format)"
         },
-        "or": "",
-        "drag_and_drop": "",
+        "or": "ELLER",
+        "drag_and_drop": "Træk din macaroon herhen eller <0>find den</0>",
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "Forbindelse kunne ikke oprettes. Er dine LND-oplysninger korrekte?"
         }
       },
       "lnc": {
-        "title": "",
+        "title": "LND med LNC",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "Opret forbindelse til din LND-node",
+          "description": "Start en ny session i terminal (litd) for at få en ny forbindelseskode, og skriv den her"
         },
         "pairing_phrase": {
-          "label": "",
-          "placeholder": ""
+          "label": "Din forbindelseskode ",
+          "placeholder": "hemmelig kode til sats-samlingen"
         }
       },
       "lndhub_bluewallet": {
-        "title": "",
+        "title": "Bluewallet",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "Opet forbindelse til Bluewallet",
+          "description": "Vælg den wallet du vil oprette forbindelse til i Bluewallet, åbn den, klik på \"...\", klik på Export/Backup for at se QR-koden og aflæs den med dit webkamera."
         },
         "uri": {
-          "label": ""
+          "label": "BlueWallet export URI"
         },
         "errors": {
-          "invalid_uri": "",
-          "connection_failed": ""
+          "invalid_uri": "Ugyldig BlueWallet URI",
+          "connection_failed": "Forbindelse kunne ikke oprettes. Er din BlueWallet URI korrekt?"
         }
       },
       "lndhub_go": {
-        "title": "",
+        "title": "LNDHub",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "Opret forbindelse til LNDHub",
+          "description": "Indsæt dine adgangsoplysninger til LNDHub her, eller aflæs QR-koden med dit webkamera."
         },
         "uri": {
-          "label": ""
+          "label": "LNDHub export URI"
         },
         "errors": {
-          "invalid_uri": "",
-          "connection_failed": ""
+          "invalid_uri": "Ugyldig LNDHub URI",
+          "connection_failed": "Forbindelse kunne ikke oprettes. Er din LNDHub URI korrekt?"
         }
       },
       "lnbits": {
-        "title": "",
+        "title": "LNbits",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "Opret forbindelse til <0>LNbits</0>",
+          "instructions": "Vælg den wallet du vil oprette forbindelse til i LNbits, åbn den, klik på API-oplysninger og kopier Admin-nøglen. Indsæt den herunder:"
         },
         "admin_key": {
-          "label": "",
-          "placeholder": ""
+          "label": "LNbits Admin-nøgle",
+          "placeholder": "Din admin-nøgle med 32 tegn"
         },
         "url": {
-          "label": ""
+          "label": "LNbits URL"
         },
         "errors": {
           "connection_failed": ""
