@@ -4,12 +4,12 @@
       "nav": {
         "welcome": "Bienvenido",
         "password": "Su Contraseña",
-        "connect": "Su cuenta de Lightning",
+        "connect": "Su Cuenta de Lightning",
         "done": "Hecho"
       },
       "set_password": {
         "title": "Proteja su billetera",
-        "description": "Los datos de su cuenta Lightning se cifran de forma segura con una contraseña de desbloqueo. No olvides esta contraseña! Lo necesita para desbloquear el teléfono por extensión (en este navegador)",
+        "description": "Esta contraseña se utiliza para proteger tu billetera y darte acceso a la extensión del navegador. No se puede restablecer y es independiente de la contraseña de tu cuenta de Alby.",
         "choose_password": {
           "label": "Elige una contraseña:"
         },
@@ -98,7 +98,7 @@
         },
         "page": {
           "title": "Conectar a nodo Citadel",
-          "instructions": "Esto actualmente no funciona si el A2F está activado."
+          "instructions": "Esto actualmente no funciona si el 2FA está activado."
         }
       },
       "umbrel": {
@@ -163,6 +163,56 @@
           "invalid_uri": "LN Dhubri No válido",
           "connection_failed": "La conexión falló. ¿Es correcto el URI de LNDHub?"
         }
+      },
+      "kollider": {
+        "description": "Inicie sesión en su cuenta Kollider",
+        "page": {
+          "title": "Conéctese a su cuenta Kollider",
+          "description": "¿Aún no tienes una cuenta? <0>¡Regístrese</0> ahora!"
+        },
+        "username": {
+          "label": "Introduzca su nombre de usuario Kollider"
+        },
+        "password": {
+          "label": "Introduzca su contraseña de Kollider"
+        },
+        "errors": {
+          "connection_failed": "La conexión falló. ¿Te aseguraste de que los datos de la cuenta son correctos?"
+        }
+      },
+      "commando": {
+        "pubkey": {
+          "label": "Clave Pública"
+        },
+        "port": {
+          "label": "Puerto"
+        },
+        "privKey": {
+          "label": "Clave privada local (autogenerada)"
+        },
+        "config": {
+          "label": "Datos de Configuración"
+        }
+      },
+      "galoy": {
+        "errors": {
+          "failed_to_login_sms": "No se pudo iniciar sesión con el código de SMS",
+          "setup_failed": "Falló la configuración"
+        },
+        "phone_number": {
+          "label": "Ingrese su número telefónico"
+        },
+        "sms_code": {
+          "label": "Ingrese su código de verificación de SMS"
+        },
+        "jwt": {
+          "label": "Ingresa tu token de JWT"
+        }
+      },
+      "lnc": {
+        "page": {
+          "title": "Conéctese a su nodo LND"
+        }
       }
     },
     "home": {
@@ -180,7 +230,7 @@
       "allowance_view": {
         "recent_transactions": "Transacciones Recientes",
         "allowance": "Subsidio",
-        "sats_used": "sat utilizados",
+        "sats_used": "sats utilizados",
         "no_transactions": "No hay transacciones en <0>{{name}}</0> todavía."
       },
       "default_view": {
@@ -193,6 +243,57 @@
       "title": "Cuentas",
       "actions": {
         "add_account": "Añadir Cuenta"
+      },
+      "account_view": {
+        "nostr": {
+          "errors": {
+            "failed_to_load": "No se pudo cargar la clave Nostr. ¿Es una clave Nostr válida?"
+          },
+          "private_key": {
+            "success": "Clave privada cifrada y guardada con éxito.",
+            "successfully_removed": "Clave privada eliminada con éxito.",
+            "label": "Clave Privada",
+            "title": "Administra tu clave",
+            "subtitle": "Pegue su clave privada o genere una nueva. Asegúrese de hacer una copia de seguridad de su clave privada antes de generar una nueva. <0>Más información »</0>"
+          },
+          "public_key": {
+            "label": "Clave Pública"
+          },
+          "generate_keys": {
+            "title": "Generar una nueva clave de Nostr",
+            "screen_reader": "Genere una nueva clave Nostr para su cuenta",
+            "actions": {
+              "random_keys": "Genera una clave aleatoria"
+            },
+            "hint": "Puede generar una clave aleatoria o una clave derivada a partir de los detalles de esta cuenta (usando una frase canónica firmada). <0>Aprenda Más »</0>"
+          },
+          "actions": {
+            "generate": "Generar una nueva clave"
+          },
+          "title": "Nostr",
+          "hint": "es un protocolo simple y abierto que tiene como objetivo crear redes sociales resistentes a la censura. Nostr trabaja con claves criptográficas. Para publicar algo, lo firma con su clave y lo envía a múltiples relevos. Puede usar Alby para administrar su clave Nostr. Muchas aplicaciones de Nostr le permitirán simplemente usar la clave de la extensión Alby."
+        },
+        "remove": {
+          "title": "Eliminar Esta Cuenta",
+          "confirm": "¿Está seguro de que desea eliminar la cuenta: {{name}}?\nEsto no se puede deshacer. Si usó esta cuenta para iniciar sesión en sitios web, es posible que pierda el acceso a ellos."
+        },
+        "title1": "Información de la Cuenta",
+        "title2": "Editar Cuenta",
+        "name": {
+          "title": "Nombre",
+          "placeholder": "Nombre de la Cuenta"
+        },
+        "export": {
+          "title": "Exportar Cuenta",
+          "screen_reader": "Exportar los detalles de la cuenta",
+          "your_ln_address": "Tu Dirección Lightning:",
+          "tip_mobile": "Consejo: Use esta billetera con su dispositivo móvil",
+          "scan_qr": "Importe esta billetera a Zeus o BlueWallet escaneando el código QR."
+        },
+        "actions": {
+          "remove_account": "Eliminar cuenta",
+          "export": "Exportar"
+        }
       }
     },
     "enable": {
@@ -200,7 +301,8 @@
       "request1": "Solicitar aprobación de transacciones",
       "request2": "Solicitar facturas e información sobre Lightning",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
-      "title": "Conectar"
+      "title": "Conectar",
+      "block_added": "Se agregó {{host}} a la lista de bloqueados, vuelva a cargar la página."
     },
     "unlock": {
       "unlock_to_continue": "Desbloquear para continuar",
@@ -212,7 +314,10 @@
         "help": "Los datos de su cuenta están encriptados con su contraseña de desbloqueo. Si realmente olvidó su contraseña de desbloqueo, debe restablecer y agregar su cuenta Lightning nuevamente.",
         "link": "Restablecer ahora y agregar una nueva cuenta"
       },
-      "unlock_password": "Tu contraseña de desbloqueo"
+      "unlock_password": "Tu contraseña de desbloqueo",
+      "errors": {
+        "invalid_password": "Contraseña no válida"
+      }
     },
     "settings": {
       "title": "Configuración",
@@ -222,7 +327,7 @@
       },
       "lnurl_auth": {
         "title": "Autenticación-LNURL",
-        "hint": "es un protocolo de autenticación genérico. Autentica al usuario mediante firmas digitales. El protocolo no requiere ninguna otra información de identificación, como contraseñas, correos electrónicos, nombres de usuario o similares. Con Alby, puede usar sus cuentas lightning para iniciar sesión de forma segura en sitios web. <br /> Para ser compatibles con otras billeteras, tuvimos que hacer algunos cambios que puedes configurar aquí. <br /> <strong>Idealmente, todas esas opciones están desactivadas.</strong> Úsalos solo si tienes cuentas antiguas.",
+        "hint": "es un protocolo de autenticación genérico. Autentica al usuario mediante firmas digitales. El protocolo no requiere ninguna otra información de identificación, como contraseñas, correos electrónicos, nombres de usuario o similares. Con Alby, puede usar sus cuentas lightning para iniciar sesión de forma segura en sitios web.  Para ser compatibles con otras billeteras, tuvimos que hacer algunos cambios que puedes configurar aquí. <0>Idealmente, todas esas opciones están desactivadas.</0> Úsalos solo si tienes cuentas antiguas.",
         "legacy_lnurl_auth_202207": {
           "title": "Autenticación-LNURL Legada",
           "subtitle": "La generación de claves para la autenticación-LNURL ha cambiado (en julio de 2022). Alby no era compatible con otras implementaciones. Esto se cambió, pero ahora se utilizan diferentes claves de inicio de sesión. Si usó autenticación-LNURL para iniciar sesión antes, aún puede habilitar el método anterior. Esta opción se eliminará más adelante, asegúrese de cambiar al nuevo inicio de sesión."
@@ -252,7 +357,7 @@
         }
       },
       "show_fiat": {
-        "title": "Sat a Fiat",
+        "title": "Sats a Fiat",
         "subtitle": "Convierta siempre a la moneda seleccionada desde el intercambio seleccionado"
       },
       "currency": {
@@ -300,6 +405,15 @@
       "browser_notifications": {
         "title": "Notificaciones del navegador",
         "subtitle": "Notificaciones relacionadas con pagos y autenticación."
+      },
+      "nostr": {
+        "private_key": {
+          "title": "Clave Privada",
+          "subtitle": "Esta sección se ha movido a la página de cuentas ya que las claves ahora son específicas de la cuenta.",
+          "go_to": "Ir a Cuentas"
+        },
+        "title": "Nostr",
+        "hint": "es un protocolo simple y abierto que tiene como objetivo crear redes sociales resistentes a la censura. Nostr trabaja con claves criptográficas. Para publicar algo, lo firma con su clave y lo envía a múltiples relevos. Puede usar Alby para administrar su clave Nostr. Muchas aplicaciones de Nostr le permitirán simplemente usar la clave de la extensión Alby."
       }
     },
     "send": {
@@ -308,7 +422,8 @@
         "title": "Esperando para escanear"
       },
       "input": {
-        "label": "Factura, Dirección Lightning o LNURL"
+        "label": "Destinatario",
+        "hint": "Factura, Dirección Lightning o LNURL"
       }
     },
     "lnurlpay": {
@@ -323,7 +438,8 @@
       },
       "email": {
         "label": "Email"
-      }
+      },
+      "success": "¡Pago enviado con éxito!"
     },
     "receive": {
       "title": "Recibir",
@@ -348,9 +464,13 @@
       "publisher": {
         "allowance": {
           "title": "Tolerancia",
-          "used_budget": "sats utilizada"
+          "used_budget": "sats utilizados"
         }
-      }
+      },
+      "description": "Sitios web donde has usado Alby anteriormente",
+      "discover": "Descubre Sitios Web",
+      "title": "Tus ⚡ Sitios Web",
+      "no_info": "Parece que todavía no has usado Alby en ningún sitio web."
     },
     "make_invoice": {
       "title": "Crear Factura",
@@ -367,7 +487,7 @@
     },
     "confirm_sign_message": {
       "title": "Firmar",
-      "content": "{{host}} te pide que firmes:"
+      "content": "Este sitio web te pide que firmes:"
     },
     "confirm_keysend": {
       "title": "Aprobar Pago",
@@ -389,7 +509,7 @@
         "heading": "Quieres iniciar sesión en"
       },
       "submit": "Sesión",
-      "success": "Autenticado correctamente",
+      "success": "Inicio de sesión exitoso en {{name}}",
       "errors": {
         "status": "Error: El estado de autenticación no es correcto"
       }
@@ -398,7 +518,7 @@
       "content_message": {
         "heading": "Solicitar un canal desde el nodo"
       },
-      "success": "Solicitud de canal enviada correctamente",
+      "success": "Solicitud de canal enviada con éxito a {{name}}",
       "title": "Solicitud de Canal"
     },
     "lnurlwithdraw": {
@@ -409,10 +529,113 @@
       "amount": {
         "label": "Cantidad"
       },
-      "success": "Solicitud de retiro enviada correctamente"
+      "success": "Solicitud de retiro de {{amount}} enviada con éxito a {{sender}}"
     },
     "choose_path": {
-      "title": "Conectar"
+      "title": "Conectar",
+      "description": "Para comenzar a usar Alby y realizar pagos en línea, conecta tu billetera Lightning a la extensión.",
+      "alby": {
+        "title": "Alby",
+        "create_new": "Regístrese"
+      },
+      "other": {
+        "title": "Otras Billeteras",
+        "and_more": "Y más...",
+        "connect": "Conectar"
+      }
+    },
+    "nostr": {
+      "title": "Nostr",
+      "allow": "Permitir que este sitio web:",
+      "content": "Este sitio web te solicita firmar:",
+      "allow_sign": "Permitir que {{host}} firme:",
+      "block_and_ignore": "Bloquear e ignorar {{host}}",
+      "block_added": "Se agregó {{host}} a la lista de bloqueados, vuelva a cargar el sitio web."
+    },
+    "discover": {
+      "title": "Explora el Ecosistema ⚡️ Lightning",
+      "description": "Sitios web y aplicaciones web donde puede usar Alby",
+      "tips": {
+        "top_up_wallet": {
+          "title": "⚡️ Recarga tu billetera",
+          "description": "Cree una factura lightning, envíese algunos bitcoins y comience a usar Alby en el ecosistema lightning",
+          "label1": "Recibir Bitcoin",
+          "label2": "Comprar Bitcoin"
+        },
+        "title": "Tu billetera Alby está lista",
+        "description": "Algunos consejos para que empieces a zumbar 🐝",
+        "pin": {
+          "description2": "En la lista de extensiones, busque Alby y haga clic en el ícono de la chincheta para fijarlo a la barra de herramientas",
+          "description1": "<0>Para acceder fácilmente a Alby, haga clic en el icono de la extensión</0> <1/> <2>en la esquina superior derecha de su navegador</2>",
+          "title": "📌 Fija tu extensión Alby",
+          "description3": "¡Eso es todo! Para acceder a Alby simplemente haga clic en el icono de Alby"
+        },
+        "demo": {
+          "label1": "Inténtalo",
+          "title": "🕹️ Prueba la versión Demo de Alby",
+          "description": "Descubra todo lo que puede hacer con Alby en nuestro sitio web de demostraciones"
+        },
+        "address": {
+          "title": "⚡️ Obtén una dirección lightning",
+          "description": "Cree su propia dirección lightning y reciba pagos lightning tan fácil como enviar un correo electrónico",
+          "label1": "¡Obtenlo Ahora!"
+        }
+      },
+      "list": {
+        "entertaiment": "Entretenimiento",
+        "shopping": "Compras",
+        "miscellaneous": "Varios",
+        "showcases": "Vitrinas",
+        "nostr": "Nostr"
+      }
+    },
+    "confirm_request_permission": {
+      "title": "Aprobar solicitud",
+      "always_allow": "Recordar mi elección y no volver a preguntar",
+      "allow": "Permitir que este sitio web ejecute:"
+    },
+    "alby": {
+      "pre_connect": {
+        "errors": {
+          "create_wallet_error1": "No se pudo iniciar sesión o crear una nueva cuenta.",
+          "create_wallet_error2": "Si necesita ayuda, póngase en contacto con support@getalby.com",
+          "create_wallet_error": "No se pudo iniciar sesión o crear una nueva cuenta. Si necesita ayuda, póngase en contacto con support@getalby.com"
+        },
+        "forgot_password": "¿Olvidó su contraseña?",
+        "create_account": "Cree una nueva cuenta Alby para enviar y recibir pagos de bitcoin.",
+        "login_account": "Inicie sesión para conectar su cuenta de Alby existente.",
+        "optional_lightning_note": {
+          "part2": "dirección lightning"
+        },
+        "set_password": {
+          "choose_password": {
+            "label": "Contraseña"
+          },
+          "confirm_password": {
+            "label": "Confirmar Contraseña"
+          },
+          "errors": {
+            "enter_password": "Por favor introduzca una contraseña.",
+            "confirm_password": "Por favor, confirme su contraseña.",
+            "mismatched_password": "Las contraseñas no coinciden."
+          }
+        },
+        "title": "Tu cuenta Alby",
+        "optional_lightning_address": {
+          "label": "Elija una Dirección Lightning (opcional)",
+          "title": "números y letras, al menos 4 caracteres"
+        }
+      }
+    },
+    "keysend": {
+      "title": "Enviar",
+      "success": "¡Pago enviado! Preimagen: {{preimage}}",
+      "receiver": {
+        "label": "Enviar pago a"
+      },
+      "amount": {
+        "label": "Cantidad (Satoshi)"
+      }
     }
   },
   "common": {
@@ -446,12 +669,25 @@
       "remove": "Quitar",
       "copy": "Copiar",
       "open": "Abrir",
-      "back": "Volver"
+      "back": "Volver",
+      "receive_again": "Recibir otro pago",
+      "log_in": "Iniciar Sesión",
+      "remember": "Recordar mi elección y no preguntar nuevamente"
     },
     "errors": {
-      "connection_failed": "Error de conexión"
+      "connection_failed": "Error de conexión",
+      "payment_failed": "Pago Fallido"
     },
-    "description": "Descripción"
+    "description": "Descripción",
+    "confirm_password": "Confirmar Contraseña",
+    "success_message": "{{amount}}{{fiatAmount}} enviados a {{destination}}",
+    "message": "Mensaje",
+    "description_full": "Descripción Completa",
+    "advanced": "Avanzado",
+    "accounts": "Cuentas",
+    "discover": "Descubrir",
+    "response": "Respuesta",
+    "help": "Ayuda"
   },
   "components": {
     "allowance_menu": {
@@ -461,14 +697,19 @@
         "label": "Nuevo presupuesto"
       },
       "edit_allowance": {
-        "title": "Establecer un nuevo presupuesto",
-        "screen_reader": "Opciones de asignación"
-      }
+        "title": "Editar Asignación",
+        "screen_reader": "Opciones de Asignación"
+      },
+      "enable_login": {
+        "title": "Habilitar inicio de sesión en el sitio web",
+        "subtitle": "Iniciar sesión automáticamente sin confirmación cuando el sitio web lo solicite."
+      },
+      "edit_permissions": "Editar Permisos"
     },
     "qrcode_scanner": {
-      "title": "Escanee el Código QR",
+      "title": "Escanear el Código QR",
       "actions": {
-        "start_scanning": "Comience a escanear",
+        "start_scanning": "Comenzar a escanear",
         "stop_scanning": "Detener el escaneo"
       },
       "errors": {
@@ -484,8 +725,9 @@
         "sender": "Remitente",
         "message": "Mensaje",
         "app": "Aplicación",
-        "podcast": "Contenido Podcasts"
-      }
+        "podcast": "Podcasts"
+      },
+      "open_location": "Abrir sitio web"
     },
     "confirm_or_cancel": {
       "only_trusted": "Conéctese solo con sitios en los que confíe."
@@ -516,7 +758,7 @@
         "invalid_credentials": "Contraseña no válida. Por favor, revise su contraseña y dirección de correo electrónico e inténtelo de nuevo."
       },
       "login_failed": {
-        "password_reset": "Olvidó su contraseña? Haga clic aquí"
+        "password_reset": "¿Olvidó su contraseña? Haga clic aquí"
       }
     },
     "account_menu": {
@@ -535,9 +777,83 @@
     },
     "badge": {
       "label": {
-        "active": "ACTIVO"
+        "active": "ACTIVO",
+        "auth": "INICIAR SESIÓN"
       }
     }
   },
-  "permissions": {}
+  "permissions": {
+    "commando": {
+      "getinfo": "Obtenga el resumen del nodo.",
+      "bkpr-listbalances": "Lista de todos los saldos actuales e históricos de la cuenta.",
+      "checkmessage": "Verifique que la firma fue generada por un nodo dado.",
+      "connect": "Establecer una nueva conexión con otro nodo.",
+      "keysend": "Enviar un pago a otro nodo.",
+      "offer": "Crear una oferta.",
+      "sendpay": "Enviar un pago a través de una ruta.",
+      "signmessage": "Crear una firma a partir de este nodo.",
+      "fundchannel": "Abra un canal de pago con un par al realizar una transacción de financiación.",
+      "listfunds": "Listar todos los fondos disponibles.",
+      "getroute": "Encontrar la mejor ruta para el pago a un nodo lightning.",
+      "invoice": "Crear la expectativa de un pago.",
+      "listpays": "Obtener el estado de todos los comandos de pago.",
+      "listpeers": "Listar los nodos que están conectados o que tienen canales abiertos con este nodo.",
+      "listtransactions": "Listar las transacciones rastreadas en la billetera.",
+      "pay": "Envíe un pago a una factura BOLT11.",
+      "listinvoices": "Obtener el estado de todas las facturas.",
+      "listoffers": "Enumerar todas las ofertas u obtener una oferta específica.",
+      "multifundchannel": "Abra múltiples canales de pago con nodos al realizar una sola transacción de financiación.",
+      "disconnect": "Cerrar una conexión existente con un par."
+    },
+    "nostr": {
+      "signmessage": "Firma el mensaje con tu clave.",
+      "getpublickey": "Leer tu clave pública.",
+      "nip04encrypt": "Cifrar datos.",
+      "nip04decrypt": "Descifrar datos."
+    },
+    "lnd": {
+      "queryroutes": "Consultar una posible ruta.",
+      "openchannel": "Abrir un nuevo canal.",
+      "getnetworkinfo": "Obtener estadísticas básicas sobre el gráfico de canales conocidos.",
+      "getnodeinfo": "Obtener la información del canal para un nodo.",
+      "gettransactions": "Obtener una lista de todas las transacciones relevantes para la billetera.",
+      "getchaninfo": "Obtener el anuncio de la red para el canal dado.",
+      "listpeers": "Obtener una lista de todos los pares actualmente activos.",
+      "lookupinvoice": "Consultar los detalles de la factura.",
+      "listpayments": "Obtener una lista de todos los pagos salientes.",
+      "estimatefee": "Calcular la tasa de tarifa y las tarifas totales para una transacción.",
+      "getinfo": "Obtener la información del nodo.",
+      "listchannels": "Obtener una descripción de todos los canales abiertos.",
+      "listinvoices": "Obtener una lista de todas las facturas.",
+      "connectpeer": "Establecer una conexión con un par remoto.",
+      "disconnectpeer": "Desconectar de un par remoto.",
+      "addinvoice": "Crear nuevas facturas.",
+      "channelbalance": "Obtener un informe sobre los fondos totales en todos los canales abiertos.",
+      "walletbalance": "Obtener las salidas totales no gastadas de la billetera.",
+      "sendtoroute": "Realizar un pago a través de la ruta especificada.",
+      "decodepayreq": "Decodificar una cadena de solicitud de pago."
+    },
+    "lnc": {
+      "getinfo": "Obtener la información del nodo.",
+      "gettransactions": "Obtener una lista de todas las transacciones relevantes para la billetera.",
+      "getnodeinfo": "Obtener la información del canal para un nodo.",
+      "getnetworkinfo": "Obtener estadísticas básicas sobre el gráfico de canales conocidos.",
+      "listinvoices": "Obtener una lista de todas las facturas.",
+      "channelbalance": "Obtener un informe sobre los fondos totales en todos los canales abiertos.",
+      "walletbalance": "Obtener las salidas totales no gastadas de la billetera.",
+      "listpeers": "Obtener una lista de todos los pares actualmente activos.",
+      "lookupinvoice": "Consultar los detalles de la factura.",
+      "queryroutes": "Consultar una posible ruta.",
+      "sendtoroute": "Realizar un pago a través de la ruta especificada.",
+      "openchannel": "Abrir un nuevo canal.",
+      "connectpeer": "Establezca una conexión con un par remoto.",
+      "disconnectpeer": "Desconectarse de un par remoto.",
+      "estimatefee": "Calcular la tasa de tarifa y las tarifas totales para una transacción.",
+      "getchaninfo": "Obtener el anuncio de la red para el canal dado.",
+      "addinvoice": "Crear nuevas facturas.",
+      "listpayments": "Obtener una lista de todos los pagos salientes.",
+      "listchannels": "Obtener una descripción de todos los canales abiertos.",
+      "decodepayreq": "Decodificar una cadena de solicitud de pago."
+    }
+  }
 }
