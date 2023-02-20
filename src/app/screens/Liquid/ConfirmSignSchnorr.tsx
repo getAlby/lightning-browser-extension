@@ -18,7 +18,7 @@ function ConfirmSignSchnorr() {
   const navState = useNavigationState();
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
-    keyPrefix: "nostr",
+    keyPrefix: "liquid",
   });
   const navigate = useNavigate();
 

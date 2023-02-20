@@ -13,7 +13,7 @@ import { OriginData } from "~/types";
 
 function LiquidConfirmGetPublicKey() {
   const { t } = useTranslation("translation", {
-    keyPrefix: "nostr",
+    keyPrefix: "liquid",
   });
   const { t: tCommon } = useTranslation("common");
   const { t: tPermissions } = useTranslation("permissions");

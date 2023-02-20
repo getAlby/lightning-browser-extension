@@ -711,6 +711,14 @@
       "allow": "Allow this website to execute:",
       "always_allow": "Remember my choice and don't ask again"
     },
+    "liquid": {
+      "title": "Nostr",
+      "allow": "Allow this website to:",
+      "content": "This website asks you to sign:",
+      "allow_sign": "Allow {{host}} to sign:",
+      "block_and_ignore": "Block and ignore {{host}}",
+      "block_added": "Added {{host}} to the blocklist, please reload the website."
+    },
     "nostr": {
       "title": "Nostr",
       "allow": "Allow this website to:",
