@@ -3,7 +3,7 @@ import utils from "~/common/lib/utils";
 
 import { ExtensionIcon, setIcon } from "./actions/setup/setIcon";
 import connectors from "./connectors";
-import { isIndexedDbAvailable, db } from "./db";
+import { db, isIndexedDbAvailable } from "./db";
 import * as events from "./events";
 import migrate from "./migrations";
 import { router } from "./router";
@@ -119,7 +119,6 @@ const routeCalls = (
 async function init() {
   console.info("Loading background script");
 
-  //await browser.storage.sync.set({ settings: { debug: true }, allowances: [] });
   await state.getState().init();
   console.info("State loaded");
 
