@@ -50,7 +50,7 @@ async function init() {
         return;
       }
 
-      // limit the calls that can be made from window.liquid
+      // limit the calls that can be made from window.secp256k1
       // only listed calls can be executed
       // if not enabled only enable can be called.
       const availableCalls = isEnabled ? liquidCalls : disabledCalls;

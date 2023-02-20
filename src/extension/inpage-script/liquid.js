@@ -1,5 +1,5 @@
 import LiquidProvider from "../ln/liquid";
 
 if (document) {
-  window.liquid = new LiquidProvider();
+  window.secp256k1 = new LiquidProvider();
 }
