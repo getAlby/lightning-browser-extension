@@ -147,65 +147,65 @@
         "title": "LNDHub",
         "page": {
           "title": "Podłącz się do LNDHub",
-          "description": ""
+          "description": "Wprowadź tutaj swój identyfikator URI LNDHub lub zeskanuj kod QR za pomocą kamery internetowej."
         },
         "uri": {
           "label": ""
         },
         "errors": {
-          "invalid_uri": "",
-          "connection_failed": ""
+          "invalid_uri": "Niepoprawny LNDHub URI",
+          "connection_failed": "Połączenie nieudane. Czy URI LNDHub jest prawidłowy?"
         }
       },
       "lnbits": {
-        "title": "",
+        "title": "LNbits",
         "page": {
-          "title": "",
+          "title": "Podłącz do <0>LNbits</0>",
           "instructions": ""
         },
         "admin_key": {
           "label": "",
-          "placeholder": ""
+          "placeholder": "Twój 32-cyfrowy klucz administratora"
         },
         "url": {
-          "label": ""
+          "label": "Adres URL LNbits"
         },
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "Połączenie nieudane. Czy masz poprawny adres URL i klucz administratora?"
         }
       },
       "eclair": {
-        "title": "",
+        "title": "Eclair",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "Podłącz do <0>Eclair</0>",
+          "instructions": "Potrzebujesz adresu URL i hasła Twojego Eclair."
         },
         "password": {
-          "label": ""
+          "label": "Hasło do Eclair"
         },
         "url": {
-          "label": "",
-          "placeholder": ""
+          "label": "Adres URL do Eclair",
+          "placeholder": "http://localhost:8080"
         }
       },
       "citadel": {
-        "title": "",
+        "title": "Citadel",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "Podłącz do węzła <0>Citadel</0>",
+          "instructions": "Ta funkcja nie działa jeśli 2FA jest włączone."
         },
         "password": {
           "label": ""
         },
         "url": {
           "label": "",
-          "placeholder": ""
+          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
-        "title": "",
+        "title": "Umbrel",
         "page": {
-          "title": "",
+          "title": "Podłącz do węzła <0>Umbrel</0>",
           "instructions": ""
         },
         "rest_url": {
@@ -214,20 +214,20 @@
         }
       },
       "mynode": {
-        "title": "",
+        "title": "myNode",
         "page": {
-          "title": "",
+          "title": "Podłącz do <0>myNode</0>",
           "instructions": ""
         },
         "rest_url": {
           "label": "",
-          "placeholder": ""
+          "placeholder": "lndconnect://twojwezel:8080?..."
         }
       },
       "start9": {
-        "title": "",
+        "title": "Start9",
         "page": {
-          "title": "",
+          "title": "Podłącz do węzła <0>Embassy</0>",
           "instructions": ""
         },
         "rest_url": {
@@ -236,9 +236,9 @@
         }
       },
       "raspiblitz": {
-        "title": "",
+        "title": "RaspiBlitz",
         "page": {
-          "title": "",
+          "title": "Podłącz do węzła <0>RaspiBlitz</0>",
           "instructions1": "",
           "instructions2": ""
         },
@@ -250,62 +250,62 @@
       "bitcoin_beach": {
         "title": "",
         "page": {
-          "title": ""
+          "title": "Podłącz do <0>Bitcoin Beach Wallet</0>"
         }
       },
       "bitcoin_jungle": {
-        "title": "",
+        "title": "Portfel Bitcoin Jungle",
         "page": {
-          "title": ""
+          "title": "Podłącz do <0>Portfela Bitcoin Jungle</0>"
         }
       },
       "galoy": {
         "phone_number": {
-          "label": ""
+          "label": "Wprowadź numer telefonu"
         },
         "sms_code": {
-          "label": ""
+          "label": "Wprowadź pod weryfikujący SMS"
         },
         "jwt": {
-          "label": "",
+          "label": "Wprowadź swój token JWT",
           "info": ""
         },
         "actions": {
-          "login": "",
-          "request_sms_code": ""
+          "login": "Zaloguj",
+          "request_sms_code": "Wyślij kod SMS"
         },
         "errors": {
-          "failed_to_request_sms": "",
-          "failed_to_login_sms": "",
-          "setup_failed": "",
-          "missing_jwt": "",
-          "invalid_jwt": ""
+          "failed_to_request_sms": "Nie udało się wysłać kodu SMS",
+          "failed_to_login_sms": "Logowanie z kodem SMS nie udało się",
+          "setup_failed": "Konfiguracja nie powiodła się",
+          "missing_jwt": "Brakuje tokenu JWT, logowanie nieudane.",
+          "invalid_jwt": "podano nieprawidłowy token JWT"
         }
       },
       "kollider": {
-        "title": "",
-        "description": "",
+        "title": "Kollider",
+        "description": "Zaloguj się do swojego konta Kollider",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "Podłącz do konta Kollider",
+          "description": "Nie masz jeszcze konta? <0>Zarejestruj się</0> teraz!"
         },
         "username": {
-          "label": ""
+          "label": "Wprowadź nazwę użytkownika Kollider"
         },
         "password": {
-          "label": ""
+          "label": "Wprowadź swoje hasło Kollider"
         },
         "currency": {
-          "label": ""
+          "label": "Wybierz walutę swojego konta"
         },
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "Połączenie nieudane. Czy na pewno podane dane są poprawne?"
         }
       },
       "btcpay": {
-        "title": "",
+        "title": "BTCPay Server",
         "page": {
-          "title": "",
+          "title": "Podłącz do węzła LND na BTCPayServer",
           "instructions": ""
         },
         "config": {
@@ -332,83 +332,83 @@
           "label": ""
         },
         "port": {
-          "label": ""
+          "label": "Port"
         },
         "proxy": {
           "label": ""
         },
         "privKey": {
-          "label": ""
+          "label": "Lokalny klucz prywatny (generowany automatycznie)"
         },
         "config": {
-          "label": "",
-          "placeholder": ""
+          "label": "Konfiguracja",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
         },
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "Połączenie nieudane. Czy Twój węzeł Core Lightning jest online i korzysta z wtyczki commando?"
         }
       }
     },
     "home": {
       "actions": {
-        "send_satoshis": "",
-        "enable_now": ""
+        "send_satoshis": "⚡️ Wyślij Satoshi ⚡️",
+        "enable_now": "Włącz teraz"
       },
-      "recent_transactions": "",
+      "recent_transactions": "Ostatnie transakcje",
       "transaction_list": {
         "tabs": {
-          "outgoing": "",
-          "incoming": ""
+          "outgoing": "Wychodzące",
+          "incoming": "Przychodzące"
         }
       },
       "allowance_view": {
-        "recent_transactions": "",
+        "recent_transactions": "Ostatnie transakcje",
         "allowance": "",
         "sats_used": "",
         "no_transactions": ""
       },
       "default_view": {
-        "recent_transactions": "",
+        "recent_transactions": "Ostatnie transakcje",
         "no_transactions": "",
-        "is_blocked_hint": "",
-        "block_removed": ""
+        "is_blocked_hint": "Alby jest obecnie wyłączone na {{host}}",
+        "block_removed": "Włączono {{host}}. Odśwież stronę."
       }
     },
     "accounts": {
-      "title": "",
+      "title": "Konta",
       "account_view": {
-        "title1": "",
-        "title2": "",
+        "title1": "Informacje o koncie",
+        "title2": "Edytuj konto",
         "name": {
-          "title": "",
-          "placeholder": ""
+          "title": "Nazwa",
+          "placeholder": "Nazwa konta"
         },
         "export": {
-          "title": "",
-          "screen_reader": "",
-          "waiting": "",
-          "your_ln_address": "",
-          "tip_mobile": "",
+          "title": "Eksport konta",
+          "screen_reader": "Eksportuj dane konta",
+          "waiting": "oczekiwanie na dane LndHub...",
+          "your_ln_address": "Twój adres Lightning:",
+          "tip_mobile": "Wskazówka: Użyj tego portfela na swoim urządzeniu mobilnym",
           "export_uri": "",
-          "scan_qr": ""
+          "scan_qr": "Zaimportuj ten portfel do Zeusa lub BlueWallet skanując kod QR."
         },
         "nostr": {
-          "title": "",
-          "hint": "",
+          "title": "Nostr",
+          "hint": "jest prostym i otwartym protokołem mającym na celu stworzenie sieci społecznościowych opornych na cenzurę. Nostr działa przy użyciu kluczy kryptograficznych. Aby coś opublikować podpisujesz to swoim kluczem i wysyłasz do kilku przekaźników. Możesz użyć Alby aby zarządzać swoim kluczem Nostr. Następnie, różne aplikacje umożliwią Ci używanie klucze z rozszerzenia Alby.",
           "private_key": {
-            "title": "",
-            "subtitle": "",
-            "warning": "",
-            "success": "",
-            "successfully_removed": "",
-            "label": ""
+            "title": "Zarządzaj swoim kluczem",
+            "subtitle": "Wklej swój klucz prywatny lub wygeneruj nowy. Upewnij się, że zrobisz kopię zapasową klucza prywatnego zanim wygenerujesz nowy. <0>Dowiedz się więcej »</o>",
+            "warning": "To skasuje Twój stary klucz prywatny. Jesteś pewien?",
+            "success": "Klucz prywatny został zaszyfrowany i zapisany.",
+            "successfully_removed": "Klucz prywatny usunięty.",
+            "label": "Klucz prywatny"
           },
           "public_key": {
-            "label": ""
+            "label": "Klucz publiczny"
           },
           "generate_keys": {
-            "title": "",
-            "screen_reader": "",
+            "title": "Wygeneruj nowy klucz Nostr",
+            "screen_reader": "Wygeneruj nowy klucz Nostr ze swojego konta",
             "hint": "",
             "actions": {
               "random_keys": "",
