@@ -400,6 +400,7 @@
             "subtitle": "Paste your private key or generate a new one. Make sure you backup your private key before you generate a new one. <0>Learn more »</0>",
             "warning": "Please type your account's name to delete your old private key",
             "success": "Private key encrypted & saved successfully.",
+            "failed": "Failed to delete your old private key",
             "successfully_removed": "Private key removed successfully.",
             "label": "Private Key"
           },
