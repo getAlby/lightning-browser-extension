@@ -15,22 +15,26 @@ const changePassword = async (message: Message) => {
       password
     );
     tmpAccounts[accountId].config = encryptData(accountConfig, newPassword);
-    const accountNostrKey = decryptData(
-      accounts[accountId].nostrPrivateKey as string,
-      password
-    );
-    tmpAccounts[accountId].nostrPrivateKey = encryptData(
-      accountNostrKey,
-      newPassword
-    );
-    const accountLiquidKey = decryptData(
-      accounts[accountId].liquidPrivateKey as string,
-      password
-    );
-    tmpAccounts[accountId].liquidPrivateKey = encryptData(
-      accountLiquidKey,
-      newPassword
-    );
+    if (accounts[accountId].nostrPrivateKey) {
+      const accountNostrKey = decryptData(
+        accounts[accountId].nostrPrivateKey as string,
+        password
+      );
+      tmpAccounts[accountId].nostrPrivateKey = encryptData(
+        accountNostrKey,
+        newPassword
+      );
+    }
+    if (accounts[accountId].liquidPrivateKey) {
+      const accountLiquidKey = decryptData(
+        accounts[accountId].liquidPrivateKey as string,
+        password
+      );
+      tmpAccounts[accountId].liquidPrivateKey = encryptData(
+        accountLiquidKey,
+        newPassword
+      );
+    }
   }
   state.setState({ accounts: tmpAccounts, password: newPassword });
   // make sure we immediately persist the updated accounts

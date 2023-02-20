@@ -566,6 +566,7 @@ export interface Payment extends Omit<DbPayment, "id"> {
 
 export enum PermissionMethodNostr {
   NOSTR_SIGNMESSAGE = "nostr/signMessage",
+  NOSTR_SIGNSCHNORR = "nostr/signSchnorr",
   NOSTR_GETPUBLICKEY = "nostr/getPublicKey",
   NOSTR_NIP04DECRYPT = "nostr/nip04decrypt",
   NOSTR_NIP04ENCRYPT = "nostr/nip04encrypt",

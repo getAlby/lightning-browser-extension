@@ -128,15 +128,28 @@ function KeyManager({
   }
 
   useEffect(() => {
-    setPublicKey(currentPrivateKey ? generatePublicKey(currentPrivateKey) : "");
-    type === "nostr"
-      ? setPrivateKey(
-          currentPrivateKey
-            ? nostrlib.hexToNip19(currentPrivateKey, "nsec")
-            : ""
-        )
-      : setPrivateKey(currentPrivateKey);
-  }, [currentPrivateKey, generatePublicKey, type]);
+    try {
+      setPublicKey(
+        currentPrivateKey ? generatePublicKey(currentPrivateKey) : ""
+      );
+      type === "nostr"
+        ? setPrivateKey(
+            currentPrivateKey
+              ? nostrlib.hexToNip19(currentPrivateKey, "nsec")
+              : ""
+          )
+        : setPrivateKey(currentPrivateKey);
+    } catch (e) {
+      if (e instanceof Error)
+        toast.error(
+          <p>
+            {t("errors.failed_to_load", { type })}
+            <br />
+            {e.message}
+          </p>
+        );
+    }
+  }, [currentPrivateKey, generatePublicKey, t, type]);
 
   function closeModal() {
     setModalIsOpen(false);

@@ -108,13 +108,19 @@
     "items": [
       {
         "title": "Astral",
-        "subtitle": "A Twitter-like client with chat and one-click payments.",
+        "subtitle": "A Twitter-like client with chat and one-click payments",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/astral_thumbnail.png",
         "url": "https://astral.ninja/"
       },
       {
+        "title": "Blogstack",
+        "subtitle": "A Medium-like blog sharing website",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/blockstack-logo.png",
+        "url": "https://blogstack.io/"
+      },
+      {
         "title": "emon.chat",
-        "subtitle": "Instant messaging client with built in lightning payments.",
+        "subtitle": "Instant messaging client with built in lightning payments",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/emon_thumbnail.svg",
         "url": "https://emon.chat/"
       },
@@ -125,14 +131,26 @@
         "url": "https://hamstr.to/home"
       },
       {
+        "title": "Iris",
+        "subtitle": "Social networking app with tipping",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/iris-to.png",
+        "url": "https://iris.to"
+      },
+      {
+        "title": "Notebin",
+        "subtitle": "An online note sharing web client",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/notebin-logo.png",
+        "url": "https://notebin.org/"
+      },
+      {
         "title": "Snort",
-        "subtitle": "Fast nostr web client.",
+        "subtitle": "Fast nostr web client",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/snort_thumbnail.png",
         "url": "https://snort.social"
       },
       {
         "title": "Yo, Sup?",
-        "subtitle": "The blue bird experience for Nostr.",
+        "subtitle": "The blue bird experience for Nostr",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/yosup_thumbnail.svg",
         "url": "https://yosup.app/"
       }
@@ -179,7 +197,7 @@
       },
       {
         "title": "Vida",
-        "subtitle": "Earn sats anytime someone wants to connect and chatt",
+        "subtitle": "Earn sats anytime someone wants to connect and chat",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/vida_thumbnail.png",
         "url": "https://vida.page/"
       },

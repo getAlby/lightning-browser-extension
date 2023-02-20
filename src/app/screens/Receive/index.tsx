@@ -44,7 +44,7 @@ function Receive() {
   const [invoice, setInvoice] = useState<{
     paymentRequest: string;
     rHash: string;
-  }>();
+  } | null>();
   const [copyLabel, setCopyLabel] = useState(tCommon("actions.copy") as string);
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
@@ -100,6 +100,17 @@ function Receive() {
       });
   }
 
+  function setDefaults() {
+    setFormData({
+      amount: "0",
+      description: "",
+      expiration: "",
+    });
+    setPaid(false);
+    setPollingForPayment(false);
+    setInvoice(null);
+  }
+
   async function createInvoice() {
     try {
       setLoading(true);
@@ -140,6 +151,20 @@ function Receive() {
             </div>
           )}
         </div>
+        {paid && (
+          <div className="my-4">
+            <Button
+              type="submit"
+              label={tCommon("actions.receive_again")}
+              primary
+              fullWidth
+              onClick={() => {
+                setDefaults();
+                navigate("/receive");
+              }}
+            />
+          </div>
+        )}
         {!paid && (
           <>
             <div className="mt-8 mb-4 flex justify-center">
@@ -200,7 +225,9 @@ function Receive() {
         title={t("title")}
         headerLeft={
           <IconButton
-            onClick={() => navigate("/")}
+            onClick={() => {
+              invoice ? setDefaults() : navigate(-1);
+            }}
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
