@@ -148,7 +148,7 @@ function AccountScreen() {
       prompt(t("nostr.private_key.warning"))?.toLowerCase() !==
         account?.name?.toLowerCase()
     ) {
-      toast.error(t("nostr.private_key.failed"));
+      toast.error(t("nostr.private_key.failed_to_remove"));
       return;
     }
 
