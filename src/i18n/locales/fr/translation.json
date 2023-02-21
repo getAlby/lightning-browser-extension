@@ -1,32 +1,32 @@
 {
   "translation": {
     "welcome": {
-      "title": "",
+      "title": "Bienvenue sur Alby",
       "nav": {
-        "welcome": "",
-        "password": "",
-        "connect": "",
-        "done": ""
+        "welcome": "Bienvenue",
+        "password": "Mot de passe",
+        "connect": "Votre compte Lightning",
+        "done": "Fait"
       },
       "set_password": {
-        "title": "",
-        "description": "",
+        "title": "Saisissez votre mot de passe",
+        "description": "Ce mot de passe est utilisé pour protéger votre portefeuille et vous donner accès à l'extension du navigateur. Il ne peut être changé et est différent du mot de passe de votre compte Alby.",
         "choose_password": {
-          "label": ""
+          "label": "Choisissez un mot de passe de déverrouillage:"
         },
         "confirm_password": {
-          "label": ""
+          "label": "Confimez que ce que vous avez écrit est correct:"
         },
         "errors": {
-          "enter_password": "",
-          "confirm_password": "",
-          "mismatched_password": ""
+          "enter_password": "S'il vous plait, entrez votre mot de passe.",
+          "confirm_password": "Veuillez confirmer votre mot de passe.",
+          "mismatched_password": "Les mots de passe entrés ne sont pas les mêmes."
         }
       },
       "test_connection": {
-        "ready": "",
-        "initializing": "",
-        "connection_error": "",
+        "ready": "Parfait, vous êtes prêt !",
+        "initializing": "Création de votre compte. S'il vous plait, veuillez patienter, ceci peut prendre une minute...",
+        "connection_error": "Erreur de connexion",
         "review_connection_details": "",
         "connection_taking_long": "",
         "contact_support": "",

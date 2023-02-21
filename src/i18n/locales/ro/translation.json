@@ -400,15 +400,15 @@
             "subtitle": "Insereaza cheia ta privata sau genereaza una noua. Inainte sa generezi o noua cheie asigura-te ca ai salvat cheia privata. <0>Mai multe »</0>",
             "warning": "Vechea ta cheie privata va fi stearsa. Sigur doresti asta?",
             "success": "Cheia privata a fost criptata si salvata cu succes.",
-            "successfully_removed": "",
-            "label": ""
+            "successfully_removed": "Cheia privata a fost indepartata cu succes.",
+            "label": "Cheia privata"
           },
           "public_key": {
-            "label": ""
+            "label": "Cheia publica"
           },
           "generate_keys": {
-            "title": "",
-            "screen_reader": "",
+            "title": "Generare noua cheie Nostr",
+            "screen_reader": "Generare cheie noua Nostr pentru contul tau",
             "hint": "",
             "actions": {
               "random_keys": "",
