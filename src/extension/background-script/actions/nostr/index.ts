@@ -7,6 +7,7 @@ import getRelays from "./getRelays";
 import removePrivateKey from "./removePrivateKey";
 import setPrivateKey from "./setPrivateKey";
 import signEventOrPrompt from "./signEventOrPrompt";
+import signSchnorrOrPrompt from "./signSchnorrOrPrompt";
 
 export {
   generatePrivateKey,
@@ -16,6 +17,7 @@ export {
   getPublicKeyOrPrompt,
   getRelays,
   signEventOrPrompt,
+  signSchnorrOrPrompt,
   encryptOrPrompt,
   decryptOrPrompt,
 };

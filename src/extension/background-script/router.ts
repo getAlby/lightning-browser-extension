@@ -79,6 +79,7 @@ const routes = {
       enable: allowances.enable,
       getPublicKeyOrPrompt: nostr.getPublicKeyOrPrompt,
       signEventOrPrompt: nostr.signEventOrPrompt,
+      signSchnorrOrPrompt: nostr.signSchnorrOrPrompt,
       getRelays: nostr.getRelays,
       encryptOrPrompt: nostr.encryptOrPrompt,
       decryptOrPrompt: nostr.decryptOrPrompt,
