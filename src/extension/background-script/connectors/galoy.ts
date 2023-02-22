@@ -1,21 +1,21 @@
-import axios from "axios";
-import { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import lightningPayReq from "bolt11";
+import { Account } from "~/types";
 
 import Connector, {
-  SendPaymentArgs,
-  SendPaymentResponse,
   CheckPaymentArgs,
   CheckPaymentResponse,
   ConnectPeerResponse,
+  GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
-  GetBalanceResponse,
+  KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  SendPaymentArgs,
+  SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
-  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -25,9 +25,11 @@ interface Config {
 }
 
 class Galoy implements Connector {
+  account: Account;
   config: Config;
 
-  constructor(config: Config) {
+  constructor(account: Account, config: Config) {
+    this.account = account;
     this.config = config;
   }
 

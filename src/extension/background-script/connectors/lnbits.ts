@@ -3,23 +3,24 @@ import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
 import utils from "~/common/lib/utils";
 import HashKeySigner from "~/common/utils/signer";
+import { Account } from "~/types";
 
 import state from "../state";
 import Connector, {
-  SendPaymentArgs,
-  SendPaymentResponse,
   CheckPaymentArgs,
   CheckPaymentResponse,
   ConnectorInvoice,
   ConnectPeerResponse,
+  GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
-  GetBalanceResponse,
+  KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  SendPaymentArgs,
+  SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
-  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -28,9 +29,11 @@ interface Config {
 }
 
 class LnBits implements Connector {
+  account: Account;
   config: Config;
 
-  constructor(config: Config) {
+  constructor(account: Account, config: Config) {
+    this.account = account;
     this.config = config;
   }
 
