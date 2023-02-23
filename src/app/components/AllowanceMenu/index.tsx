@@ -239,8 +239,8 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                   {t("edit_permissions")}
                 </h2>
                 <div>
-                  {permissions.map((permission, i) => (
-                    <Fragment key={`element-${i}`}>
+                  {permissions.map((permission) => (
+                    <Fragment key={`element-${permission.id}`}>
                       <Setting
                         title={permission.method}
                         subtitle={tPermissions(
