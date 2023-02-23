@@ -87,10 +87,12 @@
         "optional_lightning_address": {
           "label": "Choose your Lightning Address (optional)",
           "suffix": "@getalby.com",
-          "title": "numbers and letters, at least 3 characters"
+          "title": "numbers and letters, at least 4 characters"
         },
         "errors": {
-          "create_wallet_error": "Failed to log in or create a new account. If you need help, please contact support@getalby.com"
+          "create_wallet_error": "Failed to log in or create a new account. If you need help, please contact support@getalby.com",
+          "create_wallet_error1": "Failed to log in or create a new account.",
+          "create_wallet_error2": "If you need help, please contact support@getalby.com"
         }
       }
     },
@@ -374,27 +376,64 @@
     },
     "accounts": {
       "title": "Accounts",
+      "account_view": {
+        "title1": "Account Information",
+        "title2": "Edit Account",
+        "name": {
+          "title": "Name",
+          "placeholder": "Account Name"
+        },
+        "export": {
+          "title": "Export Account",
+          "screen_reader": "Export account details",
+          "waiting": "waiting for LndHub data...",
+          "your_ln_address": "Your Lightning Address:",
+          "tip_mobile": "Tip: Use this wallet with your mobile device",
+          "export_uri": "LNDHub Credentials URI",
+          "scan_qr": "Import this wallet into Zeus or BlueWallet by scanning the QRCode."
+        },
+        "nostr": {
+          "title": "Nostr",
+          "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
+          "private_key": {
+            "title": "Manage your key",
+            "subtitle": "Paste your private key or generate a new one. Make sure you backup your private key before you generate a new one. <0>Learn more »</0>",
+            "warning": "This will delete your old private key. Are you sure?",
+            "success": "Private key encrypted & saved successfully.",
+            "successfully_removed": "Private key removed successfully.",
+            "label": "Private Key"
+          },
+          "public_key": {
+            "label": "Public Key"
+          },
+          "generate_keys": {
+            "title": "Generate a new Nostr key",
+            "screen_reader": "Generate a new Nostr key for your account",
+            "hint": "You can generate a random key or a derive key from this account details (using a signed canonical phrase). <0>Learn more »</0>",
+            "actions": {
+              "random_keys": "Generate a random key",
+              "derived_keys": "Derive a key from account"
+            }
+          },
+          "actions": {
+            "generate": "Generate a new key"
+          },
+          "errors": {
+            "failed_to_load": "Failed to load the Nostr key. Is it a valid Nostr key?"
+          }
+        },
+        "remove": {
+          "title": "Remove This Account",
+          "subtitle": "All the linked allowances will be deleted. Please be certain.",
+          "confirm": "Are you sure you want to remove account: {{name}}? \nThis can not be undone. If you used this account to login to websites you might lose access to those."
+        },
+        "actions": {
+          "remove_account": "Remove account",
+          "export": "Export"
+        }
+      },
       "actions": {
         "add_account": "Add account"
-      },
-      "edit": {
-        "title": "Edit Account",
-        "name": {
-          "label": "Name"
-        },
-        "screen_reader": "Edit account name"
-      },
-      "export": {
-        "title": "Export Account",
-        "screen_reader": "Export account details",
-        "waiting": "waiting for LndHub data...",
-        "your_ln_address": "Your Lightning Address:",
-        "tip_mobile": "Tip: Use this wallet with your mobile device",
-        "export_uri": "LNDHub Credentials URI",
-        "scan_qr": "Import this wallet into Zeus or BlueWallet by scanning the QRCode."
-      },
-      "remove": {
-        "confirm": "Are you sure you want to remove account: {{name}}? \nThis can not be undone. If you used this account to login to websites you might lose access to those."
       }
     },
     "enable": {
@@ -512,10 +551,8 @@
         "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
         "private_key": {
           "title": "Private key",
-          "subtitle": "Paste your private key or generate a new one. Generating a key will create a new key based on the current account you use. It can be re-generated, but please make sure you backup this private key. <0>Learn more »</0>",
-          "generate": "Generate",
-          "warning": "This will delete your old private key. Are you sure?",
-          "success": "Private key encrypted & saved successfully."
+          "subtitle": "This section is moved to accounts page as keys are account specific now.",
+          "go_to": "Go To Accounts"
         }
       }
     },
@@ -704,6 +741,7 @@
     "success": "Success",
     "error": "Error",
     "settings": "Settings",
+    "accounts": "Accounts",
     "discover": "Discover",
     "websites": "Websites",
     "sats_one": "sat",
@@ -734,6 +772,7 @@
       "send": "Send",
       "save": "Save",
       "receive": "Receive",
+      "receive_again": "Receive another payment",
       "close": "Close",
       "export": "Export",
       "remove": "Remove",

@@ -19,10 +19,10 @@ The extension can connect to different node implementations and supports custodi
 - [x] Custom budgets/allowances for websites to allow payment streams/auto-payments
 - [x] Multiple accounts and support for different node backends (lnd, etc.)
 - [x] Full WebLN send and receive payment flows (getInfo, sendPayment, fixed makeInvoice support)
-- [x] [LNURL-pay](https://xn--57h.bigsun.xyz/lnurl-pay-flow.txt) support
-- [x] [LNURL-auth](https://xn--57h.bigsun.xyz/lnurl-auth.html) support
+- [x] [LNURL-pay](https://github.com/lnurl/luds/blob/luds/06.md) support
+- [x] [LNURL-auth](https://github.com/lnurl/luds/blob/luds/04.md) support
 - [x] Payment history with additional website metadata
-- [x] [LNURL-withdraw](https://xn--57h.bigsun.xyz/lnurl-withdraw-flow.txt) support
+- [x] [LNURL-withdraw](https://github.com/lnurl/luds/blob/luds/03.md) support
 - [x] WebLN signMessage, verifyMessage support
 - [x] WebLN dynamic makeInvoice support
 - [x] Keysend
@@ -57,7 +57,7 @@ Add Alby to your browser
 
 ### Try out the most recent version of Alby (Nightly Releases)
 
-- [Firefox Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/firefox.xpi.zip) - best to install it as a temporary add-on as discussed in the "Load extension into browser" section
+- [Firefox Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/firefox.xpi.zip) - best to install it as a temporary add-on as discussed in the "[Load extension into browser](/doc/SETUP.md#-load-extension-into-browser)" section
 - [Chrome Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/chrome.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right), and drag & drop the file in the browser
 
 (Note: You might need to reconfigure your wallet after installing new versions)
@@ -100,7 +100,7 @@ We use the [Development Project Board](https://github.com/orgs/getAlby/projects/
 
 #### Developer
 
-- Check out the issues that have specifically been [marked as being friendly to new contributors](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3Adesign+label%3A%22good+first+issue%22)
+- Check out the issues that have specifically been [marked as being friendly to new contributors](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
 - You can also review open PRs
 - [Contribution guide for new developers](./doc/CONTRIBUTION.md)
 

@@ -4,12 +4,12 @@ import {
   CheckIcon,
   PlusIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import Avvvatars from "avvvatars-react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Avatar from "~/app/components/Avatar";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import msg from "~/common/lib/msg";
@@ -75,7 +75,7 @@ function AccountMenu({ showOptions = true }: Props) {
   return (
     <div className="relative pl-2 w-72 flex bg-gray-100 rounded-md dark:bg-surface-12dp">
       <div className="flex items-center">
-        <Avvvatars value={authAccount?.name || ""} style={"shape"} />
+        <Avatar size={32} name={authAccount?.name || ""} />
       </div>
 
       <div
@@ -127,7 +127,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 title={account.name}
               >
                 <div className="shrink-0">
-                  <Avvvatars value={account.name} style={"shape"} />
+                  <Avatar size={32} name={account.name} />
                 </div>
                 <span className="overflow-hidden text-ellipsis whitespace-nowrap ml-2">
                   {account.name}&nbsp;

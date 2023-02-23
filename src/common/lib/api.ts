@@ -6,6 +6,7 @@ import {
   MakeInvoiceResponse,
 } from "~/extension/background-script/connectors/connector.interface";
 import type {
+  Account,
   AccountInfo,
   Accounts,
   Allowance,
@@ -33,6 +34,10 @@ export interface AccountInfoRes {
   name: string;
 }
 
+export interface GetAccountRes
+  extends Pick<Account, "id" | "connector" | "name"> {
+  nostrEnabled: boolean;
+}
 interface StatusRes {
   configured: boolean;
   unlocked: boolean;
@@ -92,6 +97,7 @@ export const swrGetAccountInfo = async (
   });
 };
 export const getAccounts = () => msg.request<Accounts>("getAccounts");
+export const getAccount = () => msg.request<GetAccountRes>("getAccount");
 export const updateAllowance = () => msg.request<Accounts>("updateAllowance");
 export const selectAccount = (id: string) =>
   msg.request("selectAccount", { id });
@@ -130,6 +136,7 @@ export const getCurrencyRate = async () =>
   msg.request<{ rate: number }>("getCurrencyRate");
 
 export default {
+  getAccount,
   getAccountInfo,
   getAccounts,
   getInfo,
