@@ -1,5 +1,6 @@
 // dayjs locales must be imported as well, list: https://github.com/iamkun/dayjs/tree/dev/src/locale
 import "dayjs/locale/es";
+import "dayjs/locale/fi";
 import "dayjs/locale/it";
 import "dayjs/locale/pt-br";
 import "dayjs/locale/sv";
@@ -10,6 +11,7 @@ import { initReactI18next } from "react-i18next";
 // import our translations
 import en from "~/i18n/locales/en/translation.json";
 import es from "~/i18n/locales/es/translation.json";
+import fi from "~/i18n/locales/fi/translation.json";
 import it from "~/i18n/locales/it/translation.json";
 import pt_BR from "~/i18n/locales/pt_BR/translation.json";
 import sv from "~/i18n/locales/sv/translation.json";
@@ -29,6 +31,12 @@ export const resources = {
     common: es.common,
     components: es.components,
     permissions: es.permissions,
+  },
+  fi: {
+    translation: fi.translation,
+    common: fi.common,
+    components: fi.components,
+    permissions: fi.permissions,
   },
   it: {
     translation: it.translation,
@@ -60,6 +68,7 @@ export const resources = {
 export const supportedLocales = [
   { locale: "en", label: "English" },
   { locale: "es", label: "Español" },
+  { locale: "fi", label: "Finnish" },
   { locale: "it", label: "Italiano" },
   { locale: "pt-BR", label: "Português (Brasil)" },
   { locale: "sv", label: "Svenska" },

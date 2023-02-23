@@ -732,7 +732,8 @@
       "copy": "Copiar",
       "back": "Voltar",
       "log_in": "Fazer login",
-      "remember": "Lembrar minha escolha e não perguntar novamente"
+      "remember": "Lembrar minha escolha e não perguntar novamente",
+      "receive_again": "Receber outro pagamento"
     },
     "errors": {
       "connection_failed": "Falha na conexão",
