@@ -24,9 +24,7 @@ export async function hasPermissionFor(method: string, host: string) {
   const accountId = state.getState().currentAccountId;
 
   if (!accountId) {
-    return Promise.reject(
-      new Error("Could not find an allowance for this host")
-    );
+    return Promise.reject(new Error("Account doesn't exist"));
   }
 
   const findPermission = await db.permissions.get({
