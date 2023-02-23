@@ -10,6 +10,7 @@ import Peertube from "./Peertube";
 import Reddit from "./Reddit";
 import SoundCloud from "./SoundCloud";
 import StackOverflow from "./StackOverflow";
+import Substack from "./Substack";
 import Twitter from "./Twitter";
 import Vida from "./Vida";
 import VimeoVideo from "./VimeoVideo";
@@ -30,6 +31,7 @@ const enhancements = [
   GitHub,
   SoundCloud,
   StackOverflow,
+  Substack,
   GeyserProject,
   Vida,
 

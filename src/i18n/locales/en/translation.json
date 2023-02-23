@@ -90,7 +90,9 @@
           "title": "numbers and letters, at least 4 characters"
         },
         "errors": {
-          "create_wallet_error": "Failed to log in or create a new account. If you need help, please contact support@getalby.com"
+          "create_wallet_error": "Failed to log in or create a new account. If you need help, please contact support@getalby.com",
+          "create_wallet_error1": "Failed to log in or create a new account.",
+          "create_wallet_error2": "If you need help, please contact support@getalby.com"
         }
       }
     },
@@ -415,6 +417,9 @@
           },
           "actions": {
             "generate": "Generate a new key"
+          },
+          "errors": {
+            "failed_to_load": "Failed to load the Nostr key. Is it a valid Nostr key?"
           }
         },
         "remove": {
@@ -767,6 +772,7 @@
       "send": "Send",
       "save": "Save",
       "receive": "Receive",
+      "receive_again": "Receive another payment",
       "close": "Close",
       "export": "Export",
       "remove": "Remove",

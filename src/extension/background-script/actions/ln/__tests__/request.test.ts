@@ -292,6 +292,40 @@ describe("ln request", () => {
       expect(result).toStrictEqual(requestResponse);
     });
 
+    test("doesn't call requestMethod if clicks cancel", async () => {
+      (utils.openPrompt as jest.Mock).mockImplementationOnce(() => {
+        throw new Error();
+      });
+      // prepare DB with a permission
+      await db.permissions.bulkAdd([permissionInDB]);
+
+      const messageWithOtherPermission = {
+        ...message,
+        args: {
+          ...message.args,
+          method: "sendPayment",
+        },
+      };
+
+      expect(await db.permissions.toArray()).toHaveLength(1);
+      expect(
+        await db.permissions.get({ method: "webln/lnd/sendpayment" })
+      ).toBeUndefined();
+
+      const result = await request(messageWithOtherPermission);
+
+      expect(utils.openPrompt).toHaveBeenCalledTimes(1);
+
+      expect(connector.requestMethod).not.toHaveBeenCalled();
+
+      expect(await db.permissions.toArray()).toHaveLength(1);
+      expect(
+        await db.permissions.get({ method: "webln/lnd/sendpayment" })
+      ).toBeUndefined();
+
+      expect(result).toHaveProperty("error");
+    });
+
     test("does not save the permission if enabled 'false'", async () => {
       (utils.openPrompt as jest.Mock).mockResolvedValueOnce({
         data: { enabled: false, blocked: false },

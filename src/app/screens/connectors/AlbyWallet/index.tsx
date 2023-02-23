@@ -85,9 +85,22 @@ export default function AlbyWallet({ variant }: Props) {
             );
           } else {
             toast.error(
-              `${t("pre_connect.errors.create_wallet_error")} ${JSON.stringify(
-                data
-              )}`
+              <p>
+                {t("pre_connect.errors.create_wallet_error1")}
+                <br />
+                {t("pre_connect.errors.create_wallet_error2")}
+                <br />
+                {Object.keys(data).map((rule, index) => {
+                  return (
+                    <p key={`rule-${index}`}>
+                      <span className="capitalize">{rule}</span>
+                      {" - "}
+                      {data[rule].join(", ")}
+                      <br />
+                    </p>
+                  );
+                })}
+              </p>
             );
           }
         }
@@ -95,7 +108,7 @@ export default function AlbyWallet({ variant }: Props) {
       .catch((e) => {
         console.error(e);
         toast.error(
-          `${t("pre_connect.errors.create_wallet_error")} ${e.message}`
+          `${t("pre_connect.errors.create_wallet_error")} - ${e.message}`
         );
         setLoading(false);
       });

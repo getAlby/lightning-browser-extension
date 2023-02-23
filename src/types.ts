@@ -140,6 +140,7 @@ export type NavigationState = {
     customRecords?: Record<string, string>;
     message?: string;
     event?: Event;
+    sigHash?: string;
     description?: string;
     details?: string;
     requestPermission: {
@@ -403,11 +404,25 @@ export interface MessagePrivateKeySet extends MessageDefault {
   action: "setPrivateKey";
 }
 
+export interface MessagePrivateKeyRemove extends MessageDefault {
+  args: {
+    id?: Account["id"];
+  };
+  action: "removePrivateKey";
+}
+
 export interface MessageSignEvent extends MessageDefault {
   args: {
     event: Event;
   };
   action: "signEvent";
+}
+
+export interface MessageSignSchnorr extends MessageDefault {
+  args: {
+    sigHash: string;
+  };
+  action: "signSchnorr";
 }
 
 export interface MessageEncryptGet extends MessageDefault {
@@ -557,6 +572,7 @@ export interface Payment extends Omit<DbPayment, "id"> {
 
 export enum PermissionMethodNostr {
   NOSTR_SIGNMESSAGE = "nostr/signMessage",
+  NOSTR_SIGNSCHNORR = "nostr/signSchnorr",
   NOSTR_GETPUBLICKEY = "nostr/getPublicKey",
   NOSTR_NIP04DECRYPT = "nostr/nip04decrypt",
   NOSTR_NIP04ENCRYPT = "nostr/nip04encrypt",

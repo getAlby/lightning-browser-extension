@@ -1,79 +1,152 @@
 {
   "translation": {
     "welcome": {
+      "title": "",
       "nav": {
-        "welcome": "Vítejte",
-        "password": "Vaše heslo",
-        "connect": "Váš Lightning účet",
-        "done": "Hotovo"
+        "welcome": "",
+        "password": "",
+        "connect": "",
+        "done": ""
       },
       "set_password": {
-        "title": "Nastavit heslo pro odemčení účtu",
-        "description": "Toto heslo je použito pro zabezpečení vaši peněženky a pokytuje přístup k doplňku prohlížeče. Již nemůže být resetováno a nijak nesouvisí s heslem k vašemu Alby účtu.",
+        "title": "",
+        "description": "",
         "choose_password": {
-          "label": "Zvolte heslo pro odemčení:"
+          "label": ""
         },
         "confirm_password": {
-          "label": "Ověřte, že heslo je zadáno správně:"
+          "label": ""
         },
         "errors": {
-          "enter_password": "Prosím, zadejte heslo.",
-          "confirm_password": "Prosím potvrďte své heslo.",
-          "mismatched_password": "Hesla se neshodují."
+          "enter_password": "",
+          "confirm_password": "",
+          "mismatched_password": ""
         }
       },
       "test_connection": {
-        "ready": "Skvěle, vše je připraveno!",
-        "initializing": "Inicializace vašeho účtu. Prosím čekejte, chvíli to zabere...",
-        "connection_error": "Chyba spojení",
-        "review_connection_details": "Prosím překontrolujte nastavení vašeho spojení.",
-        "connection_taking_long": "Připojování zabralo více, než bylo očekáváno... Zadali jste údaje o připojení správně? Je váš uzel dostupný?",
-        "contact_support": "Pokud potřebujete pomoct, prosím kontaktujte support@getalby.com",
+        "ready": "",
+        "initializing": "",
+        "connection_error": "",
+        "review_connection_details": "",
+        "connection_taking_long": "",
+        "contact_support": "",
         "actions": {
-          "delete_edit_account": "Smažte nevalidní účet a změny proveďte znovu"
+          "delete_edit_account": ""
         }
+      }
+    },
+    "choose_path": {
+      "title": "",
+      "description": "",
+      "alby": {
+        "title": "",
+        "description": "",
+        "create_new": ""
       },
-      "title": "Vítejte v Alby"
+      "other": {
+        "title": "",
+        "description": "",
+        "and_more": "",
+        "connect": ""
+      }
+    },
+    "alby": {
+      "pre_connect": {
+        "set_password": {
+          "choose_password": {
+            "label": ""
+          },
+          "confirm_password": {
+            "label": ""
+          },
+          "errors": {
+            "enter_password": "",
+            "confirm_password": "",
+            "mismatched_password": ""
+          }
+        },
+        "forgot_password": "",
+        "title": "",
+        "create_account": "",
+        "login_account": "",
+        "host_wallet": "",
+        "email": {
+          "create": {
+            "label": ""
+          },
+          "login": {
+            "label": ""
+          }
+        },
+        "optional_lightning_note": {
+          "part1": "",
+          "part2": "",
+          "part3": "",
+          "part4": ""
+        },
+        "optional_lightning_address": {
+          "label": "",
+          "suffix": "",
+          "title": ""
+        },
+        "errors": {
+          "create_wallet_error": "",
+          "create_wallet_error1": "",
+          "create_wallet_error2": ""
+        }
+      }
     },
     "choose_connector": {
-      "description": "Připojte svou externí ligtning peněženku nebo uzel",
+      "title": "",
+      "description": "",
       "lnd": {
-        "title": "LND",
+        "title": "",
         "page": {
-          "title": "Připojt se ke svému LND uzlu",
-          "description": "Potřebujete URL svého uzlu a macaroon s oprávněním pro čtení a odesílání (například admin.macaroon)"
+          "title": "",
+          "description": ""
         },
         "url": {
-          "label": "REST API host a port",
-          "placeholder": "https://url-vaseho-uzlu:8080"
+          "label": "",
+          "placeholder": ""
         },
         "macaroon": {
-          "label": "Macaroon (v hexadecimálním formátu)"
+          "label": ""
         },
-        "or": "NEBO",
-        "drag_and_drop": "Přetáhněte svůj macaroon zde nebo ho <0>vyhledejte</0>",
+        "or": "",
+        "drag_and_drop": "",
         "errors": {
-          "connection_failed": "Připojení se nezdařilo. Jsou vaše údaje pro LND zadány správně?"
+          "connection_failed": ""
+        }
+      },
+      "lnc": {
+        "title": "",
+        "page": {
+          "title": "",
+          "description": ""
+        },
+        "pairing_phrase": {
+          "label": "",
+          "placeholder": ""
         }
       },
       "lndhub_bluewallet": {
-        "title": "Bluewallet",
+        "title": "",
         "page": {
-          "title": "Připojit k BlueWallet",
-          "description": "V BlueWallet vyberte peněženku, kterou chcete připojit, otevřete ji, klikněte na ¨...¨, klikněte na Export/Záloha pro zobrazení QR kódu a tento kód naskenujte svou webkamerou."
+          "title": "",
+          "description": ""
         },
         "uri": {
-          "label": "BlueWallet Export URI"
+          "label": ""
         },
         "errors": {
-          "invalid_uri": "Nevalidní BlueWallet URI",
-          "connection_failed": "Připojení se nezdařilo. Je vaše BlueWallet URI správné?"
+          "invalid_uri": "",
+          "connection_failed": ""
         }
       },
       "lndhub_go": {
-        "title": "LNDHub",
+        "title": "",
         "page": {
-          "title": "Připojit k LNDHub",
+          "title": "",
           "description": ""
         },
         "uri": {
@@ -209,6 +282,26 @@
           "invalid_jwt": ""
         }
       },
+      "kollider": {
+        "title": "",
+        "description": "",
+        "page": {
+          "title": "",
+          "description": ""
+        },
+        "username": {
+          "label": ""
+        },
+        "password": {
+          "label": ""
+        },
+        "currency": {
+          "label": ""
+        },
+        "errors": {
+          "connection_failed": ""
+        }
+      },
       "btcpay": {
         "title": "",
         "page": {
@@ -254,17 +347,6 @@
         "errors": {
           "connection_failed": ""
         }
-      },
-      "title": "Připojte Lightning peněženku",
-      "lnc": {
-        "title": "LND s LNC",
-        "page": {
-          "title": "Připojit k vašemu LND uzlu",
-          "description": "Vytvořte nové sezení v terminálu (litd) pro získání nové párovací fráze a vložte ji zde"
-        },
-        "pairing_phrase": {
-          "label": "Vaše párovací fráze "
-        }
       }
     },
     "home": {
@@ -288,11 +370,68 @@
       "default_view": {
         "recent_transactions": "",
         "no_transactions": "",
-        "is_blocked_hint": ""
+        "is_blocked_hint": "",
+        "block_removed": ""
       }
     },
     "accounts": {
       "title": "",
+      "account_view": {
+        "title1": "",
+        "title2": "",
+        "name": {
+          "title": "",
+          "placeholder": ""
+        },
+        "export": {
+          "title": "",
+          "screen_reader": "",
+          "waiting": "",
+          "your_ln_address": "",
+          "tip_mobile": "",
+          "export_uri": "",
+          "scan_qr": ""
+        },
+        "nostr": {
+          "title": "",
+          "hint": "",
+          "private_key": {
+            "title": "",
+            "subtitle": "",
+            "warning": "",
+            "success": "",
+            "successfully_removed": "",
+            "label": ""
+          },
+          "public_key": {
+            "label": ""
+          },
+          "generate_keys": {
+            "title": "",
+            "screen_reader": "",
+            "hint": "",
+            "actions": {
+              "random_keys": "",
+              "derived_keys": ""
+            }
+          },
+          "actions": {
+            "generate": ""
+          },
+          "errors": {
+            "failed_to_load": ""
+          }
+        },
+        "remove": {
+          "title": "",
+          "subtitle": "",
+          "confirm": ""
+        },
+        "actions": {
+          "remove_account": "",
+          "export": ""
+        }
+      },
       "actions": {
         "add_account": ""
       }
@@ -302,7 +441,8 @@
       "allow": "",
       "request1": "",
       "request2": "",
-      "block_and_ignore": ""
+      "block_and_ignore": "",
+      "block_added": ""
     },
     "unlock": {
       "unlock_to_continue": "",
@@ -411,7 +551,8 @@
         "hint": "",
         "private_key": {
           "title": "",
-          "subtitle": ""
+          "subtitle": "",
+          "go_to": ""
         }
       }
     },
@@ -487,7 +628,50 @@
         "status": ""
       }
     },
+    "discover": {
+      "title": "",
+      "description": "",
+      "list": {
+        "trading": "",
+        "gaming": "",
+        "entertaiment": "",
+        "shopping": "",
+        "miscellaneous": "",
+        "showcases": "",
+        "nostr": ""
+      },
+      "tips": {
+        "title": "",
+        "description": "",
+        "top_up_wallet": {
+          "title": "",
+          "description": "",
+          "label1": "",
+          "label2": ""
+        },
+        "pin": {
+          "title": "",
+          "description1": "",
+          "description2": "",
+          "description3": ""
+        },
+        "demo": {
+          "title": "",
+          "description": "",
+          "label1": ""
+        },
+        "address": {
+          "title": "",
+          "description": "",
+          "label1": ""
+        }
+      }
+    },
     "publishers": {
+      "title": "",
+      "description": "",
+      "no_info": "",
+      "discover": "",
       "publisher": {
         "allowance": {
           "title": "",
@@ -544,76 +728,21 @@
     "nostr": {
       "title": "",
       "allow": "",
-      "block_and_ignore": ""
-    },
-    "choose_path": {
-      "title": "Připojit",
-      "other": {
-        "title": "Jiné peněženky",
-        "description": "Připojte svou existující lightning peněženku nebo svůj uzel pomocí různých konektorů.",
-        "and_more": "a více...",
-        "connect": "Připojit"
-      },
-      "alby": {
-        "create_new": "Vytvoření účtu",
-        "title": "Alby",
-        "description": "Zaregistrujte se, nebo se přihlašte ke svému existujícímu Alby účtu a začněte využívat lightning platby."
-      },
-      "description": "Pro použití Alby pro online platby, připojte svou lightning peněženku k doplňku."
-    },
-    "alby": {
-      "pre_connect": {
-        "optional_lightning_note": {
-          "part4": "dozvědět se více",
-          "part3": ". Jedná se o jednoduchý způsob jak vám kdokoliv může zaslat bitcoin přes síť lightning.",
-          "part1": "Váš Alby účet poskytuje také volitelnou",
-          "part2": "lightning adresu"
-        },
-        "optional_lightning_address": {
-          "label": "Vyberte si svou Lightning adresu (volitelné)",
-          "suffix": "@getalby.com",
-          "title": "čísla a písmena, minimálně 4 znaky"
-        },
-        "errors": {
-          "create_wallet_error1": "Přihlášení nebo vytvoření nového účtu se nezdařilo.",
-          "create_wallet_error2": "Pokud potřebujete pomoct, prosím kontaktujte support@getalby.com",
-          "create_wallet_error": "Přihlášení nebo vytvoření nového účtu se nezdařilo. Pokud potřebujete pomoc, kontaktujte support@getalby.com"
-        },
-        "forgot_password": "Zapomněli jste heslo?",
-        "title": "Váš účet Alby",
-        "create_account": "Vytvořte nový Alby účet pro zasílání a příjímání bitcoin plateb.",
-        "login_account": "Přihlašte se pro připojení k existujícímu učtu Alby.",
-        "set_password": {
-          "choose_password": {
-            "label": "Heslo"
-          },
-          "confirm_password": {
-            "label": "Potvrďte heslo"
-          },
-          "errors": {
-            "enter_password": "Prosím zadejte heslo.",
-            "confirm_password": "Prosím potvrďte své heslo.",
-            "mismatched_password": "Hesla se neshodují."
-          }
-        },
-        "host_wallet": "Provozujeme pro vás Lightning peněženku!",
-        "email": {
-          "create": {
-            "label": "Emailová adresa"
-          },
-          "login": {
-            "label": "Emailová adresa nebo adresa Lightning"
-          }
-        }
-      }
+      "content": "",
+      "allow_sign": "",
+      "block_and_ignore": "",
+      "block_added": ""
     }
   },
   "common": {
     "password": "",
+    "confirm_password": "",
     "advanced": "",
     "success": "",
     "error": "",
     "settings": "",
+    "accounts": "",
+    "discover": "",
     "websites": "",
     "sats_one": "",
     "sats_other": "",
@@ -643,10 +772,13 @@
       "send": "",
       "save": "",
       "receive": "",
+      "receive_again": "",
       "close": "",
       "export": "",
       "remove": "",
-      "copy": ""
+      "copy": "",
+      "log_in": "",
+      "remember": ""
     },
     "errors": {
       "connection_failed": "",
@@ -667,7 +799,8 @@
       "edit_allowance": {
         "title": "",
         "screen_reader": ""
-      }
+      },
+      "edit_permissions": ""
     },
     "qrcode_scanner": {
       "title": "",
@@ -689,7 +822,8 @@
         "message": "",
         "app": "",
         "podcast": ""
-      }
+      },
+      "open_location": ""
     },
     "confirm_or_cancel": {
       "only_trusted": ""
@@ -739,8 +873,94 @@
     },
     "badge": {
       "label": {
-        "active": ""
+        "active": "",
+        "auth": ""
       }
+    }
+  },
+  "permissions": {
+    "nostr": {
+      "getpublickey": "",
+      "nip04encrypt": "",
+      "nip04decrypt": "",
+      "signmessage": ""
+    },
+    "commando": {
+      "bkpr-listbalances": "",
+      "checkmessage": "",
+      "connect": "",
+      "decode": "",
+      "decodepay": "",
+      "disconnect": "",
+      "feerates": "",
+      "fundchannel": "",
+      "getinfo": "",
+      "getroute": "",
+      "invoice": "",
+      "keysend": "",
+      "listforwards": "",
+      "listfunds": "",
+      "listinvoices": "",
+      "listnodes": "",
+      "listoffers": "",
+      "listpays": "",
+      "listpeers": "",
+      "listsendpays": "",
+      "listtransactions": "",
+      "multifundchannel": "",
+      "offer": "",
+      "pay": "",
+      "sendpay": "",
+      "setchannel": "",
+      "signmessage": ""
+    },
+    "lnd": {
+      "getinfo": "",
+      "listchannels": "",
+      "listinvoices": "",
+      "channelbalance": "",
+      "walletbalance": "",
+      "openchannel": "",
+      "connectpeer": "",
+      "disconnectpeer": "",
+      "estimatefee": "",
+      "getchaninfo": "",
+      "getnetworkinfo": "",
+      "getnodeinfo": "",
+      "gettransactions": "",
+      "listpayments": "",
+      "listpeers": "",
+      "lookupinvoice": "",
+      "queryroutes": "",
+      "verifymessage": "",
+      "sendtoroute": "",
+      "decodepayreq": "",
+      "routermc": "",
+      "addinvoice": ""
+    },
+    "lnc": {
+      "getinfo": "",
+      "listchannels": "",
+      "listinvoices": "",
+      "channelbalance": "",
+      "walletbalance": "",
+      "openchannel": "",
+      "connectpeer": "",
+      "disconnectpeer": "",
+      "estimatefee": "",
+      "getchaninfo": "",
+      "getnetworkinfo": "",
+      "getnodeinfo": "",
+      "gettransactions": "",
+      "listpayments": "",
+      "listpeers": "",
+      "lookupinvoice": "",
+      "queryroutes": "",
+      "verifymessage": "",
+      "sendtoroute": "",
+      "decodepayreq": "",
+      "routermc": "",
+      "addinvoice": ""
     }
   }
 }

@@ -10,13 +10,23 @@ export async function hasPermissionFor(method: string, host: string) {
     return false;
   }
 
-  const allowance = await db.allowances.get({
-    host,
-  });
+  const allowance = await db.allowances
+    .where("host")
+    .equalsIgnoreCase(host)
+    .first();
+
+  if (!allowance?.id) {
+    return Promise.reject(
+      new Error("Could not find an allowance for this host")
+    );
+  }
+
   const accountId = state.getState().currentAccountId;
 
-  if (!allowance?.id || !accountId) {
-    return false;
+  if (!accountId) {
+    return Promise.reject(
+      new Error("Could not find an allowance for this host")
+    );
   }
 
   const findPermission = await db.permissions.get({
