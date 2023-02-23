@@ -2,6 +2,7 @@ import type { DbPayment } from "~/types";
 
 export const paymentsFixture: DbPayment[] = [
   {
+    accountId: "12345",
     allowanceId: "3",
     createdAt: "123456",
     description: "A blue bird?!",
@@ -17,6 +18,7 @@ export const paymentsFixture: DbPayment[] = [
     totalFees: 111,
   },
   {
+    accountId: "12345",
     allowanceId: "3",
     createdAt: "123456",
     description: "A yellow bird?!",

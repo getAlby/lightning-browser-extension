@@ -44,6 +44,7 @@ describe("Payment notifications", () => {
   });
 
   const data: PaymentNotificationData = {
+    accountId: "12345",
     response: {
       data: {
         preimage:

@@ -7,6 +7,14 @@ import state from "../../state";
 export default async function keysend(message: Message) {
   PubSub.publish(`ln.keysend.start`, message);
   const { destination, amount, customRecords } = message.args;
+
+  const accountId = await state.getState().currentAccountId;
+  if (!accountId) {
+    return {
+      error: "select an account.",
+    };
+  }
+
   if (
     typeof destination !== "string" ||
     (typeof amount !== "string" && typeof amount !== "number")
@@ -31,6 +39,7 @@ export default async function keysend(message: Message) {
     };
   }
   pubsub.publishPaymentNotification(message, {
+    accountId,
     response,
     details: {
       destination: destination,

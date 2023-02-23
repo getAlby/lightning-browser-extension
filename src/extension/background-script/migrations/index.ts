@@ -1,3 +1,4 @@
+import db from "../db";
 import state from "../state";
 
 export type Migration = keyof typeof migrations;
@@ -37,6 +38,18 @@ const migrations = {
         accounts,
       });
       // will be persisted by setMigrated
+    }
+  },
+
+  migratePaymentsWithoutAccountId: async () => {
+    const { accounts } = state.getState();
+    if (Object.keys(accounts).length == 1) {
+      const accountId = Object.keys(accounts)[0];
+      const payments = await db.payments.toArray();
+
+      payments.forEach(async (payments) => {
+        payments.id && (await db.payments.update(payments.id, { accountId }));
+      });
     }
   },
 
