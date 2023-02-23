@@ -267,6 +267,10 @@ export interface MessageSetIcon extends MessageDefault {
   };
 }
 
+export interface MessageGetPassword extends MessageDefault {
+  action: "getPassword";
+}
+
 export interface MessageAccountLock extends MessageDefault {
   action: "lock";
 }

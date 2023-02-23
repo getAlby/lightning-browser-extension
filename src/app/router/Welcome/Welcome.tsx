@@ -1,7 +1,7 @@
 import SetPassword from "@screens/Onboard/SetPassword";
 import TestConnection from "@screens/Onboard/TestConnection";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { HashRouter as Router, useRoutes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -10,11 +10,13 @@ import { SettingsProvider } from "~/app/context/SettingsContext";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
 import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
+import api from "~/common/lib/api";
 import i18n from "~/i18n/i18nConfig";
 
 const connectorRoutes = getConnectorRoutes();
 
 function getRoutes(
+  passwordExists: boolean,
   connectorRoutes: {
     path: string;
     element: JSX.Element;
@@ -31,16 +33,15 @@ function getRoutes(
     {
       path: "/choose-path",
       name: i18n.t("translation:welcome.nav.connect"),
+      element: passwordExists ? (
+        <ChooseConnectorPath
+          title={i18n.t("translation:choose_path.title")}
+          description={i18n.t("translation:choose_path.description")}
+        />
+      ) : (
+        <SetPassword />
+      ),
       children: [
-        {
-          index: true,
-          element: (
-            <ChooseConnectorPath
-              title={i18n.t("translation:choose_path.title")}
-              description={i18n.t("translation:choose_path.description")}
-            />
-          ),
-        },
         {
           path: "create",
           element: <AlbyWallet variant="create" />,
@@ -70,13 +71,11 @@ function getRoutes(
     },
     {
       path: "/test-connection",
-      element: <TestConnection />,
+      element: passwordExists ? <TestConnection /> : <SetPassword />,
       name: i18n.t("translation:welcome.nav.done"),
     },
   ];
 }
-
-const routes = getRoutes(connectorRoutes);
 
 function WelcomeRouter() {
   return (
@@ -95,6 +94,20 @@ function WelcomeRouter() {
 
 function App() {
   const { t } = useTranslation();
+
+  const [loading, setLoading] = useState(true);
+  const [passwordExists, setPasswordExists] = useState(false);
+
+  useEffect(() => {
+    async function fetchPasswordStatus() {
+      const response = await api.getPassword();
+      setPasswordExists(response.passwordExists);
+      setLoading(false);
+    }
+
+    fetchPasswordStatus();
+  });
+  const routes = getRoutes(passwordExists, connectorRoutes);
   const routesElement = useRoutes(routes);
 
   const [languageChanged, setLanguageChanged] = useState(false);
@@ -122,7 +135,7 @@ function App() {
           </p>
         </div>
       </div>
-      <Container maxWidth="xl">{routesElement}</Container>
+      {!loading && <Container maxWidth="xl">{routesElement}</Container>}
     </div>
   );
 }
