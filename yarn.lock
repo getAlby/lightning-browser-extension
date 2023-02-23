@@ -1318,10 +1318,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/chrome@^0.0.216":
-  version "0.0.216"
-  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.216.tgz#91b80d2e56bed47362076ca7112ec409c0c958a4"
-  integrity sha512-nJezaOm7yX2Zen+9NhNuGBE2WtssH/ssbqIeULL13wMlCwvjNmSaUeueFEixMODKyCY2vlhkD/jERSvEG0wWEA==
+"@types/chrome@^0.0.217":
+  version "0.0.217"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.217.tgz#144b534776ef87ce4121c404951ecc0e14051071"
+  integrity sha512-q8fLzCCoHiR9gYRoqvrx12+HaJjRTqUom5Ks/wLSR8Ac83qAqWaA4NgUBUcDjM1O1ACczygxIHCEENXs1zmbqQ==
   dependencies:
     "@types/filesystem" "*"
     "@types/har-format" "*"
