@@ -734,7 +734,7 @@
       "block_added": "Added {{host}} to the blocklist, please reload the website."
     },
     "transactions": {
-      "title": "All transactions",
+      "title": "Transactions",
       "description": "This page lists all transactions, independent of the selected account.",
       "list_empty": "No transactions available yet."
     }
