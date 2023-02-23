@@ -81,7 +81,6 @@ export default function UserMenu() {
           <ReceiveIcon className="w-6 h-6 -ml-0.5 mr-2 text-gray-700 dark:text-neutral-300" />
           {tCommon("actions.receive")}
         </Menu.ItemButton>
-        <Menu.Divider />
         <Menu.ItemButton
           onClick={() => {
             openOptions("transactions");
@@ -90,6 +89,7 @@ export default function UserMenu() {
           <TransactionsIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
           {tCommon("transactions")}
         </Menu.ItemButton>
+        <Menu.Divider />
         <Menu.ItemButton
           onClick={() => {
             openOptions("settings");
