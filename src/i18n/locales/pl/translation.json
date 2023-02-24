@@ -161,10 +161,10 @@
         "title": "LNbits",
         "page": {
           "title": "Podłącz do <0>LNbits</0>",
-          "instructions": ""
+          "instructions": "W LNbits, wybierz portfel, do którego chcesz się podłączyć, otwórz go, kliknij na API Info i skopiuj klucz administratora. Wklej go poniżej:"
         },
         "admin_key": {
-          "label": "",
+          "label": "Klucz administratora LNbits",
           "placeholder": "Twój 32-cyfrowy klucz administratora"
         },
         "url": {
@@ -195,10 +195,10 @@
           "instructions": "Ta funkcja nie działa jeśli 2FA jest włączone."
         },
         "password": {
-          "label": ""
+          "label": "Hasło Citadel"
         },
         "url": {
-          "label": "",
+          "label": "Adres URL Citadel",
           "placeholder": "http://citadel.local"
         }
       },
