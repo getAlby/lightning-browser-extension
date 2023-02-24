@@ -121,14 +121,11 @@ const state = createState<State>((set, get) => ({
     const syncStorage = browser.storage.sync;
 
     return syncStorage
-      .set({ test: "alby" })
-      .then(() => {
-        syncStorage.remove("test");
-        return syncStorage.get(browserStorageKeys).then((result) => {
-          // Deep merge to ensure that nested defaults are also merged instead of overwritten.
-          const data = merge(browserStorageDefaults, result as BrowserStorage);
-          set(data);
-        });
+      .get(browserStorageKeys)
+      .then((result) => {
+        // Deep merge to ensure that nested defaults are also merged instead of overwritten.
+        const data = merge(browserStorageDefaults, result as BrowserStorage);
+        set(data);
       })
       .catch((e) => {
         console.info("storage.sync is not available. using storage.local");
@@ -155,10 +152,9 @@ const state = createState<State>((set, get) => ({
     };
 
     return syncStorage
-      .set({ test: "alby" })
-      .then(() => {
-        syncStorage.remove("test");
-        return syncStorage.set(data);
+      .set(data)
+      .then((result) => {
+        return result;
       })
       .catch((e) => {
         return browser.storage.local.set({ mockSync: data });
