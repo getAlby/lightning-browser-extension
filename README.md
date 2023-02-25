@@ -46,6 +46,7 @@ Alby supports
 
 - All [Chromium based browsers](<https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium>) - Chrome Opera, Brave etc.
 - Firefox
+- Safari
 - more coming soon...
 
 ## Installation
