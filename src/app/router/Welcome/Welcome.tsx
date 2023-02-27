@@ -100,8 +100,8 @@ function App() {
 
   useEffect(() => {
     async function fetchPasswordStatus() {
-      const response = await api.getPassword();
-      setPasswordExists(response.passwordExists);
+      const { unlocked } = await api.getStatus();
+      setPasswordExists(unlocked);
       setLoading(false);
     }
 

@@ -52,10 +52,6 @@ interface BlocklistRes {
   blocked: boolean;
 }
 
-interface GetPasswordRes {
-  passwordExists: boolean;
-}
-
 export const getAccountInfo = () => msg.request<AccountInfoRes>("accountInfo");
 
 /**
@@ -109,7 +105,6 @@ export const getAllowance = (host: string) =>
   msg.request<Allowance>("getAllowance", { host });
 export const getPayments = (options: { limit: number }) =>
   msg.request<{ payments: DbPayment[] }>("getPayments", options);
-export const getPassword = () => msg.request<GetPasswordRes>("getPassword");
 export const getSettings = () => msg.request<SettingsStorage>("getSettings");
 export const getStatus = () => msg.request<StatusRes>("status");
 export const getInfo = () => msg.request<NodeInfo>("getInfo");
@@ -148,7 +143,6 @@ export default {
   selectAccount,
   getAllowance,
   updateAllowance,
-  getPassword,
   getPayments,
   getSettings,
   getStatus,
