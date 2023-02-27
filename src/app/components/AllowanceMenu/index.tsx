@@ -240,7 +240,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                 </h2>
                 <div>
                   {permissions.map((permission) => (
-                    <Fragment key={`element-${permission.id}`}>
+                    <Fragment key={permission.id}>
                       <Setting
                         title={permission.method}
                         subtitle={tPermissions(
