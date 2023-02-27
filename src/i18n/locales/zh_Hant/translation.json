@@ -1,302 +1,302 @@
 {
   "translation": {
     "welcome": {
-      "title": "",
+      "title": "歡迎來到Alby",
       "nav": {
-        "welcome": "",
-        "password": "",
-        "connect": "",
-        "done": ""
+        "welcome": "歡迎",
+        "password": "你的密碼",
+        "connect": "你的閃電帳戶",
+        "done": "完成"
       },
       "set_password": {
-        "title": "",
+        "title": "設置解鎖密碼",
         "description": "",
         "choose_password": {
-          "label": ""
+          "label": "選擇解鎖密碼："
         },
         "confirm_password": {
-          "label": ""
+          "label": "確認你輸入的內容是否正確："
         },
         "errors": {
-          "enter_password": "",
-          "confirm_password": "",
-          "mismatched_password": ""
+          "enter_password": "請輸入密碼。",
+          "confirm_password": "請確認你的密碼。",
+          "mismatched_password": "密碼不匹配。"
         }
       },
       "test_connection": {
-        "ready": "",
-        "initializing": "",
-        "connection_error": "",
-        "review_connection_details": "",
-        "connection_taking_long": "",
-        "contact_support": "",
+        "ready": "太棒了，你已經準備好了！",
+        "initializing": "正在初始化你的帳戶。請稍候，這可能需要一分鐘...",
+        "connection_error": "連接錯誤",
+        "review_connection_details": "請檢查你的連接詳細信息。",
+        "connection_taking_long": "嘗試連接的時間比預期的要長...你的詳細信息是否正確？你的節點是否可訪問？",
+        "contact_support": "如果你需要幫助，請聯繫 support@getalby.com",
         "actions": {
-          "delete_edit_account": ""
+          "delete_edit_account": "刪除無效帳戶並重新編輯"
         }
       }
     },
     "choose_path": {
-      "title": "",
-      "description": "",
+      "title": "連接",
+      "description": "要開始使用 Alby 進行在線支付，請將你的閃電錢包連接到擴展程序。",
       "alby": {
-        "title": "",
-        "description": "",
-        "create_new": ""
+        "title": "Alby",
+        "description": "註冊或使用你現有的 Alby 帳戶立即開始閃電支付。",
+        "create_new": "註冊"
       },
       "other": {
-        "title": "",
-        "description": "",
-        "and_more": "",
-        "connect": ""
+        "title": "其他錢包",
+        "description": "連接到你現有的閃電錢包或節點，可從各種連接器中選擇。",
+        "and_more": "等等...",
+        "connect": "連接"
       }
     },
     "alby": {
       "pre_connect": {
         "set_password": {
           "choose_password": {
-            "label": ""
+            "label": "密碼"
           },
           "confirm_password": {
-            "label": ""
+            "label": "確認密碼"
           },
           "errors": {
-            "enter_password": "",
-            "confirm_password": "",
-            "mismatched_password": ""
+            "enter_password": "請輸入密碼。",
+            "confirm_password": "請確認你的密碼。",
+            "mismatched_password": "密碼不匹配。"
           }
         },
-        "forgot_password": "",
-        "title": "",
-        "create_account": "",
-        "login_account": "",
-        "host_wallet": "",
+        "forgot_password": "忘記密碼？",
+        "title": "你的Alby帳戶",
+        "create_account": "創建一個新的Alby帳戶來發送和接收比特幣付款。",
+        "login_account": "登錄以連接你現有的Alby帳戶。",
+        "host_wallet": "我們為你託管閃電錢包！",
         "email": {
           "create": {
-            "label": ""
+            "label": "電子郵件地址"
           },
           "login": {
-            "label": ""
+            "label": "電子郵件地址或閃電地址"
           }
         },
         "optional_lightning_note": {
-          "part1": "",
-          "part2": "",
+          "part1": "你的 Alby 帳戶還附帶一個可選的",
+          "part2": "閃電地址",
           "part3": "",
-          "part4": ""
+          "part4": "瞭解更多"
         },
         "optional_lightning_address": {
-          "label": "",
-          "suffix": "",
-          "title": ""
+          "label": "選擇你的閃電位址（可選）",
+          "suffix": "@getalby.com",
+          "title": "數字和字母，至少 4 個字符"
         },
         "errors": {
-          "create_wallet_error": "",
-          "create_wallet_error1": "",
-          "create_wallet_error2": ""
+          "create_wallet_error": "無法登錄或創建新帳戶。如果你需要幫助，請聯繫 support@getalby.com",
+          "create_wallet_error1": "無法登錄或創建新帳戶。",
+          "create_wallet_error2": "如果你需要幫助，請聯繫 support@getalby.com"
         }
       }
     },
     "choose_connector": {
-      "title": "",
-      "description": "",
+      "title": "連接閃電錢包",
+      "description": "連接你的外部閃電錢包或節點",
       "lnd": {
-        "title": "",
+        "title": "LND",
         "page": {
-          "title": "",
+          "title": "連接你的 LND 節點",
           "description": ""
         },
         "url": {
-          "label": "",
-          "placeholder": ""
+          "label": "REST API 主機和端口",
+          "placeholder": "https://your-node-url:8080"
         },
         "macaroon": {
-          "label": ""
+          "label": "Macaroon(HEX格式)"
         },
-        "or": "",
-        "drag_and_drop": "",
+        "or": "或",
+        "drag_and_drop": "將macaroon拖放到此處或<0>瀏覽</0>",
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "連接失敗。你的 LND 憑證是否正確？"
         }
       },
       "lnc": {
-        "title": "",
+        "title": "LND使用LNC",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "連接你的 LND 節點",
+          "description": "在終端（litd）中創建一個新會話以獲取新的配對短語並在此處輸入"
         },
         "pairing_phrase": {
-          "label": "",
-          "placeholder": ""
+          "label": "你的配對短語 ",
+          "placeholder": "secret stack sats phrase"
         }
       },
       "lndhub_bluewallet": {
-        "title": "",
+        "title": "Bluewallet",
         "page": {
-          "title": "",
+          "title": "連接 BlueWallet",
           "description": ""
         },
         "uri": {
-          "label": ""
+          "label": "BlueWallet 導出 URI"
         },
         "errors": {
-          "invalid_uri": "",
-          "connection_failed": ""
+          "invalid_uri": "BlueWallet URI無效",
+          "connection_failed": "連接失敗。你的 BlueWallet URI 是否正確？"
         }
       },
       "lndhub_go": {
-        "title": "",
+        "title": "LNDHub",
         "page": {
-          "title": "",
+          "title": "連接LNDHub",
           "description": ""
         },
         "uri": {
-          "label": ""
+          "label": "LNDHub 導出 URI"
         },
         "errors": {
-          "invalid_uri": "",
-          "connection_failed": ""
+          "invalid_uri": "LNDHub URI無效",
+          "connection_failed": "連接失敗。你的 LNDHub URI 是否正確？"
         }
       },
       "lnbits": {
-        "title": "",
+        "title": "LNbits",
         "page": {
-          "title": "",
+          "title": "連接 <0>LNbits</0>",
           "instructions": ""
         },
         "admin_key": {
-          "label": "",
-          "placeholder": ""
+          "label": "LNbits 管理員密鑰",
+          "placeholder": "你的 32 位數管理員密鑰"
         },
         "url": {
-          "label": ""
+          "label": "LNbits URL"
         },
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "連接失敗。你是否擁有正確的 URL 和管理員密鑰？"
         }
       },
       "eclair": {
-        "title": "",
+        "title": "Eclair",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "連接 <0>Eclair</0>",
+          "instructions": "你需要你的 Eclair URL 和密碼。"
         },
         "password": {
-          "label": ""
+          "label": "Eclair 密碼"
         },
         "url": {
-          "label": "",
-          "placeholder": ""
+          "label": "Eclair URL",
+          "placeholder": "http://localhost:8080"
         }
       },
       "citadel": {
-        "title": "",
+        "title": "Citadel",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "連接 <0>Citadel</0> 節點",
+          "instructions": "如果啟用了 2FA，這目前不可用。"
         },
         "password": {
-          "label": ""
+          "label": "Citadel 密碼"
         },
         "url": {
-          "label": "",
-          "placeholder": ""
+          "label": "Citadel URL",
+          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
-        "title": "",
+        "title": "Umbrel",
         "page": {
-          "title": "",
+          "title": "連接 <0>Umbrel</0> 節點",
           "instructions": ""
         },
         "rest_url": {
-          "label": "",
-          "placeholder": ""
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
         }
       },
       "mynode": {
-        "title": "",
+        "title": "myNode",
         "page": {
-          "title": "",
+          "title": "連接 <0>myNode</0>",
           "instructions": ""
         },
         "rest_url": {
-          "label": "",
-          "placeholder": ""
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
         }
       },
       "start9": {
-        "title": "",
+        "title": "Start9",
         "page": {
-          "title": "",
+          "title": "連接你的<0>Embassy</0>節點",
           "instructions": ""
         },
         "rest_url": {
-          "label": "",
-          "placeholder": ""
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
         }
       },
       "raspiblitz": {
-        "title": "",
+        "title": "RaspiBlitz",
         "page": {
-          "title": "",
+          "title": "連接你的 <0>RaspiBlitz</0> 節點",
           "instructions1": "",
           "instructions2": ""
         },
         "rest_api_host": {
-          "label": "",
-          "placeholder": ""
+          "label": "REST API 主機",
+          "placeholder": "your-node-onion-address:port"
         }
       },
       "bitcoin_beach": {
-        "title": "",
+        "title": "Bitcoin Beach Wallet",
         "page": {
-          "title": ""
+          "title": "連接<0>Bitcoin Beach Wallet</0>"
         }
       },
       "bitcoin_jungle": {
-        "title": "",
+        "title": "Bitcoin Jungle Wallet",
         "page": {
-          "title": ""
+          "title": "連接<0>Bitcoin Jungle Wallet</0>"
         }
       },
       "galoy": {
         "phone_number": {
-          "label": ""
+          "label": "輸入你的電話號碼"
         },
         "sms_code": {
-          "label": ""
+          "label": "輸入你的短信驗證碼"
         },
         "jwt": {
-          "label": "",
+          "label": "輸入你的 JWT 令牌",
           "info": ""
         },
         "actions": {
-          "login": "",
-          "request_sms_code": ""
+          "login": "登錄",
+          "request_sms_code": "索取短信驗證碼"
         },
         "errors": {
-          "failed_to_request_sms": "",
-          "failed_to_login_sms": "",
-          "setup_failed": "",
-          "missing_jwt": "",
-          "invalid_jwt": ""
+          "failed_to_request_sms": "索取短信驗證碼失敗",
+          "failed_to_login_sms": "短信驗證碼登錄失敗",
+          "setup_failed": "設置失敗",
+          "missing_jwt": "JWT不存在，無法登陸。",
+          "invalid_jwt": "傳遞了無效的JWT"
         }
       },
       "kollider": {
-        "title": "",
-        "description": "",
+        "title": "Kollider",
+        "description": "登錄你的 Kollider 帳戶",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "連接你的 Kollider 帳戶",
+          "description": "還沒有帳戶？立即<0>註冊</0>！"
         },
         "username": {
-          "label": ""
+          "label": "輸入你的 Kollider 用戶名"
         },
         "password": {
-          "label": ""
+          "label": "輸入你的 Kollider 密碼"
         },
         "currency": {
-          "label": ""
+          "label": "選擇你的貨幣帳戶"
         },
         "errors": {
           "connection_failed": ""

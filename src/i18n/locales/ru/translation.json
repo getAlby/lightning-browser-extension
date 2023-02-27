@@ -1,211 +1,211 @@
 {
   "translation": {
     "welcome": {
-      "title": "Witaj w Alby",
+      "title": "Добро пожаловать в Alby",
       "nav": {
-        "welcome": "Powitanie",
-        "password": "Twoje hasło",
-        "connect": "Twoje konto Lightning",
-        "done": "Koniec"
+        "welcome": "Добро пожаловать",
+        "password": "Ваш Пароль",
+        "connect": "Ваш Лайтнинг Аккаунт",
+        "done": "Готово"
       },
       "set_password": {
-        "title": "Ustaw hasło blokady",
-        "description": "To hasło zabezpiecza Twój portfel i umożliwia dostęp do rozszerzenia przeglądarki. Nie można go zresetować i jest odrębne od hasła do Twojego konta Alby.",
+        "title": "Установите пароль разблокировки",
+        "description": "Этот пароль нужен для защиты вашего кошелька, он предоставляет доступ к расширению браузера. Он не может быть восстановлен и не является паролем аккаунта Alby.",
         "choose_password": {
-          "label": "Wybierz hasło blokady:"
+          "label": ""
         },
         "confirm_password": {
-          "label": "Potwierdźmy, że wpisano poprawnie:"
+          "label": ""
         },
         "errors": {
-          "enter_password": "Proszę wprowadzić hasło.",
-          "confirm_password": "Proszę potwierdzić hasło.",
-          "mismatched_password": "Hasła się nie zgadzają."
+          "enter_password": "",
+          "confirm_password": "",
+          "mismatched_password": ""
         }
       },
       "test_connection": {
-        "ready": "Świetnie, wszystko gotowe!",
-        "initializing": "Tworzenie Twojego konta. Poczekaj proszę, to może zająć chwilę...",
-        "connection_error": "Błąd połączenia",
-        "review_connection_details": "Sprawdź proszę dane do połączenia.",
-        "connection_taking_long": "Próba połączenia trwa dłużej niż oczekiwano... Czy dane do połączenia są poprawne? Czy Twój węzeł jest osiągalny?",
-        "contact_support": "Jeśli potrzebujesz pomocy, skontaktuj się z support@getalby.com",
+        "ready": "",
+        "initializing": "",
+        "connection_error": "",
+        "review_connection_details": "",
+        "connection_taking_long": "",
+        "contact_support": "",
         "actions": {
-          "delete_edit_account": "Skasuj niepoprawne konto i wyedytuj ponownie"
+          "delete_edit_account": ""
         }
       }
     },
     "choose_path": {
-      "title": "Połącz",
-      "description": "Aby zacząć używać Alby aby płacić online, połącz swój portfel lightning z rozszerzeniem.",
+      "title": "",
+      "description": "",
       "alby": {
-        "title": "Alby",
-        "description": "Zarejestruj się lub użyj istniejącego konta Alby aby zacząć z płatnościami lightning w mgnieniu oka.",
-        "create_new": "Zarejestruj się"
+        "title": "",
+        "description": "",
+        "create_new": ""
       },
       "other": {
-        "title": "Inne portfele",
-        "description": "Połącz się z Twoim istniejącym portfelem lightning lub węzłem i wybierz dostępne integracje.",
-        "and_more": "i więcej...",
-        "connect": "Połącz"
+        "title": "",
+        "description": "",
+        "and_more": "",
+        "connect": ""
       }
     },
     "alby": {
       "pre_connect": {
         "set_password": {
           "choose_password": {
-            "label": "Hasło"
+            "label": ""
           },
           "confirm_password": {
-            "label": "Potwierdź hasło"
+            "label": ""
           },
           "errors": {
-            "enter_password": "Proszę wprowadzić hasło.",
-            "confirm_password": "Proszę potwierdzić hasło.",
-            "mismatched_password": "Hasła się nie zgadzają."
+            "enter_password": "",
+            "confirm_password": "",
+            "mismatched_password": ""
           }
         },
-        "forgot_password": "Zapomniałeś hasło?",
-        "title": "Twoje konto Alby",
-        "create_account": "Utwórz nowe konto Alby aby wysyłać i otrzymywać płatności w bitcoinie.",
-        "login_account": "Zaloguj się do istniejącego konta Alby.",
-        "host_wallet": "Prowadzimy portfel Lightning dla Ciebie!",
+        "forgot_password": "",
+        "title": "",
+        "create_account": "",
+        "login_account": "",
+        "host_wallet": "",
         "email": {
           "create": {
-            "label": "Adres email"
+            "label": ""
           },
           "login": {
-            "label": "Adres email lub adres Lightning"
+            "label": ""
           }
         },
         "optional_lightning_note": {
-          "part1": "Twoje konto Alby zawiera opcjonalny",
-          "part2": "adres lightning",
-          "part3": ". Jest to prosty sposób aby każdy mógł wysłać Ci bitcoiny w sieci lightning.",
-          "part4": "dowiedz się więcej"
+          "part1": "",
+          "part2": "",
+          "part3": "",
+          "part4": ""
         },
         "optional_lightning_address": {
-          "label": "Wybierz swój adres Lightning (opcjonalny)",
-          "suffix": "@getalby.com",
-          "title": "cyfry i litery, co najmniej 4 znaki"
+          "label": "",
+          "suffix": "",
+          "title": ""
         },
         "errors": {
-          "create_wallet_error": "Błąd podczas logowanie lub tworzenia nowego konta. Jeśli potrzebujesz pomocy, skontaktuj się z support@getalby.com",
-          "create_wallet_error1": "Błąd podczas logowanie lub tworzenia nowego konta.",
-          "create_wallet_error2": "Jeśli potrzebujesz pomocy, skontaktuj się z support@getalby.com"
+          "create_wallet_error": "",
+          "create_wallet_error1": "",
+          "create_wallet_error2": ""
         }
       }
     },
     "choose_connector": {
-      "title": "Podłącz portfel Lightning",
-      "description": "Podłącz swój zewnętrzny portfel lightning lub węzeł",
+      "title": "",
+      "description": "",
       "lnd": {
-        "title": "LND",
+        "title": "",
         "page": {
-          "title": "Podłącz się do swojego węzła LND",
-          "description": "Potrzebujesz adresu URL Twojego węzła i tzw. macaroon z uprawnieniami do odczytu i wysyłania (np. admin.macaroon)"
+          "title": "",
+          "description": ""
         },
         "url": {
-          "label": "Serwer i port RESTowego API",
-          "placeholder": "https://url-twojego-wezla:8080"
+          "label": "",
+          "placeholder": ""
         },
         "macaroon": {
-          "label": "Macaroon (format heksadecymalny)"
+          "label": ""
         },
-        "or": "LUB",
-        "drag_and_drop": "Przeciągnij i upuść Twój macaroon tutaj lub <0>znajdź plik</0>",
+        "or": "",
+        "drag_and_drop": "",
         "errors": {
-          "connection_failed": "Połączenie nie powiodło się. Czy Twoje dane uwierzytelniające są poprawne?"
+          "connection_failed": ""
         }
       },
       "lnc": {
-        "title": "LND z LNC",
+        "title": "",
         "page": {
-          "title": "Podłącz się do swojego węzła LND",
-          "description": "Stwórz nową sesję w terminalu (litd) aby uzyskać nową frazę parowania i wpisz ją tutaj"
+          "title": "",
+          "description": ""
         },
         "pairing_phrase": {
-          "label": "Twoja fraza parująca ",
-          "placeholder": "tajna fraza stosu satsów"
+          "label": "",
+          "placeholder": ""
         }
       },
       "lndhub_bluewallet": {
-        "title": "Bluewallet",
+        "title": "",
         "page": {
-          "title": "Podłącz do BlueWallet",
-          "description": "W BlueWallet wybierz portfel do którego chcesz się podłączyć, otwócz go, kliknij na \"...\", kliknij na Eksport/Kopia zapasowa, aby wyświetlić kod QR i zeskanuj go kamerką."
-        },
-        "uri": {
-          "label": "Adres URI eksportu z BlueWallet"
-        },
-        "errors": {
-          "invalid_uri": "Niepoprawny adres URI BlueWallet",
-          "connection_failed": "Połączenie się nie powiodło. Czy Twój adres URI BlueWallet jest poprawny?"
-        }
-      },
-      "lndhub_go": {
-        "title": "LNDHub",
-        "page": {
-          "title": "Podłącz się do LNDHub",
-          "description": "Wprowadź tutaj swój identyfikator URI LNDHub lub zeskanuj kod QR za pomocą kamery internetowej."
+          "title": "",
+          "description": ""
         },
         "uri": {
           "label": ""
         },
         "errors": {
-          "invalid_uri": "Niepoprawny LNDHub URI",
-          "connection_failed": "Połączenie nieudane. Czy URI LNDHub jest prawidłowy?"
+          "invalid_uri": "",
+          "connection_failed": ""
+        }
+      },
+      "lndhub_go": {
+        "title": "",
+        "page": {
+          "title": "",
+          "description": ""
+        },
+        "uri": {
+          "label": ""
+        },
+        "errors": {
+          "invalid_uri": "",
+          "connection_failed": ""
         }
       },
       "lnbits": {
-        "title": "LNbits",
+        "title": "",
         "page": {
-          "title": "Podłącz do <0>LNbits</0>",
-          "instructions": "W LNbits, wybierz portfel, do którego chcesz się podłączyć, otwórz go, kliknij na API Info i skopiuj klucz administratora. Wklej go poniżej:"
+          "title": "",
+          "instructions": ""
         },
         "admin_key": {
-          "label": "Klucz administratora LNbits",
-          "placeholder": "Twój 32-cyfrowy klucz administratora"
+          "label": "",
+          "placeholder": ""
         },
         "url": {
-          "label": "Adres URL LNbits"
+          "label": ""
         },
         "errors": {
-          "connection_failed": "Połączenie nieudane. Czy masz poprawny adres URL i klucz administratora?"
+          "connection_failed": ""
         }
       },
       "eclair": {
-        "title": "Eclair",
+        "title": "",
         "page": {
-          "title": "Podłącz do <0>Eclair</0>",
-          "instructions": "Potrzebujesz adresu URL i hasła Twojego Eclair."
+          "title": "",
+          "instructions": ""
         },
         "password": {
-          "label": "Hasło do Eclair"
+          "label": ""
         },
         "url": {
-          "label": "Adres URL do Eclair",
-          "placeholder": "http://localhost:8080"
+          "label": "",
+          "placeholder": ""
         }
       },
       "citadel": {
-        "title": "Citadel",
+        "title": "",
         "page": {
-          "title": "Podłącz do węzła <0>Citadel</0>",
-          "instructions": "Ta funkcja nie działa jeśli 2FA jest włączone."
+          "title": "",
+          "instructions": ""
         },
         "password": {
-          "label": "Hasło Citadel"
+          "label": ""
         },
         "url": {
-          "label": "Adres URL Citadel",
-          "placeholder": "http://citadel.local"
+          "label": "",
+          "placeholder": ""
         }
       },
       "umbrel": {
-        "title": "Umbrel",
+        "title": "",
         "page": {
-          "title": "Podłącz do węzła <0>Umbrel</0>",
+          "title": "",
           "instructions": ""
         },
         "rest_url": {
@@ -214,20 +214,20 @@
         }
       },
       "mynode": {
-        "title": "myNode",
+        "title": "",
         "page": {
-          "title": "Podłącz do <0>myNode</0>",
+          "title": "",
           "instructions": ""
         },
         "rest_url": {
           "label": "",
-          "placeholder": "lndconnect://twojwezel:8080?..."
+          "placeholder": ""
         }
       },
       "start9": {
-        "title": "Start9",
+        "title": "",
         "page": {
-          "title": "Podłącz do węzła <0>Embassy</0>",
+          "title": "",
           "instructions": ""
         },
         "rest_url": {
@@ -236,9 +236,9 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
+        "title": "",
         "page": {
-          "title": "Podłącz do węzła <0>RaspiBlitz</0>",
+          "title": "",
           "instructions1": "",
           "instructions2": ""
         },
@@ -250,62 +250,62 @@
       "bitcoin_beach": {
         "title": "",
         "page": {
-          "title": "Podłącz do <0>Bitcoin Beach Wallet</0>"
+          "title": ""
         }
       },
       "bitcoin_jungle": {
-        "title": "Portfel Bitcoin Jungle",
+        "title": "",
         "page": {
-          "title": "Podłącz do <0>Portfela Bitcoin Jungle</0>"
+          "title": ""
         }
       },
       "galoy": {
         "phone_number": {
-          "label": "Wprowadź numer telefonu"
+          "label": ""
         },
         "sms_code": {
-          "label": "Wprowadź pod weryfikujący SMS"
+          "label": ""
         },
         "jwt": {
-          "label": "Wprowadź swój token JWT",
+          "label": "",
           "info": ""
         },
         "actions": {
-          "login": "Zaloguj",
-          "request_sms_code": "Wyślij kod SMS"
+          "login": "",
+          "request_sms_code": ""
         },
         "errors": {
-          "failed_to_request_sms": "Nie udało się wysłać kodu SMS",
-          "failed_to_login_sms": "Logowanie z kodem SMS nie udało się",
-          "setup_failed": "Konfiguracja nie powiodła się",
-          "missing_jwt": "Brakuje tokenu JWT, logowanie nieudane.",
-          "invalid_jwt": "podano nieprawidłowy token JWT"
+          "failed_to_request_sms": "",
+          "failed_to_login_sms": "",
+          "setup_failed": "",
+          "missing_jwt": "",
+          "invalid_jwt": ""
         }
       },
       "kollider": {
-        "title": "Kollider",
-        "description": "Zaloguj się do swojego konta Kollider",
+        "title": "",
+        "description": "",
         "page": {
-          "title": "Podłącz do konta Kollider",
-          "description": "Nie masz jeszcze konta? <0>Zarejestruj się</0> teraz!"
+          "title": "",
+          "description": ""
         },
         "username": {
-          "label": "Wprowadź nazwę użytkownika Kollider"
+          "label": ""
         },
         "password": {
-          "label": "Wprowadź swoje hasło Kollider"
+          "label": ""
         },
         "currency": {
-          "label": "Wybierz walutę swojego konta"
+          "label": ""
         },
         "errors": {
-          "connection_failed": "Połączenie nieudane. Czy na pewno podane dane są poprawne?"
+          "connection_failed": ""
         }
       },
       "btcpay": {
-        "title": "BTCPay Server",
+        "title": "",
         "page": {
-          "title": "Podłącz do węzła LND na BTCPayServer",
+          "title": "",
           "instructions": ""
         },
         "config": {
@@ -332,83 +332,83 @@
           "label": ""
         },
         "port": {
-          "label": "Port"
+          "label": ""
         },
         "proxy": {
           "label": ""
         },
         "privKey": {
-          "label": "Lokalny klucz prywatny (generowany automatycznie)"
+          "label": ""
         },
         "config": {
-          "label": "Konfiguracja",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "",
+          "placeholder": ""
         },
         "errors": {
-          "connection_failed": "Połączenie nieudane. Czy Twój węzeł Core Lightning jest online i korzysta z wtyczki commando?"
+          "connection_failed": ""
         }
       }
     },
     "home": {
       "actions": {
-        "send_satoshis": "⚡️ Wyślij Satoshi ⚡️",
-        "enable_now": "Włącz teraz"
+        "send_satoshis": "",
+        "enable_now": ""
       },
-      "recent_transactions": "Ostatnie transakcje",
+      "recent_transactions": "",
       "transaction_list": {
         "tabs": {
-          "outgoing": "Wychodzące",
-          "incoming": "Przychodzące"
+          "outgoing": "",
+          "incoming": ""
         }
       },
       "allowance_view": {
-        "recent_transactions": "Ostatnie transakcje",
+        "recent_transactions": "",
         "allowance": "",
         "sats_used": "",
         "no_transactions": ""
       },
       "default_view": {
-        "recent_transactions": "Ostatnie transakcje",
+        "recent_transactions": "",
         "no_transactions": "",
-        "is_blocked_hint": "Alby jest obecnie wyłączone na {{host}}",
-        "block_removed": "Włączono {{host}}. Odśwież stronę."
+        "is_blocked_hint": "",
+        "block_removed": ""
       }
     },
     "accounts": {
-      "title": "Konta",
+      "title": "",
       "account_view": {
-        "title1": "Informacje o koncie",
-        "title2": "Edytuj konto",
+        "title1": "",
+        "title2": "",
         "name": {
-          "title": "Nazwa",
-          "placeholder": "Nazwa konta"
+          "title": "",
+          "placeholder": ""
         },
         "export": {
-          "title": "Eksport konta",
-          "screen_reader": "Eksportuj dane konta",
-          "waiting": "oczekiwanie na dane LndHub...",
-          "your_ln_address": "Twój adres Lightning:",
-          "tip_mobile": "Wskazówka: Użyj tego portfela na swoim urządzeniu mobilnym",
+          "title": "",
+          "screen_reader": "",
+          "waiting": "",
+          "your_ln_address": "",
+          "tip_mobile": "",
           "export_uri": "",
-          "scan_qr": "Zaimportuj ten portfel do Zeusa lub BlueWallet skanując kod QR."
+          "scan_qr": ""
         },
         "nostr": {
-          "title": "Nostr",
-          "hint": "jest prostym i otwartym protokołem mającym na celu stworzenie sieci społecznościowych opornych na cenzurę. Nostr działa przy użyciu kluczy kryptograficznych. Aby coś opublikować podpisujesz to swoim kluczem i wysyłasz do kilku przekaźników. Możesz użyć Alby aby zarządzać swoim kluczem Nostr. Następnie, różne aplikacje umożliwią Ci używanie klucze z rozszerzenia Alby.",
+          "title": "",
+          "hint": "",
           "private_key": {
-            "title": "Zarządzaj swoim kluczem",
-            "subtitle": "Wklej swój klucz prywatny lub wygeneruj nowy. Upewnij się, że zrobisz kopię zapasową klucza prywatnego zanim wygenerujesz nowy. <0>Dowiedz się więcej »</o>",
-            "warning": "To skasuje Twój stary klucz prywatny. Jesteś pewien?",
-            "success": "Klucz prywatny został zaszyfrowany i zapisany.",
-            "successfully_removed": "Klucz prywatny usunięty.",
-            "label": "Klucz prywatny"
+            "title": "",
+            "subtitle": "",
+            "warning": "",
+            "success": "",
+            "successfully_removed": "",
+            "label": ""
           },
           "public_key": {
-            "label": "Klucz publiczny"
+            "label": ""
           },
           "generate_keys": {
-            "title": "Wygeneruj nowy klucz Nostr",
-            "screen_reader": "Wygeneruj nowy klucz Nostr ze swojego konta",
+            "title": "",
+            "screen_reader": "",
             "hint": "",
             "actions": {
               "random_keys": "",
@@ -547,7 +547,7 @@
         "success": ""
       },
       "nostr": {
-        "title": "Nostr",
+        "title": "",
         "hint": "",
         "private_key": {
           "title": "",
