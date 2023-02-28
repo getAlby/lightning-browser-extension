@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import { classNames } from "~/app/utils";
 
+import { Range } from "./range";
+
 export type Props = {
   suffix?: string;
   endAdornment?: React.ReactNode;
@@ -84,9 +86,7 @@ export default function DualCurrencyField({
         </label>
         {(min || max) && (
           <span className="text-xs font-normal">
-            {min && max && "Between " + min + " and " + max + " sats"}
-            {min && !max && "> " + min + " sats"}
-            {max && !min && "< " + max + " sats"}
+            <Range min={min} max={max} /> sats
           </span>
         )}
       </div>

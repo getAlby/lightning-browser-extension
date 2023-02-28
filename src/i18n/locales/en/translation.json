@@ -783,6 +783,11 @@
     "errors": {
       "connection_failed": "Connection failed",
       "payment_failed": "Payment Failed"
+    },
+    "range": {
+      "between": "between {{min}} and {{max}}",
+      "lessThan": "< {{max}}",
+      "greaterThan": "> {{min}}"
     }
   },
   "components": {
