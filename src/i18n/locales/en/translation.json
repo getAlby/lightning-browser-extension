@@ -239,7 +239,7 @@
         "title": "RaspiBlitz",
         "page": {
           "title": "Connect to your <0>RaspiBlitz</0> node",
-          "instructions1": "<0>Connect to your RaspiBlitz node</0> <1/><1/>Follow these steps:<1/> 1. <0>SSH</0> into your <0>Raspiblitz</0><1/>2. Select <0>Connect Apps & Show Credentials</0> from the list<1/><0/>3. Choose <0>Connect Alby to this node</0><1/>4. Press <0>OK</0> to display the connection credentials<1/><1/>Copy and paste the <0>REST API host</0> or the <0>.onion</0> address to connect through Tor into the input below.",
+          "instructions1": "Follow these steps:<1/> 1. <0>SSH</0> into your <0>Raspiblitz</0><1/>2. Select <0>Connect Apps & Show Credentials</0> from the list<1/><0/>3. Choose <0>Connect Alby to this node</0><1/>4. Press <0>OK</0> to display the connection credentials<1/><1/>Copy and paste the <0>REST API host</0> or the <0>.onion</0> address to connect through Tor into the input below.",
           "instructions2": "Copy the (admin) <0>macaroon</0> into the input below."
         },
         "rest_api_host": {
