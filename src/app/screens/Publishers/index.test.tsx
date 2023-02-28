@@ -4,6 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import i18n from "~/../tests/unit/helpers/i18n";
 import { SettingsProvider } from "~/app/context/SettingsContext";
+import msg from "~/common/lib/msg";
 
 import { AccountsProvider } from "../../context/AccountsContext";
 import Publishers from "./index";
@@ -17,9 +18,11 @@ jest.mock("~/common/lib/api", () => {
   };
 });
 
-jest.mock("~/common/lib/msg", () => {
-  return {
-    request: jest.fn(() => ({
+jest.mock("~/common/lib/msg");
+
+describe("Publishers", () => {
+  test("renders active allowance", async () => {
+    (msg.request as jest.Mock).mockImplementation(() => ({
       allowances: [
         {
           host: "https://openai.com/dall-e-2/",
@@ -37,12 +40,8 @@ jest.mock("~/common/lib/msg", () => {
           lnurlAuth: true,
         },
       ],
-    })),
-  };
-});
+    }));
 
-describe("Publishers", () => {
-  test("renders active allowance", async () => {
     render(
       <SettingsProvider>
         <AccountsProvider>
@@ -55,7 +54,7 @@ describe("Publishers", () => {
       </SettingsProvider>
     );
 
-    expect(await screen.findByText("Your ⚡️ Websites")).toBeInTheDocument();
+    expect(await screen.findByText("Your ⚡ Websites")).toBeInTheDocument();
     expect(await screen.findByText("DALL·E 2")).toBeInTheDocument();
     expect(await screen.findByText("ACTIVE")).toBeInTheDocument();
     expect(await screen.findByText("LOGIN")).toBeInTheDocument();
@@ -63,5 +62,30 @@ describe("Publishers", () => {
       await screen.findByText("100 / 98,756 sats used")
     ).toBeInTheDocument();
     expect(await screen.findByText("3,000 sats")).toBeInTheDocument();
+  });
+
+  test("no publishers shows discover button", async () => {
+    (msg.request as jest.Mock).mockImplementation(() => ({
+      allowances: [],
+    }));
+    render(
+      <SettingsProvider>
+        <AccountsProvider>
+          <I18nextProvider i18n={i18n}>
+            <MemoryRouter>
+              <Publishers />
+            </MemoryRouter>
+          </I18nextProvider>
+        </AccountsProvider>
+      </SettingsProvider>
+    );
+
+    expect(await screen.findByText("Your ⚡ Websites")).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        "It looks like you haven't used Alby in any websites yet."
+      )
+    ).toBeInTheDocument();
+    expect(await screen.findByText("Discover Websites")).toBeInTheDocument();
   });
 });

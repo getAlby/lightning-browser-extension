@@ -38,6 +38,7 @@ const routes = {
   addAccount: accounts.add,
   editAccount: accounts.edit,
   getAccounts: accounts.all,
+  getAccount: accounts.get,
   removeAccount: accounts.remove,
   selectAccount: accounts.select,
   setPassword: setup.setPassword,
@@ -58,6 +59,7 @@ const routes = {
   nostr: {
     generatePrivateKey: nostr.generatePrivateKey,
     getPrivateKey: nostr.getPrivateKey,
+    removePrivateKey: nostr.removePrivateKey,
     setPrivateKey: nostr.setPrivateKey,
   },
 
@@ -77,6 +79,7 @@ const routes = {
       enable: allowances.enable,
       getPublicKeyOrPrompt: nostr.getPublicKeyOrPrompt,
       signEventOrPrompt: nostr.signEventOrPrompt,
+      signSchnorrOrPrompt: nostr.signSchnorrOrPrompt,
       getRelays: nostr.getRelays,
       encryptOrPrompt: nostr.encryptOrPrompt,
       decryptOrPrompt: nostr.decryptOrPrompt,

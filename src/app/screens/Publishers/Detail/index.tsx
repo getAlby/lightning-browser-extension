@@ -5,7 +5,7 @@ import PublisherCard from "@components/PublisherCard";
 import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -15,7 +15,7 @@ import type { Allowance, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
 
-function Publisher() {
+function PublisherDetail() {
   const { t } = useTranslation("translation", {
     keyPrefix: "publishers",
   });
@@ -75,7 +75,7 @@ function Publisher() {
     <div>
       <div className="border-b border-gray-200 dark:border-neutral-500">
         <PublisherCard
-          title={allowance?.host || ""}
+          title={allowance?.name || ""}
           image={allowance?.imageURL || ""}
           url={allowance?.host}
           isCard={false}
@@ -121,4 +121,4 @@ function Publisher() {
   );
 }
 
-export default Publisher;
+export default PublisherDetail;

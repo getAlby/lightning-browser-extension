@@ -1,12 +1,14 @@
 import {
+  AddressBookIcon,
   GearIcon,
+  GlobeIcon,
   LockIcon,
   MenuIcon,
+  QuestionIcon,
+  ReceiveIcon,
+  RocketIcon,
   SendIcon,
   TransactionsIcon,
-  ReceiveIcon,
-  QuestionIcon,
-  RocketIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -46,7 +48,15 @@ export default function UserMenu() {
       <Menu.Button className="flex items-center text-gray-700 dark:text-white hover:text-black dark:hover:text-white transition-colors duration-200">
         <MenuIcon className="h-6 w-6" />
       </Menu.Button>
-      <Menu.List position="right">
+      <Menu.List position="left">
+        <Menu.ItemButton
+          onClick={() => {
+            openOptions("discover");
+          }}
+        >
+          <GlobeIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          {tCommon("discover")}
+        </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
             openOptions("publishers");
@@ -71,6 +81,7 @@ export default function UserMenu() {
           <ReceiveIcon className="w-6 h-6 -ml-0.5 mr-2 text-gray-700 dark:text-neutral-300" />
           {tCommon("actions.receive")}
         </Menu.ItemButton>
+        <Menu.Divider />
         <Menu.ItemButton
           onClick={() => {
             openOptions("settings");
@@ -79,7 +90,14 @@ export default function UserMenu() {
           <GearIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
           {tCommon("settings")}
         </Menu.ItemButton>
-        <Menu.Divider />
+        <Menu.ItemButton
+          onClick={() => {
+            openOptions("accounts");
+          }}
+        >
+          <AddressBookIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          {tCommon("accounts")}
+        </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
             utils.openUrl("https://feedback.getalby.com");

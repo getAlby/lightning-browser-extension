@@ -1,3 +1,5 @@
+import { ACCOUNT_CURRENCIES } from "~/common/constants";
+
 export interface WebLNNode {
   alias: string;
   pubkey?: string;
@@ -43,6 +45,7 @@ export type GetInfoResponse = {
 export type GetBalanceResponse = {
   data: {
     balance: number;
+    currency?: ACCOUNT_CURRENCIES;
   };
 };
 

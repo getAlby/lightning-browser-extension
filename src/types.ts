@@ -1,5 +1,5 @@
 import { PaymentRequestObject } from "bolt11";
-import { CURRENCIES } from "~/common/constants";
+import { ACCOUNT_CURRENCIES, CURRENCIES, TIPS } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
 import {
   ConnectorInvoice,
@@ -16,6 +16,7 @@ export interface Account {
   connector: ConnectorType;
   config: string;
   name: string;
+  nostrPrivateKey?: string | null;
 }
 
 export interface Accounts {
@@ -28,10 +29,9 @@ export interface NodeInfo {
 export interface AccountInfo {
   alias: string;
   balance: number;
-  fiatBalance?: string;
   id: string;
   name: string;
-  satsBalance?: string;
+  currency: ACCOUNT_CURRENCIES;
 }
 
 export interface MetaData {
@@ -140,6 +140,7 @@ export type NavigationState = {
     customRecords?: Record<string, string>;
     message?: string;
     event?: Event;
+    sigHash?: string;
     description?: string;
     details?: string;
     requestPermission: {
@@ -165,6 +166,11 @@ export interface MessagePaymentAll extends MessageDefault {
   args?: {
     limit?: number;
   };
+}
+
+export interface MessageAccountGet extends MessageDefault {
+  args?: { id?: Account["id"] };
+  action: "getAccount";
 }
 
 export interface MessageAccountRemove extends MessageDefault {
@@ -373,11 +379,33 @@ export interface MessagePublicKeyGet extends MessageDefault {
   action: "getPublicKeyOrPrompt";
 }
 
+export interface MessagePrivateKeyGet extends MessageDefault {
+  args?: {
+    id?: Account["id"];
+  };
+  action: "getPrivateKey";
+}
+
+export interface MessagePrivateKeyGenerate extends MessageDefault {
+  args?: {
+    type?: "random";
+  };
+  action: "generatePrivateKey";
+}
+
 export interface MessagePrivateKeySet extends MessageDefault {
   args: {
+    id?: Account["id"];
     privateKey: string;
   };
   action: "setPrivateKey";
+}
+
+export interface MessagePrivateKeyRemove extends MessageDefault {
+  args: {
+    id?: Account["id"];
+  };
+  action: "removePrivateKey";
 }
 
 export interface MessageSignEvent extends MessageDefault {
@@ -385,6 +413,13 @@ export interface MessageSignEvent extends MessageDefault {
     event: Event;
   };
   action: "signEvent";
+}
+
+export interface MessageSignSchnorr extends MessageDefault {
+  args: {
+    sigHash: string;
+  };
+  action: "signSchnorr";
 }
 
 export interface MessageEncryptGet extends MessageDefault {
@@ -534,6 +569,7 @@ export interface Payment extends Omit<DbPayment, "id"> {
 
 export enum PermissionMethodNostr {
   NOSTR_SIGNMESSAGE = "nostr/signMessage",
+  NOSTR_SIGNSCHNORR = "nostr/signSchnorr",
   NOSTR_GETPUBLICKEY = "nostr/getPublicKey",
   NOSTR_NIP04DECRYPT = "nostr/nip04decrypt",
   NOSTR_NIP04ENCRYPT = "nostr/nip04encrypt",
@@ -628,6 +664,7 @@ export interface SettingsStorage {
   exchange: SupportedExchanges;
   debug: boolean;
   nostrEnabled: boolean;
+  closedTips: TIPS[];
 }
 
 export interface Badge {
@@ -682,3 +719,5 @@ export interface Invoice {
     value_msat_total: number;
   };
 }
+
+export type BrowserType = "chrome" | "firefox";

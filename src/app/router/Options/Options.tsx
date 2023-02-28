@@ -1,6 +1,7 @@
 import Container from "@components/Container";
 import Navbar from "@components/Navbar";
 import Accounts from "@screens/Accounts";
+import AccountDetail from "@screens/Accounts/Detail";
 import ConfirmPayment from "@screens/ConfirmPayment";
 import Keysend from "@screens/Keysend";
 import LNURLAuth from "@screens/LNURLAuth";
@@ -8,19 +9,22 @@ import LNURLChannel from "@screens/LNURLChannel";
 import LNURLPay from "@screens/LNURLPay";
 import LNURLWithdraw from "@screens/LNURLWithdraw";
 import TestConnection from "@screens/Options/TestConnection";
-import Publisher from "@screens/Publisher";
 import Publishers from "@screens/Publishers";
+import PublisherDetail from "@screens/Publishers/Detail";
 import Receive from "@screens/Receive";
 import Send from "@screens/Send";
 import Settings from "@screens/Settings";
 import Unlock from "@screens/Unlock";
-import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { useTranslation } from "react-i18next";
-import { HashRouter, Navigate, Outlet, Routes, Route } from "react-router-dom";
+import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
+import Discover from "~/app/screens/Discover";
+import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
+import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
+import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
 import i18n from "~/i18n/i18nConfig";
 
 function Options() {
@@ -39,8 +43,11 @@ function Options() {
             }
           >
             <Route index element={<Navigate to="/publishers" replace />} />
+            <Route path="discover">
+              <Route index element={<Discover />} />
+            </Route>
             <Route path="publishers">
-              <Route path=":id" element={<Publisher />} />
+              <Route path=":id" element={<PublisherDetail />} />
               <Route index element={<Publishers />} />
             </Route>
             <Route path="send" element={<Send />} />
@@ -53,10 +60,11 @@ function Options() {
             <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="settings" element={<Settings />} />
             <Route path="accounts">
+              <Route path=":id" element={<AccountDetail />} />
               <Route
                 path="new"
                 element={
-                  <Container>
+                  <Container maxWidth="xl">
                     <Outlet />
                   </Container>
                 }
@@ -64,20 +72,39 @@ function Options() {
                 <Route
                   index
                   element={
-                    <ChooseConnector
-                      title={i18n.t(
-                        "translation:choose_connector.title.options"
+                    <ChooseConnectorPath
+                      title={i18n.t("translation:choose_path.title")}
+                      description={i18n.t(
+                        "translation:choose_path.description"
                       )}
                     />
                   }
                 />
-                {connectorRoutes.map((connectorRoute) => (
+                <Route
+                  path="create"
+                  element={<AlbyWallet variant="create" />}
+                />
+                <Route path="login" element={<AlbyWallet variant="login" />} />
+                <Route path="choose-connector">
                   <Route
-                    key={connectorRoute.path}
-                    path={connectorRoute.path}
-                    element={connectorRoute.element}
+                    index
+                    element={
+                      <ChooseConnector
+                        title={i18n.t("translation:choose_connector.title")}
+                        description={i18n.t(
+                          "translation:choose_connector.description"
+                        )}
+                      />
+                    }
                   />
-                ))}
+                  {connectorRoutes.map((connectorRoute) => (
+                    <Route
+                      key={connectorRoute.path}
+                      path={connectorRoute.path}
+                      element={connectorRoute.element}
+                    />
+                  ))}
+                </Route>
               </Route>
               <Route index element={<Accounts />} />
             </Route>
@@ -111,10 +138,10 @@ const Layout = () => {
   return (
     <div>
       <Navbar>
+        <Navbar.Link href="/discover">{tCommon("discover")}</Navbar.Link>
         <Navbar.Link href="/publishers">{tCommon("websites")}</Navbar.Link>
         <Navbar.Link href="/send">{tCommon("actions.send")}</Navbar.Link>
         <Navbar.Link href="/receive">{tCommon("actions.receive")}</Navbar.Link>
-        <Navbar.Link href="/settings">{tCommon("settings")}</Navbar.Link>
       </Navbar>
       <ToastContainer
         autoClose={15000}

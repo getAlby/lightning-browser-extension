@@ -43,7 +43,7 @@ const permissionInDB = {
   allowanceId: allowanceInDB.id,
   createdAt: "1487076708000",
   host: allowanceInDB.host,
-  method: "webln/makeinvoice",
+  method: "webln/lnd/makeinvoice",
   blocked: false,
   enabled: true,
 };
@@ -59,6 +59,10 @@ const message: MessageGenericRequest = {
 
 const requestResponse = { data: [] };
 const fullConnector = {
+  // hacky fix because Jest doesn't return constructor name
+  constructor: {
+    name: "lnd",
+  },
   requestMethod: jest.fn(() => Promise.resolve(requestResponse)),
   supportedMethods: [
     // saved and compared in lowercase
@@ -197,7 +201,7 @@ describe("ln request", () => {
         args: {
           requestPermission: {
             method: message.args.method.toLowerCase(),
-            description: "object.makeinvoice", // jest doesn't give back the constructor's name?
+            description: "lnd.makeinvoice",
           },
         },
         origin: message.origin,
@@ -224,7 +228,7 @@ describe("ln request", () => {
         args: {
           requestPermission: {
             method: message.args.method.toLowerCase(),
-            description: "object.makeinvoice", // jest doesn't give back the constructor's name?
+            description: "lnd.makeinvoice",
           },
         },
         origin: message.origin,
@@ -256,7 +260,7 @@ describe("ln request", () => {
 
       expect(await db.permissions.toArray()).toHaveLength(1);
       expect(
-        await db.permissions.get({ method: "webln/getinfo" })
+        await db.permissions.get({ method: "webln/lnd/getinfo" })
       ).toBeUndefined();
 
       const result = await request(messageWithGetInfo);
@@ -271,11 +275,11 @@ describe("ln request", () => {
       expect(await db.permissions.toArray()).toHaveLength(2);
 
       const addedPermission = await db.permissions.get({
-        method: "webln/getinfo",
+        method: "webln/lnd/getinfo",
       });
       expect(addedPermission).toEqual(
         expect.objectContaining({
-          method: "webln/getinfo",
+          method: "webln/lnd/getinfo",
           enabled: true,
           allowanceId: allowanceInDB.id,
           host: allowanceInDB.host,
@@ -284,6 +288,40 @@ describe("ln request", () => {
       );
 
       expect(result).toStrictEqual(requestResponse);
+    });
+
+    test("doesn't call requestMethod if clicks cancel", async () => {
+      (utils.openPrompt as jest.Mock).mockImplementationOnce(() => {
+        throw new Error();
+      });
+      // prepare DB with a permission
+      await db.permissions.bulkAdd([permissionInDB]);
+
+      const messageWithOtherPermission = {
+        ...message,
+        args: {
+          ...message.args,
+          method: "sendPayment",
+        },
+      };
+
+      expect(await db.permissions.toArray()).toHaveLength(1);
+      expect(
+        await db.permissions.get({ method: "webln/lnd/sendpayment" })
+      ).toBeUndefined();
+
+      const result = await request(messageWithOtherPermission);
+
+      expect(utils.openPrompt).toHaveBeenCalledTimes(1);
+
+      expect(connector.requestMethod).not.toHaveBeenCalled();
+
+      expect(await db.permissions.toArray()).toHaveLength(1);
+      expect(
+        await db.permissions.get({ method: "webln/lnd/sendpayment" })
+      ).toBeUndefined();
+
+      expect(result).toHaveProperty("error");
     });
 
     test("does not save the permission if enabled 'false'", async () => {
@@ -303,7 +341,7 @@ describe("ln request", () => {
 
       expect(await db.permissions.toArray()).toHaveLength(1);
       expect(
-        await db.permissions.get({ method: "webln/sendpayment" })
+        await db.permissions.get({ method: "webln/lnd/sendpayment" })
       ).toBeUndefined();
 
       const result = await request(messageWithOtherPermission);
@@ -317,7 +355,7 @@ describe("ln request", () => {
 
       expect(await db.permissions.toArray()).toHaveLength(1);
       expect(
-        await db.permissions.get({ method: "webln/sendpayment" })
+        await db.permissions.get({ method: "webln/lnd/sendpayment" })
       ).toBeUndefined();
 
       expect(result).toStrictEqual(requestResponse);

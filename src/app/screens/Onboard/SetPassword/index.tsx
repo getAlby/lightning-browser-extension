@@ -23,7 +23,7 @@ export default function SetPassword() {
     event.preventDefault();
     try {
       await msg.request("setPassword", { password: formData.password });
-      navigate("/choose-connector");
+      navigate("/choose-path");
     } catch (e) {
       if (e instanceof Error) {
         console.error(e.message);
@@ -32,15 +32,28 @@ export default function SetPassword() {
     }
   }
 
+  const unlockScreenshot = (
+    <img
+      src="assets/images/unlock_screenshot.png"
+      alt="Unlock screen"
+      className="w-64"
+    />
+  );
+
   return (
     <form onSubmit={handleSubmit}>
-      <div className="relative mt-14 lg:flex space-x-8 bg-white dark:bg-surface-02dp py-12 px-10">
+      <div className="relative mt-14 lg:flex lg:space-x-8 bg-white dark:bg-surface-02dp pt-12 pb-4 lg:py-12 px-10">
         <div className="lg:w-1/2">
-          <h1 className="text-2xl font-bold dark:text-white">{t("title")}</h1>
+          <h1 className="text-2xl font-bold dark:text-white max-sm:text-center">
+            {t("title")}
+          </h1>
+          <div className="lg:hidden mt-4 w-full flex justify-center">
+            {unlockScreenshot}
+          </div>
           <p className="text-gray-500 my-6 dark:text-gray-400">
             {t("description")}
           </p>
-          <div className="w-4/5 mb-6">
+          <div className="lg:w-4/5 mb-6">
             <PasswordForm
               i18nKeyPrefix="welcome.set_password"
               formData={formData}
@@ -48,14 +61,8 @@ export default function SetPassword() {
             />
           </div>
         </div>
-        <div className="mt-16 lg:mt-0 lg:w-1/2">
-          <div className="lg:flex h-full justify-center items-center">
-            <img
-              src="assets/images/unlock_screenshot.png"
-              alt="Unlock screen"
-              className="w-64"
-            />
-          </div>
+        <div className="hidden lg:flex w-1/2 justify-center items-center self-center">
+          {unlockScreenshot}
         </div>
       </div>
       <div className="my-8 flex justify-center">
@@ -67,6 +74,7 @@ export default function SetPassword() {
             !formData.password ||
             formData.password !== formData.passwordConfirmation
           }
+          className="max-sm:w-full"
         />
       </div>
     </form>
