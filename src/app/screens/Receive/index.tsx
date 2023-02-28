@@ -100,7 +100,7 @@ function Receive() {
       });
   }
 
-  function receiveAnotherPayment() {
+  function setDefaults() {
     setFormData({
       amount: "0",
       description: "",
@@ -109,7 +109,6 @@ function Receive() {
     setPaid(false);
     setPollingForPayment(false);
     setInvoice(null);
-    navigate("/receive");
   }
 
   async function createInvoice() {
@@ -159,7 +158,10 @@ function Receive() {
               label={tCommon("actions.receive_again")}
               primary
               fullWidth
-              onClick={receiveAnotherPayment}
+              onClick={() => {
+                setDefaults();
+                navigate("/receive");
+              }}
             />
           </div>
         )}
@@ -223,7 +225,9 @@ function Receive() {
         title={t("title")}
         headerLeft={
           <IconButton
-            onClick={() => navigate("/")}
+            onClick={() => {
+              invoice ? setDefaults() : navigate(-1);
+            }}
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }

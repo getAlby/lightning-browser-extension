@@ -64,6 +64,8 @@ For most people who are new to the btc lightning network, starting a test versio
 │   ├── app                     # React UI App
 │   ├── extension               # Browser Extension
 │   ├── common                  # Helpers and utilities used by both the React App and the Browser Extension
+│   ├── fixtures                # Reusable sample data for tests
+│   ├── i18n                    # Translations for internationalization
 ├── static                  # Static Resources
 │   ├── assets                  # Images, logos, etc
 │   └── views                   # Static HTML files
