@@ -398,8 +398,9 @@
           "private_key": {
             "title": "Manage your key",
             "subtitle": "Paste your private key or generate a new one. Make sure you backup your private key before you generate a new one. <0>Learn more »</0>",
-            "warning": "This will delete your old private key. Are you sure?",
+            "warning": "Please enter the name of the account to confirm the deletion of the private key:",
             "success": "Private key encrypted & saved successfully.",
+            "failed_to_remove": "The entered account name didn't match, your old private has been restored.",
             "successfully_removed": "Private key removed successfully.",
             "label": "Private Key"
           },
