@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
 
-type RangeProps = {
+type RangeLabelProps = {
   min?: number | string | undefined;
   max?: number | string | undefined;
 };
-export function Range({ min, max }: RangeProps): React.ReactElement {
+export function RangeLabel({ min, max }: RangeLabelProps) {
   const { t } = useTranslation("common");
 
   if (min && max) {
@@ -13,7 +13,7 @@ export function Range({ min, max }: RangeProps): React.ReactElement {
     return <>{t("range.greaterThan", { min })}</>;
   } else if (max) {
     return <>{t("range.lessThan", { max })}</>;
+  } else {
+    return null;
   }
-
-  return <></>;
 }

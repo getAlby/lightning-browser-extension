@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { classNames } from "~/app/utils";
 
-import { Range } from "./range";
+import { RangeLabel } from "./rangeLabel";
 
 export type Props = {
   suffix?: string;
@@ -86,7 +86,7 @@ export default function DualCurrencyField({
         </label>
         {(min || max) && (
           <span className="text-xs font-normal">
-            <Range min={min} max={max} /> sats
+            <RangeLabel min={min} max={max} /> sats
           </span>
         )}
       </div>
