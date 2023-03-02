@@ -1,6 +1,7 @@
 import state from "~/extension/background-script/state";
+import { MessageSetPassword } from "~/types";
 
-const setPassword = async (message, sender) => {
+const setPassword = async (message: MessageSetPassword) => {
   // TODO: This action should be used to initially validate and define a password.
   // We might want to validate that no account was already configured with a different password
 

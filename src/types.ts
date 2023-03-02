@@ -140,6 +140,7 @@ export type NavigationState = {
     customRecords?: Record<string, string>;
     message?: string;
     event?: Event;
+    sigHash?: string;
     description?: string;
     details?: string;
     requestPermission: {
@@ -259,6 +260,10 @@ export interface MessageBlocklistGet extends MessageDefault {
   action: "getBlocklist";
 }
 
+export interface MessageBlocklistList extends MessageDefault {
+  action: "listBlocklist";
+}
+
 export interface MessageSetIcon extends MessageDefault {
   action: "setIcon";
   args: {
@@ -340,6 +345,37 @@ export interface MessageWebLnLnurl extends MessageDefault {
   action: "webln/lnurl";
 }
 
+export interface MessageGetInfo extends MessageDefault {
+  action: "getInfo";
+}
+
+export interface MessageMakeInvoice extends MessageDefault {
+  args: { memo?: string; defaultMemo?: string; amount?: string };
+  action: "makeInvoice";
+}
+
+export interface MessageReset extends MessageDefault {
+  action: "reset";
+}
+
+export interface MessageStatus extends MessageDefault {
+  action: "status";
+}
+
+export interface MessageSetPassword extends MessageDefault {
+  args: { password: string };
+  action: "setPassword";
+}
+
+export interface MessageAccountValidate extends MessageDefault {
+  args: {
+    connector: ConnectorType;
+    config: Record<string, string>;
+    name: string;
+  };
+  action: "validateAccount";
+}
+
 export interface MessageConnectPeer extends MessageDefault {
   args: { pubkey: string; host: string };
   action: "connectPeer";
@@ -400,11 +436,25 @@ export interface MessagePrivateKeySet extends MessageDefault {
   action: "setPrivateKey";
 }
 
+export interface MessagePrivateKeyRemove extends MessageDefault {
+  args: {
+    id?: Account["id"];
+  };
+  action: "removePrivateKey";
+}
+
 export interface MessageSignEvent extends MessageDefault {
   args: {
     event: Event;
   };
   action: "signEvent";
+}
+
+export interface MessageSignSchnorr extends MessageDefault {
+  args: {
+    sigHash: string;
+  };
+  action: "signSchnorr";
 }
 
 export interface MessageEncryptGet extends MessageDefault {
@@ -554,6 +604,7 @@ export interface Payment extends Omit<DbPayment, "id"> {
 
 export enum PermissionMethodNostr {
   NOSTR_SIGNMESSAGE = "nostr/signMessage",
+  NOSTR_SIGNSCHNORR = "nostr/signSchnorr",
   NOSTR_GETPUBLICKEY = "nostr/getPublicKey",
   NOSTR_NIP04DECRYPT = "nostr/nip04decrypt",
   NOSTR_NIP04ENCRYPT = "nostr/nip04encrypt",

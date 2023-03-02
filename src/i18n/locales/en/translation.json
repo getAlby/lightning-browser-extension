@@ -239,8 +239,8 @@
         "title": "RaspiBlitz",
         "page": {
           "title": "Connect to your <0>RaspiBlitz</0> node",
-          "instructions1": "You need your node onion address, port, and a macaroon with read and send permissions (e.g. admin.macaroon).<1/><1/><0>SSH</0> into your <0>RaspiBlitz</0>.<1/>Run the command <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Copy and paste the <0>.onion</0> address in the input below.<1/>Add your <0>port</0> after the onion address, the default port is <0>:8080</0>.",
-          "instructions2": "Select <0>CONNECT</0>.<1/>Select <0>EXPORT</0>.<1/>Select <0>HEX</0>.<1/>Copy the <0>adminMacaroon</0>.<1/>Paste the macaroon in the input below."
+          "instructions1": "Follow these steps:<1/> 1. <0>SSH</0> into your <0>Raspiblitz</0><1/>2. Select <0>Connect Apps & Show Credentials</0> from the list<1/><0/>3. Choose <0>Connect Alby to this node</0><1/>4. Press <0>OK</0> to display the connection credentials<1/><1/>Copy and paste the <0>REST API host</0> or the <0>.onion</0> address to connect through Tor into the input below.",
+          "instructions2": "Copy the (admin) <0>macaroon</0> into the input below."
         },
         "rest_api_host": {
           "label": "REST API host",
@@ -398,8 +398,9 @@
           "private_key": {
             "title": "Manage your key",
             "subtitle": "Paste your private key or generate a new one. Make sure you backup your private key before you generate a new one. <0>Learn more »</0>",
-            "warning": "This will delete your old private key. Are you sure?",
+            "warning": "Please enter the name of the account to confirm the deletion of the private key:",
             "success": "Private key encrypted & saved successfully.",
+            "failed_to_remove": "The entered account name didn't match, your old private has been restored.",
             "successfully_removed": "Private key removed successfully.",
             "label": "Private Key"
           },

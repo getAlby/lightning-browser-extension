@@ -1,6 +1,7 @@
-import state from "../../state";
+import state from "~/extension/background-script/state";
+import { MessageStatus } from "~/types";
 
-const status = async (message, sender) => {
+const status = async (message: MessageStatus) => {
   const unlocked = await state.getState().isUnlocked();
   const account = state.getState().getAccount();
   const currentAccountId = state.getState().currentAccountId;

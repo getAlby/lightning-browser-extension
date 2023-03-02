@@ -1,6 +1,6 @@
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
-import axios, { AxiosRequestConfig, Method } from "axios";
 import type { AxiosResponse } from "axios";
+import axios, { AxiosRequestConfig, Method } from "axios";
 import lightningPayReq from "bolt11";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
@@ -13,11 +13,11 @@ import state from "../state";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
+  ConnectorInvoice,
+  ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
-  ConnectorInvoice,
-  ConnectPeerResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -331,35 +331,42 @@ export default class LndHub implements Connector {
 
   async authorize() {
     const url = `${this.config.url}/auth?type=auth`;
-    const { data: authData } = await axios.post(
-      url,
-      {
-        login: this.config.login,
-        password: this.config.password,
-      },
-      {
-        headers: {
-          ...defaultHeaders,
-          "X-TS": Math.floor(Date.now() / 1000),
-          "X-VERIFY": this.generateHmacVerification(url),
+    try {
+      const { data: authData } = await axios.post(
+        url,
+        {
+          login: this.config.login,
+          password: this.config.password,
         },
-        adapter: fetchAdapter,
+        {
+          headers: {
+            ...defaultHeaders,
+            "X-TS": Math.floor(Date.now() / 1000),
+            "X-VERIFY": this.generateHmacVerification(url),
+          },
+          adapter: fetchAdapter,
+        }
+      );
+
+      if (authData.error || authData.errors) {
+        const error = authData.error || authData.errors;
+        const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
+
+        throw new Error(errMessage);
       }
-    );
 
-    if (authData.error || authData.errors) {
-      const error = authData.error || authData.errors;
-      const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
-
-      console.error(errMessage);
-      throw new Error("API error: " + errMessage);
-    } else {
       this.refresh_token = authData.refresh_token;
       this.access_token = authData.access_token;
       this.refresh_token_created = +new Date();
       this.access_token_created = +new Date();
 
       return authData;
+    } catch (e) {
+      throw new Error(
+        `API error (${this.config.url})${
+          e instanceof Error ? `: ${e.message}` : ""
+        }`
+      );
     }
   }
 

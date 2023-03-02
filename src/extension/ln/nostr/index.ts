@@ -28,6 +28,11 @@ export default class NostrProvider {
     return this.execute("signEventOrPrompt", { event });
   }
 
+  async signSchnorr(sigHash: string): Promise<Buffer> {
+    await this.enable();
+    return this.execute("signSchnorrOrPrompt", { sigHash });
+  }
+
   async getRelays(): Promise<string[]> {
     await this.enable();
     return this.execute<string[]>("getRelays");
