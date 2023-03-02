@@ -735,7 +735,7 @@
     },
     "transactions": {
       "title": "Transactions",
-      "description": "This page lists all transactions, independent of the selected account.",
+      "description": "Outgoing transactions across all of your accounts",
       "list_empty": "No transactions available yet."
     }
   },
