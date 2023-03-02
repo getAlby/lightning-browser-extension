@@ -1,6 +1,8 @@
+import type { MessageReset } from "~/types";
+
 import state from "../../state";
 
-const reset = async (message, sender) => {
+const reset = async (message: MessageReset) => {
   state.setState({
     accounts: {},
     account: null,

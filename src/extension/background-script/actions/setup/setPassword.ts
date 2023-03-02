@@ -1,6 +1,8 @@
+import { MessageSetPassword } from "~/types";
+
 import state from "../../state";
 
-const setPassword = (message, sender) => {
+const setPassword = (message: MessageSetPassword) => {
   // TODO: This action should be used to initially validate and define a password.
   // We might want to validate that no account was already configured with a different password
 
