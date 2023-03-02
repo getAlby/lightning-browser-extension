@@ -60,7 +60,7 @@
         "title": "Bluewallet",
         "page": {
           "title": "Připojit k BlueWallet",
-          "description": "V BlueWallet vyberte peněženku, kterou chcete připojit, otevřete ji, klikněte na ¨...¨, klikněte na Export/Záloha pro zobrazení QR kódu a tento kód naskenujte svou webkamerou."
+          "description": "V BlueWallet vyberte peněženku, kterou chcete připojit, otevřete ji, klikněte na ¨...¨, klikněte na Exportovat/Záloha pro zobrazení QR kódu a tento kód naskenujte svou webkamerou."
         },
         "uri": {
           "label": "BlueWallet Export URI"
@@ -119,7 +119,7 @@
         "title": "Citadel",
         "page": {
           "title": "Připojení k uzlu <0>Citadel</0>",
-          "instructions": "Aktuálně nefunguje, pokud je zapnutá dvoufaktorová autentizace (2FA)."
+          "instructions": "Aktuálně nefunguje v případě, že máte zapnutou dvoufaktorovou autentizaci (2FA)."
         },
         "password": {
           "label": "Heslo k Citadel"
@@ -133,7 +133,7 @@
         "title": "Umbrel",
         "page": {
           "title": "Připojení k uzlu <0>Umbrel</0>",
-          "instructions": "V dashboardu Umbrell běžte do <0>Připojit pěněženku (Connect Wallet)</0>. Vyberte <0>lndconnect REST</0> a zkopírujte <0>lndconnect URL</0>. (V závislosti na vašem nastavení můžete také využít lokálního připojení nebo připojení přes Tor.)"
+          "instructions": "V dashboardu Umbrell přejděte do <0>Připojit pěněženku (Connect Wallet)</0>. Vyberte volbu <0>lndconnect REST</0> a zkopírujte <0>lndconnect URL</0>. (V závislosti na vašem nastavení můžete využít buď lokálního spojení nebo připojení přes Tor.)"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -144,7 +144,7 @@
         "title": "myNode",
         "page": {
           "title": "Připojení k <0>myNode</0>",
-          "instructions": "Na vaší domovské stránce myNode klikněte na tlačítko <0>Pěněženka (Wallet)</0> vaší služby <0>lightning</0><1/>. Dále zvolte <0>Párovat peněženku (Pair Wallet)</0> pod záložkou <0>Stav (Status)</0>. S dotázáním vložte své heslo.<1/> Z rozbalovací nabídky vyberte volbu párování. V závislosti na vašem nastavení můžete zvolit buď spojení přes <0>lightning (REST + Local IP)</0> nebo <0>lightning (REST + Tor)</0>."
+          "instructions": "Na vaší domovské stránce myNode klikněte na tlačítko <0>Pěněženka (Wallet)</0> služby <0>lightning</0>.<1/> Dále zvolte <0>Párovat peněženku (Pair Wallet)</0> pod záložkou <0>Stav (Status)</0>. S dotázáním vložte vaše heslo.<1/> Z rozbalovací nabídky vyberte volbu párování. V závislosti na vašem nastavení můžete zvolit buď připojení přes <0>lightning (REST + Local IP)</0> nebo <0>lightning (REST + Tor)</0>."
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -155,7 +155,7 @@
         "title": "Start9",
         "page": {
           "title": "Připojení k vašemu uzlu <0>Embassy</0>",
-          "instructions": "<0>Poznámka:</0> Aktuálně podporujeme pouze LND, ale v budoucnu budeme přidávat podporu c-lightning!<1/>Ve dashboardu vašeho Embassy zvolte službu <0>lightning network Daemon</0>.<1/>Vyberte záložku <0>Vlastnosti (Properties)</0>.<1/>Následně zkopírujte <0>LND Connect REST URL.</0>"
+          "instructions": "<0>Pozn.:</0> Aktuálně podporujeme pouze LND, ale v budoucnu plánujeme přidávat podporu c-lightning!<1/>V dashboardu vašeho Embassy zvolte službu <0>lightning network daemon</0>.<1/>Vyberte záložku <0>Vlastnosti (Properties)</0>.<1/>Následně zkopírujte <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -167,7 +167,7 @@
         "page": {
           "title": "Připojení k vašemu uzlu <0>RaspiBlitz</0>",
           "instructions1": "Budete potřebovat onion adresu, port a macaroon s oprávněním pro čtení a odesílání (například admin.macaroon) vašeho uzlu.<1/><1/><0>Připojte se přes SSH</0> k vašemu <0>RaspiBlitz</0>.<1/>Zadejte příkaz <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Zkopírujte <0>.onion</0> adresu a vložte ji do pole níže.<1/>K onion adrese přidejte <0>port</0>, defaultní port je <0>:8080</0>.",
-          "instructions2": "Vyberte <0>PŘIPOJIT (CONNECT)</0>.<1/>Vyberte <0>EXPORT</0>.<1/>Vyberte hexadecimální format <0>HEX</0>.<1/>Zkopírujte <0>adminMacaroon</0>.<1/>Vložte ho do pole níže."
+          "instructions2": "Vyberte <0>PŘIPOJIT (CONNECT)</0>.<1/>Vyberte <0>EXPORTOVAT (EXPORT)</0>.<1/>Vyberte hexadecimální format <0>HEX</0>.<1/>Zkopírujte <0>adminMacaroon</0>.<1/>Vložte ho do pole níže."
         },
         "rest_api_host": {
           "label": "REST API host",
@@ -264,7 +264,7 @@
         },
         "pairing_phrase": {
           "label": "Vaše párovací fráze ",
-          "placeholder": "tajná sats fráze"
+          "placeholder": "tajná fráze"
         }
       },
       "kollider": {
@@ -275,7 +275,7 @@
         },
         "page": {
           "title": "Připojení k vašemu účtu Kollider",
-          "description": "Nemáte ještě účet? <0>Vytvořte</0> ho teď!"
+          "description": "Nemáte ještě účet? <0>Vytvořte</0> ho!"
         },
         "username": {
           "label": "Vložte vaše uživatelské jméno ke Kollider"
@@ -322,14 +322,14 @@
         "remove": {
           "confirm": "Jste si jisti, že chcete odstranit účet: {{name}}? \nTato operace nelze vzít zpět. Pokud jste tento účet používali k přihlašovaní k webovým stránkam, můžete k nim ztratit přístup.",
           "title": "Odstranit tento účet",
-          "subtitle": "Všechny propojené příspěvky budou smazány. Buďte si jisti."
+          "subtitle": "Všechny propojené příspěvky budou smazány. Buďte si jisti, že akci chcete opravdu provést."
         },
         "nostr": {
           "errors": {
             "failed_to_load": "Nepodařilo se načíst Nostr klíč. Zadali jste validní Nostr klíč?"
           },
           "generate_keys": {
-            "hint": "Můžete vygenerovat náhodný klíč nebo derivovat klíč ze svého účtu (použitím podepsané kanonické fráze). <0>Dozvědět se více »</0>",
+            "hint": "Můžete vygenerovat nový náhodně generovaný klíč nebo derivovat klíč ze svého účtu (s využitím podepsané kanonické fráze). <0>Dozvědět se více »</0>",
             "screen_reader": "Vygenerovat nový Nostr klíč pro váš účet",
             "actions": {
               "random_keys": "Vygenerovat náhodný klíč",
@@ -339,7 +339,7 @@
           },
           "private_key": {
             "title": "Správa vašeho klíče",
-            "subtitle": "Vložte svůj privátní klíč nebo si vygenerujte nový. Ujistěte se, že máte svůj privátní klíč zazálohovaný předtím, než vygenerujete nový. <0>Dozvědět se více »</0>",
+            "subtitle": "Vložte svůj privátní klíč nebo si vygenerujte nový. Předtím, než budete generovat nový klíč, ujistěte se, že máte svůj klíč zazalohovaný. <0>Dozvědět se více »</0>",
             "warning": "Tato akce odstraní váš starý privátní klíč. Jste si jisti?",
             "success": "Privátní klíč byl úspěšně zašifrován a uložen.",
             "successfully_removed": "Privátní klíč byl odstraněn.",
@@ -348,7 +348,7 @@
           "actions": {
             "generate": "Vygenerovat nový klíč"
           },
-          "hint": "je jednoduchý otevřený protokol, jehož snahou je vytvořit necenzurovatelné sociální sítě. Nostr pracuje s kryptografickými klíči. Pro publikování jakékoliv zpravy přes tento protokol, je vždy nutné zprávu podepsat svým klíčem a odeslat ji několika relé. Můžete použít Alby ke správě svého Nostr klíče. Většina Nostr aplikací vám pak umožní jednoduché použití klíče přímo z doplňku Alby.",
+          "hint": "je jednoduchý otevřený protokol, jehož snahou je vytvořit necenzurovatelné sociální sítě. Nostr pracuje s kryptografickými klíči. Pro publikování jakékoliv zpravy přes tento protokol, je vždy nutné zprávu podepsat svým klíčem a odeslat ji několika tzv. relé. Alby můžete použít ke správě svého Nostr klíče. Většina Nostr aplikací vám pak umožní jednoduché použití klíče přímo z doplňku Alby.",
           "title": "Nostr",
           "public_key": {
             "label": "Veřejný klíč"
@@ -559,7 +559,7 @@
       },
       "description": {
         "label": "Popisek",
-        "placeholder": "Např. kdo odesílá tuto platbu?"
+        "placeholder": "Např. kdo tuto platbu odesílá?"
       },
       "success": "Platba přijata!",
       "payment": {
@@ -577,7 +577,7 @@
       "title": "Vaše ⚡ webové stránky",
       "description": "Webové stránky, na kterých jste v minulosti použili Alby",
       "no_info": "Vypadá to, že jste Alby ještě na žádné webové stránce nepoužili.",
-      "discover": "Objevit webové stránky"
+      "discover": "Prozkoumat webové stránky"
     },
     "make_invoice": {
       "title": "Vytvořit fakturu",
@@ -696,7 +696,7 @@
     },
     "discover": {
       "title": "Prozkoumejte ekosystém Lightningu ⚡️",
-      "description": "Webové stránky a aplikace, kde je možné používat Alby",
+      "description": "Webové stránky a aplikace, kde je možné Alby používat",
       "list": {
         "trading": "Obchodování",
         "gaming": "Hraní her",
@@ -716,7 +716,7 @@
         "description": "Pár tipů než začnete",
         "top_up_wallet": {
           "title": "⚡️ Dobít peněženku",
-          "description": "Vytvořte lightning fakturu, pošlete si nějaké bitcoiny a začněte používat Alby v ekosystému lightning",
+          "description": "Vytvořte lightning fakturu, pošlete si bitcoiny a začněte používat Alby v ekosystému lightning",
           "label1": "Přijmout Bitcoin",
           "label2": "Koupit Bitcoin"
         },
@@ -783,7 +783,7 @@
     },
     "confirm_password": "Potvrďte heslo",
     "accounts": "Účty",
-    "discover": "Objevit"
+    "discover": "Objevovat"
   },
   "components": {
     "allowance_menu": {
@@ -809,7 +809,7 @@
         "stop_scanning": "Zastavit skenování"
       },
       "errors": {
-        "allow_camera_access": "Prosím povolte přístup kamery na obrazovce nastavení."
+        "allow_camera_access": "Prosím povolte přístup kamery ve svém nastavení."
       }
     },
     "transactionsTable": {
@@ -845,7 +845,7 @@
     },
     "toasts": {
       "connection_error": {
-        "what_you_can_do": "Zde je, co můžete dělat:",
+        "what_you_can_do": "Co můžete dělat:",
         "double_check": "Znovu překontrolujte detaily spojení",
         "if_ssl_errors": "a pokud vidíte SSL chyby (například ERR_CERT_AUTHORITY_INVALID), klikněte na \"pokročilé\" a pokračujte přijetím certifikátu.",
         "visit_guides": "Navštivte naše návody pro další pomoc"
