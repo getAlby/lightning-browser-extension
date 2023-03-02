@@ -2,19 +2,20 @@ import Base64 from "crypto-js/enc-base64";
 import UTF8 from "crypto-js/enc-utf8";
 
 import Connector, {
-  SendPaymentArgs,
-  SendPaymentResponse,
   CheckPaymentArgs,
   CheckPaymentResponse,
+  ConnectorInvoice,
   ConnectPeerResponse,
+  GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
-  GetBalanceResponse,
+  KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  SendPaymentArgs,
+  SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
-  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -38,7 +39,14 @@ class Eclair implements Connector {
   }
 
   get supportedMethods() {
-    return ["getInfo", "keysend", "makeInvoice", "sendPayment", "signMessage"];
+    return [
+      "getInfo",
+      "keysend",
+      "makeInvoice",
+      "sendPayment",
+      "signMessage",
+      "listInvoices",
+    ];
   }
 
   getInfo(): Promise<GetInfoResponse> {
@@ -61,14 +69,32 @@ class Eclair implements Connector {
     throw new Error("Not yet supported with the currently used account.");
   }
 
-  // not yet implemented
   async getInvoices(): Promise<GetInvoicesResponse> {
-    console.error(
-      `Not yet supported with the currently used account: ${this.constructor.name}`
-    );
-    throw new Error(
-      `${this.constructor.name}: "getInvoices" is not yet supported. Contact us if you need it.`
-    );
+    const response = await this.request("/listinvoices");
+    const invoices: ConnectorInvoice[] = response
+      .map(
+        (invoice: {
+          paymentHash: string;
+          description: string;
+          timestamp: number;
+          amount: number;
+        }) => ({
+          id: invoice.paymentHash,
+          memo: invoice.description,
+          settled: true,
+          settleDate: invoice.timestamp * 1000,
+          totalAmount: invoice.amount / 1000,
+          type: "received",
+        })
+      )
+      .sort((a: ConnectorInvoice, b: ConnectorInvoice) => {
+        return b.settleDate - a.settleDate;
+      });
+    return {
+      data: {
+        invoices: invoices,
+      },
+    };
   }
 
   async getBalance(): Promise<GetBalanceResponse> {
