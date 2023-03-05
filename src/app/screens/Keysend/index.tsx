@@ -119,7 +119,7 @@ function Keysend() {
                   <DualCurrencyField
                     id="amount"
                     label={t("amount.label")}
-                    min={0}
+                    min={1}
                     onChange={(e) => setAmountSat(e.target.value)}
                     value={amountSat}
                     fiatValue={fiatAmount}
