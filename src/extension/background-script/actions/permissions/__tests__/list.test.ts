@@ -1,6 +1,6 @@
 import db from "~/extension/background-script/db";
 import { permissionsFixture } from "~/fixtures/permissions";
-import type { DbPermission, Permission, MessagePermissionsList } from "~/types";
+import type { DbPermission, MessagePermissionsList, Permission } from "~/types";
 
 import listByAllowance from "../list";
 
@@ -40,6 +40,7 @@ describe("delete permissions by id", () => {
       },
       args: {
         id: 1,
+        accountId: "123456",
       },
     };
 
