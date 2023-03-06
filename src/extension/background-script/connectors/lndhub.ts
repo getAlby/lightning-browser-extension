@@ -7,6 +7,7 @@ import hmacSHA256 from "crypto-js/hmac-sha256";
 import sha256 from "crypto-js/sha256";
 import utils from "~/common/lib/utils";
 import HashKeySigner from "~/common/utils/signer";
+import { Account } from "~/types";
 
 import state from "../state";
 import Connector, {
@@ -43,6 +44,7 @@ const defaultHeaders = {
 };
 
 export default class LndHub implements Connector {
+  account: Account;
   config: Config;
   access_token?: string;
   access_token_created?: number;
@@ -50,7 +52,8 @@ export default class LndHub implements Connector {
   refresh_token_created?: number;
   noRetry?: boolean;
 
-  constructor(config: Config) {
+  constructor(account: Account, config: Config) {
+    this.account = account;
     this.config = config;
   }
 

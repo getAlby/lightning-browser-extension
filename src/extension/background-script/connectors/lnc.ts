@@ -1,5 +1,4 @@
-import LNC from "@lightninglabs/lnc-web";
-import { CredentialStore } from "@lightninglabs/lnc-web";
+import LNC, { CredentialStore } from "@lightninglabs/lnc-web";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
@@ -8,23 +7,24 @@ import SHA256 from "crypto-js/sha256";
 import snakeCase from "lodash.snakecase";
 import { encryptData } from "~/common/lib/crypto";
 import utils from "~/common/lib/utils";
+import { Account } from "~/types";
 
 import state from "../state";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  SendPaymentArgs,
-  SendPaymentResponse,
-  GetInfoResponse,
-  GetBalanceResponse,
-  GetInvoicesResponse,
-  ConnectPeerResponse,
   ConnectorInvoice,
+  ConnectPeerResponse,
+  GetBalanceResponse,
+  GetInfoResponse,
+  GetInvoicesResponse,
+  KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  SendPaymentArgs,
+  SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
-  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -82,9 +82,11 @@ const snakeCaseObjectDeep = (value: FixMe): FixMe => {
 };
 
 class LncCredentialStore implements CredentialStore {
+  account: Account;
   config: Config;
 
-  constructor(config: Config) {
+  constructor(account: Account, config: Config) {
+    this.account = account;
     this.config = config;
   }
 
@@ -136,7 +138,7 @@ class LncCredentialStore implements CredentialStore {
   private async _save() {
     const accounts = state.getState().accounts;
     const password = state.getState().password as string;
-    const currentAccountId = state.getState().currentAccountId as string;
+    const currentAccountId = this.account.id;
     accounts[currentAccountId].config = encryptData(this.config, password);
     state.setState({ accounts });
     await state.getState().saveToStorage();
@@ -145,13 +147,15 @@ class LncCredentialStore implements CredentialStore {
 }
 
 class Lnc implements Connector {
+  account: Account;
   config: Config;
   lnc: FixMe;
 
-  constructor(config: Config) {
+  constructor(account: Account, config: Config) {
+    this.account = account;
     this.config = config;
     this.lnc = new LNC({
-      credentialStore: new LncCredentialStore(config),
+      credentialStore: new LncCredentialStore(account, config),
     });
   }
 

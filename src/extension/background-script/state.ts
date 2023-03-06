@@ -81,7 +81,7 @@ const state = createState<State>((set, get) => ({
     const password = get().password as string;
     const config = decryptData(account.config as string, password);
 
-    const connector = new connectors[account.connector](config);
+    const connector = new connectors[account.connector](account, config);
     await connector.init();
 
     set({ connector: connector });
