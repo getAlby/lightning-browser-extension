@@ -420,6 +420,8 @@ function LNURLPay() {
                               fiatValue={fiatValue}
                             />
                             <SatButtons
+                              min={Math.floor(+details.minSendable / 1000)}
+                              max={Math.floor(+details.maxSendable / 1000)}
                               onClick={setValueSat}
                               disabled={loadingConfirm}
                             />
