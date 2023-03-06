@@ -662,7 +662,6 @@ export interface SettingsStorage {
   showFiat: boolean;
   currency: CURRENCIES;
   exchange: SupportedExchanges;
-  debug: boolean;
   nostrEnabled: boolean;
   closedTips: TIPS[];
 }
