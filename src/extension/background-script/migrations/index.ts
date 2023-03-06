@@ -26,35 +26,6 @@ const setMigrated = (name: Migration): Promise<void> => {
 };
 
 const migrations = {
-  migrateisUsingGlobalNostrKey: async () => {
-    const { nostrPrivateKey, accounts } = state.getState();
-
-    if (nostrPrivateKey) {
-      Object.values(accounts).map((account) => {
-        if (!account.nostrPrivateKey) account.nostrPrivateKey = nostrPrivateKey;
-      });
-
-      state.setState({
-        accounts,
-      });
-      // will be persisted by setMigrated
-    }
-  },
-
-  ensureAccountId: async () => {
-    const { accounts } = state.getState();
-    Object.keys(accounts).forEach((accountId) => {
-      if (!accounts[accountId].id) {
-        console.info(`updating ${accountId}`);
-        accounts[accountId].id = accountId;
-      }
-    });
-    state.setState({
-      accounts,
-    });
-    // will be persisted by setMigrated
-  },
-
   migratePermissionsWithoutAccountId: async () => {
     const { accounts } = state.getState();
     const accountId = Object.keys(accounts)[0];
@@ -70,16 +41,6 @@ const migrations = {
 const migrate = async () => {
   // going forward we can iterate through the the migrations object above and DRY this up:
   // Object.keys(migrations).forEach((name: string) => {
-  if (shouldMigrate("migrateisUsingGlobalNostrKey")) {
-    console.info("Running migration for: migrateisUsingGlobalNostrKey");
-    await migrations["migrateisUsingGlobalNostrKey"]();
-    await setMigrated("migrateisUsingGlobalNostrKey");
-  }
-  if (shouldMigrate("ensureAccountId")) {
-    console.info("Running migration for: ensureAccountId");
-    await migrations["ensureAccountId"]();
-    await setMigrated("ensureAccountId");
-  }
   if (shouldMigrate("migratePermissionsWithoutAccountId")) {
     console.info("Running migration for: migratePermissionsWithoutAccountId");
     await migrations["migratePermissionsWithoutAccountId"]();
