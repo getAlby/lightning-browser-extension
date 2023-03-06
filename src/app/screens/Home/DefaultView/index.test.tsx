@@ -37,8 +37,8 @@ jest.mock("~/app/context/SettingsContext", () => ({
   }),
 }));
 
-describe("Accounts", () => {
-  test("render currentUrl is null ", async () => {
+describe("DefaultView", () => {
+  test("render DefaultView currentUrl is null ", async () => {
     render(
       <AccountsProvider>
         <I18nextProvider i18n={i18n}>
@@ -52,7 +52,7 @@ describe("Accounts", () => {
     expect(await screen.findByText("Send")).toBeInTheDocument();
     expect(await screen.findByText("Receive")).toBeInTheDocument();
   });
-  test("render have Battery ", async () => {
+  test("render DefaultView have Battery ", async () => {
     const battery = BatteryFixture[0];
     render(
       <AccountsProvider>
