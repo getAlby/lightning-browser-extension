@@ -48,7 +48,7 @@ export default async function sendPayment(
     };
   }
 
-  pubsub.publishPaymentNotification(message, {
+  pubsub.publishPaymentNotification("sendPayment", message, {
     accountId,
     paymentRequestDetails,
     response,
