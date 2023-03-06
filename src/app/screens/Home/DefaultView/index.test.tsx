@@ -3,6 +3,7 @@ import { I18nextProvider } from "react-i18next";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import i18n from "~/../tests/unit/helpers/i18n";
+import { BatteryFixture } from "~/fixtures/battery";
 
 import { AccountsProvider } from "../../../context/AccountsContext";
 import DefaultView from "./index";
@@ -37,7 +38,7 @@ jest.mock("~/app/context/SettingsContext", () => ({
 }));
 
 describe("Accounts", () => {
-  test("render", async () => {
+  test("render currentUrl is null ", async () => {
     render(
       <AccountsProvider>
         <I18nextProvider i18n={i18n}>
@@ -50,5 +51,26 @@ describe("Accounts", () => {
     expect(await screen.findByText("Recent Transactions")).toBeInTheDocument();
     expect(await screen.findByText("Send")).toBeInTheDocument();
     expect(await screen.findByText("Receive")).toBeInTheDocument();
+  });
+  test("render have Battery ", async () => {
+    const battery = BatteryFixture[0];
+    render(
+      <AccountsProvider>
+        <I18nextProvider i18n={i18n}>
+          <MemoryRouter>
+            <DefaultView
+              currentUrl={new URL("https://github.com/im-adithya")}
+              lnDataFromCurrentTab={[battery]}
+            />
+          </MemoryRouter>
+        </I18nextProvider>
+      </AccountsProvider>
+    );
+
+    expect(
+      await screen.findByText("⚡️ Send Satoshis ⚡️")
+    ).toBeInTheDocument();
+    expect(await screen.findByText(battery.name)).toBeInTheDocument();
+    expect(await screen.findByText(battery.description)).toBeInTheDocument();
   });
 });
