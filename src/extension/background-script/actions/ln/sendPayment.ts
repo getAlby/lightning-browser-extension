@@ -2,7 +2,7 @@ import lightningPayReq from "bolt11";
 import PubSub from "pubsub-js";
 import pubsub from "~/common/lib/pubsub";
 import state from "~/extension/background-script/state";
-import { MessageSendPayment, Message } from "~/types";
+import { Message, MessageSendPayment } from "~/types";
 
 export default async function sendPayment(
   message: MessageSendPayment | Message // 'keysend' & 'sendPaymentOrPrompt' still need the Message type
@@ -41,7 +41,7 @@ export default async function sendPayment(
     };
   }
 
-  pubsub.publishPaymentNotification(message, {
+  pubsub.publishPaymentNotification("sendPayment", message, {
     paymentRequestDetails,
     response,
     details: {

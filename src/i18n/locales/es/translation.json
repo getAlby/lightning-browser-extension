@@ -127,7 +127,7 @@
         "title": "Cuenta Start9",
         "page": {
           "title": "Conecta tu nodo <0>Embassy</0>",
-          "instructions": "<0>Nota:</0> ¡Actualmente solo admitimos LND pero en el futuro añadiremos c-lightning!<1/>En tu control de mandos Embassy pulsa el servicio <0>red lightning Daemon</0>.<1/>Selecciona la pestaña <0>Propiedades</0>.<1/>Ahora copia el <0>URL REST LND Conecta</0>."
+          "instructions": "<0>Nota:</0> Actualmente solo admitimos LND, ¡pero agregaremos compatibilidad con c-lightning en el futuro!<1/>En su panel de Embassy, haga clic en el servicio <0>Lightning Network Daemon</0>. <1/>Seleccione la pestaña <0>Propiedades</0>.<1/>Ahora copie la <0>URL REST de LND Connect.</0>"
         },
         "rest_url": {
           "label": "URL REST conectalnd",
@@ -138,8 +138,8 @@
         "title": "Cuenta RaspiBlitz",
         "page": {
           "title": "Conecta tu nodo <0>RaspiBlitz</0>",
-          "instructions2": "Selecciona <0>CONECTAR</0>.<1/>Selecciona <0>EXPORTAR</0>.<1/>Selecciona <0>HEX</0>.<1/>Copia el <0>adminMacaroon</ 0>.<1/>Pega el macarrón en la entrada de abajo.",
-          "instructions1": "Necesita la dirección onion de su nodo, el puerto y un macarrón con permisos de lectura y envío (por ejemplo, admin.macaroon).<1/><1/><0>SSH</0> en su <0>RaspiBlitz</0> .<1/>Ejecute el comando <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Copie y pegue la dirección <0>.onion</0> en la entrada a continuación .<1/>Agregue su <0>puerto</0> después de la dirección onion, el puerto predeterminado es <0>:8080</0>."
+          "instructions2": "Copie el (admin) <0>macaroon</0> en la entrada de abajo.",
+          "instructions1": "Siga estos pasos:<1/> 1. <0>SSH</0> en su <0>Raspiblitz</0><1/>2. Seleccione <0>Conectar aplicaciones y mostrar credenciales</0> de la lista<1/><0/>3. Elija <0>Conectar Alby a este nodo</0><1/>4. Pulsa <0>Aceptar</0> para mostrar las credenciales de conexión<1/><1/>Copia y pega el <0>host API REST</0> o la dirección <0>.onion</0> para conectarte a través de Tor en la entrada de abajo."
         },
         "rest_api_host": {
           "label": "Host de la API REST",
@@ -176,7 +176,7 @@
         "title": "Bluewallet",
         "page": {
           "title": "Conecta a BlueWallet",
-          "description": "En BlueWallet, elige la billetera que quieres conectar, ábrela, pulsa \"...\", pulsa Exportar/Recuperar para mostrar el código QR y escanearlo con su cámara web."
+          "description": "En BlueWallet, elija el monedero que desea conectar, ábralo, haga clic en \"...\", haga clic en Exportar/Copia de seguridad para mostrar el código QR y escanéelo con su cámara web."
         },
         "uri": {
           "label": "URI de Exportación BlueWallet"
@@ -329,7 +329,8 @@
             "label": "Clave Privada",
             "title": "Administra tu clave",
             "subtitle": "Pegue su clave privada o genere una nueva. Asegúrese de hacer una copia de seguridad de su clave privada antes de generar una nueva. <0>Más información »</0>",
-            "warning": "Esto eliminará su antigua clave privada. ¿Desea continuar?"
+            "warning": "Introduzca el nombre de la cuenta para confirmar la eliminación de la clave privada:",
+            "failed_to_remove": "El nombre de cuenta introducido no coincide, tu antiguo privado ha sido restaurado."
           },
           "public_key": {
             "label": "Clave Pública"
@@ -390,7 +391,7 @@
         "part2": "Soporte de Alby"
       },
       "unlock_error": {
-        "help": "Los datos de su cuenta están encriptados con su contraseña de desbloqueo. Si realmente olvidó su contraseña de desbloqueo, debe restablecer y agregar su cuenta Lightning nuevamente.",
+        "help": "Los datos de tu cuenta están encriptados con tu contraseña de desbloqueo. Si realmente olvidaste tu contraseña de desbloqueo, tienes que restablecer y añadir tu cuenta relámpago de nuevo.",
         "link": "Restablecer ahora y agregar una nueva cuenta"
       },
       "unlock_password": "Tu contraseña de desbloqueo",
@@ -406,7 +407,7 @@
       },
       "lnurl_auth": {
         "title": "Autenticación-LNURL",
-        "hint": "es un protocolo de autenticación genérico. Autentica al usuario mediante firmas digitales. El protocolo no requiere ninguna otra información de identificación, como contraseñas, correos electrónicos, nombres de usuario o similares. Con Alby, puede usar sus cuentas lightning para iniciar sesión de forma segura en sitios web.  Para ser compatibles con otras billeteras, tuvimos que hacer algunos cambios que puedes configurar aquí. <0>Idealmente, todas esas opciones están desactivadas.</0> Úsalos solo si tienes cuentas antiguas.",
+        "hint": "es un protocolo genérico de autenticación. Autentica al usuario utilizando firmas digitales. El protocolo no requiere ninguna otra información de identificación como contraseñas, correos electrónicos, nombres de usuario o similares. Con Alby puedes utilizar tus cuentas relámpago para iniciar sesión en sitios web de forma segura. Para ser compatible con otros monederos hemos tenido que hacer algunos cambios que puedes configurar aquí. <0>Idealmente todas esas opciones están en OFF.</0> Úsalas sólo si tienes cuentas antiguas.",
         "legacy_lnurl_auth_202207": {
           "title": "Autenticación-LNURL Legada",
           "subtitle": "La generación de claves para la autenticación-LNURL ha cambiado (en julio de 2022). Alby no era compatible con otras implementaciones. Esto se cambió, pero ahora se utilizan diferentes claves de inicio de sesión. Si usó autenticación-LNURL para iniciar sesión antes, aún puede habilitar el método anterior. Esta opción se eliminará más adelante, asegúrese de cambiar al nuevo inicio de sesión."

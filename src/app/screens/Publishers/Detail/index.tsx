@@ -15,7 +15,7 @@ import type { Allowance, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
 
-function Publisher() {
+function PublisherDetail() {
   const { t } = useTranslation("translation", {
     keyPrefix: "publishers",
   });
@@ -121,4 +121,4 @@ function Publisher() {
   );
 }
 
-export default Publisher;
+export default PublisherDetail;

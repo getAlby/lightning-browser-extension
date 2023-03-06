@@ -1,6 +1,8 @@
+import { MessageStatus } from "~/types";
+
 import state from "../../state";
 
-const status = (message, sender) => {
+const status = (message: MessageStatus) => {
   const unlocked = state.getState().password !== null;
   const account = state.getState().getAccount();
   const currentAccountId = state.getState().currentAccountId;

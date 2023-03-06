@@ -37,7 +37,7 @@ import type { Account } from "~/types";
 type AccountAction = Omit<Account, "connector" | "config" | "nostrPrivateKey">;
 dayjs.extend(relativeTime);
 
-function AccountScreen() {
+function AccountDetail() {
   const auth = useAccount();
   const { accounts, getAccounts } = useAccounts();
   const { t } = useTranslation("translation", {
@@ -143,7 +143,12 @@ function AccountScreen() {
 
     if (nostrPrivateKey === currentPrivateKey) return;
 
-    if (currentPrivateKey && !confirm(t("nostr.private_key.warning"))) {
+    if (
+      currentPrivateKey &&
+      prompt(t("nostr.private_key.warning"))?.toLowerCase() !==
+        account?.name?.toLowerCase()
+    ) {
+      toast.error(t("nostr.private_key.failed_to_remove"));
       return;
     }
 
@@ -153,20 +158,23 @@ function AccountScreen() {
         throw new Error("No account available");
       }
 
-      // Validate the private key before saving
-      nostrPrivateKey && generatePublicKey(nostrPrivateKey);
-      nostrPrivateKey && nostrlib.hexToNip19(nostrPrivateKey, "nsec");
-
-      await msg.request("nostr/setPrivateKey", {
-        id: account.id,
-        privateKey: nostrPrivateKey,
-      });
-
       if (nostrPrivateKey) {
+        // Validate the private key before saving
+        generatePublicKey(nostrPrivateKey);
+        nostrlib.hexToNip19(nostrPrivateKey, "nsec");
+
+        await msg.request("nostr/setPrivateKey", {
+          id: account.id,
+          privateKey: nostrPrivateKey,
+        });
         toast.success(t("nostr.private_key.success"));
       } else {
+        await msg.request("nostr/removePrivateKey", {
+          id: account.id,
+        });
         toast.success(t("nostr.private_key.successfully_removed"));
       }
+
       setCurrentPrivateKey(nostrPrivateKey);
     } catch (e) {
       if (e instanceof Error) toast.error(e.message);
@@ -465,7 +473,7 @@ function AccountScreen() {
                   type={nostrPrivateKeyVisible ? "text" : "password"}
                   value={nostrPrivateKey}
                   onChange={(event) => {
-                    setNostrPrivateKey(event.target.value);
+                    setNostrPrivateKey(event.target.value.trim());
                   }}
                   endAdornment={
                     <button
@@ -633,4 +641,4 @@ function AccountScreen() {
   );
 }
 
-export default AccountScreen;
+export default AccountDetail;

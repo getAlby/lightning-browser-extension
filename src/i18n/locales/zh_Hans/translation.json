@@ -5,7 +5,7 @@
         "welcome": "欢迎",
         "password": "你的密码",
         "done": "已完成",
-        "connect": "Your Lightning Account"
+        "connect": "你的闪电账户"
       },
       "set_password": {
         "title": "设置解锁密码",
@@ -143,7 +143,7 @@
         "title": "Core Lightning",
         "page": {
           "title": "连接你的Core Lightning节点",
-          "instructions": "确保你用的是Core Lightning 0.12.0或更新的版本，commando插件正在运行，并且你的节点可以通过闪电网络访问。通过运行'lightning-cli commando-rune'来创建符文。"
+          "instructions": "确保你用的是Core Lightning 0.12.0或更新的版本、commando插件正在运行，并且你的节点可以通过闪电网络访问。通过运行'lightning-cli commando-rune'来创建rune。"
         },
         "host": {
           "label": "主机"
@@ -334,13 +334,13 @@
               "derived_keys": "从帐户派生密钥"
             },
             "title": "生成新的 Nostr 密钥",
-            "hint": "你可以从这个账户的详细信息中生成一个随机密钥或派生密钥（使用一个签名的规范短语）。 <0>了解更多\"</0>。"
+            "hint": "你可以从这个账户的详细信息中生成一个随机密钥或派生密钥（使用一个签名的规范短语）。 <0>了解更多\"</0>"
           },
           "actions": {
             "generate": "生成新密钥"
           },
           "private_key": {
-            "subtitle": "粘贴你的私钥或生成一个新的。请确保在生成新的私钥之前备份你的私钥。 <0>了解更多\"</0>。",
+            "subtitle": "粘贴你的私钥或生成一个新的。请确保在生成新的私钥之前备份你的私钥。 <0>了解更多\"</0>",
             "title": "管理你的钥匙",
             "warning": "这将删除你的旧私钥。是否确定？",
             "success": "私钥已加密并成功保存。",
@@ -361,7 +361,8 @@
         },
         "remove": {
           "title": "删除此帐户",
-          "subtitle": "所有链接的配额都将被删除。请确定。"
+          "subtitle": "所有链接的配额都将被删除。请确定。",
+          "confirm": "是否确定要移除帐户：{{name}}？\n这是无法撤消的。如果你使用此帐户登录网站，则可能无法访问这些网站。"
         },
         "actions": {
           "remove_account": "删除帐户",
@@ -652,7 +653,8 @@
       "tips": {
         "address": {
           "title": "⚡️ 获取闪电地址",
-          "label1": "立即获取！"
+          "label1": "立即获取！",
+          "description": "创建你自己的闪电地址，并像电子邮件一样轻松接收闪电付款"
         },
         "pin": {
           "description3": "就这样！要访问 Alby，只需点击 Alby 图标",
@@ -768,7 +770,7 @@
     "description": "描述",
     "message": "消息",
     "sats_one": "sat",
-    "sats_other": "sats",
+    "sats_other": "聪",
     "success_message": "{{amount}}{{fiatAmount}}已发送至{{destination}}",
     "response": "答复",
     "help": "帮助",
@@ -886,7 +888,76 @@
       "decode": "解码一个bolt11/bolt12/rune字符串。",
       "connect": "与另一个节点建立新的连接。",
       "decodepay": "检查并解析 bolt11 字符串。",
-      "disconnect": "关闭与对等方的现有连接。"
+      "disconnect": "关闭与对等方的现有连接。",
+      "fundchannel": "通过投入资金交易与对等方打开支付渠道。",
+      "getroute": "寻找支付到闪电节点的最佳途径。",
+      "invoice": "创建付款的期望。",
+      "listforwards": "列出所有已尝试转发的 htlc。",
+      "listfunds": "列出所有可用资金。",
+      "listnodes": "列出该节点通过八卦消息了解到的节点。",
+      "listpeers": "列出与该节点相连或有开放渠道的节点。",
+      "listsendpays": "获取所有sendpay命令的状态。",
+      "listtransactions": "列出钱包中跟踪的交易。",
+      "offer": "创建报价。",
+      "multifundchannel": "通过投入一笔资金交易，与多个节点开通支付渠道。",
+      "pay": "向 BOLT11 发票发送付款。",
+      "signmessage": "从这个节点创建一个签名。",
+      "keysend": "向另一个节点发送付款。",
+      "listinvoices": "获取所有发票的状态。",
+      "getinfo": "获取节点的摘要。",
+      "listoffers": "列出所有报价或获取特定报价。",
+      "setchannel": "配置为渠道宣传的费用/htlc 范围。",
+      "sendpay": "通过途径发送付款。",
+      "feerates": "返回 CLN 将使用的费率。",
+      "listpays": "获取所有支付命令的状态。"
+    },
+    "lnc": {
+      "getnodeinfo": "获取节点的渠道信息。",
+      "gettransactions": "获取与该钱包相关的所有交易的列表。",
+      "listpeers": "获取所有当前活跃的对等点的列表。",
+      "addinvoice": "创建新发票。",
+      "getinfo": "获取节点信息。",
+      "listinvoices": "获取所有发票的列表。",
+      "walletbalance": "获取钱包的总未花费输出。",
+      "connectpeer": "建立与远程对等点的连接。",
+      "disconnectpeer": "断开与远程对等点的连接。",
+      "estimatefee": "估算交易的费率和总费用。",
+      "getnetworkinfo": "获取有关已知渠道图的基本统计信息。",
+      "listpayments": "获取所有付款的列表。",
+      "lookupinvoice": "查看发票详情。",
+      "listchannels": "获取所有开放频道的描述。",
+      "channelbalance": "获取所有开放渠道的总资金报告。",
+      "getchaninfo": "获取给定渠道的网络公告。",
+      "openchannel": "开通新渠道。",
+      "sendtoroute": "通过指定的途径付款。",
+      "routermc": "读取内部任务控制状态。",
+      "queryroutes": "查询可能的途径。",
+      "verifymessage": "通过消息验证签名。",
+      "decodepayreq": "解码支付请求字符串。"
+    },
+    "lnd": {
+      "sendtoroute": "通过指定的途径付款。",
+      "queryroutes": "查询可能的途径。",
+      "verifymessage": "通过消息验证签名。",
+      "lookupinvoice": "查看发票详情。",
+      "listpeers": "获取所有当前活跃的对等点的列表。",
+      "listinvoices": "获取所有发票的列表。",
+      "channelbalance": "获取所有开放渠道的总资金报告。",
+      "walletbalance": "获取钱包的总未花费输出。",
+      "disconnectpeer": "断开与远程对等点的连接。",
+      "estimatefee": "估算交易的费率和总费用。",
+      "getchaninfo": "获取给定渠道的网络公告。",
+      "getnetworkinfo": "获取有关已知渠道图的基本统计信息。",
+      "getnodeinfo": "获取节点的渠道信息。",
+      "gettransactions": "获取与该钱包相关的所有交易的列表。",
+      "listpayments": "获取所有付款的列表。",
+      "decodepayreq": "解码支付请求字符串。",
+      "routermc": "读取内部任务控制状态。",
+      "addinvoice": "创建新发票。",
+      "getinfo": "获取节点信息。",
+      "listchannels": "获取所有开放频道的描述。",
+      "connectpeer": "建立与远程对等点的连接。",
+      "openchannel": "开通新渠道。"
     }
   }
 }

@@ -260,6 +260,10 @@ export interface MessageBlocklistGet extends MessageDefault {
   action: "getBlocklist";
 }
 
+export interface MessageBlocklistList extends MessageDefault {
+  action: "listBlocklist";
+}
+
 export interface MessageSetIcon extends MessageDefault {
   action: "setIcon";
   args: {
@@ -341,6 +345,37 @@ export interface MessageWebLnLnurl extends MessageDefault {
   action: "webln/lnurl";
 }
 
+export interface MessageGetInfo extends MessageDefault {
+  action: "getInfo";
+}
+
+export interface MessageMakeInvoice extends MessageDefault {
+  args: { memo?: string; defaultMemo?: string; amount?: string };
+  action: "makeInvoice";
+}
+
+export interface MessageReset extends MessageDefault {
+  action: "reset";
+}
+
+export interface MessageStatus extends MessageDefault {
+  action: "status";
+}
+
+export interface MessageSetPassword extends MessageDefault {
+  args: { password: string };
+  action: "setPassword";
+}
+
+export interface MessageAccountValidate extends MessageDefault {
+  args: {
+    connector: ConnectorType;
+    config: Record<string, string>;
+    name: string;
+  };
+  action: "validateAccount";
+}
+
 export interface MessageConnectPeer extends MessageDefault {
   args: { pubkey: string; host: string };
   action: "connectPeer";
@@ -399,6 +434,13 @@ export interface MessagePrivateKeySet extends MessageDefault {
     privateKey: string;
   };
   action: "setPrivateKey";
+}
+
+export interface MessagePrivateKeyRemove extends MessageDefault {
+  args: {
+    id?: Account["id"];
+  };
+  action: "removePrivateKey";
 }
 
 export interface MessageSignEvent extends MessageDefault {

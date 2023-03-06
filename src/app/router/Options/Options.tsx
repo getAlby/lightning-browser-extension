@@ -1,7 +1,7 @@
 import Container from "@components/Container";
 import Navbar from "@components/Navbar";
 import Accounts from "@screens/Accounts";
-import ShowAccount from "@screens/Accounts/Show";
+import AccountDetail from "@screens/Accounts/Detail";
 import ConfirmPayment from "@screens/ConfirmPayment";
 import Keysend from "@screens/Keysend";
 import LNURLAuth from "@screens/LNURLAuth";
@@ -10,7 +10,7 @@ import LNURLPay from "@screens/LNURLPay";
 import LNURLWithdraw from "@screens/LNURLWithdraw";
 import TestConnection from "@screens/Options/TestConnection";
 import Publishers from "@screens/Publishers";
-import ShowPublisher from "@screens/Publishers/Show";
+import PublisherDetail from "@screens/Publishers/Detail";
 import Receive from "@screens/Receive";
 import Send from "@screens/Send";
 import Settings from "@screens/Settings";
@@ -47,7 +47,7 @@ function Options() {
               <Route index element={<Discover />} />
             </Route>
             <Route path="publishers">
-              <Route path=":id" element={<ShowPublisher />} />
+              <Route path=":id" element={<PublisherDetail />} />
               <Route index element={<Publishers />} />
             </Route>
             <Route path="send" element={<Send />} />
@@ -60,7 +60,7 @@ function Options() {
             <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="settings" element={<Settings />} />
             <Route path="accounts">
-              <Route path=":id" element={<ShowAccount />} />
+              <Route path=":id" element={<AccountDetail />} />
               <Route
                 path="new"
                 element={
