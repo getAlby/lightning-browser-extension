@@ -11,7 +11,7 @@ export default async function keysend(message: Message) {
   const accountId = await state.getState().currentAccountId;
   if (!accountId) {
     return {
-      error: "select an account.",
+      error: "Select an account.",
     };
   }
 
@@ -20,7 +20,7 @@ export default async function keysend(message: Message) {
     (typeof amount !== "string" && typeof amount !== "number")
   ) {
     return {
-      error: "destination or amount missing.",
+      error: "Destination or amount missing.",
     };
   }
 
