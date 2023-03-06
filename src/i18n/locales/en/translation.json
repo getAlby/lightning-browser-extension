@@ -380,8 +380,7 @@
         "title1": "Account Information",
         "title2": "Edit Account",
         "name": {
-          "title": "Name",
-          "placeholder": "Account Name"
+          "title": "Display name"
         },
         "export": {
           "title": "Export Account",
