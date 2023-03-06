@@ -166,8 +166,8 @@
         "title": "RaspiBlitz",
         "page": {
           "title": "Připojení k vašemu uzlu <0>RaspiBlitz</0>",
-          "instructions1": "Budete potřebovat onion adresu, port a macaroon s oprávněním pro čtení a odesílání (například admin.macaroon) vašeho uzlu.<1/><1/><0>Připojte se přes SSH</0> k vašemu <0>RaspiBlitz</0>.<1/>Zadejte příkaz <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Zkopírujte <0>.onion</0> adresu a vložte ji do pole níže.<1/>K onion adrese přidejte <0>port</0>, defaultní port je <0>:8080</0>.",
-          "instructions2": "Vyberte <0>PŘIPOJIT (CONNECT)</0>.<1/>Vyberte <0>EXPORTOVAT (EXPORT)</0>.<1/>Vyberte hexadecimální format <0>HEX</0>.<1/>Zkopírujte <0>adminMacaroon</0>.<1/>Vložte ho do pole níže."
+          "instructions1": "Následujte tyto kroky:<1/> 1. <0>Připojte se přes SSH</0> k vašemu <0>RaspiBlitz</0><1/>2. Vyberte <0>Připojit aplikace a zobrazit přístupové údaje (Connect Apps & Show Credentials)</0> ze seznamu<1/><0/>3. Vyberte <0>Připojit Alby k tomuto uzlu</0><1/>4. Stiskněte <0>OK</0>pro zobrazení detailů připojení<1/><1/>Zkopírujte <0>REST API</0> nebo <0>.onion</0> adresu pro připojení přes Tor a vložte ji do vstupního pole níže.",
+          "instructions2": "Zkopírujte (administrační) <0>macaroon</0> do pole níže."
         },
         "rest_api_host": {
           "label": "REST API host",
@@ -340,10 +340,11 @@
           "private_key": {
             "title": "Správa vašeho klíče",
             "subtitle": "Vložte svůj privátní klíč nebo si vygenerujte nový. Předtím, než budete generovat nový klíč, ujistěte se, že máte svůj klíč zazalohovaný. <0>Dozvědět se více »</0>",
-            "warning": "Tato akce odstraní váš starý privátní klíč. Jste si jisti?",
+            "warning": "Prosím vložte jméno vašeho účtu pro potvrzení smazání privátního klíče:",
             "success": "Privátní klíč byl úspěšně zašifrován a uložen.",
             "successfully_removed": "Privátní klíč byl odstraněn.",
-            "label": "Privátní klíč"
+            "label": "Privátní klíč",
+            "failed_to_remove": "Zadané jméno účtu se neshoduje, váš starý privátní klíč byl obnoven."
           },
           "actions": {
             "generate": "Vygenerovat nový klíč"

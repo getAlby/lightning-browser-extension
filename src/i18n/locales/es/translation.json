@@ -138,8 +138,8 @@
         "title": "Cuenta RaspiBlitz",
         "page": {
           "title": "Conecta tu nodo <0>RaspiBlitz</0>",
-          "instructions2": "Selecciona <0>CONECTAR</0>.<1/>Selecciona <0>EXPORTAR</0>.<1/>Selecciona <0>HEX</0>.<1/>Copia el <0>adminMacaroon</ 0>.<1/>Pega el macarrón en la entrada de abajo.",
-          "instructions1": "Necesita la dirección onion de su nodo, el puerto y un macarrón con permisos de lectura y envío (por ejemplo, admin.macaroon).<1/><1/><0>SSH</0> en su <0>RaspiBlitz</0> .<1/>Ejecute el comando <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Copie y pegue la dirección <0>.onion</0> en la entrada a continuación .<1/>Agregue su <0>puerto</0> después de la dirección onion, el puerto predeterminado es <0>:8080</0>."
+          "instructions2": "Copie el (admin) <0>macaroon</0> en la entrada de abajo.",
+          "instructions1": "Siga estos pasos:<1/> 1. <0>SSH</0> en su <0>Raspiblitz</0><1/>2. Seleccione <0>Conectar aplicaciones y mostrar credenciales</0> de la lista<1/><0/>3. Elija <0>Conectar Alby a este nodo</0><1/>4. Pulsa <0>Aceptar</0> para mostrar las credenciales de conexión<1/><1/>Copia y pega el <0>host API REST</0> o la dirección <0>.onion</0> para conectarte a través de Tor en la entrada de abajo."
         },
         "rest_api_host": {
           "label": "Host de la API REST",
@@ -329,7 +329,8 @@
             "label": "Clave Privada",
             "title": "Administra tu clave",
             "subtitle": "Pegue su clave privada o genere una nueva. Asegúrese de hacer una copia de seguridad de su clave privada antes de generar una nueva. <0>Más información »</0>",
-            "warning": "Esto eliminará su antigua clave privada. ¿Desea continuar?"
+            "warning": "Introduzca el nombre de la cuenta para confirmar la eliminación de la clave privada:",
+            "failed_to_remove": "El nombre de cuenta introducido no coincide, tu antiguo privado ha sido restaurado."
           },
           "public_key": {
             "label": "Clave Pública"

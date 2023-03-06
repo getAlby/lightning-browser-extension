@@ -139,9 +139,9 @@
       },
       "raspiblitz": {
         "page": {
-          "instructions1": "Du benötigst deine Node-Onion-Adresse, Port und eine Macaroon mit Lese- und Sendeberechtigungen (z. B. admin.macaroon).<1/><1/><0>SSH in deinem <0>RaspiBlitz.<1/>Führe den Befehl <0>sudo cat /mnt/hdd/tor/lndrest/hostname aus.<1/>Kopiere die <0>.onion-Adresse und füge deine Eingabe unten ein .<1/>Füge deinen <0>Port nach der Onion-Adresse hinzu, der Standardport ist <0>:8080.",
+          "instructions1": "Folge diese Schritte:<1/> 1. <0>SSH</0> in deinem <0>Raspiblitz</0><1/>2. Wähle <0>Connect Apps & Show Credentials</0> aus der Liste<1/><0/>3. Wähle <0>Connect Alby to this node</0><1/>4. Drücke <0>OK</0>, um die Verbindungsdaten anzuzeigen<1/><1/>Kopiere den <0>REST API-Host</0> oder die <0>.onion</0>-Adresse, um dich über Tor zu verbinden, und füge sie in das Feld darunter ein.",
           "title": "Verbinde dich mit deinem <0>RaspiBlitz</0> Knoten",
-          "instructions2": "Wähle <0>VERBINDEN.<1/>Wähle <0>EXPORTIEREN.<1/>Wähle <0>HEX.<1/>Kopiere das <0>adminMacaroon.<1/>Füge die Makrone in die Eingabe unten ein."
+          "instructions2": "Kopiere (admin) <0>macaroon</0> in die unten stehende Eingabe."
         },
         "title": "RaspiBlitz",
         "rest_api_host": {
@@ -448,10 +448,11 @@
           "private_key": {
             "title": "Verwalten von deinen Schlüssel",
             "subtitle": "Füge deinen privaten Schlüssel ein oder erzeuge einen neuen. Stelle sicher, dass du deinen privaten Schlüssel sicherst, bevor du einen neuen Schlüssel generierst. <0>Mehr erfahren\"</0>",
-            "warning": "Dadurch wird dein alter privater Schlüssel gelöscht. Bist du dir sicher?",
+            "warning": "Bitte gebe den Namen des Kontos ein, um die Löschung des privaten Schlüssels zu bestätigen:",
             "success": "Privater Schlüssel erfolgreich verschlüsselt und gespeichert.",
             "successfully_removed": "Privater Schlüssel erfolgreich entfernt.",
-            "label": "Privater Schlüssel"
+            "label": "Privater Schlüssel",
+            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter Privatname wurde wiederhergestellt."
           },
           "public_key": {
             "label": "Öffentlicher Schlüssel"
