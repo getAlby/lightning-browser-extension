@@ -397,7 +397,8 @@
           "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
           "private_key": {
             "title": "Manage your key",
-            "subtitle": "Paste your private key or generate a new one. Make sure you backup your private key before you generate a new one. <0>Learn more »</0>",
+            "subtitle": "Paste your private key or generate a new one. <0>Learn more »</0>",
+            "backup": "⚠️ Don't forget to back up your private key! Not backing up your key might result in loosing access to your Nostr identity.",
             "warning": "Please enter the name of the account to confirm the deletion of the private key:",
             "success": "Private key encrypted & saved successfully.",
             "failed_to_remove": "The entered account name didn't match, your old private has been restored.",

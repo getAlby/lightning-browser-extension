@@ -459,6 +459,9 @@ function AccountDetail() {
                 />
               </div>
             </div>
+            <div className="rounded-md text-orange-700 bg-orange-50 font-medium p-3 mb-4">
+              {t("nostr.private_key.backup")}
+            </div>
             <form
               onSubmit={(e: FormEvent) => {
                 e.preventDefault();
