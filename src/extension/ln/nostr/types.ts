@@ -1,10 +1,13 @@
-export type Event = {
-  id?: string;
+export type EventFragment = {
   kind: EventKind;
   pubkey?: string;
   content: string;
   tags: string[][];
   created_at: number;
+};
+
+export type Event = EventFragment & {
+  id?: string;
   sig?: string;
 };
 

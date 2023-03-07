@@ -4,15 +4,17 @@ import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import Checkbox from "@components/form/Checkbox";
+import { pick } from "lodash";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Button from "~/app/components/Button";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import { Event } from "~/extension/ln/nostr/types";
+import { Event, EventFragment } from "~/extension/ln/nostr/types";
 import type { OriginData } from "~/types";
 
 function ConfirmSignMessage() {
@@ -24,10 +26,18 @@ function ConfirmSignMessage() {
   const navigate = useNavigate();
 
   const event = navState.args?.event as Event;
+  const eventFragment = pick<EventFragment, keyof EventFragment>(event, [
+    "content",
+    "created_at",
+    "kind",
+    "pubkey",
+    "tags",
+  ]);
   const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [rememberPermission, setRememberPermission] = useState(false);
+  const [showJSON, setShowJSON] = useState(false);
 
   // TODO: refactor: the success message and loading will not be displayed because after the reply the prompt is closed.
   async function confirm() {
@@ -65,6 +75,10 @@ function ConfirmSignMessage() {
     confirm();
   }
 
+  function toggleShowJSON() {
+    setShowJSON((current) => !current);
+  }
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
@@ -81,6 +95,17 @@ function ConfirmSignMessage() {
                 heading={t("allow_sign", { host: origin.host })}
                 content={event.content}
               />
+              <div className="flex justify-end mb-4 gap-4">
+                <Button
+                  label={showJSON ? "Hide JSON" : "View JSON"}
+                  onClick={toggleShowJSON}
+                />
+              </div>
+              {showJSON && (
+                <div className="whitespace-pre-wrap break-words p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
+                  {JSON.stringify(eventFragment, null, 2)}
+                </div>
+              )}
               <div className="flex items-center">
                 <Checkbox
                   id="remember_permission"
