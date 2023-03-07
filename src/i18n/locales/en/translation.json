@@ -738,6 +738,7 @@
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
       "kinds": {
+        "unknown": "nostr event of kind {{kind}}",
         "0": "metadata",
         "1": "short text note",
         "2": "recommend relay",

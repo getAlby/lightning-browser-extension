@@ -94,7 +94,9 @@ function ConfirmSignMessage() {
               <ContentMessage
                 heading={t("allow_sign_event", {
                   host: origin.host,
-                  kind: t(`kinds.${event.kind}`) ?? event.kind,
+                  kind: t(`kinds.${event.kind}`, {
+                    defaultValue: t("kinds.unknown", { kind: event.kind }),
+                  }),
                 })}
                 content={event.content || t("no_content")}
               />
