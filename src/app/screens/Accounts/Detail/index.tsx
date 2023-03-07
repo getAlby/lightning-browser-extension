@@ -459,7 +459,7 @@ function AccountDetail() {
                 />
               </div>
             </div>
-            <div className="rounded-md text-orange-700 bg-orange-50 font-medium p-3 mb-4">
+            <div className="rounded-md font-medium p-4 mb-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
               {t("nostr.private_key.backup")}
             </div>
             <form
