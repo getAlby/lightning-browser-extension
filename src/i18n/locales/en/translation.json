@@ -527,6 +527,11 @@
         "subtitle": "",
         "placeholder": "Enter your email address"
       },
+      "backup": {
+        "title": "Backup Account Information",
+        "subtitle": "Save all information associated with your accounts, including nostr keys",
+        "label": "Download Backup"
+      },
       "change_password": {
         "title": "Change unlock password",
         "subtitle": "",

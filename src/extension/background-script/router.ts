@@ -49,6 +49,7 @@ const routes = {
   changePassword: settings.changePassword,
   setSetting: settings.set,
   getSettings: settings.get,
+  backup: settings.backup,
   addBlocklist: blocklist.add,
   deleteBlocklist: blocklist.deleteBlocklist,
   getBlocklist: blocklist.get,

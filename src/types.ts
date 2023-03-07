@@ -365,6 +365,10 @@ export interface MessageStatus extends MessageDefault {
   action: "status";
 }
 
+export interface MessageBackup extends MessageDefault {
+  action: "backup";
+}
+
 export interface MessageSetPassword extends MessageDefault {
   args: { password: string };
   action: "setPassword";

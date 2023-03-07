@@ -38,6 +38,17 @@ function Settings() {
     setModalIsOpen(false);
   }
 
+  async function downloadBackup() {
+    const data = await msg.request<string>("backup");
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(data);
+    const downloadAnchorNode = document.createElement("a");
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", "alby-backup" + ".json");
+    document.body.appendChild(downloadAnchorNode); // required for firefox
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+  }
+
   async function updateAccountPassword(password: string) {
     try {
       await msg.request("changePassword", {
@@ -243,6 +254,21 @@ function Settings() {
                     <option value="coindesk">Coindesk</option>
                     <option value="yadio">yadio</option>
                   </Select>
+                </div>
+              )}
+            </Setting>
+
+            <Setting title={t("backup.title")} subtitle={t("backup.subtitle")}>
+              {!isLoading && (
+                <div className="w-64">
+                  <Button
+                    onClick={downloadBackup}
+                    label={t("backup.label")}
+                    primary
+                    fullWidth
+                    loading={isLoading}
+                    disabled={isLoading}
+                  />
                 </div>
               )}
             </Setting>
