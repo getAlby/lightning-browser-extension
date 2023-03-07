@@ -92,12 +92,15 @@ function ConfirmSignMessage() {
                 url={origin.host}
               />
               <ContentMessage
-                heading={t("allow_sign", { host: origin.host })}
-                content={event.content}
+                heading={t("allow_sign_event", {
+                  host: origin.host,
+                  kind: t(`kinds.${event.kind}`) ?? event.kind,
+                })}
+                content={event.content || t("no_content")}
               />
               <div className="flex justify-end mb-4 gap-4">
                 <Button
-                  label={showJSON ? "Hide JSON" : "View JSON"}
+                  label={showJSON ? t("hide_json") : t("show_json")}
                   onClick={toggleShowJSON}
                 />
               </div>
