@@ -398,7 +398,7 @@
           "private_key": {
             "title": "Manage your key",
             "subtitle": "Paste your private key or generate a new one. <0>Learn more »</0>",
-            "backup": "⚠️ Don't forget to back up your private key! Not backing up your key might result in loosing access to your Nostr identity.",
+            "backup": "⚠️ Don't forget to back up your private key! Not backing up your key might result in loosing access.",
             "warning": "Please enter the name of the account to confirm the deletion of the private key:",
             "success": "Private key encrypted & saved successfully.",
             "failed_to_remove": "The entered account name didn't match, your old private has been restored.",
