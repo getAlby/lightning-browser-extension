@@ -4,7 +4,6 @@ import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import Checkbox from "@components/form/Checkbox";
-import { pick } from "lodash";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +13,7 @@ import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import { Event, EventFragment } from "~/extension/ln/nostr/types";
+import { Event } from "~/extension/ln/nostr/types";
 import type { OriginData } from "~/types";
 
 function ConfirmSignMessage() {
@@ -26,13 +25,6 @@ function ConfirmSignMessage() {
   const navigate = useNavigate();
 
   const event = navState.args?.event as Event;
-  const eventFragment = pick<EventFragment, keyof EventFragment>(event, [
-    "content",
-    "created_at",
-    "kind",
-    "pubkey",
-    "tags",
-  ]);
   const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -107,7 +99,7 @@ function ConfirmSignMessage() {
               </div>
               {showJSON && (
                 <div className="whitespace-pre-wrap break-words p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
-                  {JSON.stringify(eventFragment, null, 2)}
+                  {JSON.stringify(event, null, 2)}
                 </div>
               )}
               <div className="flex items-center">
