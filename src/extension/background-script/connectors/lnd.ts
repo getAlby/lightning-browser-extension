@@ -121,6 +121,10 @@ const methods: Record<string, Record<string, string>> = {
     path: "/v2/invoices/hodl",
     httpMethod: "POST",
   },
+  settleinvoice: {
+    path: "/v2/invoices/settle",
+    httpMethod: "POST",
+  },
 };
 
 const pathTemplateParser = (

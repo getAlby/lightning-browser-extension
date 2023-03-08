@@ -937,7 +937,8 @@
       "decodepayreq": "Decode a payment request string.",
       "routermc": "Read the internal mission control state.",
       "addinvoice": "Create new invoices.",
-      "addholdinvoice": "Create new HODL invoices."
+      "addholdinvoice": "Create new HODL invoices.",
+      "settleinvoice": "Settle an accepted invoice."
     },
     "lnc": {
       "getinfo": "Get the node information.",
