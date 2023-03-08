@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Button from "~/app/components/Button";
+import Hyperlink from "~/app/components/Hyperlink";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
@@ -100,11 +100,10 @@ function ConfirmSignMessage() {
                 })}
                 content={event.content || t("no_content")}
               />
-              <div className="flex justify-end mb-4 gap-4">
-                <Button
-                  label={showJSON ? t("hide_json") : t("show_json")}
-                  onClick={toggleShowJSON}
-                />
+              <div className="flex justify-center mb-4 gap-4">
+                <Hyperlink onClick={toggleShowJSON}>
+                  {showJSON ? t("hide_details") : t("view_details")}
+                </Hyperlink>
               </div>
               {showJSON && (
                 <div className="whitespace-pre-wrap break-words p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
