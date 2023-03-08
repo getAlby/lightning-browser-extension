@@ -874,7 +874,12 @@
     "message": "Nachricht",
     "response": "Antwort",
     "success_message": "{{amount}}{{fiatAmount}} gesendet an {{destination}}",
-    "accounts": "Konten"
+    "accounts": "Konten",
+    "range": {
+      "between": "zwischen {{min}} und {{max}}",
+      "lessThan": "< {{max}}",
+      "greaterThan": "> {{min}}"
+    }
   },
   "permissions": {
     "commando": {
