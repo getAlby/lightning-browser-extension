@@ -29,6 +29,7 @@ describe("delete permissions by id", () => {
       },
       args: {
         ids: [2, 3],
+        accountId: "123456",
       },
     };
 

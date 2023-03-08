@@ -2,21 +2,23 @@ import PubSub from "pubsub-js";
 
 import { updateAllowance } from "./allowances";
 import {
-  paymentSuccessNotification,
-  paymentFailedNotification,
-  lnurlAuthSuccessNotification,
   lnurlAuthFailedNotification,
+  lnurlAuthSuccessNotification,
+  paymentFailedNotification,
+  paymentSuccessNotification,
 } from "./notifications";
 import { persistSuccessfullPayment } from "./persistPayments";
 
 const subscribe = () => {
-  PubSub.subscribe("ln.sendPayment.success", paymentSuccessNotification);
-  PubSub.subscribe("ln.sendPayment.failed", paymentFailedNotification);
+  const paymentTypes = ["sendPayment", "keysend"];
 
-  PubSub.subscribe("ln.sendPayment.success", persistSuccessfullPayment);
-  PubSub.subscribe("ln.sendPayment.success", updateAllowance);
-  PubSub.subscribe("ln.keysend.success", persistSuccessfullPayment);
-  PubSub.subscribe("ln.keysend.success", updateAllowance);
+  paymentTypes.forEach((type) => {
+    PubSub.subscribe(`ln.${type}.success`, paymentSuccessNotification);
+    PubSub.subscribe(`ln.${type}.failed`, paymentFailedNotification);
+
+    PubSub.subscribe(`ln.${type}.success`, persistSuccessfullPayment);
+    PubSub.subscribe(`ln.${type}.success`, updateAllowance);
+  });
 
   PubSub.subscribe("lnurl.auth.success", lnurlAuthSuccessNotification);
   PubSub.subscribe("lnurl.auth.failed", lnurlAuthFailedNotification);

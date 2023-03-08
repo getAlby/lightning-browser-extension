@@ -3,6 +3,7 @@ import type { DbPermission } from "~/types";
 export const permissionsFixture: DbPermission[] = [
   {
     id: 1,
+    accountId: "123456",
     allowanceId: 1,
     createdAt: "1487076708000",
     host: "pro.kollider.xyz",
@@ -12,6 +13,7 @@ export const permissionsFixture: DbPermission[] = [
   },
   {
     id: 2,
+    accountId: "123456",
     allowanceId: 1,
     createdAt: "1487076708000",
     host: "pro.kollider.xyz",
@@ -21,6 +23,7 @@ export const permissionsFixture: DbPermission[] = [
   },
   {
     id: 3,
+    accountId: "123456",
     allowanceId: 2,
     createdAt: "1487076708000",
     host: "lnmarkets.com",

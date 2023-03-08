@@ -219,6 +219,7 @@ export interface MessagePermissionDelete extends MessageDefault {
   args: {
     host: Permission["host"];
     method: Permission["method"];
+    accountId: Account["id"];
   };
   action: "deletePermission";
 }
@@ -226,6 +227,7 @@ export interface MessagePermissionDelete extends MessageDefault {
 export interface MessagePermissionsList extends MessageDefault {
   args: {
     id: Allowance["id"];
+    accountId: Account["id"];
   };
   action: "listPermissions";
 }
@@ -233,6 +235,7 @@ export interface MessagePermissionsList extends MessageDefault {
 export interface MessagePermissionsDelete extends MessageDefault {
   args: {
     ids: Permission["id"][];
+    accountId: Account["id"];
   };
   action: "deletePermissions";
 }
@@ -258,6 +261,10 @@ export interface MessageBlocklistGet extends MessageDefault {
     host: string;
   };
   action: "getBlocklist";
+}
+
+export interface MessageBlocklistList extends MessageDefault {
+  action: "listBlocklist";
 }
 
 export interface MessageSetIcon extends MessageDefault {
@@ -339,6 +346,37 @@ export interface MessageWebLnLnurl extends MessageDefault {
   args: { lnurlEncoded: string };
   public: boolean;
   action: "webln/lnurl";
+}
+
+export interface MessageGetInfo extends MessageDefault {
+  action: "getInfo";
+}
+
+export interface MessageMakeInvoice extends MessageDefault {
+  args: { memo?: string; defaultMemo?: string; amount?: string };
+  action: "makeInvoice";
+}
+
+export interface MessageReset extends MessageDefault {
+  action: "reset";
+}
+
+export interface MessageStatus extends MessageDefault {
+  action: "status";
+}
+
+export interface MessageSetPassword extends MessageDefault {
+  args: { password: string };
+  action: "setPassword";
+}
+
+export interface MessageAccountValidate extends MessageDefault {
+  args: {
+    connector: ConnectorType;
+    config: Record<string, string>;
+    name: string;
+  };
+  action: "validateAccount";
 }
 
 export interface MessageConnectPeer extends MessageDefault {
@@ -578,6 +616,7 @@ export enum PermissionMethodNostr {
 export interface DbPermission {
   id?: number;
   createdAt: string;
+  accountId: string;
   allowanceId: number;
   host: string;
   method: string | PermissionMethodNostr;
@@ -662,7 +701,6 @@ export interface SettingsStorage {
   showFiat: boolean;
   currency: CURRENCIES;
   exchange: SupportedExchanges;
-  debug: boolean;
   nostrEnabled: boolean;
   closedTips: TIPS[];
 }

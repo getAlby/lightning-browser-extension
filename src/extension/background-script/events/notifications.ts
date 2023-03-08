@@ -9,7 +9,7 @@ import type { AuthNotificationData, PaymentNotificationData } from "~/types";
 import { notify } from "./helpers";
 
 const paymentSuccessNotification = async (
-  message: "ln.sendPayment.success",
+  message: "ln.sendPayment.success" | "ln.keysend.success",
   data: PaymentNotificationData
 ) => {
   const recipient = data?.origin?.name;
@@ -65,7 +65,7 @@ const paymentSuccessNotification = async (
 };
 
 const paymentFailedNotification = (
-  message: "ln.sendPayment.failed",
+  message: "ln.sendPayment.failed" | "ln.keysend.failed",
   data: PaymentNotificationData
 ) => {
   let error;

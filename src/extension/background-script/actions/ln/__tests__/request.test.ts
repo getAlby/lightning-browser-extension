@@ -21,6 +21,7 @@ const ConnectorClass = jest.fn().mockImplementation(() => {
 jest.mock("~/extension/background-script/state", () => ({
   getState: () => ({
     getConnector: jest.fn(() => Promise.resolve(new ConnectorClass())),
+    currentAccountId: "123456",
   }),
 }));
 
@@ -40,6 +41,7 @@ const allowanceInDB = {
 
 const permissionInDB = {
   id: 1,
+  accountId: "123456",
   allowanceId: allowanceInDB.id,
   createdAt: "1487076708000",
   host: allowanceInDB.host,

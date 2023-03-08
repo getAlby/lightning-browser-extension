@@ -143,7 +143,12 @@ function AccountDetail() {
 
     if (nostrPrivateKey === currentPrivateKey) return;
 
-    if (currentPrivateKey && !confirm(t("nostr.private_key.warning"))) {
+    if (
+      currentPrivateKey &&
+      prompt(t("nostr.private_key.warning"))?.toLowerCase() !==
+        account?.name?.toLowerCase()
+    ) {
+      toast.error(t("nostr.private_key.failed_to_remove"));
       return;
     }
 
@@ -453,6 +458,9 @@ function AccountDetail() {
                   fullWidth
                 />
               </div>
+            </div>
+            <div className="rounded-md font-medium p-4 mb-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
+              {t("nostr.private_key.backup")}
             </div>
             <form
               onSubmit={(e: FormEvent) => {
