@@ -519,7 +519,7 @@
       },
       "name": {
         "title": "Nom",
-        "subtitle": "",
+        "subtitle": "translation.settings.name.subtitle\n",
         "placeholder": "Entrez votre nom"
       },
       "email": {
