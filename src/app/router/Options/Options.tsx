@@ -14,6 +14,7 @@ import PublisherDetail from "@screens/Publishers/Detail";
 import Receive from "@screens/Receive";
 import Send from "@screens/Send";
 import Settings from "@screens/Settings";
+import Transactions from "@screens/Transactions";
 import Unlock from "@screens/Unlock";
 import { useTranslation } from "react-i18next";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
@@ -54,6 +55,7 @@ function Options() {
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="keysend" element={<Keysend />} />
             <Route path="receive" element={<Receive />} />
+            <Route path="transactions" element={<Transactions />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
@@ -142,6 +144,9 @@ const Layout = () => {
         <Navbar.Link href="/publishers">{tCommon("websites")}</Navbar.Link>
         <Navbar.Link href="/send">{tCommon("actions.send")}</Navbar.Link>
         <Navbar.Link href="/receive">{tCommon("actions.receive")}</Navbar.Link>
+        <Navbar.Link href="/transactions">
+          {tCommon("actions.transactions")}
+        </Navbar.Link>
       </Navbar>
       <ToastContainer
         autoClose={15000}

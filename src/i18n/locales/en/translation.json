@@ -764,6 +764,11 @@
         "30023": "long-form content",
         "30078": "application-specific data"
       }
+    },
+    "transactions": {
+      "title": "Transactions",
+      "description": "Outgoing transactions across all of your accounts",
+      "list_empty": "No transactions available yet."
     }
   },
   "common": {
@@ -776,6 +781,7 @@
     "accounts": "Accounts",
     "discover": "Discover",
     "websites": "Websites",
+    "transactions": "Transactions",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "loading",
@@ -805,6 +811,7 @@
       "save": "Save",
       "receive": "Receive",
       "receive_again": "Receive another payment",
+      "transactions": "Transactions",
       "close": "Close",
       "export": "Export",
       "remove": "Remove",
