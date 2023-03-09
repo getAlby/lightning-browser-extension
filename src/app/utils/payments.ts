@@ -1,16 +1,20 @@
 import dayjs from "dayjs";
-import { Payment, Transaction } from "~/types";
+import { DbPayment, Transaction } from "~/types";
 
-export const convertPaymentToTransaction = (payment: Payment): Transaction => ({
+export const convertPaymentToTransaction = (
+  payment: DbPayment,
+  publisherLink?: string
+): Transaction => ({
   ...payment,
   id: `${payment.id}`,
   type: "sent",
   date: dayjs(payment.createdAt).fromNow(),
   title: payment.name || payment.description,
-  publisherLink: payment.location,
+  publisherLink: publisherLink || payment.location,
 });
 
 export const convertPaymentsToTransactions = (
-  payments: Payment[]
+  payments: DbPayment[],
+  publisherLink?: string
 ): Transaction[] =>
-  payments.map((p: Payment) => convertPaymentToTransaction(p));
+  payments.map((p: DbPayment) => convertPaymentToTransaction(p, publisherLink));
