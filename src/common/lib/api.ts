@@ -103,7 +103,7 @@ export const selectAccount = (id: string) =>
   msg.request("selectAccount", { id });
 export const getAllowance = (host: string) =>
   msg.request<Allowance>("getAllowance", { host });
-export const getPayments = (options: { limit: number }) =>
+export const getPayments = (options?: { limit?: number }) =>
   msg.request<{ payments: DbPayment[] }>("getPayments", options);
 export const getSettings = () => msg.request<SettingsStorage>("getSettings");
 export const getStatus = () => msg.request<StatusRes>("status");
