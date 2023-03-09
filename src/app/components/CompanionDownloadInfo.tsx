@@ -37,6 +37,7 @@ function CompanionDownloadInfo({ hasTorCallback }: Props) {
             name="mode"
             value="companion"
             className="hidden peer"
+            checked
             onChange={(e) => onChangeConnectionMode(e)}
             required
           />
