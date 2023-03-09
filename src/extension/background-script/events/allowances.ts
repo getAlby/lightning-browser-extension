@@ -1,12 +1,22 @@
+import type { PaymentNotificationData } from "~/types";
+
 import db from "../db";
 
-const updateAllowance = async (message, data) => {
+const updateAllowance = async (
+  message: "ln.sendPayment.success" | "ln.keysend.success",
+  data: PaymentNotificationData
+) => {
   if (!data.origin || !data.origin.host) {
     return;
   }
 
   const host = data.origin.host;
   const paymentResponse = data.response;
+
+  if ("error" in paymentResponse) {
+    return;
+  }
+
   const route = paymentResponse.data.route;
   const { total_amt } = route;
 
@@ -15,7 +25,7 @@ const updateAllowance = async (message, data) => {
     .equalsIgnoreCase(host)
     .first();
 
-  if (!allowance) {
+  if (!allowance || !allowance.id) {
     return;
   }
 
