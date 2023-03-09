@@ -390,7 +390,8 @@
       },
       "name": {
         "title": "Name",
-        "placeholder": "Geben Sie Ihren Namen ein"
+        "placeholder": "Geben Sie Ihren Namen ein",
+        "subtitle": "übersetzung.einstellungen.name.untertitel\n"
       },
       "email": {
         "title": "E-Mail",
@@ -447,12 +448,13 @@
           "title": "Nostr",
           "private_key": {
             "title": "Verwalten von deinen Schlüssel",
-            "subtitle": "Füge deinen privaten Schlüssel ein oder erzeuge einen neuen. Stelle sicher, dass du deinen privaten Schlüssel sicherst, bevor du einen neuen Schlüssel generierst. <0>Mehr erfahren\"</0>",
+            "subtitle": "Füge deinen privaten Schlüssel ein oder erzeuge einen neuen. <0>Mehr erfahren\"</0>",
             "warning": "Bitte gebe den Namen des Kontos ein, um die Löschung des privaten Schlüssels zu bestätigen:",
             "success": "Privater Schlüssel erfolgreich verschlüsselt und gespeichert.",
             "successfully_removed": "Privater Schlüssel erfolgreich entfernt.",
             "label": "Privater Schlüssel",
-            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter Privatname wurde wiederhergestellt."
+            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter Privatname wurde wiederhergestellt.",
+            "backup": "Vergesse nicht, deinen privaten Schlüssel zu sichern! Wenn du deinen Schlüssel nicht sicherst, kannst du den Zugang verlieren."
           },
           "public_key": {
             "label": "Öffentlicher Schlüssel"
@@ -563,7 +565,37 @@
       "content": "Auf dieser Website wirst du aufgefordert zu signieren:",
       "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
       "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade deine Website neu.",
-      "allow_sign": "Erlaube dein {{host}} zu unterschreiben:"
+      "allow_sign": "Erlaube dein {{host}} zu unterschreiben:",
+      "view_details": "Details anzeigen",
+      "hide_details": "Details ausblenden",
+      "no_content": "(Ohne Inhalt)",
+      "kinds": {
+        "unknown": "nostr Ereignis der Art {{kind}}",
+        "0": "Metadaten",
+        "5": "Ereignislöschung",
+        "40": "Kanalbildung",
+        "41": "Kanal Metadaten",
+        "42": "Kanalmeldung",
+        "43": "Kanal verstecke Nachrichten",
+        "44": "Kanal stummschalten Benutzer",
+        "10002": "Metadaten der Relaisliste",
+        "30078": "anwendungsspezifische Daten",
+        "22242": "Client Authentifizierung",
+        "7": "Reaktion",
+        "9734": "Zappanfrage",
+        "9735": "zap",
+        "2": "Relais empfehlen",
+        "1": "kurze Textnotiz",
+        "3": "Kontakte",
+        "4": "verschlüsselte Direktnachrichten",
+        "8": "Abzeichenverleihung",
+        "1984": "Berichterstattung",
+        "24133": "nostr verbinden",
+        "30008": "Profilabzeichen",
+        "30009": "Ausweisdefinition",
+        "30023": "Langform Inhalte"
+      },
+      "allow_sign_event": "Erlaube {{host}}, eine {{kind}} zu unterzeichnen:"
     },
     "confirm_request_permission": {
       "title": "Antrag genehmigen",
