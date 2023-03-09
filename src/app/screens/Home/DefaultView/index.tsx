@@ -12,7 +12,6 @@ import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Hyperlink from "~/app/components/Hyperlink";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
@@ -194,22 +193,6 @@ const DefaultView: FC<Props> = (props) => {
             }}
           />
         </div>
-        <Hyperlink
-          onClick={() => {
-            console.log("OK");
-          }}
-        >
-          <div className="text-sm cursor-pointer rounded shadow mb-4 bg-gradient-to-tr from-amber-500 to-yellow-300 p-4">
-            <h4 className="mb-2 font-semibold text-black">
-              ↘️ Fund your wallet
-            </h4>
-            <p className="text-gray-900">
-              Swap onchain bitcoin from any source to lightning and get ready to
-              use Alby.
-            </p>
-          </div>
-        </Hyperlink>
-
         {isBlockedUrl && (
           <div className="mb-2 items-center py-3 dark:text-white">
             <p className="py-1">
