@@ -597,7 +597,10 @@
       "title": "Nostr",
       "content": "Este site solicita que você assine:",
       "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site.",
-      "allow_sign": "Permitir {{host}} assinar:"
+      "allow_sign": "Permitir {{host}} assinar:",
+      "view_details": "Ver detalhes",
+      "allow_sign_event": "Permitir {{host}} assinar {{kind}}:",
+      "hide_details": "Ocultar detalhes"
     },
     "confirm_request_permission": {
       "title": "Aprovar solicitação",
@@ -702,6 +705,9 @@
           "create_wallet_error1": "Falha ao fazer login ou criar uma nova conta."
         }
       }
+    },
+    "transactions": {
+      "title": "Transações"
     }
   },
   "common": {
@@ -738,7 +744,8 @@
       "back": "Voltar",
       "log_in": "Fazer login",
       "remember": "Lembrar minha escolha e não perguntar novamente",
-      "receive_again": "Receber outro pagamento"
+      "receive_again": "Receber outro pagamento",
+      "transactions": "Transações"
     },
     "errors": {
       "connection_failed": "Falha na conexão",
@@ -758,7 +765,8 @@
       "between": "entre {{min}} e {{max}}",
       "lessThan": "< {{max}}",
       "greaterThan": "> {{min}}"
-    }
+    },
+    "transactions": "Transações"
   },
   "components": {
     "allowance_menu": {
