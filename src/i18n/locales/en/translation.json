@@ -876,7 +876,7 @@
     },
     "companion_download_info": {
       "description": "You are trying to connect to a node behind Tor. To do this you either need to have the Alby companion app installed or have Tor running. (When you're unsure, we recommend the Alby companion app.)",
-      "download_here": "Download the Alby companion here!",
+      "download_here": "Download",
       "using_tor": "click here to continue if you use the Tor Browser",
       "or": "Or:"
     },

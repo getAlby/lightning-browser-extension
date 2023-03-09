@@ -1,6 +1,10 @@
-import { ReceiveIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import {
+  ArrowDownIcon,
+  CheckIcon,
+} from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import Button from "~/app/components/Button";
 
 type Props = {
   hasTorCallback: () => void;
@@ -25,32 +29,34 @@ function CompanionDownloadInfo({ hasTorCallback }: Props) {
     <>
       {!hasTorSupport && (
         <div className="dark:text-white">
-          <p className="mb-2">{t("description")} </p>
-          <p className="mb-2">
-            <a
-              href={`https://getalby.com/install/companion/${getOS()}`}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="font-bold"
-            >
-              {t("download_here")}
-              <ReceiveIcon className="w-6 h-6 inline" />
-            </a>
-          </p>
-          <p>
-            {t("or")}{" "}
-            <a
-              href="#"
-              className="font-bold"
-              onClick={(e) => {
-                e.preventDefault();
-                setHasTorSupport(true);
-                hasTorCallback();
-              }}
-            >
-              {t("using_tor")}
-            </a>
-          </p>
+          <p className="mb-2 bg-sky-300 p-4">{t("description")}</p>
+          <div className="p-4">
+            <div className="flex mb-4 space-x-4">
+              <Button
+                fullWidth
+                icon={<ArrowDownIcon className="w-6 h-6" />}
+                label={t("download_here")}
+                direction="column"
+                onClick={() => {
+                  window.open(
+                    `https://getalby.com/install/companion/${getOS()}`,
+                    "_blank"
+                  );
+                }}
+              />
+              <Button
+                fullWidth
+                icon={<CheckIcon className="w-6 h-6" />}
+                label={"Continue without installation"}
+                direction="column"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setHasTorSupport(true);
+                  hasTorCallback();
+                }}
+              />
+            </div>
+          </div>
         </div>
       )}
     </>
