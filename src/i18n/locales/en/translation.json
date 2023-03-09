@@ -39,7 +39,7 @@
       "title": "Connect",
       "description": "To start using Alby to make online payments, connect your lightning wallet to the extension.",
       "alby": {
-        "title": "Alby",
+        "title": "Alby Account",
         "description": "Sign up or use your existing Alby account to get started with lightning payments in no time.",
         "create_new": "Sign up"
       },
