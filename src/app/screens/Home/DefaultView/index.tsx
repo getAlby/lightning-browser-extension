@@ -172,7 +172,7 @@ const DefaultView: FC<Props> = (props) => {
       )}
 
       <div className="p-4">
-        <div className="flex mb-4 space-x-4">
+        <div className="flex mb-6 space-x-4">
           <Button
             fullWidth
             icon={<SendIcon className="w-6 h-6" />}
