@@ -5,8 +5,8 @@ import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import { convertPaymentsToTransactions } from "~/app/utils/payments";
-import msg from "~/common/lib/msg";
-import { Payment, Transaction } from "~/types";
+import api from "~/common/lib/api";
+import { Transaction } from "~/types";
 
 function Transactions() {
   const { t } = useTranslation("translation", {
@@ -19,9 +19,7 @@ function Transactions() {
   const fetchData = useCallback(async () => {
     try {
       // @Todo: add SWR caching? Check where to reset/mutate the cache?
-      const { payments } = await msg.request<{ payments: Payment[] }>(
-        "getPayments"
-      );
+      const { payments } = await api.getPayments();
       const _transactions: Transaction[] = await convertPaymentsToTransactions(
         payments
       );
