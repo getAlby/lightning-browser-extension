@@ -600,7 +600,10 @@
       "allow_sign": "Permitir {{host}} assinar:",
       "view_details": "Ver detalhes",
       "allow_sign_event": "Permitir {{host}} assinar {{kind}}:",
-      "hide_details": "Ocultar detalhes"
+      "hide_details": "Ocultar detalhes",
+      "kinds": {
+        "unknown": "evento nostr do tipo {{kind}}"
+      }
     },
     "confirm_request_permission": {
       "title": "Aprovar solicitação",

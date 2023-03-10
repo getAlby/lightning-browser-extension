@@ -616,7 +616,7 @@
       "title": "Conectar",
       "description": "Para comenzar a usar Alby y realizar pagos en línea, conecta tu billetera Lightning a la extensión.",
       "alby": {
-        "title": "Alby",
+        "title": "Cuenta de Alby",
         "create_new": "Regístrate",
         "description": "Regístrate o usa tu cuenta existente de Alby para empezar con pagos lightning en poco tiempo."
       },
