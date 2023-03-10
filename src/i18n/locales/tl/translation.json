@@ -576,9 +576,6 @@
         "label": ""
       }
     },
-    "companion_download_info": {
-      "or": ""
-    },
     "toasts": {
       "connection_error": {
         "what_you_can_do": "",

@@ -881,9 +881,6 @@
         "label": "Presupuesto"
       }
     },
-    "companion_download_info": {
-      "or": "O:"
-    },
     "toasts": {
       "connection_error": {
         "what_you_can_do": "Esto es lo que puedes hacer:",

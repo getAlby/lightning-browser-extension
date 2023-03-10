@@ -823,9 +823,6 @@
         "label": "Limite de gastos"
       }
     },
-    "companion_download_info": {
-      "or": "Ou:"
-    },
     "toasts": {
       "connection_error": {
         "what_you_can_do": "Aqui está o que você pode fazer:",
