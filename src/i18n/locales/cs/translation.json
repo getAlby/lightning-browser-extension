@@ -839,9 +839,7 @@
       }
     },
     "companion_download_info": {
-      "description": "Snažíte se připojit k uzlu, který je za Tor. Aby toto bylo možné, musíte mít nainstalovanou aplikaci Alby companion nebo být připojeni k síti Tor. (Pokud si nejste jisti, doporučujeme použít aplikaci Alby companion.)",
       "download_here": "Stáhněte si Alby companion zde!",
-      "using_tor": "klikněte zde pro pokračování, pokud používáte Tor Browser",
       "or": "Nebo:"
     },
     "toasts": {

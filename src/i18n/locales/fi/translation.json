@@ -631,9 +631,7 @@
       }
     },
     "companion_download_info": {
-      "description": "Yrität muodostaa yhteyden Torin takana olevaan solmuun. Tätä varten sinulla on oltava joko asennettuna Alby companion -sovellus tai Tor käynnissä. (Kun olet epävarma, suosittelemme Alby companion -sovellusta.)",
       "download_here": "Lataa Alby companion täältä!",
-      "using_tor": "klikkaa tästä jatkaaksesi, jos käytät Tor-selainta",
       "or": "Tai:"
     },
     "toasts": {
@@ -669,6 +667,5 @@
         "active": "TOIMIVA"
       }
     }
-  },
-  "permissions": {}
+  }
 }

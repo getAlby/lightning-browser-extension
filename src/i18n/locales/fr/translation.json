@@ -844,9 +844,7 @@
       }
     },
     "companion_download_info": {
-      "description": "Vous essayez de vous connecter à un nœud derrière Tor. Pour ce faire, vous devez soit installer l'application compagnon Alby, soit exécuter Tor. (En cas de doute, nous vous recommandons l'application compagnon Alby.)",
       "download_here": "Téléchargez le compagnon Alby ici !",
-      "using_tor": "cliquez ici pour continuer si vous utilisez le navigateur Tor",
       "or": "Ou:"
     },
     "toasts": {
