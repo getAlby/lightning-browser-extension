@@ -528,9 +528,9 @@
         "placeholder": "Enter your email address"
       },
       "backup": {
-        "title": "Backup Account Information",
-        "subtitle": "Save all information associated with your accounts, including nostr keys",
-        "label": "Download Backup"
+        "title": "Backup",
+        "subtitle": "Download an encrypted file containing all of your account credentials, including your Nostr keys. You will need your unlock password to decrypt this file.",
+        "label": "Download backup file"
       },
       "change_password": {
         "title": "Change unlock password",
