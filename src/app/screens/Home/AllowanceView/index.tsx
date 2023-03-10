@@ -40,7 +40,7 @@ const AllowanceView: FC<Props> = (props) => {
   const { t } = useTranslation("translation", { keyPrefix: "home" });
 
   const showFiat = !isLoadingSettings && settings.showFiat;
-  const hasPayments = !isLoadingTransactions && !!transactions?.length;
+  const hasTransactions = !isLoadingTransactions && !!transactions?.length;
 
   // get array of payments if not done yet
   useEffect(() => {
@@ -137,9 +137,9 @@ const AllowanceView: FC<Props> = (props) => {
           </div>
         )}
 
-        {hasPayments && <TransactionsTable transactions={transactions} />}
+        {hasTransactions && <TransactionsTable transactions={transactions} />}
 
-        {!hasPayments && (
+        {!hasTransactions && (
           <p className="text-gray-500 dark:text-neutral-400">
             <Trans
               i18nKey={"allowance_view.no_transactions"}
