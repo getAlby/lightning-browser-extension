@@ -10,7 +10,7 @@
       },
       "set_password": {
         "title": "Set an unlock password",
-        "description": "This password is used to protect your wallet and provide access to the browser extension. It cannot be reset and is separate from your Alby account password.",
+        "description": "This password is used to protect your wallet and provide access to the browser extension. It cannot be reset and is separate from your Alby Account password.",
         "choose_password": {
           "label": "Choose an unlock password:"
         },
@@ -37,10 +37,10 @@
     },
     "choose_path": {
       "title": "Connect",
-      "description": "To start using Alby to make online payments, connect your lightning wallet to the extension.",
+      "description": "To start using the Alby Extension, connect your lightning wallet.",
       "alby": {
         "title": "Alby Account",
-        "description": "Sign up or use your existing Alby account to get started with lightning payments in no time.",
+        "description": "Sign up or use your existing Alby Account to get started with lightning payments in no time.",
         "create_new": "Sign up"
       },
       "other": {
@@ -66,9 +66,9 @@
           }
         },
         "forgot_password": "Forgot password?",
-        "title": "Your Alby account",
-        "create_account": "Create a new Alby account to send and receive bitcoin payments.",
-        "login_account": "Log in to connect your existing Alby account.",
+        "title": "Your Alby Account",
+        "create_account": "Create a new Alby Account to send and receive bitcoin payments.",
+        "login_account": "Log in to connect your existing Alby Account.",
         "host_wallet": "We host a Lightning wallet for you!",
         "email": {
           "create": {
@@ -79,7 +79,7 @@
           }
         },
         "optional_lightning_note": {
-          "part1": "Your Alby account also comes with an optional",
+          "part1": "Your Alby Account also comes with an optional",
           "part2": "lightning address",
           "part3": ". This is a simple way for anyone to send you bitcoin on the lightning network.",
           "part4": "learn more"

@@ -56,7 +56,7 @@ const commonCreateWalletUserCreate = async (
 
   await findByText(
     $document,
-    "To start using Alby to make online payments, connect your lightning wallet to the extension."
+    "To start using the Alby Extension, connect your lightning wallet."
   );
 
   if (options.connectToLightningWallet) {
@@ -101,7 +101,7 @@ test.describe("Create or connect wallets", () => {
     const createNewWalletButton = await getByText($document, "Sign up");
     createNewWalletButton.click();
 
-    await findByText($document, "Your Alby account");
+    await findByText($document, "Your Alby Account");
 
     // type user email
     const emailField = await getByLabelText($document, "Email Address");
@@ -136,7 +136,7 @@ test.describe("Create or connect wallets", () => {
     const loginButton = await getByText($document, "Log in");
     loginButton.click();
 
-    await findByText($document, "Your Alby account");
+    await findByText($document, "Your Alby Account");
 
     // type user email
     const emailField = await getByLabelText(
