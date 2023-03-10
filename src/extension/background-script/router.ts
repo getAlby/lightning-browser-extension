@@ -33,6 +33,7 @@ const routes = {
   makeInvoice: ln.makeInvoice,
   connectPeer: ln.connectPeer,
   getPayments: payments.all,
+  getPaymentsByAccount: payments.listByAccount,
   accountInfo: accounts.info,
   accountDecryptedDetails: accounts.decryptedDetails,
   addAccount: accounts.add,
