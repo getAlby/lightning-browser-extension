@@ -40,10 +40,10 @@ function Settings() {
 
   async function downloadBackup() {
     const data = await msg.request<string>("backup");
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(data);
+    const dataStr = "data:text/plain;charset=utf-8," + encodeURIComponent(data);
     const downloadAnchorNode = document.createElement("a");
     downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "alby-backup" + ".json");
+    downloadAnchorNode.setAttribute("download", "alby-backup");
     document.body.appendChild(downloadAnchorNode); // required for firefox
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
