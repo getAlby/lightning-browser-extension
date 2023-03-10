@@ -66,6 +66,17 @@ const migrations = {
     });
     // will be persisted by setMigrated
   },
+
+  migratePermissionsWithoutAccountId: async () => {
+    const { accounts } = state.getState();
+    const accountId = Object.keys(accounts)[0];
+    const permissions = await db.permissions.toArray();
+
+    permissions.forEach(async (permission) => {
+      permission.id &&
+        (await db.permissions.update(permission.id, { accountId }));
+    });
+  },
 };
 
 const migrate = async () => {
@@ -80,6 +91,11 @@ const migrate = async () => {
     console.info("Running migration for: ensureAccountId");
     await migrations["ensureAccountId"]();
     await setMigrated("ensureAccountId");
+  }
+  if (shouldMigrate("migratePermissionsWithoutAccountId")) {
+    console.info("Running migration for: migratePermissionsWithoutAccountId");
+    await migrations["migratePermissionsWithoutAccountId"]();
+    await setMigrated("migratePermissionsWithoutAccountId");
   }
 };
 

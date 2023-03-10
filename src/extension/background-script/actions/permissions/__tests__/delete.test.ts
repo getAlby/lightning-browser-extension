@@ -34,6 +34,7 @@ describe("delete permission", () => {
       args: {
         host: mockPermissions[1].host,
         method: "the-request-method-2",
+        accountId: "123456",
       },
     };
 

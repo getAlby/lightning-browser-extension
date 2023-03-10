@@ -228,6 +228,7 @@ export interface MessagePermissionDelete extends MessageDefault {
   args: {
     host: Permission["host"];
     method: Permission["method"];
+    accountId: Account["id"];
   };
   action: "deletePermission";
 }
@@ -235,6 +236,7 @@ export interface MessagePermissionDelete extends MessageDefault {
 export interface MessagePermissionsList extends MessageDefault {
   args: {
     id: Allowance["id"];
+    accountId: Account["id"];
   };
   action: "listPermissions";
 }
@@ -242,6 +244,7 @@ export interface MessagePermissionsList extends MessageDefault {
 export interface MessagePermissionsDelete extends MessageDefault {
   args: {
     ids: Permission["id"][];
+    accountId: Account["id"];
   };
   action: "deletePermissions";
 }
@@ -623,6 +626,7 @@ export enum PermissionMethodNostr {
 export interface DbPermission {
   id?: number;
   createdAt: string;
+  accountId: string;
   allowanceId: number;
   host: string;
   method: string | PermissionMethodNostr;
@@ -707,7 +711,6 @@ export interface SettingsStorage {
   showFiat: boolean;
   currency: CURRENCIES;
   exchange: SupportedExchanges;
-  debug: boolean;
   nostrEnabled: boolean;
   closedTips: TIPS[];
 }

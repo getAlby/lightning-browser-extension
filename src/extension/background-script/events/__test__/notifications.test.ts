@@ -20,7 +20,6 @@ jest.mock("~/extension/background-script/actions/cache/getCurrencyRate", () => {
 const settings: SettingsStorage = {
   browserNotifications: true,
   currency: CURRENCIES["USD"],
-  debug: false,
   exchange: "coindesk",
   isUsingLegacyLnurlAuthKey: false,
   legacyLnurlAuth: false,
