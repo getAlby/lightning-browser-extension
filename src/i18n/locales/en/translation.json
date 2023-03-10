@@ -520,7 +520,7 @@
       },
       "name": {
         "title": "Name",
-        "subtitle": "translation.settings.name.subtitle\n",
+        "subtitle": "",
         "placeholder": "Enter your name"
       },
       "email": {
