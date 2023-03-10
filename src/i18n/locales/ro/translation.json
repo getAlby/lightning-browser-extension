@@ -239,8 +239,8 @@
         "title": "RaspiBlitz",
         "page": {
           "title": "Conectare la nodul tau <0>RaspiBlitz</0>",
-          "instructions1": "Ai nevoie de adresa onion a nodului tau, portul, si un macaroon cu permisiuni de citire si trimitere (ex. admin.macaroon).<1/><1/><0>SSH</0> in al tau <0>RaspiBlitz</0>.<1/>Ruleaza comanda <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Copiaza si insereaza adresa <0>.onion</0> in campul de mai jos.<1/>Si <0>portul tau</0> dupa adresa onion, portul implicit este <0>:8080</0>.",
-          "instructions2": "Selecteaza <0>CONNECT</0>.<1/>Selecteaza <0>EXPORT</0>.<1/>Selecteaza <0>HEX</0>.<1/>Copiaza <0>adminMacaroon</0>.<1/>Insereaza macaroon in campul de mai jos."
+          "instructions1": "Urmareste aceste pasi:<1/> 1. Conecteaza-te prin <0>SSH</0> la <0>Raspiblitz</0><1/> 2. Selecteaza <0>Connect Apps & Show Credentials</0> din lista <1/><0/> 3. Alege <0>Connect Alby to this node</0><1/> 4. Apasa <0>OK</0> pentru a afisa credentialele conexiunii <1/><1/>Copiaza <0>REST API host</0> sau adresa <0>.onion</0>, pentru conectarea prin Tor, si insereaza in campul de mai jos.",
+          "instructions2": "Copiaza (admin) <0>macaroon</0> si insereaza mai jos."
         },
         "rest_api_host": {
           "label": "REST API host",
@@ -398,10 +398,11 @@
           "private_key": {
             "title": "Gestionarea cheii tale",
             "subtitle": "Insereaza cheia ta privata sau genereaza una noua. Inainte sa generezi o noua cheie asigura-te ca ai salvat cheia privata. <0>Mai multe »</0>",
-            "warning": "Vechea ta cheie privata va fi stearsa. Sigur doresti asta?",
+            "warning": "Te rugam sa introduci numele contului pentru a confirma stergerea cheii private:",
             "success": "Cheia privata a fost criptata si salvata cu succes.",
             "successfully_removed": "Cheia privata a fost indepartata cu succes.",
-            "label": "Cheia privata"
+            "label": "Cheia privata",
+            "failed_to_remove": "Numele contului pe care l-ai introdus nu corespunde; vechea ta cheie privata a fost restabilita."
           },
           "public_key": {
             "label": "Cheia publica"

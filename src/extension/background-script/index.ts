@@ -12,6 +12,8 @@ import state from "./state";
 let isFirstInstalled = false;
 let isRecentlyUpdated = false;
 
+const debug = process.env.NODE_ENV === "development";
+
 // when debugging is enabled in development mode a window.debugAlby object is defined that can be used within the console. This is the type interface for that
 declare global {
   interface Window {
@@ -64,7 +66,7 @@ const updateIcon = async (
 };
 
 const debugLogger = (message: unknown, sender: Runtime.MessageSender) => {
-  if (state.getState().settings.debug) {
+  if (debug) {
     console.info("Background onMessage: ", message, sender);
   }
 };
@@ -96,8 +98,6 @@ const routeCalls = (
   if (message.application !== "LBE" || !message.prompt) {
     return;
   }
-  const debug = state.getState().settings.debug;
-
   if (message.type) {
     console.error("Invalid message, using type: ", message);
   }
@@ -147,7 +147,7 @@ async function init() {
   // Notify the content script that the tab has been updated.
   browser.tabs.onUpdated.addListener(extractLightningData);
 
-  if (state.getState().settings.debug) {
+  if (debug) {
     console.info("Debug mode enabled, use window.debugAlby");
     window.debugAlby = {
       state,

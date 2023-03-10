@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import { classNames } from "~/app/utils";
 
+import { RangeLabel } from "./rangeLabel";
+
 export type Props = {
   suffix?: string;
   endAdornment?: React.ReactNode;
@@ -75,12 +77,19 @@ export default function DualCurrencyField({
 
   return (
     <div className="relative block m-0">
-      <label
-        htmlFor={id}
-        className="block font-medium text-gray-800 dark:text-white"
-      >
-        {label}
-      </label>
+      <div className="flex justify-between items-center w-full">
+        <label
+          htmlFor={id}
+          className="font-medium text-gray-800 dark:text-white"
+        >
+          {label}
+        </label>
+        {(min || max) && (
+          <span className="text-xs font-normal">
+            <RangeLabel min={min} max={max} /> sats
+          </span>
+        )}
+      </div>
 
       <div
         className={classNames(

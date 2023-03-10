@@ -183,7 +183,6 @@ export const DEFAULT_SETTINGS: SettingsStorage = {
   showFiat: true,
   currency: CURRENCIES.USD,
   exchange: "alby",
-  debug: false,
   nostrEnabled: false,
   closedTips: [],
 };

@@ -30,7 +30,7 @@ export default async function keysend(message: Message) {
       error: e instanceof Error ? e.message : "Something went wrong",
     };
   }
-  pubsub.publishPaymentNotification(message, {
+  pubsub.publishPaymentNotification("keysend", message, {
     response,
     details: {
       destination: destination,
