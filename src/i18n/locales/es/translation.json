@@ -455,7 +455,7 @@
       },
       "name": {
         "title": "Nombre",
-        "subtitle": "traducción.ajustes.nombre.subtítulos\n",
+        "subtitle": "",
         "placeholder": "Introduzca su nombre"
       },
       "email": {

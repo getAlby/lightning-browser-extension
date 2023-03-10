@@ -391,7 +391,7 @@
       "name": {
         "title": "Name",
         "placeholder": "Geben Sie Ihren Namen ein",
-        "subtitle": "übersetzung.einstellungen.name.untertitel\n"
+        "subtitle": ""
       },
       "email": {
         "title": "E-Mail",
