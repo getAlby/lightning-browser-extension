@@ -710,7 +710,8 @@
       }
     },
     "transactions": {
-      "title": "Transações"
+      "title": "Transações",
+      "description": "Transações enviadas usando suas contas"
     }
   },
   "common": {
