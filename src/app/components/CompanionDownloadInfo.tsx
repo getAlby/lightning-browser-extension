@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 type Props = {
@@ -6,6 +6,7 @@ type Props = {
 };
 
 function CompanionDownloadInfo({ hasTorCallback }: Props) {
+  const [isTor, setIsTor] = useState(false);
   const { t } = useTranslation("components", {
     keyPrefix: "companion_download_info",
   });
@@ -20,6 +21,7 @@ function CompanionDownloadInfo({ hasTorCallback }: Props) {
 
   function onChangeConnectionMode(e: ChangeEvent<HTMLInputElement>) {
     const isTor = e.target.value === "tor";
+    setIsTor(isTor);
     hasTorCallback(isTor);
   }
 
@@ -37,9 +39,8 @@ function CompanionDownloadInfo({ hasTorCallback }: Props) {
             name="mode"
             value="companion"
             className="hidden peer"
-            checked
+            checked={!isTor}
             onChange={(e) => onChangeConnectionMode(e)}
-            required
           />
           <label
             htmlFor="mode-companion"
@@ -70,6 +71,7 @@ function CompanionDownloadInfo({ hasTorCallback }: Props) {
             name="mode"
             value="tor"
             className="hidden peer"
+            checked={isTor}
             onChange={(e) => onChangeConnectionMode(e)}
           />
           <label
