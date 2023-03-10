@@ -36,6 +36,8 @@ interface Config {
 
 const methods: Record<string, string> = {
   addinvoice: "lnd.lightning.AddInvoice",
+  addholdinvoice: "lnd.invoices.AddHoldInvoice",
+  settleinvoice: "lnd.invoices.SettleInvoice",
   channelbalance: "lnd.lightning.ChannelBalance",
   connectpeer: "lnd.lightning.ConnectPeer",
   decodepayreq: "lnd.lightning.DecodePayReq",
