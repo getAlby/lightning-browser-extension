@@ -130,7 +130,7 @@ const state = createState<State>((set, get) => ({
       .catch((e) => {
         console.info("storage.sync is not available. using storage.local");
         storage = "local";
-        return browser.storage.local.get("mockSync").then((result) => {
+        return browser.storage.local.get("__sync").then((result) => {
           // Deep merge to ensure that nested defaults are also merged instead of overwritten.
           const data = merge(
             browserStorageDefaults,
@@ -154,7 +154,9 @@ const state = createState<State>((set, get) => ({
     if (storage === "sync") {
       return browser.storage.sync.set(data);
     } else {
-      return browser.storage.local.set({ mockSync: data });
+      // because there's an overlap with accounts being stored in
+      // the local storage, see src/common/lib/cache.ts
+      return browser.storage.local.set({ __sync: data });
     }
   },
 }));
