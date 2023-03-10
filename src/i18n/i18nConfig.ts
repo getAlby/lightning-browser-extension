@@ -91,13 +91,13 @@ export const resources = {
 // needs to be aligned with `resources`
 export const supportedLocales = [
   { locale: "en", label: "English" },
-  { locale: "cs", label: "Czech" },
-  { locale: "da", label: "Danish" },
+  { locale: "cs", label: "Čeština," },
+  { locale: "da", label: "Dansk" },
   { locale: "es", label: "Español" },
-  { locale: "fi", label: "Finnish" },
   { locale: "fr", label: "Français" },
   { locale: "it", label: "Italiano" },
   { locale: "pt-BR", label: "Português (Brasil)" },
+  { locale: "fi", label: "Suomalainen" },
   { locale: "sv", label: "Svenska" },
   { locale: "zh-CN", label: "中文（简化字）" },
 ];
