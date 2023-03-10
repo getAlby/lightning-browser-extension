@@ -193,6 +193,7 @@ const DefaultView: FC<Props> = (props) => {
             }}
           />
         </div>
+
         {isBlockedUrl && (
           <div className="mb-2 items-center py-3 dark:text-white">
             <p className="py-1">
