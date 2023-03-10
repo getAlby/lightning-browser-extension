@@ -838,9 +838,6 @@
         "label": "Rozpočet"
       }
     },
-    "companion_download_info": {
-      "or": "Nebo:"
-    },
     "toasts": {
       "connection_error": {
         "what_you_can_do": "Co můžete dělat:",

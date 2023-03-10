@@ -837,9 +837,6 @@
         "label": "Budget"
       }
     },
-    "companion_download_info": {
-      "or": "Eller:"
-    },
     "toasts": {
       "connection_error": {
         "what_you_can_do": "Dette kan du gøre:",

@@ -843,9 +843,6 @@
         "label": "Budget"
       }
     },
-    "companion_download_info": {
-      "or": "Ou:"
-    },
     "toasts": {
       "connection_error": {
         "what_you_can_do": "Voici ce que vous pouvez faire :",

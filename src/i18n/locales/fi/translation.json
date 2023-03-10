@@ -630,9 +630,6 @@
         "label": "Budjetti"
       }
     },
-    "companion_download_info": {
-      "or": "Tai:"
-    },
     "toasts": {
       "connection_error": {
         "what_you_can_do": "Voit tehdä näin:",
