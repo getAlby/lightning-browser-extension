@@ -865,7 +865,6 @@
       }
     },
     "companion_download_info": {
-      "using_tor": "如果你使用Tor浏览器，请点击这里继续",
       "description": "你正在尝试连接到 Tor 后面的节点。为此，你需要安装 Alby 配套应用程序或运行 Tor。 （当你不确定时，我们建议使用 Alby 配套应用程序。）"
     },
     "publishers_table": {
