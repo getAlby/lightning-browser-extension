@@ -824,9 +824,7 @@
       }
     },
     "companion_download_info": {
-      "description": "Você está tentando se conectar em um servidor que usa Tor. Para funcionar, você precisa ter o aplicativo complementar Alby instalado ou ter o Tor em execução. (Se tiver de dúvidas, recomendamos o aplicativo complementar Alby.)",
       "download_here": "Faça o download do app complementar da Alby aqui!",
-      "using_tor": "clique aqui para continuar se você usa o navegador Tor",
       "or": "Ou:"
     },
     "toasts": {

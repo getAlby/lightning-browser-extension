@@ -838,9 +838,7 @@
       }
     },
     "companion_download_info": {
-      "description": "Du forsøger at oprette forbindelse til en node bag Tor. For at gøre dette, skal du enten installere Albys tillægs-app eller have Tor kørende. (Hvis du er i tvivl, anbefaler vi Albys tillægs-app.)",
       "download_here": "Hent tillægget til Alby her!",
-      "using_tor": "klik her for at forstsætte, hvis du bruger Tor-browseren",
       "or": "Eller:"
     },
     "toasts": {

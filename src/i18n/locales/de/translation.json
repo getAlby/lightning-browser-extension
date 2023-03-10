@@ -794,9 +794,7 @@
       }
     },
     "companion_download_info": {
-      "using_tor": "Klicke hier zum Weitermachen, wenn du den TOR Browser verwendest",
       "description": "Du versuchst, dich mit einem Knoten hinter Tor zu verbinden. Dazu muss entweder die Alby Companion App installiert oder Tor ausgeführt werden. (Wenn du dir nicht sicher bist, empfehlen wir die Alby Companion App.)",
-      "download_here": "Lade dein Alby-Begleiter hier herunter!",
       "or": "Oder:"
     },
     "allowance_menu": {

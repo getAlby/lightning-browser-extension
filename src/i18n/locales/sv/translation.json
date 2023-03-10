@@ -589,9 +589,7 @@
       }
     },
     "companion_download_info": {
-      "description": "Du försöker ansluta till en nod bakom Tor. Du behöver antingen ha Albys kompanjons-app installerad eller ha Tor i bakgrunden. (Om du är osäker rekommenderar vi Albys kompanjons-app.)",
       "download_here": "Ladda ner Albys kompanjons-app här!",
-      "using_tor": "klicka här för att fortsätta använda Tor-webbläsaren",
       "or": "Eller:"
     },
     "toasts": {
@@ -627,6 +625,5 @@
         "active": "AKTIV"
       }
     }
-  },
-  "permissions": {}
+  }
 }
