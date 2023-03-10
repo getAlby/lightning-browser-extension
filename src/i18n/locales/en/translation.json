@@ -882,10 +882,16 @@
       }
     },
     "companion_download_info": {
-      "description": "You are trying to connect to a node behind Tor. To do this you either need to have the Alby companion app installed or have Tor running. (When you're unsure, we recommend the Alby companion app.)",
-      "download_here": "Download the Alby companion here!",
-      "using_tor": "click here to continue if you use the Tor Browser",
-      "or": "Or:"
+      "heading": "How do you want to connect to the TOR network?",
+      "download": "Download",
+      "companion": {
+        "title": "Companion App",
+        "description": "Lightweight app that connects your browser to the TOR network."
+      },
+      "tor_native": {
+        "title": "TOR (native)",
+        "description": "Select this option if this browser is already connected to the TOR network."
+      }
     },
     "toasts": {
       "connection_error": {

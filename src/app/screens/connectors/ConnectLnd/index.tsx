@@ -160,8 +160,8 @@ export default function ConnectLnd() {
       {formData.url.match(/\.onion/i) && (
         <div className="mb-6">
           <CompanionDownloadInfo
-            hasTorCallback={() => {
-              setHasTorSupport(true);
+            hasTorCallback={(hasTor: boolean) => {
+              setHasTorSupport(hasTor);
             }}
           />
         </div>
