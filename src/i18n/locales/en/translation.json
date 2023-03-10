@@ -962,7 +962,9 @@
       "sendtoroute": "Make a payment via the specified route.",
       "decodepayreq": "Decode a payment request string.",
       "routermc": "Read the internal mission control state.",
-      "addinvoice": "Create new invoices."
+      "addinvoice": "Create new invoices.",
+      "addholdinvoice": "Create new HODL invoices.",
+      "settleinvoice": "Settle an accepted invoice."
     }
   }
 }
