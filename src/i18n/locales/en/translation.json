@@ -913,7 +913,9 @@
       "options": {
         "account": {
           "add": "Add a new account",
-          "manage": "Manage accounts"
+          "manage": "Manage accounts",
+          "account_settings": "Account settings",
+          "go_to_web_wallet": "Manage your Alby Account"
         }
       }
     },

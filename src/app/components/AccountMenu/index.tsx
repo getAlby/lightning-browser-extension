@@ -2,7 +2,8 @@ import {
   AddressBookIcon,
   CaretDownIcon,
   CheckIcon,
-  PlusIcon,
+  GlobeIcon,
+  WalletIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -10,6 +11,7 @@ import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Avatar from "~/app/components/Avatar";
+import MenuDivider from "~/app/components/Menu/MenuDivider";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import msg from "~/common/lib/msg";
@@ -73,13 +75,13 @@ function AccountMenu({ showOptions = true }: Props) {
   }
 
   return (
-    <div className="relative pl-2 w-72 flex bg-gray-100 rounded-md dark:bg-surface-12dp">
+    <div className="relative pl-2 w-72 flex border border-gray-200 rounded-md dark:bg-surface-12dp">
       <div className="flex items-center">
-        <Avatar size={32} name={authAccount?.name || ""} />
+        <Avatar size={24} name={authAccount?.id || ""} />
       </div>
 
       <div
-        className={`flex-auto mx-2 py-1 overflow-hidden ${
+        className={`flex-auto mx-2 py-3 overflow-hidden ${
           !title && !balancesDecorated ? "w-28" : ""
         }`}
       >
@@ -89,21 +91,6 @@ function AccountMenu({ showOptions = true }: Props) {
         >
           {title || <Skeleton />}
         </p>
-
-        {balancesDecorated.accountBalance ? (
-          <p className="flex justify-between">
-            <span className="text-xs dark:text-white">
-              {balancesDecorated.accountBalance}
-            </span>
-            {!!balancesDecorated.fiatBalance && (
-              <span className="text-xs text-gray-600 dark:text-neutral-400 ml-2">
-                ~{balancesDecorated.fiatBalance}
-              </span>
-            )}
-          </p>
-        ) : (
-          <Skeleton />
-        )}
       </div>
 
       <Menu as="div">
@@ -113,9 +100,55 @@ function AccountMenu({ showOptions = true }: Props) {
         </Menu.Button>
 
         <Menu.List position="left" fullWidth>
+          <Menu.Item>
+            <div
+              className={`flex-auto mx-5 py-2 overflow-hidden ${
+                !title && !balancesDecorated ? "w-28" : ""
+              }`}
+            >
+              <span className="text-xs">Balance</span>
+              {balancesDecorated.accountBalance ? (
+                <p className="flex justify-between">
+                  <span className="text-md dark:text-white">
+                    {balancesDecorated.accountBalance}
+                  </span>
+                  {!!balancesDecorated.fiatBalance && (
+                    <span className="text-xs text-gray-600 dark:text-neutral-400 ml-2">
+                      ~{balancesDecorated.fiatBalance}
+                    </span>
+                  )}
+                </p>
+              ) : (
+                <Skeleton />
+              )}
+            </div>
+          </Menu.Item>
+          <Menu.ItemButton
+            onClick={() => {
+              console.log("OK");
+            }}
+          >
+            <WalletIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+            {t("options.account.account_settings")}
+          </Menu.ItemButton>
+          <Menu.ItemButton
+            onClick={() => {
+              console.log("OK");
+            }}
+          >
+            <GlobeIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+            {t("options.account.go_to_web_wallet")}
+          </Menu.ItemButton>
+
+          <MenuDivider />
+
           <Menu.Subheader>{t("title")}</Menu.Subheader>
 
           {Object.keys(accounts).map((accountId) => {
+            if (accountId === authAccount?.id) {
+              return;
+            }
+
             const account = accounts[accountId];
             return (
               <Menu.ItemButton
@@ -127,7 +160,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 title={account.name}
               >
                 <div className="shrink-0">
-                  <Avatar size={32} name={account.name} />
+                  <Avatar size={24} name={account.id} />
                 </div>
                 <span className="overflow-hidden text-ellipsis whitespace-nowrap ml-2">
                   {account.name}&nbsp;
@@ -147,14 +180,6 @@ function AccountMenu({ showOptions = true }: Props) {
           {showOptions && (
             <>
               <Menu.Divider />
-              <Menu.ItemButton
-                onClick={() => {
-                  openOptions("accounts/new");
-                }}
-              >
-                <PlusIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-                {t("options.account.add")}
-              </Menu.ItemButton>
               <Menu.ItemButton
                 onClick={() => {
                   openOptions("accounts");
