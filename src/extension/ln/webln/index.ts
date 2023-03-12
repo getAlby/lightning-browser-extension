@@ -161,6 +161,13 @@ export default class WebLNProvider {
           // 3. data: the actual response data
           window.webln._requests.resolve(messageEvent.data.data.data);
         }
+        console.log(
+          "❌ delete from _request",
+          messageEvent.data.id,
+          messageEvent.data.data
+        );
+        delete window.nostr._requests[messageEvent.data.id];
+
         // For some reason must happen only at the end of this function
         window.removeEventListener("message", handleWindowMessage);
       }

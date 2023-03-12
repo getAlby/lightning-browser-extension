@@ -6,15 +6,30 @@ type RequestInvoiceArgs = {
   defaultMemo?: string;
 };
 
+declare global {
+  interface Window {
+    webbtc: WebBTCProvider;
+  }
+}
+
+interface Requests {
+  [key: string]: {
+    resolve: (value?: unknown) => void;
+    reject: (reason?: unknown) => void;
+  };
+}
+
 export default class WebBTCProvider {
   enabled: boolean;
   isEnabled: boolean;
   executing: boolean;
+  _requests: Requests;
 
   constructor() {
     this.enabled = false;
     this.isEnabled = false;
     this.executing = false;
+    this._requests = {};
   }
 
   enable() {
@@ -103,6 +118,9 @@ export default class WebBTCProvider {
     args?: Record<string, unknown>
   ): Promise<Record<string, unknown>> {
     return new Promise((resolve, reject) => {
+      const id = Math.random().toString().slice(4);
+      window.webbtc._requests[id] = { resolve, reject };
+      console.log("🟢 added " + id + " to _requests", action);
       // post the request to the content script. from there it gets passed to the background script and back
       // in page script can not directly connect to the background script
       window.postMessage(
@@ -122,18 +140,30 @@ export default class WebBTCProvider {
         if (
           !messageEvent.data ||
           !messageEvent.data.response ||
-          messageEvent.data.application !== "LBE"
+          messageEvent.data.application !== "LBE" ||
+          !window.webbtc._requests[messageEvent.data.id]
         ) {
           return;
         }
         if (messageEvent.data.data.error) {
-          reject(new Error(messageEvent.data.data.error));
+          window.webbtc._requests[messageEvent.data.id].reject(
+            new Error(messageEvent.data.data.error)
+          );
         } else {
           // 1. data: the message data
           // 2. data: the data passed as data to the message
           // 3. data: the actual response data
-          resolve(messageEvent.data.data.data);
+          window.webbtc._requests[messageEvent.data.id].resolve(
+            messageEvent.data.data.data
+          );
         }
+        console.log(
+          "❌ delete from _request",
+          messageEvent.data.id,
+          messageEvent.data.data
+        );
+        delete window.webbtc._requests[messageEvent.data.id];
+
         // For some reason must happen only at the end of this function
         window.removeEventListener("message", handleWindowMessage);
       }
