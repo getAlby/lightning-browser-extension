@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    webln: WebLNProvider;
+  }
+}
+
 type RequestInvoiceArgs = {
   amount?: string | number;
   defaultAmount?: string | number;
@@ -12,15 +18,24 @@ type KeysendArgs = {
   amount: string | number;
 };
 
+interface Requests {
+  [key: string]: {
+    resolve: (value?: unknown) => void;
+    reject: (reason?: unknown) => void;
+  };
+}
+
 export default class WebLNProvider {
   enabled: boolean;
   isEnabled: boolean;
   executing: boolean;
+  _requests: Requests;
 
   constructor() {
     this.enabled = false;
     this.isEnabled = false; // seems some webln implementations use webln.isEnabled and some use webln.enabled
     this.executing = false;
+    this._requests = {};
   }
 
   enable() {
@@ -107,6 +122,10 @@ export default class WebLNProvider {
     args?: Record<string, unknown>
   ): Promise<Record<string, unknown>> {
     return new Promise((resolve, reject) => {
+      const id = Math.random().toString().slice(4);
+      this._requests[id] = { resolve, reject };
+      console.log("🟢 added " + id + " to _requests", action);
+
       // post the request to the content script. from there it gets passed to the background script and back
       // in page script can not directly connect to the background script
       window.postMessage(
@@ -127,17 +146,20 @@ export default class WebLNProvider {
           !messageEvent.data ||
           !messageEvent.data.response ||
           messageEvent.data.application !== "LBE" ||
-          messageEvent.data.scope !== "webln"
+          messageEvent.data.scope !== "webln" ||
+          !window.nostr._requests[messageEvent.data.id]
         ) {
           return;
         }
         if (messageEvent.data.data.error) {
-          reject(new Error(messageEvent.data.data.error));
+          window.webln._requests.reject(
+            new Error(messageEvent.data.data.error)
+          );
         } else {
           // 1. data: the message data
           // 2. data: the data passed as data to the message
           // 3. data: the actual response data
-          resolve(messageEvent.data.data.data);
+          window.webln._requests.resolve(messageEvent.data.data.data);
         }
         // For some reason must happen only at the end of this function
         window.removeEventListener("message", handleWindowMessage);

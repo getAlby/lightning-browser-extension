@@ -9,7 +9,7 @@ declare global {
 interface Requests {
   [key: string]: {
     resolve: (value?: unknown) => void;
-    reject: (reason?: any) => void;
+    reject: (reason?: unknown) => void;
   };
 }
 
@@ -27,7 +27,7 @@ export default class NostrProvider {
     if (this.enabled) {
       return { enabled: true };
     }
-    return this.execute<{
+    return await this.execute<{
       enabled: boolean;
       remember: boolean;
     }>("enable");
@@ -93,7 +93,8 @@ export default class NostrProvider {
             console.log(
               "🔴 no _request found for, already processed? " +
                 messageEvent.data.id,
-              messageEvent.data.data.data
+              messageEvent.data.data.data,
+              messageEvent
             );
           }
 

@@ -98,6 +98,7 @@ async function init() {
         }
         window.postMessage(
           {
+            id: ev.data.id,
             application: "LBE",
             response: true,
             data: response,

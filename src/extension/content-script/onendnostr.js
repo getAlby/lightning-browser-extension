@@ -50,12 +50,8 @@ async function init() {
       }
       // if a call is active we ignore the request
       if (callActive) {
-        //console.error("nostr call already executing");
-        // TODO: How do we return an error here so it gets thrown in the inpage context
-        throw new Error("nostr call already executing");
-        // return {
-        //   error: "nostr call already executing",
-        // };
+        console.error("nostr call already executing");
+        return;
       }
 
       // limit the calls that can be made from window.nostr
@@ -92,11 +88,11 @@ async function init() {
 
         window.postMessage(
           {
+            id: ev.data.id,
             application: "LBE",
             response: true,
             data: response,
             scope: "nostr",
-            id: ev.data.id,
           },
           "*" // TODO use origin
         );
