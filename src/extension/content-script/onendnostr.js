@@ -92,6 +92,7 @@ async function init() {
             response: true,
             data: response,
             scope: "nostr",
+            id: ev.data.id,
           },
           "*" // TODO use origin
         );
