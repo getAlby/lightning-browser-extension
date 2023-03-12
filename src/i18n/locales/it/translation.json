@@ -837,12 +837,6 @@
         "label": "Budget"
       }
     },
-    "companion_download_info": {
-      "description": "Stai cercando di connetterti a un nodo dietro Tor. Per fare ciò è necessario avere installato l'app companion Alby o avere Tor in esecuzione. (Se non sei sicuro, ti consigliamo l'app complementare Alby.)",
-      "download_here": "Scarica il companion Alby qui!",
-      "using_tor": "clicca qui per continuare se stai utilizzando il Browser Tor",
-      "or": "Oppure:"
-    },
     "toasts": {
       "connection_error": {
         "what_you_can_do": "Ecco cosa puoi fare:",
