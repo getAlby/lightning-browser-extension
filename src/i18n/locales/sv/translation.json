@@ -621,5 +621,6 @@
         "active": "AKTIV"
       }
     }
-  }
+  },
+  "permissions": {}
 }

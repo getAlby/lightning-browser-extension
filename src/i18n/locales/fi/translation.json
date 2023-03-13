@@ -663,5 +663,6 @@
         "active": "TOIMIVA"
       }
     }
-  }
+  },
+  "permissions": {}
 }
