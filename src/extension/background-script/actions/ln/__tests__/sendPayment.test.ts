@@ -1,4 +1,5 @@
 import type Connector from "~/extension/background-script/connectors/connector.interface";
+import type { SendPaymentResponse } from "~/extension/background-script/connectors/connector.interface";
 import { allowanceFixture } from "~/fixtures/allowances";
 import type { MessageSendPayment, OriginData } from "~/types";
 
@@ -37,11 +38,14 @@ const message: MessageSendPayment = {
   prompt: true,
 };
 
-const requestResponse = {
+const requestResponse: SendPaymentResponse = {
   data: {
     preimage: "123",
     paymentHash: "123",
-    route: "/",
+    route: {
+      total_amt: 1000,
+      total_fees: 2,
+    },
   },
 };
 const fullConnector = {
