@@ -41,6 +41,18 @@ const migrations = {
     }
   },
 
+  migratePaymentsWithoutAccountId: async () => {
+    const { accounts } = state.getState();
+    if (Object.keys(accounts).length == 1) {
+      const accountId = Object.keys(accounts)[0];
+      const payments = await db.payments.toArray();
+
+      payments.forEach(async (payments) => {
+        payments.id && (await db.payments.update(payments.id, { accountId }));
+      });
+    }
+  },
+
   ensureAccountId: async () => {
     const { accounts } = state.getState();
     Object.keys(accounts).forEach((accountId) => {

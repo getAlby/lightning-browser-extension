@@ -60,6 +60,7 @@ export interface OriginData {
 }
 
 export interface PaymentNotificationData {
+  accountId: Account["id"];
   paymentRequestDetails?: PaymentRequestObject | undefined;
   response: SendPaymentResponse | { error: string };
   origin?: OriginData;
@@ -164,6 +165,14 @@ export interface MessageGenericRequest extends MessageDefault {
 export interface MessagePaymentAll extends MessageDefault {
   action: "getPayments";
   args?: {
+    limit?: number;
+  };
+}
+
+export interface MessagePaymentListByAccount extends MessageDefault {
+  action: "getPaymentsByAccount";
+  args: {
+    accountId: Account["id"];
     limit?: number;
   };
 }
@@ -586,6 +595,7 @@ export type Transaction = {
 };
 
 export interface DbPayment {
+  accountId: string;
   allowanceId: string;
   createdAt: string;
   description: string;

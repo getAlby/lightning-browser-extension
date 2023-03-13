@@ -9,6 +9,7 @@ const persistSuccessfulPayment = async (
   const name = data?.origin?.name;
   const host = data?.origin?.host;
   const location = data?.origin?.location;
+  const accountId = data.accountId;
   const paymentResponse = data.response;
 
   if ("error" in paymentResponse) {
@@ -24,6 +25,7 @@ const persistSuccessfulPayment = async (
   const { total_amt, total_fees } = route;
 
   await db.payments.add({
+    accountId,
     host,
     location,
     name,

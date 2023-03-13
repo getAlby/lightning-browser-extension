@@ -1,13 +1,15 @@
-import type { MessagePaymentAll } from "~/types";
+import type { MessagePaymentListByAccount } from "~/types";
 
 import db from "../../db";
 
-const all = async (message: MessagePaymentAll) => {
+const listByAccount = async (message: MessagePaymentListByAccount) => {
+  const { accountId } = message.args;
   // TODO: Add pagination instead of limiting to 2121
   const limit = message?.args?.limit || 2121;
 
   const payments = await db.payments
     .toCollection()
+    .and((p) => p.accountId === accountId)
     .limit(limit)
     .reverse()
     .sortBy("createdAt");
@@ -19,4 +21,4 @@ const all = async (message: MessagePaymentAll) => {
   };
 };
 
-export default all;
+export default listByAccount;

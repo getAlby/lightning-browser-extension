@@ -14,6 +14,7 @@ Date.now = jest.fn(() => 1487076708000);
 const mockAllowances: DbAllowance[] = allowanceFixture;
 
 const data: PaymentNotificationData = {
+  accountId: "123456",
   response: {
     data: {
       preimage: "123",

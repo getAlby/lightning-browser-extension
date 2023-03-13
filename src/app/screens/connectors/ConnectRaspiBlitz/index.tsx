@@ -139,8 +139,8 @@ export default function ConnectRaspiBlitz() {
       </div>
       {formData.url.match(/\.onion/i) && (
         <CompanionDownloadInfo
-          hasTorCallback={() => {
-            setHasTorSupport(true);
+          hasTorCallback={(hasTor: boolean) => {
+            setHasTorSupport(hasTor);
           }}
         />
       )}

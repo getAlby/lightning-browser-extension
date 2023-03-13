@@ -240,15 +240,15 @@
         "page": {
           "title": "Podłącz do węzła <0>RaspiBlitz</0>",
           "instructions1": "",
-          "instructions2": ""
+          "instructions2": "Skopiuj (admin) <0>macaroon</0> w pole poniżej."
         },
         "rest_api_host": {
-          "label": "",
-          "placeholder": ""
+          "label": "Adres serwera REST API",
+          "placeholder": "adres-onion-twojego-wezla:port"
         }
       },
       "bitcoin_beach": {
-        "title": "",
+        "title": "Portfel Bitcoin Beach",
         "page": {
           "title": "Podłącz do <0>Bitcoin Beach Wallet</0>"
         }
@@ -268,7 +268,7 @@
         },
         "jwt": {
           "label": "Wprowadź swój token JWT",
-          "info": ""
+          "info": "Logowanie do {{label}} jest w trakcie aktualizacji. Jeśli jesteś zaawansowanym użytkownikiem, pobierz swój token JWT logując się przez <0>Portfel webowy (wallet.mainnet.galoy.io)</0><1/><1/>Token JWT wygląda tak: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
           "login": "Zaloguj",
@@ -306,36 +306,36 @@
         "title": "BTCPay Server",
         "page": {
           "title": "Podłącz do węzła LND na BTCPayServer",
-          "instructions": ""
+          "instructions": "Przejdź do BTCPayServer i zaloguj się jako administrator. Idź do Server Settings > Services > NDS Rest - See information. Następni kliknij \"See QR Code information\" i skopiuj dane kodu QR. Wklej poniżej:"
         },
         "config": {
-          "label": "",
-          "placeholder": ""
+          "label": "Date konfiguracyjne",
+          "placeholder": "config=https://twoj-btc-pay.org/lnd-config/212121/lnd.config"
         },
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "Połączenie nieudane. Czy adres BTCPay jest poprawny i osiągalny?"
         }
       },
       "commando": {
-        "title": "",
+        "title": "Core Lightning",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "Podłącz do Twojego węzła Core Lightning",
+          "instructions": "Upewnij się, że masz Core Lightning w wersji 0.12.0 lub nowszej, że plugin commando działa, a Twój węzeł jest dostępny w sieci lightning. Stwórz runę komendą 'lightning-cli commando-rune'."
         },
         "host": {
-          "label": ""
+          "label": "Serwer"
         },
         "pubkey": {
-          "label": ""
+          "label": "Klucz publiczny"
         },
         "rune": {
-          "label": ""
+          "label": "Runa"
         },
         "port": {
           "label": "Port"
         },
         "proxy": {
-          "label": ""
+          "label": "Proxy websocket"
         },
         "privKey": {
           "label": "Lokalny klucz prywatny (generowany automatycznie)"
@@ -364,12 +364,12 @@
       "allowance_view": {
         "recent_transactions": "Ostatnie transakcje",
         "allowance": "",
-        "sats_used": "",
-        "no_transactions": ""
+        "sats_used": "wydanych satoshi",
+        "no_transactions": "Jeszcze nie ma transakcji na koncie <0>{{name}}</0>."
       },
       "default_view": {
         "recent_transactions": "Ostatnie transakcje",
-        "no_transactions": "",
+        "no_transactions": "Jeszcze nie ma transakcji z użyciem Alby.",
         "is_blocked_hint": "Alby jest obecnie wyłączone na {{host}}",
         "block_removed": "Włączono {{host}}. Odśwież stronę."
       }
@@ -836,12 +836,6 @@
       "budget": {
         "label": ""
       }
-    },
-    "companion_download_info": {
-      "description": "",
-      "download_here": "",
-      "using_tor": "",
-      "or": ""
     },
     "toasts": {
       "connection_error": {

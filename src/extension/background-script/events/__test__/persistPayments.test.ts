@@ -19,6 +19,7 @@ const mockPayments: DbPayment[] = paymentsFixture;
 const updatedPayments: DbPayment[] = [
   ...paymentsFixture,
   {
+    accountId: "123456",
     allowanceId: "1",
     createdAt: "1487076708000",
     description: "A red bird?!",
@@ -36,6 +37,7 @@ const updatedPayments: DbPayment[] = [
 ];
 
 const data: PaymentNotificationData = {
+  accountId: "123456",
   response: {
     data: {
       preimage: "123",

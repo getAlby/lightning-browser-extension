@@ -47,6 +47,10 @@ export class DB extends Dexie {
       permissions:
         "++id,accountId,allowanceId,host,method,enabled,blocked,createdAt",
     });
+    this.version(5).stores({
+      payments:
+        "++id,accountId,allowanceId,host,location,name,description,totalAmount,totalFees,preimage,paymentRequest,paymentHash,destination,createdAt",
+    });
     this.on("ready", this.loadFromStorage.bind(this));
     this.allowances = this.table("allowances");
     this.payments = this.table("payments");

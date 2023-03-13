@@ -53,6 +53,8 @@ const browserStorageKeys = Object.keys(browserStorageDefaults) as Array<
   keyof BrowserStorage
 >;
 
+let storage: "sync" | "local" = "sync";
+
 const state = createState<State>((set, get) => ({
   connector: null,
   account: null,
@@ -118,11 +120,25 @@ const state = createState<State>((set, get) => ({
     return get().password !== null;
   },
   init: () => {
-    return browser.storage.sync.get(browserStorageKeys).then((result) => {
-      // Deep merge to ensure that nested defaults are also merged instead of overwritten.
-      const data = merge(browserStorageDefaults, result as BrowserStorage);
-      set(data);
-    });
+    return browser.storage.sync
+      .get(browserStorageKeys)
+      .then((result) => {
+        // Deep merge to ensure that nested defaults are also merged instead of overwritten.
+        const data = merge(browserStorageDefaults, result as BrowserStorage);
+        set(data);
+      })
+      .catch((e) => {
+        console.info("storage.sync is not available. using storage.local");
+        storage = "local";
+        return browser.storage.local.get("__sync").then((result) => {
+          // Deep merge to ensure that nested defaults are also merged instead of overwritten.
+          const data = merge(
+            browserStorageDefaults,
+            result.mockSync as BrowserStorage
+          );
+          set(data);
+        });
+      });
   },
   reset: async () => {
     set({ ...browserStorageDefaults });
@@ -134,7 +150,14 @@ const state = createState<State>((set, get) => ({
       ...browserStorageDefaults,
       ...pick(current, browserStorageKeys),
     };
-    return browser.storage.sync.set(data);
+
+    if (storage === "sync") {
+      return browser.storage.sync.set(data);
+    } else {
+      // because there's an overlap with accounts being stored in
+      // the local storage, see src/common/lib/cache.ts
+      return browser.storage.local.set({ __sync: data });
+    }
   },
 }));
 

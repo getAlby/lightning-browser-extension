@@ -328,9 +328,10 @@
             "successfully_removed": "Clave privada eliminada con éxito.",
             "label": "Clave Privada",
             "title": "Administra tu clave",
-            "subtitle": "Pegue su clave privada o genere una nueva. Asegúrese de hacer una copia de seguridad de su clave privada antes de generar una nueva. <0>Más información »</0>",
+            "subtitle": "Pega tu clave privada o genera una nueva. <0>Más información \"</0>",
             "warning": "Introduzca el nombre de la cuenta para confirmar la eliminación de la clave privada:",
-            "failed_to_remove": "El nombre de cuenta introducido no coincide, tu antiguo privado ha sido restaurado."
+            "failed_to_remove": "El nombre de cuenta introducido no coincide, tu antiguo privado ha sido restaurado.",
+            "backup": "⚠️ ¡No olvides hacer una copia de seguridad de tu clave privada! Si no haces una copia de seguridad de tu clave puedes perder el acceso."
           },
           "public_key": {
             "label": "Clave Pública"
@@ -615,7 +616,7 @@
       "title": "Conectar",
       "description": "Para comenzar a usar Alby y realizar pagos en línea, conecta tu billetera Lightning a la extensión.",
       "alby": {
-        "title": "Alby",
+        "title": "Cuenta de Alby",
         "create_new": "Regístrate",
         "description": "Regístrate o usa tu cuenta existente de Alby para empezar con pagos lightning en poco tiempo."
       },
@@ -632,7 +633,37 @@
       "content": "Este sitio web te solicita firmar:",
       "allow_sign": "Permitir que {{host}} firme:",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
-      "block_added": "Se agregó {{host}} a la lista de bloqueados, vuelva a cargar el sitio web."
+      "block_added": "Se agregó {{host}} a la lista de bloqueados, vuelva a cargar el sitio web.",
+      "allow_sign_event": "Permitir que {{host}} firme un {{kind}}:",
+      "view_details": "Más información",
+      "hide_details": "Ocultar los detalles",
+      "no_content": "(Sin contenido)",
+      "kinds": {
+        "unknown": "nostr evento del tipo {{kind}}",
+        "0": "metadatos",
+        "1": "nota corta de texto",
+        "2": "Recomendar un relé",
+        "3": "contactos",
+        "7": "reacción",
+        "8": "concesión de distintivo",
+        "40": "creación del canal",
+        "41": "metadatos del canal",
+        "42": "mensaje del canal",
+        "43": "ocultar mensaje del canal",
+        "44": "silenciar a un usuario del canal",
+        "9734": "solicitud de eliminación",
+        "9735": "borrar",
+        "10002": "metadatos de la lista de relés",
+        "22242": "autenticación del cliente",
+        "24133": "conectarse a nostr",
+        "30008": "distintivos del perfil",
+        "30023": "contenidos largos",
+        "30078": "datos específicos de la aplicación",
+        "5": "borrado de eventos",
+        "4": "mensajes directos cifrados",
+        "1984": "reportando",
+        "30009": "definición del distintivo"
+      }
     },
     "discover": {
       "title": "Explora el Ecosistema ⚡️ Lightning",
@@ -733,6 +764,11 @@
       "amount": {
         "label": "Cantidad (Satoshi)"
       }
+    },
+    "transactions": {
+      "title": "Transacciones",
+      "description": "Transacciones salientes en todas sus cuentas",
+      "list_empty": "Todavía no hay transacciones disponibles."
     }
   },
   "common": {
@@ -769,7 +805,8 @@
       "back": "Volver",
       "receive_again": "Recibir otro pago",
       "log_in": "Iniciar Sesión",
-      "remember": "Recordar mi elección y no preguntar nuevamente"
+      "remember": "Recordar mi elección y no preguntar nuevamente",
+      "transactions": "Transacciones"
     },
     "errors": {
       "connection_failed": "Error de conexión",
@@ -784,7 +821,13 @@
     "accounts": "Cuentas",
     "discover": "Descubrir",
     "response": "Respuesta",
-    "help": "Ayuda"
+    "help": "Ayuda",
+    "range": {
+      "between": "entre el {{min}} y el {{max}}",
+      "lessThan": "menor que {{max}}",
+      "greaterThan": "mayor que {{min}}"
+    },
+    "transactions": "Transacciones"
   },
   "components": {
     "allowance_menu": {
@@ -837,12 +880,6 @@
       "budget": {
         "label": "Presupuesto"
       }
-    },
-    "companion_download_info": {
-      "description": "Estás intentando conectarte a un nodo detrás de Tor. Para hacer esto, necesitas tener instalada la aplicación Alby companion o tener Tor en ejecución. (Cuando no esté seguro, le recomendamos la aplicación complementaria Alby.)",
-      "download_here": "¡Descargue el compañero Alby aquí!",
-      "using_tor": "haz clic aquí para continuar si utilizas el navegador Tor",
-      "or": "O:"
     },
     "toasts": {
       "connection_error": {

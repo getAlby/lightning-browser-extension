@@ -9,6 +9,13 @@ export default async function sendPayment(
 ) {
   PubSub.publish(`ln.sendPayment.start`, message);
 
+  const accountId = await state.getState().currentAccountId;
+  if (!accountId) {
+    return {
+      error: "Select an account.",
+    };
+  }
+
   const { paymentRequest } = message.args;
   if (typeof paymentRequest !== "string") {
     return {
@@ -43,6 +50,7 @@ export default async function sendPayment(
   }
 
   pubsub.publishPaymentNotification("sendPayment", message, {
+    accountId,
     paymentRequestDetails,
     response,
     details: {
