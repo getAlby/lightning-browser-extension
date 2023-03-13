@@ -9,7 +9,7 @@ import addPermission from "../add";
 jest.mock("~/extension/background-script/state");
 
 const defaultMockState = {
-  currentAccountId: "123456",
+  currentAccountId: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
 };
 
 const mockState = defaultMockState;

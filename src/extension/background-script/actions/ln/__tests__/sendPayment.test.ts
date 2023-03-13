@@ -20,6 +20,7 @@ const ConnectorClass = jest.fn().mockImplementation(() => {
 jest.mock("~/extension/background-script/state", () => ({
   getState: () => ({
     getConnector: jest.fn(() => Promise.resolve(new ConnectorClass())),
+    currentAccountId: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
   }),
 }));
 
