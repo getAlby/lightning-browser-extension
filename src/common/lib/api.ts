@@ -1,3 +1,4 @@
+import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import {
   ConnectPeerArgs,
   ConnectPeerResponse,
@@ -5,17 +6,18 @@ import {
   MakeInvoiceResponse,
 } from "~/extension/background-script/connectors/connector.interface";
 import type {
-  Accounts,
+  Account,
   AccountInfo,
-  NodeInfo,
+  Accounts,
   Allowance,
-  SettingsStorage,
-  MessageInvoices,
   DbPayment,
+  Invoice,
+  LnurlAuthResponse,
+  MessageInvoices,
   MessageLnurlAuth,
   MessageSettingsSet,
-  LnurlAuthResponse,
-  Invoice,
+  NodeInfo,
+  SettingsStorage,
 } from "~/types";
 
 import {
@@ -26,12 +28,16 @@ import {
 import msg from "./msg";
 
 export interface AccountInfoRes {
-  balance: { balance: string | number };
+  balance: { balance: string | number; currency: ACCOUNT_CURRENCIES };
   currentAccountId: string;
   info: { alias: string; pubkey?: string };
   name: string;
 }
 
+export interface GetAccountRes
+  extends Pick<Account, "id" | "connector" | "name"> {
+  nostrEnabled: boolean;
+}
 interface StatusRes {
   configured: boolean;
   unlocked: boolean;
@@ -69,11 +75,17 @@ export const swrGetAccountInfo = async (
     getAccountInfo()
       .then((response) => {
         const { alias } = response.info;
-        const { balance: resBalance } = response.balance;
+        const { balance: resBalance, currency } = response.balance;
         const name = response.name;
         const balance =
           typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
-        const account = { id, name, alias, balance };
+        const account = {
+          id,
+          name,
+          alias,
+          balance,
+          currency: currency || "BTC", // set default currency for every account
+        };
         storeAccounts({
           ...accountsCache,
           [id]: account,
@@ -85,13 +97,18 @@ export const swrGetAccountInfo = async (
   });
 };
 export const getAccounts = () => msg.request<Accounts>("getAccounts");
+export const getAccount = () => msg.request<GetAccountRes>("getAccount");
 export const updateAllowance = () => msg.request<Accounts>("updateAllowance");
 export const selectAccount = (id: string) =>
   msg.request("selectAccount", { id });
 export const getAllowance = (host: string) =>
   msg.request<Allowance>("getAllowance", { host });
-export const getPayments = (options: { limit: number }) =>
+export const getPayments = (options?: { limit?: number }) =>
   msg.request<{ payments: DbPayment[] }>("getPayments", options);
+export const getPaymentsByAccount = (options: {
+  accountId: Account["id"];
+  limit: number;
+}) => msg.request<{ payments: DbPayment[] }>("getPaymentsByAccount", options);
 export const getSettings = () => msg.request<SettingsStorage>("getSettings");
 export const getStatus = () => msg.request<StatusRes>("status");
 export const getInfo = () => msg.request<NodeInfo>("getInfo");
@@ -123,6 +140,7 @@ export const getCurrencyRate = async () =>
   msg.request<{ rate: number }>("getCurrencyRate");
 
 export default {
+  getAccount,
   getAccountInfo,
   getAccounts,
   getInfo,

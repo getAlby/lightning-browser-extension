@@ -1,8 +1,8 @@
 import { CURRENCIES } from "~/common/constants";
 import state from "~/extension/background-script/state";
 import type {
-  PaymentNotificationData,
   AuthNotificationData,
+  PaymentNotificationData,
   SettingsStorage,
 } from "~/types";
 
@@ -20,7 +20,6 @@ jest.mock("~/extension/background-script/actions/cache/getCurrencyRate", () => {
 const settings: SettingsStorage = {
   browserNotifications: true,
   currency: CURRENCIES["USD"],
-  debug: false,
   exchange: "coindesk",
   isUsingLegacyLnurlAuthKey: false,
   legacyLnurlAuth: false,
@@ -31,6 +30,7 @@ const settings: SettingsStorage = {
   userName: "",
   websiteEnhancements: true,
   nostrEnabled: false,
+  closedTips: [],
 };
 
 const mockState = {
@@ -43,6 +43,7 @@ describe("Payment notifications", () => {
   });
 
   const data: PaymentNotificationData = {
+    accountId: "12345",
     response: {
       data: {
         preimage:

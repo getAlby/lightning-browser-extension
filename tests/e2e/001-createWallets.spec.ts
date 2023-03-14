@@ -28,17 +28,8 @@ const commonCreateWalletUserCreate = async (
 }> => {
   const { page, browser } = await loadExtension();
 
-  // get document from welcome page
+  // get document from onboard page
   const $document = await getDocument(page);
-
-  // go through welcome page
-  const startedButton = await getByText($document, "Get Started");
-  startedButton.click();
-
-  await Promise.all([
-    page.waitForNavigation(), // The promise resolves after navigation has finished
-  ]);
-
   await findByText($document, "Set an unlock password");
 
   // type user password and confirm password
@@ -65,7 +56,7 @@ const commonCreateWalletUserCreate = async (
 
   await findByText(
     $document,
-    "To start using Alby to make online payments, connect your lightning wallet to the extension."
+    "To start using the Alby Extension, connect your lightning wallet."
   );
 
   if (options.connectToLightningWallet) {
@@ -86,14 +77,19 @@ const commonCreateWalletUserCreate = async (
 const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
   // submit form
   const continueButton = await findByText($document, "Continue");
-  continueButton.click();
+  continueButton.click(),
+    // options.html
+    await Promise.all([
+      page.waitForNavigation(), // The promise resolves after navigation has finished
+    ]);
 
+  // options.html#publishers
   await Promise.all([
-    page.waitForResponse(() => true),
     page.waitForNavigation(), // The promise resolves after navigation has finished
   ]);
 
-  await findByText($document, "Success", undefined, { timeout: 15000 });
+  const $optionsdocument = await getDocument(page);
+  await findByText($optionsdocument, "Explore the Lightning ⚡️ Ecosystem");
 };
 
 test.describe("Create or connect wallets", () => {
@@ -105,7 +101,7 @@ test.describe("Create or connect wallets", () => {
     const createNewWalletButton = await getByText($document, "Sign up");
     createNewWalletButton.click();
 
-    await findByText($document, "Your Alby account");
+    await findByText($document, "Your Alby Account");
 
     // type user email
     const emailField = await getByLabelText($document, "Email Address");
@@ -140,7 +136,7 @@ test.describe("Create or connect wallets", () => {
     const loginButton = await getByText($document, "Log in");
     loginButton.click();
 
-    await findByText($document, "Your Alby account");
+    await findByText($document, "Your Alby Account");
 
     // type user email
     const emailField = await getByLabelText(
@@ -226,7 +222,6 @@ test.describe("Create or connect wallets", () => {
     await runeField.type(rune);
 
     await commonCreateWalletSuccessCheck({ page, $document });
-
     await browser.close();
   });
 

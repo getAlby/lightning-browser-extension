@@ -2,10 +2,9 @@ import merge from "lodash.merge";
 import pick from "lodash.pick";
 import browser from "webextension-polyfill";
 import createState from "zustand";
-import { CURRENCIES } from "~/common/constants";
+import { DEFAULT_SETTINGS } from "~/common/constants";
 import { decryptData } from "~/common/lib/crypto";
 import { Migration } from "~/extension/background-script/migrations";
-import i18n from "~/i18n/i18nConfig";
 import type { Account, Accounts, SettingsStorage } from "~/types";
 
 import connectors from "./connectors";
@@ -40,22 +39,6 @@ interface BrowserStorage {
   nostrPrivateKey: string | null;
 }
 
-export const DEFAULT_SETTINGS: SettingsStorage = {
-  browserNotifications: true,
-  websiteEnhancements: true,
-  legacyLnurlAuth: false,
-  isUsingLegacyLnurlAuthKey: false,
-  userName: "",
-  userEmail: "",
-  locale: i18n.resolvedLanguage,
-  theme: "system",
-  showFiat: true,
-  currency: CURRENCIES.USD,
-  exchange: "alby",
-  debug: false,
-  nostrEnabled: false,
-};
-
 // these keys get synced from the state to the browser storage
 // the values are the default values
 const browserStorageDefaults: BrowserStorage = {
@@ -69,6 +52,8 @@ const browserStorageDefaults: BrowserStorage = {
 const browserStorageKeys = Object.keys(browserStorageDefaults) as Array<
   keyof BrowserStorage
 >;
+
+let storage: "sync" | "local" = "sync";
 
 const state = createState<State>((set, get) => ({
   connector: null,
@@ -98,7 +83,7 @@ const state = createState<State>((set, get) => ({
     const password = get().password as string;
     const config = decryptData(account.config as string, password);
 
-    const connector = new connectors[account.connector](config);
+    const connector = new connectors[account.connector](account, config);
     await connector.init();
 
     set({ connector: connector });
@@ -109,28 +94,51 @@ const state = createState<State>((set, get) => ({
     if (get().nostr) {
       return get().nostr as Nostr;
     }
+    const currentAccountId = get().currentAccountId as string;
+    const account = get().accounts[currentAccountId];
 
-    const nostr = new Nostr();
+    const password = get().password as string;
+    const privateKey = decryptData(account.nostrPrivateKey as string, password);
+
+    const nostr = new Nostr(privateKey);
     set({ nostr: nostr });
 
     return nostr;
   },
   lock: async () => {
+    const allTabs = browser.extension.getViews({ type: "tab" });
+    for (const tab of allTabs) {
+      tab.close();
+    }
     const connector = get().connector;
     if (connector) {
       await connector.unload();
     }
-    set({ password: null, connector: null, account: null });
+    set({ password: null, connector: null, account: null, nostr: null });
   },
   isUnlocked: () => {
     return get().password !== null;
   },
   init: () => {
-    return browser.storage.sync.get(browserStorageKeys).then((result) => {
-      // Deep merge to ensure that nested defaults are also merged instead of overwritten.
-      const data = merge(browserStorageDefaults, result as BrowserStorage);
-      set(data);
-    });
+    return browser.storage.sync
+      .get(browserStorageKeys)
+      .then((result) => {
+        // Deep merge to ensure that nested defaults are also merged instead of overwritten.
+        const data = merge(browserStorageDefaults, result as BrowserStorage);
+        set(data);
+      })
+      .catch((e) => {
+        console.info("storage.sync is not available. using storage.local");
+        storage = "local";
+        return browser.storage.local.get("__sync").then((result) => {
+          // Deep merge to ensure that nested defaults are also merged instead of overwritten.
+          const data = merge(
+            browserStorageDefaults,
+            result.mockSync as BrowserStorage
+          );
+          set(data);
+        });
+      });
   },
   reset: async () => {
     set({ ...browserStorageDefaults });
@@ -142,7 +150,14 @@ const state = createState<State>((set, get) => ({
       ...browserStorageDefaults,
       ...pick(current, browserStorageKeys),
     };
-    return browser.storage.sync.set(data);
+
+    if (storage === "sync") {
+      return browser.storage.sync.set(data);
+    } else {
+      // because there's an overlap with accounts being stored in
+      // the local storage, see src/common/lib/cache.ts
+      return browser.storage.local.set({ __sync: data });
+    }
   },
 }));
 

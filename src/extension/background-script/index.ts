@@ -3,7 +3,7 @@ import utils from "~/common/lib/utils";
 
 import { ExtensionIcon, setIcon } from "./actions/setup/setIcon";
 import connectors from "./connectors";
-import db from "./db";
+import { db, isIndexedDbAvailable } from "./db";
 import * as events from "./events";
 import migrate from "./migrations";
 import { router } from "./router";
@@ -11,6 +11,8 @@ import state from "./state";
 
 let isFirstInstalled = false;
 let isRecentlyUpdated = false;
+
+const debug = process.env.NODE_ENV === "development";
 
 // when debugging is enabled in development mode a window.debugAlby object is defined that can be used within the console. This is the type interface for that
 declare global {
@@ -64,7 +66,7 @@ const updateIcon = async (
 };
 
 const debugLogger = (message: unknown, sender: Runtime.MessageSender) => {
-  if (state.getState().settings.debug) {
+  if (debug) {
     console.info("Background onMessage: ", message, sender);
   }
 };
@@ -96,8 +98,6 @@ const routeCalls = (
   if (message.application !== "LBE" || !message.prompt) {
     return;
   }
-  const debug = state.getState().settings.debug;
-
   if (message.type) {
     console.error("Invalid message, using type: ", message);
   }
@@ -119,11 +119,17 @@ const routeCalls = (
 async function init() {
   console.info("Loading background script");
 
-  //await browser.storage.sync.set({ settings: { debug: true }, allowances: [] });
   await state.getState().init();
   console.info("State loaded");
 
-  await db.open();
+  const dbAvailable = await isIndexedDbAvailable();
+  if (dbAvailable) {
+    console.info("Using indexedDB");
+    await db.open();
+  } else {
+    console.info("Using in memory DB");
+    await db.openWithInMemoryDB();
+  }
   console.info("DB opened");
 
   events.subscribe();
@@ -140,7 +146,7 @@ async function init() {
   // Notify the content script that the tab has been updated.
   browser.tabs.onUpdated.addListener(extractLightningData);
 
-  if (state.getState().settings.debug) {
+  if (debug) {
     console.info("Debug mode enabled, use window.debugAlby");
     window.debugAlby = {
       state,
@@ -158,7 +164,7 @@ browser.runtime.onInstalled.addListener(handleInstalled);
 
 console.info("Welcome to Alby");
 init().then(() => {
-  if (isFirstInstalled) {
+  if (isFirstInstalled && !state.getState().getAccount()) {
     utils.openUrl("welcome.html");
   }
   if (isRecentlyUpdated) {
