@@ -10,12 +10,10 @@ import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 
 export type Props = {
-  lndHubType?: "lndhub_bluewallet" | "lndhub_go";
+  lndHubType?: "lndhub_go";
 };
 
-export default function ConnectLndHub({
-  lndHubType = "lndhub_bluewallet",
-}: Props) {
+export default function ConnectLndHub({ lndHubType = "lndhub_go" }: Props) {
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: `choose_connector.${lndHubType}`,
@@ -54,7 +52,7 @@ export default function ConnectLndHub({
     const password = match[2];
     const url = match[3].replace(/\/$/, "");
     const account = {
-      name: lndHubType === "lndhub_bluewallet" ? "Bluewallet" : "LNDHub",
+      name: lndHubType === "lndhub_go" ? "Bluewallet" : "LNDHub",
       config: {
         login,
         password,

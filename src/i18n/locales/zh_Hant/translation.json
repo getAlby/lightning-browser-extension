@@ -129,20 +129,7 @@
           "placeholder": "secret stack sats phrase"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "連接 BlueWallet",
-          "description": ""
-        },
-        "uri": {
-          "label": "BlueWallet 導出 URI"
-        },
-        "errors": {
-          "invalid_uri": "BlueWallet URI無效",
-          "connection_failed": "連接失敗。你的 BlueWallet URI 是否正確？"
-        }
-      },
+
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
