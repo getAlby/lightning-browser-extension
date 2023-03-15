@@ -6,6 +6,7 @@ import ConnectKollider from "@screens/connectors/ConnectKollider";
 import ConnectLnbits from "@screens/connectors/ConnectLnbits";
 import ConnectLnc from "@screens/connectors/ConnectLnc";
 import ConnectLnd from "@screens/connectors/ConnectLnd";
+import ConnectLndHub from "@screens/connectors/ConnectLndHub";
 import ConnectMyNode from "@screens/connectors/ConnectMyNode";
 import ConnectRaspiBlitz from "@screens/connectors/ConnectRaspiBlitz";
 import ConnectStart9 from "@screens/connectors/ConnectStart9";
@@ -22,6 +23,7 @@ import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
 import kolliderLogo from "/static/assets/icons/kollider.png";
 import lnbits from "/static/assets/icons/lnbits.png";
 import lnd from "/static/assets/icons/lnd.png";
+import lndhubGo from "/static/assets/icons/lndhub_go.png";
 import mynode from "/static/assets/icons/mynode.png";
 import raspiblitz from "/static/assets/icons/raspiblitz.png";
 import start9 from "/static/assets/icons/start9.png";
@@ -59,6 +61,12 @@ function getConnectorRoutes() {
       logo: lnbits,
     },
 
+    {
+      path: "lnd-hub-go",
+      element: <ConnectLndHub lndHubType="lndhub_go" />,
+      title: i18n.t("translation:choose_connector.lndhub_go.title"),
+      logo: lndhubGo,
+    },
     {
       path: "kollider",
       element: <ConnectKollider />,
