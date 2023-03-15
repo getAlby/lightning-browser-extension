@@ -1,0 +1,450 @@
+{
+  "translation": {
+    "welcome": {
+      "title": "Alby मध्ये आपले स्वागत आहे",
+      "nav": {
+        "welcome": "नमस्कार",
+        "password": "तुमचा पासवर्ड",
+        "connect": "आपले लाइटनिंग खाते जोडा ",
+        "done": "पूर्ण झाले"
+      },
+      "set_password": {
+        "title": "अनलॉक पासवर्ड सेट करा",
+        "description": "तुमचे लाइटनिंग खाते पासवर्डसह सुरक्षितपणे एन्क्रिप्ट केलेले आहे. कृपया हा पासवर्ड लक्षात ठेवा. ब्राउझरमध्ये alby एक्सटेंशन उघडण्यासाठी तुम्हाला पासवर्डची आवश्यकता असेल.",
+        "confirm_password": {
+          "label": "आपण ते बरोबर टाईप केले आहे याची पुष्टी करूया:"
+        },
+        "choose_password": {
+          "label": "पासवर्ड निवडा"
+        },
+        "errors": {
+          "enter_password": "कृपया पासवर्ड टाका.",
+          "confirm_password": "कृपया पुष्टी करण्यासाठी तुमचा पासवर्ड पुन्हा-एंटर करा.",
+          "mismatched_password": "पासवर्ड एकमेकांशी जुळत नाहीत."
+        }
+      },
+      "test_connection": {
+        "ready": "छान, तुम्ही पुढे जाण्यासाठी तयार आहात!",
+        "initializing": "तुमचे खाते सुरू करत आहे. कृपया प्रतीक्षा करा, हे पूर्ण होण्यासाठी एक मिनिट लागू शकतो...",
+        "connection_error": "कनेक्ट करताना समस्या उद्भवली",
+        "review_connection_details": "कृपया आपल्या कनेक्शन तपशीलांचे पुनरावलोकन करा.",
+        "contact_support": "तुम्हाला मदत हवी असल्यास कृपया support@getalby.com येथे संपर्क साधा",
+        "connection_taking_long": "कनेक्ट करण्याचा प्रयत्न करताना अपेक्षेपेक्षा जास्त वेळ लागतो का... तुमचे तपशील बरोबर आहेत का? तुमचा नोड पोहोचण्यायोग्य आहे का? कृपया तपासून पहा.",
+        "actions": {
+          "delete_edit_account": "अवैध खाते हटवा आणि पुन्हा संपादित करा"
+        }
+      }
+    },
+    "choose_path": {
+      "title": "कनेक्ट करा",
+      "description": "ऑनलाइन पेमेंट करण्यासाठी Alby वापरणे सुरू करण्यासाठी, तुमचे लाइटनिंग वॉलेट एक्स्टेंशनशी कनेक्ट करा.",
+      "alby": {
+        "title": "Alby",
+        "description": "काही वेळात लाइटनिंग पेमेंटसह प्रारंभ करण्यासाठी, साइन अप करा किंवा तुमचे विद्यमान Alby खाते वापरा.",
+        "create_new": "साइन अप करा"
+      },
+      "other": {
+        "title": "इतर वॉलेट",
+        "description": "तुमच्या विद्यमान लाइटनिंग वॉलेट किंवा नोडशी कनेक्ट करा आणि विविध कनेक्टरमधून निवडा.",
+        "and_more": "& बरंच काही...",
+        "connect": "कनेक्ट करा"
+      }
+    },
+    "alby": {
+      "pre_connect": {
+        "set_password": {
+          "choose_password": {
+            "label": "पासवर्ड"
+          },
+          "confirm_password": {
+            "label": "पासवर्ड ची पुष्टी करा"
+          },
+          "errors": {
+            "enter_password": "कृपया पासवर्ड प्रविष्ट करा.",
+            "confirm_password": "कृपया आपला पासवर्ड कन्फर्म करा.",
+            "mismatched_password": "पासवर्ड जुळत नाहीत."
+          }
+        },
+        "forgot_password": "पासवर्ड विसरला?",
+        "title": "तुमचे Alby खाते",
+        "create_account": "बिटकॉइन देयके पाठविण्यासाठी आणि प्राप्त करण्यासाठी एक नवीन अल्बी खाते तयार करा.",
+        "login_account": "आपले विद्यमान Alby खाते कनेक्ट करण्यासाठी लॉग इन करा.",
+        "host_wallet": "आम्ही आपल्यासाठी लाइटनिंग वॉलेट होस्ट करतो!",
+        "email": {
+          "create": {
+            "label": "ईमेल अड्रेस"
+          },
+          "login": {
+            "label": "ईमेल अड्रेस किंवा लाइटनिंग अड्रेस"
+          }
+        },
+        "optional_lightning_note": {
+          "part1": "आपले Alby खाते देखील वैकल्पिक सह येते",
+          "part2": "विजेचा पत्ता",
+          "part3": ". लाइटनिंग नेटवर्कवर आपल्याला बिटकॉइन पाठविण्याचा हा एक सोपा मार्ग आहे.",
+          "part4": "अधिक जाणून घ्या"
+        },
+        "optional_lightning_address": {
+          "label": "आपला लाइटनिंग पत्ता निवडा (वैकल्पिक)",
+          "suffix": "@getalby.com",
+          "title": "संख्या आणि अक्षरे, किमान 4 अक्षरे"
+        },
+        "errors": {
+          "create_wallet_error": "लॉग इन करण्यात किंवा नवीन खाते तयार करण्यात अपयशी ठरले. आपल्याला मदत हवी असल्यास, कृपया support@getalby.com संपर्क साधा",
+          "create_wallet_error1": "लॉग इन करण्यात किंवा नवीन खाते तयार करण्यात अपयशी ठरले.",
+          "create_wallet_error2": "आपल्याला मदत हवी असल्यास, कृपया support@getalby.com संपर्क साधा"
+        }
+      }
+    },
+    "choose_connector": {
+      "title": "Connect Lightning Wallet",
+      "description": "आपल्या बाह्य लाइटनिंग वॉलेट किंवा नोडशी कनेक्ट करा",
+      "lnd": {
+        "title": "LND",
+        "page": {
+          "title": "आपल्या LND नोडशी कनेक्ट करा",
+          "description": "आपल्याला आपले नोड URL आणि वाचन आणि पाठवा परवानग्यांसह मॅकरून आवश्यक आहे (उदा. अॅडमिन.मॅकरून)"
+        },
+        "url": {
+          "label": "REST API host and port",
+          "placeholder": "https://your-node-url:8080"
+        },
+        "macaroon": {
+          "label": "Macaroon (HEX format)"
+        },
+        "or": "किंवा",
+        "drag_and_drop": "आपले Macaroon येथे खेचून टाका किंवा <0> browse</0>",
+        "errors": {
+          "connection_failed": "कनेक्शन निकामी झाले. आपली LND क्रेडेंशियल्स योग्य आहेत का?"
+        }
+      },
+      "lnc": {
+        "title": "LND with LNC",
+        "page": {
+          "title": "आपल्या LND नोडशी कनेक्ट करा",
+          "description": "नवीन जोडी वाक्यांश मिळविण्यासाठी टर्मिनल (litd) मध्ये एक नवीन सत्र तयार करा आणि ते येथे प्रविष्ट करा"
+        },
+        "pairing_phrase": {
+          "label": "आपली जोडी वाक्यांश ",
+          "placeholder": "गुप्त स्टॅक सॅट्स वाक्यांश"
+        }
+      },
+      "lndhub_bluewallet": {
+        "title": "Bluewallet",
+        "page": {
+          "title": "Connect to BlueWallet",
+          "description": "ब्लूवॉलेटमध्ये, आपण कनेक्ट करू इच्छित वॉलेट निवडा, ते उघडा, \"...\"वर क्लिक करा, QR कोड प्रदर्शित करण्यासाठी एक्सपोर्ट / बॅकअपवर क्लिक करा आणि आपल्या वेबकॅमसह ते स्कॅन करा."
+        },
+        "uri": {
+          "label": "BlueWallet Export URI"
+        },
+        "errors": {
+          "invalid_uri": "अवैध BlueWallet URI",
+          "connection_failed": "कनेक्शन निकामी झाले. तुमची ब्लूवॉलेट URI योग्य आहे का?"
+        }
+      },
+      "lndhub_go": {
+        "title": "LNDHub",
+        "page": {
+          "title": "LNDHub ला कनेक्ट करा",
+          "description": "आपले एलएनडीएचयूबी क्रेडेंशियल यूआरआय येथे इनपुट करा किंवा आपल्या वेबकॅमसह QR कोड स्कॅन करा."
+        },
+        "uri": {
+          "label": "LNDHub Export URI"
+        },
+        "errors": {
+          "invalid_uri": "अवैध LNDHub URI",
+          "connection_failed": "कनेक्शन निकामी झाले. तुमची LNDHub URI योग्य आहे का?"
+        }
+      },
+      "lnbits": {
+        "title": "LNbits",
+        "page": {
+          "title": "<0>LNbits</0> ला कनेक्ट करा",
+          "instructions": "In LNbits, choose the wallet you want to connect, open it, click on API Info and copy the Admin Key. Paste it below:"
+        },
+        "admin_key": {
+          "label": "LNbits Admin Key",
+          "placeholder": "Your 32 digit admin key"
+        },
+        "url": {
+          "label": "LNbits URL"
+        },
+        "errors": {
+          "connection_failed": "Connection failed. Do you have the correct URL and Admin Key?"
+        }
+      },
+      "eclair": {
+        "title": "Eclair",
+        "page": {
+          "title": "<0>Eclair</0> ला कनेक्ट करा",
+          "instructions": "You need your Eclair URL and password."
+        },
+        "password": {
+          "label": "Eclair Password"
+        },
+        "url": {
+          "label": "Eclair URL",
+          "placeholder": "http://localhost:8080"
+        }
+      },
+      "citadel": {
+        "title": "Citadel",
+        "page": {
+          "title": "<0>Citadel</0> node ला कनेक्ट करा",
+          "instructions": "This currently doesn't work if 2FA is enabled."
+        },
+        "password": {
+          "label": "Citadel Password"
+        },
+        "url": {
+          "label": "Citadel URL",
+          "placeholder": "http://citadel.local"
+        }
+      },
+      "umbrel": {
+        "title": "Umbrel",
+        "page": {
+          "title": "<0>Umbrel</0> node ला कनेक्ट करा",
+          "instructions": "In your Umbrel dashboard go to <0>Connect Wallet</0>. Select <0>lndconnect REST</0> and copy the <0>lndconnect URL</0>. (Depending on your setup you can either use the local connection or the Tor connection.)"
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
+      },
+      "mynode": {
+        "title": "myNode",
+        "page": {
+          "title": "<0>myNode</0> ला कनेक्ट करा",
+          "instructions": "On your myNode homepage click on the <0>Wallet</0> button for your <0>lightning</0> service.<1/> Now click on the <0>Pair Wallet</0> button under the <0>Status</0> tab. Enter your password when prompted.<1/> Select the dropdown menu and choose a pairing option. Depending on your setup you can either use the <0>lightning (REST + Local IP)</0> connection or the <0>lightning (REST + Tor)</0> connection."
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
+      },
+      "start9": {
+        "title": "Start9",
+        "page": {
+          "title": "your <0>Embassy</0> node ला कनेक्ट करा",
+          "instructions": "<0>Note:</0> Currently we only support LND but we will be adding c-lightning support in the future!<1/>On your Embassy dashboard click on the <0>lightning network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
+      },
+      "raspiblitz": {
+        "title": "RaspiBlitz",
+        "page": {
+          "title": "your <0>RaspiBlitz</0> node ला कनेक्ट करा",
+          "instructions1": "Follow these steps:<1/> 1. <0>SSH</0> into your <0>Raspiblitz</0><1/>2. Select <0>Connect Apps & Show Credentials</0> from the list<1/><0/>3. Choose <0>Connect Alby to this node</0><1/>4. Press <0>OK</0> to display the connection credentials<1/><1/>Copy and paste the <0>REST API host</0> or the <0>.onion</0> address to connect through Tor into the input below.",
+          "instructions2": "Copy the (admin) <0>macaroon</0> into the input below."
+        },
+        "rest_api_host": {
+          "label": "REST API host",
+          "placeholder": "your-node-onion-address:port"
+        }
+      },
+      "bitcoin_beach": {
+        "title": "Bitcoin Beach Wallet",
+        "page": {
+          "title": "<0>Bitcoin Beach Wallet</0 ला कनेक्ट करा>"
+        }
+      },
+      "bitcoin_jungle": {
+        "title": "Bitcoin Jungle Wallet",
+        "page": {
+          "title": "<0>Bitcoin Jungle Wallet</0 ला कनेक्ट करा>"
+        }
+      },
+      "galoy": {
+        "phone_number": {
+          "label": "Enter your phone number"
+        },
+        "sms_code": {
+          "label": "Enter your SMS verification code"
+        },
+        "jwt": {
+          "label": "Enter your JWT token",
+          "info": "The {{label}} login is currently being upgraded. If you are an advanced user, you can grab your JWT token by logging in via the <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>The JWT looks like: <2>eyJhbG...</2><1/><1/>"
+        },
+        "actions": {
+          "login": "Login",
+          "request_sms_code": "Request SMS Code"
+        },
+        "errors": {
+          "failed_to_request_sms": "Failed to request a SMS code",
+          "failed_to_login_sms": "Failed to login with SMS code",
+          "setup_failed": "Setup failed",
+          "missing_jwt": "JWT missing, couldn't log in.",
+          "invalid_jwt": "invalid JWT passed"
+        }
+      },
+      "kollider": {
+        "title": "Kollider",
+        "description": "Login to your Kollider account",
+        "page": {
+          "title": "Connect to your Kollider account",
+          "description": "Don't have an account already? <0>Sign up</0> now!"
+        },
+        "username": {
+          "label": "Enter your Kollider username"
+        },
+        "password": {
+          "label": "Enter your Kollider password"
+        },
+        "currency": {
+          "label": "Select your currency account"
+        },
+        "errors": {
+          "connection_failed": "Connection failed. Are you sure the account data is correct?"
+        }
+      },
+      "btcpay": {
+        "title": "BTCPay Server",
+        "page": {
+          "title": "Connect to your BTCPay LND node",
+          "instructions": "Navigate to your BTCPayServer and log in as an admin. Go to Server Settings > Services > LND Rest - See information. Then Click \"See QR Code information\" and copy the QR Code data. Paste it below:"
+        },
+        "config": {
+          "label": "Config data",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+        },
+        "errors": {
+          "connection_failed": "Connection failed. Is the BTCPay connection URL correct and accessible?"
+        }
+      },
+      "commando": {
+        "title": "Core Lightning",
+        "page": {
+          "title": "Connect to your Core Lightning node",
+          "instructions": "Make sure you have Core Lightning version 0.12.0 or newer, the commando plugin is running and your node is accessible over the lightning network. Create a rune by running 'lightning-cli commando-rune'."
+        },
+        "host": {
+          "label": "Host"
+        },
+        "pubkey": {
+          "label": "Public key"
+        },
+        "rune": {
+          "label": "Rune"
+        },
+        "port": {
+          "label": "Port"
+        },
+        "proxy": {
+          "label": "Websocket proxy"
+        },
+        "privKey": {
+          "label": "Local private key (autogenerated)"
+        },
+        "config": {
+          "label": "Config data",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+        },
+        "errors": {
+          "connection_failed": "Connection failed. Is your Core Lightning node online and using the commando plugin?"
+        }
+      }
+    },
+    "settings": {
+      "title": "सेटिंग्ज",
+      "browser_notifications": {
+        "title": "ब्राउझरकडून सूचना",
+        "subtitle": "पेमेंट आणि प्रमाणीकरण संबंधित सूचना."
+      },
+      "website_enhancements": {
+        "title": "वेबसाइट सुधारणा",
+        "subtitle": "Twitter, YouTube, इ. साठी टिपिंगमध्ये सुधारणा."
+      },
+      "lnurl_auth": {
+        "title": "LNURL-Auth",
+        "hint": "एक सामान्य प्रमाणीकरण प्रोटोकॉल आहे. हे डिजिटल स्वाक्षरी वापरून वापरकर्त्याचे प्रमाणीकरण करते. प्रोटोकॉलला पासवर्ड, ईमेल, वापरकर्तानाव किंवा तत्सम इतर कोणत्याही ओळखीच्या माहितीची आवश्यकता नसते. Alby सह तुम्ही वेबसाइटवर सुरक्षितपणे लॉग इन करण्यासाठी तुमचे लाइटनिंग खाते वापरू शकता. इतर वॉलेटशी सुसंगत होण्यासाठी आम्हाला काही बदल करावे लागले जे तुम्ही येथे कॉन्फिगर करू शकता. <0>सामान्यत: ते सर्व पर्याय बंद असतात.</0> तुमची जुनी खाती असतील तरच त्यांचा वापर करा.",
+        "legacy_lnurl_auth_202207": {
+          "title": "Legacy LNURL-Auth",
+          "subtitle": "The key generation for LNURL-auth has changed (July 2022). Alby was not compatible with other implementations. This was changed, but now different login keys are used. If you used LNURL-auth to login before you can still enable the old method. This option will be removed later, make sure to switch to the new login."
+        },
+        "legacy_lnurl_auth": {
+          "title": "Legacy signing for LNDhub and LNbits",
+          "subtitle": "Message signing and login with LNDhub (e.g. BlueWallet) and LNbits accounts has been changed (March 2022). If you logged in with these accounts you can still enable the old signing method. This option will be removed later, make sure to switch to the new login."
+        }
+      },
+      "camera_access": {
+        "title": "Camera access",
+        "subtitle": "For scanning QR codes",
+        "allow": "Allow camera access",
+        "granted": "Permission granted"
+      },
+      "language": {
+        "title": "Language",
+        "subtitle": "Translations are not 100% finished yet. <0>Help us translate Alby into your language!</0>"
+      },
+      "theme": {
+        "title": "Theme",
+        "subtitle": "Use Alby in dark or light mode",
+        "options": {
+          "dark": "Dark",
+          "light": "Light",
+          "system": "System"
+        }
+      },
+      "show_fiat": {
+        "title": "Sats to Fiat",
+        "subtitle": "Always convert into selected currency from selected exchange"
+      },
+      "currency": {
+        "title": "Currency",
+        "subtitle": "Show the amounts additionally in this currency"
+      },
+      "exchange": {
+        "title": "Exchange Source",
+        "subtitle": "Source of bitcoin exchange rates"
+      },
+      "personal_data": {
+        "title": "Personal data",
+        "description": "Payees can request for additional data to be sent with a payment. This data is not shared with anyone without your consent, you will always be prompted before this data is sent along with a payment."
+      },
+      "name": {
+        "title": "Name",
+        "subtitle": "",
+        "placeholder": "Enter your name"
+      },
+      "email": {
+        "title": "Email",
+        "subtitle": "",
+        "placeholder": "Enter your email address"
+      },
+      "change_password": {
+        "title": "Change unlock password",
+        "subtitle": "",
+        "screen_reader": "Change unlock password",
+        "choose_password": {
+          "label": "Enter a new unlock password:"
+        },
+        "confirm_password": {
+          "label": "Confirm new password:"
+        },
+        "submit": {
+          "label": "Change"
+        },
+        "errors": {
+          "enter_password": "Please enter a new unlock password.",
+          "confirm_password": "Please confirm your password.",
+          "mismatched_password": "Passwords don't match."
+        },
+        "success": "Password changed successfully"
+      },
+      "nostr": {
+        "title": "Nostr",
+        "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
+        "private_key": {
+          "title": "Private key",
+          "subtitle": "This section is moved to accounts page as keys are account specific now.",
+          "go_to": "Go To Accounts"
+        }
+      }
+    }
+  }
+}
