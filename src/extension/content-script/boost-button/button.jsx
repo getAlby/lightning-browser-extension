@@ -7,6 +7,8 @@ import extractLightningData from "../batteries/index";
 
 function BoostButton() {
   const [lnurl, setLnurl] = useState(false);
+  const [webLNDisabled, setWebLNDisabled] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [sats, setSats] = useState(0);
   const [sent, setSent] = useState(false);
@@ -37,8 +39,9 @@ function BoostButton() {
   }, []);
 
   const sendSatsToLnurl = useCallback(async () => {
-    window.webln = new WebLNProvider();
+    setLoading(true);
     try {
+      window.webln = new WebLNProvider();
       await window.webln.enable();
       const result = await window.webln.lnurl(lnurl);
       if (result) {
@@ -46,15 +49,17 @@ function BoostButton() {
         setSent(true);
       }
     } catch (e) {
-      console.info("failed payment either enable or lnurl");
+      setWebLNDisabled(true);
       console.error(e);
     } finally {
+      setLoading(false);
       setHold(false);
     }
   }, [lnurl]);
 
   const generateInvoice = useCallback(
     async (satsClicked) => {
+      setLoading(true);
       if (!satsClicked) return;
       const ln = new LightningAddress(lnurl);
       const invoice = await ln.generateInvoice({
@@ -69,8 +74,11 @@ function BoostButton() {
           setSent(true);
         }
       } catch (e) {
+        setWebLNDisabled(true);
         setSatsClicked(0);
         console.error(e);
+      } finally {
+        setLoading(false);
       }
     },
     [lnurl]
@@ -94,24 +102,27 @@ function BoostButton() {
 
   return lnurl ? (
     <button
-      className={!satsClicked && !sent ? "ripple-shadow" : "normal-shadow"}
+      className={`${
+        !webLNDisabled && !satsClicked && !sent
+          ? "ripple-shadow"
+          : "normal-shadow"
+      } ${!webLNDisabled ? "boost" : "disabled-boost"}`}
       onClick={() => {
-        if (sent || hold) return;
+        if (webLNDisabled || sent || hold) return;
         if (timer) clearTimeout(timer);
         if (holdTimer) clearTimeout(holdTimer);
         setTimer(
           setTimeout(() => {
             generateInvoice(satsClicked + 1000);
-          }, 2000)
+          }, 1000)
         );
         setSatsClicked(satsClicked + 1000);
       }}
       onMouseDown={() => {
-        if (sent || hold) return;
+        if (webLNDisabled || sent || hold) return;
         setHoldTimer(
           setTimeout(() => {
             setHold(true);
-            setExpand(true);
             setSatsClicked(0);
             sendSatsToLnurl();
           }, 2000)
@@ -136,12 +147,17 @@ function BoostButton() {
           cursor: pointer;
         }
         button:after { 
-          content: "Long press for custom boost";
+          content: "${
+            webLNDisabled
+              ? "Enable WebLN and refresh"
+              : "Long press for custom boost"
+          }";
           white-space: nowrap;
           font-family: Inter;
           position: absolute;
-          top: -50%;
-          right: 8%;
+          top: -25px;
+          left: calc(50% - 63px);
+          width: 110px;
           font-size: 8px;
           padding: 4px 8px;
           border-radius: 12px;
@@ -161,6 +177,9 @@ function BoostButton() {
           overflow: hidden;
           width: ${expand ? (!sent ? "80px" : "120px") : "0"};
           maxWidth: ${expand ? (!sent ? "80px" : "120px") : "0"};
+        }
+        .disabled-boost #lightning {
+          opacity: 0.5;
         }
 
         .shake {
@@ -199,7 +218,7 @@ function BoostButton() {
                         0 0 10px 5px rgba(0, 0, 0, 0.2);
           }
         }
-        button:active svg {
+        .boost:active #lightning {
           animation: ${!sent ? "pop 0.5s" : ""};
           animation-iteration-count: infinite;
         }
@@ -207,46 +226,85 @@ function BoostButton() {
           0% { transform: scale(1); }
           50% { transform: scale(1.3); }
           100% { transform: scale(1); }
+        }
+        #loading {
+          width: 36px;
+          padding: 2px;
+          animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
         }`}
       </style>
-      <svg
-        id="lightning"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        stroke="black"
-        width="40px"
-        className={`${!satsClicked && !sent ? "shake" : ""}`}
-      >
-        <defs>
-          <linearGradient
-            x1="50%"
-            x2="50%"
-            y1="0%"
-            y2="100%"
-            id="left-to-right"
-          >
-            <stop
-              offset={satsClicked ? 1 - (timesClicked % 5) / 4 : 1}
-              stopColor="#fff"
-            />
-            <stop
-              offset={satsClicked ? 1 - (timesClicked % 5) / 4 : 1}
-              stopColor="#ff9900"
-            />
-          </linearGradient>
-        </defs>
-        <path
-          fill="url(#left-to-right)"
-          d="M18.496 10.709l-8.636 8.88c-.24.246-.638-.039-.482-.345l3.074-6.066a.3.3 0 00-.268-.436H5.718a.3.3 0 01-.214-.51l8.01-8.115c.232-.235.618.023.489.328L11.706 9.86a.3.3 0 00.28.417l6.291-.078a.3.3 0 01.22.509z"
-        />
-      </svg>
+      {loading ? (
+        <svg
+          id="loading"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="#000000"
+            strokeWidth="4"
+          ></circle>
+          <path
+            fill="#ffffff"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+      ) : (
+        <svg
+          id="lightning"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          stroke="black"
+          width="40px"
+          className={`${
+            !webLNDisabled && !satsClicked && !sent ? "shake" : ""
+          }`}
+        >
+          <defs>
+            <linearGradient
+              x1="50%"
+              x2="50%"
+              y1="0%"
+              y2="100%"
+              id="left-to-right"
+            >
+              <stop
+                offset={satsClicked ? 1 - (timesClicked % 5) / 4 : 1}
+                stopColor="#fff"
+              />
+              <stop
+                offset={satsClicked ? 1 - (timesClicked % 5) / 4 : 1}
+                stopColor="#ff9900"
+              />
+            </linearGradient>
+          </defs>
+          <path
+            fill="url(#left-to-right)"
+            d="M18.496 10.709l-8.636 8.88c-.24.246-.638-.039-.482-.345l3.074-6.066a.3.3 0 00-.268-.436H5.718a.3.3 0 01-.214-.51l8.01-8.115c.232-.235.618.023.489.328L11.706 9.86a.3.3 0 00.28.417l6.291-.078a.3.3 0 01.22.509z"
+          />
+        </svg>
+      )}
       <div style={textStyle}>
-        {!sent
-          ? satsClicked
-            ? `${satsClicked} sats`
-            : `Boost`
-          : `${sats} sats sent`}
+        {!webLNDisabled
+          ? !sent
+            ? satsClicked
+              ? `${satsClicked} sats`
+              : `Boost`
+            : `${sats} sats sent`
+          : `No WebLN`}
       </div>
     </button>
   ) : null;
