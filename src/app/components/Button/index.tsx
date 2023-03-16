@@ -45,7 +45,7 @@ const Button = forwardRef(
           halfWidth && "w-1/2 first:mr-2 last:ml-2",
           fullWidth || halfWidth ? "px-0 py-2" : "px-7 py-2",
           primary
-            ? "bg-orange-bitcoin text-white border border-transparent"
+            ? "bg-orange-bitcoin text-black border border-transparent"
             : outline
             ? "bg-white text-orange-bitcoin border border-orange-bitcoin dark:bg-surface-02dp"
             : `bg-white text-gray-700 dark:bg-surface-02dp dark:text-neutral-200 dark:border-neutral-800`,
