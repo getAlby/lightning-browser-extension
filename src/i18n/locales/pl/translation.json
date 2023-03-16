@@ -389,7 +389,7 @@
           "waiting": "oczekiwanie na dane LndHub...",
           "your_ln_address": "Twój adres Lightning:",
           "tip_mobile": "Wskazówka: Użyj tego portfela na swoim urządzeniu mobilnym",
-          "export_uri": "",
+          "export_uri": "Adres LNDHub",
           "scan_qr": "Zaimportuj ten portfel do Zeusa lub BlueWallet skanując kod QR."
         },
         "nostr": {
@@ -409,21 +409,21 @@
           "generate_keys": {
             "title": "Wygeneruj nowy klucz Nostr",
             "screen_reader": "Wygeneruj nowy klucz Nostr ze swojego konta",
-            "hint": "",
+            "hint": "Możesz wygenerować losowy klucz lub wyprowadzić go z danych tego konta (używając podpisanej frazy kanonicznej). <0>Dowiedz się więcej »</0>",
             "actions": {
-              "random_keys": "",
-              "derived_keys": ""
+              "random_keys": "Wygeneruj losowy klucz",
+              "derived_keys": "Wyprowadź klucz z danych konta"
             }
           },
           "actions": {
-            "generate": ""
+            "generate": "Generuj nowy klucz"
           },
           "errors": {
-            "failed_to_load": ""
+            "failed_to_load": "Nie udało się władować klucza Nostr. Czy to poprawny klucz?"
           }
         },
         "remove": {
-          "title": "",
+          "title": "Usuń konto",
           "subtitle": "",
           "confirm": ""
         },

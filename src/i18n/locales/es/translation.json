@@ -9,7 +9,7 @@
       },
       "set_password": {
         "title": "Proteja su billetera",
-        "description": "Esta contraseña se utiliza para proteger tu billetera y darte acceso a la extensión del navegador. No se puede restablecer y es independiente de la contraseña de tu cuenta de Alby.",
+        "description": "Esta contraseña se utiliza para proteger su monedero y proporcionar acceso a la extensión del navegador. No se puede restablecer y es independiente de la contraseña de su cuenta de Alby.",
         "choose_password": {
           "label": "Elige una contraseña:"
         },
@@ -614,11 +614,11 @@
     },
     "choose_path": {
       "title": "Conectar",
-      "description": "Para comenzar a usar Alby y realizar pagos en línea, conecta tu billetera Lightning a la extensión.",
+      "description": "Para empezar a utilizar la Extensión de Alby, conecta tu monedero lightning.",
       "alby": {
         "title": "Cuenta de Alby",
         "create_new": "Regístrate",
-        "description": "Regístrate o usa tu cuenta existente de Alby para empezar con pagos lightning en poco tiempo."
+        "description": "Regístrate o usa tú cuenta de Alby existente para empezar a realizar pagos relámpago en un abrir y cerrar de ojos."
       },
       "other": {
         "title": "Otras Billeteras",
@@ -717,13 +717,13 @@
           "create_wallet_error": "Error al iniciar sesión o crear una cuenta nueva. Si necesita ayuda, por favor contacte support@getalby.com"
         },
         "forgot_password": "¿Olvidó su contraseña?",
-        "create_account": "Cree una nueva cuenta Alby para enviar y recibir pagos de bitcoin.",
-        "login_account": "Inicie sesión para conectar su cuenta de Alby existente.",
+        "create_account": "Crea una nueva Cuenta de Alby para enviar y recibir pagos en bitcoin.",
+        "login_account": "Inicia sesión para conectar tú cuenta de Alby existente.",
         "optional_lightning_note": {
           "part2": "dirección lightning",
           "part4": "aprende más",
           "part3": ". Este es un modo simple para que cualquiera te envie Bitcoin en la red lightning.",
-          "part1": "Su cuenta de Alby también viene con una opción"
+          "part1": "Tú cuenta de Alby también viene con una opción"
         },
         "set_password": {
           "choose_password": {
@@ -738,7 +738,7 @@
             "mismatched_password": "Las contraseñas no coinciden."
           }
         },
-        "title": "Tu cuenta Alby",
+        "title": "Tu cuenta de Alby",
         "optional_lightning_address": {
           "label": "Elige tu Dirección Lightning (opcional)",
           "title": "números y letras, al menos 4 caracteres",
@@ -914,6 +914,18 @@
         "active": "ACTIVO",
         "auth": "INICIAR SESIÓN"
       }
+    },
+    "companion_download_info": {
+      "download": "Descargar",
+      "companion": {
+        "title": "Aplicación complementaria",
+        "description": "Aplicación ligera que conecta tu navegador a la red TOR."
+      },
+      "tor_native": {
+        "title": "TOR (nativa)",
+        "description": "Seleccione esta opción si este navegador ya está conectado a la red TOR."
+      },
+      "heading": "¿Cómo quieres conectarte a la red TOR?"
     }
   },
   "permissions": {
@@ -974,7 +986,9 @@
       "sendtoroute": "Realizar un pago a través de la ruta especificada.",
       "decodepayreq": "Decodificar una cadena de solicitud de pago.",
       "verifymessage": "Verificar una firma sobre un mensaje.",
-      "routermc": "Lea el estado de control de la misión interna."
+      "routermc": "Lea el estado de control de la misión interna.",
+      "settleinvoice": "Pagar una factura aceptada.",
+      "addholdinvoice": "Crear nuevas facturas HODL."
     },
     "lnc": {
       "getinfo": "Obtener la información del nodo.",
@@ -998,7 +1012,9 @@
       "listchannels": "Obtener una descripción de todos los canales abiertos.",
       "decodepayreq": "Decodificar una cadena de solicitud de pago.",
       "verifymessage": "Verificar una firma sobre un mensaje.",
-      "routermc": "Lea el estado de control de la misión interna."
+      "routermc": "Lea el estado de control de la misión interna.",
+      "addholdinvoice": "Crear nuevas facturas HODL.",
+      "settleinvoice": "Pagar una factura aceptada."
     }
   }
 }
