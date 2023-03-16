@@ -285,21 +285,29 @@
       "kollider": {
         "title": "Kollider",
         "description": "Login to your Kollider account",
-        "page": {
+        "choose_path": {
+          "title": "Connect to your Kollider Wallet",
+          "description": "Login or Signup to Kollider Wallet to connect it to Alby.",
+          "create_new": "Sign up"
+        },
+        "create": {
+          "title": "Create Kollider Wallet and connect to Alby",
+          "description": "Create a new Kollider Wallet to send, receive and trade Bitcoin."
+        },
+        "login": {
           "title": "Connect to your Kollider account",
           "description": "Don't have an account already? <0>Sign up</0> now!"
         },
         "username": {
-          "label": "Enter your Kollider username"
-        },
-        "password": {
-          "label": "Enter your Kollider password"
+          "label": "Username"
         },
         "currency": {
           "label": "Select your currency account"
         },
         "errors": {
-          "connection_failed": "Connection failed. Are you sure the account data is correct?"
+          "connection_failed": "Connection failed. Are you sure the account data is correct?",
+          "user_already_exists": "Username already exists",
+          "registration_limit_exceeded": "Registration limit exceeded, try after sometime."
         }
       },
       "btcpay": {
