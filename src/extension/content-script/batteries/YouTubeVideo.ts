@@ -2,7 +2,7 @@ import { Battery } from "~/types";
 
 import getOriginData from "../originData";
 import { findLnurlFromYouTubeAboutPage } from "./YouTubeChannel";
-import { findLightningAddressInText, setLightningData } from "./helpers";
+import { findLightningAddressInText } from "./helpers";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
 
@@ -23,6 +23,7 @@ const battery = async (): Promise<Battery | void> => {
   }
   let match;
   let lnurl;
+  const contentUri = document.location.toString();
   // check for an lnurl
   if ((match = text.match(/(lnurlp:)(\S+)/i))) {
     lnurl = match[2];
@@ -52,16 +53,15 @@ const battery = async (): Promise<Battery | void> => {
       "#columns #primary #primary-inner #owner #avatar img" // support maybe new UI being rolled out 2022/09
     )?.src ||
     "";
-  setLightningData([
-    {
-      method: "lnurl",
-      address: lnurl,
-      ...getOriginData(),
-      name,
-      description: "", // we can not reliably find a description (the meta tag might be of a different video)
-      icon: imageUrl,
-    },
-  ]);
+  return {
+    method: "lnurl",
+    address: lnurl,
+    ...getOriginData(),
+    name,
+    description: "", // we can not reliably find a description (the meta tag might be of a different video)
+    icon: imageUrl,
+    contentUri: contentUri,
+  };
 };
 
 const YouTubeVideo = {

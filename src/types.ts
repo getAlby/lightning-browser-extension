@@ -91,6 +91,7 @@ export interface Battery extends OriginData {
   suggested?: string;
   name: string;
   icon: string;
+  contentUri?: string;
 }
 
 export type BatteryMetaTagRecipient = Pick<
