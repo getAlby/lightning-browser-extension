@@ -7,7 +7,7 @@ import extractLightningData from "../batteries/index";
 function BoostButton() {
   const [sats, setSats] = useState(0);
   const [sent, setSent] = useState(false);
-
+  const [contentUri, setContentUri] = useState("");
   const [lnurl, setLnurl] = useState(false);
 
   useEffect(() => {
@@ -18,6 +18,7 @@ function BoostButton() {
       const lnData = await extractLightningData();
       if (lnData) {
         setLnurl(lnData.address);
+        setContentUri(lnData.contentUri);
         clearInterval(intervalId);
       } else if (count >= 5) {
         clearInterval(intervalId);
@@ -33,7 +34,7 @@ function BoostButton() {
     try {
       await window.webln.enable();
       try {
-        const result = await window.webln.lnurl(lnurl);
+        const result = await window.webln.lnurl(lnurl, contentUri);
         if (result) {
           setSats(result.route.total_amt);
           setSent(true);

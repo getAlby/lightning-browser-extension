@@ -7,7 +7,7 @@ import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
 import axios from "axios";
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -40,6 +40,7 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
 function LNURLPay() {
   const navState = useNavigationState();
   const details = navState.args?.lnurlDetails as LNURLPayServiceResponse;
+  const contentUri = navState.args?.contentUri;
   const {
     isLoading: isLoadingSettings,
     settings,
@@ -87,13 +88,20 @@ function LNURLPay() {
       userName?.length &&
       userEmail?.length &&
       details.payerData?.email &&
-      details.payerData?.name
+      details.payerData?.name &&
+      contentUri
     ) {
-      return { name: userName, email: userEmail };
+      return { name: userName, email: userEmail, contentUri: contentUri };
+    } else if (userName?.length && details.payerData?.name && contentUri) {
+      return { name: userName, contentUri: contentUri };
+    } else if (userEmail?.length && details.payerData?.email && contentUri) {
+      return { email: userEmail, contentUri: contentUri };
     } else if (userName?.length && details.payerData?.name) {
       return { name: userName };
     } else if (userEmail?.length && details.payerData?.email) {
       return { email: userEmail };
+    } else if (contentUri) {
+      return { contentUri: contentUri };
     } else {
       return undefined;
     }

@@ -43,11 +43,11 @@ export default class WebLNProvider {
     return this.execute("getInfo");
   }
 
-  lnurl(lnurlEncoded: string) {
+  lnurl(lnurlEncoded: string, contentUri?: string) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling lnurl");
     }
-    return this.execute("lnurl", { lnurlEncoded });
+    return this.execute("lnurl", { lnurlEncoded, contentUri });
   }
 
   sendPayment(paymentRequest: string) {

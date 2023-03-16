@@ -131,6 +131,7 @@ export interface MessageDefaultPublic extends MessageDefault {
 export type NavigationState = {
   origin?: OriginData; // only defoned if coming via "Prompt", can be empty if a LNURL-action is being used via "Send" within the "PopUp"
   args?: {
+    contentUri?: string;
     lnurlDetails: LNURLDetails;
     amountEditable?: boolean;
     memoEditable?: boolean;
@@ -425,6 +426,7 @@ export interface LNURLPayServiceResponse {
     identifier: { mandatory: boolean };
     email: { mandatory: boolean };
     auth: { mandatory: boolean; k1: string };
+    contentUri: { mandatory: boolean };
   };
   commentAllowed?: number;
   url: string;
