@@ -82,7 +82,7 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
-    "@types/chrome": "^0.0.222",
+    "@types/chrome": "^0.0.224",
     "@types/crypto-js": "^4.1.1",
     "@types/elliptic": "^6.4.14",
     "@types/lodash.merge": "^4.6.7",
