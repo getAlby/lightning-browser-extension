@@ -1,4 +1,5 @@
 import api from "~/common/lib/api";
+import { BrowserType } from "~/types";
 
 export function classNames(...classes: (string | boolean)[]) {
   return classes.filter(Boolean).join(" ");
@@ -27,4 +28,17 @@ export function getTheme() {
       document.documentElement.classList.remove("dark");
     }
   });
+}
+
+export function getBrowserType(): BrowserType | null {
+  if (!chrome?.runtime) return null;
+  const url = chrome.runtime.getURL("");
+  if (url.startsWith("moz-extension://")) return "firefox";
+  if (url.startsWith("chrome-extension://")) return "chrome";
+
+  return null;
+}
+
+export function isAlbyAccount(alias = "") {
+  return alias === "🐝 getalby.com";
 }

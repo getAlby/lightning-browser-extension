@@ -38,7 +38,7 @@ export default function PublishersTable({
                 <div className="flex items-center">
                   <div className="shrink-0">
                     <img
-                      className="h-12 w-12 object-cover rounded-full shadow-lg"
+                      className="h-12 w-12 object-cover rounded-lg"
                       src={publisher.imageURL || DEFAULT_IMAGE}
                       alt={publisher.host}
                       onError={(e) => {
@@ -66,11 +66,14 @@ export default function PublishersTable({
                     </div>
                     <div className="text-sm text-gray-500 dark:text-neutral-400">
                       {publisher.host} • {publisher.paymentsCount}{" "}
-                      {tComponents("payments")}{" "}
+                      {tComponents("payments")}
                       {publisher.paymentsAmount > 0 && (
-                        <span>
-                          {getFormattedSats(publisher.paymentsAmount)}
-                        </span>
+                        <>
+                          {" • "}
+                          <span>
+                            {getFormattedSats(publisher.paymentsAmount)}
+                          </span>
+                        </>
                       )}
                     </div>
                   </div>

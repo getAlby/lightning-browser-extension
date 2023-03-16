@@ -83,9 +83,17 @@ const utils = {
           left: left,
         })
         .then((window) => {
+          let closeWindow = true; // by default we call remove.window (except the browser forces this prompt to open in a tab)
           let tabId: number | undefined;
           if (window.tabs) {
             tabId = window.tabs[0].id;
+          }
+
+          // Kiwi Browser opens the prompt in the same window (there are only tabs on mobile browsers)
+          // Find the currently active tab to validate messages
+          if (window.tabs && window.tabs?.length > 1) {
+            tabId = window.tabs?.find((x) => x.active)?.id;
+            closeWindow = false; // we'll only remove the tab and not the window further down
           }
 
           // this interval hightlights the popup in the taskbar
@@ -97,6 +105,7 @@ const utils = {
               drawAttention: true,
             });
           }, 2100);
+
           const onMessageListener = (
             responseMessage: {
               response?: unknown;
@@ -109,21 +118,30 @@ const utils = {
               responseMessage &&
               responseMessage.response &&
               sender.tab &&
-              sender.tab.id === tabId
+              sender.tab.id === tabId &&
+              sender.tab.windowId
             ) {
               clearInterval(focusInterval);
               browser.tabs.onRemoved.removeListener(onRemovedListener);
-              if (sender.tab.windowId) {
-                return browser.windows.remove(sender.tab.windowId).then(() => {
-                  // in the future actual "remove" (closing prompt) will be moved to component for i.e. budget flow
-                  // https://github.com/getAlby/lightning-browser-extension/issues/1197
-                  if (responseMessage.error) {
-                    return reject(new Error(responseMessage.error));
-                  } else {
-                    return resolve(responseMessage);
-                  }
-                });
+              // if the window was opened as tab we remove the tab
+              // otherwise if a window was opened we have to remove the window.
+              // Opera fails to close the window with tabs.remove - it fails with: "Tabs cannot be edited right now (user may be dragging a tab)"
+              let closePromise;
+              if (closeWindow) {
+                closePromise = browser.windows.remove(sender.tab.windowId);
+              } else {
+                closePromise = browser.tabs.remove(sender.tab.id as number); // as number only for TS - we check for sender.tab.id in the if above
               }
+
+              return closePromise.then(() => {
+                // in the future actual "remove" (closing prompt) will be moved to component for i.e. budget flow
+                // https://github.com/getAlby/lightning-browser-extension/issues/1197
+                if (responseMessage.error) {
+                  return reject(new Error(responseMessage.error));
+                } else {
+                  return resolve(responseMessage);
+                }
+              });
             }
           };
 

@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Hyperlink from "~/app/components/Hyperlink";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
@@ -28,6 +29,7 @@ function ConfirmSignMessage() {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [rememberPermission, setRememberPermission] = useState(false);
+  const [showJSON, setShowJSON] = useState(false);
 
   // TODO: refactor: the success message and loading will not be displayed because after the reply the prompt is closed.
   async function confirm() {
@@ -65,6 +67,10 @@ function ConfirmSignMessage() {
     confirm();
   }
 
+  function toggleShowJSON() {
+    setShowJSON((current) => !current);
+  }
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
@@ -78,9 +84,24 @@ function ConfirmSignMessage() {
                 url={origin.host}
               />
               <ContentMessage
-                heading={t("permissions.allow_sign", { host: origin.host })}
-                content={event.content}
+                heading={t("allow_sign_event", {
+                  host: origin.host,
+                  kind: t(`kinds.${event.kind}`, {
+                    defaultValue: t("kinds.unknown", { kind: event.kind }),
+                  }),
+                })}
+                content={event.content || t("no_content")}
               />
+              <div className="flex justify-center mb-4 gap-4">
+                <Hyperlink onClick={toggleShowJSON}>
+                  {showJSON ? t("hide_details") : t("view_details")}
+                </Hyperlink>
+              </div>
+              {showJSON && (
+                <div className="whitespace-pre-wrap break-words p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
+                  {JSON.stringify(event, null, 2)}
+                </div>
+              )}
               <div className="flex items-center">
                 <Checkbox
                   id="remember_permission"
@@ -94,7 +115,7 @@ function ConfirmSignMessage() {
                   htmlFor="remember_permission"
                   className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
                 >
-                  {t("confirm_sign_message.remember.label")}
+                  {tCommon("actions.remember")}
                 </label>
               </div>
             </div>

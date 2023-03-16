@@ -1,3 +1,4 @@
+import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
@@ -11,6 +12,8 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Header from "~/app/components/Header";
+import IconButton from "~/app/components/IconButton";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -136,6 +139,11 @@ function LNURLPay() {
             validateStatus: () => true,
           }
         );
+
+        if (response.status >= 500) {
+          toast.error("Payment aborted: Recipient server error");
+          return;
+        }
 
         const isSuccessResponse = function (
           obj: LNURLPaymentInfo | LNURLError
@@ -353,9 +361,25 @@ function LNURLPay() {
   return (
     <>
       <div className="flex flex-col grow overflow-hidden">
-        <ScreenHeader
-          title={!successAction ? tCommon("actions.send") : tCommon("success")}
-        />
+        {!navState.isPrompt ? (
+          <Header
+            title={
+              !successAction ? tCommon("actions.send") : tCommon("success")
+            }
+            headerLeft={
+              <IconButton
+                onClick={() => navigate(-1)}
+                icon={<CaretLeftIcon className="w-4 h-4" />}
+              />
+            }
+          />
+        ) : (
+          <ScreenHeader
+            title={
+              !successAction ? tCommon("actions.send") : tCommon("success")
+            }
+          />
+        )}
         {!successAction ? (
           <>
             <div className="grow overflow-y-auto no-scrollbar">
@@ -404,6 +428,8 @@ function LNURLPay() {
                               fiatValue={fiatValue}
                             />
                             <SatButtons
+                              min={Math.floor(+details.minSendable / 1000)}
+                              max={Math.floor(+details.maxSendable / 1000)}
                               onClick={setValueSat}
                               disabled={loadingConfirm}
                             />

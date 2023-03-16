@@ -1,4 +1,5 @@
 import {
+  AddressBookIcon,
   GearIcon,
   GlobeIcon,
   LockIcon,
@@ -47,7 +48,7 @@ export default function UserMenu() {
       <Menu.Button className="flex items-center text-gray-700 dark:text-white hover:text-black dark:hover:text-white transition-colors duration-200">
         <MenuIcon className="h-6 w-6" />
       </Menu.Button>
-      <Menu.List position="right">
+      <Menu.List position="left">
         <Menu.ItemButton
           onClick={() => {
             openOptions("discover");
@@ -82,13 +83,29 @@ export default function UserMenu() {
         </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
+            openOptions("transactions");
+          }}
+        >
+          <TransactionsIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          {tCommon("transactions")}
+        </Menu.ItemButton>
+        <Menu.Divider />
+        <Menu.ItemButton
+          onClick={() => {
             openOptions("settings");
           }}
         >
           <GearIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
           {tCommon("settings")}
         </Menu.ItemButton>
-        <Menu.Divider />
+        <Menu.ItemButton
+          onClick={() => {
+            openOptions("accounts");
+          }}
+        >
+          <AddressBookIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          {tCommon("accounts")}
+        </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
             utils.openUrl("https://feedback.getalby.com");

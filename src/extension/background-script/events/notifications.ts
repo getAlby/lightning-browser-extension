@@ -1,19 +1,17 @@
-import { getFormattedFiat } from "~/common/utils/currencyConvert";
+import {
+  getFormattedFiat,
+  getFormattedSats,
+} from "~/common/utils/currencyConvert";
 import { getCurrencyRateWithCache } from "~/extension/background-script/actions/cache/getCurrencyRate";
 import state from "~/extension/background-script/state";
-import i18n from "~/i18n/i18nConfig";
-import type { PaymentNotificationData, AuthNotificationData } from "~/types";
+import type { AuthNotificationData, PaymentNotificationData } from "~/types";
 
 import { notify } from "./helpers";
 
 const paymentSuccessNotification = async (
-  message: "ln.sendPayment.success",
+  message: "ln.sendPayment.success" | "ln.keysend.success",
   data: PaymentNotificationData
 ) => {
-  function formatAmount(amount: number) {
-    return `${amount} ${i18n.t("common:sats", { count: amount })}`;
-  }
-
   const recipient = data?.origin?.name;
   const paymentResponseData = data.response;
   let paymentAmountFiatLocale;
@@ -46,15 +44,19 @@ const paymentSuccessNotification = async (
     notificationTitle = `${notificationTitle} to »${recipient}«`;
   }
 
-  let notificationMessage = `Amount: ${formatAmount(paymentAmount)}`;
+  let notificationMessage = `Amount: ${getFormattedSats({
+    amount: paymentAmount,
+    locale,
+  })}`;
 
   if (showFiat) {
     notificationMessage = `${notificationMessage} (${paymentAmountFiatLocale})`;
   }
 
-  notificationMessage = `${notificationMessage}\nFee: ${formatAmount(
-    total_fees
-  )}`;
+  notificationMessage = `${notificationMessage}\nFee: ${getFormattedSats({
+    amount: total_fees,
+    locale,
+  })}`;
 
   return notify({
     title: notificationTitle,
@@ -63,7 +65,7 @@ const paymentSuccessNotification = async (
 };
 
 const paymentFailedNotification = (
-  message: "ln.sendPayment.failed",
+  message: "ln.sendPayment.failed" | "ln.keysend.failed",
   data: PaymentNotificationData
 ) => {
   let error;

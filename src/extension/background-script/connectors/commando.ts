@@ -2,6 +2,7 @@ import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
 import LnMessage from "lnmessage";
 import { v4 as uuidv4 } from "uuid";
+import { Account } from "~/types";
 
 import Connector, {
   CheckPaymentArgs,
@@ -110,10 +111,12 @@ const supportedMethods: string[] = [
 ];
 
 export default class Commando implements Connector {
+  account: Account;
   config: Config;
   ln: LnMessage;
 
-  constructor(config: Config) {
+  constructor(account: Account, config: Config) {
+    this.account = account;
     this.config = config;
     this.ln = new LnMessage({
       remoteNodePublicKey: this.config.pubkey,

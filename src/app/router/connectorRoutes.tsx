@@ -2,7 +2,9 @@ import ConnectBtcpay from "@screens/connectors/ConnectBtcpay";
 import ConnectCitadel from "@screens/connectors/ConnectCitadel";
 import ConnectEclair from "@screens/connectors/ConnectEclair";
 import ConnectGaloy, { galoyUrls } from "@screens/connectors/ConnectGaloy";
+import ConnectKollider from "@screens/connectors/ConnectKollider";
 import ConnectLnbits from "@screens/connectors/ConnectLnbits";
+import ConnectLnc from "@screens/connectors/ConnectLnc";
 import ConnectLnd from "@screens/connectors/ConnectLnd";
 import ConnectLndHub from "@screens/connectors/ConnectLndHub";
 import ConnectMyNode from "@screens/connectors/ConnectMyNode";
@@ -18,6 +20,7 @@ import core_ln from "/static/assets/icons/core_ln.svg";
 import eclair from "/static/assets/icons/eclair.jpg";
 import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.png";
 import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
+import kolliderLogo from "/static/assets/icons/kollider.png";
 import lnbits from "/static/assets/icons/lnbits.png";
 import lnd from "/static/assets/icons/lnd.png";
 import lndhubBlueWallet from "/static/assets/icons/lndhub_bluewallet.png";
@@ -41,6 +44,12 @@ function getConnectorRoutes() {
       logo: lnd,
     },
     {
+      path: "lnc",
+      element: <ConnectLnc />,
+      title: i18n.t("translation:choose_connector.lnc.title"),
+      logo: lnd,
+    },
+    {
       path: "commando",
       element: <ConnectCommando />,
       title: i18n.t("translation:choose_connector.commando.title"),
@@ -57,6 +66,13 @@ function getConnectorRoutes() {
       element: <ConnectLndHub lndHubType="lndhub_go" />,
       title: i18n.t("translation:choose_connector.lndhub_go.title"),
       logo: lndhubGo,
+    },
+    {
+      path: "kollider",
+      element: <ConnectKollider />,
+      title: i18n.t("translation:choose_connector.kollider.title"),
+      description: i18n.t("translation:choose_connector.kollider.description"),
+      logo: kolliderLogo,
     },
     {
       path: "lnd-hub-bluewallet",

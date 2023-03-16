@@ -1,28 +1,19 @@
 import Button from "@components/Button";
-import Card from "@components/Card";
 import Loading from "@components/Loading";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
+import utils from "~/common/lib/utils";
 
 export default function TestConnection() {
-  const [accountInfo, setAccountInfo] = useState<{
-    alias: string;
-    name: string;
-    balance: number;
-  }>();
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const { getFormattedSats } = useSettings();
 
   const { t } = useTranslation("translation", {
     keyPrefix: "welcome.test_connection",
   });
-  const { t: tCommon } = useTranslation("common");
 
   const navigate = useNavigate();
 
@@ -36,15 +27,14 @@ export default function TestConnection() {
     const timer = setTimeout(() => {
       setErrorMessage(t("connection_taking_long"));
     }, 45000);
+
     try {
       const response = await api.getAccountInfo();
-      const name = response.name;
-      const { alias } = response.info;
-      const { balance: resBalance } = response.balance;
-      const balance =
-        typeof resBalance === "number" ? resBalance : parseInt(resBalance);
-
-      setAccountInfo({ alias, balance, name });
+      if (response.name && response.info.alias) {
+        utils.redirectPage("options.html#/discover");
+      } else {
+        setErrorMessage(t("connection_error"));
+      }
     } catch (e) {
       const message = e instanceof Error ? `(${e.message})` : "";
       console.error(message);
@@ -61,7 +51,7 @@ export default function TestConnection() {
   }, []);
 
   return (
-    <div className="relative mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white dark:bg-surface-02dp px-10 py-12">
+    <div className="relative mt-14 lg:grid lg:grid-cols-2 gap-8 bg-white dark:bg-surface-02dp p-10 shadow rounded-lg">
       <div className="relative">
         <div>
           {errorMessage && (
@@ -85,38 +75,6 @@ export default function TestConnection() {
               <p className="text-gray-500 dark:text-white">
                 {t("contact_support")}
               </p>
-            </div>
-          )}
-
-          {accountInfo && accountInfo.alias && (
-            <div>
-              <div className="flex space-x-2">
-                <h1 className="text-2xl font-bold text-green-bitcoin">
-                  {tCommon("success")}
-                </h1>
-                <img src="assets/icons/star.svg" alt="image" className="w-8" />
-              </div>
-              <p className="mt-6 dark:text-white">{t("ready")}</p>
-
-              <div className="mt-6 shadow-lg p-4 rounded-xl">
-                <Card
-                  color="bg-gray-100"
-                  alias={`${accountInfo.name} - ${accountInfo.alias}`}
-                  satoshis={
-                    typeof accountInfo.balance === "number"
-                      ? getFormattedSats(accountInfo.balance)
-                      : ""
-                  }
-                />
-              </div>
-              <div>
-                <p className="mt-8 dark:text-white">{t("tutorial")}</p>
-                <div className="mt-8">
-                  <a href="https://getalby.com/demo">
-                    <Button label={t("try_tutorial")} primary />
-                  </a>
-                </div>
-              </div>
             </div>
           )}
 
