@@ -22,7 +22,6 @@ const battery = async (): Promise<Battery | void> => {
     )?.src || "";
 
   let lnurl;
-  const contentUri = match[0];
 
   const headerLink = document.querySelector<HTMLAnchorElement>(
     "#channel-header #primary-links a[href*='getalby.com']"
@@ -44,7 +43,6 @@ const battery = async (): Promise<Battery | void> => {
     name: name,
     description: "", // we can not reliably find a description (the meta tag might be of a different video)
     icon: imageUrl,
-    contentUri: contentUri,
   };
 };
 

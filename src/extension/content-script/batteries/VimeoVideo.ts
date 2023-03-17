@@ -16,7 +16,6 @@ const battery = (): Battery | void => {
   const text = videoDescription.textContent || "";
   let match;
   let recipient;
-  const contentUri = document.location.toString();
   // check for an lnurl
   if ((match = text.match(/(lnurlp:)(\S+)/i))) {
     recipient = match[2];
@@ -39,7 +38,6 @@ const battery = (): Battery | void => {
     ...getOriginData(),
     name,
     icon: imageUrl,
-    contentUri: contentUri,
   };
 };
 

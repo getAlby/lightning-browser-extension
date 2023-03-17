@@ -14,7 +14,6 @@ const battery = (): Battery | void => {
 
   const match = findLightningAddressInText(description);
   if (!match) return;
-  const contentUri = document.location.toString();
   return {
     method: "lnurl",
     address: match,
@@ -24,7 +23,6 @@ const battery = (): Battery | void => {
     icon:
       document.querySelector<HTMLImageElement>(`img[alt*='${name}']`)?.src ??
       "",
-    contentUri: contentUri,
   };
 };
 

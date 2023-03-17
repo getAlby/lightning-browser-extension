@@ -14,7 +14,6 @@ function BoostButton() {
   const [sent, setSent] = useState(false);
   const [contentUri, setContentUri] = useState("");
 
-
   const [hold, setHold] = useState(false);
   const [timer, setTimer] = useState();
   const [holdTimer, setHoldTimer] = useState();
@@ -46,7 +45,7 @@ function BoostButton() {
     try {
       window.webln = new WebLNProvider();
       await window.webln.enable();
-      const result = await window.webln.lnurl(lnurl);
+      const result = await window.webln.lnurl(lnurl, contentUri);
       if (result) {
         setSats(result.route.total_amt);
         setSent(true);
@@ -58,7 +57,7 @@ function BoostButton() {
       setLoading(false);
       setHold(false);
     }
-  }, [lnurl]);
+  }, [lnurl, contentUri]);
 
   const generateInvoice = useCallback(
     async (satsClicked) => {
@@ -67,6 +66,7 @@ function BoostButton() {
       const ln = new LightningAddress(lnurl);
       const invoice = await ln.generateInvoice({
         amount: (satsClicked * 1000).toString(),
+        payerData: { contentUri: contentUri },
       });
       window.webln = new WebLNProvider();
       try {
@@ -84,7 +84,7 @@ function BoostButton() {
         setLoading(false);
       }
     },
-    [lnurl]
+    [lnurl, contentUri]
   );
 
   const textStyle = {
