@@ -9,7 +9,7 @@
       },
       "set_password": {
         "title": "Ange ett lösenord för upplåsning",
-        "description": "Ditt Lightning-konto är krypterat med ett lösenord för upplåsning. Glöm inte detta lösenord! Du behöver lösenordet för att kunna låsa upp Alby-tillägget (i denna webbläsare)",
+        "description": "Ditt Lightning-konto är krypterat med ett lösenord för upplåsning. Glöm inte detta lösenord! Du behöver lösenordet för att kunna låsa upp Alby-tillägget (i denna webbläsare).",
         "choose_password": {
           "label": "Välj ett lösenord för upplåsning:"
         },
@@ -32,10 +32,11 @@
         "actions": {
           "delete_edit_account": "Radera ogiltigt konto och redigera igen"
         }
-      }
+      },
+      "title": "Välkommen till Alby"
     },
     "choose_connector": {
-      "description": "Du behöver koppla en lightning-plånbok så att du kan interagera med dina favoritwebbplatser som accepterar bitcoin lightning-betalningar!",
+      "description": "Anslut till din externa lightning-plånbok eller node",
       "lnd": {
         "title": "LND",
         "page": {
@@ -221,6 +222,70 @@
         "errors": {
           "connection_failed": "Anslutning misslyckades. Är URL till BTCPay-anslutningen korrekt och tillgänglig?"
         }
+      },
+      "kollider": {
+        "title": "Kollider",
+        "page": {
+          "description": "Har du inte ett konto? <0>Bli Medlem</0> nu!",
+          "title": "Anslut till ditt kollider-konto"
+        },
+        "currency": {
+          "label": "Välj ditt valutakonto"
+        },
+        "errors": {
+          "connection_failed": "Anslutningen misslyckades. Är du säker på att kontouppgifterna är korrekta?"
+        },
+        "description": "Logga in på ditt Kollider-konto",
+        "username": {
+          "label": "Skriv in ditt Kollider användarnamn"
+        },
+        "password": {
+          "label": "Skriv in ditt Kollider lösenord"
+        }
+      },
+      "commando": {
+        "port": {
+          "label": "Port"
+        },
+        "title": "Core Lightning",
+        "proxy": {
+          "label": "Websocket proxy"
+        },
+        "config": {
+          "label": "Config data",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+        },
+        "errors": {
+          "connection_failed": "Anslutningen misslyckades. Är din Core Lightning-nod online och använder kommandoplugin?"
+        },
+        "privKey": {
+          "label": "Lokal privat nyckel (automatiskt genererad)"
+        },
+        "page": {
+          "title": "Anslut till din Core Lightning node",
+          "instructions": "Säkerställ att du har Core Lightning version 0.12.0 eller nyare, att kommando insticksprogrammet är aktivt samt att din node är åtkomlig över lightning-nätverket. Skapa en rune genom att köra 'lightning-cli commando-rune'."
+        },
+        "pubkey": {
+          "label": "Publik nyckel"
+        },
+        "rune": {
+          "label": "Rune"
+        },
+        "host": {
+          "label": "Host"
+        }
+      },
+      "title": "Anslut Lightning Plånbok",
+      "lnc": {
+        "pairing_phrase": {
+          "placeholder": "hemlig stack sats fras",
+          "label": "Din parningsfras "
+        },
+        "title": "LND med LNC",
+        "page": {
+          "title": "Anslut till din LND node",
+          "description": "Skapa en ny session i terminal (litd) för att få en ny parningsfras och skriv in den här"
+        }
       }
     },
     "home": {
@@ -244,18 +309,77 @@
       "default_view": {
         "recent_transactions": "Senaste Transaktioner",
         "no_transactions": "Inga transaktioner genomförda med Alby.",
-        "is_blocked_hint": "Alby är för tillfället avstängt hos {{host}}"
+        "is_blocked_hint": "Alby är för tillfället avstängt hos {{host}}",
+        "block_removed": "Aktiverade {{host}}. Ladda om webbplatsen."
       }
     },
     "accounts": {
       "title": "Konton",
       "actions": {
         "add_account": "Lägg till konto"
+      },
+      "account_view": {
+        "nostr": {
+          "generate_keys": {
+            "hint": "Du kan generera en slumpmässig nyckel eller få en nyckel från denna kontoinformation (med en signerad kanonisk fras). <0>Läs mer »</0>",
+            "screen_reader": "Skapa en ny Nostr-nyckel för ditt konto",
+            "title": "Generera en ny Nostr nyckel",
+            "actions": {
+              "random_keys": "Generera en slumpmässig nyckel",
+              "derived_keys": "Få en nyckel från kontot"
+            }
+          },
+          "errors": {
+            "failed_to_load": "Det gick inte att ladda Nostr-nyckeln. Är det en giltig Nostr-nyckel?"
+          },
+          "private_key": {
+            "title": "Hantera dina nycklar",
+            "successfully_removed": "Privat nyckel har tagits bort.",
+            "label": "Privat Nyckel",
+            "backup": "⚠️ Glöm inte att säkerhetskopiera din privata nyckel! Att inte säkerhetskopiera din nyckel kan leda till att du förlorar åtkomst.",
+            "warning": "Ange namnet på kontot för att bekräfta raderingen av den privata nyckeln:",
+            "subtitle": "Klistra in din privata nyckel eller skapa en ny. <0>Läs mer »</0>",
+            "success": "Privat nyckel krypterad och sparad.",
+            "failed_to_remove": "Det angivna kontonamnet matchade inte, din gamla privata har återställts."
+          },
+          "public_key": {
+            "label": "Publik Nyckel"
+          },
+          "actions": {
+            "generate": "Generera en ny nyckel"
+          },
+          "title": "Nostr",
+          "hint": "är ett enkelt och öppet protokoll som syftar till att skapa ett censur beskyddat sociala nätverk. Nostr fungerar med kryptografiska nycklar. För att publicera något signerar du det med din nyckel och skickar det till flera reläer. Du kan använda Alby för att hantera din Nostr-nyckel. Många Nostr-applikationer låter dig då helt enkelt använda nyckeln från Alby-tillägget."
+        },
+        "remove": {
+          "title": "Ta bort detta konto",
+          "subtitle": "Alla kopplade traktamenten kommer att raderas. Var säker på vad du gör.",
+          "confirm": "Är du säker på att du vill ta bort kontot: {{name}}? \nDetta kan inte ångras. Om du använde det här kontot för att logga in på webbplatser kan du förlora åtkomst till dessa."
+        },
+        "title1": "Konto information",
+        "title2": "Redigera konto",
+        "name": {
+          "title": "Namn",
+          "placeholder": "Namn på konto"
+        },
+        "export": {
+          "title": "Exportera konto",
+          "screen_reader": "Exportera konto detaljer",
+          "waiting": "väntar på LndHub-data...",
+          "your_ln_address": "Din Lightning Address:",
+          "tip_mobile": "Tips: Använd den här plånboken med din mobil",
+          "export_uri": "LNDHub-inloggnings-URI",
+          "scan_qr": "Importera denna plånbok till Zeus eller BlueWallet genom att skanna QR-koden."
+        },
+        "actions": {
+          "remove_account": "Ta bort kontot",
+          "export": "Exportera"
+        }
       }
     },
     "enable": {
       "title": "Anslut",
-      "allow": "Tillåt {{host}} att:",
+      "allow": "Tillåt den här webbplatsen att:",
       "request1": "Begär tillåtelse för transaktioner",
       "request2": "Begär faktura och lightning-information",
       "block_and_ignore": "Blockera och ignorera {{host}}"
@@ -496,6 +620,67 @@
       "title": "Nostr",
       "allow": "Tillåt {{host}} att:",
       "block_and_ignore": "Blockera och ignorera {{host}}"
+    },
+    "choose_path": {
+      "alby": {
+        "title": "Alby Konto",
+        "description": "Registrera dig eller använd ditt befintliga Alby-konto för att komma igång med lightning betalningar på nolltid.",
+        "create_new": "Registrera dig"
+      },
+      "other": {
+        "title": "Annan Plånbok",
+        "connect": "Anslut",
+        "and_more": "& mer...",
+        "description": "Anslut till din befintliga lightning Plånbok eller Node och välj från olika kontakter."
+      },
+      "title": "Anslut",
+      "description": "För att börja använda Alby tillägget, anslut din lightning plånbok."
+    },
+    "alby": {
+      "pre_connect": {
+        "set_password": {
+          "choose_password": {
+            "label": "Lösenord"
+          },
+          "confirm_password": {
+            "label": "Bekräfta Lösenord"
+          },
+          "errors": {
+            "mismatched_password": "Lösenordet matchar inte.",
+            "enter_password": "Vänligen ange ett lösenord.",
+            "confirm_password": "Vänligen ange ditt lösenord."
+          }
+        },
+        "optional_lightning_address": {
+          "suffix": "@getalby.com",
+          "label": "Välj din lightning Address (frivilligt)",
+          "title": "siffror och bokstäver, minst 4 tecken"
+        },
+        "optional_lightning_note": {
+          "part2": "lightning address",
+          "part3": ". Detta är ett enkelt sätt för vem som helst att skicka bitcoin till dig på lightning nätverket.",
+          "part4": "lär dig mer",
+          "part1": "Ditt Alby-konto kommer också med alternativ"
+        },
+        "errors": {
+          "create_wallet_error1": "Det gick inte att logga in eller skapa ett nytt konto.",
+          "create_wallet_error2": "Om du behöver hjälp, kontakta support@getalby.com",
+          "create_wallet_error": "Det gick inte att logga in eller skapa ett nytt konto. Om du behöver hjälp, kontakta support@getalby.com"
+        },
+        "forgot_password": "Glömt ditt lösenord?",
+        "title": "Ditt Alby-konto",
+        "create_account": "Skapa ett nytt Alby-konto för att skicka och ta emot bitcoinbetalningar.",
+        "login_account": "Logga in för att ansluta ditt befintliga Alby-konto.",
+        "host_wallet": "Vi tillhandahåller en Lightning Plånbok för dig!",
+        "email": {
+          "create": {
+            "label": "Email Address"
+          },
+          "login": {
+            "label": "Email Address eller Lightning Address"
+          }
+        }
+      }
     }
   },
   "common": {
@@ -621,6 +806,5 @@
         "active": "AKTIV"
       }
     }
-  },
-  "permissions": {}
+  }
 }
