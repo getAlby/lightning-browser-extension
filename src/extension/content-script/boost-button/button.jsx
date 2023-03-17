@@ -64,9 +64,9 @@ function BoostButton() {
       setLoading(true);
       if (!satsClicked) return;
       const ln = new LightningAddress(lnurl);
-      const invoice = await ln.requestInvoice({
-        satoshi: Number(satsClicked * 1000),
-        payerdata: { contentUri: contentUri },
+      const invoice = await ln.generateInvoice({
+        amount: (satsClicked * 1000).toString(),
+        payerdata: JSON.stringify({ contentUri: contentUri }),
       });
       window.webln = new WebLNProvider();
       try {
