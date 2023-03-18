@@ -797,7 +797,7 @@
         "title": "Povolit přihlášení k webovým stránkám",
         "subtitle": "Automaticky přihlásit bez potvrzení, když to webová stránka vyžádá."
       },
-      "edit_allowance": {
+      "edit_preferences": {
         "title": "Upravit příspěvek",
         "screen_reader": "Možnosti příspěvku"
       },

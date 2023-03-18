@@ -549,7 +549,7 @@
         "title": "Aktivera webbplatsinloggning",
         "subtitle": "Logga in automatiskt utan bekräftelse när webbplatsen begär det."
       },
-      "edit_allowance": {
+      "edit_preferences": {
         "title": "Redigera Beloppsgräns",
         "screen_reader": "Alternativ för Beloppsgräns"
       }
