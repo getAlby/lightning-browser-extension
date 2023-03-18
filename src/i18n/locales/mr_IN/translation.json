@@ -351,27 +351,27 @@
     },
     "home": {
       "actions": {
-        "send_satoshis": "⚡️ Send Satoshis ⚡️",
-        "enable_now": "Enable Now"
+        "send_satoshis": "⚡️  Satoshis पाठवा ⚡️",
+        "enable_now": "आता सुरू करा"
       },
-      "recent_transactions": "Recent Transactions",
+      "recent_transactions": "अलीकडचे व्यवहार",
       "transaction_list": {
         "tabs": {
-          "outgoing": "Outgoing",
-          "incoming": "Incoming"
+          "outgoing": "बाहेर जाणरे",
+          "incoming": "येणारे"
         }
       },
       "allowance_view": {
-        "recent_transactions": "Recent Transactions",
-        "allowance": "Allowance",
-        "sats_used": "sats used",
-        "no_transactions": "No transactions on <0>{{name}}</0> yet."
+        "recent_transactions": "अलीकडचे व्यवहार",
+        "allowance": "भत्ता",
+        "sats_used": "sats वापरले",
+        "no_transactions": "अद्याप <0>{{name}}</0> वर कोणतेही व्यवहार नाहीत."
       },
       "default_view": {
-        "recent_transactions": "Recent Transactions",
-        "no_transactions": "No transactions made with Alby, yet.",
-        "is_blocked_hint": "Alby is currently disabled on {{host}}",
-        "block_removed": "Enabled {{host}}. Please reload the website."
+        "recent_transactions": "अलीकडचे व्यवहार",
+        "no_transactions": "Alby सह अद्याप कोणतेही व्यवहार केलेले नाहीत.",
+        "is_blocked_hint": "Alby सध्या {{host}} वर अक्षम आहे",
+        "block_removed": "{{host}} सक्षम केले. कृपया वेबसाइट रीलोड करा."
       }
     },
     "settings": {
