@@ -999,7 +999,7 @@
         "queryroutes": "संभाव्य मार्गासाठी प्रश्न.",
         "verifymessage": "संदेशावर स्वाक्षरीची पडताळणी करा.",
         "sendtoroute": "निर्दिष्ट मार्गाने पेमेंट करा.",
-        "decodepayreq": "Payment request string. डीकोड करा.",
+        "decodepayreq": "Payment request string डीकोड करा.",
         "routermc": "अंतर्गत मिशन नियंत्रण स्थिती वाचा.",
         "addinvoice": "नवीन पावत्या तयार करा.",
         "addholdinvoice": "नवीन HODL पावत्या तयार करा.",
