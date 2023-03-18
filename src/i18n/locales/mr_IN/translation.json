@@ -485,76 +485,76 @@
       },
       "camera_access": {
         "title": "Camera access",
-        "subtitle": "For scanning QR codes",
-        "allow": "Allow camera access",
-        "granted": "Permission granted"
+        "subtitle": "QR कोड स्कॅन करण्यासाठी",
+        "allow": "कॅमेरा प्रवेशास परवानगी द्या",
+        "granted": "परवानगी दिली"
       },
       "language": {
-        "title": "Language",
-        "subtitle": "Translations are not 100% finished yet. <0>Help us translate Alby into your language!</0>"
+        "title": "भाषा",
+        "subtitle": "अजून 100% भाषांतरे पूर्ण झालेली नाहीत. <0>तुमच्या भाषेत Alby चे भाषांतर करण्यास आम्हाला मदत करा!</0>"
       },
       "theme": {
         "title": "Theme",
         "subtitle": "Use Alby in dark or light mode",
         "options": {
-          "dark": "Dark",
-          "light": "Light",
-          "system": "System"
+          "dark": "डार्क",
+          "light": "लाइट",
+          "system": "डीफॉल्ट"
         }
       },
       "show_fiat": {
         "title": "Sats to Fiat",
-        "subtitle": "Always convert into selected currency from selected exchange"
+        "subtitle": "निवडलेल्या एक्सचेंजमधून नेहमी निवडलेल्या चलनात रूपांतरित करा"
       },
       "currency": {
-        "title": "Currency",
-        "subtitle": "Show the amounts additionally in this currency"
+        "title": "चलन",
+        "subtitle": "या चलनात अतिरिक्त रक्कम दाखवा"
       },
       "exchange": {
-        "title": "Exchange Source",
-        "subtitle": "Source of bitcoin exchange rates"
+        "title": "एक्सचेंज स्रोत",
+        "subtitle": "बिटकॉइन विनिमय दरांचा स्रोत"
       },
       "personal_data": {
-        "title": "Personal data",
-        "description": "Payees can request for additional data to be sent with a payment. This data is not shared with anyone without your consent, you will always be prompted before this data is sent along with a payment."
+        "title": "वैयक्तिक डेटा",
+        "description": "देयके पेमेंटसह अतिरिक्त डेटा पाठवण्याची विनंती करू शकतात. हा डेटा तुमच्या संमतीशिवाय कोणाशीही शेअर केला जात नाही, हा डेटा पेमेंटसह पाठवण्यापूर्वी तुम्हाला नेहमी सूचित केले जाईल."
       },
       "name": {
-        "title": "Name",
+        "title": "नाव",
         "subtitle": "",
-        "placeholder": "Enter your name"
+        "placeholder": "तुमचे नाव प्रविष्ट करा"
       },
       "email": {
-        "title": "Email",
+        "title": "ईमेल",
         "subtitle": "",
-        "placeholder": "Enter your email address"
+        "placeholder": "तुमचा ईमेल पत्ता प्रविष्ट करा"
       },
       "change_password": {
-        "title": "Change unlock password",
+        "title": "अनलॉक पासवर्ड बदला",
         "subtitle": "",
-        "screen_reader": "Change unlock password",
+        "screen_reader": "अनलॉक पासवर्ड बदला",
         "choose_password": {
-          "label": "Enter a new unlock password:"
+          "label": "नवीन अनलॉक पासवर्ड टाका:"
         },
         "confirm_password": {
-          "label": "Confirm new password:"
+          "label": "नवीन पासवर्डची पुष्टी करा:"
         },
         "submit": {
-          "label": "Change"
+          "label": "बदला"
         },
         "errors": {
-          "enter_password": "Please enter a new unlock password.",
-          "confirm_password": "Please confirm your password.",
-          "mismatched_password": "Passwords don't match."
+          "enter_password": "कृपया नवीन अनलॉक पासवर्ड टाका.",
+          "confirm_password": "कृपया तुमच्या पासवर्डची पुष्टी करा.",
+          "mismatched_password": "संकेतशब्द जुळत नाहीत."
         },
-        "success": "Password changed successfully"
+        "success": "पासवर्ड यशस्वीरित्या बदलला"
       },
       "nostr": {
         "title": "Nostr",
-        "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
+        "hint": "सेन्सॉरशिप-प्रतिरोधक सोशल नेटवर्क्स तयार करणे हा एक साधा आणि खुला प्रोटोकॉल आहे. Nostr क्रिप्टोग्राफिक कीसह कार्य करते. काहीतरी प्रकाशित करण्यासाठी तुम्ही त्यावर तुमच्या की सह स्वाक्षरी करा आणि एकाधिक रिलेवर पाठवा. तुम्ही तुमचे व्यवस्थापन करण्यासाठी Alby वापरू शकता Nostr की. अनेक Nostr Application तुम्हाला Alby एक्स्टेंशनमधील की वापरण्याची परवानगी देतात.",
         "private_key": {
-          "title": "Private key",
-          "subtitle": "This section is moved to accounts page as keys are account specific now.",
-          "go_to": "Go To Accounts"
+          "title": "खाजगी की",
+          "subtitle": "हा विभाग खाते पृष्ठावर हलविला आहे कारण की आता खाते विशिष्ट आहेत.",
+          "go_to": "खात्यावर जा"
         }
       }
     }
