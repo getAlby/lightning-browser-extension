@@ -163,6 +163,17 @@
     ]
   },
   {
+    "title": "nodeManagement",
+    "items": [
+      {
+        "title": "LNnodeinsight.com",
+        "subtitle": "Develop your own data-driven Lightning Network insight",
+        "logo": "https://lnnodeinsight.com/www/LNnodeinsight-tinylogonobkgrnd-white.svg",
+        "url": "https://lnnodeinsight.com/"
+      }
+    ]
+  },
+  {
     "title": "miscellaneous",
     "items": [
       {
