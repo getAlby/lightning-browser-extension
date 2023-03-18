@@ -447,18 +447,18 @@
       "block_added": "ब्लॉकलिस्टमध्ये {{होस्ट}} जोडले, कृपया वेबसाइट रीलोड करा."
     },
     "unlock": {
-      "unlock_to_continue": "Unlock to continue",
-      "unlock_password": "Your unlock password",
+      "unlock_to_continue": "चालू ठेवण्यासाठी अनलॉक करा",
+      "unlock_password": "तुमचा अनलॉक पासवर्ड",
       "help_contact": {
-        "part1": "Need help? Contact",
-        "part2": "Alby Support"
+        "part1": "मदत हवी आहे? संपर्क साधा",
+        "part2": "Alby सपोर्ट"
       },
       "unlock_error": {
-        "help": "Your account data is encrypted with your unlock password. If you really forgot your unlock password you have to reset and add your lightning account again.",
-        "link": "Reset now and add a new account"
+        "help": "तुमचा खाते डेटा तुमच्या अनलॉक पासवर्डसह कूटबद्ध केला आहे. तुम्ही तुमचा अनलॉक पासवर्ड खरोखर विसरलात तर तुम्हाला तुमचे Lightning खाते रीसेट करून पुन्हा जोडावे लागेल.",
+        "link": "आता रीसेट करा आणि नवीन खाते जोडा"
       },
       "errors": {
-        "invalid_password": "Invalid password"
+        "invalid_password": "चुकीचा पासवर्ड"
       }
     },
     "settings": {
