@@ -557,6 +557,78 @@
           "go_to": "खात्यावर जा"
         }
       }
+    },
+    "send": {
+      "title": "Send",
+      "qrcode": {
+        "title": "स्कॅन करण्यासाठी प्रतीक्षा करत आहे"
+      },
+      "input": {
+        "label": "प्राप्तकर्ता",
+        "hint": "चालन, Lightning address किंवा LNURL"
+      }
+    },
+    "lnurlpay": {
+      "amount": {
+        "label": "रक्कम"
+      },
+      "comment": {
+        "label": "टिप्पणी"
+      },
+      "name": {
+        "label": "नाव"
+      },
+      "email": {
+        "label": "ईमेल"
+      },
+      "success": "पेमेंट यशस्वीरीत्या पाठवले!"
+    },
+    "lnurlauth": {
+      "title": "Authentication",
+      "content_message": {
+        "heading": "तुम्हाला लॉग इन करायचे आहे का"
+      },
+      "submit": "लॉग इन",
+      "success": "{{name}} वर लॉगिन यशस्वी झाले",
+      "errors": {
+        "status": "समस्या: प्रमाणीकरण स्थिती ठीक नाही"
+      }
+    },
+    "lnurlchannel": {
+      "title": "चॅनेल विनंती",
+      "content_message": {
+        "heading": "नोडमधून चॅनेलची विनंती करा"
+      },
+      "success": "{{name}} ला चॅनल विनंती यशस्वीरीत्या पाठवली"
+    },
+    "lnurlwithdraw": {
+      "title": "मागे घ्या",
+      "content_message": {
+        "heading": "रक्कम"
+      },
+      "amount": {
+        "label": "रक्कम"
+      },
+      "success": "{{sender}} ला {{amount}} पैसे काढण्याची विनंती यशस्वीरीत्या पाठवली"
+    },
+    "receive": {
+      "title": "प्राप्त करा",
+      "actions": {
+        "create_invoice": "चालन तयार करा"
+      },
+      "amount": {
+        "label": "रक्कम",
+        "placeholder": "सतोशीमधील रक्कम..."
+      },
+      "description": {
+        "label": "वर्णन",
+        "placeholder": "उदा. हे पेमेंट कोण पाठवत आहे?"
+      },
+      "success": "पेमेंट मिळाले!",
+      "payment": {
+        "waiting": "पेमेंटची वाट पाहत आहे...",
+        "status": "पेमेंट स्थिती तपासा"
+      }
     }
   }
 }
