@@ -239,8 +239,8 @@
         "title": "RaspiBlitz",
         "page": {
           "title": "your <0>RaspiBlitz</0> node ला कनेक्ट करा",
-          "instructions1": "Follow these steps:<1/> 1. <0>SSH</0> into your <0>Raspiblitz</0><1/>2. Select <0>Connect Apps & Show Credentials</0> from the list<1/><0/>3. Choose <0>Connect Alby to this node</0><1/>4. Press <0>OK</0> to display the connection credentials<1/><1/>Copy and paste the <0>REST API host</0> or the <0>.onion</0> address to connect through Tor into the input below.",
-          "instructions2": "Copy the (admin) <0>macaroon</0> into the input below."
+          "instructions1": "या चरणांचे अनुसरण करा:<1/> 1. <0>SSH</0> तुमच्या <0>Raspiblitz</0><1/>2. सूचीमधून <0>अ‍ॅप्स कनेक्ट करा आणि क्रेडेंशियल दाखवा</0> निवडा<1/><0/>3. <0>Alby ला या नोडशी कनेक्ट करा</0><1/>4 निवडा. कनेक्शन क्रेडेन्शियल प्रदर्शित करण्यासाठी <0>ओके</0> दाबा<1/><1/>कनेक्‍ट करण्यासाठी <0>REST API होस्ट</0> किंवा <0>.onion</0> पत्ता कॉपी आणि पेस्ट करा टोर द्वारे खालील इनपुटमध्ये.",
+          "instructions2": "खालील इनपुटमध्ये (admin) <0>macaroon</0> कॉपी करा."
         },
         "rest_api_host": {
           "label": "REST API host",
@@ -250,76 +250,76 @@
       "bitcoin_beach": {
         "title": "Bitcoin Beach Wallet",
         "page": {
-          "title": "<0>Bitcoin Beach Wallet</0 ला कनेक्ट करा>"
+          "title": "<0>Bitcoin Beach Wallet ला कनेक्ट करा</0>"
         }
       },
       "bitcoin_jungle": {
         "title": "Bitcoin Jungle Wallet",
         "page": {
-          "title": "<0>Bitcoin Jungle Wallet</0 ला कनेक्ट करा>"
+          "title": "<0>Bitcoin Jungle Wallet ला कनेक्ट करा</0>"
         }
       },
       "galoy": {
         "phone_number": {
-          "label": "Enter your phone number"
+          "label": "तुमचा फोन नंबर एंटर करा"
         },
         "sms_code": {
-          "label": "Enter your SMS verification code"
+          "label": "तुमचा SMS सत्यापन कोड प्रविष्ट करा"
         },
         "jwt": {
-          "label": "Enter your JWT token",
-          "info": "The {{label}} login is currently being upgraded. If you are an advanced user, you can grab your JWT token by logging in via the <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>The JWT looks like: <2>eyJhbG...</2><1/><1/>"
+          "label": "JWT token एंटर करा",
+          "info": "The {{label}} login सध्या अपग्रेड केले जात आहे. तुम्ही प्रगत वापरकर्ते असल्यास, तुम्ही <0>वेब वॉलेट (wallet.mainnet.galoy.io)</0><1/><1/>JWT द्वारे लॉग इन करून तुमचे JWT टोकन मिळवू शकता: < 2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
           "login": "Login",
-          "request_sms_code": "Request SMS Code"
+          "request_sms_code": "SMS कोडची विनंती करा"
         },
         "errors": {
-          "failed_to_request_sms": "Failed to request a SMS code",
-          "failed_to_login_sms": "Failed to login with SMS code",
-          "setup_failed": "Setup failed",
-          "missing_jwt": "JWT missing, couldn't log in.",
-          "invalid_jwt": "invalid JWT passed"
+          "failed_to_request_sms": "SMS कोडची विनंती करण्यात अयशस्वी",
+          "failed_to_login_sms": "SMS कोडची विनंती करताना अपयश आले",
+          "setup_failed": "Setup अयशस्वी",
+          "missing_jwt": "JWT शोधू शकत नाही म्हणून लॉग इन करू शकलो नाही.",
+          "invalid_jwt": "चुकीचे JWT पास झाले"
         }
       },
       "kollider": {
         "title": "Kollider",
-        "description": "Login to your Kollider account",
+        "description": "तुमच्या Kollider खात्यात लॉग इन करा",
         "page": {
-          "title": "Connect to your Kollider account",
-          "description": "Don't have an account already? <0>Sign up</0> now!"
+          "title": "Kollider खाते ला कनेक्ट करा",
+          "description": "आधीच खाते नाही? <0>साइन अप करा</0> !"
         },
         "username": {
-          "label": "Enter your Kollider username"
+          "label": "तुमचे Kollider username प्रविष्ट करा"
         },
         "password": {
-          "label": "Enter your Kollider password"
+          "label": "तुमचे Kollider password  प्रविष्ट करा"
         },
         "currency": {
-          "label": "Select your currency account"
+          "label": "तुमचे चलन खाते निवडा"
         },
         "errors": {
-          "connection_failed": "Connection failed. Are you sure the account data is correct?"
+          "connection_failed": "कनेक्शन अयशस्वी झाले. तुम्हाला खात्री आहे की खाते डेटा बरोबर आहे?"
         }
       },
       "btcpay": {
         "title": "BTCPay Server",
         "page": {
-          "title": "Connect to your BTCPay LND node",
-          "instructions": "Navigate to your BTCPayServer and log in as an admin. Go to Server Settings > Services > LND Rest - See information. Then Click \"See QR Code information\" and copy the QR Code data. Paste it below:"
+          "title": "BTCPay LND node ला कनेक्ट करा",
+          "instructions": "तुमच्या BTCPayServer वर नेव्हिगेट करा आणि admin म्हणून लॉग इन करा. सर्व्हर सेटिंग्ज > सेवा > LND REST वर जा - माहिती पहा. नंतर \"QR कोड माहिती पहा\" वर क्लिक करा आणि QR कोड डेटा कॉपी करा. ते खाली पेस्ट करा:"
         },
         "config": {
           "label": "Config data",
           "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
         },
         "errors": {
-          "connection_failed": "Connection failed. Is the BTCPay connection URL correct and accessible?"
+          "connection_failed": "कनेक्शन अयशस्वी झाले. BTCPay कनेक्शन URL योग्य आणि प्रवेशयोग्य आहे का?"
         }
       },
       "commando": {
         "title": "Core Lightning",
         "page": {
-          "title": "Connect to your Core Lightning node",
+          "title": "आपल्या Core Lightning node ला कनेक्ट करा",
           "instructions": "Make sure you have Core Lightning version 0.12.0 or newer, the commando plugin is running and your node is accessible over the lightning network. Create a rune by running 'lightning-cli commando-rune'."
         },
         "host": {
@@ -345,8 +345,33 @@
           "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
         },
         "errors": {
-          "connection_failed": "Connection failed. Is your Core Lightning node online and using the commando plugin?"
+          "connection_failed": "कनेक्शन अयशस्वी झाले. तुमचा कोर Lightning node ऑनलाइन आहे आणि कमांडो commando plugin आहे का?"
         }
+      }
+    },
+    "home": {
+      "actions": {
+        "send_satoshis": "⚡️ Send Satoshis ⚡️",
+        "enable_now": "Enable Now"
+      },
+      "recent_transactions": "Recent Transactions",
+      "transaction_list": {
+        "tabs": {
+          "outgoing": "Outgoing",
+          "incoming": "Incoming"
+        }
+      },
+      "allowance_view": {
+        "recent_transactions": "Recent Transactions",
+        "allowance": "Allowance",
+        "sats_used": "sats used",
+        "no_transactions": "No transactions on <0>{{name}}</0> yet."
+      },
+      "default_view": {
+        "recent_transactions": "Recent Transactions",
+        "no_transactions": "No transactions made with Alby, yet.",
+        "is_blocked_hint": "Alby is currently disabled on {{host}}",
+        "block_removed": "Enabled {{host}}. Please reload the website."
       }
     },
     "settings": {
