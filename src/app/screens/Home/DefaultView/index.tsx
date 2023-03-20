@@ -16,26 +16,12 @@ import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import { classNames } from "~/app/utils/index";
+import { convertPaymentsToTransactions } from "~/app/utils/payments";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import type { Battery, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
-
-const loadPayments = async () => {
-  const response = await api.getPayments({ limit: 10 });
-
-  const payments: Transaction[] = response.payments.map((payment) => ({
-    ...payment,
-    id: `${payment.id}`,
-    type: "sent",
-    date: dayjs(payment.createdAt).fromNow(),
-    title: payment.name || payment.description,
-    publisherLink: "options.html#/publishers",
-  }));
-
-  return payments;
-};
 
 export type Props = {
   lnDataFromCurrentTab?: Battery[];
@@ -43,8 +29,8 @@ export type Props = {
 };
 
 const DefaultView: FC<Props> = (props) => {
-  const [isLoadingPayments, setIsLoadingPayments] = useState(true);
-  const [payments, setPayments] = useState<Transaction[] | null>(null);
+  const [isLoadingTransactions, setIsLoadingTransactions] = useState(true);
+  const [transactions, setTransactions] = useState<Transaction[] | null>(null);
 
   const [isLoadingInvoices, setIsLoadingInvoices] = useState(false);
   const [incomingTransactions, setIncomingTransactions] = useState<
@@ -60,11 +46,8 @@ const DefaultView: FC<Props> = (props) => {
   } = useSettings();
 
   const showFiat = !isLoadingSettings && settings.showFiat;
-  const hasPayments = !isLoadingPayments && !!payments?.length;
-  const isEmptyPayments = !isLoadingPayments && payments?.length === 0;
+  const hasTransactions = !isLoadingTransactions && !!transactions?.length;
   const hasInvoices = !isLoadingInvoices && !!incomingTransactions?.length;
-  const isEmptyInvoices =
-    !isLoadingInvoices && incomingTransactions?.length === 0;
 
   const navigate = useNavigate();
   const { account, balancesDecorated } = useAccount();
@@ -86,29 +69,33 @@ const DefaultView: FC<Props> = (props) => {
     checkBlockedUrl();
   }, [props.currentUrl]);
 
-  // get array of payments if not done yet
+  // get array of transactions if not done yet
   useEffect(() => {
-    const getPayments = async () => {
+    const getTransactions = async () => {
       try {
-        const payments = await loadPayments();
+        const { payments } = await api.getPayments({ limit: 10 });
+        const transactions: Transaction[] = await convertPaymentsToTransactions(
+          payments,
+          "options.html#/publishers"
+        );
         // attach fiatAmount if enabled
-        for (const payment of payments) {
-          const totalAmountFiat = showFiat
-            ? await getFormattedFiat(payment.totalAmount)
+        for (const transaction of transactions) {
+          transaction.totalAmountFiat = showFiat
+            ? await getFormattedFiat(transaction.totalAmount)
             : "";
-          payment.totalAmountFiat = totalAmountFiat;
         }
-        setPayments(payments);
+
+        setTransactions(transactions);
       } catch (e) {
         console.error(e);
         if (e instanceof Error) toast.error(e.message);
       } finally {
-        setIsLoadingPayments(false);
+        setIsLoadingTransactions(false);
       }
     };
 
-    !payments && !isLoadingSettings && getPayments();
-  }, [isLoadingSettings, payments, getFormattedFiat, showFiat]);
+    !transactions && !isLoadingSettings && getTransactions();
+  }, [isLoadingSettings, transactions, getFormattedFiat, showFiat]);
 
   const unblock = async () => {
     try {
@@ -148,10 +135,9 @@ const DefaultView: FC<Props> = (props) => {
     }));
 
     for (const invoice of invoices) {
-      const totalAmountFiat = settings.showFiat
+      invoice.totalAmountFiat = settings.showFiat
         ? await getFormattedFiat(invoice.totalAmount)
         : "";
-      invoice.totalAmountFiat = totalAmountFiat;
     }
 
     setIncomingTransactions(invoices);
@@ -170,7 +156,6 @@ const DefaultView: FC<Props> = (props) => {
       {!!props.lnDataFromCurrentTab?.length && (
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       )}
-
       <div className="p-4">
         <div className="flex mb-6 space-x-4">
           <Button
@@ -210,13 +195,13 @@ const DefaultView: FC<Props> = (props) => {
           </div>
         )}
 
-        {isLoadingPayments && (
+        {isLoadingTransactions && (
           <div className="flex justify-center">
             <Loading />
           </div>
         )}
 
-        {!isLoadingPayments && (
+        {!isLoadingTransactions && (
           <div>
             <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
               {t("default_view.recent_transactions")}
@@ -248,8 +233,10 @@ const DefaultView: FC<Props> = (props) => {
 
               <Tab.Panels>
                 <Tab.Panel>
-                  {hasPayments && <TransactionsTable transactions={payments} />}
-                  {isEmptyPayments && (
+                  {hasTransactions && (
+                    <TransactionsTable transactions={transactions} />
+                  )}
+                  {!hasTransactions && (
                     <p className="text-gray-500 dark:text-neutral-400">
                       {t("default_view.no_transactions")}
                     </p>
@@ -264,7 +251,7 @@ const DefaultView: FC<Props> = (props) => {
                   {hasInvoices && (
                     <TransactionsTable transactions={incomingTransactions} />
                   )}
-                  {isEmptyInvoices && (
+                  {!hasInvoices && (
                     <p className="text-gray-500 dark:text-neutral-400">
                       {t("default_view.no_transactions")}
                     </p>

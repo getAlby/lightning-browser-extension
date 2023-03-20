@@ -6,6 +6,7 @@ import sha256 from "crypto-js/sha256";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import { getBTCToSats, getSatsToBTC } from "~/common/utils/currencyConvert";
 import HashKeySigner from "~/common/utils/signer";
+import { Account } from "~/types";
 
 import Connector, {
   CheckPaymentArgs,
@@ -49,6 +50,7 @@ const defaultHeaders = {
 };
 
 export default class Kollider implements Connector {
+  account: Account;
   config: Config;
   access_token?: string;
   access_token_created?: number;
@@ -59,7 +61,8 @@ export default class Kollider implements Connector {
   currency: KolliderCurrencies;
   currentAccountId: string | null;
 
-  constructor(config: Config) {
+  constructor(account: Account, config: Config) {
+    this.account = account;
     this.config = config;
     this.currency = config.currency;
     this.currentAccountId = null;

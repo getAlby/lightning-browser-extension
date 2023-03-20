@@ -9,7 +9,7 @@
       },
       "set_password": {
         "title": "Passwort zum Entsperren festlegen",
-        "description": "Die Daten deines Lightning Kontos sind mit einem Freischalt Passwort sicher verschlüsselt. Vergesse dieses Passwort nicht! Du benötigst es, um die Alby Erweiterung zu entsperren (in diesem Browser).",
+        "description": "Dieses Passwort wird verwendet, um deine Wallet zu schützen und den Zugriff auf die Browser-Erweiterung zu ermöglichen. Es kann nicht zurückgesetzt werden und ist unabhängig von Ihrem Alby Konto Passwort.",
         "choose_password": {
           "label": "Wähle ein Password zum Entsperren:"
         },
@@ -139,9 +139,9 @@
       },
       "raspiblitz": {
         "page": {
-          "instructions1": "Du benötigst deine Node-Onion-Adresse, Port und eine Macaroon mit Lese- und Sendeberechtigungen (z. B. admin.macaroon).<1/><1/><0>SSH in deinem <0>RaspiBlitz.<1/>Führe den Befehl <0>sudo cat /mnt/hdd/tor/lndrest/hostname aus.<1/>Kopiere die <0>.onion-Adresse und füge deine Eingabe unten ein .<1/>Füge deinen <0>Port nach der Onion-Adresse hinzu, der Standardport ist <0>:8080.",
+          "instructions1": "Folge diese Schritte:<1/> 1. <0>SSH</0> in deinem <0>Raspiblitz</0><1/>2. Wähle <0>Connect Apps & Show Credentials</0> aus der Liste<1/><0/>3. Wähle <0>Connect Alby to this node</0><1/>4. Drücke <0>OK</0>, um die Verbindungsdaten anzuzeigen<1/><1/>Kopiere den <0>REST API-Host</0> oder die <0>.onion</0>-Adresse, um dich über Tor zu verbinden, und füge sie in das Feld darunter ein.",
           "title": "Verbinde dich mit deinem <0>RaspiBlitz</0> Knoten",
-          "instructions2": "Wähle <0>VERBINDEN.<1/>Wähle <0>EXPORTIEREN.<1/>Wähle <0>HEX.<1/>Kopiere das <0>adminMacaroon.<1/>Füge die Makrone in die Eingabe unten ein."
+          "instructions2": "Kopiere (admin) <0>macaroon</0> in die unten stehende Eingabe."
         },
         "title": "RaspiBlitz",
         "rest_api_host": {
@@ -390,7 +390,8 @@
       },
       "name": {
         "title": "Name",
-        "placeholder": "Geben Sie Ihren Namen ein"
+        "placeholder": "Geben Sie Ihren Namen ein",
+        "subtitle": ""
       },
       "email": {
         "title": "E-Mail",
@@ -447,11 +448,13 @@
           "title": "Nostr",
           "private_key": {
             "title": "Verwalten von deinen Schlüssel",
-            "subtitle": "Füge deinen privaten Schlüssel ein oder erzeuge einen neuen. Stelle sicher, dass du deinen privaten Schlüssel sicherst, bevor du einen neuen Schlüssel generierst. <0>Mehr erfahren\"</0>",
-            "warning": "Dadurch wird dein alter privater Schlüssel gelöscht. Bist du dir sicher?",
+            "subtitle": "Füge deinen privaten Schlüssel ein oder erzeuge einen neuen. <0>Mehr erfahren\"</0>",
+            "warning": "Bitte gebe den Namen des Kontos ein, um die Löschung des privaten Schlüssels zu bestätigen:",
             "success": "Privater Schlüssel erfolgreich verschlüsselt und gespeichert.",
             "successfully_removed": "Privater Schlüssel erfolgreich entfernt.",
-            "label": "Privater Schlüssel"
+            "label": "Privater Schlüssel",
+            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter Privatname wurde wiederhergestellt.",
+            "backup": "Vergesse nicht, deinen privaten Schlüssel zu sichern! Wenn du deinen Schlüssel nicht sicherst, kannst du den Zugang verlieren."
           },
           "public_key": {
             "label": "Öffentlicher Schlüssel"
@@ -562,7 +565,37 @@
       "content": "Auf dieser Website wirst du aufgefordert zu signieren:",
       "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
       "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade deine Website neu.",
-      "allow_sign": "Erlaube dein {{host}} zu unterschreiben:"
+      "allow_sign": "Erlaube dein {{host}} zu unterschreiben:",
+      "view_details": "Details anzeigen",
+      "hide_details": "Details ausblenden",
+      "no_content": "(Ohne Inhalt)",
+      "kinds": {
+        "unknown": "nostr Ereignis der Art {{kind}}",
+        "0": "Metadaten",
+        "5": "Ereignislöschung",
+        "40": "Kanalbildung",
+        "41": "Kanal Metadaten",
+        "42": "Kanalmeldung",
+        "43": "Kanal verstecke Nachrichten",
+        "44": "Kanal stummschalten Benutzer",
+        "10002": "Metadaten der Relaisliste",
+        "30078": "anwendungsspezifische Daten",
+        "22242": "Client Authentifizierung",
+        "7": "Reaktion",
+        "9734": "Zappanfrage",
+        "9735": "zap",
+        "2": "Relais empfehlen",
+        "1": "kurze Textnotiz",
+        "3": "Kontakte",
+        "4": "verschlüsselte Direktnachrichten",
+        "8": "Abzeichenverleihung",
+        "1984": "Berichterstattung",
+        "24133": "nostr verbinden",
+        "30008": "Profilabzeichen",
+        "30009": "Ausweisdefinition",
+        "30023": "Langform Inhalte"
+      },
+      "allow_sign_event": "Erlaube {{host}}, eine {{kind}} zu unterzeichnen:"
     },
     "confirm_request_permission": {
       "title": "Antrag genehmigen",
@@ -640,11 +673,11 @@
             "label": "Email Adresse"
           }
         },
-        "login_account": "Melden dich an, um dein bestehendes Alby-Konto zu verbinden.",
+        "login_account": "Melde dich an, um dein bestehendes Alby-Konto zu verbinden.",
         "host_wallet": "Wir hosten die Lightning Wallet für dich!",
         "optional_lightning_note": {
           "part3": ". Dies ist eine einfache Möglichkeit für jeden, dir Bitcoin über das Lightning-Netzwerk zu senden.",
-          "part1": "Ihr Alby-Konto enthält außerdem ein optionales",
+          "part1": "Dein Alby-Konto enthält außerdem ein optionales",
           "part2": "Lightning Adresse",
           "part4": "mehr erfahren"
         },
@@ -660,7 +693,7 @@
           "create_wallet_error2": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com"
         },
         "forgot_password": "Passwort vergessen?",
-        "title": "Dein Alby Konto",
+        "title": "Dein Alby-Konto",
         "set_password": {
           "choose_password": {
             "label": "Password"
@@ -684,12 +717,12 @@
         "connect": "Verbinden"
       },
       "alby": {
-        "title": "Alby",
-        "description": "Melden dich an oder nutze dein bestehendes Alby-Konto, um im Handumdrehen eine Lightning Zahlung zu beginnen.",
+        "title": "Alby Konto",
+        "description": "Melde dich an oder verwende dein bestehendes Alby-Konto, um im Handumdrehen mit Lightningzahlungen zu beginnen.",
         "create_new": "Anmelden"
       },
       "title": "Verbinden",
-      "description": "Um Alby für Online-Zahlungen zu nutzen, verbinde deine Lightning Wallet mit der Erweiterung."
+      "description": "Um mit der Verwendung der Alby Erweiterung zu beginnen, verbinde deine Lightning Wallet."
     },
     "discover": {
       "description": "Websites und Webapplikationen, auf denen du Alby verwenden kannst",
@@ -729,6 +762,11 @@
           "description1": "<0>Um einfach auf Alby zuzugreifen, klicke auf das Erweiterungssymbol <1/> <2>in der oberen rechten Ecke Ihres Browsers"
         }
       }
+    },
+    "transactions": {
+      "title": "Transaktionen",
+      "description": "Ausgehende Transaktionen über alle deine Konten",
+      "list_empty": "Noch keine Transaktionen verfügbar."
     }
   },
   "components": {
@@ -761,10 +799,16 @@
       }
     },
     "companion_download_info": {
-      "using_tor": "Klicke hier zum Weitermachen, wenn du den TOR Browser verwendest",
-      "description": "Du versuchst, dich mit einem Knoten hinter Tor zu verbinden. Dazu muss entweder die Alby Companion App installiert oder Tor ausgeführt werden. (Wenn du dir nicht sicher bist, empfehlen wir die Alby Companion App.)",
-      "download_here": "Lade dein Alby-Begleiter hier herunter!",
-      "or": "Oder:"
+      "download": "Download",
+      "companion": {
+        "title": "Begleitende App",
+        "description": "Leichte Anwendung, die deinem Browser mit dem TOR-Netzwerk verbindet."
+      },
+      "tor_native": {
+        "title": "TOR (native)",
+        "description": "Wähle diese Option, wenn dieser Browser bereits mit dem TOR-Netzwerk verbunden ist."
+      },
+      "heading": "Wie willst du dich mit dem TOR-Netzwerk verbinden?"
     },
     "allowance_menu": {
       "edit_allowance": {
@@ -863,7 +907,8 @@
       "save": "Speichern",
       "copy": "Kopieren",
       "remember": "Denke an meine Wahl und frage nicht noch einmal",
-      "receive_again": "Eine weitere Zahlung erhalten"
+      "receive_again": "Eine weitere Zahlung erhalten",
+      "transactions": "Transaktionen"
     },
     "discover": "Entdecken",
     "errors": {
@@ -873,7 +918,13 @@
     "message": "Nachricht",
     "response": "Antwort",
     "success_message": "{{amount}}{{fiatAmount}} gesendet an {{destination}}",
-    "accounts": "Konten"
+    "accounts": "Konten",
+    "range": {
+      "between": "zwischen {{min}} und {{max}}",
+      "lessThan": "< {{max}}",
+      "greaterThan": "> {{min}}"
+    },
+    "transactions": "Transaktionen"
   },
   "permissions": {
     "commando": {
@@ -927,7 +978,9 @@
       "decodepayreq": "Entschlüssel eine Zahlungsanforderungszeichenfolge.",
       "addinvoice": "Erstelle neue Rechnungen.",
       "listpayments": "Erhalte eine Liste aller ausgehenden Zahlungen.",
-      "verifymessage": "Überprüfe eine Signatur über eine Nachricht."
+      "verifymessage": "Überprüfe eine Signatur über eine Nachricht.",
+      "addholdinvoice": "Erstelle eine neue HODL-Rechnungen.",
+      "settleinvoice": "Begleiche eine akzeptierte Rechnung."
     },
     "nostr": {
       "getpublickey": "Lese deinen öffentlichen Schlüssel.",
@@ -957,7 +1010,9 @@
       "listinvoices": "Erhalte eine Liste aller Rechnungen.",
       "channelbalance": "Erhalte einen Bericht über den Gesamtbetrag der Mittel für alle offenen Kanäle.",
       "walletbalance": "Ermittel die gesamten nicht verbrauchten Ausgaben deiner Wallet.",
-      "openchannel": "Öffne einen neuen Kanal."
+      "openchannel": "Öffne einen neuen Kanal.",
+      "addholdinvoice": "Erstelle eine neue HODL-Rechnungen.",
+      "settleinvoice": "Begleiche eine akzeptierte Rechnung."
     }
   }
 }

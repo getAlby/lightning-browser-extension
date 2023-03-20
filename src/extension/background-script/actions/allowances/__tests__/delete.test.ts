@@ -9,6 +9,7 @@ const mockAllowances: DbAllowance[] = allowanceFixture;
 const mockPermissions = [
   {
     id: 1,
+    accountId: "123456",
     allowanceId: 1,
     createdAt: "1667291216372",
     host: "pro.kollider.xyz",
@@ -18,6 +19,7 @@ const mockPermissions = [
   },
   {
     id: 2,
+    accountId: "123456",
     allowanceId: 2,
     createdAt: "1667291216372",
     host: "lnmarkets.com",
@@ -27,6 +29,7 @@ const mockPermissions = [
   },
   {
     id: 3,
+    accountId: "123456",
     allowanceId: 2,
     createdAt: "1667291216372",
     host: "lnmarkets.com",

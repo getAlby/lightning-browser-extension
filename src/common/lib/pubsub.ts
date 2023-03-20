@@ -12,6 +12,7 @@ const pubsub = {
       status = "failed";
     }
     PubSub.publish(`ln.${type}.${status}`, {
+      accountId: data.accountId,
       response: data.response,
       details: data.details,
       paymentRequestDetails: data.paymentRequestDetails,

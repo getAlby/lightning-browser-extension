@@ -138,8 +138,8 @@
         "title": "RaspiBlitz",
         "page": {
           "title": "Conecte seu servidor <0>RaspiBlitz</0>",
-          "instructions2": "Selecione <0>CONNECT</0>.<1/>Selecione <0>EXPORT</0>.<1/>Selecione <0>HEX</0>.<1/>Copie o <0>adminMacaroon</0>.<1/>Cole o macaroon no campo abaixo.",
-          "instructions1": "Você precisa do endereço onion, porta, e um macaroon com permissão de leitura e envio (e.g. admin.macaroon).<1/><1/><0>SSH</0> no seu <0>RaspiBlitz</0>.<1/>Execute o comando <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Copie e cole o endereço <0>.onion</0> no campo abaixo.<1/>Adicione a <0>porta</0> após o endereço onion, a porta padrão é <0>:8080</0>."
+          "instructions2": "Copie o (admin) <0>macaroon</0> no campo abaixo.",
+          "instructions1": "Siga esses passos<1/> 1. <0>SSH</0> na <0>Raspiblitz</0><1/>2. Selecione <0>Conectar apps & Mostrar credenciais</0> da lista<1/><0/>3. Escolher <0>Conectar Alby neste servidor</0><1/>4. Pressione <0>OK</0> para exibir as credenciais de conexão<1/><1/>Copie e cole o <0>REST API host</0> ou o <0>.onion</0> endereço para conectar -se através do TOR na entrada abaixo."
         },
         "rest_api_host": {
           "label": "REST API host",
@@ -304,9 +304,11 @@
             "title": "Gerenciar sua chave",
             "successfully_removed": "Chave privada removida com sucesso.",
             "label": "Chave privada",
-            "warning": "Esta ação excluirá sua chave privada antiga. Tem certeza de que deseja continuar?",
-            "subtitle": "Cole sua chave privada ou gere uma nova. Certifique-se de fazer backup de sua chave privada antes de gerar uma nova. <0>Saiba mais »</0>",
-            "success": "Chave privada encriptada e salva com sucesso."
+            "warning": "Digite o nome da conta para confirmar a exclusão da chave privada:",
+            "subtitle": "Cole sua chave privada ou gere uma nova. <0>Saiba mais »</0>",
+            "success": "Chave privada encriptada e salva com sucesso.",
+            "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada antiga foi restaurada.",
+            "backup": "⚠️ Faça o backup da sua chave privada! Não fazer o backup da sua chave pode resultar na perda permanente de acesso."
           },
           "public_key": {
             "label": "Chave pública"
@@ -323,6 +325,9 @@
           },
           "actions": {
             "generate": "Gerar uma nova chave"
+          },
+          "errors": {
+            "failed_to_load": "Falha ao carregar a chave Nostr. Esta é uma chave Nostr válida?"
           }
         },
         "remove": {
@@ -592,7 +597,13 @@
       "title": "Nostr",
       "content": "Este site solicita que você assine:",
       "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site.",
-      "allow_sign": "Permitir {{host}} assinar:"
+      "allow_sign": "Permitir {{host}} assinar:",
+      "view_details": "Ver detalhes",
+      "allow_sign_event": "Permitir {{host}} assinar {{kind}}:",
+      "hide_details": "Ocultar detalhes",
+      "kinds": {
+        "unknown": "evento nostr do tipo {{kind}}"
+      }
     },
     "confirm_request_permission": {
       "title": "Aprovar solicitação",
@@ -697,6 +708,10 @@
           "create_wallet_error1": "Falha ao fazer login ou criar uma nova conta."
         }
       }
+    },
+    "transactions": {
+      "title": "Transações",
+      "description": "Transações enviadas usando suas contas"
     }
   },
   "common": {
@@ -733,7 +748,8 @@
       "back": "Voltar",
       "log_in": "Fazer login",
       "remember": "Lembrar minha escolha e não perguntar novamente",
-      "receive_again": "Receber outro pagamento"
+      "receive_again": "Receber outro pagamento",
+      "transactions": "Transações"
     },
     "errors": {
       "connection_failed": "Falha na conexão",
@@ -748,7 +764,13 @@
     "advanced": "Avançado",
     "discover": "Explorar",
     "confirm_password": "Confirmar senha",
-    "accounts": "Minhas contas"
+    "accounts": "Minhas contas",
+    "range": {
+      "between": "entre {{min}} e {{max}}",
+      "lessThan": "< {{max}}",
+      "greaterThan": "> {{min}}"
+    },
+    "transactions": "Transações"
   },
   "components": {
     "allowance_menu": {
@@ -801,12 +823,6 @@
       "budget": {
         "label": "Limite de gastos"
       }
-    },
-    "companion_download_info": {
-      "description": "Você está tentando se conectar em um servidor que usa Tor. Para funcionar, você precisa ter o aplicativo complementar Alby instalado ou ter o Tor em execução. (Se tiver de dúvidas, recomendamos o aplicativo complementar Alby.)",
-      "download_here": "Faça o download do app complementar da Alby aqui!",
-      "using_tor": "clique aqui para continuar se você usa o navegador Tor",
-      "or": "Ou:"
     },
     "toasts": {
       "connection_error": {

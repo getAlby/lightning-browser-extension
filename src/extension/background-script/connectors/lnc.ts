@@ -7,6 +7,7 @@ import SHA256 from "crypto-js/sha256";
 import snakeCase from "lodash.snakecase";
 import { encryptData } from "~/common/lib/crypto";
 import utils from "~/common/lib/utils";
+import { Account } from "~/types";
 
 import state from "../state";
 import Connector, {
@@ -35,6 +36,8 @@ interface Config {
 
 const methods: Record<string, string> = {
   addinvoice: "lnd.lightning.AddInvoice",
+  addholdinvoice: "lnd.invoices.AddHoldInvoice",
+  settleinvoice: "lnd.invoices.SettleInvoice",
   channelbalance: "lnd.lightning.ChannelBalance",
   connectpeer: "lnd.lightning.ConnectPeer",
   decodepayreq: "lnd.lightning.DecodePayReq",
@@ -81,9 +84,11 @@ const snakeCaseObjectDeep = (value: FixMe): FixMe => {
 };
 
 class LncCredentialStore implements CredentialStore {
+  account: Account;
   config: Config;
 
-  constructor(config: Config) {
+  constructor(account: Account, config: Config) {
+    this.account = account;
     this.config = config;
   }
 
@@ -147,13 +152,15 @@ class LncCredentialStore implements CredentialStore {
 }
 
 class Lnc implements Connector {
+  account: Account;
   config: Config;
   lnc: FixMe;
 
-  constructor(config: Config) {
+  constructor(account: Account, config: Config) {
+    this.account = account;
     this.config = config;
     this.lnc = new LNC({
-      credentialStore: new LncCredentialStore(config),
+      credentialStore: new LncCredentialStore(account, config),
     });
   }
 
