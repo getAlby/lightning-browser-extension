@@ -806,5 +806,6 @@
         "active": "AKTIV"
       }
     }
-  }
+  },
+  "permissions": {}
 }
