@@ -602,7 +602,12 @@
       "allow_sign_event": "Permitir {{host}} assinar {{kind}}:",
       "hide_details": "Ocultar detalhes",
       "kinds": {
-        "unknown": "evento nostr do tipo {{kind}}"
+        "unknown": "evento nostr do tipo {{kind}}",
+        "0": "metadados",
+        "5": "exclusão de evento",
+        "4": "mensagens diretas criptografadas",
+        "9735": "zap",
+        "3": "contatos"
       }
     },
     "confirm_request_permission": {
@@ -660,7 +665,7 @@
         "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira disponíveis.",
         "connect": "Conectar"
       },
-      "description": "Você pode usar a Alby criando uma conta conosco ou conectando-se nas carteiras bitcoin disponíveis.",
+      "description": "Você pode usar a extensão Alby criando uma conta conosco ou conectando-se nas carteiras bitcoin disponíveis.",
       "title": "Escolha o tipo de conta"
     },
     "alby": {
@@ -855,6 +860,11 @@
       "label": {
         "active": "LIMITE DE GASTOS",
         "auth": "LOGIN RELÂMPAGO"
+      }
+    },
+    "companion_download_info": {
+      "tor_native": {
+        "title": "TOR (nativo)"
       }
     }
   },
