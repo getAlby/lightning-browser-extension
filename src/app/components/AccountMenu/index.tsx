@@ -3,6 +3,7 @@ import {
   CaretDownIcon,
   CheckIcon,
   GlobeIcon,
+  PlusIcon,
   WalletIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useEffect, useState } from "react";
@@ -42,7 +43,7 @@ function AccountMenu({ showOptions = true }: Props) {
   const title =
     !!authAccount?.name &&
     typeof authAccount?.name === "string" &&
-    `${authAccount?.name} - ${authAccount?.alias}`;
+    `${authAccount?.name}`;
 
   useEffect(() => {
     getAccounts();
@@ -110,7 +111,7 @@ function AccountMenu({ showOptions = true }: Props) {
               </span>
               {balancesDecorated.accountBalance ? (
                 <p className="flex justify-between">
-                  <span className="text-md dark:text-white">
+                  <span className="dark:text-white">
                     {balancesDecorated.accountBalance}
                   </span>
                   {!!balancesDecorated.fiatBalance && (
@@ -126,7 +127,7 @@ function AccountMenu({ showOptions = true }: Props) {
           </Menu.Item>
           <Menu.ItemButton
             onClick={() => {
-              navigate(`/accounts/${authAccount?.id}`);
+              openOptions(`accounts/${authAccount?.id}`);
             }}
           >
             <WalletIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
@@ -181,6 +182,14 @@ function AccountMenu({ showOptions = true }: Props) {
           {showOptions && (
             <>
               <Menu.Divider />
+              <Menu.ItemButton
+                onClick={() => {
+                  openOptions("accounts/new");
+                }}
+              >
+                <PlusIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+                {t("options.account.add")}
+              </Menu.ItemButton>
               <Menu.ItemButton
                 onClick={() => {
                   openOptions("accounts");
