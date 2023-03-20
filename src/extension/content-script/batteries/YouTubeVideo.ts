@@ -18,12 +18,15 @@ const battery = async (): Promise<Battery | void> => {
   const channelLink = document.querySelector<HTMLAnchorElement>(
     "#columns #primary #primary-inner #meta-contents .ytd-channel-name a"
   );
+  const contentUri = document.querySelector<HTMLLinkElement>(
+    'link[rel="canonical"]'
+  )?.href;
   if (!text || !channelLink) {
     return;
   }
   let match;
   let lnurl;
-  const contentUri = document.location.toString();
+
   // check for an lnurl
   if ((match = text.match(/(lnurlp:)(\S+)/i))) {
     lnurl = match[2];
