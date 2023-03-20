@@ -795,6 +795,7 @@
     "response": "Response",
     "message": "Message",
     "help": "Help",
+    "balance": "Balance",
     "actions": {
       "back": "Back",
       "delete": "Delete",

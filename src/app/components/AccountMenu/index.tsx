@@ -26,6 +26,7 @@ export type Props = {
 
 function AccountMenu({ showOptions = true }: Props) {
   const { t } = useTranslation("components", { keyPrefix: "account_menu" });
+  const { t: tCommon } = useTranslation("common");
 
   const {
     setAccountId,
@@ -83,7 +84,7 @@ function AccountMenu({ showOptions = true }: Props) {
             <Avatar size={24} name={authAccount?.id || ""} />
             <div
               className={`flex-auto mx-2 py-3 overflow-hidden ${
-                !title ? "w-28" : ""
+                !title ? "w-32" : ""
               }`}
             >
               <p
@@ -105,7 +106,7 @@ function AccountMenu({ showOptions = true }: Props) {
               }`}
             >
               <span className="text-xs text-gray-500 dark:text-neutral-300">
-                Balance
+                {tCommon("balance")}
               </span>
               {balancesDecorated.accountBalance ? (
                 <p className="flex justify-between">
