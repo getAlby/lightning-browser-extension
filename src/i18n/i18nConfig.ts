@@ -5,6 +5,7 @@ import "dayjs/locale/es";
 import "dayjs/locale/fi";
 import "dayjs/locale/fr";
 import "dayjs/locale/it";
+import "dayjs/locale/pl";
 import "dayjs/locale/pt-br";
 import "dayjs/locale/sv";
 import "dayjs/locale/zh-cn";
@@ -20,6 +21,7 @@ import fi from "~/i18n/locales/fi/translation.json";
 import fr from "~/i18n/locales/fr/translation.json";
 import it from "~/i18n/locales/it/translation.json";
 import mr_IN from "~/i18n/locales/mr_IN/translation.json";
+import pl from "~/i18n/locales/pl/translation.json";
 import pt_BR from "~/i18n/locales/pt_BR/translation.json";
 import sv from "~/i18n/locales/sv/translation.json";
 import zh_Hans from "~/i18n/locales/zh_Hans/translation.json";
@@ -69,6 +71,18 @@ export const resources = {
     components: it.components,
     permissions: it.permissions,
   },
+  mr_IN: {
+    translation: mr_IN.translation,
+    common: mr_IN.common,
+    components: mr_IN.components,
+    permissions: mr_IN.permissions,
+  },
+  pl: {
+    translation: pl.translation,
+    common: pl.common,
+    components: pl.components,
+    permissions: pl.permissions,
+  },
   "pt-BR": {
     translation: pt_BR.translation,
     common: pt_BR.common,
@@ -87,12 +101,6 @@ export const resources = {
     components: zh_Hans.components,
     permissions: zh_Hans.permissions,
   },
-  mr_IN: {
-    translation: mr_IN.translation,
-    common: mr_IN.common,
-    components: mr_IN.components,
-    permissions: mr_IN.permissions,
-  },
 } as const;
 
 // needs to be aligned with `resources`
@@ -103,6 +111,7 @@ export const supportedLocales = [
   { locale: "es", label: "Español" },
   { locale: "fr", label: "Français" },
   { locale: "it", label: "Italiano" },
+  { locale: "pl", label: "Polski" },
   { locale: "pt-BR", label: "Português (Brasil)" },
   { locale: "fi", label: "Suomalainen" },
   { locale: "sv", label: "Svenska" },
