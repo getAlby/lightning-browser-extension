@@ -159,6 +159,12 @@
         "subtitle": "Lightning-fast UI for Nostr",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/primat-logo_fire-409917ad.svg",
         "url": "https://primal.net/"
+      },
+      {
+        "title": "Satellite",
+        "subtitle": "Satellite | Powered by Nostr",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/satellite-earth.png",
+        "url": "https://satellite.earth/"
       }
     ]
   },
