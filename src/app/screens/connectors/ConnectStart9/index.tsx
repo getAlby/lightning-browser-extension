@@ -1,27 +1,35 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-import utils from "~/common/lib/utils";
-
+import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
-import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
+import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
+import { useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import msg from "~/common/lib/msg";
+import utils from "~/common/lib/utils";
 
-const initialFormData = Object.freeze({
+const initialFormData = {
   url: "",
   macaroon: "",
-});
+};
 
 export default function ConnectStart9() {
   const navigate = useNavigate();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "choose_connector.start9",
+  });
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
+  const [hasTorSupport, setHasTorSupport] = useState(false);
 
   function handleLndconnectUrl(event: React.ChangeEvent<HTMLInputElement>) {
     try {
       const lndconnectUrl = event.target.value.trim();
-      const lndconnect = new URL(lndconnectUrl);
-      const url = "https:" + lndconnect.pathname;
+      let lndconnect = new URL(lndconnectUrl);
+      lndconnect.protocol = "http:";
+      lndconnect = new URL(lndconnect.toString());
+      const url = `https://${lndconnect.host}${lndconnect.pathname}`;
       let macaroon = lndconnect.searchParams.get("macaroon") || "";
       macaroon = utils.urlSafeBase64ToHex(macaroon);
       // const cert = lndconnect.searchParams.get("cert"); // TODO: handle LND certs with the native connector
@@ -31,12 +39,12 @@ export default function ConnectStart9() {
         macaroon,
       });
     } catch (e) {
-      console.log("invalid lndconnect string");
+      console.error("invalid lndconnect string", e);
     }
   }
 
   function getConnectorType() {
-    if (formData.url.match(/\.onion/i)) {
+    if (formData.url.match(/\.onion/i) && !hasTorSupport) {
       return "nativelnd";
     }
     // default to LND
@@ -62,45 +70,61 @@ export default function ConnectStart9() {
       if (account.connector === "nativelnd") {
         validation = { valid: true, error: "" };
       } else {
-        validation = await utils.call("validateAccount", account);
+        validation = await msg.request("validateAccount", account);
       }
 
       if (validation.valid) {
-        const addResult = await utils.call("addAccount", account);
+        const addResult = await msg.request("addAccount", account);
         if (addResult.accountId) {
-          await utils.call("selectAccount", {
+          await msg.request("selectAccount", {
             id: addResult.accountId,
           });
           navigate("/test-connection");
         }
       } else {
-        alert(`
-          Connection failed. Are your Embassy credentials correct? \n\n(${validation.error})`);
+        toast.error(
+          <ConnectionErrorToast
+            message={validation.error as string}
+            link={`${formData.url}/v1/getinfo`}
+          />
+        );
       }
     } catch (e) {
       console.error(e);
-      let message = "Connection failed. Are your Embassy credentials correct?";
+      let message = "";
       if (e instanceof Error) {
-        message += `\n\n${e.message}`;
+        message += `${e.message}`;
       }
-      alert(message);
+      toast.error(<ConnectionErrorToast message={message} />);
     }
     setLoading(false);
   }
 
   return (
     <ConnectorForm
-      title="Connect to your Embassy node"
+      title={
+        <h1 className="mb-6 text-2xl font-bold dark:text-white">
+          <Trans
+            i18nKey={"page.title"}
+            t={t}
+            components={[
+              // eslint-disable-next-line react/jsx-key
+              <a className="underline" href="https://start9.com/latest/"></a>,
+            ]}
+          />
+        </h1>
+      }
       description={
-        <p>
-          <strong>Note</strong>: Currently we only support LND but we will be
-          adding c-lightning support in the future! <br />
-          On your Embassy dashboard click on the{" "}
-          <strong>Lightning Network Daemon</strong> service.
-          <br />
-          Select the <strong>Properties</strong> tab.
-          <br /> Now copy the <strong>LND Connect REST URL</strong>.
-        </p>
+        <Trans
+          i18nKey={"page.instructions"}
+          t={t}
+          components={[
+            // eslint-disable-next-line react/jsx-key
+            <strong></strong>,
+            // eslint-disable-next-line react/jsx-key
+            <br />,
+          ]}
+        />
       }
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
@@ -108,14 +132,18 @@ export default function ConnectStart9() {
     >
       <TextField
         id="lndconnect"
-        label="lndconnect REST URL"
-        placeholder="lndconnect://yournode:8080?..."
+        label={t("rest_url.label")}
+        placeholder={t("rest_url.placeholder")}
         onChange={handleLndconnectUrl}
         required
       />
       {formData.url.match(/\.onion/i) && (
         <div className="mt-6">
-          <CompanionDownloadInfo />
+          <CompanionDownloadInfo
+            hasTorCallback={(hasTor: boolean) => {
+              setHasTorSupport(hasTor);
+            }}
+          />
         </div>
       )}
     </ConnectorForm>

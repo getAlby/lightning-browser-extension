@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import getOriginData from "../originData";
-import setLightningData from "../setLightningData";
+import { findLightningAddressInText, setLightningData } from "./helpers";
 
 interface PeertubeRes {
   channel: {
@@ -59,8 +59,8 @@ const battery = (): void => {
       }
       // if there is no lnurl we check for a zap emoji with a lightning address
       // we check for the @-sign to try to limit the possibility to match some invalid text (e.g. random emoji usage)
-      else if ((match = text.match(/(⚡️:?|lightning:|lnurl:)\s?(\S+@\S+)/i))) {
-        recipient = match[2];
+      else if ((match = findLightningAddressInText(text))) {
+        recipient = match;
       } else {
         return;
       }
@@ -69,8 +69,8 @@ const battery = (): void => {
       setLightningData([
         {
           ...metaData,
-          method: "lnurlp",
-          recipient: recipient,
+          method: "lnurl",
+          address: recipient,
           name: channelName,
           icon: icon,
           description: channelDescription,
@@ -78,7 +78,7 @@ const battery = (): void => {
       ]);
     })
     .catch((e) => {
-      console.log("Alby could not load video data", e);
+      console.error("Alby could not load video data", e);
     });
 };
 

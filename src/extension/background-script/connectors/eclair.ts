@@ -1,19 +1,22 @@
 import Base64 from "crypto-js/enc-base64";
 import UTF8 from "crypto-js/enc-utf8";
+import { Account } from "~/types";
+
 import Connector, {
-  SendPaymentArgs,
-  SendPaymentResponse,
   CheckPaymentArgs,
   CheckPaymentResponse,
-  GetInfoResponse,
+  ConnectorInvoice,
+  ConnectPeerResponse,
   GetBalanceResponse,
+  GetInfoResponse,
+  GetInvoicesResponse,
+  KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  SendPaymentArgs,
+  SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
-  VerifyMessageArgs,
-  VerifyMessageResponse,
-  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -22,9 +25,11 @@ interface Config {
 }
 
 class Eclair implements Connector {
+  account: Account;
   config: Config;
 
-  constructor(config: Config) {
+  constructor(account: Account, config: Config) {
+    this.account = account;
     this.config = config;
   }
 
@@ -36,8 +41,19 @@ class Eclair implements Connector {
     return Promise.resolve();
   }
 
+  get supportedMethods() {
+    return [
+      "getInfo",
+      "keysend",
+      "makeInvoice",
+      "sendPayment",
+      "signMessage",
+      "listInvoices",
+    ];
+  }
+
   getInfo(): Promise<GetInfoResponse> {
-    return this.request("/getinfo", undefined, {}).then((data) => {
+    return this.request("/getinfo", undefined).then((data) => {
       return {
         data: {
           alias: data.alias,
@@ -48,24 +64,50 @@ class Eclair implements Connector {
     });
   }
 
-  async getBalance(): Promise<GetBalanceResponse> {
-    const channels = await this.request("/channels");
-    const total = channels
+  // not yet implemented
+  async connectPeer(): Promise<ConnectPeerResponse> {
+    console.error(
+      `${this.constructor.name} does not implement the getInvoices call`
+    );
+    throw new Error("Not yet supported with the currently used account.");
+  }
+
+  async getInvoices(): Promise<GetInvoicesResponse> {
+    const response = await this.request("/listinvoices");
+    const invoices: ConnectorInvoice[] = response
       .map(
-        (
-          channel: Record<
-            string,
-            Record<
-              string,
-              Record<string, Record<string, Record<string, number>>>
-            >
-          >
-        ) => channel.data?.commitments?.localCommit?.spec?.toLocal || 0
+        (invoice: {
+          paymentHash: string;
+          description: string;
+          timestamp: number;
+          amount: number;
+        }) => ({
+          id: invoice.paymentHash,
+          memo: invoice.description,
+          settled: true,
+          settleDate: invoice.timestamp * 1000,
+          totalAmount: invoice.amount / 1000,
+          type: "received",
+        })
       )
+      .sort((a: ConnectorInvoice, b: ConnectorInvoice) => {
+        return b.settleDate - a.settleDate;
+      });
+    return {
+      data: {
+        invoices: invoices,
+      },
+    };
+  }
+
+  async getBalance(): Promise<GetBalanceResponse> {
+    const balances = await this.request("/usablebalances");
+    const total = balances
+      .map((balance: Record<string, number>) => balance.canSend || 0)
       .reduce((acc: number, b: number) => acc + b, 0);
     return {
       data: {
-        balance: total / 1000,
+        balance: Math.floor(total / 1000),
       },
     };
   }
@@ -86,8 +128,8 @@ class Eclair implements Connector {
         preimage: paymentPreimage,
         paymentHash,
         route: {
-          total_amt: Math.round(recipientAmount / 1000),
-          total_fees: status.feesPaid,
+          total_amt: Math.floor(recipientAmount / 1000),
+          total_fees: Math.floor(status.feesPaid / 1000),
         },
       },
     };
@@ -115,20 +157,8 @@ class Eclair implements Connector {
 
     return {
       data: {
+        message: args.message,
         signature: signature as string,
-      },
-    };
-  }
-
-  async verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse> {
-    const { valid } = await this.request("/verifymessage", {
-      msg: Base64.stringify(UTF8.parse(args.message)),
-      sig: args.signature,
-    });
-
-    return {
-      data: {
-        valid,
       },
     };
   }
@@ -147,11 +177,7 @@ class Eclair implements Connector {
     };
   }
 
-  async request(
-    path: string,
-    params?: Record<string, unknown>,
-    defaultValues?: Record<string, unknown>
-  ) {
+  async request(path: string, params?: Record<string, unknown>) {
     const url = new URL(
       this.config.url.startsWith("http")
         ? this.config.url
@@ -191,15 +217,11 @@ class Eclair implements Connector {
       } catch (err) {
         throw new Error(res.statusText);
       }
-      console.log("eclair error", errBody.error);
+      console.error("eclair error", errBody.error);
       throw new Error(errBody.error);
     }
 
-    let data = await res.json();
-    if (defaultValues) {
-      data = Object.assign(Object.assign({}, defaultValues), data);
-    }
-    return data;
+    return await res.json();
   }
 }
 

@@ -1,8 +1,8 @@
+import { MessageSettingsSet } from "~/types";
+
 import state from "../../state";
 
-import { Message } from "~/types";
-
-const set = async (message: Message) => {
+const set = async (message: MessageSettingsSet) => {
   const { settings } = state.getState();
   const { setting } = message.args;
   if (typeof setting === "object") {
@@ -15,7 +15,7 @@ const set = async (message: Message) => {
     });
 
     // make sure we immediately persist the new settings
-    state.getState().saveToStorage();
+    await state.getState().saveToStorage();
     return Promise.resolve({ data: newSettings });
   } else {
     return Promise.reject(new Error("Incorrect setting"));

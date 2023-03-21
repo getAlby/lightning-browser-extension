@@ -11,7 +11,11 @@
   },
   "description": "The Bitcoin Lightning wallet for direct payments across the globe, Bitcoin Lightning applications and passwordless logins.",
   "homepage_url": "https://getAlby.com/",
-  "web_accessible_resources": ["js/inpageScript.bundle.js"],
+  "web_accessible_resources": [
+    "js/inpageScript.bundle.js",
+    "js/inpageScriptWebLN.bundle.js",
+    "js/inpageScriptNostr.bundle.js"
+  ],
   "permissions": [
     "notifications",
     "activeTab",
@@ -22,7 +26,7 @@
     "*://*/*"
   ],
 
-  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "content_security_policy": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';",
 
   "__chrome|firefox__author": "Alby",
   "__opera__developer": {
@@ -41,14 +45,44 @@
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "assets/icons/alby_icon_sleeping_16x16.png",
-      "32": "assets/icons/alby_icon_sleeping_32x32.png",
-      "48": "assets/icons/alby_icon_sleeping_48x48.png",
-      "128": "assets/icons/alby_icon_sleeping_128x128.png"
+      "16": "assets/icons/alby_icon_yellow_16x16.png",
+      "32": "assets/icons/alby_icon_yellow_32x32.png",
+      "48": "assets/icons/alby_icon_yellow_48x48.png",
+      "128": "assets/icons/alby_icon_yellow_128x128.png"
     },
+    "theme_icons": [
+      {
+        "dark": "assets/icons/alby_icon_yellow_16x16.png",
+        "light": "assets/icons/alby_icon_yellow_dark_16x16.png",
+        "size": 16
+      },
+      {
+        "dark": "assets/icons/alby_icon_yellow_32x32.png",
+        "light": "assets/icons/alby_icon_yellow_dark_32x32.png",
+        "size": 32
+      },
+      {
+        "dark": "assets/icons/alby_icon_yellow_48x48.png",
+        "light": "assets/icons/alby_icon_yellow_dark_48x48.png",
+        "size": 48
+      },
+      {
+        "dark": "assets/icons/alby_icon_yellow_128x128.png",
+        "light": "assets/icons/alby_icon_yellow_dark_128x128.png",
+        "size": 128
+      }
+    ],
     "default_title": "Alby - Bitcoin Lightning Wallet",
     "__chrome|opera__chrome_style": false,
     "__firefox__browser_style": false
+  },
+
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+A"
+      }
+    }
   },
 
   "options_ui": {
@@ -59,20 +93,25 @@
   },
 
   "background": {
-    "scripts": [
-      "js/background.bundle.js"
-    ],
+    "scripts": ["js/background.bundle.js"],
     "__chrome|opera__persistent": true
   },
 
-  "content_scripts": [{
-    "all_frames": true,
-    "matches": [
-      "*://*/*"
-    ],
-    "run_at": "document_end",
-    "js": [
-      "js/contentScript.bundle.js"
-    ]
-  }]
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": ["*://*/*"],
+      "run_at": "document_end",
+      "js": [
+        "js/contentScriptOnEnd.bundle.js",
+        "js/contentScriptOnEndNostr.bundle.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": ["*://*/*"],
+      "run_at": "document_start",
+      "js": ["js/contentScriptOnStart.bundle.js"]
+    }
+  ]
 }

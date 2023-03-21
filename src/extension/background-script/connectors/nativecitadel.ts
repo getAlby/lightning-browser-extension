@@ -1,13 +1,7 @@
+import Native from "./Native";
 import Citadel from "./citadel";
 
-import Native from "./Native";
-
 const NativeConnector = Native(Citadel);
-
-interface Config {
-  url: string;
-  password: string;
-}
 
 type PostMessage = {
   id: string;
@@ -19,19 +13,6 @@ type PostMessage = {
 };
 
 export default class NativeCitadel extends NativeConnector {
-  constructor(config: Config) {
-    super(config);
-    this.citadel.requestFunc = (
-      jwt: string,
-      url: string,
-      method?: "GET" | "POST" | "PUT" | "DELETE",
-      body?: unknown,
-      auth?: boolean
-    ) => {
-      return this.request(jwt, url, method, body, auth);
-    };
-  }
-
   _nativeRequest(postMessage: PostMessage) {
     return new Promise<{
       id: string;
@@ -59,32 +40,36 @@ export default class NativeCitadel extends NativeConnector {
     });
   }
 
-  async request<ResponseType = unknown>(
-    jwt: string,
-    url: string,
-    method?: "GET" | "POST" | "PUT" | "DELETE",
-    body?: unknown,
-    auth?: boolean
-  ): Promise<ResponseType> {
-    let authHeader = "";
-    if (jwt) authHeader = `JWT ${jwt}`;
+  async request<Type>(
+    method: string,
+    path: string,
+    args?: Record<string, unknown>
+  ): Promise<Type> {
+    let body;
     let headers: Record<string, string> = {};
+    path = this.config.url + (this.config.url.endsWith("/") ? "" : "/") + path;
+
     if (method !== "GET") {
       headers = {
         "Content-type": "application/json",
       };
     }
-    if (authHeader && auth)
+    if (this.jwt)
       headers = {
         ...headers,
-        Authorization: authHeader,
+        Authorization: `JWT ${this.jwt}`,
       };
+
+    if (method === "POST") {
+      body = JSON.stringify(args);
+    }
 
     const response = await this._nativeRequest({
       headers,
-      url: url,
+      url: path,
       method: method || "GET",
-      id: url + Math.floor(Math.random() * 1000 + 1).toString(),
+      id: path + Math.floor(Math.random() * 1000 + 1).toString(),
+      body,
     });
 
     if (response.status !== 200) {
@@ -92,7 +77,7 @@ export default class NativeCitadel extends NativeConnector {
     }
 
     const data = response.body;
-    let parsed: unknown;
+    let parsed;
     try {
       parsed = JSON.parse(data);
     } catch {
@@ -103,6 +88,6 @@ export default class NativeCitadel extends NativeConnector {
       throw new Error(parsed);
     }
 
-    return parsed as ResponseType;
+    return parsed;
   }
 }

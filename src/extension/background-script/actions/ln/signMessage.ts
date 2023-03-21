@@ -1,6 +1,7 @@
 import PubSub from "pubsub-js";
-import state from "../../state";
 import { Message } from "~/types";
+
+import state from "../../state";
 
 const signMessage = async (message: Message) => {
   PubSub.publish(`ln.signMessage.start`, message);
@@ -9,6 +10,12 @@ const signMessage = async (message: Message) => {
   if (typeof messageToSign !== "string") {
     return {
       error: "Message missing.",
+    };
+  }
+
+  if (messageToSign.startsWith("DO NOT EVER SIGN THIS TEXT")) {
+    return {
+      error: "forbidden",
     };
   }
 
@@ -24,7 +31,7 @@ const signMessage = async (message: Message) => {
     });
     return response;
   } catch (e) {
-    console.log(e);
+    console.error(e);
     if (e instanceof Error) {
       PubSub.publish(`ln.signMessage.failed`, {
         error: e.message,

@@ -1,25 +1,27 @@
-import sha256 from "crypto-js/sha256";
+import lightningPayReq from "bolt11";
 import Hex from "crypto-js/enc-hex";
-import { parsePaymentRequest } from "invoices";
-
+import sha256 from "crypto-js/sha256";
 import utils from "~/common/lib/utils";
 import HashKeySigner from "~/common/utils/signer";
+import { Account } from "~/types";
+
+import state from "../state";
 import Connector, {
-  SendPaymentArgs,
-  SendPaymentResponse,
   CheckPaymentArgs,
   CheckPaymentResponse,
-  GetInfoResponse,
+  ConnectorInvoice,
+  ConnectPeerResponse,
   GetBalanceResponse,
+  GetInfoResponse,
+  GetInvoicesResponse,
+  KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  SendPaymentArgs,
+  SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
-  VerifyMessageArgs,
-  VerifyMessageResponse,
-  KeysendArgs,
 } from "./connector.interface";
-import state from "../state";
 
 interface Config {
   adminkey: string;
@@ -27,9 +29,11 @@ interface Config {
 }
 
 class LnBits implements Connector {
+  account: Account;
   config: Config;
 
-  constructor(config: Config) {
+  constructor(account: Account, config: Config) {
+    this.account = account;
     this.config = config;
   }
 
@@ -41,13 +45,16 @@ class LnBits implements Connector {
     return Promise.resolve();
   }
 
+  get supportedMethods() {
+    return ["getInfo", "makeInvoice", "sendPayment", "signMessage"];
+  }
+
   getInfo(): Promise<GetInfoResponse> {
     return this.request(
       "GET",
       "/api/v1/wallet",
       this.config.adminkey,
-      undefined,
-      {}
+      undefined
     ).then((data) => {
       return {
         data: {
@@ -57,16 +64,89 @@ class LnBits implements Connector {
     });
   }
 
+  // not yet implemented
+  async connectPeer(): Promise<ConnectPeerResponse> {
+    console.error(
+      `${this.constructor.name} does not implement the getInvoices call`
+    );
+    throw new Error("Not yet supported with the currently used account.");
+  }
+
+  /*
+  LNBits Swagger Docs: https://legend.lnbits.org/devs/swagger.html#/default/api_payments_api_v1_payments_get
+  Sample Response:
+    [
+      {
+        "checking_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "pending": false,
+        "amount": 2000,
+        "fee": 0,
+        "memo": "LNbits",
+        "time": 1000000000,
+        "bolt11": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "preimage": "0000000000000000000000000000000000000000000000000000000000000000",
+        "payment_hash": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "extra": {},
+        "wallet_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "webhook": null,
+        "webhook_status": null
+      }
+    ]
+  */
+  async getInvoices(): Promise<GetInvoicesResponse> {
+    return this.request(
+      "GET",
+      "/api/v1/payments",
+      this.config.adminkey,
+      undefined
+    ).then(
+      (
+        data: {
+          checking_id: string;
+          pending: boolean;
+          amount: number;
+          fee: number;
+          memo: string;
+          time: number;
+          bolt11: string;
+          preimage: string;
+          payment_hash: string;
+          wallet_id: string;
+          webhook: string;
+          webhook_status: string;
+        }[]
+      ) => {
+        const invoices: ConnectorInvoice[] = data
+          .filter((invoice) => invoice.amount > 0)
+          .map((invoice, index): ConnectorInvoice => {
+            return {
+              id: `${invoice.checking_id}-${index}`,
+              memo: invoice.memo,
+              preimage: invoice.preimage,
+              settled: !invoice.pending,
+              settleDate: invoice.time * 1000,
+              totalAmount: `${Math.floor(invoice.amount / 1000)}`,
+              type: "received",
+            };
+          });
+
+        return {
+          data: {
+            invoices,
+          },
+        };
+      }
+    );
+  }
+
   getBalance(): Promise<GetBalanceResponse> {
     return this.request(
       "GET",
       "/api/v1/wallet",
       this.config.adminkey,
-      undefined,
-      {}
+      undefined
     ).then((data) => {
-      // TODO better amount handling
-      const balanceInSats = data.balance / 1000;
+      const balanceInSats = Math.floor(data.balance / 1000);
       return {
         data: {
           balance: balanceInSats,
@@ -76,10 +156,8 @@ class LnBits implements Connector {
   }
 
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
-    const paymentRequestDetails = parsePaymentRequest({
-      request: args.paymentRequest,
-    });
-    const amountInSats = paymentRequestDetails.tokens;
+    const paymentRequestDetails = lightningPayReq.decode(args.paymentRequest);
+    const amountInSats = paymentRequestDetails.satoshis || 0;
     return this.request("POST", "/api/v1/payments", this.config.adminkey, {
       bolt11: args.paymentRequest,
       out: true,
@@ -146,28 +224,8 @@ class LnBits implements Connector {
     }
     return Promise.resolve({
       data: {
+        message: args.message,
         signature: signedMessageDERHex,
-      },
-    });
-  }
-
-  verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse> {
-    // create a signing key from the lnbits adminkey
-    let keyHex = sha256(`lnbits://${this.config.adminkey}`).toString(Hex);
-
-    const { settings } = state.getState();
-    if (settings.legacyLnurlAuth) {
-      keyHex = sha256(
-        `LBE-LNBITS-${this.config.url}-${this.config.adminkey}`
-      ).toString(Hex);
-    }
-    if (!keyHex) {
-      return Promise.reject(new Error("Could not create key"));
-    }
-    const signer = new HashKeySigner(keyHex);
-    return Promise.resolve({
-      data: {
-        valid: signer.verify(args.message, args.signature),
       },
     });
   }
@@ -191,8 +249,7 @@ class LnBits implements Connector {
     method: string,
     path: string,
     apiKey: string,
-    args?: Record<string, unknown>,
-    defaultValues?: Record<string, unknown>
+    args?: Record<string, unknown>
   ) {
     let body = null;
     let query = "";
@@ -213,14 +270,10 @@ class LnBits implements Connector {
     });
     if (!res.ok) {
       const errBody = await res.json();
-      console.log("errBody", errBody);
+      console.error("errBody", errBody);
       throw new Error(errBody.detail);
     }
-    let data = await res.json();
-    if (defaultValues) {
-      data = Object.assign(Object.assign({}, defaultValues), data);
-    }
-    return data;
+    return await res.json();
   }
 }
 

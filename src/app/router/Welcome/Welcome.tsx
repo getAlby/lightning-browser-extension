@@ -1,97 +1,128 @@
-import { useEffect, useState } from "react";
-import { HashRouter as Router, useRoutes, useLocation } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-
-import connectorRoutes from "~/app/router/connectorRoutes";
-import type { Step } from "@components/Steps";
-import DevMenu from "@components/DevMenu";
-import Steps from "@components/Steps";
-import Intro from "@screens/Onboard/Intro";
 import SetPassword from "@screens/Onboard/SetPassword";
-import ChooseConnector from "@screens/connectors/ChooseConnector";
 import TestConnection from "@screens/Onboard/TestConnection";
-import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
+import ChooseConnector from "@screens/connectors/ChooseConnector";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { HashRouter as Router, useRoutes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import Container from "~/app/components/Container";
+import { SettingsProvider } from "~/app/context/SettingsContext";
+import getConnectorRoutes from "~/app/router/connectorRoutes";
+import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
+import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
+import i18n from "~/i18n/i18nConfig";
 
-const routes = [
-  { path: "/", element: <Intro />, name: "Welcome" },
-  { path: "/set-password", element: <SetPassword />, name: "Your Password" },
-  {
-    path: "/choose-connector",
-    name: "Connect to Lightning",
-    children: [
-      {
-        index: true,
-        element: (
-          <ChooseConnector
-            title="Do you have a lightning wallet?"
-            description="You need to first connect to a lightning wallet so that you can interact with your favorite websites that accept bitcoin lightning payments!"
-          />
-        ),
-      },
-      ...connectorRoutes,
-    ],
-  },
-  { path: "/test-connection", element: <TestConnection />, name: "Done" },
-];
+const connectorRoutes = getConnectorRoutes();
 
-const initialSteps: Step[] = routes.map((route) => ({
-  id: route.name,
-  status: "upcoming",
-}));
+function getRoutes(
+  connectorRoutes: {
+    path: string;
+    element: JSX.Element;
+    title: string;
+    logo: string;
+  }[]
+) {
+  return [
+    {
+      path: "/",
+      element: <SetPassword />,
+      name: i18n.t("translation:welcome.nav.password"),
+    },
+    {
+      path: "/choose-path",
+      name: i18n.t("translation:welcome.nav.connect"),
+      children: [
+        {
+          index: true,
+          element: (
+            <ChooseConnectorPath
+              title={i18n.t("translation:choose_path.title")}
+              description={i18n.t("translation:choose_path.description")}
+            />
+          ),
+        },
+        {
+          path: "create",
+          element: <AlbyWallet variant="create" />,
+        },
+        {
+          path: "login",
+          element: <AlbyWallet variant="login" />,
+        },
+        {
+          path: "choose-connector",
+          children: [
+            {
+              index: true,
+              element: (
+                <ChooseConnector
+                  title={i18n.t("translation:choose_connector.title")}
+                  description={i18n.t(
+                    "translation:choose_connector.description"
+                  )}
+                />
+              ),
+            },
+            ...connectorRoutes,
+          ],
+        },
+      ],
+    },
+    {
+      path: "/test-connection",
+      element: <TestConnection />,
+      name: i18n.t("translation:welcome.nav.done"),
+    },
+  ];
+}
+
+const routes = getRoutes(connectorRoutes);
 
 function WelcomeRouter() {
   return (
-    <Router>
-      <App />
-    </Router>
+    <SettingsProvider>
+      <Router>
+        <ToastContainer
+          autoClose={15000}
+          hideProgressBar={true}
+          className="w-fit max-w-2xl"
+        />
+        <App />
+      </Router>
+    </SettingsProvider>
   );
 }
 
 function App() {
-  const [steps, setSteps] = useState(initialSteps);
-  const { t } = useTranslation(["welcome"]);
-  const location = useLocation();
+  const { t } = useTranslation();
   const routesElement = useRoutes(routes);
 
-  // Update step progress based on active location.
-  useEffect(() => {
-    const { pathname } = location;
-    let activeStepIndex = 0;
-    routes.forEach((route, index) => {
-      if (pathname.includes(route.path)) activeStepIndex = index;
-    });
-    const updatedSteps = initialSteps.map((step, index) => {
-      let status: Step["status"] = "upcoming";
-      if (index < activeStepIndex) {
-        status = "complete";
-      } else if (index === activeStepIndex) {
-        status = "current";
-      }
-      return { ...step, status };
-    });
-    setSteps(updatedSteps);
-  }, [location]);
+  const [languageChanged, setLanguageChanged] = useState(false);
+  i18n.on("languageChanged", () => {
+    // Trigger rerender to update displayed language
+    setLanguageChanged(!languageChanged);
+  });
 
   return (
     <div>
-      {process.env.NODE_ENV === "development" && (
-        <>
-          <DevMenu />
-          <div className="w-32 mr-4 mt-1 pt-3 float-right">
-            <LocaleSwitcher />
-          </div>
-        </>
-      )}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center font-serif font-medium text-2xl pt-7 pb-3 dark:text-white">
-          <p>{t("heading")}</p>
+        <div className="text-center font-serif font-medium text-2xl my-10 dark:text-white">
+          <p>
+            {t("welcome.title")}
+            <img
+              src="assets/icons/alby_icon_yellow.svg"
+              alt="Alby"
+              className="dark:hidden inline align-middle w-6 ml-2"
+            />
+            <img
+              src="assets/icons/alby_icon_yellow_dark.svg"
+              alt="Alby"
+              className="hidden dark:inline align-middle w-6 ml-2"
+            />
+          </p>
         </div>
-
-        <Steps steps={steps} />
       </div>
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {routesElement}
-      </div>
+      <Container maxWidth="xl">{routesElement}</Container>
     </div>
   );
 }

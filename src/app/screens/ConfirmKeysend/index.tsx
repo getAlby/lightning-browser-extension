@@ -1,46 +1,65 @@
-import { useState, MouseEvent, useRef } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-
-import PaymentSummary from "@components/PaymentSummary";
-import utils from "~/common/lib/utils";
-import getOriginData from "~/extension/content-script/originData";
-import msg from "~/common/lib/msg";
-
 import BudgetControl from "@components/BudgetControl";
-import PublisherCard from "@components/PublisherCard";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import Container from "@components/Container";
+import PaymentSummary from "@components/PaymentSummary";
+import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import ScreenHeader from "~/app/components/ScreenHeader";
+import { useSettings } from "~/app/context/SettingsContext";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
+import { USER_REJECTED_ERROR } from "~/common/constants";
+import msg from "~/common/lib/msg";
 import type { OriginData } from "~/types";
 
-type Props = {
-  origin?: OriginData;
-  destination?: string;
-  customRecords?: Record<string, string>;
-  valueSat?: string;
-};
+function ConfirmKeysend() {
+  const navState = useNavigationState();
+  const destination = navState.args?.destination as string;
+  const amount = navState.args?.amount as string;
+  const customRecords = navState.args?.customRecords as Record<string, string>;
+  const origin = navState.origin as OriginData;
 
-function Keysend(props: Props) {
-  const [searchParams] = useSearchParams();
+  const { t: tCommon } = useTranslation("common");
+  const { t } = useTranslation("translation", {
+    keyPrefix: "confirm_keysend",
+  });
+
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFormattedFiat,
+  } = useSettings();
+  const showFiat = !isLoadingSettings && settings.showFiat;
+
   const navigate = useNavigate();
+
   const [rememberMe, setRememberMe] = useState(false);
-  const [origin] = useState(
-    props.origin ||
-      (searchParams.get("origin") &&
-        JSON.parse(searchParams.get("origin") as string)) ||
-      getOriginData()
-  );
-  const originRef = useRef(props.origin || getOriginData());
-  const [customRecords] = useState(props.customRecords || {});
-  const [amount] = useState(props.valueSat || "");
-  const [destination] = useState(
-    props.destination || searchParams.get("destination")
-  );
   const [budget, setBudget] = useState(
     ((parseInt(amount) || 0) * 10).toString()
   );
+  const [fiatAmount, setFiatAmount] = useState("");
+  const [fiatBudgetAmount, setFiatBudgetAmount] = useState("");
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      if (showFiat && amount) {
+        const res = await getFormattedFiat(amount);
+        setFiatAmount(res);
+      }
+    })();
+  }, [amount, showFiat, getFormattedFiat]);
+
+  useEffect(() => {
+    (async () => {
+      const res = await getFormattedFiat(budget);
+      setFiatBudgetAmount(res);
+    })();
+  }, [budget, showFiat, getFormattedFiat]);
 
   async function confirm() {
     if (rememberMe && budget) {
@@ -48,7 +67,7 @@ function Keysend(props: Props) {
     }
     try {
       setLoading(true);
-      const payment = await utils.call(
+      const payment = await msg.request(
         "keysend",
         { destination, amount, customRecords },
         {
@@ -60,22 +79,35 @@ function Keysend(props: Props) {
       );
 
       msg.reply(payment); // resolves the prompt promise and closes the prompt window
-      setSuccessMessage(`Payment sent! Preimage: ${payment.preimage}`);
+      setSuccessMessage(
+        t("success", {
+          preimage: payment.preimage,
+        })
+      );
     } catch (e) {
-      console.log(e);
+      console.error(e);
       if (e instanceof Error) {
-        alert(`Error: ${e.message}`);
+        toast.error(`${tCommon("error")}: ${e.message}`);
       }
     } finally {
       setLoading(false);
     }
   }
 
-  function reject(e: MouseEvent) {
+  function reject(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    if (props.origin) {
-      msg.error("User rejected");
+    if (origin) {
+      msg.error(USER_REJECTED_ERROR);
     } else {
+      navigate(-1);
+    }
+  }
+
+  function close(e: React.MouseEvent<HTMLButtonElement>) {
+    if (navState.isPrompt) {
+      window.close();
+    } else {
+      e.preventDefault();
       navigate(-1);
     }
   }
@@ -84,52 +116,72 @@ function Keysend(props: Props) {
     if (!budget) return;
     return msg.request("addAllowance", {
       totalBudget: parseInt(budget),
-      host: originRef.current.host,
-      name: originRef.current.name,
-      imageURL: originRef.current.icon,
+      host: origin.host,
+      name: origin.name,
+      imageURL: origin.icon,
     });
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    confirm();
+  }
+
   return (
-    <div>
-      <PublisherCard
-        title={origin.name}
-        description={origin.description}
-        image={origin.icon}
-      />
-      <div className="p-4 max-w-screen-sm mx-auto">
-        {!successMessage ? (
-          <>
-            <div className="mb-8">
-              <PaymentSummary
-                amount={amount}
-                description={`Send payment to ${destination}`}
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
+      <ScreenHeader title={t("title")} />
+      {!successMessage ? (
+        <form onSubmit={handleSubmit} className="h-full">
+          <Container justifyBetween maxWidth="sm">
+            <div>
+              <PublisherCard
+                title={origin.name}
+                image={origin.icon}
+                url={origin.host}
               />
+              <div className="my-4">
+                <div className="shadow mb-4 bg-white dark:bg-surface-02dp p-4 rounded-lg">
+                  <PaymentSummary
+                    amount={amount}
+                    fiatAmount={fiatAmount}
+                    description={t("payment_summary.description", {
+                      destination,
+                    })}
+                  />
+                </div>
+
+                <BudgetControl
+                  fiatAmount={fiatBudgetAmount}
+                  remember={rememberMe}
+                  onRememberChange={(event) => {
+                    setRememberMe(event.target.checked);
+                  }}
+                  budget={budget}
+                  onBudgetChange={(event) => setBudget(event.target.value)}
+                />
+              </div>
             </div>
-            <BudgetControl
-              remember={rememberMe}
-              onRememberChange={(event) => {
-                setRememberMe(event.target.checked);
-              }}
-              budget={budget}
-              onBudgetChange={(event) => setBudget(event.target.value)}
-            />
             <ConfirmOrCancel
               disabled={loading}
               loading={loading}
-              onConfirm={confirm}
               onCancel={reject}
             />
-          </>
-        ) : (
-          <SuccessMessage
-            message={successMessage}
-            onClose={() => window.close()}
+          </Container>
+        </form>
+      ) : (
+        <Container maxWidth="sm">
+          <PublisherCard
+            title={origin.name}
+            image={origin.icon}
+            url={origin.host}
           />
-        )}
-      </div>
+          <div className="my-4">
+            <SuccessMessage message={successMessage} onClose={close} />
+          </div>
+        </Container>
+      )}
     </div>
   );
 }
 
-export default Keysend;
+export default ConfirmKeysend;

@@ -1,5 +1,5 @@
 import getOriginData from "../originData";
-import setLightningData from "../setLightningData";
+import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher = /^https:\/\/www.reddit\.com\/user\/(\w+).*/;
 
@@ -14,17 +14,21 @@ function battery(): void {
   if (!descriptionElement || !imageUrl) {
     return;
   }
+
+  const content = descriptionElement.content.split(/:(.*)/s);
+  const userName = content[0];
+  const description =
+    document.querySelector<HTMLMetaElement>(
+      `h4 + a[href*='user/${userName.split("/")[1]}'] + div`
+    )?.textContent ?? content[1].slice(1);
+
   let match;
   let recipient;
   // attempt to extract lnurlp: from the description text
-  if ((match = (descriptionElement.content || "").match(/lnurlp:(\S+)/i))) {
+  if ((match = (description || "").match(/lnurlp:(\S+)/i))) {
     recipient = match[1];
-  } else if (
-    (match = descriptionElement.content.match(
-      /(⚡:?|lightning:|lnurl:)\s?(\S+@\S+)/i
-    ))
-  ) {
-    recipient = match[2];
+  } else if ((match = findLightningAddressInText(description))) {
+    recipient = match;
   }
   // if we still did not find anything ignore it.
   if (!recipient) {
@@ -34,10 +38,11 @@ function battery(): void {
   setLightningData([
     {
       method: "lnurl",
-      recipient,
+      address: recipient,
       ...getOriginData(),
+      description,
       icon: imageUrl,
-      name: document.title,
+      name: userName,
     },
   ]);
 }

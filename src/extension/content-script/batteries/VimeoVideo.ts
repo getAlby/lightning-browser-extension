@@ -1,5 +1,5 @@
 import getOriginData from "../originData";
-import setLightningData from "../setLightningData";
+import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher = /^https:\/\/vimeo.com\/.*\d{4,}\/?$/;
 
@@ -20,8 +20,8 @@ const battery = (): void => {
   }
   // if there is no lnurl we check for a zap emoji with a lightning address
   // we check for the @-sign to try to limit the possibility to match some invalid text (e.g. random emoji usage)
-  else if ((match = text.match(/(⚡:?|lightning:|lnurl:)\s?(\S+@\S+)/i))) {
-    recipient = match[2];
+  else if ((match = findLightningAddressInText(text))) {
+    recipient = match;
   } else {
     return;
   }
@@ -33,7 +33,7 @@ const battery = (): void => {
   setLightningData([
     {
       method: "lnurl",
-      recipient,
+      address: recipient,
       ...getOriginData(),
       name,
       icon: imageUrl,

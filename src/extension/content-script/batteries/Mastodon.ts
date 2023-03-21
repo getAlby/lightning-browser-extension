@@ -1,5 +1,5 @@
 import getOriginData from "../originData";
-import setLightningData from "../setLightningData";
+import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher =
   /^https:\/\/(bitcoinhackers\.org|kosmos\.social)\/(web\/)?@\S+/;
@@ -12,7 +12,7 @@ const battery = (): void => {
   if (!bio) return;
 
   let match, recipient;
-  if ((match = (bio.textContent || "").match(/lnurlp:(\S+)/i))) {
+  if ((match = findLightningAddressInText(bio.textContent || ""))) {
     recipient = match[1];
   } else {
     const zapElements = document.querySelectorAll(
@@ -20,7 +20,9 @@ const battery = (): void => {
     );
     for (const zapElement of zapElements) {
       if (
-        (match = (zapElement.nextSibling?.textContent || "").match(/(\S+@\S+)/))
+        (match = findLightningAddressInText(
+          zapElement.nextSibling?.textContent || ""
+        ))
       ) {
         recipient = match[1];
         break;
@@ -33,7 +35,7 @@ const battery = (): void => {
   setLightningData([
     {
       method: "lnurl",
-      recipient: recipient,
+      address: recipient,
       ...getOriginData(),
       name:
         document

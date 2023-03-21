@@ -2,7 +2,7 @@ import connectors from "../../connectors";
 
 const validateAccount = async (message, sender) => {
   const account = message.args;
-  const connector = new connectors[account.connector](account.config);
+  const connector = new connectors[account.connector](account, account.config);
   await connector.init();
 
   try {
@@ -11,7 +11,7 @@ const validateAccount = async (message, sender) => {
 
     return { data: { valid: true, info: info } };
   } catch (e) {
-    console.log(e);
+    console.error(e);
     return { data: { valid: false, error: e.message } };
   }
 };

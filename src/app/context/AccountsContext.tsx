@@ -1,7 +1,6 @@
 import { useState, createContext, useContext } from "react";
-
-import type { Accounts } from "~/types";
 import api from "~/common/lib/api";
+import type { Accounts } from "~/types";
 
 interface AccountsContextType {
   accounts: Accounts;

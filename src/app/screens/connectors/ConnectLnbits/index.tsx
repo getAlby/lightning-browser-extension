@@ -1,18 +1,24 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-import utils from "~/common/lib/utils";
-
+import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
+import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
+import { useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import msg from "~/common/lib/msg";
 
 export default function ConnectLnbits() {
   const navigate = useNavigate();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "choose_connector.lnbits",
+  });
   const [formData, setFormData] = useState({
     adminkey: "",
     url: "https://legend.lnbits.com",
   });
   const [loading, setLoading] = useState(false);
+  const [hasTorSupport, setHasTorSupport] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -22,7 +28,7 @@ export default function ConnectLnbits() {
   }
 
   function getConnectorType() {
-    if (formData.url.match(/\.onion/i)) {
+    if (formData.url.match(/\.onion/i) && !hasTorSupport) {
       return "nativelnbits";
     }
     // default to LNbits
@@ -34,7 +40,7 @@ export default function ConnectLnbits() {
     setLoading(true);
     const { adminkey, url } = formData;
     const account = {
-      name: "LNBits",
+      name: "LNbits",
       config: {
         adminkey,
         url,
@@ -48,38 +54,49 @@ export default function ConnectLnbits() {
       if (account.connector === "nativelnbits") {
         validation = { valid: true, error: "" };
       } else {
-        validation = await utils.call("validateAccount", account);
+        validation = await msg.request("validateAccount", account);
       }
 
       if (validation.valid) {
-        const addResult = await utils.call("addAccount", account);
+        const addResult = await msg.request("addAccount", account);
         if (addResult.accountId) {
-          await utils.call("selectAccount", {
+          await msg.request("selectAccount", {
             id: addResult.accountId,
           });
           navigate("/test-connection");
         }
       } else {
-        console.log(validation);
-        alert(
-          `Connection failed. Do you have the correct URL and Admin Key? \n\n(${validation.error})`
+        console.error(validation);
+        toast.error(
+          <ConnectionErrorToast message={validation.error as string} />
         );
       }
     } catch (e) {
       console.error(e);
-      let message =
-        "Connection failed. Do you have the correct URL and Admin Key?";
+      let message = t("errors.connection_failed");
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
-      alert(message);
+      toast.error(message);
     }
     setLoading(false);
   }
 
   return (
     <ConnectorForm
-      title="Connect to LNbits"
+      title={
+        <h1 className="mb-6 text-2xl font-bold dark:text-white">
+          <Trans
+            i18nKey={"page.title"}
+            t={t}
+            components={[
+              // eslint-disable-next-line react/jsx-key
+              <a className="underline" href="https://lnbits.com/"></a>,
+            ]}
+          />
+        </h1>
+      }
+      description={t("page.instructions")}
       submitLoading={loading}
       submitDisabled={formData.adminkey === "" || formData.url === ""}
       onSubmit={handleSubmit}
@@ -87,20 +104,32 @@ export default function ConnectLnbits() {
       <div className="mb-6">
         <TextField
           id="adminkey"
-          label="LNbits Admin Key"
+          label={t("admin_key.label")}
+          placeholder={t("admin_key.placeholder")}
           type="text"
           required
           onChange={handleChange}
         />
       </div>
-      <TextField
-        id="url"
-        label="LNbits URL"
-        type="text"
-        value={formData.url}
-        required
-        onChange={handleChange}
-      />
+      <div className="mb-6">
+        <TextField
+          id="url"
+          label={t("url.label")}
+          type="text"
+          value={formData.url}
+          required
+          onChange={handleChange}
+        />
+      </div>
+      {formData.url.match(/\.onion/i) && (
+        <div className="mb-6">
+          <CompanionDownloadInfo
+            hasTorCallback={(hasTor: boolean) => {
+              setHasTorSupport(hasTor);
+            }}
+          />
+        </div>
+      )}
     </ConnectorForm>
   );
 }

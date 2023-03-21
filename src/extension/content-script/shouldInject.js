@@ -1,8 +1,14 @@
+import msg from "../../common/lib/msg";
+
 // https://github.com/joule-labs/joule-extension/blob/develop/src/content_script/shouldInject.ts
 // Whether or not to inject the WebLN listeners
-// TODO: Add user settings for whether or not to inject
-export default function shouldInject() {
-  return doctypeCheck() && suffixCheck() && documentElementCheck();
+export default async function shouldInject() {
+  const notBlocked = await blocklistCheck();
+  const isHTML = doctypeCheck();
+  const noProhibitedType = suffixCheck();
+  const hasDocumentElement = documentElementCheck();
+
+  return notBlocked && isHTML && noProhibitedType && hasDocumentElement;
 }
 
 // Checks the doctype of the current document if it exists
@@ -38,4 +44,17 @@ function documentElementCheck() {
     return docNode.toLowerCase() === "html";
   }
   return true;
+}
+
+async function blocklistCheck() {
+  try {
+    const currentHost = window.location.host;
+    const blocklistData = await msg.request("getBlocklist", {
+      host: currentHost,
+    });
+    return !blocklistData.blocked; // return true if not blocked
+  } catch (e) {
+    if (e instanceof Error) console.error(e);
+    return false;
+  }
 }

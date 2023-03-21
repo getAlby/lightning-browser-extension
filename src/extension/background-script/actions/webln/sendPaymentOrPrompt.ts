@@ -1,5 +1,4 @@
-import { parsePaymentRequest } from "invoices";
-
+import lightningPayReq from "bolt11";
 import utils from "~/common/lib/utils";
 import { Message } from "~/types";
 
@@ -7,6 +6,8 @@ import db from "../../db";
 import sendPayment from "../ln/sendPayment";
 
 const sendPaymentOrPrompt = async (message: Message) => {
+  if (!("host" in message.origin)) return;
+
   const paymentRequest = message.args.paymentRequest;
   if (typeof paymentRequest !== "string") {
     return {
@@ -14,10 +15,13 @@ const sendPaymentOrPrompt = async (message: Message) => {
     };
   }
 
-  const paymentRequestDetails = parsePaymentRequest({
-    request: paymentRequest,
-  });
-  if (await checkAllowance(message.origin.host, paymentRequestDetails.tokens)) {
+  const paymentRequestDetails = lightningPayReq.decode(paymentRequest);
+  if (
+    await checkAllowance(
+      message.origin.host,
+      paymentRequestDetails.satoshis || 0
+    )
+  ) {
     return sendPaymentWithAllowance(message);
   } else {
     return payWithPrompt(message);
@@ -30,7 +34,7 @@ async function checkAllowance(host: string, amount: number) {
     .equalsIgnoreCase(host)
     .first();
 
-  return allowance && allowance.remainingBudget >= amount;
+  return allowance && allowance.remainingBudget > amount; // check that the budget is higher than the amount. amount can be 0
 }
 
 async function sendPaymentWithAllowance(message: Message) {
@@ -49,11 +53,11 @@ async function payWithPrompt(message: Message) {
   try {
     const response = await utils.openPrompt({
       ...message,
-      type: "confirmPayment",
+      action: "confirmPayment",
     });
     return response;
   } catch (e) {
-    console.log("Payment cancelled", e);
+    console.error("Payment cancelled", e);
     if (e instanceof Error) {
       return { error: e.message };
     }

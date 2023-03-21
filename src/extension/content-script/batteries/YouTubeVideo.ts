@@ -1,44 +1,62 @@
 import getOriginData from "../originData";
-import setLightningData from "../setLightningData";
+import { findLnurlFromYouTubeAboutPage } from "./YouTubeChannel";
+import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
 
-const battery = (): void => {
-  const videoDescription = document.querySelector(
-    "#columns #primary #primary-inner #meta-contents #description .content"
-  );
-  const channelLink = document.querySelector(
+const battery = async (): Promise<void> => {
+  let text = "";
+  document
+    .querySelectorAll(
+      "#columns #primary #primary-inner #meta-contents #description .content"
+    )
+    .forEach((e) => {
+      text += ` ${e.textContent}`;
+    });
+  const channelLink = document.querySelector<HTMLAnchorElement>(
     "#columns #primary #primary-inner #meta-contents .ytd-channel-name a"
   );
-  if (!videoDescription || !channelLink) {
+  if (!text || !channelLink) {
     return;
   }
-  const text = videoDescription.textContent || "";
   let match;
-  let recipient;
+  let lnurl;
   // check for an lnurl
   if ((match = text.match(/(lnurlp:)(\S+)/i))) {
-    recipient = match[2];
+    lnurl = match[2];
   }
   // if there is no lnurl we check for a zap emoji with a lightning address
   // we check for the @-sign to try to limit the possibility to match some invalid text (e.g. random emoji usage)
-  else if ((match = text.match(/(⚡:?|lightning:|lnurl:)\s?(\S+@\S+)/i))) {
-    recipient = match[2];
+  else if ((match = findLightningAddressInText(text))) {
+    lnurl = match;
   } else {
-    return;
+    // load the about page to check for a lightning address
+    const match = channelLink.href.match(
+      /^https:\/\/www\.youtube.com\/(((channel|c)\/([^/]+))|(@[^/]+)).*/
+    );
+    if (match) {
+      lnurl = await findLnurlFromYouTubeAboutPage(match[1]);
+    }
   }
+
+  if (!lnurl) return;
 
   const name = channelLink.textContent || "";
   const imageUrl =
     document.querySelector<HTMLImageElement>(
       "#columns #primary #primary-inner #meta-contents img"
-    )?.src || "";
+    )?.src ||
+    document.querySelector<HTMLImageElement>(
+      "#columns #primary #primary-inner #owner #avatar img" // support maybe new UI being rolled out 2022/09
+    )?.src ||
+    "";
   setLightningData([
     {
       method: "lnurl",
-      recipient,
+      address: lnurl,
       ...getOriginData(),
       name,
+      description: "", // we can not reliably find a description (the meta tag might be of a different video)
       icon: imageUrl,
     },
   ]);

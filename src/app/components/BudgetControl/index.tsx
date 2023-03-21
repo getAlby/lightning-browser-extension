@@ -1,14 +1,15 @@
-import { ChangeEventHandler } from "react";
+import Checkbox from "@components/form/Checkbox";
+import DualCurrencyField from "@components/form/DualCurrencyField";
 import { Transition } from "@headlessui/react";
-
-import Checkbox from "../form/Checkbox";
-import TextField from "../form/TextField";
+import { ChangeEventHandler } from "react";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   remember: boolean;
   onRememberChange: ChangeEventHandler<HTMLInputElement>;
   budget: string;
   onBudgetChange: ChangeEventHandler<HTMLInputElement>;
+  fiatAmount: string;
 };
 
 function BudgetControl({
@@ -16,9 +17,16 @@ function BudgetControl({
   onRememberChange,
   budget,
   onBudgetChange,
+  fiatAmount,
 }: Props) {
+  const { t } = useTranslation("components", {
+    keyPrefix: "budget_control",
+  });
+
+  const { t: tCommon } = useTranslation("common");
+
   return (
-    <div className="mb-8">
+    <div className="mb-6">
       <div className="flex items-center">
         <Checkbox
           id="remember_me"
@@ -28,9 +36,9 @@ function BudgetControl({
         />
         <label
           htmlFor="remember_me"
-          className="ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+          className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
         >
-          Remember and set a budget
+          {t("remember.label")}
         </label>
       </div>
 
@@ -43,17 +51,19 @@ function BudgetControl({
         leaveFrom="scale-100 opacity-100"
         leaveTo="scale-95 opacity-0"
       >
-        <p className="mt-4 mb-3 text-gray-500 text-sm">
-          You may set a balance to not be asked for confirmation on payments
-          until it is exhausted.
+        <p className="my-3 text-gray-500 text-sm">
+          {t("remember.description")}
         </p>
+
         <div>
-          <TextField
+          <DualCurrencyField
+            autoFocus
+            fiatValue={fiatAmount}
             id="budget"
-            label="Budget"
-            placeholder="sat"
+            min={0}
+            label={t("budget.label")}
+            placeholder={tCommon("sats", { count: 0 })}
             value={budget}
-            type="number"
             onChange={onBudgetChange}
           />
         </div>

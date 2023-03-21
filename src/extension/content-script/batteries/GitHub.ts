@@ -1,7 +1,7 @@
 import getOriginData from "../originData";
-import setLightningData from "../setLightningData";
+import { findLightningAddressInText, setLightningData } from "./helpers";
 
-const urlMatcher = /^https:\/\/github.com\/([^/]+)(\/([^/]+))?$/;
+const urlMatcher = /^https:\/\/github.com\/([^/]+)(\/)?(\/([^/]+))?(\/)?$/;
 
 const battery = (): void => {
   const urlParts = document.location.pathname.split("/");
@@ -11,14 +11,27 @@ const battery = (): void => {
   if (username && repo) {
     handleRepositoryPage(username);
   } else if (username) {
-    handleProfilePage();
+    const lightningData = handleProfilePage() || handleOrganizationPage();
+    if (lightningData) {
+      setLightningData([lightningData]);
+    }
   }
 };
 
 function parseElement(elementSelector: string) {
   const text = document.querySelector<HTMLElement>(elementSelector)?.innerText;
   if (text) {
-    const match = text.match(/(⚡:?|lightning:|lnurl:)\s?(\S+@\S+)/i);
+    let match;
+    if ((match = findLightningAddressInText(text))) return match;
+  }
+
+  // Fallback for Windows and Linux
+  const zap = document
+    .querySelector<HTMLElement>(elementSelector)
+    ?.querySelector('[alias="zap"]');
+  if (zap) {
+    const lnaddress = zap.nextSibling?.textContent as string;
+    const match = lnaddress.match(/(:?)\s?(\S+@\S+)/i);
     if (match) return match[2];
   }
 }
@@ -29,30 +42,55 @@ function handleProfilePage() {
   );
 
   // This is not a GitHub profile
-  if (!shortBioElement) return;
+  if (!shortBioElement) return null;
 
   const address =
-    parseElement(".Layout-sidebar .h-card [data-bio-text]") ||
+    parseElement(".Layout-sidebar .h-card") ||
     parseElement(".Layout-main article");
 
-  if (!address) return;
+  if (!address) return null;
 
-  setLightningData([
-    {
-      method: "lnurl",
-      recipient: address,
-      ...getOriginData(),
-      description: shortBioElement?.innerText ?? "",
-      name:
-        document.querySelector<HTMLHeadingElement>(
-          '.Layout-sidebar .h-card [itemprop="name"]'
-        )?.innerText ?? "",
-      icon:
-        document.querySelector<HTMLImageElement>(
-          `.Layout-sidebar .h-card img.avatar-user`
-        )?.src ?? "",
-    },
-  ]);
+  return {
+    method: "lnurl",
+    address: address,
+    ...getOriginData(),
+    description: shortBioElement?.innerText ?? "",
+    name:
+      document.querySelector<HTMLHeadingElement>(
+        '.Layout-sidebar .h-card [itemprop="name"]'
+      )?.innerText ?? "",
+    icon:
+      document.querySelector<HTMLImageElement>(
+        `.Layout-sidebar .h-card img.avatar-user`
+      )?.src ?? "",
+  };
+}
+
+function handleOrganizationPage() {
+  const orgName = document.querySelector<HTMLHeadingElement>(
+    ".pagehead.orghead h1"
+  );
+  const shortBioElement = document.querySelector<HTMLElement>(
+    ".pagehead.orghead h1+div"
+  );
+
+  if (!orgName) return null;
+
+  const address =
+    parseElement(".pagehead.orghead h1+div") || parseElement("article");
+
+  if (!address) return null;
+
+  return {
+    method: "lnurl",
+    address: address,
+    ...getOriginData(),
+    description: shortBioElement?.innerText ?? "",
+    name: orgName.innerText,
+    icon:
+      document.querySelector<HTMLImageElement>(`.pagehead.orghead img.avatar`)
+        ?.src ?? "",
+  };
 }
 
 function handleRepositoryPage(username: string) {
@@ -62,7 +100,7 @@ function handleRepositoryPage(username: string) {
     setLightningData([
       {
         method: "lnurl",
-        recipient: address,
+        address: address,
         ...getOriginData(),
         description:
           document.querySelector<HTMLHeadingElement>("article")?.innerText ??

@@ -1,28 +1,43 @@
-import utils from "./utils";
+import { ACCOUNT_CURRENCIES } from "~/common/constants";
+import {
+  ConnectPeerArgs,
+  ConnectPeerResponse,
+  MakeInvoiceArgs,
+  MakeInvoiceResponse,
+} from "~/extension/background-script/connectors/connector.interface";
+import type {
+  Account,
+  AccountInfo,
+  Accounts,
+  Allowance,
+  DbPayment,
+  Invoice,
+  LnurlAuthResponse,
+  MessageInvoices,
+  MessageLnurlAuth,
+  MessageSettingsSet,
+  NodeInfo,
+  SettingsStorage,
+} from "~/types";
+
 import {
   getAccountsCache,
   removeAccountFromCache,
   storeAccounts,
 } from "./cache";
-import type {
-  Accounts,
-  AccountInfo,
-  Allowance,
-  Transaction,
-  SettingsStorage,
-} from "~/types";
-import {
-  MakeInvoiceArgs,
-  MakeInvoiceResponse,
-} from "~/extension/background-script/connectors/connector.interface";
+import msg from "./msg";
 
-interface AccountInfoRes {
+export interface AccountInfoRes {
+  balance: { balance: string | number; currency: ACCOUNT_CURRENCIES };
   currentAccountId: string;
+  info: { alias: string; pubkey?: string };
   name: string;
-  info: { alias: string };
-  balance: { balance: string };
 }
 
+export interface GetAccountRes
+  extends Pick<Account, "id" | "connector" | "name"> {
+  nostrEnabled: boolean;
+}
 interface StatusRes {
   configured: boolean;
   unlocked: boolean;
@@ -33,7 +48,12 @@ interface UnlockRes {
   currentAccountId: string;
 }
 
-export const getAccountInfo = () => utils.call<AccountInfoRes>("accountInfo");
+interface BlocklistRes {
+  blocked: boolean;
+}
+
+export const getAccountInfo = () => msg.request<AccountInfoRes>("accountInfo");
+
 /**
  * stale-while-revalidate get account info
  * @param id - account id
@@ -55,9 +75,17 @@ export const swrGetAccountInfo = async (
     getAccountInfo()
       .then((response) => {
         const { alias } = response.info;
+        const { balance: resBalance, currency } = response.balance;
         const name = response.name;
-        const balance = parseInt(response.balance.balance); // TODO: handle amounts
-        const account = { id, name, alias, balance };
+        const balance =
+          typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
+        const account = {
+          id,
+          name,
+          alias,
+          balance,
+          currency: currency || "BTC", // set default currency for every account
+        };
         storeAccounts({
           ...accountsCache,
           [id]: account,
@@ -68,44 +96,70 @@ export const swrGetAccountInfo = async (
       .catch(reject);
   });
 };
-export const getAccounts = () => utils.call<Accounts>("getAccounts");
+export const getAccounts = () => msg.request<Accounts>("getAccounts");
+export const getAccount = () => msg.request<GetAccountRes>("getAccount");
+export const updateAllowance = () => msg.request<Accounts>("updateAllowance");
 export const selectAccount = (id: string) =>
-  utils.call("selectAccount", { id });
+  msg.request("selectAccount", { id });
 export const getAllowance = (host: string) =>
-  utils.call<Allowance>("getAllowance", { host });
-export const getPayments = (options: { limit: number }) =>
-  utils.call<{ payments: Transaction[] }>("getPayments", options);
-export const getSettings = () => utils.call<SettingsStorage>("getSettings");
-export const getStatus = () => utils.call<StatusRes>("status");
+  msg.request<Allowance>("getAllowance", { host });
+export const getPayments = (options?: { limit?: number }) =>
+  msg.request<{ payments: DbPayment[] }>("getPayments", options);
+export const getPaymentsByAccount = (options: {
+  accountId: Account["id"];
+  limit: number;
+}) => msg.request<{ payments: DbPayment[] }>("getPaymentsByAccount", options);
+export const getSettings = () => msg.request<SettingsStorage>("getSettings");
+export const getStatus = () => msg.request<StatusRes>("status");
+export const getInfo = () => msg.request<NodeInfo>("getInfo");
 export const makeInvoice = ({ amount, memo }: MakeInvoiceArgs) =>
-  utils.call<MakeInvoiceResponse["data"]>("makeInvoice", { amount, memo });
-export const setSetting = (
-  setting: Record<string, string | number | boolean>
-) =>
-  utils.call<SettingsStorage>("setSetting", {
+  msg.request<MakeInvoiceResponse["data"]>("makeInvoice", { amount, memo });
+export const connectPeer = ({ host, pubkey }: ConnectPeerArgs) =>
+  msg.request<ConnectPeerResponse["data"]>("connectPeer", { host, pubkey });
+export const setSetting = (setting: MessageSettingsSet["args"]["setting"]) =>
+  msg.request<SettingsStorage>("setSetting", {
     setting,
   });
-export const deleteAccount = (id: string) =>
+export const removeAccount = (id: string) =>
   Promise.all([
-    utils.call("deleteAccount", { id }),
+    msg.request("removeAccount", { id }),
     removeAccountFromCache(id),
   ]);
 export const unlock = (password: string) =>
-  utils.call<UnlockRes>("unlock", { password });
+  msg.request<UnlockRes>("unlock", { password });
+export const getBlocklist = (host: string) =>
+  msg.request<BlocklistRes>("getBlocklist", { host });
+export const getInvoices = (options?: MessageInvoices["args"]) =>
+  msg.request<{ invoices: Invoice[] }>("getInvoices", options);
+export const lnurlAuth = (
+  options: MessageLnurlAuth["args"]
+): Promise<LnurlAuthResponse> =>
+  msg.request<LnurlAuthResponse>("lnurlAuth", options);
+
+export const getCurrencyRate = async () =>
+  msg.request<{ rate: number }>("getCurrencyRate");
 
 export default {
+  getAccount,
   getAccountInfo,
   getAccounts,
+  getInfo,
   selectAccount,
   getAllowance,
+  updateAllowance,
   getPayments,
   getSettings,
   getStatus,
   makeInvoice,
+  connectPeer,
   setSetting,
   swr: {
     getAccountInfo: swrGetAccountInfo,
   },
-  deleteAccount,
+  removeAccount,
   unlock,
+  getBlocklist,
+  getInvoices,
+  lnurlAuth,
+  getCurrencyRate,
 };

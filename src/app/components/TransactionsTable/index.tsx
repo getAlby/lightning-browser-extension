@@ -1,61 +1,55 @@
-import {
-  PlusIcon,
-  MinusIcon,
-  CaretDownIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
+import { CaretDownIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Disclosure } from "@headlessui/react";
-
+import { useTranslation } from "react-i18next";
+import Button from "~/app/components/Button";
+import { useSettings } from "~/app/context/SettingsContext";
 import { Transaction } from "~/types";
 
 import Badge from "../Badge";
 
-type Props = {
+export type Props = {
   transactions: Transaction[];
 };
 
 export default function TransactionsTable({ transactions }: Props) {
-  function renderIcon(type: string) {
-    function getIcon() {
-      const iconClasses = "h-3 w-3";
-      switch (type) {
-        case "received":
-          return <PlusIcon className={iconClasses} />;
-        case "sent":
-        case "sending":
-          return <MinusIcon className={iconClasses} />;
-      }
-    }
-
-    return (
-      <div className="flex justify-center items-center w-6 h-6 border-2 border-gray-200 rounded-full dark:text-white">
-        {getIcon()}
-      </div>
-    );
-  }
+  const { getFormattedSats } = useSettings();
+  const { t: tComponents } = useTranslation("components");
 
   return (
     <div className="shadow overflow-hidden rounded-lg">
-      <div className="bg-white divide-y divide-gray-200 dark:bg-gray-700">
+      <div className="bg-white divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
         {transactions.map((tx) => (
           <div key={tx.id} className="px-3 py-2">
             <Disclosure>
               {({ open }) => (
                 <>
                   <div className="flex">
-                    <div className="flex items-center shrink-0 mr-3">
-                      {tx.type && renderIcon(tx.type)}
-                    </div>
                     <div className="overflow-hidden mr-3">
-                      <div className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                        {tx.title}
+                      <div
+                        className="
+                      text-sm font-medium text-gray-900 truncate dark:text-white"
+                      >
+                        <p className="truncate">
+                          {tx.publisherLink && tx.title ? (
+                            <a
+                              target="_blank"
+                              href={tx.publisherLink}
+                              rel="noopener noreferrer"
+                            >
+                              {tx.title}
+                            </a>
+                          ) : (
+                            tx.title || tx.boostagram?.message || "\u00A0"
+                          )}
+                        </p>
                       </div>
-                      <p className="text-xs text-gray-500 capitalize dark:text-gray-400">
-                        {tx.type}
+                      <p className="text-xs text-gray-600 dark:text-neutral-400">
+                        {tx.date}
                       </p>
                     </div>
                     {tx.badges && (
                       <div className="ml-6 space-x-3">
-                        {tx.badges.map((badge, i) => (
+                        {tx.badges.map((badge) => (
                           <Badge
                             key={badge.label}
                             label={badge.label}
@@ -71,29 +65,98 @@ export default function TransactionsTable({ transactions }: Props) {
                           {[tx.type && "sent", "sending"].includes(tx.type)
                             ? "-"
                             : "+"}
-                          {tx.totalAmount} sat
+                          {getFormattedSats(tx.totalAmount)}
                         </p>
-                        <p className="text-xs text-gray-400">{tx.date}</p>
+                        {!!tx.totalAmountFiat && (
+                          <p className="text-xs text-gray-600 dark:text-neutral-400">
+                            ~{tx.totalAmountFiat}
+                          </p>
+                        )}
                       </div>
-                      <Disclosure.Button className="block h-0 mt-2 text-gray-500 hover:text-black dark:hover:text-white transition-color duration-200">
-                        <CaretDownIcon
-                          className={`${open ? "rotate-180" : ""} w-5 h-5`}
-                        />
-                      </Disclosure.Button>
+                      {(!!tx.description ||
+                        [tx.type && "sent", "sending"].includes(tx.type) ||
+                        (tx.type === "received" && tx.boostagram)) && (
+                        <Disclosure.Button className="block text-gray-500 hover:text-black dark:hover:text-white transition-color duration-200">
+                          <CaretDownIcon
+                            className={`${open ? "rotate-180" : ""} w-5 h-5`}
+                          />
+                        </Disclosure.Button>
+                      )}
                     </div>
                   </div>
                   <Disclosure.Panel>
-                    <div className="mt-1 ml-9 text-xs text-gray-500 dark:text-gray-400">
-                      {tx.description}
-                      {tx.preimage && (
-                        <p className="truncate">Preimage: {tx.preimage}</p>
+                    <div className="text-xs text-gray-600 dark:text-neutral-400">
+                      {(tx.description || tx.boostagram) && (
+                        <div className="my-2">
+                          {tx.description && <p>{tx.description}</p>}
+                          {tx.boostagram && (
+                            <ul>
+                              <li>
+                                {tComponents(
+                                  "transactionsTable.boostagram.sender"
+                                )}
+                                : {tx.boostagram.sender_name}
+                              </li>
+                              <li>
+                                {tComponents(
+                                  "transactionsTable.boostagram.message"
+                                )}
+                                : {tx.boostagram.message}
+                              </li>
+                              <li>
+                                {tComponents(
+                                  "transactionsTable.boostagram.app"
+                                )}
+                                : {tx.boostagram.app_name}
+                              </li>
+                              <li>
+                                {tComponents(
+                                  "transactionsTable.boostagram.podcast"
+                                )}
+                                : {tx.boostagram.podcast}
+                              </li>
+                            </ul>
+                          )}
+                        </div>
                       )}
-                      {tx.location ? (
-                        <a href={tx.location} target="_blank" rel="noreferrer">
-                          {tx.location}
-                        </a>
-                      ) : (
-                        ""
+                      {(tx.totalFees !== undefined || tx.location) && (
+                        <div className="my-2 flow-root">
+                          {tx.totalFees !== undefined && (
+                            <p className="float-left">
+                              <span className="font-bold">
+                                {tComponents("transactionsTable.fee")}
+                              </span>
+                              <br />
+                              {getFormattedSats(tx.totalFees)}
+                            </p>
+                          )}
+                          {tx.location && (
+                            <a
+                              className="float-right"
+                              href={tx.location}
+                              target="_blank"
+                              rel="noreferrer noopener"
+                            >
+                              <Button
+                                primary
+                                label={tComponents(
+                                  "transactionsTable.open_location"
+                                )}
+                              />
+                            </a>
+                          )}
+                        </div>
+                      )}
+                      {tx.preimage && (
+                        <div className="my-2 flow-root">
+                          <p className="float-left break-all">
+                            <span className="font-bold">
+                              {tComponents("transactionsTable.preimage")}
+                            </span>
+                            <br />
+                            {tx.preimage}
+                          </p>
+                        </div>
                       )}
                     </div>
                   </Disclosure.Panel>

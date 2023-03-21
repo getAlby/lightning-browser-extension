@@ -1,18 +1,29 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-import TextField from "@components/form/TextField";
+import {
+  HiddenIcon,
+  VisibleIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
+import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
-
-import utils from "~/common/lib/utils";
+import TextField from "@components/form/TextField";
+import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
+import { useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import msg from "~/common/lib/msg";
 
 export default function ConnectCitadel() {
   const navigate = useNavigate();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "choose_connector.citadel",
+  });
+  const [passwordView, setPasswordView] = useState(false);
   const [formData, setFormData] = useState({
     password: "",
-    url: "http://citadel.local",
+    url: "",
   });
   const [loading, setLoading] = useState(false);
+  const [hasTorSupport, setHasTorSupport] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -22,7 +33,7 @@ export default function ConnectCitadel() {
   }
 
   function getConnectorType() {
-    if (formData.url.match(/\.onion/i)) {
+    if (formData.url.match(/\.onion/i) && !hasTorSupport) {
       return "nativecitadel";
     }
     return "citadel";
@@ -52,57 +63,93 @@ export default function ConnectCitadel() {
       if (account.connector === "nativecitadel") {
         validation = { valid: true, error: "" };
       } else {
-        validation = await utils.call("validateAccount", account);
+        validation = await msg.request("validateAccount", account);
       }
       if (validation.valid) {
-        const addResult = await utils.call("addAccount", account);
+        const addResult = await msg.request("addAccount", account);
         if (addResult.accountId) {
-          await utils.call("selectAccount", {
+          await msg.request("selectAccount", {
             id: addResult.accountId,
           });
           navigate("/test-connection");
         }
       } else {
-        alert(`
-          Connection failed. Is your password correct? \n\n(${validation.error})`);
+        toast.error(
+          <ConnectionErrorToast message={validation.error as string} />
+        );
       }
     } catch (e) {
       console.error(e);
-      let message = "Connection failed. Is your password correct?";
+      let message = "";
       if (e instanceof Error) {
-        message += `\n\n${e.message}`;
+        message += `${e.message}`;
       }
-      alert(message);
+      toast.error(<ConnectionErrorToast message={message} />);
     }
     setLoading(false);
   }
 
   return (
     <ConnectorForm
-      title="Connect to your Citadel Node"
-      description="This currently doesn't work if 2FA is enabled."
+      title={
+        <h1 className="mb-6 text-2xl font-bold dark:text-white">
+          <Trans
+            i18nKey={"page.title"}
+            t={t}
+            components={[
+              // eslint-disable-next-line react/jsx-key
+              <a className="underline" href="https://runcitadel.space/"></a>,
+            ]}
+          />
+        </h1>
+      }
+      description={t("page.instructions")}
       submitLoading={loading}
       submitDisabled={formData.password === "" || formData.url === ""}
       onSubmit={handleSubmit}
     >
       <div className="mb-6">
         <TextField
-          label="Password"
+          label={t("password.label")}
           id="password"
-          type="password"
+          type={passwordView ? "text" : "password"}
+          required
+          onChange={handleChange}
+          endAdornment={
+            <button
+              type="button"
+              className="flex justify-center items-center w-10 h-8"
+              onClick={() => setPasswordView(!passwordView)}
+            >
+              {passwordView ? (
+                <HiddenIcon className="h-6 w-6" />
+              ) : (
+                <VisibleIcon className="h-6 w-6" />
+              )}
+            </button>
+          }
+        />
+      </div>
+      <div className="mb-6">
+        <TextField
+          label={t("url.label")}
+          id="url"
+          placeholder={t("url.placeholder")}
+          type="text"
+          value={formData.url}
           required
           onChange={handleChange}
         />
       </div>
-      <TextField
-        label="Citadel URL"
-        id="url"
-        placeholder="citadel.local"
-        type="text"
-        value={formData.url}
-        required
-        onChange={handleChange}
-      />
+      {formData.url.match(/\.onion/i) && (
+        <div className="mb-6">
+          <CompanionDownloadInfo
+            hasTorCallback={(hasTor: boolean) => {
+              setHasTorSupport(hasTor);
+            }}
+          />
+        </div>
+      )}
     </ConnectorForm>
   );
 }

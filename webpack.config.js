@@ -9,14 +9,8 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-// init env variables otherwise the EnvironmentPlugin complains if those are not set.
-if (!process.env.FAUCET_URL) {
-  process.env.FAUCET_URL = ""; // env variables are passed as string. empty strings are still falsy
-}
-if (!process.env.FAUCET_K) {
-  process.env.FAUCET_K = ""; // env variables are passed as string. empty strings are still falsy
-}
 // default value is set in the code where it is used
 if (!process.env.WALLET_CREATE_URL) {
   process.env.WALLET_CREATE_URL = ""; // env variables are passed as string. empty strings are still falsy
@@ -29,6 +23,11 @@ if (!process.env.BITCOIN_BEACH_GALOY_URL) {
 // default value is set in the code where it is used
 if (!process.env.BITCOIN_JUNGLE_GALOY_URL) {
   process.env.BITCOIN_JUNGLE_GALOY_URL = ""; // env variables are passed as string. empty strings are still falsy
+}
+
+// default value is set in the code where it is used
+if (!process.env.HMAC_VERIFY_HEADER_KEY) {
+  process.env.HMAC_VERIFY_HEADER_KEY = ""; // env variables are passed as string. empty strings are still falsy
 }
 
 const viewsPath = path.join(__dirname, "static", "views");
@@ -61,9 +60,13 @@ var options = {
 
   entry: {
     manifest: "./src/manifest.json",
-    background: "./src/extension/background-script/index.js",
-    contentScript: "./src/extension/content-script/index.js",
+    background: "./src/extension/background-script/index.ts",
+    contentScriptOnEnd: "./src/extension/content-script/onend.js",
+    contentScriptOnEndNostr: "./src/extension/content-script/onendnostr.js",
+    contentScriptOnStart: "./src/extension/content-script/onstart.ts",
     inpageScript: "./src/extension/inpage-script/index.js",
+    inpageScriptWebLN: "./src/extension/inpage-script/webln.js",
+    inpageScriptNostr: "./src/extension/inpage-script/nostr.js",
     popup: "./src/app/router/Popup/index.tsx",
     prompt: "./src/app/router/Prompt/index.tsx",
     options: "./src/app/router/Options/index.tsx",
@@ -81,7 +84,6 @@ var options = {
       "webextension-polyfill": "webextension-polyfill",
       Buffer: "buffer",
       process: "process/browser",
-      crypto: "crypto-browserify",
       assert: "assert",
       stream: "stream-browserify",
     },
@@ -103,8 +105,10 @@ var options = {
       },
       {
         test: /\.(js|ts)x?$/,
-        loader: "babel-loader",
         exclude: /node_modules/,
+        use: {
+          loader: "swc-loader",
+        },
       },
       {
         test: /\.(sa|sc|c)ss$/,
@@ -145,13 +149,12 @@ var options = {
     // new webpack.SourceMapDevToolPlugin({ filename: false }),
     // environmental variables
     new webpack.EnvironmentPlugin([
-      "FAUCET_K",
-      "FAUCET_URL",
       "BITCOIN_BEACH_GALOY_URL",
       "BITCOIN_JUNGLE_GALOY_URL",
       "NODE_ENV",
       "TARGET_BROWSER",
       "WALLET_CREATE_URL",
+      "HMAC_VERIFY_HEADER_KEY",
     ]),
     // delete previous build files
     new CleanWebpackPlugin({
@@ -200,6 +203,13 @@ var options = {
     // copy static assets
     new CopyWebpackPlugin({
       patterns: [{ from: "static/assets", to: "assets" }],
+    }),
+    new BundleAnalyzerPlugin({
+      generateStatsFile: (nodeEnv !== "development" ? true : false),
+      analyzerMode: (nodeEnv !== "development" ? 'static' : 'disabled'),
+      reportFilename: '../bundle-report.html',
+      statsFilename: '../bundle-stats.json',
+      openAnalyzer: nodeEnv !== "development",
     }),
   ],
 };

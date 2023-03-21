@@ -1,37 +1,33 @@
-import Button from "../Button";
 import { SatoshiV2Icon } from "@bitcoin-design/bitcoin-icons-react/filled";
+
+import Button from "../Button";
 
 type Props = {
   onClick: (amount: string) => void;
+  disabled?: boolean;
+  min?: number;
+  max?: number;
 };
 
-function SatButtons({ onClick }: Props) {
+function SatButtons({ onClick, disabled, min, max }: Props) {
+  const sizes = [1000, 5000, 10000, 25000];
+
   return (
-    <div className="flex gap-2 mt-2">
-      <Button
-        icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label="100 ⚡"
-        onClick={() => onClick("100")}
-        fullWidth
-      />
-      <Button
-        icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label="1K ⚡"
-        onClick={() => onClick("1000")}
-        fullWidth
-      />
-      <Button
-        icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label="5K ⚡"
-        onClick={() => onClick("5000")}
-        fullWidth
-      />
-      <Button
-        icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label="10K ⚡"
-        onClick={() => onClick("10000")}
-        fullWidth
-      />
+    <div className="flex gap-2">
+      {sizes.map((size) => (
+        <Button
+          key={size}
+          icon={<SatoshiV2Icon className="w-4 h-4" />}
+          label={size / 1000 + "k"}
+          onClick={() => onClick(size.toString())}
+          fullWidth
+          disabled={
+            disabled ||
+            (min != undefined && min > size) ||
+            (max != undefined && max < size)
+          }
+        />
+      ))}
     </div>
   );
 }

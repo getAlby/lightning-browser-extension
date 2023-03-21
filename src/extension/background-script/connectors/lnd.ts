@@ -1,24 +1,27 @@
 import Base64 from "crypto-js/enc-base64";
-import WordArray from "crypto-js/lib-typedarrays";
 import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
+import WordArray from "crypto-js/lib-typedarrays";
 import SHA256 from "crypto-js/sha256";
-
 import utils from "~/common/lib/utils";
+import { Account } from "~/types";
+
 import Connector, {
-  SendPaymentArgs,
-  SendPaymentResponse,
   CheckPaymentArgs,
   CheckPaymentResponse,
-  GetInfoResponse,
+  ConnectorInvoice,
+  ConnectPeerArgs,
+  ConnectPeerResponse,
   GetBalanceResponse,
+  GetInfoResponse,
+  GetInvoicesResponse,
+  KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  SendPaymentArgs,
+  SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
-  VerifyMessageArgs,
-  VerifyMessageResponse,
-  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -26,18 +29,160 @@ interface Config {
   url: string;
 }
 
+const methods: Record<string, Record<string, string>> = {
+  getinfo: {
+    path: "/v1/getinfo",
+    httpMethod: "GET",
+  },
+  listchannels: {
+    path: "/v1/channels",
+    httpMethod: "GET",
+  },
+  listinvoices: {
+    path: "/v1/invoices",
+    httpMethod: "GET",
+  },
+  channelbalance: {
+    path: "/v1/balance/channels",
+    httpMethod: "GET",
+  },
+  walletbalance: {
+    path: "/v1/balance/blockchain",
+    httpMethod: "GET",
+  },
+  openchannel: {
+    path: "/v1/channels",
+    httpMethod: "POST",
+  },
+  connectpeer: {
+    path: "/v1/peers",
+    httpMethod: "POST",
+  },
+  disconnectpeer: {
+    path: "/v1/peers/{{pub_key}}",
+    httpMethod: "DELETE",
+  },
+  estimatefee: {
+    path: "/v1/transactions/fee",
+    httpMethod: "GET",
+  },
+  getchaninfo: {
+    path: "/v1/graph/edge/{{chan_id}}",
+    httpMethod: "GET",
+  },
+  getnetworkinfo: {
+    path: "/v1/graph/info",
+    httpMethod: "GET",
+  },
+  getnodeinfo: {
+    path: "/v1/graph/node/{{pub_key}}",
+    httpMethod: "GET",
+  },
+  gettransactions: {
+    path: "/v1/transactions",
+    httpMethod: "GET",
+  },
+  listpayments: {
+    path: "/v1/payments",
+    httpMethod: "GET",
+  },
+  listpeers: {
+    path: "/v1/peers",
+    httpMethod: "GET",
+  },
+  lookupinvoice: {
+    path: "/v1/invoice/{{r_hash_str}}",
+    httpMethod: "GET",
+  },
+  queryroutes: {
+    path: "/v1/graph/routes/{{pub_key}}/{{amt}}",
+    httpMethod: "GET",
+  },
+  verifymessage: {
+    path: "/v1/verifymessage",
+    httpMethod: "POST",
+  },
+  sendtoroute: {
+    path: "/v1/channels/transactions/route",
+    httpMethod: "POST",
+  },
+  decodepayreq: {
+    path: "/v1/payreq/{{pay_req}}",
+    httpMethod: "GET",
+  },
+  routermc: {
+    path: "/v2/router/mc",
+    httpMethod: "GET",
+  },
+  addinvoice: {
+    path: "/v1/invoices",
+    httpMethod: "POST",
+  },
+  addholdinvoice: {
+    path: "/v2/invoices/hodl",
+    httpMethod: "POST",
+  },
+  settleinvoice: {
+    path: "/v2/invoices/settle",
+    httpMethod: "POST",
+  },
+};
+
+const pathTemplateParser = (
+  template: string,
+  data: Record<string, unknown>
+): string => {
+  return template.replace(/{{(.*?)}}/g, (match) => {
+    const key = match.split(/{{|}}/).filter(Boolean)[0];
+    const value = data[key];
+    if (value === undefined) {
+      throw new Error(`Missing parameter ${key}`);
+    }
+    delete data[key];
+    return String(value); // typecast to string
+  });
+};
+
 class Lnd implements Connector {
+  account: Account;
   config: Config;
 
-  constructor(config: Config) {
+  constructor(account: Account, config: Config) {
+    this.account = account;
     this.config = config;
   }
 
   init() {
     return Promise.resolve();
   }
+
   unload() {
     return Promise.resolve();
+  }
+
+  get supportedMethods() {
+    return Object.keys(methods);
+  }
+
+  async requestMethod(
+    method: string,
+    args: Record<string, unknown>
+  ): Promise<{ data: unknown }> {
+    const methodDetails = methods[method];
+    if (!methodDetails) {
+      throw new Error(`${method} is not supported`);
+    }
+    const httpMethod = methodDetails.httpMethod;
+    let path = methodDetails.path;
+    // add path parameters from the args hash and remove those attributes from args
+    // e.g. pathTemplateParser('invoice/{{r_hash_str}}', {r_hash_str: 'foo'})
+    //   will return invoice/foo and delete r_hash_str from the args object;
+    path = pathTemplateParser(path, args);
+    const response = await this.request(httpMethod, path, args);
+
+    return {
+      data: response,
+    };
   }
 
   getInfo(): Promise<GetInfoResponse> {
@@ -58,6 +203,33 @@ class Lnd implements Connector {
 
   getBalance(): Promise<GetBalanceResponse> {
     return this.getChannelsBalance();
+  }
+
+  connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse> {
+    const { pubkey, host } = args;
+
+    return this.request<Record<string, never>>("POST", "/v1/peers", {
+      addr: {
+        pubkey,
+        host,
+      },
+      perm: true,
+    })
+      .then((data) => {
+        return {
+          data: true,
+        };
+      })
+      .catch((e) => {
+        // the request fails (HTTP 500), but if we are already connected we say it's a success
+        if (e.message.match(/already connected/)) {
+          return {
+            data: true,
+          };
+        } else {
+          throw new Error(e.message);
+        }
+      });
   }
 
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
@@ -86,8 +258,9 @@ class Lnd implements Connector {
       };
     });
   }
+
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
-    //See: https://gist.github.com/dellagustin/c3793308b75b6b0faf134e64db7dc915
+    // See: https://gist.github.com/dellagustin/c3793308b75b6b0faf134e64db7dc915
     const dest_pubkey_hex = args.pubkey;
     const dest_pubkey_base64 = Hex.parse(dest_pubkey_hex).toString(Base64);
 
@@ -161,19 +334,6 @@ class Lnd implements Connector {
     });
   }
 
-  verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse> {
-    return this.request<{ valid: boolean }>("POST", "/v1/verifymessage", {
-      msg: Base64.stringify(UTF8.parse(args.message)),
-      signature: args.signature,
-    }).then((data) => {
-      return {
-        data: {
-          valid: data.valid,
-        },
-      };
-    });
-  }
-
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
     return this.request<{ payment_request: string; r_hash: string }>(
       "POST",
@@ -223,23 +383,90 @@ class Lnd implements Connector {
     });
   };
 
-  getTransactions = () => {
-    return this.request("GET", "/v1/payments", undefined, {
-      transactions: [],
-    });
-  };
+  async getInvoices(): Promise<GetInvoicesResponse> {
+    const data = await this.request<{
+      invoices: {
+        add_index: string;
+        amt_paid_msat: string;
+        amt_paid_sat: string;
+        amt_paid: string;
+        cltv_expiry: string;
+        creation_date: string;
+        description_hash?: string;
+        expiry: string;
+        fallback_addr: string;
+        features: unknown[];
+        htlcs: {
+          chan_id: string;
+          htlc_index: string;
+          amt_msat: string;
+          accept_height: number;
+          accept_time: string;
+          resolve_time: string;
+          expiry_height: number;
+          state: "SETTLED";
+          custom_records: ConnectorInvoice["custom_records"];
+          mpp_total_amt_msat: string;
+          amp?: unknown;
+        }[];
+        is_keysend: boolean;
+        memo: string;
+        payment_addr: string;
+        payment_request: string;
+        private: boolean;
+        r_hash: string;
+        r_preimage: string;
+        route_hints: [];
+        settle_date: string;
+        settle_index: string;
+        settled: boolean;
+        state: string;
+        value_msat: string;
+        value: string;
+      }[];
+      last_index_offset: string;
+      first_index_offset: string;
+    }>("GET", "/v1/invoices", { reversed: true });
 
-  async request<Type>(
+    const invoices: ConnectorInvoice[] = data.invoices
+      .map((invoice, index): ConnectorInvoice => {
+        const custom_records =
+          invoice.htlcs[0] && invoice.htlcs[0].custom_records;
+
+        return {
+          custom_records,
+          id: `${invoice.payment_request}-${index}`,
+          memo: invoice.memo,
+          preimage: invoice.r_preimage,
+          settled: invoice.settled,
+          settleDate: parseInt(invoice.settle_date) * 1000,
+          totalAmount: invoice.value,
+          type: "received",
+        };
+      })
+      .sort((a, b) => {
+        return b.settleDate - a.settleDate;
+      });
+
+    return {
+      data: {
+        invoices,
+      },
+    };
+  }
+
+  protected async request<Type>(
     method: string,
     path: string,
     args?: Record<string, unknown>,
     defaultValues?: Record<string, unknown>
   ): Promise<Type> {
     const url = new URL(this.config.url);
-    url.pathname = path;
+    url.pathname = `${url.pathname.replace(/\/$/, "")}${path}`;
     let body = null;
     const headers = new Headers();
     headers.append("Accept", "application/json");
+
     if (method === "POST") {
       body = JSON.stringify(args);
       headers.append("Content-Type", "application/json");
@@ -268,13 +495,13 @@ class Lnd implements Connector {
           delete errBody.message;
         }
         if (!errBody.error) {
-          throw new Error();
+          throw new Error("Something went wrong");
         }
       } catch (err) {
         throw new Error(res.statusText);
       }
-      console.log("errBody", errBody);
-      throw errBody;
+      console.error(errBody);
+      throw new Error(errBody.error);
     }
     let data = await res.json();
     if (defaultValues) {

@@ -1,15 +1,13 @@
-import Lnd from "./lnd";
-
 import Native from "./Native";
+import Lnd from "./lnd";
 
 const NativeConnector = Native(Lnd);
 
 export default class NativeLnd extends NativeConnector {
-  request<Type>(
+  protected request<Type>(
     method: string,
     path: string,
-    args?: Record<string, string>,
-    defaultValues?: Record<string, unknown>
+    args?: Record<string, unknown>
   ): Promise<Type> {
     const url = new URL(this.config.url);
     url.pathname = path;
@@ -20,7 +18,9 @@ export default class NativeLnd extends NativeConnector {
       body = JSON.stringify(args) as string;
       headers["Content-Type"] = "application/json";
     } else if (args !== undefined) {
-      url.search = new URLSearchParams(args).toString();
+      url.search = new URLSearchParams(
+        args as Record<string, string>
+      ).toString();
     }
     if (this.config.macaroon) {
       headers["Grpc-Metadata-macaroon"] = this.config.macaroon;
@@ -39,10 +39,7 @@ export default class NativeLnd extends NativeConnector {
         if (response.status > 299) {
           reject(new Error(response.body));
         } else {
-          let data = JSON.parse(response.body);
-          if (defaultValues) {
-            data = Object.assign(Object.assign({}, defaultValues), data);
-          }
+          const data = JSON.parse(response.body);
           resolve(data);
         }
       };

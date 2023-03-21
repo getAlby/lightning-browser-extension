@@ -12,7 +12,7 @@
   "description": "Lightning up the browser",
   "homepage_url": "https://github.com/bumi",
   "short_name": "Lightning",
-  "web_accessible_resources": ["js/inpageScript.bundle.js"],
+  "web_accessible_resources": ["js/inpageScript.bundle.js", "js/inpageScriptWebLN.bundle.js"],
   "permissions": [
     "nativeMessaging",
     "notifications",
@@ -56,6 +56,14 @@
     "__firefox__browser_style": false
   },
 
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+A"
+      }
+    }
+  },
+
   "__chrome|opera__options_page": "options.html",
   "options_ui": {
     "page": "options.html",
@@ -76,7 +84,7 @@
       "https://*/*"
     ],
     "js": [
-      "js/contentScript.bundle.js"
+      "js/contentScriptOnEnd.bundle.js"
     ]
   }]
 }

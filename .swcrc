@@ -1,0 +1,21 @@
+{
+  "jsc": {
+    "parser": {
+      "syntax": "typescript",
+      "tsx": true
+    },
+    "transform": {
+      "react": {
+        "runtime": "automatic"
+      }
+    }
+  },
+  "env": {
+    "targets": [
+      "last 5 Chrome versions",
+      "last 5 Edge versions",
+      "last 5 Opera versions",
+      "last 5 Firefox versions"
+    ]
+  }
+}

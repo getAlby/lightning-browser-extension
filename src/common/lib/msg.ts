@@ -1,24 +1,25 @@
 import browser from "webextension-polyfill";
 
 const msg = {
-  request: (
-    type: string,
-    args?: { [key: string]: string | number },
-    overwrites?: { [key: string]: string }
+  request: <T = Record<string, unknown>>(
+    action: string,
+    args?: Record<string, unknown>,
+    overwrites?: Record<string, unknown>
   ) => {
     return browser.runtime
       .sendMessage({
         application: "LBE",
         prompt: true,
-        type: type,
+        action: action,
         args: args,
         origin: { internal: true },
         ...overwrites,
       })
-      .then((response) => {
+      .then((response: { data: T; error?: string }) => {
         if (response.error) {
           throw new Error(response.error);
         }
+
         return response.data;
       });
   },

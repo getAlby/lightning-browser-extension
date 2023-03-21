@@ -1,9 +1,12 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import utils from "~/common/lib/utils";
-import TextField from "@components/form/TextField";
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
+import TextField from "@components/form/TextField";
+import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
+import { useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import msg from "~/common/lib/msg";
 
 const initialFormData = Object.freeze({
   url: "",
@@ -12,8 +15,12 @@ const initialFormData = Object.freeze({
 
 export default function ConnectRaspiBlitz() {
   const navigate = useNavigate();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "choose_connector.raspiblitz",
+  });
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
+  const [hasTorSupport, setHasTorSupport] = useState(false);
 
   function handleUrl(event: React.ChangeEvent<HTMLInputElement>) {
     let url = event.target.value.trim();
@@ -34,7 +41,7 @@ export default function ConnectRaspiBlitz() {
   }
 
   function getConnectorType() {
-    if (formData.url.match(/\.onion/i)) {
+    if (formData.url.match(/\.onion/i) && !hasTorSupport) {
       return "nativelnd";
     }
     // default to LND
@@ -60,73 +67,95 @@ export default function ConnectRaspiBlitz() {
       if (account.connector === "nativelnd") {
         validation = { valid: true, error: "" };
       } else {
-        validation = await utils.call("validateAccount", account);
+        validation = await msg.request("validateAccount", account);
       }
 
       if (validation.valid) {
-        const addResult = await utils.call("addAccount", account);
+        const addResult = await msg.request("addAccount", account);
         if (addResult.accountId) {
-          await utils.call("selectAccount", {
+          await msg.request("selectAccount", {
             id: addResult.accountId,
           });
           navigate("/test-connection");
         }
       } else {
-        alert(`
-          Connection failed. Are your RaspiBlitz credentials correct? \n\n(${validation.error})`);
+        toast.error(
+          <ConnectionErrorToast
+            message={validation.error as string}
+            link={`${formData.url}/v1/getinfo`}
+          />
+        );
       }
     } catch (e) {
       console.error(e);
-      let message =
-        "Connection failed. Are your RaspiBlitz credentials correct?";
+      let message = "";
       if (e instanceof Error) {
-        message += `\n\n${e.message}`;
+        message += `${e.message}`;
       }
-      alert(message);
+      toast.error(<ConnectionErrorToast message={message} />);
     }
     setLoading(false);
   }
 
   return (
     <ConnectorForm
-      title="Connect to your RaspiBlitz node"
+      title={
+        <h1 className="mb-6 text-2xl font-bold dark:text-white">
+          <Trans
+            i18nKey={"page.title"}
+            t={t}
+            components={[
+              // eslint-disable-next-line react/jsx-key
+              <a className="underline" href="https://raspiblitz.org/"></a>,
+            ]}
+          />
+        </h1>
+      }
       description={
-        <p>
-          You need your node onion address, port, and a macaroon with read and
-          send permissions (e.g. admin.macaroon).
-          <br />
-          <br />
-          <strong>SSH</strong> into your <strong>RaspiBlitz</strong>.<br />
-          Run the command{" "}
-          <strong>sudo cat /mnt/hdd/tor/lndrest8080/hostname</strong>.
-          <br />
-          Copy and paste the <strong>.onion</strong> address in the input below.
-          <br />
-          Add your <strong>port</strong> after the onion address, the default
-          port is <strong>:8080</strong>.
-        </p>
+        <Trans
+          i18nKey={"page.instructions1"}
+          t={t}
+          components={[
+            // eslint-disable-next-line react/jsx-key
+            <strong></strong>,
+            // eslint-disable-next-line react/jsx-key
+            <br />,
+          ]}
+        />
       }
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
+      video="https://cdn.getalby-assets.com/connector-guides/in_extension_guide_raspiblitz.mp4"
     >
       <div className="mt-6">
         <TextField
           id="url"
-          label="REST API host"
-          placeholder="your-node-onion-address:port"
+          label={t("rest_api_host.label")}
+          placeholder={t("rest_api_host.placeholder")}
           onChange={handleUrl}
           required
         />
       </div>
-      {formData.url.match(/\.onion/i) && <CompanionDownloadInfo />}
+      {formData.url.match(/\.onion/i) && (
+        <CompanionDownloadInfo
+          hasTorCallback={(hasTor: boolean) => {
+            setHasTorSupport(hasTor);
+          }}
+        />
+      )}
       <div className="mt-6">
-        <p className="mb-6 text-gray-500 mt-6 dark:text-gray-400">
-          Select <b>CONNECT</b>.<br />
-          Select <b>EXPORT</b>.<br />
-          Select <b>HEX</b>.<br />
-          Copy the <b>adminMacaroon</b>.<br />
-          Paste the macaroon in the input below.
+        <p className="mb-6 text-gray-500 mt-6 dark:text-neutral-400">
+          <Trans
+            i18nKey={"page.instructions2"}
+            t={t}
+            components={[
+              // eslint-disable-next-line react/jsx-key
+              <b></b>,
+              // eslint-disable-next-line react/jsx-key
+              <br />,
+            ]}
+          />
         </p>
         <div>
           <TextField

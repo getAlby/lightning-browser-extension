@@ -1,5 +1,13 @@
-import { sendPaymentOrPrompt } from "./sendPaymentOrPrompt";
 import keysendOrPrompt from "./keysendOrPrompt";
+import lnurl from "./lnurl";
+import makeInvoiceOrPrompt from "./makeInvoiceOrPrompt";
+import { sendPaymentOrPrompt } from "./sendPaymentOrPrompt";
 import signMessageOrPrompt from "./signMessageOrPrompt";
 
-export { sendPaymentOrPrompt, keysendOrPrompt, signMessageOrPrompt };
+export {
+  sendPaymentOrPrompt,
+  keysendOrPrompt,
+  signMessageOrPrompt,
+  makeInvoiceOrPrompt,
+  lnurl,
+};

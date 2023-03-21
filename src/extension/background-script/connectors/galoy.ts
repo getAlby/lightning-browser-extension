@@ -1,20 +1,21 @@
-import axios from "axios";
-import { parsePaymentRequest } from "invoices";
-import { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
+import lightningPayReq from "bolt11";
+import { Account } from "~/types";
+
 import Connector, {
-  SendPaymentArgs,
-  SendPaymentResponse,
   CheckPaymentArgs,
   CheckPaymentResponse,
-  GetInfoResponse,
+  ConnectPeerResponse,
   GetBalanceResponse,
+  GetInfoResponse,
+  GetInvoicesResponse,
+  KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  SendPaymentArgs,
+  SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
-  VerifyMessageArgs,
-  VerifyMessageResponse,
-  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -24,9 +25,11 @@ interface Config {
 }
 
 class Galoy implements Connector {
+  account: Account;
   config: Config;
 
-  constructor(config: Config) {
+  constructor(account: Account, config: Config) {
+    this.account = account;
     this.config = config;
   }
 
@@ -36,6 +39,10 @@ class Galoy implements Connector {
 
   unload() {
     return Promise.resolve();
+  }
+
+  get supportedMethods() {
+    return ["getInfo", "makeInvoice", "sendPayment", "signMessage"];
   }
 
   getInfo(): Promise<GetInfoResponse> {
@@ -64,6 +71,24 @@ class Galoy implements Connector {
         },
       };
     });
+  }
+
+  // not yet implemented
+  async connectPeer(): Promise<ConnectPeerResponse> {
+    console.error(
+      `${this.constructor.name} does not implement the getInvoices call`
+    );
+    throw new Error("Not yet supported with the currently used account.");
+  }
+
+  // not yet implemented
+  async getInvoices(): Promise<GetInvoicesResponse> {
+    console.error(
+      `Not yet supported with the currently used account: ${this.constructor.name}`
+    );
+    throw new Error(
+      `${this.constructor.name}: "getInvoices" is not yet supported. Contact us if you need it.`
+    );
   }
 
   getBalance(): Promise<GetBalanceResponse> {
@@ -124,9 +149,9 @@ class Galoy implements Connector {
       },
     };
 
-    const { tokens: amountInSats, id: paymentHash } = parsePaymentRequest({
-      request: args.paymentRequest,
-    });
+    const paymentRequestDetails = lightningPayReq.decode(args.paymentRequest);
+    const amountInSats = paymentRequestDetails.satoshis || 0;
+    const paymentHash = paymentRequestDetails.tagsObject.payment_hash || "";
 
     return this.request(query).then(({ data, errors }) => {
       const errs = errors || data.lnInvoicePaymentSend.errors;
@@ -266,10 +291,6 @@ class Galoy implements Connector {
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
-    return Promise.reject(new Error("Not yet supported with Galoy."));
-  }
-
-  verifyMessage(args: VerifyMessageArgs): Promise<VerifyMessageResponse> {
     return Promise.reject(new Error("Not yet supported with Galoy."));
   }
 

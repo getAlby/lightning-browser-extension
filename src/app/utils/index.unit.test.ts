@@ -5,7 +5,7 @@ test("joins classNames together", () => {
   const smallText = false;
   expect(
     classNames(
-      "p-4 block" || "",
+      "p-4 block",
       "bg-blue-200",
       largeText && "text-3xl",
       smallText && "text-xs",

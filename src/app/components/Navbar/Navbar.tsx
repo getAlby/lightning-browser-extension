@@ -2,24 +2,22 @@ import AccountMenu from "../AccountMenu";
 import UserMenu from "../UserMenu";
 
 type Props = {
-  title: string;
-  subtitle: string;
   children?: React.ReactNode;
 };
 
-export default function Navbar({ title, subtitle, children }: Props) {
+export default function Navbar({ children }: Props) {
   return (
-    <div className="px-4 py-2 bg-white flex justify-between items-center border-b border-gray-200 dark:bg-gray-800 dark:border-gray-500">
-      <div className="flex w-8/12 md:w-4/12 lg:w-3/12">
-        <AccountMenu title={title} subtitle={subtitle} />
-      </div>
-      {children && (
-        <div>
-          <nav className="flex space-x-8">{children}</nav>
+    <div className="px-4 py-2 bg-white border-b border-gray-200 dark:bg-surface-01dp dark:border-white/10">
+      <div className="max-w-screen-lg flex justify-between items-center mx-auto w-full">
+        <div className="flex">
+          <UserMenu />
+          {children && (
+            <nav className="ml-4 space-x-4 lg:ml-4 lg:space-x-8 hidden md:flex">
+              {children}
+            </nav>
+          )}
         </div>
-      )}
-      <div className="md:w-4/12 lg:w-3/12 flex justify-end items-center">
-        <UserMenu />
+        <AccountMenu />
       </div>
     </div>
   );

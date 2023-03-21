@@ -1,21 +1,26 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-
-import utils from "~/common/lib/utils";
-
-import Input from "@components/form/Input";
 import ConnectorForm from "@components/ConnectorForm";
+import Input from "@components/form/Input";
+import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
+import axios from "axios";
+import { useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import msg from "~/common/lib/msg";
 
 export const galoyUrls = {
   "galoy-bitcoin-beach": {
+    i18nPrefix: "bitcoin_beach",
     label: "Bitcoin Beach Wallet",
+    website: "https://galoy.io/bitcoin-beach-wallet/",
     url:
       process.env.BITCOIN_BEACH_GALOY_URL ||
       "https://api.mainnet.galoy.io/graphql/",
   },
   "galoy-bitcoin-jungle": {
+    i18nPrefix: "bitcoin_jungle",
     label: "Bitcoin Jungle Wallet",
+    website: "https://bitcoinjungle.app/",
     url:
       process.env.BITCOIN_JUNGLE_GALOY_URL ||
       "https://api.mainnet.bitcoinjungle.app/graphql",
@@ -34,13 +39,20 @@ type Props = {
 
 export default function ConnectGaloy(props: Props) {
   const { instance } = props;
-  const { url, label } = galoyUrls[instance];
+  const { url, label, website, i18nPrefix } = galoyUrls[instance];
 
   const navigate = useNavigate();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "choose_connector",
+  });
   const [loading, setLoading] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [smsCode, setSmsCode] = useState<string | undefined>();
   const [smsCodeRequested, setSmsCodeRequested] = useState<
+    boolean | undefined
+  >();
+  const [jwt, setJwt] = useState<string | undefined>();
+  const [acceptJwtDirectly, setAcceptJwtDirectly] = useState<
     boolean | undefined
   >();
 
@@ -50,6 +62,10 @@ export default function ConnectGaloy(props: Props) {
 
   function handleSmsCodeChange(event: React.ChangeEvent<HTMLInputElement>) {
     setSmsCode(event.target.value.trim());
+  }
+
+  function handleJwtChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setJwt(event.target.value.trim());
   }
 
   async function requestSmsCode(event: React.FormEvent<HTMLFormElement>) {
@@ -83,17 +99,23 @@ export default function ConnectGaloy(props: Props) {
       if (errs && errs.length) {
         console.error(errs);
         const errMessage = errs[0].message;
-        const alertMsg = `Failed to request a SMS code${
-          errMessage ? `: ${errMessage}` : ""
-        }`;
-        alert(alertMsg);
+
+        const captchaRegex = /use captcha/;
+        if (errMessage.match(captchaRegex)) {
+          setAcceptJwtDirectly(true);
+        } else {
+          const alertMsg = `${t("galoy.errors.failed_to_request_sms")}${
+            errMessage ? `: ${errMessage}` : ""
+          }`;
+          toast.error(alertMsg);
+        }
       } else {
         setSmsCodeRequested(data.userRequestAuthCode.success);
       }
     } catch (e: unknown) {
       console.error(e);
       if (e instanceof Error) {
-        alert(`Failed to request a SMS code: ${e.message}`);
+        toast.error(`${t("galoy.errors.failed_to_request_sms")}: ${e.message}`);
       }
     } finally {
       setLoading(false);
@@ -139,7 +161,7 @@ export default function ConnectGaloy(props: Props) {
       if (authData.error || authData.errors) {
         const error = authData.error || authData.errors;
         const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
-        const errorMsg = `Failed to login with SMS code${
+        const errorMsg = `${t("galoy.errors.failed_to_login_sms")}${
           errMessage ? `: ${errMessage}` : ""
         }`;
         throw new Error(errorMsg);
@@ -159,8 +181,10 @@ export default function ConnectGaloy(props: Props) {
         const error = meData.error || meData.errors;
         console.error(error);
         const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
-        const alertMsg = `Setup failed${errMessage ? `: ${errMessage}` : ""}`;
-        alert(alertMsg);
+        const alertMsg = `${t("galoy.errors.setup_failed")}${
+          errMessage ? `: ${errMessage}` : ""
+        }`;
+        toast.error(alertMsg);
       } else {
         const walletId = meData.data.me.defaultAccount.defaultWalletId;
         saveAccount({ authToken, walletId });
@@ -168,7 +192,63 @@ export default function ConnectGaloy(props: Props) {
     } catch (e: unknown) {
       console.error(e);
       if (e instanceof Error) {
-        alert(`Setup failed: ${e.message}`);
+        toast.error(`${t("galoy.errors.setup_failed")}: ${e.message}`);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function loginWithJwt(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setLoading(true);
+    const meQuery = {
+      query: `
+          query getinfo {
+            me {
+              defaultAccount {
+                defaultWalletId
+              }
+            }
+          }
+        `,
+    };
+    try {
+      if (!jwt) {
+        const errorMsg = `${t("galoy.errors.missing_jwt")}`;
+        throw new Error(errorMsg);
+      }
+      const authToken = jwt;
+
+      const { data: meData } = await axios.post(url, meQuery, {
+        headers: {
+          ...defaultHeaders,
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+      if (meData.error || meData.errors) {
+        const error = meData.error || meData.errors;
+        console.error(error);
+        const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
+        const alertMsg = `${t("galoy.errors.setup_failed")}${
+          errMessage ? `: ${errMessage}` : ""
+        }`;
+        toast.error(alertMsg);
+      } else {
+        const walletId = meData.data.me.defaultAccount.defaultWalletId;
+        saveAccount({ authToken, walletId });
+      }
+    } catch (e: unknown) {
+      console.error(e);
+      if (e instanceof Error) {
+        const unauthedRegex = /status code 401/;
+        toast.error(
+          `${t("galoy.errors.setup_failed")}: ${
+            e.message.match(unauthedRegex)
+              ? `${t("galoy.errors.invalid_jwt")}`
+              : e.message
+          }`
+        );
       }
     } finally {
       setLoading(false);
@@ -189,22 +269,24 @@ export default function ConnectGaloy(props: Props) {
     };
 
     try {
-      const validation = await utils.call("validateAccount", account);
+      const validation = await msg.request("validateAccount", account);
       if (validation.valid) {
-        const addResult = await utils.call("addAccount", account);
+        const addResult = await msg.request("addAccount", account);
         if (addResult.accountId) {
-          await utils.call("selectAccount", {
+          await msg.request("selectAccount", {
             id: addResult.accountId,
           });
           navigate("/test-connection");
         }
       } else {
-        alert(`Connection failed (${validation.error})`);
+        toast.error(
+          <ConnectionErrorToast message={validation.error as string} />
+        );
       }
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        alert(`Connection failed (${e.message})`);
+        toast.error(<ConnectionErrorToast message={e.message} />);
       }
     } finally {
       setLoading(false);
@@ -213,38 +295,98 @@ export default function ConnectGaloy(props: Props) {
 
   return (
     <ConnectorForm
-      title={`Connect to ${label}`}
-      submitLabel={smsCodeRequested || smsCode ? "Login" : "Request SMS Code"}
+      title={
+        <h1 className="mb-6 text-2xl font-bold dark:text-white">
+          <Trans
+            i18nKey={`${i18nPrefix}.page.title`}
+            t={t}
+            components={[
+              // eslint-disable-next-line react/jsx-key
+              <a className="underline" href={website}></a>,
+            ]}
+          />
+        </h1>
+      }
+      submitLabel={
+        smsCodeRequested || smsCode || acceptJwtDirectly || jwt
+          ? t("galoy.actions.login")
+          : t("galoy.actions.request_sms_code")
+      }
       submitLoading={loading}
       submitDisabled={!phoneNumber}
-      onSubmit={smsCodeRequested || smsCode ? requestAuthToken : requestSmsCode}
+      onSubmit={
+        smsCodeRequested || smsCode
+          ? requestAuthToken
+          : acceptJwtDirectly || jwt
+          ? loginWithJwt
+          : requestSmsCode
+      }
     >
-      <div>
-        <label htmlFor="adminkey" className="block font-medium text-gray-700">
-          Enter your phone number
-        </label>
-        <div className="mt-1">
-          <Input
-            name="phone"
-            type="tel"
-            required
-            placeholder="+503"
-            disabled={smsCodeRequested}
-            onChange={handlePhoneNumberChange}
-          />
-        </div>
-      </div>
-      {smsCodeRequested && (
+      {!acceptJwtDirectly && (
         <div>
-          <label htmlFor="url" className="block font-medium text-gray-700">
-            Enter your SMS verifcation code
+          <label
+            htmlFor="phone"
+            className="block font-medium text-gray-700 dark:text-white"
+          >
+            {t("galoy.phone_number.label")}
           </label>
           <div className="mt-1">
             <Input
+              id="phone"
+              name="phone"
+              type="tel"
+              required
+              placeholder="+503"
+              disabled={smsCodeRequested}
+              onChange={handlePhoneNumberChange}
+            />
+          </div>
+        </div>
+      )}
+      {smsCodeRequested && (
+        <div className="mt-6">
+          <label htmlFor="2fa" className="block font-medium text-gray-700">
+            {t("galoy.sms_code.label")}
+          </label>
+          <div className="mt-1">
+            <Input
+              id="2fa"
               name="2fa"
               type="text"
               required
               onChange={handleSmsCodeChange}
+            />
+          </div>
+        </div>
+      )}
+      {acceptJwtDirectly && (
+        <div className="mt-6">
+          <Trans
+            i18nKey={"galoy.jwt.info"}
+            t={t}
+            values={{ label }}
+            components={[
+              // eslint-disable-next-line react/jsx-key
+              <a
+                href="https://wallet.mainnet.galoy.io"
+                className="underline"
+              ></a>,
+              // eslint-disable-next-line react/jsx-key
+              <br />,
+              // eslint-disable-next-line react/jsx-key
+              <b></b>,
+            ]}
+          />
+          <label htmlFor="jwt" className="block font-medium text-gray-700">
+            {t("galoy.jwt.label")}
+          </label>
+          <div className="mt-1">
+            <Input
+              id="jwt"
+              name="jwt"
+              type="text"
+              required
+              onChange={handleJwtChange}
             />
           </div>
         </div>

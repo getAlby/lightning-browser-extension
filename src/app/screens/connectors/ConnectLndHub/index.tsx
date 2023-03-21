@@ -1,19 +1,30 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-import utils from "~/common/lib/utils";
-
+import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import QrcodeScanner from "@components/QrcodeScanner";
 import TextField from "@components/form/TextField";
-import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
+import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import msg from "~/common/lib/msg";
 
-export default function ConnectLndHub() {
+export type Props = {
+  lndHubType?: "lndhub_bluewallet" | "lndhub_go";
+};
+
+export default function ConnectLndHub({
+  lndHubType = "lndhub_bluewallet",
+}: Props) {
   const navigate = useNavigate();
+  const { t } = useTranslation("translation", {
+    keyPrefix: `choose_connector.${lndHubType}`,
+  });
   const [formData, setFormData] = useState({
     uri: "",
   });
   const [loading, setLoading] = useState(false);
+  const [hasTorSupport, setHasTorSupport] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -23,7 +34,7 @@ export default function ConnectLndHub() {
   }
 
   function getConnectorType() {
-    if (formData.uri.match(/\.onion/i)) {
+    if (formData.uri.match(/\.onion/i) && !hasTorSupport) {
       return "nativelndhub";
     }
     // default to LndHub
@@ -35,7 +46,7 @@ export default function ConnectLndHub() {
     setLoading(true);
     const match = formData.uri.match(/lndhub:\/\/(\S+):(\S+)@(\S+)/i);
     if (!match) {
-      alert("Invalid LNDHub URI");
+      toast.error(t("errors.invalid_uri"));
       setLoading(false);
       return;
     }
@@ -43,7 +54,7 @@ export default function ConnectLndHub() {
     const password = match[2];
     const url = match[3].replace(/\/$/, "");
     const account = {
-      name: "LNDHub",
+      name: lndHubType === "lndhub_bluewallet" ? "Bluewallet" : "LNDHub",
       config: {
         login,
         password,
@@ -58,40 +69,38 @@ export default function ConnectLndHub() {
       if (account.connector === "nativelndhub") {
         validation = { valid: true, error: "" };
       } else {
-        validation = await utils.call("validateAccount", account);
+        validation = await msg.request("validateAccount", account);
       }
 
       if (validation.valid) {
-        const addResult = await utils.call("addAccount", account);
+        const addResult = await msg.request("addAccount", account);
         if (addResult.accountId) {
-          await utils.call("selectAccount", {
+          await msg.request("selectAccount", {
             id: addResult.accountId,
           });
           navigate("/test-connection");
         }
       } else {
-        console.log(validation);
-        alert(
-          `Connection failed. Is your LNDHub URI correct? \n\n(${validation.error})`
+        console.error(validation);
+        toast.error(
+          <ConnectionErrorToast message={validation.error as string} />
         );
       }
     } catch (e) {
       console.error(e);
-      let message = "Connection failed. Is your LNDHub URI correct?";
+      let message = t("errors.connection_failed");
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
-      alert(message);
+      toast.error(message);
     }
     setLoading(false);
   }
 
   return (
     <ConnectorForm
-      title="Connect to LNDHub (BlueWallet)"
-      description='In BlueWallet, choose the wallet you want to connect, open it, click
-      on "...", click on Export/Backup to display the QR code
-      and scan it with your webcam.'
+      title={t("page.title")}
+      description={t("page.description")}
       submitLoading={loading}
       submitDisabled={formData.uri === ""}
       onSubmit={handleSubmit}
@@ -99,7 +108,7 @@ export default function ConnectLndHub() {
       <div className="mb-6">
         <TextField
           id="uri"
-          label="LNDHub Export URI"
+          label={t("uri.label")}
           type="text"
           required
           placeholder="lndhub://..."
@@ -111,7 +120,11 @@ export default function ConnectLndHub() {
       </div>
       {formData.uri.match(/\.onion/i) && (
         <div className="mb-6">
-          <CompanionDownloadInfo />
+          <CompanionDownloadInfo
+            hasTorCallback={(hasTor: boolean) => {
+              setHasTorSupport(hasTor);
+            }}
+          />
         </div>
       )}
       <div>

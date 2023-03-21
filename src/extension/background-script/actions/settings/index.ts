@@ -1,4 +1,5 @@
-import set from "./set";
+import changePassword from "./changePassword";
 import get from "./get";
+import set from "./set";
 
-export { set, get };
+export { changePassword, set, get };

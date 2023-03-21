@@ -1,62 +1,70 @@
+import merge from "lodash.merge";
+import pick from "lodash.pick";
 import browser from "webextension-polyfill";
 import createState from "zustand";
-import merge from "lodash/merge";
-import pick from "lodash/pick";
-
+import { DEFAULT_SETTINGS } from "~/common/constants";
 import { decryptData } from "~/common/lib/crypto";
+import { Migration } from "~/extension/background-script/migrations";
+import type { Account, Accounts, SettingsStorage } from "~/types";
+
 import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
-import type { Account, Accounts, SettingsStorage } from "~/types";
-import i18n from "~/i18n/i18nConfig";
+import Nostr from "./nostr";
 
 interface State {
-  connector: Connector | null;
   account: Account | null;
-  settings: SettingsStorage;
   accounts: Accounts;
+  migrations: Migration[] | null;
+  connector: Connector | null;
   currentAccountId: string | null;
-  password: string | null;
+  nostrPrivateKey: string | null;
+  nostr: Nostr | null;
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
-  lock: () => Promise<void>;
+  getNostr: () => Nostr;
   init: () => Promise<void>;
+  isUnlocked: () => boolean;
+  lock: () => Promise<void>;
+  password: string | null;
   saveToStorage: () => Promise<void>;
+  settings: SettingsStorage;
+  reset: () => Promise<void>;
 }
 
 interface BrowserStorage {
   settings: SettingsStorage;
   accounts: Accounts;
   currentAccountId: string | null;
+  migrations: Migration[] | null;
+  nostrPrivateKey: string | null;
 }
-
-export const DEFAULT_SETTINGS = {
-  websiteEnhancements: true,
-  legacyLnurlAuth: false,
-  userName: "",
-  userEmail: "",
-  locale: i18n.resolvedLanguage,
-  theme: "system",
-};
 
 // these keys get synced from the state to the browser storage
 // the values are the default values
 const browserStorageDefaults: BrowserStorage = {
-  settings: DEFAULT_SETTINGS,
+  settings: { ...DEFAULT_SETTINGS }, // duplicate DEFALT_SETTINGS
   accounts: {},
   currentAccountId: null,
+  migrations: [],
+  nostrPrivateKey: null,
 };
 
 const browserStorageKeys = Object.keys(browserStorageDefaults) as Array<
   keyof BrowserStorage
 >;
 
+let storage: "sync" | "local" = "sync";
+
 const state = createState<State>((set, get) => ({
   connector: null,
   account: null,
   settings: DEFAULT_SETTINGS,
+  migrations: [],
   accounts: {},
   currentAccountId: null,
   password: null,
+  nostr: null,
+  nostrPrivateKey: null,
   getAccount: () => {
     const currentAccountId = get().currentAccountId as string;
     let account = null;
@@ -75,26 +83,66 @@ const state = createState<State>((set, get) => ({
     const password = get().password as string;
     const config = decryptData(account.config as string, password);
 
-    const connector = new connectors[account.connector](config);
+    const connector = new connectors[account.connector](account, config);
     await connector.init();
 
     set({ connector: connector });
 
     return connector;
   },
+  getNostr: () => {
+    if (get().nostr) {
+      return get().nostr as Nostr;
+    }
+    const currentAccountId = get().currentAccountId as string;
+    const account = get().accounts[currentAccountId];
+
+    const password = get().password as string;
+    const privateKey = decryptData(account.nostrPrivateKey as string, password);
+
+    const nostr = new Nostr(privateKey);
+    set({ nostr: nostr });
+
+    return nostr;
+  },
   lock: async () => {
+    const allTabs = browser.extension.getViews({ type: "tab" });
+    for (const tab of allTabs) {
+      tab.close();
+    }
     const connector = get().connector;
     if (connector) {
-      connector.unload();
+      await connector.unload();
     }
-    set({ password: null, connector: null, account: null });
+    set({ password: null, connector: null, account: null, nostr: null });
+  },
+  isUnlocked: () => {
+    return get().password !== null;
   },
   init: () => {
-    return browser.storage.sync.get(browserStorageKeys).then((result) => {
-      // Deep merge to ensure that nested defaults are also merged instead of overwritten.
-      const data = merge(browserStorageDefaults, result as BrowserStorage);
-      set(data);
-    });
+    return browser.storage.sync
+      .get(browserStorageKeys)
+      .then((result) => {
+        // Deep merge to ensure that nested defaults are also merged instead of overwritten.
+        const data = merge(browserStorageDefaults, result as BrowserStorage);
+        set(data);
+      })
+      .catch((e) => {
+        console.info("storage.sync is not available. using storage.local");
+        storage = "local";
+        return browser.storage.local.get("__sync").then((result) => {
+          // Deep merge to ensure that nested defaults are also merged instead of overwritten.
+          const data = merge(
+            browserStorageDefaults,
+            result.mockSync as BrowserStorage
+          );
+          set(data);
+        });
+      });
+  },
+  reset: async () => {
+    set({ ...browserStorageDefaults });
+    get().saveToStorage();
   },
   saveToStorage: () => {
     const current = get();
@@ -102,26 +150,15 @@ const state = createState<State>((set, get) => ({
       ...browserStorageDefaults,
       ...pick(current, browserStorageKeys),
     };
-    return browser.storage.sync.set(data);
+
+    if (storage === "sync") {
+      return browser.storage.sync.set(data);
+    } else {
+      // because there's an overlap with accounts being stored in
+      // the local storage, see src/common/lib/cache.ts
+      return browser.storage.local.set({ __sync: data });
+    }
   },
 }));
-
-browserStorageKeys.forEach((key) => {
-  console.log(`Adding state subscription for ${key}`);
-  state.subscribe(
-    (newValue, previousValue) => {
-      //if (previous && Object.keys(previous) > 0) {
-      const data = { [key]: newValue };
-      return browser.storage.sync.set(data);
-      //}
-      //return Promise.resolve();
-    },
-    (state) => state[key],
-    (newValue, previousValue) => {
-      // NOTE: using JSON.stringify to compare objects
-      return JSON.stringify(newValue) === JSON.stringify(previousValue);
-    }
-  );
-});
 
 export default state;

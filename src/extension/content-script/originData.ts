@@ -75,6 +75,14 @@ const metaDataRules: Record<string, RuleSet> = {
   description: {
     rules: [
       [
+        'meta[property="alby:description"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
+        'meta[name="alby:description"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
         'meta[property="og:description"][content]',
         (element) => element.getAttribute("content"),
       ],
@@ -189,6 +197,14 @@ const metaDataRules: Record<string, RuleSet> = {
   },
   provider: {
     rules: [
+      [
+        'meta[property="alby:name"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
+        'meta[name="alby:name"][content]',
+        (element) => element.getAttribute("content"),
+      ],
       [
         'meta[property="og:site_name"][content]',
         (element) => element.getAttribute("content"),
@@ -491,6 +507,14 @@ const metaDataRules: Record<string, RuleSet> = {
   image: {
     rules: [
       [
+        'meta[property="alby:image"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
+        'meta[name="alby:image"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
         'meta[property="og:image:secure_url"][content]',
         (element) => element.getAttribute("content"),
       ],
@@ -579,6 +603,14 @@ const metaDataRules: Record<string, RuleSet> = {
   icon: {
     rules: [
       [
+        'meta[property="alby:image"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
+        'meta[name="alby:image"][content]',
+        (element) => element.getAttribute("content"),
+      ],
+      [
         'link[rel="apple-touch-icon"][href]',
         (element) => element.getAttribute("href"),
       ],
@@ -586,7 +618,6 @@ const metaDataRules: Record<string, RuleSet> = {
         'link[rel="apple-touch-icon-precomposed"][href]',
         (element) => element.getAttribute("href"),
       ],
-      ['link[rel="icon" i][href]', (element) => element.getAttribute("href")],
       [
         'link[rel="fluid-icon"][href]',
         (element) => element.getAttribute("href"),
@@ -603,20 +634,8 @@ const metaDataRules: Record<string, RuleSet> = {
         'link[rel="mask-icon"][href]',
         (element) => element.getAttribute("href"),
       ],
+      ['link[rel="icon" i][href]', (element) => element.getAttribute("href")],
     ],
-    scorer: (element) => {
-      const sizes = element.getAttribute("sizes");
-      if (sizes) {
-        const sizeMatches = sizes.match(/\d+/g);
-        if (sizeMatches) {
-          const parsed = parseInt(sizeMatches[0]);
-          if (!isNaN(parsed)) {
-            return parsed;
-          }
-        }
-      }
-    },
-    defaultValue: (context) => makeUrlAbsolute(context.url, "/favicon.ico"),
     processor: (iconUrl, context) =>
       context.options.forceImageHttps === true
         ? makeUrlSecure(makeUrlAbsolute(context.url, iconUrl))
@@ -625,6 +644,10 @@ const metaDataRules: Record<string, RuleSet> = {
   monetization: {
     rules: [
       ['meta[name="lightning"]', (element) => element.getAttribute("content")],
+      [
+        'meta[property="lightning"]',
+        (element) => element.getAttribute("content"),
+      ],
     ],
     processor: (text) => text.toLowerCase(),
   },
@@ -718,7 +741,7 @@ export default function getOriginData(): OriginData {
     pathname: window.location.pathname,
     name: metaData.provider || metaData.title || "",
     description: metaData.description || "",
-    icon: metaData.image || metaData.icon || "",
+    icon: metaData.icon || metaData.image || "",
     metaData: metaData,
     external: true, // indicate that the call is coming from the website (and not made internally within the extension)
   };

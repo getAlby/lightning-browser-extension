@@ -14,14 +14,16 @@ export default function Card({
   currency,
 }: Props) {
   return (
-    <div className={`${color} h-36 rounded-lg pt-6 dark:bg-gray-600`}>
+    <div className={`${color} rounded-lg py-6 dark:bg-gray-600`}>
       <p className="font-normal text-black ml-6 dark:text-white">{alias}</p>
       <p className="text-2xl font-bold text-black ml-6 mt-2 dark:text-white">
         {satoshis}
       </p>
-      <p className="font-normal text-white ml-6 mt-1">
-        {fiat} {currency}
-      </p>
+      {fiat && currency && (
+        <p className="font-normal text-white ml-6 mt-1">
+          {fiat} {currency}
+        </p>
+      )}
     </div>
   );
 }

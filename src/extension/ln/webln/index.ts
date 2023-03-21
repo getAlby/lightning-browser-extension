@@ -43,15 +43,6 @@ export default class WebLNProvider {
     return this.execute("getInfo");
   }
 
-  getTransactions() {
-    if (!this.enabled) {
-      throw new Error(
-        "Provider must be enabled before calling getTransactions"
-      );
-    }
-    return this.execute("getTransactions");
-  }
-
   lnurl(lnurlEncoded: string) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling lnurl");
@@ -96,13 +87,23 @@ export default class WebLNProvider {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling verifyMessage");
     }
-
-    return this.execute("verifyMessage", { signature, message });
+    throw new Error("Alby does not support `verifyMessage`");
   }
 
-  // NOTE: new call `type`s must be specified also in the content script
+  request(method: string, params: Record<string, unknown>) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling request");
+    }
+
+    return this.execute("request", {
+      method,
+      params,
+    });
+  }
+
+  // NOTE: new call `action`s must be specified also in the content script
   execute(
-    type: string,
+    action: string,
     args?: Record<string, unknown>
   ): Promise<Record<string, unknown>> {
     return new Promise((resolve, reject) => {
@@ -112,8 +113,8 @@ export default class WebLNProvider {
         {
           application: "LBE",
           prompt: true,
-          //action: `webln/${type}`, // TODO: think about a convention to call the actions
-          type: `${type}`,
+          action: `webln/${action}`,
+          scope: "webln",
           args,
         },
         "*" // TODO use origin
@@ -125,7 +126,8 @@ export default class WebLNProvider {
         if (
           !messageEvent.data ||
           !messageEvent.data.response ||
-          messageEvent.data.application !== "LBE"
+          messageEvent.data.application !== "LBE" ||
+          messageEvent.data.scope !== "webln"
         ) {
           return;
         }

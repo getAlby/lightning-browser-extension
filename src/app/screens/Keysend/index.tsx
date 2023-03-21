@@ -1,41 +1,59 @@
-import { Fragment, useState, MouseEvent } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
 import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-
-import utils from "~/common/lib/utils";
-import { useAuth } from "~/app/context/AuthContext";
-
-import Input from "@components/form/Input";
+import Button from "@components/Button";
+import ConfirmOrCancel from "@components/ConfirmOrCancel";
+import ContentMessage from "@components/ContentMessage";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
-import Button from "@components/Button";
-import SuccessMessage from "@components/SuccessMessage";
+import PublisherCard from "@components/PublisherCard";
+import ResultCard from "@components/ResultCard";
 import SatButtons from "@components/SatButtons";
+import DualCurrencyField from "@components/form/DualCurrencyField";
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Container from "~/app/components/Container";
+import { useAccount } from "~/app/context/AccountContext";
+import { useSettings } from "~/app/context/SettingsContext";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
+import msg from "~/common/lib/msg";
 
-type Props = {
-  destination?: string;
-  customRecords?: Record<string, string>;
-  valueSat?: string;
-};
-
-function Keysend(props: Props) {
-  const [searchParams] = useSearchParams();
+function Keysend() {
+  const {
+    isLoading: isLoadingSettings,
+    settings,
+    getFormattedFiat,
+    getFormattedSats,
+  } = useSettings();
+  const showFiat = !isLoadingSettings && settings.showFiat;
+  const navState = useNavigationState();
   const navigate = useNavigate();
-  const auth = useAuth();
-  const [amount, setAmount] = useState(props.valueSat || "");
-  const [customRecords] = useState(props.customRecords || {});
-  const [destination] = useState(
-    props.destination || searchParams.get("destination")
-  );
+  const auth = useAccount();
+  const [amountSat, setAmountSat] = useState(navState.args?.amount || "");
+  const customRecords = navState.args?.customRecords;
+  const destination = navState.args?.destination as string;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [fiatAmount, setFiatAmount] = useState("");
+
+  const { t } = useTranslation("translation", { keyPrefix: "keysend" });
+  const { t: tCommon } = useTranslation("common");
+
+  useEffect(() => {
+    (async () => {
+      if (amountSat !== "" && showFiat) {
+        const res = await getFormattedFiat(amountSat);
+        setFiatAmount(res);
+      }
+    })();
+  }, [amountSat, showFiat, getFormattedFiat]);
 
   async function confirm() {
     try {
       setLoading(true);
-      const payment = await utils.call(
+      const payment = await msg.request(
         "keysend",
-        { destination, amount, customRecords },
+        { destination, amount: amountSat, customRecords },
         {
           origin: {
             name: destination,
@@ -43,50 +61,43 @@ function Keysend(props: Props) {
         }
       );
 
-      setSuccessMessage(`Payment sent! Preimage: ${payment.preimage}`);
+      setSuccessMessage(
+        t("success", {
+          preimage: payment.preimage,
+        })
+      );
 
       auth.fetchAccountInfo(); // Update balance.
     } catch (e) {
-      console.log(e);
+      console.error(e);
       if (e instanceof Error) {
-        alert(`Error: ${e.message}`);
+        toast.error(`Error: ${e.message}`);
       }
     } finally {
       setLoading(false);
     }
   }
 
-  function reject(e: MouseEvent) {
+  function reject(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     navigate(-1);
   }
 
-  function renderAmount() {
-    return (
-      <div className="mt-1 flex flex-col">
-        <Input
-          type="number"
-          min={+0 / 1000}
-          max={+1000000 / 1000}
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-        <SatButtons onClick={setAmount} />
-      </div>
-    );
+  function close(e: React.MouseEvent<HTMLButtonElement>) {
+    // will never be reached via prompt
+    e.preventDefault();
+    navigate(-1);
   }
 
-  function elements() {
-    const elements = [];
-    elements.push(["Send payment to", destination]);
-    elements.push(["Amount (Satoshi)", renderAmount()]);
-    return elements;
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    confirm();
   }
 
   return (
-    <div>
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <Header
-        title="Send"
+        title={t("title")}
         headerLeft={
           <IconButton
             onClick={() => navigate("/send")}
@@ -94,44 +105,60 @@ function Keysend(props: Props) {
           />
         }
       />
-      <div className="p-4 max-w-screen-sm mx-auto">
-        {!successMessage ? (
-          <>
-            <dl className="shadow bg-white dark:bg-gray-700 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-              {elements().map(([t, d], i) => (
-                <Fragment key={`element-${i}`}>
-                  <dt className="text-sm font-semibold text-gray-500">{t}</dt>
-                  <dd className="text-sm mb-4 dark:text-white break-all">
-                    {d}
-                  </dd>
-                </Fragment>
-              ))}
-            </dl>
-            <div className="text-center">
-              <div className="mb-5">
-                <Button
-                  onClick={confirm}
-                  label="Confirm"
-                  fullWidth
-                  primary
-                  loading={loading}
-                  disabled={loading || !amount}
+      {!successMessage ? (
+        <>
+          <form onSubmit={handleSubmit} className="h-full">
+            <Container justifyBetween maxWidth="sm">
+              <div>
+                {destination && <PublisherCard title={destination} />}
+                <ContentMessage
+                  heading={t("receiver.label")}
+                  content={destination}
                 />
+                <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden">
+                  <DualCurrencyField
+                    id="amount"
+                    label={t("amount.label")}
+                    min={1}
+                    onChange={(e) => setAmountSat(e.target.value)}
+                    value={amountSat}
+                    fiatValue={fiatAmount}
+                  />
+                  <SatButtons onClick={setAmountSat} />
+                </div>
               </div>
-
-              <a
-                className="underline text-sm text-gray-500"
-                href="#"
-                onClick={reject}
-              >
-                Cancel
-              </a>
-            </div>
-          </>
-        ) : (
-          <SuccessMessage message={successMessage} onClose={reject} />
-        )}
-      </div>
+              <ConfirmOrCancel
+                label={tCommon("actions.confirm")}
+                onCancel={reject}
+                loading={loading}
+                disabled={loading || !amountSat}
+              />
+            </Container>
+          </form>
+        </>
+      ) : (
+        <Container justifyBetween maxWidth="sm">
+          <ResultCard
+            isSuccess
+            message={
+              !destination
+                ? successMessage
+                : tCommon("success_message", {
+                    amount: getFormattedSats(amountSat),
+                    fiatAmount: showFiat ? ` (${fiatAmount})` : ``,
+                    destination,
+                  })
+            }
+          />
+          <div className="my-4">
+            <Button
+              onClick={close}
+              label={tCommon("actions.close")}
+              fullWidth
+            />
+          </div>
+        </Container>
+      )}
     </div>
   );
 }

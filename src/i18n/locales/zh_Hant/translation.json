@@ -1,0 +1,960 @@
+{
+  "translation": {
+    "welcome": {
+      "title": "歡迎來到Alby",
+      "nav": {
+        "welcome": "歡迎",
+        "password": "你的密碼",
+        "connect": "你的閃電帳戶",
+        "done": "完成"
+      },
+      "set_password": {
+        "title": "設置解鎖密碼",
+        "description": "",
+        "choose_password": {
+          "label": "選擇解鎖密碼："
+        },
+        "confirm_password": {
+          "label": "確認你輸入的內容是否正確："
+        },
+        "errors": {
+          "enter_password": "請輸入密碼。",
+          "confirm_password": "請確認你的密碼。",
+          "mismatched_password": "密碼不匹配。"
+        }
+      },
+      "test_connection": {
+        "ready": "太棒了，你已經準備好了！",
+        "initializing": "正在初始化你的帳戶。請稍候，這可能需要一分鐘...",
+        "connection_error": "連接錯誤",
+        "review_connection_details": "請檢查你的連接詳細信息。",
+        "connection_taking_long": "嘗試連接的時間比預期的要長...你的詳細信息是否正確？你的節點是否可訪問？",
+        "contact_support": "如果你需要幫助，請聯繫 support@getalby.com",
+        "actions": {
+          "delete_edit_account": "刪除無效帳戶並重新編輯"
+        }
+      }
+    },
+    "choose_path": {
+      "title": "連接",
+      "description": "要開始使用 Alby 進行在線支付，請將你的閃電錢包連接到擴展程序。",
+      "alby": {
+        "title": "Alby",
+        "description": "註冊或使用你現有的 Alby 帳戶立即開始閃電支付。",
+        "create_new": "註冊"
+      },
+      "other": {
+        "title": "其他錢包",
+        "description": "連接到你現有的閃電錢包或節點，可從各種連接器中選擇。",
+        "and_more": "等等...",
+        "connect": "連接"
+      }
+    },
+    "alby": {
+      "pre_connect": {
+        "set_password": {
+          "choose_password": {
+            "label": "密碼"
+          },
+          "confirm_password": {
+            "label": "確認密碼"
+          },
+          "errors": {
+            "enter_password": "請輸入密碼。",
+            "confirm_password": "請確認你的密碼。",
+            "mismatched_password": "密碼不匹配。"
+          }
+        },
+        "forgot_password": "忘記密碼？",
+        "title": "你的Alby帳戶",
+        "create_account": "創建一個新的Alby帳戶來發送和接收比特幣付款。",
+        "login_account": "登錄以連接你現有的Alby帳戶。",
+        "host_wallet": "我們為你託管閃電錢包！",
+        "email": {
+          "create": {
+            "label": "電子郵件地址"
+          },
+          "login": {
+            "label": "電子郵件地址或閃電地址"
+          }
+        },
+        "optional_lightning_note": {
+          "part1": "你的 Alby 帳戶還附帶一個可選的",
+          "part2": "閃電地址",
+          "part3": "",
+          "part4": "瞭解更多"
+        },
+        "optional_lightning_address": {
+          "label": "選擇你的閃電位址（可選）",
+          "suffix": "@getalby.com",
+          "title": "數字和字母，至少 4 個字符"
+        },
+        "errors": {
+          "create_wallet_error": "無法登錄或創建新帳戶。如果你需要幫助，請聯繫 support@getalby.com",
+          "create_wallet_error1": "無法登錄或創建新帳戶。",
+          "create_wallet_error2": "如果你需要幫助，請聯繫 support@getalby.com"
+        }
+      }
+    },
+    "choose_connector": {
+      "title": "連接閃電錢包",
+      "description": "連接你的外部閃電錢包或節點",
+      "lnd": {
+        "title": "LND",
+        "page": {
+          "title": "連接你的 LND 節點",
+          "description": ""
+        },
+        "url": {
+          "label": "REST API 主機和端口",
+          "placeholder": "https://your-node-url:8080"
+        },
+        "macaroon": {
+          "label": "Macaroon(HEX格式)"
+        },
+        "or": "或",
+        "drag_and_drop": "將macaroon拖放到此處或<0>瀏覽</0>",
+        "errors": {
+          "connection_failed": "連接失敗。你的 LND 憑證是否正確？"
+        }
+      },
+      "lnc": {
+        "title": "LND使用LNC",
+        "page": {
+          "title": "連接你的 LND 節點",
+          "description": "在終端（litd）中創建一個新會話以獲取新的配對短語並在此處輸入"
+        },
+        "pairing_phrase": {
+          "label": "你的配對短語 ",
+          "placeholder": "secret stack sats phrase"
+        }
+      },
+      "lndhub_bluewallet": {
+        "title": "Bluewallet",
+        "page": {
+          "title": "連接 BlueWallet",
+          "description": ""
+        },
+        "uri": {
+          "label": "BlueWallet 導出 URI"
+        },
+        "errors": {
+          "invalid_uri": "BlueWallet URI無效",
+          "connection_failed": "連接失敗。你的 BlueWallet URI 是否正確？"
+        }
+      },
+      "lndhub_go": {
+        "title": "LNDHub",
+        "page": {
+          "title": "連接LNDHub",
+          "description": ""
+        },
+        "uri": {
+          "label": "LNDHub 導出 URI"
+        },
+        "errors": {
+          "invalid_uri": "LNDHub URI無效",
+          "connection_failed": "連接失敗。你的 LNDHub URI 是否正確？"
+        }
+      },
+      "lnbits": {
+        "title": "LNbits",
+        "page": {
+          "title": "連接 <0>LNbits</0>",
+          "instructions": ""
+        },
+        "admin_key": {
+          "label": "LNbits 管理員密鑰",
+          "placeholder": "你的 32 位數管理員密鑰"
+        },
+        "url": {
+          "label": "LNbits URL"
+        },
+        "errors": {
+          "connection_failed": "連接失敗。你是否擁有正確的 URL 和管理員密鑰？"
+        }
+      },
+      "eclair": {
+        "title": "Eclair",
+        "page": {
+          "title": "連接 <0>Eclair</0>",
+          "instructions": "你需要你的 Eclair URL 和密碼。"
+        },
+        "password": {
+          "label": "Eclair 密碼"
+        },
+        "url": {
+          "label": "Eclair URL",
+          "placeholder": "http://localhost:8080"
+        }
+      },
+      "citadel": {
+        "title": "Citadel",
+        "page": {
+          "title": "連接 <0>Citadel</0> 節點",
+          "instructions": "如果啟用了 2FA，這目前不可用。"
+        },
+        "password": {
+          "label": "Citadel 密碼"
+        },
+        "url": {
+          "label": "Citadel URL",
+          "placeholder": "http://citadel.local"
+        }
+      },
+      "umbrel": {
+        "title": "Umbrel",
+        "page": {
+          "title": "連接 <0>Umbrel</0> 節點",
+          "instructions": ""
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
+      },
+      "mynode": {
+        "title": "myNode",
+        "page": {
+          "title": "連接 <0>myNode</0>",
+          "instructions": ""
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
+      },
+      "start9": {
+        "title": "Start9",
+        "page": {
+          "title": "連接你的<0>Embassy</0>節點",
+          "instructions": ""
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
+      },
+      "raspiblitz": {
+        "title": "RaspiBlitz",
+        "page": {
+          "title": "連接你的 <0>RaspiBlitz</0> 節點",
+          "instructions1": "",
+          "instructions2": ""
+        },
+        "rest_api_host": {
+          "label": "REST API 主機",
+          "placeholder": "your-node-onion-address:port"
+        }
+      },
+      "bitcoin_beach": {
+        "title": "Bitcoin Beach Wallet",
+        "page": {
+          "title": "連接<0>Bitcoin Beach Wallet</0>"
+        }
+      },
+      "bitcoin_jungle": {
+        "title": "Bitcoin Jungle Wallet",
+        "page": {
+          "title": "連接<0>Bitcoin Jungle Wallet</0>"
+        }
+      },
+      "galoy": {
+        "phone_number": {
+          "label": "輸入你的電話號碼"
+        },
+        "sms_code": {
+          "label": "輸入你的短信驗證碼"
+        },
+        "jwt": {
+          "label": "輸入你的 JWT 令牌",
+          "info": ""
+        },
+        "actions": {
+          "login": "登錄",
+          "request_sms_code": "索取短信驗證碼"
+        },
+        "errors": {
+          "failed_to_request_sms": "索取短信驗證碼失敗",
+          "failed_to_login_sms": "短信驗證碼登錄失敗",
+          "setup_failed": "設置失敗",
+          "missing_jwt": "JWT不存在，無法登陸。",
+          "invalid_jwt": "傳遞了無效的JWT"
+        }
+      },
+      "kollider": {
+        "title": "Kollider",
+        "description": "登錄你的 Kollider 帳戶",
+        "page": {
+          "title": "連接你的 Kollider 帳戶",
+          "description": "還沒有帳戶？立即<0>註冊</0>！"
+        },
+        "username": {
+          "label": "輸入你的 Kollider 用戶名"
+        },
+        "password": {
+          "label": "輸入你的 Kollider 密碼"
+        },
+        "currency": {
+          "label": "選擇你的貨幣帳戶"
+        },
+        "errors": {
+          "connection_failed": ""
+        }
+      },
+      "btcpay": {
+        "title": "",
+        "page": {
+          "title": "",
+          "instructions": ""
+        },
+        "config": {
+          "label": "",
+          "placeholder": ""
+        },
+        "errors": {
+          "connection_failed": ""
+        }
+      },
+      "commando": {
+        "title": "",
+        "page": {
+          "title": "",
+          "instructions": ""
+        },
+        "host": {
+          "label": ""
+        },
+        "pubkey": {
+          "label": ""
+        },
+        "rune": {
+          "label": ""
+        },
+        "port": {
+          "label": ""
+        },
+        "proxy": {
+          "label": ""
+        },
+        "privKey": {
+          "label": ""
+        },
+        "config": {
+          "label": "",
+          "placeholder": ""
+        },
+        "errors": {
+          "connection_failed": ""
+        }
+      }
+    },
+    "home": {
+      "actions": {
+        "send_satoshis": "",
+        "enable_now": ""
+      },
+      "recent_transactions": "",
+      "transaction_list": {
+        "tabs": {
+          "outgoing": "",
+          "incoming": ""
+        }
+      },
+      "allowance_view": {
+        "recent_transactions": "",
+        "allowance": "",
+        "sats_used": "",
+        "no_transactions": ""
+      },
+      "default_view": {
+        "recent_transactions": "",
+        "no_transactions": "",
+        "is_blocked_hint": "",
+        "block_removed": ""
+      }
+    },
+    "accounts": {
+      "title": "",
+      "account_view": {
+        "title1": "",
+        "title2": "",
+        "name": {
+          "title": "",
+          "placeholder": ""
+        },
+        "export": {
+          "title": "",
+          "screen_reader": "",
+          "waiting": "",
+          "your_ln_address": "",
+          "tip_mobile": "",
+          "export_uri": "",
+          "scan_qr": ""
+        },
+        "nostr": {
+          "title": "",
+          "hint": "",
+          "private_key": {
+            "title": "",
+            "subtitle": "",
+            "warning": "",
+            "success": "",
+            "successfully_removed": "",
+            "label": ""
+          },
+          "public_key": {
+            "label": ""
+          },
+          "generate_keys": {
+            "title": "",
+            "screen_reader": "",
+            "hint": "",
+            "actions": {
+              "random_keys": "",
+              "derived_keys": ""
+            }
+          },
+          "actions": {
+            "generate": ""
+          },
+          "errors": {
+            "failed_to_load": ""
+          }
+        },
+        "remove": {
+          "title": "",
+          "subtitle": "",
+          "confirm": ""
+        },
+        "actions": {
+          "remove_account": "",
+          "export": ""
+        }
+      },
+      "actions": {
+        "add_account": ""
+      }
+    },
+    "enable": {
+      "title": "",
+      "allow": "",
+      "request1": "",
+      "request2": "",
+      "block_and_ignore": "",
+      "block_added": ""
+    },
+    "unlock": {
+      "unlock_to_continue": "",
+      "unlock_password": "",
+      "help_contact": {
+        "part1": "",
+        "part2": ""
+      },
+      "unlock_error": {
+        "help": "",
+        "link": ""
+      },
+      "errors": {
+        "invalid_password": ""
+      }
+    },
+    "settings": {
+      "title": "",
+      "browser_notifications": {
+        "title": "",
+        "subtitle": ""
+      },
+      "website_enhancements": {
+        "title": "",
+        "subtitle": ""
+      },
+      "lnurl_auth": {
+        "title": "",
+        "hint": "",
+        "legacy_lnurl_auth_202207": {
+          "title": "",
+          "subtitle": ""
+        },
+        "legacy_lnurl_auth": {
+          "title": "",
+          "subtitle": ""
+        }
+      },
+      "camera_access": {
+        "title": "",
+        "subtitle": "",
+        "allow": "",
+        "granted": ""
+      },
+      "language": {
+        "title": "",
+        "subtitle": ""
+      },
+      "theme": {
+        "title": "",
+        "subtitle": "",
+        "options": {
+          "dark": "",
+          "light": "",
+          "system": ""
+        }
+      },
+      "show_fiat": {
+        "title": "",
+        "subtitle": ""
+      },
+      "currency": {
+        "title": "",
+        "subtitle": ""
+      },
+      "exchange": {
+        "title": "",
+        "subtitle": ""
+      },
+      "personal_data": {
+        "title": "",
+        "description": ""
+      },
+      "name": {
+        "title": "",
+        "subtitle": "",
+        "placeholder": ""
+      },
+      "email": {
+        "title": "",
+        "subtitle": "",
+        "placeholder": ""
+      },
+      "change_password": {
+        "title": "",
+        "subtitle": "",
+        "screen_reader": "",
+        "choose_password": {
+          "label": ""
+        },
+        "confirm_password": {
+          "label": ""
+        },
+        "submit": {
+          "label": ""
+        },
+        "errors": {
+          "enter_password": "",
+          "confirm_password": "",
+          "mismatched_password": ""
+        },
+        "success": ""
+      },
+      "nostr": {
+        "title": "",
+        "hint": "",
+        "private_key": {
+          "title": "",
+          "subtitle": "",
+          "go_to": ""
+        }
+      }
+    },
+    "send": {
+      "title": "",
+      "qrcode": {
+        "title": ""
+      },
+      "input": {
+        "label": "",
+        "hint": ""
+      }
+    },
+    "lnurlpay": {
+      "amount": {
+        "label": ""
+      },
+      "comment": {
+        "label": ""
+      },
+      "name": {
+        "label": ""
+      },
+      "email": {
+        "label": ""
+      },
+      "success": ""
+    },
+    "lnurlauth": {
+      "title": "",
+      "content_message": {
+        "heading": ""
+      },
+      "submit": "",
+      "success": "",
+      "errors": {
+        "status": ""
+      }
+    },
+    "lnurlchannel": {
+      "title": "",
+      "content_message": {
+        "heading": ""
+      },
+      "success": ""
+    },
+    "lnurlwithdraw": {
+      "title": "",
+      "content_message": {
+        "heading": ""
+      },
+      "amount": {
+        "label": ""
+      },
+      "success": ""
+    },
+    "receive": {
+      "title": "",
+      "actions": {
+        "create_invoice": ""
+      },
+      "amount": {
+        "label": "",
+        "placeholder": ""
+      },
+      "description": {
+        "label": "",
+        "placeholder": ""
+      },
+      "success": "",
+      "payment": {
+        "waiting": "",
+        "status": ""
+      }
+    },
+    "discover": {
+      "title": "",
+      "description": "",
+      "list": {
+        "trading": "",
+        "gaming": "",
+        "entertaiment": "",
+        "shopping": "",
+        "miscellaneous": "",
+        "showcases": "",
+        "nostr": ""
+      },
+      "tips": {
+        "title": "",
+        "description": "",
+        "top_up_wallet": {
+          "title": "",
+          "description": "",
+          "label1": "",
+          "label2": ""
+        },
+        "pin": {
+          "title": "",
+          "description1": "",
+          "description2": "",
+          "description3": ""
+        },
+        "demo": {
+          "title": "",
+          "description": "",
+          "label1": ""
+        },
+        "address": {
+          "title": "",
+          "description": "",
+          "label1": ""
+        }
+      }
+    },
+    "publishers": {
+      "title": "",
+      "description": "",
+      "no_info": "",
+      "discover": "",
+      "publisher": {
+        "allowance": {
+          "title": "",
+          "used_budget": ""
+        }
+      }
+    },
+    "make_invoice": {
+      "title": "",
+      "amount": {
+        "label": ""
+      },
+      "memo": {
+        "label": ""
+      },
+      "errors": {
+        "amount_too_small": "",
+        "amount_too_big": ""
+      }
+    },
+    "confirm_sign_message": {
+      "title": "",
+      "content": ""
+    },
+    "confirm_keysend": {
+      "title": "",
+      "success": "",
+      "payment_summary": {
+        "description": ""
+      }
+    },
+    "keysend": {
+      "title": "",
+      "success": "",
+      "receiver": {
+        "label": ""
+      },
+      "amount": {
+        "label": ""
+      }
+    },
+    "confirm_payment": {
+      "title": "",
+      "success": "",
+      "actions": {
+        "pay_now": ""
+      }
+    },
+    "confirm_request_permission": {
+      "title": "",
+      "allow": "",
+      "always_allow": ""
+    },
+    "nostr": {
+      "title": "",
+      "allow": "",
+      "content": "",
+      "allow_sign": "",
+      "block_and_ignore": "",
+      "block_added": ""
+    }
+  },
+  "common": {
+    "password": "",
+    "confirm_password": "",
+    "advanced": "",
+    "success": "",
+    "error": "",
+    "settings": "",
+    "accounts": "",
+    "discover": "",
+    "websites": "",
+    "sats_one": "",
+    "sats_other": "",
+    "loading": "",
+    "amount": "",
+    "optional": "",
+    "feedback": "",
+    "copied": "",
+    "description": "",
+    "description_full": "",
+    "success_message": "",
+    "response": "",
+    "message": "",
+    "help": "",
+    "actions": {
+      "back": "",
+      "delete": "",
+      "edit": "",
+      "next": "",
+      "open": "",
+      "cancel": "",
+      "confirm": "",
+      "continue": "",
+      "connect": "",
+      "lock": "",
+      "unlock": "",
+      "send": "",
+      "save": "",
+      "receive": "",
+      "receive_again": "",
+      "close": "",
+      "export": "",
+      "remove": "",
+      "copy": "",
+      "log_in": "",
+      "remember": ""
+    },
+    "errors": {
+      "connection_failed": "",
+      "payment_failed": ""
+    }
+  },
+  "components": {
+    "allowance_menu": {
+      "confirm_delete": "",
+      "hint": "",
+      "new_budget": {
+        "label": ""
+      },
+      "enable_login": {
+        "title": "",
+        "subtitle": ""
+      },
+      "edit_allowance": {
+        "title": "",
+        "screen_reader": ""
+      },
+      "edit_permissions": ""
+    },
+    "qrcode_scanner": {
+      "title": "",
+      "actions": {
+        "start_scanning": "",
+        "stop_scanning": ""
+      },
+      "errors": {
+        "allow_camera_access": ""
+      }
+    },
+    "transactionsTable": {
+      "fee": "",
+      "preimage": "",
+      "received": "",
+      "sent": "",
+      "boostagram": {
+        "sender": "",
+        "message": "",
+        "app": "",
+        "podcast": ""
+      },
+      "open_location": ""
+    },
+    "confirm_or_cancel": {
+      "only_trusted": ""
+    },
+    "budget_control": {
+      "remember": {
+        "label": "",
+        "description": ""
+      },
+      "budget": {
+        "label": ""
+      }
+    },
+    "toasts": {
+      "connection_error": {
+        "what_you_can_do": "",
+        "double_check": "",
+        "if_ssl_errors": "",
+        "visit_guides": ""
+      },
+      "login_failed": {
+        "password_reset": ""
+      },
+      "errors": {
+        "invalid_credentials": ""
+      }
+    },
+    "account_menu": {
+      "screen_reader": "",
+      "title": "",
+      "options": {
+        "account": {
+          "add": "",
+          "manage": ""
+        }
+      }
+    },
+    "publishers_table": {
+      "payments": "",
+      "used": ""
+    },
+    "badge": {
+      "label": {
+        "active": "",
+        "auth": ""
+      }
+    }
+  },
+  "permissions": {
+    "nostr": {
+      "getpublickey": "",
+      "nip04encrypt": "",
+      "nip04decrypt": "",
+      "signmessage": ""
+    },
+    "commando": {
+      "bkpr-listbalances": "",
+      "checkmessage": "",
+      "connect": "",
+      "decode": "",
+      "decodepay": "",
+      "disconnect": "",
+      "feerates": "",
+      "fundchannel": "",
+      "getinfo": "",
+      "getroute": "",
+      "invoice": "",
+      "keysend": "",
+      "listforwards": "",
+      "listfunds": "",
+      "listinvoices": "",
+      "listnodes": "",
+      "listoffers": "",
+      "listpays": "",
+      "listpeers": "",
+      "listsendpays": "",
+      "listtransactions": "",
+      "multifundchannel": "",
+      "offer": "",
+      "pay": "",
+      "sendpay": "",
+      "setchannel": "",
+      "signmessage": ""
+    },
+    "lnd": {
+      "getinfo": "",
+      "listchannels": "",
+      "listinvoices": "",
+      "channelbalance": "",
+      "walletbalance": "",
+      "openchannel": "",
+      "connectpeer": "",
+      "disconnectpeer": "",
+      "estimatefee": "",
+      "getchaninfo": "",
+      "getnetworkinfo": "",
+      "getnodeinfo": "",
+      "gettransactions": "",
+      "listpayments": "",
+      "listpeers": "",
+      "lookupinvoice": "",
+      "queryroutes": "",
+      "verifymessage": "",
+      "sendtoroute": "",
+      "decodepayreq": "",
+      "routermc": "",
+      "addinvoice": ""
+    },
+    "lnc": {
+      "getinfo": "",
+      "listchannels": "",
+      "listinvoices": "",
+      "channelbalance": "",
+      "walletbalance": "",
+      "openchannel": "",
+      "connectpeer": "",
+      "disconnectpeer": "",
+      "estimatefee": "",
+      "getchaninfo": "",
+      "getnetworkinfo": "",
+      "getnodeinfo": "",
+      "gettransactions": "",
+      "listpayments": "",
+      "listpeers": "",
+      "lookupinvoice": "",
+      "queryroutes": "",
+      "verifymessage": "",
+      "sendtoroute": "",
+      "decodepayreq": "",
+      "routermc": "",
+      "addinvoice": ""
+    }
+  }
+}

@@ -1,27 +1,14 @@
 import { CaretRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { useTranslation } from "react-i18next";
+import { useSettings } from "~/app/context/SettingsContext";
+import { Publisher } from "~/types";
 
 import Badge from "../Badge";
 import Progressbar from "../Progressbar";
 
-type Publisher = {
-  id: string;
-  imageURL?: string;
-  host: string;
-  name: string;
-  badge?: {
-    label: string;
-    color: string;
-    textColor: string;
-  };
-  paymentsCount: number;
-  totalBudget: number;
-  usedBudget: number;
-  percentage: string;
-};
-
 type Props = {
   publishers: Publisher[];
-  navigateToPublisher: (id: string) => void;
+  navigateToPublisher: (id: number) => void;
 };
 
 const DEFAULT_IMAGE =
@@ -31,21 +18,27 @@ export default function PublishersTable({
   publishers,
   navigateToPublisher,
 }: Props) {
+  const { getFormattedSats, getFormattedNumber } = useSettings();
+  const { t: tComponents } = useTranslation("components", {
+    keyPrefix: "publishers_table",
+  });
+  const { t: tCommon } = useTranslation("common");
+
   return (
     <div className="shadow overflow-hidden rounded-lg">
       <table className="min-w-full">
-        <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800">
+        <tbody className="bg-white divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
           {publishers.map((publisher) => (
             <tr
               key={publisher.id}
-              className="cursor-pointer hover:bg-gray-50 transition duration-200 dark:hover:bg-gray-700"
+              className="cursor-pointer hover:bg-gray-50 transition duration-200 dark:hover:bg-neutral-800"
               onClick={() => navigateToPublisher(publisher.id)}
             >
               <td className="px-4 py-6 whitespace-nowrap">
                 <div className="flex items-center">
                   <div className="shrink-0">
                     <img
-                      className="h-12 w-12 object-cover rounded-full shadow-lg"
+                      className="h-12 w-12 object-cover rounded-lg"
                       src={publisher.imageURL || DEFAULT_IMAGE}
                       alt={publisher.host}
                       onError={(e) => {
@@ -60,16 +53,28 @@ export default function PublishersTable({
                       <p className="text-lg inline mr-2 dark:text-white">
                         {publisher.name}
                       </p>
-                      {publisher.badge && (
-                        <Badge
-                          label={publisher.badge.label}
-                          color={publisher.badge.color}
-                          textColor={publisher.badge.textColor}
-                        />
-                      )}
+                      {publisher.badges?.map((b) => {
+                        return (
+                          <Badge
+                            key={b.label}
+                            label={b.label}
+                            color={b.color}
+                            textColor={b.textColor}
+                          />
+                        );
+                      })}
                     </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
-                      {publisher.host} • {publisher.paymentsCount} payments
+                    <div className="text-sm text-gray-500 dark:text-neutral-400">
+                      {publisher.host} • {publisher.paymentsCount}{" "}
+                      {tComponents("payments")}
+                      {publisher.paymentsAmount > 0 && (
+                        <>
+                          {" • "}
+                          <span>
+                            {getFormattedSats(publisher.paymentsAmount)}
+                          </span>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -77,8 +82,11 @@ export default function PublishersTable({
               <td className="px-6 py-6 whitespace-nowrap text-right">
                 {publisher.totalBudget > 0 && (
                   <div className="ml-40">
-                    <p className="text-lg text-gray-700 mb-0 dark:text-gray-400">
-                      {publisher.usedBudget} / {publisher.totalBudget} sat used
+                    <p className="text-lg text-gray-500 mb-0 dark:text-neutral-400">
+                      {getFormattedNumber(publisher.usedBudget)} /{" "}
+                      {getFormattedNumber(publisher.totalBudget)}{" "}
+                      {tCommon("sats", { count: publisher.usedBudget })}{" "}
+                      {tComponents("used")}
                     </p>
                     <div className="relative mt-2 ml-auto">
                       <div className="flex items-center justify-end">

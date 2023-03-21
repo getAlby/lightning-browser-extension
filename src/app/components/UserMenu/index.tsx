@@ -1,21 +1,26 @@
-import { useNavigate } from "react-router-dom";
 import {
+  AddressBookIcon,
   GearIcon,
+  GlobeIcon,
   LockIcon,
   MenuIcon,
+  QuestionIcon,
+  ReceiveIcon,
+  RocketIcon,
   SendIcon,
   TransactionsIcon,
-  ReceiveIcon,
-  QuestionIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { useAccount } from "~/app/context/AccountContext";
 import utils from "~/common/lib/utils";
-import { useAuth } from "~/app/context/AuthContext";
+
 import Menu from "../Menu";
 
 export default function UserMenu() {
   const navigate = useNavigate();
-  const auth = useAuth();
+  const auth = useAccount();
+  const { t: tCommon } = useTranslation("common");
 
   function openOptions(path: string) {
     // if we are in the popup
@@ -40,54 +45,87 @@ export default function UserMenu() {
 
   return (
     <Menu as="div" className="relative">
-      <Menu.Button className="flex items-center text-gray-500 hover:text-black dark:hover:text-white transition-colors duration-200">
+      <Menu.Button className="flex items-center text-gray-700 dark:text-white hover:text-black dark:hover:text-white transition-colors duration-200">
         <MenuIcon className="h-6 w-6" />
       </Menu.Button>
-      <Menu.List position="right">
+      <Menu.List position="left">
+        <Menu.ItemButton
+          onClick={() => {
+            openOptions("discover");
+          }}
+        >
+          <GlobeIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          {tCommon("discover")}
+        </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
             openOptions("publishers");
           }}
         >
-          <TransactionsIcon className="h-5 w-5 mr-2 text-gray-500" />
-          Websites
+          <TransactionsIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          {tCommon("websites")}
         </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
             navigate("/send");
           }}
         >
-          <SendIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-500" />
-          Send
+          <SendIcon className="w-6 h-6 -ml-0.5 mr-2 text-gray-700 dark:text-neutral-300" />
+          {tCommon("actions.send")}
         </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
             navigate("/receive");
           }}
         >
-          <ReceiveIcon className="w-6 h-6 -ml-0.5 mr-2 opacity-75 text-gray-500" />
-          Receive
+          <ReceiveIcon className="w-6 h-6 -ml-0.5 mr-2 text-gray-700 dark:text-neutral-300" />
+          {tCommon("actions.receive")}
         </Menu.ItemButton>
+        <Menu.ItemButton
+          onClick={() => {
+            openOptions("transactions");
+          }}
+        >
+          <TransactionsIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          {tCommon("transactions")}
+        </Menu.ItemButton>
+        <Menu.Divider />
         <Menu.ItemButton
           onClick={() => {
             openOptions("settings");
           }}
         >
-          <GearIcon className="h-5 w-5 mr-2 text-gray-500" />
-          Settings
+          <GearIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          {tCommon("settings")}
+        </Menu.ItemButton>
+        <Menu.ItemButton
+          onClick={() => {
+            openOptions("accounts");
+          }}
+        >
+          <AddressBookIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          {tCommon("accounts")}
         </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
             utils.openUrl("https://feedback.getalby.com");
           }}
         >
-          <QuestionIcon className="h-5 w-5 mr-2 text-gray-500" />
-          Feedback
+          <RocketIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          {tCommon("feedback")}
+        </Menu.ItemButton>
+        <Menu.ItemButton
+          onClick={() => {
+            utils.openUrl("https://guides.getalby.com");
+          }}
+        >
+          <QuestionIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          {tCommon("help")}
         </Menu.ItemButton>
         <Menu.Divider />
         <Menu.ItemButton onClick={lock}>
-          <LockIcon className="h-5 w-5 mr-2 text-gray-500" />
-          Lock
+          <LockIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          {tCommon("actions.lock")}
         </Menu.ItemButton>
       </Menu.List>
     </Menu>
