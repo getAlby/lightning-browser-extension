@@ -2,7 +2,7 @@ import getOriginData from "../originData";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher =
-  /^https:\/\/(bitcoinhackers\.org|kosmos\.social)\/(web\/)?@\S+/;
+  /^https:\/\/(bitcoinhackers\.org|kosmos\.social|podcastindex.social)\/(web\/)?@\S+/;
 
 const battery = (): void => {
   const bio = document.querySelector(
