@@ -42,7 +42,6 @@
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@vespaiach/axios-fetch-adapter": "^0.3.0",
-    "avvvatars-react": "^0.4.2",
     "axios": "^0.27.2",
     "bech32": "^2.0.0",
     "bolt11": "^1.4.0",
