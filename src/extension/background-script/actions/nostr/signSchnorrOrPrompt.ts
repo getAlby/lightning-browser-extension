@@ -10,7 +10,7 @@ const signSchnorrOrPrompt = async (message: MessageSignSchnorr) => {
     return;
   }
 
-  const nostr = state.getState().getNostr();
+  const nostr = await state.getState().getNostr();
   const sigHash = message.args.sigHash;
 
   try {

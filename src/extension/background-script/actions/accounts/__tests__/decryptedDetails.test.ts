@@ -23,7 +23,7 @@ jest.mock("~/common/lib/crypto", () => {
 });
 
 const mockState = {
-  password: "123456",
+  password: jest.fn,
   saveToStorage: jest.fn,
   accounts: {
     "888": {
@@ -45,6 +45,10 @@ describe("export account", () => {
   });
 
   test("export existing lndhub account", async () => {
+    (chrome.storage.session.get as jest.Mock).mockResolvedValue({
+      password: 123456,
+    });
+
     const message: MessageAccountDecryptedDetails = {
       application: "LBE",
       args: {
@@ -69,6 +73,10 @@ describe("export account", () => {
   });
 
   test("export non-existing account should error", async () => {
+    (chrome.storage.session.get as jest.Mock).mockResolvedValue({
+      password: 123456,
+    });
+
     const message: MessageAccountDecryptedDetails = {
       application: "LBE",
       args: {
