@@ -2,7 +2,6 @@ import browser, { Runtime, Tabs } from "webextension-polyfill";
 import utils from "~/common/lib/utils";
 
 import { ExtensionIcon, setIcon } from "./actions/setup/setIcon";
-import connectors from "./connectors";
 import { db, isIndexedDbAvailable } from "./db";
 import * as events from "./events";
 import migrate from "./migrations";
@@ -146,16 +145,6 @@ async function init() {
 
   // Notify the content script that the tab has been updated.
   browser.tabs.onUpdated.addListener(extractLightningData);
-
-  if (debug) {
-    console.info("Debug mode enabled, use window.debugAlby");
-    window.debugAlby = {
-      state,
-      db,
-      connectors,
-      router,
-    };
-  }
 
   console.info("Loading completed");
 }
