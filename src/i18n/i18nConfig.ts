@@ -5,6 +5,7 @@ import "dayjs/locale/es";
 import "dayjs/locale/fi";
 import "dayjs/locale/fr";
 import "dayjs/locale/it";
+import "dayjs/locale/mr";
 import "dayjs/locale/pl";
 import "dayjs/locale/pt-br";
 import "dayjs/locale/sv";
@@ -20,7 +21,7 @@ import es from "~/i18n/locales/es/translation.json";
 import fi from "~/i18n/locales/fi/translation.json";
 import fr from "~/i18n/locales/fr/translation.json";
 import it from "~/i18n/locales/it/translation.json";
-import mr_IN from "~/i18n/locales/mr_IN/translation.json";
+import mr from "~/i18n/locales/mr/translation.json";
 import pl from "~/i18n/locales/pl/translation.json";
 import pt_BR from "~/i18n/locales/pt_BR/translation.json";
 import sv from "~/i18n/locales/sv/translation.json";
@@ -71,11 +72,11 @@ export const resources = {
     components: it.components,
     permissions: it.permissions,
   },
-  mr_IN: {
-    translation: mr_IN.translation,
-    common: mr_IN.common,
-    components: mr_IN.components,
-    permissions: mr_IN.permissions,
+  mr: {
+    translation: mr.translation,
+    common: mr.common,
+    components: mr.components,
+    permissions: mr.permissions,
   },
   pl: {
     translation: pl.translation,
@@ -116,7 +117,7 @@ export const supportedLocales = [
   { locale: "fi", label: "Suomalainen" },
   { locale: "sv", label: "Svenska" },
   { locale: "zh-CN", label: "中文（简化字）" },
-  { locale: "mr_IN", label: "मराठी (India)" },
+  { locale: "mr", label: "मराठी (India)" },
 ];
 
 i18n
