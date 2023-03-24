@@ -1,7 +1,6 @@
 import {
   AddressBookIcon,
   CaretDownIcon,
-  CheckIcon,
   GlobeIcon,
   PlusIcon,
   WalletIcon,
@@ -145,6 +144,7 @@ function AccountMenu({ showOptions = true }: Props) {
 
           <Menu.Subheader>{t("title")}</Menu.Subheader>
           {Object.keys(accounts).map((accountId) => {
+            // Do not render the current active account
             if (accountId === authAccount?.id) {
               return;
             }
@@ -165,14 +165,6 @@ function AccountMenu({ showOptions = true }: Props) {
                 <span className="overflow-hidden text-ellipsis whitespace-nowrap ml-2">
                   {account.name}&nbsp;
                 </span>
-                {accountId === authAccount?.id && (
-                  <span
-                    data-testid="selected"
-                    className="ml-auto flex-shrink-0 w-3.5 h-3.5 rounded-full bg-orange-bitcoin flex justify-center items-center"
-                  >
-                    <CheckIcon className="w-3 h-3 text-white" />
-                  </span>
-                )}
               </Menu.ItemButton>
             );
           })}
