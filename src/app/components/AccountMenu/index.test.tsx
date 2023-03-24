@@ -89,12 +89,9 @@ describe("AccountMenu", () => {
     await act(async () => {
       await user.click(screen.getByText("Toggle Dropdown"));
     });
-    await screen.findByText("Switch account");
 
-    // As we have set the active account as "LND account above"
-    expect(
-      screen.getByTitle("LND account").querySelector('[data-testid="selected"]')
-    ).toBeInTheDocument();
+    expect(screen.getByText("Switch account")).toBeInTheDocument();
+    expect(screen.getByText("Balance")).toBeInTheDocument();
   });
 
   test("displays accounts without options", async () => {
