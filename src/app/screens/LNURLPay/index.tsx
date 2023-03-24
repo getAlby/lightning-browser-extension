@@ -43,7 +43,7 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
 function LNURLPay() {
   const navState = useNavigationState();
   const details = navState.args?.lnurlDetails as LNURLPayServiceResponse;
-  const contentUri = navState.args?.contentUri;
+  const contentMetadata = navState.args?.contentMetadata;
   const {
     isLoading: isLoadingSettings,
     settings,
@@ -94,8 +94,8 @@ function LNURLPay() {
     if (userEmail?.length && details.payerData?.email) {
       payerData["email"] = userEmail;
     }
-    if (contentUri) {
-      payerData["contentUri"] = contentUri;
+    if (contentMetadata) {
+      payerData["content_metadata"] = contentMetadata;
     }
 
     if (Object.keys(payerData).length != 0) {

@@ -21,6 +21,11 @@ const battery = async (): Promise<Battery | void> => {
   const contentUri = document.querySelector<HTMLLinkElement>(
     'link[rel="canonical"]'
   )?.href;
+
+  const contentMetadata = {
+    contenturi: contentUri,
+  };
+
   if (!text || !channelLink) {
     return;
   }
@@ -63,7 +68,7 @@ const battery = async (): Promise<Battery | void> => {
     name,
     description: "", // we can not reliably find a description (the meta tag might be of a different video)
     icon: imageUrl,
-    contentUri: contentUri,
+    contentMetadata: contentMetadata,
   };
 };
 

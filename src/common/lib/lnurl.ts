@@ -123,7 +123,7 @@ const lnurl = {
       | {
           name?: string;
           email?: string;
-          contentUri?: string;
+          contentMetadata?: string;
         };
     metadata: string;
     amount: number;

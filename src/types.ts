@@ -92,7 +92,7 @@ export interface Battery extends OriginData {
   suggested?: string;
   name: string;
   icon: string;
-  contentUri?: string;
+  contentMetadata?: { [key: string]: string | number | undefined };
 }
 
 export type BatteryMetaTagRecipient = Pick<
@@ -132,7 +132,7 @@ export interface MessageDefaultPublic extends MessageDefault {
 export type NavigationState = {
   origin?: OriginData; // only defoned if coming via "Prompt", can be empty if a LNURL-action is being used via "Send" within the "PopUp"
   args?: {
-    contentUri?: string;
+    contentMetadata?: string;
     lnurlDetails: LNURLDetails;
     amountEditable?: boolean;
     memoEditable?: boolean;
@@ -508,7 +508,7 @@ export interface LNURLPayServiceResponse {
     identifier: { mandatory: boolean };
     email: { mandatory: boolean };
     auth: { mandatory: boolean; k1: string };
-    contentUri: { mandatory: boolean };
+    contentMetadata: { mandatory: boolean };
   };
   commentAllowed?: number;
   url: string;

@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import "~/app/styles/index.css";
 import WebLNProvider from "~/extension/ln/webln";
 
+import { youTubeTimingInfo } from "../batteries/helpers";
 import extractLightningData from "../batteries/index";
 
 function BoostButton() {
@@ -12,11 +13,12 @@ function BoostButton() {
 
   const [sats, setSats] = useState(0);
   const [sent, setSent] = useState(false);
-  const [contentUri, setContentUri] = useState("");
+  const [contentMetadata, setContentMetadata] = useState("");
 
   const [hold, setHold] = useState(false);
   const [timer, setTimer] = useState();
   const [holdTimer, setHoldTimer] = useState();
+  const [isYoutube, setIsYoutube] = useState(false);
 
   const [expand, setExpand] = useState(false);
   const [satsClicked, setSatsClicked] = useState(0);
@@ -29,7 +31,10 @@ function BoostButton() {
       const lnData = await extractLightningData();
       if (lnData) {
         setLnurl(lnData.address);
-        setContentUri(lnData.contentUri);
+        if (lnData.host == "www.youtube.com") setIsYoutube(true);
+        if (lnData.contentMetadata) {
+          setContentMetadata(lnData.contentMetadata);
+        }
         clearInterval(intervalId);
       } else if (count >= 5) {
         clearInterval(intervalId);
@@ -45,7 +50,11 @@ function BoostButton() {
     try {
       window.webln = new WebLNProvider();
       await window.webln.enable();
-      const result = await window.webln.lnurl(lnurl, contentUri);
+      if (isYoutube && Object.keys(contentMetadata).length != 0) {
+        const currentTime = youTubeTimingInfo();
+        contentMetadata["payment_content_offset"] = currentTime;
+      }
+      const result = await window.webln.lnurl(lnurl, contentMetadata);
       if (result) {
         setSats(result.route.total_amt);
         setSent(true);
@@ -57,17 +66,24 @@ function BoostButton() {
       setLoading(false);
       setHold(false);
     }
-  }, [lnurl, contentUri]);
+  }, [lnurl, contentMetadata, isYoutube]);
 
   const generateInvoice = useCallback(
     async (satsClicked) => {
       setLoading(true);
       if (!satsClicked) return;
       const ln = new LightningAddress(lnurl);
-      const invoice = await ln.generateInvoice({
-        amount: (satsClicked * 1000).toString(),
-        payerdata: JSON.stringify({ contentUri: contentUri }),
-      });
+      if (isYoutube && Object.keys(contentMetadata).length != 0) {
+        const currentTime = youTubeTimingInfo();
+        contentMetadata["payment_content_offset"] = currentTime;
+      }
+      let invoiceDetails = { amount: (satsClicked * 1000).toString() };
+      if (Object.keys(contentMetadata).length != 0) {
+        invoiceDetails["payerdata"] = JSON.stringify({
+          content_metadata: contentMetadata,
+        });
+      }
+      const invoice = await ln.generateInvoice(invoiceDetails);
       window.webln = new WebLNProvider();
       try {
         await window.webln.enable();
@@ -84,7 +100,7 @@ function BoostButton() {
         setLoading(false);
       }
     },
-    [lnurl, contentUri]
+    [lnurl, contentMetadata, isYoutube]
   );
 
   const textStyle = {

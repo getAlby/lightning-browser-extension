@@ -43,7 +43,7 @@ const mockDetails: LNURLDetails = {
       mandatory: false,
       k1: "027f16dee6284649a71b23161b2104be2f33e42133e8ed7999f99d9d35086a0f",
     },
-    contentUri: {
+    contentMetadata: {
       mandatory: false,
     },
   },
