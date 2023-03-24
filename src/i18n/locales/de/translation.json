@@ -9,7 +9,7 @@
       },
       "set_password": {
         "title": "Passwort zum Entsperren festlegen",
-        "description": "Die Daten deines Lightning Kontos sind mit einem Freischalt Passwort sicher verschlüsselt. Vergesse dieses Passwort nicht! Du benötigst es, um die Alby Erweiterung zu entsperren (in diesem Browser).",
+        "description": "Dieses Passwort wird verwendet, um deine Wallet zu schützen und den Zugriff auf die Browser-Erweiterung zu ermöglichen. Es kann nicht zurückgesetzt werden und ist unabhängig von Ihrem Alby Konto Passwort.",
         "choose_password": {
           "label": "Wähle ein Password zum Entsperren:"
         },
@@ -673,11 +673,11 @@
             "label": "Email Adresse"
           }
         },
-        "login_account": "Melden dich an, um dein bestehendes Alby-Konto zu verbinden.",
+        "login_account": "Melde dich an, um dein bestehendes Alby-Konto zu verbinden.",
         "host_wallet": "Wir hosten die Lightning Wallet für dich!",
         "optional_lightning_note": {
           "part3": ". Dies ist eine einfache Möglichkeit für jeden, dir Bitcoin über das Lightning-Netzwerk zu senden.",
-          "part1": "Ihr Alby-Konto enthält außerdem ein optionales",
+          "part1": "Dein Alby-Konto enthält außerdem ein optionales",
           "part2": "Lightning Adresse",
           "part4": "mehr erfahren"
         },
@@ -693,7 +693,7 @@
           "create_wallet_error2": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com"
         },
         "forgot_password": "Passwort vergessen?",
-        "title": "Dein Alby Konto",
+        "title": "Dein Alby-Konto",
         "set_password": {
           "choose_password": {
             "label": "Password"
@@ -717,12 +717,12 @@
         "connect": "Verbinden"
       },
       "alby": {
-        "title": "Alby",
-        "description": "Melden dich an oder nutze dein bestehendes Alby-Konto, um im Handumdrehen eine Lightning Zahlung zu beginnen.",
+        "title": "Alby Konto",
+        "description": "Melde dich an oder verwende dein bestehendes Alby-Konto, um im Handumdrehen mit Lightningzahlungen zu beginnen.",
         "create_new": "Anmelden"
       },
       "title": "Verbinden",
-      "description": "Um Alby für Online-Zahlungen zu nutzen, verbinde deine Lightning Wallet mit der Erweiterung."
+      "description": "Um mit der Verwendung der Alby Erweiterung zu beginnen, verbinde deine Lightning Wallet."
     },
     "discover": {
       "description": "Websites und Webapplikationen, auf denen du Alby verwenden kannst",
@@ -762,6 +762,11 @@
           "description1": "<0>Um einfach auf Alby zuzugreifen, klicke auf das Erweiterungssymbol <1/> <2>in der oberen rechten Ecke Ihres Browsers"
         }
       }
+    },
+    "transactions": {
+      "title": "Transaktionen",
+      "description": "Ausgehende Transaktionen über alle deine Konten",
+      "list_empty": "Noch keine Transaktionen verfügbar."
     }
   },
   "components": {
@@ -794,10 +799,16 @@
       }
     },
     "companion_download_info": {
-      "using_tor": "Klicke hier zum Weitermachen, wenn du den TOR Browser verwendest",
-      "description": "Du versuchst, dich mit einem Knoten hinter Tor zu verbinden. Dazu muss entweder die Alby Companion App installiert oder Tor ausgeführt werden. (Wenn du dir nicht sicher bist, empfehlen wir die Alby Companion App.)",
-      "download_here": "Lade dein Alby-Begleiter hier herunter!",
-      "or": "Oder:"
+      "download": "Download",
+      "companion": {
+        "title": "Begleitende App",
+        "description": "Leichte Anwendung, die deinem Browser mit dem TOR-Netzwerk verbindet."
+      },
+      "tor_native": {
+        "title": "TOR (native)",
+        "description": "Wähle diese Option, wenn dieser Browser bereits mit dem TOR-Netzwerk verbunden ist."
+      },
+      "heading": "Wie willst du dich mit dem TOR-Netzwerk verbinden?"
     },
     "allowance_menu": {
       "edit_allowance": {
@@ -896,7 +907,8 @@
       "save": "Speichern",
       "copy": "Kopieren",
       "remember": "Denke an meine Wahl und frage nicht noch einmal",
-      "receive_again": "Eine weitere Zahlung erhalten"
+      "receive_again": "Eine weitere Zahlung erhalten",
+      "transactions": "Transaktionen"
     },
     "discover": "Entdecken",
     "errors": {
@@ -911,7 +923,8 @@
       "between": "zwischen {{min}} und {{max}}",
       "lessThan": "< {{max}}",
       "greaterThan": "> {{min}}"
-    }
+    },
+    "transactions": "Transaktionen"
   },
   "permissions": {
     "commando": {
@@ -965,7 +978,9 @@
       "decodepayreq": "Entschlüssel eine Zahlungsanforderungszeichenfolge.",
       "addinvoice": "Erstelle neue Rechnungen.",
       "listpayments": "Erhalte eine Liste aller ausgehenden Zahlungen.",
-      "verifymessage": "Überprüfe eine Signatur über eine Nachricht."
+      "verifymessage": "Überprüfe eine Signatur über eine Nachricht.",
+      "addholdinvoice": "Erstelle eine neue HODL-Rechnungen.",
+      "settleinvoice": "Begleiche eine akzeptierte Rechnung."
     },
     "nostr": {
       "getpublickey": "Lese deinen öffentlichen Schlüssel.",
@@ -995,7 +1010,9 @@
       "listinvoices": "Erhalte eine Liste aller Rechnungen.",
       "channelbalance": "Erhalte einen Bericht über den Gesamtbetrag der Mittel für alle offenen Kanäle.",
       "walletbalance": "Ermittel die gesamten nicht verbrauchten Ausgaben deiner Wallet.",
-      "openchannel": "Öffne einen neuen Kanal."
+      "openchannel": "Öffne einen neuen Kanal.",
+      "addholdinvoice": "Erstelle eine neue HODL-Rechnungen.",
+      "settleinvoice": "Begleiche eine akzeptierte Rechnung."
     }
   }
 }

@@ -22,7 +22,7 @@ const NostrClass = jest.fn().mockImplementation(() => {
 jest.mock("~/extension/background-script/state", () => ({
   getState: () => ({
     getNostr: jest.fn(() => new NostrClass()),
-    currentAccountId: "123456",
+    currentAccountId: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
   }),
 }));
 

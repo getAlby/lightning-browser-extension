@@ -23,12 +23,13 @@ export default async function sendPayment(
     };
   }
 
-  const paymentRequestDetails = lightningPayReq.decode(paymentRequest);
   const connector = await state.getState().getConnector();
 
-  let response;
+  let response, paymentRequestDetails;
 
   try {
+    paymentRequestDetails = lightningPayReq.decode(paymentRequest);
+
     response = await connector.sendPayment({
       paymentRequest,
     });
@@ -53,8 +54,10 @@ export default async function sendPayment(
     paymentRequestDetails,
     response,
     details: {
-      description: paymentRequestDetails.tagsObject.description,
-      destination: paymentRequestDetails.payeeNodeKey,
+      ...(paymentRequestDetails && {
+        description: paymentRequestDetails.tagsObject.description,
+        destination: paymentRequestDetails.payeeNodeKey,
+      }),
     },
   });
 

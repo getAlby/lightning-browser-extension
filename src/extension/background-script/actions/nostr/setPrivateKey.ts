@@ -6,7 +6,12 @@ import state from "../../state";
 const setPrivateKey = async (message: MessagePrivateKeySet) => {
   const id = message.args?.id || state.getState().currentAccountId;
 
-  const password = state.getState().password as string;
+  const password = await state.getState().password();
+  if (!password) {
+    return {
+      error: "Password is missing.",
+    };
+  }
   const privateKey = message.args.privateKey;
   const accounts = state.getState().accounts;
 
