@@ -155,6 +155,7 @@ export default function ConnectLnd() {
           title={t("url.placeholder")}
           onChange={handleChange}
           required
+          autoFocus={true}
         />
       </div>
       {formData.url.match(/\.onion/i) && (

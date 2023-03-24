@@ -113,6 +113,7 @@ export default function ConnectCitadel() {
           label={t("password.label")}
           id="password"
           type={passwordView ? "text" : "password"}
+          autoFocus={true}
           required
           onChange={handleChange}
           endAdornment={
