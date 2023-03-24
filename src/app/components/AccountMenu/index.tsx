@@ -84,9 +84,7 @@ function AccountMenu({ showOptions = true }: Props) {
           <div className="flex items-center">
             <Avatar size={24} name={authAccount?.id || ""} />
             <div
-              className={`flex-auto mx-2 py-3 overflow-hidden ${
-                !title ? "w-32" : ""
-              }`}
+              className={`flex-auto mx-2 py-3 overflow-hidden min-w-[10rem] max-w-[14rem] text-left`}
             >
               <p
                 title={title || ""}
