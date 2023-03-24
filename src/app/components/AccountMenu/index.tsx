@@ -140,7 +140,7 @@ function AccountMenu({ showOptions = true }: Props) {
               }}
             >
               <GlobeIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-              {t("options.account.go_to_web_wallet")}
+              {t("options.account.go_to_web_wallet")} →
             </Menu.ItemButton>
           )}
           <MenuDivider />
