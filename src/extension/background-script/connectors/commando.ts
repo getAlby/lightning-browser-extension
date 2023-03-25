@@ -142,7 +142,15 @@ export default class Commando implements Connector {
   }
 
   get supportedMethods() {
-    return supportedMethods;
+    return [
+      "getInfo",
+      "keysend",
+      "makeInvoice",
+      "sendPayment",
+      "signMessage",
+      "getBalance",
+      ...supportedMethods,
+    ];
   }
 
   async requestMethod(

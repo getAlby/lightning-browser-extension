@@ -42,7 +42,13 @@ class Galoy implements Connector {
   }
 
   get supportedMethods() {
-    return ["getInfo", "makeInvoice", "sendPayment", "signMessage"];
+    return [
+      "getInfo",
+      "makeInvoice",
+      "sendPayment",
+      "signMessage",
+      "getBalance",
+    ];
   }
 
   getInfo(): Promise<GetInfoResponse> {

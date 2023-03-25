@@ -184,7 +184,15 @@ class Lnc implements Connector {
   }
 
   get supportedMethods() {
-    return Object.keys(methods);
+    return [
+      "getInfo",
+      "keysend",
+      "makeInvoice",
+      "sendPayment",
+      "signMessage",
+      "getBalance",
+      ...Object.keys(methods),
+    ];
   }
 
   async requestMethod(
