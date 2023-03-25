@@ -15,6 +15,7 @@ const weblnCalls = [
   "webln/keysendOrPrompt",
   "webln/makeInvoice",
   "webln/signMessageOrPrompt",
+  "webln/getBalanceOrPrompt",
   "webln/request",
 ];
 // calls that can be executed when webln is not enabled for the current content page

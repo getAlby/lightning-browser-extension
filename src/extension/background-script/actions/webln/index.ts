@@ -1,3 +1,4 @@
+import getBalanceOrPrompt from "./getBalanceOrPrompt";
 import keysendOrPrompt from "./keysendOrPrompt";
 import lnurl from "./lnurl";
 import makeInvoiceOrPrompt from "./makeInvoiceOrPrompt";
@@ -10,4 +11,5 @@ export {
   signMessageOrPrompt,
   makeInvoiceOrPrompt,
   lnurl,
+  getBalanceOrPrompt,
 };
