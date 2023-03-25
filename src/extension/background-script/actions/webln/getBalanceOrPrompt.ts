@@ -42,7 +42,7 @@ const getBalanceOrPrompt = async (message: MessageDefault) => {
       }>({
         args: {
           requestPermission: {
-            method: "test",
+            method: "getBalance",
             description: `webln.getbalance`,
           },
         },
@@ -59,7 +59,7 @@ const getBalanceOrPrompt = async (message: MessageDefault) => {
           accountId: accountId,
           allowanceId: allowance.id,
           host: message.origin.host,
-          method: "weblnMethod", // ensure to store the prefixed method string
+          method: "webln.getbalance", // ensure to store the prefixed method string
           enabled: promptResponse.data.enabled,
           blocked: promptResponse.data.blocked,
         });
