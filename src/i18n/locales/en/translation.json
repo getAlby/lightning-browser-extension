@@ -287,12 +287,12 @@
         "description": "Login to your Kollider account",
         "choose_path": {
           "title": "Connect to your Kollider Wallet",
-          "description": "Login or Signup to Kollider Wallet to connect it to Alby.",
+          "description": "Login or sign up for a new Kollider account and connect to Alby.",
           "create_new": "Sign up"
         },
         "create": {
-          "title": "Create Kollider Wallet and connect to Alby",
-          "description": "Create a new Kollider Wallet to send, receive and trade Bitcoin."
+          "title": "Create your Kollider account and connect to Alby",
+          "description": "Create a new Kollider account to send, receive and trade Bitcoin."
         },
         "login": {
           "title": "Connect to your Kollider account",
