@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import Button from "~/app/components/Button";
 import ConnectorPath from "~/app/components/ConnectorPath";
-import getConnectorRoutes from "~/app/router/connectorRoutes";
+import { getConnectorRoutes } from "~/app/router/connectorRoutes";
 import i18n from "~/i18n/i18nConfig";
 
 import alby from "/static/assets/icons/alby.png";

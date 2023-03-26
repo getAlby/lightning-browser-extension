@@ -21,12 +21,47 @@ import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
-import getConnectorRoutes from "~/app/router/connectorRoutes";
+import {
+  getBtcPayConnectorRoutes,
+  getCitadelConnectorRoutes,
+  getConnectorRoutes,
+  getMynodeConnectorRoutes,
+  getRaspiblitzConnectorRoutes,
+  getStart9ConnectorRoutes,
+  getUmbrelConnectorRoutes,
+} from "~/app/router/connectorRoutes";
 import Discover from "~/app/screens/Discover";
 import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
 import i18n from "~/i18n/i18nConfig";
+
+const multiConnectors = [
+  {
+    path: "umbrel",
+    connectors: getUmbrelConnectorRoutes(),
+  },
+  {
+    path: "citadel",
+    connectors: getCitadelConnectorRoutes(),
+  },
+  {
+    path: "btcpay",
+    connectors: getBtcPayConnectorRoutes(),
+  },
+  {
+    path: "raspiblitz",
+    connectors: getRaspiblitzConnectorRoutes(),
+  },
+  {
+    path: "mynode",
+    connectors: getMynodeConnectorRoutes(),
+  },
+  {
+    path: "start9",
+    connectors: getStart9ConnectorRoutes(),
+  },
+];
 
 function Options() {
   const connectorRoutes = getConnectorRoutes();
@@ -96,6 +131,7 @@ function Options() {
                         description={i18n.t(
                           "translation:choose_connector.description"
                         )}
+                        connectorRoutes={connectorRoutes}
                       />
                     }
                   />
@@ -105,6 +141,17 @@ function Options() {
                       path={connectorRoute.path}
                       element={connectorRoute.element}
                     />
+                  ))}
+                  {multiConnectors.map((multiConnector) => (
+                    <Route path={multiConnector.path} key={multiConnector.path}>
+                      {multiConnector.connectors.map((connectorRoute) => (
+                        <Route
+                          key={connectorRoute.path}
+                          path={connectorRoute.path}
+                          element={connectorRoute.element}
+                        />
+                      ))}
+                    </Route>
                   ))}
                 </Route>
               </Route>
