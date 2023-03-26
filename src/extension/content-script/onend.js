@@ -71,12 +71,7 @@ async function init() {
       // if not enabled only enable can be called.
       const availableCalls = isEnabled ? weblnCalls : disabledCalls;
       if (!availableCalls.includes(ev.data.action)) {
-        console.error(
-          "Function not available. Is the provider enabled? xx",
-          availableCalls,
-          disabledCalls,
-          ev.data.action
-        );
+        console.error("Function not available. Is the provider enabled?");
         return;
       }
 
