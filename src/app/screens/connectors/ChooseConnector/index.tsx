@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ConnectorRoute } from "~/app/router/connectorRoutes";
 
 type Props = {
-  connectorRoutes?: ConnectorRoute[];
+  connectorRoutes: ConnectorRoute[];
   title: string;
   description?: string;
 };
@@ -34,7 +34,7 @@ export default function ChooseConnector({
             )}
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-5">
-            {(connectorRoutes || []).map(({ path, title, logo }) => (
+            {connectorRoutes.map(({ path, title, logo }) => (
               <LinkButton key={path} to={path} title={title} logo={logo} />
             ))}
           </div>

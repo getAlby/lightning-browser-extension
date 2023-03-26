@@ -60,6 +60,7 @@ function getRoutes(
                   description={i18n.t(
                     "translation:choose_connector.description"
                   )}
+                  connectorRoutes={connectorRoutes}
                 />
               ),
             },
