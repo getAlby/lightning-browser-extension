@@ -26,7 +26,7 @@ async function authOrPrompt(
 
   // we have the check the unlock status manually. The account can still be locked
   // If it is locked we must show a prompt to unlock
-  const isUnlocked = state.getState().isUnlocked();
+  const isUnlocked = await state.getState().isUnlocked();
 
   // check if there is a publisher and lnurlAuth is enabled,
   // otherwise we we prompt the user

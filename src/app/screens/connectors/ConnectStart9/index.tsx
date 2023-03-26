@@ -136,6 +136,7 @@ export default function ConnectStart9() {
         placeholder={t("rest_url.placeholder")}
         onChange={handleLndconnectUrl}
         required
+        autoFocus={true}
       />
       {formData.url.match(/\.onion/i) && (
         <div className="mt-6">
