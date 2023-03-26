@@ -95,11 +95,261 @@
         }
       }
     },
+    "choose_connector": {
+      "title": "लाइटनिंग वॉलेट कनेक्ट करें",
+      "description": "अपने बाहरी लाइटनिंग वॉलेट या Node से कनेक्ट करें",
+      "lnd": {
+        "title": "LND",
+        "page": {
+          "title": "अपने LND नोड से कनेक्ट करें",
+          "description": "आपको अपने नोड URL और पढ़ने और भेजने की अनुमति के साथ एक मैकरून की आवश्यकता है (जैसे admin.macaroon)"
+        },
+        "url": {
+          "label": "REST API होस्ट और पोर्ट",
+          "placeholder": "https://your-node-url:8080"
+        },
+        "macaroon": {
+          "label": "Macaroon (HEX format)"
+        },
+        "or": "या",
+        "drag_and_drop": "अपने मैक्रों को यहाँ खींचें और छोड़ें या <0> ब्राउज़ करें </0>",
+        "errors": {
+          "connection_failed": "कनेक्शन विफल रहा। क्या आपके LND क्रेडेंशियल्स सही हैं?"
+        }
+      },
+      "lnc": {
+        "title": "LND के साथ LNC",
+        "page": {
+          "title": "अपने LND नोड से कनेक्ट करें",
+          "description": "एक नया युग्मन वाक्यांश प्राप्त करने के लिए टर्मिनल (litd) में एक नया session बनाएँ और इसे यहाँ दर्ज करें"
+        },
+        "pairing_phrase": {
+          "label": "आपका युग्मन वाक्यांश",
+          "placeholder": "गुप्त stack sats वाक्यांश"
+        }
+      },
+      "lndhub_bluewallet": {
+        "title": "Bluewallet",
+        "page": {
+          "title": "BlueWallet  से कनेक्ट करें",
+          "description": "ब्लू वॉलेट में, वह वॉलेट चुनें जिसे आप कनेक्ट करना चाहते हैं, इसे खोलें, \"...\" पर क्लिक करें, क्यूआर कोड प्रदर्शित करने के लिए निर्यात/बैकअप पर क्लिक करें और इसे अपने वेबकैम से स्कैन करें।"
+        },
+        "uri": {
+          "label": "BlueWallet Export URI"
+        },
+        "errors": {
+          "invalid_uri": "अवैध BlueWallet URI",
+          "connection_failed": "कनेक्शन विफल रहा। क्या आपका BlueWallet URI सही है?"
+        }
+      },
+      "lndhub_go": {
+        "title": "LNDHub",
+        "page": {
+          "title": "LNDHub से कनेक्ट करें",
+          "description": "यहां अपना LNDHub क्रेडेंशियल URI डालें या अपने वेबकैम से QR कोड स्कैन करें।"
+        },
+        "uri": {
+          "label": "LNDHub Export URI"
+        },
+        "errors": {
+          "invalid_uri": "अवैध LNDHub URI",
+          "connection_failed": "कनेक्शन विफल। क्या आपका LNDHub URI सही है?"
+        }
+      },
+      "lnbits": {
+        "title": "LNbits",
+        "page": {
+          "title": "<0>LNbits</0> से कनेक्ट करें",
+          "instructions": "LNbits में, वह वॉलेट चुनें जिसे आप कनेक्ट करना चाहते हैं, इसे खोलें, API जानकारी पर क्लिक करें और एडमिन कुंजी को कॉपी करें। इसे नीचे पेस्ट करें:s"
+        },
+        "admin_key": {
+          "label": "LNbits Admin Key",
+          "placeholder": "आपकी 32 अंकों की एडमिन की"
+        },
+        "url": {
+          "label": "LNbits URL"
+        },
+        "errors": {
+          "connection_failed": "कनेक्शन विफल रहा। क्या आपके पास सही URL और एडमिन कुंजी है?"
+        }
+      },
+      "eclair": {
+        "title": "Eclair",
+        "page": {
+          "title": "<0>Eclair</0>  से कनेक्ट करें",
+          "instructions": "आपको अपना Eclair URL और पासवर्ड चाहिए।"
+        },
+        "password": {
+          "label": "Eclair पासवर्ड"
+        },
+        "url": {
+          "label": "Eclair URL",
+          "placeholder": "http://localhost:8080"
+        }
+      },
+      "citadel": {
+        "title": "Citadel",
+        "page": {
+          "title": "<0>Citadel</0> node से कनेक्ट करें",
+          "instructions": "यह वर्तमान में काम नहीं करता है अगर 2FA सक्षम है।"
+        },
+        "password": {
+          "label": "Citadel पासवर्ड"
+        },
+        "url": {
+          "label": "Citadel URL",
+          "placeholder": "http://citadel.local"
+        }
+      },
+      "umbrel": {
+        "title": "Umbrel",
+        "page": {
+          "title": "<0>Umbrel</0> node  से कनेक्ट करें",
+          "instructions": "अपने Umbrel dashboard में <0>कनेक्ट वॉलेट</0> पर जाएं। <0>बाकी को कनेक्ट करें</0> चुनें और <0>lndconnect URL</0> को कॉपी करें। (आपके सेटअप के आधार पर आप या तो स्थानीय कनेक्शन या TOR कनेक्शन का उपयोग कर सकते हैं।)"
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
+      },
+      "mynode": {
+        "title": "myNode",
+        "page": {
+          "title": "<0>myNode</0> से कनेक्ट करें",
+          "instructions": "अपने myNode होमपेज पर अपनी <0>लाइटिंग</0> सेवा के लिए <0>वॉलेट</0> बटन पर क्लिक करें।<1/> अब <0> पेयर वॉलेट</0> पर क्लिक करें <0>स्थिति</0> टैब के अंतर्गत बटन। संकेत दिए जाने पर अपना पासवर्ड दर्ज करें। <1/> ड्रॉपडाउन मेनू का चयन करें और एक युग्मन विकल्प चुनें। अपने सेटअप के आधार पर आप या तो <0>लाइटनिंग (REST + स्थानीय) का उपयोग कर सकते हैं IP)</0> कनेक्शन या <0>लाइटनिंग (REST + Tor)</0> कनेक्शन।"
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
+      },
+      "start9": {
+        "title": "Start9",
+        "page": {
+          "title": "अपने <0>Embassy</0> node से कनेक्ट करें",
+          "instructions": "<0>ध्यान दें:</0> वर्तमान में हम केवल एलएनडी का समर्थन करते हैं लेकिन हम भविष्य में सी-लाइटिंग समर्थन जोड़ेंगे!<1/>अपने दूतावास के डैशबोर्ड पर <0>लाइटनिंग नेटवर्क डेमन<पर क्लिक करें। /0> सेवा।<1/><0>प्रॉपर्टी</0> टैब चुनें।<1/>अब <0>LND Connect REST URL कॉपी करें।</0>"
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
+      },
+      "raspiblitz": {
+        "title": "RaspiBlitz",
+        "page": {
+          "title": "your <0>RaspiBlitz</0> node से कनेक्ट करें",
+          "instructions1": "इन चरणों का पालन करें:<1/> 1. <0>SSH</0> अपने <0>Raspiblitz</0><1/>2 में। <0>ऐप्लिकेशन कनेक्ट करें और क्रेडेंशियल दिखाएं</0> चुनें 0> सूची से<1/><0/>3. चुनें <0>Alby को इस नोड से कनेक्ट करें</0><1/>4. कनेक्शन क्रेडेंशियल प्रदर्शित करने के लिए <0>ठीक</0> दबाएं<1 /><1/>नीचे दिए गए इनपुट में Tor के माध्यम से कनेक्ट करने के लिए <0>REST API होस्ट</0> या <0>.onion</0> पता कॉपी और पेस्ट करें।",
+          "instructions2": "(एडमिन) <0>मैकरून</0> को नीचे दिए गए इनपुट में कॉपी करें।"
+        },
+        "rest_api_host": {
+          "label": "REST API host",
+          "placeholder": "your-node-onion-address:port"
+        }
+      },
+      "bitcoin_beach": {
+        "title": "Bitcoin Beach Wallet",
+        "page": {
+          "title": "<0>Bitcoin Beach Wallet</0 से कनेक्ट करें>"
+        }
+      },
+      "bitcoin_jungle": {
+        "title": "Bitcoin Jungle Wallet",
+        "page": {
+          "title": "<0>Bitcoin Jungle Wallet</0 से कनेक्ट करें>"
+        }
+      },
+      "galoy": {
+        "phone_number": {
+          "label": "अपना फोन नंबर दर्ज करें"
+        },
+        "sms_code": {
+          "label": "अपना SMS सत्यापन कोड दर्ज करें"
+        },
+        "jwt": {
+          "label": "अपना JWT token दर्ज करें",
+          "info": "{{label}} लॉगिन वर्तमान में अपग्रेड किया जा रहा है। यदि आप एक उन्नत उपयोगकर्ता हैं, तो आप <0>वेब वॉलेट (wallet.mainnet.galoy.io)< के माध्यम से लॉग इन करके अपना JWT टोकन प्राप्त कर सकते हैं। /0><1/><1/>JWT ऐसा दिखता है: <2>eyJhbG...</2><1/><1/>"
+        },
+        "actions": {
+          "login": "लॉग इन",
+          "request_sms_code": "अनुरोध SMS Code"
+        },
+        "errors": {
+          "failed_to_request_sms": "SMS कोड का अनुरोध करने में विफल",
+          "failed_to_login_sms": "SMS कोड से प्रवेश करने में विफल",
+          "setup_failed": "स्थापना विफल",
+          "missing_jwt": "JWT गायब, लॉग इन नहीं हो सका।",
+          "invalid_jwt": "अवैध JWT उत्तीर्ण"
+        }
+      },
+      "kollider": {
+        "title": "Kollider",
+        "description": "अपने Kollider account",
+        "page": {
+          "title": "your Kollider खाते में प्रवेश करें",
+          "description": "क्या आपके पास पहले से कोई खाता नहीं है? अभी <0>साइन अप करें</0>!"
+        },
+        "username": {
+          "label": "अपना Kollider उपयोगकर्ता नाम दर्ज करें"
+        },
+        "password": {
+          "label": "अपना Kollider पासवर्ड दर्ज करें"
+        },
+        "currency": {
+          "label": "अपना मुद्रा खाता चुनें"
+        },
+        "errors": {
+          "connection_failed": "कनेक्शन विफल। क्या आप सुनिश्चित हैं कि खाता डेटा सही है?"
+        }
+      },
+      "btcpay": {
+        "title": "BTCPay Server",
+        "page": {
+          "title": "your BTCPay LND node से कनेक्ट करें",
+          "instructions": "अपने BTCPayServer पर नेविगेट करें और एक admin के रूप में लॉग इन करें। सर्वर सेटिंग्स पर जाएं> सेवाएं> एलएनडी रेस्ट - जानकारी देखें। फिर \"क्यूआर कोड जानकारी देखें\" पर क्लिक करें और क्यूआर कोड डेटा कॉपी करें। इसे नीचे पेस्ट करें: "
+        },
+        "config": {
+          "label": "Config data",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+        },
+        "errors": {
+          "connection_failed": "कनेक्शन विफल। क्या BTCPay कनेक्शन URL सही और पहुंच योग्य है?"
+        }
+      },
+      "commando": {
+        "title": "Core Lightning",
+        "page": {
+          "title": "your Core Lightning node से कनेक्ट करें",
+          "instructions": "निश्चित करें कि आपके पास कोर लाइटनिंग संस्करण 0.12.0 या नया है, कमांडो प्लगइन चल रहा है और आपका नोड लाइटनिंग नेटवर्क पर पहुंच योग्य है। 'lightning-cli commando-rune' चलाकर एक rune बनाएं।"
+        },
+        "host": {
+          "label": "Host"
+        },
+        "pubkey": {
+          "label": "Public key"
+        },
+        "rune": {
+          "label": "Rune"
+        },
+        "port": {
+          "label": "Port"
+        },
+        "proxy": {
+          "label": "Websocket proxy"
+        },
+        "privKey": {
+          "label": "स्थानीय निजी कुंजी (स्वत: उत्पन्न)"
+        },
+        "config": {
+          "label": "Config data",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+        },
+        "errors": {
+          "connection_failed": "कनेक्शन विफल। क्या आपका Core lightning node ऑनलाइन है और commando plugin का उपयोग कर रहा है?"
+        }
+      }
+    },
     "settings": {
       "title": "समायोजन"
-    },
-    "choose_connector": {
-      "description": "आपको पहले एक Lightning वॉलेट से कनेक्ट करने की आवश्यकता है ताकि आप अपनी पसंदीदा वेबसाइटों से बातचीत कर सकें जो बिटकॉइन Lightning भुगतान स्वीकार करते हैं!"
     }
   }
 }
