@@ -46,6 +46,9 @@ const mockDetails: LNURLDetails = {
     contentMetadata: {
       mandatory: false,
     },
+    contentMetadataUri: {
+      mandatory: false,
+    },
   },
   domain: "lnurl.fiatjaf.com",
   url: "https://lnurl.fiatjaf.com/lnurl-pay?session=a798c63b416e02a33685b51d7a32cf8d5dea14f5b5fd734c5d26d246606a3521",

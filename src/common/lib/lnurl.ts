@@ -124,6 +124,7 @@ const lnurl = {
           name?: string;
           email?: string;
           contentMetadata?: string;
+          contentMetadataUri?: string;
         };
     metadata: string;
     amount: number;

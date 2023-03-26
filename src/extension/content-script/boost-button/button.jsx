@@ -1,4 +1,5 @@
 import { LightningAddress } from "alby-tools";
+import { create } from "ipfs-http-client";
 import { useCallback, useEffect, useState } from "react";
 import "~/app/styles/index.css";
 import WebLNProvider from "~/extension/ln/webln";
@@ -23,6 +24,9 @@ function BoostButton() {
   const [expand, setExpand] = useState(false);
   const [satsClicked, setSatsClicked] = useState(0);
 
+  // Create IPFS client instance
+  const ipfs = create("http://localhost:5001");
+
   useEffect(() => {
     let count = 0;
 
@@ -45,16 +49,46 @@ function BoostButton() {
     extract();
   }, []);
 
+  const ipfsDataHandler = useCallback(
+    async (data) => {
+      try {
+        const result = await ipfs.add(JSON.stringify(data));
+        const hash = result.cid.toString();
+        const gatewayUrl = "http://localhost:8080/ipfs/"; // Replace with the URL of your local IPFS node
+        const cid = hash; // Replace with your own CID
+
+        const response = await fetch(gatewayUrl + cid);
+        const responsegot = await response.text();
+        console.info(responsegot);
+
+        return cid;
+      } catch (error) {
+        console.error("Error handling data:", error);
+      }
+    },
+    [ipfs]
+  );
   const sendSatsToLnurl = useCallback(async () => {
     setLoading(true);
     try {
       window.webln = new WebLNProvider();
       await window.webln.enable();
+      let contentMetadataUri;
       if (isYoutube && Object.keys(contentMetadata).length != 0) {
         const currentTime = youTubeTimingInfo();
         contentMetadata["payment_content_offset"] = currentTime;
+        const data = {
+          name: "Payer Data metadata",
+          description: "This is a test file",
+          content: contentMetadata,
+        };
+        contentMetadataUri = await ipfsDataHandler(data);
       }
-      const result = await window.webln.lnurl(lnurl, contentMetadata);
+      const result = await window.webln.lnurl(
+        lnurl,
+        contentMetadata,
+        contentMetadataUri
+      );
       if (result) {
         setSats(result.route.total_amt);
         setSent(true);
@@ -66,21 +100,29 @@ function BoostButton() {
       setLoading(false);
       setHold(false);
     }
-  }, [lnurl, contentMetadata, isYoutube]);
+  }, [lnurl, contentMetadata, isYoutube, ipfsDataHandler]);
 
   const generateInvoice = useCallback(
     async (satsClicked) => {
       setLoading(true);
       if (!satsClicked) return;
       const ln = new LightningAddress(lnurl);
+      let contentMetadataUri;
       if (isYoutube && Object.keys(contentMetadata).length != 0) {
         const currentTime = youTubeTimingInfo();
         contentMetadata["payment_content_offset"] = currentTime;
+        const data = {
+          name: "Payer Data metadata",
+          description: "This is a test file",
+          content: contentMetadata,
+        };
+        contentMetadataUri = await ipfsDataHandler(data);
       }
       let invoiceDetails = { amount: (satsClicked * 1000).toString() };
       if (Object.keys(contentMetadata).length != 0) {
         invoiceDetails["payerdata"] = JSON.stringify({
           content_metadata: contentMetadata,
+          content_metadata_uri: contentMetadataUri,
         });
       }
       const invoice = await ln.generateInvoice(invoiceDetails);
@@ -100,7 +142,7 @@ function BoostButton() {
         setLoading(false);
       }
     },
-    [lnurl, contentMetadata, isYoutube]
+    [lnurl, contentMetadata, isYoutube, ipfsDataHandler]
   );
 
   const textStyle = {

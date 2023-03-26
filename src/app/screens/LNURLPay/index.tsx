@@ -44,6 +44,7 @@ function LNURLPay() {
   const navState = useNavigationState();
   const details = navState.args?.lnurlDetails as LNURLPayServiceResponse;
   const contentMetadata = navState.args?.contentMetadata;
+  const contentMetadataUri = navState.args?.contentMetadataUri;
   const {
     isLoading: isLoadingSettings,
     settings,
@@ -96,6 +97,9 @@ function LNURLPay() {
     }
     if (contentMetadata) {
       payerData["content_metadata"] = contentMetadata;
+    }
+    if (contentMetadataUri) {
+      payerData["content_metadata_uri"] = contentMetadataUri;
     }
 
     if (Object.keys(payerData).length != 0) {
