@@ -125,6 +125,7 @@ export default function ConnectBtcpay() {
           placeholder={t("config.placeholder")}
           onChange={handleChange}
           required
+          autoFocus={true}
         />
       </div>
       {formData.url.match(/\.onion/i) && (

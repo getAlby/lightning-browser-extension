@@ -121,6 +121,7 @@ export default function ConnectKollidier() {
           required
           value={formData.username}
           onChange={handleChange}
+          autoFocus={true}
         />
       </div>
       <div className="mb-6">
