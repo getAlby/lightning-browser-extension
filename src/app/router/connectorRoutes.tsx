@@ -1,4 +1,5 @@
 import ConnectBtcpay from "@screens/connectors/ConnectBtcpay";
+import ConnectBtcpayCln from "@screens/connectors/ConnectBtcpayCln";
 import ConnectCitadel from "@screens/connectors/ConnectCitadel";
 import ConnectEclair from "@screens/connectors/ConnectEclair";
 import ConnectGaloy, { galoyUrls } from "@screens/connectors/ConnectGaloy";
@@ -132,6 +133,12 @@ function getConnectorRoutes() {
       path: "btcpay",
       element: <ConnectBtcpay />,
       title: i18n.t("translation:choose_connector.btcpay.title"),
+      logo: btcpay,
+    },
+    {
+      path: "btcpaycln",
+      element: <ConnectBtcpayCln />,
+      title: i18n.t("translation:choose_connector.btcpay_cln.title"),
       logo: btcpay,
     },
   ];
