@@ -72,7 +72,7 @@ export default function SetPassword() {
             !formData.password ||
             formData.password !== formData.passwordConfirmation
           }
-          className="max-sm:w-full"
+          className="w-64"
         />
       </div>
     </form>
