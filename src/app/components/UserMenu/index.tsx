@@ -1,8 +1,8 @@
 import {
   AddressBookIcon,
   GearIcon,
-  GlobeIcon,
   LockIcon,
+  MagicWandIcon,
   MenuIcon,
   QuestionIcon,
   ReceiveIcon,
@@ -54,7 +54,7 @@ export default function UserMenu() {
             openOptions("discover");
           }}
         >
-          <GlobeIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          <RocketIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
           {tCommon("discover")}
         </Menu.ItemButton>
         <Menu.ItemButton
@@ -111,7 +111,7 @@ export default function UserMenu() {
             utils.openUrl("https://feedback.getalby.com");
           }}
         >
-          <RocketIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          <MagicWandIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
           {tCommon("feedback")}
         </Menu.ItemButton>
         <Menu.ItemButton
