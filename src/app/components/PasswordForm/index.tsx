@@ -91,7 +91,7 @@ export default function PasswordForm<
 
   return (
     <>
-      <div className="w-full mb-6">
+      <div className="w-full">
         <TextField
           autoFocus={autoFocus}
           id="password"

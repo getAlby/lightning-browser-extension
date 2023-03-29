@@ -42,7 +42,7 @@ export default function SetPassword() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="max-w-screen-sm mx-auto relative shadow-lg rounded-xl mt-14 lg:flex lg:space-x-8 bg-white dark:bg-surface-02dp pt-10 pb-10 lg:py-12 px-10">
+      <div className="max-w-screen-sm mx-auto shadow-lg rounded-xl relative mt-14 lg:flex lg:space-x-8 bg-white dark:bg-surface-02dp pt-10 pb-10 px-10">
         <div>
           <h1 className="text-2xl font-bold dark:text-white max-sm:text-center">
             {t("title")}
@@ -54,7 +54,7 @@ export default function SetPassword() {
           <div className="mt-4 w-full flex justify-center">
             {unlockScreenshot}
           </div>
-          <div className="lg:w-4/5 mb-6">
+          <div>
             <PasswordForm
               i18nKeyPrefix="welcome.set_password"
               formData={formData}
