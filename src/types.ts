@@ -92,7 +92,7 @@ export interface Battery extends OriginData {
   suggested?: string;
   name: string;
   icon: string;
-  contentMetadata?: { [key: string]: string | number | undefined };
+  getContentMetadata?: () => Record<string, unknown>;
 }
 
 export type BatteryMetaTagRecipient = Pick<

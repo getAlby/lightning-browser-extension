@@ -2,7 +2,7 @@ import { Battery } from "~/types";
 
 import getOriginData from "../originData";
 import { findLnurlFromYouTubeAboutPage } from "./YouTubeChannel";
-import { findLightningAddressInText } from "./helpers";
+import { findLightningAddressInText, getYouTubeTimingInfo } from "./helpers";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
 
@@ -18,13 +18,6 @@ const battery = async (): Promise<Battery | void> => {
   const channelLink = document.querySelector<HTMLAnchorElement>(
     "#columns #primary #primary-inner #meta-contents .ytd-channel-name a"
   );
-  const contentUri = document.querySelector<HTMLLinkElement>(
-    'link[rel="canonical"]'
-  )?.href;
-
-  const contentMetadata = {
-    contenturi: contentUri,
-  };
 
   if (!text || !channelLink) {
     return;
@@ -68,13 +61,26 @@ const battery = async (): Promise<Battery | void> => {
     name,
     description: "", // we can not reliably find a description (the meta tag might be of a different video)
     icon: imageUrl,
-    contentMetadata: contentMetadata,
+    getContentMetadata: getContentMetadata,
+  };
+};
+
+const getContentMetadata = (): Record<string, unknown> => {
+  const contentUri = document.querySelector<HTMLLinkElement>(
+    'link[rel="canonical"]'
+  )?.href;
+  const paymentContentOffset = getYouTubeTimingInfo();
+
+  return {
+    contenturi: contentUri,
+    payment_content_offset: paymentContentOffset,
   };
 };
 
 const YouTubeVideo = {
   urlMatcher,
   battery,
+  getContentMetadata,
 };
 
 export default YouTubeVideo;

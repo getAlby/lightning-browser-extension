@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from "react";
 import "~/app/styles/index.css";
 import WebLNProvider from "~/extension/ln/webln";
 
-import { youTubeTimingInfo } from "../batteries/helpers";
 import extractLightningData from "../batteries/index";
 
 function BoostButton() {
@@ -14,12 +13,11 @@ function BoostButton() {
 
   const [sats, setSats] = useState(0);
   const [sent, setSent] = useState(false);
-  const [contentMetadata, setContentMetadata] = useState("");
 
   const [hold, setHold] = useState(false);
   const [timer, setTimer] = useState();
   const [holdTimer, setHoldTimer] = useState();
-  const [isYoutube, setIsYoutube] = useState(false);
+  const [lnData, setlnData] = useState();
 
   const [expand, setExpand] = useState(false);
   const [satsClicked, setSatsClicked] = useState(0);
@@ -35,10 +33,8 @@ function BoostButton() {
       const lnData = await extractLightningData();
       if (lnData) {
         setLnurl(lnData.address);
-        if (lnData.host == "www.youtube.com") setIsYoutube(true);
-        if (lnData.contentMetadata) {
-          setContentMetadata(lnData.contentMetadata);
-        }
+        setlnData(lnData);
+
         clearInterval(intervalId);
       } else if (count >= 5) {
         clearInterval(intervalId);
@@ -54,14 +50,13 @@ function BoostButton() {
       try {
         const result = await ipfs.add(JSON.stringify(data));
         const hash = result.cid.toString();
-        const gatewayUrl = "http://localhost:8080/ipfs/"; // Replace with the URL of your local IPFS node
-        const cid = hash; // Replace with your own CID
-
-        const response = await fetch(gatewayUrl + cid);
+        const gatewayUrl = "http://localhost:8080/ipfs/";
+        const contentMetadataUri = gatewayUrl + hash;
+        const response = await fetch(gatewayUrl + hash);
         const responsegot = await response.text();
         console.info(responsegot);
 
-        return cid;
+        return contentMetadataUri;
       } catch (error) {
         console.error("Error handling data:", error);
       }
@@ -74,9 +69,9 @@ function BoostButton() {
       window.webln = new WebLNProvider();
       await window.webln.enable();
       let contentMetadataUri;
-      if (isYoutube && Object.keys(contentMetadata).length != 0) {
-        const currentTime = youTubeTimingInfo();
-        contentMetadata["payment_content_offset"] = currentTime;
+      let contentMetadata;
+      if (lnData.getContentMetadata) {
+        contentMetadata = lnData.getContentMetadata();
         const data = {
           name: "Payer Data metadata",
           description: "This is a test file",
@@ -84,6 +79,7 @@ function BoostButton() {
         };
         contentMetadataUri = await ipfsDataHandler(data);
       }
+
       const result = await window.webln.lnurl(
         lnurl,
         contentMetadata,
@@ -100,7 +96,7 @@ function BoostButton() {
       setLoading(false);
       setHold(false);
     }
-  }, [lnurl, contentMetadata, isYoutube, ipfsDataHandler]);
+  }, [lnurl, ipfsDataHandler, lnData]);
 
   const generateInvoice = useCallback(
     async (satsClicked) => {
@@ -108,9 +104,9 @@ function BoostButton() {
       if (!satsClicked) return;
       const ln = new LightningAddress(lnurl);
       let contentMetadataUri;
-      if (isYoutube && Object.keys(contentMetadata).length != 0) {
-        const currentTime = youTubeTimingInfo();
-        contentMetadata["payment_content_offset"] = currentTime;
+      let contentMetadata = {};
+      if (lnData.getContentMetadata) {
+        contentMetadata = lnData.getContentMetadata();
         const data = {
           name: "Payer Data metadata",
           description: "This is a test file",
@@ -118,13 +114,19 @@ function BoostButton() {
         };
         contentMetadataUri = await ipfsDataHandler(data);
       }
+
       let invoiceDetails = { amount: (satsClicked * 1000).toString() };
-      if (Object.keys(contentMetadata).length != 0) {
-        invoiceDetails["payerdata"] = JSON.stringify({
-          content_metadata: contentMetadata,
-          content_metadata_uri: contentMetadataUri,
-        });
+      let payerDataMetadata = {};
+      if (Object.keys(contentMetadata).length) {
+        payerDataMetadata["content_metadata"] = contentMetadata;
       }
+      if (contentMetadataUri) {
+        payerDataMetadata["content_metadata_uri"] = contentMetadataUri;
+      }
+      if (Object.keys(payerDataMetadata).length) {
+        invoiceDetails["payerdata"] = JSON.stringify(payerDataMetadata);
+      }
+
       const invoice = await ln.generateInvoice(invoiceDetails);
       window.webln = new WebLNProvider();
       try {
@@ -142,7 +144,7 @@ function BoostButton() {
         setLoading(false);
       }
     },
-    [lnurl, contentMetadata, isYoutube, ipfsDataHandler]
+    [lnurl, ipfsDataHandler, lnData]
   );
 
   const textStyle = {

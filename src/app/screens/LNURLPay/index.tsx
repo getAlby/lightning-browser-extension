@@ -102,7 +102,7 @@ function LNURLPay() {
       payerData["content_metadata_uri"] = contentMetadataUri;
     }
 
-    if (Object.keys(payerData).length != 0) {
+    if (Object.keys(payerData).length) {
       return payerData;
     } else {
       return undefined;

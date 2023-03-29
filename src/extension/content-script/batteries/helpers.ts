@@ -57,7 +57,7 @@ export const setLightningData = (data: [Battery]): void => {
   msg.request("setIcon", { icon: ExtensionIcon.Tipping });
 };
 
-export const youTubeTimingInfo = (): number | undefined => {
+export const getYouTubeTimingInfo = (): number | undefined => {
   let currentTime;
   const video = document.querySelector("video") as HTMLVideoElement | null;
   if (video !== null && video !== undefined) {
