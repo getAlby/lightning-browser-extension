@@ -23,9 +23,17 @@ const battery = (): Battery | void => {
     icon:
       document.querySelector<HTMLImageElement>(`img[alt*='${name}']`)?.src ??
       "",
+    getContentMetadata: getContentMetadata,
   };
 };
 
+const getContentMetadata = (): Record<string, unknown> => {
+  const scrollPosition = window.scrollY;
+
+  return {
+    scroll_position: scrollPosition,
+  };
+};
 const Medium = {
   urlMatcher,
   battery,
