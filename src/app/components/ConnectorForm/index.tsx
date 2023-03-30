@@ -1,6 +1,4 @@
 import { FormEventHandler } from "react";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import i18n from "~/i18n/i18nConfig";
 
 import Button from "../Button";
@@ -28,9 +26,6 @@ function ConnectorForm({
   video,
   image,
 }: Props) {
-  const { t: tCommon } = useTranslation("common");
-  const navigate = useNavigate();
-
   const media = (
     <div className="flex h-full justify-center items-center">
       {video ? (
@@ -99,13 +94,6 @@ function ConnectorForm({
         <div className="hidden lg:block lg:w-1/2">{media}</div>
       </div>
       <div className="mb-4 mt-8 md:my-8 flex flex-col-reverse justify-center gap-4 md:flex-row">
-        <Button
-          label={tCommon("actions.back")}
-          onClick={(e) => {
-            navigate(-1);
-          }}
-          className="max-sm:w-full"
-        />
         <Button
           type="submit"
           label={submitLabel}
