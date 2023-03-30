@@ -4,7 +4,6 @@ import {
   LockIcon,
   MagicWandIcon,
   MenuIcon,
-  QuestionIcon,
   ReceiveIcon,
   RocketIcon,
   SendIcon,
@@ -12,6 +11,7 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { ConnectedSiteIcon, HelpIcon } from "~/app/components/CustomIcons";
 import { useAccount } from "~/app/context/AccountContext";
 import utils from "~/common/lib/utils";
 
@@ -79,7 +79,7 @@ export default function UserMenu() {
               utils.openUrl("https://guides.getalby.com");
             }}
           >
-            <QuestionIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+            <HelpIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
             {tCommon("help")}
           </Menu.ItemButton>
           <Menu.Divider />
@@ -110,7 +110,7 @@ export default function UserMenu() {
               openOptions("publishers");
             }}
           >
-            <TransactionsIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+            <ConnectedSiteIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
             {tCommon("connected_sites")}
           </Menu.ItemButton>
           <Menu.ItemButton
@@ -167,7 +167,7 @@ export default function UserMenu() {
               utils.openUrl("https://guides.getalby.com");
             }}
           >
-            <QuestionIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+            <HelpIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
             {tCommon("help")}
           </Menu.ItemButton>
           <Menu.Divider />
