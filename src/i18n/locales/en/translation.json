@@ -739,6 +739,10 @@
       "no_content": "(No content)",
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
+      "reactions": {
+        "like": "🤙 Like"
+      },
+      "note": "Note",
       "kinds": {
         "unknown": "nostr event of kind {{kind}}",
         "0": "metadata",
