@@ -733,6 +733,7 @@
       "content": "This website asks you to sign:",
       "allow_sign": "Allow {{host}} to sign:",
       "allow_sign_event": "Allow {{host}} to sign a {{kind}}:",
+      "allow_sign_event_contacts": "Allow {{host}} to sign an update to contacts list",
       "view_details": "View details",
       "hide_details": "Hide details",
       "no_content": "(No content)",

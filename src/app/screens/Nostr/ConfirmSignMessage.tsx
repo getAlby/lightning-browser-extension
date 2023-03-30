@@ -13,7 +13,7 @@ import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import { Event } from "~/extension/ln/nostr/types";
+import { Event, EventKind } from "~/extension/ln/nostr/types";
 import type { OriginData } from "~/types";
 
 function ConfirmSignMessage() {
@@ -84,13 +84,25 @@ function ConfirmSignMessage() {
                 url={origin.host}
               />
               <ContentMessage
-                heading={t("allow_sign_event", {
-                  host: origin.host,
-                  kind: t(`kinds.${event.kind}`, {
-                    defaultValue: t("kinds.unknown", { kind: event.kind }),
-                  }),
-                })}
-                content={event.content || t("no_content")}
+                heading={
+                  event.kind === EventKind.Contacts
+                    ? t("allow_sign_event_contacts", {
+                        host: origin.host,
+                      })
+                    : t("allow_sign_event", {
+                        host: origin.host,
+                        kind: t(`kinds.${event.kind}`, {
+                          defaultValue: t("kinds.unknown", {
+                            kind: event.kind,
+                          }),
+                        }),
+                      })
+                }
+                content={
+                  event.kind === EventKind.Contacts
+                    ? ""
+                    : event.content || t("no_content")
+                }
               />
               <div className="flex justify-center mb-4 gap-4">
                 <Hyperlink onClick={toggleShowJSON}>
