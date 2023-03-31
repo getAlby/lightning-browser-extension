@@ -39,7 +39,9 @@ export default function Input({
       id={id}
       className={classNames(
         "block w-full placeholder-gray-500 dark:placeholder-neutral-600 dark:text-white",
-        !suffix && !endAdornment
+        disabled
+        ? `${outerStyles} bg-gray-50 dark:bg-surface-16dp text-gray-500 dark:text-gray-500`
+        : !suffix && !endAdornment
           ? `${outerStyles} focus:ring-orange-bitcoin focus:border-orange-bitcoin focus:dark:border-orange-bitcoin focus:ring-1`
           : "pr-0 border-0 focus:ring-0 bg-transparent"
       )}
