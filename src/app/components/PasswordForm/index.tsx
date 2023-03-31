@@ -132,7 +132,7 @@ export default function PasswordForm<
         )}
       </div>
       {confirm && (
-        <div className="w-full">
+        <div className="mt-6 w-full">
           <TextField
             id="passwordConfirmation"
             label={t("confirm_password.label")}

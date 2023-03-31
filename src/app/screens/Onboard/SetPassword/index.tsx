@@ -48,10 +48,10 @@ export default function SetPassword() {
             {t("title")}
           </h1>
 
-          <p className="text-gray-500 my-6 dark:text-gray-400">
+          <p className="text-gray-500 mt-4 dark:text-gray-400">
             {t("description")}
           </p>
-          <div className="mt-4 w-full flex justify-center">
+          <div className="my-6 w-full flex justify-center">
             {unlockScreenshot}
           </div>
           <div>
