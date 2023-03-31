@@ -28,7 +28,7 @@ function ConnectorForm({
 }: Props) {
   const media = (
     <div className="flex h-full justify-center items-center">
-      {video ? (
+      {video && (
         <div
           className="flex-1 relative h-0 max-md:mb-4"
           style={{ paddingBottom: "56.25%" }}
@@ -37,34 +37,16 @@ function ConnectorForm({
             <source src={video} type="video/mp4" />
           </video>
         </div>
-      ) : (
+      )}
+      {image && (
         <>
-          {image ? (
-            <>
-              <div className="w-full md:w-full mb-8 lg:w-full lg:mb-0">
-                <img
-                  src={image}
-                  alt="Screenshot"
-                  className="block w-full rounded-md"
-                />
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="w-16 md:w-32 mb-8 lg:w-64 lg:mb-0">
-                <img
-                  src="assets/icons/alby_logo.svg"
-                  alt="Alby"
-                  className="block dark:hidden w-full"
-                />
-                <img
-                  src="assets/icons/alby_logo_dark.svg"
-                  alt="Alby"
-                  className="hidden dark:block w-full"
-                />
-              </div>
-            </>
-          )}
+          <div className="w-full md:w-full mb-8 lg:w-full lg:mb-0">
+            <img
+              src={image}
+              alt="Screenshot"
+              className="block w-full rounded-md"
+            />
+          </div>
         </>
       )}
     </div>
