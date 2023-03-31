@@ -54,27 +54,25 @@ function ConnectorForm({
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="relative lg:flex lg:gap-4 mt-14 bg-white dark:bg-surface-02dp p-10 shadow rounded-lg">
-        <div className="lg:w-1/2">
-          {typeof title === "string" ? (
-            <h1 className="mb-1 text-2xl font-bold dark:text-white">{title}</h1>
-          ) : (
-            title
-          )}
-          <div className="lg:hidden mt-4">{media}</div>
-          {description && (
-            <div className="text-gray-500 dark:text-neutral-400 whitespace-pre-line mb-8">
-              {typeof description === "string" ? (
-                <p>{description}</p>
-              ) : (
-                description
-              )}
-            </div>
-          )}
-          <div className="lg:w-4/5">{children}</div>
-        </div>
-        <div className="hidden lg:block lg:w-1/2">{media}</div>
+      <div className="max-w-[600px] mx-auto relative mt-14 bg-white dark:bg-surface-02dp p-10 shadow rounded-lg">
+        {typeof title === "string" ? (
+          <h1 className="mb-1 text-2xl font-bold dark:text-white">{title}</h1>
+        ) : (
+          title
+        )}
+        <div className="mt-4">{media}</div>
+        {description && (
+          <div className="text-gray-500 dark:text-neutral-400 whitespace-pre-line mb-8">
+            {typeof description === "string" ? (
+              <p>{description}</p>
+            ) : (
+              description
+            )}
+          </div>
+        )}
+        <div>{children}</div>
       </div>
+
       <div className="mb-4 mt-8 md:my-8 flex flex-col-reverse justify-center gap-4 md:flex-row">
         <Button
           type="submit"
