@@ -177,7 +177,7 @@
       },
       "raspiblitz": {
         "page": {
-          "instructions2": "选择<0>CONNECT</0>。<1/>选择<0>EXPORT</0>。<1/>选择<0>HEX</0>。<1/>复制<0>adminMacaroon</0>。<1/>将Macaroon粘贴到下面的输入中。",
+          "instructions2": "将（admin）<0>macaroon</0>粘贴到下面的输入中。",
           "instructions1": "你需要你的节点洋葱地址，端口，和一个具有读取和发送权限的macaroon（例如admin.macaroon）。<1/><1/><0>SSH</0>进入你的<0>RaspiBlitz</0>.<1/>运行命令<0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>。<1/>复制并粘贴<0>.onion</0>地址到下面的输入中。<1/>在onion地址后面添加你的<0>端口</0>，默认端口是<0>:8080</0>。",
           "title": "连接你的<0>RaspiBlitz</0>节点"
         },
@@ -340,12 +340,14 @@
             "generate": "生成新密钥"
           },
           "private_key": {
-            "subtitle": "粘贴你的私钥或生成一个新的。请确保在生成新的私钥之前备份你的私钥。 <0>了解更多\"</0>",
+            "subtitle": "粘贴你的私钥或生成一个新的。<0>了解更多»</0>",
             "title": "管理你的钥匙",
-            "warning": "这将删除你的旧私钥。是否确定？",
+            "warning": "请输入账户名称以确认删除私钥：",
             "success": "私钥已加密并成功保存。",
             "successfully_removed": "私钥成功删除。",
-            "label": "私钥"
+            "label": "私钥",
+            "backup": "⚠️ 不要忘记备份你的私钥!不备份你的钥匙可能会导致失去访问权。",
+            "failed_to_remove": "输入的账户名称不匹配，你的旧私钥已被恢复。"
           },
           "hint": "是一个简单而开放的协议，旨在创建抗审查的社交网络。 Nostr 使用加密密钥。你可以使用你的密钥对内容进行签名并将其发送到多个中继。你可以使用 Alby 来管理你的 Nostr 密钥。许多 Nostr 应用程序将允许你简单地使用 Alby 扩展中的密钥。"
         },
@@ -592,7 +594,31 @@
       "block_and_ignore": "阻止并忽略 {{host}}",
       "content": "该网站要求你签署:",
       "allow_sign": "允许{{host}}签署：",
-      "block_added": "已将{{host}}添加到屏蔽列表，请重新加载网站。"
+      "block_added": "已将{{host}}添加到屏蔽列表，请重新加载网站。",
+      "allow_sign_event": "允许 {{host}} 签署 {{kind}}：",
+      "view_details": "查看详情",
+      "hide_details": "隐藏详情",
+      "no_content": "(无内容)",
+      "kinds": {
+        "unknown": "nostr 事件类型 {{kind}}",
+        "1": "短文便条",
+        "3": "联系人",
+        "4": "加密直接信息",
+        "5": "删除事件",
+        "7": "反应",
+        "8": "徽章",
+        "1984": "报告",
+        "9734": "电击请求",
+        "9735": "电击",
+        "10002": "中继器列表元数据",
+        "22242": "客户端认证",
+        "30008": "个人资料徽章",
+        "30023": "长篇内容",
+        "30078": "特定于应用程序的数据",
+        "2": "推荐中继器",
+        "30009": "徽章定义",
+        "0": "元数据"
+      }
     },
     "lnurlpay": {
       "amount": {
@@ -625,7 +651,7 @@
     },
     "choose_path": {
       "title": "连接",
-      "description": "要使用Alby进行在线支付，请将Alby连接到你的闪电网络钱包。",
+      "description": "要开始使用Alby进行在线支付，请将Alby连接到你的闪电网络钱包。",
       "other": {
         "title": "其他钱包",
         "description": "连接到你现有的闪电钱包或节点，可从各种连接器中选择。",
@@ -635,7 +661,7 @@
       "alby": {
         "description": "注册或使用您现有的Alby账户，立即开始闪电支付。",
         "create_new": "注册",
-        "title": "Alby"
+        "title": "Alby帐户"
       }
     },
     "discover": {
@@ -729,6 +755,10 @@
       },
       "title": "通道要求",
       "success": "通道请求已成功发送到 {{name}}"
+    },
+    "transactions": {
+      "list_empty": "尚无交易。",
+      "title": "交易"
     }
   },
   "common": {
@@ -753,7 +783,8 @@
       "copy": "复制",
       "log_in": "登录",
       "receive_again": "接收另一笔付款",
-      "remember": "记住我的选择，不要再问"
+      "remember": "记住我的选择，不要再问",
+      "transactions": "交易"
     },
     "errors": {
       "connection_failed": "连接失败",
@@ -780,7 +811,13 @@
     "advanced": "高级",
     "accounts": "帐户",
     "confirm_password": "确认密码",
-    "discover": "发现"
+    "discover": "发现",
+    "range": {
+      "between": "在 {{min}} 和 {{max}} 之间",
+      "lessThan": "< {{max}}",
+      "greaterThan": ">{{min}}"
+    },
+    "transactions": "交易"
   },
   "components": {
     "toasts": {
@@ -867,6 +904,16 @@
     "publishers_table": {
       "used": "已使用",
       "payments": "付款"
+    },
+    "companion_download_info": {
+      "heading": "你想如何连接到TOR网络？",
+      "download": "下载",
+      "tor_native": {
+        "title": "TOR（本地）"
+      },
+      "companion": {
+        "title": "配套应用"
+      }
     }
   },
   "permissions": {
@@ -927,7 +974,9 @@
       "routermc": "读取内部任务控制状态。",
       "queryroutes": "查询可能的途径。",
       "verifymessage": "通过消息验证签名。",
-      "decodepayreq": "解码支付请求字符串。"
+      "decodepayreq": "解码支付请求字符串。",
+      "addholdinvoice": "创建新的 HODL 发票。",
+      "settleinvoice": "结算已接受的发票。"
     },
     "lnd": {
       "sendtoroute": "通过指定的途径付款。",
@@ -951,7 +1000,9 @@
       "getinfo": "获取节点信息。",
       "listchannels": "获取所有开放频道的描述。",
       "connectpeer": "建立与远程对等点的连接。",
-      "openchannel": "开通新渠道。"
+      "openchannel": "开通新渠道。",
+      "addholdinvoice": "创建新的HODL发票。",
+      "settleinvoice": "结算已接受的发票。"
     }
   }
 }
