@@ -29,7 +29,7 @@ export default function Input({
 }: React.InputHTMLAttributes<HTMLInputElement> & Props) {
   const inputEl = useRef<HTMLInputElement>(null);
   const outerStyles =
-    "rounded-md border border-gray-300 dark:border-neutral-800 bg-white dark:bg-black transition duration-300";
+    "rounded-md border border-gray-300 dark:border-neutral-800 transition duration-300";
 
   const inputNode = (
     <input
@@ -39,11 +39,12 @@ export default function Input({
       id={id}
       className={classNames(
         "block w-full placeholder-gray-500 dark:placeholder-neutral-600",
+        !suffix && !endAdornment
+          ? `${outerStyles} focus:ring-orange-bitcoin focus:border-orange-bitcoin focus:dark:border-orange-bitcoin focus:ring-1`
+          : "pr-0 border-0 focus:ring-0",
         disabled
-          ? "rounded-md border border-gray-300 dark:border-neutral-800 bg-gray-50 dark:bg-surface-01dp text-gray-500 dark:text-neutral-500"
-          : !suffix && !endAdornment
-          ? `${outerStyles} focus:ring-orange-bitcoin focus:border-orange-bitcoin focus:dark:border-orange-bitcoin focus:ring-1 dark:text-white`
-          : "pr-0 border-0 focus:ring-0 bg-transparent dark:text-white"
+          ? "bg-gray-50 dark:bg-surface-01dp text-gray-500 dark:text-neutral-500"
+          : "bg-white dark:bg-black dark:text-white"
       )}
       placeholder={placeholder}
       required={required}
