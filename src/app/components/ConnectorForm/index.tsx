@@ -80,7 +80,7 @@ function ConnectorForm({
           loading={submitLoading}
           disabled={submitDisabled}
           primary
-          className="max-sm:w-full"
+          className="w-64"
         />
       </div>
     </form>
