@@ -45,6 +45,14 @@ export default class WebBTCProvider {
     return this.execute("signMessageOrPrompt", { message });
   }
 
+  signPsbt(psbt: string) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling signMessage");
+    }
+
+    return this.execute("signPsbtWithPrompt", { psbt });
+  }
+
   verifyMessage(signature: string, message: string) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling verifyMessage");

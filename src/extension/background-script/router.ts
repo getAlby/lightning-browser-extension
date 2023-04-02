@@ -9,6 +9,7 @@ import * as payments from "./actions/payments";
 import * as permissions from "./actions/permissions";
 import * as settings from "./actions/settings";
 import * as setup from "./actions/setup";
+import * as webbtc from "./actions/webbtc";
 import * as webln from "./actions/webln";
 
 const routes = {
@@ -66,6 +67,10 @@ const routes = {
 
   // Public calls that are accessible from the inpage script (through the content script)
   public: {
+    webbtc: {
+      enable: allowances.enable,
+      getInfo: webbtc.signPsbt,
+    },
     webln: {
       enable: allowances.enable,
       getInfo: ln.getInfo,
