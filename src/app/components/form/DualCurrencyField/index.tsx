@@ -85,7 +85,7 @@ export default function DualCurrencyField({
           {label}
         </label>
         {(min || max) && (
-          <span className="text-xs font-normal dark:text-white">
+          <span className="text-xs font-normal text-gray-800 dark:text-neutral-400">
             <RangeLabel min={min} max={max} /> sats
           </span>
         )}
