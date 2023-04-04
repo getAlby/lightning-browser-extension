@@ -4,7 +4,8 @@ import type { MessageAccountDecryptedDetails } from "~/types";
 
 const decryptedDetails = async (message: MessageAccountDecryptedDetails) => {
   const accounts = state.getState().accounts;
-  const password = state.getState().password as string;
+  const password = await state.getState().password();
+  if (!password) return { error: "Password is missing" };
   const accountId = message.args.id;
 
   if (accountId in accounts) {

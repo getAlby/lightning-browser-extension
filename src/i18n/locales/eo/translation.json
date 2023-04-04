@@ -630,12 +630,6 @@
         "label": "Buĝeto"
       }
     },
-    "companion_download_info": {
-      "description": "",
-      "download_here": "",
-      "using_tor": "",
-      "or": "Aŭ:"
-    },
     "toasts": {
       "connection_error": {
         "what_you_can_do": "",

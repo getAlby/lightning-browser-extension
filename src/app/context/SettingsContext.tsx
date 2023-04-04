@@ -61,11 +61,12 @@ export const SettingsProvider = ({
   useEffect(() => {
     api
       .getSettings()
-      .then((response) => {
-        setSettings(response);
+      .then((settings) => {
+        setSettings(settings);
       })
       .catch((e) => {
-        toast.error(
+        toast.error(`An unexpected error occurred (${e.message})`);
+        console.error(
           `SettingsProvider: An unexpected error occurred (${e.message})`
         );
       })

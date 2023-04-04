@@ -10,12 +10,13 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
+import { convertPaymentsToTransactions } from "~/app/utils/payments";
 import msg from "~/common/lib/msg";
 import type { Allowance, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
 
-function Publisher() {
+function PublisherDetail() {
   const { t } = useTranslation("translation", {
     keyPrefix: "publishers",
   });
@@ -28,7 +29,7 @@ function Publisher() {
 
   const hasFetchedData = useRef(false);
   const [allowance, setAllowance] = useState<Allowance | undefined>();
-  const [payments, setPayments] = useState<Transaction[] | undefined>();
+  const [transactions, setTransactions] = useState<Transaction[] | undefined>();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -40,22 +41,16 @@ function Publisher() {
         });
         setAllowance(response);
 
-        const payments: Transaction[] = response.payments.map((payment) => ({
-          ...payment,
-          id: `${payment.id}`,
-          type: "sent",
-          date: dayjs(payment.createdAt).fromNow(),
-          title: payment.name || payment.description,
-          publisherLink: payment.location,
-        }));
+        const _transactions: Transaction[] = convertPaymentsToTransactions(
+          response.payments
+        );
 
-        for (const payment of payments) {
-          const totalAmountFiat = settings.showFiat
+        for (const payment of _transactions) {
+          payment.totalAmountFiat = settings.showFiat
             ? await getFormattedFiat(payment.totalAmount)
             : "";
-          payment.totalAmountFiat = totalAmountFiat;
         }
-        setPayments(payments);
+        setTransactions(_transactions);
       }
     } catch (e) {
       console.error(e);
@@ -111,8 +106,8 @@ function Publisher() {
           </div>
 
           <div>
-            {payments && payments?.length > 0 && (
-              <TransactionsTable transactions={payments} />
+            {transactions && transactions?.length > 0 && (
+              <TransactionsTable transactions={transactions} />
             )}
           </div>
         </Container>
@@ -121,4 +116,4 @@ function Publisher() {
   );
 }
 
-export default Publisher;
+export default PublisherDetail;

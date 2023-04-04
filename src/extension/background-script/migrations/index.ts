@@ -1,3 +1,4 @@
+import db from "../db";
 import state from "../state";
 
 export type Migration = keyof typeof migrations;
@@ -40,6 +41,18 @@ const migrations = {
     }
   },
 
+  migratePaymentsWithoutAccountId: async () => {
+    const { accounts } = state.getState();
+    if (Object.keys(accounts).length == 1) {
+      const accountId = Object.keys(accounts)[0];
+      const payments = await db.payments.toArray();
+
+      payments.forEach(async (payments) => {
+        payments.id && (await db.payments.update(payments.id, { accountId }));
+      });
+    }
+  },
+
   ensureAccountId: async () => {
     const { accounts } = state.getState();
     Object.keys(accounts).forEach((accountId) => {
@@ -52,6 +65,17 @@ const migrations = {
       accounts,
     });
     // will be persisted by setMigrated
+  },
+
+  migratePermissionsWithoutAccountId: async () => {
+    const { accounts } = state.getState();
+    const accountId = Object.keys(accounts)[0];
+    const permissions = await db.permissions.toArray();
+
+    permissions.forEach(async (permission) => {
+      permission.id &&
+        (await db.permissions.update(permission.id, { accountId }));
+    });
   },
 };
 
@@ -67,6 +91,11 @@ const migrate = async () => {
     console.info("Running migration for: ensureAccountId");
     await migrations["ensureAccountId"]();
     await setMigrated("ensureAccountId");
+  }
+  if (shouldMigrate("migratePermissionsWithoutAccountId")) {
+    console.info("Running migration for: migratePermissionsWithoutAccountId");
+    await migrations["migratePermissionsWithoutAccountId"]();
+    await setMigrated("migratePermissionsWithoutAccountId");
   }
 };
 

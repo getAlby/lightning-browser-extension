@@ -98,6 +98,7 @@ export default function ConnectEclair() {
           label={t("password.label")}
           type={passwordView ? "text" : "password"}
           required
+          autoFocus={true}
           onChange={handleChange}
           endAdornment={
             <button

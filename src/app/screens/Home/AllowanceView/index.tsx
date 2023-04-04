@@ -13,6 +13,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
+import { convertPaymentsToTransactions } from "~/app/utils/payments";
 import type { Allowance, Transaction, Battery } from "~/types";
 
 dayjs.extend(relativeTime);
@@ -33,52 +34,44 @@ const AllowanceView: FC<Props> = (props) => {
     getFormattedNumber,
   } = useSettings();
 
-  const [payments, setPayments] = useState<Transaction[] | null>(null);
-  const [isLoadingPayments, setIsLoadingPayments] = useState(true);
+  const [transactions, setTransactions] = useState<Transaction[] | null>(null);
+  const [isLoadingTransactions, setIsLoadingTransactions] = useState(true);
 
   const { t } = useTranslation("translation", { keyPrefix: "home" });
 
   const showFiat = !isLoadingSettings && settings.showFiat;
-  const hasPayments = !isLoadingPayments && !!payments?.length;
-  const isEmptyPayments = !isLoadingPayments && payments?.length === 0;
+  const hasTransactions = !isLoadingTransactions && !!transactions?.length;
 
   // get array of payments if not done yet
   useEffect(() => {
-    const getPayments = async () => {
-      const payments: Transaction[] = props.allowance.payments.map(
-        (payment) => ({
-          ...payment,
-          id: `${payment.id}`,
-          type: "sent",
-          date: dayjs(payment.createdAt).fromNow(),
-          title: payment.name || payment.description,
-          publisherLink: `options.html#/publishers/${props.allowance.id}`,
-        })
+    const getTransactions = async () => {
+      const transactions: Transaction[] = await convertPaymentsToTransactions(
+        props.allowance.payments,
+        `options.html#/publishers/${props.allowance.id}`
       );
 
       try {
         // attach fiatAmount if enabled
-        for (const payment of payments) {
-          const totalAmountFiat = showFiat
-            ? await getFormattedFiat(payment.totalAmount)
+        for (const transaction of transactions) {
+          transaction.totalAmountFiat = showFiat
+            ? await getFormattedFiat(transaction.totalAmount)
             : "";
-          payment.totalAmountFiat = totalAmountFiat;
         }
 
-        setPayments(payments);
+        setTransactions(transactions);
       } catch (e) {
         console.error(e);
         if (e instanceof Error) toast.error(e.message);
       } finally {
-        setIsLoadingPayments(false);
+        setIsLoadingTransactions(false);
       }
     };
 
-    !payments && !isLoadingSettings && getPayments();
+    !transactions && !isLoadingSettings && getTransactions();
   }, [
     props.allowance,
     isLoadingSettings,
-    payments,
+    transactions,
     getFormattedFiat,
     showFiat,
   ]);
@@ -138,15 +131,15 @@ const AllowanceView: FC<Props> = (props) => {
           {t("allowance_view.recent_transactions")}
         </h2>
 
-        {isLoadingPayments && (
+        {isLoadingTransactions && (
           <div className="flex justify-center">
             <Loading />
           </div>
         )}
 
-        {hasPayments && <TransactionsTable transactions={payments} />}
+        {hasTransactions && <TransactionsTable transactions={transactions} />}
 
-        {isEmptyPayments && (
+        {!hasTransactions && (
           <p className="text-gray-500 dark:text-neutral-400">
             <Trans
               i18nKey={"allowance_view.no_transactions"}

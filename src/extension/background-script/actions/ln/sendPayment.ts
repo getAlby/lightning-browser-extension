@@ -2,12 +2,19 @@ import lightningPayReq from "bolt11";
 import PubSub from "pubsub-js";
 import pubsub from "~/common/lib/pubsub";
 import state from "~/extension/background-script/state";
-import { MessageSendPayment, Message } from "~/types";
+import { Message, MessageSendPayment } from "~/types";
 
 export default async function sendPayment(
   message: MessageSendPayment | Message // 'keysend' & 'sendPaymentOrPrompt' still need the Message type
 ) {
   PubSub.publish(`ln.sendPayment.start`, message);
+
+  const accountId = await state.getState().currentAccountId;
+  if (!accountId) {
+    return {
+      error: "Select an account.",
+    };
+  }
 
   const { paymentRequest } = message.args;
   if (typeof paymentRequest !== "string") {
@@ -16,12 +23,13 @@ export default async function sendPayment(
     };
   }
 
-  const paymentRequestDetails = lightningPayReq.decode(paymentRequest);
   const connector = await state.getState().getConnector();
 
-  let response;
+  let response, paymentRequestDetails;
 
   try {
+    paymentRequestDetails = lightningPayReq.decode(paymentRequest);
+
     response = await connector.sendPayment({
       paymentRequest,
     });
@@ -41,12 +49,15 @@ export default async function sendPayment(
     };
   }
 
-  pubsub.publishPaymentNotification(message, {
+  pubsub.publishPaymentNotification("sendPayment", message, {
+    accountId,
     paymentRequestDetails,
     response,
     details: {
-      description: paymentRequestDetails.tagsObject.description,
-      destination: paymentRequestDetails.payeeNodeKey,
+      ...(paymentRequestDetails && {
+        description: paymentRequestDetails.tagsObject.description,
+        destination: paymentRequestDetails.payeeNodeKey,
+      }),
     },
   });
 

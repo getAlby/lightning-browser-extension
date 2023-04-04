@@ -8,13 +8,18 @@ const getPrivateKey = async (message: MessagePrivateKeyGet) => {
 
   if (!id) {
     return {
-      data: state.getState().getNostr().privateKey,
+      data: (await state.getState().getNostr()).privateKey,
     };
   }
 
   const accounts = state.getState().accounts;
   if (Object.keys(accounts).includes(id)) {
-    const password = state.getState().password as string;
+    const password = await state.getState().password();
+    if (!password) {
+      return {
+        error: "Password is missing.",
+      };
+    }
     const account = accounts[id];
     if (!account.nostrPrivateKey) return { data: null };
     const privateKey = decryptData(account.nostrPrivateKey, password);

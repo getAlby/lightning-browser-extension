@@ -135,12 +135,13 @@ export default function ConnectRaspiBlitz() {
           placeholder={t("rest_api_host.placeholder")}
           onChange={handleUrl}
           required
+          autoFocus={true}
         />
       </div>
       {formData.url.match(/\.onion/i) && (
         <CompanionDownloadInfo
-          hasTorCallback={() => {
-            setHasTorSupport(true);
+          hasTorCallback={(hasTor: boolean) => {
+            setHasTorSupport(hasTor);
           }}
         />
       )}

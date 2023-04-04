@@ -5,8 +5,10 @@ import unlock from "../unlock";
 
 jest.mock("~/extension/background-script/state");
 
+const passwordMock = jest.fn;
+
 const mockState = {
-  password: "123456",
+  password: passwordMock,
   currentAccountId: "1e1e8ea6-493e-480b-9855-303d37506e97",
   getAccount: () => ({
     config:
@@ -33,9 +35,7 @@ describe("edit account", () => {
     };
 
     state.getState = jest.fn().mockReturnValue(mockState);
-    state.setState = () => jest.fn;
-
-    const spy = jest.spyOn(state, "setState");
+    const spy = jest.spyOn(mockState, "password");
 
     expect(await unlock(message)).toStrictEqual({
       data: {
@@ -44,9 +44,7 @@ describe("edit account", () => {
       },
     });
 
-    expect(spy).toHaveBeenNthCalledWith(1, {
-      password: "1",
-    });
+    expect(spy).toHaveBeenNthCalledWith(1, "1");
 
     expect(spy).toHaveBeenCalledTimes(1);
   });

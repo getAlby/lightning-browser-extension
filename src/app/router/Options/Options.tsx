@@ -1,7 +1,7 @@
 import Container from "@components/Container";
 import Navbar from "@components/Navbar";
 import Accounts from "@screens/Accounts";
-import ShowAccount from "@screens/Accounts/Show";
+import AccountDetail from "@screens/Accounts/Detail";
 import ConfirmPayment from "@screens/ConfirmPayment";
 import Keysend from "@screens/Keysend";
 import LNURLAuth from "@screens/LNURLAuth";
@@ -10,10 +10,11 @@ import LNURLPay from "@screens/LNURLPay";
 import LNURLWithdraw from "@screens/LNURLWithdraw";
 import TestConnection from "@screens/Options/TestConnection";
 import Publishers from "@screens/Publishers";
-import ShowPublisher from "@screens/Publishers/Show";
+import PublisherDetail from "@screens/Publishers/Detail";
 import Receive from "@screens/Receive";
 import Send from "@screens/Send";
 import Settings from "@screens/Settings";
+import Transactions from "@screens/Transactions";
 import Unlock from "@screens/Unlock";
 import { useTranslation } from "react-i18next";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
@@ -47,20 +48,21 @@ function Options() {
               <Route index element={<Discover />} />
             </Route>
             <Route path="publishers">
-              <Route path=":id" element={<ShowPublisher />} />
+              <Route path=":id" element={<PublisherDetail />} />
               <Route index element={<Publishers />} />
             </Route>
             <Route path="send" element={<Send />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="keysend" element={<Keysend />} />
             <Route path="receive" element={<Receive />} />
+            <Route path="transactions" element={<Transactions />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
             <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="settings" element={<Settings />} />
             <Route path="accounts">
-              <Route path=":id" element={<ShowAccount />} />
+              <Route path=":id" element={<AccountDetail />} />
               <Route
                 path="new"
                 element={
@@ -142,6 +144,9 @@ const Layout = () => {
         <Navbar.Link href="/publishers">{tCommon("websites")}</Navbar.Link>
         <Navbar.Link href="/send">{tCommon("actions.send")}</Navbar.Link>
         <Navbar.Link href="/receive">{tCommon("actions.receive")}</Navbar.Link>
+        <Navbar.Link href="/transactions">
+          {tCommon("actions.transactions")}
+        </Navbar.Link>
       </Navbar>
       <ToastContainer
         autoClose={15000}

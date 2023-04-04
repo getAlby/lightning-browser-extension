@@ -82,6 +82,7 @@ export default function ConnectLnd() {
           placeholder={t("pairing_phrase.placeholder")}
           onChange={handleChange}
           required
+          autoFocus={true}
         />
       </div>
     </ConnectorForm>

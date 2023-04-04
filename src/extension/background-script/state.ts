@@ -4,6 +4,7 @@ import browser from "webextension-polyfill";
 import createState from "zustand";
 import { DEFAULT_SETTINGS } from "~/common/constants";
 import { decryptData } from "~/common/lib/crypto";
+import { isManifestV3 } from "~/common/utils/mv3";
 import { Migration } from "~/extension/background-script/migrations";
 import type { Account, Accounts, SettingsStorage } from "~/types";
 
@@ -19,13 +20,14 @@ interface State {
   currentAccountId: string | null;
   nostrPrivateKey: string | null;
   nostr: Nostr | null;
+  mv2Password: string | null;
+  password: (password?: string | null) => Promise<string | null>;
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
-  getNostr: () => Nostr;
+  getNostr: () => Promise<Nostr>;
   init: () => Promise<void>;
-  isUnlocked: () => boolean;
+  isUnlocked: () => Promise<boolean>;
   lock: () => Promise<void>;
-  password: string | null;
   saveToStorage: () => Promise<void>;
   settings: SettingsStorage;
   reset: () => Promise<void>;
@@ -53,6 +55,8 @@ const browserStorageKeys = Object.keys(browserStorageDefaults) as Array<
   keyof BrowserStorage
 >;
 
+let storage: "sync" | "local" = "sync";
+
 const state = createState<State>((set, get) => ({
   connector: null,
   account: null,
@@ -60,9 +64,28 @@ const state = createState<State>((set, get) => ({
   migrations: [],
   accounts: {},
   currentAccountId: null,
-  password: null,
   nostr: null,
   nostrPrivateKey: null,
+  mv2Password: null,
+  password: async (password) => {
+    if (isManifestV3) {
+      if (password) {
+        // @ts-ignore: https://github.com/mozilla/webextension-polyfill/issues/329
+        await browser.storage.session.set({ password });
+      }
+      // @ts-ignore: https://github.com/mozilla/webextension-polyfill/issues/329
+      const storageSessionPassword = await browser.storage.session.get(
+        "password"
+      );
+
+      return storageSessionPassword.password;
+    } else {
+      if (password) {
+        set({ mv2Password: password });
+      }
+      return get().mv2Password;
+    }
+  },
   getAccount: () => {
     const currentAccountId = get().currentAccountId as string;
     let account = null;
@@ -77,25 +100,26 @@ const state = createState<State>((set, get) => ({
     }
     const currentAccountId = get().currentAccountId as string;
     const account = get().accounts[currentAccountId];
-
-    const password = get().password as string;
+    const password = await get().password();
+    if (!password) throw new Error("Password is not set");
     const config = decryptData(account.config as string, password);
 
-    const connector = new connectors[account.connector](config);
+    const connector = new connectors[account.connector](account, config);
     await connector.init();
 
     set({ connector: connector });
 
     return connector;
   },
-  getNostr: () => {
+  getNostr: async () => {
     if (get().nostr) {
       return get().nostr as Nostr;
     }
     const currentAccountId = get().currentAccountId as string;
     const account = get().accounts[currentAccountId];
 
-    const password = get().password as string;
+    const password = await get().password();
+    if (!password) throw new Error("Password is not set");
     const privateKey = decryptData(account.nostrPrivateKey as string, password);
 
     const nostr = new Nostr(privateKey);
@@ -104,25 +128,54 @@ const state = createState<State>((set, get) => ({
     return nostr;
   },
   lock: async () => {
-    const allTabs = browser.extension.getViews({ type: "tab" });
-    for (const tab of allTabs) {
-      tab.close();
+    if (isManifestV3) {
+      // @ts-ignore: https://github.com/mozilla/webextension-polyfill/issues/329
+      await browser.storage.session.set({ password: null });
+    } else {
+      set({ mv2Password: null });
     }
+
+    const allTabs = await browser.tabs.query({ title: "Alby" });
+
+    // https://stackoverflow.com/a/54317362/1667461
+    const allTabIds = Array.from(allTabs, (tab) => tab.id).filter(
+      (i): i is number => {
+        return typeof i === "number";
+      }
+    );
+
+    browser.tabs.remove(allTabIds);
+
     const connector = get().connector;
     if (connector) {
       await connector.unload();
     }
-    set({ password: null, connector: null, account: null, nostr: null });
+    set({ connector: null, account: null, nostr: null });
   },
-  isUnlocked: () => {
-    return get().password !== null;
+  isUnlocked: async () => {
+    const password = await await get().password();
+    return !!password;
   },
   init: () => {
-    return browser.storage.sync.get(browserStorageKeys).then((result) => {
-      // Deep merge to ensure that nested defaults are also merged instead of overwritten.
-      const data = merge(browserStorageDefaults, result as BrowserStorage);
-      set(data);
-    });
+    return browser.storage.sync
+      .get(browserStorageKeys)
+      .then((result) => {
+        // Deep merge to ensure that nested defaults are also merged instead of overwritten.
+        const data = merge(browserStorageDefaults, result as BrowserStorage);
+        set(data);
+      })
+      .catch((e) => {
+        console.info("storage.sync is not available. using storage.local");
+        storage = "local";
+        return browser.storage.local.get("__sync").then((result) => {
+          // Deep merge to ensure that nested defaults are also merged instead of overwritten.
+          const data = merge(
+            browserStorageDefaults,
+            result.mockSync as BrowserStorage
+          );
+          set(data);
+        });
+      });
   },
   reset: async () => {
     set({ ...browserStorageDefaults });
@@ -134,7 +187,14 @@ const state = createState<State>((set, get) => ({
       ...browserStorageDefaults,
       ...pick(current, browserStorageKeys),
     };
-    return browser.storage.sync.set(data);
+
+    if (storage === "sync") {
+      return browser.storage.sync.set(data);
+    } else {
+      // because there's an overlap with accounts being stored in
+      // the local storage, see src/common/lib/cache.ts
+      return browser.storage.local.set({ __sync: data });
+    }
   },
 }));
 

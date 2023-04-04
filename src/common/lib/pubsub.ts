@@ -3,6 +3,7 @@ import { Message, MessageSendPayment, PaymentNotificationData } from "~/types";
 
 const pubsub = {
   publishPaymentNotification: (
+    type: "sendPayment" | "keysend",
     message: MessageSendPayment | Message, // 'keysend' & 'sendPaymentOrPrompt' still need the Message type
     data: Omit<PaymentNotificationData, "origin">
   ) => {
@@ -10,7 +11,8 @@ const pubsub = {
     if ("error" in data.response) {
       status = "failed";
     }
-    PubSub.publish(`ln.sendPayment.${status}`, {
+    PubSub.publish(`ln.${type}.${status}`, {
+      accountId: data.accountId,
       response: data.response,
       details: data.details,
       paymentRequestDetails: data.paymentRequestDetails,

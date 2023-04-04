@@ -2,8 +2,7 @@ import browser, { Runtime, Tabs } from "webextension-polyfill";
 import utils from "~/common/lib/utils";
 
 import { ExtensionIcon, setIcon } from "./actions/setup/setIcon";
-import connectors from "./connectors";
-import { isIndexedDbAvailable, db } from "./db";
+import { db, isIndexedDbAvailable } from "./db";
 import * as events from "./events";
 import migrate from "./migrations";
 import { router } from "./router";
@@ -11,6 +10,8 @@ import state from "./state";
 
 let isFirstInstalled = false;
 let isRecentlyUpdated = false;
+
+const debug = process.env.NODE_ENV === "development";
 
 // when debugging is enabled in development mode a window.debugAlby object is defined that can be used within the console. This is the type interface for that
 declare global {
@@ -34,6 +35,7 @@ const extractLightningData = (
     // Adding a short delay because I've seen cases where this call has happened too fast
     // before the receiving side in the content-script was connected/listening
     setTimeout(() => {
+      // double check: https://developer.chrome.com/docs/extensions/mv3/migrating_to_service_workers/#alarms
       browser.tabs.sendMessage(tabId, {
         action: "extractLightningData",
       });
@@ -64,7 +66,7 @@ const updateIcon = async (
 };
 
 const debugLogger = (message: unknown, sender: Runtime.MessageSender) => {
-  if (state.getState().settings.debug) {
+  if (debug) {
     console.info("Background onMessage: ", message, sender);
   }
 };
@@ -96,8 +98,6 @@ const routeCalls = (
   if (message.application !== "LBE" || !message.prompt) {
     return;
   }
-  const debug = state.getState().settings.debug;
-
   if (message.type) {
     console.error("Invalid message, using type: ", message);
   }
@@ -119,7 +119,6 @@ const routeCalls = (
 async function init() {
   console.info("Loading background script");
 
-  //await browser.storage.sync.set({ settings: { debug: true }, allowances: [] });
   await state.getState().init();
   console.info("State loaded");
 
@@ -147,15 +146,6 @@ async function init() {
   // Notify the content script that the tab has been updated.
   browser.tabs.onUpdated.addListener(extractLightningData);
 
-  if (state.getState().settings.debug) {
-    console.info("Debug mode enabled, use window.debugAlby");
-    window.debugAlby = {
-      state,
-      db,
-      connectors,
-      router,
-    };
-  }
   console.info("Loading completed");
 }
 

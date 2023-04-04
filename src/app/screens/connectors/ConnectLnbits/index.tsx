@@ -109,6 +109,7 @@ export default function ConnectLnbits() {
           type="text"
           required
           onChange={handleChange}
+          autoFocus={true}
         />
       </div>
       <div className="mb-6">
@@ -124,8 +125,8 @@ export default function ConnectLnbits() {
       {formData.url.match(/\.onion/i) && (
         <div className="mb-6">
           <CompanionDownloadInfo
-            hasTorCallback={() => {
-              setHasTorSupport(true);
+            hasTorCallback={(hasTor: boolean) => {
+              setHasTorSupport(hasTor);
             }}
           />
         </div>

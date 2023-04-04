@@ -1,17 +1,10 @@
-import { Blocklist } from "../../../../types";
+import { MessageBlocklistList } from "~/types";
+
 import db from "../../db";
 
-const list = async () => {
-  let blocklist = await db.blocklist
-    .toCollection()
-    .reverse()
-    .sortBy("createdAt");
+const list = async (message: MessageBlocklistList) => {
+  const blocklist = await db.blocklist.toArray();
 
-  const blocklistPromises = blocklist.map(async (site: Blocklist) => {
-    return site;
-  });
-
-  blocklist = await Promise.all(blocklistPromises);
   return {
     data: {
       blocklist,

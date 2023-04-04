@@ -113,6 +113,7 @@ export default function ConnectCitadel() {
           label={t("password.label")}
           id="password"
           type={passwordView ? "text" : "password"}
+          autoFocus={true}
           required
           onChange={handleChange}
           endAdornment={
@@ -144,8 +145,8 @@ export default function ConnectCitadel() {
       {formData.url.match(/\.onion/i) && (
         <div className="mb-6">
           <CompanionDownloadInfo
-            hasTorCallback={() => {
-              setHasTorSupport(true);
+            hasTorCallback={(hasTor: boolean) => {
+              setHasTorSupport(hasTor);
             }}
           />
         </div>

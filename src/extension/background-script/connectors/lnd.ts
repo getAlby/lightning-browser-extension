@@ -4,6 +4,7 @@ import UTF8 from "crypto-js/enc-utf8";
 import WordArray from "crypto-js/lib-typedarrays";
 import SHA256 from "crypto-js/sha256";
 import utils from "~/common/lib/utils";
+import { Account } from "~/types";
 
 import Connector, {
   CheckPaymentArgs,
@@ -117,6 +118,14 @@ const methods: Record<string, Record<string, string>> = {
     path: "/v1/invoices",
     httpMethod: "POST",
   },
+  addholdinvoice: {
+    path: "/v2/invoices/hodl",
+    httpMethod: "POST",
+  },
+  settleinvoice: {
+    path: "/v2/invoices/settle",
+    httpMethod: "POST",
+  },
 };
 
 const pathTemplateParser = (
@@ -135,9 +144,11 @@ const pathTemplateParser = (
 };
 
 class Lnd implements Connector {
+  account: Account;
   config: Config;
 
-  constructor(config: Config) {
+  constructor(account: Account, config: Config) {
+    this.account = account;
     this.config = config;
   }
 
