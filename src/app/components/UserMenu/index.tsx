@@ -11,8 +11,8 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { ConnectedSiteIcon, HelpIcon } from "~/app/components/CustomIcons";
 import { useAccount } from "~/app/context/AccountContext";
+import { ConnectedSiteIcon, HelpIcon } from "~/app/icons";
 import utils from "~/common/lib/utils";
 
 import Menu from "../Menu";
