@@ -148,6 +148,7 @@ export type NavigationState = {
       method: string;
       description: string;
     };
+    psbt?: string;
   };
   isPrompt?: true; // only passed via Prompt.tsx
   action: string;

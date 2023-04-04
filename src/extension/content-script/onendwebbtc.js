@@ -44,7 +44,7 @@ async function init() {
       }
       // if a call is active we ignore the request
       if (callActive) {
-        console.error("nostr call already executing");
+        console.error("WebBTC call already executing");
         return;
       }
 
