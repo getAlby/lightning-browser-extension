@@ -285,6 +285,7 @@
       "kollider": {
         "title": "Kollider",
         "description": "Login to your Kollider account",
+        "warning": "⚠️ Please make sure you store your credentials securely in a password manager. Without these credentials your account will not be recoverable.",
         "choose_path": {
           "title": "Connect to your Kollider Wallet",
           "description": "Login or sign up for a new Kollider account and connect to Alby.",

@@ -198,6 +198,11 @@ export default function ConnectKollidier({ variant }: Props) {
       }
       onSubmit={handleSubmit}
     >
+      {variant === "create" && (
+        <div className="rounded-md font-medium p-4 mb-8 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
+          {t("warning")}
+        </div>
+      )}
       <div className="mb-6">
         <TextField
           id="username"
