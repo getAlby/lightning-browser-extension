@@ -41,7 +41,7 @@
         "title": "LND",
         "page": {
           "title": "Anslut din LND-nod",
-          "description": "Du behöver URLen till din nod samt en macaroon med  läs och skicka-rättigheter (t.ex. admin.macaroon)"
+          "description": "Du behöver URLen till din nod samt en macaroon med läs och skicka-rättigheter (t.ex. admin.macaroon)"
         },
         "url": {
           "label": "REST API värd och port",
@@ -263,7 +263,7 @@
         },
         "page": {
           "title": "Anslut till din Core Lightning node",
-          "instructions": "Säkerställ att du har Core Lightning version 0.12.0 eller nyare, att kommando insticksprogrammet är aktivt samt att din node är åtkomlig över lightning-nätverket. Skapa en rune genom att köra 'lightning-cli commando-rune'."
+          "instructions": "Säkerställ att du har Core Lightning version 0.12.0 eller nyare, att kommando insticksprogrammet är aktivt samt att din node är nåbar över lightning-nätverket. Skapa en rune genom att köra 'lightning-cli commando-rune'."
         },
         "pubkey": {
           "label": "Publik nyckel"
@@ -272,7 +272,7 @@
           "label": "Rune"
         },
         "host": {
-          "label": "Host"
+          "label": "Hosta"
         }
       },
       "title": "Anslut Lightning Plånbok",
@@ -729,7 +729,8 @@
         "shopping": "Shoppa",
         "showcases": "Vitriner",
         "nostr": "Nostr",
-        "trading": "Handel"
+        "trading": "Handel",
+        "nodeManagement": "Nodhantering"
       },
       "tips": {
         "pin": {
