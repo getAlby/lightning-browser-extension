@@ -701,7 +701,8 @@
         "showcases": "Vitrinas",
         "nostr": "Nostr",
         "trading": "Comerciar",
-        "gaming": "Juegos"
+        "gaming": "Juegos",
+        "nodeManagement": "Gestión de nodos"
       }
     },
     "confirm_request_permission": {
