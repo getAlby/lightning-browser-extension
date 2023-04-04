@@ -10,7 +10,7 @@
       },
       "set_password": {
         "title": "設置解鎖密碼",
-        "description": "",
+        "description": "此密碼用於保護你的錢包並提供對瀏覽器擴展程式的訪問。它無法重置，並且與你的Alby帳戶密碼不同。",
         "choose_password": {
           "label": "選擇解鎖密碼："
         },
@@ -37,9 +37,9 @@
     },
     "choose_path": {
       "title": "連接",
-      "description": "要開始使用 Alby 進行在線支付，請將你的閃電錢包連接到擴展程序。",
+      "description": "要開始使用 Alby 進行在線支付，請將Alby連接到你的閃電錢包。",
       "alby": {
-        "title": "Alby",
+        "title": "Alby帳戶",
         "description": "註冊或使用你現有的 Alby 帳戶立即開始閃電支付。",
         "create_new": "註冊"
       },
@@ -81,7 +81,7 @@
         "optional_lightning_note": {
           "part1": "你的 Alby 帳戶還附帶一個可選的",
           "part2": "閃電地址",
-          "part3": "",
+          "part3": "。這是任何人輕鬆地在閃電網路上向你發送比特幣的一個方法。",
           "part4": "瞭解更多"
         },
         "optional_lightning_address": {
@@ -103,7 +103,7 @@
         "title": "LND",
         "page": {
           "title": "連接你的 LND 節點",
-          "description": ""
+          "description": "你需要你的節點 URL 和一個具有讀取和發送權限的macaroon（例如 admin.macaroon）"
         },
         "url": {
           "label": "REST API 主機和端口",
@@ -133,7 +133,7 @@
         "title": "Bluewallet",
         "page": {
           "title": "連接 BlueWallet",
-          "description": ""
+          "description": "在BlueWallet中，選擇要連接的錢包，打開它，點擊“...”，點擊導出/備份以顯示二維碼並使用攝像頭掃描。"
         },
         "uri": {
           "label": "BlueWallet 導出 URI"
@@ -147,7 +147,7 @@
         "title": "LNDHub",
         "page": {
           "title": "連接LNDHub",
-          "description": ""
+          "description": "在此處輸入你的 LNDHub 憑據 URI 或使用攝像頭掃描二維碼。"
         },
         "uri": {
           "label": "LNDHub 導出 URI"
@@ -161,7 +161,7 @@
         "title": "LNbits",
         "page": {
           "title": "連接 <0>LNbits</0>",
-          "instructions": ""
+          "instructions": "在LNbits中，選擇要連接的錢包，打開它，点击API資訊並複製管理鑰匙。在下面貼上："
         },
         "admin_key": {
           "label": "LNbits 管理員密鑰",
@@ -206,7 +206,7 @@
         "title": "Umbrel",
         "page": {
           "title": "連接 <0>Umbrel</0> 節點",
-          "instructions": ""
+          "instructions": "在你的 Umbrel 儀錶板中，轉到 <0>Connect Wallet</0>。選擇 <0>lndconnect REST</0> 並複製 <0>lndconnect URL</0>。（根據你的設定，你可以使用本地連接或 Tor 連接。）"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -217,7 +217,7 @@
         "title": "myNode",
         "page": {
           "title": "連接 <0>myNode</0>",
-          "instructions": ""
+          "instructions": "在你的myNode主頁上，點擊你的<0>Lightning</0>服務的<0>Wallet</0>按鈕。<1/>現在點擊<0>Status</0>選項卡下的<0>Pair Wallet</0>按鈕。出現提示時輸入密碼。<1/>選擇下拉功能表，然後選擇配對選項。根據你的設置，你可以使用<0>Lightning（REST + Local IP）</0> 連接或 <0>Lightning（REST + Tor）</0> 連接。"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -228,7 +228,7 @@
         "title": "Start9",
         "page": {
           "title": "連接你的<0>Embassy</0>節點",
-          "instructions": ""
+          "instructions": "<0>注：</0>目前我們只 支持LND，但我們將在未來添加 c-lightning 支持！<1/>在你的Embassy儀錶板上，點擊<0>Lightning Network Daemon</0>服務.<1/>選擇<0>Properties</0>選項卡.<1/>然後複製 <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -239,8 +239,8 @@
         "title": "RaspiBlitz",
         "page": {
           "title": "連接你的 <0>RaspiBlitz</0> 節點",
-          "instructions1": "",
-          "instructions2": ""
+          "instructions1": "按照以下步驟操作：<1/> 1.<0>SSH</0>進入你的<0>Raspiblitz</0><1/>2。從列表中選擇<0>Connect Apps & Show Credentials</0><1/><0/>3。選擇 <0>Connect Alby to this node</0><1/>4。按 <0>OK</0> 以顯示連接憑據<1/><1/>在下面的輸入中複製並粘貼<0>REST API 主機</0>或 <0>.onion</0> 位址以通過 Tor 連接。",
+          "instructions2": "將（管理員）<0>macaroon</0>複製到下面的輸入中。"
         },
         "rest_api_host": {
           "label": "REST API 主機",
@@ -268,7 +268,7 @@
         },
         "jwt": {
           "label": "輸入你的 JWT 令牌",
-          "info": ""
+          "info": "當前正在升級 {{label}} 登錄名。如果你是高級使用者，你可以通過<0>網絡錢包（wallet.mainnet.galoy.io）</0><1/><1/>登錄來獲取你的JWT令牌，JWT看起來像：<2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
           "login": "登錄",
@@ -299,332 +299,334 @@
           "label": "選擇你的貨幣帳戶"
         },
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "連接失敗。你確定帳戶數據正確嗎？"
         }
       },
       "btcpay": {
-        "title": "",
+        "title": "BTCPay Server",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "連接到你的BTCPay LND節點",
+          "instructions": "導航到你的BTCPayServer並以管理員身份登錄。轉到Server Settings> LND Rest - See Information。然後點擊「See QR Code Information」並複製二維碼數據。在下面貼上："
         },
         "config": {
-          "label": "",
-          "placeholder": ""
+          "label": "配置數據",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
         },
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "連接失敗。BTCPay連接URL是否正確且可訪問？"
         }
       },
       "commando": {
-        "title": "",
+        "title": "Core Lightning",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "連接到你的Core Lightning節點",
+          "instructions": "確保你使用的是Core Lightning 0.12.0或更高版本，commando插件正在運行，並且你的節點可以通過閃電網路訪問。通過運行「lightning-cli commando-rune」來創建rune。"
         },
         "host": {
-          "label": ""
+          "label": "主機"
         },
         "pubkey": {
-          "label": ""
+          "label": "公鑰"
         },
         "rune": {
-          "label": ""
+          "label": "Rune"
         },
         "port": {
-          "label": ""
+          "label": "端口"
         },
         "proxy": {
-          "label": ""
+          "label": "Websocket 代理"
         },
         "privKey": {
-          "label": ""
+          "label": "本地私鑰（自動產生）"
         },
         "config": {
-          "label": "",
-          "placeholder": ""
+          "label": "配置數據",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
         },
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "連接失敗。你的Core Lightning節點是否在線並使用commando插件？"
         }
       }
     },
     "home": {
       "actions": {
-        "send_satoshis": "",
-        "enable_now": ""
+        "send_satoshis": "⚡️ 發送聰 ⚡️",
+        "enable_now": "立即啟用"
       },
-      "recent_transactions": "",
+      "recent_transactions": "近期交易",
       "transaction_list": {
         "tabs": {
-          "outgoing": "",
-          "incoming": ""
+          "outgoing": "外發",
+          "incoming": "傳入"
         }
       },
       "allowance_view": {
-        "recent_transactions": "",
-        "allowance": "",
-        "sats_used": "",
-        "no_transactions": ""
+        "recent_transactions": "近期交易",
+        "allowance": "限額",
+        "sats_used": "以使用的聰",
+        "no_transactions": "<0>{{name}}</0> 上還沒有交易。"
       },
       "default_view": {
-        "recent_transactions": "",
-        "no_transactions": "",
-        "is_blocked_hint": "",
-        "block_removed": ""
+        "recent_transactions": "近期交易",
+        "no_transactions": "尚未用Alby進行任何交易。",
+        "is_blocked_hint": "Alby目前在 {{host}} 上被禁用",
+        "block_removed": "已啟用 {{host}}。請重新載入網站。"
       }
     },
     "accounts": {
-      "title": "",
+      "title": "帳戶",
       "account_view": {
-        "title1": "",
-        "title2": "",
+        "title1": "帳戶信息",
+        "title2": "編輯帳戶",
         "name": {
-          "title": "",
-          "placeholder": ""
+          "title": "名字",
+          "placeholder": "帳戶名稱"
         },
         "export": {
-          "title": "",
-          "screen_reader": "",
-          "waiting": "",
-          "your_ln_address": "",
-          "tip_mobile": "",
-          "export_uri": "",
-          "scan_qr": ""
+          "title": "導出帳戶",
+          "screen_reader": "導出帳戶詳情",
+          "waiting": "等待 LndHub 數據...",
+          "your_ln_address": "你的閃電地址：",
+          "tip_mobile": "提示：將此錢包與你的行動裝置一起使用",
+          "export_uri": "LNDHub 憑據 URI",
+          "scan_qr": "通過掃描二維碼將此錢包導入Zeus或BlueWallet。"
         },
         "nostr": {
-          "title": "",
+          "title": "Nostr",
           "hint": "",
           "private_key": {
-            "title": "",
-            "subtitle": "",
-            "warning": "",
-            "success": "",
-            "successfully_removed": "",
-            "label": ""
+            "title": "管理你的私鑰",
+            "subtitle": "粘貼你的私鑰或生成一個新私鑰。<0>瞭解更多 »</0>",
+            "warning": "請輸入帳號名稱以確認刪除私鑰：",
+            "success": "私鑰加密並成功保存。",
+            "successfully_removed": "私鑰已成功刪除。",
+            "label": "私鑰",
+            "failed_to_remove": "輸入的帳戶名稱不匹配，你的舊私鑰已恢復。",
+            "backup": "⚠️ 不要忘記備份你的私鑰！不備份私鑰可能會導致失去訪問權。"
           },
           "public_key": {
-            "label": ""
+            "label": "公鑰"
           },
           "generate_keys": {
-            "title": "",
-            "screen_reader": "",
-            "hint": "",
+            "title": "生成新的 Nostr 鑰匙",
+            "screen_reader": "為你的帳戶生成新的 Nostr 鑰匙",
+            "hint": "你可以生成隨機鑰匙或從此帳戶詳細資訊派生鑰匙（使用有符號的規範短語）。<0>瞭解更多 »</0>",
             "actions": {
-              "random_keys": "",
-              "derived_keys": ""
+              "random_keys": "生成隨機鑰匙",
+              "derived_keys": "從帳戶派生鑰匙"
             }
           },
           "actions": {
-            "generate": ""
+            "generate": "生成新鑰匙"
           },
           "errors": {
-            "failed_to_load": ""
+            "failed_to_load": "無法載入 Nostr 鑰匙。它是有效的 Nostr 鑰匙嗎？"
           }
         },
         "remove": {
-          "title": "",
-          "subtitle": "",
-          "confirm": ""
+          "title": "刪除此帳戶",
+          "subtitle": "所有關聯的限額都將被刪除。請確定。",
+          "confirm": "是否確實要刪除帳戶：{{名稱}}？\n這是無法撤銷的。如果你使用此帳戶登錄網站，則可能無法訪問這些網站。"
         },
         "actions": {
-          "remove_account": "",
-          "export": ""
+          "remove_account": "刪除帳戶",
+          "export": "導出"
         }
       },
       "actions": {
-        "add_account": ""
+        "add_account": "添加帳戶"
       }
     },
     "enable": {
-      "title": "",
-      "allow": "",
-      "request1": "",
-      "request2": "",
-      "block_and_ignore": "",
-      "block_added": ""
+      "title": "連接",
+      "allow": "允許本網站：",
+      "request1": "請求批准交易",
+      "request2": "索取發票和閃電信息",
+      "block_and_ignore": "阻止並忽略 {{host}}",
+      "block_added": "已將{{host}}添加到阻止清單，請重新載入網站。"
     },
     "unlock": {
-      "unlock_to_continue": "",
-      "unlock_password": "",
+      "unlock_to_continue": "解鎖以繼續",
+      "unlock_password": "你的解鎖密碼",
       "help_contact": {
-        "part1": "",
-        "part2": ""
+        "part1": "需要幫助嗎？聯繫",
+        "part2": "Alby支援"
       },
       "unlock_error": {
         "help": "",
-        "link": ""
+        "link": "立即重置並添加新帳戶"
       },
       "errors": {
-        "invalid_password": ""
+        "invalid_password": "密碼無效"
       }
     },
     "settings": {
-      "title": "",
+      "title": "設置",
       "browser_notifications": {
-        "title": "",
-        "subtitle": ""
+        "title": "瀏覽器通知",
+        "subtitle": "付款和認證相關通知。"
       },
       "website_enhancements": {
-        "title": "",
+        "title": "網站改進",
         "subtitle": ""
       },
       "lnurl_auth": {
-        "title": "",
+        "title": "LNURL-認證",
         "hint": "",
         "legacy_lnurl_auth_202207": {
-          "title": "",
+          "title": "舊版 LNURL-認證",
           "subtitle": ""
         },
         "legacy_lnurl_auth": {
-          "title": "",
+          "title": "LNDhub 和 LNbits 的舊版簽名",
           "subtitle": ""
         }
       },
       "camera_access": {
-        "title": "",
-        "subtitle": "",
-        "allow": "",
-        "granted": ""
+        "title": "攝像頭訪問權",
+        "subtitle": "用於掃描二維碼",
+        "allow": "允許攝像頭訪問",
+        "granted": "許可已授予"
       },
       "language": {
-        "title": "",
-        "subtitle": ""
+        "title": "語言",
+        "subtitle": "翻譯尚未100%完成。<0>幫我們把Alby翻譯成你的語言！</0>"
       },
       "theme": {
-        "title": "",
-        "subtitle": "",
+        "title": "主題",
+        "subtitle": "在深色或淺色模式下使用 Alby",
         "options": {
-          "dark": "",
-          "light": "",
-          "system": ""
+          "dark": "深色",
+          "light": "淺色",
+          "system": "系統"
         }
       },
       "show_fiat": {
-        "title": "",
-        "subtitle": ""
+        "title": "聰兌換法幣",
+        "subtitle": "始終從所選交易所轉換為所選貨幣"
       },
       "currency": {
-        "title": "",
-        "subtitle": ""
+        "title": "貨幣",
+        "subtitle": "另外以該貨幣顯示金額"
       },
       "exchange": {
-        "title": "",
-        "subtitle": ""
+        "title": "交易所來源",
+        "subtitle": "比特幣匯率來源"
       },
       "personal_data": {
-        "title": "",
+        "title": "個人數據",
         "description": ""
       },
       "name": {
-        "title": "",
+        "title": "名字",
         "subtitle": "",
-        "placeholder": ""
+        "placeholder": "輸入你的名字"
       },
       "email": {
-        "title": "",
+        "title": "電子郵件",
         "subtitle": "",
-        "placeholder": ""
+        "placeholder": "輸入你的電子郵件位址"
       },
       "change_password": {
-        "title": "",
+        "title": "更改解鎖密碼",
         "subtitle": "",
-        "screen_reader": "",
+        "screen_reader": "更改解鎖密碼",
         "choose_password": {
-          "label": ""
+          "label": "輸入新的解鎖密碼："
         },
         "confirm_password": {
-          "label": ""
+          "label": "確認新密碼："
         },
         "submit": {
-          "label": ""
+          "label": "更改"
         },
         "errors": {
-          "enter_password": "",
-          "confirm_password": "",
-          "mismatched_password": ""
+          "enter_password": "請輸入新的解鎖密碼。",
+          "confirm_password": "請確認你的密碼。",
+          "mismatched_password": "密碼不匹配。"
         },
-        "success": ""
+        "success": "密碼更改成功"
       },
       "nostr": {
-        "title": "",
+        "title": "Nostr",
         "hint": "",
         "private_key": {
-          "title": "",
-          "subtitle": "",
-          "go_to": ""
+          "title": "私鑰",
+          "subtitle": "此部分已移至帳戶頁面，因為私鑰現在是特定於帳戶的。",
+          "go_to": "前往帳戶"
         }
       }
     },
     "send": {
-      "title": "",
+      "title": "發送",
       "qrcode": {
-        "title": ""
+        "title": "等待掃描"
       },
       "input": {
-        "label": "",
-        "hint": ""
+        "label": "接收者",
+        "hint": "發票、閃電地址或 LNURL"
       }
     },
     "lnurlpay": {
       "amount": {
-        "label": ""
+        "label": "金額"
       },
       "comment": {
-        "label": ""
+        "label": "注"
       },
       "name": {
-        "label": ""
+        "label": "名字"
       },
       "email": {
-        "label": ""
+        "label": "電子郵件"
       },
-      "success": ""
+      "success": "成功，付款已發送！"
     },
     "lnurlauth": {
-      "title": "",
+      "title": "認證",
       "content_message": {
-        "heading": ""
+        "heading": "是否要登錄"
       },
-      "submit": "",
-      "success": "",
+      "submit": "登錄",
+      "success": "成功登錄 {{name}}",
       "errors": {
-        "status": ""
+        "status": "錯誤：認證狀態不正常"
       }
     },
     "lnurlchannel": {
-      "title": "",
+      "title": "通道要求",
       "content_message": {
-        "heading": ""
+        "heading": "向節點要求通道"
       },
-      "success": ""
+      "success": "通道要求已成功發送到{{name}}"
     },
     "lnurlwithdraw": {
-      "title": "",
+      "title": "提款",
       "content_message": {
-        "heading": ""
+        "heading": "金額"
       },
       "amount": {
-        "label": ""
+        "label": "金額"
       },
-      "success": ""
+      "success": "向{{sender}}成功發送了{{amount}}的提款要求"
     },
     "receive": {
-      "title": "",
+      "title": "接收",
       "actions": {
-        "create_invoice": ""
+        "create_invoice": "創建發票"
       },
       "amount": {
-        "label": "",
-        "placeholder": ""
+        "label": "金額",
+        "placeholder": "聰金額..."
       },
       "description": {
-        "label": "",
-        "placeholder": ""
+        "label": "描述",
+        "placeholder": "例如，誰在發送這筆付款？"
       },
-      "success": "",
+      "success": "已收到付款！",
       "payment": {
-        "waiting": "",
+        "waiting": "等待付款...",
         "status": ""
       }
     },
