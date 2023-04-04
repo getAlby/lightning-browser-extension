@@ -218,24 +218,22 @@ export default function ConnectKollidier({ variant }: Props) {
           autoFocus={false}
         />
       </div>
-      {variant === "login" && (
-        <div className="mb-6">
-          <p className="font-medium text-gray-800 dark:text-white">
-            {t("currency.label")}
-          </p>
-          <Select
-            name="currency"
-            value={formData.currency}
-            onChange={handleChange}
-          >
-            {supportedCurrencies.map((currency) => (
-              <option key={currency.value} value={currency.value}>
-                {currency.label}
-              </option>
-            ))}
-          </Select>
-        </div>
-      )}
+      <div className="mb-6">
+        <p className="font-medium text-gray-800 dark:text-white">
+          {t("currency.label")}
+        </p>
+        <Select
+          name="currency"
+          value={formData.currency}
+          onChange={handleChange}
+        >
+          {supportedCurrencies.map((currency) => (
+            <option key={currency.value} value={currency.value}>
+              {currency.label}
+            </option>
+          ))}
+        </Select>
+      </div>
     </ConnectorForm>
   );
 }
