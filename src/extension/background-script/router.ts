@@ -69,7 +69,8 @@ const routes = {
   public: {
     webbtc: {
       enable: allowances.enable,
-      getInfo: webbtc.signPsbt,
+      getInfo: webbtc.getInfo,
+      signPsbt: webbtc.signPsbt,
     },
     webln: {
       enable: allowances.enable,

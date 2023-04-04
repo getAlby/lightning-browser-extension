@@ -16,6 +16,7 @@
   "web_accessible_resources": [
     "js/inpageScript.bundle.js",
     "js/inpageScriptWebLN.bundle.js",
+    "js/inpageScriptWebBTC.bundle.js",
     "js/inpageScriptNostr.bundle.js"
   ],
 
@@ -24,6 +25,7 @@
       "resources": [
         "js/inpageScript.bundle.js",
         "js/inpageScriptWebLN.bundle.js",
+        "js/inpageScriptWebBTC.bundle.js",
         "js/inpageScriptNostr.bundle.js"
       ],
       "matches": ["https://*/*"]
@@ -167,8 +169,9 @@
       "matches": ["*://*/*"],
       "run_at": "document_end",
       "js": [
-        "js/contentScriptOnEnd.bundle.js",
-        "js/contentScriptOnEndNostr.bundle.js"
+        "js/contentScriptOnEndWebLN.bundle.js",
+        "js/contentScriptOnEndNostr.bundle.js",
+        "js/contentScriptOnEndWebBTC.bundle.js"
       ]
     },
     {

@@ -1,11 +1,3 @@
-type RequestInvoiceArgs = {
-  amount?: string | number;
-  defaultAmount?: string | number;
-  minimumAmount?: string | number;
-  maximumAmount?: string | number;
-  defaultMemo?: string;
-};
-
 export default class WebBTCProvider {
   enabled: boolean;
   isEnabled: boolean;
@@ -37,45 +29,12 @@ export default class WebBTCProvider {
     return this.execute("getInfo");
   }
 
-  signMessage(message: string) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling signMessage");
-    }
-
-    return this.execute("signMessageOrPrompt", { message });
-  }
-
   signPsbt(psbt: string) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling signMessage");
     }
 
     return this.execute("signPsbtWithPrompt", { psbt });
-  }
-
-  verifyMessage(signature: string, message: string) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling verifyMessage");
-    }
-    throw new Error("Alby does not support `verifyMessage`");
-  }
-
-  makeInvoice(args: string | number | RequestInvoiceArgs) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling makeInvoice");
-    }
-    if (typeof args !== "object") {
-      args = { amount: args };
-    }
-
-    return this.execute("makeInvoice", args);
-  }
-
-  sendPayment(paymentRequest: string) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling sendPayment");
-    }
-    return this.execute("sendPaymentOrPrompt", { paymentRequest });
   }
 
   sendTransaction(address: string, amount: string) {
@@ -117,8 +76,8 @@ export default class WebBTCProvider {
         {
           application: "LBE",
           prompt: true,
-          action: `webln/${action}`,
-          scope: "webln",
+          action: `webbtc/${action}`,
+          scope: "webbtc",
           args,
         },
         "*" // TODO use origin
@@ -130,10 +89,12 @@ export default class WebBTCProvider {
         if (
           !messageEvent.data ||
           !messageEvent.data.response ||
-          messageEvent.data.application !== "LBE"
+          messageEvent.data.application !== "LBE" ||
+          messageEvent.data.scope !== "webbtc"
         ) {
           return;
         }
+
         if (messageEvent.data.data.error) {
           reject(new Error(messageEvent.data.data.error));
         } else {

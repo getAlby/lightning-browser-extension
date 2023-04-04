@@ -13,6 +13,10 @@ async function onstart() {
   // window.webln
   injectScript(browser.runtime.getURL("js/inpageScriptWebLN.bundle.js"));
 
+  // window.webbtc
+  // TODO: Add check if current account has keys
+  injectScript(browser.runtime.getURL("js/inpageScriptWebBTC.bundle.js"));
+
   // window.nostr
   const nostrEnabled = (await api.getAccount()).nostrEnabled;
   if (nostrEnabled) {
