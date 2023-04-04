@@ -640,7 +640,8 @@
         "shopping": "Shopping",
         "miscellaneous": "Miscellaneous",
         "showcases": "Showcases",
-        "nostr": "Nostr"
+        "nostr": "Nostr",
+        "nodeManagement": "Node Management"
       },
       "tips": {
         "title": "Your Alby wallet is ready",

@@ -344,6 +344,7 @@ export default function ConnectGaloy(props: Props) {
               placeholder="+503"
               disabled={smsCodeRequested}
               onChange={handlePhoneNumberChange}
+              autoFocus={true}
             />
           </div>
         </div>
@@ -392,6 +393,7 @@ export default function ConnectGaloy(props: Props) {
               type="text"
               required
               onChange={handleJwtChange}
+              autoFocus={true}
             />
           </div>
         </div>
