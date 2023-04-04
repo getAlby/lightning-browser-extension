@@ -96,10 +96,10 @@ function LNURLPay() {
       payerData["email"] = userEmail;
     }
     if (contentMetadata) {
-      payerData["content_metadata"] = contentMetadata;
+      payerData["contentMetadata"] = contentMetadata;
     }
     if (contentMetadataUri) {
-      payerData["content_metadata_uri"] = contentMetadataUri;
+      payerData["contentMetadataUri"] = contentMetadataUri;
     }
 
     if (Object.keys(payerData).length) {

@@ -31,7 +31,7 @@ const getContentMetadata = (): Record<string, unknown> => {
   const scrollPosition = window.scrollY;
 
   return {
-    scroll_position: scrollPosition,
+    scrollPosition: scrollPosition,
   };
 };
 const Medium = {

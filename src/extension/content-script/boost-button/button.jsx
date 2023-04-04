@@ -118,10 +118,10 @@ function BoostButton() {
       let invoiceDetails = { amount: (satsClicked * 1000).toString() };
       let payerDataMetadata = {};
       if (Object.keys(contentMetadata).length) {
-        payerDataMetadata["content_metadata"] = contentMetadata;
+        payerDataMetadata["contentMetadata"] = contentMetadata;
       }
       if (contentMetadataUri) {
-        payerDataMetadata["content_metadata_uri"] = contentMetadataUri;
+        payerDataMetadata["contentMetadataUri"] = contentMetadataUri;
       }
       if (Object.keys(payerDataMetadata).length) {
         invoiceDetails["payerdata"] = JSON.stringify(payerDataMetadata);

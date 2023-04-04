@@ -72,8 +72,8 @@ const getContentMetadata = (): Record<string, unknown> => {
   const paymentContentOffset = getYouTubeTimingInfo();
 
   return {
-    contenturi: contentUri,
-    payment_content_offset: paymentContentOffset,
+    contentUri: contentUri,
+    paymentContentOffset: paymentContentOffset,
   };
 };
 
