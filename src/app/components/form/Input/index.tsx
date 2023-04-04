@@ -40,7 +40,7 @@ export default function Input({
       className={classNames(
         "block w-full placeholder-gray-500 dark:placeholder-neutral-600",
         !suffix && !endAdornment
-          ? `${outerStyles} focus:ring-orange-bitcoin focus:border-primary focus:ring-1`
+          ? `${outerStyles} focus:ring-primary focus:border-primary focus:ring-1`
           : "pr-0 border-0 focus:ring-0",
         disabled
           ? "bg-gray-50 dark:bg-surface-01dp text-gray-500 dark:text-neutral-500"

@@ -60,7 +60,7 @@ module.exports = {
       },
     },
     backgroundImage: (theme) => ({
-      "gradient-primary": `linear-gradient(180deg, #FFDE6E 63.72%, #F8C455 95.24%)`,
+      "primary-gradient": `linear-gradient(180deg, #FFDE6E 63%, #F8C455 95%)`,
     }),
   },
 };
