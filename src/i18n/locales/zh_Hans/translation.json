@@ -41,7 +41,7 @@
           "connection_failed": "连接失败。你的LND凭据是否正确？"
         },
         "page": {
-          "description": "你需要你的节点URL和一个具有读取和发送权限的macaroon（例如：admin.macaroon）",
+          "description": "你需要你的节点URL和一个具有读取和发送权限的macaroon（例如admin.macaroon）",
           "title": "连接你的LND节点"
         },
         "url": {
@@ -178,7 +178,7 @@
       "raspiblitz": {
         "page": {
           "instructions2": "将（admin）<0>macaroon</0>粘贴到下面的输入中。",
-          "instructions1": "你需要你的节点洋葱地址，端口，和一个具有读取和发送权限的macaroon（例如admin.macaroon）。<1/><1/><0>SSH</0>进入你的<0>RaspiBlitz</0>.<1/>运行命令<0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>。<1/>复制并粘贴<0>.onion</0>地址到下面的输入中。<1/>在onion地址后面添加你的<0>端口</0>，默认端口是<0>:8080</0>。",
+          "instructions1": "按照以下步骤操作：<1/> 1.<0>SSH</0>进入你的<0>Raspiblitz</0><1/>2。从列表中选择<0>Connect Apps & Show Credentials</0><1/><0/>3。选择 <0>Connect Alby to this node</0><1/>4。按 <0>OK</0> 以显示连接凭据<1/><1/>在下面的输入中复制并粘贴<0>REST API 主机</0>或 <0>.onion</0> 地址以通过 Tor 连接。",
           "title": "连接你的<0>RaspiBlitz</0>节点"
         },
         "rest_api_host": {
@@ -191,7 +191,7 @@
         "title": "Bluewallet",
         "page": {
           "title": "连接BlueWallet",
-          "description": "在BlueWallet中，选择你要连接的钱包，打开它，点击\"...\"，点击导出/备份，显示二维码，用摄像头扫描。"
+          "description": "在BlueWallet中，选择你要连接的钱包，打开它，点击\"...\"，点击导出/备份，显示二维码并使用摄像头扫描。"
         },
         "uri": {
           "label": "BlueWallet导出URI"
@@ -248,7 +248,7 @@
         "title": "myNode",
         "page": {
           "title": "连接<0>myNode</0>",
-          "instructions": "在你的myNode主页上点击你的<0>Lightning</0>服务的<0>Wallet</0>按钮。<1/> 现在点击<0>Status</0>标签下的<0>Pair Wallet</0>按钮。<1/>选择下拉菜单并选择一个配对选项。根据你的设置，你可以使用<0>闪电（REST +本地IP）</0>连接或<0>闪电（REST + Tor）</0>连接。"
+          "instructions": "在你的myNode主页上点击你的<0>Lightning</0>服务的<0>Wallet</0>按钮。<1/> 现在点击<0>Status</0>标签下的<0>Pair Wallet</0>按钮。出现提示时输入密码。<1/>选择下拉菜单并选择一个配对选项。根据你的设置，你可以使用<0>闪电（REST +本地IP）</0>连接或<0>闪电（REST + Tor）</0>连接。"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -293,7 +293,7 @@
       "allowance_view": {
         "recent_transactions": "近期交易",
         "no_transactions": "<0>{{name}}</0>还没有交易。",
-        "sats_used": "已使用的sats",
+        "sats_used": "已使用的聪",
         "allowance": "限额"
       },
       "default_view": {
@@ -422,8 +422,8 @@
         },
         "hint": "是一个通用的认证协议。它使用数字签名对用户进行认证。该协议不需要任何其他识别信息，如密码、电子邮件、用户名或类似信息。通过Alby，你可以使用你的闪电账户安全地登录网站。为了与其他钱包兼容，我们不得不做一些改变，你可以在这里进行配置。 <0>理想情况下，所有这些选项都是关闭的。</0>仅当你有旧帐户时才使用它们。",
         "legacy_lnurl_auth_202207": {
-          "subtitle": "LNURL-auth的密钥生成已经改变（2022年7月）。Alby与其他实现不兼容。这被改变了，但现在使用不同的登录密钥。如果你之前使用LNURL-auth登录，你仍然可以启用旧方法。这个选项以后会被删除，请务必切换到新的登录方式。",
-          "title": "旧版 LNURL-Auth"
+          "subtitle": "LNURL-认证的密钥生成已经改变（2022年7月）。Alby与其他实现不兼容。这被改变了，但现在使用不同的登录密钥。如果你之前使用LNURL-认证登录，你仍然可以启用旧方法。这个选项以后会被删除，请务必切换到新的登录方式。",
+          "title": "旧版 LNURL-认证"
         }
       },
       "browser_notifications": {
@@ -519,7 +519,7 @@
     "send": {
       "input": {
         "hint": "发票、闪电地址或LNURL",
-        "label": "接受者"
+        "label": "接收者"
       },
       "title": "发送",
       "qrcode": {
@@ -532,7 +532,7 @@
         "heading": "你是否想登录"
       },
       "title": "认证",
-      "success": "登录成功 {{name}}",
+      "success": "成功登录 {{name}}",
       "errors": {
         "status": "错误：认证状态不正常"
       }
@@ -617,7 +617,13 @@
         "30078": "特定于应用程序的数据",
         "2": "推荐中继器",
         "30009": "徽章定义",
-        "0": "元数据"
+        "0": "元数据",
+        "40": "频道创建",
+        "43": "频道隐藏消息",
+        "44": "频道静音用户",
+        "24133": "nostr 连接",
+        "41": "频道元数据",
+        "42": "频道消息"
       }
     },
     "lnurlpay": {
@@ -672,7 +678,8 @@
         "entertaiment": "娱乐",
         "gaming": "游戏",
         "showcases": "展示",
-        "nostr": "Nostr"
+        "nostr": "Nostr",
+        "nodeManagement": "节点管理"
       },
       "description": "可以使用 Alby 的网站和网络应用程序",
       "title": "探索闪电⚡️生态系统",
@@ -685,7 +692,7 @@
         "pin": {
           "description3": "就这样！要访问 Alby，只需点击 Alby 图标",
           "title": "📌 固定你的 Alby 扩展",
-          "description1": "<0>要轻松访问阿尔比，请点击浏览器右上角的扩展图标</0> <1/> <2>",
+          "description1": "<0>要轻松访问Alby，请点击浏览器右上角的扩展图标</0> <1/> <2>",
           "description2": "在扩展列表中，找到 Alby 并点击固定图标以将其固定到工具栏"
         },
         "top_up_wallet": {
@@ -751,14 +758,15 @@
     },
     "lnurlchannel": {
       "content_message": {
-        "heading": "向节点请求通道"
+        "heading": "向节点要求通道"
       },
       "title": "通道要求",
-      "success": "通道请求已成功发送到 {{name}}"
+      "success": "通道要求已成功发送到 {{name}}"
     },
     "transactions": {
       "list_empty": "尚无交易。",
-      "title": "交易"
+      "title": "交易",
+      "description": "你所有帐户的传出交易"
     }
   },
   "common": {
@@ -909,10 +917,12 @@
       "heading": "你想如何连接到TOR网络？",
       "download": "下载",
       "tor_native": {
-        "title": "TOR（本地）"
+        "title": "TOR（本地）",
+        "description": "如果该浏览器已经连接到TOR网络，请选择该选项。"
       },
       "companion": {
-        "title": "配套应用"
+        "title": "配套应用",
+        "description": "将浏览器连接到 TOR 网络的轻量级应用程序。"
       }
     }
   },
