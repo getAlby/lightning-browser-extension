@@ -221,7 +221,7 @@ const DefaultView: FC<Props> = (props) => {
                         "focus:outline-none",
                         "hover:bg-gray-50 dark:hover:bg-surface-16dp",
                         selected
-                          ? "text-primary"
+                          ? "text-black"
                           : "text-gray-700  dark:text-neutral-200"
                       )
                     }

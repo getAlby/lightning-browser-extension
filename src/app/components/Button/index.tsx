@@ -45,7 +45,7 @@ const Button = forwardRef(
           halfWidth && "w-1/2 first:mr-2 last:ml-2",
           fullWidth || halfWidth ? "px-0 py-2" : "px-7 py-2",
           primary
-            ? "bg-gray-900 text-white border border-transparent"
+            ? "bg-gradient-primary text-black"
             : "bg-white text-gray-900 border border-gray-900 dark:bg-surface-02dp hover:bg-gray-900 hover:text-white",
           !disabled && "hover:bg-gray-700",
 
