@@ -44,7 +44,7 @@
     "@vespaiach/axios-fetch-adapter": "^0.3.0",
     "axios": "^0.27.2",
     "bech32": "^2.0.0",
-    "bolt11": "^1.4.0",
+    "bolt11": "^1.4.1",
     "crypto-js": "^4.1.1",
     "dayjs": "^1.11.7",
     "dexie": "^3.2.3",
