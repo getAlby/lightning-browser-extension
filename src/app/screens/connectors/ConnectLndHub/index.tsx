@@ -129,7 +129,7 @@ export default function ConnectLndHub({
         </div>
       )}
       <div>
-        <p className="text-center my-4 dark:text-white">OR</p>
+        <p className="text-center my-6 dark:text-white">OR</p>
         <QrcodeScanner
           fps={10}
           qrbox={250}

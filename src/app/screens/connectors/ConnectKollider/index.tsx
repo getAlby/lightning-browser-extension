@@ -203,7 +203,7 @@ export default function ConnectKollidier({ variant }: Props) {
           {t("warning")}
         </div>
       )}
-      <div className="mb-6">
+      <div className="mt-6 mb-6">
         <TextField
           id="username"
           label={t(`username.label`)}

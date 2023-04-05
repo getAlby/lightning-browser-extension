@@ -127,14 +127,16 @@ export default function ConnectUmbrel() {
       onSubmit={handleSubmit}
       image="https://cdn.getalby-assets.com/connector-guides/umbrel.png"
     >
-      <TextField
-        id="lndconnect"
-        label={t("rest_url.label")}
-        placeholder={t("rest_url.placeholder")}
-        onChange={handleLndconnectUrl}
-        required
-        autoFocus={true}
-      />
+      <div className="mt-6">
+        <TextField
+          id="lndconnect"
+          label={t("rest_url.label")}
+          placeholder={t("rest_url.placeholder")}
+          onChange={handleLndconnectUrl}
+          required
+          autoFocus={true}
+        />
+      </div>
       {formData.url.match(/\.onion/i) && (
         <div className="mt-6">
           <CompanionDownloadInfo

@@ -130,14 +130,16 @@ export default function ConnectStart9() {
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
     >
-      <TextField
-        id="lndconnect"
-        label={t("rest_url.label")}
-        placeholder={t("rest_url.placeholder")}
-        onChange={handleLndconnectUrl}
-        required
-        autoFocus={true}
-      />
+      <div className="mt-6">
+        <TextField
+          id="lndconnect"
+          label={t("rest_url.label")}
+          placeholder={t("rest_url.placeholder")}
+          onChange={handleLndconnectUrl}
+          required
+          autoFocus={true}
+        />
+      </div>
       {formData.url.match(/\.onion/i) && (
         <div className="mt-6">
           <CompanionDownloadInfo
