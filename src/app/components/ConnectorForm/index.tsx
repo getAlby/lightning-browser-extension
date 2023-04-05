@@ -30,7 +30,7 @@ function ConnectorForm({
     <div className="flex h-full justify-center items-center">
       {video && (
         <div
-          className="flex-1 relative h-0 max-md:mb-4"
+          className="flex-1 relative h-0 mb-6"
           style={{ paddingBottom: "56.25%" }}
         >
           <video className="absolute t-0 l-0 w-full h-full" controls>
@@ -56,15 +56,15 @@ function ConnectorForm({
     <form onSubmit={onSubmit}>
       <div className="max-w-[600px] mx-auto relative mt-14 bg-white dark:bg-surface-02dp p-10 shadow rounded-lg">
         {typeof title === "string" ? (
-          <h1 className="mb-1 text-2xl font-bold dark:text-white">{title}</h1>
+          <h1 className="mb-4 text-2xl font-bold dark:text-white">{title}</h1>
         ) : (
           title
         )}
-        <div className="mt-4">{media}</div>
+        {media}
         {description && (
-          <div className="text-gray-500 dark:text-neutral-400 whitespace-pre-line mb-8">
+          <div className="text-gray-500 dark:text-neutral-400 whitespace-pre-line">
             {typeof description === "string" ? (
-              <p>{description}</p>
+              <p className="mb-6">bar{description}</p>
             ) : (
               description
             )}
