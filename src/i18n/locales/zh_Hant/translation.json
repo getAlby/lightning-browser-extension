@@ -620,113 +620,121 @@
       "success": "已收到付款！",
       "payment": {
         "waiting": "等待付款...",
-        "status": ""
+        "status": "查看付款狀態"
       }
     },
     "discover": {
-      "title": "",
-      "description": "",
+      "title": "探索閃電⚡️生態系統",
+      "description": "可以使用 Alby 的網站和網絡應用程序",
       "list": {
-        "trading": "",
-        "gaming": "",
-        "entertaiment": "",
-        "shopping": "",
-        "miscellaneous": "",
-        "showcases": "",
-        "nostr": ""
+        "trading": "交易",
+        "gaming": "遊戲",
+        "entertaiment": "娛樂",
+        "shopping": "購物",
+        "miscellaneous": "雜項",
+        "showcases": "展示",
+        "nostr": "Nostr",
+        "nodeManagement": "節點管理"
       },
       "tips": {
-        "title": "",
-        "description": "",
+        "title": "你的Alby錢包已準備就緒",
+        "description": "一些讓你開始嗡嗡作响的小貼士🐝",
         "top_up_wallet": {
-          "title": "",
+          "title": "⚡️充值你的錢包",
           "description": "",
-          "label1": "",
-          "label2": ""
+          "label1": "接收比特幣",
+          "label2": "購買比特幣"
         },
         "pin": {
-          "title": "",
+          "title": "📌 固定你的Alby擴展",
           "description1": "",
           "description2": "",
-          "description3": ""
+          "description3": "就這樣！要訪問Alby，只需点击Alby圖標"
         },
         "demo": {
-          "title": "",
-          "description": "",
-          "label1": ""
+          "title": "🕹️ 試用 Alby 演示",
+          "description": "在我們的演示網站上發現你可以使用 Alby 執行的所有操作",
+          "label1": "試一試"
         },
         "address": {
-          "title": "",
+          "title": "⚡️ 獲取閃電地址",
           "description": "",
-          "label1": ""
+          "label1": "立即獲取！"
         }
       }
     },
     "publishers": {
-      "title": "",
-      "description": "",
-      "no_info": "",
-      "discover": "",
+      "title": "你的 ⚡ 網站",
+      "description": "你曾經使用過Alby的網站",
+      "no_info": "看起來你還沒有在任何網站上使用過 Alby。",
+      "discover": "發現網站",
       "publisher": {
         "allowance": {
-          "title": "",
-          "used_budget": ""
+          "title": "限額",
+          "used_budget": "以使用的聰"
         }
       }
     },
     "make_invoice": {
-      "title": "",
+      "title": "創建發票",
       "amount": {
-        "label": ""
+        "label": "金額（聰）"
       },
       "memo": {
-        "label": ""
+        "label": "備忘錄"
       },
       "errors": {
-        "amount_too_small": "",
-        "amount_too_big": ""
+        "amount_too_small": "金額低於最低限度",
+        "amount_too_big": "金額超過最高限度"
       }
     },
     "confirm_sign_message": {
-      "title": "",
-      "content": ""
+      "title": "簽名",
+      "content": "該網站要求你簽署："
     },
     "confirm_keysend": {
-      "title": "",
+      "title": "批准付款",
       "success": "",
       "payment_summary": {
-        "description": ""
+        "description": "付款至： {{destination}}"
       }
     },
     "keysend": {
-      "title": "",
+      "title": "發送",
       "success": "",
       "receiver": {
-        "label": ""
+        "label": "付款至"
       },
       "amount": {
-        "label": ""
+        "label": "金額（聰）"
       }
     },
     "confirm_payment": {
-      "title": "",
+      "title": "批准付款",
       "success": "",
       "actions": {
-        "pay_now": ""
+        "pay_now": "立即付款"
       }
     },
     "confirm_request_permission": {
-      "title": "",
-      "allow": "",
-      "always_allow": ""
+      "title": "批准請求",
+      "allow": "允許該網站執行：",
+      "always_allow": "記住我的選擇，不要再問了"
     },
     "nostr": {
-      "title": "",
-      "allow": "",
-      "content": "",
-      "allow_sign": "",
-      "block_and_ignore": "",
-      "block_added": ""
+      "title": "Nostr",
+      "allow": "允許该網站：",
+      "content": "該網站要求你簽署：",
+      "allow_sign": "允許 {{host}} 簽名：",
+      "block_and_ignore": "阻止並忽略 {{host}}",
+      "block_added": "已將 {{host}} 添加到黑名單，請重新加載網站。",
+      "view_details": "查看詳情",
+      "hide_details": "隱藏詳情",
+      "kinds": {
+        "1": "短文便條",
+        "0": "元數據"
+      },
+      "no_content": "（ 無內容 ）"
     }
   },
   "common": {
