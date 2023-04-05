@@ -120,7 +120,7 @@ export default class WebBTCProvider {
     return new Promise((resolve, reject) => {
       const id = Math.random().toString().slice(4);
       window.webbtc._requests[id] = { resolve, reject };
-      console.log("🟢 added " + id + " to _requests", action);
+
       // post the request to the content script. from there it gets passed to the background script and back
       // in page script can not directly connect to the background script
       window.postMessage(
@@ -157,11 +157,7 @@ export default class WebBTCProvider {
             messageEvent.data.data.data
           );
         }
-        console.log(
-          "❌ delete from _request",
-          messageEvent.data.id,
-          messageEvent.data.data
-        );
+
         delete window.webbtc._requests[messageEvent.data.id];
 
         // For some reason must happen only at the end of this function

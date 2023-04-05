@@ -58,7 +58,6 @@ export default class NostrProvider {
     return new Promise((resolve, reject) => {
       const id = Math.random().toString().slice(4);
       window.nostr._requests[id] = { resolve, reject };
-      console.log("🟢 added " + id + " to _requests", action);
       // post the request to the content script. from there it gets passed to the background script and back
       // in page script can not directly connect to the background script
       window.postMessage(
@@ -83,21 +82,6 @@ export default class NostrProvider {
           messageEvent.data.scope !== "nostr" ||
           !window.nostr._requests[messageEvent.data.id]
         ) {
-          if (
-            messageEvent.data &&
-            messageEvent.data.response &&
-            messageEvent.data.application === "LBE" &&
-            messageEvent.data.scope === "nostr" &&
-            !window.nostr._requests[messageEvent.data.id]
-          ) {
-            console.log(
-              "🔴 no _request found for, already processed? " +
-                messageEvent.data.id,
-              messageEvent.data.data.data,
-              messageEvent
-            );
-          }
-
           return;
         }
 
@@ -114,11 +98,6 @@ export default class NostrProvider {
           );
         }
 
-        console.log(
-          "❌ delete from _request",
-          messageEvent.data.id,
-          messageEvent.data.data
-        );
         delete window.nostr._requests[messageEvent.data.id];
 
         // For some reason must happen only at the end of this function

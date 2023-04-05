@@ -124,7 +124,6 @@ export default class WebLNProvider {
     return new Promise((resolve, reject) => {
       const id = Math.random().toString().slice(4);
       this._requests[id] = { resolve, reject };
-      console.log("🟢 added " + id + " to _requests", action);
 
       // post the request to the content script. from there it gets passed to the background script and back
       // in page script can not directly connect to the background script
@@ -161,11 +160,7 @@ export default class WebLNProvider {
           // 3. data: the actual response data
           window.webln._requests.resolve(messageEvent.data.data.data);
         }
-        console.log(
-          "❌ delete from _request",
-          messageEvent.data.id,
-          messageEvent.data.data
-        );
+
         delete window.nostr._requests[messageEvent.data.id];
 
         // For some reason must happen only at the end of this function
