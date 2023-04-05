@@ -112,18 +112,16 @@ export default function ConnectLnbits() {
           autoFocus={true}
         />
       </div>
-      <div className="mb-6">
-        <TextField
-          id="url"
-          label={t("url.label")}
-          type="text"
-          value={formData.url}
-          required
-          onChange={handleChange}
-        />
-      </div>
+      <TextField
+        id="url"
+        label={t("url.label")}
+        type="text"
+        value={formData.url}
+        required
+        onChange={handleChange}
+      />
       {formData.url.match(/\.onion/i) && (
-        <div className="mb-6">
+        <div className="mt-6">
           <CompanionDownloadInfo
             hasTorCallback={(hasTor: boolean) => {
               setHasTorSupport(hasTor);

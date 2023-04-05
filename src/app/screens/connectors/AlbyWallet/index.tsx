@@ -193,7 +193,7 @@ export default function AlbyWallet({ variant }: Props) {
         />
       </div>
       {variant === "login" && (
-        <p className="mb-2 text-gray-700 dark:text-neutral-400">
+        <p className="text-gray-700 dark:text-neutral-400">
           <a
             className="underline"
             target="_blank"

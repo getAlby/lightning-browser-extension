@@ -131,19 +131,17 @@ export default function ConnectCitadel() {
           }
         />
       </div>
-      <div className="mb-6">
-        <TextField
-          label={t("url.label")}
-          id="url"
-          placeholder={t("url.placeholder")}
-          type="text"
-          value={formData.url}
-          required
-          onChange={handleChange}
-        />
-      </div>
+      <TextField
+        label={t("url.label")}
+        id="url"
+        placeholder={t("url.placeholder")}
+        type="text"
+        value={formData.url}
+        required
+        onChange={handleChange}
+      />
       {formData.url.match(/\.onion/i) && (
-        <div className="mb-6">
+        <div className="mt-6">
           <CompanionDownloadInfo
             hasTorCallback={(hasTor: boolean) => {
               setHasTorSupport(hasTor);

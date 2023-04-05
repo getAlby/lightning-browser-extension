@@ -118,18 +118,16 @@ export default function ConnectBtcpay() {
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
     >
-      <div className="mb-6">
-        <TextField
-          id="btcpay-config"
-          label={t("config.label")}
-          placeholder={t("config.placeholder")}
-          onChange={handleChange}
-          required
-          autoFocus={true}
-        />
-      </div>
+      <TextField
+        id="btcpay-config"
+        label={t("config.label")}
+        placeholder={t("config.placeholder")}
+        onChange={handleChange}
+        required
+        autoFocus={true}
+      />
       {formData.url.match(/\.onion/i) && (
-        <div className="mb-6">
+        <div className="mt-6">
           <CompanionDownloadInfo
             hasTorCallback={(hasTor: boolean) => {
               setHasTorSupport(hasTor);

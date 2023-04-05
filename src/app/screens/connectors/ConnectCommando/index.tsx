@@ -175,30 +175,28 @@ export default function ConnectCommando() {
               onChange={handleChange}
             />
           </div>
-          <div className="mb-6">
-            <TextField
-              id="commandoPrivateKey"
-              label={t("privKey.label")}
-              type={commandoPrivateKeyVisible ? "text" : "password"}
-              value={formData.privateKey}
-              endAdornment={
-                <button
-                  type="button"
-                  tabIndex={-1}
-                  className="flex justify-center items-center w-10 h-8"
-                  onClick={() => {
-                    setCommandoPrivateKeyVisible(!commandoPrivateKeyVisible);
-                  }}
-                >
-                  {commandoPrivateKeyVisible ? (
-                    <HiddenIcon className="h-6 w-6" />
-                  ) : (
-                    <VisibleIcon className="h-6 w-6" />
-                  )}
-                </button>
-              }
-            />
-          </div>
+          <TextField
+            id="commandoPrivateKey"
+            label={t("privKey.label")}
+            type={commandoPrivateKeyVisible ? "text" : "password"}
+            value={formData.privateKey}
+            endAdornment={
+              <button
+                type="button"
+                tabIndex={-1}
+                className="flex justify-center items-center w-10 h-8"
+                onClick={() => {
+                  setCommandoPrivateKeyVisible(!commandoPrivateKeyVisible);
+                }}
+              >
+                {commandoPrivateKeyVisible ? (
+                  <HiddenIcon className="h-6 w-6" />
+                ) : (
+                  <VisibleIcon className="h-6 w-6" />
+                )}
+              </button>
+            }
+          />
         </div>
       )}
     </ConnectorForm>
