@@ -133,41 +133,45 @@ function AccountMenu({ showOptions = true }: Props) {
           {isAlbyAccount(authAccount?.alias) && (
             <Menu.ItemButton
               onClick={() => {
-                window.open(`https://getalby.com/login`, "_blank");
+                window.open(`https://getalby.com/user`, "_blank");
               }}
             >
               <GlobeIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
               {t("options.account.go_to_web_wallet")} →
             </Menu.ItemButton>
           )}
-          <MenuDivider />
 
-          <Menu.Subheader>{t("title")}</Menu.Subheader>
-          {Object.keys(accounts).map((accountId) => {
-            // Do not render the current active account
-            if (accountId === authAccount?.id) {
-              return;
-            }
+          {Object.keys(accounts).length > 1 && (
+            <>
+              <MenuDivider />
+              <Menu.Subheader>{t("title")}</Menu.Subheader>
+              {Object.keys(accounts).map((accountId) => {
+                // Do not render the current active account
+                if (accountId === authAccount?.id) {
+                  return;
+                }
 
-            const account = accounts[accountId];
-            return (
-              <Menu.ItemButton
-                key={accountId}
-                onClick={() => {
-                  selectAccount(accountId);
-                }}
-                disabled={loading}
-                title={account.name}
-              >
-                <div className="shrink-0">
-                  <Avatar size={24} name={account.id} />
-                </div>
-                <span className="overflow-hidden text-ellipsis whitespace-nowrap ml-2">
-                  {account.name}&nbsp;
-                </span>
-              </Menu.ItemButton>
-            );
-          })}
+                const account = accounts[accountId];
+                return (
+                  <Menu.ItemButton
+                    key={accountId}
+                    onClick={() => {
+                      selectAccount(accountId);
+                    }}
+                    disabled={loading}
+                    title={account.name}
+                  >
+                    <div className="shrink-0">
+                      <Avatar size={24} name={account.id} />
+                    </div>
+                    <span className="overflow-hidden text-ellipsis whitespace-nowrap ml-2">
+                      {account.name}&nbsp;
+                    </span>
+                  </Menu.ItemButton>
+                );
+              })}
+            </>
+          )}
 
           {showOptions && (
             <>

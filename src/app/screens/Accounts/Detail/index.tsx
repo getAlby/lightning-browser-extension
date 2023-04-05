@@ -268,7 +268,7 @@ function AccountDetail() {
         title={t("title1")}
         headerLeft={
           <IconButton
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/accounts")}
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
