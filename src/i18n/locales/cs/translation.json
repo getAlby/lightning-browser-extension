@@ -274,14 +274,10 @@
           "connection_failed": "Připojení se nezdařilo. Jste si jisti, že jste zadali údaje k účtu správně?"
         },
         "page": {
-          "title": "Připojení k vašemu účtu Kollider",
           "description": "Nemáte ještě účet? <0>Vytvořte</0> ho!"
         },
         "username": {
           "label": "Vložte vaše uživatelské jméno ke Kollider"
-        },
-        "password": {
-          "label": "Vložte vaše heslo ke Kollider"
         },
         "currency": {
           "label": "Zvolte měnu vašeho účtu"

@@ -286,13 +286,9 @@
         "title": "",
         "description": "",
         "page": {
-          "title": "",
           "description": ""
         },
         "username": {
-          "label": ""
-        },
-        "password": {
           "label": ""
         },
         "currency": {

@@ -226,7 +226,6 @@
       "kollider": {
         "title": "Kollider",
         "page": {
-          "description": "Har du inte ett konto? <0>Bli Medlem</0> nu!",
           "title": "Anslut till ditt kollider-konto"
         },
         "currency": {
@@ -238,9 +237,6 @@
         "description": "Logga in på ditt Kollider-konto",
         "username": {
           "label": "Skriv in ditt Kollider användarnamn"
-        },
-        "password": {
-          "label": "Skriv in ditt Kollider lösenord"
         }
       },
       "commando": {

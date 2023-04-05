@@ -269,15 +269,11 @@
       "kollider": {
         "title": "Kollider",
         "page": {
-          "title": "连接你的Kollider账户",
           "description": "还没有帐户？立即<0>注册</0>！"
         },
         "description": "登录你的Kollider账户",
         "username": {
           "label": "输入你的Kollider用户名"
-        },
-        "password": {
-          "label": "输入你的Kollider密码"
         },
         "currency": {
           "label": "选择你的货币账户"

@@ -203,14 +203,10 @@
       "kollider": {
         "description": "Inicie sesión en su cuenta Kollider",
         "page": {
-          "title": "Conéctese a su cuenta Kollider",
           "description": "¿Aún no tienes una cuenta? <0>¡Regístrese</0> ahora!"
         },
         "username": {
           "label": "Introduzca su nombre de usuario Kollider"
-        },
-        "password": {
-          "label": "Introduzca su contraseña de Kollider"
         },
         "errors": {
           "connection_failed": "La conexión falló. ¿Te aseguraste de que los datos de la cuenta son correctos?"

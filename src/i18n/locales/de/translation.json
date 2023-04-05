@@ -259,11 +259,7 @@
         "title": "Kollider",
         "description": "Anmeldung bei deinem Kollider Konto",
         "page": {
-          "description": "Du hast noch kein Konto? <0>Jetzt anmelden</0>!",
           "title": "Verbinde dich mit deinem Kollider-Konto"
-        },
-        "password": {
-          "label": "Gebe dein Kollider Passwort ein"
         },
         "currency": {
           "label": "Wähle dein Währungskonto"

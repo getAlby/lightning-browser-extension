@@ -226,14 +226,10 @@
       "kollider": {
         "description": "Accedi al tuo account Kollider",
         "page": {
-          "title": "Connettiti al tuo account Kollider",
           "description": "Non hai ancora un account? <0>Registrati</0> ora!"
         },
         "username": {
           "label": "Inserisci il tuo username Kollider"
-        },
-        "password": {
-          "label": "Inserisci la tua password Kollider"
         },
         "currency": {
           "label": "Seleziona la valuta del tuo account"
