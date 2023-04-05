@@ -1326,10 +1326,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/chrome@^0.0.224":
-  version "0.0.224"
-  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.224.tgz#0138497299eaaf261d61ece62d7d6af3868ce856"
-  integrity sha512-YkL7q3KDV7OAKgVCBNIfH73rnjNMbIzAYHzTa2DKhSK/2z0Wf/n8yJnK/UoW+lvuYJJR4LtAkG3YvsIZTy7BOA==
+"@types/chrome@^0.0.226":
+  version "0.0.226"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.226.tgz#db6fc9a0476718156f97917a3b25e3f876f5bc7e"
+  integrity sha512-cyl2Bt/P3xPH4arxHctNbzksO20hirQCL3Jcqz6mOZKgad7SkhqRqc7BL9EWVRvocs6hyo8bwkzKidTlM8WGUw==
   dependencies:
     "@types/filesystem" "*"
     "@types/har-format" "*"
