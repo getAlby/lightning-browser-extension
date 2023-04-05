@@ -202,19 +202,32 @@
       },
       "kollider": {
         "description": "Inicie sesión en su cuenta Kollider",
-        "page": {
-          "description": "¿Aún no tienes una cuenta? <0>¡Regístrese</0> ahora!"
-        },
         "username": {
-          "label": "Introduzca su nombre de usuario Kollider"
+          "label": "Nombre de usuario"
         },
         "errors": {
-          "connection_failed": "La conexión falló. ¿Te aseguraste de que los datos de la cuenta son correctos?"
+          "connection_failed": "La conexión falló. ¿Te aseguraste de que los datos de la cuenta son correctos?",
+          "user_already_exists": "El nombre de usuario ya existe",
+          "registration_limit_exceeded": "Límite de registro excedido, inténtalo más tarde."
         },
         "title": "Kollider",
         "currency": {
           "label": "Seleccione su cuenta de divisas"
-        }
+        },
+        "choose_path": {
+          "description": "Inicia sesión o regístrate para obtener una nueva cuenta de Kollider y conéctate a Alby.",
+          "title": "Conéctate a tú monedero Kollider",
+          "create_new": "Regístrate"
+        },
+        "create": {
+          "title": "Crea tú cuenta Kollider y conéctate a Alby",
+          "description": "Crea una nueva cuenta Kollider para enviar, recibir e intercambiar Bitcoin."
+        },
+        "login": {
+          "title": "Conéctate a tú cuenta Kollider",
+          "description": "¿Aún no tienes una cuenta? <0>¡Regístrese</0> ahora!"
+        },
+        "warning": "⚠️ Asegúrate de almacenar tus credenciales de forma segura en un administrador de contraseñas. Sin estas credenciales, tú cuenta no será recuperable."
       },
       "commando": {
         "pubkey": {
