@@ -285,9 +285,6 @@
       "kollider": {
         "title": "Kollider",
         "description": "Log ind på din Kollider-konto",
-        "page": {
-          "description": "Har du ikke en konto? <0>Opret en konto</0> nu!"
-        },
         "username": {
           "label": "Indtast dit Kollider-brugernavn"
         },

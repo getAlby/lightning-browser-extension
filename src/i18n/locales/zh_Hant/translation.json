@@ -285,9 +285,6 @@
       "kollider": {
         "title": "Kollider",
         "description": "登錄你的 Kollider 帳戶",
-        "page": {
-          "description": "還沒有帳戶？立即<0>註冊</0>！"
-        },
         "username": {
           "label": "輸入你的 Kollider 用戶名"
         },

@@ -225,9 +225,6 @@
       },
       "kollider": {
         "description": "Accedi al tuo account Kollider",
-        "page": {
-          "description": "Non hai ancora un account? <0>Registrati</0> ora!"
-        },
         "username": {
           "label": "Inserisci il tuo username Kollider"
         },

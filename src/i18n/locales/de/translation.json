@@ -258,9 +258,6 @@
       "kollider": {
         "title": "Kollider",
         "description": "Anmeldung bei deinem Kollider Konto",
-        "page": {
-          "title": "Verbinde dich mit deinem Kollider-Konto"
-        },
         "currency": {
           "label": "Wähle dein Währungskonto"
         },

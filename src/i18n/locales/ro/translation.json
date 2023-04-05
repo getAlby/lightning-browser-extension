@@ -285,9 +285,6 @@
       "kollider": {
         "title": "Kollider",
         "description": "Logare la contul tau Kollider",
-        "page": {
-          "description": "Nu ai inca un cont? <0>Inregistreaza-te</0> acum!"
-        },
         "username": {
           "label": "Introdu numele de utilizator Kollider"
         },

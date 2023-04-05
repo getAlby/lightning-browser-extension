@@ -225,9 +225,6 @@
       },
       "kollider": {
         "title": "Kollider",
-        "page": {
-          "title": "Anslut till ditt kollider-konto"
-        },
         "currency": {
           "label": "Välj ditt valutakonto"
         },

@@ -268,9 +268,6 @@
       },
       "kollider": {
         "title": "Kollider",
-        "page": {
-          "description": "还没有帐户？立即<0>注册</0>！"
-        },
         "description": "登录你的Kollider账户",
         "username": {
           "label": "输入你的Kollider用户名"

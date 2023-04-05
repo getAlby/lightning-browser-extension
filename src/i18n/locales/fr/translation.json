@@ -285,9 +285,6 @@
       "kollider": {
         "title": "Kollider",
         "description": "Connectez-vous à votre compte Kollider",
-        "page": {
-          "description": "Vous n'avez pas encore de compte ? <0>Sign up</0> maintenant !"
-        },
         "username": {
           "label": "Saisissez votre nom d'utilisateur pour Kollider"
         },
