@@ -55,6 +55,11 @@ function ConnectorForm({
   return (
     <form onSubmit={onSubmit}>
       <div className="max-w-[600px] mx-auto relative mt-14 bg-white dark:bg-surface-02dp p-10 shadow rounded-lg">
+        {/*
+            TODO: this can be simplified to always wrap the title in h1, without checking if it
+                    is string or Trans component, so we centralize the styles of the h1 tag in
+                    just one place 
+        */}
         {typeof title === "string" ? (
           <h1 className="mb-4 text-2xl font-bold dark:text-white">{title}</h1>
         ) : (

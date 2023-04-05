@@ -224,7 +224,7 @@ export default function ConnectKollidier({ variant }: Props) {
           autoFocus={false}
         />
       </div>
-      <div className="mb-6">
+      <div>
         <p className="font-medium text-gray-800 dark:text-white">
           {t("currency.label")}
         </p>

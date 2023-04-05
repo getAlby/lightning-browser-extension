@@ -103,7 +103,7 @@ export default function ConnectMyNode() {
   return (
     <ConnectorForm
       title={
-        <h1 className="mb-6 text-2xl font-bold dark:text-white">
+        <h1 className="mb-4 text-2xl font-bold dark:text-white">
           <Trans
             i18nKey={"page.title"}
             t={t}
