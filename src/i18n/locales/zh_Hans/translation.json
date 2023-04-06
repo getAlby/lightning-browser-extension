@@ -166,7 +166,7 @@
       },
       "start9": {
         "page": {
-          "instructions": "<0>注意：</0>目前我们只支持LND，但是我们将在未来增加对c-lightning的支持！<1/>在你的Embassy仪表板上点击<0>Lightning Network Daemon</0>服务。<1/>选择<0>属性</0>标签。<1/>然后复制<0>LND连接REST URL。</0>",
+          "instructions": "<0>注意：</0>目前我们只支持LND，但是我们将在未来增加对c-lightning的支持！<1/>在你的Embassy仪表板上点击<0>lightning network daemon</0>服务。<1/>选择<0>属性</0>标签。<1/>然后复制<0>LND连接REST URL。</0>",
           "title": "连接你的<0>Embassy</0>节点"
         },
         "rest_url": {
