@@ -286,13 +286,28 @@
         "title": "Kollider",
         "description": "登錄你的 Kollider 帳戶",
         "username": {
-          "label": "輸入你的 Kollider 用戶名"
+          "label": "用戶名"
         },
         "currency": {
           "label": "選擇你的貨幣帳戶"
         },
         "errors": {
-          "connection_failed": "連接失敗。你確定帳戶數據正確嗎？"
+          "connection_failed": "連接失敗。你確定帳戶數據正確嗎？",
+          "user_already_exists": "用戶名已存在",
+          "registration_limit_exceeded": "超出註冊限制，請稍後嘗試。"
+        },
+        "choose_path": {
+          "description": "登錄或註冊一個新的Kollider帳戶並連接到Alby。",
+          "create_new": "註冊",
+          "title": "連接到你的Kollider錢包"
+        },
+        "login": {
+          "description": "還沒有帳戶？立即<0>註冊</0>！",
+          "title": "連接到你的 Kollider 帳戶"
+        },
+        "create": {
+          "description": "創建一個新的 Kollider 帳戶來發送、接收和交易比特幣。",
+          "title": "創建你的 Kollider 帳戶並連接到 Alby"
         }
       },
       "btcpay": {
@@ -437,7 +452,7 @@
       "request1": "請求批准交易",
       "request2": "索取發票和閃電信息",
       "block_and_ignore": "阻止並忽略 {{host}}",
-      "block_added": "已將{{host}}添加到阻止清單，請重新載入網站。"
+      "block_added": "已將{{host}}添加到阻止列表，請重新載入網站。"
     },
     "unlock": {
       "unlock_to_continue": "解鎖以繼續",
@@ -462,7 +477,7 @@
       },
       "website_enhancements": {
         "title": "網站改進",
-        "subtitle": ""
+        "subtitle": "為Twitter、YouTube等提供小費功能。"
       },
       "lnurl_auth": {
         "title": "LNURL-認證",
@@ -658,7 +673,7 @@
         },
         "address": {
           "title": "⚡️ 獲取閃電地址",
-          "description": "",
+          "description": "創建你自己的閃電地址，並像使用電子郵件一樣輕鬆接收閃電付款",
           "label1": "立即獲取！"
         }
       }
@@ -694,14 +709,14 @@
     },
     "confirm_keysend": {
       "title": "批准付款",
-      "success": "",
+      "success": "付款已發送！原像：{{preimage}}",
       "payment_summary": {
         "description": "付款至： {{destination}}"
       }
     },
     "keysend": {
       "title": "發送",
-      "success": "",
+      "success": "付款已發送！原像：{{preimage}}",
       "receiver": {
         "label": "付款至"
       },
@@ -711,7 +726,7 @@
     },
     "confirm_payment": {
       "title": "批准付款",
-      "success": "",
+      "success": "支付{{amount}}成功！",
       "actions": {
         "pay_now": "立即付款"
       }
@@ -727,66 +742,96 @@
       "content": "該網站要求你簽署：",
       "allow_sign": "允許 {{host}} 簽名：",
       "block_and_ignore": "阻止並忽略 {{host}}",
-      "block_added": "已將 {{host}} 添加到黑名單，請重新加載網站。",
+      "block_added": "已將 {{host}} 添加到阻止列表，請重新加載網站。",
       "view_details": "查看詳情",
       "hide_details": "隱藏詳情",
       "kinds": {
         "1": "短文便條",
-        "0": "元數據"
+        "0": "元數據",
+        "2": "推薦中繼器",
+        "4": "加密的直接消息",
+        "5": "刪除事件",
+        "7": "回應",
+        "8": "徽章獎勵",
+        "unknown": "nostr 事件類型 {{kind}}",
+        "9735": "電擊",
+        "22242": "客戶端認證",
+        "10002": "中繼器列表元數據",
+        "24133": "nostr連接",
+        "30008": "個人資料徽章",
+        "30023": "長篇內容",
+        "30078": "應用程序特定數據",
+        "3": "聯繫人",
+        "41": "頻道元數據",
+        "42": "頻道消息",
+        "43": "頻道隱藏消息",
+        "40": "頻道創建",
+        "1984": "報告",
+        "9734": "電擊請求",
+        "44": "頻道靜音用戶",
+        "30009": "徽章定義"
       },
-      "no_content": "（ 無內容 ）"
+      "no_content": "（ 無內容 ）",
+      "allow_sign_event": "允許 {{host}} 簽署 {{kind}}："
+    },
+    "transactions": {
+      "title": "交易",
+      "description": "你所有帳戶的傳出交易",
+      "list_empty": "尚無可用交易。"
     }
   },
   "common": {
-    "password": "",
-    "confirm_password": "",
-    "advanced": "",
-    "success": "",
-    "error": "",
-    "settings": "",
-    "accounts": "",
-    "discover": "",
-    "websites": "",
-    "sats_one": "",
-    "sats_other": "",
-    "loading": "",
-    "amount": "",
-    "optional": "",
-    "feedback": "",
-    "copied": "",
-    "description": "",
-    "description_full": "",
+    "password": "密碼",
+    "confirm_password": "確認密碼",
+    "advanced": "高級",
+    "success": "成功",
+    "error": "錯誤",
+    "settings": "設置",
+    "accounts": "帳戶",
+    "discover": "發現",
+    "websites": "網站",
+    "sats_one": "聰",
+    "sats_other": "聰",
+    "loading": "加載中",
+    "amount": "金額",
+    "optional": "可選",
+    "feedback": "反饋",
+    "copied": "已複製！",
+    "description": "描述",
+    "description_full": "詳細描述",
     "success_message": "",
-    "response": "",
-    "message": "",
-    "help": "",
+    "response": "答覆",
+    "message": "消息",
+    "help": "幫助",
     "actions": {
-      "back": "",
-      "delete": "",
-      "edit": "",
-      "next": "",
-      "open": "",
-      "cancel": "",
-      "confirm": "",
-      "continue": "",
-      "connect": "",
-      "lock": "",
-      "unlock": "",
-      "send": "",
-      "save": "",
-      "receive": "",
+      "back": "返回",
+      "delete": "刪除",
+      "edit": "編輯",
+      "next": "下一步",
+      "open": "打開",
+      "cancel": "取消",
+      "confirm": "確認",
+      "continue": "繼續",
+      "connect": "連接",
+      "lock": "鎖定",
+      "unlock": "解鎖",
+      "send": "發送",
+      "save": "保存",
+      "receive": "接收",
       "receive_again": "",
-      "close": "",
-      "export": "",
-      "remove": "",
-      "copy": "",
-      "log_in": "",
-      "remember": ""
+      "close": "關閉",
+      "export": "導出",
+      "remove": "移除",
+      "copy": "複製",
+      "log_in": "登錄",
+      "remember": "記住我的選擇，不要再問了",
+      "transactions": "交易"
     },
     "errors": {
-      "connection_failed": "",
-      "payment_failed": ""
-    }
+      "connection_failed": "連接失敗",
+      "payment_failed": "付款失敗"
+    },
+    "transactions": "交易"
   },
   "components": {
     "allowance_menu": {
