@@ -18,10 +18,9 @@ const decryptOrPrompt = async (message: MessageDecryptGet) => {
     );
 
     if (hasPermission) {
-      const response = (await state.getState().getNostr()).decrypt(
-        message.args.peer,
-        message.args.ciphertext
-      );
+      const response = await (
+        await state.getState().getNostr()
+      ).decrypt(message.args.peer, message.args.ciphertext);
 
       return { data: response };
     } else {
@@ -44,10 +43,9 @@ const decryptOrPrompt = async (message: MessageDecryptGet) => {
         );
       }
       if (promptResponse.data.confirm) {
-        const response = (await state.getState().getNostr()).decrypt(
-          message.args.peer,
-          message.args.ciphertext
-        );
+        const response = await (
+          await state.getState().getNostr()
+        ).decrypt(message.args.peer, message.args.ciphertext);
 
         return { data: response };
       } else {
