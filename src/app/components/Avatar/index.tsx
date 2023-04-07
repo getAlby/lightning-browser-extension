@@ -21,17 +21,18 @@ const Avatar = (props: Props) => {
   }, [props.name, props.size]);
 
   return (
-    <>
-      <div className="overflow-hidden rounded-full">
-        <svg
-          ref={svgRef}
-          width={props.size}
-          height={props.size}
-          viewBox={`0 0 ${props.size} ${props.size}`}
-          xmlns="http://www.w3.org/2000/svg"
-        />
-      </div>
-    </>
+    <svg
+      className="rounded-full overflow-hidden"
+      style={{
+        transform:
+          "translateZ(0)" /* Forced GPU render to avoid ugly borders when switching accounts */,
+      }}
+      ref={svgRef}
+      width={props.size}
+      height={props.size}
+      viewBox={`0 0 ${props.size} ${props.size}`}
+      xmlns="http://www.w3.org/2000/svg"
+    />
   );
 };
 
