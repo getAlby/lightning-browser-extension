@@ -4,6 +4,7 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/outline";
 import AlbyLogo from "@components/AlbyLogo";
 import Button from "@components/Button";
+import Container from "@components/Container";
 import Input from "@components/form/Input";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -56,75 +57,77 @@ function Unlock() {
   }
 
   return (
-    <div className="p-8">
-      <div className="flex justify-center">
-        <div className="w-40 dark:text-white">
-          <AlbyLogo />
+    <Container maxWidth="sm">
+      <div className="p-8">
+        <div className="flex justify-center">
+          <div className="w-40 dark:text-white">
+            <AlbyLogo />
+          </div>
         </div>
-      </div>
-      <p className="text-center text-xl font-normal font-serif mt-8 mb-5 dark:text-white">
-        {t("unlock_to_continue")}
-      </p>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-5">
-          <Input
-            placeholder={t("unlock_password")}
-            type={passwordView ? "text" : "password"}
-            autoFocus
-            value={password}
-            onChange={handlePasswordChange}
-            endAdornment={
-              <button
-                type="button"
-                className="flex justify-center items-center w-10 h-8"
-                onClick={() => {
-                  setPasswordView(!passwordView);
-                }}
-              >
-                {passwordView ? (
-                  <HiddenIcon className="h-6 w-6" />
-                ) : (
-                  <VisibleIcon className="h-6 w-6" />
-                )}
-              </button>
-            }
-          />
-          {error && (
-            <>
-              <p className="mt-1 text-red-500">{error}</p>
-              <p className="mt-1 text-gray-500">{t("unlock_error.help")}</p>
-              <p className="mt-1">
-                <a
-                  href="#"
-                  className="text-gray-500 underline "
-                  onClick={reset}
+        <p className="text-center text-xl font-normal font-serif mt-8 mb-5 dark:text-white">
+          {t("unlock_to_continue")}
+        </p>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-5">
+            <Input
+              placeholder={t("unlock_password")}
+              type={passwordView ? "text" : "password"}
+              autoFocus
+              value={password}
+              onChange={handlePasswordChange}
+              endAdornment={
+                <button
+                  type="button"
+                  className="flex justify-center items-center w-10 h-8"
+                  onClick={() => {
+                    setPasswordView(!passwordView);
+                  }}
                 >
-                  {t("unlock_error.link")}
-                </a>
-              </p>
-            </>
-          )}
-        </div>
-        <Button
-          type="submit"
-          label={tCommon("actions.unlock")}
-          fullWidth
-          primary
-          loading={loading}
-          disabled={loading || password === ""}
-        />
+                  {passwordView ? (
+                    <HiddenIcon className="h-6 w-6" />
+                  ) : (
+                    <VisibleIcon className="h-6 w-6" />
+                  )}
+                </button>
+              }
+            />
+            {error && (
+              <>
+                <p className="mt-1 text-red-500">{error}</p>
+                <p className="mt-1 text-gray-500">{t("unlock_error.help")}</p>
+                <p className="mt-1">
+                  <a
+                    href="#"
+                    className="text-gray-500 underline "
+                    onClick={reset}
+                  >
+                    {t("unlock_error.link")}
+                  </a>
+                </p>
+              </>
+            )}
+          </div>
+          <Button
+            type="submit"
+            label={tCommon("actions.unlock")}
+            fullWidth
+            primary
+            loading={loading}
+            disabled={loading || password === ""}
+          />
 
-        <div className="flex justify-center space-x-1 mt-5">
-          <span className="text-gray-500">{t("help_contact.part1")} </span>
-          <a
-            className="text-orange-bitcoin font-semibold"
-            href="mailto:support@getalby.com"
-          >
-            {t("help_contact.part2")}
-          </a>
-        </div>
-      </form>
-    </div>
+          <div className="flex justify-center space-x-1 mt-5">
+            <span className="text-gray-500">{t("help_contact.part1")} </span>
+            <a
+              className="text-orange-bitcoin font-semibold"
+              href="mailto:support@getalby.com"
+            >
+              {t("help_contact.part2")}
+            </a>
+          </div>
+        </form>
+      </div>
+    </Container>
   );
 }
 

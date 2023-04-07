@@ -36,6 +36,24 @@ const updatedPayments: DbPayment[] = [
   },
 ];
 
+const updatedPaymentsWithoutOrigin: DbPayment[] = [
+  ...updatedPayments,
+  {
+    accountId: "123456",
+    allowanceId: "",
+    createdAt: "1487076708000",
+    description: "A blue bird?!",
+    destination: "Space",
+    host: "",
+    id: 7,
+    paymentHash: "321",
+    paymentRequest: "",
+    preimage: "321",
+    totalAmount: 2121,
+    totalFees: 333,
+  },
+];
+
 const data: PaymentNotificationData = {
   accountId: "123456",
   response: {
@@ -65,6 +83,27 @@ const data: PaymentNotificationData = {
   },
 };
 
+const dataWitouthOrigin: PaymentNotificationData = {
+  accountId: "123456",
+  response: {
+    data: {
+      preimage: "321",
+      paymentHash: "321",
+      route: {
+        total_amt: 2121,
+        total_fees: 333,
+      },
+    },
+  },
+  details: {
+    description: "A blue bird?!",
+    destination: "Space",
+  },
+};
+
+db.allowances.bulkAdd(mockAllowances);
+db.payments.bulkAdd(mockPayments);
+
 describe("Persist payments", () => {
   afterEach(() => {
     jest.clearAllMocks();
@@ -78,14 +117,28 @@ describe("Persist payments", () => {
       action: "getPayments",
     };
 
-    await db.allowances.bulkAdd(mockAllowances);
-    await db.payments.bulkAdd(mockPayments);
-
     await persistSuccessfulPayment("ln.sendPayment.success", data);
 
     expect(await getPayments(message)).toEqual({
       data: {
         payments: [...updatedPayments.reverse()],
+      },
+    });
+  });
+
+  test("updates payments on persisting successful payment with empty origin (i.e. pay to ln-address inside popup)", async () => {
+    const message: MessagePaymentAll = {
+      application: "LBE",
+      origin: { internal: true },
+      prompt: true,
+      action: "getPayments",
+    };
+
+    await persistSuccessfulPayment("ln.sendPayment.success", dataWitouthOrigin);
+
+    expect(await getPayments(message)).toEqual({
+      data: {
+        payments: [...updatedPaymentsWithoutOrigin.reverse()],
       },
     });
   });
