@@ -1,5 +1,4 @@
 import {
-  AddressBookIcon,
   GearIcon,
   LockIcon,
   MagicWandIcon,
@@ -100,14 +99,6 @@ export default function UserMenu() {
         >
           <GearIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
           {tCommon("settings")}
-        </Menu.ItemButton>
-        <Menu.ItemButton
-          onClick={() => {
-            openOptions("accounts");
-          }}
-        >
-          <AddressBookIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-          {tCommon("accounts")}
         </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {
