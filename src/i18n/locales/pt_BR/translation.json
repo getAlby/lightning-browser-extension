@@ -855,7 +855,7 @@
       }
     },
     "account_menu": {
-      "title": "Selecionar conta",
+      "title": "Trocar conta",
       "options": {
         "account": {
           "add": "Adicionar nova conta",
