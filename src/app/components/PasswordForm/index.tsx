@@ -77,12 +77,20 @@ export default function PasswordForm<
     let passwordErrorMessage: errorMessage = "";
     let passwordConfirmationErrorMessage: errorMessage = "";
 
-    if (!formData.password) passwordErrorMessage = "enter_password";
-    if (confirm && !formData.passwordConfirmation) {
+    if (confirm && !formData.password && formData.passwordConfirmation) {
+      passwordErrorMessage = "enter_password";
+    }
+
+    if (confirm && formData.password && !formData.passwordConfirmation) {
       passwordConfirmationErrorMessage = "confirm_password";
-    } else if (confirm && formData.password !== formData.passwordConfirmation) {
+    } else if (
+      confirm &&
+      formData.passwordConfirmation &&
+      formData.password !== formData.passwordConfirmation
+    ) {
       passwordConfirmationErrorMessage = "mismatched_password";
     }
+
     setErrors({
       passwordErrorMessage,
       passwordConfirmationErrorMessage,
