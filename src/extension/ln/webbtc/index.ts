@@ -110,6 +110,6 @@ export default class WebBTCProvider {
     action: string,
     args?: Record<string, unknown>
   ): Promise<Record<string, unknown>> {
-    return postMessage(action, "webln", args);
+    return postMessage("webln", action, args);
   }
 }

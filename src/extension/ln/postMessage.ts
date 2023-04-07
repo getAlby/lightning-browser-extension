@@ -1,6 +1,6 @@
 export function postMessage<T>(
-  action: string,
   scope: string,
+  action: string,
   args: T | undefined
 ): Promise<T> {
   return new Promise((resolve, reject) => {

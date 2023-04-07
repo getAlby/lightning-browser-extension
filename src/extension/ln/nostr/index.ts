@@ -47,7 +47,7 @@ export default class NostrProvider {
     action: string,
     args?: Record<string, unknown>
   ): Promise<Record<string, unknown>> {
-    return postMessage(action, "nostr", args);
+    return postMessage("nostr", action, args);
   }
 }
 
