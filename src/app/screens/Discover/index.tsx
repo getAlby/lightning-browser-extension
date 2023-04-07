@@ -33,9 +33,12 @@ function Discover() {
         {t("discover.description")}
       </p>
 
-      <div className="mb-12">
-        {websites.map(({ title, items }) => (
-          <div className="mb-10" key={title}>
+      <div>
+        {websites.map(({ title, items }, index) => (
+          <div
+            className={index !== websites.length - 1 ? "mb-10" : ""}
+            key={title}
+          >
             <h4 className="mb-2 text-xl font-bold dark:text-white">
               {t(`discover.list.${title as "trading"}`)}
             </h4>

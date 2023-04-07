@@ -69,10 +69,20 @@ function getConnectorRoutes() {
     },
     {
       path: "kollider",
-      element: <ConnectKollider />,
+      element: <ConnectKollider variant="select" />,
       title: i18n.t("translation:choose_connector.kollider.title"),
       description: i18n.t("translation:choose_connector.kollider.description"),
       logo: kolliderLogo,
+      children: [
+        {
+          path: "create",
+          element: <ConnectKollider variant="create" />,
+        },
+        {
+          path: "login",
+          element: <ConnectKollider variant="login" />,
+        },
+      ],
     },
     {
       path: "lnd-hub-bluewallet",
