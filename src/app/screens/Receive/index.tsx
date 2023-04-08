@@ -27,6 +27,7 @@ function Receive() {
   const { t: tCommon } = useTranslation("common");
 
   const auth = useAccount();
+
   const {
     isLoading: isLoadingSettings,
     settings,
@@ -49,7 +50,8 @@ function Receive() {
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
-
+  const [isLightning, setLightning] = useState(true);
+  const isAlbyUser = auth.account?.alias === "🐝 getalby.com";
   useEffect(() => {
     mounted.current = true;
 
@@ -232,47 +234,121 @@ function Receive() {
           />
         }
       />
-      {invoice ? (
-        <Container maxWidth="sm">{renderInvoice()}</Container>
-      ) : (
-        <form onSubmit={handleSubmit} className="h-full">
-          <fieldset className="h-full" disabled={loading}>
-            <Container justifyBetween maxWidth="sm">
-              <div className="py-4">
-                <div className="mb-4">
-                  <DualCurrencyField
-                    id="amount"
-                    min={0}
-                    label={t("amount.label")}
-                    placeholder={t("amount.placeholder")}
-                    fiatValue={fiatAmount}
-                    onChange={handleChange}
-                    autoFocus
-                  />
-                </div>
 
+      {isAlbyUser ? (
+        <Container maxWidth="sm">
+          <div className="flex mb-6  mt-4 text-xl ">
+            <Button
+              className={
+                isLightning
+                  ? `text-gray-700 shadow-lg  dark:text-neutral-200`
+                  : `text-gray-500 dark:text-neutral-500` + "font-bold"
+              }
+              outline={isLightning}
+              icon={<img src="assets/icons/thunder.svg"></img>}
+              fullWidth
+              label={"Lightning"}
+              direction="row"
+              onClick={() => {
+                setLightning(true);
+              }}
+            />
+
+            <Button
+              className={
+                !isLightning
+                  ? `text-gray-700   shadow-lg  dark:text-neutral-200`
+                  : `text-gray-500 dark:text-neutral-500` + "font-bold "
+              }
+              icon={<img src="assets/icons/Block.svg"></img>}
+              outline={!isLightning}
+              fullWidth
+              label={"On-chain"}
+              direction="row"
+              onClick={() => {
+                setLightning(false);
+              }}
+            />
+          </div>
+        </Container>
+      ) : null}
+
+      {isLightning ? (
+        invoice ? (
+          <Container maxWidth="sm">{renderInvoice()}</Container>
+        ) : (
+          <form onSubmit={handleSubmit} className="h-full">
+            <fieldset className="h-full" disabled={loading}>
+              <Container justifyBetween maxWidth="sm">
+                <div className="py-4">
+                  <div className="mb-4">
+                    <DualCurrencyField
+                      id="amount"
+                      min={0}
+                      label={t("amount.label")}
+                      placeholder={t("amount.placeholder")}
+                      fiatValue={fiatAmount}
+                      onChange={handleChange}
+                      autoFocus
+                    />
+                  </div>
+
+                  <div className="mb-4">
+                    <TextField
+                      id="description"
+                      label={t("description.label")}
+                      placeholder={t("description.placeholder")}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
                 <div className="mb-4">
-                  <TextField
-                    id="description"
-                    label={t("description.label")}
-                    placeholder={t("description.placeholder")}
-                    onChange={handleChange}
+                  <Button
+                    type="submit"
+                    label={t("actions.create_invoice")}
+                    fullWidth
+                    primary
+                    loading={loading}
+                    disabled={loading}
                   />
                 </div>
+              </Container>
+            </fieldset>
+          </form>
+        )
+      ) : (
+        <div className=" h-full">
+          <Container justifyBetween maxWidth="sm">
+            <div className="py-8 text-center dark:text-neutral-200">
+              <div className="mb-8">
+                <p>
+                  To receive Bitcoin on-chain, log-in to{" "}
+                  <strong>Alby Account </strong>on getalby.com
+                </p>
               </div>
-              <div className="mb-4">
+
+              <div className="mb-8">
+                <p>
+                  Your bitcoin on-chain address is under{" "}
+                  <strong>Receive</strong> page, accessible from{" "}
+                  <strong>Payments</strong>
+                </p>
+              </div>
+            </div>
+            <div className="mb-4 ">
+              <a href="https://getalby.com/node/receive">
                 <Button
                   type="submit"
-                  label={t("actions.create_invoice")}
+                  label={"Go Alby Account on getalby.com ->"}
                   fullWidth
                   primary
                   loading={loading}
                   disabled={loading}
                 />
-              </div>
-            </Container>
-          </fieldset>
-        </form>
+              </a>
+            </div>
+          </Container>
+        </div>
       )}
     </div>
   );
