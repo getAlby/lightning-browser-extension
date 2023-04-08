@@ -47,51 +47,49 @@ export default function UserMenu() {
         <MenuIcon className="h-6 w-6" />
       </Menu.Button>
       <Menu.List position="left">
-        {window.innerWidth <= 768 && ( // navbar is hidden till 768px(tailwind's md-size)
-          <>
-            <Menu.ItemButton
-              onClick={() => {
-                openOptions("discover");
-              }}
-            >
-              <RocketIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-              {tCommon("discover")}
-            </Menu.ItemButton>
-            <Menu.ItemButton
-              onClick={() => {
-                openOptions("publishers");
-              }}
-            >
-              <ConnectedSiteIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-              {tCommon("connected_sites")}
-            </Menu.ItemButton>
-            <Menu.ItemButton
-              onClick={() => {
-                navigate("/send");
-              }}
-            >
-              <SendIcon className="w-6 h-6 -ml-0.5 mr-2 text-gray-700 dark:text-neutral-300" />
-              {tCommon("actions.send")}
-            </Menu.ItemButton>
-            <Menu.ItemButton
-              onClick={() => {
-                navigate("/receive");
-              }}
-            >
-              <ReceiveIcon className="w-6 h-6 -ml-0.5 mr-2 text-gray-700 dark:text-neutral-300" />
-              {tCommon("actions.receive")}
-            </Menu.ItemButton>
-            <Menu.ItemButton
-              onClick={() => {
-                openOptions("transactions");
-              }}
-            >
-              <TransactionsIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-              {tCommon("transactions")}
-            </Menu.ItemButton>
-            <Menu.Divider />
-          </>
-        )}
+        <div className="block lg:hidden">
+          <Menu.ItemButton
+            onClick={() => {
+              openOptions("discover");
+            }}
+          >
+            <RocketIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+            {tCommon("discover")}
+          </Menu.ItemButton>
+          <Menu.ItemButton
+            onClick={() => {
+              openOptions("publishers");
+            }}
+          >
+            <ConnectedSiteIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+            {tCommon("connected_sites")}
+          </Menu.ItemButton>
+          <Menu.ItemButton
+            onClick={() => {
+              navigate("/send");
+            }}
+          >
+            <SendIcon className="w-6 h-6 -ml-0.5 mr-2 text-gray-700 dark:text-neutral-300" />
+            {tCommon("actions.send")}
+          </Menu.ItemButton>
+          <Menu.ItemButton
+            onClick={() => {
+              navigate("/receive");
+            }}
+          >
+            <ReceiveIcon className="w-6 h-6 -ml-0.5 mr-2 text-gray-700 dark:text-neutral-300" />
+            {tCommon("actions.receive")}
+          </Menu.ItemButton>
+          <Menu.ItemButton
+            onClick={() => {
+              openOptions("transactions");
+            }}
+          >
+            <TransactionsIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+            {tCommon("transactions")}
+          </Menu.ItemButton>
+          <Menu.Divider />
+        </div>
         <Menu.ItemButton
           onClick={() => {
             openOptions("settings");
