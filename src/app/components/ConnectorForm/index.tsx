@@ -14,6 +14,7 @@ type Props = {
   onSubmit: FormEventHandler;
   children: React.ReactNode;
   video?: string;
+  image?: string;
 };
 
 function ConnectorForm({
@@ -25,6 +26,7 @@ function ConnectorForm({
   onSubmit,
   children,
   video,
+  image,
 }: Props) {
   const { t: tCommon } = useTranslation("common");
   const navigate = useNavigate();
@@ -42,18 +44,37 @@ function ConnectorForm({
         </div>
       ) : (
         <>
-          <div className="w-16 md:w-32 mb-8 lg:w-64 lg:mb-0">
-            <img
-              src="assets/icons/alby_logo.svg"
-              alt="Alby"
-              className="block dark:hidden w-full"
-            />
-            <img
-              src="assets/icons/alby_logo_dark.svg"
-              alt="Alby"
-              className="hidden dark:block w-full"
-            />
-          </div>
+          {image ? (
+            <>
+              <div className="w-16 md:w-32 mb-8 lg:w-[80%] lg:mb-0">
+                <img
+                  src={`${image}`}
+                  alt="Image"
+                  className="block dark:hidden w-full"
+                />
+                <img
+                  src={`${image}`}
+                  alt="Image"
+                  className="hidden dark:block w-full"
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="w-16 md:w-32 mb-8 lg:w-64 lg:mb-0">
+                <img
+                  src="assets/icons/alby_logo.svg"
+                  alt="Alby"
+                  className="block dark:hidden w-full"
+                />
+                <img
+                  src="assets/icons/alby_logo_dark.svg"
+                  alt="Alby"
+                  className="hidden dark:block w-full"
+                />
+              </div>
+            </>
+          )}
         </>
       )}
     </div>
