@@ -837,7 +837,8 @@
       "lessThan": "menor que {{max}}",
       "greaterThan": "mayor que {{min}}"
     },
-    "transactions": "Transacciones"
+    "transactions": "Transacciones",
+    "balance": "Balance"
   },
   "components": {
     "allowance_menu": {
@@ -910,7 +911,9 @@
       "options": {
         "account": {
           "add": "Agregar una nueva cuenta",
-          "manage": "Administrar cuentas"
+          "manage": "Administrar cuentas",
+          "account_settings": "Configuraciones de la cuenta",
+          "go_to_web_wallet": "Administra tu cuenta de Alby"
         }
       },
       "screen_reader": "Alternar menú desplegable"
