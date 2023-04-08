@@ -784,7 +784,9 @@
       "options": {
         "account": {
           "add": "Füge einen neuen Account hinzu",
-          "manage": "Konten verwalten"
+          "manage": "Konten verwalten",
+          "account_settings": "Kontoeinstellungen",
+          "go_to_web_wallet": "Verwalten Sie Ihr Alby-Konto"
         }
       },
       "title": "Konto wechseln",
@@ -934,7 +936,8 @@
       "lessThan": "< {{max}}",
       "greaterThan": "> {{min}}"
     },
-    "transactions": "Transaktionen"
+    "transactions": "Transaktionen",
+    "balance": "Bilanz"
   },
   "permissions": {
     "commando": {
