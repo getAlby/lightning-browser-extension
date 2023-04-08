@@ -1,5 +1,7 @@
 # #### This all good standard ###
 
+yarn.lock
+
 # Logs
 logs
 *.log
