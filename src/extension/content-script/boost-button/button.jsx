@@ -49,8 +49,9 @@ function BoostButton() {
         setSent(true);
       }
     } catch (e) {
-      setWebLNDisabled(true);
-      console.error(e);
+      if (e.message !== "Prompt was closed" && e.message !== "User rejected")
+        setWebLNDisabled(true);
+      console.error(e.message);
     } finally {
       setLoading(false);
       setHold(false);
@@ -74,9 +75,10 @@ function BoostButton() {
           setSent(true);
         }
       } catch (e) {
-        setWebLNDisabled(true);
         setSatsClicked(0);
-        console.error(e);
+        if (e.message !== "Prompt was closed" && e.message !== "User rejected")
+          setWebLNDisabled(true);
+        console.error(e.message);
       } finally {
         setLoading(false);
       }
