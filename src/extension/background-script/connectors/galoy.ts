@@ -86,6 +86,7 @@ class Galoy implements Connector {
     console.error(
       `Not yet supported with the currently used account: ${this.constructor.name}`
     );
+
     throw new Error(
       `${this.constructor.name}: "getInvoices" is not yet supported. Contact us if you need it.`
     );

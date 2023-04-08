@@ -8,13 +8,13 @@ import PublisherCard from "@components/PublisherCard";
 import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { FC, useState, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import { convertPaymentsToTransactions } from "~/app/utils/payments";
-import type { Allowance, Transaction, Battery } from "~/types";
+import type { Allowance, Battery, Transaction } from "~/types";
 
 dayjs.extend(relativeTime);
 
@@ -139,7 +139,7 @@ const AllowanceView: FC<Props> = (props) => {
 
         {hasTransactions && <TransactionsTable transactions={transactions} />}
 
-        {!hasTransactions && (
+        {!hasTransactions && !transactions?.length && (
           <p className="text-gray-500 dark:text-neutral-400">
             <Trans
               i18nKey={"allowance_view.no_transactions"}
