@@ -5,7 +5,7 @@
         "welcome": "欢迎",
         "password": "你的密码",
         "done": "已完成",
-        "connect": "你的闪电账户"
+        "connect": "你的闪电帐户"
       },
       "set_password": {
         "title": "设置解锁密码",
@@ -24,13 +24,13 @@
       },
       "test_connection": {
         "ready": "真棒，你已准备就绪!",
-        "initializing": "正在初始化你的账户。请耐心等待，可能需要几分钟。。。",
+        "initializing": "正在初始化你的帐户。请耐心等待，可能需要几分钟。。。",
         "connection_error": "连接错误",
         "review_connection_details": "请检查你的连接详情。",
         "connection_taking_long": "尝试连接花费的时间不预期的要长。。。你的详情正确吗？你的节点是否可达？",
         "contact_support": "如果你需要帮助，请联系support@getalby.com",
         "actions": {
-          "delete_edit_account": "删除无效账户并重新编辑"
+          "delete_edit_account": "删除无效帐户并重新编辑"
         }
       },
       "title": "欢迎使用Alby"
@@ -268,32 +268,32 @@
       },
       "kollider": {
         "title": "Kollider",
-        "description": "登录你的Kollider账户",
+        "description": "登录你的Kollider帐户",
         "username": {
           "label": "用户名"
         },
         "currency": {
-          "label": "选择你的货币账户"
+          "label": "选择你的货币帐户"
         },
         "errors": {
-          "connection_failed": "连接失败。你确定账户数据是正确的吗？",
+          "connection_failed": "连接失败。你确定帐户数据是正确的吗？",
           "user_already_exists": "用户名已存在",
           "registration_limit_exceeded": "超过了注册限制，请稍后再试。"
         },
         "choose_path": {
           "create_new": "注册",
-          "description": "登录或注册一个新的Kollider账户并连接到Alby。",
+          "description": "登录或注册一个新的Kollider帐户并连接到Alby。",
           "title": "连接到你的Kollider钱包"
         },
         "create": {
-          "title": "创建你的Kollider账户并连接到Alby",
-          "description": "创建一个新的Kollider账户来发送、接收和交易比特币。"
+          "title": "创建你的Kollider帐户并连接到Alby",
+          "description": "创建一个新的Kollider帐户来发送、接收和交易比特币。"
         },
         "login": {
-          "title": "连接到你的Kollider账户",
+          "title": "连接到你的Kollider帐户",
           "description": "还没有帐户？立即<0>注册</0>！"
         },
-        "warning": "⚠️ 请确保你将你的凭证安全地保存在密码管理器中。没有这些凭证，你的账户将无法恢复。"
+        "warning": "⚠️ 请确保你将你的凭证安全地保存在密码管理器中。没有这些凭证，你的帐户将无法恢复。"
       },
       "title": "连接闪电钱包"
     },
@@ -323,9 +323,9 @@
       }
     },
     "accounts": {
-      "title": "账户",
+      "title": "帐户",
       "actions": {
-        "add_account": "添加账户"
+        "add_account": "添加帐户"
       },
       "account_view": {
         "nostr": {
@@ -337,26 +337,26 @@
             "label": "公钥"
           },
           "generate_keys": {
-            "screen_reader": "为你的账户生成一个新的Nostr密钥",
+            "screen_reader": "为你的帐户生成一个新的Nostr密钥",
             "actions": {
               "random_keys": "生成随机密钥",
               "derived_keys": "从帐户派生密钥"
             },
             "title": "生成新的 Nostr 密钥",
-            "hint": "你可以从这个账户的详细信息中生成一个随机密钥或派生密钥（使用一个签名的规范短语）。 <0>了解更多\"</0>"
+            "hint": "你可以从这个帐户的详细信息中生成一个随机密钥或派生密钥（使用一个签名的规范短语）。 <0>了解更多\"</0>"
           },
           "actions": {
             "generate": "生成新密钥"
           },
           "private_key": {
             "subtitle": "粘贴你的私钥或生成一个新的。<0>了解更多»</0>",
-            "title": "管理你的钥匙",
-            "warning": "请输入账户名称以确认删除私钥：",
+            "title": "管理你的密钥",
+            "warning": "请输入帐户名称以确认删除私钥：",
             "success": "私钥已加密并成功保存。",
             "successfully_removed": "私钥成功删除。",
             "label": "私钥",
-            "backup": "⚠️ 不要忘记备份你的私钥!不备份你的钥匙可能会导致失去访问权。",
-            "failed_to_remove": "输入的账户名称不匹配，你的旧私钥已被恢复。"
+            "backup": "⚠️ 不要忘记备份你的私钥!不备份你的密钥可能会导致失去访问权。",
+            "failed_to_remove": "输入的帐户名称不匹配，你的旧私钥已被恢复。"
           },
           "hint": "是一个简单而开放的协议，旨在创建抗审查的社交网络。 Nostr 使用加密密钥。你可以使用你的密钥对内容进行签名并将其发送到多个中继。你可以使用 Alby 来管理你的 Nostr 密钥。许多 Nostr 应用程序将允许你简单地使用 Alby 扩展中的密钥。"
         },
@@ -365,7 +365,7 @@
           "export_uri": "LNDHub凭证URI",
           "tip_mobile": "提示：用你的移动设备使用这个钱包",
           "scan_qr": "通过扫描二维码将这个钱包导入Zeus或BlueWallet。",
-          "title": "导出账户",
+          "title": "导出帐户",
           "screen_reader": "导出帐户详情",
           "waiting": "等待LndHub的数据...",
           "your_ln_address": "你的闪电地址："
@@ -396,8 +396,8 @@
         "invalid_password": "密码无效"
       },
       "unlock_error": {
-        "help": "你的账户数据是用你的解锁密码加密的。如果你真的忘记了你的解锁密码，你必须重置并再次添加你的闪电账户。",
-        "link": "立即重置并添加新账户"
+        "help": "你的帐户数据是用你的解锁密码加密的。如果你真的忘记了你的解锁密码，你必须重置并再次添加你的闪电帐户。",
+        "link": "立即重置并添加新帐户"
       },
       "unlock_password": "你的解锁密码"
     },
@@ -427,9 +427,9 @@
         "title": "LNURL-认证",
         "legacy_lnurl_auth": {
           "title": "LNDhub 和 LNbits 的旧签名方式",
-          "subtitle": "用LNDhub（如BlueWallet）和LNbits账户进行的消息签署和登录已经改变（2022年3月）。如果你用这些账户登录，你仍然可以启用旧的签名方法。这个选项以后会被删除，请确保切换到新的登录方式。"
+          "subtitle": "用LNDhub（如BlueWallet）和LNbits账户进行的消息签署和登录已经改变（2022年3月）。如果你用这些帐户登录，你仍然可以启用旧的签名方法。这个选项以后会被删除，请确保切换到新的登录方式。"
         },
-        "hint": "是一个通用的认证协议。它使用数字签名对用户进行认证。该协议不需要任何其他识别信息，如密码、电子邮件、用户名或类似信息。通过Alby，你可以使用你的闪电账户安全地登录网站。为了与其他钱包兼容，我们不得不做一些改变，你可以在这里进行配置。 <0>理想情况下，所有这些选项都是关闭的。</0>仅当你有旧帐户时才使用它们。",
+        "hint": "是一个通用的认证协议。它使用数字签名对用户进行认证。该协议不需要任何其他识别信息，如密码、电子邮件、用户名或类似信息。通过Alby，你可以使用你的闪电帐户安全地登录网站。为了与其他钱包兼容，我们不得不做一些改变，你可以在这里进行配置。 <0>理想情况下，所有这些选项都是关闭的。</0>仅当你有旧帐户时才使用它们。",
         "legacy_lnurl_auth_202207": {
           "subtitle": "LNURL-认证的密钥生成已经改变（2022年7月）。Alby与其他实现不兼容。这被改变了，但现在使用不同的登录密钥。如果你之前使用LNURL-认证登录，你仍然可以启用旧方法。这个选项以后会被删除，请务必切换到新的登录方式。",
           "title": "旧版 LNURL-认证"
@@ -511,7 +511,7 @@
       "receiver": {
         "label": "将付款发送至"
       },
-      "success": "付款已发送! Preimage: {{preimage}}",
+      "success": "付款已发送！原像：{{preimage}}",
       "amount": {
         "label": "金额(聪)"
       },
@@ -674,7 +674,7 @@
         "connect": "连接"
       },
       "alby": {
-        "description": "注册或使用您现有的Alby账户，立即开始闪电支付。",
+        "description": "注册或使用你现有的Alby帐户，立即开始闪电支付。",
         "create_new": "注册",
         "title": "Alby帐户"
       }
@@ -721,13 +721,13 @@
     },
     "alby": {
       "pre_connect": {
-        "create_account": "创建一个新的Alby账户以发送和接收比特币付款。",
+        "create_account": "创建一个新的Alby帐户以发送和接收比特币付款。",
         "title": "你的Alby帐户",
-        "login_account": "登录以连接你现有的Alby账户。",
+        "login_account": "登录以连接你现有的Alby帐户。",
         "errors": {
-          "create_wallet_error1": "登录或创建新账户失败。",
+          "create_wallet_error1": "登录或创建新帐户失败。",
           "create_wallet_error2": "如果你需要帮助，请联系support@getalby.com",
-          "create_wallet_error": "登录或创建新账户失败。如果你需要帮助，请联系 support@getalby.com"
+          "create_wallet_error": "登录或创建新帐户失败。如果你需要帮助，请联系 support@getalby.com"
         },
         "forgot_password": "忘记密码？",
         "host_wallet": "我们为你托管的闪电钱包！",
@@ -758,7 +758,7 @@
           }
         },
         "optional_lightning_note": {
-          "part1": "你的Alby账户还附带一个可选的",
+          "part1": "你的Alby帐户还附带一个可选的",
           "part2": "闪电地址",
           "part3": "。这是任何人都可以轻松地在闪电网络上向你发送比特币的一个方法。",
           "part4": "了解更多"
@@ -834,7 +834,8 @@
       "lessThan": "< {{max}}",
       "greaterThan": ">{{min}}"
     },
-    "transactions": "交易"
+    "transactions": "交易",
+    "balance": "余额"
   },
   "components": {
     "toasts": {
@@ -855,8 +856,10 @@
       "title": "切换帐户",
       "options": {
         "account": {
-          "add": "添加新账户",
-          "manage": "管理账户"
+          "add": "添加新帐户",
+          "manage": "管理帐户",
+          "account_settings": "帐户设置",
+          "go_to_web_wallet": "管理你的 Alby 帐户"
         }
       },
       "screen_reader": "切换下拉菜单"
@@ -943,7 +946,7 @@
       "getpublickey": "读取你的公钥。"
     },
     "commando": {
-      "bkpr-listbalances": "所有当前和历史账户余额列表。",
+      "bkpr-listbalances": "所有当前和历史帐户余额列表。",
       "checkmessage": "验证该签名是由一个给定的节点产生的。",
       "decode": "解码一个bolt11/bolt12/rune字符串。",
       "connect": "与另一个节点建立新的连接。",
