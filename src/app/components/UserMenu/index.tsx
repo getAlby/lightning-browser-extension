@@ -47,7 +47,7 @@ export default function UserMenu() {
         <MenuIcon className="h-6 w-6" />
       </Menu.Button>
       <Menu.List position="left">
-        {window.location.pathname !== "/options.html" && (
+        {window.innerWidth <= 768 && ( // navbar is hidden till 768px(tailwind's md-size)
           <>
             <Menu.ItemButton
               onClick={() => {
