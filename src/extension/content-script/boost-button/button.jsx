@@ -110,7 +110,7 @@ function BoostButton() {
           : "normal-shadow"
       } ${!webLNDisabled ? "boost" : "disabled-boost"}`}
       onClick={() => {
-        if (webLNDisabled || sent || hold) return;
+        if (loading || webLNDisabled || sent || hold) return;
         if (timer) clearTimeout(timer);
         if (holdTimer) clearTimeout(holdTimer);
         setTimer(
@@ -121,7 +121,7 @@ function BoostButton() {
         setSatsClicked(satsClicked + 1000);
       }}
       onMouseDown={() => {
-        if (webLNDisabled || sent || hold) return;
+        if (loading || webLNDisabled || sent || hold || loading) return;
         setHoldTimer(
           setTimeout(() => {
             setHold(true);
