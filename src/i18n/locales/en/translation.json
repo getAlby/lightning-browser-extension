@@ -122,7 +122,7 @@
         "title": "LND with LNC",
         "page": {
           "title": "Connect to your LND node",
-          "description": "Create a new session in terminal (litd) to obtain a new pairing phrase and enter it here"
+          "description": "1. On Lightning Terminal sidebar choose Lightning Node Connect \n 2. Click Create a new session \n 3. Label the session, choose desired permissions and submit \n 4. Copy pairing phrase and paste it below"
         },
         "pairing_phrase": {
           "label": "Your pairing phrase ",
