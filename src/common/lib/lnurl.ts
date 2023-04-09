@@ -4,9 +4,9 @@ import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 import {
+  LNURLAuthServiceResponse,
   LNURLDetails,
   LNURLError,
-  LNURLAuthServiceResponse,
   LNURLPaymentInfo,
 } from "~/types";
 
@@ -123,6 +123,8 @@ const lnurl = {
       | {
           name?: string;
           email?: string;
+          contentMetadata?: string;
+          contentMetadataUri?: string;
         };
     metadata: string;
     amount: number;

@@ -1,4 +1,5 @@
 import { LightningAddress } from "alby-tools";
+import { create } from "ipfs-http-client";
 import { useCallback, useEffect, useState } from "react";
 import "~/app/styles/index.css";
 import WebLNProvider from "~/extension/ln/webln";
@@ -16,9 +17,13 @@ function BoostButton() {
   const [hold, setHold] = useState(false);
   const [timer, setTimer] = useState();
   const [holdTimer, setHoldTimer] = useState();
+  const [lnData, setlnData] = useState();
 
   const [expand, setExpand] = useState(false);
   const [satsClicked, setSatsClicked] = useState(0);
+
+  // Create IPFS client instance
+  const ipfs = create("http://localhost:5001");
 
   useEffect(() => {
     let count = 0;
@@ -28,6 +33,8 @@ function BoostButton() {
       const lnData = await extractLightningData();
       if (lnData) {
         setLnurl(lnData.address);
+        setlnData(lnData);
+
         clearInterval(intervalId);
       } else if (count >= 5) {
         clearInterval(intervalId);
@@ -38,12 +45,46 @@ function BoostButton() {
     extract();
   }, []);
 
+  const ipfsDataHandler = useCallback(
+    async (data) => {
+      try {
+        const result = await ipfs.add(JSON.stringify(data));
+        const hash = result.cid.toString();
+        const gatewayUrl = "http://localhost:8080/ipfs/";
+        const contentMetadataUri = gatewayUrl + hash;
+        const response = await fetch(gatewayUrl + hash);
+        const responsegot = await response.text();
+        console.info(responsegot);
+
+        return contentMetadataUri;
+      } catch (error) {
+        console.error("Error handling data:", error);
+      }
+    },
+    [ipfs]
+  );
   const sendSatsToLnurl = useCallback(async () => {
     setLoading(true);
     try {
       window.webln = new WebLNProvider();
       await window.webln.enable();
-      const result = await window.webln.lnurl(lnurl);
+      let contentMetadataUri;
+      let contentMetadata;
+      if (lnData.getContentMetadata) {
+        contentMetadata = lnData.getContentMetadata();
+        const data = {
+          name: "Payer Data metadata",
+          description: "This is a test file",
+          content: contentMetadata,
+        };
+        contentMetadataUri = await ipfsDataHandler(data);
+      }
+
+      const result = await window.webln.lnurl(
+        lnurl,
+        contentMetadata,
+        contentMetadataUri
+      );
       if (result) {
         setSats(result.route.total_amt);
         setSent(true);
@@ -56,16 +97,38 @@ function BoostButton() {
       setLoading(false);
       setHold(false);
     }
-  }, [lnurl]);
+  }, [lnurl, ipfsDataHandler, lnData]);
 
   const generateInvoice = useCallback(
     async (satsClicked) => {
       setLoading(true);
       if (!satsClicked) return;
       const ln = new LightningAddress(lnurl);
-      const invoice = await ln.generateInvoice({
-        amount: (satsClicked * 1000).toString(),
-      });
+      let contentMetadataUri;
+      let contentMetadata = {};
+      if (lnData.getContentMetadata) {
+        contentMetadata = lnData.getContentMetadata();
+        const data = {
+          name: "Payer Data metadata",
+          description: "This is a test file",
+          content: contentMetadata,
+        };
+        contentMetadataUri = await ipfsDataHandler(data);
+      }
+
+      let invoiceDetails = { amount: (satsClicked * 1000).toString() };
+      let payerDataMetadata = {};
+      if (Object.keys(contentMetadata).length) {
+        payerDataMetadata["contentMetadata"] = contentMetadata;
+      }
+      if (contentMetadataUri) {
+        payerDataMetadata["contentMetadataUri"] = contentMetadataUri;
+      }
+      if (Object.keys(payerDataMetadata).length) {
+        invoiceDetails["payerdata"] = JSON.stringify(payerDataMetadata);
+      }
+
+      const invoice = await ln.generateInvoice(invoiceDetails);
       window.webln = new WebLNProvider();
       try {
         await window.webln.enable();
@@ -83,7 +146,7 @@ function BoostButton() {
         setLoading(false);
       }
     },
-    [lnurl]
+    [lnurl, ipfsDataHandler, lnData]
   );
 
   const textStyle = {

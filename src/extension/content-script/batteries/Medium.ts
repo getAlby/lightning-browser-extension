@@ -14,7 +14,6 @@ const battery = (): Battery | void => {
 
   const match = findLightningAddressInText(description);
   if (!match) return;
-
   return {
     method: "lnurl",
     address: match,
@@ -24,9 +23,17 @@ const battery = (): Battery | void => {
     icon:
       document.querySelector<HTMLImageElement>(`img[alt*='${name}']`)?.src ??
       "",
+    getContentMetadata: getContentMetadata,
   };
 };
 
+const getContentMetadata = (): Record<string, unknown> => {
+  const scrollPosition = window.scrollY;
+
+  return {
+    scrollPosition: scrollPosition,
+  };
+};
 const Medium = {
   urlMatcher,
   battery,

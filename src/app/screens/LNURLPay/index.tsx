@@ -43,6 +43,8 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
 function LNURLPay() {
   const navState = useNavigationState();
   const details = navState.args?.lnurlDetails as LNURLPayServiceResponse;
+  const contentMetadata = navState.args?.contentMetadata;
+  const contentMetadataUri = navState.args?.contentMetadataUri;
   const {
     isLoading: isLoadingSettings,
     settings,
@@ -86,17 +88,22 @@ function LNURLPay() {
   }, [settings.userName, settings.userEmail]);
 
   const getPayerData = (details: LNURLPayServiceResponse) => {
-    if (
-      userName?.length &&
-      userEmail?.length &&
-      details.payerData?.email &&
-      details.payerData?.name
-    ) {
-      return { name: userName, email: userEmail };
-    } else if (userName?.length && details.payerData?.name) {
-      return { name: userName };
-    } else if (userEmail?.length && details.payerData?.email) {
-      return { email: userEmail };
+    const payerData: { [key: string]: string } = {};
+    if (userName?.length && details.payerData?.name) {
+      payerData["name"] = userName;
+    }
+    if (userEmail?.length && details.payerData?.email) {
+      payerData["email"] = userEmail;
+    }
+    if (contentMetadata) {
+      payerData["contentMetadata"] = contentMetadata;
+    }
+    if (contentMetadataUri) {
+      payerData["contentMetadataUri"] = contentMetadataUri;
+    }
+
+    if (Object.keys(payerData).length) {
+      return payerData;
     } else {
       return undefined;
     }
@@ -119,9 +126,7 @@ function LNURLPay() {
         comment: comment && comment, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/12.md
         payerdata: payerdata && JSON.stringify(payerdata), // https://github.com/fiatjaf/lnurl-rfc/blob/luds/18.md
       };
-
       let response;
-
       try {
         response = await axios.get<LNURLPaymentInfo | LNURLError>(
           details.callback,
