@@ -631,7 +631,7 @@
       "list": {
         "trading": "Negociação",
         "gaming": "Jogos",
-        "entertaiment": "Entretenimento",
+        "entertainment": "Entretenimento",
         "shopping": "Compras",
         "miscellaneous": "Outros",
         "nostr": "Nostr"
