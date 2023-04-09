@@ -779,6 +779,10 @@
       "title": "Transactions",
       "description": "Outgoing transactions across all of your accounts",
       "list_empty": "No transactions available yet."
+    },
+    "wallet": {
+      "title": "Wallet",
+      "recent_transactions": "Recent transactions"
     }
   },
   "common": {
@@ -791,6 +795,7 @@
     "accounts": "Accounts",
     "discover": "Discover",
     "websites": "Websites",
+    "wallet": "Wallet",
     "transactions": "Transactions",
     "sats_one": "sat",
     "sats_other": "sats",
