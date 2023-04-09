@@ -104,13 +104,33 @@ function Options() {
                       />
                     }
                   />
-                  {connectorRoutes.map((connectorRoute) => (
-                    <Route
-                      key={connectorRoute.path}
-                      path={connectorRoute.path}
-                      element={connectorRoute.element}
-                    />
-                  ))}
+                  {connectorRoutes.map((connectorRoute) => {
+                    if (connectorRoute.children) {
+                      return (
+                        <Route
+                          key={connectorRoute.path}
+                          path={connectorRoute.path}
+                        >
+                          <Route index element={connectorRoute.element} />
+                          {connectorRoute.children.map((connectorRoute) => (
+                            <Route
+                              key={connectorRoute.path}
+                              path={connectorRoute.path}
+                              element={connectorRoute.element}
+                            />
+                          ))}
+                        </Route>
+                      );
+                    } else {
+                      return (
+                        <Route
+                          key={connectorRoute.path}
+                          path={connectorRoute.path}
+                          element={connectorRoute.element}
+                        />
+                      );
+                    }
+                  })}
                   {distributionRoutes.map((multiConnector) => (
                     <Route path={multiConnector.path} key={multiConnector.path}>
                       {multiConnector.connectors.map((connectorRoute) => (

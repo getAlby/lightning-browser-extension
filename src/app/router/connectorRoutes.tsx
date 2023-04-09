@@ -39,6 +39,10 @@ interface ConnectorRoute {
   title: string;
   description?: string;
   logo: string;
+  children?: {
+    path: string;
+    element: JSX.Element;
+  }[];
 }
 
 interface DistributionRoute {
@@ -63,7 +67,7 @@ function getConnectorRoutes(): ConnectorRoute[] {
       path: "lnc",
       element: <ConnectLnc />,
       title: i18n.t("translation:choose_connector.lnc.title"),
-      logo: lnd,
+      logo: lightning_terminal,
     },
     {
       path: "commando",
@@ -85,10 +89,20 @@ function getConnectorRoutes(): ConnectorRoute[] {
     },
     {
       path: "kollider",
-      element: <ConnectKollider />,
+      element: <ConnectKollider variant="select" />,
       title: i18n.t("translation:choose_connector.kollider.title"),
       description: i18n.t("translation:choose_connector.kollider.description"),
       logo: kolliderLogo,
+      children: [
+        {
+          path: "create",
+          element: <ConnectKollider variant="create" />,
+        },
+        {
+          path: "login",
+          element: <ConnectKollider variant="login" />,
+        },
+      ],
     },
     {
       path: "lnd-hub-bluewallet",

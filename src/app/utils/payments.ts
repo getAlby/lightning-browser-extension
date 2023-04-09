@@ -8,7 +8,7 @@ export const convertPaymentToTransaction = (
   ...payment,
   id: `${payment.id}`,
   type: "sent",
-  date: dayjs(payment.createdAt).fromNow(),
+  date: dayjs(+payment.createdAt).fromNow(),
   title: payment.name || payment.description,
   publisherLink: publisherLink || payment.location,
 });

@@ -1,57 +1,5 @@
 [
   {
-    "title": "trading",
-    "items": [
-      {
-        "title": "LNMarkets",
-        "subtitle": "Instant Bitcoin derivatives trading",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lnmarkets.png",
-        "url": "https://lnmarkets.com/"
-      },
-      {
-        "title": "Kollider",
-        "subtitle": "Instant Bitcoin derivatives trading",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/kollider_thumbnail.png",
-        "url": "https://kollider.xyz/"
-      },
-      {
-        "title": "LOFT",
-        "subtitle": "Trade investment products in Bitcoin",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/loft-trade_thumbnail.png",
-        "url": "https://loft.trade/"
-      }
-    ]
-  },
-  {
-    "title": "gaming",
-    "items": [
-      {
-        "title": "Lightning Poker",
-        "subtitle": "Play Poker with Bitcoin",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lightning-poker_thumbnail.png",
-        "url": "https://lightning-poker.com/"
-      },
-      {
-        "title": "LNBlackJack",
-        "subtitle": "Play Blackjack with Bitcoin",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lnblackjack_thumbnail.png",
-        "url": "https://www.lnblackjack.com/"
-      },
-      {
-        "title": "Lightning Roulette",
-        "subtitle": "Play Roulette with Bitcoin",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lightning-roulette_thumbnail.svg",
-        "url": "https://lightning-roulette.com/"
-      },
-      {
-        "title": "LNflip",
-        "subtitle": "Play coin flip matches against other players",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lnflip_thumbnail.png",
-        "url": "https://www.lnflip.com/"
-      }
-    ]
-  },
-  {
     "title": "entertaiment",
     "items": [
       {
@@ -163,6 +111,81 @@
     ]
   },
   {
+    "title": "trading",
+    "items": [
+      {
+        "title": "LNMarkets",
+        "subtitle": "Instant Bitcoin derivatives trading",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lnmarkets.png",
+        "url": "https://lnmarkets.com/"
+      },
+      {
+        "title": "Kollider",
+        "subtitle": "Instant Bitcoin derivatives trading",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/kollider_thumbnail.png",
+        "url": "https://kollider.xyz/"
+      },
+      {
+        "title": "LOFT",
+        "subtitle": "Trade investment products in Bitcoin",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/loft-trade_thumbnail.png",
+        "url": "https://loft.trade/"
+      }
+    ]
+  },
+  {
+    "title": "gaming",
+    "items": [
+      {
+        "title": "Lightning Poker",
+        "subtitle": "Play Poker with Bitcoin",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lightning-poker_thumbnail.png",
+        "url": "https://lightning-poker.com/"
+      },
+      {
+        "title": "LNBlackJack",
+        "subtitle": "Play Blackjack with Bitcoin",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lnblackjack_thumbnail.png",
+        "url": "https://www.lnblackjack.com/"
+      },
+      {
+        "title": "Lightning Roulette",
+        "subtitle": "Play Roulette with Bitcoin",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lightning-roulette_thumbnail.svg",
+        "url": "https://lightning-roulette.com/"
+      },
+      {
+        "title": "LNflip",
+        "subtitle": "Play coin flip matches against other players",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lnflip_thumbnail.png",
+        "url": "https://www.lnflip.com/"
+      }
+    ]
+  },
+  {
+    "title": "nodeManagement",
+    "items": [
+      {
+        "title": "channel.ninja",
+        "subtitle": "Get recommended channel partners for your lightning node",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/channelninja.png",
+        "url": "https://channel.ninja/"
+      },
+      {
+        "title": "Amboss",
+        "subtitle": "Lightning Network node explorer",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/amboss-space_thumbnail.png",
+        "url": "https://amboss.space/"
+      },
+      {
+        "title": "LNnodeinsight.com",
+        "subtitle": "Develop your own data-driven Lightning Network insight",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/LNnodeinsight-tinylogonobkgrnd.svg",
+        "url": "https://lnnodeinsight.com/"
+      }
+    ]
+  },
+  {
     "title": "miscellaneous",
     "items": [
       {
@@ -182,12 +205,6 @@
         "subtitle": "Crowdfunding projects with Bitcoin Lightning",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/geyser_thumbnail.png",
         "url": "https://geyser.fund/"
-      },
-      {
-        "title": "Amboss",
-        "subtitle": "Lightning Network node explorer",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/amboss-space_thumbnail.png",
-        "url": "https://amboss.space/"
       },
       {
         "title": "Lightsats",
@@ -212,12 +229,6 @@
         "subtitle": "Get booked and paid in Bitcoin",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lncal_thumbnail.svg",
         "url": "https://lncal.com/"
-      },
-      {
-        "title": "channel.ninja",
-        "subtitle": "Get recommended channel partners for your lightning node",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/channelninja.png",
-        "url": "https://channel.ninja/"
       }
     ]
   }

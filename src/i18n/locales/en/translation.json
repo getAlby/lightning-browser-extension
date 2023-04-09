@@ -288,21 +288,30 @@
       "kollider": {
         "title": "Kollider",
         "description": "Login to your Kollider account",
-        "page": {
+        "warning": "⚠️ Please make sure you store your credentials securely in a password manager. Without these credentials your account will not be recoverable.",
+        "choose_path": {
+          "title": "Connect to your Kollider Wallet",
+          "description": "Login or sign up for a new Kollider account and connect to Alby.",
+          "create_new": "Sign up"
+        },
+        "create": {
+          "title": "Create your Kollider account and connect to Alby",
+          "description": "Create a new Kollider account to send, receive and trade Bitcoin."
+        },
+        "login": {
           "title": "Connect to your Kollider account",
           "description": "Don't have an account already? <0>Sign up</0> now!"
         },
         "username": {
-          "label": "Enter your Kollider username"
-        },
-        "password": {
-          "label": "Enter your Kollider password"
+          "label": "Username"
         },
         "currency": {
           "label": "Select your currency account"
         },
         "errors": {
-          "connection_failed": "Connection failed. Are you sure the account data is correct?"
+          "connection_failed": "Connection failed. Are you sure the account data is correct?",
+          "user_already_exists": "Username already exists",
+          "registration_limit_exceeded": "Registration limit exceeded, try after sometime."
         }
       },
       "btcpay": {
@@ -667,7 +676,8 @@
         "shopping": "Shopping",
         "miscellaneous": "Miscellaneous",
         "showcases": "Showcases",
-        "nostr": "Nostr"
+        "nostr": "Nostr",
+        "nodeManagement": "Node Management"
       },
       "tips": {
         "title": "Your Alby wallet is ready",
@@ -822,6 +832,7 @@
     "response": "Response",
     "message": "Message",
     "help": "Help",
+    "balance": "Balance",
     "actions": {
       "back": "Back",
       "delete": "Delete",
@@ -940,7 +951,9 @@
       "options": {
         "account": {
           "add": "Add a new account",
-          "manage": "Manage accounts"
+          "manage": "Manage accounts",
+          "account_settings": "Account settings",
+          "go_to_web_wallet": "Manage your Alby Account"
         }
       }
     },
