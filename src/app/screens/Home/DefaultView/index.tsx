@@ -54,6 +54,7 @@ const DefaultView: FC<Props> = (props) => {
 
   const { t } = useTranslation("translation", { keyPrefix: "home" });
   const { t: tCommon } = useTranslation("common");
+  const { t: tComponents } = useTranslation("components");
 
   // check if currentURL is blocked
   useEffect(() => {
@@ -210,8 +211,8 @@ const DefaultView: FC<Props> = (props) => {
             <Tab.Group>
               <Tab.List className="mb-2">
                 {[
-                  t("transaction_list.tabs.outgoing"),
-                  t("transaction_list.tabs.incoming"),
+                  tComponents("transaction_list.tabs.outgoing"),
+                  tComponents("transaction_list.tabs.incoming"),
                 ].map((category) => (
                   <Tab
                     key={category}

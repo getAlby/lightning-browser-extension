@@ -364,12 +364,6 @@
         "enable_now": "Enable Now"
       },
       "recent_transactions": "Recent Transactions",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Outgoing",
-          "incoming": "Incoming"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Recent Transactions",
         "allowance": "Allowance",
@@ -782,7 +776,9 @@
     },
     "wallet": {
       "title": "Wallet",
-      "recent_transactions": "Recent transactions"
+      "recent_transactions": "Recent transactions",
+      "no_outgoing_transactions": "No outgoing transactions for this account yet.",
+      "no_incoming_transactions": "No incoming transactions for this account yet."
     }
   },
   "common": {
@@ -796,7 +792,6 @@
     "discover": "Discover",
     "websites": "Websites",
     "wallet": "Wallet",
-    "transactions": "Transactions",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "loading",
@@ -884,6 +879,12 @@
         "podcast": "Podcast"
       },
       "open_location": "Open website"
+    },
+    "transaction_list": {
+      "tabs": {
+        "outgoing": "Outgoing",
+        "incoming": "Incoming"
+      }
     },
     "confirm_or_cancel": {
       "only_trusted": "Only connect with sites you trust."
