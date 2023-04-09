@@ -41,6 +41,11 @@ interface ConnectorRoute {
   logo: string;
 }
 
+interface DistributionRoute {
+  path: string;
+  connectors: ConnectorRoute[];
+}
+
 const galoyPaths: { [key: string]: keyof typeof galoyUrls } = {
   bitcoinBeach: "galoy-bitcoin-beach",
   bitcoinJungle: "galoy-bitcoin-jungle",
@@ -352,6 +357,35 @@ function getStart9ConnectorRoutes(): ConnectorRoute[] {
   ];
 }
 
+function getDistributionRoutes(): DistributionRoute[] {
+  return [
+    {
+      path: "umbrel",
+      connectors: getUmbrelConnectorRoutes(),
+    },
+    {
+      path: "citadel",
+      connectors: getCitadelConnectorRoutes(),
+    },
+    {
+      path: "btcpay",
+      connectors: getBtcPayConnectorRoutes(),
+    },
+    {
+      path: "raspiblitz",
+      connectors: getRaspiblitzConnectorRoutes(),
+    },
+    {
+      path: "mynode",
+      connectors: getMynodeConnectorRoutes(),
+    },
+    {
+      path: "start9",
+      connectors: getStart9ConnectorRoutes(),
+    },
+  ];
+}
+
 export {
   getConnectorRoutes,
   getUmbrelConnectorRoutes,
@@ -360,5 +394,6 @@ export {
   getRaspiblitzConnectorRoutes,
   getMynodeConnectorRoutes,
   getStart9ConnectorRoutes,
+  getDistributionRoutes,
   ConnectorRoute,
 };

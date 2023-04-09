@@ -60,12 +60,12 @@ function MakeInvoice() {
     setError("");
     if (
       invoiceAttributes.minimumAmount &&
-      parseInt(amount) < invoiceAttributes.minimumAmount
+      parseInt(amount) < +invoiceAttributes.minimumAmount
     ) {
       setError(t("errors.amount_too_small"));
     } else if (
       invoiceAttributes.maximumAmount &&
-      parseInt(amount) > invoiceAttributes.maximumAmount
+      parseInt(amount) > +invoiceAttributes.maximumAmount
     ) {
       setError(t("errors.amount_too_big"));
     }

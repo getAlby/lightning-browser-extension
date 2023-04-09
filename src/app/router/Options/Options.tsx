@@ -22,13 +22,8 @@ import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import {
-  getBtcPayConnectorRoutes,
-  getCitadelConnectorRoutes,
   getConnectorRoutes,
-  getMynodeConnectorRoutes,
-  getRaspiblitzConnectorRoutes,
-  getStart9ConnectorRoutes,
-  getUmbrelConnectorRoutes,
+  getDistributionRoutes,
 } from "~/app/router/connectorRoutes";
 import Discover from "~/app/screens/Discover";
 import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
@@ -36,35 +31,9 @@ import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
 import i18n from "~/i18n/i18nConfig";
 
-const multiConnectors = [
-  {
-    path: "umbrel",
-    connectors: getUmbrelConnectorRoutes(),
-  },
-  {
-    path: "citadel",
-    connectors: getCitadelConnectorRoutes(),
-  },
-  {
-    path: "btcpay",
-    connectors: getBtcPayConnectorRoutes(),
-  },
-  {
-    path: "raspiblitz",
-    connectors: getRaspiblitzConnectorRoutes(),
-  },
-  {
-    path: "mynode",
-    connectors: getMynodeConnectorRoutes(),
-  },
-  {
-    path: "start9",
-    connectors: getStart9ConnectorRoutes(),
-  },
-];
-
 function Options() {
   const connectorRoutes = getConnectorRoutes();
+  const distributionRoutes = getDistributionRoutes();
 
   return (
     <Providers>
@@ -142,7 +111,7 @@ function Options() {
                       element={connectorRoute.element}
                     />
                   ))}
-                  {multiConnectors.map((multiConnector) => (
+                  {distributionRoutes.map((multiConnector) => (
                     <Route path={multiConnector.path} key={multiConnector.path}>
                       {multiConnector.connectors.map((connectorRoute) => (
                         <Route
