@@ -125,7 +125,7 @@ export default function ConnectUmbrel() {
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
-      video="https://cdn.getalby-assets.com/connector-guides/in_extension_guide_umbrel.mp4"
+      image="https://user-images.githubusercontent.com/68239231/227179114-9ccd042a-9996-4298-ac3a-38f64adc4ff3.png"
     >
       <TextField
         id="lndconnect"
