@@ -2,6 +2,7 @@ import {
   ReceiveIcon,
   SendIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
+import BalanceBox from "@components/BalanceBox";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import Loading from "@components/Loading";
@@ -110,7 +111,7 @@ function Wallet() {
         <Button
           fullWidth
           icon={<SendIcon className="h-6" />}
-          className="h-28 grow"
+          className="h-28 grow text-xl"
           label={tCommon("actions.send")}
           direction="column"
           onClick={() => {
@@ -118,12 +119,12 @@ function Wallet() {
           }}
         />
 
-        <div className="h-28 grow w-full text-center">balance</div>
+        <BalanceBox className="h-28 grow"></BalanceBox>
 
         <Button
           fullWidth
           icon={<ReceiveIcon className="h-6" />}
-          className="h-28 grow"
+          className="h-28 grow text-xl"
           label={tCommon("actions.receive")}
           direction="column"
           onClick={() => {
