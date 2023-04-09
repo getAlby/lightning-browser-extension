@@ -206,7 +206,7 @@
         "title": "Umbrel",
         "page": {
           "title": "Connect to <0>Umbrel</0> node",
-          "instructions": "In your Umbrel dashboard go to <0>Connect Wallet</0>. Select <0>lndconnect REST</0> and copy the <0>lndconnect URL</0>. (Depending on your setup you can either use the local connection or the Tor connection.)"
+          "instructions": "1. In your Lightning Node dashboard go to <0>Connect wallet</0>\n 2. Select <0>REST (Tor)</0> or <0>REST (Local Network)</0> mode\n 3. Copy the <0>lndconnect URL</0> and paste it below"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
