@@ -21,10 +21,7 @@ import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
-import {
-  getConnectorRoutes,
-  getDistributionRoutes,
-} from "~/app/router/connectorRoutes";
+import { getConnectorRoutes } from "~/app/router/connectorRoutes";
 import Discover from "~/app/screens/Discover";
 import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
@@ -33,7 +30,6 @@ import i18n from "~/i18n/i18nConfig";
 
 function Options() {
   const connectorRoutes = getConnectorRoutes();
-  const distributionRoutes = getDistributionRoutes();
 
   return (
     <Providers>
@@ -131,17 +127,6 @@ function Options() {
                       );
                     }
                   })}
-                  {distributionRoutes.map((multiConnector) => (
-                    <Route path={multiConnector.path} key={multiConnector.path}>
-                      {multiConnector.connectors.map((connectorRoute) => (
-                        <Route
-                          key={connectorRoute.path}
-                          path={connectorRoute.path}
-                          element={connectorRoute.element}
-                        />
-                      ))}
-                    </Route>
-                  ))}
                 </Route>
               </Route>
               <Route index element={<Accounts />} />

@@ -42,18 +42,162 @@ interface ConnectorRoute {
   children?: {
     path: string;
     element: JSX.Element;
+    title?: string;
+    description?: string;
+    logo?: string;
   }[];
-}
-
-interface DistributionRoute {
-  path: string;
-  connectors: ConnectorRoute[];
 }
 
 const galoyPaths: { [key: string]: keyof typeof galoyUrls } = {
   bitcoinBeach: "galoy-bitcoin-beach",
   bitcoinJungle: "galoy-bitcoin-jungle",
 };
+
+const umbrelConnectorRoutes = [
+  {
+    path: "lnd-connect",
+    element: <ConnectUmbrel />,
+    title: i18n.t("translation:choose_connector.lightning_node.title"),
+    logo: lightning_node,
+  },
+  {
+    path: "lnc",
+    element: <ConnectLnc />,
+    title: i18n.t("translation:choose_connector.lnc.title"),
+    logo: lightning_terminal,
+  },
+  {
+    path: "commando",
+    element: <ConnectCommando />,
+    title: i18n.t("translation:choose_connector.commando.title"),
+    logo: core_ln,
+  },
+  {
+    path: "lnbits",
+    element: <ConnectLnbits />,
+    title: i18n.t("translation:choose_connector.lnbits.title"),
+    logo: lnbits,
+  },
+];
+
+const citadelConnectorRoutes = [
+  {
+    path: "citadel",
+    element: <ConnectCitadel />,
+    title: i18n.t("translation:choose_connector.citadel.title"),
+    logo: citadel,
+  },
+  {
+    path: "lnc",
+    element: <ConnectLnc />,
+    title: i18n.t("translation:choose_connector.lnc.title"),
+    logo: lightning_terminal,
+  },
+  {
+    path: "commando",
+    element: <ConnectCommando />,
+    title: i18n.t("translation:choose_connector.commando.title"),
+    logo: core_ln,
+  },
+  {
+    path: "lnbits",
+    element: <ConnectLnbits />,
+    title: i18n.t("translation:choose_connector.lnbits.title"),
+    logo: lnbits,
+  },
+];
+
+const raspiblitzConnectorRoutes = [
+  {
+    path: "lnd",
+    element: <ConnectRaspiBlitz />,
+    title: i18n.t("translation:choose_connector.lnd.title"),
+    logo: lnd,
+  },
+  {
+    path: "lnc",
+    element: <ConnectLnc />,
+    title: i18n.t("translation:choose_connector.lnc.title"),
+    logo: lightning_terminal,
+  },
+  {
+    path: "commando",
+    element: <ConnectCommando />,
+    title: i18n.t("translation:choose_connector.commando.title"),
+    logo: core_ln,
+  },
+  {
+    path: "lnbits",
+    element: <ConnectLnbits />,
+    title: i18n.t("translation:choose_connector.lnbits.title"),
+    logo: lnbits,
+  },
+];
+
+const myNodeConnectorRoutes = [
+  {
+    path: "lnd",
+    element: <ConnectMyNode />,
+    title: i18n.t("translation:choose_connector.lnd.title"),
+    logo: lnd,
+  },
+  {
+    path: "lnc",
+    element: <ConnectLnc />,
+    title: i18n.t("translation:choose_connector.lnc.title"),
+    logo: lightning_terminal,
+  },
+  {
+    path: "commando",
+    element: <ConnectCommando />,
+    title: i18n.t("translation:choose_connector.commando.title"),
+    logo: core_ln,
+  },
+  {
+    path: "lnbits",
+    element: <ConnectLnbits />,
+    title: i18n.t("translation:choose_connector.lnbits.title"),
+    logo: lnbits,
+  },
+];
+
+const start9ConnectorRoutes = [
+  {
+    path: "lnd",
+    element: <ConnectStart9 />,
+    title: i18n.t("translation:choose_connector.lnd.title"),
+    logo: lnd,
+  },
+  {
+    path: "lnc",
+    element: <ConnectLnc />,
+    title: i18n.t("translation:choose_connector.lnc.title"),
+    logo: lightning_terminal,
+  },
+  {
+    path: "commando",
+    element: <ConnectCommando />,
+    title: i18n.t("translation:choose_connector.commando.title"),
+    logo: core_ln,
+  },
+  {
+    path: "lnbits",
+    element: <ConnectLnbits />,
+    title: i18n.t("translation:choose_connector.lnbits.title"),
+    logo: lnbits,
+  },
+];
+
+const kolliderConnectorRoutes = [
+  {
+    path: "create",
+    element: <ConnectKollider variant="create" />,
+  },
+  {
+    path: "login",
+    element: <ConnectKollider variant="login" />,
+  },
+];
 
 function getConnectorRoutes(): ConnectorRoute[] {
   return [
@@ -93,16 +237,7 @@ function getConnectorRoutes(): ConnectorRoute[] {
       title: i18n.t("translation:choose_connector.kollider.title"),
       description: i18n.t("translation:choose_connector.kollider.description"),
       logo: kolliderLogo,
-      children: [
-        {
-          path: "create",
-          element: <ConnectKollider variant="create" />,
-        },
-        {
-          path: "login",
-          element: <ConnectKollider variant="login" />,
-        },
-      ],
+      children: kolliderConnectorRoutes,
     },
     {
       path: "lnd-hub-bluewallet",
@@ -124,11 +259,12 @@ function getConnectorRoutes(): ConnectorRoute[] {
           description={i18n.t(
             "translation:choose_citadel_connector.description"
           )}
-          connectorRoutes={getCitadelConnectorRoutes()}
+          connectorRoutes={citadelConnectorRoutes}
         />
       ),
       title: i18n.t("translation:choose_connector.citadel.title"),
       logo: citadel,
+      children: citadelConnectorRoutes,
     },
     {
       path: "umbrel",
@@ -138,11 +274,12 @@ function getConnectorRoutes(): ConnectorRoute[] {
           description={i18n.t(
             "translation:choose_umbrel_connector.description"
           )}
-          connectorRoutes={getUmbrelConnectorRoutes()}
+          connectorRoutes={umbrelConnectorRoutes}
         />
       ),
       title: i18n.t("translation:choose_connector.umbrel.title"),
       logo: umbrel,
+      children: umbrelConnectorRoutes,
     },
     {
       path: "mynode",
@@ -152,11 +289,12 @@ function getConnectorRoutes(): ConnectorRoute[] {
           description={i18n.t(
             "translation:choose_mynode_connector.description"
           )}
-          connectorRoutes={getRaspiblitzConnectorRoutes()}
+          connectorRoutes={myNodeConnectorRoutes}
         />
       ),
       title: i18n.t("translation:choose_connector.mynode.title"),
       logo: mynode,
+      children: myNodeConnectorRoutes,
     },
     {
       path: "start9",
@@ -166,11 +304,12 @@ function getConnectorRoutes(): ConnectorRoute[] {
           description={i18n.t(
             "translation:choose_start9_connector.description"
           )}
-          connectorRoutes={getRaspiblitzConnectorRoutes()}
+          connectorRoutes={start9ConnectorRoutes}
         />
       ),
       title: i18n.t("translation:choose_connector.start9.title"),
       logo: start9,
+      children: start9ConnectorRoutes,
     },
     {
       path: "raspiblitz",
@@ -180,11 +319,12 @@ function getConnectorRoutes(): ConnectorRoute[] {
           description={i18n.t(
             "translation:choose_raspiblitz_connector.description"
           )}
-          connectorRoutes={getRaspiblitzConnectorRoutes()}
+          connectorRoutes={raspiblitzConnectorRoutes}
         />
       ),
       title: i18n.t("translation:choose_connector.raspiblitz.title"),
       logo: raspiblitz,
+      children: raspiblitzConnectorRoutes,
     },
     {
       path: galoyPaths.bitcoinBeach,
@@ -200,214 +340,11 @@ function getConnectorRoutes(): ConnectorRoute[] {
     },
     {
       path: "btcpay",
-      element: (
-        <ChooseConnector
-          title={i18n.t("translation:choose_btcpay_connector.title")}
-          description={i18n.t(
-            "translation:choose_btcpay_connector.description"
-          )}
-          connectorRoutes={getBtcPayConnectorRoutes()}
-        />
-      ),
+      element: <ConnectBtcpay />,
       title: i18n.t("translation:choose_connector.btcpay.title"),
       logo: btcpay,
     },
   ];
 }
 
-function getUmbrelConnectorRoutes(): ConnectorRoute[] {
-  return [
-    {
-      path: "lnd-connect",
-      element: <ConnectUmbrel />,
-      title: i18n.t("translation:choose_connector.lightning_node.title"),
-      logo: lightning_node,
-    },
-    {
-      path: "lnc",
-      element: <ConnectLnc />,
-      title: i18n.t("translation:choose_connector.lnc.title"),
-      logo: lightning_terminal,
-    },
-    {
-      path: "commando",
-      element: <ConnectCommando />,
-      title: i18n.t("translation:choose_connector.commando.title"),
-      logo: core_ln,
-    },
-    {
-      path: "lnbits",
-      element: <ConnectLnbits />,
-      title: i18n.t("translation:choose_connector.lnbits.title"),
-      logo: lnbits,
-    },
-  ];
-}
-
-function getCitadelConnectorRoutes(): ConnectorRoute[] {
-  return [
-    {
-      path: "citadel",
-      element: <ConnectCitadel />,
-      title: i18n.t("translation:choose_connector.citadel.title"),
-      logo: citadel,
-    },
-    {
-      path: "lnc",
-      element: <ConnectLnc />,
-      title: i18n.t("translation:choose_connector.lnc.title"),
-      logo: lightning_terminal,
-    },
-    {
-      path: "commando",
-      element: <ConnectCommando />,
-      title: i18n.t("translation:choose_connector.commando.title"),
-      logo: core_ln,
-    },
-    {
-      path: "lnbits",
-      element: <ConnectLnbits />,
-      title: i18n.t("translation:choose_connector.lnbits.title"),
-      logo: lnbits,
-    },
-  ];
-}
-
-function getBtcPayConnectorRoutes(): ConnectorRoute[] {
-  return [
-    {
-      path: "lnd",
-      element: <ConnectBtcpay />,
-      title: i18n.t("translation:choose_connector.lnd.title"),
-      logo: lnd,
-    },
-  ];
-}
-
-function getRaspiblitzConnectorRoutes(): ConnectorRoute[] {
-  return [
-    {
-      path: "lnd",
-      element: <ConnectRaspiBlitz />,
-      title: i18n.t("translation:choose_connector.lnd.title"),
-      logo: lnd,
-    },
-    {
-      path: "lnc",
-      element: <ConnectLnc />,
-      title: i18n.t("translation:choose_connector.lnc.title"),
-      logo: lightning_terminal,
-    },
-    {
-      path: "commando",
-      element: <ConnectCommando />,
-      title: i18n.t("translation:choose_connector.commando.title"),
-      logo: core_ln,
-    },
-    {
-      path: "lnbits",
-      element: <ConnectLnbits />,
-      title: i18n.t("translation:choose_connector.lnbits.title"),
-      logo: lnbits,
-    },
-  ];
-}
-
-function getMynodeConnectorRoutes(): ConnectorRoute[] {
-  return [
-    {
-      path: "lnd",
-      element: <ConnectMyNode />,
-      title: i18n.t("translation:choose_connector.mynode.title"),
-      logo: lnd,
-    },
-    {
-      path: "lnc",
-      element: <ConnectLnc />,
-      title: i18n.t("translation:choose_connector.lnc.title"),
-      logo: lightning_terminal,
-    },
-    {
-      path: "commando",
-      element: <ConnectCommando />,
-      title: i18n.t("translation:choose_connector.commando.title"),
-      logo: core_ln,
-    },
-    {
-      path: "lnbits",
-      element: <ConnectLnbits />,
-      title: i18n.t("translation:choose_connector.lnbits.title"),
-      logo: lnbits,
-    },
-  ];
-}
-
-function getStart9ConnectorRoutes(): ConnectorRoute[] {
-  return [
-    {
-      path: "lnd",
-      element: <ConnectStart9 />,
-      title: i18n.t("translation:choose_connector.start9.title"),
-      logo: lnd,
-    },
-    {
-      path: "lnc",
-      element: <ConnectLnc />,
-      title: i18n.t("translation:choose_connector.lnc.title"),
-      logo: lightning_terminal,
-    },
-    {
-      path: "commando",
-      element: <ConnectCommando />,
-      title: i18n.t("translation:choose_connector.commando.title"),
-      logo: core_ln,
-    },
-    {
-      path: "lnbits",
-      element: <ConnectLnbits />,
-      title: i18n.t("translation:choose_connector.lnbits.title"),
-      logo: lnbits,
-    },
-  ];
-}
-
-function getDistributionRoutes(): DistributionRoute[] {
-  return [
-    {
-      path: "umbrel",
-      connectors: getUmbrelConnectorRoutes(),
-    },
-    {
-      path: "citadel",
-      connectors: getCitadelConnectorRoutes(),
-    },
-    {
-      path: "btcpay",
-      connectors: getBtcPayConnectorRoutes(),
-    },
-    {
-      path: "raspiblitz",
-      connectors: getRaspiblitzConnectorRoutes(),
-    },
-    {
-      path: "mynode",
-      connectors: getMynodeConnectorRoutes(),
-    },
-    {
-      path: "start9",
-      connectors: getStart9ConnectorRoutes(),
-    },
-  ];
-}
-
-export {
-  getConnectorRoutes,
-  getUmbrelConnectorRoutes,
-  getCitadelConnectorRoutes,
-  getBtcPayConnectorRoutes,
-  getRaspiblitzConnectorRoutes,
-  getMynodeConnectorRoutes,
-  getStart9ConnectorRoutes,
-  getDistributionRoutes,
-  ConnectorRoute,
-};
+export { getConnectorRoutes, ConnectorRoute };
