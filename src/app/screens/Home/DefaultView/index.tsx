@@ -160,21 +160,21 @@ const DefaultView: FC<Props> = (props) => {
         <div className="flex mb-6 space-x-4">
           <Button
             fullWidth
-            icon={<SendIcon className="w-6 h-6" />}
-            label={tCommon("actions.send")}
-            direction="column"
-            onClick={() => {
-              navigate("/send");
-            }}
-          />
-
-          <Button
-            fullWidth
             icon={<ReceiveIcon className="w-6 h-6" />}
             label={tCommon("actions.receive")}
             direction="column"
             onClick={() => {
               navigate("/receive");
+            }}
+          />
+
+          <Button
+            fullWidth
+            icon={<SendIcon className="w-6 h-6" />}
+            label={tCommon("actions.send")}
+            direction="column"
+            onClick={() => {
+              navigate("/send");
             }}
           />
         </div>
