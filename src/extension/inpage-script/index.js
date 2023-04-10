@@ -1,6 +1,6 @@
 import { ABORT_PROMPT_ERROR, USER_REJECTED_ERROR } from "~/common/constants";
 
-import WebLNProvider from "../ln/webln";
+import WebLNProvider from "../providers/webln";
 
 if (document) {
   // window.webln is normally loaded onstart (see onstart.js)
