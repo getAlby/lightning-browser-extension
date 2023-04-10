@@ -47,7 +47,7 @@ export default function UserMenu() {
         <MenuIcon className="h-6 w-6" />
       </Menu.Button>
       <Menu.List position="left">
-        <div className="block lg:hidden">
+        <div className="lg:hidden">
           <Menu.ItemButton
             onClick={() => {
               openOptions("discover");
