@@ -10,6 +10,7 @@ import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
+import { Tab } from "@headlessui/react";
 import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
 import { useTranslation } from "react-i18next";
@@ -18,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import { isAlbyAccount } from "~/app/utils";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import { poll } from "~/common/utils/helpers";
@@ -50,8 +52,11 @@ function Receive() {
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
-  const [isLightning, setLightning] = useState(true);
-  const isAlbyUser = auth.account?.alias === "🐝 getalby.com";
+  const [recieveType, setRecieveType] = useState("lightning");
+  const isAlbyUser = isAlbyAccount(auth.account?.alias);
+  const RecieveTabStyles =
+    "flex font-bold inline-flex px-2 flex-1 py-2 justify-center items-center rounded-md shadow focus:outline-none  transition duration-150";
+
   useEffect(() => {
     mounted.current = true;
 
@@ -140,7 +145,7 @@ function Receive() {
     if (!invoice) return null;
     return (
       <div className="py-4">
-        <div className="relative p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center overflow-hidden">
+        <div className="relative p-8  bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center overflow-hidden">
           <QRCode value={invoice.paymentRequest.toUpperCase()} level="M" />
           {paid && (
             <div className="absolute inset-0 flex justify-center items-center bg-white/90">
@@ -237,117 +242,163 @@ function Receive() {
 
       {isAlbyUser ? (
         <Container maxWidth="sm">
-          <div className="flex mb-6  mt-4 text-xl ">
-            <Button
-              className={
-                isLightning
-                  ? `text-gray-700 shadow-lg  dark:text-neutral-200`
-                  : `text-gray-500 dark:text-neutral-500` + "font-bold"
-              }
-              outline={isLightning}
-              icon={<img src="assets/icons/thunder.svg"></img>}
-              fullWidth
-              label={"Lightning"}
-              direction="row"
-              onClick={() => {
-                setLightning(true);
-              }}
-            />
+          <div className=" h-full mx-auto">
+            <Tab.Group>
+              <Tab.List className="flex mb-6  mt-4 text-lg  px-4 ">
+                <Tab
+                  className={
+                    (recieveType === "lightning"
+                      ? `text-gray-700 drop-shadow-xl dark:text-neutral-200 bg-white dark:bg-surface-16dp `
+                      : `text-gray-500 dark:text-neutral-500 rounded-tr-none rounded-br-none bg-gray-200 dark:bg-surface-02dp `) +
+                    RecieveTabStyles
+                  }
+                  onClick={() => {
+                    setRecieveType("lightning");
+                  }}
+                >
+                  <img src="assets/icons/thunder.svg"></img>
+                  Lightning
+                </Tab>
+                <Tab
+                  className={
+                    (recieveType === "onchain"
+                      ? `text-gray-700 drop-shadow-xl dark:text-neutral-200 bg-white dark:bg-surface-16dp `
+                      : `text-gray-500 dark:text-neutral-500 rounded-tl-none rounded-bl-none bg-gray-200 dark:bg-surface-02dp `) +
+                    RecieveTabStyles
+                  }
+                  onClick={() => {
+                    setRecieveType("onchain");
+                  }}
+                >
+                  <img src="assets/icons/Block.svg"></img>
+                  Onchain
+                </Tab>
+              </Tab.List>
+              <Tab.Panels className="h-full">
+                <Tab.Panel className="h-full">
+                  {invoice ? (
+                    <Container maxWidth="sm">{renderInvoice()}</Container>
+                  ) : (
+                    <form onSubmit={handleSubmit} className="h-full">
+                      <fieldset className="h-full" disabled={loading}>
+                        <Container justifyBetween maxWidth="sm">
+                          <div className="py-4">
+                            <div className="mb-4">
+                              <DualCurrencyField
+                                id="amount"
+                                min={0}
+                                label={t("amount.label")}
+                                placeholder={t("amount.placeholder")}
+                                fiatValue={fiatAmount}
+                                onChange={handleChange}
+                                autoFocus
+                              />
+                            </div>
 
-            <Button
-              className={
-                !isLightning
-                  ? `text-gray-700   shadow-lg  dark:text-neutral-200`
-                  : `text-gray-500 dark:text-neutral-500` + "font-bold "
-              }
-              icon={<img src="assets/icons/Block.svg"></img>}
-              outline={!isLightning}
-              fullWidth
-              label={"On-chain"}
-              direction="row"
-              onClick={() => {
-                setLightning(false);
-              }}
-            />
+                            <div className="mb-4">
+                              <TextField
+                                id="description"
+                                label={t("description.label")}
+                                placeholder={t("description.placeholder")}
+                                onChange={handleChange}
+                              />
+                            </div>
+                          </div>
+                          <div className="mb-8">
+                            <Button
+                              type="submit"
+                              label={t("actions.create_invoice")}
+                              fullWidth
+                              primary
+                              loading={loading}
+                              disabled={loading}
+                            />
+                          </div>
+                        </Container>
+                      </fieldset>
+                    </form>
+                  )}
+                </Tab.Panel>
+                <Tab.Panel className="h-full">
+                  <Container justifyBetween maxWidth="sm">
+                    <div className="py-8 text-center dark:text-neutral-200">
+                      <div className="mb-8">
+                        <p>
+                          To receive Bitcoin on-chain, log-in to{" "}
+                          <strong>Alby Account </strong>on getalby.com
+                        </p>
+                      </div>
+
+                      <div className="mb-8">
+                        <p>
+                          Your bitcoin on-chain address is under{" "}
+                          <strong>Receive</strong> page, accessible from{" "}
+                          <strong>Payments</strong>
+                        </p>
+                      </div>
+                    </div>
+                    <div className="mb-4 ">
+                      <a href="https://getalby.com/node/receive">
+                        <Button
+                          type="submit"
+                          label={"Go Alby Account on getalby.com ->"}
+                          fullWidth
+                          primary
+                          loading={loading}
+                          disabled={loading}
+                        />
+                      </a>
+                    </div>
+                  </Container>
+                </Tab.Panel>
+              </Tab.Panels>
+            </Tab.Group>
           </div>
         </Container>
-      ) : null}
-
-      {isLightning ? (
-        invoice ? (
-          <Container maxWidth="sm">{renderInvoice()}</Container>
-        ) : (
-          <form onSubmit={handleSubmit} className="h-full">
-            <fieldset className="h-full" disabled={loading}>
-              <Container justifyBetween maxWidth="sm">
-                <div className="py-4">
-                  <div className="mb-4">
-                    <DualCurrencyField
-                      id="amount"
-                      min={0}
-                      label={t("amount.label")}
-                      placeholder={t("amount.placeholder")}
-                      fiatValue={fiatAmount}
-                      onChange={handleChange}
-                      autoFocus
-                    />
-                  </div>
-
-                  <div className="mb-4">
-                    <TextField
-                      id="description"
-                      label={t("description.label")}
-                      placeholder={t("description.placeholder")}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-                <div className="mb-4">
-                  <Button
-                    type="submit"
-                    label={t("actions.create_invoice")}
-                    fullWidth
-                    primary
-                    loading={loading}
-                    disabled={loading}
-                  />
-                </div>
-              </Container>
-            </fieldset>
-          </form>
-        )
       ) : (
         <div className=" h-full">
-          <Container justifyBetween maxWidth="sm">
-            <div className="py-8 text-center dark:text-neutral-200">
-              <div className="mb-8">
-                <p>
-                  To receive Bitcoin on-chain, log-in to{" "}
-                  <strong>Alby Account </strong>on getalby.com
-                </p>
-              </div>
+          {invoice ? (
+            <Container maxWidth="sm">{renderInvoice()}</Container>
+          ) : (
+            <form onSubmit={handleSubmit} className=" h-full">
+              <fieldset className="h-full" disabled={loading}>
+                <Container justifyBetween maxWidth="sm">
+                  <div className="py-4">
+                    <div className="mb-4">
+                      <DualCurrencyField
+                        id="amount"
+                        min={0}
+                        label={t("amount.label")}
+                        placeholder={t("amount.placeholder")}
+                        fiatValue={fiatAmount}
+                        onChange={handleChange}
+                        autoFocus
+                      />
+                    </div>
 
-              <div className="mb-8">
-                <p>
-                  Your bitcoin on-chain address is under{" "}
-                  <strong>Receive</strong> page, accessible from{" "}
-                  <strong>Payments</strong>
-                </p>
-              </div>
-            </div>
-            <div className="mb-4 ">
-              <a href="https://getalby.com/node/receive">
-                <Button
-                  type="submit"
-                  label={"Go Alby Account on getalby.com ->"}
-                  fullWidth
-                  primary
-                  loading={loading}
-                  disabled={loading}
-                />
-              </a>
-            </div>
-          </Container>
+                    <div className="mb-4">
+                      <TextField
+                        id="description"
+                        label={t("description.label")}
+                        placeholder={t("description.placeholder")}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="mb-8">
+                    <Button
+                      type="submit"
+                      label={t("actions.create_invoice")}
+                      fullWidth
+                      primary
+                      loading={loading}
+                      disabled={loading}
+                    />
+                  </div>
+                </Container>
+              </fieldset>
+            </form>
+          )}
         </div>
       )}
     </div>
