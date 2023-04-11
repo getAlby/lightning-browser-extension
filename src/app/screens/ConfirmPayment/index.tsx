@@ -122,6 +122,10 @@ function ConfirmPayment() {
     }
   }
 
+  function closeResult() {
+    navigate(-1);
+  }
+
   function saveBudget() {
     if (!budget || !navState.origin) return;
     return msg.request("addAllowance", {
@@ -198,6 +202,7 @@ function ConfirmPayment() {
                     destination: navState.origin.name,
                   })
             }
+            close={closeResult}
           />
           <div className="my-4">
             <Button
