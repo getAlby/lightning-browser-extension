@@ -58,6 +58,8 @@ const routes = {
   lnurl: lnurl,
   lnurlAuth: auth,
   getCurrencyRate: cache.getCurrencyRate,
+  signPsbt: webbtc.signPsbt,
+
   nostr: {
     generatePrivateKey: nostr.generatePrivateKey,
     getPrivateKey: nostr.getPrivateKey,
@@ -70,7 +72,7 @@ const routes = {
     webbtc: {
       enable: allowances.enable,
       getInfo: webbtc.getInfo,
-      signPsbt: webbtc.signPsbt,
+      signPsbtWithPrompt: webbtc.signPsbtWithPrompt,
     },
     webln: {
       enable: allowances.enable,

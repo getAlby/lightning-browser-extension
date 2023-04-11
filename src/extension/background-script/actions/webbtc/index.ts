@@ -1,4 +1,6 @@
-import getInfo from "./getInfo";
-import signPsbt from "./signPsbt";
+import signPsbt from "~/extension/background-script/actions/webbtc/signPsbt";
 
-export { getInfo, signPsbt };
+import getInfo from "./getInfo";
+import signPsbtWithPrompt from "./signPsbtWithPrompt";
+
+export { getInfo, signPsbtWithPrompt, signPsbt };

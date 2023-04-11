@@ -5,7 +5,7 @@ import shouldInject from "./shouldInject";
 
 // Nostr calls that can be executed from the WebBTC Provider.
 // Update when new calls are added
-const webbtcCalls = ["webbtc/getInfo", "webbtc/signPsbt"];
+const webbtcCalls = ["webbtc/getInfo", "webbtc/signPsbtWithPrompt"];
 // calls that can be executed when `window.webbtc` is not enabled for the current content page
 const disabledCalls = ["webbtc/enable"];
 
