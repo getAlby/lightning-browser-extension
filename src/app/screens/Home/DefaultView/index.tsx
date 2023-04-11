@@ -219,10 +219,8 @@ const DefaultView: FC<Props> = (props) => {
                       classNames(
                         "w-1/2 rounded-lg py-2.5 font-bold transition duration-150",
                         "focus:outline-none",
-                        "hover:bg-gray-50 dark:hover:bg-surface-16dp",
-                        selected
-                          ? "text-orange-bitcoin"
-                          : "text-gray-700  dark:text-neutral-200"
+                        "hover:bg-gray-50 dark:hover:bg-surface-16dp hover:text-gray-600 dark:hover:text-gray-300",
+                        selected ? "text-black" : "text-gray-400"
                       )
                     }
                   >
