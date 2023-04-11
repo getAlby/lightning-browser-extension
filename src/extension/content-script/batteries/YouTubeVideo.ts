@@ -2,7 +2,7 @@ import { Battery } from "~/types";
 
 import getOriginData from "../originData";
 import { findLnurlFromYouTubeAboutPage } from "./YouTubeChannel";
-import { findLightningAddressInText, setLightningData } from "./helpers";
+import { findLightningAddressInText, getYouTubeTimingInfo } from "./helpers";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
 
@@ -18,11 +18,13 @@ const battery = async (): Promise<Battery | void> => {
   const channelLink = document.querySelector<HTMLAnchorElement>(
     "#columns #primary #primary-inner #meta-contents .ytd-channel-name a"
   );
+
   if (!text || !channelLink) {
     return;
   }
   let match;
   let lnurl;
+
   // check for an lnurl
   if ((match = text.match(/(lnurlp:)(\S+)/i))) {
     lnurl = match[2];
@@ -52,21 +54,33 @@ const battery = async (): Promise<Battery | void> => {
       "#columns #primary #primary-inner #owner #avatar img" // support maybe new UI being rolled out 2022/09
     )?.src ||
     "";
-  setLightningData([
-    {
-      method: "lnurl",
-      address: lnurl,
-      ...getOriginData(),
-      name,
-      description: "", // we can not reliably find a description (the meta tag might be of a different video)
-      icon: imageUrl,
-    },
-  ]);
+  return {
+    method: "lnurl",
+    address: lnurl,
+    ...getOriginData(),
+    name,
+    description: "", // we can not reliably find a description (the meta tag might be of a different video)
+    icon: imageUrl,
+    getContentMetadata: getContentMetadata,
+  };
+};
+
+const getContentMetadata = (): Record<string, unknown> => {
+  const contentUri = document.querySelector<HTMLLinkElement>(
+    'link[rel="canonical"]'
+  )?.href;
+  const paymentContentOffset = getYouTubeTimingInfo();
+
+  return {
+    contentUri: contentUri,
+    paymentContentOffset: paymentContentOffset,
+  };
 };
 
 const YouTubeVideo = {
   urlMatcher,
   battery,
+  getContentMetadata,
 };
 
 export default YouTubeVideo;
