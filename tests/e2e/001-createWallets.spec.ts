@@ -56,7 +56,7 @@ const commonCreateWalletUserCreate = async (
 
   await findByText(
     $document,
-    "To start using Alby Extension, use Alby Account or connect through your lightning wallet."
+    "To start using Alby Extension, use Alby Account or connect to your lightning wallet."
   );
 
   if (options.connectToLightningWallet) {
