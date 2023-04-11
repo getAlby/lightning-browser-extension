@@ -1,3 +1,4 @@
+import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import BudgetControl from "@components/BudgetControl";
 import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
@@ -8,6 +9,7 @@ import ResultCard from "@components/ResultCard";
 import lightningPayReq from "bolt11";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
@@ -47,6 +49,8 @@ function ConfirmPayment() {
   );
   const [fiatAmount, setFiatAmount] = useState("");
   const [fiatBudgetAmount, setFiatBudgetAmount] = useState("");
+  const [showQRCode, setShowQRCode] = useState(false);
+  const [copyLabel, setCopyLabel] = useState(tCommon("actions.copy") as string);
 
   const formattedInvoiceSats = getFormattedSats(invoice.satoshis || 0);
 
@@ -118,12 +122,12 @@ function ConfirmPayment() {
       window.close();
     } else {
       e.preventDefault();
-      navigate(-1);
+      setShowQRCode(true);
     }
   }
 
   function closeResult() {
-    navigate(-1);
+    setShowQRCode(true);
   }
 
   function saveBudget() {
@@ -191,26 +195,69 @@ function ConfirmPayment() {
         </form>
       ) : (
         <Container justifyBetween maxWidth="sm">
-          <ResultCard
-            isSuccess
-            message={
-              !navState.origin
-                ? successMessage
-                : tCommon("success_message", {
-                    amount: formattedInvoiceSats,
-                    fiatAmount: showFiat ? ` (${fiatAmount})` : ``,
-                    destination: navState.origin.name,
-                  })
-            }
-            close={closeResult}
-          />
-          <div className="my-4">
-            <Button
-              onClick={close}
-              label={tCommon("actions.close")}
-              fullWidth
-            />
-          </div>
+          {showQRCode ? (
+            <div className="p-12 font-medium drop-shadow rounded-lg mt-4 flex flex-col items-center bg-white dark:bg-surface-02dp">
+              <QRCode value={paymentRequest.toString()} level="M" />
+
+              <div className="w-full mt-4 space-y-4">
+                <div className="flex">
+                  <input
+                    type="text"
+                    className="rounded-none rounded-l-lg bg-transparent border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.3 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    value={paymentRequest.toString()}
+                    disabled
+                  />
+                  <span
+                    onClick={async () => {
+                      try {
+                        navigator.clipboard.writeText(paymentRequest);
+                        setCopyLabel(tCommon("copied"));
+                        setTimeout(() => {
+                          setCopyLabel(tCommon("actions.copy"));
+                        }, 1000);
+                      } catch (e) {
+                        if (e instanceof Error) {
+                          toast.error(e.message);
+                        }
+                      }
+                    }}
+                    className="inline-flex px-4 items-center border-r-0 border-gray-300 rounded-r-md font-medium shadow bg-orange-bitcoin hover:bg-orange-bitcoin-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-bitcoin transition duration-150"
+                  >
+                    <CopyIcon className="w-6 h-6 mr-2" />
+                    {copyLabel}
+                  </span>
+                </div>
+                <div className="flex items-center justify-center w-full">
+                  <p className="text-orange-bitcoin-700">
+                    {formattedInvoiceSats} was deposited
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <>
+              <ResultCard
+                isSuccess
+                message={
+                  !navState.origin
+                    ? successMessage
+                    : tCommon("success_message", {
+                        amount: formattedInvoiceSats,
+                        fiatAmount: showFiat ? ` (${fiatAmount})` : ``,
+                        destination: navState.origin.name,
+                      })
+                }
+                close={closeResult}
+              />
+              <div className="my-4">
+                <Button
+                  onClick={close}
+                  label={tCommon("actions.close")}
+                  fullWidth
+                />
+              </div>
+            </>
+          )}
         </Container>
       )}
     </div>
