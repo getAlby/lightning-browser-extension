@@ -33,9 +33,14 @@ export default function ChooseConnector({
               </p>
             )}
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-5">
+          <div className="flex flex-row flex-wrap gap-4 justify-center">
             {connectorRoutes.map(({ path, title, logo }) => (
-              <LinkButton key={path} to={path} title={title} logo={logo} />
+              <div
+                key={path}
+                className="basis-1/2-gap-4 md:basis-1/3-gap-4 lg:basis-1/5-gap-4"
+              >
+                <LinkButton to={path} title={title} logo={logo} />
+              </div>
             ))}
           </div>
         </div>
@@ -43,9 +48,7 @@ export default function ChooseConnector({
       <div className="mb-4 mt-8 md:my-8 flex flex-col-reverse justify-center gap-4 md:flex-row">
         <Button
           label={tCommon("actions.back")}
-          onClick={() => {
-            navigate(-1);
-          }}
+          onClick={() => navigate(-1)}
           className="max-sm:w-full"
         />
       </div>
