@@ -73,7 +73,7 @@ export default function ConnectLnd() {
       submitLoading={loading}
       submitDisabled={formData.pairingPhrase === ""}
       onSubmit={handleSubmit}
-      image="https://user-images.githubusercontent.com/68239231/227179356-9100768e-8bcb-4c3c-9701-f746778a87cc.png"
+      image="assets\images\connectors\lnc\dark.png"
     >
       <div className="mb-6">
         <TextField

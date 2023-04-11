@@ -46,14 +46,14 @@ function ConnectorForm({
         <>
           {image ? (
             <>
-              <div className="w-16 md:w-32 mb-8 lg:w-[100%] lg:mb-0">
+              <div className="w-full md:w-full mb-8 lg:w-full lg:mb-0">
                 <img
-                  src={`${image}`}
+                  src={image}
                   alt="Image"
                   className="block dark:hidden w-full"
                 />
                 <img
-                  src={`${image}`}
+                  src={image}
                   alt="Image"
                   className="hidden dark:block w-full"
                 />
