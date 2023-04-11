@@ -74,7 +74,13 @@ export default function ResultCard({ message, isSuccess, close }: Props) {
         )}
 
         <p className="text-center dark:text-white w-full text-ellipsis line-clamp-3">
-          {message}
+          <span
+            style={{
+              fontFeatureSettings: `"zero" on`,
+            }}
+          >
+            {message}
+          </span>
         </p>
         <ProgressBar progress={progress}></ProgressBar>
       </div>
