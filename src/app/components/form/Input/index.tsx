@@ -40,7 +40,7 @@ export default function Input({
       className={classNames(
         "block w-full placeholder-gray-500 dark:placeholder-neutral-600",
         !suffix && !endAdornment
-          ? `${outerStyles} focus:ring-orange-bitcoin focus:border-orange-bitcoin focus:dark:border-orange-bitcoin focus:ring-1`
+          ? `${outerStyles} focus:ring-primary focus:border-primary focus:ring-1`
           : "pr-0 border-0 focus:ring-0",
         disabled
           ? "bg-gray-50 dark:bg-surface-01dp text-gray-500 dark:text-neutral-500"
@@ -68,7 +68,7 @@ export default function Input({
     <div
       className={classNames(
         "flex items-stretch overflow-hidden",
-        "focus-within:ring-orange-bitcoin focus-within:border-orange-bitcoin focus-within:dark:border-orange-bitcoin focus-within:ring-1",
+        "focus-within:ring-primary focus-within:border-primary focus-within:dark:border-primary focus-within:ring-1",
         outerStyles
       )}
     >
