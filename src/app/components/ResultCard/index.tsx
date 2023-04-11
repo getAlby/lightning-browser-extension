@@ -36,7 +36,8 @@ export default function ResultCard({ message, isSuccess, close }: Props) {
       clearInterval(interval);
       clearTimeout(timeoutId);
     };
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const ProgressBar = ({ progress }: { progress: number }) => {
     return (
