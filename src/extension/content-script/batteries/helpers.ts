@@ -56,3 +56,19 @@ export const setLightningData = (data: [Battery]): void => {
   });
   msg.request("setIcon", { icon: ExtensionIcon.Tipping });
 };
+
+export const getYouTubeTimingInfo = (): number | undefined => {
+  let currentTime;
+  const video = document.querySelector("video") as HTMLVideoElement | null;
+  if (video !== null && video !== undefined) {
+    currentTime = video.currentTime;
+  } else {
+    const player = document.querySelector(
+      ".video-stream"
+    ) as HTMLVideoElement | null;
+    if (player !== null && player !== undefined) {
+      currentTime = player.currentTime;
+    }
+  }
+  return currentTime;
+};

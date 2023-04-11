@@ -16,6 +16,7 @@ function BoostButton() {
   const [hold, setHold] = useState(false);
   const [timer, setTimer] = useState();
   const [holdTimer, setHoldTimer] = useState();
+  const [lnData, setlnData] = useState();
 
   const [expand, setExpand] = useState(false);
   const [satsClicked, setSatsClicked] = useState(0);
@@ -28,6 +29,7 @@ function BoostButton() {
       const lnData = await extractLightningData();
       if (lnData) {
         setLnurl(lnData.address);
+        setlnData(lnData);
         clearInterval(intervalId);
       } else if (count >= 5) {
         clearInterval(intervalId);
@@ -63,9 +65,21 @@ function BoostButton() {
       setLoading(true);
       if (!satsClicked) return;
       const ln = new LightningAddress(lnurl);
-      const invoice = await ln.generateInvoice({
-        amount: (satsClicked * 1000).toString(),
-      });
+      let contentMetadata = {};
+      if (lnData.getContentMetadata) {
+        contentMetadata = lnData.getContentMetadata();
+      }
+
+      let invoiceDetails = { amount: (satsClicked * 1000).toString() };
+      let payerDataMetadata = {};
+      if (Object.keys(contentMetadata).length) {
+        payerDataMetadata["contentMetadata"] = contentMetadata;
+      }
+      if (Object.keys(payerDataMetadata).length) {
+        invoiceDetails["payerdata"] = JSON.stringify(payerDataMetadata);
+      }
+
+      const invoice = await ln.generateInvoice(invoiceDetails);
       window.webln = new WebLNProvider();
       try {
         await window.webln.enable();
@@ -83,7 +97,7 @@ function BoostButton() {
         setLoading(false);
       }
     },
-    [lnurl]
+    [lnurl, lnData]
   );
 
   const textStyle = {
